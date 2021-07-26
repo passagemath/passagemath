@@ -214,7 +214,8 @@ class CVXPYSDPBackend(MatrixSDPBackend):
             sage: N(p.get_backend().get_variable_value(2), digits=3)
             -0.888
         """
-        raise NotImplementedError
+        variables = self.cvxpy_variables()
+        return variables[variable].value
 
     def dual_variable(self, i, sparse=False):
         """
@@ -260,7 +261,8 @@ class CVXPYSDPBackend(MatrixSDPBackend):
             0.0
 
         """
-        raise NotImplementedError
+        constraints = self.cvxpy_problem().constraints
+        return constraints[i].dual_value
 
     def slack(self, i, sparse=False):
         """
