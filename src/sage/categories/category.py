@@ -3364,3 +3364,15 @@ class JoinCategory(CategoryWithParameters):
             except ValueError:
                 pass
         return "Join of " + " and ".join(str(cat) for cat in self._super_categories)
+
+    def _lean_(self):
+        r"""
+        Return the category as Lean mathlib input for a typeclass.
+
+        EXAMPLES::
+
+            sage: QQ.category()
+            Join of Category of number fields and Category of quotient fields and Category of metric spaces
+            sage: QQ._lean_init_()
+        """
+        raise NotImplementedError
