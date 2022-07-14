@@ -1047,6 +1047,8 @@ cdef class Rational(sage.structure.element.FieldElement):
         """
         return gmpy2.GMPy_MPQ_From_mpq(self.value)
 
+    _lean_init_ = _interface_init_
+
     def _magma_init_(self, magma):
         """
         Return the magma representation of ``self``.
