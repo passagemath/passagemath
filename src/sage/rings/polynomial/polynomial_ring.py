@@ -872,6 +872,18 @@ class PolynomialRing_generic(Ring):
             P_ = P.remove_var(self.variable_name())
             return self.base_ring() != P_ and self.base_ring().has_coerce_map_from(P_)
 
+    def _lean_init_(self):
+        """
+
+        EXAMPLES::
+
+            sage: ZZ['x']._lean_init_()
+            'polynomial int'
+
+        """
+        # data.polynomial.basic
+        return 'polynomial ' + self.base_ring()._lean_init_()
+
     def _magma_init_(self, magma):
         """
         Used in converting this ring to the corresponding ring in MAGMA.
