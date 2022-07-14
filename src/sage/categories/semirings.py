@@ -54,3 +54,18 @@ class Semirings(CategoryWithAxiom):
         An example of a semiring: the ternary-logic semiring
     """
     _base_category_class_and_axiom = (MagmasAndAdditiveMagmas.Distributive.AdditiveAssociative.AdditiveCommutative.AdditiveUnital.Associative, "Unital")
+
+    def _lean_init_(self):
+        r"""
+        Return the category as Lean mathlib input for a typeclass.
+
+        EXAMPLES::
+
+            sage: from sage.categories.semirings import Semirings
+            sage: C = Semirings(); C
+            Category of semirings
+            sage: C._lean_init_()
+            'semiring'
+        """
+        # defined in algebra.ring.basic
+        return 'semiring'
