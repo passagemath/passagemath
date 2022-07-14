@@ -56,6 +56,9 @@ class AdditiveGroups(CategoryWithAxiom_singleton):
     """
     _base_category_class_and_axiom = (AdditiveMonoids, "AdditiveInverse")
 
+    def __lean_init__(self):
+        return 'add_group'
+
     class Algebras(AlgebrasCategory):
         class ParentMethods:
             group = raw_getattr(Groups.Algebras.ParentMethods, "group")

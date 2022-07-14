@@ -59,6 +59,9 @@ class CommutativeAdditiveGroups(CategoryWithAxiom, AbelianCategory):
     """
     _base_category_class_and_axiom = (AdditiveGroups, "AdditiveCommutative")
 
+    def __lean_init__(self):
+        return 'add_comm_group'
+
     class CartesianProducts(CartesianProductsCategory):
         class ElementMethods:
             def additive_order(self):

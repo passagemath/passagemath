@@ -40,3 +40,6 @@ class CommutativeAdditiveMonoids(CategoryWithAxiom):
         sage: TestSuite(CommutativeAdditiveMonoids()).run()
     """
     _base_category_class_and_axiom = (AdditiveMonoids, "AdditiveCommutative")
+
+    def __lean_init__(self):
+        return 'add_comm_monoid'
