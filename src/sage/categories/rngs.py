@@ -48,7 +48,7 @@ class Rngs(CategoryWithAxiom):
 
     _base_category_class_and_axiom = (MagmasAndAdditiveMagmas.Distributive.AdditiveAssociative.AdditiveCommutative.AdditiveUnital.Associative, "AdditiveInverse")
 
-    def _lean_init_(self):
+    def __lean_init__(self):
         r"""
         Return the category as Lean mathlib input for a typeclass.
 
@@ -57,7 +57,7 @@ class Rngs(CategoryWithAxiom):
             sage: from sage.categories.rngs import Rngs
             sage: C = Rngs(); C
             Category of rngs
-            sage: C._lean_init_()
+            sage: C.__lean_init__()
             'non_unital_ring'
         """
         # defined in algebra.ring.basic

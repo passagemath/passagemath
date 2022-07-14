@@ -2500,6 +2500,48 @@ class CategoryWithAxiom(Category):
                          for category in self._super_categories
                          for axiom in category.axioms()) | {self._axiom}
 
+    def _lean_init_(self):
+        """
+
+        EXAMPLES::
+
+            sage: Rings().Commutative().Finite()
+            Category of finite commutative rings
+            sage: _._lean_init_()
+            'finite comm_ring'
+        """
+        # adapted from _repr_object_names_static
+        category = self
+        axioms = self.axioms()
+
+        axioms = canonicalize_axioms(all_axioms, axioms)
+
+        base_category = category
+        while True:
+            try:
+                result = base_category.__lean_init__()
+            except (AttributeError, NotImplementedError):
+                base_category = base_category.base_category()
+            else:
+                break
+
+        for axiom in reversed(axioms):
+            if axiom in base_category.axioms():
+                # If the base category already has this axiom, we
+                # need not repeat it here. See the example with
+                # Sets().Finite().Subquotients() or Monoids()
+                continue
+            base_category = base_category._with_axiom(axiom)
+
+            if axiom == "Finite":
+                result = "finite" + " " + result
+            elif axiom == "Commutative":
+                result = "is_commutative" + " " + result
+
+            # TODO: Handle more of all_axioms here.
+
+        return result
+
 
 class CategoryWithAxiom_over_base_ring(CategoryWithAxiom, Category_over_base_ring):
 

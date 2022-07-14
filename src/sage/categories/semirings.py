@@ -55,7 +55,7 @@ class Semirings(CategoryWithAxiom):
     """
     _base_category_class_and_axiom = (MagmasAndAdditiveMagmas.Distributive.AdditiveAssociative.AdditiveCommutative.AdditiveUnital.Associative, "Unital")
 
-    def _lean_init_(self):
+    def __lean_init__(self):
         r"""
         Return the category as Lean mathlib input for a typeclass.
 
@@ -64,7 +64,7 @@ class Semirings(CategoryWithAxiom):
             sage: from sage.categories.semirings import Semirings
             sage: C = Semirings(); C
             Category of semirings
-            sage: C._lean_init_()
+            sage: C.__lean_init__()
             'semiring'
         """
         # defined in algebra.ring.basic

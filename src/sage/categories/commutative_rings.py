@@ -58,7 +58,7 @@ class CommutativeRings(CategoryWithAxiom):
         sage: A.is_commutative()                                                    # needs sage.combinat sage.libs.singular sage.modules
         False
     """
-    def _lean_init_(self):
+    def __lean_init__(self):
         r"""
         Return the category as Lean mathlib input for a typeclass.
 
@@ -66,7 +66,7 @@ class CommutativeRings(CategoryWithAxiom):
 
             sage: C = CommutativeRings(); C
             Category of commutative rings
-            sage: C._lean_init_()
+            sage: C._lean_init_()  # indirect doctest
             'comm_ring'
         """
         # defined in algebra.ring.basic

@@ -70,6 +70,9 @@ class Magmas(Category_singleton):
         """
         return [Sets()]
 
+    def __lean_init__(self):
+        return 'has_mul'
+
     class SubcategoryMethods:
 
         @cached_method

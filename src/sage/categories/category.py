@@ -3365,7 +3365,7 @@ class JoinCategory(CategoryWithParameters):
                 pass
         return "Join of " + " and ".join(str(cat) for cat in self._super_categories)
 
-    def _lean_(self):
+    def __lean_init__(self):
         r"""
         Return the category as Lean mathlib input for a typeclass.
 
@@ -3373,6 +3373,6 @@ class JoinCategory(CategoryWithParameters):
 
             sage: QQ.category()
             Join of Category of number fields and Category of quotient fields and Category of metric spaces
-            sage: QQ._lean_init_()
+            sage: QQ.__lean_init__()
         """
         raise NotImplementedError
