@@ -55,3 +55,7 @@ Special Update/Build Instructions
 ---------------------------------
 
 -  Use spkg-src to update this package
+
+-  To build the gui (xcas), use::
+
+     export GIAC_CONFIGURE="--enable-fltk"
