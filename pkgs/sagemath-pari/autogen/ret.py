@@ -54,6 +54,14 @@ class PariReturnGEN(PariReturn):
         s = "        return new_gen({name})\n"
         return s.format(name=self.name)
 
+class PariReturnmGEN(PariReturn):
+    def ctype(self):
+        return "GEN"
+    def return_code(self):
+        s = "        {name} = gcopy({name})\n"
+        s += "        return new_gen({name})\n"
+        return s.format(name=self.name)
+
 class PariReturnInt(PariReturn):
     def ctype(self):
         return "int"
@@ -78,7 +86,7 @@ class PariReturnVoid(PariReturn):
 
 pari_ret_types = {
         '':  PariReturnGEN,
-        'm': PariReturnGEN,
+        'm': PariReturnmGEN,
         'i': PariReturnInt,
         'l': PariReturnLong,
         'u': PariReturnULong,
