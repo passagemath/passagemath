@@ -791,22 +791,23 @@ def format(s, embedded=False):
             obj = s[i_0 + i + 3:i_0 + i + 3 + j]
             if obj in docs:
                 t = ''
-            else:
+            elif obj.isidentifier():
                 try:
-                    x = eval('%s.%s' % (toplevel.__name__, obj), locals())
+                    x = getattr(toplevel, obj)
                 except AttributeError:
                     # A pair <<<...>>> has been found, but the object not.
                     i_0 += i + 6 + j
-                    continue
-                except SyntaxError:
-                    # This is a simple heuristics to cover the case of
-                    # a non-matching set of <<< and >>>
-                    i_0 += i + 3
                     continue
                 t0 = sage.misc.sageinspect.sage_getdef(x, obj)
                 t1 = sage.misc.sageinspect.sage_getdoc(x)
                 t = 'Definition: ' + t0 + '\n\n' + t1
                 docs.add(obj)
+            else:
+                # This is a simple heuristics to cover the case of
+                # a non-matching set of <<< and >>>
+                i_0 += i + 3
+                continue
+
             s = s[:i_0 + i] + '\n' + t + s[i_0 + i + 6 + j:]
             i_0 += i
 
