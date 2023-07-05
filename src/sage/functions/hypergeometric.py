@@ -367,7 +367,7 @@ class Hypergeometric(BuiltinFunction):
                 p = get_coercion_model().common_parent(*args)
                 return self._evalf_(a, b, z, parent=p)
 
-    def _evalf_(self, a, b, z, parent, algorithm=None):
+    def _evalf_(self, a, b, z, parent=None, algorithm=None):
         """
         TESTS::
 
@@ -1002,7 +1002,7 @@ class Hypergeometric_M(BuiltinFunction):
             return Integer(1)
         return
 
-    def _evalf_(self, a, b, z, parent, algorithm=None):
+    def _evalf_(self, a, b, z, parent=None, algorithm=None):
         """
         TESTS::
 
@@ -1108,7 +1108,7 @@ class Hypergeometric_U(BuiltinFunction):
     def _eval_(self, a, b, z, **kwargs):
         return
 
-    def _evalf_(self, a, b, z, parent, algorithm=None):
+    def _evalf_(self, a, b, z, parent=None, algorithm=None):
         """
         TESTS::
 
