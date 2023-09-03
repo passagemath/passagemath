@@ -160,6 +160,7 @@ def QuaternionMatrixGroupGF3():
     elements commonly called `I` and `J`, while `K`
     is the product of `I` and `J`. ::
 
+        sage: # needs sage.libs.gap
         sage: from sage.groups.matrix_gps.finitely_generated import QuaternionMatrixGroupGF3
 
         sage: # needs sage.libs.gap
