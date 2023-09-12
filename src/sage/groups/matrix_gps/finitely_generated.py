@@ -179,7 +179,7 @@ def QuaternionMatrixGroupGF3():
 
     TESTS::
 
-        sage: groups.matrix.QuaternionGF3()
+        sage: groups.matrix.QuaternionGF3()                                             # needs sage.modules
         Matrix group over Finite Field of size 3 with 2 generators (
         [1 1]  [2 1]
         [1 2], [1 1]
