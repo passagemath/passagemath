@@ -1,0 +1,5 @@
+cd src
+LOCALINSTALLER=perlbrew
+export PERLBREW_ROOT="$SAGE_LOCAL"
+${PERL-perl} "$LOCALINSTALLER" self-install || sdh_die "perlbrew self-install failed"
+# ${PERL-perl} "$LOCALINSTALLER" -f -q install-patchperl || sdh_die "perlbrew install-patchperl" failed
