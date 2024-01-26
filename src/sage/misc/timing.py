@@ -90,6 +90,7 @@ def cputime(
         subprocesses = True
 
     if not subprocesses:
+        import resource
         try:
             t = float(t)
         except TypeError:
