@@ -234,6 +234,9 @@ case $system:$command in
     cpan:install)
         [ -n "$system_packages" ] && print_shell_command cpan -i $system_packages
         ;;
+    spkg:install)
+        [ -n "$system_packages" ] && print_shell_command sage -i $system_packages
+        ;;
     repology:install)
         if [ -n "$system_packages" ]; then
             links=""
