@@ -430,7 +430,7 @@ equilibrium values::
 It is also possible to generate a Normal form game from a gambit Game::
 
     sage: # optional - pygambit
-    sage: from gambit import Game
+    sage: from pygambit import Game
     sage: gambitgame= Game.new_table([2, 2])
     sage: gambitgame[int(0), int(0)][int(0)] = int(8)
     sage: gambitgame[int(0), int(0)][int(1)] = int(8)
@@ -583,7 +583,7 @@ We can check the cause of this by using ``is_degenerate()``::
     sage: degenerate_game.is_degenerate()
     True
 
-Note the 'negative' `-0.0` output by gambit. This is due to the numerical
+Note the 'negative' `-0.0` output by pygambit. This is due to the numerical
 nature of the algorithm used.
 
 Here is an example with the trivial game where all payoffs are 0::
@@ -649,8 +649,8 @@ from sage.numerical.mip import MixedIntegerLinearProgram
 from sage.cpython.string import bytes_to_str
 
 try:
-    from gambit import Game
-    from gambit.nash import ExternalLPSolver, ExternalLCPSolver
+    from pygambit import Game
+    from pygambit.nash import ExternalLPSolver, ExternalLCPSolver
 except ImportError:
     Game = None
     ExternalLPSolver = None
@@ -715,7 +715,7 @@ class NormalFormGame(SageObject, MutableMapping):
         Can initialise a game from a gambit game object::
 
             sage: # optional - pygambit
-            sage: from gambit import Game
+            sage: from pygambit import Game
             sage: gambitgame= Game.new_table([2, 2])
             sage: gambitgame[int(0), int(0)][int(0)] = int(5)
             sage: gambitgame[int(0), int(0)][int(1)] = int(8)
@@ -975,7 +975,7 @@ class NormalFormGame(SageObject, MutableMapping):
         TESTS::
 
             sage: # optional - pygambit
-            sage: from gambit import Game
+            sage: from pygambit import Game
             sage: testgame = Game.new_table([2, 2])
             sage: testgame[int(0), int(0)][int(0)] = int(8)
             sage: testgame[int(0), int(0)][int(1)] = int(8)
@@ -1016,7 +1016,7 @@ class NormalFormGame(SageObject, MutableMapping):
         TESTS::
 
             sage: # optional - pygambit
-            sage: from gambit import Game
+            sage: from pygambit import Game
             sage: A = matrix([[2, 1], [1, 2.5]])
             sage: g = NormalFormGame([A])
             sage: gg = g._gambit_(); gg
