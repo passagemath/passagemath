@@ -68,7 +68,7 @@ from .types cimport *
 from .string_utils cimport to_string, to_bytes
 from .paripriv cimport *
 from .convert cimport PyObject_AsGEN, gen_to_integer
-from .pari_instance cimport (prec_bits_to_words,
+from .pari_instance cimport (prec_bits_to_pari,
                              default_bitprec, get_var)
 from .stack cimport (new_gen, new_gens2, new_gen_noclear,
                      clone_gen, clear_stack, reset_avma,
@@ -649,7 +649,7 @@ cdef class Gen(Gen_base):
         if m is not None:
             t0 = t0.Mod(m)
         sig_on()
-        return new_gen(gpow(t0.g, t1.g, prec_bits_to_words(0)))
+        return new_gen(gpow(t0.g, t1.g, prec_bits_to_pari(0)))
 
     def __neg__(self):
         sig_on()
@@ -2928,7 +2928,7 @@ cdef class Gen(Gen_base):
         54.9711779448622
         """
         sig_on()
-        return new_gen(bernreal(self, prec_bits_to_words(precision)))
+        return new_gen(bernreal(self, prec_bits_to_pari(precision)))
 
     def besselk(nu, x, unsigned long precision=0):
         """
@@ -2965,7 +2965,7 @@ cdef class Gen(Gen_base):
         """
         cdef Gen t0 = objtogen(x)
         sig_on()
-        return new_gen(kbessel(nu.g, t0.g, prec_bits_to_words(precision)))
+        return new_gen(kbessel(nu.g, t0.g, prec_bits_to_pari(precision)))
 
     def eint1(x, long n=0, unsigned long precision=0):
         r"""
@@ -2993,9 +2993,9 @@ cdef class Gen(Gen_base):
         """
         sig_on()
         if n <= 0:
-            return new_gen(eint1(x.g, prec_bits_to_words(precision)))
+            return new_gen(eint1(x.g, prec_bits_to_pari(precision)))
         else:
-            return new_gen(veceint1(x.g, stoi(n), prec_bits_to_words(precision)))
+            return new_gen(veceint1(x.g, stoi(n), prec_bits_to_pari(precision)))
 
     log_gamma = Gen_base.lngamma
 
@@ -3028,7 +3028,7 @@ cdef class Gen(Gen_base):
         -0.400459056163451
         """
         sig_on()
-        return new_gen(polylog0(m, x.g, flag, prec_bits_to_words(precision)))
+        return new_gen(polylog0(m, x.g, flag, prec_bits_to_pari(precision)))
 
     def sqrtn(x, n, unsigned long precision=0):
         r"""
@@ -3092,7 +3092,7 @@ cdef class Gen(Gen_base):
         cdef GEN ans, zetan
         cdef Gen t0 = objtogen(n)
         sig_on()
-        ans = gsqrtn(x.g, t0.g, &zetan, prec_bits_to_words(precision))
+        ans = gsqrtn(x.g, t0.g, &zetan, prec_bits_to_pari(precision))
         return new_gens2(ans, zetan)
 
     def ffprimroot(self):
@@ -4611,7 +4611,7 @@ cdef class Gen(Gen_base):
         elif typ(g0) == t_RFRAC:
             g0 = rfrac_to_ser(g0, n+4)
 
-        cdef GEN r = ellwp0(self.g, g0, flag, prec_bits_to_words(precision))
+        cdef GEN r = ellwp0(self.g, g0, flag, prec_bits_to_pari(precision))
         if flag == 1 and have_ellwp_flag1_bug():
             # Work around ellwp() bug: double the second element
             set_gel(r, 2, gmulgs(gel(r, 2), 2))

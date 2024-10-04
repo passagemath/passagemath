@@ -54,6 +54,7 @@ cdef extern from "pari/pari.h":
         t_INFINITY
 
     int BITS_IN_LONG
+    int LOWDEFAULTPREC
     long DEFAULTPREC       # 64 bits precision
     long MEDDEFAULTPREC    # 128 bits precision
     long BIGDEFAULTPREC    # 192 bits precision

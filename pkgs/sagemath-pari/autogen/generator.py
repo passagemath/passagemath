@@ -149,7 +149,7 @@ class PariFunctionGenerator(object):
                     cdef GEN _tech = NULL
                     if _have_tech:
                         _tech = (<Gen>tech).g
-                    precision = prec_bits_to_words(precision)
+                    precision = prec_bits_to_pari(precision)
                     cdef GEN _ret = bnfinit0(_P, flag, _tech, precision)
                     return new_gen(_ret)
             <BLANKLINE>

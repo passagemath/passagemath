@@ -5,8 +5,7 @@ cimport cython
 
 from .gen cimport Gen
 
-cpdef long prec_bits_to_words(unsigned long prec_in_bits) noexcept
-cpdef long prec_words_to_bits(long prec_in_words) noexcept
+cpdef long prec_bits_to_pari(unsigned long prec_in_bits) noexcept
 cpdef long default_bitprec() noexcept
 
 cdef class Pari_auto:

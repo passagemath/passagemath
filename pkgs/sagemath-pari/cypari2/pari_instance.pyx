@@ -301,7 +301,7 @@ from .closure cimport _pari_init_closure
 
 # Default precision (in PARI words) for the PARI library interface,
 # when no explicit precision is given and the inputs are exact.
-cdef long prec = prec_bits_to_words(53)
+cdef long prec = prec_bits_to_pari(53)
 
 
 #################################################################
@@ -341,7 +341,7 @@ def prec_dec_to_bits(long prec_in_dec):
     return int(prec_in_dec*log_10 + 1.0)  # Add one to round up
 
 
-cpdef long prec_bits_to_words(unsigned long prec_in_bits) noexcept:
+cpdef long prec_bits_to_pari(unsigned long prec_in_bits) noexcept:
     r"""
     Convert from precision expressed in bits to pari real precision
     expressed in words. Note: this rounds up to the nearest word,
@@ -350,46 +350,18 @@ cpdef long prec_bits_to_words(unsigned long prec_in_bits) noexcept:
 
     Examples:
 
-    >>> from cypari2.pari_instance import prec_bits_to_words
+    >>> from cypari2.pari_instance import prec_bits_to_pari
     >>> import sys
     >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
-    >>> prec_bits_to_words(70) == (5 if bitness == '32' else 4)
+    >>> prec_bits_to_pari(70) == (5 if bitness == '32' else 4)
     True
 
     >>> ans32 = [(32, 3), (64, 4), (96, 5), (128, 6), (160, 7), (192, 8), (224, 9), (256, 10)]
     >>> ans64 = [(32, 3), (64, 3), (96, 4), (128, 4), (160, 5), (192, 5), (224, 6), (256, 6)]
-    >>> [(32*n, prec_bits_to_words(32*n)) for n in range(1, 9)] == (ans32 if bitness == '32' else ans64)
+    >>> [(32*n, prec_bits_to_pari(32*n)) for n in range(1, 9)] == (ans32 if bitness == '32' else ans64)
     True
     """
-    if not prec_in_bits:
-        return prec
-    cdef unsigned long wordsize = BITS_IN_LONG
-
-    # This equals ceil(prec_in_bits/wordsize) + 2
-    return (prec_in_bits - 1)//wordsize + 3
-
-
-cpdef long prec_words_to_bits(long prec_in_words) noexcept:
-    r"""
-    Convert from pari real precision expressed in words to precision
-    expressed in bits. Note: this adjusts for the two codewords of a
-    pari real, and is architecture-dependent.
-
-    Examples:
-
-    >>> from cypari2.pari_instance import prec_words_to_bits
-    >>> import sys
-    >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
-    >>> prec_words_to_bits(10) == (256 if bitness == '32' else 512)
-    True
-
-    >>> ans32 = [(3, 32), (4, 64), (5, 96), (6, 128), (7, 160), (8, 192), (9, 224)]
-    >>> ans64 = [(3, 64), (4, 128), (5, 192), (6, 256), (7, 320), (8, 384), (9, 448)] # 64-bit
-    >>> [(n, prec_words_to_bits(n)) for n in range(3, 10)] == (ans32 if bitness == '32' else ans64)
-    True
-    """
-    # see user's guide to the pari library, page 10
-    return (prec_in_words - 2) * BITS_IN_LONG
+    return max(LOWDEFAULTPREC, nbits2prec(prec_in_bits))
 
 
 cpdef long default_bitprec() noexcept:
@@ -402,7 +374,7 @@ cpdef long default_bitprec() noexcept:
     >>> default_bitprec()
     64
     """
-    return (prec - 2) * BITS_IN_LONG
+    return LOWDEFAULTPREC
 
 
 def prec_dec_to_words(long prec_in_dec):
@@ -424,29 +396,7 @@ def prec_dec_to_words(long prec_in_dec):
     >>> [(n, prec_dec_to_words(n)) for n in range(10, 90, 10)] == (ans32 if bitness == '32' else ans64)
     True
     """
-    return prec_bits_to_words(prec_dec_to_bits(prec_in_dec))
-
-
-def prec_words_to_dec(long prec_in_words):
-    r"""
-    Convert from precision expressed in words to precision expressed in
-    decimal. Note: this adjusts for the two codewords of a pari real,
-    and is architecture-dependent.
-
-    Examples:
-
-    >>> from cypari2.pari_instance import prec_words_to_dec
-    >>> import sys
-    >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
-    >>> prec_words_to_dec(5) == (28 if bitness == '32' else 57)
-    True
-
-    >>> ans32 = [(3, 9), (4, 19), (5, 28), (6, 38), (7, 48), (8, 57), (9, 67)]
-    >>> ans64 = [(3, 19), (4, 38), (5, 57), (6, 77), (7, 96), (8, 115), (9, 134)]
-    >>> [(n, prec_words_to_dec(n)) for n in range(3, 10)] == (ans32 if bitness == '32' else ans64)
-    True
-    """
-    return prec_bits_to_dec(prec_words_to_bits(prec_in_words))
+    return prec_bits_to_pari(prec_dec_to_bits(prec_in_dec))
 
 
 # Callbacks from PARI to print stuff using sys.stdout.write() instead
