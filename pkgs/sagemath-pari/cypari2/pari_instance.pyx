@@ -361,7 +361,7 @@ cpdef long prec_bits_to_pari(unsigned long prec_in_bits) noexcept:
     >>> [(32*n, prec_bits_to_pari(32*n)) for n in range(1, 9)] == (ans32 if bitness == '32' else ans64)
     True
     """
-    return max(LOWDEFAULTPREC, nbits2prec(prec_in_bits))
+    return nbits2prec(prec_in_bits) or LOWDEFAULTPREC
 
 
 cpdef long default_bitprec() noexcept:
