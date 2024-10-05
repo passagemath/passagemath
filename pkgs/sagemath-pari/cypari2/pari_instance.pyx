@@ -377,28 +377,6 @@ cpdef long default_bitprec() noexcept:
     return prec2nbits(LOWDEFAULTPREC)
 
 
-def prec_dec_to_words(long prec_in_dec):
-    r"""
-    Convert from precision expressed in decimal to precision expressed
-    in words. Note: this rounds up to the nearest word, adjusts for the
-    two codewords of a pari real, and is architecture-dependent.
-
-    Examples:
-
-    >>> from cypari2.pari_instance import prec_dec_to_words
-    >>> import sys
-    >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
-    >>> prec_dec_to_words(38) == (6 if bitness == '32' else 4)
-    True
-
-    >>> ans32 = [(10, 4), (20, 5), (30, 6), (40, 7), (50, 8), (60, 9), (70, 10), (80, 11)]
-    >>> ans64 = [(10, 3), (20, 4), (30, 4), (40, 5), (50, 5), (60, 6), (70, 6), (80, 7)] # 64-bit
-    >>> [(n, prec_dec_to_words(n)) for n in range(10, 90, 10)] == (ans32 if bitness == '32' else ans64)
-    True
-    """
-    return prec_bits_to_pari(prec_dec_to_bits(prec_in_dec))
-
-
 # Callbacks from PARI to print stuff using sys.stdout.write() instead
 # of C library functions like puts().
 cdef PariOUT python_pariOut
