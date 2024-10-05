@@ -374,7 +374,7 @@ cpdef long default_bitprec() noexcept:
     >>> default_bitprec()
     64
     """
-    return LOWDEFAULTPREC
+    return prec2nbits(LOWDEFAULTPREC)
 
 
 def prec_dec_to_words(long prec_in_dec):
