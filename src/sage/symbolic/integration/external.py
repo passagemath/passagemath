@@ -256,6 +256,16 @@ def libgiac_integrator(expression, v, a=None, b=None):
     if a is None:
         result = libgiac.integrate(Pygen(expression), v)
     else:
+        # We use _giac_() in the endpoints if they are infinite because
+        # for some reason, passing them straight to libgiac() gives us
+        # a different kind of infinity back that doesn't work as well,
+        # at least for integration.
+        from sage.rings.infinity import PlusInfinity, MinusInfinity
+        if isinstance(a, PlusInfinity) or isinstance(a, MinusInfinity):
+            a = a._giac_()
+        if isinstance(b, PlusInfinity) or isinstance(b, MinusInfinity):
+            b = b._giac_()
+
         result = libgiac.integrate(Pygen(expression), v, a, b)
     if 'integrate' in format(result) or 'integration' in format(result):
         return expression.integrate(v, a, b, hold=True)
