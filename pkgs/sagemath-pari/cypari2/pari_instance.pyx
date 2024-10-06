@@ -372,14 +372,14 @@ cpdef long prec_pari_to_bits(long prec_pari) noexcept:
     expressed in bits. Note: this adjusts for the two codewords of a
     pari real, and is architecture-dependent.
     Examples:
-    >>> from cypari2.pari_instance import prec_words_to_bits
+    >>> from cypari2.pari_instance import prec_pari_to_bits
     >>> import sys
     >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
-    >>> prec_words_to_bits(10) == (256 if bitness == '32' else 512)
+    >>> prec_pari_to_bits(10) == (256 if bitness == '32' else 512)
     True
     >>> ans32 = [(3, 32), (4, 64), (5, 96), (6, 128), (7, 160), (8, 192), (9, 224)]
     >>> ans64 = [(3, 64), (4, 128), (5, 192), (6, 256), (7, 320), (8, 384), (9, 448)] # 64-bit
-    >>> [(n, prec_words_to_bits(n)) for n in range(3, 10)] == (ans32 if bitness == '32' else ans64)
+    >>> [(n, prec_pari_to_bits(n)) for n in range(3, 10)] == (ans32 if bitness == '32' else ans64)
     True
     """
     return prec2nbits(prec_pari)
