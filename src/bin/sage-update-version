@@ -146,5 +146,5 @@ git commit -m "Updated SageMath version to $SAGE_VERSION" -- \
     "$SAGE_ROOT/src/doc/en/website/versions.txt" \
     || die "Error committing to the repository."
 
-git tag -a "$SAGE_VERSION" -m "$SAGE_VERSION_BANNER" \
+git tag -a "passagemath-$SAGE_VERSION" -m "$SAGE_VERSION_BANNER" \
     || die "Error tagging the repository."
