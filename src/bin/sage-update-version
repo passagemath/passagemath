@@ -134,12 +134,13 @@ if [[ $SAGE_VERSION =~ ^[0-9]+(\.[0-9]+)*$ ]]; then
     # For the origin of this format, see .github/workflows/doc-publish.yml
     url="doc-$version--$domain"
     # Add new line to versions.txt
-    sed -i "${line_number}i $SAGE_VERSION $url" "$file_path"
+    sed -i.bak "${line_number}i\\"$'\n'"$SAGE_VERSION $url"$'\n' "$file_path"
     # If the number of version lines is more than 10, remove the last line
     line_count=$(grep -c '^[0-9]' "$file_path")
     if [ "$line_count" -gt 10 ]; then
-      sed -i '$ d' "$file_path"
+      sed -i.bak '$ d' "$file_path"
     fi
+    rm -f "$file_path".bak
 fi
 
 # Commit auto-generated changes
