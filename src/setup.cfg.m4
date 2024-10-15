@@ -1,6 +1,6 @@
 include(`sage_spkg_versions.m4')dnl' -*- conf-unix -*-
 [metadata]
-name = sagemath-standard
+name = passagemath-standard
 version = file: VERSION.txt
 description = passagemath: Standard Python Library
 long_description = file: README.rst
