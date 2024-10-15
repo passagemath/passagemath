@@ -24,7 +24,7 @@ jobs:
     uses: ./.github/workflows/docker_hub.yml
     with:
       # Build from scratch
-      dockerhub_repository: sagemath-dev
+      dockerhub_repository: passagemath-dev
       dockerfile_target: make-build
     secrets: inherit
 
@@ -33,6 +33,6 @@ jobs:
     uses: ./.github/workflows/docker_hub.yml
     with:
       # Build from sagemath-dev
-      dockerhub_repository: sagemath
+      dockerhub_repository: passagemath
       dockerfile_target: sagemath
     secrets: inherit
