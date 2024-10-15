@@ -48,11 +48,18 @@ done
       if [ -f "$spkg"/version_requirements.txt -a -d "$spkg"/src ]; then
           ( echo "# This file is updated on every release by the sage-update-version script"
             # Normalize the package name to PyPI convention (dashes, not underscores)
-            if [ "$spkg" = sagelib ]; then
-                pkg=passagemath-standard
-            else
-                pkg=pas${spkg//_/-}
-            fi
+            case "$spkg" in
+                sagelib)
+                    pkg=passagemath-standard;;
+                sagemath*)
+                    pkg=${spkg#sagemath_}
+                    pkg=passagemath-${pkg//_/-};;
+                sage*)
+                    pkg=${spkg#sage_}
+                    pkg=passagemath-${pkg//_/-};;
+                *)
+                    pkg=${spkg//_/-};;
+            esac
             # Normalize the version (updated above as VERSION.txt) according to PEP440.
             version=$(cat "$spkg"/package-version.txt)
             version=${version//.beta/b}
