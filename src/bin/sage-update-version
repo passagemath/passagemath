@@ -34,7 +34,7 @@ set -e
 # If $1 starts with "sage-", remove this prefix
 SAGE_VERSION=`echo "$1" | sed 's/^sage-//'`
 SAGE_RELEASE_DATE=`date -u +'%Y-%m-%d'`
-SAGE_VERSION_BANNER="SageMath version $SAGE_VERSION, Release Date: $SAGE_RELEASE_DATE"
+SAGE_VERSION_BANNER="passagemath version $SAGE_VERSION, Release Date: $SAGE_RELEASE_DATE"
 
 # Update Sage version file for all distribution packages
 for version_file in "$SAGE_ROOT"/pkgs/*/VERSION.txt; do
@@ -49,9 +49,9 @@ done
           ( echo "# This file is updated on every release by the sage-update-version script"
             # Normalize the package name to PyPI convention (dashes, not underscores)
             if [ "$spkg" = sagelib ]; then
-                pkg=sagemath-standard
+                pkg=passagemath-standard
             else
-                pkg=${spkg//_/-}
+                pkg=pas${spkg//_/-}
             fi
             # Normalize the version (updated above as VERSION.txt) according to PEP440.
             version=$(cat "$spkg"/package-version.txt)
