@@ -8,8 +8,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-repl"
-description = "Sage: Open Source Mathematics Software: IPython kernel, Sage preparser, doctester"
+name = "passagemath-repl"
+description = "passagemath: IPython kernel, Sage preparser, doctester"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_environment
