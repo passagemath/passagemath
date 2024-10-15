@@ -88,21 +88,25 @@ EOF
 echo "$SAGE_VERSION_BANNER" > "$SAGE_ROOT/VERSION.txt"
 
 # Add version to the front of GitHub release assets URLs.
+#REPO=https://github.com/sagemath/sage
+#UPSTREAM_D_FILE="$SAGE_ROOT/.upstream.d/20-github.com-sagemath-sage-releases"
+REPO=https://github.com/passagemath/passagemath
+UPSTREAM_D_FILE="$SAGE_ROOT/.upstream.d/15-github.com-passagemath-passagemath-releases"
 SAGE_MINOR_VERSION=${SAGE_VERSION//.alpha*/}
 SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.beta*/}
 SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.dev*/}
 SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.post*/}
 SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.rc*/}
-( echo "https://github.com/sagemath/sage/releases/download/$SAGE_MINOR_VERSION/"
-  sed '/^#/d' "$SAGE_ROOT/.upstream.d/20-github.com-sagemath-sage-releases"
-) | uniq | head -n 3 > "$SAGE_ROOT/.upstream.d/20-github.com-sagemath-sage-releases.tmp"
+( echo "${REPO}/releases/download/$SAGE_MINOR_VERSION/"
+  sed '/^#/d' "${UPSTREAM_D_FILE}"
+) | uniq | head -n 3 > "${UPSTREAM_D_FILE}.tmp"
 ( cat <<EOF
 # Upstream packages as uploaded as GitHub release assets.
 # This file is automatically updated by the sage-update-version script.
 EOF
-  cat "$SAGE_ROOT/.upstream.d/20-github.com-sagemath-sage-releases.tmp"
-) > "$SAGE_ROOT/.upstream.d/20-github.com-sagemath-sage-releases"
-rm -f "$SAGE_ROOT/.upstream.d/20-github.com-sagemath-sage-releases.tmp"
+  cat "${UPSTREAM_D_FILE}.tmp"
+) > "${UPSTREAM_D_FILE}"
+rm -f "${UPSTREAM_D_FILE}.tmp"
 
 # Regenerate auto-generated files tarball
 "$SAGE_ROOT/bootstrap" -s
@@ -142,7 +146,7 @@ git commit -m "Updated SageMath version to $SAGE_VERSION" -- \
     "$SAGE_ROOT/build/pkgs/configure/package-version.txt" \
     "$SAGE_ROOT/build/pkgs/*/version_requirements.txt" \
     "$SAGE_ROOT"/pkgs/*/VERSION.txt \
-    "$SAGE_ROOT/.upstream.d/20-github.com-sagemath-sage-releases" \
+    "${UPSTREAM_D_FILE}" \
     "$SAGE_ROOT/src/doc/en/website/versions.txt" \
     || die "Error committing to the repository."
 
