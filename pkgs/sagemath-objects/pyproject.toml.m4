@@ -14,7 +14,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-objects"
+name = "passagemath-objects"
 description = "passagemath: Sage objects, elements, parents, categories, coercion, metaclasses"
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2

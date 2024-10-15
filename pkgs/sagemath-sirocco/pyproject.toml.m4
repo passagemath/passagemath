@@ -13,7 +13,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-sirocco"
+name = "passagemath-sirocco"
 description = "passagemath: Certified root continuation with sirocco"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari

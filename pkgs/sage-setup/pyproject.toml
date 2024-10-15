@@ -3,7 +3,7 @@ requires = ["setuptools>=61.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sage-setup"
+name = "passagemath-setup"
 description = "passagemath: Build system of the Sage library"
 license = {text = "GNU General Public License (GPL) v2 or later"}
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]

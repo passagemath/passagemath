@@ -13,7 +13,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-mcqd"
+name = "passagemath-mcqd"
 description = "passagemath: Finding maximum cliques with mcqd"
 dependencies = [
     SPKG_INSTALL_REQUIRES_memory_allocator

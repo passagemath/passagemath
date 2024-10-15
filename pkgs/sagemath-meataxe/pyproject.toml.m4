@@ -13,7 +13,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-meataxe"
+name = "passagemath-meataxe"
 description = "passagemath: Matrices over small finite fields with meataxe"
 dependencies = []
 dynamic = ["version"]

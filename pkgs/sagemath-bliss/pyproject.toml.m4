@@ -13,7 +13,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-bliss"
+name = "passagemath-bliss"
 description = "passagemath: Graph (iso/auto)morphisms with bliss"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
