@@ -13,8 +13,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-coxeter3"
-description = "Sage: Open Source Mathematics Software: Coxeter groups, Bruhat ordering, Kazhdan-Lusztig polynomials with coxeter3"
+name = "passagemath-coxeter3"
+description = "passagemath: Coxeter groups, Bruhat ordering, Kazhdan-Lusztig polynomials with coxeter3"
 dependencies = []
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'

@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-categories"
-description = "Sage: Open Source Mathematics Software: Sage categories and basic rings"
+name = "passagemath-categories"
+description = "passagemath: Sage categories and basic rings"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
 ]

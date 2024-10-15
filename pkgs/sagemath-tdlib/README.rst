@@ -1,5 +1,5 @@
 ========================================================================
- Sage: Open Source Mathematics Software: Tree decompositions with tdlib
+ passagemath: Tree decompositions with tdlib
 ========================================================================
 
 About SageMath

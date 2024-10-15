@@ -1,5 +1,5 @@
 =========================================================================
- Sage: Open Source Mathematics Software: Sage categories and basic rings
+ passagemath: Sage categories and basic rings
 =========================================================================
 
 About SageMath

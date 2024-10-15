@@ -14,8 +14,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-objects"
-description = "Sage: Open Source Mathematics Software: Sage objects, elements, parents, categories, coercion, metaclasses"
+name = "passagemath-objects"
+description = "passagemath: Sage objects, elements, parents, categories, coercion, metaclasses"
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals

@@ -4,12 +4,12 @@ on:
   push:
     tags:
       # Match all release tags including beta, rc
-      - '[0-9]+.[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+'
-      - '[0-9]+.[0-9]+.beta[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+.beta[0-9]+'
-      - '[0-9]+.[0-9]+.rc[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+.rc[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.beta[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.[0-9]+.beta[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.rc[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.[0-9]+.rc[0-9]+'
 
   workflow_dispatch:
     # Allow to run manually
@@ -245,23 +245,23 @@ jobs:
 
       - name: sagemath-objects
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*objects*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*objects*
 
       - name: sagemath-categories
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*categories*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*categories*
 
       - name: sagemath-bliss
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*bliss*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*bliss*
 
       - name: sagemath-coxeter3
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*coxeter3*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*coxeter3*
 
       - name: sagemath-mcqd
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*mcqd*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*mcqd*
 
       - uses: actions/upload-artifact@v4
         with:

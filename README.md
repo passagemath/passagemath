@@ -1,20 +1,23 @@
-<div>
-<a href="https://sagemath.org">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="src/doc/common/static/logo_sagemath_white.svg">
-    <img src="src/doc/common/static/logo_sagemath_black.svg" height="60" align="left">
-  </picture>
-</a>
-   <em>"Creating a Viable Open Source Alternative to
-   Magma, Maple, Mathematica, and MATLAB"</em>
-</div>
+passagemath: General purpose mathematical software system, a fork of SageMath
+=============================================================================
 
-#
+passagemath is open source mathematical software released under the GNU General Public
+Licence GPLv2+.
 
-Sage is open source mathematical software released under the GNU General Public
-Licence GPLv2+, and includes packages that have [compatible software licenses](./COPYING.txt).
+It is a fork of [SageMath](https://www.sagemath.org/), created in 2024 with the following goals:
+
+* providing modularized installation with pip,
+* establishing first-class membership in the scientific Python ecosystem,
+* giving clear attribution of upstream projects,
+* inviting collaborations with upstream projects,
+* maintaining a professional, respectful, inclusive community,
+* developing a port to Pyodide for serverless deployment with Javascript,
+* developing a native Windows port.
+
 [People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
-development of Sage. [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
+development of SageMath, and hence of passagemath.
+
+[Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
 
 Table of Contents
 -----------------
