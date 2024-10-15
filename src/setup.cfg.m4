@@ -2,7 +2,7 @@ include(`sage_spkg_versions.m4')dnl' -*- conf-unix -*-
 [metadata]
 name = sagemath-standard
 version = file: VERSION.txt
-description = Sage: Open Source Mathematics Software: Standard Python Library
+description = passagemath: Standard Python Library
 long_description = file: README.rst
 long_description_content_type = text/x-rst
 license_files = LICENSE.txt

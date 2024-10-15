@@ -14,7 +14,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sagemath-sirocco"
-description = "Sage: Open Source Mathematics Software: Certified root continuation with sirocco"
+description = "passagemath: Certified root continuation with sirocco"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals

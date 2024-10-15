@@ -13,7 +13,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sagemath-tdlib"
-description = "Sage: Open Source Mathematics Software: Tree decompositions with tdlib"
+description = "passagemath: Tree decompositions with tdlib"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
 ]

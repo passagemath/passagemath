@@ -14,7 +14,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sagemath-bliss"
-description = "Sage: Open Source Mathematics Software: Graph (iso/auto)morphisms with bliss"
+description = "passagemath: Graph (iso/auto)morphisms with bliss"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
 ]
