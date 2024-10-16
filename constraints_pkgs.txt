@@ -1,0 +1,39 @@
+# This "constraints file" can be used for forcing pip
+# (and any tools that delegate to pip, such as pypa/build)
+# to install the distribution packages included in
+# the SageMath monorepository only from their source trees
+# in SAGE_ROOT/pkgs/ instead of from PyPI.
+#
+# Example: Building a sagemath-standard wheel
+#
+# [alice@localhost sage]$ ./bootstrap
+# [alice@localhost sage]$ ./configure
+# [alice@localhost sage]$ export MAKE="make -j16" SAGE_NUM_THREADS=16
+# [alice@localhost sage]$ make all-sage-local
+# [alice@localhost sage]$ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
+# [alice@localhost sage]$ ./sage -sh -c 'python3 -m build -v -v pkgs/sagemath-standard'
+#
+# Non-example: Installing the built wheel using the same
+# constraints file will fail because sagemath-standard is one
+# of the distribution packages listed below. It will conflict
+# with the built wheel for sagemath-standard!
+# Use "pkgs/sagemath-standard/constraints_pkgs.txt" instead.
+
+# Reference on the format:
+# https://pip.pypa.io/en/stable/user_guide/#constraints-files
+#
+passagemath-conf        @ file://${SAGE_ROOT}/pkgs/sage-conf
+passagemath-docbuild    @ file://${SAGE_ROOT}/pkgs/sage-docbuild
+passagemath-setup       @ file://${SAGE_ROOT}/pkgs/sage-setup
+passagemath-sws2rst     @ file://${SAGE_ROOT}/pkgs/sage-sws2rst
+passagemath-bliss       @ file://${SAGE_ROOT}/pkgs/sagemath-bliss
+passagemath-categories  @ file://${SAGE_ROOT}/pkgs/sagemath-categories
+passagemath-coxeter3    @ file://${SAGE_ROOT}/pkgs/sagemath-coxeter3
+passagemath-environment @ file://${SAGE_ROOT}/pkgs/sagemath-environment
+passagemath-mcqd        @ file://${SAGE_ROOT}/pkgs/sagemath-mcqd
+passagemath-meataxe     @ file://${SAGE_ROOT}/pkgs/sagemath-meataxe
+passagemath-objects     @ file://${SAGE_ROOT}/pkgs/sagemath-objects
+passagemath-repl        @ file://${SAGE_ROOT}/pkgs/sagemath-repl
+passagemath-sirocco     @ file://${SAGE_ROOT}/pkgs/sagemath-sirocco
+passagemath-standard    @ file://${SAGE_ROOT}/pkgs/sagemath-standard
+passagemath-tdlib       @ file://${SAGE_ROOT}/pkgs/sagemath-tdlib

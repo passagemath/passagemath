@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       dockerhub_repository:
-        default: sagemath-dev
+        default: passagemath-dev
         type: string
       dockerfile_target:
         default: make-build
@@ -43,7 +43,7 @@ jobs:
           REPO=${{ inputs.dockerhub_repository }}
           # see if the tag has already been pushed
           # if yes then skip following steps
-          URL="https://registry.hub.docker.com/v2/repositories/sagemath/$REPO/tags?page_size=32"
+          URL="https://registry.hub.docker.com/v2/repositories/passagemath/$REPO/tags?page_size=32"
           LATEST_TAGS=$(curl -L -s $URL | jq '."results"[]["name"]')
           JOB_DONE=false
           for i in $LATEST_TAGS; do if [[ $i == \"$TAG_NAME\" ]]; then JOB_DONE=true; break; fi done
@@ -51,9 +51,9 @@ jobs:
 
           if [[ $JOB_DONE == 'false' ]]
           then
-            TAG="sagemath/$REPO:$TAG_NAME"
-            TAG_LIST="$TAG, sagemath/$REPO:develop"
-            BASE="sagemath/sagemath-dev:$TAG_NAME"
+            TAG="passagemath/$REPO:$TAG_NAME"
+            TAG_LIST="$TAG, passagemath/$REPO:develop"
+            BASE="passagemath/passagemath-dev:$TAG_NAME"
             echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
             echo "TAG=$TAG" >> $GITHUB_ENV
             echo "TAG_LIST=$TAG_LIST" >> $GITHUB_ENV
@@ -65,7 +65,7 @@ jobs:
         id: upd_tag_list
         run: |
           REPO=${{ inputs.dockerhub_repository }}
-          TAG_LIST="${{ env.TAG_LIST }}, sagemath/$REPO:latest"
+          TAG_LIST="${{ env.TAG_LIST }}, passagemath/$REPO:latest"
           echo "TAG_LIST=$TAG_LIST" >> $GITHUB_ENV
         if: "env.JOB_DONE == 'false' && !contains(env.TAG_NAME, 'beta') && !contains(env.TAG_NAME, 'rc')"
 
@@ -82,7 +82,7 @@ jobs:
         if: env.JOB_DONE == 'false' && env.CAN_LOGIN == 'true'
 
       - name: Build and push make-build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: docker/Dockerfile

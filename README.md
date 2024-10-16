@@ -1,20 +1,23 @@
-<div>
-<a href="https://sagemath.org">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="src/doc/common/static/logo_sagemath_white.svg">
-    <img src="src/doc/common/static/logo_sagemath_black.svg" height="60" align="left">
-  </picture>
-</a>
-   <em>"Creating a Viable Open Source Alternative to
-   Magma, Maple, Mathematica, and MATLAB"</em>
-</div>
+passagemath: General purpose mathematical software system, a fork of SageMath
+=============================================================================
 
-#
+passagemath is open source mathematical software released under the GNU General Public
+Licence GPLv2+.
 
-Sage is open source mathematical software released under the GNU General Public
-Licence GPLv2+, and includes packages that have [compatible software licenses](./COPYING.txt).
+It is a fork of [SageMath](https://www.sagemath.org/), created in 2024 with the following goals:
+
+* providing modularized installation with pip,
+* establishing first-class membership in the scientific Python ecosystem,
+* giving clear attribution of upstream projects,
+* inviting collaborations with upstream projects,
+* maintaining a professional, respectful, inclusive community,
+* developing a port to Pyodide for serverless deployment with Javascript,
+* developing a native Windows port.
+
 [People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
-development of Sage. [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
+development of SageMath, and hence of passagemath.
+
+[Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
 
 Table of Contents
 -----------------
@@ -69,7 +72,7 @@ virtualization).
 
 Detailed information on supported platforms for a specific version of Sage
 can be found in the section _Availability and installation help_ of the
-[release tour](https://wiki.sagemath.org/ReleaseTours) for this version.
+[release tour for this version](https://github.com/sagemath/sage/releases).
 
 We highly appreciate contributions to Sage that fix portability bugs
 and help port Sage to new platforms; let us know at the [sage-devel
@@ -92,7 +95,7 @@ below](#sagemath-docker-images)) or other virtualization solutions.
 [macOS] Preparing the Platform
 ------------------------------
 
-- If your Mac uses the Apple Silicon (M1, M2, M3; arm64) architecture and
+- If your Mac uses the Apple Silicon (M1, M2, M3, M4; arm64) architecture and
   you set up your Mac by transferring files from an older Mac, make sure
   that the directory ``/usr/local`` does not contain an old copy of Homebrew
   (or other software) for the x86_64 architecture that you may have copied
@@ -431,19 +434,19 @@ in the Installation Guide.
 Alternative Installation using PyPI
 ---------------
 
-For installing Sage in a Python environment from PyPI, Sage provides the
-`pip`-installable package [sagemath-standard](https://pypi.org/project/sagemath-standard/).
+For installing the project in a Python environment from PyPI, passagemath provides the
+`pip`-installable package [passagemath-standard](https://pypi.org/project/passagemath-standard/).
 
-Unless you need to install Sage into a specific existing environment, we recommend
+Unless you need to install passagemath into a specific existing environment, we recommend
 to create and activate a fresh virtual environment, for example `~/sage-venv/`:
 
             $ python3 -m venv ~/sage-venv
             $ source ~/sage-venv/bin/activate
 
-As the first installation step, install [sage_conf](https://pypi.org/project/sage-conf/),
+As the first installation step, install [passagemath-conf](https://pypi.org/project/passagemath-conf/),
 which builds various prerequisite packages in a subdirectory of `~/.sage/`:
 
-            (sage-venv) $ python3 -m pip install -v sage_conf
+            (sage-venv) $ python3 -m pip install -v passagemath-conf
 
 After a successful installation, a wheelhouse provides various Python packages.
 You can list the wheels using the command:
@@ -456,13 +459,13 @@ for example by:
 
             $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
 
-Now install the packages from the wheelhouse and the [sage_setup](https://pypi.org/project/sage-conf/)
+Now install the packages from the wheelhouse and the [passagemath-setup](https://pypi.org/project/passagemath-setup/)
 package, and finally install the Sage library:
 
-            (sage-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl sage_setup
-            (sage-venv) $ python3 -m pip install --no-build-isolation -v sagemath-standard
+            (sage-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl passagemath-setup
+            (sage-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
 
-The above instructions install the latest stable release of Sage.
+The above instructions install the latest stable release of passagemath.
 To install the latest development version instead, add the switch `--pre` to all invocations of
 `python3 -m pip install`.
 
@@ -489,8 +492,8 @@ Troubleshooting
 ---------------
 
 If you have problems building Sage, check the Sage Installation Guide,
-as well as the version-specific Sage Installation FAQ in the [Sage Release
-Tour](https://wiki.sagemath.org/ReleaseTours) corresponding to the
+as well as the version-specific installation help in the [release
+tour](https://github.com/sagemath/sage/releases) corresponding to the
 version that you are installing.
 
 Please do not hesitate to ask for help in the [SageMath forum

@@ -1,8 +1,8 @@
 include(`sage_spkg_versions.m4')dnl' -*- conf-unix -*-
 [metadata]
-name = sagemath-standard
+name = passagemath-standard
 version = file: VERSION.txt
-description = Sage: Open Source Mathematics Software: Standard Python Library
+description = passagemath: Standard Python Library
 long_description = file: README.rst
 long_description_content_type = text/x-rst
 license_files = LICENSE.txt
@@ -33,7 +33,7 @@ dnl From Makefile.in: SAGERUNTIME
     SPKG_INSTALL_REQUIRES_ipython
     SPKG_INSTALL_REQUIRES_pexpect
 dnl From Makefile.in: DOC_DEPENDENCIES
-    SPKG_INSTALL_REQUIRES_sphinx
+    sphinx >=5.2, <9
     SPKG_INSTALL_REQUIRES_networkx
     SPKG_INSTALL_REQUIRES_scipy
     SPKG_INSTALL_REQUIRES_sympy
@@ -131,6 +131,7 @@ sage =
 [options.extras_require]
 R        = SPKG_INSTALL_REQUIRES_rpy2
 bliss    = SPKG_INSTALL_REQUIRES_sagemath_bliss
+brial    = SPKG_INSTALL_REQUIRES_sagemath_brial
 coxeter3 = SPKG_INSTALL_REQUIRES_sagemath_coxeter3
 mcqd     = SPKG_INSTALL_REQUIRES_sagemath_mcqd
 meataxe  = SPKG_INSTALL_REQUIRES_sagemath_meataxe

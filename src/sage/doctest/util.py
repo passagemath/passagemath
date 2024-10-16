@@ -41,7 +41,7 @@ def count_noun(number, noun, plural=None, pad_number=False, pad_noun=False):
         '2 oranges'
         sage: count_noun(3, "peach", "peaches")
         '3 peaches'
-        sage: count_noun(1, "peach", plural="peaches", pad_noun=True)
+        sage: count_noun(1, "peach", plural='peaches', pad_noun=True)
         '1 peach  '
     """
     if plural is None:
@@ -78,7 +78,7 @@ def dict_difference(self, other):
 
         sage: from sage.doctest.control import DocTestDefaults
         sage: D1 = DocTestDefaults()
-        sage: D2 = DocTestDefaults(foobar="hello", timeout=100)
+        sage: D2 = DocTestDefaults(foobar='hello', timeout=100)
         sage: dict_difference(D2.__dict__, D1.__dict__)
         {'foobar': 'hello', 'timeout': 100}
     """
@@ -145,6 +145,7 @@ class Timer:
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: from sage.doctest.util import Timer
             sage: Timer().start().annotate(EllipticCurve)
             sage: EllipticCurve.cputime # random
@@ -198,7 +199,7 @@ class Timer:
 
     def __ne__(self, other):
         """
-        Test for non-equality
+        Test for non-equality.
 
         EXAMPLES::
 
@@ -423,7 +424,7 @@ class NestedName:
         """
         INPUT:
 
-        - base -- a string: the name of the module.
+        - ``base`` -- string; the name of the module
 
         EXAMPLES::
 
@@ -436,12 +437,14 @@ class NestedName:
 
     def __setitem__(self, index, value):
         """
-        Sets the value at a given indentation level.
+        Set the value at a given indentation level.
 
         INPUT:
 
-        - index -- a positive integer, the indentation level (often a multiple of 4, but not necessarily)
-        - value -- a string, the name of the class or function at that indentation level.
+        - ``index`` -- positive integer; the indentation level (often a
+          multiple of 4, but not necessarily)
+        - ``value`` -- string; the name of the class or function at that
+          indentation level
 
         EXAMPLES::
 

@@ -44,7 +44,7 @@ systems['MPFI'] = ['sage.rings.real_mpfi',
                    'sage.rings.complex_interval']
 systems['M4RI'] = ['sage.matrix.matrix_mod2_dense']
 systems['Givaro'] = ['sage.rings.finite_rings.element_givaro']
-systems['PolyBoRi'] = ['sage.rings.polynomial.pbori']
+systems['PolyBoRi'] = ['sage.rings.polynomial.pbori.pbori']
 
 
 def get_systems(cmd):
@@ -57,7 +57,7 @@ def get_systems(cmd):
 
     INPUT:
 
-    - ``cmd`` -- a string to run
+    - ``cmd`` -- string to run
 
     .. WARNING::
 

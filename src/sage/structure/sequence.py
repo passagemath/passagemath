@@ -70,9 +70,16 @@ specifying the universe of the sequence::
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-
 import sage.structure.sage_object
 import sage.structure.coerce
+
+from sage.misc.lazy_import import lazy_import
+
+lazy_import('sage.rings.polynomial.multi_polynomial_ideal', 'MPolynomialIdeal')
+lazy_import('sage.rings.polynomial.multi_polynomial_ring', 'MPolynomialRing_base')
+lazy_import('sage.rings.polynomial.multi_polynomial_sequence', 'PolynomialSequence')
+lazy_import('sage.rings.polynomial.pbori.pbori', 'BooleanMonomialMonoid')
+lazy_import('sage.rings.quotient_ring', 'QuotientRing_nc')
 
 
 def Sequence(x, universe=None, check=True, immutable=False, cr=False, cr_str=None, use_sage_types=False):
@@ -85,33 +92,29 @@ def Sequence(x, universe=None, check=True, immutable=False, cr=False, cr_str=Non
 
     INPUT:
 
-    - ``x`` -- a list or tuple instance
+    - ``x`` -- list or tuple instance
 
-    - ``universe`` -- (default: None) the universe of elements; if None
-      determined using canonical coercions and the entire list of
-      elements.  If list is empty, is category Objects() of all
-      objects.
+    - ``universe`` -- (default: ``None``) the universe of elements; if ``None``
+      determined using canonical coercions and the entire list of elements.
+      If list is empty, is category ``Objects()`` of all objects.
 
-    - ``check`` -- (default: ``True``) whether to coerce the elements of x
+    - ``check`` -- boolean (default: ``True``); whether to coerce the elements of x
       into the universe
 
-    - ``immutable`` -- (default: ``True``) whether or not this sequence is
+    - ``immutable`` -- boolean (default: ``True``); whether or not this sequence is
       immutable
 
-    - ``cr`` -- (default: ``False``) if True, then print a carriage return
-      after each comma when printing this sequence.
+    - ``cr`` -- boolean (default: ``False``); if ``True``, then print a carriage return
+      after each comma when printing this sequence
 
-    - ``cr_str`` -- (default: ``False``) if True, then print a carriage return
-      after each comma when calling ``str()`` on this sequence.
+    - ``cr_str`` -- boolean (default: ``False``); if ``True``, then print a carriage return
+      after each comma when calling ``str()`` on this sequence
 
-    - ``use_sage_types`` -- (default: ``False``) if True, coerce the
-       built-in Python numerical types int, float, complex to the
-       corresponding Sage types (this makes functions like vector()
-       more flexible)
+    - ``use_sage_types`` -- boolean (default: ``False``); if ``True``, coerce the
+      built-in Python numerical types int, float, complex to the corresponding
+      Sage types (this makes functions like ``vector()`` more flexible)
 
-    OUTPUT:
-
-    - a sequence
+    OUTPUT: a sequence
 
     EXAMPLES::
 
@@ -219,14 +222,9 @@ def Sequence(x, universe=None, check=True, immutable=False, cr=False, cr_str=Non
             universe = x.universe()
             x = list(x)
         else:
-            try:
-                from sage.rings.polynomial.multi_polynomial_ideal import MPolynomialIdeal
-            except ImportError:
-                pass
-            else:
-                if isinstance(x, MPolynomialIdeal):
-                    universe = x.ring()
-                    x = x.gens()
+            if isinstance(x, MPolynomialIdeal):
+                universe = x.ring()
+                x = x.gens()
 
     if universe is None:
         orig_x = x
@@ -253,16 +251,8 @@ def Sequence(x, universe=None, check=True, immutable=False, cr=False, cr_str=Non
             if universe is None:   # no type errors raised.
                 universe = sage.structure.element.parent(x[len(x)-1])
 
-    try:
-        from sage.rings.polynomial.multi_polynomial_sequence import PolynomialSequence
-        from sage.rings.polynomial.pbori.pbori import BooleanMonomialMonoid
-        from sage.rings.polynomial.multi_polynomial_ring import is_MPolynomialRing
-        from sage.rings.quotient_ring import is_QuotientRing
-    except ImportError:
-        pass
-    else:
-        if is_MPolynomialRing(universe) or isinstance(universe, BooleanMonomialMonoid) or (is_QuotientRing(universe) and is_MPolynomialRing(universe.cover_ring())):
-            return PolynomialSequence(x, universe, immutable=immutable, cr=cr, cr_str=cr_str)
+    if isinstance(universe, (MPolynomialRing_base, BooleanMonomialMonoid)) or (isinstance(universe, QuotientRing_nc) and isinstance(universe.cover_ring(), MPolynomialRing_base)):
+        return PolynomialSequence(x, universe, immutable=immutable, cr=cr, cr_str=cr_str)
 
     return Sequence_generic(x, universe, check, immutable, cr, cr_str, use_sage_types)
 
@@ -277,30 +267,26 @@ class Sequence_generic(sage.structure.sage_object.SageObject, list):
 
     INPUT:
 
-    - ``x`` -- a list or tuple instance
+    - ``x`` -- list or tuple instance
 
-    - ``universe`` -- (default: None) the universe of elements; if None
-      determined using canonical coercions and the entire list of
-      elements.  If list is empty, is category Objects() of all
-      objects.
+    - ``universe`` -- (default: ``None``) the universe of elements; if ``None``
+      determined using canonical coercions and the entire list of elements.
+      If list is empty, is category ``Objects()`` of all objects.
 
-    - ``check`` -- (default: ``True``) whether to coerce the elements of x
+    - ``check`` -- boolean (default: ``True``); whether to coerce the elements of x
       into the universe
 
-    - ``immutable`` -- (default: ``True``) whether or not this sequence is
+    - ``immutable`` -- boolean (default: ``True``); whether or not this sequence is
       immutable
 
-    - ``cr`` -- (default: ``False``) if True, then print a carriage return
-      after each comma when printing this sequence.
+    - ``cr`` -- boolean (default: ``False``); if ``True``, then print a carriage return
+      after each comma when printing this sequence
 
-    - ``use_sage_types`` -- (default: ``False``) if True, coerce the
-       built-in Python numerical types int, float, complex to the
-       corresponding Sage types (this makes functions like vector()
-       more flexible)
+    - ``use_sage_types`` -- boolean (default: ``False``); if ``True``, coerce the
+      built-in Python numerical types int, float, complex to the corresponding
+      Sage types (this makes functions like ``vector()`` more flexible)
 
-    OUTPUT:
-
-    - a sequence
+    OUTPUT: a sequence
 
     EXAMPLES::
 
@@ -402,7 +388,6 @@ class Sequence_generic(sage.structure.sage_object.SageObject, list):
         [1, 2, 1, 3]
         sage: v.universe()
         Finite Field of size 5
-
     """
     def __init__(self, x, universe=None, check=True, immutable=False,
                  cr=False, cr_str=None, use_sage_types=False):
@@ -584,7 +569,7 @@ class Sequence_generic(sage.structure.sage_object.SageObject, list):
 
     def pop(self, index=-1):
         """
-        Remove and return item at index (default last)
+        Remove and return item at index ``index`` (default: last).
 
         EXAMPLES::
 
@@ -599,7 +584,7 @@ class Sequence_generic(sage.structure.sage_object.SageObject, list):
 
     def remove(self, value):
         """
-        Remove first occurrence of value
+        Remove first occurrence of ``value``.
 
         EXAMPLES::
 
@@ -753,8 +738,8 @@ class Sequence_generic(sage.structure.sage_object.SageObject, list):
 
     def is_immutable(self):
         """
-        Return True if this object is immutable (can not be changed)
-        and False if it is not.
+        Return ``True`` if this object is immutable (can not be changed)
+        and ``False`` if it is not.
 
         To make this object immutable use :meth:`set_immutable`.
 
@@ -821,7 +806,7 @@ class Sequence_generic(sage.structure.sage_object.SageObject, list):
 
     def __copy__(self):
         """
-        Return a copy of this sequence
+        Return a copy of this sequence.
 
         EXAMPLES::
 
@@ -833,7 +818,6 @@ class Sequence_generic(sage.structure.sage_object.SageObject, list):
             True
             sage: t.is_mutable() == s.is_mutable()
             True
-
         """
         return Sequence(self, universe=self.__universe,
                         check=False,
@@ -842,7 +826,7 @@ class Sequence_generic(sage.structure.sage_object.SageObject, list):
 
     def __getattr__(self, name):
         """
-        Strictly for unpickling old 'Sequences'
+        Strictly for unpickling old 'Sequences'.
 
         INPUT:
 
