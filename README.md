@@ -19,6 +19,44 @@ development of SageMath, and hence of passagemath.
 
 [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
 
+Modularized distributions
+-------------------------
+
+**Distributions named after a basic mathematical structure:** The packages may also cover a wide range of generalizations/applications of the structure after which they are named. Users who work in a specialized research area will, of course, recognize what structures they need. The down-to-earth naming also creates discoverability by a broader audience. Not many more distribution packages than these 7 are needed:
+- [passagemath-combinat](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-combinat): provides "everything combinatorial", except for graphs.
+- [passagemath-graphs](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-graphs): also provides posets, combinatorial designs, abstract simplicial complexes, quivers, etc.
+- [passagemath-groups](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-groups)
+- [passagemath-modules](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-modules): also has matrices, tensors, homology, coding theory, etc.
+- [passagemath-polyhedra](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-polyhedra): also provides fans, hyperplane arrangements, polyhedral complexes, linear and mixed-integer optimization, lattice point sets, and toric varieties
+- [passagemath-schemes](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-schemes)
+- [passagemath-symbolics](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-symbolics): symbolic expressions and symbolic calculus
+
+**Distributions named after a third-party non-Python dependency:** This makes technical sense because the dependencies will be localized to this distribution package, but it also helps give **attribution and visibility** to these libraries and projects that Sage depends on.
+   | Standard packages | Optional Packages |
+   | :---------------- | :---------------- |
+   | [passagemath-flint](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-flint) | [passagemath-bliss](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-bliss) |
+   | [passagemath-gap](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-gap) | [passagemath-brial](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-brial) |
+   | [passagemath-glpk](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-glpk) | [passagemath-coxeter3](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-coxeter3) |
+   | [passagemath-giac](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-giac) | [passagemath-mcqd](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-mcqd) |
+   | [passagemath-homfly](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-homfly) | [passagemath-meataxe](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-meataxe) |
+   | [passagemath-lcalc](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-lcalc) | [passagemath-sirocco](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-sirocco) |
+   | [passagemath-libbraiding](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-libbraiding) | [passagemath-tdlib](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-tdlib) |
+   | [passagemath-libecm](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-libecm) |
+   | [passagemath-linbox](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-linbox) |
+   | [passagemath-ntl](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-ntl) |
+   | [passagemath-pari](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-pari) |
+   | [passagemath-singular](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-singular) |
+
+**Distributions named after a technical functionality:**
+- [passagemath-objects](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-objects): Sage extends Python's object system by dynamic   mix-in classes that are driven by categories and axioms. It is loosely   modeled on concepts of category theory and inspired by   Scratchpad/Axiom/FriCAS, Magma, and MuPAD. This distribution package makes Sage objects, the element/parent framework, basic categories and functors,   the coercion system and the related metaclasses available.
+- [passagemath-categories](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-categories): This distribution package contains the full set of categories defined by Sage, as well as basic mathematical objects such as integers and rational numbers, a basic implementation of polynomials, and affine spaces.  None of this brings in additional dependencies.
+- [passagemath-environment](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-environment)
+- [passagemath-plot](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-plot): Plotting facilities, depending on matplotlib.
+- [passagemath-repl](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-repl): The top-level interactive environment with the preparser that defines the surface language of Sage. This distribution also includes the doctesting facilities, as the doctests are written in the surface language.
+- [passagemath-standard](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-standard): Everything as provided by a standard installation of the Sage distribution. This is reduced to an empty meta-package.
+- [passagemath-standard-no-symbolics](https://github.com/mkoeppe/sage/tree/t/32432/modularization_of_sagelib__break_out_a_separate_package_sagemath_polyhedra/pkgs/sagemath-standard-no-symbolics)
+
+
 Table of Contents
 -----------------
 
