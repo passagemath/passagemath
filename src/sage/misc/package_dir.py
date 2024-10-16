@@ -565,6 +565,7 @@ if __name__ == '__main__':
                 print(f'{distribution_dir} does not exist')
                 sys.exit(1)
             distribution_underscore = distribution.replace('-', '_')
+            distribution_underscore = "pas" + distribution_underscore
             try:
                 with open(os.path.join(distribution_dir,
                                        f'{distribution_underscore}.egg-info', 'SOURCES.txt')) as f:
