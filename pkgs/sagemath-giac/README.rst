@@ -1,5 +1,5 @@
 ========================================================================
- Sage: Open Source Mathematics Software: Symbolic computation with GIAC
+ passagemath: Symbolic computation with GIAC
 ========================================================================
 
 About SageMath

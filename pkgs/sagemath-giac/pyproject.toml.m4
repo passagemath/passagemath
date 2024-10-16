@@ -14,8 +14,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-giac"
-description = "Sage: Open Source Mathematics Software: Symbolic computation with GIAC"
+name = "passagemath-giac"
+description = "passagemath: Symbolic computation with GIAC"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_categories
 ]
