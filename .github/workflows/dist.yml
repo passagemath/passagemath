@@ -1,6 +1,8 @@
 name: Prepare source distributions and wheels
 
 on:
+  pull_request:
+  merge_group:
   push:
     tags:
       # Match all release tags including beta, rc
@@ -29,6 +31,7 @@ jobs:
     # tarball has been uploaded to the Sage server at the time
     # of pushing a release tag.
 
+    if: startsWith(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -113,7 +116,7 @@ jobs:
           password: ${{ secrets.SAGEMATH_PYPI_API_TOKEN }}
           skip-existing: true
           verbose: true
-        if: env.CAN_DEPLOY == 'true'
+        if: env.CAN_DEPLOY == 'true' && startsWith(github.ref, 'refs/tags/')
 
   release:
 
@@ -166,7 +169,7 @@ jobs:
           password: ${{ secrets.SAGEMATH_PYPI_API_TOKEN }}
           skip-existing: true
           verbose: true
-        if: env.CAN_DEPLOY == 'true'
+        if: env.CAN_DEPLOY == 'true' && startsWith(github.ref, 'refs/tags/')
 
   build_wheels:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }}
@@ -310,7 +313,8 @@ jobs:
   upload_wheels:
     # This needs to be a separate job because pypa/gh-action-pypi-publish cannot run on macOS
     needs: build_wheels
-    if: (success() || failure())
+    if: (success() || failure()) && startsWith(github.ref, 'refs/tags')
+
     runs-on: ubuntu-latest
     env:
       CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
