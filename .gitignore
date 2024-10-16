@@ -221,6 +221,7 @@ build/pkgs/wheel/version_requirements.txt
 /pkgs/sagemath-bliss/setup.cfg
 /pkgs/sagemath-brial/setup.cfg
 /pkgs/sagemath-coxeter3/setup.cfg
+/pkgs/sagemath-giac/setup.cfg
 /pkgs/sagemath-mcqd/setup.cfg
 /pkgs/sagemath-meataxe/setup.cfg
 /pkgs/sagemath-sirocco/setup.cfg
@@ -232,6 +233,7 @@ build/pkgs/wheel/version_requirements.txt
 /pkgs/sagemath-bliss/pyproject.toml
 /pkgs/sagemath-brial/pyproject.toml
 /pkgs/sagemath-coxeter3/pyproject.toml
+/pkgs/sagemath-giac/pyproject.toml
 /pkgs/sagemath-mcqd/pyproject.toml
 /pkgs/sagemath-meataxe/pyproject.toml
 /pkgs/sagemath-sirocco/pyproject.toml
@@ -243,6 +245,7 @@ build/pkgs/wheel/version_requirements.txt
 /pkgs/sagemath-bliss/requirements*.txt
 /pkgs/sagemath-brial/requirements*.txt
 /pkgs/sagemath-coxeter3/requirements*.txt
+/pkgs/sagemath-giac/requirements*.txt
 /pkgs/sagemath-mcqd/requirements*.txt
 /pkgs/sagemath-meataxe/requirements*.txt
 /pkgs/sagemath-sirocco/requirements*.txt
