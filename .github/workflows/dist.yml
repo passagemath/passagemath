@@ -253,34 +253,48 @@ jobs:
           done
 
       - name: sagemath-objects
+        id:   sagemath-objects
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*objects*
 
       - name: sagemath-categories
+        id:   sagemath-categories
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*categories*
 
       - name: sagemath-bliss
+        id:   sagemath-bliss
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*bliss*
 
       - name: sagemath-brial
+        id:   sagemath-brial
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*brial*
 
       - name: sagemath-coxeter3
+        id:   sagemath-coxeter3
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*coxeter3*
 
       - name: sagemath-giac
+        id:   sagemath-giac
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*giac*
 
       - name: sagemath-mcqd
+        id:   sagemath-mcqd
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*mcqd*
 
       - name: sagemath-tdlib
+        id:   sagemath-tdlib
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           case "${{ matrix.arch }}" in
               sagemath*tdlib:i686) ;;  # broken - boost-related
@@ -288,6 +302,7 @@ jobs:
           esac
 
       - uses: actions/upload-artifact@v4
+        if:   (success() || failure())
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
           path: ./wheelhouse/*.whl
@@ -295,6 +310,7 @@ jobs:
   upload_wheels:
     # This needs to be a separate job because pypa/gh-action-pypi-publish cannot run on macOS
     needs: build_wheels
+    if: (success() || failure())
     runs-on: ubuntu-latest
     env:
       CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
