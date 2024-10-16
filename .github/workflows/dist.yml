@@ -1,18 +1,25 @@
 name: Prepare source distributions and wheels
 
 on:
+  pull_request:
+  merge_group:
   push:
     tags:
       # Match all release tags including beta, rc
-      - '[0-9]+.[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+'
-      - '[0-9]+.[0-9]+.beta[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+.beta[0-9]+'
-      - '[0-9]+.[0-9]+.rc[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+.rc[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.beta[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.[0-9]+.beta[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.rc[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.[0-9]+.rc[0-9]+'
 
   workflow_dispatch:
     # Allow to run manually
+
+concurrency:
+  # Cancel previous runs of this workflow for the same branch
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
 
@@ -29,6 +36,7 @@ jobs:
     # tarball has been uploaded to the Sage server at the time
     # of pushing a release tag.
 
+    if: startsWith(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,13 +44,22 @@ jobs:
         run: |
           sudo DEBIAN_FRONTEND=noninteractive apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install $(build/bin/sage-get-system-packages debian _bootstrap)
+      - name: bootstrap -D
+        run: |
+          ./bootstrap -D
+      - name: bootstrap
+        if: failure()
+        run: |
+          ./bootstrap
       - name: make dist (--disable-download-from-upstream-url)
+        if: (success() || failure())
         id: make_dist
         run: |
-          ./bootstrap -D && ./configure --disable-download-from-upstream-url && make dist
+          ./configure --disable-download-from-upstream-url && make dist
         env:
           MAKE: make -j8
       - name: make download (--disable-download-from-upstream-url)
+        if: (success() || failure())
         id: make_download
         run: |
           make -k download DOWNLOAD_PACKAGES=":all: --no-file huge"
@@ -61,7 +78,7 @@ jobs:
       - name: make download (--enable-download-from-upstream-url)
         if: (success() || failure()) && steps.make_download.outcome != 'success'
         run: |
-          make -k download DOWNLOAD_PACKAGES=":all: --no-file huge --allow-upstream"
+          make -k download DOWNLOAD_PACKAGES=":all: --no-file huge --allow-upstream --on-error warn"
         env:
           MAKE: make -j8
       - name: Remove what cannot be distributed
@@ -92,7 +109,7 @@ jobs:
           ./bootstrap
           ./configure
           make pypi-sdists V=0
-          (mkdir dist && mv upstream/sage*.tar.gz dist/)
+          (mkdir dist && mv upstream/*sage*.tar.gz dist/)
           ls -l dist
       - uses: actions/upload-artifact@v4
         with:
@@ -104,13 +121,13 @@ jobs:
           password: ${{ secrets.SAGEMATH_PYPI_API_TOKEN }}
           skip-existing: true
           verbose: true
-        if: env.CAN_DEPLOY == 'true'
+        if: env.CAN_DEPLOY == 'true' && startsWith(github.ref, 'refs/tags/')
 
   release:
 
     needs: [release_dist, sdists_for_pypi]
     runs-on: ubuntu-latest
-    if: (success() || failure()) && github.repository == 'sagemath/sage' && startsWith(github.ref, 'refs/tags/')
+    if: (success() || failure()) && github.repository == 'passagemath/passagemath' && startsWith(github.ref, 'refs/tags/passagemath-')
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -145,7 +162,7 @@ jobs:
           ./bootstrap
           ./configure
           make pypi-noarch-wheels V=0
-          (mkdir dist && mv venv/var/lib/sage/wheels/sage*-none-any.whl dist/)
+          (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/)
           ls -l dist
       - uses: actions/upload-artifact@v4
         with:
@@ -157,7 +174,7 @@ jobs:
           password: ${{ secrets.SAGEMATH_PYPI_API_TOKEN }}
           skip-existing: true
           verbose: true
-        if: env.CAN_DEPLOY == 'true'
+        if: env.CAN_DEPLOY == 'true' && startsWith(github.ref, 'refs/tags/')
 
   build_wheels:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }}
@@ -181,7 +198,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib
+      TARGETS_PRE: gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -237,40 +254,62 @@ jobs:
         run: |
           "${{ steps.python.outputs.python-path }}" -m pip install cibuildwheel==2.18.0
           export PATH=build/bin:$PATH
-          echo CIBW_BEFORE_ALL="( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS)) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/)) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS)) || echo error ignored) ) && if cp /host/sage-\$AUDITWHEEL_PLAT/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root ${{ startsWith(matrix.os, 'ubuntu') && '--prefix=/host/sage-\$AUDITWHEEL_PLAT' || '' }} && cp config.status prefix/; fi && MAKE=\"make -j6\" make V=0 $TARGETS_PRE && (echo \"sage_conf @ file://\$(pwd)/pkgs/sage-conf\" && echo \"sage_setup @ file://\$(pwd)/pkgs/sage-setup\") > constraints.txt" >> "$GITHUB_ENV"
+          echo CIBW_BEFORE_ALL="( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS)) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/)) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS)) || echo error ignored) ) && if cp /host/sage-\$AUDITWHEEL_PLAT/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root ${{ startsWith(matrix.os, 'ubuntu') && '--prefix=/host/sage-\$AUDITWHEEL_PLAT' || '' }} && cp config.status prefix/; fi && MAKE=\"make -j6\" make V=0 $TARGETS_PRE && (echo \"passagemath-conf @ file://\$(pwd)/pkgs/sage-conf\" && echo \"passagemath-setup @ file://\$(pwd)/pkgs/sage-setup\") > constraints.txt" >> "$GITHUB_ENV"
           mkdir -p unpacked
           for sdist in dist/$pkg*.tar.gz; do
               (cd unpacked && tar xfz - ) < $sdist
           done
 
       - name: sagemath-objects
+        id:   sagemath-objects
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*objects*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*objects*
 
       - name: sagemath-categories
+        id:   sagemath-categories
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*categories*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*categories*
 
       - name: sagemath-bliss
+        id:   sagemath-bliss
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*bliss*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*bliss*
+
+      - name: sagemath-brial
+        id:   sagemath-brial
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*brial*
 
       - name: sagemath-coxeter3
+        id:   sagemath-coxeter3
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*coxeter3*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*coxeter3*
+
+      - name: sagemath-giac
+        id:   sagemath-giac
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*giac*
 
       - name: sagemath-mcqd
+        id:   sagemath-mcqd
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*mcqd*
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*mcqd*
 
       - name: sagemath-tdlib
+        id:   sagemath-tdlib
         run: |
           case "${{ matrix.arch }}" in
               i686) ;;  # broken - boost-related
-              *) "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*tdlib*
+              *) "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*tdlib*
           esac
 
       - uses: actions/upload-artifact@v4
+        if:   (success() || failure())
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
           path: ./wheelhouse/*.whl
@@ -278,6 +317,8 @@ jobs:
   upload_wheels:
     # This needs to be a separate job because pypa/gh-action-pypi-publish cannot run on macOS
     needs: build_wheels
+    if: (success() || failure()) && startsWith(github.ref, 'refs/tags')
+
     runs-on: ubuntu-latest
     env:
       CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
