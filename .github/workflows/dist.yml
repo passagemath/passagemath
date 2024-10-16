@@ -263,6 +263,10 @@ jobs:
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*coxeter3*
 
+      - name: sagemath-giac
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/sagemath*giac*
+
       - name: sagemath-mcqd
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*mcqd*
