@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from sage.matroids.matroid cimport Matroid
 from sage.graphs.generic_graph_pyx cimport GenericGraph_pyx
 
