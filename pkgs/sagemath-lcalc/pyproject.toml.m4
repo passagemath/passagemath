@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-lcalc"
-description = "Sage: Open Source Mathematics Software: L-function calculations with lcalc"
+name = "passagemath-lcalc"
+description = "passagemath: L-function calculations with lcalc"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_categories

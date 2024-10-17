@@ -1,5 +1,5 @@
 ====================================================================================
- Sage: Open Source Mathematics Software: Fast computations with MPFI, FLINT and arb
+ passagemath: Fast computations with MPFI, FLINT and arb
 ====================================================================================
 
 About SageMath

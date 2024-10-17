@@ -1,5 +1,5 @@
 ===============================================================================================
- Sage: Open Source Mathematics Software: Plotting and graphics with Matplotlib, Three.JS, etc.
+ passagemath: Plotting and graphics with Matplotlib, Three.JS, etc.
 ===============================================================================================
 
 About SageMath

@@ -1,5 +1,5 @@
 ==========================================================================================
- Sage: Open Source Mathematics Software: Homfly polynomials of knots/links with libhomfly
+ passagemath: Homfly polynomials of knots/links with libhomfly
 ==========================================================================================
 
 About SageMath

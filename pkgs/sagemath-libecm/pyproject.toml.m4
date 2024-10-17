@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-libecm"
-description = "Sage: Open Source Mathematics Software: Elliptic curve method for integer factorization using GMP-ECM"
+name = "passagemath-libecm"
+description = "passagemath: Elliptic curve method for integer factorization using GMP-ECM"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_categories

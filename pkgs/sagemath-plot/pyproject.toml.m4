@@ -17,8 +17,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-plot"
-description = "Sage: Open Source Mathematics Software: Plotting and graphics with Matplotlib, Three.JS, etc."
+name = "passagemath-plot"
+description = "passagemath: Plotting and graphics with Matplotlib, Three.JS, etc."
 dependencies = [
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_gmpy2

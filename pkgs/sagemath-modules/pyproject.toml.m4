@@ -21,8 +21,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-modules"
-description = "Sage: Open Source Mathematics Software: Vectors, matrices, tensors, vector spaces, affine spaces, modules and algebras, additive groups, quadratic forms, homology, coding theory, matroids"
+name = "passagemath-modules"
+description = "passagemath: Vectors, matrices, tensors, vector spaces, affine spaces, modules and algebras, additive groups, quadratic forms, homology, coding theory, matroids"
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
@@ -44,10 +44,10 @@ test    = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 flint   = [SPKG_INSTALL_REQUIRES_sagemath_flint]
 gsl     = []  # No extra needed
 linbox  = [SPKG_INSTALL_REQUIRES_sagemath_linbox]
-m4ri    = ["sagemath-modules[linbox]"]
-m4rie   = ["sagemath-modules[linbox]"]
+m4ri    = ["passagemath-modules[linbox]"]
+m4rie   = ["passagemath-modules[linbox]"]
 meataxe = [SPKG_INSTALL_REQUIRES_sagemath_meataxe]
-mpfi    = ["sagemath-modules[flint]"]
+mpfi    = ["passagemath-modules[flint]"]
 mpfr    = []  # No extra needed
 mpmath  = []  # No extra needed
 ntl     = [SPKG_INSTALL_REQUIRES_sagemath_ntl]
@@ -55,36 +55,36 @@ numpy   = [SPKG_INSTALL_REQUIRES_numpy]
 pari    = [SPKG_INSTALL_REQUIRES_sagemath_pari]
 
 # extras by rings
-RDF     = ["sagemath-modules[numpy]"]
-CDF     = ["sagemath-modules[numpy]"]
+RDF     = ["passagemath-modules[numpy]"]
+CDF     = ["passagemath-modules[numpy]"]
 RR      = []  # No extra needed
 CC      = []  # No extra needed
-RIF     = ["sagemath-modules[flint]"]
-CIF     = ["sagemath-modules[flint]"]
-RBF     = ["sagemath-modules[flint]"]
-CBF     = ["sagemath-modules[flint]"]
-GF      = ["sagemath-modules[pari]"]
-GF2     = ["sagemath-modules[m4ri]"]
-GF2e    = ["sagemath-modules[m4rie]"]
-GF2n    = ["sagemath-modules[m4rie]"]
-GFpn    = ["sagemath-modules[meataxe]"]
-QQbar   = ["sagemath-modules[NumberField]"]
-AA      = ["sagemath-modules[NumberField]"]
-UCF     = ["sagemath-modules[gap]"]
-Zp      = ["sagemath-modules[pari]"]
-Qp      = ["sagemath-modules[Zp]"]
-Zq      = ["sagemath-modules[Zp]"]
-Qq      = ["sagemath-modules[Zp]"]
-FiniteField     = ["sagemath-modules[GF]"]
-NumberField     = ["sagemath-modules[flint]"]
-QuadraticField  = ["sagemath-modules[NumberField]"]
-CyclotomicField = ["sagemath-modules[NumberField]"]
+RIF     = ["passagemath-modules[flint]"]
+CIF     = ["passagemath-modules[flint]"]
+RBF     = ["passagemath-modules[flint]"]
+CBF     = ["passagemath-modules[flint]"]
+GF      = ["passagemath-modules[pari]"]
+GF2     = ["passagemath-modules[m4ri]"]
+GF2e    = ["passagemath-modules[m4rie]"]
+GF2n    = ["passagemath-modules[m4rie]"]
+GFpn    = ["passagemath-modules[meataxe]"]
+QQbar   = ["passagemath-modules[NumberField]"]
+AA      = ["passagemath-modules[NumberField]"]
+UCF     = ["passagemath-modules[gap]"]
+Zp      = ["passagemath-modules[pari]"]
+Qp      = ["passagemath-modules[Zp]"]
+Zq      = ["passagemath-modules[Zp]"]
+Qq      = ["passagemath-modules[Zp]"]
+FiniteField     = ["passagemath-modules[GF]"]
+NumberField     = ["passagemath-modules[flint]"]
+QuadraticField  = ["passagemath-modules[NumberField]"]
+CyclotomicField = ["passagemath-modules[NumberField]"]
 
 # extras by features
-padics      = ["sagemath-modules[Zp]"]
+padics      = ["passagemath-modules[Zp]"]
 
 # the whole package
-standard    = ["sagemath-modules[invariant,combinat,padics,NumberField,FiniteField,m4ri,m4rie,flint,linbox,numpy,mpfi,ntl,pari]"]
+standard    = ["passagemath-modules[invariant,combinat,padics,NumberField,FiniteField,m4ri,m4rie,flint,linbox,numpy,mpfi,ntl,pari]"]
 
 [tool.setuptools]
 include-package-data = false

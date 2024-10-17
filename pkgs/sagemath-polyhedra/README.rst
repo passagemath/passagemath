@@ -1,5 +1,5 @@
 ====================================================================================================================
- Sage: Open Source Mathematics Software: Convex polyhedra in arbitrary dimension, mixed integer linear optimization
+ passagemath: Convex polyhedra in arbitrary dimension, mixed integer linear optimization
 ====================================================================================================================
 
 About SageMath

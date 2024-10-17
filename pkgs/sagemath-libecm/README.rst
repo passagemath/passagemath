@@ -1,5 +1,5 @@
 =======================================================================================================
- Sage: Open Source Mathematics Software: Elliptic curve method for integer factorization using GMP-ECM
+ passagemath: Elliptic curve method for integer factorization using GMP-ECM
 =======================================================================================================
 
 About SageMath

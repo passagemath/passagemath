@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-polyhedra"
-description = "Sage: Open Source Mathematics Software: Convex polyhedra in arbitrary dimension, mixed integer linear optimization"
+name = "passagemath-polyhedra"
+description = "passagemath: Convex polyhedra in arbitrary dimension, mixed integer linear optimization"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_gmpy2
@@ -46,7 +46,7 @@ pari        = [SPKG_INSTALL_REQUIRES_sagemath_pari]
 # polyhedral libraries
 4ti2        = []  # FIXME
 cddlib      = []  # FIXME
-latte       = ["sagemath-polyhedra[latte_int]"]  # alias
+latte       = ["passagemath-polyhedra[latte_int]"]  # alias
 latte_int   = []  # FIXME
 normaliz    = [SPKG_INSTALL_REQUIRES_pynormaliz]
 polymake    = [SPKG_INSTALL_REQUIRES_jupymake]
@@ -54,18 +54,18 @@ ppl         = []  # no extra required
 topcom      = []  # FIXME
 
 # optimization libraries
-cbc         = ["sagemath-polyhedra[cbc_sage]"]
+cbc         = ["passagemath-polyhedra[cbc_sage]"]
 cbc_sage    = [SPKG_INSTALL_REQUIRES_sage_numerical_backends_coin]
-coin        = ["sagemath-polyhedra[cbc_sage]"]
-coin_sage   = ["sagemath-polyhedra[cbc_sage]"]
-cplex       = ["sagemath-polyhedra[cplex_sage]"]
+coin        = ["passagemath-polyhedra[cbc_sage]"]
+coin_sage   = ["passagemath-polyhedra[cbc_sage]"]
+cplex       = ["passagemath-polyhedra[cplex_sage]"]
 cplex_sage  = [SPKG_INSTALL_REQUIRES_sage_numerical_backends_cplex]
-cvxopt      = ["sagemath-polyhedra[cvxopt_sage]"]
+cvxopt      = ["passagemath-polyhedra[cvxopt_sage]"]
 cvxopt_sage = [SPKG_INSTALL_REQUIRES_cvxopt]
 cvxpy       = [SPKG_INSTALL_REQUIRES_cvxpy]
-glpk        = ["sagemath-polyhedra[glpk_sage]"]
+glpk        = ["passagemath-polyhedra[glpk_sage]"]
 glpk_sage   = []  # no extra required
-gurobi      = ["sagemath-polyhedra[gurobi_sage]"]
+gurobi      = ["passagemath-polyhedra[gurobi_sage]"]
 gurobi_sage = [SPKG_INSTALL_REQUIRES_sage_numerical_backends_gurobi]
 scip        = [SPKG_INSTALL_REQUIRES_pyscipopt]
 
@@ -73,13 +73,13 @@ scip        = [SPKG_INSTALL_REQUIRES_pyscipopt]
 QQ          = []
 ZZ          = []
 RDF         = []  # FIXME: cddlib
-NumberField = ["sagemath-polyhedra[flint]"]
+NumberField = ["passagemath-polyhedra[flint]"]
 
 # features
 plot        = [SPKG_INSTALL_REQUIRES_sagemath_plot]
 
 # the whole package
-standard    = ["sagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,pari,plot,RDF]"]
+standard    = ["passagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,pari,plot,RDF]"]
 
 [tool.setuptools]
 include-package-data = false

@@ -17,8 +17,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-pari"
-description = "Sage: Open Source Mathematics Software: Computational Number Theory with PARI/GP"
+name = "passagemath-pari"
+description = "passagemath: Computational Number Theory with PARI/GP"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals

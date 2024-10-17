@@ -13,8 +13,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-homfly"
-description = "Sage: Open Source Mathematics Software: Homfly polynomials of knots/links with libhomfly"
+name = "passagemath-homfly"
+description = "passagemath: Homfly polynomials of knots/links with libhomfly"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
 ]
