@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-glpk"
-description = "Sage: Open Source Mathematics Software: Linear and mixed integer linear optimization backend using GLPK"
+name = "passagemath-glpk"
+description = "passagemath: Linear and mixed integer linear optimization backend using GLPK"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_memory_allocator

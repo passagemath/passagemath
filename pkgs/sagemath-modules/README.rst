@@ -1,5 +1,5 @@
 ===========================================================================================================================================================================================================
- Sage: Open Source Mathematics Software: Vectors, matrices, tensors, vector spaces, affine spaces, modules and algebras, additive groups, quadratic forms, root systems, homology, coding theory, matroids
+ passagemath: Vectors, matrices, tensors, vector spaces, affine spaces, modules and algebras, additive groups, quadratic forms, root systems, homology, coding theory, matroids
 ===========================================================================================================================================================================================================
 
 About SageMath

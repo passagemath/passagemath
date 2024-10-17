@@ -1,5 +1,5 @@
 ==============================================================================
- Sage: Open Source Mathematics Software: Computational Number Theory with NTL
+ passagemath: Computational Number Theory with NTL
 ==============================================================================
 
 About SageMath

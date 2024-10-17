@@ -1,5 +1,5 @@
 ===============================================================================================
- Sage: Open Source Mathematics Software: Linear Algebra with fflas-ffpack, Givaro, IML, LinBox
+ passagemath: Linear Algebra with fflas-ffpack, Givaro, IML, LinBox
 ===============================================================================================
 
 About SageMath

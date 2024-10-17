@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-libbraiding"
-description = "Sage: Open Source Mathematics Software: Braid computations with libbraiding"
+name = "passagemath-libbraiding"
+description = "passagemath: Braid computations with libbraiding"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_memory_allocator

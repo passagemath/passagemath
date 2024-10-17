@@ -1,5 +1,5 @@
 ==================================================================================
- Sage: Open Source Mathematics Software: Computational Number Theory with PARI/GP
+ passagemath: Computational Number Theory with PARI/GP
 ==================================================================================
 
 About SageMath

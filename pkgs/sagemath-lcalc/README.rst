@@ -1,5 +1,5 @@
 ============================================================================
- Sage: Open Source Mathematics Software: L-function calculations with lcalc
+ passagemath: L-function calculations with lcalc
 ============================================================================
 
 About SageMath

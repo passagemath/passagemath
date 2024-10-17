@@ -1,5 +1,5 @@
 =========================================================================================================
- Sage: Open Source Mathematics Software: Linear and mixed integer linear optimization backend using GLPK
+ passagemath: Linear and mixed integer linear optimization backend using GLPK
 =========================================================================================================
 
 About SageMath

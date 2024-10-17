@@ -17,8 +17,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-ntl"
-description = "Sage: Open Source Mathematics Software: Computational Number Theory with NTL"
+name = "passagemath-ntl"
+description = "passagemath: Computational Number Theory with NTL"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals

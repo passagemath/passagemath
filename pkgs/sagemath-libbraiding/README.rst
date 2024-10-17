@@ -1,5 +1,5 @@
 =============================================================================
- Sage: Open Source Mathematics Software: Braid computations with libbraiding
+ passagemath: Braid computations with libbraiding
 =============================================================================
 
 About SageMath

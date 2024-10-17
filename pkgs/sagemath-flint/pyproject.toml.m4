@@ -21,8 +21,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-flint"
-description = "Sage: Open Source Mathematics Software: Fast computations with FLINT and arb"
+name = "passagemath-flint"
+description = "passagemath: Fast computations with FLINT and arb"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_ntl

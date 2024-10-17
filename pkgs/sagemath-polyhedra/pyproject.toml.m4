@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-polyhedra"
-description = "Sage: Open Source Mathematics Software: Convex polyhedra in arbitrary dimension, mixed integer linear optimization"
+name = "passagemath-polyhedra"
+description = "passagemath: Convex polyhedra in arbitrary dimension, mixed integer linear optimization"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_gmpy2

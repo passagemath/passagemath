@@ -19,8 +19,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-linbox"
-description = "Sage: Open Source Mathematics Software: Linear Algebra with fflas-ffpack, Givaro, IML, LinBox"
+name = "passagemath-linbox"
+description = "passagemath: Linear Algebra with fflas-ffpack, Givaro, IML, LinBox"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
