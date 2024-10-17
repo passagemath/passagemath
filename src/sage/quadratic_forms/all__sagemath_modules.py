@@ -11,3 +11,5 @@ from sage.quadratic_forms.random_quadraticform import (random_quadraticform, ran
 from sage.quadratic_forms.extras import least_quadratic_nonresidue, extend_to_primitive, is_triangular_number
 
 from sage.quadratic_forms.constructions import BezoutianQuadraticForm, HyperbolicPlane_quadratic_form
+
+from sage.quadratic_forms.bqf_class_group import BQFClassGroup
