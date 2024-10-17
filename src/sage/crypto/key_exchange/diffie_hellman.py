@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Diffie-Hellman Key Exchange Scheme
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from sage.rings.all__sagemath_categories import *
 
 from sage.rings.function_field.all__sagemath_modules import *
