@@ -141,6 +141,18 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_objects			\
 	sagemath_repl				\
 	sagemath_categories			\
+	sagemath_modules			\
+	sagemath_plot				\
+	sagemath_polyhedra			\
+	sagemath_flint				\
+	sagemath_pari				\
+	sagemath_glpk				\
+	sagemath_homfly				\
+	sagemath_linbox				\
+	sagemath_ntl				\
+	sagemath_lcalc				\
+	sagemath_libbraiding			\
+	sagemath_libecm				\
 	sagemath_bliss 				\
 	sagemath_mcqd 				\
 	sagemath_tdlib				\
