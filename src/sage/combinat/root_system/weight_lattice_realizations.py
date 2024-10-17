@@ -917,6 +917,7 @@ class WeightLatticeRealizations(Category_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: RootSystem(['A', 3]).ambient_lattice()._inverse_cartan_matrix
                 [3/4 1/2 1/4]
                 [1/2   1 1/2]
