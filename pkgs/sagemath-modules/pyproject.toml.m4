@@ -42,7 +42,6 @@ test    = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
 # extras by packages
 flint   = [SPKG_INSTALL_REQUIRES_sagemath_flint]
-gap     = [SPKG_INSTALL_REQUIRES_sagemath_gap]
 gsl     = []  # No extra needed
 linbox  = [SPKG_INSTALL_REQUIRES_sagemath_linbox]
 m4ri    = ["sagemath-modules[linbox]"]
@@ -76,15 +75,12 @@ Zp      = ["sagemath-modules[pari]"]
 Qp      = ["sagemath-modules[Zp]"]
 Zq      = ["sagemath-modules[Zp]"]
 Qq      = ["sagemath-modules[Zp]"]
-SR      = [SPKG_INSTALL_REQUIRES_sagemath_symbolics]
 FiniteField     = ["sagemath-modules[GF]"]
 NumberField     = ["sagemath-modules[flint]"]
 QuadraticField  = ["sagemath-modules[NumberField]"]
 CyclotomicField = ["sagemath-modules[NumberField]"]
 
 # extras by features
-invariant   = [SPKG_INSTALL_REQUIRES_sagemath_groups]
-combinat    = [SPKG_INSTALL_REQUIRES_sagemath_combinat]
 padics      = ["sagemath-modules[Zp]"]
 
 # the whole package

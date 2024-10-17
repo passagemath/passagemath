@@ -46,9 +46,7 @@ jsmol           = [SPKG_INSTALL_REQUIRES_jupyter_jsmol]
 matplotlib      = []  # no extra needed
 
 # extras by other features
-graphs          = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
 polyhedra       = [SPKG_INSTALL_REQUIRES_sagemath_polyhedra]
-symbolics       = [SPKG_INSTALL_REQUIRES_sagemath_symbolics]
 
 [tool.setuptools]
 include-package-data = false

@@ -76,11 +76,7 @@ RDF         = []  # FIXME: cddlib
 NumberField = ["sagemath-polyhedra[flint]"]
 
 # features
-graphs      = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
-groups      = [SPKG_INSTALL_REQUIRES_sagemath_groups]
 plot        = [SPKG_INSTALL_REQUIRES_sagemath_plot]
-posets      = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
-toric       = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
 
 # the whole package
 standard    = ["sagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,pari,plot,RDF]"]
