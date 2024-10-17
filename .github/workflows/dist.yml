@@ -184,8 +184,14 @@ jobs:
       fail-fast: false
       matrix:
         os:      [ubuntu-latest]
-        arch:    [x86_64, i686, aarch64]
-        build:   [manylinux, musllinux]
+        arch: >-
+          ${{ github.event_name == 'pull_request'
+                && fromJson('["x86_64"]')
+                || fromJson('["x86_64", "i686", "aarch64"]') }}
+        build: >-
+          ${{ github.event_name == 'pull_request'
+                && fromJson('["manylinux"]')
+                || fromJson('["manylinux", "musllinux"]') }}
         include:
           - os: macos-13
             arch: x86_64
