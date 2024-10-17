@@ -3921,6 +3921,7 @@ class RootLatticeRealizations(Category_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: P = RootSystem(['A', 3]).weight_space()
                 sage: La = P.fundamental_weights()
                 sage: alphacheck = P.coroot_lattice().positive_roots()
