@@ -5,9 +5,9 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 # Note we include numpy here to build some modules that cimport numpy,
 # but it is not part of the install-requires.
 requires = [
-    "sage_setup[autogen]",
     SPKG_INSTALL_REQUIRES_setuptools
     SPKG_INSTALL_REQUIRES_sage_setup
+    SPKG_INSTALL_REQUIRES_jinja2
     SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
