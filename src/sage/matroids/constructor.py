@@ -112,17 +112,18 @@ from sage.categories.fields import Fields
 from sage.categories.rings import Rings
 from sage.rings.finite_rings.finite_field_base import FiniteField
 import sage.matroids.matroid
-import sage.matroids.basis_exchange_matroid
-from sage.matroids.rank_matroid import RankMatroid
-from sage.matroids.circuits_matroid import CircuitsMatroid
-from sage.matroids.flats_matroid import FlatsMatroid
-from sage.matroids.circuit_closures_matroid import CircuitClosuresMatroid
-from sage.matroids.basis_matroid import BasisMatroid
-from sage.matroids.linear_matroid import LinearMatroid, RegularMatroid, BinaryMatroid, TernaryMatroid, QuaternaryMatroid
-from sage.matroids.graphic_matroid import GraphicMatroid
 import sage.matroids.utilities
 
 lazy_import('sage.combinat.posets.lattices', 'FiniteLatticePoset')
+lazy_import('sage.matroids.basis_matroid', 'BasisMatroid')
+lazy_import('sage.matroids.circuit_closures_matroid', 'CircuitClosuresMatroid')
+lazy_import('sage.matroids.circuits_matroid', 'CircuitsMatroid')
+lazy_import('sage.matroids.flats_matroid', 'FlatsMatroid')
+lazy_import('sage.matroids.graphic_matroid', 'GraphicMatroid')
+lazy_import('sage.matroids.linear_matroid',
+            ['LinearMatroid', 'RegularMatroid', 'BinaryMatroid',
+             'TernaryMatroid', 'QuaternaryMatroid'])
+lazy_import('sage.matroids.rank_matroid', 'RankMatroid')
 
 
 def Matroid(groundset=None, data=None, **kwds):
