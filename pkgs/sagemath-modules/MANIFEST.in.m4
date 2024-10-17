@@ -285,6 +285,8 @@ graft sage/probability                                  # uses gsl
 graft sage/libs/mpc
 include sage/rings/complex_mpc.p*
 
+graft sage/libs/mpmath
+
 # because it needs real_mpfr
 include sage/numerical/gauss_legendre.p*
 # uses vector
