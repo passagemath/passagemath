@@ -46,6 +46,7 @@ version = {file = ["VERSION.txt"]}
     "python_debug.h",
 ]
 "sage.ext" = [
+    "ccobject.h",
     "mod_int.h",
 ]
 "sage.rings" = ["integer_fake.h"]
