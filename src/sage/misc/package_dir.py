@@ -480,16 +480,30 @@ if __name__ == '__main__':
     distribution = args.set or args.add or ''
 
     if distribution == 'all':
-        distributions = ["sagemath-bliss",
-                         "sagemath-brial",
-                         "sagemath-coxeter3",
-                         "sagemath-mcqd",
-                         "sagemath-meataxe",
-                         "sagemath-sirocco",
+        # Order matters because some MANIFESTs are not careful enough
+        distributions = ["sagemath-glpk",
+                         "sagemath-polyhedra",
+                         "sagemath-bliss",
                          "sagemath-tdlib",
-                         "sagemath-environment",
+                         "sagemath-mcqd",
+                         "sagemath-sirocco",
+                         "sagemath-coxeter3",
+                         "sagemath-meataxe",
+                         "sagemath-giac",
+                         "sagemath-brial",
+                         "sagemath-lcalc",
+                         "sagemath-libbraiding",
+                         "sagemath-libecm",
+                         "sagemath-linbox",
+                         "sagemath-flint",
+                         "sagemath-ntl",
+                         "sagemath-pari",
+                         "sagemath-homfly",
+                         "sagemath-plot",
+                         "sagemath-modules",
                          "sagemath-categories",
                          "sagemath-repl",
+                         "sagemath-environment",
                          "sagemath-objects"]
     else:
         distributions = [distribution.replace('_', '-')]
