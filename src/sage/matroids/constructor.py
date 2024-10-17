@@ -103,8 +103,8 @@ Functions
 
 
 from itertools import combinations
-from sage.combinat.posets.lattices import FiniteLatticePoset
 from sage.matrix.constructor import matrix
+from sage.misc.lazy_import import lazy_import
 from sage.structure.element import Matrix
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
@@ -121,6 +121,8 @@ from sage.matroids.basis_matroid import BasisMatroid
 from sage.matroids.linear_matroid import LinearMatroid, RegularMatroid, BinaryMatroid, TernaryMatroid, QuaternaryMatroid
 from sage.matroids.graphic_matroid import GraphicMatroid
 import sage.matroids.utilities
+
+lazy_import('sage.combinat.posets.lattices', 'FiniteLatticePoset')
 
 
 def Matroid(groundset=None, data=None, **kwds):
