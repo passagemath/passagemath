@@ -1,5 +1,5 @@
 =======================================================================================================================================================
- Sage: Open Source Mathematics Software: Graphs, posets, hypergraphs, designs, abstract complexes, combinatorial polyhedra, abelian sandpiles, quivers
+ passagemath: Graphs, posets, hypergraphs, designs, abstract complexes, combinatorial polyhedra, abelian sandpiles, quivers
 =======================================================================================================================================================
 
 About SageMath

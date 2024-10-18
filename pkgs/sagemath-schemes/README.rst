@@ -1,5 +1,5 @@
 =============================================================================================================================================
- Sage: Open Source Mathematics Software: Schemes, varieties, elliptic curves, algebraic Riemann surfaces, modular forms, arithmetic dynamics
+ passagemath: Schemes, varieties, elliptic curves, algebraic Riemann surfaces, modular forms, arithmetic dynamics
 =============================================================================================================================================
 
 About SageMath

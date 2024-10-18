@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-combinat"
-description = "Sage: Open Source Mathematics Software: Algebraic combinatorics, combinatorial representation theory"
+name = "passagemath-combinat"
+description = "passagemath: Algebraic combinatorics, combinatorial representation theory"
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
@@ -42,7 +42,7 @@ graphs          = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
 modules         = [SPKG_INSTALL_REQUIRES_sagemath_modules]
 
 # everything
-standard        = ["sagemath-combinat[lrcalc,symmetrica,graphs,modules]"]
+standard        = ["passagemath-combinat[lrcalc,symmetrica,graphs,modules]"]
 
 [tool.setuptools]
 include-package-data = false

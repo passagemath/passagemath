@@ -1,5 +1,5 @@
 =====================================================================
- Sage: Open Source Mathematics Software: Groups and Invariant Theory
+ passagemath: Groups and Invariant Theory
 =====================================================================
 
 About SageMath
