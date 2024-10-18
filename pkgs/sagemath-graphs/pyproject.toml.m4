@@ -74,6 +74,8 @@ host-requires = [
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
+  "pkg:generic/planarity",
+  "pkg:generic/rw",
 ]
 
 dependencies = [
