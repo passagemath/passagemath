@@ -17,8 +17,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-gap"
-description = "Sage: Open Source Mathematics Software: Computational Group Theory with GAP"
+name = "passagemath-gap"
+description = "passagemath: Computational Group Theory with GAP"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals

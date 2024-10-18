@@ -1,5 +1,5 @@
 ================================================================================================================
- Sage: Open Source Mathematics Software: Computer algebra, algebraic geometry, singularity theory with Singular
+ passagemath: Computer algebra, algebraic geometry, singularity theory with Singular
 ================================================================================================================
 
 About SageMath

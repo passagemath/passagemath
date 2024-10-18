@@ -18,8 +18,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-symbolics"
-description = "Sage: Open Source Mathematics Software: Symbolic calculus"
+name = "passagemath-symbolics"
+description = "passagemath: Symbolic calculus"
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cypari

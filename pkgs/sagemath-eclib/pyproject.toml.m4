@@ -18,8 +18,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-eclib"
-description = "Sage: Open Source Mathematics Software: Elliptic curves over the rationals with eclib/mwrank"
+name = "passagemath-eclib"
+description = "passagemath: Elliptic curves over the rationals with eclib/mwrank"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_linbox
     SPKG_INSTALL_REQUIRES_sagemath_modules

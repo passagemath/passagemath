@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-graphs"
-description = "Sage: Open Source Mathematics Software: Graphs, posets, hypergraphs, designs, abstract complexes, combinatorial polyhedra, abelian sandpiles, quivers"
+name = "passagemath-graphs"
+description = "passagemath: Graphs, posets, hypergraphs, designs, abstract complexes, combinatorial polyhedra, abelian sandpiles, quivers"
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
@@ -53,7 +53,7 @@ polyhedra   = [SPKG_INSTALL_REQUIRES_sagemath_polyhedra]
 repl        = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 sat         = [SPKG_INSTALL_REQUIRES_sagemath_combinat]
 
-standard    = ["sagemath-graphs[combinat,databases,mip,modules,plot,polyhedra,repl]"]
+standard    = ["passagemath-graphs[combinat,databases,mip,modules,plot,polyhedra,repl]"]
 
 [tool.setuptools]
 include-package-data = false

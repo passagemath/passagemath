@@ -12,8 +12,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-groups"
-description = "Sage: Open Source Mathematics Software: Groups and Invariant Theory"
+name = "passagemath-groups"
+description = "passagemath: Groups and Invariant Theory"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_gap
@@ -46,7 +46,7 @@ representations = [SPKG_INSTALL_REQUIRES_sagemath_combinat]
 semigroups      = [SPKG_INSTALL_REQUIRES_sagemath_combinat]
 
 # the whole package
-standard        = ["sagemath-groups[additive,matrix,representations,semigroups]"]
+standard        = ["passagemath-groups[additive,matrix,representations,semigroups]"]
 
 [tool.setuptools]
 include-package-data = false

@@ -16,8 +16,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-singular"
-description = "Sage: Open Source Mathematics Software: Computer algebra, algebraic geometry, singularity theory with Singular"
+name = "passagemath-singular"
+description = "passagemath: Computer algebra, algebraic geometry, singularity theory with Singular"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals

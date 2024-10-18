@@ -1,5 +1,5 @@
 =============================================================================
- Sage: Open Source Mathematics Software: Computational Group Theory with GAP
+ passagemath: Computational Group Theory with GAP
 =============================================================================
 
 About SageMath

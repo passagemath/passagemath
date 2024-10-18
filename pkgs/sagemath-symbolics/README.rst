@@ -1,5 +1,5 @@
 ===========================================================
- Sage: Open Source Mathematics Software: Symbolic calculus
+ passagemath: Symbolic calculus
 ===========================================================
 
 About SageMath

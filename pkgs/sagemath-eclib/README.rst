@@ -1,5 +1,5 @@
 ==============================================================================================
- Sage: Open Source Mathematics Software: Elliptic curves over the rationals with eclib/mwrank
+ passagemath: Elliptic curves over the rationals with eclib/mwrank
 ==============================================================================================
 
 About SageMath

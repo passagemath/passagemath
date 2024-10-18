@@ -1,5 +1,5 @@
 ======================================================================================================
- Sage: Open Source Mathematics Software: Algebraic combinatorics, combinatorial representation theory
+ passagemath: Algebraic combinatorics, combinatorial representation theory
 ======================================================================================================
 
 About SageMath
