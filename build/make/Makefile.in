@@ -163,6 +163,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_mcqd 				\
 	sagemath_tdlib				\
 	sagemath_giac				\
+	sagemath_singular			\
 	sagemath_symbolics			\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
