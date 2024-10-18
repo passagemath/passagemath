@@ -104,10 +104,17 @@ jobs:
         run: |
           sudo DEBIAN_FRONTEND=noninteractive apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install $(build/bin/sage-get-system-packages debian _bootstrap)
+      - name: Cache SAGE_LOCAL
+        uses: actions/cache@v4
+        with:
+          path: |
+            config.status
+            local
+          key: sdists_for_pypi
       - name: make pypi-sdists
         run: |
           ./bootstrap
-          ./configure
+          if [ -x ./config.status ]; then ./config.status; else ./configure; fi
           make pypi-sdists V=0
           (mkdir dist && mv upstream/*sage*.tar.gz dist/)
           ls -l dist
