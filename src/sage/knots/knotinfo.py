@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.graphs sage.groups
 r"""
 Access to the KnotInfo database
