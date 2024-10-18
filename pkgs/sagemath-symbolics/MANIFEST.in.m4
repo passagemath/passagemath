@@ -19,6 +19,8 @@ include sage/calculus/predefined.p*
 include sage/calculus/tests.p*
 include sage/calculus/var.p*
 
+include sage/cpython/pycore_long.h  # FIXME
+
 graft sage/manifolds
 
 graft sage/geometry/riemannian_manifolds
