@@ -328,6 +328,18 @@ jobs:
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*homfly*
 
+      - name: sagemath-combinat
+        id:   sagemath-combinat
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*combinat*
+
+      - name: sagemath-graphs
+        id:   sagemath-graphs
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*graphs*
+
         ####### sagemath-modules and what depends on it
 
       - name: sagemath-modules
@@ -383,6 +395,43 @@ jobs:
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*libbraiding*
+
+      - name: sagemath-eclib
+        id:   sagemath-eclib
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*eclib*
+
+      - name: sagemath-gap
+        id:   sagemath-gap
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*gap*
+
+      - name: sagemath-groups
+        id:   sagemath-groups
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*groups*
+
+      - name: sagemath-singular
+        id:   sagemath-singular
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*singular*
+
+      - name: sagemath-schemes
+        id:   sagemath-schemes
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*schemes*
+
+      - name: sagemath-symbolics
+        id:   sagemath-symbolics
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*symbolics*
+
 
       - uses: actions/upload-artifact@v4
         if:   (success() || failure())

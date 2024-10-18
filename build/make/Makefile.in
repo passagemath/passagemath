@@ -144,9 +144,15 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_modules			\
 	sagemath_plot				\
 	sagemath_polyhedra			\
+	sagemath_graphs				\
+	sagemath_combinat			\
+	sagemath_schemes			\
+	sagemath_gap				\
+	sagemath_groups				\
 	sagemath_flint				\
 	sagemath_pari				\
 	sagemath_glpk				\
+	sagemath_eclib				\
 	sagemath_homfly				\
 	sagemath_linbox				\
 	sagemath_ntl				\
@@ -157,6 +163,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_mcqd 				\
 	sagemath_tdlib				\
 	sagemath_giac				\
+	sagemath_symbolics			\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
 	sagemath_meataxe			\
