@@ -55,7 +55,6 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_libecm
     SPKG_INSTALL_REQUIRES_sagemath_linbox
     SPKG_INSTALL_REQUIRES_sagemath_modules
-    SPKG_INSTALL_REQUIRES_sagemath_mpmath
     SPKG_INSTALL_REQUIRES_sagemath_ntl
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_pari
@@ -85,7 +84,6 @@ dnl From Makefile.in: DOC_DEPENDENCIES
     SPKG_INSTALL_REQUIRES_scipy
     SPKG_INSTALL_REQUIRES_matplotlib
     SPKG_INSTALL_REQUIRES_pillow
-    SPKG_INSTALL_REQUIRES_mpmath
     SPKG_INSTALL_REQUIRES_ipykernel
     SPKG_INSTALL_REQUIRES_jupyter_client
     SPKG_INSTALL_REQUIRES_ipywidgets
