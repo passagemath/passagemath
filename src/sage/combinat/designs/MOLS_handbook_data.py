@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Known lower bounds on the number of Mutually Orthogonal Latin
 Squares (MOLS) of a given size.
