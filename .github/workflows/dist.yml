@@ -258,7 +258,7 @@ jobs:
           path: |
             /sage-*
             ~/sage-*
-          key: ${{ runner.os }}-cibuildwheel-${{ matrix.build }}
+          key: ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
 
       - name: Unpack and prepare
         # We build the wheels from the sdists so that MANIFEST filtering becomes effective.
