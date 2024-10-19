@@ -20,7 +20,7 @@ export PIP_FIND_LINKS="file://$SAGE_SPKG_WHEELS"
 
 unset tox_args
 
-wheel="$(sed -n '1s,.*@ file://,,p' $SAGE_SPKG_SCRIPTS/$PKG_BASE/spkg-requirements.txt)"
+wheel="$(sed -n '1s,.*@ file://,,p' $SAGE_SPKG_SCRIPTS/$PKG_BASE/spkg-requirements.txt 2>/dev/null)"
 if [ -n "$wheel" ]; then
     tox_envs=$(tox -l -q)
     tox_args="-r -p auto -v --installpkg $wheel"
