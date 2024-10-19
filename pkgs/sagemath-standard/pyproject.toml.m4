@@ -47,6 +47,7 @@ tdlib = [
 [tool.setuptools]
 license-files = ["LICENSE.txt"]
 include-package-data = false
+packages = []
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
