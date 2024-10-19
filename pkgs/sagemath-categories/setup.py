@@ -9,4 +9,9 @@ from sage_setup import sage_setup
 
 sage_setup(
     ['sagemath-categories'],
-    interpreters=['Element', 'Python'])  # RDF uses gsl --> sagemath-modules
+    interpreters=['Element', 'Python'],  # RDF uses gsl --> sagemath-modules
+    package_data={
+        "sage.rings.finite_rings": [
+            "integer_mod_limits.h",
+        ],
+    })
