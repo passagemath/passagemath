@@ -456,6 +456,12 @@ jobs:
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*symbolics*
 
+      - name: sagemath-standard-no-symbolics
+        id:   sagemath-standard-no-symbolics
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*standard-no-symbolics*
+
 
       - uses: actions/upload-artifact@v4
         if:   (success() || failure())
