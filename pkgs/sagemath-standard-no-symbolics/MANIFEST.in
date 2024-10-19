@@ -1,8 +1,3 @@
-dnl MANIFEST.in is generated from this file by SAGE_ROOT/bootstrap via m4.
-
-dnl Include all from sagemath-categories (via m4 include)
-include(`../../../src/MANIFEST.in')
-
 prune .tox
 exclude *.m4
 include requirements.txt
