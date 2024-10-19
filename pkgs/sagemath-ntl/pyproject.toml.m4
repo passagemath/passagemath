@@ -38,9 +38,6 @@ content-type = "text/x-rst"
 packages = ["sage.libs.ntl"]
 include-package-data = false
 
-[tool.setuptools.package-data]
-"sage.libs.ntl" = ["*.h"]
-
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
 
