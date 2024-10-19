@@ -979,8 +979,8 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: W = CoxeterGroup(['D', 4])
-                sage: W.reflection_representation()
+                sage: W = CoxeterGroup(['D', 4])                                        # needs sage.graphs
+                sage: W.reflection_representation()                                     # needs sage.graphs
                 Reflection representation of Finite Coxeter group over
                  Integer Ring with Coxeter matrix:
                 [1 3 2 2]
@@ -2015,6 +2015,7 @@ class CoxeterGroups(Category_singleton):
                 sage: (s[3]*s[2]*s[1]).absolute_length()                                # needs sage.combinat sage.groups
                 3
 
+                sage: # needs sage.graphs
                 sage: W = CoxeterGroup(["A",2,1])
                 sage: (r, s, t) = W.simple_reflections()
                 sage: (r * s * r * t).absolute_length()
@@ -2049,6 +2050,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: W = CoxeterGroup(['A', 2, 1])
                 sage: (r, s, t) = W.simple_reflections()
                 sage: (r * s * r * t).absolute_chain()
@@ -2081,6 +2083,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: W = CoxeterGroup(["A",2,1])
                 sage: W.one().absolute_chain_reflections()
                 []

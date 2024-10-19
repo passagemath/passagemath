@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Diffie-Hellman Key Exchange Scheme
 
@@ -77,6 +78,7 @@ class DiffieHellman(KeyExchangeScheme):
         large prime. This is the prime from the 8192-bit MODP group in RFC 3526
         (see [KK2003]_)::
 
+            sage: # needs sage.symbolic
             sage: p = 2^8192 - 2^8128 - 1 + 2^64 * (round(2^8062 * pi) + 4743158)
             sage: DH = key_exchange.DiffieHellman(p, 2, proof=False)
             sage: alice_sk = DH.generate_secret_key()
@@ -239,14 +241,14 @@ class DiffieHellman(KeyExchangeScheme):
         size is `(p - 1) / 2`::
 
             sage: DH = key_exchange.DiffieHellman(47, 2)
-            sage: DH.subgroup_size()
+            sage: DH.subgroup_size()                                                    # needs sage.libs.pari
             23
 
         This is an example of a ``DiffieHellman`` instance where the subgroup
         size is `p - 1`::
 
             sage: DH = key_exchange.DiffieHellman(47, 5)
-            sage: DH.subgroup_size()
+            sage: DH.subgroup_size()                                                    # needs sage.libs.pari
             46
         """
         return self._g.multiplicative_order()
@@ -259,7 +261,7 @@ class DiffieHellman(KeyExchangeScheme):
         TESTS::
 
             sage: DH = key_exchange.DiffieHellman(53, 9)
-            sage: len(DH)
+            sage: len(DH)                                                               # needs sage.libs.pari
             26
         """
         return int(self.subgroup_size())

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Base class for elements of multivariate polynomial rings
 """
@@ -1114,7 +1115,7 @@ cdef class MPolynomial(CommutativePolynomial):
 
         TESTS::
 
-            sage: # needs sage.libs.giac
+            sage: # needs giac
             sage: R.<x,y,z> = GF(101)['e,i'][]
             sage: f = R('e*i') * x + y^2
             sage: f._giac_init_()

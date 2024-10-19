@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Index of key exchange schemes
 
