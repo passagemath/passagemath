@@ -22,7 +22,7 @@ for general installation instructions.
 About this pip-installable source distribution
 ----------------------------------------------
 
-This pip-installable source distribution `sagemath-modules` is a distribution of a part of the Sage Library.  Use at your own risk.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`).
+This pip-installable source distribution `sagemath-modules` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`).
 
 
 What is included
