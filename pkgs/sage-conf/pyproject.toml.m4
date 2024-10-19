@@ -6,8 +6,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sage-conf"
-description = "Sage: Open Source Mathematics Software: Configuration module for the SageMath library"
+name = "passagemath-conf"
+description = "passagemath: Configuration module"
 readme = "README.rst"
 dnl Not including the standard metadata from pyproject_toml_metadata.m4
 dnl because sage-conf is GPL v3+.
