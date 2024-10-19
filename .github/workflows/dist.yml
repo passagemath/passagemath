@@ -252,12 +252,13 @@ jobs:
           ./bootstrap
 
       - name: Cache SAGE_LOCAL
-        uses: actions/cache@v4
+        id:   cache-sage-local
+        uses: actions/cache/restore@v4
         with:
           path: |
             /sage-*
             ~/sage-*
-          key: ${{ runner.os }}-cibuildwheel-${{ matrix.build }}
+          key: ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
 
       - name: Unpack and prepare
         # We build the wheels from the sdists so that MANIFEST filtering becomes effective.
@@ -285,6 +286,14 @@ jobs:
         id:   sagemath-objects
         run: |
           "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*objects*
+
+      - name: Save SAGE_LOCAL cache
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            /sage-*
+            ~/sage-*
+          key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
 
         ####### sagemath-categories and what depends on it
 
