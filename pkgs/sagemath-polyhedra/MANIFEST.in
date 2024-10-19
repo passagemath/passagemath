@@ -1,4 +1,3 @@
-dnl MANIFEST.in is generated from this file by SAGE_ROOT/bootstrap via m4.
 prune sage
 
 include VERSION.txt
