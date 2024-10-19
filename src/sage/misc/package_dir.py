@@ -506,7 +506,6 @@ if __name__ == '__main__':
                          "sagemath-ntl",
                          "sagemath-pari",
                          "sagemath-homfly",
-                         "sagemath-mpmath",
                          "sagemath-plot",
                          "sagemath-combinat",
                          "sagemath-modules",
