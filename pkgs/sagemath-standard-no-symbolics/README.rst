@@ -1,5 +1,5 @@
 ======================================================================================
- Sage: Open Source Mathematics Software: Sage library without the symbolics subsystem
+ passagemath: Sage library without the symbolics subsystem
 ======================================================================================
 
 About SageMath

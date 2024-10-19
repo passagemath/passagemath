@@ -7,8 +7,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-standard"
-description = "Sage: Open Source Mathematics Software: Standard Python Library"
+name = "passagemath-standard"
+description = "passagemath: Standard Python Library"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_standard_no_symbolics
     SPKG_INSTALL_REQUIRES_sagemath_symbolics

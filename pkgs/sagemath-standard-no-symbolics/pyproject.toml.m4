@@ -34,8 +34,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-standard-no-symbolics"
-description = "Sage: Open Source Mathematics Software: Sage library without the symbolics subsystem"
+name = "passagemath-standard-no-symbolics"
+description = "passagemath: Sage library without the symbolics subsystem"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_six
