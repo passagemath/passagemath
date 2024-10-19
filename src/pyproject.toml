@@ -19,8 +19,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-standard"
-description = "Sage: Open Source Mathematics Software: Standard Python Library"
+name = "passagemath-standard"
+description = "passagemath: Standard Python Library"
 dependencies = [
     'six >=1.15.0',
     # From build/pkgs/sagelib/dependencies
