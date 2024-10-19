@@ -13,8 +13,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-meataxe"
-description = "Sage: Open Source Mathematics Software: Matrices over small finite fields with meataxe"
+name = "passagemath-meataxe"
+description = "passagemath: Matrices over small finite fields with meataxe"
 dependencies = []
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'

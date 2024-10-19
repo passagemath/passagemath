@@ -480,15 +480,39 @@ if __name__ == '__main__':
     distribution = args.set or args.add or ''
 
     if distribution == 'all':
-        distributions = ["sagemath-bliss",
-                         "sagemath-coxeter3",
-                         "sagemath-mcqd",
-                         "sagemath-meataxe",
-                         "sagemath-sirocco",
+        # Order matters because some MANIFESTs are not careful enough
+        distributions = ["sagemath-symbolics",
+                         "sagemath-schemes",
+                         "sagemath-glpk",
+                         "sagemath-gap",
+                         "sagemath-groups",
+                         "sagemath-polyhedra",
+                         "sagemath-graphs",
+                         "sagemath-bliss",
                          "sagemath-tdlib",
-                         "sagemath-environment",
+                         "sagemath-mcqd",
+                         "sagemath-sirocco",
+                         "sagemath-coxeter3",
+                         "sagemath-meataxe",
+                         "sagemath-giac",
+                         "sagemath-brial",
+                         "sagemath-eclib",
+                         "sagemath-lcalc",
+                         "sagemath-libbraiding",
+                         "sagemath-libecm",
+                         "sagemath-singular",
+                         "sagemath-linbox",
+                         "sagemath-flint",
+                         "sagemath-ntl",
+                         "sagemath-pari",
+                         "sagemath-homfly",
+                         "sagemath-mpmath",
+                         "sagemath-plot",
+                         "sagemath-combinat",
+                         "sagemath-modules",
                          "sagemath-categories",
                          "sagemath-repl",
+                         "sagemath-environment",
                          "sagemath-objects"]
     else:
         distributions = [distribution.replace('_', '-')]
@@ -564,6 +588,7 @@ if __name__ == '__main__':
                 print(f'{distribution_dir} does not exist')
                 sys.exit(1)
             distribution_underscore = distribution.replace('-', '_')
+            distribution_underscore = "pas" + distribution_underscore
             try:
                 with open(os.path.join(distribution_dir,
                                        f'{distribution_underscore}.egg-info', 'SOURCES.txt')) as f:

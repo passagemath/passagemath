@@ -1,5 +1,5 @@
 =========================================================================
- Sage: Open Source Mathematics Software: System and software environment
+ passagemath: System and software environment
 =========================================================================
 
 About SageMath

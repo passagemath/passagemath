@@ -165,9 +165,9 @@ class DiscreteValuationRings(Category_singleton):
 
                 sage: L = PowerSeriesRing(QQ, 't')
                 sage: t = L.gen()
-                sage: F = algebras.Free(L, ['A', 'B'])
-                sage: A, B = F.gens()
-                sage: f = t*A+t**2*B/2
+                sage: F = algebras.Free(L, ['A', 'B'])                                  # needs sage.combinat
+                sage: A, B = F.gens()                                                   # needs sage.combinat
+                sage: f = t*A + t**2*B/2                                                # needs sage.combinat
             """
             if not other:
                 raise ZeroDivisionError("Euclidean division by the zero element not defined")

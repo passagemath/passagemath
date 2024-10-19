@@ -1,5 +1,5 @@
 ===================================================================================
- Sage: Open Source Mathematics Software: IPython kernel, Sage preparser, doctester
+ passagemath: IPython kernel, Sage preparser, doctester
 ===================================================================================
 
 About SageMath

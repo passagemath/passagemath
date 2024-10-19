@@ -141,12 +141,34 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_objects			\
 	sagemath_repl				\
 	sagemath_categories			\
+	sagemath_modules			\
+	sagemath_plot				\
+	sagemath_polyhedra			\
+	sagemath_graphs				\
+	sagemath_combinat			\
+	sagemath_schemes			\
+	sagemath_gap				\
+	sagemath_groups				\
+	sagemath_flint				\
+	sagemath_pari				\
+	sagemath_glpk				\
+	sagemath_eclib				\
+	sagemath_homfly				\
+	sagemath_linbox				\
+	sagemath_ntl				\
+	sagemath_lcalc				\
+	sagemath_libbraiding			\
+	sagemath_libecm				\
 	sagemath_bliss 				\
 	sagemath_mcqd 				\
 	sagemath_tdlib				\
+	sagemath_giac				\
+	sagemath_singular			\
+	sagemath_symbolics			\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
-	sagemath_meataxe
+	sagemath_meataxe			\
+	sagemath_brial
 
 # sage_docbuild is here, not in PYPI_WHEEL_PACKAGES, because it depends on sagelib
 WHEEL_PACKAGES = $(PYPI_WHEEL_PACKAGES)		\

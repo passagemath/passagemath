@@ -58,12 +58,8 @@ import os
 import operator
 import math
 
-# ############### end setup warnings ###############################
-
+# includes .all__sagemath_objects, .all__sagemath_environment
 from sage.all__sagemath_repl import *
-# this includes .all__sagemath_objects, .all__sagemath_environment
-
-# ##################################################################
 
 # This import also sets up the interrupt handler
 from cysignals.signals import (AlarmInterrupt, SignalError,
