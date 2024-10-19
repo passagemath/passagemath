@@ -794,7 +794,7 @@ class sage__numerical__mip(PythonModule):
             True
         """
         PythonModule.__init__(self, 'sage.numerical.mip',
-                              spkg='sagemath_polyhedra')
+                              spkg='sagemath_polyhedra', type='standard')
 
 
 class sage__plot(JoinFeature):
@@ -1068,7 +1068,7 @@ class sage__rings__polynomial__pbori(JoinFeature):
         """
         JoinFeature.__init__(self, 'sage.rings.polynomial.pbori',
                              [PythonModule('sage.rings.polynomial.pbori.pbori')],
-                             spkg='sagemath_brial', type='optional')
+                             spkg='sagemath_brial', type='standard')
 
 
 class sage__rings__real_double(PythonModule):
