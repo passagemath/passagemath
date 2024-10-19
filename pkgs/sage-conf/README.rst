@@ -47,8 +47,8 @@ library, for example, using ``pip install sagemath-standard``.
 
 Customization with environment variables:
 
-``SAGE_CONF_FILE``
-``SAGE_CONF_ENV_FILE``
+- ``SAGE_CONF_FILE``, ``SAGE_CONF_ENV_FILE``
+
   To skip creation of a build tree and bring your own configuration instead,
   use the environment variables ``SAGE_CONF_FILE`` or ``SAGE_CONF_ENV_FILE``
   at the build time of the package. The files named by these variables
@@ -59,10 +59,12 @@ Customization with environment variables:
 
     export SAGE_CONF_FILE=/dev/null
 
-``SAGE_CONF_CONFIGURE_ARGS``
+- ``SAGE_CONF_CONFIGURE_ARGS``
+
   If set, this is appended to the invocation of ``./configure``.
 
-``SAGE_CONF_TARGETS``
+- ``SAGE_CONF_TARGETS``
+
   The Makefile targets to build. The default is ``build`` (which builds all
   standard non-Python and Python packages that have not been disabled).
   To disable building the wheelhouse, you can use::
