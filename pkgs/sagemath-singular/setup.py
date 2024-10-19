@@ -11,4 +11,5 @@ sage_setup(['sagemath-singular'],
            required_modules=('Singular',
                              # from sagemath-linbox
                              'fflas-ffpack', 'givaro', 'gsl', 'linbox', 'cblas',
-                             'm4ri', 'gdlib', 'libpng', 'zlib'))
+                             'm4ri', 'gdlib', 'libpng', 'zlib'),
+           package_data={})

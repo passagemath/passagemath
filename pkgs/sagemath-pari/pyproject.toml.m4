@@ -37,11 +37,7 @@ content-type = "text/x-rst"
 test = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
 [tool.setuptools]
-packages = ["sage.libs.pari"]
 include-package-data = false
-
-[tool.setuptools.package-data]
-"sage.libs.pari" = ["*.pxd"]
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
