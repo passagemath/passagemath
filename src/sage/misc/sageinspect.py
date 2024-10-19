@@ -17,7 +17,7 @@ Cython modules::
     sage: sage_getdoc(sage.rings.rational).lstrip()
     'Rational Numbers...'
     sage: sage_getsource(sage.rings.rational)
-    '...# distutils: ...Rational Numbers...'
+    '...Rational Numbers...'
 
 Python modules::
 
