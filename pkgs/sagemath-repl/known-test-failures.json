@@ -1,7 +1,14 @@
 {
+    "sage.doctest.__main__": {
+        "ntests": 9
+    },
+    "sage.doctest.check_tolerance": {
+        "failed": true,
+        "ntests": 19
+    },
     "sage.doctest.control": {
         "failed": true,
-        "ntests": 229
+        "ntests": 228
     },
     "sage.doctest.external": {
         "ntests": 40
@@ -11,11 +18,15 @@
     },
     "sage.doctest.forker": {
         "failed": true,
-        "ntests": 412
+        "ntests": 413
+    },
+    "sage.doctest.marked_output": {
+        "failed": true,
+        "ntests": 21
     },
     "sage.doctest.parsing": {
         "failed": true,
-        "ntests": 308
+        "ntests": 273
     },
     "sage.doctest.reporting": {
         "ntests": 126
@@ -28,8 +39,7 @@
         "ntests": 23
     },
     "sage.doctest.util": {
-        "failed": true,
-        "ntests": 141
+        "ntests": 137
     },
     "sage.misc.sage_eval": {
         "failed": true,
@@ -50,8 +60,7 @@
         "ntests": 24
     },
     "sage.repl.display.formatter": {
-        "failed": true,
-        "ntests": 47
+        "ntests": 46
     },
     "sage.repl.display.jsmol_iframe": {
         "ntests": 24
@@ -62,10 +71,6 @@
     },
     "sage.repl.display.util": {
         "ntests": 6
-    },
-    "sage.repl.image": {
-        "failed": true,
-        "ntests": 42
     },
     "sage.repl.inputhook": {
         "ntests": 7
@@ -111,7 +116,7 @@
     },
     "sage.repl.preparse": {
         "failed": true,
-        "ntests": 347
+        "ntests": 345
     },
     "sage.repl.rich_output.backend_base": {
         "failed": true,
