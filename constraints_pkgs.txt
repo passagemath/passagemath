@@ -4,14 +4,14 @@
 # the SageMath monorepository only from their source trees
 # in SAGE_ROOT/pkgs/ instead of from PyPI.
 #
-# Example: Building a sagemath-standard wheel
+# Example: Building a sagemath-standard-no-symbolics wheel
 #
 # [alice@localhost sage]$ ./bootstrap
 # [alice@localhost sage]$ ./configure
 # [alice@localhost sage]$ export MAKE="make -j16" SAGE_NUM_THREADS=16
 # [alice@localhost sage]$ make all-sage-local
 # [alice@localhost sage]$ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
-# [alice@localhost sage]$ ./sage -sh -c 'python3 -m build -v -v pkgs/sagemath-standard'
+# [alice@localhost sage]$ ./sage -sh -c 'python3 -m build -v -v pkgs/sagemath-standard-no-symbolics'
 #
 # Non-example: Installing the built wheel using the same
 # constraints file will fail because sagemath-standard is one
