@@ -127,10 +127,10 @@ AC_ARG_ENABLE([debug],
 AC_ARG_VAR(SAGE_DEBUG, controls debugging support: "no" debugging; debugging "symbols" (default); build debug version ("yes"))
 
 AC_ARG_ENABLE([editable],
-              [AS_HELP_STRING([--disable-editable],
-                              [do not use an editable install of the Sage library: changes to Python files will require "sage -b" to rebuild the Sage library])],
+              [AS_HELP_STRING([--enable-editable],
+                              [use an editable install of the Sage library (experimental)])],
               [AC_SUBST([SAGE_EDITABLE], [$enableval])],
-              [AC_SUBST([SAGE_EDITABLE], [yes])])
+              [AC_SUBST([SAGE_EDITABLE], [no])])
 
 AC_ARG_ENABLE([wheels],
               [AS_HELP_STRING([--enable-wheels],
