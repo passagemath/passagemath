@@ -46,6 +46,14 @@ py-modules = [
     "sage.misc.pager",
     "sage.misc.cython",
     "sage.misc.inline_fortran",
+    "sage.misc.benchmark",
+    "sage.misc.classgraph",
+    "sage.misc.copying",
+    "sage.misc.gperftools",
+    "sage.misc.messaging",
+    "sage.misc.python",
+    "sage.misc.remote_file",
+    "sage.misc.sh",
 ]
 packages = [
     "sage.doctest",
