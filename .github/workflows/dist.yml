@@ -274,7 +274,8 @@ jobs:
         #
         # omit sagemath-{meataxe,sirocco} for now -- needs sagemath-modules
         run: |
-          "${{ steps.python.outputs.python-path }}" -m pip install cibuildwheel==2.21.3
+          ./configure --with-python="${{ steps.python.outputs.python-path }}"
+          make cibuildwheel
           export PATH=build/bin:$PATH
           echo CIBW_BEFORE_ALL="( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS)) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/)) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS)) || echo error ignored) ) && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX && cp config.status prefix/; fi && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored) && (echo \"passagemath-conf @ file://\$(pwd)/pkgs/sage-conf\" && echo \"passagemath-setup @ file://\$(pwd)/pkgs/sage-setup\") > constraints.txt" >> "$GITHUB_ENV"
           mkdir -p unpacked
@@ -285,7 +286,7 @@ jobs:
       - name: sagemath-objects
         id:   sagemath-objects
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*objects*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*objects*
 
       - name: Save SAGE_LOCAL cache
         uses: actions/cache/save@v4
@@ -300,69 +301,69 @@ jobs:
       - name: sagemath-categories
         id:   sagemath-categories
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*categories*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*categories*
 
       - name: sagemath-bliss
         id:   sagemath-bliss
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*bliss*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*bliss*
 
       - name: sagemath-brial
         id:   sagemath-brial
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*brial*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*brial*
 
       - name: sagemath-coxeter3
         id:   sagemath-coxeter3
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*coxeter3*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*coxeter3*
 
       - name: sagemath-giac
         id:   sagemath-giac
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*giac*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*giac*
 
       - name: sagemath-mcqd
         id:   sagemath-mcqd
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*mcqd*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*mcqd*
 
       - name: sagemath-tdlib
         id:   sagemath-tdlib
         run: |
           case "${{ matrix.arch }}" in
               i686) ;;  # broken - boost-related
-              *) "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*tdlib*
+              *) venv/bin/python3 -m cibuildwheel unpacked/*sagemath*tdlib*
           esac
 
       - name: sagemath-glpk
         id:   sagemath-glpk
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*glpk*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*glpk*
 
       - name: sagemath-homfly
         id:   sagemath-homfly
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*homfly*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*homfly*
 
       - name: sagemath-combinat
         id:   sagemath-combinat
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*combinat*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*combinat*
 
       - name: sagemath-graphs
         id:   sagemath-graphs
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*graphs*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*graphs*
 
         ####### sagemath-modules and what depends on it
 
@@ -370,97 +371,97 @@ jobs:
         id:   sagemath-modules
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*modules*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*modules*
 
       - name: sagemath-plot
         id:   sagemath-plot
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*plot*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*plot*
 
       - name: sagemath-polyhedra
         id:   sagemath-polyhedra
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*polyhedra*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*polyhedra*
 
       - name: sagemath-pari
         id:   sagemath-pari
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*pari*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*pari*
 
       - name: sagemath-ntl
         id:   sagemath-ntl
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*ntl*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*ntl*
 
       - name: sagemath-flint
         id:   sagemath-flint
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*flint*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*flint*
 
       - name: sagemath-linbox
         id:   sagemath-linbox
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*linbox*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*linbox*
 
       - name: sagemath-lcalc
         id:   sagemath-lcalc
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*lcalc*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*lcalc*
 
       - name: sagemath-libbraiding
         id:   sagemath-libbraiding
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*libbraiding*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*libbraiding*
 
       - name: sagemath-eclib
         id:   sagemath-eclib
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*eclib*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*eclib*
 
       - name: sagemath-gap
         id:   sagemath-gap
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*gap*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*gap*
 
       - name: sagemath-groups
         id:   sagemath-groups
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*groups*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*groups*
 
       - name: sagemath-singular
         id:   sagemath-singular
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*singular*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*singular*
 
       - name: sagemath-schemes
         id:   sagemath-schemes
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*schemes*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*schemes*
 
       - name: sagemath-symbolics
         id:   sagemath-symbolics
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*symbolics*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*symbolics*
 
       - name: sagemath-standard-no-symbolics
         id:   sagemath-standard-no-symbolics
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          "${{ steps.python.outputs.python-path }}" -m cibuildwheel unpacked/*sagemath*standard-no-symbolics*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*standard-no-symbolics*
 
 
       - uses: actions/upload-artifact@v4
