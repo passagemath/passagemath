@@ -274,6 +274,7 @@ jobs:
         #
         # omit sagemath-{meataxe,sirocco} for now -- needs sagemath-modules
         run: |
+          "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           ./configure --with-python="${{ steps.python.outputs.python-path }}"
           make cibuildwheel
           export PATH=build/bin:$PATH
