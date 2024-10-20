@@ -11,6 +11,9 @@ sage_setup(
     ['sagemath-categories'],
     interpreters=['Element', 'Python'],  # RDF uses gsl --> sagemath-modules
     package_data={
+        "sage.data_structures": [
+            "bitset_intrinsics.h",
+        ],
         "sage.rings.finite_rings": [
             "integer_mod_limits.h",
         ],
