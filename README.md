@@ -19,8 +19,56 @@ development of SageMath, and hence of passagemath.
 
 [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
 
+Full installation
+-----------------
+
+For installing the project in a Python environment, passagemath provides the
+`pip`-installable package [passagemath-standard](https://pypi.org/project/passagemath-standard/).
+
+Unless you need to install passagemath into a specific existing environment, we recommend
+to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.12.x),
+for example `~/passagemath-venv/`:
+
+            $ python3 -m venv ~/passagemath-venv
+            $ source ~/passagemath-venv/bin/activate
+
+The following instructions are for installation from PyPI. If you want to build from
+a local clone of the passagemath repository instead, use the following command first.
+
+            passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
+            passagemath $ export SAGE_CONF_TARGETS=build-local
+
+As the first installation step, install [passagemath-conf](https://pypi.org/project/passagemath-conf/),
+which builds various prerequisite non-Python packages in a subdirectory of `~/.sage/`.
+The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
+
+            (passagemath-venv) $ python3 -m pip install -v passagemath-conf
+
+After a successful installation, a wheelhouse provides various Python packages.
+You can list the wheels using the command:
+
+            (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
+
+If this gives an error saying that `sage-config` is not found, check any messages
+that the `pip install` command may have printed. You may need to adjust your `PATH`,
+for example by:
+
+            $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
+
+Now install the packages from the wheelhouse and the [passagemath-setup](https://pypi.org/project/passagemath-setup/)
+package, and finally install the Sage library:
+
+            (passagemath-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl passagemath-setup
+            (passagemath-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
+
+The above instructions install the latest stable release of passagemath.
+To install the latest development version instead, add the switch `--pre` to all invocations of
+`python3 -m pip install`.
+
 Modularized distributions
 -------------------------
+
+The passagemath library is provided by a number of distributions (pip-installable packages).
 
 **Distributions named after a basic mathematical structure:** The packages may also cover a wide range of generalizations/applications of the structure after which they are named. Users who work in a specialized research area will, of course, recognize what structures they need. The down-to-earth naming also creates discoverability by a broader audience. Not many more distribution packages than these 7 are needed:
 - [![PyPI: passagemath-combinat](https://img.shields.io/pypi/v/passagemath-combinat.svg?label=passagemath-combinat)](https://pypi.python.org/pypi/passagemath-combinat): provides "everything combinatorial", except for graphs.
@@ -468,51 +516,6 @@ in the Installation Guide.
     or JupyterLab installation, as described in the section
     [Launching SageMath](https://doc.sagemath.org/html/en/installation/launching.html)
     in the Sage Installation Guide.
-
-Alternative Installation using PyPI
----------------
-
-For installing the project in a Python environment from PyPI, passagemath provides the
-`pip`-installable package [passagemath-standard](https://pypi.org/project/passagemath-standard/).
-
-Unless you need to install passagemath into a specific existing environment, we recommend
-to create and activate a fresh virtual environment, for example `~/sage-venv/`:
-
-            $ python3 -m venv ~/sage-venv
-            $ source ~/sage-venv/bin/activate
-
-As the first installation step, install [passagemath-conf](https://pypi.org/project/passagemath-conf/),
-which builds various prerequisite packages in a subdirectory of `~/.sage/`:
-
-            (sage-venv) $ python3 -m pip install -v passagemath-conf
-
-After a successful installation, a wheelhouse provides various Python packages.
-You can list the wheels using the command:
-
-            (sage-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
-
-If this gives an error saying that `sage-config` is not found, check any messages
-that the `pip install` command may have printed. You may need to adjust your `PATH`,
-for example by:
-
-            $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
-
-Now install the packages from the wheelhouse and the [passagemath-setup](https://pypi.org/project/passagemath-setup/)
-package, and finally install the Sage library:
-
-            (sage-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl passagemath-setup
-            (sage-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
-
-The above instructions install the latest stable release of passagemath.
-To install the latest development version instead, add the switch `--pre` to all invocations of
-`python3 -m pip install`.
-
-**NOTE:** PyPI has various other `pip`-installable packages with the word "sage" in their names.
-Some of them are maintained by the SageMath project, some are provided by SageMath users for
-various purposes, and others are entirely unrelated to SageMath. Do not use the packages
-`sage` and `sagemath`. For a curated list of packages, see the chapter
-[Packages and Features](https://doc.sagemath.org/html/en/reference/spkg/index.html) of the
-Sage Reference Manual.
 
 SageMath Docker images
 ----------------------
