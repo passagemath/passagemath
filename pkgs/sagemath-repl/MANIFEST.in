@@ -19,6 +19,15 @@ include sage/misc/pager.py
 include sage/misc/cython.py
 include sage/misc/inline_fortran.py
 
+include sage/misc/benchmark.py
+include sage/misc/classgraph.py
+include sage/misc/copying.py
+include sage/misc/gperftools.py
+include sage/misc/messaging.py
+include sage/misc/python.py
+include sage/misc/remote_file.py
+include sage/misc/sh.py
+
 include VERSION.txt
 
 global-exclude all__*.py

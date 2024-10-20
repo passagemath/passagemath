@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-repl
 "Benchmarks"
 
 from sage.misc.misc import cputime
