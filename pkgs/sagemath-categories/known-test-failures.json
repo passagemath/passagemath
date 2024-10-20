@@ -141,7 +141,7 @@
     },
     "sage.categories.coxeter_groups": {
         "failed": true,
-        "ntests": 392
+        "ntests": 368
     },
     "sage.categories.crystals": {
         "ntests": 1
@@ -153,7 +153,6 @@
         "ntests": 30
     },
     "sage.categories.discrete_valuation": {
-        "failed": true,
         "ntests": 28
     },
     "sage.categories.distributive_magmas_and_additive_magmas": {
@@ -266,7 +265,7 @@
     },
     "sage.categories.filtered_modules_with_basis": {
         "failed": true,
-        "ntests": 74
+        "ntests": 72
     },
     "sage.categories.finite_complex_reflection_groups": {
         "ntests": 172
@@ -787,7 +786,7 @@
     },
     "sage.doctest.forker": {
         "failed": true,
-        "ntests": 414
+        "ntests": 0
     },
     "sage.doctest.marked_output": {
         "failed": true,
@@ -886,7 +885,6 @@
         "ntests": 10
     },
     "sage.features.interfaces": {
-        "failed": true,
         "ntests": 34
     },
     "sage.features.internet": {
@@ -953,7 +951,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "ntests": 161
+        "ntests": 177
     },
     "sage.features.sat": {
         "ntests": 16
@@ -990,14 +988,14 @@
         "ntests": 94
     },
     "sage.functions.exp_integral": {
-        "ntests": 156
+        "ntests": 154
     },
     "sage.functions.gamma": {
         "failed": true,
         "ntests": 140
     },
     "sage.functions.generalized": {
-        "ntests": 70
+        "ntests": 69
     },
     "sage.functions.hyperbolic": {
         "ntests": 81
@@ -1022,7 +1020,7 @@
         "ntests": 238
     },
     "sage.functions.piecewise": {
-        "ntests": 11
+        "ntests": 6
     },
     "sage.functions.prime_pi": {
         "ntests": 4
@@ -1362,18 +1360,15 @@
         "ntests": 28
     },
     "sage.repl.attach": {
-        "failed": true,
         "ntests": 135
     },
     "sage.repl.configuration": {
-        "failed": true,
         "ntests": 22
     },
     "sage.repl.display.fancy_repr": {
         "ntests": 27
     },
     "sage.repl.display.formatter": {
-        "failed": true,
         "ntests": 58
     },
     "sage.repl.display.jsmol_iframe": {
@@ -1386,11 +1381,9 @@
         "ntests": 7
     },
     "sage.repl.inputhook": {
-        "failed": true,
         "ntests": 7
     },
     "sage.repl.interface_magic": {
-        "failed": true,
         "ntests": 20
     },
     "sage.repl.interpreter": {
@@ -1441,7 +1434,6 @@
         "ntests": 15
     },
     "sage.repl.rich_output.backend_ipython": {
-        "failed": true,
         "ntests": 75
     },
     "sage.repl.rich_output.buffer": {
@@ -1683,7 +1675,7 @@
     },
     "sage.rings.polynomial.multi_polynomial": {
         "failed": true,
-        "ntests": 466
+        "ntests": 471
     },
     "sage.rings.polynomial.multi_polynomial_element": {
         "failed": true,
@@ -1827,7 +1819,6 @@
         "ntests": 26
     },
     "sage.schemes.affine.affine_space": {
-        "failed": true,
         "ntests": 167
     },
     "sage.schemes.affine.affine_subscheme": {
@@ -1965,7 +1956,7 @@
     },
     "sage.structure.coerce": {
         "failed": true,
-        "ntests": 311
+        "ntests": 312
     },
     "sage.structure.coerce_actions": {
         "ntests": 128
@@ -2109,7 +2100,6 @@
         "ntests": 4
     },
     "sage.typeset.ascii_art": {
-        "failed": true,
         "ntests": 24
     },
     "sage.typeset.character_art": {

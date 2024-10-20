@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-repl
+# sage.doctest: needs sage.rings.real_interval_field
 """
 Helpers for tolerance checking in doctests
 """
