@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # cython: old_style_globals=True
 """
 Dependency usage tracking for citations

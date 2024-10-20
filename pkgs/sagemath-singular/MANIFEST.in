@@ -7,6 +7,7 @@ graft           sage/algebras/letterplace                             # singular
 graft           sage/algebras/fusion_rings                            # number_field (ntl), singular
 graft           sage/ext_data/singular
 graft           sage/libs/singular
+include         sage/interfaces/singular.p*
 include         sage/matrix/matrix_mpolynom*.p*
 include         sage/rings/function_field/*_polymod.*
 include         sage/rings/polynomial/plural.p*

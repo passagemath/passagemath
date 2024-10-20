@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-repl
 # sage.doctest: needs sage.symbolic
 """
 C Function Profiler Using Google Perftools
