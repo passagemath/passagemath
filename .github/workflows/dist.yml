@@ -490,6 +490,10 @@ jobs:
           path: wheelhouse
           merge-multiple: true
 
+      - name: Remove wheels that are too large
+        run: |
+          find wheelhouse -size +96M -delete
+
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
