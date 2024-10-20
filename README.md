@@ -341,7 +341,7 @@ in the Installation Guide.
       where `SAGE_LOCAL` is the desired installation prefix, which
       must be writable by the user.
 
-      If you use this option in combination with `--disable-editable`,
+      Unless you use this option in combination with `--enable-editable`,
       you can delete the entire Sage source tree after completing
       the build process.  What is installed in `SAGE_LOCAL` will be
       a self-contained installation of Sage.
