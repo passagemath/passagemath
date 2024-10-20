@@ -4,7 +4,7 @@ prune sage
 global-include    all__sagemath_glpk.py
 
 graft sage/libs/glpk
-include sage/numerical/backends/glpk_*backend.p*
+include sage/numerical/backends/glpk_*backend*.p*
 
 global-exclude *.c
 global-exclude *.cpp
