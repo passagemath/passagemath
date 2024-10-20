@@ -84,7 +84,6 @@
         "ntests": 59
     },
     "sage.categories.category_types": {
-        "failed": true,
         "ntests": 74
     },
     "sage.categories.category_with_axiom": {
@@ -1494,7 +1493,6 @@
         "ntests": 17
     },
     "sage.rings.finite_rings.finite_field_prime_modn": {
-        "failed": true,
         "ntests": 28
     },
     "sage.rings.finite_rings.galois_group": {
@@ -1508,11 +1506,9 @@
         "ntests": 539
     },
     "sage.rings.finite_rings.integer_mod_ring": {
-        "failed": true,
         "ntests": 253
     },
     "sage.rings.finite_rings.residue_field": {
-        "failed": true,
         "ntests": 41
     },
     "sage.rings.fraction_field": {
@@ -1536,7 +1532,6 @@
         "ntests": 7
     },
     "sage.rings.function_field.function_field": {
-        "failed": true,
         "ntests": 158
     },
     "sage.rings.function_field.function_field_rational": {
@@ -1544,7 +1539,6 @@
         "ntests": 135
     },
     "sage.rings.function_field.ideal": {
-        "failed": true,
         "ntests": 92
     },
     "sage.rings.function_field.ideal_rational": {
@@ -1596,7 +1590,6 @@
         "ntests": 202
     },
     "sage.rings.laurent_series_ring": {
-        "failed": true,
         "ntests": 151
     },
     "sage.rings.laurent_series_ring_element": {
@@ -1610,7 +1603,6 @@
         "ntests": 444
     },
     "sage.rings.multi_power_series_ring": {
-        "failed": true,
         "ntests": 218
     },
     "sage.rings.multi_power_series_ring_element": {
@@ -1667,7 +1659,6 @@
         "ntests": 7
     },
     "sage.rings.polynomial.laurent_polynomial_ring": {
-        "failed": true,
         "ntests": 87
     },
     "sage.rings.polynomial.laurent_polynomial_ring_base": {
@@ -1753,7 +1744,6 @@
         "ntests": 257
     },
     "sage.rings.power_series_ring": {
-        "failed": true,
         "ntests": 241
     },
     "sage.rings.power_series_ring_element": {
@@ -1992,7 +1982,6 @@
         "ntests": 6
     },
     "sage.structure.factory": {
-        "failed": true,
         "ntests": 99
     },
     "sage.structure.formal_sum": {
