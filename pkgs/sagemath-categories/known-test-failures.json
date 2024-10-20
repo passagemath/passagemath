@@ -485,7 +485,6 @@
         "ntests": 52
     },
     "sage.categories.map": {
-        "failed": true,
         "ntests": 353
     },
     "sage.categories.matrix_algebras": {
@@ -799,8 +798,7 @@
         "ntests": 126
     },
     "sage.doctest.rif_tol": {
-        "failed": true,
-        "ntests": 18
+        "ntests": 3
     },
     "sage.doctest.sources": {
         "ntests": 343
@@ -1261,7 +1259,6 @@
         "ntests": 31
     },
     "sage.misc.sage_input": {
-        "failed": true,
         "ntests": 732
     },
     "sage.misc.sage_ostools": {
@@ -1502,7 +1499,6 @@
         "ntests": 15
     },
     "sage.rings.finite_rings.integer_mod": {
-        "failed": true,
         "ntests": 539
     },
     "sage.rings.finite_rings.integer_mod_ring": {
@@ -1535,7 +1531,6 @@
         "ntests": 158
     },
     "sage.rings.function_field.function_field_rational": {
-        "failed": true,
         "ntests": 135
     },
     "sage.rings.function_field.ideal": {
@@ -1554,7 +1549,6 @@
         "ntests": 20
     },
     "sage.rings.function_field.order_rational": {
-        "failed": true,
         "ntests": 69
     },
     "sage.rings.function_field.place": {
@@ -1586,7 +1580,6 @@
         "ntests": 1
     },
     "sage.rings.integer_ring": {
-        "failed": true,
         "ntests": 202
     },
     "sage.rings.laurent_series_ring": {
@@ -1645,10 +1638,9 @@
     },
     "sage.rings.polynomial.infinite_polynomial_element": {
         "failed": true,
-        "ntests": 298
+        "ntests": 0
     },
     "sage.rings.polynomial.infinite_polynomial_ring": {
-        "failed": true,
         "ntests": 275
     },
     "sage.rings.polynomial.laurent_polynomial": {
@@ -1669,7 +1661,6 @@
         "ntests": 471
     },
     "sage.rings.polynomial.multi_polynomial_element": {
-        "failed": true,
         "ntests": 251
     },
     "sage.rings.polynomial.multi_polynomial_ideal": {
@@ -1705,7 +1696,6 @@
         "ntests": 13
     },
     "sage.rings.polynomial.polynomial_ring": {
-        "failed": true,
         "ntests": 397
     },
     "sage.rings.polynomial.polynomial_ring_constructor": {
@@ -1768,7 +1758,6 @@
         "ntests": 533
     },
     "sage.rings.rational_field": {
-        "failed": true,
         "ntests": 189
     },
     "sage.rings.real_double": {
