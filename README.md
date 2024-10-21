@@ -128,9 +128,9 @@ Getting Started
 
 Those who are impatient may use prebuilt Sage available online from any of
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sagemath/sage-binder-env/master
-) &nbsp; [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/sagemath/sage/tree/master
-) &nbsp; [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-black?logo=github)](https://codespaces.new/sagemath/sage/tree/master)
+<!-- [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sagemath/sage-binder-env/master
+) &nbsp; --->[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/passagemath/passagemath/tree/main
+) &nbsp; [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-black?logo=github)](https://codespaces.new/passagemath/passagemath/tree/main)
 
 without local installation. Otherwise read on.
 
@@ -158,7 +158,7 @@ virtualization).
 
 Detailed information on supported platforms for a specific version of Sage
 can be found in the section _Availability and installation help_ of the
-[release tour for this version](https://github.com/sagemath/sage/releases).
+[release notes for this version](https://github.com/passagemath/passagemath/releases).
 
 We highly appreciate contributions to Sage that fix portability bugs
 and help port Sage to new platforms; let us know at the [sage-devel
@@ -262,11 +262,11 @@ in the Installation Guide.
             $ mkdir -p ~/sage
             $ cd ~/sage
 
-    - Clone the Sage git repository:
+    - Clone the passagemath git repository:
 
             $ git clone -c core.symlinks=true --filter blob:none  \
                         --origin upstream --branch develop --tags \
-                        https://github.com/sagemath/sage.git
+                        https://github.com/passagemath/passagemath.git
 
       This command obtains the most recent development release.
       Replace `--branch develop` by `--branch master` to select
@@ -517,24 +517,12 @@ in the Installation Guide.
     [Launching SageMath](https://doc.sagemath.org/html/en/installation/launching.html)
     in the Sage Installation Guide.
 
-SageMath Docker images
-----------------------
-
-[![Docker Status](http://dockeri.co/image/sagemath/sagemath)](https://hub.docker.com/r/sagemath/sagemath)
-
-SageMath is available on Docker Hub and can be downloaded by:
-``` bash
-docker pull sagemath/sagemath
-```
-
-Currently, only stable versions are kept up to date.
-
 Troubleshooting
 ---------------
 
 If you have problems building Sage, check the Sage Installation Guide,
 as well as the version-specific installation help in the [release
-tour](https://github.com/sagemath/sage/releases) corresponding to the
+tour](https://github.com/passagemath/passagemath/releases) corresponding to the
 version that you are installing.
 
 Please do not hesitate to ask for help in the [SageMath forum
