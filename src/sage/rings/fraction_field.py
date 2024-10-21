@@ -297,6 +297,7 @@ class FractionField_generic(ring.Field):
             sage: F1(R12(F1('a')))
             a
 
+            sage: # needs sage.libs.singular
             sage: F2 = FractionField( QQ['a','b'] )
             sage: R22 = F2['x','y']
             sage: R22('a')
@@ -583,7 +584,7 @@ class FractionField_generic(ring.Field):
 
         ::
 
-            sage: F._element_constructor_(x/y)
+            sage: F._element_constructor_(x/y)                                          # needs sage.libs.singular
             x/y
 
         TESTS:

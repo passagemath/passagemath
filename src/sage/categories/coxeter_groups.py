@@ -988,8 +988,8 @@ class CoxeterGroups(Category_singleton):
                 [2 3 1 2]
                 [2 3 2 1]
 
-                sage: W = CoxeterGroup(['I', 13])
-                sage: W.reflection_representation()
+                sage: W = CoxeterGroup(['I', 13])                                       # needs sage.graphs
+                sage: W.reflection_representation()                                     # needs sage.graphs
                 Reflection representation of Finite Coxeter group over
                  Universal Cyclotomic Field with Coxeter matrix:
                 [ 1 13]
