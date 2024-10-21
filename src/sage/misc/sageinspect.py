@@ -1654,12 +1654,15 @@ def sage_getargspec(obj):
         except TypeError:  # arg is not a code object
             # The above "hopefully" was wishful thinking:
             try:
-                return inspect.FullArgSpec(*_sage_getargspec_cython(sage_getsource(obj)))
+                source = sage_getsource(obj)
+                if source is not None:
+                    return inspect.FullArgSpec(*_sage_getargspec_cython(source))
             except TypeError:  # This happens for Python builtins
-                # The best we can do is to return a generic argspec
-                args = []
-                varargs = 'args'
-                varkw = 'kwds'
+                pass
+            # The best we can do is to return a generic argspec
+            args = []
+            varargs = 'args'
+            varkw = 'kwds'
     try:
         defaults = func_obj.__defaults__
     except AttributeError:
