@@ -870,7 +870,7 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
             We can also automatically construct a basis such that
             the lift morphism is (lower) unitriangular::
 
-                sage: # needs sage.modules
+                sage: # needs sage.libs.singular sage.modules
                 sage: R.<a,b> = QQ[]
                 sage: C = CombinatorialFreeModule(R, range(3), prefix='x')
                 sage: x = C.basis()
@@ -954,7 +954,7 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: Y.retract(x[0] + 2*x[1])
                 3*y[2]
 
-                sage: # needs sage.modules
+                sage: # needs sage.libs.singular sage.modules
                 sage: R.<a,b> = QQ[]
                 sage: C = CombinatorialFreeModule(R, range(3), prefix='x')
                 sage: x = C.basis()
@@ -1481,7 +1481,7 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
             By default, this method tests only the elements returned by
             ``self.some_elements()``::
 
-                sage: # needs sage.modules
+                sage: # needs sage.combinat sage.modules
                 sage: A = AlgebrasWithBasis(QQ).example(); A
                 An example of an algebra with basis:
                  the free algebra on the generators ('a', 'b', 'c') over Rational Field
