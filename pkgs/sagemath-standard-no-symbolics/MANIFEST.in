@@ -2,6 +2,8 @@ prune .tox
 exclude *.m4
 include requirements.txt
 
+graft sage
+
 prune sage/symbolic
 prune sage/manifolds
 prune sage/lfunctions
