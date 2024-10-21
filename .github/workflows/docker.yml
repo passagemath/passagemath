@@ -293,7 +293,7 @@ jobs:
              DOCKER_IMAGE=${TOX_ENV_SANS_INCREMENTAL#docker-}
              for TAG in $*; do
                  echo -n "  \$"
-                 if [ "$DOCKER_PUSH_REPOSITORY" != "ghcr.io/sagemath/sage/" ]; then
+                 if [ "$DOCKER_PUSH_REPOSITORY" != "ghcr.io/passagemath/passagemath/" ]; then
                      echo -n " FROM_DOCKER_REPOSITORY=$DOCKER_PUSH_REPOSITORY"
                  fi
                  eval DOCKER_TARGET=\${TAG#*$DOCKER_IMAGE-}
@@ -305,7 +305,7 @@ jobs:
              done
           elif [ -n "$DOCKER_PUSH_REPOSITORY" -a -f .tox/$TOX_ENV/Dockertags ]; then
              echo "Unable to push Docker images to $DOCKER_PUSH_REPOSITORY."
-             echo "This is normal in a pull request to sagemath/sage or to another user's repository."
+             echo "This is normal in a pull request to passagemath/passagemath or to another user's repository."
              echo
              echo "If you need Docker images, "
              echo " - either run this GitHub Actions workflow in your repository fork"
