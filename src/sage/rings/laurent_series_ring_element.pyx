@@ -1414,6 +1414,7 @@ cdef class LaurentSeries(AlgebraElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Frac(QQ[['x']])
             sage: f = 2*x + 3*x^2 - x^4 + O(x^5)
             sage: g = f.reverse()
@@ -1424,6 +1425,7 @@ cdef class LaurentSeries(AlgebraElement):
             sage: g(f)
             x + O(x^5)
 
+            sage: # needs sage.libs.pari
             sage: A.<t> = LaurentSeriesRing(ZZ)
             sage: a = t - t^2 - 2*t^4 + t^5 + O(t^6)
             sage: b = a.reverse(); b
@@ -1433,6 +1435,7 @@ cdef class LaurentSeries(AlgebraElement):
             sage: b(a)
             t + O(t^6)
 
+            sage: # needs sage.libs.pari
             sage: B.<b,c> = ZZ[ ]
             sage: A.<t> = LaurentSeriesRing(B)
             sage: f = t + b*t^2 + c*t^3 + O(t^4)
@@ -1443,6 +1446,7 @@ cdef class LaurentSeries(AlgebraElement):
             sage: g(f)
             t + O(t^4)
 
+            sage: # needs sage.libs.pari
             sage: A.<t> = PowerSeriesRing(ZZ)
             sage: B.<s> = LaurentSeriesRing(A)
             sage: f = (1 - 3*t + 4*t^3 + O(t^4))*s + (2 + t + t^2 + O(t^3))*s^2 + O(s^3)
@@ -1457,11 +1461,13 @@ cdef class LaurentSeries(AlgebraElement):
         If the leading coefficient is not a unit, we pass to its fraction
         field if possible::
 
+            sage: # needs sage.libs.pari
             sage: A.<t> = LaurentSeriesRing(ZZ)
             sage: a = 2*t - 4*t^2 + t^4 - t^5 + O(t^6)
             sage: a.reverse()
             1/2*t + 1/2*t^2 + t^3 + 79/32*t^4 + 437/64*t^5 + O(t^6)
 
+            sage: # needs sage.libs.pari
             sage: B.<b> = PolynomialRing(ZZ)
             sage: A.<t> = LaurentSeriesRing(B)
             sage: f = 2*b*t + b*t^2 + 3*b^2*t^3 + O(t^4)
@@ -1474,6 +1480,7 @@ cdef class LaurentSeries(AlgebraElement):
 
         We can handle some base rings of positive characteristic::
 
+            sage: # needs sage.libs.pari
             sage: A8.<t> = LaurentSeriesRing(Zmod(8))
             sage: a = t - 15*t^2 - 2*t^4 + t^5 + O(t^6)
             sage: b = a.reverse(); b
@@ -1485,6 +1492,7 @@ cdef class LaurentSeries(AlgebraElement):
 
         The optional argument ``precision`` sets the precision of the output::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = LaurentSeriesRing(QQ)
             sage: f = 2*x + 3*x^2 - 7*x^3 + x^4 + O(x^5)
             sage: g = f.reverse(precision=3); g
@@ -1498,6 +1506,7 @@ cdef class LaurentSeries(AlgebraElement):
         output is automatically set to the default precision of the parent
         ring::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = LaurentSeriesRing(QQ, default_prec=20)
             sage: (x - x^2).reverse()  # get some Catalan numbers
             x + x^2 + 2*x^3 + 5*x^4 + 14*x^5 + 42*x^6 + 132*x^7 + 429*x^8 + 1430*x^9

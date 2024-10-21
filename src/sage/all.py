@@ -58,6 +58,7 @@ import os
 import operator
 import math
 
+<<<<<<< HEAD
 # ############### end setup warnings ###############################
 
 # includes .all__sagemath_objects, .all__sagemath_environment
@@ -65,6 +66,42 @@ from sage.all__sagemath_repl import *
 from sage.all__sagemath_modules import *
 
 # ##################################################################
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+# includes .all__sagemath_objects, .all__sagemath_environment
+from sage.all__sagemath_repl import *
+||||||||| 79c047c0a22
+################ end setup warnings ###############################
+
+from sage.all__sagemath_repl import *  # includes .all__sagemath_objects, .all__sagemath_environment
+
+###################################################################
+=========
+# ############### end setup warnings ###############################
+
+from sage.all__sagemath_repl import *
+# this includes .all__sagemath_objects, .all__sagemath_environment
+
+# ##################################################################
+>>>>>>>>> Temporary merge branch 2
+
+# This import also sets up the interrupt handler
+from cysignals.signals import (AlarmInterrupt, SignalError,
+                               sig_on_reset as sig_on_count)
+
+from time import sleep
+from functools import reduce  # in order to keep reduce in python3
+=======
+# includes .all__sagemath_objects, .all__sagemath_environment
+from sage.all__sagemath_repl import *
+
+# This import also sets up the interrupt handler
+from cysignals.signals import (AlarmInterrupt, SignalError,
+                               sig_on_reset as sig_on_count)
+
+from time import sleep
+from functools import reduce  # in order to keep reduce in python3
+>>>>>>> main
 
 import sage.misc.lazy_import
 

@@ -1,5 +1,9 @@
 # sage_setup: distribution = sagemath-flint
+<<<<<<< HEAD
 # sage.doctest: needs sage.graphs sage.modules
+||||||| merged common ancestors
+=======
+>>>>>>> main
 """
 Quiver Morphisms
 """

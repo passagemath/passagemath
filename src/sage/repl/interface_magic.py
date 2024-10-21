@@ -35,7 +35,6 @@ language to separate multiple commands.
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-
 from sage.misc.lazy_import import lazy_import, LazyImport
 from sage.repl.rich_output.display_manager import get_display_manager
 

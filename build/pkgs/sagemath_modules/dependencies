@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 FORCE $(PYTHON) cysignals gmpy2 sagemath_categories mpfr mpc sagemath_mpmath gsl numpy | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build
+||||||| merged common ancestors
+=======
+FORCE $(PYTHON) cysignals gmpy2 sagemath_categories mpfr mpc gsl numpy | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build
+>>>>>>> main
 
 # FORCE: Always run the spkg-install script

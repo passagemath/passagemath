@@ -1,6 +1,10 @@
 # sage_setup: distribution = sagemath-combinat
+<<<<<<< HEAD
 # sage.doctest: needs sage.combinat sage.modules
 
+||||||| merged common ancestors
+=======
+>>>>>>> main
 from cpython.object cimport *
 from cysignals.signals cimport sig_on, sig_off
 

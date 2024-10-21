@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 $(PYTHON) cypari memory_allocator sagemath_categories sagemath_modules sagemath_mpmath | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig
+||||||| merged common ancestors
+=======
+$(PYTHON) cypari memory_allocator sagemath_categories sagemath_modules | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig
+>>>>>>> main

@@ -29,6 +29,12 @@ exclude sage/rings/padics/local_generic_element.p*
 
 include sage/schemes/hyperelliptic_curves/hypellfrob.p*
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+=======
+include sage/ext/ccobject.h  # FIXME - shipped by sagemath-objects
+
+>>>>>>> main
 global-exclude *.c
 global-exclude *.cpp
 

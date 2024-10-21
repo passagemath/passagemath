@@ -14,8 +14,8 @@ requires = [
 build-backend = "mesonpy"
 
 [project]
-name = "sagemath-brial"
-description = "Sage: Open Source Mathematics Software: Boolean Ring Algebra with BRiAl"
+name = "passagemath-brial"
+description = "passagemath: Boolean Ring Algebra with BRiAl"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_environment

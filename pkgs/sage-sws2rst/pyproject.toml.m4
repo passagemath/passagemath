@@ -6,8 +6,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sage-sws2rst"
-description = "Sage: Open Source Mathematics Software: SageNB worksheet converter"
+name = "passagemath-sws2rst"
+description = "passagemath: SageNB worksheet converter"
 license = {text = "GNU General Public License (GPL) v3 or later"}
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
 urls = {Homepage = "https://www.sagemath.org"}

@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 $(PYTHON) sagemath_categories giac | $(PYTHON_TOOLCHAIN) sage_setup cython pkgconfig
+||||||| merged common ancestors
+=======
+$(PYTHON) sagelib giac | $(PYTHON_TOOLCHAIN) sage_setup cython pkgconfig
+>>>>>>> main

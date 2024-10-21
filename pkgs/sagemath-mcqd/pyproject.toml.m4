@@ -13,8 +13,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-mcqd"
-description = "Sage: Open Source Mathematics Software: Finding maximum cliques with mcqd"
+name = "passagemath-mcqd"
+description = "passagemath: Finding maximum cliques with mcqd"
 dependencies = [
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_cysignals

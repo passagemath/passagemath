@@ -951,7 +951,6 @@ class ProductOfSimplicialSets(PullbackOfSimplicialSets, Factors):
             {0: 0, 1: 0, 2: Z}
 
             sage: K.factor(0) is S2
-            ....:
             True
             sage: K.factor(0, as_subset=True) is S2
             False

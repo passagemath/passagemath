@@ -2734,7 +2734,7 @@ def factor(n, proof=None, int_=False, algorithm='pari', verbose=0, **kwds):
 
     Test that :issue:`35219` is fixed::
 
-        sage: len(factor(2^2203-1,proof=false))
+        sage: len(factor(2^2203 - 1, proof=false))                                      # needs sage.libs.pari
         1
     """
     try:
@@ -6394,6 +6394,7 @@ def smooth_part(x, base):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.arith.misc import smooth_part
         sage: from sage.rings.generic import ProductTree
         sage: smooth_part(10^77+1, primes(1000))
@@ -6435,6 +6436,7 @@ def coprime_part(x, base):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.arith.misc import coprime_part, smooth_part
         sage: from sage.rings.generic import ProductTree
         sage: coprime_part(10^77+1, primes(10000))

@@ -1,5 +1,10 @@
 =====================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Groups and Invariant Theory
+||||||| merged common ancestors
+=======
+ passagemath: Groups and Invariant Theory
+>>>>>>> main
 =====================================================================
 
 About SageMath

@@ -2,6 +2,7 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 [build-system]
 # Minimum requirements for the build system to execute.
 requires = [
+<<<<<<< HEAD
     SPKG_INSTALL_REQUIRES_meson_python
     SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_sage_setup
@@ -17,6 +18,24 @@ build-backend = "mesonpy"
 [project]
 name = "sagemath-lcalc"
 description = "Sage: Open Source Mathematics Software: L-function calculations with lcalc"
+||||||| merged common ancestors
+=======
+    SPKG_INSTALL_REQUIRES_setuptools
+    SPKG_INSTALL_REQUIRES_pkgconfig
+    SPKG_INSTALL_REQUIRES_sage_setup
+    SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sagemath_objects
+    SPKG_INSTALL_REQUIRES_cython
+    SPKG_INSTALL_REQUIRES_memory_allocator
+    SPKG_INSTALL_REQUIRES_cysignals
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "passagemath-lcalc"
+description = "passagemath: L-function calculations with lcalc"
+>>>>>>> main
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_categories

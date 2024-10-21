@@ -2,6 +2,7 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 [build-system]
 # Minimum requirements for the build system to execute.
 requires = [
+<<<<<<< HEAD
     SPKG_INSTALL_REQUIRES_meson_python
     SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sagemath_environment
@@ -15,6 +16,22 @@ build-backend = "mesonpy"
 [project]
 name = "sagemath-homfly"
 description = "Sage: Open Source Mathematics Software: Homfly polynomials of knots/links with libhomfly"
+||||||| merged common ancestors
+=======
+    SPKG_INSTALL_REQUIRES_setuptools
+    SPKG_INSTALL_REQUIRES_sage_setup
+    SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sagemath_objects
+    SPKG_INSTALL_REQUIRES_cython
+    SPKG_INSTALL_REQUIRES_cysignals
+    SPKG_INSTALL_REQUIRES_pkgconfig
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "passagemath-homfly"
+description = "passagemath: Homfly polynomials of knots/links with libhomfly"
+>>>>>>> main
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
 ]

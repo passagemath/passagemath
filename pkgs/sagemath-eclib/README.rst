@@ -1,5 +1,10 @@
 ==============================================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Elliptic curves over the rationals with eclib/mwrank
+||||||| merged common ancestors
+=======
+ passagemath: Elliptic curves over the rationals with eclib/mwrank
+>>>>>>> main
 ==============================================================================================
 
 About SageMath

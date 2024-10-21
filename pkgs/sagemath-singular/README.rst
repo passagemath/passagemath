@@ -1,5 +1,10 @@
 ================================================================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Computer algebra, algebraic geometry, singularity theory with Singular
+||||||| merged common ancestors
+=======
+ passagemath: Computer algebra, algebraic geometry, singularity theory with Singular
+>>>>>>> main
 ================================================================================================================
 
 About SageMath

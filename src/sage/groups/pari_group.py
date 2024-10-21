@@ -1,5 +1,11 @@
 # sage_setup: distribution = sagemath-pari
+<<<<<<< HEAD
 # sage.doctest: needs sage.groups sage.libs.pari
+||||||| merged common ancestors
+# sage.doctest: needs sage.libs.pari
+=======
+# sage.doctest: needs sage.libs.pari
+>>>>>>> main
 r"""
 PARI Groups
 

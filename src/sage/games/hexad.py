@@ -1,5 +1,9 @@
 # sage_setup: distribution = sagemath-combinat
+<<<<<<< HEAD
 # sage.doctest: needs sage.symbolic
+||||||| merged common ancestors
+=======
+>>>>>>> main
 r"""
 Hexads in S(5, 6, 12)
 

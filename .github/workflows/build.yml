@@ -268,6 +268,17 @@ jobs:
       matrix:
         targets:
           - sagemath_categories-check
+          - sagemath_combinat-check
+          - sagemath_flint-check
+          - sagemath_graphs-check
+          - sagemath_groups-check
+          - sagemath_modules-check
+          - sagemath_pari-check
+          - sagemath_plot-check
+          - sagemath_polyhedra-check
+          - sagemath_schemes-check
+          - sagemath_standard_no_symbolics-check
+          - sagemath_symbolics-check
     steps:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10

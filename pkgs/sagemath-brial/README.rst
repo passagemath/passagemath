@@ -1,5 +1,5 @@
 =========================================================================
- Sage: Open Source Mathematics Software: Boolean Ring Algebra with BRiAl
+ passagemath: Boolean Ring Algebra with BRiAl
 =========================================================================
 
 About SageMath

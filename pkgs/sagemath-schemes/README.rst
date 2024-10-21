@@ -1,5 +1,10 @@
 =============================================================================================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Schemes, varieties, elliptic curves, algebraic Riemann surfaces, modular forms, arithmetic dynamics
+||||||| merged common ancestors
+=======
+ passagemath: Schemes, varieties, elliptic curves, algebraic Riemann surfaces, modular forms, arithmetic dynamics
+>>>>>>> main
 =============================================================================================================================================
 
 About SageMath

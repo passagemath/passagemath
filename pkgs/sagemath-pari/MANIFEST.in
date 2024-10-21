@@ -60,6 +60,12 @@ global-exclude *.cpp
 
 include sage/rings/padics/transcendantal.c  # sic
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+=======
+graft sage/ext_data/pari
+
+>>>>>>> main
 global-exclude all__sagemath*.*
 global-include all__sagemath_pari.py
 

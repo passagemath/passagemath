@@ -3442,15 +3442,14 @@ class PermutationGroup_generic(FiniteGroup):
 
         EXAMPLES::
 
-            sage: # optional - gap_package_hap
             sage: G = SymmetricGroup(5)
-            sage: G.homology(7)
+            sage: G.homology(7)                              # optional - gap_package_hap
             Multiplicative Abelian group isomorphic to C2 x C2 x C4 x C3 x C5
-            sage: G.homology(7,2)
+            sage: G.homology(7,2)                              # optional - gap_package_hap
             Multiplicative Abelian group isomorphic to C2 x C2 x C2 x C2 x C2
-            sage: G.homology(7,3)
+            sage: G.homology(7,3)                              # optional - gap_package_hap
             Multiplicative Abelian group isomorphic to C3
-            sage: G.homology(7,5)
+            sage: G.homology(7,5)                              # optional - gap_package_hap
             Multiplicative Abelian group isomorphic to C5
 
         REFERENCES:

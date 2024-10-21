@@ -1,5 +1,10 @@
 =======================================================================================================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Graphs, posets, hypergraphs, designs, abstract complexes, combinatorial polyhedra, abelian sandpiles, quivers
+||||||| merged common ancestors
+=======
+ passagemath: Graphs, posets, hypergraphs, designs, abstract complexes, combinatorial polyhedra, abelian sandpiles, quivers
+>>>>>>> main
 =======================================================================================================================================================
 
 About SageMath

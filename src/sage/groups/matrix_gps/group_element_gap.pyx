@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-gap
-
 r"""
 Matrix group elements implemented in GAP
 """

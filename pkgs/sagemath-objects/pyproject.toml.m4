@@ -13,8 +13,8 @@ requires = [
 build-backend = "mesonpy"
 
 [project]
-name = "sagemath-objects"
-description = "Sage: Open Source Mathematics Software: Sage objects, elements, parents, categories, coercion, metaclasses"
+name = "passagemath-objects"
+description = "passagemath: Sage objects, elements, parents, categories, coercion, metaclasses"
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
@@ -36,19 +36,6 @@ include-package-data = false
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
-
-[tool.setuptools.package-data]
-"sage.cpython" = [
-    "pycore_long.h",
-    "pyx_visit.h",
-    "string_impl.h",
-    "cython_metaclass.h",
-    "python_debug.h",
-]
-"sage.ext" = [
-    "mod_int.h",
-]
-"sage.rings" = ["integer_fake.h"]
 
 [external]
 # External dependencies in the format proposed by https://peps.python.org/pep-0725

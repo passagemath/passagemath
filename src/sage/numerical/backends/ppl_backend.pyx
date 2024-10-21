@@ -1,5 +1,11 @@
 # sage_setup: distribution = sagemath-polyhedra
+<<<<<<< HEAD
 # sage.doctest: needs pplpy
+||||||| merged common ancestors
+# sage.doctest: optional - pplpy
+=======
+# sage.doctest: optional - pplpy
+>>>>>>> main
 """
 PPL Backend
 

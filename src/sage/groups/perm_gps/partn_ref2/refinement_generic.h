@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-groups
+ */
 /*******************************************************************************
 #       Copyright (C) 2012 Thomas Feulner <thomas.feulner@uni-bayreuth.de>
 #

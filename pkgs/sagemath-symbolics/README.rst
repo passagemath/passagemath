@@ -1,5 +1,10 @@
 ===========================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Symbolic calculus
+||||||| merged common ancestors
+=======
+ passagemath: Symbolic calculus
+>>>>>>> main
 ===========================================================
 
 About SageMath

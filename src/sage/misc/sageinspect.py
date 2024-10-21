@@ -17,7 +17,13 @@ Cython modules::
     sage: sage_getdoc(sage.rings.rational).lstrip()
     'Rational Numbers...'
     sage: sage_getsource(sage.rings.rational)
+<<<<<<< HEAD
     '# sage_setup: distribution = sagemath-categories...# distutils: ...Rational Numbers...'
+||||||| merged common ancestors
+    '# distutils: ...Rational Numbers...'
+=======
+    '...Rational Numbers...'
+>>>>>>> main
 
 Python modules::
 
@@ -2256,7 +2262,7 @@ def sage_getsourcelines(obj):
         sage: sage_getsourcelines(test_func)
         (['def base(x):\n',
         ...
-        '    return x\n'], 8)
+        '    return x\n'], 9)
 
     Here are some cases that were covered in :issue:`11298`;
     note that line numbers may easily change, and therefore we do

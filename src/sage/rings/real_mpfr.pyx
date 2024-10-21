@@ -1,5 +1,9 @@
 # sage_setup: distribution = sagemath-modules
+<<<<<<< HEAD
 
+||||||| merged common ancestors
+=======
+>>>>>>> main
 r"""
 Arbitrary precision floating point real numbers using GNU MPFR
 

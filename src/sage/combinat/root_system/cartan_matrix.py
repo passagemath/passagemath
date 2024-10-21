@@ -395,7 +395,7 @@ class CartanMatrix(Base, CartanType_abstract,
             sage: C = CartanMatrix([[2]], index_set=(4,))
             sage: C.index_set()
             (4,)
-            sage: CartanType("A3").subtype((2,)) is CartanType("A1").relabel({1:2})
+            sage: CartanType("A3").subtype((2,)) is CartanType("A1").relabel({1:2})     # needs sage.graphs
             True
         """
         self._index_set = index_set
@@ -1151,14 +1151,14 @@ def find_cartan_type_from_matrix(CM):
     Check that :issue:`35987` is fixed::
 
         sage: from sage.combinat.root_system.cartan_matrix import find_cartan_type_from_matrix
-        sage: cm = CartanMatrix(['A',7]).subtype([2,3,5])
-        sage: find_cartan_type_from_matrix(cm)
+        sage: cm = CartanMatrix(['A',7]).subtype([2,3,5])                               # needs sage.graphs
+        sage: find_cartan_type_from_matrix(cm)                                          # needs sage.graphs
         A2xA1 relabelled by {1: 2, 2: 3, 3: 5}
 
-        sage: cm = CartanMatrix(['B',10,1]).subtype([0,1,2,3,5,6,8,9,10])
-        sage: ct = find_cartan_type_from_matrix(cm); ct
+        sage: cm = CartanMatrix(['B',10,1]).subtype([0,1,2,3,5,6,8,9,10])               # needs sage.graphs
+        sage: ct = find_cartan_type_from_matrix(cm); ct                                 # needs sage.graphs
         D4xB3xA2 relabelled by {1: 0, 2: 2, 3: 1, 4: 3, 5: 8, 6: 9, 7: 10, 8: 5, 9: 6}
-        sage: ct.dynkin_diagram()
+        sage: ct.dynkin_diagram()                                                       # needs sage.graphs
             O 3
             |
             |

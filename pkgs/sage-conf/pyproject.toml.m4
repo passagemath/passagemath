@@ -6,12 +6,32 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
+<<<<<<< HEAD
+<<<<<<<< HEAD:pkgs/sage-conf/pyproject.toml.m4
 name = "sage-conf"
 description = "Sage: Open Source Mathematics Software: Configuration module for the SageMath library"
 readme = "README.rst"
 dnl Not including the standard metadata from pyproject_toml_metadata.m4
 dnl because sage-conf is GPL v3+.
 license = {text = "GNU General Public License (GPL) v3 or later"}
+|||||||| merged common ancestors:pkgs/sage-setup/pyproject.toml
+name = "sage-setup"
+description = "Sage: Open Source Mathematics Software: Build system of the Sage library"
+license = {text = "GNU General Public License (GPL) v2 or later"}
+========
+name = "passagemath-setup"
+description = "passagemath: Build system of the Sage library"
+license = {text = "GNU General Public License (GPL) v2 or later"}
+>>>>>>>> main:pkgs/sage-setup/pyproject.toml
+||||||| merged common ancestors
+=======
+name = "passagemath-conf"
+description = "passagemath: Configuration module"
+readme = "README.rst"
+dnl Not including the standard metadata from pyproject_toml_metadata.m4
+dnl because sage-conf is GPL v3+.
+license = {text = "GNU General Public License (GPL) v3 or later"}
+>>>>>>> main
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
 classifiers = [
     "Development Status :: 6 - Mature",

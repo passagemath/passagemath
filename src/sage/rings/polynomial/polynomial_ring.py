@@ -2559,7 +2559,7 @@ class PolynomialRing_field(PolynomialRing_integral_domain,
 
         EXAMPLES::
 
-            sage: QQbar['x'].fraction_field()
+            sage: QQbar['x'].fraction_field()                                           # needs sage.rings.number_field
             Fraction Field of Univariate Polynomial Ring in x over Algebraic
             Field
 

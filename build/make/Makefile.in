@@ -147,6 +147,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_graphs				\
 	sagemath_combinat			\
 	sagemath_schemes			\
+<<<<<<< HEAD
 	sagemath_giac				\
 	sagemath_flint				\
 	sagemath_pari				\
@@ -156,12 +157,28 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_ntl				\
 	sagemath_brial				\
 	sagemath_eclib				\
+||||||| merged common ancestors
+=======
+	sagemath_gap				\
+	sagemath_groups				\
+	sagemath_flint				\
+	sagemath_pari				\
+	sagemath_glpk				\
+	sagemath_eclib				\
+	sagemath_homfly				\
+	sagemath_linbox				\
+	sagemath_ntl				\
+>>>>>>> main
 	sagemath_lcalc				\
 	sagemath_libbraiding			\
 	sagemath_libecm				\
 	sagemath_bliss 				\
 	sagemath_mcqd 				\
 	sagemath_tdlib				\
+	sagemath_giac				\
+	sagemath_singular			\
+	sagemath_standard_no_symbolics		\
+	sagemath_symbolics			\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
 	sagemath_meataxe			\

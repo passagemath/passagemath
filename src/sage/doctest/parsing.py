@@ -1519,6 +1519,12 @@ class SageOutputChecker(doctest.OutputChecker):
             pythran_numpy_warning_regex = re.compile(r'WARNING: Overriding pythran description with argspec information for: numpy\.random\.[a-z_]+')
             got = pythran_numpy_warning_regex.sub('', got)
             did_fixup = True
+
+        if "ld_classic is deprecated" in got:
+            ld_classic_warning_regex = re.compile(r'ld: warning: -ld_classic is deprecated and will be removed in a future release')
+            got = ld_classic_warning_regex.sub('', got)
+            did_fixup = True
+
         return did_fixup, want, got
 
     def output_difference(self, example, got, optionflags):

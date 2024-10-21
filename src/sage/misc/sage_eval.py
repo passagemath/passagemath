@@ -176,7 +176,13 @@ def sage_eval(source, locals=None, cmds='', preparse=True):
         import sage.all as toplevel
     except ImportError:
         try:
+<<<<<<< HEAD
             import sage.all__sagemath_modules as toplevel
+||||||| merged common ancestors
+    import sage.all
+=======
+            import sage.all__sagemath_polyhedra as toplevel
+>>>>>>> main
         except ImportError:
             try:
                 import sage.all__sagemath_categories as toplevel

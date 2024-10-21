@@ -1,5 +1,9 @@
 # sage_setup: distribution = sagemath-pari
+<<<<<<< HEAD
 # sage.doctest: needs sage.rings.padics
+||||||| merged common ancestors
+=======
+>>>>>>> main
 r"""
 `p`-adic Floating Point Elements
 

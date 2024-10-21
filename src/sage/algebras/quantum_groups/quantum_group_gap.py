@@ -1,5 +1,11 @@
 # sage_setup: distribution = sagemath-combinat
+<<<<<<< HEAD
 # sage.doctest: optional - gap_package_quagroup, needs sage.combinat sage.libs.gap sage.modules
+||||||| merged common ancestors
+# sage.doctest: optional - gap_package_quagroup sage.combinat sage.libs.gap sage.modules
+=======
+# sage.doctest: optional - gap_package_quagroup sage.combinat sage.libs.gap sage.modules
+>>>>>>> main
 """
 Quantum Groups Using GAP's QuaGroup Package
 

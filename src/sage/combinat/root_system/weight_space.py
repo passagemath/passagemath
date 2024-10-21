@@ -628,9 +628,9 @@ class WeightSpaceElement(CombinatorialFreeModule.Element):
 
             sage: P = RootSystem(['A',3]).weight_lattice()
             sage: La = P.fundamental_weights()
-            sage: [al._to_root_vector() for al in P.simple_roots()]
+            sage: [al._to_root_vector() for al in P.simple_roots()]                     # needs sage.graphs
             [(1, 0, 0), (0, 1, 0), (0, 0, 1)]
-            sage: (La[1] + La[2])._to_root_vector()
+            sage: (La[1] + La[2])._to_root_vector()                                     # needs sage.graphs
             (5/4, 3/2, 3/4)
         """
         return self.parent()._inverse_cartan_matrix * self.to_vector()

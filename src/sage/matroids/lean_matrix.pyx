@@ -1,5 +1,11 @@
 # sage_setup: distribution = sagemath-modules
+<<<<<<< HEAD
 # sage.doctest: needs sage.rings.finite_rings
+||||||| merged common ancestors
+# sage.doctest: optional - sage.rings.finite_rings
+=======
+# sage.doctest: optional - sage.rings.finite_rings
+>>>>>>> main
 """
 Lean matrices
 

@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-objects
-
 from sage.structure.sage_object cimport SageObject
 from sage.structure.parent cimport Parent
 from sage.misc.inherit_comparison cimport InheritComparisonMetaclass
@@ -133,6 +132,7 @@ cpdef inline bint have_same_parent(left, right) noexcept:
 
     These have different types but the same parent::
 
+        sage: # needs sage.rings.real_mpfr
         sage: a = RLF(2)
         sage: b = exp(a)
         sage: type(a)

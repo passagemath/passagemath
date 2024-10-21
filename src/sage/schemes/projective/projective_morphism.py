@@ -69,7 +69,6 @@ from sage.categories.finite_fields import FiniteFields
 from sage.categories.homset import Hom, End
 from sage.categories.number_fields import NumberFields
 from sage.misc.cachefunc import cached_method
-from sage.misc.misc_c import prod
 from sage.misc.lazy_attribute import lazy_attribute
 from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod

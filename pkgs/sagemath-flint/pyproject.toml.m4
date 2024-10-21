@@ -3,6 +3,7 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 # Minimum requirements for the build system to execute.
 # sage_conf is needed for library name of the flint library.
 requires = [
+<<<<<<< HEAD
     SPKG_INSTALL_REQUIRES_meson_python
     SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sage_conf
@@ -23,6 +24,29 @@ build-backend = "mesonpy"
 [project]
 name = "sagemath-flint"
 description = "Sage: Open Source Mathematics Software: Fast computations with FLINT and arb"
+||||||| merged common ancestors
+=======
+    SPKG_INSTALL_REQUIRES_setuptools
+    SPKG_INSTALL_REQUIRES_sage_setup
+    SPKG_INSTALL_REQUIRES_sage_conf
+    SPKG_INSTALL_REQUIRES_numpy
+    SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_modules
+    SPKG_INSTALL_REQUIRES_sagemath_ntl
+    SPKG_INSTALL_REQUIRES_sagemath_pari
+    SPKG_INSTALL_REQUIRES_cython
+    SPKG_INSTALL_REQUIRES_gmpy2
+    SPKG_INSTALL_REQUIRES_cypari
+    SPKG_INSTALL_REQUIRES_cysignals
+    SPKG_INSTALL_REQUIRES_pkgconfig
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "passagemath-flint"
+description = "passagemath: Fast computations with FLINT and arb"
+>>>>>>> main
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_ntl

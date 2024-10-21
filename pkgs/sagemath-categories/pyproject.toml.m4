@@ -16,8 +16,8 @@ requires = [
 build-backend = "mesonpy"
 
 [project]
-name = "sagemath-categories"
-description = "Sage: Open Source Mathematics Software: Sage categories and basic rings"
+name = "passagemath-categories"
+description = "passagemath: Sage categories and basic rings"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_memory_allocator
@@ -39,9 +39,6 @@ include-package-data = false
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
-
-[tool.setuptools.package-data]
-"sage.rings.finite_rings" = ["integer_mod_limits.h"]
 
 [external]
 # External dependencies in the format proposed by https://peps.python.org/pep-0725

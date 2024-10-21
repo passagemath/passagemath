@@ -30,9 +30,152 @@ except ImportError:
 # Function field
 from sage.rings.function_field.all import *
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+# Following will go to all__sagemath_categories.py in #36566
+||||||||| ab24dac430e
+# Finite residue fields
+from sage.rings.finite_rings.residue_field import ResidueField
+
+# p-adic field
+from sage.rings.padics.all import *
+from sage.rings.padics.padic_printing import _printer_defaults as padic_printing
+
+# valuations
+from sage.rings.valuation.all import *
+=========
+# Finite residue fields
+from sage.rings.finite_rings.residue_field import ResidueField
+
+# p-adic field
+from sage.rings.padics.all import *
+from sage.rings.padics.padic_printing import _printer_defaults as padic_printing
+
+# Pseudo-ring of PARI objects.
+from sage.rings.pari_ring import PariRing, Pari
+
+# valuations
+from sage.rings.valuation.all import *
+>>>>>>>>> Temporary merge branch 2
+
+# Semirings
+from sage.rings.semirings.all import *
+
+<<<<<<<<< Temporary merge branch 1
+# Double precision floating point numbers
+from sage.rings.real_double import RealDoubleField, RDF, RealDoubleElement
+||||||||| ab24dac430e
+# Real numbers
+from sage.rings.real_mpfr import (RealField, RR,
+                       create_RealNumber as RealNumber)   # this is used by the preparser to wrap real literals -- very important.
+Reals = RealField
+
+from sage.rings.real_double import RealDoubleField, RDF, RealDoubleElement
+=========
+# Real numbers
+from sage.rings.real_mpfr import (RealField, RR,
+                                  create_RealNumber as RealNumber)   # this is used by the preparser to wrap real literals -- very important.
+
+# Lazy Laurent series ring
+lazy_import('sage.rings.lazy_series_ring', ['LazyLaurentSeriesRing', 'LazyPowerSeriesRing',
+                                            'LazySymmetricFunctions', 'LazyDirichletSeriesRing'])
+
+# Tate algebras
+from sage.rings.tate_algebra import TateAlgebra
+
+Reals = RealField
+
+# Number field
+from sage.rings.number_field.all import *
+>>>>>>>>> Temporary merge branch 2
+
+<<<<<<<<< Temporary merge branch 1
+# Lazy reals
+from sage.rings.real_lazy import RealLazyField, RLF, ComplexLazyField, CLF
+||||||||| ab24dac430e
+from sage.rings.real_lazy import RealLazyField, RLF, ComplexLazyField, CLF
+=========
+>>>>>>>>> Temporary merge branch 2
+
+# up to here (#36566)
+
+=======
+# Semirings
+from sage.rings.semirings.all import *
+
+# Double precision floating point numbers
+from sage.rings.real_double import RealDoubleField, RDF, RealDoubleElement
+
+
+# up to here (#36566)
+
+>>>>>>> main
 # Polynomial Rings and Polynomial Quotient Rings
 from sage.rings.polynomial.all import *
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+# Following will go to all__sagemath_categories.py in #36566
+
+<<<<<<<<< Temporary merge branch 1
+# Power series rings
+from sage.rings.power_series_ring import PowerSeriesRing
+
+# Laurent series ring in one variable
+from sage.rings.laurent_series_ring import LaurentSeriesRing
+
+# Puiseux series ring
+from sage.rings.puiseux_series_ring import PuiseuxSeriesRing
+
+# Big-oh notation
+from sage.rings.big_oh import O
+
+# Fraction field
+from sage.rings.fraction_field import FractionField
+Frac = FractionField
+
+# Localization
+from sage.rings.localization import Localization
+
+# up to here (#36566)
+
+||||||||| ab24dac430e
+# Power series rings
+from sage.rings.power_series_ring import PowerSeriesRing
+
+# Laurent series ring in one variable
+from sage.rings.laurent_series_ring import LaurentSeriesRing
+
+# Lazy Laurent series ring
+lazy_import('sage.rings.lazy_series_ring', ['LazyLaurentSeriesRing', 'LazyPowerSeriesRing',
+                                            'LazySymmetricFunctions', 'LazyDirichletSeriesRing'])
+
+# Tate algebras
+from sage.rings.tate_algebra import TateAlgebra
+
+# Puiseux series ring
+from sage.rings.puiseux_series_ring import PuiseuxSeriesRing
+
+# Pseudo-ring of PARI objects.
+from sage.rings.pari_ring import PariRing, Pari
+
+# Big-oh notation
+from sage.rings.big_oh import O
+
+# Fraction field
+from sage.rings.fraction_field import FractionField
+Frac = FractionField
+
+# Localization
+from sage.rings.localization import Localization
+
+=========
+>>>>>>>>> Temporary merge branch 2
+=======
+# Following will go to all__sagemath_categories.py in #36566
+
+>>>>>>> main
 # c-finite sequences
 from sage.rings.cfinite_sequence import CFiniteSequence, CFiniteSequences
 

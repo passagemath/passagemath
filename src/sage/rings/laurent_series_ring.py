@@ -52,6 +52,7 @@ except ImportError:
     pari_gen = ()
 
 lazy_import('sage.rings.polynomial.laurent_polynomial_ring_base', 'LaurentPolynomialRing_generic')
+lazy_import('sage.rings.lazy_series', ['LazyPowerSeries', 'LazyLaurentSeries'])
 lazy_import('sage.rings.lazy_series_ring', ('LazyPowerSeriesRing', 'LazyLaurentSeriesRing'))
 lazy_import('sage.rings.polynomial.polynomial_ring', 'PolynomialRing_general')
 lazy_import('sage.rings.power_series_ring', 'PowerSeriesRing_generic')
@@ -74,8 +75,8 @@ def is_LaurentSeriesRing(x):
         use 'isinstance(..., (LaurentSeriesRing, LazyLaurentSeriesRing))' instead.
         See https://github.com/sagemath/sage/issues/38290 for details.
         True
-        sage: L.<z> = LazyLaurentSeriesRing(QQ)
-        sage: is_LaurentSeriesRing(L)
+        sage: L.<z> = LazyLaurentSeriesRing(QQ)                                         # needs sage.combinat
+        sage: is_LaurentSeriesRing(L)                                                   # needs sage.combinat
         True
     """
     from sage.misc.superseded import deprecation
@@ -460,6 +461,7 @@ class LaurentSeriesRing(UniqueRepresentation, CommutativeRing):
 
         Lazy series::
 
+            sage: # needs sage.combinat
             sage: L.<z> = LazyLaurentSeriesRing(ZZ)
             sage: R = LaurentSeriesRing(QQ, names='z')
             sage: R(z^-5 + 1/(1-z))
@@ -518,7 +520,6 @@ class LaurentSeriesRing(UniqueRepresentation, CommutativeRing):
             x^-3
         """
         from sage.rings.fraction_field_element import FractionFieldElement
-        from sage.rings.lazy_series import LazyPowerSeries, LazyLaurentSeries
         from sage.rings.polynomial.multi_polynomial import MPolynomial
         from sage.rings.polynomial.polynomial_element import Polynomial
         from sage.structure.element import parent
@@ -656,9 +657,9 @@ class LaurentSeriesRing(UniqueRepresentation, CommutativeRing):
             True
             sage: S.has_coerce_map_from(S)
             True
-            sage: S.has_coerce_map_from(LazyLaurentSeriesRing(ZZ, 't'))
+            sage: S.has_coerce_map_from(LazyLaurentSeriesRing(ZZ, 't'))                 # needs sage.combinat
             True
-            sage: S.has_coerce_map_from(LazyPowerSeriesRing(ZZ, 't'))
+            sage: S.has_coerce_map_from(LazyPowerSeriesRing(ZZ, 't'))                   # needs sage.combinat
             True
 
             sage: S.has_coerce_map_from(QQ)
@@ -683,9 +684,9 @@ class LaurentSeriesRing(UniqueRepresentation, CommutativeRing):
             False
             sage: R.has_coerce_map_from(ZZ['x'])
             True
-            sage: R.has_coerce_map_from(LazyLaurentSeriesRing(ZZ, 't'))
+            sage: R.has_coerce_map_from(LazyLaurentSeriesRing(ZZ, 't'))                 # needs sage.combinat
             True
-            sage: R.has_coerce_map_from(LazyLaurentSeriesRing(ZZ['x'], 't'))
+            sage: R.has_coerce_map_from(LazyLaurentSeriesRing(ZZ['x'], 't'))            # needs sage.combinat
             True
         """
         A = self.base_ring()

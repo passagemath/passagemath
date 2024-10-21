@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 r"""
 Auslander-Reiten Quivers
 """

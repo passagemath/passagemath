@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 # sage_setup: distribution = sagemath-mpmath
+||||||| merged common ancestors
+import mpmath
+=======
+# sage_setup: distribution = sagemath-modules
+import mpmath
+>>>>>>> main
 
 # Patch mpmath to use Cythonized functions
 from sage.libs.mpmath import utils as _utils

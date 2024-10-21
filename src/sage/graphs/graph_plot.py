@@ -1,5 +1,11 @@
 # sage_setup: distribution = sagemath-graphs
+<<<<<<< HEAD
 # sage.doctest: needs sage.plot
+||||||| merged common ancestors
+# sage.doctest: optional - sage.plot
+=======
+# sage.doctest: optional - sage.plot
+>>>>>>> main
 r"""
 Graph plotting
 

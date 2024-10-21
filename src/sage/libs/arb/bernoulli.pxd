@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-flint
-
 # Deprecated header file; use sage/libs/flint/bernoulli.pxd instead
 # See https://github.com/sagemath/sage/pull/36449
 

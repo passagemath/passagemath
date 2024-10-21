@@ -1,4 +1,5 @@
 ===============================================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Plotting and graphics with Matplotlib, Three.JS, etc.
 ===============================================================================================
 
@@ -19,6 +20,31 @@ The traditional and recommended way to install SageMath is from source via Sage-
 
 About this experimental pip-installable source distribution
 -----------------------------------------------------------
+||||||| merged common ancestors
+=======
+ passagemath: Plotting and graphics with Matplotlib, Three.JS, etc.
+===============================================================================================
+
+About SageMath
+--------------
+
+   "Creating a Viable Open Source Alternative to
+    Magma, Maple, Mathematica, and MATLAB"
+
+   Copyright (C) 2005-2024 The Sage Development Team
+
+   https://www.sagemath.org
+
+SageMath fully supports all major Linux distributions, recent versions of
+macOS, and Windows (Windows Subsystem for Linux).
+
+See https://doc.sagemath.org/html/en/installation/index.html
+for general installation instructions.
+
+
+About this pip-installable source distribution
+----------------------------------------------
+>>>>>>> main
 
 This pip-installable source distribution `sagemath-plot` is an experimental distribution of a part of the Sage Library.  Use at your own risk.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`).
 

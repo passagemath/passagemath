@@ -1,5 +1,9 @@
 # sage_setup: distribution = sagemath-graphs
+<<<<<<< HEAD
 # sage.doctest: needs sage.modules
+||||||| merged common ancestors
+=======
+>>>>>>> main
 """
 Sandpiles
 

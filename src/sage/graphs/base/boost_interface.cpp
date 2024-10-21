@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-graphs
+ */
 #ifndef BOOSTGRAPH
 #define BOOSTGRAPH
 #include <boost/graph/adjacency_list.hpp>

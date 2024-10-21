@@ -228,6 +228,7 @@ try:
 except ImportError:
     LaurentSeriesRing = ()
 
+lazy_import('sage.rings.lazy_series', 'LazyPowerSeries')
 lazy_import('sage.rings.lazy_series_ring', ('LazyPowerSeriesRing', 'LazyLaurentSeriesRing'))
 
 
@@ -257,6 +258,8 @@ def is_MPowerSeriesRing(x):
         True
         sage: is_MPowerSeriesRing(T)
         False
+
+        sage: # needs sage.combinat
         sage: L = LazyPowerSeriesRing(QQ, 'x')
         sage: is_MPowerSeriesRing(L)
         True
@@ -836,6 +839,7 @@ class MPowerSeriesRing_generic(PowerSeriesRing_generic, Nonexact):
             sage: H._coerce_map_from_(PolynomialRing(ZZ,'z2,f0'))
             True
 
+            sage: # needs sage.combinat
             sage: L.<x,y> = LazyPowerSeriesRing(QQ)
             sage: R = PowerSeriesRing(QQ, names=('x','y','z'))
             sage: R.has_coerce_map_from(L)
@@ -870,6 +874,7 @@ class MPowerSeriesRing_generic(PowerSeriesRing_generic, Nonexact):
             Multivariate Power Series Ring in t0, t1, t2, t3, t4 over
             Integer Ring
 
+            sage: # needs sage.combinat
             sage: L.<x,y> = LazyPowerSeriesRing(QQ)
             sage: R = PowerSeriesRing(QQ, names=('x','y','z'))
             sage: R(1/(1-x-y), prec=3)
@@ -882,7 +887,6 @@ class MPowerSeriesRing_generic(PowerSeriesRing_generic, Nonexact):
                 prec = f.prec()
             except AttributeError:
                 prec = infinity
-        from sage.rings.lazy_series import LazyPowerSeries
         if isinstance(f, LazyPowerSeries):
             if prec is infinity:
                 try:

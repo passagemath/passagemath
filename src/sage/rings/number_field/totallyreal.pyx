@@ -1,5 +1,9 @@
 # sage_setup: distribution = sagemath-flint
+<<<<<<< HEAD
 
+||||||| merged common ancestors
+=======
+>>>>>>> main
 r"""
 Enumeration of primitive totally real fields
 

@@ -1,5 +1,9 @@
 # sage_setup: distribution = sagemath-flint
+<<<<<<< HEAD
 
+||||||| merged common ancestors
+=======
+>>>>>>> main
 include "sage/libs/linkages/padics/fmpz_poly_unram.pxi"
 include "sage/libs/linkages/padics/unram_shared.pxi"
 include "FM_template.pxi"

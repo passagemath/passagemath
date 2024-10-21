@@ -48,6 +48,7 @@ class SAGE_SRC(StaticFile):
     r"""
     A :class:`~sage.features.Feature` which describes the presence of the
     monolithic source tree of the Sage library.
+
     """
     def __init__(self):
         r"""
@@ -571,8 +572,14 @@ class sage__libs__m4ri(JoinFeature):
     A :class:`sage.features.Feature` describing the presence of Cython modules
     depending on the M4RI and/or M4RIe libraries.
 
+<<<<<<< HEAD
     In addition to the modularization purposes that this tag serves, it also provides attribution
     to the upstream project.
+||||||| merged common ancestors
+=======
+    In addition to the modularization purposes that this tag serves,
+    it also provides attribution to the upstream project.
+>>>>>>> main
 
     TESTS::
 
@@ -793,7 +800,7 @@ class sage__numerical__mip(PythonModule):
             True
         """
         PythonModule.__init__(self, 'sage.numerical.mip',
-                              spkg='sagemath_polyhedra')
+                              spkg='sagemath_polyhedra', type='standard')
 
 
 class sage__plot(JoinFeature):
@@ -1067,7 +1074,7 @@ class sage__rings__polynomial__pbori(JoinFeature):
         """
         JoinFeature.__init__(self, 'sage.rings.polynomial.pbori',
                              [PythonModule('sage.rings.polynomial.pbori.pbori')],
-                             spkg='sagemath_brial', type='optional')
+                             spkg='sagemath_brial', type='standard')
 
 
 class sage__rings__real_double(PythonModule):
@@ -1196,7 +1203,14 @@ class sage__schemes(JoinFeature):
         JoinFeature.__init__(self, 'sage.schemes',
                              [PythonModule('sage.schemes.elliptic_curves.ell_generic'),
                               sage__modules()],
+<<<<<<< HEAD
                              spkg='sagemath_schemes', type='standard')
+||||||| merged common ancestors
+                             [PythonModule('sage.schemes.elliptic_curves.ell_generic')],
+                             spkg='sagemath_schemes', type='standard')
+=======
+                             spkg="sagemath_schemes", type='standard')
+>>>>>>> main
 
 
 class sage__symbolic(JoinFeature):

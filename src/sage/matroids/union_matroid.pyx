@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-modules
-
 from sage.matroids.matroid cimport Matroid
 
 cdef class MatroidUnion(Matroid):

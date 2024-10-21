@@ -1081,7 +1081,13 @@ cdef class PowerSeries_poly(PowerSeries):
             f2 = f.__pari__()
             g = f2.serreverse()
             return PowerSeries_poly(f.parent(), g.Vec(-out_prec), out_prec)
+<<<<<<< HEAD
         except (TypeError, ValueError, AttributeError, PariError, ModuleNotFoundError):
+||||||| merged common ancestors
+        except (TypeError,ValueError,AttributeError,PariError):
+=======
+        except (TypeError, ValueError, AttributeError, PariError, ImportError):
+>>>>>>> main
             # if pari fails, continue with Lagrange inversion
             from sage.misc.verbose import verbose
             verbose("passing to pari failed; trying Lagrange inversion")

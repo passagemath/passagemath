@@ -275,7 +275,7 @@ class RootSpaceElement(CombinatorialFreeModule.Element):
         Verify that directionality is correct for roots of different lengths::
 
             sage: lat = RootSystem(['B', 3]).root_lattice()
-            sage: lat.simple_root(2).scalar(lat.simple_coroot(3))
+            sage: lat.simple_root(2).scalar(lat.simple_coroot(3))                       # needs sage.graphs
             -2
         """
         if lambdacheck in self.parent().coroot_lattice() or lambdacheck in self.parent().coroot_space():

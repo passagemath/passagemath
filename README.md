@@ -1,20 +1,109 @@
-<div>
-<a href="https://sagemath.org">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="src/doc/common/static/logo_sagemath_white.svg">
-    <img src="src/doc/common/static/logo_sagemath_black.svg" height="60" align="left">
-  </picture>
-</a>
-   <em>"Creating a Viable Open Source Alternative to
-   Magma, Maple, Mathematica, and MATLAB"</em>
-</div>
+passagemath: General purpose mathematical software system, a fork of SageMath
+=============================================================================
 
-#
+passagemath is open source mathematical software released under the GNU General Public
+Licence GPLv2+.
 
-Sage is open source mathematical software released under the GNU General Public
-Licence GPLv2+, and includes packages that have [compatible software licenses](./COPYING.txt).
+It is a fork of [SageMath](https://www.sagemath.org/), created in October 2024 with the following goals:
+
+* providing [modularized installation with pip](https://github.com/sagemath/sage/issues/29705),
+* establishing first-class membership in the scientific Python ecosystem,
+* giving [clear attribution of upstream projects](https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ),
+* inviting collaborations with upstream projects,
+* [maintaining a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ/m/Tq17YRqOAAAJ),
+* developing a port to [Pyodide](https://pyodide.org/en/stable/) for serverless deployment with Javascript,
+* developing a native Windows port.
+
 [People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
-development of Sage. [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
+development of SageMath, and hence of passagemath.
+
+[Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
+
+Full installation
+-----------------
+
+For installing the project in a Python environment, passagemath provides the
+`pip`-installable package [passagemath-standard](https://pypi.org/project/passagemath-standard/).
+
+Unless you need to install passagemath into a specific existing environment, we recommend
+to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.12.x),
+for example `~/passagemath-venv/`:
+
+            $ python3 -m venv ~/passagemath-venv
+            $ source ~/passagemath-venv/bin/activate
+
+The following instructions are for installation from PyPI. If you want to build from
+a local clone of the passagemath repository instead, use the following command first.
+
+            passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
+            passagemath $ export SAGE_CONF_TARGETS=build-local
+
+As the first installation step, install [passagemath-conf](https://pypi.org/project/passagemath-conf/),
+which builds various prerequisite non-Python packages in a subdirectory of `~/.sage/`.
+The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
+
+            (passagemath-venv) $ python3 -m pip install -v passagemath-conf
+
+After a successful installation, a wheelhouse provides various Python packages.
+You can list the wheels using the command:
+
+            (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
+
+If this gives an error saying that `sage-config` is not found, check any messages
+that the `pip install` command may have printed. You may need to adjust your `PATH`,
+for example by:
+
+            $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
+
+Now install the packages from the wheelhouse and the [passagemath-setup](https://pypi.org/project/passagemath-setup/)
+package, and finally install the Sage library:
+
+            (passagemath-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl passagemath-setup
+            (passagemath-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
+
+The above instructions install the latest stable release of passagemath.
+To install the latest development version instead, add the switch `--pre` to all invocations of
+`python3 -m pip install`.
+
+Modularized distributions
+-------------------------
+
+The passagemath library is provided by a number of distributions (pip-installable packages).
+
+**Distributions named after a basic mathematical structure:** The packages may also cover a wide range of generalizations/applications of the structure after which they are named. Users who work in a specialized research area will, of course, recognize what structures they need. The down-to-earth naming also creates discoverability by a broader audience. Not many more distribution packages than these 7 are needed:
+- [![PyPI: passagemath-combinat](https://img.shields.io/pypi/v/passagemath-combinat.svg?label=passagemath-combinat)](https://pypi.python.org/pypi/passagemath-combinat): provides "everything combinatorial", except for graphs.
+- [![PyPI: passagemath-graphs](https://img.shields.io/pypi/v/passagemath-graphs.svg?label=passagemath-graphs)](https://pypi.python.org/pypi/passagemath-graphs): also provides posets, combinatorial designs, abstract simplicial complexes, quivers, etc.
+- [![PyPI: passagemath-groups](https://img.shields.io/pypi/v/passagemath-groups.svg?label=passagemath-groups)](https://pypi.python.org/pypi/passagemath-groups)
+- [![PyPI: passagemath-modules](https://img.shields.io/pypi/v/passagemath-modules.svg?label=passagemath-modules)](https://pypi.python.org/pypi/passagemath-modules): also has matrices, tensors, homology, coding theory, etc.
+- [![PyPI: passagemath-polyhedra](https://img.shields.io/pypi/v/passagemath-polyhedra.svg?label=passagemath-polyhedra)](https://pypi.python.org/pypi/passagemath-polyhedra): also provides fans, hyperplane arrangements, polyhedral complexes, linear and mixed-integer optimization, lattice point sets, and toric varieties
+- [![PyPI: passagemath-schemes](https://img.shields.io/pypi/v/passagemath-schemes.svg?label=passagemath-schemes)](https://pypi.python.org/pypi/passagemath-schemes)
+- [![PyPI: passagemath-symbolics](https://img.shields.io/pypi/v/passagemath-symbolics.svg?label=passagemath-symbolics)](https://pypi.python.org/pypi/passagemath-symbolics): symbolic expressions and symbolic calculus
+
+**Distributions named after a third-party non-Python dependency:** This makes technical sense because the dependencies will be localized to this distribution package, but it also helps give **attribution and visibility** to these libraries and projects that Sage depends on.
+   | Standard packages | Optional Packages |
+   | :---------------- | :---------------- |
+   | [![PyPI: passagemath-flint](https://img.shields.io/pypi/v/passagemath-flint.svg?label=passagemath-flint)](https://pypi.python.org/pypi/passagemath-flint) | [![PyPI: passagemath-bliss](https://img.shields.io/pypi/v/passagemath-bliss.svg?label=passagemath-bliss)](https://pypi.python.org/pypi/passagemath-bliss)  |
+   | [![PyPI: passagemath-gap](https://img.shields.io/pypi/v/passagemath-gap.svg?label=passagemath-gap)](https://pypi.python.org/pypi/passagemath-gap) | [![PyPI: passagemath-brial](https://img.shields.io/pypi/v/passagemath-brial.svg?label=passagemath-brial)](https://pypi.python.org/pypi/passagemath-brial) |
+   | [![PyPI: passagemath-glpk](https://img.shields.io/pypi/v/passagemath-glpk.svg?label=passagemath-glpk)](https://pypi.python.org/pypi/passagemath-glpk) | [![PyPI: passagemath-coxeter3](https://img.shields.io/pypi/v/passagemath-coxeter3.svg?label=passagemath-coxeter3)](https://pypi.python.org/pypi/passagemath-coxeter3)  |
+   | [![PyPI: passagemath-giac](https://img.shields.io/pypi/v/passagemath-giac.svg?label=passagemath-giac)](https://pypi.python.org/pypi/passagemath-giac) | [![PyPI: passagemath-mcqd](https://img.shields.io/pypi/v/passagemath-mcqd.svg?label=passagemath-mcqd)](https://pypi.python.org/pypi/passagemath-mcqd)  |
+   | [![PyPI: passagemath-homfly](https://img.shields.io/pypi/v/passagemath-homfly.svg?label=passagemath-homfly)](https://pypi.python.org/pypi/passagemath-homfly) | [![PyPI: passagemath-meataxe](https://img.shields.io/pypi/v/passagemath-meataxe.svg?label=passagemath-meataxe)](https://pypi.python.org/pypi/passagemath-meataxe)  |
+   | [![PyPI: passagemath-lcalc](https://img.shields.io/pypi/v/passagemath-lcalc.svg?label=passagemath-lcalc)](https://pypi.python.org/pypi/passagemath-lcalc) | [![PyPI: passagemath-sirocco](https://img.shields.io/pypi/v/passagemath-sirocco.svg?label=passagemath-sirocco)](https://pypi.python.org/pypi/passagemath-sirocco) |
+   | [![PyPI: passagemath-libbraiding](https://img.shields.io/pypi/v/passagemath-libbraiding.svg?label=passagemath-libbraiding)](https://pypi.python.org/pypi/passagemath-libbraiding) | [![PyPI: passagemath-tdlib](https://img.shields.io/pypi/v/passagemath-tdlib.svg?label=passagemath-tdlib)](https://pypi.python.org/pypi/passagemath-tdlib) |
+   | [![PyPI: passagemath-libecm](https://img.shields.io/pypi/v/passagemath-libecm.svg?label=passagemath-libecm)](https://pypi.python.org/pypi/passagemath-libecm) |
+   | [![PyPI: passagemath-linbox](https://img.shields.io/pypi/v/passagemath-linbox.svg?label=passagemath-linbox)](https://pypi.python.org/pypi/passagemath-linbox) |
+   | [![PyPI: passagemath-ntl](https://img.shields.io/pypi/v/passagemath-ntl.svg?label=passagemath-ntl)](https://pypi.python.org/pypi/passagemath-ntl) |
+   | [![PyPI: passagemath-pari](https://img.shields.io/pypi/v/passagemath-pari.svg?label=passagemath-pari)](https://pypi.python.org/pypi/passagemath-pari) |
+   | [![PyPI: passagemath-singular](https://img.shields.io/pypi/v/passagemath-singular.svg?label=passagemath-singular)](https://pypi.python.org/pypi/passagemath-singular) |
+
+**Distributions named after a technical functionality:**
+- [![PyPI: passagemath-objects](https://img.shields.io/pypi/v/passagemath-objects.svg?label=passagemath-objects)](https://pypi.python.org/pypi/passagemath-objects): Sage extends Python's object system by dynamic   mix-in classes that are driven by categories and axioms. It is loosely   modeled on concepts of category theory and inspired by   Scratchpad/Axiom/FriCAS, Magma, and MuPAD. This distribution package makes Sage objects, the element/parent framework, basic categories and functors,   the coercion system and the related metaclasses available.
+- [![PyPI: passagemath-categories](https://img.shields.io/pypi/v/passagemath-categories.svg?label=passagemath-categories)](https://pypi.python.org/pypi/passagemath-categories): This distribution package contains the full set of categories defined by Sage, as well as basic mathematical objects such as integers and rational numbers, a basic implementation of polynomials, and affine spaces.  None of this brings in additional dependencies.
+- [![PyPI: passagemath-environment](https://img.shields.io/pypi/v/passagemath-environment.svg?label=passagemath-environment)](https://pypi.python.org/pypi/passagemath-environment)
+- [![PyPI: passagemath-plot](https://img.shields.io/pypi/v/passagemath-plot.svg?label=passagemath-plot)](https://pypi.python.org/pypi/passagemath-plot): Plotting facilities, depending on matplotlib.
+- [![PyPI: passagemath-repl](https://img.shields.io/pypi/v/passagemath-repl.svg?label=passagemath-repl)](https://pypi.python.org/pypi/passagemath-repl): The top-level interactive environment with the preparser that defines the surface language of Sage. This distribution also includes the doctesting facilities, as the doctests are written in the surface language.
+- [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard): Everything as provided by a standard installation of the Sage distribution. This is reduced to an empty meta-package.
+- [![PyPI: passagemath-standard-no-symbolics](https://img.shields.io/pypi/v/passagemath-standard-no-symbolics.svg?label=passagemath-standard-no-symbolics)](https://pypi.python.org/pypi/passagemath-standard-no-symbolics)
+
 
 Table of Contents
 -----------------
@@ -300,7 +389,7 @@ in the Installation Guide.
       where `SAGE_LOCAL` is the desired installation prefix, which
       must be writable by the user.
 
-      If you use this option in combination with `--disable-editable`,
+      Unless you use this option in combination with `--enable-editable`,
       you can delete the entire Sage source tree after completing
       the build process.  What is installed in `SAGE_LOCAL` will be
       a self-contained installation of Sage.
@@ -427,51 +516,6 @@ in the Installation Guide.
     or JupyterLab installation, as described in the section
     [Launching SageMath](https://doc.sagemath.org/html/en/installation/launching.html)
     in the Sage Installation Guide.
-
-Alternative Installation using PyPI
----------------
-
-For installing Sage in a Python environment from PyPI, Sage provides the
-`pip`-installable package [sagemath-standard](https://pypi.org/project/sagemath-standard/).
-
-Unless you need to install Sage into a specific existing environment, we recommend
-to create and activate a fresh virtual environment, for example `~/sage-venv/`:
-
-            $ python3 -m venv ~/sage-venv
-            $ source ~/sage-venv/bin/activate
-
-As the first installation step, install [sage_conf](https://pypi.org/project/sage-conf/),
-which builds various prerequisite packages in a subdirectory of `~/.sage/`:
-
-            (sage-venv) $ python3 -m pip install -v sage_conf
-
-After a successful installation, a wheelhouse provides various Python packages.
-You can list the wheels using the command:
-
-            (sage-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
-
-If this gives an error saying that `sage-config` is not found, check any messages
-that the `pip install` command may have printed. You may need to adjust your `PATH`,
-for example by:
-
-            $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
-
-Now install the packages from the wheelhouse and the [sage_setup](https://pypi.org/project/sage-conf/)
-package, and finally install the Sage library:
-
-            (sage-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl sage_setup
-            (sage-venv) $ python3 -m pip install --no-build-isolation -v sagemath-standard
-
-The above instructions install the latest stable release of Sage.
-To install the latest development version instead, add the switch `--pre` to all invocations of
-`python3 -m pip install`.
-
-**NOTE:** PyPI has various other `pip`-installable packages with the word "sage" in their names.
-Some of them are maintained by the SageMath project, some are provided by SageMath users for
-various purposes, and others are entirely unrelated to SageMath. Do not use the packages
-`sage` and `sagemath`. For a curated list of packages, see the chapter
-[Packages and Features](https://doc.sagemath.org/html/en/reference/spkg/index.html) of the
-Sage Reference Manual.
 
 SageMath Docker images
 ----------------------

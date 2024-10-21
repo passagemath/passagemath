@@ -7,4 +7,8 @@ dnl To be added when ready for editable:
 -e ../sagemath-environment
 -e ../sagemath-objects
 -e ../sagemath-categories
+<<<<<<< HEAD
 -e ../sagemath-mpmath
+||||||| merged common ancestors
+=======
+>>>>>>> main

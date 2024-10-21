@@ -1,4 +1,5 @@
 ===========================================================================================================================================================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Vectors, matrices, tensors, vector spaces, affine spaces, modules and algebras, additive groups, quadratic forms, root systems, homology, coding theory, matroids
 ===========================================================================================================================================================================================================
 
@@ -21,6 +22,33 @@ About this experimental pip-installable source distribution
 -----------------------------------------------------------
 
 This pip-installable source distribution `sagemath-modules` is an experimental distribution of a part of the Sage Library.  Use at your own risk.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`).
+||||||| merged common ancestors
+=======
+ passagemath: Vectors, matrices, tensors, vector spaces, affine spaces, modules and algebras, additive groups, quadratic forms, root systems, homology, coding theory, matroids
+===========================================================================================================================================================================================================
+
+About SageMath
+--------------
+
+   "Creating a Viable Open Source Alternative to
+    Magma, Maple, Mathematica, and MATLAB"
+
+   Copyright (C) 2005-2024 The Sage Development Team
+
+   https://www.sagemath.org
+
+SageMath fully supports all major Linux distributions, recent versions of
+macOS, and Windows (Windows Subsystem for Linux).
+
+See https://doc.sagemath.org/html/en/installation/index.html
+for general installation instructions.
+
+
+About this pip-installable source distribution
+----------------------------------------------
+
+This pip-installable source distribution `sagemath-modules` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`).
+>>>>>>> main
 
 
 What is included

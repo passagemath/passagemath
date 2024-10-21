@@ -145,6 +145,7 @@ class Timer:
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: from sage.doctest.util import Timer
             sage: Timer().start().annotate(EllipticCurve)                               # needs sage.schemes
             sage: EllipticCurve.cputime  # random                                       # needs sage.schemes

@@ -1,5 +1,15 @@
 # sage_setup: distribution = sagemath-symbolics
+<<<<<<< HEAD
 
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+from sage.calculus.all__sagemath_modules import *
+||||||||| ab24dac430e
+=========
+from sage.calculus.all__sagemath_categories import *
+>>>>>>>>> Temporary merge branch 2
+=======
+>>>>>>> main
 from sage.calculus.all__sagemath_modules import *
 
 from sage.calculus import desolvers

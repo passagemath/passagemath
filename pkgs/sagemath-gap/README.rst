@@ -1,5 +1,10 @@
 =============================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Computational Group Theory with GAP
+||||||| merged common ancestors
+=======
+ passagemath: Computational Group Theory with GAP
+>>>>>>> main
 =============================================================================
 
 About SageMath

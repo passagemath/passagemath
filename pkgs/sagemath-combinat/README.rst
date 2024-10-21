@@ -1,5 +1,10 @@
 ======================================================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Algebraic combinatorics, combinatorial representation theory
+||||||| merged common ancestors
+=======
+ passagemath: Algebraic combinatorics, combinatorial representation theory
+>>>>>>> main
 ======================================================================================================
 
 About SageMath

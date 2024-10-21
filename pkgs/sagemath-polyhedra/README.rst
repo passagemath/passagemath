@@ -1,4 +1,5 @@
 ====================================================================================================================
+<<<<<<< HEAD
  Sage: Open Source Mathematics Software: Convex polyhedra in arbitrary dimension, mixed integer linear optimization
 ====================================================================================================================
 
@@ -21,6 +22,33 @@ About this experimental pip-installable source distribution
 -----------------------------------------------------------
 
 This pip-installable source distribution `sagemath-polyhedra` is an experimental distribution of a part of the Sage Library.  Use at your own risk.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`), sufficient for computations with convex polyhedra in arbitrary dimension (in exact rational arithmetic), and linear and mixed integer linear optimization (in floating point arithmetic).
+||||||| merged common ancestors
+=======
+ passagemath: Convex polyhedra in arbitrary dimension, mixed integer linear optimization
+====================================================================================================================
+
+About SageMath
+--------------
+
+   "Creating a Viable Open Source Alternative to
+    Magma, Maple, Mathematica, and MATLAB"
+
+   Copyright (C) 2005-2024 The Sage Development Team
+
+   https://www.sagemath.org
+
+SageMath fully supports all major Linux distributions, recent versions of
+macOS, and Windows (Windows Subsystem for Linux).
+
+See https://doc.sagemath.org/html/en/installation/index.html
+for general installation instructions.
+
+
+About this pip-installable source distribution
+----------------------------------------------
+
+This pip-installable source distribution `sagemath-polyhedra` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`), sufficient for computations with convex polyhedra in arbitrary dimension (in exact rational arithmetic), and linear and mixed integer linear optimization (in floating point arithmetic).
+>>>>>>> main
 
 
 What is included
