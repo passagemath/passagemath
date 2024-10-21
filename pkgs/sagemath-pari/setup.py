@@ -9,4 +9,6 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-pari'],
            required_modules=('gsl',),
-           package_data={})
+           package_data={"sage": [
+               "ext_data/pari/**",
+            ]})
