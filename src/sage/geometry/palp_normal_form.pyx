@@ -1,5 +1,5 @@
-# sage_setup: distribution = sagemath-polyhedra
-# sage.doctest: needs sage.groups
+# sage_setup: distribution = sagemath-groups
+# sage.doctest: needs sage.geometry.polyhedron sage.groups
 r"""
 PALP normal form of vertices of a lattice polytope
 """

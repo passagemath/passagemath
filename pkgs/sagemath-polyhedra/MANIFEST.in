@@ -15,6 +15,7 @@ exclude sage/geometry/toric_lattice*.p*                 # in sagemath-modules
 exclude sage/geometry/all.py
 prune sage/geometry/hyperbolic_space
 prune sage/geometry/riemannian_manifolds
+exclude sage/geometry/palp_normal_form.p*                # depends on sage.groups.perm_gps
 exclude sage/geometry/ribbon_graph.p*                    # depends on sage.groups.perm_gps
 exclude sage/geometry/integral_points_integer_dense.pyx  # depends on matrix_integer_dense (flint)
 
