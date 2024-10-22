@@ -7,8 +7,7 @@
         "ntests": 148
     },
     "sage.algebras.exterior_algebra_groebner": {
-        "failed": true,
-        "ntests": 0
+        "ntests": 67
     },
     "sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra": {
         "failed": true,
@@ -161,7 +160,6 @@
         "ntests": 328
     },
     "sage.categories.chain_complexes": {
-        "failed": true,
         "ntests": 26
     },
     "sage.categories.coalgebras": {
@@ -1390,7 +1388,6 @@
         "ntests": 78
     },
     "sage.groups.additive_abelian.additive_abelian_wrapper": {
-        "failed": true,
         "ntests": 96
     },
     "sage.groups.additive_abelian.qmodnz": {
@@ -1412,7 +1409,6 @@
         "ntests": 54
     },
     "sage.groups.generic": {
-        "failed": true,
         "ntests": 120
     },
     "sage.groups.group": {
@@ -1487,7 +1483,6 @@
         "ntests": 1
     },
     "sage.homology.homology_group": {
-        "failed": true,
         "ntests": 22
     },
     "sage.homology.homology_vector_space_with_basis": {
@@ -1497,6 +1492,7 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
+        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -1850,7 +1846,6 @@
         "ntests": 13
     },
     "sage.misc.misc": {
-        "failed": true,
         "ntests": 169
     },
     "sage.misc.misc_c": {
@@ -2010,7 +2005,6 @@
         "ntests": 905
     },
     "sage.modules.free_module_homspace": {
-        "failed": true,
         "ntests": 60
     },
     "sage.modules.free_module_integer": {
@@ -2041,7 +2035,6 @@
         "ntests": 47
     },
     "sage.modules.module_functors": {
-        "failed": true,
         "ntests": 57
     },
     "sage.modules.multi_filtered_vector_space": {
@@ -3082,7 +3075,6 @@
         "ntests": 112
     },
     "sage.tensor.modules.free_module_morphism": {
-        "failed": true,
         "ntests": 326
     },
     "sage.tensor.modules.free_module_tensor": {
