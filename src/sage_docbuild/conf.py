@@ -704,7 +704,8 @@ def add_page_context(app, pagename, templatename, context, doctree):
             # autodoc from the Python or Cython source files. Hence we tweak
             # here template context variables so that links to the correct
             # source files are generated.
-            suffix = '.py' if importlib.import_module(pagename.replace('/','.')).__file__.endswith('.py') else '.pyx'
+            f = importlib.import_module(pagename.replace('/','.')).__file__
+            suffix = '.py' if not f or f.endswith('.py') else '.pyx'
             context['page_source_suffix'] = suffix
             context['theme_source_view_link'] = os.path.join(source_repository, f'blob/develop/src', '{filename}')
             context['theme_source_edit_link'] = os.path.join(source_repository, f'edit/develop/src', '{filename}')
