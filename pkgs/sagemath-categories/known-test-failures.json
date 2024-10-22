@@ -1091,6 +1091,10 @@
     "sage.misc.banner": {
         "ntests": 12
     },
+    "sage.misc.benchmark": {
+        "failed": true,
+        "ntests": 18
+    },
     "sage.misc.binary_tree": {
         "ntests": 61
     },
@@ -1109,8 +1113,16 @@
     "sage.misc.callable_dict": {
         "ntests": 12
     },
+    "sage.misc.citation": {
+        "failed": true,
+        "ntests": 10
+    },
     "sage.misc.classcall_metaclass": {
         "ntests": 78
+    },
+    "sage.misc.classgraph": {
+        "failed": true,
+        "ntests": 8
     },
     "sage.misc.constant_function": {
         "ntests": 21
@@ -1153,6 +1165,9 @@
     "sage.misc.functional": {
         "failed": true,
         "ntests": 271
+    },
+    "sage.misc.gperftools": {
+        "ntests": 17
     },
     "sage.misc.html": {
         "failed": true,
@@ -1200,6 +1215,9 @@
     "sage.misc.map_threaded": {
         "ntests": 1
     },
+    "sage.misc.messaging": {
+        "ntests": 2
+    },
     "sage.misc.method_decorator": {
         "ntests": 13
     },
@@ -1241,8 +1259,14 @@
         "failed": true,
         "ntests": 74
     },
+    "sage.misc.python": {
+        "ntests": 7
+    },
     "sage.misc.random_testing": {
         "ntests": 18
+    },
+    "sage.misc.remote_file": {
+        "ntests": 1
     },
     "sage.misc.repr": {
         "ntests": 31
@@ -1286,6 +1310,10 @@
     "sage.misc.session": {
         "failed": true,
         "ntests": 61
+    },
+    "sage.misc.sh": {
+        "failed": true,
+        "ntests": 1
     },
     "sage.misc.stopgap": {
         "ntests": 11
