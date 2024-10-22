@@ -459,7 +459,7 @@ jobs:
         id:   sagemath-symbolics
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          venv/bin/python3 -m cibuildwheel unpacked/*sagemath*symbolics*
+          venv/bin/python3 -m cibuildwheel unpacked/*sagemath_symbolics*
 
       - name: sagemath-standard-no-symbolics
         id:   sagemath-standard-no-symbolics
