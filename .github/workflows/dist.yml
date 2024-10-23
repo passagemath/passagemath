@@ -225,7 +225,8 @@ jobs:
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
       CIBW_REPAIR_WHEEL_COMMAND_LINUX: "LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH auditwheel repair -w {dest_dir} {wheel}"
-
+      # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
+      MACOSX_DEPLOYMENT_TARGET: "13.0"
     steps:
       - uses: actions/checkout@v4
 
