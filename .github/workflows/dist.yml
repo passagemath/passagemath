@@ -209,7 +209,7 @@ jobs:
     env:
       CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
       # SPKGs to install as system packages
-      SPKGS: _bootstrap _prereq openssl curl readline libpng info ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
+      SPKGS: _bootstrap _prereq openssl curl readline liblzma libpng info ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
       TARGETS_PRE: ccache gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl libgd
       CIBW_BUILD: "*${{ matrix.build }}*"
