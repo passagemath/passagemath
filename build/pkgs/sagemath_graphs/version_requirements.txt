@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-graphs ~= 10.4.24
+passagemath-graphs ~= 10.4.25
