@@ -279,7 +279,7 @@ jobs:
         # omit sagemath-{meataxe,sirocco} for now -- needs sagemath-modules
         run: |
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
-          . ./.homebrew-build-env
+          . ./.homebrew-build-env 2> /dev/null || :
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --prefix=$HOME/runner-venv
           make cibuildwheel
           export PATH=build/bin:$PATH
