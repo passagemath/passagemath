@@ -60,10 +60,6 @@
     "sage.arith.srange": {
         "ntests": 77
     },
-    "sage.calculus.expr": {
-        "failed": true,
-        "ntests": 45
-    },
     "sage.calculus.functional": {
         "ntests": 2
     },
@@ -572,8 +568,7 @@
         "ntests": 145
     },
     "sage.categories.modules_with_basis": {
-        "failed": true,
-        "ntests": 509
+        "ntests": 496
     },
     "sage.categories.monoid_algebras": {
         "ntests": 4
@@ -1524,7 +1519,6 @@
         "ntests": 57
     },
     "sage.matrix.action": {
-        "failed": true,
         "ntests": 109
     },
     "sage.matrix.args": {
@@ -1552,7 +1546,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2075
+        "ntests": 2064
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
@@ -1579,7 +1573,7 @@
     },
     "sage.matrix.matrix_laurent_mpolynomial_dense": {
         "failed": true,
-        "ntests": 18
+        "ntests": 8
     },
     "sage.matrix.matrix_misc": {
         "ntests": 22
@@ -1589,7 +1583,7 @@
     },
     "sage.matrix.matrix_polynomial_dense": {
         "failed": true,
-        "ntests": 524
+        "ntests": 519
     },
     "sage.matrix.matrix_real_double_dense": {
         "ntests": 3
@@ -2002,7 +1996,7 @@
     },
     "sage.modules.free_module_element": {
         "failed": true,
-        "ntests": 905
+        "ntests": 897
     },
     "sage.modules.free_module_homspace": {
         "ntests": 60
@@ -2386,7 +2380,7 @@
     },
     "sage.rings.fraction_field": {
         "failed": true,
-        "ntests": 205
+        "ntests": 201
     },
     "sage.rings.fraction_field_element": {
         "failed": true,
