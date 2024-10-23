@@ -220,7 +220,7 @@ jobs:
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
       CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.13' }}
       # Environment during wheel build
-      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14' || '' }}"
+      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic $LDFLAGS\"' || '' }}"
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
