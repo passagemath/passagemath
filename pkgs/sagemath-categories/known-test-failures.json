@@ -988,7 +988,6 @@
         "ntests": 154
     },
     "sage.functions.gamma": {
-        "failed": true,
         "ntests": 140
     },
     "sage.functions.generalized": {
@@ -1364,7 +1363,6 @@
         "ntests": 86
     },
     "sage.parallel.map_reduce": {
-        "failed": true,
         "ntests": 293
     },
     "sage.parallel.multiprocessing_sage": {
@@ -1537,7 +1535,7 @@
     },
     "sage.rings.fraction_field": {
         "failed": true,
-        "ntests": 197
+        "ntests": 193
     },
     "sage.rings.fraction_field_element": {
         "failed": true,
