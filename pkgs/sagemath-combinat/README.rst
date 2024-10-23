@@ -22,7 +22,7 @@ for general installation instructions.
 About this pip-installable source distribution
 ----------------------------------------------
 
-This pip-installable source distribution `sagemath-combinat` is a distribution of a part of the Sage library.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`).
+This pip-installable source distribution ``passagemath-combinat`` is a distribution of a part of the Sage library.  It provides a small subset of the modules of the Sage library ("sagelib", ``sagemath-standard``).
 
 
 What is included
@@ -33,6 +33,18 @@ What is included
 * `Combinatorics on Words <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/words/all.html#sage-combinat-words-all>`_, `Free Monoids <https://doc.sagemath.org/html/en/reference/monoids/index.html>`_, `Automatic Semigroups <https://doc.sagemath.org/html/en/reference/monoids/sage/monoids/automatic_semigroup.html>`_
 
 * `Symmetric Functions <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/sf/all.html#sage-combinat-sf-all>`_, other `Algebras with combinatorial bases <https://doc.sagemath.org/html/en/reference/algebras/index.html>`_
+
+
+Examples
+--------
+
+```
+    >>> !pip install passagemath-combinat
+    >>> from sage.all__sagemath_combinat import *
+
+
+
+```
 
 
 Available as extras, from other distribution packages
