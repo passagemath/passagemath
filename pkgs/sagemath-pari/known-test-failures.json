@@ -1427,48 +1427,19 @@
         "ntests": 28
     },
     "sage.quadratic_forms.genera.genus": {
-        "failed": true,
-        "ntests": 529
-    },
-    "sage.quadratic_forms.qfsolve": {
-        "failed": true,
-        "ntests": 38
+        "ntests": 2
     },
     "sage.quadratic_forms.quadratic_form__automorphisms": {
-        "failed": true,
-        "ntests": 52
-    },
-    "sage.quadratic_forms.quadratic_form__genus": {
-        "failed": true,
-        "ntests": 10
-    },
-    "sage.quadratic_forms.quadratic_form__local_density_interfaces": {
-        "failed": true,
-        "ntests": 18
-    },
-    "sage.quadratic_forms.quadratic_form__local_normal_form": {
-        "failed": true,
-        "ntests": 18
-    },
-    "sage.quadratic_forms.quadratic_form__mass": {
-        "failed": true,
-        "ntests": 4
+        "ntests": 5
     },
     "sage.quadratic_forms.quadratic_form__mass__Conway_Sloane_masses": {
-        "failed": true,
-        "ntests": 59
+        "ntests": 6
     },
     "sage.quadratic_forms.quadratic_form__mass__Siegel_densities": {
-        "failed": true,
-        "ntests": 14
-    },
-    "sage.quadratic_forms.quadratic_form__siegel_product": {
-        "failed": true,
-        "ntests": 13
+        "ntests": 5
     },
     "sage.quadratic_forms.special_values": {
-        "failed": true,
-        "ntests": 21
+        "ntests": 6
     },
     "sage.repl.attach": {
         "ntests": 135
@@ -1656,7 +1627,7 @@
     },
     "sage.rings.fraction_field": {
         "failed": true,
-        "ntests": 212
+        "ntests": 208
     },
     "sage.rings.fraction_field_element": {
         "failed": true,
@@ -1805,20 +1776,8 @@
     "sage.rings.padics.padic_base_leaves": {
         "ntests": 177
     },
-    "sage.rings.padics.padic_capped_absolute_element": {
-        "ntests": 58
-    },
-    "sage.rings.padics.padic_capped_relative_element": {
-        "ntests": 80
-    },
     "sage.rings.padics.padic_extension_leaves": {
         "ntests": 72
-    },
-    "sage.rings.padics.padic_fixed_mod_element": {
-        "ntests": 63
-    },
-    "sage.rings.padics.padic_floating_point_element": {
-        "ntests": 59
     },
     "sage.rings.padics.padic_generic": {
         "ntests": 50
