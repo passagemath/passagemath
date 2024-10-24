@@ -774,7 +774,8 @@
         "ntests": 2
     },
     "sage.coding.linear_code": {
-        "ntests": 40
+        "failed": true,
+        "ntests": 0
     },
     "sage.coding.linear_code_no_metric": {
         "ntests": 2
@@ -1078,8 +1079,7 @@
         "ntests": 19
     },
     "sage.doctest.control": {
-        "failed": true,
-        "ntests": 229
+        "ntests": 3
     },
     "sage.doctest.external": {
         "ntests": 42
@@ -1089,14 +1089,14 @@
     },
     "sage.doctest.forker": {
         "failed": true,
-        "ntests": 0
+        "ntests": 381
     },
     "sage.doctest.marked_output": {
         "ntests": 21
     },
     "sage.doctest.parsing": {
         "failed": true,
-        "ntests": 275
+        "ntests": 270
     },
     "sage.doctest.reporting": {
         "ntests": 126
@@ -1404,6 +1404,7 @@
         "ntests": 54
     },
     "sage.groups.generic": {
+        "failed": true,
         "ntests": 120
     },
     "sage.groups.group": {
@@ -3037,7 +3038,6 @@
         "ntests": 150
     },
     "sage.tensor.modules.comp": {
-        "failed": true,
         "ntests": 1009
     },
     "sage.tensor.modules.ext_pow_free_module": {
@@ -3072,7 +3072,6 @@
         "ntests": 326
     },
     "sage.tensor.modules.free_module_tensor": {
-        "failed": true,
         "ntests": 638
     },
     "sage.tensor.modules.reflexive_module": {
@@ -3082,7 +3081,6 @@
         "ntests": 142
     },
     "sage.tensor.modules.tensor_free_submodule": {
-        "failed": true,
         "ntests": 104
     },
     "sage.tensor.modules.tensor_free_submodule_basis": {
