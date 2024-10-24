@@ -967,7 +967,6 @@
         "ntests": 4
     },
     "sage.features": {
-        "failed": true,
         "ntests": 146
     },
     "sage.features.all": {
@@ -1095,7 +1094,6 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "failed": true,
         "ntests": 174
     },
     "sage.features.sat": {
@@ -1196,7 +1194,6 @@
         "ntests": 13
     },
     "sage.graphs.base.boost_graph": {
-        "failed": true,
         "ntests": 205
     },
     "sage.graphs.base.c_graph": {
@@ -1253,7 +1250,6 @@
         "ntests": 580
     },
     "sage.graphs.convexity_properties": {
-        "failed": true,
         "ntests": 67
     },
     "sage.graphs.digraph": {
@@ -1279,7 +1275,6 @@
         "ntests": 101
     },
     "sage.graphs.generators.basic": {
-        "failed": true,
         "ntests": 97
     },
     "sage.graphs.generators.chessboard": {
@@ -1337,7 +1332,6 @@
         "ntests": 1129
     },
     "sage.graphs.graph_coloring": {
-        "failed": true,
         "ntests": 151
     },
     "sage.graphs.graph_database": {
@@ -1376,7 +1370,6 @@
         "ntests": 131
     },
     "sage.graphs.graph_decompositions.tree_decomposition": {
-        "failed": true,
         "ntests": 273
     },
     "sage.graphs.graph_decompositions.vertex_separation": {
@@ -1388,14 +1381,12 @@
         "ntests": 8
     },
     "sage.graphs.graph_generators": {
-        "failed": true,
         "ntests": 166
     },
     "sage.graphs.graph_generators_pyx": {
         "ntests": 7
     },
     "sage.graphs.graph_input": {
-        "failed": true,
         "ntests": 61
     },
     "sage.graphs.graph_latex": {
@@ -1437,7 +1428,6 @@
         "ntests": 249
     },
     "sage.graphs.orientations": {
-        "failed": true,
         "ntests": 71
     },
     "sage.graphs.partial_cube": {
@@ -1445,7 +1435,6 @@
         "ntests": 14
     },
     "sage.graphs.path_enumeration": {
-        "failed": true,
         "ntests": 267
     },
     "sage.graphs.planarity": {
@@ -1472,7 +1461,6 @@
         "ntests": 251
     },
     "sage.graphs.traversals": {
-        "failed": true,
         "ntests": 222
     },
     "sage.graphs.trees": {

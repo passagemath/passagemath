@@ -1297,7 +1297,6 @@
         "ntests": 4
     },
     "sage.features": {
-        "failed": true,
         "ntests": 146
     },
     "sage.features.all": {
@@ -1425,7 +1424,6 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "failed": true,
         "ntests": 181
     },
     "sage.features.sat": {
@@ -1544,7 +1542,6 @@
         "ntests": 13
     },
     "sage.graphs.base.boost_graph": {
-        "failed": true,
         "ntests": 205
     },
     "sage.graphs.base.c_graph": {
@@ -1601,7 +1598,6 @@
         "ntests": 580
     },
     "sage.graphs.convexity_properties": {
-        "failed": true,
         "ntests": 67
     },
     "sage.graphs.digraph": {
@@ -1609,7 +1605,6 @@
         "ntests": 565
     },
     "sage.graphs.digraph_generators": {
-        "failed": true,
         "ntests": 137
     },
     "sage.graphs.distances_all_pairs": {
@@ -1627,7 +1622,6 @@
         "ntests": 101
     },
     "sage.graphs.generators.basic": {
-        "failed": true,
         "ntests": 97
     },
     "sage.graphs.generators.chessboard": {
@@ -1686,7 +1680,6 @@
         "ntests": 1209
     },
     "sage.graphs.graph_coloring": {
-        "failed": true,
         "ntests": 151
     },
     "sage.graphs.graph_database": {
@@ -1725,7 +1718,6 @@
         "ntests": 131
     },
     "sage.graphs.graph_decompositions.tree_decomposition": {
-        "failed": true,
         "ntests": 273
     },
     "sage.graphs.graph_decompositions.vertex_separation": {
@@ -1744,7 +1736,6 @@
         "ntests": 7
     },
     "sage.graphs.graph_input": {
-        "failed": true,
         "ntests": 61
     },
     "sage.graphs.graph_latex": {
@@ -1786,7 +1777,6 @@
         "ntests": 249
     },
     "sage.graphs.orientations": {
-        "failed": true,
         "ntests": 71
     },
     "sage.graphs.partial_cube": {
@@ -1794,7 +1784,6 @@
         "ntests": 14
     },
     "sage.graphs.path_enumeration": {
-        "failed": true,
         "ntests": 267
     },
     "sage.graphs.planarity": {
@@ -1821,7 +1810,6 @@
         "ntests": 254
     },
     "sage.graphs.traversals": {
-        "failed": true,
         "ntests": 222
     },
     "sage.graphs.trees": {
@@ -2033,14 +2021,12 @@
         "ntests": 109
     },
     "sage.matrix.args": {
-        "failed": true,
         "ntests": 160
     },
     "sage.matrix.berlekamp_massey": {
         "ntests": 7
     },
     "sage.matrix.constructor": {
-        "failed": true,
         "ntests": 131
     },
     "sage.matrix.docs": {
@@ -2134,11 +2120,9 @@
         "ntests": 1
     },
     "sage.matroids.basis_exchange_matroid": {
-        "failed": true,
         "ntests": 186
     },
     "sage.matroids.basis_matroid": {
-        "failed": true,
         "ntests": 150
     },
     "sage.matroids.circuit_closures_matroid": {
@@ -2162,7 +2146,6 @@
         "ntests": 632
     },
     "sage.matroids.dual_matroid": {
-        "failed": true,
         "ntests": 92
     },
     "sage.matroids.extension": {
@@ -2200,11 +2183,9 @@
         "ntests": 40
     },
     "sage.matroids.unpickling": {
-        "failed": true,
         "ntests": 64
     },
     "sage.matroids.utilities": {
-        "failed": true,
         "ntests": 72
     },
     "sage.misc.abstract_method": {
