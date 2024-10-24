@@ -10,7 +10,7 @@ It is a fork of [SageMath](https://www.sagemath.org/), created in October 2024 w
 * establishing first-class membership in the scientific Python ecosystem,
 * giving [clear attribution of upstream projects](https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ),
 * inviting collaborations with upstream projects,
-* [maintaining a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ/m/Tq17YRqOAAAJ),
+* [maintaining a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ),
 * developing a port to [Pyodide](https://pyodide.org/en/stable/) for serverless deployment with Javascript,
 * developing a native Windows port.
 
@@ -31,8 +31,12 @@ for example `~/passagemath-venv/`:
             $ python3 -m venv ~/passagemath-venv
             $ source ~/passagemath-venv/bin/activate
 
-The following instructions are for installation from PyPI. If you want to build from
-a local clone of the passagemath repository instead, use the following command first.
+Next, if you want to build from PyPI, use the following command:
+
+            passagemath $ export SAGE_CONF_TARGETS=build
+
+If you want to build from a local clone of the passagemath repository instead,
+use the following command first.
 
             passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
             passagemath $ export SAGE_CONF_TARGETS=build-local
@@ -289,21 +293,17 @@ in the Installation Guide.
     - Clone the passagemath git repository:
 
             $ git clone -c core.symlinks=true --filter blob:none  \
-                        --origin upstream --branch develop --tags \
+                        --origin passagemath \
                         https://github.com/passagemath/passagemath.git
 
-      This command obtains the most recent development release.
-      Replace `--branch develop` by `--branch master` to select
-      the most recent stable release instead.
-
-      This will create the subdirectory `~/sage/sage`. (See the section
+      This will create the subdirectory `~/sage/passagemath`. (See the section
       [Setting up git](https://doc.sagemath.org/html/en/developer/git_setup.html)
       and the following sections in the Sage Developer's Guide
       for more information.)
 
     - Change into the created subdirectory:
 
-            $ cd sage
+            $ cd passagemath
 
     - [Windows] The Sage source tree contains symbolic links, and the
       build will not work if Windows line endings rather than UNIX
