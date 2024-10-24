@@ -773,8 +773,7 @@
         "ntests": 19
     },
     "sage.doctest.control": {
-        "failed": true,
-        "ntests": 229
+        "ntests": 3
     },
     "sage.doctest.external": {
         "ntests": 42
@@ -784,7 +783,7 @@
     },
     "sage.doctest.forker": {
         "failed": true,
-        "ntests": 0
+        "ntests": 366
     },
     "sage.doctest.marked_output": {
         "failed": true,
@@ -792,7 +791,7 @@
     },
     "sage.doctest.parsing": {
         "failed": true,
-        "ntests": 275
+        "ntests": 270
     },
     "sage.doctest.reporting": {
         "ntests": 126
@@ -1537,7 +1536,7 @@
     },
     "sage.rings.fraction_field": {
         "failed": true,
-        "ntests": 197
+        "ntests": 193
     },
     "sage.rings.fraction_field_element": {
         "failed": true,
