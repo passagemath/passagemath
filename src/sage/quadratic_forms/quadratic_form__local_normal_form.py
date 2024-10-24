@@ -1,9 +1,5 @@
 # sage_setup: distribution = sagemath-pari
-<<<<<<< HEAD
 # sage.doctest: needs sage.libs.pari sage.modules
-||||||| merged common ancestors
-=======
->>>>>>> main
 """
 Local Normal Form
 """

@@ -22,13 +22,12 @@ development of SageMath, and hence of passagemath.
 Full installation
 -----------------
 
-For installing the project in a Python environment, passagemath provides the
-`pip`-installable package [passagemath-standard](https://pypi.org/project/passagemath-standard/).
-
 Unless you need to install passagemath into a specific existing environment, we recommend
 to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.12.x),
 for example `~/passagemath-venv/`:
 
+            $ python3 --version
+            Python 3.12.7
             $ python3 -m venv ~/passagemath-venv
             $ source ~/passagemath-venv/bin/activate
 
@@ -38,7 +37,7 @@ a local clone of the passagemath repository instead, use the following command f
             passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
             passagemath $ export SAGE_CONF_TARGETS=build-local
 
-As the first installation step, install [passagemath-conf](https://pypi.org/project/passagemath-conf/),
+As the first installation step, install [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf),
 which builds various prerequisite non-Python packages in a subdirectory of `~/.sage/`.
 The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
 
@@ -55,10 +54,16 @@ for example by:
 
             $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
 
-Now install the packages from the wheelhouse and the [passagemath-setup](https://pypi.org/project/passagemath-setup/)
-package, and finally install the Sage library:
+Now install the packages from the wheelhouse:
 
-            (passagemath-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl passagemath-setup
+            (passagemath-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl
+
+Next, install the [![PyPI: passagemath-setup](https://img.shields.io/pypi/v/passagemath-setup.svg?label=passagemath-setup)](https://pypi.python.org/pypi/passagemath-setup) package:
+
+            (passagemath-venv) $ python3 -m pip install passagemath-setup
+
+Finally, install the Sage library from the package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard):
+
             (passagemath-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
 
 The above instructions install the latest stable release of passagemath.
@@ -70,39 +75,58 @@ Modularized distributions
 
 The passagemath library is provided by a number of distributions (pip-installable packages).
 
-**Distributions named after a basic mathematical structure:** The packages may also cover a wide range of generalizations/applications of the structure after which they are named. Users who work in a specialized research area will, of course, recognize what structures they need. The down-to-earth naming also creates discoverability by a broader audience. Not many more distribution packages than these 7 are needed:
-- [![PyPI: passagemath-combinat](https://img.shields.io/pypi/v/passagemath-combinat.svg?label=passagemath-combinat)](https://pypi.python.org/pypi/passagemath-combinat): provides "everything combinatorial", except for graphs.
-- [![PyPI: passagemath-graphs](https://img.shields.io/pypi/v/passagemath-graphs.svg?label=passagemath-graphs)](https://pypi.python.org/pypi/passagemath-graphs): also provides posets, combinatorial designs, abstract simplicial complexes, quivers, etc.
-- [![PyPI: passagemath-groups](https://img.shields.io/pypi/v/passagemath-groups.svg?label=passagemath-groups)](https://pypi.python.org/pypi/passagemath-groups)
-- [![PyPI: passagemath-modules](https://img.shields.io/pypi/v/passagemath-modules.svg?label=passagemath-modules)](https://pypi.python.org/pypi/passagemath-modules): also has matrices, tensors, homology, coding theory, etc.
-- [![PyPI: passagemath-polyhedra](https://img.shields.io/pypi/v/passagemath-polyhedra.svg?label=passagemath-polyhedra)](https://pypi.python.org/pypi/passagemath-polyhedra): also provides fans, hyperplane arrangements, polyhedral complexes, linear and mixed-integer optimization, lattice point sets, and toric varieties
-- [![PyPI: passagemath-schemes](https://img.shields.io/pypi/v/passagemath-schemes.svg?label=passagemath-schemes)](https://pypi.python.org/pypi/passagemath-schemes)
-- [![PyPI: passagemath-symbolics](https://img.shields.io/pypi/v/passagemath-symbolics.svg?label=passagemath-symbolics)](https://pypi.python.org/pypi/passagemath-symbolics): symbolic expressions and symbolic calculus
 
-**Distributions named after a third-party non-Python dependency:** This makes technical sense because the dependencies will be localized to this distribution package, but it also helps give **attribution and visibility** to these libraries and projects that Sage depends on.
+### Distributions named after a basic mathematical structure
+
+The packages may also cover a wide range of generalizations/applications of the structure after which they are named. Users who work in a specialized research area will, of course, recognize what structures they need. The down-to-earth naming also creates discoverability by a broader audience. Not many more distribution packages than these 7 are needed:
+
+[![PyPI: passagemath-combinat](https://img.shields.io/pypi/v/passagemath-combinat.svg?label=passagemath-combinat)](https://pypi.python.org/pypi/passagemath-combinat) provides "everything combinatorial", except for graphs. It provides the functionality of [SYMMETRICA](http://www.algorithm.uni-bayreuth.de/en/research/SYMMETRICA), the library for representation theory of the symmetric group, combinatorics of tableaux, symmetric functions, etc.
+
+[![PyPI: passagemath-graphs](https://img.shields.io/pypi/v/passagemath-graphs.svg?label=passagemath-graphs)](https://pypi.python.org/pypi/passagemath-graphs) provides directed and undirected graphs, but also posets, combinatorial designs, abstract simplicial complexes, quivers, etc.  It uses the [Boost Graph Library](https://github.com/boostorg/graph), with additional functionality from [NetworkX](https://networkx.github.io/) and several other libraries.
+
+[![PyPI: passagemath-groups](https://img.shields.io/pypi/v/passagemath-groups.svg?label=passagemath-groups)](https://pypi.python.org/pypi/passagemath-groups) provides groups and invariant theory.
+
+[![PyPI: passagemath-modules](https://img.shields.io/pypi/v/passagemath-modules.svg?label=passagemath-modules)](https://pypi.python.org/pypi/passagemath-modules) provides vector spaces, modules, matrices, tensors, homology, coding theory, abelian groups, etc.
+
+[![PyPI: passagemath-polyhedra](https://img.shields.io/pypi/v/passagemath-polyhedra.svg?label=passagemath-polyhedra)](https://pypi.python.org/pypi/passagemath-polyhedra) provides convex polyhedra in arbitrary dimension on the basis of the [Parma Polyhedra Library](https://www.bugseng.com/ppl), but also provides fans, hyperplane arrangements, polyhedral complexes, linear and mixed-integer optimization, lattice point sets, and toric varieties.
+
+[![PyPI: passagemath-schemes](https://img.shields.io/pypi/v/passagemath-schemes.svg?label=passagemath-schemes)](https://pypi.python.org/pypi/passagemath-schemes) provides algebraic varieties, schemes, elliptic curves, modular forms, etc.
+
+[![PyPI: passagemath-symbolics](https://img.shields.io/pypi/v/passagemath-symbolics.svg?label=passagemath-symbolics)](https://pypi.python.org/pypi/passagemath-symbolics) provides symbolic expressions implemented in Pynac, a fork of [GiNaC](https://www.ginac.de/), symbolic calculus using [Maxima](http://maxima.sourceforge.net), and interfaces to various other symbolic software systems including [SymPy](https://www.sympy.org/en/index.html), as well as differential geometry (SageManifolds).
+
+### Distributions named after a third-party non-Python dependency
+
+This makes technical sense because the dependencies will be localized to this distribution package, but it also helps give **attribution and visibility** to these libraries and projects that Sage depends on.
    | Standard packages | Optional Packages |
    | :---------------- | :---------------- |
-   | [![PyPI: passagemath-flint](https://img.shields.io/pypi/v/passagemath-flint.svg?label=passagemath-flint)](https://pypi.python.org/pypi/passagemath-flint) | [![PyPI: passagemath-bliss](https://img.shields.io/pypi/v/passagemath-bliss.svg?label=passagemath-bliss)](https://pypi.python.org/pypi/passagemath-bliss)  |
-   | [![PyPI: passagemath-gap](https://img.shields.io/pypi/v/passagemath-gap.svg?label=passagemath-gap)](https://pypi.python.org/pypi/passagemath-gap) | [![PyPI: passagemath-brial](https://img.shields.io/pypi/v/passagemath-brial.svg?label=passagemath-brial)](https://pypi.python.org/pypi/passagemath-brial) |
-   | [![PyPI: passagemath-glpk](https://img.shields.io/pypi/v/passagemath-glpk.svg?label=passagemath-glpk)](https://pypi.python.org/pypi/passagemath-glpk) | [![PyPI: passagemath-coxeter3](https://img.shields.io/pypi/v/passagemath-coxeter3.svg?label=passagemath-coxeter3)](https://pypi.python.org/pypi/passagemath-coxeter3)  |
-   | [![PyPI: passagemath-giac](https://img.shields.io/pypi/v/passagemath-giac.svg?label=passagemath-giac)](https://pypi.python.org/pypi/passagemath-giac) | [![PyPI: passagemath-mcqd](https://img.shields.io/pypi/v/passagemath-mcqd.svg?label=passagemath-mcqd)](https://pypi.python.org/pypi/passagemath-mcqd)  |
-   | [![PyPI: passagemath-homfly](https://img.shields.io/pypi/v/passagemath-homfly.svg?label=passagemath-homfly)](https://pypi.python.org/pypi/passagemath-homfly) | [![PyPI: passagemath-meataxe](https://img.shields.io/pypi/v/passagemath-meataxe.svg?label=passagemath-meataxe)](https://pypi.python.org/pypi/passagemath-meataxe)  |
-   | [![PyPI: passagemath-lcalc](https://img.shields.io/pypi/v/passagemath-lcalc.svg?label=passagemath-lcalc)](https://pypi.python.org/pypi/passagemath-lcalc) | [![PyPI: passagemath-sirocco](https://img.shields.io/pypi/v/passagemath-sirocco.svg?label=passagemath-sirocco)](https://pypi.python.org/pypi/passagemath-sirocco) |
-   | [![PyPI: passagemath-libbraiding](https://img.shields.io/pypi/v/passagemath-libbraiding.svg?label=passagemath-libbraiding)](https://pypi.python.org/pypi/passagemath-libbraiding) | [![PyPI: passagemath-tdlib](https://img.shields.io/pypi/v/passagemath-tdlib.svg?label=passagemath-tdlib)](https://pypi.python.org/pypi/passagemath-tdlib) |
-   | [![PyPI: passagemath-libecm](https://img.shields.io/pypi/v/passagemath-libecm.svg?label=passagemath-libecm)](https://pypi.python.org/pypi/passagemath-libecm) |
+   | [![PyPI: passagemath-flint](https://img.shields.io/pypi/v/passagemath-flint.svg?label=passagemath-flint)](https://pypi.python.org/pypi/passagemath-flint) provides modules depending on [FLINT](https://flintlib.org), the Fast Library for Number Theory.| [![PyPI: passagemath-bliss](https://img.shields.io/pypi/v/passagemath-bliss.svg?label=passagemath-bliss)](https://pypi.python.org/pypi/passagemath-bliss) provides the functionality of [bliss](https://users.aalto.fi/~tjunttil/bliss/index.html), a tool for computing automorphism groups and canonical forms of graphs. |
+   | [![PyPI: passagemath-gap](https://img.shields.io/pypi/v/passagemath-gap.svg?label=passagemath-gap)](https://pypi.python.org/pypi/passagemath-gap) provides modules depending on [GAP](https://www.gap-system.org), the system for computational discrete algebra with particular emphasis on Computational Group Theory. | [![PyPI: passagemath-brial](https://img.shields.io/pypi/v/passagemath-brial.svg?label=passagemath-brial)](https://pypi.python.org/pypi/passagemath-brial) provides the functionality of [BRiAl](https://github.com/BRiAl/BRiAl), a Boolean Ring Algebra implementation using binary decision diagrams, the successor to PolyBoRi. |
+   | [![PyPI: passagemath-giac](https://img.shields.io/pypi/v/passagemath-giac.svg?label=passagemath-giac)](https://pypi.python.org/pypi/passagemath-giac) provides the functionality of [Giac](http://www-fourier.ujf-grenoble.fr/~parisse/giac.html), a general purpose computer algebra system. | [![PyPI: passagemath-coxeter3](https://img.shields.io/pypi/v/passagemath-coxeter3.svg?label=passagemath-coxeter3)](https://pypi.python.org/pypi/passagemath-coxeter3)  |
+   | [![PyPI: passagemath-glpk](https://img.shields.io/pypi/v/passagemath-glpk.svg?label=passagemath-glpk)](https://pypi.python.org/pypi/passagemath-glpk) provides a mixed integer linear optimization backend using [GLPK](http://www.gnu.org/software/glpk), the GNU Linear Programming Kit. | [![PyPI: passagemath-mcqd](https://img.shields.io/pypi/v/passagemath-mcqd.svg?label=passagemath-mcqd)](https://pypi.python.org/pypi/passagemath-mcqd)  |
+   | [![PyPI: passagemath-homfly](https://img.shields.io/pypi/v/passagemath-homfly.svg?label=passagemath-homfly)](https://pypi.python.org/pypi/passagemath-homfly) provides the functionality of [libhomfly](https://github.com/miguelmarco/libhomfly), the library to compute the homfly polynomial of knots and links. | [![PyPI: passagemath-meataxe](https://img.shields.io/pypi/v/passagemath-meataxe.svg?label=passagemath-meataxe)](https://pypi.python.org/pypi/passagemath-meataxe)  |
+   | [![PyPI: passagemath-lcalc](https://img.shields.io/pypi/v/passagemath-lcalc.svg?label=passagemath-lcalc)](https://pypi.python.org/pypi/passagemath-lcalc) provides the functionality of [lcalc](http://oto.math.uwaterloo.ca/~mrubinst/L_function_public/L.html), the L-function calculator. | [![PyPI: passagemath-sirocco](https://img.shields.io/pypi/v/passagemath-sirocco.svg?label=passagemath-sirocco)](https://pypi.python.org/pypi/passagemath-sirocco) |
+   | [![PyPI: passagemath-libbraiding](https://img.shields.io/pypi/v/passagemath-libbraiding.svg?label=passagemath-libbraiding)](https://pypi.python.org/pypi/passagemath-libbraiding) provides the functionality of libbraiding, the library to compute several properties of braids, including centralizer and conjugacy check. | [![PyPI: passagemath-tdlib](https://img.shields.io/pypi/v/passagemath-tdlib.svg?label=passagemath-tdlib)](https://pypi.python.org/pypi/passagemath-tdlib) provides the functionality of [treedec](https://gitlab.com/freetdi/treedec), algorithms concerning tree decompositions of graphs. |
+   | [![PyPI: passagemath-libecm](https://img.shields.io/pypi/v/passagemath-libecm.svg?label=passagemath-libecm)](https://pypi.python.org/pypi/passagemath-libecm) provides the functionality of [GMP-ECM](https://gitlab.inria.fr/zimmerma/ecm), the elliptic curve method for integer factorization. |
    | [![PyPI: passagemath-linbox](https://img.shields.io/pypi/v/passagemath-linbox.svg?label=passagemath-linbox)](https://pypi.python.org/pypi/passagemath-linbox) |
-   | [![PyPI: passagemath-ntl](https://img.shields.io/pypi/v/passagemath-ntl.svg?label=passagemath-ntl)](https://pypi.python.org/pypi/passagemath-ntl) |
-   | [![PyPI: passagemath-pari](https://img.shields.io/pypi/v/passagemath-pari.svg?label=passagemath-pari)](https://pypi.python.org/pypi/passagemath-pari) |
-   | [![PyPI: passagemath-singular](https://img.shields.io/pypi/v/passagemath-singular.svg?label=passagemath-singular)](https://pypi.python.org/pypi/passagemath-singular) |
+   | [![PyPI: passagemath-ntl](https://img.shields.io/pypi/v/passagemath-ntl.svg?label=passagemath-ntl)](https://pypi.python.org/pypi/passagemath-ntl) provides the functionality of [NTL](http://www.shoup.net/ntl/), a library for doing number theory. |
+   | [![PyPI: passagemath-pari](https://img.shields.io/pypi/v/passagemath-pari.svg?label=passagemath-pari)](https://pypi.python.org/pypi/passagemath-pari) provides the functionality of [PARI/GP](http://pari.math.u-bordeaux.fr/), the computer algebra system for fast computations in number theory. |
+   | [![PyPI: passagemath-singular](https://img.shields.io/pypi/v/passagemath-singular.svg?label=passagemath-singular)](https://pypi.python.org/pypi/passagemath-singular) provides functionality from [Singular](https://www.singular.uni-kl.de/), the computer algebra system for polynomial computations, algebraic geometry, singularity theory. |
 
-**Distributions named after a technical functionality:**
-- [![PyPI: passagemath-objects](https://img.shields.io/pypi/v/passagemath-objects.svg?label=passagemath-objects)](https://pypi.python.org/pypi/passagemath-objects): Sage extends Python's object system by dynamic   mix-in classes that are driven by categories and axioms. It is loosely   modeled on concepts of category theory and inspired by   Scratchpad/Axiom/FriCAS, Magma, and MuPAD. This distribution package makes Sage objects, the element/parent framework, basic categories and functors,   the coercion system and the related metaclasses available.
-- [![PyPI: passagemath-categories](https://img.shields.io/pypi/v/passagemath-categories.svg?label=passagemath-categories)](https://pypi.python.org/pypi/passagemath-categories): This distribution package contains the full set of categories defined by Sage, as well as basic mathematical objects such as integers and rational numbers, a basic implementation of polynomials, and affine spaces.  None of this brings in additional dependencies.
-- [![PyPI: passagemath-environment](https://img.shields.io/pypi/v/passagemath-environment.svg?label=passagemath-environment)](https://pypi.python.org/pypi/passagemath-environment)
-- [![PyPI: passagemath-plot](https://img.shields.io/pypi/v/passagemath-plot.svg?label=passagemath-plot)](https://pypi.python.org/pypi/passagemath-plot): Plotting facilities, depending on matplotlib.
-- [![PyPI: passagemath-repl](https://img.shields.io/pypi/v/passagemath-repl.svg?label=passagemath-repl)](https://pypi.python.org/pypi/passagemath-repl): The top-level interactive environment with the preparser that defines the surface language of Sage. This distribution also includes the doctesting facilities, as the doctests are written in the surface language.
-- [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard): Everything as provided by a standard installation of the Sage distribution. This is reduced to an empty meta-package.
-- [![PyPI: passagemath-standard-no-symbolics](https://img.shields.io/pypi/v/passagemath-standard-no-symbolics.svg?label=passagemath-standard-no-symbolics)](https://pypi.python.org/pypi/passagemath-standard-no-symbolics)
+### Distributions named after a technical functionality
+
+[![PyPI: passagemath-objects](https://img.shields.io/pypi/v/passagemath-objects.svg?label=passagemath-objects)](https://pypi.python.org/pypi/passagemath-objects) Sage extends Python's object system by dynamic   mix-in classes that are driven by categories and axioms. It is loosely   modeled on concepts of category theory and inspired by   Scratchpad/Axiom/FriCAS, Magma, and MuPAD. This distribution package makes Sage objects, the element/parent framework, basic categories and functors,   the coercion system and the related metaclasses available. It only depends on the basic arithmetic libraries [GMP](http://gmplib.org), [MPFR](http://mpfr.org/), [MPC](https://www.multiprecision.org/mpc), on the Cython interface [gmpy2](https://pypi.org/project/gmpy2/) to these libraries, and on  [cysignals](https://github.com/sagemath/cysignals).
+
+[![PyPI: passagemath-categories](https://img.shields.io/pypi/v/passagemath-categories.svg?label=passagemath-categories)](https://pypi.python.org/pypi/passagemath-categories) This distribution package contains the full set of categories defined by Sage, as well as basic mathematical objects such as integers and rational numbers, a basic implementation of polynomials, and affine spaces.  None of this brings in additional dependencies.
+
+[![PyPI: passagemath-environment](https://img.shields.io/pypi/v/passagemath-environment.svg?label=passagemath-environment)](https://pypi.python.org/pypi/passagemath-environment) provides the `sage` script for launching the Sage REPL and accessing various developer tools and modules that provide the connection to the system and software environment.
+
+[![PyPI: passagemath-plot](https://img.shields.io/pypi/v/passagemath-plot.svg?label=passagemath-plot)](https://pypi.python.org/pypi/passagemath-plot) Plotting facilities, depending on [matplotlib](https://matplotlib.org).
+
+[![PyPI: passagemath-repl](https://img.shields.io/pypi/v/passagemath-repl.svg?label=passagemath-repl)](https://pypi.python.org/pypi/passagemath-repl) The top-level interactive environment with the preparser that defines the surface language of Sage. This distribution also includes the doctesting facilities, as the doctests are written in the surface language.
+
+[![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard) Everything as provided by a standard installation of the Sage distribution. This is reduced to an empty meta-package.
+
+[![PyPI: passagemath-standard-no-symbolics](https://img.shields.io/pypi/v/passagemath-standard-no-symbolics.svg?label=passagemath-standard-no-symbolics)](https://pypi.python.org/pypi/passagemath-standard-no-symbolics)
 
 
 Table of Contents
@@ -128,9 +152,9 @@ Getting Started
 
 Those who are impatient may use prebuilt Sage available online from any of
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sagemath/sage-binder-env/master
-) &nbsp; [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/sagemath/sage/tree/master
-) &nbsp; [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-black?logo=github)](https://codespaces.new/sagemath/sage/tree/master)
+<!-- [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sagemath/sage-binder-env/master
+) &nbsp; --->[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/passagemath/passagemath/tree/main
+) &nbsp; [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-black?logo=github)](https://codespaces.new/passagemath/passagemath/tree/main)
 
 without local installation. Otherwise read on.
 
@@ -158,7 +182,7 @@ virtualization).
 
 Detailed information on supported platforms for a specific version of Sage
 can be found in the section _Availability and installation help_ of the
-[release tour for this version](https://github.com/sagemath/sage/releases).
+[release notes for this version](https://github.com/passagemath/passagemath/releases).
 
 We highly appreciate contributions to Sage that fix portability bugs
 and help port Sage to new platforms; let us know at the [sage-devel
@@ -262,11 +286,11 @@ in the Installation Guide.
             $ mkdir -p ~/sage
             $ cd ~/sage
 
-    - Clone the Sage git repository:
+    - Clone the passagemath git repository:
 
             $ git clone -c core.symlinks=true --filter blob:none  \
                         --origin upstream --branch develop --tags \
-                        https://github.com/sagemath/sage.git
+                        https://github.com/passagemath/passagemath.git
 
       This command obtains the most recent development release.
       Replace `--branch develop` by `--branch master` to select
@@ -517,24 +541,12 @@ in the Installation Guide.
     [Launching SageMath](https://doc.sagemath.org/html/en/installation/launching.html)
     in the Sage Installation Guide.
 
-SageMath Docker images
-----------------------
-
-[![Docker Status](http://dockeri.co/image/sagemath/sagemath)](https://hub.docker.com/r/sagemath/sagemath)
-
-SageMath is available on Docker Hub and can be downloaded by:
-``` bash
-docker pull sagemath/sagemath
-```
-
-Currently, only stable versions are kept up to date.
-
 Troubleshooting
 ---------------
 
 If you have problems building Sage, check the Sage Installation Guide,
 as well as the version-specific installation help in the [release
-tour](https://github.com/sagemath/sage/releases) corresponding to the
+tour](https://github.com/passagemath/passagemath/releases) corresponding to the
 version that you are installing.
 
 Please do not hesitate to ask for help in the [SageMath forum

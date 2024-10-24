@@ -26,7 +26,9 @@ description = "Sage: Open Source Mathematics Software: Computer algebra, algebra
     SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_ntl
     SPKG_INSTALL_REQUIRES_sagemath_flint
+    SPKG_INSTALL_REQUIRES_sagemath_linbox
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_cysignals
@@ -47,6 +49,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_sagemath_flint
+    SPKG_INSTALL_REQUIRES_sagemath_linbox
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'

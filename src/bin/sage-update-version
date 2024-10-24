@@ -113,7 +113,7 @@ SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.beta*/}
 SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.dev*/}
 SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.post*/}
 SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.rc*/}
-( echo "${REPO}/releases/download/$SAGE_MINOR_VERSION/"
+( echo "${REPO}/releases/download/passagemath-$SAGE_MINOR_VERSION/"
   sed '/^#/d' "${UPSTREAM_D_FILE}"
 ) | uniq | head -n 3 > "${UPSTREAM_D_FILE}.tmp"
 ( cat <<EOF
@@ -125,7 +125,7 @@ EOF
 rm -f "${UPSTREAM_D_FILE}.tmp"
 
 # Regenerate auto-generated files tarball
-"$SAGE_ROOT/bootstrap" -s
+#"$SAGE_ROOT/bootstrap" -s
 
 # Create CITATION file for Zenodo-GitHub integration
 export SAGE_VERSION

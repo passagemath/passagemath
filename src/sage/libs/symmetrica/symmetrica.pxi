@@ -1,10 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
-<<<<<<< HEAD
 # sage.doctest: needs sage.combinat sage.modules
 
-||||||| merged common ancestors
-=======
->>>>>>> main
 # We put all definitions together, whether they appear in def.h or
 # macro.h
 cdef extern from 'symmetrica/def.h':

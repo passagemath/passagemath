@@ -1,9 +1,5 @@
 # sage_setup: distribution = sagemath-pari
-<<<<<<< HEAD
 # sage.doctest: needs sage.rings.padics
-||||||| merged common ancestors
-=======
->>>>>>> main
 """
 `p`-adic Capped Relative Elements
 

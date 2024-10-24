@@ -1,11 +1,5 @@
 # sage_setup: distribution = sagemath-pari
-<<<<<<< HEAD
 # sage.doctest: needs sage.libs.pari sage.modules
-||||||| merged common ancestors
-# sage.doctest: needs sage.libs.pari
-=======
-# sage.doctest: needs sage.libs.pari
->>>>>>> main
 """
 Solving quadratic equations
 

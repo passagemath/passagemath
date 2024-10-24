@@ -1,10 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
-<<<<<<< HEAD
 # sage.doctest: needs sage.combinat sage.modules
 
-||||||| merged common ancestors
-=======
->>>>>>> main
 cdef extern from 'symmetrica/def.h':
     INT outerproduct_schur(OP parta, OP partb, OP result)
     INT dimension_schur(OP a, OP result)

@@ -1,9 +1,5 @@
 # sage_setup: distribution = sagemath-flint
-<<<<<<< HEAD
 # sage.doctest: needs sage.graphs
-||||||| merged common ancestors
-=======
->>>>>>> main
 """
 Path algebra elements
 

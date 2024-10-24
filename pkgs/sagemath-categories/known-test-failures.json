@@ -966,15 +966,7 @@
         "ntests": 19
     },
     "sage.doctest.control": {
-<<<<<<< HEAD
-        "ntests": 2
-||||||| merged common ancestors
-        "failed": true,
-        "ntests": 0
-=======
-        "failed": true,
-        "ntests": 229
->>>>>>> main
+        "ntests": 3
     },
     "sage.doctest.external": {
         "ntests": 42
@@ -984,19 +976,7 @@
     },
     "sage.doctest.forker": {
         "failed": true,
-<<<<<<< HEAD
-        "ntests": 386
-||||||| merged common ancestors
-<<<<<<<<< Temporary merge branch 1
-        "ntests": 433
-||||||||| ab24dac430e
-        "ntests": 413
-=========
-        "ntests": 414
->>>>>>>>> Temporary merge branch 2
-=======
-        "ntests": 0
->>>>>>> main
+        "ntests": 366
     },
     "sage.doctest.marked_output": {
         "failed": true,
@@ -1004,19 +984,7 @@
     },
     "sage.doctest.parsing": {
         "failed": true,
-<<<<<<< HEAD
-        "ntests": 303
-||||||| merged common ancestors
-<<<<<<<<< Temporary merge branch 1
-        "ntests": 321
-||||||||| 79c047c0a22
-        "ntests": 313
-=========
-        "ntests": 275
->>>>>>>>> Temporary merge branch 2
-=======
-        "ntests": 275
->>>>>>> main
+        "ntests": 270
     },
     "sage.doctest.reporting": {
 <<<<<<< HEAD
@@ -1429,6 +1397,10 @@
     "sage.misc.banner": {
         "ntests": 12
     },
+    "sage.misc.benchmark": {
+        "failed": true,
+        "ntests": 18
+    },
     "sage.misc.binary_tree": {
         "ntests": 61
     },
@@ -1447,8 +1419,16 @@
     "sage.misc.callable_dict": {
         "ntests": 12
     },
+    "sage.misc.citation": {
+        "failed": true,
+        "ntests": 10
+    },
     "sage.misc.classcall_metaclass": {
         "ntests": 78
+    },
+    "sage.misc.classgraph": {
+        "failed": true,
+        "ntests": 8
     },
     "sage.misc.constant_function": {
         "ntests": 21
@@ -1509,6 +1489,9 @@
     "sage.misc.globals": {
         "ntests": 39
     },
+    "sage.misc.gperftools": {
+        "ntests": 17
+    },
     "sage.misc.html": {
         "failed": true,
         "ntests": 64
@@ -1555,6 +1538,9 @@
     "sage.misc.map_threaded": {
         "ntests": 1
     },
+    "sage.misc.messaging": {
+        "ntests": 2
+    },
     "sage.misc.method_decorator": {
         "ntests": 13
     },
@@ -1596,8 +1582,14 @@
     "sage.misc.prandom": {
         "ntests": 74
     },
+    "sage.misc.python": {
+        "ntests": 7
+    },
     "sage.misc.random_testing": {
         "ntests": 18
+    },
+    "sage.misc.remote_file": {
+        "ntests": 1
     },
     "sage.misc.repr": {
         "ntests": 31
@@ -1653,6 +1645,10 @@
 =======
         "ntests": 61
 >>>>>>> main
+    },
+    "sage.misc.sh": {
+        "failed": true,
+        "ntests": 1
     },
     "sage.misc.stopgap": {
         "ntests": 11
@@ -1906,7 +1902,7 @@
     },
     "sage.rings.fraction_field": {
         "failed": true,
-        "ntests": 197
+        "ntests": 193
     },
     "sage.rings.fraction_field_element": {
         "failed": true,

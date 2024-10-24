@@ -25,6 +25,8 @@ prune sage/groups/perm_gps
 exclude sage/groups/*gap*.p*
 exclude sage/groups/galois_group_perm.p*
 
+include           sage/geometry/palp_normal_form.p*
+
 global-exclude all__sagemath_*.py
 global-include all__sagemath_groups.py
 

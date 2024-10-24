@@ -31,6 +31,7 @@ description = "Sage: Open Source Mathematics Software: Elliptic curves over the 
     SPKG_INSTALL_REQUIRES_sagemath_linbox
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_sagemath_ntl
+    SPKG_INSTALL_REQUIRES_sagemath_flint
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_memory_allocator

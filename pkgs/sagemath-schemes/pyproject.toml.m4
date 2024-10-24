@@ -92,6 +92,8 @@ standard        = ["sagemath-schemes[toric,padics,NumberField,FiniteField,flint,
     SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_modules
+    SPKG_INSTALL_REQUIRES_sagemath_polyhedra
+    SPKG_INSTALL_REQUIRES_sagemath_flint
     SPKG_INSTALL_REQUIRES_scipy
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_gmpy2
@@ -109,6 +111,8 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_scipy
     SPKG_INSTALL_REQUIRES_sagemath_modules
+    SPKG_INSTALL_REQUIRES_sagemath_flint
+    SPKG_INSTALL_REQUIRES_sagemath_polyhedra
     SPKG_INSTALL_REQUIRES_sagemath_singular
 ]
 dynamic = ["version"]

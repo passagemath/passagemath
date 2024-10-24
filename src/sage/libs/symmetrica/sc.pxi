@@ -1,10 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
-<<<<<<< HEAD
 # sage.doctest: needs sage.combinat sage.modules
 
-||||||| merged common ancestors
-=======
->>>>>>> main
 cdef extern from 'symmetrica/def.h':
     INT chartafel(OP degree, OP result)
     INT charvalue(OP irred, OP cls, OP result, OP table)

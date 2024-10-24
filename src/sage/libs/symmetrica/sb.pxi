@@ -1,10 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
-<<<<<<< HEAD
 # sage.doctest: needs sage.combinat sage.modules
 
-||||||| merged common ancestors
-=======
->>>>>>> main
 cdef extern from 'symmetrica/def.h':
     INT mult_schubert_schubert(OP a, OP b, OP result)
     INT m_perm_sch(OP a, OP b)

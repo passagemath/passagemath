@@ -16221,6 +16221,7 @@ cdef class Matrix(Matrix1):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y,z> = QQ[]
             sage: M = matrix(R, [[2*x-z, 0, y-z^2, 1], [0, z - y, z - x, 0],[z - y, x^2 - y, 0, 0]])
             sage: M
@@ -18862,6 +18863,7 @@ def _matrix_power_symbolic(A, n):
     Check if :issue:`36838` is fixed:Checking symbolic power of
     nilpotent matrix::
 
+        sage: # needs sage.symbolic
         sage: A = matrix([[0,1],[0,0]]); A
         [0 1]
         [0 0]

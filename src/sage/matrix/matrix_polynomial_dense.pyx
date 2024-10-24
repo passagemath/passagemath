@@ -4395,6 +4395,7 @@ cdef class Matrix_polynomial_dense(Matrix_generic_dense):
             [    0     1     0]
             [    0     0 1/2*x]
 
+            sage: # needs sage.rings.number_field
             sage: field.<a> = NumberField(x**2 - 2)
             sage: ring.<y> = field[]
             sage: mat = matrix([[3*a*y - 1, (-8*a - 1)*y - 2*a + 1]])

@@ -1,9 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
-<<<<<<< HEAD
 # sage.doctest: needs sage.combinat sage.modules
-||||||| merged common ancestors
-=======
->>>>>>> main
 r"""
 Family Games America's Quantumino solver
 

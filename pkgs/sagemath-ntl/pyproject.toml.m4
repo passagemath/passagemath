@@ -76,7 +76,6 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [tool.setuptools]
-packages = ["sage.libs.ntl"]
 include-package-data = false
 >>>>>>> main
 
