@@ -31,8 +31,12 @@ for example `~/passagemath-venv/`:
             $ python3 -m venv ~/passagemath-venv
             $ source ~/passagemath-venv/bin/activate
 
-The following instructions are for installation from PyPI. If you want to build from
-a local clone of the passagemath repository instead, use the following command first.
+Next, if you want to build from PyPI, use the following command:
+
+            passagemath $ export SAGE_CONF_TARGETS=build
+
+If you want to build from a local clone of the passagemath repository instead,
+use the following command first.
 
             passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
             passagemath $ export SAGE_CONF_TARGETS=build-local
