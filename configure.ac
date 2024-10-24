@@ -484,7 +484,7 @@ AC_ARG_ENABLE([doc],
 AC_ARG_ENABLE([sagelib],
   AS_HELP_STRING([--disable-sagelib],
                  [disable build of the Sage library and packages depending on it]), [
-    for pkg in sagelib sage_docbuild sage_setup; do
+    for pkg in sagelib sage_docbuild sage_setup sagemath_bliss sagemath_brial sagemath_categories sagemath_cmr sagemath_combinat sagemath_coxeter3 sagemath_doc_html sagemath_doc_pdf sagemath_eclib sagemath_environment sagemath_flint sagemath_gap sagemath_giac sagemath_glpk sagemath_graphs sagemath_groups sagemath_homfly sagemath_lcalc sagemath_libbraiding sagemath_libecm sagemath_linbox sagemath_mcqd sagemath_meataxe sagemath_modules sagemath_mpmath sagemath_ntl sagemath_objects sagemath_pari sagemath_plot sagemath_polyhedra sagemath_repl sagemath_schemes sagemath_singular sagemath_sirocco sagemath_standard_no_symbolics sagemath_symbolics sagemath_tdlib; do
       AS_VAR_SET([SAGE_ENABLE_$pkg], [$enableval])
     done
   ])
