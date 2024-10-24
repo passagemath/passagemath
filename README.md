@@ -289,21 +289,17 @@ in the Installation Guide.
     - Clone the passagemath git repository:
 
             $ git clone -c core.symlinks=true --filter blob:none  \
-                        --origin upstream --branch develop --tags \
+                        --origin passagemath \
                         https://github.com/passagemath/passagemath.git
 
-      This command obtains the most recent development release.
-      Replace `--branch develop` by `--branch master` to select
-      the most recent stable release instead.
-
-      This will create the subdirectory `~/sage/sage`. (See the section
+      This will create the subdirectory `~/sage/passagemath`. (See the section
       [Setting up git](https://doc.sagemath.org/html/en/developer/git_setup.html)
       and the following sections in the Sage Developer's Guide
       for more information.)
 
     - Change into the created subdirectory:
 
-            $ cd sage
+            $ cd passagemath
 
     - [Windows] The Sage source tree contains symbolic links, and the
       build will not work if Windows line endings rather than UNIX
