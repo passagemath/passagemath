@@ -40,6 +40,22 @@ What is included
 
 * `Interactive Simplex Method <https://doc.sagemath.org/html/en/reference/numerical/sage/numerical/interactive_simplex_method.html>`_
 
+* see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-polyhedra/MANIFEST.in
+
+
+Examples
+--------
+
+A quick way to try it out interactively:
+
+```
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[test]" IPython
+```
+
+```
+    In [1]: from sage.all__sagemath_polyhedra import *
+```
+
 
 Available as extras, from other distributions
 ---------------------------------------------
@@ -87,3 +103,16 @@ Optional backends for optimization:
 `pip install "sagemath-polyhedra[scip]"`
  `SCIP <https://doc.sagemath.org/html/en/reference/spkg/scip.html#spkg-scip>`_ Mixed Integer Optimization solver,
  via `PySCIPOpt <https://doc.sagemath.org/html/en/reference/spkg/pyscipopt.html#spkg-pyscipopt>`_
+
+
+Development
+-----------
+
+```
+    $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
+    $ cd passagemath
+    passagemath $ ./bootstrap
+    passagemath $ python3 -m venv polyhedra-venv
+    passagemath $ source polyhedra-venv/bin/activate
+    (polyhedra-venv) passagemath $ pip install -v -e pkgs/sagemath-polyhedra
+```
