@@ -34,6 +34,8 @@ What is included
 
 * `Symmetric Functions <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/sf/all.html#sage-combinat-sf-all>`_, other `Algebras with combinatorial bases <https://doc.sagemath.org/html/en/reference/algebras/index.html>`_
 
+* see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-combinat/MANIFEST.in
+
 
 Examples
 --------
@@ -46,9 +48,8 @@ A quick way to try it out interactively:
 
 ```
     In [1]: from sage.all__sagemath_combinat import *
-
-
-
+    In [2]: RowStandardTableaux([3,2,1]).cardinality()
+    Out[2]: 60
 ```
 
 
@@ -63,3 +64,16 @@ Available as extras, from other distribution packages
 
 * `sagemath-polyhedra <https://pypi.org/project/sagemath-polyhedra>`_:
   Polyhedra, lattice points, hyperplane arrangements
+
+
+Development
+-----------
+
+```
+    $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
+    $ cd passagemath
+    passagemath $ ./bootstrap
+    passagemath $ python3 -m venv combinat-venv
+    passagemath $ source combinat-venv/bin/activate
+    (combinat-venv) passagemath $ pip install -v -e pkgs/sagemath-combinat
+```
