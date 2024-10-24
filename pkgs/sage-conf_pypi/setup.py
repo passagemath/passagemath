@@ -91,16 +91,17 @@ class build_py(setuptools_build_py):
             shutil.copyfile(os.path.join(SAGE_ROOT, 'src', 'bin', 'sage-env-config'),
                             os.path.join(HERE, 'bin', 'sage-env-config'))
 
-            # Here we run "make build" -- which builds everything except for sagelib because we
-            # used configure --disable-sagelib
-            # Alternative:
-            # "make build-local" only builds the non-Python packages of the Sage distribution.
-            # It still makes an (empty) venv in SAGE_VENV, which is unused by default;
-            # but then a user could use "make build-venv" to build compatible wheels for all Python packages.
-            # TODO: A target to only build wheels of tricky packages
-            # (that use native libraries shared with other packages).
+            # Here we run "make base-toolchain"
+            # Alternatives:
+            # - "make build" -- which builds everything except for sagelib because we
+            #   used configure --disable-sagelib
+            # - "make build-local" only builds the non-Python packages of the Sage distribution.
+            #   It still makes an (empty) venv in SAGE_VENV, which is unused by default;
+            #   but then a user could use "make build-venv" to build compatible wheels for all Python packages.
+            # - TODO: A target to only build wheels of tricky packages
+            #   (that use native libraries shared with other packages).
             SETMAKE = 'if [ -z "$MAKE" ]; then export MAKE="make -j$(PATH=build/bin:$PATH build/bin/sage-build-num-threads | cut -d" " -f 2)"; fi'
-            TARGETS = 'build'
+            TARGETS = 'base'
             cmd = f'cd {SAGE_ROOT} && ({SETENV}; {SETMAKE} && $MAKE V=0 ${{SAGE_CONF_TARGETS-{TARGETS}}})'
             print(f"Running {cmd}", flush=True)
             if os.system(cmd) != 0:
