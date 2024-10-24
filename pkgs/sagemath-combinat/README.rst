@@ -56,13 +56,13 @@ A quick way to try it out interactively:
 Available as extras, from other distribution packages
 -----------------------------------------------------
 
-* `sagemath-graphs <https://pypi.org/project/sagemath-graphs>`_:
+* `passagemath-graphs <https://pypi.org/project/passagemath-graphs>`_:
   Graphs, posets, finite state machines, combinatorial designs, incidence structures, quivers
 
-* `sagemath-modules <https://pypi.org/project/sagemath-modules>`_:
+* `passagemath-modules <https://pypi.org/project/passagemath-modules>`_:
   Modules and algebras, root systems, coding theory
 
-* `sagemath-polyhedra <https://pypi.org/project/sagemath-polyhedra>`_:
+* `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra>`_:
   Polyhedra, lattice points, hyperplane arrangements
 
 
