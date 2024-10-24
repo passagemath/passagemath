@@ -38,9 +38,14 @@ What is included
 Examples
 --------
 
+A quick way to try it out interactively:
+
 ```
-    >>> !pip install passagemath-combinat
-    >>> from sage.all__sagemath_combinat import *
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-combinat[test]" IPython
+```
+
+```
+    In [1]: from sage.all__sagemath_combinat import *
 
 
 
