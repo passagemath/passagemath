@@ -31,7 +31,9 @@ Methods
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from sage.combinat.partitions import AccelAsc_next
+from sage.misc.lazy_import import lazy_import
+
+lazy_import('sage.combinat.partitions', 'AccelAsc_next')
 
 
 class CoTree:
