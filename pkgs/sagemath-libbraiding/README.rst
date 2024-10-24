@@ -25,3 +25,21 @@ About this pip-installable source distribution
 This pip-installable source distribution ``sagemath-libbraiding`` provides
 an interface to libbraiding, a library to compute several properties of braids,
 including centralizer and conjugacy check.
+
+
+Examples
+--------
+
+
+
+Development
+-----------
+
+```
+    $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
+    $ cd passagemath
+    passagemath $ ./bootstrap
+    passagemath $ python3 -m venv libbraiding-venv
+    passagemath $ source libbraiding-venv/bin/activate
+    (libbraiding-venv) passagemath $ pip install -v -e pkgs/sagemath-libbraiding
+```
