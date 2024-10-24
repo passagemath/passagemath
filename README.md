@@ -10,7 +10,7 @@ It is a fork of [SageMath](https://www.sagemath.org/), created in October 2024 w
 * establishing first-class membership in the scientific Python ecosystem,
 * giving [clear attribution of upstream projects](https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ),
 * inviting collaborations with upstream projects,
-* [maintaining a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ/m/Tq17YRqOAAAJ),
+* [maintaining a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ),
 * developing a port to [Pyodide](https://pyodide.org/en/stable/) for serverless deployment with Javascript,
 * developing a native Windows port.
 
