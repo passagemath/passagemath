@@ -972,11 +972,9 @@
         "ntests": 36
     },
     "sage.combinat.designs.subhypergraph_search": {
-        "failed": true,
         "ntests": 12
     },
     "sage.combinat.designs.twographs": {
-        "failed": true,
         "ntests": 33
     },
     "sage.combinat.dlx": {
@@ -1217,7 +1215,6 @@
         "ntests": 281
     },
     "sage.combinat.subsets_hereditary": {
-        "failed": true,
         "ntests": 16
     },
     "sage.combinat.subsets_pairwise": {
@@ -1635,21 +1632,18 @@
         "ntests": 3
     },
     "sage.graphs.asteroidal_triples": {
-        "failed": true,
         "ntests": 13
     },
     "sage.graphs.base.boost_graph": {
         "ntests": 205
     },
     "sage.graphs.base.c_graph": {
-        "failed": true,
         "ntests": 773
     },
     "sage.graphs.base.dense_graph": {
         "ntests": 86
     },
     "sage.graphs.base.graph_backends": {
-        "failed": true,
         "ntests": 85
     },
     "sage.graphs.base.overview": {
@@ -1659,11 +1653,9 @@
         "ntests": 133
     },
     "sage.graphs.base.static_dense_graph": {
-        "failed": true,
         "ntests": 110
     },
     "sage.graphs.base.static_sparse_backend": {
-        "failed": true,
         "ntests": 181
     },
     "sage.graphs.base.static_sparse_graph": {
@@ -1675,19 +1667,12 @@
         "ntests": 424
     },
     "sage.graphs.centrality": {
-        "failed": true,
         "ntests": 31
     },
     "sage.graphs.cliquer": {
-        "failed": true,
         "ntests": 34
     },
-    "sage.graphs.cographs": {
-        "failed": true,
-        "ntests": 44
-    },
     "sage.graphs.comparability": {
-        "failed": true,
         "ntests": 52
     },
     "sage.graphs.connectivity": {
@@ -1705,7 +1690,6 @@
         "ntests": 137
     },
     "sage.graphs.distances_all_pairs": {
-        "failed": true,
         "ntests": 165
     },
     "sage.graphs.domination": {
@@ -1722,11 +1706,9 @@
         "ntests": 97
     },
     "sage.graphs.generators.chessboard": {
-        "failed": true,
         "ntests": 42
     },
     "sage.graphs.generators.classical_geometries": {
-        "failed": true,
         "ntests": 60
     },
     "sage.graphs.generators.degree_sequence": {
@@ -1741,11 +1723,9 @@
         "ntests": 382
     },
     "sage.graphs.generators.intersection": {
-        "failed": true,
         "ntests": 72
     },
     "sage.graphs.generators.platonic_solids": {
-        "failed": true,
         "ntests": 6
     },
     "sage.graphs.generators.random": {
@@ -1757,7 +1737,6 @@
         "ntests": 444
     },
     "sage.graphs.generators.world_map": {
-        "failed": true,
         "ntests": 20
     },
     "sage.graphs.generic_graph": {
@@ -1765,11 +1744,9 @@
         "ntests": 3695
     },
     "sage.graphs.generic_graph_pyx": {
-        "failed": true,
         "ntests": 139
     },
     "sage.graphs.genus": {
-        "failed": true,
         "ntests": 51
     },
     "sage.graphs.graph": {
@@ -1784,30 +1761,24 @@
         "ntests": 50
     },
     "sage.graphs.graph_decompositions.bandwidth": {
-        "failed": true,
         "ntests": 14
     },
     "sage.graphs.graph_decompositions.clique_separators": {
-        "failed": true,
         "ntests": 68
     },
     "sage.graphs.graph_decompositions.cutwidth": {
-        "failed": true,
         "ntests": 63
     },
     "sage.graphs.graph_decompositions.fast_digraph": {
         "ntests": 11
     },
     "sage.graphs.graph_decompositions.graph_products": {
-        "failed": true,
         "ntests": 48
     },
     "sage.graphs.graph_decompositions.modular_decomposition": {
-        "failed": true,
         "ntests": 151
     },
     "sage.graphs.graph_decompositions.rankwidth": {
-        "failed": true,
         "ntests": 23
     },
     "sage.graphs.graph_decompositions.slice_decomposition": {
@@ -1818,11 +1789,9 @@
         "ntests": 273
     },
     "sage.graphs.graph_decompositions.vertex_separation": {
-        "failed": true,
         "ntests": 176
     },
     "sage.graphs.graph_editor": {
-        "failed": true,
         "ntests": 8
     },
     "sage.graphs.graph_generators": {
@@ -1842,14 +1811,12 @@
         "ntests": 58
     },
     "sage.graphs.hyperbolicity": {
-        "failed": true,
         "ntests": 68
     },
     "sage.graphs.hypergraph_generators": {
         "ntests": 23
     },
     "sage.graphs.independent_sets": {
-        "failed": true,
         "ntests": 56
     },
     "sage.graphs.isgci": {
@@ -1857,15 +1824,12 @@
         "ntests": 83
     },
     "sage.graphs.isoperimetric_inequalities": {
-        "failed": true,
         "ntests": 25
     },
     "sage.graphs.line_graph": {
-        "failed": true,
         "ntests": 40
     },
     "sage.graphs.lovasz_theta": {
-        "failed": true,
         "ntests": 5
     },
     "sage.graphs.matching": {
@@ -1876,25 +1840,21 @@
         "ntests": 71
     },
     "sage.graphs.partial_cube": {
-        "failed": true,
         "ntests": 14
     },
     "sage.graphs.path_enumeration": {
         "ntests": 267
     },
     "sage.graphs.planarity": {
-        "failed": true,
         "ntests": 6
     },
     "sage.graphs.pq_trees": {
         "ntests": 90
     },
     "sage.graphs.print_graphs": {
-        "failed": true,
         "ntests": 12
     },
     "sage.graphs.schnyder": {
-        "failed": true,
         "ntests": 103
     },
     "sage.graphs.spanning_tree": {
@@ -1912,15 +1872,12 @@
         "ntests": 25
     },
     "sage.graphs.tutte_polynomial": {
-        "failed": true,
         "ntests": 109
     },
     "sage.graphs.views": {
-        "failed": true,
         "ntests": 206
     },
     "sage.graphs.weakly_chordal": {
-        "failed": true,
         "ntests": 33
     },
     "sage.groups.abelian_gps.abelian_group": {
@@ -2022,8 +1979,7 @@
         "ntests": 75
     },
     "sage.groups.perm_gps.partn_ref.refinement_graphs": {
-        "failed": true,
-        "ntests": 0
+        "ntests": 110
     },
     "sage.groups.perm_gps.partn_ref.refinement_lists": {
         "ntests": 3
@@ -2439,7 +2395,6 @@
         "ntests": 11
     },
     "sage.misc.latex_standalone": {
-        "failed": true,
         "ntests": 237
     },
     "sage.misc.lazy_attribute": {
@@ -2527,7 +2482,6 @@
         "ntests": 29
     },
     "sage.misc.rest_index_of_methods": {
-        "failed": true,
         "ntests": 27
     },
     "sage.misc.sage_eval": {
@@ -3735,7 +3689,6 @@
         "ntests": 397
     },
     "sage.sets.set_from_iterator": {
-        "failed": true,
         "ntests": 197
     },
     "sage.sets.totally_ordered_finite_set": {
