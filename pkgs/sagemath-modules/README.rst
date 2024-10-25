@@ -112,3 +112,16 @@ Available as extras, from other distributions
 
 `pip install "sagemath-modules[standard]"`
  All related features as in a standard installation of SageMath
+
+
+Development
+-----------
+
+```
+    $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
+    $ cd passagemath
+    passagemath $ ./bootstrap
+    passagemath $ python3 -m venv modules-venv
+    passagemath $ source modules-venv/bin/activate
+    (modules-venv) passagemath $ pip install -v -e pkgs/sagemath-modules
+```
