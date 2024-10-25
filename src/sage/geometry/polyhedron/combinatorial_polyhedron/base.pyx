@@ -89,7 +89,6 @@ from cysignals.memory cimport check_calloc, sig_free
 
 import sage.geometry.abc
 
-from sage.rings.integer             import Integer
 from sage.structure.element         import Matrix
 from sage.matrix.matrix_dense      cimport Matrix_dense
 from sage.misc.misc                 import is_iterator
@@ -1151,7 +1150,7 @@ cdef class CombinatorialPolyhedron(SageObject):
                 try:
                     # To be consistent with ``Polyhedron_base``,
                     for i in range(self.n_Hrepresentation()):
-                        incidence_matrix.set_unsafe_si(0, i, 1)
+                        incidence_matrix.set_unsafe_int(0, i, 1)
                 except AttributeError:
                     for i in range(self.n_Hrepresentation()):
                         incidence_matrix[0, i] = 1
@@ -1165,7 +1164,7 @@ cdef class CombinatorialPolyhedron(SageObject):
             try:
                 for Hindex in range(n_facets, n_facets + n_equations):
                     for Vindex in range(self.n_Vrepresentation()):
-                        incidence_matrix.set_unsafe_si(Vindex, Hindex, 1)
+                        incidence_matrix.set_unsafe_int(Vindex, Hindex, 1)
             except AttributeError:
                 for Hindex in range(n_facets, n_facets + n_equations):
                     for Vindex in range(self.n_Vrepresentation()):
@@ -1176,7 +1175,7 @@ cdef class CombinatorialPolyhedron(SageObject):
             Hindex = facet.ambient_H_indices()[0]
             try:
                 for Vindex in facet.ambient_V_indices():
-                    incidence_matrix.set_unsafe_si(Vindex, Hindex, 1)
+                    incidence_matrix.set_unsafe_int(Vindex, Hindex, 1)
             except AttributeError:
                 for Vindex in facet.ambient_V_indices():
                     incidence_matrix[Vindex, Hindex] = 1
@@ -1365,11 +1364,16 @@ cdef class CombinatorialPolyhedron(SageObject):
         cdef size_t i, first, second
 
         self._compute_edges(self._algorithm_to_dual(algorithm))
-        for i in range(self._edges.length):
-            first = self._edges.get(i).first
-            second = self._edges.get(i).second
-            adjacency_matrix.set_unsafe_int(first, second, 1)
-            adjacency_matrix.set_unsafe_int(second, first, 1)
+        try:
+            for i in range(self._edges.length):
+                first = self._edges.get(i).first
+                second = self._edges.get(i).second
+                adjacency_matrix.set_unsafe_int(first, second, 1)
+                adjacency_matrix.set_unsafe_int(second, first, 1)
+        except AttributeError:
+                first = self._edges.get(i).first
+                second = self._edges.get(i).second
+                adjacency_matrix[first, second] = adjacency_matrix[second, first] = 1
         adjacency_matrix.set_immutable()
         return adjacency_matrix
 
@@ -1535,11 +1539,17 @@ cdef class CombinatorialPolyhedron(SageObject):
         cdef size_t i
 
         self._compute_ridges(self._algorithm_to_dual(algorithm))
-        for i in range(self._ridges.length):
-            first = self._ridges.get(i).first
-            second = self._ridges.get(i).second
-            adjacency_matrix.set_unsafe_int(first, second, 1)
-            adjacency_matrix.set_unsafe_int(second, first, 1)
+        try:
+            for i in range(self._ridges.length):
+                first = self._ridges.get(i).first
+                second = self._ridges.get(i).second
+                adjacency_matrix.set_unsafe_int(first, second, 1)
+                adjacency_matrix.set_unsafe_int(second, first, 1)
+        except AttributeError:
+            for i in range(self._ridges.length):
+                first = self._ridges.get(i).first
+                second = self._ridges.get(i).second
+                adjacency_matrix[first, second] = adjacency_matrix[second, first] = 1
         adjacency_matrix.set_immutable()
         return adjacency_matrix
 
@@ -2656,7 +2666,7 @@ cdef class CombinatorialPolyhedron(SageObject):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.groups sage.rings.number_field
             sage: P = polytopes.dodecahedron()
             sage: C = CombinatorialPolyhedron(P)
             sage: C.meet_of_Hrep(0)
