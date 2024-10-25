@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
-# sage.doctest: optional - pplpy
+# sage.doctest: needs pplpy
 """
 PPL Backend
 
