@@ -1617,53 +1617,42 @@
         "ntests": 186
     },
     "sage.matroids.basis_matroid": {
-        "failed": true,
         "ntests": 150
     },
     "sage.matroids.circuit_closures_matroid": {
-        "failed": true,
-        "ntests": 86
+        "ntests": 74
     },
     "sage.matroids.circuits_matroid": {
-        "failed": true,
-        "ntests": 119
+        "ntests": 107
     },
     "sage.matroids.constructor": {
-        "failed": true,
-        "ntests": 154
+        "ntests": 135
     },
     "sage.matroids.database_collections": {
-        "failed": true,
-        "ntests": 10
+        "ntests": 2
     },
     "sage.matroids.database_matroids": {
-        "failed": true,
-        "ntests": 617
+        "ntests": 424
     },
     "sage.matroids.dual_matroid": {
-        "failed": true,
         "ntests": 77
     },
     "sage.matroids.extension": {
         "ntests": 48
     },
     "sage.matroids.flats_matroid": {
-        "failed": true,
-        "ntests": 107
+        "ntests": 1
     },
     "sage.matroids.linear_matroid": {
-        "failed": true,
-        "ntests": 633
+        "ntests": 621
     },
     "sage.matroids.matroid": {
-        "failed": true,
-        "ntests": 980
+        "ntests": 930
     },
     "sage.matroids.matroids_plot_helpers": {
         "ntests": 22
     },
     "sage.matroids.minor_matroid": {
-        "failed": true,
         "ntests": 73
     },
     "sage.matroids.rank_matroid": {
@@ -1676,8 +1665,7 @@
         "ntests": 40
     },
     "sage.matroids.unpickling": {
-        "failed": true,
-        "ntests": 64
+        "ntests": 61
     },
     "sage.matroids.utilities": {
         "ntests": 61
