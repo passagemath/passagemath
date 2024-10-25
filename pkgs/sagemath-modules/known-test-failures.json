@@ -10,7 +10,6 @@
         "ntests": 67
     },
     "sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra": {
-        "failed": true,
         "ntests": 167
     },
     "sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra_element": {
@@ -308,7 +307,6 @@
         "ntests": 14
     },
     "sage.categories.facade_sets": {
-        "failed": true,
         "ntests": 27
     },
     "sage.categories.fields": {
@@ -774,8 +772,7 @@
         "ntests": 2
     },
     "sage.coding.linear_code": {
-        "failed": true,
-        "ntests": 0
+        "ntests": 40
     },
     "sage.coding.linear_code_no_metric": {
         "ntests": 2
@@ -832,7 +829,6 @@
         "ntests": 13
     },
     "sage.combinat.permutation": {
-        "failed": true,
         "ntests": 1195
     },
     "sage.combinat.permutation_cython": {
@@ -1404,7 +1400,6 @@
         "ntests": 54
     },
     "sage.groups.generic": {
-        "failed": true,
         "ntests": 120
     },
     "sage.groups.group": {
@@ -1562,14 +1557,12 @@
         "ntests": 8
     },
     "sage.matrix.matrix_double_sparse": {
-        "failed": true,
         "ntests": 25
     },
     "sage.matrix.matrix_generic_dense": {
         "ntests": 51
     },
     "sage.matrix.matrix_generic_sparse": {
-        "failed": true,
         "ntests": 91
     },
     "sage.matrix.matrix_laurent_mpolynomial_dense": {
@@ -1594,7 +1587,6 @@
         "ntests": 445
     },
     "sage.matrix.matrix_sparse": {
-        "failed": true,
         "ntests": 159
     },
     "sage.matrix.misc_mpfr": {
@@ -2187,7 +2179,6 @@
         "ntests": 69
     },
     "sage.quadratic_forms.quadratic_form__theta": {
-        "failed": true,
         "ntests": 18
     },
     "sage.quadratic_forms.quadratic_form__variable_substitutions": {
@@ -2343,7 +2334,6 @@
         "ntests": 34
     },
     "sage.rings.derivation": {
-        "failed": true,
         "ntests": 392
     },
     "sage.rings.factorint": {
@@ -2385,7 +2375,7 @@
     },
     "sage.rings.fraction_field_element": {
         "failed": true,
-        "ntests": 198
+        "ntests": 0
     },
     "sage.rings.function_field.constructor": {
         "ntests": 34
@@ -2448,7 +2438,6 @@
         "ntests": 37
     },
     "sage.rings.ideal": {
-        "failed": true,
         "ntests": 340
     },
     "sage.rings.ideal_monoid": {
@@ -2533,7 +2522,6 @@
         "ntests": 133
     },
     "sage.rings.polynomial.ideal": {
-        "failed": true,
         "ntests": 13
     },
     "sage.rings.polynomial.infinite_polynomial_element": {
@@ -2605,7 +2593,6 @@
         "ntests": 1907
     },
     "sage.rings.polynomial.polynomial_element_generic": {
-        "failed": true,
         "ntests": 198
     },
     "sage.rings.polynomial.polynomial_quotient_ring": {
@@ -2619,7 +2606,6 @@
         "ntests": 128
     },
     "sage.rings.polynomial.polynomial_ring": {
-        "failed": true,
         "ntests": 409
     },
     "sage.rings.polynomial.polynomial_ring_constructor": {
@@ -2710,7 +2696,6 @@
         "ntests": 1017
     },
     "sage.rings.ring": {
-        "failed": true,
         "ntests": 206
     },
     "sage.rings.ring_extension": {
@@ -2821,14 +2806,12 @@
         "ntests": 376
     },
     "sage.schemes.projective.projective_subscheme": {
-        "failed": true,
         "ntests": 240
     },
     "sage.sets.cartesian_product": {
         "ntests": 54
     },
     "sage.sets.condition_set": {
-        "failed": true,
         "ntests": 53
     },
     "sage.sets.disjoint_set": {
@@ -2874,7 +2857,6 @@
         "ntests": 336
     },
     "sage.sets.set": {
-        "failed": true,
         "ntests": 367
     },
     "sage.sets.set_from_iterator": {
@@ -2917,7 +2899,6 @@
         "ntests": 163
     },
     "sage.structure.coerce": {
-        "failed": true,
         "ntests": 339
     },
     "sage.structure.coerce_actions": {
@@ -2940,7 +2921,6 @@
         "ntests": 658
     },
     "sage.structure.element.pxd": {
-        "failed": true,
         "ntests": 23
     },
     "sage.structure.element_wrapper": {
@@ -2984,7 +2964,6 @@
         "ntests": 11
     },
     "sage.structure.parent": {
-        "failed": true,
         "ntests": 315
     },
     "sage.structure.parent_gens": {
