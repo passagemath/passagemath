@@ -1,9 +1,4 @@
 # sage_setup: distribution = sagemath-flint
-<<<<<<< HEAD
-
-||||||| merged common ancestors
-=======
->>>>>>> main
 from cypari2.gen cimport Gen as pari_gen
 from sage.libs.flint.types cimport fmpz_poly_t
 from sage.rings.padics.qadic_flint_FP cimport FPElement

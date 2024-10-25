@@ -1,9 +1,4 @@
 # sage_setup: distribution = sagemath-flint
-<<<<<<< HEAD
-
-||||||| merged common ancestors
-=======
->>>>>>> main
 ###############################################################################
 #          Copyright (C) 2010 Sebastian Pancratz <sfp@pancratz.org>           #
 #                                                                             #

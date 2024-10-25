@@ -876,7 +876,6 @@ cdef class PuiseuxSeries(AlgebraElement):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.finite_rings
             sage: P.<y> = PolynomialRing(GF(5))
             sage: R.<x> = PuiseuxSeriesRing(P)
             sage: p = 3*y*x**(-2/3) + 2*y**2*x**(1/5); p
@@ -950,7 +949,6 @@ cdef class PuiseuxSeries(AlgebraElement):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.finite_rings
             sage: R.<x> = PuiseuxSeriesRing(GF(3))
             sage: p = (x**(-1/3) + 2*x**3)**2; p
             x^(-2/3) + x^(8/3) + x^6
