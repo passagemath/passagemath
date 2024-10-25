@@ -344,6 +344,7 @@ def Matroid(groundset=None, data=None, **kwds):
         Given a dictionary of flats indexed by their rank, we get a
         :class:`FlatsMatroid <sage.matroids.flats_matroid.FlatsMatroid>`::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(flats={0: [''], 1: ['a', 'b'], 2: ['ab']})
             sage: M.is_isomorphic(matroids.Uniform(2, 2)) and M.is_valid()
             True
@@ -355,6 +356,7 @@ def Matroid(groundset=None, data=None, **kwds):
         time-consuming, but after it's done we benefit from some faster methods
         (e.g., :meth:`is_valid() <sage.matroids.flats_matroid.FlatsMatroid.is_valid>`)::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(flats=['', 'a', 'b', 'ab'])
             sage: for i in range(M.rank() + 1):  # print flats by rank
             ....:     print(f'{i}: {sorted([sorted(F) for F in M.flats(i)], key=str)}')
@@ -368,6 +370,7 @@ def Matroid(groundset=None, data=None, **kwds):
 
         Finally, we can also directly provide a lattice of flats::
 
+            sage: # needs sage.graphs
             sage: from sage.combinat.posets.lattices import LatticePoset
             sage: flats = [frozenset(F) for F in powerset('ab')]
             sage: L_M = LatticePoset((flats, lambda x, y: x < y))
@@ -590,6 +593,7 @@ def Matroid(groundset=None, data=None, **kwds):
 
         The keywords ``morphism`` and ``reduced_morphism`` are also available::
 
+            sage: # needs sage.rings.finite_rings
             sage: M = matroids.catalog.RelaxedNonFano("abcdefg")
             sage: A = M.representation(order=True, reduced=True); A
             Generic morphism:

@@ -61,15 +61,17 @@ from sage.matroids.basis_matroid import BasisMatroid
 from sage.matroids.circuits_matroid import CircuitsMatroid
 from sage.matroids.circuit_closures_matroid import CircuitClosuresMatroid
 from sage.matroids.dual_matroid import DualMatroid
-from sage.matroids.flats_matroid import FlatsMatroid
 from sage.matroids.linear_matroid import LinearMatroid, RegularMatroid, BinaryMatroid, TernaryMatroid, QuaternaryMatroid
 from sage.matroids.minor_matroid import MinorMatroid
 from sage.matroids.rank_matroid import RankMatroid
 from sage.matroids.union_matroid import MatroidUnion, MatroidSum, PartitionMatroid
 
-# lazy import of GraphicMatroid for modularization purposes
+# lazy import of GraphicMatroid and FlatsMatroid for modularization purposes
 from sage.misc.lazy_import import lazy_import
 lazy_import('sage.matroids.graphic_matroid', 'GraphicMatroid')
+lazy_import('sage.matroids.flats_matroid', 'FlatsMatroid')
 
 from sage.matroids.extension import LinearSubclasses, MatroidExtensions
 from sage.matroids.utilities import setprint, newlabel, get_nonisomorphic_matroids, lift_cross_ratios, lift_map, cmp_elements_key
+
+del lazy_import

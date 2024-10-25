@@ -1611,66 +1611,51 @@
         "ntests": 18
     },
     "sage.matroids.advanced": {
-        "failed": true,
         "ntests": 1
     },
     "sage.matroids.basis_exchange_matroid": {
-        "failed": true,
         "ntests": 186
     },
     "sage.matroids.basis_matroid": {
-        "failed": true,
         "ntests": 150
     },
     "sage.matroids.circuit_closures_matroid": {
-        "failed": true,
-        "ntests": 86
+        "ntests": 74
     },
     "sage.matroids.circuits_matroid": {
-        "failed": true,
-        "ntests": 141
+        "ntests": 107
     },
     "sage.matroids.constructor": {
-        "failed": true,
-        "ntests": 154
+        "ntests": 135
     },
     "sage.matroids.database_collections": {
-        "failed": true,
-        "ntests": 14
+        "ntests": 2
     },
     "sage.matroids.database_matroids": {
-        "failed": true,
-        "ntests": 617
+        "ntests": 424
     },
     "sage.matroids.dual_matroid": {
-        "failed": true,
-        "ntests": 92
+        "ntests": 77
     },
     "sage.matroids.extension": {
-        "failed": true,
         "ntests": 48
     },
     "sage.matroids.flats_matroid": {
-        "failed": true,
-        "ntests": 107
+        "ntests": 1
     },
     "sage.matroids.linear_matroid": {
-        "failed": true,
-        "ntests": 633
+        "ntests": 621
     },
     "sage.matroids.matroid": {
-        "failed": true,
-        "ntests": 980
+        "ntests": 930
     },
     "sage.matroids.matroids_plot_helpers": {
         "ntests": 22
     },
     "sage.matroids.minor_matroid": {
-        "failed": true,
         "ntests": 73
     },
     "sage.matroids.rank_matroid": {
-        "failed": true,
         "ntests": 50
     },
     "sage.matroids.set_system": {
@@ -1680,11 +1665,9 @@
         "ntests": 40
     },
     "sage.matroids.unpickling": {
-        "failed": true,
-        "ntests": 64
+        "ntests": 61
     },
     "sage.matroids.utilities": {
-        "failed": true,
         "ntests": 61
     },
     "sage.misc.abstract_method": {
@@ -2085,12 +2068,10 @@
         "ntests": 152
     },
     "sage.numerical.backends.generic_backend": {
-        "failed": true,
-        "ntests": 60
+        "ntests": 8
     },
     "sage.numerical.backends.generic_sdp_backend": {
-        "failed": true,
-        "ntests": 22
+        "ntests": 3
     },
     "sage.numerical.gauss_legendre": {
         "ntests": 60
