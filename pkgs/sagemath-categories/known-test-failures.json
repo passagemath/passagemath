@@ -1540,7 +1540,7 @@
     },
     "sage.rings.fraction_field_element": {
         "failed": true,
-        "ntests": 198
+        "ntests": 0
     },
     "sage.rings.function_field.constructor": {
         "ntests": 34
@@ -1713,7 +1713,6 @@
         "ntests": 1844
     },
     "sage.rings.polynomial.polynomial_element_generic": {
-        "failed": true,
         "ntests": 194
     },
     "sage.rings.polynomial.polynomial_quotient_ring": {
@@ -1795,7 +1794,6 @@
         "ntests": 19
     },
     "sage.rings.ring": {
-        "failed": true,
         "ntests": 206
     },
     "sage.rings.semirings.non_negative_integer_semiring": {
@@ -1892,11 +1890,9 @@
         "ntests": 34
     },
     "sage.schemes.projective.projective_space": {
-        "failed": true,
         "ntests": 381
     },
     "sage.schemes.projective.projective_subscheme": {
-        "failed": true,
         "ntests": 233
     },
     "sage.sets.cartesian_product": {
@@ -1948,7 +1944,6 @@
         "ntests": 336
     },
     "sage.sets.set": {
-        "failed": true,
         "ntests": 352
     },
     "sage.sets.set_from_iterator": {

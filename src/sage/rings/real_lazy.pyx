@@ -179,7 +179,10 @@ cdef class LazyField(Field):
                 from sage.sets.pythonclass import Set_PythonType
                 return LazyWrapperMorphism(Set_PythonType(R), self)
         elif R.is_exact():
-            ivf = self.interval_field()
+            try:
+                ivf = self.interval_field()
+            except ImportError:
+                return None
             mor = ivf.coerce_map_from(R)
             # Indirect coercions might lead to loops both in the coercion
             # discovery algorithm and when trying to convert LazyWrappers,
@@ -945,7 +948,12 @@ cdef class LazyWrapper(LazyFieldElement):
         FieldElement.__init__(self, parent)
         self._value = value
         if check:
-            self._parent.interval_field()(value)
+            try:
+                ivf = self._parent.interval_field()
+            except ImportError:
+                pass
+            else:
+                ivf(value)
 
     def __neg__(self):
         """
