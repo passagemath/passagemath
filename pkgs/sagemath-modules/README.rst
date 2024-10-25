@@ -61,6 +61,31 @@ What is included
 * `Probability Spaces and Distributions <https://doc.sagemath.org/html/en/reference/probability/index.html>`_, `Statistics <https://doc.sagemath.org/html/en/reference/stats/index.html>`_
 
 
+Examples
+--------
+
+A quick way to try it out interactively:
+
+```
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-modules[test]" IPython
+```
+
+```
+    In [1]: from sage.all__sagemath_modules import *
+
+    In [2]: M = matroids.Wheel(5); M
+    Out[2]: Wheel(5): Regular matroid of rank 5 on 10 elements with 121 bases
+
+    In [3]: M.representation()
+    Out[3]:
+    [ 1  0  0  0  0  1  0  0  0 -1]
+    [ 0  1  0  0  0 -1  1  0  0  0]
+    [ 0  0  1  0  0  0 -1  1  0  0]
+    [ 0  0  0  1  0  0  0 -1  1  0]
+    [ 0  0  0  0  1  0  0  0 -1  1]
+```
+
+
 Available as extras, from other distributions
 ---------------------------------------------
 
