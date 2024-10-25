@@ -74,7 +74,7 @@ def U24(groundset='abcd'):
         sage: N = matroids.Uniform(2, 4)
         sage: M.is_isomorphic(N)
         True
-        sage: M.automorphism_group().structure_description()
+        sage: M.automorphism_group().structure_description()                            # needs sage.graphs
         'S4'
 
     `U_{2,4}` is isomorphic to `\mathcal{W}^2`::
@@ -121,7 +121,7 @@ def U25(groundset='abcde'):
         sage: U25 = matroids.catalog.U25(); U25
         U(2, 5): Matroid of rank 2 on 5 elements with circuit-closures
         {2: {{'a', 'b', 'c', 'd', 'e'}}}
-        sage: U25.is_graphic() or U25.is_regular()
+        sage: U25.is_graphic() or U25.is_regular()                                      # needs sage.graphs
         False
         sage: U35 = matroids.catalog.U35()
         sage: U25.is_isomorphic(U35.dual())
@@ -153,7 +153,7 @@ def U35(groundset='abcde'):
         sage: U35 = matroids.catalog.U35(); U35
         U(3, 5): Matroid of rank 3 on 5 elements with circuit-closures
         {3: {{'a', 'b', 'c', 'd', 'e'}}}
-        sage: U35.is_graphic() or U35.is_regular()
+        sage: U35.is_graphic() or U35.is_regular()                                      # needs sage.graphs
         False
         sage: U25 = matroids.catalog.U25()
         sage: U35.is_isomorphic(U25.dual())
@@ -180,6 +180,7 @@ def K4(groundset='abcdef'):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: M = matroids.catalog.K4(); M
         M(K4): Graphic matroid of rank 3 on 6 elements
         sage: M.is_graphic()
@@ -188,18 +189,18 @@ def K4(groundset='abcdef'):
     `M(K_4)` is isomorphic to `M(\mathcal{W}_3)`, the rank-`3` wheel::
 
         sage: W3 = matroids.Wheel(3)
-        sage: M.is_isomorphic(W3)
+        sage: M.is_isomorphic(W3)                                                       # needs sage.graphs
         True
 
     and to the tipless binary `3`-spike::
 
         sage: Z = matroids.Z(3, False)
-        sage: M.is_isomorphic(Z)
+        sage: M.is_isomorphic(Z)                                                        # needs sage.graphs
         True
 
     It has a transitive automorphism group::
 
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     REFERENCES:
@@ -208,6 +209,7 @@ def K4(groundset='abcdef'):
 
     TESTS::
 
+        sage: # needs sage.graphs
         sage: M = matroids.catalog.K4(range(6))
         sage: sorted(M.groundset())
         [0, 1, 2, 3, 4, 5]
@@ -231,7 +233,7 @@ def Whirl3(groundset='abcdef'):
         False
         sage: W.is_isomorphic(W.dual())
         True
-        sage: W.automorphism_group().is_transitive()
+        sage: W.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     For all elements `e`, neither `\mathcal{W}_3 \setminus \{e\}` nor `\mathcal{W}_3 / \{e\}`
@@ -269,6 +271,7 @@ def Q6(groundset='abcdef'):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: from sage.matroids.advanced import setprint
         sage: M = matroids.catalog.Q6(); M
         Q6: Quaternary matroid of rank 3 on 6 elements
@@ -309,11 +312,11 @@ def P6(groundset=None):
         {2: {{'a', 'b', 'c'}}, 3: {{'a', 'b', 'c', 'd', 'e', 'f'}}}
         sage: len(set(M.nonspanning_circuits()).difference(M.nonbases())) == 0
         True
-        sage: Matroid(matrix=random_matrix(GF(4, 'a'), ncols=5, nrows=5)).has_minor(M)
+        sage: Matroid(matrix=random_matrix(GF(4, 'a'), ncols=5, nrows=5)).has_minor(M)  # needs sage.rings.finite_rings
         False
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -343,7 +346,7 @@ def U36(groundset='abcdef'):
         True
         sage: U36.equals(U36.dual())
         True
-        sage: U36.automorphism_group().structure_description()
+        sage: U36.automorphism_group().structure_description()                          # needs sage.graphs
         'S6'
 
     REFERENCES:
@@ -379,9 +382,9 @@ def R6(groundset='abcdef'):
         True
         sage: M.is_connected()
         True
-        sage: M.is_3connected()
+        sage: M.is_3connected()                                                         # needs sage.graphs
         False
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     REFERENCES:
@@ -409,9 +412,9 @@ def Fano(groundset='abcdefg'):
         sage: from sage.matroids.advanced import setprint
         sage: M = matroids.catalog.Fano(); M
         Fano: Binary matroid of rank 3 on 7 elements, type (3, 0)
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
-        sage: M.automorphism_group().structure_description()
+        sage: M.automorphism_group().structure_description()                            # needs sage.graphs
         'PSL(3,2)'
 
     Every single-element deletion of `F_7` is isomorphic to `M(K_4)`::
@@ -419,7 +422,7 @@ def Fano(groundset='abcdefg'):
         sage: setprint(sorted(M.nonspanning_circuits()))
         [{'a', 'b', 'f'}, {'a', 'c', 'e'}, {'a', 'd', 'g'}, {'b', 'c', 'd'},
          {'b', 'e', 'g'}, {'c', 'f', 'g'}, {'d', 'e', 'f'}]
-        sage: M.delete(M.groundset_list()[randrange(0,
+        sage: M.delete(M.groundset_list()[randrange(0,                                  # needs sage.graphs
         ....:                  7)]).is_isomorphic(matroids.CompleteGraphic(4))
         True
 
@@ -459,13 +462,14 @@ def FanoDual(groundset='abcdefg'):
         F7*: Binary matroid of rank 4 on 7 elements, type (3, 7)
         sage: F7.is_isomorphic(F7D.dual())
         True
-        sage: F7D.automorphism_group().is_transitive()
+        sage: F7D.automorphism_group().is_transitive()                                  # needs sage.graphs
         True
-        sage: F7D.automorphism_group().structure_description()
+        sage: F7D.automorphism_group().structure_description()                          # needs sage.graphs
         'PSL(3,2)'
 
     Every single-element deletion of `F_7^*` is isomorphic to `M(K_{2, 3})`::
 
+        sage: # needs sage.graphs
         sage: K2_3 = Matroid(graphs.CompleteBipartiteGraph(2, 3))
         sage: import random
         sage: e = random.choice(list(F7D.groundset()))
@@ -503,9 +507,9 @@ def NonFano(groundset='abcdefg'):
         sage: setprint(M.nonbases())
         [{'a', 'b', 'f'}, {'a', 'c', 'e'}, {'a', 'd', 'g'},
          {'b', 'c', 'd'}, {'b', 'e', 'g'}, {'c', 'f', 'g'}]
-        sage: M.delete('f').is_isomorphic(matroids.CompleteGraphic(4))
+        sage: M.delete('f').is_isomorphic(matroids.CompleteGraphic(4))                  # needs sage.graphs
         True
-        sage: M.delete('g').is_isomorphic(matroids.CompleteGraphic(4))
+        sage: M.delete('g').is_isomorphic(matroids.CompleteGraphic(4))                  # needs sage.graphs
         False
 
     REFERENCES:
@@ -541,9 +545,9 @@ def NonFanoDual(groundset='abcdefg'):
         sage: import random
         sage: e = random.choice(list(M.groundset()))
         sage: N = M.contract(e)
-        sage: K4 = matroids.catalog.K4()
+        sage: K4 = matroids.catalog.K4()                                                # needs sage.graphs
         sage: W3 = matroids.catalog.Whirl3()
-        sage: N.is_isomorphic(K4) or N.is_isomorphic(W3)
+        sage: N.is_isomorphic(K4) or N.is_isomorphic(W3)                                # needs sage.graphs
         True
 
     REFERENCES:
@@ -575,7 +579,7 @@ def O7(groundset='abcdefg'):
 
         sage: M = matroids.catalog.O7(); M
         O7: Ternary matroid of rank 3 on 7 elements, type 0+
-        sage: M.delete('e').is_isomorphic(matroids.CompleteGraphic(4))
+        sage: M.delete('e').is_isomorphic(matroids.CompleteGraphic(4))                  # needs sage.graphs
         True
         sage: M.tutte_polynomial()
         y^4 + x^3 + x*y^2 + 3*y^3 + 4*x^2 + 5*x*y + 5*y^2 + 4*x + 4*y
@@ -608,7 +612,7 @@ def P7(groundset='abcdefg'):
         P7: Ternary matroid of rank 3 on 7 elements, type 1+
         sage: M.whitney_numbers2()
         [1, 7, 11, 1]
-        sage: M.has_minor(matroids.CompleteGraphic(4))
+        sage: M.has_minor(matroids.CompleteGraphic(4))                                  # needs sage.graphs
         False
         sage: M.is_valid()
         True
@@ -697,7 +701,7 @@ def AG32prime(groundset=None):
          {'d', 'e', 'f', 'g'}]
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     Self-dual but not identically self-dual::
@@ -755,7 +759,7 @@ def R8(groundset='abcdefgh'):
         True
         sage: M.has_minor(matroids.catalog.Fano())
         False
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     Every single-element deletion is isomorphic to (F_7^-)^* and every
@@ -816,7 +820,7 @@ def F8(groundset=None):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -866,7 +870,7 @@ def Q8(groundset=None):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -906,12 +910,13 @@ def L8(groundset=None):
         True
         sage: M.is_valid()  # long time
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     Every single-element contraction is isomorphic to the free extension of
     `M(K_4)`::
 
+        sage: # needs sage.graphs
         sage: K4 = matroids.catalog.K4(range(6))
         sage: Bext = [list(b) for b in K4.bases()] + [list(I)+[6] for I in
         ....:                                         K4.independent_sets(2)]
@@ -962,7 +967,7 @@ def S8(groundset='abcdefgh'):
         [...True...]
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1008,7 +1013,7 @@ def Vamos(groundset=None):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1041,7 +1046,7 @@ def T8(groundset='abcdefgh'):
         False
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1078,11 +1083,11 @@ def J(groundset='abcdefgh'):
         [{'a', 'b', 'f'}, {'a', 'c', 'g'}, {'a', 'd', 'h'}]
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.has_minor(matroids.CompleteGraphic(4))
+        sage: M.has_minor(matroids.CompleteGraphic(4))                                  # needs sage.graphs
         False
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1118,7 +1123,7 @@ def P8(groundset='abcdefgh'):
         P8: Ternary matroid of rank 4 on 8 elements, type 2+
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: Matroid(matrix=random_matrix(GF(4, 'a'), ncols=5, nrows=5)).has_minor(M)
+        sage: Matroid(matrix=random_matrix(GF(4, 'a'), ncols=5, nrows=5)).has_minor(M)  # needs sage.rings.finite_rings
         False
         sage: M.bicycle_dimension()
         2
@@ -1187,7 +1192,7 @@ def Wheel4(groundset='abcdefgh'):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1214,7 +1219,7 @@ def Whirl4(groundset='abcdefgh'):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1244,7 +1249,7 @@ def K33dual(groundset='abcdefghi'):
         False
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     REFERENCES:
@@ -1303,13 +1308,13 @@ def AG23(groundset='abcdefghi'):
         AG(2, 3): Ternary matroid of rank 3 on 9 elements, type 3+
         sage: M.is_valid() and M.is_3connected() and M.is_ternary()
         True
-        sage: M.has_minor(matroids.catalog.K4())
+        sage: M.has_minor(matroids.catalog.K4())                                        # needs sage.graphs
         False
         sage: import random
         sage: e = random.choice(list(M.groundset()))
         sage: M.delete(e).is_isomorphic(matroids.catalog.AG23minus())
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     REFERENCES:
@@ -1337,7 +1342,7 @@ def TernaryDowling3(groundset='abcdefghi'):
         72
         sage: M.fundamental_cycle('abc', 'd')
         {'a': 2, 'b': 1, 'd': 1}
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1373,9 +1378,9 @@ def R9(groundset=None):
         True
         sage: len(M.nonspanning_circuits())
         15
-        sage: M.is_simple() and M.is_ternary()
+        sage: M.is_simple() and M.is_ternary()                                          # needs sage.graphs
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1411,7 +1416,7 @@ def Pappus(groundset=None):
         True
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     REFERENCES:
@@ -1445,7 +1450,7 @@ def NonPappus(groundset=None):
         False
         sage: M.is_valid() and M.is_paving()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1467,6 +1472,7 @@ def K5(groundset='abcdefghij'):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: M = matroids.catalog.K5(); M
         M(K5): Graphic matroid of rank 4 on 10 elements
         sage: M.is_valid()
@@ -1491,6 +1497,7 @@ def K5dual(groundset='abcdefghij'):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: M = matroids.catalog.K5dual(); M
         M*(K5): Dual of 'Graphic matroid of rank 4 on 10 elements'
         sage: M.is_3connected()
@@ -1526,16 +1533,17 @@ def R10(groundset='abcdefghij'):
         ....:     cct.append(len(i))
         sage: Set(cct)
         {4, 6}
-        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
+        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())                      # needs sage.graphs
         True
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     Every single-element deletion is isomorphic to `M(K_{3, 3})`, and every
     single-element contraction is isomorphic to `M^*(K_{3, 3})`::
 
+        sage: # needs sage.graphs
         sage: K33 = matroids.catalog.K33()
         sage: K33D = matroids.catalog.K33dual()
         sage: import random
@@ -1583,7 +1591,7 @@ def NonDesargues(groundset=None):
         NonDesargues: Matroid of rank 3 on 10 elements with 9 nonspanning circuits
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1609,11 +1617,11 @@ def R12(groundset='abcdefghijkl'):
 
         sage: M = matroids.catalog.R12(); M
         R12: Regular matroid of rank 6 on 12 elements with 441 bases
-        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
+        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())                      # needs sage.graphs
         True
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1648,7 +1656,7 @@ def ExtendedTernaryGolayCode(groundset='abcdefghijkl'):
         Extended Ternary Golay Code: Ternary matroid of rank 6 on 12 elements,
         type 6+
         sage: C = LinearCode(M.representation())
-        sage: C.is_permutation_equivalent(codes.GolayCode(GF(3)))
+        sage: C.is_permutation_equivalent(codes.GolayCode(GF(3)))                       # needs sage.rings.finite_rings
         True
         sage: M.is_valid()
         True
@@ -1657,7 +1665,7 @@ def ExtendedTernaryGolayCode(groundset='abcdefghijkl'):
 
         sage: # long time
         sage: G = M.automorphism_group()
-        sage: G.is_transitive()
+        sage: G.is_transitive()                                                         # needs sage.graphs
         True
         sage: G.structure_description()
         'M12'
@@ -1723,7 +1731,7 @@ def T12(groundset='abcdefghijkl'):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     REFERENCES:
@@ -1759,7 +1767,7 @@ def PG23(groundset=None):
         PG(2, 3): Ternary matroid of rank 3 on 13 elements, type 3+
         sage: M.is_3connected()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
 
     REFERENCES:
@@ -1796,9 +1804,9 @@ def Wheel(r, field=None, ring=None, groundset=None):
         sage: M.is_valid()
         True
         sage: M = matroids.Wheel(3)
-        sage: M.is_isomorphic(matroids.CompleteGraphic(4))
+        sage: M.is_isomorphic(matroids.CompleteGraphic(4))                              # needs sage.graphs
         True
-        sage: M.is_isomorphic(matroids.Wheel(3, field=GF(3)))
+        sage: M.is_isomorphic(matroids.Wheel(3, field=GF(3)))                           # needs sage.graphs
         True
         sage: M = matroids.Wheel(3, field=GF(3)); M
         Wheel(3): Ternary matroid of rank 3 on 6 elements, type 0+
@@ -1809,9 +1817,9 @@ def Wheel(r, field=None, ring=None, groundset=None):
         sage: import random
         sage: r = random.choice(range(4, 8))
         sage: M = matroids.Wheel(r)
-        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
+        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())                      # needs sage.graphs
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -1868,10 +1876,10 @@ def Whirl(r, groundset=None):
         sage: M.tutte_polynomial()
         x^5 + y^5 + 5*x^4 + 5*x^3*y + 5*x^2*y^2 + 5*x*y^3 + 5*y^4 + 10*x^3 + 15*x^2*y +
          15*x*y^2 + 10*y^3 + 10*x^2 + 15*x*y + 10*y^2 + 5*x + 5*y
-        sage: M.is_isomorphic(matroids.Wheel(5))
+        sage: M.is_isomorphic(matroids.Wheel(5))                                        # needs sage.graphs
         False
         sage: M = matroids.Whirl(3)
-        sage: M.is_isomorphic(matroids.CompleteGraphic(4))
+        sage: M.is_isomorphic(matroids.CompleteGraphic(4))                              # needs sage.graphs
         False
 
     For `r \ge 3`, the whirl is self-dual but not identically self-dual::
@@ -1879,7 +1887,7 @@ def Whirl(r, groundset=None):
         sage: import random
         sage: r = random.choice(range(3, 10))
         sage: M = matroids.Whirl(r)
-        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
+        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())                      # needs sage.graphs
         True
 
     Except for `\mathcal{W}^2`, which is isomorphic to `U_{2, 4}`, these
@@ -1887,7 +1895,7 @@ def Whirl(r, groundset=None):
 
         sage: r = random.choice(range(3, 8))
         sage: M = matroids.Whirl(r)
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     .. TODO::
@@ -1990,7 +1998,7 @@ def PG(n, q, x=None, groundset=None):
         sage: M = matroids.PG(2, 2)
         sage: M.is_isomorphic(matroids.catalog.Fano())
         True
-        sage: matroids.PG(5, 4, 'z').size() == (4^6 - 1) / (4 - 1)
+        sage: matroids.PG(5, 4, 'z').size() == (4^6 - 1) / (4 - 1)                      # needs sage.rings.finite_rings
         True
         sage: M = matroids.PG(4, 7); M
         PG(4, 7): Linear matroid of rank 5 on 2801 elements represented over the Finite Field
@@ -2036,7 +2044,7 @@ def AG(n, q, x=None, groundset=None):
         sage: M = matroids.AG(2, 3).delete(8)
         sage: M.is_isomorphic(matroids.catalog.AG23minus())
         True
-        sage: matroids.AG(5, 4, 'z').size() == ((4 ^ 6 - 1) / (4 - 1) - (4 ^ 5 - 1)/(4 - 1))
+        sage: matroids.AG(5, 4, 'z').size() == ((4 ^ 6 - 1) / (4 - 1) - (4 ^ 5 - 1)/(4 - 1))    # needs sage.rings.finite_rings
         True
         sage: M = matroids.AG(4, 2); M
         AG(4, 2): Binary matroid of rank 5 on 16 elements, type (5, 0)
@@ -2087,7 +2095,7 @@ def Z(r, t=True, groundset=None):
         sage: E = sorted(Z3.groundset()); E
         ['t', 'x1', 'x2', 'x3', 'y1', 'y2', 'y3']
         sage: e = random.choice(E)
-        sage: Z3.delete(e).is_isomorphic(matroids.catalog.K4())
+        sage: Z3.delete(e).is_isomorphic(matroids.catalog.K4())                                 # needs sage.graphs
         True
 
     `Z_3 \cong F_7`::
@@ -2123,7 +2131,7 @@ def Z(r, t=True, groundset=None):
         True
         sage: Z.equals(Z.dual()) != (r % 2 == 1)  # XOR
         True
-        sage: Z.automorphism_group().is_transitive()  # long time
+        sage: Z.automorphism_group().is_transitive()  # long time                       # needs sage.graphs
         True
 
     REFERENCES:
@@ -2189,7 +2197,7 @@ def Spike(r, t=True, C3=[], groundset=None):
         sage: import random
         sage: r = random.choice(range(3, 20))
         sage: M = matroids.Spike(r)
-        sage: M.is_3connected()
+        sage: M.is_3connected()                                                         # needs sage.graphs
         True
 
     Each of `F_7`, `F_7^-`, and `P_7`, is a 3-spike. After inspection of the
@@ -2201,16 +2209,16 @@ def Spike(r, t=True, C3=[], groundset=None):
         ....:                           ['x1', 'x3', 'y2'],
         ....:                           ['x2', 'x3', 'y1'],
         ....:                           ['y1', 'y2', 'y3']])
-        sage: M.is_isomorphic(matroids.catalog.Fano())
+        sage: M.is_isomorphic(matroids.catalog.Fano())                                  # needs sage.graphs
         True
         sage: M = matroids.Spike(3, C3=[['x1', 'x2', 'x3'],
         ....:                           ['x1', 'y2', 'y3'],
         ....:                           ['x2', 'y1', 'y3']])
-        sage: M.is_isomorphic(matroids.catalog.NonFano())
+        sage: M.is_isomorphic(matroids.catalog.NonFano())                               # needs sage.graphs
         True
         sage: M = matroids.Spike(3, C3=[['x1', 'x2', 'y3'],
         ....:                           ['x3', 'y1', 'y2']])
-        sage: M.is_isomorphic(matroids.catalog.P7())
+        sage: M.is_isomorphic(matroids.catalog.P7())                                    # needs sage.graphs
         True
 
     Deleting any element gives a self-dual matroid. The tipless free spike
@@ -2219,7 +2227,7 @@ def Spike(r, t=True, C3=[], groundset=None):
         sage: M = matroids.Spike(6)
         sage: e = random.choice(list(M.groundset()))
         sage: Minor = M.delete(e)
-        sage: Minor.is_isomorphic(Minor.dual())
+        sage: Minor.is_isomorphic(Minor.dual())                                         # needs sage.graphs
         True
         sage: r = random.choice(range(3, 8))
         sage: M = matroids.Spike(r, False)
@@ -2305,7 +2313,7 @@ def Theta(n, groundset=None):
         sage: M.is_isomorphic(U)
         True
         sage: M = matroids.Theta(3)
-        sage: M.is_isomorphic(matroids.catalog.K4())
+        sage: M.is_isomorphic(matroids.catalog.K4())                                    # needs sage.graphs
         True
 
     `\Theta_n` is self-dual; identically self-dual if and only if `n = 2`::
@@ -2323,10 +2331,10 @@ def Theta(n, groundset=None):
 
         sage: n = random.choice(range(4, 8))
         sage: M = matroids.Theta(2 + n % 2)
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         True
         sage: M = matroids.Theta(n)
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -2395,7 +2403,7 @@ def Psi(r, groundset=None):
         sage: M = matroids.Psi(r)
         sage: M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()  # long time
+        sage: M.automorphism_group().is_transitive()  # long time                       # needs sage.graphs
         True
 
     REFERENCES:
@@ -2455,6 +2463,7 @@ def RelaxedNonFano(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.RelaxedNonFano(); M
         F7=: Quaternary matroid of rank 3 on 7 elements
         sage: M.is_valid()
@@ -2477,6 +2486,7 @@ def TippedFree3spike(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.TippedFree3spike(); M
         Tipped rank-3 free spike: Quaternary matroid of rank 3 on 7 elements
         sage: M.has_minor(matroids.Uniform(3,6))
@@ -2524,6 +2534,7 @@ def TQ8(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.TQ8(); M
         TQ8: Quaternary matroid of rank 4 on 8 elements
         sage: M.is_isomorphic(M.dual())
@@ -2551,6 +2562,7 @@ def P8p(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.P8p(); M
         P8-: Quaternary matroid of rank 4 on 8 elements
         sage: M.is_isomorphic(M.dual())
@@ -2578,6 +2590,7 @@ def KP8(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.KP8(); M
         KP8: Quaternary matroid of rank 4 on 8 elements
         sage: M.is_isomorphic(M.dual())
@@ -2605,6 +2618,7 @@ def Sp8(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.Sp8(); M
         Sp8: Quaternary matroid of rank 4 on 8 elements
         sage: M.is_isomorphic(M.dual())
@@ -2632,6 +2646,7 @@ def Sp8pp(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.Sp8pp(); M
         Sp8=: Quaternary matroid of rank 4 on 8 elements
         sage: M.is_isomorphic(M.dual())
@@ -2657,6 +2672,7 @@ def LP8(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.LP8(); M
         LP8: Quaternary matroid of rank 4 on 8 elements
         sage: M.is_isomorphic(M.dual())
@@ -2684,6 +2700,7 @@ def WQ8(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.WQ8(); M
         WQ8: Quaternary matroid of rank 4 on 8 elements
         sage: M.is_isomorphic(M.dual())
@@ -2714,6 +2731,7 @@ def BB9(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: BB = matroids.catalog.BB9(); BB
         BB9: Quaternary matroid of rank 3 on 9 elements
         sage: BR = matroids.catalog.BetsyRoss()
@@ -2754,6 +2772,7 @@ def TQ9(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: TQ8 = matroids.catalog.TQ8()
         sage: TQ9 = matroids.catalog.TQ9(); TQ9
         TQ9: Quaternary matroid of rank 4 on 9 elements
@@ -2790,6 +2809,7 @@ def TQ9p(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: TQ8 = matroids.catalog.TQ8()
         sage: TQ9p = matroids.catalog.TQ9p(); TQ9p
         TQ9': Quaternary matroid of rank 4 on 9 elements
@@ -2827,6 +2847,7 @@ def M8591(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.M8591(); M
         M8591: Quaternary matroid of rank 4 on 9 elements
         sage: M.is_valid()
@@ -2857,6 +2878,7 @@ def PP9(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P8p = matroids.catalog.P8p()
         sage: PP9 = matroids.catalog.PP9(); PP9
         PP9: Quaternary matroid of rank 4 on 9 elements
@@ -2897,6 +2919,7 @@ def BB9gDY(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.BB9gDY(); M
         Segment cosegment exchange on BB9: Quaternary matroid of rank 5 on 9 elements
         sage: M.is_valid()
@@ -2933,6 +2956,7 @@ def A9(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.A9(); M
         A9: Quaternary matroid of rank 3 on 9 elements
         sage: M.is_valid()
@@ -2962,6 +2986,7 @@ def FN9(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FN9(); M
         FN9: Quaternary matroid of rank 3 on 9 elements
         sage: M.is_valid()
@@ -2996,6 +3021,7 @@ def FX9(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FX9(); M
         FX9: Quaternary matroid of rank 4 on 9 elements
         sage: M.is_valid()
@@ -3029,6 +3055,7 @@ def KR9(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: KR9 = matroids.catalog.KR9(); KR9
         KR9: Quaternary matroid of rank 4 on 9 elements
         sage: KP8 = matroids.catalog.KP8()
@@ -3065,6 +3092,7 @@ def KQ9(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: KQ9 = matroids.catalog.KQ9(); KQ9
         KQ9: Quaternary matroid of rank 4 on 9 elements
         sage: TQ8 = matroids.catalog.TQ8()
@@ -3107,6 +3135,7 @@ def UG10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.UG10(); M
         UG10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3138,6 +3167,7 @@ def FF10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FF10(); M
         FF10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3170,6 +3200,7 @@ def GP10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.GP10(); M
         GP10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3201,6 +3232,7 @@ def FZ10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FZ10(); M
         FZ10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3233,6 +3265,7 @@ def UQ10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.UQ10(); M
         UQ10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3264,6 +3297,7 @@ def FP10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FP10(); M
         FP10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3296,6 +3330,7 @@ def TQ10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.TQ10(); M
         TQ10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3332,6 +3367,7 @@ def FY10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FY10(); M
         FY10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3366,6 +3402,7 @@ def PP10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: PP10 = matroids.catalog.PP10(); PP10
         PP10: Quaternary matroid of rank 5 on 10 elements
         sage: M = PP10.delete('a').contract('e')
@@ -3403,6 +3440,7 @@ def FU10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FU10(); M
         FU10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3435,6 +3473,7 @@ def D10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.D10(); M
         D10: Quaternary matroid of rank 4 on 10 elements
         sage: M.has_minor(matroids.catalog.TQ8())
@@ -3465,6 +3504,7 @@ def UK10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.UK10(); M
         UK10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3496,6 +3536,7 @@ def PK10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.PK10(); M
         PK10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3527,6 +3568,7 @@ def GK10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.GK10(); M
         GK10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3558,6 +3600,7 @@ def FT10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FT10(); M
         FT10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3589,6 +3632,7 @@ def TK10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.TK10(); M
         TK10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3620,6 +3664,7 @@ def KT10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.KT10(); M
         KT10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3651,6 +3696,7 @@ def TU10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.TU10(); M
         TU10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3682,6 +3728,7 @@ def UT10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.UT10(); M
         UT10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3713,6 +3760,7 @@ def FK10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FK10(); M
         FK10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3744,6 +3792,7 @@ def KF10(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.KF10(); M
         KF10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -3779,6 +3828,7 @@ def FA11(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: FA11 = matroids.catalog.FA11(); FA11
         FA11: Quaternary matroid of rank 5 on 11 elements
         sage: FF10 = matroids.catalog.FF10()
@@ -3816,6 +3866,7 @@ def FR12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FR12(); M
         FR12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -3848,6 +3899,7 @@ def GP12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.GP12(); M
         GP12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -3883,6 +3935,7 @@ def FQ12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: FQ12 = matroids.catalog.FQ12(); FQ12
         FQ12: Quaternary matroid of rank 6 on 12 elements
         sage: PP9 = matroids.catalog.PP9()
@@ -3923,6 +3976,7 @@ def FF12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FF12(); M
         FF12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -3960,6 +4014,7 @@ def FZ12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FZ12(); M
         FZ12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -3992,6 +4047,7 @@ def UQ12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.UQ12(); M
         UQ12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -4024,6 +4080,7 @@ def FP12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FP12(); M
         FP12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -4056,6 +4113,7 @@ def FS12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FS12(); M
         FS12: Quaternary matroid of rank 5 on 12 elements
         sage: M.rank()
@@ -4087,6 +4145,7 @@ def UK12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.UK12(); M
         UK12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -4119,6 +4178,7 @@ def UA12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.UA12(); M
         UA12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -4151,6 +4211,7 @@ def AK12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.AK12(); M
         AK12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -4183,6 +4244,7 @@ def FK12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FK12(); M
         FK12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -4215,6 +4277,7 @@ def KB12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.KB12(); M
         KB12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -4247,6 +4310,7 @@ def AF12(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.AF12(); M
         AF12: Quaternary matroid of rank 6 on 12 elements
         sage: M.is_isomorphic(M.dual())
@@ -4281,7 +4345,7 @@ def NestOfTwistedCubes(groundset=None):
 
         sage: M = matroids.catalog.NestOfTwistedCubes(); M
         NestOfTwistedCubes: Matroid of rank 6 on 12 elements with 57 circuits
-        sage: M.is_3connected()
+        sage: M.is_3connected()                                                         # needs sage.graphs
         True
     """
     # utility function
@@ -4347,6 +4411,7 @@ def XY13(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.XY13(); M
         XY13: Quaternary matroid of rank 6 on 13 elements
         sage: M.is_3connected()
@@ -4420,6 +4485,7 @@ def N3pp(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.N3pp(); M
         N3=: Quaternary matroid of rank 7 on 14 elements
         sage: M.is_isomorphic(M.dual())
@@ -4453,6 +4519,7 @@ def UP14(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.UP14(); M
         UP14: Quaternary matroid of rank 7 on 14 elements
         sage: M.is_isomorphic(M.dual())
@@ -4486,6 +4553,7 @@ def VP14(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.VP14(); M
         VP14: Quaternary matroid of rank 7 on 14 elements
         sage: M.is_isomorphic(M.dual())
@@ -4519,6 +4587,7 @@ def FV14(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FV14(); M
         FV14: Quaternary matroid of rank 7 on 14 elements
         sage: M.is_isomorphic(M.dual())
@@ -4552,6 +4621,7 @@ def OW14(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.OW14(); M
         OW14: Quaternary matroid of rank 7 on 14 elements
         sage: M.is_isomorphic(M.dual())
@@ -4584,6 +4654,7 @@ def FM14(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FM14(); M
         FM14: Quaternary matroid of rank 7 on 14 elements
         sage: M.is_isomorphic(M.dual())
@@ -4621,6 +4692,7 @@ def FA15(groundset=None):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.FA15(); M
         FA15: Quaternary matroid of rank 7 on 15 elements
         sage: M.has_minor(matroids.catalog.N3pp())
@@ -4870,8 +4942,8 @@ def Block_9_4(groundset=None):
         circuits
         sage: M.is_valid() and M.is_paving()
         True
-        sage: BD = BlockDesign(M.groundset(), list(M.nonspanning_circuits()))
-        sage: BD.is_t_design(return_parameters=True)
+        sage: BD = BlockDesign(M.groundset(), list(M.nonspanning_circuits()))           # needs sage.graphs
+        sage: BD.is_t_design(return_parameters=True)                                    # needs sage.graphs
         (True, (2, 9, 4, 3))
     """
     NSC = ['abcd', 'acef', 'bdef', 'cdeg', 'abfg', 'adeh', 'bcfh', 'acgh',
@@ -4950,8 +5022,8 @@ def Block_10_5(groundset=None):
         circuits
         sage: M.is_valid() and M.is_paving()
         True
-        sage: BD = BlockDesign(M.groundset(), list(M.nonspanning_circuits()))
-        sage: BD.is_t_design(return_parameters=True)
+        sage: BD = BlockDesign(M.groundset(), list(M.nonspanning_circuits()))           # needs sage.graphs
+        sage: BD.is_t_design(return_parameters=True)                                    # needs sage.graphs
         (True, (3, 10, 5, 3))
     """
     NSC = ['abcde', 'acdfg', 'bdefg', 'bcdfh', 'abefh', 'abcgh', 'adegh',
@@ -4976,6 +5048,7 @@ def Q10(groundset='abcdefghij'):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.Q10(); M
         Q10: Quaternary matroid of rank 5 on 10 elements
         sage: M.is_isomorphic(M.dual())
@@ -4989,6 +5062,7 @@ def Q10(groundset='abcdefghij'):
     are quaternary are `U_{2, 5}, U_{3, 5}, F_7, F_7^*`. As it happens, it
     suffices to check for `U_{2, 5}`::
 
+        sage: # needs sage.rings.finite_rings
         sage: S = matroids.catalog.Q10().linear_extensions(simple=True)
         sage: [M for M in S if not M.has_line_minor(5)]
         []
@@ -5139,6 +5213,7 @@ def ExtendedBinaryGolayCode(groundset='abcdefghijklmnopqrstuvwx'):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.ExtendedBinaryGolayCode(); M
         Extended Binary Golay Code: Binary matroid of rank 12 on 24 elements, type (12, 0)
         sage: C = LinearCode(M.representation())

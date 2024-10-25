@@ -2868,6 +2868,7 @@ cdef class LinearMatroid(BasisExchangeMatroid):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: M = matroids.Wheel(3)
             sage: OS = M.orlik_terao_algebra(); OS
             Orlik-Terao algebra of Wheel(3):
@@ -5581,6 +5582,7 @@ cdef class QuaternaryMatroid(LinearMatroid):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: M = matroids.catalog.RelaxedNonFano("abcdefg")
             sage: sorted(M.groundset())
             ['a', 'b', 'c', 'd', 'e', 'f', 'g']
@@ -5590,6 +5592,7 @@ cdef class QuaternaryMatroid(LinearMatroid):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: M = matroids.catalog.RelaxedNonFano("abcdefg")
             sage: f = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7}
             sage: N = M.relabel(f)

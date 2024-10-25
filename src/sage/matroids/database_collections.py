@@ -230,6 +230,7 @@ def OxleyMatroids():
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: OM = list(matroids.OxleyMatroids()); len(OM)
         44
         sage: import random
@@ -280,6 +281,7 @@ def BrettellMatroids():
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: BM = list(matroids.BrettellMatroids()); len(BM)
         68
         sage: import random
@@ -329,6 +331,7 @@ def VariousMatroids():
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: VM = list(matroids.VariousMatroids()); len(VM)
         16
         sage: import random
