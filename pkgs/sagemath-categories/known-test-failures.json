@@ -1687,10 +1687,10 @@
         "ntests": 37
     },
     "sage.numerical.backends.generic_backend": {
-        "ntests": 17
+        "ntests": 8
     },
     "sage.numerical.backends.generic_sdp_backend": {
-        "ntests": 12
+        "ntests": 3
     },
     "sage.parallel.decorate": {
         "ntests": 86
@@ -1906,13 +1906,7 @@
     },
     "sage.rings.fraction_field_element": {
         "failed": true,
-<<<<<<< HEAD
-        "ntests": 263
-||||||| merged common ancestors
-        "ntests": 271
-=======
-        "ntests": 198
->>>>>>> main
+        "ntests": 0
     },
     "sage.rings.function_field.constructor": {
         "ntests": 34
@@ -2170,13 +2164,6 @@
 >>>>>>> main
     },
     "sage.rings.polynomial.polynomial_element_generic": {
-<<<<<<< HEAD
-        "ntests": 188
-||||||| merged common ancestors
-        "failed": true,
-        "ntests": 193
-=======
-        "failed": true,
         "ntests": 194
 >>>>>>> main
     },
@@ -2293,18 +2280,6 @@
         "ntests": 19
     },
     "sage.rings.ring": {
-<<<<<<< HEAD
-        "ntests": 337
-||||||| merged common ancestors
-        "failed": true,
-<<<<<<<<< Temporary merge branch 1
-        "ntests": 337
-||||||||| ab24dac430e
-        "ntests": 298
-=========
-        "ntests": 214
-=======
-        "failed": true,
         "ntests": 206
 >>>>>>> main
     },
@@ -2489,7 +2464,7 @@
         "ntests": 341
     },
     "sage.sets.set": {
-        "ntests": 363
+        "ntests": 352
     },
     "sage.sets.set_from_iterator": {
         "ntests": 150

@@ -1154,6 +1154,10 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return the feasible set of ``self``.
 
+        INPUT:
+
+        - ``backend`` -- (optional) a backend for :mod:`Polyhedron <sage.geometry.polyhedron.constructor>`
+
         OUTPUT: a :mod:`Polyhedron <sage.geometry.polyhedron.constructor>`
 
         EXAMPLES::
@@ -1178,7 +1182,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, sqrt(2)], [sqrt(3), 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: F = P.feasible_set(backend='number_field'); F
             A 2-dimensional polyhedron in (Symbolic Ring)^2
             defined as the convex hull of 4 vertices
@@ -1190,7 +1194,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([RDF(1), RDF(1)], [RDF(3), RDF(1)])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.feasible_set()
             A 2-dimensional polyhedron in RDF^2
             defined as the convex hull of 4 vertices

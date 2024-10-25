@@ -334,7 +334,7 @@ class PolynomialRing_singular_repr:
             from sage.interfaces.singular import singular
         try:
             R = self.__singular
-            if R.parent() is not singular:
+            if singular is not None and R.parent() is not singular:
                 raise ValueError
             elif singular is None:
                 from sage.interfaces.singular import singular

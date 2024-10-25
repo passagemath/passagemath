@@ -1,9 +1,5 @@
 # sage_setup: distribution = sagemath-categories
-<<<<<<< HEAD
 # sage.doctest: needs sage.geometry.polyhedron
-||||||| merged common ancestors
-=======
->>>>>>> main
 r"""
 Generic Backend for LP solvers
 
