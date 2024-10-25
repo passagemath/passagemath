@@ -344,6 +344,7 @@ def Matroid(groundset=None, data=None, **kwds):
         Given a dictionary of flats indexed by their rank, we get a
         :class:`FlatsMatroid <sage.matroids.flats_matroid.FlatsMatroid>`::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(flats={0: [''], 1: ['a', 'b'], 2: ['ab']})
             sage: M.is_isomorphic(matroids.Uniform(2, 2)) and M.is_valid()
             True

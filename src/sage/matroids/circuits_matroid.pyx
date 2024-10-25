@@ -418,6 +418,7 @@ cdef class CircuitsMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.circuits_matroid import CircuitsMatroid
             sage: M = CircuitsMatroid(matroids.catalog.RelaxedNonFano())
             sage: sorted(M.groundset())

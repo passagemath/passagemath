@@ -525,6 +525,7 @@ cdef class CircuitClosuresMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.circuit_closures_matroid import CircuitClosuresMatroid
             sage: M = CircuitClosuresMatroid(matroids.catalog.RelaxedNonFano())
             sage: sorted(M.groundset())
