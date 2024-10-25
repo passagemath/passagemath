@@ -46,15 +46,11 @@ What is included
 Examples
 --------
 
-A quick way to try it out interactively:
+A quick way to try it out interactively::
 
-```
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[test]" IPython
-```
 
-```
     In [1]: from sage.all__sagemath_polyhedra import *
-```
 
 
 Available as extras, from other distributions
