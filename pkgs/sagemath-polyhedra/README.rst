@@ -104,11 +104,11 @@ Optional backends for optimization:
 Development
 -----------
 
-```
+::
+
     $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
     $ cd passagemath
     passagemath $ ./bootstrap
     passagemath $ python3 -m venv polyhedra-venv
     passagemath $ source polyhedra-venv/bin/activate
     (polyhedra-venv) passagemath $ pip install -v -e pkgs/sagemath-polyhedra
-```
