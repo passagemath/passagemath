@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-categories
+ */
 //*****************************************************************************
 //       Copyright (C) 2008 Carlo Hamalainen <carlo.hamalainen@gmail.com>,
 //

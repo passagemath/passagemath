@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Introduction to Drinfeld modular forms
 ======================================

@@ -1,0 +1,2 @@
+# This file is updated on every release by the sage-update-version script
+passagemath-standard-no-symbolics ~= 10.4.29

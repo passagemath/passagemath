@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Class groups of binary quadratic forms
 
@@ -78,6 +79,7 @@ AUTHORS:
 # ****************************************************************************
 
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 
 from sage.structure.parent import Parent
 from sage.structure.unique_representation import UniqueRepresentation
@@ -95,7 +97,7 @@ from sage.groups.generic import order_from_multiple, multiple
 from sage.groups.additive_abelian.additive_abelian_wrapper import AdditiveAbelianGroupWrapper
 from sage.quadratic_forms.binary_qf import BinaryQF
 
-from sage.libs.pari import pari
+lazy_import('sage.libs.pari', 'pari')
 
 
 class BQFClassGroup(Parent, UniqueRepresentation):

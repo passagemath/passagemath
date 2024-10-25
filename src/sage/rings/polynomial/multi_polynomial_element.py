@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Generic Multivariate Polynomials
 
@@ -228,6 +229,7 @@ class MPolynomial_element(MPolynomial):
 
         You can specify a map on the base ring::
 
+            sage: # needs sage.libs.singular
             sage: F.<x,y> = ZZ[]
             sage: F = F.fraction_field(); x,y = F(x),F(y)
             sage: cc = F.hom([y,x])
@@ -673,6 +675,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
 
         Ensure that :issue:`37603` is fixed::
 
+            sage: # needs sage.rings.number_field
             sage: R.<x,y,z> = PolynomialRing(QQbar)
             sage: f = 3*x^2 - 2*y + 7*x^2*y^2 + 5
             sage: type(f.degree())
@@ -729,12 +732,14 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         TESTS:
 
         Ensure that :issue:`37603` is fixed::
-             sage: R.<x,y,z> = QQbar[]
-             sage: f = 2*x*y^3*z^2
-             sage: f.total_degree()
-             6
-             sage: type(f.total_degree())
-             <class 'sage.rings.integer.Integer'>
+
+            sage: # needs sage.rings.number_field
+            sage: R.<x,y,z> = QQbar[]
+            sage: f = 2*x*y^3*z^2
+            sage: f.total_degree()
+            6
+            sage: type(f.total_degree())
+            <class 'sage.rings.integer.Integer'>
         """
         return self.degree()
 
@@ -1307,6 +1312,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
 
         The weight of the parent ring is respected::
 
+            sage: # needs sage.rings.finite_rings
             sage: term_order = TermOrder("wdegrevlex", [1, 3])
             sage: R.<x, y> = PolynomialRing(Qp(5), order=term_order)
             sage: (x + y).is_homogeneous()
@@ -2088,6 +2094,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
 
         Check that the global proof flag for polynomials is honored::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y> = PolynomialRing(QQ['z'])
             sage: f = x^2 + y^2
             sage: with proof.WithProof('polynomial', True):
@@ -2277,14 +2284,14 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         R = self.parent()
         try:
             R._singular_().set_ring()
-        except TypeError:
+        except (TypeError, ImportError):
             f = self.parent().flattening_morphism()
             if f.domain() != f.codomain():
                 g = f.section()
                 q,r = f(self).quo_rem(f(right))
                 return g(q), g(r)
             else:
-                raise
+                raise TypeError
         else:
             X = self._singular_().division(right._singular_())
             return R(X[1][1,1]), R(X[2][1])

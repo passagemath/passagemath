@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Actions used by the coercion model for matrix and vector multiplications
 
@@ -452,10 +453,10 @@ cdef class MatrixPolymapAction(MatrixMulAction):
             sage: M = MatrixSpace(QQ, 2, 2)
             sage: P.<x, y> = ProjectiveSpace(QQ, 1)
             sage: H = Hom(P, P)
-            sage: f = H([x^2 + y^2, y^2])
+            sage: f = H([x^2 + y^2, y^2])                                               # needs sage.libs.singular
             sage: A = MatrixPolymapAction(M, H)
             sage: m = matrix([[1,1], [0,1]])
-            sage: A._act_(m, f)
+            sage: A._act_(m, f)                                                         # needs sage.libs.singular
             Scheme endomorphism of Projective Space of dimension 1 over Rational Field
               Defn: Defined on coordinates by sending (x : y) to
                     (x^2 + 2*y^2 : y^2)
@@ -525,10 +526,10 @@ cdef class PolymapMatrixAction(MatrixMulAction):
             sage: M = MatrixSpace(QQ, 2, 2)
             sage: P.<x,y> = ProjectiveSpace(QQ, 1)
             sage: H = Hom(P, P)
-            sage: f = H([x^2 + y^2, y^2])
+            sage: f = H([x^2 + y^2, y^2])                                               # needs sage.libs.singular
             sage: A = PolymapMatrixAction(M, H)
             sage: m = matrix([[1,1], [0,1]])
-            sage: A._act_(m, f)
+            sage: A._act_(m, f)                                                         # needs sage.libs.singular
             Scheme endomorphism of Projective Space of dimension 1 over Rational Field
               Defn: Defined on coordinates by sending (x : y) to
                     (x^2 + 2*x*y + 2*y^2 : y^2)

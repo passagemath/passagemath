@@ -76,8 +76,8 @@ else:
 
     log.info("Discovering Python/Cython source code...")
 
-    optional_packages = ['mcqd', 'bliss', 'tdlib',
-                         'coxeter3', 'sirocco', 'meataxe', 'cmr']
+    optional_packages = ['mcqd', 'bliss', 'brial', 'tdlib',
+                         'coxeter3', 'giac', 'sirocco', 'meataxe', 'cmr']
     distributions_to_exclude = [f"sagemath-{pkg}"
                                 for pkg in optional_packages]
     files_to_exclude = filter_cython_sources(SAGE_SRC, distributions_to_exclude)

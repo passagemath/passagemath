@@ -17,7 +17,7 @@ Cython modules::
     sage: sage_getdoc(sage.rings.rational).lstrip()
     'Rational Numbers...'
     sage: sage_getsource(sage.rings.rational)
-    '# distutils: ...Rational Numbers...'
+    '...Rational Numbers...'
 
 Python modules::
 
@@ -1654,12 +1654,15 @@ def sage_getargspec(obj):
         except TypeError:  # arg is not a code object
             # The above "hopefully" was wishful thinking:
             try:
-                return inspect.FullArgSpec(*_sage_getargspec_cython(sage_getsource(obj)))
+                source = sage_getsource(obj)
+                if source is not None:
+                    return inspect.FullArgSpec(*_sage_getargspec_cython(source))
             except TypeError:  # This happens for Python builtins
-                # The best we can do is to return a generic argspec
-                args = []
-                varargs = 'args'
-                varkw = 'kwds'
+                pass
+            # The best we can do is to return a generic argspec
+            args = []
+            varargs = 'args'
+            varkw = 'kwds'
     try:
         defaults = func_obj.__defaults__
     except AttributeError:
@@ -2225,6 +2228,7 @@ def sage_getsourcelines(obj):
         sage: from sage.misc.sageinspect import sage_getsourcelines
 
         sage: # needs sage.modules
+        sage: from sage.matrix.constructor import matrix
         sage: sage_getsourcelines(matrix)[1]
         21
         sage: sage_getsourcelines(matrix)[0][0]
@@ -2255,7 +2259,7 @@ def sage_getsourcelines(obj):
         sage: sage_getsourcelines(test_func)
         (['def base(x):\n',
         ...
-        '    return x\n'], 8)
+        '    return x\n'], 9)
 
     Here are some cases that were covered in :issue:`11298`;
     note that line numbers may easily change, and therefore we do

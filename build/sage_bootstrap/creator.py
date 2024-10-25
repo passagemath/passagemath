@@ -59,6 +59,19 @@ class PackageCreator(object):
                 f.write('upstream_url={0}'.format(upstream_url))
             f.write('\n')
 
+    def set_pypi_urls(self, pypi_version):
+        """
+        Write the ``checksums.ini`` file
+        """
+        with open(os.path.join(self.path, 'checksums.ini'), 'w+') as f:
+            for url in pypi_version.urls:
+                if 'cp' in url['python_version'] or 'py3' in url['python_version']:
+                    f.write('[{0}]\n'.format(url['filename']))
+                    f.write('tarball={0}\n'.format(url['filename']))
+                    f.write('sha256={0}\n'.format(url['digests']['sha256']))
+                    f.write('upstream_url={0}\n'.format(url['url']))
+                    f.write('\n')
+
     def set_description(self, description, license, upstream_contact):
         """
         Write the ``SPKG.rst`` file
@@ -108,7 +121,7 @@ class PackageCreator(object):
 
     def set_python_data_and_scripts(self, pypi_package_name=None, source='normal', dependencies=None):
         """
-        Write the file ``dependencies`` and other files for Python packages.
+        Write the files ``dependencies``, ``dependencies_build``, and other files for Python packages.
 
         If ``source`` is ``"normal"``, write the files ``spkg-install.in`` and
         ``version_requirements.txt``.
@@ -121,16 +134,14 @@ class PackageCreator(object):
         """
         if pypi_package_name is None:
             pypi_package_name = self.package_name
-        with open(os.path.join(self.path, 'dependencies'), 'w+') as f:
-            if dependencies:
-                dependencies = ' '.join(dependencies)
-            else:
-                dependencies = ''
+        with open(os.path.join(self.path, 'dependencies_build'), 'w+') as f:
             if source == 'wheel':
-                dependencies_order_only = 'pip $(PYTHON)'
+                f.write(' | pip $(PYTHON)\n\n')
             else:
-                dependencies_order_only = '$(PYTHON_TOOLCHAIN) $(PYTHON)'
-            f.write(dependencies + ' | ' + dependencies_order_only + '\n\n')
+                f.write(' | $(PYTHON_TOOLCHAIN) $(PYTHON)\n\n')
+            f.write('----------\nAll lines of this file are ignored except the first.\n')
+        with open(os.path.join(self.path, 'dependencies'), 'w+') as f:
+            f.write('# No dependencies\n\n')
             f.write('----------\nAll lines of this file are ignored except the first.\n')
         if source == 'normal':
             with open(os.path.join(self.path, 'spkg-install.in'), 'w+') as f:

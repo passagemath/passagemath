@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 # distutils: libraries = flint
 # distutils: depends = flint/acb_calc.h
 

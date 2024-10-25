@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-symbolics
+# sage.doctest: needs giac
 r"""
 Pexpect Interface to Giac
 

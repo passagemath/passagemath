@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Base class for matrices, part 2
 
@@ -7763,7 +7764,10 @@ cdef class Matrix(Matrix1):
         cdef Matrix d, a
         cdef Py_ssize_t r, c
         cdef bint transformation = 'transformation' in kwds and kwds['transformation']
-        if self._base_ring == ZZ:
+
+        if self._base_ring == ZZ and self.dense_matrix() is not self:
+            # delegate to the specialized echelon form
+            # implemented in matrix_integer_dense
             if 'include_zero_rows' in kwds and not kwds['include_zero_rows']:
                 raise ValueError("cannot echelonize in place and delete zero rows")
             if transformation:
@@ -16213,6 +16217,7 @@ cdef class Matrix(Matrix1):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y,z> = QQ[]
             sage: M = matrix(R, [[2*x-z, 0, y-z^2, 1], [0, z - y, z - x, 0],[z - y, x^2 - y, 0, 0]])
             sage: M
@@ -18854,6 +18859,7 @@ def _matrix_power_symbolic(A, n):
     Check if :issue:`36838` is fixed:Checking symbolic power of
     nilpotent matrix::
 
+        sage: # needs sage.symbolic
         sage: A = matrix([[0,1],[0,0]]); A
         [0 1]
         [0 0]

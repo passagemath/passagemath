@@ -1,3 +1,6 @@
+# sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.combinat sage.modules
+
 cdef extern from 'symmetrica/def.h':
     INT chartafel(OP degree, OP result)
     INT charvalue(OP irred, OP cls, OP result, OP table)
