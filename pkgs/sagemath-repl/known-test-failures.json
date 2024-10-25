@@ -1,4 +1,11 @@
 {
+<<<<<<< HEAD
+||||||| merged common ancestors
+    "sage.doctest.control": {
+        "failed": true,
+        "ntests": 229
+    },
+=======
     "sage.doctest.__main__": {
         "ntests": 9
     },
@@ -10,6 +17,7 @@
         "failed": true,
         "ntests": 228
     },
+>>>>>>> main
     "sage.doctest.external": {
         "ntests": 40
     },
@@ -18,28 +26,48 @@
     },
     "sage.doctest.forker": {
         "failed": true,
+<<<<<<< HEAD
+        "ntests": 385
+||||||| merged common ancestors
+        "ntests": 412
+=======
         "ntests": 413
     },
     "sage.doctest.marked_output": {
         "failed": true,
         "ntests": 21
+>>>>>>> main
     },
     "sage.doctest.parsing": {
         "failed": true,
+<<<<<<< HEAD
+        "ntests": 296
+||||||| merged common ancestors
+        "ntests": 308
+=======
         "ntests": 273
+>>>>>>> main
     },
     "sage.doctest.reporting": {
-        "ntests": 126
+        "failed": true,
+        "ntests": 124
     },
     "sage.doctest.sources": {
         "failed": true,
-        "ntests": 341
+        "ntests": 376
     },
     "sage.doctest.test": {
         "ntests": 23
     },
     "sage.doctest.util": {
+<<<<<<< HEAD
+        "ntests": 138
+||||||| merged common ancestors
+        "failed": true,
+        "ntests": 141
+=======
         "ntests": 137
+>>>>>>> main
     },
     "sage.misc.sage_eval": {
         "failed": true,
@@ -50,7 +78,7 @@
         "ntests": 721
     },
     "sage.repl.attach": {
-        "ntests": 135
+        "ntests": 128
     },
     "sage.repl.configuration": {
         "ntests": 22
@@ -81,7 +109,7 @@
     },
     "sage.repl.interpreter": {
         "failed": true,
-        "ntests": 105
+        "ntests": 109
     },
     "sage.repl.ipython_extension": {
         "failed": true,
@@ -89,7 +117,7 @@
     },
     "sage.repl.ipython_kernel.install": {
         "failed": true,
-        "ntests": 35
+        "ntests": 40
     },
     "sage.repl.ipython_kernel.interact": {
         "failed": true,
@@ -112,11 +140,17 @@
     },
     "sage.repl.load": {
         "failed": true,
-        "ntests": 39
+        "ntests": 41
     },
     "sage.repl.preparse": {
         "failed": true,
+<<<<<<< HEAD
+        "ntests": 341
+||||||| merged common ancestors
+        "ntests": 347
+=======
         "ntests": 345
+>>>>>>> main
     },
     "sage.repl.rich_output.backend_base": {
         "failed": true,
@@ -129,14 +163,14 @@
         "ntests": 15
     },
     "sage.repl.rich_output.backend_ipython": {
-        "ntests": 73
+        "ntests": 75
     },
     "sage.repl.rich_output.buffer": {
         "ntests": 49
     },
     "sage.repl.rich_output.display_manager": {
         "failed": true,
-        "ntests": 84
+        "ntests": 85
     },
     "sage.repl.rich_output.output_basic": {
         "ntests": 46

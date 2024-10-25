@@ -245,7 +245,14 @@ SINGULAR_BIN = var("SINGULAR_BIN") or "Singular"
 OPENMP_CFLAGS = var("OPENMP_CFLAGS", "")
 OPENMP_CXXFLAGS = var("OPENMP_CXXFLAGS", "")
 
+<<<<<<< HEAD
+# Make sure that a non-vendored copy of mpmath (e.g. used by SymPy) does not use Sage types
+||||||| merged common ancestors
+# Make sure mpmath uses Sage types
+os.environ['MPMATH_SAGE'] = '1'
+=======
 # Make sure that mpmath < 1.4 does not try to use Sage types
+>>>>>>> main
 os.environ.pop('MPMATH_SAGE', None)
 os.environ['MPMATH_NOSAGE'] = '1'
 
@@ -293,7 +300,7 @@ def sage_include_directories(use_sources=False):
     Expected output while using Sage::
 
         sage: import sage.env
-        sage: sage.env.sage_include_directories()
+        sage: sage.env.sage_include_directories()                                       # needs numpy
         ['...',
          '.../numpy/...core/include',
          '.../include/python...']
@@ -358,6 +365,7 @@ def cython_aliases(required_modules=None, optional_modules=None):
 
     EXAMPLES::
 
+        sage: # needs sage.misc.cython
         sage: from sage.env import cython_aliases
         sage: cython_aliases()
         {...}
@@ -377,7 +385,7 @@ def cython_aliases(required_modules=None, optional_modules=None):
     We can use ``cython.parallel`` regardless of whether OpenMP is supported.
     This will run in parallel, if OpenMP is supported::
 
-        sage: cython(                                               # optional - sage.misc.cython
+        sage: cython(                                                                                                   # needs sage.misc.cython
         ....: '''
         ....: #distutils: extra_compile_args = OPENMP_CFLAGS
         ....: #distutils: extra_link_args = OPENMP_CFLAGS

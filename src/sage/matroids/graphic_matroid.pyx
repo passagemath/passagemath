@@ -1,5 +1,11 @@
 # sage_setup: distribution = sagemath-modules
+<<<<<<< HEAD
+# sage.doctest: needs sage.graphs
+||||||| merged common ancestors
 # sage.doctest: optional - sage.graphs
+=======
+# sage.doctest: optional - sage.graphs
+>>>>>>> main
 r"""
 Graphic Matroids
 
@@ -523,9 +529,9 @@ cdef class GraphicMatroid(Matroid):
             sage: Mp = M.minor(cert[0], cert[1])
             sage: N.is_isomorphism(Mp, cert[2])
             True
-            sage: M._has_minor(N)
+            sage: M._has_minor(N)                                                       # needs sage.numerical.mip
             True
-            sage: M._has_minor(N1)
+            sage: M._has_minor(N1)                                                      # needs sage.numerical.mip
             True
             sage: _, cert = M._has_minor(N, certificate=True)
             sage: Mp = M.minor(cert[0], cert[1])
@@ -536,13 +542,13 @@ cdef class GraphicMatroid(Matroid):
 
             sage: M = matroids.CompleteGraphic(6)
             sage: N = Matroid(range(8), graphs.WheelGraph(5))
-            sage: M._has_minor(N)
+            sage: M._has_minor(N)                                                       # needs sage.numerical.mip
             True
             sage: _, cert = M._has_minor(N, certificate=True)
             sage: Mp = M.minor(cert[0], cert[1])
             sage: N.is_isomorphism(Mp, cert[2])
             True
-            sage: N.has_minor(M)
+            sage: N.has_minor(M)                                                        # needs sage.numerical.mip
             False
             sage: N.has_minor(M, certificate=True)
             (False, None)

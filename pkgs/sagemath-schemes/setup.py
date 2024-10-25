@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+<<<<<<< HEAD
+from sage_setup import sage_setup
+
+sage_setup(['sagemath-schemes'])
+||||||| merged common ancestors
+=======
 # PEP 517 builds do not have . in sys.path
 import os
 import sys
@@ -9,3 +15,4 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-schemes'],
            package_data={})
+>>>>>>> main

@@ -1,7 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 from sage.misc.lazy_import import lazy_import
 
-
 # Algebra base classes
 lazy_import('sage.algebras.free_algebra', 'FreeAlgebra')
 lazy_import('sage.algebras.free_algebra_quotient', 'FreeAlgebraQuotient')

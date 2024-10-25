@@ -147,6 +147,18 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_graphs				\
 	sagemath_combinat			\
 	sagemath_schemes			\
+<<<<<<< HEAD
+	sagemath_giac				\
+	sagemath_flint				\
+	sagemath_pari				\
+	sagemath_gap				\
+	sagemath_homfly				\
+	sagemath_linbox				\
+	sagemath_ntl				\
+	sagemath_brial				\
+	sagemath_eclib				\
+||||||| merged common ancestors
+=======
 	sagemath_gap				\
 	sagemath_groups				\
 	sagemath_flint				\
@@ -156,6 +168,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_homfly				\
 	sagemath_linbox				\
 	sagemath_ntl				\
+>>>>>>> main
 	sagemath_lcalc				\
 	sagemath_libbraiding			\
 	sagemath_libecm				\
@@ -169,7 +182,10 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
 	sagemath_meataxe			\
-	sagemath_brial
+	sagemath_symbolics			\
+	sagemath_glpk				\
+	sagemath_mpmath				\
+	sagemath_standard_no_symbolics
 
 # sage_docbuild is here, not in PYPI_WHEEL_PACKAGES, because it depends on sagelib
 WHEEL_PACKAGES = $(PYPI_WHEEL_PACKAGES)		\
@@ -814,11 +830,13 @@ $(1)-uninstall: $(1)-$(4)-uninstall
 
 $(1)-clean: $(1)-uninstall
 
-$(1)-sdist: FORCE python_build sage_setup cython
+$(1)-sdist: FORCE python_build sage_setup cython meson_python
 	$(AM_V_at) cd '$$(SAGE_ROOT)' && \
 		. '$$(SAGE_ROOT)/src/bin/sage-src-env-config' && \
 		. '$$(SAGE_ROOT)/src/bin/sage-env-config' && \
 		. '$$(SAGE_ROOT)/src/bin/sage-env' && \
+		export CXXFLAGS="$$$$CXXFLAGS $$$$(echo "$$$$CXX" | sed -En "s/.*(-std=[a-z0-9+]*).*/\1/p")" && \
+		export CXX=$$$$(echo "$$$$CXX" | sed 's/-std=[a-z0-9+]*//g') && \
 		'$$(SAGE_ROOT)/build/pkgs/$(1)/spkg-src'
 
 # Recursive tox invocation

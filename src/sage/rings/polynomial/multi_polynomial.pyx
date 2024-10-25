@@ -2142,7 +2142,7 @@ cdef class MPolynomial(CommutativePolynomial):
             self._parent._singular_().set_ring()
             g = self._singular_().gcd(other._singular_())
             return self._parent(g)
-        except (TypeError, AttributeError):
+        except (TypeError, AttributeError, ImportError):
             pass
 
         gens = self.parent().gens()

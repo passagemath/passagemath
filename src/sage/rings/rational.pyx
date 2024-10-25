@@ -1,4 +1,20 @@
 # sage_setup: distribution = sagemath-categories
+<<<<<<< HEAD
+# distutils: libraries = NTL_LIBRARIES
+# distutils: extra_compile_args = NTL_CFLAGS
+# distutils: include_dirs = NTL_INCDIR
+# distutils: library_dirs = NTL_LIBDIR
+# distutils: extra_link_args = NTL_LIBEXTRA
+# distutils: language = c++
+||||||| merged common ancestors
+# distutils: libraries = NTL_LIBRARIES
+# distutils: extra_compile_args = NTL_CFLAGS
+# distutils: include_dirs = NTL_INCDIR
+# distutils: library_dirs = NTL_LIBDIR
+# distutils: extra_link_args = NTL_LIBEXTRA
+# distutils: language = c++
+=======
+>>>>>>> main
 r"""
 Rational Numbers
 
@@ -61,6 +77,8 @@ import operator
 import fractions
 
 import sage.rings.rational_field
+
+cimport sage.rings.integer as integer
 
 from sage.arith.long cimport integer_check_long_py
 from sage.categories.morphism cimport Morphism

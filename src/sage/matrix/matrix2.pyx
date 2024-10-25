@@ -2420,13 +2420,13 @@ cdef class Matrix(Matrix1):
             sage: R.<q> = LaurentPolynomialRing(S)
             sage: MS = MatrixSpace(S, 3, sparse=True)
             sage: A = MS([[x, y, 3], [4, 2+y, x^2], [0, 1-x, x+y]])
-            sage: A.det()
+            sage: A.det()                                                               # needs sage.rings.finite_rings
             x^4 - x^3 + x^2*y + x*y^2 + 2*x^2 - 2*x*y + 3*y^2 + 2*x - 2
-            sage: A.quantum_determinant()
+            sage: A.quantum_determinant()                                               # needs sage.rings.finite_rings
             (2*x - 2)*q^2 + (x^4 - x^3 + 3*x*y + 3*y^2)*q + x^2*y + x*y^2 + 2*x^2 + 2*x*y
-            sage: A.quantum_determinant(int(2))
+            sage: A.quantum_determinant(int(2))                                         # needs sage.rings.finite_rings
             2*x^4 - 2*x^3 + x^2*y + x*y^2 + 2*x^2 + x*y - y^2 + x - 1
-            sage: A.quantum_determinant(q*x + q^-1*y)
+            sage: A.quantum_determinant(q*x + q^-1*y)                                   # needs sage.rings.finite_rings
             (2*x*y^2 - 2*y^2)*q^-2 + (x^4*y - x^3*y + 3*x*y^2 + 3*y^3)*q^-1
              + (-2*x^2*y + x*y^2 + 2*x^2 - 2*x*y)
              + (x^5 - x^4 + 3*x^2*y + 3*x*y^2)*q + (2*x^3 - 2*x^2)*q^2
@@ -3911,7 +3911,11 @@ cdef class Matrix(Matrix1):
         """
         from sage.matrix.matrix_space import MatrixSpace
         tm = verbose("computing right kernel matrix over a number field for %sx%s matrix" % (self.nrows(), self.ncols()), level=2)
-        basis = self.__pari__().matker()
+        try:
+            self_pari = self.__pari__()
+        except ImportError:
+            return None, None
+        basis = self_pari.matker()
         # Coerce PARI representations into the number field
         R = self.base_ring()
         basis = [[R(x) for x in row] for row in basis]
@@ -11444,9 +11448,9 @@ cdef class Matrix(Matrix1):
             [0 0|0 0|0 1|0]
             [---+---+---+-]
             [0 0|0 0|0 0|1]
-            sage: M * T == T * J
+            sage: M * T == T * J                                                        # needs sage.rings.finite_rings
             True
-            sage: T.rank()
+            sage: T.rank()                                                              # needs sage.rings.finite_rings
             7
             sage: M.rank()
             7

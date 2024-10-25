@@ -1604,6 +1604,7 @@ class KnotInfoBase(Enum):
         Check the skein-relation from the KnotInfo description page (applied to one
         of the positive crossings of the right-handed trefoil)::
 
+            sage: # needs sage.symbolic
             sage: K3_1  = KnotInfo.K3_1
 
             sage: # needs sage.symbolic
