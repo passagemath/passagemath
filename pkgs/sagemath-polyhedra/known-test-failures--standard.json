@@ -1446,7 +1446,6 @@
         "ntests": 125
     },
     "sage.geometry.convex_set": {
-        "failed": true,
         "ntests": 148
     },
     "sage.geometry.fan": {
@@ -1498,41 +1497,33 @@
         "ntests": 111
     },
     "sage.geometry.polyhedron.backend_cdd": {
-        "failed": true,
         "ntests": 33
     },
     "sage.geometry.polyhedron.backend_cdd_rdf": {
-        "failed": true,
         "ntests": 34
     },
     "sage.geometry.polyhedron.backend_field": {
-        "failed": true,
         "ntests": 64
     },
     "sage.geometry.polyhedron.backend_normaliz": {
         "ntests": 21
     },
     "sage.geometry.polyhedron.backend_number_field": {
-        "failed": true,
-        "ntests": 28
+        "ntests": 27
     },
     "sage.geometry.polyhedron.backend_polymake": {
         "ntests": 73
     },
     "sage.geometry.polyhedron.backend_ppl": {
-        "failed": true,
         "ntests": 90
     },
     "sage.geometry.polyhedron.base": {
-        "failed": true,
         "ntests": 150
     },
     "sage.geometry.polyhedron.base0": {
-        "failed": true,
         "ntests": 212
     },
     "sage.geometry.polyhedron.base1": {
-        "failed": true,
         "ntests": 144
     },
     "sage.geometry.polyhedron.base2": {
@@ -1540,14 +1531,12 @@
         "ntests": 96
     },
     "sage.geometry.polyhedron.base3": {
-        "failed": true,
-        "ntests": 322
+        "ntests": 320
     },
     "sage.geometry.polyhedron.base4": {
         "ntests": 10
     },
     "sage.geometry.polyhedron.base5": {
-        "failed": true,
         "ntests": 382
     },
     "sage.geometry.polyhedron.base6": {
@@ -1555,15 +1544,12 @@
         "ntests": 247
     },
     "sage.geometry.polyhedron.base7": {
-        "failed": true,
         "ntests": 128
     },
     "sage.geometry.polyhedron.base_QQ": {
-        "failed": true,
         "ntests": 112
     },
     "sage.geometry.polyhedron.base_RDF": {
-        "failed": true,
         "ntests": 14
     },
     "sage.geometry.polyhedron.base_ZZ": {
@@ -1571,7 +1557,6 @@
         "ntests": 100
     },
     "sage.geometry.polyhedron.base_mutable": {
-        "failed": true,
         "ntests": 57
     },
     "sage.geometry.polyhedron.base_number_field": {
@@ -1581,29 +1566,24 @@
         "ntests": 10
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.base": {
-        "failed": true,
-        "ntests": 589
+        "ntests": 581
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.combinatorial_face": {
-        "failed": true,
         "ntests": 180
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.conversions": {
         "ntests": 58
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.face_iterator": {
-        "failed": true,
         "ntests": 364
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.list_of_faces": {
         "ntests": 67
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.polyhedron_face_lattice": {
-        "failed": true,
         "ntests": 52
     },
     "sage.geometry.polyhedron.constructor": {
-        "failed": true,
         "ntests": 109
     },
     "sage.geometry.polyhedron.double_description": {
@@ -1613,7 +1593,6 @@
         "ntests": 72
     },
     "sage.geometry.polyhedron.face": {
-        "failed": true,
         "ntests": 159
     },
     "sage.geometry.polyhedron.lattice_euclidean_group_element": {
@@ -1637,7 +1616,6 @@
         "ntests": 200
     },
     "sage.geometry.polyhedron.plot": {
-        "failed": true,
         "ntests": 225
     },
     "sage.geometry.polyhedron.ppl_lattice_polygon": {
@@ -1647,14 +1625,12 @@
         "ntests": 166
     },
     "sage.geometry.polyhedron.representation": {
-        "failed": true,
         "ntests": 343
     },
     "sage.geometry.pseudolines": {
         "ntests": 77
     },
     "sage.geometry.relative_interior": {
-        "failed": true,
         "ntests": 88
     },
     "sage.geometry.toric_lattice": {
@@ -1719,7 +1695,6 @@
         "ntests": 33
     },
     "sage.groups.affine_gps.group_element": {
-        "failed": true,
         "ntests": 92
     },
     "sage.groups.galois_group": {
@@ -2349,7 +2324,6 @@
         "ntests": 11
     },
     "sage.misc.latex_standalone": {
-        "failed": true,
         "ntests": 210
     },
     "sage.misc.lazy_attribute": {
@@ -2668,7 +2642,7 @@
     },
     "sage.numerical.interactive_simplex_method": {
         "failed": true,
-        "ntests": 1054
+        "ntests": 1081
     },
     "sage.numerical.knapsack": {
         "ntests": 77
@@ -2748,7 +2722,6 @@
         "ntests": 40
     },
     "sage.plot.graphics": {
-        "failed": true,
         "ntests": 310
     },
     "sage.plot.histogram": {
@@ -3077,7 +3050,6 @@
         "ntests": 34
     },
     "sage.rings.derivation": {
-        "failed": true,
         "ntests": 406
     },
     "sage.rings.factorint": {
@@ -3182,7 +3154,7 @@
     },
     "sage.rings.fraction_field_element": {
         "failed": true,
-        "ntests": 217
+        "ntests": 0
     },
     "sage.rings.function_field.constructor": {
         "ntests": 34
@@ -3349,7 +3321,6 @@
         "ntests": 258
     },
     "sage.rings.number_field.number_field_morphisms": {
-        "failed": true,
         "ntests": 167
     },
     "sage.rings.number_field.number_field_rel": {
@@ -3565,7 +3536,6 @@
         "ntests": 160
     },
     "sage.rings.polynomial.laurent_polynomial_ring_base": {
-        "failed": true,
         "ntests": 127
     },
     "sage.rings.polynomial.multi_polynomial": {
@@ -3945,7 +3915,6 @@
         "ntests": 435
     },
     "sage.schemes.projective.projective_subscheme": {
-        "failed": true,
         "ntests": 260
     },
     "sage.schemes.toric.chow_group": {
@@ -4066,7 +4035,6 @@
         "ntests": 163
     },
     "sage.structure.coerce": {
-        "failed": true,
         "ntests": 360
     },
     "sage.structure.coerce_actions": {
@@ -4186,7 +4154,6 @@
         "ntests": 150
     },
     "sage.tensor.modules.comp": {
-        "failed": true,
         "ntests": 1009
     },
     "sage.tensor.modules.ext_pow_free_module": {
@@ -4220,7 +4187,6 @@
         "ntests": 326
     },
     "sage.tensor.modules.free_module_tensor": {
-        "failed": true,
         "ntests": 638
     },
     "sage.tensor.modules.reflexive_module": {
@@ -4230,7 +4196,6 @@
         "ntests": 142
     },
     "sage.tensor.modules.tensor_free_submodule": {
-        "failed": true,
         "ntests": 104
     },
     "sage.tensor.modules.tensor_free_submodule_basis": {

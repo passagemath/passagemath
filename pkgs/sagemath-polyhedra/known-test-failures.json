@@ -1443,7 +1443,6 @@
         "ntests": 33
     },
     "sage.geometry.polyhedron.backend_cdd_rdf": {
-        "failed": true,
         "ntests": 34
     },
     "sage.geometry.polyhedron.backend_field": {
@@ -1455,7 +1454,7 @@
     },
     "sage.geometry.polyhedron.backend_number_field": {
         "failed": true,
-        "ntests": 23
+        "ntests": 22
     },
     "sage.geometry.polyhedron.backend_polymake": {
         "ntests": 73
@@ -1473,7 +1472,6 @@
         "ntests": 212
     },
     "sage.geometry.polyhedron.base1": {
-        "failed": true,
         "ntests": 140
     },
     "sage.geometry.polyhedron.base2": {
@@ -1481,7 +1479,6 @@
         "ntests": 96
     },
     "sage.geometry.polyhedron.base3": {
-        "failed": true,
         "ntests": 320
     },
     "sage.geometry.polyhedron.base4": {
@@ -1522,25 +1519,21 @@
         "ntests": 10
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.base": {
-        "failed": true,
         "ntests": 577
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.combinatorial_face": {
-        "failed": true,
         "ntests": 180
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.conversions": {
         "ntests": 58
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.face_iterator": {
-        "failed": true,
         "ntests": 364
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.list_of_faces": {
         "ntests": 67
     },
     "sage.geometry.polyhedron.combinatorial_polyhedron.polyhedron_face_lattice": {
-        "failed": true,
         "ntests": 52
     },
     "sage.geometry.polyhedron.constructor": {
@@ -1597,7 +1590,6 @@
         "ntests": 77
     },
     "sage.geometry.relative_interior": {
-        "failed": true,
         "ntests": 88
     },
     "sage.geometry.toric_lattice": {
@@ -1751,6 +1743,7 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
+        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -2394,7 +2387,8 @@
         "ntests": 60
     },
     "sage.numerical.interactive_simplex_method": {
-        "ntests": 1054
+        "failed": true,
+        "ntests": 1081
     },
     "sage.numerical.knapsack": {
         "ntests": 77
