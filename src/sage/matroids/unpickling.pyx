@@ -34,9 +34,7 @@ from sage.rings.rational cimport Rational
 from sage.matroids.basis_matroid cimport BasisMatroid
 from sage.matroids.circuits_matroid cimport CircuitsMatroid
 from sage.matroids.circuit_closures_matroid cimport CircuitClosuresMatroid
-from sage.matroids.flats_matroid cimport FlatsMatroid
 from sage.matroids.dual_matroid import DualMatroid
-from sage.matroids.graphic_matroid import GraphicMatroid
 from sage.matroids.lean_matrix cimport GenericMatrix, BinaryMatrix, TernaryMatrix, QuaternaryMatrix, PlusMinusOneMatrix, RationalMatrix
 from sage.matroids.linear_matroid cimport LinearMatroid, RegularMatroid, BinaryMatroid, TernaryMatroid, QuaternaryMatroid
 from sage.matroids.minor_matroid import MinorMatroid
@@ -198,12 +196,13 @@ def unpickle_flats_matroid(version, data):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: from sage.matroids.flats_matroid import FlatsMatroid
         sage: M = FlatsMatroid(matroids.catalog.Vamos())
         sage: M == loads(dumps(M))  # indirect doctest
         True
     """
-    cdef FlatsMatroid M
+    from sage.matroids.flats_matroid import FlatsMatroid
     if version != 0:
         raise TypeError("object was created with newer version of Sage. Please upgrade.")
     M = FlatsMatroid(groundset=data[0], flats=data[1])
@@ -741,6 +740,7 @@ def unpickle_graphic_matroid(version, data):
         sage: M == loads(dumps(M))                                                      # needs sage.graphs
         True
     """
+    from sage.matroids.graphic_matroid import GraphicMatroid
     if version != 0:
         raise TypeError("object was created with newer version of Sage. Please upgrade.")
     G, name = data
