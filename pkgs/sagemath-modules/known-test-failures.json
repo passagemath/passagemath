@@ -1611,11 +1611,9 @@
         "ntests": 18
     },
     "sage.matroids.advanced": {
-        "failed": true,
         "ntests": 1
     },
     "sage.matroids.basis_exchange_matroid": {
-        "failed": true,
         "ntests": 186
     },
     "sage.matroids.basis_matroid": {
@@ -1628,7 +1626,7 @@
     },
     "sage.matroids.circuits_matroid": {
         "failed": true,
-        "ntests": 141
+        "ntests": 119
     },
     "sage.matroids.constructor": {
         "failed": true,
@@ -1636,7 +1634,7 @@
     },
     "sage.matroids.database_collections": {
         "failed": true,
-        "ntests": 14
+        "ntests": 10
     },
     "sage.matroids.database_matroids": {
         "failed": true,
@@ -1644,10 +1642,9 @@
     },
     "sage.matroids.dual_matroid": {
         "failed": true,
-        "ntests": 92
+        "ntests": 77
     },
     "sage.matroids.extension": {
-        "failed": true,
         "ntests": 48
     },
     "sage.matroids.flats_matroid": {
@@ -1670,7 +1667,6 @@
         "ntests": 73
     },
     "sage.matroids.rank_matroid": {
-        "failed": true,
         "ntests": 50
     },
     "sage.matroids.set_system": {
@@ -1684,7 +1680,6 @@
         "ntests": 64
     },
     "sage.matroids.utilities": {
-        "failed": true,
         "ntests": 61
     },
     "sage.misc.abstract_method": {
@@ -2085,12 +2080,10 @@
         "ntests": 152
     },
     "sage.numerical.backends.generic_backend": {
-        "failed": true,
-        "ntests": 60
+        "ntests": 8
     },
     "sage.numerical.backends.generic_sdp_backend": {
-        "failed": true,
-        "ntests": 22
+        "ntests": 3
     },
     "sage.numerical.gauss_legendre": {
         "ntests": 60
