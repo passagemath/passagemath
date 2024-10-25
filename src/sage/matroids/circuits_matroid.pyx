@@ -499,6 +499,7 @@ cdef class CircuitsMatroid(Matroid):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: from sage.matroids.circuits_matroid import CircuitsMatroid
             sage: M = CircuitsMatroid(matroids.CompleteGraphic(4))
             sage: len(M.bases())
@@ -548,6 +549,8 @@ cdef class CircuitsMatroid(Matroid):
             sage: M = CircuitsMatroid(matroids.Uniform(2, 4))
             sage: len(M.nonbases())
             0
+
+            sage: # needs sage.graphs
             sage: M = CircuitsMatroid(matroids.CompleteGraphic(6))
             sage: len(M.nonbases())
             1707
@@ -755,6 +758,7 @@ cdef class CircuitsMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1, 2, 3], [3, 4, 5], [1, 2, 4, 5]])
             sage: SimplicialComplex(M.no_broken_circuits_sets())
             Simplicial complex with vertex set (1, 2, 3, 4, 5)
@@ -765,6 +769,7 @@ cdef class CircuitsMatroid(Matroid):
 
         ::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1, 2, 3], [1, 4, 5], [2, 3, 4, 5]])
             sage: SimplicialComplex(M.no_broken_circuits_sets([5, 4, 3, 2, 1]))
             Simplicial complex with vertex set (1, 2, 3, 4, 5)
@@ -772,6 +777,7 @@ cdef class CircuitsMatroid(Matroid):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1, 2, 3], [3, 4, 5], [1, 2, 4, 5]])
             sage: C1 = SimplicialComplex(M.no_broken_circuits_sets())
             sage: from sage.matroids.basis_matroid import BasisMatroid
@@ -805,6 +811,7 @@ cdef class CircuitsMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1, 2, 3], [3, 4, 5], [1, 2, 4, 5]])
             sage: M.broken_circuit_complex()
             Simplicial complex with vertex set (1, 2, 3, 4, 5)
@@ -819,6 +826,7 @@ cdef class CircuitsMatroid(Matroid):
         For a matroid with loops, the broken circuit complex is not defined,
         and the method yields an error::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(groundset=[0, 1, 2], circuits=[[0]])
             sage: M.broken_circuit_complex()
             Traceback (most recent call last):

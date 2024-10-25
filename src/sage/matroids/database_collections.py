@@ -230,6 +230,7 @@ def OxleyMatroids():
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: OM = list(matroids.OxleyMatroids()); len(OM)
         44
         sage: import random
