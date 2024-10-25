@@ -845,7 +845,6 @@ class RationalField(Singleton, number_field_base.NumberField):
         from sage.matrix.constructor import matrix
         from sage.modules.free_module import VectorSpace
         from sage.rings.finite_rings.finite_field_constructor import FiniteField as GF
-        from sage.rings.padics.factory import Qp
         from sage.sets.primes import Primes
 
         # input checks
@@ -868,6 +867,7 @@ class RationalField(Singleton, number_field_base.NumberField):
                 if check and not is_prime(p):
                     raise ValueError("all entries in list must be prime"
                                      " or -1 for infinite place")
+                from sage.rings.padics.factory import Qp
                 R = Qp(p)
                 if R(b).is_square():
                     raise ValueError("second argument must be a nonsquare with"
