@@ -1,9 +1,5 @@
 # sage_setup: distribution = sagemath-symbolics
-<<<<<<< HEAD
-||||||| merged common ancestors
-=======
 # sage.doctest: needs giac
->>>>>>> main
 r"""
 Pexpect Interface to Giac
 
