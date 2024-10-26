@@ -481,11 +481,12 @@ cdef class FractionFieldElement(FieldElement):
 
         Check that :issue:`37122` is fixed::
 
+            sage: # needs sage.libs.singular
             sage: P = PolynomialRing(QQ, ["x%s" % i for i in range(10000)])
             sage: PF = P.fraction_field()
             sage: p = sum(i*P.gen(i) for i in range(5)) / sum(i*P.gen(i) for i in range(8))
             sage: v = P.gen(4)
-            sage: p.subs({v: 100})                                                      # needs sage.libs.singular
+            sage: p.subs({v: 100})
             (x1 + 2*x2 + 3*x3 + 400)/(x1 + 2*x2 + 3*x3 + 5*x5 + 6*x6 + 7*x7 + 400)
         """
         if isinstance(in_dict, dict):
