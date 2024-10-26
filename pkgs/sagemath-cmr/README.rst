@@ -1,5 +1,5 @@
 ==========================================================================
- Sage: Open Source Mathematics Software: Combinatorial matrix recognition
+ passagemath: Combinatorial matrix recognition
 ==========================================================================
 
 About SageMath
@@ -22,8 +22,8 @@ for general installation instructions.
 About this pip-installable source distribution
 ----------------------------------------------
 
-This pip-installable source distribution ``sagemath-cmr`` is a small
-optional distribution for use with ``sagemath-standard``.
+This pip-installable source distribution ``passagemath-cmr`` is a small
+optional distribution for use with ``passagemath-standard``.
 
 It provides a Cython interface to the CMR library (https://github.com/discopt/cmr),
 providing recognition and decomposition algorithms for:
