@@ -88,9 +88,12 @@ def produce_latex_macro(name, *sample_args):
                 import sage.all__sagemath_polyhedra as toplevel
             except ImportError:
                 try:
-                    import sage.all__sagemath_categories as toplevel
+                    import sage.all__sagemath_modules as toplevel
                 except ImportError:
-                    import sage.all__sagemath_objects as toplevel
+                    try:
+                        import sage.all__sagemath_categories as toplevel
+                    except ImportError:
+                        import sage.all__sagemath_objects as toplevel
         module = toplevel.__name__
         real_name = names_split[0]
     else:
@@ -207,7 +210,13 @@ def sage_latex_macros():
         sage: sage_latex_macros()
         ['\\newcommand{\\ZZ}{\\Bold{Z}}', '\\newcommand{\\NN}{\\Bold{N}}', ...
     """
-    return [produce_latex_macro(*x) for x in macros] + latex_macros + sage_configurable_latex_macros
+    result = []
+    for x in macros:
+        try:
+            result.append(produce_latex_macro(*x))
+        except ImportError:
+            pass
+    return result + latex_macros + sage_configurable_latex_macros
 
 
 def sage_mathjax_macros():
