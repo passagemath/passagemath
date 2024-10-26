@@ -35,3 +35,19 @@ providing recognition and decomposition algorithms for:
 - Regular Matroids
 - Graphic / Cographic / Planar Matrices
 - Series-Parallel Matroids
+
+
+Development
+-----------
+
+::
+
+    $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
+    $ cd passagemath
+    passagemath $ ./bootstrap
+    passagemath $ ./.homebrew-build-env         # on macOS when homebrew is in use
+    passagemath $ python3 -m venv cmr-venv
+    passagemath $ source cmr-venv/bin/activate
+    (cmr-venv) passagemath $ pip install -v -e pkgs/sagemath-cmr        \
+                                            -e pkgs/sagemath-modules    \
+                                            -e pkgs/sagemath-categories
