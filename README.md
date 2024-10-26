@@ -122,15 +122,22 @@ This makes technical sense because the dependencies will be localized to this di
 
 [![PyPI: passagemath-categories](https://img.shields.io/pypi/v/passagemath-categories.svg?label=passagemath-categories)](https://pypi.python.org/pypi/passagemath-categories) This distribution package contains the full set of categories defined by Sage, as well as basic mathematical objects such as integers and rational numbers, a basic implementation of polynomials, and affine spaces.  None of this brings in additional dependencies.
 
-[![PyPI: passagemath-environment](https://img.shields.io/pypi/v/passagemath-environment.svg?label=passagemath-environment)](https://pypi.python.org/pypi/passagemath-environment) provides the `sage` script for launching the Sage REPL and accessing various developer tools and modules that provide the connection to the system and software environment.
+[![PyPI: passagemath-environment](https://img.shields.io/pypi/v/passagemath-environment.svg?label=passagemath-environment)](https://pypi.python.org/pypi/passagemath-environment) provides the `sage` script for launching the Sage REPL and accessing various developer tools and Python modules that provide the connection to the system and software environment.
+
+[![PyPI: passagemath-repl](https://img.shields.io/pypi/v/passagemath-repl.svg?label=passagemath-repl)](https://pypi.python.org/pypi/passagemath-repl) The top-level interactive environment with the preparser that defines the surface language of Sage. This distribution also includes the doctesting facilities (`sage -t`), as the doctests are written in the surface language.
 
 [![PyPI: passagemath-plot](https://img.shields.io/pypi/v/passagemath-plot.svg?label=passagemath-plot)](https://pypi.python.org/pypi/passagemath-plot) Plotting facilities, depending on [matplotlib](https://matplotlib.org).
 
-[![PyPI: passagemath-repl](https://img.shields.io/pypi/v/passagemath-repl.svg?label=passagemath-repl)](https://pypi.python.org/pypi/passagemath-repl) The top-level interactive environment with the preparser that defines the surface language of Sage. This distribution also includes the doctesting facilities, as the doctests are written in the surface language.
+[![PyPI: passagemath-standard-no-symbolics](https://img.shields.io/pypi/v/passagemath-standard-no-symbolics.svg?label=passagemath-standard-no-symbolics)](https://pypi.python.org/pypi/passagemath-standard-no-symbolics) Ideally an empty meta-package that depends on everything that is not in passagemath-symbolics; as a catch-all mechanism, this distribution ships all modules that do not carry a `# sage_setup: distribution = ...` directive.
 
 [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard) Everything as provided by a standard installation of the Sage distribution. This is reduced to an empty meta-package.
 
-[![PyPI: passagemath-standard-no-symbolics](https://img.shields.io/pypi/v/passagemath-standard-no-symbolics.svg?label=passagemath-standard-no-symbolics)](https://pypi.python.org/pypi/passagemath-standard-no-symbolics)
+[![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf) Confectionery and configuration system.
+
+[![PyPI: passagemath-setup](https://img.shields.io/pypi/v/passagemath-setup.svg?label=passagemath-setup)](https://pypi.python.org/pypi/passagemath-setup) Build system for the Sage library.
+
+[![PyPI: passagemath-docbuild](https://img.shields.io/pypi/v/passagemath-docbuild.svg?label=passagemath-docbuild)](https://pypi.python.org/pypi/passagemath-docbuild) Build system for the Sage documentation.
+
 
 
 Table of Contents
