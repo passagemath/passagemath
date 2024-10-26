@@ -1483,7 +1483,6 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
-        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -1764,7 +1763,6 @@
         "ntests": 17
     },
     "sage.misc.html": {
-        "failed": true,
         "ntests": 64
     },
     "sage.misc.inherit_comparison": {
@@ -1781,7 +1779,6 @@
         "ntests": 235
     },
     "sage.misc.latex_macros": {
-        "failed": true,
         "ntests": 11
     },
     "sage.misc.latex_standalone": {
@@ -1868,7 +1865,6 @@
         "ntests": 31
     },
     "sage.misc.reset": {
-        "failed": true,
         "ntests": 29
     },
     "sage.misc.rest_index_of_methods": {
@@ -2240,7 +2236,6 @@
         "ntests": 353
     },
     "sage.repl.rich_output.backend_base": {
-        "failed": true,
         "ntests": 96
     },
     "sage.repl.rich_output.backend_doctest": {
@@ -2355,8 +2350,7 @@
         "ntests": 201
     },
     "sage.rings.fraction_field_element": {
-        "failed": true,
-        "ntests": 0
+        "ntests": 193
     },
     "sage.rings.function_field.constructor": {
         "ntests": 34
