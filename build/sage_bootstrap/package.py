@@ -470,7 +470,7 @@ class Package(object):
         """
         Return a list of strings, the package names of the check dependencies
         """
-        return self.__dependencies_order_only.strip().split()
+        return self.__dependencies_check.strip().split()
 
     def __eq__(self, other):
         return self.tarball == other.tarball
