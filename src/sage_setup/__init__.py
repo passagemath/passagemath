@@ -1,6 +1,7 @@
 def sage_setup(distributions, *,
                interpreters=(),
                required_modules=(), optional_modules=(),
+               spkgs=(),
                recurse_packages=(),
                package_data=None):
     r"""
@@ -16,6 +17,8 @@ def sage_setup(distributions, *,
     - ``required_modules`` -- sequence of strings, pkgconfig modules that are required for the build.
 
     - ``optional_modules`` -- sequence of strings, pkgconfig modules to checked for the build.
+
+    - ``spkgs`` -- sequence of strings, SPKGs required for the build.
 
     - ``package_data`` -- ``None`` or a dictionary mapping package names to lists of filename
       glob patterns, the package data to install.
@@ -67,6 +70,14 @@ def sage_setup(distributions, *,
 
     from sage_setup.excepthook import excepthook
     sys.excepthook = excepthook
+
+    if spkgs:
+        try:
+            from sage_conf import make
+        except ImportError:
+            pass
+        else:
+            make(" ".join(f"{spkg}-ensure" for spkg in spkgs))
 
     from sage_setup.setenv import setenv
     setenv()
