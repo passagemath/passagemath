@@ -21,7 +21,7 @@ from sage.interfaces.process import ContainChildren
 from sage.misc.timing import walltime
 
 
-class WorkerData():
+class WorkerData:
     """
     Simple class which stores data about a running ``p_iter_fork``
     worker.
@@ -56,7 +56,7 @@ class WorkerData():
         self.failure = failure
 
 
-class p_iter_fork():
+class p_iter_fork:
     """
     A parallel iterator implemented using ``fork()``.
 

@@ -490,6 +490,7 @@ class MultivectorModule(UniqueRepresentation, Parent):
 
 #***********************************************************************
 
+
 class MultivectorFreeModule(ExtPowerFreeModule):
     r"""
     Free module of multivector fields of a given degree `p` (`p`-vector
