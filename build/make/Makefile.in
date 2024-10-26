@@ -821,6 +821,17 @@ $(1)-sdist: FORCE python_build sage_setup cython
 		. '$$(SAGE_ROOT)/src/bin/sage-env' && \
 		'$$(SAGE_ROOT)/build/pkgs/$(1)/spkg-src'
 
+$(1)-cibuildwheel: cibuildwheel $(1)-sdist
+	$(AM_V_at) cd '$$(SAGE_ROOT)' && \
+		. '$$(SAGE_ROOT)/src/bin/sage-src-env-config' && \
+		. '$$(SAGE_ROOT)/src/bin/sage-env-config' && \
+		. '$$(SAGE_ROOT)/src/bin/sage-env' && \
+		rm -rf '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked' && \
+		mkdir -p '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked' && \
+		cd '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked' && \
+		tar xfz $$$$(ls -t $$$$SAGE_DISTFILES/*$(1)*.tar.gz | head -n1) && \
+		python3 -m cibuildwheel *$(1)*
+
 # Recursive tox invocation
 # Setting SAGE_SPKG_WHEELS is for the benefit of sagelib's tox.ini
 $(1)-tox-%: FORCE
