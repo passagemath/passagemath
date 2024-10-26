@@ -451,7 +451,7 @@ class EnumeratedSetFromIterator(Parent):
 
 # TODO: move it in sage.misc ?
 @instancedoc
-class Decorator():
+class Decorator:
     r"""
     Abstract class that manage documentation and sources of the wrapped object.
 
@@ -839,7 +839,7 @@ class EnumeratedSetFromIterator_method_caller(Decorator):
             **self.options)
 
 
-class EnumeratedSetFromIterator_method_decorator():
+class EnumeratedSetFromIterator_method_decorator:
     r"""
     Decorator for enumerated set built from a method.
 

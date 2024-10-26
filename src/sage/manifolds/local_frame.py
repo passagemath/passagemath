@@ -409,6 +409,7 @@ class LocalCoFrame(FreeModuleCoBasis):
 
 #******************************************************************************
 
+
 class LocalFrame(FreeModuleBasis):
     r"""
     Local frame on a vector bundle.
@@ -1233,6 +1234,7 @@ class LocalFrame(FreeModuleBasis):
 
 #******************************************************************************
 
+
 class TrivializationCoFrame(LocalCoFrame):
     r"""
     Trivialization coframe on a vector bundle.
@@ -1364,6 +1366,7 @@ class TrivializationCoFrame(LocalCoFrame):
         return "Trivialization coframe " + self._name
 
 #******************************************************************************
+
 
 class TrivializationFrame(LocalFrame):
     r"""

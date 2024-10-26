@@ -73,7 +73,7 @@ relation_operators = {operator.eq: '==',
                       operator.ge: '>='}
 
 
-class FDerivativeOperator():
+class FDerivativeOperator:
     r"""
     Function derivative operators.
 
@@ -202,7 +202,7 @@ class FDerivativeOperator():
         return self._parameter_set
 
 
-class DerivativeOperator():
+class DerivativeOperator:
     """
     Derivative operator.
 
@@ -227,7 +227,7 @@ class DerivativeOperator():
         sage: D[0, 1](f)(x, x^2)
         D[0, 1](f)(x, x^2)
     """
-    class DerivativeOperatorWithParameters():
+    class DerivativeOperatorWithParameters:
         def __init__(self, parameter_set):
             self._parameter_set = parameter_set
 

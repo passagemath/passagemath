@@ -234,7 +234,7 @@ class PiecewiseFunction(BuiltinFunction):
                     return subs_map.apply_to(func, 0)
             raise ValueError(f'point {point} is not in the domain')
 
-        raise ValueError('substition not allowed')
+        raise ValueError('substitution not allowed')
 
     @staticmethod
     def in_operands(ex):
@@ -320,7 +320,7 @@ class PiecewiseFunction(BuiltinFunction):
                           for domain, func in parameters],
                          var=variable)
 
-    class EvaluationMethods():
+    class EvaluationMethods:
 
         def __pow__(self, parameters, variable, n):
             """
