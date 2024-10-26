@@ -12,6 +12,7 @@ sage_setup(['sagemath-singular'],
                              # from sagemath-linbox
                              'fflas-ffpack', 'givaro', 'gsl', 'linbox', 'cblas',
                              'm4ri', 'gdlib', 'libpng', 'zlib'),
+           spkgs=['singular'],
            package_data={"sage": [
                "ext_data/singular/**",
            ]})
