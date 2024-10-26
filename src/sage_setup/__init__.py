@@ -71,21 +71,6 @@ def sage_setup(distributions, *,
     from sage_setup.excepthook import excepthook
     sys.excepthook = excepthook
 
-    if spkgs:
-        try:
-            from sage_conf import make
-        except ImportError:
-            pass
-        else:
-            make(" ".join(f"{spkg}-ensure" for spkg in spkgs))
-
-    from sage_setup.setenv import setenv
-    setenv()
-
-    import sage.env
-    sage.env.default_required_modules = required_modules
-    sage.env.default_optional_modules = optional_modules
-
     cmdclass = dict(build_ext=sage_build_ext_minimal,
                     build_py=sage_build_py)
 
@@ -99,6 +84,22 @@ def sage_setup(distributions, *,
         python_modules = []
         python_packages = []
     else:
+
+        if spkgs:
+            try:
+                from sage_conf import make
+            except ImportError:
+                pass
+            else:
+                make(" ".join(f"{spkg}-ensure" for spkg in spkgs))
+
+        from sage_setup.setenv import setenv
+        setenv()
+
+        import sage.env
+        sage.env.default_required_modules = required_modules
+        sage.env.default_optional_modules = optional_modules
+
         if interpreters:
             log.info("Generating auto-generated sources")
             # from sage_setup.autogen import autogen_all
