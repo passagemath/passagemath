@@ -26,7 +26,7 @@ from sage.rings.integer_ring import ZZ
 from sage.structure.element import coercion_model
 
 
-class CellComplexReference():
+class CellComplexReference:
 
     def __init__(self, cell_complex, degree, cells=None):
         """

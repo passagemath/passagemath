@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-categories
+# sage_setup: distribution = sagemath-repl
 """
 Quitting interfaces
 """

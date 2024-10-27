@@ -407,7 +407,7 @@ class Hypergeometric(BuiltinFunction):
         return (t * derivative(z, diff_param) *
                 hypergeometric([c + 1 for c in a], [c + 1 for c in b], z))
 
-    class EvaluationMethods():
+    class EvaluationMethods:
 
         def _fast_callable_(self, a, b, z, etb):
             """
@@ -1027,7 +1027,7 @@ class Hypergeometric_M(BuiltinFunction):
         raise NotImplementedError('derivative of hypergeometric function '
                                   'with respect to parameters')
 
-    class EvaluationMethods():
+    class EvaluationMethods:
         def generalized(self, a, b, z):
             """
             Return as a generalized hypergeometric function.
@@ -1133,7 +1133,7 @@ class Hypergeometric_U(BuiltinFunction):
         raise NotImplementedError('derivative of hypergeometric function '
                                   'with respect to parameters')
 
-    class EvaluationMethods():
+    class EvaluationMethods:
         def generalized(self, a, b, z):
             """
             Return in terms of the generalized hypergeometric function.

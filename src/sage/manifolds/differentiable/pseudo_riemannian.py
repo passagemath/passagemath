@@ -275,6 +275,7 @@ from sage.manifolds.differentiable.manifold import DifferentiableManifold
 
 ###############################################################################
 
+
 class PseudoRiemannianManifold(DifferentiableManifold):
     r"""
     PseudoRiemannian manifold.
