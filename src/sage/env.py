@@ -279,6 +279,12 @@ SAGE_GAP_COMMAND = var('SAGE_GAP_COMMAND', None)
 GAP_ROOT_PATHS = var("GAP_ROOT_PATHS",
                      ";".join([join(SAGE_LOCAL, "lib", "gap"),
                                join(SAGE_LOCAL, "share", "gap")]))
+try:
+    import gap
+except ImportError:
+    pass
+else:
+    GAP_ROOT_PATHS = ';'.join(p for p in gap.__path__) + ';' + GAP_ROOT_PATHS
 
 # post process
 if DOT_SAGE is not None and ' ' in DOT_SAGE:

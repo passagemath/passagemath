@@ -846,9 +846,13 @@ $(1)-cibuildwheel: cibuildwheel $(1)-sdist
 		. '$$(SAGE_ROOT)/src/bin/sage-env' && \
 		rm -rf '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked' && \
 		mkdir -p '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked' && \
-		cd '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked' && \
-		tar xfz $$$$(ls -t $$$$SAGE_DISTFILES/*$(1)*.tar.gz | head -n1) && \
-		python3 -m cibuildwheel *$(1)*
+		(cd '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked' && \
+		 tar xfz $$$$(ls -t $$$$SAGE_DISTFILES/*$(1)*.tar.gz | head -n1)) && \
+		export CIBW_BEFORE_ALL='echo > constraints.txt' && \
+		export CIBW_BEFORE_BUILD='(echo "passagemath-conf @ file://$$$$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$$$$(pwd)/pkgs/sage-setup") > constraints.txt' && \
+		export CIBW_ENVIRONMENT='PATH=$$$$(pwd)/prefix/bin:$$$$PATH CPATH=$$$$(pwd)/prefix/include:$$$$CPATH LIBRARY_PATH=$$$$(pwd)/prefix/lib:$$$$LIBRARY_PATH PKG_CONFIG_PATH=$$$$(pwd)/prefix/lib/pkgconfig:$$$$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$$$$(pwd)/constraints.txt PIP_FIND_LINKS=file://$$$$(pwd)/wheelhouse SAGE_NUM_THREADS=6' && \
+		env | grep '^CIBW' && \
+		python3 -m cibuildwheel --output-dir '$$(SAGE_ROOT)/wheelhouse' '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked'/*$(1)*
 
 # Recursive tox invocation
 # Setting SAGE_SPKG_WHEELS is for the benefit of sagelib's tox.ini
