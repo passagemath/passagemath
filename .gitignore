@@ -5,6 +5,7 @@
 /local
 /logs
 /upstream
+/wheelhouse
 
 # Autotools generated files
 /aclocal.m4
@@ -215,6 +216,8 @@ build/bin/sage-build-env-config
 /pkgs/sagemath-*/meson-build
 /pkgs/sagemath-*/cython_debug
 /pkgs/sagemath-*/.pyodide-xbuildenv
+
+/build/pkgs/*/unpacked
 
 # same for old locations - before Issue #31577
 /build/pkgs/*/src/build
