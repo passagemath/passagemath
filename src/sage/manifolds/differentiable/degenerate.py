@@ -23,6 +23,7 @@ if TYPE_CHECKING:
 
 ###############################################################################
 
+
 class DegenerateManifold(DifferentiableManifold):
     r"""
 
@@ -370,6 +371,7 @@ class DegenerateManifold(DifferentiableManifold):
 
 from sage.manifolds.differentiable.tensorfield_paral import TensorFieldParal
 from sage.manifolds.differentiable.tensorfield import TensorField
+
 
 class TangentTensor(TensorFieldParal):
     r"""

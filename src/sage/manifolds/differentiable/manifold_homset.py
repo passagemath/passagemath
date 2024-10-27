@@ -50,6 +50,7 @@ from sage.manifolds.differentiable.integrated_curve import IntegratedCurve
 from sage.manifolds.differentiable.integrated_curve import IntegratedAutoparallelCurve
 from sage.manifolds.differentiable.integrated_curve import IntegratedGeodesic
 
+
 class DifferentiableManifoldHomset(TopologicalManifoldHomset):
     r"""
     Set of differentiable maps between two differentiable manifolds.
@@ -509,6 +510,7 @@ class DifferentiableCurveSet(DifferentiableManifoldHomset):
 
 #******************************************************************************
 
+
 class IntegratedCurveSet(DifferentiableCurveSet):
     r"""
     Set of integrated curves in a differentiable manifold.
@@ -963,6 +965,7 @@ class IntegratedCurveSet(DifferentiableCurveSet):
 
 #******************************************************************************
 
+
 class IntegratedAutoparallelCurveSet(IntegratedCurveSet):
     r"""
     Set of integrated autoparallel curves in a differentiable manifold.
@@ -1415,6 +1418,7 @@ class IntegratedAutoparallelCurveSet(IntegratedCurveSet):
         # value above
 
 #******************************************************************************
+
 
 class IntegratedGeodesicSet(IntegratedAutoparallelCurveSet):
     r"""

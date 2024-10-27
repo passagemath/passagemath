@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-giac
+# sage.doctest: needs sage.libs.giac
 """
 Wrappers for Giac functions
 

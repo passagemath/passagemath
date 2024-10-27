@@ -1070,6 +1070,7 @@ class RealDiffChart(DiffChart, RealChart):
 
 #******************************************************************************
 
+
 class DiffCoordChange(CoordChange):
     r"""
     Transition map between two charts of a differentiable manifold.

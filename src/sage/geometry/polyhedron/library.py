@@ -92,6 +92,7 @@ lazy_import('sage.graphs.digraph', 'DiGraph')
 lazy_import('sage.graphs.graph', 'Graph')
 lazy_import('sage.combinat.root_system.associahedron', 'Associahedron')
 
+
 def zero_sum_projection(d, base_ring=None):
     r"""
     Return a matrix corresponding to the projection on the orthogonal of
@@ -319,6 +320,7 @@ def gale_transform_to_polytope(vectors, base_ring=None, backend=None):
         raise ValueError("the gale transform does not correspond to a polytope")
 
     return P
+
 
 def gale_transform_to_primal(vectors, base_ring=None, backend=None):
     r"""

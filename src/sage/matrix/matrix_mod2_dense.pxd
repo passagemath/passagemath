@@ -1,12 +1,5 @@
 # sage_setup: distribution = sagemath-linbox
-<<<<<<< HEAD
-
 from sage.matrix.matrix_dense cimport Matrix_dense
-||||||| merged common ancestors
-from .matrix_dense cimport Matrix_dense
-=======
-from .matrix_dense cimport Matrix_dense
->>>>>>> main
 from sage.libs.m4ri cimport *
 
 cdef class Matrix_mod2_dense(Matrix_dense):

@@ -669,10 +669,7 @@ def format(s, embedded=False):
     EXAMPLES::
 
         sage: from sage.misc.sagedoc import format
-        sage: identity_matrix(2).rook_vector.__doc__[191:263]                           # needs sage.modules
-        'Let `A` be an `m` by `n` (0,1)-matrix. We identify `A` with a chessboard'
-
-        sage: format(identity_matrix(2).rook_vector.__doc__[191:263])                   # needs sage.modules
+        sage: format('Let `A` be an `m` by `n` (0,1)-matrix. We identify `A` with a chessboard')
         'Let A be an m by n (0,1)-matrix. We identify A with a chessboard\n'
 
     If the first line of the string is 'nodetex', remove 'nodetex' but
@@ -774,7 +771,7 @@ def format(s, embedded=False):
         import sage.all as toplevel
     except ImportError:
         try:
-            import sage.all__sagemath_modules as toplevel
+            import sage.all__sagemath_polyhedra as toplevel
         except ImportError:
             try:
                 import sage.all__sagemath_categories as toplevel
@@ -796,7 +793,7 @@ def format(s, embedded=False):
                 t = ''
             elif obj.isidentifier():
                 try:
-                    x = getattr(toplevel, obj)
+                    x = eval('%s.%s' % (toplevel.__name__, obj), locals())
                 except AttributeError:
                     # A pair <<<...>>> has been found, but the object not.
                     i_0 += i + 6 + j

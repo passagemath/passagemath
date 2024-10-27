@@ -74,4 +74,5 @@ sys.path.insert(0, os.path.dirname(__file__))
 >>>>>>> main
 from sage_setup import sage_setup
 
-sage_setup(['sagemath-tdlib'])
+sage_setup(['sagemath-tdlib'],
+           spkgs=['tdlib'])

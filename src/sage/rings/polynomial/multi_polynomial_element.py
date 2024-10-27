@@ -38,7 +38,7 @@ We verify Lagrange's four squares identity::
     ....:  + (a0*b2 - a1*b3 + a2*b0 + a3*b1)^2 + (a0*b3 + a1*b2 - a2*b1 + a3*b0)^2)
     True
 """
-#*****************************************************************************
+# ****************************************************************************
 #
 #   Sage: Open Source Mathematical Software
 #
@@ -55,7 +55,7 @@ We verify Lagrange's four squares identity::
 #  The full text of the GPL is available at:
 #
 #                  https://www.gnu.org/licenses/
-#*****************************************************************************
+# ****************************************************************************
 
 import operator
 
@@ -74,6 +74,7 @@ from sage.misc.lazy_attribute import lazy_attribute
 
 from sage.rings.rational_field import QQ
 from sage.rings.fraction_field import FractionField
+
 
 class MPolynomial_element(MPolynomial):
     r"""
@@ -1935,8 +1936,8 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         if index == -1:
             # var is not a generator; do term-by-term differentiation recursively
             # var may be, for example, a generator of the base ring
-            d = dict([(e, x._derivative(var))
-                      for e, x in self.monomial_coefficients().items()])
+            d = {e: x._derivative(var)
+                 for e, x in self.monomial_coefficients().items()}
             d = polydict.PolyDict(d, check=False)
             d.remove_zeros()
             return MPolynomial_polydict(P, d)
@@ -2501,6 +2502,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
                 r += plt
                 p -= plt
         return r
+
 
 ###############################################################
 # Useful for some geometry code.

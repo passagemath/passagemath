@@ -3045,7 +3045,7 @@ class ParallelogramPolyomino(ClonableList,
 
         INPUT:
 
-        - ``box_position`` -- the position of the statring cell
+        - ``box_position`` -- the position of the starting cell
 
         - ``direction`` -- the direction (0 or 1)
 

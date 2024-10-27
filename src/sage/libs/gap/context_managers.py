@@ -46,7 +46,7 @@ The value is reset even if exceptions occur::
 from sage.libs.gap.libgap import libgap
 
 
-class GlobalVariableContext():
+class GlobalVariableContext:
 
     def __init__(self, variable, value):
         """

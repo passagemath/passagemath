@@ -2865,6 +2865,7 @@ class IntegratedCurve(DifferentiableCurve):
                              aspect_ratio=aspect_ratio, color=color,
                              style=style, label_axes=label_axes)
 
+
 class IntegratedAutoparallelCurve(IntegratedCurve):
     r"""
     Autoparallel curve on the manifold with respect to a given
@@ -3648,6 +3649,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
             print(description)
 
         return [self._equations_rhs, v0, chart]
+
 
 class IntegratedGeodesic(IntegratedAutoparallelCurve):
     r"""

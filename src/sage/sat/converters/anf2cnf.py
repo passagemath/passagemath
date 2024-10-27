@@ -10,5 +10,5 @@ AUTHORS:
 """
 
 
-class ANF2CNFConverter():
+class ANF2CNFConverter:
     pass
