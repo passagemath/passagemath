@@ -56,3 +56,23 @@ Development
     (cmr-venv) passagemath $ pip install -v -e pkgs/sagemath-cmr        \
                                             -e pkgs/sagemath-modules    \
                                             -e pkgs/sagemath-categories
+
+Modularized use::
+
+    (cmr-venv) passagemath $ pip install -v passagemath-repl
+    (cmr-venv) passagemath $ sage
+    ... sage.all is not available ...
+    sage: from sage.all__sagemath_modules import *
+    sage: matroids.Uniform(3, 4)
+
+In plain Python::
+
+    (cmr-venv) passagemath $ python3
+    >>> from sage.all__sagemath_modules import *
+    >>> matroids.Uniform(3, 4)
+
+For full functionality of Sage::
+
+    (cmr-venv) passagemath $ pip install -v passagemath-standard
+    (cmr-venv) passagemath $ sage
+    sage: matroids.Uniform(3, 4)
