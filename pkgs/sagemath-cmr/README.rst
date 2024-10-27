@@ -47,12 +47,12 @@ Development
     passagemath $ ./bootstrap
     passagemath $ ./.homebrew-build-env         # on macOS when homebrew is in use
     passagemath $ export PATH=/usr/sbin/:/sbin/:/bin/:/usr/lib/wsl/lib/   # on WSL
-    passagemath $ python3 -m venv cmr-venv
-    passagemath $ source cmr-venv/bin/activate
     passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_cmr.txt"
     passagemath $ echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" > constraints_cmr.txt
     passagemath $ echo "passagemath-categories @ file://$(pwd)/pkgs/sagemath-categories" >> constraints_cmr.txt
     passagemath $ echo "passagemath-modules @ file://$(pwd)/pkgs/sagemath-modules" >> constraints_cmr.txt
+    passagemath $ python3 -m venv cmr-venv
+    passagemath $ source cmr-venv/bin/activate
     (cmr-venv) passagemath $ pip install -v -e pkgs/sagemath-cmr        \
                                             -e pkgs/sagemath-modules    \
                                             -e pkgs/sagemath-categories
