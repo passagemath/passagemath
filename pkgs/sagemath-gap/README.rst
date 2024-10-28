@@ -22,7 +22,7 @@ for general installation instructions.
 About this pip-installable source distribution
 ----------------------------------------------
 
-This pip-installable source distribution ``sagemath-gap`` is a small
+This pip-installable source distribution ``passagemath-gap`` is a small
 distribution that provides modules that depend on the GAP system, see
 https://www.gap-system.org
 
