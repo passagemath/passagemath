@@ -19,6 +19,7 @@ from sage.structure.richcmp cimport richcmp
 from sage.rings.integer_ring import ZZ
 
 from sage.matrix.matrix_space import MatrixSpace
+from sage.matrix.matrix_dense cimport Matrix_dense
 from sage.matrix.matrix_generic_dense cimport Matrix_generic_dense as MatrixClass
 # FIXME: This was Matrix_integer_dense; changed for modularization to avoid flint dep
 
@@ -31,7 +32,7 @@ cdef class ArithmeticSubgroupElement(MultiplicativeGroupElement):
     determinant 1.
     """
 
-    cdef MatrixClass __x
+    cdef Matrix_dense __x
 
     def __init__(self, parent, x, check=True):
         """
