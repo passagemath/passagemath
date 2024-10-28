@@ -578,6 +578,7 @@ class SimplicialSets(Category_singleton):
 
                 TESTS::
 
+                    sage: # needs sage.graphs sage.groups
                     sage: RP2 = simplicial_sets.RealProjectiveSpace(2)
                     sage: S3 = simplicial_sets.Sphere(3)
                     sage: X = S3.wedge(RP2)

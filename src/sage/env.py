@@ -284,7 +284,7 @@ try:
 except ImportError:
     pass
 else:
-    GAP_ROOT_PATHS = ';'.join(p for p in gap.__path__) + ';' + GAP_ROOT_PATHS
+    GAP_ROOT_PATHS = ';'.join([p for p in gap.__path__] + [GAP_ROOT_PATHS])
 
 # post process
 if DOT_SAGE is not None and ' ' in DOT_SAGE:

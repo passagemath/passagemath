@@ -1495,6 +1495,7 @@ cdef class Field(CommutativeRing):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: GF(2).an_embedding(GF(4))
             Ring morphism:
               From: Finite Field of size 2
@@ -1512,6 +1513,7 @@ cdef class Field(CommutativeRing):
 
         ::
 
+            sage: # needs sage.rings.nunmber_field
             sage: CyclotomicField(5).an_embedding(QQbar)
             Coercion map:
               From: Cyclotomic Field of order 5 and degree 4

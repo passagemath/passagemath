@@ -55,6 +55,9 @@ include(`pyproject_toml_metadata.m4')dnl'
 file = "README.rst"
 content-type = "text/x-rst"
 
+[project.optional-dependencies]
+test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
 # so there is no clean way to refer to the repair_wheel.py script

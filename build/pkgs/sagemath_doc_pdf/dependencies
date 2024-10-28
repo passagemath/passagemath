@@ -1,1 +1,1 @@
-sagemath_doc_html texlive texlive_luatex free_fonts xindy
+$(SAGE_ROOT)/pkgs/sagemath-doc-pdf/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-doc-pdf/MANIFEST.in sagemath_doc_html texlive texlive_luatex free_fonts xindy
