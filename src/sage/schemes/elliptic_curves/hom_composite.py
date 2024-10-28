@@ -459,7 +459,6 @@ class EllipticCurveHom_composite(EllipticCurveHom):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.finite_rings
             sage: from sage.schemes.elliptic_curves.hom_composite import EllipticCurveHom_composite
             sage: E = EllipticCurve(GF(43), [1,0])
             sage: P, = E.gens()
@@ -471,7 +470,7 @@ class EllipticCurveHom_composite(EllipticCurveHom):
         TESTS::
 
             sage: E = EllipticCurve('4730k1')
-            sage: EllipticCurveHom_composite.from_factors([], E) == E.scalar_multiplication(1)      # needs sage.rings.finite_rings
+            sage: EllipticCurveHom_composite.from_factors([], E) == E.scalar_multiplication(1)
             True
 
         ::
@@ -573,7 +572,6 @@ class EllipticCurveHom_composite(EllipticCurveHom):
 
         TESTS::
 
-            sage: # needs sage.rings.finite_rings
             sage: from sage.schemes.elliptic_curves.hom_composite import EllipticCurveHom_composite
             sage: E = EllipticCurve(GF(43), [1,0])
             sage: P, = E.gens()
@@ -609,7 +607,6 @@ class EllipticCurveHom_composite(EllipticCurveHom):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.finite_rings
             sage: from sage.schemes.elliptic_curves.hom_composite import EllipticCurveHom_composite
             sage: E = EllipticCurve(GF(43), [1,0])
             sage: P, = E.gens()

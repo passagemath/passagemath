@@ -326,7 +326,7 @@ cdef class RingExtensionElement(CommutativeAlgebraElement):
             sage: f = E(1)
             sage: g = f.in_base(); g
             1
-            sage: g.parent()                                                            # needs sage.rings.number_field
+            sage: g.parent()
             Finite Field in z2 of size 5^2
 
         TESTS::

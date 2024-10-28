@@ -329,7 +329,6 @@ def solve_linear_differential_system(a, b, c, alpha):
 
     EXAMPLES::
 
-        sage: # needs sage.rings.finite_rings
         sage: from sage.schemes.elliptic_curves.ell_wp import solve_linear_differential_system
         sage: k = GF(17)
         sage: R.<x> = PowerSeriesRing(k)
