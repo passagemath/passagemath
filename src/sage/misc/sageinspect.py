@@ -17,13 +17,7 @@ Cython modules::
     sage: sage_getdoc(sage.rings.rational).lstrip()
     'Rational Numbers...'
     sage: sage_getsource(sage.rings.rational)
-<<<<<<< HEAD
-    '# sage_setup: distribution = sagemath-categories...# distutils: ...Rational Numbers...'
-||||||| merged common ancestors
-    '# distutils: ...Rational Numbers...'
-=======
     '...Rational Numbers...'
->>>>>>> main
 
 Python modules::
 
@@ -2236,7 +2230,7 @@ def sage_getsourcelines(obj):
         sage: # needs sage.modules
         sage: from sage.matrix.constructor import matrix
         sage: sage_getsourcelines(matrix)[1]
-        22
+        21
         sage: sage_getsourcelines(matrix)[0][0]
         'def matrix(*args, **kwds):\n'
 
