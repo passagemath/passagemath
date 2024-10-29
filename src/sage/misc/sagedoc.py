@@ -29,7 +29,7 @@ see :issue:`12849`::
 
 Check that sphinx is not imported at Sage start-up::
 
-    sage: os.system("sage -c \"if 'sphinx' in sys.modules: sys.exit(1)\"")
+    sage: os.system("sage -c \"if 'sphinx' in sys.modules: sys.exit(1)\"")              # needs sage.all
     0
 """
 # ****************************************************************************
@@ -724,7 +724,7 @@ def format(s, embedded=False):
 
     If replacement is impossible, then no error is raised::
 
-        sage: print(format('<<<bla\n<<<bla>>>\n<<<identity_matrix>>>'))
+        sage: print(format('<<<bla\n<<<bla>>>\n<<<identity_matrix>>>'))                 # needs sage.modules
         <<<bla <<<bla>>>
         <BLANKLINE>
         Definition: identity_matrix(ring, n=0, sparse=False)
@@ -1178,7 +1178,7 @@ def search_src(string, extra1='', extra2='', extra3='', extra4='',
 
         sage: len(search_src('log', 'derivative', interact=False).splitlines()) < 40
         True
-        sage: len(search_src('log', 'derivative',
+        sage: len(search_src('log', 'derivative',                                       # needs sage.all
         ....:                interact=False, multiline=True).splitlines()) > 70
         True
 
