@@ -34,17 +34,19 @@ A quick way to try it out interactively::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-gap[test]" IPython
 
-    In [1]: from sage.all__sagemath_gap import *
+    In [1]: from sage.all__sagemath_modules import *
 
-    In [2]: G = libgap.eval("Group([(1,2,3), (1,2)(3,4), (1,7)])")
+    In [2]: from sage.all__sagemath_gap import *
 
-    In [3]: CG = G.ConjugacyClasses()
+    In [3]: G = libgap.eval("Group([(1,2,3), (1,2)(3,4), (1,7)])")
 
-    In [4]: gamma = CG[2]
+    In [4]: CG = G.ConjugacyClasses()
 
-    In [5]: g = gamma.Representative()
+    In [5]: gamma = CG[2]
 
-    In [6]: CG; gamma; g
+    In [6]: g = gamma.Representative()
+
+    In [7]: CG; gamma; g
     [ ()^G, (4,7)^G, (3,4,7)^G, (2,3)(4,7)^G, (2,3,4,7)^G, (1,2)(3,4,7)^G, (1,2,3,4,7)^G ]
     (3,4,7)^G
     (3,4,7)
