@@ -1639,6 +1639,9 @@
     "sage.functions.wigner": {
         "ntests": 24
     },
+    "sage.games.quantumino": {
+        "ntests": 1
+    },
     "sage.games.sudoku_backtrack": {
         "ntests": 3
     },

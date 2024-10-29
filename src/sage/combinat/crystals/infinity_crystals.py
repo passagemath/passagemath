@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
-# sage.doctest: needs sage.combinat sage.modules
+# sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
 `\mathcal{B}(\infty)` Crystals of Tableaux in Nonexceptional Types and `G_2`
 

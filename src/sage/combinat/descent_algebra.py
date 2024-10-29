@@ -344,7 +344,7 @@ class DescentAlgebra(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: D = DescentAlgebra(QQ, 4).D()
-                sage: [D.to_symmetric_group_algebra_on_basis(tuple(b))
+                sage: [D.to_symmetric_group_algebra_on_basis(tuple(b))                  # needs sage.graphs
                 ....:  for b in Subsets(3)]
                 [[1, 2, 3, 4],
                  [2, 1, 3, 4] + [3, 1, 2, 4] + [4, 1, 2, 3],
@@ -944,6 +944,7 @@ class DescentAlgebraBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: D = DescentAlgebra(QQ, 4).D()
                 sage: D.to_symmetric_group_algebra(D[1,3])
                 [2, 1, 4, 3] + [3, 1, 4, 2] + [3, 2, 4, 1] + [4, 1, 3, 2] + [4, 2, 3, 1]
@@ -964,6 +965,7 @@ class DescentAlgebraBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: B = DescentAlgebra(QQ, 3).B()
                 sage: [B.to_symmetric_group_algebra_on_basis(c)
                 ....:  for c in Compositions(3)]
@@ -994,6 +996,7 @@ class DescentAlgebraBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: B = DescentAlgebra(QQ, 4).B()
                 sage: B[1,3].to_symmetric_group_algebra()
                 [1, 2, 3, 4] + [2, 1, 3, 4] + [3, 1, 2, 4] + [4, 1, 2, 3]
