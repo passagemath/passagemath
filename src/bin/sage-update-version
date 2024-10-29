@@ -73,7 +73,8 @@ done
             version=${version//.beta/b}
             version=${version//.rc/rc}
             # ~= asks for a compatible release. https://peps.python.org/pep-0440/#compatible-release
-            echo "$pkg ~= $version" ) > "$spkg"/version_requirements.txt
+            # we append .0, thus pinning the micro release
+            echo "$pkg ~= $version.0" ) > "$spkg"/version_requirements.txt
       fi
   done )
 
