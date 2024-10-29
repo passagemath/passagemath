@@ -706,6 +706,9 @@
     "sage.combinat.SJT": {
         "ntests": 31
     },
+    "sage.combinat.alternating_sign_matrix": {
+        "ntests": 3
+    },
     "sage.combinat.backtrack": {
         "ntests": 28
     },
@@ -766,6 +769,9 @@
     },
     "sage.combinat.derangements": {
         "ntests": 87
+    },
+    "sage.combinat.descent_algebra": {
+        "ntests": 1
     },
     "sage.combinat.diagram": {
         "ntests": 244
@@ -871,6 +877,9 @@
     "sage.combinat.partition": {
         "failed": true,
         "ntests": 1301
+    },
+    "sage.combinat.partition_algebra": {
+        "ntests": 2
     },
     "sage.combinat.partition_tuple": {
         "ntests": 394
@@ -1453,6 +1462,9 @@
     },
     "sage.functions.wigner": {
         "ntests": 24
+    },
+    "sage.games.quantumino": {
+        "ntests": 1
     },
     "sage.games.sudoku_backtrack": {
         "ntests": 3
