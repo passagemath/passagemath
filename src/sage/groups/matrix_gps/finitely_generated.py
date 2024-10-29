@@ -20,8 +20,8 @@ The finitely generated matrix groups can also be constructed as
 subgroups of matrix groups::
 
     sage: SL2Z = SL(2, ZZ)
-    sage: S, T = SL2Z.gens()
-    sage: SL2Z.subgroup([T^2])
+    sage: S, T = SL2Z.gens()                                                            # needs sage.libs.gap
+    sage: SL2Z.subgroup([T^2])                                                          # needs sage.libs.gap
     Subgroup with 1 generators (
     [1 2]
     [0 1]
@@ -179,7 +179,7 @@ def QuaternionMatrixGroupGF3():
 
     TESTS::
 
-        sage: groups.matrix.QuaternionGF3()                                             # needs sage.modules
+        sage: groups.matrix.QuaternionGF3()
         Matrix group over Finite Field of size 3 with 2 generators (
         [1 1]  [2 1]
         [1 2], [1 1]
