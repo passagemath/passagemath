@@ -545,6 +545,7 @@ class ArtinGroup(UniqueRepresentation, FinitelyPresentedGroup):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: Gamma = graphs.CycleGraph(5)
             sage: G = RightAngledArtinGroup(Gamma)
             sage: G.as_permutation_group()

@@ -767,7 +767,7 @@
         "ntests": 17
     },
     "sage.categories.simplicial_sets": {
-        "ntests": 57
+        "ntests": 58
     },
     "sage.categories.subobjects": {
         "ntests": 2
@@ -958,9 +958,6 @@
     "sage.data_structures.mutable_poset": {
         "ntests": 441
     },
-    "sage.doctest.__main__": {
-        "ntests": 9
-    },
     "sage.doctest.check_tolerance": {
         "failed": true,
         "ntests": 19
@@ -976,7 +973,7 @@
     },
     "sage.doctest.forker": {
         "failed": true,
-        "ntests": 366
+        "ntests": 374
     },
     "sage.doctest.marked_output": {
         "failed": true,
@@ -1025,17 +1022,11 @@
         "ntests": 23
     },
     "sage.doctest.util": {
-<<<<<<< HEAD
-        "ntests": 141
-||||||| merged common ancestors
-        "failed": true,
-        "ntests": 141
-=======
-        "ntests": 137
->>>>>>> main
+        "ntests": 166
     },
     "sage.env": {
-        "ntests": 36
+        "failed": true,
+        "ntests": 45
     },
     "sage.ext.fast_callable": {
         "failed": true,
@@ -1249,8 +1240,7 @@
     },
 =======
     "sage.features.threejs": {
-        "failed": true,
-        "ntests": 6
+        "ntests": 7
     },
     "sage.features.topcom": {
         "ntests": 8
@@ -1619,8 +1609,7 @@
         "ntests": 88
     },
     "sage.misc.sagedoc": {
-        "failed": true,
-        "ntests": 103
+        "ntests": 102
     },
     "sage.misc.sageinspect": {
         "failed": true,
@@ -1691,10 +1680,11 @@
         "ntests": 3
     },
     "sage.parallel.decorate": {
-        "ntests": 86
+        "ntests": 85
     },
     "sage.parallel.map_reduce": {
-        "ntests": 291
+        "failed": true,
+        "ntests": 289
     },
     "sage.parallel.multiprocessing_sage": {
         "ntests": 9
@@ -1748,7 +1738,7 @@
     },
     "sage.repl.interpreter": {
         "failed": true,
-        "ntests": 114
+        "ntests": 113
     },
     "sage.repl.ipython_extension": {
         "failed": true,
@@ -2500,7 +2490,7 @@
     },
     "sage.structure.element": {
         "failed": true,
-        "ntests": 566
+        "ntests": 561
     },
     "sage.structure.element.pxd": {
 <<<<<<< HEAD
