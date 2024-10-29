@@ -72,6 +72,7 @@ import itertools
 from sage.misc.lazy_attribute import lazy_attribute
 from sage.misc.cachefunc import cached_method
 from sage.misc.latex import latex
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.arith.misc import binomial
 from sage.features import FeatureNotPresentError
@@ -85,8 +86,8 @@ from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
 
 from sage.combinat.root_system.cartan_type import CartanType
 
-from sage.graphs.digraph import DiGraph
-from sage.graphs.dot2tex_utils import have_dot2tex
+lazy_import('sage.graphs.digraph', 'DiGraph')
+lazy_import('sage.graphs.dot2tex_utils', 'have_dot2tex')
 
 ######################################
 # Latex method for viewing the trees #

@@ -25,7 +25,6 @@ from sage.combinat.partition import _Partitions
 from sage.misc.lazy_import import lazy_import
 from sage.rings.infinity import infinity
 from sage.rings.integer import Integer
-import sage.libs.symmetrica.all as symmetrica
 
 lazy_import('sage.libs.symmetrica', 'all', as_='symmetrica')
 

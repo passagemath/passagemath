@@ -436,6 +436,10 @@ cdef void late_import() noexcept:
     from sage.rings.rational import Rational
     from sage.rings.integer_ring import ZZ
 
+    #Symmetric Functions
+    import sage.combinat.sf.sf
+    SymmetricFunctions = sage.combinat.sf.sf.SymmetricFunctions
+
     import builtins
     builtinlist = builtins.list
 
