@@ -27,7 +27,7 @@ exclude sage/numerical/gauss_legendre.p*                # sagemath-modules
 exclude sage/numerical/optimize.p*                      # sagemath-modules
 exclude sage/numerical/backends/glpk*.p*                # sagemath-glpk
 
-include sage/rings/groebner_fan.p*
+include sage/rings/polynomial/groebner_fan.p*
 include sage/rings/polynomial/omega.py
 
 graft sage/schemes/toric
