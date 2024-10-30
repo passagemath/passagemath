@@ -121,7 +121,6 @@ sage = [
     "ext_data/mwrank/*",
     "ext_data/notebook-ipython/*",
     "ext_data/nbconvert/*",
-    "ext_data/graphs/*",
     "ext_data/valgrind/*",
 ]
 
