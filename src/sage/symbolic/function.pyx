@@ -1067,22 +1067,25 @@ cdef class BuiltinFunction(Function):
             if (self._preserved_arg
                     and isinstance(args[self._preserved_arg-1], Element)):
                 arg_parent = parent(args[self._preserved_arg-1])
-                from sage.symbolic.ring import SR
-                if arg_parent is SR:
-                    return res
+                try:
+                    from sage.symbolic.ring import SR
+                except ImportError:
+                    SR = None
+                else:
+                    if arg_parent is SR:
+                        return res
                 from sage.rings.polynomial.polynomial_ring import PolynomialRing_commutative
                 from sage.rings.polynomial.multi_polynomial_ring import MPolynomialRing_polydict_domain
-                if isinstance(arg_parent, (PolynomialRing_commutative,
-                                           MPolynomialRing_polydict_domain)):
+                if SR is not None and isinstance(arg_parent, (PolynomialRing_commutative,
+                                                              MPolynomialRing_polydict_domain)):
                     try:
                         return SR(res).polynomial(ring=arg_parent)
                     except TypeError:
                         return res
-                else:
-                    try:
-                        return arg_parent(res)
-                    except TypeError:
-                        return res
+                try:
+                    return arg_parent(res)
+                except TypeError:
+                    return res
             return res
         if not isinstance(res, Element):
             return res
@@ -1094,9 +1097,13 @@ cdef class BuiltinFunction(Function):
         from sage.rings.real_double import RDF
         if RDF.has_coerce_map_from(p):
             return float(res)
-        from sage.rings.complex_double import CDF
-        if CDF.has_coerce_map_from(p):
-            return complex(res)
+        try:
+            from sage.rings.complex_double import CDF
+        except ImportError:
+            pass
+        else:
+            if CDF.has_coerce_map_from(p):
+                return complex(res)
         return res
 
     cdef _is_registered(self):
