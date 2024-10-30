@@ -118,8 +118,6 @@ sage = [
     "ext_data/images/*",
     "ext_data/doctest/*",
     "ext_data/doctest/invalid/*",
-    "ext_data/gap/*",
-    "ext_data/gap/joyner/*",
     "ext_data/mwrank/*",
     "ext_data/notebook-ipython/*",
     "ext_data/nbconvert/*",

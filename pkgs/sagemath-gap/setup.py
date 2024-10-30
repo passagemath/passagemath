@@ -10,4 +10,4 @@ from sage_setup import sage_setup
 sage_setup(['sagemath-gap'],
            spkgs=['gap'],
            package_data={'sage.libs.gap': ['sage.gaprc'],
-                         'sage.ext_data.gap': ['*']})
+                         'sage.ext_data.gap': ['**']})
