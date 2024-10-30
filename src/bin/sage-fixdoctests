@@ -102,7 +102,10 @@ def default_venv_environment_from_distribution(distribution):
         if extras:
             tox_env_name += '-' + extras.replace(',', '-')
         default_venv = os.path.join(SAGE_ROOT, 'pkgs', plain_distribution, '.tox', tox_env_name)
-        default_environment = 'sage.all__' + plain_distribution.replace('-', '_')
+        if plain_distribution == 'sagemath-standard-no-symbolics':
+            default_environment = 'sage.all'
+        else:
+            default_environment = 'sage.all__' + plain_distribution.replace('-', '_')
     else:
         default_venv = ''
         default_environment = runtest_default_environment
