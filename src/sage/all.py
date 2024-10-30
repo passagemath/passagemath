@@ -66,7 +66,6 @@ from sage.all__sagemath_modules import *
 
 from time import sleep
 from functools import reduce  # in order to keep reduce in python3
->>>>>>> main
 
 # ##################################################################
 
