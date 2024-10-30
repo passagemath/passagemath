@@ -17,8 +17,12 @@ functions are for internal use by routines elsewhere in the Sage library.
 
 from cysignals.memory cimport check_allocarray, sig_free
 
-from sage.matrix.matrix_generic_dense cimport Matrix_generic_dense as MatrixClass
-# FIXME: This was Matrix_integer_dense; changed for modularization to avoid flint dep
+from sage.matrix.matrix_dense cimport Matrix_dense
+
+try:
+    from sage.matrix.matrix_integer_dense import Matrix_integer_dense as MatrixClass
+except ImportError:
+    from sage.matrix.matrix_generic_dense import Matrix_generic_dense as MatrixClass
 
 import random
 from .congroup_gamma1 import Gamma1_constructor as Gamma1
@@ -33,7 +37,7 @@ from sage.matrix.matrix_space import MatrixSpace
 from sage.rings.integer_ring import ZZ
 Mat2Z = MatrixSpace(ZZ, 2)
 
-cdef MatrixClass genS, genT, genI
+cdef Matrix_dense genS, genT, genI
 
 genS = MatrixClass(Mat2Z, [0,-1, 1, 0], True, True)
 genT = MatrixClass(Mat2Z, [1, 1, 0, 1], True, True)
@@ -301,7 +305,7 @@ def generators_helper(coset_reps, level):
         [21  5], [ 7 -1], [-7  1]
         ]
     """
-    cdef MatrixClass x,y,z,v,vSmod,vTmod
+    cdef Matrix_dense x,y,z,v,vSmod,vTmod
 
     crs = coset_reps.list()
     try:
