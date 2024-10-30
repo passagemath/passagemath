@@ -359,7 +359,7 @@ class Jacobi(BuiltinFunction):
                 return csch(x)
         return
 
-    def _evalf_(self, x, m, parent, algorithm=None):
+    def _evalf_(self, x, m, parent=None, algorithm=None):
         r"""
         TESTS::
 
@@ -717,7 +717,7 @@ class InverseJacobi(BuiltinFunction):
                 return Integer(0)
         return
 
-    def _evalf_(self, x, m, parent, algorithm=None):
+    def _evalf_(self, x, m, parent=None, algorithm=None):
         r"""
         TESTS::
 
@@ -1104,7 +1104,7 @@ class JacobiAmplitude(BuiltinFunction):
             return Integer(0)
         return
 
-    def _evalf_(self, x, m, parent, algorithm=None):
+    def _evalf_(self, x, m, parent=None, algorithm=None):
         r"""
         TESTS::
 

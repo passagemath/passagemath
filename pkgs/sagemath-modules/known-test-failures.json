@@ -670,7 +670,7 @@
         "ntests": 17
     },
     "sage.categories.simplicial_sets": {
-        "ntests": 54
+        "ntests": 55
     },
     "sage.categories.subobjects": {
         "ntests": 2
@@ -1067,9 +1067,6 @@
     "sage.data_structures.mutable_poset": {
         "ntests": 441
     },
-    "sage.doctest.__main__": {
-        "ntests": 9
-    },
     "sage.doctest.check_tolerance": {
         "failed": true,
         "ntests": 19
@@ -1085,7 +1082,7 @@
     },
     "sage.doctest.forker": {
         "failed": true,
-        "ntests": 381
+        "ntests": 389
     },
     "sage.doctest.marked_output": {
         "ntests": 21
@@ -1107,11 +1104,11 @@
         "ntests": 23
     },
     "sage.doctest.util": {
-        "ntests": 137
+        "ntests": 166
     },
     "sage.env": {
         "failed": true,
-        "ntests": 41
+        "ntests": 45
     },
     "sage.ext.fast_callable": {
         "failed": true,
@@ -1269,8 +1266,7 @@
         "ntests": 2
     },
     "sage.features.threejs": {
-        "failed": true,
-        "ntests": 6
+        "ntests": 7
     },
     "sage.features.topcom": {
         "ntests": 8
@@ -1409,8 +1405,7 @@
         "ntests": 10
     },
     "sage.groups.matrix_gps.finitely_generated": {
-        "failed": true,
-        "ntests": 48
+        "ntests": 47
     },
     "sage.groups.matrix_gps.group_element": {
         "ntests": 33
@@ -1427,7 +1422,6 @@
         "ntests": 21
     },
     "sage.groups.matrix_gps.orthogonal": {
-        "failed": true,
         "ntests": 43
     },
     "sage.groups.matrix_gps.symplectic": {
@@ -1483,6 +1477,7 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
+        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -1890,7 +1885,7 @@
     },
     "sage.misc.sagedoc": {
         "failed": true,
-        "ntests": 103
+        "ntests": 102
     },
     "sage.misc.sageinspect": {
         "failed": true,
@@ -1975,7 +1970,7 @@
     },
     "sage.modules.free_module_integer": {
         "failed": true,
-        "ntests": 94
+        "ntests": 96
     },
     "sage.modules.free_module_morphism": {
         "failed": true,
@@ -2076,10 +2071,11 @@
         "ntests": 27
     },
     "sage.parallel.decorate": {
-        "ntests": 86
+        "ntests": 85
     },
     "sage.parallel.map_reduce": {
-        "ntests": 293
+        "failed": true,
+        "ntests": 289
     },
     "sage.parallel.multiprocessing_sage": {
         "ntests": 9
@@ -2116,7 +2112,8 @@
         "ntests": 5
     },
     "sage.quadratic_forms.count_local_2": {
-        "ntests": 16
+        "failed": true,
+        "ntests": 23
     },
     "sage.quadratic_forms.extras": {
         "failed": true,
@@ -2200,7 +2197,7 @@
     },
     "sage.repl.interpreter": {
         "failed": true,
-        "ntests": 114
+        "ntests": 113
     },
     "sage.repl.ipython_extension": {
         "failed": true,
@@ -2438,7 +2435,6 @@
         "ntests": 879
     },
     "sage.rings.invariants.reconstruction": {
-        "failed": true,
         "ntests": 59
     },
     "sage.rings.laurent_series_ring": {
@@ -2893,7 +2889,7 @@
     },
     "sage.structure.element": {
         "failed": true,
-        "ntests": 658
+        "ntests": 657
     },
     "sage.structure.element.pxd": {
         "ntests": 23

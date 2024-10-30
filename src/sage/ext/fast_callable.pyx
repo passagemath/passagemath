@@ -1741,7 +1741,7 @@ cpdef dict get_builtin_functions():
          'mul', 'neg', 'pow', 'sec', 'sin', 'sinh', 'sqrt', 'sub', 'tan', 'tanh']
         sage: builtins[sin]                                                             # needs sage.symbolic
         'sin'
-        sage: builtins[ln]
+        sage: builtins[ln]                                                              # needs sage.symbolic
         'log'
     """
     # We delay building builtin_functions to break a circular import
@@ -1762,15 +1762,19 @@ cpdef dict get_builtin_functions():
         op_pow: 'pow',
     }
 
-    # not handled: atan2, log2, log10
-    import sage.functions.all as func_all
-    for fn in ('sqrt', 'ceil', 'floor',
-               'sin', 'cos', 'tan', 'sec', 'csc', 'cot',
-               'asin', 'acos', 'atan', 'sinh', 'cosh', 'tanh',
-               'asinh', 'acosh', 'atanh', 'exp', 'log'):
-        builtin_functions[getattr(func_all, fn)] = fn
-    builtin_functions[func_all.abs_symbolic] = 'abs'
-    builtin_functions[func_all.ln] = 'log'
+    try:
+        import sage.functions.all as func_all
+    except ImportError:
+        pass
+    else:
+        # not handled: atan2, log2, log10
+        for fn in ('sqrt', 'ceil', 'floor',
+                   'sin', 'cos', 'tan', 'sec', 'csc', 'cot',
+                   'asin', 'acos', 'atan', 'sinh', 'cosh', 'tanh',
+                   'asinh', 'acosh', 'atanh', 'exp', 'log'):
+            builtin_functions[getattr(func_all, fn)] = fn
+        builtin_functions[func_all.abs_symbolic] = 'abs'
+        builtin_functions[func_all.ln] = 'log'
     return builtin_functions
 
 
@@ -2192,7 +2196,7 @@ cdef class InstructionStream:
             sage: instr_stream.instr('load_arg', 0)
             sage: instr_stream.instr('sin')                                             # needs sage.symbolic
             sage: instr_stream.instr('py_call', math.sin, 1)
-            sage: instr_stream.instr('abs')
+            sage: instr_stream.instr('abs')                                             # needs sage.symbolic
             sage: instr_stream.instr('factorial')
             Traceback (most recent call last):
             ...
