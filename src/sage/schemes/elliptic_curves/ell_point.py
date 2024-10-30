@@ -162,7 +162,6 @@ lazy_import('sage.schemes.generic.morphism', 'SchemeMorphism')
 try:
     from sage.libs.pari import pari
     from cypari2.handle_error import PariError
-    from cypari2.pari_instance import prec_pari_to_bits
 except ImportError:
     PariError = ()
 
