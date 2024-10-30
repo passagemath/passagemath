@@ -1259,13 +1259,6 @@
         "ntests": 154
     },
     "sage.functions.gamma": {
-<<<<<<< HEAD
-||||||| merged common ancestors
->>>>>>>>> Temporary merge branch 2
-        "failed": true,
-=======
-        "failed": true,
->>>>>>> main
         "ntests": 140
     },
     "sage.functions.generalized": {
