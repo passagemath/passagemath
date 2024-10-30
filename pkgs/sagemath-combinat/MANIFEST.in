@@ -85,6 +85,10 @@ prune sage/algebras/letterplace                             # singular
 prune sage/algebras/fusion_rings                            # number_field (ntl), singular
 prune sage/algebras/lie_algebras                # needs modules
 
+include sage/databases/findstat.py
+include sage/databases/oeis.py
+include sage/databases/sloane.py
+
 global-exclude all__sagemath_*.*
 global-include all__sagemath_combinat.py
 

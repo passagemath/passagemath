@@ -28,6 +28,7 @@ exclude sage/numerical/optimize.p*                      # sagemath-modules
 exclude sage/numerical/backends/glpk*.p*                # sagemath-glpk
 
 include sage/rings/groebner_fan.p*
+include sage/rings/polynomial/omega.py
 
 graft sage/schemes/toric
 
