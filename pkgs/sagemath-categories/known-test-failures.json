@@ -983,7 +983,6 @@
         "ntests": 154
     },
     "sage.functions.gamma": {
-        "failed": true,
         "ntests": 140
     },
     "sage.functions.generalized": {
