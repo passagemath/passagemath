@@ -55,6 +55,7 @@ on:
            "centos-stream-9-python3.12",
            "almalinux-8-python3.9",
            "almalinux-9-python3.11",
+           "alpine",
            "gentoo-python3.10",
            "gentoo-python3.11",
            "gentoo-python3.12",
