@@ -326,7 +326,7 @@ ARG NUMPROC=8
 ENV MAKE="make -j\${NUMPROC}"
 ARG USE_MAKEFLAGS="-k V=0"
 ENV SAGE_CHECK=warn
-ENV SAGE_CHECK_PACKAGES="!cython,!python3,!cysignals,!linbox,!ppl,!cmake,!rpy2,!sage_sws2rst"
+ENV SAGE_CHECK_PACKAGES="!cython,!python3,!cysignals,!linbox,!ppl,!cmake,!rpy2,!sage_sws2rst,!sagemath-bliss,!sagemath-brial,!sagemath-categories,!sagemath-cmr,!sagemath-combinat,!sagemath-coxeter3,!sagemath-doc-html,!sagemath-doc-pdf,!sagemath-eclib,!sagemath-environment,!sagemath-flint,!sagemath-gap,!sagemath-giac,!sagemath-glpk,!sagemath-graphs,!sagemath-groups,!sagemath-homfly,!sagemath-lcalc,!sagemath-libbraiding,!sagemath-libecm,!sagemath-linbox,!sagemath-mcqd,!sagemath-meataxe,!sagemath-modules,!sagemath-mpmath,!sagemath-ntl,!sagemath-objects,!sagemath-pari,!sagemath-plot,!sagemath-polyhedra,!sagemath-repl,!sagemath-schemes,!sagemath-singular,!sagemath-sirocco,!sagemath-standard,!sagemath-standard-no-symbolics,!sagemath-symbolics,!sagemath-tdlib"
 #:toolchain:
 $RUN$CHECK_STATUS_THEN make \${USE_MAKEFLAGS} base-toolchain$ENDRUN$THEN_SAVE_STATUS
 
@@ -335,7 +335,7 @@ ARG NUMPROC=8
 ENV MAKE="make -j\${NUMPROC}"
 ARG USE_MAKEFLAGS="-k V=0"
 ENV SAGE_CHECK=warn
-ENV SAGE_CHECK_PACKAGES="!cython,!python3,!cysignals,!linbox,!ppl,!cmake,!rpy2,!sage_sws2rst"
+ENV SAGE_CHECK_PACKAGES="!cython,!python3,!cysignals,!linbox,!ppl,!cmake,!rpy2,!sage_sws2rst,!sagemath-bliss,!sagemath-brial,!sagemath-categories,!sagemath-cmr,!sagemath-combinat,!sagemath-coxeter3,!sagemath-doc-html,!sagemath-doc-pdf,!sagemath-eclib,!sagemath-environment,!sagemath-flint,!sagemath-gap,!sagemath-giac,!sagemath-glpk,!sagemath-graphs,!sagemath-groups,!sagemath-homfly,!sagemath-lcalc,!sagemath-libbraiding,!sagemath-libecm,!sagemath-linbox,!sagemath-mcqd,!sagemath-meataxe,!sagemath-modules,!sagemath-mpmath,!sagemath-ntl,!sagemath-objects,!sagemath-pari,!sagemath-plot,!sagemath-polyhedra,!sagemath-repl,!sagemath-schemes,!sagemath-singular,!sagemath-sirocco,!sagemath-standard,!sagemath-standard-no-symbolics,!sagemath-symbolics,!sagemath-tdlib"
 #:make:
 ARG TARGETS_PRE="all-sage-local"
 $RUN$CHECK_STATUS_THEN make SAGE_SPKG="sage-spkg -y -o" \${USE_MAKEFLAGS} \${TARGETS_PRE}$ENDRUN$THEN_SAVE_STATUS
@@ -345,7 +345,7 @@ ARG NUMPROC=8
 ENV MAKE="make -j\${NUMPROC}"
 ARG USE_MAKEFLAGS="-k V=0"
 ENV SAGE_CHECK=warn
-ENV SAGE_CHECK_PACKAGES="!cython,!python3,!cysignals,!linbox,!ppl,!cmake,!rpy2,!sage_sws2rst"
+ENV SAGE_CHECK_PACKAGES="!cython,!python3,!cysignals,!linbox,!ppl,!cmake,!rpy2,!sage_sws2rst,!sagemath-bliss,!sagemath-brial,!sagemath-categories,!sagemath-cmr,!sagemath-combinat,!sagemath-coxeter3,!sagemath-doc-html,!sagemath-doc-pdf,!sagemath-eclib,!sagemath-environment,!sagemath-flint,!sagemath-gap,!sagemath-giac,!sagemath-glpk,!sagemath-graphs,!sagemath-groups,!sagemath-homfly,!sagemath-lcalc,!sagemath-libbraiding,!sagemath-libecm,!sagemath-linbox,!sagemath-mcqd,!sagemath-meataxe,!sagemath-modules,!sagemath-mpmath,!sagemath-ntl,!sagemath-objects,!sagemath-pari,!sagemath-plot,!sagemath-polyhedra,!sagemath-repl,!sagemath-schemes,!sagemath-singular,!sagemath-sirocco,!sagemath-standard,!sagemath-standard-no-symbolics,!sagemath-symbolics,!sagemath-tdlib"
 $ADD .gitignore /new/.gitignore
 $ADD src /new/src
 RUN cd /new && rm -rf .git && \\
@@ -366,7 +366,7 @@ ARG NUMPROC=8
 ENV MAKE="make -j\${NUMPROC}"
 ARG USE_MAKEFLAGS="-k V=0"
 ENV SAGE_CHECK=warn
-ENV SAGE_CHECK_PACKAGES="!cython,!python3,!cysignals,!linbox,!ppl,!cmake,!rpy2,!sage_sws2rst"
+ENV SAGE_CHECK_PACKAGES="!cython,!python3,!cysignals,!linbox,!ppl,!cmake,!rpy2,!sage_sws2rst,!sagemath-bliss,!sagemath-brial,!sagemath-categories,!sagemath-cmr,!sagemath-combinat,!sagemath-coxeter3,!sagemath-doc-html,!sagemath-doc-pdf,!sagemath-eclib,!sagemath-environment,!sagemath-flint,!sagemath-gap,!sagemath-giac,!sagemath-glpk,!sagemath-graphs,!sagemath-groups,!sagemath-homfly,!sagemath-lcalc,!sagemath-libbraiding,!sagemath-libecm,!sagemath-linbox,!sagemath-mcqd,!sagemath-meataxe,!sagemath-modules,!sagemath-mpmath,!sagemath-ntl,!sagemath-objects,!sagemath-pari,!sagemath-plot,!sagemath-polyhedra,!sagemath-repl,!sagemath-schemes,!sagemath-singular,!sagemath-sirocco,!sagemath-standard,!sagemath-standard-no-symbolics,!sagemath-symbolics,!sagemath-tdlib"
 ARG TARGETS_OPTIONAL="ptest"
 $RUN$CHECK_STATUS_THEN make SAGE_SPKG="sage-spkg -y -o" \${USE_MAKEFLAGS} \${TARGETS_OPTIONAL} || echo "(error ignored)"$ENDRUN$THEN_SAVE_STATUS
 
