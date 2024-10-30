@@ -279,6 +279,7 @@ jobs:
           - sagemath_schemes-check
           - sagemath_standard_no_symbolics-check
           - sagemath_symbolics-check
+          - sagemath_giac-check
     steps:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
