@@ -42,4 +42,5 @@ from sage.geometry.all__sagemath_polyhedra import *
 from sage.geometry.triangulation.all import *
 from sage.numerical.all import *
 from sage.game_theory.all import *
+from sage.rings.all__sagemath_polyhedra import *
 from sage.schemes.all__sagemath_polyhedra import *
