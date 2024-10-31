@@ -1,1 +1,1 @@
-tox sagemath_repl sagemath_symbolics
+tox sagemath_repl
