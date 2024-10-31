@@ -27,6 +27,8 @@ from sage.topology.all   import *
 
 from sage.combinat.all__sagemath_graphs import *
 
+from sage.databases.all__sagemath_graphs import *
+
 from sage.sandpiles.all import *
 
 from sage.knots.all import *
