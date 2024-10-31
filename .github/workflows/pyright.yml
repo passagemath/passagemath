@@ -5,8 +5,7 @@ on:
   merge_group:
   push:
     branches:
-      - master
-      - develop
+      - main
   workflow_dispatch:
     # Allow to run manually
 
