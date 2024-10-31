@@ -35,6 +35,7 @@ lazy_import('sage.misc.edit_module', 'set_edit_template', deprecation=34259)
 
 lazy_import('sage.misc.pager', 'pager')
 
+lazy_import('sage.misc.sh', 'sh')
 
 lazy_import("sage.misc.cython", "cython_lambda")
 lazy_import("sage.misc.cython", "cython_compile", "cython")
