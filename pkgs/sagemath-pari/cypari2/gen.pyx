@@ -904,6 +904,7 @@ cdef class Gen(Gen_base):
 
         >>> x = pari('x')
 
+        >>> pari.setrand(1)
         >>> (x**2 - 65).bnfinit().bnf_get_fu()
         [Mod(x - 8, x^2 - 65)]
         >>> (x**4 - x**2 + 1).bnfinit().bnf_get_fu()
@@ -953,6 +954,7 @@ cdef class Gen(Gen_base):
         >>> import warnings
         >>> with warnings.catch_warnings(record=True) as w:
         ...     warnings.simplefilter('always')
+        ...     pari.setrand(1)
         ...     funits = (x**2 - 65).bnfinit().bnfunit()
         ...     assert len(w) == 1
         ...     assert issubclass(w[0].category, DeprecationWarning)

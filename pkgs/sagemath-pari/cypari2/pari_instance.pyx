@@ -235,9 +235,9 @@ Verify that ``nfroots()`` (which has an unusual signature with a
 non-default argument following a default argument) works:
 
 >>> pari.nfroots(x='x^4 - 1')
-[-1, 1]
+[-1, 1]...
 >>> pari.nfroots(pari.nfinit('t^2 + 1'), "x^4 - 1")
-[-1, 1, Mod(-t, t^2 + 1), Mod(t, t^2 + 1)]
+[-1, 1, Mod(-t, t^2 + 1), Mod(t, t^2 + 1)]...
 
 Reset default precision for the following tests:
 
