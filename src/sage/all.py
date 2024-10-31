@@ -73,8 +73,6 @@ import sage.misc.lazy_import
 
 from sage.misc.all       import *         # takes a while
 
-from sage.misc.sh import sh
-
 from sage.libs.all import *
 from sage.data_structures.all import *
 
