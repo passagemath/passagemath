@@ -2811,7 +2811,7 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     Now without specifying `\mu`::
 
-        sage: graphs.strongly_regular_graph(10,3,0)
+        sage: graphs.strongly_regular_graph(10,3,0)             # needs database_graphs
         complement(Johnson graph with parameters 5,2): Graph on 10 vertices
 
     An obviously infeasible set of parameters::
