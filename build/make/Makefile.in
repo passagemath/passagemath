@@ -766,25 +766,26 @@ endif
 #     $(1): package name
 #     $(2): package version
 #     $(3): package dependencies
-#     $(4): package tree variable
+#     $(4): package check dependencies
+#     $(5): package tree variable
 
 define SCRIPT_PACKAGE_templ
 $(1)-build-deps: $(3)
 
-$$($(4))/$(SPKG_INST_RELDIR)/$(1)-$(2): $(3)
-	+$(MAKE_REC) $(1)-$(4)-no-deps
+$$($(5))/$(SPKG_INST_RELDIR)/$(1)-$(2): $(3) $(if $(check_deps_$(1)),$$(and $$(filter-out no,$$(SAGE_CHECK_$(1))),$(4)))
+	+$(MAKE_REC) $(1)-$(5)-no-deps
 
-$(1): $$($(4))/$(SPKG_INST_RELDIR)/$(1)-$(2)
+$(1): $$($(5))/$(SPKG_INST_RELDIR)/$(1)-$(2)
 
 $(1)-ensure: $(inst_$(1))
 
-$(1)-$(4)-no-deps:
-	$(PLUS)@if [ -z '$$($(4))' ]; then \
-	    echo "Error: The installation tree $(4) has been disabled" 2>&1; \
-	    echo "$$($(4)_DISABLED_MESSAGE)" 2>&1; \
+$(1)-$(5)-no-deps:
+	$(PLUS)@if [ -z '$$($(5))' ]; then \
+	    echo "Error: The installation tree $(5) has been disabled" 2>&1; \
+	    echo "$$($(5)_DISABLED_MESSAGE)" 2>&1; \
 	    exit 1; \
 	else \
-	    rm -rf '$$($(4))/var/lib/sage/scripts/$(1)'; \
+	    rm -rf '$$($(5))/var/lib/sage/scripts/$(1)'; \
 	    cd '$$(SAGE_ROOT)/build/pkgs/$(1)' && \
 		. '$$(SAGE_ROOT)/src/bin/sage-src-env-config' && \
 		. '$$(SAGE_ROOT)/src/bin/sage-env-config' && \
@@ -792,25 +793,25 @@ $(1)-$(4)-no-deps:
 		. '$$(SAGE_ROOT)/build/bin/sage-build-env-config' && \
 		. '$$(SAGE_ROOT)/build/bin/sage-build-env' && \
 		SAGE_CHECK=$$(SAGE_CHECK_$(1)) \
-		sage-logger -p 'SAGE_CHECK=$$(SAGE_CHECK_$(1)) PATH=$$(SAGE_SRC)/bin:$$($(4))/bin:$$$$PATH $$(SAGE_SPKG) $$(SAGE_SPKG_OPTIONS) \
+		sage-logger -p 'SAGE_CHECK=$$(SAGE_CHECK_$(1)) PATH=$$(SAGE_SRC)/bin:$$($(5))/bin:$$$$PATH $$(SAGE_SPKG) $$(SAGE_SPKG_OPTIONS) \
 		$(if $(filter $(1),$(TOOLCHAIN_DEPS)),--keep-existing) \
-		$(1)-$(2) $$($(4))' '$$(SAGE_LOGS)/$(1)-$(2).log'; \
+		$(1)-$(2) $$($(5))' '$$(SAGE_LOGS)/$(1)-$(2).log'; \
 	fi
 
-$(1)-no-deps: $(1)-$(4)-no-deps
+$(1)-no-deps: $(1)-$(5)-no-deps
 
-$(1)-$(4)-check:
-	$(PLUS)@sage-logger -p 'PATH=$$(SAGE_SRC)/bin:$$($(4))/bin:$$$$PATH $$(SAGE_SPKG) --check-only $(1)-$(2) $$($(4))' '$$(SAGE_LOGS)/$(1)-$(2).log'
+$(1)-$(5)-check:
+	$(PLUS)@sage-logger -p 'PATH=$$(SAGE_SRC)/bin:$$($(5))/bin:$$$$PATH $$(SAGE_SPKG) --check-only $(1)-$(2) $$($(5))' '$$(SAGE_LOGS)/$(1)-$(2).log'
 
-$(1)-check: $(1)-$(4)-check
+$(1)-check: $(1)-$(5)-check
 
-$(1)-$(4)-uninstall:
-	if [ -d '$$($(4))' ]; then \
+$(1)-$(5)-uninstall:
+	if [ -d '$$($(5))' ]; then \
 	    sage-spkg-uninstall $(if $(filter $(1),$(TOOLCHAIN_DEPS)),--keep-files) \
-		$(1) '$$($(4))'; \
+		$(1) '$$($(5))'; \
 	fi
 
-$(1)-uninstall: $(1)-$(4)-uninstall
+$(1)-uninstall: $(1)-$(5)-uninstall
 
 $(1)-clean: $(1)-uninstall
 
@@ -852,13 +853,13 @@ endef
 
 $(foreach pkgname,$(SCRIPT_PACKAGES),\
     $(foreach tree, $(trees_$(pkgname)), \
-	$(eval $(call SCRIPT_PACKAGE_templ,$(pkgname),$(vers_$(pkgname)),$(call pkg_deps,$(pkgname),build_),$(tree)))))
+	$(eval $(call SCRIPT_PACKAGE_templ,$(pkgname),$(vers_$(pkgname)),$(call pkg_deps,$(pkgname),build_),$(call pkg_deps,$(pkgname),check_),$(tree)))))
 
 ifdef DEBUG_RULES
 $(info # Rules for script packages)
 $(foreach pkgname,$(SCRIPT_PACKAGES),\
     $(foreach tree, $(trees_$(pkgname)), \
-	$(info $(call SCRIPT_PACKAGE_templ,$(pkgname),$(vers_$(pkgname)),$(call pkg_deps,$(pkgname),build_),$(tree)))))
+	$(info $(call SCRIPT_PACKAGE_templ,$(pkgname),$(vers_$(pkgname)),$(call pkg_deps,$(pkgname),build_),$(call pkg_deps,$(pkgname),check_),$(tree)))))
 endif
 
 # sagelib depends on this so that its install script is always executed
