@@ -1,23 +1,8 @@
 {
-<<<<<<< HEAD
-||||||| merged common ancestors
-    "sage.doctest.control": {
-        "failed": true,
-        "ntests": 229
-    },
-=======
-    "sage.doctest.__main__": {
-        "ntests": 9
-    },
     "sage.doctest.check_tolerance": {
         "failed": true,
         "ntests": 19
     },
-    "sage.doctest.control": {
-        "failed": true,
-        "ntests": 228
-    },
->>>>>>> main
     "sage.doctest.external": {
         "ntests": 40
     },
@@ -26,12 +11,7 @@
     },
     "sage.doctest.forker": {
         "failed": true,
-<<<<<<< HEAD
-        "ntests": 385
-||||||| merged common ancestors
-        "ntests": 412
-=======
-        "ntests": 413
+        "ntests": 373
     },
     "sage.doctest.marked_output": {
         "failed": true,
@@ -40,13 +20,7 @@
     },
     "sage.doctest.parsing": {
         "failed": true,
-<<<<<<< HEAD
-        "ntests": 296
-||||||| merged common ancestors
-        "ntests": 308
-=======
-        "ntests": 273
->>>>>>> main
+        "ntests": 266
     },
     "sage.doctest.reporting": {
         "failed": true,
@@ -60,14 +34,7 @@
         "ntests": 23
     },
     "sage.doctest.util": {
-<<<<<<< HEAD
-        "ntests": 138
-||||||| merged common ancestors
-        "failed": true,
-        "ntests": 141
-=======
-        "ntests": 137
->>>>>>> main
+        "ntests": 166
     },
     "sage.misc.sage_eval": {
         "failed": true,
@@ -109,7 +76,7 @@
     },
     "sage.repl.interpreter": {
         "failed": true,
-        "ntests": 109
+        "ntests": 104
     },
     "sage.repl.ipython_extension": {
         "failed": true,

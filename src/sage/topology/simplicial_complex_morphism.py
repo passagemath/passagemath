@@ -259,7 +259,7 @@ class SimplicialComplexMorphism(Morphism):
             sage: f = {x[0]:x[0] for x in S.cells()[0]}
             sage: H = Hom(S,T)
             sage: z = H(f)
-            sage: z.associated_chain_complex_morphism()
+            sage: z.associated_chain_complex_morphism()                                 # needs sage.modules
             Chain complex morphism:
               From: Chain complex with at most 2 nonzero terms over Integer Ring
               To:   Chain complex with at most 2 nonzero terms over Integer Ring

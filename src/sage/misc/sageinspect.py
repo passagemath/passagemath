@@ -2230,7 +2230,7 @@ def sage_getsourcelines(obj):
         sage: # needs sage.modules
         sage: from sage.matrix.constructor import matrix
         sage: sage_getsourcelines(matrix)[1]
-        21
+        22
         sage: sage_getsourcelines(matrix)[0][0]
         'def matrix(*args, **kwds):\n'
 

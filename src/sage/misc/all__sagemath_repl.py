@@ -25,6 +25,8 @@ lazy_import('sage.misc.trace', 'trace', deprecation=34259)
 
 lazy_import('sage.misc.profiler', 'Profiler', deprecation=34259)
 
+lazy_import('sage.misc.classgraph', 'class_graph')
+
 from sage.misc.dev_tools import import_statements
 
 lazy_import('sage.misc.dev_tools', 'runsnake', deprecation=34259)
@@ -35,6 +37,9 @@ lazy_import('sage.misc.edit_module', 'set_edit_template', deprecation=34259)
 
 lazy_import('sage.misc.pager', 'pager')
 
+lazy_import('sage.misc.remote_file', 'get_remote_file')
+
+lazy_import('sage.misc.sh', 'sh')
 
 lazy_import("sage.misc.cython", "cython_lambda")
 lazy_import("sage.misc.cython", "cython_compile", "cython")

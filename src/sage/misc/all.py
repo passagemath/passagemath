@@ -11,64 +11,6 @@ from sage.misc.misc import (BackslashOperator,
                             newton_method_sizes, compose,
                             nest)
 
-<<<<<<< HEAD
-||||||| merged common ancestors
-<<<<<<<<< Temporary merge branch 1
-from sage.misc.dev_tools import import_statements
-
-from sage.misc.edit_module import edit
-
-||||||||| ab24dac430e
-                  exists, forall, is_iterator,
-                  random_sublist,
-                  pad_zeros,
-                  SAGE_DB,
-                   newton_method_sizes, compose,
-                  nest)
-
-from sage.misc.banner import version
-
-from sage.misc.dev_tools import import_statements
-
-from sage.misc.html import html, pretty_print_default
-
-from sage.misc.table import table
-
-from sage.misc.sage_timeit_class import timeit
-
-from sage.misc.edit_module import edit
-
-from sage.misc.map_threaded import map_threaded
-
-from sage.misc.session import load_session, save_session, show_identifiers
-
-=========
->>>>>>>>> Temporary merge branch 2
-=======
-from sage.misc.dev_tools import import_statements
-
-from sage.misc.edit_module import edit
-
->>>>>>> main
-from sage.misc.remote_file import get_remote_file
-
-lazy_import('sage.misc.pager', 'pager')
-
-from sage.misc.classgraph import class_graph
-
-lazy_import("sage.misc.cython", "cython_lambda")
-lazy_import("sage.misc.cython", "cython_compile", "cython")
-
-<<<<<<< HEAD
-||||||| merged common ancestors
-<<<<<<<<< Temporary merge branch 1
-# Following will go to all__sagemath_repl.py in #36566
-from sage.misc.explain_pickle import (explain_pickle, unpickle_newobj, unpickle_build,
-                                      unpickle_instantiate, unpickle_persistent,
-                                      unpickle_extension, unpickle_appends)
-
-lazy_import('sage.misc.inline_fortran', 'fortran')
-
 lazy_import('sage.misc.banner', 'banner', deprecation=34259)
 lazy_import('sage.misc.dev_tools', 'runsnake', deprecation=34259)
 lazy_import('sage.misc.edit_module', 'set_edit_template', deprecation=34259)
