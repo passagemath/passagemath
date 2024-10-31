@@ -716,7 +716,6 @@
         "ntests": 11
     },
     "sage.combinat.designs.covering_array": {
-        "failed": true,
         "ntests": 31
     },
     "sage.combinat.designs.covering_design": {
@@ -729,7 +728,6 @@
         "ntests": 2
     },
     "sage.combinat.designs.designs_pyx": {
-        "failed": true,
         "ntests": 75
     },
     "sage.combinat.designs.difference_family": {
@@ -907,6 +905,10 @@
     },
     "sage.databases.knotinfo_db": {
         "ntests": 100
+    },
+    "sage.databases.sql_db": {
+        "failed": true,
+        "ntests": 292
     },
     "sage.doctest.check_tolerance": {
         "failed": true,
@@ -1225,7 +1227,7 @@
     },
     "sage.graphs.connectivity": {
         "failed": true,
-        "ntests": 580
+        "ntests": 570
     },
     "sage.graphs.convexity_properties": {
         "ntests": 67
@@ -1297,7 +1299,7 @@
     },
     "sage.graphs.graph": {
         "failed": true,
-        "ntests": 1129
+        "ntests": 1112
     },
     "sage.graphs.graph_coloring": {
         "ntests": 151
@@ -1405,12 +1407,11 @@
         "ntests": 103
     },
     "sage.graphs.spanning_tree": {
-        "failed": true,
-        "ntests": 169
+        "ntests": 165
     },
     "sage.graphs.strongly_regular_db": {
         "failed": true,
-        "ntests": 251
+        "ntests": 244
     },
     "sage.graphs.traversals": {
         "ntests": 222
@@ -2341,7 +2342,6 @@
         "ntests": 23
     },
     "sage.sets.recursively_enumerated_set": {
-        "failed": true,
         "ntests": 336
     },
     "sage.sets.set": {
