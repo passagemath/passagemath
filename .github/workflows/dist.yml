@@ -412,6 +412,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*flint*
 
+      - name: sagemath-cmr
+        id:   sagemath-cmr
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*cmr*
+
       - name: sagemath-linbox
         id:   sagemath-linbox
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
