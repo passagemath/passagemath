@@ -25,6 +25,8 @@ lazy_import('sage.misc.trace', 'trace', deprecation=34259)
 
 lazy_import('sage.misc.profiler', 'Profiler', deprecation=34259)
 
+lazy_import('sage.misc.classgraph', 'class_graph')
+
 from sage.misc.dev_tools import import_statements
 
 lazy_import('sage.misc.dev_tools', 'runsnake', deprecation=34259)

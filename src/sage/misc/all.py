@@ -19,8 +19,6 @@ from sage.misc.remote_file import get_remote_file
 
 lazy_import('sage.misc.pager', 'pager')
 
-from sage.misc.classgraph import class_graph
-
 lazy_import("sage.misc.cython", "cython_lambda")
 lazy_import("sage.misc.cython", "cython_compile", "cython")
 
