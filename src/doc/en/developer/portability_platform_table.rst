@@ -3005,7 +3005,7 @@
    * -    ‑*maximal*
      - |image-almalinux-9-python3.11-maximal-with-system-packages| |image-almalinux-9-python3.11-maximal-with-targets-pre|
      -
-   * - **alpine 
+   * - **alpine** 
        
           ‑*minimal*
      - |image-alpine-minimal-with-system-packages| |image-alpine-minimal-with-targets-pre| |image-alpine-minimal-with-targets| |image-alpine-minimal-with-targets-optional|
