@@ -983,7 +983,6 @@
         "ntests": 154
     },
     "sage.functions.gamma": {
-        "failed": true,
         "ntests": 140
     },
     "sage.functions.generalized": {
@@ -1085,10 +1084,6 @@
     },
     "sage.misc.banner": {
         "ntests": 12
-    },
-    "sage.misc.benchmark": {
-        "failed": true,
-        "ntests": 18
     },
     "sage.misc.binary_tree": {
         "ntests": 61
@@ -1304,7 +1299,6 @@
         "ntests": 61
     },
     "sage.misc.sh": {
-        "failed": true,
         "ntests": 1
     },
     "sage.misc.stopgap": {

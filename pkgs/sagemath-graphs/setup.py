@@ -9,4 +9,4 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-graphs'],
            spkgs=['boost_cropped', 'planarity', 'rw'],
-           package_data={})
+           package_data={'sage.ext_data.graphs': ['**']})

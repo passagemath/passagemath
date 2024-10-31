@@ -1,5 +1,7 @@
 # sage_setup: distribution = sagemath-modules
 
+from sage.rings.polynomial.all__sagemath_categories import *
+
 from sage.misc.lazy_import import lazy_import
 
 # Ore Polynomial Rings

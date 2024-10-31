@@ -5,8 +5,7 @@ on:
   merge_group:
   push:
     branches:
-      - master
-      - develop
+      - main
     # Ignore pushes on tags to prevent two uploads of codecov reports
     tags-ignore: ['**']
   workflow_dispatch:
@@ -279,6 +278,7 @@ jobs:
           - sagemath_schemes-check
           - sagemath_standard_no_symbolics-check
           - sagemath_symbolics-check
+          - sagemath_giac-check
     steps:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10

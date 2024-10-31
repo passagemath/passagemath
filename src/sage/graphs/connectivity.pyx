@@ -1692,6 +1692,7 @@ def vertex_connectivity(G, value_only=True, sets=False, k=None, solver=None, ver
 
     Check that :issue:`38723` is fixed::
 
+        sage: # needs sage.modules
         sage: G = graphs.SierpinskiGasketGraph(3)
         sage: G.vertex_connectivity(k=1)                                                # needs sage.numerical.mip
         True
@@ -2871,6 +2872,7 @@ def spqr_tree_to_graph(T):
 
     Check that :issue:`38527` is fixed::
 
+        sage: # needs sage.numerical.mip
         sage: from sage.graphs.connectivity import spqr_tree, spqr_tree_to_graph
         sage: G = Graph('LlCG{O@?GBoMw?')
         sage: T1 = spqr_tree(G, algorithm="Hopcroft_Tarjan")

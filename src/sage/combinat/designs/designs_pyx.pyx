@@ -278,7 +278,7 @@ def is_orthogonal_array(OA, int k, int n, int t=2, verbose=False, terminology='O
         sage: for a in product(product((0,1), repeat=3), repeat=4):                     # needs sage.schemes
         ....:     if is_orthogonal_array(a,3,2):
         ....:          n += 1
-        sage: n
+        sage: n                                                                         # needs sage.schemes
         48
     """
     cdef int n2 = n*n

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     # Allow to run manually
     branches:
-      - 'develop'
+      - main
   push:
     tags:
       # Match all release tags including beta, rc
