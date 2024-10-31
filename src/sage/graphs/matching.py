@@ -554,7 +554,7 @@ def is_factor_critical(G, matching=None, algorithm='Edmonds', solver=None, verbo
         sage: G = graphs.RandomGNP(15, .2)
         sage: G.add_path([0..14])
         sage: G.add_edge(14, 0)
-        sage: G.is_hamiltonian()
+        sage: G.is_hamiltonian()                                                    # needs sage.numerical.mip
         True
         sage: G.is_factor_critical()                                                # needs networkx
         True
