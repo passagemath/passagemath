@@ -1220,13 +1220,7 @@ def matching(G, value_only=False, algorithm='Edmonds',
         ...
         ValueError: algorithm must be set to either "Edmonds" or "LP"
     """
-    from sage.rings.real_mpfr import RR
-
-    def weight(x):
-        if x in RR:
-            return x
-        else:
-            return 1
+    from sage.graphs.generic_graph import _weight_if_real as weight
 
     W = {}
     L = {}
