@@ -28,6 +28,8 @@ exclude sage/categories/subobjects.*
 exclude sage/categories/subquotients.*
 exclude sage/categories/with_realizations.*
 
+include sage/databases/sql_db.py
+
 include sage/geometry/abc.p*
 
 # Interfaces
