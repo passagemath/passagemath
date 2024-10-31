@@ -10294,18 +10294,15 @@ class GenericGraph(GenericGraph_pyx):
             raise ValueError("this method does not support both "
                              "vertex_bound=True and algorithm='" + algorithm + "'")
         if use_edge_labels:
-            from sage.rings.real_mpfr import RR
             if integer:
                 from math import floor
 
                 def capacity(z):
-                    return floor(z) if z in RR else 1
+                    return floor(z) if z in Reals else 1
             else:
-                def capacity(z):
-                    return z if z in RR else 1
+                capacity = _weight_if_real
         else:
-            def capacity(z):
-                return 1
+            capacity = _weight_1
 
         if algorithm is None:
             if vertex_bound:
