@@ -239,13 +239,13 @@ def covering_array(strength, number_columns, levels):
         sage: from sage.combinat.designs.designs_pyx import is_covering_array
         sage: from sage.combinat.designs.covering_array import covering_array
         sage: C1 = covering_array(2, 7, 3)
-        sage: is_covering_array(C1,parameters=True)
+        sage: is_covering_array(C1, parameters=True)
         (True, (12, 2, 7, 3))
         sage: C2 = covering_array(2, 11, 2)
-        sage: is_covering_array(C2,parameters=True)
+        sage: is_covering_array(C2, parameters=True)
         (True, (7, 2, 11, 2))
-        sage: C3 = covering_array(2, 8, 7)
-        sage: is_covering_array(C3,parameters=True)
+        sage: C3 = covering_array(2, 8, 7)                                              # needs sage.schemes
+        sage: is_covering_array(C3, parameters=True)                                    # needs sage.schemes
         (True, (49, 2, 8, 7))
         sage: C4 = covering_array(2, 50, 7)
         No direct construction known and/or implemented for a CA(N; 2, 50, 7)
