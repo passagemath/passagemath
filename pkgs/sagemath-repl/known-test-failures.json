@@ -1,14 +1,7 @@
 {
-    "sage.doctest.__main__": {
-        "ntests": 9
-    },
     "sage.doctest.check_tolerance": {
         "failed": true,
         "ntests": 19
-    },
-    "sage.doctest.control": {
-        "failed": true,
-        "ntests": 228
     },
     "sage.doctest.external": {
         "ntests": 40
@@ -18,7 +11,7 @@
     },
     "sage.doctest.forker": {
         "failed": true,
-        "ntests": 413
+        "ntests": 373
     },
     "sage.doctest.marked_output": {
         "failed": true,
@@ -26,7 +19,7 @@
     },
     "sage.doctest.parsing": {
         "failed": true,
-        "ntests": 273
+        "ntests": 266
     },
     "sage.doctest.reporting": {
         "ntests": 126
@@ -39,7 +32,7 @@
         "ntests": 23
     },
     "sage.doctest.util": {
-        "ntests": 137
+        "ntests": 166
     },
     "sage.misc.sage_eval": {
         "failed": true,
@@ -81,7 +74,7 @@
     },
     "sage.repl.interpreter": {
         "failed": true,
-        "ntests": 105
+        "ntests": 104
     },
     "sage.repl.ipython_extension": {
         "failed": true,
