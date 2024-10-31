@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-repl
+# sage.doctest: needs sage.all
 "Benchmarks"
 
 from sage.misc.misc import cputime
