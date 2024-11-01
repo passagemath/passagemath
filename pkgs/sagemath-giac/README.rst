@@ -29,9 +29,14 @@ interface to GIAC.
 What is included
 ----------------
 
-- https://doc.sagemath.org/html/en/reference/libs/sage/libs/giac.html
+- `Cython interface to GIAC <https://doc.sagemath.org/html/en/reference/libs/sage/libs/giac.html>`_
 
-- https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/giac.html
+  The Cython interface is by Frederic Han and was previously available under the name
+  `giacpy-sage <https://gitlab.math.univ-paris-diderot.fr/han/giacpy-sage/>`_.
+  It was `merged into the Sage library <https://github.com/sagemath/sage/issues/29171>`_
+  in 2020.
+
+- `Pexpect interface to GIAC <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/giac.html>`_
 
 - see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-giac/MANIFEST.in
 
