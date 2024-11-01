@@ -299,10 +299,6 @@ from .stack cimport (new_gen, new_gen_noclear, clear_stack,
 from .handle_error cimport _pari_init_error_handling
 from .closure cimport _pari_init_closure
 
-# Default precision (in PARI words) for the PARI library interface,
-# when no explicit precision is given and the inputs are exact.
-cdef long prec = prec_bits_to_pari(53)
-
 
 #################################################################
 # conversions between various real precision models
@@ -339,31 +335,6 @@ def prec_dec_to_bits(long prec_in_dec):
     """
     cdef double log_10 = 3.32192809488736
     return int(prec_in_dec*log_10 + 1.0)  # Add one to round up
-
-
-cpdef long prec_bits_to_pari(unsigned long prec_in_bits) noexcept:
-    r"""
-    Convert from precision expressed in bits to pari real precision
-    expressed in words. Note: this rounds up to the nearest word,
-    adjusts for the two codewords of a pari real, and is
-    architecture-dependent.
-
-    Examples:
-
-    >>> from cypari2.pari_instance import prec_bits_to_pari
-    >>> import sys
-    >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
-    >>> prec_bits_to_pari(70) == (5 if bitness == '32' else 4)
-    True
-
-    >>> ans32 = [(32, 3), (64, 4), (96, 5), (128, 6), (160, 7), (192, 8), (224, 9), (256, 10)]
-    >>> ans64 = [(32, 3), (64, 3), (96, 4), (128, 4), (160, 5), (192, 5), (224, 6), (256, 6)]
-    >>> [(32*n, prec_bits_to_pari(32*n)) for n in range(1, 9)] == (ans32 if bitness == '32' else ans64)
-    True
-    """
-    if not prec_in_bits:
-        return prec
-    return nbits2prec(prec_in_bits)
 
 
 cpdef long default_bitprec() noexcept:
