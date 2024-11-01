@@ -1070,6 +1070,9 @@
     "sage.data_structures.mutable_poset": {
         "ntests": 441
     },
+    "sage.databases.sql_db": {
+        "ntests": 230
+    },
     "sage.doctest.check_tolerance": {
         "failed": true,
         "ntests": 19
@@ -1739,7 +1742,6 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
-        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -1747,6 +1749,9 @@
     },
     "sage.interfaces.four_ti_2": {
         "ntests": 54
+    },
+    "sage.interfaces.gfan": {
+        "ntests": 2
     },
     "sage.interfaces.interface": {
         "ntests": 4
@@ -1941,10 +1946,6 @@
     },
     "sage.misc.banner": {
         "ntests": 12
-    },
-    "sage.misc.benchmark": {
-        "failed": true,
-        "ntests": 18
     },
     "sage.misc.binary_tree": {
         "ntests": 61
@@ -2170,7 +2171,6 @@
         "ntests": 61
     },
     "sage.misc.sh": {
-        "failed": true,
         "ntests": 1
     },
     "sage.misc.stopgap": {
@@ -2757,7 +2757,6 @@
         "ntests": 879
     },
     "sage.rings.invariants.reconstruction": {
-        "failed": true,
         "ntests": 59
     },
     "sage.rings.laurent_series_ring": {
@@ -2815,6 +2814,10 @@
         "failed": true,
         "ntests": 133
     },
+    "sage.rings.polynomial.groebner_fan": {
+        "failed": true,
+        "ntests": 357
+    },
     "sage.rings.polynomial.ideal": {
         "ntests": 13
     },
@@ -2865,6 +2868,10 @@
     "sage.rings.polynomial.multi_polynomial_sequence": {
         "failed": true,
         "ntests": 135
+    },
+    "sage.rings.polynomial.omega": {
+        "failed": true,
+        "ntests": 121
     },
     "sage.rings.polynomial.ore_function_element": {
         "ntests": 56
