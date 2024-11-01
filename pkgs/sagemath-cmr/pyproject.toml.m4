@@ -28,6 +28,7 @@ include(`pyproject_toml_metadata.m4')dnl'
 [project.optional-dependencies]
 test = [
     SPKG_INSTALL_REQUIRES_sagemath_repl
+    SPKG_INSTALL_REQUIRES_sagemath_pari
 ]
 
 [project.readme]
