@@ -744,7 +744,7 @@
         "ntests": 12
     },
     "sage.combinat.designs.orthogonal_arrays_build_recursive": {
-        "ntests": 9
+        "ntests": 19
     },
     "sage.combinat.designs.resolvable_bibd": {
         "ntests": 5
@@ -762,7 +762,7 @@
         "ntests": 61
     },
     "sage.combinat.finite_state_machine": {
-        "ntests": 36
+        "ntests": 37
     },
     "sage.combinat.finite_state_machine_generators": {
         "ntests": 33
@@ -811,11 +811,10 @@
         "ntests": 27
     },
     "sage.combinat.posets.hasse_diagram": {
-        "failed": true,
         "ntests": 515
     },
     "sage.combinat.posets.lattices": {
-        "ntests": 40
+        "ntests": 46
     },
     "sage.combinat.posets.linear_extension_iterator": {
         "ntests": 13
@@ -907,8 +906,7 @@
         "ntests": 100
     },
     "sage.databases.sql_db": {
-        "failed": true,
-        "ntests": 292
+        "ntests": 248
     },
     "sage.doctest.check_tolerance": {
         "failed": true,
@@ -1330,7 +1328,6 @@
         "ntests": 23
     },
     "sage.graphs.graph_decompositions.slice_decomposition": {
-        "failed": true,
         "ntests": 131
     },
     "sage.graphs.graph_decompositions.tree_decomposition": {
