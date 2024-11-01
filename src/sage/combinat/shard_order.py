@@ -225,7 +225,7 @@ def shard_poset(n):
 
         sage: P = posets.ShardPoset(4); P  # indirect doctest
         Finite poset containing 24 elements
-        sage: P.chain_polynomial()
+        sage: P.chain_polynomial()                                                      # needs sage.libs.flint
         34*q^4 + 90*q^3 + 79*q^2 + 24*q + 1
         sage: P.characteristic_polynomial()
         q^3 - 11*q^2 + 23*q - 13
