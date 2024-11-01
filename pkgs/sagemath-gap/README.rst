@@ -27,6 +27,18 @@ distribution that provides modules that depend on the GAP system, see
 https://www.gap-system.org
 
 
+What is included
+----------------
+
+- `Cython interface to libgap <https://doc.sagemath.org/html/en/reference/libs/sage/libs/gap/libgap.html>`_
+
+- `Pexpect interface to GAP <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/gap.html>`_
+
+- numerous modules with build-time dependencies on GAP, see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-gap/MANIFEST.in
+
+- the binary wheels on PyPI ship a prebuilt copy of GAP 4.13.1
+
+
 Examples
 --------
 
