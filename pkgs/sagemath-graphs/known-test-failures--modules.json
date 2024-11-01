@@ -815,8 +815,7 @@
         "ntests": 73
     },
     "sage.combinat.cluster_algebra_quiver.quiver": {
-        "failed": true,
-        "ntests": 312
+        "ntests": 303
     },
     "sage.combinat.cluster_algebra_quiver.quiver_mutation_type": {
         "ntests": 244
@@ -874,7 +873,7 @@
         "ntests": 36
     },
     "sage.combinat.designs.orthogonal_arrays_build_recursive": {
-        "ntests": 9
+        "ntests": 19
     },
     "sage.combinat.designs.resolvable_bibd": {
         "ntests": 5
@@ -947,7 +946,6 @@
         "ntests": 27
     },
     "sage.combinat.posets.hasse_diagram": {
-        "failed": true,
         "ntests": 561
     },
     "sage.combinat.posets.incidence_algebras": {
@@ -1233,8 +1231,7 @@
         "ntests": 100
     },
     "sage.databases.sql_db": {
-        "failed": true,
-        "ntests": 292
+        "ntests": 248
     },
     "sage.doctest.check_tolerance": {
         "failed": true,
@@ -1674,7 +1671,6 @@
         "ntests": 23
     },
     "sage.graphs.graph_decompositions.slice_decomposition": {
-        "failed": true,
         "ntests": 131
     },
     "sage.graphs.graph_decompositions.tree_decomposition": {
@@ -1914,7 +1910,6 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
-        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -3145,7 +3140,6 @@
         "ntests": 39
     },
     "sage.sandpiles.examples": {
-        "failed": true,
         "ntests": 24
     },
     "sage.sandpiles.sandpile": {
