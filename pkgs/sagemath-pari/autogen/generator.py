@@ -139,7 +139,7 @@ class PariFunctionGenerator(object):
             ...     help=r"bnfinit(P,{flag=0},{tech=[]}): compute...",
             ...     **{"class":"basic", "section":"number_fields"})
                 GEN bnfinit0(GEN, long, GEN, long)
-                def bnfinit(P, long flag=0, tech=None, long precision=0):
+                def bnfinit(P, long flag=0, tech=None, long precision=DEFAULT_BITPREC):
                     ...
                     cdef bint _have_tech = (tech is not None)
                     if _have_tech:
@@ -149,7 +149,7 @@ class PariFunctionGenerator(object):
                     cdef GEN _tech = NULL
                     if _have_tech:
                         _tech = (<Gen>tech).g
-                    precision = prec_bits_to_pari(precision)
+                    precision = nbits2prec(precision)
                     cdef GEN _ret = bnfinit0(_P, flag, _tech, precision)
                     return new_gen(_ret)
             <BLANKLINE>

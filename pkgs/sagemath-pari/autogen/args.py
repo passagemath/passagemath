@@ -304,11 +304,11 @@ class PariArgumentPrec(PariArgumentClass):
     def ctype(self):
         return "long"
     def always_default(self):
-        return "0"
+        return "DEFAULT_BITPREC"
     def get_argument_name(self, namesiter):
         return "precision"
     def c_convert_code(self):
-        s = "        {name} = prec_bits_to_pari({name})\n"
+        s = "        {name} = nbits2prec({name})\n"
         return s.format(name=self.name)
 
 class PariArgumentBitprec(PariArgumentClass):
@@ -317,13 +317,9 @@ class PariArgumentBitprec(PariArgumentClass):
     def ctype(self):
         return "long"
     def always_default(self):
-        return "0"
+        return "DEFAULT_BITPREC"
     def get_argument_name(self, namesiter):
         return "precision"
-    def c_convert_code(self):
-        s  = "        if not {name}:\n"
-        s += "            {name} = default_bitprec()\n"
-        return s.format(name=self.name)
 
 class PariArgumentSeriesPrec(PariArgumentClass):
     def _typerepr(self):

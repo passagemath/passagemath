@@ -8,6 +8,12 @@ from .gen cimport Gen
 cpdef long prec_bits_to_pari(unsigned long prec_in_bits) noexcept
 cpdef long default_bitprec() noexcept
 
+cdef extern from *:
+    """
+    #define DEFAULT_BITPREC prec2nbits(DEFAULTPREC)
+    """
+    long DEFAULT_BITPREC
+
 cdef class Pari_auto:
     pass
 

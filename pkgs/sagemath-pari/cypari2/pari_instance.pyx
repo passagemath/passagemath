@@ -376,7 +376,7 @@ cpdef long default_bitprec() noexcept:
     >>> default_bitprec()
     64
     """
-    return prec2nbits(LOWDEFAULTPREC)
+    return DEFAULT_BITPREC
 
 
 # Callbacks from PARI to print stuff using sys.stdout.write() instead
