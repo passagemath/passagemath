@@ -10453,7 +10453,7 @@ class FiniteStateMachine(SageObject):
             ....:                initial_states=[0],
             ....:                on_duplicate_transition=\
             ....:                    duplicate_transition_add_input)
-            sage: T.moments_waiting_time(
+            sage: T.moments_waiting_time(                                               # needs sage.libs.singular
             ....:     is_zero=lambda e: e in (p + q - 1)*R)
             {'expectation': +Infinity, 'variance': +Infinity}
         """
