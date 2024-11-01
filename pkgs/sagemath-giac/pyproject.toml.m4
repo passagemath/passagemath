@@ -33,11 +33,7 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [tool.setuptools]
-packages = ["sage.libs.giac"]
 include-package-data = false
-
-[tool.setuptools.package-data]
-"sage.libs.giac" = ["*.pxd"]
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
