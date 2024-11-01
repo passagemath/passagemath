@@ -15,8 +15,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-cmr"
-description = "Sage: Open Source Mathematics Software: Combinatorial matrix recognition"
+name = "passagemath-cmr"
+description = "passagemath: Combinatorial matrix recognition"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_sagemath_modules
