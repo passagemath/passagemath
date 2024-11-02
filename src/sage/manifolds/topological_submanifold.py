@@ -732,6 +732,7 @@ class TopologicalSubmanifold(TopologicalManifold):
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: M = Manifold(3, 'M', structure='topological')
             sage: N = Manifold(2, 'N', ambient = M, structure='topological')
             sage: CM.<x,y,z> = M.chart()

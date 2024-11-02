@@ -222,7 +222,7 @@ class FunctionAiryAiSimple(BuiltinFunction):
             0.0065911393574607191442574484080
             sage: airy_ai_simple(3).n(algorithm='scipy')  # rel tol 1e-10               # needs scipy
             0.006591139357460719
-            sage: airy_ai_simple(I).n(algorithm='scipy')  # rel tol 1e-10
+            sage: airy_ai_simple(I).n(algorithm='scipy')  # rel tol 1e-10               # needs scipy
             0.33149330543214117 - 0.3174498589684438*I
 
         TESTS::
@@ -760,7 +760,7 @@ class FunctionAiryBiPrime(BuiltinFunction):
             161.92668350461340184309492429
             sage: airy_bi_prime(4).n(algorithm='scipy')  # rel tol 1e-10                # needs scipy
             161.92668350461398
-            sage: airy_bi_prime(I).n(algorithm='scipy')  # rel tol 1e-10
+            sage: airy_bi_prime(I).n(algorithm='scipy')  # rel tol 1e-10                # needs scipy
             0.135026646710819 - 0.1288373867812549*I
 
         TESTS::

@@ -281,7 +281,7 @@ def Q6(groundset='abcdef'):
          {'e', 'f'}]
         sage: M.nonspanning_circuits() == M.noncospanning_cocircuits()
         False
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
 
     REFERENCES:
@@ -4414,7 +4414,7 @@ def XY13(groundset=None):
         sage: # needs sage.rings.finite_rings
         sage: M = matroids.catalog.XY13(); M
         XY13: Quaternary matroid of rank 6 on 13 elements
-        sage: M.is_3connected()
+        sage: M.is_3connected()                                                         # needs sage.graphs
         True
     """
     GF4 = GF(4, 'w')
