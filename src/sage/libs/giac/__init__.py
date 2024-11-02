@@ -256,11 +256,12 @@ def groebner_basis(gens, proba_epsilon=None, threads=None, prot=False,
         ...Polynomial Sequence with 74 Polynomials in 8 Variables
 
         sage: I = ideal(P(0),P(0))
-        sage: I.groebner_basis() == gb_giac(I)
+        sage: I.groebner_basis() == gb_giac(I)                                          # needs sage.libs.singular
         True
 
     Test the supported term orderings::
 
+        sage: # needs sage.libs.singular
         sage: from sage.rings.ideal import Cyclic
         sage: P = PolynomialRing(QQ, 'x', 4, order='lex')
         sage: B = gb_giac(Cyclic(P))
