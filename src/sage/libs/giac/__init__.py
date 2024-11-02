@@ -13,6 +13,7 @@ AUTHORS:
 
 EXAMPLES::
 
+    sage: # needs sage.libs.singular
     sage: from sage.libs.giac import groebner_basis as gb_giac # random
     sage: P = PolynomialRing(QQ, 6, 'x')
     sage: I = sage.rings.ideal.Cyclic(P)
@@ -167,7 +168,7 @@ def groebner_basis(gens, proba_epsilon=None, threads=None, prot=False,
 
         sage: from sage.libs.giac import groebner_basis as gb_giac
 
-        sage: # needs sage.rings.finite_rings
+        sage: # needs sage.libs.singular sage.rings.finite_rings
         sage: P = PolynomialRing(GF(previous_prime(2**31)), 6, 'x')
         sage: I = sage.rings.ideal.Cyclic(P)
         sage: B = gb_giac(I.gens())
@@ -179,7 +180,7 @@ def groebner_basis(gens, proba_epsilon=None, threads=None, prot=False,
 
     Elimination ideals can be computed by passing ``elim_variables``::
 
-        sage: # needs sage.rings.finite_rings
+        sage: # needs sage.libs.singular sage.rings.finite_rings
         sage: P = PolynomialRing(GF(previous_prime(2**31)), 5, 'x')
         sage: I = sage.rings.ideal.Cyclic(P)
         sage: B = gb_giac(I.gens(), elim_variables=[P.gen(0), P.gen(2)])
@@ -207,6 +208,7 @@ def groebner_basis(gens, proba_epsilon=None, threads=None, prot=False,
 
     * multi threaded operations::
 
+        sage: # needs sage.libs.singular
         sage: P = PolynomialRing(QQ, 8, 'x')
         sage: I = sage.rings.ideal.Cyclic(P)
         sage: time B = gb_giac(I.gens(),1e-6,threads=2) # doctest: +SKIP
@@ -217,6 +219,7 @@ def groebner_basis(gens, proba_epsilon=None, threads=None, prot=False,
 
     ::
 
+        sage: # needs sage.libs.singular
         sage: I = sage.rings.ideal.Katsura(P)
         sage: gb_giac(I,prot=True)  # random, long time (3s)
         9381383 begin computing basis modulo 535718473
