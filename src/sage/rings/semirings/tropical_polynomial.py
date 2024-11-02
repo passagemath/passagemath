@@ -128,7 +128,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
 
         sage: p1.piecewise_function()
         piecewise(x|-->1 on (-oo, -3], x|-->x + 4 on (-3, 2), x|-->3*x on [2, +oo); x)
-        sage: p1.plot()
+        sage: p1.plot()                                                                 # needs sage.plot
         Graphics object consisting of 1 graphics primitive
 
     .. PLOT::
@@ -143,7 +143,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
 
         sage: p2.piecewise_function()
         piecewise(x|-->3 on (-oo, 1], x|-->2*x + 1 on (1, +oo); x)
-        sage: p2.plot()
+        sage: p2.plot()                                                                 # needs sage.plot
         Graphics object consisting of 1 graphics primitive
 
     .. PLOT::
@@ -465,7 +465,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
             3*x^3 + 1*x^2 + 2*x + 4
             sage: p1.roots()
             [1/3, 1/3, 1/3]
-            sage: p1.plot()
+            sage: p1.plot()                                                             # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -485,7 +485,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
             sage: p1 = R([4,2,1,3])
             sage: p1.roots()
             [-2, 1, 2]
-            sage: p1.plot()
+            sage: p1.plot()                                                             # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -501,14 +501,14 @@ class TropicalPolynomial(Polynomial_generic_sparse):
         If ``xmin`` or ``xmax`` is given as an input, then the others also
         have to be given. Otherwise it will raise an error::
 
-            sage: plot(p1, 5)
+            sage: plot(p1, 5)                                                           # needs sage.plot
             Traceback (most recent call last):
             ...
             ValueError: expected 2 inputs for xmin and xmax, but got 1
 
         Error also occured when ``xmin`` is greater or equal than``xmax``::
 
-            sage: plot(p1, 5, 3)
+            sage: plot(p1, 5, 3)                                                        # needs sage.plot
             Traceback (most recent call last):
             ...
             ValueError: xmin = 5 should be less than xmax = 3
@@ -886,7 +886,7 @@ class TropicalPolynomialSemiring(UniqueRepresentation, Parent):
             sage: points = [(-2,-3),(1,3),(2,4)]
             sage: p1 = R.interpolation(points); p1
             1*x^2 + 2*x + 4
-            sage: p1.plot()
+            sage: p1.plot()                                                             # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -905,7 +905,7 @@ class TropicalPolynomialSemiring(UniqueRepresentation, Parent):
             sage: points = [(0,0),(1,1),(2,4)]
             sage: p1 = R.interpolation(points); p1
             (-2)*x^3 + (-1)*x^2 + 0*x + 0
-            sage: p1.plot()
+            sage: p1.plot()                                                             # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
