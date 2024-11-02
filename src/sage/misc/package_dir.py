@@ -276,7 +276,7 @@ def is_package_or_sage_namespace_package_dir(path, *, distribution_filter=None):
         sage: directories = [os.path.join(p, 'mpfr')
         ....:                for p in sage.libs.__path__]; directories
         ['.../sage/libs/mpfr'...]
-        sage: any(is_package_or_sage_namespace_package_dir(d) for d in directories)
+        sage: any(is_package_or_sage_namespace_package_dir(d) for d in directories)     # needs sage.rings.real_mpfr
         True
 
     :mod:`sage` is an implicit namespace package::
