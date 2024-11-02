@@ -1517,7 +1517,7 @@ class IntegratedCurve(DifferentiableCurve):
         The argument ``verbose=True`` will cause the solver to write a small
         message each time it is switching chart::
 
-            sage: sol = c.solve_across_charts(step=0.1, verbose=True)
+            sage: sol = c.solve_across_charts(step=0.1, verbose=True)                   # needs scipy
             Performing numerical integration with method 'ode'.
             Integration will take place on the whole manifold domain.
             Resulting list of points will be associated with the key 'ode_multichart' by default.
@@ -1536,7 +1536,7 @@ class IntegratedCurve(DifferentiableCurve):
 
         The following code prints the corresponding charts::
 
-            sage: for chart, solution in sol:
+            sage: for chart, solution in sol:                                           # needs scipy
             ....:     print(chart)
             Chart (M, (r, th))
             Chart (M, (x, y))
@@ -3030,6 +3030,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Solve, interpolate and prepare the plot for the solutions
     corresponding to the two initial conditions previously set::
 
+        sage: # needs scipy sage.plot
         sage: graph2D_mercator = Graphics()
         sage: for key in dict_params:
         ....:     sol = c.solve(solution_key='sol-'+key,
@@ -3042,6 +3043,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Prepare a grid of Mercator coordinates lines, and plot the curves
     over it::
 
+        sage: # needs scipy sage.plot
         sage: graph2D_mercator_coords=mercator.plot(chart=mercator,
         ....:                            number_values=8,color='yellow')
         sage: graph2D_mercator + graph2D_mercator_coords

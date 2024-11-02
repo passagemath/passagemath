@@ -806,6 +806,7 @@ class IntegratedCurveSet(DifferentiableCurveSet):
 
         EXAMPLES::
 
+            sage: # needs scipy
             sage: from sage.manifolds.differentiable.manifold_homset import IntegratedCurveSet
             sage: M = Manifold(2, 'M')
             sage: X.<x,y> = M.chart()
@@ -1242,6 +1243,7 @@ class IntegratedAutoparallelCurveSet(IntegratedCurveSet):
 
         EXAMPLES::
 
+            sage: # needs scipy
             sage: from sage.manifolds.differentiable.manifold_homset import IntegratedAutoparallelCurveSet
             sage: M = Manifold(2, 'M')
             sage: X.<x,y> = M.chart()
@@ -1686,6 +1688,7 @@ class IntegratedGeodesicSet(IntegratedAutoparallelCurveSet):
 
         EXAMPLES::
 
+            sage: # needs scipy
             sage: from sage.manifolds.differentiable.manifold_homset import IntegratedGeodesicSet
             sage: M = Manifold(4, 'M', start_index=1)
             sage: X.<w,x,y,z> = M.chart()
