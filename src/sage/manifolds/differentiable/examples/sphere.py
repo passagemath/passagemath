@@ -1145,12 +1145,12 @@ class Sphere(PseudoRiemannianSubmanifold):
         Minimal triangulation of the 2-sphere::
 
             sage: S2 = manifolds.Sphere(2)
-            sage: S = S2.minimal_triangulation(); S
+            sage: S = S2.minimal_triangulation(); S                                     # needs sage.graphs
             Minimal triangulation of the 2-sphere
 
         The Euler characteristic of a 2-sphere::
 
-            sage: S.euler_characteristic()
+            sage: S.euler_characteristic()                                              # needs sage.graphs
             2
         """
         from sage.topology.simplicial_complex_examples import Sphere as SymplicialSphere
