@@ -1,5 +1,5 @@
 ========================================================================
- passagemath: Symbolic computation with GIAC
+ passagemath: Symbolic computation with Giac
 ========================================================================
 
 About SageMath
@@ -19,11 +19,17 @@ See https://doc.sagemath.org/html/en/installation/index.html
 for general installation instructions.
 
 
-About this pip-installable source distribution
-----------------------------------------------
+About this pip-installable distribution package
+-----------------------------------------------
 
-This pip-installable source distribution ``sagemath-giac`` provides a Cython
-interface to GIAC.
+`Giac/Xcas <https://www-fourier.ujf-grenoble.fr/~parisse/giac.html>`_
+is a general purpose Computer algebra system by Bernard Parisse released under GPLv3.
+It has been developed since 2000 and is widely used: Giac/Xcas is the native CAS engine
+of the HP Prime calculators; the C++ kernel of the system, Giac, provides the CAS view
+of `Geogebra <https://www.geogebra.org/>`_.
+
+This pip-installable source distribution ``passagemath-giac`` makes Giac available
+from Python and provides integration with the Sage Mathematical Software System.
 
 
 What is included
