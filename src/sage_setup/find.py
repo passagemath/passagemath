@@ -160,7 +160,7 @@ def find_python_sources(src_dir, modules=['sage'], distributions=None,
                 for filename in filenames:
                     base, ext = os.path.splitext(filename)
                     filepath = os.path.join(dirpath, filename)
-                    if ext == PYMOD_EXT and base != '__init__':
+                    if ext == PYMOD_EXT:
                         if filepath in distribution_filter:
                             python_modules.append(package + '.' + base)
                     if ext == '.pyx':

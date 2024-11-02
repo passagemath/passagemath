@@ -129,9 +129,6 @@ from sage.combinat.all import Posets  # so that sage.combinat.all.Posets wins ov
 # when they are first needed.
 ###########################################################
 
-from sage.rings.imaginary_unit import I
-i = I
-
 from sage.misc.copying import license
 copying = license
 copyright = license
