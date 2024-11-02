@@ -132,10 +132,8 @@ cdef class ntl_GF2X():
             sage: ntl.GF2X(f)
             [1 0 1 0 0 1]
         """
-        from sage.rings.finite_rings.element_givaro import FiniteField_givaroElement
         from sage.rings.finite_rings.element_ntl_gf2e import FiniteField_ntl_gf2eElement
         from sage.rings.finite_rings.finite_field_base import FiniteField
-        from sage.rings.polynomial.polynomial_gf2x import Polynomial_GF2X
 
         cdef long _x
 
@@ -152,16 +150,27 @@ cdef class ntl_GF2X():
 
         if isinstance(x, Integer):
             #binary repr, reversed, and "["..."]" added
-            x="["+x.binary()[::-1].replace(""," ")+"]"
-        elif isinstance(x, Polynomial_GF2X):
-            x = x.list() # this is slow but cimport leads to circular imports
+            x = "["+x.binary()[::-1].replace(""," ")+"]"
         elif isinstance(x, FiniteField):
             if x.characteristic() == 2:
                 x = list(x.modulus())
-        elif isinstance(x, FiniteField_givaroElement):
-            x = "0x" + hex(x.to_integer())[2:][::-1]
         elif isinstance(x, FiniteField_ntl_gf2eElement):
             x = x.polynomial().list()
+        else:
+            try:
+                from sage.rings.polynomial.polynomial_gf2x import Polynomial_GF2X
+            except ImportError:
+                pass
+            else:
+                if isinstance(x, Polynomial_GF2X):
+                    x = x.list() # this is slow but cimport leads to circular imports
+            try:
+                from sage.rings.finite_rings.element_givaro import FiniteField_givaroElement
+            except ImportError:
+                pass
+            else:
+                if isinstance(x, FiniteField_givaroElement):
+                    x = "0x" + hex(x.to_integer())[2:][::-1]
         s = str(x).replace(","," ")
         # TODO: this is very slow, but we wait until somebody complains
         ccreadstr(self.x, s)
