@@ -641,7 +641,7 @@ class Function_lambert_w(BuiltinFunction):
     neither is numerical integration using GSL. The :meth:`numerical_integral`
     function does work if you pass a lambda function::
 
-        sage: numerical_integral(lambda x: lambert_w(x), 0, 1)                          # needs sage.modules
+        sage: numerical_integral(lambda x: lambert_w(x), 0, 1)                          # needs scipy sage.modules
         (0.33036612476168054, 3.667800782666048e-15)
     """
 
