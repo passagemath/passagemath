@@ -1234,7 +1234,7 @@ class FastCallableConverter(Converter):
             sage: etb = ExpressionTreeBuilder(vars=['x'], domain=RDF)
             sage: (x^7)._fast_callable_(etb)
             ipow(v_0, 7)
-            sage: f(x)=1/pi/x; plot(f,2,3)
+            sage: f(x) = 1/pi/x; plot(f,2,3)                                            # needs sage.plot
             Graphics object consisting of 1 graphics primitive
         """
         # This used to convert the operands first.  Doing it this way
