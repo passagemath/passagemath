@@ -23,3 +23,6 @@ from .rings.all__sagemath_flint import *
 
 from sage.rings.qqbar import _init_qqbar
 _init_qqbar()
+
+from sage.rings.imaginary_unit import I
+i = I
