@@ -2476,6 +2476,23 @@ syms_cur = symbol_table.get('functions', {})
 syms_default = dict(syms_cur)
 
 
+def _toplevel_dict():
+    try:
+        import sage.all as toplevel
+    except ImportError:
+        try:
+            import sage.all__sagemath_symbolics as toplevel
+        except ImportError:
+            try:
+                import sage.all__sagemath_modules as toplevel
+            except ImportError:
+                try:
+                    import sage.all__sagemath_categories as toplevel
+                except ImportError:
+                    import sage.all__sagemath_objects as toplevel
+    return toplevel.__dict__
+
+
 def _find_var(name, interface=None):
     """
     Function to pass to Parser for constructing
@@ -2511,9 +2528,8 @@ def _find_var(name, interface=None):
 
     # try to find the name in the global namespace
     # needed for identifiers like 'e', etc.
-    import sage.all
     try:
-        return SR(sage.all.__dict__[name])
+        return SR(_toplevel_dict()[name])
     except (KeyError, TypeError):
         return var(name)
 
@@ -2541,9 +2557,8 @@ def _find_func(name, create_when_missing=True):
     if f is not None:
         return f
 
-    import sage.all
     try:
-        f = SR(sage.all.__dict__[name])
+        f = SR(_toplevel_dict()[name])
         if not isinstance(f, Expression):
             return f
     except (KeyError, TypeError):

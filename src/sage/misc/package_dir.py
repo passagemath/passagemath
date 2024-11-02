@@ -276,7 +276,7 @@ def is_package_or_sage_namespace_package_dir(path, *, distribution_filter=None):
         sage: directories = [os.path.join(p, 'mpfr')
         ....:                for p in sage.libs.__path__]; directories
         ['.../sage/libs/mpfr'...]
-        sage: any(is_package_or_sage_namespace_package_dir(d) for d in directories)
+        sage: any(is_package_or_sage_namespace_package_dir(d) for d in directories)     # needs sage.rings.real_mpfr
         True
 
     :mod:`sage` is an implicit namespace package::
@@ -625,7 +625,7 @@ if __name__ == '__main__':
                     for root, dirs, files in os.walk(path):
                         for dir in sorted(dirs):
                             path = os.path.join(root, dir)
-                            if any(dir.startswith(prefix) for prefix in ['.', 'build', 'dist', '__pycache__', '_vendor', '.tox']):
+                            if any(dir.startswith(prefix) for prefix in ['.', 'build', 'dist', '__pycache__', '_vendor', '.tox', 'meson.build']):
                                 # Silently skip
                                 dirs.remove(dir)
                             elif not is_package_or_sage_namespace_package_dir(path):

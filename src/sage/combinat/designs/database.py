@@ -848,7 +848,7 @@ def OA_9_135():
     As this orthogonal array requires a `(273,17,1)` cyclic difference set, we check that
     it is available::
 
-        sage: G,D = designs.difference_family(273,17,1); G                              # needs sage.libs.pari
+        sage: G,D = designs.difference_family(273,17,1); G                              # needs sage.libs.pari conway_polynomials
         Ring of integers modulo 273
     """
     from .bibd import BIBD_from_difference_family

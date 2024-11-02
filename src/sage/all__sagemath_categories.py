@@ -13,6 +13,7 @@ from sage.sets.all import *
 from sage.combinat.all__sagemath_categories import *
 from sage.arith.all import *
 from sage.data_structures.all import *
+from sage.databases.all__sagemath_categories import *
 from sage.ext.all__sagemath_categories import *
 from sage.groups.all__sagemath_categories import *
 from sage.interfaces.all import *

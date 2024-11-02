@@ -1,6 +1,5 @@
 {
     "sage.algebras.clifford_algebra": {
-        "failed": true,
         "ntests": 618
     },
     "sage.algebras.clifford_algebra_element": {
@@ -1138,6 +1137,9 @@
     "sage.data_structures.mutable_poset": {
         "ntests": 441
     },
+    "sage.databases.sql_db": {
+        "ntests": 230
+    },
     "sage.doctest.check_tolerance": {
         "ntests": 19
     },
@@ -1366,7 +1368,6 @@
         "ntests": 141
     },
     "sage.functions.generalized": {
-        "failed": true,
         "ntests": 69
     },
     "sage.functions.hyperbolic": {
@@ -1795,6 +1796,9 @@
     "sage.interfaces.four_ti_2": {
         "ntests": 54
     },
+    "sage.interfaces.gfan": {
+        "ntests": 2
+    },
     "sage.interfaces.gnuplot": {
         "ntests": 1
     },
@@ -2193,10 +2197,6 @@
     "sage.misc.banner": {
         "ntests": 12
     },
-    "sage.misc.benchmark": {
-        "failed": true,
-        "ntests": 18
-    },
     "sage.misc.binary_tree": {
         "ntests": 61
     },
@@ -2409,7 +2409,6 @@
         "ntests": 102
     },
     "sage.misc.sageinspect": {
-        "failed": true,
         "ntests": 329
     },
     "sage.misc.search": {
@@ -2420,7 +2419,6 @@
         "ntests": 61
     },
     "sage.misc.sh": {
-        "failed": true,
         "ntests": 1
     },
     "sage.misc.stopgap": {
@@ -3219,7 +3217,6 @@
         "ntests": 883
     },
     "sage.rings.invariants.reconstruction": {
-        "failed": true,
         "ntests": 59
     },
     "sage.rings.laurent_series_ring": {
@@ -3482,6 +3479,10 @@
         "failed": true,
         "ntests": 150
     },
+    "sage.rings.polynomial.groebner_fan": {
+        "failed": true,
+        "ntests": 357
+    },
     "sage.rings.polynomial.hilbert": {
         "failed": true,
         "ntests": 8
@@ -3533,6 +3534,10 @@
     "sage.rings.polynomial.multi_polynomial_sequence": {
         "failed": true,
         "ntests": 141
+    },
+    "sage.rings.polynomial.omega": {
+        "failed": true,
+        "ntests": 126
     },
     "sage.rings.polynomial.ore_function_element": {
         "failed": true,
