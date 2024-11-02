@@ -337,6 +337,36 @@ def prec_dec_to_bits(long prec_in_dec):
     return int(prec_in_dec*log_10 + 1.0)  # Add one to round up
 
 
+cpdef long prec_words_to_bits(long prec_in_words) noexcept:
+    r"""
+    Deprecated internal function. Used (incorrectly) in sagemath < 10.5.
+
+    Convert from pari real precision expressed in words to precision
+    expressed in bits. Note: this adjusts for the two codewords of a
+    pari real, and is architecture-dependent.
+
+    Examples:
+
+    >>> from cypari2.pari_instance import prec_words_to_bits
+    >>> import sys
+    >>> import warnings
+    >>> warnings.simplefilter("ignore")
+    >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
+    >>> prec_words_to_bits(10) == (256 if bitness == '32' else 512)
+    True
+
+    >>> ans32 = [(3, 32), (4, 64), (5, 96), (6, 128), (7, 160), (8, 192), (9, 224)]
+    >>> ans64 = [(3, 64), (4, 128), (5, 192), (6, 256), (7, 320), (8, 384), (9, 448)] # 64-bit
+    >>> [(n, prec_words_to_bits(n)) for n in range(3, 10)] == (ans32 if bitness == '32' else ans64)
+    True
+    """
+    from warnings import warn
+    warn("'prec_words_to_bits` in cypari2 is internal and deprecated",
+         DeprecationWarning)
+    # see user's guide to the pari library, page 10
+    return (prec_in_words - 2) * BITS_IN_LONG
+
+
 cpdef long default_bitprec() noexcept:
     r"""
     Return the default precision in bits.

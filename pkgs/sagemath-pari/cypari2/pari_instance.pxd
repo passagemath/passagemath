@@ -5,6 +5,8 @@ cimport cython
 
 from .gen cimport Gen
 
+# DEPRECATED INTERNAL FUNCTION used (incorrectly) in sagemath < 10.5
+cpdef long prec_words_to_bits(long prec_in_words) noexcept
 cpdef long default_bitprec() noexcept
 
 cdef extern from *:
