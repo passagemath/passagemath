@@ -46,6 +46,8 @@ What is included
 
 - see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-giac/MANIFEST.in
 
+- The binary wheels on PyPI ship a prebuilt copy of the Giac library.
+
 
 Examples
 --------
