@@ -1,12 +1,16 @@
 include VERSION.txt
 
 prune sage
-global-include    all__sagemath_giac.py
+
+include           sage/interfaces/giac.p*
 
 graft             sage/libs/giac
 
 global-exclude *.c
 global-exclude *.cpp
+
+global-exclude    all__sagemath_*.py
+global-include    all__sagemath_giac.py
 
 global-exclude __pycache__
 global-exclude *.py[co]
