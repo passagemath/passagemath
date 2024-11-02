@@ -56,6 +56,14 @@ A quick way to try it out interactively::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-giac[test]" IPython
 
-    In [1]: from sage.all__sagemath_modules import *
+    In [1]: from sage.all__sagemath_giac import *
 
-    In [2]: from sage.libs.giac import groebner_basis as gb_giac
+    In [2]: x = libgiac('x')
+
+    In [3]: V = [[x[i]**j for i in range(8)] for j in range(8)]
+
+    In [4]: libgiac(V).dim()
+    Out[4]: [8,8]
+
+    In [5]: libgiac.det_minor(V).factor()
+    Out[5]: (x[6]-(x[7]))*(x[5]-(x[7]))*(x[5]-(x[6]))*(x[4]-(x[7]))*(x[4]-(x[6]))*(x[4]-(x[5]))*(x[3]-(x[7]))*(x[3]-(x[6]))*(x[3]-(x[5]))*(x[3]-(x[4]))*(x[2]-(x[7]))*(x[2]-(x[6]))*(x[2]-(x[5]))*(x[2]-(x[4]))*(x[2]-(x[3]))*(x[1]-(x[7]))*(x[1]-(x[6]))*(x[1]-(x[5]))*(x[1]-(x[4]))*(x[1]-(x[3]))*(x[1]-(x[2]))*(x[0]-(x[7]))*(x[0]-(x[6]))*(x[0]-(x[5]))*(x[0]-(x[4]))*(x[0]-(x[3]))*(x[0]-(x[2]))*(x[0]-(x[1]))
