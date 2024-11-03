@@ -1016,7 +1016,7 @@
     },
     "sage.combinat.path_tableaux.semistandard": {
         "failed": true,
-        "ntests": 0
+        "ntests": 82
     },
     "sage.combinat.perfect_matching": {
         "ntests": 127
@@ -1030,7 +1030,7 @@
     },
     "sage.combinat.plane_partition": {
         "failed": true,
-        "ntests": 0
+        "ntests": 352
     },
     "sage.combinat.posets.cartesian_product": {
         "ntests": 75
@@ -1142,7 +1142,7 @@
     },
     "sage.combinat.skew_tableau": {
         "failed": true,
-        "ntests": 0
+        "ntests": 372
     },
     "sage.combinat.species.characteristic_species": {
         "ntests": 79
@@ -1229,7 +1229,7 @@
     },
     "sage.combinat.tableau": {
         "failed": true,
-        "ntests": 0
+        "ntests": 1370
     },
     "sage.combinat.tableau_residues": {
         "ntests": 121
