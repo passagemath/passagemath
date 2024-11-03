@@ -17,7 +17,7 @@ Cython modules::
     sage: sage_getdoc(sage.rings.rational).lstrip()
     'Rational Numbers...'
     sage: sage_getsource(sage.rings.rational)
-    '# distutils: ...Rational Numbers...'
+    '...Rational Numbers...'
 
 Python modules::
 
@@ -311,7 +311,7 @@ def _extract_embedded_signature(docstring, name):
         sage: from sage.misc.sageinspect import _extract_embedded_signature
         sage: from sage.misc.nested_class import MainClass
         sage: print(_extract_embedded_signature(MainClass.NestedClass.NestedSubClass.dummy.__doc__, 'dummy')[0])
-        File: sage/misc/nested_class.pyx (starting at line ...)
+        File: ...sage/misc/nested_class.pyx (starting at line ...)
         ...
         sage: _extract_embedded_signature(MainClass.NestedClass.NestedSubClass.dummy.__doc__, 'dummy')[1]
         FullArgSpec(args=['self', 'x', 'r'], varargs='args', varkw='kwds', defaults=((1, 2, 3.4),), kwonlyargs=[], kwonlydefaults=None, annotations={})
@@ -1654,12 +1654,15 @@ def sage_getargspec(obj):
         except TypeError:  # arg is not a code object
             # The above "hopefully" was wishful thinking:
             try:
-                return inspect.FullArgSpec(*_sage_getargspec_cython(sage_getsource(obj)))
+                source = sage_getsource(obj)
+                if source is not None:
+                    return inspect.FullArgSpec(*_sage_getargspec_cython(source))
             except TypeError:  # This happens for Python builtins
-                # The best we can do is to return a generic argspec
-                args = []
-                varargs = 'args'
-                varkw = 'kwds'
+                pass
+            # The best we can do is to return a generic argspec
+            args = []
+            varargs = 'args'
+            varkw = 'kwds'
     try:
         defaults = func_obj.__defaults__
     except AttributeError:
@@ -1850,7 +1853,7 @@ def _sage_getdoc_unformatted(obj):
         sage: from sage.misc.sageinspect import _sage_getdoc_unformatted
         sage: print(_sage_getdoc_unformatted(sage.rings.integer.Integer))
         Integer(x=None, base=0)
-        File: sage/rings/integer.pyx (starting at line ...)
+        File: ...sage/rings/integer.pyx (starting at line ...)
         <BLANKLINE>
             The :class:`Integer` class represents arbitrary precision
             integers. It derives from the :class:`Element` class, so
@@ -2225,8 +2228,9 @@ def sage_getsourcelines(obj):
         sage: from sage.misc.sageinspect import sage_getsourcelines
 
         sage: # needs sage.modules
+        sage: from sage.matrix.constructor import matrix
         sage: sage_getsourcelines(matrix)[1]
-        21
+        22
         sage: sage_getsourcelines(matrix)[0][0]
         'def matrix(*args, **kwds):\n'
 
@@ -2255,7 +2259,7 @@ def sage_getsourcelines(obj):
         sage: sage_getsourcelines(test_func)
         (['def base(x):\n',
         ...
-        '    return x\n'], 8)
+        '    return x\n'], 9)
 
     Here are some cases that were covered in :issue:`11298`;
     note that line numbers may easily change, and therefore we do

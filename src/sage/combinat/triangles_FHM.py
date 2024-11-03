@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 """
 Combinatorial triangles for posets and fans
 
@@ -381,7 +382,7 @@ class M_triangle(Triangle):
         A = self._poly.parent()
 
         dict_dual = {(n - dy, n - dx): coeff
-                     for (dx, dy), coeff in self._poly.dict().items()}
+                     for (dx, dy), coeff in self._poly.monomial_coefficients().items()}
         return M_triangle(A(dict_dual), variables=(x, y))
 
     def transmute(self):
@@ -484,7 +485,7 @@ class H_triangle(Triangle):
         A = self._poly.parent()
 
         dict_dual = {(n - dy, n - dx): coeff
-                     for (dx, dy), coeff in self._poly.dict().items()}
+                     for (dx, dy), coeff in self._poly.monomial_coefficients().items()}
         return H_triangle(A(dict_dual), variables=(x, y))
 
     def m(self):

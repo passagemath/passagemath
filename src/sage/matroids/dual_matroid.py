@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Dual matroids
 
@@ -522,6 +523,7 @@ class DualMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = matroids.catalog.K5dual(range(10))
             sage: type(M)
             <class 'sage.matroids.dual_matroid.DualMatroid'>
@@ -535,6 +537,7 @@ class DualMatroid(Matroid):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: M = matroids.catalog.K5dual(range(10))
             sage: f = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e',
             ....:      5: 'f', 6: 'g', 7: 'h', 8: 'i', 9: 'j'}
@@ -555,6 +558,7 @@ class DualMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = matroids.catalog.K5dual()
             sage: type(M)
             <class 'sage.matroids.dual_matroid.DualMatroid'>

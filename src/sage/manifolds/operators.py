@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Operators for vector calculus
 
@@ -42,6 +43,7 @@ AUTHORS:
 # (at your option) any later version.
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
+
 
 def grad(scalar):
     r"""
@@ -93,6 +95,7 @@ def grad(scalar):
     more details and examples.
     """
     return scalar.gradient()
+
 
 def div(tensor):
     r"""
@@ -167,6 +170,7 @@ def div(tensor):
     """
     return tensor.divergence()
 
+
 def curl(vector):
     r"""
     Curl operator.
@@ -234,6 +238,7 @@ def curl(vector):
     """
     return vector.curl()
 
+
 def laplacian(field):
     r"""
     Laplace-Beltrami operator.
@@ -293,6 +298,7 @@ def laplacian(field):
     more details and examples.
     """
     return field.laplacian()
+
 
 def dalembertian(field):
     r"""

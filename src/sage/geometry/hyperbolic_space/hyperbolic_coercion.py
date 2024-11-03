@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 """
 Coercion Maps Between Hyperbolic Plane Models
 
@@ -28,6 +29,7 @@ from sage.functions.other import real, imag
 from sage.misc.functional import sqrt
 from sage.misc.lazy_import import lazy_import
 lazy_import('sage.misc.call', 'attrcall')
+
 
 class HyperbolicModelCoercion(Morphism):
     """
@@ -148,6 +150,7 @@ class HyperbolicModelCoercion(Morphism):
 # From UHP #
 ############
 
+
 class CoercionUHPtoPD(HyperbolicModelCoercion):
     """
     Coercion from the UHP to PD model.
@@ -188,6 +191,7 @@ class CoercionUHPtoPD(HyperbolicModelCoercion):
             return matrix([[1,-I],[-I,1]]) * x * matrix([[1,I],[I,1]]).conjugate()/Integer(2)
         return matrix([[1,-I],[-I,1]]) * x * matrix([[1,I],[I,1]])/Integer(2)
 
+
 class CoercionUHPtoKM(HyperbolicModelCoercion):
     """
     Coercion from the UHP to KM model.
@@ -226,6 +230,7 @@ class CoercionUHPtoKM(HyperbolicModelCoercion):
             [0 0 1]
         """
         return SL2R_to_SO21(x)
+
 
 class CoercionUHPtoHM(HyperbolicModelCoercion):
     """
@@ -268,6 +273,7 @@ class CoercionUHPtoHM(HyperbolicModelCoercion):
 ###########
 # From PD #
 ###########
+
 
 class CoercionPDtoUHP(HyperbolicModelCoercion):
     """
@@ -317,6 +323,7 @@ class CoercionPDtoUHP(HyperbolicModelCoercion):
         if not HyperbolicIsometryPD._orientation_preserving(x):
             return matrix([[1,I],[I,1]]) * x * matrix([[1,-I],[-I,1]]).conjugate() / Integer(2)
         return matrix([[1,I],[I,1]]) * x * matrix([[1,-I],[-I,1]]) / Integer(2)
+
 
 class CoercionPDtoKM(HyperbolicModelCoercion):
     """
@@ -444,6 +451,7 @@ class CoercionKMtoUHP(HyperbolicModelCoercion):
         """
         return SO21_to_SL2R(x)
 
+
 class CoercionKMtoPD(HyperbolicModelCoercion):
     """
     Coercion from the KM to PD model.
@@ -481,6 +489,7 @@ class CoercionKMtoPD(HyperbolicModelCoercion):
         """
         return (matrix(2,[1,-I,-I,1]) * SO21_to_SL2R(x) *
                 matrix(2,[1,I,I,1])/Integer(2))
+
 
 class CoercionKMtoHM(HyperbolicModelCoercion):
     """
@@ -524,6 +533,7 @@ class CoercionKMtoHM(HyperbolicModelCoercion):
 # From HM #
 ###########
 
+
 class CoercionHMtoUHP(HyperbolicModelCoercion):
     """
     Coercion from the HM to UHP model.
@@ -560,6 +570,7 @@ class CoercionHMtoUHP(HyperbolicModelCoercion):
         """
         return SO21_to_SL2R(x)
 
+
 class CoercionHMtoPD(HyperbolicModelCoercion):
     """
     Coercion from the HM to PD model.
@@ -595,6 +606,7 @@ class CoercionHMtoPD(HyperbolicModelCoercion):
         """
         return (matrix(2,[1,-I,-I,1]) * SO21_to_SL2R(x) *
                 matrix(2,[1,I,I,1])/Integer(2))
+
 
 class CoercionHMtoKM(HyperbolicModelCoercion):
     """
@@ -634,6 +646,7 @@ class CoercionHMtoKM(HyperbolicModelCoercion):
 
 #####################################################################
 ## Helper functions
+
 
 def SL2R_to_SO21(A):
     r"""

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Base class for polyhedra: Methods for constructing new polyhedra
 
@@ -41,6 +42,7 @@ from sage.matrix.constructor import matrix
 from sage.modules.free_module_element import vector
 
 from .base4 import Polyhedron_base4
+
 
 class Polyhedron_base5(Polyhedron_base4):
     """
@@ -2452,7 +2454,7 @@ class Polyhedron_base5(Polyhedron_base4):
         if tester is None:
             tester = self._tester(**options)
 
-        if self.backend() == 'normaliz' and not self.base_ring() in (ZZ, QQ):
+        if self.backend() == 'normaliz' and self.base_ring() not in (ZZ, QQ):
             # Speeds up the doctest for significantly.
             self = self.change_ring(self._internal_base_ring)
 

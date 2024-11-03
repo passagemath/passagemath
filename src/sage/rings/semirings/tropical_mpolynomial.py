@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-categories
+# sage.doctest: needs sage.symbolic
 r"""
 Multivariate Tropical Polynomials
 
@@ -89,7 +91,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
         sage: p1 = R(3)*a*b + a + R(-1)*b
         sage: p1.tropical_variety()
         Tropical curve of 3*a*b + 0*a + (-1)*b
-        sage: p1.tropical_variety().plot()
+        sage: p1.tropical_variety().plot()                                              # needs sage.plot
         Graphics object consisting of 3 graphics primitives
 
     .. PLOT::
@@ -105,7 +107,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
     Tropical polynomial in two variables will induce a function in three
     dimension that consists of a number of surfaces::
 
-        sage: p1.plot3d()
+        sage: p1.plot3d()                                                               # needs sage.plot
         Graphics3d Object
 
     .. PLOT::
@@ -124,7 +126,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
         sage: p1 = R(3)*a*b + a + R(-1)*b
         sage: p1.tropical_variety()
         Tropical curve of 3*a*b + 0*a + (-1)*b
-        sage: p1.tropical_variety().plot()
+        sage: p1.tropical_variety().plot()                                              # needs sage.plot
         Graphics object consisting of 3 graphics primitives
 
     .. PLOT::
@@ -139,7 +141,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
     ::
 
-        sage: p1.plot3d()
+        sage: p1.plot3d()                                                               # needs sage.plot
         Graphics3d Object
 
     .. PLOT::
@@ -212,7 +214,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
             sage: T = TropicalSemiring(QQ, use_min=False)
             sage: R.<x,y> = PolynomialRing(T)
             sage: p1 = x^2
-            sage: p1.plot3d()
+            sage: p1.plot3d()                                                           # needs sage.plot
             Graphics3d Object
 
         .. PLOT::
@@ -228,7 +230,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
         of multiple surfaces::
 
             sage: p2 = R(3) + R(2)*x + R(2)*y + R(3)*x*y
-            sage: p2.plot3d()
+            sage: p2.plot3d()                                                           # needs sage.plot
             Graphics3d Object
 
         .. PLOT::
@@ -245,7 +247,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y> = PolynomialRing(T)
             sage: p3 = R(2)*x^2 + x*y + R(2)*y^2 + x + R(-1)*y + R(3)
-            sage: p3.plot3d()
+            sage: p3.plot3d()                                                           # needs sage.plot
             Graphics3d Object
 
         .. PLOT::
@@ -262,7 +264,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y,z> = PolynomialRing(T)
             sage: p1 = x*y*z + x
-            sage: p1.plot3d()
+            sage: p1.plot3d()                                                           # needs sage.plot
             Traceback (most recent call last):
             ...
             NotImplementedError: can only plot the graph of tropical
@@ -401,7 +403,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
             sage: x + R(-1)*y + R(-3)
             0*x + (-1)*y + (-3)
         """
-        if not self.dict():
+        if not self.monomial_coefficients():
             return str(self.parent().base().zero())
         s = super()._repr_()
         if self.monomials()[-1].is_constant():
@@ -425,7 +427,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
             sage: latex(R.zero())
             \infty
         """
-        if not self.dict():
+        if not self.monomial_coefficients():
             return self.parent().base().zero()._latex_()
         s = super()._latex_()
         if self.monomials()[-1].is_constant():
@@ -531,7 +533,7 @@ class TropicalMPolynomialSemiring(UniqueRepresentation, Parent):
                 raise ValueError(f"can not convert {x} to {self}")
         if isinstance(x, MPolynomial):
             if x.parent().variable_names() == self.variable_names():
-                x = x.dict()
+                x = x.monomial_coefficients()
             else:
                 raise ValueError(f"can not convert {x} to {self}")
         elif (x in self.base().base_ring()) or (x in self.base()):
@@ -630,9 +632,8 @@ class TropicalMPolynomialSemiring(UniqueRepresentation, Parent):
         R = PolynomialRing(self.base().base_ring(), self.variable_names())
         f = R.random_element(degree=degree, terms=terms, choose_degree=choose_degree,
                              *args, **kwargs)
-        new_dict = {}
-        for key, value in f.dict().items():
-            new_dict[key] = self.base()(value)
+        new_dict = {key: self.base()(value)
+                    for key, value in f.monomial_coefficients().items()}
         return self.element_class(self, new_dict)
 
     def gen(self, n=0):

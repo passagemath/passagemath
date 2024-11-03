@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-objects
+
 # This type-stub file helps pyright understand the decorator @lazy_attribute.
 
 # Adapted from https://github.com/python/typeshed/blob/b9640005eb586afdbe0a57bac2b88a7a12465069/stdlib/builtins.pyi#L1237-L1254

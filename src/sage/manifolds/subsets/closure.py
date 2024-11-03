@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Topological Closures of Manifold Subsets
 
@@ -16,6 +17,7 @@ of a manifold subset in the topology of the manifold.
 # ****************************************************************************
 
 from sage.manifolds.subset import ManifoldSubset
+
 
 class ManifoldSubsetClosure(ManifoldSubset):
 

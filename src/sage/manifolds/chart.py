@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Coordinate Charts
 
@@ -3269,6 +3270,7 @@ class RealChart(Chart):
         return resu
 
 # *****************************************************************************
+
 
 class CoordChange(SageObject):
     r"""

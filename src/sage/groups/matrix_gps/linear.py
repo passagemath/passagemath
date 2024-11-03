@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Linear Groups
 
@@ -236,7 +237,7 @@ def SL(n, R, var='a'):
         Special Linear Group of degree 2 over Integer Ring
         sage: G.category()
         Category of infinite groups
-        sage: G.gens()
+        sage: G.gens()                                                                  # needs sage.libs.gap
         (
         [ 0  1]  [1 1]
         [-1  0], [0 1]
@@ -331,11 +332,11 @@ class LinearMatrixGroup_generic(NamedMatrixGroup_generic):
             351980328960000000
 
             sage: G = GL(2, Integers(6))
-            sage: G.order() == len(list(G))
+            sage: G.order() == len(list(G))                                             # needs sage.libs.gap
             True
 
             sage: H = SL(2, Integers(6))
-            sage: H.order() == len(list(H))
+            sage: H.order() == len(list(H))                                             # needs sage.libs.gap
             True
 
         Arbitrary base rings are currently not fully supported::

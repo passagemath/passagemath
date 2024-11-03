@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-eclib/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-eclib/MANIFEST.in $(PYTHON) memory_allocator sagemath_categories sagemath_linbox sagemath_ntl sagemath_modules eclib | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig

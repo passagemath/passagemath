@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Disjoint-set data structure
 
@@ -62,7 +63,10 @@ from sage.rings.integer cimport Integer
 from sage.structure.sage_object cimport SageObject
 from cpython.object cimport PyObject_RichCompare
 from sage.groups.perm_gps.partn_ref.data_structures cimport *
-from sage.combinat.set_partition import SetPartition
+from sage.misc.lazy_import import LazyImport
+
+SetPartition = LazyImport('sage.combinat.set_partition', 'SetPartition')
+
 
 cpdef DisjointSet(arg):
     r"""
@@ -106,6 +110,7 @@ cpdef DisjointSet(arg):
 
     From a set partition (see :issue:`38693`)::
 
+        sage: # needs sage.combinat
         sage: SP = SetPartition(DisjointSet(5))
         sage: DisjointSet(SP)
         {{0}, {1}, {2}, {3}, {4}}
@@ -958,8 +963,7 @@ cdef class DisjointSet_of_hashables(DisjointSet_class):
             sage: d.union(3, 4)
             sage: d
             {{0}, {1, 2, 3, 4}}
-            sage: g = d.to_digraph()
-            sage: g                                                                     # needs sage.graphs
+            sage: g = d.to_digraph(); g                                                 # needs sage.graphs
             Looped digraph on 5 vertices
             sage: g.edges(sort=True)                                                    # needs sage.graphs
             [(0, 0, None), (1, 2, None), (2, 2, None), (3, 2, None), (4, 2, None)]

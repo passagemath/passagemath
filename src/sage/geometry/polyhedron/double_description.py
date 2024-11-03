@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Double Description Algorithm for Cones
 
@@ -703,6 +704,7 @@ class StandardDoubleDescriptionPair(DoubleDescriptionPair):
             R_new.append(r)
         self.R = R_pos + R_nul + R_new
         self.A.append(a)
+
 
 class StandardAlgorithm(Problem):
     """

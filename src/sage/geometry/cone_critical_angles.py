@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Find maximal angles between polyhedral convex cones
 
@@ -39,6 +40,7 @@ from sage.rings.qqbar import AA
 from sage.rings.rational_field import QQ
 from sage.rings.real_double import RDF
 from sage.symbolic.constants import pi
+
 
 def _normalize_gevp_solution(gevp_solution):
     r"""

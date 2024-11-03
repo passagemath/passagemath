@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Differential Form Modules
 
@@ -569,6 +570,7 @@ class DiffFormModule(UniqueRepresentation, Parent):
         return self._degree
 
 # *****************************************************************************
+
 
 class DiffFormFreeModule(ExtPowerDualFreeModule):
     r"""

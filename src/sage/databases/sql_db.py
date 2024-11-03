@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Relational (sqlite) Databases Module
 
@@ -241,6 +242,7 @@ def construct_skeleton(database):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs graph_database
         sage: G = SQLDatabase(GraphDatabase().__dblocation__, False)
         sage: from sage.databases.sql_db import construct_skeleton
         sage: sorted(construct_skeleton(G))
@@ -254,7 +256,7 @@ def construct_skeleton(database):
         exe1 = cur.execute("PRAGMA table_info(%s)" % table[0])
         for col in exe1.fetchall():
             if not col[2]:
-                typ = u'NOTYPE'
+                typ = 'NOTYPE'
             else:
                 typ = col[2]
             skeleton[table[0]][col[1]] = {'sql':typ,
@@ -482,7 +484,7 @@ class SQLQuery(SageObject):
         else:
             self.__query_string__ = kwds['query_string']
             if 'param_tuple' in kwds:
-                self.__param_tuple__ = tuple((str(x) for x in kwds['param_tuple']))
+                self.__param_tuple__ = tuple(str(x) for x in kwds['param_tuple'])
             else:
                 self.__param_tuple__ = tuple()
             return
@@ -527,6 +529,7 @@ class SQLQuery(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs graph_database
             sage: G = GraphDatabase()
             sage: q = 'SELECT graph_id,graph6,num_vertices,num_edges FROM graph_data WHERE graph_id<=(?) AND num_vertices=(?)'
             sage: param = (22,5)
@@ -553,6 +556,7 @@ class SQLQuery(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs graph_database
             sage: G = GraphDatabase()
             sage: q = 'SELECT graph_id,graph6,num_vertices,num_edges FROM graph_data WHERE graph_id<=(?) AND num_vertices=(?)'
             sage: param = (22,5)
@@ -572,6 +576,7 @@ class SQLQuery(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs graph_database
             sage: G = GraphDatabase()
             sage: q = 'SELECT graph_id,graph6 FROM graph_data WHERE num_vertices=(?)'
             sage: param = (5,)
@@ -598,6 +603,7 @@ class SQLQuery(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs graph_database
             sage: G = GraphDatabase()
             sage: q = 'SELECT graph_id,graph6,num_vertices,num_edges FROM graph_data WHERE graph_id<=(?) AND num_vertices=(?)'
             sage: param = (22,5)
@@ -651,6 +657,8 @@ class SQLQuery(SageObject):
             0
             1
             1
+
+            sage: # needs sage.graphs graph_database
             sage: D = GraphDatabase()
             sage: from sage.graphs.graph_database import valid_kwds, data_to_degseq
             sage: relabel = {}
@@ -690,6 +698,7 @@ class SQLQuery(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs graph_database
             sage: G = GraphDatabase()
             sage: Q = SQLQuery(G, {'table_name':'graph_data', 'display_cols':['graph_id','graph6','num_vertices'], 'expression':['num_edges','<',3]})
             sage: R = copy(Q)
@@ -936,6 +945,7 @@ class SQLDatabase(SageObject):
         function which generates all labeled graphs (noting that this is not
         the optimal way)::
 
+            sage: # needs sage.graphs
             sage: from sage.groups.perm_gps.partn_ref.refinement_graphs import all_labeled_graphs
 
         We will need a table in the database in which to store the graphs, and
@@ -959,6 +969,7 @@ class SQLDatabase(SageObject):
         Now that we have the table, we will begin to populate the table with
         rows. First, add the graph on zero vertices.::
 
+            sage: # needs sage.graphs
             sage: G = Graph()
             sage: D.add_row('simon',(G.graph6_string(), 0, 0))
             sage: D.show('simon')
@@ -968,6 +979,7 @@ class SQLDatabase(SageObject):
 
         Next, add the graph on one vertex.::
 
+            sage: # needs sage.graphs
             sage: G.add_vertex()
             0
             sage: D.add_row('simon',(G.graph6_string(), 1, 0))
@@ -979,6 +991,7 @@ class SQLDatabase(SageObject):
 
         Say we want a database of graphs on four or less vertices::
 
+            sage: # needs sage.graphs
             sage: labels = {}
             sage: for i in range(2, 5):
             ....:     labels[i] = []
@@ -1014,6 +1027,7 @@ class SQLDatabase(SageObject):
         vertices with three edges. We do so by creating two queries and asking
         for rows that satisfy them both::
 
+            sage: # needs sage.graphs
             sage: Q = SQLQuery(D, {'table_name':'simon', 'display_cols':['graph6'], 'expression':['vertices','=',4]})
             sage: Q2 = SQLQuery(D, {'table_name':'simon', 'display_cols':['graph6'], 'expression':['edges','=',3]})
             sage: Q = Q.intersect(Q2)
@@ -1037,6 +1051,7 @@ class SQLDatabase(SageObject):
         file. For example, let's say we open the same file with another class
         instance. We can load the file as an immutable database::
 
+            sage: # needs sage.graphs
             sage: E = SQLDatabase(dbpath)
             sage: E.show('simon')
             graph6               vertices             edges
@@ -1250,6 +1265,7 @@ class SQLDatabase(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs graph_database
             sage: GDB = GraphDatabase()
             sage: GDB.get_skeleton()             # slightly random output
             {'aut_grp': {'aut_grp_size': {'index': True,
@@ -2164,7 +2180,7 @@ class SQLDatabase(SageObject):
         if self.__read_only__:
             raise RuntimeError('Cannot add rows to read only database.')
         quest = '(' + ', '.join('?' for i in rows[0]) + ')'
-        strows = [tuple((str(entry) for entry in row)) for row in rows]
+        strows = [tuple(str(entry) for entry in row) for row in rows]
 
         if entry_order is not None:
             self.__connection__.executemany('INSERT INTO ' + table_name

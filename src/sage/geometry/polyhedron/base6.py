@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Base class for polyhedra: Methods for plotting and affine hull projection
 """
@@ -36,6 +37,7 @@ from sage.matrix.constructor import matrix
 from sage.modules.free_module_element import vector
 from sage.geometry.convex_set import AffineHullProjectionData
 from .base5 import Polyhedron_base5
+
 
 class Polyhedron_base6(Polyhedron_base5):
     r"""

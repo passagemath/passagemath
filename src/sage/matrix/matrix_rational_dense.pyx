@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-linbox
 # distutils: extra_compile_args = -D_XPG6 NTL_CFLAGS M4RI_CFLAGS
 # distutils: extra_link_args = NTL_LIBEXTRA
 # distutils: libraries = iml NTL_LIBRARIES m CBLAS_LIBRARIES
@@ -2955,6 +2956,9 @@ cdef class Matrix_rational_dense(Matrix_dense):
             [ 1/28 -1/40 -1/18]
             [ 1/28 -1/40  1/18]
             [    0 -3/40     0]
+            sage: L, U = A.LLL(transformation=True)
+            sage: U * A == L
+            True
 
             sage: A = random_matrix(QQ, 10, 10)
             sage: d = lcm(a.denom() for a in A.list())
@@ -2962,6 +2966,9 @@ cdef class Matrix_rational_dense(Matrix_dense):
             True
         """
         A, d = self._clear_denom()
+        if kwargs.get('transformation', False):
+            L, U = A.LLL(*args, **kwargs)
+            return L / d, U
         return A.LLL(*args, **kwargs) / d
 
     def is_LLL_reduced(self, delta=None, eta=None):

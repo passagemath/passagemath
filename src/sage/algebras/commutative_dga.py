@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Commutative Differential Graded Algebras
@@ -79,6 +80,7 @@ from sage.structure.sage_object import SageObject
 from sage.misc.cachefunc import cached_method
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
 from sage.misc.functional import is_odd, is_even
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.categories.chain_complexes import ChainComplexes
 from sage.categories.algebras import Algebras
@@ -86,7 +88,6 @@ from sage.categories.morphism import Morphism
 from sage.categories.modules import Modules
 from sage.categories.homset import Hom
 
-from sage.algebras.free_algebra import FreeAlgebra
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.combinat.free_module import CombinatorialFreeModule
 from sage.combinat.integer_vector_weighted import WeightedIntegerVectors
@@ -103,6 +104,8 @@ from sage.rings.quotient_ring_element import QuotientRingElement
 from sage.misc.cachefunc import cached_function
 
 import sage.interfaces.abc
+
+lazy_import('sage.algebras.free_algebra', 'FreeAlgebra')
 
 
 def sorting_keys(element):
@@ -222,7 +225,7 @@ class Differential(UniqueRepresentation, Morphism,
             return A.zero()
 
         for g in I.gens():
-            d = g.dict()
+            d = g.monomial_coefficients()
             res = A.sum(d[ex] * image_monomial(ex) for ex in d)
             if not res.is_zero():
                 raise ValueError("the differential does not preserve the ideal")
@@ -303,7 +306,7 @@ class Differential(UniqueRepresentation, Morphism,
         if x.is_zero():
             return self.codomain().zero()
         res = self.codomain().zero()
-        dic = x.dict()
+        dic = x.monomial_coefficients()
         for key in dic:
             keyl = list(key)
             coef = dic[key]
@@ -392,11 +395,11 @@ class Differential(UniqueRepresentation, Morphism,
         A = self.domain()
         dom = A.basis(n)
         cod = A.basis(n + 1)
-        cokeys = [next(iter(a.lift().dict().keys())) for a in cod]
+        cokeys = [next(iter(a.lift().monomial_coefficients().keys())) for a in cod]
         m = matrix(A.base_ring(), len(dom), len(cod))
         for i, domi in enumerate(dom):
             im = self(domi)
-            dic = im.lift().dict()
+            dic = im.lift().monomial_coefficients()
             for j in dic.keys():
                 k = cokeys.index(j)
                 m[i, k] = dic[j]
@@ -670,11 +673,11 @@ class Differential_multigraded(Differential):
         n = G(vector(n))
         dom = A.basis(n)
         cod = A.basis(n + self._degree_of_differential)
-        cokeys = [next(iter(a.lift().dict().keys())) for a in cod]
+        cokeys = [next(iter(a.lift().monomial_coefficients().keys())) for a in cod]
         m = matrix(self.base_ring(), len(dom), len(cod))
         for i, domi in enumerate(dom):
             im = self(domi)
-            dic = im.lift().dict()
+            dic = im.lift().monomial_coefficients()
             for j in dic.keys():
                 k = cokeys.index(j)
                 m[i, k] = dic[j]
@@ -1182,7 +1185,7 @@ class GCAlgebra(UniqueRepresentation, QuotientRing_nc):
         basis = []
         for v in free_basis:
             el = prod([self.gen(i)**v[i] for i in range(len(v))])
-            di = el.dict()
+            di = el.monomial_coefficients()
             if len(di) == 1:
                 k, = di.keys()
                 if tuple(k) == v:
@@ -1477,7 +1480,7 @@ class GCAlgebra(UniqueRepresentation, QuotientRing_nc):
             """
             if self.is_zero():
                 raise ValueError("the zero element does not have a well-defined degree")
-            exps = self.lift().dict().keys()
+            exps = self.monomial_coefficients().keys()
             degrees = self.parent()._degrees
             n = self.parent().ngens()
             l = [sum(e[i] * degrees[i] for i in range(n)) for e in exps]
@@ -1548,7 +1551,7 @@ class GCAlgebra(UniqueRepresentation, QuotientRing_nc):
                 sage: a.homogeneous_parts()
                 {1: -2*e3 + e5, 2: e1*e2, 3: e1*e3*e5 - 3*e2*e3*e5}
             """
-            dic = self.dict()
+            dic = self.monomial_coefficients()
             terms = [self.parent()({t: dic[t]}) for t in dic.keys()]
             res = {}
             for term in terms:
@@ -1559,7 +1562,7 @@ class GCAlgebra(UniqueRepresentation, QuotientRing_nc):
                     res[deg] = term
             return {i: res[i] for i in sorted(res.keys())}
 
-        def dict(self):
+        def monomial_coefficients(self):
             r"""
             A dictionary that determines the element.
 
@@ -1569,11 +1572,18 @@ class GCAlgebra(UniqueRepresentation, QuotientRing_nc):
             EXAMPLES::
 
                 sage: A.<x,y,z,t> = GradedCommutativeAlgebra(QQ, degrees=(1, 2, 2, 3))
-                sage: dic = (x*y - 5*y*z + 7*x*y^2*z^3*t).dict()
-                sage: sorted(dic.items())
+                sage: elt = x*y - 5*y*z + 7*x*y^2*z^3*t
+                sage: sorted(elt.monomial_coefficients().items())
+                [((0, 1, 1, 0), -5), ((1, 1, 0, 0), 1), ((1, 2, 3, 1), 7)]
+
+            ``dict`` is an alias::
+
+                sage: sorted(elt.dict().items())
                 [((0, 1, 1, 0), -5), ((1, 1, 0, 0), 1), ((1, 2, 3, 1), 7)]
             """
-            return self.lift().dict()
+            return self.lift().monomial_coefficients()
+
+        dict = monomial_coefficients
 
         def __call__(self, *values, **kwargs):
             r"""
@@ -1645,8 +1655,8 @@ class GCAlgebra(UniqueRepresentation, QuotientRing_nc):
                     if gstr in kwargs:
                         images[i] = kwargs[gstr]
             res = 0
-            for (m, c) in self.dict().items():
-                term = prod((gen**y for (y, gen) in zip(m, images)), c)
+            for m, c in self.monomial_coefficients().items():
+                term = prod((gen ** y for y, gen in zip(m, images)), c)
                 res += term
             return res
 
@@ -2000,7 +2010,7 @@ class GCAlgebra_multigraded(GCAlgebra):
                 raise ValueError("the zero element does not have a well-defined degree")
             degrees = self.parent()._degrees_multi
             n = self.parent().ngens()
-            exps = self.lift().dict().keys()
+            exps = self.monomial_coefficients().keys()
             l = [sum(exp[i] * degrees[i] for i in range(n)) for exp in exps]
             if len(set(l)) == 1:
                 return l[0]
@@ -3861,7 +3871,7 @@ class GCAlgebraMorphism(RingHomomorphism_im_gens):
         """
         codomain = self.codomain()
         result = codomain.zero()
-        for mono, coeff in x.dict().items():
+        for mono, coeff in x.monomial_coefficients().items():
             term = prod([gen**y for (y, gen) in zip(mono, self.im_gens())],
                         codomain.one())
             result += coeff * term

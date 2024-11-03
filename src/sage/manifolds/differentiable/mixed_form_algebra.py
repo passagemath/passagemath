@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Graded Algebra of Mixed Differential Forms
 
@@ -36,6 +37,7 @@ from sage.categories.morphism import SetMorphism
 from sage.structure.unique_representation import UniqueRepresentation
 from sage.symbolic.ring import SR
 from sage.manifolds.differentiable.mixed_form import MixedForm
+
 
 class MixedFormAlgebra(Parent, UniqueRepresentation):
     r"""

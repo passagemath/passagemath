@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Classes for symbolic functions
 
@@ -155,6 +156,7 @@ try:
         get_sfunction_from_hash, get_sfunction_from_serial as get_sfunction_from_serial
     )
 except ImportError:
+    call_registered_function = None
     register_or_update_function = None
 
 
@@ -403,7 +405,7 @@ cdef class Function(SageObject):
         except AttributeError:
             return NotImplemented
 
-    def __call__(self, *args, bint coerce=True, bint hold=False):
+    def __call__(self, *args, bint coerce=True, bint hold=False, dont_call_method_on_arg=None):
         """
         Evaluates this function at the given arguments.
 
@@ -524,6 +526,19 @@ cdef class Function(SageObject):
         # if the given input is a symbolic expression, we don't convert it back
         # to a numeric type at the end
         symbolic_input = any(isinstance(arg, Expression) for arg in args)
+
+        if call_registered_function is None:
+            try:
+                evalf = self._evalf_
+            except AttributeError:
+                if len(args) == 1 and not dont_call_method_on_arg:
+                    method = getattr(args[0], self._name, None)
+                    if callable(method):
+                        return method()
+            else:
+                result = evalf(*args)
+                if result is not None:
+                    return result
 
         from sage.symbolic.ring import SR
 
@@ -1044,7 +1059,7 @@ cdef class BuiltinFunction(Function):
             res = self._evalf_try_(*args)
             if res is None:
                 res = super().__call__(
-                        *args, coerce=coerce, hold=hold)
+                        *args, coerce=coerce, hold=hold, dont_call_method_on_arg=dont_call_method_on_arg)
 
         # Convert the output back to the corresponding
         # Python type if possible.
@@ -1052,38 +1067,44 @@ cdef class BuiltinFunction(Function):
             if (self._preserved_arg
                     and isinstance(args[self._preserved_arg-1], Element)):
                 arg_parent = parent(args[self._preserved_arg-1])
-                from sage.symbolic.ring import SR
-                if arg_parent is SR:
-                    return res
+                try:
+                    from sage.symbolic.ring import SR
+                except ImportError:
+                    SR = None
+                else:
+                    if arg_parent is SR:
+                        return res
                 from sage.rings.polynomial.polynomial_ring import PolynomialRing_commutative
                 from sage.rings.polynomial.multi_polynomial_ring import MPolynomialRing_polydict_domain
-                if isinstance(arg_parent, (PolynomialRing_commutative,
-                                           MPolynomialRing_polydict_domain)):
+                if SR is not None and isinstance(arg_parent, (PolynomialRing_commutative,
+                                                              MPolynomialRing_polydict_domain)):
                     try:
                         return SR(res).polynomial(ring=arg_parent)
                     except TypeError:
                         return res
-                else:
-                    try:
-                        return arg_parent(res)
-                    except TypeError:
-                        return res
+                try:
+                    return arg_parent(res)
+                except TypeError:
+                    return res
             return res
         if not isinstance(res, Element):
             return res
 
         p = res.parent()
-        from sage.rings.complex_double import CDF
         from sage.rings.integer_ring import ZZ
-        from sage.rings.real_double import RDF
         if ZZ.has_coerce_map_from(p):
             return int(res)
-        elif RDF.has_coerce_map_from(p):
+        from sage.rings.real_double import RDF
+        if RDF.has_coerce_map_from(p):
             return float(res)
-        elif CDF.has_coerce_map_from(p):
-            return complex(res)
+        try:
+            from sage.rings.complex_double import CDF
+        except ImportError:
+            pass
         else:
-            return res
+            if CDF.has_coerce_map_from(p):
+                return complex(res)
+        return res
 
     cdef _is_registered(self):
         """

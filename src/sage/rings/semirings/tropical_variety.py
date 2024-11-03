@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-categories
+# sage.doctest: needs sage.symbolic
 r"""
 Tropical Varieties
 
@@ -85,7 +87,7 @@ class TropicalVariety(UniqueRepresentation, SageObject):
         [[(t1, 1), [t1 >= -1], 1], [(-1, t1), [t1 <= 1], 1], [(-t1, t1), [t1 >= 1], 1]]
         sage: tv.vertices()
         {(-1, 1)}
-        sage: tv.plot()
+        sage: tv.plot()                                                                 # needs sage.plot
         Graphics object consisting of 3 graphics primitives
 
     .. PLOT::
@@ -107,7 +109,7 @@ class TropicalVariety(UniqueRepresentation, SageObject):
         Tropical curve of 0*x*y + 1*x + 0
         sage: tv.components()
         [[(t1, 1), [t1 <= -1], 1], [(-1, t1), [t1 >= 1], 1], [(-t1, t1), [t1 <= 1], 1]]
-        sage: tv.plot()
+        sage: tv.plot()                                                                 # needs sage.plot
         Graphics object consisting of 3 graphics primitives
 
     .. PLOT::
@@ -134,7 +136,7 @@ class TropicalVariety(UniqueRepresentation, SageObject):
         [(7, t1), [t1 <= 0], 1],
         [(t1 - 1, t1), [2 <= t1], 1],
         [(t1 + 7, t1), [0 <= t1], 1]]
-        sage: tv.plot()
+        sage: tv.plot()                                                                 # needs sage.plot
         Graphics object consisting of 8 graphics primitives
 
     .. PLOT::
@@ -201,7 +203,7 @@ class TropicalVariety(UniqueRepresentation, SageObject):
 
         # Convert each term to its linear function
         linear_eq = {}
-        pd = poly.dict()
+        pd = poly.monomial_coefficients()
         for key in pd:
             eq = sum(variables[i] * e for i, e in enumerate(key))
             eq += pd[key].lift()
@@ -820,7 +822,7 @@ class TropicalSurface(TropicalVariety):
             sage: R.<x,y,z> = PolynomialRing(T)
             sage: p1 = x + z
             sage: tv = p1.tropical_variety()
-            sage: tv.plot()
+            sage: tv.plot()                                                             # needs sage.plot
             Graphics3d Object
 
         .. PLOT::
@@ -837,7 +839,7 @@ class TropicalSurface(TropicalVariety):
 
             sage: p2 = x^2 + x + y + z + R(1)
             sage: tv = p2.tropical_variety()
-            sage: tv.plot()
+            sage: tv.plot()                                                             # needs sage.plot
             Graphics3d Object
 
         .. PLOT::
@@ -1056,7 +1058,7 @@ class TropicalCurve(TropicalVariety):
             sage: R.<x,y> = PolynomialRing(T)
             sage: (y+R(1)).tropical_variety().components()
             [[(t1, 1), [-Infinity < t1, t1 < +Infinity], 1]]
-            sage: (y+R(1)).tropical_variety().plot()
+            sage: (y+R(1)).tropical_variety().plot()                                    # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -1077,7 +1079,7 @@ class TropicalCurve(TropicalVariety):
             [(t1 + 1, t1), [-4 <= t1, t1 <= -2], 1],
             [(t1, -4), [t1 <= -3], 2],
             [(-t1 - 7, t1), [t1 <= -4], 1]]
-            sage: p1.tropical_variety().plot()
+            sage: p1.tropical_variety().plot()                                          # needs sage.plot
             Graphics object consisting of 6 graphics primitives
 
         .. PLOT::
@@ -1094,7 +1096,7 @@ class TropicalCurve(TropicalVariety):
 
             sage: p2 = (x^6 + R(4)*x^4*y^2 + R(2)*x^3*y^3 + R(3)*x^2*y^4 + x*y^5
             ....:       + R(7)*x^2 + R(5)*x*y + R(3)*y^2 + R(2)*x + y + R(10))
-            sage: p2.tropical_variety().plot()
+            sage: p2.tropical_variety().plot()                                          # needs sage.plot
             Graphics object consisting of 11 graphics primitives
 
         .. PLOT::

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Hypergeometric functions
 
@@ -298,7 +299,7 @@ class Hypergeometric(BuiltinFunction):
 
         TESTS::
 
-            sage: hypergeometric([2, 3, 4], [4, 1], 1)
+            sage: hypergeometric([2, 3, 4], [4, 1], 1)                                  # needs sage.symbolic
             hypergeometric((2, 3, 4), (4, 1), 1)
         """
         return BuiltinFunction.__call__(self,
@@ -366,7 +367,7 @@ class Hypergeometric(BuiltinFunction):
                 p = get_coercion_model().common_parent(*args)
                 return self._evalf_(a, b, z, parent=p)
 
-    def _evalf_(self, a, b, z, parent, algorithm=None):
+    def _evalf_(self, a, b, z, parent=None, algorithm=None):
         """
         TESTS::
 
@@ -406,7 +407,7 @@ class Hypergeometric(BuiltinFunction):
         return (t * derivative(z, diff_param) *
                 hypergeometric([c + 1 for c in a], [c + 1 for c in b], z))
 
-    class EvaluationMethods():
+    class EvaluationMethods:
 
         def _fast_callable_(self, a, b, z, etb):
             """
@@ -1001,7 +1002,7 @@ class Hypergeometric_M(BuiltinFunction):
             return Integer(1)
         return
 
-    def _evalf_(self, a, b, z, parent, algorithm=None):
+    def _evalf_(self, a, b, z, parent=None, algorithm=None):
         """
         TESTS::
 
@@ -1026,7 +1027,7 @@ class Hypergeometric_M(BuiltinFunction):
         raise NotImplementedError('derivative of hypergeometric function '
                                   'with respect to parameters')
 
-    class EvaluationMethods():
+    class EvaluationMethods:
         def generalized(self, a, b, z):
             """
             Return as a generalized hypergeometric function.
@@ -1107,7 +1108,7 @@ class Hypergeometric_U(BuiltinFunction):
     def _eval_(self, a, b, z, **kwargs):
         return
 
-    def _evalf_(self, a, b, z, parent, algorithm=None):
+    def _evalf_(self, a, b, z, parent=None, algorithm=None):
         """
         TESTS::
 
@@ -1132,7 +1133,7 @@ class Hypergeometric_U(BuiltinFunction):
         raise NotImplementedError('derivative of hypergeometric function '
                                   'with respect to parameters')
 
-    class EvaluationMethods():
+    class EvaluationMethods:
         def generalized(self, a, b, z):
             """
             Return in terms of the generalized hypergeometric function.

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.flint sage.libs.gap sage.libs.pari
 r"""
 Congruence arithmetic subgroups of `\SL_2(\ZZ)`
@@ -432,6 +433,7 @@ class CongruenceSubgroupFromGroup(CongruenceSubgroupBase):
         """
         return self.__G
 
+
 class CongruenceSubgroup(CongruenceSubgroupFromGroup):
     r"""
     One of the "standard" congruence subgroups `\Gamma_0(N)`, `\Gamma_1(N)`,
@@ -568,6 +570,7 @@ class CongruenceSubgroup(CongruenceSubgroupFromGroup):
                 return GammaH(level, [ h % level for h in H ])
         else:
             raise NotImplementedError
+
 
 def _minimize_level(G):
     r"""

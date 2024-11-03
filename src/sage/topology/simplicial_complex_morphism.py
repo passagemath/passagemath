@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.graphs
 r"""
 Morphisms of simplicial complexes
@@ -258,7 +259,7 @@ class SimplicialComplexMorphism(Morphism):
             sage: f = {x[0]:x[0] for x in S.cells()[0]}
             sage: H = Hom(S,T)
             sage: z = H(f)
-            sage: z.associated_chain_complex_morphism()
+            sage: z.associated_chain_complex_morphism()                                 # needs sage.modules
             Chain complex morphism:
               From: Chain complex with at most 2 nonzero terms over Integer Ring
               To:   Chain complex with at most 2 nonzero terms over Integer Ring
@@ -555,7 +556,7 @@ class SimplicialComplexMorphism(Morphism):
                 return False
         return True
 
-    def is_identity(self):
+    def is_identity(self) -> bool:
         """
         If ``self`` is an identity morphism, returns ``True``.
         Otherwise, ``False``.
@@ -588,18 +589,15 @@ class SimplicialComplexMorphism(Morphism):
         """
         if self.domain() != self.codomain():
             return False
-        else:
-            f = {}
-            for i in self.domain().vertices():
-                f[i] = i
-            if self._vertex_dictionary != f:
-                return False
-            else:
-                return True
+
+        f = {i: i for i in self.domain().vertices()}
+        return self._vertex_dictionary == f
 
     def fiber_product(self, other, rename_vertices=True):
         """
-        Fiber product of ``self`` and ``other``. Both morphisms should have
+        Fiber product of ``self`` and ``other``.
+
+        Both morphisms should have
         the same codomain. The method returns a morphism of simplicial
         complexes, which is the morphism from the space of the fiber product
         to the codomain.

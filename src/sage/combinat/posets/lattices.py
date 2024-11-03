@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.modules
 r"""
 Finite lattices and semilattices
@@ -2305,7 +2306,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
 
         TESTS::
 
-            sage: [posets.ChainPoset(i).is_orthocomplemented() for i in range(4)]
+            sage: [posets.ChainPoset(i).is_orthocomplemented() for i in range(4)]       # needs sage.groups
             [True, True, True, False]
         """
         it = self._hasse_diagram.orthocomplementations_iterator()
@@ -4250,7 +4251,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
         of a non-convex subsets::
 
             sage: L = LatticePoset(DiGraph('OQC?a?@CO?G_C@?GA?O??_??@?BO?A_?G??C??_?@???'))
-            sage: L.is_constructible_by_doublings('convex')
+            sage: L.is_constructible_by_doublings('convex')                             # needs sage.combinat
             False
             sage: L.is_constructible_by_doublings('any')
             True
@@ -4273,7 +4274,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
         can't be optimized to test just some maximal chain::
 
             sage: L = LatticePoset(DiGraph('QSO?I?_?_GBG??_??a???@?K??A??B???C??s??G??I??@??A??@???'))
-            sage: L.is_constructible_by_doublings('convex')
+            sage: L.is_constructible_by_doublings('convex')                             # needs sage.combinat
             False
             sage: L.is_constructible_by_doublings('any')
             True
@@ -4390,7 +4391,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
 
         TESTS::
 
-            sage: [posets.ChainPoset(i).is_isoform() for i in range(5)]
+            sage: [posets.ChainPoset(i).is_isoform() for i in range(5)]                 # needs sage.combinat
             [True, True, True, False, False]
 
             sage: posets.DiamondPoset(5).is_isoform()  # Simple, so trivially isoform   # needs sage.combinat
@@ -4448,7 +4449,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
         Every uniform lattice is regular, but the converse is not true::
 
             sage: N6 = LatticePoset({1: [2, 3, 5], 2: [4], 3: [4], 5: [6], 4: [6]})
-            sage: N6.is_uniform(), N6.is_regular()
+            sage: N6.is_uniform(), N6.is_regular()                                      # needs sage.combinat
             (False, True)
 
             sage: N6.is_uniform(certificate=True)                                       # needs sage.combinat
@@ -4619,7 +4620,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
 
         TESTS::
 
-            sage: [posets.ChainPoset(i).is_simple() for i in range(5)]
+            sage: [posets.ChainPoset(i).is_simple() for i in range(5)]                  # needs sage.combinat
             [True, True, True, False, False]
         """
         from sage.combinat.set_partition import SetPartition

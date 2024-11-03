@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.graphs
 r"""
 Quiver mutation types
@@ -67,7 +68,9 @@ class QuiverMutationTypeFactory(SageObject):
             _mutation_type_error(data)
 
         # check for reducible types
-        if all(type(data_component) in [list, tuple, QuiverMutationType_Irreducible] for data_component in data):
+        if all(isinstance(data_component, (list, tuple,
+                                           QuiverMutationType_Irreducible))
+               for data_component in data):
             if len(data) == 1:
                 return QuiverMutationType(data[0])
             else:

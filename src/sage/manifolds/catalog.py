@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Manifolds Catalog
 
@@ -92,6 +93,7 @@ def Minkowski(positive_spacelike=True, names=None):
     g[0,0] = -sgn
     g[1,1], g[2,2], g[3,3] = sgn, sgn, sgn
     return M
+
 
 def Kerr(m=1, a=0, coordinates='BL', names=None):
     """
@@ -216,6 +218,7 @@ def Kerr(m=1, a=0, coordinates='BL', names=None):
 
     raise NotImplementedError("coordinates system not implemented, see help"
                               " for details")
+
 
 def Torus(R=2, r=1, names=None):
     """

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Sets
 
@@ -209,7 +210,7 @@ def Set(X=None, category=None):
         return Set_object_enumerated(X, category=category)
 
 
-class Set_base():
+class Set_base:
     r"""
     Abstract base class for sets, not necessarily parents.
     """

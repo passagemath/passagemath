@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 """
 Constructors for certain modular abelian varieties
 
@@ -22,6 +23,7 @@ import sage.modular.modform.element
 from sage.modular.abvar import abvar
 
 _cache = {}
+
 
 def _get(key):
     """
@@ -48,6 +50,7 @@ def _get(key):
         if z is not None:
             return z
     raise ValueError("element not in cache")
+
 
 def _saved(key, J):
     """
@@ -95,6 +98,7 @@ def J0(N):
         J = Gamma0(N).modular_abelian_variety()
         return _saved(key, J)
 
+
 def J1(N):
     """
     Return the Jacobian `J_1(N)` of the modular curve
@@ -112,6 +116,7 @@ def J1(N):
         from sage.modular.arithgroup.all import Gamma1
         return _saved(key, Gamma1(N).modular_abelian_variety())
 
+
 def JH(N, H):
     """
     Return the Jacobian `J_H(N)` of the modular curve
@@ -128,6 +133,7 @@ def JH(N, H):
     except ValueError:
         from sage.modular.arithgroup.all import GammaH
         return _saved(key, GammaH(N, H).modular_abelian_variety())
+
 
 def AbelianVariety(X):
     """

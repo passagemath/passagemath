@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 """
 Library Interface to GAP
 
@@ -175,6 +176,8 @@ AUTHORS:
   - Dima Pasechnik (2018-09-18, GAP Days): started the port to native
     libgap API
 """
+
+# hi
 
 ###############################################################################
 #       Copyright (C) 2009, William Stein <wstein@gmail.com>

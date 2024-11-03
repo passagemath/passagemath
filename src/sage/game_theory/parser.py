@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 """
 Parser For gambit And lrs Nash Equilibria
 """
@@ -13,7 +14,7 @@ Parser For gambit And lrs Nash Equilibria
 # ****************************************************************************
 
 
-class Parser():
+class Parser:
     r"""
     A class for parsing the outputs of different algorithms called in other
     software packages.

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Algebra of Differentiable Scalar Fields
 
@@ -34,6 +35,7 @@ from sage.rings.infinity import infinity
 from sage.symbolic.ring import SymbolicRing
 from sage.manifolds.scalarfield_algebra import ScalarFieldAlgebra
 from sage.manifolds.differentiable.scalarfield import DiffScalarField
+
 
 class DiffScalarFieldAlgebra(ScalarFieldAlgebra):
     r"""

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.pari
 r"""
 Weight 1 modular forms
@@ -19,6 +20,7 @@ from sage.misc.verbose import verbose
 from sage.structure.sequence import Sequence
 from sage.modular.arithgroup.all import Gamma0, GammaH
 from sage.modular.arithgroup.arithgroup_generic import ArithmeticSubgroup
+
 
 @cached_function
 def modular_ratio_space(chi):
@@ -99,6 +101,7 @@ def modular_ratio_to_prec(chi, qexp, prec):
     fB = qexp * B
     fB_elt = C(fB, check=False)
     return fB_elt.qexp(prec) / B
+
 
 @cached_function
 def hecke_stable_subspace(chi, aux_prime=ZZ(2)):
@@ -187,6 +190,7 @@ def hecke_stable_subspace(chi, aux_prime=ZZ(2)):
     qexps = Sequence(A(x.list()).add_bigoh(R) for x in J.gens())
     return qexps
 
+
 @cached_function
 def dimension_wt1_cusp_forms(chi):
     r"""
@@ -199,6 +203,7 @@ def dimension_wt1_cusp_forms(chi):
         1
     """
     return len(hecke_stable_subspace(chi))
+
 
 @cached_function
 def dimension_wt1_cusp_forms_gH(group):

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.pari sage.rings.number_field
 r"""
 Modular forms with character
@@ -93,6 +94,7 @@ from .ambient import ModularFormsAmbient
 from . import ambient_R
 from . import cuspidal_submodule
 from . import eisenstein_submodule
+
 
 class ModularFormsAmbient_eps(ModularFormsAmbient):
     """

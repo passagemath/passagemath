@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Mixin For Extra Tab Completions
 
@@ -27,7 +28,7 @@ EXAMPLES::
 import builtins
 
 
-class ExtraTabCompletion():
+class ExtraTabCompletion:
 
     def __dir__(self):
         """
@@ -71,7 +72,7 @@ def completions(s, globs):
          sage: import sage.interfaces.tab_completion as s
          sage: p = x**2 + 1
          sage: s.completions('p.co',globals()) # indirect doctest
-         ['p.coefficients',...]
+         ['p.coefficient',...]
 
          sage: s.completions('dic',globals()) # indirect doctest
          ['dickman_rho', 'dict']

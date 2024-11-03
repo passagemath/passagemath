@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-linbox
 # distutils: extra_compile_args = NTL_CFLAGS M4RI_CFLAGS
 # distutils: libraries = iml NTL_LIBRARIES gmp m CBLAS_LIBRARIES
 # distutils: library_dirs = NTL_LIBDIR CBLAS_LIBDIR
@@ -2110,6 +2111,45 @@ cdef class Matrix_integer_dense(Matrix_dense):
         self.cache(key, ans)
         return ans
 
+    def _echelonize_ring(self, **kwds):
+        r"""
+        Echelonize self in place, where the base ring of self is assumed to
+        be a ring (not a field).
+
+        EXAMPLES::
+
+            sage: a = matrix(ZZ, 3, 4, [1..12], sparse=False); a
+            [ 1  2  3  4]
+            [ 5  6  7  8]
+            [ 9 10 11 12]
+            sage: a._echelonize_ring()
+            sage: a
+            [ 1  2  3  4]
+            [ 0  4  8 12]
+            [ 0  0  0  0]
+        """
+        self.check_mutability()
+        cdef Matrix d, a
+        cdef Py_ssize_t r, c
+        cdef bint transformation = 'transformation' in kwds and kwds['transformation']
+
+        if 'include_zero_rows' in kwds and not kwds['include_zero_rows']:
+            raise ValueError("cannot echelonize in place and delete zero rows")
+        if transformation:
+            d, a = self.echelon_form(**kwds)
+        else:
+            d = self.echelon_form(**kwds)
+        for c from 0 <= c < self.ncols():
+            for r from 0 <= r < self.nrows():
+                self.set_unsafe(r, c, d.get_unsafe(r,c))
+        self.clear_cache()
+        self.cache('pivots', d.pivots())
+        self.cache('in_echelon_form', True)
+        if transformation:
+            return a
+        else:
+            return
+
     def saturation(self, p=0, proof=None, max_dets=5):
         r"""
         Return a saturation matrix of self, which is a matrix whose rows
@@ -3297,7 +3337,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         else:
             return R
 
-    def is_LLL_reduced(self, delta=None, eta=None):
+    def is_LLL_reduced(self, delta=None, eta=None, algorithm='fpLLL'):
         r"""
         Return ``True`` if this lattice is `(\delta, \eta)`-LLL reduced.
         See ``self.LLL`` for a definition of LLL reduction.
@@ -3308,6 +3348,8 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         - ``eta`` -- (default: `0.501`) parameter `\eta` as described above
 
+        - ``algorithm`` -- either ``'fpLLL'`` (default) or ``'sage'``
+
         EXAMPLES::
 
             sage: A = random_matrix(ZZ, 10, 10)
@@ -3316,6 +3358,15 @@ cdef class Matrix_integer_dense(Matrix_dense):
             False
             sage: L.is_LLL_reduced()
             True
+
+        The ``'sage'`` algorithm currently does not work for matrices with
+        linearly dependent rows::
+
+            sage: A = matrix(ZZ, [[1, 2, 3], [2, 4, 6]])
+            sage: A.is_LLL_reduced(algorithm='sage')
+            Traceback (most recent call last):
+            ...
+            ValueError: linearly dependent input for module version of Gram-Schmidt
         """
         if eta is None:
             eta = 0.501
@@ -3330,20 +3381,27 @@ cdef class Matrix_integer_dense(Matrix_dense):
         if eta < 0.5:
             raise TypeError("eta must be >= 0.5")
 
-        # this is pretty slow
-        import sage.modules.misc
-        G, mu = sage.modules.misc.gram_schmidt(self.rows())
-        #For any $i>j$, we have $|mu_{i, j}| <= \eta$
-        for e in mu.list():
-            if e.abs() > eta:
-                return False
+        if algorithm == 'fpLLL':
+            from fpylll import LLL, IntegerMatrix
+            A = IntegerMatrix.from_matrix(self)
+            return LLL.is_reduced(A, delta=delta, eta=eta)
+        elif algorithm == 'sage':
+            # This is pretty slow
+            import sage.modules.misc
+            G, mu = sage.modules.misc.gram_schmidt(self.rows())
+            # For any $i>j$, we have $|mu_{i, j}| <= \eta$
+            for e in mu.list():
+                if e.abs() > eta:
+                    return False
 
-        #For any $i<d$, we have $\delta |b_i^*|^2 <= |b_{i+1}^* + mu_{i+1, i} b_i^* |^2$
-        norms = [G[i].norm()**2 for i in range(len(G))]
-        for i in range(1,self.nrows()):
-            if norms[i] < (delta - mu[i,i-1]**2) * norms[i-1]:
-                return False
-        return True
+            # For any $i<d$, we have $\delta |b_i^*|^2 <= |b_{i+1}^* + mu_{i+1, i} b_i^* |^2$
+            norms = [G[i].norm()**2 for i in range(len(G))]
+            for i in range(1,self.nrows()):
+                if norms[i] < (delta - mu[i,i-1]**2) * norms[i-1]:
+                    return False
+            return True
+        else:
+            raise ValueError("algorithm must be one of 'fpLLL' or 'sage'")
 
     def prod_of_row_sums(self, cols):
         """

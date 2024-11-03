@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Homsets and endomorphism rings of elliptic curves
 

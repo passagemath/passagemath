@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Fraction Field Elements
 
@@ -140,8 +141,9 @@ cdef class FractionFieldElement(FieldElement):
 
         ::
 
+            sage: # needs sage.libs.singular
             sage: phi = F.hom([a + b, a*b], K)
-            sage: phi(x+y) # indirect doctest
+            sage: phi(x + y)  # indirect doctest
             a*b + a + b
 
         ::
@@ -226,6 +228,7 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y> = ZZ[]
             sage: f = x/y + 1; f
             (x + y)/y
@@ -241,6 +244,7 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y> = ZZ[]
             sage: f = x/y + 1; f
             (x + y)/y
@@ -255,6 +259,7 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y> = ZZ[]
             sage: f = x/y + 1; f
             (x + y)/y
@@ -368,21 +373,23 @@ cdef class FractionFieldElement(FieldElement):
             sage: d={x:1}
             sage: d[FractionField(R).0]
             1
-            sage: R.<x,y,z>=ZZ[] # this probably has a separate implementation from ZZ[]
-            sage: hash(R.0)==hash(FractionField(R).0)
+
+            sage: # needs sage.libs.singular
+            sage: R.<x,y,z> = ZZ[]  # this probably has a separate implementation from ZZ[]
+            sage: hash(R.0) == hash(FractionField(R).0)
             True
-            sage: d={x:1}
+            sage: d = {x: 1}
             sage: d[FractionField(R).0]
             1
-            sage: R.<x,y,z>=QQ[] # this probably has a separate implementation from ZZ[]
-            sage: hash(R.0)==hash(FractionField(R).0)
+            sage: R.<x,y,z> = QQ[]  # this probably has a separate implementation from ZZ[]
+            sage: hash(R.0) == hash(FractionField(R).0)
             True
-            sage: ((x+1)/(x^2+1)).subs({x:1})
+            sage: ((x+1)/(x^2+1)).subs({x: 1})
             1
-            sage: d={x:1}
+            sage: d = {x: 1}
             sage: d[FractionField(R).0]
             1
-            sage: hash(R(1)/R(2))==hash(1/2)
+            sage: hash(R(1)/R(2)) == hash(1/2)
             True
 
         Check that :issue:`16268` is fixed::
@@ -437,7 +444,8 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
-            sage: x = PolynomialRing(RationalField(),'x',3).gens()
+            sage: # needs sage.libs.singular
+            sage: x = PolynomialRing(RationalField(), 'x', 3).gens()
             sage: f = x[0] + x[1] - 2*x[1]*x[2]
             sage: f
             -2*x1*x2 + x0 + x1
@@ -466,13 +474,14 @@ cdef class FractionFieldElement(FieldElement):
 
             sage: x, y = PolynomialRing(ZZ, 2, 'xy').gens()
             sage: f = x^2 + y + x^2*y^2 + 5
-            sage: (1/f).subs(x=5)
+            sage: (1/f).subs(x=5)                                                       # needs sage.libs.singular
             1/(25*y^2 + y + 30)
 
         TESTS:
 
         Check that :issue:`37122` is fixed::
 
+            sage: # needs sage.libs.singular
             sage: P = PolynomialRing(QQ, ["x%s" % i for i in range(10000)])
             sage: PF = P.fraction_field()
             sage: p = sum(i*P.gen(i) for i in range(5)) / sum(i*P.gen(i) for i in range(8))
@@ -602,13 +611,15 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: K.<x,y> = Frac(ZZ['x,y'])
-            sage: x+y # indirect doctest
+            sage: x + y  # indirect doctest
             x + y
             sage: 1/x + 1/y
             (x + y)/(x*y)
             sage: 1/x + 1/(x*y)
             (y + 1)/(x*y)
+
             sage: Frac(CDF['x']).gen() + 3                                              # needs sage.rings.complex_double
             x + 3.0
 
@@ -749,6 +760,7 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: K.<x,y,z> = Frac(ZZ['x,y,z'])
             sage: a = (x+1)*(x+y)/(z-3) # indirect doctest
             sage: b = (x+y)/(z-1)
@@ -792,6 +804,7 @@ cdef class FractionFieldElement(FieldElement):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: K.<x,y> = Frac(ZZ['x,y'])
             sage: float(x/x + y/y)
             2.0
@@ -908,11 +921,11 @@ cdef class FractionFieldElement(FieldElement):
             <class 'sage.rings.polynomial.multi_polynomial_libsingular.MPolynomial_libsingular'>
             sage: x^0
             1
-            sage: ((x+y)/(x-y))^2
+            sage: ((x+y)/(x-y))^2                                                       # needs sage.libs.singular
             (x^2 + 2*x*y + y^2)/(x^2 - 2*x*y + y^2)
-            sage: ((x+y)/(x-y))^-2
+            sage: ((x+y)/(x-y))^-2                                                      # needs sage.libs.singular
             (x^2 - 2*x*y + y^2)/(x^2 + 2*x*y + y^2)
-            sage: ((x+y)/(x-y))^0
+            sage: ((x+y)/(x-y))^0                                                       # needs sage.libs.singular
             1
         """
         snum = (<FractionFieldElement> self)._numerator
@@ -985,6 +998,7 @@ cdef class FractionFieldElement(FieldElement):
 
         ::
 
+            sage: # needs sage.libs.singular
             sage: K.<x,y> = Frac(ZZ['x,y'])
             sage: x > y
             True
@@ -1020,6 +1034,7 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: F = ZZ['x,y'].fraction_field()
             sage: x,y = F.gens()
             sage: t = F(0)/x
@@ -1028,7 +1043,7 @@ cdef class FractionFieldElement(FieldElement):
 
         ::
 
-            sage: bool(1/x)
+            sage: bool(1/x)                                                             # needs sage.libs.singular
             True
         """
         return not self._numerator.is_zero()
@@ -1039,6 +1054,7 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: F = ZZ['x,y'].fraction_field()
             sage: x,y = F.gens()
             sage: t = F(0)/x
@@ -1058,6 +1074,7 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: F = ZZ['x,y'].fraction_field()
             sage: x,y = F.gens()
             sage: (x/x).is_one()
@@ -1075,6 +1092,7 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: F = ZZ['x,y'].fraction_field()
             sage: x,y = F.gens()
             sage: elt = (2*x + 2*y) / (3*x - 3*y); elt
@@ -1092,6 +1110,7 @@ cdef class FractionFieldElement(FieldElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: F = ZZ['x,y'].fraction_field()
             sage: f = F.random_element()
             sage: loads(f.dumps()) == f
@@ -1125,6 +1144,7 @@ cdef class FractionFieldElement(FieldElement):
 
         TESTS::
 
+            sage: # needs sage.libs.singular
             sage: R.<y,z> = ZZ[]
             sage: (~(y+z))._evaluate_polynomial(pol)
             (y^3 + 3*y^2*z + 3*y*z^2 + z^3 + 1)/(y^3 + 3*y^2*z + 3*y*z^2 + z^3)
@@ -1285,6 +1305,7 @@ def make_element(parent, numerator, denominator):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.singular
         sage: from sage.rings.fraction_field_element import make_element
         sage: R = ZZ['x,y']
         sage: x,y = R.gens()

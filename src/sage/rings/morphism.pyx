@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Homomorphisms of rings
 
@@ -873,12 +874,16 @@ cdef class RingHomomorphism(RingMap):
                     return homset([self(g) for g in right.im_gens()], **kwds)
                 except ValueError:
                     pass
-            from sage.rings.number_field.morphism import RelativeNumberFieldHomomorphism_from_abs
-            if isinstance(right, RelativeNumberFieldHomomorphism_from_abs):
-                try:
-                    return homset(self*right.abs_hom())
-                except ValueError:
-                    pass
+            try:
+                from sage.rings.number_field.morphism import RelativeNumberFieldHomomorphism_from_abs
+            except ImportError:
+                pass
+            else:
+                if isinstance(right, RelativeNumberFieldHomomorphism_from_abs):
+                    try:
+                        return homset(self*right.abs_hom())
+                    except ValueError:
+                        pass
         return sage.categories.map.Map._composition_(self, right, homset)
 
     def pushforward(self, I):
@@ -2277,7 +2282,7 @@ cdef class RingHomomorphism_from_base(RingHomomorphism):
         """
         P = self.codomain()
         try:
-            return P(dict([(a, self._underlying(b)) for a,b in x.dict().items()]))
+            return P({a: self._underlying(b) for a, b in x.monomial_coefficients().items()})
         except Exception:
             pass
         try:

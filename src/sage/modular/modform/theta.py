@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 """
 `q`-expansions of theta series
 
@@ -10,6 +11,7 @@ from sage.rings.integer_ring import ZZ
 from sage.rings.power_series_ring import PowerSeriesRing
 
 from math import sqrt
+
 
 def theta2_qexp(prec=10, var='q', K=ZZ, sparse=False):
     r"""
@@ -57,6 +59,7 @@ def theta2_qexp(prec=10, var='q', K=ZZ, sparse=False):
         v[m*m] = one
     R = PowerSeriesRing(K, sparse=sparse, names=var)
     return R(v, prec=prec)
+
 
 def theta_qexp(prec=10, var='q', K=ZZ, sparse=False):
     r"""

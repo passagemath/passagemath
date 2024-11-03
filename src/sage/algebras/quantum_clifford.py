@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.modules
 r"""
 Quantum Clifford Algebras
@@ -533,7 +534,7 @@ class QuantumCliffordAlgebraGeneric(QuantumCliffordAlgebra):
         poly *= self._w_poly.monomial(*v)
         poly = poly.reduce([vp[i]**(4*k) - (1 + q**(-2*k)) * vp[i]**(2*k) + q**(-2*k)
                             for i in range(self._n)])
-        pdict = poly.dict()
+        pdict = poly.monomial_coefficients()
         ret = {(self._psi(p), tuple(e)): pdict[e] * q**q_power * sign
                for e in pdict}
 
@@ -610,7 +611,7 @@ class QuantumCliffordAlgebraGeneric(QuantumCliffordAlgebra):
                               for wi in wp})
             poly = poly.reduce([wi**(4*k) - (1 + q**(-2*k)) * wi**(2*k) + q**(-2*k)
                                 for wi in wp])
-            pdict = poly.dict()
+            pdict = poly.monomial_coefficients()
             coeff = coeff.inverse_of_unit()
             ret = {(p, tuple(e)): coeff * c for e, c in pdict.items()}
             return Cl.element_class(Cl, ret)

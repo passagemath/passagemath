@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 # distutils: libraries = NTL_LIBRARIES gmp
 # distutils: extra_compile_args = NTL_CFLAGS
 # distutils: include_dirs = NTL_INCDIR
@@ -1160,7 +1161,7 @@ cdef class Polynomial_rational_flint(Polynomial):
         if do_sig: sig_off()
         return res
 
-    def __pow__(Polynomial_rational_flint self, exp, ignored):
+    def __pow__(Polynomial_rational_flint self, exp, mod):
         """
         Return ``self`` raised to the power of ``exp``.
 
@@ -1266,9 +1267,22 @@ cdef class Polynomial_rational_flint(Polynomial):
             ...
             TypeError: no canonical coercion from Univariate Polynomial
             Ring in R over Rational Field to Rational Field
+
+        Check that using third argument raises an error::
+
+            sage: R.<x> = PolynomialRing(QQ)
+            sage: pow(x, 2, x)
+            Traceback (most recent call last):
+            ...
+            NotImplementedError: pow() with a modulus is not implemented for this ring
         """
         cdef Polynomial_rational_flint res
         cdef long n
+
+        if mod is not None:
+            raise NotImplementedError(
+                "pow() with a modulus is not implemented for this ring"
+            )
 
         try:
             n = pyobject_to_long(exp)

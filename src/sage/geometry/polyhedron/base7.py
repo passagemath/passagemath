@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Base class for polyhedra: Methods for triangulation and volume computation
 """
@@ -36,6 +37,7 @@ from sage.modules.free_module_element import vector
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
 from .base6 import Polyhedron_base6
+
 
 class Polyhedron_base7(Polyhedron_base6):
     r"""

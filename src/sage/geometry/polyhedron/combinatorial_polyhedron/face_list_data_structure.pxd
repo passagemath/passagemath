@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 """
 Inline cython methods for lists of faces.
 """
@@ -147,7 +148,7 @@ cdef inline void face_list_delete_faces_by_array(face_list_t faces, bint *delete
 cdef inline void face_list_delete_faces_by_face(face_list_t faces, face_t face) noexcept:
     r"""
     Remove all faces such that the ``i``-th bit in ``face`` is not set
-    descreasing ``faces.n_faces``.
+    decreasing ``faces.n_faces``.
 
     .. WARNING::
 

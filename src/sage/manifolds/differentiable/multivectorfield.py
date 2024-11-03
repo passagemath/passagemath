@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Multivector Fields
 
@@ -39,6 +40,7 @@ REFERENCES:
 from sage.tensor.modules.alternating_contr_tensor import AlternatingContrTensor
 from sage.manifolds.differentiable.tensorfield import TensorField
 from sage.manifolds.differentiable.tensorfield_paral import TensorFieldParal
+
 
 class MultivectorField(TensorField):
     r"""

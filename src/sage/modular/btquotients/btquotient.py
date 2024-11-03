@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.pari
 r"""
 Quotients of the Bruhat-Tits tree
@@ -2914,7 +2915,7 @@ class BruhatTitsQuotient(SageObject, UniqueRepresentation):
         while not V:
             V = [g for g in self._find_elements_in_order(l * p ** nninc)
                  if prod([self._character(ZZ((v * Matrix(ZZ, 4, 1, g))[0, 0]))
-                          / self._character((p ** (nninc // 2)))
+                          / self._character(p ** (nninc // 2))
                           for v in self.get_extra_embedding_matrices()]) == 1]
             if not V:
                 nninc += 2
@@ -2927,7 +2928,7 @@ class BruhatTitsQuotient(SageObject, UniqueRepresentation):
         letters = self.get_nontorsion_generators()
         letters += [g for g in self._find_elements_in_order(1)
                     if prod([self._character(ZZ((v * Matrix(ZZ, 4, 1, g))[0, 0]))
-                             / self._character((p ** (nninc // 2)))
+                             / self._character(p ** (nninc // 2))
                              for v in self.get_extra_embedding_matrices()]) == 1]
         n_iters = 0
 

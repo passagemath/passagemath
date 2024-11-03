@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Elements of Drinfeld modular forms rings
 
@@ -24,6 +25,7 @@ from sage.structure.richcmp import richcmp, op_NE, op_EQ
 
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.multi_polynomial import MPolynomial
+
 
 class DrinfeldModularFormsElement(ModuleElement):
     r"""

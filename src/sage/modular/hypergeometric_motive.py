@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 """
 Hypergeometric motives
 
@@ -186,6 +187,7 @@ def characteristic_polynomial_from_traces(traces, d, q, i, sign, deg=None, use_f
     for k in range(bound + 1, fulldeg + 1):
         data[k] = sign * coeffs[d - k] * q**(i * (k - d / 2))
     return ring(data)
+
 
 def enumerate_hypergeometric_data(d, weight=None):
     r"""

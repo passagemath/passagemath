@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Tangent Spaces
 
@@ -33,6 +34,7 @@ from sage.tensor.modules.finite_rank_free_module import FiniteRankFreeModule
 
 if TYPE_CHECKING:
     from sage.manifolds.point import ManifoldPoint
+
 
 class TangentSpace(FiniteRankFreeModule):
     r"""

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 The abstract Matroid class
 
@@ -532,19 +533,24 @@ cdef class Matroid(SageObject):
             ....:     BasisMatroid(matroids.catalog.Vamos()),
             ....:     CircuitsMatroid(matroids.catalog.Vamos()),
             ....:     CircuitClosuresMatroid(matroids.catalog.Vamos()),
-            ....:     FlatsMatroid(matroids.catalog.Vamos()),
             ....:     Matroid(groundset=range(10), rank_function=lambda X: min(len(X), 4)),
             ....:     Matroid(Matrix(GF(7), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
             ....:     Matroid(Matrix(GF(2), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
             ....:     Matroid(Matrix(GF(3), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
-            ....:     Matroid(Matrix(GF(4, 'x'), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
             ....:     matroids.catalog.R10()
+            ....: ]
+            sage: matroids_lst += [                                                     # needs sage.graphs
+            ....:     FlatsMatroid(matroids.catalog.Vamos()),
+            ....: ]
+            sage: matroids_lst += [                                                     # needs sage.rings.finite_rings
+            ....:     Matroid(Matrix(GF(4, 'x'), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
             ....: ]
             sage: for M in matroids_lst:  # indirect doctest
             ....:     N = copy(M)
             ....:     assert M == N
             ....:     assert M.groundset() is N.groundset()
 
+            sage: # needs sage.graphs
             sage: M = Matroid(graphs.PappusGraph())
             sage: N = copy(M)
             sage: M == N
@@ -578,19 +584,24 @@ cdef class Matroid(SageObject):
             ....:     BasisMatroid(matroids.catalog.Vamos()),
             ....:     CircuitsMatroid(matroids.catalog.Vamos()),
             ....:     CircuitClosuresMatroid(matroids.catalog.Vamos()),
-            ....:     FlatsMatroid(matroids.catalog.Vamos()),
             ....:     Matroid(groundset=range(10), rank_function=lambda X: min(len(X), 4)),
             ....:     Matroid(Matrix(GF(7), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
             ....:     Matroid(Matrix(GF(2), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
             ....:     Matroid(Matrix(GF(3), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
-            ....:     Matroid(Matrix(GF(4, 'x'), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
             ....:     matroids.catalog.R10()
+            ....: ]
+            sage: matroids_lst += [                                                     # needs sage.graphs
+            ....:     FlatsMatroid(matroids.catalog.Vamos()),
+            ....: ]
+            sage: matroids_lst += [                                                     # needs sage.rings.finite_rings
+            ....:     Matroid(Matrix(GF(4, 'x'), [[1,0,0,1,1],[0,1,0,1,2],[0,0,1,1,3]])),
             ....: ]
             sage: for M in matroids_lst:  # indirect doctest
             ....:     N = deepcopy(M)
             ....:     assert M == N
             ....:     assert M.groundset() is N.groundset()
 
+            sage: # needs sage.graphs
             sage: M = Matroid(graphs.PappusGraph())
             sage: N = deepcopy(M)
             sage: M == N
@@ -3304,6 +3315,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1,2,3], [3,4,5], [1,2,4,5]])
             sage: SimplicialComplex(list(M.no_broken_circuits_sets_iterator()))
             Simplicial complex with vertex set (1, 2, 3, 4, 5)
@@ -3314,6 +3326,7 @@ cdef class Matroid(SageObject):
 
         ::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1,2,3], [1,4,5], [2,3,4,5]])
             sage: SimplicialComplex(list(M.no_broken_circuits_sets_iterator([5,4,3,2,1])))
             Simplicial complex with vertex set (1, 2, 3, 4, 5)
@@ -3322,6 +3335,7 @@ cdef class Matroid(SageObject):
         For a matroid with loops all sets contain the broken circuit
         `\emptyset`, and thus we shouldn't get any set as output::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(groundset=[1,2,3], circuits=[[3]])
             sage: list(M.no_broken_circuits_sets_iterator())
             []
@@ -3382,6 +3396,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: M = matroids.Uniform(3, 4)
             sage: OS = M.orlik_solomon_algebra(QQ)
             sage: OS
@@ -3797,9 +3812,9 @@ cdef class Matroid(SageObject):
         a function, and many other types of maps::
 
             sage: M = matroids.catalog.Fano()
-            sage: P = PermutationGroup([[('a', 'b', 'c'),                               # needs sage.rings.finite_rings
+            sage: P = PermutationGroup([[('a', 'b', 'c'),                               # needs sage.groups sage.rings.finite_rings
             ....:                        ('d', 'e', 'f'), ('g')]]).gen()
-            sage: M.is_isomorphism(M, P)                                                # needs sage.rings.finite_rings
+            sage: M.is_isomorphism(M, P)                                                # needs sage.groups sage.rings.finite_rings
             True
 
             sage: M = matroids.catalog.Pappus()
@@ -6246,6 +6261,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: matroids.Uniform(5, 5).girth()
             +Infinity
             sage: matroids.catalog.K4().girth()
@@ -6588,6 +6604,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = matroids.catalog.Wheel4()
             sage: M.is_graphic()
             True
@@ -7940,6 +7957,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = matroids.CompleteGraphic(5)
             sage: M.characteristic_polynomial()
             l^4 - 10*l^3 + 35*l^2 - 50*l + 24
@@ -7999,7 +8017,7 @@ cdef class Matroid(SageObject):
 
             sage: from sage.matroids.advanced import setprint
             sage: M = matroids.catalog.Fano()
-            sage: setprint(M.flat_cover())                                              # needs sage.rings.finite_rings
+            sage: setprint(M.flat_cover())                                              # needs sage.numerical.mip sage.rings.finite_rings
             [{'a', 'b', 'f'}, {'a', 'c', 'e'}, {'a', 'd', 'g'},
              {'b', 'c', 'd'}, {'b', 'e', 'g'}, {'c', 'f', 'g'},
              {'d', 'e', 'f'}]
@@ -8275,10 +8293,10 @@ cdef class Matroid(SageObject):
             ....:         pos[t[i]]=(RR(y*sin(2*pi*(i+1/2)/5)), RR(y*cos(2*pi*(i+1/2)/5)))
             ....:
             sage: pos['k']=(0,0)
-            sage: M._fix_positions(pos_dict=pos)                                        # needs sage.symbolic
-            sage: M._cached_info['lineorders'] is None                                  # needs sage.symbolic
+            sage: M._fix_positions(pos_dict=pos)                                        # needs scipy sage.symbolic
+            sage: M._cached_info['lineorders'] is None                                  # needs scipy sage.symbolic
             True
-            sage: M._cached_info['plot_positions']['k']                                 # needs sage.symbolic
+            sage: M._cached_info['plot_positions']['k']                                 # needs scipy sage.symbolic
             (0, 0)
         """
         if self.rank() > 3:
@@ -8317,6 +8335,7 @@ cdef class Matroid(SageObject):
         For a matroid with loops, the broken circuit complex is not defined,
         and the method yields an error::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(flats={0: ['a'], 1: ['ab', 'ac'], 2: ['abc']})
             sage: M.broken_circuit_complex()
             Traceback (most recent call last):
@@ -8357,6 +8376,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = matroids.catalog.Fano()
             sage: G = M.automorphism_group()
             sage: G.is_transitive()
@@ -8634,6 +8654,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.rank_matroid import RankMatroid
             sage: N = matroids.catalog.Sp8pp()
             sage: M = RankMatroid(groundset=N.groundset(), rank_function=N.rank)
@@ -8647,6 +8668,7 @@ cdef class Matroid(SageObject):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.rank_matroid import RankMatroid
             sage: N = matroids.catalog.Sp8pp()
             sage: M = RankMatroid(groundset=N.groundset(), rank_function=N.rank)

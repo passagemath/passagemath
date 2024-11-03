@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.graphs sage.modules
 r"""
 Quiver
@@ -232,7 +233,8 @@ class ClusterQuiver(SageObject):
                                    values))
 
         # constructs a quiver from a mutation type
-        if type( data ) in [QuiverMutationType_Irreducible,QuiverMutationType_Reducible]:
+        if isinstance(data, (QuiverMutationType_Irreducible,
+                             QuiverMutationType_Reducible)):
             if frozen is not None:
                 print('The input specifies a mutation type, so the'
                       ' additional parameter frozen is ignored.'
@@ -1950,10 +1952,15 @@ class ClusterQuiver(SageObject):
             path = None
         elif not return_path and self._mutation_type == 'undetermined infinite mutation type':
             is_finite = False
-        elif type( self._mutation_type ) in [QuiverMutationType_Irreducible, QuiverMutationType_Reducible] and self._mutation_type.is_mutation_finite():
+        elif (isinstance(self._mutation_type, (QuiverMutationType_Irreducible,
+                                               QuiverMutationType_Reducible))
+              and self._mutation_type.is_mutation_finite()):
             is_finite = True
             path = None
-        elif not return_path and type( self._mutation_type ) in [QuiverMutationType_Irreducible, QuiverMutationType_Reducible] and not self._mutation_type.is_mutation_finite():
+        elif (not return_path and isinstance(self._mutation_type,
+                                             (QuiverMutationType_Irreducible,
+                                              QuiverMutationType_Reducible))
+              and not self._mutation_type.is_mutation_finite()):
             is_finite = False
         else:
             # turning dg_component into a canonical form
@@ -2214,11 +2221,13 @@ class ClusterQuiver(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.geometry.polyhedron
             sage: Fg = ClusterQuiver([[1,2]]).g_vector_fan(); Fg
             Rational polyhedral fan in 2-d lattice N
             sage: Fg.ngenerating_cones()
             5
 
+            sage: # needs sage.geometry.polyhedron
             sage: Fg = ClusterQuiver([[1,2],[2,3]]).g_vector_fan(); Fg
             Rational polyhedral fan in 3-d lattice N
             sage: Fg.ngenerating_cones()
@@ -2226,6 +2235,7 @@ class ClusterQuiver(SageObject):
             sage: Fg.is_smooth()
             True
 
+            sage: # needs sage.geometry.polyhedron
             sage: Fg = ClusterQuiver([[1,2],[2,3],[3,1]]).g_vector_fan(); Fg
             Rational polyhedral fan in 3-d lattice N
             sage: Fg.ngenerating_cones()
@@ -2235,6 +2245,7 @@ class ClusterQuiver(SageObject):
 
         TESTS::
 
+            sage: # needs sage.geometry.polyhedron
             sage: ClusterQuiver(['A',[2,2],1]).g_vector_fan()
             Traceback (most recent call last):
             ...

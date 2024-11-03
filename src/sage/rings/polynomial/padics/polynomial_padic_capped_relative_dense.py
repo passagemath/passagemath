@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 # sage.doctest: needs sage.libs.ntl
 """
 `p`-adic Capped Relative Dense Polynomials
@@ -51,7 +52,7 @@ class Polynomial_padic_capped_relative_dense(Polynomial_generic_cdv, Polynomial_
         Check that :issue:`13620` has been fixed::
 
             sage: f = R.zero()
-            sage: R(f.dict())
+            sage: R(f.monomial_coefficients())
             0
 
         Check that :issue:`29829` has been fixed::

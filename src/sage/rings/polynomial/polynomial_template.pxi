@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-ntl
 """
 Polynomial Template for C/C++ Library Interfaces
 """
@@ -371,7 +372,7 @@ cdef class Polynomial_template(Polynomial):
             sage: f.gcd(g)
             Traceback (most recent call last):
             ...
-            ValueError: non-invertible elements encountered during GCD
+            RuntimeError: FLINT gcd calculation failed
         """
         if celement_is_zero(&self.x, (<Polynomial_template>self)._cparent):
             return other

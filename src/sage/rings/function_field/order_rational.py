@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Orders of function fields: rational
 """
@@ -83,7 +84,7 @@ class FunctionFieldMaximalOrder_rational(FunctionFieldMaximalOrder):
         except TypeError:
             raise TypeError("unable to convert to an element of {}".format(F))
 
-        if not f.denominator() in self.function_field().constant_base_field():
+        if f.denominator() not in self.function_field().constant_base_field():
             raise TypeError("%r is not an element of %r" % (f,self))
 
         return f

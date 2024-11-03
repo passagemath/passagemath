@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
 Iwahori-Hecke Algebras
@@ -83,7 +84,7 @@ def normalized_laurent_polynomial(R, p):
         u + v^-1 + u^-1
     """
     try:
-        return R({k: R._base(c) for k, c in p.dict().items()})
+        return R({k: R._base(c) for k, c in p.monomial_coefficients().items()})
     except (AttributeError, TypeError):
         return R(p)
 

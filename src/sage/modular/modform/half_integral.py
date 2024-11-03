@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Compute spaces of half-integral weight modular forms
 
@@ -15,6 +16,7 @@ from . import constructor
 
 from .theta import theta2_qexp, theta_qexp
 from copy import copy
+
 
 def half_integral_weight_modform_basis(chi, k, prec):
     r"""

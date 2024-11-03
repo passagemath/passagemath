@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Generic Multivariate Polynomials
 
@@ -37,7 +38,7 @@ We verify Lagrange's four squares identity::
     ....:  + (a0*b2 - a1*b3 + a2*b0 + a3*b1)^2 + (a0*b3 + a1*b2 - a2*b1 + a3*b0)^2)
     True
 """
-#*****************************************************************************
+# ****************************************************************************
 #
 #   Sage: Open Source Mathematical Software
 #
@@ -54,7 +55,7 @@ We verify Lagrange's four squares identity::
 #  The full text of the GPL is available at:
 #
 #                  https://www.gnu.org/licenses/
-#*****************************************************************************
+# ****************************************************************************
 
 import operator
 
@@ -229,6 +230,7 @@ class MPolynomial_element(MPolynomial):
 
         You can specify a map on the base ring::
 
+            sage: # needs sage.libs.singular
             sage: F.<x,y> = ZZ[]
             sage: F = F.fraction_field(); x,y = F(x),F(y)
             sage: cc = F.hom([y,x])
@@ -674,6 +676,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
 
         Ensure that :issue:`37603` is fixed::
 
+            sage: # needs sage.rings.number_field
             sage: R.<x,y,z> = PolynomialRing(QQbar)
             sage: f = 3*x^2 - 2*y + 7*x^2*y^2 + 5
             sage: type(f.degree())
@@ -730,12 +733,14 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         TESTS:
 
         Ensure that :issue:`37603` is fixed::
-             sage: R.<x,y,z> = QQbar[]
-             sage: f = 2*x*y^3*z^2
-             sage: f.total_degree()
-             6
-             sage: type(f.total_degree())
-             <class 'sage.rings.integer.Integer'>
+
+            sage: # needs sage.rings.number_field
+            sage: R.<x,y,z> = QQbar[]
+            sage: f = 2*x*y^3*z^2
+            sage: f.total_degree()
+            6
+            sage: type(f.total_degree())
+            <class 'sage.rings.integer.Integer'>
         """
         return self.degree()
 
@@ -802,12 +807,27 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         zero = self.parent().base_ring().zero()
         return self.element().get(exp, zero)
 
-    def dict(self):
+    def monomial_coefficients(self):
         """
         Return underlying dictionary with keys the exponents and values
         the coefficients of this polynomial.
+
+        EXAMPLES::
+
+            sage: # needs sage.rings.number_field
+            sage: R.<x,y,z> = PolynomialRing(QQbar, order='lex')
+            sage: f = (x^1*y^5*z^2 + x^2*z + x^4*y^1*z^3)
+            sage: f.monomial_coefficients()
+            {(1, 5, 2): 1, (2, 0, 1): 1, (4, 1, 3): 1}
+
+        ``dict`` is an alias::
+
+            sage: f.dict()  # needs sage.rings.number_field
+            {(1, 5, 2): 1, (2, 0, 1): 1, (4, 1, 3): 1}
         """
         return self.element().dict()
+
+    dict = monomial_coefficients
 
     def __iter__(self):
         """
@@ -1293,6 +1313,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
 
         The weight of the parent ring is respected::
 
+            sage: # needs sage.rings.finite_rings
             sage: term_order = TermOrder("wdegrevlex", [1, 3])
             sage: R.<x, y> = PolynomialRing(Qp(5), order=term_order)
             sage: (x + y).is_homogeneous()
@@ -1854,12 +1875,12 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
             <class 'sage.rings.polynomial.multi_polynomial_element.MPolynomial_polydict'>
         """
         # handle division by monomials without using Singular
-        if len(right.dict()) == 1:
+        if len(right.monomial_coefficients()) == 1:
             P = self.parent()
             ret = P(0)
-            denC,denM = next(iter(right))
-            for c,m in self:
-                t = c*m
+            denC, denM = next(iter(right))
+            for c, m in self:
+                t = c * m
                 if denC.divides(c) and P.monomial_divides(denM, m):
                     ret += P.monomial_quotient(t, right, coeff=True)
             return ret
@@ -1915,7 +1936,8 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         if index == -1:
             # var is not a generator; do term-by-term differentiation recursively
             # var may be, for example, a generator of the base ring
-            d = dict([(e, x._derivative(var)) for (e, x) in self.dict().items()])
+            d = {e: x._derivative(var)
+                 for e, x in self.monomial_coefficients().items()}
             d = polydict.PolyDict(d, check=False)
             d.remove_zeros()
             return MPolynomial_polydict(P, d)
@@ -2012,7 +2034,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
             # var is not a generator; do term-by-term integration recursively
             # var may be, for example, a generator of the base ring
             d = {e: x.integral(var)
-                 for e, x in self.dict().items()}
+                 for e, x in self.monomial_coefficients().items()}
             d = polydict.PolyDict(d, check=False)
             d.remove_zeros()
         else:
@@ -2073,6 +2095,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
 
         Check that the global proof flag for polynomials is honored::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y> = PolynomialRing(QQ['z'])
             sage: f = x^2 + y^2
             sage: with proof.WithProof('polynomial', True):
@@ -2262,14 +2285,14 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         R = self.parent()
         try:
             R._singular_().set_ring()
-        except TypeError:
+        except (TypeError, ImportError):
             f = self.parent().flattening_morphism()
             if f.domain() != f.codomain():
                 g = f.section()
                 q,r = f(self).quo_rem(f(right))
                 return g(q), g(r)
             else:
-                raise
+                raise TypeError
         else:
             X = self._singular_().division(right._singular_())
             return R(X[1][1,1]), R(X[2][1])
@@ -2479,6 +2502,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
                 r += plt
                 p -= plt
         return r
+
 
 ###############################################################
 # Useful for some geometry code.

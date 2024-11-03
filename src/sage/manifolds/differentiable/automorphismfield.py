@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Tangent-Space Automorphism Fields
 
@@ -27,6 +28,7 @@ AUTHORS:
 from sage.tensor.modules.free_module_automorphism import FreeModuleAutomorphism
 from sage.manifolds.differentiable.tensorfield import TensorField
 from sage.manifolds.differentiable.tensorfield_paral import TensorFieldParal
+
 
 class AutomorphismField(TensorField):
     r"""

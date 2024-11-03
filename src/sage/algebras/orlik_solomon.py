@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.modules
 r"""
 Orlik-Solomon Algebras
@@ -549,6 +550,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.geometry.polyhedron
             sage: OS = hyperplane_arrangements.braid(3).orlik_solomon_algebra(QQ)
             sage: gens = OS.algebra_generators()
             sage: AC = OS.aomoto_complex(gens[0])
@@ -561,7 +563,6 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
             {0: Vector space of dimension 0 over Rational Field,
              1: Vector space of dimension 0 over Rational Field,
              2: Vector space of dimension 0 over Rational Field}
-
             sage: AC = OS.aomoto_complex(-2*gens[0] + gens[1] + gens[2]); ascii_art(AC)
                                          [ 1]
                         [-1 -1 -1]       [ 1]
@@ -574,6 +575,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
 
         TESTS::
 
+            sage: # needs sage.geometry.polyhedron
             sage: OS = hyperplane_arrangements.braid(4).orlik_solomon_algebra(QQ)
             sage: gens = OS.algebra_generators()
             sage: OS.aomoto_complex(gens[0] * gens[1] * gens[3])

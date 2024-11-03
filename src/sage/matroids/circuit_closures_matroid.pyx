@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Circuit closures matroids
 
@@ -524,6 +525,7 @@ cdef class CircuitClosuresMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.circuit_closures_matroid import CircuitClosuresMatroid
             sage: M = CircuitClosuresMatroid(matroids.catalog.RelaxedNonFano())
             sage: sorted(M.groundset())
@@ -537,6 +539,7 @@ cdef class CircuitClosuresMatroid(Matroid):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.circuit_closures_matroid import CircuitClosuresMatroid
             sage: M = CircuitClosuresMatroid(matroids.catalog.RelaxedNonFano())
             sage: f = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g'}

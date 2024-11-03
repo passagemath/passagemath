@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Catalog of common polyhedral convex cones
 
@@ -71,6 +72,7 @@ individual functions and the references therein.
 # show up in the cones.<tab> list, and that list should contain only
 # the top-level non-underscore functions defined in this module.
 #
+
 
 def _preprocess_args(ambient_dim, lattice):
     r"""

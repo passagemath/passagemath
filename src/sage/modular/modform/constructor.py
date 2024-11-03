@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.pari
 """
 Creating spaces of modular forms
@@ -19,15 +20,15 @@ EXAMPLES::
     ]
 """
 
-#*****************************************************************************
+# ****************************************************************************
 #       Copyright (C) 2004-2006 William Stein <wstein@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ****************************************************************************
 
 import weakref
 import re
@@ -94,13 +95,13 @@ def canonical_parameters(group, level, weight, base_ring):
         raise NotImplementedError("weight must be at least 1")
 
     if isinstance(group, dirichlet.DirichletCharacter):
-        if ( group.level() != Integer(level) ):
+        if group.level() != Integer(level):
             raise ValueError("group.level() and level do not match.")
         group = group.minimize_base_ring()
         level = Integer(level)
 
     elif isinstance(group, arithgroup.CongruenceSubgroupBase):
-        if ( Integer(level) != group.level() ):
+        if Integer(level) != group.level():
             raise ValueError("group.level() and level do not match.")
         # normalize the case of SL2Z
         if isinstance(group, arithgroup.SL2Z_class) or \
@@ -131,6 +132,7 @@ def canonical_parameters(group, level, weight, base_ring):
 
 
 _cache = {}
+
 
 def ModularForms_clear_cache():
     """

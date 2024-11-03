@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Algebra of Scalar Fields
 
@@ -37,6 +38,7 @@ from sage.categories.commutative_algebras import CommutativeAlgebras
 from sage.categories.topological_spaces import TopologicalSpaces
 from sage.symbolic.ring import SymbolicRing, SR
 from sage.manifolds.scalarfield import ScalarField
+
 
 class ScalarFieldAlgebra(UniqueRepresentation, Parent):
     r"""

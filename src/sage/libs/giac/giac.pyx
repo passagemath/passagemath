@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-giac
+# sage.doctest: needs sage.libs.giac
 # distutils: libraries = giac
 # distutils: language = c++
 # distutils: extra_compile_args = -std=c++11
@@ -65,6 +67,7 @@ Some settings of giac are available via the ``giacsettings`` element. (Ex:
 maximal number of threads in computations, allowing probabilistic algorithms or
 not...::
 
+    sage: # needs sage.libs.singular
     sage: R = PolynomialRing(QQ,8,'x')
     sage: I = sage.rings.ideal.Katsura(R,8)
     sage: giacsettings.proba_epsilon = 1e-15

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Topological Vector Bundle
 
@@ -40,6 +41,7 @@ from sage.rings.cc import CC
 from sage.rings.real_mpfr import RR
 from sage.rings.integer import Integer
 from sage.manifolds.vector_bundle_fiber import VectorBundleFiber
+
 
 class TopologicalVectorBundle(CategoryObject, UniqueRepresentation):
     r"""

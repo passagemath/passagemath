@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Points of Topological Manifolds
 
@@ -91,6 +92,7 @@ from sage.structure.element import Element
 from sage.misc.decorators import options
 from sage.symbolic.expression import Expression
 from sage.rings.integer_ring import ZZ
+
 
 class ManifoldPoint(Element):
     r"""
@@ -689,7 +691,7 @@ class ManifoldPoint(Element):
             diff = xs - xo
             period = periods[ind]
             if period is not None:
-                if not (diff/period in ZZ):
+                if diff/period not in ZZ:
                     return False
             else:
                 if isinstance(diff, Expression) and not diff.is_trivial_zero():

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 # sage.doctest: needs sage.graphs
 """
 Matching games
@@ -939,7 +940,7 @@ class MatchingGame(SageObject):
         return {key: self._sol_dict[key][0] for key in self._suitors}
 
 
-class Player():
+class Player:
     r"""
     A class to act as a data holder for the players used of the
     matching games.

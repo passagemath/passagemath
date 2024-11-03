@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.libs.pari sage.rings.number_field
 """
 Ideals of number fields
@@ -2161,7 +2162,7 @@ class NumberFieldFractionalIdeal(MultiplicativeGroupElement, NumberFieldIdeal, I
 
         R = self.number_field().maximal_order()
 
-        if not (f in R):
+        if f not in R:
             raise TypeError("reduce only defined for integral elements")
 
         Rbasis = R.basis()

@@ -81,7 +81,7 @@ def reproducible_repr(val):
         frozenset(['a', 'b', 'c', 'd'])
         sage: print(reproducible_repr([1, frozenset("cab"), set("bar"), 0]))
         [1, frozenset(['a', 'b', 'c']), set(['a', 'b', 'r']), 0]
-        sage: print(reproducible_repr({3.0: "three", "2": "two", 1: "one"}))            # optional - sage.rings.real_mpfr
+        sage: print(reproducible_repr({3.0: "three", "2": "two", 1: "one"}))            # needs sage.rings.real_mpfr
         {'2': 'two', 1: 'one', 3.00000000000000: 'three'}
         sage: print(reproducible_repr("foo\nbar"))  # demonstrate default case
         'foo\nbar'
@@ -112,7 +112,7 @@ def reproducible_repr(val):
     return repr(val)
 
 
-class AttributeAccessTracerHelper():
+class AttributeAccessTracerHelper:
 
     def __init__(self, delegate, prefix="  ", reads=True):
         r"""
@@ -223,7 +223,7 @@ class AttributeAccessTracerHelper():
         setattr(self.delegate, name, val)
 
 
-class AttributeAccessTracerProxy():
+class AttributeAccessTracerProxy:
 
     def __init__(self, delegate, **kwds):
         r"""

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Weyl Algebras
@@ -786,7 +787,7 @@ class DifferentialWeylAlgebra(UniqueRepresentation, Parent):
             return self.element_class(self, {i: R(c) for i, c in x if R(c) != zero})
         x = self._poly_ring(x)
         return self.element_class(self, {(tuple(m), t): c
-                                         for m, c in x.dict().items()})
+                                         for m, c in x.monomial_coefficients().items()})
 
     def _coerce_map_from_(self, R):
         """

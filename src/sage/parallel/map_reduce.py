@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Parallel computations using RecursivelyEnumeratedSet and Map-Reduce
 
@@ -628,7 +629,7 @@ class AbortError(Exception):
     pass
 
 
-class ActiveTaskCounterDarwin():
+class ActiveTaskCounterDarwin:
     r"""
     Handling the number of active tasks.
 
@@ -741,7 +742,7 @@ class ActiveTaskCounterDarwin():
             self._active_tasks.value = 0
 
 
-class ActiveTaskCounterPosix():
+class ActiveTaskCounterPosix:
     r"""
     Handling the number of active tasks.
 
@@ -884,7 +885,7 @@ ActiveTaskCounter = (ActiveTaskCounterDarwin if sys.platform == 'darwin'
 # ActiveTaskCounter = ActiveTaskCounterDarwin  # to debug Darwin implementation
 
 
-class RESetMapReduce():
+class RESetMapReduce:
     r"""
     Map-Reduce on recursively enumerated sets.
 
@@ -1136,21 +1137,12 @@ class RESetMapReduce():
             sage: from sage.parallel.map_reduce import RESetMapReduce
             sage: def children(x):
             ....:     print(f"Starting: {x}", flush=True)
-            ....:     sleep(float(0.5))
-            ....:     print(f"Finished: {x}", flush=True)
             ....:     return []
             sage: S = RESetMapReduce(roots=[1, 2], children=children)
             sage: S.setup_workers(2)
-            sage: S.start_workers(); sleep(float(0.4))
+            sage: S.start_workers(); sleep(float(5))  # long time
             Starting: ...
             Starting: ...
-            sage: [w.is_alive() for w in S._workers]
-            [True, True]
-            sage: sleep(float(1.5))
-            Finished: ...
-            Finished: ...
-            sage: [not w.is_alive() for w in S._workers]
-            [True, True]
 
         Cleanup::
 

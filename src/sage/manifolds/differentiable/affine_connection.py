@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Affine Connections
 
@@ -34,6 +35,7 @@ from sage.misc.cachefunc import cached_method
 from sage.manifolds.differentiable.manifold import DifferentiableManifold
 from sage.parallel.decorate import parallel
 from sage.parallel.parallelism import Parallelism
+
 
 class AffineConnection(SageObject):
     r"""

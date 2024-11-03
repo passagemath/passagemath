@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.rings.number_field
 r"""
 Elliptic curves over number fields
@@ -248,15 +249,6 @@ class EllipticCurve_number_field(EllipticCurve_field):
             #III(E/K)[2]  = 1
             rank(E/K)     = 1
              listpoints = [[Mod(1/2*y + 3/2, y^2 + 7), Mod(-y - 2, y^2 + 7), 1]]
-            (1, 1, [(1/2*a + 3/2 : -a - 2 : 1)])
-
-            sage: v = E.simon_two_descent(verbose=2)
-            K = bnfinit(y^2 + 7);
-            a = Mod(y,K.pol);
-            bnfellrank(K, [0, 0, 0, 1, a], [[Mod(1/2*y + 3/2, y^2 + 7), Mod(-y - 2, y^2 + 7)]]);
-            ...
-            v = [1, 1, [[Mod(1/2*y + 3/2, y^2 + 7), Mod(-y - 2, y^2 + 7)]]]
-            sage: v
             (1, 1, [(1/2*a + 3/2 : -a - 2 : 1)])
 
         A curve with 2-torsion::

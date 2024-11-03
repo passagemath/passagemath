@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Power Series Methods
 
@@ -794,7 +795,7 @@ cdef class PowerSeries_poly(PowerSeries):
         """
         return self.__f.list()
 
-    def dict(self):
+    def monomial_coefficients(self):
         """
         Return a dictionary of coefficients for ``self``.
 
@@ -806,10 +807,17 @@ cdef class PowerSeries_poly(PowerSeries):
 
             sage: R.<t> = ZZ[[]]
             sage: f = 1 + t^10 + O(t^12)
+            sage: f.monomial_coefficients()
+            {0: 1, 10: 1}
+
+        ``dict`` is an alias::
+
             sage: f.dict()
             {0: 1, 10: 1}
         """
-        return self.__f.dict()
+        return self.__f.monomial_coefficients()
+
+    dict = monomial_coefficients
 
     def _derivative(self, var=None):
         """
@@ -1073,7 +1081,7 @@ cdef class PowerSeries_poly(PowerSeries):
             f2 = f.__pari__()
             g = f2.serreverse()
             return PowerSeries_poly(f.parent(), g.Vec(-out_prec), out_prec)
-        except (TypeError,ValueError,AttributeError,PariError):
+        except (TypeError, ValueError, AttributeError, PariError, ImportError):
             # if pari fails, continue with Lagrange inversion
             from sage.misc.verbose import verbose
             verbose("passing to pari failed; trying Lagrange inversion")

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Domination
 
@@ -360,7 +361,7 @@ def dominating_sets(g, k=1, independent=False, total=False, connected=False,
     Subgraph induced by the dominating set is connected::
 
         sage: G = graphs.PetersenGraph()
-        sage: all(G.subgraph(vertices=dom).is_connected()
+        sage: all(G.subgraph(vertices=dom).is_connected()                               # needs sage.numerical.mip
         ....:     for dom in G.dominating_set(k=1, connected=True))
         True
 
@@ -1324,7 +1325,7 @@ def maximum_leaf_number(G, solver=None, verbose=0, integrality_tolerance=1e-3):
     Petersen graph::
 
         sage: G = graphs.PetersenGraph()
-        sage: G.maximum_leaf_number()
+        sage: G.maximum_leaf_number()                                                   # needs sage.numerical.mip
         6
 
     TESTS:

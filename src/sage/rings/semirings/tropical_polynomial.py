@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-categories
+# sage.doctest: needs sage.symbolic
 r"""
 Univariate Tropical Polynomials
 
@@ -126,7 +128,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
 
         sage: p1.piecewise_function()
         piecewise(x|-->1 on (-oo, -3], x|-->x + 4 on (-3, 2), x|-->3*x on [2, +oo); x)
-        sage: p1.plot()
+        sage: p1.plot()                                                                 # needs sage.plot
         Graphics object consisting of 1 graphics primitive
 
     .. PLOT::
@@ -141,7 +143,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
 
         sage: p2.piecewise_function()
         piecewise(x|-->3 on (-oo, 1], x|-->2*x + 1 on (1, +oo); x)
-        sage: p2.plot()
+        sage: p2.plot()                                                                 # needs sage.plot
         Graphics object consisting of 1 graphics primitive
 
     .. PLOT::
@@ -207,7 +209,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
         """
         from itertools import combinations
         tropical_roots = []
-        data = self.dict()
+        data = self.monomial_coefficients()
         R = self.parent().base()
         if len(data) == 1:
             exponent = next(iter(data))
@@ -279,7 +281,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
         """
         roots = self.roots()
         R = self.parent()
-        poly = R(self.dict()[self.degree()].lift())
+        poly = R(self.monomial_coefficients()[self.degree()].lift())
         for root in roots:
             linear = R([root, 0])
             poly *= linear
@@ -321,7 +323,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
             (3) * 0
         """
         from sage.structure.factorization import Factorization
-        unit = self.dict()[self.degree()]
+        unit = self.monomial_coefficients()[self.degree()]
         if self != self.split_form() or not self.roots():
             factor = [(self * self.parent(-unit.lift()), 1)]
             return Factorization(factor, unit=unit)
@@ -374,7 +376,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
         from sage.sets.real_set import RealSet
 
         x = SR.var('x')
-        data = self.dict()
+        data = self.monomial_coefficients()
         R = self.parent().base()
         if not self.roots():
             f = data[0].lift()
@@ -463,7 +465,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
             3*x^3 + 1*x^2 + 2*x + 4
             sage: p1.roots()
             [1/3, 1/3, 1/3]
-            sage: p1.plot()
+            sage: p1.plot()                                                             # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -483,7 +485,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
             sage: p1 = R([4,2,1,3])
             sage: p1.roots()
             [-2, 1, 2]
-            sage: p1.plot()
+            sage: p1.plot()                                                             # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -499,14 +501,14 @@ class TropicalPolynomial(Polynomial_generic_sparse):
         If ``xmin`` or ``xmax`` is given as an input, then the others also
         have to be given. Otherwise it will raise an error::
 
-            sage: plot(p1, 5)
+            sage: plot(p1, 5)                                                           # needs sage.plot
             Traceback (most recent call last):
             ...
             ValueError: expected 2 inputs for xmin and xmax, but got 1
 
         Error also occured when ``xmin`` is greater or equal than``xmax``::
 
-            sage: plot(p1, 5, 3)
+            sage: plot(p1, 5, 3)                                                        # needs sage.plot
             Traceback (most recent call last):
             ...
             ValueError: xmin = 5 should be less than xmax = 3
@@ -527,7 +529,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
 
     def _repr_(self):
         r"""
-        Return a string represemtation of ``self``.
+        Return a string representation of ``self``.
 
         EXAMPLES::
 
@@ -537,7 +539,7 @@ class TropicalPolynomial(Polynomial_generic_sparse):
             (-1)*x^3 + 2*x^2 + (-1)*x + (-3)
         """
         import re
-        if not self.dict():
+        if not self.monomial_coefficients():
             return str(self.parent().base().zero())
 
         def replace_negatives(expr):
@@ -844,7 +846,7 @@ class TropicalPolynomialSemiring(UniqueRepresentation, Parent):
         from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
         R = PolynomialRing(self.base().base_ring(), self.variable_names())
         f = R.random_element(degree=degree, monic=monic, *args, **kwds)
-        new_dict = f.dict()
+        new_dict = f.monomial_coefficients()
         if monic:
             new_dict[f.degree()] = 0
         return self.element_class(self, new_dict)
@@ -884,7 +886,7 @@ class TropicalPolynomialSemiring(UniqueRepresentation, Parent):
             sage: points = [(-2,-3),(1,3),(2,4)]
             sage: p1 = R.interpolation(points); p1
             1*x^2 + 2*x + 4
-            sage: p1.plot()
+            sage: p1.plot()                                                             # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -903,7 +905,7 @@ class TropicalPolynomialSemiring(UniqueRepresentation, Parent):
             sage: points = [(0,0),(1,1),(2,4)]
             sage: p1 = R.interpolation(points); p1
             (-2)*x^3 + (-1)*x^2 + 0*x + 0
-            sage: p1.plot()
+            sage: p1.plot()                                                             # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.flint sage.libs.pari
 """
 Base class for modular abelian varieties
@@ -2371,8 +2372,8 @@ class ModularAbelianVariety_abstract(Parent):
             from .constructor import AbelianVariety
             decomp = [AbelianVariety(f) for f in
                       self.newform_decomposition('a')]
-            return prod((s.frobenius_polynomial(p) for s in
-                         decomp))
+            return prod(s.frobenius_polynomial(p) for s in
+                         decomp)
         f = self.newform('a')
         Kf = f.base_ring()
         eps = f.character()

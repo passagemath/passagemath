@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-polyhedra
+ */
 #ifndef TRIANGULATION__H
 #define TRIANGULATION__H
 

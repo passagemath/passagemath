@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 # sage.doctest: needs sage.libs.linbox
 r"""
 Number fields
@@ -9343,6 +9344,41 @@ class NumberField_absolute(NumberField_generic):
               From: Number Field in a with defining polynomial x^3 - 2
               To:   Complex Field with 53 bits of precision
               Defn: a |--> 1.25992104989487
+            ]
+
+        Some more (possible and impossible) embeddings of cyclotomic fields::
+
+            sage: CyclotomicField(5).embeddings(QQbar)
+            [
+            Ring morphism:
+              From: Cyclotomic Field of order 5 and degree 4
+              To:   Algebraic Field
+              Defn: zeta5 |--> 0.3090169943749474? + 0.9510565162951536?*I,
+            Ring morphism:
+              From: Cyclotomic Field of order 5 and degree 4
+              To:   Algebraic Field
+              Defn: zeta5 |--> -0.8090169943749474? + 0.5877852522924731?*I,
+            Ring morphism:
+              From: Cyclotomic Field of order 5 and degree 4
+              To:   Algebraic Field
+              Defn: zeta5 |--> -0.8090169943749474? - 0.5877852522924731?*I,
+            Ring morphism:
+              From: Cyclotomic Field of order 5 and degree 4
+              To:   Algebraic Field
+              Defn: zeta5 |--> 0.3090169943749474? - 0.9510565162951536?*I
+            ]
+            sage: CyclotomicField(3).embeddings(CyclotomicField(7))
+            [ ]
+            sage: CyclotomicField(3).embeddings(CyclotomicField(6))
+            [
+            Ring morphism:
+              From: Cyclotomic Field of order 3 and degree 2
+              To:   Cyclotomic Field of order 6 and degree 2
+              Defn: zeta3 |--> zeta6 - 1,
+            Ring morphism:
+              From: Cyclotomic Field of order 3 and degree 2
+              To:   Cyclotomic Field of order 6 and degree 2
+              Defn: zeta3 |--> -zeta6
             ]
 
         Test that :issue:`15053` is fixed::

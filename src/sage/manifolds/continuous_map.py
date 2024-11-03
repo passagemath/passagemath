@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Continuous Maps Between Topological Manifolds
 
@@ -33,6 +34,7 @@ REFERENCES:
 
 from sage.categories.homset import Hom
 from sage.categories.morphism import Morphism
+
 
 class ContinuousMap(Morphism):
     r"""
@@ -1062,7 +1064,7 @@ class ContinuousMap(Morphism):
 
         EXAMPLES:
 
-        A simple reparamentrization::
+        A simple reparametrization::
 
             sage: R.<t> = manifolds.RealLine()
             sage: I = R.open_interval(0, 2*pi)

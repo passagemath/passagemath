@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.flint
 """
 Hecke operators on `q`-expansions
@@ -25,6 +26,7 @@ lazy_import('sage.rings.number_field.number_field', 'CyclotomicField')
 
 from sage.modular.dirichlet import DirichletGroup, DirichletCharacter
 from .element import ModularFormElement
+
 
 def hecke_operator_on_qexp(f, n, k, eps=None,
                            prec=None, check=True, _return_list=False):

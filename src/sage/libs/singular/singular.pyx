@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-singular
 """
 libSingular: Conversion Routines and Initialisation
 
@@ -1188,8 +1189,8 @@ cdef number *sa2si_transext_QQ(object elem, ring *_ring) noexcept:
     if nMapFuncPtr is NULL:
         raise RuntimeError("Failed to determine nMapFuncPtr")
 
-    numerdic = elem.numerator().dict()
-    denomdic = elem.denominator().dict()
+    numerdic = elem.numerator().monomial_coefficients()
+    denomdic = elem.denominator().monomial_coefficients()
 
     if numerdic and not isinstance(list(numerdic)[0], (tuple, ETuple)):
         numerdic = {(k,):b for k,b in numerdic.items()}
@@ -1303,8 +1304,8 @@ cdef number *sa2si_transext_FF(object elem, ring *_ring) noexcept:
     if nMapFuncPtr is NULL:
         raise RuntimeError("Failed to determine nMapFuncPtr")
 
-    numerdic = elem.numerator().dict()
-    denomdic = elem.denominator().dict()
+    numerdic = elem.numerator().monomial_coefficients()
+    denomdic = elem.denominator().monomial_coefficients()
 
     if numerdic and not isinstance(list(numerdic)[0], (tuple, ETuple)):
         numerdic = {(k,):b for k,b in numerdic.items()}

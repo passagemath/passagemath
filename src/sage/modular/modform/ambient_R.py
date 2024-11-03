@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.pari
 """
 Modular forms over a non-minimal base ring
@@ -15,6 +16,7 @@ from . import ambient
 from .cuspidal_submodule import CuspidalSubmodule_R
 from sage.rings.integer_ring import ZZ
 from sage.misc.cachefunc import cached_method
+
 
 class ModularFormsAmbient_R(ambient.ModularFormsAmbient):
     def __init__(self, M, base_ring):

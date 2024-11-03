@@ -1,4 +1,5 @@
-# sage.doctest: optional - sage.modules
+# sage_setup: distribution = sagemath-graphs
+# sage.doctest: needs sage.modules
 r"""
 Families of graphs derived from classical geometries over finite fields
 
@@ -1107,7 +1108,7 @@ def T2starGeneralizedQuadrangleGraph(q, dual=False, hyperoval=None, field=None, 
                 raise RuntimeError("incorrect hyperoval size")
             for L in Theta.blocks():
                 if set(L).issubset(Pi):
-                    if not len(HO.intersection(L)) in [0, 2]:
+                    if len(HO.intersection(L)) not in [0, 2]:
                         raise RuntimeError("incorrect hyperoval")
 
     L = [[y for y in z if y not in HO]

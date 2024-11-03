@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Undirected graphs
 
@@ -419,7 +420,7 @@ from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
 import sage.graphs.generic_graph_pyx as generic_graph_pyx
-from sage.graphs.generic_graph import GenericGraph
+from sage.graphs.generic_graph import GenericGraph, _weight_if_real, _weight_1
 from sage.graphs.independent_sets import IndependentSets
 from sage.misc.rest_index_of_methods import doc_index, gen_thematic_rest_table_index
 from sage.graphs.views import EdgesView
@@ -2993,13 +2994,9 @@ class Graph(GenericGraph):
             f_bounds = bounds
 
         if self.weighted():
-            from sage.rings.real_mpfr import RR
-
-            def weight(x):
-                return x if x in RR else 1
+            weight = _weight_if_real
         else:
-            def weight(x):
-                return 1
+            weight = _weight_1
 
         for v in self:
             minimum, maximum = f_bounds(v)
@@ -3190,14 +3187,11 @@ class Graph(GenericGraph):
                              "Please convert it to a Graph if you really mean it.")
 
         if use_edge_labels:
-            from sage.rings.real_mpfr import RR
-
             def weight(e):
                 l = self.edge_label(e)
-                return l if l in RR else 1
+                return _weight_if_real(l)
         else:
-            def weight(e):
-                return 1
+            weight = _weight_1
 
         from sage.numerical.mip import MixedIntegerLinearProgram
 
@@ -3977,11 +3971,11 @@ class Graph(GenericGraph):
 
         TESTS::
 
-            sage: Graph([]).chromatic_symmetric_function() == 1
+            sage: Graph([]).chromatic_symmetric_function() == 1                         # needs sage.combinat sage.modules
             True
 
-            sage: e = SymmetricFunctions(ZZ).e()
-            sage: e(graphs.CompleteGraph(5).chromatic_symmetric_function())
+            sage: e = SymmetricFunctions(ZZ).e()                                        # needs sage.combinat sage.modules
+            sage: e(graphs.CompleteGraph(5).chromatic_symmetric_function())             # needs sage.combinat sage.modules
             120*e[5]
         """
         from sage.combinat.sf.sf import SymmetricFunctions
@@ -4120,6 +4114,100 @@ class Graph(GenericGraph):
             if any(not self.is_independent_set(s) for s in sigma):
                 continue
             ret += M.term(sigma.to_composition(), t**asc(sigma))
+        return ret
+
+    @doc_index("Coloring")
+    def tutte_symmetric_function(self, R=None, t=None):
+        r"""
+        Return the Tutte symmetric function of ``self``.
+
+        Let `G` be a graph. The Tutte symmetric function `XB_G` of the graph
+        `G` was introduced in [Sta1998]_. We present the equivalent definition
+        given in [CS2022]_.
+
+        .. MATH::
+
+            XB_G = \sum_{\pi \vdash V} (1+t)^{e(\pi)} \tilde{m}_{\lambda(\pi)},
+
+        where the sum ranges over all set-partitions `\pi` of the vertex set
+        `V`, `\lambda(\pi)` is the partition determined by the sizes of the
+        blocks of `\pi`, and `e(\pi)` is the number of edges whose endpoints
+        lie in the same block of `\pi`. In particular, the coefficients of
+        `XB_G` when expanded in terms of augmented monomial symmetric functions
+        are polynomials in `t` with non-negative integer coefficients.
+
+        For an integer partition `\lambda = 1^{r_1}2^{r_2}\cdots` expressed in
+        the exponential notation, the augmented monomial symmetric function
+        is defined as
+
+        .. MATH::
+
+            \tilde{m}_{\lambda} = \left(\prod_{i} r_i! \right) m_{\lambda}.
+
+        INPUT:
+
+        - ``R`` -- (default: the parent of ``t``) the base ring for the symmetric
+          functions
+
+        - ``t`` -- (default: `t` in `\ZZ[t]`) the parameter `t`
+
+        EXAMPLES::
+
+            sage: p = SymmetricFunctions(ZZ).p()                                        # needs sage.combinat sage.modules
+            sage: G = Graph([[1,2],[2,3],[3,4],[4,1],[1,3]])
+            sage: XB_G = G.tutte_symmetric_function(); XB_G                             # needs sage.combinat sage.modules
+            24*m[1, 1, 1, 1] + (10*t+12)*m[2, 1, 1] + (4*t^2+10*t+6)*m[2, 2]
+             + (2*t^3+8*t^2+10*t+4)*m[3, 1]
+             + (t^5+5*t^4+10*t^3+10*t^2+5*t+1)*m[4]
+            sage: p(XB_G)                                                               # needs sage.combinat sage.modules
+            p[1, 1, 1, 1] + 5*t*p[2, 1, 1] + 2*t^2*p[2, 2]
+             + (2*t^3+8*t^2)*p[3, 1] + (t^5+5*t^4+8*t^3)*p[4]
+
+        Graphs are allowed to have multiedges and loops::
+
+            sage: G = Graph([[1,2],[2,3],[2,3]], multiedges = True)
+            sage: XB_G = G.tutte_symmetric_function(); XB_G                             # needs sage.combinat sage.modules
+            6*m[1, 1, 1] + (t^2+3*t+3)*m[2, 1] + (t^3+3*t^2+3*t+1)*m[3]
+
+        We check that at `t = -1`, we recover the usual chromatic symmetric
+        function::
+
+            sage: G = Graph([[1,2],[1,2],[2,3],[3,4],[4,5]], multiedges=True)
+            sage: XB_G = G.tutte_symmetric_function(t=-1); XB_G                         # needs sage.combinat sage.modules
+            120*m[1, 1, 1, 1, 1] + 36*m[2, 1, 1, 1] + 12*m[2, 2, 1]
+             + 2*m[3, 1, 1] + m[3, 2]
+            sage: X_G = G.chromatic_symmetric_function(); X_G                           # needs sage.combinat sage.modules
+            p[1, 1, 1, 1, 1] - 4*p[2, 1, 1, 1] + 3*p[2, 2, 1] + 3*p[3, 1, 1]
+             - 2*p[3, 2] - 2*p[4, 1] + p[5]
+            sage: XB_G == X_G                                                           # needs sage.combinat sage.modules
+            True
+        """
+        from sage.combinat.sf.sf import SymmetricFunctions
+        from sage.combinat.set_partition import SetPartitions
+        from sage.misc.misc_c import prod
+        from collections import Counter
+
+        if t is None:
+            t = ZZ['t'].gen()
+        if R is None:
+            R = t.parent()
+        m = SymmetricFunctions(R).m()
+        ret = m.zero()
+        V = self.vertices()
+        M = Counter(self.edge_iterator(labels=False))
+        fact = [1]
+        fact.extend(fact[-1] * i for i in range(1, len(V)+1))
+
+        def mono(pi):
+            arcs = 0
+            for s in pi:
+                for u in s:
+                    arcs += sum(M[(u, v)] for v in s if self.has_edge(u, v))
+            return arcs
+
+        for pi in SetPartitions(V):
+            pa = pi.to_partition()
+            ret += prod(fact[i] for i in pa.to_exp()) * m[pa] * (1+t)**mono(pi)
         return ret
 
     @doc_index("Algorithmically hard stuff")
@@ -4641,6 +4729,7 @@ class Graph(GenericGraph):
         Trying to find an induced minor isomorphic to `C_5` in a graph
         containing an induced `C_6`::
 
+            sage: # needs sage.numerical.mip
             sage: g = graphs.CycleGraph(6)
             sage: for i in range(randint(10, 30)):
             ....:     g.add_edge(randint(0, 5), g.add_vertex())
@@ -4656,6 +4745,7 @@ class Graph(GenericGraph):
         A graph `g` may have a minor isomorphic to a given graph `h` but no
         induced minor isomorphic to `h`::
 
+            sage: # needs sage.numerical.mip
             sage: g = Graph([(0, 1), (0, 2), (1, 2), (2, 3), (3, 4), (3, 5), (4, 5), (6, 5)])
             sage: h = Graph([(9, 10), (9, 11), (9, 12), (9, 13)])
             sage: l = g.minor(h, induced=False)
@@ -4667,6 +4757,7 @@ class Graph(GenericGraph):
         Checking that the returned induced minor is isomorphic to the given
         graph::
 
+            sage: # needs sage.numerical.mip
             sage: g = Graph([(0, 1), (0, 2), (1, 2), (2, 3), (3, 4), (3, 5), (4, 5), (6, 5)])
             sage: h = Graph([(7, 8), (8, 9), (9, 10), (10, 11)])
             sage: L = g.minor(h, induced=True)
@@ -8159,9 +8250,8 @@ class Graph(GenericGraph):
         #
         # If the same edge is added several times their capacities add up.
 
-        from sage.rings.real_mpfr import RR
         for uu, vv, capacity in edges:
-            capacity = capacity if capacity in RR else 1
+            capacity = _weight_if_real(capacity)
 
             # Assume uu is in gU
             if uu in V:
@@ -8954,7 +9044,7 @@ class Graph(GenericGraph):
               resistances
 
             * :meth:`effective_resistance` --
-              compuetes effective resistance for a single node pair
+              computes effective resistance for a single node pair
 
             * See :wikipedia:`Resistance_distance` for more details.
 
@@ -9596,7 +9686,10 @@ class Graph(GenericGraph):
     from sage.graphs.tutte_polynomial import tutte_polynomial
     from sage.graphs.lovasz_theta import lovasz_theta
     from sage.graphs.partial_cube import is_partial_cube
-    from sage.graphs.orientations import strong_orientations_iterator, random_orientation, acyclic_orientations
+    from sage.graphs.orientations import orient
+    from sage.graphs.orientations import strong_orientations_iterator
+    from sage.graphs.orientations import random_orientation
+    from sage.graphs.orientations import acyclic_orientations
     from sage.graphs.connectivity import bridges, cleave, spqr_tree
     from sage.graphs.connectivity import is_triconnected
     from sage.graphs.comparability import is_comparability
@@ -9646,6 +9739,7 @@ _additional_categories = {
     "is_permutation"            : "Graph properties",
     "tutte_polynomial"          : "Algorithmically hard stuff",
     "lovasz_theta"              : "Leftovers",
+    "orient" : "Connectivity, orientations, trees",
     "strong_orientations_iterator" : "Connectivity, orientations, trees",
     "random_orientation"        : "Connectivity, orientations, trees",
     "acyclic_orientations"      : "Connectivity, orientations, trees",

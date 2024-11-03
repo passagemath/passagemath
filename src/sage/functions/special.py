@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Miscellaneous special functions
 
@@ -312,7 +313,7 @@ class SphericalHarmonic(BuiltinFunction):
             res = res.substitute({sqrt(sin(theta)**2): sin(theta)})
             return res
 
-    def _evalf_(self, n, m, theta, phi, parent, **kwds):
+    def _evalf_(self, n, m, theta, phi, parent=None, **kwds):
         r"""
         TESTS::
 

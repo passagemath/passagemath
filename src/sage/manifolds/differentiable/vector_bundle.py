@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Differentiable Vector Bundles
 
@@ -36,6 +37,7 @@ from sage.manifolds.vector_bundle import TopologicalVectorBundle
 from sage.rings.infinity import infinity
 from sage.misc.superseded import deprecated_function_alias
 from sage.rings.rational_field import QQ
+
 
 class DifferentiableVectorBundle(TopologicalVectorBundle):
     r"""
@@ -332,6 +334,7 @@ class DifferentiableVectorBundle(TopologicalVectorBundle):
         return self._total_space
 
 # *****************************************************************************
+
 
 class TensorBundle(DifferentiableVectorBundle):
     r"""

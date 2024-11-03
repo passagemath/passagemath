@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 r"""
 Interface to GAP
 
@@ -216,10 +217,18 @@ WORKSPACE = gap_workspace_file()
 first_try = True
 
 if SAGE_GAP_COMMAND is None:
+    # Find GAP executable in GAP_ROOT_PATHS.
+    # This is how the executable is accessed in sagemath-gap as published to PyPI.
+    for dir in GAP_ROOT_PATHS.split(';'):
+        gap_executable = os.path.join(dir, 'gap')
+        if os.path.exists(gap_executable):
+            break
+    else:
+        gap_executable = 'gap'  # just find it in PATH
     # Passing -A allows us to use a minimal GAP installation without
     # producing errors at start-up. The files sage.g and sage.gaprc are
     # used to load any additional packages that may be available.
-    gap_cmd = f'gap -A -l "{GAP_ROOT_PATHS}"'
+    gap_cmd = f'{gap_executable} -A -l "{GAP_ROOT_PATHS}"'
     if SAGE_GAP_MEMORY is not None:
         gap_cmd += " -s " + SAGE_GAP_MEMORY + " -o " + SAGE_GAP_MEMORY
 else:

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 The matrix monoid `\Sigma_0(N)`.
 
@@ -105,6 +106,7 @@ class _default_adjuster(Sigma0ActionAdjuster):
             (1, 2, 3, 4)
         """
         return tuple(g.list())
+
 
 class Sigma0_factory(UniqueFactory):
     r"""

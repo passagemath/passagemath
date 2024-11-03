@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Vector Frames
 
@@ -1554,6 +1555,7 @@ class VectorFrame(FreeModuleBasis):
 
 #******************************************************************************
 
+
 class CoordCoFrame(CoFrame):
     r"""
     Coordinate coframe on a differentiable manifold.
@@ -1666,6 +1668,7 @@ class CoordCoFrame(CoFrame):
         return "Coordinate coframe " + self._name
 
 #******************************************************************************
+
 
 class CoordFrame(VectorFrame):
     r"""

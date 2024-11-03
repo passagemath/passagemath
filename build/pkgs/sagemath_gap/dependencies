@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-gap/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-gap/MANIFEST.in $(PYTHON) sagemath_environment sagemath_categories sagemath_modules gap | $(PYTHON_TOOLCHAIN) sage_setup cython pkgconfig

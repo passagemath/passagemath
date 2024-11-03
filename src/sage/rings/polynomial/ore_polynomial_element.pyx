@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.combinat
 r"""
 Univariate Ore polynomials
@@ -2481,7 +2482,7 @@ cdef class OrePolynomial_generic_dense(OrePolynomial):
         else:
             return (<OrePolynomial_generic_dense>self)._coeffs
 
-    cpdef dict dict(self):
+    cpdef dict monomial_coefficients(self):
         r"""
         Return a dictionary representation of ``self``.
 
@@ -2491,6 +2492,11 @@ cdef class OrePolynomial_generic_dense(OrePolynomial):
             sage: sigma = R.hom([t+1])
             sage: S.<x> = R['x',sigma]
             sage: a = x^2012 + t*x^1006 + t^3 + 2*t
+            sage: a.monomial_coefficients()
+            {0: t^3 + 2*t, 1006: t, 2012: 1}
+
+        ``dict`` is an alias::
+
             sage: a.dict()
             {0: t^3 + 2*t, 1006: t, 2012: 1}
         """
@@ -2502,6 +2508,8 @@ cdef class OrePolynomial_generic_dense(OrePolynomial):
             if c:
                 X[i] = c
         return X
+
+    dict = monomial_coefficients
 
     cpdef Integer degree(self):
         r"""

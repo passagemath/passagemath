@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Degenerate manifolds
 """
@@ -21,6 +22,7 @@ if TYPE_CHECKING:
     from sage.manifolds.differentiable.metric import DegenerateMetric
 
 ###############################################################################
+
 
 class DegenerateManifold(DifferentiableManifold):
     r"""
@@ -369,6 +371,7 @@ class DegenerateManifold(DifferentiableManifold):
 
 from sage.manifolds.differentiable.tensorfield_paral import TensorFieldParal
 from sage.manifolds.differentiable.tensorfield import TensorField
+
 
 class TangentTensor(TensorFieldParal):
     r"""

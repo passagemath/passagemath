@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 # pylint: disable=missing-function-docstring
 from _pytest.fixtures import FixtureRequest
 import pytest
@@ -157,6 +158,7 @@ class TestCoherenceOfFormulas:
         a = M.one_form(1,2)
         b = M.one_form(3,4)
         assert omega.on_forms(a, b) == omega(a.up(omega), b.up(omega))
+
 
 def generic_scalar_field(M: DifferentiableManifold, name: str) -> DiffScalarField:
     chart_functions = {chart: function(name)(*chart[:]) for chart in M.atlas()}
