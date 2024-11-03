@@ -367,6 +367,7 @@ cdef class IndexedFreeModuleElement(ModuleElement):
         We can get the ascii art when there is no ``one_basis`` method
         (and the basis keys do not compare with ``None``)::
 
+            sage: # needs sage.groups
             sage: DC3 = groups.permutation.DiCyclic(3)
             sage: L = DC3.regular_representation(QQ, side='left')
             sage: E2 = L.exterior_power(2)
@@ -462,6 +463,7 @@ cdef class IndexedFreeModuleElement(ModuleElement):
         We can get the unicode art when there is no ``one_basis`` method
         (and the basis keys do not compare with ``None``)::
 
+            sage: # needs sage.groups
             sage: DC3 = groups.permutation.DiCyclic(3)
             sage: L = DC3.regular_representation(QQ, side='left')
             sage: E2 = L.exterior_power(2)
@@ -1002,6 +1004,7 @@ cdef class IndexedFreeModuleElement(ModuleElement):
             ...
             TypeError: unsupported operand type(s) for /: 'str' and 'CombinatorialFreeModule_with_category.element_class'
 
+            sage: # needs sage.combinat
             sage: L = LazyPowerSeriesRing(QQ, 't')
             sage: t = L.gen()
             sage: F = algebras.Free(L, ['A', 'B'])

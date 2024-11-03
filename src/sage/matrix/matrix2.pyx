@@ -771,7 +771,7 @@ cdef class Matrix(Matrix1):
 
             sage: A = matrix(ZZ, [[1, 2, 3], [2, 0, 2], [3, 2, 5]])
             sage: b = vector(RDF, [1, 1, 1])
-            sage: A.solve_right(b) == A.change_ring(RDF).solve_right(b)
+            sage: A.solve_right(b) == A.change_ring(RDF).solve_right(b)                 # needs scipy
             ...
             True
 
@@ -1730,7 +1730,7 @@ cdef class Matrix(Matrix1):
             sage: (Mx * M).norm()  # huge error                                         # needs scipy
             11.5...
             sage: Mx = M.pseudoinverse(algorithm='numpy')                               # needs numpy
-            sage: (Mx * M).norm()  # still OK
+            sage: (Mx * M).norm()  # still OK                                           # needs scipy
             1.00...
 
         When multiplying the given matrix with the pseudoinverse, the
@@ -7293,6 +7293,7 @@ cdef class Matrix(Matrix1):
         Running this test independently, without adjusting the eigenvectors
         could indicate this situation on your hardware.  ::
 
+            sage: # needs scipy
             sage: A = matrix(QQ, 3, 3, range(9))
             sage: em = A.change_ring(RDF).eigenmatrix_left()
             sage: evalues = em[0]; evalues.dense_matrix()  # abs tol 1e-13
