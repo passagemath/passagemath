@@ -379,7 +379,6 @@
         "ntests": 31
     },
     "sage.categories.finite_monoids": {
-        "failed": true,
         "ntests": 28
     },
     "sage.categories.finite_permutation_groups": {
@@ -957,11 +956,9 @@
         "ntests": 135
     },
     "sage.combinat.root_system.type_super_A": {
-        "failed": true,
         "ntests": 127
     },
     "sage.combinat.root_system.weight_lattice_realizations": {
-        "failed": true,
         "ntests": 135
     },
     "sage.combinat.root_system.weight_space": {
@@ -1399,7 +1396,6 @@
         "ntests": 54
     },
     "sage.groups.generic": {
-        "failed": true,
         "ntests": 120
     },
     "sage.groups.group": {
@@ -1539,7 +1535,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2064
+        "ntests": 2058
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
@@ -1746,7 +1742,6 @@
         "ntests": 32
     },
     "sage.misc.functional": {
-        "failed": true,
         "ntests": 296
     },
     "sage.misc.gperftools": {
@@ -1948,7 +1943,6 @@
         "ntests": 117
     },
     "sage.modules.filtered_vector_space": {
-        "failed": true,
         "ntests": 169
     },
     "sage.modules.free_module": {
@@ -1993,7 +1987,6 @@
         "ntests": 57
     },
     "sage.modules.multi_filtered_vector_space": {
-        "failed": true,
         "ntests": 122
     },
     "sage.modules.quotient_module": {
@@ -2038,12 +2031,11 @@
         "ntests": 78
     },
     "sage.modules.vector_space_morphism": {
-        "failed": true,
         "ntests": 151
     },
     "sage.modules.with_basis.indexed_element": {
         "failed": true,
-        "ntests": 179
+        "ntests": 166
     },
     "sage.modules.with_basis.morphism": {
         "ntests": 353
