@@ -31,18 +31,9 @@ AUTHORS:
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
-from sage.dynamics.complex_dynamics.mandel_julia_helper import (fast_mandelbrot_plot,
-                                                                fast_external_ray,
-                                                                convert_to_pixels,
-                                                                get_line,
-                                                                fast_julia_plot,
-                                                                general_julia,
-                                                                polynomial_mandelbrot,
-                                                                julia_helper)
-
 from sage.misc.lazy_import import lazy_import
 lazy_import("sage.plot.colors", "Color")
-from sage.repl.image import Image
+lazy_import("sage.repl.image", "Image")
 from sage.functions.log import logb
 from sage.functions.other import floor
 from sage.rings.rational_field import QQ
@@ -56,6 +47,16 @@ from sage.rings.fraction_field import FractionField_generic
 from sage.categories.function_fields import FunctionFields
 
 lazy_import('sage.dynamics.arithmetic_dynamics.generic_ds', 'DynamicalSystem')
+lazy_import('sage.dynamics.complex_dynamics.mandel_julia_helper', (
+    'fast_mandelbrot_plot',
+    'fast_external_ray',
+    'convert_to_pixels',
+    'get_line',
+    'fast_julia_plot',
+    'general_julia',
+    'polynomial_mandelbrot',
+    'julia_helper'
+))
 
 EPS = 0.00001
 
