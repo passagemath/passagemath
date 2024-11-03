@@ -24,6 +24,7 @@ graft sage/libs/symmetrica
 # included in sagemath-categories
 prune sage/combinat/integer_lists
 exclude sage/combinat/integer_vector.p*
+exclude sage/combinat/integer_vector_weighted.p*
 exclude sage/combinat/backtrack.p*
 exclude sage/combinat/combinat.p*
 exclude sage/combinat/combinat_cython.p*
