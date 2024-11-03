@@ -373,6 +373,7 @@ def cython_aliases(required_modules=None, optional_modules=None):
 
     EXAMPLES::
 
+        sage: # needs sage.misc.cython (actually just pkgconfig)
         sage: from sage.env import cython_aliases
         sage: cython_aliases()
         {...}
