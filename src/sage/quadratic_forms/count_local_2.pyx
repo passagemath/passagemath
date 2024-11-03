@@ -305,6 +305,7 @@ def count_all_local_good_types_normal_form(Q, p, k, m, zvec, nzvec):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.quadratic_forms.count_local_2 import count_all_local_good_types_normal_form
         sage: Q = DiagonalQuadraticForm(ZZ, [1,2,3])
         sage: Q_local_at2 = Q.local_normal_form(2)
