@@ -1522,8 +1522,9 @@ class HyperbolicGeodesicUHP(HyperbolicGeodesic):
 
         EXAMPLES::
 
-            sage: # needs scipy
             sage: UHP = HyperbolicPlane().UHP()
+
+            sage: # needs scipy
             sage: g = UHP.random_geodesic()
             sage: h = g.perpendicular_bisector().complete()
             sage: c = lambda x: x.coordinates()
@@ -1533,10 +1534,9 @@ class HyperbolicGeodesicUHP(HyperbolicGeodesic):
         ::
 
             sage: # needs scipy
-            sage: UHP = HyperbolicPlane().UHP()
-            sage: g = UHP.get_geodesic(1+I,2+0.5*I)
+            sage: g = UHP.get_geodesic(1 + I, 2 + 0.5*I)
             sage: h = g.perpendicular_bisector().complete()
-            sage: show(g.plot(color='blue')+h.plot(color='orange'))
+            sage: show(g.plot(color='blue') + h.plot(color='orange'))
 
         .. PLOT::
 

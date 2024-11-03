@@ -299,7 +299,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
             [4.0 5.0 6.0]
             [7.0 8.0 9.0]
 
-            sage: A.determinant() < 10e-12
+            sage: A.determinant() < 10e-12                                              # needs scipy
             True
 
         TESTS::
@@ -850,7 +850,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
 
         Bogus values of the ``eps`` keyword will be caught::
 
-            sage: A.singular_values(eps='junk')
+            sage: A.singular_values(eps='junk')                                         # needs scipy
             Traceback (most recent call last):
             ...
             ValueError: could not convert string to float: ...
@@ -1012,6 +1012,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
 
         The results are immutable since they are cached.  ::
 
+            sage: # needs scipy
             sage: P, L, U = matrix(RDF, 2, 2, range(4)).LU()
             sage: L[0,0] = 0
             Traceback (most recent call last):
@@ -1214,6 +1215,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
         In this generalized eigenvalue problem, the homogeneous coordinates
         explain the output obtained for the eigenvalues::
 
+            sage: # needs scipy
             sage: A = matrix.identity(RDF, 2)
             sage: B = matrix(RDF, [[3, 5], [6, 10]])
             sage: A.eigenvalues(B)  # tol 1e-14
@@ -2907,6 +2909,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
         A small matrix that does not fit into any of the usual categories
         of normal matrices.  ::
 
+            sage: # needs scipy
             sage: A = matrix(RDF, [[1, -1],
             ....:                  [1,  1]])
             sage: A.is_normal()

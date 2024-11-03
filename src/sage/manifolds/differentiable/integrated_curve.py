@@ -45,9 +45,9 @@ all possible options, including the choice of the numerical algorithm)::
 
 Plot the geodesic after interpolating the solution ``sol``::
 
-    sage: interp = c.interpolate()
+    sage: interp = c.interpolate()                                                      # needs scipy
 
-    sage: # needs sage.plot
+    sage: # needs scipy sage.plot
     sage: graph = c.plot_integrated()
     sage: p_plot = p.plot(size=30, label_offset=-0.07, fontsize=20)
     sage: v_plot = v.plot(label_offset=0.05, fontsize=20)
@@ -1544,7 +1544,7 @@ class IntegratedCurve(DifferentiableCurve):
 
         The interpolation is done as usual::
 
-            sage: interp = c.interpolate()
+            sage: interp = c.interpolate()                                              # needs scipy
 
         To plot the result, you must first be sure that the mapping
         encompasses all the chart, which is the case here.
@@ -1552,9 +1552,9 @@ class IntegratedCurve(DifferentiableCurve):
         :meth:`plot_integrated` again on each part.
         Finally, ``color`` can be a list, which will be cycled through::
 
-            sage: fig += c.plot_integrated(mapping=phi, color=["green","red"],          # needs sage.plot
+            sage: fig += c.plot_integrated(mapping=phi, color=["green","red"],          # needs scipy sage.plot
             ....: thickness=3, plot_points=100, across_charts=True)
-            sage: fig                                                                   # needs sage.plot
+            sage: fig                                                                   # needs scipy sage.plot
             Graphics object consisting of 43 graphics primitives
 
         .. PLOT::
@@ -1948,7 +1948,7 @@ class IntegratedCurve(DifferentiableCurve):
             ...
             ValueError: no existing key 'my solution' referring to any
              numerical solution
-            sage: interp = c.interpolate(solution_key='sol_T1',
+            sage: interp = c.interpolate(solution_key='sol_T1',                         # needs scipy
             ....:                        method='my method')
             Traceback (most recent call last):
             ...
@@ -3099,6 +3099,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Plot the resulting curves on the grid of polar coordinates lines on
     `\mathbb{S}^{2}`::
 
+        sage: # needs sage.plot
         sage: graph3D_embedded_curves = Graphics()
         sage: for key in dict_params:
         ....:     graph3D_embedded_curves += c.plot_integrated(interpolation_key='interp-'+key,

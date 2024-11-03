@@ -246,7 +246,8 @@ def extcode_dir(iface=None):
 
     EXAMPLES::
 
-        sage: sage.interfaces.magma.extcode_dir()
+        sage: from sage.interfaces.magma import extcode_dir
+        sage: extcode_dir()
         '...dir_.../data/'
     """
     global EXTCODE_DIR
@@ -2783,6 +2784,7 @@ class MagmaGBLogPrettyPrinter:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: P.<x,y,z> = GF(32003)[]
             sage: I = sage.rings.ideal.Cyclic(P)
             sage: _ = I.groebner_basis('magma',prot='sage') # indirect doctest, optional - magma, not tested
@@ -2792,6 +2794,7 @@ class MagmaGBLogPrettyPrinter:
 
             Highest degree reached during computation:  3.
 
+            sage: # needs sage.libs.singular
             sage: P.<x,y,z> = GF(32003)[]
             sage: I = sage.rings.ideal.Cyclic(P)
             sage: _ = I.groebner_basis('magma',prot=True) # indirect doctest, optional - magma, not tested
@@ -2852,6 +2855,7 @@ class MagmaGBLogPrettyPrinter:
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: P.<x,y,z> = GF(32003)[]
             sage: I = sage.rings.ideal.Katsura(P)
             sage: _ = I.groebner_basis('magma',prot=True) # indirect doctest, optional - magma
@@ -2988,6 +2992,7 @@ def magma_gb_standard_options(func):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.singular
         sage: P.<a,b,c,d,e> = PolynomialRing(GF(127))
         sage: J = sage.rings.ideal.Cyclic(P).homogenize()
         sage: from sage.misc.sageinspect import sage_getsource

@@ -778,7 +778,7 @@ cdef class Matrix(Matrix1):
         A degenerate case::
 
             sage: A = matrix(RDF, 0, 0, [])
-            sage: A.solve_right(vector(RDF,[]))
+            sage: A.solve_right(vector(RDF,[]))                                         # needs scipy
             ()
 
         Over an inexact ring like ``RDF``, the coefficient matrix of a
@@ -786,7 +786,7 @@ cdef class Matrix(Matrix1):
 
             sage: A = matrix(RDF, 5, range(25))
             sage: b = vector(RDF, [1,2,3,4,5])
-            sage: A.solve_right(b)
+            sage: A.solve_right(b)                                                      # needs scipy
             Traceback (most recent call last):
             ...
             LinAlgError: Matrix is singular.
@@ -795,7 +795,7 @@ cdef class Matrix(Matrix1):
 
             sage: A = matrix(RDF, 5, range(25))
             sage: b = vector(RDF, [1,2,3,4])
-            sage: A.solve_right(b)
+            sage: A.solve_right(b)                                                      # needs sage.rings.finite_rings
             Traceback (most recent call last):
             ...
             ValueError: number of rows of self must equal degree of
@@ -1768,7 +1768,7 @@ cdef class Matrix(Matrix1):
 
         Although it is not too far off::
 
-            sage: (~M - M.pseudoinverse(algorithm='numpy')).norm() < 1e-14              # needs numpy
+            sage: (~M - M.pseudoinverse(algorithm='numpy')).norm() < 1e-14              # needs scipy
             True
 
         TESTS::
@@ -7359,7 +7359,7 @@ cdef class Matrix(Matrix1):
 
         The following example shows that :issue:`12595` has been resolved::
 
-            sage: # needs sage.rings.complex_double
+            sage: # needs scipy sage.rings.complex_double
             sage: m = Matrix(CDF, 8, [[-1, -1, -1, -1, 1, -3, -1, -1],
             ....:                     [1, 1, 1, 1, -1, -1, 1, -3],
             ....:                     [-1, 3, -1, -1, 1, 1, -1, -1],
