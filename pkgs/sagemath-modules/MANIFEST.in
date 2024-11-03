@@ -143,6 +143,7 @@ include sage/algebras/algebra.py
 include sage/algebras/catalog.py
 graft sage/algebras/finite_dimensional_algebras  # for hyperplane arrangements
 include sage/algebras/group_algebra.py
+include sage/algebras/commutative_dga.p*
 include sage/algebras/finite_gca.p*
 
 graft sage/matrix

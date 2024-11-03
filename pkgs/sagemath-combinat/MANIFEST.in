@@ -71,6 +71,7 @@ prune sage/algebras/finite_dimensional_algebras
 exclude sage/algebras/group_algebra.py
 exclude sage/algebras/orlik_solomon.p*
 exclude sage/algebras/orlik_terao.p*
+exclude sage/algebras/commutative_dga.p*
 exclude sage/algebras/finite_gca.p*
 exclude sage/algebras/clifford_algebra*.p*
 exclude sage/algebras/exterior_algebra*.p*
