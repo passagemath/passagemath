@@ -1075,6 +1075,7 @@ class FreeModuleAutomorphism(FreeModuleTensor, MultiplicativeGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: M = FiniteRankFreeModule(QQ, 2, name='M')
             sage: e = M.basis('e')
             sage: a = M.automorphism([[1,1],[0,2]], name='a')
