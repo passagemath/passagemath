@@ -54,7 +54,7 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-giac[test]" IPython
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-giac[test]" ipython
 
     In [1]: from sage.all__sagemath_giac import *
 
