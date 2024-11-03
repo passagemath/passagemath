@@ -110,7 +110,7 @@ class FiniteGCAlgebra(CombinatorialFreeModule):
 
     We can also return the basis::
 
-        sage: list(A.basis())
+        sage: list(A.basis())                                                           # needs sage.combinat
         [1, x, z, y, t, x*z, x*y, x*t, z^2, y*z, y^2, z*t, y*t, x*z^2, x*y*z, x*y^2]
 
     Depending on the context, the multiplication can be given a different
@@ -186,6 +186,7 @@ class FiniteGCAlgebra(CombinatorialFreeModule):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: A.<x,y,z,t> = GradedCommutativeAlgebra(QQ, max_degree=6)
             sage: TestSuite(A).run()
             sage: A = GradedCommutativeAlgebra(QQ, ('x','y','z'), [2,3,4], max_degree=8)
