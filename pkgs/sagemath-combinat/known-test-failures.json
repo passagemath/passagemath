@@ -22,7 +22,6 @@
         "ntests": 14
     },
     "sage.algebras.quantum_groups.q_numbers": {
-        "failed": true,
         "ntests": 23
     },
     "sage.algebras.quantum_oscillator": {
@@ -805,7 +804,6 @@
         "ntests": 220
     },
     "sage.combinat.gray_codes": {
-        "failed": true,
         "ntests": 26
     },
     "sage.combinat.growth": {
@@ -849,11 +847,9 @@
         "ntests": 82
     },
     "sage.combinat.multiset_partition_into_sets_ordered": {
-        "failed": true,
         "ntests": 531
     },
     "sage.combinat.ncsf_qsym.combinatorics": {
-        "failed": true,
         "ntests": 31
     },
     "sage.combinat.necklace": {
@@ -971,7 +967,6 @@
         "ntests": 6
     },
     "sage.combinat.shuffle": {
-        "failed": true,
         "ntests": 134
     },
     "sage.combinat.sidon_sets": {
@@ -1196,6 +1191,19 @@
         "failed": true,
         "ntests": 972
     },
+    "sage.databases.findstat": {
+        "failed": true,
+        "ntests": 134
+    },
+    "sage.databases.oeis": {
+        "ntests": 125
+    },
+    "sage.databases.sloane": {
+        "ntests": 5
+    },
+    "sage.databases.sql_db": {
+        "ntests": 230
+    },
     "sage.doctest.check_tolerance": {
         "failed": true,
         "ntests": 19
@@ -1402,7 +1410,7 @@
         "ntests": 8
     },
     "sage.functions.airy": {
-        "ntests": 99
+        "ntests": 101
     },
     "sage.functions.bessel": {
         "ntests": 160
@@ -1414,7 +1422,6 @@
         "ntests": 154
     },
     "sage.functions.gamma": {
-        "failed": true,
         "ntests": 140
     },
     "sage.functions.generalized": {
@@ -1530,10 +1537,6 @@
     "sage.misc.banner": {
         "ntests": 12
     },
-    "sage.misc.benchmark": {
-        "failed": true,
-        "ntests": 18
-    },
     "sage.misc.binary_tree": {
         "ntests": 61
     },
@@ -1558,10 +1561,6 @@
     },
     "sage.misc.classcall_metaclass": {
         "ntests": 78
-    },
-    "sage.misc.classgraph": {
-        "failed": true,
-        "ntests": 8
     },
     "sage.misc.constant_function": {
         "ntests": 21
@@ -1685,7 +1684,7 @@
         "ntests": 22
     },
     "sage.misc.package_dir": {
-        "ntests": 29
+        "ntests": 32
     },
     "sage.misc.parser": {
         "ntests": 136
@@ -1735,7 +1734,6 @@
         "ntests": 88
     },
     "sage.misc.sagedoc": {
-        "failed": true,
         "ntests": 102
     },
     "sage.misc.sageinspect": {
@@ -1749,7 +1747,6 @@
         "ntests": 61
     },
     "sage.misc.sh": {
-        "failed": true,
         "ntests": 1
     },
     "sage.misc.stopgap": {
@@ -2275,8 +2272,17 @@
     "sage.rings.semirings.non_negative_integer_semiring": {
         "ntests": 16
     },
+    "sage.rings.semirings.tropical_mpolynomial": {
+        "ntests": 8
+    },
+    "sage.rings.semirings.tropical_polynomial": {
+        "ntests": 8
+    },
     "sage.rings.semirings.tropical_semiring": {
         "ntests": 120
+    },
+    "sage.rings.semirings.tropical_variety": {
+        "ntests": 8
     },
     "sage.rings.sum_of_squares": {
         "ntests": 35
