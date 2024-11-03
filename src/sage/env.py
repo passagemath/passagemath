@@ -231,6 +231,21 @@ PPLPY_DOCS = var("PPLPY_DOCS", join(SAGE_SHARE, "doc", "pplpy"))
 MAXIMA = var("MAXIMA", "maxima")
 MAXIMA_FAS = var("MAXIMA_FAS")
 KENZO_FAS = var("KENZO_FAS")
+try:
+    import ecl
+except ImportError:
+    pass
+else:
+    for p in ecl.__path__:
+        fas = os.path.join(p, 'maxima.fas')
+        if os.path.exists(fas):
+            MAXIMA_FAS = fas
+            break
+    for p in ecl.__path__:
+        fas = os.path.join(p, 'kenzo.fas')
+        if os.path.exists(fas):
+            KENZO_FAS = fas
+            break
 SAGE_NAUTY_BINS_PREFIX = var("SAGE_NAUTY_BINS_PREFIX", "")
 SAGE_ECMBIN = var("SAGE_ECMBIN", "ecm")
 RUBIKS_BINS_PREFIX = var("RUBIKS_BINS_PREFIX", "")
