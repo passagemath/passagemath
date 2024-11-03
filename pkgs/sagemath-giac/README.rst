@@ -67,3 +67,26 @@ A quick way to try it out interactively::
 
     In [5]: libgiac.det_minor(V).factor()
     Out[5]: (x[6]-(x[7]))*(x[5]-(x[7]))*(x[5]-(x[6]))*(x[4]-(x[7]))*(x[4]-(x[6]))*(x[4]-(x[5]))*(x[3]-(x[7]))*(x[3]-(x[6]))*(x[3]-(x[5]))*(x[3]-(x[4]))*(x[2]-(x[7]))*(x[2]-(x[6]))*(x[2]-(x[5]))*(x[2]-(x[4]))*(x[2]-(x[3]))*(x[1]-(x[7]))*(x[1]-(x[6]))*(x[1]-(x[5]))*(x[1]-(x[4]))*(x[1]-(x[3]))*(x[1]-(x[2]))*(x[0]-(x[7]))*(x[0]-(x[6]))*(x[0]-(x[5]))*(x[0]-(x[4]))*(x[0]-(x[3]))*(x[0]-(x[2]))*(x[0]-(x[1]))
+
+    In [6]: (x+5)**(1/3)        # note here 1/3 is done in Python before being sent to Giac
+    Out[6]: (x+5)^0.333333333333
+
+    In [7]: (x+5)**QQ('1/3')    # using Sage rationals
+    Out[7]: (x+5)^(1/3)
+
+    In [8]: from fractions import Fraction  # using Python rationals
+
+    In [9]: (x+5)**Fraction(1,3)
+    Out[9]: (x+5)^(1/3)
+
+The last example again, using the Sage REPL::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-giac[test]" sage
+    Warning: sage.all is not available; this is a limited REPL.
+
+    sage: from sage.all__sagemath_giac import *
+
+    sage: x = libgiac('x')
+
+    sage: (x+5)^(1/3)           # the Sage preparser translates this to (x+5)**QQ('1/3')
+    (x+5)^(1/3)
