@@ -1106,12 +1106,10 @@
         "ntests": 166
     },
     "sage.dynamics.complex_dynamics.mandel_julia": {
-        "failed": true,
         "ntests": 25
     },
     "sage.env": {
-        "failed": true,
-        "ntests": 44
+        "ntests": 39
     },
     "sage.ext.fast_callable": {
         "ntests": 236
@@ -1144,8 +1142,7 @@
         "ntests": 3
     },
     "sage.features.databases": {
-        "failed": true,
-        "ntests": 29
+        "ntests": 28
     },
     "sage.features.dvipng": {
         "ntests": 4
@@ -1338,8 +1335,7 @@
         "ntests": 133
     },
     "sage.geometry.hyperbolic_space.hyperbolic_geodesic": {
-        "failed": true,
-        "ntests": 400
+        "ntests": 401
     },
     "sage.geometry.hyperbolic_space.hyperbolic_interface": {
         "ntests": 25
@@ -1420,7 +1416,7 @@
     },
     "sage.groups.matrix_gps.matrix_group": {
         "failed": true,
-        "ntests": 49
+        "ntests": 47
     },
     "sage.groups.matrix_gps.named_group": {
         "ntests": 18
@@ -1475,7 +1471,6 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
-        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -1485,8 +1480,7 @@
         "ntests": 139
     },
     "sage.interfaces.magma": {
-        "failed": true,
-        "ntests": 92
+        "ntests": 83
     },
     "sage.interfaces.maple": {
         "ntests": 19
@@ -1745,7 +1739,7 @@
     },
     "sage.manifolds.differentiable.integrated_curve": {
         "failed": true,
-        "ntests": 337
+        "ntests": 330
     },
     "sage.manifolds.differentiable.levi_civita_connection": {
         "ntests": 115
@@ -1910,7 +1904,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 1939
+        "ntests": 1932
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 3
@@ -1926,7 +1920,7 @@
     },
     "sage.matrix.matrix_double_dense": {
         "failed": true,
-        "ntests": 164
+        "ntests": 150
     },
     "sage.matrix.matrix_double_sparse": {
         "ntests": 23
@@ -2271,7 +2265,7 @@
     },
     "sage.misc.session": {
         "failed": true,
-        "ntests": 61
+        "ntests": 59
     },
     "sage.misc.sh": {
         "ntests": 1
@@ -2574,10 +2568,6 @@
     },
     "sage.quadratic_forms.ternary_qf": {
         "ntests": 309
-    },
-    "sage.quivers.ar_quiver": {
-        "failed": true,
-        "ntests": 188
     },
     "sage.repl.attach": {
         "ntests": 135
@@ -3422,8 +3412,7 @@
         "ntests": 53
     },
     "sage.rings.valuation.valuation": {
-        "failed": true,
-        "ntests": 166
+        "ntests": 164
     },
     "sage.rings.valuation.valuation_space": {
         "ntests": 198
