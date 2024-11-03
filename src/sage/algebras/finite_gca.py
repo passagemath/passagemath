@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-combinat
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.modules
 r"""
 Finite dimensional graded commutative algebras
