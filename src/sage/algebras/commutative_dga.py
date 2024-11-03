@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-combinat
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Commutative Differential Graded Algebras
@@ -80,6 +80,7 @@ from sage.structure.sage_object import SageObject
 from sage.misc.cachefunc import cached_method
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
 from sage.misc.functional import is_odd, is_even
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.categories.chain_complexes import ChainComplexes
 from sage.categories.algebras import Algebras
@@ -87,7 +88,6 @@ from sage.categories.morphism import Morphism
 from sage.categories.modules import Modules
 from sage.categories.homset import Hom
 
-from sage.algebras.free_algebra import FreeAlgebra
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.combinat.free_module import CombinatorialFreeModule
 from sage.combinat.integer_vector_weighted import WeightedIntegerVectors
@@ -104,6 +104,8 @@ from sage.rings.quotient_ring_element import QuotientRingElement
 from sage.misc.cachefunc import cached_function
 
 import sage.interfaces.abc
+
+lazy_import('sage.algebras.free_algebra', 'FreeAlgebra')
 
 
 def sorting_keys(element):

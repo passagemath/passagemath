@@ -6,6 +6,7 @@ from sage.misc.lazy_import import lazy_import
 # Integer lists
 from sage.combinat.integer_lists import IntegerListsLex
 from sage.combinat.integer_vector import IntegerVectors
+lazy_import('sage.combinat.integer_vector_weighted', 'WeightedIntegerVectors')
 
 from sage.combinat.combinat import (CombinatorialObject,
                                     bell_number, bell_polynomial, bernoulli_polynomial,
