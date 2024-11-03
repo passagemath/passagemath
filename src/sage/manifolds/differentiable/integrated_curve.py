@@ -83,12 +83,12 @@ Plot the geodesic after interpolating the solution ``sol``::
 
 In particular, its value at `t=1` is::
 
-    sage: c(1)
+    sage: c(1)                                                                          # needs scipy
     Point on the 2-dimensional Riemannian manifold M
 
 which corresponds to the following `(x, y)` coordinates::
 
-    sage: X(c(1))  # abs tol 1e-12
+    sage: X(c(1))  # abs tol 1e-12                                                      # needs scipy
     (2.4784140715580136, 1.5141683866138937)
 
 AUTHORS:
@@ -3155,6 +3155,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Then, compute a curve such that both components of its initial
     tangent vectors are nonzero::
 
+        sage: # needs scipy
         sage: sol = c.solve(solution_key='sol-angle',
         ....:  parameters_values={tmin:0,tmax:2,th0:pi/4,ph0:0.1,v_th0:1,v_ph0:8})
         sage: interp = c.interpolate(solution_key='sol-angle',
@@ -3163,7 +3164,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Plot the resulting curve in the Mercator plane.
     This generates a straight line, as expected::
 
-        sage: c.plot_integrated(interpolation_key='interp-angle',
+        sage: c.plot_integrated(interpolation_key='interp-angle',                       # needs scipy sage.plot
         ....:         chart=mercator, thickness=1, display_tangent=True,
         ....:         scale=0.2, width_tangent=0.2)
         Graphics object consisting of 11 graphics primitives
