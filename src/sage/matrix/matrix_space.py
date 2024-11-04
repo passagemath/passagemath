@@ -2665,6 +2665,7 @@ class MatrixSpace(UniqueRepresentation, Parent):
         """
         return self.element_class(self, d, coerce=coerce)
 
+
 def dict_to_list(entries, nrows, ncols):
     r"""
     Given a dictionary of coordinate tuples, return the list given by

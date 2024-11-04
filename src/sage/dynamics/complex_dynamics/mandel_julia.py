@@ -60,6 +60,7 @@ lazy_import('sage.dynamics.complex_dynamics.mandel_julia_helper', (
 
 EPS = 0.00001
 
+
 def mandelbrot_plot(f=None, **kwds):
     r"""
     Plot of the Mandelbrot set for a one parameter family of polynomial maps.
@@ -500,6 +501,7 @@ def kneading_sequence(theta):
             y = 2*y - floor(2*y)
         KS_str = ''.join(KS) + '*'
     return KS_str
+
 
 def julia_plot(f=None, **kwds):
     r"""
