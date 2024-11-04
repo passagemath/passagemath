@@ -3202,6 +3202,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
 
     One may eventually plot such a curve on `\mathbb{S}^{2}`::
 
+        sage: # needs scipy sage.plot
         sage: graph3D_embedded_angle_curve=c.plot_integrated(interpolation_key='interp-angle',
         ....:        mapping=euclid_embedding, thickness=5,
         ....:        display_tangent=True, scale=0.1, width_tangent=0.5)
