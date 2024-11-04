@@ -2,6 +2,7 @@ prune sage
 
 include VERSION.txt
 
+include sage/libs/msolve.p*
 include sage/rings/polynomial/msolve.p*
 
 global-exclude *.c

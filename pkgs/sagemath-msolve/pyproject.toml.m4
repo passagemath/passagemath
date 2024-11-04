@@ -18,6 +18,10 @@ name = "passagemath-msolve"
 description = "passagemath: Polynomial system solving through algebraic methods with msolve"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
+    SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_flint          dnl for sage.rings.{real_arb,real_mpfi}
+    SPKG_INSTALL_REQUIRES_sagemath_modules        dnl for sage.rings.real_mpfr
+    SPKG_INSTALL_REQUIRES_sagemath_repl           dnl for sage_eval
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -28,8 +32,6 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-     SPKG_INSTALL_REQUIRES_sagemath_categories
-     SPKG_INSTALL_REQUIRES_sagemath_repl
 ]
 
 [tool.setuptools]
