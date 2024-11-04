@@ -2,6 +2,10 @@ dnl Standard metadata of SageMath distribution packages
 dnl
 license = {text = "GNU General Public License (GPL) v2 or later"}
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
+maintainers = [
+    {name = "Matthias Köppe"},
+    {name = "passagemath contributors"},
+]
 classifiers = [
     "Development Status :: 6 - Mature",
     "Intended Audience :: Education",
