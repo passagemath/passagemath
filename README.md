@@ -87,8 +87,13 @@ To install the latest development version instead, add the switch `--pre` to all
 Modularized distributions
 -------------------------
 
-The passagemath library is provided by a number of distributions (pip-installable packages).
+passagemath provides the Sage library in a number of distributions (pip-installable packages) that can be installed separately.
 
+Authors of packages that depend on the Sage library can declare dependencies on these distributions. The benefit for users of the package: There is no longer a need to first install Sage. Instead, the parts of the Sage library that are needed by the package are automatically installed. Thus, the package becomes first-class member of the Python ecosystem.
+
+- [sage-numerical-interactive-mip](https://github.com/passagemath/sage-numerical-interactive-mip) is an example of a pure Python package that [declares dependencies](https://github.com/passagemath/sage-numerical-interactive-mip/blob/master/pyproject.toml) on four distributions: passagemath-polyhedra, passagemath-plot, passagemath-repl, and passagemath-flint.
+
+Here is an overview of the available distribution packages.
 
 ### Distributions named after a basic mathematical structure
 
@@ -159,8 +164,6 @@ Table of Contents
 * [\[macOS\] Preparing the Platform](#macos-preparing-the-platform)
 * [Instructions to Build from Source](#instructions-to-build-from-source)
 * [SageMath Docker Images](#sagemath-docker-images)
-* [Troubleshooting](#troubleshooting)
-* [Contributing to Sage](#contributing-to-sage)
 * [Directory Layout](#directory-layout)
 * [Build System](#build-system)
 * [Relocation](#relocation)
@@ -174,7 +177,8 @@ Getting Started
 Those who are impatient may use prebuilt Sage available online from any of
 
 <!-- [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sagemath/sage-binder-env/master
-) &nbsp; --->[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/passagemath/passagemath/tree/main
+) &nbsp; --->
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/passagemath/passagemath/tree/main
 ) &nbsp; [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-black?logo=github)](https://codespaces.new/passagemath/passagemath/tree/main)
 
 without local installation. Otherwise read on.
