@@ -2333,7 +2333,7 @@ class GenericGraph(GenericGraph_pyx):
             Traceback (most recent call last):
             ...
             TypeError: Vertex labels are not comparable. You must specify an ordering using parameter 'vertices'
-            sage: Graph ([[0, 42, 'John'], [(42, 'John')]]).adjacency_matrix(vertices=['John', 42, 0])
+            sage: Graph ([[0, 42, 'John'], [(42, 'John')]]).adjacency_matrix(vertices=['John', 42, 0])  # needs sage.modules
             [0 1 0]
             [1 0 0]
             [0 0 0]

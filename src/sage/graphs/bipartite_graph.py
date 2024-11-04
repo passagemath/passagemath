@@ -2638,6 +2638,7 @@ class BipartiteGraph(Graph):
 
         Check that :issue:`38832` is fixed::
 
+            sage: # needs sage.modules
             sage: B = BipartiteGraph(matrix([[1, 1], [1, 1]]))
             sage: B.canonical_label()
             Bipartite graph on 4 vertices
