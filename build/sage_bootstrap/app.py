@@ -446,9 +446,9 @@ class Application(object):
                     tarball = pypi_version.tarball.replace(pypi_version.version, 'VERSION')
                 if not version:
                     version = pypi_version.version
-                # Use a URL from pypi.io instead of the specific URL received from the PyPI query
+                # Use a URL from files.pythonhosted.org instead of the specific URL received from the PyPI query
                 # because it follows a simple pattern.
-                upstream_url = 'https://pypi.io/packages/source/{0:1.1}/{0}/{1}'.format(package_name, tarball)
+                upstream_url = 'https://files.pythonhosted.org/packages/source/{0:1.1}/{0}/{1}'.format(package_name, tarball)
             elif source == 'wheel':
                 if not version:
                     version = pypi_version.version
