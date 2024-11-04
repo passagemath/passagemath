@@ -2991,18 +2991,18 @@ class RealChart(Chart):
         Note that the default values of some arguments of the method ``plot``
         are stored in the dictionary ``plot.options``::
 
-            sage: X.plot.options  # random (dictionary output)
+            sage: X.plot.options  # random (dictionary output)                          # needs sage.plot
             {'color': 'red', 'label_axes': True, 'max_range': 8,
              'plot_points': 75, 'style': '-', 'thickness': 1}
 
         so that they can be adjusted by the user::
 
-            sage: X.plot.options['color'] = 'blue'
+            sage: X.plot.options['color'] = 'blue'                                      # needs sage.plot
 
         From now on, all chart plots will use blue as the default color.
         To restore the original default options, it suffices to type::
 
-            sage: X.plot.reset()
+            sage: X.plot.reset()                                                        # needs sage.plot
         """
         from sage.misc.functional import numerical_approx
         from sage.plot.graphics import Graphics
