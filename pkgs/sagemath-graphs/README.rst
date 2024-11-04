@@ -66,6 +66,37 @@ A quick way to try it out interactively::
     Out[7]: False
 
 
+Available as extras, from other distributions
+---------------------------------------------
+
+``pip install passagemath-graphs[networkx]`` additionally installs
+`NetworkX <https://networkx.github.io>`::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[networkx,test]" ipython
+    In [1]: from sage.all__sagemath_graphs import *
+
+    In [2]: ## Example depending on networkx goes here
+
+
+``pip install passagemath-graphs[igraph]`` additionally installs
+`igraph <https://python.igraph.org/en/stable/>`::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[igraph,test]" ipython
+    In [1]: from sage.all__sagemath_graphs import *
+
+    In [2]: ## Example depending on igraph goes here
+
+
+``pip install passagemath-graphs[mip]`` additionally makes the mixed-integer programming
+solver GLPK available::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[mip,test]" ipython
+    In [1]: from sage.all__sagemath_graphs import *
+
+    In [2]: ## Example depending on MIP goes here
+
+
+
 Development
 -----------
 
