@@ -336,6 +336,7 @@ def height_bound(polynomial):
 
     return (6*(L2norm_sq)**3)
 
+
 def PGL_repn(rational_function):
     r"""
     Take a linear fraction transformation and represent it as a 2x2 matrix.
@@ -365,6 +366,7 @@ def PGL_repn(rational_function):
         f = rational_function.numerator()
         g = rational_function.denominator()
         return matrix(F, 2, [f[1], f[0], g[1], g[0]])
+
 
 def PGL_order(A):
     r"""
@@ -402,6 +404,7 @@ def PGL_order(A):
         B = AA*B
 
     return n
+
 
 def CRT_helper(automorphisms, moduli):
     r"""
@@ -450,6 +453,7 @@ def CRT_helper(automorphisms, moduli):
 
     return autos, modulus*moduli[0]
 
+
 def CRT_automorphisms(automorphisms, order_elts, degree, moduli):
     r"""
     Compute a maximal list of automorphisms over `Zmod(M)`.
@@ -495,6 +499,7 @@ def CRT_automorphisms(automorphisms, order_elts, degree, moduli):
 
     # get list of CRT'ed automorphisms
     return CRT_helper(degree_d_autos, moduli)
+
 
 def valid_automorphisms(automorphisms_CRT, rational_function, ht_bound, M,
                         return_functions=False):
@@ -905,6 +910,7 @@ def automorphism_group_FF(rational_function, absolute=False, iso_type=False, ret
     else:
         return G, which_group(G[1])
 
+
 def field_descent(sigma, y):
     r"""
     Function for descending an element in a field `E` to a subfield `F`.
@@ -961,6 +967,7 @@ def field_descent(sigma, y):
             steps += 1
 
     return x + F(quotient)*a**(steps)
+
 
 def rational_function_coefficient_descent(rational_function, sigma, poly_ring):
     r"""
@@ -1060,6 +1067,7 @@ def rational_function_coerce(rational_function, sigma, S_polys):
     else:
         return S_polys([sigma(a) for a in f]) / S_polys([sigma(b) for b in g])
 
+
 def rational_function_reduce(rational_function):
     r"""
     Force Sage to divide out common factors in numerator and denominator
@@ -1084,6 +1092,7 @@ def rational_function_reduce(rational_function):
     G = phi.denominator()
     comm_factor = gcd(F,G)
     return (F.quo_rem(comm_factor)[0]) / (G.quo_rem(comm_factor)[0])
+
 
 def three_stable_points(rational_function, invariant_list):
     r"""
@@ -1157,6 +1166,7 @@ def three_stable_points(rational_function, invariant_list):
             if s(phi(z)) == phi(s(z)) and s not in automorphisms:
                 automorphisms.append(s)
     return automorphisms
+
 
 def automorphism_group_FF_alg2(rational_function):
     r"""
@@ -1456,6 +1466,7 @@ def order_p_automorphisms(rational_function, pre_image):
 
     return automorphisms_p
 
+
 def automorphisms_fixing_pair(rational_function, pair, quad):
     r"""
     Compute the set of automorphisms with order prime to the characteristic
@@ -1535,6 +1546,7 @@ def automorphisms_fixing_pair(rational_function, pair, quad):
                     automorphisms_prime_to_p.append(rational_function_reduce(s))
 
     return list(set(automorphisms_prime_to_p))
+
 
 def automorphism_group_FF_alg3(rational_function):
     r"""
@@ -2126,6 +2138,7 @@ def greedy_independence_check(P, repeated_mult, point_to_mult):
                 if len(source) == n+2:
                     return source, corresponding
 
+
 def conjugating_set_helper(f, g, num_cpus, source, possible_targets):
     r"""
     Return the set of elements in PGL over the base ring
@@ -2270,6 +2283,7 @@ def conjugating_set_helper(f, g, num_cpus, source, possible_targets):
     else:
         Conj = find_conjugations_subset(product(*subset_iterators))
     return Conj
+
 
 def is_conjugate_helper(f, g, num_cpus, source, possible_targets):
     r"""

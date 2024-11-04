@@ -1053,6 +1053,7 @@ class Polynomial_generic_sparse(Polynomial):
         """
         return len(self.__coeffs)
 
+
 class Polynomial_generic_domain(Polynomial, IntegralDomainElement):
     def __init__(self, parent, is_gen=False, construct=False):
         Polynomial.__init__(self, parent, is_gen=is_gen)
@@ -1085,6 +1086,7 @@ class Polynomial_generic_domain(Polynomial, IntegralDomainElement):
         if self.degree() > 0:
             return False
         return self[0].is_unit()
+
 
 class Polynomial_generic_field(Polynomial_singular_repr,
                                Polynomial_generic_domain,
@@ -1591,6 +1593,7 @@ class Polynomial_generic_cdv(Polynomial_generic_domain):
 
 class Polynomial_generic_dense_cdv(Polynomial_generic_dense_inexact, Polynomial_generic_cdv):
     pass
+
 
 class Polynomial_generic_sparse_cdv(Polynomial_generic_sparse, Polynomial_generic_cdv):
     pass

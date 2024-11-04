@@ -244,8 +244,8 @@ cdef class SemimonomialTransformation(MultiplicativeGroupElement):
             sage: SemimonomialTransformationGroup(F, 4).an_element()  # indirect doctest
             ((a, 1, 1, 1); (1,4,3,2), Ring endomorphism of Finite Field in a of size 3^2 Defn: a |--> 2*a + 1)
         """
-        return "(%s; %s, %s)"%(self.v, self.perm.cycle_string(),
-                               self.get_autom())
+        return "(%s; %s, %s)" % (self.v, self.perm.cycle_string(),
+                                 self.get_autom())
 
     cpdef _richcmp_(left, _right, int op):
         """

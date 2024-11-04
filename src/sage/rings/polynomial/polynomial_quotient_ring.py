@@ -263,6 +263,7 @@ class PolynomialQuotientRingFactory(UniqueFactory):
 
 PolynomialQuotientRing = PolynomialQuotientRingFactory("PolynomialQuotientRing")
 
+
 def is_PolynomialQuotientRing(x):
     from sage.misc.superseded import deprecation
     deprecation(38266,
