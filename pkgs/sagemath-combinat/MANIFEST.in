@@ -9,7 +9,8 @@ include requirements.txt
 graft sage/algebras
 graft sage/combinat
 graft sage/monoids
-exclude sage/monoids/monoid.py          # sagemath-categories
+exclude sage/monoids/monoid.py                  # sagemath-categories
+exclude sage/monoids/indexed_free_monoid.p*     # sagemath-categories
 graft sage/games
 graft sage/sat
 
