@@ -24,11 +24,11 @@ classifiers = [
 requires-python = ">=3.9, <3.13"
 
 [project.urls]
-download = "https://doc.sagemath.org/html/en/installation/index.html"
 "release notes" = "https://github.com/passagemath/passagemath/releases"
 "repo (upstream)" = "https://github.com/sagemath/sage"
 "repo" = "https://github.com/passagemath/passagemath"
 documentation = "https://doc.sagemath.org"
 "homepage (upstream)" = "https://www.sagemath.org"
+"discourse" = "(https://passagemath.discourse.group/https://passagemath.discourse.group/https://passagemath.discourse.group/dddddhttps://passagemath.discourse.group/"
 "tracker (upstream)" = "https://github.com/sagemath/sage/issues"
 "tracker" = "https://github.com/passagemath/passagemath/issues"
