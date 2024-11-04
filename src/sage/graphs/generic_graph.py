@@ -1023,8 +1023,8 @@ class GenericGraph(GenericGraph_pyx):
 
         ::
 
-            sage: tikz = g.tikz(format='tkz_graph')
-            sage: _ = tikz.pdf(view=False)          # optional - latex
+            sage: tikz = g.tikz(format='tkz_graph')                                     # needs sage.plot
+            sage: _ = tikz.pdf(view=False)          # optional - latex                  # needs sage.plot
 
         Using another value for ``prog``::
 
@@ -2276,7 +2276,7 @@ class GenericGraph(GenericGraph_pyx):
             [0 1 0 1 0]
             [0 0 1 0 1]
             [0 0 0 1 0]
-            sage: type(_)
+            sage: type(_)                                                               # needs numpy sage.modules
             <class 'sage.matrix.matrix_numpy_integer_dense.Matrix_numpy_integer_dense'>
 
         As an immutable matrix::
@@ -8209,6 +8209,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Longest (induced) cycle of a graph::
 
+            sage: # needs sage.numerical.mip
             sage: G = graphs.Grid2dGraph(3, 4)
             sage: G.longest_cycle(induced=False)
             longest cycle from 2D Grid Graph for [3, 4]: Graph on 12 vertices
@@ -8217,6 +8218,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Longest (induced) cycle in a digraph::
 
+            sage: # needs sage.numerical.mip
             sage: D = digraphs.Circuit(8)
             sage: D.add_edge(0, 2)
             sage: D.longest_cycle(induced=False)
@@ -8236,6 +8238,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Longest (induced) cycle when considering edge weights::
 
+            sage: # needs sage.numerical.mip
             sage: D = digraphs.Circuit(15)
             sage: for u, v in D.edges(labels=False):
             ....:     D.set_edge_label(u, v, 1)
@@ -8255,6 +8258,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Check that the example from :issue:`37028` is fixed::
 
+            sage: # needs sage.numerical.mip
             sage: d = {0: [4, 6, 10, 11], 1: [5, 7, 10, 11], 2: [8, 9, 10, 11],
             ....:      3: [8, 9, 11], 4: [6, 10, 11], 5: [7, 10, 11],
             ....:      6: [10, 11],  7: [10], 8: [10], 9: [11]}
@@ -8266,6 +8270,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Small cases::
 
+            sage: # needs sage.numerical.mip
             sage: Graph().longest_cycle()
             longest cycle: Graph on 0 vertices
             sage: Graph(1).longest_cycle()
@@ -8289,6 +8294,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Disconnected digraph::
 
+            sage: # needs sage.numerical.mip
             sage: D = digraphs.Circuit(5) + digraphs.Circuit(4)
             sage: D.longest_cycle()
             longest cycle from Subgraph of (Circuit disjoint_union Circuit): Digraph on 5 vertices
@@ -17217,7 +17223,8 @@ class GenericGraph(GenericGraph_pyx):
 
         Comparison of algorithms::
 
-            sage: G = graphs.RandomBarabasiAlbert(50,2)                                 # needs networkx
+            sage: # needs networkx
+            sage: G = graphs.RandomBarabasiAlbert(50,2)
             sage: results = []
             sage: results.append(G.triangles_count(algorithm='matrix'))
             sage: results.append(G.triangles_count(algorithm='iter'))                   # needs sage.modules
