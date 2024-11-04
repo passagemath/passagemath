@@ -40,7 +40,7 @@ Examples
 A quick way to try it out interactively:
 
 ```
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-flint[test]" IPython
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-flint[test]" ipython
 ```
 
 ```
