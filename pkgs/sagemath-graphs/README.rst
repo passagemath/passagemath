@@ -54,13 +54,9 @@ What is included
 Examples
 --------
 
-A quick way to try it out interactively:
+A quick way to try it out interactively::
 
-```
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[test]" ipython
-```
-
-```
     In [1]: from sage.all__sagemath_graphs import *
 
     In [6]: g = Graph([(1, 3), (3, 8), (5, 2)]); g
@@ -68,17 +64,16 @@ A quick way to try it out interactively:
 
     In [7]: g.is_connected()
     Out[7]: False
-```
 
 
 Development
 -----------
 
-```
+::
+
     $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
     $ cd passagemath
     passagemath $ ./bootstrap
     passagemath $ python3 -m venv graphs-venv
     passagemath $ source graphs-venv/bin/activate
     (graphs-venv) passagemath $ pip install -v -e pkgs/sagemath-graphs
-```
