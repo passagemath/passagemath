@@ -6,6 +6,9 @@
     "sage.algebras.clifford_algebra_element": {
         "ntests": 148
     },
+    "sage.algebras.commutative_dga": {
+        "ntests": 7
+    },
     "sage.algebras.exterior_algebra_groebner": {
         "ntests": 67
     },
@@ -17,6 +20,10 @@
     },
     "sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra_morphism": {
         "ntests": 59
+    },
+    "sage.algebras.finite_gca": {
+        "failed": true,
+        "ntests": 91
     },
     "sage.algebras.octonion_algebra": {
         "failed": true,
@@ -770,8 +777,7 @@
         "ntests": 2
     },
     "sage.coding.linear_code": {
-        "failed": true,
-        "ntests": 0
+        "ntests": 40
     },
     "sage.coding.linear_code_no_metric": {
         "ntests": 2
@@ -820,6 +826,10 @@
     },
     "sage.combinat.integer_vector": {
         "ntests": 254
+    },
+    "sage.combinat.integer_vector_weighted": {
+        "failed": true,
+        "ntests": 52
     },
     "sage.combinat.matrices.dancing_links": {
         "ntests": 250
@@ -1108,7 +1118,7 @@
     },
     "sage.env": {
         "failed": true,
-        "ntests": 45
+        "ntests": 40
     },
     "sage.ext.fast_callable": {
         "failed": true,
@@ -1139,7 +1149,6 @@
         "ntests": 3
     },
     "sage.features.databases": {
-        "failed": true,
         "ntests": 38
     },
     "sage.features.dvipng": {
@@ -1396,7 +1405,6 @@
         "ntests": 54
     },
     "sage.groups.generic": {
-        "failed": true,
         "ntests": 120
     },
     "sage.groups.group": {
@@ -1416,8 +1424,7 @@
         "ntests": 47
     },
     "sage.groups.matrix_gps.matrix_group": {
-        "failed": true,
-        "ntests": 55
+        "ntests": 53
     },
     "sage.groups.matrix_gps.named_group": {
         "ntests": 21
@@ -1536,7 +1543,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2058
+        "ntests": 2054
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
@@ -1548,7 +1555,7 @@
         "ntests": 35
     },
     "sage.matrix.matrix_double_dense": {
-        "ntests": 21
+        "ntests": 23
     },
     "sage.matrix.matrix_double_sparse": {
         "ntests": 25
@@ -1887,7 +1894,7 @@
     },
     "sage.misc.session": {
         "failed": true,
-        "ntests": 61
+        "ntests": 59
     },
     "sage.misc.sh": {
         "ntests": 1
