@@ -19,10 +19,12 @@ See https://doc.sagemath.org/html/en/installation/index.html
 for general installation instructions.
 
 
-About this pip-installable source distribution
-----------------------------------------------
+About this pip-installable distribution package
+-----------------------------------------------
 
-This pip-installable source distribution `passagemath-graphs` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`) for computations with graphs, posets, complexes, etc.
+This pip-installable package `passagemath-graphs` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`) for computations with graphs, posets, complexes, etc.
+
+It consists of over 170 first-party Python and Cython modules and uses the `Boost Graph Library <https://github.com/boostorg/graph>`_, with additional functionality from `NetworkX <https://networkx.github.io/>`_ and several other libraries.
 
 
 What is included
@@ -53,7 +55,7 @@ Examples
 A quick way to try it out interactively:
 
 ```
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[test]" IPython
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[test]" ipython
 ```
 
 ```
