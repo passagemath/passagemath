@@ -44,6 +44,8 @@ What is included
 
 * `Cluster Algebras and Quivers <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/cluster_algebra_quiver/all.html>`_
 
+* `Knot Theory <https://doc.sagemath.org/html/en/reference/knots/index.html>`_
+
 * `Sandpiles <https://doc.sagemath.org/html/en/reference/dynamics/sage/sandpiles/sandpile.html>`_
 
 * see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-graphs/MANIFEST.in
