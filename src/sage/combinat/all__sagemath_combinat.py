@@ -145,7 +145,6 @@ from sage.combinat.ncsym.all import *
 lazy_import('sage.combinat.fqsym', 'FreeQuasisymmetricFunctions')
 from sage.combinat.matrices.all import *
 
-lazy_import('sage.combinat.integer_vector_weighted', 'WeightedIntegerVectors')
 lazy_import('sage.combinat.integer_vectors_mod_permgroup',
             'IntegerVectorsModPermutationGroup')
 

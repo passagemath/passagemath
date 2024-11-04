@@ -21,8 +21,6 @@ lazy_import('sage.algebras.jordan_algebra', 'JordanAlgebra')
 
 lazy_import('sage.algebras.shuffle_algebra', 'ShuffleAlgebra')
 
-lazy_import('sage.algebras.commutative_dga', 'GradedCommutativeAlgebra')
-
 lazy_import('sage.algebras.rational_cherednik_algebra',
             'RationalCherednikAlgebra')
 

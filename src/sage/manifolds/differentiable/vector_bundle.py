@@ -256,6 +256,7 @@ class DifferentiableVectorBundle(TopologicalVectorBundle):
         Let us check the total Pontryagin class which must be the one
         element in the corresponding cohomology ring in this case::
 
+            sage: # needs sage.combinat
             sage: TM = M.tangent_bundle(); TM
             Tangent bundle TM over the 4-dimensional Lorentzian manifold M
             sage: p = TM.characteristic_cohomology_class('Pontryagin'); p

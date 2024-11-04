@@ -212,6 +212,7 @@ include sage/rings/big_oh.p*
 include sage/ext/fast_*.p*
 
 include sage/combinat/integer_vector.p*
+include sage/combinat/integer_vector_weighted.p*
 graft sage/combinat/integer_lists
 include sage/combinat/backtrack.p*
 include sage/combinat/combinat.p*

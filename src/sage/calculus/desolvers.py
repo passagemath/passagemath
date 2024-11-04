@@ -251,7 +251,7 @@ def desolve(de, dvar, ics=None, ivar=None, show_method=False, contrib_ode=False,
 
     ::
 
-        sage: plot(f)
+        sage: plot(f)                                                                   # needs sage.plot
         Graphics object consisting of 1 graphics primitive
 
     We can also solve second-order differential equations::
@@ -1298,7 +1298,8 @@ def desolve_rk4(de, dvar, ics=None, ivar=None, end_points=None, step=0.1, output
     use ``show(P)`` in Sage notebook. ::
 
         sage: x,y = var('x,y')
-        sage: P=desolve_rk4(y*(2-y),y,ics=[0,.1],ivar=x,output='slope_field',end_points=[-4,6],thickness=3)
+        sage: P = desolve_rk4(y*(2-y), y, ics=[0,.1], ivar=x,                           # needs sage.plot
+        ....:                 output='slope_field', end_points=[-4,6], thickness=3)
 
     ALGORITHM:
 
