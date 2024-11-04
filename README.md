@@ -190,10 +190,6 @@ This requires you to clone the git repository (as described in this README) or d
 [sources](https://www.sagemath.org/download-source.html) in the form
 of a tarball.
 
-If you have questions or encounter problems, please do not hesitate
-to email the [sage-support mailing list](https://groups.google.com/group/sage-support)
-or ask on the [Ask Sage questions and answers site](https://ask.sagemath.org).
-
 Supported Platforms
 -------------------
 
