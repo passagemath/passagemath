@@ -19,6 +19,15 @@ development of SageMath, and hence of passagemath.
 
 [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
 
+
+passagemath community
+---------------------
+
+Join [passagemath.discourse.group](https://passagemath.discourse.group/) for help and discussions.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how you can contribute.
+
+
 Full installation
 -----------------
 
@@ -548,31 +557,6 @@ in the Installation Guide.
     or JupyterLab installation, as described in the section
     [Launching SageMath](https://doc.sagemath.org/html/en/installation/launching.html)
     in the Sage Installation Guide.
-
-Troubleshooting
----------------
-
-If you have problems building Sage, check the Sage Installation Guide,
-as well as the version-specific installation help in the [release
-tour](https://github.com/passagemath/passagemath/releases) corresponding to the
-version that you are installing.
-
-Please do not hesitate to ask for help in the [SageMath forum
-](https://ask.sagemath.org/questions/) or the [sage-support mailing
-list](https://groups.google.com/forum/#!forum/sage-support).  The
-[Troubleshooting section in the Sage Installation Guide
-](https://doc.sagemath.org/html/en/installation/troubles.html)
-provides instructions on what information to provide so that we can provide
-help more effectively.
-
-Contributing to Sage
---------------------
-
-If you'd like to contribute to Sage, we strongly recommend that you read the
-[Developer's Guide](https://doc.sagemath.org/html/en/developer/index.html).
-
-Sage has significant components written in the following languages:
-C/C++, Python, Cython, Common Lisp, Fortran, and a bit of Perl.
 
 Directory Layout
 ----------------
