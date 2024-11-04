@@ -227,7 +227,7 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             sage: from sage.knots.free_knotinfo_monoid import FreeKnotInfoMonoid
             sage: FKIM =  FreeKnotInfoMonoid()
             sage: K = KnotInfo.K5_1.link().mirror_image()
-            sage: FKIM(K)
+            sage: FKIM(K)                                                               # needs sage.modules
             KnotInfo['K5_1m']
         """
         if isinstance(x, tuple):
@@ -271,7 +271,7 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             Defining K3_1m
             sage: elems = (K3_1, K3_1m)
             sage: K = Knots().from_table(3, 1)
-            sage: FKIM._check_elements(K, elems)
+            sage: FKIM._check_elements(K, elems)                                        # needs sage.modules
             KnotInfo['K3_1m']
             sage: K = Knots().from_table(4, 1)
             sage: FKIM._check_elements(K, elems) is None
@@ -311,8 +311,8 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             Defining K3_1m
             sage: KI = K3_1 * K3_1m
             sage: K = KI.as_knot()
-            sage: h = K3_1.to_knotinfo()[0][0].homfly_polynomial()
-            sage: FKIM._search_composition(3, K, h)
+            sage: h = K3_1.to_knotinfo()[0][0].homfly_polynomial()                      # needs sage.modules
+            sage: FKIM._search_composition(3, K, h)                                     # needs sage.modules
             (KnotInfo['K3_1'],)
         """
         from sage.knots.knotinfo import KnotInfo
@@ -375,7 +375,7 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             sage: from sage.knots.free_knotinfo_monoid import FreeKnotInfoMonoid
             sage: FKIM =  FreeKnotInfoMonoid()
             sage: K = KnotInfo.K5_1.link().mirror_image()
-            sage: FKIM._from_knot(K)
+            sage: FKIM._from_knot(K)                                                    # needs sage.modules
             (KnotInfo['K5_1m'],)
         """
         hp = knot.homfly_polynomial(normalization='vz')
@@ -403,18 +403,18 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             sage: from sage.knots.free_knotinfo_monoid import FreeKnotInfoMonoid
             sage: FKIM =  FreeKnotInfoMonoid()
             sage: K = KnotInfo.K5_1.link().mirror_image()
-            sage: FKIM.from_knot(K)
+            sage: FKIM.from_knot(K)                                                     # needs sage.modules
             KnotInfo['K5_1m']
 
             sage: # optional - database_knotinfo
             sage: K = Knot(KnotInfo.K9_12.braid())
-            sage: FKIM.from_knot(K)                   # long time
+            sage: FKIM.from_knot(K)                   # long time                       # optional - database_knotinfo
             Traceback (most recent call last):
             ...
             NotImplementedError: this (possibly non prime) knot cannot be
             identified uniquely by KnotInfo
             use keyword argument `unique` to obtain more details
-            sage: FKIM.from_knot(K, unique=False)     # long time
+            sage: FKIM.from_knot(K, unique=False)     # long time                       # optional - database_knotinfo
             [KnotInfo['K4_1']*KnotInfo['K5_2'], KnotInfo['K9_12']]
         """
         hp = knot.homfly_polynomial(normalization='vz')

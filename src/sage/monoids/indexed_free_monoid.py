@@ -1,4 +1,5 @@
-# sage_setup: distribution = sagemath-combinat
+# sage_setup: distribution = sagemath-categories
+# sage.doctest: needs sage.combinat
 """
 Indexed Monoids
 
