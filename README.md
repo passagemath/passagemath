@@ -19,6 +19,15 @@ development of SageMath, and hence of passagemath.
 
 [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
 
+
+passagemath community
+---------------------
+
+Join [passagemath.discourse.group](https://passagemath.discourse.group/) for help and discussions.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how you can contribute.
+
+
 Full installation
 -----------------
 
@@ -78,8 +87,13 @@ To install the latest development version instead, add the switch `--pre` to all
 Modularized distributions
 -------------------------
 
-The passagemath library is provided by a number of distributions (pip-installable packages).
+passagemath provides the Sage library in a number of distributions (pip-installable packages) that can be installed separately.
 
+Authors of packages that depend on the Sage library can declare dependencies on these distributions. The benefit for users of the package: There is no longer a need to first install Sage. Instead, the parts of the Sage library that are needed by the package are automatically installed. Thus, the package becomes first-class member of the Python ecosystem.
+
+- [sage-numerical-interactive-mip](https://github.com/passagemath/sage-numerical-interactive-mip) is an example of a pure Python package that [declares dependencies](https://github.com/passagemath/sage-numerical-interactive-mip/blob/master/pyproject.toml) on four distributions: passagemath-polyhedra, passagemath-plot, passagemath-repl, and passagemath-flint.
+
+Here is an overview of the available distribution packages.
 
 ### Distributions named after a basic mathematical structure
 
@@ -150,8 +164,6 @@ Table of Contents
 * [\[macOS\] Preparing the Platform](#macos-preparing-the-platform)
 * [Instructions to Build from Source](#instructions-to-build-from-source)
 * [SageMath Docker Images](#sagemath-docker-images)
-* [Troubleshooting](#troubleshooting)
-* [Contributing to Sage](#contributing-to-sage)
 * [Directory Layout](#directory-layout)
 * [Build System](#build-system)
 * [Relocation](#relocation)
@@ -165,7 +177,8 @@ Getting Started
 Those who are impatient may use prebuilt Sage available online from any of
 
 <!-- [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sagemath/sage-binder-env/master
-) &nbsp; --->[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/passagemath/passagemath/tree/main
+) &nbsp; --->
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/passagemath/passagemath/tree/main
 ) &nbsp; [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-black?logo=github)](https://codespaces.new/passagemath/passagemath/tree/main)
 
 without local installation. Otherwise read on.
@@ -180,10 +193,6 @@ Sage in the cloud.
 This requires you to clone the git repository (as described in this README) or download the
 [sources](https://www.sagemath.org/download-source.html) in the form
 of a tarball.
-
-If you have questions or encounter problems, please do not hesitate
-to email the [sage-support mailing list](https://groups.google.com/group/sage-support)
-or ask on the [Ask Sage questions and answers site](https://ask.sagemath.org).
 
 Supported Platforms
 -------------------
@@ -548,31 +557,6 @@ in the Installation Guide.
     or JupyterLab installation, as described in the section
     [Launching SageMath](https://doc.sagemath.org/html/en/installation/launching.html)
     in the Sage Installation Guide.
-
-Troubleshooting
----------------
-
-If you have problems building Sage, check the Sage Installation Guide,
-as well as the version-specific installation help in the [release
-tour](https://github.com/passagemath/passagemath/releases) corresponding to the
-version that you are installing.
-
-Please do not hesitate to ask for help in the [SageMath forum
-](https://ask.sagemath.org/questions/) or the [sage-support mailing
-list](https://groups.google.com/forum/#!forum/sage-support).  The
-[Troubleshooting section in the Sage Installation Guide
-](https://doc.sagemath.org/html/en/installation/troubles.html)
-provides instructions on what information to provide so that we can provide
-help more effectively.
-
-Contributing to Sage
---------------------
-
-If you'd like to contribute to Sage, we strongly recommend that you read the
-[Developer's Guide](https://doc.sagemath.org/html/en/developer/index.html).
-
-Sage has significant components written in the following languages:
-C/C++, Python, Cython, Common Lisp, Fortran, and a bit of Perl.
 
 Directory Layout
 ----------------

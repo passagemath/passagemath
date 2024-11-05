@@ -368,9 +368,9 @@ def dominating_sets(g, k=1, independent=False, total=False, connected=False,
     Minimum distance-k connected dominating sets of the Tietze graph::
 
         sage: G = graphs.TietzeGraph()
-        sage: sorted(G.dominating_sets(k=2, connected=True))
+        sage: sorted(G.dominating_sets(k=2, connected=True))                            # needs sage.numerical.mip
         [[0, 9], [1, 0], [2, 3], [4, 3], [5, 6], [7, 6], [8, 0], [10, 3], [11, 6]]
-        sage: sorted(G.dominating_sets(k=3, connected=True))
+        sage: sorted(G.dominating_sets(k=3, connected=True))                            # needs sage.numerical.mip
         [[0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11]]
 
     TESTS::
