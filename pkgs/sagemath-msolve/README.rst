@@ -23,3 +23,13 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable source distribution ``sagemath-msolve`` provides an interface to `msolve <https://msolve.lip6.fr/>`_, which implements computer algebra algorithms for solving polynomial systems (with rational coefficients or coefficients in a prime field).
+
+
+Examples
+--------
+
+A quick way to try it out interactively::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-msolve[test]" IPython
+
+    In [1]: from sage.all__sagemath_msolve import *
