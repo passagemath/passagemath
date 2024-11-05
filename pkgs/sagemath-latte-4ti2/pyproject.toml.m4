@@ -19,6 +19,7 @@ description = "passagemath: Lattice points in polyhedra with LattE integrale and
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_cddlib
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'

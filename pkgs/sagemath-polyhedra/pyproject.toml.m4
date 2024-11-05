@@ -44,10 +44,10 @@ linbox      = [SPKG_INSTALL_REQUIRES_sagemath_linbox]
 pari        = [SPKG_INSTALL_REQUIRES_sagemath_pari]
 
 # polyhedral libraries
-4ti2        = []  # FIXME
-cddlib      = []  # FIXME
+4ti2        = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
+cddlib      = [SPKG_INSTALL_REQUIRES_sagemath_cddlib]
 latte       = ["passagemath-polyhedra[latte_int]"]  # alias
-latte_int   = []  # FIXME
+latte_int   = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
 normaliz    = [SPKG_INSTALL_REQUIRES_pynormaliz]
 polymake    = [SPKG_INSTALL_REQUIRES_jupymake]
 ppl         = []  # no extra required
