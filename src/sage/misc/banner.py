@@ -25,7 +25,7 @@ def version():
     EXAMPLES::
 
        sage: version()
-       'SageMath version ..., Release Date: ...'
+       '... version ..., Release Date: ...'
     """
     return SAGE_VERSION_BANNER
 
@@ -49,9 +49,9 @@ def banner_text(full=True):
 
         sage: print(sage.misc.banner.banner_text(full=True))
         ┌────────────────────────────────────────────────────────────────────┐
-        │ SageMath version ...
+        │ ... version ...
         sage: print(sage.misc.banner.banner_text(full=False))
-        SageMath version ..., Release Date: ...
+        ... version ..., Release Date: ...
     """
     if not full:
         return version()
@@ -100,7 +100,7 @@ def banner():
         sage: import sage.misc.banner; sage.misc.banner.SAGE_BANNER = ''
         sage: sage.misc.banner.banner()
         ┌────────────────────────────────────────────────────────────────────┐
-        │ SageMath version ..., Release Date: ...                            │
+        │ ... version ..., Release Date: ...                                 │
         │ Using Python .... Type "help()" for help.                          │
         ...
     """

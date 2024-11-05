@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Orientations
 
@@ -45,6 +46,7 @@ Methods
 
 from copy import copy
 from sage.graphs.digraph import DiGraph
+from sage.graphs.generic_graph import _weight_if_real, _weight_1
 
 
 def orient(G, f, weighted=None, data_structure=None, sparse=None,
@@ -1117,14 +1119,11 @@ def minimum_outdegree_orientation(G, use_edge_labels=False, solver=None, verbose
                          "Please convert it to a Graph if you really mean it.")
 
     if use_edge_labels:
-        from sage.rings.real_mpfr import RR
-
         def weight(e):
             label = G.edge_label(e[0], e[1])
-            return label if label in RR else 1
+            return _weight_if_real(label)
     else:
-        def weight(e):
-            return 1
+        weight = _weight_1
 
     from sage.numerical.mip import MixedIntegerLinearProgram
 

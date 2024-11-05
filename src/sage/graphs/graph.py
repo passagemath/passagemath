@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Undirected graphs
 
@@ -419,7 +420,7 @@ from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
 import sage.graphs.generic_graph_pyx as generic_graph_pyx
-from sage.graphs.generic_graph import GenericGraph
+from sage.graphs.generic_graph import GenericGraph, _weight_if_real, _weight_1
 from sage.graphs.independent_sets import IndependentSets
 from sage.misc.rest_index_of_methods import doc_index, gen_thematic_rest_table_index
 from sage.graphs.views import EdgesView
@@ -2993,13 +2994,9 @@ class Graph(GenericGraph):
             f_bounds = bounds
 
         if self.weighted():
-            from sage.rings.real_mpfr import RR
-
-            def weight(x):
-                return x if x in RR else 1
+            weight = _weight_if_real
         else:
-            def weight(x):
-                return 1
+            weight = _weight_1
 
         for v in self:
             minimum, maximum = f_bounds(v)
@@ -3456,11 +3453,11 @@ class Graph(GenericGraph):
 
         TESTS::
 
-            sage: Graph([]).chromatic_symmetric_function() == 1
+            sage: Graph([]).chromatic_symmetric_function() == 1                         # needs sage.combinat sage.modules
             True
 
-            sage: e = SymmetricFunctions(ZZ).e()
-            sage: e(graphs.CompleteGraph(5).chromatic_symmetric_function())
+            sage: e = SymmetricFunctions(ZZ).e()                                        # needs sage.combinat sage.modules
+            sage: e(graphs.CompleteGraph(5).chromatic_symmetric_function())             # needs sage.combinat sage.modules
             120*e[5]
         """
         from sage.combinat.sf.sf import SymmetricFunctions
@@ -4214,6 +4211,7 @@ class Graph(GenericGraph):
         Trying to find an induced minor isomorphic to `C_5` in a graph
         containing an induced `C_6`::
 
+            sage: # needs sage.numerical.mip
             sage: g = graphs.CycleGraph(6)
             sage: for i in range(randint(10, 30)):
             ....:     g.add_edge(randint(0, 5), g.add_vertex())
@@ -4229,6 +4227,7 @@ class Graph(GenericGraph):
         A graph `g` may have a minor isomorphic to a given graph `h` but no
         induced minor isomorphic to `h`::
 
+            sage: # needs sage.numerical.mip
             sage: g = Graph([(0, 1), (0, 2), (1, 2), (2, 3), (3, 4), (3, 5), (4, 5), (6, 5)])
             sage: h = Graph([(9, 10), (9, 11), (9, 12), (9, 13)])
             sage: l = g.minor(h, induced=False)
@@ -4240,6 +4239,7 @@ class Graph(GenericGraph):
         Checking that the returned induced minor is isomorphic to the given
         graph::
 
+            sage: # needs sage.numerical.mip
             sage: g = Graph([(0, 1), (0, 2), (1, 2), (2, 3), (3, 4), (3, 5), (4, 5), (6, 5)])
             sage: h = Graph([(7, 8), (8, 9), (9, 10), (10, 11)])
             sage: L = g.minor(h, induced=True)
@@ -7732,9 +7732,8 @@ class Graph(GenericGraph):
         #
         # If the same edge is added several times their capacities add up.
 
-        from sage.rings.real_mpfr import RR
         for uu, vv, capacity in edges:
-            capacity = capacity if capacity in RR else 1
+            capacity = _weight_if_real(capacity)
 
             # Assume uu is in gU
             if uu in V:

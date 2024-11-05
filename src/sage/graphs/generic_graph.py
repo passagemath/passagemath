@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Generic graphs (common to directed/undirected)
 
@@ -456,6 +457,18 @@ from sage.features.igraph import python_igraph as igraph_feature
 lazy_import('sage.matrix.constructor', 'matrix')
 
 to_hex = LazyImport('matplotlib.colors', 'to_hex')
+
+
+try:
+    from sage.rings.real_mpfr import RR as Reals
+except ImportError:
+    from sage.rings.real_double import RDF as Reals
+
+def _weight_if_real(x):
+    return x if x in Reals else 1
+
+def _weight_1(x):
+    return 1
 
 
 class GenericGraph(GenericGraph_pyx):
@@ -1010,8 +1023,8 @@ class GenericGraph(GenericGraph_pyx):
 
         ::
 
-            sage: tikz = g.tikz(format='tkz_graph')
-            sage: _ = tikz.pdf(view=False)          # optional - latex
+            sage: tikz = g.tikz(format='tkz_graph')                                     # needs sage.plot
+            sage: _ = tikz.pdf(view=False)          # optional - latex                  # needs sage.plot
 
         Using another value for ``prog``::
 
@@ -2263,7 +2276,7 @@ class GenericGraph(GenericGraph_pyx):
             [0 1 0 1 0]
             [0 0 1 0 1]
             [0 0 0 1 0]
-            sage: type(_)
+            sage: type(_)                                                               # needs numpy sage.modules
             <class 'sage.matrix.matrix_numpy_integer_dense.Matrix_numpy_integer_dense'>
 
         As an immutable matrix::
@@ -2320,7 +2333,7 @@ class GenericGraph(GenericGraph_pyx):
             Traceback (most recent call last):
             ...
             TypeError: Vertex labels are not comparable. You must specify an ordering using parameter 'vertices'
-            sage: Graph ([[0, 42, 'John'], [(42, 'John')]]).adjacency_matrix(vertices=['John', 42, 0])
+            sage: Graph ([[0, 42, 'John'], [(42, 'John')]]).adjacency_matrix(vertices=['John', 42, 0])  # needs sage.modules
             [0 1 0]
             [1 0 0]
             [0 0 0]
@@ -8066,13 +8079,9 @@ class GenericGraph(GenericGraph_pyx):
             value_only = False
 
         if use_edge_labels:
-            from sage.rings.real_mpfr import RR
-
-            def weight(x):
-                return x if x in RR else 1
+            weight = _weight_if_real
         else:
-            def weight(x):
-                return 1
+            weight = _weight_1
 
         if g.is_directed():
             def good_edge(e):
@@ -8200,6 +8209,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Longest (induced) cycle of a graph::
 
+            sage: # needs sage.numerical.mip
             sage: G = graphs.Grid2dGraph(3, 4)
             sage: G.longest_cycle(induced=False)
             longest cycle from 2D Grid Graph for [3, 4]: Graph on 12 vertices
@@ -8208,6 +8218,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Longest (induced) cycle in a digraph::
 
+            sage: # needs sage.numerical.mip
             sage: D = digraphs.Circuit(8)
             sage: D.add_edge(0, 2)
             sage: D.longest_cycle(induced=False)
@@ -8227,6 +8238,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Longest (induced) cycle when considering edge weights::
 
+            sage: # needs sage.numerical.mip
             sage: D = digraphs.Circuit(15)
             sage: for u, v in D.edges(labels=False):
             ....:     D.set_edge_label(u, v, 1)
@@ -8246,6 +8258,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Check that the example from :issue:`37028` is fixed::
 
+            sage: # needs sage.numerical.mip
             sage: d = {0: [4, 6, 10, 11], 1: [5, 7, 10, 11], 2: [8, 9, 10, 11],
             ....:      3: [8, 9, 11], 4: [6, 10, 11], 5: [7, 10, 11],
             ....:      6: [10, 11],  7: [10], 8: [10], 9: [11]}
@@ -8257,6 +8270,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Small cases::
 
+            sage: # needs sage.numerical.mip
             sage: Graph().longest_cycle()
             longest cycle: Graph on 0 vertices
             sage: Graph(1).longest_cycle()
@@ -8280,6 +8294,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Disconnected digraph::
 
+            sage: # needs sage.numerical.mip
             sage: D = digraphs.Circuit(5) + digraphs.Circuit(4)
             sage: D.longest_cycle()
             longest cycle from Subgraph of (Circuit disjoint_union Circuit): Digraph on 5 vertices
@@ -10180,18 +10195,15 @@ class GenericGraph(GenericGraph_pyx):
             raise ValueError("this method does not support both "
                              "vertex_bound=True and algorithm='" + algorithm + "'")
         if use_edge_labels:
-            from sage.rings.real_mpfr import RR
             if integer:
                 from math import floor
 
                 def capacity(z):
-                    return floor(z) if z in RR else 1
+                    return floor(z) if z in Reals else 1
             else:
-                def capacity(z):
-                    return z if z in RR else 1
+                capacity = _weight_if_real
         else:
-            def capacity(z):
-                return 1
+            capacity = _weight_1
 
         if algorithm is None:
             if vertex_bound:
@@ -10818,13 +10830,9 @@ class GenericGraph(GenericGraph_pyx):
 
         # Whether to use edge labels
         if use_edge_labels:
-            from sage.rings.real_mpfr import RR
-
-            def capacity(x):
-                return x if x in RR else 1
+            capacity = _weight_if_real
         else:
-            def capacity(x):
-                return 1
+            capacity = _weight_1
 
         if g.is_directed():
             # This function return the balance of flow at X
@@ -16095,7 +16103,11 @@ class GenericGraph(GenericGraph_pyx):
             {0: 1/3, 1: 1/3, 2: 0, 3: 1/3, 4: 1/3, 5: 1/3,
              6: 1/3, 7: 1/3, 8: 0, 9: 1/3, 10: 1/3, 11: 0}
 
-            sage: (graphs.FruchtGraph()).clustering_coeff(weight=True)                  # needs networkx
+            sage: # needs networkx
+            sage: import numpy
+            sage: if int(numpy.version.short_version[0]) > 1:
+            ....:     numpy.set_printoptions(legacy="1.25")
+            sage: (graphs.FruchtGraph()).clustering_coeff(weight=True)
             {0: 0.3333333333333333, 1: 0.3333333333333333, 2: 0,
              3: 0.3333333333333333, 4: 0.3333333333333333,
              5: 0.3333333333333333, 6: 0.3333333333333333,
@@ -17211,7 +17223,8 @@ class GenericGraph(GenericGraph_pyx):
 
         Comparison of algorithms::
 
-            sage: G = graphs.RandomBarabasiAlbert(50,2)                                 # needs networkx
+            sage: # needs networkx
+            sage: G = graphs.RandomBarabasiAlbert(50,2)
             sage: results = []
             sage: results.append(G.triangles_count(algorithm='matrix'))
             sage: results.append(G.triangles_count(algorithm='iter'))                   # needs sage.modules

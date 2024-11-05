@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-repl
+# sage.doctest: needs sage.graphs
 r"""
 Class inheritance graphs
 """

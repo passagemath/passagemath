@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Elements of free modules
 
@@ -4235,6 +4236,7 @@ cdef class FreeModuleElement(Vector):   # abstract base class
 
         ::
 
+            sage: # needs sage.rings.number_field
             sage: w2 = [4, QQbar(-5).sqrt()]
             sage: v.concatenate(w2)
             (1, 2, 3, 4, 2.236...*I)
@@ -4260,6 +4262,7 @@ cdef class FreeModuleElement(Vector):   # abstract base class
 
         ::
 
+            sage: # needs sage.rings.finite_rings
             sage: v.concatenate(GF(9).gens())
             (1, 2, 0, z2)
             sage: v.concatenate(GF(9).gens()).parent()

@@ -8,8 +8,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-environment"
-description = "Sage: Open Source Mathematics Software: System and software environment"
+name = "passagemath-environment"
+description = "passagemath: System and software environment"
 dependencies = []
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'

@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-flint
+ */
 /* WARNING: src/sage/libs/flint/flint_wrap.h is generated from
  * src/sage_setup/autogen/flint/templates/flint_wrap.h.template
  * please make sure that you are modifying the correct file! */
@@ -25,6 +27,10 @@
 /* Should work on GCC, clang, MSVC */
 #pragma push_macro("ulong")
 #undef ulong
+
+/* Reserved in C99, needed for FLINT without https://github.com/flintlib/flint/pull/2027 */
+#pragma push_macro("I")
+#define I Iv
 
 #include <flint/flint.h>
 
@@ -169,6 +175,7 @@
 #undef mp_bitcnt_t
 
 #pragma pop_macro("ulong")
+#pragma pop_macro("I")
 
 /* CPU_SIZE_1 and SIZE_RED_FAILURE_THRESH are defined as macros in flint/fmpz_lll.h
  * and as variables in fplll/defs.h, which breaks build if linbox is compiled with fplll */

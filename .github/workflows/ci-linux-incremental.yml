@@ -88,7 +88,7 @@ jobs:
       # Build incrementally from published Docker image
       incremental: true
       free_disk_space: true
-      from_docker_repository: ghcr.io/sagemath/sage/
+      from_docker_repository: ghcr.io/passagemath/passagemath/
       from_docker_target: "with-targets"
       from_docker_tag: "dev"
       docker_targets: "with-targets"
@@ -115,7 +115,7 @@ jobs:
       # Build incrementally from published Docker image
       incremental: true
       free_disk_space: true
-      from_docker_repository: ghcr.io/sagemath/sage/
+      from_docker_repository: ghcr.io/passagemath/passagemath/
       from_docker_target: "with-targets-pre"
       from_docker_tag: "dev"
       docker_targets: "with-targets-pre"
@@ -138,7 +138,7 @@ jobs:
       # Build incrementally from published Docker image
       incremental: true
       free_disk_space: true
-      from_docker_repository: ghcr.io/sagemath/sage/
+      from_docker_repository: ghcr.io/passagemath/passagemath/
       from_docker_target: "with-targets"
       from_docker_tag: "dev"
       docker_targets: "with-targets"

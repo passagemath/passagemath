@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-objects
+ */
 /* See mod_int.pxd if you want to use these declarations in Cython */
 
 /* CPython using signed long as the data type for plain integers, which is

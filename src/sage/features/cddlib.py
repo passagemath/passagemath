@@ -36,3 +36,7 @@ class CddExecutable(Executable):
         """
         Executable.__init__(self, name=name, executable=name, spkg='cddlib',
                             url='https://github.com/cddlib/cddlib', type='standard')
+
+
+def all_features():
+    return [CddExecutable()]

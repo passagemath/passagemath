@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 r"""
 FindStat - the search engine for combinatorial statistics and maps
 

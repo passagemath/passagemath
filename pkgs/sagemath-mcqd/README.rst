@@ -1,5 +1,5 @@
 ===========================================================================
- Sage: Open Source Mathematics Software: Finding maximum cliques with mcqd
+ passagemath: Finding maximum cliques with mcqd
 ===========================================================================
 
 About SageMath

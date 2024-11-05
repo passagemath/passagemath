@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from sage.categories.map cimport Map
 from sage.structure.parent cimport Parent
 

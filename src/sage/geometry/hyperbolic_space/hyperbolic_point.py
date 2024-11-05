@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Hyperbolic Points
 
@@ -586,7 +587,7 @@ class HyperbolicPointUHP(HyperbolicPoint):
 
         EXAMPLES::
 
-            sage: HyperbolicPlane().UHP().get_point(I).show()
+            sage: HyperbolicPlane().UHP().get_point(I).show()                           # needs sage.plot
             Graphics object consisting of 2 graphics primitives
             sage: HyperbolicPlane().UHP().get_point(0).show()                           # needs sage.plot
             Graphics object consisting of 2 graphics primitives

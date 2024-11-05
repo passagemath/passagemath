@@ -1,5 +1,5 @@
 ==============================================================================
- Sage: Open Source Mathematics Software: Graph (iso/auto)morphisms with bliss
+ passagemath: Graph (iso/auto)morphisms with bliss
 ==============================================================================
 
 About SageMath

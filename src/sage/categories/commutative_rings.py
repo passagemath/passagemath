@@ -339,12 +339,12 @@ class CommutativeRings(CategoryWithAxiom):
             We can specify a different codomain::
 
                 sage: K = R.fraction_field()
-                sage: M = R.derivation_module(K); M                                         # needs sage.modules
+                sage: M = R.derivation_module(K); M                                         # needs sage.libs.singular sage.modules
                 Module of derivations
                  from Multivariate Polynomial Ring in x, y, z over Rational Field
                    to Fraction Field of
                       Multivariate Polynomial Ring in x, y, z over Rational Field
-                sage: M.gen() / x                                                           # needs sage.modules
+                sage: M.gen() / x                                                           # needs sage.libs.singular sage.modules
                 1/x*d/dx
 
             Here is an example with a non-canonical defining morphism::

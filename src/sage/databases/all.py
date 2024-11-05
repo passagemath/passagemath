@@ -46,9 +46,11 @@ EXAMPLES::
 #  the License, or (at your option) any later version.
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
-from sage.misc.lazy_import import lazy_import
 
-from sage.databases.sql_db import SQLQuery, SQLDatabase
+from sage.databases.all__sagemath_combinat import *
+from sage.databases.all__sagemath_graphs import *
+
+from sage.misc.lazy_import import lazy_import
 
 lazy_import('sage.databases.conway', 'ConwayPolynomials')
 
@@ -58,10 +60,6 @@ lazy_import('sage.databases.jones', 'JonesDatabase')
 
 lazy_import('sage.databases.stein_watkins',
             ['SteinWatkinsAllData', 'SteinWatkinsPrimeData'])
-
-lazy_import('sage.databases.sloane', 'SloaneEncyclopedia')
-
-lazy_import('sage.databases.oeis', 'oeis')
 
 lazy_import('sage.databases.symbolic_data', 'SymbolicData')
 
@@ -79,5 +77,4 @@ from sage.databases.db_class_polynomials import \
 
 lazy_import('sage.databases.cunningham_tables', 'cunningham_prime_factors')
 
-lazy_import('sage.databases.findstat', ['findstat', 'findmap'])
 del lazy_import

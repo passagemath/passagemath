@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 # Macros from acb_poly.h
 # See https://github.com/flintlib/flint/issues/1529
 

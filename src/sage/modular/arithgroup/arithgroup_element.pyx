@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 """
 Elements of arithmetic subgroups
 """
@@ -18,7 +19,9 @@ from sage.structure.richcmp cimport richcmp
 from sage.rings.integer_ring import ZZ
 
 from sage.matrix.matrix_space import MatrixSpace
-from sage.matrix.matrix_integer_dense cimport Matrix_integer_dense
+from sage.matrix.matrix_dense cimport Matrix_dense
+from sage.matrix.matrix_generic_dense cimport Matrix_generic_dense as MatrixClass
+# FIXME: This was Matrix_integer_dense; changed for modularization to avoid flint dep
 
 M2Z = MatrixSpace(ZZ, 2)
 
@@ -29,7 +32,7 @@ cdef class ArithmeticSubgroupElement(MultiplicativeGroupElement):
     determinant 1.
     """
 
-    cdef Matrix_integer_dense __x
+    cdef Matrix_dense __x
 
     def __init__(self, parent, x, check=True):
         """

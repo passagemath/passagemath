@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Subschemes of affine space
 
@@ -510,6 +511,7 @@ class AlgebraicScheme_subscheme_affine_field(AlgebraicScheme_subscheme_affine):
 
         TESTS::
 
+            sage: # needs sage.libs.singular
             sage: A2.<x,y> = AffineSpace(QQ, 2)
             sage: X = A2.subscheme(x - y)
             sage: H = X.Hom(A2)

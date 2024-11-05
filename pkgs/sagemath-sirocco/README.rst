@@ -1,5 +1,5 @@
 ==================================================================================
- Sage: Open Source Mathematics Software: Certified root continuation with sirocco
+ passagemath: Certified root continuation with sirocco
 ==================================================================================
 
 About SageMath

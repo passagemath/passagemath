@@ -1,5 +1,5 @@
 ============================================================================================================
- Sage: Open Source Mathematics Software: Sage objects, elements, parents, categories, coercion, metaclasses
+ passagemath: Sage objects, elements, parents, categories, coercion, metaclasses
 ============================================================================================================
 
 About SageMath

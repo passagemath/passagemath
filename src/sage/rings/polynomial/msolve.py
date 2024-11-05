@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-msolve
 r"""
 Solution of polynomial systems using msolve
 
@@ -73,6 +74,7 @@ def groebner_basis_degrevlex(ideal, proof=True):
 
         sage: from sage.rings.polynomial.msolve import groebner_basis_degrevlex
 
+        sage: # needs sage.libs.singular
         sage: R.<a,b,c> = PolynomialRing(GF(101), 3, order='lex')
         sage: I = sage.rings.ideal.Katsura(R,3)
         sage: gb = groebner_basis_degrevlex(I); gb # optional - msolve
@@ -179,7 +181,7 @@ def variety(ideal, ring, *, proof=True):
          {x: 1, y: 1},
          {x: 0.11535382288068429? + 0.5897428050222055?*I, y: 0.3194484597356763? - 1.633170240915238?*I},
          {x: 0.11535382288068429? - 0.5897428050222055?*I, y: 0.3194484597356763? + 1.633170240915238?*I}]
-        sage: I.variety(ComplexField(100))
+        sage: I.variety(ComplexField(100))                                              # needs sage.libs.singular
         [{y: 1.0000000000000000000000000000, x: 1.0000000000000000000000000000},
          {y: 0.36110308052864737763464656216, x: 2.7692923542386314152404094643},
          {y: 0.31944845973567631118267671892 - 1.6331702409152376561188467320*I, x: 0.11535382288068429237979526783 + 0.58974280502220550164728074602*I},

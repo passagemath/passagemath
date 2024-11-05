@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from sage.structure.parent cimport Parent
 from sage.structure.element cimport Element
 from sage.structure.element cimport CommutativeAlgebraElement

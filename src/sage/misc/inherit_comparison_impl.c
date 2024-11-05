@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-objects
+ */
 /*
  * Copy comparison methods from type "src" to type "dst" if "dst" has
  * no comparison defined.

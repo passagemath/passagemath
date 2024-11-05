@@ -254,8 +254,9 @@ SINGULAR_BIN = var("SINGULAR_BIN") or "Singular"
 OPENMP_CFLAGS = var("OPENMP_CFLAGS", "")
 OPENMP_CXXFLAGS = var("OPENMP_CXXFLAGS", "")
 
-# Make sure mpmath uses Sage types
-os.environ['MPMATH_SAGE'] = '1'
+# Make sure that mpmath < 1.4 does not try to use Sage types
+os.environ.pop('MPMATH_SAGE', None)
+os.environ['MPMATH_NOSAGE'] = '1'
 
 # misc
 SAGE_BANNER = var("SAGE_BANNER", "")
@@ -271,6 +272,12 @@ SAGE_GAP_COMMAND = var('SAGE_GAP_COMMAND', None)
 GAP_ROOT_PATHS = var("GAP_ROOT_PATHS",
                      ";".join([join(SAGE_LOCAL, "lib", "gap"),
                                join(SAGE_LOCAL, "share", "gap")]))
+try:
+    import gap
+except ImportError:
+    pass
+else:
+    GAP_ROOT_PATHS = ';'.join([p for p in gap.__path__] + [GAP_ROOT_PATHS])
 
 # post process
 if DOT_SAGE is not None and ' ' in DOT_SAGE:
@@ -366,6 +373,7 @@ def cython_aliases(required_modules=None, optional_modules=None):
 
     EXAMPLES::
 
+        sage: # needs sage.misc.cython (actually just pkgconfig)
         sage: from sage.env import cython_aliases
         sage: cython_aliases()
         {...}

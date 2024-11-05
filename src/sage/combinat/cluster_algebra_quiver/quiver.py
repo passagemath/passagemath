@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.graphs sage.modules
 r"""
 Quiver
@@ -2220,11 +2221,13 @@ class ClusterQuiver(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.geometry.polyhedron
             sage: Fg = ClusterQuiver([[1,2]]).g_vector_fan(); Fg
             Rational polyhedral fan in 2-d lattice N
             sage: Fg.ngenerating_cones()
             5
 
+            sage: # needs sage.geometry.polyhedron
             sage: Fg = ClusterQuiver([[1,2],[2,3]]).g_vector_fan(); Fg
             Rational polyhedral fan in 3-d lattice N
             sage: Fg.ngenerating_cones()
@@ -2232,6 +2235,7 @@ class ClusterQuiver(SageObject):
             sage: Fg.is_smooth()
             True
 
+            sage: # needs sage.geometry.polyhedron
             sage: Fg = ClusterQuiver([[1,2],[2,3],[3,1]]).g_vector_fan(); Fg
             Rational polyhedral fan in 3-d lattice N
             sage: Fg.ngenerating_cones()
@@ -2241,6 +2245,7 @@ class ClusterQuiver(SageObject):
 
         TESTS::
 
+            sage: # needs sage.geometry.polyhedron
             sage: ClusterQuiver(['A',[2,2],1]).g_vector_fan()
             Traceback (most recent call last):
             ...

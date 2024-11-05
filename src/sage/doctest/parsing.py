@@ -560,7 +560,7 @@ def parse_tolerance(source, want):
         0
         sage: marked.rel_tol
         0
-        sage: marked.abs_tol
+        sage: marked.abs_tol                                                            # needs sage.rings.real_mpfr
         0.010000000000000000000...?
     """
     # regular expressions
@@ -870,7 +870,7 @@ class SageDocTestParser(doctest.DocTestParser):
             '0.893515349287690\n'
             sage: type(ex.want)
             <class 'sage.doctest.marked_output.MarkedOutput'>
-            sage: ex.want.tol
+            sage: ex.want.tol                                                           # needs sage.rings.real_interval_field
             2.000000000000000000...?e-11
 
         You can use continuation lines::
@@ -1208,6 +1208,8 @@ class SageOutputChecker(doctest.OutputChecker):
         '0.893515349287690\n'
         sage: type(ex.want)
         <class 'sage.doctest.marked_output.MarkedOutput'>
+
+        sage: # needs sage.rings.real_interval_field
         sage: ex.want.tol
         2.000000000000000000...?e-11
         sage: OC.check_output(ex.want, '0.893515349287690', optflag)
@@ -1516,6 +1518,12 @@ class SageOutputChecker(doctest.OutputChecker):
             pythran_numpy_warning_regex = re.compile(r'WARNING: Overriding pythran description with argspec information for: numpy\.random\.[a-z_]+')
             got = pythran_numpy_warning_regex.sub('', got)
             did_fixup = True
+
+        if "ld_classic is deprecated" in got:
+            ld_classic_warning_regex = re.compile(r'ld: warning: -ld_classic is deprecated and will be removed in a future release')
+            got = ld_classic_warning_regex.sub('', got)
+            did_fixup = True
+
         return did_fixup, want, got
 
     def output_difference(self, example, got, optionflags):

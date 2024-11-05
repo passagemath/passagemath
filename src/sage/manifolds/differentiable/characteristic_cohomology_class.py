@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-symbolics
+# sage.doctest: needs sage.combinat
 r"""
 Characteristic cohomology classes
 

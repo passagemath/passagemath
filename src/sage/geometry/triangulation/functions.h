@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-polyhedra
+ */
 #ifndef FUNCTIONS__H
 #define FUNCTIONS__H
 

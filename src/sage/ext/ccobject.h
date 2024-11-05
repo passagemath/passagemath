@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-objects
+ */
 #ifndef __SAGE_CCOBJECT_H__
 #define __SAGE_CCOBJECT_H__
 

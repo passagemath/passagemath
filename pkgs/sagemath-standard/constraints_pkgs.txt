@@ -17,5 +17,5 @@
 # Reference on the format:
 # https://pip.pypa.io/en/stable/user_guide/#constraints-files
 #
-sage_conf            @ file://${SAGE_ROOT}/pkgs/sage-conf
-sage_setup           @ file://${SAGE_ROOT}/pkgs/sage-setup
+passagemath-conf     @ file://${SAGE_ROOT}/pkgs/sage-conf
+passagemath-setup    @ file://${SAGE_ROOT}/pkgs/sage-setup

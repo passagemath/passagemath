@@ -1,19 +1,16 @@
 # Code of Conduct #
 
-This Code was approved by the Sage community by a vote which ended on
-March 31, 2024.
-
 ## Introduction ##
 
-The Sage community is comprised of an international mixture of mathematicians,
+The passagemath community is comprised of an international mixture of mathematicians,
 computer scientists, engineers, researchers, teachers, amateurs, and others
 with varied backgrounds. This diversity is one of our strengths, but it can
 also lead to communication problems and unhappiness. People who love working on
-Sage can more effectively collaborate with others if they follow this Code.
+passagemath can more effectively collaborate with others if they follow this Code.
 
 This document is complemented by a second, [the Code of Conduct
 Committee Manual](/CODE_OF_CONDUCT_COMMITTEE.md), which describes the
-roles and procedures for the Sage Code of Conduct Committee.
+roles and procedures for the passagemath Code of Conduct Committee.
 
 ## Guidelines ##
 
@@ -25,7 +22,7 @@ roles and procedures for the Sage Code of Conduct Committee.
 3. Be considerate. Your work will be used by other people and you in turn will
    depend on the work of others. Any decision you take will affect users and
    developers, so you should take those consequences into account when making
-   decisions. Conversely, Sage is constantly evolving, and earlier decisions
+   decisions. Conversely, passagemath is constantly evolving, and earlier decisions
    that were made in good faith may sometimes need to be reconsidered.
    Nonetheless, we should still appreciate the hard work done in the past.
 
@@ -34,7 +31,7 @@ roles and procedures for the Sage Code of Conduct Committee.
    experience some frustration now and then, but we cannot allow that
    frustration to morph into personal attacks. It is important to remember that
    a community where people feel uncomfortable or threatened is not a
-   productive one. Members of the Sage community should be respectful when
+   productive one. Members of the passagemath community should be respectful when
    dealing with other developers and users.
 
    When we disagree, we should try to understand why. Disagreements, both
@@ -56,14 +53,13 @@ roles and procedures for the Sage Code of Conduct Committee.
     8. Repeated harassment of others. In general, if someone asks you to stop, then stop.
     9. Advocating for, or encouraging, any of the above behavior.
 
-This Code of Conduct applies to all spaces managed by the Sage
+This Code of Conduct applies to all spaces managed by the passagemath
 project, including all public and private mailing lists, issue
 trackers, wikis, and any other communication channel used by our
-community. It also applies to Sage Days and any other in-person or
-virtual events.
+community. It also applies to any in-person or virtual events.
 
 This Code of Conduct should be honored by everyone who participates in
-the Sage community formally or informally, or claims any affiliation
+the passagemath community formally or informally, or claims any affiliation
 with the project, in any project-related activities, and, especially,
 when representing the project, in any role.
 
@@ -75,7 +71,7 @@ surrounding community.
 
 ## Diversity statement ##
 
-Sage welcomes and encourages participation in our community by people
+passagemath welcomes and encourages participation in our community by people
 of all backgrounds and identities. We are committed to promoting and
 sustaining a culture that values mutual respect, tolerance, and
 learning, and we work together as a community to help each other live
@@ -89,10 +85,10 @@ phenotype, political beliefs, profession, race, religion, sexual
 orientation, socioeconomic status, subculture, and technical ability,
 to the extent that these do not conflict with this Code of Conduct.
 
-Though we welcome people fluent in all languages, Sage development is
+Though we welcome people fluent in all languages, passagemath development is
 conducted in English.
 
-Standards for behavior in the Sage community are detailed in the Code
+Standards for behavior in the passagemath community are detailed in the Code
 of Conduct above. Participants in our community should uphold these
 standards in all their interactions and help others to do so as well.
 
@@ -104,23 +100,18 @@ that sometimes people may have a bad day, or be unaware of some of the
 guidelines in this Code of Conduct. Please keep this in mind when
 deciding on how to respond to a breach of this Code.
 
-For clearly intentional breaches, report those to the Sage Code of
+For clearly intentional breaches, report those to the passagemath Code of
 Conduct Committee (see below). For possibly unintentional breaches,
 you may reply to the person and point out this Code of Conduct (either
 in public or in private, whatever is most appropriate). If you would
-prefer not to do that, please feel free to report to the Sage Code of
+prefer not to do that, please feel free to report to the passagemath Code of
 Conduct Committee directly, or ask the committee for advice, in
 confidence.
 
-You can report issues to the Sage Code of Conduct Committee at
-sage-conduct@googlegroups.com. Currently, the committee consists of:
+You can report issues to the passagemath Code of Conduct Committee.
+Currently, the committee consists of:
 
-- Nils Bruin
-- J-P Labbé
-- John Palmieri
-- Viviane Pons
-- David Roe
-- Julian Rüth
+- @mkoeppe
 
 If your report involves any members of the committee, or if they feel
 they have a conflict of interest in handling it, then they will recuse
@@ -133,14 +124,14 @@ then you can also contact individual committee members.
 This section summarizes the most important points; more details can be
 found in the Code of Conduct enforcement guide.
 
-The Sage Code of Conduct Committee will investigate and respond to all
+The passagemath Code of Conduct Committee will investigate and respond to all
 complaints. The committee will protect the identity of the reporter,
 and treat the content of complaints as confidential (unless the
 reporter agrees otherwise).
 
 In case of severe and obvious breaches, e.g., personal threat or
 violent, sexist or racist language, the committee will immediately
-disconnect the originator from Sage communication channels; please see
+disconnect the originator from passagemath communication channels; please see
 the manual for details.
 
 In cases not involving clear severe and obvious breaches of this Code
@@ -152,12 +143,12 @@ violation report will be:
 - discussion with and/or feedback provided to the reportee
 - mediation (if feedback didn’t help, and only if both reporter and
   reportee agree to this)
-- enforcement via transparent decision by the Sage Code of Conduct Committee
+- enforcement via transparent decision by the passagemath Code of Conduct Committee
 
 The committee will respond to any report as soon as possible, and our
 goal will be to respond within 72 hours.
 
-Potential consequences for violating the Sage Code of Conduct include:
+Potential consequences for violating the passagemath Code of Conduct include:
 
 - Nothing (for example if the matter has been resolved publicly while
   the committee was considering responses)
@@ -167,7 +158,7 @@ Potential consequences for violating the Sage Code of Conduct include:
 - A public announcement that an incident occurred
 - Mediation (only if both reporter and reportee agree)
 - An imposed vacation (e.g. asking someone to "take a week off" from a mailing list)
-- A permanent or temporary ban from some or all Sage spaces (mailing
+- A permanent or temporary ban from some or all passagemath spaces (mailing
   lists, GitHub repos, in-person events, etc.)
 - Assistance to the reporter with a report to other bodies, for
   example, institutional offices or appropriate law enforcement
@@ -177,7 +168,7 @@ Potential consequences for violating the Sage Code of Conduct include:
   (usually pursued by people without formal authority: may be called
   for if the person is the event leader, or refuses to stand aside
   from the conflict of interest, or similar)
-- Any other response that the Sage Code of Conduct Committee deems necessary and
+- Any other response that the passagemath Code of Conduct Committee deems necessary and
   appropriate to the situation
 
 ## Policies and procedures of common project platforms ##
@@ -195,12 +186,7 @@ Google groups:
 
 ## Amending the Code of Conduct ##
 
-This document may be amended by a vote of the Sage
-community in the sage-devel Google group, with the exception of facts
-like the membership of the Sage Code of Conduct Committee, changes to
-URLs, or changes to email addresses: changes like that can be done via
-a normal pull request. Any pull requests involving this document
-should list the committee members as reviewers.
+TBD.
 
 ## Credits ##
 

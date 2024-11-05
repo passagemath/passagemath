@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Partition/Diagram Algebras
@@ -996,11 +997,12 @@ def SetPartitionsTk(k):
         sage: T3.cardinality()
         5
 
-        sage: T3.first() #random
+        sage: # needs sage.graphs
+        sage: T3.first()             # random
         {{1, -3}, {2, 3}, {-1, -2}}
-        sage: T3.last() #random
+        sage: T3.last()              # random
         {{1, 2}, {3, -1}, {-3, -2}}
-        sage: T3.random_element() #random
+        sage: T3.random_element()    # random
         {{1, -3}, {2, 3}, {-1, -2}}
 
         sage: T2p5 = SetPartitionsTk(2.5); T2p5
@@ -1008,9 +1010,10 @@ def SetPartitionsTk(k):
         sage: T2p5.cardinality()
         2
 
-        sage: T2p5.first() #random
+        sage: # needs sage.graphs
+        sage: T2p5.first()           # random
         {{2, -2}, {3, -3}, {1, -1}}
-        sage: T2p5.last() #random
+        sage: T2p5.last()            # random
         {{1, 2}, {3, -3}, {-1, -2}}
     """
     is_int, k = _int_or_half_int(k)
@@ -1033,6 +1036,7 @@ class SetPartitionsTk_k(SetPartitionsBk_k):
         """
         TESTS::
 
+            sage: # needs sage.graphs
             sage: T3 = SetPartitionsTk(3)
             sage: A3 = SetPartitionsAk(3)
             sage: all(sp in T3 for sp in T3)
@@ -1069,7 +1073,8 @@ class SetPartitionsTk_k(SetPartitionsBk_k):
         """
         TESTS::
 
-            sage: SetPartitionsTk(3).list() #random
+            sage: # needs sage.graphs
+            sage: SetPartitionsTk(3).list()  # random
             [{{1, -3}, {2, 3}, {-1, -2}},
              {{2, -2}, {3, -3}, {1, -1}},
              {{1, 2}, {3, -3}, {-1, -2}},
@@ -1512,7 +1517,7 @@ class PartitionAlgebra_generic(CombinatorialFreeModule):
 
             sage: from sage.combinat.partition_algebra import *
             sage: s = PartitionAlgebra_sk(QQ, 3, 1)
-            sage: TestSuite(s).run()
+            sage: TestSuite(s).run()                                                    # needs sage.graphs
             sage: s == loads(dumps(s))
             True
         """
@@ -1543,7 +1548,7 @@ class PartitionAlgebra_generic(CombinatorialFreeModule):
             sage: from sage.combinat.partition_algebra import *
             sage: s = PartitionAlgebra_sk(QQ, 3, 1)
             sage: t12 = s(Set([Set([1,-2]),Set([2,-1]),Set([3,-3])]))
-            sage: t12^2 == s(1) #indirect doctest
+            sage: t12^2 == s(1)  # indirect doctest                                     # needs sage.graphs
             True
         """
         sp, l = set_partition_composition(left, right)
@@ -1787,13 +1792,13 @@ def to_graph(sp):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: import sage.combinat.partition_algebra as pa
-        sage: g = pa.to_graph( pa.to_set_partition([[1,-2],[2,-1]])); g
+        sage: g = pa.to_graph(pa.to_set_partition([[1,-2], [2,-1]])); g
         Graph on 4 vertices
-
-        sage: g.vertices(sort=False) #random
+        sage: g.vertices(sort=False)    # random
         [1, 2, -2, -1]
-        sage: g.edges(sort=False) #random
+        sage: g.edges(sort=False)       # random
         [(1, -2, None), (2, -1, None)]
     """
     g = Graph()
@@ -1820,6 +1825,7 @@ def pair_to_graph(sp1, sp2):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: import sage.combinat.partition_algebra as pa
         sage: sp1 = pa.to_set_partition([[1,-2],[2,-1]])
         sage: sp2 = pa.to_set_partition([[1,-2],[2,-1]])
@@ -1828,6 +1834,7 @@ def pair_to_graph(sp1, sp2):
 
     ::
 
+        sage: # needs sage.graphs
         sage: g.vertices(sort=False) #random
         [(1, 2), (-1, 1), (-2, 2), (-1, 2), (-2, 1), (2, 1), (2, 2), (1, 1)]
         sage: g.edges(sort=False) #random
@@ -1840,11 +1847,11 @@ def pair_to_graph(sp1, sp2):
 
     Another example which used to be wrong until :issue:`15958`::
 
+        sage: # needs sage.graphs
         sage: sp3 = pa.to_set_partition([[1, -1], [2], [-2]])
         sage: sp4 = pa.to_set_partition([[1], [-1], [2], [-2]])
         sage: g = pa.pair_to_graph( sp3, sp4 ); g
         Graph on 8 vertices
-
         sage: g.vertices(sort=True)
         [(-2, 1), (-2, 2), (-1, 1), (-1, 2), (1, 1), (1, 2), (2, 1), (2, 2)]
         sage: g.edges(sort=True)
@@ -1963,6 +1970,7 @@ def set_partition_composition(sp1, sp2):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: import sage.combinat.partition_algebra as pa
         sage: sp1 = pa.to_set_partition([[1,-2],[2,-1]])
         sage: sp2 = pa.to_set_partition([[1,-2],[2,-1]])

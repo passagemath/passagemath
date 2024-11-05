@@ -1,5 +1,5 @@
 ====================================================================================================================
- Sage: Open Source Mathematics Software: Coxeter groups, Bruhat ordering, Kazhdan-Lusztig polynomials with coxeter3
+ passagemath: Coxeter groups, Bruhat ordering, Kazhdan-Lusztig polynomials with coxeter3
 ====================================================================================================================
 
 About SageMath

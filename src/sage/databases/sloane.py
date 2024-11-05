@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 """
 Local copy of the On-Line Encyclopedia of Integer Sequences
 

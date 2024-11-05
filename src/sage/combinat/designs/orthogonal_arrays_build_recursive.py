@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.rings.finite_rings
 r"""
 Orthogonal arrays (build recursive constructions)
@@ -68,7 +69,7 @@ def construction_3_3(k,n,m,i,explain_construction=False):
         sage: is_orthogonal_array(construction_3_3(*find_construction_3_3(k,n)[1]),k,n,2)           # needs sage.schemes
         True
 
-        sage: print(designs.orthogonal_arrays.explain_construction(9,91))
+        sage: print(designs.orthogonal_arrays.explain_construction(9,91))                           # needs sage.schemes
         Construction 3.3 with n=11,m=8,i=3 from:
            Julian R. Abel, Nicholas Cavenagh
            Concerning eight mutually orthogonal latin squares,
@@ -140,7 +141,7 @@ def construction_3_4(k,n,m,r,s,explain_construction=False):
         sage: is_orthogonal_array(construction_3_4(*find_construction_3_4(k,n)[1]),k,n,2)           # needs sage.schemes
         True
 
-        sage: print(designs.orthogonal_arrays.explain_construction(8,164))
+        sage: print(designs.orthogonal_arrays.explain_construction(8,164))                          # needs sage.schemes
         Construction 3.4 with n=23,m=7,r=2,s=1 from:
            Julian R. Abel, Nicholas Cavenagh
            Concerning eight mutually orthogonal latin squares,
@@ -216,7 +217,7 @@ def construction_3_5(k,n,m,r,s,t,explain_construction=False):
         sage: is_orthogonal_array(construction_3_5(*find_construction_3_5(k,n)[1]),k,n,2)           # needs sage.schemes
         True
 
-        sage: print(designs.orthogonal_arrays.explain_construction(8,90))
+        sage: print(designs.orthogonal_arrays.explain_construction(8,90))                           # needs sage.schemes
         Construction 3.5 with n=11,m=6,r=8,s=8,t=8 from:
            Julian R. Abel, Nicholas Cavenagh
            Concerning eight mutually orthogonal latin squares,
@@ -309,7 +310,7 @@ def construction_3_6(k,n,m,i,explain_construction=False):
         sage: is_orthogonal_array(construction_3_6(*find_construction_3_6(k,n)[1]),k,n,2)           # needs sage.schemes
         True
 
-        sage: print(designs.orthogonal_arrays.explain_construction(10,756))
+        sage: print(designs.orthogonal_arrays.explain_construction(10,756))                         # needs sage.schemes
         Construction 3.6 with n=16,m=47,i=4 from:
            Julian R. Abel, Nicholas Cavenagh
            Concerning eight mutually orthogonal latin squares,
@@ -503,7 +504,7 @@ def construction_q_x(k, q, x, check=True, explain_construction=False):
         sage: from sage.combinat.designs.orthogonal_arrays_build_recursive import construction_q_x
         sage: _ = construction_q_x(9,16,6)                                                          # needs sage.schemes
 
-        sage: print(designs.orthogonal_arrays.explain_construction(9,158))
+        sage: print(designs.orthogonal_arrays.explain_construction(9,158))                          # needs sage.schemes
         (q-x)-construction with q=16,x=6 from:
            Malcolm Greig,
            Designs from projective planes and PBD bases,
@@ -677,7 +678,7 @@ def thwart_lemma_3_5(k,n,m,a,b,c,d=0,complement=False,explain_construction=False
         ....:     OA = thwart_lemma_3_5(k,n,m,a,b,c,d,complement=True)
         ....:     assert is_orthogonal_array(OA,k,n*m+a+b+c+d,verbose=True)
 
-        sage: print(designs.orthogonal_arrays.explain_construction(10,1046))
+        sage: print(designs.orthogonal_arrays.explain_construction(10,1046))                        # needs sage.schemes
         Lemma 3.5 with n=13,m=79,a=9,b=1,c=0,d=9 from:
            Charles J.Colbourn, Jeffrey H. Dinitz, Mieczyslaw Wojtas,
            Thwarts in transversal designs,
@@ -1172,14 +1173,14 @@ def _reorder_matrix(matrix):
         sage: from sage.combinat.designs.orthogonal_arrays_build_recursive import _reorder_matrix
         sage: N = 4; k = 3
         sage: M = [[0,1,2],[0,1,3],[0,2,3],[1,2,3]]
-        sage: M2 = _reorder_matrix(M)
-        sage: all(set(M2[i][0] for i in range(N)) == set(range(N)) for i in range(k))
+        sage: M2 = _reorder_matrix(M)                                                   # needs sage.numerical.mip
+        sage: all(set(M2[i][0] for i in range(N)) == set(range(N)) for i in range(k))   # needs sage.numerical.mip
         True
 
         sage: M = [list(range(10))] * 10
         sage: N = k = 10
-        sage: M2 = _reorder_matrix(M)
-        sage: all(set(M2[i][0] for i in range(N)) == set(range(N)) for i in range(k))
+        sage: M2 = _reorder_matrix(M)                                                   # needs sage.numerical.mip
+        sage: all(set(M2[i][0] for i in range(N)) == set(range(N)) for i in range(k))   # needs sage.numerical.mip
         True
     """
     from sage.graphs.graph import Graph
@@ -1355,6 +1356,7 @@ def brouwer_separable_design(k,t,q,x,check=False,verbose=False,explain_construct
 
     Test all possible cases::
 
+        sage: # needs conway_polynomials
         sage: from sage.combinat.designs.orthogonal_arrays_build_recursive import brouwer_separable_design
         sage: k,q,t=4,4,3; _=brouwer_separable_design(k,q,t,0,verbose=True)
         Case i) with k=4,q=3,t=4,x=0

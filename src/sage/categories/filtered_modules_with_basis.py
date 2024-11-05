@@ -1182,6 +1182,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
                 EXAMPLES::
 
+                    sage: # needs sage.geometry.polyhedron
                     sage: OS = hyperplane_arrangements.braid(3).orlik_solomon_algebra(QQ)
                     sage: OS.hilbert_series()
                     2*t^2 + 3*t + 1

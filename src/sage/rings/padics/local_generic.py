@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.rings.padics
 r"""
 Local Generic
@@ -1168,6 +1169,7 @@ class LocalGeneric(CommutativeRing):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: K = Qp(2, print_mode='digits', prec=10)
             sage: M = matrix(K, 2, 2, [K(1,5),K(2,7),K(3,3),K(5,8)])
             sage: M
@@ -1230,9 +1232,9 @@ class LocalGeneric(CommutativeRing):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: A = Zp(5, prec=10, print_mode='digits')
             sage: M = matrix(A, 2, 2, [2, 7, 1, 6])
-
             sage: S, L, R = M.smith_form()  # indirect doctest
             sage: S
             [ ...1     0]
@@ -1247,12 +1249,14 @@ class LocalGeneric(CommutativeRing):
         If not needed, it is possible to avoid the computation of
         the transformations matrices `L` and `R`::
 
+            sage: # needs sage.modules
             sage: M.smith_form(transformation=False)  # indirect doctest
             [ ...1     0]
             [    0 ...10]
 
         This method works for rectangular matrices as well::
 
+            sage: # needs sage.modules
             sage: M = matrix(A, 3, 2, [2, 7, 1, 6, 3, 8])
             sage: S, L, R = M.smith_form()  # indirect doctest
             sage: S
@@ -1271,6 +1275,7 @@ class LocalGeneric(CommutativeRing):
         minimum precision of any entry in the matrix, then they are
         reported as an inexact zero::
 
+            sage: # needs sage.modules
             sage: A = ZpCA(5, prec=10)
             sage: M = matrix(A, 2, 2, [5, 5, 5, 5])
             sage: M.smith_form(transformation=False, exact=False)  # indirect doctest
@@ -1280,6 +1285,7 @@ class LocalGeneric(CommutativeRing):
         However, an error is raised if the precision on the entries is
         not enough to determine which column to use as a pivot at some point::
 
+            sage: # needs sage.modules
             sage: M = matrix(A, 2, 2, [A(0,5), A(5^6,10), A(0,8), A(5^7,10)]); M
             [       O(5^5) 5^6 + O(5^10)]
             [       O(5^8) 5^7 + O(5^10)]
@@ -1290,12 +1296,14 @@ class LocalGeneric(CommutativeRing):
 
         TESTS::
 
+            sage: # needs sage.modules
             sage: A = ZpCR(5, prec=10)
             sage: M = zero_matrix(A, 2)                                                 # needs sage.geometry.polyhedron
             sage: M.smith_form(transformation=False)  # indirect doctest
             [0 0]
             [0 0]
 
+            sage: # needs sage.modules
             sage: M = matrix(2, 2, [ A(0,10), 0, 0, 0] )
             sage: M.smith_form(transformation=False)  # indirect doctest
             Traceback (most recent call last):
@@ -1541,6 +1549,7 @@ class LocalGeneric(CommutativeRing):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: R = Qp(5,10)
             sage: M = matrix(R, 2, 2, [1, 6, 2, 7])
             sage: M.determinant()  # indirect doctest
@@ -1551,6 +1560,7 @@ class LocalGeneric(CommutativeRing):
 
         Sometimes, we gain precision on the determinant::
 
+            sage: # needs sage.modules
             sage: M = matrix(R, 3, 3,
             ....:             [R(16820,7), R(73642,7), R( 3281,7),
             ....:              R(67830,7), R(63768,7), R(76424,7),
@@ -1562,6 +1572,7 @@ class LocalGeneric(CommutativeRing):
 
         We check the stability of our algorithm::
 
+            sage: # needs sage.modules
             sage: for dim in range(3,10):
             ....:     M = matrix(dim, dim, [ R(1) for _ in range(dim^2) ])
             ....:     print(M.determinant())

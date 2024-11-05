@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # cython: binding=True
 # distutils: language = c++
 # distutils: extra_compile_args = -std=c++11
@@ -326,7 +327,7 @@ def slice_decomposition(G, initial_vertex=None):
         sage: from sage.graphs.graph_latex import check_tkz_graph
         sage: check_tkz_graph()  # random - depends on Tex installation
         sage: view(G)  # not tested
-        sage: latex(G)  # to obtain the corresponding LaTeX code
+        sage: latex(G)  # to obtain the corresponding LaTeX code                        # needs sage.plot
         \begin{tikzpicture}
         ...
         \end{tikzpicture}

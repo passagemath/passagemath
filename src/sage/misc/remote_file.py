@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-repl
 "get_remote_file"
 import os
 from pathlib import Path

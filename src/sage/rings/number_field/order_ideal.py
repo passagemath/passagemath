@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 r"""
 Ideals of (Not Necessarily Maximal) Orders in Number Fields
 

@@ -123,7 +123,7 @@ if [ -n "$SAGE_SILENT_BUILD" -a ${use_prefix} = true ]; then
             sed "s;^;  [$logname]   ;" "$logfile" >&2
         else
             echo "  [$logname] error installing, exit status $status. End of log file:"
-            tail -n 120 "$logfile" | sed "/Please email sage-devel/,$ d;s;^;  [$logname]   ;" >&2
+            tail -n 12000 "$logfile" | sed "/Please email sage-devel/,$ d;s;^;  [$logname]   ;" >&2
             echo "  [$logname] Full log file: $logfile"
         fi
     else

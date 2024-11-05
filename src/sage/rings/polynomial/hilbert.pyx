@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 r"""
 Compute Hilbert series of monomial ideals
 
@@ -461,12 +462,12 @@ def first_hilbert_series(I, grading=None, return_grading=False):
         sage: I = 0*R
         sage: first_hilbert_series(I)
         1
-        sage: first_hilbert_series(singular(I))
+        sage: first_hilbert_series(singular(I))                                         # needs sage.libs.singular
         1
         sage: I = 1*R
         sage: first_hilbert_series(I)
         0
-        sage: first_hilbert_series(singular(I))
+        sage: first_hilbert_series(singular(I))                                         # needs sage.libs.singular
         0
     """
     from sage.rings.integer_ring import ZZ

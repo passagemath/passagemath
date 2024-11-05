@@ -53,7 +53,7 @@ class DatabaseCremona(StaticFile):
     EXAMPLES::
 
         sage: from sage.features.databases import DatabaseCremona
-        sage: DatabaseCremona('cremona_mini', type='standard').is_present()
+        sage: DatabaseCremona('cremona_mini', type='standard').is_present()             # needs database_cremona_mini_ellcurve
         FeatureTestResult('database_cremona_mini_ellcurve', True)
         sage: DatabaseCremona().is_present()                                    # optional - database_cremona_ellcurve
         FeatureTestResult('database_cremona_ellcurve', True)

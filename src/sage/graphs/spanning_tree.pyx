@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # cython: binding=True
 r"""
 Spanning trees
@@ -1312,6 +1313,7 @@ def edge_disjoint_spanning_trees(G, k, by_weight=False, weight_function=None, ch
 
     Check that the method is robust to incomparable vertices::
 
+        sage: # needs sage.numerical.mip
         sage: G = Graph()
         sage: G.add_clique([0, 1, 2, 'a', 'b'])
         sage: F = G.edge_disjoint_spanning_trees(k=2)

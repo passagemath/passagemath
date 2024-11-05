@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # cython: old_style_globals=True
 """
 Dependency usage tracking for citations
@@ -44,7 +45,7 @@ systems['MPFI'] = ['sage.rings.real_mpfi',
                    'sage.rings.complex_interval']
 systems['M4RI'] = ['sage.matrix.matrix_mod2_dense']
 systems['Givaro'] = ['sage.rings.finite_rings.element_givaro']
-systems['PolyBoRi'] = ['sage.rings.polynomial.pbori']
+systems['PolyBoRi'] = ['sage.rings.polynomial.pbori.pbori']
 
 
 def get_systems(cmd):

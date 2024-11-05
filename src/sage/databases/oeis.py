@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 r"""
 The On-Line Encyclopedia of Integer Sequences (OEIS)
 

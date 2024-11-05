@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Binary quadratic forms with integer coefficients
 
@@ -211,7 +212,7 @@ class BinaryQF(SageObject):
             sage: Q = BinaryQF.principal(D)
             sage: Q.discriminant() == D     # correct discriminant
             True
-            sage: (Q*Q).is_equivalent(Q)    # idempotent (hence identity)
+            sage: (Q*Q).is_equivalent(Q)    # idempotent (hence identity)  # needs sage.libs.pari
             True
         """
         D = ZZ(D)

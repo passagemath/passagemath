@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 import mpmath
 
 # Patch mpmath to use Cythonized functions

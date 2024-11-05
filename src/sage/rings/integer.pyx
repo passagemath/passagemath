@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Elements of the ring `\ZZ` of integers
 
@@ -3953,7 +3954,7 @@ cdef class Integer(sage.structure.element.EuclideanDomainElement):
             sage: p = next_prime(10^15)
             sage: q = next_prime(10^21)
             sage: n = p * q
-            sage: n.factor(algorithm='ecm')
+            sage: n.factor(algorithm='ecm')                                             # needs ecm
             1000000000000037 * 1000000000000000000117
 
         TESTS::

@@ -55,12 +55,14 @@ class Threejs(StaticFile):
         Defining what version is required is delegated to the distribution package
         that provides the file ``threejs-version.txt`` in :mod:`sage.ext_data.threejs`.
 
-        If the file is not provided, :exc:`FileNotFoundError` is raised.
+        If the file is not provided, ``"unknown"`` is returned.
 
         EXAMPLES::
 
             sage: from sage.features.threejs import Threejs
-            sage: Threejs().required_version()
+            sage: type(Threejs().required_version())
+            <class 'str'>
+            sage: Threejs().required_version()                                          # needs sage.plot
             'r...'
         """
         from sage.env import SAGE_EXTCODE

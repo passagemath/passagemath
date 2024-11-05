@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Hyperbolic Geodesics
 
@@ -873,10 +874,11 @@ class HyperbolicGeodesic(SageObject):
 
         EXAMPLES::
 
+            sage: # needs scipy sage.plot
             sage: PD = HyperbolicPlane().PD()
             sage: g = PD.get_geodesic(-0.3+0.4*I,+0.7-0.1*I)
             sage: h = g.perpendicular_bisector().complete()
-            sage: P = g.plot(color='blue')+h.plot(color='orange');P
+            sage: P = g.plot(color='blue') + h.plot(color='orange'); P
             Graphics object consisting of 4 graphics primitives
 
         .. PLOT::
@@ -887,6 +889,7 @@ class HyperbolicGeodesic(SageObject):
 
         Complete geodesics cannot be bisected::
 
+            sage: # needs scipy
             sage: g = HyperbolicPlane().PD().get_geodesic(0, 1)
             sage: g.perpendicular_bisector()
             Traceback (most recent call last):
@@ -895,11 +898,13 @@ class HyperbolicGeodesic(SageObject):
 
         TESTS::
 
+            sage: # needs scipy
             sage: g = HyperbolicPlane().PD().random_geodesic()
             sage: h = g.perpendicular_bisector().complete()
             sage: bool(h.intersection(g)[0].coordinates() - g.midpoint().coordinates() < 10**-9)
             True
 
+            sage: # needs scipy
             sage: g = HyperbolicPlane().UHP().random_geodesic()
             sage: h = g.perpendicular_bisector().complete()
             sage: bool(h.intersection(g)[0].coordinates() - g.midpoint().coordinates() < 10**-9)
@@ -1517,19 +1522,21 @@ class HyperbolicGeodesicUHP(HyperbolicGeodesic):
 
         EXAMPLES::
 
-             sage: UHP = HyperbolicPlane().UHP()
-             sage: g = UHP.random_geodesic()
-             sage: h = g.perpendicular_bisector().complete()
-             sage: c = lambda x: x.coordinates()
-             sage: bool(c(g.intersection(h)[0]) - c(g.midpoint()) < 10**-9)
-             True
+            sage: UHP = HyperbolicPlane().UHP()
+
+            sage: # needs scipy
+            sage: g = UHP.random_geodesic()
+            sage: h = g.perpendicular_bisector().complete()
+            sage: c = lambda x: x.coordinates()
+            sage: bool(c(g.intersection(h)[0]) - c(g.midpoint()) < 10**-9)
+            True
 
         ::
 
-            sage: UHP = HyperbolicPlane().UHP()
-            sage: g = UHP.get_geodesic(1+I,2+0.5*I)
+            sage: # needs scipy
+            sage: g = UHP.get_geodesic(1 + I, 2 + 0.5*I)
             sage: h = g.perpendicular_bisector().complete()
-            sage: show(g.plot(color='blue')+h.plot(color='orange'))
+            sage: show(g.plot(color='blue') + h.plot(color='orange'))
 
         .. PLOT::
 
@@ -1549,6 +1556,7 @@ class HyperbolicGeodesicUHP(HyperbolicGeodesic):
 
         Check the result is independent of the order (:issue:`29936`)::
 
+            sage: # needs scipy
             sage: def bisector_gets_midpoint(a, b):
             ....:     UHP = HyperbolicPlane().UHP()
             ....:     g = UHP.get_geodesic(a, b)

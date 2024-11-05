@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Elements of `\ZZ/n\ZZ`
 
@@ -767,8 +768,8 @@ cdef class IntegerMod_abstract(FiniteRingElement):
         An example for ``check=True``::
 
             sage: F = GF(127, impl='modn')
-            sage: t = F.primitive_element()
-            sage: t.log(t, 57, check=True)
+            sage: t = F.primitive_element()                                             # needs sage.libs.pari
+            sage: t.log(t, 57, check=True)                                              # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             ValueError: base does not have the provided order

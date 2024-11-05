@@ -1,0 +1,2 @@
+$(SAGE_ROOT)/pkgs/sagemath-modules/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-modules/MANIFEST.in $(PYTHON) cysignals gmpy2 sagemath_categories mpfr mpc gsl numpy | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build
+

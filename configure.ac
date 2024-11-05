@@ -127,10 +127,10 @@ AC_ARG_ENABLE([debug],
 AC_ARG_VAR(SAGE_DEBUG, controls debugging support: "no" debugging; debugging "symbols" (default); build debug version ("yes"))
 
 AC_ARG_ENABLE([editable],
-              [AS_HELP_STRING([--disable-editable],
-                              [do not use an editable install of the Sage library: changes to Python files will require "sage -b" to rebuild the Sage library])],
+              [AS_HELP_STRING([--enable-editable],
+                              [use an editable install of the Sage library (experimental)])],
               [AC_SUBST([SAGE_EDITABLE], [$enableval])],
-              [AC_SUBST([SAGE_EDITABLE], [yes])])
+              [AC_SUBST([SAGE_EDITABLE], [no])])
 
 AC_ARG_ENABLE([wheels],
               [AS_HELP_STRING([--enable-wheels],
@@ -450,7 +450,7 @@ AC_ARG_ENABLE([cvxopt],
 AC_ARG_ENABLE([notebook],
   AS_HELP_STRING([--disable-notebook],
                  [disable build of the Jupyter notebook and related packages]), [
-    for pkg in notebook nbconvert beautifulsoup4 sagenb_export nbformat nbclient terminado send2trash prometheus_client mistune pandocfilters bleach defusedxml jsonschema jupyter_jsmol argon2_cffi argon2_cffi_bindings webencodings tinycss2 ipympl soupsieve fastjsonschema anyio arrow async_lru fqdn isoduration json5 jsonpointer jsonschema_specifications jupyter_events jupyter_lsp jupyter_server jupyter_server_terminals jupyterlab jupyterlab_server jupyterlab_pygments jupyterlab_mathjax2 jupyter_sphinx notebook_shim overrides python_json_logger pyyaml referencing rfc3339_validator rfc3986_validator sniffio types_python_dateutil uri_template webcolors websocket_client httpx httpcore h11; do
+    for pkg in notebook nbconvert beautifulsoup4 sagenb_export nbformat nbclient terminado send2trash prometheus_client mistune pandocfilters bleach defusedxml jsonschema jupyter_jsmol argon2_cffi argon2_cffi_bindings webencodings tinycss2 ipympl soupsieve fastjsonschema anyio arrow async_lru fqdn isoduration json5 jsonpointer jsonschema_specifications jupyter_events jupyter_lsp jupyter_server jupyter_server_terminals jupyterlab jupyterlab_server jupyterlab_pygments jupyterlab_mathjax2 jupyter_sphinx notebook_shim overrides python_json_logger pyyaml referencing rfc3339_validator rfc3986_validator rpds_py sniffio types_python_dateutil uri_template webcolors websocket_client httpx httpcore h11; do
       AS_VAR_SET([SAGE_ENABLE_$pkg], [$enableval])
     done
   ])
@@ -484,7 +484,7 @@ AC_ARG_ENABLE([doc],
 AC_ARG_ENABLE([sagelib],
   AS_HELP_STRING([--disable-sagelib],
                  [disable build of the Sage library and packages depending on it]), [
-    for pkg in sagelib sage_docbuild sage_setup; do
+    for pkg in sagelib sage_docbuild sage_setup sagemath_bliss sagemath_brial sagemath_categories sagemath_cmr sagemath_combinat sagemath_coxeter3 sagemath_doc_html sagemath_doc_pdf sagemath_eclib sagemath_environment sagemath_flint sagemath_gap sagemath_giac sagemath_glpk sagemath_graphs sagemath_groups sagemath_homfly sagemath_lcalc sagemath_libbraiding sagemath_libecm sagemath_linbox sagemath_mcqd sagemath_meataxe sagemath_modules sagemath_mpmath sagemath_ntl sagemath_objects sagemath_pari sagemath_plot sagemath_polyhedra sagemath_repl sagemath_schemes sagemath_singular sagemath_sirocco sagemath_standard_no_symbolics sagemath_symbolics sagemath_tdlib; do
       AS_VAR_SET([SAGE_ENABLE_$pkg], [$enableval])
     done
   ])

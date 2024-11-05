@@ -1,14 +1,14 @@
-# Guide for the Sage Code of Conduct Committee #
+# Guide for the passagemath Code of Conduct Committee #
 
 ## Introduction ##
 
-This is the manual followed by the Sage Code of Conduct Committee. It
+This is the manual followed by the passagemath Code of Conduct Committee. It
 complements the [Code of Conduct](/CODE_OF_CONDUCT.md). It is used when
 we respond to an issue to make sure we’re consistent and fair.
 
 Enforcing the Code of Conduct impacts our community today and for the
 future. It’s an action that we do not take lightly. When reviewing
-enforcement measures, the Sage Code of Conduct Committee will keep the
+enforcement measures, the passagemath Code of Conduct Committee will keep the
 following values and guidelines in mind:
 
 - Act in a personal manner rather than impersonal. The committee can
@@ -102,10 +102,10 @@ start at or devolve into obvious and flagrant abuse. We will deal
 quickly with clear and severe breaches like personal threats, violent,
 sexist, or racist language.
 
-When a member of the Sage Code of Conduct Committee becomes aware of a
+When a member of the passagemath Code of Conduct Committee becomes aware of a
 clear and severe breach, they will do the following:
 
-- Immediately disconnect the originator from all Sage communication channels.
+- Immediately disconnect the originator from all passagemath communication channels.
 
 - Reply to the reporter that their report has been received and that
   the originator has been disconnected.
@@ -114,12 +114,12 @@ clear and severe breach, they will do the following:
   contact the originator, and tell them specifically how their
   language or actions qualify as a “clear and severe breach”. The
   moderator should also say that, if the originator believes this is
-  unfair or they want to be reconnected to Sage, they have the right
-  to ask for a review, as below, by the Sage Code of Conduct Committee. The
-  moderator should copy this explanation to the Sage Code of Conduct
+  unfair or they want to be reconnected to passagemath, they have the right
+  to ask for a review, as below, by the passagemath Code of Conduct Committee. The
+  moderator should copy this explanation to the passagemath Code of Conduct
   Committee.
 
-The Sage Code of Conduct Committee will formally review and sign off on all
+The passagemath Code of Conduct Committee will formally review and sign off on all
 cases where this mechanism has been applied to make sure it is not
 being used to control ordinary heated disagreement.
 
@@ -158,7 +158,7 @@ committee finds the need to use off-list communications (e.g., phone
 calls for early/rapid response), it should, in all cases, summarize
 these back to the list so there’s a good record of the process.
 
-The Sage Code of Conduct Committee should aim to have a resolution agreed upon
+The passagemath Code of Conduct Committee should aim to have a resolution agreed upon
 within two weeks. In the event that a resolution can’t be determined
 in that time, the committee will respond to the reporter(s) with an
 update and projected timeline for the resolution.
@@ -210,7 +210,7 @@ Possible responses may include:
   the individual chooses not to take a temporary break voluntarily,
   the committee may issue a “mandatory cooling off period”.
 
-- A permanent or temporary ban from some or all Sage spaces (mailing
+- A permanent or temporary ban from some or all passagemath spaces (mailing
   lists, GitHub, etc.). The group will maintain records of all such
   bans so that they may be reviewed in the future or otherwise
   maintained.
@@ -222,7 +222,7 @@ may or may not choose to provide further details about what actions
 were taken and how they might affect the reporter.
 
 The committee will never publicly discuss the issue; all public
-statements will be made by a representative of the Sage Code of Conduct
+statements will be made by a representative of the passagemath Code of Conduct
 Committee.
 
 ## Conflicts of interest ##
@@ -233,7 +233,7 @@ necessary.
 
 ## Amending the Code of Conduct Committee manual ##
 
-This document may be amended by a vote of the Sage Code of Conduct
+This document may be amended by a vote of the passagemath Code of Conduct
 Committee.
 
 ## Credits ##

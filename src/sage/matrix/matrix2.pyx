@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Base class for matrices, part 2
 
@@ -770,14 +771,14 @@ cdef class Matrix(Matrix1):
 
             sage: A = matrix(ZZ, [[1, 2, 3], [2, 0, 2], [3, 2, 5]])
             sage: b = vector(RDF, [1, 1, 1])
-            sage: A.solve_right(b) == A.change_ring(RDF).solve_right(b)
+            sage: A.solve_right(b) == A.change_ring(RDF).solve_right(b)                 # needs scipy
             ...
             True
 
         A degenerate case::
 
             sage: A = matrix(RDF, 0, 0, [])
-            sage: A.solve_right(vector(RDF,[]))
+            sage: A.solve_right(vector(RDF,[]))                                         # needs scipy
             ()
 
         Over an inexact ring like ``RDF``, the coefficient matrix of a
@@ -785,7 +786,7 @@ cdef class Matrix(Matrix1):
 
             sage: A = matrix(RDF, 5, range(25))
             sage: b = vector(RDF, [1,2,3,4,5])
-            sage: A.solve_right(b)
+            sage: A.solve_right(b)                                                      # needs scipy
             Traceback (most recent call last):
             ...
             LinAlgError: Matrix is singular.
@@ -794,7 +795,7 @@ cdef class Matrix(Matrix1):
 
             sage: A = matrix(RDF, 5, range(25))
             sage: b = vector(RDF, [1,2,3,4])
-            sage: A.solve_right(b)
+            sage: A.solve_right(b)                                                      # needs sage.rings.finite_rings
             Traceback (most recent call last):
             ...
             ValueError: number of rows of self must equal degree of
@@ -1729,7 +1730,7 @@ cdef class Matrix(Matrix1):
             sage: (Mx * M).norm()  # huge error                                         # needs scipy
             11.5...
             sage: Mx = M.pseudoinverse(algorithm='numpy')                               # needs numpy
-            sage: (Mx * M).norm()  # still OK
+            sage: (Mx * M).norm()  # still OK                                           # needs scipy
             1.00...
 
         When multiplying the given matrix with the pseudoinverse, the
@@ -1767,7 +1768,7 @@ cdef class Matrix(Matrix1):
 
         Although it is not too far off::
 
-            sage: (~M - M.pseudoinverse(algorithm='numpy')).norm() < 1e-14              # needs numpy
+            sage: (~M - M.pseudoinverse(algorithm='numpy')).norm() < 1e-14              # needs scipy
             True
 
         TESTS::
@@ -3910,7 +3911,11 @@ cdef class Matrix(Matrix1):
         """
         from sage.matrix.matrix_space import MatrixSpace
         tm = verbose("computing right kernel matrix over a number field for %sx%s matrix" % (self.nrows(), self.ncols()), level=2)
-        basis = self.__pari__().matker()
+        try:
+            self_pari = self.__pari__()
+        except ImportError:
+            return None, None
+        basis = self_pari.matker()
         # Coerce PARI representations into the number field
         R = self.base_ring()
         basis = [[R(x) for x in row] for row in basis]
@@ -7292,6 +7297,7 @@ cdef class Matrix(Matrix1):
         Running this test independently, without adjusting the eigenvectors
         could indicate this situation on your hardware.  ::
 
+            sage: # needs scipy
             sage: A = matrix(QQ, 3, 3, range(9))
             sage: em = A.change_ring(RDF).eigenmatrix_left()
             sage: evalues = em[0]; evalues.dense_matrix()  # abs tol 1e-13
@@ -7353,7 +7359,7 @@ cdef class Matrix(Matrix1):
 
         The following example shows that :issue:`12595` has been resolved::
 
-            sage: # needs sage.rings.complex_double
+            sage: # needs scipy sage.rings.complex_double
             sage: m = Matrix(CDF, 8, [[-1, -1, -1, -1, 1, -3, -1, -1],
             ....:                     [1, 1, 1, 1, -1, -1, 1, -3],
             ....:                     [-1, 3, -1, -1, 1, 1, -1, -1],
@@ -7764,7 +7770,10 @@ cdef class Matrix(Matrix1):
         cdef Matrix d, a
         cdef Py_ssize_t r, c
         cdef bint transformation = 'transformation' in kwds and kwds['transformation']
-        if self._base_ring == ZZ:
+
+        if self._base_ring == ZZ and self.dense_matrix() is not self:
+            # delegate to the specialized echelon form
+            # implemented in matrix_integer_dense
             if 'include_zero_rows' in kwds and not kwds['include_zero_rows']:
                 raise ValueError("cannot echelonize in place and delete zero rows")
             if transformation:
@@ -16214,6 +16223,7 @@ cdef class Matrix(Matrix1):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y,z> = QQ[]
             sage: M = matrix(R, [[2*x-z, 0, y-z^2, 1], [0, z - y, z - x, 0],[z - y, x^2 - y, 0, 0]])
             sage: M
@@ -18855,6 +18865,7 @@ def _matrix_power_symbolic(A, n):
     Check if :issue:`36838` is fixed:Checking symbolic power of
     nilpotent matrix::
 
+        sage: # needs sage.symbolic
         sage: A = matrix([[0,1],[0,0]]); A
         [0 1]
         [0 0]

@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-graphs
+# sage.doctest: needs database_graphs
 r"""
 ISGCI: Information System on Graph Classes and their Inclusions
 

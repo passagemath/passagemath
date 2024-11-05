@@ -1,0 +1,2 @@
+$(SAGE_ROOT)/pkgs/sagemath-plot/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-plot/MANIFEST.in $(PYTHON) cysignals gmpy2 sagemath_categories matplotlib numpy pillow sagemath_modules sage_conf | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build
+

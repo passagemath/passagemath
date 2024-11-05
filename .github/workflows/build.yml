@@ -5,8 +5,7 @@ on:
   merge_group:
   push:
     branches:
-      - master
-      - develop
+      - main
     # Ignore pushes on tags to prevent two uploads of codecov reports
     tags-ignore: ['**']
   workflow_dispatch:
@@ -70,7 +69,7 @@ env:
   # Adapted from docker.yml
   TOX_ENV:                "docker-${{ github.event.inputs.platform || 'ubuntu-jammy-standard' }}-incremental"
   BUILD_IMAGE:            "localhost:5000/${{ github.repository }}/sage-${{ github.event.inputs.platform || 'ubuntu-jammy-standard' }}-with-targets:ci"
-  FROM_DOCKER_REPOSITORY: "ghcr.io/sagemath/sage/"
+  FROM_DOCKER_REPOSITORY: "ghcr.io/passagemath/passagemath/"
   FROM_DOCKER_TARGET:     "with-targets"
   FROM_DOCKER_TAG:        ${{ github.event.inputs.docker_tag || 'dev'}}
   EXTRA_CONFIGURE_ARGS:   --enable-fat-binary
@@ -268,6 +267,18 @@ jobs:
       matrix:
         targets:
           - sagemath_categories-check
+          - sagemath_combinat-check
+          - sagemath_flint-check
+          - sagemath_graphs-check
+          - sagemath_groups-check
+          - sagemath_modules-check
+          - sagemath_pari-check
+          - sagemath_plot-check
+          - sagemath_polyhedra-check
+          - sagemath_schemes-check
+          - sagemath_standard_no_symbolics-check
+          - sagemath_symbolics-check
+          - sagemath_giac-check
     steps:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10

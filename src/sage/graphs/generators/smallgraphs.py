@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Various small graphs
 
@@ -1962,7 +1963,7 @@ def CubeplexGraph(embedding='LM'):
         4
         sage: g.diameter()
         3
-        sage: g.is_hamiltonian()
+        sage: g.is_hamiltonian()                                                        # needs sage.numerical.mip
         True
         sage: g.crossing_number()
         1
@@ -4983,7 +4984,7 @@ def TwinplexGraph(embedding='LM'):
         5
         sage: g.diameter()
         3
-        sage: g.is_hamiltonian()
+        sage: g.is_hamiltonian()                                                        # needs sage.numerical.mip
         True
         sage: g.crossing_number()
         2

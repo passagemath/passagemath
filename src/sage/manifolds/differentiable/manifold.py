@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Differentiable Manifolds
 
@@ -3543,6 +3544,7 @@ class DifferentiableManifold(TopologicalManifold):
         Trajectory of a particle of unit mass and unit charge in a
         unit, uniform, stationary magnetic field::
 
+            sage: # needs scipy
             sage: M = Manifold(3, 'M')
             sage: X.<x1,x2,x3> = M.chart()
             sage: t = var('t')
@@ -3679,6 +3681,7 @@ class DifferentiableManifold(TopologicalManifold):
         Declare an integrated autoparallel curve with respect to this
         connection::
 
+            sage: # needs scipy
             sage: p = S2.point((pi/4, 0), name='p')
             sage: Tp = S2.tangent_space(p)
             sage: v = Tp((1,1), basis=epolar_ON.at(p))
@@ -3800,6 +3803,7 @@ class DifferentiableManifold(TopologicalManifold):
 
         Declare an integrated geodesic with respect to this metric::
 
+            sage: # needs scipy
             sage: p = S2.point((pi/4, 0), name='p')
             sage: Tp = S2.tangent_space(p)
             sage: v = Tp((1, 1), basis=epolar.at(p))

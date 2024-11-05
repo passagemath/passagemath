@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: optional - sage.graphs
 r"""
 Graphic Matroids
@@ -211,11 +212,11 @@ cdef class GraphicMatroid(Matroid):
                               self._vertex_map[e[1]], groundset[i]))
         # If the matroid is empty, have the internal graph be a single vertex
         if edge_list:
-            self._G = <GenericGraph_pyx?> Graph(edge_list, loops=True, multiedges=True,
-                                                weighted=True, data_structure='static_sparse')
+            self._G = Graph(edge_list, loops=True, multiedges=True,
+                            weighted=True, data_structure='static_sparse')
         else:
-            self._G = <GenericGraph_pyx?> Graph(1, loops=True, multiedges=True,
-                                                weighted=True, data_structure='static_sparse')
+            self._G = Graph(1, loops=True, multiedges=True,
+                            weighted=True, data_structure='static_sparse')
         # Map groundset elements to graph edges:
         # The edge labels should already be the elements.
         self._groundset_edge_map = ({l: (u, v) for (u, v, l) in self._G.edge_iterator()})
@@ -486,7 +487,7 @@ cdef class GraphicMatroid(Matroid):
             sage: N
             Graphic matroid of rank 6 on 8 elements
         """
-        cdef GenericGraph_pyx g = self.graph()
+        cdef object g = self.graph()
         cdef list cont_edges = self._groundset_to_edges(contractions)
         cdef list del_edges = self._groundset_to_edges(deletions)
         # deletions first so contractions don't mess up the vertices
@@ -673,7 +674,7 @@ cdef class GraphicMatroid(Matroid):
             sage: M._is_circuit(frozenset([0,1,3]))
             False
         """
-        cdef GenericGraph_pyx g = self._subgraph_from_set(X)
+        cdef object g = self._subgraph_from_set(X)
         return g.is_cycle()
 
     cpdef frozenset _closure(self, frozenset X):
@@ -710,7 +711,7 @@ cdef class GraphicMatroid(Matroid):
         cdef set XX = set(X)
         cdef frozenset Y = self.groundset().difference(XX)
         cdef list edgelist = self._groundset_to_edges(Y)
-        cdef GenericGraph_pyx g = self._subgraph_from_set(XX)
+        cdef object g = self._subgraph_from_set(XX)
         cdef list V = g.vertices(sort=False)
         cdef int components = g.connected_components_number()
         for e in edgelist:
@@ -906,7 +907,7 @@ cdef class GraphicMatroid(Matroid):
             sage: sorted(N._coclosure(frozenset([3])))
             [3, 4, 5]
         """
-        cdef GenericGraph_pyx g = self.graph()
+        cdef object g = self.graph()
         g.delete_edges(self._groundset_to_edges(X))
         cdef int components = g.connected_components_number()
         cdef set XX = set(X)

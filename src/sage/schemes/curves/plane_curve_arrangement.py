@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Affine and Projective Plane Curve Arrangements
 

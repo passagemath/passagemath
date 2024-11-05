@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Database of strongly regular graphs
 
@@ -2805,12 +2806,12 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
         sage: graphs.strongly_regular_graph(10,3,0,1,existence=True)                    # needs sage.libs.pari
         True
-        sage: graphs.strongly_regular_graph(10,3,0,1)
+        sage: graphs.strongly_regular_graph(10,3,0,1)           # needs database_graphs
         complement(Johnson graph with parameters 5,2): Graph on 10 vertices
 
     Now without specifying `\mu`::
 
-        sage: graphs.strongly_regular_graph(10,3,0)
+        sage: graphs.strongly_regular_graph(10,3,0)             # needs database_graphs
         complement(Johnson graph with parameters 5,2): Graph on 10 vertices
 
     An obviously infeasible set of parameters::
@@ -2918,6 +2919,7 @@ def strongly_regular_graph_lazy(int v, int k, int l, int mu=-1, bint existence=F
 
     TESTS::
 
+        sage: # needs database_graphs
         sage: from sage.graphs.strongly_regular_db import strongly_regular_graph_lazy
         sage: g,p=strongly_regular_graph_lazy(10,6,3); g,p
         (<cyfunction is_johnson.<locals>.<lambda> at ...>, 5)

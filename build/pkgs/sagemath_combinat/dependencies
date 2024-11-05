@@ -1,0 +1,2 @@
+$(SAGE_ROOT)/pkgs/sagemath-combinat/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-combinat/MANIFEST.in $(PYTHON) cysignals gmpy2 sagemath_categories symmetrica | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build
+

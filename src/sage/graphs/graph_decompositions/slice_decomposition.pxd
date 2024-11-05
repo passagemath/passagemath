@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 from libcpp.vector cimport vector
 
 from sage.structure.sage_object cimport SageObject
