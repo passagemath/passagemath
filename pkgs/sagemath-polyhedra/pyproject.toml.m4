@@ -49,6 +49,7 @@ cddlib      = [SPKG_INSTALL_REQUIRES_sagemath_cddlib]
 latte       = ["passagemath-polyhedra[latte_int]"]  # alias
 latte_int   = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
 normaliz    = [SPKG_INSTALL_REQUIRES_pynormaliz]
+palp        = [SPKG_INSTALL_REQUIRES_sagemath_palp]
 polymake    = [SPKG_INSTALL_REQUIRES_jupymake]
 ppl         = []  # no extra required
 topcom      = []  # FIXME
