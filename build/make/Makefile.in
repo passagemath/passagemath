@@ -166,6 +166,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_singular			\
 	sagemath_standard_no_symbolics		\
 	sagemath_symbolics			\
+	sagemath_msolve				\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
 	sagemath_meataxe			\
@@ -824,7 +825,7 @@ $(1)-sdist: FORCE python_build sage_setup cython
 		. '$$(SAGE_ROOT)/src/bin/sage-env' && \
 		'$$(SAGE_ROOT)/build/pkgs/$(1)/spkg-src'
 
-$(1)-cibuildwheel: cibuildwheel $(1)-sdist
+$(1)-cibuildwheel: cibuildwheel $(1)-sdist sage_conf
 	$(AM_V_at) cd '$$(SAGE_ROOT)' && \
 		. '$$(SAGE_ROOT)/src/bin/sage-src-env-config' && \
 		. '$$(SAGE_ROOT)/src/bin/sage-env-config' && \
@@ -834,7 +835,7 @@ $(1)-cibuildwheel: cibuildwheel $(1)-sdist
 		(cd '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked' && \
 		 tar xfz $$$$(ls -t $$$$SAGE_DISTFILES/*$(1)*.tar.gz | head -n1)) && \
 		export CIBW_BEFORE_ALL='echo > constraints.txt' && \
-		export CIBW_BEFORE_BUILD='(echo "passagemath-conf @ file://$$$$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$$$$(pwd)/pkgs/sage-setup") > constraints.txt' && \
+		export CIBW_BEFORE_BUILD='cat $$(SAGE_VENV)/var/lib/sage/scripts/{sage_conf,sage_setup}/spkg-requirements.txt > constraints.txt' && \
 		export CIBW_ENVIRONMENT='PATH=$$$$(pwd)/prefix/bin:$$$$PATH CPATH=$$$$(pwd)/prefix/include:$$$$CPATH LIBRARY_PATH=$$$$(pwd)/prefix/lib:$$$$LIBRARY_PATH PKG_CONFIG_PATH=$$$$(pwd)/prefix/lib/pkgconfig:$$$$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$$$$(pwd)/constraints.txt PIP_FIND_LINKS=file://$$$$(pwd)/wheelhouse SAGE_NUM_THREADS=6' && \
 		env | grep '^CIBW' && \
 		python3 -m cibuildwheel --output-dir '$$(SAGE_ROOT)/wheelhouse' '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked'/*$(1)*
