@@ -52,7 +52,7 @@ normaliz    = [SPKG_INSTALL_REQUIRES_pynormaliz]
 palp        = [SPKG_INSTALL_REQUIRES_sagemath_palp]
 polymake    = [SPKG_INSTALL_REQUIRES_jupymake]
 ppl         = []  # no extra required
-topcom      = []  # FIXME
+topcom      = [SPKG_INSTALL_REQUIRES_sagemath_topcom]
 
 # optimization libraries
 cbc         = ["passagemath-polyhedra[cbc_sage]"]
@@ -73,7 +73,7 @@ scip        = [SPKG_INSTALL_REQUIRES_pyscipopt]
 # supported rings
 QQ          = []
 ZZ          = []
-RDF         = []  # FIXME: cddlib
+RDF         = ["passagemath-polyhedra[cddlib]"]
 NumberField = ["passagemath-polyhedra[flint]"]
 
 # features
