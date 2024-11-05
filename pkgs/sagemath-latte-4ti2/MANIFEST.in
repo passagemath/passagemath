@@ -4,6 +4,7 @@ include VERSION.txt
 
 include sage/interfaces/latte.p*
 include sage/interfaces/four_ti_2.py
+include sage/libs/latte_int.p*
 
 global-exclude *.c
 global-exclude *.cpp
