@@ -5,8 +5,6 @@ include VERSION.txt
 exclude *.m4
 include requirements.txt
 
-include sage/interfaces/latte.p*
-include sage/interfaces/four_ti_2.p*
 include sage/interfaces/gfan.p*
 include sage/interfaces/polymake.p*
 
