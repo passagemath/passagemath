@@ -11,8 +11,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "passagemath-cddlib"
-description = "passagemath: Polynomial system solving through algebraic methods with cddlib"
+name = "passagemath-topcom"
+description = "passagemath: Triangulations of point configurations and oriented matroids with TOPCOM"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_environment
 ]
@@ -36,13 +36,13 @@ test = [
 # https://github.com/pypa/cibuildwheel/issues/1931
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf',
-    'python3 pkgs/sagemath-cddlib/repair_wheel.py {wheel}',
+    'python3 pkgs/sagemath-topcom/repair_wheel.py {wheel}',
     'auditwheel repair -w {dest_dir} {wheel}',
 ]
 [tool.cibuildwheel.macos]
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf',
-    'python3 pkgs/sagemath-cddlib/repair_wheel.py {wheel}',
+    'python3 pkgs/sagemath-topcom/repair_wheel.py {wheel}',
     'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
 ]
 
@@ -61,7 +61,7 @@ build-requires = [
 ]
 
 host-requires = [
-  "pkg:generic/cddlib",
+  "pkg:generic/topcom",
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
