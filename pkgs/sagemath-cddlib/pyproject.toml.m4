@@ -5,21 +5,15 @@ requires = [
     SPKG_INSTALL_REQUIRES_setuptools
     SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_sage_setup
-    SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_environment
-    SPKG_INSTALL_REQUIRES_sagemath_objects
-    SPKG_INSTALL_REQUIRES_cython
-    SPKG_INSTALL_REQUIRES_cysignals
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "passagemath-latte-4ti2"
-description = "passagemath: Lattice points in polyhedra with LattE integrale and 4ti2"
+name = "passagemath-cddlib"
+description = "passagemath: Polynomial system solving through algebraic methods with cddlib"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_sagemath_categories
-    SPKG_INSTALL_REQUIRES_sagemath_cddlib
+    SPKG_INSTALL_REQUIRES_sagemath_environment
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -41,13 +35,13 @@ test = [
 # https://github.com/pypa/cibuildwheel/issues/1931
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf',
-    'python3 pkgs/sagemath-latte-4ti2/repair_wheel.py {wheel}',
+    'python3 pkgs/sagemath-cddlib/repair_wheel.py {wheel}',
     'auditwheel repair -w {dest_dir} {wheel}',
 ]
 [tool.cibuildwheel.macos]
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf',
-    'python3 pkgs/sagemath-latte-4ti2/repair_wheel.py {wheel}',
+    'python3 pkgs/sagemath-cddlib/repair_wheel.py {wheel}',
     'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
 ]
 
@@ -66,8 +60,7 @@ build-requires = [
 ]
 
 host-requires = [
-  "pkg:generic/latte_int",
-  "pkg:generic/4ti2",
+  "pkg:generic/cddlib",
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",

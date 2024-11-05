@@ -168,6 +168,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_symbolics			\
 	sagemath_msolve				\
 	sagemath_latte_4ti2			\
+	sagemath_cddlib				\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
 	sagemath_meataxe			\
