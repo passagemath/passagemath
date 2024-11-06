@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-symbolics
+# sage_setup: distribution = sagemath-qepcad
 r"""
 Interface to QEPCAD
 ===================
