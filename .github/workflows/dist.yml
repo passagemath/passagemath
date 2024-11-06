@@ -172,7 +172,7 @@ jobs:
   build_wheels:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }}
     runs-on: ${{ matrix.os }}
-    needs: sdists_for_pypi
+    needs: [sdists_for_pypi, noarch_wheels_for_pypi]
     strategy:
       fail-fast: false
       matrix:
@@ -197,7 +197,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline info ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl libgd msolve
+      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl libgd msolve cddlib latte_int 4ti2 topcom palp nauty
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -209,7 +209,7 @@ jobs:
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup") > constraints.txt
       # Environment during wheel build
-      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic $LDFLAGS\"' || '' }}"
+      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic $LDFLAGS\"' || '' }}"
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
@@ -228,6 +228,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: dist
+          path: dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: noarch-wheels
           path: dist
 
       - uses: actions/setup-python@v5
@@ -403,6 +408,36 @@ jobs:
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*msolve*
+
+      - name: sagemath-cddlib
+        id:   sagemath-cddlib
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*latte*4ti2*
+
+      - name: sagemath-latte-4ti2
+        id:   sagemath-latte-4ti2
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*latte*4ti2*
+
+      - name: sagemath-topcom
+        id:   sagemath-topcom
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*topcom*
+
+      - name: sagemath-palp
+        id:   sagemath-palp
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*palp*
+
+      - name: sagemath-nauty
+        id:   sagemath-nauty
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*nauty*
 
       - name: sagemath-linbox
         id:   sagemath-linbox

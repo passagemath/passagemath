@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-latte-4ti2/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-latte-4ti2/MANIFEST.in  latte_int 4ti2 cysignals | $(PYTHON_TOOLCHAIN) sage_setup sage_conf sagemath_environment cython pkgconfig $(PYTHON)

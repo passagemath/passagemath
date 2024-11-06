@@ -169,6 +169,7 @@ def load_submodules(module=None, exclude_pattern=None):
         load sage.geometry.riemannian_manifolds.surface3d_generators... succeeded
 
         sage: sage.misc.dev_tools.load_submodules(sage.geometry)
+        load sage.geometry.lattice_polytope... succeeded
         load sage.geometry.polyhedron.lattice_euclidean_group_element... succeeded
         load sage.geometry.polyhedron.palp_database... succeeded
         load sage.geometry.polyhedron.ppl_lattice_polygon... succeeded
@@ -515,7 +516,8 @@ def import_statements(*objects, **kwds):
 
         sage: import_statements('Rationals')
         from sage.rings.rational_field import RationalField as Rationals
-        sage: import_statements(sage.combinat.partition_algebra.SetPartitionsAk)
+        sage: from sage.combinat.partition_algebra import SetPartitionsAk
+        sage: import_statements(SetPartitionsAk)
         from sage.combinat.partition_algebra import SetPartitionsAk
         sage: import_statements(CIF)
         from sage.rings.cif import CIF
