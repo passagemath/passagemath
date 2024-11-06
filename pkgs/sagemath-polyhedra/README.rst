@@ -48,7 +48,7 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[test]" IPython
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[test]" ipython
 
     In [1]: from sage.all__sagemath_polyhedra import *
 
@@ -70,7 +70,19 @@ Additional features:
 Other backends for polyhedral computations can be installed:
 
 `pip install "sagemath-polyhedra[normaliz]"`
- `Normaliz <https://doc.sagemath.org/html/en/reference/spkg/normaliz.html#spkg-normaliz>`_, via `PyNormaliz <https://doc.sagemath.org/html/en/reference/spkg/pynormaliz.html#spkg-pynormaliz>`_
+ `Normaliz <https://doc.sagemath.org/html/en/reference/spkg/normaliz.html#spkg-normaliz>`_, via `PyNormaliz <https://doc.sagemath.org/html/en/reference/spkg/pynormaliz.html#spkg-pynormaliz>`_,
+ provides very fast computations in particular for polyhedra with data in algebraic number fields.
+
+::
+
+   $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[normaliz,test]" ipython
+
+   In [1]: from sage.all__sagemath_polyhedra import *
+
+   In [2]: gap_norm = polytopes.grand_antiprism(backend='normaliz'); gap_norm
+
+   In [3]: gap_norm.f_vector()
+
 
 `pip install "sagemath-polyhedra[polymake]"`
  `Polymake <https://doc.sagemath.org/html/en/reference/spkg/polymake.html#spkg-polymake>`_, via `JuPyMake <https://pypi.org/project/JuPyMake/>`_
