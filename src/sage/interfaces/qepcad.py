@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-symbolics
+# sage_setup: distribution = sagemath-qepcad
 r"""
 Interface to QEPCAD
 ===================
@@ -610,9 +610,11 @@ import os
 from sage.env import SAGE_LOCAL
 import pexpect
 import re
+import shlex
 import sys
 
 from sage.cpython.string import bytes_to_str
+from sage.features.qepcad import Qepcad as qepcad_feature
 from sage.misc.flatten import flatten
 from sage.misc.sage_eval import sage_eval
 from sage.repl.preparse import implicit_mul
@@ -665,7 +667,7 @@ def _qepcad_cmd(memcells=None):
         memcells_arg = f'+N{memcells}'
     else:
         memcells_arg = ''
-    return f"env qe={SAGE_LOCAL} qepcad {memcells_arg}"
+    return f"env qe={SAGE_LOCAL} {shlex.quote(qepcad_feature().absolute_filename())} {memcells_arg}"
 
 
 _command_info_cache = None
