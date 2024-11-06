@@ -773,8 +773,7 @@
         "ntests": 230
     },
     "sage.doctest.check_tolerance": {
-        "failed": true,
-        "ntests": 19
+        "ntests": 9
     },
     "sage.doctest.control": {
         "ntests": 3
@@ -786,16 +785,14 @@
         "ntests": 59
     },
     "sage.doctest.forker": {
-        "failed": true,
-        "ntests": 374
+        "ntests": 254
     },
     "sage.doctest.marked_output": {
         "failed": true,
         "ntests": 21
     },
     "sage.doctest.parsing": {
-        "failed": true,
-        "ntests": 270
+        "ntests": 233
     },
     "sage.doctest.reporting": {
         "ntests": 126
@@ -813,7 +810,6 @@
         "ntests": 166
     },
     "sage.env": {
-        "failed": true,
         "ntests": 40
     },
     "sage.ext.fast_callable": {
@@ -1175,10 +1171,9 @@
     },
     "sage.misc.latex": {
         "failed": true,
-        "ntests": 211
+        "ntests": 212
     },
     "sage.misc.latex_macros": {
-        "failed": true,
         "ntests": 11
     },
     "sage.misc.latex_standalone": {
@@ -1749,8 +1744,7 @@
         "ntests": 241
     },
     "sage.rings.power_series_ring_element": {
-        "failed": true,
-        "ntests": 471
+        "ntests": 463
     },
     "sage.rings.puiseux_series_ring": {
         "ntests": 72
