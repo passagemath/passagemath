@@ -991,6 +991,7 @@ class SageDocTestParser(doctest.DocTestParser):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: parse("::\n\n    sage: # needs sage.combinat\n    sage: from sage.geometry.polyhedron.combinatorial_polyhedron.conversions \\\n    ....:         import incidence_matrix_to_bit_rep_of_Vrep\n    sage: P = polytopes.associahedron(['A',3])\n\n")
             ['::\n\n',
             '',
@@ -1288,6 +1289,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(rndstr,nf,optflag)
             True
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(tentol,nf,optflag)
             True
             sage: OC.check_output(tentol,ten,optflag)
@@ -1295,6 +1297,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(tentol,zero,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(tenabs,nf,optflag)
             False
             sage: OC.check_output(tenabs,ten,optflag)
@@ -1302,6 +1305,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(tenabs,zero,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(tenrel,nf,optflag)
             True
             sage: OC.check_output(tenrel,ten,optflag)
@@ -1309,6 +1313,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(tenrel,zero,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(zerotol,zero,optflag)
             True
             sage: OC.check_output(zerotol,eps,optflag)
@@ -1316,6 +1321,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(zerotol,ten,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(zeroabs,zero,optflag)
             True
             sage: OC.check_output(zeroabs,eps,optflag)
@@ -1323,6 +1329,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(zeroabs,ten,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(zerorel,zero,optflag)
             True
             sage: OC.check_output(zerorel,eps,optflag)
@@ -1332,6 +1339,7 @@ class SageOutputChecker(doctest.OutputChecker):
 
         More explicit tolerance checks::
 
+            sage: # needs sage.rings.real_interval_field
             sage: _ = x  # rel tol 1e10                                                 # needs sage.symbolic
             sage: raise RuntimeError   # rel tol 1e10
             Traceback (most recent call last):
@@ -1348,11 +1356,13 @@ class SageOutputChecker(doctest.OutputChecker):
 
         Abs tol checks over the complex domain::
 
+            sage: # needs sage.rings.real_interval_field sage.symbolic
             sage: [1, -1.3, -1.5 + 0.1*I, 0.5 - 0.1*I, -1.5*I]  # abs tol 1.0
             [1, -1, -1, 1, -I]
 
         Spaces before numbers or between the sign and number are ignored::
 
+            sage: # needs sage.rings.real_interval_field
             sage: print("[ - 1, 2]")  # abs tol 1e-10
             [-1,2]
 
@@ -1563,6 +1573,7 @@ class SageOutputChecker(doctest.OutputChecker):
 
         ::
 
+            sage: # needs sage.rings.real_interval_field
             sage: print(OC.output_difference(tenabs,nf,optflag))
             Expected:
                 10.0
@@ -1570,7 +1581,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 9.5
             Tolerance exceeded:
                 10.0 vs 9.5, tolerance 5e-1 > 1e-1
-
             sage: print(OC.output_difference(tentol,zero,optflag))
             Expected:
                 10.0
@@ -1578,7 +1588,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 0.0
             Tolerance exceeded:
                 10.0 vs 0.0, tolerance 1e0 > 1e-1
-
             sage: print(OC.output_difference(tentol,eps,optflag))
             Expected:
                 10.0
@@ -1586,7 +1595,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 -0.05
             Tolerance exceeded:
                 10.0 vs -0.05, tolerance 2e0 > 1e-1
-
             sage: print(OC.output_difference(tlist,L,optflag))
             Expected:
                 [10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
@@ -1598,6 +1606,7 @@ class SageOutputChecker(doctest.OutputChecker):
 
         TESTS::
 
+            sage: # needs sage.rings.real_interval_field
             sage: print(OC.output_difference(tenabs,zero,optflag))
             Expected:
                 10.0
@@ -1605,7 +1614,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 0.0
             Tolerance exceeded:
                 10.0 vs 0.0, tolerance 1e1 > 1e-1
-
             sage: print(OC.output_difference(tenrel,zero,optflag))
             Expected:
                 10.0
@@ -1613,7 +1621,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 0.0
             Tolerance exceeded:
                 10.0 vs 0.0, tolerance 1e0 > 1e-1
-
             sage: print(OC.output_difference(tenrel,eps,optflag))
             Expected:
                 10.0
@@ -1621,7 +1628,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 -0.05
             Tolerance exceeded:
                 10.0 vs -0.05, tolerance 2e0 > 1e-1
-
             sage: print(OC.output_difference(zerotol,ten,optflag))
             Expected:
                 0.0
@@ -1629,7 +1635,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 10.05
             Tolerance exceeded:
                 0.0 vs 10.05, tolerance 2e1 > 1e-1
-
             sage: print(OC.output_difference(zeroabs,ten,optflag))
             Expected:
                 0.0
@@ -1637,7 +1642,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 10.05
             Tolerance exceeded:
                 0.0 vs 10.05, tolerance 2e1 > 1e-1
-
             sage: print(OC.output_difference(zerorel,eps,optflag))
             Expected:
                 0.0
@@ -1645,7 +1649,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 -0.05
             Tolerance exceeded:
                 0.0 vs -0.05, tolerance +infinity > 1e-1
-
             sage: print(OC.output_difference(zerorel,ten,optflag))
             Expected:
                 0.0
