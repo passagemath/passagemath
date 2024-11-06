@@ -56,6 +56,7 @@ def check_tolerance_real_domain(want: MarkedOutput, got: str) -> tuple[str, str]
 
     EXAMPLES::
 
+        sage: # needs sage.rings.real_interval_field
         sage: from sage.doctest.check_tolerance import check_tolerance_real_domain
         sage: from sage.doctest.marked_output import MarkedOutput
         sage: check_tolerance_real_domain(
@@ -215,6 +216,7 @@ def check_tolerance_complex_domain(want: MarkedOutput, got: str) -> tuple[str, s
 
     EXAMPLES::
 
+        sage: # needs sage.rings.real_interval_field
         sage: from sage.doctest.check_tolerance import check_tolerance_complex_domain
         sage: from sage.doctest.marked_output import MarkedOutput
         sage: check_tolerance_complex_domain(

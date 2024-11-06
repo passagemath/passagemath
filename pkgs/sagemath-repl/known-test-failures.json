@@ -1,17 +1,16 @@
 {
     "sage.doctest.check_tolerance": {
-        "failed": true,
-        "ntests": 19
+        "ntests": 9
     },
     "sage.doctest.external": {
-        "ntests": 40
+        "ntests": 41
     },
     "sage.doctest.fixtures": {
         "ntests": 58
     },
     "sage.doctest.forker": {
         "failed": true,
-        "ntests": 373
+        "ntests": 253
     },
     "sage.doctest.marked_output": {
         "failed": true,
@@ -19,7 +18,7 @@
     },
     "sage.doctest.parsing": {
         "failed": true,
-        "ntests": 266
+        "ntests": 229
     },
     "sage.doctest.reporting": {
         "ntests": 126

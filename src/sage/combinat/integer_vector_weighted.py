@@ -113,7 +113,7 @@ class WeightedIntegerVectors(Parent, UniqueRepresentation):
         TESTS::
 
             sage: WIV = WeightedIntegerVectors(8, [1,1,2])
-            sage: TestSuite(WIV).run()
+            sage: TestSuite(WIV).run()                                                  # needs sage.combinat
         """
         self._n = n
         self._weights = weight

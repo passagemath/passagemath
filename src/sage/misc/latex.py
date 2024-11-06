@@ -564,6 +564,11 @@ def latex_extra_preamble():
         <BLANKLINE>
         \newcommand{\ZZ}{\Bold{Z}}
         \newcommand{\NN}{\Bold{N}}
+        ...
+        sage: print(latex_extra_preamble())                                             # needs sage.all
+        <BLANKLINE>
+        \newcommand{\ZZ}{\Bold{Z}}
+        \newcommand{\NN}{\Bold{N}}
         \newcommand{\RR}{\Bold{R}}
         \newcommand{\CC}{\Bold{C}}
         \newcommand{\QQ}{\Bold{Q}}
