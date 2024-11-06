@@ -1276,7 +1276,8 @@ def sage_getfile(obj):
 
     The following tests against some bugs fixed in :issue:`9976`::
 
-        sage: obj = sage.combinat.partition_algebra.SetPartitionsAk                     # needs sage.combinat sage.modules
+        sage: from sage.combinat.partition_algebra import SetPartitionsAk               # needs sage.combinat sage.modules
+        sage: obj = SetPartitionsAk                                                     # needs sage.combinat sage.modules
         sage: sage_getfile(obj)                                                         # needs sage.combinat sage.modules
         '...sage/combinat/partition_algebra.py'
 
