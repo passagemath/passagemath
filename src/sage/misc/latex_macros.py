@@ -230,6 +230,6 @@ def sage_mathjax_macros():
 
         sage: from sage.misc.latex_macros import sage_mathjax_macros
         sage: sage_mathjax_macros()
-        {'Bold': ['\\mathbf{#1}', 1], 'CC': '\\Bold{C}', ...
+        {'Bold': ['\\mathbf{#1}', 1], ... 'QQ': '\\Bold{Q}', ...
     """
     return dict(convert_latex_macro_to_mathjax(m) for m in sage_latex_macros())
