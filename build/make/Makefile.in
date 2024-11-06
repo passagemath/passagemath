@@ -172,6 +172,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_topcom				\
 	sagemath_nauty				\
 	sagemath_palp				\
+	sagemath_qepcad				\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
 	sagemath_meataxe			\
