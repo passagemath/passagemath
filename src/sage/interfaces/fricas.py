@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-symbolics
+# sage_setup: distribution = sagemath-fricas
 # sage.doctest: optional - fricas
 r"""
 Interface to FriCAS
@@ -309,7 +309,7 @@ class FriCAS(ExtraTabCompletion, Expect):
         """
         if command is None:
             from sage.features.fricas import FriCAS
-            command = [FriCAS(), "-nosman"]
+            command = [FriCAS().absolute_filename(), "-nosman"]
 
         eval_using_file_cutoff = 4096 - 5  # magic number from Expect._eval_line (there might be a bug)
         assert max(len(c) for c in FRICAS_INIT_CODE) < eval_using_file_cutoff
