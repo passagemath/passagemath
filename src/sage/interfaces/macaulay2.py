@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-macaulay2
 r"""
 Interface to Macaulay2
 
