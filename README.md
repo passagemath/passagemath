@@ -101,7 +101,7 @@ The packages may also cover a wide range of generalizations/applications of the 
 
 [![PyPI: passagemath-combinat](https://img.shields.io/pypi/v/passagemath-combinat.svg?label=passagemath-combinat)](https://pypi.python.org/pypi/passagemath-combinat) provides "everything combinatorial", except for graphs. It provides the functionality of [SYMMETRICA](http://www.algorithm.uni-bayreuth.de/en/research/SYMMETRICA), the library for representation theory of the symmetric group, combinatorics of tableaux, symmetric functions, etc.
 
-[![PyPI: passagemath-graphs](https://img.shields.io/pypi/v/passagemath-graphs.svg?label=passagemath-graphs)](https://pypi.python.org/pypi/passagemath-graphs) provides directed and undirected graphs, but also posets, combinatorial designs, abstract simplicial complexes, quivers, etc.  It uses the [Boost Graph Library](https://github.com/boostorg/graph), with additional functionality from [NetworkX](https://networkx.github.io/) and several other libraries.
+[![PyPI: passagemath-graphs](https://img.shields.io/pypi/v/passagemath-graphs.svg?label=passagemath-graphs)](https://pypi.python.org/pypi/passagemath-graphs) provides directed and undirected graphs, but also posets, combinatorial designs, abstract simplicial complexes, quivers, etc.  It consists of over 170 first-party Python and Cython modules and uses the [Boost Graph Library](https://github.com/boostorg/graph), with additional functionality from [NetworkX](https://networkx.github.io/) and several other libraries.
 
 [![PyPI: passagemath-groups](https://img.shields.io/pypi/v/passagemath-groups.svg?label=passagemath-groups)](https://pypi.python.org/pypi/passagemath-groups) provides groups and invariant theory.
 
