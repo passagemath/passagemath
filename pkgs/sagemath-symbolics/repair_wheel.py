@@ -6,7 +6,7 @@ import sys
 
 from pathlib import Path
 
-from sage_conf import MAXIMA_FAS
+from sage_conf import MAXIMA_FAS, SAGE_LOCAL
 
 wheel = sys.argv[1]
 
@@ -19,7 +19,7 @@ sys.stdout.flush()
 os.system(command)
 
 # SAGE_LOCAL/bin/maxima --> sage_wheels/bin/maxima
-command = f'ln -sf {shlex.quote(SAGE_LOCAL)} sage_wheels && zip -r {shlex.quote(wheel)} sage_wheels/bin/{{ecl,maxima}} sage_wheels/{{lib,share}}/maxima'
+command = f'ln -sf {shlex.quote(SAGE_LOCAL)} sage_wheels && zip -r {shlex.quote(wheel)} sage_wheels/bin/{{ecl,maxima}} sage_wheels/{{lib,share}}/maxima sage_wheels/lib/ecl-*'
 print(f'Running {command}')
 sys.stdout.flush()
 os.system(command)
