@@ -122,6 +122,10 @@ jobs:
         with:
           path: "dist/*.tar.gz"
           name: dist
+      - name: twine check
+        run: |
+          ./sage -pip install twine
+          ./sage -sh -c 'twine check dist/*.tar.gz'
 
   release:
 
