@@ -582,7 +582,7 @@ cdef class LinearMatroid(BasisExchangeMatroid):
             sage: R = GF(7)
             sage: A = Matrix(R, [[1, 0, 6, 1, 2],[6, 1, 0, 0, 1],[0, 6, 3, 6, 0]])
             sage: M = LinearMatroid(reduced_matrix=A)
-            sage: M.representation(lift_map=lift_map('sru'))                            # needs sage.rings.finite_rings
+            sage: M.representation(lift_map=lift_map('sru'))                            # needs sage.graphs sage.rings.finite_rings
             [     1      0      0      1      0      1      1      1]
             [     0      1      0 -z + 1      1      0      0      1]
             [     0      0      1      0      1      -1 z - 1      0]
@@ -2615,13 +2615,19 @@ cdef class LinearMatroid(BasisExchangeMatroid):
         cochains = self.linear_coextension_cochains(F, cosimple=cosimple, fundamentals=fundamentals)
         return self._linear_coextensions(element, cochains)
 
-    cpdef bint is_valid(self) noexcept:
+    cpdef is_valid(self, certificate=False):
         r"""
         Test if the data represent an actual matroid.
 
         Since this matroid is linear, we test the representation matrix.
 
-        OUTPUT:
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``)
+
+        OUTPUT: boolean, or (boolean, dictionary)
+
+        The boolean output value is:
 
         - ``True`` if the matrix is over a field.
         - ``True`` if the matrix is over a ring and all cross ratios are
@@ -2650,19 +2656,19 @@ cdef class LinearMatroid(BasisExchangeMatroid):
             sage: from sage.matroids.advanced import *  # LinearMatroid
             sage: M = LinearMatroid(ring=ZZ, reduced_matrix=Matrix(ZZ,
             ....:                          [[1, 0, 1], [1, 1, 0], [0, 1, 1]]))
-            sage: M.is_valid()
-            False
+            sage: M.is_valid(certificate=True)
+            (False, {'error': 'not all cross ratios are invertible'})
         """
         if self.base_ring().is_field():
-            return True
+            return True if not certificate else (True, {})
         try:
             CR = self.cross_ratios()
         except (ArithmeticError, TypeError, ValueError):
-            return False
+            return False if not certificate else (False, {"error": "can't compute cross ratios"})
         for x in CR:
             if not x ** (-1) in self.base_ring():
-                return False
-        return True
+                return False if not certificate else (False, {"error": "not all cross ratios are invertible"})
+        return True if not certificate else (True, {})
 
     # connectivity
 
@@ -3962,14 +3968,18 @@ cdef class BinaryMatroid(LinearMatroid):
         A_cmr = Matrix_cmr_chr_sparse(A.parent(), A)
         return A_cmr._is_binary_linear_matroid_graphic()
 
-    cpdef bint is_valid(self) noexcept:
+    cpdef is_valid(self, certificate=False):
         r"""
         Test if the data obey the matroid axioms.
 
         Since this is a linear matroid over the field `\GF{2}`, this is always
         the case.
 
-        OUTPUT: ``True``
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``)
+
+        OUTPUT: ``True``, or ``(True, {})``
 
         EXAMPLES::
 
@@ -3977,7 +3987,7 @@ cdef class BinaryMatroid(LinearMatroid):
             sage: M.is_valid()
             True
         """
-        return True
+        return True if not certificate else (True, {})
 
     # representability
 
@@ -4824,14 +4834,18 @@ cdef class TernaryMatroid(LinearMatroid):
                              basis=bas,
                              keep_initial_representation=False)
 
-    cpdef bint is_valid(self) noexcept:
+    cpdef is_valid(self, certificate=False):
         r"""
         Test if the data obey the matroid axioms.
 
         Since this is a linear matroid over the field `\GF{3}`, this is always
         the case.
 
-        OUTPUT: ``True``
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``)
+
+        OUTPUT: ``True``, or ``(True, {})``
 
         EXAMPLES::
 
@@ -4839,7 +4853,7 @@ cdef class TernaryMatroid(LinearMatroid):
             sage: M.is_valid()
             True
         """
-        return True
+        return True if not certificate else (True, {})
 
     # representability
 
@@ -5588,14 +5602,18 @@ cdef class QuaternaryMatroid(LinearMatroid):
                              basis=bas,
                              keep_initial_representation=False)
 
-    cpdef bint is_valid(self) noexcept:
+    cpdef is_valid(self, certificate=False):
         r"""
         Test if the data obey the matroid axioms.
 
         Since this is a linear matroid over the field `\GF{4}`, this is always
         the case.
 
-        OUTPUT: ``True``
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``)
+
+        OUTPUT: ``True``, or ``(True, {})``
 
         EXAMPLES::
 
@@ -5603,7 +5621,7 @@ cdef class QuaternaryMatroid(LinearMatroid):
             sage: M.is_valid()                                                          # needs sage.rings.finite_rings
             True
         """
-        return True
+        return True if not certificate else (True, {})
 
     def __reduce__(self):
         """
@@ -6381,7 +6399,7 @@ cdef class RegularMatroid(LinearMatroid):
         """
         return BinaryMatroid(reduced_matrix=self._reduced_representation()).is_graphic(algorithm=algorithm)
 
-    cpdef bint is_valid(self) noexcept:
+    cpdef is_valid(self, certificate=False):
         r"""
         Test if the data obey the matroid axioms.
 
@@ -6389,7 +6407,11 @@ cdef class RegularMatroid(LinearMatroid):
         representation matrix is *totally unimodular*, i.e. if all square
         submatrices have determinant in `\{-1, 0, 1\}`.
 
-        OUTPUT: boolean
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``)
+
+        OUTPUT: boolean, or (boolean, dictionary)
 
         EXAMPLES::
 
@@ -6398,15 +6420,17 @@ cdef class RegularMatroid(LinearMatroid):
             ....:                         [0, 1, 0, 1, 0, 1, 1],
             ....:                         [0, 0, 1, 0, 1, 1, 1]]),
             ....:             regular=True, check=False)
-            sage: M.is_valid()
-            False
+            sage: M.is_valid(certificate=True)
+            (False, {'error': 'the representation matrix is not totally unimodular'})
             sage: M = Matroid(graphs.PetersenGraph())
             sage: M.is_valid()
             True
         """
         M = LinearMatroid(ring=QQ, reduced_matrix=self.representation(self.basis(), True, False))
         CR = M.cross_ratios()
-        return CR.issubset(set([1]))
+        if CR.issubset(set([1])):
+            return True if not certificate else (True, {})
+        return False if not certificate else (False, {"error": "the representation matrix is not totally unimodular"})
 
     # representation
 

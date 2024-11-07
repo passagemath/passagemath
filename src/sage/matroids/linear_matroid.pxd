@@ -63,7 +63,7 @@ cdef class LinearMatroid(BasisExchangeMatroid):
     cpdef _is_3connected_shifting(self, certificate=*)
     cpdef _is_4connected_shifting(self, certificate=*)
 
-    cpdef bint is_valid(self) noexcept
+    cpdef is_valid(self, certificate=*)
 
 cdef class BinaryMatroid(LinearMatroid):
     cdef tuple _b_invariant, _b_partition
@@ -95,7 +95,7 @@ cdef class BinaryMatroid(LinearMatroid):
     cpdef bint is_graphic(self, algorithm=*) except -1
     cpdef _is_graphic_GG(self)
     cpdef _is_graphic_cmr(self)
-    cpdef bint is_valid(self) noexcept
+    cpdef bint is_valid(self, certificate=*)
 
 
 cdef class TernaryMatroid(LinearMatroid):
@@ -125,7 +125,7 @@ cdef class TernaryMatroid(LinearMatroid):
     cpdef _fast_isom_test(self, other)
     cpdef relabel(self, mapping)
 
-    cpdef bint is_valid(self) noexcept
+    cpdef is_valid(self, certificate=*)
 
 cdef class QuaternaryMatroid(LinearMatroid):
     cdef object _x_zero, _x_one
@@ -152,7 +152,7 @@ cdef class QuaternaryMatroid(LinearMatroid):
     cpdef _fast_isom_test(self, other)
     cpdef relabel(self, mapping)
 
-    cpdef bint is_valid(self) noexcept
+    cpdef is_valid(self, certificate=*)
 
 cdef class RegularMatroid(LinearMatroid):
     cdef _bases_count, _r_invariant
@@ -177,4 +177,4 @@ cdef class RegularMatroid(LinearMatroid):
 
     cpdef bint is_regular(self, algorithm=*) except -1
     cpdef bint is_graphic(self, algorithm=*) except -1
-    cpdef bint is_valid(self) noexcept
+    cpdef is_valid(self, certificate=*)

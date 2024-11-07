@@ -2318,7 +2318,7 @@ cdef class Matroid(SageObject):
 
     # verification
 
-    cpdef bint is_valid(self) noexcept:
+    cpdef is_valid(self, certificate=False):
         r"""
         Test if the data obey the matroid axioms.
 
@@ -2332,7 +2332,11 @@ cdef class Matroid(SageObject):
 
         Certain subclasses may check other axioms instead.
 
-        OUTPUT: boolean
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``)
+
+        OUTPUT: boolean, or (boolean, dictionary)
 
         EXAMPLES::
 
@@ -2353,8 +2357,10 @@ cdef class Matroid(SageObject):
             sage: def r(X):
             ....:     return -1
             sage: M = Matroid(groundset=[0,1,2], rank_function=r)
-            sage: M.is_valid()
-            False
+            sage: M.is_valid(certificate=True)
+            (False,
+             {'error': "the rank must be between 0 and the set's cardinality",
+              'set': frozenset()})
         """
         cdef int i, j, rX, rY
         cdef frozenset X, Y, E = self.groundset()
@@ -2363,17 +2369,17 @@ cdef class Matroid(SageObject):
                 X = frozenset(Xt)
                 rX = self._rank(X)
                 if rX > i or rX < 0:
-                    return False
+                    return False if not certificate else (False, {"error": "the rank must be between 0 and the set's cardinality", "set": X})
                 for j in range(i, len(E) + 1):
                     for Yt in combinations(E, j):
                         Y = frozenset(Yt)
                         rY = self._rank(Y)
                         if X.issubset(Y) and rX > rY:
-                            return False
+                            return False if not certificate else (False, {"error": "the rank function must be monotonic", "set 1": X, "set 2": Y})
                         if (self._rank(X.union(Y)) +
                            self._rank(X.intersection(Y)) > rX + rY):
-                            return False
-        return True
+                            return False if not certificate else (False, {"error": "the rank function must be submodular", "set 1": X, "set 2": Y})
+        return True if not certificate else (True, {})
 
     # enumeration
 
@@ -3813,9 +3819,9 @@ cdef class Matroid(SageObject):
         a function, and many other types of maps::
 
             sage: M = matroids.catalog.Fano()
-            sage: P = PermutationGroup([[('a', 'b', 'c'),                               # needs sage.rings.finite_rings
+            sage: P = PermutationGroup([[('a', 'b', 'c'),                               # needs sage.groups sage.rings.finite_rings
             ....:                        ('d', 'e', 'f'), ('g')]]).gen()
-            sage: M.is_isomorphism(M, P)                                                # needs sage.rings.finite_rings
+            sage: M.is_isomorphism(M, P)                                                # needs sage.groups sage.rings.finite_rings
             True
 
             sage: M = matroids.catalog.Pappus()
@@ -8085,7 +8091,7 @@ cdef class Matroid(SageObject):
 
             sage: from sage.matroids.advanced import setprint
             sage: M = matroids.catalog.Fano()
-            sage: setprint(M.flat_cover())                                              # needs sage.rings.finite_rings
+            sage: setprint(M.flat_cover())                                              # needs sage.numerical.mip sage.rings.finite_rings
             [{'a', 'b', 'f'}, {'a', 'c', 'e'}, {'a', 'd', 'g'},
              {'b', 'c', 'd'}, {'b', 'e', 'g'}, {'c', 'f', 'g'},
              {'d', 'e', 'f'}]
@@ -8361,10 +8367,10 @@ cdef class Matroid(SageObject):
             ....:         pos[t[i]]=(RR(y*sin(2*pi*(i+1/2)/5)), RR(y*cos(2*pi*(i+1/2)/5)))
             ....:
             sage: pos['k']=(0,0)
-            sage: M._fix_positions(pos_dict=pos)                                        # needs sage.symbolic
-            sage: M._cached_info['lineorders'] is None                                  # needs sage.symbolic
+            sage: M._fix_positions(pos_dict=pos)                                        # needs scipy sage.symbolic
+            sage: M._cached_info['lineorders'] is None                                  # needs scipy sage.symbolic
             True
-            sage: M._cached_info['plot_positions']['k']                                 # needs sage.symbolic
+            sage: M._cached_info['plot_positions']['k']                                 # needs scipy sage.symbolic
             (0, 0)
         """
         if self.rank() > 3:

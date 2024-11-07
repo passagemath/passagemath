@@ -35,13 +35,11 @@ include sage/libs/ecl.p*
 include sage/libs/eclsig.h
 
 include sage/interfaces/fricas.p*
-include sage/interfaces/giac.p*
 include sage/interfaces/magma*.p*
 include sage/interfaces/maple*.p*
 include sage/interfaces/mathematica.p*
 include sage/interfaces/mathics.p*
 include sage/interfaces/maxima*.p*
-include sage/interfaces/qepcad.p*
 include sage/interfaces/sympy*.p*
 include sage/interfaces/tides.p*
 

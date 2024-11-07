@@ -34,9 +34,9 @@ type the following::
 
     sage: maxima(pi)
     %pi
-    sage: singular(pi)
+    sage: singular(pi)                                                                  # needs sage.libs.singular
     pi
-    sage: gap(pi)
+    sage: gap(pi)                                                                       # needs sage.libs.gap
     pi
     sage: gp(pi)
     3.141592653589793238462643383     # 32-bit
@@ -525,7 +525,7 @@ class Constant:
 
             sage: from sage.symbolic.constants import Constant
             sage: p = Constant('p')
-            sage: gap(p)
+            sage: gap(p)                                                                # needs sage.libs.gap
             p
         """
         return gap('"%s"' % self)
@@ -542,7 +542,7 @@ class Constant:
 
             sage: from sage.symbolic.constants import Constant
             sage: p = Constant('p')
-            sage: singular(p)
+            sage: singular(p)                                                           # needs sage.libs.singular
             p
         """
         return singular('"%s"' % self)

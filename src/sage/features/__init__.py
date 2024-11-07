@@ -742,6 +742,17 @@ class Executable(FileFeature):
             sage.features.FeatureNotPresentError: does-not-exist is not available.
             Executable 'does-not-exist-xxxxyxyyxyy' not found on PATH.
         """
+        try:
+            # populated in PyPI wheels by pkgs/sagemath-*/repair_wheel.py
+            import sage_wheels
+        except ImportError:
+            pass
+        else:
+            search_path = ':'.join(os.path.join(p, 'bin') for p in sage_wheels.__path__)
+            path = shutil.which(self.executable, path=search_path)
+            if path is not None:
+                return path
+
         if SAGE_LOCAL:
             if Path(SAGE_VENV).resolve() != Path(SAGE_LOCAL).resolve():
                 # As sage.env currently gives SAGE_LOCAL a fallback value from SAGE_VENV,

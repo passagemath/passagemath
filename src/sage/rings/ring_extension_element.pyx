@@ -25,6 +25,7 @@ from sage.misc.latex import latex
 
 from sage.structure.category_object import normalize_names
 from sage.structure.element cimport CommutativeAlgebraElement
+from sage.structure.parent cimport Parent
 from sage.rings.integer_ring import ZZ
 from sage.categories.fields import Fields
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
@@ -1034,7 +1035,7 @@ cdef class RingExtensionWithBasisElement(RingExtensionElement):
         base = (<RingExtension_generic>self._parent)._check_base(base)
         return self._vector(base)
 
-    cdef _vector(self, CommutativeRing base):
+    cdef _vector(self, Parent base):
         r"""
         Return the vector of coordinates of this element over ``base``
         (in the basis output by the method :meth:`basis_over`).
@@ -1199,7 +1200,7 @@ cdef class RingExtensionWithBasisElement(RingExtensionElement):
             raise ValueError("the extension is not finite free")
         return self._matrix(base)
 
-    cdef _matrix(self, CommutativeRing base):
+    cdef _matrix(self, Parent base):
         r"""
         Return the matrix of the multiplication by this element (in
         the basis output by :meth:`basis_over`).
@@ -1287,7 +1288,7 @@ cdef class RingExtensionWithBasisElement(RingExtensionElement):
             raise ValueError("the extension is not finite free")
         return self._trace(base)
 
-    cdef _trace(self, CommutativeRing base):
+    cdef _trace(self, Parent base):
         r"""
         Return the trace of this element over ``base``.
 
@@ -1315,7 +1316,7 @@ cdef class RingExtensionWithBasisElement(RingExtensionElement):
             ....:     assert((x+y).trace(base) == x.trace(base) + y.trace(base))
         """
         cdef RingExtensionWithBasis parent = self._parent
-        cdef CommutativeRing b
+        cdef Parent b
         if base is parent:
             return self
         b = parent._base
@@ -1380,7 +1381,7 @@ cdef class RingExtensionWithBasisElement(RingExtensionElement):
             raise ValueError("the extension is not finite free")
         return self._norm(base)
 
-    cdef _norm(self, CommutativeRing base):
+    cdef _norm(self, Parent base):
         r"""
         Return the norm of this element over ``base``.
 
@@ -1408,7 +1409,7 @@ cdef class RingExtensionWithBasisElement(RingExtensionElement):
             ....:     assert((x*y).norm(base) == x.norm(base) * y.norm(base))
         """
         cdef RingExtensionWithBasis parent = self._parent
-        cdef CommutativeRing b
+        cdef Parent b
         if base is parent:
             return self
         b = parent._base

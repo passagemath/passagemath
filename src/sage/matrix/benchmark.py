@@ -122,6 +122,7 @@ def report_ZZ(**kwds):
 
 # Integer Nullspace
 
+
 def nullspace_ZZ(n=200, min=0, max=2**32, system='sage'):
     """
     Nullspace over ZZ:
@@ -241,6 +242,7 @@ s := Cputime(t);
     else:
         raise ValueError('unknown system "%s"' % system)
 
+
 def rank2_ZZ(n=400, min=0, max=2**64, system='sage'):
     """
     Rank 2 over ZZ:
@@ -281,6 +283,7 @@ s := Cputime(t);
         raise ValueError('unknown system "%s"' % system)
 
 # Smith Form
+
 
 def smithform_ZZ(n=128, min=0, max=9, system='sage'):
     """
@@ -367,6 +370,7 @@ s := Cputime(t);
     else:
         raise ValueError('unknown system "%s"' % system)
 
+
 def matrix_add_ZZ(n=200, min=-9, max=9, system='sage', times=50):
     """
     Matrix addition over ZZ
@@ -414,6 +418,7 @@ s := Cputime(t);
     else:
         raise ValueError('unknown system "%s"' % system)
 
+
 def matrix_add_ZZ_2(n=200, bits=16, system='sage', times=50):
     """
     Matrix addition over ZZ.
@@ -435,6 +440,7 @@ def matrix_add_ZZ_2(n=200, bits=16, system='sage', times=50):
     """
     b = 2**bits
     return matrix_add_ZZ(n=n, min=-b, max=b,system=system, times=times)
+
 
 def det_ZZ(n=200, min=1, max=100, system='sage'):
     """
@@ -603,6 +609,7 @@ def report_GF(p=16411, **kwds):
 
 # Nullspace over GF
 
+
 def nullspace_GF(n=300, p=16411, system='sage'):
     """
     Given a n+1 x n  matrix over GF(p) with random
@@ -679,6 +686,7 @@ s := Cputime(t);
         return magma.eval('s')
     else:
         raise ValueError('unknown system "%s"' % system)
+
 
 def matrix_add_GF(n=1000, p=16411, system='sage',times=100):
     """
@@ -806,6 +814,7 @@ s := Cputime(t);
     else:
         raise ValueError('unknown system "%s"' % system)
 
+
 def rank2_GF(n=500, p=16411, system='sage'):
     """
     Rank over GF(p): Given a (n + 10) x n matrix over GF(p) with
@@ -842,6 +851,7 @@ s := Cputime(t);
         return float(magma.eval('s'))
     else:
         raise ValueError('unknown system "%s"' % system)
+
 
 def det_GF(n=400, p=16411 , system='sage'):
     """
@@ -906,6 +916,7 @@ def hilbert_matrix(n):
 
 # Reduced row echelon form over QQ
 
+
 def echelon_QQ(n=100, min=0, max=9, system='sage'):
     """
     Given a n x (2*n) matrix over QQ with random integer entries
@@ -945,6 +956,7 @@ s := Cputime(t);
         raise ValueError('unknown system "%s"' % system)
 
 # Invert a matrix over QQ.
+
 
 def inverse_QQ(n=100, min=0, max=9, system='sage'):
     """
@@ -1068,6 +1080,8 @@ delete h;
         return float(magma.eval('s'))
 
 # inverse of Hilbert matrix
+
+
 def invert_hilbert_QQ(n=40, system='sage'):
     """
     Run the benchmark for calculating the inverse of the hilbert
@@ -1101,6 +1115,7 @@ delete h;
             print(code)
         magma.eval(code)
         return float(magma.eval('s'))
+
 
 def MatrixVector_QQ(n=1000,h=100,system='sage',times=1):
     """

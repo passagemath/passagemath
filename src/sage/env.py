@@ -11,7 +11,7 @@ environment variables, and has the same ``SAGE_ROOT`` and ``SAGE_LOCAL``
     sage: module_name = "sage.all"   # hide .all import from the linter
     sage: cmd  = f"from {module_name} import SAGE_ROOT, SAGE_LOCAL;"
     sage: cmd +=  "from os.path import samefile;"
-    sage: cmd += f"s1 = samefile(SAGE_ROOT, '{SAGE_ROOT}');"
+    sage: cmd += f"s1 = samefile(SAGE_ROOT, '{SAGE_ROOT}') if SAGE_ROOT else True;"
     sage: cmd += f"s2 = samefile(SAGE_LOCAL, '{SAGE_LOCAL}');"
     sage: cmd += "print(s1 and s2);"
     sage: out = check_output([sys.executable, "-c", cmd], env=env).decode().strip()   # long time
@@ -231,6 +231,21 @@ PPLPY_DOCS = var("PPLPY_DOCS", join(SAGE_SHARE, "doc", "pplpy"))
 MAXIMA = var("MAXIMA", "maxima")
 MAXIMA_FAS = var("MAXIMA_FAS")
 KENZO_FAS = var("KENZO_FAS")
+try:
+    import ecl
+except ImportError:
+    pass
+else:
+    for p in ecl.__path__:
+        fas = os.path.join(p, 'maxima.fas')
+        if os.path.exists(fas):
+            MAXIMA_FAS = fas
+            break
+    for p in ecl.__path__:
+        fas = os.path.join(p, 'kenzo.fas')
+        if os.path.exists(fas):
+            KENZO_FAS = fas
+            break
 SAGE_NAUTY_BINS_PREFIX = var("SAGE_NAUTY_BINS_PREFIX", "")
 SAGE_ECMBIN = var("SAGE_ECMBIN", "ecm")
 RUBIKS_BINS_PREFIX = var("RUBIKS_BINS_PREFIX", "")
@@ -308,7 +323,7 @@ def sage_include_directories(use_sources=False):
     Expected output while using Sage::
 
         sage: import sage.env
-        sage: sage.env.sage_include_directories()
+        sage: sage.env.sage_include_directories()                                       # needs numpy
         ['...',
          '.../numpy/...core/include',
          '.../include/python...']
@@ -373,6 +388,7 @@ def cython_aliases(required_modules=None, optional_modules=None):
 
     EXAMPLES::
 
+        sage: # needs sage.misc.cython (actually just pkgconfig)
         sage: from sage.env import cython_aliases
         sage: cython_aliases()
         {...}

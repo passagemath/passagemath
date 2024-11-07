@@ -3,6 +3,8 @@ from sage.misc.lazy_import import lazy_import
 
 lazy_import('sage.algebras.group_algebra', 'GroupAlgebra')
 
+lazy_import('sage.algebras.commutative_dga', 'GradedCommutativeAlgebra')
+
 # old-style class for associative algebras, use Parent instead
 from sage.rings.ring import Algebra
 

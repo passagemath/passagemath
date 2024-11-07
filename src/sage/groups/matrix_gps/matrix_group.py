@@ -371,6 +371,7 @@ class MatrixGroup_base(Group):
             sage: m2*e*e
             2*B['v']
 
+            sage: # needs sage.groups
             sage: W = WeylGroup(["A", 1, 1])
             sage: W.sign_representation()
             Sign representation of
@@ -404,8 +405,7 @@ class MatrixGroup_base(Group):
             sage: V
             Natural representation of Special Linear Group of degree 6
              over Finite Field of size 3
-            sage: e = prod(G.gens())
-            sage: e
+            sage: e = prod(G.gens()); e                                                 # needs sage.libs.gap
             [2 0 0 0 0 1]
             [2 0 0 0 0 0]
             [0 2 0 0 0 0]
@@ -415,7 +415,7 @@ class MatrixGroup_base(Group):
             sage: v = V.an_element()
             sage: v
             2*e[0] + 2*e[1]
-            sage: e * v
+            sage: e * v                                                                 # needs sage.libs.gap
             e[0] + e[1] + e[2]
         """
         from sage.modules.with_basis.representation import NaturalMatrixRepresentation
@@ -593,6 +593,7 @@ class MatrixGroup_generic(MatrixGroup_base):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: MatrixGroup([identity_matrix(3)]).is_trivial()
             True
             sage: SL(2, ZZ).is_trivial()
@@ -602,6 +603,7 @@ class MatrixGroup_generic(MatrixGroup_base):
 
         TESTS::
 
+            sage: # needs sage.libs.gap
             sage: CoxeterGroup(['A',0], implementation='matrix').is_trivial()
             True
             sage: MatrixGroup([matrix(SR, [[1,x], [0,1]])]).is_trivial()

@@ -44,14 +44,15 @@ linbox      = [SPKG_INSTALL_REQUIRES_sagemath_linbox]
 pari        = [SPKG_INSTALL_REQUIRES_sagemath_pari]
 
 # polyhedral libraries
-4ti2        = []  # FIXME
-cddlib      = []  # FIXME
+4ti2        = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
+cddlib      = [SPKG_INSTALL_REQUIRES_sagemath_cddlib]
 latte       = ["passagemath-polyhedra[latte_int]"]  # alias
-latte_int   = []  # FIXME
+latte_int   = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
 normaliz    = [SPKG_INSTALL_REQUIRES_pynormaliz]
+palp        = [SPKG_INSTALL_REQUIRES_sagemath_palp]
 polymake    = [SPKG_INSTALL_REQUIRES_jupymake]
 ppl         = []  # no extra required
-topcom      = []  # FIXME
+topcom      = [SPKG_INSTALL_REQUIRES_sagemath_topcom]
 
 # optimization libraries
 cbc         = ["passagemath-polyhedra[cbc_sage]"]
@@ -72,7 +73,7 @@ scip        = [SPKG_INSTALL_REQUIRES_pyscipopt]
 # supported rings
 QQ          = []
 ZZ          = []
-RDF         = []  # FIXME: cddlib
+RDF         = ["passagemath-polyhedra[cddlib]"]
 NumberField = ["passagemath-polyhedra[flint]"]
 
 # features

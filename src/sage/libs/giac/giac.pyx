@@ -67,6 +67,7 @@ Some settings of giac are available via the ``giacsettings`` element. (Ex:
 maximal number of threads in computations, allowing probabilistic algorithms or
 not...::
 
+    sage: # needs sage.libs.singular
     sage: R = PolynomialRing(QQ,8,'x')
     sage: I = sage.rings.ideal.Katsura(R,8)
     sage: giacsettings.proba_epsilon = 1e-15
@@ -647,7 +648,7 @@ cdef class GiacSetting(Pygen):
             l = Pygen('cas_setup()').eval()
             pl = [ i for i in l ]
             pl[6] = value
-            Pygen('cas_setup(%s)'%(pl)).eval()
+            Pygen('cas_setup(%s)' % pl).eval()
 
     property sqrtflag:
         r"""
@@ -663,7 +664,7 @@ cdef class GiacSetting(Pygen):
                 pl[9]=1
             else:
                 pl[9]=0
-            Pygen('cas_setup(%s)'%(pl)).eval()
+            Pygen('cas_setup(%s)' % pl).eval()
 
     property complexflag:
         r"""
@@ -691,7 +692,7 @@ cdef class GiacSetting(Pygen):
                 pl[2] = 1
             else:
                 pl[2] = 0
-            Pygen('cas_setup(%s)'%(pl)).eval()
+            Pygen('cas_setup(%s)' % pl).eval()
 
     property eval_level:
         r"""
@@ -717,7 +718,7 @@ cdef class GiacSetting(Pygen):
             l = Pygen('cas_setup()').eval()
             pl = [ i for i in l ]
             pl[7] = [l[7][0],l[7][1],l[7][2], value]
-            Pygen('cas_setup(%s)'%(pl)).eval()
+            Pygen('cas_setup(%s)' % pl).eval()
 
     property proba_epsilon:
         r"""
@@ -741,7 +742,7 @@ cdef class GiacSetting(Pygen):
             l = Pygen('cas_setup()').eval()
             pl = [ i for i in l ]
             pl[5] = [l[5][0],value]
-            Pygen('cas_setup(%s)'%(pl)).eval()
+            Pygen('cas_setup(%s)' % pl).eval()
 
     property epsilon:
         r"""
@@ -764,7 +765,7 @@ cdef class GiacSetting(Pygen):
             l = Pygen('cas_setup()').eval()
             pl = [ i for i in l ]
             pl[5] = [value,l[5][1]]
-            Pygen('cas_setup(%s)'%(pl)).eval()
+            Pygen('cas_setup(%s)' % pl).eval()
 
     property threads:
         r"""
@@ -774,7 +775,7 @@ cdef class GiacSetting(Pygen):
             return (self.cas_setup()[7][0])._val
 
         def __set__(self,value):
-            Pygen('threads:=%s'%(str(value))).eval()
+            Pygen('threads:=%s' % str(value)).eval()
 
 ########################################################
 #                                                      #
@@ -959,7 +960,7 @@ cdef class Pygen(GiacMethods_base):
                     sig_off()
                     return _wrap_gen(result)
                 else:
-                    raise IndexError('list index %s out of range'%(i))
+                    raise IndexError('list index %s out of range' % i)
             else:
                 if isinstance(i, slice):
                     sig_on()
@@ -979,17 +980,18 @@ cdef class Pygen(GiacMethods_base):
                     raise TypeError('gen indexes are not yet implemented')
         # Here we add support to formal variable indexes:
         else:
-            cmd='%s[%s]'%(self,i)
-            ans=Pygen(cmd).eval()
+            cmd = '%s[%s]' % (self, i)
+            ans = Pygen(cmd).eval()
             # if the answer is a string, it must be an error message because self is not a list or a string
             if (ans._type == 12):
-                raise TypeError("Error executing code in Giac\nCODE:\n\t%s\nGiac ERROR:\n\t%s"%(cmd, ans))
+                raise TypeError("Error executing code in Giac\nCODE:\n\t%s\nGiac ERROR:\n\t%s" % (cmd, ans))
             return ans
 
     def __setitem__(self, key, value):
         """
         Set the value of a coefficient of a giac vector or matrix or list.
-           Warning: It is an in place affectation.
+
+        Warning: It is an in place affectation.
 
         TESTS::
 
@@ -1029,9 +1031,9 @@ cdef class Pygen(GiacMethods_base):
         sig_on()
         cdef gen g = gen(<string>encstring23('GIACPY_TMP_NAME050268070969290100291003'),context_ptr)
         GIAC_sto((<Pygen>self).gptr[0],g,1,context_ptr)
-        g=gen(<string>encstring23('GIACPY_TMP_NAME050268070969290100291003[%s]'%(str(key))),context_ptr)
+        g = gen(<string>encstring23('GIACPY_TMP_NAME050268070969290100291003[%s]' % str(key)), context_ptr)
         v=(<Pygen>(Pygen(value).eval())).gptr[0]
-        GIAC_sto(v,g,1,context_ptr)
+        GIAC_sto(v, g, 1, context_ptr)
         Pygen('purge(GIACPY_TMP_NAME050268070969290100291003):;').eval()
         sig_off()
         return

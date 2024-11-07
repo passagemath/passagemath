@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-graphs
+# sage.doctest: needs database_graphs
 """
 Graph database
 

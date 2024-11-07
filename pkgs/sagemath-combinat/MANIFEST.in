@@ -9,7 +9,8 @@ include requirements.txt
 graft sage/algebras
 graft sage/combinat
 graft sage/monoids
-exclude sage/monoids/monoid.py          # sagemath-categories
+exclude sage/monoids/monoid.py                  # sagemath-categories
+exclude sage/monoids/indexed_free_monoid.p*     # sagemath-categories
 graft sage/games
 graft sage/sat
 
@@ -24,6 +25,7 @@ graft sage/libs/symmetrica
 # included in sagemath-categories
 prune sage/combinat/integer_lists
 exclude sage/combinat/integer_vector.p*
+exclude sage/combinat/integer_vector_weighted.p*
 exclude sage/combinat/backtrack.p*
 exclude sage/combinat/combinat.p*
 exclude sage/combinat/combinat_cython.p*
@@ -70,7 +72,8 @@ prune sage/algebras/finite_dimensional_algebras
 exclude sage/algebras/group_algebra.py
 exclude sage/algebras/orlik_solomon.p*
 exclude sage/algebras/orlik_terao.p*
-
+exclude sage/algebras/commutative_dga.p*
+exclude sage/algebras/finite_gca.p*
 exclude sage/algebras/clifford_algebra*.p*
 exclude sage/algebras/exterior_algebra*.p*
 exclude sage/algebras/octonion_algebra.p*

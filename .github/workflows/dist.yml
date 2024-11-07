@@ -122,13 +122,6 @@ jobs:
         with:
           path: "dist/*.tar.gz"
           name: dist
-      - uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.SAGEMATH_PYPI_API_TOKEN }}
-          skip-existing: true
-          verbose: true
-        if: env.CAN_DEPLOY == 'true' && startsWith(github.ref, 'refs/tags/')
 
   release:
 
@@ -175,18 +168,11 @@ jobs:
         with:
           path: "dist/*.whl"
           name: noarch-wheels
-      - uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.SAGEMATH_PYPI_API_TOKEN }}
-          skip-existing: true
-          verbose: true
-        if: env.CAN_DEPLOY == 'true' && startsWith(github.ref, 'refs/tags/')
 
   build_wheels:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }}
     runs-on: ${{ matrix.os }}
-    needs: sdists_for_pypi
+    needs: [sdists_for_pypi, noarch_wheels_for_pypi]
     strategy:
       fail-fast: false
       matrix:
@@ -211,7 +197,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline info ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl libgd cmr
+      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl libgd cmr msolve cddlib latte_int 4ti2 topcom palp nauty qepcad gfan
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -223,11 +209,11 @@ jobs:
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup") > constraints.txt
       # Environment during wheel build
-      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic $LDFLAGS\"' || '' }}"
+      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
-      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && case {wheel} in *sagemath_gap*) python3 -m pip install passagemath-conf && python3 pkgs/sagemath-gap/repair_wheel.py {wheel};; esac && auditwheel repair -w {dest_dir} {wheel}"
+      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel repair -w {dest_dir} {wheel}"
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
     steps:
@@ -242,6 +228,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: dist
+          path: dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: noarch-wheels
           path: dist
 
       - uses: actions/setup-python@v5
@@ -418,6 +409,54 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*cmr*
 
+      - name: sagemath-msolve
+        id:   sagemath-msolve
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*msolve*
+
+      - name: sagemath-cddlib
+        id:   sagemath-cddlib
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*cddlib*
+
+      - name: sagemath-latte-4ti2
+        id:   sagemath-latte-4ti2
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*latte*4ti2*
+
+      - name: sagemath-topcom
+        id:   sagemath-topcom
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*topcom*
+
+      - name: sagemath-gfan
+        id:   sagemath-gfan
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*gfan*
+
+      - name: sagemath-palp
+        id:   sagemath-palp
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*palp*
+
+      - name: sagemath-nauty
+        id:   sagemath-nauty
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*nauty*
+
+      - name: sagemath-qepcad
+        id:   sagemath-qepcad
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*qepcad*
+
       - name: sagemath-linbox
         id:   sagemath-linbox
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
@@ -487,7 +526,7 @@ jobs:
 
   upload_wheels:
     # This needs to be a separate job because pypa/gh-action-pypi-publish cannot run on macOS
-    needs: build_wheels
+    needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels]
     if: (success() || failure()) && startsWith(github.ref, 'refs/tags')
 
     runs-on: ubuntu-latest
@@ -497,12 +536,19 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          pattern: "*-*-*-wheels"
+          pattern: "*-wheels"
+          path: wheelhouse
+          merge-multiple: true
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: "dist"
           path: wheelhouse
           merge-multiple: true
 
       - name: Remove wheels that are too large
         run: |
+          ls -l wheelhouse
           find wheelhouse -size +96M -delete
 
       - uses: pypa/gh-action-pypi-publish@release/v1

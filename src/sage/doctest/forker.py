@@ -122,6 +122,7 @@ def init_sage(controller=None):
 
     EXAMPLES::
 
+        sage: # needs sage.all
         sage: from sage.doctest.forker import init_sage
         sage: sage.doctest.DOCTEST_MODE = False
         sage: init_sage()
@@ -130,6 +131,7 @@ def init_sage(controller=None):
 
     Check that pexpect interfaces are invalidated, but still work::
 
+        sage: # needs sage.all
         sage: gap.eval("my_test_var := 42;")
         '42'
         sage: gap.eval("my_test_var;")
@@ -1719,6 +1721,7 @@ class DocTestDispatcher(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.all
             sage: from sage.doctest.control import DocTestController, DocTestDefaults
             sage: from sage.doctest.forker import DocTestDispatcher
             sage: DocTestDispatcher(DocTestController(DocTestDefaults(), []))
@@ -1736,6 +1739,7 @@ class DocTestDispatcher(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.all
             sage: from sage.doctest.control import DocTestController, DocTestDefaults
             sage: from sage.doctest.forker import DocTestDispatcher
             sage: from sage.doctest.reporting import DocTestReporter
@@ -1782,6 +1786,7 @@ class DocTestDispatcher(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.all
             sage: from sage.doctest.control import DocTestController, DocTestDefaults
             sage: from sage.doctest.forker import DocTestDispatcher
             sage: from sage.doctest.reporting import DocTestReporter
@@ -1806,6 +1811,7 @@ class DocTestDispatcher(SageObject):
         module will be immediately printed and any other ongoing tests
         canceled::
 
+            sage: # needs sage.all
             sage: from tempfile import NamedTemporaryFile as NTF
             sage: with NTF(suffix='.py', mode='w+t') as f1, \
             ....:      NTF(suffix='.py', mode='w+t') as f2:
@@ -2168,6 +2174,7 @@ class DocTestWorker(multiprocessing.Process):
 
     EXAMPLES::
 
+        sage: # needs sage.all
         sage: from sage.doctest.forker import DocTestWorker, DocTestTask
         sage: from sage.doctest.sources import FileDocTestSource
         sage: from sage.doctest.reporting import DocTestReporter
@@ -2190,6 +2197,7 @@ class DocTestWorker(multiprocessing.Process):
 
         TESTS::
 
+            sage: # needs sage.all
             sage: run_doctests(sage.rings.big_oh) # indirect doctest
             Running doctests with ID ...
             Doctesting 1 file.
@@ -2331,6 +2339,7 @@ class DocTestWorker(multiprocessing.Process):
 
         EXAMPLES::
 
+            sage: # needs sage.all
             sage: from sage.doctest.forker import DocTestWorker, DocTestTask
             sage: from sage.doctest.sources import FileDocTestSource
             sage: from sage.doctest.reporting import DocTestReporter
@@ -2365,6 +2374,7 @@ class DocTestWorker(multiprocessing.Process):
 
         EXAMPLES::
 
+            sage: # needs sage.all
             sage: from sage.doctest.forker import DocTestWorker, DocTestTask
             sage: from sage.doctest.sources import FileDocTestSource
             sage: from sage.doctest.reporting import DocTestReporter
@@ -2436,6 +2446,7 @@ class DocTestWorker(multiprocessing.Process):
         We set up the worker to start by blocking ``SIGQUIT``, such that
         killing will fail initially::
 
+            sage: # needs sage.all
             sage: from cysignals.pselect import PSelecter
             sage: import signal
             sage: def block_hup():
@@ -2495,6 +2506,7 @@ class DocTestTask:
 
     EXAMPLES::
 
+        sage: # needs sage.all
         sage: from sage.doctest.forker import DocTestTask
         sage: from sage.doctest.sources import FileDocTestSource
         sage: from sage.doctest.control import DocTestDefaults, DocTestController
@@ -2559,6 +2571,7 @@ class DocTestTask:
 
         EXAMPLES::
 
+            sage: # needs sage.all
             sage: from sage.doctest.forker import DocTestTask
             sage: from sage.doctest.sources import FileDocTestSource
             sage: from sage.doctest.control import DocTestDefaults, DocTestController

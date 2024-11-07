@@ -283,13 +283,14 @@ def skipfile(filename, tested_optional_tags=False, *,
         sage: skipfile(filename, True)
         False
     """
-    if filename.endswith('.rst.txt'):
-        ext = '.rst.txt'
     if filename.endswith('__main__.py'):
         if log:
             log(f"Skipping '{filename}' because it is a __main__.py file")
         return True
-    _ , ext = os.path.splitext(filename)
+    if filename.endswith('.rst.txt'):
+        ext = '.rst.txt'
+    else:
+        _ , ext = os.path.splitext(filename)
     # .rst.txt appear in the installed documentation in subdirectories named "_sources"
     if ext not in ('.py', '.pyx', '.pxd', '.pxi', '.sage', '.spyx', '.rst', '.tex', '.rst.txt'):
         if log:
@@ -496,7 +497,7 @@ class DocTestController(SageObject):
                         if pkg.name in options.hide:
                             continue
                         # Skip features for which we have a more specific runtime feature test.
-                        if pkg.name in ['bliss', 'coxeter3', 'mcqd', 'meataxe', 'sirocco', 'tdlib']:
+                        if pkg.name in ['bliss', 'coxeter3', 'giac', 'mcqd', 'meataxe', 'sirocco', 'tdlib', 'latte_int']:
                             continue
                         if pkg.is_installed() and pkg.installed_version == pkg.remote_version:
                             options.optional.add(pkg.name)

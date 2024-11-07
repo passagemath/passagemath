@@ -91,7 +91,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
         sage: p1 = R(3)*a*b + a + R(-1)*b
         sage: p1.tropical_variety()
         Tropical curve of 3*a*b + 0*a + (-1)*b
-        sage: p1.tropical_variety().plot()
+        sage: p1.tropical_variety().plot()                                              # needs sage.plot
         Graphics object consisting of 3 graphics primitives
 
     .. PLOT::
@@ -107,7 +107,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
     Tropical polynomial in two variables will induce a function in three
     dimension that consists of a number of surfaces::
 
-        sage: p1.plot3d()
+        sage: p1.plot3d()                                                               # needs sage.plot
         Graphics3d Object
 
     .. PLOT::
@@ -126,7 +126,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
         sage: p1 = R(3)*a*b + a + R(-1)*b
         sage: p1.tropical_variety()
         Tropical curve of 3*a*b + 0*a + (-1)*b
-        sage: p1.tropical_variety().plot()
+        sage: p1.tropical_variety().plot()                                              # needs sage.plot
         Graphics object consisting of 3 graphics primitives
 
     .. PLOT::
@@ -141,7 +141,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
     ::
 
-        sage: p1.plot3d()
+        sage: p1.plot3d()                                                               # needs sage.plot
         Graphics3d Object
 
     .. PLOT::
@@ -214,7 +214,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
             sage: T = TropicalSemiring(QQ, use_min=False)
             sage: R.<x,y> = PolynomialRing(T)
             sage: p1 = x^2
-            sage: p1.plot3d()
+            sage: p1.plot3d()                                                           # needs sage.plot
             Graphics3d Object
 
         .. PLOT::
@@ -230,7 +230,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
         of multiple surfaces::
 
             sage: p2 = R(3) + R(2)*x + R(2)*y + R(3)*x*y
-            sage: p2.plot3d()
+            sage: p2.plot3d()                                                           # needs sage.plot
             Graphics3d Object
 
         .. PLOT::
@@ -247,7 +247,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y> = PolynomialRing(T)
             sage: p3 = R(2)*x^2 + x*y + R(2)*y^2 + x + R(-1)*y + R(3)
-            sage: p3.plot3d()
+            sage: p3.plot3d()                                                           # needs sage.plot
             Graphics3d Object
 
         .. PLOT::
@@ -264,7 +264,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y,z> = PolynomialRing(T)
             sage: p1 = x*y*z + x
-            sage: p1.plot3d()
+            sage: p1.plot3d()                                                           # needs sage.plot
             Traceback (most recent call last):
             ...
             NotImplementedError: can only plot the graph of tropical

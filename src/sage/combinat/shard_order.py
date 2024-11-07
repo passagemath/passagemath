@@ -89,7 +89,7 @@ class ShardPosetElement(tuple):
             Digraph on 3 vertices
         """
         self.runs = p.decreasing_runs(as_tuple=True)
-        self.run_indices = [None] * (len(p) + 1)
+        self.run_indices = [0] * (len(p) + 1)
         for i, bloc in enumerate(self.runs):
             for j in bloc:
                 self.run_indices[j] = i
@@ -225,7 +225,7 @@ def shard_poset(n):
 
         sage: P = posets.ShardPoset(4); P  # indirect doctest
         Finite poset containing 24 elements
-        sage: P.chain_polynomial()
+        sage: P.chain_polynomial()                                                      # needs sage.libs.flint
         34*q^4 + 90*q^3 + 79*q^2 + 24*q + 1
         sage: P.characteristic_polynomial()
         q^3 - 11*q^2 + 23*q - 13

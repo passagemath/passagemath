@@ -118,7 +118,6 @@ can be applied on both. Here is what it can do:
     :widths: 30, 70
     :delim: |
 
-    :meth:`~GenericGraph.eulerian_orientation` | Return a DiGraph which is an Eulerian orientation of the current graph.
     :meth:`~GenericGraph.eulerian_circuit` | Return a list of edges forming an Eulerian circuit if one exists.
     :meth:`~GenericGraph.minimum_cycle_basis` | Return a minimum weight cycle basis of the graph.
     :meth:`~GenericGraph.cycle_basis` | Return a list of cycles which form a basis of the cycle space of ``self``.
@@ -953,7 +952,7 @@ class GenericGraph(GenericGraph_pyx):
 
         return self.latex_options().latex()
 
-    def tikz(self, format='dot2tex', edge_labels=None,
+    def tikz(self, format=None, edge_labels=None,
             color_by_label=False, prog='dot', rankdir='down',
             standalone_config=None, usepackage=None,
             usetikzlibrary=None, macros=None,
@@ -1024,8 +1023,8 @@ class GenericGraph(GenericGraph_pyx):
 
         ::
 
-            sage: tikz = g.tikz(format='tkz_graph')
-            sage: _ = tikz.pdf(view=False)          # optional - latex
+            sage: tikz = g.tikz(format='tkz_graph')                                     # needs sage.plot
+            sage: _ = tikz.pdf(view=False)          # optional - latex                  # needs sage.plot
 
         Using another value for ``prog``::
 
@@ -2277,7 +2276,7 @@ class GenericGraph(GenericGraph_pyx):
             [0 1 0 1 0]
             [0 0 1 0 1]
             [0 0 0 1 0]
-            sage: type(_)
+            sage: type(_)                                                               # needs numpy sage.modules
             <class 'sage.matrix.matrix_numpy_integer_dense.Matrix_numpy_integer_dense'>
 
         As an immutable matrix::
@@ -2334,7 +2333,7 @@ class GenericGraph(GenericGraph_pyx):
             Traceback (most recent call last):
             ...
             TypeError: Vertex labels are not comparable. You must specify an ordering using parameter 'vertices'
-            sage: Graph ([[0, 42, 'John'], [(42, 'John')]]).adjacency_matrix(vertices=['John', 42, 0])
+            sage: Graph ([[0, 42, 'John'], [(42, 'John')]]).adjacency_matrix(vertices=['John', 42, 0])  # needs sage.modules
             [0 1 0]
             [1 0 0]
             [0 0 0]
@@ -4744,110 +4743,6 @@ class GenericGraph(GenericGraph_pyx):
         return self._backend.num_edges(self._directed)
 
     num_edges = size
-
-    # Orientations
-
-    def eulerian_orientation(self):
-        r"""
-        Return a DiGraph which is an Eulerian orientation of the current graph.
-
-        An Eulerian graph being a graph such that any vertex has an even degree,
-        an Eulerian orientation of a graph is an orientation of its edges such
-        that each vertex `v` verifies `d^+(v)=d^-(v)=d(v)/2`, where `d^+` and
-        `d^-` respectively represent the out-degree and the in-degree of a
-        vertex.
-
-        If the graph is not Eulerian, the orientation verifies for any vertex
-        `v` that `| d^+(v)-d^-(v) | \leq 1`.
-
-        ALGORITHM:
-
-        This algorithm is a random walk through the edges of the graph, which
-        orients the edges according to the walk. When a vertex is reached which
-        has no non-oriented edge (this vertex must have odd degree), the walk
-        resumes at another vertex of odd degree, if any.
-
-        This algorithm has complexity `O(n+m)` for ``SparseGraph`` and `O(n^2)`
-        for ``DenseGraph``, where `m` is the number of edges in the graph and
-        `n` is the number of vertices in the graph.
-
-        EXAMPLES:
-
-        The CubeGraph with parameter 4, which is regular of even degree, has an
-        Eulerian orientation such that `d^+ = d^-`::
-
-            sage: g = graphs.CubeGraph(4)
-            sage: g.degree()
-            [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
-            sage: o = g.eulerian_orientation()
-            sage: o.in_degree()
-            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-            sage: o.out_degree()
-            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-
-        Secondly, the Petersen Graph, which is 3 regular has an orientation such
-        that the difference between `d^+` and `d^-` is at most 1::
-
-            sage: g = graphs.PetersenGraph()
-            sage: o = g.eulerian_orientation()
-            sage: o.in_degree()
-            [2, 2, 2, 2, 2, 1, 1, 1, 1, 1]
-            sage: o.out_degree()
-            [1, 1, 1, 1, 1, 2, 2, 2, 2, 2]
-
-        TESTS::
-
-            sage: E0 = Graph(); E4 = Graph(4)  # See trac #21741
-            sage: E0.eulerian_orientation()
-            Digraph on 0 vertices
-            sage: E4.eulerian_orientation()
-            Digraph on 4 vertices
-        """
-        from sage.graphs.digraph import DiGraph
-
-        d = DiGraph()
-        d.add_vertices(self.vertex_iterator())
-
-        if not self.size():
-            return d
-
-        g = copy(self)
-
-        # list of vertices of odd degree
-        odd = [x for x in g.vertex_iterator() if g.degree(x) % 2]
-
-        # Picks the first vertex, which is preferably an odd one
-        if odd:
-            v = odd.pop()
-        else:
-            v = next(g.edge_iterator(labels=None))[0]
-            odd.append(v)
-        # Stops when there is no edge left
-        while True:
-
-            # If there is an edge adjacent to the current one
-            if g.degree(v):
-                e = next(g.edge_iterator(v))
-                g.delete_edge(e)
-                if e[0] != v:
-                    e = (e[1], e[0], e[2])
-                d.add_edge(e)
-                v = e[1]
-
-            # The current vertex is isolated
-            else:
-                odd.remove(v)
-
-                # jumps to another odd vertex if possible
-                if odd:
-                    v = odd.pop()
-                # Else jumps to an even vertex which is not isolated
-                elif g.size():
-                    v = next(g.edge_iterator())[0]
-                    odd.append(v)
-                # If there is none, we are done !
-                else:
-                    return d
 
     def eulerian_circuit(self, return_vertices=False, labels=True, path=False):
         r"""
@@ -8314,6 +8209,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Longest (induced) cycle of a graph::
 
+            sage: # needs sage.numerical.mip
             sage: G = graphs.Grid2dGraph(3, 4)
             sage: G.longest_cycle(induced=False)
             longest cycle from 2D Grid Graph for [3, 4]: Graph on 12 vertices
@@ -8322,6 +8218,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Longest (induced) cycle in a digraph::
 
+            sage: # needs sage.numerical.mip
             sage: D = digraphs.Circuit(8)
             sage: D.add_edge(0, 2)
             sage: D.longest_cycle(induced=False)
@@ -8341,6 +8238,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Longest (induced) cycle when considering edge weights::
 
+            sage: # needs sage.numerical.mip
             sage: D = digraphs.Circuit(15)
             sage: for u, v in D.edges(labels=False):
             ....:     D.set_edge_label(u, v, 1)
@@ -8360,6 +8258,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Check that the example from :issue:`37028` is fixed::
 
+            sage: # needs sage.numerical.mip
             sage: d = {0: [4, 6, 10, 11], 1: [5, 7, 10, 11], 2: [8, 9, 10, 11],
             ....:      3: [8, 9, 11], 4: [6, 10, 11], 5: [7, 10, 11],
             ....:      6: [10, 11],  7: [10], 8: [10], 9: [11]}
@@ -8371,6 +8270,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Small cases::
 
+            sage: # needs sage.numerical.mip
             sage: Graph().longest_cycle()
             longest cycle: Graph on 0 vertices
             sage: Graph(1).longest_cycle()
@@ -8394,6 +8294,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Disconnected digraph::
 
+            sage: # needs sage.numerical.mip
             sage: D = digraphs.Circuit(5) + digraphs.Circuit(4)
             sage: D.longest_cycle()
             longest cycle from Subgraph of (Circuit disjoint_union Circuit): Digraph on 5 vertices
@@ -17322,7 +17223,8 @@ class GenericGraph(GenericGraph_pyx):
 
         Comparison of algorithms::
 
-            sage: G = graphs.RandomBarabasiAlbert(50,2)                                 # needs networkx
+            sage: # needs networkx
+            sage: G = graphs.RandomBarabasiAlbert(50,2)
             sage: results = []
             sage: results.append(G.triangles_count(algorithm='matrix'))
             sage: results.append(G.triangles_count(algorithm='iter'))                   # needs sage.modules

@@ -54,6 +54,7 @@ include sage/groups/generic.p*
 include sage/groups/groups_catalog.p*
 
 include sage/monoids/monoid.p*
+include sage/monoids/indexed_free_monoid.p*
 
 include sage/rings/ring.*
 include sage/rings/quotient_ring*.p*
@@ -212,6 +213,7 @@ include sage/rings/big_oh.p*
 include sage/ext/fast_*.p*
 
 include sage/combinat/integer_vector.p*
+include sage/combinat/integer_vector_weighted.p*
 graft sage/combinat/integer_lists
 include sage/combinat/backtrack.p*
 include sage/combinat/combinat.p*

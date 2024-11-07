@@ -22,7 +22,7 @@ cdef class GraphicMatroid(Matroid):
     cpdef bint _is_closed(self, frozenset X) noexcept
     cpdef _is_isomorphic(self, other, certificate=*)
     cpdef _isomorphism(self, other)
-    cpdef bint is_valid(self) noexcept
+    cpdef bint is_valid(self, certificate=*) noexcept
     cpdef bint is_graphic(self, algorithm=*) except -1
     cpdef bint is_regular(self, algorithm=*) except -1
     cpdef graph(self)

@@ -308,10 +308,10 @@ cdef class TimeSeries:
         if len(self) > max_print:
             v0 = self[:max_print//2]
             v1 = self[-max_print//2:]
-            return '[' + ', '.join(format%x for x in v0) + ' ... ' + \
-                         ', '.join(format%x for x in v1) + ']'
+            return '[' + ', '.join(format % x for x in v0) + ' ... ' + \
+                         ', '.join(format % x for x in v1) + ']'
         else:
-            return '[' + ', '.join(format%x for x in self) + ']'
+            return '[' + ', '.join(format % x for x in self) + ']'
 
     def __len__(self):
         r"""
@@ -2363,7 +2363,7 @@ cdef class TimeSeries:
 
             sage: v = stats.TimeSeries([1..9]); v
             [1.0000, 2.0000, 3.0000, 4.0000, 5.0000, 6.0000, 7.0000, 8.0000, 9.0000]
-            sage: w = v.fft(); w
+            sage: w = v.fft(); w                                                        # needs scipy
             [45.0000, -4.5000, 12.3636, -4.5000, 5.3629, -4.5000, 2.5981, -4.5000, 0.7935]
 
         We get just the series of real parts of ::
@@ -2375,9 +2375,9 @@ cdef class TimeSeries:
 
             sage: v = stats.TimeSeries([1..10]); v
             [1.0000, 2.0000, 3.0000, 4.0000, 5.0000, 6.0000, 7.0000, 8.0000, 9.0000, 10.0000]
-            sage: w = v.fft(); w
+            sage: w = v.fft(); w                                                        # needs scipy
             [55.0000, -5.0000, 15.3884, -5.0000, 6.8819, -5.0000, 3.6327, -5.0000, 1.6246, -5.0000]
-            sage: v.fft().ifft()
+            sage: v.fft().ifft()                                                        # needs scipy
             [1.0000, 2.0000, 3.0000, 4.0000, 5.0000, 6.0000, 7.0000, 8.0000, 9.0000, 10.0000]
         """
         import scipy.fftpack
@@ -2434,9 +2434,9 @@ cdef class TimeSeries:
 
             sage: v = stats.TimeSeries([1..10]); v
             [1.0000, 2.0000, 3.0000, 4.0000, 5.0000, 6.0000, 7.0000, 8.0000, 9.0000, 10.0000]
-            sage: v.ifft()
+            sage: v.ifft()                                                              # needs scipy
             [5.1000, -5.6876, 1.4764, -1.0774, 0.4249, -0.1000, -0.2249, 0.6663, -1.2764, 1.6988]
-            sage: v.ifft().fft()
+            sage: v.ifft().fft()                                                        # needs scipy
             [1.0000, 2.0000, 3.0000, 4.0000, 5.0000, 6.0000, 7.0000, 8.0000, 9.0000, 10.0000]
         """
         import scipy.fftpack

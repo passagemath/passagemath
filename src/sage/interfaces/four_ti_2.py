@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-polyhedra
+# sage_setup: distribution = sagemath-latte-4ti2
 r"""
 Interface to 4ti2
 
