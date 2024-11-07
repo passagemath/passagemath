@@ -125,6 +125,9 @@ from .maxima_abstract import (MaximaAbstract, MaximaAbstractFunction,
 from sage.misc.instancedoc import instancedoc
 from sage.env import MAXIMA_FAS
 
+import sage.functions.error
+import sage.functions.log
+import sage.functions.other
 import sage.rings.real_double
 import sage.symbolic.expression
 import sage.symbolic.integration.integral
