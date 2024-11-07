@@ -95,7 +95,7 @@ cdef class BinaryMatroid(LinearMatroid):
     cpdef bint is_graphic(self, algorithm=*) except -1
     cpdef _is_graphic_GG(self)
     cpdef _is_graphic_cmr(self)
-    cpdef bint is_valid(self, certificate=*)
+    cpdef is_valid(self, certificate=*)
 
 
 cdef class TernaryMatroid(LinearMatroid):
