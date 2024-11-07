@@ -170,6 +170,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_latte_4ti2			\
 	sagemath_cddlib				\
 	sagemath_topcom				\
+	sagemath_gfan				\
 	sagemath_nauty				\
 	sagemath_palp				\
 	sagemath_qepcad				\
