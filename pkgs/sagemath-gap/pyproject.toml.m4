@@ -35,7 +35,7 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+test            = ["passagemath-repl"]
 
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),

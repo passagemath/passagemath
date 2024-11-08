@@ -28,8 +28,8 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-     SPKG_INSTALL_REQUIRES_sagemath_categories
-     SPKG_INSTALL_REQUIRES_sagemath_repl
+     "passagemath-categories",
+     "passagemath-repl",
 ]
 
 [tool.setuptools]
