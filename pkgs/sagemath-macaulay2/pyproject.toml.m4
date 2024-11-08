@@ -32,7 +32,7 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    SPKG_INSTALL_REQUIRES_sagemath_linbox
+    "passagemath-linbox",
 ]
 
 [tool.cibuildwheel.linux]
