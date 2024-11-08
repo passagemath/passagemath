@@ -38,21 +38,21 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test    = ["passagemath-repl",]
+test    = ["passagemath-repl"]
 
 # extras by packages
-flint   = ["passagemath-flint",]
+flint   = ["passagemath-flint"]
 gsl     = []  # No extra needed
-linbox  = ["passagemath-linbox",]
+linbox  = ["passagemath-linbox"]
 m4ri    = ["passagemath-modules[linbox]"]
 m4rie   = ["passagemath-modules[linbox]"]
-meataxe = ["passagemath-meataxe",]
+meataxe = ["passagemath-meataxe"]
 mpfi    = ["passagemath-modules[flint]"]
 mpfr    = []  # No extra needed
 mpmath  = []  # No extra needed
-ntl     = ["passagemath-ntl",]
+ntl     = ["passagemath-ntl"]
 numpy   = [SPKG_INSTALL_REQUIRES_numpy]
-pari    = ["passagemath-pari",]
+pari    = ["passagemath-pari"]
 
 # extras by rings
 RDF     = ["passagemath-modules[numpy]"]

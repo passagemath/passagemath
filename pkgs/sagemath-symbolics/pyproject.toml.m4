@@ -41,11 +41,11 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl",]
+test            = ["passagemath-repl"]
 
 # extras by libraries
 axiom           = []  # FIXME
-giac            = ["passagemath-giac",]
+giac            = ["passagemath-giac"]
 ginac           = []  # no extra needed, same as pynac
 maxima          = []  # no extra needed
 ntl             = []  # no extra needed
@@ -55,7 +55,7 @@ singular        = []  # no extra needed
 sympy           = []  # no extra needed
 
 # extras by other features
-plot            = ["passagemath-plot",]
+plot            = ["passagemath-plot"]
 
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),

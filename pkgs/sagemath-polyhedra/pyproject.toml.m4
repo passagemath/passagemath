@@ -35,24 +35,24 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test        = ["passagemath-repl",]
+test        = ["passagemath-repl"]
 
 # general libraries
-flint       = ["passagemath-flint",]
+flint       = ["passagemath-flint"]
 fpylll      = [SPKG_INSTALL_REQUIRES_fpylll]
-linbox      = ["passagemath-linbox",]
-pari        = ["passagemath-pari",]
+linbox      = ["passagemath-linbox"]
+pari        = ["passagemath-pari"]
 
 # polyhedral libraries
-4ti2        = ["passagemath-latte_4ti2",]
-cddlib      = ["passagemath-cddlib",]
+4ti2        = ["passagemath-latte_4ti2"]
+cddlib      = ["passagemath-cddlib"]
 latte       = ["passagemath-polyhedra[latte_int]"]  # alias
-latte_int   = ["passagemath-latte_4ti2",]
+latte_int   = ["passagemath-latte_4ti2"]
 normaliz    = [SPKG_INSTALL_REQUIRES_pynormaliz]
-palp        = ["passagemath-palp",]
+palp        = ["passagemath-palp"]
 polymake    = [SPKG_INSTALL_REQUIRES_jupymake]
 ppl         = []  # no extra required
-topcom      = ["passagemath-topcom",]
+topcom      = ["passagemath-topcom"]
 
 # optimization libraries
 cbc         = ["passagemath-polyhedra[cbc_sage]"]
@@ -77,7 +77,7 @@ RDF         = ["passagemath-polyhedra[cddlib]"]
 NumberField = ["passagemath-polyhedra[flint]"]
 
 # features
-plot        = ["passagemath-plot",]
+plot        = ["passagemath-plot"]
 
 # the whole package
 standard    = ["passagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,pari,plot,RDF]"]

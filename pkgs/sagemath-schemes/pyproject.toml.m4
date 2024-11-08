@@ -38,18 +38,18 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test    = ["passagemath-repl",]
+test    = ["passagemath-repl"]
 
 # extras by packages (same as sagemath-modules)
-flint   = ["passagemath-flint",]
+flint   = ["passagemath-flint"]
 linbox  = []  # FIXME
 m4ri    = []  # FIXME
 m4rie   = []  # FIXME
-meataxe = ["passagemath-meataxe",]
+meataxe = ["passagemath-meataxe"]
 mpfi    = []  # FIXME
-ntl     = ["passagemath-ntl",]
+ntl     = ["passagemath-ntl"]
 numpy   = [SPKG_INSTALL_REQUIRES_numpy]
-pari    = ["passagemath-pari",]
+pari    = ["passagemath-pari"]
 
 # extras by packages (specific to sagemath-schemes)
 
@@ -83,7 +83,7 @@ CyclotomicField = ["passagemath-schemes[NumberField]"]
 
 # extras by features
 toric           = ["passagemath-polyhedra",
-                   "passagemath-graphs",]
+                   "passagemath-graphs"]
 padics          = ["passagemath-schemes[Zp]"]
 
 # the whole package

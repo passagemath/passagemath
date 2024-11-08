@@ -30,10 +30,10 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl",]
+test            = ["passagemath-repl"]
 
 # extras by packages
-coxeter3        = ["passagemath-coxeter3",]
+coxeter3        = ["passagemath-coxeter3"]
 gap             = []  # no extra needed
 
 # extras by groups_catalog
@@ -45,8 +45,8 @@ permutation     = []  # no extra needed
 presentation    = []  # no extra needed
 
 # extras by other features
-representations = ["passagemath-combinat",]
-semigroups      = ["passagemath-combinat",]
+representations = ["passagemath-combinat"]
+semigroups      = ["passagemath-combinat"]
 
 # the whole package
 standard        = ["passagemath-groups[additive,matrix,representations,semigroups]"]

@@ -39,14 +39,14 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl",]
+test            = ["passagemath-repl"]
 
 # extras by libraries
 jsmol           = [SPKG_INSTALL_REQUIRES_jupyter_jsmol]
 matplotlib      = []  # no extra needed
 
 # extras by other features
-polyhedra       = ["passagemath-polyhedra",]
+polyhedra       = ["passagemath-polyhedra"]
 
 [tool.setuptools]
 include-package-data = false

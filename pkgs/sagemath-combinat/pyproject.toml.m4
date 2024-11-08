@@ -31,15 +31,15 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl",]
+test            = ["passagemath-repl"]
 
 # by library
 lrcalc          = [SPKG_INSTALL_REQUIRES_lrcalc_python]
 symmetrica      = []
 
 # by feature
-graphs          = ["passagemath-graphs",]
-modules         = ["passagemath-modules",]
+graphs          = ["passagemath-graphs"]
+modules         = ["passagemath-modules"]
 
 # everything
 standard        = ["passagemath-combinat[lrcalc,symmetrica,graphs,modules]"]

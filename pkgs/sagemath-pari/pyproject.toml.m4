@@ -34,7 +34,7 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test = ["passagemath-repl",]
+test = ["passagemath-repl"]
 
 [tool.setuptools]
 include-package-data = false
