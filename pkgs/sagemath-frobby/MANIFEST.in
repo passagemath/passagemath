@@ -2,6 +2,7 @@ prune sage
 
 include VERSION.txt
 
+include sage/interfaces/frobby.p*
 include sage/libs/frobby.p*
 
 global-exclude *.c
