@@ -10,8 +10,8 @@ from sage_conf import SAGE_LOCAL
 
 wheel = sys.argv[1]
 
-# SAGE_LOCAL/bin/macaulay2 --> sage_wheels/bin/macaulay2
-command = f'ln -sf {shlex.quote(SAGE_LOCAL)} sage_wheels && zip -r {shlex.quote(wheel)} sage_wheels/bin/macaulay2'
+# SAGE_LOCAL/bin/M2 --> sage_wheels/bin/M2 etc.
+command = f'ln -sf {shlex.quote(SAGE_LOCAL)} sage_wheels && zip -r {shlex.quote(wheel)} sage_wheels/bin/M2* sage_wheels/{{share,lib,libexec}}/Macaulay2'
 print(f'Running {command}')
 sys.stdout.flush()
 os.system(command)
