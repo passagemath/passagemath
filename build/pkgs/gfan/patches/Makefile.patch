@@ -73,25 +73,27 @@ index 9556cf4..40127b6 100644
  
  
  MKDIR=mkdir -p
-@@ -110,10 +69,8 @@ MKDIR=mkdir -p
+@@ -110,11 +69,9 @@ MKDIR=mkdir -p
  PREFIX =
  SHELL       = /bin/sh
  #ARCH        = LINUX
+
 -CC          = $(PREFIX)gcc
 -CLINKER     = $(CC)
 -CXX         = $(PREFIX)g++
 -CCLINKER    = $(CXX)
 +CC          ?= $(PREFIX)gcc
 +CXX         ?= $(PREFIX)g++
- #OPTFLAGS    = -O2 -DGMPRATIONAL -DNDEBUG
- # Note that gcc produces wrong code with -O3
- OPTFLAGS    =  -DGMPRATIONAL -Wuninitialized -fno-omit-frame-pointer -O2	 #-O3 -fno-guess-branch-probability #-DNDEBUG
-@@ -125,10 +82,10 @@ OPTFLAGS    =  -DGMPRATIONAL -Wuninitialized -fno-omit-frame-pointer -O2	 #-O3 -
+ 
+ #CC          = $(PREFIX)gcc-8.1
+ #CLINKER     = $(CC)
+@@ -125,11 +82,10 @@ OPTFLAGS    =  -DGMPRATIONAL -Wuninitialized -fno-omit-frame-pointer -O2	 #-O3 -
  #OPTFLAGS    =  -DGMPRATIONAL -Wuninitialized -fno-omit-frame-pointer -O3 -msse2 -ftree-vectorizer-verbose=2 -ffast-math #-DNDEBUG
  #OPTFLAGS    =  -DGMPRATIONAL -Wuninitialized -fno-omit-frame-pointer -O3 -mavx -msse2 -ftree-vectorizer-verbose=2 -ffast-math #-DNDEBUG
  
--CFLAGS	  = $(OPTFLAGS) $(GPROFFLAG) $(STACTDUMP_OPTIONS) $(ADDITIONALINCLUDEOPTIONS) -std=c++0x -g $(CDDDEFINE_PREFIX) #-pedantic
--#CFLAGS	  = $(OPTFLAGS) $(GPROFFLAG) $(STACTDUMP_OPTIONS) $(ADDITIONALINCLUDEOPTIONS) -D_GLIBCXX_DEBUG -std=c++0x -g $(CDDDEFINE_PREFIX) #-pedantic
+-CFLAGS	  = $(OPTFLAGS) $(GPROFFLAG) $(STACTDUMP_OPTIONS) $(ADDITIONALINCLUDEOPTIONS) -g $(CDDDEFINE_PREFIX) -std=c++2a #-pedantic
+-#CFLAGS	  = $(OPTFLAGS) $(GPROFFLAG) $(STACTDUMP_OPTIONS) $(ADDITIONALINCLUDEOPTIONS) -std=c++0x -g $(CDDDEFINE_PREFIX) #-pedantic
+-#CFLAGS	  = $(OPTFLAGS) $(GPROFFLAG) $(STACTDUMP_OPTIONS) $(ADDITIONALINCLUDEOPTIONS) -D_GLIBCXX_DEBUG -g $(CDDDEFINE_PREFIX) #-pedantic
 -CCFLAGS	  = $(CFLAGS)
 -FFLAGS	  = $(OPTFLAGS)
 +CFLAGS	  := $(CFLAGS) $(OPTFLAGS) $(GPROFFLAG) $(ADDITIONALINCLUDEOPTIONS) #-pedantic
@@ -114,7 +116,7 @@ index 9556cf4..40127b6 100644
  # Define suffixes to make the program compile on legolas.imf.au.dk :
  .SUFFIXES: .o .cpp .c
  
- OBJECTS = 	$(addprefix src/,$(SOPLEX_OBJECTS)) \
+ OBJECTS1 = 	$(addprefix src/,$(SOPLEX_OBJECTS)) \
  		$(SINGULAR_OBJECTS) \
 -		$(SAGE_OBJECTS) \
  		$(addprefix src/,$(CATSOBJECTS)) \
