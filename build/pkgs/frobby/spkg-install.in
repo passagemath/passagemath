@@ -1,4 +1,4 @@
 cd src
-sdh_cmake MODE=release
+sdh_cmake -DBUILD_TESTING=off
 sdh_make
 sdh_make_install
