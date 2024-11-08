@@ -12,7 +12,7 @@ index 755bfe6..183c735 100644
  	  if(!failed.empty())
  	  {
  		  cout<<"Failed tests:\n-------------\n";
-@@ -569,11 +572,9 @@ int testIntegers()
+@@ -569,12 +572,10 @@ int testIntegers()
  		  {
  			  cout<<*i<<" FAILED!\n";
  		  }
@@ -22,6 +22,7 @@ index 755bfe6..183c735 100644
 -	  cout<<"Number of succesful tests "<<good<<endl;
 -	  cout<<"Number of failed tests "<<bad<<endl;
 -
+ 	  }
  	  return 0;
    }
  };
