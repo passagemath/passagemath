@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-frobby
 r"""
 Interface to Frobby for fast computations on monomial ideals.
 
