@@ -52,6 +52,7 @@ Features
    sage/features/mcqd
    sage/features/meataxe
    sage/features/mip_backends
+   sage/features/nauty
    sage/features/normaliz
    sage/features/pandoc
    sage/features/pdf2svg
