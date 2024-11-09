@@ -40,17 +40,14 @@ What is included
 Examples
 --------
 
-A quick way to try it out interactively:
+A quick way to try it out interactively::
 
-```
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-combinat[test]" IPython
-```
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-combinat[test]" ipython
 
-```
     In [1]: from sage.all__sagemath_combinat import *
+
     In [2]: RowStandardTableaux([3,2,1]).cardinality()
     Out[2]: 60
-```
 
 
 Available as extras, from other distribution packages
@@ -69,11 +66,11 @@ Available as extras, from other distribution packages
 Development
 -----------
 
-```
+::
+
     $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
     $ cd passagemath
     passagemath $ ./bootstrap
     passagemath $ python3 -m venv combinat-venv
     passagemath $ source combinat-venv/bin/activate
     (combinat-venv) passagemath $ pip install -v -e pkgs/sagemath-combinat
-```

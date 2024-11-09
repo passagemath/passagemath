@@ -66,7 +66,7 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-modules[test]" IPython
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-modules[test]" ipython
 
     In [1]: from sage.all__sagemath_modules import *
 
