@@ -17,3 +17,7 @@ Upstream Contact
 ----------------
 
 Matthias Köppe, UC Davis, CA, USA
+
+https://www.math.ucdavis.edu/~latte/
+
+https://github.com/latte-int/latte
