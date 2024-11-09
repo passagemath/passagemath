@@ -66,22 +66,78 @@ and testing to make sure nothing funny is going on).
    sage/interfaces/abc
    sage/interfaces/axiom
    sage/interfaces/ecm
-   sage/interfaces/four_ti_2
+
+.. ONLY:: feature_4ti2
+
+   .. toctree::
+      :maxdepth: 1
+
+      sage/interfaces/four_ti_2
+
+.. toctree::
+   :maxdepth: 1
+
    sage/interfaces/fricas
-   sage/interfaces/frobby
+
+.. ONLY:: feature_frobby
+
+   .. toctree::
+      :maxdepth: 1
+
+      sage/interfaces/frobby
+
+.. toctree::
+   :maxdepth: 1
+
    sage/interfaces/gap
    sage/interfaces/gap3
-   sage/interfaces/gfan
-   sage/interfaces/giac
+
+.. ONLY:: feature_gfan
+
+   .. toctree::
+      :maxdepth: 1
+
+      sage/interfaces/gfan
+
+.. ONLY:: feature_giac
+
+   .. toctree::
+      :maxdepth: 1
+
+      sage/interfaces/giac
+
+.. toctree::
+   :maxdepth: 1
+
    sage/interfaces/gnuplot
    sage/interfaces/gp
    sage/interfaces/jmoldata
    sage/interfaces/kash
    sage/interfaces/kenzo
-   sage/interfaces/latte
+
+.. ONLY:: feature_latte_int
+
+   .. toctree::
+      :maxdepth: 1
+
+      sage/interfaces/latte
+
+.. toctree::
+   :maxdepth: 1
+
    sage/interfaces/lie
    sage/interfaces/lisp
-   sage/interfaces/macaulay2
+
+.. ONLY:: feature_macaulay2
+
+   .. toctree::
+      :maxdepth: 1
+
+      sage/interfaces/macaulay2
+
+.. toctree::
+   :maxdepth: 1
+
    sage/interfaces/magma
    sage/interfaces/magma_free
    sage/interfaces/maple
@@ -98,7 +154,17 @@ and testing to make sure nothing funny is going on).
    sage/interfaces/polymake
    sage/interfaces/povray
    sage/interfaces/psage
-   sage/interfaces/qepcad
+
+.. ONLY:: feature_latte_int
+
+   .. toctree::
+      :maxdepth: 1
+
+      sage/interfaces/qepcad
+
+.. toctree::
+   :maxdepth: 1
+
    sage/interfaces/r
    sage/interfaces/rubik
    sage/interfaces/sage0
