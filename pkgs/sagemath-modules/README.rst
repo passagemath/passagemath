@@ -64,13 +64,10 @@ What is included
 Examples
 --------
 
-A quick way to try it out interactively:
+A quick way to try it out interactively::
 
-```
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-modules[test]" IPython
-```
 
-```
     In [1]: from sage.all__sagemath_modules import *
 
     In [2]: M = matroids.Wheel(5); M
@@ -83,7 +80,6 @@ A quick way to try it out interactively:
     [ 0  0  1  0  0  0 -1  1  0  0]
     [ 0  0  0  1  0  0  0 -1  1  0]
     [ 0  0  0  0  1  0  0  0 -1  1]
-```
 
 
 Available as extras, from other distributions
@@ -117,11 +113,11 @@ Available as extras, from other distributions
 Development
 -----------
 
-```
+::
+
     $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
     $ cd passagemath
     passagemath $ ./bootstrap
     passagemath $ python3 -m venv modules-venv
     passagemath $ source modules-venv/bin/activate
     (modules-venv) passagemath $ pip install -v -e pkgs/sagemath-modules
-```
