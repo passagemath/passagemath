@@ -105,7 +105,7 @@ The packages may also cover a wide range of generalizations/applications of the 
 
 [![PyPI: passagemath-groups](https://img.shields.io/pypi/v/passagemath-groups.svg?label=passagemath-groups)](https://pypi.python.org/pypi/passagemath-groups) provides groups and invariant theory.
 
-[![PyPI: passagemath-modules](https://img.shields.io/pypi/v/passagemath-modules.svg?label=passagemath-modules)](https://pypi.python.org/pypi/passagemath-modules) provides vector spaces, modules, matrices, tensors, homology, coding theory, abelian groups, etc.
+[![PyPI: passagemath-modules](https://img.shields.io/pypi/v/passagemath-modules.svg?label=passagemath-modules)](https://pypi.python.org/pypi/passagemath-modules) provides vector spaces, modules, matrices, tensors, homology, coding theory, abelian groups, matroids, etc. It consists of over 440 first-party Python and Cython modules and depends on the [GNU Scientific Library](http://www.gnu.org/software/gsl/) and [NumPy](https://numpy.org/).
 
 [![PyPI: passagemath-polyhedra](https://img.shields.io/pypi/v/passagemath-polyhedra.svg?label=passagemath-polyhedra)](https://pypi.python.org/pypi/passagemath-polyhedra) provides convex polyhedra in arbitrary dimension on the basis of the [Parma Polyhedra Library](https://www.bugseng.com/ppl), but also provides fans, hyperplane arrangements, polyhedral complexes, linear and mixed-integer optimization, lattice point sets, and toric varieties.
 
