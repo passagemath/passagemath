@@ -30,7 +30,13 @@ automorphism groups of graphs and digraphs by Brendan McKay and Adolfo Piperno.
 What is included
 ----------------
 
-The binary wheels published on PyPI include a prebuilt copy of nauty and traces.
+- Graph generators `graphs.nauty_genbg <https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph_generators.html#sage.graphs.graph_generators.GraphGenerators.nauty_genbg>`_, `graphs.nauty_geng <https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph_generators.html#sage.graphs.graph_generators.GraphGenerators.nauty_geng>`_, `graphs.nauty_genktreeg <https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph_generators.html#sage.graphs.graph_generators.GraphGenerators.nauty_genktreeg>`_
+
+- Hypergraph generator `hypergraphs.nauty <https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/hypergraph_generators.html#sage.graphs.hypergraph_generators.HypergraphGenerators.nauty>`_
+
+- Raw access to all gtools from Python
+
+- The binary wheels published on PyPI include a prebuilt copy of nauty and traces.
 
 
 Examples
