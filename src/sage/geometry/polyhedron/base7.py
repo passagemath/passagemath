@@ -427,12 +427,13 @@ class Polyhedron_base7(Polyhedron_base6):
             ...
             ValueError: LattE integrale cannot be applied over inexact rings
         """
-        from sage.interfaces.latte import integrate
         from sage.rings.real_double import RDF
 
         if self.base_ring() == RDF:
             raise ValueError("LattE integrale cannot be applied over inexact rings")
         else:
+            from sage.interfaces.latte import integrate
+
             return integrate(self.cdd_Hrepresentation(), algorithm=algorithm, cdd=True, verbose=verbose, **kwargs)
 
     def _volume_normaliz(self, measure='induced'):

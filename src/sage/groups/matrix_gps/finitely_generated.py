@@ -185,7 +185,7 @@ def QuaternionMatrixGroupGF3():
         [1 2], [1 1]
         )
 
-        sage: # needs sage.groups
+        sage: # needs sage.libs.gap
         sage: Q = QuaternionMatrixGroupGF3()
         sage: QP = Q.as_permutation_group()
         sage: QP.is_isomorphic(QuaternionGroup())

@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-macaulay2
+# sage.doctest: optional - macaulay2
 r"""
 Interface to Macaulay2
 
