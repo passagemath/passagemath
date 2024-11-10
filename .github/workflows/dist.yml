@@ -564,7 +564,7 @@ jobs:
           verbose: true
         if: env.CAN_DEPLOY == 'true'
 
-  check_wheels:
+  tox:
     needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels]
     if: (success() || failure())
     strategy:
@@ -600,6 +600,7 @@ jobs:
       - run: |
           pkg=${{ matrix.distribution }}
           WHEELHOUSE=$(pwd)/wheelhouse
+          export PIP_FIND_LINKS=file://$WHEELHOUSE
           cd pkgs/$pkg
           pkg=${pkg//-/_}
           tox -v -v -e norequirements --installpkg $WHEELHOUSE/*$pkg*-cp310-*manylinux*.whl
