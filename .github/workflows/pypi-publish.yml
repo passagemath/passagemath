@@ -21,7 +21,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run_id }}
+          run-id: ${{ github.event.inputs.run-id }}
 
       - uses: actions/download-artifact@v4
         with:
@@ -30,7 +30,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run_id }}
+          run-id: ${{ github.event.inputs.run-id }}
 
       - name: Remove wheels that are too large
         run: |
