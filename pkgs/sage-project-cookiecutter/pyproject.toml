@@ -3,8 +3,8 @@ requires = ["setuptools>=61.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sage-project-cookiecutter"
-description = "Sage: Open Source Mathematics Software: Script for maintaining a SageMath-based project"
+name = "passagemath-project-cookiecutter"
+description = "passagemath: Script for maintaining a passagemath-based project"
 license = {text = "GNU General Public License (GPL) v2 or later"}
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
 classifiers = [
