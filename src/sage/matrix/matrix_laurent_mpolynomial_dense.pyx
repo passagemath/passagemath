@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Dense matrices over multivariate polynomials over fields.
 
@@ -15,7 +16,7 @@ AUTHOR:
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
 from sage.matrix.constructor import identity_matrix
-from sage.rings.polynomial.laurent_polynomial_ring_base import LaurentPolynomialRing_generic
+
 
 cdef class Matrix_laurent_mpolynomial_dense(Matrix_generic_dense):
     """
@@ -23,14 +24,14 @@ cdef class Matrix_laurent_mpolynomial_dense(Matrix_generic_dense):
     """
     def laurent_matrix_reduction(self):
         """
-        From a matrix `self` of Laurent polynomials, apply elementary operations
-        to obtain a matrix `P` of polynomials such that the variables do not divide
-        no column and no row.
+        From a matrix ``self`` of Laurent polynomials, apply elementary operations
+        to obtain a matrix ``P`` of polynomials such that the variables do not divide
+        any column and any row.
 
         OUTPUT:
 
-        Three matrices `L`, `P`, `R` such that ``self` equals `L P R`, where `L` and
-        `R` are diagonal with monomial entries.
+        Three matrices ``L``, ``P``, ``R`` such that ``self`` equals ``L P R``,
+        where ``L`` and ``R`` are diagonal with monomial entries.
 
         EXAMPLES:
 
@@ -56,12 +57,12 @@ cdef class Matrix_laurent_mpolynomial_dense(Matrix_generic_dense):
         res = self.__copy__()
         for j, rw in enumerate(res.rows()):
             for t in R.gens():
-                n = min(mon.degree(t) for a in rw for cf, mon in a)
+                n = min(mon.degree(t) for a in rw for _, mon in a)
                 res.rescale_row(j, t ** -n)
                 mat_l.rescale_col(j, t ** n)
         for j, cl in enumerate(res.columns()):
             for t in R.gens():
-                n = min(mon.degree(t) for a in cl for cf, mon in a)
+                n = min(mon.degree(t) for a in cl for _, mon in a)
                 res.rescale_col(j, t ** -n)
                 mat_r.rescale_row(j, t ** n)
         res = res.change_ring(R.polynomial_ring())
@@ -69,19 +70,20 @@ cdef class Matrix_laurent_mpolynomial_dense(Matrix_generic_dense):
 
     def _fitting_ideal(self, i):
         r"""
-        Return the `i`-th Fitting ideal of the matrix. This is the ideal generated
+        Return the `i`-th Fitting ideal of the matrix.
+
+        This is the ideal generated
         by the `n - i` minors, where `n` is the number of columns.
 
         INPUT:
 
-        ``i`` -- an integer
+        - ``i`` -- integer
 
-        OUTPUT:
-
-        An ideal on the base ring.
+        OUTPUT: an ideal on the base ring
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y,z> = LaurentPolynomialRing(QQ)
             sage: M = matrix(R, [[2*x^-1-z, 0, y-z^-2, 0], [0, z - y^-1, z - x, 0],[z - y, x^-2 - y, 0, z]])
             sage: M
@@ -105,7 +107,6 @@ cdef class Matrix_laurent_mpolynomial_dense(Matrix_generic_dense):
             (1,)
             sage: [R.ideal(M.minors(i)) == M._fitting_ideal(4 - i) for i in range(5)]
             [True, True, True, True, True]
-
         """
         R = self.base_ring()
         S = R.polynomial_ring()

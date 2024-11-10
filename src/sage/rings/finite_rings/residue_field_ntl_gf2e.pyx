@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-ntl
 r"""
 Finite residue fields (NTL implementation)
 """
@@ -110,7 +111,7 @@ class ResidueFiniteField_ntl_gf2e(ResidueField_generic, FiniteField_ntl_gf2e):
         """
         INPUT:
 
-        - ``x`` -- Something to cast into ``self``.
+        - ``x`` -- something to cast into ``self``
 
         EXAMPLES::
 

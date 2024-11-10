@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Enumerated set of lists of integers with constraints: front-end
 
@@ -280,7 +281,7 @@ class IntegerLists(Parent):
 
     def _element_constructor_default(self, l):
         """
-        Default element constructor
+        Default element constructor.
 
         EXAMPLES::
 

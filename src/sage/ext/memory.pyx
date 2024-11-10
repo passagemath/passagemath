@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 """
 Low-level memory allocation functions
 
@@ -44,7 +45,7 @@ cdef extern from "Python.h":
 
 cdef void alloc_error(size_t size) noexcept nogil:
     """
-    Jump back to ``sig_on()``, raising a :class:`MemoryError`.
+    Jump back to ``sig_on()``, raising a :exc:`MemoryError`.
     """
     with gil:
         PyErr_Format(MemoryError, "failed to allocate %zu bytes", size)
@@ -92,5 +93,6 @@ def init_memory_functions():
         sage: init_memory_functions()
     """
     mp_set_memory_functions(sage_sig_malloc, sage_sig_realloc, sage_sig_free)
+
 
 init_memory_functions()

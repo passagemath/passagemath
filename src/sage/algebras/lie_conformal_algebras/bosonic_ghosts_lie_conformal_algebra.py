@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Bosonic Ghosts Lie Conformal Algebra
@@ -32,6 +33,8 @@ AUTHORS:
 from sage.matrix.special import identity_matrix
 from sage.structure.indexed_generators import standardize_names_index_set
 from .graded_lie_conformal_algebra import GradedLieConformalAlgebra
+
+
 class BosonicGhostsLieConformalAlgebra(GradedLieConformalAlgebra):
     r"""
     The Bosonic ghosts or `\beta-\gamma`-system Lie conformal
@@ -39,14 +42,14 @@ class BosonicGhostsLieConformalAlgebra(GradedLieConformalAlgebra):
 
     INPUT:
 
-    - ``R`` -- a commutative ring.
+    - ``R`` -- a commutative ring
     - ``ngens`` -- an even positive Integer (default: ``2``); the
       number of non-central generators of this Lie conformal
       algebra.
-    - ``names`` -- a list of ``str``; alternative names for the
+    - ``names`` -- list of ``str``; alternative names for the
       generators
-    - ``index_set`` -- an enumerated set; An indexing set for the
-      generators.
+    - ``index_set`` -- an enumerated set; an indexing set for the
+      generators
 
     OUTPUT:
 
@@ -79,7 +82,7 @@ class BosonicGhostsLieConformalAlgebra(GradedLieConformalAlgebra):
 
     def __init__(self, R, ngens=2, names=None, index_set=None):
         """
-        Initialize self.
+        Initialize ``self``.
 
         TESTS::
 

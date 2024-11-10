@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 include "sage/libs/linkages/padics/fmpz_poly_unram.pxi"
 include "sage/libs/linkages/padics/unram_shared.pxi"
 include "FM_template.pxi"
@@ -83,13 +84,13 @@ cdef class qAdicFixedModElement(FMElement):
         Return the element with the same reduction mod p that can be expressed
         with coefficients between 0 and p-1.  The absolute precision will be maximal.
 
-        This method is used in printing and computing p-adic expansions.
+        This method is used in printing and computing `p`-adic expansions.
 
         INPUT:
 
-        - ``use_smallest_mode`` -- if True, use reps between -p/2 and p/2 instead.
-        - ``return_list`` -- if True, return a list of coefficients (as integers).
-            For use in printing.
+        - ``use_smallest_mode`` -- if ``True``, use reps between -p/2 and p/2 instead
+        - ``return_list`` -- if ``True``, return a list of coefficients (as integers);
+          for use in printing
 
         EXAMPLES::
 

@@ -1,4 +1,5 @@
-# sage.doctest: needs sage.combinat sage.modules
+# sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.combinat sage.graphs sage.modules
 """
 Direct Sum of Crystals
 """
@@ -33,8 +34,8 @@ class DirectSumOfCrystals(DisjointUnionEnumeratedSets):
 
     INPUT:
 
-     - ``crystals``  -- a list of crystals of the same Cartan type
-     - ``keepkey``   -- a boolean
+    - ``crystals`` -- list of crystals of the same Cartan type
+    - ``keepkey`` -- boolean
 
     The option ``keepkey`` is by default set to ``False``, assuming
     that the crystals are all distinct. In this case the elements of

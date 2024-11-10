@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 # sage.doctest: needs sage.libs.flint
 include "sage/libs/linkages/padics/Polynomial_ram.pxi"
 include "FM_template.pxi"
@@ -20,7 +21,7 @@ cdef class RelativeRamifiedFixedModElement(FMElement):
             sage: W(5)._poly_rep()
             5
 
-        The coefficients of P are fixed-mod p-adics::
+        The coefficients of P are fixed-mod `p`-adics::
 
             sage: P = W.random_element()._poly_rep()
             sage: ring = P.parent().base_ring()

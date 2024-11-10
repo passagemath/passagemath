@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 """
 Abstract ANF to CNF Converter
 
@@ -8,5 +9,6 @@ AUTHORS:
 - Martin Albrecht (2012): first version
 """
 
-class ANF2CNFConverter():
+
+class ANF2CNFConverter:
     pass

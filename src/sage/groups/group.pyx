@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-objects
 """
 Base class for groups
 """
@@ -33,14 +34,14 @@ def is_Group(x):
 
     EXAMPLES::
 
-        sage: F.<a,b> = FreeGroup()                                                     # needs sage.groups
         sage: from sage.groups.group import is_Group
-        sage: is_Group(F)                                                               # needs sage.groups
+        sage: is_Group("a string")
         doctest:warning...DeprecationWarning: use instead G in Groups()
         See https://github.com/sagemath/sage/issues/37449 for details.
-        True
-        sage: is_Group("a string")
         False
+        sage: F.<a,b> = FreeGroup()                                                     # needs sage.groups
+        sage: is_Group(F)                                                               # needs sage.groups
+        True
     """
     deprecation(37449, 'use instead G in Groups()')
     return isinstance(x, Group)
@@ -110,7 +111,7 @@ cdef class Group(Parent):
             if not isinstance(category, tuple):
                 category = (category,)
             if not any(cat.is_subcategory(Groups()) for cat in category):
-                raise ValueError("%s is not a subcategory of %s"%(category, Groups()))
+                raise ValueError("%s is not a subcategory of %s" % (category, Groups()))
         Parent.__init__(self, base=base, category=category)
 
     def is_abelian(self):
@@ -201,9 +202,10 @@ cdef class Group(Parent):
 
         EXAMPLES::
 
-            sage: groups.presentation.Cyclic(1).is_trivial()
+            sage: groups.presentation.Cyclic(1).is_trivial()                            # needs sage.groups
             True
 
+            sage: # needs sage.groups
             sage: G.<a,b> = FreeGroup('a, b')
             sage: H = G / (a^2, b^3, a*b*~a*~b)
             sage: H.is_trivial()
@@ -211,13 +213,13 @@ cdef class Group(Parent):
 
         A non-trivial presentation of the trivial group::
 
+            sage: # needs sage.groups
             sage: F.<a,b> = FreeGroup()
             sage: J = F / ((~a)*b*a*(~b)^2, (~b)*a*b*(~a)^2)
             sage: J.is_trivial()
             True
         """
         return self.order() == 1
-
 
     def is_multiplicative(self):
         r"""
@@ -287,7 +289,7 @@ cdef class FiniteGroup(Group):
 
     def __init__(self, base=None, category=None):
         """
-        The Python constructor
+        The Python constructor.
 
         TESTS::
 

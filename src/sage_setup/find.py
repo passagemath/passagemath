@@ -53,7 +53,9 @@ def find_python_sources(src_dir, modules=['sage'], distributions=None,
       ``distribution`` (from a ``# sage_setup: distribution = PACKAGE``
       directive in the module source file) is in ``exclude_distributions``.
 
-    OUTPUT: Triple consisting of
+    OUTPUT:
+
+    Triple consisting of
 
     - the list of package names (corresponding to ordinary packages
       or namespace packages, according to
@@ -158,7 +160,7 @@ def find_python_sources(src_dir, modules=['sage'], distributions=None,
                 for filename in filenames:
                     base, ext = os.path.splitext(filename)
                     filepath = os.path.join(dirpath, filename)
-                    if ext == PYMOD_EXT and base != '__init__':
+                    if ext == PYMOD_EXT:
                         if filepath in distribution_filter:
                             python_modules.append(package + '.' + base)
                     if ext == '.pyx':
@@ -184,7 +186,7 @@ def filter_cython_sources(src_dir, distributions, exclude_distributions=None):
       directive in the module source file) is an element of
       ``distributions``.
 
-    OUTPUT: List of absolute paths to Cython files (``*.pyx``).
+    OUTPUT: list of absolute paths to Cython files (``*.pyx``)
 
     EXAMPLES::
 
@@ -341,7 +343,6 @@ def find_extra_files(src_dir, modules, cythonized_dir, special_filenames=[], *,
 
     return data_files
 
-
 def installed_files_by_module(site_packages, modules=('sage',)):
     """
     Find all currently installed files
@@ -375,11 +376,6 @@ def installed_files_by_module(site_packages, modules=('sage',)):
         'sage/structure/__init__.py'
         sage: f2
         'sage/structure/....pyc'
-
-    Namespace packages::
-
-        sage: files_by_module['sage.graphs.graph_decompositions']
-        set()
 
     This takes about 30ms with warm cache::
 

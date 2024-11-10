@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Factories to construct function fields
 
@@ -22,7 +23,6 @@ AUTHORS:
 
 - Julian Rueth (2011-09-14): replaced ``@cached_function`` with
   ``UniqueFactory``
-
 """
 
 # ****************************************************************************
@@ -39,6 +39,7 @@ AUTHORS:
 # ****************************************************************************
 
 from sage.structure.factory import UniqueFactory
+
 
 class FunctionFieldFactory(UniqueFactory):
     """
@@ -168,7 +169,6 @@ class FunctionFieldExtensionFactory(UniqueFactory):
             sage: N.<z> = K.extension(z - 1)
             sage: M is N
             False
-
         """
         if names is None:
             names = polynomial.variable_name()

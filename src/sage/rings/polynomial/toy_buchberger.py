@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Educational versions of Groebner basis algorithms
 
@@ -140,7 +141,6 @@ AUTHORS:
 - Martin Albrecht (2007-05-24): initial version
 
 - Marshall Hampton (2009-07-08): some doctest additions
-
 """
 
 from sage.misc.verbose import get_verbose
@@ -158,7 +158,7 @@ def spol(f, g):
 
     INPUT:
 
-    -  ``f, g`` -- polynomials
+    - ``f``, ``g`` -- polynomials
 
     OUTPUT: the S-polynomial of f and g
 
@@ -302,7 +302,7 @@ def update(G, B, h):
 
     - ``G`` -- an intermediate Groebner basis
 
-    - ``B`` -- a set of critical pairs
+    - ``B`` -- set of critical pairs
 
     - ``h`` -- a polynomial
 
@@ -379,7 +379,7 @@ def select(P):
 
     INPUT:
 
-    - ``P`` -- a list of critical pairs
+    - ``P`` -- list of critical pairs
 
     OUTPUT: an element of P
 
@@ -402,7 +402,7 @@ def inter_reduction(Q):
 
     INPUT:
 
-    - ``Q`` -- a set of polynomials
+    - ``Q`` -- set of polynomials
 
     OUTPUT:
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Mathematical constants
 
@@ -33,9 +34,9 @@ type the following::
 
     sage: maxima(pi)
     %pi
-    sage: singular(pi)
+    sage: singular(pi)                                                                  # needs sage.libs.singular
     pi
-    sage: gap(pi)
+    sage: gap(pi)                                                                       # needs sage.libs.gap
     pi
     sage: gp(pi)
     3.141592653589793238462643383     # 32-bit
@@ -273,8 +274,8 @@ def unpickle_Constant(class_name, name, conversions, latex, mathml, domain):
 
 
 @richcmp_method
-class Constant():
-    def __init__(self, name, conversions=None, latex=None, mathml="",
+class Constant:
+    def __init__(self, name, conversions=None, latex=None, mathml='',
                  domain='complex'):
         """
         EXAMPLES::
@@ -323,7 +324,7 @@ class Constant():
 
     def __reduce__(self):
         """
-        Adds support for pickling constants.
+        Add support for pickling constants.
 
         EXAMPLES::
 
@@ -345,7 +346,6 @@ class Constant():
               'positive'))
             sage: loads(dumps(pi.pyobject()))
             pi
-
         """
         return (unpickle_Constant, (self.__class__.__name__, self._name,
                                     self._conversions, self._latex,
@@ -353,7 +353,7 @@ class Constant():
 
     def domain(self):
         """
-        Returns the domain of this constant.  This is either positive,
+        Return the domain of this constant.  This is either positive,
         real, or complex, and is used by Pynac to make inferences
         about expressions containing this constant.
 
@@ -370,7 +370,7 @@ class Constant():
 
     def expression(self):
         """
-        Returns an expression for this constant.
+        Return an expression for this constant.
 
         EXAMPLES::
 
@@ -387,11 +387,11 @@ class Constant():
 
     def _symbolic_(self, SR):
         """
-        Returns an expression for this constant.
+        Return an expression for this constant.
 
         INPUT:
 
-        - ``SR`` - a symbolic ring parent
+        - ``SR`` -- a symbolic ring parent
 
         EXAMPLES::
 
@@ -407,7 +407,7 @@ class Constant():
 
     def name(self):
         """
-        Returns the name of this constant.
+        Return the name of this constant.
 
         EXAMPLES::
 
@@ -469,7 +469,6 @@ class Constant():
             sage: m = partial(p._generic_interface, '%pi')
             sage: m(maxima)
             %pi
-
         """
         return I(value)
 
@@ -491,7 +490,6 @@ class Constant():
             sage: mi = partial(p._generic_interface_init, '%pi')
             sage: mi()
             '%pi'
-
         """
         return value
 
@@ -519,7 +517,7 @@ class Constant():
 
     def _gap_(self, gap):
         """
-        Returns the constant as a string in GAP. Since GAP does not
+        Return the constant as a string in GAP. Since GAP does not
         have floating point numbers, we simply return the constant as
         a string.
 
@@ -527,14 +525,14 @@ class Constant():
 
             sage: from sage.symbolic.constants import Constant
             sage: p = Constant('p')
-            sage: gap(p)
+            sage: gap(p)                                                                # needs sage.libs.gap
             p
         """
         return gap('"%s"' % self)
 
     def _singular_(self, singular):
         """
-        Returns the constant as a string in Singular. Since Singular
+        Return the constant as a string in Singular. Since Singular
         does not always support floating point numbers, we simply
         return the constant as a string.  (Singular allows floating point
         numbers if the current ring has floating point coefficients,
@@ -544,14 +542,14 @@ class Constant():
 
             sage: from sage.symbolic.constants import Constant
             sage: p = Constant('p')
-            sage: singular(p)
+            sage: singular(p)                                                           # needs sage.libs.singular
             p
         """
         return singular('"%s"' % self)
 
 
 class Pi(Constant):
-    def __init__(self, name="pi"):
+    def __init__(self, name='pi'):
         r"""
         TESTS::
 
@@ -612,7 +610,6 @@ class Pi(Constant):
 
 
 pi = Pi().expression()
-
 """
 The formal square root of -1.
 
@@ -740,7 +737,7 @@ class NotANumber(Constant):
 
     def _sympy_(self):
         """
-        Converts NaN to SymPy NaN.
+        Convert ``NaN`` to SymPy NaN.
 
         EXAMPLES::
 
@@ -759,7 +756,7 @@ NaN = NotANumber().expression()
 
 class GoldenRatio(Constant):
     """
-    The number (1+sqrt(5))/2
+    The number (1+sqrt(5))/2.
 
     EXAMPLES::
 
@@ -846,7 +843,7 @@ class GoldenRatio(Constant):
 
     def _sympy_(self):
         """
-        Converts golden_ratio to SymPy GoldenRation.
+        Convert ``golden_ratio`` to SymPy GoldenRatio.
 
         EXAMPLES::
 
@@ -1003,7 +1000,7 @@ class EulerGamma(Constant):
 
     def _sympy_(self):
         """
-        Converts euler_gamma to SymPy EulerGamma.
+        Convert ``euler_gamma`` to SymPy EulerGamma.
 
         EXAMPLES::
 
@@ -1073,7 +1070,7 @@ class Catalan(Constant):
 
     def _sympy_(self):
         """
-        Converts catalan to SymPy Catalan.
+        Convert ``catalan`` to SymPy Catalan.
 
         EXAMPLES::
 
@@ -1124,7 +1121,6 @@ class Khinchin(Constant):
             2.6854520010653064453097148355
             sage: RealField(100)(khinchin)
             2.6854520010653064453097148355
-
         """
         import sage.libs.mpmath.all as a
         return a.eval_constant('khinchin', R)
@@ -1153,7 +1149,6 @@ class TwinPrime(Constant):
         0.6601618158468696
         sage: twinprime.n(digits=60)
         0.660161815846869573927812110014555778432623360284733413319448
-
     """
     def __init__(self, name='twinprime'):
         """
@@ -1202,7 +1197,6 @@ class Mertens(Constant):
         0.26149721284764277
         sage: mertens.n(digits=60)
         0.261497212847642783755426838608695859051566648261199206192064
-
     """
     def __init__(self, name='mertens'):
         """
@@ -1223,7 +1217,6 @@ class Mertens(Constant):
             0.26149721284764278375542683861
             sage: RealField(100)(mertens)
             0.26149721284764278375542683861
-
         """
         import sage.libs.mpmath.all as a
         return a.eval_constant('mertens', R)
@@ -1256,7 +1249,6 @@ class Glaisher(Constant):
         glaisher + 2
         sage: parent(a)
         Symbolic Ring
-
     """
     def __init__(self, name='glaisher'):
         """
@@ -1278,7 +1270,6 @@ class Glaisher(Constant):
             1.2824271291006226368753425689
             sage: RealField(100)(glaisher)
             1.2824271291006226368753425689
-
         """
         import sage.libs.mpmath.all as a
         return a.eval_constant('glaisher', R)

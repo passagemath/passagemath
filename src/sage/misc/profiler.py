@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-repl
 r"""
 Simple profiling tool
 
@@ -7,13 +8,13 @@ AUTHORS:
 - Martin Albrecht
 """
 
-#*****************************************************************************
+# *****************************************************************************
 #       Copyright (C) 2006 William Stein <wstein@gmail.com>
 #                     2006 David Harvey <dmharvey@math.harvard.edu>
 #
 #  Distributed under the terms of the GNU General Public License (GPL)
 #                  http://www.gnu.org/licenses/
-#*****************************************************************************
+# *****************************************************************************
 
 from sage.misc.timing import cputime
 import inspect
@@ -82,9 +83,10 @@ class Profiler:
     def __init__(self, systems=[], verbose=False):
         """
         INPUT:
-            systems -- a list of interfaces to other system which implements a cputime
-                       method. The cputimes of all provided systems will be added
-                       to the cputime of Sage itself.
+
+        - ``systems`` -- list of interfaces to other system which implements a
+          cputime method. The cputimes of all provided systems will be added
+          to the cputime of Sage itself.
         """
         systems = [e.cputime for e in systems]
         self._cputime_functions = [cputime] + list(systems)
@@ -100,7 +102,7 @@ class Profiler:
 
     def __call__(self, message=None):
         """ Adds a checkpoint. """
-        entry_times = [fn() for fn in self._cputime_functions ]
+        entry_times = [fn() for fn in self._cputime_functions]
 
         frame = inspect.currentframe().f_back
         try:
@@ -120,7 +122,7 @@ class Profiler:
 
         self._active_details = (line_number, context, message)
 
-        self._last_cputime = [fn() for fn in self._cputime_functions ]
+        self._last_cputime = [fn() for fn in self._cputime_functions]
         if self._verbose:
             print(self.print_last())
             sys.stdout.flush()
@@ -152,7 +154,7 @@ class Profiler:
 
     def print_last(self):
         """
-        Prints the last profiler step
+        Print the last profiler step.
         """
         if not self._checkpoints:
             return ""
@@ -174,4 +176,4 @@ class Profiler:
 
         return "%9.3fs -- %s" % (time_used, message)
 
-## end of file
+# end of file

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # distutils: libraries = GSL_LIBRARIES
 # distutils: library_dirs = GSL_LIBDIR
 # distutils: include_dirs = GSL_INCDIR
@@ -79,7 +80,6 @@ cdef extern from "gsl/gsl_linalg.h":
   double  gsl_linalg_complex_LU_lndet(gsl_matrix_complex * LU)
 
   gsl_complex  gsl_linalg_complex_LU_sgndet(gsl_matrix_complex * LU, int signum)
-
 
 
   # QR decomposition

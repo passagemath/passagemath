@@ -1,4 +1,4 @@
-##      -*-   coding: utf-8   -*-     ##
+# sage_setup: distribution = sagemath-repl
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#
@@ -277,5 +277,4 @@ r"""
     -1| -1  1 -i  i
      i|  i -i -1  1
     -i| -i  i  1 -1
-
 """

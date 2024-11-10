@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 from sage.rings.integer import Integer
 from sage.structure.sage_object import SageObject
 from sage.lfunctions.dokchitser import Dokchitser
@@ -9,7 +10,7 @@ class GrossZagierLseries(SageObject):
 
     def __init__(self, E, A, prec=53):
         r"""
-        Class for the Gross-Zagier L-series.
+        Class for the Gross-Zagier `L`-series.
 
         This is attached to a pair `(E,A)` where `E` is an elliptic curve over
         `\QQ` and `A` is an ideal class in an imaginary quadratic number field.
@@ -23,7 +24,7 @@ class GrossZagierLseries(SageObject):
 
         - ``A`` -- an ideal class in an imaginary quadratic number field
 
-        - ``prec`` -- an integer (default 53) giving the required precision
+        - ``prec`` -- integer (default: 53); giving the required precision
 
         EXAMPLES::
 
@@ -71,9 +72,9 @@ class GrossZagierLseries(SageObject):
 
         INPUT:
 
-        - `s` -- complex number
+        - ``s`` -- complex number
 
-        - ``der`` -- ? (default 0)
+        - ``der`` -- (default: 0)
 
         EXAMPLES::
 
@@ -93,9 +94,9 @@ class GrossZagierLseries(SageObject):
 
         INPUT:
 
-        - `s` -- complex number (default 1)
-        - ``series_prec`` -- number of terms (default 6) in the Taylor series
-        - ``var`` -- variable (default 'z')
+        - ``s`` -- complex number (default: 1)
+        - ``series_prec`` -- number of terms (default: 6) in the Taylor series
+        - ``var`` -- variable (default: ``'z'``)
 
         EXAMPLES::
 

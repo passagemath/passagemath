@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 List of faces
 
@@ -180,7 +181,7 @@ cdef class ListOfFaces:
 
     cpdef ListOfFaces __copy__(self):
         r"""
-        Return a copy of self.
+        Return a copy of ``self``.
 
         EXAMPLES::
 
@@ -423,7 +424,7 @@ cdef class ListOfFaces:
 
     cdef void delete_faces_unsafe(self, bint *delete, face_t face) noexcept:
         r"""
-        Deletes face ``i`` if and only if ``delete[i]``.
+        Delete face ``i`` if and only if ``delete[i]``.
 
         Alternatively, deletes all faces such that the ``i``-th bit in ``face`` is not set.
 
@@ -478,7 +479,7 @@ cdef class ListOfFaces:
 
     def matrix(self):
         r"""
-        Obtain the matrix of self.
+        Obtain the matrix of ``self``.
 
         Each row represents a face and each column an atom.
 
@@ -509,11 +510,19 @@ cdef class ListOfFaces:
 
         cdef size_t i
         cdef long j
-        for i in range(self.n_faces()):
-            j = face_next_atom(self.data.faces[i], 0)
-            while j != -1:
-                M.set_unsafe_int(i, j, 1)
-                j = face_next_atom(self.data.faces[i], j+1)
+        try:
+            for i in range(self.n_faces()):
+                j = face_next_atom(self.data.faces[i], 0)
+                while j != -1:
+                    M.set_unsafe_int(i, j, 1)
+                    j = face_next_atom(self.data.faces[i], j+1)
+        except AttributeError:
+            # Fall back to general matrix API
+            for i in range(self.n_faces()):
+                j = face_next_atom(self.data.faces[i], 0)
+                while j != -1:
+                    M[i, j] = 1
+                    j = face_next_atom(self.data.faces[i], j+1)
 
         M.set_immutable()
         return M
@@ -529,7 +538,7 @@ cdef tuple face_as_combinatorial_polyhedron(ListOfFaces facets, ListOfFaces Vrep
     - ``face`` -- face in Vrepresentation or ``NULL``
     - ``dual`` -- boolean
 
-    OUTPUT: A tuple of new facets and new Vrepresentation as :class:`ListOfFaces`.
+    OUTPUT: a tuple of new facets and new Vrepresentation as :class:`ListOfFaces`.
     """
     cdef ListOfFaces new_facets, new_Vrep
     cdef bint* delete

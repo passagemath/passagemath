@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Sums of morphisms of elliptic curves
 
@@ -559,7 +560,6 @@ class EllipticCurveHom_sum(EllipticCurveHom):
         `\varphi: E_1\to E_2` is this morphism and `\omega_i` are
         the standard Weierstrass differentials on `E_i` defined by
         `\mathrm dx/(2y+a_1x+a_3)`.
-
 
         EXAMPLES::
 

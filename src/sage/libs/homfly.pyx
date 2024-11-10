@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-homfly
 # distutils: libraries = homfly gc
 r"""
 Cython wrapper for libhomfly library
@@ -57,11 +58,9 @@ def homfly_polynomial_string(link):
 
     INPUT:
 
-    - ``link`` -- a string of space-separated integers representing the link
+    - ``link`` -- string of space-separated integers representing the link
 
-    OUTPUT:
-
-    A string with the HOMFLY polynomial in the variables `M` and `L`
+    OUTPUT: string with the HOMFLY polynomial in the variables `M` and `L`
 
     EXAMPLES::
 
@@ -83,11 +82,7 @@ def homfly_polynomial_dict(link):
 
     INPUT:
 
-    - ``link`` -- a string of space-separated integers representing the link
-
-    OUTPUT:
-
-    A dictionary representing the HOMFLY polynomial.
+    - ``link`` -- string of space-separated integers representing the link
 
     EXAMPLES::
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-ntl
 # distutils: libraries = NTL_LIBRARIES gmp m
 # distutils: extra_compile_args = NTL_CFLAGS
 # distutils: include_dirs = NTL_INCDIR
@@ -70,7 +71,7 @@ cdef class ntl_zz_pContext_class():
 
     def modulus(self):
         """
-        Print the modulus for self.
+        Print the modulus for ``self``.
 
         EXAMPLES::
 

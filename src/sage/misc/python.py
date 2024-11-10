@@ -1,9 +1,10 @@
+# sage_setup: distribution = sagemath-repl
 "Evaluating Python code without any preparsing"
 
 
 class Python:
     """
-    Allows for evaluating a chunk of code without any preparsing.
+    Allow for evaluating a chunk of code without any preparsing.
     """
 
     def eval(self, x, globals, locals=None):
@@ -15,8 +16,8 @@ class Python:
 
         INPUT:
 
-        - ``x`` -- a string
-        - ``globals`` -- a dictionary
+        - ``x`` -- string
+        - ``globals`` -- dictionary
         - ``locals`` -- completely IGNORED
 
         EXAMPLES::

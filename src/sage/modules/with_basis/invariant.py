@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.groups
 r"""
 Invariant modules
@@ -22,7 +23,6 @@ from sage.categories.finitely_generated_semigroups import FinitelyGeneratedSemig
 from sage.categories.finite_dimensional_modules_with_basis import FiniteDimensionalModulesWithBasis
 from sage.sets.family import Family
 from sage.matrix.constructor import Matrix
-from sage.libs.gap.libgap import libgap
 
 
 class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
@@ -257,7 +257,7 @@ class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
 
         # Give the intersection of kernels of the map `s*x-x` to determine when
         # `s*x = x` for all generators `s` of `S`
-        basis = M.annihilator_basis(S.gens(), action=_invariant_map, side="left")
+        basis = M.annihilator_basis(S.gens(), action=_invariant_map, side='left')
 
         super().__init__(Family(basis),
                          support_order=M._compute_support_order(basis),
@@ -310,9 +310,9 @@ class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
             M = M._module
         return f"({self._semigroup})-invariant submodule of {M}"
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
-        Return a latex representaion of ``self``.
+        Return a latex representation of ``self``.
 
         EXAMPLES::
 
@@ -800,7 +800,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
             sage: type(T)
             <class 'sage.modules.with_basis.invariant.FiniteDimensionalInvariantModule_with_category'>
 
-        Check the :class:`ValueError`::
+        Check the :exc:`ValueError`::
 
             sage: T = M.twisted_invariant_module(G, "ichigo", action_on_basis=action)
             Traceback (most recent call last):
@@ -808,6 +808,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
             ValueError: chi must be a list/tuple or a class function of the group G
         """
         from sage.groups.class_function import ClassFunction, ClassFunction_libgap
+        from sage.libs.gap.libgap import libgap
 
         if isinstance(chi, (list, tuple)):
             chi = ClassFunction(G, libgap(chi))
@@ -905,7 +906,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
         basis = M.annihilator_basis(M.basis(),
                                     action=proj_difference,
-                                    side="left")
+                                    side='left')
 
         super().__init__(Family(basis),
                          support_order=M._compute_support_order(basis),

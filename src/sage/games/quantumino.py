@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.combinat sage.modules
 r"""
 Family Games America's Quantumino solver
 
@@ -53,7 +54,7 @@ the following 3d picture. They will show up in 3D in your default (=Jmol)
 viewer::
 
     sage: from sage.games.quantumino import show_pentaminos
-    sage: show_pentaminos()
+    sage: show_pentaminos()                                                             # needs sage.plot
     Graphics3d Object
 
 To solve the puzzle where the pentamino numbered 12 is put aside::
@@ -63,12 +64,12 @@ To solve the puzzle where the pentamino numbered 12 is put aside::
     sage: s                                               # long time (<1s)
     Quantumino state where the following pentamino is put aside :
     Polyomino: [(0, 0, 0), (1, 0, 0), (1, 1, 0), (1, 1, 1), (2, 1, 1)], Color: blue
-    sage: s.show3d()                                      # long time (<1s)
+    sage: s.show3d()                            # long time (<1s)                       # needs sage.plot
     Graphics3d Object
 
 To remove the frame::
 
-    sage: s.show3d().show(frame=False)                    # long time (<1s)
+    sage: s.show3d().show(frame=False)          # long time (<1s)                       # needs sage.plot
 
 To solve the puzzle where the pentamino numbered 7 is put aside::
 
@@ -76,7 +77,7 @@ To solve the puzzle where the pentamino numbered 7 is put aside::
     sage: s                                               # long time (<1s)
     Quantumino state where the following pentamino is put aside :
     Polyomino: [(0, 0, 0), (0, 1, 0), (0, 2, 0), (0, 2, 1), (1, 0, 0)], Color: orange
-    sage: s.show3d()                                      # long time (<1s)
+    sage: s.show3d()                            # long time (<1s)                       # needs sage.plot
     Graphics3d Object
 
 The solution is iterable. This may be used to explicitly list the positions of each
@@ -118,12 +119,12 @@ because it needs to create the complete data to describe the problem::
 To get the solution inside other boxes::
 
     sage: s = next(QuantuminoSolver(7, box=(4,4,5)).solve())        # not tested (2s)
-    sage: s.show3d()                                                # not tested (<1s)
+    sage: s.show3d()                            # not tested (<1s)                      # needs sage.plot
 
 ::
 
     sage: s = next(QuantuminoSolver(7, box=(2,2,20)).solve())       # not tested (1s)
-    sage: s.show3d()                                                # not tested (<1s)
+    sage: s.show3d()                            # not tested (<1s)                      # needs sage.plot
 
 If there are no solution, a StopIteration error is raised::
 
@@ -166,7 +167,6 @@ REFERENCES:
   <http://familygamesamerica.com/mainsite/consumers/productview.php?pro_id=274&search=quantumino>`_
 - [2] `Quantumino - How to Play <http://www.youtube.com/watch?v=jX_VKzakZi8>`_ on Youtube
 - [3] Knuth, Donald (2000). *Dancing links*. :arxiv:`cs/0011047`.
-
 """
 # ****************************************************************************
 #       Copyright (C) 2011 Sebastien Labbe <slabqc@gmail.com>
@@ -214,12 +214,10 @@ def show_pentaminos(box=(5,8,2)):
 
     INPUT:
 
-    - ``box`` -- tuple of size three (optional, default: ``(5,8,2)``),
+    - ``box`` -- tuple of size three (default: ``(5,8,2)``),
       size of the box
 
-    OUTPUT:
-
-    3D Graphic object
+    OUTPUT: 3D Graphic object
 
     EXAMPLES::
 
@@ -258,10 +256,10 @@ class QuantuminoState(SageObject):
 
     INPUT:
 
-    - ``pentos`` - list of 16 3d pentamino representing the (partial)
+    - ``pentos`` -- list of 16 3d pentamino representing the (partial)
       solution
-    - ``aside`` - 3d polyomino, the unused 3D pentamino
-    - ``box`` - tuple of size three (optional, default: ``(5,8,2)``),
+    - ``aside`` -- 3d polyomino, the unused 3D pentamino
+    - ``box`` -- tuple of size three (default: ``(5,8,2)``),
       size of the box
 
     EXAMPLES::
@@ -350,9 +348,7 @@ class QuantuminoState(SageObject):
         r"""
         Return the solution as a 3D Graphic object.
 
-        OUTPUT:
-
-            3D Graphic Object
+        OUTPUT: 3D Graphic Object
 
         EXAMPLES::
 
@@ -399,8 +395,8 @@ class QuantuminoSolver(SageObject):
 
     INPUT:
 
-    - ``aside`` - integer, from 0 to 16, the aside pentamino
-    - ``box`` - tuple of size three (optional, default: ``(5,8,2)``),
+    - ``aside`` -- integer, from 0 to 16, the aside pentamino
+    - ``box`` -- tuple of size three (default: ``(5,8,2)``),
       size of the box
 
     EXAMPLES::
@@ -431,7 +427,7 @@ class QuantuminoSolver(SageObject):
 
     def __repr__(self):
         r"""
-        String representation
+        String representation.
 
         EXAMPLES::
 
@@ -478,17 +474,15 @@ class QuantuminoSolver(SageObject):
 
         INPUT:
 
-        - ``partial`` - string (optional, default: ``None``), whether to
+        - ``partial`` -- string (default: ``None``), whether to
           include partial (incomplete) solutions. It can be one of the
           following:
 
-          - ``None`` - include only complete solution
-          - ``'common'`` - common part between two consecutive solutions
-          - ``'incremental'`` - one piece change at a time
+          - ``None`` -- include only complete solution
+          - ``'common'`` -- common part between two consecutive solutions
+          - ``'incremental'`` -- one piece change at a time
 
-        OUTPUT:
-
-            iterator of QuantuminoState
+        OUTPUT: iterator of :class:`QuantuminoState`
 
         EXAMPLES:
 
@@ -576,9 +570,7 @@ class QuantuminoSolver(SageObject):
         r"""
         Return the number of solutions.
 
-        OUTPUT:
-
-            integer
+        OUTPUT: integer
 
         EXAMPLES::
 

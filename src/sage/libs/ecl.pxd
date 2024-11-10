@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 # distutils: extra_compile_args = ECL_CFLAGS
 # distutils: include_dirs = ECL_INCDIR
 # distutils: libraries = ECL_LIBRARIES
@@ -146,7 +147,6 @@ cdef extern from "ecl/ecl.h":
     cl_object cl_make_string(cl_narg narg, cl_object o, ...)
     ecl_character ecl_char(cl_object s, cl_index i)
     ecl_character ecl_char_set(cl_object s, cl_index i, ecl_character c)
-
 
     # S-expr evaluation and function calls
 

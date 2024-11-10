@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-objects
 r"""
 Loading and saving sessions and listing all variables
 
@@ -89,8 +90,8 @@ def init(state=None):
 
     INPUT:
 
-    - ``state`` -- a dictionary or ``None``; if ``None`` the :func:`locals()`
-      of the caller is used.
+    - ``state`` -- dictionary or ``None``; if ``None`` the :func:`locals()`
+      of the caller is used
 
     EXAMPLES::
 
@@ -124,12 +125,10 @@ def _is_new_var(x, v, hidden):
 
     - ``v`` -- object
 
-    - ``hidden`` -- bool; if ``True``, always return ``False`` on variables
-      that start with ``_``)
+    - ``hidden`` -- boolean; if ``True``, always return ``False`` on variables
+      that start with ``_``
 
-    OUTPUT:
-
-    A bool
+    OUTPUT: boolean
 
     EXAMPLES:
 
@@ -173,18 +172,16 @@ def _is_new_var(x, v, hidden):
 
 def show_identifiers(hidden=False):
     r"""
-    Returns a list of all variable names that have been defined during
+    Return a list of all variable names that have been defined during
     this session.  By default, this returns only those identifiers
     that don't start with an underscore.
 
     INPUT:
 
-    - ``hidden`` -- bool (Default: ``False``); If ``True``, also return
-      identifiers that start with an underscore.
+    - ``hidden`` -- boolean (default: ``False``); if ``True``, also return
+      identifiers that start with an underscore
 
-    OUTPUT:
-
-    A list of variable names
+    OUTPUT: list of variable names
 
     EXAMPLES:
 
@@ -260,15 +257,13 @@ def save_session(name='sage_session', verbose=False):
 
     INPUT:
 
-        - ``name`` -- string (default: 'sage_session') name of ``sobj``
-          to save the session to.
+        - ``name`` -- string (default: ``'sage_session'``); name of ``sobj``
+          to save the session to
 
-        - ``verbose`` -- bool (default: ``False``) if ``True``, print
-          info about why certain variables can't be saved.
+        - ``verbose`` -- boolean (default: ``False``); if ``True``, print
+          info about why certain variables can't be saved
 
-    OUTPUT:
-
-        - Creates a file and returns silently.
+    OUTPUT: creates a file and returns silently
 
     EXAMPLES:
 
@@ -296,6 +291,7 @@ def save_session(name='sage_session', verbose=False):
 
     Something similar happens for cython-defined functions::
 
+        sage: # needs sage.misc.cython
         sage: g = cython_lambda('double x', 'x*x + 1.5')
         sage: save_session(tmp_f, verbose=True)
         ...

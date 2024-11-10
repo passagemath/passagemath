@@ -1,4 +1,4 @@
-##      -*-   coding: utf-8   -*-     ##
+# sage_setup: distribution = sagemath-repl
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#
@@ -167,5 +167,4 @@ r"""
     sage: n = random_prime(10000)
     sage: m, n, euler_phi(m*n) == euler_phi(m)*euler_phi(n)   # random
     (5881, 1277, True)
-
 """

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 """
 Long tests for GAP
 
@@ -15,7 +16,7 @@ def test_loop_1():
     """
     libgap.collect()
     for i in range(10000):
-        G = libgap.CyclicGroup(2)
+        _ = libgap.CyclicGroup(2)
 
 
 def test_loop_2():

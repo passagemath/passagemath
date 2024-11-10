@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 # distutils: libraries = gap gmp m
 ###############################################################################
 #       Copyright (C) 2009, William Stein <wstein@gmail.com>
@@ -74,6 +75,8 @@ cdef extern from "gap/libgap-api.h" nogil:
     bint GAP_IsSmallInt(Obj)
     Obj GAP_NewObjIntFromInt(Int val)
     Int GAP_ValueInt(Obj)
+    Int GAP_SizeInt(Obj)
+    UInt* GAP_AddrInt(Obj)
 
     bint GAP_IsList(Obj lst)
     UInt GAP_LenList(Obj lst)

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Interactive Simplex Method
 
@@ -44,7 +45,7 @@ in acres, we can construct the following LP problem::
     sage: A = ([1, 1], [3, 1])
     sage: b = (1000, 1500)
     sage: c = (10, 5)
-    sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+    sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
     sage: P
     LP problem (use 'view(...)' or '%display typeset' for details)
 
@@ -197,12 +198,12 @@ from sage.modules.free_module_element import free_module_element as vector
 from sage.misc.lazy_import import lazy_import
 lazy_import("sage.plot.all", ["Graphics", "arrow", "line", "point", "rainbow", "text"])
 from sage.rings.infinity import Infinity
+from sage.rings.polynomial.polynomial_ring import polygen
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
+from sage.rings.polynomial.polynomial_element import Polynomial
 from sage.rings.rational_field import QQ
-from sage.rings.real_double import RDF
 from sage.rings.integer_ring import ZZ
 from sage.structure.all import SageObject
-from sage.symbolic.ring import SR
 
 
 # We produce rather complicated LaTeX code which needs some tweaks to be
@@ -218,14 +219,12 @@ def _assemble_arrayl(lines, stretch=None):
 
     INPUT:
 
-    - ``lines`` -- a list of strings suitable for math mode typesetting
+    - ``lines`` -- list of strings suitable for math mode typesetting
 
-    - ``stretch`` -- (default: None) if given, a command setting
+    - ``stretch`` -- (default: ``None``) if given, a command setting
       ``\arraystretch`` to this value will be added before the array
 
-    OUTPUT:
-
-    - a :class:`LatexExpr`
+    OUTPUT: a :class:`LatexExpr`
 
     EXAMPLES::
 
@@ -267,11 +266,11 @@ def _latex_product(coefficients, variables,
 
     INPUT:
 
-    - ``coefficients`` -- a list of coefficients
+    - ``coefficients`` -- list of coefficients
 
-    - ``variables`` -- a list of variables
+    - ``variables`` -- list of variables
 
-    - ``separator`` -- (default: ``"&"`` with some extra space adjustment) a
+    - ``separator`` -- (default: ``'&'`` with some extra space adjustment) a
       string to be inserted between elements of the generated expression
 
     - ``head`` -- either ``None`` (default) or a list of entries to be
@@ -280,10 +279,10 @@ def _latex_product(coefficients, variables,
     - ``tail`` -- either ``None`` (default) or a list of entries to be
       added to the end of the output
 
-    - ``drop_plus`` -- (default: ``True``) whether to drop the leading plus
+    - ``drop_plus`` -- boolean (default: ``True``); whether to drop the leading plus
       sign or not
 
-    - ``allow_empty`` -- (default: ``False``) whether to allow empty output or
+    - ``allow_empty`` -- boolean (default: ``False``); whether to allow empty output or
       produce at least "0"
 
     OUTPUT:
@@ -302,21 +301,26 @@ def _latex_product(coefficients, variables,
         (x, y)
         sage: print(_latex_product([-1, 3], [x, y]))                                    # needs sage.symbolic
         - \mspace{-6mu}&\mspace{-6mu} x \mspace{-6mu}&\mspace{-6mu} + \mspace{-6mu}&\mspace{-6mu} 3 y
+        sage: var("x, y, z")
+        (x, y, z)
+        sage: print(_latex_product([-pi, log(2), pi**0], [x, y, z]))
+        - \mspace{-6mu}&\mspace{-6mu} \pi x \mspace{-6mu}&\mspace{-6mu} + \mspace{-6mu}&\mspace{-6mu} \log\left(2\right) y \mspace{-6mu}&\mspace{-6mu} + \mspace{-6mu}&\mspace{-6mu} z
     """
     entries = []
     for c, v in zip(coefficients, variables):
-        if c == 0:
+        t = latex(c)
+        if t == '0':
             entries.extend(["", ""])
             continue
         sign = "+"
-        if latex(c).strip().startswith("-"):
+        if t.strip().startswith("-"):
             sign = "-"
             c = - c
-        if c == 1:
+        if t.strip() == '1' or t.strip() == '-1':
             t = latex(v)
         else:
             t = latex(c)
-            if SR(c).operator() in [operator.add, operator.sub]:
+            if '+' in t or '-' in t:
                 t = r"\left( " + t + r" \right)"
             t += " " + latex(v)
         entries.extend([sign, t])
@@ -363,9 +367,7 @@ def variable(R, v):
     - ``v`` -- a variable of ``R`` or convertible into ``R``, a string
       with the name of a variable of ``R`` or an index of a variable in ``R``
 
-    OUTPUT:
-
-    - a variable of ``R``
+    OUTPUT: a variable of ``R``
 
     EXAMPLES::
 
@@ -449,11 +451,9 @@ def default_variable_name(variable):
 
     INPUT:
 
-    - ``variable`` - a string describing requested name
+    - ``variable`` -- string describing requested name
 
-    OUTPUT:
-
-    - a string with the requested name for current style
+    OUTPUT: string with the requested name for current style
 
     EXAMPLES::
 
@@ -474,13 +474,13 @@ def style(new_style=None):
 
     INPUT:
 
-    - ``new_style`` -- a string or ``None`` (default)
+    - ``new_style`` -- string or ``None`` (default)
 
     OUTPUT:
 
     - a string with current style (same as ``new_style`` if it was given)
 
-    If the input is not recognized as a valid style, a ``ValueError`` exception
+    If the input is not recognized as a valid style, a :exc:`ValueError` exception
     is raised.
 
     Currently supported styles are:
@@ -570,25 +570,25 @@ class InteractiveLPProblem(SageObject):
 
     - ``c`` -- a vector of objective coefficients
 
-    - ``x`` -- (default: ``"x"``) a vector of decision variables or a
+    - ``x`` -- (default: ``'x'``) a vector of decision variables or a
       string giving the base name
 
-    - ``constraint_type`` -- (default: ``"<="``) a string specifying constraint
-      type(s): either ``"<="``, ``">="``, ``"=="``, or a list of them
+    - ``constraint_type`` -- (default: ``'<='``) a string specifying constraint
+      type(s): either ``'<='``, ``'>='``, ``'=='``, or a list of them
 
     - ``variable_type`` -- (default: ``""``) a string specifying variable
-      type(s): either ``">="``, ``"<="``, ``""`` (the empty string), or a
-      list of them, corresponding, respectively, to non-negative,
-      non-positive, and free variables
+      type(s): either ``'>='``, ``'<='``, ``""`` (the empty string), or a
+      list of them, corresponding, respectively, to nonnegative,
+      nonpositive, and free variables
 
-    - ``problem_type`` -- (default: ``"max"``) a string specifying the
-      problem type: ``"max"``, ``"min"``, ``"-max"``, or ``"-min"``
+    - ``problem_type`` -- (default: ``'max'``) a string specifying the
+      problem type: ``'max'``, ``'min'``, ``'-max'``, or ``'-min'``
 
     - ``base_ring`` -- (default: the fraction field of a common ring for all
       input coefficients) a field to which all input coefficients will be
       converted
 
-    - ``is_primal`` -- (default: ``True``) whether this problem is primal or
+    - ``is_primal`` -- boolean (default: ``True``); whether this problem is primal or
       dual: each problem is of course dual to its own dual, this flag is mostly
       for internal use and affects default variable names only
 
@@ -615,16 +615,16 @@ class InteractiveLPProblem(SageObject):
         sage: A = ([1, 1], [3, 1])
         sage: b = (1000, 1500)
         sage: c = (10, 5)
-        sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+        sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
 
     Same problem, but more explicitly::
 
         sage: P = InteractiveLPProblem(A, b, c, ["C", "B"],
-        ....:     constraint_type="<=", variable_type=">=")
+        ....:     constraint_type='<=', variable_type='>=')
 
     Even more explicitly::
 
-        sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], problem_type="max",
+        sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], problem_type='max',
         ....:     constraint_type=["<=", "<="], variable_type=[">=", ">="])
 
     Using the last form you should be able to represent any LP problem, as long
@@ -632,8 +632,8 @@ class InteractiveLPProblem(SageObject):
     are on different sides.
     """
 
-    def __init__(self, A, b, c, x="x",
-                 constraint_type="<=", variable_type="", problem_type="max",
+    def __init__(self, A, b, c, x='x',
+                 constraint_type='<=', variable_type='', problem_type='max',
                  base_ring=None, is_primal=True, objective_constant_term=0):
         r"""
         See :class:`InteractiveLPProblem` for documentation.
@@ -643,7 +643,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: TestSuite(P).run()
         """
         super().__init__()
@@ -651,7 +651,7 @@ class InteractiveLPProblem(SageObject):
         b = vector(b)
         c = vector(c)
         if base_ring is None:
-            base_ring = vector(A.list() + list(b) + list(c)).base_ring()
+            base_ring = vector(A.list() + list(b) + list(c) + [objective_constant_term]).base_ring()
         base_ring = base_ring.fraction_field()
         A = A.change_ring(base_ring)
         A.set_immutable()
@@ -670,10 +670,10 @@ class InteractiveLPProblem(SageObject):
             x = [str(_) for _ in x]
             if len(x) != n:
                 raise ValueError("A and x have incompatible dimensions")
-        R = PolynomialRing(base_ring, x, order="neglex")
+        R = PolynomialRing(base_ring, x, order='neglex')
         x = vector(R, R.gens()) # All variables as a vector
         self._Abcx = A, b, c, x
-        self._constant_term = objective_constant_term
+        self._constant_term = base_ring(objective_constant_term)
 
         if constraint_type in ["<=", ">=", "=="]:
             constraint_type = (constraint_type, ) * m
@@ -724,11 +724,11 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
-            sage: P2 = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
+            sage: P2 = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P == P2
             True
-            sage: P3 = InteractiveLPProblem(A, c, b, ["C", "B"], variable_type=">=")
+            sage: P3 = InteractiveLPProblem(A, c, b, ["C", "B"], variable_type='>=')
             sage: P == P3
             False
         """
@@ -744,16 +744,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return a LaTeX representation of ``self``.
 
-        OUTPUT:
-
-        - a string
+        OUTPUT: string
 
         TESTS::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: print(P._latex_())
             \begin{array}{l}
             \begin{array}{lcrcrcl}
@@ -796,16 +794,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return a string representation of ``self``.
 
-        OUTPUT:
-
-        - a string
+        OUTPUT: string
 
         TESTS::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: print(P._repr_())
             LP problem (use ...)
         """
@@ -821,16 +817,14 @@ class InteractiveLPProblem(SageObject):
           problem, e.g. a vector or a list of correct length or a single
           element list with such a vector
 
-        OUTPUT:
-
-        - ``x`` as a vector
+        OUTPUT: ``x`` as a vector
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, variable_type='>=')
             sage: P._solution([100, 200])
             (100, 200)
             sage: P._solution([[100, 200]])
@@ -872,7 +866,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P._solve()
             ((250, 750), 6250)
         """
@@ -907,16 +901,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return `A`, `b`, `c`, and `x` of ``self`` as a tuple.
 
-        OUTPUT:
-
-        - a tuple
+        OUTPUT: a tuple
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.Abcx()
             (
             [1 1]
@@ -925,7 +917,7 @@ class InteractiveLPProblem(SageObject):
         """
         return self._Abcx
 
-    def add_constraint(self, coefficients, constant_term, constraint_type="<="):
+    def add_constraint(self, coefficients, constant_term, constraint_type='<='):
         r"""
         Return a new LP problem by adding a constraint to``self``.
 
@@ -935,12 +927,10 @@ class InteractiveLPProblem(SageObject):
 
         - ``constant_term`` -- a constant term of the new constraint
 
-        - ``constraint_type`` -- (default: ``"<="``) a string indicating
+        - ``constraint_type`` -- (default: ``'<='``) a string indicating
           the constraint type of the new constraint
 
-        OUTPUT:
-
-        - an :class:`LP problem <InteractiveLPProblem>`
+        OUTPUT: an :class:`LP problem <InteractiveLPProblem>`
 
         EXAMPLES::
 
@@ -996,21 +986,19 @@ class InteractiveLPProblem(SageObject):
 
             The base ring of LP problems is always a field.
 
-        OUTPUT:
-
-        - a ring
+        OUTPUT: a ring
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.base_ring()
             Rational Field
 
             sage: c = (10, 5.)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.base_ring()
             Real Field with 53 bits of precision
         """
@@ -1020,16 +1008,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return constant terms of constraints of ``self``, i.e. `b`.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.constant_terms()
             (1000, 1500)
             sage: P.b()
@@ -1041,16 +1027,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return coefficients of constraints of ``self``, i.e. `A`.
 
-        OUTPUT:
-
-        - a matrix
+        OUTPUT: a matrix
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.constraint_coefficients()
             [1 1]
             [3 1]
@@ -1064,16 +1048,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return a tuple listing the constraint types of all rows.
 
-        OUTPUT:
-
-        - a tuple of strings
+        OUTPUT: a tuple of strings
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=", constraint_type=["<=", "=="])
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=', constraint_type=["<=", "=="])
             sage: P.constraint_types()
             ('<=', '==')
         """
@@ -1083,16 +1065,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return decision variables of ``self``, i.e. `x`.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.decision_variables()
             (C, B)
             sage: P.x()
@@ -1109,16 +1089,14 @@ class InteractiveLPProblem(SageObject):
         - ``y`` -- (default: depends on :func:`style`)
           a vector of dual decision variables or a string giving the base name
 
-        OUTPUT:
-
-        - an :class:`InteractiveLPProblem`
+        OUTPUT: an :class:`InteractiveLPProblem`
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: DP = P.dual()
             sage: DP.b() == P.c()
             True
@@ -1172,22 +1150,53 @@ class InteractiveLPProblem(SageObject):
             objective_constant_term=self._constant_term)
 
     @cached_method
-    def feasible_set(self):
+    def feasible_set(self, backend=None):
         r"""
         Return the feasible set of ``self``.
 
-        OUTPUT:
+        INPUT:
 
-        - a :mod:`Polyhedron <sage.geometry.polyhedron.constructor>`
+        - ``backend`` -- (optional) a backend for :mod:`Polyhedron <sage.geometry.polyhedron.constructor>`
+
+        OUTPUT: a :mod:`Polyhedron <sage.geometry.polyhedron.constructor>`
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
-            sage: P.feasible_set()
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
+            sage: F = P.feasible_set(); F
             A 2-dimensional polyhedron in QQ^2
+            defined as the convex hull of 4 vertices
+            sage: F.backend()
+            'ppl'
+            sage: F_cdd = P.feasible_set(backend='cdd'); F_cdd
+            A 2-dimensional polyhedron in QQ^2
+            defined as the convex hull of 4 vertices
+            sage: F_cdd.backend()
+            'cdd'
+
+        An algebraic polyhedron::
+
+            sage: A = ([1, sqrt(2)], [sqrt(3), 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
+            sage: F = P.feasible_set(backend='number_field'); F
+            A 2-dimensional polyhedron in (Symbolic Ring)^2
+            defined as the convex hull of 4 vertices
+            sage: F.backend()
+            'number_field'
+
+        Using ``RDF``::
+
+            sage: A = ([RDF(1), RDF(1)], [RDF(3), RDF(1)])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
+            sage: P.feasible_set()
+            A 2-dimensional polyhedron in RDF^2
             defined as the convex hull of 4 vertices
         """
         ieqs = []
@@ -1204,35 +1213,29 @@ class InteractiveLPProblem(SageObject):
                 ieqs.append([0] + list(-n))
             elif r == ">=":
                 ieqs.append([0] + list(n))
-        if self.base_ring() is QQ:
-            R = QQ
-        else:
-            R = RDF
-            ieqs = [[R(_) for _ in ieq] for ieq in ieqs]
-            eqns = [[R(_) for _ in eqn] for eqn in eqns]
-        return Polyhedron(ieqs=ieqs, eqns=eqns, base_ring=R)
+        if backend is not None:
+            return Polyhedron(ieqs=ieqs, eqns=eqns, backend=backend)
+        return Polyhedron(ieqs=ieqs, eqns=eqns)
 
     def is_bounded(self):
         r"""
         Check if ``self`` is bounded.
 
-        OUTPUT:
-
-        - ``True`` is ``self`` is bounded, ``False`` otherwise
+        OUTPUT: ``True`` if ``self`` is bounded, ``False`` otherwise
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.is_bounded()
             True
 
         Note that infeasible problems are always bounded::
 
             sage: b = (-1000, 1500)
-            sage: P = InteractiveLPProblem(A, b, c, variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, variable_type='>=')
             sage: P.is_feasible()
             False
             sage: P.is_bounded()
@@ -1259,7 +1262,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, variable_type='>=')
             sage: P.is_feasible()
             True
             sage: P.is_feasible(100, 200)
@@ -1279,17 +1282,17 @@ class InteractiveLPProblem(SageObject):
 
     def is_negative(self):
         r"""
-        Return `True` when the problem is of type ``"-max"`` or ``"-min"``.
+        Return ``True`` when the problem is of type ``'-max'`` or ``'-min'``.
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.is_negative()
             False
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=", problem_type="-min")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=', problem_type='-min')
             sage: P.is_negative()
             True
         """
@@ -1301,16 +1304,14 @@ class InteractiveLPProblem(SageObject):
 
         This distinction affects only some automatically chosen variable names.
 
-        OUTPUT:
-
-        - boolean
+        OUTPUT: boolean
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.is_primal()
             True
             sage: P.dual().is_primal()
@@ -1327,16 +1328,14 @@ class InteractiveLPProblem(SageObject):
         - anything that can be interpreted as a valid solution for
           this problem, i.e. a sequence of values for all decision variables
 
-        OUTPUT:
-
-        - ``True`` is the given solution is optimal, ``False`` otherwise
+        OUTPUT: ``True`` if the given solution is optimal, ``False`` otherwise
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (15, 5)
-            sage: P = InteractiveLPProblem(A, b, c, variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, variable_type='>=')
             sage: P.is_optimal(100, 200)
             False
             sage: P.is_optimal(500, 0)
@@ -1353,16 +1352,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return the number of constraints of ``self``, i.e. `m`.
 
-        OUTPUT:
-
-        - an integer
+        OUTPUT: integer
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.n_constraints()
             2
             sage: P.m()
@@ -1374,16 +1371,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return the number of decision variables of ``self``, i.e. `n`.
 
-        OUTPUT:
-
-        - an integer
+        OUTPUT: integer
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.n_variables()
             2
             sage: P.n()
@@ -1395,16 +1390,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return coefficients of the objective of ``self``, i.e. `c`.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.objective_coefficients()
             (10, 5)
             sage: P.c()
@@ -1416,22 +1409,20 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return the constant term of the objective.
 
-        OUTPUT:
-
-        - a number
+        OUTPUT: a number
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.objective_constant_term()
             0
             sage: P.optimal_value()
             6250
             sage: P = InteractiveLPProblem(A, b, c, ["C", "B"],
-            ....:       variable_type=">=", objective_constant_term=-1250)
+            ....:       variable_type='>=', objective_constant_term=-1250)
             sage: P.objective_constant_term()
             -1250
             sage: P.optimal_value()
@@ -1458,7 +1449,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, variable_type='>=')
             sage: P.objective_value(100, 200)
             2000
         """
@@ -1469,16 +1460,14 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return **an** optimal solution of ``self``.
 
-        OUTPUT:
-
-        - a vector or ``None`` if there are no optimal solutions
+        OUTPUT: a vector or ``None`` if there are no optimal solutions
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.optimal_solution()
             (250, 750)
         """
@@ -1498,7 +1487,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.optimal_value()
             6250
         """
@@ -1515,9 +1504,7 @@ class InteractiveLPProblem(SageObject):
 
         - ``alpha`` -- (default: 0.2) determines how opaque are shadows
 
-        OUTPUT:
-
-        - a plot
+        OUTPUT: a plot
 
         This only works for problems with two decision variables. On the plot
         the black arrow indicates the direction of growth of the objective. The
@@ -1533,7 +1520,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: p = P.plot()                                                          # needs sage.plot
             sage: p.show()                                                              # needs sage.plot
 
@@ -1546,7 +1533,7 @@ class InteractiveLPProblem(SageObject):
 
         We check that zero objective can be dealt with::
 
-            sage: InteractiveLPProblem(A, b, (0, 0), ["C", "B"], variable_type=">=").plot()         # needs sage.plot
+            sage: InteractiveLPProblem(A, b, (0, 0), ["C", "B"], variable_type='>=').plot()         # needs sage.plot
             Graphics object consisting of 8 graphics primitives
         """
         FP = self.plot_feasible_set(*args, **kwds)
@@ -1563,8 +1550,8 @@ class InteractiveLPProblem(SageObject):
                             else [xmin + (xmax-xmin)/2, ymin + (ymax-ymin)/2])
         length = min(xmax - xmin, ymax - ymin) / 5
         end = start + (c * length / c.norm()).n().change_ring(QQ)
-        result = FP + point(start, color="black", size=50, zorder=10)
-        result += arrow(start, end, color="black", zorder=10)
+        result = FP + point(start, color='black', size=50, zorder=10)
+        result += arrow(start, end, color='black', zorder=10)
         ieqs = [(xmax, -1, 0), (- xmin, 1, 0),
                 (ymax, 0, -1), (- ymin, 0, 1)]
         box = Polyhedron(ieqs=ieqs)
@@ -1574,11 +1561,11 @@ class InteractiveLPProblem(SageObject):
             level = box.intersection(level)
             if level.vertices():
                 if i == 0 and self.is_bounded():
-                    result += line(level.vertices(), color="black",
+                    result += line(level.vertices(), color='black',
                                    thickness=2)
                 else:
-                    result += line(level.vertices(), color="black",
-                                   linestyle="--")
+                    result += line(level.vertices(), color='black',
+                                   linestyle='--')
         result.set_axes_range(xmin, xmax, ymin, ymax)
         result.axes_labels(FP.axes_labels())    #FIXME: should be preserved!
         return result
@@ -1595,9 +1582,7 @@ class InteractiveLPProblem(SageObject):
 
         - ``alpha`` -- (default: 0.2) determines how opaque are shadows
 
-        OUTPUT:
-
-        - a plot
+        OUTPUT: a plot
 
         This only works for a problem with two decision variables. The plot
         shows boundaries of constraints with a shadow on one side for
@@ -1610,7 +1595,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: p = P.plot_feasible_set()                                             # needs sage.plot
             sage: p.show()                                                              # needs sage.plot
 
@@ -1676,9 +1661,9 @@ class InteractiveLPProblem(SageObject):
             halfplane = box.intersection(Polyhedron(ieqs=ieqs))
             result += halfplane.render_solid(alpha=alpha, color=color)
         if F.vertices():
-            result += F.render_solid(alpha=alpha, color="gray")
+            result += F.render_solid(alpha=alpha, color='gray')
             result += text("$F$", F.center(),
-                           fontsize=20, color="black", zorder=5)
+                           fontsize=20, color='black', zorder=5)
         result.set_axes_range(xmin, xmax, ymin, ymax)
         result.axes_labels(["${}$".format(latex(xi)) for xi in x])
         result.legend(True)
@@ -1694,19 +1679,17 @@ class InteractiveLPProblem(SageObject):
 
         Needs to be used together with ``is_negative``.
 
-        OUTPUT:
-
-        - a string, one of ``"max"``, ``"min"``.
+        OUTPUT: string, one of ``'max'``, ``'min'``
 
         EXAMPLES::
 
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=')
             sage: P.problem_type()
             'max'
-            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=", problem_type="-min")
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type='>=', problem_type='-min')
             sage: P.problem_type()
             'min'
         """
@@ -1718,7 +1701,7 @@ class InteractiveLPProblem(SageObject):
 
         INPUT:
 
-        - ``transformation`` -- (default: ``False``) if ``True``, a map
+        - ``transformation`` -- boolean (default: ``False``); if ``True``, a map
           converting solutions of the problem in standard form to the original
           one will be returned as well
 
@@ -1736,7 +1719,7 @@ class InteractiveLPProblem(SageObject):
             sage: A = ([1, 1], [3, 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
-            sage: P = InteractiveLPProblem(A, b, c, variable_type=">=")
+            sage: P = InteractiveLPProblem(A, b, c, variable_type='>=')
             sage: DP = P.dual()
             sage: DPSF = DP.standard_form()
             sage: DPSF.b()
@@ -1788,7 +1771,7 @@ class InteractiveLPProblem(SageObject):
             sage: c = (-10, -5)
             sage: P = InteractiveLPProblem(A, b, c, variable_type=["<=", ""],
             ....:                          objective_constant_term=-42,
-            ....:                          problem_type="min")
+            ....:                          problem_type='min')
             sage: PSF, f = P.standard_form(True)
             sage: PSF.optimal_solution()
             (0, 1000, 0)
@@ -1798,7 +1781,6 @@ class InteractiveLPProblem(SageObject):
             -5042
             sage: P.optimal_value()
             -5042
-
         """
         A, b, c, x = self.Abcx()
         f = identity_matrix(self.n()).columns()
@@ -1840,7 +1822,7 @@ class InteractiveLPProblem(SageObject):
             x = newx
             f = newf
 
-        objective_name = SR(kwds.get("objective_name", default_variable_name(
+        objective_name = polygen(ZZ, kwds.get("objective_name", default_variable_name(
             "primal objective" if self.is_primal() else "dual objective")))
         is_negative = self._is_negative
         constant_term = self._constant_term
@@ -1849,7 +1831,7 @@ class InteractiveLPProblem(SageObject):
             c = - c
             constant_term = - constant_term
             objective_name = - objective_name
-        kwds["objective_name"] = objective_name
+        kwds["objective_name"] = objective_name  # polynomial, no longer a string
         kwds["problem_type"] = "-max" if is_negative else "max"
         kwds["is_primal"] = self.is_primal()
         kwds["objective_constant_term"] = constant_term
@@ -1861,9 +1843,7 @@ class InteractiveLPProblem(SageObject):
         r"""
         Return a tuple listing the variable types of all decision variables.
 
-        OUTPUT:
-
-        - a tuple of strings
+        OUTPUT: a tuple of strings
 
         EXAMPLES::
 
@@ -1913,17 +1893,17 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
 
     - ``c`` -- a vector of objective coefficients
 
-    - ``x`` -- (default: ``"x"``) a vector of decision variables or a string
+    - ``x`` -- (default: ``'x'``) a vector of decision variables or a string
       the base name giving
 
-    - ``problem_type`` -- (default: ``"max"``) a string specifying the
-      problem type: either ``"max"`` or ``"-max"``
+    - ``problem_type`` -- (default: ``'max'``) a string specifying the
+      problem type: either ``'max'`` or ``'-max'``
 
     - ``slack_variables`` -- (default: depends on :func:`style`)
       a vector of slack variables or a string giving the base name
 
     - ``auxiliary_variable`` -- (default: same as ``x`` parameter with adjoined
-      ``"0"`` if it was given as a string, otherwise ``"x0"``) the auxiliary
+      ``'0'`` if it was given as a string, otherwise ``'x0'``) the auxiliary
       name, expected to be the same as the first decision variable for
       auxiliary problems
 
@@ -1931,12 +1911,12 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
       input coefficients) a field to which all input coefficients will be
       converted
 
-    - ``is_primal`` -- (default: ``True``) whether this problem is primal or
+    - ``is_primal`` -- boolean (default: ``True``); whether this problem is primal or
       dual: each problem is of course dual to its own dual, this flag is mostly
       for internal use and affects default variable names only
 
-    - ``objective_name`` -- a string or a symbolic expression for the
-      objective used in dictionaries, default depends on :func:`style`
+    - ``objective_name`` -- string or symbolic expression for the
+      objective used in dictionaries (default: depends on :func:`style`)
 
     - ``objective_constant_term`` -- (default: 0) a constant term of the
       objective
@@ -1949,8 +1929,8 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         sage: P = InteractiveLPProblemStandardForm(A, b, c)
 
     Unlike :class:`InteractiveLPProblem`, this class does not allow you to adjust types of
-    constraints (they are always ``"<="``) and variables (they are always
-    ``">="``), and the problem type may only be ``"max"`` or ``"-max"``.
+    constraints (they are always ``'<='``) and variables (they are always
+    ``'>='``), and the problem type may only be ``'max'`` or ``'-max'``.
     You may give custom names to slack and auxiliary variables, but in
     most cases defaults should work::
 
@@ -1960,7 +1940,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         (x3, x4)
     """
 
-    def __init__(self, A, b, c, x="x", problem_type="max",
+    def __init__(self, A, b, c, x='x', problem_type='max',
                  slack_variables=None, auxiliary_variable=None,
                  base_ring=None, is_primal=True, objective_name=None,
                  objective_constant_term=0):
@@ -1981,8 +1961,8 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         super().__init__(
             A, b, c, x,
             problem_type=problem_type,
-            constraint_type="<=",
-            variable_type=">=",
+            constraint_type='<=',
+            variable_type='>=',
             base_ring=base_ring,
             is_primal=is_primal,
             objective_constant_term=objective_constant_term)
@@ -2008,7 +1988,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         names.extend(slack_variables)
         if names[0] == names[1]:
             names.pop(0)
-        R = PolynomialRing(self.base_ring(), names, order="neglex")
+        R = PolynomialRing(self.base_ring(), names, order='neglex')
         self._R = R
         x = vector(R.gens()[-n-m:-m])
         x.set_immutable()
@@ -2016,7 +1996,10 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         if objective_name is None:
             objective_name = default_variable_name(
                 "primal objective" if is_primal else "dual objective")
-        self._objective_name = SR(objective_name)
+        if isinstance(objective_name, Polynomial):
+            self._objective_name = objective_name
+        else:
+            self._objective_name = polygen(ZZ, objective_name)
 
     @staticmethod
     def random_element(m, n, bound=5, special_probability=0.2,
@@ -2069,9 +2052,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         - ``slack_variable`` -- (default: depends on :func:`style`)
           a string giving the name of the slack variable of the new constraint
 
-        OUTPUT:
-
-        - an :class:`LP problem in standard form <InteractiveLPProblemStandardForm>`
+        OUTPUT: an :class:`LP problem in standard form <InteractiveLPProblemStandardForm>`
 
         EXAMPLES::
 
@@ -2134,12 +2115,10 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
 
         INPUT:
 
-        - ``objective_name`` -- a string or a symbolic expression for the
-          objective used in dictionaries, default depends on :func:`style`
+        - ``objective_name`` -- string or symbolic expression for the
+          objective used in dictionaries (default: depends on :func:`style`)
 
-        OUTPUT:
-
-        - an :class:`LP problem in standard form <InteractiveLPProblemStandardForm>`
+        OUTPUT: an :class:`LP problem in standard form <InteractiveLPProblemStandardForm>`
 
         The auxiliary problem with the auxiliary variable `x_0` is
 
@@ -2184,9 +2163,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         Note that the auxiliary variable may or may not be among
         :meth:`~InteractiveLPProblem.decision_variables`.
 
-        OUTPUT:
-
-        - a variable of the :meth:`coordinate_ring` of ``self``
+        OUTPUT: a variable of the :meth:`coordinate_ring` of ``self``
 
         EXAMPLES::
 
@@ -2244,9 +2221,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
 
         - basic variables for the dictionary to be constructed
 
-        OUTPUT:
-
-        - a :class:`dictionary <LPDictionary>`
+        OUTPUT: a :class:`dictionary <LPDictionary>`
 
         .. NOTE::
 
@@ -2277,9 +2252,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
           :meth:`auxiliary_problem` of ``self`` with the optimal value `0` and
           a non-basic auxiliary variable
 
-        OUTPUT:
-
-        - a feasible :class:`dictionary <LPDictionary>` for ``self``
+        OUTPUT: a feasible :class:`dictionary <LPDictionary>` for ``self``
 
         EXAMPLES::
 
@@ -2345,9 +2318,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
 
         See :meth:`run_simplex_method` for the description of possibilities.
 
-        OUTPUT:
-
-        - a :class:`dictionary <LPDictionary>`
+        OUTPUT: a :class:`dictionary <LPDictionary>`
 
         EXAMPLES::
 
@@ -2381,9 +2352,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         See :meth:`run_revised_simplex_method` for the description of
         possibilities.
 
-        OUTPUT:
-
-        - a :class:`revised dictionary <LPRevisedDictionary>`
+        OUTPUT: a :class:`revised dictionary <LPRevisedDictionary>`
 
         EXAMPLES::
 
@@ -2417,9 +2386,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         of the :meth:`~InteractiveLPProblem.decision_variables`, i.e. it has slack
         variables as basic ones.
 
-        OUTPUT:
-
-        - a :class:`dictionary <LPDictionary>`
+        OUTPUT: a :class:`dictionary <LPDictionary>`
 
         EXAMPLES::
 
@@ -2446,9 +2413,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         - ``verbose`` -- if ``True`` (default), names of injected variables
           will be printed
 
-        OUTPUT:
-
-        - none
+        OUTPUT: none
 
         EXAMPLES::
 
@@ -2472,9 +2437,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         r"""
         Return the objective name used in dictionaries for this problem.
 
-        OUTPUT:
-
-        - a symbolic expression
+        OUTPUT: a symbolic expression
 
         EXAMPLES::
 
@@ -2491,7 +2454,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
             zeta
             sage: sage.numerical.interactive_simplex_method.style("UAlberta")
             'UAlberta'
-            sage: P = InteractiveLPProblemStandardForm(A, b, c, objective_name="custom")
+            sage: P = InteractiveLPProblemStandardForm(A, b, c, objective_name='custom')
             sage: P.objective_name()
             custom
         """
@@ -2507,9 +2470,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
           :meth:`slack_variables` will be used, perhaps with the
           :meth:`auxiliary_variable` to give a feasible dictionary
 
-        OUTPUT:
-
-        - a :class:`revised dictionary <LPRevisedDictionary>`
+        OUTPUT: a :class:`revised dictionary <LPRevisedDictionary>`
 
         EXAMPLES::
 
@@ -2562,7 +2523,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
             one of the following:
 
             - an optimal dictionary with the :meth:`auxiliary_variable` among
-              :meth:`~LPRevisedDictionary.basic_variables` and a non-zero
+              :meth:`~LPRevisedDictionary.basic_variables` and a nonzero
               optimal value indicating
               that ``self`` is infeasible;
 
@@ -2626,7 +2587,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
             of the following:
 
             - an optimal dictionary for the :meth:`auxiliary_problem` with a
-              non-zero optimal value indicating that ``self`` is infeasible;
+              nonzero optimal value indicating that ``self`` is infeasible;
 
             - a non-optimal dictionary for ``self`` that has marked entering
               variable for which there is no choice of the leaving variable,
@@ -2657,6 +2618,56 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
             Entering: $x_{2}$. Leaving: $x_{3}$.
             ...
             The optimal value: $6250$. An optimal solution: $\left(250,\,750\right)$.
+
+        TESTS::
+
+            sage: from sage.rings.real_double import RDF
+            sage: A = ([RDF(1), RDF(1)], [RDF(3), RDF(1)], [RDF(-1), RDF(-1)])
+            sage: b = (RDF(1000), RDF(1500), RDF(-400))
+            sage: c = (RDF(10), RDF(5))
+            sage: P = InteractiveLPProblemStandardForm(A, b, c)
+            sage: P.run_simplex_method()
+            \begin{equation*}
+            ...
+            \end{equation*}
+            The initial dictionary is infeasible, solving auxiliary problem.
+            ...
+            Entering: $x_{0}$. Leaving: $x_{5}$.
+            ...
+            Entering: $x_{1}$. Leaving: $x_{0}$.
+            ...
+            Back to the original problem.
+            ...
+            Entering: $x_{5}$. Leaving: $x_{4}$.
+            ...
+            Entering: $x_{2}$. Leaving: $x_{3}$.
+            ...
+            The optimal value: $6250.0$. An optimal solution: $\left(249.99999999999997,\,750.0\right)$.
+
+        Using constants in the symbolic ring::
+
+            sage: A = Matrix(([1, 1], [3, 1], [-1, -1])) * pi
+            sage: b = vector((1000, 1500, -400)) * pi
+            sage: c = vector((10, 5)) * pi
+            sage: P = InteractiveLPProblemStandardForm(A, b, c)
+            sage: P.run_simplex_method()
+            \begin{equation*}
+            ...
+            \end{equation*}
+            The initial dictionary is infeasible, solving auxiliary problem.
+            ...
+            Entering: $x_{0}$. Leaving: $x_{5}$.
+            ...
+            Entering: $x_{1}$. Leaving: $x_{0}$.
+            ...
+            Back to the original problem.
+            ...
+            Entering: $x_{5}$. Leaving: $x_{4}$.
+            ...
+            Entering: $x_{2}$. Leaving: $x_{3}$.
+            ...
+            The optimal value: $6250 \, \pi$. An optimal solution: $\left(250,\,750\right)$.
+
         """
         output = []
         d = self.initial_dictionary()
@@ -2698,9 +2709,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
         If you want to give custom names to slack variables, you have to do so
         during construction of the problem.
 
-        OUTPUT:
-
-        - a tuple
+        OUTPUT: a tuple
 
         EXAMPLES::
 
@@ -2746,9 +2755,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return an HTML representation of ``self``.
 
-        OUTPUT:
-
-        - a string
+        OUTPUT: string
 
         TESTS::
 
@@ -2772,12 +2779,10 @@ class LPAbstractDictionary(SageObject):
 
         INPUT:
 
-        - ``direction`` -- a string specifying the type of the simplex method
+        - ``direction`` -- string specifying the type of the simplex method
           used, either "primal" or "dual"
 
-        OUTPUT:
-
-        - :class:`~sage.misc.html.HtmlFragment`.
+        OUTPUT: :class:`~sage.misc.html.HtmlFragment`
 
         TESTS::
 
@@ -2806,9 +2811,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return a string representation of ``self``.
 
-        OUTPUT:
-
-        - a string
+        OUTPUT: string
 
         TESTS::
 
@@ -2832,18 +2835,16 @@ class LPAbstractDictionary(SageObject):
 
         INPUT:
 
-        - ``nonbasic_coefficients``-- a list of the coefficients for the
+        - ``nonbasic_coefficients`` -- list of the coefficients for the
           new row (with which nonbasic variables are subtracted in the relation
           for the new basic variable)
 
-        - ``constant``--  the constant term for the new row
+        - ``constant`` -- the constant term for the new row
 
-        - ``basic_variable``-- (default: depends on :func:`style`)
+        - ``basic_variable`` -- (default: depends on :func:`style`)
           a string giving the name of the basic variable of the new row
 
-        OUTPUT:
-
-        - a new dictionary of the same class
+        OUTPUT: a new dictionary of the same class
 
         EXAMPLES::
 
@@ -2861,9 +2862,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return the base ring of ``self``, i.e. the ring of coefficients.
 
-        OUTPUT:
-
-        - a ring
+        OUTPUT: a ring
 
         EXAMPLES::
 
@@ -2885,9 +2884,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return the basic variables of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -2913,12 +2910,10 @@ class LPAbstractDictionary(SageObject):
 
         INPUT:
 
-        - ``include_slack_variables`` -- (default: ``False``) if ``True``,
+        - ``include_slack_variables`` -- boolean (default: ``False``); if ``True``,
           values of slack variables will be appended at the end
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -2955,9 +2950,7 @@ class LPAbstractDictionary(SageObject):
         - ``v`` -- a nonbasic variable of ``self``, can be given as a string, an
           actual variable, or an integer interpreted as the index of a variable
 
-        OUTPUT:
-
-        - a vector of coefficients of a nonbasic variable
+        OUTPUT: a vector of coefficients of a nonbasic variable
 
         EXAMPLES::
 
@@ -2975,9 +2968,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return the constant terms of relations of ``self``.
 
-        OUTPUT:
-
-        - a vector.
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -3107,9 +3098,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return the currently chosen entering variable.
 
-        OUTPUT:
-
-        - a variable if the entering one was chosen, otherwise ``None``
+        OUTPUT: a variable if the entering one was chosen, otherwise ``None``
 
         EXAMPLES::
 
@@ -3130,9 +3119,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return coefficients of the entering variable.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -3157,7 +3144,7 @@ class LPAbstractDictionary(SageObject):
         OUTPUT:
 
         - ``True`` if all :meth:`~LPDictionary.objective_coefficients` are
-          non-positive, ``False`` otherwise
+          nonpositive, ``False`` otherwise
 
         EXAMPLES::
 
@@ -3181,7 +3168,7 @@ class LPAbstractDictionary(SageObject):
         OUTPUT:
 
         - ``True`` if all :meth:`~LPDictionary.constant_terms` are
-          non-negative, ``False`` otherwise
+          nonnegative, ``False`` otherwise
 
         EXAMPLES::
 
@@ -3205,8 +3192,8 @@ class LPAbstractDictionary(SageObject):
         OUTPUT:
 
         - ``True`` if ``self`` :meth:`is_feasible` and :meth:`is_dual_feasible`
-          (i.e. all :meth:`~LPDictionary.constant_terms` are non-negative and
-          all :meth:`~LPDictionary.objective_coefficients` are non-positive),
+          (i.e. all :meth:`~LPDictionary.constant_terms` are nonnegative and
+          all :meth:`~LPDictionary.objective_coefficients` are nonpositive),
           ``False`` otherwise.
 
         EXAMPLES::
@@ -3277,9 +3264,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return the currently chosen leaving variable.
 
-        OUTPUT:
-
-        - a variable if the leaving one was chosen, otherwise ``None``
+        OUTPUT: a variable if the leaving one was chosen, otherwise ``None``
 
         EXAMPLES::
 
@@ -3300,9 +3285,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return coefficients of the leaving variable.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -3332,9 +3315,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return non-basic variables of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -3352,9 +3333,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return coefficients of the objective of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -3372,9 +3351,7 @@ class LPAbstractDictionary(SageObject):
         r"""
         Return the objective name of ``self``.
 
-        OUTPUT:
-
-        - a symbolic expression
+        OUTPUT: a symbolic expression
 
         EXAMPLES::
 
@@ -3393,9 +3370,7 @@ class LPAbstractDictionary(SageObject):
         Return the value of the objective at the
         :meth:`~LPAbstractDictionary.basic_solution` of ``self``.
 
-        OUTPUT:
-
-        - a number
+        OUTPUT: a number
 
         EXAMPLES::
 
@@ -3609,9 +3584,7 @@ class LPAbstractDictionary(SageObject):
         - ``v`` -- a basic variable of ``self``, can be given as a string, an
           actual variable, or an integer interpreted as the index of a variable
 
-        OUTPUT:
-
-        - a vector of coefficients of a basic variable
+        OUTPUT: a vector of coefficients of a basic variable
 
         EXAMPLES::
 
@@ -3839,15 +3812,13 @@ class LPDictionary(LPAbstractDictionary):
 
     - ``objective_value`` -- current value of the objective `z^*`
 
-    - ``basic_variables`` -- a list of basic variables `x_B`
+    - ``basic_variables`` -- list of basic variables `x_B`
 
-    - ``nonbasic_variables`` -- a list of non-basic variables `x_N`
+    - ``nonbasic_variables`` -- list of non-basic variables `x_N`
 
     - ``objective_name`` -- a "name" for the objective `z`
 
-    OUTPUT:
-
-    - a :class:`dictionary for an LP problem <LPDictionary>`
+    OUTPUT: a :class:`dictionary for an LP problem <LPDictionary>`
 
     .. NOTE::
 
@@ -3872,7 +3843,7 @@ class LPDictionary(LPAbstractDictionary):
         sage: A = matrix(QQ, ([1, 1], [3, 1]))
         sage: b = vector(QQ, (1000, 1500))
         sage: c = vector(QQ, (10, 5))
-        sage: R = PolynomialRing(QQ, "x1, x2, x3, x4", order="neglex")
+        sage: R = PolynomialRing(QQ, "x1, x2, x3, x4", order='neglex')
         sage: from sage.numerical.interactive_simplex_method \
         ....:     import LPDictionary
         sage: D2 = LPDictionary(A, b, c, 0, R.gens()[2:], R.gens()[:2], "z")
@@ -3891,7 +3862,7 @@ class LPDictionary(LPAbstractDictionary):
             sage: A = matrix(QQ, ([1, 1], [3, 1]))
             sage: b = vector(QQ, (1000, 1500))
             sage: c = vector(QQ, (10, 5))
-            sage: R = PolynomialRing(QQ, "x1, x2, x3, x4", order="neglex")
+            sage: R = PolynomialRing(QQ, "x1, x2, x3, x4", order='neglex')
             sage: from sage.numerical.interactive_simplex_method \
             ....:     import LPDictionary
             sage: D = LPDictionary(A, b, c, 0, R.gens()[2:], R.gens()[:2], "z")
@@ -3904,7 +3875,35 @@ class LPDictionary(LPAbstractDictionary):
         c = copy(c)
         B = vector(basic_variables)
         N = vector(nonbasic_variables)
-        self._AbcvBNz = [A, b, c, objective_value, B, N, SR(objective_name)]
+        # Issue #29101: vector does not guarantee that the result is freshly allocated
+        # if the input was already a vector
+        if B is basic_variables:
+            B = copy(B)
+        if N is nonbasic_variables:
+            N = copy(N)
+        self._AbcvBNz = [A, b, c, objective_value, B, N, polygen(ZZ, objective_name)]
+
+    def __copy__(self):
+        r"""
+        TESTS:
+
+        Test that copies do not share state with the original::
+
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblemStandardForm(A, b, c)
+            sage: D = P.initial_dictionary()
+            sage: D_2 = copy(D)
+            sage: D is D_2
+            False
+            sage: D.enter('x1')
+            sage: D.leave('x3')
+            sage: D.update()
+            sage: D_2 == D
+            False
+        """
+        return type(self)(*self._AbcvBNz)
 
     @staticmethod
     def random_element(m, n, bound=5, special_probability=0.2):
@@ -3922,9 +3921,7 @@ class LPDictionary(LPAbstractDictionary):
         - ``special_probability`` -- (default: 0.2) probability of constructing a
           potentially infeasible or potentially optimal dictionary
 
-        OUTPUT:
-
-        - an :class:`LP problem dictionary <LPDictionary>`
+        OUTPUT: an :class:`LP problem dictionary <LPDictionary>`
 
         EXAMPLES::
 
@@ -3942,11 +3939,9 @@ class LPDictionary(LPAbstractDictionary):
             c = random_vector(ZZ, n, x=-bound, y=bound).change_ring(QQ)
         else:   # Make dual feasible dictionary
             c = random_vector(ZZ, n, x=-bound, y=0).change_ring(QQ)
-        x_N = list(PolynomialRing(QQ, "x", m + n + 1, order="neglex").gens())
+        x_N = list(PolynomialRing(QQ, "x", m + n + 1, order='neglex').gens())
         x_N.pop(0)
-        x_B = []
-        for i in range(m):
-            x_B.append(x_N.pop(randint(0, n + m - i - 1)))
+        x_B = [x_N.pop(randint(0, n + m - i - 1)) for i in range(m)]
         return LPDictionary(A, b, c, randint(-bound, bound), x_B, x_N, "z")
 
     def __eq__(self, other):
@@ -3973,7 +3968,7 @@ class LPDictionary(LPAbstractDictionary):
             sage: A = matrix(QQ, ([1, 1], [3, 1]))
             sage: b = vector(QQ, (1000, 1500))
             sage: c = vector(QQ, (10, 5))
-            sage: R = PolynomialRing(QQ, "x1, x2, x3, x4", order="neglex")
+            sage: R = PolynomialRing(QQ, "x1, x2, x3, x4", order='neglex')
             sage: from sage.numerical.interactive_simplex_method \
             ....:     import LPDictionary
             sage: D2 = LPDictionary(A, b, c, 0, R.gens()[2:], R.gens()[:2], "z")
@@ -3991,9 +3986,7 @@ class LPDictionary(LPAbstractDictionary):
         r"""
         Return a LaTeX representation of ``self``.
 
-        OUTPUT:
-
-        - a string
+        OUTPUT: string
 
         TESTS::
 
@@ -4067,18 +4060,16 @@ class LPDictionary(LPAbstractDictionary):
 
         INPUT:
 
-        - ``nonbasic_coefficients``-- a list of the coefficients for the
+        - ``nonbasic_coefficients`` -- list of the coefficients for the
           new row (with which nonbasic variables are subtracted in the relation
           for the new basic variable)
 
-        - ``constant``--  the constant term for the new row
+        - ``constant`` -- the constant term for the new row
 
-        - ``basic_variable``-- (default: depends on :func:`style`)
+        - ``basic_variable`` -- (default: depends on :func:`style`)
           a string giving the name of the basic variable of the new row
 
-        OUTPUT:
-
-        - a :class:`dictionary <LPDictionary>`
+        OUTPUT: a :class:`dictionary <LPDictionary>`
 
         EXAMPLES::
 
@@ -4113,7 +4104,7 @@ class LPDictionary(LPAbstractDictionary):
             basic_variable = str(basic_variable)
 
         R = PolynomialRing(
-            BR, list(B.base_ring().variable_names()) + [basic_variable], order="neglex")
+            BR, list(B.base_ring().variable_names()) + [basic_variable], order='neglex')
         B = list(B) + [basic_variable]
         B = map(R, B)
         N = map(R, N)
@@ -4123,9 +4114,7 @@ class LPDictionary(LPAbstractDictionary):
         r"""
         Return the basic variables of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -4148,9 +4137,7 @@ class LPDictionary(LPAbstractDictionary):
         - ``v`` -- a nonbasic variable of ``self``, can be given as a string, an
           actual variable, or an integer interpreted as the index of a variable
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -4173,9 +4160,7 @@ class LPDictionary(LPAbstractDictionary):
         r"""
         Return the constant terms of relations of ``self``.
 
-        OUTPUT:
-
-        - a vector.
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -4193,9 +4178,7 @@ class LPDictionary(LPAbstractDictionary):
         r"""
         Return non-basic variables of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -4213,9 +4196,7 @@ class LPDictionary(LPAbstractDictionary):
         r"""
         Return coefficients of the objective of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -4233,9 +4214,7 @@ class LPDictionary(LPAbstractDictionary):
         r"""
         Return the objective name of ``self``.
 
-        OUTPUT:
-
-        - a symbolic expression
+        OUTPUT: a symbolic expression
 
         EXAMPLES::
 
@@ -4254,9 +4233,7 @@ class LPDictionary(LPAbstractDictionary):
         Return the value of the objective at the
         :meth:`~LPAbstractDictionary.basic_solution` of ``self``.
 
-        OUTPUT:
-
-        - a number
+        OUTPUT: a number
 
         EXAMPLES::
 
@@ -4282,9 +4259,7 @@ class LPDictionary(LPAbstractDictionary):
         - ``v`` -- a basic variable of ``self``, can be given as a string, an
           actual variable, or an integer interpreted as the index of a variable
 
-        OUTPUT:
-
-        - a vector of coefficients of a basic variable
+        OUTPUT: a vector of coefficients of a basic variable
 
         EXAMPLES::
 
@@ -4381,11 +4356,9 @@ class LPRevisedDictionary(LPAbstractDictionary):
     - ``problem`` -- an :class:`LP problem in standard form
       <InteractiveLPProblemStandardForm>`
 
-    - ``basic_variables`` -- a list of basic variables or their indices
+    - ``basic_variables`` -- list of basic variables or their indices
 
-    OUTPUT:
-
-    - a :class:`revised dictionary for an LP problem <LPRevisedDictionary>`
+    OUTPUT: a :class:`revised dictionary for an LP problem <LPRevisedDictionary>`
 
     A revised dictionary encodes the same relations as a
     :class:`regular dictionary <LPDictionary>`, but stores only what is
@@ -4553,9 +4526,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return a LaTeX representation of ``self``.
 
-        OUTPUT:
-
-        - a string
+        OUTPUT: string
 
         TESTS::
 
@@ -4680,12 +4651,10 @@ class LPRevisedDictionary(LPAbstractDictionary):
 
         INPUT:
 
-        - ``direction`` -- a string specifying the type of the simplex method
+        - ``direction`` -- string specifying the type of the simplex method
           used, either "primal" or "dual"
 
-        OUTPUT:
-
-        - :class:`~sage.misc.html.HtmlFragment`.
+        OUTPUT: :class:`~sage.misc.html.HtmlFragment`
 
         TESTS::
 
@@ -4726,9 +4695,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
 
         - ``v`` -- a variable, its name, or its index
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -4762,9 +4729,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         Return the `A_N` matrix, constraint coefficients of
         non-basic variables.
 
-        OUTPUT:
-
-        - a matrix
+        OUTPUT: a matrix
 
         EXAMPLES::
 
@@ -4785,9 +4750,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         Return the `B` matrix, i.e. constraint coefficients of
         basic variables.
 
-        OUTPUT:
-
-        - a matrix
+        OUTPUT: a matrix
 
         EXAMPLES::
 
@@ -4810,9 +4773,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         This inverse matrix is stored and computed during dictionary update in
         a more efficient way than generic inversion.
 
-        OUTPUT:
-
-        - a matrix
+        OUTPUT: a matrix
 
         EXAMPLES::
 
@@ -4835,9 +4796,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return the eta matrix between ``self`` and the next dictionary.
 
-        OUTPUT:
-
-        - a matrix
+        OUTPUT: a matrix
 
         If `B_{\mathrm{old}}` is the current matrix `B` and `B_{\mathrm{new}}`
         is the `B` matrix of the next dictionary (after the update step), then
@@ -4875,9 +4834,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         This inverse matrix is computed in a more efficient way than generic
         inversion.
 
-        OUTPUT:
-
-        - a matrix
+        OUTPUT: a matrix
 
         EXAMPLES::
 
@@ -4914,18 +4871,16 @@ class LPRevisedDictionary(LPAbstractDictionary):
 
         INPUT:
 
-        - ``nonbasic_coefficients``-- a list of the coefficients for the
+        - ``nonbasic_coefficients`` -- list of the coefficients for the
           new row (with which nonbasic variables are subtracted in the relation
           for the new basic variable)
 
-        - ``constant``--  the constant term for the new row
+        - ``constant`` -- the constant term for the new row
 
-        - ``basic_variable``-- (default: depends on :func:`style`)
+        - ``basic_variable`` -- (default: depends on :func:`style`)
           a string giving the name of the basic variable of the new row
 
-        OUTPUT:
-
-        - a :class:`revised dictionary <LPRevisedDictionary>`
+        OUTPUT: a :class:`revised dictionary <LPRevisedDictionary>`
 
         EXAMPLES::
 
@@ -5003,9 +4958,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
             indices of variables which are parts of their names. (They will for
             the default indexed names.)
 
-        OUTPUT:
-
-        - a list.
+        OUTPUT: list
 
         EXAMPLES::
 
@@ -5024,9 +4977,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return the basic variables of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -5044,9 +4995,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return the `c_B` vector, objective coefficients of basic variables.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -5074,9 +5023,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return the `c_N` vector, objective coefficients of non-basic variables.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -5107,9 +5054,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         - ``v`` -- a nonbasic variable of ``self``, can be given as a string, an
           actual variable, or an integer interpreted as the index of a variable
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -5131,9 +5076,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return constant terms in the relations of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -5151,9 +5094,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return a regular LP dictionary matching ``self``.
 
-        OUTPUT:
-
-        - an :class:`LP dictionary <LPDictionary>`
+        OUTPUT: an :class:`LP dictionary <LPDictionary>`
 
         EXAMPLES::
 
@@ -5189,9 +5130,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
             of variables which are parts of their names. (They will for the
             default indexed names.)
 
-        OUTPUT:
-
-        - a list
+        OUTPUT: list
 
         EXAMPLES::
 
@@ -5210,9 +5149,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return non-basic variables of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 
@@ -5231,9 +5168,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return coefficients of the objective of ``self``.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         These are coefficients of non-basic variables when basic variables are
         eliminated.
@@ -5254,9 +5189,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return the objective name of ``self``.
 
-        OUTPUT:
-
-        - a symbolic expression
+        OUTPUT: a symbolic expression
 
         EXAMPLES::
 
@@ -5274,9 +5207,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return the value of the objective at the basic solution of ``self``.
 
-        OUTPUT:
-
-        - a number
+        OUTPUT: a number
 
         EXAMPLES::
 
@@ -5295,9 +5226,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         r"""
         Return the original problem.
 
-        OUTPUT:
-
-        - an :class:`LP problem in standard form <InteractiveLPProblemStandardForm>`
+        OUTPUT: an :class:`LP problem in standard form <InteractiveLPProblemStandardForm>`
 
         EXAMPLES::
 
@@ -5323,9 +5252,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         - ``v`` -- a basic variable of ``self``, can be given as a string, an
           actual variable, or an integer interpreted as the index of a variable
 
-        OUTPUT:
-
-        - a vector of coefficients of a basic variable
+        OUTPUT: a vector of coefficients of a basic variable
 
         EXAMPLES::
 
@@ -5387,9 +5314,7 @@ class LPRevisedDictionary(LPAbstractDictionary):
         Return the `y` vector, the product of :meth:`c_B` and
         :meth:`B_inverse`.
 
-        OUTPUT:
-
-        - a vector
+        OUTPUT: a vector
 
         EXAMPLES::
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Koszul Complexes
 """
@@ -53,7 +54,7 @@ class KoszulComplex(ChainComplex_class, UniqueRepresentation):
     INPUT:
 
     - ``R`` -- the base ring
-    - ``elements`` -- a tuple of elements of ``R``
+    - ``elements`` -- tuple of elements of `R`
 
     EXAMPLES::
 

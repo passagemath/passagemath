@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-repl
 # sage.doctest: needs sage.combinat sage.graphs sage.groups
 r"""
 This file contains doctests for the Chapter "k-Schur function primer"
@@ -11,7 +12,6 @@ NEEDS TO BE A ONE-YEAR DEPRECATION PERIOD. ALSO, PLEASE IN THIS CASE
 CONTACT Anne Schilling (anne@math.ucdavis.edu) AND Mike Zabrocki
 (zabrocki@mathstat.yorku.ca) REGARDING THE CHANGES!
 """
-
 """
 Sage example in ./kschurnotes/notes-mike-anne.tex, line 198::
 

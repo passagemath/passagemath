@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-linbox
 """
 Functions for changing the base ring of matrices quickly
 """
@@ -15,10 +16,10 @@ def integer_to_real_double_dense(Matrix_integer_dense A):
     real double entries.
 
     INPUT:
-        A -- a dense matrix over the integers
 
-    OUTPUT:
-        -- a dense real double matrix
+    - ``A`` -- a dense matrix over the integers
+
+    OUTPUT: a dense real double matrix
 
     EXAMPLES::
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.rings.real_interval_field sage.rings.real_mpfr
 """
 Lazy real and complex numbers
@@ -110,7 +111,6 @@ cdef class LazyField(Field):
 
             sage: RLF # indirect doctest
             Real Lazy Field
-
         """
         Field.__init__(self,base or self, names=names, normalize=normalize, category=category)
 
@@ -179,7 +179,10 @@ cdef class LazyField(Field):
                 from sage.sets.pythonclass import Set_PythonType
                 return LazyWrapperMorphism(Set_PythonType(R), self)
         elif R.is_exact():
-            ivf = self.interval_field()
+            try:
+                ivf = self.interval_field()
+            except ImportError:
+                return None
             mor = ivf.coerce_map_from(R)
             # Indirect coercions might lead to loops both in the coercion
             # discovery algorithm and when trying to convert LazyWrappers,
@@ -193,7 +196,7 @@ cdef class LazyField(Field):
 
     def algebraic_closure(self):
         """
-        Returns the algebraic closure of ``self``, i.e., the complex lazy
+        Return the algebraic closure of ``self``, i.e., the complex lazy
         field.
 
         EXAMPLES::
@@ -258,7 +261,7 @@ class RealLazyField_class(LazyField):
     """
     def interval_field(self, prec=None):
         """
-        Returns the interval field that represents the same mathematical
+        Return the interval field that represents the same mathematical
         field as ``self``.
 
         EXAMPLES::
@@ -276,7 +279,7 @@ class RealLazyField_class(LazyField):
 
     def construction(self):
         """
-        Returns the functorial construction of ``self``, namely, the
+        Return the functorial construction of ``self``, namely, the
         completion of the rationals at infinity to infinite precision.
 
         EXAMPLES::
@@ -354,6 +357,7 @@ class RealLazyField_class(LazyField):
 
 RLF = RealLazyField_class()
 
+
 def RealLazyField():
     """
     Return the lazy real field.
@@ -408,7 +412,7 @@ class ComplexLazyField_class(LazyField):
 
     def interval_field(self, prec=None):
         """
-        Returns the interval field that represents the same mathematical
+        Return the interval field that represents the same mathematical
         field as ``self``.
 
         EXAMPLES::
@@ -446,7 +450,7 @@ class ComplexLazyField_class(LazyField):
 
     def construction(self):
         """
-        Returns the functorial construction of ``self``, namely,
+        Return the functorial construction of ``self``, namely,
         algebraic closure of the real lazy field.
 
         EXAMPLES::
@@ -509,9 +513,10 @@ class ComplexLazyField_class(LazyField):
 
 CLF = ComplexLazyField_class()
 
+
 def ComplexLazyField():
     """
-    Returns the lazy complex field.
+    Return the lazy complex field.
 
     EXAMPLES:
 
@@ -521,7 +526,6 @@ def ComplexLazyField():
         True
     """
     return CLF
-
 
 
 cdef int get_new_prec(R, int depth) except -1:
@@ -744,7 +748,7 @@ cdef class LazyFieldElement(FieldElement):
 
     def approx(self):
         """
-        Returns ``self`` as an element of an interval field.
+        Return ``self`` as an element of an interval field.
 
         EXAMPLES::
 
@@ -858,13 +862,12 @@ cdef class LazyFieldElement(FieldElement):
 
     def __dir__(self):
         """
-        Adds the named_unops to ``__dir__`` so that tab completion works.
+        Add the named_unops to ``__dir__`` so that tab completion works.
 
         TESTS::
 
             sage: "log" in RLF(sqrt(8)).__dir__()                                       # needs sage.symbolic
             True
-
         """
         return FieldElement.__dir__(self) + named_unops
 
@@ -889,7 +892,7 @@ cdef class LazyFieldElement(FieldElement):
 
     def continued_fraction(self):
         r"""
-        Return the continued fraction of self.
+        Return the continued fraction of ``self``.
 
         EXAMPLES::
 
@@ -917,11 +920,12 @@ def make_element(parent, *args):
     """
     return parent(*args)
 
+
 cdef class LazyWrapper(LazyFieldElement):
 
     cpdef int depth(self) noexcept:
         """
-        Returns the depth of ``self`` as an expression, which is always 0.
+        Return the depth of ``self`` as an expression, which is always 0.
 
         EXAMPLES::
 
@@ -944,7 +948,12 @@ cdef class LazyWrapper(LazyFieldElement):
         FieldElement.__init__(self, parent)
         self._value = value
         if check:
-            self._parent.interval_field()(value)
+            try:
+                ivf = self._parent.interval_field()
+            except ImportError:
+                pass
+            else:
+                ivf(value)
 
     def __neg__(self):
         """
@@ -1047,7 +1056,7 @@ cdef class LazyWrapper(LazyFieldElement):
 
     def continued_fraction(self):
         r"""
-        Return the continued fraction of self.
+        Return the continued fraction of ``self``.
 
         EXAMPLES::
 
@@ -1202,7 +1211,7 @@ cdef class LazyUnop(LazyFieldElement):
 
     def __init__(self, LazyField parent, arg, op):
         """
-        Represents a unevaluated single function of one variable.
+        Represent a unevaluated single function of one variable.
 
         EXAMPLES::
 
@@ -1367,7 +1376,7 @@ cdef class LazyNamedUnop(LazyUnop):
 
     def approx(self):
         """
-        Does something reasonable with functions that are not defined on the
+        Do something reasonable with functions that are not defined on the
         interval fields.
 
         TESTS::

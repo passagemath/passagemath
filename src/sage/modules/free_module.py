@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Free modules
 
@@ -157,7 +158,6 @@ AUTHORS:
 - Simon King (2010-12): (:issue:`8800`) fixed a bug in ``denominator()``.
 
 - Simon King (2010-12), Peter Bruin (June 2014): (:issue:`10513`) new coercion model and category framework.
-
 """
 
 ###########################################################################
@@ -309,7 +309,7 @@ FreeModuleFactory_with_standard_basis = FreeModuleFactory("FreeModule")
 def FreeModule(base_ring, rank_or_basis_keys=None, sparse=False, inner_product_matrix=None, *,
                with_basis='standard', rank=None, basis_keys=None, **args):
     r"""
-    Create a free module over the given commutative ``base_ring``
+    Create a free module over the given commutative ``base_ring``.
 
     ``FreeModule`` can be called with the following positional arguments:
 
@@ -319,22 +319,22 @@ def FreeModule(base_ring, rank_or_basis_keys=None, sparse=False, inner_product_m
 
     INPUT:
 
-    -  ``base_ring`` -- a commutative ring
+    - ``base_ring`` -- a commutative ring
 
-    -  ``rank`` -- a nonnegative integer
+    - ``rank`` -- nonnegative integer
 
-    -  ``basis_keys`` -- a finite or enumerated family of arbitrary objects
+    - ``basis_keys`` -- a finite or enumerated family of arbitrary objects
 
-    -  ``sparse`` -- boolean (default ``False``)
+    - ``sparse`` -- boolean (default: ``False``)
 
-    -  ``inner_product_matrix`` -- the inner product matrix (default ``None``)
+    - ``inner_product_matrix`` -- the inner product matrix (default: ``None``)
 
-    -  ``with_basis`` -- either ``"standard"`` (the default), in which case
-       a free module with the standard basis as the distinguished basis is created;
-       or ``None``, in which case a free module without distinguished basis is
-       created.
+    - ``with_basis`` -- either ``'standard'`` (the default), in which case
+      a free module with the standard basis as the distinguished basis is created;
+      or ``None``, in which case a free module without distinguished basis is
+      created.
 
-    -  further options may be accepted by various implementation classes
+    - further options may be accepted by various implementation classes
 
     OUTPUT: a free module
 
@@ -342,9 +342,9 @@ def FreeModule(base_ring, rank_or_basis_keys=None, sparse=False, inner_product_m
     depending on the input.  Not all combinations of options are
     implemented.
 
-    -  If the parameter ``basis_keys`` is provided, it must be a finite
-       or enumerated family of objects, and an instance of
-       :class:`CombinatorialFreeModule` is created.
+    - If the parameter ``basis_keys`` is provided, it must be a finite
+      or enumerated family of objects, and an instance of
+      :class:`CombinatorialFreeModule` is created.
 
        EXAMPLES::
 
@@ -356,9 +356,9 @@ def FreeModule(base_ring, rank_or_basis_keys=None, sparse=False, inner_product_m
        for more examples and details, including its :class:`UniqueRepresentation`
        semantics.
 
-    -  If the parameter ``with_basis`` is set to ``None``, then a free module
-       of the given ``rank`` without distinguished basis is created.  It is
-       represented by an instance of :class:`FiniteRankFreeModule`.
+    - If the parameter ``with_basis`` is set to ``None``, then a free module
+      of the given ``rank`` without distinguished basis is created.  It is
+      represented by an instance of :class:`FiniteRankFreeModule`.
 
        EXAMPLES::
 
@@ -368,20 +368,19 @@ def FreeModule(base_ring, rank_or_basis_keys=None, sparse=False, inner_product_m
        See the documentation of :class:`FiniteRankFreeModule` for more
        options, examples, and details.
 
-    -  If ``rank`` is provided and the option ``with_basis`` is left at its
-       default value, ``"standard"``, then a free ambient module with
-       distinguished standard basis indexed by ``range(rank)`` is created.
-       There is only one dense and one sparse free ambient module of
-       given ``rank`` over ``base_ring``.
+    - If ``rank`` is provided and the option ``with_basis`` is left at its
+      default value, ``'standard'``, then a free ambient module with
+      distinguished standard basis indexed by ``range(rank)`` is created.
+      There is only one dense and one sparse free ambient module of
+      given ``rank`` over ``base_ring``.
 
-       EXAMPLES::
+      EXAMPLES::
 
-           sage: FreeModule(Integers(8), 10)
-           Ambient free module of rank 10 over Ring of integers modulo 8
+          sage: FreeModule(Integers(8), 10)
+          Ambient free module of rank 10 over Ring of integers modulo 8
 
-       The remainder of this documentation discusses this case of
-       free ambient modules.
-
+      The remainder of this documentation discusses this case of
+      free ambient modules.
 
     EXAMPLES:
 
@@ -485,7 +484,6 @@ def FreeModule(base_ring, rank_or_basis_keys=None, sparse=False, inner_product_m
 
         Refactor modules such that it only counts what category the base
         ring belongs to, but not what is its Python class.
-
 
     EXAMPLES::
 
@@ -599,7 +597,7 @@ def VectorSpace(K, dimension_or_basis_keys=None, sparse=False, inner_product_mat
         (0, 0, 1)
         ]
 
-    The base must be a field or a :class:`TypeError` is raised.
+    The base must be a field or a :exc:`TypeError` is raised.
 
     ::
 
@@ -623,16 +621,16 @@ def span(gens, base_ring=None, check=True, already_echelonized=False):
 
     INPUT:
 
-    - ``gens`` - a list of either vectors or lists of ring elements
+    - ``gens`` -- list of either vectors or lists of ring elements
       used to generate the span
 
-    - ``base_ring`` - default: ``None`` - a principal ideal domain
+    - ``base_ring`` -- (default: ``None``) a principal ideal domain
       for the ring of scalars
 
-    - ``check`` - default: ``True`` - passed to the ``span()`` method
+    - ``check`` -- (default: ``True``) passed to the ``span()`` method
       of the ambient module
 
-    - ``already_echelonized`` - default: ``False`` - set to ``True``
+    - ``already_echelonized`` -- (default: ``False``) set to ``True``
       if the vectors form the rows of a matrix in echelon form, in
       order to skip the computation of an echelonized basis for the
       span.
@@ -784,7 +782,7 @@ def span(gens, base_ring=None, check=True, already_echelonized=False):
         return FreeModule(R, 0)
     else:
         x = gens[0]
-        if free_module_element.is_FreeModuleElement(x):
+        if isinstance(x, free_module_element.FreeModuleElement):
             M = x.parent()
         else:
             try:
@@ -846,18 +844,24 @@ def basis_seq(V, vecs):
 
 def is_FreeModule(M):
     """
-    Return True if M inherits from FreeModule_generic.
+    Return ``True`` if M inherits from ``FreeModule_generic``.
 
     EXAMPLES::
 
         sage: from sage.modules.free_module import is_FreeModule
         sage: V = ZZ^3
         sage: is_FreeModule(V)
+        doctest:warning...
+        DeprecationWarning: the function is_FreeModule is deprecated;
+        use 'isinstance(..., FreeModule_generic)' instead
+        See https://github.com/sagemath/sage/issues/37924 for details.
         True
         sage: W = V.span([ V.random_element() for i in range(2) ])
         sage: is_FreeModule(W)
         True
     """
+    from sage.misc.superseded import deprecation
+    deprecation(37924, "the function is_FreeModule is deprecated; use 'isinstance(..., FreeModule_generic)' instead")
     return isinstance(M, FreeModule_generic)
 
 
@@ -877,7 +881,7 @@ class Module_free_ambient(Module):
 
     - ``base_ring`` -- a commutative ring
 
-    - ``degree`` -- a non-negative integer; degree of the ambient free module
+    - ``degree`` -- nonnegative integer; degree of the ambient free module
 
     - ``sparse`` -- boolean (default: ``False``)
 
@@ -1033,9 +1037,7 @@ class Module_free_ambient(Module):
 
         See :class:`TestSuite` for a typical use case.
 
-        OUTPUT:
-
-        An iterator.
+        OUTPUT: an iterator
 
         EXAMPLES::
 
@@ -1605,11 +1607,11 @@ class Module_free_ambient(Module):
 
         INPUT:
 
-        - ``gens`` -- a list of vectors
+        - ``gens`` -- list of vectors
 
         - ``base_ring`` -- (optional) a ring
 
-        - ``check`` -- boolean (default: ``True``): whether or not to
+        - ``check`` -- boolean (default: ``True``); whether or not to
           coerce entries of gens into base field
 
         - ``already_echelonized`` -- boolean (default: ``False``);
@@ -1733,9 +1735,9 @@ class Module_free_ambient(Module):
 
         INPUT:
 
-        - ``gens`` -- a list of free module elements or a free module
+        - ``gens`` -- list of free module elements or a free module
 
-        - ``check`` -- (default: ``True``) whether or not to verify
+        - ``check`` -- boolean (default: ``True``); whether or not to verify
           that the gens are in ``self``
 
         OUTPUT:
@@ -1764,7 +1766,7 @@ class Module_free_ambient(Module):
             [3 3 0]
 
         We try to create a submodule that is not really a submodule,
-        which results in an :class:`ArithmeticError` exception::
+        which results in an :exc:`ArithmeticError` exception::
 
             sage: W.submodule([B[0] - B[1]])
             Traceback (most recent call last):
@@ -1816,7 +1818,7 @@ class Module_free_ambient(Module):
         - ``sub`` -- a submodule of ``self`` or something that can
           be turned into one via ``self.submodule(sub)``
 
-        - ``check`` -- (default: ``True``) whether or not to check that
+        - ``check`` -- boolean (default: ``True``); whether or not to check that
           ``sub`` is a submodule
 
         EXAMPLES::
@@ -1937,9 +1939,9 @@ class FreeModule_generic(Module_free_ambient):
 
     - ``base_ring`` -- a commutative ring
 
-    - ``rank`` -- a non-negative integer
+    - ``rank`` -- nonnegative integer
 
-    - ``degree`` -- a non-negative integer
+    - ``degree`` -- nonnegative integer
 
     - ``sparse`` -- boolean (default: ``False``)
 
@@ -2009,7 +2011,6 @@ class FreeModule_generic(Module_free_ambient):
             <class 'sage.modules.free_module_element.FreeModuleElement_generic_sparse'>
             sage: N.element_class
             <class 'sage.modules.free_module_element.FreeModuleElement_generic_sparse'>
-
         """
         if base_ring not in CommutativeRings():
             warn("You are constructing a free module\n"
@@ -2036,7 +2037,7 @@ class FreeModule_generic(Module_free_ambient):
 
     def construction(self):
         """
-        The construction functor and base ring for self.
+        The construction functor and base ring for ``self``.
 
         EXAMPLES::
 
@@ -2099,9 +2100,9 @@ class FreeModule_generic(Module_free_ambient):
 
     def _dense_module(self):
         """
-        Creates a dense module with the same defining data as self.
+        Create a dense module with the same defining data as ``self``.
 
-        N.B. This function is for internal use only! See dense_module for
+        N.B. This function is for internal use only! See ``dense_module`` for
         use.
 
         EXAMPLES::
@@ -2156,9 +2157,9 @@ class FreeModule_generic(Module_free_ambient):
 
     def _sparse_module(self):
         """
-        Creates a sparse module with the same defining data as self.
+        Create a sparse module with the same defining data as ``self``.
 
-        N.B. This function is for internal use only! See sparse_module for
+        N.B. This function is for internal use only! See ``sparse_module`` for
         use.
 
         EXAMPLES::
@@ -2178,9 +2179,9 @@ class FreeModule_generic(Module_free_ambient):
         The ``coerce`` and ``copy`` arguments are
         passed on to the underlying element constructor. If
         ``check`` is ``True``, confirm that the
-        element specified by x does in fact lie in self.
+        element specified by x does in fact lie in ``self``.
 
-        .. note::
+        .. NOTE::
 
            In the case of an inexact base ring (i.e. RDF), we don't
            verify that the element is in the subspace, even when
@@ -2477,7 +2478,7 @@ class FreeModule_generic(Module_free_ambient):
 
         if R in InfiniteEnumeratedSets():
             # This makes iter(ZZ^n) produce vectors in a "natural" order,
-            # rather than only vectors with the first component non-zero.
+            # rather than only vectors with the first component nonzero.
             # Algorithm: Initial version which ordered by max-norm due to
             # Aleksei Udovenko, adapted by Lorenz Panny to order by 1-norm
             # primarily and by max-norm secondarily.
@@ -2527,9 +2528,7 @@ class FreeModule_generic(Module_free_ambient):
         r"""
         Return the cardinality of the free module.
 
-        OUTPUT:
-
-        Either an integer or ``+Infinity``.
+        OUTPUT: either an integer or ``+Infinity``
 
         EXAMPLES::
 
@@ -2745,7 +2744,7 @@ class FreeModule_generic(Module_free_ambient):
             [  0   1  -3   0   0   0]
             [  0   0   0 1/2   4   2]
         """
-        if not is_FreeModule(other):
+        if not isinstance(other, FreeModule_generic):
             raise TypeError("other must be a free module")
         if other.base_ring() != self.base_ring():
             raise TypeError("base rings of self and other must be the same")
@@ -2753,25 +2752,24 @@ class FreeModule_generic(Module_free_ambient):
 
     def coordinates(self, v, check=True):
         """
-        Write `v` in terms of the basis for self.
+        Write `v` in terms of the basis for ``self``.
 
         INPUT:
 
         - ``v`` -- vector
 
-        - ``check`` -- boolean (default: ``True``); if ``True``, also verify that
-           `v` is really in ``self``.
+        - ``check`` -- boolean (default: ``True``); if ``True``, also verify
+          that `v` is really in ``self``
 
         OUTPUT: list
 
-        Returns a list `c` such that if `B` is the basis
-        for self, then
+        Returns a list `c` such that if `B` is the basis for ``self``, then
 
         .. MATH::
 
             \\sum c_i B_i = v.
 
-        If `v` is not in self, raise an :class:`ArithmeticError` exception.
+        If `v` is not in self, raise an :exc:`ArithmeticError` exception.
 
         EXAMPLES::
 
@@ -2785,14 +2783,14 @@ class FreeModule_generic(Module_free_ambient):
     def coordinate_vector(self, v, check=True):
         """
         Return the vector whose coefficients give `v` as a linear
-        combination of the basis for self.
+        combination of the basis for ``self``.
 
         INPUT:
 
         - ``v`` -- vector
 
         - ``check`` -- boolean (default: ``True``); if ``True``, also verify that
-           `v` is really in ``self``.
+          `v` is really in ``self``
 
         OUTPUT: list
 
@@ -2867,7 +2865,7 @@ class FreeModule_generic(Module_free_ambient):
             [ 0  1  1  0 -2  1 -1  1 -1 -2  2  0  0  0  0  0  0  0  0]
             [ 0  0  3  0 -3  2 -1  2 -1 -4  2 -1 -2  1  2  0  0 -1  1]
         """
-        if not is_FreeModule(V):
+        if not isinstance(V, FreeModule_generic):
             raise ValueError("V must be a free module")
         A = self.basis_matrix()
         A = A.matrix_from_columns(A.pivots()).transpose()
@@ -3007,9 +3005,9 @@ class FreeModule_generic(Module_free_ambient):
 
         INPUT:
 
-        - `i` -- an integer (default 0)
+        - ``i`` -- integer (default: 0)
 
-        OUTPUT: `i`-th basis vector for ``self``.
+        OUTPUT: `i`-th basis vector for ``self``
 
         EXAMPLES::
 
@@ -3092,20 +3090,20 @@ class FreeModule_generic(Module_free_ambient):
 
         EXAMPLES::
 
-            sage: W = ZZ^2; W.hom(matrix(1, [1, 2]), side="right")
+            sage: W = ZZ^2; W.hom(matrix(1, [1, 2]), side='right')
             Free module morphism defined as left-multiplication by the matrix
             [1 2]
             Domain: Ambient free module of rank 2 over the principal ideal domain Integer Ring
             Codomain: Ambient free module of rank 1 over the principal ideal domain Integer Ring
-            sage: V = QQ^2; V.hom(identity_matrix(2), side="right")
+            sage: V = QQ^2; V.hom(identity_matrix(2), side='right')
             Vector space morphism represented as left-multiplication by the matrix:
             [1 0]
             [0 1]
             Domain: Vector space of dimension 2 over Rational Field
             Codomain: Vector space of dimension 2 over Rational Field
         """
-        from sage.structure.element import is_Matrix
-        if codomain is None and is_Matrix(im_gens):
+        from sage.structure.element import Matrix
+        if codomain is None and isinstance(im_gens, Matrix):
             side = kwds.get("side", "left")
             n = im_gens.nrows() if side == "right" else im_gens.ncols()
             from sage.categories.pushout import pushout
@@ -3162,7 +3160,7 @@ class FreeModule_generic(Module_free_ambient):
 
     def is_ambient(self):
         """
-        Returns False since this is not an ambient free module.
+        Return ``False`` since this is not an ambient free module.
 
         EXAMPLES::
 
@@ -3188,7 +3186,7 @@ class FreeModule_generic(Module_free_ambient):
     def is_dense(self):
         """
         Return ``True`` if the underlying representation of
-        this module uses dense vectors, and False otherwise.
+        this module uses dense vectors, and ``False`` otherwise.
 
         EXAMPLES::
 
@@ -3216,7 +3214,7 @@ class FreeModule_generic(Module_free_ambient):
 
     def is_finite(self):
         """
-        Returns True if the underlying set of this free module is finite.
+        Return ``True`` if the underlying set of this free module is finite.
 
         EXAMPLES::
 
@@ -3231,7 +3229,7 @@ class FreeModule_generic(Module_free_ambient):
 
     def ngens(self):
         """
-        Returns the number of basis elements of this free module.
+        Return the number of basis elements of this free module.
 
         EXAMPLES::
 
@@ -3250,7 +3248,7 @@ class FreeModule_generic(Module_free_ambient):
 
     def nonembedded_free_module(self):
         """
-        Returns an ambient free module that is isomorphic to this free
+        Return an ambient free module that is isomorphic to this free
         module.
 
         Thus if this free module is of rank `n` over a ring
@@ -3266,16 +3264,16 @@ class FreeModule_generic(Module_free_ambient):
 
     def random_element(self, prob=1.0, *args, **kwds):
         """
-        Returns a random element of self.
+        Return a random element of ``self``.
 
         INPUT:
 
-        -- ``prob`` - float. Each coefficient will be set to zero with
-           probability `1-prob`. Otherwise coefficients will be chosen
-           randomly from base ring (and may be zero).
+        - ``prob`` -- float. Each coefficient will be set to zero with
+          probability `1-prob`. Otherwise coefficients will be chosen
+          randomly from base ring (and may be zero).
 
-        -- ``*args, **kwds`` - passed on to ``random_element()`` function
-           of base ring.
+        - ``*args``, ``**kwds`` -- passed on to the :func:`random_element`
+          function of the base ring
 
         EXAMPLES::
 
@@ -3324,7 +3322,7 @@ class FreeModule_generic(Module_free_ambient):
     def __bool__(self):
         """
         Return ``True`` if and only if the rank of this module is
-        non-zero. In other words, this returns ``False`` for the zero
+        nonzero. In other words, this returns ``False`` for the zero
         module and ``True`` otherwise (apart from the exceptional case
         where the base ring is the zero ring).
 
@@ -3616,7 +3614,6 @@ class FreeModule_generic(Module_free_ambient):
              over Finite Field of size 2
             Basis matrix:
             [1 1]
-
         """
         B = self.basis_matrix()
         B = other * B if switch_sides else B * other
@@ -3664,8 +3661,8 @@ class FreeModule_generic_domain(FreeModule_generic):
 
     def __add__(self, other):
         r"""
-        Return the sum of ``self`` and other, where both ``self`` and ``other`` must be
-        submodules of the ambient vector space.
+        Return the sum of ``self`` and ``other``, where both ``self`` and
+        ``other`` must be submodules of the ambient vector space.
 
         EXAMPLES:
 
@@ -3818,7 +3815,7 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
             return sage.rings.infinity.infinity
 
         a = sage.matrix.matrix_space.MatrixSpace(self.base_field(), self.rank())(C).determinant()
-        if sage.rings.integer_ring.is_IntegerRing(self.base_ring()):
+        if isinstance(self.base_ring(), sage.rings.integer_ring.IntegerRing_class):
             return a.abs()
         elif isinstance(self.base_ring, sage.rings.abc.Order):
             return self.base_ring().ideal(a).norm()
@@ -4033,7 +4030,7 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
     def saturation(self):
         r"""
         Return the saturated submodule of `R^n` that spans the same
-        vector space as self.
+        vector space as ``self``.
 
         EXAMPLES:
 
@@ -4144,7 +4141,7 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
             ...
             ValueError: The given basis vectors must be linearly independent.
         """
-        if is_FreeModule(basis):
+        if isinstance(basis, FreeModule_generic):
             basis = basis.gens()
         if base_ring is None or base_ring == self.base_ring():
             try:
@@ -4176,19 +4173,17 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
 
     def submodule_with_basis(self, basis, check=True, already_echelonized=False):
         r"""
-        Create the R-submodule of the ambient vector space with given
-        basis, where R is the base ring of self.
+        Create the `R`-submodule of the ambient vector space with given
+        basis, where `R` is the base ring of ``self``.
 
         INPUT:
 
-        - ``basis`` -- a list of linearly independent vectors
+        - ``basis`` -- list of linearly independent vectors
 
         - ``check`` -- whether or not to verify that each gen is in
-           the ambient vector space
+          the ambient vector space
 
-        OUTPUT:
-
-        - ``FreeModule`` -- the `R`-submodule with given basis
+        OUTPUT: ``FreeModule``; the `R`-submodule with given basis
 
         EXAMPLES:
 
@@ -4255,12 +4250,10 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
 
         INPUT:
 
+        - ``gens`` -- list of vector in ``self``
 
-        -  ``gens`` - a list of vector in self
-
-        -  ``check`` - whether or not to verify that each gen
-           is in the ambient vector space
-
+        - ``check`` -- whether or not to verify that each gen
+          is in the ambient vector space
 
         OUTPUT: a vector subspace
 
@@ -4306,7 +4299,7 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
             Basis matrix:
             [  1 3/2   2]
         """
-        if is_FreeModule(gens):
+        if isinstance(gens, FreeModule_generic):
             gens = gens.gens()
         return FreeModule_submodule_field(self.ambient_vector_space(), gens, check=check)
 
@@ -4317,10 +4310,10 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
 
         INPUT:
 
-        - ``basis`` -- a list of linearly independent vectors
+        - ``basis`` -- list of linearly independent vectors
 
         - ``check`` -- whether or not to verify that each gen is in
-           the ambient vector space
+          the ambient vector space
 
         OUTPUT: a vector subspace with user-specified basis
 
@@ -4346,7 +4339,7 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
         - ``sub`` -- a submodule of ``self``, or something that can
           be turned into one via ``self.submodule(sub)``
 
-        - ``check`` -- (default: ``True``) whether or not to check
+        - ``check`` -- boolean (default: ``True``); whether or not to check
           that ``sub`` is a submodule
 
         - further named arguments, that are passed to the constructor
@@ -4360,7 +4353,7 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
         """
         # Calling is_subspace may be way too slow and repeat work done below.
         # It will be very desirable to somehow do this step better.
-        if check and (not is_FreeModule(sub) or not sub.is_submodule(self)):
+        if check and (not isinstance(sub, FreeModule_generic) or not sub.is_submodule(self)):
             try:
                 sub = self.submodule(sub)
             except (TypeError, ArithmeticError):
@@ -4378,7 +4371,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
     """
     def __init__(self, base_field, dimension, degree, sparse=False, category=None):
         """
-        Creates a vector space over a field.
+        Create a vector space over a field.
 
         EXAMPLES::
 
@@ -4401,16 +4394,16 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
     def _Hom_(self, Y, category):
         r"""
-        Returns a homspace whose morphisms have this vector space as domain.
+        Return a homspace whose morphisms have this vector space as domain.
 
         This is called by the general methods such as
         :meth:`sage.structure.parent.Parent.Hom`.
 
         INPUT:
 
-        - ``Y`` - a free module (or vector space) that will
+        - ``Y`` -- a free module (or vector space) that will
           be the codomain of the morphisms in returned homspace
-        - ``category`` - the category for the homspace
+        - ``category`` -- the category for the homspace
 
         OUTPUT:
 
@@ -4496,7 +4489,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
     def __add__(self, other):
         """
-        Return the sum of ``self`` and other.
+        Return the sum of ``self`` and ``other``.
 
         EXAMPLES::
 
@@ -4538,8 +4531,8 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
     def intersection(self, other):
         """
-        Return the intersection of ``self`` and other, which must be
-        R-submodules of a common ambient vector space.
+        Return the intersection of ``self`` and ``other``, which must be
+        `R`-submodules of a common ambient vector space.
 
         EXAMPLES::
 
@@ -4636,7 +4629,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
     def is_subspace(self, other):
         """
-        True if this vector space is a subspace of other.
+        ``True`` if this vector space is a subspace of ``other``.
 
         EXAMPLES::
 
@@ -4660,19 +4653,17 @@ class FreeModule_generic_field(FreeModule_generic_pid):
         field of ``self`` or user specified base_ring.
 
         Note that this span is a subspace of the ambient vector space, but
-        need not be a subspace of self.
+        need not be a subspace of ``self``.
 
         INPUT:
 
+        - ``basis`` -- list of vectors
 
-        -  ``basis`` - list of vectors
+        - ``check`` -- boolean (default: ``True``); whether or not to
+          coerce entries of gens into base field
 
-        -  ``check`` - boolean (default: ``True``): whether or not to
-           coerce entries of gens into base field
-
-        -  ``already_echelonized`` - boolean (default: ``False``):
-           set this if you know the gens are already in echelon form
-
+        - ``already_echelonized`` -- boolean (default: ``False``);
+          set this if you know the gens are already in echelon form
 
         EXAMPLES::
 
@@ -4688,14 +4679,14 @@ class FreeModule_generic_field(FreeModule_generic_pid):
             [3 3 0]
 
         The basis vectors must be linearly independent or a
-        :class:`ValueError` exception is raised::
+        :exc:`ValueError` exception is raised::
 
             sage: W.span_of_basis([[2,2,2], [3,3,3]])
             Traceback (most recent call last):
             ...
             ValueError: The given basis vectors must be linearly independent.
         """
-        if is_FreeModule(basis):
+        if isinstance(basis, FreeModule_generic):
             basis = basis.gens()
         if base_ring is None:
             return FreeModule_submodule_with_basis_field(
@@ -4717,13 +4708,13 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
         INPUT:
 
-        -  ``gens`` - list of vectors
+        - ``gens`` -- list of vectors
 
-        -  ``check`` - boolean (default: ``True``) verify that gens
-           are all in ``self``.
+        - ``check`` -- boolean (default: ``True``); verify that gens
+          are all in ``self``
 
-        -  ``already_echelonized`` - boolean (default: ``False``) set
-           to True if you know the gens are in Echelon form.
+        - ``already_echelonized`` -- boolean (default: ``False``); set
+          to ``True`` if you know the gens are in Echelon form
 
         EXAMPLES:
 
@@ -4747,7 +4738,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
             [1 1 0]
 
         With ``check=True`` (the default) the mistake is correctly
-        detected and reported with an :class:`ArithmeticError` exception::
+        detected and reported with an :exc:`ArithmeticError` exception::
 
             sage: W.subspace([[1,1,0]], check=True)
             Traceback (most recent call last):
@@ -4762,7 +4753,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
         INPUT:
 
-        - ``dim`` - int, dimension of subspaces to be generated
+        - ``dim`` -- integer; dimension of subspaces to be generated
 
         EXAMPLES::
 
@@ -4919,8 +4910,8 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
     def vector_space(self, base_field=None):
         """
-        Return the vector space associated to self. Since ``self`` is a vector
-        space this function simply returns self, unless the base field is
+        Return the vector space associated to ``self``. Since ``self`` is a vector
+        space this function simply returns ``self``, unless the base field is
         different.
 
         EXAMPLES::
@@ -4940,7 +4931,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
     def zero_submodule(self):
         """
-        Return the zero submodule of self.
+        Return the zero submodule of ``self``.
 
         EXAMPLES::
 
@@ -4953,7 +4944,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
     def zero_subspace(self):
         """
-        Return the zero subspace of self.
+        Return the zero subspace of ``self``.
 
         EXAMPLES::
 
@@ -4966,19 +4957,21 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
     def linear_dependence(self, vectors, zeros='left', check=True):
         r"""
-        Returns a list of vectors giving relations of linear dependence for the input list of vectors.
+        Return a list of vectors giving relations of linear dependence for the
+        input list of vectors.
+
         Can be used to check linear independence of a set of vectors.
 
         INPUT:
 
-        - ``vectors`` -- A list of vectors, all from the same vector
-          space.
+        - ``vectors`` -- list of vectors; all from the same vector
+          space
 
-        - ``zeros`` -- default: ``'left'`` - ``'left'`` or ``'right'``
+        - ``zeros`` -- (default: ``'left'``) ``'left'`` or ``'right'``
           as a general preference for where zeros are located in the
           returned coefficients
 
-        - ``check`` -- default: ``True`` - if ``True`` each item in
+        - ``check`` -- (default: ``True``) if ``True`` each item in
           the list ``vectors`` is checked for membership in ``self``.
           Set to ``False`` if you can be certain the vectors come from
           the vector space.
@@ -4995,7 +4988,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
         list being empty, so this provides a test - see the examples below.
 
         The returned vectors are always independent, and with ``zeros`` set to
-        ``'left'`` they have 1's in their first non-zero entries and a qualitative
+        ``'left'`` they have 1s in their first nonzero entries and a qualitative
         disposition to having zeros in the low-index entries.  With ``zeros`` set
         to ``'right'`` the situation is reversed with a qualitative disposition
         for zeros in the high-index entries.
@@ -5162,7 +5155,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
         - ``sub`` -- a submodule of ``self``, or something that can
           be turned into one via ``self.submodule(sub)``
 
-        - ``check`` -- (default: ``True``) whether or not to check
+        - ``check`` -- boolean (default: ``True``); whether or not to check
           that ``sub`` is a submodule
 
         EXAMPLES::
@@ -5189,9 +5182,9 @@ class FreeModule_generic_field(FreeModule_generic_pid):
         """
         # Calling is_submodule may be way too slow and repeat work done below.
         # It will be very desirable to somehow do this step better.
-        if is_FreeModule(sub) and self.base_ring() != sub.base_ring():
+        if isinstance(sub, FreeModule_generic) and self.base_ring() != sub.base_ring():
             raise ValueError("base rings must be the same")
-        if check and (not is_FreeModule(sub) or not sub.is_subspace(self)):
+        if check and (not isinstance(sub, FreeModule_generic) or not sub.is_subspace(self)):
             try:
                 sub = self.subspace(sub)
             except (TypeError, ArithmeticError):
@@ -5300,22 +5293,21 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
         INPUT:
 
-        -  ``sub`` -- a submodule of ``self`` or something that can
-           be turned into one via ``self.submodule(sub)``
+        - ``sub`` -- a submodule of ``self`` or something that can
+          be turned into one via ``self.submodule(sub)``
 
-        -  ``check`` -- (default: ``True``) whether or not to check
-           that sub is a submodule
+        - ``check`` -- boolean (default: ``True``); whether or not to check
+          that sub is a submodule
 
         - further named arguments, that are currently ignored.
 
         OUTPUT:
 
-        -  ``U`` -- the quotient as an abstract *ambient* free module
+        - ``U``; the quotient as an abstract *ambient* free module
 
-        -  ``pi`` -- projection map to the quotient
+        - ``pi``; projection map to the quotient
 
-        -  ``lift`` -- lifting map back from quotient
-
+        - ``lift``; lifting map back from quotient
 
         EXAMPLES::
 
@@ -5342,7 +5334,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
         """
         # Calling is_subspace may be way too slow and repeat work done below.
         # It will be very desirable to somehow do this step better.
-        if check and (not is_FreeModule(sub) or not sub.is_subspace(self)):
+        if check and (not isinstance(sub, FreeModule_generic) or not sub.is_subspace(self)):
             try:
                 sub = self.subspace(sub)
             except (TypeError, ArithmeticError):
@@ -5372,11 +5364,11 @@ class FreeModule_ambient(FreeModule_generic):
 
         INPUT:
 
-        -  ``base_ring`` -- a commutative ring
+        - ``base_ring`` -- a commutative ring
 
-        -  ``rank`` -- a non-negative integer
+        - ``rank`` -- nonnegative integer
 
-        -  ``sparse`` -- boolean (default: ``False``)
+        - ``sparse`` -- boolean (default: ``False``)
 
         - ``coordinate_ring`` -- a ring containing ``base_ring``
           (default: equal to ``base_ring``)
@@ -5463,7 +5455,7 @@ class FreeModule_ambient(FreeModule_generic):
 
     def _dense_module(self):
         """
-        Creates a dense module with the same defining data as self.
+        Create a dense module with the same defining data as ``self``.
 
         N.B. This function is for internal use only! See dense_module for
         use.
@@ -5479,7 +5471,7 @@ class FreeModule_ambient(FreeModule_generic):
 
     def _sparse_module(self):
         """
-        Creates a sparse module with the same defining data as self.
+        Create a sparse module with the same defining data as ``self``.
 
         N.B. This function is for internal use only! See sparse_module for
         use.
@@ -5495,7 +5487,7 @@ class FreeModule_ambient(FreeModule_generic):
 
     def echelonized_basis_matrix(self):
         """
-        The echelonized basis matrix of self.
+        The echelonized basis matrix of ``self``.
 
         EXAMPLES::
 
@@ -5630,7 +5622,7 @@ class FreeModule_ambient(FreeModule_generic):
 
     def _repr_(self):
         """
-        The printing representation of self.
+        The printing representation of ``self``.
 
         EXAMPLES::
 
@@ -5732,10 +5724,8 @@ class FreeModule_ambient(FreeModule_generic):
 
         OUTPUT:
 
-
-        -  ``Sequence`` - an immutable sequence with universe
-           this ambient free module
-
+        - ``Sequence`` -- an immutable sequence with universe
+          this ambient free module
 
         EXAMPLES::
 
@@ -5804,8 +5794,8 @@ class FreeModule_ambient(FreeModule_generic):
         """
         if self.base_ring() is R:
             return self
-        from sage.modules.free_quadratic_module import is_FreeQuadraticModule
-        if is_FreeQuadraticModule(self):
+        from sage.modules.free_quadratic_module import FreeQuadraticModule_generic
+        if isinstance(self, FreeQuadraticModule_generic):
             return FreeModule(R, self.rank(),
                               inner_product_matrix=self.inner_product_matrix(),
                               sparse=self.is_sparse())
@@ -5818,7 +5808,7 @@ class FreeModule_ambient(FreeModule_generic):
 
         INPUT:
 
-        - ``v`` - list
+        - ``v`` -- list
 
         EXAMPLES::
 
@@ -5853,7 +5843,7 @@ class FreeModule_ambient(FreeModule_generic):
 
             \\sum c_i B_i = v.
 
-        If `v` is not in self, raise an :class:`ArithmeticError` exception.
+        If `v` is not in self, raise an :exc:`ArithmeticError` exception.
 
         EXAMPLES::
 
@@ -5872,10 +5862,10 @@ class FreeModule_ambient(FreeModule_generic):
 
         INPUT:
 
-        -  ``v`` - vector
+        - ``v`` -- vector
 
-        -  ``check`` - boolean (default: ``True``); if True, also
-           verify that `v` is really in ``self``.
+        - ``check`` -- boolean (default: ``True``); if ``True``, also
+          verify that `v` is really in ``self``
 
         OUTPUT: list
 
@@ -5899,8 +5889,8 @@ class FreeModule_ambient(FreeModule_generic):
 
     def echelon_coordinates(self, v, check=True):
         """
-        Returns the coordinate vector of v in terms of the echelon basis
-        for self.
+        Return the coordinate vector of v in terms of the echelon basis
+        for ``self``.
 
         EXAMPLES::
 
@@ -5934,18 +5924,16 @@ class FreeModule_ambient(FreeModule_generic):
 
     def random_element(self, prob=1.0, *args, **kwds):
         """
-        Returns a random element of self.
+        Return a random element of ``self``.
 
         INPUT:
 
+        - ``prob`` -- float. Each coefficient will be set to zero with
+          probability `1-prob`. Otherwise coefficients will be chosen
+          randomly from base ring (and may be zero).
 
-        - ``prob`` - float. Each coefficient will be set to zero with
-           probability `1-prob`. Otherwise coefficients will be chosen
-           randomly from base ring (and may be zero).
-
-        - ``*args, **kwds`` - passed on to random_element function of base
-           ring.
-
+        - ``*args``, ``**kwds`` -- passed on to random_element function of base
+          ring
 
         EXAMPLES::
 
@@ -6008,9 +5996,9 @@ class FreeModule_ambient(FreeModule_generic):
 
         INPUT:
 
-        - `i` -- an integer (default 0)
+        - ``i`` -- integer (default: 0)
 
-        OUTPUT: `i`-th basis vector for ``self``.
+        OUTPUT: `i`-th basis vector for ``self``
 
         EXAMPLES::
 
@@ -6192,8 +6180,8 @@ class FreeModule_ambient_domain(FreeModule_generic_domain, FreeModule_ambient):
 
         - ``v`` -- vector
 
-        - ``check`` -- boolean (default: ``True``); if ``True``, also verify that
-           `v` is really in ``self``.
+        - ``check`` -- boolean (default: ``True``); if ``True``, also verify
+          that `v` is really in ``self``
 
         OUTPUT: list
 
@@ -6204,7 +6192,7 @@ class FreeModule_ambient_domain(FreeModule_generic_domain, FreeModule_ambient):
 
             \\sum c_i B_i = v.
 
-        If `v` is not in self, raise an :class:`ArithmeticError` exception.
+        If `v` is not in self, raise an :exc:`ArithmeticError` exception.
 
         EXAMPLES::
 
@@ -6227,7 +6215,7 @@ class FreeModule_ambient_domain(FreeModule_generic_domain, FreeModule_ambient):
 
     def vector_space(self, base_field=None):
         """
-        Returns the vector space obtained from ``self`` by tensoring with the
+        Return the vector space obtained from ``self`` by tensoring with the
         fraction field of the base ring and extending to the field.
 
         EXAMPLES::
@@ -6261,7 +6249,7 @@ class FreeModule_ambient_pid(FreeModule_generic_pid, FreeModule_ambient_domain):
 
         - ``base_ring`` -- a principal ideal domain
 
-        - ``rank`` -- a non-negative integer
+        - ``rank`` -- nonnegative integer
 
         - ``sparse`` -- boolean (default: ``False``)
 
@@ -6291,7 +6279,7 @@ class FreeModule_ambient_pid(FreeModule_generic_pid, FreeModule_ambient_domain):
 
     def _repr_(self) -> str:
         """
-        The printing representation of self.
+        The printing representation of ``self``.
 
         EXAMPLES::
 
@@ -6343,9 +6331,6 @@ class FreeModule_ambient_pid(FreeModule_generic_pid, FreeModule_ambient_domain):
 ###############################################################################
 
 class FreeModule_ambient_field(FreeModule_generic_field, FreeModule_ambient_pid):
-    """
-
-    """
     def __init__(self, base_field, dimension, sparse=False, category=None):
         """
         Create the ambient vector space of given dimension over the given
@@ -6353,11 +6338,11 @@ class FreeModule_ambient_field(FreeModule_generic_field, FreeModule_ambient_pid)
 
         INPUT:
 
-        -  ``base_field`` -- a field
+        - ``base_field`` -- a field
 
-        -  ``dimension`` -- a non-negative integer
+        - ``dimension`` -- nonnegative integer
 
-        -  ``sparse`` -- boolean (default: ``False``)
+        - ``sparse`` -- boolean (default: ``False``)
 
         EXAMPLES::
 
@@ -6368,7 +6353,7 @@ class FreeModule_ambient_field(FreeModule_generic_field, FreeModule_ambient_pid)
 
     def _repr_(self):
         """
-        The printing representation of self.
+        The printing representation of ``self``.
 
         EXAMPLES::
 
@@ -6412,7 +6397,7 @@ class FreeModule_ambient_field(FreeModule_generic_field, FreeModule_ambient_pid)
 
     def ambient_vector_space(self):
         """
-        Returns ``self`` as the ambient vector space.
+        Return ``self`` as the ambient vector space.
 
         EXAMPLES::
 
@@ -6424,7 +6409,7 @@ class FreeModule_ambient_field(FreeModule_generic_field, FreeModule_ambient_pid)
 
     def base_field(self):
         """
-        Returns the base field of this vector space.
+        Return the base field of this vector space.
 
         EXAMPLES::
 
@@ -6483,28 +6468,27 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
     INPUT:
 
     - ``ambient`` -- ambient free module over a principal ideal domain `R`,
-      i.e. `R^n`;
+      i.e. `R^n`
 
     - ``basis`` -- list of elements of `K^n`, where `K` is the fraction field
-      of `R`. These elements must be linearly independent and will be used as
-      the default basis of the constructed submodule;
+      of `R`; these elements must be linearly independent and will be used as
+      the default basis of the constructed submodule
 
-    - ``check`` -- (default: ``True``) if ``False``, correctness of the input
-      will not be checked and type conversion may be omitted, use with care;
+    - ``check`` -- boolean (default: ``True``); if ``False``, correctness of
+      the input will not be checked and type conversion may be omitted, use
+      with care
 
-    - ``echelonize`` -- (default:``False``) if ``True``, ``basis`` will be
+    - ``echelonize`` -- (default: ``False``) if ``True``, ``basis`` will be
       echelonized and the result will be used as the default basis of the
       constructed submodule;
 
-    - `` echelonized_basis`` -- (default: ``None``) if not ``None``, must be
-      the echelonized basis spanning the same submodule as ``basis``;
+    - ``echelonized_basis`` -- (default: ``None``) if not ``None``, must be
+      the echelonized basis spanning the same submodule as ``basis``
 
-    - ``already_echelonized`` -- (default: ``False``) if ``True``, ``basis``
-      must be already given in the echelonized form.
+    - ``already_echelonized`` -- boolean (default: ``False``); if ``True``,
+      ``basis`` must be already given in the echelonized form
 
-    OUTPUT:
-
-    - `R`-submodule of `K^n` with the user-specified ``basis``.
+    OUTPUT: `R`-submodule of `K^n` with the user-specified ``basis``
 
     EXAMPLES::
 
@@ -6644,7 +6628,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
     def _echelon_matrix_richcmp(self, other, op):
         r"""
-        Compare the free module ``self`` with other.
+        Compare the free module ``self`` with ``other``.
 
         Modules are ordered by their ambient spaces, then by dimension,
         then in order by their echelon matrices.
@@ -6719,7 +6703,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
     def construction(self):
         """
-        Returns the functorial construction of self, namely, the subspace
+        Return the functorial construction of ``self``, namely, the subspace
         of the ambient module spanned by the given basis.
 
         EXAMPLES::
@@ -6813,7 +6797,6 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
             [   0 23/6 46/3]
             sage: L._denominator(L.echelonized_basis_matrix().list())
             30
-
         """
         if not B:
             return 1
@@ -6825,7 +6808,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
     def _repr_(self):
         """
-        The printing representation of self.
+        The printing representation of ``self``.
 
         EXAMPLES::
 
@@ -6944,7 +6927,6 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
             [5 7 9]
             sage: U.ambient()
             Ambient free module of rank 3 over the principal ideal domain Integer Ring
-
         """
         if self.base_ring() == self.coordinate_ring():
             return self.ambient_module()
@@ -7044,10 +7026,10 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
         INPUT:
 
-        -  ``v`` - vector
+        - ``v`` -- vector
 
-        -  ``check`` - boolean (default: ``True``); if ``True``, also
-           verify that `v` is really in ``self``.
+        - ``check`` -- boolean (default: ``True``); if ``True``, also
+          verify that `v` is really in ``self``
 
         OUTPUT: list
 
@@ -7058,7 +7040,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
             \sum c_i B_i = v.
 
-        If `v` is not in self, raise an :class:`ArithmeticError` exception.
+        If `v` is not in self, raise an :exc:`ArithmeticError` exception.
 
         EXAMPLES::
 
@@ -7159,10 +7141,10 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
     def echelon_to_user_matrix(self):
         """
         Return matrix that transforms the echelon basis to the user basis
-        of self. This is a matrix `A` such that if `v` is a
+        of ``self``. This is a matrix `A` such that if `v` is a
         vector written with respect to the echelon basis for ``self`` then
         `vA` is that vector written with respect to the user basis
-        of self.
+        of ``self``.
 
         EXAMPLES::
 
@@ -7178,7 +7160,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
             [ 4/3 -1/3]
 
         The vector `(1,1,1)` has coordinates `v=(1,1)` with
-        respect to the echelonized basis for self. Multiplying `vA`
+        respect to the echelonized basis for ``self``. Multiplying `vA`
         we find the coordinates of this vector with respect to the user
         basis.
 
@@ -7200,10 +7182,10 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
     def _user_to_rref_matrix(self):
         """
-        Returns a transformation matrix from the user specified basis to row
+        Return a transformation matrix from the user specified basis to row
         reduced echelon form, for this module over a PID.
 
-        Note: For internal use only! See user_to_echelon_matrix.
+        Note: For internal use only! See ``user_to_echelon_matrix``.
 
         EXAMPLES::
 
@@ -7232,10 +7214,10 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
     def _rref_to_user_matrix(self):
         """
-        Returns a transformation matrix from row reduced echelon form to
+        Return a transformation matrix from row reduced echelon form to
         the user specified basis, for this module over a PID.
 
-        Note: For internal use only! See user_to_echelon_matrix.
+        Note: For internal use only! See ``user_to_echelon_matrix``.
 
         EXAMPLES::
 
@@ -7261,7 +7243,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
     def _echelon_to_rref_matrix(self):
         """
-        Returns a transformation matrix from the some matrix to the row
+        Return a transformation matrix from the some matrix to the row
         reduced echelon form for this module over a PID.
 
         Note: For internal use only! and not used!
@@ -7296,7 +7278,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
     def _rref_to_echelon_matrix(self):
         """
-        Returns a transformation matrix from row reduced echelon form to
+        Return a transformation matrix from row reduced echelon form to
         some matrix for this module over a PID.
 
         Note: For internal use only!
@@ -7429,7 +7411,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
         INPUT:
 
-        -  ``R`` - a principal ideal domain
+        - ``R`` -- a principal ideal domain
 
         EXAMPLES::
 
@@ -7490,7 +7472,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
         - ``v`` -- vector
 
         - ``check`` -- boolean (default: ``True``); if ``True``, also verify that
-           `v` is really in ``self``.
+          `v` is really in ``self``
 
         OUTPUT: list
 
@@ -7501,7 +7483,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
             \\sum c_i B_i = v.
 
-        If `v` is not in self, raise an :class:`ArithmeticError` exception.
+        If `v` is not in self, raise an :exc:`ArithmeticError` exception.
 
         EXAMPLES::
 
@@ -7546,19 +7528,19 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
         INPUT:
 
-        -  ``v`` - vector
+        - ``v`` -- vector
 
-        -  ``check`` - boolean (default: ``True``); if ``True``, also
-           verify that `v` is really in ``self``.
+        - ``check`` -- boolean (default: ``True``); if ``True``, also
+          verify that `v` is really in ``self``
 
         Returns a list `c` such that if `B` is the echelonized basis
-        for self, then
+        for ``self``, then
 
         .. MATH::
 
             \\sum c_i B_i = v.
 
-        If `v` is not in self, raise an :class:`ArithmeticError` exception.
+        If `v` is not in self, raise an :exc:`ArithmeticError` exception.
 
         EXAMPLES::
 
@@ -7598,7 +7580,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
         INPUT:
 
-        - ``v`` - list
+        - ``v`` -- list
 
         EXAMPLES::
 
@@ -7666,7 +7648,7 @@ class FreeModule_submodule_pid(FreeModule_submodule_with_basis_pid):
 
     def _repr_(self):
         """
-        The printing representation of self.
+        The printing representation of ``self``.
 
         EXAMPLES::
 
@@ -7702,7 +7684,7 @@ class FreeModule_submodule_pid(FreeModule_submodule_with_basis_pid):
         - ``v`` -- vector
 
         - ``check`` -- boolean (default: ``True``); if ``True``, also verify that
-           `v` is really in ``self``.
+           `v` is really in ``self``
 
         OUTPUT: list
 
@@ -7713,7 +7695,7 @@ class FreeModule_submodule_pid(FreeModule_submodule_with_basis_pid):
 
             \\sum c_i B_i = v.
 
-        If `v` is not in self, raise an :class:`ArithmeticError` exception.
+        If `v` is not in self, raise an :exc:`ArithmeticError` exception.
 
         EXAMPLES::
 
@@ -7824,7 +7806,7 @@ class FreeModule_submodule_with_basis_field(FreeModule_generic_field, FreeModule
 
     def _repr_(self):
         """
-        The printing representation of self.
+        The printing representation of ``self``.
 
         EXAMPLES::
 
@@ -8015,7 +7997,7 @@ class FreeModule_submodule_field(FreeModule_submodule_with_basis_field):
             [ 1  0 -1]
             [ 0  1  2]
         """
-        if is_FreeModule(gens):
+        if isinstance(gens, FreeModule_generic):
             gens = gens.gens()
         FreeModule_submodule_with_basis_field.__init__(self, ambient,
                                                        basis=gens, check=check,
@@ -8025,7 +8007,7 @@ class FreeModule_submodule_field(FreeModule_submodule_with_basis_field):
 
     def _repr_(self) -> str:
         """
-        The default printing representation of self.
+        The default printing representation of ``self``.
 
         EXAMPLES::
 
@@ -8104,10 +8086,10 @@ class FreeModule_submodule_field(FreeModule_submodule_with_basis_field):
 
         INPUT:
 
-        -  ``v`` -- vector
+        - ``v`` -- vector
 
-        -  ``check`` -- boolean (default: ``True``); if ``True``, also
-           verify that `v` is really in ``self``
+        - ``check`` -- boolean (default: ``True``); if ``True``, also
+          verify that `v` is really in ``self``
 
         OUTPUT: list
 
@@ -8118,7 +8100,7 @@ class FreeModule_submodule_field(FreeModule_submodule_with_basis_field):
 
             \\sum c_i B_i = v.
 
-        If `v` is not in ``self``, raise an :class:`ArithmeticError` exception.
+        If `v` is not in ``self``, raise an :exc:`ArithmeticError` exception.
 
         EXAMPLES::
 
@@ -8181,7 +8163,7 @@ class FreeModule_submodule_field(FreeModule_submodule_with_basis_field):
 
             \\sum c_i B_i = v.
 
-        If `v` is not in ``self``, raise an :class:`ArithmeticError` exception.
+        If `v` is not in ``self``, raise an :exc:`ArithmeticError` exception.
 
         EXAMPLES::
 
@@ -8261,10 +8243,10 @@ def element_class(R, is_sparse):
         <class 'sage.modules.free_module_element.FreeModuleElement_generic_dense'>
     """
     import sage.rings.integer_ring
-    if sage.rings.integer_ring.is_IntegerRing(R) and not is_sparse:
+    if isinstance(R, sage.rings.integer_ring.IntegerRing_class) and not is_sparse:
         from sage.modules.vector_integer_dense import Vector_integer_dense
         return Vector_integer_dense
-    elif sage.rings.rational_field.is_RationalField(R) and not is_sparse:
+    elif isinstance(R, sage.rings.rational_field.RationalField) and not is_sparse:
         from sage.modules.vector_rational_dense import Vector_rational_dense
         return Vector_rational_dense
     elif isinstance(R, sage.rings.abc.IntegerModRing) and not is_sparse:

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 r"""
 Counting
 
@@ -12,5 +13,4 @@ Counting
 .. TODO::
 
    Mention sage/combinat/degree_sequences?
-
 """

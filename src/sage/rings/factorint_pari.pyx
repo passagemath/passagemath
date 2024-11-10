@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 # sage.doctest: needs sage.libs.pari
 r"""
 Integer factorization using PARI
@@ -41,9 +42,7 @@ def factor_using_pari(n, int_=False, debug_level=0, proof=None):
       required to be proven prime;  if ``None``, the global default
       is used
 
-    OUTPUT:
-
-    A list of pairs.
+    OUTPUT: list of pairs
 
     EXAMPLES::
 

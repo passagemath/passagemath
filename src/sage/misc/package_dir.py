@@ -106,8 +106,8 @@ def read_distribution(src_file):
 
     OUTPUT:
 
-    - a string, the name of the distribution package (``PKG``); or the empty
-      string if no directive was found.
+    A string, the name of the distribution package (``PKG``), or the empty
+    string if no directive was found.
 
     EXAMPLES::
 
@@ -117,7 +117,7 @@ def read_distribution(src_file):
         sage: read_distribution(os.path.join(SAGE_SRC, 'sage', 'graphs', 'graph_decompositions', 'tdlib.pyx'))
         'sagemath-tdlib'
         sage: read_distribution(os.path.join(SAGE_SRC, 'sage', 'graphs', 'graph_decompositions', 'modular_decomposition.py'))
-        ''
+        'sagemath-graphs'
     """
     with open(src_file, encoding='utf-8', errors='ignore') as fh:
         for line in fh:
@@ -201,8 +201,8 @@ def update_distribution(src_file, distribution, *, verbose=False):
     try:
         with open(src_file) as f:
             src_lines = f.read().splitlines()
-    except UnicodeDecodeError:
-        # Silently skip binary files
+    except (UnicodeDecodeError, FileNotFoundError):
+        # Silently skip binary files, nonexisting files
         return
     any_found = False
     any_change = False
@@ -251,9 +251,9 @@ def is_package_or_sage_namespace_package_dir(path, *, distribution_filter=None):
 
     INPUT:
 
-    - ``path`` -- a directory name.
+    - ``path`` -- a directory name
 
-    - ``distribution_filter`` -- (optional, default: ``None``)
+    - ``distribution_filter`` -- (default: ``None``)
       only consider ``all*.py`` files whose distribution (from a
       ``# sage_setup:`` ``distribution = PACKAGE`` directive in the source file)
       is an element of ``distribution_filter``.
@@ -263,6 +263,8 @@ def is_package_or_sage_namespace_package_dir(path, *, distribution_filter=None):
     :mod:`sage.cpython` is an ordinary package::
 
         sage: from sage.misc.package_dir import is_package_or_sage_namespace_package_dir
+        sage: len(sage.cpython.__path__)
+        1
         sage: directory = sage.cpython.__path__[0]; directory
         '.../sage/cpython'
         sage: is_package_or_sage_namespace_package_dir(directory)
@@ -271,23 +273,26 @@ def is_package_or_sage_namespace_package_dir(path, *, distribution_filter=None):
     :mod:`sage.libs.mpfr` only has an ``__init__.pxd`` file, but we consider
     it a package directory for consistency with Cython::
 
-        sage: directory = os.path.join(sage.libs.__path__[0], 'mpfr'); directory
-        '.../sage/libs/mpfr'
-        sage: is_package_or_sage_namespace_package_dir(directory)
+        sage: directories = [os.path.join(p, 'mpfr')
+        ....:                for p in sage.libs.__path__]; directories
+        ['.../sage/libs/mpfr'...]
+        sage: any(is_package_or_sage_namespace_package_dir(d) for d in directories)     # needs sage.rings.real_mpfr
         True
 
-    :mod:`sage` is designated to become an implicit namespace package::
+    :mod:`sage` is an implicit namespace package::
 
-        sage: directory = sage.__path__[0]; directory
+        sage: sage.__path__[0]
         '.../sage'
-        sage: is_package_or_sage_namespace_package_dir(directory)
+        sage: all(is_package_or_sage_namespace_package_dir(p) for p in sage.__path__)
         True
 
     Not a package::
 
-        sage: directory = os.path.join(sage.symbolic.__path__[0], 'ginac'); directory   # needs sage.symbolic
-        '.../sage/symbolic/ginac'
-        sage: is_package_or_sage_namespace_package_dir(directory)                       # needs sage.symbolic
+        sage: directories = [os.path.join(p, 'ginac')                                   # needs sage.symbolic
+        ....:                for p in sage.symbolic.__path__]; directories
+        ['.../sage/symbolic/ginac'...]
+        sage: any(is_package_or_sage_namespace_package_dir(d)                           # needs sage.symbolic
+        ....:     for d in directories)
         False
     """
     if os.path.exists(os.path.join(path, '__init__.py')):                # ordinary package
@@ -307,7 +312,7 @@ def is_package_or_sage_namespace_package_dir(path, *, distribution_filter=None):
 @contextmanager
 def cython_namespace_package_support():
     r"""
-    Activate namespace package support in Cython 0.x
+    Activate namespace package support in Cython 0.x.
 
     See https://github.com/cython/cython/issues/2918#issuecomment-991799049
     """
@@ -333,16 +338,16 @@ def walk_packages(path=None, prefix='', onerror=None):
 
     INPUT:
 
-    - ``path`` -- a list of paths to look for modules in or
-      ``None`` (all accessible modules).
+    - ``path`` -- list of paths to look for modules in or
+      ``None`` (all accessible modules)
 
-    - ``prefix`` -- a string to output on the front of every module name
-      on output.
+    - ``prefix`` -- string to output on the front of every module name
+      on output
 
     - ``onerror`` -- a function which gets called with one argument (the
       name of the package which was being imported) if any exception
       occurs while trying to import a package.  If ``None``, ignore
-      :class:`ImportError` but propagate all other exceptions.
+      :exc:`ImportError` but propagate all other exceptions.
 
     EXAMPLES::
 
@@ -469,7 +474,7 @@ if __name__ == '__main__':
                               "do not change files that already have a nonempty directive"))
     parser.add_argument('--set', metavar='DISTRIBUTION', type=str, default=None,
                         help="add or update the 'sage_setup: DISTRIBUTION' directive in FILES")
-    parser.add_argument('--from-egg-info', action="store_true", default=False,
+    parser.add_argument('--from-egg-info', action='store_true', default=False,
                         help="take FILES from pkgs/DISTRIBUTION/DISTRIBUTION.egg-info/SOURCES.txt")
     parser.add_argument("filename", metavar='FILES', nargs='*', type=str,
                         help=("source files or directories (default: all files from SAGE_SRC, "
@@ -480,15 +485,38 @@ if __name__ == '__main__':
     distribution = args.set or args.add or ''
 
     if distribution == 'all':
-        distributions = ["sagemath-bliss",
-                         "sagemath-coxeter3",
-                         "sagemath-mcqd",
-                         "sagemath-meataxe",
-                         "sagemath-sirocco",
+        # Order matters because some MANIFESTs are not careful enough
+        distributions = ["sagemath-symbolics",
+                         "sagemath-schemes",
+                         "sagemath-glpk",
+                         "sagemath-gap",
+                         "sagemath-groups",
+                         "sagemath-polyhedra",
+                         "sagemath-graphs",
+                         "sagemath-bliss",
                          "sagemath-tdlib",
-                         "sagemath-environment",
+                         "sagemath-mcqd",
+                         "sagemath-sirocco",
+                         "sagemath-coxeter3",
+                         "sagemath-meataxe",
+                         "sagemath-giac",
+                         "sagemath-brial",
+                         "sagemath-eclib",
+                         "sagemath-lcalc",
+                         "sagemath-libbraiding",
+                         "sagemath-libecm",
+                         "sagemath-singular",
+                         "sagemath-linbox",
+                         "sagemath-flint",
+                         "sagemath-ntl",
+                         "sagemath-pari",
+                         "sagemath-homfly",
+                         "sagemath-plot",
+                         "sagemath-combinat",
+                         "sagemath-modules",
                          "sagemath-categories",
                          "sagemath-repl",
+                         "sagemath-environment",
                          "sagemath-objects"]
     else:
         distributions = [distribution.replace('_', '-')]
@@ -564,6 +592,7 @@ if __name__ == '__main__':
                 print(f'{distribution_dir} does not exist')
                 sys.exit(1)
             distribution_underscore = distribution.replace('-', '_')
+            distribution_underscore = "pas" + distribution_underscore
             try:
                 with open(os.path.join(distribution_dir,
                                        f'{distribution_underscore}.egg-info', 'SOURCES.txt')) as f:
@@ -590,7 +619,7 @@ if __name__ == '__main__':
                     for root, dirs, files in os.walk(path):
                         for dir in sorted(dirs):
                             path = os.path.join(root, dir)
-                            if any(dir.startswith(prefix) for prefix in ['.', 'build', 'dist', '__pycache__', '_vendor', '.tox']):
+                            if any(dir.startswith(prefix) for prefix in ['.', 'build', 'dist', '__pycache__', '_vendor', '.tox', 'meson.build']):
                                 # Silently skip
                                 dirs.remove(dir)
                             elif not is_package_or_sage_namespace_package_dir(path):

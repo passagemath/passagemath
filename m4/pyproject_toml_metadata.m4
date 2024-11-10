@@ -2,6 +2,10 @@ dnl Standard metadata of SageMath distribution packages
 dnl
 license = {text = "GNU General Public License (GPL) v2 or later"}
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
+maintainers = [
+    {name = "Matthias Köppe"},
+    {name = "passagemath contributors"},
+]
 classifiers = [
     "Development Status :: 6 - Mature",
     "Intended Audience :: Education",
@@ -17,5 +21,14 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
-urls = {Homepage = "https://www.sagemath.org"}
 requires-python = ">=3.9, <3.13"
+
+[project.urls]
+"release notes" = "https://github.com/passagemath/passagemath/releases"
+"repo (upstream)" = "https://github.com/sagemath/sage"
+"repo" = "https://github.com/passagemath/passagemath"
+documentation = "https://doc.sagemath.org"
+"homepage (upstream)" = "https://www.sagemath.org"
+"discourse" = "https://passagemath.discourse.group"
+"tracker (upstream)" = "https://github.com/sagemath/sage/issues"
+"tracker" = "https://github.com/passagemath/passagemath/issues"

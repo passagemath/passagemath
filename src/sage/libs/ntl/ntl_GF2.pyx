@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-ntl
 # distutils: libraries = NTL_LIBRARIES gmp
 # distutils: extra_compile_args = NTL_CFLAGS
 # distutils: include_dirs = NTL_INCDIR
@@ -41,7 +42,7 @@ cdef class ntl_GF2():
     """
     def __init__(self, v=None):
         r"""
-        Initializes a NTL bit.
+        Initialize a NTL bit.
 
         EXAMPLES::
 
@@ -61,7 +62,7 @@ cdef class ntl_GF2():
 
     def __repr__(self):
         """
-        Return the string representation of self.
+        Return the string representation of ``self``.
 
         EXAMPLES::
 
@@ -72,7 +73,7 @@ cdef class ntl_GF2():
 
     def __reduce__(self):
         """
-        Serializes self.
+        Serialize ``self``.
 
         EXAMPLES::
 
@@ -84,7 +85,7 @@ cdef class ntl_GF2():
 
     def __richcmp__(ntl_GF2 self, other, int op):
         """
-        Compare self to other.
+        Compare ``self`` to ``other``.
 
         EXAMPLES::
 
@@ -237,7 +238,7 @@ cdef class ntl_GF2():
 
     def __int__(self):
         """
-        Return self as an int.
+        Return ``self`` as an int.
 
         EXAMPLES::
 

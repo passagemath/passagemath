@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# sage_setup: distribution = sagemath-repl
 """
 Parsing docstrings
 
@@ -43,52 +43,13 @@ from typing import Literal, Union, overload
 
 from sage.misc.cachefunc import cached_function
 from sage.repl.preparse import preparse, strip_string_literals
+from sage.doctest.rif_tol import RIFtol, add_tolerance
+from sage.doctest.marked_output import MarkedOutput
+from sage.doctest.check_tolerance import (
+    ToleranceExceededError, check_tolerance_real_domain,
+    check_tolerance_complex_domain, float_regex)
 
 from .external import available_software, external_software
-
-_RIFtol = None
-
-
-def RIFtol(*args):
-    """
-    Create an element of the real interval field used for doctest tolerances.
-
-    It allows large numbers like 1e1000, it parses strings with spaces
-    like ``RIF(" - 1 ")`` out of the box and it carries a lot of
-    precision. The latter is useful for testing libraries using
-    arbitrary precision but not guaranteed rounding such as PARI. We use
-    1044 bits of precision, which should be good to deal with tolerances
-    on numbers computed with 1024 bits of precision.
-
-    The interval approach also means that we do not need to worry about
-    rounding errors and it is also very natural to see a number with
-    tolerance as an interval.
-
-    EXAMPLES::
-
-        sage: from sage.doctest.parsing import RIFtol
-        sage: RIFtol(-1, 1)
-        0.?
-        sage: RIFtol(" - 1 ")
-        -1
-        sage: RIFtol("1e1000")
-        1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000?e1000
-    """
-    global _RIFtol
-    if _RIFtol is None:
-        try:
-            # We need to import from sage.all to avoid circular imports.
-            from sage.rings.real_mpfi import RealIntervalField
-        except ImportError:
-            from warnings import warn
-            warn("RealIntervalField not available, ignoring all tolerance specifications in doctests")
-
-            def fake_RIFtol(*args):
-                return 0
-            _RIFtol = fake_RIFtol
-        else:
-            _RIFtol = RealIntervalField(1044)
-    return _RIFtol(*args)
 
 
 # This is the correct pattern to match ISO/IEC 6429 ANSI escape sequences:
@@ -136,7 +97,7 @@ def parse_optional_tags(
     - ``'not tested'``
     - ``'known bug'`` (possible values are ``None``, ``linux`` and ``macos``)
     - ``'py2'``
-    - ``'optional - FEATURE...'`` or ``'needs FEATURE...'`` --
+    - ``'optional -- FEATURE...'`` or ``'needs FEATURE...'`` --
       the dictionary will just have the key ``'FEATURE'``
 
     The values, if non-``None``, are strings with optional explanations
@@ -144,9 +105,9 @@ def parse_optional_tags(
 
     INPUT:
 
-    - ``string`` -- a string
+    - ``string`` -- string
 
-    - ``return_string_sans_tags`` -- (boolean, default ``False``); whether to
+    - ``return_string_sans_tags`` -- boolean (default: ``False``); whether to
       additionally return ``string`` with the optional tags removed but other
       comments kept and a boolean ``is_persistent``
 
@@ -205,7 +166,6 @@ def parse_optional_tags(
         sage: parse_optional_tags("sage: #this is not #needs scipy\n....: import scipy",
         ....:                     return_string_sans_tags=True)
         ({'scipy': None}, 'sage: #this is not \n....: import scipy', False)
-
     """
     safe, literals, state = strip_string_literals(string)
     split = safe.split('\n', 1)
@@ -277,16 +237,15 @@ def parse_file_optional_tags(lines):
 
     INPUT:
 
-    - ``lines`` -- iterable of pairs ``(lineno, line)``.
+    - ``lines`` -- iterable of pairs ``(lineno, line)``
 
-    OUTPUT:
-
-    a dictionary whose keys are strings (tags); see :func:`parse_optional_tags`
+    OUTPUT: dictionary whose keys are strings (tags);
+    see :func:`parse_optional_tags`
 
     EXAMPLES::
 
         sage: from sage.doctest.parsing import parse_file_optional_tags
-        sage: filename = tmp_filename(ext=".pyx")
+        sage: filename = tmp_filename(ext='.pyx')
         sage: with open(filename, "r") as f:
         ....:     parse_file_optional_tags(enumerate(f))
         {}
@@ -338,9 +297,7 @@ def _tag_group(tag):
 
     - ``tag`` -- string
 
-    OUTPUT:
-
-    a string; one of ``'special'``, ``'optional'``, ``'standard'``, ``'sage'``
+    OUTPUT: string; one of ``'special'``, ``'optional'``, ``'standard'``, ``'sage'``
 
     EXAMPLES::
 
@@ -370,7 +327,8 @@ def unparse_optional_tags(tags, prefix='# '):
 
     INPUT:
 
-    - ``tags`` -- dict or iterable of tags, as output by :func:`parse_optional_tags`
+    - ``tags`` -- dictionary or iterable of tags, as output by
+      :func:`parse_optional_tags`
 
     - ``prefix`` -- to be put before a nonempty string
 
@@ -585,13 +543,11 @@ def parse_tolerance(source, want):
 
     INPUT:
 
-    - ``source`` -- a string, the source of a doctest
-    - ``want`` -- a string, the desired output of the doctest
+    - ``source`` -- string, the source of a doctest
+    - ``want`` -- string, the desired output of the doctest
 
-    OUTPUT:
-
-    ``want`` if there are no tolerance tags specified; a
-    :class:`MarkedOutput` version otherwise.
+    OUTPUT: ``want`` if there are no tolerance tags specified; a
+    :class:`MarkedOutput` version otherwise
 
     EXAMPLES::
 
@@ -604,7 +560,7 @@ def parse_tolerance(source, want):
         0
         sage: marked.rel_tol
         0
-        sage: marked.abs_tol
+        sage: marked.abs_tol                                                            # needs sage.rings.real_mpfr
         0.010000000000000000000...?
     """
     # regular expressions
@@ -696,84 +652,7 @@ def reduce_hex(fingerprints):
     return "%032x" % res
 
 
-class MarkedOutput(str):
-    """
-    A subclass of string with context for whether another string
-    matches it.
-
-    EXAMPLES::
-
-        sage: from sage.doctest.parsing import MarkedOutput
-        sage: s = MarkedOutput("abc")
-        sage: s.rel_tol
-        0
-        sage: s.update(rel_tol = .05)
-        'abc'
-        sage: s.rel_tol
-        0.0500000000000000
-
-        sage: MarkedOutput("56 µs")
-        '56 \xb5s'
-    """
-    random = False
-    rel_tol = 0
-    abs_tol = 0
-    tol = 0
-
-    def update(self, **kwds):
-        """
-        EXAMPLES::
-
-            sage: from sage.doctest.parsing import MarkedOutput
-            sage: s = MarkedOutput("0.0007401")
-            sage: s.update(abs_tol = .0000001)
-            '0.0007401'
-            sage: s.rel_tol
-            0
-            sage: s.abs_tol
-            1.00000000000000e-7
-        """
-        self.__dict__.update(kwds)
-        return self
-
-    def __reduce__(self):
-        """
-        Pickling.
-
-        EXAMPLES::
-
-            sage: from sage.doctest.parsing import MarkedOutput
-            sage: s = MarkedOutput("0.0007401")
-            sage: s.update(abs_tol = .0000001)
-            '0.0007401'
-            sage: t = loads(dumps(s)) # indirect doctest
-            sage: t == s
-            True
-            sage: t.abs_tol
-            1.00000000000000e-7
-        """
-        return make_marked_output, (str(self), self.__dict__)
-
-
-def make_marked_output(s, D):
-    """
-    Auxiliary function for pickling.
-
-    EXAMPLES::
-
-        sage: from sage.doctest.parsing import make_marked_output
-        sage: s = make_marked_output("0.0007401", {'abs_tol':.0000001})
-        sage: s
-        '0.0007401'
-        sage: s.abs_tol
-        1.00000000000000e-7
-    """
-    ans = MarkedOutput(s)
-    ans.__dict__.update(D)
-    return ans
-
-
-class OriginalSource():
+class OriginalSource:
     r"""
     Context swapping out the pre-parsed source with the original for
     better reporting.
@@ -873,11 +752,11 @@ class SageDocTestParser(doctest.DocTestParser):
         r"""
         INPUT:
 
-        - ``optional_tags`` -- a list or tuple of strings.
+        - ``optional_tags`` -- list or tuple of strings
         - ``long`` -- boolean, whether to run doctests marked as taking a
-          long time.
-        - ``probed_tags`` -- a list or tuple of strings.
-        - ``file_optional_tags`` -- an iterable of strings.
+          long time
+        - ``probed_tags`` -- list or tuple of strings
+        - ``file_optional_tags`` -- an iterable of strings
 
         EXAMPLES::
 
@@ -948,9 +827,9 @@ class SageDocTestParser(doctest.DocTestParser):
 
         INPUT:
 
-        - ``string`` -- the string to parse.
-        - ``name`` -- optional string giving the name identifying string,
-          to be used in error messages.
+        - ``string`` -- the string to parse
+        - ``name`` -- (optional) string giving the name identifying string,
+          to be used in error messages
 
         OUTPUT:
 
@@ -990,8 +869,8 @@ class SageDocTestParser(doctest.DocTestParser):
             sage: ex.want
             '0.893515349287690\n'
             sage: type(ex.want)
-            <class 'sage.doctest.parsing.MarkedOutput'>
-            sage: ex.want.tol
+            <class 'sage.doctest.marked_output.MarkedOutput'>
+            sage: ex.want.tol                                                           # needs sage.rings.real_interval_field
             2.000000000000000000...?e-11
 
         You can use continuation lines::
@@ -1112,6 +991,7 @@ class SageDocTestParser(doctest.DocTestParser):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: parse("::\n\n    sage: # needs sage.combinat\n    sage: from sage.geometry.polyhedron.combinatorial_polyhedron.conversions \\\n    ....:         import incidence_matrix_to_bit_rep_of_Vrep\n    sage: P = polytopes.associahedron(['A',3])\n\n")
             ['::\n\n',
             '',
@@ -1328,7 +1208,9 @@ class SageOutputChecker(doctest.OutputChecker):
         sage: ex.want
         '0.893515349287690\n'
         sage: type(ex.want)
-        <class 'sage.doctest.parsing.MarkedOutput'>
+        <class 'sage.doctest.marked_output.MarkedOutput'>
+
+        sage: # needs sage.rings.real_interval_field
         sage: ex.want.tol
         2.000000000000000000...?e-11
         sage: OC.check_output(ex.want, '0.893515349287690', optflag)
@@ -1368,73 +1250,20 @@ class SageOutputChecker(doctest.OutputChecker):
             return '<CSI-' + ansi_escape.lstrip('\x1b[\x9b') + '>'
         return ansi_escape_sequence.subn(human_readable, string)[0]
 
-    def add_tolerance(self, wantval, want):
-        """
-        Enlarge the real interval element ``wantval`` according to
-        the tolerance options in ``want``.
-
-        INPUT:
-
-        - ``wantval`` -- a real interval element
-        - ``want`` -- a :class:`MarkedOutput` describing the tolerance
-
-        OUTPUT:
-
-        - an interval element containing ``wantval``
-
-        EXAMPLES::
-
-            sage: from sage.doctest.parsing import MarkedOutput, SageOutputChecker
-            sage: OC = SageOutputChecker()
-            sage: want_tol = MarkedOutput().update(tol=0.0001)
-            sage: want_abs = MarkedOutput().update(abs_tol=0.0001)
-            sage: want_rel = MarkedOutput().update(rel_tol=0.0001)
-            sage: OC.add_tolerance(RIF(pi.n(64)), want_tol).endpoints()                 # needs sage.symbolic
-            (3.14127849432443, 3.14190681285516)
-            sage: OC.add_tolerance(RIF(pi.n(64)), want_abs).endpoints()                 # needs sage.symbolic
-            (3.14149265358979, 3.14169265358980)
-            sage: OC.add_tolerance(RIF(pi.n(64)), want_rel).endpoints()                 # needs sage.symbolic
-            (3.14127849432443, 3.14190681285516)
-            sage: OC.add_tolerance(RIF(1e1000), want_tol)
-            1.000?e1000
-            sage: OC.add_tolerance(RIF(1e1000), want_abs)
-            1.000000000000000?e1000
-            sage: OC.add_tolerance(RIF(1e1000), want_rel)
-            1.000?e1000
-            sage: OC.add_tolerance(0, want_tol)
-            0.000?
-            sage: OC.add_tolerance(0, want_abs)
-            0.000?
-            sage: OC.add_tolerance(0, want_rel)
-            0
-        """
-        if want.tol:
-            if wantval == 0:
-                return RIFtol(want.tol) * RIFtol(-1, 1)
-            else:
-                return wantval * (1 + RIFtol(want.tol) * RIFtol(-1, 1))
-        elif want.abs_tol:
-            return wantval + RIFtol(want.abs_tol) * RIFtol(-1, 1)
-        elif want.rel_tol:
-            return wantval * (1 + RIFtol(want.rel_tol) * RIFtol(-1, 1))
-        else:
-            return wantval
-
     def check_output(self, want, got, optionflags):
         r"""
-        Checks to see if the output matches the desired output.
+        Check to see if the output matches the desired output.
 
         If ``want`` is a :class:`MarkedOutput` instance, takes into account the desired tolerance.
 
         INPUT:
 
-        - ``want`` -- a string or :class:`MarkedOutput`
-        - ``got`` -- a string
-        - ``optionflags`` -- an integer, passed down to :class:`doctest.OutputChecker`
+        - ``want`` -- string or :class:`MarkedOutput`
+        - ``got`` -- string
+        - ``optionflags`` -- integer; passed down to :class:`doctest.OutputChecker`
 
-        OUTPUT:
-
-        - boolean, whether ``got`` matches ``want`` up to the specified tolerance.
+        OUTPUT: boolean; whether ``got`` matches ``want`` up to the specified
+        tolerance
 
         EXAMPLES::
 
@@ -1459,6 +1288,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(rndstr,nf,optflag)
             True
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(tentol,nf,optflag)
             True
             sage: OC.check_output(tentol,ten,optflag)
@@ -1466,6 +1296,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(tentol,zero,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(tenabs,nf,optflag)
             False
             sage: OC.check_output(tenabs,ten,optflag)
@@ -1473,6 +1304,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(tenabs,zero,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(tenrel,nf,optflag)
             True
             sage: OC.check_output(tenrel,ten,optflag)
@@ -1480,6 +1312,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(tenrel,zero,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(zerotol,zero,optflag)
             True
             sage: OC.check_output(zerotol,eps,optflag)
@@ -1487,6 +1320,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(zerotol,ten,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(zeroabs,zero,optflag)
             True
             sage: OC.check_output(zeroabs,eps,optflag)
@@ -1494,6 +1328,7 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(zeroabs,ten,optflag)
             False
 
+            sage: # needs sage.rings.real_interval_field
             sage: OC.check_output(zerorel,zero,optflag)
             True
             sage: OC.check_output(zerorel,eps,optflag)
@@ -1503,6 +1338,7 @@ class SageOutputChecker(doctest.OutputChecker):
 
         More explicit tolerance checks::
 
+            sage: # needs sage.rings.real_interval_field
             sage: _ = x  # rel tol 1e10                                                 # needs sage.symbolic
             sage: raise RuntimeError   # rel tol 1e10
             Traceback (most recent call last):
@@ -1517,8 +1353,15 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: 0  # rel tol 1
             1
 
+        Abs tol checks over the complex domain::
+
+            sage: # needs sage.rings.real_interval_field sage.symbolic
+            sage: [1, -1.3, -1.5 + 0.1*I, 0.5 - 0.1*I, -1.5*I]  # abs tol 1.0
+            [1, -1, -1, 1, -I]
+
         Spaces before numbers or between the sign and number are ignored::
 
+            sage: # needs sage.rings.real_interval_field
             sage: print("[ - 1, 2]")  # abs tol 1e-10
             [-1,2]
 
@@ -1547,34 +1390,17 @@ class SageOutputChecker(doctest.OutputChecker):
             sage: OC.check_output(ex.want, 'Long-step dual simplex will be used\n1.3090169943749475', optflag)
             True
         """
-        # Regular expression for floats
-        float_regex = re.compile(r'\s*([+-]?\s*((\d*\.?\d+)|(\d+\.?))([eE][+-]?\d+)?)')
-
         got = self.human_readable_escape_sequences(got)
-
-        if isinstance(want, MarkedOutput):
-            if want.random:
-                return True
-            elif want.tol or want.rel_tol or want.abs_tol:
-                # First check that the number of occurrences of floats appearing match
-                want_str = [g[0] for g in float_regex.findall(want)]
-                got_str = [g[0] for g in float_regex.findall(got)]
-                if len(want_str) != len(got_str):
-                    return False
-
-                # Then check the numbers
-                want_values = [RIFtol(g) for g in want_str]
-                want_intervals = [self.add_tolerance(v, want) for v in want_values]
-                got_values = [RIFtol(g) for g in got_str]
-                # The doctest is not successful if one of the "want" and "got"
-                # intervals have an empty intersection
-                if not all(a.overlaps(b) for a, b in zip(want_intervals, got_values)):
-                    return False
-
-                # Then check the part of the doctests without the numbers
-                # Continue the check process with floats replaced by stars
-                want = float_regex.sub('*', want)
-                got = float_regex.sub('*', got)
+        try:
+            if isinstance(want, MarkedOutput):
+                if want.random:
+                    return True
+                elif want.tol or want.rel_tol:
+                    want, got = check_tolerance_real_domain(want, got)
+                elif want.abs_tol:
+                    want, got = check_tolerance_complex_domain(want, got)
+        except ToleranceExceededError:
+            return False
 
         if doctest.OutputChecker.check_output(self, want, got, optionflags):
             return True
@@ -1588,20 +1414,18 @@ class SageOutputChecker(doctest.OutputChecker):
 
     def do_fixup(self, want, got):
         r"""
-        Performs few changes to the strings ``want`` and ``got``.
+        Perform few changes to the strings ``want`` and ``got``.
 
         For example, remove warnings to be ignored.
 
         INPUT:
 
-        - ``want`` -- a string or :class:`MarkedOutput`
-        - ``got`` -- a string
+        - ``want`` -- string or :class:`MarkedOutput`
+        - ``got`` -- string
 
-        OUTPUT:
+        OUTPUT: a tuple:
 
-        A tuple:
-
-        - bool, ``True`` when some fixup were performed and ``False`` otherwise
+        - boolean, ``True`` when some fixup were performed and ``False`` otherwise
         - string, edited wanted string
         - string, edited got string
 
@@ -1641,7 +1465,6 @@ class SageOutputChecker(doctest.OutputChecker):
             (False, '1.3090169943749475\n', 'ANYTHING1.3090169943749475')
             sage: OC.do_fixup(ex.want,'Long-step dual simplex will be used\n1.3090169943749475')
             (True, '1.3090169943749475\n', '\n1.3090169943749475')
-
         """
         did_fixup = False
 
@@ -1688,6 +1511,12 @@ class SageOutputChecker(doctest.OutputChecker):
             got = ld_pie_warning_regex.sub('', got)
             did_fixup = True
 
+        if "R[write to console]" in got:
+            # Supress R warnings
+            r_warning_regex = re.compile(r'R\[write to console\]:.*')
+            got = r_warning_regex.sub('', got)
+            did_fixup = True
+
         if "Overriding pythran description" in got:
             # Some signatures changed in numpy-1.25.x that may yet be
             # reverted, but which pythran would otherwise warn about.
@@ -1699,6 +1528,12 @@ class SageOutputChecker(doctest.OutputChecker):
             pythran_numpy_warning_regex = re.compile(r'WARNING: Overriding pythran description with argspec information for: numpy\.random\.[a-z_]+')
             got = pythran_numpy_warning_regex.sub('', got)
             did_fixup = True
+
+        if "ld_classic is deprecated" in got:
+            ld_classic_warning_regex = re.compile(r'ld: warning: -ld_classic is deprecated and will be removed in a future release')
+            got = ld_classic_warning_regex.sub('', got)
+            did_fixup = True
+
         return did_fixup, want, got
 
     def output_difference(self, example, got, optionflags):
@@ -1711,12 +1546,10 @@ class SageOutputChecker(doctest.OutputChecker):
         INPUT:
 
         - ``example`` -- a :class:`doctest.Example` instance
-        - ``got`` -- a string
-        - ``optionflags`` -- an integer, passed down to :class:`doctest.OutputChecker`
+        - ``got`` -- string
+        - ``optionflags`` -- integer; passed down to :class:`doctest.OutputChecker`
 
-        OUTPUT:
-
-        - a string, describing how ``got`` fails to match ``example.want``
+        OUTPUT: string, describing how ``got`` fails to match ``example.want``
 
         EXAMPLES::
 
@@ -1739,6 +1572,7 @@ class SageOutputChecker(doctest.OutputChecker):
 
         ::
 
+            sage: # needs sage.rings.real_interval_field
             sage: print(OC.output_difference(tenabs,nf,optflag))
             Expected:
                 10.0
@@ -1746,7 +1580,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 9.5
             Tolerance exceeded:
                 10.0 vs 9.5, tolerance 5e-1 > 1e-1
-
             sage: print(OC.output_difference(tentol,zero,optflag))
             Expected:
                 10.0
@@ -1754,7 +1587,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 0.0
             Tolerance exceeded:
                 10.0 vs 0.0, tolerance 1e0 > 1e-1
-
             sage: print(OC.output_difference(tentol,eps,optflag))
             Expected:
                 10.0
@@ -1762,7 +1594,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 -0.05
             Tolerance exceeded:
                 10.0 vs -0.05, tolerance 2e0 > 1e-1
-
             sage: print(OC.output_difference(tlist,L,optflag))
             Expected:
                 [10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
@@ -1774,6 +1605,7 @@ class SageOutputChecker(doctest.OutputChecker):
 
         TESTS::
 
+            sage: # needs sage.rings.real_interval_field
             sage: print(OC.output_difference(tenabs,zero,optflag))
             Expected:
                 10.0
@@ -1781,7 +1613,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 0.0
             Tolerance exceeded:
                 10.0 vs 0.0, tolerance 1e1 > 1e-1
-
             sage: print(OC.output_difference(tenrel,zero,optflag))
             Expected:
                 10.0
@@ -1789,7 +1620,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 0.0
             Tolerance exceeded:
                 10.0 vs 0.0, tolerance 1e0 > 1e-1
-
             sage: print(OC.output_difference(tenrel,eps,optflag))
             Expected:
                 10.0
@@ -1797,7 +1627,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 -0.05
             Tolerance exceeded:
                 10.0 vs -0.05, tolerance 2e0 > 1e-1
-
             sage: print(OC.output_difference(zerotol,ten,optflag))
             Expected:
                 0.0
@@ -1805,7 +1634,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 10.05
             Tolerance exceeded:
                 0.0 vs 10.05, tolerance 2e1 > 1e-1
-
             sage: print(OC.output_difference(zeroabs,ten,optflag))
             Expected:
                 0.0
@@ -1813,7 +1641,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 10.05
             Tolerance exceeded:
                 0.0 vs 10.05, tolerance 2e1 > 1e-1
-
             sage: print(OC.output_difference(zerorel,eps,optflag))
             Expected:
                 0.0
@@ -1821,7 +1648,6 @@ class SageOutputChecker(doctest.OutputChecker):
                 -0.05
             Tolerance exceeded:
                 0.0 vs -0.05, tolerance +infinity > 1e-1
-
             sage: print(OC.output_difference(zerorel,ten,optflag))
             Expected:
                 0.0
@@ -1830,9 +1656,6 @@ class SageOutputChecker(doctest.OutputChecker):
             Tolerance exceeded:
                 0.0 vs 10.05, tolerance +infinity > 1e-1
         """
-        # Regular expression for floats
-        float_regex = re.compile(r'\s*([+-]?\s*((\d*\.?\d+)|(\d+\.?))([eE][+-]?\d+)?)')
-
         got = self.human_readable_escape_sequences(got)
         want = example.want
         diff = doctest.OutputChecker.output_difference(self, example, got, optionflags)
@@ -1854,7 +1677,7 @@ class SageOutputChecker(doctest.OutputChecker):
                 for wstr, gstr in zip(want_str, got_str):
                     w = RIFtol(wstr)
                     g = RIFtol(gstr)
-                    if not g.overlaps(self.add_tolerance(w, want)):
+                    if not g.overlaps(add_tolerance(w, want)):
                         if want.tol:
                             if not w:
                                 fail(wstr, gstr, abs(g), want.tol)

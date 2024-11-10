@@ -1,4 +1,5 @@
-# sage.doctest: optional - sage.rings.function_field
+# sage_setup: distribution = sagemath-singular
+# sage.doctest: needs sage.rings.function_field
 r"""
 Elements of function fields: extension
 """
@@ -114,7 +115,7 @@ cdef class FunctionFieldElement_polymod(FunctionFieldElement):
 
     cpdef _richcmp_(self, other, int op):
         """
-        Do rich comparison with the other element with respect to ``op``
+        Do rich comparison with the other element with respect to ``op``.
 
         EXAMPLES::
 
@@ -257,7 +258,7 @@ cdef class FunctionFieldElement_polymod(FunctionFieldElement):
 
         INPUT:
 
-        - ``n`` -- an integer
+        - ``n`` -- integer
 
         OUTPUT:
 
@@ -293,7 +294,6 @@ cdef class FunctionFieldElement_polymod(FunctionFieldElement):
             x
             sage: L(x^9).nth_root(-27)^-27
             x^9
-
         """
         if n == 1:
             return self
@@ -323,7 +323,7 @@ cdef class FunctionFieldElement_polymod(FunctionFieldElement):
 
         INPUT:
 
-        - ``n`` -- an integer
+        - ``n`` -- integer
 
         ALGORITHM:
 
@@ -345,7 +345,6 @@ cdef class FunctionFieldElement_polymod(FunctionFieldElement):
             False
             sage: L(x).is_nth_power(2)
             True
-
         """
         if n == 0:
             return self.is_one()

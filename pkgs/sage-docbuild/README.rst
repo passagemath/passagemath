@@ -1,5 +1,5 @@
 ================================================================================
- Sage: Open Source Mathematics Software: Build system of the Sage documentation
+ passagemath: Build system of the Sage documentation
 ================================================================================
 
 About SageMath

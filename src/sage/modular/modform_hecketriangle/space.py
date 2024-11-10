@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.combinat sage.graphs
 r"""
 Modular forms for Hecke triangle groups
@@ -5,7 +6,6 @@ Modular forms for Hecke triangle groups
 AUTHORS:
 
 - Jonas Jermann (2013): initial version
-
 """
 # ****************************************************************************
 #       Copyright (C) 2013-2014 Jonas Jermann <jjermann2@gmail.com>
@@ -267,7 +267,7 @@ class QuasiModularForms(FormsSpace_abstract, Module, UniqueRepresentation):
 
         INPUT:
 
-        - ``v`` -- An element of ``self``.
+        - ``v`` -- an element of ``self``
 
         OUTPUT:
 
@@ -441,7 +441,7 @@ class QuasiCuspForms(FormsSpace_abstract, Module, UniqueRepresentation):
 
         INPUT:
 
-        - ``v`` -- An element of ``self``.
+        - ``v`` -- an element of ``self``
 
         OUTPUT:
 
@@ -709,7 +709,7 @@ class ModularForms(FormsSpace_abstract, Module, UniqueRepresentation):
 
         INPUT:
 
-        - ``v`` -- An element of ``self``.
+        - ``v`` -- an element of ``self``
 
         OUTPUT:
 
@@ -854,7 +854,7 @@ class CuspForms(FormsSpace_abstract, Module, UniqueRepresentation):
 
         INPUT:
 
-        - ``v`` -- An element of ``self``.
+        - ``v`` -- an element of ``self``
 
         OUTPUT:
 
@@ -962,9 +962,9 @@ class ZeroForm(FormsSpace_abstract, Module, UniqueRepresentation):
 
         INPUT:
 
-        - ``k``   -- A rational number, the weight.
+        - ``k`` -- a rational number; the weight
 
-        - ``ep``  -- ``1`` or ``-1``, the multiplier.
+        - ``ep`` -- ``1`` or ``-1``; the multiplier
 
         EXAMPLES::
 
@@ -1018,7 +1018,7 @@ class ZeroForm(FormsSpace_abstract, Module, UniqueRepresentation):
 
         INPUT:
 
-        - ``v`` -- An element of ``self``, i.e. in this case the zero vector.
+        - ``v`` -- an element of ``self``, i.e. in this case the zero vector
 
         EXAMPLES::
 

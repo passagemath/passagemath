@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Root system data for type A infinity
 """
@@ -98,7 +99,6 @@ class CartanType(CartanType_standard, CartanType_simple):
             sage: print(CartanType(['A', NN]).ascii_art())
             O---O---O---O---O---O---O---..
             0   1   2   3   4   5   6
-
         """
         if label is None:
             label = lambda i: i

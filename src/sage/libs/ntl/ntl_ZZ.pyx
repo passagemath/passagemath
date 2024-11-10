@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-ntl
 # distutils: libraries = NTL_LIBRARIES gmp m
 # distutils: extra_compile_args = NTL_CFLAGS
 # distutils: include_dirs = NTL_INCDIR
@@ -60,7 +61,7 @@ cdef class ntl_ZZ():
     # See ntl.pxd for definition of data members
     def __init__(self, v=None):
         r"""
-        Initializes and NTL integer.
+        Initialize and NTL integer.
 
         EXAMPLES::
 
@@ -100,7 +101,7 @@ cdef class ntl_ZZ():
 
     def __repr__(self):
         """
-        Return the string representation of self.
+        Return the string representation of ``self``.
 
         EXAMPLES::
 
@@ -120,7 +121,7 @@ cdef class ntl_ZZ():
 
     def __richcmp__(ntl_ZZ self, other, int op):
         """
-        Compare self to other.
+        Compare ``self`` to ``other``.
 
         EXAMPLES::
 
@@ -253,7 +254,7 @@ cdef class ntl_ZZ():
 
     def __int__(self):
         """
-        Return self as an int.
+        Return ``self`` as an int.
 
         EXAMPLES::
 
@@ -271,7 +272,7 @@ cdef class ntl_ZZ():
 
     cdef int get_as_int(ntl_ZZ self) noexcept:
         r"""
-        Returns value as C int.
+        Return value as C int.
 
         Return value is only valid if the result fits into an int.
 
@@ -298,7 +299,7 @@ cdef class ntl_ZZ():
 
     def _integer_(self, ZZ=None):
         r"""
-        Gets the value as a sage int.
+        Get the value as a sage int.
 
         EXAMPLES::
 
@@ -314,7 +315,7 @@ cdef class ntl_ZZ():
 
     cdef void set_from_int(ntl_ZZ self, int value) noexcept:
         r"""
-        Sets the value from a C int.
+        Set the value from a C int.
 
         AUTHOR: David Harvey (2006-08-05)
         """
@@ -322,7 +323,7 @@ cdef class ntl_ZZ():
 
     def set_from_sage_int(self, Integer value):
         r"""
-        Sets the value from a sage int.
+        Set the value from a sage int.
 
         EXAMPLES::
 
@@ -355,7 +356,7 @@ cdef class ntl_ZZ():
     def valuation(self, ntl_ZZ prime):
         """
         Uses code in ``ntlwrap_impl.h`` to compute the number of times
-        prime divides self.
+        prime divides ``self``.
 
         EXAMPLES::
 
@@ -383,8 +384,8 @@ cdef class ntl_ZZ():
 
     def val_unit(self, ntl_ZZ prime):
         """
-        Uses code in ``ntlwrap_impl.h`` to compute p-adic valuation and
-        unit of self.
+        Uses code in ``ntlwrap_impl.h`` to compute `p`-adic valuation and
+        unit of ``self``.
 
         EXAMPLES::
 
@@ -472,6 +473,7 @@ def ntl_setSeed(x=None):
     sig_on()
     ZZ_SetSeed(seed.x)
     sig_off()
+
 
 ntl_setSeed()
 

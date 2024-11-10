@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.combinat sage.modules
 """
 Abstract base class for algebras
@@ -23,7 +24,7 @@ from sage.categories.algebras import Algebras
 
 def is_Algebra(x):
     r"""
-    Return True if x is an Algebra.
+    Return ``True`` if `x` is an Algebra.
 
     EXAMPLES::
 

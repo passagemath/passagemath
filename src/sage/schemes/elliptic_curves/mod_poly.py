@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Modular polynomials for elliptic curves
 
@@ -42,7 +43,7 @@ def classical_modular_polynomial(l, j=None):
 
     INPUT:
 
-    - ``l`` -- positive integer.
+    - ``l`` -- positive integer
     - ``j`` -- either ``None`` or a ring element:
 
       * if ``None`` is given, the original modular polynomial
@@ -136,7 +137,7 @@ def classical_modular_polynomial(l, j=None):
 
     # If the generic polynomial is in the cache or the database, evaluating
     # it directly should always be faster than recomputing it from scratch.
-    if l  in _cache:
+    if l in _cache:
         return _cache[l](j, Y)
     try:
         Phi = _db[l]

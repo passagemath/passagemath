@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-brial
+# sage.doctest: needs sage.rings.polynomial.pbori
 from sage.rings.polynomial.pbori.pbori import mod_mon_set
 from .pbori import (BooleSet, GroebnerStrategy, ReductionStrategy,
                     parallel_reduce, easy_linear_factors)
@@ -591,7 +593,7 @@ def symmGB_F2_C(G, opt_exchange=True,
                 opt_allow_recursion=False, use_noro=False, use_faugere=False,
                 ll=False, opt_linear_algebra_in_last_block=True,
                 max_generators=None, red_tail_deg_growth=True,
-                modified_linear_algebra=True, matrix_prefix="",
+                modified_linear_algebra=True, matrix_prefix='',
                 draw_matrices=False):
     if use_noro:
         raise NotImplementedError("noro not implemented for symmgb")

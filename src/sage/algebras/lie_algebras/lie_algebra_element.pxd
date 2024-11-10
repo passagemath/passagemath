@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from sage.structure.element cimport Element
 from sage.structure.element_wrapper cimport ElementWrapper
 from sage.structure.sage_object cimport SageObject
@@ -20,7 +21,8 @@ cdef class LieSubalgebraElementWrapper(LieAlgebraElementWrapper):
 cdef class StructureCoefficientsElement(LieAlgebraMatrixWrapper):
     cpdef bracket(self, right)
     cpdef _bracket_(self, right)
-    cpdef to_vector(self, bint sparse=*)
+    cpdef _vector_(self, bint sparse=*, order=*)
+    cpdef to_vector(self, bint sparse=*, order=*)
     cpdef dict monomial_coefficients(self, bint copy=*)
     # cpdef lift(self)
 

@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-brial
+# sage.doctest: needs sage.rings.polynomial.pbori
 r"""
 PolyBoRi's interface to libpolybori/BRiAL
 
@@ -60,7 +62,7 @@ AUTHOR:
         sage: r = r.clone(names=["z17", "z7"])
         sage: [r.variable(idx) for idx in range(3)]
         [z17, z7, x2]
-        sage: r = r.clone(names="abcde")
+        sage: r = r.clone(names='abcde')
         sage: [r.variable(idx) for idx in range(6)]
         [a, b, c, d, e, y2]
 """
@@ -104,7 +106,8 @@ _add_up_polynomials = add_up_polynomials
 
 def add_up_polynomials(polys, init):
     r"""
-    Adds up the polynomials in polys (which should be a BoolePolynomialVector or a sequence of ???
+    Add up the polynomials in polys (which should be a
+    ``BoolePolynomialVector`` or a sequence of ???
     """
     if not isinstance(polys, BoolePolynomialVector):
         vec = BoolePolynomialVector

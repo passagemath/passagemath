@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-objects
+ */
 #include <stdio.h>
 
 #if PY_MAJOR_VERSION == 3 && PY_MINOR_VERSION >= 9

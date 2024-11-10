@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Tensor Algebras
@@ -29,6 +30,7 @@ from sage.combinat.free_module import CombinatorialFreeModule, CombinatorialFree
 from sage.monoids.indexed_free_monoid import IndexedFreeMonoid
 from sage.misc.cachefunc import cached_method
 from sage.sets.family import Family
+
 
 class TensorAlgebra(CombinatorialFreeModule):
     r"""
@@ -582,7 +584,8 @@ class TensorAlgebra(CombinatorialFreeModule):
         #                          for w in Word(range(p)).shuffle(range(p, k)) )
 
 #####################################################################
-## TensorAlgebra functor
+# TensorAlgebra functor
+
 
 class TensorAlgebraFunctor(ConstructionFunctor):
     r"""
@@ -682,7 +685,8 @@ class TensorAlgebraFunctor(ConstructionFunctor):
         return D.module_morphism(phi, codomain=C)
 
 #####################################################################
-## Lift map from the base ring
+# Lift map from the base ring
+
 
 class BaseRingLift(Morphism):
     r"""

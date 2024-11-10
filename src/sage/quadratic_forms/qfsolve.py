@@ -1,4 +1,5 @@
-# sage.doctest: needs sage.libs.pari
+# sage_setup: distribution = sagemath-pari
+# sage.doctest: needs sage.libs.pari sage.modules
 """
 Solving quadratic equations
 
@@ -129,7 +130,7 @@ def solve(self, c=0):
 
     - ``c`` -- (default: 0) a rational number
 
-    OUTPUT: A non-zero vector `x` satisfying ``self(x) == c``.
+    OUTPUT: a nonzero vector `x` satisfying ``self(x) == c``
 
     ALGORITHM:
 

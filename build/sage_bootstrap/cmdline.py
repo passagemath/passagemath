@@ -40,7 +40,6 @@ SageMath Bootstrap Library
 Provides scripts to manage the packages of Sage-the-distribution,
 including SageMath's database of equivalent system packages,
 and to download and upload tarballs from/to SageMath servers.
-
 """
 
 
@@ -327,6 +326,9 @@ def make_parser():
         help=('package name or designator for all packages of a given type '
               '(one of :all:, :standard:, :optional:, and :experimental:)'))
     parser_dependencies.add_argument(
+        '--build', action='store_true',
+        help='list the (ordinary) build dependencies')
+    parser_dependencies.add_argument(
         '--order-only', action='store_true',
         help='list the order-only build dependencies')
     parser_dependencies.add_argument(
@@ -415,6 +417,9 @@ def make_parser():
     parser_download.add_argument(
         '--no-check-certificate', action='store_true',
         help='do not check SSL certificates for https connections')
+    parser_download.add_argument(
+        '--tags', nargs='*', default=[],
+        help='ordered list of platform compatibility tags to try (for platform-dependent wheels only)')
 
     parser_upload = subparsers.add_parser(
         'upload', epilog=epilog_upload,
@@ -508,6 +513,8 @@ def run():
         app.properties(*args.package_class, format=args.format)
     elif args.subcommand == 'dependencies':
         types = []
+        if args.build:
+            types.append('build')
         if args.order_only:
             types.append('order_only')
         if args.optional:
@@ -540,7 +547,8 @@ def run():
                          has_files=args.has_files, no_files=args.no_files,
                          exclude=args.exclude,
                          allow_upstream=args.allow_upstream,
-                         on_error=args.on_error)
+                         on_error=args.on_error,
+                         tags=args.tags)
     elif args.subcommand == 'create':
         app.create(args.package_name, args.version, args.tarball, args.type, args.url,
                    args.description, args.license, args.upstream_contact,

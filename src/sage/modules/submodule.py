@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Submodules and subquotients of free modules
 
@@ -21,7 +22,6 @@ EXAMPLES::
 AUTHORS:
 
 - Kwankyu Lee (2022-05): initial version
-
 """
 
 # ****************************************************************************

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Jacobi elliptic functions
 
@@ -358,7 +359,7 @@ class Jacobi(BuiltinFunction):
                 return csch(x)
         return
 
-    def _evalf_(self, x, m, parent, algorithm=None):
+    def _evalf_(self, x, m, parent=None, algorithm=None):
         r"""
         TESTS::
 
@@ -716,7 +717,7 @@ class InverseJacobi(BuiltinFunction):
                 return Integer(0)
         return
 
-    def _evalf_(self, x, m, parent, algorithm=None):
+    def _evalf_(self, x, m, parent=None, algorithm=None):
         r"""
         TESTS::
 
@@ -935,7 +936,7 @@ def jacobi(kind, z, m, **kwargs):
 
     INPUT:
 
-    - ``kind`` -- a string of the form ``'pq'``, where ``p``, ``q`` are in
+    - ``kind`` -- string of the form ``'pq'``, where ``p``, ``q`` are in
       ``c``, ``d``, ``n``, ``s``
     - ``z`` -- a complex number
     - ``m`` -- a complex number; note that `m = k^2`, where `k` is
@@ -998,7 +999,7 @@ def inverse_jacobi(kind, x, m, **kwargs):
 
     INPUT:
 
-    - ``kind`` -- a string of the form ``'pq'``, where ``p``, ``q`` are in
+    - ``kind`` -- string of the form ``'pq'``, where ``p``, ``q`` are in
       ``c``, ``d``, ``n``, ``s``
     - ``x`` -- a real number
     - ``m`` -- a real number; note that `m = k^2`, where `k` is the elliptic
@@ -1103,7 +1104,7 @@ class JacobiAmplitude(BuiltinFunction):
             return Integer(0)
         return
 
-    def _evalf_(self, x, m, parent, algorithm=None):
+    def _evalf_(self, x, m, parent=None, algorithm=None):
         r"""
         TESTS::
 

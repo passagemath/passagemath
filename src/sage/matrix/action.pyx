@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Actions used by the coercion model for matrix and vector multiplications
 
@@ -66,8 +67,8 @@ AUTHOR:
 
 import operator
 
-from sage.matrix.matrix_space import MatrixSpace, is_MatrixSpace
-from sage.modules.free_module import FreeModule, is_FreeModule
+from sage.matrix.matrix_space import MatrixSpace
+from sage.modules.free_module import FreeModule, FreeModule_generic
 from sage.structure.coerce cimport coercion_model
 from sage.categories.homset import Hom, End
 
@@ -100,7 +101,7 @@ cdef class MatrixMulAction(Action):
          over Univariate Polynomial Ring in x over Rational Field
     """
     def __init__(self, G, S, is_left):
-        if not is_MatrixSpace(G):
+        if not isinstance(G, MatrixSpace):
             raise TypeError("Not a matrix space: %s" % G)
         if isinstance(S, SchemeHomset_generic):
             if G.base_ring() is not S.domain().base_ring():
@@ -160,7 +161,7 @@ cdef class MatrixMatrixAction(MatrixMulAction):
         example is good practice.
     """
     def __init__(self, G, S):
-        if not is_MatrixSpace(S):
+        if not isinstance(S, MatrixSpace):
             raise TypeError("Not a matrix space: %s" % S)
 
         MatrixMulAction.__init__(self, G, S, True)
@@ -267,7 +268,6 @@ cdef class MatrixMatrixAction(MatrixMulAction):
             [ 5360  7303]
             [ 8168 11143]
             [11056 15077]
-
         """
         cdef Matrix A = <Matrix>g
         cdef Matrix B = <Matrix>s
@@ -304,7 +304,7 @@ cdef class MatrixVectorAction(MatrixMulAction):
             ...
             TypeError: incompatible dimensions 3, 4
             """
-        if not is_FreeModule(S):
+        if not isinstance(S, FreeModule_generic):
             raise TypeError("Not a free module: %s" % S)
         MatrixMulAction.__init__(self, G, S, True)
 
@@ -355,7 +355,7 @@ cdef class VectorMatrixAction(MatrixMulAction):
             ...
             TypeError: incompatible dimensions 5, 3
         """
-        if not is_FreeModule(S):
+        if not isinstance(S, FreeModule_generic):
             raise TypeError("Not a free module: %s" % S)
         MatrixMulAction.__init__(self, G, S, False)
 
@@ -439,7 +439,7 @@ cdef class MatrixPolymapAction(MatrixMulAction):
 
     cpdef _act_(self, mat, f):
         """
-        Call the action
+        Call the action.
 
         INPUT:
 
@@ -453,10 +453,10 @@ cdef class MatrixPolymapAction(MatrixMulAction):
             sage: M = MatrixSpace(QQ, 2, 2)
             sage: P.<x, y> = ProjectiveSpace(QQ, 1)
             sage: H = Hom(P, P)
-            sage: f = H([x^2 + y^2, y^2])
+            sage: f = H([x^2 + y^2, y^2])                                               # needs sage.libs.singular
             sage: A = MatrixPolymapAction(M, H)
             sage: m = matrix([[1,1], [0,1]])
-            sage: A._act_(m, f)
+            sage: A._act_(m, f)                                                         # needs sage.libs.singular
             Scheme endomorphism of Projective Space of dimension 1 over Rational Field
               Defn: Defined on coordinates by sending (x : y) to
                     (x^2 + 2*y^2 : y^2)
@@ -526,10 +526,10 @@ cdef class PolymapMatrixAction(MatrixMulAction):
             sage: M = MatrixSpace(QQ, 2, 2)
             sage: P.<x,y> = ProjectiveSpace(QQ, 1)
             sage: H = Hom(P, P)
-            sage: f = H([x^2 + y^2, y^2])
+            sage: f = H([x^2 + y^2, y^2])                                               # needs sage.libs.singular
             sage: A = PolymapMatrixAction(M, H)
             sage: m = matrix([[1,1], [0,1]])
-            sage: A._act_(m, f)
+            sage: A._act_(m, f)                                                         # needs sage.libs.singular
             Scheme endomorphism of Projective Space of dimension 1 over Rational Field
               Defn: Defined on coordinates by sending (x : y) to
                     (x^2 + 2*x*y + 2*y^2 : y^2)

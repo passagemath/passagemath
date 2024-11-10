@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 """
 Lie Conformal Algebras With Basis
@@ -19,6 +20,7 @@ AUTHORS:
 
 from sage.categories.lie_conformal_algebras import LieConformalAlgebras
 from sage.combinat.free_module import CombinatorialFreeModule
+
 
 class LieConformalAlgebraWithBasis(CombinatorialFreeModule):
     """
@@ -54,7 +56,7 @@ class LieConformalAlgebraWithBasis(CombinatorialFreeModule):
     def __init__(self, R, basis_keys=None, element_class=None, category=None,
                  prefix=None, **kwds):
         """
-        Initialize self.
+        Initialize ``self``.
 
         TESTS::
 

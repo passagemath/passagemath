@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-glpk
 import pytest
 
 from sage.numerical.backends.generic_backend_test import GenericBackendTests
@@ -9,4 +10,4 @@ class TestGLPKBackend(GenericBackendTests):
 
     @pytest.fixture
     def backend(self) -> GenericBackend:
-        return MixedIntegerLinearProgram(solver="GLPK").get_backend()
+        return MixedIntegerLinearProgram(solver='GLPK').get_backend()

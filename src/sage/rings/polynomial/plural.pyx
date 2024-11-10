@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-singular
 r"""
 Noncommutative polynomials via libSINGULAR/Plural
 
@@ -120,7 +121,7 @@ import sage.libs.singular.ring
 
 from sage.rings.finite_rings.finite_field_prime_modn import FiniteField_prime_modn
 from sage.rings.integer cimport Integer
-from sage.rings.integer_ring import is_IntegerRing
+from sage.rings.integer_ring import IntegerRing_class
 
 from sage.rings.polynomial.multi_polynomial_libsingular cimport MPolynomialRing_libsingular, MPolynomial_libsingular, new_MP
 from sage.rings.polynomial.multi_polynomial_ideal import NCPolynomialIdeal
@@ -157,7 +158,7 @@ class G_AlgFactory(UniqueFactory):
         - ``key`` -- a 6-tuple, formed by a base ring, a tuple of names, two
           matrices over a polynomial ring over the base ring with the given
           variable names, a term order, and a category
-        - ``extra_args`` -- a dictionary, whose only relevant key is 'check'.
+        - ``extra_args`` -- dictionary, whose only relevant key is 'check'
 
         TESTS::
 
@@ -174,18 +175,19 @@ class G_AlgFactory(UniqueFactory):
                                        category, check)
 
     def create_key_and_extra_args(self, base_ring, c, d, names=None, order=None,
-                                  category=None, check=None):
+                                  category=None, check=None, commutative=None):
         """
         Create a unique key for g-algebras.
 
         INPUT:
 
         - ``base_ring`` -- a ring
-        - ``c,d`` -- two matrices
-        - ``names`` -- a tuple or list of names
+        - ``c``, ``d`` -- two matrices
+        - ``names`` -- tuple or list of names
         - ``order`` -- (optional) term order
         - ``category`` -- (optional) category
-        - ``check`` -- optional bool
+        - ``check`` -- (optional) boolean
+        - ``commutative`` -- (optional) boolean
 
         TESTS::
 
@@ -193,6 +195,10 @@ class G_AlgFactory(UniqueFactory):
             sage: H = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
             sage: H is A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y}) # indirect doctest
             True
+
+            sage: P = A.g_algebra(relations={}, order='lex')
+            sage: P.category()
+            Category of commutative algebras over Rational Field
         """
         if names is None:
             raise ValueError("The generator names must be provided")
@@ -213,7 +219,11 @@ class G_AlgFactory(UniqueFactory):
         d.set_immutable()
 
         # Get the correct category
-        category = check_default_category(Algebras(base_ring), category)
+        if commutative:
+            usualcat = Algebras(base_ring).Commutative()
+        else:
+            usualcat = Algebras(base_ring)
+        category = check_default_category(usualcat, category)
 
         # Extra arg
         if check is None:
@@ -252,7 +262,7 @@ cdef class NCPolynomialRing_plural(Ring):
         INPUT:
 
         - ``base_ring`` -- base ring (must be either `\GF{q}`, `\ZZ`, `\ZZ/n\ZZ`, `\QQ` or absolute number field)
-        - ``names`` - a tuple of names of ring variables
+        - ``names`` -- tuple of names of ring variables
         - ``c``, ``d`` -- upper triangular matrices of coefficients,
           resp. commutative polynomials, satisfying the nondegeneracy
           conditions, which are to be tested if ``check`` is ``True``. These
@@ -532,7 +542,7 @@ cdef class NCPolynomialRing_plural(Ring):
                     _p = p_NSet(_n, _ring)
 
             # also accepting ZZ
-            elif is_IntegerRing(element.parent()):
+            elif isinstance(element.parent(), IntegerRing_class):
                 if isinstance(base_ring, FiniteField_prime_modn):
                     _p = p_ISet(int(element),_ring)
                 else:
@@ -758,7 +768,7 @@ cdef class NCPolynomialRing_plural(Ring):
 
         INPUT:
 
-        ``add_commutative`` (optional bool, default ``False``)
+        - ``add_commutative`` -- boolean (default: ``False``)
 
         OUTPUT:
 
@@ -829,7 +839,7 @@ cdef class NCPolynomialRing_plural(Ring):
 
         INPUT:
 
-        - ``n`` -- an integer ``>= 0``
+        - ``n`` -- nonnegative integer
 
         EXAMPLES::
 
@@ -842,7 +852,6 @@ cdef class NCPolynomialRing_plural(Ring):
 
             sage: P.gen(1) is P.gen(1)
             False
-
         """
         cdef poly *_p
         cdef ring *_ring = self._ring
@@ -877,11 +886,11 @@ cdef class NCPolynomialRing_plural(Ring):
 
         INPUT:
 
-        - ``*gens`` - list or tuple of generators (or several input arguments)
-        - ``coerce`` - bool (default: ``True``); this must be a
+        - ``*gens`` -- list or tuple of generators (or several input arguments)
+        - ``coerce`` -- boolean (default: ``True``); this must be a
           keyword argument. Only set it to ``False`` if you are certain
           that each generator is already in the ring.
-        - ``side`` - string (either "left", which is the default, or "twosided")
+        - ``side`` -- string (either "left", which is the default, or "twosided")
           Must be a keyword argument. Defines whether the ideal is a left ideal
           or a two-sided ideal. Right ideals are not implemented.
 
@@ -892,7 +901,7 @@ cdef class NCPolynomialRing_plural(Ring):
 
             sage: P.ideal([x + 2*y + 2*z-1, 2*x*y + 2*y*z-y, x^2 + 2*y^2 + 2*z^2-x])
             Left Ideal (x + 2*y + 2*z - 1, 2*x*y + 2*y*z - y, x^2 - x + 2*y^2 + 2*z^2) of Noncommutative Multivariate Polynomial Ring in x, y, z over Rational Field, nc-relations: {y*x: -x*y}
-            sage: P.ideal([x + 2*y + 2*z-1, 2*x*y + 2*y*z-y, x^2 + 2*y^2 + 2*z^2-x], side="twosided")
+            sage: P.ideal([x + 2*y + 2*z-1, 2*x*y + 2*y*z-y, x^2 + 2*y^2 + 2*z^2-x], side='twosided')
             Twosided Ideal (x + 2*y + 2*z - 1, 2*x*y + 2*y*z - y, x^2 - x + 2*y^2 + 2*z^2) of Noncommutative Multivariate Polynomial Ring in x, y, z over Rational Field, nc-relations: {y*x: -x*y}
         """
         coerce = kwds.get('coerce', True)
@@ -1141,9 +1150,9 @@ cdef class NCPolynomialRing_plural(Ring):
 
         INPUT:
 
-        - ``f`` - monomial
+        - ``f`` -- monomial
 
-        - ``g`` - monomial
+        - ``g`` -- monomial
 
         EXAMPLES::
 
@@ -1211,8 +1220,8 @@ cdef class NCPolynomialRing_plural(Ring):
 
         INPUT:
 
-        - ``f`` - monomial
-        - ``G`` - list/set of mpolynomials
+        - ``f`` -- monomial
+        - ``G`` -- list/set of mpolynomials
 
         EXAMPLES::
 
@@ -1272,8 +1281,8 @@ cdef class NCPolynomialRing_plural(Ring):
 
         INPUT:
 
-        - ``h`` - monomial
-        - ``g`` - monomial
+        - ``h`` -- monomial
+        - ``g`` -- monomial
 
         EXAMPLES::
 
@@ -1346,11 +1355,9 @@ cdef class NCPolynomialRing_plural(Ring):
 
         INPUT:
 
-        - ``t`` - a monomial
+        - ``t`` -- a monomial
 
-        OUTPUT:
-
-        a list of monomials
+        OUTPUT: list of monomials
 
         EXAMPLES::
 
@@ -1390,7 +1397,6 @@ def unpickle_NCPolynomial_plural(NCPolynomialRing_plural R, d):
         sage: p = x*y+2*z+4*x*y*z*x
         sage: loads(dumps(p)) == p  # indirect doctest
         True
-
     """
     cdef ring *r = R._ring
     cdef poly *m
@@ -1398,7 +1404,7 @@ def unpickle_NCPolynomial_plural(NCPolynomialRing_plural R, d):
     cdef int _i, _e
     p = p_ISet(0,r)
     rChangeCurrRing(r)
-    for mon,c in d.iteritems():
+    for mon, c in d.items():
         m = p_Init(r)
         for i,e in mon.sparse_iter():
             _i = i
@@ -1452,7 +1458,6 @@ cdef class NCPolynomial_plural(RingElement):
             sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
             sage: loads(dumps(x*y+2*z+4*x*y*z*x))
             4*x^2*y*z + 8*x^2*y - 4*x*z^2 + x*y - 8*x*z + 2*z
-
         """
         return unpickle_NCPolynomial_plural, (self._parent, self.dict())
 
@@ -1532,7 +1537,7 @@ cdef class NCPolynomial_plural(RingElement):
 
     cpdef _add_(left, right):
         """
-        Adds left and right.
+        Add ``left`` and ``right``.
 
         EXAMPLES::
 
@@ -1561,7 +1566,6 @@ cdef class NCPolynomial_plural(RingElement):
             Defining x, z, y
             sage: 3/2*x - 1/2*y - 1 # indirect doctest
             3/2*x - 1/2*y - 1
-
         """
         cdef ring *_ring = (<NCPolynomialRing_plural>left._parent)._ring
 
@@ -1634,7 +1638,7 @@ cdef class NCPolynomial_plural(RingElement):
 
     cpdef _div_(left, right):
         """
-        Divide left by right
+        Divide ``left`` by ``right``.
 
         EXAMPLES::
 
@@ -1668,7 +1672,7 @@ cdef class NCPolynomial_plural(RingElement):
         else:
             return (<NCPolynomialRing_plural>left._parent).fraction_field()(left,right)
 
-    def __pow__(NCPolynomial_plural self, exp, ignored):
+    def __pow__(NCPolynomial_plural self, exp, mod):
         """
         Return ``self**(exp)``.
 
@@ -1694,7 +1698,22 @@ cdef class NCPolynomial_plural(RingElement):
             Traceback (most recent call last):
             ....
             OverflowError: exponent overflow (2147483648)
+
+        Check that using third argument raises an error::
+
+            sage: A.<x,z,y> = FreeAlgebra(QQ, 3)
+            sage: P = A.g_algebra(relations={y*x:-x*y + z},  order='lex')
+            sage: P.inject_variables()
+            Defining x, z, y
+            sage: pow(x + y + z, 2, x)
+            Traceback (most recent call last):
+            ...
+            NotImplementedError: pow() with a modulus is not implemented for this ring
         """
+        if mod is not None:
+            raise NotImplementedError(
+                "pow() with a modulus is not implemented for this ring"
+            )
         if type(exp) is not Integer:
             try:
                 exp = Integer(exp)
@@ -1760,8 +1779,6 @@ cdef class NCPolynomial_plural(RingElement):
             Field, nc-relations: {z*x: x*z + 2*x, z*y: y*z - 2*y, y*x: x*y - z}
             sage: sorted(I.std().gens(),key=str)
             [2*x*y - z - 1, x*z + x, x^2, y*z - y, y^2, z^2 - 1]
-
-
         """
         cdef ideal *_I
         cdef NCPolynomialRing_plural parent = <NCPolynomialRing_plural>self._parent
@@ -1887,9 +1904,7 @@ cdef class NCPolynomial_plural(RingElement):
           self) If x is not specified (or is ``None``), return the total
           degree, which is the maximum degree of any monomial.
 
-        OUTPUT:
-
-        integer
+        OUTPUT: integer
 
         EXAMPLES::
 
@@ -1917,7 +1932,6 @@ cdef class NCPolynomial_plural(RingElement):
             -1
             sage: P(1).degree(x)
             0
-
         """
         cdef ring *r = (<NCPolynomialRing_plural>self._parent)._ring
         cdef poly *p = self._poly
@@ -2022,14 +2036,12 @@ cdef class NCPolynomial_plural(RingElement):
 
         INPUT:
 
-        - ``degrees`` - Can be any of:
-                - a dictionary of degree restrictions
-                - a list of degree restrictions (with None in the unrestricted variables)
-                - a monomial (very fast, but not as flexible)
+        - ``degrees`` -- can be any of:
+          - a dictionary of degree restrictions
+          - a list of degree restrictions (with ``None`` in the unrestricted variables)
+          - a monomial (very fast, but not as flexible)
 
-        OUTPUT:
-
-        element of the parent of this element.
+        OUTPUT: element of the parent of this element
 
         .. NOTE::
 
@@ -2145,11 +2157,9 @@ cdef class NCPolynomial_plural(RingElement):
 
         INPUT:
 
-        - ``mon`` - a monomial
+        - ``mon`` -- a monomial
 
-        OUTPUT:
-
-        coefficient in base ring
+        OUTPUT: coefficient in base ring
 
         .. SEEALSO::
 
@@ -2209,6 +2219,9 @@ cdef class NCPolynomial_plural(RingElement):
             sage: f = (2*x*y^3*z^2 + (7)*x^2 + (3))
             sage: f.dict()
             {(0, 0, 0): 3, (1, 2, 3): 2, (2, 0, 0): 7}
+
+            sage: f.monomial_coefficients()
+            {(0, 0, 0): 3, (1, 2, 3): 2, (2, 0, 0): 7}
         """
         cdef poly *p
         cdef ring *r
@@ -2240,7 +2253,7 @@ cdef class NCPolynomial_plural(RingElement):
 
         INPUT:
 
-        * "copy" -- ignored
+        - ``copy`` -- ignored
 
         EXAMPLES::
 
@@ -2265,9 +2278,9 @@ cdef class NCPolynomial_plural(RingElement):
 
         INPUT:
 
-        - ``codomain`` -- The parent where the images live
+        - ``codomain`` -- the parent where the images live
 
-        - ``im_gens`` -- A list or tuple with the images of the generators of this ring.
+        - ``im_gens`` -- list or tuple with the images of the generators of this ring
 
         EXAMPLES::
 
@@ -2347,8 +2360,8 @@ cdef class NCPolynomial_plural(RingElement):
 
         INPUT:
 
-        - ``x`` - a tuple or, in case of a single-variable MPolynomial
-          ring ``x`` can also be an integer.
+        - ``x`` -- tuple or, in case of a single-variable MPolynomial
+          ring ``x`` can also be an integer
 
         EXAMPLES::
 
@@ -2365,7 +2378,7 @@ cdef class NCPolynomial_plural(RingElement):
             sage: f[0,0,0]
             0
 
-            sage: R.<x> = PolynomialRing(GF(7), implementation="singular"); R
+            sage: R.<x> = PolynomialRing(GF(7), implementation='singular'); R
             Multivariate Polynomial Ring in x over Finite Field of size 7
             sage: f = 5*x^2 + 3; f
             -2*x^2 + 3
@@ -2411,9 +2424,8 @@ cdef class NCPolynomial_plural(RingElement):
 
         INPUT:
 
-        - ``as_ETuples`` - (default: ``True``) if ``True`` returns the result as an list of ETuples
-          otherwise returns a list of tuples
-
+        - ``as_ETuples`` -- boolean (default: ``True``); if ``True`` returns
+          the result as an list of ETuples, otherwise returns a list of tuples
 
         EXAMPLES::
 
@@ -2520,7 +2532,7 @@ cdef class NCPolynomial_plural(RingElement):
 
     def monomials(self):
         """
-        Return the list of monomials in ``self``
+        Return the list of monomials in ``self``.
 
         The returned list is decreasingly ordered by the term ordering
         of ``self.parent()``.
@@ -2858,7 +2870,8 @@ cdef inline NCPolynomial_plural new_NCP(NCPolynomialRing_plural parent,
 
 cpdef MPolynomialRing_libsingular new_CRing(RingWrap rw, base_ring):
     """
-    Construct MPolynomialRing_libsingular from ringWrap, assuming the ground field to be base_ring
+    Construct ``MPolynomialRing_libsingular`` from ``RingWrap``, assuming the
+    ground field to be ``base_ring``.
 
     EXAMPLES::
 
@@ -2928,7 +2941,8 @@ cpdef MPolynomialRing_libsingular new_CRing(RingWrap rw, base_ring):
 
 cpdef NCPolynomialRing_plural new_NRing(RingWrap rw, base_ring):
     """
-    Construct NCPolynomialRing_plural from ringWrap, assuming the ground field to be base_ring
+    Construct ``NCPolynomialRing_plural`` from ``RingWrap``, assuming the
+    ground field to be ``base_ring``.
 
     EXAMPLES::
 
@@ -2996,9 +3010,11 @@ cpdef NCPolynomialRing_plural new_NRing(RingWrap rw, base_ring):
 
 def new_Ring(RingWrap rw, base_ring):
     """
-    Constructs a Sage ring out of low level RingWrap, which wraps a pointer to a Singular ring.
+    Construct a Sage ring out of low level ``RingWrap``, which wraps a pointer
+    to a Singular ring.
 
-    The constructed ring is either commutative or noncommutative depending on the Singular ring.
+    The constructed ring is either commutative or noncommutative depending on
+    the Singular ring.
 
     EXAMPLES::
 
@@ -3040,7 +3056,6 @@ def new_Ring(RingWrap rw, base_ring):
         sage: from sage.rings.polynomial.plural import new_Ring
         sage: R = new_Ring(W, H.base_ring()); R
         Noncommutative Multivariate Polynomial Ring in x, y, z over Rational Field, nc-relations: {y*x: x*y - 1}
-
     """
     #    import warnings
     #    warnings.warn("This is a hack. Please, use it on your own risk...")
@@ -3051,15 +3066,15 @@ def new_Ring(RingWrap rw, base_ring):
 
 def SCA(base_ring, names, alt_vars, order='degrevlex'):
     """
-    Return a free graded-commutative algebra
+    Return a free graded-commutative algebra.
 
     This is also known as a free super-commutative algebra.
 
     INPUT:
 
     - ``base_ring`` -- the ground field
-    - ``names`` -- a list of variable names
-    - ``alt_vars`` -- a list of indices of to be anti-commutative variables (odd variables)
+    - ``names`` -- list of variable names
+    - ``alt_vars`` -- list of indices of to be anti-commutative variables (odd variables)
     - ``order`` -- ordering to be used for the constructed algebra
 
     EXAMPLES::
@@ -3115,7 +3130,7 @@ def ExteriorAlgebra(base_ring, names,order='degrevlex'):
     INPUT:
 
     - ``base_ring`` -- the ground ring
-    - ``names`` -- a list of variable names
+    - ``names`` -- list of variable names
 
     EXAMPLES::
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # cython: binding=True
 # distutils: language = c++
 r"""
@@ -452,7 +453,7 @@ cdef class GabowEdgeConnectivity:
         Allocate data structure for the new tree/forest.
 
         This method also initializes data structures for this tree index. Data
-        structures for a given tree index are allocatated only once.
+        structures for a given tree index are allocated only once.
 
         INPUT:
 

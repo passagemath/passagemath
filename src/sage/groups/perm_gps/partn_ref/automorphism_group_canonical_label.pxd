@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 #*****************************************************************************
 #       Copyright (C) 2006 - 2011 Robert L. Miller <rlmillster@gmail.com>
 #
@@ -49,6 +50,3 @@ cdef aut_gp_and_can_lab *get_aut_gp_and_can_lab( void *,
     int (*)(PartitionStack *, void *, int *, int) noexcept,
     int (*)(int *, int *, void *, void *, int) noexcept, bint, StabilizerChain *,
     agcl_work_space *, aut_gp_and_can_lab *) except NULL
-
-
-

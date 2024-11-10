@@ -1,4 +1,4 @@
-##      -*-   coding: utf-8   -*-     ##
+# sage_setup: distribution = sagemath-repl
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#
@@ -105,5 +105,4 @@ r"""
     ...
     ValueError: no discrete log of 3*a^3 + 2*a^2 + a + 3 found
     to base a^2 + 4*a + 4
-
 """

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# sage_setup: distribution = sagemath-modules
 """
 Boolean functions
 
@@ -26,7 +26,6 @@ AUTHOR:
 - Rusydi H. Makarim (2016-07-09): add is_plateaued()
 - Yann Laigle-Chapuy (2010-02-26): add basic arithmetic
 - Yann Laigle-Chapuy (2009-08-28): first implementation
-
 """
 
 from cysignals.signals cimport sig_check
@@ -121,7 +120,6 @@ cdef reed_muller(mp_limb_t* f, int ldn):
 
     .. MATH:: f(x) = \bigoplus_{support(x)\subset I} a_I
     .. MATH:: a_i  = \bigoplus_{I\subset support(x)} f(x)
-
 
     EXAMPLES::
 
@@ -233,12 +231,12 @@ cdef class BooleanFunction(SageObject):
         Construct a Boolean Function.
         The input ``x`` can be either:
 
-        - an integer - the result is the zero function with ``x`` variables;
-        - a list - it is expected to be the truth table of the
+        - an integer -- the result is the zero function with ``x`` variables;
+        - a list -- it is expected to be the truth table of the
           result. Therefore it must be of length a power of 2, and its
           elements are interpreted as Booleans;
-        - a Boolean polynomial - the result is the corresponding Boolean function;
-        - a polynomial P over an extension of GF(2) - the result is
+        - a Boolean polynomial -- the result is the corresponding Boolean function;
+        - a polynomial P over an extension of GF(2) -- the result is
           the Boolean function with truth table ``( Tr(P(x)) for x in
           GF(2^k) )``
 
@@ -368,7 +366,7 @@ cdef class BooleanFunction(SageObject):
 
     def __invert__(self):
         """
-        Return the complement Boolean function of `self`.
+        Return the complement Boolean function of ``self``.
 
         EXAMPLES::
 
@@ -545,11 +543,14 @@ cdef class BooleanFunction(SageObject):
         """
         The truth table of the Boolean function.
 
-        INPUT: a string representing the desired format, can be either
+        INPUT:
 
-        - ``'bin'`` (default): we return a tuple of Boolean values
-        - ``'int'``: we return a tuple of 0 or 1 values
-        - ``'hex'``: we return a string representing the truth table in hexadecimal
+        - ``format`` -- string representing the desired format; can be either
+
+          - ``'bin'`` -- (default) we return a tuple of Boolean values
+          - ``'int'`` -- we return a tuple of 0 or 1 values
+          - ``'hex'`` -- we return a string representing the truth table in
+            hexadecimal
 
         EXAMPLES::
 
@@ -639,10 +640,13 @@ cdef class BooleanFunction(SageObject):
         """
         Return the value of the function for the given input.
 
-        INPUT: either
+        INPUT:
 
-        - a list -- then all elements are evaluated as Booleans
-        - an integer -- then we consider its binary representation
+        - ``x`` -- either:
+
+          - a list: then all elements are evaluated as booleans
+
+          - an integer: then we consider its binary representation
 
         EXAMPLES::
 
@@ -991,9 +995,9 @@ cdef class BooleanFunction(SageObject):
 
         INPUT:
 
-        - ``d`` -- an integer;
-        - ``dim`` -- a Boolean (default: ``False``), if ``True``, return also
-          the dimension of the annihilator vector space.
+        - ``d`` -- integer
+        - ``dim`` -- boolean (default: ``False``); if ``True``, return also
+          the dimension of the annihilator vector space
 
         EXAMPLES::
 
@@ -1184,12 +1188,12 @@ cdef class BooleanFunction(SageObject):
             ...
             TypeError: cannot compute is_linear_structure() using parameter X
         """
-        from sage.structure.element import is_Vector
+        from sage.structure.element import Vector
         nvars = self._nvariables
 
         if isinstance(val, (tuple, list)):
             i = ZZ(val, base=2)
-        elif is_Vector(val):
+        elif isinstance(val, Vector):
             if val.base_ring() != GF(2):
                 raise TypeError("base ring of input vector must be GF(2)")
             elif val.parent().dimension() != nvars:
@@ -1274,7 +1278,7 @@ cdef class BooleanFunction(SageObject):
 
     def derivative(self, u):
         r"""
-        Return the derivative in direction of ``u``
+        Return the derivative in direction of ``u``.
 
         INPUT:
 
@@ -1303,12 +1307,12 @@ cdef class BooleanFunction(SageObject):
             ...
             IndexError: index out of bound
         """
-        from sage.structure.element import is_Vector
+        from sage.structure.element import Vector
         nvars = self._nvariables
 
         if isinstance(u, (tuple, list)):
             v = ZZ(u, base=2)
-        elif is_Vector(u):
+        elif isinstance(u, Vector):
             if u.base_ring() != GF(2):
                 raise TypeError("base ring of input vector must be GF(2)")
             elif u.parent().dimension() != nvars:

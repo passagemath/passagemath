@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.graphs
 r"""
 Morphisms of simplicial complexes
@@ -126,9 +127,16 @@ def is_SimplicialComplexMorphism(x):
         sage: f = {0:0,1:1,3:3,4:4}
         sage: x = H(f)
         sage: is_SimplicialComplexMorphism(x)
+        doctest:warning...
+        DeprecationWarning: The function is_SimplicialComplexMorphism is deprecated;
+        use 'isinstance(..., SimplicialComplexMorphism)' instead.
+        See https://github.com/sagemath/sage/issues/38103 for details.
         True
-
     """
+    from sage.misc.superseded import deprecation
+    deprecation(38103,
+                "The function is_SimplicialComplexMorphism is deprecated; "
+                "use 'isinstance(..., SimplicialComplexMorphism)' instead.")
     return isinstance(x, SimplicialComplexMorphism)
 
 
@@ -251,7 +259,7 @@ class SimplicialComplexMorphism(Morphism):
             sage: f = {x[0]:x[0] for x in S.cells()[0]}
             sage: H = Hom(S,T)
             sage: z = H(f)
-            sage: z.associated_chain_complex_morphism()
+            sage: z.associated_chain_complex_morphism()                                 # needs sage.modules
             Chain complex morphism:
               From: Chain complex with at most 2 nonzero terms over Integer Ring
               To:   Chain complex with at most 2 nonzero terms over Integer Ring
@@ -453,7 +461,7 @@ class SimplicialComplexMorphism(Morphism):
 
     def image(self):
         """
-        Computes the image simplicial complex of `f`.
+        Compute the image simplicial complex of `f`.
 
         EXAMPLES::
 
@@ -491,7 +499,6 @@ class SimplicialComplexMorphism(Morphism):
             Simplicial complex with vertex set (0, 1) and facets {(0, 1)}
             sage: z.image()
             Simplicial complex with vertex set (0, 2) and facets {(0, 2)}
-
         """
         fa = [self(i) for i in self.domain().facets()]
         return SimplicialComplex(fa, maximality_check=True)
@@ -542,7 +549,6 @@ class SimplicialComplexMorphism(Morphism):
             False
             sage: y.is_injective()
             True
-
         """
         v = [self._vertex_dictionary[i[0]] for i in self.domain().faces()[0]]
         for i in v:
@@ -550,7 +556,7 @@ class SimplicialComplexMorphism(Morphism):
                 return False
         return True
 
-    def is_identity(self):
+    def is_identity(self) -> bool:
         """
         If ``self`` is an identity morphism, returns ``True``.
         Otherwise, ``False``.
@@ -583,18 +589,15 @@ class SimplicialComplexMorphism(Morphism):
         """
         if self.domain() != self.codomain():
             return False
-        else:
-            f = {}
-            for i in self.domain().vertices():
-                f[i] = i
-            if self._vertex_dictionary != f:
-                return False
-            else:
-                return True
+
+        f = {i: i for i in self.domain().vertices()}
+        return self._vertex_dictionary == f
 
     def fiber_product(self, other, rename_vertices=True):
         """
-        Fiber product of ``self`` and ``other``. Both morphisms should have
+        Fiber product of ``self`` and ``other``.
+
+        Both morphisms should have
         the same codomain. The method returns a morphism of simplicial
         complexes, which is the morphism from the space of the fiber product
         to the codomain.
@@ -640,7 +643,7 @@ class SimplicialComplexMorphism(Morphism):
 
     def mapping_torus(self):
         r"""
-        The mapping torus of a simplicial complex endomorphism
+        The mapping torus of a simplicial complex endomorphism.
 
         The mapping torus is the simplicial complex formed by taking
         the product of the domain of ``self`` with a `4` point
@@ -691,10 +694,10 @@ class SimplicialComplexMorphism(Morphism):
 
         INPUT:
 
-        - ``base_ring`` -- must be a field (optional, default ``QQ``)
+        - ``base_ring`` -- must be a field (default: ``QQ``)
 
-        - ``cohomology`` -- boolean (optional, default ``False``). If
-          ``True``, the map induced in cohomology rather than homology.
+        - ``cohomology`` -- boolean (default: ``False``); if
+          ``True``, the map induced in cohomology rather than homology
 
         EXAMPLES::
 

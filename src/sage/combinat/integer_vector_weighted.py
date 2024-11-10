@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Weighted Integer Vectors
 
@@ -39,14 +40,16 @@ class WeightedIntegerVectors(Parent, UniqueRepresentation):
 
     INPUT:
 
-     - ``n`` -- a non negative integer (optional)
+    - ``n`` -- nonnegative integer (optional)
 
-     - ``weight`` -- a tuple (or list or iterable) of positive integers
+    - ``weight`` -- tuple (or list or iterable) of positive integers
 
     EXAMPLES::
 
         sage: WeightedIntegerVectors(8, [1,1,2])
         Integer vectors of 8 weighted by [1, 1, 2]
+
+        sage: # needs sage.combinat
         sage: WeightedIntegerVectors(8, [1,1,2]).first()
         [0, 0, 4]
         sage: WeightedIntegerVectors(8, [1,1,2]).last()
@@ -59,6 +62,8 @@ class WeightedIntegerVectors(Parent, UniqueRepresentation):
 
         sage: WeightedIntegerVectors([1,1,2])
         Integer vectors weighted by [1, 1, 2]
+
+        sage: # needs sage.combinat
         sage: WeightedIntegerVectors([1,1,2]).cardinality()
         +Infinity
         sage: WeightedIntegerVectors([1,1,2]).first()
@@ -108,7 +113,7 @@ class WeightedIntegerVectors(Parent, UniqueRepresentation):
         TESTS::
 
             sage: WIV = WeightedIntegerVectors(8, [1,1,2])
-            sage: TestSuite(WIV).run()
+            sage: TestSuite(WIV).run()                                                  # needs sage.combinat
         """
         self._n = n
         self._weights = weight
@@ -134,7 +139,6 @@ class WeightedIntegerVectors(Parent, UniqueRepresentation):
             ...
             ValueError: cannot convert [1, 2, 0] into Integer vectors of 3
              weighted by [2, 1, 1]
-
         """
         if isinstance(lst, IntegerVector):
             if lst.parent() is self:
@@ -184,10 +188,10 @@ class WeightedIntegerVectors(Parent, UniqueRepresentation):
         if len(self._weights) != len(x):
             return False
         s = 0
-        for i, val in enumerate(x):
-            if (not isinstance(val, (int, Integer))) and (val not in ZZ):
+        for i, xi in enumerate(x):
+            if not isinstance(xi, (int, Integer)) and xi not in ZZ:
                 return False
-            s += x[i] * self._weights[i]
+            s += xi * self._weights[i]
         return s == self._n
 
     def _recfun(self, n, l):
@@ -258,6 +262,7 @@ class WeightedIntegerVectors_all(DisjointUnionEnumeratedSets):
         sage: W.cardinality()
         +Infinity
 
+        sage: # needs sage.combinat
         sage: W12 = W.graded_component(12)
         sage: W12.an_element()
         [4, 0, 0, 0, 0]
@@ -281,7 +286,7 @@ class WeightedIntegerVectors_all(DisjointUnionEnumeratedSets):
             sage: C = WeightedIntegerVectors([2,1,3])
             sage: C.category()
             Category of facade infinite enumerated sets with grading
-            sage: TestSuite(C).run()
+            sage: TestSuite(C).run()                                                    # needs sage.combinat
         """
         self._weights = weight
         from sage.sets.family import Family
@@ -350,7 +355,7 @@ def iterator_fast(n, l):
 
     INPUT:
 
-    - ``n`` -- an integer
+    - ``n`` -- integer
     - ``l`` -- the weights in weakly decreasing order
 
     EXAMPLES::

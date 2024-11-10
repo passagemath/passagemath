@@ -1,8 +1,9 @@
+# sage_setup: distribution = sagemath-modules
 """
 Utilities for Sage-mpmath interaction
-
-Also patches some mpmath functions for speed
 """
+
+cimport gmpy2
 
 from sage.ext.stdsage cimport PY_NEW
 
@@ -16,143 +17,8 @@ from sage.libs.gmp.all cimport *
 
 from sage.rings.real_mpfr cimport RealField
 
-cpdef int bitcount(n) noexcept:
-    """
-    Bitcount of a Sage Integer or Python int/long.
+gmpy2.import_gmpy2()
 
-    EXAMPLES::
-
-        sage: from mpmath.libmp import bitcount
-        sage: bitcount(0)
-        0
-        sage: bitcount(1)
-        1
-        sage: bitcount(100)
-        7
-        sage: bitcount(-100)
-        7
-        sage: bitcount(2r)
-        2
-        sage: bitcount(2L)
-        2
-
-    """
-    cdef Integer m
-    if isinstance(n, Integer):
-        m = <Integer>n
-    else:
-        m = Integer(n)
-    if mpz_sgn(m.value) == 0:
-        return 0
-    return mpz_sizeinbase(m.value, 2)
-
-cpdef isqrt(n):
-    """
-    Square root (rounded to floor) of a Sage Integer or Python int/long.
-    The result is a Sage Integer.
-
-    EXAMPLES::
-
-        sage: from mpmath.libmp import isqrt
-        sage: isqrt(0)
-        0
-        sage: isqrt(100)
-        10
-        sage: isqrt(10)
-        3
-        sage: isqrt(10r)
-        3
-        sage: isqrt(10L)
-        3
-
-    """
-    cdef Integer m, y
-    if isinstance(n, Integer):
-        m = <Integer>n
-    else:
-        m = Integer(n)
-    if mpz_sgn(m.value) < 0:
-        raise ValueError("square root of negative integer not defined.")
-    y = PY_NEW(Integer)
-    mpz_sqrt(y.value, m.value)
-    return y
-
-cpdef from_man_exp(man, exp, long prec = 0, str rnd = 'd'):
-    """
-    Create normalized mpf value tuple from mantissa and exponent.
-
-    With prec > 0, rounds the result in the desired direction
-    if necessary.
-
-    EXAMPLES::
-
-        sage: from mpmath.libmp import from_man_exp
-        sage: from_man_exp(-6, -1)
-        (1, 3, 0, 2)
-        sage: from_man_exp(-6, -1, 1, 'd')
-        (1, 1, 1, 1)
-        sage: from_man_exp(-6, -1, 1, 'u')
-        (1, 1, 2, 1)
-    """
-    cdef Integer res
-    cdef long bc
-    res = Integer(man)
-    bc = mpz_sizeinbase(res.value, 2)
-    if not prec:
-        prec = bc
-    if mpz_sgn(res.value) < 0:
-        mpz_neg(res.value, res.value)
-        return normalize(1, res, exp, bc, prec, rnd)
-    else:
-        return normalize(0, res, exp, bc, prec, rnd)
-
-cpdef normalize(long sign, Integer man, exp, long bc, long prec, str rnd):
-    """
-    Create normalized mpf value tuple from full list of components.
-
-    EXAMPLES::
-
-        sage: from mpmath.libmp import normalize
-        sage: normalize(0, 4, 5, 3, 53, 'n')
-        (0, 1, 7, 1)
-    """
-    cdef long shift
-    cdef Integer res
-    cdef unsigned long trail
-    if mpz_sgn(man.value) == 0:
-        from mpmath.libmp import fzero
-        return fzero
-    if bc <= prec and mpz_odd_p(man.value):
-        return (sign, man, exp, bc)
-    shift = bc - prec
-    res = PY_NEW(Integer)
-    if shift > 0:
-        if rnd == 'n':
-            if mpz_tstbit(man.value, shift-1) and (mpz_tstbit(man.value, shift)
-                or (mpz_scan1(man.value, 0) < (shift-1))):
-                mpz_cdiv_q_2exp(res.value, man.value, shift)
-            else:
-                mpz_fdiv_q_2exp(res.value, man.value, shift)
-        elif rnd == 'd':
-            mpz_fdiv_q_2exp(res.value, man.value, shift)
-        elif rnd == 'f':
-            if sign: mpz_cdiv_q_2exp(res.value, man.value, shift)
-            else:    mpz_fdiv_q_2exp(res.value, man.value, shift)
-        elif rnd == 'c':
-            if sign: mpz_fdiv_q_2exp(res.value, man.value, shift)
-            else:    mpz_cdiv_q_2exp(res.value, man.value, shift)
-        elif rnd == 'u':
-            mpz_cdiv_q_2exp(res.value, man.value, shift)
-        exp += shift
-    else:
-        mpz_set(res.value, man.value)
-    # Strip trailing bits
-    trail = mpz_scan1(res.value, 0)
-    if 0 < trail < bc:
-        mpz_tdiv_q_2exp(res.value, res.value, trail)
-        exp += trail
-    bc = mpz_sizeinbase(res.value, 2)
-    return (sign, res, int(exp), bc)
 
 cdef mpfr_from_mpfval(mpfr_t res, tuple x):
     """
@@ -160,12 +26,12 @@ cdef mpfr_from_mpfval(mpfr_t res, tuple x):
     data tuple.
     """
     cdef int sign
-    cdef Integer man
+    cdef gmpy2.mpz man
     cdef long exp
     cdef long bc
     sign, man, exp, bc = x
     if man:
-        mpfr_set_z(res, man.value, MPFR_RNDZ)
+        mpfr_set_z(res, man.z, MPFR_RNDZ)
         if sign:
             mpfr_neg(res, res, MPFR_RNDZ)
         mpfr_mul_2si(res, res, exp, MPFR_RNDZ)
@@ -209,7 +75,7 @@ cdef mpfr_to_mpfval(mpfr_t value):
         mpz_tdiv_q_2exp(man.value, man.value, trailing)
         exp += trailing
     bc = mpz_sizeinbase(man.value, 2)
-    return (sign, man, int(exp), bc)
+    return (sign, man.__mpz__(), int(exp), bc)
 
 
 def mpmath_to_sage(x, prec):
@@ -235,34 +101,34 @@ def mpmath_to_sage(x, prec):
 
     A real example::
 
-        sage: RealField(100)(pi)
+        sage: RealField(100)(pi)                                                        # needs sage.symbolic
         3.1415926535897932384626433833
-        sage: t = RealField(100)(pi)._mpmath_(); t
+        sage: t = RealField(100)(pi)._mpmath_(); t                                      # needs sage.symbolic
         mpf('3.1415926535897932')
-        sage: a.mpmath_to_sage(t, 100)
+        sage: a.mpmath_to_sage(t, 100)                                                  # needs sage.symbolic
         3.1415926535897932384626433833
 
     We can ask for more precision, but the result is undefined::
 
-        sage: a.mpmath_to_sage(t, 140) # random
+        sage: a.mpmath_to_sage(t, 140)  # random                                        # needs sage.symbolic
         3.1415926535897932384626433832793333156440
-        sage: ComplexField(140)(pi)
+        sage: ComplexField(140)(pi)                                                     # needs sage.symbolic
         3.1415926535897932384626433832795028841972
 
     A complex example::
 
-        sage: ComplexField(100)([0, pi])
+        sage: ComplexField(100)([0, pi])                                                # needs sage.symbolic
         3.1415926535897932384626433833*I
-        sage: t = ComplexField(100)([0, pi])._mpmath_(); t
+        sage: t = ComplexField(100)([0, pi])._mpmath_(); t                              # needs sage.symbolic
         mpc(real='0.0', imag='3.1415926535897932')
-        sage: sage.libs.mpmath.all.mpmath_to_sage(t, 100)
+        sage: sage.libs.mpmath.all.mpmath_to_sage(t, 100)                               # needs sage.symbolic
         3.1415926535897932384626433833*I
 
     Again, we can ask for more precision, but the result is undefined::
 
-        sage: sage.libs.mpmath.all.mpmath_to_sage(t, 140) # random
+        sage: sage.libs.mpmath.all.mpmath_to_sage(t, 140) # random                      # needs sage.symbolic
         3.1415926535897932384626433832793333156440*I
-        sage: ComplexField(140)([0, pi])
+        sage: ComplexField(140)([0, pi])                                                # needs sage.symbolic
         3.1415926535897932384626433832795028841972*I
     """
     cdef RealNumber y
@@ -299,9 +165,9 @@ def sage_to_mpmath(x, prec):
         0.666666666666667
         sage: print(a.sage_to_mpmath(2./3, 53))
         0.666666666666667
-        sage: print(a.sage_to_mpmath(3+4*I, 53))
+        sage: print(a.sage_to_mpmath(3+4*I, 53))                                        # needs sage.symbolic
         (3.0 + 4.0j)
-        sage: print(a.sage_to_mpmath(1+pi, 53))
+        sage: print(a.sage_to_mpmath(1+pi, 53))                                         # needs sage.symbolic
         4.14159265358979
         sage: a.sage_to_mpmath(infinity, 53)
         mpf('+inf')
@@ -317,7 +183,6 @@ def sage_to_mpmath(x, prec):
         (mpf('0.5'), mpf('1.5'))
         sage: a.sage_to_mpmath({'n':0.5}, 53)
         {'n': mpf('0.5')}
-
     """
     cdef RealNumber y
     if isinstance(x, Element):
@@ -368,11 +233,11 @@ def call(func, *args, **kwargs):
 
         sage: import sage.libs.mpmath.all as a
         sage: a.mp.prec = 53
-        sage: a.call(a.erf, 3+4*I)
+        sage: a.call(a.erf, 3 + 4*I)                                                    # needs sage.symbolic
         -120.186991395079 - 27.7503372936239*I
-        sage: a.call(a.polylog, 2, 1/3+4/5*I)
+        sage: a.call(a.polylog, 2, 1/3 + 4/5*I)                                         # needs sage.symbolic
         0.153548951541433 + 0.875114412499637*I
-        sage: a.call(a.barnesg, 3+4*I)
+        sage: a.call(a.barnesg, 3+4*I)                                                  # needs sage.symbolic
         -0.000676375932234244 - 0.0000442236140124728*I
         sage: a.call(a.barnesg, -4)
         0.000000000000000
@@ -382,12 +247,12 @@ def call(func, *args, **kwargs):
         1.95762943509305
         sage: a.call(a.quad, a.erf, [0,1])
         0.486064958112256
-        sage: a.call(a.gammainc, 3+4*I, 2/3, 1-pi*I, prec=100)
+        sage: a.call(a.gammainc, 3 + 4*I, 2/3, 1 - pi*I, prec=100)                      # needs sage.symbolic
         -274.18871130777160922270612331 + 101.59521032382593402947725236*I
-        sage: x = (3+4*I).n(100)
-        sage: y = (2/3).n(100)
-        sage: z = (1-pi*I).n(100)
-        sage: a.call(a.gammainc, x, y, z, prec=100)
+        sage: x = (3 + 4*I).n(100)                                                      # needs sage.symbolic
+        sage: y = (2/3).n(100)                                                          # needs sage.symbolic
+        sage: z = (1 - pi*I).n(100)                                                     # needs sage.symbolic
+        sage: a.call(a.gammainc, x, y, z, prec=100)                                     # needs sage.symbolic
         -274.18871130777160922270612331 + 101.59521032382593402947725236*I
         sage: a.call(a.erf, infinity)
         1.00000000000000
@@ -415,13 +280,12 @@ def call(func, *args, **kwargs):
     Check that :issue:`11885` is fixed::
 
         sage: a.call(a.ei, 1.0r, parent=float)
-        1.8951178163559366
+        1.8951178163559368
 
     Check that :issue:`14984` is fixed::
 
         sage: a.call(a.log, -1.0r, parent=float)
         3.141592653589793j
-
     """
     from mpmath import mp
     orig = mp.prec

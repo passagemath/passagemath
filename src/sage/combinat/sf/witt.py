@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 """
 Witt symmetric functions
@@ -239,9 +240,7 @@ class SymmetricFunctionAlgebra_witt(multiplicative.SymmetricFunctionAlgebra_mult
 
         - ``lam`` -- a partition
 
-        OUTPUT:
-
-        - the expansion of ``h[lam]`` in the Witt basis ``self``
+        OUTPUT: the expansion of ``h[lam]`` in the Witt basis ``self``
 
         EXAMPLES::
 
@@ -318,9 +317,7 @@ class SymmetricFunctionAlgebra_witt(multiplicative.SymmetricFunctionAlgebra_mult
 
         - ``lam`` -- a partition
 
-        OUTPUT:
-
-        - the expansion of ``e[lam]`` in the Witt basis ``self``
+        OUTPUT: the expansion of ``e[lam]`` in the Witt basis ``self``
 
         EXAMPLES::
 
@@ -395,9 +392,7 @@ class SymmetricFunctionAlgebra_witt(multiplicative.SymmetricFunctionAlgebra_mult
 
         - ``lam`` -- a partition
 
-        OUTPUT:
-
-        - the expansion of ``p[lam]`` in the Witt basis ``self``
+        OUTPUT: the expansion of ``p[lam]`` in the Witt basis ``self``
 
         EXAMPLES::
 
@@ -561,7 +556,7 @@ class SymmetricFunctionAlgebra_witt(multiplicative.SymmetricFunctionAlgebra_mult
 
         INPUT:
 
-        - ``n`` -- a positive integer
+        - ``n`` -- positive integer
 
         OUTPUT:
 

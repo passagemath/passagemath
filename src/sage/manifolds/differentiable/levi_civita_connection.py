@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Levi-Civita Connections
 
@@ -18,7 +18,6 @@ REFERENCES:
 - [KN1963]_
 - [Lee1997]_
 - [ONe1983]_
-
 """
 #******************************************************************************
 #       Copyright (C) 2015 Eric Gourgoulhon <eric.gourgoulhon@obspm.fr>
@@ -35,6 +34,7 @@ from sage.parallel.decorate import parallel
 from sage.parallel.parallelism import Parallelism
 from sage.manifolds.differentiable.affine_connection import AffineConnection
 from sage.manifolds.differentiable.vectorframe import CoordFrame
+
 
 class LeviCivitaConnection(AffineConnection):
     r"""
@@ -117,7 +117,7 @@ class LeviCivitaConnection(AffineConnection):
     - ``name`` -- name given to the connection
     - ``latex_name`` -- (default: ``None``) LaTeX symbol to denote the
       connection
-    - ``init_coef`` -- (default: ``True``) determines whether the Christoffel
+    - ``init_coef`` -- boolean (default: ``True``); determines whether the Christoffel
       symbols are initialized (in the top charts on the domain, i.e.
       disregarding the subcharts)
 
@@ -200,7 +200,6 @@ class LeviCivitaConnection(AffineConnection):
         Gam^th_ph,ph = -cos(th)*sin(th)
         Gam^ph_r,ph = 1/r
         Gam^ph_th,ph = cos(th)/sin(th)
-
     """
     def __init__(self, metric, name, latex_name=None, init_coef=True):
         r"""
@@ -221,7 +220,6 @@ class LeviCivitaConnection(AffineConnection):
             Levi-Civita connection nabla associated with the Riemannian metric
              g on the 2-dimensional differentiable manifold M
             sage: TestSuite(nab).run()
-
         """
         AffineConnection.__init__(self, metric.domain(), name, latex_name)
         self._metric = metric
@@ -246,7 +244,6 @@ class LeviCivitaConnection(AffineConnection):
             'Levi-Civita connection nabla_g associated with the Riemannian metric g on the 5-dimensional differentiable manifold M'
             sage: repr(nab)  # indirect doctest
             'Levi-Civita connection nabla_g associated with the Riemannian metric g on the 5-dimensional differentiable manifold M'
-
         """
         description = "Levi-Civita connection"
         if self._name is not None:
@@ -264,7 +261,6 @@ class LeviCivitaConnection(AffineConnection):
             sage: g = M.metric('g')
             sage: nab = g.connection()
             sage: nab._init_derived()
-
         """
         AffineConnection._init_derived(self)
 
@@ -278,7 +274,6 @@ class LeviCivitaConnection(AffineConnection):
             sage: g = M.metric('g')
             sage: nab = g.connection()
             sage: nab._del_derived()
-
         """
         AffineConnection._del_derived(self)
 
@@ -323,7 +318,6 @@ class LeviCivitaConnection(AffineConnection):
 
             sage: nabU(g.restrict(U)).display()
             nabla_g(g) = 0
-
         """
         if subdomain == self._domain:
             return self
@@ -370,7 +364,6 @@ class LeviCivitaConnection(AffineConnection):
             sage: e = M.vector_frame('e')
             sage: nab._new_coef(e)
             3-indices components w.r.t. Vector frame (M, (e_0,e_1))
-
         """
         from sage.tensor.modules.comp import Components, CompWithSym
         from sage.manifolds.differentiable.scalarfield import DiffScalarField
@@ -438,7 +431,7 @@ class LeviCivitaConnection(AffineConnection):
             [[0, 1/r, 0], [1/r, 0, 0], [0, 0, -cos(th)*sin(th)]],
             [[0, 0, 1/r], [0, 0, cos(th)/sin(th)], [1/r, cos(th)/sin(th), 0]]]
 
-        The only non-zero Christoffel symbols::
+        The only nonzero Christoffel symbols::
 
             sage: gam[1,2,2], gam[1,3,3]
             (-r, -r*sin(th)^2)
@@ -460,7 +453,7 @@ class LeviCivitaConnection(AffineConnection):
             [[0, 1/r, 0], [0, 0, 0], [0, 0, -cos(th)/(r*sin(th))]],
             [[0, 0, 1/r], [0, 0, cos(th)/(r*sin(th))], [0, 0, 0]]]
 
-        The only non-zero connection coefficients::
+        The only nonzero connection coefficients::
 
             sage: gam_e[1,2,2], gam_e[2,1,2]
             (-1/r, 1/r)
@@ -583,7 +576,6 @@ class LeviCivitaConnection(AffineConnection):
 
             sage: t.display()
             0
-
         """
         if self._torsion is None:
             resu = self._domain.tensor_field(1, 2, antisym=(1,2))
@@ -824,7 +816,6 @@ class LeviCivitaConnection(AffineConnection):
              differentiable manifold M
             sage: ric == 0
             True
-
         """
         if self._ricci is None:
             if name is None:

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-repl
 """
 Interactively tracing execution of a command
 """
@@ -13,12 +14,10 @@ def trace(code, preparse=True):
 
     INPUT:
 
+    - ``code`` -- string
 
-    -  ``code`` - str
-
-    -  ``preparse`` - bool (default: True); if True, run
-       expression through the Sage preparser.
-
+    - ``preparse`` -- boolean (default: ``True``); if ``True``, run
+      expression through the Sage preparser
 
     REMARKS: This function is extremely powerful! For example, if you
     want to step through each line of execution of, e.g.,

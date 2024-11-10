@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-groups
 # sage.doctest: needs sage.graphs sage.rings.number_field
 r"""
 Right-Angled Artin Groups
@@ -90,7 +91,7 @@ class RightAngledArtinGroup(ArtinGroup):
     INPUT:
 
     - ``G`` -- a graph
-    - ``names`` -- a string or a list of generator names
+    - ``names`` -- string or list of generator names
 
     EXAMPLES::
 

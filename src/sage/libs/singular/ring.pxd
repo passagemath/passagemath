@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-singular
 """
 Wrapper for Singular's Rings
 
@@ -42,7 +43,6 @@ from sage.libs.singular.decl cimport ring
 #         self.parent = p
 #     def __dealloc__():
 #         do_something_with(self.parent.ring)   # segfault
-
 
 
 # create a new singular ring

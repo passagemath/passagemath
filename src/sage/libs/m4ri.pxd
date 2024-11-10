@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-linbox
 # distutils: extra_compile_args = -std=c++11
 # distutils: language = c++
 
@@ -19,7 +20,7 @@ cdef extern from "m4ri/m4ri.h":
     cdef int m4ri_radix
 
     ##############
-    # Maintainance
+    # Maintenance
     ##############
 
     # builds all gray codes up to a certain size

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 from .types cimport n_factor_t
 from .ulong_extras cimport n_factor_init, n_factor
 

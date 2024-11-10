@@ -1,0 +1,5 @@
+# Upstream packages as uploaded as GitHub release assets.
+# This file is automatically updated by the sage-update-version script.
+https://github.com/passagemath/passagemath/releases/download/passagemath-10.4.56/
+https://github.com/passagemath/passagemath/releases/download/passagemath-10.4.55/
+https://github.com/passagemath/passagemath/releases/download/passagemath-10.4.54/

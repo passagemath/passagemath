@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Mandelbrot and Julia sets
 
@@ -18,7 +19,6 @@ the function `f_c(z)` is bounded under iteration.
 AUTHORS:
 
 - Ben Barros
-
 """
 
 #*****************************************************************************
@@ -31,18 +31,9 @@ AUTHORS:
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
-from sage.dynamics.complex_dynamics.mandel_julia_helper import (fast_mandelbrot_plot,
-                                                                fast_external_ray,
-                                                                convert_to_pixels,
-                                                                get_line,
-                                                                fast_julia_plot,
-                                                                general_julia,
-                                                                polynomial_mandelbrot,
-                                                                julia_helper)
-
 from sage.misc.lazy_import import lazy_import
 lazy_import("sage.plot.colors", "Color")
-from sage.repl.image import Image
+lazy_import("sage.repl.image", "Image")
 from sage.functions.log import logb
 from sage.functions.other import floor
 from sage.rings.rational_field import QQ
@@ -52,12 +43,23 @@ from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.schemes.projective.projective_space import ProjectiveSpace
 from sage.misc.prandom import randint
 from sage.calculus.var import var
-from sage.rings.fraction_field import is_FractionField
+from sage.rings.fraction_field import FractionField_generic
 from sage.categories.function_fields import FunctionFields
 
 lazy_import('sage.dynamics.arithmetic_dynamics.generic_ds', 'DynamicalSystem')
+lazy_import('sage.dynamics.complex_dynamics.mandel_julia_helper', (
+    'fast_mandelbrot_plot',
+    'fast_external_ray',
+    'convert_to_pixels',
+    'get_line',
+    'fast_julia_plot',
+    'general_julia',
+    'polynomial_mandelbrot',
+    'julia_helper'
+))
 
 EPS = 0.00001
+
 
 def mandelbrot_plot(f=None, **kwds):
     r"""
@@ -72,65 +74,64 @@ def mandelbrot_plot(f=None, **kwds):
 
     INPUT:
 
-    - ``f`` -- map (optional - default: ``z^2 + c``), polynomial family used to
-      plot the Mandelbrot set.
+    - ``f`` -- map (default: ``z^2 + c``); polynomial family used to
+      plot the Mandelbrot set
 
-    - ``parameter`` -- variable (optional - default: ``c``), parameter variable
-      used to plot the Mandelbrot set.
+    - ``parameter`` -- variable (default: ``c``); parameter variable
+      used to plot the Mandelbrot set
 
-    - ``x_center`` -- double (optional - default: ``-1.0``), Real part of center
-      point.
+    - ``x_center`` -- double (default: ``-1.0``); Real part of center
+      point
 
-    - ``y_center`` -- double (optional - default: ``0.0``), Imaginary part of
-      center point.
+    - ``y_center`` -- double (default: ``0.0``); Imaginary part of
+      center point
 
-    - ``image_width`` -- double (optional - default: ``4.0``), width of image
-      in the complex plane.
+    - ``image_width`` -- double (default: ``4.0``); width of image
+      in the complex plane
 
-    - ``max_iteration`` -- long (optional - default: ``500``), maximum number of
-      iterations the map ``f_c(z)``.
+    - ``max_iteration`` -- long (default: ``500``); maximum number of
+      iterations the map ``f_c(z)``
 
-    - ``pixel_count`` -- long (optional - default: ``500``), side length of
-      image in number of pixels.
+    - ``pixel_count`` -- long (default: ``500``); side length of
+      image in number of pixels
 
-    - ``base_color`` -- RGB color (optional - default: ``[40, 40, 40]``) color
-      used to determine the coloring of set.
+    - ``base_color`` -- RGB color (default: ``[40, 40, 40]``); color
+      used to determine the coloring of set
 
-    - ``level_sep`` -- long (optional - default: 1) number of iterations
-      between each color level.
+    - ``level_sep`` -- long (default: 1); number of iterations
+      between each color level
 
-    - ``number_of_colors`` -- long (optional - default: 30) number of colors
-      used to plot image.
+    - ``number_of_colors`` -- long (default: 30); number of colors
+      used to plot image
 
-    - ``interact`` -- boolean (optional - default: ``False``), controls whether
-      plot will have interactive functionality.
+    - ``interact`` -- boolean (default: ``False``); controls whether
+      plot will have interactive functionality
 
-    OUTPUT:
-
-    24-bit RGB image of the Mandelbrot set in the complex plane.
+    OUTPUT: 24-bit RGB image of the Mandelbrot set in the complex plane
 
     EXAMPLES:
 
     ::
 
-        sage: mandelbrot_plot()
+        sage: mandelbrot_plot()                                                         # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
-        sage: mandelbrot_plot(pixel_count=1000)
+        sage: mandelbrot_plot(pixel_count=1000)                                         # needs sage.plot
         1000x1000px 24-bit RGB image
 
     ::
 
-        sage: mandelbrot_plot(x_center=-1.11, y_center=0.2283, image_width=1/128, # long time
-        ....: max_iteration=2000, number_of_colors=500, base_color=[40, 100, 100])
+        sage: mandelbrot_plot(x_center=-1.11, y_center=0.2283,               # long time, needs sage.plot
+        ....:                 image_width=1/128, max_iteration=2000,
+        ....:                 number_of_colors=500, base_color=[40, 100, 100])
         500x500px 24-bit RGB image
 
     To display an interactive plot of the Mandelbrot in the Notebook, set
     ``interact`` to ``True``. (This is only implemented for ``z^2 + c``)::
 
-        sage: mandelbrot_plot(interact=True)
+        sage: mandelbrot_plot(interact=True)                                            # needs sage.plot
         ...interactive(children=(FloatSlider(value=0.0, description='Real center', max=1.0, min=-1.0, step=1e-05),
         FloatSlider(value=0.0, description='Imag center', max=1.0, min=-1.0, step=1e-05),
         FloatSlider(value=4.0, description='Width', max=4.0, min=1e-05, step=1e-05),
@@ -143,8 +144,8 @@ def mandelbrot_plot(f=None, **kwds):
 
     ::
 
-        sage: mandelbrot_plot(interact=True, x_center=-0.75, y_center=0.25,
-        ....: image_width=1/2, number_of_colors=75)
+        sage: mandelbrot_plot(interact=True, x_center=-0.75, y_center=0.25,             # needs sage.plot
+        ....:                 image_width=1/2, number_of_colors=75)
         ...interactive(children=(FloatSlider(value=-0.75, description='Real center', max=1.0, min=-1.0, step=1e-05),
         FloatSlider(value=0.25, description='Imag center', max=1.0, min=-1.0, step=1e-05),
         FloatSlider(value=0.5, description='Width', max=4.0, min=1e-05, step=1e-05),
@@ -160,7 +161,7 @@ def mandelbrot_plot(f=None, **kwds):
 
         sage: R.<z,c> = CC[]
         sage: f = z^2 + c
-        sage: mandelbrot_plot(f)
+        sage: mandelbrot_plot(f)                                                        # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
@@ -168,7 +169,7 @@ def mandelbrot_plot(f=None, **kwds):
         sage: B.<c> = CC[]
         sage: R.<z> = B[]
         sage: f = z^5 + c
-        sage: mandelbrot_plot(f)  # long time
+        sage: mandelbrot_plot(f)  # long time                                           # needs sage.plot
         500x500px 24-bit RGB image
 
     When the polynomial is defined over a multivariate polynomial ring it is
@@ -176,14 +177,14 @@ def mandelbrot_plot(f=None, **kwds):
 
         sage: R.<a,b> = CC[]
         sage: f = a^2 + b^3
-        sage: mandelbrot_plot(f, parameter=b)  # long time
+        sage: mandelbrot_plot(f, parameter=b)  # long time                              # needs sage.plot
         500x500px 24-bit RGB image
 
     Interact functionality is not implemented for general polynomial maps::
 
         sage: R.<z,c> = CC[]
         sage: f = z^3 + c
-        sage: mandelbrot_plot(f, interact=True)
+        sage: mandelbrot_plot(f, interact=True)                                         # needs sage.plot
         Traceback (most recent call last):
         ...
         NotImplementedError: interact only implemented for z^2 + c
@@ -212,11 +213,11 @@ def mandelbrot_plot(f=None, **kwds):
                    y_center=FloatSlider(min=-1.0, max=1.0, step=EPS,
                                           value=y_center, description="Imag center"),
                    image_width=FloatSlider(min=EPS, max=4.0, step=EPS,
-                                             value=image_width, description="Width"),
+                                             value=image_width, description='Width'),
                    max_iteration=IntSlider(min=0, max=1000,
-                                             value=max_iteration, description="Iterations"),
+                                             value=max_iteration, description='Iterations'),
                    pixel_count=IntSlider(min=10, max=1000,
-                                           value=pixel_count, description="Pixels"),
+                                           value=pixel_count, description='Pixels'),
                    level_sep=IntSlider(min=1, max=20,
                                          value=level_sep, description="Color sep"),
                    color_num=IntSlider(min=1, max=100,
@@ -244,14 +245,14 @@ def mandelbrot_plot(f=None, **kwds):
         P = f.parent()
 
         if P.base_ring() is CC or P.base_ring() is CDF:
-            if is_FractionField(P):
+            if isinstance(P, FractionField_generic):
                 raise NotImplementedError("coefficients must be polynomials in the parameter")
             gen_list = list(P.gens())
             parameter = gen_list.pop(gen_list.index(parameter))
             variable = gen_list.pop()
 
         elif P.base_ring().base_ring() is CC or P.base_ring().base_ring() is CDF:
-            if is_FractionField(P.base_ring()):
+            if isinstance(P.base_ring(), FractionField_generic):
                 raise NotImplementedError("coefficients must be polynomials in the parameter")
             phi = P.flattening_morphism()
             f = phi(f)
@@ -302,55 +303,53 @@ def external_ray(theta, **kwds):
 
     INPUT:
 
-    - ``theta`` -- double or list of doubles, angles between 0 and 1 inclusive.
+    - ``theta`` -- double or list of doubles, angles between 0 and 1 inclusive
 
     kwds:
 
-    - ``image`` -- 24-bit RGB image (optional - default: None) user specified
-      image of Mandelbrot set.
+    - ``image`` -- 24-bit RGB image (default: ``None``); user specified
+      image of Mandelbrot set
 
-    - ``D`` -- long (optional - default: ``25``) depth of the approximation.
+    - ``D`` -- long (default: ``25``); depth of the approximation.
       As ``D`` increases, the external ray gets closer to the boundary of the
       Mandelbrot set. If the ray doesn't reach the boundary of the Mandelbrot
       set, increase ``D``.
 
-    - ``S`` -- long (optional - default: ``10``) sharpness of the approximation.
+    - ``S`` -- long (default: ``10``); sharpness of the approximation.
       Adjusts the number of points used to approximate the external ray (number
       of points is equal to ``S*D``). If ray looks jagged, increase ``S``.
 
-    - ``R`` -- long (optional - default: ``100``) radial parameter. If ``R`` is
+    - ``R`` -- long (default: ``100``); radial parameter. If ``R`` is
       large, the external ray reaches sufficiently close to infinity. If ``R`` is
       too small, Newton's method may not converge to the correct ray.
 
-    - ``prec`` -- long (optional - default: ``300``) specifies the bits of
+    - ``prec`` -- long (default: ``300``); specifies the bits of
       precision used by the Complex Field when using Newton's method to compute
-      points on the external ray.
+      points on the external ray
 
-    - ``ray_color`` -- RGB color (optional - default: ``[255, 255, 255]``) color
-      of the external ray(s).
+    - ``ray_color`` -- RGB color (default: ``[255, 255, 255]``) color
+      of the external ray(s)
 
-    OUTPUT:
-
-    24-bit RGB image of external ray(s) on the Mandelbrot set.
+    OUTPUT: 24-bit RGB image of external ray(s) on the Mandelbrot set
 
     EXAMPLES::
 
-        sage: external_ray(1/3)
+        sage: external_ray(1/3)                                                         # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
-        sage: external_ray(0.6, ray_color=[255, 0, 0])
+        sage: external_ray(0.6, ray_color=[255, 0, 0])                                  # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
-        sage: external_ray([0, 0.2, 0.4, 0.7])
+        sage: external_ray([0, 0.2, 0.4, 0.7])                                          # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
-        sage: external_ray([i/5 for i in range(1,5)])
+        sage: external_ray([i/5 for i in range(1,5)])                                   # needs sage.plot
         500x500px 24-bit RGB image
 
     WARNING:
@@ -359,14 +358,14 @@ def external_ray(theta, **kwds):
     which parameters to use when drawing the external ray.
     For example, the following is incorrect::
 
-        sage: M = mandelbrot_plot(x_center=0)  # not tested
-        sage: external_ray(5/7, image=M)       # not tested
+        sage: M = mandelbrot_plot(x_center=0)  # not tested                             # needs sage.plot
+        sage: external_ray(5/7, image=M)       # not tested                             # needs sage.plot
         500x500px 24-bit RGB image
 
     To get the correct external ray, we adjust our parameters::
 
-        sage: M = mandelbrot_plot(x_center=0)
-        sage: external_ray(5/7, x_center=0, image=M)
+        sage: M = mandelbrot_plot(x_center=0)                                           # needs sage.plot
+        sage: external_ray(5/7, x_center=0, image=M)                                    # needs sage.plot
         500x500px 24-bit RGB image
 
     .. TODO::
@@ -435,6 +434,7 @@ def external_ray(theta, **kwds):
                 pixel[int(k[0]), int(k[1])] = tuple(ray_color)
     return M
 
+
 def kneading_sequence(theta):
     r"""
     Determines the kneading sequence for an angle theta in RR/ZZ which
@@ -445,9 +445,7 @@ def kneading_sequence(theta):
 
     - ``theta`` -- a rational number with odd denominator
 
-    OUTPUT:
-
-    a string representing the kneading sequence of theta in RR/ZZ
+    OUTPUT: string representing the kneading sequence of theta in RR/ZZ
 
     REFERENCES:
 
@@ -504,6 +502,7 @@ def kneading_sequence(theta):
         KS_str = ''.join(KS) + '*'
     return KS_str
 
+
 def julia_plot(f=None, **kwds):
     r"""
     Plots the Julia set of a given polynomial ``f``. Users can specify whether
@@ -530,48 +529,46 @@ def julia_plot(f=None, **kwds):
 
     INPUT:
 
-    - ``f`` -- input polynomial (optional - default: ``z^2 - 1``).
+    - ``f`` -- input polynomial (default: ``z^2 - 1``)
 
-    - ``period`` -- list (optional - default: ``None``), returns the Julia set
-      for a random `c` value with the given (formal) cycle structure.
+    - ``period`` -- list (default: ``None``); returns the Julia set
+      for a random `c` value with the given (formal) cycle structure
 
-    - ``mandelbrot`` -- boolean (optional - default: ``True``), when set to
+    - ``mandelbrot`` -- boolean (default: ``True``); when set to
       ``True``, an image of the Mandelbrot set is appended to the right of the
-      Julia set.
+      Julia set
 
-    - ``point_color`` -- RGB color (optional - default: ``'tomato'``),
-      color of the point `c` in the Mandelbrot set (any valid input for Color).
+    - ``point_color`` -- RGB color (default: ``'tomato'``);
+      color of the point `c` in the Mandelbrot set (any valid input for Color)
 
-    - ``x_center`` -- double (optional - default: ``-1.0``), Real part
-      of center point.
+    - ``x_center`` -- double (default: ``-1.0``); real part
+      of center point
 
-    - ``y_center`` -- double (optional - default: ``0.0``), Imaginary part
-      of center point.
+    - ``y_center`` -- double (default: ``0.0``); imaginary part
+      of center point
 
-    - ``image_width`` -- double (optional - default: ``4.0``), width of image
-      in the complex plane.
+    - ``image_width`` -- double (default: ``4.0``); width of image
+      in the complex plane
 
-    - ``max_iteration`` -- long (optional - default: ``500``), maximum number
-      of iterations the map `f(z)`.
+    - ``max_iteration`` -- long (default: ``500``); maximum number
+      of iterations the map `f(z)`
 
-    - ``pixel_count`` -- long (optional - default: ``500``), side length of
-      image in number of pixels.
+    - ``pixel_count`` -- long (default: ``500``); side length of
+      image in number of pixels
 
-    - ``base_color`` -- hex color (optional - default: ``'steelblue'``), color
-      used to determine the coloring of set (any valid input for Color).
+    - ``base_color`` -- hex color (default: ``'steelblue'``); color
+      used to determine the coloring of set (any valid input for Color)
 
-    - ``level_sep`` -- long (optional - default: 1), number of iterations
-      between each color level.
+    - ``level_sep`` -- long (default: 1); number of iterations
+      between each color level
 
-    - ``number_of_colors`` -- long (optional - default: 30), number of colors
-      used to plot image.
+    - ``number_of_colors`` -- long (default: 30); number of colors
+      used to plot image
 
-    - ``interact`` -- boolean (optional - default: ``False``), controls whether
-      plot will have interactive functionality.
+    - ``interact`` -- boolean (default: ``False``); controls whether
+      plot will have interactive functionality
 
-    OUTPUT:
-
-    24-bit RGB image of the Julia set in the complex plane.
+    OUTPUT: 24-bit RGB image of the Julia set in the complex plane
 
     .. TODO::
 
@@ -582,39 +579,39 @@ def julia_plot(f=None, **kwds):
 
     The default ``f`` is `z^2 - 1`::
 
-        sage: julia_plot()
+        sage: julia_plot()                                                              # needs sage.plot
         1001x500px 24-bit RGB image
 
     To display only the Julia set, set ``mandelbrot`` to ``False``::
 
-        sage: julia_plot(mandelbrot=False)
+        sage: julia_plot(mandelbrot=False)                                              # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
         sage: R.<z> = CC[]
         sage: f = z^3 - z + 1
-        sage: julia_plot(f)  # long time
+        sage: julia_plot(f)  # long time                                                # needs sage.plot
         500x500px 24-bit RGB image
 
     To display an interactive plot of the Julia set in the Notebook,
     set ``interact`` to ``True``. (This is only implemented for polynomials of
     the form ``f = z^2 + c``)::
 
-        sage: julia_plot(interact=True)
+        sage: julia_plot(interact=True)                                                 # needs sage.plot
         ...interactive(children=(FloatSlider(value=-1.0, description='Real c'...
 
         ::
 
         sage: R.<z> = CC[]
         sage: f = z^2 + 1/2
-        sage: julia_plot(f,interact=True)
+        sage: julia_plot(f, interact=True)                                              # needs sage.plot
         ...interactive(children=(FloatSlider(value=0.5, description='Real c'...
 
     To return the Julia set of a random `c` value with (formal) cycle structure
     `(2,3)`, set ``period = [2,3]``::
 
-        sage: julia_plot(period=[2,3])
+        sage: julia_plot(period=[2,3])                                                  # needs sage.plot
         1001x500px 24-bit RGB image
 
     To return all of the Julia sets of `c` values with (formal) cycle structure
@@ -634,15 +631,15 @@ def julia_plot(f=None, **kwds):
 
         sage: R.<z> = CC[]
         sage: f = z^2 - 1
-        sage: julia_plot(f)
+        sage: julia_plot(f)                                                             # needs sage.plot
         1001x500px 24-bit RGB image
 
     ::
 
         sage: R.<z> = CC[]
         sage: K = R.fraction_field(); z = K.gen()
-        sage: f = z^2-1
-        sage: julia_plot(f)
+        sage: f = z^2 - 1
+        sage: julia_plot(f)                                                             # needs sage.plot
         1001x500px 24-bit RGB image
 
     Interact functionality is not implemented if the polynomial is not of the
@@ -650,7 +647,7 @@ def julia_plot(f=None, **kwds):
 
         sage: R.<z> = CC[]
         sage: f = z^3 + 1
-        sage: julia_plot(f, interact=True)
+        sage: julia_plot(f, interact=True)                                              # needs sage.plot
         Traceback (most recent call last):
         ...
         NotImplementedError: The interactive plot is only implemented for ...
@@ -739,11 +736,11 @@ def julia_plot(f=None, **kwds):
                 y_center=FloatSlider(min=-1.0, max=1.0, step=EPS,
                                   value=y_center, description="Imag center"),
                 image_width=FloatSlider(min=EPS, max=4.0, step=EPS,
-                                  value=image_width, description="Width"),
+                                  value=image_width, description='Width'),
                 max_iteration=IntSlider(min=0, max=1000,
-                                  value=max_iteration, description="Iterations"),
+                                  value=max_iteration, description='Iterations'),
                 pixel_count=IntSlider(min=10, max=1000,
-                                  value=pixel_count, description="Pixels"),
+                                  value=pixel_count, description='Pixels'),
                 level_sep=IntSlider(min=1, max=20,
                                   value=level_sep, description="Color sep"),
                 color_num=IntSlider(min=1, max=100,

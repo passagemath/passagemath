@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 """
 Morphism to bring a genus-one curve into Weierstrass form
 
@@ -62,13 +63,13 @@ class WeierstrassTransformation(SchemeMorphism_polynomial):
         INPUT:
 
         - ``domain``, ``codomain`` -- two schemes, one of which is an
-          elliptic curve.
+          elliptic curve
 
         - ``defining_polynomials`` -- triplet of polynomials that
-          define the transformation.
+          define the transformation
 
         - ``post_multiplication`` -- a polynomial to homogeneously
-          rescale after substituting the defining polynomials.
+          rescale after substituting the defining polynomials
 
         EXAMPLES::
 
@@ -116,9 +117,7 @@ class WeierstrassTransformation(SchemeMorphism_polynomial):
         Return the homogeneous rescaling to apply after the coordinate
         substitution.
 
-        OUTPUT:
-
-        A polynomial. See the example below.
+        OUTPUT: a polynomial; see the example below
 
         EXAMPLES::
 

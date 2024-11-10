@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 # sage.doctest: optional - sympy
 """
 Wrapper Class for Sage Sets as SymPy Sets
@@ -157,7 +158,6 @@ class SageSet(Set):
             Traceback (most recent call last):
             ...
             TypeError: did not evaluate to a bool: None
-
         """
         if element.is_symbol:
             # keep symbolic

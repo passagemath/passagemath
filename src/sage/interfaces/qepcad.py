@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-qepcad
 r"""
 Interface to QEPCAD
 ===================
@@ -609,9 +610,13 @@ import os
 from sage.env import SAGE_LOCAL
 import pexpect
 import re
+import shlex
 import sys
 
+from pathlib import Path
+
 from sage.cpython.string import bytes_to_str
+from sage.features.qepcad import Qepcad as qepcad_feature
 from sage.misc.flatten import flatten
 from sage.misc.sage_eval import sage_eval
 from sage.repl.preparse import implicit_mul
@@ -627,7 +632,7 @@ def _qepcad_atoms(formula):
 
     INPUT:
 
-    - `formula` (string) - a quantifier-free formula.
+    - ``formula`` -- string; a quantifier-free formula
 
     .. NOTE::
 
@@ -644,6 +649,12 @@ def _qepcad_atoms(formula):
     return {i.strip() for i in L}
 
 
+def _qepcad_prefix():
+    executable = qepcad_feature().absolute_filename()
+    prefix = Path(executable).parent.parent
+    return str(prefix)
+
+
 def _qepcad_cmd(memcells=None):
     r"""
     Construct a QEPCAD command line.
@@ -653,18 +664,19 @@ def _qepcad_cmd(memcells=None):
     EXAMPLES::
 
         sage: from sage.interfaces.qepcad import _qepcad_cmd
-        sage: s = _qepcad_cmd()
-        sage: s == 'env qe=%s qepcad '%SAGE_LOCAL
-        True
-        sage: s = _qepcad_cmd(memcells=8000000)
-        sage: s == 'env qe=%s qepcad +N8000000'%SAGE_LOCAL
+        sage: s = _qepcad_cmd(); s
+        'env qe=...'
+        sage: s = _qepcad_cmd(memcells=8000000); s
+        'env qe=... +N8000000'
         True
     """
     if memcells is not None:
         memcells_arg = f'+N{memcells}'
     else:
         memcells_arg = ''
-    return f"env qe={SAGE_LOCAL} qepcad {memcells_arg}"
+    executable = qepcad_feature().absolute_filename()
+    prefix = _qepcad_prefix()
+    return f"env qe={shlex.quote(str(prefix))} {shlex.quote(executable)} {memcells_arg}"
 
 
 _command_info_cache = None
@@ -690,7 +702,7 @@ def _update_command_info():
 
     cache = {}
 
-    with open(os.path.join(SAGE_LOCAL, 'share/qepcad', 'qepcad.help')) as help:
+    with open(os.path.join(_qepcad_prefix(), 'share/qepcad', 'qepcad.help')) as help:
         assert help.readline().strip() == '@'
 
         while True:
@@ -773,7 +785,7 @@ class Qepcad_expect(ExtraTabCompletion, Expect):
             Qepcad
         """
         Expect.__init__(self,
-                        name="QEPCAD",
+                        name='QEPCAD',
                         # yuck: when QEPCAD first starts,
                         # it doesn't give prompts
                         prompt="\nEnter an .*:\r",
@@ -809,7 +821,7 @@ class Qepcad:
 
         A logfile can be specified with ``logfile``.
         If ``verbose=True`` is given, then the logfile is automatically
-        set to ``sys.stdout``, so all QEPCAD interaction is echoed to
+        set to ``sys.stdout.buffer``, so all QEPCAD interaction is echoed to
         the terminal.
 
         You can set the amount of memory that QEPCAD allocates with
@@ -839,7 +851,7 @@ class Qepcad:
         self._cell_cache = {}
 
         if verbose:
-            logfile = sys.stdout
+            logfile = sys.stdout.buffer
 
         varlist = None
         if vars is not None:
@@ -1528,7 +1540,7 @@ def qepcad(formula, assume=None, interact=False, solution=None,
         sage: qepcad(qf.all_but_finitely_many(x, a*x^2 + b*x + c != 0))    # not tested (random order)
         b /= 0 \/ a /= 0 \/ c /= 0
 
-    The non-zeroes are continuous iff there are no zeroes or if
+    The nonzeroes are continuous iff there are no zeroes or if
     the polynomial is zero. ::
 
         sage: qepcad(qf.connected_subset(x, a*x^2 + b*x + c != 0))         # not tested (random order)
@@ -1871,12 +1883,12 @@ class qepcad_formula_factory:
 
         INPUT:
 
-        - ``formulas`` -- a list of unquantified formulas
+        - ``formulas`` -- list of unquantified formulas
 
         OUTPUT:
 
-        - form_strs -- a list of formulas as strings
-        - vars -- a frozenset of all variables in the formulas
+        - ``form_strs`` -- list of formulas as strings
+        - ``vars`` -- frozenset of all variables in the formulas
 
         EXAMPLES::
 
@@ -1947,7 +1959,7 @@ class qepcad_formula_factory:
 
     def formula(self, formula):
         r"""
-        Constructs a QEPCAD formula from the given input.
+        Construct a QEPCAD formula from the given input.
 
         INPUT:
 

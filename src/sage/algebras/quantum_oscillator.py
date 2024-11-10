@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 r"""
 Quantum Oscillator Algebras
 
@@ -122,7 +123,7 @@ class QuantumOscillatorAlgebra(CombinatorialFreeModule):
     - [Kuniba2022]_ Section 3.2
     """
     @staticmethod
-    def __classcall_private__(cls,  q=None, R=None):
+    def __classcall_private__(cls, q=None, R=None):
         r"""
         Standardize input to ensure a unique representation.
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-groups
 # sage.doctest: needs sage.rings.finite_rings
 r"""
 Elements of a semimonomial transformation group
@@ -89,6 +90,7 @@ def _inverse(f, R):
     while not _is_id(g*f, R):
         g *= f
     return g
+
 
 cdef class SemimonomialTransformation(MultiplicativeGroupElement):
     r"""
@@ -234,7 +236,7 @@ cdef class SemimonomialTransformation(MultiplicativeGroupElement):
 
     def __repr__(self):
         """
-        String representation of `self`.
+        String representation of ``self``.
 
         EXAMPLES::
 
@@ -242,8 +244,8 @@ cdef class SemimonomialTransformation(MultiplicativeGroupElement):
             sage: SemimonomialTransformationGroup(F, 4).an_element()  # indirect doctest
             ((a, 1, 1, 1); (1,4,3,2), Ring endomorphism of Finite Field in a of size 3^2 Defn: a |--> 2*a + 1)
         """
-        return "(%s; %s, %s)"%(self.v, self.perm.cycle_string(),
-                               self.get_autom())
+        return "(%s; %s, %s)" % (self.v, self.perm.cycle_string(),
+                                 self.get_autom())
 
     cpdef _richcmp_(left, _right, int op):
         """

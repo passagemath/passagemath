@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # distutils: libraries = GSL_LIBRARIES
 # distutils: library_dirs = GSL_LIBDIR
 # distutils: include_dirs = GSL_INCDIR
@@ -56,7 +57,6 @@ cdef extern from "gsl/gsl_permutation.h":
   size_t  gsl_permutation_linear_cycles(gsl_permutation * p)
 
   size_t  gsl_permutation_canonical_cycles(gsl_permutation * q)
-
 
 
 # Applying Permutations

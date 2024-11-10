@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat
 """
 Indexed Free Groups
@@ -136,6 +137,7 @@ class IndexedGroup(IndexedMonoid):
         return Family(self._indices, self.gen)
 
     gens = group_generators
+
 
 class IndexedFreeGroup(IndexedGroup, Group):
     """
@@ -297,6 +299,7 @@ class IndexedFreeGroup(IndexedGroup, Group):
             return [ (k, sign(e)) for k,e in self._sorted_items()
                      for dummy in range(abs(e))]
 
+
 class IndexedFreeAbelianGroup(IndexedGroup, AbelianGroup):
     """
     An indexed free abelian group.
@@ -347,9 +350,7 @@ class IndexedFreeAbelianGroup(IndexedGroup, AbelianGroup):
             sage: G({1: 3, -2: 12})
             F[-2]^12*F[1]^3
             sage: G(-5)
-            Traceback (most recent call last):
-            ...
-            TypeError: unable to convert -5, use gen() instead
+            F[-5]
 
         TESTS::
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 r"""
 Conjugacy Classes Of The Symmetric Group
 
@@ -304,7 +305,7 @@ def conjugacy_class_iterator(part, S=None):
 
     - ``part`` -- partition
 
-    - ``S`` -- (optional, default: `\{ 1, 2, \ldots, n \}`, where `n`
+    - ``S`` -- (default: `\{ 1, 2, \ldots, n \}`, where `n`
       is the size of ``part``) a set
 
     OUTPUT: an iterator over the conjugacy class consisting of all

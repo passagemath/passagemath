@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 from cpython.object cimport PyObject
 from libc.stdint cimport uint32_t, uint64_t, UINT32_MAX
 from sage.data_structures.bitset cimport *
@@ -7,9 +8,6 @@ ctypedef unsigned int uint
 
 cdef extern from "stdlib.h":
     ctypedef void const_void "const void"
-    void qsort(void *base, int nmemb, int size,
-               int(*compar)(const_void *, const_void *)) nogil
-
     void *bsearch(const_void *key, const_void *base, size_t nmemb,
                   size_t size, int(*compar)(const_void *, const_void *)) nogil
 

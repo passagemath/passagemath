@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Root system data for (untwisted) type B affine
 """
@@ -76,7 +77,6 @@ class CartanType(CartanType_standard_untwisted_affine):
             B1~
             sage: b.edges(sort=True)
             [(0, 1, 2), (1, 0, 2)]
-
         """
         from . import cartan_type
         n = self.n

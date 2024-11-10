@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 "Operators"
 
 import operator
@@ -72,7 +73,7 @@ relation_operators = {operator.eq: '==',
                       operator.ge: '>='}
 
 
-class FDerivativeOperator():
+class FDerivativeOperator:
     r"""
     Function derivative operators.
 
@@ -123,7 +124,6 @@ class FDerivativeOperator():
            sage: op = FDerivativeOperator(f, [0])
            sage: op(1)
            D[0](f)(1)
-
         """
         if (not all(isinstance(x, Expression) and x.is_symbol() for x in args) or
                 len(args) != len(set(args))):
@@ -202,7 +202,7 @@ class FDerivativeOperator():
         return self._parameter_set
 
 
-class DerivativeOperator():
+class DerivativeOperator:
     """
     Derivative operator.
 
@@ -226,9 +226,8 @@ class DerivativeOperator():
         diff(f(x, y), x, y)
         sage: D[0, 1](f)(x, x^2)
         D[0, 1](f)(x, x^2)
-
     """
-    class DerivativeOperatorWithParameters():
+    class DerivativeOperatorWithParameters:
         def __init__(self, parameter_set):
             self._parameter_set = parameter_set
 

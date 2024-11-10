@@ -1,8 +1,10 @@
+# sage_setup: distribution = sagemath-repl
 r"""
 Ensure that ``functools.partial`` is correctly handled by
 :func:`~sage.misc.sageinspect.sage_getsourcelines`.
 """
 from functools import partial
+
 
 def base(x):
     """

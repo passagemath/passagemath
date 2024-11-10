@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.modules
 """
 Clifford algebra elements
@@ -713,7 +714,7 @@ cdef class ExteriorAlgebraElement(CliffordAlgebraElement):
 
         INPUT:
 
-        - ``I`` -- a list of exterior algebra elements or an ideal
+        - ``I`` -- list of exterior algebra elements or an ideal
         - ``left`` -- boolean; if reduce as a left ideal (``True``)
           or right ideal (``False``), ignored if ``I`` is an ideal
 

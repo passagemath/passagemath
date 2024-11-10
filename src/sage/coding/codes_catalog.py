@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Index of code constructions
 
@@ -60,7 +61,6 @@ Derived Codes
 To import these names into the global namespace, use::
 
     sage: from sage.coding.codes_catalog import *
-
 """
 #*****************************************************************************
 #       Copyright (C) 2009 David Lucas <david.lucas@inria.fr>

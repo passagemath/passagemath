@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-linbox
 # Issue #33153: fflas-ffpack-2.4.3 is missing a return value in one of
 # its functions and runs afoul of -Werror=return-type. Compounding the
 # problem on openSUSE tumbleweed, the CFLAGS in python's sysconfig
@@ -27,7 +28,6 @@ cdef extern from "fflas-ffpack/fflas-ffpack.h" namespace "FFLAS":
     ctypedef enum FFLAS_TRANSPOSE:
         FflasNoTrans
         FflasTrans
-
 
     ctypedef enum FFLAS_SIDE:
         FflasRight

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Helper functions for congruence subgroups
 
@@ -16,6 +17,13 @@ functions are for internal use by routines elsewhere in the Sage library.
 
 from cysignals.memory cimport check_allocarray, sig_free
 
+from sage.matrix.matrix_dense cimport Matrix_dense
+
+try:
+    from sage.matrix.matrix_integer_dense import Matrix_integer_dense as MatrixClass
+except ImportError:
+    from sage.matrix.matrix_generic_dense import Matrix_generic_dense as MatrixClass
+
 import random
 from .congroup_gamma1 import Gamma1_constructor as Gamma1
 from .congroup_gamma0 import Gamma0_constructor as Gamma0
@@ -24,16 +32,16 @@ cimport sage.rings.fast_arith
 import sage.rings.fast_arith
 cdef sage.rings.fast_arith.arith_int arith_int
 arith_int = sage.rings.fast_arith.arith_int()
-from sage.matrix.matrix_integer_dense cimport Matrix_integer_dense
 from sage.modular.modsym.p1list import lift_to_sl2z
 from sage.matrix.matrix_space import MatrixSpace
 from sage.rings.integer_ring import ZZ
 Mat2Z = MatrixSpace(ZZ, 2)
 
-cdef Matrix_integer_dense genS, genT, genI
-genS = Matrix_integer_dense(Mat2Z, [0,-1, 1, 0], True, True)
-genT = Matrix_integer_dense(Mat2Z, [1, 1, 0, 1], True, True)
-genI = Matrix_integer_dense(Mat2Z, [1, 0, 0, 1], True, True)
+cdef Matrix_dense genS, genT, genI
+
+genS = MatrixClass(Mat2Z, [0,-1, 1, 0], True, True)
+genT = MatrixClass(Mat2Z, [1, 1, 0, 1], True, True)
+genI = MatrixClass(Mat2Z, [1, 0, 0, 1], True, True)
 
 
 # This is the C version of a function formerly implemented in python in
@@ -52,9 +60,9 @@ def degeneracy_coset_representatives_gamma0(int N, int M, int t):
 
     INPUT:
 
-    - ``N`` -- int
-    - ``M`` -- int (divisor of `N`)
-    - ``t`` -- int (divisor of `N/M`)
+    - ``N`` -- integer
+    - ``M`` -- integer (divisor of `N`)
+    - ``t`` -- integer (divisor of `N/M`)
 
     OUTPUT:
 
@@ -116,7 +124,7 @@ def degeneracy_coset_representatives_gamma0(int N, int M, int t):
     # total number of coset representatives that we'll find
     n = Gamma0(N).index() / Gamma0(M).index()
     k = 0   # number found so far
-    Ndivt = N / t
+    Ndivt = N // t
     R = <int*>check_allocarray(4 * n, sizeof(int))
     halfmax = 2*(n+10)
     while k < n:
@@ -126,10 +134,10 @@ def degeneracy_coset_representatives_gamma0(int N, int M, int t):
         g = arith_int.c_xgcd_int(-cc,dd,&bb,&aa)
         if g == 0:
             continue
-        cc = cc / g
+        cc = cc // g
         if cc % M != 0:
             continue
-        dd = dd / g
+        dd = dd // g
         # Test if we've found a new coset representative.
         is_new = 1
         for i in range(k):
@@ -165,9 +173,9 @@ def degeneracy_coset_representatives_gamma1(int N, int M, int t):
 
     INPUT:
 
-    - ``N`` -- int
-    - ``M`` -- int (divisor of `N`)
-    - ``t`` -- int (divisor of `N/M`)
+    - ``N`` -- integer
+    - ``M`` -- integer (divisor of `N`)
+    - ``t`` -- integer (divisor of `N/M`)
 
     OUTPUT:
 
@@ -217,7 +225,7 @@ def degeneracy_coset_representatives_gamma1(int N, int M, int t):
     # total number of coset representatives that we'll find
     n = Gamma1(N).index() / Gamma1(M).index()
     d = arith_int.c_gcd_int(t, N // t)
-    n = n / d
+    n = n // d
     k = 0   # number found so far
     Ndivt = N // t
     R = <int*>check_allocarray(4 * n, sizeof(int))
@@ -229,10 +237,10 @@ def degeneracy_coset_representatives_gamma1(int N, int M, int t):
         g = arith_int.c_xgcd_int(-cc, dd, &bb, &aa)
         if g == 0:
             continue
-        cc = cc / g
+        cc = cc // g
         if cc % M != 0:
             continue
-        dd = dd / g
+        dd = dd // g
         if M != 1 and dd % M != 1:
             continue
         # Test if we've found a new coset representative.
@@ -288,7 +296,7 @@ def generators_helper(coset_reps, level):
 
     EXAMPLES::
 
-        sage: Gamma0(7).generators(algorithm="todd-coxeter") # indirect doctest
+        sage: Gamma0(7).generators(algorithm='todd-coxeter') # indirect doctest
         [
         [1 1]  [-1  0]  [ 1 -1]  [1 0]  [1 1]  [-3 -1]  [-2 -1]  [-5 -1]
         [0 1], [ 0 -1], [ 0  1], [7 1], [0 1], [ 7  2], [ 7  3], [21  4],
@@ -297,18 +305,18 @@ def generators_helper(coset_reps, level):
         [21  5], [ 7 -1], [-7  1]
         ]
     """
-    cdef Matrix_integer_dense x,y,z,v,vSmod,vTmod
+    cdef Matrix_dense x,y,z,v,vSmod,vTmod
 
     crs = coset_reps.list()
     try:
-        reps = [Matrix_integer_dense(Mat2Z,lift_to_sl2z(c, d, level),False,True) for c,d in crs]
+        reps = [MatrixClass(Mat2Z,lift_to_sl2z(c, d, level),False,True) for c,d in crs]
     except Exception:
         raise ArithmeticError("Error lifting to SL2Z: level=%s crs=%s" % (level, crs))
     ans = []
     cdef Py_ssize_t i
     for i in range(len(crs)):
         x = reps[i]
-        v = Matrix_integer_dense(Mat2Z,[crs[i][0],crs[i][1],0,0],False,True)
+        v = MatrixClass(Mat2Z,[crs[i][0],crs[i][1],0,0],False,True)
         vSmod = (v*genS)
         vTmod = (v*genT)
         y_index = coset_reps.normalize(vSmod[0,0],vSmod[0,1])

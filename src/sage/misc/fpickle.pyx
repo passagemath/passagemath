@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-objects
 # cython: old_style_globals=True
 # cython: binding=True
 """
@@ -61,6 +62,7 @@ def reduce_code(co):
 
 copyreg.pickle(types.CodeType, reduce_code)
 
+
 def pickle_function(func):
     """
     Pickle the Python function func.  This is not a normal pickle; you
@@ -73,11 +75,9 @@ def pickle_function(func):
 
     INPUT:
 
-        func -- a Python function
+    - ``func`` -- a Python function
 
-    OUTPUT:
-
-        a string
+    OUTPUT: string
 
     EXAMPLES::
 

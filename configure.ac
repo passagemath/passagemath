@@ -127,16 +127,27 @@ AC_ARG_ENABLE([debug],
 AC_ARG_VAR(SAGE_DEBUG, controls debugging support: "no" debugging; debugging "symbols" (default); build debug version ("yes"))
 
 AC_ARG_ENABLE([editable],
-              [AS_HELP_STRING([--disable-editable],
-                              [do not use an editable install of the Sage library: changes to Python files will require "sage -b" to rebuild the Sage library])],
+              [AS_HELP_STRING([--enable-editable],
+                              [use an editable install of the Sage library (experimental)])],
               [AC_SUBST([SAGE_EDITABLE], [$enableval])],
-              [AC_SUBST([SAGE_EDITABLE], [yes])])
+              [AC_SUBST([SAGE_EDITABLE], [no])])
 
 AC_ARG_ENABLE([wheels],
               [AS_HELP_STRING([--enable-wheels],
                               [build wheels for the Sage library and update them on "sage -b"; if disabled, use "make wheels" to build wheels])],
-              [AC_SUBST([SAGE_WHEELS], [$enableval])],
-              [])
+              [dnl
+                 AS_VAR_IF([SAGE_EDITABLE], [yes], [dnl
+                 ], [dnl
+                   AC_MSG_NOTICE([direct installation of the Sage library (--disable-editable --disable-wheels) is no longer supported; ignoring --disable-wheels])
+                 ])
+                 AC_SUBST([SAGE_WHEELS], [$enableval])
+              ], [dnl
+                 AS_VAR_IF([SAGE_EDITABLE], [yes], [dnl
+                   AC_SUBST([SAGE_WHEELS], [no])
+                 ], [dnl
+                   AC_SUBST([SAGE_WHEELS], [yes])
+                 ])
+              ])
 
 # Check whether we are on a supported platform
 AC_CANONICAL_BUILD()
@@ -155,6 +166,27 @@ You are attempting to build Sage on $host,
 which is not a supported platform for Sage]]);;
 esac
 
+dnl Issue #38039: Alert users on WSL early about a source tree
+dnl that has not been cloned correctly.
+dnl This will save users from running into build errors later.
+AC_MSG_CHECKING([the symbolic links in the source tree])
+AS_IF([test -L build/pkgs/liblzma/package-version.txt], [dnl OK
+    AC_MSG_RESULT([intact])
+], [dnl Either replaced by a copy (OK, as done in the sage-conf_pypi sdist)
+    dnl  or replaced by the name of the link target (BAD, misconfigured git clone in WSL)
+    AS_IF([test ! -e build/pkgs/sagelib/src], [dnl
+        AC_MSG_RESULT([intact (with links to embedded source trees pruned)])
+    ], [dnl
+        AS_IF([test -d build/pkgs/sagelib/src], [dnl
+            AC_MSG_RESULT([broken (links to directories have been replaced by copies)])
+        ], [dnl
+            AC_MSG_RESULT([broken])
+        ])
+        AC_MSG_NOTICE([Sorry, the symbolic links in this source tree are broken.])
+        AC_MSG_NOTICE([See README.md for installation instructions.])
+        AC_MSG_ERROR([Exiting, as Sage cannot be built from this source tree.])
+    ])
+])
 
 ###############################################################################
 # Check general programs
@@ -418,7 +450,7 @@ AC_ARG_ENABLE([cvxopt],
 AC_ARG_ENABLE([notebook],
   AS_HELP_STRING([--disable-notebook],
                  [disable build of the Jupyter notebook and related packages]), [
-    for pkg in notebook nbconvert beautifulsoup4 sagenb_export nbformat nbclient terminado send2trash prometheus_client mistune pandocfilters bleach defusedxml jsonschema jupyter_jsmol argon2_cffi argon2_cffi_bindings webencodings tinycss2 ipympl soupsieve fastjsonschema anyio arrow async_lru fqdn isoduration json5 jsonpointer jsonschema_specifications jupyter_events jupyter_lsp jupyter_server jupyter_server_terminals jupyterlab jupyterlab_server jupyterlab_pygments jupyterlab_mathjax2 notebook_shim overrides python_json_logger pyyaml referencing rfc3339_validator rfc3986_validator sniffio types_python_dateutil uri_template webcolors websocket_client; do
+    for pkg in notebook nbconvert beautifulsoup4 sagenb_export nbformat nbclient terminado send2trash prometheus_client mistune pandocfilters bleach defusedxml jsonschema jupyter_jsmol argon2_cffi argon2_cffi_bindings webencodings tinycss2 ipympl soupsieve fastjsonschema anyio arrow async_lru fqdn isoduration json5 jsonpointer jsonschema_specifications jupyter_events jupyter_lsp jupyter_server jupyter_server_terminals jupyterlab jupyterlab_server jupyterlab_pygments jupyterlab_mathjax2 jupyter_sphinx notebook_shim overrides python_json_logger pyyaml referencing rfc3339_validator rfc3986_validator rpds_py sniffio types_python_dateutil uri_template webcolors websocket_client httpx httpcore h11; do
       AS_VAR_SET([SAGE_ENABLE_$pkg], [$enableval])
     done
   ])
@@ -429,6 +461,12 @@ AC_ARG_ENABLE([r],
     for pkg in r rpy2 r_jupyter tzlocal pytz_deprecation_shim tzdata; do
       AS_VAR_SET([SAGE_ENABLE_$pkg], [$enableval])
     done
+  ])
+
+AC_ARG_ENABLE([sagetex],
+  AS_HELP_STRING([--disable-sagetex],
+                 [don't build SageTeX]), [
+    AS_VAR_SET([SAGE_ENABLE_sagetex], [$enableval])
   ])
 
 AC_ARG_ENABLE([doc],
@@ -446,7 +484,7 @@ AC_ARG_ENABLE([doc],
 AC_ARG_ENABLE([sagelib],
   AS_HELP_STRING([--disable-sagelib],
                  [disable build of the Sage library and packages depending on it]), [
-    for pkg in sagelib sage_docbuild sage_setup; do
+    for pkg in sagelib sage_docbuild sage_setup sagemath_bliss sagemath_brial sagemath_categories sagemath_cmr sagemath_combinat sagemath_coxeter3 sagemath_doc_html sagemath_doc_pdf sagemath_eclib sagemath_environment sagemath_flint sagemath_gap sagemath_giac sagemath_glpk sagemath_graphs sagemath_groups sagemath_homfly sagemath_lcalc sagemath_libbraiding sagemath_libecm sagemath_linbox sagemath_mcqd sagemath_meataxe sagemath_modules sagemath_mpmath sagemath_ntl sagemath_objects sagemath_pari sagemath_plot sagemath_polyhedra sagemath_repl sagemath_schemes sagemath_singular sagemath_sirocco sagemath_standard_no_symbolics sagemath_symbolics sagemath_tdlib; do
       AS_VAR_SET([SAGE_ENABLE_$pkg], [$enableval])
     done
   ])
@@ -505,6 +543,19 @@ AC_CONFIG_COMMANDS(mkdirs,
             AC_MSG_NOTICE([[creating symbolic link lib64 -> lib]])
             ln -s lib "$SAGE_LOCAL/lib64"
         fi
+        dnl Check that the file system is sufficiently functional
+        if test -z "$SAGE_BUILD_DIR"; then
+            SAGE_BUILD_DIR="$SAGE_LOCAL/var/tmp/sage/build"
+        fi
+        AC_MSG_NOTICE([creating directory $SAGE_BUILD_DIR])
+        mkdir -p "$SAGE_BUILD_DIR" || AC_MSG_ERROR([error creating directory $SAGE_BUILD_DIR (SAGE_BUILD_DIR)])
+        rm -f "$SAGE_BUILD_DIR"/conftest
+        touch "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([error creating a file in $SAGE_BUILD_DIR])
+        chmod +x "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([error setting file permissions +x in $SAGE_BUILD_DIR])
+        test -x "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([file permissions +x did not persist in $SAGE_BUILD_DIR])
+        chmod -x "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([error setting file permissions -x in $SAGE_BUILD_DIR])
+        test -x "$SAGE_BUILD_DIR"/conftest && AC_MSG_ERROR([file permissions -x did not persist in $SAGE_BUILD_DIR])
+        rm -f "$SAGE_BUILD_DIR"/conftest
     ],
     [
         SAGE_LOGS="$SAGE_ROOT/logs/pkgs"

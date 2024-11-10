@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 r"""
 Sidon sets and their generalizations, Sidon `g`-sets
 
@@ -31,12 +32,10 @@ def sidon_sets(N, g=1):
 
     INPUT:
 
-    - `N` -- A positive integer.
-    - `g` -- A positive integer (default: `1`).
+    - ``N`` -- positive integer
+    - ``g`` -- positive integer (default: `1`)
 
-    OUTPUT:
-
-    - A Sage set with categories whose element are also set of integers.
+    OUTPUT: a Sage set with categories whose element are also set of integers
 
     EXAMPLES::
 

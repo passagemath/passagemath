@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Lists of graphs
 
@@ -241,7 +242,7 @@ def _to_graph6(graphs, file=None, output_list=False, sparse=False):
 
 def to_graphics_array(graph_list, **kwds):
     """
-    Draw all graphs in a graphics array
+    Draw all graphs in a graphics array.
 
     INPUT:
 
@@ -346,6 +347,7 @@ def show_graphs(graph_list, **kwds):
 
     Example where more than one graphics array is used::
 
+        sage: # needs database_graphs
         sage: gq = GraphQuery(display_cols=['graph6'], num_vertices=5)
         sage: g = gq.get_graphs_list()
         sage: len(g)

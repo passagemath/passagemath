@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # distutils: libraries = GSL_LIBRARIES
 # distutils: library_dirs = GSL_LIBDIR
 # distutils: include_dirs = GSL_INCDIR
@@ -72,7 +73,6 @@ cdef extern from "gsl/gsl_interp.h":
 
   size_t gsl_interp_bsearch( double x_array[], double x,
                             size_t index_lo, size_t index_hi)
-
 
 
 cdef extern from "gsl/gsl_spline.h":

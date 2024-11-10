@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Finite field morphisms for prime fields
 
@@ -117,9 +118,9 @@ cdef class FrobeniusEndomorphism_prime(FrobeniusEndomorphism_finite_field):
 
     def _composition(self, right):
         """
-        Return self o right.
+        Return ``self`` o ``right``.
 
-        It is always right, since self is always identity because
+        It is always ``right``, since ``self`` is always identity because
         the domain is a prime field.
         """
         return right

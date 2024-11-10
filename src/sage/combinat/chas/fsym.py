@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Poirier-Reutenauer Hopf algebra of standard tableaux
@@ -72,7 +73,7 @@ class FSymBasis_abstract(CombinatorialFreeModule, BindableClass):
         CombinatorialFreeModule.__init__(self, alg.base_ring(),
                                          StandardTableaux(),
                                          category=FSymBases(alg),
-                                         bracket="", prefix=self._prefix)
+                                         bracket='', prefix=self._prefix)
 
     def _coerce_map_from_(self, R):
         r"""
@@ -269,7 +270,7 @@ class FSymBases(Category_realization_of_parent):
             r"""
             The basis elements (optionally: of the specified degree).
 
-            OUTPUT: Family
+            OUTPUT: family
 
             EXAMPLES::
 
@@ -351,7 +352,7 @@ class FSymBases(Category_realization_of_parent):
             INPUT:
 
             - ``basis`` -- a basis of the dual Hopf algebra
-            - ``degree`` -- a non-negative integer
+            - ``degree`` -- nonnegative integer
 
             OUTPUT:
 

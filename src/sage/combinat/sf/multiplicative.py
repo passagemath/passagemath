@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Multiplicative symmetric functions
@@ -46,9 +47,7 @@ class SymmetricFunctionAlgebra_multiplicative(classical.SymmetricFunctionAlgebra
 
         - ``left``, ``right`` -- partitions
 
-        OUTPUT:
-
-        - an element of ``self``
+        OUTPUT: an element of ``self``
 
         EXAMPLES::
 

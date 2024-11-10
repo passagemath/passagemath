@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Positive Integers
 """
@@ -68,7 +69,7 @@ class PositiveIntegers(IntegerRangeInfinite):
 
     def an_element(self):
         r"""
-        Returns an element of ``self``.
+        Return an element of ``self``.
 
         EXAMPLES::
 

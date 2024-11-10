@@ -86,11 +86,8 @@ the following source types:
 
 #. A ``wheel`` package:
 
-   - comes from the wheel file named in the required file ``checksums.ini``
-     and hosted on the Sage mirrors;
-
-   - per policy, only platform-independent wheels are allowed, i.e.,
-     ``*-none-any.whl`` files;
+   - comes from the wheel file(s) named in the required file ``checksums.ini``
+     and hosted on the Sage mirrors and GitHub Release Assets;
 
    - its version number is defined by the required file ``package-version.txt``;
 
@@ -102,7 +99,19 @@ the following source types:
 
    - Sage records the version number of the package installed using a file in
      ``$SAGE_LOCAL/var/lib/sage/installed/`` and will rerun the installation
-     if ``package-version.txt`` changes.
+     if ``package-version.txt`` changes;
+
+   - platform-independent ``wheel`` packages are preferred to ``normal`` packages
+     because the installation is faster and there are no build requirements;
+
+   - platform-dependent ``wheel`` packages should only be used when installation
+     from source (as a ``normal`` package) would have unusual build requirements
+     (example: the package :ref:`rpds_py <spkg_rpds_py>` would need Rust);
+
+   - if a platform-dependent ``wheel`` package is a standard package, there
+     must be a ``configure`` option that disables it
+     (example: use of the package :ref:`rpds_py <spkg_rpds_py>` can be disabled
+     by using ``./configure --disable-notebook``).
 
 #. A ``pip`` package:
 
@@ -444,10 +453,6 @@ begin with ``sdh_``, which stands for "Sage-distribution helper".
   arguments. If ``$SAGE_DESTDIR`` is not set then the command is run
   with ``$SAGE_SUDO``, if set.
 
-- ``sdh_setup_bdist_wheel [...]``: Runs ``setup.py bdist_wheel`` with
-  the given arguments, as well as additional default arguments used for
-  installing packages into Sage.
-
 - ``sdh_pip_install [...]``: The equivalent of running ``pip install``
   with the given arguments, as well as additional default arguments used for
   installing packages into Sage with pip. The last argument must be
@@ -568,7 +573,6 @@ pip for use in a separate process, like ``tox``, then this should be
 possible.
 
 
-
 .. _section-spkg-check:
 
 Self-tests
@@ -594,8 +598,9 @@ would simply contain:
 Python-based packages
 ---------------------
 
-Python-based packages should declare ``$(PYTHON)`` as a dependency,
-and most Python-based packages will also have ``$(PYTHON_TOOLCHAIN)`` as
+Python-based packages should declare ``$(PYTHON)`` as an order-only dependency.
+
+Most ``normal`` Python-based packages will also have ``$(PYTHON_TOOLCHAIN)`` as
 an order-only dependency, which will ensure that fundamental packages such
 as ``pip`` and ``setuptools`` are available at the time of building the package.
 
@@ -609,10 +614,6 @@ case the ``spkg-install.in`` script template might just consist of
 Where ``sdh_pip_install`` is a function provided by ``sage-dist-helpers`` that
 points to the correct ``pip`` for the Python used by Sage, and includes some
 default flags needed for correct installation into Sage.
-
-If ``pip`` will not work for a package but a command like ``python3 setup.py install``
-will, you may use ``sdh_setup_bdist_wheel``, followed by
-``sdh_store_and_pip_install_wheel .``.
 
 For ``spkg-check.in`` script templates, use ``python3`` rather
 than just ``python``.  The paths are set by the Sage build system
@@ -763,7 +764,6 @@ then we must declare this dependency.  Otherwise, various errors
 can occur when building or upgrading. When new versions of ``pip``
 packages add dependencies that happen to be Sage packages, there is a
 separate source of instability.
-
 
 
 .. _section-spkg-SPKG-txt:
@@ -1020,11 +1020,11 @@ to refer to the dot-separated components of a version by ``VERSION_MAJOR``,
 ``VERSION_MINOR``, and ``VERSION_MICRO``.
 
 For Python packages available from PyPI, you should use an
-``upstream_url`` from ``pypi.io``, which follows the format
+``upstream_url`` from ``files.pythonhosted.org``, which follows the format
 
 .. CODE-BLOCK:: bash
 
-    upstream_url=https://pypi.io/packages/source/m/matplotlib/matplotlib-VERSION.tar.gz
+    upstream_url=https://files.pythonhosted.org/packages/source/m/matplotlib/matplotlib-VERSION.tar.gz
 
 Developers who wish to test a package update from a PR branch before
 the archive is available on a Sage mirror. Sage falls back to
@@ -1095,6 +1095,13 @@ package requires patching), you can use::
 
     [alice@localhost sage]$ ./sage --package create pkg:pypi/scikit-spatial \
                                                --source normal              \
+                                               --type optional
+
+To create a platform-dependent ``wheel`` package instead of a ``normal`` package,
+use::
+
+    [alice@localhost sage]$ ./sage --package create pkg:pypi/scikit-spatial \
+                                               --source wheel               \
                                                --type optional
 
 To create a ``pip`` package rather than a ``normal`` or ``wheel`` package, you can use::

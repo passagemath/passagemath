@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-flint
+# sage.doctest: needs sage.graphs sage.modules
 """
 Quiver Morphisms
 """
@@ -37,7 +39,7 @@ class QuiverRepHom(CallMorphism):
 
     - ``codomain`` -- :class:`QuiverRep`, the codomain of the homomorphism
 
-    - ``data`` - dict, list, or :class:`QuiverRepElement`
+    - ``data`` -- dict, list, or :class:`QuiverRepElement`
       (default: empty dict),
       with the following meaning:
 
@@ -66,9 +68,7 @@ class QuiverRepHom(CallMorphism):
         and from ``C`` to the codomain of ``self``.  The composition
         of these maps is the result.
 
-    OUTPUT:
-
-    - :class:`QuiverRepHom`
+    OUTPUT: :class:`QuiverRepHom`
 
     EXAMPLES::
 
@@ -267,11 +267,11 @@ class QuiverRepHom(CallMorphism):
                 start_index += dim
 
         # Get the coordinates of the vector
-        from sage.categories.map import is_Map
+        from sage.categories.map import Map
         vector = []
         for v in self._quiver:
             if v in maps_dict:
-                if is_Map(maps_dict[v]):
+                if isinstance(maps_dict[v], Map):
                     try:
                         m = maps_dict[v].matrix()
                     except (AttributeError, ValueError):
@@ -446,7 +446,7 @@ class QuiverRepHom(CallMorphism):
 
     def __neg__(self):
         """
-        This function overrides the unary ``-`` operator
+        This function overrides the unary ``-`` operator.
 
         TESTS::
 
@@ -469,7 +469,7 @@ class QuiverRepHom(CallMorphism):
 
     def __pos__(self):
         """
-        This function overrides the unary ``+`` operator
+        This function overrides the unary ``+`` operator.
 
         TESTS::
 
@@ -490,7 +490,7 @@ class QuiverRepHom(CallMorphism):
 
     def __eq__(self, other):
         """
-        This function overrides the ``==`` operator
+        This function overrides the ``==`` operator.
 
         TESTS::
 
@@ -536,7 +536,7 @@ class QuiverRepHom(CallMorphism):
 
     def __ne__(self, other):
         """
-        This function overrides the ``!=`` operator
+        This function overrides the ``!=`` operator.
 
         TESTS::
 
@@ -588,7 +588,7 @@ class QuiverRepHom(CallMorphism):
 
     def __mul__(self, other):
         """
-        This function overrides the ``*`` operator
+        This function overrides the ``*`` operator.
 
         TESTS::
 
@@ -616,7 +616,7 @@ class QuiverRepHom(CallMorphism):
 
     def _assert_valid_hom(self):
         """
-        Raise a :class:`ValueError` if the homomorphism is not well defined.
+        Raise a :exc:`ValueError` if the homomorphism is not well defined.
 
         Specifically it checks that the domain and codomains of the maps are
         correct and that the edge diagrams commute.
@@ -659,9 +659,7 @@ class QuiverRepHom(CallMorphism):
         """
         Return the domain of the homomorphism.
 
-        OUTPUT:
-
-        - :class:`QuiverRep`, the domain
+        OUTPUT: :class:`QuiverRep`; the domain
 
         EXAMPLES::
 
@@ -680,9 +678,7 @@ class QuiverRepHom(CallMorphism):
         """
         Return the codomain of the homomorphism.
 
-        OUTPUT:
-
-        - :class:`QuiverRep`, the codomain
+        OUTPUT: :class:`QuiverRep`; the codomain
 
         EXAMPLES::
 
@@ -704,12 +700,10 @@ class QuiverRepHom(CallMorphism):
 
         INPUT:
 
-        - ``vertex`` -- integer, a vertex of the quiver
+        - ``vertex`` -- integer; a vertex of the quiver
 
-        OUTPUT:
-
-        - matrix, the matrix representing the homomorphism associated to
-          the given vertex
+        OUTPUT: the matrix representing the homomorphism associated to
+        the given vertex
 
         EXAMPLES::
 
@@ -741,11 +735,9 @@ class QuiverRepHom(CallMorphism):
 
         INPUT:
 
-        - ``vertex`` -- integer, a vertex of the quiver
+        - ``vertex`` -- integer; a vertex of the quiver
 
-        OUTPUT:
-
-        - homomorphism, the homomorphism associated to the given vertex
+        OUTPUT: the homomorphism associated to the given vertex
 
         EXAMPLES::
 
@@ -781,9 +773,7 @@ class QuiverRepHom(CallMorphism):
         """
         Return the base ring of the representation in the codomain.
 
-        OUTPUT:
-
-        - ring, the base ring of the codomain
+        OUTPUT: the base ring of the codomain
 
         EXAMPLES::
 
@@ -806,9 +796,8 @@ class QuiverRepHom(CallMorphism):
         """
         Test whether the homomorphism is injective.
 
-        OUTPUT:
-
-        - bool, ``True`` if the homomorphism is injective, ``False`` otherwise
+        OUTPUT: boolean; ``True`` if the homomorphism is injective, ``False``
+        otherwise
 
         EXAMPLES::
 
@@ -829,9 +818,8 @@ class QuiverRepHom(CallMorphism):
         """
         Test whether the homomorphism is surjective.
 
-        OUTPUT:
-
-        - bool, ``True`` if the homomorphism is surjective, ``False`` otherwise
+        OUTPUT: boolean; ``True`` if the homomorphism is surjective, ``False``
+        otherwise
 
         EXAMPLES::
 
@@ -857,10 +845,8 @@ class QuiverRepHom(CallMorphism):
         """
         Test whether the homomorphism is an isomorphism.
 
-        OUTPUT:
-
-        - bool, ``True`` if the homomorphism is bijective, ``False``
-          otherwise
+        OUTPUT: boolean; ``True`` if the homomorphism is bijective, ``False``
+        otherwise
 
         EXAMPLES::
 
@@ -880,9 +866,8 @@ class QuiverRepHom(CallMorphism):
         """
         Test whether the homomorphism is the zero homomorphism.
 
-        OUTPUT:
-
-        - bool, ``True`` if the homomorphism is zero, ``False`` otherwise
+        OUTPUT: boolean; ``True`` if the homomorphism is zero, ``False``
+        otherwise
 
         EXAMPLES::
 
@@ -902,10 +887,8 @@ class QuiverRepHom(CallMorphism):
         """
         Test whether the homomorphism is an endomorphism.
 
-        OUTPUT:
-
-        - bool, ``True`` if the domain equals the codomain, ``False``
-          otherwise
+        OUTPUT: boolean; ``True`` if the domain equals the codomain, ``False``
+        otherwise
 
         EXAMPLES::
 
@@ -926,9 +909,7 @@ class QuiverRepHom(CallMorphism):
         Return the rank of the homomorphism ``self`` (as a `k`-linear
         map).
 
-        OUTPUT:
-
-        - integer, the rank
+        OUTPUT: integer; the rank
 
         EXAMPLES::
 
@@ -953,9 +934,7 @@ class QuiverRepHom(CallMorphism):
         """
         Return the kernel of ``self``.
 
-        OUTPUT:
-
-        - :class:`QuiverRep`, the kernel
+        OUTPUT: :class:`QuiverRep`; the kernel
 
         .. NOTE::
 
@@ -982,9 +961,7 @@ class QuiverRepHom(CallMorphism):
         """
         Return the image of ``self``.
 
-        OUTPUT:
-
-        - :class:`QuiverRep`, the image
+        OUTPUT: :class:`QuiverRep`; the image
 
         .. NOTE::
 
@@ -1011,9 +988,7 @@ class QuiverRepHom(CallMorphism):
         """
         Return the cokernel of ``self``.
 
-        OUTPUT:
-
-        - :class:`QuiverRep`, the cokernel
+        OUTPUT: :class:`QuiverRep`; the cokernel
 
         .. NOTE::
 
@@ -1040,9 +1015,7 @@ class QuiverRepHom(CallMorphism):
         Compute the linear dual `Df : DN \to DM` of
         ``self`` = `f : M \to N` where `D(-) = Hom_k(-, k)`.
 
-        OUTPUT:
-
-        - :class:`QuiverRepHom`, the map `Df : DN \to DM`
+        OUTPUT: :class:`QuiverRepHom`; the map `Df : DN \to DM`
 
         .. NOTE::
 
@@ -1088,9 +1061,7 @@ class QuiverRepHom(CallMorphism):
         Compute the algebraic dual `f^t : N^t \to M^t` of
         ``self`` = `f : M \to N` where `(-)^t = Hom_Q(-, kQ)`.
 
-        OUTPUT:
-
-        - :class:`QuiverRepHom`, the map `f^t : N^t \to M^t`
+        OUTPUT: :class:`QuiverRepHom`; the map `f^t : N^t \to M^t`
 
         .. NOTE::
 
@@ -1131,7 +1102,7 @@ class QuiverRepHom(CallMorphism):
 
         - ``maps`` -- :class:`QuiverRepHom` or list of :class:`QuiverRepHom`'s
 
-        - ``return_maps`` -- bool (default: ``False``). If ``False``, then
+        - ``return_maps`` -- boolean (default: ``False``); if ``False``, then
           the return value is a :class:`QuiverRepHom` which is the direct sum
           of ``self`` with the :class:`QuiverRepHoms` in ``maps``.
           If ``True``, then the return value is a tuple of length either 3
@@ -1147,7 +1118,7 @@ class QuiverRepHom(CallMorphism):
           If ``pinch`` is either ``'domain'`` or ``'codomain'`` then the
           tuple will have length 3.
 
-        - ``pinch`` -- string or ``None`` (default: ``None``). If this is
+        - ``pinch`` -- string or ``None`` (default: ``None``); if this is
           equal to ``'domain'``, then the domains of ``self`` and the
           given maps must be equal.  The direct sum of `f: A \to B` and
           `g: A \to C` returned is then the map `A \to B \oplus C` defined
@@ -1161,9 +1132,7 @@ class QuiverRepHom(CallMorphism):
           `A \oplus C \to B \oplus D` defined by sending `(x, y)` to
           `(f(x), g(y))`.
 
-        OUTPUT:
-
-        - :class:`QuiverRepHom` or tuple
+        OUTPUT: :class:`QuiverRepHom` or tuple
 
         EXAMPLES::
 
@@ -1246,9 +1215,7 @@ class QuiverRepHom(CallMorphism):
 
         - ``x`` -- :class:`QuiverRepElement`
 
-        OUTPUT:
-
-        - :class:`QuiverRepElement`
+        OUTPUT: :class:`QuiverRepElement`
 
         EXAMPLES::
 

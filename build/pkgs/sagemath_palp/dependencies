@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-palp/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-palp/MANIFEST.in  palp cysignals | $(PYTHON_TOOLCHAIN) sage_setup sage_conf sagemath_environment cython pkgconfig $(PYTHON)

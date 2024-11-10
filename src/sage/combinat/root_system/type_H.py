@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Root system data for type H
 """
@@ -55,7 +56,7 @@ class CartanType(CartanType_standard_finite, CartanType_simple):
 
     def coxeter_diagram(self):
         """
-        Returns a Coxeter diagram for type H.
+        Return a Coxeter diagram for type H.
 
         EXAMPLES::
 

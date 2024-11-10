@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 # sage.doctest: needs sage.libs.flint
 r"""
 Integer factorization using FLINT
@@ -34,7 +35,7 @@ def factor_using_flint(Integer n):
 
     INPUT:
 
-    - ``n`` -- a nonzero sage Integer; the number to factor.
+    - ``n`` -- a nonzero sage Integer; the number to factor
 
     OUTPUT:
 

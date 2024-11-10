@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 # sage.doctest: # needs sage.symbolic
 """
 Real intervals with a fixed absolute precision
@@ -212,7 +213,7 @@ cdef class RealIntervalAbsoluteField_class(Field):
 
     def absprec(self):
         """
-        Returns the absolute precision of self.
+        Return the absolute precision of ``self``.
 
         EXAMPLES::
 

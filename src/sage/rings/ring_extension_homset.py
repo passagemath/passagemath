@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.rings.finite_rings
 r"""
 Homset between extensions of rings
@@ -19,6 +20,7 @@ AUTHOR:
 
 from sage.rings.homset import RingHomset_generic
 from sage.rings.ring_extension_morphism import RingExtensionHomomorphism
+
 
 class RingExtensionHomset(RingHomset_generic):
     r"""

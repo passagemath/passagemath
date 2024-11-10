@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-categories
+# sage.doctest: needs sage.schemes
 r"""
 Jacobians in Khuri-Makdisi model
 
@@ -66,7 +68,6 @@ space associated with certain multiple of `B` (depending on the model). This
 allows representing points of Jacobian as matrices once we fix a basis of the
 Riemann-Roch space.
 
-
 EXAMPLES::
 
     sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
@@ -108,7 +109,6 @@ EXAMPLES::
 AUTHORS:
 
 - Kwankyu Lee (2022-01-24): initial version
-
 """
 
 # ****************************************************************************
@@ -171,7 +171,6 @@ class JacobianPoint(JacobianPoint_base):
         [0 0 0 1 0 0 0 0 5]
         [0 0 0 0 0 1 0 0 5]
         [0 0 0 0 0 0 1 0 4]
-
     """
     def __init__(self, parent, w):
         """
@@ -339,7 +338,7 @@ class JacobianPoint(JacobianPoint_base):
 
         INPUT:
 
-        - ``n`` -- an integer
+        - ``n`` -- integer
 
         EXAMPLES::
 
@@ -362,7 +361,7 @@ class JacobianPoint(JacobianPoint_base):
 
         INPUT:
 
-        - ``n`` -- an integer
+        - ``n`` -- integer
 
         EXAMPLES::
 

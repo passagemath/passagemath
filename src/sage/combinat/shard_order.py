@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Shard intersection order
 
@@ -45,7 +46,7 @@ class ShardPosetElement(tuple):
 
     - ``p`` -- the permutation itself as a tuple
     - ``runs`` -- the decreasing runs as a tuple of tuples
-    - ``run_indices`` -- a list ``integer -> index of the run``
+    - ``run_indices`` -- list; ``integer -> index of the run``
     - ``dpg`` -- the transitive closure of the shard preorder graph
     - ``spg`` -- the transitive reduction of the shard preorder graph
 
@@ -60,7 +61,7 @@ class ShardPosetElement(tuple):
     """
     def __new__(cls, p):
         r"""
-        Initialization of the underlying tuple
+        Initialization of the underlying tuple.
 
         TESTS::
 
@@ -74,7 +75,7 @@ class ShardPosetElement(tuple):
         r"""
         INPUT:
 
-        - ``p`` - a permutation
+        - ``p`` -- a permutation
 
         EXAMPLES::
 
@@ -88,7 +89,7 @@ class ShardPosetElement(tuple):
             Digraph on 3 vertices
         """
         self.runs = p.decreasing_runs(as_tuple=True)
-        self.run_indices = [None] * (len(p) + 1)
+        self.run_indices = [0] * (len(p) + 1)
         for i, bloc in enumerate(self.runs):
             for j in bloc:
                 self.run_indices[j] = i
@@ -127,7 +128,7 @@ class ShardPosetElement(tuple):
             sage: e1 <= e0
             False
         """
-        if type(self) is not type(other) or len(self) != len(other):
+        if not isinstance(other, ShardPosetElement) or len(self) != len(other):
             raise TypeError("these are not comparable")
         if self.runs == other.runs:
             return True
@@ -172,13 +173,13 @@ def shard_preorder_graph(runs):
 
     INPUT:
 
-    - a tuple of tuples, the runs of a permutation, or
+    - ``runs`` -- either
 
-    - a tuple of pairs `(i,j)`, each one standing for a run from `i` to `j`.
+      - a tuple of tuples, the runs of a permutation, or
 
-    OUTPUT:
+      - a tuple of pairs `(i,j)`, each one standing for a run from `i` to `j`
 
-    a directed graph, with vertices labelled by integers
+    OUTPUT: a directed graph, with vertices labelled by integers
 
     EXAMPLES::
 
@@ -224,7 +225,7 @@ def shard_poset(n):
 
         sage: P = posets.ShardPoset(4); P  # indirect doctest
         Finite poset containing 24 elements
-        sage: P.chain_polynomial()
+        sage: P.chain_polynomial()                                                      # needs sage.libs.flint
         34*q^4 + 90*q^3 + 79*q^2 + 24*q + 1
         sage: P.characteristic_polynomial()
         q^3 - 11*q^2 + 23*q - 13

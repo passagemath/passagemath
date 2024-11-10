@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.rings.number_field
 """
 Torsion points on modular abelian varieties
@@ -33,7 +34,7 @@ class TorsionPoint(ModuleElement):
     - ``element`` -- a `\QQ`-vector space element that represents
       this element in terms of the ambient rational homology
 
-    - ``check`` -- bool (default: ``True``): whether to check that
+    - ``check`` -- boolean (default: ``True``); whether to check that
       element is in the appropriate vector space
 
     EXAMPLES:
@@ -97,7 +98,7 @@ class TorsionPoint(ModuleElement):
         r"""
         Return a string representation of ``self``.
 
-        .. note::
+        .. NOTE::
 
             Since they are represented as equivalences classes of
             rational homology modulo integral homology, we represent
@@ -195,8 +196,8 @@ class TorsionPoint(ModuleElement):
 
         INPUT:
 
-        - ``self, right`` -- elements of the same finite abelian
-          variety subgroup.
+        - ``self``, ``right`` -- elements of the same finite abelian
+          variety subgroup
 
         - ``op`` -- comparison operator (see :mod:`sage.structure.richcmp`)
 

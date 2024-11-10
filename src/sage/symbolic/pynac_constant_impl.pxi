@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 """
 Wrapper around Pynac's constants
 """
@@ -25,7 +26,7 @@ cdef class PynacConstant:
 
     def __cinit__(self, name, texname, domain_string):
         """
-        Creates a constant in Pynac.
+        Create a constant in Pynac.
 
         EXAMPLES::
 
@@ -75,7 +76,7 @@ cdef class PynacConstant:
 
     def serial(self):
         """
-        Returns the underlying Pynac serial for this constant.
+        Return the underlying Pynac serial for this constant.
 
         EXAMPLES::
 
@@ -88,7 +89,7 @@ cdef class PynacConstant:
 
     def name(self):
         """
-        Returns the name of this constant.
+        Return the name of this constant.
 
         EXAMPLES::
 
@@ -111,7 +112,7 @@ cdef class PynacConstant:
 
     def expression(self):
         """
-        Returns this constant as an Expression.
+        Return this constant as an Expression.
 
         EXAMPLES::
 

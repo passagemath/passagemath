@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-brial
+# sage.doctest: needs sage.rings.polynomial.pbori
 from .pbori import (top_index, if_then_else,
                     substitute_variables, BooleSet,
                     ll_red_nf_redsb, ll_red_nf_noredsb,
@@ -79,7 +81,7 @@ def eliminate(polys, on_the_fly=False, prot=False, reduction_function=None,
         lm = p.lex_lead()
         if lm.deg() == 1:
 
-            if not (lm in linear_leading_monomials):
+            if lm not in linear_leading_monomials:
                 linear_leading_monomials.add(lm)
                 linear_leads.append(p)
             else:

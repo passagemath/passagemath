@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# sage_setup: distribution = sagemath-flint
 r"""
 Compute Hilbert series of monomial ideals
 
@@ -94,7 +94,7 @@ cdef inline list interred(list L):
 
     INPUT:
 
-    - ``L`` -- a list of :class:`~sage.rings.polynomial.polydict.ETuple`
+    - ``L`` -- list of :class:`~sage.rings.polynomial.polydict.ETuple`
 
     OUTPUT:
 
@@ -422,6 +422,7 @@ cdef make_children(Node D, tuple w):
      #    It may be a good idea to form the product of some of the most
      #    frequent variables. But this isn't implemented yet. TODO?
 
+
 def first_hilbert_series(I, grading=None, return_grading=False):
     """
     Return the first Hilbert series of the given monomial ideal.
@@ -431,7 +432,8 @@ def first_hilbert_series(I, grading=None, return_grading=False):
     - ``I`` -- a monomial ideal (possibly defined in singular)
     - ``grading`` -- (optional) a list or tuple of integers used as
       degree weights
-    - ``return_grading`` -- (default: ``False``) whether to return the grading
+    - ``return_grading`` -- boolean (default: ``False``); whether to return the
+      grading
 
     OUTPUT:
 
@@ -460,12 +462,12 @@ def first_hilbert_series(I, grading=None, return_grading=False):
         sage: I = 0*R
         sage: first_hilbert_series(I)
         1
-        sage: first_hilbert_series(singular(I))
+        sage: first_hilbert_series(singular(I))                                         # needs sage.libs.singular
         1
         sage: I = 1*R
         sage: first_hilbert_series(I)
         0
-        sage: first_hilbert_series(singular(I))
+        sage: first_hilbert_series(singular(I))                                         # needs sage.libs.singular
         0
     """
     from sage.rings.integer_ring import ZZ
@@ -550,6 +552,7 @@ def first_hilbert_series(I, grading=None, return_grading=False):
                 fmpz_poly_mul(AN.RMult, AN.RMult, fhs._poly)
                 fmpz_poly_add(fhs._poly, AN.LMult, AN.RMult)
                 got_result = True
+
 
 def hilbert_poincare_series(I, grading=None):
     r"""

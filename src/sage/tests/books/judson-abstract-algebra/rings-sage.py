@@ -1,4 +1,4 @@
-##      -*-   coding: utf-8   -*-     ##
+# sage_setup: distribution = sagemath-repl
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#
@@ -410,5 +410,4 @@ r"""
 
     sage: b.parent()
     Rational Field
-
 """

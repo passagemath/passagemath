@@ -1,8 +1,8 @@
+# sage_setup: distribution = sagemath-objects
 # cython: old_style_globals=True
 """
 Interpreter reset
 """
-
 import sys
 
 # Exclude these from the reset command.
@@ -25,10 +25,10 @@ def reset(vars=None, attached=False):
 
     INPUT:
 
-    - ``vars`` -- a list, or space or comma separated string (default:
-      ``None``), variables to restore
+    - ``vars`` -- list or space or comma separated string (default:
+      ``None``); variables to restore
 
-    - ``attached`` -- boolean (default: ``False``), if ``vars`` is not None,
+    - ``attached`` -- boolean (default: ``False``); if ``vars`` is not ``None``,
       whether to detach all attached files
 
     EXAMPLES::
@@ -38,24 +38,26 @@ def reset(vars=None, attached=False):
         sage: x                                                                         # needs sage.symbolic
         x
 
-        sage: fn = tmp_filename(ext='foo.py')
+        sage: fn = tmp_filename(ext='.py')
         sage: sage.misc.reset.EXCLUDE.add('fn')
         sage: with open(fn, 'w') as f:
         ....:     _ = f.write('a = 111')
         sage: attach(fn)
-        sage: [fn] == attached_files()
+        sage: af = attached_files(); len(af)
+        1
+        sage: af == [fn]
         True
         sage: reset()
-        sage: [fn] == attached_files()
-        True
+        sage: af = attached_files(); len(af)
+        1
         sage: reset(attached=True)
-        sage: [fn] == attached_files()
-        False
+        sage: af = attached_files(); len(af)
+        0
         sage: sage.misc.reset.EXCLUDE.remove('fn')
 
     TESTS:
 
-    Confirm that assumptions don't survive a reset (:issue:`10855`)::
+    Confirm that assumptions do not survive a reset (:issue:`10855`)::
 
         sage: # needs sage.symbolic
         sage: assume(x > 3)
@@ -68,9 +70,7 @@ def reset(vars=None, attached=False):
         []
         sage: bool(x > 3)
         False
-
     """
-    from sage.symbolic.assumptions import forget
     if vars is not None:
         restore(vars)
         return
@@ -83,7 +83,12 @@ def reset(vars=None, attached=False):
             except KeyError:
                 pass
     restore()
-    forget()
+    try:
+        from sage.symbolic.assumptions import forget
+    except ImportError:
+        pass
+    else:
+        forget()
     reset_interfaces()
     if attached:
         import sage.repl.attach
@@ -96,8 +101,8 @@ def restore(vars=None):
 
     INPUT:
 
-    - ``vars`` -- string or list (default: ``None``), if not ``None``, restores
-      just the given variables to the default value.
+    - ``vars`` -- string or list (default: ``None``); if not ``None``, restores
+      just the given variables to the default value
 
     EXAMPLES::
 
@@ -130,19 +135,33 @@ def restore(vars=None):
     """
     G = globals()  # this is the reason the code must be in Cython.
     if 'sage_mode' not in G:
-        import sage.all
-        D = sage.all.__dict__
+        try:
+            import sage.all as toplevel
+        except ImportError:
+            try:
+                import sage.all__sagemath_polyhedra as toplevel
+            except ImportError:
+                try:
+                    import sage.all__sagemath_modules as toplevel
+                except ImportError:
+                    try:
+                        import sage.all__sagemath_categories as toplevel
+                    except ImportError:
+                        import sage.all__sagemath_objects as toplevel
     else:
         mode = G['sage_mode']
         if mode == 'cmdline':
-            import sage.all_cmdline
-            D = sage.all_cmdline.__dict__
+            import sage.all_cmdline as toplevel
         else:
-            import sage.all
-            D = sage.all.__dict__
+            import sage.all as toplevel
+    D = toplevel.__dict__
     _restore(G, D, vars)
-    import sage.calculus.calculus
-    _restore(sage.calculus.calculus.syms_cur, sage.calculus.calculus.syms_default, vars)
+    try:
+        import sage.calculus.calculus
+    except ImportError:
+        pass
+    else:
+        _restore(sage.calculus.calculus.syms_cur, sage.calculus.calculus.syms_default, vars)
 
 
 def _restore(G, D, vars):
@@ -166,5 +185,9 @@ def _restore(G, D, vars):
 
 
 def reset_interfaces():
-    from sage.interfaces.quit import expect_quitall
-    expect_quitall()
+    try:
+        from sage.interfaces.quit import expect_quitall
+    except ImportError:
+        pass
+    else:
+        expect_quitall()

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.combinat
 r"""
 Cell modules
@@ -234,7 +235,7 @@ class CellModule(CombinatorialFreeModule):
     @cached_method
     def nonzero_bilinear_form(self):
         """
-        Return ``True`` if the bilinear form of ``self`` is non-zero.
+        Return ``True`` if the bilinear form of ``self`` is nonzero.
 
         EXAMPLES::
 

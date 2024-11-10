@@ -1,5 +1,6 @@
-# sage.doctest: optional - sage.rings.finite_rings               (because all doctests use finite fields)
-# sage.doctest: optional - sage.rings.function_field    (because almost all doctests use function field extensions)
+# sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.rings.finite_rings               (because all doctests use finite fields)
+# sage.doctest: needs sage.rings.function_field    (because almost all doctests use function field extensions)
 """
 Divisors of function fields
 
@@ -37,7 +38,6 @@ We verify the Riemann-Roch theorem::
 AUTHORS:
 
 - Kwankyu Lee (2017-04-30): initial version
-
 """
 
 # ****************************************************************************
@@ -75,6 +75,7 @@ from sage.rings.integer import Integer
 
 from .place import PlaceSet
 
+
 def divisor(field, data):
     """
     Construct a divisor from the data.
@@ -98,6 +99,7 @@ def divisor(field, data):
     """
     divisor_group = field.divisor_group()
     return divisor_group.element_class(divisor_group, data)
+
 
 def prime_divisor(field, place, m=1):
     """
@@ -133,7 +135,7 @@ class FunctionFieldDivisor(ModuleElement):
 
     - ``parent`` -- divisor group
 
-    - ``data`` -- dict of place and multiplicity pairs
+    - ``data`` -- dictionary of place and multiplicity pairs
 
     EXAMPLES::
 
@@ -468,7 +470,7 @@ class FunctionFieldDivisor(ModuleElement):
 
     def is_effective(self):
         """
-        Return ``True`` if this divisor has non-negative multiplicity at all
+        Return ``True`` if this divisor has nonnegative multiplicity at all
         places.
 
         EXAMPLES::

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 """
 Sets of homomorphisms between number fields
 """
@@ -240,7 +241,7 @@ class NumberFieldHomset(RingHomset_generic):
 
     def __getitem__(self, n):
         r"""
-        Return the ``n``th element of ``self.list()``.
+        Return the `n`-th element of ``self.list()``.
 
         EXAMPLES::
 

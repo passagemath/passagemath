@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 "Operands"
 
 # ****************************************************************************
@@ -187,6 +188,7 @@ cdef class OperandsWrapper(SageObject):
             Operands of x^2
         """
         return restore_op_wrapper, (self._expr,)
+
 
 def restore_op_wrapper(expr):
     """

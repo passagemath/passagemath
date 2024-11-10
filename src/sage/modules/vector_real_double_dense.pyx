@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: optional - numpy
 r"""
 Dense real double vectors using a NumPy backend
@@ -62,7 +63,7 @@ cdef class Vector_real_double_dense(Vector_double_dense):
 
     def stats_skew(self):
         """
-        Computes the skewness of a data set.
+        Compute the skewness of a data set.
 
         For normally distributed data, the skewness should be about
         0. A skewness value > 0 means that there is more weight in the
@@ -78,10 +79,9 @@ cdef class Vector_real_double_dense(Vector_double_dense):
         import scipy.stats
         return self._sage_dtype(scipy.stats.skew(self._vector_numpy))
 
-
     def __reduce__(self):
         """
-        Pickling
+        Pickling.
 
         EXAMPLES::
 

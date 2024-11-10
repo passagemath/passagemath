@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Quantum Matrix Coordinate Algebras
@@ -975,6 +976,7 @@ class QuantumGL(QuantumMatrixCoordinateAlgebra_abstract):
                       if t != 'c' else T.monomial((I['c'], I['c'])) ** e
                       for t, e in x._sorted_items())
 
+
 def _generator_key(t):
     """
     Helper function to make ``'c'`` less that all other indices for
@@ -982,11 +984,9 @@ def _generator_key(t):
 
     INPUT:
 
-    a tuple (index, exponent)
+    - ``t`` -- tuple (index, exponent)
 
-    OUTPUT:
-
-    a tuple made from the index only
+    OUTPUT: a tuple made from the index only
 
     EXAMPLES::
 

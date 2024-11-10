@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 """
 Elements of arithmetic subgroups
 """
@@ -18,7 +19,9 @@ from sage.structure.richcmp cimport richcmp
 from sage.rings.integer_ring import ZZ
 
 from sage.matrix.matrix_space import MatrixSpace
-from sage.matrix.matrix_integer_dense cimport Matrix_integer_dense
+from sage.matrix.matrix_dense cimport Matrix_dense
+from sage.matrix.matrix_generic_dense cimport Matrix_generic_dense as MatrixClass
+# FIXME: This was Matrix_integer_dense; changed for modularization to avoid flint dep
 
 M2Z = MatrixSpace(ZZ, 2)
 
@@ -29,7 +32,7 @@ cdef class ArithmeticSubgroupElement(MultiplicativeGroupElement):
     determinant 1.
     """
 
-    cdef Matrix_integer_dense __x
+    cdef Matrix_dense __x
 
     def __init__(self, parent, x, check=True):
         """
@@ -43,7 +46,7 @@ cdef class ArithmeticSubgroupElement(MultiplicativeGroupElement):
           which lives in ``parent``
 
         - ``check`` -- if ``True``, check that parent is an arithmetic
-          subgroup, and that `x` defines a matrix of determinant `1`.
+          subgroup, and that `x` defines a matrix of determinant `1`
 
         We tend not to create elements of arithmetic subgroups that are not
         SL2Z, in order to avoid coercion issues (that is, the other arithmetic
@@ -77,8 +80,8 @@ cdef class ArithmeticSubgroupElement(MultiplicativeGroupElement):
             True
         """
         if check:
-            from .arithgroup_generic import is_ArithmeticSubgroup
-            if not is_ArithmeticSubgroup(parent):
+            from .arithgroup_generic import ArithmeticSubgroup
+            if not isinstance(parent, ArithmeticSubgroup):
                 raise TypeError("parent (= %s) must be an arithmetic subgroup" % parent)
 
             x = M2Z(x, copy=True, coerce=True)
@@ -159,8 +162,8 @@ cdef class ArithmeticSubgroupElement(MultiplicativeGroupElement):
 
     cpdef _richcmp_(self, right_r, int op):
         """
-        Compare self to right, where right is guaranteed to have the same
-        parent as self.
+        Compare ``self`` to ``right``, where ``right`` is guaranteed to have
+        the same parent as ``self``.
 
         EXAMPLES::
 
@@ -205,7 +208,7 @@ cdef class ArithmeticSubgroupElement(MultiplicativeGroupElement):
 
     cpdef _mul_(self, right):
         """
-        Return self * right.
+        Return ``self * right``.
 
         EXAMPLES::
 
@@ -375,8 +378,8 @@ cdef class ArithmeticSubgroupElement(MultiplicativeGroupElement):
             sage: G([1, 4, 0, 1]).acton(infinity)
             +Infinity
         """
-        from sage.rings.infinity import is_Infinite, infinity
-        if is_Infinite(z):
+        from sage.rings.infinity import InfinityElement, infinity
+        if isinstance(z, InfinityElement):
             if self.c() != 0:
                 return self.a() / self.c()
             else:

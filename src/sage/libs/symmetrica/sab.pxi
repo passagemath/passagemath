@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 cdef extern from 'symmetrica/def.h':
     INT dimension_symmetrization(OP n, OP part, OP a)
     INT bdg(OP part, OP perm, OP D)
@@ -10,7 +11,7 @@ cdef extern from 'symmetrica/def.h':
 
 def dimension_symmetrization_symmetrica(n, part):
     """
-    computes the dimension of the degree of a irreducible
+    Compute the dimension of the degree of a irreducible
     representation of the GL_n, n is a INTEGER object, labeled
     by the PARTITION object a.
     """
@@ -37,7 +38,7 @@ def dimension_symmetrization_symmetrica(n, part):
 
 def bdg_symmetrica(part, perm):
     """
-    Calculates the irreducible matrix representation
+    Calculate the irreducible matrix representation
     D^part(perm), whose entries are of integral numbers.
 
     REFERENCE: H. Boerner:
@@ -62,10 +63,9 @@ def bdg_symmetrica(part, perm):
     freeall(cD)
 
 
-
 def sdg_symmetrica(part, perm):
     """
-    Calculates the irreducible matrix representation
+    Calculate the irreducible matrix representation
     D^part(perm), which consists of rational numbers.
 
     REFERENCE: G. James/ A. Kerber:
@@ -90,13 +90,12 @@ def sdg_symmetrica(part, perm):
     freeall(cperm)
     freeall(cD)
 
-
-
     return res
+
 
 def odg_symmetrica(part, perm):
     """
-    Calculates the irreducible matrix representation
+    Calculate the irreducible matrix representation
     D^part(perm), which consists of real numbers.
 
     REFERENCE: G. James/ A. Kerber:
@@ -121,17 +120,11 @@ def odg_symmetrica(part, perm):
     freeall(cperm)
     freeall(cD)
 
-
-
     return res
 
 
 def ndg_symmetrica(part, perm):
-    """
-
-    """
     cdef OP cpart, cperm, cD
-
 
     cpart = callocobject()
     cperm = callocobject()
@@ -147,16 +140,11 @@ def ndg_symmetrica(part, perm):
     freeall(cperm)
     freeall(cD)
 
-
-
     return res
 
+
 def specht_dg_symmetrica(part, perm):
-    """
-
-    """
     cdef OP cpart, cperm, cD
-
 
     cpart = callocobject()
     cperm = callocobject()
@@ -171,8 +159,6 @@ def specht_dg_symmetrica(part, perm):
     freeall(cpart)
     freeall(cperm)
     freeall(cD)
-
-
 
     return res
 
@@ -191,8 +177,6 @@ def specht_dg_symmetrica(part, perm):
 ##     """
 ##     cdef OP cm, cn, cM
 
-##
-
 ##     cm = callocobject()
 ##     _op_integer(m, cm)
 
@@ -201,8 +185,6 @@ def specht_dg_symmetrica(part, perm):
 
 ##     cM = callocobject()
 
-
-
 ##     glmndg(cm, cn, cM, VAR)
 ##     res = _py(cM)
 
@@ -210,7 +192,5 @@ def specht_dg_symmetrica(part, perm):
 ##    freeall(cm)
 ##    freeall(cn)
 ##    freeall(cM)
-
-##
 
 ##    return res

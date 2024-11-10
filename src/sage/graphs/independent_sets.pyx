@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Independent sets
 
@@ -12,7 +13,6 @@ sets. See the documentation of :class:`IndependentSets` for actual examples.
 
 Classes and methods
 -------------------
-
 """
 
 from sage.data_structures.binary_matrix cimport *
@@ -41,10 +41,10 @@ cdef class IndependentSets:
     - ``G`` -- a graph
 
     - ``maximal`` -- boolean (default: ``False``); whether to only consider
-      (inclusionwise) maximal independent sets.
+      (inclusionwise) maximal independent sets
 
     - ``complement`` -- boolean (default: ``False``); whether to consider the
-      graph's complement (i.e. cliques instead of independent sets).
+      graph's complement (i.e. cliques instead of independent sets)
 
     ALGORITHM:
 
@@ -130,7 +130,7 @@ cdef class IndependentSets:
     """
     def __init__(self, G, maximal=False, complement=False):
         r"""
-        Constructor for this class
+        Constructor for this class.
 
         TESTS::
 
@@ -331,11 +331,11 @@ cdef class IndependentSets:
 
     def __contains__(self, S):
         r"""
-        Check whether the set is an independent set (possibly maximal)
+        Check whether the set is an independent set (possibly maximal).
 
         INPUT:
 
-        - ``S`` -- a set of vertices to be tested.
+        - ``S`` -- set of vertices to be tested
 
         TESTS:
 

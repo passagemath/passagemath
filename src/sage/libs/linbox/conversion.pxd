@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-linbox
 r"""
 Inline conversions between LinBox and Sage
 
@@ -83,8 +84,8 @@ cdef inline void set_linbox_matrix_modn_sparse(SparseMatrix_Modular_uint64& A, M
 
     INPUT:
 
-    - A -- LinBox matrix
-    - m -- Sage matrix
+    - ``A`` -- LinBox matrix
+    - ``m`` -- Sage matrix
     """
     cdef c_vector_modint * row
     cdef size_t i, j
@@ -101,8 +102,8 @@ cdef inline SparseMatrix_Modular_uint64 * new_linbox_matrix_modn_sparse(Modular_
 
     INPUT:
 
-    - F -- LinBox field
-    - m -- Sage matrix
+    - ``F`` -- LinBox field
+    - ``m`` -- Sage matrix
     """
     cdef SparseMatrix_Modular_uint64 * A = new SparseMatrix_Modular_uint64(F, <size_t> m._nrows, <size_t> m._ncols)
     set_linbox_matrix_modn_sparse(A[0], m)
@@ -118,8 +119,8 @@ cdef inline void set_linbox_matrix_integer_sparse(SparseMatrix_integer& A, Matri
 
     INPUT:
 
-    - A -- LinBox matrix
-    - m -- Sage matrix
+    - ``A`` -- LinBox matrix
+    - ``m`` -- Sage matrix
     """
     cdef size_t i, j, k
     cdef mpz_vector * v
@@ -139,7 +140,7 @@ cdef inline SparseMatrix_integer * new_linbox_matrix_integer_sparse(ZRing &ZZ, M
 
     INPUT:
 
-    - m -- Sage matrix
+    - ``m`` -- Sage matrix
     """
     cdef SparseMatrix_integer * A = new SparseMatrix_integer(ZZ, <size_t> m._nrows, <size_t> m._ncols)
     set_linbox_matrix_integer_sparse(A[0], m)
@@ -155,7 +156,7 @@ cdef inline DenseVector_integer * new_linbox_vector_integer_dense(ZRing &ZZ, Vec
 
     INPUT:
 
-    - v -- a Sage dense integer vector
+    - ``v`` -- a Sage dense integer vector
     """
     cdef cppvector[Integer] * vec = new cppvector[Integer](<size_t> v._degree)
     cdef size_t i
@@ -173,8 +174,8 @@ cdef inline Vector_integer_dense new_sage_vector_integer_dense(P, DenseVector_in
 
     INPUT:
 
-    - P -- parent for the Sage vector
-    - v -- linbox vector
+    - ``P`` -- parent for the Sage vector
+    - ``v`` -- linbox vector
     """
     cdef Vector_integer_dense res = P()
     cdef size_t i

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 """
 Kummer surfaces over a general ring
 """
@@ -24,6 +25,7 @@ from sage.categories.schemes import Schemes
 # y^2 = (c9^2 + 4*a12)*x^6 + (2*c6*c9 + 4*a10)*x^5
 #     + (2*c3*c9 + c6^2 + 4*a8)*x^4 + (2*c0*c9 + 2*c3*c6 + 4*a6)*x^3
 #     + (2*c0*c6 + c3^2 + 4*a4)*x^2 + (2*c0*c3 + 4*a2)*x + c0^2 + 4*a0
+
 
 class KummerSurface(AlgebraicScheme_subscheme_projective):
     def __init__(self, J):

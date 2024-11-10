@@ -25,7 +25,7 @@ on:
            "ubuntu-lunar",
            "ubuntu-mantic",
            "ubuntu-noble",
-           "debian-buster-gcc_spkg",
+           "ubuntu-oracular",
            "debian-bullseye",
            "debian-bookworm",
            "debian-trixie",
@@ -37,6 +37,7 @@ on:
            "linuxmint-21.1",
            "linuxmint-21.2",
            "linuxmint-21.3",
+           "linuxmint-22",
            "fedora-30",
            "fedora-31",
            "fedora-32",
@@ -48,11 +49,13 @@ on:
            "fedora-38",
            "fedora-39",
            "fedora-40",
-           "centos-7-devtoolset-gcc_11",
-           "centos-stream-8-python3.9",
-           "centos-stream-9-python3.9",
+           "fedora-41",
+           "fedora-42",
+           "centos-stream-9",
+           "centos-stream-9-python3.12",
            "almalinux-8-python3.9",
            "almalinux-9-python3.11",
+           "alpine",
            "gentoo-python3.10",
            "gentoo-python3.11",
            "gentoo-python3.12",
@@ -171,7 +174,7 @@ jobs:
           ref: ${{ inputs.sage_ref }}
           fetch-depth: 10000
       - name: Download upstream artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: upstream
           name: ${{ inputs.upstream_artifact }}
@@ -215,9 +218,9 @@ jobs:
             EXTRA_DOCKER_TAGS=`echo $GITHUB_REF_NAME | tr -d '[:space:]' | tr -c '[:alnum:]_.-' '-' | sed 's/^[-.]*//' | cut -c1-128`
             shopt -s extglob
             case "$GITHUB_REF_NAME" in
-              +([0-9]).+([0-9])?(.+([0-9])) )
+              passagemath-+([0-9]).+([0-9])?(.+([0-9])) )
                 EXTRA_DOCKER_TAGS="latest dev $EXTRA_DOCKER_TAGS";;
-              +([0-9]).+([0-9])?(.+([0-9]))?(.)@(a|alpha|b|beta|rc)+([0-9]) )
+              passagemath-+([0-9]).+([0-9])?(.+([0-9]))?(.)@(a|alpha|b|beta|rc)+([0-9]) )
                 EXTRA_DOCKER_TAGS="dev $EXTRA_DOCKER_TAGS";;
             esac
             echo "EXTRA_DOCKER_TAGS=$EXTRA_DOCKER_TAGS" >> $GITHUB_ENV
@@ -245,19 +248,27 @@ jobs:
         # The arcane "find" command is a replacement for "pkill make",
         # which we use because pkill is not installed in the "minimal" package
         # configuration on many platforms.
+        #
+        # The "sed" command strips away timestamps from "docker build" (buildkit)
+        # such as "#25 1211.0" at the beginning of each line. The timestamps are
+        # redundant because GH Actions provides timestamps for each line already.
+        # Stripping the timestamps from the beginnings of lines also allows
+        # GitHub Actions to recognize workflow commands such as ::error etc.
+        #
         run: |
           (sleep ${{ inputs.timeout }}; for id in $(docker ps -q); do docker exec $id find /proc -maxdepth 2 -name cmdline -exec bash -c "grep -l [m][a][k][e] {} | cut -d/ -f3 | xargs --no-run-if-empty kill" \;; done) &
-          set -o pipefail; EXTRA_DOCKER_BUILD_ARGS="--build-arg NUMPROC=9 --build-arg USE_MAKEFLAGS=\"-k V=0 SAGE_NUM_THREADS=5\"" tox -e $TOX_ENV -- $TARGETS 2>&1 | sed "/^configure: notice:/s|^|::warning file=artifacts/$LOGS_ARTIFACT_NAME/config.log::|;/^configure: warning:/s|^|::warning file=artifacts/$LOGS_ARTIFACT_NAME/config.log::|;/^configure: error:/s|^|::error file=artifacts/$LOGS_ARTIFACT_NAME/config.log::|;"
+          set -o pipefail; EXTRA_DOCKER_BUILD_ARGS="--build-arg NUMPROC=9 --build-arg USE_MAKEFLAGS=\"-k V=0 SAGE_NUM_THREADS=5\"" tox -e $TOX_ENV -- $TARGETS 2>&1 | sed -E --unbuffered "s/^#[0-9]+ [0-9]+[.][0-9]+ //;/^configure: notice:/s|^|::warning file=artifacts/$LOGS_ARTIFACT_NAME/config.log::|;/^configure: warning:/s|^|::warning file=artifacts/$LOGS_ARTIFACT_NAME/config.log::|;/^configure: error:/s|^|::error file=artifacts/$LOGS_ARTIFACT_NAME/config.log::|;"
       - name: Copy logs from the Docker image or build container
         run: |
           mkdir -p "artifacts/$LOGS_ARTIFACT_NAME"
           cp -r .tox/$TOX_ENV/* "artifacts/$LOGS_ARTIFACT_NAME"
           rm -rf "artifacts/$LOGS_ARTIFACT_NAME"/{bin,lib,pyvenv.cfg}
         if: always()
-      - uses: actions/upload-artifact@v3
+      - name: Upload log artifact
+        uses: actions/upload-artifact@v4
         with:
           path: artifacts
-          name: ${{ env.LOGS_ARTIFACT_NAME }}
+          name: ${{ env.LOGS_ARTIFACT_NAME }}-${{ job.container.id }}
         if: always()
       - name: Print out logs for immediate inspection
         # and markup the output with GitHub Actions logging commands
@@ -286,7 +297,7 @@ jobs:
              DOCKER_IMAGE=${TOX_ENV_SANS_INCREMENTAL#docker-}
              for TAG in $*; do
                  echo -n "  \$"
-                 if [ "$DOCKER_PUSH_REPOSITORY" != "ghcr.io/sagemath/sage/" ]; then
+                 if [ "$DOCKER_PUSH_REPOSITORY" != "ghcr.io/passagemath/passagemath/" ]; then
                      echo -n " FROM_DOCKER_REPOSITORY=$DOCKER_PUSH_REPOSITORY"
                  fi
                  eval DOCKER_TARGET=\${TAG#*$DOCKER_IMAGE-}
@@ -298,7 +309,7 @@ jobs:
              done
           elif [ -n "$DOCKER_PUSH_REPOSITORY" -a -f .tox/$TOX_ENV/Dockertags ]; then
              echo "Unable to push Docker images to $DOCKER_PUSH_REPOSITORY."
-             echo "This is normal in a pull request to sagemath/sage or to another user's repository."
+             echo "This is normal in a pull request to passagemath/passagemath or to another user's repository."
              echo
              echo "If you need Docker images, "
              echo " - either run this GitHub Actions workflow in your repository fork"

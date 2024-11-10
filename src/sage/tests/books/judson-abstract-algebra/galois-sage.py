@@ -1,4 +1,4 @@
-##      -*-   coding: utf-8   -*-     ##
+# sage_setup: distribution = sagemath-repl
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#
@@ -485,5 +485,4 @@ r"""
 
     sage: sg[2].is_normal(P)
     False
-
 """

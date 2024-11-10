@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-linbox
 r"""
 Finite residue fields (Givaro implementation)
 """
@@ -71,7 +72,7 @@ class ResidueFiniteField_givaro(ResidueField_generic, FiniteField_givaro):
 
         - ``to_order`` -- the map from a lattice in that vector space to the maximal order
 
-        - ``PB`` -- a matrix used in defining the reduction and lifting maps.
+        - ``PB`` -- a matrix used in defining the reduction and lifting maps
 
         EXAMPLES::
 
@@ -104,7 +105,7 @@ class ResidueFiniteField_givaro(ResidueField_generic, FiniteField_givaro):
         """
         INPUT:
 
-            - ``x`` -- Something to cast into ``self``.
+            - ``x`` -- something to cast into ``self``
 
         EXAMPLES::
 

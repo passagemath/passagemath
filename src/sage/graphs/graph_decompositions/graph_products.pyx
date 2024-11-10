@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # cython: binding=True
 r"""
 Products of graphs
@@ -153,7 +154,7 @@ def is_cartesian_product(g, certificate=False, relabeling=False):
         - :meth:`sage.graphs.generic_graph.GenericGraph.cartesian_product`
 
         - :mod:`~sage.graphs.graph_decompositions.graph_products` -- a module on
-          graph products.
+          graph products
 
     .. NOTE::
 

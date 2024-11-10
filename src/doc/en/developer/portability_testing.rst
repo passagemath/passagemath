@@ -22,7 +22,7 @@ spectrum of platforms.
 Testing PRs with GitHub Actions
 ===============================
 
-`GitHub Actions <https://github.com/sagemath/sage/actions>`_ are automatically
+`GitHub Actions <https://github.com/passagemath/passagemath/actions>`_ are automatically
 and constantly testing GitHub PRs to identify errors early and ensure code
 quality. In particular, Build & Test workflows perform an incremental build of
 Sage and run doctests on a selection of major platforms including Ubuntu,
@@ -75,13 +75,13 @@ setting is in Preferences -> Resources -> Advanced.
    (or another cloud service) using a container with the Docker-in-Docker
    feature. Sage provides a suitable dev container configuration
    `.devcontainer/tox-docker-in-docker
-   <https://github.com/sagemath/sage/tree/develop/.devcontainer/tox-docker-in-docker>`_:
+   <https://github.com/passagemath/passagemath/tree/develop/.devcontainer/tox-docker-in-docker>`_:
 
    .. ONLY:: html
 
       .. image:: https://github.com/codespaces/badge.svg
          :align: center
-         :target: https://codespaces.new/sagemath/sage?devcontainer_path=.devcontainer%2Ftox-docker-in-docker%2Fdevcontainer.json
+         :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Ftox-docker-in-docker%2Fdevcontainer.json
 
 All major Linux distributions provide ready-to-use Docker images,
 which are published via `Docker Hub <https://hub.docker.com>`_
@@ -615,7 +615,7 @@ for example using::
 
 If you run Docker-in-Docker on GitHub Codespaces using our dev container
 configuration `.devcontainer/tox-docker-in-docker
-<https://github.com/sagemath/sage/tree/develop/.devcontainer/tox-docker-in-docker>`_,
+<https://github.com/passagemath/passagemath/tree/develop/.devcontainer/tox-docker-in-docker>`_,
 ``tox`` is already installed.
 
 Sage provides a sophisticated tox configuration in the file
@@ -997,7 +997,7 @@ Actions that runs our portability tests on a multitude of platforms on
 every push of a tag (but not of a branch) to a repository for which
 GitHub Actions are enabled.
 
-In particular, it automatically runs on our main repository sagemath/sage
+In particular, it automatically runs on our main repository passagemath/passagemath
 on every release tag.
 
 This is defined in the files
@@ -1144,19 +1144,19 @@ the build logs for a given platform.
 The image version corresponding to the latest development release
 receives the additional Docker tag ``dev``, see for example the Docker
 image for the platform `ubuntu-focal-standard
-<https://github.com/sagemath/sage/pkgs/container/sage%2Fsage-ubuntu-focal-standard-with-targets-optional>`_. Thus,
+<https://github.com/passagemath/passagemath/pkgs/container/sage%2Fsage-ubuntu-focal-standard-with-targets-optional>`_. Thus,
 for example, the following command will work::
 
-  $ docker run -it ghcr.io/sagemath/sage/sage-ubuntu-focal-standard-with-targets-optional:dev bash
-  Unable to find image 'ghcr.io/sagemath/sage/sage-ubuntu-focal-standard-with-targets-optional:dev' locally
-  dev: Pulling from sagemath/sage/sage-ubuntu-focal-standard-with-targets-optional
+  $ docker run -it ghcr.io/passagemath/passagemath/sage-ubuntu-focal-standard-with-targets-optional:dev bash
+  Unable to find image 'ghcr.io/passagemath/passagemath/sage-ubuntu-focal-standard-with-targets-optional:dev' locally
+  dev: Pulling from passagemath/passagemath/sage-ubuntu-focal-standard-with-targets-optional
   d5fd17ec1767: Already exists
   67586203f0c7: Pull complete
   b63c529f4777: Pull complete
   ...
   159775d1a3d2: Pull complete
   Digest: sha256:e6ba5e12f59c6c4668692ef4cfe4ae5f242556482664fb347bf260f32bf8e698
-  Status: Downloaded newer image for ghcr.io/sagemath/sage/sage-ubuntu-focal-standard-with-targets-optional:dev
+  Status: Downloaded newer image for ghcr.io/passagemath/passagemath/sage-ubuntu-focal-standard-with-targets-optional:dev
   root@8055a7ba0607:/sage# ./sage
   ┌────────────────────────────────────────────────────────────────────┐
   │ SageMath version 9.6, Release Date: 2022-05-15                     │
@@ -1209,7 +1209,7 @@ extensions. Search for "Dev Containers" and install it.
 The extension needs a ``devcontainer.json`` configuration file to work. Sage
 provides sample ``devcontainer.json`` configuration files
 `$SAGE_ROOT/.devcontainer/*/devcontainer.json
-<https://github.com/sagemath/sage/tree/develop/.devcontainer/>`_ for this
+<https://github.com/passagemath/passagemath/tree/develop/.devcontainer/>`_ for this
 purpose.
 
 If you open the sage folder in VS Code, it may prompt you whether you would like to open the current
@@ -1224,7 +1224,7 @@ Open Folder in Container", and hit :kbd:`Enter`, and choose the directory
 
 VS Code then prompts you to choose a dev container configuration.
 For example, choose "ubuntu-jammy-standard" `.devcontainer/portability-ubuntu-jammy-standard/devcontainer.json
-<https://github.com/sagemath/sage/tree/develop/.devcontainer/portability-ubuntu-jammy-standard/devcontainer.json>`_,
+<https://github.com/passagemath/passagemath/tree/develop/.devcontainer/portability-ubuntu-jammy-standard/devcontainer.json>`_,
 which uses the Docker image based on ``ubuntu-jammy-standard``, the most recent
 development version of Sage (``dev`` tag), and a full installation of
 the Sage distribution (``with-targets``). Other dev container configurations
@@ -1287,7 +1287,7 @@ containers from a public Docker image that provides SageMath and then updates th
 installation of SageMath in this container by building from the current source tree.
 
 - `develop-docker-computop/devcontainer.json
-  <https://github.com/sagemath/sage/tree/develop/.devcontainer/develop-docker-computop/devcontainer.json>`_
+  <https://github.com/passagemath/passagemath/tree/develop/.devcontainer/develop-docker-computop/devcontainer.json>`_
   configures a container with the `Docker image from the 3-manifolds
   project <https://hub.docker.com/r/computop/sage/>`_, providing
   SnapPy, Regina, PHCPack, etc.
@@ -1308,21 +1308,21 @@ useful to copy these configurations into your own projects (they should
 work without change) or to adapt them to your needs.
 
 - `downstream-archlinux-latest/devcontainer.json
-  <https://github.com/sagemath/sage/tree/develop/.devcontainer/downstream-archlinux-latest/devcontainer.json>`_
+  <https://github.com/passagemath/passagemath/tree/develop/.devcontainer/downstream-archlinux-latest/devcontainer.json>`_
   configures a container with an installation of `Arch Linux
   <https://archlinux.org/>`_ and its SageMath package. (The suffix ``latest``
   indicates the most recent version of Arch Linux as available on Docker Hub.)
 
 - `downstream-conda-forge-latest/devcontainer.json
-  <https://github.com/sagemath/sage/tree/develop/.devcontainer/downstream-conda-forge-latest/devcontainer.json>`_
+  <https://github.com/passagemath/passagemath/tree/develop/.devcontainer/downstream-conda-forge-latest/devcontainer.json>`_
   configures a container with an installation of conda-forge and its SageMath package.
 
 - `downstream-docker-cocalc/devcontainer.json
-  <https://github.com/sagemath/sage/tree/develop/.devcontainer/downstream-docker-cocalc/devcontainer.json>`_
+  <https://github.com/passagemath/passagemath/tree/develop/.devcontainer/downstream-docker-cocalc/devcontainer.json>`_
   configures a container with `the CoCalc Docker image <https://doc.cocalc.com/docker-image.html>`_.
 
 - `downstream-docker-computop/devcontainer.json
-  <https://github.com/sagemath/sage/tree/develop/.devcontainer/develop-docker-computop/devcontainer.json>`_
+  <https://github.com/passagemath/passagemath/tree/develop/.devcontainer/develop-docker-computop/devcontainer.json>`_
   configures a container with the `Docker image from the 3-manifolds
   project <https://hub.docker.com/r/computop/sage/>`_, providing
   SnapPy, Regina, PHCPack, etc.

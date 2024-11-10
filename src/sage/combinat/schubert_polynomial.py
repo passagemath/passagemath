@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Schubert Polynomials
@@ -80,12 +81,14 @@ from sage.combinat.free_module import CombinatorialFreeModule
 from sage.combinat.key_polynomial import KeyPolynomial
 from sage.combinat.permutation import Permutations, Permutation
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.infinite_polynomial_element import InfinitePolynomial
-from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.multi_polynomial import MPolynomial
-import sage.libs.symmetrica.all as symmetrica
+from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
+
+lazy_import('sage.libs.symmetrica', 'all', as_='symmetrica')
 
 
 def SchubertPolynomialRing(R):
@@ -156,7 +159,7 @@ class SchubertPolynomial_class(CombinatorialFreeModule.Element):
             p = R(p)
         return p
 
-    def divided_difference(self, i, algorithm="sage"):
+    def divided_difference(self, i, algorithm='sage'):
         r"""
         Return the ``i``-th divided difference operator, applied to ``self``.
 

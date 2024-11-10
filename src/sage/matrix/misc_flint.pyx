@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 r"""
 Misc matrix algorithms using FLINT
 """
@@ -27,7 +28,7 @@ def matrix_integer_dense_rational_reconstruction(Matrix_integer_dense A, Integer
     INPUT:
 
     - ``A`` -- matrix
-    - ``N`` -- an integer
+    - ``N`` -- integer
 
     EXAMPLES::
 

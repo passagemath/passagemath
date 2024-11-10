@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Airy functions
 
@@ -62,11 +63,11 @@ lazy_import('mpmath', ['airyai', 'airybi'],
 class FunctionAiryAiGeneral(BuiltinFunction):
     def __init__(self):
         r"""
-        The generalized derivative of the Airy Ai function
+        The generalized derivative of the Airy Ai function.
 
         INPUT:
 
-        - ``alpha`` -- Return the `\alpha`-th order fractional derivative with
+        - ``alpha`` -- return the `\alpha`-th order fractional derivative with
           respect to `z`.
           For `\alpha = n = 1,2,3,\ldots` this gives the derivative
           `\operatorname{Ai}^{(n)}(z)`, and for `\alpha = -n = -1,-2,-3,\ldots`
@@ -78,7 +79,7 @@ class FunctionAiryAiGeneral(BuiltinFunction):
 
             f_n(z) = \int_0^z f_{n-1}(t) dt
 
-        - ``x`` -- The argument of the function
+        - ``x`` -- the argument of the function
 
         EXAMPLES::
 
@@ -221,7 +222,7 @@ class FunctionAiryAiSimple(BuiltinFunction):
             0.0065911393574607191442574484080
             sage: airy_ai_simple(3).n(algorithm='scipy')  # rel tol 1e-10               # needs scipy
             0.006591139357460719
-            sage: airy_ai_simple(I).n(algorithm='scipy')  # rel tol 1e-10
+            sage: airy_ai_simple(I).n(algorithm='scipy')  # rel tol 1e-10               # needs scipy
             0.33149330543214117 - 0.3174498589684438*I
 
         TESTS::
@@ -365,7 +366,7 @@ airy_ai_prime = FunctionAiryAiPrime()
 
 def airy_ai(alpha, x=None, hold_derivative=True, **kwds):
     r"""
-    The Airy Ai function
+    The Airy Ai function.
 
     The Airy Ai function `\operatorname{Ai}(x)` is (along with
     `\operatorname{Bi}(x)`) one of the two linearly independent standard
@@ -387,7 +388,7 @@ def airy_ai(alpha, x=None, hold_derivative=True, **kwds):
 
     INPUT:
 
-    - ``alpha`` -- Return the `\alpha`-th order fractional derivative with
+    - ``alpha`` -- return the `\alpha`-th order fractional derivative with
       respect to `z`.
       For `\alpha = n = 1,2,3,\ldots` this gives the derivative
       `\operatorname{Ai}^{(n)}(z)`, and for `\alpha = -n = -1,-2,-3,\ldots`
@@ -399,9 +400,9 @@ def airy_ai(alpha, x=None, hold_derivative=True, **kwds):
 
         f_n(z) = \int_0^z f_{n-1}(t) dt
 
-    - ``x`` -- The argument of the function
+    - ``x`` -- the argument of the function
 
-    - ``hold_derivative`` -- Whether or not to stop from returning higher
+    - ``hold_derivative`` -- whether or not to stop from returning higher
       derivatives in terms of `\operatorname{Ai}(x)` and
       `\operatorname{Ai}'(x)`
 
@@ -504,7 +505,7 @@ class FunctionAiryBiGeneral(BuiltinFunction):
 
         INPUT:
 
-        - ``alpha`` -- Return the `\alpha`-th order fractional derivative with
+        - ``alpha`` -- return the `\alpha`-th order fractional derivative with
           respect to `z`.
           For `\alpha = n = 1,2,3,\ldots` this gives the derivative
           `\operatorname{Bi}^{(n)}(z)`, and for `\alpha = -n = -1,-2,-3,\ldots`
@@ -516,7 +517,7 @@ class FunctionAiryBiGeneral(BuiltinFunction):
 
             f_n(z) = \int_0^z f_{n-1}(t) dt
 
-        - ``x`` -- The argument of the function
+        - ``x`` -- the argument of the function
 
         EXAMPLES::
 
@@ -581,7 +582,6 @@ class FunctionAiryBiGeneral(BuiltinFunction):
             sage: from sage.functions.airy import airy_bi_general
             sage: airy_bi_general(-2, 1.0)                                              # needs mpmath
             0.388621540699059
-
         """
         parent = kwargs.get('parent')
         import mpmath
@@ -762,7 +762,7 @@ class FunctionAiryBiPrime(BuiltinFunction):
             161.92668350461340184309492429
             sage: airy_bi_prime(4).n(algorithm='scipy')  # rel tol 1e-10                # needs scipy
             161.92668350461398
-            sage: airy_bi_prime(I).n(algorithm='scipy')  # rel tol 1e-10
+            sage: airy_bi_prime(I).n(algorithm='scipy')  # rel tol 1e-10                # needs scipy
             0.135026646710819 - 0.1288373867812549*I
 
         TESTS::
@@ -807,7 +807,7 @@ airy_bi_prime = FunctionAiryBiPrime()
 
 def airy_bi(alpha, x=None, hold_derivative=True, **kwds):
     r"""
-    The Airy Bi function
+    The Airy Bi function.
 
     The Airy Bi function `\operatorname{Bi}(x)` is (along with
     `\operatorname{Ai}(x)`) one of the two linearly independent standard
@@ -830,7 +830,7 @@ def airy_bi(alpha, x=None, hold_derivative=True, **kwds):
 
     INPUT:
 
-    - ``alpha`` -- Return the `\alpha`-th order fractional derivative with
+    - ``alpha`` -- return the `\alpha`-th order fractional derivative with
       respect to `z`.
       For `\alpha = n = 1,2,3,\ldots` this gives the derivative
       `\operatorname{Bi}^{(n)}(z)`, and for `\alpha = -n = -1,-2,-3,\ldots`
@@ -842,11 +842,11 @@ def airy_bi(alpha, x=None, hold_derivative=True, **kwds):
 
         f_n(z) = \int_0^z f_{n-1}(t) dt
 
-    - ``x`` -- The argument of the function
+    - ``x`` -- the argument of the function
 
-    - ``hold_derivative`` -- Whether or not to stop from returning higher
-      derivatives in terms of `\operatorname{Bi}(x)` and
-      `\operatorname{Bi}'(x)`
+    - ``hold_derivative`` -- boolean (default: ``True``); whether or not to
+      stop from returning higher derivatives in terms of `\operatorname{Bi}(x)`
+      and `\operatorname{Bi}'(x)`
 
     .. SEEALSO:: :func:`airy_ai`
 

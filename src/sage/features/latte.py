@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 r"""
 Features for testing the presence of ``latte_int``
 """
@@ -15,7 +16,7 @@ Features for testing the presence of ``latte_int``
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from . import Executable
+from . import Executable, PythonModule
 from .join_feature import JoinFeature
 
 
@@ -34,8 +35,8 @@ class Latte_count(Executable):
             sage: isinstance(Latte_count(), Latte_count)
             True
         """
-        Executable.__init__(self, "count", executable="count",
-                            spkg="latte_int",
+        Executable.__init__(self, 'count', executable='count',
+                            spkg='latte_int',
                             url=LATTE_URL)
 
 
@@ -51,8 +52,8 @@ class Latte_integrate(Executable):
             sage: isinstance(Latte_integrate(), Latte_integrate)
             True
         """
-        Executable.__init__(self, "integrate", executable="integrate",
-                            spkg="latte_int",
+        Executable.__init__(self, 'integrate', executable='integrate',
+                            spkg='latte_int',
                             url=LATTE_URL)
 
 
@@ -75,9 +76,12 @@ class Latte(JoinFeature):
             sage: isinstance(Latte(), Latte)
             True
         """
-        JoinFeature.__init__(self, "latte_int",
-                             (Latte_count(), Latte_integrate()),
-                             description="LattE")
+        JoinFeature.__init__(self, 'latte_int',
+                             (Latte_count(),
+                              Latte_integrate(),
+                              PythonModule('sage.interfaces.latte')),
+                             description='LattE',
+                             spkg='sagemath_latte_4ti2')
 
 
 def all_features():

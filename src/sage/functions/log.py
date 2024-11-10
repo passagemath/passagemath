@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Logarithmic functions
 
@@ -6,7 +7,6 @@ AUTHORS:
 - Yoora Yi Tenen (2012-11-16): Add documentation for :meth:`log()` (:issue:`12113`)
 
 - Tomas Kalvoda (2015-04-01): Add :meth:`exp_polar()` (:issue:`18085`)
-
 """
 
 from sage.misc.functional import log as log
@@ -574,7 +574,7 @@ class Function_lambert_w(BuiltinFunction):
 
     INPUT:
 
-    - ``n`` -- an integer. `n=0` corresponds to the principal branch.
+    - ``n`` -- integer; `n=0` corresponds to the principal branch
 
     - ``z`` -- a complex number
 
@@ -641,7 +641,7 @@ class Function_lambert_w(BuiltinFunction):
     neither is numerical integration using GSL. The :meth:`numerical_integral`
     function does work if you pass a lambda function::
 
-        sage: numerical_integral(lambda x: lambert_w(x), 0, 1)                          # needs sage.modules
+        sage: numerical_integral(lambda x: lambert_w(x), 0, 1)                          # needs scipy sage.modules
         (0.33036612476168054, 3.667800782666048e-15)
     """
 
@@ -921,7 +921,7 @@ class Function_exp_polar(BuiltinFunction):
 
         INPUT:
 
-        - ``z`` -- a complex number `z = a + ib`.
+        - ``z`` -- a complex number `z = a + ib`
 
         OUTPUT:
 
@@ -990,7 +990,6 @@ class Function_exp_polar(BuiltinFunction):
             Traceback (most recent call last):
             ...
             ValueError: invalid attempt to numerically evaluate exp_polar()
-
         """
         if (not isinstance(z, Expression) and
                 bool(-const_pi < imag(z) <= const_pi)):

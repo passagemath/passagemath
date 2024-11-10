@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Derivations of function fields
 
@@ -18,7 +19,6 @@ AUTHORS:
   derivation classes; morphisms to/from fraction fields
 
 - Kwankyu Lee (2017-04-30): added higher derivations and completions
-
 """
 
 # ****************************************************************************

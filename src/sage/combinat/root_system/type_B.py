@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Root system data for type B
 """
@@ -32,7 +33,6 @@ class AmbientSpace(ambient_space.AmbientSpace):
             sage: e = RootSystem(['B',3]).ambient_space()
             sage: e.root(0,1)
             (1, -1, 0)
-
         """
         return self.monomial(i) - self.monomial(j)
 
@@ -98,7 +98,6 @@ class AmbientSpace(ambient_space.AmbientSpace):
              (1, 0, 0),
              (0, 1, 0),
              (0, 0, 1)]
-
         """
         res = []
         for i in range(self.n-1):
@@ -218,7 +217,7 @@ class CartanType(CartanType_standard_finite, CartanType_simple, CartanType_cryst
 
     def dynkin_diagram(self):
         """
-        Returns a Dynkin diagram for type B.
+        Return a Dynkin diagram for type B.
 
         EXAMPLES::
 

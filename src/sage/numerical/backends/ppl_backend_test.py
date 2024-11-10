@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 import pytest
 
 from sage.numerical.backends.generic_backend_test import GenericBackendTests
@@ -9,4 +10,4 @@ class TestPPLBackend(GenericBackendTests):
 
     @pytest.fixture
     def backend(self) -> GenericBackend:
-        return MixedIntegerLinearProgram(solver="PPL").get_backend()
+        return MixedIntegerLinearProgram(solver='PPL').get_backend()

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.flint sage.libs.pari
 """
 Elements of Hecke modules
@@ -35,10 +36,16 @@ def is_HeckeModuleElement(x):
     EXAMPLES::
 
         sage: sage.modular.hecke.all.is_HeckeModuleElement(0)
+        doctest:warning...
+        DeprecationWarning: the function is_HeckeModuleElement is deprecated;
+        use 'isinstance(..., HeckeModuleElement)' instead
+        See https://github.com/sagemath/sage/issues/37895 for details.
         False
         sage: sage.modular.hecke.all.is_HeckeModuleElement(BrandtModule(37)([1,2,3]))
         True
     """
+    from sage.misc.superseded import deprecation
+    deprecation(37895, "the function is_HeckeModuleElement is deprecated; use 'isinstance(..., HeckeModuleElement)' instead")
     return isinstance(x, HeckeModuleElement)
 
 
@@ -150,7 +157,7 @@ class HeckeModuleElement(ModuleElement):
         EXAMPLES::
 
             sage: M = ModularSymbols(11, 2)
-            sage: M.0 == M.1 # indirect doctest
+            sage: M.0 == M.1  # indirect doctest
             False
             sage: M.0 == (M.1 + M.0 - M.1)
             True
@@ -276,9 +283,9 @@ class HeckeModuleElement(ModuleElement):
 
     def is_new(self, p=None) -> bool:
         r"""
-        Return ``True`` if this element is p-new.
+        Return ``True`` if this element is `p`-new.
 
-        If p is ``None``, return ``True`` if the element is new.
+        If `p` is ``None``, return ``True`` if the element is new.
 
         EXAMPLES::
 
@@ -293,9 +300,9 @@ class HeckeModuleElement(ModuleElement):
 
     def is_old(self, p=None) -> bool:
         r"""
-        Return ``True`` if this element is p-old.
+        Return ``True`` if this element is `p`-old.
 
-        If p is ``None``, return ``True`` if the element is old.
+        If `p` is ``None``, return ``True`` if the element is old.
 
         EXAMPLES::
 

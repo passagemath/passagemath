@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-ntl
 # distutils: libraries = NTL_LIBRARIES gmp
 # distutils: extra_compile_args = NTL_CFLAGS
 # distutils: include_dirs = NTL_INCDIR
@@ -53,9 +54,9 @@ def verify_bernoulli_mod_p(data):
 
     INPUT:
 
-    - ``data`` -- list, same format as output of :func:`bernoulli_mod_p` function
+    - ``data`` -- list; same format as output of :func:`bernoulli_mod_p` function
 
-    OUTPUT: bool -- True if checksum passed
+    OUTPUT: boolean; ``True`` if checksum passed
 
     EXAMPLES::
 
@@ -100,7 +101,7 @@ def bernoulli_mod_p(int p):
 
     INPUT:
 
-    - ``p`` -- integer, a prime
+    - ``p`` -- integer; a prime
 
     OUTPUT:
 
@@ -224,21 +225,18 @@ def bernoulli_mod_p(int p):
     return output
 
 
-
 def bernoulli_mod_p_single(long p, long k):
     r"""
     Return the Bernoulli number `B_k` mod `p`.
 
-    If `B_k` is not `p`-integral, an :class:`ArithmeticError` is raised.
+    If `B_k` is not `p`-integral, an :exc:`ArithmeticError` is raised.
 
     INPUT:
 
-    - ``p`` -- integer, a prime
-    - ``k`` -- non-negative integer
+    - ``p`` -- integer; a prime
+    - ``k`` -- nonnegative integer
 
-    OUTPUT:
-
-    The `k`-th Bernoulli number mod `p`.
+    OUTPUT: the `k`-th Bernoulli number mod `p`
 
     EXAMPLES::
 
@@ -268,7 +266,7 @@ def bernoulli_mod_p_single(long p, long k):
         sage: bernoulli_mod_p_single(19, -4)
         Traceback (most recent call last):
         ...
-        ValueError: k must be non-negative
+        ValueError: k must be nonnegative
 
     Check results against :class:`bernoulli_mod_p`::
 

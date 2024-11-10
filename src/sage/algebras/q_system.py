@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
 Q-Systems
@@ -446,12 +447,12 @@ class QSystem(CombinatorialFreeModule):
             if m == t[a] * self._level:
                 return self.one()
         if m == 1:
-            return self.monomial( self._indices.gen((a,1)) )
+            return self.monomial(self._indices.gen((a,1)))
         #if self._cartan_type.type() == 'A' and self._level is None:
         #    return self._jacobi_trudy(a, m)
         I = self._cm.index_set()
         p = self._Q_poly(a, m)
-        return p.subs({ g: self.Q(I[i], 1) for i,g in enumerate(self._poly.gens()) })
+        return p.subs({g: self.Q(I[i], 1) for i,g in enumerate(self._poly.gens())})
 
     @cached_method
     def _Q_poly(self, a, m):
@@ -564,6 +565,7 @@ class QSystem(CombinatorialFreeModule):
             """
             return self.parent().sum_of_terms((tl*tr, cl*cr)
                                               for tl,cl in self for tr,cr in x)
+
 
 def is_tamely_laced(ct):
     r"""

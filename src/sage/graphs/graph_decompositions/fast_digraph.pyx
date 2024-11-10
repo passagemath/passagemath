@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Compact structure for fast operations on less than 32 vertices
 
@@ -117,7 +118,7 @@ cdef inline int compute_out_neighborhood_cardinality(FastDigraph g, int S) noexc
 
     - ``g`` -- a FastDigraph
 
-    - ``S`` -- an integer describing the set
+    - ``S`` -- integer describing the set
 
     EXAMPLES::
 

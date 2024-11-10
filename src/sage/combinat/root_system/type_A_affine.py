@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Root system data for (untwisted) type A affine
 """
@@ -68,7 +69,7 @@ class CartanType(CartanType_standard_untwisted_affine):
 
     def dynkin_diagram(self):
         """
-        Returns the extended Dynkin diagram for affine type A.
+        Return the extended Dynkin diagram for affine type A.
 
         EXAMPLES::
 

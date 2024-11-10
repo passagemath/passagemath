@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-frobby/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-frobby/MANIFEST.in  frobby cysignals | $(PYTHON_TOOLCHAIN) sage_setup sage_conf sagemath_environment cython pkgconfig $(PYTHON)

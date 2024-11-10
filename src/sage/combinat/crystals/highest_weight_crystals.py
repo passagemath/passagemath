@@ -1,4 +1,5 @@
-# sage.doctest: needs sage.combinat sage.modules
+# sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
 Highest weight crystals
 """
@@ -192,7 +193,6 @@ def HighestWeightCrystal(dominant_weight, model=None):
         ....:             C1 = crystals.HighestWeight(wt.to_ambient().to_weight_space(ZZ), model=model)
         ....:             C2 = crystals.HighestWeight(wt, model=model)
         ....:             assert C1 == C2
-
     """
     cartan_type = dominant_weight.parent().cartan_type()
     if model is None:
@@ -310,8 +310,8 @@ class FiniteDimensionalHighestWeightCrystal_TypeE(TensorProductOfCrystals):
 
     def module_generator(self):
         """
-        This yields the module generator (or highest weight element) of the classical
-        crystal of given dominant weight in self.
+        Yield the module generator (or highest weight element) of the classical
+        crystal of given dominant weight in ``self``.
 
         EXAMPLES::
 

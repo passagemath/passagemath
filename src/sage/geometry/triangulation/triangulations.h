@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-polyhedra
+ */
 #ifndef TRIANGULATION__H
 #define TRIANGULATION__H
 
@@ -32,8 +34,6 @@ public:
   bool have_more_triangulations();
   const compact_simplices& next_triangulation();
 };
-
-
 
 
 typedef triangulations* triangulations_ptr;

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.libs.singular
 r"""
 Free resolutions
@@ -230,7 +231,7 @@ class FreeResolution(SageObject, metaclass=ClasscallMetaclass):
 
         INPUT:
 
-        - ``i`` -- a positive integer
+        - ``i`` -- positive integer
 
         EXAMPLES::
 
@@ -271,11 +272,11 @@ class FreeResolution(SageObject, metaclass=ClasscallMetaclass):
     @abstract_method
     def differential(self, i):
         r"""
-        Return the ``i``-th differential map.
+        Return the `i`-th differential map.
 
         INPUT:
 
-        - ``i`` -- a positive integer
+        - ``i`` -- positive integer
 
         TESTS::
 
@@ -375,7 +376,7 @@ class FiniteFreeResolution(FreeResolution):
 
         INPUT:
 
-        - ``i`` -- a positive integer
+        - ``i`` -- positive integer
 
         EXAMPLES::
 
@@ -409,11 +410,11 @@ class FiniteFreeResolution(FreeResolution):
 
     def __getitem__(self, i):
         r"""
-        Return the ``i``-th free module of this resolution.
+        Return the `i`-th free module of this resolution.
 
         INPUT:
 
-        - ``i`` -- a positive integer
+        - ``i`` -- positive integer
 
         EXAMPLES::
 
@@ -443,11 +444,11 @@ class FiniteFreeResolution(FreeResolution):
 
     def differential(self, i):
         r"""
-        Return the ``i``-th differential map.
+        Return the `i`-th differential map.
 
         INPUT:
 
-        - ``i`` -- a positive integer
+        - ``i`` -- positive integer
 
         EXAMPLES::
 
@@ -542,11 +543,11 @@ class FiniteFreeResolution(FreeResolution):
 
     def matrix(self, i):
         r"""
-        Return the matrix representing the ``i``-th differential map.
+        Return the matrix representing the `i`-th differential map.
 
         INPUT:
 
-        - ``i`` -- a positive integer
+        - ``i`` -- positive integer
 
         EXAMPLES::
 

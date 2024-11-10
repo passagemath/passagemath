@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from sage.misc.binary_tree import BinaryTree
 from sage.misc.binary_tree cimport BinaryTree
 
@@ -56,9 +57,3 @@ cdef class mul_pd(binary_pd):
 
 cdef class abc_pd(binary_pd):
     cdef int index
-
-
-
-
-
-

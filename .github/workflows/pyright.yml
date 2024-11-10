@@ -5,8 +5,7 @@ on:
   merge_group:
   push:
     branches:
-      - master
-      - develop
+      - main
   workflow_dispatch:
     # Allow to run manually
 
@@ -18,7 +17,7 @@ concurrency:
 jobs:
   pyright:
     runs-on: ubuntu-latest
-    container: ghcr.io/sagemath/sage/sage-ubuntu-jammy-standard-with-targets:dev
+    container: ghcr.io/passagemath/passagemath/sage-ubuntu-jammy-standard-with-targets:dev
     steps:
       - name: Checkout
         id: checkout
@@ -32,7 +31,7 @@ jobs:
           eval $(sage-print-system-package-command auto --spkg --yes --no-install-recommends install git)
 
       - name: Install GH CLI
-        uses: dev-hanz-ops/install-gh-cli-action@v0.1.0
+        uses: dev-hanz-ops/install-gh-cli-action@v0.2.0
         with:
           gh-cli-version: 2.32.0
 

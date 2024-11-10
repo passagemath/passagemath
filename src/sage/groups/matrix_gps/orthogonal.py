@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Orthogonal Linear Groups
 
@@ -112,7 +113,7 @@ def normalize_args_e(degree, ring, e):
 
     - ``ring`` -- a ring; the base ring of the affine space
 
-    - ``e`` -- integer, one of `+1`, `0`, `-1`.  Only relevant for
+    - ``e`` -- integer; one of `+1`, `0`, `-1`.  Only relevant for
       finite fields and if the degree is even. A parameter that
       distinguishes inequivalent invariant forms.
 
@@ -252,7 +253,7 @@ def GO(n, R, e=0, var='a', invariant_form=None):
       for finite fields and if the degree is even: a parameter that
       distinguishes inequivalent invariant forms
 
-    - ``var`` -- (optional, default: ``'a'``) variable used to
+    - ``var`` -- (default: ``'a'``) variable used to
       represent generator of the finite field, if needed
 
     - ``invariant_form`` -- (optional) instances being accepted by
@@ -360,7 +361,7 @@ def SO(n, R, e=None, var='a', invariant_form=None):
       for finite fields and if the degree is even: a parameter that
       distinguishes inequivalent invariant forms
 
-    - ``var`` -- (optional, default: ``'a'``) variable used to
+    - ``var`` -- (default: ``'a'``) variable used to
       represent generator of the finite field, if needed
 
     - ``invariant_form`` -- (optional) instances being accepted by

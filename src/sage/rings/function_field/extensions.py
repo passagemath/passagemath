@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Special extensions of function fields
 
@@ -50,7 +51,6 @@ Constant field extension of a function field over a finite field::
 AUTHORS:
 
 - Kwankyu Lee (2021-12-24): added constant field extension
-
 """
 
 # ****************************************************************************
@@ -83,7 +83,6 @@ class ConstantFieldExtension(FunctionFieldExtension):
     - ``F`` -- a function field whose constant field is `k`
 
     - ``k_ext`` -- an extension of `k`
-
     """
     def __init__(self, F, k_ext):
         """

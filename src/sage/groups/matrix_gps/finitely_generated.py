@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Finitely Generated Matrix Groups
 
@@ -19,8 +20,8 @@ The finitely generated matrix groups can also be constructed as
 subgroups of matrix groups::
 
     sage: SL2Z = SL(2, ZZ)
-    sage: S, T = SL2Z.gens()
-    sage: SL2Z.subgroup([T^2])
+    sage: S, T = SL2Z.gens()                                                            # needs sage.libs.gap
+    sage: SL2Z.subgroup([T^2])                                                          # needs sage.libs.gap
     Subgroup with 1 generators (
     [1 2]
     [0 1]
@@ -72,10 +73,10 @@ AUTHORS:
 from sage.groups.matrix_gps.group_element import is_MatrixGroupElement
 from sage.groups.matrix_gps.matrix_group import MatrixGroup_generic
 from sage.matrix.constructor import matrix
-from sage.matrix.matrix_space import is_MatrixSpace
+from sage.matrix.matrix_space import MatrixSpace
 from sage.misc.cachefunc import cached_method
 from sage.rings.integer_ring import ZZ
-from sage.structure.element import is_Matrix
+from sage.structure.element import Matrix
 from sage.structure.sequence import Sequence
 
 
@@ -83,7 +84,7 @@ def normalize_square_matrices(matrices):
     """
     Find a common space for all matrices.
 
-    OUTPUT: a list of matrices, all elements of the same matrix space
+    OUTPUT: list of matrices, all elements of the same matrix space
 
     EXAMPLES::
 
@@ -105,7 +106,7 @@ def normalize_square_matrices(matrices):
             deg.append(m.parent().degree())
             gens.append(m.matrix())
             continue
-        if is_Matrix(m):
+        if isinstance(m, Matrix):
             if not m.is_square():
                 raise TypeError('matrix must be square')
             deg.append(m.ncols())
@@ -130,7 +131,7 @@ def normalize_square_matrices(matrices):
         raise ValueError('not all matrices have the same size')
     gens = Sequence(gens, immutable=True)
     MS = gens.universe()
-    if not is_MatrixSpace(MS):
+    if not isinstance(MS, MatrixSpace):
         raise TypeError('all generators must be matrices')
     if MS.nrows() != MS.ncols():
         raise ValueError('matrices must be square')
@@ -159,6 +160,7 @@ def QuaternionMatrixGroupGF3():
     elements commonly called `I` and `J`, while `K`
     is the product of `I` and `J`. ::
 
+        sage: # needs sage.libs.gap
         sage: from sage.groups.matrix_gps.finitely_generated import QuaternionMatrixGroupGF3
 
         sage: # needs sage.libs.gap

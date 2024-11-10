@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 """
 Freely Generated Lie Conformal Algebras
@@ -24,6 +25,7 @@ from sage.rings.integer import Integer
 from sage.sets.family import Family
 from sage.sets.disjoint_union_enumerated_sets import DisjointUnionEnumeratedSets
 
+
 class FreelyGeneratedLieConformalAlgebra(LieConformalAlgebraWithBasis):
     """
     Base class for a central extension of a freely generated Lie
@@ -40,7 +42,7 @@ class FreelyGeneratedLieConformalAlgebra(LieConformalAlgebraWithBasis):
     def __init__(self, R, index_set=None, central_elements=None, category=None,
                  element_class=None, prefix=None, **kwds):
         """
-        Initialize self.
+        Initialize ``self``.
 
         TESTS::
 

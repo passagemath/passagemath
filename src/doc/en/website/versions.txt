@@ -1,0 +1,19 @@
+# This file is used by the version selector of the Sage doc
+# and updated by the script src/bin/sage-update-version
+#
+# The lines are for recent stable releases (at most 10 lines)
+# A line consists of the version and the URL to the doc
+#
+# The sage-update-version script adds a new line for a new stable release
+# when run by the Sage release manager to prepare a new release
+#
+10.4.56 doc-10-4-56--passagemath.netlify.app
+10.4.55 doc-10-4-55--passagemath.netlify.app
+10.4.54 doc-10-4-54--passagemath.netlify.app
+10.4.53 doc-10-4-53--passagemath.netlify.app
+10.4.52 doc-10-4-52--passagemath.netlify.app
+10.4.51 doc-10-4-51--passagemath.netlify.app
+10.4.50 doc-10-4-50--passagemath.netlify.app
+10.4.49 doc-10-4-49--passagemath.netlify.app
+10.4.48 doc-10-4-48--passagemath.netlify.app
+10.4.47 doc-10-4-47--passagemath.netlify.app

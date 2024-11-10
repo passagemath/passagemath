@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Partition/Diagram Algebras
@@ -16,18 +17,19 @@ Partition/Diagram Algebras
 #
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
-from sage.arith.misc import binomial, factorial
+from sage.arith.misc import binomial, factorial, integer_ceil as ceil
 from sage.categories.algebras_with_basis import AlgebrasWithBasis
 from sage.combinat.combinat import catalan_number
 from sage.combinat.free_module import CombinatorialFreeModule
 from sage.combinat.permutation import Permutations
 from sage.combinat.set_partition import SetPartition, SetPartitions, SetPartitions_set
 from sage.combinat.subset import Subsets
-from sage.functions.all import ceil
-from sage.graphs.graph import Graph
+from sage.misc.lazy_import import lazy_import
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
 from sage.sets.set import Set, Set_generic
+
+lazy_import('sage.graphs.graph', 'Graph')
 
 
 def _int_or_half_int(k):
@@ -36,7 +38,7 @@ def _int_or_half_int(k):
 
     OUTPUT:
 
-    If ``k`` is not in `1/2 \ZZ`, then this raises a :class:`ValueError`.
+    If ``k`` is not in `1/2 \ZZ`, then this raises a :exc:`ValueError`.
     Otherwise, we return the pair:
 
     - boolean; ``True`` if ``k`` is an integer and ``False`` if a half integer
@@ -363,9 +365,7 @@ class SetPartitionsSk_k(SetPartitionsAk_k):
             True
         """
         for p in Permutations(self.k):
-            res = []
-            for i in range(self.k):
-                res.append(Set([i + 1, -p[i]]))
+            res = [Set([i, -pi]) for i, pi in enumerate(p, start=1)]
             yield self.element_class(self, res)
 
 
@@ -432,10 +432,7 @@ class SetPartitionsSkhalf_k(SetPartitionsAkhalf_k):
              {{1, -3}, {2, -2}, {4, -4}, {3, -1}}]
         """
         for p in Permutations(self.k):
-            res = []
-            for i in range(self.k):
-                res.append(Set([i + 1, -p[i]]))
-
+            res = [Set([i, -pi]) for i, pi in enumerate(p, start=1)]
             res.append(Set([self.k + 1, -self.k - 1]))
             yield self.element_class(self, res)
 
@@ -850,7 +847,6 @@ def SetPartitionsPk(k):
         {{-1}, {-2}, {2}, {3, -3}, {1}}
         sage: P2p5.random_element() #random
         {{1, 2, 3, -3}, {-1, -2}}
-
     """
     is_int, k = _int_or_half_int(k)
     if not is_int:
@@ -1001,11 +997,12 @@ def SetPartitionsTk(k):
         sage: T3.cardinality()
         5
 
-        sage: T3.first() #random
+        sage: # needs sage.graphs
+        sage: T3.first()             # random
         {{1, -3}, {2, 3}, {-1, -2}}
-        sage: T3.last() #random
+        sage: T3.last()              # random
         {{1, 2}, {3, -1}, {-3, -2}}
-        sage: T3.random_element() #random
+        sage: T3.random_element()    # random
         {{1, -3}, {2, 3}, {-1, -2}}
 
         sage: T2p5 = SetPartitionsTk(2.5); T2p5
@@ -1013,9 +1010,10 @@ def SetPartitionsTk(k):
         sage: T2p5.cardinality()
         2
 
-        sage: T2p5.first() #random
+        sage: # needs sage.graphs
+        sage: T2p5.first()           # random
         {{2, -2}, {3, -3}, {1, -1}}
-        sage: T2p5.last() #random
+        sage: T2p5.last()            # random
         {{1, 2}, {3, -3}, {-1, -2}}
     """
     is_int, k = _int_or_half_int(k)
@@ -1038,6 +1036,7 @@ class SetPartitionsTk_k(SetPartitionsBk_k):
         """
         TESTS::
 
+            sage: # needs sage.graphs
             sage: T3 = SetPartitionsTk(3)
             sage: A3 = SetPartitionsAk(3)
             sage: all(sp in T3 for sp in T3)
@@ -1074,7 +1073,8 @@ class SetPartitionsTk_k(SetPartitionsBk_k):
         """
         TESTS::
 
-            sage: SetPartitionsTk(3).list() #random
+            sage: # needs sage.graphs
+            sage: SetPartitionsTk(3).list()  # random
             [{{1, -3}, {2, 3}, {-1, -2}},
              {{2, -2}, {3, -3}, {1, -1}},
              {{1, 2}, {3, -3}, {-1, -2}},
@@ -1517,7 +1517,7 @@ class PartitionAlgebra_generic(CombinatorialFreeModule):
 
             sage: from sage.combinat.partition_algebra import *
             sage: s = PartitionAlgebra_sk(QQ, 3, 1)
-            sage: TestSuite(s).run()
+            sage: TestSuite(s).run()                                                    # needs sage.graphs
             sage: s == loads(dumps(s))
             True
         """
@@ -1548,7 +1548,7 @@ class PartitionAlgebra_generic(CombinatorialFreeModule):
             sage: from sage.combinat.partition_algebra import *
             sage: s = PartitionAlgebra_sk(QQ, 3, 1)
             sage: t12 = s(Set([Set([1,-2]),Set([2,-1]),Set([3,-3])]))
-            sage: t12^2 == s(1) #indirect doctest
+            sage: t12^2 == s(1)  # indirect doctest                                     # needs sage.graphs
             True
         """
         sp, l = set_partition_composition(left, right)
@@ -1578,7 +1578,7 @@ class PartitionAlgebra_ak(PartitionAlgebra_generic):
             name = "Partition algebra A_%s(%s)" % (k, n)
         cclass = SetPartitionsAk(k)
         self._element_class = PartitionAlgebraElement_ak
-        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix="A")
+        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix='A')
 
 
 class PartitionAlgebraElement_bk(PartitionAlgebraElement_generic):
@@ -1599,7 +1599,7 @@ class PartitionAlgebra_bk(PartitionAlgebra_generic):
             name = "Partition algebra B_%s(%s)" % (k, n)
         cclass = SetPartitionsBk(k)
         self._element_class = PartitionAlgebraElement_bk
-        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix="B")
+        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix='B')
 
 
 class PartitionAlgebraElement_sk(PartitionAlgebraElement_generic):
@@ -1620,7 +1620,7 @@ class PartitionAlgebra_sk(PartitionAlgebra_generic):
             name = "Partition algebra S_%s(%s)" % (k, n)
         cclass = SetPartitionsSk(k)
         self._element_class = PartitionAlgebraElement_sk
-        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix="S")
+        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix='S')
 
 
 class PartitionAlgebraElement_pk(PartitionAlgebraElement_generic):
@@ -1641,7 +1641,7 @@ class PartitionAlgebra_pk(PartitionAlgebra_generic):
             name = "Partition algebra P_%s(%s)" % (k, n)
         cclass = SetPartitionsPk(k)
         self._element_class = PartitionAlgebraElement_pk
-        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix="P")
+        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix='P')
 
 
 class PartitionAlgebraElement_tk(PartitionAlgebraElement_generic):
@@ -1662,7 +1662,7 @@ class PartitionAlgebra_tk(PartitionAlgebra_generic):
             name = "Partition algebra T_%s(%s)" % (k, n)
         cclass = SetPartitionsTk(k)
         self._element_class = PartitionAlgebraElement_tk
-        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix="T")
+        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix='T')
 
 
 class PartitionAlgebraElement_rk(PartitionAlgebraElement_generic):
@@ -1683,7 +1683,7 @@ class PartitionAlgebra_rk(PartitionAlgebra_generic):
             name = "Partition algebra R_%s(%s)" % (k, n)
         cclass = SetPartitionsRk(k)
         self._element_class = PartitionAlgebraElement_rk
-        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix="R")
+        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix='R')
 
 
 class PartitionAlgebraElement_prk(PartitionAlgebraElement_generic):
@@ -1704,7 +1704,7 @@ class PartitionAlgebra_prk(PartitionAlgebra_generic):
             name = "Partition algebra PR_%s(%s)" % (k, n)
         cclass = SetPartitionsPRk(k)
         self._element_class = PartitionAlgebraElement_prk
-        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix="PR")
+        PartitionAlgebra_generic.__init__(self, R, cclass, n, k, name=name, prefix='PR')
 
 
 ##########################################################
@@ -1792,13 +1792,13 @@ def to_graph(sp):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: import sage.combinat.partition_algebra as pa
-        sage: g = pa.to_graph( pa.to_set_partition([[1,-2],[2,-1]])); g
+        sage: g = pa.to_graph(pa.to_set_partition([[1,-2], [2,-1]])); g
         Graph on 4 vertices
-
-        sage: g.vertices(sort=False) #random
+        sage: g.vertices(sort=False)    # random
         [1, 2, -2, -1]
-        sage: g.edges(sort=False) #random
+        sage: g.edges(sort=False)       # random
         [(1, -2, None), (2, -1, None)]
     """
     g = Graph()
@@ -1825,6 +1825,7 @@ def pair_to_graph(sp1, sp2):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: import sage.combinat.partition_algebra as pa
         sage: sp1 = pa.to_set_partition([[1,-2],[2,-1]])
         sage: sp2 = pa.to_set_partition([[1,-2],[2,-1]])
@@ -1833,6 +1834,7 @@ def pair_to_graph(sp1, sp2):
 
     ::
 
+        sage: # needs sage.graphs
         sage: g.vertices(sort=False) #random
         [(1, 2), (-1, 1), (-2, 2), (-1, 2), (-2, 1), (2, 1), (2, 2), (1, 1)]
         sage: g.edges(sort=False) #random
@@ -1845,11 +1847,11 @@ def pair_to_graph(sp1, sp2):
 
     Another example which used to be wrong until :issue:`15958`::
 
+        sage: # needs sage.graphs
         sage: sp3 = pa.to_set_partition([[1, -1], [2], [-2]])
         sage: sp4 = pa.to_set_partition([[1], [-1], [2], [-2]])
         sage: g = pa.pair_to_graph( sp3, sp4 ); g
         Graph on 8 vertices
-
         sage: g.vertices(sort=True)
         [(-2, 1), (-2, 2), (-1, 1), (-1, 2), (1, 1), (1, 2), (2, 1), (2, 2)]
         sage: g.edges(sort=True)
@@ -1941,15 +1943,15 @@ def to_set_partition(l, k=None):
         to_be_added -= spart
         sp.append(spart)
 
-    for singleton in to_be_added:
-        sp.append(Set([singleton]))
+    sp.extend(Set([singleton])
+              for singleton in to_be_added)
 
     return Set(sp)
 
 
 def identity(k):
-    """
-    Return the identity set partition 1, -1, ..., k, -k
+    r"""
+    Return the identity set partition `1, -1, \ldots, k, -k`.
 
     EXAMPLES::
 
@@ -1968,6 +1970,7 @@ def set_partition_composition(sp1, sp2):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: import sage.combinat.partition_algebra as pa
         sage: sp1 = pa.to_set_partition([[1,-2],[2,-1]])
         sage: sp2 = pa.to_set_partition([[1,-2],[2,-1]])

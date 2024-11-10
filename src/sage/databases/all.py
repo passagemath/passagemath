@@ -5,7 +5,7 @@ This file gathers together all the tables in Sage.
 
     * CremonaDatabase() - Cremona's tables of elliptic curves and related data.
 
-    * findstat -- The FindStat database (http://www.findstat.org/).
+    * findstat -- The FindStat database (https://www.findstat.org/).
 
     * JonesDatabase() -- returns the John Jones table of number fields
       with bounded ramification and degree <= 6.
@@ -46,9 +46,11 @@ EXAMPLES::
 #  the License, or (at your option) any later version.
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
-from sage.misc.lazy_import import lazy_import
 
-from .sql_db import SQLQuery, SQLDatabase
+from sage.databases.all__sagemath_combinat import *
+from sage.databases.all__sagemath_graphs import *
+
+from sage.misc.lazy_import import lazy_import
 
 lazy_import('sage.databases.conway', 'ConwayPolynomials')
 
@@ -59,24 +61,20 @@ lazy_import('sage.databases.jones', 'JonesDatabase')
 lazy_import('sage.databases.stein_watkins',
             ['SteinWatkinsAllData', 'SteinWatkinsPrimeData'])
 
-lazy_import('sage.databases.sloane', 'SloaneEncyclopedia')
-
-lazy_import('sage.databases.oeis', 'oeis')
-
 lazy_import('sage.databases.symbolic_data', 'SymbolicData')
 
 lazy_import('sage.databases.odlyzko', 'zeta_zeros')
 
-from .db_modular_polynomials import \
-     ClassicalModularPolynomialDatabase, \
-     DedekindEtaModularPolynomialDatabase, \
-     DedekindEtaModularCorrespondenceDatabase, \
-     AtkinModularPolynomialDatabase, \
-     AtkinModularCorrespondenceDatabase
+from sage.databases.db_modular_polynomials import \
+    ClassicalModularPolynomialDatabase, \
+    DedekindEtaModularPolynomialDatabase, \
+    DedekindEtaModularCorrespondenceDatabase, \
+    AtkinModularPolynomialDatabase, \
+    AtkinModularCorrespondenceDatabase
 
-from .db_class_polynomials import \
-     HilbertClassPolynomialDatabase
+from sage.databases.db_class_polynomials import \
+    HilbertClassPolynomialDatabase
 
 lazy_import('sage.databases.cunningham_tables', 'cunningham_prime_factors')
 
-lazy_import('sage.databases.findstat', ['findstat', 'findmap'])
+del lazy_import

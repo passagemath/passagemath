@@ -1,3 +1,6 @@
+# sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.combinat sage.modules
+
 cdef extern from 'symmetrica/def.h':
     INT chartafel(OP degree, OP result)
     INT charvalue(OP irred, OP cls, OP result, OP table)
@@ -7,7 +10,7 @@ cdef extern from 'symmetrica/def.h':
 
 def chartafel_symmetrica(n):
     """
-    you enter the degree of the symmetric group, as INTEGER
+    You enter the degree of the symmetric group, as INTEGER
     object and the result is a MATRIX object: the charactertable
     of the symmetric group of the given degree.
 
@@ -43,7 +46,7 @@ def chartafel_symmetrica(n):
 
 def charvalue_symmetrica(irred, cls, table=None):
     """
-    you enter a PARTITION object part, labelling the irreducible
+    You enter a PARTITION object part, labelling the irreducible
     character, you enter a PARTITION object class, labeling the class
     or class may be a PERMUTATION object, then result becomes the value
     of that character on that class or permutation. Note that the
@@ -55,14 +58,16 @@ def charvalue_symmetrica(irred, cls, table=None):
     EXAMPLES::
 
         sage: n = 3
-        sage: m = matrix([[symmetrica.charvalue(irred, cls) for cls in Partitions(n)] for irred in Partitions(n)]); m
+        sage: m = matrix([[symmetrica.charvalue(irred, cls) for cls in Partitions(n)]
+        ....:             for irred in Partitions(n)]); m
         [ 1  1  1]
         [-1  0  2]
         [ 1 -1  1]
         sage: m == symmetrica.chartafel(n)
         True
         sage: n = 4
-        sage: m = matrix([[symmetrica.charvalue(irred, cls) for cls in Partitions(n)] for irred in Partitions(n)])
+        sage: m = matrix([[symmetrica.charvalue(irred, cls) for cls in Partitions(n)]
+        ....:             for irred in Partitions(n)])
         sage: m == symmetrica.chartafel(n)
         True
     """
@@ -98,7 +103,7 @@ def charvalue_symmetrica(irred, cls, table=None):
 
 def kranztafel_symmetrica(a, b):
     r"""
-    you enter the INTEGER objects, say `a` and `b`, and ``res`` becomes a
+    You enter the INTEGER objects, say `a` and `b`, and ``res`` becomes a
     MATRIX object, the charactertable of `S_b \wr S_a`, ``co`` becomes a
     VECTOR object of classorders and ``cl`` becomes a VECTOR object of
     the classlabels.

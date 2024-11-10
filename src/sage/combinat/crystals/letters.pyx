@@ -1,4 +1,5 @@
-# sage.doctest: needs sage.combinat sage.modules
+# sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
 Crystals of letters
 """
@@ -1360,7 +1361,7 @@ cdef class LetterTuple(Element):
 
     cpdef _richcmp_(left, right, int op):
         """
-        Check comparison between ``left`` and ``right`` based on ``op``
+        Check comparison between ``left`` and ``right`` based on ``op``.
 
         EXAMPLES::
 
@@ -2825,7 +2826,7 @@ cdef class LetterWrapped(Element):
 
     cpdef _richcmp_(left, right, int op):
         """
-        Check comparison between ``left`` and ``right`` based on ``op``
+        Check comparison between ``left`` and ``right`` based on ``op``.
 
         EXAMPLES::
 

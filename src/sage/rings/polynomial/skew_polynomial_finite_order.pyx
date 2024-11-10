@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.combinat sage.rings.finite_rings
 r"""
 Univariate dense skew polynomials over a field with a finite order automorphism
@@ -157,8 +158,8 @@ cdef class SkewPolynomial_finite_order_dense(SkewPolynomial_generic_dense):
 
         INPUT:
 
-        - ``var`` -- a string or ``False`` or ``None`` (default: ``None``);
-          the variable name; if ``False``, return the list of coefficients
+        - ``var`` -- string or ``False`` or ``None`` (default: ``None``);
+          the variable name. If ``False``, return the list of coefficients.
 
         EXAMPLES::
 
@@ -228,8 +229,8 @@ cdef class SkewPolynomial_finite_order_dense(SkewPolynomial_generic_dense):
 
         INPUT:
 
-        - ``var`` -- a string or ``False`` or ``None`` (default: ``None``);
-          the variable name; if ``False``, return the list of coefficients
+        - ``var`` -- string or ``False`` or ``None`` (default: ``None``);
+          the variable name. If ``False``, return the list of coefficients.
 
         .. NOTE::
 
@@ -341,7 +342,7 @@ cdef class SkewPolynomial_finite_order_dense(SkewPolynomial_generic_dense):
 
         INPUT:
 
-        - ``var`` -- a string, a pair of strings or ``None``
+        - ``var`` -- string, a pair of strings or ``None``
           (default: ``None``); the variable names used for the
           characteristic polynomial and the center
 
@@ -449,7 +450,7 @@ cdef class SkewPolynomial_finite_order_dense(SkewPolynomial_generic_dense):
 
         ALGORITHM:
 
-        #. Sage first checks whether ``self`` is itself in the
+        #. Sage first checks whether self is itself in the
            center. It if is, it returns ``self``
 
         #. If an optimal bound was previously computed and
@@ -517,7 +518,6 @@ cdef class SkewPolynomial_finite_order_dense(SkewPolynomial_generic_dense):
         if self._optbound is not None:
             return center(self._optbound)
         return self.reduced_norm()
-
 
     def optimal_bound(self):
         r"""

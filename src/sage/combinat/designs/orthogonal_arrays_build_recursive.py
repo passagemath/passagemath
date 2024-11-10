@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.rings.finite_rings
 r"""
 Orthogonal arrays (build recursive constructions)
@@ -23,10 +24,10 @@ called.
     :func:`~sage.combinat.designs.orthogonal_arrays_build_recursive.construction_3_6` | Return a `OA(k,nm+i)`.
     :func:`~sage.combinat.designs.orthogonal_arrays_build_recursive.construction_q_x` | Return an `OA(k,(q-1)*(q-x)+x+2)` using the `q-x` construction.
     :func:`OA_and_oval` | Return a `OA(q+1,q)` whose blocks contains `\leq 2` zeroes in the last `q` columns.
-    :func:`thwart_lemma_3_5` | Returns an `OA(k,nm+a+b+c+d)`.
-    :func:`thwart_lemma_4_1` | Returns an `OA(k,nm+4(n-2))`.
-    :func:`three_factor_product` | Returns an `OA(k+1,n_1n_2n_3)`.
-    :func:`brouwer_separable_design` | Returns a `OA(k,t(q^2+q+1)+x)` using Brouwer's result on separable designs.
+    :func:`thwart_lemma_3_5` | Return an `OA(k,nm+a+b+c+d)`.
+    :func:`thwart_lemma_4_1` | Return an `OA(k,nm+4(n-2))`.
+    :func:`three_factor_product` | Return an `OA(k+1,n_1n_2n_3)`.
+    :func:`brouwer_separable_design` | Return a `OA(k,t(q^2+q+1)+x)` using Brouwer's result on separable designs.
 
 Functions
 ---------
@@ -49,11 +50,11 @@ def construction_3_3(k,n,m,i,explain_construction=False):
 
     INPUT:
 
-    - ``k,n,m,i`` (integers) such that the following designs are available:
-      `OA(k,n)`, `OA(k,m)`, `OA(k,m+1)`, `OA(k,r)`.
+    - ``k``, ``n``, ``m``, ``i`` -- integers such that the following designs are
+      available: `OA(k,n)`, `OA(k,m)`, `OA(k,m+1)`, `OA(k,r)`
 
-    - ``explain_construction`` (boolean) -- return a string describing
-      the construction.
+    - ``explain_construction`` -- boolean; return a string describing
+      the construction
 
     .. SEEALSO::
 
@@ -68,7 +69,7 @@ def construction_3_3(k,n,m,i,explain_construction=False):
         sage: is_orthogonal_array(construction_3_3(*find_construction_3_3(k,n)[1]),k,n,2)           # needs sage.schemes
         True
 
-        sage: print(designs.orthogonal_arrays.explain_construction(9,91))
+        sage: print(designs.orthogonal_arrays.explain_construction(9,91))                           # needs sage.schemes
         Construction 3.3 with n=11,m=8,i=3 from:
            Julian R. Abel, Nicholas Cavenagh
            Concerning eight mutually orthogonal latin squares,
@@ -96,6 +97,7 @@ def construction_3_3(k,n,m,i,explain_construction=False):
     assert is_orthogonal_array(OA,k,n*m+i)
     return OA
 
+
 def construction_3_4(k,n,m,r,s,explain_construction=False):
     r"""
     Return a `OA(k,nm+rs)`.
@@ -116,14 +118,15 @@ def construction_3_4(k,n,m,r,s,explain_construction=False):
 
     INPUT:
 
-    - ``k,n,m,r,s`` (integers) -- we assume that `s<n` and `1\leq r,s`
+    - ``k``, ``n``, ``m``, ``r``, ``s`` -- integers; we assume that `s<n` and
+      `1\leq r,s`
 
       The following designs must be available: `OA(k,n)`, `OA(k,m)`,
       `OA(k,m+1)`, `OA(k,m+2)`, `OA(k,s)`. Additionally, it requires either a
       `OA(k,m+r)` or a `OA(k,m+r+1)`.
 
-    - ``explain_construction`` (boolean) -- return a string describing
-      the construction.
+    - ``explain_construction`` -- boolean; return a string describing
+      the construction
 
     .. SEEALSO::
 
@@ -138,7 +141,7 @@ def construction_3_4(k,n,m,r,s,explain_construction=False):
         sage: is_orthogonal_array(construction_3_4(*find_construction_3_4(k,n)[1]),k,n,2)           # needs sage.schemes
         True
 
-        sage: print(designs.orthogonal_arrays.explain_construction(8,164))
+        sage: print(designs.orthogonal_arrays.explain_construction(8,164))                          # needs sage.schemes
         Construction 3.4 with n=23,m=7,r=2,s=1 from:
            Julian R. Abel, Nicholas Cavenagh
            Concerning eight mutually orthogonal latin squares,
@@ -177,6 +180,7 @@ def construction_3_4(k,n,m,r,s,explain_construction=False):
     OA = wilson_construction(OA,k,n,m,[1]*r+[s],check=False)
     return OA
 
+
 def construction_3_5(k,n,m,r,s,t,explain_construction=False):
     r"""
     Return an `OA(k,nm+r+s+t)`.
@@ -189,13 +193,13 @@ def construction_3_5(k,n,m,r,s,t,explain_construction=False):
 
     INPUT:
 
-    - ``k,n,m`` (integers)
+    - ``k``, ``n``, ``m`` -- integers
 
-    - ``r,s,t`` (integers) -- sizes of the three truncated groups,
-      such that `r\leq s` and `(q-r-1)(q-s) \geq (q-s-1)*(q-r)`.
+    - ``r``, ``s``, ``t`` -- integers; sizes of the three truncated groups,
+      such that `r\leq s` and `(q-r-1)(q-s) \geq (q-s-1)*(q-r)`
 
-    - ``explain_construction`` (boolean) -- return a string describing
-      the construction.
+    - ``explain_construction`` -- boolean; return a string describing
+      the construction
 
     The following designs must be available : `OA(k,n)`, `OA(k,r)`, `OA(k,s)`,
     `OA(k,t)`, `OA(k,m+1)`, `OA(k,m+2)`, `OA(k,m+3)`.
@@ -213,13 +217,12 @@ def construction_3_5(k,n,m,r,s,t,explain_construction=False):
         sage: is_orthogonal_array(construction_3_5(*find_construction_3_5(k,n)[1]),k,n,2)           # needs sage.schemes
         True
 
-        sage: print(designs.orthogonal_arrays.explain_construction(8,90))
+        sage: print(designs.orthogonal_arrays.explain_construction(8,90))                           # needs sage.schemes
         Construction 3.5 with n=11,m=6,r=8,s=8,t=8 from:
            Julian R. Abel, Nicholas Cavenagh
            Concerning eight mutually orthogonal latin squares,
            Vol. 15, n.3, pp. 255-261,
            Journal of Combinatorial Designs, 2007
-
     """
     from .orthogonal_arrays import wilson_construction, OA_relabel
     assert r <= s
@@ -272,9 +275,10 @@ def construction_3_5(k,n,m,r,s,t,explain_construction=False):
     OA = wilson_construction(OA,k,q,m,[r,s,t], check=False)
     return OA
 
+
 def construction_3_6(k,n,m,i,explain_construction=False):
     r"""
-    Return a `OA(k,nm+i)`
+    Return a `OA(k,nm+i)`.
 
     This is Wilson's construction with `r` columns of order `1`, in which each
     block intersects at most two truncated columns. Such a design exists when
@@ -282,11 +286,12 @@ def construction_3_6(k,n,m,i,explain_construction=False):
 
     INPUT:
 
-    - ``k,n,m,i`` (integers) -- `n` must be a prime power. The following designs
-      must be available: `OA(k+r,q)`, `OA(k,m)`, `OA(k,m+1)`, `OA(k,m+2)`.
+    - ``k``, ``n``, ``m``, ``i`` -- integers; `n` must be a prime power. The
+      following designs must be available: `OA(k+r,q)`, `OA(k,m)`, `OA(k,m+1)`,
+      `OA(k,m+2)`
 
-    - ``explain_construction`` (boolean) -- return a string describing
-      the construction.
+    - ``explain_construction`` -- boolean; return a string describing
+      the construction
 
     This is construction 3.6 from [AC07]_.
 
@@ -305,7 +310,7 @@ def construction_3_6(k,n,m,i,explain_construction=False):
         sage: is_orthogonal_array(construction_3_6(*find_construction_3_6(k,n)[1]),k,n,2)           # needs sage.schemes
         True
 
-        sage: print(designs.orthogonal_arrays.explain_construction(10,756))
+        sage: print(designs.orthogonal_arrays.explain_construction(10,756))                         # needs sage.schemes
         Construction 3.6 with n=16,m=47,i=4 from:
            Julian R. Abel, Nicholas Cavenagh
            Concerning eight mutually orthogonal latin squares,
@@ -327,6 +332,7 @@ def construction_3_6(k,n,m,i,explain_construction=False):
     assert is_orthogonal_array(OA,k,n*m+i)
     return OA
 
+
 def OA_and_oval(q, *, solver=None, integrality_tolerance=1e-3):
     r"""
     Return a `OA(q+1,q)` whose blocks contains `\leq 2` zeroes in the last `q`
@@ -344,7 +350,7 @@ def OA_and_oval(q, *, solver=None, integrality_tolerance=1e-3):
 
     - ``q`` -- a prime power
 
-    - ``solver`` -- (default: ``None``) Specify a Mixed Integer Linear
+    - ``solver`` -- (default: ``None``) specify a Mixed Integer Linear
       Programming (MILP) solver to be used. If set to ``None``, the default one
       is used. For more information on MILP solvers and which default solver is
       used, see the method :meth:`solve
@@ -353,7 +359,7 @@ def OA_and_oval(q, *, solver=None, integrality_tolerance=1e-3):
       <sage.numerical.mip.MixedIntegerLinearProgram>`.
 
     - ``integrality_tolerance`` -- parameter for use with MILP solvers over an
-      inexact base ring; see :meth:`MixedIntegerLinearProgram.get_values`.
+      inexact base ring; see :meth:`MixedIntegerLinearProgram.get_values`
 
     .. NOTE::
 
@@ -364,7 +370,6 @@ def OA_and_oval(q, *, solver=None, integrality_tolerance=1e-3):
 
         sage: from sage.combinat.designs.orthogonal_arrays_build_recursive import OA_and_oval
         sage: _ = OA_and_oval
-
     """
     from sage.arith.misc import is_prime_power
     from sage.combinat.designs.block_design import projective_plane
@@ -471,7 +476,8 @@ def construction_q_x(k, q, x, check=True, explain_construction=False):
 
     INPUT:
 
-    - ``k,q,x`` -- integers such that `0<x<q` and such that Sage can build:
+    - ``k``, ``q``, ``x`` -- integers such that `0<x<q` and such that Sage can
+      build:
 
         - A projective plane of order `q`
         - `OA(k,q-x-1)-(q-x-1).OA(k,1)`
@@ -479,13 +485,12 @@ def construction_q_x(k, q, x, check=True, explain_construction=False):
         - `OA(k,q)-q.OA(k,1)`
         - `OA(k,x+2)`
 
-    - ``check`` -- (boolean) Whether to check that output is correct before
-      returning it. As this is expected to be useless (but we are cautious
-      guys), you may want to disable it whenever you want speed. Set to
-      ``True`` by default.
+    - ``check`` -- boolean (default: ``True``); whether to check that output is
+      correct before returning it. As this is expected to be useless, you may
+      want to disable it whenever you want speed.
 
-    - ``explain_construction`` (boolean) -- return a string describing
-      the construction.
+    - ``explain_construction`` -- boolean; return a string describing
+      the construction
 
     .. SEEALSO::
 
@@ -499,7 +504,7 @@ def construction_q_x(k, q, x, check=True, explain_construction=False):
         sage: from sage.combinat.designs.orthogonal_arrays_build_recursive import construction_q_x
         sage: _ = construction_q_x(9,16,6)                                                          # needs sage.schemes
 
-        sage: print(designs.orthogonal_arrays.explain_construction(9,158))
+        sage: print(designs.orthogonal_arrays.explain_construction(9,158))                          # needs sage.schemes
         (q-x)-construction with q=16,x=6 from:
            Malcolm Greig,
            Designs from projective planes and PBD bases,
@@ -533,9 +538,9 @@ def construction_q_x(k, q, x, check=True, explain_construction=False):
 
     # Add rows, extended with p1 and p2
     p1 = q**2
-    p2 = p1+1
-    TD.extend([[ii*q+i for ii in range(q)]+[p1] for i in range(1,q)])
-    TD.append( [ii*q   for ii in range(q)]+[p1,p2])
+    p2 = p1 + 1
+    TD.extend([ii*q + i for ii in range(q)] + [p1] for i in range(1, q))
+    TD.append([ii*q for ii in range(q)] + [p1, p2])
 
     # Add Columns. We do not add some columns which would have size 1 after we
     # delete points.
@@ -576,7 +581,7 @@ def construction_q_x(k, q, x, check=True, explain_construction=False):
 
 def thwart_lemma_3_5(k,n,m,a,b,c,d=0,complement=False,explain_construction=False):
     r"""
-    Returns an `OA(k,nm+a+b+c+d)`
+    Return an `OA(k,nm+a+b+c+d)`.
 
     *(When `d=0`)*
 
@@ -633,14 +638,15 @@ def thwart_lemma_3_5(k,n,m,a,b,c,d=0,complement=False,explain_construction=False
 
     INPUT:
 
-    - ``k,n,m,a,b,c,d`` -- integers which must satisfy the constraints above. In
-      particular, `a+b+c\leq n+1` must hold. By default, `d=0`.
+    - ``k``, ``n``, ``m``, ``a``, ``b``, ``c``, ``d`` -- integers which must
+      satisfy the constraints above. In particular, `a+b+c\leq n+1` must hold
+      By default, `d=0`.
 
-    - ``complement`` (boolean) -- whether to complement the sets, i.e. follow
-      the `n-a,n-b,n-c` variant described above.
+    - ``complement`` -- boolean; whether to complement the sets, i.e. follow
+      the `n-a,n-b,n-c` variant described above
 
-    - ``explain_construction`` (boolean) -- return a string describing
-      the construction.
+    - ``explain_construction`` -- boolean; return a string describing
+      the construction
 
     .. SEEALSO::
 
@@ -672,7 +678,7 @@ def thwart_lemma_3_5(k,n,m,a,b,c,d=0,complement=False,explain_construction=False
         ....:     OA = thwart_lemma_3_5(k,n,m,a,b,c,d,complement=True)
         ....:     assert is_orthogonal_array(OA,k,n*m+a+b+c+d,verbose=True)
 
-        sage: print(designs.orthogonal_arrays.explain_construction(10,1046))
+        sage: print(designs.orthogonal_arrays.explain_construction(10,1046))                        # needs sage.schemes
         Lemma 3.5 with n=13,m=79,a=9,b=1,c=0,d=9 from:
            Charles J.Colbourn, Jeffrey H. Dinitz, Mieczyslaw Wojtas,
            Thwarts in transversal designs,
@@ -751,9 +757,10 @@ def thwart_lemma_3_5(k,n,m,a,b,c,d=0,complement=False,explain_construction=False
 
     return wilson_construction(OA,k,n,m,sizes, check=False)
 
+
 def thwart_lemma_4_1(k,n,m,explain_construction=False):
     r"""
-    Returns an `OA(k,nm+4(n-2))`.
+    Return an `OA(k,nm+4(n-2))`.
 
     Implements Lemma 4.1 from [Thwarts]_.
 
@@ -773,10 +780,10 @@ def thwart_lemma_4_1(k,n,m,explain_construction=False):
 
     INPUT:
 
-    - ``k,n,m`` (integers)
+    - ``k``, ``n``, ``m`` -- integers
 
-    - ``explain_construction`` (boolean) -- return a string describing
-      the construction.
+    - ``explain_construction`` -- boolean; return a string describing
+      the construction
 
     .. SEEALSO::
 
@@ -879,9 +886,10 @@ def thwart_lemma_4_1(k,n,m,explain_construction=False):
 
     return wilson_construction(OA,k,n,m,[n-2,]*4,check=False)
 
+
 def three_factor_product(k,n1,n2,n3,check=False,explain_construction=False):
     r"""
-    Returns an `OA(k+1,n_1n_2n_3)`
+    Return an `OA(k+1,n_1n_2n_3)`.
 
     The three factor product construction from [DukesLing14]_ does the following:
 
@@ -945,14 +953,14 @@ def three_factor_product(k,n1,n2,n3,check=False,explain_construction=False):
 
     INPUT:
 
-    - ``k,n1,n2,n3`` (integers)
+    - ``k``, ``n1``, ``n2``, ``n3`` -- integers
 
-    - ``check`` -- (boolean) Whether to check that everything is going smoothly
+    - ``check`` -- boolean; whether to check that everything is going smoothly
       while the design is being built. It is disabled by default, as the
       constructor of orthogonal arrays checks the final design anyway.
 
-    - ``explain_construction`` (boolean) -- return a string describing
-      the construction.
+    - ``explain_construction`` -- boolean; return a string describing
+      the construction
 
     .. SEEALSO::
 
@@ -1016,13 +1024,13 @@ def three_factor_product(k,n1,n2,n3,check=False,explain_construction=False):
 
     def product_with_parallel_classes(OA1,k,g1,g2,g1_parall,parall,check=True):
         r"""
-        Returns the product of two OA while keeping track of parallel classes
+        Return the product of two OA while keeping track of parallel classes.
 
         INPUT:
 
-        - ``OA1`` (an `OA(k,g_1)`
+        - ``OA1`` -- (an `OA(k,g_1)`
 
-        - ``k,g1,g2`` integers
+        - ``k``, ``g1``, ``g2`` -- integers
 
         - ``g1_parall`` -- list of `g_1`-parallel classes
 
@@ -1036,7 +1044,7 @@ def three_factor_product(k,n1,n2,n3,check=False,explain_construction=False):
 
         Two lists of classes ``g1_parall`` and ``parallel`` which are respectively
         `g_1`-parallel and parallel classes such that ``g1_parall+parallel`` is an
-        `OA(k,g1*g2)``.
+        ``OA(k,g1*g2)``.
         """
         if check:
             for classs in g1_parall:
@@ -1144,6 +1152,7 @@ def three_factor_product(k,n1,n2,n3,check=False,explain_construction=False):
 
     return OA
 
+
 def _reorder_matrix(matrix):
     r"""
     Return a matrix which is obtained from ``matrix`` by permutation of each row
@@ -1164,14 +1173,14 @@ def _reorder_matrix(matrix):
         sage: from sage.combinat.designs.orthogonal_arrays_build_recursive import _reorder_matrix
         sage: N = 4; k = 3
         sage: M = [[0,1,2],[0,1,3],[0,2,3],[1,2,3]]
-        sage: M2 = _reorder_matrix(M)
-        sage: all(set(M2[i][0] for i in range(N)) == set(range(N)) for i in range(k))
+        sage: M2 = _reorder_matrix(M)                                                   # needs sage.numerical.mip
+        sage: all(set(M2[i][0] for i in range(N)) == set(range(N)) for i in range(k))   # needs sage.numerical.mip
         True
 
         sage: M = [list(range(10))] * 10
         sage: N = k = 10
-        sage: M2 = _reorder_matrix(M)
-        sage: all(set(M2[i][0] for i in range(N)) == set(range(N)) for i in range(k))
+        sage: M2 = _reorder_matrix(M)                                                   # needs sage.numerical.mip
+        sage: all(set(M2[i][0] for i in range(N)) == set(range(N)) for i in range(k))   # needs sage.numerical.mip
         True
     """
     from sage.graphs.graph import Graph
@@ -1183,7 +1192,7 @@ def _reorder_matrix(matrix):
     g.add_edges((x,N+i) for i,S in enumerate(matrix) for x in S)
     matrix = []
     for _ in range(k):
-        matching = g.matching(algorithm="LP")
+        matching = g.matching(algorithm='LP')
         col = [0]*N
         for x,i,_ in matching:
             if i < N:
@@ -1194,9 +1203,10 @@ def _reorder_matrix(matrix):
 
     return list(zip(*matrix))
 
+
 def brouwer_separable_design(k,t,q,x,check=False,verbose=False,explain_construction=False):
     r"""
-    Returns a `OA(k,t(q^2+q+1)+x)` using Brouwer's result on separable designs.
+    Return a `OA(k,t(q^2+q+1)+x)` using Brouwer's result on separable designs.
 
     This method is an implementation of Brouwer's construction presented in
     [Brouwer80]_. It consists in a systematic application of the usual
@@ -1319,16 +1329,16 @@ def brouwer_separable_design(k,t,q,x,check=False,verbose=False,explain_construct
 
     INPUT:
 
-    - ``k,t,q,x`` (integers)
+    - ``k``, ``t``, ``q``, ``x`` -- integers
 
-    - ``check`` -- (boolean) Whether to check that output is correct before
-      returning it. Set to ``False`` by default.
+    - ``check`` -- boolean (default: ``False``); whether to check that output
+      is correct before returning it
 
-    - ``verbose`` (boolean) -- whether to print some information on the
-      construction and parameters being used.
+    - ``verbose`` -- boolean; whether to print some information on the
+      construction and parameters being used
 
-    - ``explain_construction`` (boolean) -- return a string describing
-      the construction.
+    - ``explain_construction`` -- boolean; return a string describing
+      the construction
 
     .. SEEALSO::
 
@@ -1346,6 +1356,7 @@ def brouwer_separable_design(k,t,q,x,check=False,verbose=False,explain_construct
 
     Test all possible cases::
 
+        sage: # needs conway_polynomials
         sage: from sage.combinat.designs.orthogonal_arrays_build_recursive import brouwer_separable_design
         sage: k,q,t=4,4,3; _=brouwer_separable_design(k,q,t,0,verbose=True)
         Case i) with k=4,q=3,t=4,x=0
@@ -1444,9 +1455,9 @@ def brouwer_separable_design(k,t,q,x,check=False,verbose=False,explain_construct
         else:
             partition_of_blocks_of_size_t[plane-t].append([relabel[xx] for xx in B if xx % m < t])
 
-    ###############################################################################
+    ###########################################################################
     # Separable design built !
-    #-------------------------
+    # ------------------------
     #
     # At this point we have a PBD on t*(q**2+q+1) points. Its blocks are
     # split into:
@@ -1457,7 +1468,7 @@ def brouwer_separable_design(k,t,q,x,check=False,verbose=False,explain_construct
     # - blocks_of_size_q_plus_t : contains all t*(q**2+q+1)blocks of size q+t,
     #                             covering the same number of points: it is a
     #                             symmetric design.
-    ###############################################################################
+    ###########################################################################
 
     ##############################################
     # Part 2: Build an OA on t(q^2+q+1)+x points #
