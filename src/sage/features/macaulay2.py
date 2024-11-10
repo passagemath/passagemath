@@ -30,8 +30,8 @@ class Macaulay2(Executable):
         r"""
         TESTS::
 
-            sage: from sage.features.macaulay2 import macaulay2
-            sage: isinstance(macaulay2(), macaulay2)
+            sage: from sage.features.macaulay2 import Macaulay2
+            sage: isinstance(Macaulay2(), Macaulay2)
             True
         """
         Executable.__init__(self, "macaulay2", executable='M2',
