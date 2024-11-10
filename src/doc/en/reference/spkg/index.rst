@@ -54,6 +54,7 @@ Features
    sage/features/mip_backends
    sage/features/nauty
    sage/features/normaliz
+   sage/features/palp
    sage/features/pandoc
    sage/features/pdf2svg
    sage/features/polymake
