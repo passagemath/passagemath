@@ -30,8 +30,8 @@ class Qepcad(Executable):
         r"""
         TESTS::
 
-            sage: from sage.features.qepcad import qepcad
-            sage: isinstance(qepcad(), qepcad)
+            sage: from sage.features.qepcad import Qepcad
+            sage: isinstance(Qepcad(), Qepcad)
             True
         """
         Executable.__init__(self, "qepcad", executable='qepcad',
