@@ -232,7 +232,10 @@ init_code = ['besselexpand : true', 'display2d : false', 'domain : complex', 'ke
 # See trac # 6818.
 init_code.append('nolabels : true')
 for l in init_code:
-    ecl_eval("#$%s$" % l)
+    try:
+        ecl_eval("#$%s$" % l)
+    except RuntimeError:
+        raise RuntimeError(f'error evaluating init code: {l}')
 # To get more debug information uncomment the next line
 # should allow to do this through a method
 # ecl_eval("(setf *standard-output* original-standard-output)")
