@@ -245,6 +245,7 @@ else:
         maxima_bin = os.path.join(p, 'bin/maxima')
         if os.path.exists(maxima_bin):
             MAXIMA = maxima_bin
+            os.environ['MAXIMA_PREFIX'] = p
             break
     for p in sage_wheels.__path__:
         for dir in glob(os.path.join(p, 'lib/ecl-*')):
