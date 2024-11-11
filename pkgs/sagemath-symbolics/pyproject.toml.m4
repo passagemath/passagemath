@@ -76,18 +76,6 @@ repair-wheel-command = [
 [tool.setuptools]
 include-package-data = false
 
-[tool.setuptools.package-data]
-"sage.interfaces" = ["sage-maxima.lisp"]
-sage = [
-    "ext_data/*",
-    "ext_data/kenzo/*",
-    "ext_data/singular/*",
-    "ext_data/singular/function_field/*",
-    "ext_data/magma/*",
-    "ext_data/magma/latex/*",
-    "ext_data/magma/sage/*",
-]
-
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
 
