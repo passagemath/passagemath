@@ -126,6 +126,8 @@ from sage.misc.instancedoc import instancedoc
 from sage.env import MAXIMA_FAS
 
 import sage.functions.error
+import sage.functions.gamma
+import sage.functions.hypergeometric
 import sage.functions.log
 import sage.functions.other
 import sage.rings.real_double
