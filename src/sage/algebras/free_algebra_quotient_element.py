@@ -37,8 +37,9 @@ def is_FreeAlgebraQuotientElement(x):
     """
     EXAMPLES::
 
+        sage: from sage.algebras.free_algebra_quotient import hamilton_quatalg
         sage: from sage.algebras.free_algebra_quotient_element import is_FreeAlgebraQuotientElement
-        sage: H, (i,j,k) = sage.algebras.free_algebra_quotient.hamilton_quatalg(QQ)
+        sage: H, (i,j,k) = hamilton_quatalg(QQ)
         sage: is_FreeAlgebraQuotientElement(i)
         doctest:warning...
         DeprecationWarning: The function is_FreeAlgebraQuotientElement is deprecated;
