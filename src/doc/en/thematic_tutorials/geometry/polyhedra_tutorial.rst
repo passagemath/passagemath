@@ -744,7 +744,7 @@ the computation is done using an embedded number field.
 
 ::
 
-    sage: # optional - pynormaliz
+    sage: # optional - pynormaliz sage.rings.number_field
     sage: P4_normaliz = Polyhedron(vertices=[[sqrt_2, 0], [0, cbrt_2]],
     ....:                          backend='normaliz')
     sage: P4_normaliz

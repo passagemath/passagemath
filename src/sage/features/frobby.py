@@ -31,7 +31,7 @@ class Frobby(Executable):
         TESTS::
 
             sage: from sage.features.frobby import Frobby
-            sage: isinstance(frobby(), Frobby)
+            sage: isinstance(Frobby(), Frobby)
             True
         """
         Executable.__init__(self, "frobby", executable='frobby',
