@@ -49,9 +49,29 @@ Examples
 
 Starting Maxima from the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics" sage -sh -c maxima
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics" sage -maxima
 
+Using the pexpect interface to Maxima::
 
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics[test]" ipython
+
+    In [1]: from sage.interfaces.maxima import maxima
+
+    In [2]: maxima('1+1')
+    Out[2]: 2
+
+Using the library interface to Maxima::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics[test]" ipython
+
+    In [1]: from sage.interfaces.maxima_lib import maxima_lib
+
+    In [2]: F = maxima_lib('x^5 - y^5').factor()
+
+    In [3]: F.display2d()
+    Out[3]:
+                               4      3    2  2    3      4
+                   - (y - x) (y  + x y  + x  y  + x  y + x )
 
 
 Available as extras, from other distributions
