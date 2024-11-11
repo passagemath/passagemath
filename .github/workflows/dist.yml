@@ -369,6 +369,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*graphs*
 
+      - name: sagemath-planarity
+        id:   sagemath-planarity
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*planarity*
+
         ####### sagemath-modules and what depends on it
 
       - name: sagemath-modules

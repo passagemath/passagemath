@@ -41,6 +41,7 @@ mcqd        = ["passagemath-mcqd"]
 nauty       = ["passagemath-nauty"]
 networkx    = [SPKG_INSTALL_REQUIRES_networkx]
 pari        = ["passagemath-pari"]
+planarity   = ["passagemath-planarity"]
 tdlib       = ["passagemath-tdlib"]
 
 # features
@@ -54,7 +55,7 @@ polyhedra   = ["passagemath-polyhedra"]
 repl        = ["passagemath-repl"]
 sat         = ["passagemath-combinat"]
 
-standard    = ["passagemath-graphs[combinat,databases,mip,modules,plot,polyhedra,repl]"]
+standard    = ["passagemath-graphs[combinat,databases,mip,modules,planarity,plot,polyhedra,repl]"]
 
 [tool.setuptools]
 include-package-data = false
@@ -75,7 +76,6 @@ host-requires = [
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
-  "pkg:generic/planarity",
   "pkg:generic/rw",
 ]
 
