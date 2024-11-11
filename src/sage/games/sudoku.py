@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.combinat sage.modules
 r"""
 Sudoku Puzzles
 
@@ -468,9 +470,9 @@ class Sudoku(SageObject):
         for row in range(nsquare):
             for col in range(nsquare):
                 entry = next(gen)
-                array.append((str(entry) if entry else ' '))
-                array.append(('' if col == nsquare - 1 else '&'))
-            array.append(('\\\\\n' if (row+1) % n else '\\\\\\hline\n'))
+                array.append(str(entry) if entry else ' ')
+                array.append('' if col == nsquare - 1 else '&')
+            array.append('\\\\\n' if (row+1) % n else '\\\\\\hline\n')
         array.append('\\end{array}')
         return ''.join(array)
 

@@ -2,10 +2,37 @@ prune sage
 
 graft sage/doctest
 graft sage/repl
+graft sage/tests
+
 include sage/misc/banner.py
 include sage/misc/sagedoc.py
 include sage/misc/sage_input.py
 include sage/misc/sage_eval.py
+
+include sage/misc/explain_pickle.py
+include sage/misc/trace.py
+include sage/misc/profiler.py
+include sage/misc/dev_tools.py
+include sage/misc/edit_module.py
+include sage/misc/pager.py
+
+include sage/misc/cython.py
+include sage/misc/inline_fortran.py
+
+include sage/misc/benchmark.py
+include sage/misc/classgraph.py
+include sage/misc/copying.py
+include sage/misc/gperftools.py
+include sage/misc/messaging.py
+include sage/misc/python.py
+include sage/misc/remote_file.py
+include sage/misc/sh.py
+
+# expect_objects from sage.interfaces.quit is needed to compute the
+# CPU time used by each doctest. We include sage.interfaces.cleaner
+# because it is conditionally imported by sage.interfaces.quit.
+include sage/interfaces/quit.py
+include sage/interfaces/cleaner.py
 
 include VERSION.txt
 

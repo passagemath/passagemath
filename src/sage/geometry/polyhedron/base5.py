@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Base class for polyhedra: Methods for constructing new polyhedra
 
@@ -41,6 +42,7 @@ from sage.matrix.constructor import matrix
 from sage.modules.free_module_element import vector
 
 from .base4 import Polyhedron_base4
+
 
 class Polyhedron_base5(Polyhedron_base4):
     """

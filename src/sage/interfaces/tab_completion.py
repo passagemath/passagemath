@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Mixin For Extra Tab Completions
 
@@ -27,7 +28,7 @@ EXAMPLES::
 import builtins
 
 
-class ExtraTabCompletion():
+class ExtraTabCompletion:
 
     def __dir__(self):
         """

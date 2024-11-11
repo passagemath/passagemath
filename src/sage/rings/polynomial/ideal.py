@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Ideals in Univariate Polynomial Rings
 
@@ -18,6 +19,7 @@ AUTHORS:
 #*****************************************************************************
 
 from sage.rings.ideal import Ideal_pid
+
 
 class Ideal_1poly_field(Ideal_pid):
     """

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.groups
 r"""
 Invariant modules
@@ -22,7 +23,6 @@ from sage.categories.finitely_generated_semigroups import FinitelyGeneratedSemig
 from sage.categories.finite_dimensional_modules_with_basis import FiniteDimensionalModulesWithBasis
 from sage.sets.family import Family
 from sage.matrix.constructor import Matrix
-from sage.libs.gap.libgap import libgap
 
 
 class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
@@ -310,9 +310,9 @@ class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
             M = M._module
         return f"({self._semigroup})-invariant submodule of {M}"
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
-        Return a latex representaion of ``self``.
+        Return a latex representation of ``self``.
 
         EXAMPLES::
 
@@ -808,6 +808,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
             ValueError: chi must be a list/tuple or a class function of the group G
         """
         from sage.groups.class_function import ClassFunction, ClassFunction_libgap
+        from sage.libs.gap.libgap import libgap
 
         if isinstance(chi, (list, tuple)):
             chi = ClassFunction(G, libgap(chi))

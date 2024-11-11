@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.libs.singular sage.modules (because all doctests need laurent_polynomial_mpair, Groebner bases)
 r"""
 Ideals in Laurent polynomial rings.
@@ -25,6 +26,7 @@ from sage.rings.ideal import Ideal_generic
 from sage.rings.polynomial.laurent_polynomial_ring import LaurentPolynomialRing_univariate
 from sage.structure.richcmp import op_EQ, op_NE, op_LT, op_LE, op_GT, op_GE
 from sage.arith.misc import GCD
+
 
 class LaurentPolynomialIdeal( Ideal_generic ):
     def __init__(self, ring, gens, coerce=True, hint=None):

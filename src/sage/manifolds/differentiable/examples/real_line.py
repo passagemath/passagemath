@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 The Real Line and Open Intervals
 
@@ -32,6 +33,7 @@ from sage.typeset.unicode_characters import unicode_mathbbR
 from sage.manifolds.differentiable.manifold import DifferentiableManifold
 from sage.manifolds.structure import RealDifferentialStructure
 from sage.categories.manifolds import Manifolds
+
 
 class OpenInterval(DifferentiableManifold):
     r"""

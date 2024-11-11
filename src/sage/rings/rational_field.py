@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Field `\QQ` of Rational Numbers
 
@@ -335,8 +336,16 @@ class RationalField(Singleton, number_field_base.NumberField):
         """
         from sage.rings.infinity import Infinity
         if p == Infinity:
-            from sage.rings.real_field import create_RealField
-            return create_RealField(prec, **extras)
+            try:
+                from sage.rings.real_field import create_RealField
+            except ImportError:
+                if prec == 53:
+                    from sage.rings.real_double import RDF
+                    return RDF
+                else:
+                    raise
+            else:
+                return create_RealField(prec, **extras)
         else:
             from sage.rings.padics.factory import Qp
             return Qp(p, prec, **extras)
@@ -601,7 +610,8 @@ class RationalField(Singleton, number_field_base.NumberField):
 
     def embeddings(self, K):
         r"""
-        Return list of the one embedding of `\QQ` into `K`, if it exists.
+        Return the list containing the unique embedding of `\QQ` into `K`,
+        if it exists, and an empty list otherwise.
 
         EXAMPLES::
 
@@ -612,16 +622,17 @@ class RationalField(Singleton, number_field_base.NumberField):
                From: Rational Field
                To:   Cyclotomic Field of order 5 and degree 4]
 
-        `K` must have characteristic 0::
+        The field `K` must have characteristic `0` for an embedding of `\QQ`
+        to exist::
 
             sage: QQ.embeddings(GF(3))
-            Traceback (most recent call last):
-            ...
-            ValueError: no embeddings of the rational field into K.
+            []
         """
-        if K.characteristic():
-            raise ValueError("no embeddings of the rational field into K.")
-        return [self.hom(K)]
+        if K.characteristic() == 0:
+            v = [self.hom(K)]
+        else:
+            v = []
+        return Sequence(v, check=False, universe=self.Hom(K))
 
     def automorphisms(self):
         r"""
@@ -836,7 +847,6 @@ class RationalField(Singleton, number_field_base.NumberField):
         from sage.matrix.constructor import matrix
         from sage.modules.free_module import VectorSpace
         from sage.rings.finite_rings.finite_field_constructor import FiniteField as GF
-        from sage.rings.padics.factory import Qp
         from sage.sets.primes import Primes
 
         # input checks
@@ -859,6 +869,7 @@ class RationalField(Singleton, number_field_base.NumberField):
                 if check and not is_prime(p):
                     raise ValueError("all entries in list must be prime"
                                      " or -1 for infinite place")
+                from sage.rings.padics.factory import Qp
                 R = Qp(p)
                 if R(b).is_square():
                     raise ValueError("second argument must be a nonsquare with"

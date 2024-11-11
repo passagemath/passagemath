@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 """
 Conversion of symbolic expressions to other types
 
@@ -26,8 +27,8 @@ from sage.structure.element import Expression
 from sage.functions.all import exp
 from sage.symbolic.operators import arithmetic_operators, relation_operators, FDerivativeOperator, add_vararg, mul_vararg
 from sage.rings.number_field.number_field_element_base import NumberFieldElement_base
-from sage.rings.universal_cyclotomic_field import UniversalCyclotomicField
 
+lazy_import('sage.rings.universal_cyclotomic_field', 'UniversalCyclotomicField')
 lazy_import('sage.symbolic.expression_conversion_sympy', ['SympyConverter', 'sympy_converter'])
 lazy_import('sage.symbolic.expression_conversion_algebraic', ['AlgebraicConverter', 'algebraic'])
 
@@ -1233,7 +1234,7 @@ class FastCallableConverter(Converter):
             sage: etb = ExpressionTreeBuilder(vars=['x'], domain=RDF)
             sage: (x^7)._fast_callable_(etb)
             ipow(v_0, 7)
-            sage: f(x)=1/pi/x; plot(f,2,3)
+            sage: f(x) = 1/pi/x; plot(f,2,3)                                            # needs sage.plot
             Graphics object consisting of 1 graphics primitive
         """
         # This used to convert the operands first.  Doing it this way

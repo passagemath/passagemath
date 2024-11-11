@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.rings.padics
 r"""
 Elements of Berkovich space.
@@ -92,7 +93,7 @@ class Berkovich_Element_Cp(Berkovich_Element):
         # if radius is a list or a tuple, this is a type 4 point
         if isinstance(radius, (list, tuple)):
             if error_check:
-                if not (isinstance(center, list) or isinstance(center, tuple)):
+                if not isinstance(center, (list, tuple)):
                     raise TypeError("center was passed a list but radius was not a list")
                 if len(radius) != len(center):
                     raise ValueError("the same number of centers and radii "

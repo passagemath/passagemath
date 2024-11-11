@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-linbox
 """
 Saturation over ZZ
 """
@@ -67,6 +68,7 @@ def p_saturation(A, p, proof=True):
         C = ((B * H) / p).change_ring(ZZ)
         H = H.stack(C).hermite_form(include_zero_rows=False, proof=proof)
     verbose("done saturating", tm)
+
 
 def random_sublist_of_size(k, n):
     """
@@ -181,6 +183,7 @@ def solve_system_with_difficult_last_row(B, A):
     verbose("Done getting linear combinations.", tm)
     return X
 
+
 def saturation(A, proof=True, p=0, max_dets=5):
     r"""
     Compute a saturation matrix of `A`.
@@ -282,6 +285,7 @@ def saturation(A, proof=True, p=0, max_dets=5):
     # Now compute B^(-1) * A
     C = solve_system_with_difficult_last_row(B, A)
     return C.change_ring(ZZ)._insert_zero_columns(zero_cols)
+
 
 def index_in_saturation(A, proof=True):
     r"""

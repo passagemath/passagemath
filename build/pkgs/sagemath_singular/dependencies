@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-singular/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-singular/MANIFEST.in $(PYTHON) cypari memory_allocator sagemath_categories sagemath_linbox sagemath_flint sagemath_modules singular | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig

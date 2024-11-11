@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-plot
 """
 Complex plots
 
@@ -826,7 +827,7 @@ class ComplexPlot(GraphicPrimitive):
             sage: isinstance(complex_plot(lambda z: z, (-1,1), (-1,1))[0]._repr_(), str)
             True
         """
-        return "ComplexPlot defined by a %s x %s data grid"%(self.x_count, self.y_count)
+        return "ComplexPlot defined by a %s x %s data grid" % (self.x_count, self.y_count)
 
     def _render_on_subplot(self, subplot):
         """

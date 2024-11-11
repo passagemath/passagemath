@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Power Series
 
@@ -1540,7 +1541,9 @@ cdef class PowerSeries(AlgebraElement):
             1 + 1/2*t - 1/8*t^2 + 1/16*t^3 - 5/128*t^4 + O(t^5)
             sage: sqrt(4 + t)
             2 + 1/4*t - 1/64*t^2 + 1/512*t^3 - 5/16384*t^4 + O(t^5)
-            sage: u = sqrt(2 + t, prec=2, extend=True, name = 'alpha'); u
+
+            sage: # needs sage.libs.singular
+            sage: u = sqrt(2 + t, prec=2, extend=True, name='alpha'); u
             alpha
             sage: u^2
             2 + t
@@ -1548,6 +1551,7 @@ cdef class PowerSeries(AlgebraElement):
             Univariate Quotient Polynomial Ring in alpha
              over Power Series Ring in t over Rational Field
              with modulus x^2 - 2 - t
+
             sage: K.<t> = PowerSeriesRing(QQ, 't', 50)
             sage: sqrt(1 + 2*t + t^2)
             1 + t
@@ -1572,6 +1576,7 @@ cdef class PowerSeries(AlgebraElement):
 
         A formal square root::
 
+            sage: # needs sage.libs.singular
             sage: K.<t> = PowerSeriesRing(QQ, 5)
             sage: f = 2*t + t^3 + O(t^4)
             sage: s = f.sqrt(extend=True, name='sqrtf'); s

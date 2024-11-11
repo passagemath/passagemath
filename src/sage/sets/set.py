@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Sets
 
@@ -209,7 +210,7 @@ def Set(X=None, category=None):
         return Set_object_enumerated(X, category=category)
 
 
-class Set_base():
+class Set_base:
     r"""
     Abstract base class for sets, not necessarily parents.
     """
@@ -492,7 +493,7 @@ class Set_object(Set_generic, Set_base, Set_boolean_operators, Set_add_sub_opera
             and 'Integer Ring'
         """
         from sage.rings.integer import Integer
-        if isinstance(X, int) or isinstance(X, Integer):
+        if isinstance(X, (int, Integer)):
             # The coercion model will try to call Set_object(0)
             raise ValueError('underlying object cannot be an integer')
 

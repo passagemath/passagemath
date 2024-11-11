@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Circuits matroids
 
@@ -417,6 +418,7 @@ cdef class CircuitsMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.circuits_matroid import CircuitsMatroid
             sage: M = CircuitsMatroid(matroids.catalog.RelaxedNonFano())
             sage: sorted(M.groundset())
@@ -430,6 +432,7 @@ cdef class CircuitsMatroid(Matroid):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.circuits_matroid import CircuitsMatroid
             sage: M = CircuitsMatroid(matroids.catalog.RelaxedNonFano())
             sage: f = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g'}
@@ -498,6 +501,7 @@ cdef class CircuitsMatroid(Matroid):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: from sage.matroids.circuits_matroid import CircuitsMatroid
             sage: M = CircuitsMatroid(matroids.CompleteGraphic(4))
             sage: len(M.bases())
@@ -547,6 +551,8 @@ cdef class CircuitsMatroid(Matroid):
             sage: M = CircuitsMatroid(matroids.Uniform(2, 4))
             sage: len(M.nonbases())
             0
+
+            sage: # needs sage.graphs
             sage: M = CircuitsMatroid(matroids.CompleteGraphic(6))
             sage: len(M.nonbases())
             1707
@@ -754,6 +760,7 @@ cdef class CircuitsMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1, 2, 3], [3, 4, 5], [1, 2, 4, 5]])
             sage: SimplicialComplex(M.no_broken_circuits_sets())
             Simplicial complex with vertex set (1, 2, 3, 4, 5)
@@ -764,6 +771,7 @@ cdef class CircuitsMatroid(Matroid):
 
         ::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1, 2, 3], [1, 4, 5], [2, 3, 4, 5]])
             sage: SimplicialComplex(M.no_broken_circuits_sets([5, 4, 3, 2, 1]))
             Simplicial complex with vertex set (1, 2, 3, 4, 5)
@@ -771,6 +779,7 @@ cdef class CircuitsMatroid(Matroid):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1, 2, 3], [3, 4, 5], [1, 2, 4, 5]])
             sage: C1 = SimplicialComplex(M.no_broken_circuits_sets())
             sage: from sage.matroids.basis_matroid import BasisMatroid
@@ -804,6 +813,7 @@ cdef class CircuitsMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(circuits=[[1, 2, 3], [3, 4, 5], [1, 2, 4, 5]])
             sage: M.broken_circuit_complex()
             Simplicial complex with vertex set (1, 2, 3, 4, 5)
@@ -818,6 +828,7 @@ cdef class CircuitsMatroid(Matroid):
         For a matroid with loops, the broken circuit complex is not defined,
         and the method yields an error::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(groundset=[0, 1, 2], circuits=[[0]])
             sage: M.broken_circuit_complex()
             Traceback (most recent call last):
@@ -869,13 +880,17 @@ cdef class CircuitsMatroid(Matroid):
 
     # verification
 
-    cpdef bint is_valid(self) noexcept:
+    cpdef is_valid(self, certificate=False):
         r"""
         Test if ``self`` obeys the matroid axioms.
 
         For a matroid defined by its circuits, we check the circuit axioms.
 
-        OUTPUT: boolean
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``)
+
+        OUTPUT: boolean, or (boolean, dictionary)
 
         EXAMPLES::
 
@@ -901,8 +916,12 @@ cdef class CircuitsMatroid(Matroid):
             False
             sage: C = [[1, 2, 3], [3, 4, 5]]
             sage: M = Matroid(circuits=C)
-            sage: M.is_valid()
-            False
+            sage: M.is_valid(certificate=True)
+            (False,
+             {'circuit 1': frozenset({...}),
+              'circuit 2': frozenset({...}),
+              'element': 3,
+              'error': 'elimination axiom failed'})
         """
         from itertools import combinations_with_replacement
         cdef int i, j
@@ -911,7 +930,7 @@ cdef class CircuitsMatroid(Matroid):
             # loop through all circuit length pairs (i, j) with i <= j
             for C1 in self._k_C[i]:
                 if not C1:  # the empty set can't be a circuit
-                    return False
+                    return False if not certificate else (False, {"error": "the empty set can't be a circuit"})
                 for C2 in self._k_C[j]:
                     I12 = C1 & C2
                     if not I12:  # C1 and C2 are disjoint; nothing to test
@@ -920,10 +939,10 @@ cdef class CircuitsMatroid(Matroid):
                         if len(C1) == len(C2):  # they are the same circuit
                             break
                         # C1 < C2; a circuit can't be a subset of another circuit
-                        return False
+                        return False if not certificate else (False, {"error": "a circuit can't be a subset of another circuit", "circuit 1": C1, "circuit 2": C2})
                     # check circuit elimination axiom
                     U12 = C1 | C2
                     for e in I12:
                         if self._is_independent(U12 - {e}):
-                            return False
-        return True
+                            return False if not certificate else (False, {"error": "elimination axiom failed", "circuit 1": C1, "circuit 2": C2, "element": e})
+        return True if not certificate else (True, {})

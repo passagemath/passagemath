@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 r"""
 Convert PARI objects to Sage types
 """
@@ -379,7 +380,7 @@ cpdef set_integer_from_gen(Integer self, Gen x):
             sig_on()
             x = new_gen(FF_to_FpXQ_i((<Gen>x).g))
         else:
-            raise TypeError("Unable to coerce PARI %s to an Integer"%x)
+            raise TypeError("Unable to coerce PARI %s to an Integer" % x)
 
     # Now we have a true PARI integer, convert it to Sage
     INT_to_mpz(self.value, (<Gen>x).g)

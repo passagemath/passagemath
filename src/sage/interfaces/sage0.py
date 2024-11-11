@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.all
 r"""
 Interface to Sage
@@ -270,6 +271,7 @@ class Sage(ExtraTabCompletion, Expect):
         """
         EXAMPLES::
 
+            sage: from sage.interfaces.sage0 import sage0
             sage: sage0.__reduce__()
             (<function reduce_load_Sage at 0x...>, ())
         """
@@ -393,7 +395,7 @@ class Sage(ExtraTabCompletion, Expect):
         EXAMPLES::
 
             sage: sage0.version()
-            'SageMath version ..., Release Date: ...'
+            '... version ..., Release Date: ...'
             sage: sage0.version() == version()
             True
         """

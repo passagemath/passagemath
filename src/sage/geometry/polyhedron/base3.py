@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Base class for polyhedra: Methods regarding the combinatorics of a polyhedron
 
@@ -37,6 +38,7 @@ from sage.matrix.constructor import matrix
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
 from .base2 import Polyhedron_base2
+
 
 class Polyhedron_base3(Polyhedron_base2):
     """
@@ -135,7 +137,7 @@ class Polyhedron_base3(Polyhedron_base2):
             [1 0 1 0 0 1]
             [1 0 0 0 1 1]
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.groups sage.rings.number_field
             sage: P = polytopes.dodecahedron().faces(2)[0].as_polyhedron()
             sage: P.slack_matrix()
             [1/2*sqrt5 - 1/2               0               0               1 1/2*sqrt5 - 1/2               0]

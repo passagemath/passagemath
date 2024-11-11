@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 """
 Finite fields implemented via PARI's FFELT type
 
@@ -20,6 +21,7 @@ AUTHORS:
 from .element_pari_ffelt import FiniteFieldElement_pari_ffelt
 from .finite_field_base import FiniteField
 from .finite_field_constructor import GF
+
 
 class FiniteField_pari_ffelt(FiniteField):
     """

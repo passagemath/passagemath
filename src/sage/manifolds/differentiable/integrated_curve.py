@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Integrated Curves and Geodesics in Manifolds
 
@@ -44,9 +45,9 @@ all possible options, including the choice of the numerical algorithm)::
 
 Plot the geodesic after interpolating the solution ``sol``::
 
-    sage: interp = c.interpolate()
+    sage: interp = c.interpolate()                                                      # needs scipy
 
-    sage: # needs sage.plot
+    sage: # needs scipy sage.plot
     sage: graph = c.plot_integrated()
     sage: p_plot = p.plot(size=30, label_offset=-0.07, fontsize=20)
     sage: v_plot = v.plot(label_offset=0.05, fontsize=20)
@@ -82,12 +83,12 @@ Plot the geodesic after interpolating the solution ``sol``::
 
 In particular, its value at `t=1` is::
 
-    sage: c(1)
+    sage: c(1)                                                                          # needs scipy
     Point on the 2-dimensional Riemannian manifold M
 
 which corresponds to the following `(x, y)` coordinates::
 
-    sage: X(c(1))  # abs tol 1e-12
+    sage: X(c(1))  # abs tol 1e-12                                                      # needs scipy
     (2.4784140715580136, 1.5141683866138937)
 
 AUTHORS:
@@ -1516,7 +1517,7 @@ class IntegratedCurve(DifferentiableCurve):
         The argument ``verbose=True`` will cause the solver to write a small
         message each time it is switching chart::
 
-            sage: sol = c.solve_across_charts(step=0.1, verbose=True)
+            sage: sol = c.solve_across_charts(step=0.1, verbose=True)                   # needs scipy
             Performing numerical integration with method 'ode'.
             Integration will take place on the whole manifold domain.
             Resulting list of points will be associated with the key 'ode_multichart' by default.
@@ -1535,7 +1536,7 @@ class IntegratedCurve(DifferentiableCurve):
 
         The following code prints the corresponding charts::
 
-            sage: for chart, solution in sol:
+            sage: for chart, solution in sol:                                           # needs scipy
             ....:     print(chart)
             Chart (M, (r, th))
             Chart (M, (x, y))
@@ -1543,7 +1544,7 @@ class IntegratedCurve(DifferentiableCurve):
 
         The interpolation is done as usual::
 
-            sage: interp = c.interpolate()
+            sage: interp = c.interpolate()                                              # needs scipy
 
         To plot the result, you must first be sure that the mapping
         encompasses all the chart, which is the case here.
@@ -1551,9 +1552,9 @@ class IntegratedCurve(DifferentiableCurve):
         :meth:`plot_integrated` again on each part.
         Finally, ``color`` can be a list, which will be cycled through::
 
-            sage: fig += c.plot_integrated(mapping=phi, color=["green","red"],          # needs sage.plot
+            sage: fig += c.plot_integrated(mapping=phi, color=["green","red"],          # needs scipy sage.plot
             ....: thickness=3, plot_points=100, across_charts=True)
-            sage: fig                                                                   # needs sage.plot
+            sage: fig                                                                   # needs scipy sage.plot
             Graphics object consisting of 43 graphics primitives
 
         .. PLOT::
@@ -1947,7 +1948,7 @@ class IntegratedCurve(DifferentiableCurve):
             ...
             ValueError: no existing key 'my solution' referring to any
              numerical solution
-            sage: interp = c.interpolate(solution_key='sol_T1',
+            sage: interp = c.interpolate(solution_key='sol_T1',                         # needs scipy
             ....:                        method='my method')
             Traceback (most recent call last):
             ...
@@ -2864,6 +2865,7 @@ class IntegratedCurve(DifferentiableCurve):
                              aspect_ratio=aspect_ratio, color=color,
                              style=style, label_axes=label_axes)
 
+
 class IntegratedAutoparallelCurve(IntegratedCurve):
     r"""
     Autoparallel curve on the manifold with respect to a given
@@ -3028,6 +3030,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Solve, interpolate and prepare the plot for the solutions
     corresponding to the two initial conditions previously set::
 
+        sage: # needs scipy sage.plot
         sage: graph2D_mercator = Graphics()
         sage: for key in dict_params:
         ....:     sol = c.solve(solution_key='sol-'+key,
@@ -3040,6 +3043,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Prepare a grid of Mercator coordinates lines, and plot the curves
     over it::
 
+        sage: # needs scipy sage.plot
         sage: graph2D_mercator_coords=mercator.plot(chart=mercator,
         ....:                            number_values=8,color='yellow')
         sage: graph2D_mercator + graph2D_mercator_coords
@@ -3095,6 +3099,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Plot the resulting curves on the grid of polar coordinates lines on
     `\mathbb{S}^{2}`::
 
+        sage: # needs sage.plot
         sage: graph3D_embedded_curves = Graphics()
         sage: for key in dict_params:
         ....:     graph3D_embedded_curves += c.plot_integrated(interpolation_key='interp-'+key,
@@ -3150,6 +3155,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Then, compute a curve such that both components of its initial
     tangent vectors are nonzero::
 
+        sage: # needs scipy
         sage: sol = c.solve(solution_key='sol-angle',
         ....:  parameters_values={tmin:0,tmax:2,th0:pi/4,ph0:0.1,v_th0:1,v_ph0:8})
         sage: interp = c.interpolate(solution_key='sol-angle',
@@ -3158,7 +3164,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Plot the resulting curve in the Mercator plane.
     This generates a straight line, as expected::
 
-        sage: c.plot_integrated(interpolation_key='interp-angle',
+        sage: c.plot_integrated(interpolation_key='interp-angle',                       # needs scipy sage.plot
         ....:         chart=mercator, thickness=1, display_tangent=True,
         ....:         scale=0.2, width_tangent=0.2)
         Graphics object consisting of 11 graphics primitives
@@ -3196,6 +3202,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
 
     One may eventually plot such a curve on `\mathbb{S}^{2}`::
 
+        sage: # needs scipy sage.plot
         sage: graph3D_embedded_angle_curve=c.plot_integrated(interpolation_key='interp-angle',
         ....:        mapping=euclid_embedding, thickness=5,
         ....:        display_tangent=True, scale=0.1, width_tangent=0.5)
@@ -3287,6 +3294,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Plot the curves (for clarity, set a 2 degrees shift in the initial
     value of `\theta_{0}` so that the curves do not overlap)::
 
+        sage: # needs scipy sage.plot
         sage: graph2D_mercator_loxo = c_loxo.plot(chart=mercator,
         ....:  parameters={th0:pi/4+2*pi/180, ph0:0.1, v_th0:1, v_ph0:8},
         ....:  thickness=1, color='blue')
@@ -3332,6 +3340,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Both curves do have the same aspect.
     One may eventually compare these curves on `\mathbb{S}^{2}`::
 
+        sage: # needs scipy sage.plot
         sage: graph3D_embedded_angle_curve=c.plot_integrated(interpolation_key='interp-angle',
         ....:                     mapping=euclid_embedding, thickness=3)
         sage: graph3D_embedded_loxo = c_loxo.plot(mapping=euclid_embedding,
@@ -3647,6 +3656,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
             print(description)
 
         return [self._equations_rhs, v0, chart]
+
 
 class IntegratedGeodesic(IntegratedAutoparallelCurve):
     r"""

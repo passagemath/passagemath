@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Points of Topological Manifolds
 
@@ -91,6 +92,7 @@ from sage.structure.element import Element
 from sage.misc.decorators import options
 from sage.symbolic.expression import Expression
 from sage.rings.integer_ring import ZZ
+
 
 class ManifoldPoint(Element):
     r"""

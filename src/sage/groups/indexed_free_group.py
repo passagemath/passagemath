@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat
 """
 Indexed Free Groups
@@ -136,6 +137,7 @@ class IndexedGroup(IndexedMonoid):
         return Family(self._indices, self.gen)
 
     gens = group_generators
+
 
 class IndexedFreeGroup(IndexedGroup, Group):
     """
@@ -296,6 +298,7 @@ class IndexedFreeGroup(IndexedGroup, Group):
             sign = lambda x: 1 if x > 0 else -1 # It is never 0
             return [ (k, sign(e)) for k,e in self._sorted_items()
                      for dummy in range(abs(e))]
+
 
 class IndexedFreeAbelianGroup(IndexedGroup, AbelianGroup):
     """

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Matching
 
@@ -232,7 +233,7 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
     The Petersen graph is bicritical::
 
         sage: G = graphs.PetersenGraph()
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         True
 
     A graph (without a self-loop) is bicritical if and only if the underlying
@@ -241,13 +242,13 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
         sage: G = graphs.PetersenGraph()
         sage: G.allow_multiple_edges(True)
         sage: G.add_edge(0, 5)
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         True
 
     A nontrivial circular ladder graph whose order is not divisible by 4 is bicritical::
 
         sage: G = graphs.CircularLadderGraph(5)
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         True
 
     The graph obtained by splicing two bicritical graph is also bicritical.
@@ -258,14 +259,14 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
         sage: G = graphs.CompleteGraph(4)
         sage: G.allow_multiple_edges(True)
         sage: G.add_edge(0, 1)
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         True
         sage: H = Graph()
         sage: H.add_edges([
         ....:    (0, 1), (0, 2), (0, 3), (0, 4), (1, 2),
         ....:    (1, 5), (2, 5), (3, 4), (3, 5), (4, 5)
         ....: ])
-        sage: H.is_bicritical()
+        sage: H.is_bicritical()                                                     # needs networkx
         True
 
     A graph (of order more than two) with more that one component is not bicritical::
@@ -277,7 +278,7 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
         sage: G.add_edges(cycle1.edges() + cycle2.edges())
         sage: len(G.connected_components(sort=False))
         2
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         False
 
     A graph (of order more than two) with a cut-vertex is not bicritical::
@@ -288,17 +289,17 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
         True
         sage: G.has_perfect_matching()
         True
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         False
 
     A connected graph of order two is assumed to be bicritical, whereas the
     disconnected graph of the same order is not::
 
         sage: G = graphs.CompleteBipartiteGraph(1, 1)
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         True
         sage: G = graphs.CompleteBipartiteGraph(2, 0)
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         False
 
     A bipartite graph of order three or more is not bicritical::
@@ -306,28 +307,28 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
         sage: G = graphs.CompleteBipartiteGraph(3, 3)
         sage: G.has_perfect_matching()
         True
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         False
 
     One may specify a matching::
 
         sage: G = graphs.WheelGraph(10)
         sage: M = G.matching()
-        sage: G.is_bicritical(matching=M)
+        sage: G.is_bicritical(matching=M)                                           # needs networkx
         True
         sage: H = graphs.HexahedralGraph()
         sage: N = H.matching()
-        sage: H.is_bicritical(matching=N)
+        sage: H.is_bicritical(matching=N)                                           # needs networkx
         False
 
     One may ask for a co-`\mathcal{NP}` certificate::
 
         sage: G = graphs.CompleteGraph(14)
-        sage: G.is_bicritical(coNP_certificate=True)
+        sage: G.is_bicritical(coNP_certificate=True)                                # needs networkx
         (True, None)
         sage: H = graphs.CircularLadderGraph(20)
         sage: M = H.matching()
-        sage: H.is_bicritical(matching=M, coNP_certificate=True)
+        sage: H.is_bicritical(matching=M, coNP_certificate=True)                    # needs networkx
         (False, {0, 2})
 
     TESTS:
@@ -335,12 +336,12 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
     If the graph is trivial::
 
         sage: G = Graph()
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         Traceback (most recent call last):
         ...
         ValueError: the graph is trivial
         sage: H = graphs.CycleGraph(1)
-        sage: H.is_bicritical()
+        sage: H.is_bicritical()                                                     # needs networkx
         Traceback (most recent call last):
         ...
         ValueError: the graph is trivial
@@ -350,19 +351,19 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
         sage: G = graphs.CompleteGraph(6)
         sage: M = Graph(G.matching())
         sage: M.add_edges([(0, 1), (0, 2)])
-        sage: G.is_bicritical(matching=M)
+        sage: G.is_bicritical(matching=M)                                           # needs networkx
         Traceback (most recent call last):
         ...
         ValueError: the input is not a matching
         sage: N = Graph(G.matching())
         sage: N.add_edge(6, 7)
-        sage: G.is_bicritical(matching=N)
+        sage: G.is_bicritical(matching=N)                                           # needs networkx
         Traceback (most recent call last):
         ...
         ValueError: the input is not a matching of the graph
         sage: J = Graph()
         sage: J.add_edges([(0, 1), (2, 3)])
-        sage: G.is_bicritical(matching=J)
+        sage: G.is_bicritical(matching=J)                                           # needs networkx
         Traceback (most recent call last):
         ...
         ValueError: the input is not a perfect matching of the graph
@@ -372,7 +373,7 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
         sage: G = graphs.CompleteGraph(4)
         sage: G.allow_loops(True)
         sage: G.add_edge(0, 0)
-        sage: G.is_bicritical()
+        sage: G.is_bicritical()                                                     # needs networkx
         Traceback (most recent call last):
         ...
         ValueError: This method is not known to work on graphs with loops.
@@ -553,7 +554,7 @@ def is_factor_critical(G, matching=None, algorithm='Edmonds', solver=None, verbo
         sage: G = graphs.RandomGNP(15, .2)
         sage: G.add_path([0..14])
         sage: G.add_edge(14, 0)
-        sage: G.is_hamiltonian()
+        sage: G.is_hamiltonian()                                                    # needs sage.numerical.mip
         True
         sage: G.is_factor_critical()                                                # needs networkx
         True
@@ -778,7 +779,7 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
     The Petersen graph is matching covered::
 
         sage: G = graphs.PetersenGraph()
-        sage: G.is_matching_covered()
+        sage: G.is_matching_covered()                                               # needs networkx
         True
 
     A graph (without a self-loop) is matching covered if and only if the
@@ -787,7 +788,7 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
         sage: G = graphs.PetersenGraph()
         sage: G.allow_multiple_edges(True)
         sage: G.add_edge(0, 5)
-        sage: G.is_matching_covered()
+        sage: G.is_matching_covered()                                               # needs networkx
         True
 
     A corollary to Tutte's fundamental result [Tut1947]_, as a
@@ -806,7 +807,7 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
         sage: degree_sequence = G.degree_sequence()
         sage: min(degree_sequence) == max(degree_sequence) == 3
         True
-        sage: G.is_matching_covered()
+        sage: G.is_matching_covered()                                               # needs networkx
         True
 
     A connected bipartite graph `G[A, B]`, with `|A| = |B| \geq 2`, is
@@ -818,7 +819,7 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
         sage: G = graphs.HexahedralGraph()
         sage: G.is_bipartite()
         True
-        sage: G.is_matching_covered()
+        sage: G.is_matching_covered()                                                   # needs networkx
         True
         sage: P = graphs.PathGraph(10)
         sage: P.is_bipartite()
@@ -826,7 +827,7 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
         sage: M = Graph(P.matching())
         sage: set(P) == set(M)
         True
-        sage: P.is_matching_covered()
+        sage: P.is_matching_covered()                                                   # needs networkx
         False
 
     A connected bipartite graph `G[A, B]` of order six or more is matching
@@ -836,10 +837,9 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
         sage: G = graphs.CircularLadderGraph(8)
         sage: G.is_bipartite()
         True
-        sage: G.is_matching_covered()
+        sage: G.is_matching_covered()                                                   # needs networkx
         True
         sage: A, B = G.bipartite_sets()
-        sage: # needs random
         sage: import random
         sage: a = random.choice(list(A))
         sage: b = random.choice(list(B))
@@ -855,7 +855,7 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
         sage: H.add_edge(3, 4)
         sage: H.is_bipartite()
         True
-        sage: H.is_matching_covered()
+        sage: H.is_matching_covered()                                                   # needs networkx
         False
         sage: H.delete_vertices([3, 4])
         sage: N = Graph(H.matching())
@@ -1219,13 +1219,7 @@ def matching(G, value_only=False, algorithm='Edmonds',
         ...
         ValueError: algorithm must be set to either "Edmonds" or "LP"
     """
-    from sage.rings.real_mpfr import RR
-
-    def weight(x):
-        if x in RR:
-            return x
-        else:
-            return 1
+    from sage.graphs.generic_graph import _weight_if_real as weight
 
     W = {}
     L = {}
@@ -1428,6 +1422,7 @@ def M_alternating_even_mark(G, vertex, matching):
     Show the list of required vertices for a graph `G` with a matching `M`
     for a vertex `u`::
 
+        sage: # needs networkx
         sage: G = graphs.CycleGraph(3)
         sage: M = G.matching()
         sage: M
@@ -1443,6 +1438,7 @@ def M_alternating_even_mark(G, vertex, matching):
     The result is equivalent for the underlying simple graph of the provided
     graph, if the other parameters provided are the same::
 
+        sage: # needs networkx
         sage: G = graphs.CompleteBipartiteGraph(3, 3)
         sage: G.allow_multiple_edges(True)
         sage: G.add_edge(0, 3)
@@ -1461,6 +1457,7 @@ def M_alternating_even_mark(G, vertex, matching):
     `M`-exposed vertex, each vertex in `G` is reachable from `u` through an
     even length `M`-alternating path as described above::
 
+        sage: # needs networkx
         sage: G = graphs.WheelGraph(11)
         sage: M = Graph(G.matching())
         sage: G.is_factor_critical(M)
@@ -1479,6 +1476,7 @@ def M_alternating_even_mark(G, vertex, matching):
     neighbor, each neighbor of `v` is reachable from `u` through an even length
     `M`-alternating path as described above::
 
+        sage: # needs networkx
         sage: G = Graph()
         sage: G.add_edges([
         ....:    (0, 2), (0, 3), (0, 4), (1, 2),
@@ -1500,12 +1498,13 @@ def M_alternating_even_mark(G, vertex, matching):
     being `v`, each vertex of the graph distinct from `v` is reachable from `u`
     through an even length `M`-alternating path as described above::
 
+        sage: # needs networkx
         sage: G = graphs.PetersenGraph()
         sage: M = Graph(G.matching())
         sage: G.is_bicritical(M)
         True
         sage: import random
-        sage: u = random.choice(list(G))                                            # needs random
+        sage: u = random.choice(list(G))
         sage: v = next(M.neighbor_iterator(u))
         sage: from sage.graphs.matching import M_alternating_even_mark
         sage: S = M_alternating_even_mark(G, u, M)
@@ -1516,6 +1515,7 @@ def M_alternating_even_mark(G, vertex, matching):
 
     Giving a wrong vertex::
 
+        sage: # needs networkx
         sage: G = graphs.HexahedralGraph()
         sage: M = G.matching()
         sage: u = G.order()
@@ -1527,6 +1527,7 @@ def M_alternating_even_mark(G, vertex, matching):
 
     Giving a wrong matching::
 
+        sage: # needs networkx
         sage: from sage.graphs.matching import M_alternating_even_mark
         sage: G = graphs.CompleteGraph(6)
         sage: M = [(0, 1), (0, 2)]

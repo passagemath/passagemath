@@ -13,8 +13,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sagemath-bliss"
-description = "Sage: Open Source Mathematics Software: Graph (iso/auto)morphisms with bliss"
+name = "passagemath-bliss"
+description = "passagemath: Graph (iso/auto)morphisms with bliss"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
 ]
@@ -26,7 +26,10 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+test = [
+    "passagemath-repl",
+    "passagemath-graphs",
+]
 
 [tool.setuptools]
 include-package-data = false

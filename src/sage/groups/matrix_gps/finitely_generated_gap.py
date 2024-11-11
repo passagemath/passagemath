@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 """
 Finitely Generated Matrix Groups with GAP
 """
@@ -923,6 +924,7 @@ class FinitelyGeneratedMatrixGroup_gap(MatrixGroup_gap):
                 if len(inv) == ms[deg]:
                     break
         return list(inv)
+
 
 def _new_invariant_is_linearly_independent(F, invariants):
     """

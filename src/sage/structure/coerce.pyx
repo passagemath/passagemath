@@ -144,6 +144,13 @@ cpdef py_scalar_parent(py_type):
         Real Double Field
         sage: py_scalar_parent(gmpy2.mpc)                                               # needs sage.rings.complex_double
         Complex Double Field
+
+        sage: # needs mpmath
+        sage: import mpmath
+        sage: py_scalar_parent(mpmath.mpf)
+        Real Double Field
+        sage: py_scalar_parent(mpmath.mpc)                                              # needs sage.rings.complex_double
+        Complex Double Field
     """
     if issubclass(py_type, int):
         import sage.rings.integer_ring
@@ -151,39 +158,46 @@ cpdef py_scalar_parent(py_type):
     if py_type is FractionType:
         import sage.rings.rational_field
         return sage.rings.rational_field.QQ
-    elif issubclass(py_type, float):
+    if issubclass(py_type, float):
         import sage.rings.real_double
         return sage.rings.real_double.RDF
-    elif issubclass(py_type, complex):
+    if issubclass(py_type, complex):
         import sage.rings.complex_double
         return sage.rings.complex_double.CDF
-    elif is_numpy_type(py_type):
+    if is_numpy_type(py_type):
         import numpy
         if issubclass(py_type, numpy.integer):
             import sage.rings.integer_ring
             return sage.rings.integer_ring.ZZ
-        elif issubclass(py_type, numpy.floating):
+        if issubclass(py_type, numpy.floating):
             import sage.rings.real_double
             return sage.rings.real_double.RDF
-        elif issubclass(py_type, numpy.complexfloating):
+        if issubclass(py_type, numpy.complexfloating):
             import sage.rings.complex_double
             return sage.rings.complex_double.CDF
-        else:
-            return None
-    elif issubclass(py_type, gmpy2.mpz):
+        return None
+    if issubclass(py_type, gmpy2.mpz):
         import sage.rings.integer_ring
         return sage.rings.integer_ring.ZZ
-    elif issubclass(py_type, gmpy2.mpq):
+    if issubclass(py_type, gmpy2.mpq):
         import sage.rings.rational_field
         return sage.rings.rational_field.QQ
-    elif issubclass(py_type, gmpy2.mpfr):
+    if issubclass(py_type, gmpy2.mpfr):
         import sage.rings.real_double
         return sage.rings.real_double.RDF
-    elif issubclass(py_type, gmpy2.mpc):
+    if issubclass(py_type, gmpy2.mpc):
         import sage.rings.complex_double
         return sage.rings.complex_double.CDF
-    else:
+    if is_mpmath_type(py_type):
+        import mpmath
+        if issubclass(py_type, mpmath.mpf):
+            from sage.rings.real_double import RDF
+            return RDF
+        if issubclass(py_type, mpmath.mpc):
+            from sage.rings.complex_double import CDF
+            return CDF
         return None
+    return None
 
 cpdef py_scalar_to_element(x):
     """
@@ -469,10 +483,10 @@ cpdef bint is_numpy_type(t) noexcept:
         return True
     return False
 
+
 cpdef bint is_mpmath_type(t) noexcept:
     r"""
-    Check whether the type ``t`` is a type whose name starts with either
-    ``mpmath.`` or ``sage.libs.mpmath.``.
+    Check whether the type ``t`` is a type whose name starts with ``mpmath.``
 
     EXAMPLES::
 
@@ -489,7 +503,7 @@ cpdef bint is_mpmath_type(t) noexcept:
         True
     """
     return isinstance(t, type) and \
-           strncmp((<PyTypeObject*>t).tp_name, "sage.libs.mpmath.", 17) == 0
+           t.__module__.startswith("mpmath.")
 
 
 cdef class CoercionModel:
@@ -685,7 +699,7 @@ cdef class CoercionModel:
             sage: cm.record_exceptions()
             sage: cm._test_exception_stack()
             sage: cm.exception_stack()
-            ['Traceback (most recent call last):\n  File "sage/structure/coerce.pyx", line ...TypeError: just a test']
+            ['Traceback (most recent call last):\n  File "...coerce.pyx", line ...TypeError: just a test']
             sage: cm.record_exceptions(False)
             sage: cm._test_exception_stack()
             sage: cm.exception_stack()
@@ -713,7 +727,7 @@ cdef class CoercionModel:
             []
             sage: cm._test_exception_stack()
             sage: cm.exception_stack()
-            ['Traceback (most recent call last):\n  File "sage/structure/coerce.pyx", line ...TypeError: just a test']
+            ['Traceback (most recent call last):\n  File "...coerce.pyx", line ...TypeError: just a test']
 
         The function _test_exception_stack is executing the following code::
 
@@ -743,7 +757,7 @@ cdef class CoercionModel:
             []
             sage: cm._test_exception_stack()
             sage: cm.exception_stack()
-            ['Traceback (most recent call last):\n  File "sage/structure/coerce.pyx", line ...TypeError: just a test']
+            ['Traceback (most recent call last):\n  File "...coerce.pyx", line ...TypeError: just a test']
         """
         try:
             raise TypeError("just a test")
@@ -1271,7 +1285,7 @@ cdef class CoercionModel:
 
         if not isinstance(y, Element):
             op_name = op.__name__
-            mul_method = getattr(y, '__r%s__'%op_name, None)
+            mul_method = getattr(y, '__r%s__' % op_name, None)
             if mul_method is not None:
                 res = mul_method(x)
                 if res is not None and res is not NotImplemented:
@@ -1425,7 +1439,7 @@ cdef class CoercionModel:
             except Exception:
                 self._record_exception()
 
-        raise TypeError("no common canonical parent for objects with parents: '%s' and '%s'"%(xp, yp))
+        raise TypeError("no common canonical parent for objects with parents: '%s' and '%s'" % (xp, yp))
 
     cpdef coercion_maps(self, R, S):
         r"""

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.libs.pari
 r"""
 Elements of Quotients of Univariate Polynomial Rings
@@ -145,7 +146,7 @@ class PolynomialQuotientRingElement(polynomial_singular_interface.Polynomial_sin
                 Q = P(0)
                 X = P.gen()
                 while R.degree() >= B.degree():
-                    S = P((R.leading_coefficient()/B.leading_coefficient())) * X**(R.degree()-B.degree())
+                    S = P(R.leading_coefficient()/B.leading_coefficient()) * X**(R.degree()-B.degree())
                     Q = Q + S
                     R = R - S*B
                 polynomial = R

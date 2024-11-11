@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Sage functions to compute minimal models of rational functions
 under the conjugation action of `PGL_2(QQ)`.
@@ -473,6 +474,8 @@ def Min(Fun, p, ubRes, conj, all_orbits=False):
 ###################################################
 
 #modification of Bruin-Molnar for all representatives
+
+
 def BM_all_minimal(vp, return_transformation=False, D=None):
     r"""
     Determine a representative in each `SL(2,\ZZ)` orbit with minimal
@@ -623,6 +626,8 @@ def BM_all_minimal(vp, return_transformation=False, D=None):
 ###################################################
 
 #find minimal model
+
+
 def HS_minimal(f, return_transformation=False, D=None):
     r"""
     Compute a minimal model for the given projective dynamical system.
@@ -713,6 +718,8 @@ def HS_minimal(f, return_transformation=False, D=None):
     return F
 
 #find all representatives of orbits for one prime
+
+
 def HS_all_minimal_p(p, f, m=None, return_transformation=False):
     r"""
     Find a representative in each distinct `SL(2,\ZZ)` orbit with
@@ -814,6 +821,8 @@ def HS_all_minimal_p(p, f, m=None, return_transformation=False):
         return [funct for funct, matr in reps]
 
 #find all representatives of orbits
+
+
 def HS_all_minimal(f, return_transformation=False, D=None):
     r"""
     Determine a representative in each `SL(2,\ZZ)` orbit with minimal resultant.
@@ -905,6 +914,7 @@ def HS_all_minimal(f, return_transformation=False, D=None):
 #
 # Ben Hutz July 2018
 #####################################3
+
 
 def get_bound_dynamical(F, f, m=1, dynatomic=True, prec=53, emb=None):
     """

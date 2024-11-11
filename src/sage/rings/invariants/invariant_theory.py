@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Classical Invariant Theory
 
@@ -3959,7 +3960,7 @@ class TwoQuaternaryQuadratics(TwoAlgebraicForms):
 
 ######################################################################
 
-class InvariantTheoryFactory():
+class InvariantTheoryFactory:
     """
     Factory object for invariants of multilinear forms.
 

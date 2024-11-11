@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 # sage.doctest: needs sage.libs.gap sage.modules
 """
 Heisenberg Group
@@ -25,6 +26,7 @@ from sage.categories.groups import Groups
 from sage.categories.rings import Rings
 from sage.rings.integer_ring import ZZ
 from copy import copy
+
 
 class HeisenbergGroup(UniqueRepresentation, FinitelyGeneratedMatrixGroup_gap):
     r"""

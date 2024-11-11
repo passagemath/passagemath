@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Base class for polyhedra: Methods for triangulation and volume computation
 """
@@ -36,6 +37,7 @@ from sage.modules.free_module_element import vector
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
 from .base6 import Polyhedron_base6
+
 
 class Polyhedron_base7(Polyhedron_base6):
     r"""
@@ -425,12 +427,13 @@ class Polyhedron_base7(Polyhedron_base6):
             ...
             ValueError: LattE integrale cannot be applied over inexact rings
         """
-        from sage.interfaces.latte import integrate
         from sage.rings.real_double import RDF
 
         if self.base_ring() == RDF:
             raise ValueError("LattE integrale cannot be applied over inexact rings")
         else:
+            from sage.interfaces.latte import integrate
+
             return integrate(self.cdd_Hrepresentation(), algorithm=algorithm, cdd=True, verbose=verbose, **kwargs)
 
     def _volume_normaliz(self, measure='induced'):

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Set of Morphisms between Topological Manifolds
 
@@ -32,6 +33,7 @@ from sage.structure.parent import Parent
 from sage.structure.unique_representation import UniqueRepresentation
 from sage.manifolds.continuous_map import ContinuousMap
 from sage.misc.cachefunc import cached_method
+
 
 class TopologicalManifoldHomset(UniqueRepresentation, Homset):
     r"""

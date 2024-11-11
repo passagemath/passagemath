@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Dual matroids
 
@@ -522,6 +523,7 @@ class DualMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = matroids.catalog.K5dual(range(10))
             sage: type(M)
             <class 'sage.matroids.dual_matroid.DualMatroid'>
@@ -535,6 +537,7 @@ class DualMatroid(Matroid):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: M = matroids.catalog.K5dual(range(10))
             sage: f = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e',
             ....:      5: 'f', 6: 'g', 7: 'h', 8: 'i', 9: 'j'}
@@ -545,16 +548,21 @@ class DualMatroid(Matroid):
         M = self._matroid.relabel(mapping).dual()
         return M
 
-    def is_valid(self):
+    def is_valid(self, certificate=False):
         """
         Test if ``self`` obeys the matroid axioms.
 
         For a :class:`DualMatroid`, we check its dual.
 
-        OUTPUT: boolean
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``)
+
+        OUTPUT: boolean, or (boolean, dictionary)
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = matroids.catalog.K5dual()
             sage: type(M)
             <class 'sage.matroids.dual_matroid.DualMatroid'>
@@ -564,4 +572,11 @@ class DualMatroid(Matroid):
             sage: M.dual().is_valid()
             False
         """
+        if certificate:
+            v, c = self._matroid.is_valid(certificate)
+            if v:
+                return True, {}
+            else:
+                c["error"] = "the dual matroid is not valid: " + c["error"]
+                return v, c
         return self._matroid.is_valid()

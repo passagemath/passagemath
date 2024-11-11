@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 r"""
 Small primes of degree one
 
@@ -96,7 +97,7 @@ AUTHORS:
 from sage.rings.integer_ring import ZZ
 
 
-class Small_primes_of_degree_one_iter():
+class Small_primes_of_degree_one_iter:
     r"""
     Iterator that finds primes of a number field of absolute degree
     one and bounded small prime norm.

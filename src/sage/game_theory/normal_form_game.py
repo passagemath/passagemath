@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Normal form games with N players.
 
@@ -2783,7 +2784,7 @@ class NormalFormGame(SageObject, MutableMapping):
         return False
 
 
-class _Player():
+class _Player:
     def __init__(self, num_strategies):
         r"""
         TESTS::

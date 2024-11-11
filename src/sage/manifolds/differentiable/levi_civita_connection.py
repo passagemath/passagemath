@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Levi-Civita Connections
 
@@ -33,6 +34,7 @@ from sage.parallel.decorate import parallel
 from sage.parallel.parallelism import Parallelism
 from sage.manifolds.differentiable.affine_connection import AffineConnection
 from sage.manifolds.differentiable.vectorframe import CoordFrame
+
 
 class LeviCivitaConnection(AffineConnection):
     r"""

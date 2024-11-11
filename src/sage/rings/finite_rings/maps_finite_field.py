@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.rings.finite_rings
 """
 Structure maps for finite fields
@@ -20,6 +21,7 @@ AUTHORS:
 #*****************************************************************************
 
 from sage.categories.morphism import Morphism
+
 
 class FiniteFieldVectorSpaceIsomorphism(Morphism):
     """
@@ -69,6 +71,7 @@ class FiniteFieldVectorSpaceIsomorphism(Morphism):
             True
         """
         return True
+
 
 class MorphismVectorSpaceToFiniteField(FiniteFieldVectorSpaceIsomorphism):
     """
@@ -129,6 +132,7 @@ class MorphismVectorSpaceToFiniteField(FiniteFieldVectorSpaceIsomorphism):
             for i in range(m):
                 w[i*n:(i+1)*n] = v[i]._vector_()
             return E(w * self._C)
+
 
 class MorphismFiniteFieldToVectorSpace(FiniteFieldVectorSpaceIsomorphism):
     """

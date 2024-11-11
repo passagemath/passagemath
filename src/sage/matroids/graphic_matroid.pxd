@@ -1,9 +1,10 @@
+# sage_setup: distribution = sagemath-modules
 from sage.matroids.matroid cimport Matroid
-from sage.graphs.generic_graph_pyx cimport GenericGraph_pyx
+
 
 cdef class GraphicMatroid(Matroid):
     cdef frozenset _groundset
-    cdef readonly GenericGraph_pyx _G
+    cdef readonly object _G
     cdef dict _vertex_map
     cdef dict _groundset_edge_map
     cpdef frozenset groundset(self)
@@ -21,7 +22,7 @@ cdef class GraphicMatroid(Matroid):
     cpdef bint _is_closed(self, frozenset X) noexcept
     cpdef _is_isomorphic(self, other, certificate=*)
     cpdef _isomorphism(self, other)
-    cpdef bint is_valid(self) noexcept
+    cpdef is_valid(self, certificate=*)
     cpdef bint is_graphic(self) noexcept
     cpdef bint is_regular(self) noexcept
     cpdef graph(self)

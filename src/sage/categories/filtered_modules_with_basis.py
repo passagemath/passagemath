@@ -1182,6 +1182,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
                 EXAMPLES::
 
+                    sage: # needs sage.geometry.polyhedron
                     sage: OS = hyperplane_arrangements.braid(3).orlik_solomon_algebra(QQ)
                     sage: OS.hilbert_series()
                     2*t^2 + 3*t + 1
@@ -1197,7 +1198,6 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
                 from collections import defaultdict
                 from sage.rings.integer_ring import ZZ
                 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
-                R = self.base_ring()
                 PR = PolynomialRing(ZZ, 't')
                 dims = defaultdict(ZZ)
                 for b in self.basis():

@@ -318,9 +318,10 @@ class Feature(TrivialUniqueRepresentation):
             sage: from sage.features.sagemath import sage__rings__function_field
             sage: sage__rings__function_field().joined_features()
             [Feature('sage.rings.function_field.function_field_polymod'),
-            Feature('sage.libs.singular'),
-            Feature('sage.libs.singular.singular'),
-            Feature('sage.interfaces.singular')]
+             Feature('sage.libs.singular'),
+             Feature('sage.libs.singular.singular'),
+             Feature('sage.interfaces.singular'),
+             Feature('sage.rings.polynomial.plural')]
             sage: from sage.features.interfaces import Mathematica
             sage: Mathematica().joined_features()
             []
@@ -467,7 +468,7 @@ class FeatureNotPresentError(RuntimeError):
         return "\n".join(lines)
 
 
-class FeatureTestResult():
+class FeatureTestResult:
     r"""
     The result of a :meth:`Feature.is_present` call.
 
@@ -741,6 +742,17 @@ class Executable(FileFeature):
             sage.features.FeatureNotPresentError: does-not-exist is not available.
             Executable 'does-not-exist-xxxxyxyyxyy' not found on PATH.
         """
+        try:
+            # populated in PyPI wheels by pkgs/sagemath-*/repair_wheel.py
+            import sage_wheels
+        except ImportError:
+            pass
+        else:
+            search_path = ':'.join(os.path.join(p, 'bin') for p in sage_wheels.__path__)
+            path = shutil.which(self.executable, path=search_path)
+            if path is not None:
+                return path
+
         if SAGE_LOCAL:
             if Path(SAGE_VENV).resolve() != Path(SAGE_LOCAL).resolve():
                 # As sage.env currently gives SAGE_LOCAL a fallback value from SAGE_VENV,

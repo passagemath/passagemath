@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Dynamical systems on projective schemes
 
@@ -116,7 +117,10 @@ lazy_import('sage.rings.number_field.number_field_ideal', 'NumberFieldFractional
 lazy_import('sage.rings.padics.factory', 'Qp')
 lazy_import('sage.rings.qqbar', 'number_field_elements_from_algebraics')
 
-from sage.libs.pari.all import PariError
+try:
+    from sage.libs.pari.all import PariError
+except ImportError:
+    PariError = ()
 
 
 class DynamicalSystem_projective(SchemeMorphism_polynomial_projective_space,
@@ -7026,6 +7030,7 @@ class DynamicalSystem_projective(SchemeMorphism_polynomial_projective_space,
             return (M, E)
         return E
 
+
 class DynamicalSystem_projective_field(DynamicalSystem_projective,
                                        SchemeMorphism_polynomial_projective_space_field):
 
@@ -9116,6 +9121,7 @@ class DynamicalSystem_projective_field(DynamicalSystem_projective,
                 return False, None
         else:
             return Npoly.derivative(z) == (z - N_aff[0]).denominator()
+
 
 class DynamicalSystem_projective_finite_field(DynamicalSystem_projective_field,
                                               SchemeMorphism_polynomial_projective_space_finite_field):

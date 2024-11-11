@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Hasse diagrams of posets
 
@@ -2426,7 +2427,7 @@ class HasseDiagram(DiGraph):
 
             sage: P = posets.ChainPoset(3)
             sage: H = P._hasse_diagram
-            sage: t = H.chain_polynomial(); t
+            sage: t = H.chain_polynomial(); t                                           # needs sage.libs.flint
             q^3 + 3*q^2 + 3*q + 1
         """
         return chain_poly(self._leq_storage)._sage_('q')  # noqa: F821

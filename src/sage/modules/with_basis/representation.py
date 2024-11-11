@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.groups
 """
 Representations of a semigroup
@@ -685,8 +686,8 @@ class Representation_abstract:
             5
         """
         if not is_closed and gens:
-            R = self.base_ring()
-            repr_mats = [self.representation_matrix(g) for g in self._semigroup.gens()]
+            repr_mats = [self.representation_matrix(g)
+                         for g in self._semigroup.gens()]
             amb_dim = self.dimension()
             SM = matrix([v._vector_() for v in gens])
             SM.echelonize()
@@ -2892,7 +2893,6 @@ class SchurFunctorRepresentation(Subrepresentation):
             keys = list(V.basis().keys())
 
         ambient = tensor([V]*d)
-        I = ambient.indices()
         cla = SymmetricGroupAlgebra(R, SymmetricGroup(d)).young_symmetrizer(shape)
         mc = cla.monomial_coefficients(copy=False)
         gens = [ambient.sum_of_terms((tuple([k[i-1] for i in p.tuple()]), coeff)

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-frobby
 r"""
 Interface to Frobby for fast computations on monomial ideals.
 
@@ -25,6 +26,7 @@ from subprocess import Popen, PIPE
 from sage.misc.misc_c import prod
 
 from sage.cpython.string import bytes_to_str, str_to_bytes
+from sage.features.frobby import Frobby as frobby_executable
 
 
 class Frobby:
@@ -65,7 +67,7 @@ class Frobby:
 
         - Bjarke Hammersholt Roune (2008-04-27)
         """
-        command = ['frobby'] + action.split()
+        command = [frobby_executable().absolute_filename()] + action.split()
         for option in options:
             command += ('-' + option.strip()).split()
 

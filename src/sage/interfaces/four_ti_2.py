@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-latte-4ti2
+# sage.doctest: optional - 4ti2
 r"""
 Interface to 4ti2
 
@@ -41,7 +43,7 @@ from sage.features.four_ti_2 import FourTi2Executable
 import os
 
 
-class FourTi2():
+class FourTi2:
     r"""
     An interface to the program 4ti2.
 

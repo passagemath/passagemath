@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.libs.singular
 r"""
 Projective curves
@@ -2521,7 +2522,6 @@ class IntegralProjectiveCurve(ProjectiveCurve_field):
             sage: C.function(C._map_from_function_field(f)) == f
             True
         """
-        F = self._function_field
         S = self.ambient_space().coordinate_ring()
         phi = self._open_affine._nonsingular_model[2]
         i = self._open_affine_index

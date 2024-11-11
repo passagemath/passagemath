@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Term orders
 
@@ -538,6 +539,7 @@ description_mapping = {
     'matrix'        : matrix_description,
     'block'         : block_description,
 }
+
 
 class TermOrder(SageObject):
     """

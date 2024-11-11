@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Curves in Manifolds
 
@@ -36,6 +37,7 @@ from sage.misc.latex import latex
 from sage.misc.decorators import options
 from sage.manifolds.point import ManifoldPoint
 from sage.manifolds.differentiable.diff_map import DiffMap
+
 
 class DifferentiableCurve(DiffMap):
     r"""
@@ -204,7 +206,7 @@ class DifferentiableCurve(DiffMap):
 
     Plot of the curve and its tangent vector field::
 
-        sage: show(c.plot(thickness=2, aspect_ratio=1) +
+        sage: show(c.plot(thickness=2, aspect_ratio=1) +                                # needs sage.plot
         ....:      v.plot(chart=X, number_values=17, scale=0.5))
 
     .. PLOT::
@@ -755,7 +757,7 @@ class DifferentiableCurve(DiffMap):
             sage: X.<x,y> = R2.chart()
             sage: R.<t> = manifolds.RealLine()
             sage: c = R2.curve([sin(t), sin(2*t)/2], (t, 0, 2*pi), name='c')
-            sage: c.plot()  # 2D plot
+            sage: c.plot()  # 2D plot                                                   # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -769,7 +771,7 @@ class DifferentiableCurve(DiffMap):
 
         Plot for a subinterval of the curve's domain::
 
-            sage: c.plot(prange=(0,pi))
+            sage: c.plot(prange=(0,pi))                                                 # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -783,7 +785,7 @@ class DifferentiableCurve(DiffMap):
 
         Plot with various options::
 
-            sage: c.plot(color='green', style=':', thickness=3, aspect_ratio=1)
+            sage: c.plot(color='green', style=':', thickness=3, aspect_ratio=1)         # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -801,7 +803,7 @@ class DifferentiableCurve(DiffMap):
 
             sage: E.<r,ph> = EuclideanSpace(coordinates='polar')
             sage: c = E.curve((1 + cos(ph), ph), (ph, 0, 2*pi))
-            sage: c.plot(chart=E.cartesian_coordinates(), aspect_ratio=1)
+            sage: c.plot(chart=E.cartesian_coordinates(), aspect_ratio=1)               # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -826,10 +828,11 @@ class DifferentiableCurve(DiffMap):
             F: S^2 → R^3
             on U: (th, ph) ↦ (x, y, z) = (cos(ph)*sin(th), sin(ph)*sin(th), cos(th))
             sage: c = S2.curve([2*atan(exp(-t/10)), t], (t, -oo, +oo), name='c')
-            sage: graph_c = c.plot(mapping=F, max_range=40,
+            sage: graph_c = c.plot(mapping=F, max_range=40,                             # needs sage.plot
             ....:                  plot_points=200, thickness=2, label_axes=False)  # 3D plot
-            sage: graph_S2 = XS.plot(X3, mapping=F, number_values=11, color='black') # plot of the sphere
-            sage: show(graph_c + graph_S2) # the loxodrome + the sphere
+            sage: graph_S2 = XS.plot(X3, mapping=F,              # plot of the sphere   # needs sage.plot
+            ....:                    number_values=11, color='black')
+            sage: show(graph_c + graph_S2)  # the loxodrome + the sphere                # needs sage.plot
 
         .. PLOT::
 
@@ -857,7 +860,7 @@ class DifferentiableCurve(DiffMap):
         To make a plot, we set specific values for ``a`` and ``b`` by means
         of the Python dictionary ``parameters``::
 
-            sage: c.plot(parameters={a: 2, b: -3}, aspect_ratio=1)
+            sage: c.plot(parameters={a: 2, b: -3}, aspect_ratio=1)                      # needs sage.plot
             Graphics object consisting of 1 graphics primitive
 
         .. PLOT::
@@ -973,6 +976,7 @@ class DifferentiableCurve(DiffMap):
 
         TESTS::
 
+            sage: # needs sage.plot
             sage: M = Manifold(2, 'R^2')
             sage: X.<x,y> = M.chart()
             sage: R.<t> = manifolds.RealLine()

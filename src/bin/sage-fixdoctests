@@ -102,7 +102,10 @@ def default_venv_environment_from_distribution(distribution):
         if extras:
             tox_env_name += '-' + extras.replace(',', '-')
         default_venv = os.path.join(SAGE_ROOT, 'pkgs', plain_distribution, '.tox', tox_env_name)
-        default_environment = 'sage.all__' + plain_distribution.replace('-', '_')
+        if plain_distribution == 'sagemath-standard-no-symbolics':
+            default_environment = 'sage.all'
+        else:
+            default_environment = 'sage.all__' + plain_distribution.replace('-', '_')
     else:
         default_venv = ''
         default_environment = runtest_default_environment
@@ -588,9 +591,23 @@ if __name__ == "__main__":
 
     if args.distribution == ['all']:
         args.distribution = ['sagemath-categories',
+                             'sagemath-modules',
+                             'sagemath-pari',
+                             'sagemath-graphs', 'sagemath-graphs[modules]', 'sagemath-graphs[modules,pari]',
+                             'sagemath-groups',
+                             'sagemath-combinat', 'sagemath-combinat[graphs]', 'sagemath-combinat[modules]',
+                             'sagemath-polyhedra', 'sagemath-polyhedra[standard]',
+                             'sagemath-schemes', 'sagemath-schemes[ntl]', 'sagemath-schemes[pari]',
+                             'sagemath-symbolics',
                              '']  # monolithic distribution
         args.update_failures_distribution = args.distribution + ['sagemath-repl',    # not included above because it knows too little and complains too much
-                                                                 ]
+                                                                 'sagemath-bliss',
+                                                                 'sagemath-coxeter3',
+                                                                 'sagemath-flint',
+                                                                 'sagemath-glpk',
+                                                                 'sagemath-linbox',
+                                                                 'sagemath-plot',
+                                                                 'sagemath-standard-no-symbolics']
 
         args.ignore_bad_distributions = True
 

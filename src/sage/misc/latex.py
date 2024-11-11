@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 LaTeX printing support
 
@@ -560,6 +561,11 @@ def latex_extra_preamble():
 
         sage: from sage.misc.latex import latex_extra_preamble
         sage: print(latex_extra_preamble())
+        <BLANKLINE>
+        \newcommand{\ZZ}{\Bold{Z}}
+        \newcommand{\NN}{\Bold{N}}
+        ...
+        sage: print(latex_extra_preamble())                                             # needs sage.all
         <BLANKLINE>
         \newcommand{\ZZ}{\Bold{Z}}
         \newcommand{\NN}{\Bold{N}}

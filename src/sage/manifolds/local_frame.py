@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Local Frames
 
@@ -407,6 +408,7 @@ class LocalCoFrame(FreeModuleCoBasis):
                                                     self._latex_name)
 
 #******************************************************************************
+
 
 class LocalFrame(FreeModuleBasis):
     r"""
@@ -1232,6 +1234,7 @@ class LocalFrame(FreeModuleBasis):
 
 #******************************************************************************
 
+
 class TrivializationCoFrame(LocalCoFrame):
     r"""
     Trivialization coframe on a vector bundle.
@@ -1363,6 +1366,7 @@ class TrivializationCoFrame(LocalCoFrame):
         return "Trivialization coframe " + self._name
 
 #******************************************************************************
+
 
 class TrivializationFrame(LocalFrame):
     r"""

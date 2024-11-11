@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Dense matrices over multivariate polynomials over fields.
 
@@ -82,6 +83,7 @@ cdef class Matrix_laurent_mpolynomial_dense(Matrix_generic_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y,z> = LaurentPolynomialRing(QQ)
             sage: M = matrix(R, [[2*x^-1-z, 0, y-z^-2, 0], [0, z - y^-1, z - x, 0],[z - y, x^-2 - y, 0, z]])
             sage: M

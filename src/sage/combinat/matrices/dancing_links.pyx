@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # distutils: language = c++
 """
 Dancing Links internal pyx code
@@ -904,7 +905,7 @@ cdef class dancing_linksWrapper:
             sage: from sage.combinat.matrices.dancing_links import dlx_solver
             sage: rows = [[0,1,2], [0,2], [1], [3]]
             sage: x = dlx_solver(rows)
-            sage: s = x.to_sat_solver()                                                 # needs sage.sat
+            sage: s = x.to_sat_solver()                                                 # needs sage.numerical.mip sage.sat
 
         Using some optional SAT solvers::
 
@@ -960,7 +961,7 @@ cdef class dancing_linksWrapper:
             sage: rows = [[0,1,2], [3,4,5], [0,1], [2,3,4,5], [0], [1,2,3,4,5]]
             sage: d = dlx_solver(rows)
             sage: solutions = [[0,1], [2,3], [4,5]]
-            sage: d.one_solution_using_sat_solver() in solutions                        # needs sage.sat
+            sage: d.one_solution_using_sat_solver() in solutions                        # needs sage.numerical.mip sage.sat
             True
 
         Using optional solvers::

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.libs.gap sage.libs.pari sage.libs.singular sage.symbolic
 """
 Common Interface Functionality through Pexpect
@@ -85,7 +86,7 @@ BAD_SESSION = -2
 # "return", "break", or "continue", raising an exception, ...)
 
 
-class gc_disabled():
+class gc_disabled:
     """
     This is a "with" statement context manager. Garbage collection is
     disabled within its scope. Nested usage is properly handled.

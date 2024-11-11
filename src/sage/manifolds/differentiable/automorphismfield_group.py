@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Group of Tangent-Space Automorphism Fields
 
@@ -47,6 +48,7 @@ from sage.manifolds.differentiable.vectorfield_module import (VectorFieldModule,
                                                               VectorFieldFreeModule)
 from sage.manifolds.differentiable.automorphismfield import (AutomorphismField,
                                                              AutomorphismFieldParal)
+
 
 class AutomorphismFieldGroup(UniqueRepresentation, Parent):
     r"""

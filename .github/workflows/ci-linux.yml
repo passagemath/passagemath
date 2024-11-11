@@ -24,11 +24,6 @@ on:
   workflow_dispatch:
     # Allow to run manually
 
-env:
-  TARGETS_PRE: all-sage-local
-  TARGETS: build doc-html
-  TARGETS_OPTIONAL: ptest
-
 permissions:
   packages: write
 
@@ -43,8 +38,8 @@ jobs:
       docker_targets: "with-system-packages configured with-targets-pre with-targets"
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
-      targets: build doc-html
-      targets_optional: ptest
+      targets: build
+      targets_optional: doc-html ptest-nodoc
       tox_system_factors: >-
         ["ubuntu-jammy"]
       tox_packages_factors: >-
@@ -63,14 +58,14 @@ jobs:
       docker_targets: "with-system-packages configured with-targets-pre with-targets with-targets-optional"
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
-      targets: build doc-html
-      targets_optional: ptest
+      targets: build
+      targets_optional: doc-html ptest-nodoc
       tox_packages_factors: >-
           ["standard"]
       docker_push_repository: ghcr.io/${{ github.repository }}/
       # Make sure that all "standard" jobs can start simultaneously,
       # so that runners are available by the time that "default" starts.
-      max_parallel: 50
+      max_parallel: 8
 
   standard-constraints_pkgs-norequirements:
     if: ${{ success() || failure() }}
@@ -86,7 +81,7 @@ jobs:
       targets_pre: all-sage-local python3-ensure tox-ensure sagelib-tox-sagepython-constraints_pkgs-norequirements
       tox_packages_factors: >-
           ["standard"]
-      max_parallel: 15
+      max_parallel: 8
 
   standard-sitepackages:
     if: ${{ success() || failure() }}
@@ -100,8 +95,8 @@ jobs:
       from_docker_target: "with-targets-pre"
       docker_targets: "with-targets with-targets-optional"
       # FIXME: duplicated from env.TARGETS
-      targets: build doc-html
-      targets_optional: ptest
+      targets: build
+      targets_optional: doc-html ptest-nodoc
       tox_packages_factors: >-
         ["standard-sitepackages"]
       # Only test systems with a usable system python (>= 3.9)
@@ -124,7 +119,7 @@ jobs:
          "opensuse-tumbleweed-python3.10",
          "opensuse-tumbleweed"]
       docker_push_repository: ghcr.io/${{ github.repository }}/
-      max_parallel: 8
+      max_parallel: 3
 
   minimal:
     if: ${{ success() || failure() }}
@@ -135,14 +130,14 @@ jobs:
       docker_targets: "with-system-packages configured with-targets-pre with-targets with-targets-optional"
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
-      targets: build doc-html
-      targets_optional: ptest
+      targets: build
+      targets_optional: doc-html ptest-nodoc
       tox_packages_factors: >-
           ["minimal"]
       docker_push_repository: ghcr.io/${{ github.repository }}/
       # Reduced from 30 because it may run in parallel with 'standard' and 'standard-sitepackages' above.
       # Calibrated for clogging the job pipeline until the "default" job has finished.
-      max_parallel: 24
+      max_parallel: 4
 
   maximal-pre:
     if: ${{ success() || failure() }}
@@ -157,6 +152,7 @@ jobs:
       tox_packages_factors: >-
           ["maximal"]
       docker_push_repository: ghcr.io/${{ github.repository }}/
+      max_parallel: 4
 
   optional:
     if: ${{ success() || failure() }}
@@ -172,6 +168,7 @@ jobs:
       docker_targets: "with-targets-optional"
       # We remove packages starting with _, in particular package _develop
       targets_optional: '$(echo $(export PATH=build/bin:$PATH && sage-package list :optional: --has-file "spkg-install.in|spkg-install|requirements.txt" --no-file "huge|has_nonfree_dependencies" | grep -v sagemath_doc | grep -v ^_))'
+      max_parallel: 4
 
   experimental:
     if: ${{ success() || failure() }}
@@ -186,3 +183,4 @@ jobs:
           ["maximal"]
       docker_targets: "with-targets-optional"
       targets_optional: '$(echo $(export PATH=build/bin:$PATH && sage-package list :experimental: --has-file "spkg-install.in|spkg-install|requirements.txt" --no-file "huge|has_nonfree_dependencies" | grep -v sagemath_doc))'
+      max_parallel: 4

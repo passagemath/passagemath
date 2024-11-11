@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Base class for polyhedra: Initialization and access to Vrepresentation and Hrepresentation
 """
@@ -34,6 +35,7 @@ from sage.misc.cachefunc import cached_method
 from sage.misc.abstract_method import abstract_method
 from sage.structure.element import Element
 import sage.geometry.abc
+
 
 class Polyhedron_base0(Element, sage.geometry.abc.Polyhedron):
     """

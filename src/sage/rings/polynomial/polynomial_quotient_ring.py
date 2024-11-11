@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.libs.pari
 """
 Quotients of Univariate Polynomial Rings
@@ -261,6 +262,7 @@ class PolynomialQuotientRingFactory(UniqueFactory):
 
 
 PolynomialQuotientRing = PolynomialQuotientRingFactory("PolynomialQuotientRing")
+
 
 def is_PolynomialQuotientRing(x):
     from sage.misc.superseded import deprecation

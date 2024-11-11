@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 # sage.doctest: needs sage.geometry.polyhedron sage.graphs
 r"""
 Fano toric varieties
@@ -532,9 +533,8 @@ def CPRFanoToricVariety(Delta=None,
             raise ValueError("the origin (point #%d) cannot be used for a "
                 "coordinate!\nGot: %s"
                 % (Delta_polar.origin(), coordinate_points))
-    point_to_ray = {}
-    for n, point in enumerate(coordinate_points):
-        point_to_ray[point] = n
+    point_to_ray = {point: n
+                    for n, point in enumerate(coordinate_points)}
     # This can be simplified if LatticePolytopeClass is adjusted.
     rays = [Delta_polar.point(p) for p in coordinate_points]
     # Check/normalize charts and construct the fan based on them.
@@ -546,8 +546,10 @@ def CPRFanoToricVariety(Delta=None,
         # single facet of Delta_polar, otherwise they do not form a
         # subdivision of the face fan of Delta_polar
         if check:
-            facet_sets = [frozenset(facet.ambient_point_indices())
-                          for facet in Delta_polar.facets()]
+            ambient_points = Delta_polar.ambient().points()
+            facet_sets = [frozenset(Pindex for Pindex, point in enumerate(ambient_points)
+                                    if normal*point + Delta_polar.facet_constant(Hindex) == 0)
+                          for Hindex, normal in enumerate(Delta_polar.facet_normals())]
             for chart in charts:
                 is_bad = True
                 for fset in facet_sets:
@@ -1229,9 +1231,8 @@ class CPRFanoToricVariety_field(ToricVariety_field):
                              "subdivision!" % Delta_polar.origin())
         if new_points:
             coordinate_points = coordinate_points + new_points
-            point_to_ray = {}
-            for n, point in enumerate(coordinate_points):
-                point_to_ray[point] = n
+            point_to_ray = {point: n
+                            for n, point in enumerate(coordinate_points)}
         else:
             point_to_ray = self._point_to_ray
         new_rays = [Delta_polar.point(point) for point in new_points]
@@ -1585,7 +1586,7 @@ def add_variables(field, variables):
     if isinstance(field, FractionField_generic):
         # Q(a) ---> Q(a, b) rather than Q(a)(b)
         R = field.ring()
-        if isinstance(R, PolynomialRing_general) or isinstance(R, MPolynomialRing_base):
+        if isinstance(R, (PolynomialRing_general, MPolynomialRing_base)):
             new_variables = list(R.variable_names())
             for v in variables:
                 if v not in new_variables:

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from sage.matroids.matroid cimport Matroid
 from sage.matroids.set_system cimport SetSystem
 
@@ -34,4 +35,4 @@ cdef class CircuitsMatroid(Matroid):
     cpdef relabel(self, mapping)
 
     # verification
-    cpdef bint is_valid(self) noexcept
+    cpdef is_valid(self, certificate=*)

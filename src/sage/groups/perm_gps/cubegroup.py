@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 r"""
 Rubik's cube group functions
 
@@ -127,6 +128,7 @@ globals().update(named_colors)
 
 #########################################################
 # written by Tom Boothby, placed in the public domain
+
 
 def xproj(x, y, z, r):
     r"""
@@ -346,6 +348,7 @@ singmaster_indices = {
     31: "rd",
     32: "rbd",
 }
+
 
 def index2singmaster(facet):
     """

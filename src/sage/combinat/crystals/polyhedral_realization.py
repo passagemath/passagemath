@@ -1,4 +1,5 @@
-# sage.doctest: needs sage.combinat sage.modules
+# sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
 Polyhedral Realization of `B(\infty)`
 """

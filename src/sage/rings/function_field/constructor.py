@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Factories to construct function fields
 
@@ -38,6 +39,7 @@ AUTHORS:
 # ****************************************************************************
 
 from sage.structure.factory import UniqueFactory
+
 
 class FunctionFieldFactory(UniqueFactory):
     """

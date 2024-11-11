@@ -1,5 +1,5 @@
 ========================================================================================
- Sage: Open Source Mathematics Software: Matrices over small finite fields with meataxe
+ passagemath: Matrices over small finite fields with meataxe
 ========================================================================================
 
 About SageMath

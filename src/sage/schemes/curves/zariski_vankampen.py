@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 # sage.doctest: needs sage.geometry.polyhedron sage.graphs sage.groups sage.rings.number_field
 r"""
 Zariski-Van Kampen method implementation
@@ -1135,7 +1136,7 @@ def vertical_lines_in_braidmon(pols) -> list:
     OUTPUT:
 
     A list with the indices of the vertical lines in ``flist`` if there is
-    no other componnet with vertical asymptote; otherwise it returns an empty
+    no other component with vertical asymptote; otherwise it returns an empty
     list.
 
     EXAMPLES::

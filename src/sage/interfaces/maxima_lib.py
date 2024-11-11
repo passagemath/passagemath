@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Library interface to Maxima
 
@@ -124,6 +125,11 @@ from .maxima_abstract import (MaximaAbstract, MaximaAbstractFunction,
 from sage.misc.instancedoc import instancedoc
 from sage.env import MAXIMA_FAS
 
+import sage.functions.error
+import sage.functions.gamma
+import sage.functions.hypergeometric
+import sage.functions.log
+import sage.functions.other
 import sage.rings.real_double
 import sage.symbolic.expression
 import sage.symbolic.integration.integral
@@ -228,7 +234,10 @@ init_code = ['besselexpand : true', 'display2d : false', 'domain : complex', 'ke
 # See trac # 6818.
 init_code.append('nolabels : true')
 for l in init_code:
-    ecl_eval("#$%s$" % l)
+    try:
+        ecl_eval("#$%s$" % l)
+    except RuntimeError:
+        raise RuntimeError(f'error evaluating init code: {l}')
 # To get more debug information uncomment the next line
 # should allow to do this through a method
 # ecl_eval("(setf *standard-output* original-standard-output)")
@@ -1244,8 +1253,8 @@ sage_op_dict = {
     sage.functions.other.conjugate: "$CONJUGATE",
 }
 # we compile the dictionary
-sage_op_dict = dict([(k, EclObject(sage_op_dict[k])) for k in sage_op_dict])
-max_op_dict = dict([(sage_op_dict[k], k) for k in sage_op_dict])
+sage_op_dict = {k: EclObject(sage_op_dict[k]) for k in sage_op_dict}
+max_op_dict = {sage_op_dict[k]: k for k in sage_op_dict}
 
 
 # Here we correct the dictionaries for some simple operators
@@ -1437,7 +1446,7 @@ def max_at_to_sage(expr):
         subsvalues = {v.lhs(): v.rhs() for v in max_to_sr(subsarg)}
     else:
         v = max_to_sr(subsarg)
-        subsvalues = dict([(v.lhs(), v.rhs())])
+        subsvalues = {v.lhs(): v.rhs()}
     return SR(arg).subs(subsvalues)
 
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Polynomial Interfaces to Singular
 
@@ -69,6 +70,9 @@ def _do_singular_init_(singular, base_ring, char, _vars, order):
          //        block   2 : ordering C,
          None)
     """
+    if singular is None:
+        from sage.interfaces.singular import singular
+
     make_ring = lambda s: singular.ring(s, _vars, order=order)
 
     if base_ring is ZZ:
@@ -257,7 +261,7 @@ class PolynomialRing_singular_repr:
             //                  : names    x
             //        block   2 : ordering C
 
-            sage: R = Frac(ZZ['a,b'])['x,y']
+            sage: R = Frac(ZZ['a,b'])['x,y']                                            # needs sage.libs.singular
             sage: singular(R)                                                           # needs sage.libs.singular
             polynomial ring, over a field, global ordering
             //   coefficients: QQ(a, b)
@@ -330,8 +334,10 @@ class PolynomialRing_singular_repr:
             from sage.interfaces.singular import singular
         try:
             R = self.__singular
-            if R.parent() is not singular:
+            if singular is not None and R.parent() is not singular:
                 raise ValueError
+            elif singular is None:
+                from sage.interfaces.singular import singular
             R._check_valid()
             if self.base_ring() is ZZ or self.base_ring().is_prime_field():
                 return R

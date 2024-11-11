@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Sections
 
@@ -24,6 +25,7 @@ from sage.tensor.modules.free_module_element import FiniteRankFreeModuleElement
 from sage.tensor.modules.tensor_with_indices import TensorWithIndices
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
+
 
 class Section(ModuleElementWithMutability):
     r"""
@@ -2249,6 +2251,7 @@ class Section(ModuleElementWithMutability):
         super().set_immutable()
 
 #******************************************************************************
+
 
 class TrivialSection(FiniteRankFreeModuleElement, Section):
     r"""

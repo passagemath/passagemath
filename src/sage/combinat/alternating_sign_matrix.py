@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
 Alternating Sign Matrices
@@ -262,13 +263,12 @@ class AlternatingSignMatrix(Element,
             True
         """
         n = self._matrix.nrows()
-        triangle = [None] * n
-        prev = zero_vector(ZZ, n)
+        triangle = [0] * n
+        add_row = zero_vector(ZZ, n)
         for j, row in enumerate(self._matrix):
-            add_row = row + prev
+            add_row = row + add_row
             triangle[n - 1 - j] = [i + 1 for i in range(n - 1, -1, -1)
                                    if add_row[i] == 1]
-            prev = add_row
         return MonotoneTriangles(n)(triangle)
 
     @combinatorial_map(name='rotate counterclockwise')
@@ -1040,8 +1040,8 @@ class AlternatingSignMatrices(UniqueRepresentation, Parent):
 
     Notably, this implementation allows to make a lattice of it::
 
-        sage: L = A.lattice()
-        sage: L
+        sage: # needs sage.graphs
+        sage: L = A.lattice(); L
         Finite lattice containing 7 elements
         sage: L.category()
         Category of facade finite enumerated lattice posets
@@ -1486,6 +1486,7 @@ class AlternatingSignMatrices(UniqueRepresentation, Parent):
         Proof of the lattice property for alternating sign matrices of
         size 3::
 
+            sage: # needs sage.graphs
             sage: A = AlternatingSignMatrices(3)
             sage: P = Poset(A._lattice_initializer())
             sage: P.is_lattice()
@@ -1556,8 +1557,7 @@ class AlternatingSignMatrices(UniqueRepresentation, Parent):
         EXAMPLES::
 
             sage: A = AlternatingSignMatrices(3)
-            sage: L = A.lattice()
-            sage: L
+            sage: L = A.lattice(); L                                                    # needs sage.graphs
             Finite lattice containing 7 elements
         """
         return LatticePoset(self._lattice_initializer(), cover_relations=True,
@@ -1645,7 +1645,7 @@ class MonotoneTriangles(GelfandTsetlinPatternsTopRow):
 
     The monotone triangles are a lattice::
 
-        sage: M.lattice()
+        sage: M.lattice()                                                               # needs sage.graphs
         Finite lattice containing 7 elements
 
     Monotone triangles can be converted to alternating sign matrices
@@ -1718,6 +1718,7 @@ class MonotoneTriangles(GelfandTsetlinPatternsTopRow):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = MonotoneTriangles(3)
             sage: P = Poset(M._lattice_initializer())
             sage: P.is_lattice()
@@ -1756,8 +1757,7 @@ class MonotoneTriangles(GelfandTsetlinPatternsTopRow):
         EXAMPLES::
 
             sage: M = MonotoneTriangles(3)
-            sage: P = M.lattice()
-            sage: P
+            sage: P = M.lattice(); P                                                    # needs sage.graphs
             Finite lattice containing 7 elements
         """
         return LatticePoset(self._lattice_initializer(), cover_relations=True,

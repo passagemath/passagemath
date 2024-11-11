@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-polyhedra
+ */
 #include <algorithm>
 #include "triangulations.h"
 

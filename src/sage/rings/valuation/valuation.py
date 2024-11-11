@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 r"""
 Discrete valuations
 
@@ -987,7 +988,7 @@ class DiscreteValuation(DiscretePseudoValuation):
             sage: S.<x> = R[]
             sage: f = (x^6+2)^25 + 5
             sage: v = R.valuation()
-            sage: v.montes_factorization(f, assume_squarefree=True, required_precision=0)
+            sage: v.montes_factorization(f, assume_squarefree=True, required_precision=0)   # needs sage.geometry.polyhedron
             (x^50 + 2*5*x^45 + 5*x^40 + 5*x^30 + 2*x^25 + 3*5*x^20 + 2*5*x^10 + 2*5*x^5 + 5*x + 3 + 5) * (x^50 + 3*5*x^45 + 5*x^40 + 5*x^30 + (3 + 4*5)*x^25 + 3*5*x^20 + 2*5*x^10 + 3*5*x^5 + 4*5*x + 3 + 5) * (x^50 + 3*5*x^40 + 3*5*x^30 + 4*5*x^20 + 5*x^10 + 3 + 5)
 
         In this case, ``f`` factors into degrees 1, 2, and 5 over a totally ramified extension::
@@ -999,7 +1000,7 @@ class DiscreteValuation(DiscretePseudoValuation):
             sage: S.<x> = R[]
             sage: f = (x^3 + 5)*(x^5 + w) + 625
             sage: v = R.valuation()
-            sage: v.montes_factorization(f, assume_squarefree=True, required_precision=0)           # needs sage.libs.flint
+            sage: v.montes_factorization(f, assume_squarefree=True, required_precision=0)           # needs sage.geometry.polyhedron sage.libs.flint
             ((1 + O(w^60))*x + 4*w + O(w^61)) * ((1 + O(w^60))*x^2 + (w + O(w^61))*x + w^2 + O(w^62)) * ((1 + O(w^60))*x^5 + w + O(w^61))
 
         REFERENCES:
@@ -1043,7 +1044,7 @@ class DiscreteValuation(DiscretePseudoValuation):
         return super()._ge_(other)
 
 
-class MacLaneApproximantNode():
+class MacLaneApproximantNode:
     r"""
     A node in the tree computed by :meth:`DiscreteValuation.mac_lane_approximants`.
 

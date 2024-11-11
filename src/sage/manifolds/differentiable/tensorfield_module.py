@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Tensor Field Modules
 
@@ -586,6 +587,7 @@ class TensorFieldModule(UniqueRepresentation, ReflexiveModule_tensor):
         return resu
 
 #***********************************************************************
+
 
 class TensorFieldFreeModule(TensorFreeModule):
     r"""

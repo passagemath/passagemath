@@ -16,7 +16,7 @@ Features for testing the presence of ``latte_int``
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from . import Executable
+from . import Executable, PythonModule
 from .join_feature import JoinFeature
 
 
@@ -77,8 +77,11 @@ class Latte(JoinFeature):
             True
         """
         JoinFeature.__init__(self, 'latte_int',
-                             (Latte_count(), Latte_integrate()),
-                             description='LattE')
+                             (Latte_count(),
+                              Latte_integrate(),
+                              PythonModule('sage.interfaces.latte')),
+                             description='LattE',
+                             spkg='sagemath_latte_4ti2')
 
 
 def all_features():

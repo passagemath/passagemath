@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Coordinate Charts on Differentiable Manifolds
 
@@ -1068,6 +1069,7 @@ class RealDiffChart(DiffChart, RealChart):
         return self._dom_restrict[subset]
 
 #******************************************************************************
+
 
 class DiffCoordChange(CoordChange):
     r"""

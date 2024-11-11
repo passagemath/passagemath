@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-plot
 # sage.doctest: needs sage.symbolic
 r"""
 Plotting functions
@@ -319,7 +320,9 @@ class _Coordinates:
         from sage.structure.element import Expression
         from sage.rings.real_mpfr import RealNumber
         from sage.rings.integer import Integer
-        if params is not None and (isinstance(func, Expression) or isinstance(func, RealNumber) or isinstance(func, Integer)):
+        if params is not None and isinstance(func, (Expression,
+                                                    RealNumber,
+                                                    Integer)):
             return self.transform(**{
                 self.dep_var: func,
                 self.indep_vars[0]: params[0],

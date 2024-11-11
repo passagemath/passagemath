@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-repl
 r"""
 Some tools for developers
 
@@ -147,6 +148,8 @@ def load_submodules(module=None, exclude_pattern=None):
     EXAMPLES::
 
         sage: sage.misc.dev_tools.load_submodules(sage.combinat)
+        load sage.combinat.SJT... succeeded
+        load sage.combinat.affine_permutation... succeeded
         load sage.combinat.algebraic_combinatorics... succeeded
         ...
         load sage.combinat.words.suffix_trees... succeeded
@@ -166,6 +169,7 @@ def load_submodules(module=None, exclude_pattern=None):
         load sage.geometry.riemannian_manifolds.surface3d_generators... succeeded
 
         sage: sage.misc.dev_tools.load_submodules(sage.geometry)
+        load sage.geometry.lattice_polytope... succeeded
         load sage.geometry.polyhedron.lattice_euclidean_group_element... succeeded
         load sage.geometry.polyhedron.palp_database... succeeded
         load sage.geometry.polyhedron.ppl_lattice_polygon... succeeded
@@ -276,6 +280,8 @@ def find_objects_from_name(name, module_name=None, include_lazy_imports=False):
     obj = []
     for smodule_name, smodule in sys.modules.items():
         if module_name and not smodule_name.startswith(module_name):
+            continue
+        if smodule_name.rpartition('.')[2].startswith('all__sagemath_'):
             continue
         if hasattr(smodule, '__dict__') and name in smodule.__dict__:
             u = smodule.__dict__[name]
@@ -510,7 +516,8 @@ def import_statements(*objects, **kwds):
 
         sage: import_statements('Rationals')
         from sage.rings.rational_field import RationalField as Rationals
-        sage: import_statements(sage.combinat.partition_algebra.SetPartitionsAk)
+        sage: from sage.combinat.partition_algebra import SetPartitionsAk
+        sage: import_statements(SetPartitionsAk)
         from sage.combinat.partition_algebra import SetPartitionsAk
         sage: import_statements(CIF)
         from sage.rings.cif import CIF

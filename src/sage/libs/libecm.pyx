@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-libecm
 # distutils: libraries = ecm
 # distutils: extra_link_args = LINUX_NOEXECSTACK
 r"""
@@ -169,7 +170,7 @@ def ecmfactor(number, double B1, verbose=False, sigma=0):
     sage_int_sigma = Integer(sigma)
 
     if number <= 1:
-        raise ValueError("Input number (%s) must be greater than 1"%number)
+        raise ValueError("Input number (%s) must be greater than 1" % number)
 
     if verbose:
         print("Performing one curve with B1=%1.0f" % B1)

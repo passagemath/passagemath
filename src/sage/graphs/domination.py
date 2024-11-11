@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 r"""
 Domination
 
@@ -360,16 +361,16 @@ def dominating_sets(g, k=1, independent=False, total=False, connected=False,
     Subgraph induced by the dominating set is connected::
 
         sage: G = graphs.PetersenGraph()
-        sage: all(G.subgraph(vertices=dom).is_connected()
+        sage: all(G.subgraph(vertices=dom).is_connected()                               # needs sage.numerical.mip
         ....:     for dom in G.dominating_set(k=1, connected=True))
         True
 
     Minimum distance-k connected dominating sets of the Tietze graph::
 
         sage: G = graphs.TietzeGraph()
-        sage: sorted(G.dominating_sets(k=2, connected=True))
+        sage: sorted(G.dominating_sets(k=2, connected=True))                            # needs sage.numerical.mip
         [[0, 9], [1, 0], [2, 3], [4, 3], [5, 6], [7, 6], [8, 0], [10, 3], [11, 6]]
-        sage: sorted(G.dominating_sets(k=3, connected=True))
+        sage: sorted(G.dominating_sets(k=3, connected=True))                            # needs sage.numerical.mip
         [[0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11]]
 
     TESTS::
@@ -1324,7 +1325,7 @@ def maximum_leaf_number(G, solver=None, verbose=0, integrality_tolerance=1e-3):
     Petersen graph::
 
         sage: G = graphs.PetersenGraph()
-        sage: G.maximum_leaf_number()
+        sage: G.maximum_leaf_number()                                                   # needs sage.numerical.mip
         6
 
     TESTS:

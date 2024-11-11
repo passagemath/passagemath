@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Differentiable Vector Bundles
 
@@ -36,6 +37,7 @@ from sage.manifolds.vector_bundle import TopologicalVectorBundle
 from sage.rings.infinity import infinity
 from sage.misc.superseded import deprecated_function_alias
 from sage.rings.rational_field import QQ
+
 
 class DifferentiableVectorBundle(TopologicalVectorBundle):
     r"""
@@ -254,6 +256,7 @@ class DifferentiableVectorBundle(TopologicalVectorBundle):
         Let us check the total Pontryagin class which must be the one
         element in the corresponding cohomology ring in this case::
 
+            sage: # needs sage.combinat
             sage: TM = M.tangent_bundle(); TM
             Tangent bundle TM over the 4-dimensional Lorentzian manifold M
             sage: p = TM.characteristic_cohomology_class('Pontryagin'); p
@@ -332,6 +335,7 @@ class DifferentiableVectorBundle(TopologicalVectorBundle):
         return self._total_space
 
 # *****************************************************************************
+
 
 class TensorBundle(DifferentiableVectorBundle):
     r"""

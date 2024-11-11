@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Pseudo-Riemannian Manifolds
 
@@ -273,6 +274,7 @@ from sage.manifolds.structure import (PseudoRiemannianStructure,
 from sage.manifolds.differentiable.manifold import DifferentiableManifold
 
 ###############################################################################
+
 
 class PseudoRiemannianManifold(DifferentiableManifold):
     r"""

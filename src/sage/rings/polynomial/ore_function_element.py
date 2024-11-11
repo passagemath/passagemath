@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Fraction field elements of Ore polynomial rings
 
@@ -714,6 +715,7 @@ class ConstantOreFunctionSection(Map):
         if numerator.degree() == denominator.degree() and denominator.right_divides(numerator):
             return numerator.leading_coefficient() / denominator.leading_coefficient()
         raise TypeError(f"{x} is not a constant function")
+
 
 class OreFunctionBaseringInjection(Morphism):
     r"""

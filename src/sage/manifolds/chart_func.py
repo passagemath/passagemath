@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Chart Functions
 
@@ -2612,6 +2613,7 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             self._express[curr] = self.expr().collect_common_factors()
         self._del_derived()
         return self
+
 
 class ChartFunctionRing(Parent, UniqueRepresentation):
     """

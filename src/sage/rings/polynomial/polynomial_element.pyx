@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Univariate polynomial base class
 
@@ -2348,6 +2349,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         Also works for extension fields and even characteristic::
 
+            sage: # needs sage.rings.finite_rings
             sage: F.<z4> = GF(2^4)
             sage: R.<x> = F[]
             sage: f = (x + z4^3 + z4^2)^4 * (x^2 + z4*x + z4) * (x^2 + (z4^3 + z4^2 + z4)*x + z4^2 + z4 + 1)
@@ -7177,9 +7179,9 @@ cdef class Polynomial(CommutativePolynomial):
             sage: f = R('e*i') * x + x^2
             sage: f._giac_init_()
             '((1)*1)*sageVARx^2+((1)*sageVARe*sageVARi)*sageVARx'
-            sage: giac(f)
+            sage: giac(f)  # needs giac
             sageVARx^2+sageVARe*sageVARi*sageVARx
-            sage: giac(R.zero())
+            sage: giac(R.zero())  # needs giac
             0
         """
         g = 'sageVAR' + self.variable_name()
@@ -8996,32 +8998,18 @@ cdef class Polynomial(CommutativePolynomial):
                         self = self//c
                     except (AttributeError, NotImplementedError, TypeError):
                         pass
-                return self._roots_from_factorization(self.factor(), multiplicities)
+                try:
+                    fac = self.factor()
+                except ArithmeticError:
+                    raise NotImplementedError
+                else:
+                    return self._roots_from_factorization(fac, multiplicities)
             else:
                 raise NotImplementedError
         except NotImplementedError:
             if K.is_finite():
                 if multiplicities:
                     raise NotImplementedError("root finding with multiplicities for this polynomial not implemented (try the multiplicities=False option)")
-                elif isinstance(K, sage.rings.abc.IntegerModRing):
-                    # handling via the chinese remainders theorem
-                    N = K.cardinality()
-                    primes = N.prime_divisors()
-                    residue_roots = []
-                    for p in primes:
-                        local_self = self.change_ring(GF(p))
-                        local_roots = local_self.roots(multiplicities=False)
-                        residue_roots.append([a.lift() for a in local_roots])
-                    result = []
-                    P = ZZ.prod(primes)
-                    for res in cartesian_product_iterator(residue_roots):
-                        lifted = crt(list(res), primes)
-                        candidate = lifted
-                        for k in range(N // P):
-                            if not self(candidate):
-                                result.append(K(candidate))
-                            candidate += P
-                    return result
                 else:
                     return [a for a in K if not self(a)]
 
@@ -9655,6 +9643,8 @@ cdef class Polynomial(CommutativePolynomial):
             ...
             NotImplementedError: Univariate Polynomial Ring in x over Rational Field
             does not provide an xgcd implementation for univariate polynomials
+
+            sage: # needs sage.libs.singular
             sage: T.<x,y> = QQ[]
             sage: def poor_xgcd(f, g):
             ....:     ret = S(T(f).gcd(g))
@@ -10233,6 +10223,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: R(0).is_squarefree()
             False
 
+            sage: # needs sage.libs.singular
             sage: S.<y> = QQ[]
             sage: R.<x> = S[]
             sage: (2*x*y).is_squarefree()
@@ -11142,6 +11133,7 @@ cdef class Polynomial(CommutativePolynomial):
             ...
             ValueError: not a 17th power
 
+            sage: # needs sage.libs.singular
             sage: R1.<x> = QQ[]
             sage: R2.<y> = R1[]
             sage: R3.<z> = R2[]
@@ -12774,9 +12766,10 @@ cdef class Polynomial_generic_dense_inexact(Polynomial_generic_dense):
 
         Ensure that :issue:`37621` is fixed::
 
+            sage: # needs sage.rings.padics
             sage: k.<x> = QQ[]
-            sage: K = Qp(11,5)
-            sage: L.<a> = K.extension(x^20-11)
+            sage: K = Qp(11, 5)
+            sage: L.<a> = K.extension(x^20 - 11)
             sage: R.<x> = L[]
             sage: f = R.random_element()
             sage: type(f.degree())

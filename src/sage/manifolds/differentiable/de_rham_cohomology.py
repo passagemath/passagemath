@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 De Rham Cohomology
 
@@ -52,6 +53,7 @@ from sage.structure.element import AlgebraElement
 from sage.categories.algebras import Algebras
 from .characteristic_cohomology_class import (CharacteristicCohomologyClassRing,
                                               CharacteristicCohomologyClassRingElement)
+
 
 class DeRhamCohomologyClass(AlgebraElement):
     r"""
@@ -297,6 +299,7 @@ class DeRhamCohomologyClass(AlgebraElement):
             if self.representative() == other.representative():
                 return True
         raise NotImplementedError('comparison via exact forms is currently not supported')
+
 
 class DeRhamCohomologyRing(Parent, UniqueRepresentation):
     r"""

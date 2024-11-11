@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Mandelbrot and Julia sets
 
@@ -30,18 +31,9 @@ AUTHORS:
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
-from sage.dynamics.complex_dynamics.mandel_julia_helper import (fast_mandelbrot_plot,
-                                                                fast_external_ray,
-                                                                convert_to_pixels,
-                                                                get_line,
-                                                                fast_julia_plot,
-                                                                general_julia,
-                                                                polynomial_mandelbrot,
-                                                                julia_helper)
-
 from sage.misc.lazy_import import lazy_import
 lazy_import("sage.plot.colors", "Color")
-from sage.repl.image import Image
+lazy_import("sage.repl.image", "Image")
 from sage.functions.log import logb
 from sage.functions.other import floor
 from sage.rings.rational_field import QQ
@@ -55,8 +47,19 @@ from sage.rings.fraction_field import FractionField_generic
 from sage.categories.function_fields import FunctionFields
 
 lazy_import('sage.dynamics.arithmetic_dynamics.generic_ds', 'DynamicalSystem')
+lazy_import('sage.dynamics.complex_dynamics.mandel_julia_helper', (
+    'fast_mandelbrot_plot',
+    'fast_external_ray',
+    'convert_to_pixels',
+    'get_line',
+    'fast_julia_plot',
+    'general_julia',
+    'polynomial_mandelbrot',
+    'julia_helper'
+))
 
 EPS = 0.00001
+
 
 def mandelbrot_plot(f=None, **kwds):
     r"""
@@ -110,24 +113,25 @@ def mandelbrot_plot(f=None, **kwds):
 
     ::
 
-        sage: mandelbrot_plot()
+        sage: mandelbrot_plot()                                                         # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
-        sage: mandelbrot_plot(pixel_count=1000)
+        sage: mandelbrot_plot(pixel_count=1000)                                         # needs sage.plot
         1000x1000px 24-bit RGB image
 
     ::
 
-        sage: mandelbrot_plot(x_center=-1.11, y_center=0.2283, image_width=1/128, # long time
-        ....: max_iteration=2000, number_of_colors=500, base_color=[40, 100, 100])
+        sage: mandelbrot_plot(x_center=-1.11, y_center=0.2283,               # long time, needs sage.plot
+        ....:                 image_width=1/128, max_iteration=2000,
+        ....:                 number_of_colors=500, base_color=[40, 100, 100])
         500x500px 24-bit RGB image
 
     To display an interactive plot of the Mandelbrot in the Notebook, set
     ``interact`` to ``True``. (This is only implemented for ``z^2 + c``)::
 
-        sage: mandelbrot_plot(interact=True)
+        sage: mandelbrot_plot(interact=True)                                            # needs sage.plot
         ...interactive(children=(FloatSlider(value=0.0, description='Real center', max=1.0, min=-1.0, step=1e-05),
         FloatSlider(value=0.0, description='Imag center', max=1.0, min=-1.0, step=1e-05),
         FloatSlider(value=4.0, description='Width', max=4.0, min=1e-05, step=1e-05),
@@ -140,8 +144,8 @@ def mandelbrot_plot(f=None, **kwds):
 
     ::
 
-        sage: mandelbrot_plot(interact=True, x_center=-0.75, y_center=0.25,
-        ....: image_width=1/2, number_of_colors=75)
+        sage: mandelbrot_plot(interact=True, x_center=-0.75, y_center=0.25,             # needs sage.plot
+        ....:                 image_width=1/2, number_of_colors=75)
         ...interactive(children=(FloatSlider(value=-0.75, description='Real center', max=1.0, min=-1.0, step=1e-05),
         FloatSlider(value=0.25, description='Imag center', max=1.0, min=-1.0, step=1e-05),
         FloatSlider(value=0.5, description='Width', max=4.0, min=1e-05, step=1e-05),
@@ -157,7 +161,7 @@ def mandelbrot_plot(f=None, **kwds):
 
         sage: R.<z,c> = CC[]
         sage: f = z^2 + c
-        sage: mandelbrot_plot(f)
+        sage: mandelbrot_plot(f)                                                        # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
@@ -165,7 +169,7 @@ def mandelbrot_plot(f=None, **kwds):
         sage: B.<c> = CC[]
         sage: R.<z> = B[]
         sage: f = z^5 + c
-        sage: mandelbrot_plot(f)  # long time
+        sage: mandelbrot_plot(f)  # long time                                           # needs sage.plot
         500x500px 24-bit RGB image
 
     When the polynomial is defined over a multivariate polynomial ring it is
@@ -173,14 +177,14 @@ def mandelbrot_plot(f=None, **kwds):
 
         sage: R.<a,b> = CC[]
         sage: f = a^2 + b^3
-        sage: mandelbrot_plot(f, parameter=b)  # long time
+        sage: mandelbrot_plot(f, parameter=b)  # long time                              # needs sage.plot
         500x500px 24-bit RGB image
 
     Interact functionality is not implemented for general polynomial maps::
 
         sage: R.<z,c> = CC[]
         sage: f = z^3 + c
-        sage: mandelbrot_plot(f, interact=True)
+        sage: mandelbrot_plot(f, interact=True)                                         # needs sage.plot
         Traceback (most recent call last):
         ...
         NotImplementedError: interact only implemented for z^2 + c
@@ -330,22 +334,22 @@ def external_ray(theta, **kwds):
 
     EXAMPLES::
 
-        sage: external_ray(1/3)
+        sage: external_ray(1/3)                                                         # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
-        sage: external_ray(0.6, ray_color=[255, 0, 0])
+        sage: external_ray(0.6, ray_color=[255, 0, 0])                                  # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
-        sage: external_ray([0, 0.2, 0.4, 0.7])
+        sage: external_ray([0, 0.2, 0.4, 0.7])                                          # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
-        sage: external_ray([i/5 for i in range(1,5)])
+        sage: external_ray([i/5 for i in range(1,5)])                                   # needs sage.plot
         500x500px 24-bit RGB image
 
     WARNING:
@@ -354,14 +358,14 @@ def external_ray(theta, **kwds):
     which parameters to use when drawing the external ray.
     For example, the following is incorrect::
 
-        sage: M = mandelbrot_plot(x_center=0)  # not tested
-        sage: external_ray(5/7, image=M)       # not tested
+        sage: M = mandelbrot_plot(x_center=0)  # not tested                             # needs sage.plot
+        sage: external_ray(5/7, image=M)       # not tested                             # needs sage.plot
         500x500px 24-bit RGB image
 
     To get the correct external ray, we adjust our parameters::
 
-        sage: M = mandelbrot_plot(x_center=0)
-        sage: external_ray(5/7, x_center=0, image=M)
+        sage: M = mandelbrot_plot(x_center=0)                                           # needs sage.plot
+        sage: external_ray(5/7, x_center=0, image=M)                                    # needs sage.plot
         500x500px 24-bit RGB image
 
     .. TODO::
@@ -430,6 +434,7 @@ def external_ray(theta, **kwds):
                 pixel[int(k[0]), int(k[1])] = tuple(ray_color)
     return M
 
+
 def kneading_sequence(theta):
     r"""
     Determines the kneading sequence for an angle theta in RR/ZZ which
@@ -496,6 +501,7 @@ def kneading_sequence(theta):
             y = 2*y - floor(2*y)
         KS_str = ''.join(KS) + '*'
     return KS_str
+
 
 def julia_plot(f=None, **kwds):
     r"""
@@ -573,39 +579,39 @@ def julia_plot(f=None, **kwds):
 
     The default ``f`` is `z^2 - 1`::
 
-        sage: julia_plot()
+        sage: julia_plot()                                                              # needs sage.plot
         1001x500px 24-bit RGB image
 
     To display only the Julia set, set ``mandelbrot`` to ``False``::
 
-        sage: julia_plot(mandelbrot=False)
+        sage: julia_plot(mandelbrot=False)                                              # needs sage.plot
         500x500px 24-bit RGB image
 
     ::
 
         sage: R.<z> = CC[]
         sage: f = z^3 - z + 1
-        sage: julia_plot(f)  # long time
+        sage: julia_plot(f)  # long time                                                # needs sage.plot
         500x500px 24-bit RGB image
 
     To display an interactive plot of the Julia set in the Notebook,
     set ``interact`` to ``True``. (This is only implemented for polynomials of
     the form ``f = z^2 + c``)::
 
-        sage: julia_plot(interact=True)
+        sage: julia_plot(interact=True)                                                 # needs sage.plot
         ...interactive(children=(FloatSlider(value=-1.0, description='Real c'...
 
         ::
 
         sage: R.<z> = CC[]
         sage: f = z^2 + 1/2
-        sage: julia_plot(f,interact=True)
+        sage: julia_plot(f, interact=True)                                              # needs sage.plot
         ...interactive(children=(FloatSlider(value=0.5, description='Real c'...
 
     To return the Julia set of a random `c` value with (formal) cycle structure
     `(2,3)`, set ``period = [2,3]``::
 
-        sage: julia_plot(period=[2,3])
+        sage: julia_plot(period=[2,3])                                                  # needs sage.plot
         1001x500px 24-bit RGB image
 
     To return all of the Julia sets of `c` values with (formal) cycle structure
@@ -625,15 +631,15 @@ def julia_plot(f=None, **kwds):
 
         sage: R.<z> = CC[]
         sage: f = z^2 - 1
-        sage: julia_plot(f)
+        sage: julia_plot(f)                                                             # needs sage.plot
         1001x500px 24-bit RGB image
 
     ::
 
         sage: R.<z> = CC[]
         sage: K = R.fraction_field(); z = K.gen()
-        sage: f = z^2-1
-        sage: julia_plot(f)
+        sage: f = z^2 - 1
+        sage: julia_plot(f)                                                             # needs sage.plot
         1001x500px 24-bit RGB image
 
     Interact functionality is not implemented if the polynomial is not of the
@@ -641,7 +647,7 @@ def julia_plot(f=None, **kwds):
 
         sage: R.<z> = CC[]
         sage: f = z^3 + 1
-        sage: julia_plot(f, interact=True)
+        sage: julia_plot(f, interact=True)                                              # needs sage.plot
         Traceback (most recent call last):
         ...
         NotImplementedError: The interactive plot is only implemented for ...

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 """
 Isolate Complex Roots of Polynomials
 
@@ -89,6 +90,7 @@ def interval_roots(p, rts, prec):
         irts.append(irt)
 
     return irts
+
 
 def intervals_disjoint(intvs):
     """

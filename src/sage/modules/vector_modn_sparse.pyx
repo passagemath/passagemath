@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 #############################################################################
 #       Copyright (C) 2004, 2007 William Stein <wstein@gmail.com>
 #  Distributed under the terms of the GNU General Public License (GPL)
@@ -251,7 +252,7 @@ cdef int add_c_vector_modint_init(c_vector_modint* sum, c_vector_modint* v,
     while i < v.num_nonzero or j < w.num_nonzero:
         if i >= v.num_nonzero:   # just copy w in
             z.positions[k] = w.positions[j]
-            z.entries[k] = (multiple*w.entries[j])%v.p
+            z.entries[k] = (multiple * w.entries[j]) % v.p
             j = j + 1
             k = k + 1
         elif j >= w.num_nonzero:  # just copy v in
@@ -265,7 +266,7 @@ cdef int add_c_vector_modint_init(c_vector_modint* sum, c_vector_modint* v,
             i = i + 1
             k = k + 1
         elif v.positions[i] > w.positions[j]: # copy entry from w in
-            s = (multiple*w.entries[j])%v.p
+            s = (multiple * w.entries[j]) % v.p
             if s != 0:
                 z.positions[k] = w.positions[j]
                 z.entries[k] = s

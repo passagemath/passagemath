@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Homomorphisms of rings
 
@@ -873,12 +874,16 @@ cdef class RingHomomorphism(RingMap):
                     return homset([self(g) for g in right.im_gens()], **kwds)
                 except ValueError:
                     pass
-            from sage.rings.number_field.morphism import RelativeNumberFieldHomomorphism_from_abs
-            if isinstance(right, RelativeNumberFieldHomomorphism_from_abs):
-                try:
-                    return homset(self*right.abs_hom())
-                except ValueError:
-                    pass
+            try:
+                from sage.rings.number_field.morphism import RelativeNumberFieldHomomorphism_from_abs
+            except ImportError:
+                pass
+            else:
+                if isinstance(right, RelativeNumberFieldHomomorphism_from_abs):
+                    try:
+                        return homset(self*right.abs_hom())
+                    except ValueError:
+                        pass
         return sage.categories.map.Map._composition_(self, right, homset)
 
     def pushforward(self, I):
@@ -2879,8 +2884,10 @@ cdef class FrobeniusEndomorphism_generic(RingHomomorphism):
              over Finite Field of size 5
         """
         from sage.rings.ring import CommutativeRing
+        from sage.categories.commutative_rings import CommutativeRings
         from sage.categories.homset import Hom
-        if not isinstance(domain, CommutativeRing):
+        if not (domain in CommutativeRings() or
+                isinstance(domain, CommutativeRing)):  # TODO: remove this line
             raise TypeError("The base ring must be a commutative ring")
         self._p = domain.characteristic()
         if not self._p.is_prime():

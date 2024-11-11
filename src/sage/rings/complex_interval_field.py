@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 r"""
 Arbitrary precision complex intervals (parent class)
 
@@ -49,6 +50,8 @@ from sage.rings.ring import Field
 from sage.structure.parent import Parent
 
 cache = {}
+
+
 def ComplexIntervalField(prec=53, names=None):
     """
     Return the complex interval field with real and imaginary parts having

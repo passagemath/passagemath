@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.graphs          (because all doctests use the catalogs simplicial_complexes, cubical_complexes)
 r"""
 Chains and cochains
@@ -25,7 +26,7 @@ from sage.rings.integer_ring import ZZ
 from sage.structure.element import coercion_model
 
 
-class CellComplexReference():
+class CellComplexReference:
 
     def __init__(self, cell_complex, degree, cells=None):
         """

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from sage.structure.sage_object cimport SageObject
 from sage.matroids.set_system cimport SetSystem
 
@@ -105,7 +106,7 @@ cdef class Matroid(SageObject):
     cpdef is_coclosed(self, X)
 
     # verification
-    cpdef bint is_valid(self) noexcept
+    cpdef is_valid(self, certificate=*)
 
     # enumeration
     cpdef SetSystem circuits(self, k=*)

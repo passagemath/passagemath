@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Multivector Field Modules
 
@@ -488,6 +489,7 @@ class MultivectorModule(UniqueRepresentation, Parent):
         return self._degree
 
 #***********************************************************************
+
 
 class MultivectorFreeModule(ExtPowerFreeModule):
     r"""

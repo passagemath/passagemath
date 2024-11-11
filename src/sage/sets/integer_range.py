@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 """
 Integer Range
 
@@ -384,7 +385,7 @@ class IntegerRangeFinite(IntegerRange):
             sage: IntegerRange(123,12,4).cardinality()
             0
         """
-        return (abs((self._end+self._step-self._begin))-1) // abs(self._step)
+        return (abs(self._end+self._step-self._begin)-1) // abs(self._step)
 
     def _repr_(self):
         """

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: optional - scipy
 """
 Numerical Root Finding and Optimization
@@ -577,7 +578,7 @@ def minimize_constrained(func,cons,x0,gradient=None,algorithm='default', **args)
                     min = optimize.fmin_tnc(f, x0, approx_grad=True, bounds=cons, messages=0, **args)[0]
         elif isinstance(cons[0], (function_type, Expression)):
             min = optimize.fmin_cobyla(f, x0, cons, **args)
-    elif isinstance(cons, function_type) or isinstance(cons, Expression):
+    elif isinstance(cons, (function_type, Expression)):
         min = optimize.fmin_cobyla(f, x0, cons, **args)
     return vector(RDF, min)
 

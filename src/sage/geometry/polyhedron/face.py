@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 """
 A class to keep information about faces of a polyhedron
 
@@ -990,6 +991,7 @@ class PolyhedronFace(ConvexSet_closed):
         parent = self.polyhedron().parent().change_ring(self.polyhedron().base_ring().fraction_field())
 
         return parent.element_class(parent, None, [locus_ieqs, locus_eqns])
+
 
 def combinatorial_face_to_polyhedral_face(polyhedron, combinatorial_face):
     r"""

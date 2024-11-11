@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Vector Bundle Fiber Elements
 
@@ -19,6 +20,7 @@ AUTHORS:
 #******************************************************************************
 
 from sage.tensor.modules.free_module_element import FiniteRankFreeModuleElement
+
 
 class VectorBundleFiberElement(FiniteRankFreeModuleElement):
     r"""

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-glpk
 # sage.doctest: needs sage.graphs
 """
 GLPK Backend for access to GLPK graph functions
@@ -840,7 +841,7 @@ cdef class GLPKGraphBackend():
         cdef int i = self._find_vertex(vert)
 
         if i < 0:
-            raise RuntimeError("Vertex %s does not exist."%(vert))
+            raise RuntimeError("Vertex %s does not exist." % vert)
 
         cdef int num[2]
         num[1] = i + 1
@@ -880,7 +881,7 @@ cdef class GLPKGraphBackend():
         verts_val = [self._find_vertex(v) for v in verts]
         if -1 in verts_val:
             i = verts_val.index(-1)
-            raise RuntimeError("Vertex %s does not exist."%(verts[i]))
+            raise RuntimeError("Vertex %s does not exist." % verts[i])
 
         cdef int * num = <int *>check_allocarray(len(verts_val) + 1, sizeof(int))
         cdef int ndel = len(verts_val)

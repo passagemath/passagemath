@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-polyhedra
 r"""
 Library of commonly used, famous, or interesting polytopes
 
@@ -90,6 +91,7 @@ from .parent import Polyhedra
 lazy_import('sage.graphs.digraph', 'DiGraph')
 lazy_import('sage.graphs.graph', 'Graph')
 lazy_import('sage.combinat.root_system.associahedron', 'Associahedron')
+
 
 def zero_sum_projection(d, base_ring=None):
     r"""
@@ -318,6 +320,7 @@ def gale_transform_to_polytope(vectors, base_ring=None, backend=None):
         raise ValueError("the gale transform does not correspond to a polytope")
 
     return P
+
 
 def gale_transform_to_primal(vectors, base_ring=None, backend=None):
     r"""
@@ -3475,7 +3478,10 @@ class Polytopes:
     # --------------------------------------------------------
     # imports from other files
     # --------------------------------------------------------
-    associahedron = staticmethod(Associahedron)
+    try:
+        associahedron = staticmethod(Associahedron)
+    except ImportError:
+        pass
 
     try:
         flow_polytope = staticmethod(DiGraph.flow_polytope)

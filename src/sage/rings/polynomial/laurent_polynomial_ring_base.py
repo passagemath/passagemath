@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.modules
 r"""
 Ring of Laurent Polynomials (base class)
@@ -29,6 +30,7 @@ from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.ring import CommutativeRing
 from sage.structure.parent import Parent
 from sage.combinat.integer_vector import IntegerVectors
+
 
 class LaurentPolynomialRing_generic(CommutativeRing, Parent):
     """

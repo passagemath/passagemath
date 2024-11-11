@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Symbolic Equations and Inequalities
 
@@ -180,20 +181,20 @@ We can also solve many inequalities::
 
 We can numerically find roots of equations::
 
-    sage: (x == sin(x)).find_root(-2,2)
+    sage: (x == sin(x)).find_root(-2,2)                                                 # needs scipy
     0.0
-    sage: (x^5 + 3*x + 2 == 0).find_root(-2,2,x)
+    sage: (x^5 + 3*x + 2 == 0).find_root(-2,2,x)                                        # needs scipy
     -0.6328345202421523
-    sage: (cos(x) == sin(x)).find_root(10,20)
+    sage: (cos(x) == sin(x)).find_root(10,20)                                           # needs scipy
     19.634954084936208
 
 We illustrate some valid error conditions::
 
-    sage: (cos(x) != sin(x)).find_root(10,20)
+    sage: (cos(x) != sin(x)).find_root(10,20)                                           # needs scipy
     Traceback (most recent call last):
     ...
     ValueError: Symbolic equation must be an equality.
-    sage: (SR(3)==SR(2)).find_root(-1,1)
+    sage: (SR(3)==SR(2)).find_root(-1,1)                                                # needs scipy
     Traceback (most recent call last):
     ...
     RuntimeError: no zero in the interval, since constant expression is not 0.
@@ -201,7 +202,7 @@ We illustrate some valid error conditions::
 There must be at most one variable::
 
     sage: x, y = var('x,y')
-    sage: (x == y).find_root(-2,2)
+    sage: (x == y).find_root(-2,2)                                                      # needs scipy
     Traceback (most recent call last):
     ...
     NotImplementedError: root finding currently only implemented in 1 dimension.
@@ -621,7 +622,8 @@ def solve(f, *args, **kwds):
 
     - ``algorithm`` -- string (default: ``'maxima'``); to use SymPy's
       solvers set this to 'sympy'. Note that SymPy is always used
-      for diophantine equations. Another choice is 'giac'.
+      for diophantine equations. Another choice, if it is installed,
+      is 'giac'.
 
     - ``domain`` -- string (default: ``'complex'``); setting this to 'real'
       changes the way SymPy solves single equations; inequalities
@@ -926,13 +928,16 @@ def solve(f, *args, **kwds):
 
     A basic interface to Giac is provided::
 
+        sage: # needs sage.libs.giac
         sage: solve([(2/3)^x-2], [x], algorithm='giac')
         ...[[-log(2)/(log(3) - log(2))]]
 
+        sage: # needs sage.libs.giac
         sage: f = (sin(x) - 8*cos(x)*sin(x))*(sin(x)^2 + cos(x)) - (2*cos(x)*sin(x) - sin(x))*(-2*sin(x)^2 + 2*cos(x)^2 - cos(x))
         sage: solve(f, x, algorithm='giac')
         ...[-2*arctan(sqrt(2)), 0, 2*arctan(sqrt(2)), pi]
 
+        sage: # needs sage.libs.giac
         sage: x, y = SR.var('x,y')
         sage: solve([x+y-4,x*y-3],[x,y],algorithm='giac')
         [[1, 3], [3, 1]]
@@ -1434,17 +1439,20 @@ def _giac_solver(f, x, solution_dict=False):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.giac
         sage: solve([(2/3)^x-2], [x], algorithm='giac')
         ...[[-log(2)/(log(3) - log(2))]]
         sage: solve([(2/3)^x-2], [x], algorithm='giac', solution_dict=True)
         ...[{x: -log(2)/(log(3) - log(2))}]
 
+        sage: # needs sage.libs.giac
         sage: f = (sin(x) - 8*cos(x)*sin(x))*(sin(x)^2 + cos(x)) - (2*cos(x)*sin(x) - sin(x))*(-2*sin(x)^2 + 2*cos(x)^2 - cos(x))
         sage: solve(f, x, algorithm='giac')
         ...[-2*arctan(sqrt(2)), 0, 2*arctan(sqrt(2)), pi]
         sage: solve(f, x, algorithm='giac', solution_dict=True)
         ...[{x: -2*arctan(sqrt(2))}, {x: 0}, {x: 2*arctan(sqrt(2))}, {x: pi}]
 
+        sage: # needs sage.libs.giac
         sage: x, y = SR.var('x,y')
         sage: solve([x+y-7,x*y-10],[x,y],algorithm='giac')
         [[2, 5], [5, 2]]

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.rings.finite_rings
 """
 Homset for finite fields
@@ -42,6 +43,7 @@ from sage.rings.finite_rings.finite_field_base import FiniteField
 from sage.rings.integer import Integer
 from sage.rings.morphism import RingHomomorphism_im_gens
 from sage.structure.sequence import Sequence
+
 
 class FiniteFieldHomset(RingHomset_generic):
     """

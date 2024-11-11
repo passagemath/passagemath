@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-objects
 r"""
 Loading and saving sessions and listing all variables
 
@@ -290,6 +291,7 @@ def save_session(name='sage_session', verbose=False):
 
     Something similar happens for cython-defined functions::
 
+        sage: # needs sage.misc.cython
         sage: g = cython_lambda('double x', 'x*x + 1.5')
         sage: save_session(tmp_f, verbose=True)
         ...

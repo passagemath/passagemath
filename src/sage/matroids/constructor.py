@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Matroid construction
 
@@ -102,8 +103,8 @@ Functions
 
 
 from itertools import combinations
-from sage.combinat.posets.lattices import FiniteLatticePoset
 from sage.matrix.constructor import matrix
+from sage.misc.lazy_import import lazy_import
 from sage.structure.element import Matrix
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
@@ -111,15 +112,18 @@ from sage.categories.fields import Fields
 from sage.categories.rings import Rings
 from sage.rings.finite_rings.finite_field_base import FiniteField
 import sage.matroids.matroid
-import sage.matroids.basis_exchange_matroid
-from sage.matroids.rank_matroid import RankMatroid
-from sage.matroids.circuits_matroid import CircuitsMatroid
-from sage.matroids.flats_matroid import FlatsMatroid
-from sage.matroids.circuit_closures_matroid import CircuitClosuresMatroid
-from sage.matroids.basis_matroid import BasisMatroid
-from sage.matroids.linear_matroid import LinearMatroid, RegularMatroid, BinaryMatroid, TernaryMatroid, QuaternaryMatroid
-from sage.matroids.graphic_matroid import GraphicMatroid
 import sage.matroids.utilities
+
+lazy_import('sage.combinat.posets.lattices', 'FiniteLatticePoset')
+lazy_import('sage.matroids.basis_matroid', 'BasisMatroid')
+lazy_import('sage.matroids.circuit_closures_matroid', 'CircuitClosuresMatroid')
+lazy_import('sage.matroids.circuits_matroid', 'CircuitsMatroid')
+lazy_import('sage.matroids.flats_matroid', 'FlatsMatroid')
+lazy_import('sage.matroids.graphic_matroid', 'GraphicMatroid')
+lazy_import('sage.matroids.linear_matroid',
+            ['LinearMatroid', 'RegularMatroid', 'BinaryMatroid',
+             'TernaryMatroid', 'QuaternaryMatroid'])
+lazy_import('sage.matroids.rank_matroid', 'RankMatroid')
 
 
 def Matroid(groundset=None, data=None, **kwds):
@@ -340,6 +344,7 @@ def Matroid(groundset=None, data=None, **kwds):
         Given a dictionary of flats indexed by their rank, we get a
         :class:`FlatsMatroid <sage.matroids.flats_matroid.FlatsMatroid>`::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(flats={0: [''], 1: ['a', 'b'], 2: ['ab']})
             sage: M.is_isomorphic(matroids.Uniform(2, 2)) and M.is_valid()
             True
@@ -351,6 +356,7 @@ def Matroid(groundset=None, data=None, **kwds):
         time-consuming, but after it's done we benefit from some faster methods
         (e.g., :meth:`is_valid() <sage.matroids.flats_matroid.FlatsMatroid.is_valid>`)::
 
+            sage: # needs sage.graphs
             sage: M = Matroid(flats=['', 'a', 'b', 'ab'])
             sage: for i in range(M.rank() + 1):  # print flats by rank
             ....:     print(f'{i}: {sorted([sorted(F) for F in M.flats(i)], key=str)}')
@@ -364,6 +370,7 @@ def Matroid(groundset=None, data=None, **kwds):
 
         Finally, we can also directly provide a lattice of flats::
 
+            sage: # needs sage.graphs
             sage: from sage.combinat.posets.lattices import LatticePoset
             sage: flats = [frozenset(F) for F in powerset('ab')]
             sage: L_M = LatticePoset((flats, lambda x, y: x < y))
@@ -586,6 +593,7 @@ def Matroid(groundset=None, data=None, **kwds):
 
         The keywords ``morphism`` and ``reduced_morphism`` are also available::
 
+            sage: # needs sage.rings.finite_rings
             sage: M = matroids.catalog.RelaxedNonFano("abcdefg")
             sage: A = M.representation(order=True, reduced=True); A
             Generic morphism:
@@ -815,7 +823,7 @@ def Matroid(groundset=None, data=None, **kwds):
             key = 'matroid'
         elif isinstance(data, str):
             key = 'revlex'
-        elif isinstance(data, dict) or isinstance(data, FiniteLatticePoset):
+        elif isinstance(data, (dict, FiniteLatticePoset)):
             key = 'flats'
         elif data is None:
             raise TypeError("no input data given for Matroid()")

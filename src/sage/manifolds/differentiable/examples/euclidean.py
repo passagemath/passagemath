@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Euclidean Spaces
 
@@ -418,6 +419,7 @@ from sage.manifolds.differentiable.pseudo_riemannian import \
                                                        PseudoRiemannianManifold
 
 ###############################################################################
+
 
 class EuclideanSpace(PseudoRiemannianManifold):
     r"""
@@ -1040,6 +1042,7 @@ class EuclideanSpace(PseudoRiemannianManifold):
                       coordinates=coordinates, names=names)
 
 ###############################################################################
+
 
 class EuclideanPlane(EuclideanSpace):
     r"""

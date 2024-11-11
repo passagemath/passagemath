@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Subsets of Topological Manifolds
 
@@ -74,6 +75,7 @@ from sage.misc.superseded import deprecation
 from sage.categories.sets_cat import Sets
 from sage.manifolds.family import ManifoldObjectFiniteFamily, ManifoldSubsetFiniteFamily
 from sage.manifolds.point import ManifoldPoint
+
 
 class ManifoldSubset(UniqueRepresentation, Parent):
     r"""

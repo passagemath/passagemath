@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 """
 Ambient Jacobian abelian variety
 
@@ -409,7 +410,7 @@ class ModAbVar_ambient_jacobian_class(ModularAbelianVariety_modsym_abstract):
         if self.dimension() == 0:
             return []
         G = self.group()
-        if not (isinstance(G, Gamma0_class) or isinstance(G, Gamma1_class)):
+        if not isinstance(G, (Gamma0_class, Gamma1_class)):
             return [S.newform(names=names) for S in self.decomposition()]
         Gtype = G.parent()
         N = G.level()

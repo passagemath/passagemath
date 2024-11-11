@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 r"""
 Families of Manifold Objects
 
@@ -27,6 +28,7 @@ AUTHORS:
 
 from functools import total_ordering
 from sage.sets.family import FiniteFamily
+
 
 @total_ordering
 class ManifoldObjectFiniteFamily(FiniteFamily):
@@ -180,6 +182,7 @@ class ManifoldObjectFiniteFamily(FiniteFamily):
             '\\{A, B\\}'
         """
         return self._latex_name
+
 
 class ManifoldSubsetFiniteFamily(ManifoldObjectFiniteFamily):
 

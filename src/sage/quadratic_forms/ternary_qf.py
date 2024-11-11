@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Ternary quadratic form with integer coefficients
 
@@ -234,7 +235,7 @@ class TernaryQF(SageObject):
                                   M[1, 2], M[0, 2], M[0, 1]])
             else:
                 return QuadraticForm(ZZ, v.transpose() * self.matrix() * v)
-        elif (isinstance(v, Vector) or isinstance(v, (list, tuple))):
+        elif isinstance(v, (Vector, list, tuple)):
             # Check that v has length 3
             if len(v) != 3:
                 raise TypeError("your vector needs to have length 3")

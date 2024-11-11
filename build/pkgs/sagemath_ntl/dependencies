@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-ntl/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-ntl/MANIFEST.in $(PYTHON) cypari memory_allocator sagemath_categories sagemath_modules sagemath_pari ntl | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig

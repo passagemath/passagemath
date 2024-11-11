@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 r"""
 Discrete valuations on function fields
 
@@ -156,6 +157,7 @@ from sage.misc.cachefunc import cached_method
 from sage.rings.valuation.valuation import DiscreteValuation, DiscretePseudoValuation, InfiniteDiscretePseudoValuation, NegativeInfiniteDiscretePseudoValuation
 from sage.rings.valuation.trivial_valuation import TrivialValuation
 from sage.rings.valuation.mapped_valuation import FiniteExtensionFromLimitValuation, MappedValuation_base
+
 
 class FunctionFieldValuationFactory(UniqueFactory):
     r"""

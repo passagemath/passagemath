@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-graphs
 # cython: binding=True
 r"""
 Connectivity related functions
@@ -1372,7 +1373,8 @@ def edge_connectivity(G,
         ...
         TypeError: the input must be a Sage graph
     """
-    from sage.graphs.generic_graph import GenericGraph
+    from sage.graphs.generic_graph import GenericGraph, _weight_if_real, _weight_1
+
     if not isinstance(G, GenericGraph):
         raise TypeError("the input must be a Sage graph")
 
@@ -1428,13 +1430,9 @@ def edge_connectivity(G,
         return val
 
     if use_edge_labels:
-        from sage.rings.real_mpfr import RR
-
-        def weight(x):
-            return x if x in RR else 1
+        weight = _weight_if_real
     else:
-        def weight(x):
-            return 1
+        weight = _weight_1
 
     # Better methods for small connectivity tests, when one is not interested in
     # cuts...
@@ -1694,6 +1692,7 @@ def vertex_connectivity(G, value_only=True, sets=False, k=None, solver=None, ver
 
     Check that :issue:`38723` is fixed::
 
+        sage: # needs sage.modules
         sage: G = graphs.SierpinskiGasketGraph(3)
         sage: G.vertex_connectivity(k=1)                                                # needs sage.numerical.mip
         True
@@ -2873,6 +2872,7 @@ def spqr_tree_to_graph(T):
 
     Check that :issue:`38527` is fixed::
 
+        sage: # needs sage.numerical.mip
         sage: from sage.graphs.connectivity import spqr_tree, spqr_tree_to_graph
         sage: G = Graph('LlCG{O@?GBoMw?')
         sage: T1 = spqr_tree(G, algorithm="Hopcroft_Tarjan")
