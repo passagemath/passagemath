@@ -249,7 +249,7 @@ else:
     for p in sage_wheels.__path__:
         for dir in glob(os.path.join(p, 'lib/ecl-*')):
             ECLDIR = dir + '/'
-            MAXIMA = f'env ECLDIR={shlex.quote(ECLDIR)} {MAXIMA}'
+            os.environ['ECLDIR'] = ECLDIR
             break
 
 try:
