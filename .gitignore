@@ -190,6 +190,7 @@ build/bin/sage-build-env-config
 
 # Generated files in the top-level source trees
 /pkgs/*/build
+/pkgs/*/.mesonpy-*
 /pkgs/*/dist
 /pkgs/*/MANIFEST
 /pkgs/*/*.egg-info
