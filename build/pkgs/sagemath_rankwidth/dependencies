@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-rankwidth/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-rankwidth/MANIFEST.in  rw cysignals boost_cropped | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig $(PYTHON)
