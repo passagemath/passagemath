@@ -1,5 +1,5 @@
 ========================================================================
- passagemath: Graph rankwidth with the edge addition rankwidth suite
+ passagemath: Rankwidth and rank decompositions of graphs with rw
 ========================================================================
 
 About SageMath
@@ -25,12 +25,26 @@ About this pip-installable distribution
 This pip-installable distribution ``passagemath-rankwidth`` is a small
 optional distribution for use with ``passagemath-graphs``.
 
-It provides a Cython interface to the
-`Edge Addition Planarity Suite <https://github.com/graph-algorithms/edge-addition-rankwidth-suite/>`_
-by John Boyer.
+It provides a Cython interface to `rw <https://sourceforge.net/projects/rankwidth/>`_ by
+Philipp Klaus Krause.
 
 
 What is included
 ----------------
 
-- `Cython interface to Boyer's rankwidth algorithm <https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/rankwidth.html>`_
+- `Cython interface to rw <https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph_decompositions/rankwidth.html>`_
+
+
+Examples
+--------
+
+::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-rankwidth[test]" ipython
+
+    In [1]: from sage.all__sagemath_rankwidth import *
+
+    In [2]: g = graphs.PetersenGraph()
+
+    In [3]: g.rank_decomposition()
+    Out[3]: (3, Graph on 19 vertices)
