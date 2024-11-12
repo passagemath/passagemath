@@ -42,7 +42,7 @@ build-requires = [
 ]
 
 host-requires = [
-  "pkg:generic/rankwidth",
+  "pkg:generic/rw",
 ]
 
 dependencies = [
