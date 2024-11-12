@@ -13,7 +13,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-rankwidth"
-description = "passagemath: Graph rankwidth with the edge addition rankwidth suite"
+description = "passagemath: Rankwidth and rank decompositions of graphs with rw"
 dependencies = [
     'passagemath-graphs',
 ]
