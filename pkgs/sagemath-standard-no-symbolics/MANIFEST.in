@@ -97,6 +97,18 @@ prune sage/libs/mpmath
 include sage/calculus/all__sagemath_standard_no_symbolics.py
 include sage/calculus/integration.p*
 
+global-exclude *.c
+global-exclude *.cpp
+
 global-exclude all__sagemath_*.py
 global-include all.py
 global-include all__sagemath_standard_no_symbolics.py
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude *.bak
+global-exclude *.so
+global-exclude *~
+prune .tox
+prune build
+prune dist
