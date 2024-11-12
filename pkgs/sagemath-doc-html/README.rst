@@ -1,5 +1,5 @@
 ======================================================================
- Sage: Open Source Mathematics Software: Documentation in HTML format
+ passagemath: Documentation in HTML format
 ======================================================================
 
 About SageMath
