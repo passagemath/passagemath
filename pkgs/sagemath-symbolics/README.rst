@@ -8,17 +8,19 @@ About SageMath
    "Creating a Viable Open Source Alternative to
     Magma, Maple, Mathematica, and MATLAB"
 
-   Copyright (C) 2005-2023 The Sage Development Team
+   Copyright (C) 2005-2024 The Sage Development Team
 
    https://www.sagemath.org
 
-SageMath fully supports all major Linux distributions, recent versions of macOS, and Windows (using Cygwin or Windows Subsystem for Linux).
+SageMath fully supports all major Linux distributions, recent versions of
+macOS, and Windows (Windows Subsystem for Linux).
 
-The traditional and recommended way to install SageMath is from source via Sage-the-distribution (https://www.sagemath.org/download-source.html).  Sage-the-distribution first builds a large number of open source packages from source (unless it finds suitable versions installed in the system) and then installs the Sage Library (sagelib, implemented in Python and Cython).
+See https://doc.sagemath.org/html/en/installation/index.html
+for general installation instructions.
 
 
-About this pip-installable distribution
----------------------------------------
+About this pip-installable distribution package
+-----------------------------------------------
 
 This pip-installable distribution `passagemath-symbolics` is a distribution of a part of the Sage Library.
 It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`).
@@ -36,7 +38,7 @@ What is included
 
 * `Asymptotic Expansions <https://doc.sagemath.org/html/en/reference/asymptotic/index.html>`_
 
-* SageManifolds: `Topological, Differentiable, Pseudo-Riemannian, Poisson Manifolds <https://doc.sagemath.org/html/en/reference/manifolds/index.html>`_
+* `SageManifolds <https://sagemanifolds.obspm.fr/>`_: `Topological, Differentiable, Pseudo-Riemannian, Poisson Manifolds <https://doc.sagemath.org/html/en/reference/manifolds/index.html>`_
 
 * `Hyperbolic Geometry <https://doc.sagemath.org/html/en/reference/hyperbolic_geometry/index.html>`_
 
@@ -72,6 +74,34 @@ Using the library interface to Maxima::
     Out[3]:
                                4      3    2  2    3      4
                    - (y - x) (y  + x y  + x  y  + x  y + x )
+
+Using `SageManifolds <https://sagemanifolds.obspm.fr/>`_::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics[test]" ipython
+
+    In [1]: from sage.all__sagemath_symbolics import *
+
+    In [2]: M = Manifold(4, 'M', structure='Lorentzian'); M
+    Out[2]: 4-dimensional Lorentzian manifold M
+
+    In [3]: X = M.chart(r"t r:(0,+oo) th:(0,pi):\theta ph:(0,2*pi):\phi")
+
+    In [4]: t,r,th,ph = X[:]; m = var('m'); assume(m>=0)
+
+    In [5]: g = M.metric(); g[0,0] = -(1-2*m/r); g[1,1] = 1/(1-2*m/r); g[2,2] = r**2; g[3,3] = (r*sin(th))**2; g.display()
+    Out[5]: g = (2*m/r - 1) dt⊗dt - 1/(2*m/r - 1) dr⊗dr + r^2 dth⊗dth + r^2*sin(th)^2 dph⊗dph
+
+    In [6]: g.christoffel_symbols_display()
+    Out[6]:
+    Gam^t_t,r = -m/(2*m*r - r^2)
+    Gam^r_t,t = -(2*m^2 - m*r)/r^3
+    Gam^r_r,r = m/(2*m*r - r^2)
+    Gam^r_th,th = 2*m - r
+    Gam^r_ph,ph = (2*m - r)*sin(th)^2
+    Gam^th_r,th = 1/r
+    Gam^th_ph,ph = -cos(th)*sin(th)
+    Gam^ph_r,ph = 1/r
+    Gam^ph_th,ph = cos(th)/sin(th)
 
 
 Available as extras, from other distributions
