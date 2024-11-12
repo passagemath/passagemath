@@ -1,1 +1,2 @@
-sagemath-doc-pdf
+# This file is updated on every release by the sage-update-version script
+passagemath-doc-pdf ~= 10.4.59.0
