@@ -375,6 +375,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*planarity*
 
+      - name: sagemath-rankwidth
+        id:   sagemath-rankwidth
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*rankwidth*
+
         ####### sagemath-modules and what depends on it
 
       - name: sagemath-modules

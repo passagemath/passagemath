@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-graphs
+# sage_setup: distribution = sagemath-rankwidth
 # cython: binding=True
 # distutils: libraries = rw
 r"""
