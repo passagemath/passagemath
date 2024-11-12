@@ -14,8 +14,8 @@ requires = [
 build-backend = 'mesonpy'
 
 [project]
-name = "sagemath-doc-pdf"
-description = "Sage: Open Source Mathematics Software: Documentation in PDF format"
+name = "passagemath-doc-pdf"
+description = "passagemath: Documentation in PDF format"
 dependencies = []
 license = {text = "GNU General Public License (GPL) v2 or later; Creative Commons Attribution-ShareAlike 3.0 Unported"}
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
