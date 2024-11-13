@@ -1477,7 +1477,7 @@ class BinaryQF(SageObject):
         We check that :issue:`37635` is fixed::
 
             sage: list = range(0xa19ae44106b09bfffffffffff0, 0xa19ae44106b09c000000000010)
-            sage: all(BinaryQF([1, 0, -x]).reduced_form().is_reduced() for x in list)
+            sage: all(BinaryQF([1, 0, -x]).reduced_form().is_reduced() for x in list)   # needs sage.libs.pari
             True
         """
         D = self.discriminant()
@@ -1811,6 +1811,7 @@ class BinaryQF(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: F = BinaryQF([3, -16, 161])
             sage: cl = F.form_class(); cl
             Class of 3*x^2 + 2*x*y + 140*y^2
