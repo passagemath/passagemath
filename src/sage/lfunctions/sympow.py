@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-sympow
 r"""
 Watkins symmetric power `L`-function calculator
 
