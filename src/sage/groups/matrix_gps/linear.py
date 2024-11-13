@@ -341,6 +341,7 @@ class LinearMatrixGroup_generic(NamedMatrixGroup_generic):
 
         Arbitrary base rings are currently not fully supported::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = PolynomialRing(GF(7))
             sage: S = R.quotient(x^2 + 5)
             sage: GL(2, S).order()
