@@ -3,6 +3,7 @@ prune sage
 include VERSION.txt
 
 include sage/lfunctions/sympow.p*
+include sage/libs/sympow.p*
 
 global-exclude *.c
 global-exclude *.cpp
