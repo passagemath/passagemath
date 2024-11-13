@@ -1154,14 +1154,14 @@ class PolynomialSequence_generic(Sequence_generic):
 
             sage: R.<x,y,z> = PolynomialRing(QQ)
             sage: F = Sequence([z*x+y^3,z+y^3,z+x*y])
-            sage: F.reduced()
+            sage: F.reduced()                                                           # needs sage.libs.singular
             [y^3 + z, x*y + z, x*z - z]
 
         Note that tail reduction for local orderings is not well-defined::
 
             sage: R.<x,y,z> = PolynomialRing(QQ,order='negdegrevlex')
             sage: F = Sequence([z*x+y^3,z+y^3,z+x*y])
-            sage: F.reduced()
+            sage: F.reduced()                                                           # needs sage.libs.singular
             [z + x*y, x*y - y^3, x^2*y - y^3]
 
         A fixed error with nonstandard base fields::

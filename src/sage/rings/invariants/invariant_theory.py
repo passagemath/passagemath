@@ -2430,8 +2430,8 @@ class BinaryQuintic(AlgebraicForm):
             sage: gf = f.transformed(g)
             sage: f.canonical_form() == gf.canonical_form()
             True
-            sage: h = f.canonical_form(reduce_gcd=True)
-            sage: gcd(h.coeffs())
+            sage: h = f.canonical_form(reduce_gcd=True)                                 # needs sage.libs.pari
+            sage: gcd(h.coeffs())                                                       # needs sage.libs.pari
             1
         """
         clebsch = self.clebsch_invariants(as_tuple=True)
