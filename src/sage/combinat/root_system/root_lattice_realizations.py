@@ -2276,9 +2276,9 @@ class RootLatticeRealizations(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: RootSystem(["B",3]).ambient_space().plot_roots()                  # needs sage.plot
+                sage: RootSystem(["B",3]).ambient_space().plot_roots()                  # needs sage.geometry.polyhedron sage.plot
                 Graphics3d Object
-                sage: RootSystem(["B",3]).ambient_space().plot_roots("all")             # needs sage.plot
+                sage: RootSystem(["B",3]).ambient_space().plot_roots("all")             # needs sage.geometry.polyhedron sage.plot
                 Graphics3d Object
 
             TESTS::
@@ -2411,7 +2411,7 @@ class RootLatticeRealizations(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: RootSystem(["B",3]).ambient_space().plot_fundamental_weights()    # needs sage.plot
+                sage: RootSystem(["B",3]).ambient_space().plot_fundamental_weights()    # needs sage.geometry.polyhedron sage.plot
                 Graphics3d Object
 
             TESTS::
@@ -2610,23 +2610,25 @@ class RootLatticeRealizations(Category_over_base_ring):
 
             2D plots::
 
-                sage: RootSystem(["B",2]).ambient_space().plot_fundamental_chamber()    # needs sage.plot
+                sage: # needs sage.geometry.polyhedron sage.plot
+                sage: RootSystem(["B",2]).ambient_space().plot_fundamental_chamber()
                 Graphics object consisting of 1 graphics primitive
-                sage: RootSystem(["B",2,1]).ambient_space().plot_fundamental_chamber()  # needs sage.plot
+                sage: RootSystem(["B",2,1]).ambient_space().plot_fundamental_chamber()
                 Graphics object consisting of 1 graphics primitive
-                sage: RootSystem(["B",2,1]).ambient_space().plot_fundamental_chamber("classical")   # needs sage.plot
+                sage: RootSystem(["B",2,1]).ambient_space().plot_fundamental_chamber("classical")
                 Graphics object consisting of 1 graphics primitive
 
             3D plots::
 
-                sage: RootSystem(["A",3,1]).weight_space() .plot_fundamental_chamber()  # needs sage.plot
+                sage: # needs sage.geometry.polyhedron sage.plot
+                sage: RootSystem(["A",3,1]).weight_space() .plot_fundamental_chamber()
                 Graphics3d Object
-                sage: RootSystem(["B",3,1]).ambient_space().plot_fundamental_chamber()  # needs sage.plot
+                sage: RootSystem(["B",3,1]).ambient_space().plot_fundamental_chamber()
                 Graphics3d Object
 
             This feature is currently not available in the root lattice/space::
 
-                sage: list(RootSystem(["A",2]).root_lattice().plot_fundamental_chamber())           # needs sage.plot
+                sage: list(RootSystem(["A",2]).root_lattice().plot_fundamental_chamber())           # needs sage.geometry.polyhedron sage.plot
                 Traceback (most recent call last):
                 ...
                 TypeError: classical fundamental chamber not yet available in the root lattice
@@ -2634,10 +2636,10 @@ class RootLatticeRealizations(Category_over_base_ring):
             TESTS::
 
                 sage: L = RootSystem(["B",2,1]).ambient_space()
-                sage: print(L.plot_fundamental_chamber().description())                             # needs sage.plot
+                sage: print(L.plot_fundamental_chamber().description())                             # needs sage.geometry.polyhedron sage.plot
                 Polygon defined by 3 points:     [(0.5, 0.5), (1.0, 0.0), (0.0, 0.0)]
 
-                sage: print(L.plot_fundamental_chamber(style='classical').description())            # needs sage.plot
+                sage: print(L.plot_fundamental_chamber(style='classical').description())            # needs sage.geometry.polyhedron sage.plot
                 Polygon defined by 3 points:     [(0.0, 0.0), (3.0, 3.0), (3.0, 0.0)]
             """
             plot_options = self.plot_parse_options(**options)

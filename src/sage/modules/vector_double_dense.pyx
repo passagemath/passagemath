@@ -234,8 +234,8 @@ cdef class Vector_double_dense(Vector_numpy_dense):
 
         EXAMPLES::
 
-            sage: # needs scipy
-            sage: v = vector(CDF,[1+2*I,2,3*I,4])
+            sage: # needs scipy sage.symbolic
+            sage: v = vector(CDF, [1 + 2*I, 2, 3*I, 4])
             sage: v.fft()
             (7.0 + 5.0*I, 1.0 + 1.0*I, -5.0 + 5.0*I, 1.0 - 3.0*I)
             sage: v.fft(direction='backward')
@@ -340,6 +340,7 @@ cdef class Vector_double_dense(Vector_numpy_dense):
         For complex numbers the real and imaginary parts are considered
         separately.  ::
 
+            sage: # needs sage.symbolic
             sage: w = vector(CDF, [10^-6 + 5*I, 5 + 10^-6*I, 5 + 5*I, 10^-6 + 10^-6*I])
             sage: w.zero_at(1.0e-4)
             (5.0*I, 5.0, 5.0 + 5.0*I, 0.0)
@@ -416,7 +417,8 @@ cdef class Vector_double_dense(Vector_numpy_dense):
 
         And over the complex numbers.  ::
 
-            sage: w = vector(CDF, [3-4*I, 0, 5+12*I])
+            sage: # needs sage.symbolic
+            sage: w = vector(CDF, [3 - 4*I, 0, 5 + 12*I])
             sage: w.norm()
             13.9283882...
             sage: w.norm(p=2)
@@ -482,8 +484,9 @@ cdef class Vector_double_dense(Vector_numpy_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: v = vector(RDF, range(9))
-            sage: w = vector(CDF, [k+(9-k)*I for k in range(9)])
+            sage: w = vector(CDF, [k + (9-k)*I for k in range(9)])
             sage: v.mean()
             4.0
             sage: w.mean()
@@ -501,8 +504,9 @@ cdef class Vector_double_dense(Vector_numpy_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: v = vector(RDF, range(9))
-            sage: w = vector(CDF, [k+(9-k)*I for k in range(9)])
+            sage: w = vector(CDF, [k + (9-k)*I for k in range(9)])
             sage: v.variance()
             7.5
             sage: v.variance(population=False)
@@ -528,8 +532,9 @@ cdef class Vector_double_dense(Vector_numpy_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: v = vector(RDF, range(9))
-            sage: w = vector(CDF, [k+(9-k)*I for k in range(9)])
+            sage: w = vector(CDF, [k + (9-k)*I for k in range(9)])
             sage: v.standard_deviation()
             2.7386127875258306
             sage: v.standard_deviation(population=False)
@@ -555,9 +560,9 @@ cdef class Vector_double_dense(Vector_numpy_dense):
 
         EXAMPLES::
 
-            sage: # needs scipy
+            sage: # needs scipy sage.symbolic
             sage: v = vector(RDF, range(9))
-            sage: w = vector(CDF, [k+(9-k)*I for k in range(9)])
+            sage: w = vector(CDF, [k + (9-k)*I for k in range(9)])
             sage: v.stats_kurtosis()  # rel tol 5e-15
             -1.2300000000000000
             sage: w.stats_kurtosis()  # rel tol 5e-15
@@ -572,8 +577,9 @@ cdef class Vector_double_dense(Vector_numpy_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: v = vector(RDF, range(9))
-            sage: w = vector(CDF, [k+(9-k)*I for k in range(9)])
+            sage: w = vector(CDF, [k + (9-k)*I for k in range(9)])
             sage: v.prod()
             0.0
             sage: w.prod()
@@ -587,8 +593,9 @@ cdef class Vector_double_dense(Vector_numpy_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: v = vector(RDF, range(9))
-            sage: w = vector(CDF, [k+(9-k)*I for k in range(9)])
+            sage: w = vector(CDF, [k + (9-k)*I for k in range(9)])
             sage: v.sum()
             36.0
             sage: w.sum()

@@ -1614,6 +1614,7 @@ In the latter case, please inform the developers.""".format(self.order()))
             sage: R._lift_residue_field_root(2, 2, f, f.derivative(), R(1))
             (3,)
 
+            sage: # needs sage.libs.pari
             sage: R = Zmod(4001**2)
             sage: S.<x> = R[]
             sage: f = x^3 - 2
@@ -1773,6 +1774,7 @@ In the latter case, please inform the developers.""".format(self.order()))
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Zmod(41)[]
             sage: (x^3 + x).roots()
             [(0, 1), (32, 1), (9, 1)]

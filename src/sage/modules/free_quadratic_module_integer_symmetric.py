@@ -1535,6 +1535,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = IntegralLattice('A4')
             sage: t = vector([1.2, -3/11, 5.5, -9.1])
             sage: short = L.enumerate_short_vectors()   # implicit doctest
@@ -1599,6 +1600,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: L = IntegralLattice(4, [[1,2,3,4], [7,7,8,8], [1,-1,1,0]])
             sage: short = L.enumerate_short_vectors()
             sage: vecs = [next(short) for _ in range(20)]
@@ -1610,6 +1612,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         This example demonstrates that the lattice inner product is used for the norm::
 
+            sage: # needs sage.libs.pari
             sage: Q = Matrix(QQ, [[1000, 0], [0, 1]])
             sage: B = [[1, 1], [1, -1]]
             sage: L = IntegralLattice(Q, basis=B)
@@ -1634,6 +1637,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: L = IntegralLattice(4, [[1,2,3,4], [7,7,8,8], [1,-1,1,0]])
             sage: t = vector([1/2, -133/7, 123.44, -11])
             sage: close = L.enumerate_close_vectors(t)

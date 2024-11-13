@@ -550,6 +550,7 @@ class LaurentPolynomialRing_generic(CommutativeRing, Parent):
 
         ::
 
+            sage: # needs sage.rings.number_field
             sage: L = LaurentPolynomialRing(QQbar, 5, 'x')
             sage: f = L.random_element(-1, 1)
             sage: f = L.random_element(-1, 1)

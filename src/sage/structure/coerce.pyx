@@ -258,14 +258,14 @@ cpdef py_scalar_to_element(x):
         ....:     assert py_scalar_parent(type(x)) == py_scalar_to_element(x).parent()
 
         sage: import numpy                                                              # needs numpy
-        sage: elt = [numpy.int8('-12'),  numpy.uint8('143'),                            # needs numpy
+        sage: elt = [numpy.int8('-12'),  numpy.uint8('143'),                            # needs numpy sage.symbolic
         ....:        numpy.int16('-33'), numpy.uint16('122'),
         ....:        numpy.int32('-19'), numpy.uint32('44'),
         ....:        numpy.int64('-3'),  numpy.uint64('552'),
         ....:        numpy.float16('-1.23'), numpy.float32('-2.22'),
         ....:        numpy.float64('-3.412'), numpy.complex64(1.2+I),
         ....:        numpy.complex128(-2+I)]
-        sage: for x in elt:                                                             # needs numpy
+        sage: for x in elt:                                                             # needs numpy sage.symbolic
         ....:     assert py_scalar_parent(type(x)) == py_scalar_to_element(x).parent()
 
         sage: elt = [gmpy2.mpz(42), gmpy2.mpq('3/4'),
