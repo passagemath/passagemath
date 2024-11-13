@@ -34,3 +34,18 @@ What is included
 ----------------
 
 - `Cython interface to Boyer's planarity algorithm <https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/planarity.html>`_
+
+
+Examples
+--------
+
+::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-planarity[test]" ipython
+
+    In [1]: from sage.all__sagemath_planarity import *
+
+    In [2]: g = graphs.PetersenGraph()
+
+    In [3]: g.is_planar()
+    Out[3]: False
