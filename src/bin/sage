@@ -173,7 +173,7 @@ if [ -x "${SELF}-venv-config" ]; then
     if [ -z "$SAGE_VENV" ]; then
         export SAGE_VENV=$("${SELF}-venv-config" SAGE_VENV)
     fi
-    SAGE_WHEELS_PATH=$("${SELF}-venv-config" SAGE_WHEELS_PATH)
+    SAGE_WHEELS_PATH=$("${SELF}-venv-config" SAGE_WHEELS_PATH 2>/dev/null)
 fi
 if [ -f "${SELF}-env-config" ]; then
     # As of Issue #22731, sage-env-config is optional.
