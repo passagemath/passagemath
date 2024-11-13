@@ -47,7 +47,9 @@ ACKNOWLEDGEMENT (from sympow readme):
 ########################################################################
 
 import os
+import shlex
 
+from sage.features.sympow import Sympow as sympow_executable
 from sage.structure.sage_object import SageObject
 from sage.misc.pager import pager
 from sage.misc.verbose import verbose
@@ -76,7 +78,7 @@ class Sympow(SageObject):
         """
         Used to call sympow with given args
         """
-        cmd = 'sympow %s' % args
+        cmd = f'{shlex.quote(sympow_executable().absolute_filename())} {args}'
         with os.popen(cmd) as f:
             v = f.read().strip()
         verbose(v, level=2)
