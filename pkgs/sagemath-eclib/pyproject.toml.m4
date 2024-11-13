@@ -36,8 +36,10 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-# No test requirements; see comment in tox.ini
-test = []
+test = [
+    "passagemath-repl",
+    "passagemath-schemes",
+]
 
 [tool.setuptools]
 include-package-data = false
