@@ -1,29 +1,18 @@
-threejs: JavaScript library to display 3D graphics in the browser
-=================================================================
+jupyter_threejs_sage: Sage: Open Source Mathematics Software: Jupyter extension for 3D graphics with threejs
+============================================================================================================
 
 Description
 -----------
 
-Three.js is a JavaScript library to display 3D graphics in the browser.
+Sage: Open Source Mathematics Software: Jupyter extension for 3D graphics with threejs
 
 License
 -------
 
 MIT License
 
-
 Upstream Contact
 ----------------
 
-Home page: http://threejs.org
+https://pypi.org/project/jupyter-threejs-sage/
 
-Dependencies
-------------
-
-None.
-
-
-Special Update/Build Instructions
----------------------------------
-
-None.
