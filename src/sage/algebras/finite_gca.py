@@ -130,6 +130,7 @@ class FiniteGCAlgebra(CombinatorialFreeModule):
         omitted, an instance of the class
         :class:`sage.algebras.commutative_dga.GCAlgebra` is created instead::
 
+            sage: # needs sage.combinat
             sage: A.<x,y,z,t> = GradedCommutativeAlgebra(QQ, degrees=(1,2,6,6))
             sage: type(A)
             <class 'sage.algebras.commutative_dga.GCAlgebra_with_category'>
