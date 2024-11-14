@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 from sage.structure.sage_object cimport SageObject
 from sage.structure.element cimport ModuleElement
 from sage.categories.action cimport Action
