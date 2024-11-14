@@ -2368,7 +2368,7 @@ cdef class TimeSeries:
 
         We get just the series of real parts of ::
 
-            sage: stats.TimeSeries([w[0]]) + w[1:].scale_time(2)
+            sage: stats.TimeSeries([w[0]]) + w[1:].scale_time(2)                        # needs scipy
             [45.0000, -4.5000, -4.5000, -4.5000, -4.5000]
 
         An example with an even number of terms::
