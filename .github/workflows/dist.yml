@@ -618,23 +618,33 @@ jobs:
         id: python
         with:
           python-version: "3.10"
-      - run: |
+      - name: Install tox
+        run: |
           pip install tox
-      - run: |
+      - name: Run tox
+        run: |
           set -x
           pkg=${{ matrix.distribution }}
           WHEELHOUSE=$(pwd)/wheelhouse
           export PIP_FIND_LINKS=file://$WHEELHOUSE
           cd pkgs/$pkg
-          pkg=${pkg//-/_}
+          pkg_underscore=${pkg//-/_}
           case "${{ matrix.os }}" in
               ubuntu*)  tag="manylinux*_x86_64";;
               macos-13) tag="macosx_*_x86_64";;
               macos-14) tag="macosx_*_arm64";;
           esac
-          wheel_pattern="$WHEELHOUSE/*$pkg*-cp310-$tag.whl"
+          wheel_pattern="$WHEELHOUSE/*$pkg_underscore*-cp310-$tag.whl"
           eval ls -l $wheel_pattern
           wheel=$(eval ls $wheel_pattern | head -n1)
           if [ -n "$wheel" ]; then
               eval tox -v -v -e py310-norequirements --installpkg "$wheel"
           fi
+      - name: Update known test failures
+        if: (success() || failure())
+        run: |
+          export PIP_FIND_LINKS=file://$WHEELHOUSE
+          pip install sagemath-environment
+          pkg=${{ matrix.distribution }}
+          sage -fixdoctests --distribution "$pkg" --update-known-test-failures
+          git diff pkgs/$pkg
