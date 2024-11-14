@@ -510,7 +510,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([1, -1, 1, -29372, -1932937])
             sage: E.conductor(algorithm='pari')
             3006
-            sage: E.conductor(algorithm='mwrank')
+            sage: E.conductor(algorithm='mwrank')               # needs eclib
             3006
             sage: E.conductor(algorithm='gp')
             3006
@@ -2883,7 +2883,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve('37a1')
             sage: E.silverman_height_bound()
             4.825400758180918
-            sage: E.silverman_height_bound(algorithm='mwrank')
+            sage: E.silverman_height_bound(algorithm='mwrank')  # needs eclib
             4.825400758180918
             sage: E.CPS_height_bound()
             0.16397076103046915
@@ -3002,7 +3002,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([1, 1, 1, 508, -2551])
             sage: E.selmer_rank()
             4
-            sage: E.selmer_rank(algorithm='mwrank')
+            sage: E.selmer_rank(algorithm='mwrank')             # needs eclib
             4
 
         The following is the curve 960d1, which has rank 0, but
@@ -3011,7 +3011,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([0, -1, 0, -900, -10098])
             sage: E.selmer_rank()
             3
-            sage: E.selmer_rank(algorithm='mwrank')
+            sage: E.selmer_rank(algorithm='mwrank')             # needs eclib
             3
 
         This curve has rank 1, and 4 elements in Sha[2].
@@ -3071,7 +3071,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([0, -1, 1, -929, -10595])
             sage: E.rank_bound()
             0
-            sage: E.rank_bound(algorithm='mwrank')
+            sage: E.rank_bound(algorithm='mwrank')              # needs eclib
             2
 
         In the following last example, both algorithm only determine a rank bound larger than the actual rank::
@@ -3079,7 +3079,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([1, 1, 1, -896670, -327184905])
             sage: E.rank_bound()
             2
-            sage: E.rank_bound(algorithm='mwrank')
+            sage: E.rank_bound(algorithm='mwrank')              # needs eclib
             2
             sage: E.rank(only_use_mwrank=False) # uses L-function
             0
