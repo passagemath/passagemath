@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Khuri-Makdisi algorithms for arithmetic in Jacobians
 

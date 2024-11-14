@@ -1238,7 +1238,7 @@
         "ntests": 3
     },
     "sage.doctest.external": {
-        "ntests": 43
+        "ntests": 42
     },
     "sage.doctest.fixtures": {
         "failed": true,
@@ -1406,7 +1406,7 @@
         "ntests": 16
     },
     "sage.features.macaulay2": {
-        "ntests": 4
+        "ntests": 3
     },
     "sage.features.mcqd": {
         "ntests": 4
@@ -2172,7 +2172,7 @@
     },
     "sage.matrix.matrix1": {
         "failed": true,
-        "ntests": 447
+        "ntests": 441
     },
     "sage.matrix.matrix2": {
         "failed": true,
@@ -2961,7 +2961,6 @@
         "ntests": 57
     },
     "sage.modular.modsym.tests": {
-        "failed": true,
         "ntests": 39
     },
     "sage.modular.overconvergent.genus0": {
@@ -3026,11 +3025,11 @@
     },
     "sage.modules.free_module": {
         "failed": true,
-        "ntests": 1485
+        "ntests": 1484
     },
     "sage.modules.free_module_element": {
         "failed": true,
-        "ntests": 979
+        "ntests": 974
     },
     "sage.modules.free_module_homspace": {
         "ntests": 60
@@ -3343,7 +3342,7 @@
     },
     "sage.repl.interpreter": {
         "failed": true,
-        "ntests": 116
+        "ntests": 113
     },
     "sage.repl.ipython_extension": {
         "failed": true,
@@ -3512,7 +3511,7 @@
     },
     "sage.rings.finite_rings.finite_field_base": {
         "failed": true,
-        "ntests": 345
+        "ntests": 340
     },
     "sage.rings.finite_rings.finite_field_constructor": {
         "failed": true,
@@ -3554,8 +3553,7 @@
         "ntests": 583
     },
     "sage.rings.finite_rings.integer_mod_ring": {
-        "failed": true,
-        "ntests": 369
+        "ntests": 367
     },
     "sage.rings.finite_rings.maps_finite_field": {
         "ntests": 31
@@ -3647,7 +3645,11 @@
     },
     "sage.rings.function_field.jacobian_khuri_makdisi": {
         "failed": true,
-        "ntests": 272
+        "ntests": 0
+    },
+    "sage.rings.function_field.khuri_makdisi": {
+        "failed": true,
+        "ntests": 226
     },
     "sage.rings.function_field.maps": {
         "ntests": 215
@@ -3687,8 +3689,7 @@
         "ntests": 55
     },
     "sage.rings.ideal": {
-        "failed": true,
-        "ntests": 370
+        "ntests": 361
     },
     "sage.rings.ideal_monoid": {
         "ntests": 48
@@ -3704,8 +3705,7 @@
         "ntests": 1
     },
     "sage.rings.integer_ring": {
-        "failed": true,
-        "ntests": 230
+        "ntests": 229
     },
     "sage.rings.invariants.invariant_theory": {
         "ntests": 883
@@ -4009,22 +4009,22 @@
     },
     "sage.rings.polynomial.multi_polynomial_element": {
         "failed": true,
-        "ntests": 534
+        "ntests": 532
     },
     "sage.rings.polynomial.multi_polynomial_ideal": {
         "failed": true,
-        "ntests": 913
+        "ntests": 895
     },
     "sage.rings.polynomial.multi_polynomial_ideal_libsingular": {
         "ntests": 25
     },
     "sage.rings.polynomial.multi_polynomial_libsingular": {
         "failed": true,
-        "ntests": 1246
+        "ntests": 1234
     },
     "sage.rings.polynomial.multi_polynomial_ring": {
         "failed": true,
-        "ntests": 155
+        "ntests": 149
     },
     "sage.rings.polynomial.multi_polynomial_ring_base": {
         "ntests": 249
@@ -4110,7 +4110,7 @@
     },
     "sage.rings.polynomial.polynomial_ring": {
         "failed": true,
-        "ntests": 536
+        "ntests": 534
     },
     "sage.rings.polynomial.polynomial_ring_constructor": {
         "failed": true,
@@ -4143,8 +4143,7 @@
         "ntests": 97
     },
     "sage.rings.polynomial.term_order": {
-        "failed": true,
-        "ntests": 361
+        "ntests": 360
     },
     "sage.rings.polynomial.toy_buchberger": {
         "ntests": 51
@@ -4191,12 +4190,11 @@
         "ntests": 17
     },
     "sage.rings.quotient_ring": {
-        "failed": true,
-        "ntests": 261
+        "ntests": 257
     },
     "sage.rings.quotient_ring_element": {
         "failed": true,
-        "ntests": 200
+        "ntests": 191
     },
     "sage.rings.rational": {
         "failed": true,
@@ -4204,7 +4202,7 @@
     },
     "sage.rings.rational_field": {
         "failed": true,
-        "ntests": 213
+        "ntests": 212
     },
     "sage.rings.real_arb": {
         "failed": true,

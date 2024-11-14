@@ -3646,7 +3646,11 @@
     },
     "sage.rings.function_field.jacobian_khuri_makdisi": {
         "failed": true,
-        "ntests": 272
+        "ntests": 0
+    },
+    "sage.rings.function_field.khuri_makdisi": {
+        "failed": true,
+        "ntests": 226
     },
     "sage.rings.function_field.maps": {
         "ntests": 215
