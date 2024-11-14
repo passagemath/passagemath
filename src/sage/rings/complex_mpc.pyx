@@ -88,6 +88,7 @@ from sage.rings.real_mpfr cimport RealField_class, RealNumber
 from sage.rings.real_mpfr import mpfr_prec_min, mpfr_prec_max
 from sage.structure.richcmp cimport rich_to_bool, richcmp
 from sage.categories.fields import Fields
+from sage.structure.element import Expression
 
 cimport gmpy2
 gmpy2.import_gmpy2()
@@ -881,7 +882,7 @@ cdef class MPComplexNumber(sage.structure.element.FieldElement):
                 return
             else:
                 C = sage.rings.complex_mpfr.ComplexField(self._parent.prec())
-                if C.has_coerce_map_from(z.parent()) or isinstance(z, sage.symbolic.expression.Expression):
+                if C.has_coerce_map_from(z.parent()) or isinstance(z, Expression):
                     self._set(C(z))
                     return
                 else:
@@ -1223,7 +1224,7 @@ cdef class MPComplexNumber(sage.structure.element.FieldElement):
             sage: MPC = MPComplexField(250)
             sage: MPC(1,2).__pari__().bitprecision()                                    # needs sage.libs.pari
             256
-            sage: MPC(pi).__pari__().bitprecision()                                     # needs sage.libs.pari
+            sage: MPC(pi).__pari__().bitprecision()                                     # needs sage.libs.pari sage.symbolic
             256
         """
         if mpfr_zero_p(self.value.re):

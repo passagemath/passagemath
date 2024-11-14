@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs fpylll
 """
 Discrete subgroups of `\\ZZ^n`
 

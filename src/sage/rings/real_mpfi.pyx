@@ -443,7 +443,7 @@ cdef class RealIntervalField_class(sage.rings.abc.RealIntervalField):
         '[1.0000000000000000 .. 2.0000000000000000]'
         sage: RIF((1r,2r)).str(style='brackets')
         '[1.0000000000000000 .. 2.0000000000000000]'
-        sage: RIF((pi, e)).str(style='brackets')
+        sage: RIF((pi, e)).str(style='brackets')                                        # needs sage.symbolic
         '[2.7182818284590450 .. 3.1415926535897936]'
 
     Values which can be represented as an exact floating-point number
@@ -1724,6 +1724,7 @@ cdef class RealIntervalFieldElement(RingElement):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: v = RIF(e, pi)
             sage: v.str(2, style='brackets')
             '[10.101101111110000101010001011000101000101011101101001 .. 11.001001000011111101101010100010001000010110100011001]'
@@ -5001,7 +5002,7 @@ cdef class RealIntervalFieldElement(RingElement):
 
             sage: r = sqrt(RIF(2)); r
             1.414213562373095?
-            sage: r.algdep(5)
+            sage: r.algdep(5)                                                           # needs fpylll
             x^2 - 2
 
         If we compute a wrong, but precise, interval, we get a wrong
@@ -5009,7 +5010,7 @@ cdef class RealIntervalFieldElement(RingElement):
 
             sage: r = sqrt(RealIntervalField(200)(2)) + (1/2)^40; r
             1.414213562374004543503461652447613117632171875376948073176680?
-            sage: r.algdep(5)
+            sage: r.algdep(5)                                                           # needs fpylll
             7266488*x^5 + 22441629*x^4 - 90470501*x^3 + 23297703*x^2 + 45778664*x + 13681026
 
         But if we compute an interval that includes the number we mean,
@@ -5017,13 +5018,13 @@ cdef class RealIntervalFieldElement(RingElement):
         interval is very imprecise::
 
             sage: r = r.union(sqrt(2.0))
-            sage: r.algdep(5)
+            sage: r.algdep(5)                                                           # needs fpylll
             x^2 - 2
 
         Even on this extremely imprecise interval we get an answer which is
         technically correct::
 
-            sage: RIF(-1, 1).algdep(5)
+            sage: RIF(-1, 1).algdep(5)                                                  # needs fpylll
             x
         """
         # If 0 is in the interval, then we have no known bits!  But

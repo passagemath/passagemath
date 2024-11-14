@@ -714,6 +714,7 @@ class ToricLattice_generic(FreeModule_generic_pid):
 
         We check that :issue:`19603` is fixed::
 
+            sage: # needs sage.geometry.polyhedron
             sage: K = Cone([(1,0,0),(0,1,0)])
             sage: K.lattice()
             3-d lattice N

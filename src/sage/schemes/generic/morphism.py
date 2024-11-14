@@ -1588,6 +1588,7 @@ class SchemeMorphism_polynomial(SchemeMorphism):
 
         ::
 
+            sage: # needs sage.schemes
             sage: R.<c> = QQ[]
             sage: P.<x,y> = ProjectiveSpace(R, 1)
             sage: f = DynamicalSystem_projective([x^2 + c*y^2, y^2], domain=P)

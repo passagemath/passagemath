@@ -374,7 +374,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
             sage: K = Zmod(10001)
             sage: P.<x> = PolynomialRing(K)
             sage: f = x^3 + 10*x^2 + 5000*x - 222
-            sage: f.small_roots()
+            sage: f.small_roots()                                                       # needs fpylll
             [4]
         """
         from sage.rings.polynomial.polynomial_modn_dense_ntl import small_roots

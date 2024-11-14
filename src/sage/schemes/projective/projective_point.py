@@ -722,7 +722,7 @@ class SchemeMorphism_point_projective_ring(SchemeMorphism_point):
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.libs.gap sage.rings.number_field
             sage: K = UniversalCyclotomicField()
             sage: P.<x,y,z> = ProjectiveSpace(K, 2)
             sage: Q = P.point([K(4/3), K.gen(7), K.gen(5)])

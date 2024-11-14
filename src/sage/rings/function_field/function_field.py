@@ -999,7 +999,7 @@ class FunctionField(Field):
 
         A place that has a unique extension can just be defined downstairs::
 
-            sage: v = L.valuation(x); v                                                 # needs sage.rings.function_field
+            sage: v = L.valuation(x); v                                                 # needs sage.geometry.polyhedron sage.rings.function_field
             (x)-adic valuation
         """
         from sage.rings.function_field.valuation import FunctionFieldValuation
@@ -1187,13 +1187,13 @@ class FunctionField(Field):
             sage: m(x)                                                                  # needs sage.rings.function_field
             s^-1 + O(s^19)
 
-            sage: m = K.completion(p, prec=infinity); m                                 # needs sage.rings.function_field
+            sage: m = K.completion(p, prec=infinity); m                                 # needs sage.combinat sage.rings.function_field
             Completion map:
               From: Rational function field in x over Finite Field of size 2
               To:   Lazy Laurent Series Ring in s over Finite Field of size 2
-            sage: f = m(x); f                                                           # needs sage.rings.function_field
+            sage: f = m(x); f                                                           # needs sage.combinat sage.rings.function_field
             s^-1 + ...
-            sage: f.coefficient(100)                                                    # needs sage.rings.function_field
+            sage: f.coefficient(100)                                                    # needs sage.combinat sage.rings.function_field
             0
 
             sage: # needs sage.rings.function_field

@@ -1170,7 +1170,7 @@ class ProductProjectiveSpaces_field(ProductProjectiveSpaces_ring):
 
             sage: u = QQ['u'].0
             sage: P = ProductProjectiveSpaces([1, 1], NumberField(u^2 - 2, 'v'))        # needs sage.rings.number_field
-            sage: sorted(list(P.points_of_bounded_height(bound=1.5)))                   # needs sage.rings.number_field
+            sage: sorted(list(P.points_of_bounded_height(bound=1.5)))                   # needs sage.geometry.polyhedron sage.rings.number_field
             [(-v : 1 , -v : 1), (-v : 1 , -1 : 1), (-v : 1 , -1/2*v : 1), (-v : 1 , 0 : 1),
              (-v : 1 , 1/2*v : 1), (-v : 1 , 1 : 0), (-v : 1 , 1 : 1), (-v : 1 , v : 1),
              (-1 : 1 , -v : 1), (-1 : 1 , -1 : 1), (-1 : 1 , -1/2*v : 1), (-1 : 1 , 0 : 1),

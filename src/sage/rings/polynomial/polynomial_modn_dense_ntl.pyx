@@ -420,7 +420,7 @@ cdef class Polynomial_dense_mod_n(Polynomial):
             sage: K = Zmod(10001)
             sage: P.<x> = PolynomialRing(K, implementation='NTL')
             sage: f = x^3 + 10*x^2 + 5000*x - 222
-            sage: f.small_roots()
+            sage: f.small_roots()                                                       # needs fpylll
             [4]
         """
         return small_roots(self, *args, **kwds)
@@ -523,7 +523,7 @@ def small_roots(self, X=None, beta=1.0, epsilon=None, **kwds):
     recover it without factoring `N` using Coppersmith's small root
     method::
 
-        sage: f.small_roots()
+        sage: f.small_roots()                                                           # needs fpylll
         [4]
 
     An application of this method is to consider RSA. We are using 512-bit RSA

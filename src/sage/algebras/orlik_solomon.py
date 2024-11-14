@@ -473,7 +473,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
 
             sage: N = matroids.catalog.Fano()
             sage: O = N.orlik_solomon_algebra(QQ)
-            sage: O.as_gca()                                                            # needs sage.libs.singular
+            sage: O.as_gca()                                                            # needs sage.combinat sage.libs.singular
             Graded Commutative Algebra with generators ('e0', 'e1', 'e2', 'e3', 'e4', 'e5', 'e6')
              in degrees (1, 1, 1, 1, 1, 1, 1) with relations
              [e1*e2 - e1*e3 + e2*e3, e0*e1*e3 - e0*e1*e4 + e0*e3*e4 - e1*e3*e4,
