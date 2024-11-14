@@ -1223,7 +1223,7 @@ cdef class MPComplexNumber(sage.structure.element.FieldElement):
             sage: MPC = MPComplexField(250)
             sage: MPC(1,2).__pari__().bitprecision()                                    # needs sage.libs.pari
             256
-            sage: MPC(pi).__pari__().bitprecision()                                     # needs sage.libs.pari
+            sage: MPC(pi).__pari__().bitprecision()                                     # needs sage.libs.pari sage.symbolic
             256
         """
         if mpfr_zero_p(self.value.re):
