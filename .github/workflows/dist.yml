@@ -618,7 +618,6 @@ jobs:
         id: python
         with:
           python-version: "3.10"
-          update-environment: false
       - run: |
           pip install tox
       - run: |
