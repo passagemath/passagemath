@@ -5963,11 +5963,11 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
             True
             sage: K.discriminant().factor()
             2^20 * 3^10 * 53^10
-            sage: K.decomposition_type(2)
+            sage: K.decomposition_type(2)                                               # needs sage.geometry.polyhedron
             [(2, 5, 2)]
-            sage: K.decomposition_type(3)
+            sage: K.decomposition_type(3)                                               # needs sage.geometry.polyhedron
             [(2, 1, 10)]
-            sage: K.decomposition_type(53)
+            sage: K.decomposition_type(53)                                              # needs sage.geometry.polyhedron
             [(2, 2, 5)]
 
         This example is only ramified at 11::
@@ -5976,7 +5976,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
             ....:                                   - 512*x^4 + 2432/11*x^2 - 11))
             sage: K.discriminant().factor()
             -1 * 11^43
-            sage: K.decomposition_type(11)
+            sage: K.decomposition_type(11)                                              # needs sage.geometry.polyhedron
             [(1, 1, 2), (22, 1, 1)]
 
         Computing the decomposition type is feasible even in large degree::
@@ -5984,11 +5984,11 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
             sage: K.<a> = NumberField(x^144 + 123*x^72 + 321*x^36 + 13*x^18 + 11)
             sage: K.discriminant().factor(limit=100000)
             2^144 * 3^288 * 7^18 * 11^17 * 31^18 * 157^18 * 2153^18 * 13907^18 * ...
-            sage: K.decomposition_type(2)
+            sage: K.decomposition_type(2)                                               # needs sage.geometry.polyhedron
             [(2, 4, 3), (2, 12, 2), (2, 36, 1)]
-            sage: K.decomposition_type(3)
+            sage: K.decomposition_type(3)                                               # needs sage.geometry.polyhedron
             [(9, 3, 2), (9, 10, 1)]
-            sage: K.decomposition_type(7)
+            sage: K.decomposition_type(7)                                               # needs sage.geometry.polyhedron
             [(1, 18, 1), (1, 90, 1), (2, 1, 6), (2, 3, 4)]
 
         It also works for relative extensions::
@@ -5999,6 +5999,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         There is a unique prime above `11` and above `13` in `K`, each of which is unramified in `M`::
 
+            sage: # needs sage.geometry.polyhedron
             sage: M.decomposition_type(11)
             [(1, 2, 5)]
             sage: P11 = K.primes_above(11)[0]
@@ -6012,6 +6013,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         There are two primes above `2`, each of which ramifies in `M`::
 
+            sage: # needs sage.geometry.polyhedron
             sage: Q0, Q1 = K.primes_above(2)
             sage: M.decomposition_type(Q0)
             [(2, 5, 1)]
@@ -6028,7 +6030,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
             sage: K.<a> = NumberField(x^4 + 18*x^2 - 1)
             sage: R.<y> = K[]
             sage: L.<b> = K.extension(y^2 + 9*a^3 - 2*a^2 + 162*a - 38)
-            sage: [L.decomposition_type(i) for i in K.primes_above(3)]
+            sage: [L.decomposition_type(i) for i in K.primes_above(3)]                  # needs sage.geometry.polyhedron
             [[(1, 1, 2)], [(1, 1, 2)], [(1, 2, 1)]]
         """
         v0 = self.base_ring().valuation(p)
@@ -10591,25 +10593,26 @@ class NumberField_absolute(NumberField_generic):
 
             sage: x = polygen(QQ, 'x')
             sage: K.<g> = NumberField(x^5 - x + 19)
-            sage: list(K.elements_of_bounded_height(bound=0.9))
+            sage: list(K.elements_of_bounded_height(bound=0.9))                         # needs sage.geometry.polyhedron
             []
 
         The only elements in a number field of height 1 are 0 and the roots of
         unity::
 
             sage: K.<a> = NumberField(x^2 + x + 1)
-            sage: list(K.elements_of_bounded_height(bound=1))
+            sage: list(K.elements_of_bounded_height(bound=1))                           # needs sage.geometry.polyhedron
             [0, a + 1, a, -1, -a - 1, -a, 1]
 
         ::
 
             sage: K.<a> = CyclotomicField(20)
-            sage: len(list(K.elements_of_bounded_height(bound=1)))
+            sage: len(list(K.elements_of_bounded_height(bound=1)))                      # needs sage.geometry.polyhedron
             21
 
         The elements in the output iterator all have relative multiplicative
         height at most the input bound::
 
+            sage: # needs sage.geometry.polyhedron
             sage: K.<a> = NumberField(x^6 + 2)
             sage: L = K.elements_of_bounded_height(bound=5)
             sage: for t in L:
@@ -10628,6 +10631,7 @@ class NumberField_absolute(NumberField_generic):
 
         ::
 
+            sage: # needs sage.geometry.polyhedron
             sage: K.<a> = NumberField(x^2 - 71)
             sage: L = K.elements_of_bounded_height(bound=20)
             sage: all(exp(2*t.global_height()) <= 20 for t in L) # long time (5 s)
@@ -10635,6 +10639,7 @@ class NumberField_absolute(NumberField_generic):
 
         ::
 
+            sage: # needs sage.geometry.polyhedron
             sage: K.<a> = NumberField(x^2 + 17)
             sage: L = K.elements_of_bounded_height(bound=120)
             sage: len(list(L))
@@ -10642,6 +10647,7 @@ class NumberField_absolute(NumberField_generic):
 
         ::
 
+            sage: # needs sage.geometry.polyhedron
             sage: K.<a> = NumberField(x^4 - 5)
             sage: L = K.elements_of_bounded_height(bound=50)
             sage: len(list(L)) # long time (2 s)
@@ -10649,6 +10655,7 @@ class NumberField_absolute(NumberField_generic):
 
         ::
 
+            sage: # needs sage.geometry.polyhedron
             sage: K.<a> = CyclotomicField(13)
             sage: L = K.elements_of_bounded_height(bound=2)
             sage: len(list(L)) # long time (3 s)
@@ -10656,6 +10663,7 @@ class NumberField_absolute(NumberField_generic):
 
         ::
 
+            sage: # needs sage.geometry.polyhedron
             sage: K.<a> = NumberField(x^6 + 2)
             sage: L = K.elements_of_bounded_height(bound=60, precision=100)
             sage: len(list(L)) # long time (5 s)
@@ -10663,6 +10671,7 @@ class NumberField_absolute(NumberField_generic):
 
         ::
 
+            sage: # needs sage.geometry.polyhedron
             sage: K.<a> = NumberField(x^4 - x^3 - 3*x^2 + x + 1)
             sage: L = K.elements_of_bounded_height(bound=10, tolerance=0.1)
             sage: len(list(L))

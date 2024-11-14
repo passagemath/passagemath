@@ -35,7 +35,7 @@ extensions can only be approximated::
     sage: R.<y> = K[]
     sage: L.<y> = K.extension(y^2 - x)
     sage: v = K.valuation(1)
-    sage: w = v.extensions(L); w
+    sage: w = v.extensions(L); w                                                        # needs sage.geometry.polyhedron
     [[ (x - 1)-adic valuation, v(y + 1) = 1 ]-adic valuation,
      [ (x - 1)-adic valuation, v(y - 1) = 1 ]-adic valuation]
 
@@ -46,7 +46,7 @@ The same phenomenon can be observed for valuations on number fields::
     sage: R.<t> = K[]
     sage: L.<t> = K.extension(t^2 + 1)
     sage: v = QQ.valuation(5)
-    sage: w = v.extensions(L); w
+    sage: w = v.extensions(L); w                                                        # needs sage.geometry.polyhedron
     [[ 5-adic valuation, v(t + 2) = 1 ]-adic valuation,
      [ 5-adic valuation, v(t + 3) = 1 ]-adic valuation]
 
@@ -56,7 +56,7 @@ The same phenomenon can be observed for valuations on number fields::
     valuation without using a limit. This is done to improve performance as many
     computations already can be done correctly with an approximation::
 
-        sage: # needs sage.rings.function_field
+        sage: # needs sage.geometry.polyhedron sage.rings.function_field
         sage: K.<x> = FunctionField(QQ)
         sage: R.<y> = K[]
         sage: L.<y> = K.extension(y^2 - x)
@@ -166,28 +166,28 @@ class LimitValuation_generic(DiscretePseudoValuation):
         sage: R.<y> = K[]
         sage: L.<y> = K.extension(y^2 - x)
         sage: v = K.valuation(0)
-        sage: w = v.extension(L)
+        sage: w = v.extension(L)                                                        # needs sage.geometry.polyhedron
         sage: w._base_valuation
         [ Gauss valuation induced by (x)-adic valuation, v(y) = 1/2 , … ]
 
     The currently used approximation can be found in the ``_approximation``
     field::
 
-        sage: w._base_valuation._approximation                                          # needs sage.rings.function_field
+        sage: w._base_valuation._approximation                                          # needs sage.geometry.polyhedron sage.rings.function_field
         [ Gauss valuation induced by (x)-adic valuation, v(y) = 1/2 ]
 
     TESTS::
 
         sage: from sage.rings.valuation.limit_valuation import LimitValuation_generic
-        sage: isinstance(w._base_valuation, LimitValuation_generic)                     # needs sage.rings.function_field
+        sage: isinstance(w._base_valuation, LimitValuation_generic)                     # needs sage.geometry.polyhedron sage.rings.function_field
         True
-        sage: TestSuite(w._base_valuation).run()        # long time                     # needs sage.rings.function_field
+        sage: TestSuite(w._base_valuation).run()        # long time                     # needs sage.geometry.polyhedron sage.rings.function_field
     """
     def __init__(self, parent, approximation):
         r"""
         TESTS::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: R.<x> = QQ[]
             sage: K.<i> = QQ.extension(x^2 + 1)
             sage: v = K.valuation(2)
@@ -234,7 +234,7 @@ class LimitValuation_generic(DiscretePseudoValuation):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.function_field
+            sage: # needs sage.geometry.polyhedron sage.rings.function_field
             sage: K.<x> = FunctionField(QQ)
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 - x)
@@ -262,7 +262,7 @@ class LimitValuation_generic(DiscretePseudoValuation):
         For the unique extension over the place at 1337, the initial
         approximation is sufficient to compute the reduction of ``y``::
 
-            sage: # needs sage.rings.function_field
+            sage: # needs sage.geometry.polyhedron sage.rings.function_field
             sage: v = K.valuation(1337)
             sage: w = v.extension(L)
             sage: u = w._base_valuation
@@ -276,7 +276,7 @@ class LimitValuation_generic(DiscretePseudoValuation):
         However, at a place over 1341, the initial approximation is not sufficient
         for some values (note that 1341-1337 is a square)::
 
-            sage: # needs sage.rings.function_field
+            sage: # needs sage.geometry.polyhedron sage.rings.function_field
             sage: v = K.valuation(1341)
             sage: w = v.extensions(L)[1]
             sage: u = w._base_valuation
@@ -309,7 +309,7 @@ class LimitValuation_generic(DiscretePseudoValuation):
         For the unique extension over the place at 23, the initial
         approximation is sufficient to compute all valuations::
 
-            sage: # needs sage.rings.function_field
+            sage: # needs sage.geometry.polyhedron sage.rings.function_field
             sage: v = K.valuation(23)
             sage: w = v.extension(L)
             sage: u = w._base_valuation
@@ -325,7 +325,7 @@ class LimitValuation_generic(DiscretePseudoValuation):
         improvement step is faster in this case than checking whether the
         approximation is sufficient)::
 
-            sage: # needs sage.rings.function_field
+            sage: # needs sage.geometry.polyhedron sage.rings.function_field
             sage: w(y)  # indirect doctest
             1/2
             sage: u._approximation
@@ -338,7 +338,7 @@ class LimitValuation_generic(DiscretePseudoValuation):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -369,7 +369,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
     EXAMPLES::
 
-        sage: # needs sage.rings.number_field
+        sage: # needs sage.geometry.polyhedron sage.rings.number_field
         sage: R.<x> = QQ[]
         sage: K.<i> = QQ.extension(x^2 + 1)
         sage: v = K.valuation(2)
@@ -380,7 +380,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
         r"""
         TESTS::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: R.<x> = QQ[]
             sage: K.<i> = QQ.extension(x^2 + 1)
             sage: v = K.valuation(2)
@@ -402,7 +402,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: v = GaussianIntegers().valuation(2)
             sage: u = v._base_valuation
             sage: u.extensions(QQ['x'])
@@ -428,7 +428,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.function_field
+            sage: # needs sage.geometry.polyhedron sage.rings.function_field
             sage: K.<x> = FunctionField(QQ)
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^4 - x^2 - 2*x - 1)
@@ -449,7 +449,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.function_field
+            sage: # needs sage.geometry.polyhedron sage.rings.function_field
             sage: K.<x> = FunctionField(QQ)
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 - x)
@@ -494,7 +494,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -510,8 +510,8 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
         This method has no effect, if the approximation is already an infinite
         valuation::
 
-            sage: u._improve_approximation()                                            # needs sage.rings.number_field
-            sage: u._approximation                                                      # needs sage.rings.number_field
+            sage: u._improve_approximation()                                            # needs sage.geometry.polyhedron sage.rings.number_field
+            sage: u._approximation                                                      # needs sage.geometry.polyhedron sage.rings.number_field
             [ Gauss valuation induced by 2-adic valuation, v(t + 1) = 1/2, v(t^2 + 1) = +Infinity ]
         """
         from sage.rings.infinity import infinity
@@ -618,7 +618,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -647,7 +647,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -716,7 +716,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -738,7 +738,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -751,7 +751,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
             sage: u._base_valuation._weakly_separating_element(uu._base_valuation)  # long time
             t + 2
 
-            sage: # needs sage.rings.function_field
+            sage: # needs sage.geometry.polyhedron sage.rings.function_field
             sage: K.<x> = FunctionField(QQ)
             sage: v = K.valuation(1/x)
             sage: R.<y> = K[]
@@ -795,7 +795,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         TESTS::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -812,7 +812,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         TESTS::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -837,7 +837,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -858,7 +858,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -887,7 +887,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -910,7 +910,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
@@ -934,7 +934,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
         For a Mac Lane limit valuation, this is never the case, so this
         method always returns ``False``::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)

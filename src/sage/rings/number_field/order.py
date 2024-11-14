@@ -1402,7 +1402,7 @@ class Order(Parent, sage.rings.abc.Order):
             sage: x = polygen(ZZ, 'x')
             sage: K.<a> = NumberField(x^2 + 1)
             sage: O = K.order(2*a)
-            sage: valuations.pAdicValuation(O, 2)
+            sage: valuations.pAdicValuation(O, 2)                                       # needs sage.geometry.polyhedron
             2-adic valuation
 
             sage: GaussianIntegers().valuation(2)
@@ -1818,6 +1818,7 @@ class Order_absolute(Order):
 
         EXAMPLES::
 
+            sage: x = polygen(ZZ, 'x')
             sage: K.<t> = NumberField(x^3 + x + 1)
             sage: K.order(1337*t)._is_maximal() is None
             True

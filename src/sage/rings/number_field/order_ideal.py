@@ -19,6 +19,7 @@ EXAMPLES::
 
 An ideal of an order in a relative number field::
 
+    sage: x = polygen(ZZ, 'x')
     sage: K.<a,b> = NumberField([x^2 + 1, x^2 - 3])
     sage: O = K.order([3*a,2*b])
     sage: I = O.ideal((-6*b + 6)*a + 6*b + 18); I

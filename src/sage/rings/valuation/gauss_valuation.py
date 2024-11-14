@@ -525,7 +525,7 @@ class GaussValuation_generic(NonFinalInductiveValuation):
             sage: v = ZZ.valuation(2)
             sage: R.<x> = ZZ[]
             sage: w = GaussValuation(R, v)
-            sage: w.extensions(GaussianIntegers()['x'])                                 # needs sage.rings.number_field
+            sage: w.extensions(GaussianIntegers()['x'])                                 # needs sage.geometry.polyhedron sage.rings.number_field
             [Gauss valuation induced by 2-adic valuation]
         """
         from sage.rings.polynomial.polynomial_ring import PolynomialRing_general

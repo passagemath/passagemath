@@ -533,7 +533,7 @@ class AugmentedValuation_base(InductiveValuation):
             sage: R.<x> = QQ[]
             sage: v = GaussValuation(R, QQ.valuation(2))
             sage: w = v.augmentation(x^2 + x + 1, 1)
-            sage: w.extensions(GaussianIntegers().fraction_field()['x'])                # needs sage.rings.number_field
+            sage: w.extensions(GaussianIntegers().fraction_field()['x'])                # needs sage.geometry.polyhedron sage.rings.number_field
             [[ Gauss valuation induced by 2-adic valuation, v(x^2 + x + 1) = 1 ]]
         """
         if ring is self.domain():
@@ -572,7 +572,7 @@ class AugmentedValuation_base(InductiveValuation):
             sage: R.<x> = K[]
             sage: v = GaussValuation(R, K.valuation(2))
             sage: w = v.augmentation(x^2 + x + 1, 1)
-            sage: w.restriction(QQ['x'])                                                # needs sage.libs.singular
+            sage: w.restriction(QQ['x'])                                                # needs sage.geometry.polyhedron sage.libs.singular
             [ Gauss valuation induced by 2-adic valuation, v(x^2 + x + 1) = 1 ]
         """
         if ring.is_subring(self.domain()):
@@ -784,7 +784,7 @@ class AugmentedValuation_base(InductiveValuation):
 
         We can change the domain of an augmented valuation even if there is no coercion between rings::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: R.<x> = GaussianIntegers()[]
             sage: v = GaussValuation(R, GaussianIntegers().valuation(2))
             sage: v = v.augmentation(x, 1)
@@ -1736,7 +1736,7 @@ class FiniteAugmentedValuation(AugmentedValuation_base, FiniteInductiveValuation
         Check that :issue:`25607` has been resolved, i.e., the coefficients
         in the following example are small::
 
-            sage: # needs sage.libs.ntl sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.libs.ntl sage.rings.number_field
             sage: R.<x> = QQ[]
             sage: K.<a> = NumberField(x^3 + 6)
             sage: R.<x> = K[]
