@@ -905,8 +905,8 @@ class SchemeMorphism_polynomial_projective_space(SchemeMorphism_polynomial):
         We can pass in a valuation to ``valuation``::
 
             sage: g = H([(a+1)*x^3 + 2*x*y^2, 4*x*y^2, 8*x*z^2])                        # needs sage.rings.number_field
-            sage: g.normalize_coordinates(valuation=A.valuation(A.prime_above(2)))      # needs sage.rings.number_field
-            sage: g == f                                                                # needs sage.rings.number_field
+            sage: g.normalize_coordinates(valuation=A.valuation(A.prime_above(2)))      # needs sage.geometry.polyhedron sage.rings.number_field
+            sage: g == f                                                                # needs sage.geometry.polyhedron sage.rings.number_field
             True
 
         ::

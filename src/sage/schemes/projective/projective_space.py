@@ -1031,7 +1031,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
             sage: R.<x> = CF[]
             sage: L.<l> = CF.extension(x^3 + 2)
             sage: Q.<x,y> = ProjectiveSpace(L, 1)
-            sage: sorted(list(Q.points_of_bounded_height(bound=1)))
+            sage: sorted(list(Q.points_of_bounded_height(bound=1)))                     # needs sage.geometry.polyhedron
             [(0 : 1), (1 : 0), (a + 1 : 1), (a : 1),
              (-1 : 1), (-a - 1 : 1), (-a : 1), (1 : 1)]
 
@@ -1041,7 +1041,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
             sage: R.<x> = QQ[]
             sage: F.<a> = NumberField(x^4 - 8*x^2 + 3)
             sage: P.<x,y,z> = ProjectiveSpace(F, 2)
-            sage: all(exp(p.global_height()) <= 1                                       # needs sage.symbolic
+            sage: all(exp(p.global_height()) <= 1                                       # needs sage.geometry.polyhedron sage.symbolic
             ....:     for p in P.points_of_bounded_height(bound=1))
             True
 
@@ -1049,7 +1049,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
 
             sage: K.<a> = CyclotomicField(3)                                            # needs sage.rings.number_field
             sage: P.<x,y,z> = ProjectiveSpace(K, 2)                                     # needs sage.rings.number_field
-            sage: len(list(P.points_of_bounded_height(bound=1)))                        # needs sage.rings.number_field
+            sage: len(list(P.points_of_bounded_height(bound=1)))                        # needs sage.geometry.polyhedron sage.rings.number_field
             57
 
         ::
@@ -1057,7 +1057,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
             sage: u = QQ['u'].0
             sage: K.<k> = NumberField(u^2 - 2)                                          # needs sage.rings.number_field
             sage: P.<x,y> = ProjectiveSpace(K, 1)                                       # needs sage.rings.number_field
-            sage: len(list(P.points_of_bounded_height(bound=2)))                        # needs sage.rings.number_field
+            sage: len(list(P.points_of_bounded_height(bound=2)))                        # needs sage.geometry.polyhedron sage.rings.number_field
             24
 
         ::
@@ -1065,12 +1065,12 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
             sage: R.<x> = QQ[]
             sage: K.<k> = NumberField(x^4 - 8*x^2 + 3)                                  # needs sage.rings.number_field
             sage: P.<x,y> = ProjectiveSpace(K, 1)                                       # needs sage.rings.number_field
-            sage: len(list(P.points_of_bounded_height(bound=2)))                        # needs sage.rings.number_field
+            sage: len(list(P.points_of_bounded_height(bound=2)))                        # needs sage.geometry.polyhedron sage.rings.number_field
             108
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: R.<x> = QQ[]
             sage: K.<v> = NumberField(x^5 + x^3 + 1)
             sage: P.<x,y,z> = ProjectiveSpace(K, 2)
@@ -1080,7 +1080,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K.<v> = QuadraticField(2)
             sage: P.<x,y> = ProjectiveSpace(K, 1)
             sage: sorted(list(P.points_of_bounded_height(bound=2)))
@@ -1091,7 +1091,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: R.<x> = QQ[]
             sage: K.<a> = NumberField(3*x^2 + 1)
             sage: P.<z,w> = ProjectiveSpace(K, 1)
@@ -1101,7 +1101,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: R.<x> = QQ[]
             sage: K.<a> = NumberField(3*x^2 + 1)
             sage: O = K.maximal_order()
@@ -1111,7 +1111,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: R.<x> = QQ[]
             sage: K.<a> = NumberField(x^3 - 7)
             sage: O = K.maximal_order()
@@ -1122,7 +1122,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
         ::
 
             sage: P.<w,z> = ProjectiveSpace(ZZ, 1)
-            sage: sorted(list(P.points_of_bounded_height(bound=2)))
+            sage: sorted(list(P.points_of_bounded_height(bound=2)))                     # needs sage.geometry.polyhedron
             [(-2 : -1), (-2 : 1), (-1 : -2), (-1 : -1),
              (-1 : 0), (-1 : 1), (-1 : 2), (0 : -1)]
 
@@ -1138,7 +1138,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K.<i> = NumberField(x^2 + 1)
             sage: PK.<t> = K[]
             sage: L.<a> = K.extension(t^4  - i)
@@ -1615,7 +1615,7 @@ class ProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
             sage: P1.<a,b,c> = ProjectiveSpace(RR, 2)
             sage: points_source = [P1([1, 4, 1]), P1([1, 2, 2]), P1([3, 5, 1]), P1([1, -1, 1])]
             sage: points_target = [P1([5, -2, 7]), P1([3, -2, 3]), P1([6, -5, 9]), P1([3, 6, 7])]
-            sage: P1.point_transformation_matrix(points_source,        # abs tol 1e-13  # needs sage.modules
+            sage: P1.point_transformation_matrix(points_source,        # abs tol 1e-13  # needs scipy sage.modules
             ....:                                points_target)
             [-0.0619047619047597  -0.609523809523810  -0.119047619047621]
             [  0.853968253968253  0.0380952380952380  0.0412698412698421]
