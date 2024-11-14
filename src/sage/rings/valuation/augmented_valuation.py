@@ -567,12 +567,12 @@ class AugmentedValuation_base(InductiveValuation):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.libs.singular sage.rings.number_field
             sage: K = GaussianIntegers().fraction_field()
             sage: R.<x> = K[]
             sage: v = GaussValuation(R, K.valuation(2))
             sage: w = v.augmentation(x^2 + x + 1, 1)
-            sage: w.restriction(QQ['x'])                                                # needs sage.geometry.polyhedron sage.libs.singular
+            sage: w.restriction(QQ['x'])
             [ Gauss valuation induced by 2-adic valuation, v(x^2 + x + 1) = 1 ]
         """
         if ring.is_subring(self.domain()):

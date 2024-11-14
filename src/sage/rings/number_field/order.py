@@ -1405,17 +1405,17 @@ class Order(Parent, sage.rings.abc.Order):
             sage: valuations.pAdicValuation(O, 2)                                       # needs sage.geometry.polyhedron
             2-adic valuation
 
-            sage: GaussianIntegers().valuation(2)
+            sage: GaussianIntegers().valuation(2)                                       # needs sage.geometry.polyhedron
             2-adic valuation
 
         ::
 
-            sage: GaussianIntegers().valuation(3)
+            sage: GaussianIntegers().valuation(3)                                       # needs sage.geometry.polyhedron
             3-adic valuation
 
         A prime `p` that factors into pairwise distinct factors, results in an error::
 
-            sage: GaussianIntegers().valuation(5)
+            sage: GaussianIntegers().valuation(5)                                       # needs sage.geometry.polyhedron
             Traceback (most recent call last):
             ...
             ValueError: The valuation Gauss valuation induced by 5-adic valuation does not

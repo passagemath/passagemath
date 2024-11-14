@@ -293,14 +293,14 @@ class PadicValuationFactory(UniqueFactory):
             2
             sage: I in K.primes_above(2)
             True
-            sage: K.valuation(I)
+            sage: K.valuation(I)                                                        # needs sage.geometry.polyhedron
             [ 2-adic valuation, v(x + 1) = 1/2 ]-adic valuation
 
         ::
 
             sage: # needs sage.rings.number_field
             sage: K.<a, b> = NumberField([x^2 - 2, x^2 + x + 1])
-            sage: K.valuation(2)
+            sage: K.valuation(2)                                                        # needs sage.geometry.polyhedron
             2-adic valuation
         """
         K, L, G = self._normalize_number_field_data(R)
@@ -730,7 +730,7 @@ class pAdicValuation_base(DiscreteValuation):
             sage: L.<a> = QQ.extension(x^3 - 2)
             sage: R.<b> = L[]
             sage: M.<b> = L.extension(b^2 + 2*b + a)
-            sage: M.valuation(2)
+            sage: M.valuation(2)                                                        # needs sage.geometry.polyhedron
             2-adic valuation
 
         Check that we can extend to a field written as a quotient::
@@ -740,13 +740,13 @@ class pAdicValuation_base(DiscreteValuation):
             sage: K.<a> = QQ.extension(x^2 + 1)
             sage: R.<y> = K[]
             sage: L.<b> = R.quo(x^2 + a)
-            sage: QQ.valuation(2).extensions(L)
+            sage: QQ.valuation(2).extensions(L)                                         # needs sage.geometry.polyhedron
             [2-adic valuation]
 
         A case where there was at some point an internal error in the
         approximants code::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: R.<x> = QQ[]
             sage: L.<a> = NumberField(x^4 + 2*x^3 + 2*x^2 + 8)
             sage: QQ.valuation(2).extensions(L)
@@ -755,7 +755,7 @@ class pAdicValuation_base(DiscreteValuation):
 
         A case where the extension was incorrect at some point::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: v = QQ.valuation(2)
             sage: L.<a> = NumberField(x^2 + 2)
             sage: M.<b> = L.extension(x^2 + 1)
@@ -765,7 +765,7 @@ class pAdicValuation_base(DiscreteValuation):
 
         A case where the extensions could not be separated at some point::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: v = QQ.valuation(2)
             sage: R.<x> = QQ[]
             sage: F = x^48 + 120*x^45 + 56*x^42 + 108*x^36 + 32*x^33 + 40*x^30 + 48*x^27 + 80*x^24 + 112*x^21 + 96*x^18 + 96*x^15 + 24*x^12 + 96*x^9 + 16*x^6 + 96*x^3 + 68
@@ -1357,7 +1357,7 @@ class pAdicFromLimitValuation(FiniteExtensionFromLimitValuation, pAdicValuation_
             sage: L.<a> = NumberField(x^2 + 2)
             sage: M.<b> = L.extension(x^2 + 1)
             sage: w = v.extension(L).extension(M)                                       # needs sage.geometry.polyhedron
-            sage: w._to_base_domain(b)                                                  # needs sage.rings.number_field
+            sage: w._to_base_domain(b)                                                  # needs sage.geometry.polyhedron
             x
         """
         polynomial = f.lift()

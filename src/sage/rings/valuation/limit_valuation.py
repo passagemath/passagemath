@@ -167,7 +167,7 @@ class LimitValuation_generic(DiscretePseudoValuation):
         sage: L.<y> = K.extension(y^2 - x)
         sage: v = K.valuation(0)
         sage: w = v.extension(L)                                                        # needs sage.geometry.polyhedron
-        sage: w._base_valuation
+        sage: w._base_valuation                                                         # needs sage.geometry.polyhedron sage.rings.function_field
         [ Gauss valuation induced by (x)-adic valuation, v(y) = 1/2 , … ]
 
     The currently used approximation can be found in the ``_approximation``
@@ -541,7 +541,7 @@ class MacLaneLimitValuation(LimitValuation_generic, InfiniteDiscretePseudoValuat
         approximation (perform one step of the Mac Lane algorithm) than to
         check for this::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: K = QQ
             sage: R.<t> = K[]
             sage: L.<t> = K.extension(t^2 + 1)
