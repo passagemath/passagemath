@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-linbox
+# sage.doctest: needs sage.geometry.polyhedron
 r"""
 Cython helper methods to compute integral points in polyhedra.
 """
