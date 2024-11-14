@@ -58,14 +58,14 @@ Examples
 Available as extras, from other distributions
 ---------------------------------------------
 
-`pip install "sagemath-plot[jsmol]"`
+`pip install "passagemath-plot[jsmol]"`
  Alternative backend for 3D graphics: `jupyter-jsmol <https://doc.sagemath.org/html/en/reference/spkg/jupyter_jsmol.html>`_
 
-`pip install "sagemath-plot[polyhedra]"`
- Polyhedra in arbitrary dimension, plotting in dimensions 2, 3, 4: `sagemath-polyhedra <https://doc.sagemath.org/html/en/reference/spkg/sagemath_polyhedra.html>`_
+`pip install "passagemath-plot[polyhedra]"`
+ Polyhedra in arbitrary dimension, plotting in dimensions 2, 3, 4: `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra/>`_
 
-`pip install "sagemath-plot[graphs]"`
- Graphs and networks: `sagemath-graphs <https://doc.sagemath.org/html/en/reference/spkg/sagemath_graphs.html>`_
+`pip install "passagemath-plot[graphs]"`
+ Graphs and networks: `sagemath-graphs <https://pypi.org/project/passagemath-graphs/>`_
 
-`pip install "sagemath-plot[symbolics]"`
- Defining and plotting symbolic functions and manifolds: `sagemath-symbolics <https://doc.sagemath.org/html/en/reference/spkg/sagemath_symbolics.html>`_
+`pip install "passagemath-plot[symbolics]"`
+ Defining and plotting symbolic functions and manifolds: `passagemath-symbolics <https://pypi.org/project/passagemath-symbolics/>`_
