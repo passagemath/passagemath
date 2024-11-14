@@ -854,7 +854,7 @@ class SchemeMorphism_polynomial_projective_space(SchemeMorphism_polynomial):
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.schemes
             sage: K.<w> = QuadraticField(5)
             sage: P.<x,y> = ProjectiveSpace(K, 1)
             sage: f = DynamicalSystem([w*x^2 + (1/5*w)*y^2, w*y^2])
@@ -865,7 +865,7 @@ class SchemeMorphism_polynomial_projective_space(SchemeMorphism_polynomial):
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.schemes
             sage: R.<t> = PolynomialRing(ZZ)
             sage: K.<b> = NumberField(t^3 - 11)
             sage: a = 7/(b - 1)
@@ -880,6 +880,7 @@ class SchemeMorphism_polynomial_projective_space(SchemeMorphism_polynomial):
 
         We can used ``ideal`` to scale with respect to a norm defined by an ideal::
 
+            sage: # needs sage.schemes
             sage: P.<x,y> = ProjectiveSpace(QQ, 1)
             sage: f = DynamicalSystem_projective([2*x^3, 2*x^2*y + 4*x*y^2])
             sage: f.normalize_coordinates(ideal=2); f
@@ -910,9 +911,10 @@ class SchemeMorphism_polynomial_projective_space(SchemeMorphism_polynomial):
 
         ::
 
-            sage: P.<x,y> = ProjectiveSpace(Qp(3), 1)                                   # needs sage.rings.padics
-            sage: f = DynamicalSystem_projective([3*x^2 + 6*y^2, 9*x*y])                # needs sage.rings.padics
-            sage: f.normalize_coordinates(); f                                          # needs sage.rings.padics
+            sage: # needs sage.rings.padics sage.schemes
+            sage: P.<x,y> = ProjectiveSpace(Qp(3), 1)
+            sage: f = DynamicalSystem_projective([3*x^2 + 6*y^2, 9*x*y])
+            sage: f.normalize_coordinates(); f
             Dynamical System of Projective Space of dimension 1 over
              3-adic Field with capped relative precision 20
               Defn: Defined on coordinates by sending (x : y) to
@@ -920,7 +922,7 @@ class SchemeMorphism_polynomial_projective_space(SchemeMorphism_polynomial):
 
         Check that #35797 is fixed::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.schemes
             sage: R.<x> = QQ[]
             sage: K.<a> = NumberField(3*x^2 + 1)
             sage: P.<z,w> = ProjectiveSpace(K, 1)
@@ -1365,6 +1367,7 @@ class SchemeMorphism_polynomial_projective_space(SchemeMorphism_polynomial):
 
         ::
 
+            sage: # needs sage.schemes
             sage: P.<x,y> = ProjectiveSpace(QQ, 1)
             sage: f = DynamicalSystem([1/25*x^2 + 25/3*x*y + y^2, 1*y^2])
             sage: exp(f.global_height())                                                # needs sage.symbolic
@@ -1372,6 +1375,7 @@ class SchemeMorphism_polynomial_projective_space(SchemeMorphism_polynomial):
 
         Scaling should not change the result::
 
+            sage: # needs sage.schemes
             sage: P.<x,y> = ProjectiveSpace(QQ, 1)
             sage: f = DynamicalSystem([1/25*x^2 + 25/3*x*y + y^2, 1*y^2])
             sage: f.global_height()                                                     # needs sage.symbolic
