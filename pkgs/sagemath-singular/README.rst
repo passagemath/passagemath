@@ -22,7 +22,7 @@ for general installation instructions.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``passagemath-singular``
+This pip-installable distribution ``passagemath-singular``
 provides interfaces to [Singular](https://www.singular.uni-kl.de/),
 the computer algebra system for polynomial computations, with
 special emphasis on commutative and non-commutative algebra, algebraic
@@ -80,4 +80,6 @@ Using the Cython interface to Singular::
     In [5]: std = singular_function('std')
 
     In [6]: std(I)
-    Out[6]: [a + b + c + d, b^2 + 2*b*d + d^2, b*c^2 + c^2*d - b*d^2 - d^3, b*c*d^2 + c^2*d^2 - b*d^3 + c*d^3 - d^4 - 1, b*d^4 + d^5 - b - d, c^3*d^2 + c^2*d^3 - c - d, c^2*d^4 + b*c - b*d + c*d - 2*d^2]
+    Out[6]: [a + b + c + d, b^2 + 2*b*d + d^2, b*c^2 + c^2*d - b*d^2 - d^3,
+             b*c*d^2 + c^2*d^2 - b*d^3 + c*d^3 - d^4 - 1, b*d^4 + d^5 - b - d,
+             c^3*d^2 + c^2*d^3 - c - d, c^2*d^4 + b*c - b*d + c*d - 2*d^2]
