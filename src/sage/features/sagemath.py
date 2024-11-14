@@ -102,7 +102,7 @@ class sagemath_doc_html(StaticFile):
                             filename='html',
                             search_path=(SAGE_DOC,),
                             spkg='sagemath_doc_html',
-                            type='standard')
+                            type='optional')
 
 
 class sage__all(PythonModule):

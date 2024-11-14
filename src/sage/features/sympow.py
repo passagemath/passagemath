@@ -36,7 +36,8 @@ class Sympow(Executable):
             sage: isinstance(Sympow(), Sympow)
             True
         """
-        Executable.__init__(self, "sympow", executable='sympow', spkg='sympow')
+        Executable.__init__(self, "sympow", executable='sympow',
+                            spkg='sympow', type='standard')
 
 
 def all_features():
