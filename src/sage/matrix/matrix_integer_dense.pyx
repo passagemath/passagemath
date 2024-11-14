@@ -2843,18 +2843,17 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs fpylll
             sage: A = Matrix(ZZ,3,3,range(1,10))
             sage: A.BKZ()
             [ 0  0  0]
             [ 2  1  0]
             [-1  1  3]
-
             sage: A = Matrix(ZZ,3,3,range(1,10))
             sage: A.BKZ(use_givens=True)
             [ 0  0  0]
             [ 2  1  0]
             [-1  1  3]
-
             sage: A = Matrix(ZZ,3,3,range(1,10))
             sage: A.BKZ(fp='fp')
             [ 0  0  0]
@@ -3067,7 +3066,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         EXAMPLES::
 
             sage: A = Matrix(ZZ,3,3,range(1,10))
-            sage: A.LLL()
+            sage: A.LLL()                                                               # needs fpylll
             [ 0  0  0]
             [ 2  1  0]
             [-1  1  3]
@@ -3075,6 +3074,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         We compute the extended GCD of a list of integers using LLL, this
         example is from the Magma handbook::
 
+            sage: # needs fpylll
             sage: Q = [ 67015143, 248934363018, 109210, 25590011055, 74631449,
             ....:       10230248, 709487, 68965012139, 972065, 864972271 ]
             sage: n = len(Q)
@@ -3093,6 +3093,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         The case `\delta = 1` is not always supported::
 
+            sage: # needs fpylll
             sage: L = X.LLL(delta=2)
             Traceback (most recent call last):
             ...
@@ -3108,8 +3109,8 @@ cdef class Matrix_integer_dense(Matrix_dense):
         We return the transformation matrix::
 
             sage: A = random_matrix(ZZ, 10, 20)
-            sage: R, U = A.LLL(transformation=True)
-            sage: U * A == R
+            sage: R, U = A.LLL(transformation=True)                                     # needs fpylll
+            sage: U * A == R                                                            # needs fpylll
             True
 
             sage: R, U = A.LLL(algorithm='NTL:LLL', transformation=True)
@@ -3123,7 +3124,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         Example with a nonzero kernel::
 
             sage: M = matrix(4,3,[1,2,3,2,4,6,7,0,1,-1,-2,-3])
-            sage: M.LLL()[0:2]
+            sage: M.LLL()[0:2]                                                          # needs fpylll
             [0 0 0]
             [0 0 0]
 
@@ -3137,6 +3138,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         TESTS::
 
+            sage: # needs fpylll
             sage: matrix(ZZ, 0, 0).LLL()
             []
             sage: matrix(ZZ, 3, 0).LLL()
@@ -3145,8 +3147,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             []
 
             sage: M = matrix(ZZ, [[1,2,3],[31,41,51],[101,201,301]])
-            sage: A = M.LLL()
-            sage: A
+            sage: A = M.LLL(); A                                                        # needs fpylll
             [ 0  0  0]
             [-1  0  1]
             [ 1  1  1]
@@ -3155,7 +3156,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: D = M.LLL(algorithm='NTL:LLL', fp='fp')
             sage: F = M.LLL(algorithm='NTL:LLL', fp='xd')
             sage: G = M.LLL(algorithm='NTL:LLL', fp='rr')
-            sage: A == B == C == D == F == G
+            sage: A == B == C == D == F == G                                            # needs fpylll
             True
             sage: H = M.LLL(algorithm='NTL:LLL', fp='qd')
             Traceback (most recent call last):
@@ -3352,6 +3353,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs fpylll
             sage: A = random_matrix(ZZ, 10, 10)
             sage: L = A.LLL()
             sage: A.is_LLL_reduced()

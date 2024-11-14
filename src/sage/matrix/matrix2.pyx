@@ -11122,10 +11122,10 @@ cdef class Matrix(Matrix1):
             ....:                    [-4*I, -2*I + 17,       0,  9*I + 1],
             ....:                    [   1,  -2*I - 6, -I + 11, -5*I + 1]])
             sage: G, M = A.gram_schmidt(orthonormal=True)
-            sage: (M*G - A).norm() < 10^-10
+            sage: (M*G - A).norm() < 10^-10                                             # needs scipy
             True
-            sage: id3 = G*G.conjugate().transpose()
-            sage: (id3 - identity_matrix(3)).norm() < 10^-10
+            sage: id3 = G * G.conjugate().transpose()
+            sage: (id3 - identity_matrix(3)).norm() < 10^-10                            # needs scipy
             True
             sage: G.row_space() == A.row_space()        # long time
             True
