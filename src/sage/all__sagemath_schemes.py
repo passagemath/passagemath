@@ -11,7 +11,7 @@ This distribution makes the following features available::
     FeatureTestResult('sage.modular', True)
 """
 
-from .all__sagemath_modules import *
+from .all__sagemath_polyhedra import *
 
 from .all__sagemath_singular import *
 

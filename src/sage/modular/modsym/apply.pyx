@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 # distutils: extra_compile_args = -D_XPG6
 """
 Monomial expansion of `(aX + bY)^i (cX + dY)^{j-i}`
