@@ -159,7 +159,6 @@
         "ntests": 66
     },
     "sage.categories.action": {
-        "failed": true,
         "ntests": 107
     },
     "sage.categories.additive_groups": {
@@ -2429,7 +2428,6 @@
         "ntests": 150
     },
     "sage.misc.cachefunc": {
-        "failed": true,
         "ntests": 688
     },
     "sage.misc.call": {
@@ -2682,7 +2680,6 @@
         "ntests": 637
     },
     "sage.modular.abvar.abvar_ambient_jacobian": {
-        "failed": true,
         "ntests": 53
     },
     "sage.modular.abvar.abvar_newform": {
@@ -2690,7 +2687,6 @@
         "ntests": 32
     },
     "sage.modular.abvar.constructor": {
-        "failed": true,
         "ntests": 15
     },
     "sage.modular.abvar.cuspidal_subgroup": {
@@ -2714,11 +2710,9 @@
         "ntests": 57
     },
     "sage.modular.abvar.morphism": {
-        "failed": true,
         "ntests": 170
     },
     "sage.modular.abvar.torsion_point": {
-        "failed": true,
         "ntests": 45
     },
     "sage.modular.abvar.torsion_subgroup": {
@@ -2739,7 +2733,6 @@
         "ntests": 45
     },
     "sage.modular.arithgroup.congroup_gamma0": {
-        "failed": true,
         "ntests": 95
     },
     "sage.modular.arithgroup.congroup_gamma1": {
@@ -2747,7 +2740,6 @@
         "ntests": 95
     },
     "sage.modular.arithgroup.congroup_gammaH": {
-        "failed": true,
         "ntests": 158
     },
     "sage.modular.arithgroup.congroup_sl2z": {
@@ -2766,7 +2758,6 @@
         "ntests": 388
     },
     "sage.modular.buzzard": {
-        "failed": true,
         "ntests": 7
     },
     "sage.modular.cusps": {
@@ -2798,7 +2789,6 @@
         "ntests": 102
     },
     "sage.modular.hecke.algebra": {
-        "failed": true,
         "ntests": 91
     },
     "sage.modular.hecke.ambient_module": {
@@ -2857,7 +2847,6 @@
         "ntests": 90
     },
     "sage.modular.modform.ambient": {
-        "failed": true,
         "ntests": 113
     },
     "sage.modular.modform.ambient_R": {
@@ -2873,7 +2862,6 @@
         "ntests": 13
     },
     "sage.modular.modform.ambient_g1": {
-        "failed": true,
         "ntests": 25
     },
     "sage.modular.modform.constructor": {
@@ -2888,6 +2876,9 @@
         "failed": true,
         "ntests": 41
     },
+    "sage.modular.modform.eis_series_cython": {
+        "ntests": 6
+    },
     "sage.modular.modform.eisenstein_submodule": {
         "failed": true,
         "ntests": 89
@@ -2901,15 +2892,12 @@
         "ntests": 9
     },
     "sage.modular.modform.half_integral": {
-        "failed": true,
         "ntests": 7
     },
     "sage.modular.modform.hecke_operator_on_qexp": {
-        "failed": true,
         "ntests": 33
     },
     "sage.modular.modform.j_invariant": {
-        "failed": true,
         "ntests": 3
     },
     "sage.modular.modform.l_series_gross_zagier": {
@@ -2921,7 +2909,6 @@
         "ntests": 20
     },
     "sage.modular.modform.numerical": {
-        "failed": true,
         "ntests": 46
     },
     "sage.modular.modform.ring": {
@@ -2943,11 +2930,9 @@
         "ntests": 15
     },
     "sage.modular.modform.vm_basis": {
-        "failed": true,
         "ntests": 27
     },
     "sage.modular.modform.weight1": {
-        "failed": true,
         "ntests": 10
     },
     "sage.modular.modform_hecketriangle.abstract_ring": {
@@ -2964,6 +2949,9 @@
         "failed": true,
         "ntests": 442
     },
+    "sage.modular.modsym.apply": {
+        "ntests": 6
+    },
     "sage.modular.modsym.boundary": {
         "failed": true,
         "ntests": 200
@@ -2979,11 +2967,13 @@
         "ntests": 23
     },
     "sage.modular.modsym.hecke_operator": {
-        "failed": true,
         "ntests": 6
     },
-    "sage.modular.modsym.manin_symbol": {
+    "sage.modular.modsym.heilbronn": {
         "failed": true,
+        "ntests": 66
+    },
+    "sage.modular.modsym.manin_symbol": {
         "ntests": 111
     },
     "sage.modular.modsym.manin_symbol_list": {
@@ -2995,7 +2985,6 @@
         "ntests": 80
     },
     "sage.modular.modsym.modular_symbols": {
-        "failed": true,
         "ntests": 65
     },
     "sage.modular.modsym.p1list": {
@@ -3005,7 +2994,6 @@
         "ntests": 271
     },
     "sage.modular.modsym.relation_matrix": {
-        "failed": true,
         "ntests": 29
     },
     "sage.modular.modsym.relation_matrix_pyx": {
@@ -3029,6 +3017,9 @@
     "sage.modular.overconvergent.hecke_series": {
         "failed": true,
         "ntests": 76
+    },
+    "sage.modular.pollack_stevens.dist": {
+        "ntests": 168
     },
     "sage.modular.pollack_stevens.fund_domain": {
         "failed": true,
@@ -3778,7 +3769,6 @@
         "ntests": 166
     },
     "sage.rings.laurent_series_ring_element": {
-        "failed": true,
         "ntests": 402
     },
     "sage.rings.localization": {
@@ -4468,6 +4458,10 @@
         "failed": true,
         "ntests": 227
     },
+    "sage.schemes.elliptic_curves.descent_two_isogeny": {
+        "failed": true,
+        "ntests": 37
+    },
     "sage.schemes.elliptic_curves.ec_database": {
         "failed": true,
         "ntests": 9
@@ -4949,7 +4943,6 @@
         "ntests": 160
     },
     "sage.structure.factorization": {
-        "failed": true,
         "ntests": 240
     },
     "sage.structure.factorization_integer": {
@@ -5101,7 +5094,6 @@
         "ntests": 245
     },
     "sage.tests.book_stein_modform": {
-        "failed": true,
         "ntests": 237
     },
     "sage.tests.cmdline": {
