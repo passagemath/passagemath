@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-graphs
+# sage_setup: distribution = sagemath-planarity
 # distutils: libraries = planarity
 """
 Wrapper for Boyer's (C) planarity algorithm

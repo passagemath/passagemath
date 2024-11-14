@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-latte-4ti2
+# sage.doctest: optional - latte_int
 r"""
 Interface to LattE integrale programs
 """

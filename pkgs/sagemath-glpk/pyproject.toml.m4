@@ -32,8 +32,8 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test = [
     # No test requirements; see comment in tox.ini
-    # SPKG_INSTALL_REQUIRES_sagemath_repl
-    # SPKG_INSTALL_REQUIRES_sagemath_polyhedra
+    # "passagemath-repl",
+    # "passagemath-polyhedra",
 ]
 
 [tool.setuptools]

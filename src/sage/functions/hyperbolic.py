@@ -459,7 +459,7 @@ class Function_arccosh(GinacFunction):
 
         ::
 
-            sage: acosh(CC(0.5))                                                        # needs sage.rings.real_mpfr
+            sage: acosh(CC(0.5))                                                        # needs sage.libs.pari sage.rings.real_mpfr
             1.04719755119660*I
 
             sage: # needs sage.symbolic

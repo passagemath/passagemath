@@ -26,8 +26,8 @@ on:
 
 env:
   TARGETS_PRE: all-sage-local
-  TARGETS: build doc-html
-  TARGETS_OPTIONAL: ptest
+  TARGETS: build
+  TARGETS_OPTIONAL: doc-html ptest-nodoc
 
 jobs:
   stage-1:

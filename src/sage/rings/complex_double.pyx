@@ -2553,7 +2553,7 @@ cdef class ComplexToCDF(Morphism):
 
     EXAMPLES::
 
-        sage: # needs numpy
+        sage: # needs numpy sage.symbolic
         sage: import numpy
         sage: f = CDF.coerce_map_from(numpy.complex128)
         sage: f(numpy.complex128(I))
@@ -2574,8 +2574,9 @@ cdef class ComplexToCDF(Morphism):
 
         EXAMPLES::
 
-            sage: import numpy                                                          # needs numpy
-            sage: CDF(numpy.complex128(I))    # indirect doctest                          # needs numpy
+            sage: # needs numpy sage.symbolic
+            sage: import numpy
+            sage: CDF(numpy.complex128(I))    # indirect doctest
             1.0*I
         """
         cdef ComplexDoubleElement z = <ComplexDoubleElement>ComplexDoubleElement.__new__(ComplexDoubleElement)

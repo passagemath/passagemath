@@ -3,7 +3,6 @@ prune sage
 include VERSION.txt
 
 include sage/libs/topcom.p*
-include sage/rings/polynomial/topcom.p*
 
 global-exclude *.c
 global-exclude *.cpp

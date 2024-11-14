@@ -31,30 +31,33 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test        = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+test        = ["passagemath-repl"]
 
 # libraries
-bliss       = [SPKG_INSTALL_REQUIRES_sagemath_bliss]
-gap         = [SPKG_INSTALL_REQUIRES_sagemath_gap]
+bliss       = ["passagemath-bliss"]
+gap         = ["passagemath-gap"]
 igraph      = [SPKG_INSTALL_REQUIRES_python_igraph]
-mcqd        = [SPKG_INSTALL_REQUIRES_sagemath_mcqd]
-nauty       = [SPKG_INSTALL_REQUIRES_sagemath_nauty]
+mcqd        = ["passagemath-mcqd"]
+nauty       = ["passagemath-nauty"]
 networkx    = [SPKG_INSTALL_REQUIRES_networkx]
-pari        = [SPKG_INSTALL_REQUIRES_sagemath_pari]
-tdlib       = [SPKG_INSTALL_REQUIRES_sagemath_tdlib]
+pari        = ["passagemath-pari"]
+planarity   = ["passagemath-planarity"]
+rankwidth   = ["passagemath-rankwidth"]
+rw          = ["passagemath-graphs[rankwidth]"]  # alias
+tdlib       = ["passagemath-tdlib"]
 
 # features
-combinat    = [SPKG_INSTALL_REQUIRES_sagemath_combinat]
+combinat    = ["passagemath-combinat"]
 editor      = [SPKG_INSTALL_REQUIRES_phitigra]
-homology    = [SPKG_INSTALL_REQUIRES_sagemath_modules]
-mip         = [SPKG_INSTALL_REQUIRES_sagemath_polyhedra]
-modules     = [SPKG_INSTALL_REQUIRES_sagemath_modules]
-plot        = [SPKG_INSTALL_REQUIRES_sagemath_plot]
-polyhedra   = [SPKG_INSTALL_REQUIRES_sagemath_polyhedra]
-repl        = [SPKG_INSTALL_REQUIRES_sagemath_repl]
-sat         = [SPKG_INSTALL_REQUIRES_sagemath_combinat]
+homology    = ["passagemath-modules"]
+mip         = ["passagemath-polyhedra"]
+modules     = ["passagemath-modules"]
+plot        = ["passagemath-plot"]
+polyhedra   = ["passagemath-polyhedra"]
+repl        = ["passagemath-repl"]
+sat         = ["passagemath-combinat"]
 
-standard    = ["passagemath-graphs[combinat,databases,mip,modules,plot,polyhedra,repl]"]
+standard    = ["passagemath-graphs[combinat,databases,mip,modules,planarity,plot,polyhedra,rankwidth,repl]"]
 
 [tool.setuptools]
 include-package-data = false
@@ -75,8 +78,6 @@ host-requires = [
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
-  "pkg:generic/planarity",
-  "pkg:generic/rw",
 ]
 
 dependencies = [

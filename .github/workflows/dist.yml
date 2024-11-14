@@ -122,6 +122,10 @@ jobs:
         with:
           path: "dist/*.tar.gz"
           name: dist
+      - name: twine check
+        run: |
+          ./sage -pip install twine
+          ./sage -sh -c 'twine check dist/*.tar.gz'
 
   release:
 
@@ -197,7 +201,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline info ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl libgd cmr msolve cddlib latte_int 4ti2 topcom palp nauty qepcad gfan
+      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd cmr msolve cddlib latte_int 4ti2 topcom palp nauty qepcad gfan frobby lrslib sympow
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -277,7 +281,7 @@ jobs:
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --prefix=$HOME/runner-venv
           make cibuildwheel
           export PATH=build/bin:$PATH
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX --with-system-gfortran=force --without-system-libpng && cp config.status prefix/; fi && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored) && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc" >> "$GITHUB_ENV"
+          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX --with-system-gfortran=force --without-system-libpng && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc" >> "$GITHUB_ENV"
           mkdir -p unpacked
           for sdist in dist/$pkg*.tar.gz; do
               (cd unpacked && tar xfz - ) < $sdist
@@ -365,6 +369,18 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*graphs*
 
+      - name: sagemath-planarity
+        id:   sagemath-planarity
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*planarity*
+
+      - name: sagemath-rankwidth
+        id:   sagemath-rankwidth
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*rankwidth*
+
         ####### sagemath-modules and what depends on it
 
       - name: sagemath-modules
@@ -439,6 +455,18 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*gfan*
 
+      - name: sagemath-lrslib
+        id:   sagemath-lrslib
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*lrslib*
+
+      - name: sagemath-frobby
+        id:   sagemath-frobby
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*frobby*
+
       - name: sagemath-palp
         id:   sagemath-palp
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
@@ -511,6 +539,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_symbolics*
 
+      - name: sagemath-sympow
+        id:   sagemath-sympow
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_sympow*
+
       - name: sagemath-standard-no-symbolics
         id:   sagemath-standard-no-symbolics
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
@@ -519,7 +553,7 @@ jobs:
 
 
       - uses: actions/upload-artifact@v4
-        if:   (success() || failure())
+        if:   always()
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
           path: ./wheelhouse/*.whl
@@ -559,3 +593,44 @@ jobs:
           skip-existing: true
           verbose: true
         if: env.CAN_DEPLOY == 'true'
+
+  tox:
+    needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels]
+    if: (success() || failure())
+    strategy:
+      fail-fast: false
+      matrix:
+        distribution:
+          - sagemath-categories
+          - sagemath-polyhedra
+        os:
+          - ubuntu-latest
+          - macos-13
+          - macos-14
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: "*-wheels"
+          path: wheelhouse
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: "dist"
+          path: wheelhouse
+          merge-multiple: true
+      - uses: actions/setup-python@v5
+        id: python
+        with:
+          python-version: "3.10"
+          update-environment: false
+      - run: |
+          pip install tox
+      - run: |
+          pkg=${{ matrix.distribution }}
+          WHEELHOUSE=$(pwd)/wheelhouse
+          export PIP_FIND_LINKS=file://$WHEELHOUSE
+          cd pkgs/$pkg
+          pkg=${pkg//-/_}
+          tox -v -v -e norequirements --installpkg $WHEELHOUSE/*$pkg*-cp310-*manylinux*.whl

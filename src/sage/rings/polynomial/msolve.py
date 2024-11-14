@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-msolve
+# sage.doctest: optional - msolve
 r"""
 Solution of polynomial systems using msolve
 

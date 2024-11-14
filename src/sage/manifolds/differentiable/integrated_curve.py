@@ -3294,6 +3294,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Plot the curves (for clarity, set a 2 degrees shift in the initial
     value of `\theta_{0}` so that the curves do not overlap)::
 
+        sage: # needs scipy sage.plot
         sage: graph2D_mercator_loxo = c_loxo.plot(chart=mercator,
         ....:  parameters={th0:pi/4+2*pi/180, ph0:0.1, v_th0:1, v_ph0:8},
         ....:  thickness=1, color='blue')
@@ -3339,6 +3340,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     Both curves do have the same aspect.
     One may eventually compare these curves on `\mathbb{S}^{2}`::
 
+        sage: # needs scipy sage.plot
         sage: graph3D_embedded_angle_curve=c.plot_integrated(interpolation_key='interp-angle',
         ....:                     mapping=euclid_embedding, thickness=3)
         sage: graph3D_embedded_loxo = c_loxo.plot(mapping=euclid_embedding,

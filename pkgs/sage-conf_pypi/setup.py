@@ -121,6 +121,7 @@ class build_py(setuptools_build_py):
         arch_tag = f'{system}-{machine}'
         # TODO: Should be user-configurable with config settings
         SAGE_ROOT = os.path.join(DOT_SAGE, f'sage-{sage_version}-{arch_tag}')
+        UPSTREAM = os.path.join(DOT_SAGE, 'upstream')
 
         def ignore(path, names):
             # exclude all embedded src trees
@@ -138,6 +139,8 @@ class build_py(setuptools_build_py):
             try:
                 shutil.copytree('sage_root', SAGE_ROOT,
                                 ignore=ignore)  # will fail if already exists
+                cmd = f'cd {SAGE_ROOT} && mkdir -p {UPSTREAM} && ln -sf {UPSTREAM} .'
+                os.system(cmd)
             except Exception as e:
                 raise SetupError(f"the directory SAGE_ROOT={SAGE_ROOT} already exists but it is not configured ({e}). "
                                  "Please either remove it and try again, or install in editable mode (pip install -e).")

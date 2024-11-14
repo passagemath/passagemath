@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-qepcad
+# sage.doctest: optional - qepcad
 r"""
 Interface to QEPCAD
 ===================

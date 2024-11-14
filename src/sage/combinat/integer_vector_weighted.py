@@ -219,6 +219,7 @@ class WeightedIntegerVectors(Parent, UniqueRepresentation):
         """
         TESTS::
 
+            sage: # needs sage.combinat
             sage: WeightedIntegerVectors(7, [2,2]).list()
             []
             sage: WeightedIntegerVectors(3, [2,1,1]).list()
@@ -226,6 +227,7 @@ class WeightedIntegerVectors(Parent, UniqueRepresentation):
 
         ::
 
+            sage: # needs sage.combinat
             sage: ivw = [ WeightedIntegerVectors(k, [1,1,1]) for k in range(11) ]
             sage: iv  = [ IntegerVectors(k, 3) for k in range(11) ]
             sage: all(sorted(map(list, iv[k])) == sorted(map(list, ivw[k])) for k in range(11))
@@ -233,6 +235,7 @@ class WeightedIntegerVectors(Parent, UniqueRepresentation):
 
         ::
 
+            sage: # needs sage.combinat
             sage: ivw = [ WeightedIntegerVectors(k, [2,3,7]) for k in range(11) ]
             sage: all(i.cardinality() == len(i.list()) for i in ivw)
             True

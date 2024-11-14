@@ -27,8 +27,8 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    SPKG_INSTALL_REQUIRES_sagemath_repl
-    SPKG_INSTALL_REQUIRES_sagemath_graphs
+    "passagemath-repl",
+    "passagemath-graphs",
 ]
 
 [tool.setuptools]

@@ -6789,15 +6789,15 @@ def is_AlgebraicReal(x):
     EXAMPLES::
 
         sage: from sage.rings.qqbar import is_AlgebraicReal
-        sage: is_AlgebraicReal(AA(sqrt(2)))                                             # needs sage.symbolic
+        sage: is_AlgebraicReal("spam")
         doctest:warning...
         DeprecationWarning: The function is_AlgebraicReal is deprecated;
         use 'isinstance(..., AlgebraicReal)' instead.
         See https://github.com/sagemath/sage/issues/38128 for details.
+        False
+        sage: is_AlgebraicReal(AA(sqrt(2)))                                             # needs sage.symbolic
         True
         sage: is_AlgebraicReal(QQbar(sqrt(2)))                                          # needs sage.symbolic
-        False
-        sage: is_AlgebraicReal("spam")
         False
     """
     from sage.misc.superseded import deprecation
@@ -6814,16 +6814,16 @@ def is_AlgebraicNumber(x):
     EXAMPLES::
 
         sage: from sage.rings.qqbar import is_AlgebraicNumber
-        sage: is_AlgebraicNumber(AA(sqrt(2)))                                           # needs sage.symbolic
+        sage: is_AlgebraicNumber("spam")
         doctest:warning...
         DeprecationWarning: The function is_AlgebraicNumber is deprecated;
         use 'isinstance(..., AlgebraicNumber)' instead.
         See https://github.com/sagemath/sage/issues/38128 for details.
         False
+        sage: is_AlgebraicNumber(AA(sqrt(2)))                                           # needs sage.symbolic
+        False
         sage: is_AlgebraicNumber(QQbar(sqrt(2)))                                        # needs sage.symbolic
         True
-        sage: is_AlgebraicNumber("spam")
-        False
     """
     from sage.misc.superseded import deprecation
     deprecation(38128,

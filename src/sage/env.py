@@ -231,6 +231,28 @@ PPLPY_DOCS = var("PPLPY_DOCS", join(SAGE_SHARE, "doc", "pplpy"))
 MAXIMA = var("MAXIMA", "maxima")
 MAXIMA_FAS = var("MAXIMA_FAS")
 KENZO_FAS = var("KENZO_FAS")
+
+try:
+    import sage_wheels
+except ImportError:
+    pass
+else:
+    import shlex
+    from glob import glob
+
+    MAXIMA = 'maxima'
+    for p in sage_wheels.__path__:
+        maxima_bin = os.path.join(p, 'bin/maxima')
+        if os.path.exists(maxima_bin):
+            MAXIMA = maxima_bin
+            os.environ['MAXIMA_PREFIX'] = p
+            break
+    for p in sage_wheels.__path__:
+        for dir in glob(os.path.join(p, 'lib/ecl-*')):
+            ECLDIR = dir + '/'
+            os.environ['ECLDIR'] = ECLDIR
+            break
+
 try:
     import ecl
 except ImportError:

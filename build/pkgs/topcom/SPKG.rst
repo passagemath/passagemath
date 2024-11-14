@@ -24,6 +24,8 @@ GPL v2
 Upstream Contact
 ----------------
 
+https://www.wm.uni-bayreuth.de/de/team/rambau_joerg/TOPCOM/
+
 :: 
 
     Prof. Dr. Jörg Rambau <Joerg.Rambau@uni-bayreuth.de>
@@ -33,7 +35,6 @@ Upstream Contact
     D-95440 Bayreuth
     Germany
     Tel: +49-921-55-7350, Fax: +49-921-55-7352
-    http://www.rambau.wm.uni-bayreuth.de
 
 Dependencies
 ------------

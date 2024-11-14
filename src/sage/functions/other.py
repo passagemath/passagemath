@@ -1616,7 +1616,7 @@ class Function_binomial(GinacFunction):
             sage: binomial(2^100, 2^100)
             1
 
-            sage: binomial(RealField()('2.5'), 2)                                       # needs sage.rings.real_mpfr
+            sage: binomial(RealField()('2.5'), 2)                                       # needs sage.libs.pari sage.rings.real_mpfr
             1.87500000000000
 
         ::

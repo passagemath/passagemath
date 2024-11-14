@@ -30,6 +30,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_scipy
     SPKG_INSTALL_REQUIRES_pillow
     SPKG_INSTALL_REQUIRES_matplotlib
+    SPKG_INSTALL_REQUIRES_threejs
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -39,14 +40,15 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+test            = ["passagemath-repl"]
 
 # extras by libraries
 jsmol           = [SPKG_INSTALL_REQUIRES_jupyter_jsmol]
 matplotlib      = []  # no extra needed
+threejs         = []  # no extra needed
 
 # extras by other features
-polyhedra       = [SPKG_INSTALL_REQUIRES_sagemath_polyhedra]
+polyhedra       = ["passagemath-polyhedra"]
 
 [tool.setuptools]
 include-package-data = false

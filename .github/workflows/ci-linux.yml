@@ -24,11 +24,6 @@ on:
   workflow_dispatch:
     # Allow to run manually
 
-env:
-  TARGETS_PRE: all-sage-local
-  TARGETS: build doc-html
-  TARGETS_OPTIONAL: ptest
-
 permissions:
   packages: write
 
@@ -43,8 +38,8 @@ jobs:
       docker_targets: "with-system-packages configured with-targets-pre with-targets"
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
-      targets: build doc-html
-      targets_optional: ptest
+      targets: build
+      targets_optional: doc-html ptest-nodoc
       tox_system_factors: >-
         ["ubuntu-jammy"]
       tox_packages_factors: >-
@@ -63,8 +58,8 @@ jobs:
       docker_targets: "with-system-packages configured with-targets-pre with-targets with-targets-optional"
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
-      targets: build doc-html
-      targets_optional: ptest
+      targets: build
+      targets_optional: doc-html ptest-nodoc
       tox_packages_factors: >-
           ["standard"]
       docker_push_repository: ghcr.io/${{ github.repository }}/
@@ -100,8 +95,8 @@ jobs:
       from_docker_target: "with-targets-pre"
       docker_targets: "with-targets with-targets-optional"
       # FIXME: duplicated from env.TARGETS
-      targets: build doc-html
-      targets_optional: ptest
+      targets: build
+      targets_optional: doc-html ptest-nodoc
       tox_packages_factors: >-
         ["standard-sitepackages"]
       # Only test systems with a usable system python (>= 3.9)
@@ -135,8 +130,8 @@ jobs:
       docker_targets: "with-system-packages configured with-targets-pre with-targets with-targets-optional"
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
-      targets: build doc-html
-      targets_optional: ptest
+      targets: build
+      targets_optional: doc-html ptest-nodoc
       tox_packages_factors: >-
           ["minimal"]
       docker_push_repository: ghcr.io/${{ github.repository }}/

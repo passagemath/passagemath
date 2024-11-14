@@ -41,11 +41,11 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+test            = ["passagemath-repl"]
 
 # extras by libraries
 axiom           = []  # FIXME
-giac            = [SPKG_INSTALL_REQUIRES_sagemath_giac]
+giac            = ["passagemath-giac"]
 ginac           = []  # no extra needed, same as pynac
 maxima          = []  # no extra needed
 ntl             = []  # no extra needed
@@ -55,7 +55,7 @@ singular        = []  # no extra needed
 sympy           = []  # no extra needed
 
 # extras by other features
-plot            = [SPKG_INSTALL_REQUIRES_sagemath_plot]
+plot            = ["passagemath-plot"]
 
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
@@ -75,18 +75,6 @@ repair-wheel-command = [
 
 [tool.setuptools]
 include-package-data = false
-
-[tool.setuptools.package-data]
-"sage.interfaces" = ["sage-maxima.lisp"]
-sage = [
-    "ext_data/*",
-    "ext_data/kenzo/*",
-    "ext_data/singular/*",
-    "ext_data/singular/function_field/*",
-    "ext_data/magma/*",
-    "ext_data/magma/latex/*",
-    "ext_data/magma/sage/*",
-]
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
