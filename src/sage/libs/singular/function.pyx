@@ -382,6 +382,7 @@ def is_sage_wrapper_for_singular_ring(ring):
 
     ::
 
+        sage: # needs sage.combinat
         sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
         sage: P = A.g_algebra(relations={y*x:-x*y}, order = 'lex')
         sage: is_sage_wrapper_for_singular_ring(P)
@@ -409,6 +410,7 @@ def is_singular_poly_wrapper(p):
 
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.libs.singular.function import is_singular_poly_wrapper
         sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
         sage: H.<x,y,z> = A.g_algebra({z*x:x*z+2*x, z*y:y*z-2*y})
@@ -920,6 +922,7 @@ cdef class Converter(SageObject):
 
         Check that negative integers come through unscathed::
 
+            sage: # needs sage.schemes
             sage: P.<x,y,z> = QQ[]
             sage: C = Curve((x-y)*(y-z)*(z-x))
             sage: I = C.defining_ideal()
@@ -930,6 +933,7 @@ cdef class Converter(SageObject):
 
         Singular's genus function is prone to crashing, see :issue:`12851` and :issue:`19750` ::
 
+            sage: # needs sage.schemes
             sage: sing_genus = sage.libs.singular.function_factory.ff.normal__lib.genus  # known bug
             sage: sing_genus(I)  # known bug
             -2
