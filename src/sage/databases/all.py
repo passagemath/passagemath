@@ -49,11 +49,10 @@ EXAMPLES::
 
 from sage.databases.all__sagemath_combinat import *
 from sage.databases.all__sagemath_graphs import *
+from sage.databases.all__sagemath_pari import *
 from sage.databases.all__sagemath_schemes import *
 
 from sage.misc.lazy_import import lazy_import
-
-lazy_import('sage.databases.conway', 'ConwayPolynomials')
 
 lazy_import('sage.databases.jones', 'JonesDatabase')
 

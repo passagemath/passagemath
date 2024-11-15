@@ -1205,6 +1205,7 @@ class PolynomialQuotientRing_generic(QuotientRing_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x> = PolynomialRing(QQ)
             sage: S.<y> = PolynomialRing(R)
             sage: T.<z> = S.quotient(y + x)

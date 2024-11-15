@@ -1108,18 +1108,18 @@ class SchemeMorphism_polynomial_affine_space_field(SchemeMorphism_polynomial_aff
             sage: H2 = Hom(A, A2)
             sage: H3 = Hom(A2, A)
             sage: f = H([x^2 + 2*(t^3 + t^2 + t + 3)])
-            sage: f.reduce_base_field()
+            sage: f.reduce_base_field()                                                 # needs sage.libs.singular
             Scheme endomorphism of Affine Space of dimension 1
              over Finite Field in t2 of size 5^2
               Defn: Defined on coordinates by sending (x) to (x^2 + (2*t2))
             sage: f2 = H2([x^2 + 4, 2*x])
-            sage: f2.reduce_base_field()
+            sage: f2.reduce_base_field()                                                # needs sage.libs.singular
             Scheme morphism:
               From: Affine Space of dimension 1 over Finite Field of size 5
               To:   Affine Space of dimension 2 over Finite Field of size 5
               Defn: Defined on coordinates by sending (x) to (x^2 - 1, 2*x)
             sage: f3 = H3([a^2 + t*b])
-            sage: f3.reduce_base_field()
+            sage: f3.reduce_base_field()                                                # needs sage.libs.singular
             Scheme morphism:
               From: Affine Space of dimension 2 over Finite Field in t of size 5^4
               To:   Affine Space of dimension 1 over Finite Field in t of size 5^4
@@ -1132,11 +1132,11 @@ class SchemeMorphism_polynomial_affine_space_field(SchemeMorphism_polynomial_aff
             sage: A.<x> = AffineSpace(K, 1)
             sage: H = End(A)
             sage: f = H([x^2 + v])
-            sage: g = f.reduce_base_field(); g
+            sage: g = f.reduce_base_field(); g                                          # needs sage.libs.singular
             Scheme endomorphism of Affine Space of dimension 1
              over Cyclotomic Field of order 4 and degree 2
               Defn: Defined on coordinates by sending (x) to (x^2 + v)
-            sage: g.base_ring() is K
+            sage: g.base_ring() is K                                                    # needs sage.libs.singular
             True
 
         ::
@@ -1145,7 +1145,7 @@ class SchemeMorphism_polynomial_affine_space_field(SchemeMorphism_polynomial_aff
             sage: A.<x> = AffineSpace(QQbar, 1)
             sage: H = End(A)
             sage: f = H([(QQbar(sqrt(2))*x^2 + 1/QQbar(sqrt(3))) / (5*x)])              # needs sage.symbolic
-            sage: f.reduce_base_field()                                                 # needs sage.symbolic
+            sage: f.reduce_base_field()                                                 # needs sage.libs.singular sage.symbolic
             Scheme endomorphism of Affine Space of dimension 1 over Number Field in a
              with defining polynomial y^4 - 4*y^2 + 1 with a = ...?
               Defn: Defined on coordinates by sending (x) to
@@ -1158,7 +1158,7 @@ class SchemeMorphism_polynomial_affine_space_field(SchemeMorphism_polynomial_aff
             sage: A.<x> = AffineSpace(QQbar, 1)
             sage: H = End(A)
             sage: f = H([QQbar(3^(1/3))*x^2 + QQbar(sqrt(-2))])                         # needs sage.symbolic
-            sage: f.reduce_base_field()                                                 # needs sage.symbolic
+            sage: f.reduce_base_field()                                                 # needs sage.libs.singular sage.symbolic
             Scheme endomorphism of Affine Space of dimension 1 over Number
             Field in a with defining polynomial y^6 + 6*y^4 - 6*y^3 + 12*y^2 + 36*y + 17
              with a = 1.442249570307409? + 1.414213562373095?*I
@@ -1177,7 +1177,7 @@ class SchemeMorphism_polynomial_affine_space_field(SchemeMorphism_polynomial_aff
             sage: A2.<u,v> = AffineSpace(K, 2)
             sage: H = Hom(A, A2)
             sage: f = H([x^2 + a*x + 3, 5*x])
-            sage: f.reduce_base_field()
+            sage: f.reduce_base_field()                                                 # needs sage.libs.singular
             Scheme morphism:
               From: Affine Space of dimension 1 over Number Field in a with
                     defining polynomial x^3 - x + 1 with a = -1.324717957244746?
@@ -1192,7 +1192,7 @@ class SchemeMorphism_polynomial_affine_space_field(SchemeMorphism_polynomial_aff
             sage: A.<x> = AffineSpace(K, 1)
             sage: H = End(A)
             sage: f = H([3*x^2 + x + 1])
-            sage: f.reduce_base_field()
+            sage: f.reduce_base_field()                                                 # needs sage.libs.singular
             Scheme endomorphism of Affine Space of dimension 1 over Rational Field
               Defn: Defined on coordinates by sending (x) to (3*x^2 + x + 1)
 
@@ -1203,7 +1203,7 @@ class SchemeMorphism_polynomial_affine_space_field(SchemeMorphism_polynomial_aff
             sage: A.<x> = AffineSpace(K, 1)
             sage: H = End(A)
             sage: f = H([x^2 + x*(t^3 + 2*t^2 + 4*t) + (t^5 + 3*t^4 + t^2 + 4*t)])
-            sage: f.reduce_base_field()
+            sage: f.reduce_base_field()                                                # needs sage.libs.singular
             Scheme endomorphism of Affine Space of dimension 1
              over Finite Field in t of size 5^6
               Defn: Defined on coordinates by sending (x) to

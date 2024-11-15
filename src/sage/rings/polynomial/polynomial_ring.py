@@ -3582,7 +3582,7 @@ class PolynomialRing_dense_mod_p(PolynomialRing_dense_finite_field,
 
             sage: GF(2)['x'].irreducible_element(33)                                    # needs sage.rings.finite_rings
             x^33 + x^13 + x^12 + x^11 + x^10 + x^8 + x^6 + x^3 + 1
-            sage: GF(2)['x'].irreducible_element(33, algorithm='minimal_weight')        # needs sage.rings.finite_rings
+            sage: GF(2)['x'].irreducible_element(33, algorithm='minimal_weight')        # needs sage.libs.ntl sage.rings.finite_rings
             x^33 + x^10 + 1
 
         In degree 1::

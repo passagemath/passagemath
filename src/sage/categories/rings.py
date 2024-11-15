@@ -1599,7 +1599,7 @@ class Rings(CategoryWithAxiom):
                 sage: ZZ._random_nonzero_element() != 0
                 True
                 sage: A = GF((5, 3))                                                    # needs sage.rings.finite_rings
-                sage: A._random_nonzero_element() != 0                                  # needs sage.rings.finite_rings
+                sage: A._random_nonzero_element() != 0                                  # needs sage.rings.finite_rings sage.modules
                 True
             """
             while True:
