@@ -773,7 +773,7 @@ def basis_from_generators(gens, ords=None):
 
     EXAMPLES::
 
-        sage: # needs sage.groups sage.rings.finite_rings
+        sage: # needs sage.groups sage.rings.finite_rings sage.schemes
         sage: from sage.groups.additive_abelian.additive_abelian_wrapper import basis_from_generators
         sage: E = EllipticCurve(GF(31337^6,'a'), j=37)
         sage: E.order()
