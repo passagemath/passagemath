@@ -6196,13 +6196,13 @@ class ConvexRationalPolyhedralCone(IntegralRayCollection, Container, ConvexSet_c
         The maximal angle in a single ray is zero::
 
             sage: K = random_cone(min_rays=1, max_rays=1, max_ambient_dim=5)
-            sage: K.max_angle()[0]
+            sage: K.max_angle()[0]                                                      # needs sage.rings.number_field sage.symbolic
             0
 
         The maximal angle in the nonnegative octant is `\pi/2`::
 
             sage: K = cones.nonnegative_orthant(3)
-            sage: K.max_angle()[0]
+            sage: K.max_angle()[0]                                                      # needs sage.rings.number_field sage.symbolic
             1/2*pi
 
         The maximal angle between the nonnegative quintant and the
@@ -6210,7 +6210,7 @@ class ConvexRationalPolyhedralCone(IntegralRayCollection, Container, ConvexSet_c
         result can be obtained faster using inexact arithmetic, but
         only confidently so because we already know the answer::
 
-            sage: # long time
+            sage: # long time, needs sage.rings.number_field sage.symbolic
             sage: P = cones.nonnegative_orthant(5)
             sage: Q = cones.schur(5)
             sage: actual = P.max_angle(Q)[0]
@@ -6226,13 +6226,14 @@ class ConvexRationalPolyhedralCone(IntegralRayCollection, Container, ConvexSet_c
 
             sage: n = 3
             sage: K = cones.schur(n)
-            sage: bool(K.max_angle()[0] == ((n-1)/n)*pi)
+            sage: bool(K.max_angle()[0] == ((n-1)/n)*pi)                                # needs sage.rings.number_field sage.symbolic
             True
 
         Sage can't prove that the actual and expected results are
         equal in the next two cases without a little nudge in the
         right direction, and, moreover, it's crashy about it::
 
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: n = 4
             sage: K = cones.schur(n)
             sage: actual = K.max_angle()[0].simplify()._sympy_()._sage_()
@@ -6251,7 +6252,7 @@ class ConvexRationalPolyhedralCone(IntegralRayCollection, Container, ConvexSet_c
 
             sage: P = Cone([(5,1), (1,-1)])
             sage: Q = Cone([(-1,0), (-1,0)])
-            sage: P.max_angle(Q)[0]
+            sage: P.max_angle(Q)[0]                                                     # needs sage.rings.number_field sage.symbolic
             pi
 
         TESTS:
@@ -6259,7 +6260,7 @@ class ConvexRationalPolyhedralCone(IntegralRayCollection, Container, ConvexSet_c
         When ``self`` and ``-other`` have nontrivial intersection, we
         expect the maximal angle to be `\pi`::
 
-            sage: # long time
+            sage: # long time, needs sage.rings.number_field sage.symbolic
             sage: from sage.geometry.cone_critical_angles import (
             ....:   _random_admissible_cone )
             sage: n = ZZ.random_element(1,3)
@@ -6273,6 +6274,7 @@ class ConvexRationalPolyhedralCone(IntegralRayCollection, Container, ConvexSet_c
         In particular, this should happen when either cone is the full
         space::
 
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: from sage.geometry.cone_critical_angles import (
             ....:   _random_admissible_cone )
             sage: n = ZZ.random_element(1,5)
