@@ -532,12 +532,14 @@ Sage's :doc:`words <words/words>`.
 
 ::
 
+    sage: # needs sage.combinat
     sage: W = Words([0, 1]); W
     Finite and infinite words over {0, 1}
 
 Let us take the inverter from the previous section and feed some
 finite word into it::
 
+    sage: # needs sage.combinat
     sage: w = W([1, 1, 0, 1]); w
     word: 1101
     sage: inverter(w)
@@ -548,6 +550,7 @@ calling :meth:`~Transducer.process` with ``automatic_output_type``).
 
 We can even input something infinite like an infinite word::
 
+    sage: # needs sage.combinat
     sage: tm = words.ThueMorseWord(); tm
     word: 0110100110010110100101100110100110010110...
     sage: inverter(tm)

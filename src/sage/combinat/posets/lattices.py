@@ -2513,6 +2513,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
         The Boolean lattice of `2^3` elements is not upward planar, even if
         its covering relations graph is planar::
 
+            sage: # needs planarity
             sage: B3 = posets.BooleanLattice(3)
             sage: B3.is_planar()
             False
@@ -2523,6 +2524,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
         Ordinal product of planar lattices is obviously planar. Same does
         not apply to Cartesian products::
 
+            sage: # needs planarity
             sage: P = posets.PentagonPoset()
             sage: Pc = P.product(P)
             sage: Po = P.ordinal_product(P)
@@ -2537,6 +2539,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
 
         TESTS::
 
+            sage: # needs planarity
             sage: posets.ChainPoset(0).is_planar()
             True
             sage: posets.ChainPoset(1).is_planar()
@@ -3735,7 +3738,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
             ....:                         [7, 8]]) )
             sage: L.is_dismantlable()
             True
-            sage: L.is_planar()
+            sage: L.is_planar()                                                         # needs planarity
             False
 
         .. SEEALSO::
@@ -4253,7 +4256,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
             sage: L = LatticePoset(DiGraph('OQC?a?@CO?G_C@?GA?O??_??@?BO?A_?G??C??_?@???'))
             sage: L.is_constructible_by_doublings('convex')                             # needs sage.combinat
             False
-            sage: L.is_constructible_by_doublings('any')
+            sage: L.is_constructible_by_doublings('any')                                # needs sage.combinat
             True
 
         .. SEEALSO::
