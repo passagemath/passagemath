@@ -1145,6 +1145,7 @@ def two_descent_by_two_isogeny(E,
 
     EXAMPLES::
 
+        sage: # needs sage.schemes
         sage: from sage.schemes.elliptic_curves.descent_two_isogeny import two_descent_by_two_isogeny
         sage: E = EllipticCurve('14a')
         sage: n1, n2, n1_prime, n2_prime = two_descent_by_two_isogeny(E)
@@ -1155,7 +1156,7 @@ def two_descent_by_two_isogeny(E,
         sage: log(n1,2) + log(n1_prime,2) - 2 # the rank
         1
 
-        sage: # needs sage.symbolic
+        sage: # needs sage.schemes sage.symbolic
         sage: x,y = var('x,y')
         sage: E = EllipticCurve(y^2 == x^3 + x^2 - 25*x + 39)
         sage: n1, n2, n1_prime, n2_prime = two_descent_by_two_isogeny(E)
@@ -1168,6 +1169,7 @@ def two_descent_by_two_isogeny(E,
 
     Using the verbosity option::
 
+        sage: # needs sage.schemes
         sage: E = EllipticCurve('14a')
         sage: two_descent_by_two_isogeny(E, verbosity=1)
         2-isogeny
@@ -1184,6 +1186,7 @@ def two_descent_by_two_isogeny(E,
 
     Handling curves whose discriminants involve larger than wordsize primes::
 
+        sage: # needs sage.schemes
         sage: E = EllipticCurve('14a')
         sage: E = E.quadratic_twist(next_prime(10^20))
         sage: E
@@ -1204,6 +1207,7 @@ def two_descent_by_two_isogeny(E,
     for rational points which do not exist, and by setting global_limit_large
     to a very high bound, it will still be working when we simulate a ``CTRL-C``::
 
+        sage: # needs sage.schemes
         sage: from sage.schemes.elliptic_curves.descent_two_isogeny import two_descent_by_two_isogeny
         sage: E = EllipticCurve('960d'); E
         Elliptic Curve defined by y^2 = x^3 - x^2 - 900*x - 10098 over Rational Field
