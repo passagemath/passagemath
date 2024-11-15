@@ -176,6 +176,7 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
     An element can be specified by its vector of coordinates with
     respect to the basis consisting of powers of the generator:
 
+        sage: # needs sage.modules
         sage: k = FiniteField(3^11, 't', impl='pari_ffelt')
         sage: V = k.vector_space(map=False)
         sage: V
@@ -1136,7 +1137,8 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
 
         ::
 
-            sage: p = 2^127-1
+            sage: # needs sage.modules
+            sage: p = 2^127 - 1
             sage: F.<t> = GF((p, 3))
             sage: elt = F.random_element()^(p^2+p+1)
             sage: (elt^2).log(elt, p-1)

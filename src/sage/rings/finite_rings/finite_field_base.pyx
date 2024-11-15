@@ -563,7 +563,7 @@ cdef class FiniteField(Field):
 
         TESTS::
 
-            sage: for K in [GF(2^18,'a'), GF(3^2,'a'), GF(47^3,'a')]:
+            sage: for K in [GF(2^18,'a'), GF(3^2,'a'), GF(47^3,'a')]:                   # needs sage.modules
             ....:     R.<x> = K[]
             ....:     if K.characteristic() < 5: m = 4
             ....:     else: m = 1
@@ -2222,7 +2222,7 @@ cdef class FiniteField(Field):
         TESTS::
 
             sage: fields = [GF(2), GF(3), GF(65537), GF(2^10), GF(163^5)]
-            sage: for F in fields:
+            sage: for F in fields:                                                      # needs sage.modules
             ....:     for _ in range(1000):
             ....:         a = F.random_element()
             ....:         order = choice(["little", "big"])

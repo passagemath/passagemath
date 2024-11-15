@@ -414,6 +414,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: k.<a> = GF(2^16)
             sage: e = a^2 + 1
             sage: v = vector(e)
@@ -422,6 +423,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
             sage: k(v)
             a^2 + 1
 
+            sage: # needs sage.modules
             sage: k.<a> = GF(3^16)
             sage: e = 2*a^2 + 1
             sage: v = vector(e)
@@ -432,7 +434,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
 
         You can also compute the vector in the other order::
 
-            sage: e._vector_(reverse=True)
+            sage: e._vector_(reverse=True)                                              # needs sage.modules
             (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1)
         """
         # vector(foo) might pass in ZZ
