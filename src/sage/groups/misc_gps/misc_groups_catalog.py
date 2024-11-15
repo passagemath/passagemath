@@ -13,17 +13,21 @@ of various groups not listed elsewhere.
 # entry to the list in the module-level
 # docstring of groups/groups_catalog.py
 
-from sage.groups.additive_abelian.additive_abelian_group import AdditiveAbelianGroup as AdditiveAbelian
-from sage.groups.abelian_gps.abelian_group import AbelianGroup as MultiplicativeAbelian
-from sage.rings.finite_rings.integer_mod_ring import IntegerModRing as AdditiveCyclic
-from sage.groups.free_group import FreeGroup as Free
-from sage.groups.artin import ArtinGroup as Artin
-from sage.groups.braid import BraidGroup as Braid
-from sage.groups.semimonomial_transformations.semimonomial_transformation_group import SemimonomialTransformationGroup as SemimonomialTransformation
-from sage.combinat.root_system.coxeter_group import CoxeterGroup
-from sage.combinat.root_system.weyl_group import WeylGroup
-from sage.combinat.colored_permutations import ShephardToddFamilyGroup as ShephardToddFamily
-from sage.groups.raag import RightAngledArtinGroup as RightAngledArtin
-from sage.combinat.root_system.reflection_group_real import ReflectionGroup
-from sage.groups.cactus_group import CactusGroup as Cactus
-from sage.groups.cactus_group import PureCactusGroup as PureCactus
+from sage.misc.lazy_import import lazy_import
+
+lazy_import('sage.groups.additive_abelian.additive_abelian_group', 'AdditiveAbelianGroup', as_='AdditiveAbelian')
+lazy_import('sage.groups.abelian_gps.abelian_group', 'AbelianGroup', as_='MultiplicativeAbelian')
+lazy_import('sage.rings.finite_rings.integer_mod_ring', 'IntegerModRing', as_='AdditiveCyclic')
+lazy_import('sage.groups.free_group', 'FreeGroup', as_='Free')
+lazy_import('sage.groups.artin', 'ArtinGroup', as_='Artin')
+lazy_import('sage.groups.braid', 'BraidGroup', as_='Braid')
+lazy_import('sage.groups.semimonomial_transformations.semimonomial_transformation_group', 'SemimonomialTransformationGroup', as_='SemimonomialTransformation')
+lazy_import('sage.combinat.root_system.coxeter_group', 'CoxeterGroup')
+lazy_import('sage.combinat.root_system.weyl_group', 'WeylGroup')
+lazy_import('sage.combinat.colored_permutations', 'ShephardToddFamilyGroup', as_='ShephardToddFamily')
+lazy_import('sage.groups.raag', 'RightAngledArtinGroup', as_='RightAngledArtin')
+lazy_import('sage.combinat.root_system.reflection_group_real', 'ReflectionGroup')
+lazy_import('sage.groups.cactus_group', 'CactusGroup', as_='Cactus')
+lazy_import('sage.groups.cactus_group', 'PureCactusGroup', as_='PureCactus')
+
+del lazy_import

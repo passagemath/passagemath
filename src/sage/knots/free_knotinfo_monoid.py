@@ -227,7 +227,7 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             sage: from sage.knots.free_knotinfo_monoid import FreeKnotInfoMonoid
             sage: FKIM =  FreeKnotInfoMonoid()
             sage: K = KnotInfo.K5_1.link().mirror_image()
-            sage: FKIM(K)                                                               # needs sage.modules
+            sage: FKIM(K)                                                               # needs libhomfly sage.modules
             KnotInfo['K5_1m']
         """
         if isinstance(x, tuple):
@@ -311,8 +311,8 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             Defining K3_1m
             sage: KI = K3_1 * K3_1m
             sage: K = KI.as_knot()
-            sage: h = K3_1.to_knotinfo()[0][0].homfly_polynomial()                      # needs sage.modules
-            sage: FKIM._search_composition(3, K, h)                                     # needs sage.modules
+            sage: h = K3_1.to_knotinfo()[0][0].homfly_polynomial()                      # needs libhomfly sage.modules
+            sage: FKIM._search_composition(3, K, h)                                     # needs libhomfly sage.modules
             (KnotInfo['K3_1'],)
         """
         from sage.knots.knotinfo import KnotInfo
@@ -403,7 +403,7 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             sage: from sage.knots.free_knotinfo_monoid import FreeKnotInfoMonoid
             sage: FKIM =  FreeKnotInfoMonoid()
             sage: K = KnotInfo.K5_1.link().mirror_image()
-            sage: FKIM.from_knot(K)                                                     # needs sage.modules
+            sage: FKIM.from_knot(K)                                                     # needs libhomfly sage.modules
             KnotInfo['K5_1m']
 
             sage: # optional - database_knotinfo

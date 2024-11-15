@@ -569,6 +569,7 @@ def simple_connected_graph_genus(G, set_embedding=False, check=True, minimal=Tru
 
     EXAMPLES::
 
+        sage: # needs planarity
         sage: import sage.graphs.genus
         sage: from sage.graphs.genus import simple_connected_graph_genus as genus
         sage: [genus(g) for g in graphs(6) if g.is_connected()].count(1)

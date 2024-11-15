@@ -1456,6 +1456,7 @@ class PolymakeElement(ExtraTabCompletion, InterfaceElement):
 
         Quadratic extensions::
 
+            sage: # needs sage.rings.number_field
             sage: K.<sqrt5> = QuadraticField(5)
             sage: polymake(K(0)).sage()   # optional - jupymake
             0
@@ -1490,7 +1491,7 @@ class PolymakeElement(ExtraTabCompletion, InterfaceElement):
 
             sage: polymake.cube(3).sage() # optional - jupymake
             A 3-dimensional polyhedron in QQ^3 defined as the convex hull of 8 vertices
-            sage: polymake.icosahedron().sage() # optional - jupymake
+            sage: polymake.icosahedron().sage() # optional - jupymake, needs sage.rings.number_field
             A 3-dimensional polyhedron in
              (Number Field in a with defining polynomial x^2 - 5 with a = 2.236067977499790?)^3
              defined as the convex hull of 12 vertices

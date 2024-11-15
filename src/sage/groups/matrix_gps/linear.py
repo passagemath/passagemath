@@ -360,10 +360,11 @@ class LinearMatrixGroup_generic(NamedMatrixGroup_generic):
 
         Check if :issue:`35490` is fixed::
 
+            sage: # needs sage.libs.pari
             sage: q = 7
             sage: FqT.<T> = GF(q)[]
-            sage: N = T^2+1
-            sage: FqTN = QuotientRing(FqT, N*FqT)
+            sage: N = T^2 + 1
+            sage: FqTN = QuotientRing(FqT, N * FqT)
             sage: S = SL(2, FqTN)
             sage: S.is_finite()
             True

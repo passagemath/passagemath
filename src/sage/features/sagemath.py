@@ -955,6 +955,7 @@ class sage__rings__number_field(JoinFeature):
     Doctests that construct algebraic number fields should be marked ``# needs sage.rings.number_field``::
 
         sage: # needs sage.rings.number_field
+        sage: x = polygen(ZZ, 'x')
         sage: K.<cuberoot2> = NumberField(x^3 - 2)
         sage: L.<cuberoot3> = K.extension(x^3 - 3)
         sage: S.<sqrt2> = L.extension(x^2 - 2); S

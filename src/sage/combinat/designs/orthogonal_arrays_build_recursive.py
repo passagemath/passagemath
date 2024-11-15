@@ -1385,7 +1385,7 @@ def brouwer_separable_design(k,t,q,x,check=False,verbose=False,explain_construct
         sage: k,q,t=5,4,8; _=brouwer_separable_design(k,t,q,q**2,verbose=True,check=True)
         Case vi) with k=5,q=4,t=8,x=16,e3=0,e4=1
 
-        sage: print(designs.orthogonal_arrays.explain_construction(10,189))
+        sage: print(designs.orthogonal_arrays.explain_construction(10, 189))            # needs sage.schemes
         Brouwer's separable design construction with t=9,q=4,x=0 from:
            Andries E. Brouwer,
            A series of separable designs with application to pairwise orthogonal Latin squares

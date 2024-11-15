@@ -1810,8 +1810,8 @@ def gcd(a, b=None, **kwargs):
     Verify that objects without gcd methods but which cannot be
     coerced to ZZ or QQ raise an error::
 
-        sage: F.<a,b> = FreeMonoid(2)                                                   # needs sage.groups
-        sage: gcd(a, b)                                                                 # needs sage.groups
+        sage: F.<a,b> = FreeMonoid(2)                                                   # needs sage.combinat
+        sage: gcd(a, b)                                                                 # needs sage.combinat
         Traceback (most recent call last):
         ...
         TypeError: unable to call gcd with a

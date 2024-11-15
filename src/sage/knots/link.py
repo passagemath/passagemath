@@ -2700,7 +2700,7 @@ class Link(SageObject):
 
             sage: B = BraidGroup(9)
             sage: b = B([1, 2, 3, 4, 5, 6, 7, 8])
-            sage: Link(b).jones_polynomial()
+            sage: Link(b).jones_polynomial()                                            # needs sage.symbolic
             1
 
         The "monster" unknot::
@@ -4182,7 +4182,7 @@ class Link(SageObject):
             sage: b, = BraidGroup(2).gens()
             sage: Link(b**13).get_knotinfo()    # optional - database_knotinfo
             KnotInfo['K13a_4878']
-            sage: Link(b**14).get_knotinfo()
+            sage: Link(b**14).get_knotinfo()                    # needs libhomfly
             Traceback (most recent call last):
             ...
             NotImplementedError: this link having more than 11 crossings cannot be determined

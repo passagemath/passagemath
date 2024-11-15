@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-graphs
+# sage.doctest: needs planarity
 """
 Schnyder's algorithm for straight-line planar embeddings
 

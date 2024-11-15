@@ -1087,7 +1087,7 @@ def BidiakisCube():
     `(x - 3) (x - 2) (x^4) (x + 1) (x + 2) (x^2 + x - 4)^2` and
     chromatic number 3::
 
-        sage: g.is_planar()
+        sage: g.is_planar()                                     # needs planarity
         True
         sage: char_poly = g.characteristic_polynomial()                                 # needs sage.modules
         sage: x = char_poly.parent()('x')                                               # needs sage.modules
@@ -1417,7 +1417,7 @@ def BuckyBall():
     The Bucky Ball is planar::
 
         sage: g = graphs.BuckyBall()
-        sage: g.is_planar()
+        sage: g.is_planar()                                     # needs planarity
         True
 
     The Bucky Ball can also be created by extracting the 1-skeleton of the Bucky
@@ -1965,7 +1965,7 @@ def CubeplexGraph(embedding='LM'):
         3
         sage: g.is_hamiltonian()                                                        # needs sage.numerical.mip
         True
-        sage: g.crossing_number()
+        sage: g.crossing_number()                               # needs planarity
         1
         sage: g.show()                          # long time                             # needs sage.plot
 
@@ -2123,7 +2123,7 @@ def DurerGraph():
 
         sage: G = graphs.DurerGraph(); G
         Durer graph: Graph on 12 vertices
-        sage: G.is_planar()
+        sage: G.is_planar()                                     # needs planarity
         True
         sage: G.order()
         12
@@ -2178,7 +2178,7 @@ def DyckGraph():
     It is non-planar and Hamiltonian, as well as bipartite (making it a bicubic
     graph)::
 
-        sage: G.is_planar()
+        sage: G.is_planar()                                     # needs planarity
         False
         sage: G.is_hamiltonian()                                                        # needs sage.numerical.mip
         True
@@ -2480,7 +2480,7 @@ def ErreraGraph():
 
         sage: G = graphs.ErreraGraph(); G
         Errera graph: Graph on 17 vertices
-        sage: G.is_planar()
+        sage: G.is_planar()                                     # needs planarity
         True
         sage: G.order()
         17
@@ -2773,7 +2773,7 @@ def GoldnerHararyGraph():
 
         sage: G = graphs.GoldnerHararyGraph(); G
         Goldner-Harary graph: Graph on 11 vertices
-        sage: G.is_planar()
+        sage: G.is_planar()                                     # needs planarity
         True
         sage: G.order()
         11
@@ -3035,7 +3035,7 @@ def HerschelGraph():
 
         sage: G = graphs.HerschelGraph(); G
         Herschel graph: Graph on 11 vertices
-        sage: G.is_planar()
+        sage: G.is_planar()                                     # needs planarity
         True
         sage: G.is_bipartite()
         True
@@ -3731,7 +3731,7 @@ def MarkstroemGraph():
         24
         sage: g.size()
         36
-        sage: g.is_planar()
+        sage: g.is_planar()                                     # needs planarity
         True
         sage: g.is_regular(3)
         True
@@ -4145,7 +4145,7 @@ def PoussinGraph():
         sage: g = graphs.PoussinGraph()
         sage: g.order()
         15
-        sage: g.is_planar()
+        sage: g.is_planar()                                     # needs planarity
         True
     """
     g = Graph({2: [7, 8, 3, 4], 1: [7, 6], 0: [6, 5, 4], 3: [5]},
@@ -4869,7 +4869,7 @@ def TutteGraph():
         46
         sage: g.size()
         69
-        sage: g.is_planar()
+        sage: g.is_planar()                                     # needs planarity
         True
         sage: g.vertex_connectivity()           # long time                             # needs sage.numerical.mip
         3
@@ -4986,7 +4986,7 @@ def TwinplexGraph(embedding='LM'):
         3
         sage: g.is_hamiltonian()                                                        # needs sage.numerical.mip
         True
-        sage: g.crossing_number()
+        sage: g.crossing_number()                               # needs planarity
         2
         sage: g.show()                          # long time                             # needs sage.plot
 
@@ -5193,7 +5193,7 @@ def WienerArayaGraph():
         67
         sage: g.girth()
         4
-        sage: g.is_planar()
+        sage: g.is_planar()                                     # needs planarity
         True
         sage: g.is_hamiltonian()                # not tested (30s)                      # needs sage.numerical.mip
         False

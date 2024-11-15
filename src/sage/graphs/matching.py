@@ -287,7 +287,7 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
         sage: G.add_edges([(5, 6), (5, 7), (6, 7)])
         sage: G.is_cut_vertex(5)
         True
-        sage: G.has_perfect_matching()
+        sage: G.has_perfect_matching()                                              # needs networkx
         True
         sage: G.is_bicritical()                                                     # needs networkx
         False
@@ -305,7 +305,7 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
     A bipartite graph of order three or more is not bicritical::
 
         sage: G = graphs.CompleteBipartiteGraph(3, 3)
-        sage: G.has_perfect_matching()
+        sage: G.has_perfect_matching()                                              # needs networkx
         True
         sage: G.is_bicritical()                                                     # needs networkx
         False
@@ -824,8 +824,8 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
         sage: P = graphs.PathGraph(10)
         sage: P.is_bipartite()
         True
-        sage: M = Graph(P.matching())
-        sage: set(P) == set(M)
+        sage: M = Graph(P.matching())                                                   # needs networkx
+        sage: set(P) == set(M)                                                          # needs networkx
         True
         sage: P.is_matching_covered()                                                   # needs networkx
         False
@@ -844,8 +844,8 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
         sage: a = random.choice(list(A))
         sage: b = random.choice(list(B))
         sage: G.delete_vertices([a, b])
-        sage: M = Graph(G.matching())
-        sage: set(M) == set(G)
+        sage: M = Graph(G.matching())                                                   # needs networkx
+        sage: set(M) == set(G)                                                          # needs networkx
         True
         sage: cycle1 = graphs.CycleGraph(4)
         sage: cycle2 = graphs.CycleGraph(6)
@@ -858,12 +858,13 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
         sage: H.is_matching_covered()                                                   # needs networkx
         False
         sage: H.delete_vertices([3, 4])
-        sage: N = Graph(H.matching())
-        sage: set(N) == set(H)
+        sage: N = Graph(H.matching())                                                   # needs networkx
+        sage: set(N) == set(H)                                                          # needs networkx
         False
 
     One may specify a matching::
 
+        sage: # needs networkx
         sage: G = graphs.WheelGraph(20)
         sage: M = Graph(G.matching())
         sage: G.is_matching_covered(matching=M)
@@ -876,6 +877,7 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
 
     One may ask for a co-`\mathcal{NP}` certificate::
 
+        sage: # needs networkx
         sage: G = graphs.CompleteGraph(14)
         sage: G.is_matching_covered(coNP_certificate=True)
         (True, None)

@@ -1520,7 +1520,7 @@ def FriendshipGraph(n):
         3
         sage: G.chromatic_number()
         3
-        sage: G.is_planar()
+        sage: G.is_planar()                                                             # needs planarity
         True
         sage: G.is_eulerian()
         True
@@ -4579,7 +4579,7 @@ def BiwheelGraph(n):
 
         sage: g = graphs.BiwheelGraph(5)
         sage: g.show()                          # long time                             # needs sage.plot
-        sage: g.is_planar()
+        sage: g.is_planar()                                     # needs planarity
         True
         sage: g.is_bipartite()
         True

@@ -1765,7 +1765,7 @@ class FinitelyPresentedGroup(GroupMixinLibGAP, CachedRepresentation, Group, Pare
 
             sage: L = [2*(i, j) + 2* (-i, -j) for i, j in ((1, 2), (2, 3), (3, 1))]
             sage: G = FreeGroup(3) / L
-            sage: G.characteristic_varieties(groebner=True)
+            sage: G.characteristic_varieties(groebner=True)                             # needs sage.libs.singular
             {0: [(0,)],
              1: [(f1 - 1, f2 - 1, f3 - 1), (f1*f3 + 1, f2 - 1), (f1*f2 + 1, f3 - 1), (f2*f3 + 1, f1 - 1),
                  (f2*f3 + 1, f1 - f2), (f2*f3 + 1, f1 - f3), (f1*f3 + 1, f2 - f3)],
@@ -1789,10 +1789,10 @@ class FinitelyPresentedGroup(GroupMixinLibGAP, CachedRepresentation, Group, Pare
             {0: Ideal (0) of Univariate Laurent Polynomial Ring in f1 over Rational Field,
              1: Ideal (-1 + 2*f1 - 2*f1^2 + f1^3) of Univariate Laurent Polynomial Ring in f1 over Rational Field,
              2: Ideal (1) of Univariate Laurent Polynomial Ring in f1 over Rational Field}
-            sage: G.characteristic_varieties(groebner=True)
+            sage: G.characteristic_varieties(groebner=True)                             # needs sage.libs.singular
             {0: [0], 1: [-1 + f1, 1 - f1 + f1^2], 2: []}
             sage: G = FreeGroup(2)/[3 * (1, ), 2 * (2, )]
-            sage: G.characteristic_varieties(groebner=True)
+            sage: G.characteristic_varieties(groebner=True)                             # needs sage.libs.singular
             {0: [-1 + F1, 1 + F1, 1 - F1 + F1^2, 1 + F1 + F1^2], 1: [1 - F1 + F1^2],  2: []}
             sage: G = FreeGroup(2)/[2 * (2, )]
             sage: G.characteristic_varieties(groebner=True)
@@ -1801,7 +1801,7 @@ class FinitelyPresentedGroup(GroupMixinLibGAP, CachedRepresentation, Group, Pare
             sage: G.characteristic_varieties()
             {0: Principal ideal (0) of Rational Field,
              1: Principal ideal (1) of Rational Field}
-            sage: G.characteristic_varieties(groebner=True)
+            sage: G.characteristic_varieties(groebner=True)                             # needs sage.libs.singular
             {0: [(0,)], 1: [(1,)]}
         """
         if self.ngens() == 0:

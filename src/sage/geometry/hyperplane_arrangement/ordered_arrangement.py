@@ -90,12 +90,14 @@ from sage.geometry.hyperplane_arrangement.arrangement import HyperplaneArrangeme
 from sage.geometry.hyperplane_arrangement.arrangement import HyperplaneArrangements
 from sage.geometry.hyperplane_arrangement.hyperplane import Hyperplane
 from sage.matrix.constructor import matrix, vector
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
-from sage.groups.free_group import FreeGroup
 from sage.rings.integer_ring import ZZ
-from sage.rings.qqbar import QQbar
-from sage.schemes.curves.plane_curve_arrangement import AffinePlaneCurveArrangements
-from sage.schemes.curves.plane_curve_arrangement import ProjectivePlaneCurveArrangements
+
+lazy_import('sage.groups.free_group', 'FreeGroup')
+lazy_import('sage.rings.qqbar', 'QQbar')
+lazy_import('sage.schemes.curves.plane_curve_arrangement', 'AffinePlaneCurveArrangements')
+lazy_import('sage.schemes.curves.plane_curve_arrangement', 'ProjectivePlaneCurveArrangements')
 
 
 class OrderedHyperplaneArrangementElement(HyperplaneArrangementElement):

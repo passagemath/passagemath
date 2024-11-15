@@ -996,8 +996,8 @@ class HyperplaneArrangementElement(Element):
             sage: A = hyperplane_arrangements.coordinate(2)
             sage: A.cocharacteristic_polynomial()                                       # needs sage.graphs
             z^2 + 2*z + 1
-            sage: B = hyperplane_arrangements.braid(3)
-            sage: B.cocharacteristic_polynomial()                                       # needs sage.graphs
+            sage: B = hyperplane_arrangements.braid(3)                                  # needs sage.groups
+            sage: B.cocharacteristic_polynomial()                                       # needs sage.graphs sage.groups
             2*z^3 + 3*z^2 + z
 
         TESTS::
@@ -1044,8 +1044,8 @@ class HyperplaneArrangementElement(Element):
             sage: A = hyperplane_arrangements.coordinate(2)
             sage: A.primitive_eulerian_polynomial()                                     # needs sage.graphs
             z^2
-            sage: B = hyperplane_arrangements.braid(3)
-            sage: B.primitive_eulerian_polynomial()                                     # needs sage.graphs
+            sage: B = hyperplane_arrangements.braid(3)                                  # needs sage.groups
+            sage: B.primitive_eulerian_polynomial()                                     # needs sage.graphs sage.groups
             z^2 + z
 
             sage: H = hyperplane_arrangements.Shi(['B',2]).cone()
@@ -1255,7 +1255,7 @@ class HyperplaneArrangementElement(Element):
             sage: x,y,z = H.gens()
             sage: h1,h2 = [1*x+2*y+3*z, 3*x+2*y+1*z]
             sage: A = H(h1, h2, backend='normaliz')
-            sage: A.restriction(h2).backend()
+            sage: A.restriction(h2).backend()                                           # needs sage.combinat
             'normaliz'
         """
         parent = self.parent()
