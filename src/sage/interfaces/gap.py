@@ -48,6 +48,7 @@ polynomial.
 
 ::
 
+    sage: # needs sage.libs.singular
     sage: singular(389)
     389
     sage: R1 = singular.ring(0, '(x,y)', 'dp')
