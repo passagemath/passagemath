@@ -274,6 +274,10 @@ jobs:
         # Therefore we cache it in a directory mounted from the host: /host
         # https://cibuildwheel.pypa.io/en/stable/faq/#linux-builds-in-containers
         #
+        # - configure --with-sage-venv makes the SAGE_VENV separate from SAGE_LOCAL.
+        #   SAGE_LOCAL is put in PATH for the wheel building.
+        #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
+        #
         # omit sagemath-{meataxe,sirocco} for now -- needs sagemath-modules
         run: |
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
@@ -281,7 +285,7 @@ jobs:
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --prefix=$HOME/runner-venv
           make cibuildwheel
           export PATH=build/bin:$PATH
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX --with-system-gfortran=force --without-system-libpng && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc" >> "$GITHUB_ENV"
+          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --without-system-libpng && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc" >> "$GITHUB_ENV"
           mkdir -p unpacked
           for sdist in dist/$pkg*.tar.gz; do
               (cd unpacked && tar xfz - ) < $sdist
