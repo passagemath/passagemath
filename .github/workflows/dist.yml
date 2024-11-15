@@ -199,7 +199,7 @@ jobs:
     env:
       CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
       # SPKGs to install as system packages
-      SPKGS: _bootstrap _prereq openssl curl readline info ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
+      SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
       TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd msolve cddlib latte_int 4ti2 topcom palp nauty qepcad gfan frobby lrslib sympow elliptic_curves
       CIBW_BUILD: "*${{ matrix.build }}*"
@@ -278,7 +278,7 @@ jobs:
         run: |
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
-          ./configure --with-python="${{ steps.python.outputs.python-path }}" --prefix=$HOME/runner-venv
+          ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --prefix=$HOME/runner-venv
           make cibuildwheel
           export PATH=build/bin:$PATH
           echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX --with-system-gfortran=force --without-system-libpng && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc" >> "$GITHUB_ENV"
