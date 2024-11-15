@@ -280,6 +280,7 @@ see how people usually visualize these graphs.
 
 ::
 
+    sage: # needs database_graphs
     sage: G = GraphQuery(display_cols=['graph6'], num_vertices=7, diameter=5)
     sage: L = G.get_graphs_list()
     sage: graphs_list.show_graphs(L)                                                    # needs sage.plot
@@ -1695,31 +1696,31 @@ class Graph(GenericGraph):
         EXAMPLES::
 
             sage: g = Graph({1: [2], 2: [3, 4], 3: [4, 5, 6, 7], 8: [3, 5], 9: [6, 7]})
-            sage: g.is_cactus()
+            sage: g.is_cactus()                                                         # needs planarity
             True
 
             sage: c6 = graphs.CycleGraph(6)
             sage: naphthalene = c6 + c6
-            sage: naphthalene.is_cactus()  # Not connected
+            sage: naphthalene.is_cactus()  # Not connected                              # needs planarity
             False
             sage: naphthalene.merge_vertices([0, 6])
-            sage: naphthalene.is_cactus()
+            sage: naphthalene.is_cactus()                                               # needs planarity
             True
             sage: naphthalene.merge_vertices([1, 7])
-            sage: naphthalene.is_cactus()
+            sage: naphthalene.is_cactus()                                               # needs planarity
             False
 
         TESTS::
 
-            sage: all(graphs.PathGraph(i).is_cactus() for i in range(5))
+            sage: all(graphs.PathGraph(i).is_cactus() for i in range(5))                # needs planarity
             True
 
-            sage: Graph('Fli@?').is_cactus()
+            sage: Graph('Fli@?').is_cactus()                                            # needs planarity
             False
 
         Test a graph that is not outerplanar, see :issue:`24480`::
 
-            sage: graphs.Balaban10Cage().is_cactus()                                    # needs networkx
+            sage: graphs.Balaban10Cage().is_cactus()                                    # needs networkx planarity
             False
         """
         self._scream_if_not_simple()
@@ -1905,7 +1906,7 @@ class Graph(GenericGraph):
         The Petersen graph is not apex::
 
             sage: G = graphs.PetersenGraph()
-            sage: G.is_apex()
+            sage: G.is_apex()                                   # needs planarity
             False
 
         A graph is apex if all its connected components are apex, but at most
@@ -1913,9 +1914,9 @@ class Graph(GenericGraph):
 
             sage: M = graphs.Grid2dGraph(3,3)
             sage: K5 = graphs.CompleteGraph(5)
-            sage: (M+K5).is_apex()
+            sage: (M + K5).is_apex()                            # needs planarity
             True
-            sage: (M+K5+K5).is_apex()
+            sage: (M + K5 + K5).is_apex()                       # needs planarity
             False
 
         TESTS:
@@ -1928,8 +1929,8 @@ class Graph(GenericGraph):
 
         The graph might be mutable or immutable::
 
-            sage: G = Graph(M+K5, immutable=True)
-            sage: G.is_apex()
+            sage: G = Graph(M + K5, immutable=True)
+            sage: G.is_apex()                                   # needs planarity
             True
         """
         # Easy cases: null graph, subgraphs of K_5 and K_3,3
@@ -1993,16 +1994,16 @@ class Graph(GenericGraph):
         vertex is the unique apex vertex ::
 
             sage: G = graphs.Grid2dGraph(4,4)
-            sage: set(G.apex_vertices()) == set(G.vertices(sort=False))
+            sage: set(G.apex_vertices()) == set(G.vertices(sort=False))     # needs planarity
             True
             sage: G.add_edges([('universal',v) for v in G])
-            sage: G.apex_vertices()
+            sage: G.apex_vertices()                                         # needs planarity
             ['universal']
 
         The Petersen graph is not apex::
 
             sage: G = graphs.PetersenGraph()
-            sage: G.apex_vertices()
+            sage: G.apex_vertices()                                         # needs planarity
             []
 
         A graph is apex if all its connected components are apex, but at most
@@ -2010,9 +2011,9 @@ class Graph(GenericGraph):
 
             sage: M = graphs.Grid2dGraph(3,3)
             sage: K5 = graphs.CompleteGraph(5)
-            sage: (M+K5).apex_vertices()
+            sage: (M + K5).apex_vertices()                                  # needs planarity
             [9, 10, 11, 12, 13]
-            sage: (M+K5+K5).apex_vertices()
+            sage: (M + K5 + K5).apex_vertices()                             # needs planarity
             []
 
         Neighbors of an apex of degree 2 are apex::
@@ -2020,11 +2021,11 @@ class Graph(GenericGraph):
             sage: G = graphs.Grid2dGraph(5,5)
             sage: v = (666, 666)
             sage: G.add_path([(1, 1), v, (3, 3)])
-            sage: G.is_planar()
+            sage: G.is_planar()                                             # needs planarity
             False
             sage: G.degree(v)
             2
-            sage: sorted(G.apex_vertices())
+            sage: sorted(G.apex_vertices())                                 # needs planarity
             [(1, 1), (2, 2), (3, 3), (666, 666)]
 
 
@@ -2045,8 +2046,8 @@ class Graph(GenericGraph):
 
         The graph might be mutable or immutable::
 
-            sage: G = Graph(M+K5, immutable=True)
-            sage: G.apex_vertices()
+            sage: G = Graph(M + K5, immutable=True)
+            sage: G.apex_vertices()                                         # needs planarity
             [9, 10, 11, 12, 13]
         """
         if k is None:
@@ -7409,10 +7410,11 @@ class Graph(GenericGraph):
 
         EXAMPLES::
 
+            sage: # needs planarity
             sage: C = graphs.CubeGraph(3)
             sage: C.is_polyhedral()
             True
-            sage: K33=graphs.CompleteBipartiteGraph(3, 3)
+            sage: K33 = graphs.CompleteBipartiteGraph(3, 3)
             sage: K33.is_polyhedral()
             False
             sage: graphs.CycleGraph(17).is_polyhedral()
@@ -7471,22 +7473,22 @@ class Graph(GenericGraph):
         EXAMPLES::
 
             sage: C = graphs.CubeGraph(3)
-            sage: C.is_circumscribable()                                                # needs sage.numerical.mip
+            sage: C.is_circumscribable()                                                # needs planarity sage.numerical.mip
             True
 
             sage: O = graphs.OctahedralGraph()
-            sage: O.is_circumscribable()                                                # needs sage.numerical.mip
+            sage: O.is_circumscribable()                                                # needs planarity sage.numerical.mip
             True
 
             sage: TT = polytopes.truncated_tetrahedron().graph()                        # needs sage.geometry.polyhedron
-            sage: TT.is_circumscribable()                                               # needs sage.geometry.polyhedron sage.numerical.mip
+            sage: TT.is_circumscribable()                                               # needs planarity sage.geometry.polyhedron sage.numerical.mip
             False
 
         Stellating in a face of the octahedral graph is not circumscribable::
 
             sage: f = set(flatten(choice(O.faces())))
             sage: O.add_edges([[6, i] for i in f])
-            sage: O.is_circumscribable()                                                # needs sage.numerical.mip
+            sage: O.is_circumscribable()                                                # needs planarity sage.numerical.mip
             False
 
         .. SEEALSO::
@@ -7497,7 +7499,7 @@ class Graph(GenericGraph):
         TESTS::
 
             sage: G = graphs.CompleteGraph(5)
-            sage: G.is_circumscribable()
+            sage: G.is_circumscribable()                                                # needs planarity
             Traceback (most recent call last):
             ...
             NotImplementedError: this method only works for polyhedral graphs
