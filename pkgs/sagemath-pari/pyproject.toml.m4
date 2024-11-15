@@ -25,6 +25,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_conway_polynomials
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
