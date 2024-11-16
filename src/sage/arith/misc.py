@@ -3720,7 +3720,7 @@ def binomial(x, m, **kwds):
         -6
         sage: binomial(-5, -2)
         0
-        sage: binomial(RealField()('2.5'), 2)                                           # needs sage.rings.real_mpfr
+        sage: binomial(RealField()('2.5'), 2)                                           # needs sage.libs.pari sage.rings.real_mpfr
         1.87500000000000
         sage: binomial(Zp(5)(99),50)
         3 + 4*5^3 + 2*5^4 + 4*5^5 + 4*5^6 + 4*5^7 + 4*5^8 + 5^9 + 2*5^10 + 3*5^11 +
