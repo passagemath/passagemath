@@ -1638,6 +1638,7 @@ In the latter case, please inform the developers.""".format(self.order()))
             sage: R._lift_residue_field_root(2, 16, f, f.derivative(), Zmod(2)(1))
             (65535,)
 
+            sage: # needs sage.libs.pari
             sage: R = Zmod(7**4)
             sage: S.<x> = R[]
             sage: f = x^4 - 2
@@ -1788,6 +1789,7 @@ In the latter case, please inform the developers.""".format(self.order()))
         We can find roots without multiplicities over a ring whose modulus is
         a prime power, even a big power:
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Zmod(7^3)[]
             sage: (x^2 + x + 1).roots(multiplicities=False)
             [18, 324]

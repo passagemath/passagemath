@@ -661,6 +661,7 @@ cdef class ComplexDoubleField_class(sage.rings.abc.ComplexDoubleField):
 
         TESTS::
 
+            sage: # needs numpy
             sage: R.<x> = CDF[]
             sage: CDF._factor_univariate_polynomial(x)
             x
