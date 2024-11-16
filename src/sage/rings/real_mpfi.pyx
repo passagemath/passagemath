@@ -1243,6 +1243,7 @@ cdef class RealIntervalFieldElement(RingElement):
 
         TESTS::
 
+            sage: # needs sage.symbolic
             sage: a = RealIntervalField(428)(factorial(100)/exp(2)); a
             1.26303298005073195998439505058085204028142920134742241494671502106333548593576383141666758300089860337889002385197008191910406895?e157
             sage: a.diameter()
@@ -1622,6 +1623,8 @@ cdef class RealIntervalFieldElement(RingElement):
             '2.2f684bda12f69?'
             sage: a.str(no_sci=False)
             '2.185185185185186?e0'
+
+            sage: # needs sage.symbolic
             sage: pi_appr = RIF(pi, 22/7)
             sage: pi_appr.str(style='brackets')
             '[3.1415926535897931 .. 3.1428571428571433]'
@@ -1633,6 +1636,7 @@ cdef class RealIntervalFieldElement(RingElement):
             '3.14223?64'
             sage: pi_appr.str(base=36)
             '3.6?'
+
             sage: RIF(NaN)                                                              # needs sage.symbolic
             [.. NaN ..]
             sage: RIF(pi, infinity)                                                     # needs sage.symbolic
@@ -1795,7 +1799,7 @@ cdef class RealIntervalFieldElement(RingElement):
             -5.00?501e7
             sage: RIF(10^-3, 12345)._str_question_style(10, 3, 'e', False)
             '6.18?618e3'
-            sage: RIF(-golden_ratio, -10^-6)._str_question_style(10, 3, 'e', False)
+            sage: RIF(-golden_ratio, -10^-6)._str_question_style(10, 3, 'e', False)     # needs sage.symbolic
             '-0.810?810'
             sage: RIF(-0.85, 0.85)._str_question_style(10, 0, 'e', False)
             '0.?'
@@ -4091,9 +4095,9 @@ cdef class RealIntervalFieldElement(RingElement):
 
         EXAMPLES::
 
-            sage: RIF(1, 2).union(RIF(pi, 22/7)).str(style='brackets')
+            sage: RIF(1, 2).union(RIF(pi, 22/7)).str(style='brackets')                  # needs sage.symbolic
             '[1.0000000000000000 .. 3.1428571428571433]'
-            sage: RIF(1, 2).union(pi).str(style='brackets')
+            sage: RIF(1, 2).union(pi).str(style='brackets')                             # needs sage.symbolic
             '[1.0000000000000000 .. 3.1415926535897936]'
             sage: RIF(1).union(RIF(0, 2)).str(style='brackets')
             '[0.0000000000000000 .. 2.0000000000000000]'

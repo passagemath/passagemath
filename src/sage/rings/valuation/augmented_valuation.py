@@ -1042,7 +1042,7 @@ class FinalAugmentedValuation(AugmentedValuation_base, FinalInductiveValuation):
             1/2
 
             sage: w = v.augmentation(x^2 + x + 1, infinity)
-            sage: w.lift(w.residue_ring().gen())                                        # needs sage.rings.number_field
+            sage: w.lift(w.residue_ring().gen())                                        # needs sage.libs.singular sage.rings.number_field
             x
 
         A case with non-trivial base valuation::
@@ -1052,7 +1052,7 @@ class FinalAugmentedValuation(AugmentedValuation_base, FinalInductiveValuation):
             sage: S.<x> = R[]
             sage: v = GaussValuation(S)
             sage: w = v.augmentation(x^2 + x + u, infinity)
-            sage: w.lift(w.residue_ring().gen())                                        # needs sage.rings.number_field
+            sage: w.lift(w.residue_ring().gen())                                        # needs sage.libs.singular sage.rings.number_field
             (1 + O(2^10))*x
 
         TESTS:

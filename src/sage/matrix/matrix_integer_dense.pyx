@@ -4847,6 +4847,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: t = ModularSymbols(11,sign=1).hecke_matrix(2)
             sage: w = t.change_ring(ZZ)
             sage: w

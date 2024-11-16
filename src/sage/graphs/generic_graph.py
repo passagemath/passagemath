@@ -5715,10 +5715,10 @@ class GenericGraph(GenericGraph_pyx):
         ::
 
             sage: k43 = graphs.CompleteBipartiteGraph(4, 3)
-            sage: result = k43.is_planar(kuratowski=True); result
+            sage: result = k43.is_planar(kuratowski=True); result                       # needs planarity
             (False,
              Kuratowski subgraph of (Complete bipartite graph of order 4+3): Graph on 6 vertices)
-            sage: result[1].is_isomorphic(graphs.CompleteBipartiteGraph(3, 3))
+            sage: result[1].is_isomorphic(graphs.CompleteBipartiteGraph(3, 3))          # needs planarity
             True
 
         Multi-edged and looped graphs are partially supported::
@@ -5954,11 +5954,11 @@ class GenericGraph(GenericGraph_pyx):
             sage: g439.show()                                                           # needs sage.plot
             sage: g439.is_circular_planar(boundary=[1, 2, 3, 4])                        # needs planarity
             False
-            sage: g439.is_circular_planar(kuratowski=True, boundary=[1, 2, 3, 4])
+            sage: g439.is_circular_planar(kuratowski=True, boundary=[1, 2, 3, 4])       # needs planarity
             (False, Kuratowski subgraph of (): Graph on 8 vertices)
-            sage: g439.is_circular_planar(kuratowski=True, boundary=[1, 2, 3])
+            sage: g439.is_circular_planar(kuratowski=True, boundary=[1, 2, 3])          # needs planarity
             (True, None)
-            sage: g439.get_embedding()
+            sage: g439.get_embedding()                                                  # needs planarity
             {1: [5, 7],
              2: [6, 5],
              3: [7, 6],
@@ -5972,12 +5972,12 @@ class GenericGraph(GenericGraph_pyx):
             sage: K23 = graphs.CompleteBipartiteGraph(2, 3)
             sage: K23.is_circular_planar(boundary=[0, 1, 2, 3])                         # needs planarity
             True
-            sage: K23.is_circular_planar(ordered=True, boundary=[0, 1, 2, 3])
+            sage: K23.is_circular_planar(ordered=True, boundary=[0, 1, 2, 3])           # needs planarity
             False
 
         With a different order::
 
-            sage: K23.is_circular_planar(set_embedding=True, boundary=[0, 2, 1, 3])
+            sage: K23.is_circular_planar(set_embedding=True, boundary=[0, 2, 1, 3])     # needs planarity
             True
 
         TESTS:
@@ -5992,7 +5992,7 @@ class GenericGraph(GenericGraph_pyx):
         Argument saving::
 
             sage: G = Graph([(1, 2)])
-            sage: for set_embedding, set_pos in ((True,True), (True,False), (False, True), (False, False)):
+            sage: for set_embedding, set_pos in ((True,True), (True,False), (False, True), (False, False)):     # needs planarity
             ....:     G = Graph([(1, 2)])
             ....:     assert G.is_circular_planar(set_embedding=set_embedding, set_pos=set_pos)
             ....:     assert (hasattr(G, '_embedding') and G._embedding is not None) == set_embedding, (set_embedding, set_pos)
@@ -6173,7 +6173,7 @@ class GenericGraph(GenericGraph_pyx):
         TESTS::
 
             sage: G = Graph([[0, 1, 2, 3], [[0, 1], [0, 2], [0, 3]]])
-            sage: G.layout(layout='planar', external_face=(1, 2))
+            sage: G.layout(layout='planar', external_face=(1, 2))                       # needs planarity
             Traceback (most recent call last):
             ...
             ValueError: (1, 2) is not an edge of Graph on 4 vertices
@@ -6182,6 +6182,7 @@ class GenericGraph(GenericGraph_pyx):
         Check the dependence of the computed position on the given combinatorial
         embedding (:issue:`28152`)::
 
+            sage: # needs planarity
             sage: G = Graph([[0, 1, 2, 3], [[0, 1], [0, 2], [0, 3]]])
             sage: G.set_embedding({0: [1, 2, 3], 1: [0], 2: [0], 3: [0]})
             sage: pos1 = G.layout('planar', save_pos=True)
@@ -6195,6 +6196,7 @@ class GenericGraph(GenericGraph_pyx):
         Check that the function handles disconnected graphs and small
         graphs (:issue:`29522`)::
 
+            sage: # needs planarity
             sage: G = graphs.CycleGraph(4) + graphs.CycleGraph(5)
             sage: G.layout_planar() # random
             {1: [3.0, 1],
@@ -6217,12 +6219,12 @@ class GenericGraph(GenericGraph_pyx):
 
             sage: H = graphs.LadderGraph(4) + graphs.CompleteGraph(3)
             sage: em = {0:[1,4], 4:[0,5], 1:[5,2,0], 5:[4,6,1], 2:[1,3,6], 6:[7,5,2], 3:[7,2], 7:[3,6], 8:[10,9], 9:[8,10], 10:[8,9]}
-            sage: p = H.layout_planar(on_embedding=em)
+            sage: p = H.layout_planar(on_embedding=em)                                  # needs planarity
 
         Check that an exception is raised if the input graph is not planar::
 
             sage: G = graphs.PetersenGraph()
-            sage: G.layout(layout='planar')
+            sage: G.layout(layout='planar')                                             # needs planarity
             Traceback (most recent call last):
             ...
             ValueError: Petersen graph is not a planar graph
@@ -6358,8 +6360,8 @@ class GenericGraph(GenericGraph_pyx):
         EXAMPLES::
 
             sage: D = graphs.DodecahedralGraph()
-            sage: pos = D.layout(layout='planar', save_pos=True)
-            sage: D.is_drawn_free_of_edge_crossings()
+            sage: pos = D.layout(layout='planar', save_pos=True)                        # needs planarity
+            sage: D.is_drawn_free_of_edge_crossings()                                   # needs planarity
             True
         """
         if self._pos is None:
@@ -6459,6 +6461,7 @@ class GenericGraph(GenericGraph_pyx):
 
         EXAMPLES::
 
+            sage: # needs planarity
             sage: g = graphs.PetersenGraph()
             sage: g.genus() # tests for minimal genus by default
             1
@@ -6480,6 +6483,7 @@ class GenericGraph(GenericGraph_pyx):
         Using the circular argument, we can compute the minimal genus preserving
         a planar, ordered boundary::
 
+            sage: # needs planarity
             sage: cube = graphs.CubeGraph(2)
             sage: cube.genus(circular=['01','10'])
             0
@@ -6522,7 +6526,7 @@ class GenericGraph(GenericGraph_pyx):
         maximal genus::
 
             sage: G = graphs.RandomBlockGraph(10, 5)
-            sage: G.genus()
+            sage: G.genus()                                                             # needs planarity
             10
         """
         if not self.is_connected():
@@ -6625,7 +6629,7 @@ class GenericGraph(GenericGraph_pyx):
         EXAMPLES::
 
             sage: P = graphs.PetersenGraph()
-            sage: P.crossing_number()
+            sage: P.crossing_number()                                                   # needs planarity
             2
 
         ALGORITHM:
@@ -6641,23 +6645,23 @@ class GenericGraph(GenericGraph_pyx):
         Empty graph, graph without edges::
 
             sage: E = graphs.EmptyGraph()
-            sage: E.crossing_number()
+            sage: E.crossing_number()                                                   # needs planarity
             0
 
             sage: g = Graph(5)
-            sage: g.crossing_number()
+            sage: g.crossing_number()                                                   # needs planarity
             0
 
         Planar graph::
 
             sage: C4 = graphs.CompleteGraph(4)
-            sage: C4.crossing_number()
+            sage: C4.crossing_number()                                                  # needs planarity
             0
 
         Non-connected graph::
 
             sage: C5x2 = graphs.CompleteGraph(5) * 2
-            sage: C5x2.crossing_number()
+            sage: C5x2.crossing_number()                                                # needs planarity
             2
 
         Test the "un-splitting edges" optimization::
@@ -6665,13 +6669,13 @@ class GenericGraph(GenericGraph_pyx):
             sage: g = graphs.CompleteGraph(4)
             sage: g.subdivide_edges(g.edges(sort=True), 1)
             sage: g.add_edge(0, g.add_vertex())
-            sage: g.crossing_number()
+            sage: g.crossing_number()                                                   # needs planarity
             0
 
             sage: g = graphs.CompleteGraph(5)
             sage: g.subdivide_edges(g.edges(sort=False), 2)
             sage: g.add_edge(0, g.add_vertex())
-            sage: g.crossing_number()
+            sage: g.crossing_number()                                                   # needs planarity
             1
         """
         def _crossing_number(G):
@@ -6775,7 +6779,7 @@ class GenericGraph(GenericGraph_pyx):
 
         With no embedding provided::
 
-            sage: graphs.TetrahedralGraph().faces()
+            sage: graphs.TetrahedralGraph().faces()                                     # needs planarity
             [[(0, 1), (1, 2), (2, 0)],
              [(0, 2), (2, 3), (3, 0)],
              [(0, 3), (3, 1), (1, 0)],
@@ -6783,7 +6787,7 @@ class GenericGraph(GenericGraph_pyx):
 
         With no embedding provided (non-planar graph)::
 
-            sage: graphs.PetersenGraph().faces()
+            sage: graphs.PetersenGraph().faces()                                        # needs planarity
             Traceback (most recent call last):
             ...
             ValueError: no embedding is provided and the graph is not planar
@@ -6799,7 +6803,7 @@ class GenericGraph(GenericGraph_pyx):
 
         The Path Graph has a single face::
 
-            sage: graphs.PathGraph(3).faces()
+            sage: graphs.PathGraph(3).faces()                                           # needs planarity
             [[(0, 1), (1, 2), (2, 1), (1, 0)]]
         """
         if not self.order() or not self.size():
@@ -6875,35 +6879,35 @@ class GenericGraph(GenericGraph_pyx):
         EXAMPLES::
 
             sage: T = graphs.TetrahedralGraph()
-            sage: T.num_faces()
+            sage: T.num_faces()                                                         # needs planarity
             4
 
         The external face of a disconnected graph is counted only once::
 
-            sage: (T + T).num_faces()
+            sage: (T + T).num_faces()                                                   # needs planarity
             7
-            sage: (T + T + T).num_faces()
+            sage: (T + T + T).num_faces()                                               # needs planarity
             10
 
         Trees and forests have a single face::
 
             sage: T = graphs.RandomTree(10)
-            sage: T.num_faces()
+            sage: T.num_faces()                                                         # needs planarity
             1
-            sage: (T + T).num_faces()
+            sage: (T + T).num_faces()                                                   # needs planarity
             1
 
         TESTS::
 
             sage: G = graphs.CompleteBipartiteGraph(3, 3)
-            sage: G.num_faces()
+            sage: G.num_faces()                                                         # needs planarity
             Traceback (most recent call last):
             ...
             ValueError: no embedding is provided and the graph is not planar
 
         Issue :issue:`22003` is fixed::
 
-            sage: Graph(1).num_faces()
+            sage: Graph(1).num_faces()                                                  # needs planarity
             1
         """
         if not self:
@@ -6957,6 +6961,7 @@ class GenericGraph(GenericGraph_pyx):
 
         EXAMPLES::
 
+            sage: # needs planarity
             sage: C = graphs.CubeGraph(3)
             sage: C.planar_dual()
             Graph on 6 vertices
@@ -6966,7 +6971,7 @@ class GenericGraph(GenericGraph_pyx):
         The planar dual of the planar dual is isomorphic to the graph itself::
 
             sage: g = graphs.BuckyBall()
-            sage: g.planar_dual().planar_dual().is_isomorphic(g)
+            sage: g.planar_dual().planar_dual().is_isomorphic(g)                        # needs planarity
             True
 
         .. SEEALSO::
@@ -6978,6 +6983,7 @@ class GenericGraph(GenericGraph_pyx):
 
         TESTS::
 
+            sage: # needs planarity
             sage: G = graphs.CompleteBipartiteGraph(3, 3)
             sage: G.planar_dual()
             Traceback (most recent call last):
@@ -6996,6 +7002,7 @@ class GenericGraph(GenericGraph_pyx):
 
         This also keeps track of edge labels::
 
+            sage: # needs planarity
             sage: label_dict = {('000', '001'): 1, ('001', '101'): 2, ('101', '100'): 3, ('100', '000'): 4}
             sage: g = graphs.CubeGraph(3)
             sage: for e in label_dict:
@@ -11493,10 +11500,10 @@ class GenericGraph(GenericGraph_pyx):
         Test that :issue:`33759` is fixed::
 
             sage: G = Graph([(1, 4), (2, 3)])
-            sage: G.is_planar(set_embedding=True)
+            sage: G.is_planar(set_embedding=True)                                       # needs planarity
             True
             sage: G.delete_vertex(3)
-            sage: G.is_planar()
+            sage: G.is_planar()                                                         # needs planarity
             True
         """
         if in_order:
@@ -11543,10 +11550,10 @@ class GenericGraph(GenericGraph_pyx):
         Test that :issue:`33759` is fixed::
 
             sage: G = Graph([(1, 4), (2, 3)])
-            sage: G.is_planar(set_embedding=True)
+            sage: G.is_planar(set_embedding=True)                                       # needs planarity
             True
             sage: G.delete_vertices([3])
-            sage: G.is_planar()
+            sage: G.is_planar()                                                         # needs planarity
             True
         """
         vertices = list(vertices)
@@ -14129,11 +14136,11 @@ class GenericGraph(GenericGraph_pyx):
         The appropriate properties are preserved::
 
             sage: g = graphs.PathGraph(10)
-            sage: g.is_planar(set_embedding=True)
+            sage: g.is_planar(set_embedding=True)                                       # needs planarity
             True
             sage: g.set_vertices({v: 'v%d'%v for v in g})
             sage: h = g.subgraph([3..5])
-            sage: sorted(h.get_pos().keys())
+            sage: sorted(h.get_pos().keys())                                            # needs planarity
             [3, 4, 5]
             sage: h.get_vertices()
             {3: 'v3', 4: 'v4', 5: 'v5'}
@@ -14258,11 +14265,11 @@ class GenericGraph(GenericGraph_pyx):
         Properties of the graph are preserved::
 
             sage: g = graphs.PathGraph(10)
-            sage: g.is_planar(set_embedding=True)
+            sage: g.is_planar(set_embedding=True)                                       # needs planarity
             True
             sage: g.set_vertices({v: 'v%d'%v for v in g})
             sage: h = g._subgraph_by_adding([3..5])
-            sage: sorted(h.get_pos().keys())
+            sage: sorted(h.get_pos().keys())                                            # needs planarity
             [3, 4, 5]
             sage: h.get_vertices()
             {3: 'v3', 4: 'v4', 5: 'v5'}
@@ -14432,11 +14439,11 @@ class GenericGraph(GenericGraph_pyx):
         Properties of the graph are preserved::
 
             sage: g = graphs.PathGraph(10)
-            sage: g.is_planar(set_embedding=True)
+            sage: g.is_planar(set_embedding=True)                                       # needs planarity
             True
             sage: g.set_vertices({v: 'v%d'%v for v in g})
             sage: h = g._subgraph_by_deleting([3..5])
-            sage: sorted(h.get_pos().keys())
+            sage: sorted(h.get_pos().keys())                                            # needs planarity
             [3, 4, 5]
             sage: h.get_vertices()
             {3: 'v3', 4: 'v4', 5: 'v5'}
@@ -20532,7 +20539,7 @@ class GenericGraph(GenericGraph_pyx):
         TESTS::
 
             sage: styles = ['spring', 'circular', 'forest']
-            sage: styles += ['planar']                                                  # needs planarity
+            sage: import sage.graphs.planarity; styles += ['planar']    # needs planarity
             sage: for style in styles:
             ....:     for G in [Graph([(1, 2)]), Graph([(1, 2), (2, 3), (3, 4)])]:
             ....:         pos = G.layout(style, save_pos=True)

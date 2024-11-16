@@ -1,6 +1,7 @@
 # sage_setup: distribution = sagemath-flint
 # distutils: libraries = gmp
 # distutils: extra_compile_args = -D_XPG6
+# sage.doctest: needs sage.schemes
 """
 `p`-adic distributions spaces
 
