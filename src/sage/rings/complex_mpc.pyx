@@ -108,10 +108,11 @@ def late_import():
     """
     global AA, QQbar
     global CLF, RLF, CDF
-    if AA is None:
-        import sage.rings.qqbar
-        AA = sage.rings.qqbar.AA
-        QQbar = sage.rings.qqbar.QQbar
+    if CDF is None:
+        try:
+            from sage.rings.qqbar import AA, QQbar
+        except ImportError:
+            pass
         from sage.rings.real_lazy import CLF, RLF
         from sage.rings.complex_double import CDF
 
