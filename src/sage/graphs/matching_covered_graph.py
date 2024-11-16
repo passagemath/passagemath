@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-graphs
+# sage.doctest: needs networkx
 r"""
 Matching covered graphs
 
