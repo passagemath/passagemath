@@ -919,7 +919,7 @@ cdef class Element(SageObject):
             sage: mp.dps = 30
             sage: 25._mpmath_(53)
             mpf('25.0')
-            sage: mpmathify(3 + 4*I)
+            sage: mpmathify(3 + 4*I)                                                    # needs sage.symbolic
             mpc(real='3.0', imag='4.0')
             sage: mpmathify(1 + pi)                                                     # needs sage.symbolic
             mpf('4.14159265358979323846264338327933')
@@ -2864,7 +2864,7 @@ cdef class RingElement(ModuleElement):
             sage: a.is_nilpotent()
             True
             sage: m = matrix(QQ, 3, [[3,2,3], [9,0,3], [-9,0,-3]])                      # needs sage.modules
-            sage: m.is_nilpotent()                                                      # needs sage.modules
+            sage: m.is_nilpotent()                                                      # needs sage.libs.pari sage.modules
             True
         """
         if self.is_unit():
