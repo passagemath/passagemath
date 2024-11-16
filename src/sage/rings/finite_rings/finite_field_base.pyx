@@ -42,7 +42,6 @@ from sage.misc.cachefunc import cached_method
 from sage.misc.prandom import randrange
 from sage.rings.integer cimport Integer
 import sage.rings.abc
-from sage.misc.superseded import deprecation_cython as deprecation, deprecated_function_alias
 
 # Copied from sage.misc.fast_methods, used in __hash__() below.
 cdef int SIZEOF_VOID_P_SHIFT = 8*sizeof(void *) - 4
@@ -458,8 +457,6 @@ cdef class FiniteField(Field):
             r = r * g + self(d)
         return r
 
-    fetch_int = deprecated_function_alias(33941, from_integer)
-
     def _is_valid_homomorphism_(self, codomain, im_gens, base_map=None):
         """
         Return ``True`` if the map from ``self`` to codomain sending
@@ -847,7 +844,7 @@ cdef class FiniteField(Field):
         """
         return 1
 
-    def is_field(self, proof = True):
+    def is_field(self, proof=True):
         """
         Return whether or not the finite field is a field, i.e.,
         always returns ``True``.

@@ -1703,7 +1703,7 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: P.monomial_lcm(x,P(1))
             x
         """
-        cdef poly *m = p_ISet(1,self._ring)
+        cdef poly *m = p_ISet(1, self._ring)
 
         if self is not f._parent:
             f = self.coerce(f)
@@ -2701,7 +2701,7 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
                 x = self.parent().coerce(x)
             except TypeError:
                 raise TypeError("argument is not coercible to the parent")
-        if not x.is_generator():
+        if not x.is_gen():
             raise TypeError("argument is not a generator")
 
         return Integer(singular_polynomial_deg(p, x._poly, r))
@@ -2885,7 +2885,7 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
         cdef poly *_degrees = <poly*>0
         cdef poly *p = self._poly
         cdef ring *r = self._parent_ring
-        cdef poly *newp = p_ISet(0,r)
+        cdef poly *newp = p_ISet(0, r)
         cdef poly *newptemp
         cdef int i
         cdef int flag
@@ -3147,7 +3147,7 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
             return -2
         return result
 
-    def __getitem__(self,x):
+    def __getitem__(self, x):
         """
         Same as ``self.monomial_coefficient`` but for exponent vectors.
 
@@ -4577,7 +4577,7 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
         """
         global errorreported
 
-        cdef ideal *fI = idInit(1,1)
+        cdef ideal *fI = idInit(1, 1)
         cdef ideal *_I
         cdef MPolynomialRing_libsingular parent = self._parent
         cdef int i = 0
@@ -4889,7 +4889,7 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
         if n_GetChar(_ring.cf) > 1<<29:
             raise NotImplementedError("GCD of multivariate polynomials over prime fields with characteristic > 2^29 is not implemented.")
 
-        cdef int count = singular_polynomial_length_bounded(self._poly,20) \
+        cdef int count = singular_polynomial_length_bounded(self._poly, 20) \
             + singular_polynomial_length_bounded(_right._poly,20)
         if count >= 20:
             sig_on()
@@ -4965,7 +4965,7 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
         if n_GetChar(_ring.cf) > 1<<29:
             raise NotImplementedError("LCM of multivariate polynomials over prime fields with characteristic > 2^29 is not implemented.")
 
-        cdef int count = singular_polynomial_length_bounded(self._poly,20) \
+        cdef int count = singular_polynomial_length_bounded(self._poly, 20) \
             + singular_polynomial_length_bounded(_g._poly,20)
         if count >= 20:
             sig_on()
@@ -5045,7 +5045,7 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
         if n_GetChar(r.cf) > 1<<29:
             raise NotImplementedError("Division of multivariate polynomials over prime fields with characteristic > 2^29 is not implemented.")
 
-        cdef int count = singular_polynomial_length_bounded(self._poly,15)
+        cdef int count = singular_polynomial_length_bounded(self._poly, 15)
         if count >= 15:  # note that _right._poly must be of shorter length than self._poly for us to care about this call
             sig_on()
         if r!=currRing: rChangeCurrRing(r)   # singclap_pdivide

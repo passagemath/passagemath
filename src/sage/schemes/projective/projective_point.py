@@ -626,7 +626,7 @@ class SchemeMorphism_point_projective_ring(SchemeMorphism_point):
                 self.scale_by(-ZZ.one())
         self._normalized = True
 
-    def dehomogenize(self,n):
+    def dehomogenize(self, n):
         r"""
         Dehomogenizes at the `n`-th coordinate.
 

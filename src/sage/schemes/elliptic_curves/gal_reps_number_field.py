@@ -133,7 +133,7 @@ class GaloisRepresentation(SageObject):
         else:
             return "Compatible family of Galois representations associated to the " + repr(self.E)
 
-    def __eq__(self,other):
+    def __eq__(self, other):
         r"""
         Compare two Galois representations.
 
@@ -1192,7 +1192,7 @@ def Billerey_P_l(E, l):
     return P
 
 
-def Billerey_B_l(E,l,B=0):
+def Billerey_B_l(E, l, B=0):
     r"""
     Return Billerey's `B_l`, adapted from the definition in [Bil2011]_, after (9).
 

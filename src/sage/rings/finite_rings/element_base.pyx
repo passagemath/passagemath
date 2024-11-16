@@ -23,7 +23,6 @@ from sage.structure.element cimport Element
 from sage.structure.parent cimport Parent
 from sage.rings.integer_ring import ZZ
 from sage.rings.integer import Integer
-from sage.misc.superseded import deprecated_function_alias
 
 
 def is_FiniteFieldElement(x):
@@ -203,7 +202,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
             f = Cx([base_map(c) for c in f])
         return codomain(f(im_gens[0]))
 
-    def minpoly(self,var='x',algorithm='pari'):
+    def minpoly(self, var='x', algorithm='pari'):
         """
         Return the minimal polynomial of this element
         (over the corresponding prime subfield).
@@ -825,7 +824,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
         """
         return self.square_root(extend=extend, all=all)
 
-    def nth_root(self, n, extend = False, all = False, algorithm=None, cunningham=False):
+    def nth_root(self, n, extend=False, all=False, algorithm=None, cunningham=False):
         r"""
         Return an `n`-th root of ``self``.
 
@@ -944,7 +943,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
         n = Integer(n)
         return self._nth_root_common(n, all, algorithm, cunningham)
 
-    def pth_power(self, int k = 1):
+    def pth_power(self, int k=1):
         """
         Return the `(p^k)`-th power of self, where `p` is the
         characteristic of the field.
@@ -978,7 +977,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
 
     frobenius = pth_power
 
-    def pth_root(self, int k = 1):
+    def pth_root(self, int k=1):
         """
         Return the `(p^k)`-th root of self, where `p` is the characteristic
         of the field.
@@ -1106,8 +1105,6 @@ cdef class FinitePolyExtElement(FiniteRingElement):
         if reverse:
             f = f.reverse(self.parent().degree() - 1)
         return f(p)
-
-    integer_representation = deprecated_function_alias(33941, to_integer)
 
     def to_bytes(self, byteorder='big'):
         r"""

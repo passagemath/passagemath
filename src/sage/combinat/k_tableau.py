@@ -4180,7 +4180,7 @@ class StrongTableaux(UniqueRepresentation, Parent):
             sage: StrongTableaux.add_marking([], [], 2, [])
             []
         """
-        def msgn(c,v):
+        def msgn(c, v):
             if c in marking:
                 return -v
             else:
