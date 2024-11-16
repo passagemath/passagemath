@@ -89,9 +89,9 @@ One can also compute traces and norms with respect to any base of the tower::
 
 And minimal polynomials::
 
-    sage: u.minpoly()                                                                   # needs sage.rings.finite_rings
+    sage: u.minpoly()                                                                   # needs sage.rings.finite_rings sage.libs.singular
     x^2 + ((3*z2 + 4) + (3*z2 + 4)*a)*x + (z2 + 1) + (4*z2 + 2)*a
-    sage: u.minpoly(F)                                                                  # needs sage.rings.finite_rings
+    sage: u.minpoly(F)                                                                  # needs sage.rings.finite_rings sage.libs.singular
     x^4 + (4*z2 + 4)*x^3 + x^2 + (z2 + 1)*x + 2*z2 + 2
 
 

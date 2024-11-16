@@ -1270,12 +1270,12 @@ class FunctionField(Field):
             Place (x + 6)
             sage: c = 15*x + 12
             sage: d = 16/(x + 13)
-            sage: K.hilbert_symbol(c, d, Q)
+            sage: K.hilbert_symbol(c, d, Q)                                             # needs sage.libs.singular
             1
 
         Check that the Hilbert symbol is symmetric and bimultiplicative::
 
-            sage: # needs sage.libs.pari
+            sage: # needs sage.libs.pari sage.libs.singular
             sage: K.<x> = FunctionField(GF(5)); R.<T> = PolynomialRing(K)
             sage: f = ((x^2 + 2*x + 2)*T^5 + (4*x^2 + 2*x + 3)*T^4 + 3*T^3 + 4*T^2
             ....:     + (2/(x^2 + 4*x + 1))*T + 3*x^2 + 2*x + 4)

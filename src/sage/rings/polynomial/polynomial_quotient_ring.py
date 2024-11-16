@@ -18,7 +18,7 @@ EXAMPLES::
 
 TESTS::
 
-    sage: # needs sage.libs.flint
+    sage: # needs sage.libs.flint sage.libs.singular
     sage: Pol.<y> = CBF[]
     sage: Quo.<y> = Pol.quotient(y^3)
     sage: CBF.zero()*y
