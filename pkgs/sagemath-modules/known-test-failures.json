@@ -2330,7 +2330,7 @@
     },
     "sage.rings.finite_rings.integer_mod_ring": {
         "failed": true,
-        "ntests": 356
+        "ntests": 348
     },
     "sage.rings.finite_rings.residue_field": {
         "ntests": 39
@@ -2513,8 +2513,7 @@
         "ntests": 160
     },
     "sage.rings.polynomial.laurent_polynomial_ring_base": {
-        "failed": true,
-        "ntests": 117
+        "ntests": 119
     },
     "sage.rings.polynomial.multi_polynomial": {
         "failed": true,
@@ -2661,7 +2660,7 @@
     },
     "sage.rings.real_mpfr": {
         "failed": true,
-        "ntests": 1017
+        "ntests": 956
     },
     "sage.rings.ring": {
         "ntests": 173
