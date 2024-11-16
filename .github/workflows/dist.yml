@@ -674,8 +674,9 @@ jobs:
       - name: Update known test failures
         if: (success() || failure())
         run: |
+          WHEELHOUSE=$(pwd)/wheelhouse
           export PIP_FIND_LINKS=file://$WHEELHOUSE
           pip install passagemath-environment passagemath-repl
           pkg=${{ matrix.distribution }}
-          sage -fixdoctests --distribution "$pkg" --update-known-test-failures
+          SAGE_ROOT=$(pwd) sage -fixdoctests --distribution "$pkg" --update-known-test-failures
           git diff pkgs/$pkg
