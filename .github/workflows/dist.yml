@@ -611,8 +611,23 @@ jobs:
       fail-fast: false
       matrix:
         distribution:
+          - sagemath-bliss
           - sagemath-categories
+          - sagemath-combinat
+          - sagemath-coxeter3
+          - sagemath-flint
+          - sagemath-giac
+          - sagemath-graphs
+          - sagemath-groups
+          - sagemath-modules
+          - sagemath-pari
+          - sagemath-plot
           - sagemath-polyhedra
+          - sagemath-repl
+          - sagemath-schemes
+          - sagemath-singular
+          - sagemath-standard-no-symbolics
+          - sagemath-symbolics
         os:
           - ubuntu-latest
           - macos-13
