@@ -221,6 +221,18 @@ jobs:
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
     steps:
+      - name: Maximize build disk space
+        if: runner.os == 'Linux'
+        uses: easimon/maximize-build-space@v10
+        with:
+          # need space in /var for Docker images
+          root-reserve-mb:      30000
+          remove-dotnet:        true
+          remove-android:       true
+          remove-haskell:       true
+          remove-codeql:        true
+          remove-docker-images: true
+
       - uses: actions/checkout@v4
 
       - name: Set up QEMU
