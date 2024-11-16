@@ -678,5 +678,7 @@ jobs:
           export PIP_FIND_LINKS=file://$WHEELHOUSE
           pip install passagemath-environment passagemath-repl
           pkg=${{ matrix.distribution }}
-          SAGE_ROOT=$(pwd) sage -fixdoctests --distribution "$pkg" --update-known-test-failures
-          git diff pkgs/$pkg
+          export SAGE_ROOT=$(pwd)
+          cd pkgs/$pkg
+          sage --fixdoctests --distribution "$pkg" --venv .tox/py310-norequirements --update-known-test-failures
+          git diff
