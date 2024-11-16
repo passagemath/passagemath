@@ -660,7 +660,7 @@ jobs:
         if: (success() || failure())
         run: |
           export PIP_FIND_LINKS=file://$WHEELHOUSE
-          pip install sagemath-environment
+          pip install passagemath-environment passagemath-repl
           pkg=${{ matrix.distribution }}
           sage -fixdoctests --distribution "$pkg" --update-known-test-failures
           git diff pkgs/$pkg
