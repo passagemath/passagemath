@@ -2983,7 +2983,7 @@ class HeegnerPointOnX0N(HeegnerPoint):
 
         EXAMPLES::
 
-            sage: heegner_point(389,-7,1).plot(pointsize=50)
+            sage: heegner_point(389,-7,1).plot(pointsize=50)                            # needs sage.plot
             Graphics object consisting of 1 graphics primitive
         """
         from sage.plot.all import point
@@ -6547,18 +6547,18 @@ def heegner_point_height(self, D, prec=2, check_rank=True):
     EXAMPLES::
 
         sage: E = EllipticCurve('11a')
-        sage: E.heegner_point_height(-7)
+        sage: E.heegner_point_height(-7)                                                # needs sage.graphs
         0.22227?
 
     Some higher rank examples::
 
         sage: E = EllipticCurve('389a')
-        sage: E.heegner_point_height(-7)
+        sage: E.heegner_point_height(-7)                                                # needs sage.graphs
         0
         sage: E = EllipticCurve('5077a')
-        sage: E.heegner_point_height(-7)
+        sage: E.heegner_point_height(-7)                                                # needs sage.graphs
         0
-        sage: E.heegner_point_height(-7, check_rank=False)
+        sage: E.heegner_point_height(-7, check_rank=False)                              # needs sage.graphs
         0.0000?
     """
 
@@ -6653,7 +6653,7 @@ def heegner_index(self, D, min_p=2, prec=5, descent_second_limit=12,
         sage: E = EllipticCurve('11a')
         sage: E.heegner_discriminants(50)
         [-7, -8, -19, -24, -35, -39, -40, -43]
-        sage: E.heegner_index(-7)
+        sage: E.heegner_index(-7)                                                       # needs sage.graphs
         1.00000?
 
     ::
@@ -6661,19 +6661,19 @@ def heegner_index(self, D, min_p=2, prec=5, descent_second_limit=12,
         sage: E = EllipticCurve('37b')
         sage: E.heegner_discriminants(100)
         [-3, -4, -7, -11, -40, -47, -67, -71, -83, -84, -95]
-        sage: E.heegner_index(-95)          # long time (1 second)
+        sage: E.heegner_index(-95)          # long time (1 second)                      # needs sage.graphs
         2.00000?
 
     This tests doing direct computation of the Mordell-Weil group.
 
     ::
 
-        sage: EllipticCurve('675b').heegner_index(-11)
+        sage: EllipticCurve('675b').heegner_index(-11)                                  # needs sage.graphs
         3.0000?
 
     Currently discriminants -3 and -4 are not supported::
 
-        sage: E.heegner_index(-3)
+        sage: E.heegner_index(-3)                                                       # needs sage.graphs
         Traceback (most recent call last):
         ...
         ArithmeticError: Discriminant (=-3) must not be -3 or -4.
@@ -6681,7 +6681,7 @@ def heegner_index(self, D, min_p=2, prec=5, descent_second_limit=12,
     The curve 681b returns the true index, which is `3`::
 
         sage: E = EllipticCurve('681b')
-        sage: I = E.heegner_index(-8); I
+        sage: I = E.heegner_index(-8); I                                                # needs sage.graphs
         3.0000?
 
     In fact, whenever the returned index has a denominator of
@@ -6695,27 +6695,27 @@ def heegner_index(self, D, min_p=2, prec=5, descent_second_limit=12,
     the regulator of the twist::
 
         sage: E = EllipticCurve([1,-1,0,-1228,-16267])
-        sage: E.heegner_index(-8)
+        sage: E.heegner_index(-8)                                                       # needs sage.graphs
         Traceback (most recent call last):
         ...
         RuntimeError: ...
 
     However when we search higher, we find the points we need::
 
-        sage: E.heegner_index(-8, descent_second_limit=16, check_rank=False)  # long time
+        sage: E.heegner_index(-8, descent_second_limit=16, check_rank=False)  # long time, needs sage.graphs
         2.00000?
 
     Two higher rank examples (of ranks 2 and 3)::
 
         sage: E = EllipticCurve('389a')
-        sage: E.heegner_index(-7)
+        sage: E.heegner_index(-7)                                                       # needs sage.graphs
         +Infinity
         sage: E = EllipticCurve('5077a')
-        sage: E.heegner_index(-7)
+        sage: E.heegner_index(-7)                                                       # needs sage.graphs
         +Infinity
-        sage: E.heegner_index(-7, check_rank=False)
+        sage: E.heegner_index(-7, check_rank=False)                                     # needs sage.graphs
         0.001?
-        sage: E.heegner_index(-7, check_rank=False).lower() == 0
+        sage: E.heegner_index(-7, check_rank=False).lower() == 0                        # needs sage.graphs
         True
     """
     if not self.satisfies_heegner_hypothesis(D):
@@ -6866,7 +6866,7 @@ def heegner_index_bound(self, D=0, prec=5, max_height=None):
     EXAMPLES::
 
         sage: E = EllipticCurve('11a1')
-        sage: E.heegner_index_bound()
+        sage: E.heegner_index_bound()                                                   # needs sage.graphs
         ([2], -7, 2)
     """
     from .ell_rational_field import _MAX_HEIGHT

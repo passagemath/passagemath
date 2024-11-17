@@ -818,6 +818,7 @@ class Lseries_ell(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve([0, -1, 1, -10, -20])   # 11A  = X_0(11)
             sage: E.lseries().L_ratio()
             1/5
@@ -842,6 +843,7 @@ class Lseries_ell(SageObject):
 
         See :issue:`3651` and :issue:`15299`::
 
+            sage: # needs sage.graphs
             sage: EllipticCurve([0,0,0,-193^2,0]).sha().an()
             4
             sage: EllipticCurve([1, 0, 1, -131, 558]).sha().an()  # long time

@@ -1233,26 +1233,26 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         normalized::
 
             sage: E = EllipticCurve('11a2')
-            sage: E.modular_symbol(implementation = 'eclib')(0)
+            sage: E.modular_symbol(implementation='eclib')(0)
             1
-            sage: E.modular_symbol(implementation = 'sage', normalize='L_ratio')(0)
+            sage: E.modular_symbol(implementation='sage', normalize='L_ratio')(0)   # needs sage.graphs
             1
-            sage: E.modular_symbol(implementation = 'sage', normalize='none')(0)
+            sage: E.modular_symbol(implementation='sage', normalize='none')(0)      # needs sage.graphs
             1
-            sage: E.modular_symbol(implementation = 'sage', normalize='period')(0)
+            sage: E.modular_symbol(implementation='sage', normalize='period')(0)    # needs sage.graphs
             1
 
         Here is an example where both normalization methods work,
         while the non-normalized symbol is incorrect::
 
             sage: E = EllipticCurve('11a3')
-            sage: E.modular_symbol(implementation = 'eclib')(0)
+            sage: E.modular_symbol(implementation='eclib')(0)
             1/25
-            sage: E.modular_symbol(implementation = 'sage', normalize='none')(0)
+            sage: E.modular_symbol(implementation='sage', normalize='none')(0)      # needs sage.graphs
             1
-            sage: E.modular_symbol(implementation = 'sage', normalize='L_ratio')(0)
+            sage: E.modular_symbol(implementation='sage', normalize='L_ratio')(0)   # needs sage.graphs
             1/25
-            sage: E.modular_symbol(implementation = 'sage', normalize='period')(0)
+            sage: E.modular_symbol(implementation='sage', normalize='period')(0)    # needs sage.graphs
             1/25
 
         Since :issue:`10256`, the interface for negative modular symbols in eclib is available::
@@ -4710,7 +4710,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         ::
 
-            sage: isocls = EllipticCurve('37b').isogeny_class('database', order='lmfdb'); isocls.curves
+            sage: isocls = EllipticCurve('37b').isogeny_class('database', order='lmfdb'); isocls.curves     # needs sage.groups
             (Elliptic Curve defined by y^2 + y = x^3 + x^2 - 1873*x - 31833 over Rational Field,
              Elliptic Curve defined by y^2 + y = x^3 + x^2 - 23*x - 50 over Rational Field,
              Elliptic Curve defined by y^2 + y = x^3 + x^2 - 3*x + 1 over Rational Field)
@@ -5198,7 +5198,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         ::
 
             sage: E = EllipticCurve('195a')
-            sage: G = E.isogeny_graph()
+            sage: G = E.isogeny_graph()                                                                     # needs sage.graphs
             sage: for v in G: print("{} {}".format(v, G.get_vertex(v)))
             1 Elliptic Curve defined by y^2 + x*y  = x^3 - 110*x + 435 over Rational Field
             2 Elliptic Curve defined by y^2 + x*y  = x^3 - 115*x + 392 over Rational Field
@@ -5208,7 +5208,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             6 Elliptic Curve defined by y^2 + x*y  = x^3 - 8125*x - 282568 over Rational Field
             7 Elliptic Curve defined by y^2 + x*y  = x^3 - 7930*x - 296725 over Rational Field
             8 Elliptic Curve defined by y^2 + x*y  = x^3 - 130000*x - 18051943 over Rational Field
-            sage: G.plot(edge_labels=True)                                              # needs sage.plot
+            sage: G.plot(edge_labels=True)                                              # needs sage.graphs sage.plot
             Graphics object consisting of 23 graphics primitives
         """
         return self.isogeny_class(order=order).graph()
@@ -5305,6 +5305,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: EllipticCurve('11a1')._shortest_paths()
             ((Elliptic Curve defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field,
               Elliptic Curve defined by y^2 + y = x^3 - x^2 over Rational Field,
@@ -5343,6 +5344,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve('11a1')
             sage: E._multiple_of_degree_of_isogeny_to_optimal_curve()
             5
@@ -7286,6 +7288,7 @@ def elliptic_curve_congruence_graph(curves):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: from sage.schemes.elliptic_curves.ell_rational_field import elliptic_curve_congruence_graph
         sage: curves = list(cremona_optimal_curves([11..30]))
         sage: G = elliptic_curve_congruence_graph(curves)

@@ -102,6 +102,7 @@ class IsogenyClass_EC(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: E = EllipticCurve('990j1')
             sage: iso = E.isogeny_class(order='lmfdb') # orders lexicographically on a-invariants
             sage: iso[2] == E # indirect doctest
@@ -124,6 +125,7 @@ class IsogenyClass_EC(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: E = EllipticCurve('990j1')
             sage: iso = E.isogeny_class(order='lmfdb') # orders lexicographically on a-invariants
             sage: iso.index(E.short_weierstrass_model())
@@ -396,6 +398,7 @@ class IsogenyClass_EC(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: isocls = EllipticCurve('15a3').isogeny_class()
             sage: G = isocls.graph()
             sage: sorted(G._pos.items())
@@ -512,6 +515,7 @@ class IsogenyClass_EC(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: isocls = EllipticCurve('15a1').isogeny_class()
             sage: print("\n".join(repr(C) for C in isocls.curves))
             Elliptic Curve defined by y^2 + x*y + y = x^3 + x^2 - 10*x - 10 over Rational Field
@@ -965,6 +969,7 @@ class IsogenyClass_EC_NumberField(IsogenyClass_EC):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: isocls = EllipticCurve('1225h1').isogeny_class('database')
             sage: isocls._mat
             sage: isocls._compute_matrix(); isocls._mat

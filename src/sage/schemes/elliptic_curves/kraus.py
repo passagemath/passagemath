@@ -794,7 +794,7 @@ def check_Kraus_global(c4, c6, assume_nonsingular=False, debug=False):
 
     TESTS (see :issue:`17295`)::
 
-        sage: # needs sage.rings.number_field
+        sage: # needs sage.groups sage.rings.number_field
         sage: K.<a> = NumberField(x^3 - 7*x - 5)
         sage: E = EllipticCurve([a, 0, 1, 2*a^2 + 5*a + 3, -a^2 - 3*a - 2])
         sage: assert E.conductor().norm() == 8
