@@ -1656,7 +1656,7 @@ class PlanePartitions_box(PlanePartitions):
 
         TESTS::
 
-            sage: all(len(set(PP)) == PP.cardinality()
+            sage: all(len(set(PP)) == PP.cardinality()                                  # needs sage.modules
             ....:     for b in cartesian_product([range(4)]*3)
             ....:     if (PP := PlanePartitions(b)))
             True
@@ -2414,7 +2414,8 @@ class PlanePartitions_TSPP(PlanePartitions):
 
         TESTS::
 
-            sage: all(len(set(PP)) == PP.cardinality() for n in range(5) if (PP := PlanePartitions([n]*3, symmetry='TSPP')))
+            sage: all(len(set(PP)) == PP.cardinality()                                  # needs sage.graphs sage.modules
+            ....:     for n in range(5) if (PP := PlanePartitions([n]*3, symmetry='TSPP')))
             True
         """
         for acl in self.to_poset().antichains_iterator():
@@ -2870,7 +2871,7 @@ class PlanePartitions_SSCPP(PlanePartitions):
 
         TESTS::
 
-            sage: all(len(set(PP)) == PP.cardinality()
+            sage: all(len(set(PP)) == PP.cardinality()                                  # needs sage.graphs sage.modules
             ....:     for a, b in cartesian_product([range(5), range(0, 5, 2)])
             ....:     if (PP := PlanePartitions([a, a, b], symmetry='SSCPP')))
             True
@@ -2971,7 +2972,7 @@ class PlanePartitions_CSTCPP(PlanePartitions):
 
         TESTS::
 
-            sage: all(len(set(PP)) == PP.cardinality()
+            sage: all(len(set(PP)) == PP.cardinality()                                  # needs sage.graphs sage.modules
             ....:     for n in range(0, 5, 2)
             ....:     if (PP := PlanePartitions([n]*3, symmetry='CSTCPP')))
             True

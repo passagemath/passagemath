@@ -5510,7 +5510,7 @@ class Permutation(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.graphs
             sage: sigma = Permutations(5).identity()
             sage: list(sigma.nth_roots(3))
             [[1, 4, 3, 5, 2], [1, 5, 3, 2, 4], [1, 2, 4, 5, 3], [1, 2, 5, 3, 4],
@@ -5535,7 +5535,7 @@ class Permutation(CombinatorialElement):
 
         We compute the number of square roots of the identity (i.e. involutions in `S_n`, :oeis:`A000085`)::
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.graphs
             sage: [len(list(Permutations(n).identity().nth_roots(2))) for n in range(2,8)]
             [2, 4, 10, 26, 76, 232]
             sage: list(Permutation('(1)').nth_roots(2))
