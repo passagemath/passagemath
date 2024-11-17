@@ -2827,6 +2827,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         defines the same field as ``pol26`` but is simpler::
 
             sage: pol26 = hilbert_class_polynomial(-4*26)
+            sage: x = polygen(QQ, 'x')
             sage: pol = x^6 - x^5 + 2*x^4 + x^3 - 2*x^2 - x - 1
             sage: K.<a> = NumberField(pol)
             sage: L.<b> = K.extension(x^2 + 26)

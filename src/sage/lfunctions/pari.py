@@ -314,6 +314,7 @@ def lfun_number_field(K):
         sage: L(3)
         1.20205690315959
 
+        sage: x = polygen(QQ, 'x')
         sage: K = NumberField(x**2 - 2, 'a')
         sage: L = LFunction(lfun_number_field(K))
         sage: L(3)
@@ -477,7 +478,7 @@ class LFunction(SageObject):
 
     We compute with the Dedekind zeta function of a number field::
 
-        sage: x = var('x')
+        sage: x = polygen(QQ, 'x')
         sage: K = NumberField(x**4 - x**2 - 1,'a')
         sage: L = K.zeta_function(algorithm='pari')
         sage: L.conductor
