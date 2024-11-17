@@ -24,7 +24,7 @@ class Ecm(Executable):
     EXAMPLES::
 
         sage: from sage.features.ecm import Ecm
-        sage: Ecm().is_present()
+        sage: Ecm().is_present()                                                        # needs ecm
         FeatureTestResult('ecm', True)
     """
     def __init__(self):
