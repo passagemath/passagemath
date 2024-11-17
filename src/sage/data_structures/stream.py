@@ -1076,9 +1076,8 @@ class Stream_taylor(Stream_inexact):
             sage: f = Stream_taylor(polygen(QQ, 'x')^3, False)
             sage: TestSuite(f).run(skip='_test_pickling')
         """
-        from sage.symbolic.ring import SR
-        from sage.structure.element import parent
-        if parent(function) is SR:
+        from sage.structure.element import Expression
+        if isinstance(function, Expression):
             self._is_symbolic = True
             if function.number_of_arguments() != 1:
                 raise NotImplementedError("the function can only take a single input")
