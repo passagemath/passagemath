@@ -42,18 +42,24 @@ test    = ["passagemath-repl"]
 
 # extras by packages (same as sagemath-modules)
 flint   = ["passagemath-flint"]
-linbox  = []  # FIXME
-m4ri    = []  # FIXME
-m4rie   = []  # FIXME
+fpylll  = [SPKG_INSTALL_REQUIRES_fpylll]
+gsl     = []  # No extra needed
+linbox  = ["passagemath-linbox"]
+m4ri    = ["passagemath-modules[linbox]"]
+m4rie   = ["passagemath-modules[linbox]"]
 meataxe = ["passagemath-meataxe"]
-mpfi    = []  # FIXME
+mpfi    = ["passagemath-modules[flint]"]
+mpfr    = []  # No extra needed
+mpmath  = []  # No extra needed
 ntl     = ["passagemath-ntl"]
 numpy   = [SPKG_INSTALL_REQUIRES_numpy]
 pari    = ["passagemath-pari"]
 
 # extras by packages (specific to sagemath-schemes)
 
+eclib   = ["passagemath-eclib"]
 singular = []  # no extra needed
+sympow  = ["passagemath-sympow"]
 
 # extras by rings; same as in sagemath-modules
 RDF     = ["passagemath-schemes[numpy]"]
