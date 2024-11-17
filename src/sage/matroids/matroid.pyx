@@ -8076,6 +8076,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: M = matroids.Wheel(2)
             sage: A = M.chow_ring(R=ZZ, augmented=False); A
             Chow ring of Wheel(2): Regular matroid of rank 2 on 4 elements with
@@ -8088,6 +8089,7 @@ cdef class Matroid(SageObject):
 
         We construct a more interesting example using the Fano matroid::
 
+            sage: # needs sage.graphs
             sage: M = matroids.catalog.Fano()
             sage: A = M.chow_ring(QQ); A
             Chow ring of Fano: Binary matroid of rank 3 on 7 elements, type (3, 0)
@@ -8116,6 +8118,7 @@ cdef class Matroid(SageObject):
         The augmented Chow ring can also be constructed with the
         Feitchner-Yuzvinsky and atom-free presentation::
 
+            sage: # needs sage.graphs
             sage: M = matroids.Wheel(3)
             sage: ch = M.chow_ring(QQ, augmented=True, presentation='fy'); ch
             Augmented Chow ring of Wheel(3): Regular matroid of rank 3 on
