@@ -12,7 +12,8 @@ Features for testing the presence of ``gfan``
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
 
-from . import Executable
+from . import Executable, PythonModule
+from .join_feature import JoinFeature
 
 
 class GfanExecutable(Executable):
@@ -28,11 +29,15 @@ class GfanExecutable(Executable):
             True
         """
         if cmd is None:
-            name = "gfan"
+            name = "gfan_executable"
+            executable = "gfan"
         else:
-            name = f"gfan_{cmd}"
-        Executable.__init__(self, name, executable=name, spkg='gfan', type='standard')
+            executable = name = f"gfan_{cmd}"
+        Executable.__init__(self, name, executable=executable, spkg='gfan', type='standard')
 
 
 def all_features():
-    return [GfanExecutable()]
+    return [JoinFeature("gfan",
+                        (GfanExecutable(),
+                         PythonModule('sage.interfaces.gfan')),
+                        spkg='sagemath_gfan')]
