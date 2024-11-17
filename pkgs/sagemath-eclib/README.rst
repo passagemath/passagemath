@@ -42,6 +42,8 @@ What is included
 
 - `Cremona modular symbols (constructor) <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/constructor.html>`_
 
+- `Interface to the mwrank program <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/mwrank.html#module-sage.interfaces.mwrank>`_
+
 
 Examples
 --------
