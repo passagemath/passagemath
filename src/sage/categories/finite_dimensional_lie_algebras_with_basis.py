@@ -469,6 +469,7 @@ class FiniteDimensionalLieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
                  D{1} + D{1, 2} + D{2, 3} + D{3},
                  D{1, 2, 3} + D{1, 3} + D{2})
 
+                sage: # needs sage.combinat sage.modules
                 sage: scoeffs = {('a','d'): {'a':1}, ('a','e'): {'b':-1},
                 ....:            ('b','d'): {'b':1}, ('b','e'): {'a':1},
                 ....:            ('d','e'): {'c':1}}
@@ -1469,6 +1470,7 @@ class FiniteDimensionalLieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
                 [An example of a finite dimensional Lie algebra with basis:
                  the 3-dimensional abelian Lie algebra over Rational Field]
 
+                sage: # needs sage.combinat sage.modules
                 sage: L.<x,y> = LieAlgebra(QQ, {('x','y'): {'x':1}})
                 sage: L.upper_central_series()
                 [Ideal () of Lie algebra on 2 generators (x, y) over Rational Field]
