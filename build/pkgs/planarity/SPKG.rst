@@ -29,6 +29,5 @@ Upstream Contact
 Special Update/Build Instructions
 ---------------------------------
 
-The tarballs can be found at,
+The tarballs can be found at
 https://github.com/graph-algorithms/edge-addition-planarity-suite/releases
-sage tarball is repackaged after running autogen.sh
