@@ -83,21 +83,23 @@ series in this case are polynomials::
 
 A similar statement is true for lazy symmetric functions::
 
-    sage: h = SymmetricFunctions(QQ).h()                                                # needs sage.combinat
-    sage: L = LazySymmetricFunctions(h)                                                 # needs sage.combinat
-    sage: 1 / (1-L(h[1]))                                                               # needs sage.combinat
+    sage: # needs sage.combinat sage.modules
+    sage: h = SymmetricFunctions(QQ).h()
+    sage: L = LazySymmetricFunctions(h)
+    sage: 1 / (1-L(h[1]))
     h[] + h[1] + (h[1,1]) + (h[1,1,1]) + (h[1,1,1,1]) + (h[1,1,1,1,1]) + (h[1,1,1,1,1,1]) + O^7
 
 We can change the base ring::
 
+    sage: # needs sage.combinat sage.modules
     sage: h = g.change_ring(QQ)
-    sage: h.parent()                                                                    # needs sage.combinat
+    sage: h.parent()
     Lazy Laurent Series Ring in z over Rational Field
-    sage: h                                                                             # needs sage.combinat
+    sage: h
     4*z + 6*z^2 + 8*z^3 + 19*z^4 + 38*z^5 + 71*z^6 + 130*z^7 + O(z^8)
-    sage: hinv = h^-1; hinv                                                             # needs sage.combinat
+    sage: hinv = h^-1; hinv
     1/4*z^-1 - 3/8 + 1/16*z - 17/32*z^2 + 5/64*z^3 - 29/128*z^4 + 165/256*z^5 + O(z^6)
-    sage: hinv.valuation()                                                              # needs sage.combinat
+    sage: hinv.valuation()
     -1
 
 TESTS:
@@ -192,9 +194,10 @@ components are in the correct ring::
     ....:         n += 1
     sage: check(L, gen(), valuation=None)                                               # needs sage.rings.finite_rings
 
-    sage: s = SymmetricFunctions(GF(2)).s()                                             # needs sage.combinat
-    sage: L = LazySymmetricFunctions(s)                                                 # needs sage.combinat
-    sage: check(L, lambda n: sum(k*s(la) for k, la in enumerate(Partitions(n))),        # needs sage.combinat
+    sage: # needs sage.combinat sage.modules
+    sage: s = SymmetricFunctions(GF(2)).s()
+    sage: L = LazySymmetricFunctions(s)
+    sage: check(L, lambda n: sum(k*s(la) for k, la in enumerate(Partitions(n))),
     ....:       valuation=0)
 
 Check that we can invert matrices::
@@ -535,7 +538,7 @@ class LazyModuleElement(Element):
 
         Similarly for lazy symmetric functions::
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.modules
             sage: p = SymmetricFunctions(QQ).p()
             sage: L = LazySymmetricFunctions(p)
             sage: f = 1/(1-2*L(p[1])); f
@@ -1372,7 +1375,7 @@ class LazyModuleElement(Element):
 
         We can compute the Frobenius character of unlabeled trees::
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.modules
             sage: m = SymmetricFunctions(QQ).m()
             sage: s = SymmetricFunctions(QQ).s()
             sage: L = LazySymmetricFunctions(m)
@@ -3418,12 +3421,12 @@ class LazyCauchyProductSeries(LazyModuleElement):
         Check that division by one does nothing, and division by
         itself gives one::
 
+            sage: # needs sage.combinat sage.modules
             sage: s = SymmetricFunctions(ZZ).s()
             sage: S = LazySymmetricFunctions(s)
             sage: f = S(lambda n: s(Partitions(n).random_element()))
             sage: f / S.one() is f
             True
-
             sage: f / f
             s[]
 
@@ -6733,6 +6736,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.modules
             sage: p = SymmetricFunctions(QQ).p()
             sage: s = SymmetricFunctions(QQ).s()
             sage: lp = LazySymmetricFunctions(p)
@@ -6744,6 +6748,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
             ....:     return p.sum_of_terms((Partition([d] * (n // d)),
             ....:          euler_phi(d) / n) for d in divisors(n))
 
+            sage: # needs sage.combinat sage.modules
             sage: A = lp(asso, valuation=2)
             sage: A.legendre_transform()[:5]
             [1/2*p[1, 1] - 1/2*p[2],
@@ -6752,6 +6757,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         TESTS::
 
+            sage: # needs sage.combinat sage.modules
             sage: p = SymmetricFunctions(QQ).p()
             sage: lp = LazySymmetricFunctions(p)
             sage: A = lp(p([1]))
@@ -6838,6 +6844,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.modules
             sage: s = SymmetricFunctions(QQ).s()
             sage: ls = LazySymmetricFunctions(s)
             sage: f = ls(lambda n: s([n]), valuation=1)

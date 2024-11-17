@@ -2144,6 +2144,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         Ensure that :issue:`37445` is fixed::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = GF(13)[]
             sage: def irr(d, R): return f.monic() if (f := R.random_element(d)).is_irreducible() else irr(d, R)
             sage: f = prod(irr(6, R) for _ in range(10))
@@ -2361,6 +2362,7 @@ cdef class Polynomial(CommutativePolynomial):
         We can also use this function for polynomials which are not defined over finite
         fields, but this simply falls back to a slow method of factorisation::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = ZZ[]
             sage: f = 3*x^4 + 2*x^3
             sage: f.any_irreducible_factor()
@@ -2573,6 +2575,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         Check for :issue:`37034`::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Zmod(55)[]
             sage: (x^2 + 1).any_root()
             Traceback (most recent call last):
