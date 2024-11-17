@@ -13,8 +13,9 @@ Feature for testing the presence of FROBBY
 # *****************************************************************************
 
 import subprocess
-from . import Executable
-from . import FeatureTestResult
+from . import Executable, FeatureTestResult, PythonModule
+from .join_feature import JoinFeature
+
 
 class Frobby(Executable):
     r"""
@@ -34,9 +35,12 @@ class Frobby(Executable):
             sage: isinstance(Frobby(), Frobby)
             True
         """
-        Executable.__init__(self, "frobby", executable='frobby',
+        Executable.__init__(self, "frobby_executable", executable='frobby',
                             spkg='frobby')
 
 
 def all_features():
-    return [Frobby()]
+    return [JoinFeature("frobby",
+                        (Frobby(),
+                         PythonModule('sage.interfaces.frobby')),
+                        spkg='sagemath_frobby')]
