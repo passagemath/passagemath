@@ -58,6 +58,8 @@ pari    = ["passagemath-pari"]
 # extras by packages (specific to sagemath-schemes)
 
 eclib   = ["passagemath-eclib"]
+msolve  = ["passagemath-msolve"]
+qepcad  = ["passagemath-qepcad"]
 singular = []  # no extra needed
 sympow  = ["passagemath-sympow"]
 
