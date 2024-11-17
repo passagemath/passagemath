@@ -3757,7 +3757,7 @@ def binomial(x, m, **kwds):
     We test that certain binomials are very fast (this should be
     instant) -- see :issue:`3309`::
 
-        sage: a = binomial(RR(1140000.78), 23310000)
+        sage: a = binomial(RR(1140000.78), 23310000)                                    # needs sage.libs.pari
 
     We test conversion of arguments to Integers -- see :issue:`6870`::
 
