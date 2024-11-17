@@ -3,7 +3,9 @@ r"""
 Feature for testing the presence of ``giac``
 """
 
-from . import Executable, FeatureTestResult
+from . import Executable, FeatureTestResult, PythonModule
+from .join_feature import JoinFeature
+
 
 class Giac(Executable):
     r"""
