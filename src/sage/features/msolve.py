@@ -19,8 +19,9 @@ Feature for testing the presence of msolve
 # *****************************************************************************
 
 import subprocess
-from . import Executable
-from . import FeatureTestResult
+from . import Executable, FeatureTestResult, PythonModule
+from .join_feature import JoinFeature
+
 
 class msolve(Executable):
     r"""
@@ -65,4 +66,7 @@ class msolve(Executable):
         return FeatureTestResult(self, True)
 
 def all_features():
-    return [msolve()]
+    return [JoinFeature("msolve",
+                        (msolve(),
+                         PythonModule('sage.rings.polynomial.msolve')),
+                        spkg='sagemath_msolve')]
