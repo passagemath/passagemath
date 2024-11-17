@@ -2060,6 +2060,7 @@ class LazyModuleElement(Element):
 
         Check that non-commutativity is taken into account::
 
+            sage: # needs sage.modules
             sage: M = MatrixSpace(ZZ, 2)
             sage: L.<z> = LazyPowerSeriesRing(M)
             sage: f = L(lambda n: matrix([[1,n],[0,1]]))
