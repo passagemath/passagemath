@@ -223,7 +223,7 @@ class DecreasingHeckeFactorization(Element, metaclass=InheritComparisonClasscall
         """
         return isinstance(self, type(other)) and self.value == other.value
 
-    def __lt__(self,other):
+    def __lt__(self, other):
         """
         Return ``True`` if ``self`` comes before ``other`` and ``False``
         otherwise.

@@ -1315,7 +1315,7 @@ This model of computation, called *continuation*, is very useful in
 combinatorics, especially when combined with recursion. Here is how to
 generate all words of a given length on a given alphabet::
 
-    sage: def words(alphabet,l):
+    sage: def words(alphabet, l):
     ....:    if l == 0:
     ....:        yield []
     ....:    else:

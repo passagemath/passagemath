@@ -289,7 +289,7 @@ class GroupActionOnSubmodule(Action):
         Echelon basis matrix:
         [0 1]
     """
-    def __init__(self, MatrixGroup,submodule, is_left=False):
+    def __init__(self, MatrixGroup, submodule, is_left=False):
         r"""
         Initialize the action.
 
