@@ -106,7 +106,7 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
             EXAMPLES::
 
                 sage: A = AlgebrasWithBasis(ZZ).Filtered().example()
-                sage: A.graded_algebra()
+                sage: A.graded_algebra()                                                # needs sage.combinat
                 Graded Algebra of An example of a filtered algebra with basis:
                  the universal enveloping algebra of
                  Lie algebra of RR^3 with cross product over Integer Ring
@@ -134,10 +134,10 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
                 sage: A = Algebras(QQ).WithBasis().Filtered().example()
                 sage: p = A.an_element() + A.algebra_generators()['x'] + 2; p
                 U['x']^2*U['y']^2*U['z']^3 + 3*U['x'] + 3*U['y'] + 3
-                sage: q = A.to_graded_conversion()(p); q
+                sage: q = A.to_graded_conversion()(p); q                                # needs sage.combinat
                 bar(U['x']^2*U['y']^2*U['z']^3) + 3*bar(U['x'])
                  + 3*bar(U['y']) + 3*bar(1)
-                sage: q.parent() is A.graded_algebra()
+                sage: q.parent() is A.graded_algebra()                                  # needs sage.combinat
                 True
             """
             base_one = self.base_ring().one()
@@ -163,10 +163,10 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
                 sage: A = Algebras(QQ).WithBasis().Filtered().example()
                 sage: p = A.an_element() + A.algebra_generators()['x'] + 2; p
                 U['x']^2*U['y']^2*U['z']^3 + 3*U['x'] + 3*U['y'] + 3
-                sage: q = A.to_graded_conversion()(p)
-                sage: A.from_graded_conversion()(q) == p
+                sage: q = A.to_graded_conversion()(p)                                   # needs sage.combinat
+                sage: A.from_graded_conversion()(q) == p                                # needs sage.combinat
                 True
-                sage: q.parent() is A.graded_algebra()
+                sage: q.parent() is A.graded_algebra()                                  # needs sage.combinat
                 True
             """
             base_one = self.base_ring().one()
@@ -194,11 +194,11 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
                 sage: A = Algebras(QQ).WithBasis().Filtered().example()
                 sage: p = A.an_element() + A.algebra_generators()['x'] + 2; p
                 U['x']^2*U['y']^2*U['z']^3 + 3*U['x'] + 3*U['y'] + 3
-                sage: q = A.projection(7)(p); q
+                sage: q = A.projection(7)(p); q                                         # needs sage.combinat
                 bar(U['x']^2*U['y']^2*U['z']^3)
-                sage: q.parent() is A.graded_algebra()
+                sage: q.parent() is A.graded_algebra()                                  # needs sage.combinat
                 True
-                sage: A.projection(8)(p)
+                sage: A.projection(8)(p)                                                # needs sage.combinat
                 0
             """
             base_zero = self.base_ring().zero()
@@ -289,6 +289,7 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
 
             We now compute `\operatorname{gr} f` ::
 
+                sage: # needs sage.combinat
                 sage: grA = A.graded_algebra(); grA
                 Graded Algebra of An example of a filtered algebra with
                  basis: the universal enveloping algebra of Lie algebra
