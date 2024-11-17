@@ -40,4 +40,4 @@ def all_features():
     return [JoinFeature("gfan",
                         (GfanExecutable(),
                          PythonModule('sage.interfaces.gfan')),
-                        spkg='sagemath_gfan')]
+                        spkg='sagemath_gfan', type='standard')]

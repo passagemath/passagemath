@@ -32,4 +32,4 @@ def all_features():
     return [JoinFeature("giac",
                         (Giac(),
                          PythonModule('sage.interfaces.giac')),
-                        spkg='sagemath_giac')]
+                        spkg='sagemath_giac', type='standard')]

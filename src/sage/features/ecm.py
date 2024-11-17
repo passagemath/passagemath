@@ -43,4 +43,4 @@ def all_features():
     return [JoinFeature("ecm",
                         (Ecm(),
                          PythonModule('sage.interfaces.ecm')),
-                        spkg='sagemath_libecm')]
+                        spkg='sagemath_libecm', type='standard')]
