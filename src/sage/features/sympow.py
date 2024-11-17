@@ -14,7 +14,8 @@ Feature for testing the presence of ``sympow``
 
 import subprocess
 
-from . import Executable
+from . import Executable, PythonModule
+from .join_feature import JoinFeature
 
 
 class Sympow(Executable):
@@ -41,4 +42,7 @@ class Sympow(Executable):
 
 
 def all_features():
-    return [Sympow()]
+    return [JoinFeature("sympow",
+                        (Sympow(),
+                         PythonModule('sage.lfunctions.sympow')),
+                        spkg='sagemath_sympow', type='standard')]
