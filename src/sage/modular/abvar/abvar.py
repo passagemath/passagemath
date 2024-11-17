@@ -3720,7 +3720,7 @@ class ModularAbelianVariety_abstract(Parent):
         By a theorem the modular degree must thus be `3`::
 
             sage: E = EllipticCurve('33a')
-            sage: E.modular_degree()
+            sage: E.modular_degree()                                                    # needs sympow
             3
 
         Next we compute the dual of a `2`-dimensional new simple

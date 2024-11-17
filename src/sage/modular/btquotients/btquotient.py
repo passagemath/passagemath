@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-schemes
-# sage.doctest: needs sage.libs.pari
+# sage.doctest: needs sage.graphs sage.libs.pari
 r"""
 Quotients of the Bruhat-Tits tree
 

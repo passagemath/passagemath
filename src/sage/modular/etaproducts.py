@@ -144,6 +144,7 @@ class EtaGroupElement(Element):
 
         EXAMPLES::
 
+            sage: # needs fpylll
             sage: eta1, eta2 = EtaGroup(4).basis() # indirect doctest
             sage: eta1 * eta2
             Eta product of level 4 : (eta_1)^24 (eta_2)^-48 (eta_4)^24
@@ -159,6 +160,7 @@ class EtaGroupElement(Element):
 
         EXAMPLES::
 
+            sage: # needs fpylll
             sage: eta1, eta2 = EtaGroup(4).basis()
             sage: eta1 / eta2 # indirect doctest
             Eta product of level 4 : (eta_1)^-8 (eta_4)^8
@@ -176,6 +178,7 @@ class EtaGroupElement(Element):
 
         EXAMPLES::
 
+            sage: # needs fpylll
             sage: eta1, eta2 = EtaGroup(4).basis()
             sage: ~eta2  # indirect doctest
             Eta product of level 4 : (eta_1)^-16 (eta_2)^24 (eta_4)^-8
@@ -503,6 +506,7 @@ class EtaGroup_class(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs fpylll
             sage: EtaGroup(5).basis()
             [Eta product of level 5 : (eta_1)^6 (eta_5)^-6]
             sage: EtaGroup(12).basis()
@@ -593,6 +597,7 @@ class EtaGroup_class(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs fpylll
             sage: EtaGroup(4).reduce_basis([ EtaProduct(4, {1:8,2:24,4:-32}), EtaProduct(4, {1:8, 4:-8})])
             [Eta product of level 4 : (eta_1)^8 (eta_4)^-8,
              Eta product of level 4 : (eta_1)^-8 (eta_2)^24 (eta_4)^-16]
@@ -1023,6 +1028,7 @@ def _eta_relations_helper(eta1, eta2, degree, qexp_terms, labels, verbose):
 
     EXAMPLES::
 
+        sage: # needs fpylll
         sage: from sage.modular.etaproducts import _eta_relations_helper
         sage: r,s = EtaGroup(4).basis()
         sage: _eta_relations_helper(r,s,4,100,['a','b'],False)
