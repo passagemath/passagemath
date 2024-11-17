@@ -473,6 +473,7 @@ class EllipticCurveFactory(UniqueFactory):
 
         ``names`` is ignored at the moment, however it is used to support a convenient way to get a generator::
 
+            sage: # needs eclib
             sage: E.<P> = EllipticCurve(QQ, [1, 3])
             sage: P
             (-1 : 1 : 1)
@@ -958,6 +959,7 @@ def EllipticCurve_from_cubic(F, P=None, morphism=True):
     points on the cubic.  First we find the preimages of multiples of
     the generator::
 
+        sage: # needs eclib
         sage: E = f.codomain()
         sage: E.label()
         '720e2'
@@ -979,6 +981,7 @@ def EllipticCurve_from_cubic(F, P=None, morphism=True):
 
     The elliptic curve also has torsion, which we can map back::
 
+        sage: # needs eclib
         sage: E.torsion_points()
         [(0 : 1 : 0),
          (-144000000/17689 : 3533760000000/2352637 : 1),
@@ -1470,6 +1473,7 @@ def EllipticCurves_with_good_reduction_outside_S(S=[], proof=None, verbose=False
 
     EXAMPLES::
 
+        sage: # needs eclib
         sage: EllipticCurves_with_good_reduction_outside_S([])
         []
         sage: elist = EllipticCurves_with_good_reduction_outside_S([2])
@@ -1485,13 +1489,14 @@ def EllipticCurves_with_good_reduction_outside_S(S=[], proof=None, verbose=False
 
     Without ``Proof=False``, this example gives two warnings::
 
+        sage: # needs eclib
         sage: elist = EllipticCurves_with_good_reduction_outside_S([11], proof=False)   # long time (14s on sage.math, 2011)
         sage: len(elist)                                                                # long time
         12
         sage: ', '.join(e.label() for e in elist)                                       # long time
         '11a1, 11a2, 11a3, 121a1, 121a2, 121b1, 121b2, 121c1, 121c2, 121d1, 121d2, 121d3'
 
-        sage: # long time
+        sage: # long time, needs eclib
         sage: elist = EllipticCurves_with_good_reduction_outside_S([2,3])               # long time (26s on sage.math, 2011)
         sage: len(elist)
         752

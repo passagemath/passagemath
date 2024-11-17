@@ -99,7 +99,7 @@ def simon_two_descent_work(E, two_tor_rk):
         ...
         (0, 0, 0, 0, [])
         sage: E = EllipticCurve('37a')
-        sage: simon_two_descent_work(E, E.two_torsion_rank())
+        sage: simon_two_descent_work(E, E.two_torsion_rank())                           # needs eclib
         (1, 1, 0, 0, [(0 : 0 : 1)])
     """
     from sage.misc.superseded import deprecation
@@ -136,10 +136,10 @@ def mwrank_two_descent_work(E, two_tor_rk):
 
         sage: from sage.schemes.elliptic_curves.BSD import mwrank_two_descent_work
         sage: E = EllipticCurve('14a')
-        sage: mwrank_two_descent_work(E, E.two_torsion_rank())
+        sage: mwrank_two_descent_work(E, E.two_torsion_rank())                          # needs eclib
         (0, 0, 0, 0, [])
         sage: E = EllipticCurve('37a')
-        sage: mwrank_two_descent_work(E, E.two_torsion_rank())
+        sage: mwrank_two_descent_work(E, E.two_torsion_rank())                          # needs eclib
         (1, 1, 0, 0, [(0 : -1 : 1)])
     """
     MWRC = E.mwrank_curve()
@@ -178,13 +178,13 @@ def pari_two_descent_work(E):
         sage: pari_two_descent_work(E)
         (0, 0, 0, 0, [])
         sage: E = EllipticCurve('37a')
-        sage: pari_two_descent_work(E) # random, up to sign
+        sage: pari_two_descent_work(E) # random, up to sign                             # needs eclib
         (1, 1, 0, 0, [(0 : -1 : 1)])
         sage: E = EllipticCurve('210e7')
-        sage: pari_two_descent_work(E)
+        sage: pari_two_descent_work(E)                                                  # needs eclib
         (0, 2, 0, 2, [])
         sage: E = EllipticCurve('66b3')
-        sage: pari_two_descent_work(E)
+        sage: pari_two_descent_work(E)                                                  # needs eclib
         (0, 0, 2, 2, [])
     """
     ep = E.pari_curve()

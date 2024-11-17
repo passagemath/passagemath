@@ -3788,7 +3788,7 @@ class HeegnerPointOnEllipticCurve(HeegnerPoint):
             0.150298370947295
             sage: P.height()
             0.0375745927368238
-            sage: E.heegner_index(-8)
+            sage: E.heegner_index(-8)                                                   # needs eclib
             2.0000?
             sage: E.torsion_order()
             1
@@ -4141,7 +4141,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         EXAMPLES::
 
-            sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67); P.index()
+            sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67); P.index()      # needs eclib
             6
         """
         if self.conductor() == 1:
@@ -4191,6 +4191,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         A rank 1 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67)
             sage: P.point_exact()
             (6 : -15 : 1)
@@ -4203,12 +4204,14 @@ class KolyvaginPoint(HeegnerPoint):
 
         A rank 0 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('11a1'); P = E.kolyvagin_point(-7)
             sage: P.point_exact()
             (-1/2*sqrt_minus_7 + 1/2 : -2*sqrt_minus_7 - 2 : 1)
 
         A rank 2 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('389a1'); P = E.kolyvagin_point(-7)
             sage: P.point_exact()
             (0 : 1 : 0)
@@ -4334,6 +4337,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         A Kolyvagin point on a rank 1 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67)
             sage: P.trace_to_real_numerical()
             (1.61355529131986 : -2.18446840788880 : 1.00000000000000)
@@ -4360,6 +4364,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('43a'); P = E.heegner_point(-20).kolyvagin_point()
             sage: PP = P.numerical_approx(); PP
             (0.000000000000000 : -1.00000000000000 : 1.00000000000000)
@@ -4396,6 +4401,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         A Kolyvagin point on a rank 1 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67)
             sage: P.mod(2)
             (1 : 1 : 1)
@@ -5684,11 +5690,12 @@ def kolyvagin_reduction_data(E, q, first_only=True):
 
     A rank 1 example::
 
-        sage: kolyvagin_reduction_data(EllipticCurve('37a1'), 3)
+        sage: kolyvagin_reduction_data(EllipticCurve('37a1'), 3)                        # needs eclib
         (17, -7, 1, 52)
 
     A rank 3 example::
 
+        sage: # needs eclib
         sage: kolyvagin_reduction_data(EllipticCurve('5077a1'), 3)
         (11, -47, 5, 4234)
         sage: H = heegner_points(5077, -47)
@@ -5703,6 +5710,7 @@ def kolyvagin_reduction_data(E, q, first_only=True):
     working in a space of dimension 293060 (so prohibitive at
     present)::
 
+        sage: # needs eclib
         sage: E = elliptic_curves.rank(4)[0]
         sage: kolyvagin_reduction_data(E,3)              # long time
         (11, -71, 7, 293060)
@@ -5712,19 +5720,19 @@ def kolyvagin_reduction_data(E, q, first_only=True):
 
     The first rank 2 example::
 
-        sage: kolyvagin_reduction_data(EllipticCurve('389a'), 3)
+        sage: kolyvagin_reduction_data(EllipticCurve('389a'), 3)                        # needs eclib
         (5, -7, 1, 130)
-        sage: kolyvagin_reduction_data(EllipticCurve('389a'), 3, first_only=False)
+        sage: kolyvagin_reduction_data(EllipticCurve('389a'), 3, first_only=False)      # needs eclib
         (5, 17, -7, 1, 130, 520)
 
     A large `q = 7`::
 
-        sage: kolyvagin_reduction_data(EllipticCurve('1143c1'), 7, first_only=False)
+        sage: kolyvagin_reduction_data(EllipticCurve('1143c1'), 7, first_only=False)    # needs eclib
         (13, 83, -59, 3, 1536, 10496)
 
     Additive reduction::
 
-        sage: kolyvagin_reduction_data(EllipticCurve('2350g1'), 5, first_only=False)
+        sage: kolyvagin_reduction_data(EllipticCurve('2350g1'), 5, first_only=False)    # needs eclib
         (19, 239, -311, 19, 6480, 85680)
     """
     from .ell_generic import EllipticCurve_generic
@@ -6457,6 +6465,7 @@ def kolyvagin_point(self, D, c=ZZ(1), check=True):
 
     EXAMPLES::
 
+        sage: # needs eclib
         sage: E = EllipticCurve('37a1')
         sage: P = E.kolyvagin_point(-67); P
         Kolyvagin point of discriminant -67 on elliptic curve of conductor 37
@@ -6970,7 +6979,7 @@ def _heegner_index_in_EK(self, D):
     We compute the index for a rank 2 curve and found that it is 2::
 
         sage: E = EllipticCurve('389a')
-        sage: E._heegner_index_in_EK(-7)
+        sage: E._heegner_index_in_EK(-7)                                                # needs eclib
         2
 
     We explicitly verify in the above example that indeed that

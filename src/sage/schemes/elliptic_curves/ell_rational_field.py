@@ -171,7 +171,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         the large database was installed)::
 
             sage: E = EllipticCurve('389a1')
-            sage: [P.curve() is E for P in E.gens()]
+            sage: [P.curve() is E for P in E.gens()]            # needs eclib
             [True, True]
         """
         # Cached values for the generators, rank and regulator.
@@ -330,6 +330,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('5077a1')
             sage: E.rank()
             3
@@ -445,9 +446,9 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         EXAMPLES::
 
             sage: E = EllipticCurve('37a1')
-            sage: E.mwrank() #random
+            sage: E.mwrank()  # random                          # needs eclib
             ...
-            sage: print(E.mwrank())
+            sage: print(E.mwrank())                             # needs eclib
             Curve [0,0,1,-1,0] :        Basic pair: I=48, J=-432
             disc=255744
             ...
@@ -465,14 +466,14 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         Run mwrank with ``'verbose'`` flag set to 0 but list generators if
         found::
 
-            sage: print(E.mwrank('-v0 -l'))
+            sage: print(E.mwrank('-v0 -l'))                     # needs eclib
             Curve [0,0,0,877,0] :   0 <= rank <= 1
             Regulator = 1
 
         Run mwrank again, this time with a higher bound for point searching
         on homogeneous spaces::
 
-            sage: print(E.mwrank('-v0 -l -b11'))
+            sage: print(E.mwrank('-v0 -l -b11'))                # needs eclib
             Curve [0,0,0,877,0] :   Rank = 1
             Generator 1 is [29604565304828237474403861024284371796799791624792913256602210:-256256267988926809388776834045513089648669153204356603464786949:490078023219787588959802933995928925096061616470779979261000]; height 95.98037...
             Regulator = 95.98037...
@@ -519,7 +520,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             3006
             sage: E.conductor(algorithm='generic')
             3006
-            sage: E.conductor(algorithm='all')
+            sage: E.conductor(algorithm='all')                  # needs eclib
             3006
 
         .. NOTE::
@@ -775,6 +776,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('11a1')
             sage: EE = E.mwrank_curve()
             sage: EE
@@ -831,7 +833,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         EXAMPLES::
 
             sage: E = EllipticCurve('37a1')
-            sage: E.two_descent(verbose=False)
+            sage: E.two_descent(verbose=False)                  # needs eclib
             True
         """
         verbose_verbose("Calling mwrank C++ library.")
@@ -1084,7 +1086,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         TESTS::
 
             sage: E = EllipticCurve('37a1')
-            sage: E.modular_symbol(implementation = 'eclib') is E.modular_symbol(implementation = 'eclib', normalize = 'L_ratio')
+            sage: E.modular_symbol(implementation = 'eclib') is E.modular_symbol(implementation = 'eclib', normalize = 'L_ratio')  # needs eclib
             True
         """
         if sign not in [1,-1]:
@@ -1179,6 +1181,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('37a1')
             sage: M = E.modular_symbol(); M
             Modular symbol with sign 1 over Rational Field attached to
@@ -1332,6 +1335,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('19a1')
             sage: f = E.modular_symbol_numerical(1)
             sage: g = E.modular_symbol(1)
@@ -1375,6 +1379,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('113a1')
             sage: symb = E.pollack_stevens_modular_symbol()
             sage: symb
@@ -1382,6 +1387,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: symb.values()
             [-1/2, 1, -1, 0, 0, 1, 1, -1, 0, -1, 0, 0, 0, 1, -1, 0, 0, 0, 1, 0, 0]
 
+            sage: # needs eclib
             sage: E = EllipticCurve([0,1])
             sage: symb = E.pollack_stevens_modular_symbol(+1)
             sage: symb.values()
@@ -1835,6 +1841,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         ::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('11a1')
             sage: E.simon_two_descent()
             doctest:warning
@@ -1863,7 +1870,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         ::
 
             sage: E = EllipticCurve([1, -1, 0, -751055859, -7922219731979])
-            sage: E.simon_two_descent()
+            sage: E.simon_two_descent()                                                 # needs eclib
             (1, 1, [])
 
         The rest of these entries were taken from Tom Womack's page
@@ -1871,6 +1878,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         ::
 
+            sage: # needs eclib
             sage: E = EllipticCurve([1, -1, 0, -79, 289])
             sage: E.simon_two_descent()
             (4, 4, [(6 : -1 : 1), (4 : 3 : 1), (5 : -2 : 1), (8 : 7 : 1)])
@@ -1889,6 +1897,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         Example from :issue:`10832`::
 
+            sage: # needs eclib
             sage: E = EllipticCurve([1,0,0,-6664,86543])
             sage: E.simon_two_descent()
             (2, 3, [(-1/4 : 2377/8 : 1), (323/4 : 1891/8 : 1)])
@@ -1901,6 +1910,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         despite that the algorithm has not found any
         points of infinite order ::
 
+            sage: # needs eclib
             sage: E = EllipticCurve([1, 1, 0, -23611790086, 1396491910863060])
             sage: E.simon_two_descent()
             (1, 2, [])
@@ -1912,7 +1922,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         Example for :issue:`5153`::
 
             sage: E = EllipticCurve([3,0])
-            sage: E.simon_two_descent()
+            sage: E.simon_two_descent()                                                 # needs eclib
             (1, 2, [(1 : 2 : 1)])
 
         The upper bound on the 2-Selmer rank returned by this method
@@ -1920,9 +1930,9 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         equals the actual 2-Selmer rank plus 2 (see :issue:`10735`)::
 
             sage: E = EllipticCurve('438e1')
-            sage: E.simon_two_descent()
+            sage: E.simon_two_descent()                                                 # needs eclib
             (0, 3, [])
-            sage: E.selmer_rank()  # uses mwrank
+            sage: E.selmer_rank()  # uses mwrank                                        # needs eclib
             1
         """
         from sage.misc.superseded import deprecation
@@ -2048,29 +2058,29 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             2
             sage: EllipticCurve('5077a').rank()
             3
-            sage: EllipticCurve([1, -1, 0, -79, 289]).rank()   # This will use the default proof behavior of True
+            sage: EllipticCurve([1, -1, 0, -79, 289]).rank()   # This will use the default proof behavior of True    # needs eclib
             4
-            sage: EllipticCurve([0, 0, 1, -79, 342]).rank(proof=False)
+            sage: EllipticCurve([0, 0, 1, -79, 342]).rank(proof=False)  # needs eclib
             5
             sage: EllipticCurve([0, 0, 1, -79, 342]).rank(algorithm='pari')
             5
 
         Examples with denominators in defining equations::
 
-            sage: E = EllipticCurve([0, 0, 0, 0, -675/4])
+            sage: E = EllipticCurve([0, 0, 0, 0, -675/4])               # needs eclib
             sage: E.rank()
             0
             sage: E = EllipticCurve([0, 0, 1/2, 0, -1/5])
-            sage: E.rank()
+            sage: E.rank()                                              # needs eclib
             1
-            sage: E.minimal_model().rank()
+            sage: E.minimal_model().rank()                              # needs eclib
             1
 
         A large example where mwrank doesn't determine the result with certainty, but pari does::
 
-            sage: EllipticCurve([1,0,0,0,37455]).rank(proof=False)
+            sage: EllipticCurve([1,0,0,0,37455]).rank(proof=False)      # needs eclib
             0
-            sage: EllipticCurve([1,0,0,0,37455]).rank(proof=True)
+            sage: EllipticCurve([1,0,0,0,37455]).rank(proof=True)       # needs eclib
             Traceback (most recent call last):
             ...
             RuntimeError: rank not provably correct (lower bound: 0)
@@ -2096,21 +2106,21 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         database. We also check that the result is cached correctly::
 
             sage: E = EllipticCurve([-517, -4528])  # 1888b1
-            sage: E.rank(use_database=False)
+            sage: E.rank(use_database=False)                            # needs eclib
             Traceback (most recent call last):
             ...
             RuntimeError: rank not provably correct (lower bound: 0)
-            sage: E._EllipticCurve_rational_field__rank
+            sage: E._EllipticCurve_rational_field__rank                 # needs eclib
             (0, False)
-            sage: E.rank()
+            sage: E.rank()                                              # needs eclib
             0
-            sage: E._EllipticCurve_rational_field__rank
+            sage: E._EllipticCurve_rational_field__rank                 # needs eclib
             (0, True)
 
         This example has Sha = Z/4 x Z/4 and the rank cannot be
         determined using pari only::
 
-            sage: E =EllipticCurve([-113^2,0])
+            sage: E = EllipticCurve([-113^2,0])
             sage: E.rank(use_database=False, verbose=False, algorithm='pari')
             Traceback (most recent call last):
             ...
@@ -2298,7 +2308,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         EXAMPLES::
 
             sage: E = EllipticCurve('389a')
-            sage: E.gens()                 # random output
+            sage: E.gens()                 # random output              # needs eclib
             [(-1 : 1 : 1), (0 : 0 : 1)]
             sage: E.gens(algorithm='pari')    # random output
             [(5/4 : 5/8 : 1), (0 : 0 : 1)]
@@ -2309,7 +2319,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         A non-integral example::
 
             sage: E = EllipticCurve([-3/8,-2/3])
-            sage: E.gens() # random (up to sign)
+            sage: E.gens() # random (up to sign)                        # needs eclib
             [(10/9 : 29/54 : 1)]
 
         A non-minimal example::
@@ -2318,7 +2328,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E1 = E.change_weierstrass_model([1/20,0,0,0]); E1
             Elliptic Curve defined by y^2 + 8000*y = x^3 + 400*x^2 - 320000*x
              over Rational Field
-            sage: E1.gens() # random (if database not used)
+            sage: E1.gens()  # random (if database not used)            # needs eclib
             [(-400 : 8000 : 1), (0 : -8000 : 1)]
             sage: E1.gens(algorithm='pari')   #random
             [(-400 : 8000 : 1), (0 : -8000 : 1)]
@@ -2326,9 +2336,9 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         TESTS::
 
             sage: E = EllipticCurve('389a')
-            sage: len(E.gens())
+            sage: len(E.gens())                                         # needs eclib
             2
-            sage: E.saturation(E.gens())[1]
+            sage: E.saturation(E.gens())[1]                             # needs eclib
             1
             sage: len(E.gens(algorithm='pari'))
             2
@@ -2336,7 +2346,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             1
             sage: E = EllipticCurve([-3/8,-2/3])
             sage: P = E.lift_x(10/9)
-            sage: set(E.gens()) <= set([P,-P])
+            sage: set(E.gens()) <= set([P,-P])                          # needs eclib
             True
         """
         if proof is None:
@@ -2385,8 +2395,8 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         EXAMPLES::
 
             sage: E = EllipticCurve([-3/8, -2/3])
-            sage: gens, proved = E._compute_gens(proof=False)
-            sage: proved
+            sage: gens, proved = E._compute_gens(proof=False)           # needs eclib
+            sage: proved                                                # needs eclib
             True
 
             sage: E = EllipticCurve([-127^2,0])
@@ -2537,16 +2547,16 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         EXAMPLES::
 
             sage: E = EllipticCurve('37a1')
-            sage: E.gens()                   # random (up to sign)
+            sage: E.gens()                   # random (up to sign)      # needs eclib
             [(0 : -1 : 1)]
-            sage: E.gens_certain()
+            sage: E.gens_certain()                                      # needs eclib
             True
 
         TESTS::
 
             sage: E = EllipticCurve('37a1')
             sage: P = E([0,-1])
-            sage: set(E.gens()) <= set([P,-P])
+            sage: set(E.gens()) <= set([P,-P])                          # needs eclib
             True
 
             sage: E = EllipticCurve([2, 4, 6, 8, 10])
@@ -2574,14 +2584,14 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         EXAMPLES::
 
             sage: E = EllipticCurve('37a1')
-            sage: E.ngens()
+            sage: E.ngens()                                             # needs eclib
             1
 
             sage: E = EllipticCurve([0,0,0,877,0])
-            sage: E.ngens()
+            sage: E.ngens()                                             # needs eclib
             1
 
-            sage: print(E.mwrank('-v0 -b12 -l'))
+            sage: print(E.mwrank('-v0 -b12 -l'))                        # needs eclib
             Curve [0,0,0,877,0] :   Rank = 1
             Generator 1 is [29604565304828237474403861024284371796799791624792913256602210:-256256267988926809388776834045513089648669153204356603464786949:490078023219787588959802933995928925096061616470779979261000]; height 95.98037...
             Regulator = 95.980...
@@ -2605,6 +2615,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve([0, 0, 1, -1, 0])
             sage: E.regulator()
             0.0511114082399688
@@ -2722,7 +2733,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: P=E(0,0)
             sage: Q=5*P; Q
             (1/4 : -5/8 : 1)
-            sage: E.saturation([Q])
+            sage: E.saturation([Q])                                                     # needs eclib
             ([(0 : 0 : 1)], 5, 0.0511114082399688)
 
         TESTS:
@@ -2731,6 +2742,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         ``v20190909``, this example would loop forever at default
         precision.  Since version ``v20210310`` it runs fine::
 
+            sage: # needs eclib
             sage: E = EllipticCurve([1, 0, 1, -977842, -372252745])
             sage: P = E([-192128125858676194585718821667542660822323528626273/336995568430319276695106602174283479617040716649, 70208213492933395764907328787228427430477177498927549075405076353624188436/195630373799784831667835900062564586429333568841391304129067339731164107, 1])
             sage: P.height()
@@ -2753,14 +2765,14 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: Q = E([-24108,-17791704])
             sage: R = E([-97104,-20391840])
             sage: S = E([-113288,-9969344])
-            sage: E.saturation([P,Q,R,S])
+            sage: E.saturation([P,Q,R,S])                                               # needs eclib
             ([(-19992 : 16313472 : 1), (-24108 : -17791704 : 1), (-97104 : -20391840 : 1), (-113288 : -9969344 : 1)], 1, 172.792031341679)
 
         See :issue:`34029`.  With eclib versions prior to 20220621 this failed to saturate::
 
             sage: E = EllipticCurve([0, 0, 0, -17607, -889490])
             sage: Q = E([-82,54])
-            sage: E.saturation([2*Q], max_prime=10)
+            sage: E.saturation([2*Q], max_prime=10)                                     # needs eclib
             ([(-82 : 54 : 1)], 2, 2.36570863272098)
         """
         if not isinstance(points, list):
@@ -2818,6 +2830,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve("11a")
             sage: E.CPS_height_bound()
             2.8774743273580445
@@ -2888,7 +2901,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             4.825400758180918
             sage: E.silverman_height_bound(algorithm='mwrank')  # needs eclib
             4.825400758180918
-            sage: E.CPS_height_bound()
+            sage: E.CPS_height_bound()                          # needs eclib
             0.16397076103046915
         """
         if algorithm == 'default':
@@ -2944,13 +2957,13 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         EXAMPLES::
 
             sage: E = EllipticCurve('389a1')
-            sage: E.point_search(1, verbose=False)
+            sage: E.point_search(1, verbose=False)              # needs eclib
             [(-1 : 1 : 1), (0 : 0 : 1)]
 
         Increasing the height_limit takes longer, but finds no more
         points::
 
-            sage: E.point_search(10, verbose=False)  # long time
+            sage: E.point_search(10, verbose=False)  # long time    # needs eclib
             [(-1 : 1 : 1), (0 : 0 : 1)]
 
         In fact this curve has rank 2 so no more than 2 points will ever be
@@ -2958,7 +2971,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         ::
 
-            sage: E.saturation(_)
+            sage: E.saturation(_)                                   # needs eclib
             ([(-1 : 1 : 1), (0 : 0 : 1)], 1, 0.152460177943144)
 
         What this shows is that if the rank is 2 then the points listed do
@@ -2966,12 +2979,12 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         ::
 
-            sage: E.rank()
+            sage: E.rank()                                          # needs eclib
             2
 
         If we only need one independent generator::
 
-            sage: E.point_search(5, verbose=False, rank_bound=1)
+            sage: E.point_search(5, verbose=False, rank_bound=1)    # needs eclib
             [(-2 : 0 : 1)]
         """
         # Convert logarithmic height to height
@@ -3876,10 +3889,10 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([0, -1, 1, -10, -20])
             sage: E
             Elliptic Curve defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
-            sage: E.modular_degree()
+            sage: E.modular_degree()                            # needs sympow
             1
             sage: E = EllipticCurve('5077a')
-            sage: E.modular_degree()
+            sage: E.modular_degree()                            # needs sympow
             1984
             sage: factor(1984)
             2^6 * 31
@@ -4009,6 +4022,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs sympow
             sage: E = EllipticCurve('37a')
             sage: E.congruence_number()
             2
@@ -5645,7 +5659,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: S
             Tate-Shafarevich group for the Elliptic Curve
              defined by y^2 + y = x^3 - x over Rational Field
-            sage: S.bound_kolyvagin()
+            sage: S.bound_kolyvagin()                                                   # needs eclib
             ([2], 1)
         """
         try:
@@ -5981,7 +5995,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         The bug reported on :issue:`22719` is now fixed::
 
             sage: E = EllipticCurve("141d1")
-            sage: E.integral_points()
+            sage: E.integral_points()                                                   # needs eclib
             [(0 : -1 : 1), (2 : -2 : 1)]
         """
         xmin = pari(xmin)
