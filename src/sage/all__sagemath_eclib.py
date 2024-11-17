@@ -12,3 +12,5 @@ try:
     from sage.all__sagemath_schemes import *
 except ImportError:
     pass
+
+from sage.libs.all__sagemath_eclib import *
