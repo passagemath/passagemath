@@ -93,7 +93,7 @@ toric           = ["passagemath-polyhedra",
 padics          = ["passagemath-schemes[Zp]"]
 
 # the whole package
-standard        = ["passagemath-schemes[toric,padics,NumberField,FiniteField,flint,linbox,mpfi,ntl,numpy,pari,singular]"]
+standard        = ["passagemath-schemes[toric,padics,NumberField,FiniteField,flint,linbox,mpfi,ntl,numpy,pari,singular,eclib,sympow]"]
 
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
