@@ -205,7 +205,7 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
         a
         sage: b = gap(a^3); b                                                           # needs sage.libs.gap
         Z(2^3)^3
-        sage: F(b)
+        sage: F(b)                                                                      # needs sage.libs.gap
         a + 1
         sage: a^3
         a + 1

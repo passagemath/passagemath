@@ -564,8 +564,8 @@ def small_roots(self, X=None, beta=1.0, epsilon=None, **kwds):
 
     and recover its small roots::
 
-        sage: Kbar = f.small_roots()[0]
-        sage: K == Kbar
+        sage: Kbar = f.small_roots()[0]                                                 # needs fpylll
+        sage: K == Kbar                                                                 # needs fpylll
         True
 
     The same algorithm can be used to factor `N = pq` if partial
