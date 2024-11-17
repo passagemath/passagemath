@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-singular ~= 10.4.61.0
+passagemath-singular ~= 10.4.62.0
