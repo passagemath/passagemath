@@ -3924,7 +3924,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
             except AttributeError:
                 if algorithm == 'sympow':
-                    from sage.lfunctions.all import sympow
+                    from sage.lfunctions.sympow import sympow
                     m = sympow.modular_degree(self)
                 elif algorithm == 'magma':
                     from sage.interfaces.magma import magma
