@@ -375,6 +375,7 @@ class EllipticCurveSaturator(SageObject):
 
         See :issue:`27387`::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - x - 26)
             sage: E = EllipticCurve([a, 1 - a, 0, 93 - 16*a, 3150 - 560*a])
             sage: P = E([65 - 35*a/3, (959*a-5377)/9])
@@ -390,6 +391,7 @@ class EllipticCurveSaturator(SageObject):
         A CM example where large sieving primes are needed (LMFDB
         label 2.0.3.1-50625.1-CMb2)::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - x + 1)
             sage: E = EllipticCurve(K, [0, 0, 1, -750, 7906])
             sage: E.has_rational_cm()
