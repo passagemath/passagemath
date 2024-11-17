@@ -4415,6 +4415,7 @@ class KolyvaginPoint(HeegnerPoint):
         Here the Kolyvagin point is a torsion point (since `E` has
         rank 1), and we reduce it modulo several primes.::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve('11a1'); P = E.kolyvagin_point(-7)
             sage: P.mod(3,70)  # long time (4s on sage.math, 2013)
             (1 : 2 : 1)

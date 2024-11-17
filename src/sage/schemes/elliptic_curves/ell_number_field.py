@@ -1965,6 +1965,8 @@ class EllipticCurve_number_field(EllipticCurve_field):
             Traceback (most recent call last):
             ...
             ValueError: The ideal must be prime.
+
+            sage: x = polygen(QQ)
             sage: K = QQ.extension(x^2 + x + 1, "a")
             sage: E = EllipticCurve([1024*K.0, 1024*K.0])
             sage: E.reduction(2*K)
@@ -2669,8 +2671,8 @@ class EllipticCurve_number_field(EllipticCurve_field):
         The isogeny class may be visualized by obtaining its graph and
         plotting it::
 
-            sage: G = C.graph()
-            sage: G.show(edge_labels=True) # long time
+            sage: G = C.graph()                                                         # needs sage.graphs
+            sage: G.show(edge_labels=True)  # long time                                 # needs sage.graphs
 
             sage: K.<i> = QuadraticField(-1)
             sage: E = EllipticCurve([1+i, -i, i, 1, 0])
@@ -2789,6 +2791,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         blocks, by contrast, the prime entries `2` are unique
         determined::
 
+            sage: # needs sage.graphs
             sage: G = C.graph()  # long time
             sage: G.adjacency_matrix()  # long time # random
             [0 1 1 0 0 1]
@@ -2802,13 +2805,13 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         To display the graph without any edge labels::
 
-            sage: G.show()  # not tested
+            sage: G.show()  # not tested                                                # needs sage.graphs
 
         To display the graph with edge labels: by default, for curves
         with rational CM, the labels are the coefficients of the
         associated quadratic forms::
 
-            sage: G.show(edge_labels=True)  # not tested
+            sage: G.show(edge_labels=True)  # not tested                                # needs sage.graphs
 
         For an alternative view, first relabel the edges using only 2
         labels to distinguish between isogenies between curves with
@@ -2816,9 +2819,9 @@ class EllipticCurve_number_field(EllipticCurve_field):
         different endomorphism rings, then use a 3-dimensional plot
         which can be rotated::
 
-            sage: for i, j, l in G.edge_iterator():  # long time
+            sage: for i, j, l in G.edge_iterator():  # long time                        # needs sage.graphs
             ....:     G.set_edge_label(i, j, l.count(','))
-            sage: G.show3d(color_by_label=True)  # long time
+            sage: G.show3d(color_by_label=True)  # long time                            # needs sage.graphs sage.plot
 
         A class number `6` example.  First we set up the fields: ``pol``
         defines the same field as ``pol26`` but is simpler::
@@ -2903,14 +2906,14 @@ class EllipticCurve_number_field(EllipticCurve_field):
         edges than in the non-CM case, it may be preferable to omit
         the edge_labels::
 
-            sage: G = C.graph()
-            sage: G.show(edge_labels=False) # long time
+            sage: G = C.graph()                                                         # needs sage.graphs
+            sage: G.show(edge_labels=False)  # long time                                # needs sage.graphs sage.plot
 
         It is possible to display a 3-dimensional plot, with colours
         to represent the different edge labels, in a form which can be
         rotated!::
 
-            sage: G.show3d(color_by_label=True) # long time
+            sage: G.show3d(color_by_label=True) # long time                             # needs sage.graphs sage.plot
 
         Over larger number fields several options make computations
         tractable.  Here we use algorithm 'heuristic' which avoids a

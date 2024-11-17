@@ -289,11 +289,11 @@ class Lseries_ell(SageObject):
         EXAMPLES::
 
             sage: E = EllipticCurve('37a')
-            sage: E.lseries().zeros(2)
+            sage: E.lseries().zeros(2)                                  # needs lcalc
             [0.000000000, 5.00317001]
 
-            sage: a = E.lseries().zeros(20)             # long time
-            sage: point([(1,x) for x in a])             # graph  (long time)
+            sage: a = E.lseries().zeros(20)             # long time     # needs lcalc
+            sage: point([(1,x) for x in a])             # long time     # needs lcalc sage.plot
             Graphics object consisting of 1 graphics primitive
 
         AUTHORS: Uses Rubinstein's L-functions calculator.
@@ -326,7 +326,7 @@ class Lseries_ell(SageObject):
         EXAMPLES::
 
             sage: E = EllipticCurve('37a')
-            sage: E.lseries().zeros_in_interval(6, 10, 0.1)      # long time
+            sage: E.lseries().zeros_in_interval(6, 10, 0.1)      # long time, needs lcalc
             [(6.87039122, 0.248922780), (8.01433081, -0.140168533), (9.93309835, -0.129943029)]
         """
         from sage.lfunctions.lcalc import lcalc
@@ -357,7 +357,7 @@ class Lseries_ell(SageObject):
         EXAMPLES::
 
             sage: E = EllipticCurve('37a')
-            sage: E.lseries().values_along_line(1, 0.5 + 20*I, 5)
+            sage: E.lseries().values_along_line(1, 0.5 + 20*I, 5)       # needs lcalc
             [(0.500000000, ...),
              (0.400000000 + 4.00000000*I, 3.31920245 - 2.60028054*I),
              (0.300000000 + 8.00000000*I, -0.886341185 - 0.422640337*I),
@@ -393,6 +393,7 @@ class Lseries_ell(SageObject):
 
         EXAMPLES::
 
+            sage: # needs lcalc
             sage: E = EllipticCurve('37a')
             sage: vals = E.lseries().twist_values(1, -12, -4)
             sage: vals[0][0]
@@ -448,7 +449,7 @@ class Lseries_ell(SageObject):
         EXAMPLES::
 
             sage: E = EllipticCurve('37a')
-            sage: E.lseries().twist_zeros(3, -4, -3)         # long time
+            sage: E.lseries().twist_zeros(3, -4, -3)         # long time, needs lcalc
             {-4: [1.60813783, 2.96144840, 3.89751747], -3: [2.06170900, 3.48216881, 4.45853219]}
         """
         from sage.lfunctions.lcalc import lcalc
@@ -782,6 +783,7 @@ class Lseries_ell(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve([0, -1, 1, -10, -20])   # 11A  = X_0(11)
             sage: E.lseries().L1_vanishes()
             False

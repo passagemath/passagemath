@@ -376,7 +376,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
         True for p = 3 by Kolyvagin bound
         True for p = 5 by Kolyvagin bound
         []
-        sage: E.prove_BSD(two_desc='pari')
+        sage: E.prove_BSD(two_desc='pari')                                              # needs sage.graphs
         []
 
     A rank two curve::

@@ -310,7 +310,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         EXAMPLES::
 
             sage: E = EllipticCurve('5077a1')
-            sage: E.modular_degree()
+            sage: E.modular_degree()                            # needs sympow
             1984
             sage: E._set_modular_degree(123456789)
             sage: E.modular_degree()
@@ -1479,9 +1479,9 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve('389a')
             sage: E.analytic_rank(algorithm='pari')
             2
-            sage: E.analytic_rank(algorithm='rubinstein')
+            sage: E.analytic_rank(algorithm='rubinstein')       # needs lcalc
             2
-            sage: E.analytic_rank(algorithm='sympow')
+            sage: E.analytic_rank(algorithm='sympow')           # needs sympow
             2
             sage: E.analytic_rank(algorithm='magma')    # optional - magma
             2
@@ -4696,6 +4696,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: isocls = EllipticCurve('37b').isogeny_class(order='lmfdb')
             sage: isocls
             Elliptic curve isogeny class 37b
@@ -4778,14 +4779,14 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             Elliptic Curve defined by y^2 + x*y + y = x^3 - 171*x - 874 over Rational Field
             Elliptic Curve defined by y^2 + x*y + y = x^3 - 11*x + 12 over Rational Field
             Elliptic Curve defined by y^2 + x*y + y = x^3 - 2731*x - 55146 over Rational Field
-            sage: isocls2 = isocls.reorder('lmfdb'); isocls2.matrix()
+            sage: isocls2 = isocls.reorder('lmfdb'); isocls2.matrix()                   # needs sage.groups
             [ 1  2  3  9 18  6]
             [ 2  1  6 18  9  3]
             [ 3  6  1  3  6  2]
             [ 9 18  3  1  2  6]
             [18  9  6  2  1  3]
             [ 6  3  2  6  3  1]
-            sage: print("\n".join(repr(C) for C in isocls2.curves))
+            sage: print("\n".join(repr(C) for C in isocls2.curves))                     # needs sage.groups
             Elliptic Curve defined by y^2 + x*y + y = x^3 - 2731*x - 55146 over Rational Field
             Elliptic Curve defined by y^2 + x*y + y = x^3 - 171*x - 874 over Rational Field
             Elliptic Curve defined by y^2 + x*y + y = x^3 - 36*x - 70 over Rational Field
@@ -5184,7 +5185,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         EXAMPLES::
 
             sage: LL = []
-            sage: for e in cremona_optimal_curves(range(1, 38)):  # long time
+            sage: for e in cremona_optimal_curves(range(1, 38)):  # long time           # needs sage.graphs
             ....:  G = e.isogeny_graph()
             ....:  already = False
             ....:  for H in LL:
@@ -5193,13 +5194,13 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             ....:          break
             ....:  if not already:
             ....:      LL.append(G)
-            sage: graphs_list.show_graphs(LL)  # long time
+            sage: graphs_list.show_graphs(LL)  # long time                              # needs sage.graphs
 
         ::
 
             sage: E = EllipticCurve('195a')
-            sage: G = E.isogeny_graph()                                                                     # needs sage.graphs
-            sage: for v in G: print("{} {}".format(v, G.get_vertex(v)))
+            sage: G = E.isogeny_graph()                                                 # needs sage.graphs
+            sage: for v in G: print("{} {}".format(v, G.get_vertex(v)))                 # needs sage.graphs
             1 Elliptic Curve defined by y^2 + x*y  = x^3 - 110*x + 435 over Rational Field
             2 Elliptic Curve defined by y^2 + x*y  = x^3 - 115*x + 392 over Rational Field
             3 Elliptic Curve defined by y^2 + x*y  = x^3 + 210*x + 2277 over Rational Field
