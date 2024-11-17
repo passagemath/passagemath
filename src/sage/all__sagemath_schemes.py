@@ -15,6 +15,7 @@ from .all__sagemath_polyhedra import *
 
 from .all__sagemath_singular import *
 
+from sage.lfunctions.all import *
 from sage.modular.all    import *
 from sage.schemes.all    import *
 from sage.databases.all__sagemath_schemes import *

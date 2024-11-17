@@ -114,7 +114,6 @@ lazy_import('sage.interacts', 'all', 'interacts')
 try:
     from .all__sagemath_plot import *
     from .all__sagemath_symbolics import *
-    from sage.lfunctions.all import *
 except ImportError:
     pass
 
