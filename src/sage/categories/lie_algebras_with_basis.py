@@ -121,10 +121,10 @@ class LieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.modules
-                sage: u = L.from_vector(vector(QQ, (1, 0, 0))); u                       # needs sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
+                sage: u = L.from_vector(vector(QQ, (1, 0, 0))); u                       # needs sage.combinat sage.modules
                 (1, 0, 0)
-                sage: parent(u) is L                                                    # needs sage.modules
+                sage: parent(u) is L                                                    # needs sage.combinat sage.modules
                 True
             """
             B = self.basis()
@@ -137,8 +137,8 @@ class LieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.modules
-                sage: L.dimension()                                                     # needs sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
+                sage: L.dimension()                                                     # needs sage.combinat sage.modules
                 3
 
             ::
@@ -209,8 +209,8 @@ class LieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.modules
-                sage: L.an_element().to_vector()                                        # needs sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
+                sage: L.an_element().to_vector()                                        # needs sage.combinat sage.modules
                 (0, 0, 0)
 
             .. TODO::
