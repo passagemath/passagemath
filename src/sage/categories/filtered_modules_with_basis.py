@@ -1187,10 +1187,12 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
                     sage: OS.hilbert_series()
                     2*t^2 + 3*t + 1
 
+                    sage: # needs sage.modules
                     sage: OS = matroids.Uniform(5, 3).orlik_solomon_algebra(ZZ)
                     sage: OS.hilbert_series()
                     t^3 + 3*t^2 + 3*t + 1
 
+                    sage: # needs sage.modules
                     sage: OS = matroids.PG(2, 3).orlik_solomon_algebra(ZZ['x','y'])
                     sage: OS.hilbert_series()
                     27*t^3 + 39*t^2 + 13*t + 1

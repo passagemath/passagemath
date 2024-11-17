@@ -550,7 +550,7 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat
+                sage: # needs sage.combinat sage.graphs
                 sage: W = ColoredPermutations(3, 2)
                 sage: P = W.milnor_fiber_poset()
                 sage: P
@@ -1199,8 +1199,8 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
                 EXAMPLES::
 
                     sage: W = ColoredPermutations(3, 2)                                 # needs sage.combinat
-                    sage: C = W.milnor_fiber_complex()                                  # needs sage.combinat
-                    sage: C.homology()                                                  # needs sage.combinat
+                    sage: C = W.milnor_fiber_complex()                                  # needs sage.combinat sage.graphs
+                    sage: C.homology()                                                  # needs sage.combinat sage.graphs sage.modules
                     {0: 0, 1: Z x Z x Z x Z}
 
                     sage: W = ReflectionGroup(5)                  # optional - gap3

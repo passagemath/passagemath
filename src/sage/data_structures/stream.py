@@ -1047,6 +1047,7 @@ class Stream_taylor(Stream_inexact):
 
     EXAMPLES::
 
+        sage: # needs sage.symbolic
         sage: from sage.data_structures.stream import Stream_taylor
         sage: g(x) = sin(x)
         sage: f = Stream_taylor(g, False)
@@ -1055,12 +1056,14 @@ class Stream_taylor(Stream_inexact):
         sage: [f[i] for i in range(10)]
         [0, 1, 0, -1/6, 0, 1/120, 0, -1/5040, 0, 1/362880]
 
+        sage: # needs sage.symbolic
         sage: g(y) = cos(y)
         sage: f = Stream_taylor(g, False)
         sage: n = f.iterate_coefficients()
         sage: [next(n) for _ in range(10)]
         [1, 0, -1/2, 0, 1/24, 0, -1/720, 0, 1/40320, 0]
 
+        sage: # needs sage.symbolic
         sage: g(z) = 1 / (1 - 2*z)
         sage: f = Stream_taylor(g, True)
         sage: [f[i] for i in range(4)]
@@ -1076,9 +1079,8 @@ class Stream_taylor(Stream_inexact):
             sage: f = Stream_taylor(polygen(QQ, 'x')^3, False)
             sage: TestSuite(f).run(skip='_test_pickling')
         """
-        from sage.symbolic.ring import SR
-        from sage.structure.element import parent
-        if parent(function) is SR:
+        from sage.structure.element import Expression
+        if isinstance(function, Expression):
             self._is_symbolic = True
             if function.number_of_arguments() != 1:
                 raise NotImplementedError("the function can only take a single input")
@@ -1146,12 +1148,14 @@ class Stream_taylor(Stream_inexact):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: from sage.data_structures.stream import Stream_taylor
             sage: g(x) = exp(x)
             sage: f = Stream_taylor(g, True)
             sage: f.get_coefficient(5)
             1/120
 
+            sage: # needs sage.symbolic
             sage: from sage.data_structures.stream import Stream_taylor
             sage: y = SR.var('y')
             sage: f = Stream_taylor(sin(y), True)

@@ -521,9 +521,9 @@ For example, a symmetric function algebra is uniquely determined by the base
 ring. Thus, it is reasonable to use :class:`UniqueRepresentation` in this
 case::
 
-    sage: isinstance(SymmetricFunctions(CC), SymmetricFunctions)                        # needs sage.combinat
+    sage: isinstance(SymmetricFunctions(CC), SymmetricFunctions)                        # needs sage.combinat sage.modules sage.rings.real_mpfr
     True
-    sage: issubclass(SymmetricFunctions, UniqueRepresentation)                          # needs sage.combinat
+    sage: issubclass(SymmetricFunctions, UniqueRepresentation)                          # needs sage.combinat sage.modules
     True
 
 :class:`UniqueRepresentation` differs from :class:`CachedRepresentation` only
