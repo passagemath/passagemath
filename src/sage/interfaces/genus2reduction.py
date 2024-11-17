@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 r"""
 Conductor and reduction types for genus 2 curves
 
