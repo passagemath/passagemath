@@ -36,11 +36,11 @@ class Mwrank(Executable):
             True
         """
         Executable.__init__(self, "mwrank", executable='mwrank',
-                            spkg='eclib')
+                            spkg='eclib', type='standard')
 
 
 def all_features():
     return [JoinFeature("eclib",
                         (Mwrank(),
                          PythonModule('sage.libs.eclib')),
-                        spkg='sagemath_eclib')]
+                        spkg='sagemath_eclib', type='standard')]
