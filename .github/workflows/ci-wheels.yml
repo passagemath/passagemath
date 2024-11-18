@@ -92,11 +92,12 @@ jobs:
       - name: Update known test failures
         if: (success() || failure())
         run: |
+          export SAGE_ROOT=$(pwd)
           WHEELHOUSE=$(pwd)/wheelhouse
           export PIP_FIND_LINKS=file://$WHEELHOUSE
-          pip install passagemath-environment passagemath-repl
+          ./bootstrap sagemath_environment sagemath_repl
+          pip install pkgs/sagemath-environment pkgs/passagemath-repl
           pkg=${{ matrix.distribution }}
-          export SAGE_ROOT=$(pwd)
           cd pkgs/$pkg
           sage --fixdoctests --distribution "$pkg" --venv .tox/py310-norequirements --update-known-test-failures
           git diff
