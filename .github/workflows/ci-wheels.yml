@@ -96,7 +96,7 @@ jobs:
           WHEELHOUSE=$(pwd)/wheelhouse
           export PIP_FIND_LINKS=file://$WHEELHOUSE
           ./bootstrap sagemath_environment sagemath_repl
-          pip install pkgs/sagemath-environment pkgs/passagemath-repl
+          pip install pkgs/sagemath-environment pkgs/sagemath-repl
           pkg=${{ matrix.distribution }}
           cd pkgs/$pkg
           sage --fixdoctests --distribution "$pkg" --toxenv py310-norequirements --update-known-test-failures
