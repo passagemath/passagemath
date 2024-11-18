@@ -10,7 +10,6 @@ on:
 jobs:
 
   tox:
-    if: (success() || failure())
     strategy:
       fail-fast: false
       matrix:
