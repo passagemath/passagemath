@@ -5661,6 +5661,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: A = matrix(ZZ, 3, 3, [-8, 2, 0, 0, 1, -1, 2, 1, -95])
             sage: As = singular(A); As
             -8     2     0
