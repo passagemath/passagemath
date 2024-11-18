@@ -55,6 +55,28 @@ A quick way to try it out interactively::
     In [1]: from sage.all__sagemath_eclib import *
 
     In [2]: M = CremonaModularSymbols(43, cuspidal=True); M
+    Out[2]: Cremona Cuspidal Modular Symbols space of dimension 6 for Gamma_0(43) of weight 2 with sign 0
+
+Finding the installation location of the mwrank program::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib" python
+    >>> from sage.features.eclib import Mwrank
+    >>> Mwrank().absolute_filename()
+    '/Users/mkoeppe/.local/pipx/.cache/6c494549ef80bf7/lib/python3.11/site-packages/sage_wheels/bin/mwrank'
+
+Use with `sage.schemes.elliptic_curves <https://doc.sagemath.org/html/en/reference/arithmetic_curves/index.html#elliptic-curves>`_::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib[test]" ipython
+
+    In [1]: from sage.all__sagemath_eclib import *
+
+    In [2]: x = polygen(ZZ, 'x')
+
+    In [3]: K = NumberField(x**2 + 23, 'a'); a = K.gen()
+
+    In [4]: E = EllipticCurve(K, [0,0,0,101,0])
+
+    In [5]: E.gens()
 
 
 Development
