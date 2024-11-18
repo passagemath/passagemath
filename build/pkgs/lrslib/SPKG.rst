@@ -10,7 +10,7 @@ Fukuda.
 See the homepage (http://cgm.cs.mcgill.ca/~avis/C/lrs.html) for details.
 
 We use an autotoolized version from
-https://github.com/mkoeppe/lrslib/tree/autoconfiscation
+https://github.com/passagemath/lrslib/tree/autoconfiscation
 
 License
 -------
@@ -33,7 +33,3 @@ If the package finds an MPI C++ compiler script (mpic++), it also builds
 and installs the "mplrs" binary, a distributed version of lrs using MPI.
 
 (Sage currently does not make use of plrs and mplrs.)
-
-
-Special Update/Build Instructions
----------------------------------

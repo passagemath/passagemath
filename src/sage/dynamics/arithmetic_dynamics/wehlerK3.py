@@ -1300,7 +1300,7 @@ class WehlerK3Surface_ring(AlgebraicScheme_subscheme_product_projective):
             return Point
         return self.point(Point, False)
 
-    def sigmaY(self,P, **kwds):
+    def sigmaY(self, P, **kwds):
         r"""
         Return the involution on the Wehler K3 surfaces induced by the double covers.
 
@@ -1580,7 +1580,7 @@ class WehlerK3Surface_ring(AlgebraicScheme_subscheme_product_projective):
         kwds.update({"check":False})
         return self.sigmaY(A, **kwds)
 
-    def psi(self,a, **kwds):
+    def psi(self, a, **kwds):
         r"""
         Evaluates the function `\psi = \sigma_x \circ \sigma_y`.
 
@@ -2449,7 +2449,7 @@ class WehlerK3Surface_ring(AlgebraicScheme_subscheme_product_projective):
         """
         return self.defining_ideal() == right.defining_ideal()
 
-    def is_symmetric_orbit(self,orbit):
+    def is_symmetric_orbit(self, orbit):
         r"""
         Check to see if the orbit is symmetric (i.e. if one of the points on the
         orbit is fixed by '\sigma_x' or '\sigma_y').

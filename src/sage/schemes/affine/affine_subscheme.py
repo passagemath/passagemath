@@ -352,6 +352,7 @@ class AlgebraicScheme_subscheme_affine(AlgebraicScheme_subscheme):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: A.<x,y> = AffineSpace(QQ, 2)
             sage: C = Curve([y^2 - x^3 - x^2], A)                                       # needs sage.libs.singular
             sage: D = Curve([y^2 + x^3], A)                                             # needs sage.libs.singular
@@ -558,7 +559,7 @@ class AlgebraicScheme_subscheme_affine_field(AlgebraicScheme_subscheme_affine):
         Tangent space at a point may have higher dimension than the dimension
         of the point. ::
 
-            sage: # needs sage.libs.singular
+            sage: # needs sage.libs.singular sage.schemes
             sage: C = Curve([x + y + z, x^2 - y^2*z^2 + z^3])
             sage: C.singular_points()
             [(0, 0, 0)]

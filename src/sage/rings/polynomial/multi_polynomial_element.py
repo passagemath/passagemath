@@ -71,7 +71,7 @@ from sage.structure.sequence import Sequence
 from .multi_polynomial import MPolynomial, is_MPolynomial
 from sage.categories.morphism import Morphism
 from sage.misc.lazy_attribute import lazy_attribute
-
+from sage.misc.superseded import deprecated_function_alias
 from sage.rings.rational_field import QQ
 from sage.rings.fraction_field import FractionField
 
@@ -691,12 +691,12 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
                 return Integer(self.element().degree(None))
             return self.weighted_degree(self.parent().term_order().weights())
         if isinstance(x, MPolynomial):
-            if not x.parent() is self.parent():
+            if x.parent() is not self.parent():
                 try:
                     x = self.parent().coerce(x)
                 except TypeError:
                     raise TypeError("x must canonically coerce to parent")
-            if not x.is_generator():
+            if not x.is_gen():
                 raise TypeError("x must be one of the generators of the parent")
         else:
             raise TypeError("x must be one of the generators of the parent")
@@ -1355,7 +1355,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         R = self.parent()
         return R(X)
 
-    def is_generator(self):
+    def is_gen(self) -> bool:
         """
         Return ``True`` if ``self`` is a generator of its parent.
 
@@ -1363,18 +1363,30 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
 
             sage: # needs sage.rings.number_field
             sage: R.<x,y> = QQbar[]
-            sage: x.is_generator()
+            sage: x.is_gen()
             True
-            sage: (x + y - y).is_generator()
+            sage: (x + y - y).is_gen()
             True
-            sage: (x*y).is_generator()
+            sage: (x*y).is_gen()
             False
+
+        TESTS::
+
+            sage: # needs sage.rings.number_field
+            sage: R.<x,y> = QQbar[]
+            sage: x.is_generator()
+            doctest:warning...:
+            DeprecationWarning: is_generator is deprecated. Please use is_gen instead.
+            See https://github.com/sagemath/sage/issues/38942 for details.
+            True
         """
         elt = self.element()
         if len(elt) == 1:
             (e, c), = elt.dict().items()
             return e.nonzero_values() == [1] and c.is_one()
         return False
+
+    is_generator = deprecated_function_alias(38942, is_gen)
 
     def is_monomial(self):
         """
@@ -1663,7 +1675,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         """
         return tuple([self.parent().gen(index) for index in self.degrees().nonzero_positions()])
 
-    def variable(self,i):
+    def variable(self, i):
         """
         Return the `i`-th variable occurring in this polynomial.
 
@@ -2207,7 +2219,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         return F
 
     @handle_AA_and_QQbar
-    def lift(self,I):
+    def lift(self, I):
         """
         Given an ideal `I = (f_1,...,f_r)` and some `g` (= ``self``) in `I`, find
         `s_1,...,s_r` such that `g = s_1 f_1 + ... + s_r f_r`.
@@ -2434,12 +2446,12 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         ::
 
             sage: f = 3*x                                                               # needs sage.rings.number_field
-            sage: f.reduce([2*x, y])                                                    # needs sage.rings.number_field
+            sage: f.reduce([2*x, y])                                                    # needs sage.libs.singular sage.rings.number_field
             0
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.libs.singular sage.rings.number_field
             sage: k.<w> = CyclotomicField(3)
             sage: A.<y9,y12,y13,y15> = PolynomialRing(k)
             sage: J = [y9 + y12]
@@ -2454,7 +2466,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
 
             sage: R.<y1,y2> = PolynomialRing(Qp(5), 2, order='lex')                     # needs sage.rings.padics
             sage: G = [y1^2 + y2^2, y1*y2 + y2^2, y2^3]                                 # needs sage.rings.padics
-            sage: type((y2^3).reduce(G))                                                # needs sage.rings.padics
+            sage: type((y2^3).reduce(G))                                                # needs sage.libs.singular sage.rings.padics
             <class 'sage.rings.polynomial.multi_polynomial_element.MPolynomial_polydict'>
 
         TESTS:
@@ -2462,7 +2474,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         Verify that :issue:`34105` is fixed::
 
             sage: R.<x,y> = AA[]                                                        # needs sage.rings.number_field
-            sage: x.reduce(R.zero_ideal())                                              # needs sage.rings.number_field
+            sage: x.reduce(R.zero_ideal())                                              # needs sage.libs.singular sage.rings.number_field
             x
         """
         from sage.rings.polynomial.multi_polynomial_ideal import MPolynomialIdeal

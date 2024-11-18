@@ -974,7 +974,7 @@ cdef class dancing_linksWrapper:
 
             sage: rows = [[0,1,2], [2,3,4,5], [0,1,2,3]]
             sage: d = dlx_solver(rows)
-            sage: d.one_solution_using_sat_solver() is None                             # needs sage.sat
+            sage: d.one_solution_using_sat_solver() is None                             # needs sage.sat sage.numerical.mip
             True
         """
         sat_solver = self.to_sat_solver(solver)

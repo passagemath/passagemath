@@ -34,12 +34,14 @@ methods have been prefixed with an underscore.
 
 from sage.functions.trig import arccos, cos
 from sage.matrix.constructor import matrix
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc import powerset
 from sage.rings.integer_ring import ZZ
 from sage.rings.qqbar import AA
 from sage.rings.rational_field import QQ
 from sage.rings.real_double import RDF
-from sage.symbolic.constants import pi
+
+lazy_import('sage.symbolic.constants', 'pi')
 
 
 def _normalize_gevp_solution(gevp_solution):
@@ -677,7 +679,7 @@ def compute_gevp_M(gs, hs):
         True
         sage: G = matrix.column(gs)
         sage: H = matrix.column(hs)
-        sage: def _test_indexing(I,J):
+        sage: def _test_indexing(I, J):
         ....:      G_I = G.matrix_from_columns(I)
         ....:      H_J = H.matrix_from_columns(J)
         ....:      return (G_I.transpose()*H_J == M[I,J]

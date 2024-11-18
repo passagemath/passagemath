@@ -85,7 +85,13 @@ Toric geometry
    sage/geometry/fan_morphism
    sage/geometry/point_collection
    sage/geometry/toric_plotter
-   sage/rings/polynomial/groebner_fan
+
+.. ONLY:: feature_gfan
+
+   .. toctree::
+      :maxdepth: 1
+
+      sage/rings/polynomial/groebner_fan
 
 Base classes for polyhedra
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

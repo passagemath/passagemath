@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-eclib
 r"""
 Interface to mwrank
 """
@@ -18,7 +19,11 @@ Interface to mwrank
 # ****************************************************************************
 
 import os
+import shlex
 import weakref
+
+from sage.features.eclib import Mwrank as mwrank_executable
+
 from .expect import Expect
 
 instances = {}
@@ -189,7 +194,7 @@ class Mwrank_class(Expect):
         Expect.__init__(self,
                         name='mwrank',
                         prompt='Enter curve: ',
-                        command="mwrank %s" % options,
+                        command=f"{shlex.quote(mwrank_executable().absolute_filename())} {options}",
                         server=server,
                         server_tmpdir=server_tmpdir,
                         restart_on_ctrlc=True,
@@ -362,4 +367,4 @@ def mwrank_console():
     from sage.repl.rich_output.display_manager import get_display_manager
     if not get_display_manager().is_in_terminal():
         raise RuntimeError('Can use the console only in the terminal. Try %%mwrank magics instead.')
-    os.system('mwrank')
+    os.system(f'{shlex.quote(mwrank_executable().absolute_filename())}')

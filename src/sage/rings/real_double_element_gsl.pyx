@@ -629,6 +629,45 @@ cdef class RealDoubleElement_gsl(RealDoubleElement):
         """
         return self._new_c(gsl_atanh(self._value))
 
+    def sech(self):
+        r"""
+        Return the hyperbolic secant of ``self``.
+
+        EXAMPLES::
+
+            sage: RDF(pi).sech()                                                        # needs sage.symbolic
+            0.08626673833405443
+            sage: CDF(pi).sech()                                                        # needs sage.symbolic
+            0.08626673833405443
+        """
+        return 1/self.cosh()
+
+    def csch(self):
+        r"""
+        Return the hyperbolic cosecant of ``self``.
+
+        EXAMPLES::
+
+            sage: RDF(pi).csch()                                                        # needs sage.symbolic
+            0.08658953753004694
+            sage: CDF(pi).csch()  # rel tol 1e-15                                       # needs sage.symbolic
+            0.08658953753004696
+        """
+        return 1/self.sinh()
+
+    def coth(self):
+        r"""
+        Return the hyperbolic cotangent of ``self``.
+
+        EXAMPLES::
+
+            sage: RDF(pi).coth()                                                        # needs sage.symbolic
+            1.003741873197321
+            sage: CDF(pi).coth()                                                        # needs sage.symbolic
+            1.0037418731973213
+        """
+        return self.cosh() / self.sinh()
+
     def erf(self):
         """
         Return the value of the error function on ``self``.

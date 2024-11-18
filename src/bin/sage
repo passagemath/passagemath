@@ -168,9 +168,12 @@ if [ -f "${SELF}-src-env-config" ]; then
     SAGE_SRC_ENV_CONFIG=1
     . "${SELF}-src-env-config" >&2
 fi
-if [ -z "$SAGE_VENV" -a -x "${SELF}-venv-config" ]; then
+if [ -x "${SELF}-venv-config" ]; then
     # installed by setup.py
-    export SAGE_VENV=$("${SELF}-venv-config" SAGE_VENV)
+    if [ -z "$SAGE_VENV" ]; then
+        export SAGE_VENV=$("${SELF}-venv-config" SAGE_VENV)
+    fi
+    SAGE_WHEELS_PATH=$("${SELF}-venv-config" SAGE_WHEELS_PATH 2>/dev/null)
 fi
 if [ -f "${SELF}-env-config" ]; then
     # As of Issue #22731, sage-env-config is optional.

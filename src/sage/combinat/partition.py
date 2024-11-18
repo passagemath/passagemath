@@ -5397,8 +5397,10 @@ class Partition(CombinatorialElement):
         Checks that the dimension satisfies the obvious recursion relation::
 
             sage: test = lambda larger, smaller: larger.dimension(smaller) == sum(mu.dimension(smaller) for mu in larger.down())
-            sage: all(test(larger,smaller) for l in range(1,8) for s in range(8)
-            ....:     for larger in Partitions(l) for smaller in Partitions(s) if smaller != larger)
+            sage: all(test(larger,smaller)                                              # needs sage.modules
+            ....:     for l in range(1,8) for s in range(8)
+            ....:     for larger in Partitions(l) for smaller in Partitions(s)
+            ....:     if smaller != larger)
             True
 
         ALGORITHM:
@@ -5711,13 +5713,14 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: GP = Partition([3,2,1]).garsia_procesi_module(QQ); GP
             Garsia-Procesi module of shape [3, 2, 1] over Rational Field
             sage: GP.graded_frobenius_image()
             q^4*s[3, 2, 1] + q^3*s[3, 3] + q^3*s[4, 1, 1] + (q^3+q^2)*s[4, 2]
              + (q^2+q)*s[5, 1] + s[6]
 
-            sage: Partition([3,2,1]).garsia_procesi_module(GF(3))
+            sage: Partition([3,2,1]).garsia_procesi_module(GF(3))                       # needs sage.modules
             Garsia-Procesi module of shape [3, 2, 1] over Finite Field of size 3
         """
         from sage.combinat.symmetric_group_representations import GarsiaProcesiModule
@@ -5773,7 +5776,7 @@ class Partition(CombinatorialElement):
             sage: Partition([2,2,1]).simple_module_dimension(GF(3))                     # needs sage.rings.finite_rings
             4
 
-            sage: for la in Partitions(6, regular=3):
+            sage: for la in Partitions(6, regular=3):                                   # needs sage.modules
             ....:     print(la, la.specht_module_dimension(), la.simple_module_dimension(GF(3)))
             [6] 1 1
             [5, 1] 5 4
@@ -5796,6 +5799,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: TM = Partition([2,2,1]).tabloid_module(QQ); TM
             Tabloid module of [2, 2, 1] over Rational Field
             sage: TM.frobenius_image()

@@ -320,9 +320,10 @@ def egros_from_jlist(jlist, S=[]):
 
     EXAMPLES::
 
+        sage: # needs eclib
         sage: from sage.schemes.elliptic_curves.ell_egros import egros_get_j, egros_from_jlist
-        sage: jlist=egros_get_j([3])
-        sage: elist=egros_from_jlist(jlist,[3])
+        sage: jlist = egros_get_j([3])
+        sage: elist = egros_from_jlist(jlist,[3])
         sage: [e.label() for e in elist]
         ['27a1', '27a2', '27a3', '27a4', '243a1', '243a2', '243b1', '243b2']
         sage: [e.ainvs() for e in elist]
@@ -372,6 +373,7 @@ def egros_get_j(S=[], proof=None, verbose=False):
 
     EXAMPLES::
 
+        sage: # needs eclib
         sage: from sage.schemes.elliptic_curves.ell_egros import egros_get_j
         sage: egros_get_j([])
         [1728]

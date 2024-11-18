@@ -36,6 +36,7 @@ AUTHORS:
 
 from typing import Optional
 import sage
+import platform
 import os
 import socket
 import sys
@@ -165,7 +166,6 @@ def var(key: str, *fallbacks: Optional[str], force: bool = False) -> Optional[st
 
 
 # system info
-UNAME = var("UNAME", os.uname()[0])
 HOSTNAME = var("HOSTNAME", socket.gethostname())
 LOCAL_IDENTIFIER = var("LOCAL_IDENTIFIER", "{}.{}".format(HOSTNAME, os.getpid()))
 
@@ -207,12 +207,22 @@ SAGE_STARTUP_FILE = var("SAGE_STARTUP_FILE", join(DOT_SAGE, "init.sage"))
 SAGE_ARCHFLAGS = var("SAGE_ARCHFLAGS", "unset")
 SAGE_PKG_CONFIG_PATH = var("SAGE_PKG_CONFIG_PATH")
 
+try:
+    import sage_wheels
+except ImportError:
+    _sage_wheels_path = []
+else:
+    _sage_wheels_path = sage_wheels.__path__
+
 # colon-separated search path for databases.
 SAGE_DATA_PATH = var("SAGE_DATA_PATH",
                      os.pathsep.join(filter(None, [
-                         join(DOT_SAGE, "db"),
-                         join(SAGE_SHARE, "sagemath"),
-                         SAGE_SHARE,
+                             join(DOT_SAGE, "db"),
+                         ] + [
+                             join(p, "share") for p in _sage_wheels_path
+                         ] + [
+                             join(SAGE_SHARE, "sagemath"),
+                             SAGE_SHARE,
                          ])))
 
 # database directories, the default is to search in SAGE_DATA_PATH
@@ -231,6 +241,43 @@ PPLPY_DOCS = var("PPLPY_DOCS", join(SAGE_SHARE, "doc", "pplpy"))
 MAXIMA = var("MAXIMA", "maxima")
 MAXIMA_FAS = var("MAXIMA_FAS")
 KENZO_FAS = var("KENZO_FAS")
+
+try:
+    import sage_wheels
+except ImportError:
+    pass
+else:
+    import shlex
+    from glob import glob
+
+    MAXIMA = 'maxima'
+    for p in sage_wheels.__path__:
+        maxima_bin = os.path.join(p, 'bin/maxima')
+        if os.path.exists(maxima_bin):
+            MAXIMA = maxima_bin
+            os.environ['MAXIMA_PREFIX'] = p
+            break
+    for p in sage_wheels.__path__:
+        for dir in glob(os.path.join(p, 'lib/ecl-*')):
+            ECLDIR = dir + '/'
+            os.environ['ECLDIR'] = ECLDIR
+            break
+
+try:
+    import ecl
+except ImportError:
+    pass
+else:
+    for p in ecl.__path__:
+        fas = os.path.join(p, 'maxima.fas')
+        if os.path.exists(fas):
+            MAXIMA_FAS = fas
+            break
+    for p in ecl.__path__:
+        fas = os.path.join(p, 'kenzo.fas')
+        if os.path.exists(fas):
+            KENZO_FAS = fas
+            break
 SAGE_NAUTY_BINS_PREFIX = var("SAGE_NAUTY_BINS_PREFIX", "")
 SAGE_ECMBIN = var("SAGE_ECMBIN", "ecm")
 RUBIKS_BINS_PREFIX = var("RUBIKS_BINS_PREFIX", "")

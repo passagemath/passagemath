@@ -320,7 +320,7 @@ class Function_gamma_inc(BuiltinFunction):
 
             sage: gamma_inc(CDF(0,1), 3)                                                # needs sage.libs.pari sage.rings.complex_double
             0.0032085749933691158 + 0.012406185811871568*I
-            sage: gamma_inc(RDF(1), 3)                                                  # needs sage.rings.complex_double
+            sage: gamma_inc(RDF(1), 3)                                                  # needs sage.libs.pari sage.rings.complex_double
             0.049787068367863944
 
             sage: # needs sage.symbolic
@@ -333,9 +333,9 @@ class Function_gamma_inc(BuiltinFunction):
             sage: loads(dumps((gamma_inc(3, 2))))
             gamma(3, 2)
 
-            sage: i = ComplexField(30).0; gamma_inc(2, 1 + i)                           # needs sage.rings.real_mpfr
+            sage: i = ComplexField(30).0; gamma_inc(2, 1 + i)                           # needs sage.libs.pari sage.rings.real_mpfr
             0.70709210 - 0.42035364*I
-            sage: gamma_inc(2., 5)                                                      # needs sage.rings.complex_double
+            sage: gamma_inc(2., 5)                                                      # needs sage.libs.pari sage.rings.complex_double
             0.0404276819945128
 
             sage: x, y = var('x,y')                                                     # needs sage.symbolic
@@ -393,9 +393,9 @@ class Function_gamma_inc(BuiltinFunction):
         """
         EXAMPLES::
 
-            sage: gamma_inc(2., 0)                                                      # needs sage.rings.complex_double
+            sage: gamma_inc(2., 0)                                                      # needs sage.libs.pari sage.rings.complex_double
             1.00000000000000
-            sage: gamma_inc(2, 0)                                                       # needs sage.rings.real_mpfr
+            sage: gamma_inc(2, 0)                                                       # needs sage.libs.pari sage.rings.real_mpfr
             1
 
             sage: # needs sage.symbolic

@@ -1478,7 +1478,7 @@ cdef class Rational(sage.structure.element.FieldElement):
             ...
             NotImplementedError: is_norm is not implemented unconditionally
              for norms from non-Galois number fields
-            sage: 7.is_norm(K, proof=False)
+            sage: 7.is_norm(K, proof=False)                                             # needs sage.groups
             False
 
         AUTHORS:
@@ -3997,9 +3997,9 @@ cdef double mpq_get_d_nearest(mpq_t x) except? -648555075988944.5:
             return 0.0
     elif shift >= 971:  # |d| > 2^1024
         if resultsign < 0:
-            return -1.0/0.0
+            return float('-inf')
         else:
-            return 1.0/0.0
+            return float('inf')
 
     sig_on()
 

@@ -2271,7 +2271,7 @@ def RandomTriangulation(n, set_position=False, k=3, seed=None):
 
         sage: G = graphs.RandomTriangulation(6, True); G
         Graph on 6 vertices
-        sage: G.is_planar()
+        sage: G.is_planar()                                                             # needs planarity
         True
         sage: G.girth()
         3
@@ -2296,6 +2296,7 @@ def RandomTriangulation(n, set_position=False, k=3, seed=None):
         ...
         ValueError: The size 'k' of the outer face must be at least 3.
 
+        sage: # needs planarity
         sage: for i in range(10):
         ....:     g = graphs.RandomTriangulation(30) # random
         ....:     assert g.is_planar()

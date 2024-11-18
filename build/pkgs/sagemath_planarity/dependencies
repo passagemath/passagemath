@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-planarity/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-planarity/MANIFEST.in  planarity cysignals boost_cropped | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig $(PYTHON)

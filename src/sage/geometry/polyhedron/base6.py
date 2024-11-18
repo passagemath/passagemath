@@ -370,7 +370,7 @@ class Polyhedron_base6(Polyhedron_base5):
             <class 'sage.plot.plot3d.base.Graphics3dGroup'>
             sage: type(Polyhedron([(0,0,0,0), (1,1,1,1)]).plot())
             <class 'sage.plot.graphics.Graphics'>
-            sage: type(Polyhedron([(0,0,0,0,0), (1,1,1,1,1)]).plot())
+            sage: type(Polyhedron([(0,0,0,0,0), (1,1,1,1,1)]).plot())                   # needs sage.symbolic
             <class 'sage.plot.graphics.Graphics'>
             sage: type(Polyhedron([(0,0,0,0), (1,1,1,1), (1,0,0,0)]).plot())
             <class 'sage.plot.graphics.Graphics'>

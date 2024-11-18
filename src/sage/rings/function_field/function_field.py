@@ -999,7 +999,7 @@ class FunctionField(Field):
 
         A place that has a unique extension can just be defined downstairs::
 
-            sage: v = L.valuation(x); v                                                 # needs sage.rings.function_field
+            sage: v = L.valuation(x); v                                                 # needs sage.geometry.polyhedron sage.rings.function_field
             (x)-adic valuation
         """
         from sage.rings.function_field.valuation import FunctionFieldValuation
@@ -1187,13 +1187,13 @@ class FunctionField(Field):
             sage: m(x)                                                                  # needs sage.rings.function_field
             s^-1 + O(s^19)
 
-            sage: m = K.completion(p, prec=infinity); m                                 # needs sage.rings.function_field
+            sage: m = K.completion(p, prec=infinity); m                                 # needs sage.combinat sage.rings.function_field
             Completion map:
               From: Rational function field in x over Finite Field of size 2
               To:   Lazy Laurent Series Ring in s over Finite Field of size 2
-            sage: f = m(x); f                                                           # needs sage.rings.function_field
+            sage: f = m(x); f                                                           # needs sage.combinat sage.rings.function_field
             s^-1 + ...
-            sage: f.coefficient(100)                                                    # needs sage.rings.function_field
+            sage: f.coefficient(100)                                                    # needs sage.combinat sage.rings.function_field
             0
 
             sage: # needs sage.rings.function_field
@@ -1264,18 +1264,18 @@ class FunctionField(Field):
             Place (1/x)
             sage: a = (5*x + 6)/(x + 15)
             sage: b = 7/x
-            sage: K.hilbert_symbol(a, b, P)
+            sage: K.hilbert_symbol(a, b, P)                                             # needs sage.libs.singular
             -1
             sage: Q = K.places()[7]; Q
             Place (x + 6)
             sage: c = 15*x + 12
             sage: d = 16/(x + 13)
-            sage: K.hilbert_symbol(c, d, Q)
+            sage: K.hilbert_symbol(c, d, Q)                                             # needs sage.libs.singular
             1
 
         Check that the Hilbert symbol is symmetric and bimultiplicative::
 
-            sage: # needs sage.libs.pari
+            sage: # needs sage.libs.pari sage.libs.singular
             sage: K.<x> = FunctionField(GF(5)); R.<T> = PolynomialRing(K)
             sage: f = ((x^2 + 2*x + 2)*T^5 + (4*x^2 + 2*x + 3)*T^4 + 3*T^3 + 4*T^2
             ....:     + (2/(x^2 + 4*x + 1))*T + 3*x^2 + 2*x + 4)

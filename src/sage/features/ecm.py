@@ -12,7 +12,8 @@ Feature for testing the presence of ``ecm`` or ``gmp-ecm``
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from . import Executable
+from . import Executable, PythonModule
+from .join_feature import JoinFeature
 from sage.env import SAGE_ECMBIN
 
 
@@ -23,8 +24,8 @@ class Ecm(Executable):
     EXAMPLES::
 
         sage: from sage.features.ecm import Ecm
-        sage: Ecm().is_present()
-        FeatureTestResult('ecm', True)
+        sage: Ecm().is_present()                                                        # needs ecm
+        FeatureTestResult('ecm_executable', True)
     """
     def __init__(self):
         r"""
@@ -34,9 +35,12 @@ class Ecm(Executable):
             sage: isinstance(Ecm(), Ecm)
             True
         """
-        Executable.__init__(self, name='ecm', executable=SAGE_ECMBIN,
+        Executable.__init__(self, name='ecm_executable', executable=SAGE_ECMBIN,
                             spkg='ecm', type='standard')
 
 
 def all_features():
-    return [Ecm()]
+    return [JoinFeature("ecm",
+                        (Ecm(),
+                         PythonModule('sage.interfaces.ecm')),
+                        spkg='sagemath_libecm', type='standard')]

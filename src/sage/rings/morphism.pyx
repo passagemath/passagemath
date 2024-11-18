@@ -1482,10 +1482,10 @@ cdef class RingHomomorphism(RingMap):
             sage: # needs sage.rings.number_field
             sage: K.<sqrt2> = QuadraticField(2)
             sage: f = K.hom([-sqrt2], K.polynomial_quotient_ring())
-            sage: (f.inverse() * f).is_identity()
+            sage: (f.inverse() * f).is_identity()                                       # needs sage.libs.singular
             True
             sage: g = K.polynomial_quotient_ring().hom([-sqrt2], K)
-            sage: (g.inverse() * g).is_identity()
+            sage: (g.inverse() * g).is_identity()                                       # needs sage.libs.singular
             True
 
         Morphisms involving Galois fields::
@@ -1543,7 +1543,7 @@ cdef class RingHomomorphism(RingMap):
 
             sage: R.<x,y> = QQbar[]                                                     # needs sage.rings.number_field
             sage: f = R.hom([x + QQbar(I)*y^2, -y], R)                                  # needs sage.rings.number_field
-            sage: (f.inverse() * f).is_identity()                                       # needs sage.rings.number_field
+            sage: (f.inverse() * f).is_identity()                                       # needs sage.libs.singular sage.rings.number_field
             True
 
         Check that results are cached::

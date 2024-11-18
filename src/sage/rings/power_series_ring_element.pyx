@@ -840,7 +840,7 @@ cdef class PowerSeries(AlgebraElement):
         v = [a[i] for i in range(min(prec, len(a)))]
         return self._parent(v, prec)
 
-    def __getitem__(self,n):
+    def __getitem__(self, n):
         r"""
         Return the coefficient of `t^n` in this power series, where
         `t` is the indeterminate of the power series ring.
@@ -2322,7 +2322,7 @@ cdef class PowerSeries(AlgebraElement):
         coeffs = self[:prec]
         return self._parent(coeffs, prec)
 
-    def solve_linear_de(self, prec = infinity, b = None, f0 = None):
+    def solve_linear_de(self, prec=infinity, b=None, f0=None):
         r"""
         Obtain a power series solution to an inhomogeneous linear
         differential equation of the form:

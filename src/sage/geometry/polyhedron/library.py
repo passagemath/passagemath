@@ -719,10 +719,10 @@ class Polytopes:
 
         EXAMPLES::
 
-            sage: ico = polytopes.icosahedron()                                         # needs sage.rings.number_field
-            sage: ico.f_vector()                                                        # needs sage.rings.number_field
+            sage: ico = polytopes.icosahedron()                                         # needs sage.groups sage.rings.number_field
+            sage: ico.f_vector()                                                        # needs sage.groups sage.rings.number_field
             (1, 12, 30, 20, 1)
-            sage: ico.volume()                                                          # needs sage.rings.number_field
+            sage: ico.volume()                                                          # needs sage.groups sage.rings.number_field
             5/12*sqrt5 + 5/4
 
         Its non exact version::

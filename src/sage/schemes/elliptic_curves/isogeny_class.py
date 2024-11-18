@@ -102,6 +102,7 @@ class IsogenyClass_EC(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: E = EllipticCurve('990j1')
             sage: iso = E.isogeny_class(order='lmfdb') # orders lexicographically on a-invariants
             sage: iso[2] == E # indirect doctest
@@ -124,6 +125,7 @@ class IsogenyClass_EC(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: E = EllipticCurve('990j1')
             sage: iso = E.isogeny_class(order='lmfdb') # orders lexicographically on a-invariants
             sage: iso.index(E.short_weierstrass_model())
@@ -396,6 +398,7 @@ class IsogenyClass_EC(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: isocls = EllipticCurve('15a3').isogeny_class()
             sage: G = isocls.graph()
             sage: sorted(G._pos.items())
@@ -512,6 +515,7 @@ class IsogenyClass_EC(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: isocls = EllipticCurve('15a1').isogeny_class()
             sage: print("\n".join(repr(C) for C in isocls.curves))
             Elliptic Curve defined by y^2 + x*y + y = x^3 + x^2 - 10*x - 10 over Rational Field
@@ -774,6 +778,7 @@ class IsogenyClass_EC_NumberField(IsogenyClass_EC):
 
         Check that :issue:`19030` is fixed (codomains of reverse isogenies were wrong)::
 
+            sage: x = polygen(QQ, 'x')
             sage: K.<i> = NumberField(x^2 + 1)
             sage: E = EllipticCurve([1, i + 1, 1, -72*i + 8, 95*i + 146])
             sage: C = E.isogeny_class()
@@ -964,6 +969,7 @@ class IsogenyClass_EC_NumberField(IsogenyClass_EC):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: isocls = EllipticCurve('1225h1').isogeny_class('database')
             sage: isocls._mat
             sage: isocls._compute_matrix(); isocls._mat
@@ -1195,8 +1201,9 @@ def isogeny_degrees_cm(E, verbose=False):
 
     Check that :issue:`36780` is fixed::
 
-        sage: L5.<r5> = NumberField(x^2-5)
-        sage: E = EllipticCurve(L5,[0,-4325477943600 *r5-4195572876000])
+        sage: x = polygen(QQ)
+        sage: L5.<r5> = NumberField(x^2 - 5)
+        sage: E = EllipticCurve(L5, [0, -4325477943600*r5 - 4195572876000])
         sage: from sage.schemes.elliptic_curves.isogeny_class import isogeny_degrees_cm
         sage: isogeny_degrees_cm(E)
         [3, 5]
@@ -1404,6 +1411,7 @@ def possible_isogeny_degrees(E, algorithm='Billerey', max_l=None,
 
     A higher degree example (LMFDB curve 5.5.170701.1-4.1-b1)::
 
+        sage: x = polygen(QQ)
         sage: K.<a> = NumberField(x^5 - x^4 - 6*x^3 + 4*x + 1)
         sage: E = EllipticCurve(K, [a^3 - a^2 - 5*a + 1, a^4 - a^3 - 5*a^2 - a + 1,
         ....:                       -a^4 + 2*a^3 + 5*a^2 - 5*a - 3, a^4 - a^3 - 5*a^2 - a,
@@ -1417,6 +1425,7 @@ def possible_isogeny_degrees(E, algorithm='Billerey', max_l=None,
 
     LMFDB curve 4.4.8112.1-108.1-a5::
 
+        sage: x = polygen(QQ)
         sage: K.<a> = NumberField(x^4 - 5*x^2 + 3)
         sage: E = EllipticCurve(K, [a^2 - 2, -a^2 + 3, a^2 - 2, -50*a^2 + 35, 95*a^2 - 67])
         sage: possible_isogeny_degrees(E, exact=False, algorithm='Billerey')            # long time (6.5s)

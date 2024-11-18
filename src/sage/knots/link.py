@@ -245,7 +245,7 @@ class Link(SageObject):
 
         sage: L.alexander_polynomial()
         t^-3 - t^-2 + t^-1 - 1 + t - t^2 + t^3
-        sage: L.jones_polynomial()
+        sage: L.jones_polynomial()                                                      # needs sage.symbolic
         -t^10 + t^9 - t^8 + t^7 - t^6 + t^5 + t^3
         sage: L.determinant()
         7
@@ -584,7 +584,7 @@ class Link(SageObject):
 
             sage: B = BraidGroup(8)
             sage: L1 = Link(B([-1, -1, -1, -2, 1, -2, 3, -2, 5, 4]))
-            sage: H = hash(L1)
+            sage: H = hash(L1)                                                          # needs sage.libs.braiding
         """
         return hash(self.braid())
 
@@ -2589,6 +2589,8 @@ class Link(SageObject):
             s0^2*s1^-1*(s1^-1*s0)^2*s1^-1
             sage: br = K8_17r.braid(); br
             s0^-1*s1*s0^-2*s1^2*s0^-1*s1
+
+            sage: # needs sage.libs.braiding
             sage: b.is_conjugated(br)
             False
             sage: b == br.reverse()
@@ -2700,7 +2702,7 @@ class Link(SageObject):
 
             sage: B = BraidGroup(9)
             sage: b = B([1, 2, 3, 4, 5, 6, 7, 8])
-            sage: Link(b).jones_polynomial()
+            sage: Link(b).jones_polynomial()                                            # needs sage.symbolic
             1
 
         The "monster" unknot::
@@ -2739,7 +2741,7 @@ class Link(SageObject):
             sage: b = B([-1, -1, -1])
             sage: Link(b).jones_polynomial(skein_normalization=True)
             -A^-16 + A^-12 + A^-4
-            sage: Link(b).jones_polynomial()
+            sage: Link(b).jones_polynomial()                                            # needs sage.symbolic
             1/t + 1/t^3 - 1/t^4
             sage: B = BraidGroup(3)
             sage: b = B([-1, -2, -1, -2])
@@ -3143,7 +3145,7 @@ class Link(SageObject):
         EXAMPLES::
 
             sage: Hopf = Link([[1, 3, 2, 4], [4, 2, 3, 1]])
-            sage: Hopf.links_gould_polynomial()
+            sage: Hopf.links_gould_polynomial()                                         # needs sage.libs.singular
             -1 + t1^-1 + t0^-1 - t0^-1*t1^-1
         """
         return self.braid().links_gould_polynomial(varnames=varnames)
@@ -3918,6 +3920,7 @@ class Link(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: b = BraidGroup(4)((1, 2, -3, 2, 2, 2, 2, 2, 2, -1, 2, 3, 2))
             sage: L = Link([[2, 5, 4, 1], [5, 7, 6, 4], [7, 9, 8, 6], [9, 11, 10, 8],
             ....:           [11, 13, 12, 10], [13, 15, 14, 12], [15, 17, 16, 14],
@@ -4072,6 +4075,7 @@ class Link(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.homfly
             sage: KnotInfo.L4a1_0.inject()
             Defining L4a1_0
             sage: L4a1_0.link()._knotinfo_matching_dict()
@@ -4182,7 +4186,7 @@ class Link(SageObject):
             sage: b, = BraidGroup(2).gens()
             sage: Link(b**13).get_knotinfo()    # optional - database_knotinfo
             KnotInfo['K13a_4878']
-            sage: Link(b**14).get_knotinfo()
+            sage: Link(b**14).get_knotinfo()                    # needs libhomfly
             Traceback (most recent call last):
             ...
             NotImplementedError: this link having more than 11 crossings cannot be determined
@@ -4197,6 +4201,7 @@ class Link(SageObject):
 
         Lets identify the monster unknot::
 
+            sage: # needs sage.libs.homfly
             sage: L = Link([[3,1,2,4], [8,9,1,7], [5,6,7,3], [4,18,6,5],
             ....:           [17,19,8,18], [9,10,11,14], [10,12,13,11],
             ....:           [12,19,15,13], [20,16,14,15], [16,20,17,2]])
@@ -4205,7 +4210,7 @@ class Link(SageObject):
 
         Usage of option ``mirror_version``::
 
-            sage: L.get_knotinfo(mirror_version=False) == KnotInfo.K0_1
+            sage: L.get_knotinfo(mirror_version=False) == KnotInfo.K0_1                 # needs sage.libs.homfly
             True
 
         Usage of option ``unique``::
@@ -4247,6 +4252,7 @@ class Link(SageObject):
         the same unoriented name (according to the note above) the option can be
         used to achieve more detailed information::
 
+            sage: # needs sage.libs.homfly
             sage: L2a1 = Link(b**2)
             sage: L2a1.get_knotinfo()
             (Series of links L2a1, <SymmetryMutant.mixed: 'x'>)
@@ -4533,11 +4539,11 @@ class Link(SageObject):
             sage: l2 = Link([[1, 8, 2, 9], [9, 2, 10, 3], [3, 14, 4, 1],
             ....:            [13, 4, 14, 5], [5, 12, 6, 13], [11, 6, 12, 7],
             ....:            [7, 10, 8, 11]])
-            sage: l1.is_isotopic(l2)
+            sage: l1.is_isotopic(l2)                                                    # needs sage.libs.braiding
             True
 
             sage: l3 = l2.mirror_image()
-            sage: l1.is_isotopic(l3)
+            sage: l1.is_isotopic(l3)                                                    # needs sage.libs.braiding
             False
 
             sage: # optional - database_knotinfo
@@ -4547,22 +4553,22 @@ class Link(SageObject):
             sage: L == L7a7(0)
             True
             sage: l = L.link()
-            sage: l.is_isotopic(L7a7(1).link())
+            sage: l.is_isotopic(L7a7(1).link())                                         # needs sage.libs.braiding
             Traceback (most recent call last):
             ...
             NotImplementedError: comparison not possible!
-            sage: l.is_isotopic(L7a7(2).link())
+            sage: l.is_isotopic(L7a7(2).link())                                         # needs sage.libs.braiding
             True
-            sage: l.is_isotopic(L7a7(3).link())
+            sage: l.is_isotopic(L7a7(3).link())                                         # needs sage.libs.braiding
             False
 
         Using verbosity::
 
             sage: set_verbose(1)
-            sage: l1.is_isotopic(l2)
+            sage: l1.is_isotopic(l2)                                                    # needs sage.libs.braiding
             verbose 1 (... link.py, is_isotopic) identified by KnotInfo (KnotInfo.K7_2, SymmetryMutant.mirror_image)
             True
-            sage: l1.is_isotopic(l3)
+            sage: l1.is_isotopic(l3)                                                    # needs sage.libs.braiding
             verbose 1 (... link.py, is_isotopic) different Homfly-PT polynomials
             False
             sage: set_verbose(0)
@@ -4575,14 +4581,14 @@ class Link(SageObject):
             sage: L1 = L.link()
             sage: L2 = L.link(L.items.braid_notation)
             sage: set_verbose(1)
-            sage: L1.is_isotopic(L2)
+            sage: L1.is_isotopic(L2)                                                    # needs sage.libs.braiding
             verbose 1 (... link.py, is_isotopic) identified by KnotInfo uniquely (KnotInfo.L6a2_0, SymmetryMutant.itself)
             True
-            sage: KnotInfo.K0_1.link().is_isotopic(KnotInfo.L2a1_0.link())
+            sage: KnotInfo.K0_1.link().is_isotopic(KnotInfo.L2a1_0.link())              # needs sage.libs.braiding
             verbose 1 (... link.py, is_isotopic) different number of components
             False
 
-            sage: # optional - database_knotinfo
+            sage: # optional - database_knotinfo, needs sage.libs.braiding
             sage: K = KnotInfo.K10_67
             sage: K1 = K.link()
             sage: K1r = K.link().reverse()

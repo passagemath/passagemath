@@ -1178,7 +1178,7 @@ class GaloisGroup(SageObject):
         """
         EXAMPLES::
 
-            sage: E = EllipticCurve('389a'); F= E.heegner_point(-7,5).ring_class_field()
+            sage: E = EllipticCurve('389a'); F = E.heegner_point(-7,5).ring_class_field()
             sage: G = F.galois_group(F.quadratic_field())
             sage: G[0]
             Class field automorphism defined by x^2 + x*y + 44*y^2
@@ -1667,7 +1667,7 @@ class GaloisAutomorphismQuadraticForm(GaloisAutomorphism):
 
         EXAMPLES::
 
-            sage: E = EllipticCurve('389a'); F= E.heegner_point(-20,3).ring_class_field()
+            sage: E = EllipticCurve('389a'); F = E.heegner_point(-20,3).ring_class_field()
             sage: G = F.galois_group(F.quadratic_field())
             sage: G[1].ideal()
             Fractional ideal (2, 1/2*sqrt_minus_20 + 1)
@@ -2983,7 +2983,7 @@ class HeegnerPointOnX0N(HeegnerPoint):
 
         EXAMPLES::
 
-            sage: heegner_point(389,-7,1).plot(pointsize=50)
+            sage: heegner_point(389,-7,1).plot(pointsize=50)                            # needs sage.plot
             Graphics object consisting of 1 graphics primitive
         """
         from sage.plot.all import point
@@ -3788,7 +3788,7 @@ class HeegnerPointOnEllipticCurve(HeegnerPoint):
             0.150298370947295
             sage: P.height()
             0.0375745927368238
-            sage: E.heegner_index(-8)
+            sage: E.heegner_index(-8)                                                   # needs eclib
             2.0000?
             sage: E.torsion_order()
             1
@@ -4141,7 +4141,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         EXAMPLES::
 
-            sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67); P.index()
+            sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67); P.index()      # needs eclib
             6
         """
         if self.conductor() == 1:
@@ -4191,6 +4191,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         A rank 1 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67)
             sage: P.point_exact()
             (6 : -15 : 1)
@@ -4203,12 +4204,14 @@ class KolyvaginPoint(HeegnerPoint):
 
         A rank 0 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('11a1'); P = E.kolyvagin_point(-7)
             sage: P.point_exact()
             (-1/2*sqrt_minus_7 + 1/2 : -2*sqrt_minus_7 - 2 : 1)
 
         A rank 2 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('389a1'); P = E.kolyvagin_point(-7)
             sage: P.point_exact()
             (0 : 1 : 0)
@@ -4284,7 +4287,7 @@ class KolyvaginPoint(HeegnerPoint):
             if not P:
                 # point at infinity
                 return Graphics()
-            return point((P[0].real(), P[1].real()),*args, **kwds)
+            return point((P[0].real(), P[1].real()), *args, **kwds)
         else:
             raise NotImplementedError
 
@@ -4334,6 +4337,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         A Kolyvagin point on a rank 1 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67)
             sage: P.trace_to_real_numerical()
             (1.61355529131986 : -2.18446840788880 : 1.00000000000000)
@@ -4360,6 +4364,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('43a'); P = E.heegner_point(-20).kolyvagin_point()
             sage: PP = P.numerical_approx(); PP
             (0.000000000000000 : -1.00000000000000 : 1.00000000000000)
@@ -4396,6 +4401,7 @@ class KolyvaginPoint(HeegnerPoint):
 
         A Kolyvagin point on a rank 1 curve::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('37a1'); P = E.kolyvagin_point(-67)
             sage: P.mod(2)
             (1 : 1 : 1)
@@ -4415,6 +4421,7 @@ class KolyvaginPoint(HeegnerPoint):
         Here the Kolyvagin point is a torsion point (since `E` has
         rank 1), and we reduce it modulo several primes.::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve('11a1'); P = E.kolyvagin_point(-7)
             sage: P.mod(3,70)  # long time (4s on sage.math, 2013)
             (1 : 2 : 1)
@@ -5683,11 +5690,12 @@ def kolyvagin_reduction_data(E, q, first_only=True):
 
     A rank 1 example::
 
-        sage: kolyvagin_reduction_data(EllipticCurve('37a1'), 3)
+        sage: kolyvagin_reduction_data(EllipticCurve('37a1'), 3)                        # needs eclib
         (17, -7, 1, 52)
 
     A rank 3 example::
 
+        sage: # needs eclib
         sage: kolyvagin_reduction_data(EllipticCurve('5077a1'), 3)
         (11, -47, 5, 4234)
         sage: H = heegner_points(5077, -47)
@@ -5702,6 +5710,7 @@ def kolyvagin_reduction_data(E, q, first_only=True):
     working in a space of dimension 293060 (so prohibitive at
     present)::
 
+        sage: # needs eclib
         sage: E = elliptic_curves.rank(4)[0]
         sage: kolyvagin_reduction_data(E,3)              # long time
         (11, -71, 7, 293060)
@@ -5711,19 +5720,19 @@ def kolyvagin_reduction_data(E, q, first_only=True):
 
     The first rank 2 example::
 
-        sage: kolyvagin_reduction_data(EllipticCurve('389a'), 3)
+        sage: kolyvagin_reduction_data(EllipticCurve('389a'), 3)                        # needs eclib
         (5, -7, 1, 130)
-        sage: kolyvagin_reduction_data(EllipticCurve('389a'), 3, first_only=False)
+        sage: kolyvagin_reduction_data(EllipticCurve('389a'), 3, first_only=False)      # needs eclib
         (5, 17, -7, 1, 130, 520)
 
     A large `q = 7`::
 
-        sage: kolyvagin_reduction_data(EllipticCurve('1143c1'), 7, first_only=False)
+        sage: kolyvagin_reduction_data(EllipticCurve('1143c1'), 7, first_only=False)    # needs eclib
         (13, 83, -59, 3, 1536, 10496)
 
     Additive reduction::
 
-        sage: kolyvagin_reduction_data(EllipticCurve('2350g1'), 5, first_only=False)
+        sage: kolyvagin_reduction_data(EllipticCurve('2350g1'), 5, first_only=False)    # needs eclib
         (19, 239, -311, 19, 6480, 85680)
     """
     from .ell_generic import EllipticCurve_generic
@@ -6456,6 +6465,7 @@ def kolyvagin_point(self, D, c=ZZ(1), check=True):
 
     EXAMPLES::
 
+        sage: # needs eclib
         sage: E = EllipticCurve('37a1')
         sage: P = E.kolyvagin_point(-67); P
         Kolyvagin point of discriminant -67 on elliptic curve of conductor 37
@@ -6547,18 +6557,18 @@ def heegner_point_height(self, D, prec=2, check_rank=True):
     EXAMPLES::
 
         sage: E = EllipticCurve('11a')
-        sage: E.heegner_point_height(-7)
+        sage: E.heegner_point_height(-7)                                                # needs sage.graphs
         0.22227?
 
     Some higher rank examples::
 
         sage: E = EllipticCurve('389a')
-        sage: E.heegner_point_height(-7)
+        sage: E.heegner_point_height(-7)                                                # needs sage.graphs
         0
         sage: E = EllipticCurve('5077a')
-        sage: E.heegner_point_height(-7)
+        sage: E.heegner_point_height(-7)                                                # needs sage.graphs
         0
-        sage: E.heegner_point_height(-7, check_rank=False)
+        sage: E.heegner_point_height(-7, check_rank=False)                              # needs sage.graphs
         0.0000?
     """
 
@@ -6653,7 +6663,7 @@ def heegner_index(self, D, min_p=2, prec=5, descent_second_limit=12,
         sage: E = EllipticCurve('11a')
         sage: E.heegner_discriminants(50)
         [-7, -8, -19, -24, -35, -39, -40, -43]
-        sage: E.heegner_index(-7)
+        sage: E.heegner_index(-7)                                                       # needs sage.graphs
         1.00000?
 
     ::
@@ -6661,19 +6671,19 @@ def heegner_index(self, D, min_p=2, prec=5, descent_second_limit=12,
         sage: E = EllipticCurve('37b')
         sage: E.heegner_discriminants(100)
         [-3, -4, -7, -11, -40, -47, -67, -71, -83, -84, -95]
-        sage: E.heegner_index(-95)          # long time (1 second)
+        sage: E.heegner_index(-95)          # long time (1 second)                      # needs sage.graphs
         2.00000?
 
     This tests doing direct computation of the Mordell-Weil group.
 
     ::
 
-        sage: EllipticCurve('675b').heegner_index(-11)
+        sage: EllipticCurve('675b').heegner_index(-11)                                  # needs sage.graphs
         3.0000?
 
     Currently discriminants -3 and -4 are not supported::
 
-        sage: E.heegner_index(-3)
+        sage: E.heegner_index(-3)                                                       # needs sage.graphs
         Traceback (most recent call last):
         ...
         ArithmeticError: Discriminant (=-3) must not be -3 or -4.
@@ -6681,7 +6691,7 @@ def heegner_index(self, D, min_p=2, prec=5, descent_second_limit=12,
     The curve 681b returns the true index, which is `3`::
 
         sage: E = EllipticCurve('681b')
-        sage: I = E.heegner_index(-8); I
+        sage: I = E.heegner_index(-8); I                                                # needs sage.graphs
         3.0000?
 
     In fact, whenever the returned index has a denominator of
@@ -6695,27 +6705,27 @@ def heegner_index(self, D, min_p=2, prec=5, descent_second_limit=12,
     the regulator of the twist::
 
         sage: E = EllipticCurve([1,-1,0,-1228,-16267])
-        sage: E.heegner_index(-8)
+        sage: E.heegner_index(-8)                                                       # needs sage.graphs
         Traceback (most recent call last):
         ...
         RuntimeError: ...
 
     However when we search higher, we find the points we need::
 
-        sage: E.heegner_index(-8, descent_second_limit=16, check_rank=False)  # long time
+        sage: E.heegner_index(-8, descent_second_limit=16, check_rank=False)  # long time, needs sage.graphs
         2.00000?
 
     Two higher rank examples (of ranks 2 and 3)::
 
         sage: E = EllipticCurve('389a')
-        sage: E.heegner_index(-7)
+        sage: E.heegner_index(-7)                                                       # needs sage.graphs
         +Infinity
         sage: E = EllipticCurve('5077a')
-        sage: E.heegner_index(-7)
+        sage: E.heegner_index(-7)                                                       # needs sage.graphs
         +Infinity
-        sage: E.heegner_index(-7, check_rank=False)
+        sage: E.heegner_index(-7, check_rank=False)                                     # needs sage.graphs
         0.001?
-        sage: E.heegner_index(-7, check_rank=False).lower() == 0
+        sage: E.heegner_index(-7, check_rank=False).lower() == 0                        # needs sage.graphs
         True
     """
     if not self.satisfies_heegner_hypothesis(D):
@@ -6866,7 +6876,7 @@ def heegner_index_bound(self, D=0, prec=5, max_height=None):
     EXAMPLES::
 
         sage: E = EllipticCurve('11a1')
-        sage: E.heegner_index_bound()
+        sage: E.heegner_index_bound()                                                   # needs sage.graphs
         ([2], -7, 2)
     """
     from .ell_rational_field import _MAX_HEIGHT
@@ -6969,7 +6979,7 @@ def _heegner_index_in_EK(self, D):
     We compute the index for a rank 2 curve and found that it is 2::
 
         sage: E = EllipticCurve('389a')
-        sage: E._heegner_index_in_EK(-7)
+        sage: E._heegner_index_in_EK(-7)                                                # needs eclib
         2
 
     We explicitly verify in the above example that indeed that

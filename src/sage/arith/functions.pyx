@@ -90,8 +90,8 @@ def lcm(a, b=None):
     Verify that objects without lcm methods but which can't be
     coerced to `\ZZ` or `\QQ` raise an error::
 
-        sage: F.<x,y> = FreeMonoid(2)                                                   # needs sage.groups
-        sage: lcm(x,y)                                                                  # needs sage.groups
+        sage: F.<x,y> = FreeMonoid(2)                                                   # needs sage.combinat
+        sage: lcm(x,y)                                                                  # needs sage.combinat
         Traceback (most recent call last):
         ...
         TypeError: unable to find lcm of x and y

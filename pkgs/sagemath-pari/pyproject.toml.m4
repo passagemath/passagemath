@@ -68,6 +68,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_conway_polynomials
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -77,7 +78,7 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+test = ["passagemath-repl"]
 
 [tool.setuptools]
 include-package-data = false

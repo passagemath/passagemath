@@ -58,6 +58,27 @@ include(`pyproject_toml_metadata.m4')dnl'
 file = "README.rst"
 content-type = "text/x-rst"
 
+[project.optional-dependencies]
+test = [
+    "passagemath-repl",
+]
+
+[tool.cibuildwheel.linux]
+# Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
+# so there is no clean way to refer to the repair_wheel.py script
+# https://github.com/pypa/cibuildwheel/issues/1931
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf',
+    'python3 pkgs/sagemath-singular/repair_wheel.py {wheel}',
+    'auditwheel repair -w {dest_dir} {wheel}',
+]
+[tool.cibuildwheel.macos]
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf',
+    'python3 pkgs/sagemath-singular/repair_wheel.py {wheel}',
+    'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
+]
+
 [tool.setuptools]
 include-package-data = false
 

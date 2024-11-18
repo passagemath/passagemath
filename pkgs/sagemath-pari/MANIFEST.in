@@ -24,7 +24,7 @@ include sage/rings/pari_ring.p*
 graft sage/rings/padics
 graft sage/rings/polynomial/padics
 graft sage/rings/valuation
-include sage/rings/function_field/valuation.p*
+include sage/rings/function_field/valuation*.p*
 include sage/libs/linkages/padics/*.pxi                         # FIXME?
 include sage/rings/tate*.p*
 # exclude what is shipped by sagemath-categories
@@ -54,6 +54,10 @@ include sage/quadratic_forms/quadratic_form__mass*.p*
 include sage/quadratic_forms/quadratic_form__siegel_product.p*
 include sage/quadratic_forms/qfsolve.p*
 include sage/quadratic_forms/special_values.p*
+
+include sage/databases/conway.py
+
+include sage/interfaces/genus2reduction.py
 
 global-exclude *.c
 global-exclude *.cpp

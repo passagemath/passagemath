@@ -514,7 +514,7 @@ class HeckeSubmodule(module.HeckeModule_free_module):
 
         We test that :issue:`5080` is fixed::
 
-            sage: EllipticCurve('128a').congruence_number()
+            sage: EllipticCurve('128a').congruence_number()                             # needs sympow
             32
         """
 

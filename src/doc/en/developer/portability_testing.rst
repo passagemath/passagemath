@@ -259,7 +259,7 @@ This information comes from Sage's database of equivalent system
 packages.  For example::
 
   $ ls build/pkgs/flint/distros/
-  alpine.txt  cygwin.txt  fedora.txt   gentoo.txt    macports.txt  opensuse.txt  void.txt
+  alpine.txt  fedora.txt  gentoo.txt   macports.txt  opensuse.txt  void.txt
   conda.txt   debian.txt  freebsd.txt  homebrew.txt  nix.txt       repology.txt
   $ cat build/pkgs/flint/distros/debian.txt
   libflint-dev
@@ -383,7 +383,6 @@ Then, to bootstrap and configure...::
   RUN mkdir -p /sage
   WORKDIR /sage
   ADD Makefile VERSION.txt README.md bootstrap configure.ac sage ./
-  ADD src/doc/bootstrap src/doc/bootstrap
   ADD m4 ./m4
   ADD build ./build
   RUN ./bootstrap
@@ -769,7 +768,7 @@ positional arguments (separated from tox options by ``--``)::
   local-direct create: /Users/mkoeppe/.../worktree-local/.tox/local-direct
   local-direct run-test-pre: PYTHONHASHSEED='2211987514'
   ...
-  src/doc/bootstrap:48: installing src/doc/en/installation/debian.txt...
+  bootstrap:48: installing src/doc/en/installation/debian.txt...
   bootstrap:69: installing 'config/config.rpath'
   configure.ac:328: installing 'config/compile'
   configure.ac:113: installing 'config/config.guess'

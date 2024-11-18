@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-pari
+# sage.doctest: needs sage.geometry.polyhedron sage.rings.function_field
 r"""
 Valuations which are implemented through a map to another valuation
 
@@ -11,12 +12,10 @@ through an infinite valuation on `K[x]` which maps `G` to infinity::
     sage: K.<x> = FunctionField(QQ)
     sage: R.<y> = K[]
     sage: L.<y> = K.extension(y^2 - x)
-
-    sage: v = K.valuation(0)                                                            # needs sage.rings.function_field
-    sage: w = v.extension(L); w                                                         # needs sage.rings.function_field
+    sage: v = K.valuation(0)
+    sage: w = v.extension(L); w
     (x)-adic valuation
-
-    sage: w._base_valuation                                                             # needs sage.rings.function_field
+    sage: w._base_valuation
     [ Gauss valuation induced by (x)-adic valuation, v(y) = 1/2 , … ]
 
 AUTHORS:

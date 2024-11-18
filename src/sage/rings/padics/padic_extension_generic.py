@@ -476,7 +476,7 @@ class pAdicExtensionGeneric(pAdicGeneric):
         """
         return self._given_poly.parent()
 
-    #def teichmuller(self, x, prec = None):
+    #def teichmuller(self, x, prec=None):
     #    if prec is None:
     #        prec = self.precision_cap()
     #    x = self(x, prec)
@@ -653,7 +653,7 @@ class pAdicExtensionGeneric(pAdicGeneric):
     #def principal_unit_group(self):
     #    raise NotImplementedError
 
-    #def zeta(self, n = None):
+    #def zeta(self, n=None):
     #    raise NotImplementedError
 
     #def zeta_order(self):

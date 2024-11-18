@@ -26,8 +26,8 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    SPKG_INSTALL_REQUIRES_sagemath_modules
-    SPKG_INSTALL_REQUIRES_sagemath_repl
+    "passagemath-modules",
+    "passagemath-repl",
 ]
 
 [tool.cibuildwheel.linux]

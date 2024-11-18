@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-macaulay2
+# sage.doctest: optional - macaulay2
 r"""
 Interface to Macaulay2
 
@@ -127,6 +129,7 @@ import re
 
 import sage.interfaces.abc
 
+from sage.features.macaulay2 import Macaulay2 as M2_executable
 from sage.interfaces.expect import (Expect, ExpectElement, ExpectFunction,
                                     FunctionElement)
 from sage.interfaces.interface import AsciiArtString
@@ -206,7 +209,7 @@ class Macaulay2(ExtraTabCompletion, Expect):
             True
         """
         if command is None:
-            command = os.getenv('SAGE_MACAULAY2_COMMAND') or 'M2'
+            command = os.getenv('SAGE_MACAULAY2_COMMAND') or M2_executable().absolute_filename()
         init_str = (
             # Prompt changing commands
             'sageLoadMode = false;'

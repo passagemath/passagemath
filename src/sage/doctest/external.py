@@ -31,14 +31,14 @@ AUTHORS:
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
-import os
+import multiprocessing
+import platform
 
 
 # With OS X, Python 3.8 defaults to use 'spawn' instead of 'fork' in
 # multiprocessing, and Sage doctesting doesn't work with 'spawn'. See
 # trac #27754.
-if os.uname().sysname == 'Darwin':
-    import multiprocessing
+if platform.system() == 'Darwin':
     multiprocessing.set_start_method('fork', force=True)
 
 # Functions in this module whose name is of the form 'has_xxx' tests if the

@@ -280,6 +280,7 @@ see how people usually visualize these graphs.
 
 ::
 
+    sage: # needs database_graphs
     sage: G = GraphQuery(display_cols=['graph6'], num_vertices=7, diameter=5)
     sage: L = G.get_graphs_list()
     sage: graphs_list.show_graphs(L)                                                    # needs sage.plot
@@ -1695,31 +1696,31 @@ class Graph(GenericGraph):
         EXAMPLES::
 
             sage: g = Graph({1: [2], 2: [3, 4], 3: [4, 5, 6, 7], 8: [3, 5], 9: [6, 7]})
-            sage: g.is_cactus()
+            sage: g.is_cactus()                                                         # needs planarity
             True
 
             sage: c6 = graphs.CycleGraph(6)
             sage: naphthalene = c6 + c6
-            sage: naphthalene.is_cactus()  # Not connected
+            sage: naphthalene.is_cactus()  # Not connected                              # needs planarity
             False
             sage: naphthalene.merge_vertices([0, 6])
-            sage: naphthalene.is_cactus()
+            sage: naphthalene.is_cactus()                                               # needs planarity
             True
             sage: naphthalene.merge_vertices([1, 7])
-            sage: naphthalene.is_cactus()
+            sage: naphthalene.is_cactus()                                               # needs planarity
             False
 
         TESTS::
 
-            sage: all(graphs.PathGraph(i).is_cactus() for i in range(5))
+            sage: all(graphs.PathGraph(i).is_cactus() for i in range(5))                # needs planarity
             True
 
-            sage: Graph('Fli@?').is_cactus()
+            sage: Graph('Fli@?').is_cactus()                                            # needs planarity
             False
 
         Test a graph that is not outerplanar, see :issue:`24480`::
 
-            sage: graphs.Balaban10Cage().is_cactus()                                    # needs networkx
+            sage: graphs.Balaban10Cage().is_cactus()                                    # needs networkx planarity
             False
         """
         self._scream_if_not_simple()
@@ -1905,7 +1906,7 @@ class Graph(GenericGraph):
         The Petersen graph is not apex::
 
             sage: G = graphs.PetersenGraph()
-            sage: G.is_apex()
+            sage: G.is_apex()                                   # needs planarity
             False
 
         A graph is apex if all its connected components are apex, but at most
@@ -1913,9 +1914,9 @@ class Graph(GenericGraph):
 
             sage: M = graphs.Grid2dGraph(3,3)
             sage: K5 = graphs.CompleteGraph(5)
-            sage: (M+K5).is_apex()
+            sage: (M + K5).is_apex()                            # needs planarity
             True
-            sage: (M+K5+K5).is_apex()
+            sage: (M + K5 + K5).is_apex()                       # needs planarity
             False
 
         TESTS:
@@ -1928,8 +1929,8 @@ class Graph(GenericGraph):
 
         The graph might be mutable or immutable::
 
-            sage: G = Graph(M+K5, immutable=True)
-            sage: G.is_apex()
+            sage: G = Graph(M + K5, immutable=True)
+            sage: G.is_apex()                                   # needs planarity
             True
         """
         # Easy cases: null graph, subgraphs of K_5 and K_3,3
@@ -1993,16 +1994,16 @@ class Graph(GenericGraph):
         vertex is the unique apex vertex ::
 
             sage: G = graphs.Grid2dGraph(4,4)
-            sage: set(G.apex_vertices()) == set(G.vertices(sort=False))
+            sage: set(G.apex_vertices()) == set(G.vertices(sort=False))     # needs planarity
             True
             sage: G.add_edges([('universal',v) for v in G])
-            sage: G.apex_vertices()
+            sage: G.apex_vertices()                                         # needs planarity
             ['universal']
 
         The Petersen graph is not apex::
 
             sage: G = graphs.PetersenGraph()
-            sage: G.apex_vertices()
+            sage: G.apex_vertices()                                         # needs planarity
             []
 
         A graph is apex if all its connected components are apex, but at most
@@ -2010,9 +2011,9 @@ class Graph(GenericGraph):
 
             sage: M = graphs.Grid2dGraph(3,3)
             sage: K5 = graphs.CompleteGraph(5)
-            sage: (M+K5).apex_vertices()
+            sage: (M + K5).apex_vertices()                                  # needs planarity
             [9, 10, 11, 12, 13]
-            sage: (M+K5+K5).apex_vertices()
+            sage: (M + K5 + K5).apex_vertices()                             # needs planarity
             []
 
         Neighbors of an apex of degree 2 are apex::
@@ -2020,11 +2021,11 @@ class Graph(GenericGraph):
             sage: G = graphs.Grid2dGraph(5,5)
             sage: v = (666, 666)
             sage: G.add_path([(1, 1), v, (3, 3)])
-            sage: G.is_planar()
+            sage: G.is_planar()                                             # needs planarity
             False
             sage: G.degree(v)
             2
-            sage: sorted(G.apex_vertices())
+            sage: sorted(G.apex_vertices())                                 # needs planarity
             [(1, 1), (2, 2), (3, 3), (666, 666)]
 
 
@@ -2045,8 +2046,8 @@ class Graph(GenericGraph):
 
         The graph might be mutable or immutable::
 
-            sage: G = Graph(M+K5, immutable=True)
-            sage: G.apex_vertices()
+            sage: G = Graph(M + K5, immutable=True)
+            sage: G.apex_vertices()                                         # needs planarity
             [9, 10, 11, 12, 13]
         """
         if k is None:
@@ -2696,7 +2697,7 @@ class Graph(GenericGraph):
             return True if not certificate else None
 
         answer = self.is_odd_hole_free(certificate=certificate)
-        if not (answer is True):
+        if answer is not True:
             return answer
 
         return self_complement.is_odd_hole_free(certificate=certificate)
@@ -7409,10 +7410,11 @@ class Graph(GenericGraph):
 
         EXAMPLES::
 
+            sage: # needs planarity
             sage: C = graphs.CubeGraph(3)
             sage: C.is_polyhedral()
             True
-            sage: K33=graphs.CompleteBipartiteGraph(3, 3)
+            sage: K33 = graphs.CompleteBipartiteGraph(3, 3)
             sage: K33.is_polyhedral()
             False
             sage: graphs.CycleGraph(17).is_polyhedral()
@@ -7471,22 +7473,22 @@ class Graph(GenericGraph):
         EXAMPLES::
 
             sage: C = graphs.CubeGraph(3)
-            sage: C.is_circumscribable()                                                # needs sage.numerical.mip
+            sage: C.is_circumscribable()                                                # needs planarity sage.numerical.mip
             True
 
             sage: O = graphs.OctahedralGraph()
-            sage: O.is_circumscribable()                                                # needs sage.numerical.mip
+            sage: O.is_circumscribable()                                                # needs planarity sage.numerical.mip
             True
 
             sage: TT = polytopes.truncated_tetrahedron().graph()                        # needs sage.geometry.polyhedron
-            sage: TT.is_circumscribable()                                               # needs sage.geometry.polyhedron sage.numerical.mip
+            sage: TT.is_circumscribable()                                               # needs planarity sage.geometry.polyhedron sage.numerical.mip
             False
 
         Stellating in a face of the octahedral graph is not circumscribable::
 
-            sage: f = set(flatten(choice(O.faces())))
-            sage: O.add_edges([[6, i] for i in f])
-            sage: O.is_circumscribable()                                                # needs sage.numerical.mip
+            sage: f = set(flatten(choice(O.faces())))                                   # needs planarity
+            sage: O.add_edges([[6, i] for i in f])                                      # needs planarity
+            sage: O.is_circumscribable()                                                # needs planarity sage.numerical.mip
             False
 
         .. SEEALSO::
@@ -7497,7 +7499,7 @@ class Graph(GenericGraph):
         TESTS::
 
             sage: G = graphs.CompleteGraph(5)
-            sage: G.is_circumscribable()
+            sage: G.is_circumscribable()                                                # needs planarity
             Traceback (most recent call last):
             ...
             NotImplementedError: this method only works for polyhedral graphs
@@ -7593,7 +7595,7 @@ class Graph(GenericGraph):
             True
 
             sage: C = graphs.CubeGraph(3)
-            sage: C.is_inscribable()                                                    # needs sage.numerical.mip
+            sage: C.is_inscribable()                                                    # needs planarity sage.numerical.mip
             True
 
         Cutting off a vertex from the cube yields an uninscribable graph::
@@ -7604,7 +7606,7 @@ class Graph(GenericGraph):
             sage: C.add_edges(Combinations(triangle, 2))
             sage: C.add_edges(zip(triangle, C.neighbors(v)))
             sage: C.delete_vertex(v)
-            sage: C.is_inscribable()                                                    # needs sage.numerical.mip
+            sage: C.is_inscribable()                                                    # needs planarity sage.numerical.mip
             False
 
         Breaking a face of the cube yields an uninscribable graph::
@@ -7612,7 +7614,7 @@ class Graph(GenericGraph):
             sage: C = graphs.CubeGraph(3)
             sage: face = choice(C.faces())
             sage: C.add_edge([face[0][0], face[2][0]])
-            sage: C.is_inscribable()                                                    # needs sage.numerical.mip
+            sage: C.is_inscribable()                                                    # needs planarity sage.numerical.mip
             False
 
 
@@ -7673,96 +7675,9 @@ class Graph(GenericGraph):
 
         return D[0] == NodeType.PRIME and len(D[1]) == self.order()
 
-    def _gomory_hu_tree(self, vertices, algorithm=None):
-        r"""
-        Return a Gomory-Hu tree associated to ``self``.
-
-        This function is the private counterpart of ``gomory_hu_tree()``, with
-        the difference that it has an optional argument needed for recursive
-        computations, which the user is not interested in defining himself.
-
-        See the documentation of ``gomory_hu_tree()`` for more information.
-
-        INPUT:
-
-        - ``vertices`` -- set of "real" vertices, as opposed to the fakes one
-          introduced during the computations. This variable is useful for the
-          algorithm and for recursion purposes.
-
-        - ``algorithm`` -- select the algorithm used by the :meth:`edge_cut`
-          method. Refer to its documentation for allowed values and default
-          behaviour.
-
-        EXAMPLES:
-
-        This function is actually tested in ``gomory_hu_tree()``, this example
-        is only present to have a doctest coverage of 100%::
-
-            sage: g = graphs.PetersenGraph()
-            sage: t = g._gomory_hu_tree(frozenset(g.vertices(sort=False)))
-        """
-        self._scream_if_not_simple()
-
-        # Small case, not really a problem ;-)
-        if len(vertices) == 1:
-            g = Graph()
-            g.add_vertices(vertices)
-            return g
-
-        # Take any two vertices (u,v)
-        it = iter(vertices)
-        u, v = next(it), next(it)
-
-        # Compute a uv min-edge-cut.
-        #
-        # The graph is split into U,V with u \in U and v\in V.
-        flow, edges, [U, V] = self.edge_cut(u, v, use_edge_labels=True,
-                                            vertices=True, algorithm=algorithm)
-
-        # One graph for each part of the previous one
-        gU, gV = self.subgraph(U, immutable=False), self.subgraph(V, immutable=False)
-
-        # A fake vertex fU (resp. fV) to represent U (resp. V)
-        fU = frozenset(U)
-        fV = frozenset(V)
-
-        # Each edge (uu,vv) with uu \in U and vv\in V yields:
-        # - an edge (uu,fV) in gU
-        # - an edge (vv,fU) in gV
-        #
-        # If the same edge is added several times their capacities add up.
-
-        for uu, vv, capacity in edges:
-            capacity = _weight_if_real(capacity)
-
-            # Assume uu is in gU
-            if uu in V:
-                uu, vv = vv, uu
-
-            # Create the new edges if necessary
-            if not gU.has_edge(uu, fV):
-                gU.add_edge(uu, fV, 0)
-            if not gV.has_edge(vv, fU):
-                gV.add_edge(vv, fU, 0)
-
-            # update the capacities
-            gU.set_edge_label(uu, fV, gU.edge_label(uu, fV) + capacity)
-            gV.set_edge_label(vv, fU, gV.edge_label(vv, fU) + capacity)
-
-        # Recursion on each side
-        gU_tree = gU._gomory_hu_tree(vertices & frozenset(gU), algorithm=algorithm)
-        gV_tree = gV._gomory_hu_tree(vertices & frozenset(gV), algorithm=algorithm)
-
-        # Union of the two partial trees
-        g = gU_tree.union(gV_tree)
-
-        # An edge to connect them, with the appropriate label
-        g.add_edge(u, v, flow)
-
-        return g
-
     @doc_index("Connectivity, orientations, trees")
-    def gomory_hu_tree(self, algorithm=None):
+    def gomory_hu_tree(self, algorithm=None, solver=None, verbose=0,
+                       *, integrality_tolerance=1e-3):
         r"""
         Return a Gomory-Hu tree of ``self``.
 
@@ -7782,6 +7697,27 @@ class Graph(GenericGraph):
         - ``algorithm`` -- select the algorithm used by the :meth:`edge_cut`
           method. Refer to its documentation for allowed values and default
           behaviour.
+
+        - ``solver`` -- string (default: ``None``); specifies a Mixed Integer
+          Linear Programming (MILP) solver to be used. If set to ``None``, the
+          default one is used. For more information on MILP solvers and which
+          default solver is used, see the method :meth:`solve
+          <sage.numerical.mip.MixedIntegerLinearProgram.solve>` of the class
+          :class:`MixedIntegerLinearProgram
+          <sage.numerical.mip.MixedIntegerLinearProgram>`.
+
+          Only useful when ``algorithm == "LP"``.
+
+        - ``verbose`` -- integer (default: 0); sets the level of
+          verbosity. Set to 0 by default, which means quiet.
+
+          Only useful when ``algorithm == "LP"``.
+
+        - ``integrality_tolerance`` -- float; parameter for use with MILP
+          solvers over an inexact base ring; see
+          :meth:`MixedIntegerLinearProgram.get_values`.
+
+          Only useful when ``algorithm == "LP"``.
 
         OUTPUT: a graph with labeled edges
 
@@ -7841,18 +7777,79 @@ class Graph(GenericGraph):
             sage: graphs.EmptyGraph().gomory_hu_tree()
             Graph on 0 vertices
         """
-        if not self.order():
-            return Graph()
-        if not self.is_connected():
-            g = Graph()
-            for cc in self.connected_components_subgraphs():
-                g = g.union(cc._gomory_hu_tree(frozenset(cc.vertex_iterator()), algorithm=algorithm))
-        else:
-            g = self._gomory_hu_tree(frozenset(self.vertex_iterator()), algorithm=algorithm)
+        self._scream_if_not_simple()
 
+        if self.order() <= 1:
+            return Graph([self, []], format='vertices_and_edges')
+
+        # Graph to store the Gomory-Hu tree
+        T = Graph([self, []], format='vertices_and_edges')
         if self.get_pos() is not None:
-            g.set_pos(dict(self.get_pos()))
-        return g
+            T.set_pos(dict(self.get_pos()))
+
+        # We use a stack to avoid recursion. An element of the stack contains
+        # the graph to be processed and the corresponding set of "real" vertices
+        # (as opposed to the fakes one introduced during the computations.
+        if self.is_connected():
+            stack = [(self, frozenset(self))]
+        else:
+            stack = [(cc, frozenset(cc)) for cc in self.connected_components_subgraphs()]
+
+        # We now iteratively decompose the graph to build the tree
+        while stack:
+            G, vertices = stack.pop()
+
+            if len(vertices) == 1:
+                continue
+
+            # Take any two vertices (u,v)
+            it = iter(vertices)
+            u, v = next(it), next(it)
+
+            # Compute a uv min-edge-cut.
+            #
+            # The graph is split into U,V with u \in U and v\in V.
+            flow, edges, [U, V] = G.edge_cut(u, v, use_edge_labels=True,
+                                             vertices=True, algorithm=algorithm,
+                                             solver=solver, verbose=verbose,
+                                             integrality_tolerance=integrality_tolerance)
+
+            # Add edge (u, v, flow) to the Gomory-Hu tree
+            T.add_edge(u, v, flow)
+
+            # Build one graph for each part of the previous graph and store the
+            # instances to process
+            for X, Y in ((U, V), (V, U)):
+                if len(X) == 1 or len(vertices & frozenset(X)) == 1:
+                    continue
+
+                # build the graph of part X
+                gX = G.subgraph(X, immutable=False)
+
+                # A fake vertex fY to represent Y
+                fY = frozenset(Y)
+
+                # For each edge (x, y) in G with x \in X and y\in Y, add edge
+                # (x, fY) in gX. If the same edge is added several times their
+                # capacities add up.
+                for xx, yy, capacity in edges:
+                    capacity = _weight_if_real(capacity)
+
+                    # Assume xx is in gX
+                    if xx in fY:
+                        xx, yy = yy, xx
+
+                    # Create the new edge or update its capacity
+                    if gX.has_edge(xx, fY):
+                        gX.set_edge_label(xx, fY, gX.edge_label(xx, fY) + capacity)
+                    else:
+                        gX.add_edge(xx, fY, capacity)
+
+                # Store instance to process
+                stack.append((gX, vertices & frozenset(gX)))
+
+        # Finally return the Gomory-Hu tree
+        return T
 
     @doc_index("Leftovers")
     def two_factor_petersen(self, solver=None, verbose=0, *, integrality_tolerance=1e-3):
@@ -9148,7 +9145,7 @@ class Graph(GenericGraph):
     from sage.graphs.weakly_chordal import is_long_hole_free, is_long_antihole_free, is_weakly_chordal
     from sage.graphs.asteroidal_triples import is_asteroidal_triple_free
     chromatic_polynomial = LazyImport('sage.graphs.chrompoly', 'chromatic_polynomial', at_startup=True)
-    from sage.graphs.graph_decompositions.rankwidth import rank_decomposition
+    rank_decomposition = LazyImport('sage.graphs.graph_decompositions.rankwidth', 'rank_decomposition', at_startup=True)
     from sage.graphs.graph_decompositions.tree_decomposition import treewidth
     from sage.graphs.graph_decompositions.vertex_separation import pathwidth
     from sage.graphs.graph_decompositions.tree_decomposition import treelength

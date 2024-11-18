@@ -205,7 +205,7 @@ from sage.misc.cachefunc import cached_function
 # Milnor, p=2
 
 
-def milnor_multiplication(r,s):
+def milnor_multiplication(r, s):
     r"""
     Product of Milnor basis elements r and s at the prime 2.
 
@@ -373,7 +373,7 @@ def multinomial(list):
 # Milnor, p odd
 
 
-def milnor_multiplication_odd(m1,m2,p):
+def milnor_multiplication_odd(m1, m2, p):
     r"""
     Product of Milnor basis elements defined by m1 and m2 at the odd prime p.
 
@@ -569,7 +569,7 @@ def milnor_multiplication_odd(m1,m2,p):
     return result
 
 
-def multinomial_odd(list,p):
+def multinomial_odd(list, p):
     r"""
     Multinomial coefficient of list, mod p.
 
@@ -636,7 +636,7 @@ def multinomial_odd(list,p):
 # Adem relations, Serre-Cartan basis, admissible sequences
 
 
-def binomial_mod2(n,k):
+def binomial_mod2(n, k):
     r"""
     The binomial coefficient `\binom{n}{k}`, computed mod 2.
 
@@ -666,7 +666,7 @@ def binomial_mod2(n,k):
         return 0
 
 
-def binomial_modp(n,k,p):
+def binomial_modp(n, k, p):
     r"""
     The binomial coefficient `\binom{n}{k}`, computed mod `p`.
 

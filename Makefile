@@ -122,7 +122,7 @@ sagelib-clean:
 	     rm -rf c_lib .cython_version cython_debug; \
 	     rm -rf build; find . -name '*.pyc' -o -name "*.so" | xargs rm -f; \
 	     rm -f $$(find . -name "*.pyx" | sed 's/\(.*\)[.]pyx$$/\1.c \1.cpp/'); \
-	     rm -rf sage/ext/interpreters) \
+	     cd sage/ext/interpreters/ && rm -f *.so *.c *.h *.py* *.pxd) \
 	    && (cd "$(SAGE_ROOT)/build/pkgs/sagelib/src/" && rm -rf build); \
 	fi
 
@@ -355,7 +355,7 @@ SPKG_INFO_DEPENDENCIES =							\
 	build/pkgs/*/version_requirements.txt build/pkgs/*/package-version.txt	\
 	build/pkgs/*/distros/*.txt
 
-configure: bootstrap src/doc/bootstrap $(CONFIGURE_DEPENDENCIES) $(SPKG_INFO_DEPENDENCIES)
+configure: bootstrap $(CONFIGURE_DEPENDENCIES) $(SPKG_INFO_DEPENDENCIES)
 	./bootstrap -d
 
 install: all

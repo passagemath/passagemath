@@ -176,6 +176,7 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
     An element can be specified by its vector of coordinates with
     respect to the basis consisting of powers of the generator:
 
+        sage: # needs sage.modules
         sage: k = FiniteField(3^11, 't', impl='pari_ffelt')
         sage: V = k.vector_space(map=False)
         sage: V
@@ -204,7 +205,7 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
         a
         sage: b = gap(a^3); b                                                           # needs sage.libs.gap
         Z(2^3)^3
-        sage: F(b)
+        sage: F(b)                                                                      # needs sage.libs.gap
         a + 1
         sage: a^3
         a + 1
@@ -521,14 +522,20 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
             except (ValueError, IndexError, TypeError):
                 raise TypeError("no coercion defined")
 
-        elif isinstance(x, sage.libs.gap.element.GapElement_FiniteField):
-            try:
-                self.construct_from(x.sage(ring=self._parent))
-            except (ValueError, IndexError, TypeError):
-                raise TypeError("no coercion defined")
-
         else:
-            raise TypeError("no coercion defined")
+            try:
+                from sage.libs.gap.element import GapElement_FiniteField
+            except ImportError:
+                raise TypeError("no coercion defined")
+            else:
+                if isinstance(x, GapElement_FiniteField):
+                    try:
+                        self.construct_from(x.sage(ring=self._parent))
+                    except (ValueError, IndexError, TypeError):
+                        raise TypeError("no coercion defined")
+                else:
+                    raise TypeError("no coercion defined")
+
 
     def _repr_(self):
         """
@@ -1136,7 +1143,8 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
 
         ::
 
-            sage: p = 2^127-1
+            sage: # needs sage.modules
+            sage: p = 2^127 - 1
             sage: F.<t> = GF((p, 3))
             sage: elt = F.random_element()^(p^2+p+1)
             sage: (elt^2).log(elt, p-1)

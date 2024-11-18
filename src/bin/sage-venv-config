@@ -22,6 +22,16 @@ try:
 except ImportError:
     pass
 
+
+try:
+    import sage_wheels
+except ImportError:
+    pass
+else:
+    import os as _os
+    SAGE_WHEELS_PATH = ':'.join(_os.path.join(p, 'bin') for p in sage_wheels.__path__)
+
+
 def _main():
     from argparse import ArgumentParser
     from sys import exit, stdout

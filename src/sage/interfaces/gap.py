@@ -48,6 +48,7 @@ polynomial.
 
 ::
 
+    sage: # needs sage.libs.singular
     sage: singular(389)
     389
     sage: R1 = singular.ring(0, '(x,y)', 'dp')
@@ -68,6 +69,7 @@ so the eval command works.
 
 ::
 
+    sage: # needs sage.libs.singular
     sage: R.<x,y> = PolynomialRing(QQ,2)
     sage: s = F[1][3].sage_polystring(); s
     '-x**5+y**2'

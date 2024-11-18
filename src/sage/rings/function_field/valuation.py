@@ -34,7 +34,7 @@ extensions::
     (x - 1)-adic valuation
     sage: R.<y> = K[]
     sage: L.<y> = K.extension(y^2 - x)                                                  # needs sage.rings.function_field
-    sage: w = v.extensions(L); w                                                        # needs sage.rings.function_field
+    sage: w = v.extensions(L); w                                                        # needs sage.geometry.polyhedron sage.rings.function_field
     [[ (x - 1)-adic valuation, v(y + 1) = 1 ]-adic valuation,
      [ (x - 1)-adic valuation, v(y - 1) = 1 ]-adic valuation]
 
@@ -58,8 +58,8 @@ Run test suite over classical places of finite extensions::
     sage: v = K.valuation(x - 1)
     sage: R.<y> = K[]
     sage: L.<y> = K.extension(y^2 - x)                                                  # needs sage.rings.function_field
-    sage: ws = v.extensions(L)                                                          # needs sage.rings.function_field
-    sage: for w in ws: TestSuite(w).run(max_runs=100)   # long time                     # needs sage.rings.function_field
+    sage: ws = v.extensions(L)                                                          # needs sage.geometry.polyhedron sage.rings.function_field
+    sage: for w in ws: TestSuite(w).run(max_runs=100)   # long time                     # needs sage.geometry.polyhedron sage.rings.function_field
 
 Run test suite for valuations that do not correspond to a classical place::
 
@@ -307,7 +307,7 @@ class FunctionFieldValuationFactory(UniqueFactory):
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^3 + 1/x^3*y + 2/x^4)                            # needs sage.rings.function_field
             sage: v = K.valuation(x)                                                    # needs sage.rings.function_field
-            sage: v.extensions(L)                                                       # needs sage.rings.function_field
+            sage: v.extensions(L)                                                       # needs sage.geometry.polyhedron sage.rings.function_field
             [[ (x)-adic valuation, v(y) = 1 ]-adic valuation
                (in Function field in y defined by y^3 + x*y + 2*x^2 after y |--> 1/x^2*y),
              [ (x)-adic valuation, v(y) = 1/2 ]-adic valuation
@@ -355,7 +355,7 @@ class FunctionFieldValuationFactory(UniqueFactory):
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 + y + x^3)                                    # needs sage.rings.function_field
             sage: v = K.valuation(1/x)                                                  # needs sage.rings.function_field
-            sage: w = v.extension(L)  # indirect doctest                                # needs sage.rings.function_field
+            sage: w = v.extension(L)  # indirect doctest                                # needs sage.geometry.polyhedron sage.rings.function_field
         """
         from sage.categories.function_fields import FunctionFields
         if valuation.domain() not in FunctionFields():
@@ -490,7 +490,7 @@ class DiscreteFunctionFieldValuation_base(DiscreteValuation):
             sage: v = K.valuation(x)
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 - x)                                          # needs sage.rings.function_field
-            sage: v.extensions(L)                                                       # needs sage.rings.function_field
+            sage: v.extensions(L)                                                       # needs sage.geometry.polyhedron sage.rings.function_field
             [(x)-adic valuation]
 
         TESTS:
@@ -500,13 +500,13 @@ class DiscreteFunctionFieldValuation_base(DiscreteValuation):
             sage: v = K.valuation(1/x)
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 - 1/(x^2 + 1))                                # needs sage.rings.function_field
-            sage: sorted(v.extensions(L), key=str)                                      # needs sage.rings.function_field
+            sage: sorted(v.extensions(L), key=str)                                      # needs sage.geometry.polyhedron sage.rings.function_field
             [[ Valuation at the infinite place, v(y + 1/x) = 3 ]-adic valuation,
              [ Valuation at the infinite place, v(y - 1/x) = 3 ]-adic valuation]
 
         Iterated extensions over the infinite place::
 
-            sage: # needs sage.rings.function_field
+            sage: # needs sage.geometry.polyhedron sage.rings.function_field
             sage: K.<x> = FunctionField(GF(2))
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 + y + x^3)
@@ -529,7 +529,7 @@ class DiscreteFunctionFieldValuation_base(DiscreteValuation):
 
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^3 - x^4 - 1)                                    # needs sage.rings.function_field
-            sage: v.extensions(L)                                                       # needs sage.rings.function_field
+            sage: v.extensions(L)                                                       # needs sage.geometry.polyhedron sage.rings.function_field
             [2-adic valuation]
 
         Test that this works in towers::
@@ -541,7 +541,7 @@ class DiscreteFunctionFieldValuation_base(DiscreteValuation):
             sage: R.<z> = L[]
             sage: L.<z> = L.extension(z - y)
             sage: v = K.valuation(x)
-            sage: v.extensions(L)
+            sage: v.extensions(L)                                                       # needs sage.geometry.polyhedron
             [(x)-adic valuation]
         """
         K = self.domain()
@@ -599,7 +599,7 @@ class RationalFunctionFieldValuation_base(FunctionFieldValuation_base):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field
             sage: x = polygen(ZZ, 'x')
             sage: K.<a> = NumberField(x^3 + 6)
             sage: v = K.valuation(2)
@@ -1058,7 +1058,7 @@ class NonClassicalRationalFunctionFieldValuation(InducedRationalFunctionFieldVal
 
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 + 2*x)                                        # needs sage.rings.function_field
-            sage: w.extension(L).residue_ring()                                         # needs sage.rings.function_field
+            sage: w.extension(L).residue_ring()                                         # needs sage.geometry.polyhedron sage.rings.function_field
             Function field in u2 defined by u2^2 + x
 
         TESTS:
@@ -1184,8 +1184,8 @@ class FunctionFieldMappedValuation_base(FunctionFieldValuation_base, MappedValua
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 + y + x^3)                                    # needs sage.rings.function_field
             sage: v = K.valuation(1/x)
-            sage: w = v.extension(L)                                                    # needs sage.rings.function_field
-            sage: w._to_base_domain(y)                                                  # needs sage.rings.function_field
+            sage: w = v.extension(L)                                                    # needs sage.geometry.polyhedron sage.rings.function_field
+            sage: w._to_base_domain(y)                                                  # needs sage.geometry.polyhedron sage.rings.function_field
             x^2*y
         """
         return self._to_base(f)
@@ -1200,8 +1200,8 @@ class FunctionFieldMappedValuation_base(FunctionFieldValuation_base, MappedValua
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 + y + x^3)                                    # needs sage.rings.function_field
             sage: v = K.valuation(1/x)
-            sage: w = v.extension(L)                                                    # needs sage.rings.function_field
-            sage: w._from_base_domain(w._to_base_domain(y))                             # needs sage.rings.function_field
+            sage: w = v.extension(L)                                                    # needs sage.geometry.polyhedron sage.rings.function_field
+            sage: w._from_base_domain(w._to_base_domain(y))                             # needs sage.geometry.polyhedron sage.rings.function_field
             y
 
         r"""
@@ -1217,8 +1217,8 @@ class FunctionFieldMappedValuation_base(FunctionFieldValuation_base, MappedValua
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 + y + x^3)                                    # needs sage.rings.function_field
             sage: v = K.valuation(1/x)
-            sage: w = v.extension(L)                                                    # needs sage.rings.function_field
-            sage: 3*w                                                                   # needs sage.rings.function_field
+            sage: w = v.extension(L)                                                    # needs sage.geometry.polyhedron sage.rings.function_field
+            sage: 3*w                                                                   # needs sage.geometry.polyhedron sage.rings.function_field
             3 * (x)-adic valuation (in Rational function field in x over Finite Field of size 2 after x |--> 1/x)
         """
         from sage.rings.rational_field import QQ
@@ -1236,7 +1236,7 @@ class FunctionFieldMappedValuation_base(FunctionFieldValuation_base, MappedValua
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 + y + x^3)                                    # needs sage.rings.function_field
             sage: v = K.valuation(1/x)
-            sage: v.extension(L)  # indirect doctest                                    # needs sage.rings.function_field
+            sage: v.extension(L)  # indirect doctest                                    # needs sage.geometry.polyhedron sage.rings.function_field
             Valuation at the infinite place
         """
         to_base = repr(self._to_base)
@@ -1255,8 +1255,8 @@ class FunctionFieldMappedValuation_base(FunctionFieldValuation_base, MappedValua
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 - x^4 - 1)
             sage: v = K.valuation(1/x)
-            sage: w0,w1 = v.extensions(L)
-            sage: w0.is_discrete_valuation()
+            sage: w0,w1 = v.extensions(L)                                               # needs sage.geometry.polyhedron
+            sage: w0.is_discrete_valuation()                                            # needs sage.geometry.polyhedron
             True
         """
         return self._base_valuation.is_discrete_valuation()
@@ -1383,23 +1383,23 @@ class FunctionFieldExtensionMappedValuation(FunctionFieldMappedValuationRelative
 
     EXAMPLES::
 
+        sage: # needs sage.geometry.polyhedron sage.rings.function_field
         sage: K.<x> = FunctionField(GF(2))
         sage: R.<y> = K[]
-        sage: L.<y> = K.extension(y^2 + y + x^3)                                        # needs sage.rings.function_field
+        sage: L.<y> = K.extension(y^2 + y + x^3)
         sage: v = K.valuation(1/x)
-        sage: w = v.extension(L)                                                        # needs sage.rings.function_field
-
-        sage: w(x)                                                                      # needs sage.rings.function_field
+        sage: w = v.extension(L)
+        sage: w(x)
         -1
-        sage: w(y)                                                                      # needs sage.rings.function_field
+        sage: w(y)
         -3/2
-        sage: w.uniformizer()                                                           # needs sage.rings.function_field
+        sage: w.uniformizer()
         1/x^2*y
 
     TESTS::
 
         sage: from sage.rings.function_field.valuation import FunctionFieldExtensionMappedValuation
-        sage: isinstance(w, FunctionFieldExtensionMappedValuation)                      # needs sage.rings.function_field
+        sage: isinstance(w, FunctionFieldExtensionMappedValuation)                      # needs sage.geometry.polyhedron sage.rings.function_field
         True
     """
     def _repr_(self):
@@ -1413,7 +1413,7 @@ class FunctionFieldExtensionMappedValuation(FunctionFieldMappedValuationRelative
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 + y + x^3)
             sage: v = K.valuation(1/x)
-            sage: w = v.extension(L); w
+            sage: w = v.extension(L); w                                                 # needs sage.geometry.polyhedron
             Valuation at the infinite place
 
             sage: # needs sage.rings.function_field
@@ -1421,7 +1421,7 @@ class FunctionFieldExtensionMappedValuation(FunctionFieldMappedValuationRelative
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 - 1/x^2 - 1)
             sage: v = K.valuation(1/x)
-            sage: w = v.extensions(L); w
+            sage: w = v.extensions(L); w                                                # needs sage.geometry.polyhedron
             [[ Valuation at the infinite place, v(y + 1) = 2 ]-adic valuation,
              [ Valuation at the infinite place, v(y - 1) = 2 ]-adic valuation]
         """
@@ -1441,8 +1441,8 @@ class FunctionFieldExtensionMappedValuation(FunctionFieldMappedValuationRelative
             sage: R.<y> = K[]
             sage: L.<y> = K.extension(y^2 + y + x^3)
             sage: v = K.valuation(1/x)
-            sage: w = v.extension(L)
-            sage: w.restriction(K) is v
+            sage: w = v.extension(L)                                                    # needs sage.geometry.polyhedron
+            sage: w.restriction(K) is v                                                 # needs sage.geometry.polyhedron
             True
         """
         if ring.is_subring(self.domain().base()):

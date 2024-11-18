@@ -1614,6 +1614,7 @@ In the latter case, please inform the developers.""".format(self.order()))
             sage: R._lift_residue_field_root(2, 2, f, f.derivative(), R(1))
             (3,)
 
+            sage: # needs sage.libs.pari
             sage: R = Zmod(4001**2)
             sage: S.<x> = R[]
             sage: f = x^3 - 2
@@ -1637,6 +1638,7 @@ In the latter case, please inform the developers.""".format(self.order()))
             sage: R._lift_residue_field_root(2, 16, f, f.derivative(), Zmod(2)(1))
             (65535,)
 
+            sage: # needs sage.libs.pari
             sage: R = Zmod(7**4)
             sage: S.<x> = R[]
             sage: f = x^4 - 2
@@ -1660,6 +1662,7 @@ In the latter case, please inform the developers.""".format(self.order()))
             sage: R._lift_residue_field_root(11, 2, f, f.derivative(), Zmod(11)(10))
             []
 
+            sage: # needs sage.libs.pari
             sage: R = Zmod(11**3)
             sage: S.<x> = R[]
             sage: f = x^2 + 123*x + 1
@@ -1773,6 +1776,7 @@ In the latter case, please inform the developers.""".format(self.order()))
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Zmod(41)[]
             sage: (x^3 + x).roots()
             [(0, 1), (32, 1), (9, 1)]
@@ -1786,6 +1790,7 @@ In the latter case, please inform the developers.""".format(self.order()))
         We can find roots without multiplicities over a ring whose modulus is
         a prime power, even a big power:
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Zmod(7^3)[]
             sage: (x^2 + x + 1).roots(multiplicities=False)
             [18, 324]
@@ -1797,49 +1802,50 @@ In the latter case, please inform the developers.""".format(self.order()))
         is a product of primes or prime powers:
 
             sage: R.<x> = Zmod(60)[]
-            sage: (x^2 - 1).roots(multiplicities=False)
+            sage: (x^2 - 1).roots(multiplicities=False)                                 # needs sage.libs.pari
             [29, 41, 49, 1, 59, 11, 19, 31]
 
         We may also ask for roots modulo a quotient of the ring over which the
         polynomial is defined:
 
             sage: R.<x> = Zmod(120)[]
-            sage: (x^2 - 1).roots(multiplicities=False)
+            sage: (x^2 - 1).roots(multiplicities=False)                                 # needs sage.libs.pari
             [89, 41, 49, 1, 29, 101, 109, 61, 59, 11, 19, 91, 119, 71, 79, 31]
-            sage: (x^2 - 1).roots(Zmod(60), multiplicities=False)
+            sage: (x^2 - 1).roots(Zmod(60), multiplicities=False)                       # needs sage.libs.pari
             [29, 41, 49, 1, 59, 11, 19, 31]
 
         TESTS::
 
             sage: R.<x> = Zmod(2)[]
-            sage: x.roots()
+            sage: x.roots()                                                             # needs sage.libs.pari
             [(0, 1)]
 
         Test polynomials with content:
 
             sage: R.<x> = Zmod(4)[]
-            sage: (2*x).roots(multiplicities=False)
+            sage: (2*x).roots(multiplicities=False)                                     # needs sage.libs.pari
             [0, 2]
 
             sage: R.<x> = Zmod(6)[]
-            sage: (3*x).roots(multiplicities=False)
+            sage: (3*x).roots(multiplicities=False)                                     # needs sage.libs.pari
             [0, 4, 2]
 
         Test polynomial with many roots:
 
             sage: R.<x> = Zmod(6)[]
             sage: f = x * (x - 1) * (x - 2) * (x - 3) * (x - 4) * (x - 5)
-            sage: len(f.roots(multiplicities=False))
+            sage: len(f.roots(multiplicities=False))                                    # needs sage.libs.pari
             6
 
         Test finding roots over large prime powers:
 
             sage: R.<x> = Zmod(2**16)[]
-            sage: (x^3 + 5).roots(multiplicities=False)
+            sage: (x^3 + 5).roots(multiplicities=False)                                 # needs sage.libs.pari
             [45475]
-            sage: (x^2 + 46*x + 1).roots(multiplicities=False)
+            sage: (x^2 + 46*x + 1).roots(multiplicities=False)                          # needs sage.libs.pari
             [421, 33189, 16805, 49573, 8613, 41381, 24997, 57765, 7725, 40493, 24109, 56877, 15917, 48685, 32301, 65069]
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Zmod(3**16)[]
             sage: (x^2 + 2).roots(multiplicities=False)
             [24620738, 18425983]
@@ -1850,6 +1856,7 @@ In the latter case, please inform the developers.""".format(self.order()))
 
         Test some larger primes:
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Zmod(41**4)[]
             sage: (x^2 + 2).roots(multiplicities=False)
             [2208905, 616856]
@@ -1859,6 +1866,7 @@ In the latter case, please inform the developers.""".format(self.order()))
 
         We can't find roots with multiplicities in non-fields:
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Zmod(6)[]
             sage: (x + 1).roots()
             Traceback (most recent call last):
@@ -1914,6 +1922,7 @@ In the latter case, please inform the developers.""".format(self.order()))
         Sage allows us to coerce polynomials from one modulus to another,
         and that makes the following defined:
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = Zmod(100)[]
             sage: (x^2 - 1).roots(Zmod(99), multiplicities=False) == (x^2 - 1).change_ring(Zmod(99)).roots(multiplicities=False)
             True

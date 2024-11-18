@@ -93,9 +93,10 @@ def enum_affine_rational_field(X, B):
 
     ::
 
+        sage: # needs sage.libs.singular sage.schemes
         sage: A.<x,y> = AffineSpace(2, QQ)
-        sage: C = Curve(x^2 + y - x)                                                    # needs sage.libs.singular
-        sage: enum_affine_rational_field(C, 10)         # long time (3 s)               # needs sage.libs.singular
+        sage: C = Curve(x^2 + y - x)
+        sage: enum_affine_rational_field(C, 10)         # long time (3 s)
         [(-2, -6), (-1, -2), (-2/3, -10/9), (-1/2, -3/4), (-1/3, -4/9),
          (0, 0), (1/3, 2/9), (1/2, 1/4), (2/3, 2/9), (1, 0),
          (4/3, -4/9), (3/2, -3/4), (5/3, -10/9), (2, -2), (3, -6)]
@@ -192,7 +193,7 @@ def enum_affine_number_field(X, **kwds):
         sage: K = NumberField(u^2 + 2, 'v')
         sage: A.<x,y,z> = AffineSpace(K, 3)
         sage: X = A.subscheme([y^2 - x])
-        sage: enum_affine_number_field(X(K), bound=2**0.5)
+        sage: enum_affine_number_field(X(K), bound=2**0.5)                              # needs sage.geometry.polyhedron
         [(0, 0, -1), (0, 0, -v), (0, 0, -1/2*v), (0, 0, 0), (0, 0, 1/2*v),
          (0, 0, v), (0, 0, 1), (1, -1, -1), (1, -1, -v), (1, -1, -1/2*v),
          (1, -1, 0), (1, -1, 1/2*v), (1, -1, v), (1, -1, 1), (1, 1, -1),
@@ -206,7 +207,7 @@ def enum_affine_number_field(X, **kwds):
         sage: K = NumberField(u^2 + 3, 'v')
         sage: A.<x,y> = AffineSpace(K, 2)
         sage: X = A.subscheme(x - y)
-        sage: enum_affine_number_field(X, bound=3**0.25)
+        sage: enum_affine_number_field(X, bound=3**0.25)                                # needs sage.geometry.polyhedron
         [(-1, -1), (-1/2*v - 1/2, -1/2*v - 1/2), (1/2*v - 1/2, 1/2*v - 1/2),
          (0, 0), (-1/2*v + 1/2, -1/2*v + 1/2), (1/2*v + 1/2, 1/2*v + 1/2), (1, 1)]
     """

@@ -9,4 +9,18 @@ from sage_setup import sage_setup
 
 sage_setup('sagemath-symbolics',
            required_modules=('gsl', 'Singular', 'ecl'),
-           spkgs=['maxima'])
+           spkgs=['maxima'],
+           package_data={
+               "sage.interfaces": [
+                   "sage-maxima.lisp",
+               ],
+               "sage": [
+                   "ext_data/*",
+                   "ext_data/kenzo/*",
+                   "ext_data/singular/*",
+                   "ext_data/singular/function_field/*",
+                   "ext_data/magma/*",
+                   "ext_data/magma/latex/*",
+                   "ext_data/magma/sage/*",
+               ],
+            })

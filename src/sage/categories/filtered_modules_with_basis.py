@@ -852,7 +852,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
                 raise ValueError("the zero element does not have a well-defined degree")
             if not self.is_homogeneous():
                 raise ValueError("element is not homogeneous")
-            return self.parent().degree_on_basis(self.leading_support())
+            return self.parent().degree_on_basis(next(iter(self.support())))
 
         # default choice for degree; will be overridden as necessary
         degree = homogeneous_degree
@@ -1187,10 +1187,12 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
                     sage: OS.hilbert_series()
                     2*t^2 + 3*t + 1
 
+                    sage: # needs sage.modules
                     sage: OS = matroids.Uniform(5, 3).orlik_solomon_algebra(ZZ)
                     sage: OS.hilbert_series()
                     t^3 + 3*t^2 + 3*t + 1
 
+                    sage: # needs sage.modules
                     sage: OS = matroids.PG(2, 3).orlik_solomon_algebra(ZZ['x','y'])
                     sage: OS.hilbert_series()
                     27*t^3 + 39*t^2 + 13*t + 1

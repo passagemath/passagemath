@@ -1252,8 +1252,8 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
             ...
             ValueError: other matrix must be square, not 2 x 3
 
-            sage: A = matrix(CDF, 2, [1, 2, 3, 4*I])
-            sage: A.eigenvalues(algorithm='symmetric')
+            sage: A = matrix(CDF, 2, [1, 2, 3, 4*I])                                    # needs sage.symbolic
+            sage: A.eigenvalues(algorithm='symmetric')                                  # needs sage.symbolic
             Traceback (most recent call last):
             ...
             TypeError: cannot apply symmetric algorithm to matrix with complex entries
@@ -1279,8 +1279,8 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
         input::
 
             sage: A = matrix.identity(CDF, 2)
-            sage: B = matrix(CDF, [[2, 1+I], [1-I, 3]])
-            sage: A.eigenvalues(B, algorithm='hermitian', homogeneous=True)  # tol 1e-14
+            sage: B = matrix(CDF, [[2, 1 + I], [1 - I, 3]])                                 # needs sage.symbolic
+            sage: A.eigenvalues(B, algorithm='hermitian', homogeneous=True)  # tol 1e-14    # needs sage.symbolic
             [(0.25, 1.0), (1.0, 1.0)]
 
         Test the deprecation::
@@ -2438,7 +2438,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
         self.cache(key, unitary)
         return unitary
 
-    def _is_hermitian_orthonormal(self, tol = 1e-12, skew=False):
+    def _is_hermitian_orthonormal(self, tol=1e-12, skew=False):
         r"""
         Return ``True`` if the matrix is (skew-)Hermitian.
 
@@ -2559,7 +2559,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
         self.cache(key, hermitian)
         return hermitian
 
-    def is_hermitian(self, tol=1e-12, algorithm = "naive"):
+    def is_hermitian(self, tol=1e-12, algorithm="naive"):
         r"""
         Return ``True`` if the matrix is equal to its conjugate-transpose.
 
@@ -2686,7 +2686,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
         else:
             raise ValueError("algorithm must be 'naive' or 'orthonormal', not {0}".format(algorithm))
 
-    def is_skew_hermitian(self, tol = 1e-12, algorithm = 'orthonormal'):
+    def is_skew_hermitian(self, tol=1e-12, algorithm='orthonormal'):
         r"""
         Return ``True`` if the matrix is equal to the negative of its
         conjugate transpose.
@@ -3641,7 +3641,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
             posdef = self.fetch(cache_str)
         return posdef
 
-    cdef _vector_times_matrix_(self,Vector v):
+    cdef _vector_times_matrix_(self, Vector v):
         if self._nrows == 0 or self._ncols == 0:
             return self.row_ambient_module().zero_vector()
         global numpy
@@ -3654,7 +3654,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
         ans = numpy.dot(v_numpy,self._matrix_numpy)
         return M(ans)
 
-    cdef _matrix_times_vector_(self,Vector v):
+    cdef _matrix_times_vector_(self, Vector v):
         if self._nrows == 0 or self._ncols == 0:
             return self.column_ambient_module().zero_vector()
 
@@ -3668,7 +3668,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
         ans = numpy.dot(self._matrix_numpy, v_numpy)
         return M(ans)
 
-    def _replace_self_with_numpy32(self,numpy_matrix):
+    def _replace_self_with_numpy32(self, numpy_matrix):
         """
 
         EXAMPLES::

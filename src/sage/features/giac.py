@@ -3,7 +3,9 @@ r"""
 Feature for testing the presence of ``giac``
 """
 
-from . import Executable, FeatureTestResult
+from . import Executable, FeatureTestResult, PythonModule
+from .join_feature import JoinFeature
+
 
 class Giac(Executable):
     r"""
@@ -13,7 +15,7 @@ class Giac(Executable):
 
         sage: from sage.features.giac import Giac
         sage: Giac().is_present()  # needs giac
-        FeatureTestResult('giac', True)
+        FeatureTestResult('giac_executable', True)
     """
     def __init__(self):
         r"""
@@ -23,8 +25,11 @@ class Giac(Executable):
             sage: isinstance(Giac(), Giac)
             True
         """
-        Executable.__init__(self, 'giac', executable='giac',
+        Executable.__init__(self, 'giac_executable', executable='giac',
                             spkg='giac', type='standard')
 
 def all_features():
-    return [Giac()]
+    return [JoinFeature("giac",
+                        (Giac(),
+                         PythonModule('sage.interfaces.giac')),
+                        spkg='sagemath_giac', type='standard')]

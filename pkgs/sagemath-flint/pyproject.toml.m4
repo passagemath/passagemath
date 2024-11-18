@@ -62,8 +62,8 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-     SPKG_INSTALL_REQUIRES_sagemath_repl
-     SPKG_INSTALL_REQUIRES_sagemath_modules
+     "passagemath-repl",
+     "passagemath-modules",
 ]
 
 [tool.setuptools]

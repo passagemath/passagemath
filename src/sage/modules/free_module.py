@@ -5127,6 +5127,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
         EXAMPLES::
 
+            sage: # needs scipy
             sage: V = RDF^3; W = V.span([[1,0,-1], [1,-1,0]])
             sage: Q = V/W; Q
             Vector space quotient V/W of dimension 1 over Real Double Field where

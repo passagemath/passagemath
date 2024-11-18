@@ -120,24 +120,24 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test        = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+test        = ["passagemath-repl"]
 
 # general libraries
-flint       = [SPKG_INSTALL_REQUIRES_sagemath_flint]
+flint       = ["passagemath-flint"]
 fpylll      = [SPKG_INSTALL_REQUIRES_fpylll]
-linbox      = [SPKG_INSTALL_REQUIRES_sagemath_linbox]
-pari        = [SPKG_INSTALL_REQUIRES_sagemath_pari]
+linbox      = ["passagemath-linbox"]
+pari        = ["passagemath-pari"]
 
 # polyhedral libraries
-4ti2        = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
-cddlib      = [SPKG_INSTALL_REQUIRES_sagemath_cddlib]
+4ti2        = ["passagemath-latte-4ti2"]
+cddlib      = ["passagemath-cddlib"]
 latte       = ["passagemath-polyhedra[latte_int]"]  # alias
-latte_int   = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
+latte_int   = ["passagemath-latte-4ti2"]
 normaliz    = [SPKG_INSTALL_REQUIRES_pynormaliz]
-palp        = [SPKG_INSTALL_REQUIRES_sagemath_palp]
+palp        = ["passagemath-palp"]
 polymake    = [SPKG_INSTALL_REQUIRES_jupymake]
 ppl         = []  # no extra required
-topcom      = [SPKG_INSTALL_REQUIRES_sagemath_topcom]
+topcom      = ["passagemath-topcom"]
 
 # optimization libraries
 cbc         = ["passagemath-polyhedra[cbc_sage]"]
@@ -162,7 +162,9 @@ RDF         = ["passagemath-polyhedra[cddlib]"]
 NumberField = ["passagemath-polyhedra[flint]"]
 
 # features
-plot        = [SPKG_INSTALL_REQUIRES_sagemath_plot]
+graphs      = ["passagemath-graphs"]
+groups      = ["passagemath-groups"]
+plot        = ["passagemath-plot"]
 
 # the whole package
 standard    = ["passagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,pari,plot,RDF]"]

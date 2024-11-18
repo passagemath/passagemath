@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-latte-4ti2
+# sage.doctest: optional - 4ti2
 r"""
 Interface to 4ti2
 

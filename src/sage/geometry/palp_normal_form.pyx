@@ -61,6 +61,8 @@ def _palp_PM_max(Matrix_integer_dense PM, check=False):
         sage: PM_max = PM.permutation_normal_form()
         sage: PM_max == o._palp_PM_max()
         True
+
+        sage: # needs polytopes_db
         sage: P2 = ReflexivePolytope(2, 0)
         sage: PM_max, permutations = P2._palp_PM_max(check=True)
         sage: PM_max

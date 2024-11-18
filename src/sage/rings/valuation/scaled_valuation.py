@@ -199,7 +199,7 @@ class ScaledValuation_generic(DiscreteValuation):
         EXAMPLES::
 
             sage: v = 3*ZZ.valuation(5)
-            sage: v.extensions(GaussianIntegers().fraction_field())                     # needs sage.rings.number_field
+            sage: v.extensions(GaussianIntegers().fraction_field())                     # needs sage.geometry.polyhedron sage.rings.number_field
             [3 * [ 5-adic valuation, v(x + 2) = 1 ]-adic valuation,
              3 * [ 5-adic valuation, v(x + 3) = 1 ]-adic valuation]
         """

@@ -42,7 +42,6 @@ from sage.misc.cachefunc import cached_method
 from sage.misc.prandom import randrange
 from sage.rings.integer cimport Integer
 import sage.rings.abc
-from sage.misc.superseded import deprecation_cython as deprecation, deprecated_function_alias
 
 # Copied from sage.misc.fast_methods, used in __hash__() below.
 cdef int SIZEOF_VOID_P_SHIFT = 8*sizeof(void *) - 4
@@ -458,8 +457,6 @@ cdef class FiniteField(Field):
             r = r * g + self(d)
         return r
 
-    fetch_int = deprecated_function_alias(33941, from_integer)
-
     def _is_valid_homomorphism_(self, codomain, im_gens, base_map=None):
         """
         Return ``True`` if the map from ``self`` to codomain sending
@@ -563,7 +560,7 @@ cdef class FiniteField(Field):
 
         TESTS::
 
-            sage: for K in [GF(2^18,'a'), GF(3^2,'a'), GF(47^3,'a')]:
+            sage: for K in [GF(2^18,'a'), GF(3^2,'a'), GF(47^3,'a')]:                   # needs sage.modules
             ....:     R.<x> = K[]
             ....:     if K.characteristic() < 5: m = 4
             ....:     else: m = 1
@@ -847,7 +844,7 @@ cdef class FiniteField(Field):
         """
         return 1
 
-    def is_field(self, proof = True):
+    def is_field(self, proof=True):
         """
         Return whether or not the finite field is a field, i.e.,
         always returns ``True``.
@@ -999,16 +996,16 @@ cdef class FiniteField(Field):
             sage: k = GF(199)
             sage: k.modulus()
             x + 198
-            sage: var('x')
+            sage: var('x')                                                              # needs sage.symbolic
             x
-            sage: k = GF(199, modulus=x+1)
-            sage: k.modulus()
+            sage: k = GF(199, modulus=x+1)                                              # needs sage.symbolic
+            sage: k.modulus()                                                           # needs sage.symbolic
             x + 1
 
         The given modulus is always made monic::
 
-            sage: k.<a> = GF(7^2, modulus=2*x^2 - 3, impl='pari_ffelt')
-            sage: k.modulus()
+            sage: k.<a> = GF(7^2, modulus=2*x^2 - 3, impl='pari_ffelt')                 # needs sage.symbolic
+            sage: k.modulus()                                                           # needs sage.symbolic
             x^2 + 2
 
         TESTS:
@@ -1021,15 +1018,15 @@ cdef class FiniteField(Field):
             x + 1
             sage: GF(2, impl='ntl').modulus()                                           # needs sage.libs.ntl
             x + 1
-            sage: GF(2, impl='modn', modulus=x).modulus()
+            sage: GF(2, impl='modn', modulus=x).modulus()                               # needs sage.symbolics
             x
-            sage: GF(2, impl='givaro', modulus=x).modulus()                             # needs sage.libs.linbox
+            sage: GF(2, impl='givaro', modulus=x).modulus()                             # needs sage.libs.linbox sage.symbolics
             x
-            sage: GF(2, impl='ntl', modulus=x).modulus()                                # needs sage.libs.ntl
+            sage: GF(2, impl='ntl', modulus=x).modulus()                                # needs sage.libs.ntl sage.symbolics
             x
-            sage: GF(13^2, 'a', impl='givaro', modulus=x^2 + 2).modulus()               # needs sage.libs.linbox
+            sage: GF(13^2, 'a', impl='givaro', modulus=x^2 + 2).modulus()               # needs sage.libs.linbox sage.symbolics
             x^2 + 2
-            sage: GF(13^2, 'a', impl='pari_ffelt', modulus=x^2 + 2).modulus()           # needs sage.libs.pari
+            sage: GF(13^2, 'a', impl='pari_ffelt', modulus=x^2 + 2).modulus()           # needs sage.libs.pari sage.symbolics
             x^2 + 2
         """
         # Normally, this is set by the constructor of the implementation
@@ -2222,7 +2219,7 @@ cdef class FiniteField(Field):
         TESTS::
 
             sage: fields = [GF(2), GF(3), GF(65537), GF(2^10), GF(163^5)]
-            sage: for F in fields:
+            sage: for F in fields:                                                      # needs sage.modules
             ....:     for _ in range(1000):
             ....:         a = F.random_element()
             ....:         order = choice(["little", "big"])

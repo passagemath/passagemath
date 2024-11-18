@@ -1,0 +1,15 @@
+diff --git a/include/mps/private/system/memory-file-stream.h b/include/mps/private/system/memory-file-stream.h
+index 0029bc9..a11b998 100644
+--- a/include/mps/private/system/memory-file-stream.h
++++ b/include/mps/private/system/memory-file-stream.h
+@@ -47,6 +47,8 @@ MPS_END_DECLS
+ 
+ #ifdef __cplusplus
+ 
++#undef isnan
++#undef isinf
+ #include <iostream>
+ #include <sstream>
+
+--
+2.40.1

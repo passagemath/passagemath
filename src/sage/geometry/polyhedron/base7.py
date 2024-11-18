@@ -427,12 +427,13 @@ class Polyhedron_base7(Polyhedron_base6):
             ...
             ValueError: LattE integrale cannot be applied over inexact rings
         """
-        from sage.interfaces.latte import integrate
         from sage.rings.real_double import RDF
 
         if self.base_ring() == RDF:
             raise ValueError("LattE integrale cannot be applied over inexact rings")
         else:
+            from sage.interfaces.latte import integrate
+
             return integrate(self.cdd_Hrepresentation(), algorithm=algorithm, cdd=True, verbose=verbose, **kwargs)
 
     def _volume_normaliz(self, measure='induced'):
@@ -662,7 +663,7 @@ class Polyhedron_base7(Polyhedron_base6):
         Induced volumes work with lrs (:issue:`33410`)::
 
             sage: P = Polyhedron([[0, 0], [1, 1]])
-            sage: P.volume(measure='induced', engine='lrs')             # optional - lrslib
+            sage: P.volume(measure='induced', engine='lrs')             # optional - lrslib sage.rings.number_field
             1.414213562373095?
         """
         from sage.features import FeatureNotPresentError
@@ -804,6 +805,7 @@ class Polyhedron_base7(Polyhedron_base6):
         If the polyhedron has floating point coordinates, an inexact result can
         be obtained if we transform to rational coordinates::
 
+            sage: # needs sage.rings.real_interval_field
             sage: P = 1.4142*polytopes.cube()
             sage: P_QQ = Polyhedron(vertices=[[QQ(vi) for vi in v] for v in P.vertex_generator()])
             sage: RDF(P_QQ.integrate(x^2*y^2*z^2))                      # optional - latte_int

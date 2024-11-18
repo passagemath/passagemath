@@ -299,7 +299,7 @@ class AlgebraicScheme_subscheme_toric(AlgebraicScheme_subscheme):
             sage: X.<x,y,u,v,t> = CPRFanoToricVariety(Delta_polar=lp)
             sage: Y = X.subscheme(x*v + y*u + t)
             sage: cone = Cone([(1,0,0), (1,1,0), (1,1,1), (1,0,1)])
-            sage: Y.affine_algebraic_patch(cone)
+            sage: Y.affine_algebraic_patch(cone)                                        # needs sage.libs.singular
             Closed subscheme of Affine Space of dimension 4 over Rational Field defined by:
               z0*z2 - z1*z3,
               z1 + z3 + 1

@@ -31,18 +31,19 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+test            = ["passagemath-repl"]
 
 # by library
 lrcalc          = [SPKG_INSTALL_REQUIRES_lrcalc_python]
 symmetrica      = []
 
 # by feature
-graphs          = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
-modules         = [SPKG_INSTALL_REQUIRES_sagemath_modules]
+graphs          = ["passagemath-graphs"]
+modules         = ["passagemath-modules"]
+findstat        = [SPKG_INSTALL_REQUIRES_requests]
 
 # everything
-standard        = ["passagemath-combinat[lrcalc,symmetrica,graphs,modules]"]
+standard        = ["passagemath-combinat[findstat,lrcalc,symmetrica,graphs,modules]"]
 
 [tool.setuptools]
 include-package-data = false

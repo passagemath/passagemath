@@ -1008,6 +1008,7 @@ def number_of_irreducible_polynomials(n, q=None, m=1):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: number_of_irreducible_polynomials(8, q=2)
         30
         sage: number_of_irreducible_polynomials(9, q=9)
@@ -1017,6 +1018,7 @@ def number_of_irreducible_polynomials(n, q=None, m=1):
 
     ::
 
+        sage: # needs sage.libs.pari
         sage: poly = number_of_irreducible_polynomials(12); poly
         1/12*q^12 - 1/12*q^6 - 1/12*q^4 + 1/12*q^2
         sage: poly(5) == number_of_irreducible_polynomials(12, q=5)
@@ -1028,6 +1030,7 @@ def number_of_irreducible_polynomials(n, q=None, m=1):
 
     This function is *much* faster than enumerating the polynomials::
 
+        sage: # needs sage.libs.pari
         sage: num = number_of_irreducible_polynomials(99, q=101)
         sage: num.bit_length()
         653

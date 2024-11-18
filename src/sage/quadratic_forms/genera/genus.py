@@ -2573,6 +2573,7 @@ class GenusSymbol_global_ring:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: gram = matrix(ZZ, 4, [2,0,1,0, 0,2,1,0, 1,1,5,0, 0,0,0,16])
             sage: genus = Genus(gram)
             sage: genus._proper_spinor_kernel()
@@ -2612,6 +2613,7 @@ class GenusSymbol_global_ring:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: gram = matrix(ZZ, 4, [2,0,1,0, 0,2,1,0, 1,1,5,0, 0,0,0,16])
             sage: genus = Genus(gram)
             sage: genus._proper_spinor_kernel()
@@ -2649,6 +2651,7 @@ class GenusSymbol_global_ring:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: g = matrix(ZZ, 3, [2,1,0, 1,2,0, 0,0,18])
             sage: gen = Genus(g)
             sage: gen.spinor_generators(False)
@@ -2684,6 +2687,7 @@ class GenusSymbol_global_ring:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: gram = matrix(ZZ, 4, [2,0,1,0, 0,2,1,0, 1,1,5,0, 0,0,0,16])
             sage: genus = Genus(gram)
             sage: b, j = genus._proper_is_improper(); b
@@ -2694,6 +2698,7 @@ class GenusSymbol_global_ring:
         This genus consists of only on (improper) class, hence spinor genus and
         improper spinor genus differ::
 
+            sage: # needs sage.libs.gap
             sage: gram = matrix(ZZ, 4, [3,0,1,-1, 0,3,-1,-1, 1,-1,6,0, -1,-1,0,6])
             sage: genus = Genus(gram)
             sage: b, j = genus._proper_is_improper(); b
@@ -2789,6 +2794,7 @@ class GenusSymbol_global_ring:
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: G = IntegralLattice("A4").twist(3).genus()
             sage: G.direct_sum(G)
             Genus of
@@ -2991,6 +2997,7 @@ class GenusSymbol_global_ring:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: from sage.quadratic_forms.genera.genus import genera
             sage: G = Genus(matrix.diagonal([1, 1, 7]))
             sage: G.representatives()
@@ -3002,6 +3009,7 @@ class GenusSymbol_global_ring:
 
         Indefinite genera work as well::
 
+            sage: # needs sage.libs.gap
             sage: G = Genus(matrix(ZZ, 3, [6,3,0, 3,6,0, 0,0,2]))
             sage: G.representatives()
             (

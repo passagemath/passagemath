@@ -58,6 +58,8 @@ SAGE_SPKG_OPTIONS = @SAGE_SPKG_OPTIONS@
 # set to empty if --disable-doc is used
 SAGE_DOCS = @SAGE_DOCS@
 SAGE_DOCS_DISABLED_MESSAGE = This Sage build is configured with "configure --disable-doc", so building the documentation will not work.
+SAGE_VENV_DOCS = @SAGE_VENV_DOCS@
+SAGE_VENV_DOCS_DISABLED_MESSAGE = This Sage build is configured with "configure --disable-doc", so building the documentation will not work.
 
 # Where the Sage distribution installs Python packages.
 # This can be overridden by 'make SAGE_VENV=/some/venv'.
@@ -135,6 +137,7 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sage_sws2rst				\
 	sage_setup				\
 	sagemath_environment			\
+	sagemath_repl
 
 # Packages for which we build wheels for PyPI
 PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
@@ -145,6 +148,8 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_plot				\
 	sagemath_polyhedra			\
 	sagemath_graphs				\
+	sagemath_planarity			\
+	sagemath_rankwidth			\
 	sagemath_combinat			\
 	sagemath_schemes			\
 <<<<<<< HEAD
@@ -183,8 +188,13 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_latte_4ti2			\
 	sagemath_cddlib				\
 	sagemath_topcom				\
+	sagemath_gfan				\
+	sagemath_frobby				\
 	sagemath_nauty				\
 	sagemath_palp				\
+	sagemath_qepcad				\
+	sagemath_lrslib				\
+	sagemath_sympow				\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
 	sagemath_meataxe			\
@@ -193,11 +203,14 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_mpmath				\
 	sagemath_standard_no_symbolics
 
-# sage_docbuild is here, not in PYPI_WHEEL_PACKAGES, because it depends on sagelib
+# sage_docbuild is here, not in PYPI_WHEEL_PACKAGES, because it depends on sagelib.
+# This can be changed when we have separate 'dependencies_build' files.
 WHEEL_PACKAGES = $(PYPI_WHEEL_PACKAGES)		\
 	sage_conf				\
 	sagelib					\
-	sage_docbuild
+	sage_docbuild				\
+	sagemath_doc_html			\
+	sagemath_doc_pdf
 
 # Packages for which build sdists for PyPI
 PYPI_SDIST_PACKAGES = $(WHEEL_PACKAGES)
@@ -509,7 +522,7 @@ pypi-noarch-wheels:
 	for a in $(PYPI_NOARCH_WHEEL_PACKAGES); do \
 	    rm -f $(SAGE_VENV)/var/lib/sage/installed/$$a-*; \
 	done
-	$(MAKE_REC) SAGE_EDITABLE=no SAGE_WHEELS=yes $(PYPI_NOARCH_WHEEL_PACKAGES)
+	$(MAKE_REC) SAGE_EDITABLE=no SAGE_WHEELS=yes $(PYPI_NOARCH_WHEEL_PACKAGES:sagemath_repl=sagemath_repl-no-deps)
 	@echo "Built wheels are in venv/var/lib/sage/wheels/"
 
 pypi-wheels:
@@ -794,7 +807,7 @@ endif
 define SCRIPT_PACKAGE_templ
 $(1)-build-deps: $(3)
 
-$(eval source_deps_$(1) = $(shell sed 's,^,$(SAGE_ROOT)/build/pkgs/$(1)/src/,' $(SAGE_ROOT)/build/pkgs/$(1)/src/*.egg-info/SOURCES.txt 2>/dev/null || :))
+$(eval source_deps_$(1) = $(shell for egg_info in $$(grep -l "^Version: $(2)" $(SAGE_ROOT)/build/pkgs/$(1)/src/*.egg-info/PKG-INFO); do sed 's,^,$(SAGE_ROOT)/build/pkgs/$(1)/src/,' $$(dirname $$egg_info)/SOURCES.txt; done 2>/dev/null || :))
 
 $$($(5))/$(SPKG_INST_RELDIR)/$(1)-$(2): $(source_deps_$(1)) $(3) $(if $(check_deps_$(1)),$$(and $$(filter-out no,$$(SAGE_CHECK_$(1))),$(4)))
 	+$(MAKE_REC) $(1)-$(5)-no-deps
@@ -848,7 +861,7 @@ $(1)-sdist: FORCE python_build sage_setup cython meson_python
 		export CXX=$$$$(echo "$$$$CXX" | sed 's/-std=[a-z0-9+]*//g') && \
 		'$$(SAGE_ROOT)/build/pkgs/$(1)/spkg-src'
 
-$(1)-cibuildwheel: cibuildwheel $(1)-sdist sage_conf
+$(1)-cibuildwheel: cibuildwheel $(1)-sdist sage_conf sage_setup sagemath_environment sagemath_repl
 	$(AM_V_at) cd '$$(SAGE_ROOT)' && \
 		. '$$(SAGE_ROOT)/src/bin/sage-src-env-config' && \
 		. '$$(SAGE_ROOT)/src/bin/sage-env-config' && \
@@ -858,7 +871,7 @@ $(1)-cibuildwheel: cibuildwheel $(1)-sdist sage_conf
 		(cd '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked' && \
 		 tar xfz $$$$(ls -t $$$$SAGE_DISTFILES/*$(1)*.tar.gz | head -n1)) && \
 		export CIBW_BEFORE_ALL='echo > constraints.txt' && \
-		export CIBW_BEFORE_BUILD='cat $$(SAGE_VENV)/var/lib/sage/scripts/{sage_conf,sage_setup}/spkg-requirements.txt > constraints.txt' && \
+		export CIBW_BEFORE_BUILD='cat $$(SAGE_VENV)/var/lib/sage/scripts/{sage_conf,sage_setup,sagemath_environment,sagemath_repl}/spkg-requirements.txt > constraints.txt' && \
 		export CIBW_ENVIRONMENT='PATH=$$$$(pwd)/prefix/bin:$$$$PATH CPATH=$$$$(pwd)/prefix/include:$$$$CPATH LIBRARY_PATH=$$$$(pwd)/prefix/lib:$$$$LIBRARY_PATH PKG_CONFIG_PATH=$$$$(pwd)/prefix/lib/pkgconfig:$$$$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$$$$(pwd)/constraints.txt PIP_FIND_LINKS=file://$$$$(pwd)/wheelhouse SAGE_NUM_THREADS=6' && \
 		env | grep '^CIBW' && \
 		python3 -m cibuildwheel --output-dir '$$(SAGE_ROOT)/wheelhouse' '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked'/*$(1)*

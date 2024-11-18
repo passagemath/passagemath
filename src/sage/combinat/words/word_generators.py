@@ -590,7 +590,7 @@ class WordGenerator:
         else:
             raise NotImplementedError
 
-    def _FibonacciWord_RecursiveConstructionIterator(self,alphabet=(0,1)):
+    def _FibonacciWord_RecursiveConstructionIterator(self, alphabet=(0, 1)):
         r"""
         Iterate over the symbols of the Fibonacci word, as defined by
         the following recursive construction: the Fibonacci word is the
@@ -660,7 +660,7 @@ class WordGenerator:
         """
         return WordMorphism(morphism).fixed_point(letter=first_letter)
 
-    def CodingOfRotationWord(self, alpha, beta, x=0, alphabet=(0,1)):
+    def CodingOfRotationWord(self, alpha, beta, x=0, alphabet=(0, 1)):
         r"""
         Return the infinite word obtained from the coding of rotation of
         parameters `(\alpha,\beta, x)` over the given two-letter alphabet.
@@ -696,7 +696,7 @@ class WordGenerator:
         w = InfiniteWords(alphabet)(f, datatype='callable')
         return w
 
-    def _CodingOfRotationWord_function(self, n, alpha, beta, x=0, alphabet=(0,1)):
+    def _CodingOfRotationWord_function(self, n, alpha, beta, x=0, alphabet=(0, 1)):
         r"""
         Internal function that returns the symbol in position `n` of the
         coding of rotation word corresponding to the parameters `\alpha`,
@@ -902,7 +902,7 @@ class WordGenerator:
                    datatype='iter')
         return w
 
-    def _CharacteristicSturmianWord_LetterIterator(self, cf, alphabet=(0,1)):
+    def _CharacteristicSturmianWord_LetterIterator(self, cf, alphabet=(0, 1)):
         r"""
         Return an iterator over the symbols of the characteristic
         Sturmian word of slope ``cf``.
@@ -968,7 +968,7 @@ class WordGenerator:
             except StopIteration:
                 return
 
-    def KolakoskiWord(self, alphabet=(1,2)):
+    def KolakoskiWord(self, alphabet=(1, 2)):
         r"""
         Return the Kolakoski word over the given alphabet and
         starting with the first letter of the alphabet.
@@ -1394,7 +1394,7 @@ class WordGenerator:
 
     ChristoffelWord = LowerChristoffelWord
 
-    def UpperChristoffelWord(self, p, q, alphabet=(0,1)):
+    def UpperChristoffelWord(self, p, q, alphabet=(0, 1)):
         r"""
         Return the upper Christoffel word of slope `p/q`, where
         `p` and `q` are relatively prime nonnegative
