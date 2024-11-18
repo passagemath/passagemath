@@ -92,6 +92,7 @@ jobs:
       - name: Update known test failures
         if: (success() || failure())
         run: |
+          set -x
           export SAGE_ROOT=$(pwd)
           WHEELHOUSE=$(pwd)/wheelhouse
           export PIP_FIND_LINKS=file://$WHEELHOUSE
