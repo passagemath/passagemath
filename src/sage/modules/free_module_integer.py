@@ -430,7 +430,7 @@ class FreeModule_submodule_with_basis_integer(FreeModule_submodule_with_basis_pi
         basis = matrix(ZZ, len(basis), len(basis[0]), basis)
         basis.set_immutable()
 
-        if self.reduced_basis[0].norm() > basis[0].norm():
+        if self.reduced_basis[0].dot_product(self.reduced_basis[0]) > basis[0].dot_product(basis[0]):
             self._reduced_basis = basis
         return basis
 
