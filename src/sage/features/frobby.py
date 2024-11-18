@@ -25,7 +25,7 @@ class Frobby(Executable):
 
         sage: from sage.features.frobby import Frobby
         sage: Frobby().is_present()  # optional - frobby
-        FeatureTestResult('frobby', True)
+        FeatureTestResult('frobby_executable', True)
     """
     def __init__(self):
         r"""

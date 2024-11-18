@@ -26,7 +26,7 @@ class FriCAS(Executable):
 
         sage: from sage.features.fricas import FriCAS
         sage: FriCAS().is_present()  # optional - fricas
-        FeatureTestResult('fricas', True)
+        FeatureTestResult('fricas_executable', True)
     """
     def __init__(self):
         r"""
