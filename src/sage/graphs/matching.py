@@ -912,6 +912,7 @@ def is_matching_covered(G, matching=None, algorithm='Edmonds', coNP_certificate=
 
     Providing with a wrong matching::
 
+        sage: # needs networkx
         sage: G = graphs.CompleteGraph(6)
         sage: M = Graph(G.matching())
         sage: M.add_edges([(0, 1), (0, 2)])

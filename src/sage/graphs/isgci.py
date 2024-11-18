@@ -584,7 +584,7 @@ class GraphClass(SageObject, CachedRepresentation):
             True
             sage: graphs.CompleteGraph(4) in graph_classes.Perfect
             True
-            sage: graphs.CompleteGraph(4) in graph_classes.Planar
+            sage: graphs.CompleteGraph(4) in graph_classes.Planar                       # needs planarity
             True
             sage: graphs.CompleteGraph(4) in graph_classes.Split
             True

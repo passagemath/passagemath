@@ -7486,8 +7486,8 @@ class Graph(GenericGraph):
 
         Stellating in a face of the octahedral graph is not circumscribable::
 
-            sage: f = set(flatten(choice(O.faces())))
-            sage: O.add_edges([[6, i] for i in f])
+            sage: f = set(flatten(choice(O.faces())))                                   # needs planarity
+            sage: O.add_edges([[6, i] for i in f])                                      # needs planarity
             sage: O.is_circumscribable()                                                # needs planarity sage.numerical.mip
             False
 
@@ -7595,7 +7595,7 @@ class Graph(GenericGraph):
             True
 
             sage: C = graphs.CubeGraph(3)
-            sage: C.is_inscribable()                                                    # needs sage.numerical.mip
+            sage: C.is_inscribable()                                                    # needs planarity sage.numerical.mip
             True
 
         Cutting off a vertex from the cube yields an uninscribable graph::
@@ -7606,7 +7606,7 @@ class Graph(GenericGraph):
             sage: C.add_edges(Combinations(triangle, 2))
             sage: C.add_edges(zip(triangle, C.neighbors(v)))
             sage: C.delete_vertex(v)
-            sage: C.is_inscribable()                                                    # needs sage.numerical.mip
+            sage: C.is_inscribable()                                                    # needs planarity sage.numerical.mip
             False
 
         Breaking a face of the cube yields an uninscribable graph::
@@ -7614,7 +7614,7 @@ class Graph(GenericGraph):
             sage: C = graphs.CubeGraph(3)
             sage: face = choice(C.faces())
             sage: C.add_edge([face[0][0], face[2][0]])
-            sage: C.is_inscribable()                                                    # needs sage.numerical.mip
+            sage: C.is_inscribable()                                                    # needs planarity sage.numerical.mip
             False
 
 

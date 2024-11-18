@@ -5724,7 +5724,7 @@ class GenericGraph(GenericGraph_pyx):
         Multi-edged and looped graphs are partially supported::
 
             sage: G = Graph({0: [1, 1]}, multiedges=True)
-            sage: G.is_planar()
+            sage: G.is_planar()                                                         # needs planarity
             True
             sage: G.is_planar(on_embedding={})
             Traceback (most recent call last):
@@ -5736,22 +5736,22 @@ class GenericGraph(GenericGraph_pyx):
             ...
             NotImplementedError: cannot compute with embeddings of
              multiple-edged or looped graphs
-            sage: G.is_planar(kuratowski=True)
+            sage: G.is_planar(kuratowski=True)                                          # needs planarity
             (True, None)
-            sage: G.is_planar(set_pos=True)
+            sage: G.is_planar(set_pos=True)                                             # needs planarity
             True
-            sage: sorted(G.get_pos().items())
+            sage: sorted(G.get_pos().items())                                           # needs planarity
             [(0, [0, 0]), (1, [0, 1])]
 
         Digraphs with multiple edges or loops or pairs of opposite arcs are
         partially supported (:issue:`35152`)::
 
             sage: D = digraphs.Complete(3)
-            sage: D.is_planar()
+            sage: D.is_planar()                                                         # needs planarity
             True
-            sage: D.is_planar(set_pos=True)
+            sage: D.is_planar(set_pos=True)                                             # needs planarity
             True
-            sage: sorted(D.get_pos().items())
+            sage: sorted(D.get_pos().items())                                           # needs planarity
             [(0, [0, 1]), (1, [1, 1]), (2, [1, 0])]
             sage: D.is_planar(on_embedding={})
             Traceback (most recent call last):
@@ -5763,17 +5763,17 @@ class GenericGraph(GenericGraph_pyx):
             ...
             NotImplementedError: cannot compute with embeddings of
              digraphs with pairs of opposite arcs
-            sage: D.is_planar(kuratowski=True)
+            sage: D.is_planar(kuratowski=True)                                          # needs planarity
             (True, None)
             sage: D.allow_multiple_edges(True)
             sage: D.add_edges(D.edges(sort=False))
             sage: D.allow_loops(True)
             sage: D.add_edges((u, u) for u in D)
-            sage: D.is_planar()
+            sage: D.is_planar()                                                         # needs planarity
             True
-            sage: D.is_planar(kuratowski=True)
+            sage: D.is_planar(kuratowski=True)                                          # needs planarity
             (True, None)
-            sage: D.is_planar(set_pos=True)
+            sage: D.is_planar(set_pos=True)                                             # needs planarity
             True
             sage: D.is_planar(set_embedding=True)
             Traceback (most recent call last):
@@ -5791,12 +5791,12 @@ class GenericGraph(GenericGraph_pyx):
             sage: G = graphs.CompleteGraph(5)
             sage: G = Graph(G, multiedges=True)
             sage: G.add_edge(0, 1)
-            sage: G.is_planar()
+            sage: G.is_planar()                                                         # needs planarity
             False
-            sage: b,k = G.is_planar(kuratowski=True)
-            sage: b
+            sage: b,k = G.is_planar(kuratowski=True)                                    # needs planarity
+            sage: b                                                                     # needs planarity
             False
-            sage: k.vertices(sort=True)
+            sage: k.vertices(sort=True)                                                 # needs planarity
             [0, 1, 2, 3, 4]
 
         TESTS:
@@ -5804,21 +5804,21 @@ class GenericGraph(GenericGraph_pyx):
         :issue:`18045`::
 
             sage: g = graphs.CompleteGraph(4)
-            sage: g.is_planar(set_embedding=True)
+            sage: g.is_planar(set_embedding=True)                                       # needs planarity
             True
             sage: emb = {0 : [2,3,1], 1: [2,3,0], 2: [1,3,0], 3:[0,1,2]}
-            sage: g.is_planar(on_embedding=emb)
+            sage: g.is_planar(on_embedding=emb)                                         # needs planarity
             False
 
         :issue:`19193`::
 
-            sage: posets.BooleanLattice(3).cover_relations_graph().is_planar()
+            sage: posets.BooleanLattice(3).cover_relations_graph().is_planar()          # needs planarity
             True
 
         :issue:`33759`::
 
             sage: G = Graph([(1, 2)])
-            sage: for set_embedding, set_pos in ((True,True), (True,False), (False, True), (False, False)):
+            sage: for set_embedding, set_pos in ((True,True), (True,False), (False, True), (False, False)):     # needs planarity
             ....:     G = Graph([(1, 2)])
             ....:     assert G.is_planar(set_embedding=set_embedding, set_pos=set_pos)
             ....:     assert (hasattr(G, '_embedding') and G._embedding is not None) == set_embedding, (set_embedding, set_pos)
@@ -5828,7 +5828,7 @@ class GenericGraph(GenericGraph_pyx):
 
             sage: G = DiGraph([[1, 2], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5],
             ....:              [3, 4], [3, 5], [4, 5], [5, 1]])
-            sage: G.is_planar()
+            sage: G.is_planar()                                 # needs planarity
             True
 
         Corner cases::
@@ -6000,7 +6000,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Corner cases::
 
-            sage: graphs.EmptyGraph().is_circular_planar()
+            sage: graphs.EmptyGraph().is_circular_planar()                                                      # needs planarity
             True
             sage: Graph(1).is_circular_planar()
             True
@@ -6512,9 +6512,9 @@ class GenericGraph(GenericGraph_pyx):
             Traceback (most recent call last):
             ...
             NotImplementedError: cannot work with embeddings of non-simple graphs
-            sage: G.to_simple().genus()
+            sage: G.to_simple().genus()                                                 # needs planarity
             0
-            sage: G.genus(set_embedding=False)
+            sage: G.genus(set_embedding=False)                                          # needs planarity
             0
             sage: G.genus(maximal=True, set_embedding=False)
             Traceback (most recent call last):
