@@ -1064,7 +1064,7 @@ class SchemeMorphism_polynomial_affine_space_field(SchemeMorphism_polynomial_aff
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.libs.singular sage.rings.number_field
             sage: K.<v> = QuadraticField(5)
             sage: PS.<x,y> = AffineSpace(K, 2)
             sage: H = Hom(PS, PS)
@@ -1072,7 +1072,7 @@ class SchemeMorphism_polynomial_affine_space_field(SchemeMorphism_polynomial_aff
             sage: F = f.weil_restriction()
             sage: P = PS(2, 1)
             sage: Q = P.weil_restriction()
-            sage: f(P).weil_restriction() == F(Q)                                       # needs sage.libs.singular
+            sage: f(P).weil_restriction() == F(Q)
             True
         """
         if any(isinstance(f, FractionFieldElement) for f in self):

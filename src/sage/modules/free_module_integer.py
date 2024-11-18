@@ -409,7 +409,7 @@ class FreeModule_submodule_with_basis_integer(FreeModule_submodule_with_basis_pi
             sage: from sage.modules.free_module_integer import IntegerLattice
             sage: A = sage.crypto.gen_lattice(type='random', n=1, m=60, q=2^60, seed=42)
             sage: L = IntegerLattice(A, lll_reduce=False)
-            sage: min(v.norm().n() for v in L.reduced_basis)
+            sage: min(v.norm().n() for v in L.reduced_basis)                            # needs sage.symbolic
             4.17330740711759e15
             sage: L.LLL()
             60 x 60 dense matrix over Integer Ring (use the '.str()' method to see the entries)
@@ -417,7 +417,7 @@ class FreeModule_submodule_with_basis_integer(FreeModule_submodule_with_basis_pi
             5.19615242270663
             sage: L.BKZ(block_size=10)
             60 x 60 dense matrix over Integer Ring (use the '.str()' method to see the entries)
-            sage: min(v.norm().n() for v in L.reduced_basis)
+            sage: min(v.norm().n() for v in L.reduced_basis)                            # needs sage.symbolic
             4.12310562561766
 
         .. NOTE::
@@ -430,7 +430,7 @@ class FreeModule_submodule_with_basis_integer(FreeModule_submodule_with_basis_pi
         basis = matrix(ZZ, len(basis), len(basis[0]), basis)
         basis.set_immutable()
 
-        if self.reduced_basis[0].norm() > basis[0].norm():
+        if self.reduced_basis[0].dot_product(self.reduced_basis[0]) > basis[0].dot_product(basis[0]):
             self._reduced_basis = basis
         return basis
 
@@ -610,7 +610,7 @@ class FreeModule_submodule_with_basis_integer(FreeModule_submodule_with_basis_pi
             sage: B = L.reduced_basis
             sage: v = L.shortest_vector(update_reduced_basis=False)
             sage: L.update_reduced_basis(v)
-            sage: bool(L.reduced_basis[0].norm() < B[0].norm())
+            sage: bool(L.reduced_basis[0].norm() < B[0].norm())                         # needs sage.symbolic
             True
         """
         w = matrix(ZZ, w)

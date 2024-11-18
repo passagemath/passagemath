@@ -8083,8 +8083,8 @@ cdef class Matroid(SageObject):
             5 bases over Integer Ring
             sage: A.defining_ideal()._gens_constructor(A.defining_ideal().ring())
             [A0*A1, A0*A23, A1*A23, A0 + A0123, A1 + A0123, A23 + A0123]
-            sage: A23 = A.gen(0)
-            sage: A23*A23
+            sage: A23 = A.gen(0)                                                        # needs sage.libs.singular
+            sage: A23*A23                                                               # needs sage.libs.singular
             0
 
         We construct a more interesting example using the Fano matroid::

@@ -1254,9 +1254,9 @@ class NonFinalInductiveValuation(FiniteInductiveValuation, DiscreteValuation):
             sage: v1 = v0.mac_lane_step(G)[0]
             sage: V = v1.mac_lane_step(G)
             sage: v2 = V[0]
-            sage: F = v2.equivalence_decomposition(G); F
+            sage: F = v2.equivalence_decomposition(G); F                                # needs sage.libs.singular
             (x^4 + 2*alpha + 1)^3 * (x^4 + 1/2*alpha^4 + alpha + 1)^3 * (x^4 + 1/2*alpha^4 + 3*alpha + 1)^3
-            sage: v2.is_equivalent(F.prod(), G)
+            sage: v2.is_equivalent(F.prod(), G)                                         # needs sage.libs.singular
             True
 
         Check that :issue:`33422` is fixed::
@@ -1267,9 +1267,9 @@ class NonFinalInductiveValuation(FiniteInductiveValuation, DiscreteValuation):
             sage: v1 = v0.augmentation(x, 3/2)
             sage: v2 = v1.augmentation(x^2-686, 7/2)
             sage: f = x^4 - 8001504*x^2 - 592815428352
-            sage: F = v2.equivalence_decomposition(f); F
+            sage: F = v2.equivalence_decomposition(f); F                                # needs sage.libs.singular
             x^4 - 343/2*x^2 + 1294139
-            sage: v2.is_equivalent(F.prod(), f)
+            sage: v2.is_equivalent(F.prod(), f)                                         # needs sage.libs.singular
             True
         """
         f = self.domain().coerce(f)

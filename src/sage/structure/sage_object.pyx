@@ -348,7 +348,7 @@ cdef class SageObject:
 
         Check that breakpoints and baseline are preserved (:issue:`29202`)::
 
-            sage: # needs sage.groups
+            sage: # needs sage.combinat
             sage: F = FreeAbelianMonoid(index_set=ZZ)
             sage: f = prod(F.gen(i) for i in range(5))
             sage: s, t = ascii_art(f), unicode_art(f)

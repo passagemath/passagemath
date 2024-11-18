@@ -2446,12 +2446,12 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         ::
 
             sage: f = 3*x                                                               # needs sage.rings.number_field
-            sage: f.reduce([2*x, y])                                                    # needs sage.rings.number_field
+            sage: f.reduce([2*x, y])                                                    # needs sage.libs.singular sage.rings.number_field
             0
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.libs.singular sage.rings.number_field
             sage: k.<w> = CyclotomicField(3)
             sage: A.<y9,y12,y13,y15> = PolynomialRing(k)
             sage: J = [y9 + y12]
@@ -2466,7 +2466,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
 
             sage: R.<y1,y2> = PolynomialRing(Qp(5), 2, order='lex')                     # needs sage.rings.padics
             sage: G = [y1^2 + y2^2, y1*y2 + y2^2, y2^3]                                 # needs sage.rings.padics
-            sage: type((y2^3).reduce(G))                                                # needs sage.rings.padics
+            sage: type((y2^3).reduce(G))                                                # needs sage.libs.singular sage.rings.padics
             <class 'sage.rings.polynomial.multi_polynomial_element.MPolynomial_polydict'>
 
         TESTS:
@@ -2474,7 +2474,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
         Verify that :issue:`34105` is fixed::
 
             sage: R.<x,y> = AA[]                                                        # needs sage.rings.number_field
-            sage: x.reduce(R.zero_ideal())                                              # needs sage.rings.number_field
+            sage: x.reduce(R.zero_ideal())                                              # needs sage.libs.singular sage.rings.number_field
             x
         """
         from sage.rings.polynomial.multi_polynomial_ideal import MPolynomialIdeal

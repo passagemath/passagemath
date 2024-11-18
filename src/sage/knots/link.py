@@ -245,7 +245,7 @@ class Link(SageObject):
 
         sage: L.alexander_polynomial()
         t^-3 - t^-2 + t^-1 - 1 + t - t^2 + t^3
-        sage: L.jones_polynomial()
+        sage: L.jones_polynomial()                                                      # needs sage.symbolic
         -t^10 + t^9 - t^8 + t^7 - t^6 + t^5 + t^3
         sage: L.determinant()
         7
@@ -584,7 +584,7 @@ class Link(SageObject):
 
             sage: B = BraidGroup(8)
             sage: L1 = Link(B([-1, -1, -1, -2, 1, -2, 3, -2, 5, 4]))
-            sage: H = hash(L1)
+            sage: H = hash(L1)                                                          # needs sage.libs.braiding
         """
         return hash(self.braid())
 
@@ -2589,11 +2589,13 @@ class Link(SageObject):
             s0^2*s1^-1*(s1^-1*s0)^2*s1^-1
             sage: br = K8_17r.braid(); br
             s0^-1*s1*s0^-2*s1^2*s0^-1*s1
-            sage: b.is_conjugated(br)                                                   # needs sage.libs.braiding
+
+            sage: # needs sage.libs.braiding
+            sage: b.is_conjugated(br)
             False
             sage: b == br.reverse()
             False
-            sage: b.is_conjugated(br.reverse())                                         # needs sage.libs.braiding
+            sage: b.is_conjugated(br.reverse())
             True
             sage: K8_17b = Link(b)
             sage: K8_17br = K8_17b.reverse()
@@ -4250,6 +4252,7 @@ class Link(SageObject):
         the same unoriented name (according to the note above) the option can be
         used to achieve more detailed information::
 
+            sage: # needs sage.libs.homfly
             sage: L2a1 = Link(b**2)
             sage: L2a1.get_knotinfo()
             (Series of links L2a1, <SymmetryMutant.mixed: 'x'>)

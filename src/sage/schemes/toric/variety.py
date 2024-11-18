@@ -3277,16 +3277,16 @@ def is_CohomologyClass(x):
         sage: P2 = toric_varieties.P2()
         sage: HH = P2.cohomology_ring()
         sage: from sage.schemes.toric.variety import is_CohomologyClass
-        sage: is_CohomologyClass( HH.one() )                                            # needs sage.libs.singular
+        sage: is_CohomologyClass('z')
         doctest:warning...
         DeprecationWarning: The function is_CohomologyClass is deprecated;
         use 'isinstance(..., CohomologyClass)' instead.
         See https://github.com/sagemath/sage/issues/38277 for details.
+        False
+        sage: is_CohomologyClass( HH.one() )                                            # needs sage.libs.singular
         True
         sage: is_CohomologyClass( HH(P2.fan(1)[0]) )                                    # needs sage.libs.singular
         True
-        sage: is_CohomologyClass('z')
-        False
     """
     from sage.misc.superseded import deprecation
     deprecation(38277,

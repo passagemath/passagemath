@@ -1018,15 +1018,15 @@ cdef class FiniteField(Field):
             x + 1
             sage: GF(2, impl='ntl').modulus()                                           # needs sage.libs.ntl
             x + 1
-            sage: GF(2, impl='modn', modulus=x).modulus()
+            sage: GF(2, impl='modn', modulus=x).modulus()                               # needs sage.symbolics
             x
-            sage: GF(2, impl='givaro', modulus=x).modulus()                             # needs sage.libs.linbox
+            sage: GF(2, impl='givaro', modulus=x).modulus()                             # needs sage.libs.linbox sage.symbolics
             x
-            sage: GF(2, impl='ntl', modulus=x).modulus()                                # needs sage.libs.ntl
+            sage: GF(2, impl='ntl', modulus=x).modulus()                                # needs sage.libs.ntl sage.symbolics
             x
-            sage: GF(13^2, 'a', impl='givaro', modulus=x^2 + 2).modulus()               # needs sage.libs.linbox
+            sage: GF(13^2, 'a', impl='givaro', modulus=x^2 + 2).modulus()               # needs sage.libs.linbox sage.symbolics
             x^2 + 2
-            sage: GF(13^2, 'a', impl='pari_ffelt', modulus=x^2 + 2).modulus()           # needs sage.libs.pari
+            sage: GF(13^2, 'a', impl='pari_ffelt', modulus=x^2 + 2).modulus()           # needs sage.libs.pari sage.symbolics
             x^2 + 2
         """
         # Normally, this is set by the constructor of the implementation

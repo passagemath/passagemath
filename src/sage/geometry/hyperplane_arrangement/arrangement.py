@@ -679,7 +679,7 @@ class HyperplaneArrangementElement(Element):
         EXAMPLES::
 
             sage: L.<x, y> = HyperplaneArrangements(QQ)
-            sage: L(x, y, x+y-2).plot()                                                 # needs sage.plot
+            sage: L(x, y, x + y - 2).plot()                                             # needs sage.plot sage.symbolic
             Graphics object consisting of 3 graphics primitives
         """
         from sage.geometry.hyperplane_arrangement.plot import plot

@@ -1831,13 +1831,13 @@ cdef class RealIntervalFieldElement(RingElement):
             5559060566555523
             sage: RIF(3^33 * 2)
             1.1118121133111046?e16
-            sage: RIF(-pi^-512, 0)
+            sage: RIF(-pi^-512, 0)                                                      # needs sage.symbolic
             -1.?e-254
             sage: RealIntervalField(2)(3 * 2^18)
             786432
             sage: RealIntervalField(2)(3 * 2^19)
             1.6?e6
-            sage: v = RIF(AA(2-sqrt(3)))
+            sage: v = RIF(AA(2-sqrt(3)))                                                # needs sage.symbolic
             sage: v
             0.2679491924311227?
             sage: v.str(error_digits=1)

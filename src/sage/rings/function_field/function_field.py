@@ -1264,7 +1264,7 @@ class FunctionField(Field):
             Place (1/x)
             sage: a = (5*x + 6)/(x + 15)
             sage: b = 7/x
-            sage: K.hilbert_symbol(a, b, P)
+            sage: K.hilbert_symbol(a, b, P)                                             # needs sage.libs.singular
             -1
             sage: Q = K.places()[7]; Q
             Place (x + 6)

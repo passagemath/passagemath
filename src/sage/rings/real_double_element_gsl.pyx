@@ -686,9 +686,9 @@ cdef class RealDoubleElement_gsl(RealDoubleElement):
 
         EXAMPLES::
 
-            sage: RDF(pi).sech()
+            sage: RDF(pi).sech()                                                        # needs sage.symbolic
             0.08626673833405443
-            sage: CDF(pi).sech()
+            sage: CDF(pi).sech()                                                        # needs sage.symbolic
             0.08626673833405443
         """
         return 1/self.cosh()
@@ -699,9 +699,9 @@ cdef class RealDoubleElement_gsl(RealDoubleElement):
 
         EXAMPLES::
 
-            sage: RDF(pi).csch()
+            sage: RDF(pi).csch()                                                        # needs sage.symbolic
             0.08658953753004694
-            sage: CDF(pi).csch()  # rel tol 1e-15
+            sage: CDF(pi).csch()  # rel tol 1e-15                                       # needs sage.symbolic
             0.08658953753004696
         """
         return 1/self.sinh()
@@ -712,9 +712,9 @@ cdef class RealDoubleElement_gsl(RealDoubleElement):
 
         EXAMPLES::
 
-            sage: RDF(pi).coth()
+            sage: RDF(pi).coth()                                                        # needs sage.symbolic
             1.003741873197321
-            sage: CDF(pi).coth()
+            sage: CDF(pi).coth()                                                        # needs sage.symbolic
             1.0037418731973213
         """
         return self.cosh() / self.sinh()

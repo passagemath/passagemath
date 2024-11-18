@@ -1529,7 +1529,7 @@ cdef class RingExtensionWithBasisElement(RingExtensionElement):
         If ``base`` is omitted, it is set to its default which is the
         base of the extension::
 
-            sage: u.minpoly()                                                           # needs sage.rings.finite_rings
+            sage: u.minpoly()                                                           # needs sage.libs.singular sage.rings.finite_rings
             x^2 + (2*a + a^2)*x - 1 + a
 
         Note that ``base`` must be an explicit base over which the

@@ -472,9 +472,9 @@ class FinitelyGeneratedMatrixGroup_gap(MatrixGroup_gap):
             1 + t + 2*t^2 + 3*t^3 + 4*t^4 + 5*t^5 + 7*t^6 + 8*t^7 + 10*t^8 + 12*t^9 + O(t^10)
             sage: mol.parent()
             Power Series Ring in t over Integer Ring
-            sage: mol = S3.molien_series(prec=oo); mol
+            sage: mol = S3.molien_series(prec=oo); mol                                  # needs sage.combinat
             1 + t + 2*t^2 + 3*t^3 + 4*t^4 + 5*t^5 + 7*t^6 + O(t^7)
-            sage: mol.parent()
+            sage: mol.parent()                                                          # needs sage.combinat
             Lazy Taylor Series Ring in t over Integer Ring
 
         Octahedral Group::

@@ -69,6 +69,7 @@ def handle_AA_and_QQbar(func):
 
         ::
 
+            sage: # needs sage.symbolic
             sage: @handle_AA_and_QQbar
             ....: def f(x):
             ....:     print(x.ring().base_ring())
