@@ -99,5 +99,5 @@ jobs:
           pip install pkgs/sagemath-environment pkgs/passagemath-repl
           pkg=${{ matrix.distribution }}
           cd pkgs/$pkg
-          sage --fixdoctests --distribution "$pkg" --venv .tox/py310-norequirements --update-known-test-failures
+          sage --fixdoctests --distribution "$pkg" --toxenv py310-norequirements --update-known-test-failures
           git diff
