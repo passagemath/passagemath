@@ -1,4 +1,7 @@
 {
+    "sage.interfaces.mwrank": {
+        "ntests": 30
+    },
     "sage.libs.eclib.constructor": {
         "ntests": 10
     },
@@ -67,15 +70,15 @@
     },
     "sage.schemes.elliptic_curves.ell_number_field": {
         "failed": true,
-        "ntests": 839
+        "ntests": 840
     },
     "sage.schemes.elliptic_curves.ell_point": {
         "failed": true,
-        "ntests": 961
+        "ntests": 960
     },
     "sage.schemes.elliptic_curves.ell_rational_field": {
         "failed": true,
-        "ntests": 847
+        "ntests": 843
     },
     "sage.schemes.elliptic_curves.ell_tate_curve": {
         "ntests": 64
