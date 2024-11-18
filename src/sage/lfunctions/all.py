@@ -1,6 +1,9 @@
 # sage_setup: distribution = sagemath-schemes
-from .all__sagemath_lcalc import *
-from .all__sagemath_sympow import *
+
+try:
+    from .all__sagemath_lcalc import *
+except ImportError:
+    pass
 
 try:
     from .all__sagemath_sympow import *
