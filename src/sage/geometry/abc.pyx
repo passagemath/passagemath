@@ -80,3 +80,26 @@ class Polyhedron:
     """
 
     pass
+
+
+cdef class HyperbolicSpace(Parent):
+    r"""
+    Abstract base class for :class:`~sage.geometry.hyperbolic_space.hyperbolic_model.HyperbolicModel`
+
+    This class is defined for the purpose of ``isinstance`` tests.  It should not be
+    instantiated.
+
+    EXAMPLES::
+
+        sage: import sage.geometry.abc
+        sage: H = HyperbolicPlane()                                                     # needs sage.symbolic
+        sage: isinstance(H, sage.geometry.abc.HyperbolicSpace)                          # needs sage.symbolic
+        True
+
+    By design, there is a unique direct subclass::
+
+        sage: len(sage.geometry.abc.HyperbolicSpace.__subclasses__()) <= 1
+        True
+    """
+
+    pass

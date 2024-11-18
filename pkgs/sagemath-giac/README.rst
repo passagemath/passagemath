@@ -17,6 +17,7 @@ macOS, and Windows (Windows Subsystem for Linux).
 
 See https://doc.sagemath.org/html/en/installation/index.html
 for general installation instructions.
+>>>>>>> main
 
 
 About this pip-installable distribution package

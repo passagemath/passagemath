@@ -819,14 +819,13 @@ cdef class Function(SageObject):
             123
             sage: del mpmath.noMpmathFn
         """
-        import mpmath
-        from sage.libs.mpmath.utils import mpmath_to_sage, sage_to_mpmath
-        prec = mpmath.mp.prec
-        args = [mpmath_to_sage(x, prec)
-                if isinstance(x, (mpmath.mpf, mpmath.mpc)) else x
+        from sage.libs.mpmath.all import mp, mpf, mpc
+        from sage.libs.mpmath.sage_utils import mpmath_to_sage, sage_to_mpmath
+        args = [mpmath_to_sage(x, mp.prec)
+                if isinstance(x, (mpf, mpc)) else x
                 for x in args]
         res = self(*args)
-        res = sage_to_mpmath(res, prec)
+        res = sage_to_mpmath(res, mp.prec)
         return res
 
 
@@ -1008,7 +1007,7 @@ cdef class BuiltinFunction(Function):
                 import numpy as module
                 custom = self._eval_numpy_
             elif any(is_mpmath_type(type(arg)) for arg in args):
-                import mpmath as module
+                import sage.libs.mpmath.all as module
                 custom = self._eval_mpmath_
             elif all(isinstance(arg, float) for arg in args):
                 # We do not include the factorial here as

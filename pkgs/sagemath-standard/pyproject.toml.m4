@@ -7,6 +7,28 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
+<<<<<<< HEAD
+name = "sagemath-standard"
+description = "Sage: Open Source Mathematics Software: Standard Python Library"
+dependencies = [
+    SPKG_INSTALL_REQUIRES_sagemath_standard_no_symbolics
+    SPKG_INSTALL_REQUIRES_sagemath_symbolics
+]
+dynamic = ["version"]
+include(`pyproject_toml_metadata.m4')dnl'
+
+[project.readme]
+file = "README.rst"
+content-type = "text/x-rst"
+
+[project.optional-dependencies]
+r = [SPKG_INSTALL_REQUIRES_rpy2]
+
+[tool.setuptools]
+license-files = ["LICENSE.txt"]
+include-package-data = false
+||||||| merged common ancestors
+=======
 name = "passagemath-standard"
 description = "passagemath: Standard Python Library"
 dependencies = [
@@ -48,6 +70,7 @@ tdlib = [
 license-files = ["LICENSE.txt"]
 include-package-data = false
 packages = []
+>>>>>>> main
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}

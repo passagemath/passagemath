@@ -76,7 +76,6 @@ from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.modular.hypergeometric_misc import hgm_coeffs
 from sage.modules.free_module_element import vector
-from sage.rings.finite_rings.finite_field_constructor import GF
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.fraction_field import FractionField
 from sage.rings.integer_ring import ZZ
@@ -1566,6 +1565,7 @@ class HypergeometricData:
         if 0 in alpha:
             return self._swap.H_value(p, f, ~t, ring)
         if ring is None:
+            from sage.rings.universal_cyclotomic_field import UniversalCyclotomicField
             ring = UniversalCyclotomicField()
         gamma = self.gamma_array()
         q = p**f
@@ -1574,6 +1574,8 @@ class HypergeometricData:
         D = -min(self.zigzag(x, flip_beta=True) for x in alpha + beta)
         # also: D = (self.weight() + 1 - m[0]) // 2
         M = self.M_value()
+
+        from sage.rings.finite_rings.finite_field_constructor import GF
 
         Fq = GF((p, f))
         gen = Fq.multiplicative_generator()

@@ -511,6 +511,12 @@ if __name__ == '__main__':
                          "sagemath-ntl",
                          "sagemath-pari",
                          "sagemath-homfly",
+<<<<<<< HEAD
+                         "sagemath-mpmath",
+||||||| merged common ancestors
+                         "sagemath-environment",
+=======
+>>>>>>> main
                          "sagemath-plot",
                          "sagemath-combinat",
                          "sagemath-modules",

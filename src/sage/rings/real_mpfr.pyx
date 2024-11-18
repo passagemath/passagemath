@@ -1,4 +1,9 @@
 # sage_setup: distribution = sagemath-modules
+<<<<<<< HEAD
+
+||||||| merged common ancestors
+=======
+>>>>>>> main
 r"""
 Arbitrary precision floating point real numbers using GNU MPFR
 
@@ -141,7 +146,7 @@ from sage.ext.stdsage cimport PY_NEW
 from sage.libs.gmp.mpz cimport *
 from sage.libs.gmp.pylong cimport mpz_set_pylong
 from sage.libs.mpfr cimport *
-from sage.libs.mpmath.utils cimport mpfr_to_mpfval
+from sage.libs.mpmath.sage_utils cimport mpfr_to_mpfval
 from sage.misc.randstate cimport randstate, current_randstate
 
 from sage.structure.element cimport Element
@@ -5295,8 +5300,8 @@ cdef class RealNumber(sage.structure.element.RingElement):
             if parent._prec > SIG_PREC_THRESHOLD:
                 sig_off()
             return x
-        from sage.libs.mpmath.utils import call
-        from mpmath import loggamma
+        from sage.libs.mpmath.sage_utils import call
+        from sage.libs.mpmath.all import loggamma
         return call(loggamma, mpfr_to_mpfval(self.value), parent=parent)
 
     def zeta(self):

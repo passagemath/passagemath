@@ -238,6 +238,8 @@ class sage_interactive(interactive):
         # Numerically evaluate symbolic expressions
 
         def n(x):
+            import sage.rings.abc
+
             if isinstance(parent(x), sage.rings.abc.SymbolicRing):
                 return x.numerical_approx()
             else:

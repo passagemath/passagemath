@@ -23,7 +23,7 @@ from sage.matrix.matrix_dense cimport Matrix_dense
 from sage.matrix.matrix_generic_dense cimport Matrix_generic_dense as MatrixClass
 # FIXME: This was Matrix_integer_dense; changed for modularization to avoid flint dep
 
-M2Z = MatrixSpace(ZZ, 2)
+M2Z = MatrixSpace(ZZ, 2, implementation='generic')
 
 
 cdef class ArithmeticSubgroupElement(MultiplicativeGroupElement):

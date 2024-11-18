@@ -15,17 +15,19 @@
     "sage.doctest.marked_output": {
         "failed": true,
         "ntests": 21
+>>>>>>> main
     },
     "sage.doctest.parsing": {
         "failed": true,
         "ntests": 229
     },
     "sage.doctest.reporting": {
-        "ntests": 126
+        "failed": true,
+        "ntests": 124
     },
     "sage.doctest.sources": {
         "failed": true,
-        "ntests": 341
+        "ntests": 376
     },
     "sage.doctest.test": {
         "ntests": 23
@@ -42,7 +44,7 @@
         "ntests": 721
     },
     "sage.repl.attach": {
-        "ntests": 135
+        "ntests": 128
     },
     "sage.repl.configuration": {
         "ntests": 22
@@ -81,7 +83,7 @@
     },
     "sage.repl.ipython_kernel.install": {
         "failed": true,
-        "ntests": 35
+        "ntests": 40
     },
     "sage.repl.ipython_kernel.interact": {
         "failed": true,
@@ -104,11 +106,17 @@
     },
     "sage.repl.load": {
         "failed": true,
-        "ntests": 39
+        "ntests": 41
     },
     "sage.repl.preparse": {
         "failed": true,
+<<<<<<< HEAD
+        "ntests": 341
+||||||| merged common ancestors
+        "ntests": 347
+=======
         "ntests": 345
+>>>>>>> main
     },
     "sage.repl.rich_output.backend_base": {
         "failed": true,
@@ -121,14 +129,14 @@
         "ntests": 15
     },
     "sage.repl.rich_output.backend_ipython": {
-        "ntests": 73
+        "ntests": 75
     },
     "sage.repl.rich_output.buffer": {
         "ntests": 49
     },
     "sage.repl.rich_output.display_manager": {
         "failed": true,
-        "ntests": 84
+        "ntests": 85
     },
     "sage.repl.rich_output.output_basic": {
         "ntests": 46

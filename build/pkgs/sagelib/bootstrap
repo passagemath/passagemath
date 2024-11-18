@@ -2,7 +2,7 @@
 set -e
 export M4PATH="$SAGE_ROOT/m4"
 MACRO_PATTERN='SPKG_'
-for infile in src/*.m4; do
+for infile in $(pwd)/src/*.m4; do
     if [ -f "$infile" ]; then
         outfilename=src/$(basename $infile .m4)
         outfile=$(readlink -f "$outfilename" || :)

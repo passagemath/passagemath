@@ -3717,7 +3717,7 @@ cdef class BinaryMatroid(LinearMatroid):
         2 x 12 BinaryMatrix
         [110011001100]
         [001100110011]
-        sage: sorted(Npp._matrix_().rows())                                             # needs sage.rings.finite_rings
+        sage: sorted(Npp._matrix_().rows())
         [(1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0), (0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1)]
         """
         if self._eq_part is None:
