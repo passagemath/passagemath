@@ -16,7 +16,7 @@ EXAMPLES:
 In most cases, this module is used indirectly, e.g. ::
 
     sage: fan = toric_varieties.dP6().fan()                                             # needs palp sage.graphs
-    sage: fan.plot()                                                                    # needs palp sage.graphs sage.plot
+    sage: fan.plot()                                                                    # needs palp sage.graphs sage.plot sage.symbolic
     Graphics object consisting of 31 graphics primitives
 
 You may change default plotting options as follows::
@@ -26,12 +26,12 @@ You may change default plotting options as follows::
     sage: toric_plotter.options(show_rays=False)
     sage: toric_plotter.options("show_rays")
     False
-    sage: fan.plot()                                                                    # needs palp sage.graphs sage.plot
+    sage: fan.plot()                                                                    # needs palp sage.graphs sage.plot sage.symbolic
     Graphics object consisting of 19 graphics primitives
     sage: toric_plotter.reset_options()
     sage: toric_plotter.options("show_rays")
     True
-    sage: fan.plot()                                                                    # needs palp sage.graphs sage.plot
+    sage: fan.plot()                                                                    # needs palp sage.graphs sage.plot sage.symbolic
     Graphics object consisting of 31 graphics primitives
 """
 
@@ -134,9 +134,9 @@ class ToricPlotter(SageObject):
     plot, e.g. ::
 
         sage: fan = toric_varieties.dP6().fan()                                         # needs palp sage.graphs
-        sage: fan.plot()                                                                # needs palp sage.graphs sage.plot
+        sage: fan.plot()                                                                # needs palp sage.graphs sage.plot sage.symbolic
         Graphics object consisting of 31 graphics primitives
-        sage: print(fan.plot())                                                         # needs palp sage.graphs sage.plot
+        sage: print(fan.plot())                                                         # needs palp sage.graphs sage.plot sage.symbolic
         Graphics object consisting of 31 graphics primitives
 
     If you do want to create your own plotting function for some toric
@@ -583,14 +583,14 @@ class ToricPlotter(SageObject):
             sage: quadrant = Cone([(1,0), (0,1)])
             sage: from sage.geometry.toric_plotter import ToricPlotter
             sage: tp = ToricPlotter(dict(), 2, quadrant.rays())
-            sage: tp.plot_walls([quadrant])                                             # needs sage.plot
+            sage: tp.plot_walls([quadrant])                                             # needs sage.plot sage.symbolic
             Graphics object consisting of 2 graphics primitives
 
         Let's also check that the truncating polyhedron is functioning
         correctly::
 
             sage: tp = ToricPlotter({"mode": "box"}, 2, quadrant.rays())
-            sage: tp.plot_walls([quadrant])                                             # needs sage.plot
+            sage: tp.plot_walls([quadrant])                                             # needs sage.plot sage.symbolic
             Graphics object consisting of 2 graphics primitives
         """
         result = Graphics()

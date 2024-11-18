@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
+# sage.doctest: needs sage.plot sage.symbolic
 """
 Plotting of Hyperplane Arrangements
 
@@ -57,7 +58,7 @@ EXAMPLES::
 
     sage: H3.<x,y,z> = HyperplaneArrangements(QQ)
     sage: A = H3([(1,0,0), 0], [(0,0,1), 5])
-    sage: A.plot(hyperplane_opacities=0.5, hyperplane_labels=True,                      # needs sage.plot
+    sage: A.plot(hyperplane_opacities=0.5, hyperplane_labels=True,
     ....:        hyperplane_legend=False)
     Graphics3d Object
 
