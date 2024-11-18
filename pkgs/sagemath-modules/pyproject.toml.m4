@@ -42,6 +42,7 @@ test    = ["passagemath-repl"]
 
 # extras by packages
 flint   = ["passagemath-flint"]
+fpylll  = [SPKG_INSTALL_REQUIRES_fpylll]
 gsl     = []  # No extra needed
 linbox  = ["passagemath-linbox"]
 m4ri    = ["passagemath-modules[linbox]"]

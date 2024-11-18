@@ -53,7 +53,7 @@ cdef class InteractiveLPBackend:
 
         This backend can work with irrational algebraic numbers::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.groups sage.rings.number_field
             sage: poly = polytopes.dodecahedron(base_ring=AA)
             sage: lp, x = poly.to_linear_program(solver='InteractiveLP', return_variable=True)
             sage: lp.set_objective(x[0] + x[1] + x[2])

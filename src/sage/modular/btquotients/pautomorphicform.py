@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-schemes
-# sage.doctest: needs sage.libs.pari
+# sage.doctest: needs sage.graphs sage.libs.pari
 #########################################################################
 #       Copyright (C) 2011 Cameron Franc and Marc Masdeu
 #
@@ -167,10 +167,10 @@ class BruhatTitsHarmonicCocycleElement(HeckeModuleElement):
     subtracted from each other::
 
         sage: X = BruhatTitsQuotient(5,23)
-        sage: H = X.harmonic_cocycles(2,prec=10)
+        sage: H = X.harmonic_cocycles(2, prec=10)
         sage: v1 = H.basis()[0]; v2 = H.basis()[1] # indirect doctest
-        sage: v3 = v1+v2
-        sage: v1 == v3-v2
+        sage: v3 = v1 + v2
+        sage: v1 == v3 - v2
         True
 
     and rescaled::

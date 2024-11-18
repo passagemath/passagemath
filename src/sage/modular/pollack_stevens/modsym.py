@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-schemes
+# sage.doctest: needs eclib
 r"""
 Element class for Pollack-Stevens' modular symbols
 

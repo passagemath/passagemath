@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 """
 Dokchitser's `L`-functions calculator
 

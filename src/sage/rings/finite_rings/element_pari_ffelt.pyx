@@ -205,7 +205,7 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
         a
         sage: b = gap(a^3); b                                                           # needs sage.libs.gap
         Z(2^3)^3
-        sage: F(b)
+        sage: F(b)                                                                      # needs sage.libs.gap
         a + 1
         sage: a^3
         a + 1
@@ -522,14 +522,20 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
             except (ValueError, IndexError, TypeError):
                 raise TypeError("no coercion defined")
 
-        elif isinstance(x, sage.libs.gap.element.GapElement_FiniteField):
-            try:
-                self.construct_from(x.sage(ring=self._parent))
-            except (ValueError, IndexError, TypeError):
-                raise TypeError("no coercion defined")
-
         else:
-            raise TypeError("no coercion defined")
+            try:
+                from sage.libs.gap.element import GapElement_FiniteField
+            except ImportError:
+                raise TypeError("no coercion defined")
+            else:
+                if isinstance(x, GapElement_FiniteField):
+                    try:
+                        self.construct_from(x.sage(ring=self._parent))
+                    except (ValueError, IndexError, TypeError):
+                        raise TypeError("no coercion defined")
+                else:
+                    raise TypeError("no coercion defined")
+
 
     def _repr_(self):
         """

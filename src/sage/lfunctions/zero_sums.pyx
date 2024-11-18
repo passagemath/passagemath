@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 r"""
 Class for computing sums over zeros of motivic `L`-functions
 

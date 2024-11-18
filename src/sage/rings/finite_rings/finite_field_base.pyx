@@ -996,16 +996,16 @@ cdef class FiniteField(Field):
             sage: k = GF(199)
             sage: k.modulus()
             x + 198
-            sage: var('x')
+            sage: var('x')                                                              # needs sage.symbolic
             x
-            sage: k = GF(199, modulus=x+1)
-            sage: k.modulus()
+            sage: k = GF(199, modulus=x+1)                                              # needs sage.symbolic
+            sage: k.modulus()                                                           # needs sage.symbolic
             x + 1
 
         The given modulus is always made monic::
 
-            sage: k.<a> = GF(7^2, modulus=2*x^2 - 3, impl='pari_ffelt')
-            sage: k.modulus()
+            sage: k.<a> = GF(7^2, modulus=2*x^2 - 3, impl='pari_ffelt')                 # needs sage.symbolic
+            sage: k.modulus()                                                           # needs sage.symbolic
             x^2 + 2
 
         TESTS:

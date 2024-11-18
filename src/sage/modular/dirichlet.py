@@ -770,9 +770,9 @@ class DirichletCharacter(MultiplicativeGroupElement):
         With the algorithm "lcalc"::
 
             sage: a = a.primitive_character()
-            sage: L = a.lfunction(algorithm='lcalc'); L
+            sage: L = a.lfunction(algorithm='lcalc'); L                                 # needs lcalc
             L-function with complex Dirichlet coefficients
-            sage: L.value(4)  # abs tol 1e-8
+            sage: L.value(4)  # abs tol 1e-8                                            # needs lcalc
             0.988944551741105 + 0.0*I
         """
         if algorithm is None:
@@ -1628,11 +1628,13 @@ class DirichletCharacter(MultiplicativeGroupElement):
 
         TESTS::
 
+            sage: # needs sage.libs.gap sage.rings.number_field
             sage: G = DirichletGroup(20, UniversalCyclotomicField())
             sage: e = G([1 for u in G.unit_gens()])
             sage: e.kloosterman_sum(7,17)
             -2*E(5) - 4*E(5)^2 - 4*E(5)^3 - 2*E(5)^4
 
+            sage: # needs sage.rings.number_field
             sage: G = DirichletGroup(12, QQbar)
             sage: e = G.gens()[0]
             sage: e.kloosterman_sum(5, 4)

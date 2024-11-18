@@ -337,6 +337,7 @@ class FiniteField_givaro(FiniteField):
 
         GAP elements need to be finite field elements::
 
+            sage: # needs sage.libs.gap
             sage: x = gap('Z(13)')
             sage: F = FiniteField(13, impl='givaro')
             sage: F(x)

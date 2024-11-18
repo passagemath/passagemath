@@ -20,6 +20,7 @@ isogenies defined over `K`.
 
 EXAMPLES::
 
+    sage: x = polygen(QQ)
     sage: K.<i> = NumberField(x^2 + 1)
     sage: E = EllipticCurve([0, 4+i])
     sage: E.discriminant()
@@ -110,6 +111,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
     EXAMPLES::
 
+        sage: x = polygen(QQ)
         sage: K.<i> = NumberField(x^2 + 1)
         sage: EllipticCurve([i, i - 1, i + 1, 24*i + 15, 14*i + 35])
         Elliptic Curve defined by
@@ -122,6 +124,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         A curve from the database of curves over `\QQ`, but over a larger field::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: EllipticCurve(K,'389a1')
             Elliptic Curve defined by y^2 + y = x^3 + x^2 + (-2)*x
@@ -155,10 +158,10 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
             sage: E = EllipticCurve([1, 0, 1, -1751, -31352])
             sage: K.<d> = QuadraticField(5)
-            sage: E.gens()
+            sage: E.gens()                                                              # needs eclib
             [(52 : 111 : 1)]
             sage: EK = E.base_extend(K)
-            sage: EK.gens()
+            sage: EK.gens()                                                             # needs eclib
             [(52 : 111 : 1)]
         """
         E = super().base_extend(R)
@@ -330,11 +333,12 @@ class EllipticCurve_number_field(EllipticCurve_field):
         EXAMPLES::
 
             sage: E = EllipticCurve([0, 0, 1, -1, 0])
-            sage: E.height_pairing_matrix()
+            sage: E.height_pairing_matrix()                                             # needs eclib
             [0.0511114082399688]
 
         For rank 0 curves, the result is a valid 0x0 matrix::
 
+            sage: # needs eclib
             sage: EllipticCurve('11a').height_pairing_matrix()
             []
             sage: E = EllipticCurve('5077a1')
@@ -346,7 +350,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: E = EllipticCurve('389a1')
             sage: E = EllipticCurve('389a1')
             sage: P, Q = E.point([-1,1,1]), E.point([0,-1,1])
-            sage: E.height_pairing_matrix([P,Q])
+            sage: E.height_pairing_matrix([P,Q])                                        # needs eclib
             [0.686667083305587 0.268478098806726]
             [0.268478098806726 0.327000773651605]
 
@@ -355,7 +359,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: x = polygen(QQ)
             sage: K.<t> = NumberField(x^2 + 47)
             sage: EK = E.base_extend(K)
-            sage: EK.height_pairing_matrix([EK(P),EK(Q)])
+            sage: EK.height_pairing_matrix([EK(P),EK(Q)])                               # needs eclib
             [0.686667083305587 0.268478098806726]
             [0.268478098806726 0.327000773651605]
 
@@ -365,10 +369,10 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: E = EllipticCurve([0,0,0,i,i])
             sage: P = E(-9+4*i, -18-25*i)
             sage: Q = E(i,-i)
-            sage: E.height_pairing_matrix([P,Q])
+            sage: E.height_pairing_matrix([P,Q])                                        # needs eclib
             [  2.16941934493768 -0.870059380421505]
             [-0.870059380421505  0.424585837470709]
-            sage: E.regulator_of_points([P,Q])
+            sage: E.regulator_of_points([P,Q])                                          # needs eclib
             0.164101403936070
 
         When the parameter ``normalised`` is set to ``False``, each
@@ -490,6 +494,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         ::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('389a1')
             sage: P,Q = E.gens()
             sage: E.regulator_of_points([P,Q])
@@ -527,6 +532,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: P1, P2 = K.primes_above(5)
             sage: E = EllipticCurve([i/5,i/5,i/5,i/5,i/5])
@@ -557,6 +563,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: P1, P2 = K.primes_above(5)
             sage: E = EllipticCurve([i/5,i/5,i/5,i/5,i/5])
@@ -584,6 +591,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: E = EllipticCurve([i/5,i/5,i/5,i/5,i/5])
             sage: P1, P2 = K.primes_above(5)
@@ -599,6 +607,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: E = EllipticCurve([i/5,i/5,i/5,i/5,i/5])
             sage: P1, P2 = K.primes_above(5)
@@ -609,6 +618,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         :issue:`7935`::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 38)
             sage: E = EllipticCurve([a,1/2])
             sage: E.global_integral_model()
@@ -617,6 +627,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         :issue:`9266`::
 
+            sage: x = polygen(QQ)
             sage: K.<s> = NumberField(x^2 - 5)
             sage: w = (1+s)/2
             sage: E = EllipticCurve(K, [2,w])
@@ -626,6 +637,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         :issue:`12151`::
 
+            sage: x = polygen(QQ)
             sage: K.<v> = NumberField(x^2 + 161*x - 150)
             sage: E = EllipticCurve([25105/216*v - 3839/36, 634768555/7776*v - 98002625/1296, 634768555/7776*v - 98002625/1296, 0, 0])
             sage: M = E.global_integral_model(); M # choice varies, not tested
@@ -647,6 +659,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         Check the skipped test from above::
 
+            sage: x = polygen(QQ)
             sage: K.<v> = NumberField(x^2 + 161*x - 150)
             sage: E = EllipticCurve([25105/216*v - 3839/36, 634768555/7776*v - 98002625/1296, 634768555/7776*v - 98002625/1296, 0, 0])
             sage: M = E.global_integral_model()
@@ -870,6 +883,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: E = EllipticCurve([1 + i, 0, 1, 0, 0])
             sage: E.local_data()
@@ -967,6 +981,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: E = EllipticCurve(K, [0,1,0,-160,308])
             sage: p = K.ideal(i + 1)
@@ -1034,6 +1049,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 5)
             sage: E = EllipticCurve([20, 225, 750, 1250*a + 6250, 62500*a + 15625])
             sage: P = K.ideal(a)
@@ -1072,6 +1088,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: [(p, E.has_good_reduction(p)) for p in prime_range(15)]
             [(2, False), (3, True), (5, True), (7, False), (11, True), (13, True)]
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^3 - 2)
             sage: P17a, P17b = [P for P,e in K.factor(17)]
             sage: E = EllipticCurve([0,0,0,0,2*a+1])
@@ -1106,6 +1123,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: [(p, E.has_bad_reduction(p)) for p in prime_range(15)]
             [(2, True), (3, False), (5, False), (7, True), (11, False), (13, False)]
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^3 - 2)
             sage: P17a, P17b = [P for P,e in K.factor(17)]
             sage: E = EllipticCurve([0,0,0,0,2*a+1])
@@ -1141,6 +1159,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: [(p, E.has_multiplicative_reduction(p)) for p in prime_range(15)]
             [(2, True), (3, False), (5, False), (7, True), (11, False), (13, False)]
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^3 - 2)
             sage: P17a, P17b = [P for P,e in K.factor(17)]
             sage: E = EllipticCurve([0,0,0,0,2*a+1])
@@ -1170,6 +1189,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: [(p, E.has_split_multiplicative_reduction(p)) for p in prime_range(15)]
             [(2, False), (3, False), (5, False), (7, True), (11, False), (13, False)]
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^3 - 2)
             sage: P17a, P17b = [P for P,e in K.factor(17)]
             sage: E = EllipticCurve([0,0,0,0,2*a+1])
@@ -1200,6 +1220,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: [(p, E.has_nonsplit_multiplicative_reduction(p)) for p in prime_range(15)]
             [(2, True), (3, False), (5, False), (7, False), (11, False), (13, False)]
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^3 - 2)
             sage: P17a, P17b = [P for P,e in K.factor(17)]
             sage: E = EllipticCurve([0,0,0,0,2*a+1])
@@ -1230,6 +1251,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: [(p, E.has_additive_reduction(p)) for p in prime_range(15)]
             [(2, False), (3, True), (5, False), (7, False), (11, False), (13, False)]
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^3 - 2)
             sage: P17a, P17b = [P for P,e in K.factor(17)]
             sage: E = EllipticCurve([0,0,0,0,2*a+1])
@@ -1285,6 +1307,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             [2, 3, 1]
             sage: vector(e.tamagawa_numbers())
             (2, 3, 1)
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 + 3)
             sage: eK = e.base_extend(K)
             sage: eK.tamagawa_numbers()
@@ -1310,6 +1333,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 5)
             sage: E = EllipticCurve([20, 225, 750, 625*a + 6875, 31250*a + 46875])
             sage: [E.tamagawa_exponent(P) for P in E.discriminant().support()]
@@ -1340,6 +1364,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: E = EllipticCurve([0, 2+i])
             sage: E.tamagawa_product()
@@ -1393,6 +1418,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: E = EllipticCurve([0, 2+i])
             sage: E.tamagawa_product_bsd()
@@ -1454,6 +1480,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 5)
             sage: E = EllipticCurve([20, 225, 750, 625*a + 6875, 31250*a + 46875])
             sage: bad_primes = E.discriminant().support(); bad_primes
@@ -1482,6 +1509,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<i> = NumberField(x^2 + 1)
             sage: EllipticCurve([i, i - 1, i + 1, 24*i + 15, 14*i + 35]).conductor()
             Fractional ideal (21*i - 3)
@@ -1491,6 +1519,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         A not so well known curve with everywhere good reduction::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 38)
             sage: E = EllipticCurve([0,0,0, 21796814856932765568243810*a - 134364590724198567128296995, 121774567239345229314269094644186997594*a - 750668847495706904791115375024037711300])
             sage: E.conductor()
@@ -1498,6 +1527,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         An example which used to fail (see :issue:`5307`)::
 
+            sage: x = polygen(QQ)
             sage: K.<w> = NumberField(x^2 + x + 6)
             sage: E = EllipticCurve([w, -1, 0, -w-6, 0])
             sage: E.conductor()
@@ -1505,6 +1535,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         An example raised in :issue:`11346`::
 
+            sage: x = polygen(QQ)
             sage: K.<g> = NumberField(x^2 - x - 1)
             sage: E1 = EllipticCurve(K, [0, 0, 0, -1/48, -161/864])
             sage: [(p.smallest_integer(), e) for p,e in E1.conductor().factor()]
@@ -1539,6 +1570,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - x - 57)
             sage: K.class_number()
             3
@@ -1560,6 +1592,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         If (and only if) the curve has everywhere good reduction the
         result is the unit ideal::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 26)
             sage: E = EllipticCurve([a, a-1, a+1, 4*a+10, 2*a+6])
             sage: E.conductor()
@@ -1595,6 +1628,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 10)
             sage: E = EllipticCurve([0, 0, 0, -22500, 750000*a])
             sage: E.non_minimal_primes()
@@ -1643,6 +1677,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 10)
             sage: E = EllipticCurve([0, 0, 0, -22500, 750000*a])
             sage: E.is_global_minimal_model()
@@ -1690,6 +1725,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         A curve defined over a field of class number 2 with no global
         minimal model was a nontrivial minimality class::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 10)
             sage: K.class_number()
             2
@@ -1747,6 +1783,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 10)
             sage: E = EllipticCurve([0, 0, 0, 4536*a+14148, -163728*a-474336])
             sage: E.is_global_minimal_model()
@@ -1787,6 +1824,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 38)
             sage: E = EllipticCurve([0,0,0, 21796814856932765568243810*a - 134364590724198567128296995, 121774567239345229314269094644186997594*a - 750668847495706904791115375024037711300])
             sage: E2 = E.global_minimal_model()
@@ -1799,6 +1837,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         See :issue:`11347`::
 
+            sage: x = polygen(QQ)
             sage: K.<g> = NumberField(x^2 - x - 1)
             sage: E = EllipticCurve(K, [0, 0, 0, -1/48, 161/864])
             sage: E2 = E.integral_model().global_minimal_model(); E2
@@ -1811,6 +1850,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         See :issue:`14472`, this used not to work over a relative extension::
 
+            sage: x = polygen(QQ)
             sage: K1.<w> = NumberField(x^2 + x + 1)
             sage: m = polygen(K1)
             sage: K2.<v> = K1.extension(m^2 - w + 1)
@@ -1823,6 +1863,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         even when global minimal models did exist, their computation
         was not implemented.  Now it is::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - 10)
             sage: K.class_number()
             2
@@ -1866,6 +1907,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         An example of a curve with everywhere good reduction but which
         has no model with unit discriminant::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - x - 16)
             sage: K.class_number()
             2
@@ -1925,6 +1967,8 @@ class EllipticCurve_number_field(EllipticCurve_field):
             Traceback (most recent call last):
             ...
             ValueError: The ideal must be prime.
+
+            sage: x = polygen(QQ)
             sage: K = QQ.extension(x^2 + x + 1, "a")
             sage: E = EllipticCurve([1024*K.0, 1024*K.0])
             sage: E.reduction(2*K)
@@ -2327,7 +2371,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: x = polygen(ZZ, 'x')
             sage: K.<a> = NumberField(x^2 + 23, 'a')
             sage: E = EllipticCurve(K,[0,0,0,101,0])
-            sage: E.gens()
+            sage: E.gens()                                                              # needs eclib
             [(23831509/8669448*a - 2867471/8669448 : 76507317707/18049790736*a - 424166479633/18049790736 : 1),
              (-2031032029/969232392*a + 58813561/969232392 : -15575984630401/21336681877488*a + 451041199309/21336681877488 : 1),
              (-186948623/4656964 : 549438861195/10049728312*a : 1)]
@@ -2335,18 +2379,20 @@ class EllipticCurve_number_field(EllipticCurve_field):
         It can happen that no points are found if the height bounds
         used in the search are too small (see :issue:`10745`)::
 
+            sage: # needs eclib
             sage: K.<t> = NumberField(x^4 + x^2 - 7)
             sage: E = EllipticCurve(K, [1, 0, 5*t^2 + 16, 0, 0])
             sage: E.gens(lim1=1, lim3=1)
             []
             sage: E.rank()
             1
-            sage: gg=E.gens(lim3=13); gg  # long time (about 4s)
+            sage: gg = E.gens(lim3=13); gg  # long time (about 4s)
             [(... : 1)]
 
         Check that the the point found has infinite order, and that it is on the curve::
 
-            sage: P=gg[0]; P.order()  # long time
+            sage: # needs eclib
+            sage: P = gg[0]; P.order()  # long time
             +Infinity
             sage: E.defining_polynomial()(*P)  # long time
             0
@@ -2355,7 +2401,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
             sage: K.<t> = NumberField(x^2 - 17)
             sage: E = EllipticCurve(K, [-4, 0])
-            sage: E.gens()
+            sage: E.gens()                                                              # needs eclib
             [(-1/2*t + 1/2 : -1/2*t + 1/2 : 1), (-t + 3 : -2*t + 10 : 1)]
             sage: E.rank()
             2
@@ -2367,7 +2413,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: EK = E.base_extend(K)
             sage: EK.rank()
             0
-            sage: EK.gens()
+            sage: EK.gens()                                                             # needs eclib
             []
 
         IMPLEMENTATION:
@@ -2404,6 +2450,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         First define a field with two real embeddings::
 
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^3 - 2)
             sage: E = EllipticCurve([0,0,0,a,2])
             sage: embs = K.embeddings(CC); len(embs)
@@ -2628,8 +2675,8 @@ class EllipticCurve_number_field(EllipticCurve_field):
         The isogeny class may be visualized by obtaining its graph and
         plotting it::
 
-            sage: G = C.graph()
-            sage: G.show(edge_labels=True) # long time
+            sage: G = C.graph()                                                         # needs sage.graphs
+            sage: G.show(edge_labels=True)  # long time                                 # needs sage.graphs
 
             sage: K.<i> = QuadraticField(-1)
             sage: E = EllipticCurve([1+i, -i, i, 1, 0])
@@ -2748,6 +2795,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         blocks, by contrast, the prime entries `2` are unique
         determined::
 
+            sage: # needs sage.graphs
             sage: G = C.graph()  # long time
             sage: G.adjacency_matrix()  # long time # random
             [0 1 1 0 0 1]
@@ -2761,13 +2809,13 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         To display the graph without any edge labels::
 
-            sage: G.show()  # not tested
+            sage: G.show()  # not tested                                                # needs sage.graphs
 
         To display the graph with edge labels: by default, for curves
         with rational CM, the labels are the coefficients of the
         associated quadratic forms::
 
-            sage: G.show(edge_labels=True)  # not tested
+            sage: G.show(edge_labels=True)  # not tested                                # needs sage.graphs
 
         For an alternative view, first relabel the edges using only 2
         labels to distinguish between isogenies between curves with
@@ -2775,14 +2823,15 @@ class EllipticCurve_number_field(EllipticCurve_field):
         different endomorphism rings, then use a 3-dimensional plot
         which can be rotated::
 
-            sage: for i, j, l in G.edge_iterator():  # long time
+            sage: for i, j, l in G.edge_iterator():  # long time                        # needs sage.graphs
             ....:     G.set_edge_label(i, j, l.count(','))
-            sage: G.show3d(color_by_label=True)  # long time
+            sage: G.show3d(color_by_label=True)  # long time                            # needs sage.graphs sage.plot
 
         A class number `6` example.  First we set up the fields: ``pol``
         defines the same field as ``pol26`` but is simpler::
 
             sage: pol26 = hilbert_class_polynomial(-4*26)
+            sage: x = polygen(QQ, 'x')
             sage: pol = x^6 - x^5 + 2*x^4 + x^3 - 2*x^2 - x - 1
             sage: K.<a> = NumberField(pol)
             sage: L.<b> = K.extension(x^2 + 26)
@@ -2862,14 +2911,14 @@ class EllipticCurve_number_field(EllipticCurve_field):
         edges than in the non-CM case, it may be preferable to omit
         the edge_labels::
 
-            sage: G = C.graph()
-            sage: G.show(edge_labels=False) # long time
+            sage: G = C.graph()                                                         # needs sage.graphs
+            sage: G.show(edge_labels=False)  # long time                                # needs sage.graphs sage.plot
 
         It is possible to display a 3-dimensional plot, with colours
         to represent the different edge labels, in a form which can be
         rotated!::
 
-            sage: G.show3d(color_by_label=True) # long time
+            sage: G.show3d(color_by_label=True) # long time                             # needs sage.graphs sage.plot
 
         Over larger number fields several options make computations
         tractable.  Here we use algorithm 'heuristic' which avoids a
@@ -3366,6 +3415,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         Some examples over `\QQ`::
 
+            sage: # needs eclib
             sage: E = EllipticCurve([0, 1, 1, -2, 42])
             sage: Pi = E.gens(); Pi
             [(-4 : 1 : 1), (-3 : 5 : 1), (-11/4 : 43/8 : 1), (-2 : 6 : 1)]
@@ -3415,6 +3465,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         An example to show the explicit use of the height pairing matrix::
 
+            sage: # needs eclib
             sage: E = EllipticCurve([0, 1, 1, -2, 42])
             sage: Pi = E.gens()
             sage: H = E.height_pairing_matrix(Pi,3)
@@ -3639,6 +3690,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             False
             sage: E.cm_discriminant()
             -20
+            sage: x = polygen(QQ)
             sage: E.has_rational_cm(K.extension(x^2 + 5, 'b'))
             True
 
@@ -3903,6 +3955,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         Another number field::
 
             sage: E = EllipticCurve('389a1')
+            sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^3 - x + 1)
             sage: EK = E.change_ring(K)
             sage: P = EK(-1,1); Q = EK(0,-1)
@@ -4052,30 +4105,30 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: E = EllipticCurve([1,2,3,40,50])
             sage: E.conductor()
             2123582
-            sage: E.gens()
+            sage: E.gens()                                                              # needs eclib
             [(5 : 17 : 1)]
             sage: K.<i> = QuadraticField(-1)
             sage: EK = E.change_ring(K)
-            sage: EK.gens_quadratic()
+            sage: EK.gens_quadratic()                                                   # needs eclib
             [(5 : 17 : 1), (-13 : 48*i + 5 : 1)]
 
-            sage: E.change_ring(QuadraticField(3, 'a')).gens_quadratic()
+            sage: E.change_ring(QuadraticField(3, 'a')).gens_quadratic()                # needs eclib
             [(5 : 17 : 1), (-1 : 2*a - 1 : 1), (11/4 : 33/4*a - 23/8 : 1)]
 
             sage: K.<a> = QuadraticField(-7)
             sage: E = EllipticCurve([0,0,0,197,0])
             sage: E.conductor()
             2483776
-            sage: E.gens()
+            sage: E.gens()                                                              # needs eclib
             [(47995604297578081/7389879786648100 : -25038161802544048018837479/635266655830129794121000 : 1)]
             sage: K.<a> = QuadraticField(7)
-            sage: E.change_ring(K).gens_quadratic()
+            sage: E.change_ring(K).gens_quadratic()                                     # needs eclib
             [(-1209642055/59583566*a + 1639995844/29791783 : -377240626321899/1720892553212*a + 138577803462855/245841793316 : 1),
              (1/28 : 393/392*a : 1),
              (-61*a + 162 : 1098*a - 2916 : 1)]
 
             sage: E = EllipticCurve([1, a])
-            sage: E.gens_quadratic()
+            sage: E.gens_quadratic()                                                    # needs eclib
             Traceback (most recent call last):
             ...
             ValueError: gens_quadratic() requires the elliptic curve to be a base change from Q

@@ -128,7 +128,7 @@ def delta_lseries(prec=53, max_imaginary_part=0,
         algorithm = 'pari'
 
     if algorithm == 'gp':
-        from sage.lfunctions.all import Dokchitser
+        from sage.lfunctions.dokchitser import Dokchitser
         L = Dokchitser(conductor=1, gammaV=[0, 1], weight=12, eps=1,
                        prec=prec)
         s = 'tau(n) = (5*sigma(n,3)+7*sigma(n,5))*n/12-35*sum(k=1,n-1,(6*k-4*(n-k))*sigma(k,3)*sigma(n-k,5));'
@@ -751,6 +751,7 @@ class ModularForm_abstract(ModuleElement):
         These can be used to express the periods of `f` as exact
         linear combinations of the real and the imaginary period of `E`::
 
+            sage: # needs eclib
             sage: s = E.modular_symbol(sign=+1)
             sage: t = E.modular_symbol(sign=-1, implementation='sage')
             sage: s(3/11), t(3/11)
@@ -984,7 +985,7 @@ class ModularForm_abstract(ModuleElement):
             sage: L(1)
             0.588879583428483
         """
-        from sage.lfunctions.all import Dokchitser
+        from sage.lfunctions.dokchitser import Dokchitser
 
         # compute the requested embedding
         C = ComplexField(prec)
@@ -1093,7 +1094,7 @@ class ModularForm_abstract(ModuleElement):
         - David Loeffler (2015) -- added support for twists, integrated into
           Sage library
         """
-        from sage.lfunctions.all import Dokchitser
+        from sage.lfunctions.dokchitser import Dokchitser
         weight = self.weight()
         C = ComplexField(prec)
         if self.level() != 1:

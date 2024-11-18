@@ -40,6 +40,8 @@ EXAMPLES::
     1/3
     sage: m(1/17)
     -2/3
+
+    sage: # needs sage.graphs
     sage: m2 = E.modular_symbol(-1, implementation='sage')
     sage: m2(0)
     0
@@ -174,6 +176,8 @@ class ModularSymbol(SageObject):
             sage: m = EllipticCurve('11a1').modular_symbol()
             sage: m.sign()
             1
+
+            sage: # needs sage.graphs
             sage: m = EllipticCurve('11a1').modular_symbol(sign=-1, implementation='sage')
             sage: m.sign()
             -1
@@ -214,6 +218,8 @@ class ModularSymbol(SageObject):
             sage: m
             Modular symbol with sign 1 over Rational Field attached to
              Elliptic Curve defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
+
+            sage: # needs sage.graphs
             sage: m = EllipticCurve('43a1').modular_symbol(sign=-1, implementation='sage')
             sage: m
             Modular symbol with sign -1 over Rational Field attached to
@@ -401,6 +407,7 @@ class ModularSymbolSage(ModularSymbol):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve('11a1')
             sage: from sage.schemes.elliptic_curves.ell_modular_symbols import ModularSymbolSage
             sage: M = ModularSymbolSage(E, +1)
@@ -420,6 +427,7 @@ class ModularSymbolSage(ModularSymbol):
         This is a rank 1 case with vanishing positive twists.
         The modular symbol is adjusted by -2::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve('121b1')
             sage: M = ModularSymbolSage(E, -1, normalize='L_ratio')
             sage: M(1/3)
@@ -427,6 +435,7 @@ class ModularSymbolSage(ModularSymbol):
             sage: M._scaling
             1
 
+            sage: # needs sage.graphs
             sage: M = EllipticCurve('121d1').modular_symbol(implementation='sage')
             sage: M(0)
             2
@@ -435,6 +444,7 @@ class ModularSymbolSage(ModularSymbol):
             sage: M(0)
             1
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve('15a1')
             sage: [C.modular_symbol(implementation='sage', normalize='L_ratio')(0)
             ....:  for C in E.isogeny_class()]
@@ -486,6 +496,7 @@ class ModularSymbolSage(ModularSymbol):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: m = EllipticCurve('11a1').modular_symbol(implementation='sage')
             sage: m._scaling
             1/5
@@ -513,6 +524,7 @@ class ModularSymbolSage(ModularSymbol):
 
         Some harder cases fail::
 
+            sage: # needs sage.graphs
             sage: m = EllipticCurve('121b1').modular_symbol(implementation='sage')
             Warning : Could not normalize the modular symbols, maybe all further results will be multiplied by -1 and a power of 2
             sage: m._scaling
@@ -520,6 +532,7 @@ class ModularSymbolSage(ModularSymbol):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: rk0 = ['11a1', '11a2', '15a1', '27a1', '37b1']
             sage: for la in rk0:  # long time (3s on sage.math, 2011)
             ....:          E = EllipticCurve(la)
@@ -532,6 +545,7 @@ class ModularSymbolSage(ModularSymbol):
             1/3 1/3 1/3
             2/3 2/3 2/3
 
+            sage: # needs sage.graphs
             sage: rk1 = ['37a1','43a1','53a1', '91b1','91b2','91b3']
             sage: [EllipticCurve(la).modular_symbol()(0) for la in rk1]  # long time (1s on sage.math, 2011)
             [0, 0, 0, 0, 0, 0]
@@ -610,6 +624,7 @@ class ModularSymbolSage(ModularSymbol):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve('11a1')
             sage: m = E.modular_symbol(sign=+1, implementation='sage')
             sage: m.__lalg__(1)
@@ -715,6 +730,7 @@ class ModularSymbolSage(ModularSymbol):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: m = EllipticCurve('11a1').modular_symbol(implementation='sage')
             sage: m._call_with_caching(0)
             1/5
@@ -736,6 +752,7 @@ class ModularSymbolSage(ModularSymbol):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: m = EllipticCurve('11a1').modular_symbol(implementation='sage')
             sage: m(0)
             1/5

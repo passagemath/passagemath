@@ -247,7 +247,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
     Test pickling an elliptic curve that has known points on it::
 
-        sage: e = EllipticCurve([0, 0, 1, -1, 0]); g = e.gens(); loads(dumps(e)) == e
+        sage: e = EllipticCurve([0, 0, 1, -1, 0]); g = e.gens(); loads(dumps(e)) == e   # needs eclib
         True
 
     Test that the refactoring from :issue:`14711` did preserve the behaviour
@@ -496,8 +496,8 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
             (0 : 1 : 0)
             sage: P.is_zero()
             True
-            sage: P = E.gens()[0]
-            sage: P.is_zero()
+            sage: P = E.gens()[0]                                                       # needs eclib
+            sage: P.is_zero()                                                           # needs eclib
             False
         """
         return bool(self._coords[2])
@@ -696,10 +696,10 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         Example to show that bug :issue:`4820` is fixed::
 
-            sage: [type(c) for c in 2*EllipticCurve('37a1').gen(0)]
+            sage: [type(c) for c in 2*EllipticCurve('37a1').gen(0)]                     # needs eclib
             [<... 'sage.rings.rational.Rational'>,
-            <... 'sage.rings.rational.Rational'>,
-            <... 'sage.rings.rational.Rational'>]
+             <... 'sage.rings.rational.Rational'>,
+             <... 'sage.rings.rational.Rational'>]
 
         Checks that :issue:`15964` is fixed::
 
@@ -805,7 +805,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         Example to show that bug :issue:`4820` is fixed::
 
-            sage: [type(c) for c in -EllipticCurve('37a1').gen(0)]
+            sage: [type(c) for c in -EllipticCurve('37a1').gen(0)]                      # needs eclib
             [<... 'sage.rings.rational.Rational'>,
              <... 'sage.rings.rational.Rational'>,
              <... 'sage.rings.rational.Rational'>]
@@ -2435,7 +2435,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
     Test pickling an elliptic curve that has known points on it::
 
-        sage: e = EllipticCurve([0, 0, 1, -1, 0]); g = e.gens(); loads(dumps(e)) == e
+        sage: e = EllipticCurve([0, 0, 1, -1, 0]); g = e.gens(); loads(dumps(e)) == e   # needs ecl
         True
     """
 
@@ -2749,6 +2749,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('990e1')
             sage: P = E.gen(0); P
             (15 : 51 : 1)
@@ -2960,7 +2961,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
             0.0511114082399688
             sage: P.order()
             +Infinity
-            sage: E.regulator()
+            sage: E.regulator()                                 # needs eclib
             0.0511114082399688...
 
             sage: def naive_height(P):

@@ -34,6 +34,7 @@ class ProjectiveConic_number_field(ProjectiveConic_field):
 
     EXAMPLES::
 
+        sage: x = polygen(QQ, 'x')
         sage: K.<a> = NumberField(x^3 - 2, 'a')
         sage: P.<X, Y, Z> = K[]
         sage: Conic(X^2 + Y^2 - a*Z^2)

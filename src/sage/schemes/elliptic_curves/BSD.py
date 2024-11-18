@@ -21,9 +21,9 @@ class BSD_data:
         sage: D = BSD_data()
         sage: D.Sha is None
         True
-        sage: D.curve=EllipticCurve('11a')
-        sage: D.update()
-        sage: D.Sha
+        sage: D.curve = EllipticCurve('11a')
+        sage: D.update()                                                                # needs sage.graphs
+        sage: D.Sha                                                                     # needs sage.graphs
         Tate-Shafarevich group for the Elliptic Curve
          defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
     """
@@ -54,8 +54,8 @@ class BSD_data:
             sage: D.Sha is None
             True
             sage: D.curve = EllipticCurve('11a')
-            sage: D.update()
-            sage: D.Sha
+            sage: D.update()                                                            # needs sage.graphs
+            sage: D.Sha                                                                 # needs sage.graphs
             Tate-Shafarevich group for the Elliptic Curve
              defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
         """
@@ -99,7 +99,7 @@ def simon_two_descent_work(E, two_tor_rk):
         ...
         (0, 0, 0, 0, [])
         sage: E = EllipticCurve('37a')
-        sage: simon_two_descent_work(E, E.two_torsion_rank())
+        sage: simon_two_descent_work(E, E.two_torsion_rank())                           # needs eclib
         (1, 1, 0, 0, [(0 : 0 : 1)])
     """
     from sage.misc.superseded import deprecation
@@ -136,10 +136,10 @@ def mwrank_two_descent_work(E, two_tor_rk):
 
         sage: from sage.schemes.elliptic_curves.BSD import mwrank_two_descent_work
         sage: E = EllipticCurve('14a')
-        sage: mwrank_two_descent_work(E, E.two_torsion_rank())
+        sage: mwrank_two_descent_work(E, E.two_torsion_rank())                          # needs eclib
         (0, 0, 0, 0, [])
         sage: E = EllipticCurve('37a')
-        sage: mwrank_two_descent_work(E, E.two_torsion_rank())
+        sage: mwrank_two_descent_work(E, E.two_torsion_rank())                          # needs eclib
         (1, 1, 0, 0, [(0 : -1 : 1)])
     """
     MWRC = E.mwrank_curve()
@@ -178,13 +178,13 @@ def pari_two_descent_work(E):
         sage: pari_two_descent_work(E)
         (0, 0, 0, 0, [])
         sage: E = EllipticCurve('37a')
-        sage: pari_two_descent_work(E) # random, up to sign
+        sage: pari_two_descent_work(E) # random, up to sign                             # needs eclib
         (1, 1, 0, 0, [(0 : -1 : 1)])
         sage: E = EllipticCurve('210e7')
-        sage: pari_two_descent_work(E)
+        sage: pari_two_descent_work(E)                                                  # needs eclib
         (0, 2, 0, 2, [])
         sage: E = EllipticCurve('66b3')
-        sage: pari_two_descent_work(E)
+        sage: pari_two_descent_work(E)                                                  # needs eclib
         (0, 0, 2, 2, [])
     """
     ep = E.pari_curve()
@@ -264,7 +264,7 @@ def heegner_index_work(E):
     EXAMPLES::
 
         sage: from sage.schemes.elliptic_curves.BSD import heegner_index_work
-        sage: heegner_index_work(EllipticCurve('14a'))
+        sage: heegner_index_work(EllipticCurve('14a'))                                  # needs sage.graphs
         (1, -31)
     """
     for D in E.heegner_discriminants_list(10):
@@ -346,14 +346,14 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
 
     EXAMPLES::
 
-        sage: EllipticCurve('11a').prove_BSD(verbosity=2)
+        sage: EllipticCurve('11a').prove_BSD(verbosity=2)                               # needs sage.graphs
         p = 2: True by 2-descent
         True for p not in {2, 5} by Kolyvagin.
         Kolyvagin's bound for p = 5 applies by Lawson-Wuthrich
         True for p = 5 by Kolyvagin bound
         []
 
-        sage: EllipticCurve('14a').prove_BSD(verbosity=2)
+        sage: EllipticCurve('14a').prove_BSD(verbosity=2)                               # needs sage.graphs
         p = 2: True by 2-descent
         True for p not in {2, 3} by Kolyvagin.
         Kolyvagin's bound for p = 3 applies by Lawson-Wuthrich
@@ -361,14 +361,14 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
         []
 
         sage: E = EllipticCurve("20a1")
-        sage: E.prove_BSD(verbosity=2)
+        sage: E.prove_BSD(verbosity=2)                                                  # needs sage.graphs
         p = 2: True by 2-descent
         True for p not in {2, 3} by Kolyvagin.
         Kato further implies that #Sha[3] is trivial.
         []
 
         sage: E = EllipticCurve("50b1")
-        sage: E.prove_BSD(verbosity=2)
+        sage: E.prove_BSD(verbosity=2)                                                  # needs sage.graphs
         p = 2: True by 2-descent
         True for p not in {2, 3, 5} by Kolyvagin.
         Kolyvagin's bound for p = 3 applies by Lawson-Wuthrich
@@ -376,7 +376,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
         True for p = 3 by Kolyvagin bound
         True for p = 5 by Kolyvagin bound
         []
-        sage: E.prove_BSD(two_desc='pari')
+        sage: E.prove_BSD(two_desc='pari')                                              # needs sage.graphs
         []
 
     A rank two curve::
@@ -385,18 +385,18 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
 
     We know nothing with proof=True::
 
-        sage: E.prove_BSD()
+        sage: E.prove_BSD()                                                             # needs sage.graphs
         Set of all prime numbers: 2, 3, 5, 7, ...
 
     We (think we) know everything with proof=False::
 
-        sage: E.prove_BSD(proof=False)
+        sage: E.prove_BSD(proof=False)                                                  # needs sage.graphs
         []
 
     A curve of rank 0 and prime conductor::
 
         sage: E = EllipticCurve('19a')
-        sage: E.prove_BSD(verbosity=2)
+        sage: E.prove_BSD(verbosity=2)                                                  # needs sage.graphs
         p = 2: True by 2-descent
         True for p not in {2, 3} by Kolyvagin.
         Kolyvagin's bound for p = 3 applies by Lawson-Wuthrich
@@ -409,7 +409,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
         sage: E._EllipticCurve_rational_field__rank
         (1, True)
         sage: E.analytic_rank = lambda : 0
-        sage: E.prove_BSD()
+        sage: E.prove_BSD()                                                             # needs sage.graphs
         Traceback (most recent call last):
         ...
         RuntimeError: It seems that the rank conjecture does not hold for this curve
@@ -425,7 +425,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
         sage: def foo(use_database):
         ....:  return 4
         sage: S.an = foo
-        sage: E.prove_BSD()
+        sage: E.prove_BSD()                                                             # needs sage.graphs
         Traceback (most recent call last):
         ...
         RuntimeError: Apparent contradiction: 0 <= rank(sha[2]) <= 0, but ord_2(sha_an) = 2
@@ -433,7 +433,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
     An example with a Tamagawa number at 5::
 
         sage: E = EllipticCurve('123a1')
-        sage: E.prove_BSD(verbosity=2)
+        sage: E.prove_BSD(verbosity=2)                                                  # needs sage.graphs
         p = 2: True by 2-descent
         True for p not in {2, 5} by Kolyvagin.
         Kolyvagin's bound for p = 5 applies by Lawson-Wuthrich
@@ -443,7 +443,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
     A curve for which 3 divides the order of the Tate-Shafarevich group::
 
         sage: E = EllipticCurve('681b')
-        sage: E.prove_BSD(verbosity=2)               # long time
+        sage: E.prove_BSD(verbosity=2)               # long time                        # needs sage.graphs
         p = 2: True by 2-descent...
         True for p not in {2, 3} by Kolyvagin....
         Remaining primes:
@@ -455,7 +455,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
     A curve for which we need to use ``heegner_index_bound``::
 
         sage: E = EllipticCurve('198b')
-        sage: E.prove_BSD(verbosity=1, secs_hi=1)
+        sage: E.prove_BSD(verbosity=1, secs_hi=1)                                       # needs sage.graphs
         p = 2: True by 2-descent
         True for p not in {2, 3} by Kolyvagin.
         [3]
@@ -463,6 +463,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
     The ``return_BSD`` option gives an object with detailed information
     about the proof::
 
+        sage: # needs sage.graphs
         sage: E = EllipticCurve('26b')
         sage: B = E.prove_BSD(return_BSD=True)
         sage: B.two_tor_rk
@@ -480,7 +481,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
 
     This was fixed by :issue:`8184` and :issue:`7575`::
 
-        sage: EllipticCurve('438e1').prove_BSD(verbosity=1)
+        sage: EllipticCurve('438e1').prove_BSD(verbosity=1)                             # needs sage.graphs
         p = 2: True by 2-descent...
         True for p not in {2} by Kolyvagin.
         []
@@ -488,7 +489,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
     ::
 
         sage: E = EllipticCurve('960d1')
-        sage: E.prove_BSD(verbosity=1)  # long time (4s on sage.math, 2011)
+        sage: E.prove_BSD(verbosity=1)  # long time (4s on sage.math, 2011)             # needs sage.graphs
         p = 2: True by 2-descent
         True for p not in {2} by Kolyvagin.
         []
@@ -496,7 +497,7 @@ def prove_BSD(E, verbosity=0, two_desc='mwrank', proof=None, secs_hi=5,
     ::
 
         sage: E = EllipticCurve('66b3')
-        sage: E.prove_BSD(two_desc="pari",verbosity=1)
+        sage: E.prove_BSD(two_desc="pari",verbosity=1)                                  # needs sage.graphs
         p = 2: True by 2-descent
         True for p not in {2} by Kolyvagin.
         []

@@ -1633,6 +1633,7 @@ cdef class FiniteField_givaroElement(FinitePolyExtElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: S.<b> = GF(5^2); S
             Finite Field in b of size 5^2
             sage: (4*b+3)._gap_init_()
