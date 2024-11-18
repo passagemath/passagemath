@@ -7465,7 +7465,7 @@ cdef class Polynomial(CommutativePolynomial):
         This function works over any field. However for base rings other than
         `\ZZ` and `\QQ` only the resultant algorithm is available::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.libs.singular sage.rings.number_field
             sage: x = polygen(QQbar)
             sage: p1 = x**2 - AA(2).sqrt()
             sage: p2 = x**3 - AA(3).sqrt()

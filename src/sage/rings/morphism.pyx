@@ -1543,7 +1543,7 @@ cdef class RingHomomorphism(RingMap):
 
             sage: R.<x,y> = QQbar[]                                                     # needs sage.rings.number_field
             sage: f = R.hom([x + QQbar(I)*y^2, -y], R)                                  # needs sage.rings.number_field
-            sage: (f.inverse() * f).is_identity()                                       # needs sage.rings.number_field
+            sage: (f.inverse() * f).is_identity()                                       # needs sage.libs.singular sage.rings.number_field
             True
 
         Check that results are cached::
