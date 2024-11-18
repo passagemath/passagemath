@@ -3901,7 +3901,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
             sage: EllipticCurve([0, 0, 1, -7, 6]).modular_degree()
             1984
-            sage: EllipticCurve([0, 0, 1, -7, 6]).modular_degree(algorithm='sympow')
+            sage: EllipticCurve([0, 0, 1, -7, 6]).modular_degree(algorithm='sympow')    # needs sympow
             1984
             sage: EllipticCurve([0, 0, 1, -7, 6]).modular_degree(algorithm='magma')  # optional - magma
             1984
