@@ -10,7 +10,6 @@ on:
 jobs:
 
   tox:
-    needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels]
     if: (success() || failure())
     strategy:
       fail-fast: false
@@ -101,4 +100,3 @@ jobs:
           cd pkgs/$pkg
           sage --fixdoctests --distribution "$pkg" --venv .tox/py310-norequirements --update-known-test-failures
           git diff
-
