@@ -225,7 +225,7 @@ def decomposition(x):
         (Ambient free module of rank 2 over the principal ideal domain Integer Ring, True)
         ]
 
-        sage: # needs sage.groups
+        sage: # needs sage.schemes
         sage: G.<a,b> = DirichletGroup(20)
         sage: c = a * b
         sage: d = c.decomposition(); d
