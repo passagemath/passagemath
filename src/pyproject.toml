@@ -6,7 +6,9 @@ requires = [
     'setuptools >= 68.1.1',
     # version constraint for macOS Big Sur support (see https://github.com/sagemath/sage/issues/31050)
     'wheel >=0.36.2',
-    'cypari2 >=2.1.1',
+    # Pin version for which wheels are available on PyPI - https://github.com/passagemath/passagemath/issues/347
+    'cypari2 == 2.1.5; sys_platform == "darwin" and platform_machine != "arm64"',
+    'cypari2 == 2.2.0; sys_platform != "darwin" or platform_machine == "arm64"',
     'cysignals >=1.10.2',
     # per https://github.com/scipy/scipy/blob/maintenance/1.13.x/pyproject.toml
     'cython >=3.0.8,<3.1.0',
