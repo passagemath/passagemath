@@ -1431,7 +1431,7 @@ def RandomTwoSphere(n):
         True
         sage: fg = G.flip_graph(); fg
         Graph on 8 vertices
-        sage: fg.is_planar() and fg.is_regular(3)
+        sage: fg.is_planar() and fg.is_regular(3)               # needs planarity
         True
     """
     from sage.graphs.generators.random import RandomTriangulation
