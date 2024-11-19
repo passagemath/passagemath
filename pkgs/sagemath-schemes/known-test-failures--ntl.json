@@ -393,7 +393,7 @@
     },
     "sage.categories.filtered_modules_with_basis": {
         "failed": true,
-        "ntests": 99
+        "ntests": 97
     },
     "sage.categories.finite_complex_reflection_groups": {
         "ntests": 172
@@ -872,7 +872,6 @@
         "ntests": 172
     },
     "sage.coding.kasami_codes": {
-        "failed": true,
         "ntests": 45
     },
     "sage.coding.linear_code": {
@@ -1250,7 +1249,6 @@
         "ntests": 343
     },
     "sage.doctest.test": {
-        "failed": true,
         "ntests": 23
     },
     "sage.doctest.util": {
@@ -1573,8 +1571,7 @@
         "ntests": 101
     },
     "sage.geometry.cone_critical_angles": {
-        "failed": true,
-        "ntests": 125
+        "ntests": 112
     },
     "sage.geometry.convex_set": {
         "ntests": 148
@@ -1609,7 +1606,7 @@
         "ntests": 38
     },
     "sage.geometry.hyperplane_arrangement.plot": {
-        "ntests": 51
+        "ntests": 7
     },
     "sage.geometry.integral_points.pxi": {
         "ntests": 171
@@ -1676,7 +1673,7 @@
     },
     "sage.geometry.polyhedron.base6": {
         "failed": true,
-        "ntests": 202
+        "ntests": 203
     },
     "sage.geometry.polyhedron.base7": {
         "ntests": 128
@@ -1968,10 +1965,6 @@
     "sage.lfunctions.pari": {
         "failed": true,
         "ntests": 182
-    },
-    "sage.lfunctions.zero_sums": {
-        "failed": true,
-        "ntests": 132
     },
     "sage.libs.arb.arith": {
         "ntests": 8
@@ -2304,14 +2297,6 @@
     "sage.matroids.basis_matroid": {
         "ntests": 150
     },
-    "sage.matroids.chow_ring": {
-        "failed": true,
-        "ntests": 40
-    },
-    "sage.matroids.chow_ring_ideal": {
-        "failed": true,
-        "ntests": 81
-    },
     "sage.matroids.circuit_closures_matroid": {
         "ntests": 86
     },
@@ -2343,8 +2328,7 @@
         "ntests": 654
     },
     "sage.matroids.matroid": {
-        "failed": true,
-        "ntests": 941
+        "ntests": 936
     },
     "sage.matroids.matroids_plot_helpers": {
         "ntests": 73
@@ -2446,7 +2430,7 @@
     },
     "sage.misc.functional": {
         "failed": true,
-        "ntests": 315
+        "ntests": 319
     },
     "sage.misc.gperftools": {
         "ntests": 17
@@ -2884,10 +2868,6 @@
     "sage.modular.modform.weight1": {
         "ntests": 10
     },
-    "sage.modular.modform_hecketriangle.abstract_ring": {
-        "failed": true,
-        "ntests": 523
-    },
     "sage.modular.modform_hecketriangle.analytic_type": {
         "ntests": 6
     },
@@ -2957,7 +2937,6 @@
         "ntests": 57
     },
     "sage.modular.modsym.tests": {
-        "failed": true,
         "ntests": 39
     },
     "sage.modular.overconvergent.genus0": {
@@ -3008,8 +2987,7 @@
         "ntests": 117
     },
     "sage.modules.filtered_vector_space": {
-        "failed": true,
-        "ntests": 174
+        "ntests": 169
     },
     "sage.modules.finite_submodule_iter": {
         "failed": true,
@@ -3027,7 +3005,7 @@
         "ntests": 60
     },
     "sage.modules.free_module_integer": {
-        "ntests": 8
+        "ntests": 11
     },
     "sage.modules.free_module_morphism": {
         "ntests": 171
@@ -3493,7 +3471,6 @@
         "ntests": 283
     },
     "sage.rings.finite_rings.finite_field_base": {
-        "failed": true,
         "ntests": 340
     },
     "sage.rings.finite_rings.finite_field_constructor": {
@@ -4132,8 +4109,7 @@
         "ntests": 1370
     },
     "sage.rings.qqbar_decorators": {
-        "failed": true,
-        "ntests": 17
+        "ntests": 10
     },
     "sage.rings.quotient_ring": {
         "ntests": 257
@@ -4370,7 +4346,7 @@
     },
     "sage.schemes.elliptic_curves.ell_modular_symbols": {
         "failed": true,
-        "ntests": 76
+        "ntests": 43
     },
     "sage.schemes.elliptic_curves.ell_number_field": {
         "failed": true,
@@ -4382,7 +4358,7 @@
     },
     "sage.schemes.elliptic_curves.ell_rational_field": {
         "failed": true,
-        "ntests": 786
+        "ntests": 776
     },
     "sage.schemes.elliptic_curves.ell_tate_curve": {
         "ntests": 64
@@ -4549,11 +4525,9 @@
         "ntests": 75
     },
     "sage.schemes.hyperelliptic_curves.jacobian_endomorphism_utils": {
-        "failed": true,
         "ntests": 39
     },
     "sage.schemes.hyperelliptic_curves.jacobian_generic": {
-        "failed": true,
         "ntests": 106
     },
     "sage.schemes.hyperelliptic_curves.jacobian_homset": {
