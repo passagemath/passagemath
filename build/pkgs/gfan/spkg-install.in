@@ -1,4 +1,7 @@
-CXXFLAGS="$CXXFLAGS"
+if [ "$UNAME" = "Darwin" ]; then
+    # https://stackoverflow.com/questions/78746910/recognize-stdexecutionpar-c-feature-in-macos
+    CXXFLAGS="$CXXFLAGS -fexperimental-library"
+fi
 
 export CC CXX CFLAGS CXXFLAGS LDFLAGS
 
