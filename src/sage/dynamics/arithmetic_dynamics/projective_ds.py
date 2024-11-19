@@ -7823,14 +7823,14 @@ class DynamicalSystem_projective_field(DynamicalSystem_projective,
 
             sage: PS.<x,y> = ProjectiveSpace(1,QQ)
             sage: f = DynamicalSystem_projective([7*x^2 - 28*y^2, 24*x*y])
-            sage: f.rational_preperiodic_graph()                                        # needs sage.rings.function_field
+            sage: f.rational_preperiodic_graph()                                        # needs sage.graphs sage.rings.function_field
             Looped digraph on 12 vertices
 
         ::
 
             sage: PS.<x,y> = ProjectiveSpace(1,QQ)
             sage: f = DynamicalSystem_projective([-3/2*x^3 + 19/6*x*y^2, y^3])
-            sage: f.rational_preperiodic_graph(prime_bound=[1,8])                       # needs sage.rings.function_field
+            sage: f.rational_preperiodic_graph(prime_bound=[1,8])                       # needs sage.graphs sage.rings.function_field
             Looped digraph on 12 vertices
 
         ::
@@ -7838,7 +7838,7 @@ class DynamicalSystem_projective_field(DynamicalSystem_projective,
             sage: PS.<x,y,z> = ProjectiveSpace(2,QQ)
             sage: f = DynamicalSystem_projective([2*x^3 - 50*x*z^2 + 24*z^3,
             ....:                                 5*y^3 - 53*y*z^2 + 24*z^3, 24*z^3])
-            sage: f.rational_preperiodic_graph(prime_bound=[1,11],  # long time
+            sage: f.rational_preperiodic_graph(prime_bound=[1,11],  # long time         # needs sage.graphs
             ....:                              lifting_prime=13)
             Looped digraph on 30 vertices
 
@@ -7848,7 +7848,7 @@ class DynamicalSystem_projective_field(DynamicalSystem_projective,
             sage: K.<w> = QuadraticField(-3)
             sage: P.<x,y> = ProjectiveSpace(K,1)
             sage: f = DynamicalSystem_projective([x^2 + y^2, y^2])
-            sage: f.rational_preperiodic_graph()        # long time
+            sage: f.rational_preperiodic_graph()        # long time                     # needs sage.graphs
             Looped digraph on 5 vertices
         """
         #input checking done in .rational_preperiodic_points()
