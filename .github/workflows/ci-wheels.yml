@@ -6,6 +6,7 @@ on:
       run-id:
         description: 'Workflow run id'
         required: true
+  workflow_call:
 
 jobs:
 
