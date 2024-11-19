@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-modules
-# sage.doctest: needs sage.libs.singular
+# sage.doctest: needs sage.graphs sage.libs.singular
 r"""
 Chow ring ideals of matroids
 
