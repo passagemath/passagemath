@@ -34,6 +34,7 @@ Modular symbols are used to compute `p`-adic `L`-functions.
 
 EXAMPLES::
 
+    sage: # needs eclib
     sage: E = EllipticCurve("19a1")
     sage: m = E.modular_symbol()
     sage: m(0)
@@ -173,8 +174,8 @@ class ModularSymbol(SageObject):
 
         EXAMPLES::
 
-            sage: m = EllipticCurve('11a1').modular_symbol()
-            sage: m.sign()
+            sage: m = EllipticCurve('11a1').modular_symbol()                            # needs eclib
+            sage: m.sign()                                                              # needs eclib
             1
 
             sage: # needs sage.graphs
@@ -190,8 +191,8 @@ class ModularSymbol(SageObject):
 
         EXAMPLES::
 
-            sage: m = EllipticCurve('11a1').modular_symbol()
-            sage: m.elliptic_curve()
+            sage: m = EllipticCurve('11a1').modular_symbol()                            # needs eclib
+            sage: m.elliptic_curve()                                                    # needs eclib
             Elliptic Curve defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
         """
         return self._E
@@ -202,8 +203,8 @@ class ModularSymbol(SageObject):
 
         EXAMPLES::
 
-            sage: m = EllipticCurve('11a1').modular_symbol()
-            sage: m.base_ring()
+            sage: m = EllipticCurve('11a1').modular_symbol()                            # needs eclib
+            sage: m.base_ring()                                                         # needs eclib
             Rational Field
         """
         return self._base_ring
@@ -214,8 +215,8 @@ class ModularSymbol(SageObject):
 
         EXAMPLES::
 
-            sage: m = EllipticCurve('11a1').modular_symbol()
-            sage: m
+            sage: m = EllipticCurve('11a1').modular_symbol()                            # needs eclib
+            sage: m                                                                     # needs eclib
             Modular symbol with sign 1 over Rational Field attached to
              Elliptic Curve defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
 
@@ -252,6 +253,7 @@ class ModularSymbolECLIB(ModularSymbol):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: from sage.schemes.elliptic_curves.ell_modular_symbols import ModularSymbolECLIB
             sage: E = EllipticCurve('11a1')
             sage: M = ModularSymbolECLIB(E,+1)
@@ -267,6 +269,7 @@ class ModularSymbolECLIB(ModularSymbol):
 
         This is a rank 1 case with vanishing positive twists::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('121b1')
             sage: M = ModularSymbolECLIB(E,+1)
             sage: M(0)
@@ -274,16 +277,17 @@ class ModularSymbolECLIB(ModularSymbol):
             sage: M(1/7)
             1/2
 
-            sage: M = EllipticCurve('121d1').modular_symbol(implementation='eclib')
-            sage: M(0)
+            sage: M = EllipticCurve('121d1').modular_symbol(implementation='eclib')     # needs eclib
+            sage: M(0)                                                                  # needs eclib
             2
 
-            sage: E = EllipticCurve('15a1')
-            sage: [C.modular_symbol(implementation='eclib')(0) for C in E.isogeny_class()]
+            sage: E = EllipticCurve('15a1')                                             # needs eclib
+            sage: [C.modular_symbol(implementation='eclib')(0) for C in E.isogeny_class()]  # needs eclib
             [1/4, 1/8, 1/4, 1/2, 1/8, 1/16, 1/2, 1]
 
         Since :issue:`10256`, the interface for negative modular symbols in eclib is available::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('11a1')
             sage: Mplus = E.modular_symbol(+1); Mplus
             Modular symbol with sign 1 over Rational Field attached to
@@ -298,13 +302,14 @@ class ModularSymbolECLIB(ModularSymbol):
 
         The scaling factor relative to eclib's normalization is 1/2 for curves of negative discriminant::
 
-            sage: [E.discriminant() for E in cremona_curves([14])]
+            sage: [E.discriminant() for E in cremona_curves([14])]                      # needs eclib
             [-21952, 941192, -1835008, -28, 25088, 98]
-            sage: [E.modular_symbol()._scaling for E in cremona_curves([14])]
+            sage: [E.modular_symbol()._scaling for E in cremona_curves([14])]           # needs eclib
             [1/2, 1, 1/2, 1/2, 1, 1]
 
         TESTS (for :issue:`10236`)::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('11a1')
             sage: m = E.modular_symbol(implementation='eclib')
             sage: m(1/7)
@@ -317,6 +322,7 @@ class ModularSymbolECLIB(ModularSymbol):
         v20210310 the value of ``nap`` is increased automatically by
         ``eclib``::
 
+            sage: # needs eclib
             sage: from sage.schemes.elliptic_curves.ell_modular_symbols import ModularSymbolECLIB
             sage: E = EllipticCurve('1590g1')
             sage: m = ModularSymbolECLIB(E, sign=+1, nap=300)
@@ -327,6 +333,7 @@ class ModularSymbolECLIB(ModularSymbol):
         effect.  The correct values may verified by the numerical
         implementation::
 
+            sage: # needs eclib
             sage: m = ModularSymbolECLIB(E, sign=+1, nap=400)
             sage: [m(a/5) for a in [1..4]]
             [13/2, -13/2, -13/2, 13/2]
@@ -353,8 +360,8 @@ class ModularSymbolECLIB(ModularSymbol):
 
         EXAMPLES::
 
-            sage: m = EllipticCurve('11a1').modular_symbol(implementation='eclib')
-            sage: m._call_with_caching(0)
+            sage: m = EllipticCurve('11a1').modular_symbol(implementation='eclib')      # needs eclib
+            sage: m._call_with_caching(0)                                               # needs eclib
             1/5
         """
         cache = self.cache[base_at_infinity]
@@ -372,8 +379,8 @@ class ModularSymbolECLIB(ModularSymbol):
 
         EXAMPLES::
 
-            sage: m = EllipticCurve('11a1').modular_symbol(implementation='eclib')
-            sage: m(0)
+            sage: m = EllipticCurve('11a1').modular_symbol(implementation='eclib')      # needs eclib
+            sage: m(0)                                                                  # needs eclib
             1/5
         """
         from sage.rings.rational import Rational
