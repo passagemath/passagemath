@@ -1518,8 +1518,8 @@ class Polyhedron_base6(Polyhedron_base5):
 
         TESTS::
 
-            sage: D = polytopes.dodecahedron()                                          # needs sage.rings.number_field
-            sage: D.facets()[0].as_polyhedron()._test_affine_hull_projection()          # needs sage.rings.number_field
+            sage: D = polytopes.dodecahedron()                                          # needs sage.groups sage.rings.number_field
+            sage: D.facets()[0].as_polyhedron()._test_affine_hull_projection()          # needs sage.groups sage.rings.number_field
         """
         if tester is None:
             tester = self._tester(**options)
