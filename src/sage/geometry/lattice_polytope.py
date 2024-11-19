@@ -1318,7 +1318,10 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
                 if self.is_reflexive():
                     parts[1] = "reflexive"
                     if self.dim() == 2 or self.index.is_in_cache():
-                        parts.insert(-1, "#%d" % self.index())
+                        try:
+                            parts.insert(-1, "#%d" % self.index())
+                        except ImportError:
+                            pass
             except (ValueError, FileNotFoundError):
                 pass
             if isinstance(self.lattice(), ToricLattice_generic):
