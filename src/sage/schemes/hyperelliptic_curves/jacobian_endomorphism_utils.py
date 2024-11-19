@@ -60,7 +60,7 @@ the LMFDB label of the curve is 169.a.169.1::
     sage: f = x^6 + 4*x^5 + 6*x^4 + 2*x^3 + x^2 + 2*x + 1
     sage: C = HyperellipticCurve(f)
     sage: A = C.jacobian()
-    sage: A.geometric_endomorphism_algebra_is_field()
+    sage: A.geometric_endomorphism_algebra_is_field()                                   # needs sage.groups
     False
 
 .. WARNING:
@@ -177,21 +177,21 @@ def get_is_geom_field(f, C, bad_primes, B=200):
         sage: R.<x> = QQ[]
         sage: f = 4*x^6 - 12*x^5 + 20*x^3 - 8*x^2 - 4*x + 1
         sage: C = HyperellipticCurve(f)
-        sage: get_is_geom_field(f,C,[13,269])
+        sage: get_is_geom_field(f,C,[13,269])                                           # needs sage.groups
         (False, False)
 
     This is LMFDB curve 3125.a.3125.1::
 
         sage: f = 4*x^5 + 1
         sage: C = HyperellipticCurve(f)
-        sage: get_is_geom_field(f,C,[5])
+        sage: get_is_geom_field(f,C,[5])                                                # needs sage.groups
         (True, False)
 
     This is LMFDB curve 277.a.277.2::
 
         sage: f = 4*x^6 - 36*x^4 + 56*x^3 - 76*x^2 + 44*x - 23
         sage: C = HyperellipticCurve(f)
-        sage: get_is_geom_field(f,C,[277])
+        sage: get_is_geom_field(f,C,[277])                                              # needs sage.groups
         (True, True)
     """
 

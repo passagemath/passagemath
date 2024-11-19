@@ -17,7 +17,6 @@ AUTHORS:
 # ****************************************************************************
 
 from sage.functions.log import exp
-from sage.geometry.hyperbolic_space.hyperbolic_interface import HyperbolicPlane
 from sage.misc.cachefunc import cached_method
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
 from sage.misc.lazy_import import lazy_import
@@ -37,6 +36,14 @@ lazy_import("sage.symbolic.constants", "pi")
 
 from .constructor import rational_type, FormsSpace, FormsRing
 from .series_constructor import MFSeriesConstructor
+
+
+def _in_HyperbolicPlane(x):
+    try:
+        from sage.geometry.hyperbolic_space.hyperbolic_interface import HyperbolicPlane
+    except ImportError:
+        return False
+    return x in HyperbolicPlane()
 
 
 # Warning: We choose CommutativeAlgebraElement because we want the
@@ -1335,7 +1342,7 @@ class FormsRingElement(CommutativeAlgebraElement, UniqueRepresentation,
         i = QuadraticField(-1, 'I').gen()
 
         # if tau is a point of HyperbolicPlane then we use it's coordinates in the UHP model
-        if (tau in HyperbolicPlane()):
+        if _in_HyperbolicPlane(tau):
             tau = tau.to_model('UHP').coordinates()
 
         if self.is_zero():
@@ -2138,7 +2145,7 @@ class FormsRingElement(CommutativeAlgebraElement, UniqueRepresentation,
         i = QuadraticField(-1, 'I').gen()
 
         # if tau is a point of HyperbolicPlane then we use it's coordinates in the UHP model
-        if (tau in HyperbolicPlane()):
+        if _in_HyperbolicPlane(tau):
             tau = tau.to_model('UHP').coordinates()
 
         if (prec is None):

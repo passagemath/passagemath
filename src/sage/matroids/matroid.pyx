@@ -8097,7 +8097,7 @@ cdef class Matroid(SageObject):
 
         Next we get the non-trivial generators and do some computations::
 
-            sage: # needs sage.libs.singular sage.rings.finite_rings
+            sage: # needs sage.graphs sage.libs.singular sage.rings.finite_rings
             sage: G = A.gens()[7:]; G
             (Aabf, Aace, Aadg, Abcd, Abeg, Acfg, Adef, Aabcdefg)
             sage: Aabf, Aace, Aadg, Abcd, Abeg, Acfg, Adef, Aabcdefg = G

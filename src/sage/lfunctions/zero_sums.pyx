@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-schemes
+# sage.doctest: needs sage.symbolic
 r"""
 Class for computing sums over zeros of motivic `L`-functions
 

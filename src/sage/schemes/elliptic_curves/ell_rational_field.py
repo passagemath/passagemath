@@ -1213,6 +1213,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         Different curves in an isogeny class have modular symbols
         which differ by a nonzero rational factor::
 
+            sage: # needs eclib
             sage: E1 = EllipticCurve('11a1')
             sage: M1 = E1.modular_symbol()
             sage: M1(0)
@@ -2062,7 +2063,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             4
             sage: EllipticCurve([0, 0, 1, -79, 342]).rank(proof=False)  # needs eclib
             5
-            sage: EllipticCurve([0, 0, 1, -79, 342]).rank(algorithm='pari')
+            sage: EllipticCurve([0, 0, 1, -79, 342]).rank(algorithm='pari')     # needs eclib
             5
 
         Examples with denominators in defining equations::
@@ -2310,7 +2311,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve('389a')
             sage: E.gens()                 # random output              # needs eclib
             [(-1 : 1 : 1), (0 : 0 : 1)]
-            sage: E.gens(algorithm='pari')    # random output
+            sage: E.gens(algorithm='pari')    # random output           # needs eclib
             [(5/4 : 5/8 : 1), (0 : 0 : 1)]
             sage: E = EllipticCurve([0,2429469980725060,0,275130703388172136833647756388,0])
             sage: len(E.gens(algorithm='pari'))  # not tested (takes too long)
@@ -2400,7 +2401,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             True
 
             sage: E = EllipticCurve([-127^2,0])
-            sage: E.gens(use_database=False, algorithm='pari',pari_effort=4)   # random
+            sage: E.gens(use_database=False, algorithm='pari',pari_effort=4)   # random, needs eclib
             [(611429153205013185025/9492121848205441 : 15118836457596902442737698070880/924793900700594415341761 : 1)]
 
         TESTS::
@@ -3899,7 +3900,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         ::
 
-            sage: EllipticCurve([0, 0, 1, -7, 6]).modular_degree()
+            sage: EllipticCurve([0, 0, 1, -7, 6]).modular_degree()  # needs sympow
             1984
             sage: EllipticCurve([0, 0, 1, -7, 6]).modular_degree(algorithm='sympow')    # needs sympow
             1984
@@ -4061,7 +4062,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         TESTS::
 
             sage: E = EllipticCurve('11a')
-            sage: E.congruence_number()
+            sage: E.congruence_number()                                                 # needs sympow
             1
         """
         # Case 1: M==1

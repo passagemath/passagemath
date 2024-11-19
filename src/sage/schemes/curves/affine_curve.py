@@ -1916,7 +1916,7 @@ class AffinePlaneCurve_field(AffinePlaneCurve, AffineCurve_field):
             sage: T.<t> = QQ[]
             sage: K.<a> = NumberField(t^3 + 2, 'a')
             sage: A.<x, y> = AffineSpace(K, 2)
-            sage: Curve(y^2 + a * x).braid_monodromy()
+            sage: Curve(y^2 + a * x).braid_monodromy()                  # needs sage.graphs
             Traceback (most recent call last):
             ...
             NotImplementedError: the base field must have an embedding to the algebraic field
@@ -1940,7 +1940,7 @@ class AffinePlaneCurve_field(AffinePlaneCurve, AffineCurve_field):
 
             sage: R.<x,y> = QQ[]
             sage: C = Curve(x^3 + 3*y^3 + 5)
-            sage: C.riemann_surface()
+            sage: C.riemann_surface()                                   # needs sage.graphs
             Riemann surface defined by polynomial f = x^3 + 3*y^3 + 5 = 0,
              with 53 bits of precision
         """

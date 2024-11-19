@@ -911,7 +911,7 @@ class FilteredVectorSpace_class(FreeModule_ambient_field):
 
         TESTS::
 
-            sage: # needs sage.geometry.polyhedron sage.schemes
+            sage: # needs sage.geometry.polyhedron sage.graphs sage.schemes
             sage: P = toric_varieties.P2()
             sage: T_P = P.sheaves.tangent_bundle()
             sage: O_P = P.sheaves.trivial_bundle(1)

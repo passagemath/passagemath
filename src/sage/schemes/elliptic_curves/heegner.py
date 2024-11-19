@@ -3235,7 +3235,7 @@ class HeegnerPointOnEllipticCurve(HeegnerPoint):
             sage: P = E.heegner_point(-19); y = P._trace_numerical_conductor_1()
             sage: [c.real() for c in y]
             [-1.2...e-16, -1.00000000000000, 1.00000000000000]
-            sage: -2*E.gens()[0]
+            sage: -2*E.gens()[0]                                                        # needs eclib
             (0 : -1 : 1)
             sage: P._trace_index()
             2

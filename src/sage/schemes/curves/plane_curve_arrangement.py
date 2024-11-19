@@ -49,9 +49,9 @@ AUTHORS:
 
 from itertools import combinations
 from sage.categories.sets_cat import Sets
-from sage.groups.free_group import FreeGroup
 from sage.misc.abstract_method import abstract_method
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.qqbar import QQbar
@@ -60,12 +60,14 @@ from sage.schemes.affine.affine_space import AffineSpace
 from sage.schemes.curves.affine_curve import AffinePlaneCurve
 from sage.schemes.curves.constructor import Curve
 from sage.schemes.curves.projective_curve import ProjectiveSpace, ProjectivePlaneCurve
-from sage.schemes.curves.zariski_vankampen import braid_monodromy, fundamental_group_arrangement
 from sage.structure.category_object import normalize_names
 from sage.structure.parent import Parent
 from sage.structure.element import Element
 from sage.structure.richcmp import richcmp
 from sage.structure.unique_representation import UniqueRepresentation
+
+lazy_import('sage.groups.free_group', 'FreeGroup')
+lazy_import('sage.schemes.curves.zariski_vankampen', ['braid_monodromy', 'fundamental_group_arrangement'])
 
 
 class PlaneCurveArrangementElement(Element):
