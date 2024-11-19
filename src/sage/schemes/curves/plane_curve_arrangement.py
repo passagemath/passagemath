@@ -60,7 +60,6 @@ from sage.schemes.affine.affine_space import AffineSpace
 from sage.schemes.curves.affine_curve import AffinePlaneCurve
 from sage.schemes.curves.constructor import Curve
 from sage.schemes.curves.projective_curve import ProjectiveSpace, ProjectivePlaneCurve
-from sage.schemes.curves.zariski_vankampen import braid_monodromy, fundamental_group_arrangement
 from sage.structure.category_object import normalize_names
 from sage.structure.parent import Parent
 from sage.structure.element import Element
@@ -68,6 +67,7 @@ from sage.structure.richcmp import richcmp
 from sage.structure.unique_representation import UniqueRepresentation
 
 lazy_import('sage.groups.free_group', 'FreeGroup')
+lazy_import('sage.schemes.curves.zariski_vankampen', ['braid_monodromy', 'fundamental_group_arrangement'])
 
 
 class PlaneCurveArrangementElement(Element):
