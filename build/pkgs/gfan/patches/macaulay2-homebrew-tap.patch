@@ -1,0 +1,53 @@
+diff --git a/src/gfanlib_circuittableint.h b/src/gfanlib_circuittableint.h
+index 2b5ced4..b5bf6ed 100644
+--- a/src/gfanlib_circuittableint.h
++++ b/src/gfanlib_circuittableint.h
+@@ -25,6 +25,7 @@ namespace gfan{
+   template<typename> struct MyMakeUnsigned;
+   template <> struct MyMakeUnsigned<int>{typedef unsigned int type;};
+   template <> struct MyMakeUnsigned<long int>{typedef unsigned long int type;};
++  template <> struct MyMakeUnsigned<long long int>{typedef unsigned long long int type;};
+   template <> struct MyMakeUnsigned<__int128>{typedef unsigned __int128 type;};
+
+   class MVMachineIntegerOverflow: public std::exception
+@@ -92,6 +93,15 @@ static std::string toStr(__uint32_t b)
+        return s.str();
+ }
+
++#ifndef _64BITLONGINT
++static std::string toStr(long int b)
++{
++       std::stringstream s;
++       s<<b;
++       return s.str();
++}
++#endif
++
+ class my256s{
+ public:
+        __int128_t lo,hi;
+@@ -213,6 +221,10 @@ static __int128_t extMul(long int a, long int b)
+ {
+        return ((__int128_t)a)*((__int128_t)b);
+ }
++static __int128_t extMul(long long int a, long long int b)
++{
++       return ((__int128_t)a)*((__int128_t)b);
++}
+
+ static __uint128_t unsignedProd64(uint64_t x,uint64_t y)
+ {
+diff --git a/src/gfanlib_z.h b/src/gfanlib_z.h
+index f56597c..8c84ed1 100644
+--- a/src/gfanlib_z.h
++++ b/src/gfanlib_z.h
+@@ -9,7 +9,7 @@
+ #define LIB_Z_H_
+
+ #include <string.h>
++#include <cstdint>
+ #include <ostream>
+ #include <iostream>
+ #define OLD 1
+--
+2.46.0
