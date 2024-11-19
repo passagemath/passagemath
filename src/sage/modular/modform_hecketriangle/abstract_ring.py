@@ -16,9 +16,8 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from sage.algebras.free_algebra import FreeAlgebra
-
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 from sage.rings.fraction_field import FractionField
 from sage.rings.infinity import infinity
 from sage.rings.integer_ring import ZZ
@@ -29,6 +28,8 @@ from sage.structure.parent import Parent
 
 from .constructor import FormsRing, FormsSpace
 from .series_constructor import MFSeriesConstructor
+
+lazy_import('sage.algebras.free_algebra', 'FreeAlgebra')
 
 
 class FormsRing_abstract(Parent):
