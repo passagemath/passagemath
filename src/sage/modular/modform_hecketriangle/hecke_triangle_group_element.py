@@ -27,9 +27,16 @@ from sage.rings.infinity import infinity
 from sage.rings.cc import CC
 
 from sage.groups.matrix_gps.group_element import MatrixGroupElement_generic
-from sage.geometry.hyperbolic_space.hyperbolic_interface import HyperbolicPlane
 
 lazy_import('sage.rings.qqbar', 'AA')
+
+
+def _in_HyperbolicPlane(x):
+    try:
+        from sage.geometry.hyperbolic_space.hyperbolic_interface import HyperbolicPlane
+    except ImportError:
+        return False
+    return x in HyperbolicPlane()
 
 
 # We want to simplify p after the coercion (pari bug for AA)
@@ -3165,9 +3172,9 @@ class HeckeTriangleGroupElement(MatrixGroupElement_generic):
         if tau.parent() == self.parent():
             return self*tau*self.inverse()
 
-        # if tau is a point of HyperbolicPlane then we use it's coordinates in the UHP model
+        # if tau is a point of HyperbolicPlane then we use its coordinates in the UHP model
         model = None
-        if (tau in HyperbolicPlane()):
+        if _in_HyperbolicPlane(tau):
             model = tau.model()
             tau = tau.to_model('UHP').coordinates()
 
@@ -3186,6 +3193,7 @@ class HeckeTriangleGroupElement(MatrixGroupElement_generic):
         if model is None:
             return result
         else:
+            from sage.geometry.hyperbolic_space.hyperbolic_interface import HyperbolicPlane
             return HyperbolicPlane().UHP().get_point(result).to_model(model)
 
     def _act_on_(self, other, self_on_left):
@@ -3224,8 +3232,8 @@ class HeckeTriangleGroupElement(MatrixGroupElement_generic):
             lam
         """
 
-        if (self_on_left):
-            if (other == infinity or other in CC or other in HyperbolicPlane()):
+        if self_on_left:
+            if other == infinity or other in CC or _in_HyperbolicPlane(other):
                 return self.acton(other)
         return None
 
@@ -3313,7 +3321,7 @@ class HeckeTriangleGroupElement(MatrixGroupElement_generic):
             except (ValueError, TypeError, AttributeError):
                 raise ValueError("f={} is not a rational function or a polynomial in one variable, so tau has to be specified explicitly!".format(f))
 
-        if (tau in HyperbolicPlane()):
+        if _in_HyperbolicPlane(tau):
             tau = tau.to_model('UHP').coordinates()
 
         return (self.c()*tau + self.d())**(-k) * f(self.acton(tau))
