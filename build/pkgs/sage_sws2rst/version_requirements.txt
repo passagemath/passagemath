@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-sws2rst ~= 10.4.63.0
+passagemath-sws2rst ~= 10.4.64.0
