@@ -41,7 +41,7 @@ diff --git a/src/gfanlib_z.h b/src/gfanlib_z.h
 index f56597c..8c84ed1 100644
 --- a/src/gfanlib_z.h
 +++ b/src/gfanlib_z.h
-@@ -9,7 +9,7 @@
+@@ -9,6 +9,7 @@
  #define LIB_Z_H_
 
  #include <string.h>
@@ -49,5 +49,3 @@ index f56597c..8c84ed1 100644
  #include <ostream>
  #include <iostream>
  #define OLD 1
---
-2.46.0
