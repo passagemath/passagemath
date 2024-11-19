@@ -11,7 +11,7 @@ from sage.rings.integer_ring import ZZ
 from sage.matrix.matrix_integer_sparse cimport Matrix_integer_sparse
 from sage.matrix.matrix_integer_dense cimport Matrix_integer_dense
 from sage.rings.integer cimport Integer
-
+from libcpp.vector cimport vector
 
 cdef class Matrix:
     """
@@ -214,7 +214,7 @@ cdef class Matrix:
         """
         cdef long n = self.nrows()
         cdef long i, j, k
-        cdef scalar* v = <scalar*> self.M.get_entries()   # coercion needed to deal with const
+        cdef vector[scalar] v = <vector[scalar]> self.M.get_entries()   # coercion needed to deal with const
 
         cdef Matrix_integer_dense Td
         cdef Matrix_integer_sparse Ts
