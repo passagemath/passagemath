@@ -101,5 +101,8 @@ jobs:
           pip install pkgs/sagemath-environment pkgs/sagemath-repl
           pkg=${{ matrix.distribution }}
           cd pkgs/$pkg
-          sage --fixdoctests --distribution "$pkg" --toxenv py310-norequirements --update-known-test-failures
+          extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;')
+          for extra in $extras; do
+              sage --fixdoctests --distribution "$pkg$extra" --toxenv py310-norequirements --update-known-test-failures
+          done
           git diff
