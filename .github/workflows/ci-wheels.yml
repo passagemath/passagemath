@@ -87,7 +87,8 @@ jobs:
           eval ls -l $wheel_pattern
           wheel=$(eval ls $wheel_pattern | head -n1)
           if [ -n "$wheel" ]; then
-              eval tox -v -v -e py310-norequirements --installpkg "$wheel"
+              tox_envs=$(tox -l -q| sed s/sagepython-.*nopypi-norequirements/py310-norequirements/)
+              eval tox -v -v $(for env in $tox_envs; do echo "-e $env"; done) --installpkg "$wheel"
           fi
       - name: Update known test failures
         if: (success() || failure())
