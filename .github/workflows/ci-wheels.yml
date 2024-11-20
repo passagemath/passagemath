@@ -46,7 +46,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || github.event.workflow_run.id}}
       - uses: actions/download-artifact@v4
         with:
           pattern: "noarch-wheels"
@@ -54,7 +54,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || github.event.workflow_run.id}}
       - uses: actions/download-artifact@v4
         with:
           pattern: "dist"
@@ -62,7 +62,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || github.event.workflow_run.id}}
       - uses: actions/setup-python@v5
         id: python
         with:
@@ -87,7 +87,8 @@ jobs:
           eval ls -l $wheel_pattern
           wheel=$(eval ls $wheel_pattern | head -n1)
           if [ -n "$wheel" ]; then
-              eval tox -v -v -e py310-norequirements --installpkg "$wheel"
+              tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py310-norequirements/')
+              eval tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
           fi
       - name: Update known test failures
         if: (success() || failure())
@@ -100,5 +101,8 @@ jobs:
           pip install pkgs/sagemath-environment pkgs/sagemath-repl
           pkg=${{ matrix.distribution }}
           cd pkgs/$pkg
-          sage --fixdoctests --distribution "$pkg" --toxenv py310-norequirements --update-known-test-failures
+          extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;')
+          for extra in $extras; do
+              sage --fixdoctests --distribution "$pkg$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
+          done
           git diff
