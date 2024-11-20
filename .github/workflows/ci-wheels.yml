@@ -87,7 +87,7 @@ jobs:
           eval ls -l $wheel_pattern
           wheel=$(eval ls $wheel_pattern | head -n1)
           if [ -n "$wheel" ]; then
-              tox_envs=$(tox -l -q| sed s/sagepython-.*nopypi-norequirements/py310-norequirements/)
+              tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py310-norequirements/')
               eval tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
           fi
       - name: Update known test failures
@@ -103,6 +103,6 @@ jobs:
           cd pkgs/$pkg
           extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;')
           for extra in $extras; do
-              sage --fixdoctests --distribution "$pkg$extra" --toxenv py310-norequirements --update-known-test-failures
+              sage --fixdoctests --distribution "$pkg$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
           done
           git diff
