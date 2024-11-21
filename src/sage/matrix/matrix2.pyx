@@ -10044,7 +10044,7 @@ cdef class Matrix(Matrix1):
             sage: D.is_nilpotent()
             False
             sage: Z = matrix.zero(QQ, 5)
-            sage: Z.is_nilpotent()
+            sage: Z.is_nilpotent()                                                      # needs sage.libs.pari
             True
 
         TESTS:
@@ -10053,9 +10053,9 @@ cdef class Matrix(Matrix1):
 
             sage: Z = matrix.zero(QQ, 0); Z
             []
-            sage: Z.charpoly()
+            sage: Z.charpoly()                                                          # needs sage.libs.pari
             1
-            sage: Z.is_nilpotent()
+            sage: Z.is_nilpotent()                                                      # needs sage.libs.pari
             True
         """
         if self.trace():
@@ -10081,11 +10081,11 @@ cdef class Matrix(Matrix1):
             sage: A = matrix([[0, -1], [1, 0]]); A
             [ 0 -1]
             [ 1  0]
-            sage: A.is_semisimple()
+            sage: A.is_semisimple()                                                     # needs sage.libs.pari
             True
-            sage: A.change_ring(QQ).is_diagonalizable()
+            sage: A.change_ring(QQ).is_diagonalizable()                                 # needs sage.libs.pari
             False
-            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()
+            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()                 # needs sage.libs.pari
             True
         """
         return self.minpoly().is_squarefree()
@@ -11793,6 +11793,7 @@ cdef class Matrix(Matrix1):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: A = matrix(QQ, 5, 5, {(0,1): -1, (1,0): 1, (2,3): -1}); A
             [ 0 -1  0  0  0]
             [ 1  0  0  0  0]
@@ -11825,6 +11826,7 @@ cdef class Matrix(Matrix1):
 
         TESTS::
 
+            sage: # needs sage.libs.pari
             sage: X = random_matrix(QQ, 4)
             sage: S, N = X.jordan_decomposition()
             sage: X == S + N
