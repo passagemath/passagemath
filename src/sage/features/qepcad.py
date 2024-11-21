@@ -40,7 +40,7 @@ class Qepcad(Executable):
 
 
 def all_features():
-    return [JoinFeature("eclib",
+    return [JoinFeature("qepcad",
                         (Qepcad(),
                          PythonModule('sage.interfaces.qepcad')),
-                        spkg='sagemath_qepcad', type='standard')]
+                        spkg='sagemath_qepcad', type='optional')]
