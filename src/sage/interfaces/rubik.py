@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-rubiks
 r"""
 Interface to several Rubik's cube solvers.
 

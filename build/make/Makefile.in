@@ -182,6 +182,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_palp				\
 	sagemath_qepcad				\
 	sagemath_lrslib				\
+	sagemath_rubiks				\
 	sagemath_sympow				\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
