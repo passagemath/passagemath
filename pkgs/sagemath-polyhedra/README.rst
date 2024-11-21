@@ -19,10 +19,10 @@ See https://doc.sagemath.org/html/en/installation/index.html
 for general installation instructions.
 
 
-About this pip-installable source distribution
-----------------------------------------------
+About this pip-installable distribution
+---------------------------------------
 
-This pip-installable source distribution `passagemath-polyhedra` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`), sufficient for computations with convex polyhedra in arbitrary dimension (in exact rational arithmetic), and linear and mixed integer linear optimization (in floating point arithmetic).
+This pip-installable distribution ``passagemath-polyhedra`` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`), sufficient for computations with convex polyhedra in arbitrary dimension (in exact rational arithmetic), and linear and mixed integer linear optimization (in floating point arithmetic).
 
 
 What is included
@@ -52,45 +52,76 @@ A quick way to try it out interactively::
 
     In [1]: from sage.all__sagemath_polyhedra import *
 
+    In [2]: P = Polyhedron(ieqs=[[0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 1], [0, 0, 1, -1, -1, 1, 0], [0, 0, -1, 1, -1, 1, 0]], eqns=[[-31, 1, 1, 1, 1, 1, 1]]); P
+    Out[2]: A 5-dimensional polyhedron in QQ^6 defined as the convex hull of 7 vertices
+
+    In [3]: P.Vrepresentation()
+    Out[4]:
+    (A vertex at (31, 0, 0, 0, 0, 0),
+     A vertex at (0, 0, 0, 0, 0, 31),
+     A vertex at (0, 0, 0, 0, 31, 0),
+     A vertex at (0, 0, 31/2, 0, 31/2, 0),
+     A vertex at (0, 31/2, 31/2, 0, 0, 0),
+     A vertex at (0, 31/2, 0, 0, 31/2, 0),
+     A vertex at (0, 0, 0, 31/2, 31/2, 0))
+
 
 Available as extras, from other distributions
 ---------------------------------------------
 
-Additional features:
+Additional features
+~~~~~~~~~~~~~~~~~~~
 
 `pip install "passagemath-polyhedra[graphs]"`
  Face lattices, combinatorial polyhedra, graph-theoretic constructions
 
-`pip install "passagemath-polyhedra[groups]"`
+ ::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[graphs,test]" ipython
+
+    In [1]: from sage.all__sagemath_polyhedra import *
+
+    In [2]: c5_10 = Polyhedron(vertices = [[i, i**2, i**3, i**4, i**5] for i in range(1, 11)]); c5_10
+    Out[2]: A 5-dimensional polyhedron in ZZ^5 defined as the convex hull of 10 vertices
+
+    In [3]: c5_10_fl = c5_10.face_lattice(); [len(x) for x in c5_10_fl.level_sets()]
+    Out[3]: [1, 10, 45, 100, 105, 42, 1]
+
+`pip install "passagemath-polyhedra[graphs,groups]"`
  Constructing symmetric polyhedra, computing automorphisms, lattice point counting modulo group actions
 
+ ::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[graphs,groups,test]" ipython
+
+    In [1]: from sage.all__sagemath_polyhedra import *
+
+    In [2]: P24 = polytopes.twenty_four_cell(); P24
+    Out[2]: A 4-dimensional polyhedron in QQ^4 defined as the convex hull of 24 vertices
+
+    In [3]: AutP24 = P24.restricted_automorphism_group(); AutP24.order()
+    Out[3]: 1152
+
 `pip install "passagemath-polyhedra[toric]"`
- `Toric Varieties <https://doc.sagemath.org/html/en/reference/schemes/index.html#toric-varieties>`_
+ `Toric varieties <https://doc.sagemath.org/html/en/reference/schemes/index.html#toric-varieties>`_
 
-Other backends for polyhedral computations can be installed:
+ ::
 
-`pip install "passagemath-polyhedra[normaliz]"`
- `Normaliz <https://doc.sagemath.org/html/en/reference/spkg/normaliz.html#spkg-normaliz>`_, via `PyNormaliz <https://doc.sagemath.org/html/en/reference/spkg/pynormaliz.html#spkg-pynormaliz>`_,
- provides very fast computations in particular for polyhedra with data in algebraic number fields.
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[graphs,toric,test]" ipython
 
-::
+    In [1]: from sage.all__sagemath_polyhedra import *
 
-   $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[normaliz,test]" ipython
+    In [2]: TV3 = ToricVariety(NormalFan(lattice_polytope.cross_polytope(3))); TV3
+    Out[2]: 3-d toric variety covered by 6 affine patches
 
-   In [1]: from sage.all__sagemath_polyhedra import *
+    In [3]: TV3.is_orbifold()
+    Out[3]: False
 
-   In [2]: gap_norm = polytopes.grand_antiprism(backend='normaliz'); gap_norm
+`pip install "passagemath-polyhedra[latte]"`
+ Installs `LattE integrale <https://doc.sagemath.org/html/en/reference/spkg/latte_int.html#spkg-latte-int>`_
+ for lattice point counting and volume computation using generating function techniques.
 
-   In [3]: gap_norm.f_vector()
-
-`pip install "passagemath-polyhedra[cddlib]"`
- cddlib provides support for computations with polyhedra in floating-point arithmetic.
-
-`passagemath-polyhedra` also provides integration with other packages for additional functionality:
-
-`pip install "passagemath-polyhedra[latte]"` installs `LattE integrale <https://doc.sagemath.org/html/en/reference/spkg/latte_int.html#spkg-latte-int>`_ for lattice point counting and volume computation using generating functions.
-
-::
+ ::
 
    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[latte,test]" ipython
 
@@ -109,12 +140,58 @@ Other backends for polyhedral computations can be installed:
    Out[4]:
    8000000012000000006000000001
 
+
+Additional backends for polyhedral computations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`pip install "passagemath-polyhedra[normaliz]"`
+ `Normaliz <https://doc.sagemath.org/html/en/reference/spkg/normaliz.html#spkg-normaliz>`_, via `PyNormaliz <https://doc.sagemath.org/html/en/reference/spkg/pynormaliz.html#spkg-pynormaliz>`_,
+ provides very fast computations in particular for polyhedra with data in algebraic number fields.
+
+ ::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[normaliz,test]" ipython
+
+    In [1]: from sage.all__sagemath_polyhedra import *
+
+    In [2]: gap_norm = polytopes.grand_antiprism(backend='normaliz'); gap_norm
+
+    In [3]: gap_norm.f_vector()
+
+`pip install "passagemath-polyhedra[cddlib]"`
+ cddlib provides support for computations with polyhedra in floating-point arithmetic.
+
+ ::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[cddlib,test]" ipython
+
+    In [1]: from sage.all__sagemath_polyhedra import *
+
+    In [2]: P1 = polytopes.regular_polygon(5, exact=False); P1
+    Out[2]: A 2-dimensional polyhedron in RDF^2 defined as the convex hull of 5 vertices
+
+`pip install "passagemath-polyhedra[lrslib]"`
+ `lrslib <https://doc.sagemath.org/html/en/reference/spkg/lrslib.html#spkg-lrslib>`_
+ can be used for polytope volume computations and for enumerating Nash equilibria.
+
+ ::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[flint,lrslib,test]" ipython
+
+    In [1]: from sage.all__sagemath_polyhedra import *
+
+    In [2]: A = matrix([[2, 1], [1, 5/2]]); B = matrix([[-1, 3], [2, 1]])
+
+    In [3]: g = NormalFormGame([A, B]); g.obtain_nash(algorithm='lrs')
+    Out[3]: [[(1/5, 4/5), (3/5, 2/5)]]
+
 `pip install "passagemath-polyhedra[polymake]"`
  `Polymake <https://doc.sagemath.org/html/en/reference/spkg/polymake.html#spkg-polymake>`_, via `JuPyMake <https://pypi.org/project/JuPyMake/>`_
 
-`lrslib <https://doc.sagemath.org/html/en/reference/spkg/lrslib.html#spkg-lrslib>`_
+ This currently requires a separate installation of polymake.
 
-Optional backends for optimization:
+Optional backends for optimization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `pip install "passagemath-polyhedra[cbc]"`
  `COIN/OR CBC <https://doc.sagemath.org/html/en/reference/spkg/cbc.html#spkg-cbc>`_ Mixed Integer Linear Optimization solver,
