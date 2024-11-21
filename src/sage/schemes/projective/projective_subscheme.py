@@ -867,7 +867,7 @@ class AlgebraicScheme_subscheme_projective(AlgebraicScheme_subscheme):
             sage: Y = P.subscheme([x - y])
             sage: H = End(P)
             sage: f = H([x^2, y^2, z^2])
-            sage: Y.preimage(f, k=2)                                                    # needs sage.libs.singular
+            sage: Y.preimage(f, k=2)                                                    # needs sage.libs.singular sage.schemes
             Closed subscheme of Projective Space of dimension 2 over Rational Field
              defined by:
               x^4 - y^4

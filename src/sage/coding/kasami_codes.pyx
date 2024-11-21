@@ -309,18 +309,18 @@ class KasamiCode(AbstractLinearCode):
             sage: C = codes.KasamiCode(8,2)
             sage: C.generator_matrix()
             [1 1 1 1 1 1 1 1]
-            sage: C.minimum_distance()
+            sage: C.minimum_distance()                                                  # needs sage.libs.gap
             8
             sage: C = codes.KasamiCode(8, 2, extended=False)
             sage: C.generator_matrix()
             [1 1 1 1 1 1 1]
-            sage: C.minimum_distance()
+            sage: C.minimum_distance()                                                  # needs sage.libs.gap
             7
             sage: C = codes.KasamiCode(4, 2, extended=False)
             sage: C.generator_matrix()
             []
             sage: C = codes.KasamiCode(16, 4, extended=False)
-            sage: C.minimum_distance()
+            sage: C.minimum_distance()                                                  # needs sage.libs.gap
             3
         """
         from sage.misc.functional import log

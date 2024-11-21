@@ -362,7 +362,7 @@ def gilbert_lower_bound(n, q, d):
     return ans
 
 
-def plotkin_upper_bound(n,q,d, algorithm=None):
+def plotkin_upper_bound(n, q, d, algorithm=None):
     r"""
     Return the Plotkin upper bound.
 
@@ -401,7 +401,7 @@ def plotkin_upper_bound(n,q,d, algorithm=None):
             return int(d/( d - t * fact)) * q**(n - fact)
 
 
-def griesmer_upper_bound(n,q,d,algorithm=None):
+def griesmer_upper_bound(n, q, d, algorithm=None):
     r"""
     Return the Griesmer upper bound.
 
@@ -457,7 +457,7 @@ def griesmer_upper_bound(n,q,d,algorithm=None):
         return q**(k-1)
 
 
-def elias_upper_bound(n,q,d,algorithm=None):
+def elias_upper_bound(n, q, d, algorithm=None):
     r"""
     Return the Elias upper bound.
 
@@ -487,7 +487,7 @@ def elias_upper_bound(n,q,d,algorithm=None):
     return int(bnd)
 
 
-def hamming_upper_bound(n,q,d):
+def hamming_upper_bound(n, q, d):
     r"""
     Return the Hamming upper bound.
 

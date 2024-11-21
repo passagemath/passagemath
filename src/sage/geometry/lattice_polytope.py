@@ -1318,7 +1318,10 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
                 if self.is_reflexive():
                     parts[1] = "reflexive"
                     if self.dim() == 2 or self.index.is_in_cache():
-                        parts.insert(-1, "#%d" % self.index())
+                        try:
+                            parts.insert(-1, "#%d" % self.index())
+                        except ImportError:
+                            pass
             except (ValueError, FileNotFoundError):
                 pass
             if isinstance(self.lattice(), ToricLattice_generic):
@@ -2465,7 +2468,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
         database::
 
             sage: d = lattice_polytope.cross_polytope(2)
-            sage: d.index()                                                             # needs palp
+            sage: d.index()                                                             # needs palp sage.groups
             3
 
         Note that polytopes with the same index are not necessarily the
@@ -2944,9 +2947,9 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
 
         The diamond is the 3rd polytope in the internal database::
 
-            sage: d.index()                                                             # needs palp
+            sage: d.index()                                                             # needs palp sage.groups
             3
-            sage: d                                                                     # needs palp
+            sage: d                                                                     # needs palp sage.groups
             2-d reflexive polytope #3 in 2-d lattice M
 
         You can get it in its normal form (in the default lattice) as ::
@@ -3328,7 +3331,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
         Check that a bug introduced in :issue:`35997` is fixed::
 
             sage: P = LatticePolytope([(-4,-6),(-4,-5),(0,0),(1,0),(5,6)])
-            sage: P._palp_PM_max()
+            sage: P._palp_PM_max()                                                      # needs sage.groups
             [9 5 4 0 0]
             [6 0 6 5 0]
             [1 5 0 0 4]
@@ -5676,7 +5679,7 @@ def read_all_polytopes(file_name):
            1  -1  -1
           -1   1  -1
            1   1  -1
-        sage: lattice_polytope.read_all_polytopes(result_name)
+        sage: lattice_polytope.read_all_polytopes(result_name)                          # needs sage.groups
         [2-d reflexive polytope #14 in 2-d lattice M,
          3-d reflexive polytope in 3-d lattice M]
         sage: os.remove(result_name)

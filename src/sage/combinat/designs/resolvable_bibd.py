@@ -57,7 +57,7 @@ from .bibd import balanced_incomplete_block_design
 from sage.misc.unknown import Unknown
 
 
-def resolvable_balanced_incomplete_block_design(v,k,existence=False):
+def resolvable_balanced_incomplete_block_design(v, k, existence=False):
     r"""
     Return a resolvable BIBD of parameters `v,k`.
 
@@ -142,7 +142,7 @@ def resolvable_balanced_incomplete_block_design(v,k,existence=False):
         raise NotImplementedError("I don't know how to build a ({},{},1)-RBIBD!".format(v,3))
 
 
-def kirkman_triple_system(v,existence=False):
+def kirkman_triple_system(v, existence=False):
     r"""
     Return a Kirkman Triple System on `v` points.
 
@@ -369,7 +369,7 @@ def kirkman_triple_system(v,existence=False):
         return KTS
 
 
-def v_4_1_rbibd(v,existence=False):
+def v_4_1_rbibd(v, existence=False):
     r"""
     Return a `(v,4,1)`-RBIBD.
 
@@ -440,7 +440,7 @@ def v_4_1_rbibd(v,existence=False):
     return BIBD
 
 
-def PBD_4_7(v,check=True, existence=False):
+def PBD_4_7(v, check=True, existence=False):
     r"""
     Return a `(v,\{4,7\})`-PBD.
 
@@ -687,7 +687,7 @@ def PBD_4_7(v,check=True, existence=False):
                                   copy=False)
 
 
-def PBD_4_7_from_Y(gdd,check=True):
+def PBD_4_7_from_Y(gdd, check=True):
     r"""
     Return a `(3v+1,\{4,7\})`-PBD from a `(v,\{4,5,7\},\NN-\{3,6,10\})`-GDD.
 

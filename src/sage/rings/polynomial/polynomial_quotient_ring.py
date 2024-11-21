@@ -18,7 +18,7 @@ EXAMPLES::
 
 TESTS::
 
-    sage: # needs sage.libs.flint
+    sage: # needs sage.libs.flint sage.libs.singular
     sage: Pol.<y> = CBF[]
     sage: Quo.<y> = Pol.quotient(y^3)
     sage: CBF.zero()*y
@@ -217,7 +217,7 @@ class PolynomialQuotientRingFactory(UniqueFactory):
             raise TypeError("ring must be a polynomial ring")
         if not isinstance(polynomial, polynomial_element.Polynomial):
             raise TypeError("must be a polynomial")
-        if not polynomial.parent() is ring:
+        if polynomial.parent() is not ring:
             raise TypeError("polynomial must be in ring")
 
         c = polynomial.leading_coefficient()
@@ -1205,6 +1205,7 @@ class PolynomialQuotientRing_generic(QuotientRing_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x> = PolynomialRing(QQ)
             sage: S.<y> = PolynomialRing(R)
             sage: T.<z> = S.quotient(y + x)

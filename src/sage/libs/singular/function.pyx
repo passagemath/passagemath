@@ -353,7 +353,7 @@ cdef leftv* new_leftv(void *data, res_type) noexcept:
     res.rtyp = res_type
     return res
 
-cdef free_leftv(leftv *args, ring *r = NULL):
+cdef free_leftv(leftv *args, ring *r=NULL):
     """
     Kills this ``leftv`` and all ``leftv``s in the tail.
 
@@ -382,6 +382,7 @@ def is_sage_wrapper_for_singular_ring(ring):
 
     ::
 
+        sage: # needs sage.combinat
         sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
         sage: P = A.g_algebra(relations={y*x:-x*y}, order = 'lex')
         sage: is_sage_wrapper_for_singular_ring(P)
@@ -409,6 +410,7 @@ def is_singular_poly_wrapper(p):
 
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.libs.singular.function import is_singular_poly_wrapper
         sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
         sage: H.<x,y,z> = A.g_algebra({z*x:x*z+2*x, z*y:y*z-2*y})
@@ -693,7 +695,7 @@ cdef class Converter(SageObject):
                 result[i,j] = p
         return result
 
-    cdef to_sage_vector_destructive(self, poly *p, free_module = None):
+    cdef to_sage_vector_destructive(self, poly *p, free_module=None):
         cdef int rank
         if free_module:
             rank = free_module.rank()
@@ -827,7 +829,7 @@ cdef class Converter(SageObject):
         cdef poly *p
         ncols = mat.ncols()
         nrows = mat.nrows()
-        cdef matrix* _m=mpNew(nrows,ncols)
+        cdef matrix* _m=mpNew(nrows, ncols)
         for i in range(nrows):
             for j in range(ncols):
                 #FIXME
@@ -920,6 +922,7 @@ cdef class Converter(SageObject):
 
         Check that negative integers come through unscathed::
 
+            sage: # needs sage.schemes
             sage: P.<x,y,z> = QQ[]
             sage: C = Curve((x-y)*(y-z)*(z-x))
             sage: I = C.defining_ideal()
@@ -930,6 +933,7 @@ cdef class Converter(SageObject):
 
         Singular's genus function is prone to crashing, see :issue:`12851` and :issue:`19750` ::
 
+            sage: # needs sage.schemes
             sage: sing_genus = sage.libs.singular.function_factory.ff.normal__lib.genus  # known bug
             sage: sing_genus(I)  # known bug
             -2
@@ -1315,7 +1319,7 @@ cdef class SingularFunction(SageObject):
 
             sage: from sage.libs.singular.function import singular_function
             sage: groebner = singular_function('groebner')
-            sage: 'groebner' in groebner.__doc__
+            sage: 'groebner' in groebner.__doc__  # needs info
             True
         """
 
@@ -1361,14 +1365,9 @@ EXAMPLES::
      [x2, x1^2],
      [x2, x1^2]]
 
-The Singular documentation for '%s' is given below.
-"""%(self._name,self._name)
-        # Github issue #11268: Include the Singular documentation as a block of code
-        singular_doc = get_docstring(self._name).split('\n')
-        if len(singular_doc) > 1:
-            return prefix + "\n::\n\n"+'\n'.join(["    "+L for L in singular_doc])
-        else:
-            return prefix + "\n::\n\n"+"    Singular documentation not found"
+"""%(self._name)
+        from sage.interfaces.singular import get_docstring
+        return prefix + get_docstring(self._name, prefix=True, code=True)
 
     cdef common_ring(self, tuple args, ring=None):
         """

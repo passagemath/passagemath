@@ -1496,7 +1496,7 @@ cdef class Polynomial_rational_flint(Polynomial):
             fmpz_get_mpz(den.value, <fmpz *> fmpq_poly_denref(self._poly))
         return den
 
-    def _derivative(self, var = None):
+    def _derivative(self, var=None):
         """
         Return the derivative of this polynomial with respect to ``var``.
 
@@ -2183,10 +2183,6 @@ cdef class Polynomial_rational_flint(Polynomial):
             sage: (zeta^2 + zeta + 1).galois_group(pari_group=True)                     # needs sage.libs.pari
             PARI group [2, -1, 1, "S2"] of degree 2
         """
-        from sage.groups.pari_group import PariGroup
-        from sage.groups.perm_gps.permgroup import PermutationGroup
-        from sage.groups.perm_gps.permgroup_named import TransitiveGroup
-
         if not self.is_irreducible():
             raise ValueError("The polynomial must be irreducible")
 
@@ -2203,16 +2199,19 @@ cdef class Polynomial_rational_flint(Polynomial):
                 "algorithm='magma' if you have magma.")
 
         if algorithm == 'pari':
+            from sage.groups.pari_group import PariGroup
             G = self._pari_with_name().Polrev().polgalois()
             H = PariGroup(G, self.degree())
             if pari_group:
                 return H
             else:
+                from sage.groups.perm_gps.permgroup import PermutationGroup
                 return PermutationGroup(H)
 
         elif algorithm == 'kash':
             try:
                 from sage.interfaces.kash import kash
+                from sage.groups.perm_gps.permgroup_named import TransitiveGroup
                 kash.eval('X := PolynomialRing(RationalField()).1')
                 s = self._repr(name='X')
                 G = kash('Galois(%s)'%s)
@@ -2233,11 +2232,13 @@ cdef class Polynomial_rational_flint(Polynomial):
                     "supported for degrees up to 15 using GAP. Try " +
                     "algorithm='kash'.")
             from sage.libs.gap.libgap import libgap
+            from sage.groups.perm_gps.permgroup_named import TransitiveGroup
             fgap = libgap(self)
             return TransitiveGroup(self.degree(), fgap.GaloisType())
 
         elif algorithm == 'magma':
             from sage.interfaces.magma import magma
+            from sage.groups.perm_gps.permgroup_named import TransitiveGroup
             X = magma(self).GaloisGroup()
             try:
                 n, d = X.TransitiveGroupIdentification(nvals=2)

@@ -1,0 +1,185 @@
+{
+    "sage.interfaces.mwrank": {
+        "ntests": 30
+    },
+    "sage.libs.eclib.constructor": {
+        "ntests": 10
+    },
+    "sage.libs.eclib.homspace": {
+        "ntests": 49
+    },
+    "sage.libs.eclib.interface": {
+        "ntests": 192
+    },
+    "sage.libs.eclib.mat": {
+        "ntests": 36
+    },
+    "sage.libs.eclib.mwrank": {
+        "ntests": 209
+    },
+    "sage.libs.eclib.newforms": {
+        "ntests": 93
+    },
+    "sage.schemes.elliptic_curves.BSD": {
+        "ntests": 50
+    },
+    "sage.schemes.elliptic_curves.Qcurves": {
+        "ntests": 62
+    },
+    "sage.schemes.elliptic_curves.cardinality": {
+        "ntests": 59
+    },
+    "sage.schemes.elliptic_curves.cm": {
+        "ntests": 92
+    },
+    "sage.schemes.elliptic_curves.constructor": {
+        "failed": true,
+        "ntests": 227
+    },
+    "sage.schemes.elliptic_curves.descent_two_isogeny": {
+        "failed": true,
+        "ntests": 37
+    },
+    "sage.schemes.elliptic_curves.ec_database": {
+        "ntests": 9
+    },
+    "sage.schemes.elliptic_curves.ell_curve_isogeny": {
+        "ntests": 876
+    },
+    "sage.schemes.elliptic_curves.ell_egros": {
+        "failed": true,
+        "ntests": 29
+    },
+    "sage.schemes.elliptic_curves.ell_field": {
+        "failed": true,
+        "ntests": 430
+    },
+    "sage.schemes.elliptic_curves.ell_finite_field": {
+        "failed": true,
+        "ntests": 530
+    },
+    "sage.schemes.elliptic_curves.ell_generic": {
+        "failed": true,
+        "ntests": 540
+    },
+    "sage.schemes.elliptic_curves.ell_local_data": {
+        "ntests": 167
+    },
+    "sage.schemes.elliptic_curves.ell_modular_symbols": {
+        "ntests": 76
+    },
+    "sage.schemes.elliptic_curves.ell_number_field": {
+        "failed": true,
+        "ntests": 840
+    },
+    "sage.schemes.elliptic_curves.ell_point": {
+        "failed": true,
+        "ntests": 960
+    },
+    "sage.schemes.elliptic_curves.ell_rational_field": {
+        "failed": true,
+        "ntests": 843
+    },
+    "sage.schemes.elliptic_curves.ell_tate_curve": {
+        "ntests": 64
+    },
+    "sage.schemes.elliptic_curves.ell_torsion": {
+        "ntests": 77
+    },
+    "sage.schemes.elliptic_curves.ell_wp": {
+        "ntests": 42
+    },
+    "sage.schemes.elliptic_curves.formal_group": {
+        "ntests": 76
+    },
+    "sage.schemes.elliptic_curves.gal_reps": {
+        "ntests": 170
+    },
+    "sage.schemes.elliptic_curves.gal_reps_number_field": {
+        "ntests": 198
+    },
+    "sage.schemes.elliptic_curves.gp_simon": {
+        "ntests": 13
+    },
+    "sage.schemes.elliptic_curves.heegner": {
+        "failed": true,
+        "ntests": 1087
+    },
+    "sage.schemes.elliptic_curves.height": {
+        "failed": true,
+        "ntests": 318
+    },
+    "sage.schemes.elliptic_curves.hom": {
+        "failed": true,
+        "ntests": 344
+    },
+    "sage.schemes.elliptic_curves.hom_composite": {
+        "failed": true,
+        "ntests": 196
+    },
+    "sage.schemes.elliptic_curves.hom_frobenius": {
+        "failed": true,
+        "ntests": 111
+    },
+    "sage.schemes.elliptic_curves.hom_scalar": {
+        "ntests": 138
+    },
+    "sage.schemes.elliptic_curves.hom_sum": {
+        "failed": true,
+        "ntests": 134
+    },
+    "sage.schemes.elliptic_curves.hom_velusqrt": {
+        "failed": true,
+        "ntests": 263
+    },
+    "sage.schemes.elliptic_curves.homset": {
+        "failed": true,
+        "ntests": 59
+    },
+    "sage.schemes.elliptic_curves.isogeny_class": {
+        "ntests": 141
+    },
+    "sage.schemes.elliptic_curves.isogeny_small_degree": {
+        "failed": true,
+        "ntests": 297
+    },
+    "sage.schemes.elliptic_curves.jacobian": {
+        "ntests": 35
+    },
+    "sage.schemes.elliptic_curves.kodaira_symbol": {
+        "ntests": 29
+    },
+    "sage.schemes.elliptic_curves.kraus": {
+        "ntests": 138
+    },
+    "sage.schemes.elliptic_curves.lseries_ell": {
+        "failed": true,
+        "ntests": 51
+    },
+    "sage.schemes.elliptic_curves.mod5family": {
+        "ntests": 2
+    },
+    "sage.schemes.elliptic_curves.mod_poly": {
+        "ntests": 27
+    },
+    "sage.schemes.elliptic_curves.mod_sym_num": {
+        "failed": true,
+        "ntests": 359
+    },
+    "sage.schemes.elliptic_curves.modular_parametrization": {
+        "ntests": 50
+    },
+    "sage.schemes.elliptic_curves.period_lattice": {
+        "failed": true,
+        "ntests": 405
+    },
+    "sage.schemes.elliptic_curves.saturation": {
+        "ntests": 69
+    },
+    "sage.schemes.elliptic_curves.weierstrass_morphism": {
+        "ntests": 244
+    },
+    "sage.schemes.elliptic_curves.weierstrass_transform": {
+        "ntests": 34
+    }
+}

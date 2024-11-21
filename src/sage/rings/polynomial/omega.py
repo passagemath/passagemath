@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
+# sage.doctest: needs sage.libs.singular
 r"""
 MacMahon's Partition Analysis Omega Operator
 

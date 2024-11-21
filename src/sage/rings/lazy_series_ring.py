@@ -1817,6 +1817,7 @@ class LazyLaurentSeriesRing(LazySeriesRing):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: L.<z> = LazyLaurentSeriesRing(QQ)
             sage: x = SR.var('x')
             sage: f(x) = (1 + x) / (1 - x^2)
@@ -1826,6 +1827,7 @@ class LazyLaurentSeriesRing(LazySeriesRing):
         For inputs as symbolic functions/expressions, the function must
         not have any poles at `0`::
 
+            sage: # needs sage.symbolic
             sage: f(x) = (1 + x^2) / sin(x^2)
             sage: L.taylor(f)
             <repr(...) failed: ValueError: power::eval(): division by zero>
@@ -2572,6 +2574,7 @@ class LazyPowerSeriesRing(LazySeriesRing):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: x = SR.var('x')
             sage: f(x) = (1 + x) / (1 - x^3)
@@ -2726,6 +2729,7 @@ class LazyCompletionGradedAlgebra(LazySeriesRing):
 
         Check that :issue:`37625` is fixed::
 
+            sage: # needs sage.combinat sage.modules
             sage: R = algebras.Free(QQ, ('a', 'b'), degrees=(1, 2))
             sage: L = R.completion()
             sage: a, b = R.gens()

@@ -606,7 +606,7 @@ class MatrixGroup_generic(MatrixGroup_base):
             sage: # needs sage.libs.gap
             sage: CoxeterGroup(['A',0], implementation='matrix').is_trivial()
             True
-            sage: MatrixGroup([matrix(SR, [[1,x], [0,1]])]).is_trivial()
+            sage: MatrixGroup([matrix(SR, [[1,x], [0,1]])]).is_trivial()                # needs sage.symbolic
             False
             sage: G = MatrixGroup([identity_matrix(3), identity_matrix(3)])
             sage: G.ngens()

@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
+# sage.doctest: needs sage.rings.number_field
 r"""
 Find maximal angles between polyhedral convex cones
 
@@ -34,12 +35,14 @@ methods have been prefixed with an underscore.
 
 from sage.functions.trig import arccos, cos
 from sage.matrix.constructor import matrix
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc import powerset
 from sage.rings.integer_ring import ZZ
 from sage.rings.qqbar import AA
 from sage.rings.rational_field import QQ
 from sage.rings.real_double import RDF
-from sage.symbolic.constants import pi
+
+lazy_import('sage.symbolic.constants', 'pi')
 
 
 def _normalize_gevp_solution(gevp_solution):
@@ -298,6 +301,7 @@ def _solve_gevp_naive(GG, HH, M, I, J):
     eigenspaces of dimension `n=2` corresponding to the eigenvalues
     `\cos\theta = -1` and `\cos\theta = 1`::
 
+        sage: # needs sage.symbolic
         sage: from sage.geometry.cone_critical_angles import _solve_gevp_naive
         sage: g11,g12,g21,g22 = SR.var('g11,g12,g21,g22', domain='real')
         sage: h11,h12,h21,h22 = SR.var('h11,h12,h21,h22', domain='real')
@@ -677,7 +681,7 @@ def compute_gevp_M(gs, hs):
         True
         sage: G = matrix.column(gs)
         sage: H = matrix.column(hs)
-        sage: def _test_indexing(I,J):
+        sage: def _test_indexing(I, J):
         ....:      G_I = G.matrix_from_columns(I)
         ....:      H_J = H.matrix_from_columns(J)
         ....:      return (G_I.transpose()*H_J == M[I,J]
@@ -788,7 +792,7 @@ def check_gevp_feasibility(cos_theta, xi, eta, G_I, G_I_c_T,
         sage: eta = xi
         sage: G_I = matrix.identity(QQ,2)
         sage: H_J = 2*G_I
-        sage: check_gevp_feasibility(0,xi,eta,G_I,None,H_J,None,0)
+        sage: check_gevp_feasibility(0,xi,eta,G_I,None,H_J,None,0)                      # needs sage.symbolic
         (False, (0, 0), (0, 0))
 
     When `\cos\theta` is zero, the inequality (42) in Theorem 7.3
@@ -804,7 +808,7 @@ def check_gevp_feasibility(cos_theta, xi, eta, G_I, G_I_c_T,
         sage: G_I = matrix.identity(QQ,4)
         sage: G_I_c_T = matrix(QQ, [[0,-1,0,0]])
         sage: H_J = G_I
-        sage: check_gevp_feasibility(0,xi,eta,G_I,G_I_c_T,H_J,None,0)
+        sage: check_gevp_feasibility(0,xi,eta,G_I,G_I_c_T,H_J,None,0)                   # needs sage.symbolic
         (False, (0, 0, 0, 0), (0, 0, 0, 0))
 
     Likewise we can make (43) fail in exactly the same way::
@@ -817,7 +821,7 @@ def check_gevp_feasibility(cos_theta, xi, eta, G_I, G_I_c_T,
         sage: G_I_c_T = matrix(QQ, [[0,1,0,0]])
         sage: H_J = G_I
         sage: H_J_c_T = matrix(QQ, [[0,-1,0,0]])
-        sage: check_gevp_feasibility(0,xi,eta,G_I,G_I_c_T,H_J,H_J_c_T,0)
+        sage: check_gevp_feasibility(0,xi,eta,G_I,G_I_c_T,H_J,H_J_c_T,0)                # needs sage.symbolic
         (False, (0, 0, 0, 0), (0, 0, 0, 0))
 
     Finally, if we ensure that everything works, we get back a feasible
@@ -831,7 +835,7 @@ def check_gevp_feasibility(cos_theta, xi, eta, G_I, G_I_c_T,
         sage: G_I_c_T = matrix(QQ, [[0,1,0,0]])
         sage: H_J = G_I
         sage: H_J_c_T = matrix(QQ, [[0,1,0,0]])
-        sage: check_gevp_feasibility(0,xi,eta,G_I,G_I_c_T,H_J,H_J_c_T,0)
+        sage: check_gevp_feasibility(0,xi,eta,G_I,G_I_c_T,H_J,H_J_c_T,0)                # needs sage.symbolic
         (True, (1/2, 1/2, 1/2, 1/2), (1/2, 1/2, 1/2, 1/2))
     """
     infeasible_result = (False, 0*xi, 0*eta)

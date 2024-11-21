@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-categories
-# sage.doctest: needs sage.modules
+# sage.doctest: needs sage.combinat sage.modules
 r"""
 Examples of a finite dimensional Lie algebra with basis
 """

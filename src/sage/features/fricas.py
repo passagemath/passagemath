@@ -14,7 +14,9 @@ Features for testing the presence of ``fricas``
 
 import os
 import subprocess
-from . import Executable, FeatureTestResult
+from . import Executable, FeatureTestResult, PythonModule
+from .join_feature import JoinFeature
+
 
 class FriCAS(Executable):
     r"""
@@ -24,7 +26,7 @@ class FriCAS(Executable):
 
         sage: from sage.features.fricas import FriCAS
         sage: FriCAS().is_present()  # optional - fricas
-        FeatureTestResult('fricas', True)
+        FeatureTestResult('fricas_executable', True)
     """
     def __init__(self):
         r"""
@@ -34,7 +36,7 @@ class FriCAS(Executable):
             sage: isinstance(FriCAS(), FriCAS)
             True
         """
-        Executable.__init__(self, name='fricas', spkg='fricas',
+        Executable.__init__(self, name='fricas_executable', spkg='fricas',
                             executable='fricas',
                             url='https://fricas.github.io')
 
@@ -62,5 +64,9 @@ class FriCAS(Executable):
 
         return FeatureTestResult(self, True)
 
+
 def all_features():
-    return [FriCAS()]
+    return [JoinFeature("fricas",
+                        (FriCAS(),
+                         PythonModule('sage.interfaces.fricas')),
+                        spkg='sagemath_fricas')]

@@ -29,7 +29,7 @@ from sage.categories.unique_factorization_domains import UniqueFactorizationDoma
 from sage.categories.fields import Fields
 from sage.categories.rings import Rings
 from sage.combinat.partition import Partitions
-from sage.combinat.free_module import CombinatorialFreeModule
+from sage.misc.lazy_import import lazy_import
 from sage.rings.rational_field import QQ
 
 from . import schur
@@ -41,6 +41,8 @@ from . import hall_littlewood
 from . import jack
 from . import macdonald
 from . import llt
+
+lazy_import('sage.combinat.free_module', 'CombinatorialFreeModule')
 
 
 class SymmetricFunctions(UniqueRepresentation, Parent):
@@ -1605,7 +1607,7 @@ class SymmetricaConversionOnBasis:
 
             sage: Sym = SymmetricFunctions(QQ['x'])
             sage: p = Sym.p(); s = Sym.s()
-            sage: def t(x) : [(p,c)] = x; return [ (p,2*c), (p.conjugate(), c) ]
+            sage: def t(x) : [(p, c)] = x; return [ (p, 2*c), (p.conjugate(), c) ]
             sage: f = sage.combinat.sf.sf.SymmetricaConversionOnBasis(t, p, s)
             sage: f(Partition([3,1]))
             s[2, 1, 1] + 2*s[3, 1]

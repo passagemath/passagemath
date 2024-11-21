@@ -3916,7 +3916,7 @@ cdef class BinaryMatroid(LinearMatroid):
                     if len(C[e] & C[f] & C[g]) > 0:
                         M.append([0,col[e,f], col[e,g], col[f,e], col[f,g], col[g,e], col[g,f]])
                         r += 1
-        cdef BinaryMatrix m = BinaryMatrix(r,c)
+        cdef BinaryMatrix m = BinaryMatrix(r, c)
         for r in range(len(M)):
             for c in M[r]:
                 m.set(r,c)
@@ -3991,7 +3991,7 @@ cdef class BinaryMatroid(LinearMatroid):
 
     # representability
 
-    cpdef binary_matroid(self, randomized_tests=1, verify = True):
+    cpdef binary_matroid(self, randomized_tests=1, verify=True):
         r"""
         Return a binary matroid representing ``self``.
 
@@ -4857,7 +4857,7 @@ cdef class TernaryMatroid(LinearMatroid):
 
     # representability
 
-    cpdef ternary_matroid(self, randomized_tests=1, verify = True):
+    cpdef ternary_matroid(self, randomized_tests=1, verify=True):
         r"""
         Return a ternary matroid representing ``self``.
 
@@ -6448,7 +6448,7 @@ cdef class RegularMatroid(LinearMatroid):
         """
         return True
 
-    cpdef binary_matroid(self, randomized_tests=1, verify = True):
+    cpdef binary_matroid(self, randomized_tests=1, verify=True):
         r"""
         Return a binary matroid representing ``self``.
 
@@ -6503,7 +6503,7 @@ cdef class RegularMatroid(LinearMatroid):
         """
         return True
 
-    cpdef ternary_matroid(self, randomized_tests=1, verify = True):
+    cpdef ternary_matroid(self, randomized_tests=1, verify=True):
         r"""
         Return a ternary matroid representing ``self``.
 

@@ -2777,7 +2777,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         We verify that 0 rows or columns works::
 
-            sage: x = matrix(QQ,2,0); y= matrix(QQ,0,2); x*y
+            sage: x = matrix(QQ,2,0); y = matrix(QQ,0,2); x*y
             [0 0]
             [0 0]
             sage: matrix(ZZ, 0, 0) * matrix(QQ, 0, 5)
@@ -2927,14 +2927,14 @@ cdef class Matrix_rational_dense(Matrix_dense):
         EXAMPLES::
 
             sage: A = Matrix(QQ, 3, 3, [1/n for n in range(1, 10)])
-            sage: A.BKZ()
+            sage: A.BKZ()                                                 # needs fpylll
             [ 1/28 -1/40 -1/18]
             [ 1/28 -1/40  1/18]
             [-1/14 -1/40     0]
 
             sage: A = random_matrix(QQ, 10, 10)
             sage: d = lcm(a.denom() for a in A.list())
-            sage: A.BKZ() == (A * d).change_ring(ZZ).BKZ() / d
+            sage: A.BKZ() == (A * d).change_ring(ZZ).BKZ() / d            # needs fpylll
             True
         """
         A, d = self._clear_denom()
@@ -2951,6 +2951,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs fpylll
             sage: A = Matrix(QQ, 3, 3, [1/n for n in range(1, 10)])
             sage: A.LLL()
             [ 1/28 -1/40 -1/18]
@@ -2959,7 +2960,6 @@ cdef class Matrix_rational_dense(Matrix_dense):
             sage: L, U = A.LLL(transformation=True)
             sage: U * A == L
             True
-
             sage: A = random_matrix(QQ, 10, 10)
             sage: d = lcm(a.denom() for a in A.list())
             sage: A.LLL() == (A * d).change_ring(ZZ).LLL() / d
@@ -2979,6 +2979,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs fpylll
             sage: A = random_matrix(QQ, 10, 10)
             sage: L = A.LLL()
             sage: A.is_LLL_reduced()

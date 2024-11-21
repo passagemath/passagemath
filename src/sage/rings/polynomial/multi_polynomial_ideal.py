@@ -639,7 +639,7 @@ class MPolynomialIdeal_singular_repr(
         try:
             self.ring()._singular_(singular).set_ring()
             I = self.__singular
-            if not (I.parent() is singular):
+            if I.parent() is not singular:
                 raise ValueError
             I._check_valid()
             return I
@@ -695,6 +695,7 @@ class MPolynomialIdeal_singular_repr(
 
         Implicit plotting in 2-d::
 
+            sage: # needs sage.plot
             sage: R.<x,y> = PolynomialRing(QQ,2)
             sage: I = R.ideal([y^3 - x^2])
             sage: I.plot()        # cusp
@@ -1588,6 +1589,7 @@ class MPolynomialIdeal_singular_repr(
         Consider the hyperelliptic curve `y^2 = 4x^5 - 30x^3 + 45x - 22` over
         `\QQ`, it has genus 2::
 
+            sage: # needs sage.schemes
             sage: P.<x> = QQ[]
             sage: f = 4*x^5 - 30*x^3 + 45*x - 22
             sage: C = HyperellipticCurve(f); C
@@ -1607,6 +1609,7 @@ class MPolynomialIdeal_singular_repr(
         You may get a nonsensical answer if the condition is not met.  A curve
         reducible over a quadratic extension of `\QQ`::
 
+            sage: # needs sage.schemes
             sage: R.<x, y, z> = QQ[]
             sage: C = Curve(x^2 - 2*y^2)
             sage: C.genus()
@@ -3727,7 +3730,7 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
         from sage.libs.singular.groebner_strategy import NCGroebnerStrategy
         return NCGroebnerStrategy(self.std())
 
-    def reduce(self,p):
+    def reduce(self, p):
         """
         Reduce an element modulo a Groebner basis for this ideal.
 
@@ -3762,7 +3765,7 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
         """
         return self._groebner_strategy().normal_form(p)
 
-    def _contains_(self,p):
+    def _contains_(self, p):
         """
         EXAMPLES:
 
@@ -4179,6 +4182,7 @@ class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
 
         EXAMPLES::
 
+            sage: # needs gfan
             sage: P.<x,y> = PolynomialRing(QQ)
             sage: i = ideal(x^2 - y^2 + 1)
             sage: g = i.groebner_fan()
@@ -4742,7 +4746,7 @@ class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
                 gb = self._groebner_basis_ginv(*args, **kwds)
             elif ":" in algorithm:
                 ginv,alg = algorithm.split(":")
-                gb = self._groebner_basis_ginv(algorithm=alg,*args, **kwds)
+                gb = self._groebner_basis_ginv(algorithm=alg, *args, **kwds)
             else:
                 raise NameError("Algorithm '%s' unknown." % algorithm)
         elif algorithm == 'giac:gbasis':

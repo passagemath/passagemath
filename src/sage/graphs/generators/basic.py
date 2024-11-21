@@ -111,7 +111,7 @@ def ButterflyGraph():
         sage: G = graphs.ButterflyGraph(); G
         Butterfly graph: Graph on 5 vertices
         sage: G.show()                          # long time                             # needs sage.plot
-        sage: G.is_planar()
+        sage: G.is_planar()                                     # needs planarity
         True
         sage: G.order()
         5

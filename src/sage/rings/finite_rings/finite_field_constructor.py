@@ -337,10 +337,10 @@ class FiniteFieldFactory(UniqueFactory):
 
         sage: K.<a> = GF(13^3, modulus=[1,0,0,2])
         sage: K.<a> = GF(13^10, modulus=pari("ffinit(13,10)"))
-        sage: var('x')
+        sage: var('x')                                                                  # needs sage.symbolic
         x
-        sage: K.<a> = GF(13^2, modulus=x^2 - 2)
-        sage: K.<a> = GF(13^2, modulus=sin(x))
+        sage: K.<a> = GF(13^2, modulus=x^2 - 2)                                         # needs sage.symbolic
+        sage: K.<a> = GF(13^2, modulus=sin(x))                                          # needs sage.symbolic
         Traceback (most recent call last):
         ...
         TypeError: self must be a numeric expression
@@ -352,7 +352,7 @@ class FiniteFieldFactory(UniqueFactory):
 
     ::
 
-        sage: K.<a> = GF(5**2, name='a', modulus=x^2 + 2, check_irreducible=False)
+        sage: K.<a> = GF(5**2, name='a', modulus=x^2 + 2, check_irreducible=False)      # needs sage.symbolic
 
     Even for prime fields, you can specify a modulus. This will not
     change how Sage computes in this field, but it will change the

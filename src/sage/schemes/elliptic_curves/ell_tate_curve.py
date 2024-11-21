@@ -588,13 +588,13 @@ class TateCurve(SageObject):
             sage: e = EllipticCurve('130a1')
             sage: eq = e.tate_curve(5)
             sage: h = eq.padic_height(prec=10)
-            sage: P = e.gens()[0]
-            sage: h(P)
+            sage: P = e.gens()[0]                                                       # needs eclib
+            sage: h(P)                                                                  # needs eclib
             2*5^-1 + 1 + 2*5 + 2*5^2 + 3*5^3 + 3*5^6 + 5^7 + O(5^9)
 
         Check that it is a quadratic function::
 
-            sage: h(3*P)-3^2*h(P)
+            sage: h(3*P) - 3^2*h(P)                                                     # needs eclib
             O(5^9)
         """
         if not self.is_split():
@@ -643,7 +643,7 @@ class TateCurve(SageObject):
         EXAMPLES::
 
             sage: eq = EllipticCurve('130a1').tate_curve(5)
-            sage: eq.padic_regulator()
+            sage: eq.padic_regulator()                                                  # needs eclib
             2*5^-1 + 1 + 2*5 + 2*5^2 + 3*5^3 + 3*5^6 + 5^7 + 3*5^9 + 3*5^10 + 3*5^12 + 4*5^13 + 3*5^15 + 2*5^16 + 3*5^18 + 4*5^19 +  4*5^20 + 3*5^21 + 4*5^22 + O(5^23)
         """
         prec = prec + 4

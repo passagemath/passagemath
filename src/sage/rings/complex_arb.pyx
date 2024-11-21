@@ -1093,7 +1093,7 @@ class ComplexBallField(UniqueRepresentation, sage.rings.abc.ComplexBallField):
         Note, though, that proper handling of the ``analytic`` flag is required
         even when the path does not touch the branch cut::
 
-            sage: correct = CBF.integral(my_sqrt, 1, 2); correct
+            sage: correct = CBF.integral(my_sqrt, 1, 2); correct                        # needs sage.symbolic
             [1.21895141649746 +/- ...e-15]
             sage: RBF(integral(sqrt(x), x, 1, 2))       # long time                     # needs sage.symbolic
             [1.21895141649746 +/- ...e-15]

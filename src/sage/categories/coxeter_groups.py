@@ -995,8 +995,8 @@ class CoxeterGroups(Category_singleton):
                 [ 1 13]
                 [13  1]
 
-                sage: W = WeylGroup(["B", 3, 1])
-                sage: W.reflection_representation(QQ)
+                sage: W = WeylGroup(["B", 3, 1])                                        # needs sage.groups
+                sage: W.reflection_representation(QQ)                                   # needs sage.groups
                 Reflection representation of Weyl Group of type ['B', 3, 1]
                  (as a matrix group acting on the root space)
             """

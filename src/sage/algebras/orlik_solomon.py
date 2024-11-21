@@ -473,7 +473,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
 
             sage: N = matroids.catalog.Fano()
             sage: O = N.orlik_solomon_algebra(QQ)
-            sage: O.as_gca()                                                            # needs sage.libs.singular
+            sage: O.as_gca()                                                            # needs sage.combinat sage.libs.singular
             Graded Commutative Algebra with generators ('e0', 'e1', 'e2', 'e3', 'e4', 'e5', 'e6')
              in degrees (1, 1, 1, 1, 1, 1, 1) with relations
              [e1*e2 - e1*e3 + e2*e3, e0*e1*e3 - e0*e1*e4 + e0*e3*e4 - e1*e3*e4,
@@ -490,10 +490,10 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
             sage: # needs sage.geometry.polyhedron
             sage: H = hyperplane_arrangements.Catalan(3,QQ).cone()
             sage: O = H.orlik_solomon_algebra(QQ)
-            sage: A = O.as_gca()
+            sage: A = O.as_gca()                                                        # needs sage.combinat
             sage: H.poincare_polynomial()
             20*x^3 + 29*x^2 + 10*x + 1
-            sage: [len(A.basis(i)) for i in range(5)]
+            sage: [len(A.basis(i)) for i in range(5)]                                   # needs sage.combinat
             [1, 10, 29, 20, 0]
         """
         from sage.algebras.commutative_dga import GradedCommutativeAlgebra
@@ -550,7 +550,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: # needs sage.geometry.polyhedron
+            sage: # needs sage.geometry.polyhedron sage.graphs
             sage: OS = hyperplane_arrangements.braid(3).orlik_solomon_algebra(QQ)
             sage: gens = OS.algebra_generators()
             sage: AC = OS.aomoto_complex(gens[0])

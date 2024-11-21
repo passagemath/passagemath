@@ -1878,7 +1878,7 @@ cdef class pAdicGenericElement(LocalGenericElement):
     #def log_artin_hasse(self):
     #    raise NotImplementedError
 
-    def multiplicative_order(self, prec = None):
+    def multiplicative_order(self, prec=None):
         r"""
         Return the multiplicative order of ``self``, where ``self`` is
         considered to be one if it is one modulo `p^{\mbox{prec}}`.
@@ -1976,7 +1976,7 @@ cdef class pAdicGenericElement(LocalGenericElement):
                 return order
         return infinity
 
-    def valuation(self, p = None):
+    def valuation(self, p=None):
         r"""
         Return the valuation of this element.
 
@@ -2100,7 +2100,7 @@ cdef class pAdicGenericElement(LocalGenericElement):
         """
         raise NotImplementedError
 
-    def ordp(self, p = None):
+    def ordp(self, p=None):
         r"""
         Return the valuation of ``self``, normalized so that the valuation of `p` is 1.
 
@@ -4057,7 +4057,7 @@ cdef class pAdicGenericElement(LocalGenericElement):
         """
         raise NotImplementedError
 
-    def _polylog_res_1(self, n, p_branch = 0):
+    def _polylog_res_1(self, n, p_branch=0):
         r"""
         Return `Li_n(`self`)`, the `n`-th `p`-adic polylogarithm of ``self``,
         assuming that ``self`` is congruent to `1 \pmod p`.

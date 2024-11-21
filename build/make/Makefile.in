@@ -137,6 +137,7 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sage_sws2rst				\
 	sage_setup				\
 	sagemath_environment			\
+	sagemath_repl
 
 # Packages for which we build wheels for PyPI
 PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
@@ -506,7 +507,7 @@ pypi-noarch-wheels:
 	for a in $(PYPI_NOARCH_WHEEL_PACKAGES); do \
 	    rm -f $(SAGE_VENV)/var/lib/sage/installed/$$a-*; \
 	done
-	$(MAKE_REC) SAGE_EDITABLE=no SAGE_WHEELS=yes $(PYPI_NOARCH_WHEEL_PACKAGES)
+	$(MAKE_REC) SAGE_EDITABLE=no SAGE_WHEELS=yes $(PYPI_NOARCH_WHEEL_PACKAGES:sagemath_repl=sagemath_repl-no-deps)
 	@echo "Built wheels are in venv/var/lib/sage/wheels/"
 
 pypi-wheels:

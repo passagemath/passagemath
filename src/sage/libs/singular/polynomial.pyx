@@ -201,7 +201,7 @@ cdef int singular_polynomial_call(poly **ret, poly *p, ring *r, list args,
         Leaked 0 bytes
     """
     cdef long l = len(args)
-    cdef ideal *to_id = idInit(l,1)
+    cdef ideal *to_id = idInit(l, 1)
     cdef bint constant_args = 1
     for i from 0 <= i < l:
         to_id.m[i]= p_Copy( get_element(args[i]), r)
@@ -392,7 +392,7 @@ cdef int singular_polynomial_pow(poly **ret, poly *p, unsigned long exp, ring *r
 
     if r != currRing:
         rChangeCurrRing(r)
-    cdef int count = singular_polynomial_length_bounded(p,15)
+    cdef int count = singular_polynomial_length_bounded(p, 15)
     if count >= 15 or exp > 15:
         sig_on()
     ret[0] = pPower( p_Copy(p,r), exp)
@@ -471,6 +471,7 @@ cdef object singular_polynomial_latex(poly *p, ring *r, object base, object late
     Demonstrate that coefficients over non-atomic represented rings are
     properly parenthesized (:issue:`11186`)::
 
+        sage: # needs sage.symbolic
         sage: x = var('x')
         sage: K.<z> = QQ.extension(x^2 + x + 1)
         sage: P.<v,w> = K[]

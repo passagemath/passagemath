@@ -96,7 +96,7 @@ class LFSRCryptosystem(SymmetricKeyCryptosystem):
         """
         return "LFSR cryptosystem over %s" % self._field
 
-    def encoding(self,M):
+    def encoding(self, M):
         S = self.cipher_domain()
         try:
             return S.encoding(M)
@@ -161,7 +161,7 @@ class ShrinkingGeneratorCryptosystem(SymmetricKeyCryptosystem):
         """
         return "Shrinking generator cryptosystem over %s" % self._field
 
-    def encoding(self,M):
+    def encoding(self, M):
         S = self.cipher_domain()
         try:
             return S.encoding(M)

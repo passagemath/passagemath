@@ -360,7 +360,7 @@ class MPolynomialRing_polydict(MPolynomialRing_macaulay2_repr, PolynomialRing_si
         Check if we still allow nonsense (see :issue:`7951`)::
 
             sage: P = PolynomialRing(QQ, 0, '')
-            sage: P('pi')
+            sage: P('pi')                                                               # needs sage.symbolic
             Traceback (most recent call last):
             ...
             TypeError: unable to convert pi to a rational

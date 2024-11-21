@@ -14,7 +14,8 @@ Feature for testing the presence of ``sympow``
 
 import subprocess
 
-from . import Executable
+from . import Executable, PythonModule
+from .join_feature import JoinFeature
 
 
 class Sympow(Executable):
@@ -26,7 +27,7 @@ class Sympow(Executable):
 
         sage: from sage.features.sympow import Sympow
         sage: Sympow().is_present()                                # needs sympow
-        FeatureTestResult('sympow', True)
+        FeatureTestResult('sympow_executable', True)
     """
     def __init__(self):
         r"""
@@ -36,9 +37,12 @@ class Sympow(Executable):
             sage: isinstance(Sympow(), Sympow)
             True
         """
-        Executable.__init__(self, "sympow", executable='sympow',
+        Executable.__init__(self, "sympow_executable", executable='sympow',
                             spkg='sympow', type='standard')
 
 
 def all_features():
-    return [Sympow()]
+    return [JoinFeature("sympow",
+                        (Sympow(),
+                         PythonModule('sage.lfunctions.sympow')),
+                        spkg='sagemath_sympow', type='standard')]

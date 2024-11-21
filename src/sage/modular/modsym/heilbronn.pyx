@@ -1,4 +1,6 @@
+# sage_setup: distribution = sagemath-flint
 # distutils: extra_compile_args = -D_XPG6
+# sage.doctest: needs sage.schemes
 """
 Heilbronn matrix computation
 """

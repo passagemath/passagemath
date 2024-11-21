@@ -72,6 +72,7 @@ from sage.geometry.lattice_polytope import LatticePolytope
 from sage.matrix.constructor import matrix
 from sage.misc.cachefunc import cached_method
 from sage.misc.functional import cyclotomic_polynomial
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.modular.hypergeometric_misc import hgm_coeffs
 from sage.modules.free_module_element import vector
@@ -85,8 +86,9 @@ from sage.rings.polynomial.polynomial_ring import polygen, polygens
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.power_series_ring import PowerSeriesRing
 from sage.rings.rational_field import QQ
-from sage.rings.universal_cyclotomic_field import UniversalCyclotomicField
 from sage.schemes.generic.spec import Spec
+
+lazy_import('sage.rings.universal_cyclotomic_field', 'UniversalCyclotomicField')
 
 
 def characteristic_polynomial_from_traces(traces, d, q, i, sign, deg=None, use_fe=True):
@@ -1493,6 +1495,7 @@ class HypergeometricData:
 
         With values in the :class:`UniversalCyclotomicField` (slow)::
 
+            sage: # needs sage.libs.gap sage.rings.number_field
             sage: from sage.modular.hypergeometric_motive import HypergeometricData as Hyp
             sage: H = Hyp(alpha_beta=([1/2]*4, [0]*4))
             sage: [H.H_value(3,i,-1) for i in range(1,3)]

@@ -330,7 +330,7 @@ cdef class RingExtensionElement(CommutativeAlgebraElement):
             sage: g.parent()
             Finite Field in z2 of size 5^2
 
-        TESTS::
+        TESTS:
 
         We check the case of a tower of extensions::
 
@@ -385,7 +385,7 @@ cdef class RingExtensionElement(CommutativeAlgebraElement):
         """
         return left._backend._richcmp_(backend_element(right), op)
 
-    cpdef _add_(self,other):
+    cpdef _add_(self, other):
         r"""
         Return the sum of this element and ``other``.
 
@@ -425,7 +425,7 @@ cdef class RingExtensionElement(CommutativeAlgebraElement):
         ans._backend = -self._backend
         return ans
 
-    cpdef _sub_(self,other):
+    cpdef _sub_(self, other):
         r"""
         Return the difference of this element and ``other``.
 
@@ -445,7 +445,7 @@ cdef class RingExtensionElement(CommutativeAlgebraElement):
         ans._backend = self._backend - (<RingExtensionElement>other)._backend
         return ans
 
-    cpdef _mul_(self,other):
+    cpdef _mul_(self, other):
         r"""
         Return the product of this element and ``other``.
 
@@ -465,7 +465,7 @@ cdef class RingExtensionElement(CommutativeAlgebraElement):
         ans._backend = self._backend * (<RingExtensionElement>other)._backend
         return ans
 
-    cpdef _div_(self,other):
+    cpdef _div_(self, other):
         r"""
         Return the quotient of this element by ``other``,
         considered as an element of the fraction field.
@@ -1529,7 +1529,7 @@ cdef class RingExtensionWithBasisElement(RingExtensionElement):
         If ``base`` is omitted, it is set to its default which is the
         base of the extension::
 
-            sage: u.minpoly()                                                           # needs sage.rings.finite_rings
+            sage: u.minpoly()                                                           # needs sage.libs.singular sage.rings.finite_rings
             x^2 + (2*a + a^2)*x - 1 + a
 
         Note that ``base`` must be an explicit base over which the

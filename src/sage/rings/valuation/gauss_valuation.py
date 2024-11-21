@@ -98,7 +98,7 @@ class GaussValuationFactory(UniqueFactory):
         if v is None:
             v = domain.base_ring().valuation()
 
-        if not v.domain() is domain.base_ring():
+        if v.domain() is not domain.base_ring():
             raise ValueError("the domain of v must be the base ring of domain but %r is not defined over %r but over %r" % (v, domain.base_ring(), v.domain()))
         if not v.is_discrete_valuation():
             raise ValueError("v must be a discrete valuation but %r is not" % (v,))
@@ -525,7 +525,7 @@ class GaussValuation_generic(NonFinalInductiveValuation):
             sage: v = ZZ.valuation(2)
             sage: R.<x> = ZZ[]
             sage: w = GaussValuation(R, v)
-            sage: w.extensions(GaussianIntegers()['x'])                                 # needs sage.rings.number_field
+            sage: w.extensions(GaussianIntegers()['x'])                                 # needs sage.geometry.polyhedron sage.rings.number_field
             [Gauss valuation induced by 2-adic valuation]
         """
         from sage.rings.polynomial.polynomial_ring import PolynomialRing_general

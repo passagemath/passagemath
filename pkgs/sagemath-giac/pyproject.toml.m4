@@ -38,13 +38,13 @@ content-type = "text/x-rst"
 # https://github.com/pypa/cibuildwheel/issues/1931
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf',
-    'python3 pkgs/sagemath-msolve/repair_wheel.py {wheel}',
+    'python3 pkgs/sagemath-giac/repair_wheel.py {wheel}',
     'auditwheel repair -w {dest_dir} {wheel}',
 ]
 [tool.cibuildwheel.macos]
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf',
-    'python3 pkgs/sagemath-msolve/repair_wheel.py {wheel}',
+    'python3 pkgs/sagemath-giac/repair_wheel.py {wheel}',
     'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
 ]
 

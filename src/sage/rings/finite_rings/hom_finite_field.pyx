@@ -36,8 +36,8 @@ map which is the inverse of `f` on the image of `f`::
       From: Finite Field in t of size 3^7
       To:   Finite Field in T of size 3^21
       Defn: t |--> T^20 + 2*T^18 + T^16 + 2*T^13 + T^9 + 2*T^8 + T^7 + T^6 + T^5 + T^3 + 2*T^2 + T
-    sage: a = k.random_element()
-    sage: g(f(a)) == a
+    sage: a = k.random_element()                                                        # needs sage.modules
+    sage: g(f(a)) == a                                                                  # needs sage.modules
     True
     sage: g(T)
     Traceback (most recent call last):
@@ -134,8 +134,8 @@ cdef class SectionFiniteFieldHomomorphism_generic(Section):
             sage: K.<T> = GF(3^21)
             sage: f = FiniteFieldHomomorphism_generic(Hom(k, K))
             sage: g = f.section()
-            sage: a = k.random_element()
-            sage: g(f(a)) == a
+            sage: a = k.random_element()                                                # needs sage.modules
+            sage: g(f(a)) == a                                                          # needs sage.modules
             True
 
             sage: g(T)
@@ -208,9 +208,9 @@ cdef class FiniteFieldHomomorphism_generic(RingHomomorphism_im_gens):
               From: Finite Field in t of size 3^7
               To:   Finite Field in T of size 3^21
               Defn: t |--> T^20 + 2*T^18 + T^16 + 2*T^13 + T^9 + 2*T^8 + T^7 + T^6 + T^5 + T^3 + 2*T^2 + T
-            sage: a = k.random_element()
-            sage: b = k.random_element()
-            sage: f(a) + f(b) == f(a + b)
+            sage: a = k.random_element()                                                # needs sage.modules
+            sage: b = k.random_element()                                                # needs sage.modules
+            sage: f(a) + f(b) == f(a + b)                                               # needs sage.modules
             True
 
             sage: k.<t> = GF(3^6)
@@ -307,6 +307,7 @@ cdef class FiniteFieldHomomorphism_generic(RingHomomorphism_im_gens):
             sage: f(t) # random
             2*T^6 + 2*T^4 + T^2 + T
 
+            sage: # needs sage.modules
             sage: a = k.random_element()
             sage: b = k.random_element()
             sage: f(a+b) == f(a) + f(b)
@@ -375,6 +376,8 @@ cdef class FiniteFieldHomomorphism_generic(RingHomomorphism_im_gens):
               From: Finite Field in t of size 3^7
               To:   Finite Field in T of size 3^21
               Defn: t |--> T^20 + 2*T^18 + T^16 + 2*T^13 + T^9 + 2*T^8 + T^7 + T^6 + T^5 + T^3 + 2*T^2 + T
+
+            sage: # needs sage.modules
             sage: a = k.random_element()
             sage: b = k.random_element()
             sage: g(f(a) + f(b)) == a + b

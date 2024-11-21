@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.groups
 r"""
 Galois groups of field extensions.
 

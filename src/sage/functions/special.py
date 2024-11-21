@@ -417,7 +417,7 @@ def elliptic_j(z, prec=53):
 
     EXAMPLES::
 
-        sage: elliptic_j(CC(i))                                                         # needs sage.rings.real_mpfr
+        sage: elliptic_j(CC(i))                                                         # needs sage.rings.real_mpfr sage.symbolic
         1728.00000000000
         sage: elliptic_j(sqrt(-2.0))                                                    # needs sage.rings.complex_double
         8000.00000000000

@@ -3581,10 +3581,6 @@ def compute_isogeny_stark(E1, E2, ell):
     return qn
 
 
-from sage.misc.superseded import deprecated_function_alias
-compute_isogeny_starks = deprecated_function_alias(34871, compute_isogeny_stark)
-
-
 def compute_isogeny_kernel_polynomial(E1, E2, ell, algorithm=None):
     r"""
     Return the kernel polynomial of a cyclic, separable, normalized
@@ -3651,11 +3647,6 @@ def compute_isogeny_kernel_polynomial(E1, E2, ell, algorithm=None):
         sage: poly.factor()
         (x + 10) * (x + 12) * (x + 16)
     """
-    if algorithm == 'starks':
-        from sage.misc.superseded import deprecation
-        deprecation(34871, 'The "starks" algorithm is being renamed to "stark".')
-        algorithm = 'stark'
-
     if algorithm is None:
         char = E1.base_ring().characteristic()
         if char != 0 and char < 4*ell + 4:

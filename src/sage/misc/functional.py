@@ -225,7 +225,7 @@ def decomposition(x):
         (Ambient free module of rank 2 over the principal ideal domain Integer Ring, True)
         ]
 
-        sage: # needs sage.groups
+        sage: # needs sage.schemes
         sage: G.<a,b> = DirichletGroup(20)
         sage: c = a * b
         sage: d = c.decomposition(); d
@@ -1650,7 +1650,7 @@ def regulator(x):
         sage: x = polygen(ZZ, 'x')
         sage: regulator(NumberField(x^2 - 2, 'a'))                                      # needs sage.rings.number_field
         0.881373587019543
-        sage: regulator(EllipticCurve('11a'))                                           # needs sage.schemes
+        sage: regulator(EllipticCurve('11a'))                                           # needs eclib sage.schemes
         1.00000000000000
     """
     return x.regulator()

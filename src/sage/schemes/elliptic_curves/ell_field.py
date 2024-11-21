@@ -2496,6 +2496,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve(GF(11), j=0)
             sage: G0 = E.isogeny_ell_graph(2, directed=False)
             sage: G0.is_directed()

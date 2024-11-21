@@ -77,6 +77,8 @@ RDF         = ["passagemath-polyhedra[cddlib]"]
 NumberField = ["passagemath-polyhedra[flint]"]
 
 # features
+graphs      = ["passagemath-graphs"]
+groups      = ["passagemath-groups"]
 plot        = ["passagemath-plot"]
 
 # the whole package

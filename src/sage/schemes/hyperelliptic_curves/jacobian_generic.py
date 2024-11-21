@@ -377,7 +377,7 @@ class HyperellipticJacobian_generic(Jacobian_generic):
             sage: f = x^6 + 2*x^4 + 2*x^3 + 5*x^2 + 6*x + 1
             sage: C = HyperellipticCurve(f)
             sage: J = C.jacobian()
-            sage: J.geometric_endomorphism_ring_is_ZZ()
+            sage: J.geometric_endomorphism_ring_is_ZZ()                                 # needs sage.groups
             False
 
         This is LMFDB curve 160000.c.800000.1 whose geometric endomorphism ring
@@ -386,7 +386,7 @@ class HyperellipticJacobian_generic(Jacobian_generic):
             sage: f = x^5 - 1
             sage: C = HyperellipticCurve(f)
             sage: J = C.jacobian()
-            sage: J.geometric_endomorphism_ring_is_ZZ()
+            sage: J.geometric_endomorphism_ring_is_ZZ()                                 # needs sage.groups
             False
 
         This is LMFDB curve 262144.d.524288.2 whose geometric endomorphism ring
@@ -395,7 +395,7 @@ class HyperellipticJacobian_generic(Jacobian_generic):
             sage: f = x^5 + x^4 + 4*x^3 + 8*x^2 + 5*x + 1
             sage: C = HyperellipticCurve(f)
             sage: J = C.jacobian()
-            sage: J.geometric_endomorphism_ring_is_ZZ()
+            sage: J.geometric_endomorphism_ring_is_ZZ()                                 # needs sage.groups
             False
 
         This is LMFDB curve 578.a.2312.1 whose geometric endomorphism ring
@@ -404,7 +404,7 @@ class HyperellipticJacobian_generic(Jacobian_generic):
             sage: f = 4*x^5 - 7*x^4 + 10*x^3 - 7*x^2 + 4*x
             sage: C = HyperellipticCurve(f)
             sage: J = C.jacobian()
-            sage: J.geometric_endomorphism_ring_is_ZZ()
+            sage: J.geometric_endomorphism_ring_is_ZZ()                                 # needs sage.groups
             False
         """
         if self._have_established_geometrically_trivial:

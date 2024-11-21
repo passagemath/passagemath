@@ -270,7 +270,7 @@ For finer invariants derived from the intersection poset, see
 Miscellaneous methods (see documentation for an explanation)::
 
     sage: a = hyperplane_arrangements.semiorder(3)
-    sage: a.has_good_reduction(5)                                                       # needs sage.rings.finite_rings
+    sage: a.has_good_reduction(5)                                                       # needs sage.graphs sage.rings.finite_rings
     True
     sage: b = a.change_ring(GF(5))
     sage: pa = a.intersection_poset()                                                   # needs sage.graphs
@@ -679,7 +679,7 @@ class HyperplaneArrangementElement(Element):
         EXAMPLES::
 
             sage: L.<x, y> = HyperplaneArrangements(QQ)
-            sage: L(x, y, x+y-2).plot()                                                 # needs sage.plot
+            sage: L(x, y, x + y - 2).plot()                                             # needs sage.plot sage.symbolic
             Graphics object consisting of 3 graphics primitives
         """
         from sage.geometry.hyperplane_arrangement.plot import plot
@@ -996,8 +996,8 @@ class HyperplaneArrangementElement(Element):
             sage: A = hyperplane_arrangements.coordinate(2)
             sage: A.cocharacteristic_polynomial()                                       # needs sage.graphs
             z^2 + 2*z + 1
-            sage: B = hyperplane_arrangements.braid(3)
-            sage: B.cocharacteristic_polynomial()                                       # needs sage.graphs
+            sage: B = hyperplane_arrangements.braid(3)                                  # needs sage.groups
+            sage: B.cocharacteristic_polynomial()                                       # needs sage.graphs sage.groups
             2*z^3 + 3*z^2 + z
 
         TESTS::
@@ -1044,8 +1044,8 @@ class HyperplaneArrangementElement(Element):
             sage: A = hyperplane_arrangements.coordinate(2)
             sage: A.primitive_eulerian_polynomial()                                     # needs sage.graphs
             z^2
-            sage: B = hyperplane_arrangements.braid(3)
-            sage: B.primitive_eulerian_polynomial()                                     # needs sage.graphs
+            sage: B = hyperplane_arrangements.braid(3)                                  # needs sage.groups
+            sage: B.primitive_eulerian_polynomial()                                     # needs sage.graphs sage.groups
             z^2 + z
 
             sage: H = hyperplane_arrangements.Shi(['B',2]).cone()
@@ -1054,7 +1054,7 @@ class HyperplaneArrangementElement(Element):
             sage: H.primitive_eulerian_polynomial()                                     # needs sage.graphs
             z^3 + 11*z^2 + 4*z
 
-            sage: H = hyperplane_arrangements.graphical(graphs.CycleGraph(4))
+            sage: H = hyperplane_arrangements.graphical(graphs.CycleGraph(4))           # needs sage.graphs
             sage: H.primitive_eulerian_polynomial()                                     # needs sage.graphs
             z^3 + 3*z^2 - z
 
@@ -1255,7 +1255,7 @@ class HyperplaneArrangementElement(Element):
             sage: x,y,z = H.gens()
             sage: h1,h2 = [1*x+2*y+3*z, 3*x+2*y+1*z]
             sage: A = H(h1, h2, backend='normaliz')
-            sage: A.restriction(h2).backend()
+            sage: A.restriction(h2).backend()                                           # needs sage.combinat
             'normaliz'
         """
         parent = self.parent()
@@ -3617,7 +3617,7 @@ class HyperplaneArrangements(Parent, UniqueRepresentation):
             True
             sage: type(K)
             <class 'sage.geometry.hyperplane_arrangement.arrangement.HyperplaneArrangements_with_category'>
-            sage: K.change_ring(RR).gen(0)
+            sage: K.change_ring(RR).gen(0)                                              # needs sage.rings.real_mpfr
             Hyperplane 1.00000000000000*x + 0.000000000000000*y + 0.000000000000000
 
         TESTS::
@@ -3871,11 +3871,11 @@ class HyperplaneArrangements(Parent, UniqueRepresentation):
 
         TESTS::
 
+            sage: # needs sage.rings.real_mpfr
             sage: L.<x> = HyperplaneArrangements(QQ);  L
             Hyperplane arrangements in 1-dimensional linear space over Rational Field with coordinate x
             sage: M.<y> = HyperplaneArrangements(RR);  M
             Hyperplane arrangements in 1-dimensional linear space over Real Field with 53 bits of precision with coordinate y
-
             sage: L.coerce_map_from(ZZ)
             Coercion map:
               From: Integer Ring

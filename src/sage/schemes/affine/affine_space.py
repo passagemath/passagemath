@@ -1050,7 +1050,7 @@ class AffineSpace_field(AffineSpace_generic):
 
             sage: u = QQ['u'].0
             sage: A.<x,y> = AffineSpace(NumberField(u^2 - 2, 'v'), 2)                   # needs sage.rings.number_field
-            sage: len(list(A.points_of_bounded_height(bound=2, tolerance=0.1)))         # needs sage.rings.number_field
+            sage: len(list(A.points_of_bounded_height(bound=2, tolerance=0.1)))         # needs sage.geometry.polyhedron sage.rings.number_field
             529
         """
         if isinstance(self.base_ring(), RationalField):

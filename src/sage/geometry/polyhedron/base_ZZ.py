@@ -883,7 +883,7 @@ class Polyhedron_ZZ(Polyhedron_QQ):
         span the space::
 
             sage: p = Polyhedron([(1,0,0), (0,1,0), (-1,0,0), (0,-1,0)])
-            sage: p.normal_form()
+            sage: p.normal_form()                                                       # needs sage.groups
             Traceback (most recent call last):
             ...
             ValueError: normal form is not defined for lower-dimensional polyhedra, got
@@ -892,7 +892,7 @@ class Polyhedron_ZZ(Polyhedron_QQ):
         The normal form is also not defined for unbounded polyhedra::
 
             sage: p = Polyhedron(vertices=[[1, 1]], rays=[[1, 0], [0, 1]], base_ring=ZZ)
-            sage: p.normal_form()
+            sage: p.normal_form()                                                       # needs sage.groups
             Traceback (most recent call last):
             ...
             ValueError: normal form is not defined for unbounded polyhedra, got
@@ -902,7 +902,7 @@ class Polyhedron_ZZ(Polyhedron_QQ):
 
         TESTS::
 
-            sage: d.normal_form(algorithm='palp_fiction')
+            sage: d.normal_form(algorithm='palp_fiction')                               # needs sage.groups
             Traceback (most recent call last):
             ...
             ValueError: algorithm must be 'palp_native'

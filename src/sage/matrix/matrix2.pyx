@@ -832,6 +832,7 @@ cdef class Matrix(Matrix1):
         Over inexact rings, the ``check`` parameter is ignored as the result is
         only an approximate solution (:issue:`13932`)::
 
+            sage: # needs scipy
             sage: RF = RealField(52)
             sage: B = matrix(RF, 2, 2, 1)
             sage: A = matrix(RF, [[0.24, 1, 0], [1, 0, 0]])
@@ -1726,7 +1727,7 @@ cdef class Matrix(Matrix1):
             sage: M = matrix.hilbert(12, ring=RR)
             sage: (~M * M).norm()  # a considerable error                               # needs scipy
             1.3...
-            sage: Mx = M.pseudoinverse(algorithm='exact')
+            sage: Mx = M.pseudoinverse(algorithm='exact')                               # needs scipy
             sage: (Mx * M).norm()  # huge error                                         # needs scipy
             11.5...
             sage: Mx = M.pseudoinverse(algorithm='numpy')                               # needs numpy
@@ -2240,7 +2241,7 @@ cdef class Matrix(Matrix1):
             ....:                  [0, 0, -2 ] ])
             sage: B = copy(A)
             sage: _ = A.charpoly()
-            sage: A.determinant() == B.determinant()
+            sage: A.determinant() == B.determinant()                                    # needs scipy
             True
         """
         cdef Py_ssize_t n
@@ -7947,13 +7948,13 @@ cdef class Matrix(Matrix1):
             sage: m == transformation_matrix * m_original
             True
 
-        TESTS::
+        TESTS:
 
         Check that :issue:`34724` is fixed (indirect doctest)::
 
             sage: a = 6.12323399573677e-17
             sage: m = matrix(RR,[[-a, -1.72508242466029], [ 0.579682446302195, a]])
-            sage: (~m*m).norm()
+            sage: (~m*m).norm()                                                         # needs scipy
             1.0
         """
         self.check_mutability()
@@ -10043,7 +10044,7 @@ cdef class Matrix(Matrix1):
             sage: D.is_nilpotent()
             False
             sage: Z = matrix.zero(QQ, 5)
-            sage: Z.is_nilpotent()
+            sage: Z.is_nilpotent()                                                      # needs sage.libs.pari
             True
 
         TESTS:
@@ -10052,9 +10053,9 @@ cdef class Matrix(Matrix1):
 
             sage: Z = matrix.zero(QQ, 0); Z
             []
-            sage: Z.charpoly()
+            sage: Z.charpoly()                                                          # needs sage.libs.pari
             1
-            sage: Z.is_nilpotent()
+            sage: Z.is_nilpotent()                                                      # needs sage.libs.pari
             True
         """
         if self.trace():
@@ -10080,11 +10081,11 @@ cdef class Matrix(Matrix1):
             sage: A = matrix([[0, -1], [1, 0]]); A
             [ 0 -1]
             [ 1  0]
-            sage: A.is_semisimple()
+            sage: A.is_semisimple()                                                     # needs sage.libs.pari
             True
-            sage: A.change_ring(QQ).is_diagonalizable()
+            sage: A.change_ring(QQ).is_diagonalizable()                                 # needs sage.libs.pari
             False
-            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()
+            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()                 # needs sage.libs.pari
             True
         """
         return self.minpoly().is_squarefree()
@@ -11086,7 +11087,7 @@ cdef class Matrix(Matrix1):
             [0 0 0]
             [0 0 0]
             [0 0 0]
-            sage: (G*G.transpose() - identity_matrix(3)).norm() < 10^-10
+            sage: (G*G.transpose() - identity_matrix(3)).norm() < 10^-10                # needs scipy
             True
             sage: G.row_space() == A.row_space()
             True
@@ -11121,10 +11122,10 @@ cdef class Matrix(Matrix1):
             ....:                    [-4*I, -2*I + 17,       0,  9*I + 1],
             ....:                    [   1,  -2*I - 6, -I + 11, -5*I + 1]])
             sage: G, M = A.gram_schmidt(orthonormal=True)
-            sage: (M*G - A).norm() < 10^-10
+            sage: (M*G - A).norm() < 10^-10                                             # needs scipy
             True
-            sage: id3 = G*G.conjugate().transpose()
-            sage: (id3 - identity_matrix(3)).norm() < 10^-10
+            sage: id3 = G * G.conjugate().transpose()
+            sage: (id3 - identity_matrix(3)).norm() < 10^-10                            # needs scipy
             True
             sage: G.row_space() == A.row_space()        # long time
             True
@@ -11792,6 +11793,7 @@ cdef class Matrix(Matrix1):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: A = matrix(QQ, 5, 5, {(0,1): -1, (1,0): 1, (2,3): -1}); A
             [ 0 -1  0  0  0]
             [ 1  0  0  0  0]
@@ -11824,6 +11826,7 @@ cdef class Matrix(Matrix1):
 
         TESTS::
 
+            sage: # needs sage.libs.pari
             sage: X = random_matrix(QQ, 4)
             sage: S, N = X.jordan_decomposition()
             sage: X == S + N
@@ -13068,7 +13071,7 @@ cdef class Matrix(Matrix1):
             [             -4.37...?*I   -0.10...? -  0.85...?*I  -0.21...? + 0.37...?*I 2.81...?]
             sage: L.parent()
             Full MatrixSpace of 4 by 4 dense matrices over Algebraic Field
-            sage: (L*L.conjugate_transpose() - A.change_ring(QQbar)).norm() < 10^-10
+            sage: (L*L.conjugate_transpose() - A.change_ring(QQbar)).norm() < 10^-10    # needs scipy
             True
 
         The field of algebraic numbers is an ideal setting for this
@@ -15287,7 +15290,7 @@ cdef class Matrix(Matrix1):
         We can check positive-definiteness of matrices over
         approximate real/complex and symbolic rings::
 
-            sage: # needs sage.rings.real_mpfr
+            sage: # needs scipy sage.rings.real_mpfr
             sage: matrix.identity(RR,4).is_positive_definite()
             True
             sage: matrix.identity(CC,4).is_positive_definite()

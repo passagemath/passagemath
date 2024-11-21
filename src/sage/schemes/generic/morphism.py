@@ -247,7 +247,7 @@ class SchemeMorphism(Element):
         converter = D._internal_coerce_map_from(P)
         if converter is None:
             try:
-                return self.pushforward(x,*args,**kwds)
+                return self.pushforward(x, *args, **kwds)
             except (AttributeError, TypeError, NotImplementedError):
                 pass # raise TypeError, "%s must be coercible into %s"%(x, self.domain())
             # Here, we would like to do
@@ -1588,6 +1588,7 @@ class SchemeMorphism_polynomial(SchemeMorphism):
 
         ::
 
+            sage: # needs sage.schemes
             sage: R.<c> = QQ[]
             sage: P.<x,y> = ProjectiveSpace(R, 1)
             sage: f = DynamicalSystem_projective([x^2 + c*y^2, y^2], domain=P)

@@ -36,6 +36,7 @@ AUTHORS:
 
 from typing import Optional
 import sage
+import platform
 import os
 import socket
 import sys
@@ -165,7 +166,6 @@ def var(key: str, *fallbacks: Optional[str], force: bool = False) -> Optional[st
 
 
 # system info
-UNAME = var("UNAME", os.uname()[0])
 HOSTNAME = var("HOSTNAME", socket.gethostname())
 LOCAL_IDENTIFIER = var("LOCAL_IDENTIFIER", "{}.{}".format(HOSTNAME, os.getpid()))
 
@@ -207,12 +207,22 @@ SAGE_STARTUP_FILE = var("SAGE_STARTUP_FILE", join(DOT_SAGE, "init.sage"))
 SAGE_ARCHFLAGS = var("SAGE_ARCHFLAGS", "unset")
 SAGE_PKG_CONFIG_PATH = var("SAGE_PKG_CONFIG_PATH")
 
+try:
+    import sage_wheels
+except ImportError:
+    _sage_wheels_path = []
+else:
+    _sage_wheels_path = sage_wheels.__path__
+
 # colon-separated search path for databases.
 SAGE_DATA_PATH = var("SAGE_DATA_PATH",
                      os.pathsep.join(filter(None, [
-                         join(DOT_SAGE, "db"),
-                         join(SAGE_SHARE, "sagemath"),
-                         SAGE_SHARE,
+                             join(DOT_SAGE, "db"),
+                         ] + [
+                             join(p, "share") for p in _sage_wheels_path
+                         ] + [
+                             join(SAGE_SHARE, "sagemath"),
+                             SAGE_SHARE,
                          ])))
 
 # database directories, the default is to search in SAGE_DATA_PATH

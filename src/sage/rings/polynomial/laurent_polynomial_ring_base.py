@@ -577,7 +577,8 @@ class LaurentPolynomialRing_generic(CommutativeRing, Parent):
 
         Test for constructions which use multivariate polynomial rings::
 
-            sage: rings = [RR, QQ, ZZ, GF(13), GF(7^3)]
+            sage: rings = [RR, QQ, ZZ, GF(13)]
+            sage: rings += [GF(7^3)]                                                    # needs sage.rings.finite_rings
             sage: for ring in rings:
             ....:     d = randint(1, 6)
             ....:     t = randint(5, 20)
@@ -594,7 +595,8 @@ class LaurentPolynomialRing_generic(CommutativeRing, Parent):
 
         Test for constructions which use univariate polynomial rings::
 
-            sage: rings = [RR, QQ, ZZ, GF(13), GF(7^3)]
+            sage: rings = [RR, QQ, ZZ, GF(13)]
+            sage: rings += [GF(7^3)]                                                    # needs sage.rings.finite_rings
             sage: for ring in rings:
             ....:     L.<x> = LaurentPolynomialRing(ring)
             ....:     for _ in range(100):

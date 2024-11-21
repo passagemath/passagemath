@@ -13,8 +13,9 @@ Feature for testing the presence of MACAULAY2
 # *****************************************************************************
 
 import subprocess
-from . import Executable
+from . import Executable, PythonModule
 from . import FeatureTestResult
+from .join_feature import JoinFeature
 
 class Macaulay2(Executable):
     r"""
@@ -24,7 +25,7 @@ class Macaulay2(Executable):
 
         sage: from sage.features.macaulay2 import Macaulay2
         sage: Macaulay2().is_present()  # optional - macaulay2
-        FeatureTestResult('macaulay2', True)
+        FeatureTestResult('macaulay2_executable', True)
     """
     def __init__(self):
         r"""
@@ -34,9 +35,12 @@ class Macaulay2(Executable):
             sage: isinstance(Macaulay2(), Macaulay2)
             True
         """
-        Executable.__init__(self, "macaulay2", executable='M2',
+        Executable.__init__(self, "macaulay2_executable", executable='M2',
                             spkg='macaulay2')
 
 
 def all_features():
-    return [Macaulay2()]
+    return [JoinFeature("macaulay2",
+                        (Macaulay2(),
+                         PythonModule('sage.interfaces.macaulay2')),
+                        spkg='sagemath_macaulay2')]

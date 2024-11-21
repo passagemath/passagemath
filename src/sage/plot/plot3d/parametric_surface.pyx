@@ -19,14 +19,14 @@ AUTHORS:
 EXAMPLES::
 
     sage: from sage.plot.plot3d.parametric_surface import ParametricSurface, MoebiusStrip
-    sage: def f(x,y): return x+y, sin(x)*sin(y), x*y
+    sage: def f(x, y): return x+y, sin(x)*sin(y), x*y
     sage: P = ParametricSurface(f, (srange(0,10,0.1), srange(-5,5.0,0.1)))
     sage: show(P)
 
 .. PLOT::
 
     from sage.plot.plot3d.parametric_surface import ParametricSurface
-    def f(x,y): return x+y, sin(x)*sin(y), x*y
+    def f(x, y): return x+y, sin(x)*sin(y), x*y
     sphinx_plot(ParametricSurface(f, (srange(0,10,0.1), srange(-5,5.0,0.1))))
 
 ::
@@ -51,13 +51,13 @@ By default, the surface is colored with one single color. ::
 .. PLOT::
 
     from sage.plot.plot3d.parametric_surface import ParametricSurface
-    def f(x,y): return x+y, sin(x)*sin(y), x*y
+    def f(x, y): return x+y, sin(x)*sin(y), x*y
     sphinx_plot(ParametricSurface(f, (srange(0,10,0.1), srange(-5,5.0,0.1)), color='red'))
 
 One can instead provide a coloring function and a colormap::
 
-    sage: def f(x,y): return x+y, x-y, x*y
-    sage: def c(x,y): return sin((x+y)/2)**2
+    sage: def f(x, y): return x+y, x-y, x*y
+    sage: def c(x, y): return sin((x+y)/2)**2
     sage: cm = colormaps.RdYlGn
     sage: P = ParametricSurface(f, (srange(-5,5,0.1), srange(-5,5.0,0.1)), color=(c,cm))
     sage: P.show(viewer='tachyon')
@@ -65,8 +65,8 @@ One can instead provide a coloring function and a colormap::
 .. PLOT::
 
     from sage.plot.plot3d.parametric_surface import ParametricSurface
-    def f(x,y): return x+y, x-y, x*y
-    def c(x,y): return sin((x+y)/2)**2
+    def f(x, y): return x+y, x-y, x*y
+    def c(x, y): return sin((x+y)/2)**2
     cm = colormaps.RdYlGn
     sphinx_plot(ParametricSurface(f, (srange(-5,5,0.1), srange(-5,5.0,0.1)), color=(c,cm)))
 
@@ -76,7 +76,7 @@ This value is passed to the chosen colormap.
 Another colored example::
 
     sage: colm = colormaps.autumn
-    sage: def g(x,y): return x, y, x**2 + y**2
+    sage: def g(x, y): return x, y, x**2 + y**2
     sage: P = ParametricSurface(g, (srange(-10,10,0.1), srange(-5,5.0,0.1)), color=(c,colm))
     sage: P.show(viewer='tachyon')
 
@@ -84,8 +84,8 @@ Another colored example::
 
     from sage.plot.plot3d.parametric_surface import ParametricSurface
     colm = colormaps.autumn
-    def g(x,y): return x, y, x**2 + y**2
-    def c(x,y): return sin((x+y)/2)**2
+    def g(x, y): return x, y, x**2 + y**2
+    def c(x, y): return sin((x+y)/2)**2
     sphinx_plot(ParametricSurface(g, (srange(-10,10,0.1), srange(-5,5.0,0.1)), color=(c,colm)))
 
 .. NOTE::
@@ -162,7 +162,7 @@ cdef class ParametricSurface(IndexFaceSet):
     EXAMPLES::
 
         sage: from sage.plot.plot3d.parametric_surface import ParametricSurface
-        sage: def f(x,y): return cos(x)*sin(y), sin(x)*sin(y), cos(y)+log(tan(y/2))+0.2*x
+        sage: def f(x, y): return cos(x)*sin(y), sin(x)*sin(y), cos(y)+log(tan(y/2))+0.2*x
         sage: S = ParametricSurface(f, (srange(0,12.4,0.1), srange(0.1,2,0.1)))
         sage: show(S)
 
@@ -172,14 +172,14 @@ cdef class ParametricSurface(IndexFaceSet):
     .. PLOT::
 
         from sage.plot.plot3d.parametric_surface import ParametricSurface
-        def f(x,y): return cos(x)*sin(y), sin(x)*sin(y), cos(y)+log(tan(y/2))+0.2*x
+        def f(x, y): return cos(x)*sin(y), sin(x)*sin(y), cos(y)+log(tan(y/2))+0.2*x
         sphinx_plot(ParametricSurface(f, (srange(0,12.4,0.1), srange(0.1,2,0.1))))
 
     The Hessenberg surface:
 
     ::
 
-        sage: def f(u,v):
+        sage: def f(u, v):
         ....:     a = 1
         ....:     from math import cos, sin, sinh, cosh
         ....:     x = cos(a)*(cos(u)*sinh(v)-cos(3*u)*sinh(3*v)/3) + sin(a)*(
@@ -195,7 +195,7 @@ cdef class ParametricSurface(IndexFaceSet):
 
     .. PLOT::
 
-        def f(u,v):
+        def f(u, v):
             a = 1
             from math import cos, sin, sinh, cosh
             x = cos(a)*(cos(u)*sinh(v)-cos(3*u)*sinh(3*v)/3) + sin(a)*(sin(u)*cosh(v)-sin(3*u)*cosh(3*v)/3)
@@ -208,8 +208,8 @@ cdef class ParametricSurface(IndexFaceSet):
 
     A colored example using the ``color`` keyword::
 
-        sage: def g(x,y): return x, y, - x**2 + y**2
-        sage: def c(x,y): return sin((x-y/2)*y/4)**2
+        sage: def g(x, y): return x, y, - x**2 + y**2
+        sage: def c(x, y): return sin((x-y/2)*y/4)**2
         sage: cm = colormaps.gist_rainbow
         sage: P = ParametricSurface(g, (srange(-10,10,0.1),
         ....:   srange(-5,5.0,0.1)),color=(c,cm))
@@ -218,8 +218,8 @@ cdef class ParametricSurface(IndexFaceSet):
     .. PLOT::
 
         from sage.plot.plot3d.parametric_surface import ParametricSurface
-        def g(x,y): return x, y, - x**2 + y**2
-        def c(x,y): return sin((x-y/2)*y/4)**2
+        def g(x, y): return x, y, - x**2 + y**2
+        def c(x, y): return sin((x-y/2)*y/4)**2
         cm = colormaps.gist_rainbow
         sphinx_plot(ParametricSurface(g, (srange(-10,10,0.1), srange(-5,5.0,0.1)),color=(c,cm)))
     """
@@ -232,7 +232,7 @@ cdef class ParametricSurface(IndexFaceSet):
         EXAMPLES::
 
             sage: from sage.plot.plot3d.parametric_surface import ParametricSurface
-            sage: def f(x,y): return x+y, sin(x)*sin(y), x*y
+            sage: def f(x, y): return x+y, sin(x)*sin(y), x*y
             sage: S = ParametricSurface(f, (srange(0,12.4,0.1), srange(0.1,2,0.1)))
         """
         if isinstance(f, list):
@@ -490,7 +490,7 @@ cdef class ParametricSurface(IndexFaceSet):
         TESTS::
 
             sage: from sage.plot.plot3d.parametric_surface import ParametricSurface, MoebiusStrip
-            sage: def f(x,y): return x+y, sin(x)*sin(y), x*y                        # indirect doctests
+            sage: def f(x, y): return x+y, sin(x)*sin(y), x*y                        # indirect doctests
             sage: P = ParametricSurface(f, (srange(0,10,0.1), srange(-5,5.0,0.1)))  # indirect doctests
             sage: P.show()                                                          # indirect doctests
             sage: S = MoebiusStrip(1, .2)                                           # indirect doctests
@@ -639,7 +639,7 @@ cdef class ParametricSurface(IndexFaceSet):
         TESTS::
 
             sage: from sage.plot.plot3d.parametric_surface import ParametricSurface
-            sage: def f(x,y): return x+y,x-y,x*y
+            sage: def f(x, y): return x+y,x-y,x*y
             sage: P = ParametricSurface(f)
             sage: P.get_grid(.1)
             Traceback (most recent call last):
@@ -764,7 +764,7 @@ cdef class ParametricSurface(IndexFaceSet):
         TESTS::
 
             sage: from sage.plot.plot3d.parametric_surface import ParametricSurface
-            sage: def f(x,y): return x+y,x-y,x*y
+            sage: def f(x, y): return x+y,x-y,x*y
             sage: P = ParametricSurface(f,(srange(0,1,0.1),srange(0,1,0.1)))
             sage: P.eval(0,0)
             Traceback (most recent call last):

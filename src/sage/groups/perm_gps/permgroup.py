@@ -1597,6 +1597,7 @@ class PermutationGroup_generic(FiniteGroup):
 
         The example from the original paper::
 
+            sage: # needs sage.combinat
             sage: H = PermutationGroup([[(1,2,3),(7,9,8),(10,12,11)],[(4,5,6),(7,8,9),(10,11,12)],[(5,6),(8,9),(11,12)],[(7,8,9),(10,11,12)]])
             sage: S = H.disjoint_direct_product_decomposition(); S
             {{1, 2, 3}, {4, 5, 6, 7, 8, 9, 10, 11, 12}}
@@ -1614,6 +1615,7 @@ class PermutationGroup_generic(FiniteGroup):
 
         An example with a different domain::
 
+            sage: # needs sage.combinat
             sage: PermutationGroup([[('a','c','d'),('b','e')]]).disjoint_direct_product_decomposition()
             {{'a', 'c', 'd'}, {'b', 'e'}}
             sage: PermutationGroup([[('a','c','d','b','e')]]).disjoint_direct_product_decomposition()
@@ -1621,6 +1623,7 @@ class PermutationGroup_generic(FiniteGroup):
 
         Counting the number of "connected" permutation groups of degree `n`::
 
+            sage: # needs sage.combinat
             sage: seq = [sum(1 for G in SymmetricGroup(n).conjugacy_classes_subgroups() if len(G.disjoint_direct_product_decomposition()) == 1) for n in range(1,8)]; seq
             [1, 1, 2, 6, 6, 27, 20]
             sage: oeis(seq) # optional -- internet
@@ -2733,6 +2736,25 @@ class PermutationGroup_generic(FiniteGroup):
         except Exception:
             raise TypeError("{0} does not convert to a permutation group element".format(g))
         return PermutationGroup(gap_group=libgap.ConjugateGroup(self, g))
+
+    def are_conjugate(self, H1, H2):
+        r"""
+        Return whether ``H1`` and ``H2`` are conjugate subgroups in ``G``.
+
+        EXAMPLES::
+
+            sage: G = SymmetricGroup(3)
+            sage: H1 = PermutationGroup([(1,2)])
+            sage: H2 = PermutationGroup([(2,3)])
+            sage: G.are_conjugate(H1, H2)
+            True
+            sage: G = SymmetricGroup(4)
+            sage: H1 = PermutationGroup([[(1,3),(2,4)], [(1,2),(3,4)]])
+            sage: H2 = PermutationGroup([[(1,2)], [(1,2),(3,4)]])
+            sage: G.are_conjugate(H1, H2)
+            False
+        """
+        return libgap.IsConjugate(self, H1, H2).sage()
 
     def direct_product(self, other, maps=True):
         """

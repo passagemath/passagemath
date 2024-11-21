@@ -3257,8 +3257,8 @@ class ComplexReflectionGroup(PermutationGroup_unique):
 
             sage: groups.permutation.ComplexReflection(4, 1, 3).cardinality()
             384
-            sage: CP = ColoredPermutations(4, 3)
-            sage: CP.cardinality()
+            sage: CP = ColoredPermutations(4, 3)                                        # needs sage.combinat
+            sage: CP.cardinality()                                                      # needs sage.combinat
             384
         """
         if p is None:

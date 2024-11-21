@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 # sage.doctest: needs sage.rings.finite_rings
 # sage.doctest: needs sage.rings.function_field
 r"""
