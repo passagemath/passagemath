@@ -290,7 +290,7 @@ class Function_exp_integral_e1(BuiltinFunction):
 
         sage: N(exp_integral_e1(2.0))                                                   # needs mpmath
         0.0489005107080611
-        sage: N(exponential_integral_1(2.0))                                            # needs sage.rings.real_mpfr
+        sage: N(exponential_integral_1(2.0))                                            # needs sage.libs.pari sage.rings.real_mpfr
         0.0489005107080611
 
     Symbolic derivatives and integrals are handled by Sage and Maxima::

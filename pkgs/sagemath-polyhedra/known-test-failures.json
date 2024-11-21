@@ -30,7 +30,7 @@
     },
     "sage.algebras.orlik_solomon": {
         "failed": true,
-        "ntests": 88
+        "ntests": 81
     },
     "sage.algebras.orlik_terao": {
         "failed": true,
@@ -332,7 +332,7 @@
     },
     "sage.categories.filtered_modules_with_basis": {
         "failed": true,
-        "ntests": 99
+        "ntests": 97
     },
     "sage.categories.finite_complex_reflection_groups": {
         "ntests": 172
@@ -768,7 +768,7 @@
         "ntests": 2
     },
     "sage.coding.kasami_codes": {
-        "ntests": 2
+        "ntests": 5
     },
     "sage.coding.linear_code": {
         "ntests": 40
@@ -1103,6 +1103,7 @@
         "ntests": 343
     },
     "sage.doctest.test": {
+        "failed": true,
         "ntests": 23
     },
     "sage.doctest.util": {
@@ -1260,8 +1261,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "failed": true,
-        "ntests": 0
+        "ntests": 181
     },
     "sage.features.sat": {
         "ntests": 16
@@ -1390,8 +1390,7 @@
         "ntests": 101
     },
     "sage.geometry.cone_critical_angles": {
-        "failed": true,
-        "ntests": 125
+        "ntests": 4
     },
     "sage.geometry.convex_set": {
         "ntests": 148
@@ -1500,7 +1499,6 @@
         "ntests": 14
     },
     "sage.geometry.polyhedron.base_ZZ": {
-        "failed": true,
         "ntests": 100
     },
     "sage.geometry.polyhedron.base_mutable": {
@@ -1787,7 +1785,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2092
+        "ntests": 2075
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
@@ -2385,7 +2383,6 @@
         "ntests": 19
     },
     "sage.quadratic_forms.binary_qf": {
-        "failed": true,
         "ntests": 299
     },
     "sage.quadratic_forms.constructions": {

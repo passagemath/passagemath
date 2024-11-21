@@ -902,7 +902,7 @@ class Polyhedron_ZZ(Polyhedron_QQ):
 
         TESTS::
 
-            sage: d.normal_form(algorithm='palp_fiction')
+            sage: d.normal_form(algorithm='palp_fiction')                               # needs sage.groups
             Traceback (most recent call last):
             ...
             ValueError: algorithm must be 'palp_native'

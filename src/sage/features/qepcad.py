@@ -13,8 +13,9 @@ Feature for testing the presence of QEPCAD
 # *****************************************************************************
 
 import subprocess
-from . import Executable
-from . import FeatureTestResult
+from . import Executable, FeatureTestResult, PythonModule
+from .join_feature import JoinFeature
+
 
 class Qepcad(Executable):
     r"""
@@ -39,4 +40,7 @@ class Qepcad(Executable):
 
 
 def all_features():
-    return [Qepcad()]
+    return [JoinFeature("qepcad",
+                        (Qepcad(),
+                         PythonModule('sage.interfaces.qepcad')),
+                        spkg='sagemath_qepcad', type='optional')]

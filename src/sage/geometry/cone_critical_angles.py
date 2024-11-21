@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
+# sage.doctest: needs sage.rings.number_field
 r"""
 Find maximal angles between polyhedral convex cones
 
