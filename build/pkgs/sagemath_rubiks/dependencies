@@ -1,0 +1,1 @@
+$(SAGE_ROOT)/pkgs/sagemath-rubiks/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-rubiks/MANIFEST.in  rubiks cysignals | $(PYTHON_TOOLCHAIN) sage_setup sage_conf sagemath_environment cython pkgconfig $(PYTHON)
