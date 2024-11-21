@@ -428,7 +428,7 @@ class Function_gamma_inc(BuiltinFunction):
 
             sage: gamma_inc(0, 2)                                                       # needs sage.symbolic
             -Ei(-2)
-            sage: gamma_inc(0, 2.)                                                      # needs sage.rings.real_mpfr
+            sage: gamma_inc(0, 2.)                                                      # needs sage.libs.pari sage.rings.real_mpfr
             0.0489005107080611
             sage: gamma_inc(0, 2).n(algorithm='pari')                                   # needs sage.libs.pari sage.symbolic
             0.0489005107080611
