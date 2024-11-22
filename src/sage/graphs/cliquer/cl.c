@@ -1,4 +1,4 @@
-/* sage_setup: distribution = sagemath-graphs
+/* sage_setup: distribution = sagemath-cliquer
  */
 #include "cliquer/cliquer.h"
 
