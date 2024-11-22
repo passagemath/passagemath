@@ -1,0 +1,9 @@
+{
+    "sage.graphs.cliquer": {
+        "ntests": 34
+    },
+    "sage.graphs.graph": {
+        "failed": true,
+        "ntests": 1129
+    }
+}
