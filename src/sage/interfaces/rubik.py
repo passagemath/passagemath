@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-rubiks
+# sage.doctest: optional - rubiks
 r"""
 Interface to several Rubik's cube solvers.
 
