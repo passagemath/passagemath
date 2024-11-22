@@ -252,13 +252,14 @@ class AbstractArgument(MultiplicativeGroupElement):
 
         ::
 
+            sage: # needs sage.symbolic
             sage: from sage.groups.misc_gps.argument_groups import ArgumentByElementGroup
-            sage: C = ArgumentByElementGroup(SR)                                        # needs sage.symbolic
-            sage: C(-1) * 4                                                             # needs sage.symbolic
+            sage: C = ArgumentByElementGroup(SR)
+            sage: C(-1) * 4
             -4
             sage: _.parent()
             Symbolic Ring
-            sage: 4 * C(-1)                                                             # needs sage.symbolic
+            sage: 4 * C(-1)
             -4
             sage: _.parent()
             Symbolic Ring
