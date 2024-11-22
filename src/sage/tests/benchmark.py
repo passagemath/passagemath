@@ -20,16 +20,15 @@ from cysignals.alarm import alarm, cancel_alarm, AlarmInterrupt
 from sage.combinat.combinat import fibonacci
 from sage.functions.other import factorial
 from sage.interfaces.gp import gp
-from sage.interfaces.macaulay2 import macaulay2
 from sage.interfaces.magma import magma, Magma
 from sage.interfaces.maple import maple
 from sage.interfaces.mathematica import mathematica
 from sage.interfaces.maxima import maxima
 from sage.interfaces.singular import singular
 from sage.libs.pari import pari
-from sage.libs.gap.libgap import libgap
 from sage.matrix.matrix_space import MatrixSpace
 from sage.misc.functional import log
+from sage.misc.lazy_import import lazy_import
 from sage.misc.timing import cputime, walltime
 from sage.modular.modsym.modsym import ModularSymbols
 from sage.rings.complex_mpfr import ComplexField
@@ -40,6 +39,9 @@ from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.schemes.elliptic_curves.constructor import EllipticCurve
+
+lazy_import('sage.interfaces.macaulay2', 'macaulay2')
+lazy_import('sage.libs.gap.libgap', 'libgap')
 
 
 def avg(X):
