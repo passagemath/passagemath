@@ -1198,8 +1198,9 @@ class PolynomialSequence_generic(Sequence_generic):
 
         Check that :issue:`26952` is fixed::
 
+            sage: # needs sage.rings.padics
             sage: Qp = pAdicField(2)
-            sage: R.<x,y,z> = PolynomialRing(Qp, implementation='generic')              # needs sage.rings.padics
+            sage: R.<x,y,z> = PolynomialRing(Qp, implementation='generic')
             sage: F = Sequence([z*x+y^3,z+y^3,3*z+x*y])
             sage: F.reduced()
             [y^3 + z, x*y + (1 + 2 + O(2^20))*z, x*z - z]
