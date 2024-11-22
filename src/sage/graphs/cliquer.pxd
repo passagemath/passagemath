@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-graphs
+# sage_setup: distribution = sagemath-cliquer
 # distutils: libraries = cliquer
 
 cdef extern from "cliquer/graph.h":
