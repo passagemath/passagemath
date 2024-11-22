@@ -42,15 +42,15 @@ EXAMPLES::
     sage: m(1/17)
     -2/3
 
-    sage: # needs sage.graphs
+    sage: # needs eclib sage.graphs
     sage: m2 = E.modular_symbol(-1, implementation='sage')
     sage: m2(0)
     0
     sage: m2(1/5)
     1/2
 
-    sage: V = E.modular_symbol_space()
-    sage: V
+    sage: # needs eclib
+    sage: V = E.modular_symbol_space(); V
     Modular Symbols subspace of dimension 1 of Modular Symbols space of dimension 2
      for Gamma_0(19) of weight 2 with sign 1 over Rational Field
     sage: V.q_eigenform(30)
