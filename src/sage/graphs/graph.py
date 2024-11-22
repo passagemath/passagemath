@@ -9154,8 +9154,8 @@ class Graph(GenericGraph):
     from sage.graphs.graph_decompositions.cutwidth import cutwidth
     from sage.graphs.graph_decompositions.slice_decomposition import slice_decomposition
     matching_polynomial = LazyImport('sage.graphs.matchpoly', 'matching_polynomial', at_startup=True)
-    from sage.graphs.cliquer import all_max_clique as cliques_maximum
-    from sage.graphs.cliquer import all_cliques
+    cliques_maximum = LazyImport('sage.graphs.cliquer', 'all_max_clique', at_startup=True)
+    all_cliques = LazyImport('sage.graphs.cliquer', 'all_cliques', at_startup=True)
     from sage.graphs.spanning_tree import random_spanning_tree
     from sage.graphs.spanning_tree import spanning_trees
     from sage.graphs.graph_decompositions.graph_products import is_cartesian_product
