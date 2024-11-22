@@ -1,5 +1,5 @@
 cd src
 
-sdh_make plantri
+sdh_make plantri fullgen
 
-sdh_install plantri $SAGE_LOCAL/bin/
+sdh_install plantri fullgen $SAGE_LOCAL/bin/
