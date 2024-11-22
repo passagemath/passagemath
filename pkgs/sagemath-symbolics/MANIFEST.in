@@ -51,6 +51,11 @@ graft sage/ext_data/magma
 global-exclude all__sagemath_*.py
 global-include all__sagemath_symbolics.py
 
+global-exclude *.c
+global-exclude *.cpp
+
+graft sage/symbolic/ginac
+
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude *.bak
