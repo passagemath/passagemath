@@ -100,7 +100,7 @@ construct the GAP polynomial `f` corresponding to
 `g`::
 
     sage: R.<x,y> = PolynomialRing(QQ,2)
-    sage: f = gap(str(g)); f
+    sage: f = gap(str(g)); f                                                            # needs sage.libs.singular
     -x_1^5+x_2^2
 
 We can call GAP functions on `f`. For example, we evaluate
@@ -111,7 +111,7 @@ at the point `(1,2)`.
 
     sage: f.Value(I, [1,2])
     3
-    sage: g(1,2)        # agrees
+    sage: g(1,2)        # agrees                                                        # needs sage.libs.singular
     3
 
 Saving and loading objects
