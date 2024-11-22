@@ -300,7 +300,7 @@ global-include all__sagemath_modules.py
 global-exclude *.c
 global-exclude *.cpp
 
-include src/sage/stats/distributions/dgs_*.c
+include sage/stats/distributions/dgs_*.c
 
 global-exclude __pycache__
 global-exclude *.py[co]
