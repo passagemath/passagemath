@@ -173,7 +173,8 @@ case $system:$command in
         [ -n "$system_packages" ] && print_shell_command conda install $options $system_packages
         ;;
     homebrew*:install)
-        [ -n "$system_packages" ] && print_shell_command brew install $system_packages
+        [ "$YES" = yes ] && options="$options --overwrite"
+        [ -n "$system_packages" ] && print_shell_command brew install $options $system_packages
         ;;
     macports*:install)
         [ "$YES" = yes ] && options="$options -N"
