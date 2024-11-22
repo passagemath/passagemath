@@ -40,8 +40,8 @@ global-include all__sagemath_schemes.py
 global-exclude *.c
 global-exclude *.cpp
 
-include src/sage/modular/arithgroup/farey.cpp
-include src/sage/modular/arithgroup/sl2z.cpp
+include sage/modular/arithgroup/farey.cpp
+include sage/modular/arithgroup/sl2z.cpp
 
 global-exclude __pycache__
 global-exclude *.py[co]
