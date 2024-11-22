@@ -30,6 +30,14 @@ include           sage/geometry/palp_normal_form.p*
 global-exclude all__sagemath_*.py
 global-include all__sagemath_groups.py
 
+global-exclude *.c
+global-exclude *.cpp
+
+global-exclude __pycache__
 global-exclude *.py[co]
-global-exclude *.so
 global-exclude *.bak
+global-exclude *.so
+global-exclude *~
+prune .tox
+prune build
+prune dist
