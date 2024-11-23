@@ -480,8 +480,7 @@ class sage__libs__gap(JoinFeature):
                               PythonModule('sage.groups.matrix_gps.orthogonal_gap'),
                               PythonModule('sage.groups.matrix_gps.symplectic_gap'),
                               PythonModule('sage.groups.matrix_gps.unitary_gap'),
-                              PythonModule('sage.matrix.matrix_gap'),
-                              PythonModule('sage.rings.universal_cyclotomic_field')])
+                              PythonModule('sage.matrix.matrix_gap')])
 
 
 class sage__libs__giac(JoinFeature):
