@@ -124,6 +124,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         TESTS::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, 1])
             sage: c = B([2, 1, 2])
@@ -146,6 +147,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B.<s0,s1,s2> = BraidGroup(4)
             sage: hash(s0*s2) == hash(s2*s0)
             True
@@ -501,6 +503,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: a = B([2, 2, -1, -1])
             sage: b = B([2, 1, 2, 1])
@@ -512,6 +515,7 @@ class Braid(FiniteTypeArtinGroupElement):
             s1*s0
             sage: d * a / d == c
             False
+
             sage: B = BraidGroup(4, 's')
             sage: b = B([1, 2, 3, 1, 2, 1])
             sage: b.plot()                                                              # needs sage.plot
@@ -809,6 +813,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: Hopf = BraidGroup(2)([-1, -1])
             sage: HopfLG = Hopf.links_gould_matrix()
             sage: HopfLG.dimensions()
@@ -844,6 +849,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: Hopf = BraidGroup(2)([-1, -1])
             sage: Hopf.links_gould_polynomial()
             -1 + t1^-1 + t0^-1 - t0^-1*t1^-1
@@ -970,7 +976,7 @@ class Braid(FiniteTypeArtinGroupElement):
             sage: b = B([1, 2, -3])
             sage: mt = b.markov_trace(); mt
             A^4/(A^12 + 3*A^8 + 3*A^4 + 1)
-            sage: mt.factor()
+            sage: mt.factor()                                                           # needs sage.libs.pari
             A^4 * (A^4 + 1)^-3
 
         We now give the non-normalized Markov trace::
@@ -1160,6 +1166,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: B = BraidGroup(2)
             sage: b = B([1,1])
             sage: sorted((gr, sorted((d, [(sm,
@@ -1322,7 +1329,7 @@ class Braid(FiniteTypeArtinGroupElement):
         EXAMPLES::
 
             sage: B = BraidGroup(3)
-            sage: B([1,2,1,2])._annular_khovanov_complex_cached((5,-1)).homology()
+            sage: B([1,2,1,2])._annular_khovanov_complex_cached((5,-1)).homology()      # needs sage.graphs
             {1: Z, 2: Z, 3: 0}
         """
         from sage.homology.chain_complex import ChainComplex
@@ -1372,8 +1379,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
             sage: B = BraidGroup(3)
             sage: b = B([1,-2,1,-2])
-            sage: C = b.annular_khovanov_complex()
-            sage: C
+            sage: C = b.annular_khovanov_complex(); C                                   # needs sage.graphs
             {(-5, -1): Chain complex with at most 1 nonzero terms over Integer Ring,
              (-3, -3): Chain complex with at most 1 nonzero terms over Integer Ring,
              (-3, -1): Chain complex with at most 2 nonzero terms over Integer Ring,
@@ -1386,16 +1392,16 @@ class Braid(FiniteTypeArtinGroupElement):
              (3, 1): Chain complex with at most 2 nonzero terms over Integer Ring,
              (3, 3): Chain complex with at most 1 nonzero terms over Integer Ring,
              (5, 1): Chain complex with at most 1 nonzero terms over Integer Ring}
-            sage: C[1,-1].homology()
+            sage: C[1,-1].homology()                                                    # needs sage.graphs
             {1: Z x Z, 2: 0}
 
         TESTS::
 
-            sage: C = BraidGroup(2)([]).annular_khovanov_complex()
-            sage: {qa: C[qa].homology() for qa in C}
+            sage: C = BraidGroup(2)([]).annular_khovanov_complex()                      # needs sage.graphs
+            sage: {qa: C[qa].homology() for qa in C}                                    # needs sage.graphs
             {(-2, -2): {0: Z}, (0, 0): {0: Z x Z}, (2, 2): {0: Z}}
 
-            sage: BraidGroup(3)([-1]).annular_khovanov_complex((0,1), ZZ).differential()
+            sage: BraidGroup(3)([-1]).annular_khovanov_complex((0,1), ZZ).differential()    # needs sage.graphs
             {-2: [],
              -1: [0]
              [1]
@@ -1487,6 +1493,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(6)
             sage: B.one().left_normal_form()
             (1,)
@@ -1597,6 +1604,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, 1, -2, 3, 1])
             sage: b.right_normal_form()
@@ -1612,6 +1620,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(4)
             sage: b = B([2, 1, 3, 2])
             sage: b.centralizer()
@@ -1627,6 +1636,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: b = B([1, 2, -1, -2, -2, 1])
             sage: b.super_summit_set()
@@ -1649,6 +1659,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: b = B([1, 2, -1, -2, -2, 1])
             sage: c = B([1, 2, 1])
@@ -1671,6 +1682,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: b = B([1, 2, -1, -2, -2, 1])
             sage: c = B([1, 2, 1])
@@ -1696,6 +1708,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: B.one().conjugating_braid(B.one())
             1
@@ -1754,6 +1767,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: a = B([2, 2, -1, -1])
             sage: b = B([2, 1, 2, 1])
@@ -1783,6 +1797,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(4)
             sage: B.one().pure_conjugating_braid(B.one())
             1
@@ -1865,6 +1880,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: a = B([2, 2, -1, -1, 2, 2])
             sage: b = B([2, 1, 2, 1])
@@ -1896,6 +1912,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: b = B([1, 2, -1])
             sage: b.thurston_type()
@@ -1915,6 +1932,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: b = B([1, 2, -1])
             sage: b.is_reducible()
@@ -1931,6 +1949,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: a = B([2, 2, -1, -1, 2, 2])
             sage: b = B([2, 1, 2, 1])
@@ -1947,6 +1966,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: a = B([2, 2, -1, -1, 2, 2])
             sage: b = B([2, 1, 2, 1])
@@ -1963,6 +1983,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: b = B([2, 1, 2, 1])
             sage: a = B([2, 2, -1, -1, 2, 2])
@@ -1982,6 +2003,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.braiding
             sage: B = BraidGroup(3)
             sage: a = B([2, 2, -1, -1, 2, 2])
             sage: a.sliding_circuits()
@@ -2018,9 +2040,9 @@ class Braid(FiniteTypeArtinGroupElement):
             sage: b  = B5((-1, 2, -3, -1, -3, 4, 2, -3, 2, 4, 2, -3)) # closure K12a_427
             sage: bm = b.mirror_image(); bm
             s0*s1^-1*s2*s0*s2*s3^-1*s1^-1*s2*s1^-1*s3^-1*s1^-1*s2
-            sage: bm.is_conjugated(b)
+            sage: bm.is_conjugated(b)                                                   # needs sage.libs.braiding
             True
-            sage: bm.is_conjugated(~b)
+            sage: bm.is_conjugated(~b)                                                  # needs sage.libs.braiding
             False
         """
         return self.parent().mirror_involution()(self)
@@ -2037,7 +2059,7 @@ class Braid(FiniteTypeArtinGroupElement):
             sage: b  = BraidGroup(3)((1, 1, -2, 1, -2, 1, -2, -2))  # closure K8_17
             sage: br = b.reverse(); br
             s1^-1*(s1^-1*s0)^3*s0
-            sage: br.is_conjugated(b)
+            sage: br.is_conjugated(b)                                                   # needs sage.libs.braiding
             False
         """
         t = list(self.Tietze())
@@ -3380,9 +3402,9 @@ class BraidGroup_class(FiniteTypeArtinGroup):
             x1*x0*x1^-2
             sage: hom1(B.gen(2))
             x1^2*x0*x1^-3
-            sage: all(hom2(hom1(a)) == a for a in B.gens())
+            sage: all(hom2(hom1(a)) == a for a in B.gens())                             # needs sage.libs.braiding
             True
-            sage: all(hom2(a) == B.one() for a in G.relations())
+            sage: all(hom2(a) == B.one() for a in G.relations())                        # needs sage.libs.braiding
             True
         """
         n = self.strands()

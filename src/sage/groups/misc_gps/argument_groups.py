@@ -1751,7 +1751,7 @@ class ArgumentGroupFactory(UniqueFactory):
         Sign Group
         sage: ArgumentGroup(RIF)                                                        # needs sage.rings.real_interval_field
         Sign Group
-        sage: ArgumentGroup(RBF)
+        sage: ArgumentGroup(RBF)                                                        # needs sage.libs.flint
         Sign Group
 
         sage: ArgumentGroup(CC)                                                         # needs sage.rings.number_field
