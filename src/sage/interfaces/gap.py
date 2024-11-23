@@ -109,7 +109,7 @@ at the point `(1,2)`.
 
 ::
 
-    sage: f.Value(I, [1,2])
+    sage: f.Value(I, [1,2])                                                             # needs sage.libs.singular
     3
     sage: g(1,2)        # agrees                                                        # needs sage.libs.singular
     3
@@ -1040,7 +1040,7 @@ class GapElement_generic(ModuleElement, ExtraTabCompletion, ExpectElement):
         ::
 
             sage: s = gap('[[Z(16),Z(16)^2],[Z(16)^3,Z(16)]]')
-            sage: s._matrix_(GF(16,'a'))
+            sage: s._matrix_(GF(16,'a'))                                                # needs sage.rings.finite_rings
             [  a a^2]
             [a^3   a]
         """
@@ -1672,6 +1672,8 @@ def gfq_gap_to_sage(x, F):
         2
         sage: F(gap('0*Z(13)'))
         0
+
+        sage: # needs sage.rings.finite_rings
         sage: F = GF(13^2, 'a')
         sage: x = gap('Z(13)')
         sage: F(x)
@@ -1686,6 +1688,7 @@ def gfq_gap_to_sage(x, F):
 
     Check that :issue:`18048` is fixed::
 
+        sage: # needs sage.rings.finite_rings
         sage: K.<a> = GF(16)
         sage: b = a^2 + a
         sage: K(b._gap_())
