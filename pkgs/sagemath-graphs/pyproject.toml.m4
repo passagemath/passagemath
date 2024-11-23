@@ -35,6 +35,8 @@ test        = ["passagemath-repl"]
 
 # libraries
 bliss       = ["passagemath-bliss"]
+buckygen    = ["passagemath-buckygen"]
+cliquer     = ["passagemath-cliquer"]
 gap         = ["passagemath-gap"]
 igraph      = [SPKG_INSTALL_REQUIRES_python_igraph]
 mcqd        = ["passagemath-mcqd"]
@@ -42,6 +44,7 @@ nauty       = ["passagemath-nauty"]
 networkx    = [SPKG_INSTALL_REQUIRES_networkx]
 pari        = ["passagemath-pari"]
 planarity   = ["passagemath-planarity"]
+plantri     = ["passagemath-plantri"]
 rankwidth   = ["passagemath-rankwidth"]
 rw          = ["passagemath-graphs[rankwidth]"]  # alias
 tdlib       = ["passagemath-tdlib"]

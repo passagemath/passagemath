@@ -10,8 +10,8 @@ from sage_conf import SAGE_LOCAL
 
 wheel = sys.argv[1]
 
-# SAGE_LOCAL/bin/lrslib --> sage_wheels/bin/lrslib
-command = f'ln -sf {shlex.quote(SAGE_LOCAL)} sage_wheels && zip -r {shlex.quote(wheel)} sage_wheels/bin/{{*lrs*,*nash*,redund*}}'
+# SAGE_LOCAL/bin/buckygen --> sage_wheels/bin/buckygen
+command = f'ln -sf {shlex.quote(SAGE_LOCAL)} sage_wheels && zip -r {shlex.quote(wheel)} sage_wheels/bin/buckygen'
 print(f'Running {command}')
 sys.stdout.flush()
 os.system(command)
