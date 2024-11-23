@@ -154,7 +154,7 @@ class FinitePermutationGroups(CategoryWithAxiom):
             example, for the symmetric group `S_n`, we get the complete
             symmetric function `h_n`::
 
-                sage: S = SymmetricFunctions(QQ); h = S.h()
+                sage: S = SymmetricFunctions(QQ); h = S.h()                             # needs sage.combinat
                 sage: h( P )                                                            # needs sage.combinat
                 h[4]
 
