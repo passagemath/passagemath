@@ -1,9 +1,6 @@
 cd src
 
-# Avoid running autotools. Patch no_vendor_cddlib.patch makes changes
-# both to input and output.
-touch configure Makefile.in
-
+autoreconf -fi
 sdh_configure \
     $SAGE_CONFIGURE_GMP
 
