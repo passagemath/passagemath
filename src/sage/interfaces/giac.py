@@ -152,6 +152,7 @@ For example, for help on the giac command factors, we type ::
 
 ::
 
+    sage: # needs sage.symbolic
     sage: alpha = giac((1+sqrt(5))/2)
     sage: beta = giac(1-sqrt(5))/2
     sage: f19  = alpha^19 - beta^19/sqrt(5)
@@ -206,7 +207,7 @@ If you want to convert more complicated Giac expressions, you can
 instead call ``GiacElement._sage_()`` and supply a translation dictionary::
 
     sage: g = giac('NewFn(x)')
-    sage: g._sage_(locals={('NewFn', 1): sin})
+    sage: g._sage_(locals={('NewFn', 1): sin})                                          # needs sage.symbolic
     sin(x)
 
 Moreover, new conversions can be permanently added using Pynac's
@@ -217,6 +218,7 @@ TESTS:
 
 Test that conversion of symbolic functions with latex names works (:issue:`31047`)::
 
+    sage: # needs sage.symbolic
     sage: var('phi')
     phi
     sage: function('Cp', latex_name='C_+')
@@ -291,6 +293,7 @@ class Giac(Expect):
 
     ::
 
+      sage: # needs sage.symbolic
       sage: x,y,z=giac('x,y,z');type(y)
       <class 'sage.interfaces.giac.GiacElement'>
       sage: I1=(1/(cos(2*y)+cos(y))).integral(y,0,pi/4).simplify()
@@ -304,21 +307,21 @@ class Giac(Expect):
     ::
 
       sage: R.<a,b> = QQ[]; f = (2+a+b)
-      sage: p = giac.gcd(f^3+5*f^5,f^2+f^5); p; R(p.sage())
+      sage: p = giac.gcd(f^3+5*f^5,f^2+f^5); p; R(p.sage())                             # needs sage.symbolic
       sageVARa^2+2*sageVARa*sageVARb+4*sageVARa+sageVARb^2+4*sageVARb+4
       a^2 + 2*a*b + b^2 + 4*a + 4*b + 4
 
     Variable names in python and giac are independent::
 
-        sage: a=sqrt(2);giac('Digits:=30;a:=5');a,giac('a'),giac(a),giac(a).evalf()
+        sage: a = sqrt(2); giac('Digits:=30;a:=5'); a,giac('a'),giac(a),giac(a).evalf()  # needs sage.symbolic
         30
         (sqrt(2), 5, sqrt(2), 1.41421356237309504880168872421)
 
     TESTS::
 
-        sage: g = giac('euler_gamma').sage();g
+        sage: g = giac('euler_gamma').sage();g                                          # needs sage.symbolic
         euler_gamma
-        sage: g.n()
+        sage: g.n()                                                                     # needs sage.symbolic
         0.577215664901533
     """
     def __init__(self, maxread=None, script_subdirectory=None, server=None, server_tmpdir=None, logfile=None):
@@ -608,7 +611,7 @@ If you got giac from the spkg then ``$PREFIX`` is ``$SAGE_LOCAL``
             sage: h1 = 'int(sin(x)^2, x)'
             sage: h2 = 'int(cos(x)^2, x)'
             sage: giac_result = giac(h1) + giac(h2)
-            sage: bool(giac_result.sage() == x)
+            sage: bool(giac_result.sage() == x)                                         # needs sage.symbolic
             True
         """
         with gc_disabled():
@@ -912,6 +915,7 @@ class GiacElement(ExpectElement):
 
         TESTS::
 
+            sage: # needs sage.symbolic
             sage: x = var('x')
             sage: t = giac((x+1)^2)
             sage: u = giac(x^2+2*x+1)
@@ -1072,48 +1076,48 @@ class GiacElement(ExpectElement):
         EXAMPLES::
 
             sage: m = giac('x^2 + 5*y')
-            sage: m.sage()
+            sage: m.sage()                                                              # needs sage.symbolic
             x^2 + 5*y
 
         ::
 
             sage: m = giac('sin(2*sqrt(1-x^2)) * (1 - cos(1/x))^2')
-            sage: m.trigexpand().sage()
+            sage: m.trigexpand().sage()                                                 # needs sage.symbolic
             2*cos(sqrt(-x^2 + 1))*cos(1/x)^2*sin(sqrt(-x^2 + 1)) - 4*cos(sqrt(-x^2 + 1))*cos(1/x)*sin(sqrt(-x^2 + 1)) + 2*cos(sqrt(-x^2 + 1))*sin(sqrt(-x^2 + 1))
 
         Converting a custom name using the ``locals`` dictionary::
 
             sage: ex = giac('myFun(x)')
-            sage: ex._sage_({('myFun', 1): sin})
+            sage: ex._sage_({('myFun', 1): sin})                                        # needs sage.symbolic
             sin(x)
 
         Same but by adding a new entry to the ``symbol_table``::
 
             sage: ex = giac('myFun(x)')
-            sage: sage.symbolic.expression.register_symbol(sin, {'giac':'myFun'})
-            sage: ex._sage_()
+            sage: sage.symbolic.expression.register_symbol(sin, {'giac':'myFun'})       # needs sage.symbolic
+            sage: ex._sage_()                                                           # needs sage.symbolic
             sin(x)
 
         Conversion of lists::
 
             sage: L = giac('solve((2/3)^x-2, x)'); L
             list[ln(2)/(ln(2)-ln(3))]
-            sage: L.sage()
+            sage: L.sage()                                                              # needs sage.symbolic
             [-log(2)/(log(3) - log(2))]
 
         TESTS:
 
         Check conversion of Booleans (:issue:`28705`)::
 
-            sage: giac('true')._sage_(), giac('false')._sage_()
+            sage: giac('true')._sage_(), giac('false')._sage_()                         # needs sage.symbolic
             (True, False)
 
         Check that variables and constants are not mixed up (:issue:`30133`)::
 
-            sage: ee, ii, pp = SR.var('e,i,pi')
-            sage: giac(ee * ii * pp).sage().variables()
+            sage: ee, ii, pp = SR.var('e,i,pi')                                         # needs sage.symbolic
+            sage: giac(ee * ii * pp).sage().variables()                                 # needs sage.symbolic
             (e, i, pi)
-            sage: giac(e * i * pi).sage().variables()
+            sage: giac(e * i * pi).sage().variables()                                   # needs sage.symbolic
             ()
         """
         from sage.symbolic.expression import symbol_table
