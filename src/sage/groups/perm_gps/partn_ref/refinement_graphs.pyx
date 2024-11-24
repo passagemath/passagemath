@@ -349,6 +349,7 @@ def search_tree(G_in, partition, lab=True, dig=False, dict_rep=False, certificat
 
     This example is due to Chris Godsil::
 
+        sage: # needs cliquer
         sage: HS = graphs.HoffmanSingletonGraph()
         sage: alqs = [Set(c) for c in (HS.complement()).cliques_maximum()]
         sage: Y = Graph([alqs, lambda s,t: len(s.intersection(t))==0])

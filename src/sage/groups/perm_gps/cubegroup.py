@@ -1089,7 +1089,7 @@ class CubeGroup(PermutationGroup_generic):
 
             sage: rubik = CubeGroup()
             sage: state = rubik.faces("R")
-            sage: rubik.solve(state)
+            sage: rubik.solve(state)                                                    # optional - rubiks
             'R'
             sage: state = rubik.faces("R*U")
             sage: rubik.solve(state, algorithm='gap')       # long time

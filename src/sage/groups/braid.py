@@ -853,11 +853,11 @@ class Braid(FiniteTypeArtinGroupElement):
             sage: Hopf = BraidGroup(2)([-1, -1])
             sage: Hopf.links_gould_polynomial()
             -1 + t1^-1 + t0^-1 - t0^-1*t1^-1
-            sage: _ == Hopf.links_gould_polynomial(use_symbolics=True)
+            sage: _ == Hopf.links_gould_polynomial(use_symbolics=True)                  # needs sage.symbolic
             True
             sage: Hopf.links_gould_polynomial(varnames='a, b')
             -1 + b^-1 + a^-1 - a^-1*b^-1
-            sage: _ == Hopf.links_gould_polynomial(varnames='a, b', use_symbolics=True)
+            sage: _ == Hopf.links_gould_polynomial(varnames='a, b', use_symbolics=True)     # needs sage.symbolic
             True
 
         REFERENCES:
