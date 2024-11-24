@@ -69,7 +69,7 @@ class Knot(Link, Element, metaclass=InheritComparisonClasscallMetaclass):
 
         sage: K.alexander_polynomial()
         -2*t^-2 + 8*t^-1 - 11 + 8*t - 2*t^2
-        sage: K.jones_polynomial()
+        sage: K.jones_polynomial()                                                      # needs sage.symbolic
         t^7 - 3*t^6 + 4*t^5 - 5*t^4 + 6*t^3 - 5*t^2 + 4*t + 1/t - 2
         sage: K.determinant()
         31
@@ -641,7 +641,7 @@ class Knots(Singleton, Parent):
 
             sage: K3 = Knots().from_table(10,56); K3
             Knot represented by 11 crossings
-            sage: K3.jones_polynomial()
+            sage: K3.jones_polynomial()                                                 # needs sage.symbolic
             t^10 - 3*t^9 + 6*t^8 - 9*t^7 + 10*t^6 - 11*t^5 + 10*t^4 - 7*t^3
             + 5*t^2 - 2*t + 1
 
