@@ -32,7 +32,7 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
          Category of Coxeter groups]
 
         sage: G = CoxeterGroups().Finite().example()
-        sage: G.cayley_graph(side = "right").plot()
+        sage: G.cayley_graph(side="right").plot()                                       # needs sage.plot
         Graphics object consisting of 40 graphics primitives
 
     Here are some further examples::
@@ -172,7 +172,7 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
                 sage: P = W.bruhat_poset()
                 sage: P
                 Finite poset containing 6 elements
-                sage: P.show()
+                sage: P.show()                                                          # needs sage.plot
 
             Here are some typical operations on this poset::
 
@@ -416,7 +416,7 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
                 sage: P = W.weak_poset()
                 sage: P
                 Finite lattice containing 6 elements
-                sage: P.show()
+                sage: P.show()                                                          # needs sage.plot
 
             This poset is in fact a lattice::
 
@@ -435,7 +435,7 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
 
                 sage: W = WeylGroup(["A",2])
                 sage: P = W.weak_poset(side = "twosided")
-                sage: P.show()
+                sage: P.show()                                                          # needs sage.plot
                 sage: len(P.hasse_diagram().edges(sort=False))
                 8
 
