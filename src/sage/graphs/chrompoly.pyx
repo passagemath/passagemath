@@ -107,12 +107,12 @@ def chromatic_polynomial(G, return_tree_basis=False, algorithm='C', cache=None):
 
         sage: G = graphs.PetersenGraph()
         sage: P = G.chromatic_polynomial()
-        sage: min(i for i in range(11) if P(i) > 0) == G.chromatic_number()
+        sage: min(i for i in range(11) if P(i) > 0) == G.chromatic_number()             # needs cliquer
         True
 
         sage: G = graphs.RandomGNP(10,0.7)
         sage: P = G.chromatic_polynomial()
-        sage: min(i for i in range(11) if P(i) > 0) == G.chromatic_number()
+        sage: min(i for i in range(11) if P(i) > 0) == G.chromatic_number()             # needs cliquer
         True
 
     Check that algorithms ``'C'`` and ``'Python'`` return the same results::

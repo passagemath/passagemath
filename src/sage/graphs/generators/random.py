@@ -624,7 +624,7 @@ def RandomBoundedToleranceGraph(n, seed=None):
     chromatic number is equal to the clique number ::
 
         sage: g = graphs.RandomBoundedToleranceGraph(8)
-        sage: g.clique_number() == g.chromatic_number()
+        sage: g.clique_number() == g.chromatic_number()                                 # needs cliquer
         True
 
     TESTS:
@@ -863,7 +863,7 @@ def RandomIntervalGraph(n, seed=None):
     the clique number ::
 
         sage: g = graphs.RandomIntervalGraph(8)
-        sage: g.clique_number() == g.chromatic_number()
+        sage: g.clique_number() == g.chromatic_number()                                 # needs cliquer
         True
     """
     if seed is not None:
@@ -1677,7 +1677,7 @@ def RandomKTree(n, k, seed=None):
         235
         sage: g.order()
         50
-        sage: g.treewidth()
+        sage: g.treewidth()                                                             # needs cliquer
         5
         sage: graphs.RandomKTree(-5, 5)
         Traceback (most recent call last):
@@ -1698,7 +1698,7 @@ def RandomKTree(n, k, seed=None):
     EXAMPLES::
 
         sage: G = graphs.RandomKTree(50, 5)
-        sage: G.treewidth()
+        sage: G.treewidth()                                                             # needs cliquer
         5
         sage: G.show()  # not tested
     """
@@ -1762,7 +1762,7 @@ def RandomPartialKTree(n, k, x, seed=None):
         50
         sage: g.size()
         233
-        sage: g.treewidth()
+        sage: g.treewidth()                                                             # needs cliquer
         5
         sage: graphs.RandomPartialKTree(-5, 5, 2)
         Traceback (most recent call last):
@@ -1781,10 +1781,10 @@ def RandomPartialKTree(n, k, x, seed=None):
         ...
         ValueError: x must be less than the number of edges in the `k`-tree with `n` nodes
         sage: G = graphs.RandomPartialKTree(50, 0, 0)
-        sage: G.treewidth()
+        sage: G.treewidth()                                                             # needs cliquer
         0
         sage: G = graphs.RandomPartialKTree(5, 2, 7)
-        sage: G.treewidth()
+        sage: G.treewidth()                                                             # needs cliquer
         0
         sage: G.size()
         0
@@ -1792,7 +1792,7 @@ def RandomPartialKTree(n, k, x, seed=None):
     EXAMPLES::
 
         sage: G = graphs.RandomPartialKTree(50,5,2)
-        sage: G.treewidth()
+        sage: G.treewidth()                                                             # needs cliquer
         5
         sage: G.show()  # not tested
     """
@@ -1950,7 +1950,7 @@ def RandomToleranceGraph(n, seed=None):
     the clique number ::
 
         sage: g = graphs.RandomToleranceGraph(8)
-        sage: g.clique_number() == g.chromatic_number()
+        sage: g.clique_number() == g.chromatic_number()                                 # needs cliquer
         True
 
     TESTS::
@@ -2490,7 +2490,7 @@ def RandomBicubicPlanar(n, seed=None):
         True
         sage: G.size() == 3*n
         True
-        sage: G.is_bipartite() and G.is_planar() and G.is_regular(3)
+        sage: G.is_bipartite() and G.is_planar() and G.is_regular(3)                    # needs planarity
         True
         sage: dic = {'red': [v for v in G.vertices(sort=False) if v[0] == 'n'],
         ....:        'blue': [v for v in G.vertices(sort=False) if v[0] != 'n']}

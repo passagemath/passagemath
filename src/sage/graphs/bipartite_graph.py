@@ -2305,8 +2305,8 @@ class BipartiteGraph(Graph):
            sage: # needs networkx numpy
            sage: g = BipartiteGraph(graphs.RandomBipartite(10, 10, .5))
            sage: vc1 = g.vertex_cover(algorithm='Konig')
-           sage: vc2 = g.vertex_cover(algorithm='Cliquer')
-           sage: len(vc1) == len(vc2)
+           sage: vc2 = g.vertex_cover(algorithm='Cliquer')                              # needs cliquer
+           sage: len(vc1) == len(vc2)                                                   # needs cliquer
            True
 
         TESTS:
@@ -2320,7 +2320,8 @@ class BipartiteGraph(Graph):
         Empty bipartite graph and bipartite graphs without edges::
 
             sage: B = BipartiteGraph()
-            sage: algorithms = ["Konig", "Cliquer", "MILP"]
+            sage: algorithms = ["Konig", "MILP"]
+            sage: import sage.graphs.cliquer; algorithms += ["Cliquer"]                 # needs cliquer
             sage: all(B.vertex_cover(algorithm=algo) == [] for algo in algorithms)
             True
             sage: all(B.vertex_cover(algorithm=algo, value_only=True) == 0 for algo in algorithms)

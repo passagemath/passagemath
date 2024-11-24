@@ -5833,9 +5833,9 @@ class GenericGraph(GenericGraph_pyx):
 
         Corner cases::
 
-            sage: graphs.EmptyGraph().is_planar()
+            sage: graphs.EmptyGraph().is_planar()               # needs planarity
             True
-            sage: Graph(1).is_planar()
+            sage: Graph(1).is_planar()                          # needs planarity
             True
         """
         # Quick check first
@@ -6000,9 +6000,9 @@ class GenericGraph(GenericGraph_pyx):
 
         Corner cases::
 
-            sage: graphs.EmptyGraph().is_circular_planar()                                                      # needs planarity
+            sage: graphs.EmptyGraph().is_circular_planar()      # needs planarity
             True
-            sage: Graph(1).is_circular_planar()
+            sage: Graph(1).is_circular_planar()                 # needs planarity
             True
         """
         if ordered and boundary is None:
@@ -20298,7 +20298,7 @@ class GenericGraph(GenericGraph_pyx):
 
         We first request the coloring as a function::
 
-            sage: # needs sage.groups
+            sage: # needs sage.groups sage.plot
             sage: f = G._color_by_label(as_function=True)
             sage: [f(1), f(2), f(3)]
             ['#0000ff', '#ff0000', '#00ff00']
@@ -20316,12 +20316,12 @@ class GenericGraph(GenericGraph_pyx):
 
         The default output is a dictionary assigning edges to colors::
 
-            sage: G._color_by_label()                                                   # needs sage.groups
+            sage: G._color_by_label()                                                   # needs sage.groups sage.plot
             {'#0000ff': [((), (1,2), 1), ...],
              '#00ff00': [((), (3,4), 3), ...],
              '#ff0000': [((), (2,3), 2), ...]}
 
-            sage: G._color_by_label({1: "blue", 2: "red", 3: "green"})                  # needs sage.groups
+            sage: G._color_by_label({1: "blue", 2: "red", 3: "green"})                  # needs sage.groups sage.plot
             {'blue': [((), (1,2), 1), ...],
              'green': [((), (3,4), 3), ...],
              'red': [((), (2,3), 2), ...]}
@@ -20330,7 +20330,7 @@ class GenericGraph(GenericGraph_pyx):
 
         We check what happens when several labels have the same color::
 
-            sage: # needs sage.groups
+            sage: # needs sage.groups sage.plot
             sage: result = G._color_by_label({1: "blue", 2: "blue", 3: "green"})
             sage: sorted(result)
             ['blue', 'green']

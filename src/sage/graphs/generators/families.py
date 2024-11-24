@@ -543,7 +543,7 @@ def BalancedTree(r, h):
         sage: T = graphs.BalancedTree(r, h)
         sage: T.is_bipartite()
         True
-        sage: T.is_planar()
+        sage: T.is_planar()                                                             # needs planarity
         True
         sage: v = (r^(h + 1) - 1) / (r - 1)
         sage: T.order() == v
@@ -1518,7 +1518,7 @@ def FriendshipGraph(n):
         2
         sage: G.girth()
         3
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                                                      # needs cliquer
         3
         sage: G.is_planar()                                                             # needs planarity
         True
@@ -2316,7 +2316,7 @@ def MycielskiGraph(k=1, relabel=True):
         sage: g = graphs.MycielskiGraph(5)
         sage: g.is_triangle_free()
         True
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                                                      # needs cliquer
         5
 
     The graphs `M_4` is (isomorphic to) the Grotzsch graph. ::
@@ -2836,7 +2836,7 @@ def HanoiTowerGraph(pegs, disks, labels=True, positions=True):
         sage: H = graphs.HanoiTowerGraph(3, 4, labels=False, positions=False)
         sage: H.automorphism_group().is_isomorphic(SymmetricGroup(3))                   # needs sage.groups
         True
-        sage: H.chromatic_number()
+        sage: H.chromatic_number()                              # needs cliquer
         3
         sage: len(H.independent_set()) == 3^(4-1)
         True
@@ -3516,7 +3516,7 @@ def WindmillGraph(k, n):
 
         sage: n,k = 5,6
         sage: W = graphs.WindmillGraph(k, n)
-        sage: W.chromatic_number() == k
+        sage: W.chromatic_number() == k                         # needs cliquer
         True
 
     TESTS:
