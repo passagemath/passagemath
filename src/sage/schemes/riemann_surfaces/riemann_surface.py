@@ -893,7 +893,7 @@ class RiemannSurface:
             sage: S = Curve(w^2-z^4+1).riemann_surface()
             sage: G = S.upstairs_graph(); G
             Graph on 22 vertices
-            sage: G.genus()
+            sage: G.genus()                                     # needs planarity
             1
             sage: G.is_connected()
             True
@@ -1542,6 +1542,7 @@ class RiemannSurface:
         of the homology basis upstairs projects down to independent linear
         combinations of an even number of faces::
 
+            sage: # needs planarity
             sage: dg = S.downstairs_graph()
             sage: edges = dg.edges(sort=True)
             sage: E = ZZ^len(edges)

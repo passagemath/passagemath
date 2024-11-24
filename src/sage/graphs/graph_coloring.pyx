@@ -429,11 +429,11 @@ cpdef chromatic_number(G):
 
         sage: from sage.graphs.graph_coloring import chromatic_number
         sage: G = Graph({0: [1, 2, 3], 1: [2]})
-        sage: chromatic_number(G)
+        sage: chromatic_number(G)                               # needs cliquer
         3
 
         sage: G = graphs.PetersenGraph()
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                              # needs cliquer
         3
     """
     G._scream_if_not_simple(allow_multiple_edges=True)
@@ -518,7 +518,7 @@ def vertex_coloring(g, k=None, value_only=False, hex_colors=False, solver=None, 
 
        sage: from sage.graphs.graph_coloring import vertex_coloring
        sage: g = graphs.PetersenGraph()
-       sage: vertex_coloring(g, value_only=True)                                        # needs sage.numerical.mip
+       sage: vertex_coloring(g, value_only=True)                # needs cliquer sage.numerical.mip
        3
 
     TESTS:
@@ -537,7 +537,7 @@ def vertex_coloring(g, k=None, value_only=False, hex_colors=False, solver=None, 
     :issue:`33559` is fixed::
 
         sage: G = Graph('MgCgS?_O@IeTHKG??')
-        sage: len(G.coloring(algorithm='MILP'))                                         # needs sage.numerical.mip
+        sage: len(G.coloring(algorithm='MILP'))                                         # needs cliquer sage.numerical.mip
         4
     """
     g._scream_if_not_simple(allow_multiple_edges=True)
@@ -1396,9 +1396,9 @@ def edge_coloring(g, value_only=False, vizing=False, hex_colors=False, solver=No
         True
         sage: all(len(Graph(C).matching()) == len(C) for C in color_classes)            # needs networkx
         True
-        sage: color_classes = edge_coloring(g, value_only=False,
+        sage: color_classes = edge_coloring(g, value_only=False,                        # needs sage.plot
         ....:                               hex_colors=True, solver='GLPK')
-        sage: sorted(color_classes.keys())
+        sage: sorted(color_classes.keys())                                              # needs sage.plot
         ['#00ffff', '#7f00ff', '#7fff00', '#ff0000']
 
     Complete graphs are colored using the linear-time round-robin coloring::
@@ -1866,8 +1866,8 @@ def linear_arboricity(g, plus_one=None, hex_colors=False, value_only=False,
 
         sage: from sage.graphs.graph_coloring import linear_arboricity
         sage: g = graphs.Grid2dGraph(4, 4)
-        sage: d = linear_arboricity(g, hex_colors=True)                                 # needs sage.numerical.mip
-        sage: sorted(d)                                                                 # needs sage.numerical.mip
+        sage: d = linear_arboricity(g, hex_colors=True)                                 # needs sage.numerical.mip sage.plot
+        sage: sorted(d)                                                                 # needs sage.numerical.mip sage.plot
         ['#00ffff', '#ff0000']
     """
     g._scream_if_not_simple()
@@ -2086,8 +2086,8 @@ def acyclic_edge_coloring(g, hex_colors=False, value_only=False, k=0,
 
         sage: from sage.graphs.graph_coloring import acyclic_edge_coloring
         sage: g = graphs.CompleteGraph(4)
-        sage: d = acyclic_edge_coloring(g, hex_colors=True)                             # needs sage.numerical.mip
-        sage: sorted(d)                                                                 # needs sage.numerical.mip
+        sage: d = acyclic_edge_coloring(g, hex_colors=True)                             # needs sage.numerical.mip sage.plot
+        sage: sorted(d)                                                                 # needs sage.numerical.mip sage.plot
         ['#0066ff', '#00ff66', '#cbff00', '#cc00ff', '#ff0000']
 
     The acyclic chromatic index of a graph without edge is 0 (:issue:`27079`)::
@@ -2096,9 +2096,9 @@ def acyclic_edge_coloring(g, hex_colors=False, value_only=False, k=0,
         sage: g = Graph(3)
         sage: acyclic_edge_coloring(g, k=None, value_only=True)                         # needs sage.numerical.mip
         0
-        sage: acyclic_edge_coloring(g, k=None, hex_colors=True)                         # needs sage.numerical.mip
+        sage: acyclic_edge_coloring(g, k=None, hex_colors=True)                         # needs sage.numerical.mip sage.plot
         {}
-        sage: acyclic_edge_coloring(g, k=None, hex_colors=False)                        # needs sage.numerical.mip
+        sage: acyclic_edge_coloring(g, k=None, hex_colors=False)                        # needs sage.numerical.mip sage.plot
         []
 
     Empty graph  (:issue:`27079`)::
@@ -2237,7 +2237,7 @@ cdef class Test:
         TESTS::
 
             sage: from sage.graphs.graph_coloring import Test
-            sage: Test().random(1)                                                      # needs sage.libs.flint
+            sage: Test().random(1)                                                      # needs cliquer sage.libs.flint
         """
         self.random_all_graph_colorings(tests)
 
@@ -2256,7 +2256,7 @@ cdef class Test:
         TESTS::
 
             sage: from sage.graphs.graph_coloring import Test
-            sage: Test().random_all_graph_colorings(1)                                  # needs sage.libs.flint
+            sage: Test().random_all_graph_colorings(1)                                  # needs cliquer sage.libs.flint
         """
         from sage.graphs.generators.random import RandomGNP
         cdef set S

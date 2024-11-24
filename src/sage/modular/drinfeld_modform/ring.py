@@ -198,7 +198,7 @@ class DrinfeldModularForms(Parent, UniqueRepresentation):
         TESTS::
 
             sage: K = Frac(GF(2)['T'])
-            sage: DrinfeldModularForms(K, rank=x)
+            sage: DrinfeldModularForms(K, rank=x)                                       # needs sage.symbolic
             Traceback (most recent call last):
             ...
             TypeError: unable to convert x to an integer

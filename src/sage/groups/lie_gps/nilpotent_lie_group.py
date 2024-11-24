@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-groups
+# sage.doctest: needs sage.symbolic
 r"""
 Nilpotent Lie groups
 

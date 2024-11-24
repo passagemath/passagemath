@@ -15,7 +15,7 @@ Features for testing the presence of ``rubiks``
 
 from sage.env import RUBIKS_BINS_PREFIX
 
-from . import Executable
+from . import Executable, PythonModule
 from .join_feature import JoinFeature
 
 
@@ -172,8 +172,9 @@ class Rubiks(JoinFeature):
             True
         """
         JoinFeature.__init__(self, "rubiks",
-                             [cu2(), size222(), optimal(), mcube(), dikcube(), cubex()],
-                             spkg='rubiks')
+                             [cu2(), size222(), optimal(), mcube(), dikcube(), cubex(),
+                              PythonModule('sage.interfaces.rubik')],
+                             spkg='sagemath_rubiks')
 
 
 def all_features():

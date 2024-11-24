@@ -1128,6 +1128,7 @@ class Stream_taylor(Stream_inexact):
             sage: f == h
             True
 
+            sage: # needs sage.symbolic
             sage: F(y) = cos(y)^2 + sin(y)^2 + y
             sage: G(y) = y + 1
             sage: f = Stream_taylor(F, True)
@@ -1189,6 +1190,7 @@ class Stream_taylor(Stream_inexact):
             sage: [next(it) for _ in range(10)]
             [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 
+            sage: # needs sage.symbolic
             sage: y = SR.var('y')
             sage: f = Stream_taylor(y^3, False)
             sage: it = f.iterate_coefficients()

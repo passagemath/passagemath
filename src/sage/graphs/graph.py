@@ -240,6 +240,7 @@ Similarly ``graphs()`` will iterate through all graphs. The complete graph of 4
 vertices is of course the smallest graph with chromatic number bigger than
 three::
 
+    sage: # needs cliquer
     sage: for g in graphs():
     ....:     if g.chromatic_number() > 3:
     ....:         break
@@ -3208,6 +3209,7 @@ class Graph(GenericGraph):
 
         EXAMPLES::
 
+            sage: # needs cliquer
             sage: G = Graph({0: [1, 2, 3], 1: [2]})
             sage: G.chromatic_number(algorithm='DLX')
             3
@@ -3220,35 +3222,36 @@ class Graph(GenericGraph):
 
         A bipartite graph has (by definition) chromatic number 2::
 
-            sage: graphs.RandomBipartite(50,50,0.7).chromatic_number()                  # needs numpy
+            sage: graphs.RandomBipartite(50,50,0.7).chromatic_number()                  # needs cliquer numpy
             2
 
         A complete multipartite graph with `k` parts has chromatic number `k`::
 
-            sage: all(graphs.CompleteMultipartiteGraph([5]*i).chromatic_number() == i
+            sage: all(graphs.CompleteMultipartiteGraph([5]*i).chromatic_number() == i   # needs cliquer
             ....:     for i in range(2, 5))
             True
 
         The complete graph has the largest chromatic number from all the graphs
         of order `n`. Namely its chromatic number is `n`::
 
-            sage: all(graphs.CompleteGraph(i).chromatic_number() == i for i in range(10))
+            sage: all(graphs.CompleteGraph(i).chromatic_number() == i for i in range(10))   # needs cliquer
             True
 
         The Kneser graph with parameters `(n, 2)` for `n > 3` has chromatic
         number `n-2`::
 
-            sage: all(graphs.KneserGraph(i,2).chromatic_number() == i-2 for i in range(4,6))
+            sage: all(graphs.KneserGraph(i,2).chromatic_number() == i-2 for i in range(4,6))    # needs cliquer
             True
 
         The Flower Snark graph has chromatic index 4 hence its line graph has
         chromatic number 4::
 
-            sage: graphs.FlowerSnark().line_graph().chromatic_number()
+            sage: graphs.FlowerSnark().line_graph().chromatic_number()                          # needs cliquer
             4
 
         TESTS::
 
+            sage: # needs cliquer
             sage: G = Graph()
             sage: G.chromatic_number(algorithm='DLX')
             0
@@ -3269,7 +3272,7 @@ class Graph(GenericGraph):
 
             sage: G = graphs.RandomGNP(15, .2)
             sage: algorithms = ['DLX', 'MILP', 'CP', 'parallel']
-            sage: len(set([G.chromatic_number(algorithm=algo) for algo in algorithms])) == 1        # needs sage.libs.flint
+            sage: len(set([G.chromatic_number(algorithm=algo) for algo in algorithms])) == 1        # needs cliquer sage.libs.flint
             True
         """
         self._scream_if_not_simple(allow_multiple_edges=True)
@@ -3342,6 +3345,7 @@ class Graph(GenericGraph):
 
         EXAMPLES::
 
+            sage: # needs cliquer
             sage: G = Graph("Fooba")
             sage: P = G.coloring(algorithm='MILP')
             sage: Q = G.coloring(algorithm='DLX')
@@ -3352,7 +3356,7 @@ class Graph(GenericGraph):
             sage: are_equal_colorings(P, Q)
             True
 
-            sage: # needs sage.plot
+            sage: # needs cliquer sage.plot
             sage: G.plot(partition=P)
             Graphics object consisting of 16 graphics primitives
             sage: G.coloring(hex_colors=True, algorithm='MILP')
@@ -5930,10 +5934,10 @@ class Graph(GenericGraph):
         Using Cliquer (default)::
 
             sage: C = graphs.PetersenGraph()
-            sage: C.clique_maximum()
+            sage: C.clique_maximum()                                                    # needs cliquer
             [7, 9]
             sage: C = Graph('DJ{')
-            sage: C.clique_maximum()
+            sage: C.clique_maximum()                                                    # needs cliquer
             [1, 2, 3, 4]
 
         Through a Linear Program::
@@ -6018,27 +6022,27 @@ class Graph(GenericGraph):
         EXAMPLES::
 
             sage: C = Graph('DJ{')
-            sage: C.clique_number()
+            sage: C.clique_number()                                                     # needs cliquer
             4
             sage: G = Graph({0:[1,2,3], 1:[2], 3:[0,1]})
             sage: G.show(figsize=[2,2])                                                 # needs sage.plot
-            sage: G.clique_number()
+            sage: G.clique_number()                                                     # needs cliquer
             3
 
         By definition the clique number of a complete graph is its order::
 
-            sage: all(graphs.CompleteGraph(i).clique_number() == i for i in range(1,15))
+            sage: all(graphs.CompleteGraph(i).clique_number() == i for i in range(1,15))    # needs cliquer
             True
 
         A non-empty graph without edges has a clique number of 1::
 
-            sage: all((i*graphs.CompleteGraph(1)).clique_number() == 1
+            sage: all((i*graphs.CompleteGraph(1)).clique_number() == 1                      # needs cliquer
             ....:     for i in range(1,15))
             True
 
         A complete multipartite graph with k parts has clique number k::
 
-            sage: all((i*graphs.CompleteMultipartiteGraph(i*[5])).clique_number() == i
+            sage: all((i*graphs.CompleteMultipartiteGraph(i*[5])).clique_number() == i      # needs cliquer
             ....:     for i in range(1,6))
             True
 
@@ -6047,7 +6051,7 @@ class Graph(GenericGraph):
             sage: g = graphs.PetersenGraph()
             sage: g.clique_number(algorithm='MILP')                                     # needs sage.numerical.mip
             2
-            sage: for i in range(10):           # optional - mcqd                       # needs sage.numerical.mip
+            sage: for i in range(10):           # optional - mcqd                       # needs cliquer sage.numerical.mip
             ....:     g = graphs.RandomGNP(15,.5)
             ....:     if g.clique_number() != g.clique_number(algorithm='mcqd'):
             ....:         print("This is dead wrong !")
@@ -6291,7 +6295,7 @@ class Graph(GenericGraph):
         Using Cliquer::
 
             sage: C = graphs.PetersenGraph()
-            sage: C.independent_set()
+            sage: C.independent_set()                                                   # needs cliquer
             [0, 3, 6, 7]
 
         As a linear program::
@@ -6381,7 +6385,7 @@ class Graph(GenericGraph):
         On the Pappus graph::
 
            sage: g = graphs.PappusGraph()
-           sage: g.vertex_cover(value_only=True)
+           sage: g.vertex_cover(value_only=True)                                        # needs cliquer
            9
 
         .. PLOT::
@@ -6395,8 +6399,8 @@ class Graph(GenericGraph):
 
            sage: g = graphs.RandomGNP(10, .5)
            sage: vc1 = g.vertex_cover(algorithm='MILP')                                 # needs sage.numerical.mip
-           sage: vc2 = g.vertex_cover(algorithm='Cliquer')
-           sage: len(vc1) == len(vc2)                                                   # needs sage.numerical.mip
+           sage: vc2 = g.vertex_cover(algorithm='Cliquer')                              # needs cliquer
+           sage: len(vc1) == len(vc2)                                                   # needs cliquer sage.numerical.mip
            True
 
         The cardinality of the vertex cover is unchanged when reduction rules
@@ -7611,10 +7615,11 @@ class Graph(GenericGraph):
 
         Breaking a face of the cube yields an uninscribable graph::
 
+            sage: # needs planarity
             sage: C = graphs.CubeGraph(3)
             sage: face = choice(C.faces())
             sage: C.add_edge([face[0][0], face[2][0]])
-            sage: C.is_inscribable()                                                    # needs planarity sage.numerical.mip
+            sage: C.is_inscribable()                                                    # needs sage.numerical.mip
             False
 
 

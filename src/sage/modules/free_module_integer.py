@@ -413,7 +413,7 @@ class FreeModule_submodule_with_basis_integer(FreeModule_submodule_with_basis_pi
             4.17330740711759e15
             sage: L.LLL()
             60 x 60 dense matrix over Integer Ring (use the '.str()' method to see the entries)
-            sage: min(v.norm().n() for v in L.reduced_basis)
+            sage: min(v.norm().n() for v in L.reduced_basis)                            # needs sage.symbolic
             5.19615242270663
             sage: L.BKZ(block_size=10)
             60 x 60 dense matrix over Integer Ring (use the '.str()' method to see the entries)

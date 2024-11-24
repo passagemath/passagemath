@@ -1174,7 +1174,7 @@ class Crystals(Category_singleton):
             EXAMPLES::
 
                 sage: C = crystals.Letters(['A', 5])
-                sage: print(C.plot())
+                sage: print(C.plot())                                                   # needs sage.plot
                 Graphics object consisting of 17 graphics primitives
             """
             return self.digraph().plot(edge_labels=True, vertex_size=0, **options)
@@ -1186,7 +1186,7 @@ class Crystals(Category_singleton):
             EXAMPLES::
 
                 sage: C = crystals.KirillovReshetikhin(['A',3,1],2,1)
-                sage: print(C.plot3d())
+                sage: print(C.plot3d())                                                 # needs sage.plot
                 Graphics3d Object
             """
             G = self.digraph(**options)

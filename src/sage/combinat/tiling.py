@@ -1448,12 +1448,12 @@ class Polyomino(SageObject):
             ....: (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (1, 1), (1, 2),
             ....: (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (2, 0), (2, 2),
             ....: (2, 3), (2, 5), (2, 6), (2, 8)])
-            sage: solution = H.self_surrounding(8)
+            sage: solution = H.self_surrounding(8)                                      # needs sage.plot
             sage: G = sum([p.show2d() for p in solution], Graphics())                   # needs sage.plot
 
         ::
 
-            sage: solution = H.self_surrounding(8, remove_incomplete_copies=False)
+            sage: solution = H.self_surrounding(8, remove_incomplete_copies=False)      # needs sage.plot
             sage: G = sum([p.show2d() for p in solution], Graphics())                   # needs sage.plot
         """
         # Define the box to tile

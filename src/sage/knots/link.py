@@ -2806,7 +2806,7 @@ class Link(SageObject):
 
         Check that :issue:`31001` is fixed::
 
-            sage: L.jones_polynomial()
+            sage: L.jones_polynomial()                                                  # needs sage.symbolic
             1
         """
         if algorithm == 'statesum':

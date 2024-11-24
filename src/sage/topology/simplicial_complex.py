@@ -4679,23 +4679,23 @@ class SimplicialComplex(Parent, GenericCellComplex):
             sage: sorted(X.is_balanced(certificate=True))
             [[1, 3, 5], [2, 4]]
             sage: X = SimplicialComplex([[1,2], [1,4], [3,4], [2,4]])
-            sage: X.is_balanced()
+            sage: X.is_balanced()                               # needs cliquer
             False
 
         Any barycentric division is balanced::
 
             sage: X = SimplicialComplex([[1,2,3], [1,2,4], [2,3,4]])
-            sage: X.is_balanced()
+            sage: X.is_balanced()                               # needs cliquer
             False
-            sage: X.barycentric_subdivision().is_balanced()
+            sage: X.barycentric_subdivision().is_balanced()     # needs cliquer
             True
 
         A non-pure balanced complex::
 
             sage: X = SimplicialComplex([[1,2,3], [3,4]])
-            sage: X.is_balanced(check_purity=True)
+            sage: X.is_balanced(check_purity=True)              # needs cliquer
             False
-            sage: sorted(X.is_balanced(certificate=True))
+            sage: sorted(X.is_balanced(certificate=True))       # needs cliquer
             [[1, 4], [2], [3]]
         """
         d = 1 + self.dimension()

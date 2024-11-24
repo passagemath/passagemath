@@ -1262,7 +1262,7 @@ class GraphGenerators:
             sage: gen = graphs.nauty_genktreeg("10 -k4")
             sage: G = next(gen); G
             Graph on 10 vertices
-            sage: G.treewidth()
+            sage: G.treewidth()                                                         # needs cliquer
             4
 
         A list of all 2-trees with 6, 7 and 8 vertices. This agrees with

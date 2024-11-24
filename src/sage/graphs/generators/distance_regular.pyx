@@ -10,6 +10,7 @@ For a survey on distance-regular graph see [BCN1989]_ or [VDKT2016]_.
 
 EXAMPLES::
 
+    sage: # needs cliquer
     sage: G = graphs.cocliques_HoffmannSingleton()
     sage: G.is_distance_regular()
     True
@@ -67,6 +68,7 @@ def cocliques_HoffmannSingleton():
 
     EXAMPLES::
 
+        sage: # needs cliquer
         sage: G = graphs.cocliques_HoffmannSingleton()
         sage: G.is_distance_regular(True)
         ([15, 14, 10, 3, None], [None, 1, 5, 12, 15])
@@ -561,8 +563,8 @@ def LeonardGraph():
 
     EXAMPLES::
 
-         sage: G = graphs.LeonardGraph()                                                # needs sage.combinat sage.modules
-         sage: G.is_distance_regular(True)                                              # needs sage.combinat sage.modules
+         sage: G = graphs.LeonardGraph()                                                # needs cliquer sage.combinat sage.modules
+         sage: G.is_distance_regular(True)                                              # needs cliquer sage.combinat sage.modules
          ([12, 11, 10, 7, None], [None, 1, 2, 5, 12])
 
     REFERENCES:
@@ -2717,8 +2719,8 @@ def distance_regular_graph(list arr, existence=False, check=True):
 
         sage: graphs.distance_regular_graph([21,20,16,1,2,12], existence=True)
         True
-        sage: G = graphs.distance_regular_graph([12,11,10,7,1,2,5,12], check=False)     # needs sage.combinat sage.modules
-        sage: G.is_distance_regular(True)                                               # needs sage.combinat sage.modules
+        sage: G = graphs.distance_regular_graph([12,11,10,7,1,2,5,12], check=False)     # needs cliquer sage.combinat sage.modules
+        sage: G.is_distance_regular(True)                                               # needs cliquer sage.combinat sage.modules
         ([12, 11, 10, 7, None], [None, 1, 2, 5, 12])
 
     REFERENCES:

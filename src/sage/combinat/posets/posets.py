@@ -4821,15 +4821,15 @@ class FinitePoset(UniqueRepresentation, Parent):
             sage: P.width()                                                             # needs networkx
             6
 
-            sage: w, max_achain = P.width(certificate=True)
-            sage: sorted(max_achain)
+            sage: w, max_achain = P.width(certificate=True)                             # needs planarity
+            sage: sorted(max_achain)                                                    # needs planarity
             [3, 5, 6, 9, 10, 12]
 
         TESTS::
 
             sage: Poset().width()                                                       # needs networkx
             0
-            sage: Poset().width(certificate=True)
+            sage: Poset().width(certificate=True)                                       # needs planarity
             (0, [])
         """
         if certificate:

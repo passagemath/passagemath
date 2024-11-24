@@ -2126,6 +2126,7 @@ class IncidenceStructure:
 
         EXAMPLES::
 
+            sage: # needs cliquer
             sage: H = Hypergraph([{1,2,3},{2,3,4},{3,4,5},{4,5,6}]); H
             Incidence structure with 6 points and 4 blocks
             sage: C = H.edge_coloring()
