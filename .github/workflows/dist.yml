@@ -638,3 +638,5 @@ jobs:
     needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels]
     if: (success() || failure())
     uses: ./.github/workflows/ci-wheels.yml
+    with:
+      run-id: ${{ github.event.workflow_run.id }}

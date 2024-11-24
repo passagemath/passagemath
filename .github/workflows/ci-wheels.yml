@@ -7,6 +7,10 @@ on:
         description: 'Workflow run id'
         required: true
   workflow_call:
+    inputs:
+      run-id:
+        type: string
+        required: true
 
 jobs:
 
@@ -46,7 +50,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id || github.event.workflow_run.id}}
+          run-id: ${{ github.event.inputs.run-id }}
       - uses: actions/download-artifact@v4
         with:
           pattern: "noarch-wheels"
@@ -54,7 +58,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id || github.event.workflow_run.id}}
+          run-id: ${{ github.event.inputs.run-id }}
       - uses: actions/download-artifact@v4
         with:
           pattern: "dist"
@@ -62,7 +66,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id || github.event.workflow_run.id}}
+          run-id: ${{ github.event.inputs.run-id }}
       - uses: actions/setup-python@v5
         id: python
         with:
