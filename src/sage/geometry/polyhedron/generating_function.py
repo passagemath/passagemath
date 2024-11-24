@@ -451,6 +451,7 @@ def generating_function_of_integral_points(polyhedron, split=False,
 
     ::
 
+        sage: # needs sage.symbolic
         sage: P = Polyhedron(rays=[(1, sqrt(2)), (0, 1)])
         Traceback (most recent call last):
         ...
@@ -962,11 +963,11 @@ class _SplitOffSimpleInequalities(_TransformHrepresentation):
 
     TESTS::
 
+        sage: # needs sage.symbolic
         sage: def eq2(A, B):
         ....:     a = SR(repr(A[0])) * prod(1-SR(repr(t)) for t in B[1])
         ....:     b = SR(repr(B[0])) * prod(1-SR(repr(t)) for t in A[1])
         ....:     return bool((a-b).full_simplify() == 0)
-
         sage: B = LaurentPolynomialRing(ZZ, 'y', 3)
         sage: ieqs = [(-2, 1, -1, 0), (-2, -1, 0, 1), (-1, -1, -1, 3)]
         sage: T = prepare(ieqs, [], B); T.inequalities, T.factor, T.rules
