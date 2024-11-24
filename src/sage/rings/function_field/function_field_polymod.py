@@ -1760,7 +1760,7 @@ class FunctionField_simple(FunctionField_polymod):
             ....:     for p in pls for q in F.places_above(p))
             True
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: K.<x> = FunctionField(QQbar); _.<Y> = K[]
             sage: F.<y> = K.extension(Y^3 - x^2*(x^2 + x + 1)^2)
             sage: O = K.maximal_order()
