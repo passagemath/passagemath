@@ -225,8 +225,8 @@ cdef extern from "cmr/separation.h":
     ctypedef struct CMR_SEPA:
         size_t numRows
         size_t numColumns
-        CMR_SEPA_FLAGS* rowsFlags
-        CMR_SEPA_FLAGS* columnsFlags
+        int* rowsFlags
+        int* columnsFlags
         CMR_SEPA_TYPE type
 
     CMR_ERROR CMRsepaCreate(CMR* cmr, size_t numRows, size_t numColumns, CMR_SEPA** psepa)
@@ -238,9 +238,14 @@ cdef extern from "cmr/separation.h":
     CMR_ERROR CMRsepaGetProjection(CMR_SEPA* sepa, size_t part, size_t* rowsToPart, size_t* columnsToPart, size_t* pnumPartRows, size_t* pnumPartColumns)
     CMR_ERROR CMRsepaCheckTernary(CMR* cmr, CMR_SEPA* sepa, CMR_CHRMAT* matrix, bool* pisTernary, CMR_SUBMAT** pviolator)
     CMR_ERROR CMRsepaCheckTernarySubmatrix(CMR* cmr, CMR_SEPA* sepa, CMR_CHRMAT* matrix, CMR_SUBMAT* submatrix, bool* pisTernary, CMR_SUBMAT** pviolator)
-    CMR_ERROR CMRoneSum(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, CMR_CHRMAT** presult)
-    CMR_ERROR CMRtwoSum(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, CMR_ELEMENT firstMarker, CMR_ELEMENT secondMarker, int8_t characteristic, CMR_CHRMAT** presult)
-    CMR_ERROR CMRthreeSum(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, CMR_ELEMENT firstMarker1, CMR_ELEMENT secondMarker1, CMR_ELEMENT firstMarker2, CMR_ELEMENT secondMarker2, int8_t characteristic, CMR_CHRMAT** presult)
+    CMR_ERROR CMRoneSumCompose(CMR* cmr, size_t numMatrices, CMR_CHRMAT** matrices, CMR_CHRMAT** presult)
+    CMR_ERROR CMRtwoSumCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, CMR_ELEMENT firstMarker, CMR_ELEMENT secondMarker, int8_t characteristic, CMR_CHRMAT** presult)
+    CMR_ERROR CMRtwoSumDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, CMR_ELEMENT* pfirstMarker)
+    CMR_ERROR CMRtwoSumDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, CMR_ELEMENT* psecondMarker)
+    CMR_ERROR CMRthreeSumSeymourCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, CMR_ELEMENT firstMarker1, CMR_ELEMENT firstMarker2, CMR_ELEMENT firstMarker3, CMR_ELEMENT secondMarker1, CMR_ELEMENT secondMarker2, CMR_ELEMENT secondMarker3, int8_t characteristic, CMR_CHRMAT** presult)
+    CMR_ERROR CMRthreeSumSeymourDecomposeEpsilon(CMR* cmr, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SEPA* sepa, char* pepsilon)
+    CMR_ERROR CMRthreeSumSeymourDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, char epsilon, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, CMR_ELEMENT* pfirstMarker1, CMR_ELEMENT* pfirstMarker2, CMR_ELEMENT* pfirstMarker3)
+    CMR_ERROR CMRthreeSumSeymourDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, char epsilon, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, CMR_ELEMENT* psecondMarker1, CMR_ELEMENT* psecondMarker2, CMR_ELEMENT* psecondMarker3)
 
 cdef extern from "cmr/graphic.h":
 
