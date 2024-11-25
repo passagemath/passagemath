@@ -37,6 +37,7 @@ def class_graph(top, depth=5, name_filter=None, classes=None, as_graph=True):
 
     We construct the inheritance graph of the classes within a given module::
 
+        sage: # needs sage.rings.padics
         sage: from sage.rings.polynomial.padics import polynomial_padic_capped_relative_dense, polynomial_padic_flat
         sage: G = class_graph(sage.rings.polynomial.padics); G
         Digraph on 6 vertices

@@ -2816,9 +2816,9 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     An obviously infeasible set of parameters::
 
-        sage: graphs.strongly_regular_graph(5,5,5,5,existence=True)
+        sage: graphs.strongly_regular_graph(5,5,5,5, existence=True)    # needs database_graphs
         False
-        sage: graphs.strongly_regular_graph(5,5,5,5)
+        sage: graphs.strongly_regular_graph(5,5,5,5)                    # needs database_graphs
         Traceback (most recent call last):
         ...
         ValueError: There exists no (5, 5, 5, 5)-strongly regular graph

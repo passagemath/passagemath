@@ -327,7 +327,7 @@ set of parameters, including number of vertices and edges, density, maximum and
 minimum degree, diameter, radius, and connectivity. To see a list of all search
 parameter keywords broken down by their designated table names, type ::
 
-    sage: graph_db_info()
+    sage: graph_db_info()                                                               # needs database_graphs
     {...}
 
 For more details on data types or keyword input, enter ::
@@ -337,8 +337,8 @@ For more details on data types or keyword input, enter ::
 The results of a query can be viewed with the show method, or can be viewed
 individually by iterating through the results ::
 
-    sage: Q = GraphQuery(display_cols=['graph6'],num_vertices=7, diameter=5)
-    sage: Q.show()
+    sage: Q = GraphQuery(display_cols=['graph6'], num_vertices=7, diameter=5)           # needs database_graphs
+    sage: Q.show()                                                                      # needs database_graphs
     Graph6
     --------------------
     F?`po
@@ -353,7 +353,7 @@ individually by iterating through the results ::
 
 Show each graph as you iterate through the results::
 
-    sage: for g in Q:                                                                   # needs sage.plot
+    sage: for g in Q:                                                                   # needs database_graphs sage.plot
     ....:     show(g)
 
 Visualization
@@ -3373,7 +3373,7 @@ class Graph(GenericGraph):
 
         TESTS::
 
-            sage: G.coloring(algorithm='foo')
+            sage: G.coloring(algorithm='foo')                                           # needs cliquer
             Traceback (most recent call last):
             ...
             ValueError: The 'algorithm' keyword must be set to either 'DLX' or 'MILP'.
@@ -6406,7 +6406,7 @@ class Graph(GenericGraph):
         The cardinality of the vertex cover is unchanged when reduction rules
         are used. First for trees::
 
-           sage: for i in range(20):
+           sage: for i in range(20):                                                    # needs cliquer
            ....:     g = graphs.RandomTree(20)
            ....:     vc1_set = g.vertex_cover()
            ....:     vc1 = len(vc1_set)
@@ -6422,7 +6422,7 @@ class Graph(GenericGraph):
 
         Then for random GNP graphs::
 
-           sage: for i in range(20):
+           sage: for i in range(20):                                                    # needs cliquer
            ....:     g = graphs.RandomGNP(50, 0.08)
            ....:     vc1_set = g.vertex_cover()
            ....:     vc1 = len(vc1_set)
@@ -7631,7 +7631,7 @@ class Graph(GenericGraph):
         TESTS::
 
             sage: G = graphs.CompleteBipartiteGraph(3,3)
-            sage: G.is_inscribable()
+            sage: G.is_inscribable()                                                    # needs planarity
             Traceback (most recent call last):
             ...
             NotImplementedError: this method only works for polyhedral graphs

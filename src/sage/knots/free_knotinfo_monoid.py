@@ -264,6 +264,7 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: from sage.knots.free_knotinfo_monoid import FreeKnotInfoMonoid
             sage: FKIM =  FreeKnotInfoMonoid()
             sage: FKIM.inject_variables(select=3)
@@ -271,7 +272,7 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             Defining K3_1m
             sage: elems = (K3_1, K3_1m)
             sage: K = Knots().from_table(3, 1)
-            sage: FKIM._check_elements(K, elems)                                        # needs sage.modules
+            sage: FKIM._check_elements(K, elems)
             KnotInfo['K3_1m']
             sage: K = Knots().from_table(4, 1)
             sage: FKIM._check_elements(K, elems) is None
