@@ -1,1 +1,1 @@
-gdbm
+gdbm-devel
