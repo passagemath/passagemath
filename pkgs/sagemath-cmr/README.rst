@@ -19,22 +19,48 @@ See https://doc.sagemath.org/html/en/installation/index.html
 for general installation instructions.
 
 
-About this pip-installable source distribution
-----------------------------------------------
+About this pip-installable distribution
+---------------------------------------
 
-This pip-installable source distribution ``passagemath-cmr`` is a small
-optional distribution for use with ``passagemath-standard``.
+This pip-installable distribution ``passagemath-cmr`` is a small
+optional distribution for use with `passagemath-modules <https://pypi.org/project/passagemath-modules/>`_ and
+`passagemath-graphs <https://pypi.org/project/passagemath-graphs/`_.
 
-It provides a Cython interface to the CMR library (https://github.com/discopt/cmr),
-providing recognition and decomposition algorithms for:
+It provides a Cython interface to the
+`CMR library <https://github.com/discopt/cmr>`_,
+which implements recognition and decomposition algorithms for:
 
 - Totally Unimodular Matrices
 - Network Matrices
-- Complement Totally Unimodular Matrices
-- (Strongly) k-Modular and Unimodular Matrices
+- Complementary Totally Unimodular Matrices
+- (Strongly) Equimodular and Unimodular Matrices
 - Regular Matroids
 - Graphic / Cographic / Planar Matrices
 - Series-Parallel Matroids
+
+
+Examples
+--------
+
+::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-cmr[test]" ipython
+
+    In [1]: from sage.all__sagemath_cmr import *
+
+    In [2]: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+
+    In [3]: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True), [[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+    Out[3]:
+    [1 0 1]
+    [0 1 1]
+    [1 2 3]
+
+    In [4]: M.is_unimodular()
+    Out[4]: True
+
+    In [5]: M.is_strongly_unimodular()
+    Out[5]: False
 
 
 Development
