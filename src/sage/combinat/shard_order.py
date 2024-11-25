@@ -229,7 +229,7 @@ def shard_poset(n):
         34*q^4 + 90*q^3 + 79*q^2 + 24*q + 1
         sage: P.characteristic_polynomial()
         q^3 - 11*q^2 + 23*q - 13
-        sage: P.zeta_polynomial()
+        sage: P.zeta_polynomial()                                                       # needs sage.libs.flint
         17/3*q^3 - 6*q^2 + 4/3*q
         sage: P.is_self_dual()
         False

@@ -1,4 +1,5 @@
 cd src
+autoreconf -fi
 sdh_configure --disable-examples --disable-ui --disable-documentation
 sdh_make
 sdh_make_install

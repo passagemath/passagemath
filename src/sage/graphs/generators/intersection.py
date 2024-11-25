@@ -72,7 +72,7 @@ def IntervalGraph(intervals, points_ordered=False):
 
         sage: intervals = [ (1,2), (1,2), (1,2), (2,3), (3,4) ]
         sage: g = graphs.IntervalGraph(intervals,True)
-        sage: g.clique_maximum()
+        sage: g.clique_maximum()                                                        # needs cliquer
         [0, 1, 2, 3]
         sage: g.get_vertices()
         {0: (1, 2), 1: (1, 2), 2: (1, 2), 3: (2, 3), 4: (3, 4)}

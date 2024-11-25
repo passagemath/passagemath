@@ -297,6 +297,11 @@ include sage/numerical/optimize.p*
 global-exclude all__sagemath_*.*
 global-include all__sagemath_modules.py
 
+global-exclude *.c
+global-exclude *.cpp
+
+include sage/stats/distributions/dgs_*.c
+
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude *.bak

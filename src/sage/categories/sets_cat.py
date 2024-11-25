@@ -2669,10 +2669,10 @@ Please use, e.g., S.algebra(QQ, category=Semigroups())""".format(self))
                 :issue:`27937`)::
 
                     sage: A = FreeAbelianMonoid('x,y').algebra(QQ)                      # needs sage.combinat sage.modules
-                    sage: F, arg = A.construction(); F, arg                             # needs sage.groups sage.modules
+                    sage: F, arg = A.construction(); F, arg                             # needs sage.combinat sage.modules
                     (The algebra functorial construction,
                      Free abelian monoid on 2 generators (x, y))
-                    sage: F(arg) is A                                                   # needs sage.groups sage.modules
+                    sage: F(arg) is A                                                   # needs sage.combinat sage.modules
                     True
                 """
                 from sage.categories.algebra_functor import (

@@ -67,11 +67,13 @@ def mean(v):
 
     EXAMPLES::
 
-        sage: mean([pi, e])                                                             # needs sage.symbolic
+        sage: mean(range(4))
         doctest:warning...
         DeprecationWarning: sage.stats.basic_stats.mean is deprecated;
         use numpy.mean or numpy.nanmean instead
         See https://github.com/sagemath/sage/issues/29662 for details.
+        3/2
+        sage: mean([pi, e])                                                             # needs sage.symbolic
         1/2*pi + 1/2*e
         sage: mean([])                                                                  # needs sage.symbolic
         NaN
@@ -79,8 +81,6 @@ def mean(v):
         1/3*sqrt(2) + 1/3*I + 1/5
         sage: mean([RIF(1.0103,1.0103), RIF(2)])                                        # needs sage.rings.real_interval_field
         1.5051500000000000?
-        sage: mean(range(4))
-        3/2
         sage: v = stats.TimeSeries([1..100])                                            # needs numpy
         sage: mean(v)                                                                   # needs numpy
         50.5

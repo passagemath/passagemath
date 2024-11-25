@@ -1098,7 +1098,7 @@ class ComplexBallField(UniqueRepresentation, sage.rings.abc.ComplexBallField):
             sage: RBF(integral(sqrt(x), x, 1, 2))       # long time                     # needs sage.symbolic
             [1.21895141649746 +/- ...e-15]
             sage: wrong = CBF.integral(lambda z, _: z.sqrt(), 1, 2) # WRONG!
-            sage: correct - wrong
+            sage: correct - wrong                                                       # needs sage.symbolic
             [-5.640636259e-5 +/- ...e-15]
 
         We can integrate the real absolute value function by defining a

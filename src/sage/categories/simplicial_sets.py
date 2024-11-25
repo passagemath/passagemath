@@ -597,7 +597,7 @@ class SimplicialSets(Category_singleton):
 
                 EXAMPLES::
 
-                    sage: # needs sage.graphs
+                    sage: # needs sage.combinat sage.graphs
                     sage: X = simplicial_sets.Torus()
                     sage: d = X._canonical_twisting_operator()
                     sage: d
@@ -664,7 +664,7 @@ class SimplicialSets(Category_singleton):
 
                 EXAMPLES::
 
-                    sage: # needs sage.graphs
+                    sage: # needs sage.graphs sage.modules
                     sage: W = simplicial_sets.Sphere(1).wedge(simplicial_sets.Sphere(2))
                     sage: W.nondegenerate_simplices()
                     [*, sigma_1, sigma_2]
@@ -679,7 +679,7 @@ class SimplicialSets(Category_singleton):
 
                 ::
 
-                    sage: # needs sage.graphs
+                    sage: # needs sage.graphs sage.modules
                     sage: X = simplicial_sets.Torus()
                     sage: C = X.twisted_chain_complex()
                     sage: C.differential(1)
@@ -693,7 +693,7 @@ class SimplicialSets(Category_singleton):
 
                 ::
 
-                    sage: # needs sage.graphs
+                    sage: # needs sage.graphs sage.modules
                     sage: Y = simplicial_sets.RealProjectiveSpace(2)
                     sage: C = Y.twisted_chain_complex()
                     sage: C.differential(1)

@@ -1281,7 +1281,7 @@ cdef class GapElement(RingElement):
             sage: type(_)
             <class 'sage.rings.rational.Rational'>
 
-            sage: libgap.eval('5 + 7*E(3)').sage()
+            sage: libgap.eval('5 + 7*E(3)').sage()                                      # needs sage.rings.number_field
             7*zeta3 + 5
 
             sage: libgap(Infinity).sage()
@@ -1807,9 +1807,9 @@ cdef class GapElement_FiniteField(GapElement):
         EXAMPLES::
 
             sage: n = libgap.eval('Z(25)^2')
-            sage: n.sage()
+            sage: n.sage()                                                              # needs sage.rings.finite_rings
             a + 3
-            sage: parent(_)
+            sage: parent(_)                                                             # needs sage.rings.finite_rings
             Finite Field in a of size 5^2
 
             sage: n.sage(ring=GF(5))
@@ -1822,9 +1822,9 @@ cdef class GapElement_FiniteField(GapElement):
             sage: n = libgap.eval('Z(2^4)^2 + Z(2^4)^1 + Z(2^4)^0')
             sage: n
             Z(2^2)^2
-            sage: n.sage()
+            sage: n.sage()                                                              # needs sage.rings.finite_rings
             a + 1
-            sage: parent(_)
+            sage: parent(_)                                                             # needs sage.rings.finite_rings
             Finite Field in a of size 2^2
             sage: n.sage(ring=ZZ)
             Traceback (most recent call last):
@@ -1842,19 +1842,19 @@ cdef class GapElement_FiniteField(GapElement):
             Traceback (most recent call last):
             ...
             ValueError: the given ring is incompatible ...
-            sage: n.sage(ring=GF(2^2, 'a'))
+            sage: n.sage(ring=GF(2^2, 'a'))                                             # needs sage.rings.finite_rings
             a + 1
-            sage: n.sage(ring=GF(2^4, 'a'))
+            sage: n.sage(ring=GF(2^4, 'a'))                                             # needs sage.rings.finite_rings
             a^2 + a + 1
-            sage: n.sage(ring=GF(2^8, 'a'))
+            sage: n.sage(ring=GF(2^8, 'a'))                                             # needs sage.rings.finite_rings
             a^7 + a^6 + a^4 + a^2 + a + 1
-            sage: (n^3).sage()
+            sage: (n^3).sage()                                                          # needs sage.rings.finite_rings
             1
 
         Check that :issue:`23153` is fixed::
 
             sage: n = libgap.eval('Z(2^4)^2 + Z(2^4)^1 + Z(2^4)^0')
-            sage: n.sage(ring=GF(2^4, 'a'))
+            sage: n.sage(ring=GF(2^4, 'a'))                                             # needs sage.rings.finite_rings
             a^2 + a + 1
         """
         deg = self.DegreeFFE().sage()
@@ -1944,24 +1944,24 @@ cdef class GapElement_Cyclotomic(GapElement):
         EXAMPLES::
 
             sage: n = libgap.eval('E(3)')
-            sage: n.sage()
+            sage: n.sage()                                                              # needs sage.rings.number_field
             zeta3
-            sage: parent(_)
+            sage: parent(_)                                                             # needs sage.rings.number_field
             Cyclotomic Field of order 3 and degree 2
 
-            sage: n.sage(ring=CyclotomicField(6))
+            sage: n.sage(ring=CyclotomicField(6))                                       # needs sage.rings.number_field
             zeta6 - 1
 
-            sage: libgap.E(3).sage(ring=CyclotomicField(3))
+            sage: libgap.E(3).sage(ring=CyclotomicField(3))                             # needs sage.rings.number_field
             zeta3
-            sage: libgap.E(3).sage(ring=CyclotomicField(6))
+            sage: libgap.E(3).sage(ring=CyclotomicField(6))                             # needs sage.rings.number_field
             zeta6 - 1
 
         TESTS:
 
         Check that :issue:`15204` is fixed::
 
-            sage: libgap.E(3).sage(ring=UniversalCyclotomicField())
+            sage: libgap.E(3).sage(ring=UniversalCyclotomicField())                     # needs sage.rings.number_field
             E(3)
             sage: libgap.E(3).sage(ring=CC)
             -0.500000000000000 + 0.866025403784439*I
@@ -2124,7 +2124,7 @@ cdef class GapElement_Ring(GapElement):
 
         EXAMPLES::
 
-            sage: libgap.GF(3,2).ring_finite_field(var='A')
+            sage: libgap.GF(3,2).ring_finite_field(var='A')                             # needs sage.rings.finite_rings
             Finite Field in A of size 3^2
         """
         size = self.Size().sage()
@@ -2137,7 +2137,7 @@ cdef class GapElement_Ring(GapElement):
 
         EXAMPLES::
 
-            sage: libgap.CyclotomicField(6).ring_cyclotomic()
+            sage: libgap.CyclotomicField(6).ring_cyclotomic()                           # needs sage.rings.number_field
             Cyclotomic Field of order 3 and degree 2
         """
         conductor = self.Conductor()
@@ -2186,10 +2186,10 @@ cdef class GapElement_Ring(GapElement):
             sage: libgap.eval('ZmodnZ(15)').sage()
             Ring of integers modulo 15
 
-            sage: libgap.GF(3,2).sage(var='A')
+            sage: libgap.GF(3,2).sage(var='A')                                          # needs sage.rings.finite_rings
             Finite Field in A of size 3^2
 
-            sage: libgap.CyclotomicField(6).sage()
+            sage: libgap.CyclotomicField(6).sage()                                      # needs sage.rings.number_field
             Cyclotomic Field of order 3 and degree 2
 
             sage: libgap(QQ['x','y']).sage()
@@ -2898,10 +2898,10 @@ cdef class GapElement_List(GapElement):
               [ 0*Z(2), Z(2^2)^2 ] ]
             sage: m.IsMatrix()
             true
-            sage: matrix(m)
+            sage: matrix(m)                                                             # needs sage.libs.pari
             [    a     1]
             [    0 a + 1]
-            sage: matrix(GF(4,'B'), m)
+            sage: matrix(GF(4,'B'), m)                                                  # needs sage.rings.finite_rings
             [    B     1]
             [    0 B + 1]
 
@@ -2950,9 +2950,9 @@ cdef class GapElement_List(GapElement):
             <class 'sage.libs.gap.element.GapElement_List'>
             sage: m[3]
             Z(2^2)^2
-            sage: vector(m)
+            sage: vector(m)                                                             # needs sage.libs.pari
             (0, a, 1, a + 1)
-            sage: vector(GF(4,'B'), m)
+            sage: vector(GF(4,'B'), m)                                                  # needs sage.rings.finite_rings
             (0, B, 1, B + 1)
         """
         if not self.IsVector():

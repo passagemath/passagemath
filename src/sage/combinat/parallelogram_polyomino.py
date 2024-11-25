@@ -571,6 +571,7 @@ class _drawing_tool:
 
     EXAMPLES::
 
+        sage: # needs sage.plot
         sage: from sage.combinat.parallelogram_polyomino import (
         ....:     _drawing_tool, default_tikz_options,
         ....:     ParallelogramPolyominoesOptions
@@ -609,6 +610,7 @@ class _drawing_tool:
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: from sage.combinat.parallelogram_polyomino import (
             ....:     _drawing_tool, default_tikz_options,
             ....:     ParallelogramPolyominoesOptions
@@ -647,6 +649,7 @@ class _drawing_tool:
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: from sage.combinat.parallelogram_polyomino import (
             ....:     _drawing_tool, ParallelogramPolyominoesOptions
             ....: )
@@ -759,6 +762,7 @@ class _drawing_tool:
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: from sage.combinat.parallelogram_polyomino import (
             ....:     _drawing_tool, ParallelogramPolyominoesOptions
             ....: )
@@ -798,6 +802,7 @@ class _drawing_tool:
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: from sage.combinat.parallelogram_polyomino import (
             ....:     _drawing_tool, ParallelogramPolyominoesOptions
             ....: )
@@ -834,6 +839,7 @@ class _drawing_tool:
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: from sage.combinat.parallelogram_polyomino import (
             ....:     _drawing_tool, ParallelogramPolyominoesOptions
             ....: )
@@ -2703,6 +2709,7 @@ class ParallelogramPolyomino(ClonableList,
 
         TESTS::
 
+            sage: # needs sage.plot
             sage: pp = ParallelogramPolyomino(
             ....:     [[0, 0, 1, 0, 0, 0, 1, 1], [1, 0, 1, 1, 0, 0, 0, 0]]
             ....: )
@@ -2771,6 +2778,7 @@ class ParallelogramPolyomino(ClonableList,
 
         TESTS::
 
+            sage: # needs sage.plot
             sage: pp = ParallelogramPolyomino(
             ....:     [[0, 0, 0, 1, 1, 0, 1, 1], [1, 0, 1, 1, 0, 1, 0, 0]]
             ....: )
@@ -2884,6 +2892,7 @@ class ParallelogramPolyomino(ClonableList,
 
         TESTS::
 
+            sage: # needs sage.plot
             sage: pp = ParallelogramPolyomino(
             ....:     [[0, 0, 0, 1, 1, 0, 1, 1], [1, 0, 1, 1, 0, 1, 0, 0]]
             ....: )
@@ -2954,6 +2963,7 @@ class ParallelogramPolyomino(ClonableList,
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: pp = ParallelogramPolyomino(
             ....:     [
             ....:         [0, 0, 0, 0, 1, 0, 1, 0, 1],
@@ -3505,6 +3515,7 @@ class ParallelogramPolyomino(ClonableList,
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: pp = ParallelogramPolyomino(
             ....:     [[0,0,0,1,1,0,1,0,0,1,1,1],[1,1,1,0,0,1,1,0,0,1,0,0]]
             ....: )
@@ -3882,6 +3893,7 @@ class ParallelogramPolyomino(ClonableList,
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: pp = ParallelogramPolyomino([[0,1],[1,0]])
             sage: latex(pp)
             <BLANKLINE>
@@ -3900,6 +3912,7 @@ class ParallelogramPolyomino(ClonableList,
 
         EXAMPLES::
 
+            sage: # needs sage.plot
             sage: pp = ParallelogramPolyomino([[0,1],[1,0]])
             sage: print(pp._latex_drawing())
             <BLANKLINE>

@@ -8684,7 +8684,7 @@ class StandardPermutations_recoilsfiner(Permutations):
         TESTS::
 
             sage: P = Permutations(recoils_finer=[2,2])
-            sage: TestSuite(P).run()                                                    # needs sage.graphs
+            sage: TestSuite(P).run()                                                    # needs sage.graphs sage.modules
         """
         Permutations.__init__(self, category=FiniteEnumeratedSets())
         self.recoils = recoils

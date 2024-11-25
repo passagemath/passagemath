@@ -18,7 +18,7 @@ cases outputs may be isomorphic as abstract graphs.
 License
 -------
 
-Plantri is distributed without a license.
+Apache License, Version 2.0
 
 
 Upstream Contact
@@ -34,5 +34,4 @@ Brendan McKay
 - Australian National University
 - bdm@cs.anu.edu.au
 
-See http://cs.anu.edu.au/~bdm/plantri
-
+See https://users.cecs.anu.edu.au/~bdm/plantri/

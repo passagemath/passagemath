@@ -2068,13 +2068,14 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         Examples with denominators in defining equations::
 
-            sage: E = EllipticCurve([0, 0, 0, 0, -675/4])               # needs eclib
+            sage: # needs eclib
+            sage: E = EllipticCurve([0, 0, 0, 0, -675/4])
             sage: E.rank()
             0
             sage: E = EllipticCurve([0, 0, 1/2, 0, -1/5])
-            sage: E.rank()                                              # needs eclib
+            sage: E.rank()
             1
-            sage: E.minimal_model().rank()                              # needs eclib
+            sage: E.minimal_model().rank()
             1
 
         A large example where mwrank doesn't determine the result with certainty, but pari does::

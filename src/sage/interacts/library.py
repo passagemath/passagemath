@@ -11,7 +11,7 @@ Invoked in the notebook, the following command will produce the fully formatted
 interactive mathlet.  In the command line, it will simply return the underlying
 HTML and Sage code which creates the mathlet::
 
-    sage: interacts.calculus.taylor_polynomial()
+    sage: interacts.calculus.taylor_polynomial()                                        # needs sage.symbolic
     ...Interactive function <function taylor_polynomial at ...> with 3 widgets
       title: HTMLText(value='<h2>Taylor polynomial</h2>')
       f: EvalText(value='e^(-x)*sin(x)', description='$f(x)=$', layout=Layout(max_width='81em'))

@@ -310,11 +310,11 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
     One may specify a matching::
 
         sage: G = graphs.WheelGraph(10)
-        sage: M = G.matching()
+        sage: M = G.matching()                                                      # needs networkx
         sage: G.is_bicritical(matching=M)                                           # needs networkx
         True
         sage: H = graphs.HexahedralGraph()
-        sage: N = H.matching()
+        sage: N = H.matching()                                                      # needs networkx
         sage: H.is_bicritical(matching=N)                                           # needs networkx
         False
 
@@ -324,7 +324,7 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
         sage: G.is_bicritical(coNP_certificate=True)                                # needs networkx
         (True, None)
         sage: H = graphs.CircularLadderGraph(20)
-        sage: M = H.matching()
+        sage: M = H.matching()                                                      # needs networkx
         sage: H.is_bicritical(matching=M, coNP_certificate=True)                    # needs networkx
         (False, {0, 2})
 

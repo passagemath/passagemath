@@ -32,7 +32,7 @@
         "ntests": 222
     },
     "sage.algebras.orlik_solomon": {
-        "ntests": 117
+        "ntests": 119
     },
     "sage.algebras.orlik_terao": {
         "failed": true,
@@ -171,6 +171,9 @@
     "sage.categories.chain_complexes": {
         "ntests": 35
     },
+    "sage.categories.classical_crystals": {
+        "ntests": 4
+    },
     "sage.categories.coalgebras": {
         "ntests": 1
     },
@@ -223,7 +226,7 @@
         "ntests": 391
     },
     "sage.categories.crystals": {
-        "ntests": 1
+        "ntests": 3
     },
     "sage.categories.cw_complexes": {
         "ntests": 36
@@ -351,7 +354,7 @@
         "ntests": 172
     },
     "sage.categories.finite_coxeter_groups": {
-        "ntests": 6
+        "ntests": 10
     },
     "sage.categories.finite_dimensional_algebras_with_basis": {
         "ntests": 135
@@ -397,7 +400,7 @@
         "ntests": 28
     },
     "sage.categories.finite_permutation_groups": {
-        "ntests": 12
+        "ntests": 15
     },
     "sage.categories.finite_semigroups": {
         "ntests": 14
@@ -687,7 +690,7 @@
     },
     "sage.categories.simplicial_sets": {
         "failed": true,
-        "ntests": 133
+        "ntests": 125
     },
     "sage.categories.subobjects": {
         "ntests": 2
@@ -945,7 +948,7 @@
     },
     "sage.combinat.designs.incidence_structures": {
         "failed": true,
-        "ntests": 287
+        "ntests": 283
     },
     "sage.combinat.designs.latin_squares": {
         "ntests": 36
@@ -1197,7 +1200,6 @@
         "ntests": 162
     },
     "sage.combinat.shard_order": {
-        "failed": true,
         "ntests": 40
     },
     "sage.combinat.subset": {
@@ -1666,13 +1668,10 @@
     },
     "sage.graphs.bipartite_graph": {
         "failed": true,
-        "ntests": 431
+        "ntests": 434
     },
     "sage.graphs.centrality": {
         "ntests": 31
-    },
-    "sage.graphs.cliquer": {
-        "ntests": 34
     },
     "sage.graphs.comparability": {
         "ntests": 52
@@ -1718,11 +1717,11 @@
     },
     "sage.graphs.generators.distance_regular": {
         "failed": true,
-        "ntests": 151
+        "ntests": 143
     },
     "sage.graphs.generators.families": {
         "failed": true,
-        "ntests": 382
+        "ntests": 383
     },
     "sage.graphs.generators.intersection": {
         "ntests": 72
@@ -1731,11 +1730,11 @@
         "ntests": 6
     },
     "sage.graphs.generators.random": {
-        "ntests": 181
+        "ntests": 182
     },
     "sage.graphs.generators.smallgraphs": {
         "failed": true,
-        "ntests": 444
+        "ntests": 445
     },
     "sage.graphs.generators.world_map": {
         "ntests": 20
@@ -1752,10 +1751,10 @@
     },
     "sage.graphs.graph": {
         "failed": true,
-        "ntests": 1136
+        "ntests": 1117
     },
     "sage.graphs.graph_coloring": {
-        "ntests": 151
+        "ntests": 153
     },
     "sage.graphs.graph_database": {
         "ntests": 4
@@ -1782,7 +1781,7 @@
         "ntests": 131
     },
     "sage.graphs.graph_decompositions.tree_decomposition": {
-        "ntests": 273
+        "ntests": 223
     },
     "sage.graphs.graph_decompositions.vertex_separation": {
         "ntests": 176
@@ -1791,7 +1790,7 @@
         "ntests": 8
     },
     "sage.graphs.graph_generators": {
-        "ntests": 174
+        "ntests": 179
     },
     "sage.graphs.graph_generators_pyx": {
         "ntests": 7
@@ -1958,7 +1957,7 @@
         "ntests": 75
     },
     "sage.groups.perm_gps.partn_ref.refinement_graphs": {
-        "ntests": 110
+        "ntests": 103
     },
     "sage.groups.perm_gps.partn_ref.refinement_lists": {
         "ntests": 3
@@ -2046,19 +2045,19 @@
     },
     "sage.knots.free_knotinfo_monoid": {
         "failed": true,
-        "ntests": 66
+        "ntests": 58
     },
     "sage.knots.gauss_code": {
         "ntests": 18
     },
     "sage.knots.knot": {
-        "ntests": 1
+        "ntests": 3
     },
     "sage.knots.knotinfo": {
         "ntests": 50
     },
     "sage.knots.link": {
-        "ntests": 50
+        "ntests": 51
     },
     "sage.libs.gsl.array": {
         "ntests": 22
@@ -2564,7 +2563,7 @@
         "ntests": 60
     },
     "sage.modules.free_module_integer": {
-        "ntests": 11
+        "ntests": 12
     },
     "sage.modules.free_module_morphism": {
         "failed": true,
@@ -3275,7 +3274,7 @@
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
         "failed": true,
-        "ntests": 142
+        "ntests": 138
     },
     "sage.rings.polynomial.ore_function_element": {
         "failed": true,

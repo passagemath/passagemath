@@ -1,4 +1,4 @@
-# Add Maxima data to the wheel
+# Add data to the wheel
 
 import os
 import shlex

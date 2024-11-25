@@ -38,6 +38,8 @@ exclude sage/graphs/mcqd.p*
 exclude sage/graphs/graph_decompositions/*tdlib*.*
 exclude sage/graphs/graph_decompositions/*rankwidth*.*
 exclude sage/graphs/planarity.p*
+exclude sage/graphs/cliquer.p*
+prune sage/graphs/cliquer
 
 exclude sage/graphs/chrompoly.p*                        # needs flint
 exclude sage/graphs/matchpoly.p*                        # needs flint
@@ -63,6 +65,11 @@ include sage/databases/knotinfo_db.p*
 
 global-exclude all__sagemath_*.py
 global-include all__sagemath_graphs.py
+
+global-exclude *.c
+global-exclude *.cpp
+
+include sage/graphs/base/boost_interface.cpp
 
 global-exclude __pycache__
 global-exclude *.py[co]

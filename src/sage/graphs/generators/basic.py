@@ -55,7 +55,7 @@ def BullGraph():
         2
         3
         3
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                                                      # needs cliquer
         3
 
     The bull graph has chromatic polynomial `x(x - 2)(x - 1)^3` and
@@ -131,7 +131,7 @@ def ButterflyGraph():
 
         sage: G.is_eulerian()
         True
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                              # needs cliquer
         3
     """
     edge_dict = {
@@ -615,7 +615,7 @@ def CompleteMultipartiteGraph(L):
 
     It clearly has a chromatic number of 3::
 
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                              # needs cliquer
         3
     """
     r = len(L)  # getting the number of partitions

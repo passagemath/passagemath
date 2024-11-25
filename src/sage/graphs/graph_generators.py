@@ -1262,7 +1262,7 @@ class GraphGenerators:
             sage: gen = graphs.nauty_genktreeg("10 -k4")
             sage: G = next(gen); G
             Graph on 10 vertices
-            sage: G.treewidth()
+            sage: G.treewidth()                                                         # needs cliquer
             4
 
         A list of all 2-trees with 6, 7 and 8 vertices. This agrees with
@@ -1628,7 +1628,7 @@ class GraphGenerators:
              18: [12, 20, 13],
              19: [14, 20, 15],
              20: [17, 19, 18]}
-            sage: g.plot3d(layout='spring')
+            sage: g.plot3d(layout='spring')                                             # needs sage.plot
             Graphics3d Object
         """
         # number of vertices should be positive

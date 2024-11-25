@@ -371,7 +371,7 @@ class MatrixGroup_base(Group):
             sage: m2*e*e
             2*B['v']
 
-            sage: # needs sage.groups
+            sage: # needs sage.graphs sage.groups
             sage: W = WeylGroup(["A", 1, 1])
             sage: W.sign_representation()
             Sign representation of

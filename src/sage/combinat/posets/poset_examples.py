@@ -1986,6 +1986,7 @@ def _random_planar_lattice(n):
 
     EXAMPLES::
 
+        sage: # needs planarity
         sage: set_random_seed(78)  # Results are reproducible
         sage: D = sage.combinat.posets.poset_examples._random_planar_lattice(10); D
         Digraph on 10 vertices

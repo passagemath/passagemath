@@ -1,2 +1,3 @@
-echo "Copying over new boost headers"
-sdh_install src/boost "$SAGE_LOCAL/include"
+cd src
+./bootstrap.sh --prefix="$SAGE_LOCAL" --with-libraries=regex
+./b2 install

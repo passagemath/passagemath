@@ -1495,8 +1495,9 @@ class HypergeometricData:
 
         With values in the :class:`UniversalCyclotomicField` (slow)::
 
-            sage: # needs sage.libs.gap sage.rings.number_field
             sage: from sage.modular.hypergeometric_motive import HypergeometricData as Hyp
+
+            sage: # needs sage.libs.gap sage.rings.number_field
             sage: H = Hyp(alpha_beta=([1/2]*4, [0]*4))
             sage: [H.H_value(3,i,-1) for i in range(1,3)]
             [0, -12]
@@ -1511,7 +1512,7 @@ class HypergeometricData:
 
         With values in :class:`ComplexField`::
 
-            sage: [H.H_value(5,i,-1, ComplexField(60)) for i in range(1,3)]
+            sage: [H.H_value(5,i,-1, ComplexField(60)) for i in range(1,3)]             # needs sage.libs.gap sage.rings.number_field
             [-4, 276]
 
         Check issue from :issue:`28404`::

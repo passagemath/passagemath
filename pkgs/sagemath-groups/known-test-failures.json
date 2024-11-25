@@ -195,8 +195,7 @@
         "ntests": 65
     },
     "sage.categories.coxeter_groups": {
-        "failed": true,
-        "ntests": 196
+        "ntests": 194
     },
     "sage.categories.cw_complexes": {
         "ntests": 36
@@ -362,8 +361,7 @@
         "ntests": 21
     },
     "sage.categories.finite_permutation_groups": {
-        "failed": true,
-        "ntests": 18
+        "ntests": 17
     },
     "sage.categories.finite_semigroups": {
         "ntests": 11
@@ -1139,7 +1137,7 @@
         "ntests": 4
     },
     "sage.features.qepcad": {
-        "ntests": 4
+        "ntests": 3
     },
     "sage.features.rubiks": {
         "ntests": 21
@@ -1187,11 +1185,11 @@
     },
     "sage.functions.exp_integral": {
         "failed": true,
-        "ntests": 60
+        "ntests": 59
     },
     "sage.functions.gamma": {
         "failed": true,
-        "ntests": 37
+        "ntests": 36
     },
     "sage.functions.generalized": {
         "ntests": 14
@@ -1302,14 +1300,14 @@
     },
     "sage.groups.braid": {
         "failed": true,
-        "ntests": 499
+        "ntests": 332
     },
     "sage.groups.conjugacy_classes": {
         "ntests": 120
     },
     "sage.groups.cubic_braid": {
         "failed": true,
-        "ntests": 152
+        "ntests": 130
     },
     "sage.groups.finitely_presented": {
         "ntests": 371
@@ -1356,8 +1354,7 @@
         "ntests": 177
     },
     "sage.groups.libgap_wrapper": {
-        "failed": true,
-        "ntests": 173
+        "ntests": 171
     },
     "sage.groups.lie_gps.nilpotent_lie_group": {
         "failed": true,
@@ -1415,7 +1412,7 @@
     },
     "sage.groups.misc_gps.argument_groups": {
         "failed": true,
-        "ntests": 296
+        "ntests": 292
     },
     "sage.groups.misc_gps.imaginary_groups": {
         "failed": true,
@@ -1490,14 +1487,14 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
+        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
         "ntests": 8
     },
     "sage.interfaces.gap": {
-        "failed": true,
-        "ntests": 201
+        "ntests": 188
     },
     "sage.interfaces.gap3": {
         "ntests": 8
@@ -1523,7 +1520,7 @@
     },
     "sage.libs.gap.element": {
         "failed": true,
-        "ntests": 519
+        "ntests": 495
     },
     "sage.libs.gap.libgap": {
         "failed": true,
@@ -1578,7 +1575,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 1709
+        "ntests": 1686
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 3
@@ -2487,7 +2484,7 @@
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
         "failed": true,
-        "ntests": 65
+        "ntests": 62
     },
     "sage.rings.polynomial.ore_function_element": {
         "ntests": 39

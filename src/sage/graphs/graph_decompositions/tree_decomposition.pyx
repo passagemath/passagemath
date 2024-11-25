@@ -41,23 +41,23 @@ Treewidth and treelength are different measures of tree-likeness. In particular,
 trees have treewidth and treelength 1::
 
     sage: T = graphs.RandomTree(20)
-    sage: T.treewidth()
+    sage: T.treewidth()                                                                 # needs cliquer
     1
     sage: T.treelength()
     1
 
 The treewidth of a cycle is 2 and its treelength is `\lceil n/3 \rceil`::
 
-    sage: [graphs.CycleGraph(n).treewidth() for n in range(3, 11)]
+    sage: [graphs.CycleGraph(n).treewidth() for n in range(3, 11)]                      # needs cliquer
     [2, 2, 2, 2, 2, 2, 2, 2]
-    sage: [graphs.CycleGraph(n).treelength() for n in range(3, 11)]
+    sage: [graphs.CycleGraph(n).treelength() for n in range(3, 11)]                     # needs cliquer
     [1, 2, 2, 2, 3, 3, 3, 4]
 
 The treewidth of a clique is `n-1` and its treelength is 1::
 
-    sage: [graphs.CompleteGraph(n).treewidth() for n in range(3, 11)]
+    sage: [graphs.CompleteGraph(n).treewidth() for n in range(3, 11)]                   # needs cliquer
     [2, 3, 4, 5, 6, 7, 8, 9]
-    sage: [graphs.CompleteGraph(n).treelength() for n in range(3, 11)]
+    sage: [graphs.CompleteGraph(n).treelength() for n in range(3, 11)]                  # needs cliquer
     [1, 1, 1, 1, 1, 1, 1, 1]
 
 
@@ -135,24 +135,24 @@ def is_valid_tree_decomposition(G, T):
         True
 
         sage: G = graphs.RandomGNP(10, .2)
-        sage: T = G.treewidth(certificate=True)
-        sage: is_valid_tree_decomposition(G, T)
+        sage: T = G.treewidth(certificate=True)                                         # needs cliquer
+        sage: is_valid_tree_decomposition(G, T)                                         # needs cliquer
         True
 
     The union of the bags is the set of vertices of `G`::
 
         sage: G = graphs.PathGraph(4)
-        sage: T = G.treewidth(certificate=True)
+        sage: T = G.treewidth(certificate=True)                                         # needs cliquer
         sage: _ = G.add_vertex()
-        sage: is_valid_tree_decomposition(G, T)
+        sage: is_valid_tree_decomposition(G, T)                                         # needs cliquer
         False
 
     Each edge of `G` is contained in a bag::
 
         sage: G = graphs.PathGraph(4)
-        sage: T = G.treewidth(certificate=True)
+        sage: T = G.treewidth(certificate=True)                                         # needs cliquer
         sage: G.add_edge(0, 3)
-        sage: is_valid_tree_decomposition(G, T)
+        sage: is_valid_tree_decomposition(G, T)                                         # needs cliquer
         False
 
     The bags containing a vertex `v` form a subtree of `T`::
@@ -275,6 +275,7 @@ def reduced_tree_decomposition(T):
 
     TESTS::
 
+        sage: # needs cliquer
         sage: G = graphs.PathGraph(3)
         sage: T = G.treewidth(certificate=True)
         sage: is_valid_tree_decomposition(G, T)
@@ -338,17 +339,17 @@ def width_of_tree_decomposition(G, T, check=True):
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import width_of_tree_decomposition
         sage: G = graphs.PathGraph(3)
-        sage: T = G.treewidth(certificate=True)
-        sage: width_of_tree_decomposition(G, T, check=True)
+        sage: T = G.treewidth(certificate=True)                                         # needs cliquer
+        sage: width_of_tree_decomposition(G, T, check=True)                             # needs cliquer
         1
 
     TESTS::
 
         sage: G = Graph()
-        sage: T = G.treewidth(certificate=True)
-        sage: width_of_tree_decomposition(G, T, check=True)
+        sage: T = G.treewidth(certificate=True)                                         # needs cliquer
+        sage: width_of_tree_decomposition(G, T, check=True)                             # needs cliquer
         0
-        sage: width_of_tree_decomposition(Graph(1), T, check=True)
+        sage: width_of_tree_decomposition(Graph(1), T, check=True)                      # needs cliquer
         Traceback (most recent call last):
         ...
         ValueError: the tree-decomposition is not valid for this graph
@@ -388,8 +389,8 @@ def _from_tree_decompositions_of_atoms_to_tree_decomposition(T_atoms, cliques):
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import is_valid_tree_decomposition
         sage: G = graphs.Grid2dGraph(2, 3)
-        sage: T = G.treewidth(algorithm='sage', certificate=True)
-        sage: is_valid_tree_decomposition(G, T)
+        sage: T = G.treewidth(algorithm='sage', certificate=True)                       # needs cliquer
+        sage: is_valid_tree_decomposition(G, T)                                         # needs cliquer
         True
 
     TESTS::
@@ -501,9 +502,9 @@ def treewidth(g, k=None, kmin=None, certificate=False, algorithm=None, nice=Fals
     The PetersenGraph has treewidth 4::
 
         sage: petersen = graphs.PetersenGraph()
-        sage: petersen.treewidth(algorithm='sage')
+        sage: petersen.treewidth(algorithm='sage')                                      # needs cliquer
         4
-        sage: petersen.treewidth(algorithm='sage', certificate=True)
+        sage: petersen.treewidth(algorithm='sage', certificate=True)                    # needs cliquer
         Tree decomposition: Graph on 6 vertices
 
     The PetersenGraph has treewidth 4 (with ``tdlib``)::
@@ -517,31 +518,32 @@ def treewidth(g, k=None, kmin=None, certificate=False, algorithm=None, nice=Fals
     Nice tree decomposition of the PetersenGraph has 28 nodes::
 
         sage: petersen = graphs.PetersenGraph()
-        sage: petersen.treewidth(algorithm='sage', certificate=True, nice=True)
+        sage: petersen.treewidth(algorithm='sage', certificate=True, nice=True)         # needs cliquer
         Nice tree decomposition of Tree decomposition: Graph on 28 vertices
         sage: petersen.treewidth(algorithm='tdlib', certificate=True, nice=True)  # optional - tdlib
         Nice tree decomposition of Tree decomposition: Graph on 28 vertices
 
     The treewidth of a 2-dimensional grid is its smallest side::
 
-        sage: graphs.Grid2dGraph(2,5).treewidth()
+        sage: graphs.Grid2dGraph(2,5).treewidth()                                       # needs cliquer
         2
-        sage: graphs.Grid2dGraph(3,5).treewidth()
+        sage: graphs.Grid2dGraph(3,5).treewidth()                                       # needs cliquer
         3
 
     When parameter ``kmin`` is specified, the method searches for a
     tree-decomposition of width at least ``kmin``::
 
         sage: g = graphs.PetersenGraph()
-        sage: g.treewidth()
+        sage: g.treewidth()                                                             # needs cliquer
         4
-        sage: g.treewidth(kmin=2, algorithm='sage')
+        sage: g.treewidth(kmin=2, algorithm='sage')                                     # needs cliquer
         4
-        sage: g.treewidth(kmin=g.order(), certificate=True, algorithm='sage')
+        sage: g.treewidth(kmin=g.order(), certificate=True, algorithm='sage')           # needs cliquer
         Tree decomposition: Graph on 1 vertex
 
     TESTS::
 
+        sage: # needs cliquer
         sage: g = graphs.PathGraph(3)
         sage: g.treewidth()
         1
@@ -578,6 +580,7 @@ def treewidth(g, k=None, kmin=None, certificate=False, algorithm=None, nice=Fals
 
     All edges do appear (:issue:`17893`)::
 
+        sage: # needs cliquer
         sage: from itertools import combinations
         sage: g = graphs.PathGraph(10)
         sage: td = g.treewidth(certificate=True)
@@ -592,11 +595,12 @@ def treewidth(g, k=None, kmin=None, certificate=False, algorithm=None, nice=Fals
         sage: for i in range(3):
         ....:     for j in range(2):
         ....:         g.add_path([i,(i,j),(i+1)%3])
-        sage: g.treewidth()
+        sage: g.treewidth()                                                             # needs cliquer
         2
 
     The decomposition is a tree (:issue:`23546`)::
 
+        sage: # needs cliquer
         sage: g = Graph({0:[1,2], 3:[4,5]})
         sage: t = g.treewidth(certificate=True)
         sage: t.is_tree()
@@ -610,6 +614,7 @@ def treewidth(g, k=None, kmin=None, certificate=False, algorithm=None, nice=Fals
     Check that the use of atoms and clique separators is correct
     (:issue:`30993`)::
 
+        sage: # needs cliquer
         sage: g = 2 * graphs.Grid2dGraph(2, 3)
         sage: g.treewidth(algorithm='sage')
         2
@@ -621,19 +626,19 @@ def treewidth(g, k=None, kmin=None, certificate=False, algorithm=None, nice=Fals
     Check that :issue:`38159` is fixed ::
 
         sage: G = Graph('I~~}vPlr_')
-        sage: G.treewidth(algorithm='sage') == G.treewidth(algorithm='tdlib')  # optional - tdlib
+        sage: G.treewidth(algorithm='sage') == G.treewidth(algorithm='tdlib')  # optional - tdlib, needs cliquer
         True
 
     Trivially true::
 
-        sage: graphs.PetersenGraph().treewidth(k=35)
+        sage: graphs.PetersenGraph().treewidth(k=35)                                    # needs cliquer
         True
-        sage: graphs.PetersenGraph().treewidth(k=35, certificate=True)
+        sage: graphs.PetersenGraph().treewidth(k=35, certificate=True)                  # needs cliquer
         Tree decomposition: Graph on 1 vertex
 
     Bad input::
 
-        sage: graphs.PetersenGraph().treewidth(k=-3)
+        sage: graphs.PetersenGraph().treewidth(k=-3)                                    # needs cliquer
         Traceback (most recent call last):
         ...
         ValueError: k(=-3) must be a nonnegative integer
@@ -839,64 +844,64 @@ def make_nice_tree_decomposition(graph, tree_decomp):
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import make_nice_tree_decomposition
         sage: petersen = graphs.PetersenGraph()
-        sage: petersen_TD = petersen.treewidth(certificate=True)
-        sage: make_nice_tree_decomposition(petersen, petersen_TD)
+        sage: petersen_TD = petersen.treewidth(certificate=True)                        # needs cliquer
+        sage: make_nice_tree_decomposition(petersen, petersen_TD)                       # needs cliquer
         Nice tree decomposition of Tree decomposition: Graph on 28 vertices
 
     ::
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import make_nice_tree_decomposition
         sage: cherry = graphs.CompleteBipartiteGraph(1, 2)
-        sage: cherry_TD = cherry.treewidth(certificate=True)
-        sage: make_nice_tree_decomposition(cherry, cherry_TD)
+        sage: cherry_TD = cherry.treewidth(certificate=True)                            # needs cliquer
+        sage: make_nice_tree_decomposition(cherry, cherry_TD)                           # needs cliquer
         Nice tree decomposition of Tree decomposition: Graph on 7 vertices
 
     ::
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import make_nice_tree_decomposition
         sage: bip_one_four = graphs.CompleteBipartiteGraph(1, 4)
-        sage: bip_one_four_TD = bip_one_four.treewidth(certificate=True)
-        sage: make_nice_tree_decomposition(bip_one_four, bip_one_four_TD)
+        sage: bip_one_four_TD = bip_one_four.treewidth(certificate=True)                # needs cliquer
+        sage: make_nice_tree_decomposition(bip_one_four, bip_one_four_TD)               # needs cliquer
         Nice tree decomposition of Tree decomposition: Graph on 15 vertices
 
     Check that :issue:`36843` is fixed::
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import make_nice_tree_decomposition
         sage: triangle = graphs.CompleteGraph(3)
-        sage: triangle_TD = triangle.treewidth(certificate=True)
-        sage: make_nice_tree_decomposition(triangle, triangle_TD)
+        sage: triangle_TD = triangle.treewidth(certificate=True)                        # needs cliquer
+        sage: make_nice_tree_decomposition(triangle, triangle_TD)                       # needs cliquer
         Nice tree decomposition of Tree decomposition: Graph on 7 vertices
 
     ::
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import make_nice_tree_decomposition
         sage: graph = graphs.CompleteBipartiteGraph(2, 5)
-        sage: graph_TD = graph.treewidth(certificate=True)
-        sage: make_nice_tree_decomposition(graph, graph_TD)
+        sage: graph_TD = graph.treewidth(certificate=True)                              # needs cliquer
+        sage: make_nice_tree_decomposition(graph, graph_TD)                             # needs cliquer
         Nice tree decomposition of Tree decomposition: Graph on 25 vertices
 
     ::
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import make_nice_tree_decomposition
         sage: empty_graph = graphs.EmptyGraph()
-        sage: tree_decomp = empty_graph.treewidth(certificate=True)
-        sage: len(make_nice_tree_decomposition(empty_graph, tree_decomp))
+        sage: tree_decomp = empty_graph.treewidth(certificate=True)                     # needs cliquer
+        sage: len(make_nice_tree_decomposition(empty_graph, tree_decomp))               # needs cliquer
         0
 
     ::
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import make_nice_tree_decomposition
         sage: singleton = graphs.CompleteGraph(1)
-        sage: tree_decomp = singleton.treewidth(certificate=True)
-        sage: make_nice_tree_decomposition(singleton, tree_decomp)
+        sage: tree_decomp = singleton.treewidth(certificate=True)                       # needs cliquer
+        sage: make_nice_tree_decomposition(singleton, tree_decomp)                      # needs cliquer
         Nice tree decomposition of Tree decomposition: Graph on 3 vertices
 
     ::
 
         sage: from sage.graphs.graph_decompositions.tree_decomposition import make_nice_tree_decomposition
         sage: an_edge = graphs.CompleteGraph(2)
-        sage: tree_decomp = an_edge.treewidth(certificate=True)
-        sage: make_nice_tree_decomposition(an_edge, tree_decomp)
+        sage: tree_decomp = an_edge.treewidth(certificate=True)                         # needs cliquer
+        sage: make_nice_tree_decomposition(an_edge, tree_decomp)                        # needs cliquer
         Nice tree decomposition of Tree decomposition: Graph on 5 vertices
     """
     if not is_valid_tree_decomposition(graph, tree_decomp):
@@ -1084,6 +1089,7 @@ def label_nice_tree_decomposition(nice_TD, root, directed=False):
 
     EXAMPLES::
 
+        sage: # needs cliquer
         sage: from sage.graphs.graph_decompositions.tree_decomposition import make_nice_tree_decomposition, label_nice_tree_decomposition
         sage: claw = graphs.CompleteBipartiteGraph(1, 3)
         sage: claw_TD = claw.treewidth(certificate=True)

@@ -148,14 +148,14 @@ def gen_rest_table_index(obj, names=None, sort=True, only_local_functions=True, 
     A function that is imported into a class under a different name is listed
     under its 'new' name::
 
-        sage: 'cliques_maximum' in gen_rest_table_index(Graph)                          # needs sage.graphs
+        sage: 'cliques_maximum' in gen_rest_table_index(Graph)                          # needs cliquer sage.graphs
         True
-        sage: 'all_max_cliques`' in gen_rest_table_index(Graph)                         # needs sage.graphs
+        sage: 'all_max_cliques`' in gen_rest_table_index(Graph)                         # needs cliquer sage.graphs
         False
 
     Check that :issue:`36178` is fixed::
 
-        sage: print(gen_rest_table_index(Graph))                                        # needs sage.graphs
+        sage: print(gen_rest_table_index(Graph))                                        # needs cliquer sage.graphs
         ...
            :meth:`~sage.graphs.graph.Graph.independent_set` @ Return a maximum independent set.
         ...

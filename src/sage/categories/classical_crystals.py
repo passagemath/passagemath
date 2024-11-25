@@ -144,26 +144,26 @@ class ClassicalCrystals(Category_singleton):
                 sage: weight = e[0] + 2*e[2]
                 sage: weight.reduced_word()
                 [2, 1]
-                sage: T.demazure_character(weight)
+                sage: T.demazure_character(weight)                                      # needs sage.symbolic
                 x1^2*x2 + x1*x2^2 + x1^2*x3 + x1*x2*x3 + x1*x3^2
 
                 sage: T = crystals.Tableaux(['A',3],shape=[2,1])
-                sage: T.demazure_character([1,2,3])
+                sage: T.demazure_character([1,2,3])                                     # needs sage.symbolic
                 x1^2*x2 + x1*x2^2 + x1^2*x3 + x1*x2*x3 + x2^2*x3
                 sage: W = WeylGroup(['A',3])
                 sage: w = W.from_reduced_word([1,2,3])
-                sage: T.demazure_character(w)
+                sage: T.demazure_character(w)                                           # needs sage.symbolic
                 x1^2*x2 + x1*x2^2 + x1^2*x3 + x1*x2*x3 + x2^2*x3
 
                 sage: T = crystals.Tableaux(['B',2], shape = [2])
                 sage: e = T.weight_lattice_realization().basis()
                 sage: weight = -2*e[1]
-                sage: T.demazure_character(weight)
+                sage: T.demazure_character(weight)                                      # needs sage.symbolic
                 x1^2 + x1*x2 + x2^2 + x1 + x2 + x1/x2 + 1/x2 + 1/x2^2 + 1
 
-                sage: T = crystals.Tableaux("B2",shape=[1/2,1/2])
-                sage: b2=WeylCharacterRing("B2",base_ring=QQ).ambient()
-                sage: T.demazure_character([1,2],f=lambda x:b2(x.weight()))
+                sage: T = crystals.Tableaux("B2", shape=[1/2,1/2])
+                sage: b2 = WeylCharacterRing("B2", base_ring=QQ).ambient()
+                sage: T.demazure_character([1,2], f=lambda x: b2(x.weight()))
                 b2(-1/2,1/2) + b2(1/2,-1/2) + b2(1/2,1/2)
 
             REFERENCES:

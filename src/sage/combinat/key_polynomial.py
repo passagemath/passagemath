@@ -328,8 +328,8 @@ class KeyPolynomialBasis(CombinatorialFreeModule):
     terms of the key basis::
 
         sage: T = crystals.Tableaux(['A',3],shape=[2,1])
-        sage: f = T.demazure_character([3,2,1])
-        sage: k.from_polynomial(f)
+        sage: f = T.demazure_character([3,2,1])                                         # needs sage.symbolic
+        sage: k.from_polynomial(f)                                                      # needs sage.symbolic
         k[1, 0, 0, 2]
 
     The default behavior is to work in a polynomial ring with infinitely many
@@ -648,7 +648,7 @@ class KeyPolynomialBasis(CombinatorialFreeModule):
             True
 
             sage: T = crystals.Tableaux(['A', 4], shape=[4,2,1,1])
-            sage: k.from_polynomial(T.demazure_character([2]))
+            sage: k.from_polynomial(T.demazure_character([2]))                          # needs sage.symbolic
             k[4, 1, 2, 1]
         """
         if f not in self._polynomial_ring:

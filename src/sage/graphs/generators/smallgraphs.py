@@ -361,7 +361,7 @@ def WellsGraph():
         5
         sage: g.diameter()
         4
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                                                      # needs cliquer
         4
         sage: g.is_regular(k=5)
         True
@@ -1093,7 +1093,7 @@ def BidiakisCube():
         sage: x = char_poly.parent()('x')                                               # needs sage.modules
         sage: char_poly == (x - 3) * (x - 2) * (x^4) * (x + 1) * (x + 2) * (x^2 + x - 4)^2          # needs sage.modules
         True
-        sage: g.chromatic_number()                                                      # needs sage.modules
+        sage: g.chromatic_number()                                                      # needs cliquer sage.modules
         3
     """
     edge_dict = {
@@ -1319,7 +1319,7 @@ def BrinkmannGraph():
 
         sage: G.is_hamiltonian()                                                        # needs sage.numerical.mip
         True
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                                                      # needs cliquer
         4
 
     Its automorphism group is isomorphic to `D_7`::
@@ -1576,7 +1576,7 @@ def DoubleStarSnark():
         30
         sage: g.size()
         45
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                                                      # needs cliquer
         3
         sage: g.is_hamiltonian()                                                        # needs sage.numerical.mip
         False
@@ -1644,7 +1644,7 @@ def MeredithGraph():
         8
         sage: g.girth()
         4
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                                                      # needs cliquer
         3
         sage: g.is_hamiltonian()                # long time                             # needs sage.numerical.mip
         False
@@ -1700,7 +1700,7 @@ def KittellGraph():
         4
         sage: g.girth()
         3
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                                                      # needs cliquer
         4
     """
     g = Graph({0: [1, 2, 4, 5, 6, 7], 1: [0, 2, 7, 10, 11, 13],
@@ -1801,7 +1801,7 @@ def ChvatalGraph():
         24
         sage: G.degree()
         [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                                                      # needs cliquer
         4
         sage: G.radius(); G.diameter(); G.girth()
         2
@@ -1838,7 +1838,7 @@ def ClebschGraph():
         1920
         sage: g.girth()
         4
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                                                      # needs cliquer
         4
         sage: g.diameter()
         2
@@ -1875,7 +1875,7 @@ def CoxeterGraph():
         336
         sage: g.girth()
         7
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                                                      # needs cliquer
         3
         sage: g.diameter()
         4
@@ -2132,7 +2132,7 @@ def DurerGraph():
 
     The Dürer graph has chromatic number 3, diameter 4, and girth 3::
 
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                              # needs cliquer
         3
         sage: G.diameter()
         4
@@ -2498,7 +2498,7 @@ def ErreraGraph():
         4
         sage: G.girth()
         3
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                              # needs cliquer
         4
 
     Each vertex degree is either 5 or 6. That is, if `f` counts the number of
@@ -2794,7 +2794,7 @@ def GoldnerHararyGraph():
     Its chromatic number is 4 and its automorphism group is isomorphic to the
     dihedral group `D_6`::
 
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                              # needs cliquer
         4
         sage: ag = G.automorphism_group()                                               # needs sage.groups
         sage: ag.is_isomorphic(DihedralGroup(6))                                        # needs sage.groups
@@ -2957,7 +2957,7 @@ def GrotzschGraph():
     Its chromatic number is 4 and its automorphism group is isomorphic to the
     dihedral group `D_5`::
 
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                              # needs cliquer
         4
         sage: ag = G.automorphism_group()                                               # needs sage.groups
         sage: ag.is_isomorphic(DihedralGroup(5))                                        # needs sage.groups
@@ -3404,7 +3404,7 @@ def HoltGraph():
         True
         sage: g.is_vertex_transitive()                                                  # needs sage.groups
         True
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                              # needs cliquer
         3
         sage: g.is_hamiltonian()                # long time                             # needs sage.numerical.mip
         True
@@ -3497,7 +3497,7 @@ def Klein3RegularGraph():
         7
         sage: g.automorphism_group().cardinality()                                      # needs sage.groups
         336
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                              # needs cliquer
         3
     """
     g3 = Graph(':w`_GKWDBap`CMWFCpWsQUNdBwwuXPHrg`U`RIqypehVLqgHupYcFJyAv^Prk]'
@@ -3530,7 +3530,7 @@ def Klein7RegularGraph():
         3
         sage: g.automorphism_group().cardinality()                                      # needs sage.groups
         336
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                              # needs cliquer
         4
     """
     g7 = Graph(':W__@`AaBbC_CDbDcE`F_AG_@DEH_IgHIJbFGIKaFHILeFGHMdFKN_EKOPaCNP'
@@ -4243,7 +4243,7 @@ def RobertsonGraph():
         sage: g.charpoly().factor()
         (x - 4) * (x - 1)^2 * (x^2 + x - 5) * (x^2 + x - 1)
          * (x^2 - 3)^2 * (x^2 + x - 4)^2 * (x^2 + x - 3)^2
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                              # needs cliquer
         3
         sage: g.is_hamiltonian()                                                        # needs sage.numerical.mip
         True
@@ -4356,7 +4356,7 @@ def ShrikhandeGraph():
 
     Its chromatic number is `4` and its automorphism group is of order `192`::
 
-        sage: G.chromatic_number()
+        sage: G.chromatic_number()                              # needs cliquer
         4
         sage: G.automorphism_group().cardinality()                                      # needs sage.groups
         192
@@ -4533,7 +4533,7 @@ def SzekeresSnarkGraph():
         50
         sage: g.size()
         75
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                              # needs cliquer
         3
     """
     g = Graph(name="Szekeres Snark Graph")
@@ -5151,7 +5151,7 @@ def WatkinsSnarkGraph():
         50
         sage: g.size()
         75
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                              # needs cliquer
         3
     """
     g = Graph(name="Watkins Snark Graph")

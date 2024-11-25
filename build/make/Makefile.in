@@ -137,7 +137,8 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sage_sws2rst				\
 	sage_setup				\
 	sagemath_environment			\
-	sagemath_repl
+	sagemath_repl				\
+	sagelib
 
 # Packages for which we build wheels for PyPI
 PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
@@ -179,10 +180,15 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_gfan				\
 	sagemath_frobby				\
 	sagemath_nauty				\
+	sagemath_plantri			\
+	sagemath_buckygen			\
+	sagemath_cliquer			\
 	sagemath_palp				\
 	sagemath_qepcad				\
 	sagemath_lrslib				\
+	sagemath_rubiks				\
 	sagemath_sympow				\
+	sagemath_macaulay2			\
 	sagemath_coxeter3 			\
 	sagemath_sirocco			\
 	sagemath_meataxe			\
@@ -197,7 +203,7 @@ WHEEL_PACKAGES = $(PYPI_WHEEL_PACKAGES)		\
 	sagemath_doc_html			\
 	sagemath_doc_pdf
 
-# Packages for which build sdists for PyPI
+# Packages for which we build sdists for PyPI
 PYPI_SDIST_PACKAGES = $(WHEEL_PACKAGES)
 
 # Generate the actual inst_<pkgname> variables; for each package that is
@@ -507,7 +513,7 @@ pypi-noarch-wheels:
 	for a in $(PYPI_NOARCH_WHEEL_PACKAGES); do \
 	    rm -f $(SAGE_VENV)/var/lib/sage/installed/$$a-*; \
 	done
-	$(MAKE_REC) SAGE_EDITABLE=no SAGE_WHEELS=yes $(PYPI_NOARCH_WHEEL_PACKAGES:sagemath_repl=sagemath_repl-no-deps)
+	$(MAKE_REC) SAGE_EDITABLE=no SAGE_WHEELS=yes $(subst sagelib,sagelib-no-deps,$(PYPI_NOARCH_WHEEL_PACKAGES:sagemath_repl=sagemath_repl-no-deps))
 	@echo "Built wheels are in venv/var/lib/sage/wheels/"
 
 pypi-wheels:
