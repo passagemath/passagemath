@@ -23,7 +23,6 @@ on:
            "ubuntu-focal",
            "ubuntu-jammy",
            "ubuntu-lunar",
-           "ubuntu-mantic",
            "ubuntu-noble",
            "ubuntu-oracular",
            "debian-bullseye",
