@@ -588,6 +588,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_buckygen*
 
+      - name: sagemath-benzene
+        id:   sagemath-benzene
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_benzene*
+
       - name: sagemath-macaulay2
         id:   sagemath-macaulay2
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'

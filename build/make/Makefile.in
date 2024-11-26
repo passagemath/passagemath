@@ -181,6 +181,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_nauty				\
 	sagemath_plantri			\
 	sagemath_buckygen			\
+	sagemath_benzene			\
 	sagemath_cliquer			\
 	sagemath_palp				\
 	sagemath_qepcad				\
