@@ -23,7 +23,7 @@ class CddExecutable(Executable):
     EXAMPLES::
 
         sage: from sage.features.cddlib import CddExecutable
-        sage: CddExecutable().is_present()
+        sage: CddExecutable().is_present()                                              # needs cddexec_gmp
         FeatureTestResult('cddexec_gmp', True)
     """
     def __init__(self, name='cddexec_gmp'):

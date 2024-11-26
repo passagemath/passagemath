@@ -147,9 +147,9 @@ Laurent series, lazy power series and lazy symmetric functions::
     sage: check(L, z)
     sage: L.<z> = LazyPowerSeriesRing(QQ)
     sage: check(L, z)
-    sage: p = SymmetricFunctions(QQ).p()                                                # needs sage.combinat
-    sage: L = LazySymmetricFunctions(p)                                                 # needs sage.combinat
-    sage: check(L, L(p[1]))                                                             # needs sage.combinat
+    sage: p = SymmetricFunctions(QQ).p()                                                # needs sage.combinat sage.modules
+    sage: L = LazySymmetricFunctions(p)                                                 # needs sage.combinat sage.modules
+    sage: check(L, L(p[1]))                                                             # needs sage.combinat sage.modules
 
 We check that the elements in the cache of the stream of homogeneous
 components are in the correct ring::
@@ -1498,7 +1498,7 @@ class LazyModuleElement(Element):
             sage: f
             1 + 2*t + 12*t^3 + 32*t^4 + 368*t^5 + 2192*t^6 + O(t^7)
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.modules
             sage: s = SymmetricFunctions(QQ).s()
             sage: L = LazySymmetricFunctions(s)
             sage: f = L.undefined()

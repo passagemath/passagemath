@@ -669,7 +669,6 @@ def _qepcad_cmd(memcells=None):
         'env qe=...'
         sage: s = _qepcad_cmd(memcells=8000000); s
         'env qe=... +N8000000'
-        True
     """
     if memcells is not None:
         memcells_arg = f'+N{memcells}'
