@@ -22,7 +22,6 @@ on:
            "ubuntu-bionic-gcc_8",
            "ubuntu-focal",
            "ubuntu-jammy",
-           "ubuntu-lunar",
            "ubuntu-noble",
            "ubuntu-oracular",
            "debian-bullseye",

@@ -214,60 +214,6 @@
 .. |codespace-ubuntu-jammy-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-jammy-maximal%2Fdevcontainer.json
 
-.. |image-ubuntu-lunar-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-minimal-with-system-packages
-
-.. |image-ubuntu-lunar-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-minimal-configured
-
-.. |image-ubuntu-lunar-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-minimal-with-targets-pre
-
-.. |image-ubuntu-lunar-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-minimal-with-targets
-
-.. |image-ubuntu-lunar-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-minimal-with-targets-optional
-
-.. |codespace-ubuntu-lunar-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-lunar-minimal%2Fdevcontainer.json
-
-.. |image-ubuntu-lunar-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-standard-with-system-packages
-
-.. |image-ubuntu-lunar-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-standard-configured
-
-.. |image-ubuntu-lunar-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-standard-with-targets-pre
-
-.. |image-ubuntu-lunar-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-standard-with-targets
-
-.. |image-ubuntu-lunar-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-standard-with-targets-optional
-
-.. |codespace-ubuntu-lunar-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-lunar-standard%2Fdevcontainer.json
-
-.. |image-ubuntu-lunar-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-maximal-with-system-packages
-
-.. |image-ubuntu-lunar-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-maximal-configured
-
-.. |image-ubuntu-lunar-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-maximal-with-targets-pre
-
-.. |image-ubuntu-lunar-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-maximal-with-targets
-
-.. |image-ubuntu-lunar-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-lunar-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-lunar-maximal-with-targets-optional
-
-.. |codespace-ubuntu-lunar-maximal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-lunar-maximal%2Fdevcontainer.json
-
 .. |image-ubuntu-noble-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-noble-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-noble-minimal-with-system-packages
 
@@ -2587,17 +2533,6 @@
      - |codespace-ubuntu-jammy-standard|
    * -    ‑*maximal*
      - |image-ubuntu-jammy-maximal-with-system-packages| |image-ubuntu-jammy-maximal-with-targets-pre|
-     -
-   * - **ubuntu**-lunar 
-       
-          ‑*minimal*
-     - |image-ubuntu-lunar-minimal-with-system-packages| |image-ubuntu-lunar-minimal-with-targets-pre| |image-ubuntu-lunar-minimal-with-targets| |image-ubuntu-lunar-minimal-with-targets-optional|
-     - |codespace-ubuntu-lunar-minimal|
-   * -    ‑*standard*
-     - |image-ubuntu-lunar-standard-with-system-packages| |image-ubuntu-lunar-standard-with-targets-pre| |image-ubuntu-lunar-standard-with-targets| |image-ubuntu-lunar-standard-with-targets-optional|
-     - |codespace-ubuntu-lunar-standard|
-   * -    ‑*maximal*
-     - |image-ubuntu-lunar-maximal-with-system-packages| |image-ubuntu-lunar-maximal-with-targets-pre|
      -
    * - **ubuntu**-noble 
        
