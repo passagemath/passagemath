@@ -1,2 +1,2 @@
 cd src
-sdh_install Eigen "$SAGE_LOCAL/include/"
+sdh_install Eigen unsupported "$SAGE_LOCAL/include/"
