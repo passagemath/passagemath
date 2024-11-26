@@ -34,6 +34,7 @@ content-type = "text/x-rst"
 test        = ["passagemath-repl"]
 
 # libraries
+benzene     = ["passagemath-benzene"]
 bliss       = ["passagemath-bliss"]
 buckygen    = ["passagemath-buckygen"]
 cliquer     = ["passagemath-cliquer"]
