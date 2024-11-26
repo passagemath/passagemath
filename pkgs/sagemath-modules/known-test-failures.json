@@ -29,7 +29,7 @@
         "ntests": 222
     },
     "sage.algebras.orlik_solomon": {
-        "ntests": 73
+        "ntests": 75
     },
     "sage.algebras.orlik_terao": {
         "failed": true,
@@ -162,6 +162,9 @@
     "sage.categories.chain_complexes": {
         "ntests": 26
     },
+    "sage.categories.classical_crystals": {
+        "ntests": 4
+    },
     "sage.categories.coalgebras": {
         "ntests": 1
     },
@@ -213,7 +216,7 @@
         "ntests": 368
     },
     "sage.categories.crystals": {
-        "ntests": 1
+        "ntests": 3
     },
     "sage.categories.cw_complexes": {
         "ntests": 36
@@ -334,7 +337,7 @@
         "ntests": 172
     },
     "sage.categories.finite_coxeter_groups": {
-        "ntests": 6
+        "ntests": 10
     },
     "sage.categories.finite_dimensional_algebras_with_basis": {
         "ntests": 72
@@ -352,8 +355,7 @@
         "ntests": 3
     },
     "sage.categories.finite_dimensional_lie_algebras_with_basis": {
-        "failed": true,
-        "ntests": 40
+        "ntests": 34
     },
     "sage.categories.finite_dimensional_modules_with_basis": {
         "failed": true,
@@ -381,7 +383,7 @@
         "ntests": 28
     },
     "sage.categories.finite_permutation_groups": {
-        "ntests": 12
+        "ntests": 15
     },
     "sage.categories.finite_semigroups": {
         "ntests": 14
@@ -765,7 +767,7 @@
         "ntests": 2
     },
     "sage.coding.kasami_codes": {
-        "ntests": 2
+        "ntests": 5
     },
     "sage.coding.linear_code": {
         "ntests": 40
@@ -1142,6 +1144,9 @@
     "sage.features.dvipng": {
         "ntests": 4
     },
+    "sage.features.eclib": {
+        "ntests": 4
+    },
     "sage.features.ecm": {
         "ntests": 4
     },
@@ -1337,8 +1342,7 @@
         "ntests": 4
     },
     "sage.functions.special": {
-        "failed": true,
-        "ntests": 121
+        "ntests": 120
     },
     "sage.functions.spike_function": {
         "ntests": 32
@@ -1485,6 +1489,7 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
+        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -1542,7 +1547,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2052
+        "ntests": 2035
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
@@ -1647,8 +1652,7 @@
         "ntests": 621
     },
     "sage.matroids.matroid": {
-        "failed": true,
-        "ntests": 934
+        "ntests": 925
     },
     "sage.matroids.matroids_plot_helpers": {
         "ntests": 22
@@ -1965,7 +1969,7 @@
         "ntests": 60
     },
     "sage.modules.free_module_integer": {
-        "ntests": 8
+        "ntests": 12
     },
     "sage.modules.free_module_morphism": {
         "failed": true,
@@ -2041,8 +2045,7 @@
         "ntests": 151
     },
     "sage.modules.with_basis.indexed_element": {
-        "failed": true,
-        "ntests": 166
+        "ntests": 160
     },
     "sage.modules.with_basis.morphism": {
         "ntests": 353
@@ -2305,10 +2308,10 @@
         "ntests": 11
     },
     "sage.rings.finite_rings.finite_field_base": {
-        "ntests": 15
+        "ntests": 21
     },
     "sage.rings.finite_rings.finite_field_constructor": {
-        "ntests": 17
+        "ntests": 21
     },
     "sage.rings.finite_rings.finite_field_prime_modn": {
         "ntests": 28
@@ -2323,8 +2326,7 @@
         "ntests": 539
     },
     "sage.rings.finite_rings.integer_mod_ring": {
-        "failed": true,
-        "ntests": 346
+        "ntests": 326
     },
     "sage.rings.finite_rings.residue_field": {
         "ntests": 39
@@ -2358,7 +2360,7 @@
         "ntests": 7
     },
     "sage.rings.function_field.function_field": {
-        "ntests": 155
+        "ntests": 156
     },
     "sage.rings.function_field.function_field_rational": {
         "ntests": 135
@@ -2527,7 +2529,7 @@
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
         "failed": true,
-        "ntests": 138
+        "ntests": 134
     },
     "sage.rings.polynomial.ore_function_element": {
         "ntests": 56
@@ -2547,7 +2549,7 @@
     },
     "sage.rings.polynomial.polynomial_element": {
         "failed": true,
-        "ntests": 1909
+        "ntests": 1897
     },
     "sage.rings.polynomial.polynomial_element_generic": {
         "ntests": 198
@@ -2690,7 +2692,7 @@
     },
     "sage.schemes.affine.affine_morphism": {
         "failed": true,
-        "ntests": 304
+        "ntests": 303
     },
     "sage.schemes.affine.affine_point": {
         "failed": true,
