@@ -122,6 +122,9 @@
     "sage.categories.chain_complexes": {
         "ntests": 22
     },
+    "sage.categories.classical_crystals": {
+        "ntests": 4
+    },
     "sage.categories.coalgebras": {
         "ntests": 22
     },
@@ -173,7 +176,7 @@
         "ntests": 368
     },
     "sage.categories.crystals": {
-        "ntests": 1
+        "ntests": 3
     },
     "sage.categories.cw_complexes": {
         "ntests": 36
@@ -300,7 +303,7 @@
         "ntests": 178
     },
     "sage.categories.finite_coxeter_groups": {
-        "ntests": 6
+        "ntests": 10
     },
     "sage.categories.finite_dimensional_algebras_with_basis": {
         "failed": true,
@@ -345,6 +348,9 @@
     },
     "sage.categories.finite_monoids": {
         "ntests": 28
+    },
+    "sage.categories.finite_permutation_groups": {
+        "ntests": 2
     },
     "sage.categories.finite_posets": {
         "ntests": 19
@@ -769,9 +775,6 @@
     "sage.combinat.dyck_word": {
         "ntests": 567
     },
-    "sage.combinat.e_one_star": {
-        "ntests": 9
-    },
     "sage.combinat.expnums": {
         "ntests": 7
     },
@@ -817,6 +820,9 @@
     },
     "sage.combinat.kazhdan_lusztig": {
         "ntests": 2
+    },
+    "sage.combinat.key_polynomial": {
+        "ntests": 3
     },
     "sage.combinat.knutson_tao_puzzles": {
         "ntests": 384
@@ -1056,7 +1062,7 @@
         "ntests": 658
     },
     "sage.combinat.tiling": {
-        "ntests": 5
+        "ntests": 7
     },
     "sage.combinat.tools": {
         "ntests": 2
@@ -1167,8 +1173,7 @@
         "ntests": 441
     },
     "sage.data_structures.stream": {
-        "failed": true,
-        "ntests": 951
+        "ntests": 942
     },
     "sage.databases.findstat": {
         "failed": true,
@@ -1255,6 +1260,9 @@
         "ntests": 38
     },
     "sage.features.dvipng": {
+        "ntests": 4
+    },
+    "sage.features.eclib": {
         "ntests": 4
     },
     "sage.features.ecm": {
@@ -1515,10 +1523,6 @@
     },
     "sage.interfaces.tab_completion": {
         "ntests": 13
-    },
-    "sage.libs.lrcalc.lrcalc": {
-        "failed": true,
-        "ntests": 50
     },
     "sage.misc.abstract_method": {
         "ntests": 33
@@ -1969,10 +1973,10 @@
         "ntests": 14
     },
     "sage.rings.finite_rings.finite_field_base": {
-        "ntests": 26
+        "ntests": 32
     },
     "sage.rings.finite_rings.finite_field_constructor": {
-        "ntests": 17
+        "ntests": 21
     },
     "sage.rings.finite_rings.finite_field_prime_modn": {
         "ntests": 28
@@ -2016,7 +2020,7 @@
         "ntests": 7
     },
     "sage.rings.function_field.function_field": {
-        "ntests": 159
+        "ntests": 160
     },
     "sage.rings.function_field.function_field_rational": {
         "ntests": 135
@@ -2078,11 +2082,11 @@
     },
     "sage.rings.lazy_series": {
         "failed": true,
-        "ntests": 1562
+        "ntests": 1518
     },
     "sage.rings.lazy_series_ring": {
         "failed": true,
-        "ntests": 618
+        "ntests": 599
     },
     "sage.rings.localization": {
         "ntests": 110
@@ -2172,14 +2176,14 @@
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
         "failed": true,
-        "ntests": 133
+        "ntests": 129
     },
     "sage.rings.polynomial.polydict": {
         "ntests": 396
     },
     "sage.rings.polynomial.polynomial_element": {
         "failed": true,
-        "ntests": 1846
+        "ntests": 1834
     },
     "sage.rings.polynomial.polynomial_element_generic": {
         "ntests": 194
@@ -2299,7 +2303,7 @@
     },
     "sage.schemes.affine.affine_morphism": {
         "failed": true,
-        "ntests": 290
+        "ntests": 289
     },
     "sage.schemes.affine.affine_point": {
         "failed": true,
@@ -2532,7 +2536,7 @@
     },
     "sage.structure.sage_object": {
         "failed": true,
-        "ntests": 104
+        "ntests": 108
     },
     "sage.structure.sequence": {
         "ntests": 183
@@ -2550,7 +2554,6 @@
         "ntests": 6
     },
     "sage.structure.unique_representation": {
-        "failed": true,
         "ntests": 234
     },
     "sage.symbolic.function": {
