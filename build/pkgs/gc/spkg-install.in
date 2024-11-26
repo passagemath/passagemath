@@ -1,6 +1,6 @@
 cd src
 
-GC_CONFIGURE="--enable-large-config"
+GC_CONFIGURE="--enable-large-config --enable-cplusplus"
 
 sdh_configure $GC_CONFIGURE
 sdh_make
