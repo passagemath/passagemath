@@ -1107,7 +1107,6 @@
         "ntests": 6
     },
     "sage.combinat.shard_order": {
-        "failed": true,
         "ntests": 40
     },
     "sage.combinat.shuffle": {
@@ -1115,10 +1114,6 @@
     },
     "sage.combinat.sidon_sets": {
         "ntests": 22
-    },
-    "sage.combinat.sine_gordon": {
-        "failed": true,
-        "ntests": 33
     },
     "sage.combinat.six_vertex_model": {
         "ntests": 51
@@ -1345,10 +1340,6 @@
     },
     "sage.data_structures.stream": {
         "ntests": 942
-    },
-    "sage.databases.findstat": {
-        "failed": true,
-        "ntests": 134
     },
     "sage.databases.knotinfo_db": {
         "ntests": 100
@@ -1810,7 +1801,7 @@
         "ntests": 8
     },
     "sage.graphs.graph_generators": {
-        "ntests": 183
+        "ntests": 184
     },
     "sage.graphs.graph_generators_pyx": {
         "ntests": 7
@@ -1943,8 +1934,7 @@
         "ntests": 13
     },
     "sage.knots.free_knotinfo_monoid": {
-        "failed": true,
-        "ntests": 66
+        "ntests": 58
     },
     "sage.knots.gauss_code": {
         "ntests": 18
@@ -1990,8 +1980,7 @@
         "ntests": 78
     },
     "sage.misc.classgraph": {
-        "failed": true,
-        "ntests": 8
+        "ntests": 3
     },
     "sage.misc.constant_function": {
         "ntests": 21
@@ -2232,7 +2221,6 @@
         "ntests": 64
     },
     "sage.monoids.indexed_free_monoid": {
-        "failed": true,
         "ntests": 238
     },
     "sage.monoids.monoid": {
@@ -2520,7 +2508,7 @@
     },
     "sage.rings.lazy_series": {
         "failed": true,
-        "ntests": 1518
+        "ntests": 1514
     },
     "sage.rings.lazy_series_ring": {
         "failed": true,
@@ -3020,7 +3008,7 @@
         "ntests": 8
     },
     "sage.tests.cmdline": {
-        "ntests": 133
+        "ntests": 108
     },
     "sage.tests.functools_partial_src": {
         "ntests": 3

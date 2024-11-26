@@ -1592,10 +1592,6 @@
         "failed": true,
         "ntests": 223
     },
-    "sage.combinat.sine_gordon": {
-        "failed": true,
-        "ntests": 33
-    },
     "sage.combinat.six_vertex_model": {
         "ntests": 51
     },
@@ -1865,10 +1861,6 @@
     "sage.data_structures.stream": {
         "failed": true,
         "ntests": 1037
-    },
-    "sage.databases.findstat": {
-        "failed": true,
-        "ntests": 134
     },
     "sage.databases.oeis": {
         "ntests": 125
@@ -2568,6 +2560,9 @@
     "sage.misc.classcall_metaclass": {
         "ntests": 78
     },
+    "sage.misc.classgraph": {
+        "ntests": 1
+    },
     "sage.misc.compat": {
         "ntests": 2
     },
@@ -2999,7 +2994,6 @@
         "ntests": 19
     },
     "sage.quadratic_forms.binary_qf": {
-        "failed": true,
         "ntests": 299
     },
     "sage.quadratic_forms.constructions": {
@@ -3989,7 +3983,7 @@
         "ntests": 8
     },
     "sage.tests.cmdline": {
-        "ntests": 133
+        "ntests": 108
     },
     "sage.tests.combinatorial_hopf_algebras": {
         "ntests": 12

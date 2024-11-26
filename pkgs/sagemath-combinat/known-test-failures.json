@@ -959,10 +959,6 @@
     "sage.combinat.sidon_sets": {
         "ntests": 22
     },
-    "sage.combinat.sine_gordon": {
-        "failed": true,
-        "ntests": 33
-    },
     "sage.combinat.six_vertex_model": {
         "ntests": 51
     },
@@ -1174,10 +1170,6 @@
     },
     "sage.data_structures.stream": {
         "ntests": 942
-    },
-    "sage.databases.findstat": {
-        "failed": true,
-        "ntests": 134
     },
     "sage.databases.oeis": {
         "ntests": 125
@@ -1555,6 +1547,9 @@
     "sage.misc.classcall_metaclass": {
         "ntests": 78
     },
+    "sage.misc.classgraph": {
+        "ntests": 1
+    },
     "sage.misc.constant_function": {
         "ntests": 21
     },
@@ -1794,7 +1789,6 @@
         "ntests": 64
     },
     "sage.monoids.indexed_free_monoid": {
-        "failed": true,
         "ntests": 238
     },
     "sage.monoids.monoid": {
@@ -2082,7 +2076,7 @@
     },
     "sage.rings.lazy_series": {
         "failed": true,
-        "ntests": 1518
+        "ntests": 1514
     },
     "sage.rings.lazy_series_ring": {
         "failed": true,
@@ -2576,7 +2570,7 @@
         "ntests": 8
     },
     "sage.tests.cmdline": {
-        "ntests": 133
+        "ntests": 108
     },
     "sage.tests.functools_partial_src": {
         "ntests": 3
