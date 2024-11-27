@@ -202,7 +202,7 @@ def gale_ryser_theorem(p1, p2, algorithm='gale',
 
     Computing the matrix for `p_1=p_2=2+2+1`::
 
-        sage: # needs sage.combinat sage.modules
+        sage: # needs sage.combinat sage.modules sage.numerical.mip
         sage: from sage.combinat.integer_vector import gale_ryser_theorem
         sage: p1 = [2,2,1]
         sage: p2 = [2,2,1]

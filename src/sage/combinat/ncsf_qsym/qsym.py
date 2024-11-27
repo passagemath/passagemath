@@ -1860,6 +1860,7 @@ class QuasiSymmetricFunctions(UniqueRepresentation, Parent):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.number_field
                 sage: M = QuasiSymmetricFunctions(CyclotomicField()).Monomial()
                 sage: M.lambda_of_monomial([1, 2], 2)
                 2*M[1, 1, 2, 2] + M[1, 1, 4] + M[1, 2, 1, 2] + M[1, 3, 2] + M[2, 2, 2]

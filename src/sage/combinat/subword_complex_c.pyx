@@ -30,6 +30,7 @@ cpdef int _flip_c(W, set positions, list extended_root_conf_indices,
         sage: _flip_c(W, set([0,1]), F._extended_root_configuration_indices(), 0)
         3
 
+        sage: # needs sage.graphs
         sage: W = CoxeterGroup(['A',2])
         sage: w = W.from_reduced_word([1,2,1])
         sage: SC = SubwordComplex([1,2,1,2,1], w)
@@ -69,6 +70,7 @@ cpdef list _construct_facets_c(tuple Q, w, int n=-1, int pos=0, int l=-1):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: from sage.combinat.subword_complex_c import _construct_facets_c
         sage: W = CoxeterGroup(['A',2])
         sage: w = W.from_reduced_word([1,2])

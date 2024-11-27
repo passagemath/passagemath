@@ -5776,7 +5776,7 @@ class Partition(CombinatorialElement):
             sage: Partition([2,2,1]).simple_module_dimension(GF(3))                     # needs sage.rings.finite_rings
             4
 
-            sage: for la in Partitions(6, regular=3):                                   # needs sage.modules
+            sage: for la in Partitions(6, regular=3):                                   # needs sage.groups sage.modules
             ....:     print(la, la.specht_module_dimension(), la.simple_module_dimension(GF(3)))
             [6] 1 1
             [5, 1] 5 4
@@ -5799,7 +5799,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.groups sage.modules
             sage: TM = Partition([2,2,1]).tabloid_module(QQ); TM
             Tabloid module of [2, 2, 1] over Rational Field
             sage: TM.frobenius_image()

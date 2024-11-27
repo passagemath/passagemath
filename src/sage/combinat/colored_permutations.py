@@ -446,6 +446,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
 
     EXAMPLES::
 
+        sage: # needs sage.groups
         sage: groups.misc.ShephardToddFamily(6, 1, 4)
         6-colored permutations of size 4
         sage: groups.misc.ShephardToddFamily(6, 2, 4)
@@ -463,6 +464,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: G = groups.misc.ShephardToddFamily(6, 1, 3)
             sage: C = ColoredPermutations(6, 3)
             sage: G is C
@@ -478,6 +480,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: G = groups.misc.ShephardToddFamily(6, 2, 3)
             sage: TestSuite(G).run()
             sage: G = groups.misc.ShephardToddFamily(8, 4, 1)
@@ -486,6 +489,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
         We skip some of the Coxeter group tests since the left descents
         have not been implemented::
 
+            sage: # needs sage.groups
             sage: coxeter_tests = ["_test_descents", "_test_has_descent",
             ....:                  "_test_reduced_word", "_test_simple_projections"]
             sage: G = groups.misc.ShephardToddFamily(2, 2, 3)
@@ -523,7 +527,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
-            sage: groups.misc.ShephardToddFamily(6, 2, 3)
+            sage: groups.misc.ShephardToddFamily(6, 2, 3)                               # needs sage.groups
             Complex reflection group G(6, 2, 3)
         """
         return "Complex reflection group G({}, {}, {})".format(self._m, self._p, self._n)
@@ -543,20 +547,20 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
             sage: C.index_set()
             (1, 2, 3)
 
-            sage: G = groups.misc.ShephardToddFamily(6, 6, 4)
-            sage: G.index_set()
+            sage: G = groups.misc.ShephardToddFamily(6, 6, 4)                           # needs sage.groups
+            sage: G.index_set()                                                         # needs sage.groups
             (1, 2, 3, 4)
 
-            sage: G = groups.misc.ShephardToddFamily(6, 2, 4)
-            sage: G.index_set()
+            sage: G = groups.misc.ShephardToddFamily(6, 2, 4)                           # needs sage.groups
+            sage: G.index_set()                                                         # needs sage.groups
             (1, 2, 3, 4, 5)
 
-            sage: G = groups.misc.ShephardToddFamily(6, 6, 1)
-            sage: G.index_set()
+            sage: G = groups.misc.ShephardToddFamily(6, 6, 1)                           # needs sage.groups
+            sage: G.index_set()                                                         # needs sage.groups
             ()
 
-            sage: G = groups.misc.ShephardToddFamily(6, 2, 1)
-            sage: G.index_set()
+            sage: G = groups.misc.ShephardToddFamily(6, 2, 1)                           # needs sage.groups
+            sage: G.index_set()                                                         # needs sage.groups
             (1,)
 
         TESTS::
@@ -582,58 +586,58 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
         EXAMPLES::
 
             sage: C = ColoredPermutations(3, 4)
-            sage: C.coxeter_matrix()                                                    # needs sage.modules
+            sage: C.coxeter_matrix()                                                    # needs sage.graphs sage.modules
             [1 3 2 2]
             [3 1 3 2]
             [2 3 1 4]
             [2 2 4 1]
 
             sage: C = ColoredPermutations(1, 4)
-            sage: C.coxeter_matrix()                                                    # needs sage.modules
+            sage: C.coxeter_matrix()                                                    # needs sage.graphs sage.modules
             [1 3 2]
             [3 1 3]
             [2 3 1]
 
-            sage: G = groups.misc.ShephardToddFamily(2, 2, 3)
-            sage: G.coxeter_matrix()
+            sage: G = groups.misc.ShephardToddFamily(2, 2, 3)                           # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.groups
             [1 3 3]
             [3 1 2]
             [3 2 1]
 
-            sage: G = groups.misc.ShephardToddFamily(2, 2, 2)
-            sage: G.coxeter_matrix()
+            sage: G = groups.misc.ShephardToddFamily(2, 2, 2)                           # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.groups
             [1 2]
             [2 1]
 
-            sage: G = groups.misc.ShephardToddFamily(2, 2, 1)
-            sage: G.coxeter_matrix()
+            sage: G = groups.misc.ShephardToddFamily(2, 2, 1)                           # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.groups
             [1]
 
-            sage: G = groups.misc.ShephardToddFamily(5, 5, 1)
-            sage: G.coxeter_matrix()
+            sage: G = groups.misc.ShephardToddFamily(5, 5, 1)                           # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.groups
             []
 
-            sage: G = groups.misc.ShephardToddFamily(4, 4, 2)
-            sage: G.coxeter_matrix()
+            sage: G = groups.misc.ShephardToddFamily(4, 4, 2)                           # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.groups
             [1 4]
             [4 1]
 
-            sage: G = groups.misc.ShephardToddFamily(7, 7, 2)
-            sage: G.coxeter_matrix()
+            sage: G = groups.misc.ShephardToddFamily(7, 7, 2)                           # needs sage.groups
+            sage: G.coxeter_matrix()                                                    # needs sage.groups
             [1 7]
             [7 1]
 
-            sage: G = groups.misc.ShephardToddFamily(6, 3, 1)
-            sage: G.coxeter_matrix() is None
+            sage: G = groups.misc.ShephardToddFamily(6, 3, 1)                           # needs sage.groups
+            sage: G.coxeter_matrix() is None                                            # needs sage.groups
             True
-            sage: G = groups.misc.ShephardToddFamily(6, 3, 4)
-            sage: G.coxeter_matrix() is None
+            sage: G = groups.misc.ShephardToddFamily(6, 3, 4)                           # needs sage.groups
+            sage: G.coxeter_matrix() is None                                            # needs sage.groups
             True
 
         TESTS::
 
             sage: S = SignedPermutations(4)
-            sage: S.coxeter_matrix()                                                    # needs sage.modules
+            sage: S.coxeter_matrix()                                                    # needs sage.graphs sage.modules
             [1 3 2 2]
             [3 1 3 2]
             [2 3 1 4]
@@ -705,19 +709,19 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
             sage: S.simple_reflection(4)
             [1, 2, 3, -4]
 
-            sage: G = groups.misc.ShephardToddFamily(4, 2, 3)
-            sage: list(G.simple_reflections())
+            sage: G = groups.misc.ShephardToddFamily(4, 2, 3)                           # needs sage.groups
+            sage: list(G.simple_reflections())                                          # needs sage.groups
             [[[0, 0, 0], [2, 1, 3]],
              [[0, 0, 0], [1, 3, 2]],
              [[0, 1, 3], [1, 3, 2]],
              [[0, 0, 2], [1, 2, 3]]]
 
-            sage: G = groups.misc.ShephardToddFamily(8, 4, 1)
-            sage: G.simple_reflections()
+            sage: G = groups.misc.ShephardToddFamily(8, 4, 1)                           # needs sage.groups
+            sage: G.simple_reflections()                                                # needs sage.groups
             Finite family {1: [[4], [1]]}
 
-            sage: G = groups.misc.ShephardToddFamily(8, 8, 1)
-            sage: G.simple_reflections()
+            sage: G = groups.misc.ShephardToddFamily(8, 8, 1)                           # needs sage.groups
+            sage: G.simple_reflections()                                                # needs sage.groups
             Finite family {}
         """
         if i not in self.index_set():
@@ -787,7 +791,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
         EXAMPLES::
 
             sage: C = ColoredPermutations(4, 3)
-            sage: C.matrix_group()                                                      # needs sage.modules
+            sage: C.matrix_group()                                                      # needs sage.modules sage.rings.number_field
             Matrix group over Cyclotomic Field of order 4 and degree 2 with 3 generators (
             [0 1 0]  [1 0 0]  [    1     0     0]
             [1 0 0]  [0 0 1]  [    0     1     0]
@@ -888,8 +892,8 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
-            sage: G = groups.misc.ShephardToddFamily(6, 3, 2)
-            sage: [x for x in G]
+            sage: G = groups.misc.ShephardToddFamily(6, 3, 2)                           # needs sage.groups
+            sage: [x for x in G]                                                        # needs sage.groups
             [[[0, 0], [1, 2]],
              [[0, 0], [2, 1]],
              [[0, 3], [1, 2]],
@@ -982,8 +986,8 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
             sage: S = ColoredPermutations(1, 3)
             sage: S.degrees()
             (2, 3)
-            sage: G = groups.misc.ShephardToddFamily(6, 2, 3)
-            sage: G.degrees()
+            sage: G = groups.misc.ShephardToddFamily(6, 2, 3)                           # needs sage.groups
+            sage: G.degrees()                                                           # needs sage.groups
             (6, 9, 12)
 
         We now check that the product of the degrees is equal to the
@@ -993,7 +997,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
             True
             sage: prod(S.degrees()) == S.cardinality()
             True
-            sage: prod(G.degrees()) == G.cardinality()
+            sage: prod(G.degrees()) == G.cardinality()                                  # needs sage.groups
             True
         """
         # For the usual symmetric group (self._m=1) we need to start at 2
@@ -1030,8 +1034,8 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
             sage: S = ColoredPermutations(1, 3)
             sage: S.codegrees()
             (1, 0)
-            sage: G = groups.misc.ShephardToddFamily(6, 2, 3)
-            sage: G.codegrees()
+            sage: G = groups.misc.ShephardToddFamily(6, 2, 3)                           # needs sage.groups
+            sage: G.codegrees()                                                         # needs sage.groups
             (12, 6, 0)
 
         TESTS:
@@ -1606,7 +1610,7 @@ class SignedPermutations(ColoredPermutations):
 
     This is a finite Coxeter group of type `B_n`::
 
-        sage: S.canonical_representation()                                              # needs sage.modules
+        sage: S.canonical_representation()                                              # needs sage.graphs sage.modules sage.rings.number_field
         Finite Coxeter group over Number Field in a with defining polynomial x^2 - 2
          with a = 1.414213562373095? with Coxeter matrix:
         [1 3 2 2]

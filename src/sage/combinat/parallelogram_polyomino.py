@@ -581,13 +581,11 @@ class _drawing_tool:
         sage: dt.draw_line([1, 1], [-1, -1])
         '\n  \\draw[color=black, line width=1] (1.000000, 1.000000) --
         (-1.000000, -1.000000);'
-
         sage: fct = lambda vec: [2*vec[0], vec[1]]
         sage: dt = _drawing_tool(opt, fct)
         sage: dt.draw_line([1, 1], [-1, -1])
         '\n  \\draw[color=black, line width=1] (2.000000, 1.000000) --
         (-2.000000, -1.000000);'
-
         sage: import copy
         sage: opt = copy.deepcopy(opt)
         sage: opt['mirror'] = [0,1]
@@ -657,12 +655,10 @@ class _drawing_tool:
             sage: dt = _drawing_tool(opt)
             sage: dt.XY([1, 1])
             [1.0, 1.0]
-
             sage: fct = lambda vec: [2*vec[0], vec[1]]
             sage: dt = _drawing_tool(opt, fct)
             sage: dt.XY([1, 1])
             [2.0, 1.0]
-
             sage: import copy
             sage: opt = copy.deepcopy(opt)
             sage: opt['mirror'] = [0, 1]
@@ -1473,11 +1469,11 @@ class ParallelogramPolyomino(ClonableList,
             [[., [[., .], [[., [., .]], .]]], [[., .], .]]
 
             sage: pp = ParallelogramPolyomino([[0, 1], [1, 0]])
-            sage: pp._to_binary_tree_Aval_Boussicault()
+            sage: pp._to_binary_tree_Aval_Boussicault()                                 # needs sage.graphs
             [., .]
 
             sage: pp = ParallelogramPolyomino([[1], [1]])
-            sage: pp._to_binary_tree_Aval_Boussicault()
+            sage: pp._to_binary_tree_Aval_Boussicault()                                 # needs sage.graphs
             .
         """
         from sage.combinat.binary_tree import BinaryTree
@@ -1532,11 +1528,11 @@ class ParallelogramPolyomino(ClonableList,
             [[., [[., .], [[., [., .]], .]]], [[., .], .]]
 
             sage: pp = ParallelogramPolyomino([[0, 1], [1, 0]])
-            sage: pp.to_binary_tree()
+            sage: pp.to_binary_tree()                                                   # needs sage.graphs
             [., .]
 
             sage: pp = ParallelogramPolyomino([[1], [1]])
-            sage: pp.to_binary_tree()
+            sage: pp.to_binary_tree()                                                   # needs sage.graphs
             .
         """
         if bijection is None or bijection == 'Aval-Boussicault':
@@ -1558,15 +1554,15 @@ class ParallelogramPolyomino(ClonableList,
         EXAMPLES::
 
             sage: pp = ParallelogramPolyomino([[0, 1], [1, 0]])
-            sage: pp._to_ordered_tree_via_dyck()
+            sage: pp._to_ordered_tree_via_dyck()                                        # needs sage.graphs
             [[]]
 
             sage: pp = ParallelogramPolyomino([[0, 1, 1], [1, 1, 0]])
-            sage: pp._to_ordered_tree_via_dyck()
+            sage: pp._to_ordered_tree_via_dyck()                                        # needs sage.graphs
             [[[]]]
 
             sage: pp = ParallelogramPolyomino([[0, 0, 1], [1, 0, 0]])
-            sage: pp._to_ordered_tree_via_dyck()
+            sage: pp._to_ordered_tree_via_dyck()                                        # needs sage.graphs
             [[], []]
 
             sage: pp = ParallelogramPolyomino(
@@ -1575,7 +1571,7 @@ class ParallelogramPolyomino(ClonableList,
             ....:         [1, 1, 0, 1, 1, 0, 0, 0, 1, 0]
             ....:     ]
             ....: )
-            sage: pp._to_ordered_tree_via_dyck()
+            sage: pp._to_ordered_tree_via_dyck()                                        # needs sage.graphs
             [[[[]], [[[]], []]], [[]]]
         """
         return self._to_dyck_delest_viennot().to_ordered_tree()
@@ -1594,17 +1590,17 @@ class ParallelogramPolyomino(ClonableList,
             ....:         [1, 1, 0, 1, 1, 0, 0, 0, 1, 0]
             ....:     ]
             ....: )
-            sage: pp._to_ordered_tree_Bou_Socci()
+            sage: pp._to_ordered_tree_Bou_Socci()                                       # needs sage.graphs
             [[[[[]], [[[]]]]], [[]]]
-            sage: pp.to_ordered_tree(bijection='Boussicault-Socci')
+            sage: pp.to_ordered_tree(bijection='Boussicault-Socci')                     # needs sage.graphs
             [[[[[]], [[[]]]]], [[]]]
 
             sage: pp = ParallelogramPolyomino([[0, 1], [1, 0]])
-            sage: pp._to_ordered_tree_Bou_Socci()
+            sage: pp._to_ordered_tree_Bou_Socci()                                       # needs sage.graphs
             [[]]
 
             sage: pp = ParallelogramPolyomino([[1], [1]])
-            sage: pp._to_ordered_tree_Bou_Socci()
+            sage: pp._to_ordered_tree_Bou_Socci()                                       # needs sage.graphs
             []
         """
         from sage.combinat.ordered_tree import OrderedTree
@@ -1722,15 +1718,15 @@ class ParallelogramPolyomino(ClonableList,
             ....:         [1, 1, 0, 1, 1, 0, 0, 0, 1, 0]
             ....:     ]
             ....: )
-            sage: pp.to_ordered_tree()
+            sage: pp.to_ordered_tree()                                                  # needs sage.graphs
             [[[[[]], [[[]]]]], [[]]]
 
             sage: pp = ParallelogramPolyomino([[0, 1], [1, 0]])
-            sage: pp.to_ordered_tree()
+            sage: pp.to_ordered_tree()                                                  # needs sage.graphs
             [[]]
 
             sage: pp = ParallelogramPolyomino([[1], [1]])
-            sage: pp.to_ordered_tree()
+            sage: pp.to_ordered_tree()                                                  # needs sage.graphs
             []
 
             sage: pp = ParallelogramPolyomino(
@@ -1739,7 +1735,7 @@ class ParallelogramPolyomino(ClonableList,
             ....:         [1, 1, 0, 1, 1, 0, 0, 0, 1, 0]
             ....:     ]
             ....: )
-            sage: pp.to_ordered_tree('via dyck and Delest-Viennot')
+            sage: pp.to_ordered_tree('via dyck and Delest-Viennot')                     # needs sage.graphs
             [[[[]], [[[]], []]], [[]]]
         """
         if bijection is None or bijection == 'Boussicault-Socci':
