@@ -69,6 +69,8 @@ def class_graph(top, depth=5, name_filter=None, classes=None, as_graph=True):
        mapping each class name to the list of names of its bases. This
        can be emulated by setting the option ``as_graph`` to ``False``::
 
+        sage: # needs sage.rings.padics
+        sage: import sage.rings.polynomial.padics
         sage: class_graph(sage.rings.polynomial.padics, depth=2, as_graph=False)
         {'Polynomial_padic': ['Polynomial'],
          'Polynomial_padic_capped_relative_dense': ['Polynomial_generic_cdv',
@@ -82,7 +84,7 @@ def class_graph(top, depth=5, name_filter=None, classes=None, as_graph=True):
 
     TESTS::
 
-        sage: G = class_graph(sage.rings.polynomial.padics, depth=2); G
+        sage: G = class_graph(sage.rings.polynomial.padics, depth=2); G                 # needs sage.rings.padics
         Digraph on 6 vertices
     """
     # This function descends recursively down the submodules of the

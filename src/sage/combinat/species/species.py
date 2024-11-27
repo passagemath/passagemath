@@ -336,7 +336,7 @@ class GenericCombinatorialSpecies(SageObject):
             sage: WP = species.SubsetSpecies()
             sage: P2 = E2*E
             sage: G = WP.functorial_composition(P2)
-            sage: G.isotype_generating_series()[0:5]                                    # needs sage.modules
+            sage: G.isotype_generating_series()[0:5]                                    # needs sage.libs.pari sage.modules
             [1, 1, 2, 4, 11]
         """
         from .functorial_composition_species import FunctorialCompositionSpecies

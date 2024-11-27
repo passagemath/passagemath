@@ -477,6 +477,7 @@ def test_executable(args, input='', timeout=100.0, pydebug_ignore_warnings=False
         ...
         cython: error: cython: Need at least one source file
 
+        sage: # needs sage.symbolic
         sage: def has_tty():
         ....:     try:
         ....:         os.open(os.ctermid(), os.O_RDONLY)
@@ -493,6 +494,7 @@ def test_executable(args, input='', timeout=100.0, pydebug_ignore_warnings=False
         sage: ret
         0
 
+        sage: # needs sage.symbolic
         sage: (out, err, ret) = test_executable(["sage", "--lisp"], "(* 12345 54321)\n")
         sage: out.find("Embeddable Common-Lisp") >= 0
         True
@@ -503,6 +505,7 @@ def test_executable(args, input='', timeout=100.0, pydebug_ignore_warnings=False
         sage: ret
         0
 
+        sage: # needs sage.libs.gap
         sage: # long time
         sage: (out, err, ret) = test_executable([
         ....:     "sage", "--gap", "-q"], "Size(SymmetricGroup(5));\n")
@@ -520,6 +523,7 @@ def test_executable(args, input='', timeout=100.0, pydebug_ignore_warnings=False
         sage: ret                                                   # long time  # optional - gdb
         0
 
+        sage: # needs sage.libs.eclib
         sage: (out, err, ret) = test_executable(["sage", "--mwrank", "-v0", "-q"], "0 0 0 0 1\n")
         sage: out
         'Curve [0,0,0,0,1] :\tRank = 0\n\n'
@@ -528,6 +532,7 @@ def test_executable(args, input='', timeout=100.0, pydebug_ignore_warnings=False
         sage: ret
         0
 
+        sage: # needs sage.libs.singular
         sage: (out, err, ret) = test_executable(["sage", "--singular"], "12345*54321;\n")
         sage: out.find("A Computer Algebra System for Polynomial Computations") >= 0
         True
@@ -541,6 +546,7 @@ def test_executable(args, input='', timeout=100.0, pydebug_ignore_warnings=False
     Test GP using the ``-f`` option which prevents the reading of a ``.gprc``
     configuration file::
 
+        sage: # needs sage.libs.pari
         sage: (out, err, ret) = test_executable(["sage", "--gp", "-f"], "3^33\nquit(42)\n")
         sage: out.find("PARI/GP") >= 0
         True

@@ -2115,7 +2115,7 @@ class Stream_plethysm(Stream_binary):
 
     EXAMPLES::
 
-        sage: # needs sage.modules
+        sage: # needs lrcalc sage.modules
         sage: from sage.data_structures.stream import Stream_function, Stream_plethysm
         sage: s = SymmetricFunctions(QQ).s()
         sage: p = SymmetricFunctions(QQ).p()
@@ -2139,7 +2139,7 @@ class Stream_plethysm(Stream_binary):
     This class also handles the plethysm of an exact stream with a
     stream of order `0`::
 
-        sage: # needs sage.modules
+        sage: # needs lrcalc sage.modules
         sage: from sage.data_structures.stream import Stream_exact
         sage: f = Stream_exact([s[1]], order=1)
         sage: g = Stream_function(lambda n: s[n], True, 0)
@@ -2151,7 +2151,7 @@ class Stream_plethysm(Stream_binary):
 
     Check corner cases::
 
-        sage: # needs sage.modules
+        sage: # needs lrcalc sage.modules
         sage: f0 = Stream_exact([p([])])
         sage: f1 = Stream_exact([p[1]], order=1)
         sage: f2 = Stream_exact([p[2]], order=2 )
@@ -2165,7 +2165,7 @@ class Stream_plethysm(Stream_binary):
 
     Check that degree one elements are treated in the correct way::
 
-        sage: # needs sage.modules
+        sage: # needs lrcalc sage.modules
         sage: R.<a1,a2,a11,b1,b21,b111> = QQ[]; p = SymmetricFunctions(R).p()
         sage: f_s = a1*p[1] + a2*p[2] + a11*p[1,1]
         sage: g_s = b1*p[1] + b21*p[2,1] + b111*p[1,1,1]
@@ -2178,11 +2178,11 @@ class Stream_plethysm(Stream_binary):
         sage: r_s == sum(r[n] for n in range(2*(r_s.degree()+1)))
         True
 
-        sage: r_s - f_s(g_s, include=[])                                                # needs sage.modules
+        sage: r_s - f_s(g_s, include=[])                                                # needs lrcalc sage.modules
         (a2*b1^2-a2*b1)*p[2] + (a2*b111^2-a2*b111)*p[2, 2, 2] + (a2*b21^2-a2*b21)*p[4, 2]
 
-        sage: r2 = Stream_plethysm(f, g, True, p, include=[])                           # needs sage.modules
-        sage: r_s - sum(r2[n] for n in range(2*(r_s.degree()+1)))                       # needs sage.modules
+        sage: r2 = Stream_plethysm(f, g, True, p, include=[])                           # needs lrcalc sage.modules
+        sage: r_s - sum(r2[n] for n in range(2*(r_s.degree()+1)))                       # needs lrcalc sage.modules
         (a2*b1^2-a2*b1)*p[2] + (a2*b111^2-a2*b111)*p[2, 2, 2] + (a2*b21^2-a2*b21)*p[4, 2]
     """
     def __init__(self, f, g, is_sparse, p, ring=None, include=None, exclude=None):

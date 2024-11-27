@@ -743,6 +743,8 @@ class Rings(CategoryWithAxiom):
                 sage: Q.ideal_monoid()
                 Monoid of ideals of Quotient of Free Algebra on 3 generators (x, y, z)
                  over Integer Ring by the ideal (x*y + y*z, x^2 + x*y - y*x - y^2)
+
+                sage: # needs sage.combinat sage.libs.singular sage.modules
                 sage: F.<x,y,z> = FreeAlgebra(ZZ, implementation='letterplace')
                 sage: I = F * [x*y + y*z, x^2 + x*y - y*x - y^2] * F
                 sage: Q = F.quo(I)

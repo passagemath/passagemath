@@ -1057,7 +1057,7 @@ class IndexedFreeAbelianMonoid(IndexedMonoid):
 
             sage: F = lie_algebras.VirasoroAlgebra(QQ).pbw_basis().indices(); F         # needs sage.combinat sage.modules
             Free abelian monoid indexed by Disjoint union of Family ({'c'}, Integer Ring)
-            sage: F.gen('c')
+            sage: F.gen('c')                                                            # needs sage.combinat sage.modules
             PBW['c']
         """
         if x not in self._indices:

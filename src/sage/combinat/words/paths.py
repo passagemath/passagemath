@@ -110,6 +110,7 @@ Some built-in combinatorial classes of paths::
 
 ::
 
+    sage: # needs sage.rings.number_field
     sage: P = WordPaths('abcdef', steps='triangle_grid')
     sage: p = P('babaddefadabcadefaadfafabacdefa')
     sage: p.plot()                                                                      # needs sage.plot
@@ -282,7 +283,7 @@ def WordPaths(alphabet, steps=None):
         Word Paths in North and East steps
         sage: WordPaths(range(4))
         Word Paths on the square grid
-        sage: WordPaths(range(6))
+        sage: WordPaths(range(6))                                                       # needs sage.rings.number_field
         Word Paths on the hexagonal grid
 
     There are many type of built-in steps...
@@ -301,9 +302,9 @@ def WordPaths(alphabet, steps=None):
 
     On a six letters alphabet::
 
-        sage: WordPaths('abcdef', steps='hexagonal_grid')
+        sage: WordPaths('abcdef', steps='hexagonal_grid')                               # needs sage.rings.number_field
         Word Paths on the hexagonal grid
-        sage: WordPaths('abcdef', steps='triangle_grid')
+        sage: WordPaths('abcdef', steps='triangle_grid')                                # needs sage.rings.number_field
         Word Paths on the triangle grid
         sage: WordPaths('abcdef', steps='cube_grid')
         Word Paths on the cube grid
@@ -576,8 +577,8 @@ class WordPaths_all(FiniteWords):
             sage: d = WordPaths('abcd').letters_to_steps()
             sage: sorted(d.items())
             [('a', (1, 0)), ('b', (0, 1)), ('c', (-1, 0)), ('d', (0, -1))]
-            sage: d = WordPaths('abcdef').letters_to_steps()
-            sage: sorted(d.items())
+            sage: d = WordPaths('abcdef').letters_to_steps()                            # needs sage.rings.number_field
+            sage: sorted(d.items())                                                     # needs sage.rings.number_field
             [('a', (1, 0)),
              ('b', (1/2, 1/2*sqrt3)),
              ('c', (-1/2, 1/2*sqrt3)),
@@ -599,11 +600,11 @@ class WordPaths_all(FiniteWords):
             Ambient free module of rank 2 over the principal ideal domain Integer Ring
             sage: WordPaths('abcd',steps='square_grid').vector_space()
             Ambient free module of rank 2 over the principal ideal domain Integer Ring
-            sage: WordPaths('abcdef',steps='hexagonal_grid').vector_space()
+            sage: WordPaths('abcdef',steps='hexagonal_grid').vector_space()             # needs sage.rings.number_field
             Vector space of dimension 2 over Number Field in sqrt3 with defining polynomial x^2 - 3 with sqrt3 = 1.732050807568878?
             sage: WordPaths('abcdef',steps='cube_grid').vector_space()
             Ambient free module of rank 3 over the principal ideal domain Integer Ring
-            sage: WordPaths('abcdef',steps='triangle_grid').vector_space()
+            sage: WordPaths('abcdef',steps='triangle_grid').vector_space()              # needs sage.rings.number_field
             Vector space of dimension 2 over Number Field in sqrt3 with defining polynomial x^2 - 3 with sqrt3 = 1.732050807568878?
         """
         return self._vector_space
@@ -693,9 +694,9 @@ class WordPaths_triangle_grid(WordPaths_all):
         EXAMPLES::
 
             sage: from sage.combinat.words.paths import WordPaths_triangle_grid
-            sage: P = WordPaths_triangle_grid('abcdef'); P
+            sage: P = WordPaths_triangle_grid('abcdef'); P                              # needs sage.rings.number_field
             Word Paths on the triangle grid
-            sage: P == loads(dumps(P))
+            sage: P == loads(dumps(P))                                                  # needs sage.rings.number_field
             True
         """
         K = QuadraticField(3, 'sqrt3')
@@ -727,6 +728,7 @@ class WordPaths_triangle_grid(WordPaths_all):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: d = WordPaths('abcdef', steps='triangle')._element_classes
             sage: len(d)
             7
@@ -750,7 +752,7 @@ class WordPaths_triangle_grid(WordPaths_all):
         EXAMPLES::
 
             sage: from sage.combinat.words.paths import WordPaths_triangle_grid
-            sage: WordPaths_triangle_grid('abcdef').__repr__()
+            sage: WordPaths_triangle_grid('abcdef').__repr__()                          # needs sage.rings.number_field
             'Word Paths on the triangle grid'
         """
         return "Word Paths on the triangle grid"
@@ -772,9 +774,9 @@ class WordPaths_hexagonal_grid(WordPaths_triangle_grid):
         EXAMPLES::
 
             sage: from sage.combinat.words.paths import WordPaths_hexagonal_grid
-            sage: P = WordPaths_hexagonal_grid('abcdef'); P
+            sage: P = WordPaths_hexagonal_grid('abcdef'); P                             # needs sage.rings.number_field
             Word Paths on the hexagonal grid
-            sage: P == loads(dumps(P))
+            sage: P == loads(dumps(P))                                                  # needs sage.rings.number_field
             True
         """
         # Construction of the class
@@ -795,6 +797,7 @@ class WordPaths_hexagonal_grid(WordPaths_triangle_grid):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: d = WordPaths('abcdef', steps='hexagon')._element_classes
             sage: type(d)
             <class 'dict'>
@@ -817,8 +820,8 @@ class WordPaths_hexagonal_grid(WordPaths_triangle_grid):
         r"""
         EXAMPLES::
 
-            sage: from sage.combinat.words.paths import WordPaths_hexagonal_grid
-            sage: WordPaths_hexagonal_grid('abcdef').__repr__()
+            sage: from sage.combinat.words.paths import WordPaths_hexagonal_grid        # needs sage.rings.number_field
+            sage: WordPaths_hexagonal_grid('abcdef').__repr__()                         # needs sage.rings.number_field
             'Word Paths on the hexagonal grid'
         """
         return "Word Paths on the hexagonal grid"
@@ -1094,6 +1097,7 @@ class FiniteWordPath_all(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: WordPaths('abcdef')('abcdef').start_point()
             (0, 0)
             sage: WordPaths('abcdef', steps='cube_grid')('abcdef').start_point()
@@ -1111,6 +1115,7 @@ class FiniteWordPath_all(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: WordPaths('abcdef')('abababab').end_point()
             (6, 2*sqrt3)
             sage: WordPaths('abAB')('abababab').end_point()
@@ -1138,6 +1143,7 @@ class FiniteWordPath_all(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: WordPaths('abcdef')('abababab').directive_vector()
             (6, 2*sqrt3)
             sage: WordPaths('abAB')('abababab').directive_vector()
@@ -1185,7 +1191,8 @@ class FiniteWordPath_all(SageObject):
 
         EXAMPLES::
 
-            sage: P = WordPaths('abcdef',steps='triangle_grid');P
+            sage: # needs sage.rings.number_field
+            sage: P = WordPaths('abcdef', steps='triangle_grid'); P
             Word Paths on the triangle grid
             sage: P('abc').is_simple()
             True
@@ -1218,6 +1225,7 @@ class FiniteWordPath_all(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: P = WordPaths('abcdef')
             sage: p = P('abcde')
             sage: p.tikz_trajectory()
@@ -1247,6 +1255,7 @@ class FiniteWordPath_all(SageObject):
 
         Projected points of the Rauzy fractal::
 
+            sage: # needs sage.rings.number_field
             sage: s = WordMorphism('1->12,2->13,3->1')
             sage: D = s.fixed_point('1')
             sage: v = s.pisot_eigenvector_right()
@@ -1319,6 +1328,7 @@ class FiniteWordPath_all(SageObject):
 
         The Rauzy fractal::
 
+            sage: # needs sage.rings.number_field
             sage: s = WordMorphism('1->12,2->13,3->1')
             sage: D = s.fixed_point('1')
             sage: v = s.pisot_eigenvector_right()
@@ -1330,33 +1340,34 @@ class FiniteWordPath_all(SageObject):
         In this case, the abelianized vector doesn't give a good
         projection::
 
-            sage: w.plot_projection()  # long time (2s)
+            sage: w.plot_projection()  # long time (2s)                                 # needs sage.rings.number_field
             Graphics object consisting of 200 graphics primitives
 
         You can project only the letters you want::
 
-            sage: w.plot_projection(v, letters='12')  # long time (2s)
+            sage: w.plot_projection(v, letters='12')  # long time (2s)                  # needs sage.rings.number_field
             Graphics object consisting of 168 graphics primitives
 
         You can increase or decrease the precision of the computations by
         changing the ring of the projection matrix::
 
-            sage: w.plot_projection(v, ring=RealField(20))  # long time (2s)
+            sage: w.plot_projection(v, ring=RealField(20))  # long time (2s)            # needs sage.rings.number_field
             Graphics object consisting of 200 graphics primitives
 
         You can change the size of the points::
 
-            sage: w.plot_projection(v, size=30)  # long time (2s)
+            sage: w.plot_projection(v, size=30)  # long time (2s)                       # needs sage.rings.number_field
             Graphics object consisting of 200 graphics primitives
 
         You can assign the color of a letter to the projected prefix to the
         right or the left of the letter::
 
-            sage: w.plot_projection(v, kind='left')  # long time (2s)
+            sage: w.plot_projection(v, kind='left')  # long time (2s)                   # needs sage.rings.number_field
             Graphics object consisting of 200 graphics primitives
 
         To remove the axis, do like this::
 
+            sage: # needs sage.rings.number_field
             sage: r = w.plot_projection(v)                                              # needs sage.plot
             sage: r.axes(False)                                                         # needs sage.plot
             sage: r                             # long time (2s)                        # needs sage.plot
@@ -1364,12 +1375,14 @@ class FiniteWordPath_all(SageObject):
 
         You can assign different colors to each letter::
 
+            sage: # needs sage.rings.number_field
             sage: color = {'1': 'purple', '2': (.2,.3,.4), '3': 'magenta'}
             sage: w.plot_projection(v, color=color)     # long time (2s)                # needs sage.plot
             Graphics object consisting of 200 graphics primitives
 
         The 3d-Rauzy fractal::
 
+            sage: # needs sage.rings.number_field
             sage: s = WordMorphism('1->12,2->13,3->14,4->1')
             sage: D = s.fixed_point('1')
             sage: v = s.pisot_eigenvector_right()
@@ -1380,6 +1393,7 @@ class FiniteWordPath_all(SageObject):
 
         The dimension of vector space of the parent must be 3 or 4::
 
+            sage: # needs sage.rings.number_field
             sage: P = WordPaths('ab', [(1, 0), (0, 1)])
             sage: p = P('aabbabbab')
             sage: p.plot_projection()                                                   # needs sage.plot
@@ -1426,6 +1440,7 @@ class FiniteWordPath_all(SageObject):
 
         The projected path of the tribonacci word::
 
+            sage: # needs sage.rings.number_field
             sage: s = WordMorphism('1->12,2->13,3->1')
             sage: D = s.fixed_point('1')
             sage: v = s.pisot_eigenvector_right()
@@ -1440,6 +1455,7 @@ class FiniteWordPath_all(SageObject):
         The ``ring`` argument allows to change the precision of the
         projected steps::
 
+            sage: # needs sage.rings.number_field
             sage: p = w.projected_path(v, RealField(10))
             sage: p
             Path: 1213121121312121312112131213121121312121...
@@ -1535,6 +1551,7 @@ class FiniteWordPath_2d(FiniteWordPath_all):
 
         A path in the triangle grid::
 
+            sage: # needs sage.rings.number_field
             sage: P = WordPaths('abcdef', steps='triangle_grid')
             sage: P('abcdedededefab').plot()                                            # needs sage.plot
             Graphics object consisting of 3 graphics primitives
@@ -1610,7 +1627,8 @@ class FiniteWordPath_2d(FiniteWordPath_all):
 
         ::
 
-            sage: P = WordPaths('abcdef',steps='triangle')
+            sage: # needs sage.rings.number_field
+            sage: P = WordPaths('abcdef', steps='triangle')
             sage: p =  P('abcdef')
             sage: a = p.animate(); print(a)                                             # needs sage.plot
             Animation with 8 frames
@@ -1777,8 +1795,8 @@ class FiniteWordPath_2d(FiniteWordPath_all):
             sage: p = DyckPaths('abaabb')
             sage: p.height()
             2
-            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
-            sage: w.height()
+            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')                # needs sage.rings.number_field
+            sage: w.height()                                                            # needs sage.rings.number_field
             2.59807621135332
         """
         return self.ymax() - self.ymin()
@@ -1840,8 +1858,8 @@ class FiniteWordPath_2d(FiniteWordPath_all):
             sage: p = DyckPaths('abaabb')
             sage: p.width()
             6
-            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
-            sage: w.width()
+            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')             # needs sage.rings.number_field
+            sage: w.width()                                                          # needs sage.rings.number_field
             4.50000000000000
         """
         return self.xmax() - self.xmin()
@@ -1891,8 +1909,8 @@ class FiniteWordPath_2d(FiniteWordPath_all):
             sage: p = DyckPaths('abaabb')
             sage: p.xmin()
             0
-            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
-            sage: w.xmin()
+            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')              # needs sage.rings.number_field
+            sage: w.xmin()                                                            # needs sage.rings.number_field
             0.000000000000000
         """
         return min(x for (x, _) in self.points())
@@ -1918,8 +1936,8 @@ class FiniteWordPath_2d(FiniteWordPath_all):
             sage: p = DyckPaths('abaabb')
             sage: p.ymin()
             0
-            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
-            sage: w.ymin()
+            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')              # needs sage.rings.number_field
+            sage: w.ymin()                                                            # needs sage.rings.number_field
             0.000000000000000
         """
         return min(y for (_, y) in self.points())
@@ -1945,8 +1963,8 @@ class FiniteWordPath_2d(FiniteWordPath_all):
             sage: p = DyckPaths('abaabb')
             sage: p.xmax()
             6
-            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
-            sage: w.xmax()
+            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')                # needs sage.rings.number_field
+            sage: w.xmax()                                                              # needs sage.rings.number_field
             4.50000000000000
         """
         return max(x for (x, _) in self.points())
@@ -1972,8 +1990,8 @@ class FiniteWordPath_2d(FiniteWordPath_all):
             sage: p = DyckPaths('abaabb')
             sage: p.ymax()
             2
-            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
-            sage: w.ymax()
+            sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')                # needs sage.rings.number_field
+            sage: w.ymax()                                                              # needs sage.rings.number_field
             2.59807621135332
         """
         return max(y for (_, y) in self.points())
@@ -2228,6 +2246,7 @@ class FiniteWordPath_triangle_grid(FiniteWordPath_2d):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
             sage: w.xmin()
             0.000000000000000
@@ -2243,6 +2262,7 @@ class FiniteWordPath_triangle_grid(FiniteWordPath_2d):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
             sage: w.ymin()
             0.000000000000000
@@ -2258,6 +2278,7 @@ class FiniteWordPath_triangle_grid(FiniteWordPath_2d):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
             sage: w.xmax()
             4.50000000000000
@@ -2273,6 +2294,7 @@ class FiniteWordPath_triangle_grid(FiniteWordPath_2d):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: w = WordPaths('abcABC', steps='triangle')('ababcaaBC')
             sage: w.ymax()
             2.59807621135332
@@ -2296,6 +2318,7 @@ class FiniteWordPath_hexagonal_grid(FiniteWordPath_triangle_grid):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: F = WordPaths('abcdef', steps='hexagon'); F
             Word Paths on the hexagonal grid
             sage: f = F('aaabbbccddef'); f
@@ -2303,7 +2326,7 @@ class FiniteWordPath_hexagonal_grid(FiniteWordPath_triangle_grid):
 
         ::
 
-            sage: f == loads(dumps(f))
+            sage: f == loads(dumps(f))                                                  # needs sage.rings.number_field
             True
         """
         super().__init__(parent, *args, **kwds)
@@ -2594,6 +2617,7 @@ class FiniteWordPath_triangle_grid_list(WordDatatype_list, FiniteWordPath_triang
     r"""
     TESTS::
 
+        sage: # needs sage.rings.number_field
         sage: P = WordPaths('abcdef', steps='triangle')
         sage: p = P(['a','b','b']); p
         Path: abb
@@ -2609,6 +2633,7 @@ class FiniteWordPath_triangle_grid_str(WordDatatype_str, FiniteWordPath_triangle
     r"""
     TESTS::
 
+        sage: # needs sage.rings.number_field
         sage: P = WordPaths('abcdef', steps='triangle')
         sage: p = P('abb'); p
         Path: abb
@@ -2624,6 +2649,7 @@ class FiniteWordPath_triangle_grid_tuple(WordDatatype_tuple, FiniteWordPath_tria
     r"""
     TESTS::
 
+        sage: # needs sage.rings.number_field
         sage: P = WordPaths('abcdef', steps='triangle')
         sage: p = P(('a','b','b')); p
         Path: abb
@@ -2657,6 +2683,7 @@ class FiniteWordPath_hexagonal_grid_list(WordDatatype_list, FiniteWordPath_hexag
     r"""
     TESTS::
 
+        sage: # needs sage.rings.number_field
         sage: P = WordPaths('abcdef', steps='hexagon')
         sage: p = P(['a','b','b']); p
         Path: abb
@@ -2672,6 +2699,7 @@ class FiniteWordPath_hexagonal_grid_str(WordDatatype_str, FiniteWordPath_hexagon
     r"""
     TESTS::
 
+        sage: # needs sage.rings.number_field
         sage: P = WordPaths('abcdef', steps='hexagon')
         sage: p = P('abb'); p
         Path: abb
@@ -2687,6 +2715,7 @@ class FiniteWordPath_hexagonal_grid_tuple(WordDatatype_tuple, FiniteWordPath_hex
     r"""
     TESTS::
 
+        sage: # needs sage.rings.number_field
         sage: P = WordPaths('abcdef', steps='hexagon')
         sage: p = P(('a','b','b')); p
         Path: abb

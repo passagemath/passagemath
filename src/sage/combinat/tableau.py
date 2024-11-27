@@ -3801,8 +3801,8 @@ class Tableau(ClonableList, metaclass=InheritComparisonClasscallMetaclass):
             [((0, 2), 2), ((0, 3), 3), ((0, 5), 4), ((1, 3), 1), ((1, 5), 2), ((2, 4), 1)]
 
             sage: B = crystals.Tableaux("A4", shape=[4,3,2,1])                          # needs sage.modules
-            sage: t = B[31].to_tableau()                                                # needs sage.modules
-            sage: sorted(t._segments().items())                                         # needs sage.modules
+            sage: t = B[31].to_tableau()                                                # needs sage.graphs sage.modules
+            sage: sorted(t._segments().items())                                         # needs sage.graphs sage.modules
             [((0, 5), 3), ((1, 4), 2), ((2, 4), 1)]
         """
         segments = {}
@@ -3833,8 +3833,8 @@ class Tableau(ClonableList, metaclass=InheritComparisonClasscallMetaclass):
             6
 
             sage: B = crystals.Tableaux("A4", shape=[4,3,2,1])                          # needs sage.modules
-            sage: t = B[31].to_tableau()                                                # needs sage.modules
-            sage: t.seg()                                                               # needs sage.modules
+            sage: t = B[31].to_tableau()                                                # needs sage.graphs sage.modules
+            sage: t.seg()                                                               # needs sage.graphs sage.modules
             3
         """
         return len(self._segments())
@@ -3861,8 +3861,8 @@ class Tableau(ClonableList, metaclass=InheritComparisonClasscallMetaclass):
             3
 
             sage: B = crystals.Tableaux("A4", shape=[4,3,2,1])                          # needs sage.modules
-            sage: t = B[32].to_tableau()                                                # needs sage.modules
-            sage: t.flush()                                                             # needs sage.modules
+            sage: t = B[32].to_tableau()                                                # needs sage.graphs sage.modules
+            sage: t.flush()                                                             # needs sage.graphs sage.modules
             4
         """
         for i in range(len(self)-1):

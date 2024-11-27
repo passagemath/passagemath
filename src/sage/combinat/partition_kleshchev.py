@@ -940,6 +940,7 @@ class KleshchevCrystalMixin:
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: C = crystals.KleshchevPartitions(3, [0,2], convention="left regular")
             sage: x = C([[5,4,1], [3,2,1,1]])
             sage: x.weight()
@@ -947,6 +948,7 @@ class KleshchevCrystalMixin:
             sage: x.Phi() - x.Epsilon()
             3*Lambda[0] - Lambda[1]
 
+            sage: # needs sage.graphs
             sage: C = crystals.KleshchevPartitions(3, [0,2], convention="right regular")
             sage: y = C([[5,1,1], [4,2,2,1,1]])
             sage: y.weight()
@@ -954,6 +956,7 @@ class KleshchevCrystalMixin:
             sage: y.Phi() - y.Epsilon()
             6*Lambda[0] - 4*Lambda[1]
 
+            sage: # needs sage.graphs
             sage: C = crystals.KleshchevPartitions(3, [0,2], convention="left regular")
             sage: y = C([[5,1,1], [4,2,2,1,1]])
             sage: y.weight()
@@ -1354,10 +1357,10 @@ class KleshchevPartitions_all(KleshchevPartitions):
         [1, 1, 1, 1]
         sage: mg.f_string([0,1,2,0])
         [2, 2]
-        sage: GC = C.subcrystal(max_depth=5).digraph()
-        sage: B = crystals.LSPaths(['A',2,1], [1,0,0])
-        sage: GB = B.subcrystal(max_depth=5).digraph()
-        sage: GC.is_isomorphic(GB, edge_labels=True)
+        sage: GC = C.subcrystal(max_depth=5).digraph()                                  # needs sage.graphs
+        sage: B = crystals.LSPaths(['A',2,1], [1,0,0])                                  # needs sage.graphs
+        sage: GB = B.subcrystal(max_depth=5).digraph()                                  # needs sage.graphs
+        sage: GC.is_isomorphic(GB, edge_labels=True)                                    # needs sage.graphs
         True
 
     Now a higher level crystal::
@@ -1376,10 +1379,10 @@ class KleshchevPartitions_all(KleshchevPartitions):
         ([1, 1, 1, 1], [])
         sage: mg.f_string([2,0,1,0])
         ([2], [2])
-        sage: GC = C.subcrystal(max_depth=5).digraph()
-        sage: B = crystals.LSPaths(['A',2,1], [1,0,1])
-        sage: GB = B.subcrystal(max_depth=5).digraph()
-        sage: GC.is_isomorphic(GB, edge_labels=True)
+        sage: GC = C.subcrystal(max_depth=5).digraph()                                  # needs sage.graphs
+        sage: B = crystals.LSPaths(['A',2,1], [1,0,1])                                  # needs sage.graphs
+        sage: GB = B.subcrystal(max_depth=5).digraph()                                  # needs sage.graphs
+        sage: GC.is_isomorphic(GB, edge_labels=True)                                    # needs sage.graphs
         True
 
     The ordering of the residues gives a different representation of the
@@ -1393,8 +1396,8 @@ class KleshchevPartitions_all(KleshchevPartitions):
         ([1, 1, 1], [1])
         sage: mg2.f_string([2,0,1,0])
         ([2, 1], [1])
-        sage: GC2 = C2.subcrystal(max_depth=5).digraph()
-        sage: GC.is_isomorphic(GC2, edge_labels=True)
+        sage: GC2 = C2.subcrystal(max_depth=5).digraph()                                # needs sage.graphs
+        sage: GC.is_isomorphic(GC2, edge_labels=True)                                   # needs sage.graphs
         True
 
     TESTS:
@@ -1406,12 +1409,12 @@ class KleshchevPartitions_all(KleshchevPartitions):
         sage: CLG = crystals.KleshchevPartitions(3, [2,0], convention="left regular")
         sage: CRG = crystals.KleshchevPartitions(3, [2,0], convention="right regular")
         sage: C = [CLS, CRS, CLG, CRG]
-        sage: G = [B.subcrystal(max_depth=6).digraph() for B in C]
-        sage: G[0].is_isomorphic(G[1], edge_labels=True)
+        sage: G = [B.subcrystal(max_depth=6).digraph() for B in C]                      # needs sage.graphs
+        sage: G[0].is_isomorphic(G[1], edge_labels=True)                                # needs sage.graphs
         True
-        sage: G[0].is_isomorphic(G[2], edge_labels=True)
+        sage: G[0].is_isomorphic(G[2], edge_labels=True)                                # needs sage.graphs
         True
-        sage: G[0].is_isomorphic(G[3], edge_labels=True)
+        sage: G[0].is_isomorphic(G[3], edge_labels=True)                                # needs sage.graphs
         True
 
     REFERENCES:
@@ -1663,6 +1666,7 @@ class KleshchevPartitions_size(KleshchevPartitions):
         and that the result is equal to the number of elements in
         the crystal at the corresponding depth::
 
+            sage: # needs sage.graphs
             sage: B = crystals.LSPaths(['A',2,1], [1,0,1])
             sage: nd4 = (B.subcrystal(max_depth=4).cardinality()
             ....:        - B.subcrystal(max_depth=3).cardinality())

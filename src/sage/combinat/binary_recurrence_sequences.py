@@ -12,7 +12,7 @@ EXAMPLES::
     sage: R = BinaryRecurrenceSequence(1,1)        #the Fibonacci sequence
     sage: R(137)        #the 137th term of the Fibonacci sequence
     19134702400093278081449423917
-    sage: R(137) == fibonacci(137)
+    sage: R(137) == fibonacci(137)                                                      # needs sage.libs.pari
     True
     sage: [R(i) % 4 for i in range(12)]
     [0, 1, 1, 2, 3, 1, 0, 1, 1, 2, 3, 1]
@@ -848,6 +848,7 @@ def _next_good_prime(p, R, qq, patience, qqold):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: R = BinaryRecurrenceSequence(1,1)
         sage: sage.combinat.binary_recurrence_sequences._next_good_prime(7,R,1,100,1)        #ran out of patience to search for good primes
         False

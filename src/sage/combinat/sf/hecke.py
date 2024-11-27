@@ -170,7 +170,7 @@ class HeckeCharacter(SymmetricFunctionAlgebra_multiplicative):
             ....:                       for m in range(1, r+1))
             ....:                   for r in mu)
             sage: phi = qbar.module_morphism(to_schur, codomain=s)
-            sage: all(phi(qbar[mu]) == s(qbar[mu]) for n in range(6)
+            sage: all(phi(qbar[mu]) == s(qbar[mu]) for n in range(6)                    # needs lrcalc
             ....:     for mu in Partitions(n))
             True
         """

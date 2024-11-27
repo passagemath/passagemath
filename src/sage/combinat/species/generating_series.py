@@ -414,7 +414,7 @@ class CycleIndexSeries(LazySymmetricFunction):
 
             sage: C = species.CycleSpecies().cycle_index_series()                       # needs sage.modules
             sage: L = species.LinearOrderSpecies().cycle_index_series()                 # needs sage.modules
-            sage: L[:8] == C.derivative()[:8]                                           # needs sage.modules
+            sage: L[:8] == C.derivative()[:8]                                           # needs sage.libs.pari sage.modules
             True
         """
         return self.derivative_with_respect_to_p1(n=n)
@@ -489,7 +489,7 @@ class CycleIndexSeries(LazySymmetricFunction):
             sage: G = species.SimpleGraphSpecies().cycle_index_series() - 1             # needs sage.modules
             sage: from sage.combinat.species.generating_series import LogarithmCycleIndexSeries
             sage: CG = LogarithmCycleIndexSeries()(G)                                   # needs sage.modules
-            sage: CG.isotype_generating_series()[0:8]                                   # needs sage.modules
+            sage: CG.isotype_generating_series()[0:8]                                   # needs sage.libs.pari sage.modules
             [0, 1, 1, 2, 6, 21, 112, 853]
         """
         base_ring = self.parent().base_ring().base_ring()
@@ -556,7 +556,7 @@ class CycleIndexSeriesRing(LazySymmetricFunctions):
             sage: from sage.combinat.species.generating_series import CycleIndexSeriesRing
             sage: CycleIndexSeriesRing.options.halting_precision(12)
             sage: R = CycleIndexSeriesRing(QQ)                                          # needs sage.modules
-            sage: TestSuite(R).run()                                                    # needs sage.modules
+            sage: TestSuite(R).run()                                                    # needs sage.libs.singular sage.modules
 
             sage: CycleIndexSeriesRing.options._reset()  # reset options
         """

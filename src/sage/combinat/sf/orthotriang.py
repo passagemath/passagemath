@@ -22,7 +22,7 @@ functions from this definition.
 ::
 
     sage: s2 = SymmetricFunctions(QQ).s()
-    sage: s2([2,1])^2
+    sage: s2([2,1])^2                                                                   # needs lrcalc
     s[2, 2, 1, 1] + s[2, 2, 2] + s[3, 1, 1, 1] + 2*s[3, 2, 1] + s[3, 3] + s[4, 1, 1] + s[4, 2]
 """
 # ****************************************************************************
@@ -103,6 +103,7 @@ class SymmetricFunctionAlgebra_orthotriang(sfa.SymmetricFunctionAlgebra_generic)
 
         TESTS::
 
+            sage: # needs lrcalc
             sage: TestSuite(s).run(elements=[s[1,1]+2*s[2], s[1]+3*s[1,1]])
             sage: TestSuite(s).run(skip=["_test_associativity", "_test_prod", '_test_construction'])  # long time (7s on sage.math, 2011)
 
@@ -338,7 +339,7 @@ class OrthotriangBasisFunctor(SymmetricFunctionsFunctor):
             sage: m = Sym.m()
             sage: s = SymmetricFunctionAlgebra_orthotriang(Sym, m, zee, 's', 'Schur functions')
             sage: F, R = s.construction()  # indirect doctest
-            sage: F(QQbar)
+            sage: F(QQbar)                                                              # needs sage.rings.number_field
             Symmetric Functions over Algebraic Field in the Schur functions basis
         """
         from sage.combinat.sf.sf import SymmetricFunctions

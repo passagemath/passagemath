@@ -43,6 +43,7 @@ class SymmetricFunctionAlgebra_monomial(classical.SymmetricFunctionAlgebra_class
 
         TESTS::
 
+            sage: # needs lrcalc
             sage: m = SymmetricFunctions(QQ).m()
             sage: m == loads(dumps(m))
             True
@@ -161,6 +162,7 @@ class SymmetricFunctionAlgebra_monomial(classical.SymmetricFunctionAlgebra_class
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: m = SymmetricFunctions(QQ).m()
             sage: P = PolynomialRing(QQ, 'x', 3)
             sage: x = P.gens()

@@ -44,13 +44,13 @@ def SimpleGraphSpecies():
         sage: S = species.SimpleGraphSpecies()
         sage: S.generating_series().counts(10)
         [1, 1, 2, 8, 64, 1024, 32768, 2097152, 268435456, 68719476736]
-        sage: S.cycle_index_series()[:5]                                                # needs sage.modules
+        sage: S.cycle_index_series()[:5]                                                # needs sage.libs.pari sage.modules
         [p[],
          p[1],
          p[1, 1] + p[2],
          4/3*p[1, 1, 1] + 2*p[2, 1] + 2/3*p[3],
          8/3*p[1, 1, 1, 1] + 4*p[2, 1, 1] + 2*p[2, 2] + 4/3*p[3, 1] + p[4]]
-        sage: S.isotype_generating_series()[:6]                                         # needs sage.modules
+        sage: S.isotype_generating_series()[:6]                                         # needs sage.libs.pari sage.modules
         [1, 1, 2, 4, 11, 34]
 
     TESTS::

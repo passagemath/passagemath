@@ -175,8 +175,8 @@ class UnitalAlgebras(CategoryWithAxiom_over_base_ring):
 
             Check that :issue:`29312` is fixed::
 
-                sage: F.<x,y,z> = FreeAlgebra(QQ, implementation='letterplace')         # needs sage.combinat sage.modules
-                sage: F._coerce_map_from_base_ring()                                    # needs sage.combinat sage.modules
+                sage: F.<x,y,z> = FreeAlgebra(QQ, implementation='letterplace')         # needs sage.combinat sage.libs.singular sage.modules
+                sage: F._coerce_map_from_base_ring()                                    # needs sage.combinat sage.libs.singular sage.modules
                 Generic morphism:
                   From: Rational Field
                   To:   Free Associative Unital Algebra on 3 generators (x, y, z) over Rational Field

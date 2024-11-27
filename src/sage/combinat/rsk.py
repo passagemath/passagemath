@@ -2527,6 +2527,7 @@ class RuleStar(Rule):
 
     As an example of `\star`-insertion, we reproduce Example 28 in [MPPS2020]_::
 
+        sage: # needs sage.groups
         sage: from sage.combinat.rsk import RuleStar
         sage: p,q = RuleStar().forward_rule([1,1,2,2,4,4], [1,3,2,4,2,4])
         sage: ascii_art(p, q)
@@ -2539,6 +2540,7 @@ class RuleStar(Rule):
         sage: RSK_inverse(p, q, output='DecreasingHeckeFactorization', insertion='Star')
         (4, 2)()(4, 2)(3, 1)
 
+        sage: # needs sage.groups
         sage: from sage.combinat.crystals.fully_commutative_stable_grothendieck import DecreasingHeckeFactorization
         sage: h = DecreasingHeckeFactorization([[4, 2], [], [4, 2], [3, 1]])
         sage: RSK_inverse(*RSK(h,insertion='Star'),insertion='Star',
@@ -2561,6 +2563,7 @@ class RuleStar(Rule):
         inverse of `\star`-insertion of `(P,Q)` returns a decreasing
         factorization whose number of factors is the maximum entry of `Q`::
 
+            sage: # needs sage.groups
             sage: from sage.combinat.crystals.fully_commutative_stable_grothendieck import DecreasingHeckeFactorization
             sage: h1 = DecreasingHeckeFactorization([[],[3,1],[1]]); h1
             ()(3, 1)(1)
@@ -2686,6 +2689,7 @@ class RuleStar(Rule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: from sage.combinat.rsk import RuleStar
             sage: p,q = RuleStar().forward_rule([1,1,2,3,3], [2,3,3,1,3]); p,q
             ([[1, 3], [2, 3], [2]], [[1, 1], [2, 3], [3]])
@@ -2694,6 +2698,7 @@ class RuleStar(Rule):
             sage: p,q = RSK([1,1,2,3,3], [2,3,3,1,3], insertion=RSK.rules.Star); p,q
             ([[1, 3], [2, 3], [2]], [[1, 1], [2, 3], [3]])
 
+            sage: # needs sage.groups
             sage: from sage.combinat.crystals.fully_commutative_stable_grothendieck import DecreasingHeckeFactorization
             sage: h = DecreasingHeckeFactorization([[3, 1], [3], [3, 2]])
             sage: p,q = RSK(h, insertion=RSK.rules.Star); p,q
@@ -2703,10 +2708,12 @@ class RuleStar(Rule):
 
         Empty objects::
 
+            sage: # needs sage.groups
             sage: from sage.combinat.rsk import RuleStar
             sage: p,q = RuleStar().forward_rule([]); p,q
             ([], [])
 
+            sage: # needs sage.groups
             sage: from sage.combinat.crystals.fully_commutative_stable_grothendieck import DecreasingHeckeFactorization
             sage: h = DecreasingHeckeFactorization([[],[]])
             sage: p,q = RuleStar().forward_rule(h); p,q
@@ -2714,6 +2721,7 @@ class RuleStar(Rule):
 
         Invalid inputs::
 
+            sage: # needs sage.groups
             sage: p,q = RuleStar().forward_rule([1,1,2,3,3], [2,2,3,1,3])
             Traceback (most recent call last):
             ...
@@ -2799,6 +2807,7 @@ class RuleStar(Rule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: from sage.combinat.rsk import RuleStar
             sage: p,q = RuleStar().forward_rule([1,1,2,2,4,4], [1,3,2,4,2,4])
             sage: ascii_art(p, q)
@@ -2814,6 +2823,7 @@ class RuleStar(Rule):
 
         Empty objects::
 
+            sage: # needs sage.groups
             sage: RuleStar().backward_rule(Tableau([]), Tableau([]))
             [[], []]
             sage: RuleStar().backward_rule(Tableau([]), Tableau([]), output='word')
@@ -2931,6 +2941,7 @@ class RuleStar(Rule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: from sage.combinat.rsk import RuleStar
             sage: RuleStar()._backward_format_output([1, 1, 2, 2, 4, 4], [1, 3, 2, 4, 2, 4], 'array')
             [[1, 1, 2, 2, 4, 4], [1, 3, 2, 4, 2, 4]]

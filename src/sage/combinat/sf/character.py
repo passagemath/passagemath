@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
-# sage.doctest: needs sage.combinat sage.modules
+# sage.doctest: needs sage.combinat sage.libs.pari sage.modules
 r"""
 Characters of the symmetric group as bases of the symmetric functions
 
