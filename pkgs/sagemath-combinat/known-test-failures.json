@@ -6,7 +6,7 @@
         "ntests": 2
     },
     "sage.algebras.free_algebra": {
-        "ntests": 3
+        "ntests": 7
     },
     "sage.algebras.hecke_algebras.cubic_hecke_algebra": {
         "ntests": 31
@@ -706,11 +706,11 @@
         "ntests": 35
     },
     "sage.combinat.binary_recurrence_sequences": {
-        "ntests": 5
+        "ntests": 6
     },
     "sage.combinat.colored_permutations": {
         "failed": true,
-        "ntests": 382
+        "ntests": 366
     },
     "sage.combinat.combinat": {
         "ntests": 250
@@ -842,6 +842,9 @@
     "sage.combinat.ncsf_qsym.combinatorics": {
         "ntests": 31
     },
+    "sage.combinat.ncsf_qsym.ncsf": {
+        "ntests": 1
+    },
     "sage.combinat.necklace": {
         "ntests": 76
     },
@@ -855,7 +858,7 @@
         "ntests": 66
     },
     "sage.combinat.parallelogram_polyomino": {
-        "ntests": 10
+        "ntests": 26
     },
     "sage.combinat.parking_functions": {
         "ntests": 267
@@ -865,6 +868,9 @@
     },
     "sage.combinat.partition_algebra": {
         "ntests": 2
+    },
+    "sage.combinat.partition_kleshchev": {
+        "ntests": 14
     },
     "sage.combinat.partition_tuple": {
         "ntests": 394
@@ -932,17 +938,32 @@
     "sage.combinat.set_partition_ordered": {
         "ntests": 241
     },
+    "sage.combinat.sf.dual": {
+        "ntests": 1
+    },
     "sage.combinat.sf.elementary": {
         "ntests": 2
     },
+    "sage.combinat.sf.hall_littlewood": {
+        "ntests": 4
+    },
+    "sage.combinat.sf.hecke": {
+        "ntests": 1
+    },
     "sage.combinat.sf.homogeneous": {
         "ntests": 2
+    },
+    "sage.combinat.sf.jack": {
+        "ntests": 1
     },
     "sage.combinat.sf.monomial": {
         "ntests": 2
     },
     "sage.combinat.sf.ns_macdonald": {
         "ntests": 7
+    },
+    "sage.combinat.sf.orthotriang": {
+        "ntests": 2
     },
     "sage.combinat.sf.powersum": {
         "ntests": 5
@@ -1099,7 +1120,7 @@
         "ntests": 597
     },
     "sage.combinat.words.paths": {
-        "ntests": 29
+        "ntests": 56
     },
     "sage.combinat.words.shuffle_product": {
         "ntests": 56
