@@ -357,9 +357,9 @@ class FreeAlgebraFactory(UniqueFactory):
 
         TESTS::
 
-            sage: FreeAlgebra.create_object('4.7.1', (QQ['x','y'],))
+            sage: FreeAlgebra.create_object('4.7.1', (QQ['x','y'],))                    # needs sage.libs.singular
             Free Associative Unital Algebra on 2 generators (x, y) over Rational Field
-            sage: FreeAlgebra.create_object('4.7.1', (QQ['x','y'],)) is FreeAlgebra(QQ,['x','y'])
+            sage: FreeAlgebra.create_object('4.7.1', (QQ['x','y'],)) is FreeAlgebra(QQ,['x','y'])   # needs sage.libs.singular
             False
         """
         if len(key) == 1:
@@ -393,9 +393,9 @@ def is_FreeAlgebra(x) -> bool:
         False
         sage: is_FreeAlgebra(FreeAlgebra(ZZ,100,'x'))
         True
-        sage: is_FreeAlgebra(FreeAlgebra(ZZ,10,'x',implementation='letterplace'))
+        sage: is_FreeAlgebra(FreeAlgebra(ZZ,10,'x',implementation='letterplace'))       # needs sage.libs.singular
         True
-        sage: is_FreeAlgebra(FreeAlgebra(ZZ,10,'x',implementation='letterplace',
+        sage: is_FreeAlgebra(FreeAlgebra(ZZ,10,'x',implementation='letterplace',        # needs sage.libs.singular
         ....:                            degrees=list(range(1,11))))
         True
     """
@@ -949,12 +949,13 @@ class FreeAlgebra_generic(CombinatorialFreeModule):
 
         TESTS::
 
+            sage: # needs sage.libs.singular
             sage: S = FractionField(QQ['t'])
             sage: t = S.gen()
             sage: F.<x,y> = FreeAlgebra(S)
-            sage: K = F.g_algebra({y*x:-x*y+1+y})
+            sage: K = F.g_algebra({y*x: -x*y + 1 + y})
             sage: x,y = K.gens()
-            sage: 1+t*y*x
+            sage: 1 + t*y*x
             (-t)*x*y + t*y + (t + 1)
         """
         from sage.matrix.constructor import Matrix
