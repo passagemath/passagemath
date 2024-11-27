@@ -165,7 +165,7 @@ class sage__combinat(JoinFeature):
         2*S((1, 1, 1), (1, 1, 1)) + 2*S((1, 1, 1), (1, 1, 2))
          + 3*S((1, 1, 1), (1, 2, 2))
         sage: L = RootSystem(['A',3,1]).root_lattice()
-        sage: PIR = L.positive_imaginary_roots(); PIR
+        sage: PIR = L.positive_imaginary_roots(); PIR                                   # needs sage.graphs
         Positive imaginary roots of type ['A', 3, 1]
 
     Doctests that use lattices, semilattices, or Dynkin diagrams should use the tag
