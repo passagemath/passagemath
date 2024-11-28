@@ -47,3 +47,19 @@ Finding the installation location of a plantri program::
     In [1]: from sage.features.graph_generators import Plantri
 
     In [2]: Plantri().absolute_filename()
+    Out[2]: '.../bin/plantri'
+
+
+Using the Python interface::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-plantri[test]" ipython
+
+    In [1]: from sage.all__sagemath_plantri import *
+
+    In [2]: len(list(graphs.planar_graphs(4, minimum_edges=4)))
+    Out[2]: 4
+
+    In [3]: gen = graphs.triangulations(6, only_eulerian=True); g = next(gen)
+
+    In [4]: g.is_isomorphic(graphs.OctahedralGraph())
+    Out[4]: True
