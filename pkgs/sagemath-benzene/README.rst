@@ -36,6 +36,24 @@ What is included
 Examples
 --------
 
-Using benzene programs on the command line::
+Using the benzene program on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-benzene" sage -sh -c benzene
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-benzene[test]" sage -sh -c benzene
+
+Finding the installation location of the benzene program::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-benzene[test]" ipython
+
+    In [1]: from sage.features.graph_generators import Benzene
+
+    In [2]: Benzene().absolute_filename()
+    Out[2]: '.../bin/benzene'
+
+Using the Python interface::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-benzene[test]" ipython
+
+    In [1]: from sage.all__sagemath_benzene import *
+
+    In [2]: len(list(graphs.fusenes(9, benzenoids=True)))
+    Out[2]: 6505
