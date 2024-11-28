@@ -37,7 +37,20 @@ What is included
 Examples
 --------
 
-A quick way to try it out interactively::
+Using Macaulay 2 on the command line::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-macaulay2" sage -sh -c 'M2'
+
+Finding the installation location of Macaulay 2::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-macaulay2[test]" ipython
+
+    In [1]: from sage.features.macaulay2 import Macaulay2
+
+    In [2]: Macaulay2().absolute_filename()
+    Out[2]: '.../bin/M2'
+
+Using the Python interface::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-macaulay2[test]" ipython
 
