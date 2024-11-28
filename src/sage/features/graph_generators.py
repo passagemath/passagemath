@@ -54,7 +54,7 @@ class Plantri(Executable):
             sage: Plantri().is_functional()  # optional - plantri
             FeatureTestResult('plantri', True)
         """
-        command = ["plantri", "4"]
+        command = [self.absolute_filename(), "4"]
         try:
             lines = subprocess.check_output(command, stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as e:
@@ -101,7 +101,7 @@ class Buckygen(Executable):
             sage: Buckygen().is_functional()  # optional - buckygen
             FeatureTestResult('buckygen', True)
         """
-        command = ["buckygen", "-d", "22d"]
+        command = [self.absolute_filename(), "-d", "22d"]
         try:
             lines = subprocess.check_output(command, stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as e:
@@ -150,7 +150,7 @@ class Benzene(Executable):
             FeatureTestResult('benzene', True)
         """
         devnull = open(os.devnull, 'wb')
-        command = ["benzene", "2", "p"]
+        command = [self.absolute_filename(), "2", "p"]
         try:
             lines = subprocess.check_output(command, stderr=devnull)
         except subprocess.CalledProcessError as e:
