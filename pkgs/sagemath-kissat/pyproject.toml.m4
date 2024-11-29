@@ -3,25 +3,20 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 # Minimum requirements for the build system to execute.
 requires = [
     SPKG_INSTALL_REQUIRES_setuptools
-    SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_pkgconfig
-    SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_cython
-    SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_memory_allocator
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "passagemath-combinat"
-description = "passagemath: Algebraic combinatorics, combinatorial representation theory"
+name = "passagemath-kissat"
+description = "passagemath: Interface to the SAT solver kissat"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_gmpy2
-    SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_memory_allocator
-    SPKG_INSTALL_REQUIRES_sagemath_categories
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -31,21 +26,26 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl"]
+test = [
+    "passagemath-combinat",
+    "passagemath-repl",
+]
 
-# by library
-glucose         = ["passagemath-glucose"]
-kissat          = ["passagemath-kissat"]
-lrcalc          = [SPKG_INSTALL_REQUIRES_lrcalc_python]
-symmetrica      = []
-
-# by feature
-graphs          = ["passagemath-graphs"]
-modules         = ["passagemath-modules"]
-findstat        = [SPKG_INSTALL_REQUIRES_requests]
-
-# everything
-standard        = ["passagemath-combinat[findstat,lrcalc,symmetrica,graphs,modules]"]
+[tool.cibuildwheel.linux]
+# Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
+# so there is no clean way to refer to the repair_wheel.py script
+# https://github.com/pypa/cibuildwheel/issues/1931
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf',
+    'python3 pkgs/sagemath-kissat/repair_wheel.py {wheel}',
+    'auditwheel repair -w {dest_dir} {wheel}',
+]
+[tool.cibuildwheel.macos]
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf',
+    'python3 pkgs/sagemath-kissat/repair_wheel.py {wheel}',
+    'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
+]
 
 [tool.setuptools]
 include-package-data = false
@@ -62,10 +62,10 @@ build-requires = [
 ]
 
 host-requires = [
+  "pkg:generic/kissat",
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
-  "pkg:generic/symmetrica",
 ]
 
 dependencies = [
