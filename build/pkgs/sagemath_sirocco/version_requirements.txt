@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-sirocco ~= 10.4.66.0
+passagemath-sirocco ~= 10.4.67.0

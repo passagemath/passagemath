@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-environment ~= 10.4.66.0
+passagemath-environment ~= 10.4.67.0
