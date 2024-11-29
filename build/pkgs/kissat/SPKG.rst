@@ -28,4 +28,4 @@ MIT license.
 Upstream Contact
 ----------------
 
-Website: http://fmv.jku.at/kissat/
+Website: https://fmv.jku.at/kissat/
