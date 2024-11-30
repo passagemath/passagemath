@@ -36,6 +36,7 @@ jobs:
       # Build from scratch
       free_disk_space: true
       docker_targets: "with-system-packages configured with-targets-pre with-targets"
+      extra_sage_packages: gdbm libxml2
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
       targets: build
@@ -56,6 +57,7 @@ jobs:
       # Build from scratch
       free_disk_space: true
       docker_targets: "with-system-packages configured with-targets-pre with-targets with-targets-optional"
+      extra_sage_packages: gdbm libxml2
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
       targets: build
@@ -74,6 +76,7 @@ jobs:
       # Build from scratch
       free_disk_space: true
       docker_targets: "with-system-packages configured with-targets-pre with-targets with-targets-optional"
+      extra_sage_packages: gdbm libxml2
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
       targets: build
@@ -97,6 +100,7 @@ jobs:
       tox_packages_factors: >-
           ["standard"]
       docker_targets: "with-targets-optional"
+      extra_sage_packages: gdbm libxml2
       # We remove packages starting with _, in particular package _develop
       targets_optional: '$(echo $(export PATH=build/bin:$PATH && sage-package list :optional: --has-file "spkg-install.in|spkg-install|requirements.txt" --no-file "huge|has_nonfree_dependencies" | grep -v sagemath_doc | grep -v ^_))'
       max_parallel: 4
@@ -113,5 +117,6 @@ jobs:
       tox_packages_factors: >-
           ["standard"]
       docker_targets: "with-targets-optional"
+      extra_sage_packages: gdbm libxml2
       targets_optional: '$(echo $(export PATH=build/bin:$PATH && sage-package list :experimental: --has-file "spkg-install.in|spkg-install|requirements.txt" --no-file "huge|has_nonfree_dependencies" | grep -v sagemath_doc))'
       max_parallel: 4
