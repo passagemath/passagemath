@@ -1,1 +1,1 @@
-gdbm
+libgdbm-dev
