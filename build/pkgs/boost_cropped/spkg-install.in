@@ -1,3 +1,4 @@
 cd src
+echo "using gcc : : $CXX ;" > user-config.jam
 ./bootstrap.sh --prefix="$SAGE_LOCAL" --with-libraries=regex
-./b2 install
+./b2 --user-config=user-config.jam toolset=gcc install
