@@ -50,7 +50,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || inputs.run-id }}
       - uses: actions/download-artifact@v4
         with:
           pattern: "noarch-wheels"
@@ -58,7 +58,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || inputs.run-id }}
       - uses: actions/download-artifact@v4
         with:
           pattern: "dist"
@@ -66,7 +66,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || inputs.run-id }}
       - uses: actions/setup-python@v5
         id: python
         with:
@@ -105,8 +105,8 @@ jobs:
           pip install pkgs/sagemath-environment pkgs/sagemath-repl
           pkg=${{ matrix.distribution }}
           cd pkgs/$pkg
-          extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;')
+          extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
           for extra in $extras; do
-              sage --fixdoctests --distribution "$pkg$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
+              sage --fixdoctests --distribution "$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
           done
           git diff
