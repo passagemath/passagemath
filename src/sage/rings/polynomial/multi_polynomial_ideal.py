@@ -3885,7 +3885,7 @@ class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
                        MPolynomialIdeal_macaulay2_repr,
                        MPolynomialIdeal_magma_repr,
                        Ideal_generic):
-    def __init__(self, ring, gens, coerce=True):
+    def __init__(self, ring, gens, coerce=True, **kwds):
         r"""
         Create an ideal in a multivariate polynomial ring.
 
