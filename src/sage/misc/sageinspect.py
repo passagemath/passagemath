@@ -2302,7 +2302,7 @@ def sage_getsourcelines(obj):
 
         sage: P.<x,y> = QQ[]
         sage: I = P*[x,y]
-        sage: sage_getsourcelines(I)
+        sage: sage_getsourcelines(I)                                                    # needs sage.libs.singular
         ([...'class MPolynomialIdeal(MPolynomialIdeal_singular_repr,\n',
           '                       MPolynomialIdeal_macaulay2_repr,\n',
           '                       MPolynomialIdeal_magma_repr,\n',
