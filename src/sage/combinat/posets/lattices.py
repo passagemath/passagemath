@@ -4279,7 +4279,7 @@ class FiniteLatticePoset(FiniteMeetSemilattice, FiniteJoinSemilattice):
             sage: L = LatticePoset(DiGraph('QSO?I?_?_GBG??_??a???@?K??A??B???C??s??G??I??@??A??@???'))
             sage: L.is_constructible_by_doublings('convex')                             # needs sage.combinat
             False
-            sage: L.is_constructible_by_doublings('any')
+            sage: L.is_constructible_by_doublings('any')                                # needs sage.combinat
             True
 
         ALGORITHM:

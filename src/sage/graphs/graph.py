@@ -6453,13 +6453,13 @@ class Graph(GenericGraph):
             sage: G = Graph([(0,1)]*5 + [(1,2)]*2, multiedges=True)
             sage: G.vertex_cover(reduction_rules=True, algorithm='MILP')                # needs sage.numerical.mip
             [1]
-            sage: G.vertex_cover(reduction_rules=False)                                 # needs sage.numerical.mip
+            sage: G.vertex_cover(reduction_rules=False)                                 # needs cliquer
             [1]
 
         Issue :issue:`25988` is fixed::
 
             sage: B = BipartiteGraph(graphs.CycleGraph(6))
-            sage: B.vertex_cover(algorithm='Cliquer', reduction_rules=True)
+            sage: B.vertex_cover(algorithm='Cliquer', reduction_rules=True)             # needs cliquer
             [1, 3, 5]
         """
         self._scream_if_not_simple(allow_multiple_edges=True)
@@ -6806,9 +6806,9 @@ class Graph(GenericGraph):
         EXAMPLES::
 
             sage: C = Graph('DJ{')
-            sage: C.cliques_vertex_clique_number()                                      # needs sage.plot
+            sage: C.cliques_vertex_clique_number()                                      # needs cliquer sage.plot
             {0: 2, 1: 4, 2: 4, 3: 4, 4: 4}
-            sage: E = C.cliques_maximal(); E
+            sage: E = C.cliques_maximal(); E                                            # needs cliquer
             [[0, 4], [1, 2, 3, 4]]
             sage: C.cliques_vertex_clique_number(cliques=E, algorithm='networkx')       # needs networkx
             {0: 2, 1: 4, 2: 4, 3: 4, 4: 4}
@@ -6816,12 +6816,12 @@ class Graph(GenericGraph):
             sage: F = graphs.Grid2dGraph(2,3)
             sage: F.cliques_vertex_clique_number(algorithm='networkx')                  # needs networkx
             {(0, 0): 2, (0, 1): 2, (0, 2): 2, (1, 0): 2, (1, 1): 2, (1, 2): 2}
-            sage: F.cliques_vertex_clique_number(vertices=[(0, 1), (1, 2)])             # needs sage.plot
+            sage: F.cliques_vertex_clique_number(vertices=[(0, 1), (1, 2)])             # needs cliquer sage.plot
             {(0, 1): 2, (1, 2): 2}
 
             sage: G = Graph({0:[1,2,3], 1:[2], 3:[0,1]})
             sage: G.show(figsize=[2,2])                                                 # needs sage.plot
-            sage: G.cliques_vertex_clique_number()                                      # needs sage.plot
+            sage: G.cliques_vertex_clique_number()                                      # needs cliquer sage.plot
             {0: 3, 1: 3, 2: 3, 3: 3}
         """
         if algorithm == "cliquer":

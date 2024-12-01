@@ -497,7 +497,7 @@ class DocTestController(SageObject):
                         if pkg.name in options.hide:
                             continue
                         # Skip features for which we have a more specific runtime feature test.
-                        if pkg.name in ['bliss', 'buckygen', 'coxeter3', 'database_graphs', 'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac', 'jmol', 'latte_int', 'macaulay2', 'mcqd', 'meataxe', 'msolve', 'palp', 'plantri', 'qepcad', 'rubiks', 'sirocco', 'sympow', 'tdlib', 'topcom']:
+                        if pkg.name in ['bliss', 'buckygen', 'coxeter3', 'cvxpy', 'database_graphs', 'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac', 'jmol', 'latte_int', 'macaulay2', 'mcqd', 'meataxe', 'msolve', 'palp', 'plantri', 'polytopes_db', 'qepcad', 'rubiks', 'sirocco', 'sympow', 'tdlib', 'topcom']:
                             continue
                         if pkg.is_installed() and pkg.installed_version == pkg.remote_version:
                             options.optional.add(pkg.name)

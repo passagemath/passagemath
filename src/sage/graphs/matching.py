@@ -345,22 +345,23 @@ def is_bicritical(G, matching=None, algorithm='Edmonds', coNP_certificate=False,
 
     Providing with a wrong matching::
 
+        sage: # needs networkx
         sage: G = graphs.CompleteGraph(6)
         sage: M = Graph(G.matching())
         sage: M.add_edges([(0, 1), (0, 2)])
-        sage: G.is_bicritical(matching=M)                                           # needs networkx
+        sage: G.is_bicritical(matching=M)
         Traceback (most recent call last):
         ...
         ValueError: the input is not a matching
         sage: N = Graph(G.matching())
         sage: N.add_edge(6, 7)
-        sage: G.is_bicritical(matching=N)                                           # needs networkx
+        sage: G.is_bicritical(matching=N)
         Traceback (most recent call last):
         ...
         ValueError: the input is not a matching of the graph
         sage: J = Graph()
         sage: J.add_edges([(0, 1), (2, 3)])
-        sage: G.is_bicritical(matching=J)                                           # needs networkx
+        sage: G.is_bicritical(matching=J)
         Traceback (most recent call last):
         ...
         ValueError: the input is not a perfect matching of the graph
