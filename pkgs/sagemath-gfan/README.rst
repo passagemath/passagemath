@@ -22,4 +22,6 @@ for general installation instructions.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``passagemath-gfan`` provides an interface to gfan.
+This pip-installable source distribution ``passagemath-gfan`` provides an interface to
+`gfan <https://users-math.au.dk/jensen/software/gfan/gfan.html>`_, the package for
+Groebner fans and tropical varieties.
