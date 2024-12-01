@@ -1356,7 +1356,7 @@ def brouwer_separable_design(k, t, q, x, check=False, verbose=False, explain_con
 
     Test all possible cases::
 
-        sage: # needs conway_polynomials
+        sage: # needs conway_polynomials sage.schemes
         sage: from sage.combinat.designs.orthogonal_arrays_build_recursive import brouwer_separable_design
         sage: k,q,t=4,4,3; _=brouwer_separable_design(k,q,t,0,verbose=True)
         Case i) with k=4,q=3,t=4,x=0
