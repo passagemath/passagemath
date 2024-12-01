@@ -1259,7 +1259,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "ntests": 181
+        "ntests": 182
     },
     "sage.features.sat": {
         "ntests": 16
@@ -1489,7 +1489,6 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
-        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -1708,6 +1707,9 @@
     },
     "sage.misc.classcall_metaclass": {
         "ntests": 78
+    },
+    "sage.misc.classgraph": {
+        "ntests": 1
     },
     "sage.misc.compat": {
         "ntests": 2
@@ -2841,7 +2843,7 @@
     },
     "sage.stats.distributions.discrete_gaussian_lattice": {
         "failed": true,
-        "ntests": 150
+        "ntests": 114
     },
     "sage.stats.distributions.discrete_gaussian_polynomial": {
         "ntests": 24
@@ -3041,7 +3043,7 @@
         "ntests": 8
     },
     "sage.tests.cmdline": {
-        "ntests": 133
+        "ntests": 108
     },
     "sage.tests.finite_poset": {
         "ntests": 1
