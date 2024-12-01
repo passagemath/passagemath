@@ -451,7 +451,7 @@ class Function_gamma_inc(BuiltinFunction):
 
             sage: gamma_inc(float(-1), float(-1))                                       # needs sage.libs.pari sage.rings.real_mpfr
             (-0.8231640121031085+3.141592653589793j)
-            sage: gamma_inc(RR(-1), RR(-1))                                             # needs sage.rings.complex_double sage.rings.real_mpfr
+            sage: gamma_inc(RR(-1), RR(-1))                                             # needs sage.libs.pari sage.rings.complex_double sage.rings.real_mpfr
             -0.823164012103109 + 3.14159265358979*I
             sage: gamma_inc(-1, float(-log(3))) - gamma_inc(-1, float(-log(2)))  # abs tol 1e-15    # needs sage.symbolic
             (1.2730972164471142+0j)
