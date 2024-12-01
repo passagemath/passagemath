@@ -442,16 +442,16 @@ class Function_gamma_inc(BuiltinFunction):
         Check that :issue:`7099` is fixed::
 
             sage: R = RealField(1024)                                                   # needs sage.rings.real_mpfr
-            sage: gamma(R(9), R(10^-3))  # rel tol 1e-308                               # needs sage.rings.real_mpfr
+            sage: gamma(R(9), R(10^-3))  # rel tol 1e-308                               # needs sage.libs.pari sage.rings.real_mpfr
             40319.99999999999999999999999999988898884344822911869926361916294165058203634104838326009191542490601781777105678829520585311300510347676330951251563007679436243294653538925717144381702105700908686088851362675381239820118402497959018315224423868693918493033078310647199219674433536605771315869983788442389633
             sage: numerical_approx(gamma(9, 10^(-3)) - gamma(9), digits=40)  # abs tol 1e-36        # needs sage.symbolic
             -1.110111598370794007949063502542063148294e-28
 
         Check that :issue:`17328` is fixed::
 
-            sage: gamma_inc(float(-1), float(-1))                                       # needs sage.rings.real_mpfr
+            sage: gamma_inc(float(-1), float(-1))                                       # needs sage.libs.pari sage.rings.real_mpfr
             (-0.8231640121031085+3.141592653589793j)
-            sage: gamma_inc(RR(-1), RR(-1))                                             # needs sage.rings.complex_double
+            sage: gamma_inc(RR(-1), RR(-1))                                             # needs sage.rings.complex_double sage.rings.real_mpfr
             -0.823164012103109 + 3.14159265358979*I
             sage: gamma_inc(-1, float(-log(3))) - gamma_inc(-1, float(-log(2)))  # abs tol 1e-15    # needs sage.symbolic
             (1.2730972164471142+0j)
