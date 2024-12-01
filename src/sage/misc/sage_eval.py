@@ -179,9 +179,12 @@ def sage_eval(source, locals=None, cmds='', preparse=True):
             import sage.all__sagemath_polyhedra as toplevel
         except ImportError:
             try:
-                import sage.all__sagemath_categories as toplevel
+                import sage.all__sagemath_modules as toplevel
             except ImportError:
-                import sage.all__sagemath_objects as toplevel
+                try:
+                    import sage.all__sagemath_categories as toplevel
+                except ImportError:
+                    import sage.all__sagemath_objects as toplevel
     if cmds:
         cmd_seq = cmds + '\n_sage_eval_returnval_ = ' + source
         if preparse:
