@@ -578,7 +578,6 @@
         "ntests": 29
     },
     "sage.categories.pushout": {
-        "failed": true,
         "ntests": 619
     },
     "sage.categories.quantum_group_representations": {
@@ -1351,7 +1350,7 @@
         "ntests": 4
     },
     "sage.features.mip_backends": {
-        "ntests": 7
+        "ntests": 9
     },
     "sage.features.msolve": {
         "ntests": 6
@@ -1390,7 +1389,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "ntests": 177
+        "ntests": 178
     },
     "sage.features.sat": {
         "ntests": 16

@@ -595,7 +595,6 @@
         "ntests": 29
     },
     "sage.categories.pushout": {
-        "failed": true,
         "ntests": 619
     },
     "sage.categories.quantum_group_representations": {
@@ -1521,7 +1520,7 @@
         "ntests": 4
     },
     "sage.features.mip_backends": {
-        "ntests": 7
+        "ntests": 9
     },
     "sage.features.msolve": {
         "ntests": 6
@@ -2740,7 +2739,8 @@
         "ntests": 31
     },
     "sage.sat.solvers.dimacs": {
-        "ntests": 186
+        "failed": true,
+        "ntests": 0
     },
     "sage.sat.solvers.picosat": {
         "ntests": 26

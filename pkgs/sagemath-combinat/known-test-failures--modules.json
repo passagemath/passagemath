@@ -23,8 +23,7 @@
         "ntests": 1
     },
     "sage.algebras.commutative_dga": {
-        "failed": true,
-        "ntests": 650
+        "ntests": 7
     },
     "sage.algebras.down_up_algebra": {
         "failed": true,
@@ -867,7 +866,7 @@
     },
     "sage.categories.rings": {
         "failed": true,
-        "ntests": 252
+        "ntests": 248
     },
     "sage.categories.rngs": {
         "ntests": 6
@@ -949,7 +948,6 @@
         "ntests": 39
     },
     "sage.categories.unital_algebras": {
-        "failed": true,
         "ntests": 54
     },
     "sage.categories.vector_spaces": {
@@ -1170,7 +1168,7 @@
     },
     "sage.combinat.integer_vector": {
         "failed": true,
-        "ntests": 273
+        "ntests": 266
     },
     "sage.combinat.integer_vector_weighted": {
         "ntests": 64
@@ -1988,7 +1986,7 @@
         "ntests": 4
     },
     "sage.features.mip_backends": {
-        "ntests": 7
+        "ntests": 9
     },
     "sage.features.msolve": {
         "ntests": 6
@@ -2027,7 +2025,6 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "failed": true,
         "ntests": 185
     },
     "sage.features.sat": {
@@ -3739,7 +3736,7 @@
     },
     "sage.stats.distributions.discrete_gaussian_lattice": {
         "failed": true,
-        "ntests": 150
+        "ntests": 114
     },
     "sage.stats.distributions.discrete_gaussian_polynomial": {
         "ntests": 24
