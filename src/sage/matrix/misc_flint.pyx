@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-flint
+# sage.doctest: needs sage.libs.linbox
 r"""
 Misc matrix algorithms using FLINT
 """
