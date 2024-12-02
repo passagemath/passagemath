@@ -1557,7 +1557,7 @@ class SignedPermutation(ColoredPermutation,
             sage: G = SignedPermutations(5)
             sage: all(pi.cycle_type().size() == 5 for pi in G)
             True
-            sage: set(pi.cycle_type() for pi in G) == set(PartitionTuples(2, 5))
+            sage: set(pi.cycle_type() for pi in G) == set(PartitionTuples(2, 5))        # needs sage.libs.flint
             True
         """
         cycles = self.to_cycles(negative_cycles=False)
@@ -1864,7 +1864,7 @@ class SignedPermutations(ColoredPermutations):
         EXAMPLES::
 
             sage: G = SignedPermutations(4)
-            sage: for nu in PartitionTuples(2, 4):
+            sage: for nu in PartitionTuples(2, 4):                                      # needs sage.libs.flint
             ....:     print(nu, G.conjugacy_class_representative(nu))
             ....:     assert nu == G.conjugacy_class_representative(nu).cycle_type(), nu
             ([4], []) [2, 3, 4, 1]
@@ -1890,7 +1890,7 @@ class SignedPermutations(ColoredPermutations):
 
         TESTS::
 
-            sage: all(nu == SignedPermutations(n).conjugacy_class_representative(nu).cycle_type()
+            sage: all(nu == SignedPermutations(n).conjugacy_class_representative(nu).cycle_type()   # needs sage.libs.flint
             ....:     for n in range(1, 6) for nu in PartitionTuples(2, n))
             True
         """

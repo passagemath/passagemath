@@ -770,7 +770,8 @@
         "ntests": 5
     },
     "sage.coding.linear_code": {
-        "ntests": 40
+        "failed": true,
+        "ntests": 0
     },
     "sage.coding.linear_code_no_metric": {
         "ntests": 2
@@ -829,11 +830,21 @@
     "sage.combinat.matrices.dlxcpp": {
         "ntests": 13
     },
+    "sage.combinat.partition": {
+        "ntests": 1194
+    },
+    "sage.combinat.partitions": {
+        "ntests": 69
+    },
     "sage.combinat.permutation": {
         "ntests": 1195
     },
     "sage.combinat.permutation_cython": {
         "ntests": 39
+    },
+    "sage.combinat.q_analogues": {
+        "failed": true,
+        "ntests": 113
     },
     "sage.combinat.ranker": {
         "ntests": 48
@@ -1220,7 +1231,7 @@
         "ntests": 4
     },
     "sage.features.mip_backends": {
-        "ntests": 7
+        "ntests": 9
     },
     "sage.features.msolve": {
         "ntests": 6
@@ -1489,6 +1500,7 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
+        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -2887,7 +2899,7 @@
     },
     "sage.structure.element": {
         "failed": true,
-        "ntests": 657
+        "ntests": 660
     },
     "sage.structure.element.pxd": {
         "ntests": 23

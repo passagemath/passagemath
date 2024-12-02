@@ -7009,7 +7009,7 @@ class Partitions_n(Partitions):
 
             sage: Partitions(5).random_element()  # random                              # needs sage.libs.flint
             [2, 1, 1, 1]
-            sage: Partitions(5).random_element(measure='Plancherel')  # random          # needs sage.libs.flint
+            sage: Partitions(5).random_element(measure='Plancherel')  # random          # needs sage.combinat sage.libs.flint
             [2, 1, 1, 1]
         """
         if measure == 'uniform':
@@ -7335,7 +7335,7 @@ class Partitions_nk(Partitions):
             [[]]
 
             sage: from sage.combinat.partition import number_of_partitions_length
-            sage: all( len(Partitions(n, length=k).list())                              # needs sage.libs.flint
+            sage: all( len(Partitions(n, length=k).list())                              # needs sage.libs.flint sage.libs.gap
             ....:      == number_of_partitions_length(n, k)
             ....:      for n in range(9) for k in range(n+2) )
             True
@@ -7399,7 +7399,7 @@ class Partitions_nk(Partitions):
             5
             sage: Partitions(8, length=5).cardinality()
             3
-            sage: Partitions(15, length=6).cardinality()
+            sage: Partitions(15, length=6).cardinality()                                # needs sage.libs.gap
             26
             sage: Partitions(0, length=0).cardinality()
             1
@@ -7416,12 +7416,12 @@ class Partitions_nk(Partitions):
 
             sage: N = [0, 1, 2, 3, 5, 10, 20, 500, 850]
             sage: K = [0, 1, 2, 3, 5, 10, 11, 20, 21, 250, 499, 500]
-            sage: all(Partitions(n, length=k).cardinality()                             # needs sage.libs.flint
+            sage: all(Partitions(n, length=k).cardinality()                             # needs sage.libs.flint sage.libs.gap
             ....:       == Partitions(n,length=k).cardinality('gap')
             ....:     for n in N for k in K)
             True
             sage: P = Partitions(4562, length=2800)
-            sage: P.cardinality() == P.cardinality('gap')                               # needs sage.libs.flint
+            sage: P.cardinality() == P.cardinality('gap')                               # needs sage.libs.flint sage.libs.gap
             True
         """
         return number_of_partitions_length(self.n, self.k, algorithm)
@@ -8973,7 +8973,7 @@ class PartitionsGreatestEQ(UniqueRepresentation, IntegerListsLex):
 
         TESTS::
 
-            sage: all(PartitionsGreatestEQ(n, a).cardinality() ==                       # needs sage.libs.flint
+            sage: all(PartitionsGreatestEQ(n, a).cardinality() ==                       # needs sage.libs.flint sage.libs.gap
             ....:     len(PartitionsGreatestEQ(n, a).list())
             ....:     for n in range(20) for a in range(6))
             True
@@ -9458,8 +9458,7 @@ except ImportError:
 
 # October 2012: fixing outdated pickles which use classes being deprecated
 from sage.misc.persist import register_unpickle_override
-lazy_import('sage.combinat.partition_tuple', 'PartitionTuples_level_size')
-register_unpickle_override('sage.combinat.partition', 'PartitionTuples_nk', PartitionTuples_level_size)
+
 register_unpickle_override('sage.combinat.partition', 'Partition_class', Partition)
 register_unpickle_override('sage.combinat.partition', 'OrderedPartitions_nk', OrderedPartitions)
 register_unpickle_override('sage.combinat.partition', 'PartitionsInBox_hw', PartitionsInBox)

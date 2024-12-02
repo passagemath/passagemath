@@ -704,11 +704,21 @@
     "sage.combinat.matrices.dlxcpp": {
         "ntests": 9
     },
+    "sage.combinat.partition": {
+        "ntests": 1194
+    },
+    "sage.combinat.partitions": {
+        "ntests": 69
+    },
     "sage.combinat.permutation": {
         "ntests": 1184
     },
     "sage.combinat.permutation_cython": {
         "ntests": 39
+    },
+    "sage.combinat.q_analogues": {
+        "failed": true,
+        "ntests": 113
     },
     "sage.combinat.ranker": {
         "ntests": 48
@@ -920,7 +930,7 @@
         "ntests": 4
     },
     "sage.features.mip_backends": {
-        "ntests": 7
+        "ntests": 9
     },
     "sage.features.msolve": {
         "ntests": 6
@@ -1990,7 +2000,7 @@
     },
     "sage.structure.element": {
         "failed": true,
-        "ntests": 562
+        "ntests": 565
     },
     "sage.structure.element.pxd": {
         "ntests": 18

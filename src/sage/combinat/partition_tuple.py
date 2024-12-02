@@ -3107,3 +3107,8 @@ class RegularPartitionTuples_level_size(PartitionTuples_level_size):
                 mu[0] = [1]
                 mu[-1] = [self._size - 1]
         return self.element_class(self, mu)
+
+
+from sage.misc.persist import register_unpickle_override
+
+register_unpickle_override('sage.combinat.partition', 'PartitionTuples_nk', PartitionTuples_level_size)
