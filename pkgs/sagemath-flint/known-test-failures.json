@@ -643,7 +643,6 @@
         "ntests": 9
     },
     "sage.categories.rings": {
-        "failed": true,
         "ntests": 227
     },
     "sage.categories.rngs": {
@@ -785,7 +784,6 @@
         "ntests": 81
     },
     "sage.coding.gabidulin_code": {
-        "failed": true,
         "ntests": 235
     },
     "sage.coding.golay_code": {
@@ -899,7 +897,6 @@
         "ntests": 13
     },
     "sage.combinat.partition": {
-        "failed": true,
         "ntests": 1231
     },
     "sage.combinat.partitions": {
@@ -911,6 +908,9 @@
     },
     "sage.combinat.permutation_cython": {
         "ntests": 39
+    },
+    "sage.combinat.q_analogues": {
+        "ntests": 127
     },
     "sage.combinat.ranker": {
         "ntests": 48
@@ -3107,7 +3107,6 @@
         "ntests": 138
     },
     "sage.rings.polynomial.ore_function_element": {
-        "failed": true,
         "ntests": 243
     },
     "sage.rings.polynomial.ore_function_field": {
