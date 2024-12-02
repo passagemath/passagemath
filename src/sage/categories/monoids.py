@@ -99,11 +99,11 @@ class Monoids(CategoryWithAxiom):
 
         EXAMPLES::
 
-            sage: Monoids.free(index_set=ZZ)                                            # needs sage.combinat
+            sage: Monoids.free(index_set=ZZ)
             Free monoid indexed by Integer Ring
-            sage: Monoids().free(ZZ)                                                    # needs sage.combinat
+            sage: Monoids().free(ZZ)
             Free monoid indexed by Integer Ring
-            sage: F.<x,y,z> = Monoids().free(); F                                       # needs sage.combinat
+            sage: F.<x,y,z> = Monoids().free(); F
             Free monoid indexed by {'x', 'y', 'z'}
         """
         if names is not None:
@@ -131,8 +131,8 @@ class Monoids(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: M = Monoids().free([1,2,3])                                       # needs sage.combinat
-                sage: M.semigroup_generators()                                          # needs sage.combinat
+                sage: M = Monoids().free([1,2,3])
+                sage: M.semigroup_generators()
                 Family (1, F[1], F[2], F[3])
             """
             G = self.monoid_generators()
@@ -416,11 +416,11 @@ class Monoids(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: Monoids.Commutative.free(index_set=ZZ)                            # needs sage.combinat
+                sage: Monoids.Commutative.free(index_set=ZZ)
                 Free abelian monoid indexed by Integer Ring
-                sage: Monoids().Commutative().free(ZZ)                                  # needs sage.combinat
+                sage: Monoids().Commutative().free(ZZ)
                 Free abelian monoid indexed by Integer Ring
-                sage: F.<x,y,z> = Monoids().Commutative().free(); F                     # needs sage.combinat
+                sage: F.<x,y,z> = Monoids().Commutative().free(); F
                 Free abelian monoid indexed by {'x', 'y', 'z'}
             """
             if names is not None:
@@ -647,7 +647,7 @@ class Monoids(CategoryWithAxiom):
                 An example with an infinitely generated group (a better output
                 is needed)::
 
-                    sage: N = Monoids.free(ZZ)                                          # needs sage.combinat
+                    sage: N = Monoids.free(ZZ)
                     sage: C = cartesian_product([M, N])                                 # needs sage.combinat sage.groups
                     sage: C.monoid_generators()                                         # needs sage.combinat sage.groups
                     Lazy family (gen(i))_{i in The Cartesian product of (...)}

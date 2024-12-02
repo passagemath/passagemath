@@ -515,8 +515,8 @@ cdef class IdentityMorphism(Morphism):
 
         EXAMPLES::
 
-            sage: E = End(Partitions(5))                                                # needs sage.combinat
-            sage: E.identity().is_identity()                                            # needs sage.combinat
+            sage: E = End(Partitions(5))
+            sage: E.identity().is_identity()
             True
 
         Check that :issue:`15478` is fixed::
