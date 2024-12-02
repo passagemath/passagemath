@@ -18,8 +18,8 @@ TESTS:
 
 Check :issue:`12482` (shall be run in a fresh session)::
 
-    sage: P = Partitions(3)                                                             # needs sage.combinat
-    sage: Family(P, lambda x: x).category()                                             # needs sage.combinat
+    sage: P = Partitions(3)
+    sage: Family(P, lambda x: x).category()
     Category of finite enumerated sets
 """
 
