@@ -387,7 +387,7 @@ sage class. In this case the class is specified using the arguments to
 
 Here is an example to test the pickling of a :class:`GlobalOptions` instance::
 
-    sage: TestSuite(Partitions.options).run()                                           # needs sage.combinat
+    sage: TestSuite(Partitions.options).run()
 
 TESTS:
 
@@ -535,7 +535,7 @@ class Option:
 
     TESTS::
 
-        sage: TestSuite(Partitions.options.display).run()                               # needs sage.combinat
+        sage: TestSuite(Partitions.options.display).run()
     """
     __name__ = 'Option class'
 
@@ -546,7 +546,7 @@ class Option:
 
         EXAMPLES::
 
-            sage: type(Partitions.options.display)    # indirect doctest                # needs sage.combinat
+            sage: type(Partitions.options.display)    # indirect doctest
             <class 'sage.structure.global_options.Option'>
         """
         self._name = name
@@ -560,7 +560,7 @@ class Option:
 
         EXAMPLES::
 
-            sage: Partitions.options.display  # indirect doctest                        # needs sage.combinat
+            sage: Partitions.options.display  # indirect doctest
             list
         """
         # NOTE: we intentionally use str() instead of repr()
@@ -1235,7 +1235,7 @@ class GlobalOptions(metaclass=GlobalOptionsMeta):
 
         EXAMPLES::
 
-            sage: print(Partitions.options.__doc__)                                     # needs sage.combinat
+            sage: print(Partitions.options.__doc__)
             <BLANKLINE>
             Set and display the global options for elements of the partition,
             skew partition, and partition tuple classes.  If no parameters are
@@ -1276,12 +1276,12 @@ class GlobalOptions(metaclass=GlobalOptionsMeta):
 
         EXAMPLES::
 
-            sage: Partitions.options.display = 'exp'                                    # needs sage.combinat
-            sage: Partitions.options.dispplay = 'list'                                  # needs sage.combinat
+            sage: Partitions.options.display = 'exp'
+            sage: Partitions.options.dispplay = 'list'
             Traceback (most recent call last):
             ...
             ValueError: dispplay is not an option for Partitions
-            sage: Partitions.options._reset()                                           # needs sage.combinat
+            sage: Partitions.options._reset()
         """
         # Underscore, and "special", attributes are set using type.__setattr__
         if name[0] == '_' or name in ['reset', 'dispatch', 'default_value']:
@@ -1354,8 +1354,8 @@ class GlobalOptions(metaclass=GlobalOptionsMeta):
 
         EXAMPLES::
 
-            sage: Partitions.options._reset()                                           # needs sage.combinat
-            sage: Partitions.options.__getstate__()                                     # needs sage.combinat
+            sage: Partitions.options._reset()
+            sage: Partitions.options.__getstate__()
              {'convention': 'English',
              'option_class': 'Partitions',
              'options_module': 'sage.combinat.partition'}
@@ -1389,7 +1389,7 @@ class GlobalOptions(metaclass=GlobalOptionsMeta):
 
         EXAMPLES::
 
-            sage: Partitions.options == PartitionsGreatestLE.options  # indirect doctest            # needs sage.combinat
+            sage: Partitions.options == PartitionsGreatestLE.options  # indirect doctest
             True
             sage: Partitions.options == Tableaux.options                                # needs sage.combinat
             False
