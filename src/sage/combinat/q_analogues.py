@@ -219,7 +219,7 @@ def q_binomial(n, k, q=None, algorithm='auto'):
         5
         sage: q_binomial(4,2,-1)
         2
-        sage: q_binomial(4,2,3.14)
+        sage: q_binomial(4,2,3.14)                                                      # needs sage.rings.real_mpfr
         152.030056160000
         sage: R = GF((5, 2), 't')
         sage: t = R.gen(0)
