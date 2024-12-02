@@ -54,12 +54,12 @@ class GradedModulesWithBasis(GradedModulesCategory):
                 sage: E.degree_negation(E.zero())                                       # needs sage.modules
                 0
 
-                sage: P = GradedModulesWithBasis(ZZ).example(); P                       # needs sage.combinat sage.modules
+                sage: P = GradedModulesWithBasis(ZZ).example(); P                       # needs sage.modules
                 An example of a graded module with basis:
                  the free module on partitions over Integer Ring
                 sage: pbp = lambda x: P.basis()[Partition(list(x))]
-                sage: p = pbp([3,1]) - 2 * pbp([2]) + 4 * pbp([1])                      # needs sage.combinat sage.modules
-                sage: P.degree_negation(p)                                              # needs sage.combinat sage.modules
+                sage: p = pbp([3,1]) - 2 * pbp([2]) + 4 * pbp([1])                      # needs sage.modules
+                sage: P.degree_negation(p)                                              # needs sage.modules
                 -4*P[1] - 2*P[2] + P[3, 1]
             """
             base_one = self.base_ring().one()
@@ -278,12 +278,12 @@ class GradedModulesWithBasis(GradedModulesCategory):
                 sage: E.zero().degree_negation()                                        # needs sage.modules
                 0
 
-                sage: P = GradedModulesWithBasis(ZZ).example(); P                       # needs sage.combinat sage.modules
+                sage: P = GradedModulesWithBasis(ZZ).example(); P                       # needs sage.modules
                 An example of a graded module with basis:
                  the free module on partitions over Integer Ring
                 sage: pbp = lambda x: P.basis()[Partition(list(x))]
-                sage: p = pbp([3,1]) - 2 * pbp([2]) + 4 * pbp([1])                      # needs sage.combinat sage.modules
-                sage: p.degree_negation()                                               # needs sage.combinat sage.modules
+                sage: p = pbp([3,1]) - 2 * pbp([2]) + 4 * pbp([1])                      # needs sage.modules
+                sage: p.degree_negation()                                               # needs sage.modules
                 -4*P[1] - 2*P[2] + P[3, 1]
             """
             return self.parent().degree_negation(self)

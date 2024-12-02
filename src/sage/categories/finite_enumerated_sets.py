@@ -62,7 +62,7 @@ class FiniteEnumeratedSets(CategoryWithAxiom):
 
             sage: FiniteEnumeratedSets()(GF(3))
             Finite Field of size 3
-            sage: Partitions(3)                                                         # needs sage.combinat
+            sage: Partitions(3)
             Partitions of the integer 3
 
         For now, lists, tuples, sets, Sets are coerced into finite
@@ -590,17 +590,17 @@ class FiniteEnumeratedSets(CategoryWithAxiom):
             inherit various methods from `Sets.CartesianProducts`
             and not from :class:`EnumeratedSets.Finite`::
 
-                sage: C = cartesian_product([Partitions(10), Permutations(20)])         # needs sage.combinat
-                sage: C in EnumeratedSets().Finite()                                    # needs sage.combinat
+                sage: C = cartesian_product([Partitions(10), Permutations(20)])
+                sage: C in EnumeratedSets().Finite()
                 True
 
-                sage: C.random_element.__module__                                       # needs sage.combinat
+                sage: C.random_element.__module__
                 'sage.categories.sets_cat'
 
-                sage: C.cardinality.__module__                                          # needs sage.combinat
+                sage: C.cardinality.__module__
                 'sage.categories.sets_cat'
 
-                sage: C.__iter__.__module__                                             # needs sage.combinat
+                sage: C.__iter__.__module__
                 'sage.categories.sets_cat'
             """
             random_element = raw_getattr(Sets.CartesianProducts.ParentMethods, "random_element")
@@ -613,9 +613,9 @@ class FiniteEnumeratedSets(CategoryWithAxiom):
 
                 EXAMPLES::
 
-                    sage: C = cartesian_product([Zmod(42), Partitions(10),              # needs sage.combinat
+                    sage: C = cartesian_product([Zmod(42), Partitions(10),
                     ....:                        IntegerRange(5)])
-                    sage: C.last()                                                      # needs sage.combinat
+                    sage: C.last()
                     (41, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 4)
                 """
                 return self._cartesian_product_of_elements(

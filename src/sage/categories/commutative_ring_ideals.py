@@ -37,7 +37,7 @@ class CommutativeRingIdeals(Category_ideal):
 
         TESTS::
 
-            sage: CommutativeRingIdeals(Partitions(4))                                  # needs sage.combinat
+            sage: CommutativeRingIdeals(Partitions(4))
             Traceback (most recent call last):
             ...
             TypeError: R (=Partitions of the integer 4) must be a commutative ring

@@ -96,6 +96,7 @@ from sage.combinat import permutation
 from sage.combinat.combinatorial_map import combinatorial_map
 from sage.combinat.composition import Composition, Compositions
 from sage.combinat.integer_vector import IntegerVectors, integer_vectors_nk_fast_iter
+from sage.combinat.partition import Partitions
 from sage.combinat.subset import powerset
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
 from sage.misc.misc_c import prod
@@ -5629,14 +5630,7 @@ class Tableaux(UniqueRepresentation, Parent):
                    values=dict(list='as a list', diagram='as a Young diagram'),
                    alias=dict(array='diagram', ferrers_diagram='diagram', young_diagram='diagram'),
                    case_sensitive=False)
-        convention = dict(default='English',
-                          description='Sets the convention used for displaying tableaux and partitions',
-                          values=dict(
-                              English='use the English convention',
-                              French='use the French convention',
-                              Russian='use the Russian convention',
-                          ),
-                          case_sensitive=False)
+        convention = {'link_to': (Partitions.options, 'convention')}
         notation = dict(alt_name='convention')
 
     def _element_constructor_(self, t):

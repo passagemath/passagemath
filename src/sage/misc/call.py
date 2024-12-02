@@ -42,7 +42,7 @@ class AttrCallObject:
         EXAMPLES::
 
             sage: core = attrcall('core', 3)
-            sage: core(Partition([4,2]))                                                # needs sage.combinat
+            sage: core(Partition([4,2]))
             [4, 2]
 
             sage: series = attrcall('series', x)                                        # needs sage.symbolic
@@ -161,7 +161,7 @@ def attrcall(name, *args, **kwds):
 
         sage: f = attrcall('core', 3); f
         *.core(3)
-        sage: [f(p) for p in Partitions(5)]                                             # needs sage.combinat
+        sage: [f(p) for p in Partitions(5)]
         [[2], [1, 1], [1, 1], [3, 1, 1], [2], [2], [1, 1]]
     """
     return AttrCallObject(name, args, kwds)

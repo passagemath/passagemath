@@ -153,7 +153,7 @@ def Set(X=None, category=None):
 
     We can also create sets from different types::
 
-        sage: sorted(Set([Sequence([3,1], immutable=True), 5, QQ, Partition([3,1,1])]), key=str)    # needs sage.combinat
+        sage: sorted(Set([Sequence([3,1], immutable=True), 5, QQ, Partition([3,1,1])]), key=str)
         [5, Rational Field, [3, 1, 1], [3, 1]]
 
     Sets with unhashable objects work, but with less functionality::

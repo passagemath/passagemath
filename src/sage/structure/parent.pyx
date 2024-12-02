@@ -1026,7 +1026,7 @@ cdef class Parent(sage.structure.category_object.CategoryObject):
             Traceback (most recent call last):
             ...
             TypeError: unsupported operand parent(s) for ^: 'Integer Ring' and '<class 'sage.rings.integer_ring.IntegerRing_class'>'
-            sage: Partitions(3)^3                                                       # needs sage.combinat sage.modules
+            sage: Partitions(3)^3                                                       # needs sage.modules
             Traceback (most recent call last):
             ...
             TypeError: unsupported operand type(s) for ** or pow(): 'Partitions_n_with_category' and 'int'

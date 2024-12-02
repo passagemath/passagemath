@@ -46,7 +46,7 @@ class CommutativeAlgebraIdeals(Category_ideal):
             ...
             TypeError: A (=Ring of integers modulo 4) must be a commutative algebra
 
-            sage: CommutativeAlgebraIdeals(Partitions(4))                               # needs sage.combinat
+            sage: CommutativeAlgebraIdeals(Partitions(4))
             Traceback (most recent call last):
             ...
             TypeError: A (=Partitions of the integer 4) must be a commutative algebra

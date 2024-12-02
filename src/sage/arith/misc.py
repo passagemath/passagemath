@@ -3980,7 +3980,7 @@ def multinomial(*ks):
         618970023101454657175683075
         sage: multinomial(Composition([1, 3]))
         4
-        sage: multinomial(Partition([4, 2]))                                            # needs sage.combinat
+        sage: multinomial(Partition([4, 2]))
         15
 
     TESTS:

@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-combinat
+# sage_setup: distribution = sagemath-categories
 r"""
 Integer partitions
 
@@ -233,14 +233,14 @@ the partition back up from them::
 
     sage: Partition([6,3,2,2]).core(3)
     [2, 1, 1]
-    sage: Partition([7,7,5,3,3,3,1]).quotient(3)
+    sage: Partition([7,7,5,3,3,3,1]).quotient(3)                                        # needs sage.combinat
     ([2], [1], [2, 2, 2])
     sage: p = Partition([11,5,5,3,2,2,2])
     sage: p.core(3)
     []
-    sage: p.quotient(3)
+    sage: p.quotient(3)                                                                 # needs sage.combinat
     ([2, 1], [4], [1, 1, 1])
-    sage: Partition(core=[],quotient=([2, 1], [4], [1, 1, 1]))
+    sage: Partition(core=[], quotient=([2, 1], [4], [1, 1, 1]))                         # needs sage.combinat
     [11, 5, 5, 3, 2, 2, 2]
 
 We can compute the `0-1` sequence and go back and forth::
@@ -305,10 +305,8 @@ from sage.rings.integer import Integer
 from sage.rings.infinity import infinity
 
 from .combinat import CombinatorialElement
-from . import tableau
 from . import permutation
 from . import composition
-from sage.combinat.partitions import ZS1_iterator, ZS1_iterator_nk, ZS1_next, ZS2_next
 from sage.combinat.integer_lists import IntegerListsLex
 from sage.combinat.integer_lists.invlex import IntegerListsBackend_invlex
 from sage.combinat.integer_vector_weighted import iterator_fast as weighted_iterator_fast
@@ -317,7 +315,11 @@ from sage.combinat.combinatorial_map import combinatorial_map
 
 lazy_import('sage.combinat.skew_partition', 'SkewPartition')
 lazy_import('sage.combinat.partition_tuple', 'PartitionTuple')
+lazy_import('sage.combinat.partitions', ['ZS1_iterator', 'ZS1_iterator_nk', 'ZS1_next', 'ZS2_next'])
 lazy_import('sage.combinat.root_system.weyl_group', 'WeylGroup')
+lazy_import('sage.combinat.tableau', ['RowStandardTableaux', 'StandardTableau',
+                                      'StandardTableaux', 'StandardTableaux_size',
+                                      'Tableau', 'Tableaux'])
 lazy_import('sage.libs.pari.all', 'pari')
 lazy_import('sage.groups.perm_gps.permgroup', 'PermutationGroup')
 lazy_import("sage.symbolic.ring", "var")
@@ -419,7 +421,7 @@ class Partition(CombinatorialElement):
         [3, 2, 1]
         sage: Partition(exp=[2,1,1])
         [3, 2, 1, 1]
-        sage: Partition(core=[2,1], quotient=[[2,1],[3],[1,1,1]])
+        sage: Partition(core=[2,1], quotient=[[2,1],[3],[1,1,1]])                       # needs sage.combinat
         [11, 5, 5, 3, 2, 2, 2]
         sage: Partition(frobenius_coordinates=([3,2],[4,0]))
         [4, 4, 1, 1, 1]
@@ -473,7 +475,7 @@ class Partition(CombinatorialElement):
             [3, 2, 1]
             sage: Partition(exp=[2,1,1])
             [3, 2, 1, 1]
-            sage: Partition(core=[2,1], quotient=[[2,1],[3],[1,1,1]])
+            sage: Partition(core=[2,1], quotient=[[2,1],[3],[1,1,1]])                   # needs sage.combinat
             [11, 5, 5, 3, 2, 2, 2]
         """
         l = len(keyword)
@@ -830,6 +832,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: mu = Partition([2, 1])
             sage: Partitions.options.latex='diagram'; latex(mu)       # indirect doctest
             {\def\lr#1{\multicolumn{1}{@{\hspace{.6ex}}c@{\hspace{.6ex}}}{\raisebox{-.3ex}{$#1$}}}
@@ -852,6 +855,7 @@ class Partition(CombinatorialElement):
             \end{array}$}
             }
 
+            sage: # needs sage.combinat
             sage: Partitions.options(latex='young_diagram', convention='french')
             sage: Partitions.options.latex='exp_high'; latex(mu)      # indirect doctest
             2,1
@@ -877,6 +881,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: print(Partition([2, 1])._latex_young_diagram())
             {\def\lr#1{\multicolumn{1}{|@{\hspace{.6ex}}c@{\hspace{.6ex}}|}{\raisebox{-.3ex}{$#1$}}}
             \raisebox{-.6ex}{$\begin{array}[b]{*{2}c}\cline{1-2}
@@ -900,6 +905,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: print(Partition([2, 1])._latex_diagram())
             {\def\lr#1{\multicolumn{1}{@{\hspace{.6ex}}c@{\hspace{.6ex}}}{\raisebox{-.3ex}{$#1$}}}
             \raisebox{-.6ex}{$\begin{array}[b]{*{2}c}\\
@@ -1034,6 +1040,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: p = Partition([3,2,1])
             sage: p/[1,1]
             [3, 2, 1] / [1, 1]
@@ -1267,6 +1274,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: Partition([2, 1, 1]).k_size(1)
             2
             sage: Partition([2, 1, 1]).k_size(2)
@@ -1421,10 +1429,10 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([6, 1]).k_row_lengths(2)
+            sage: Partition([6, 1]).k_row_lengths(2)                                    # needs sage.combinat
             [2, 1]
 
-            sage: Partition([4, 4, 4, 3, 2]).k_row_lengths(2)
+            sage: Partition([4, 4, 4, 3, 2]).k_row_lengths(2)                           # needs sage.combinat
             [0, 1, 1, 1, 2]
 
         .. SEEALSO::
@@ -1443,10 +1451,10 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([6, 1]).k_column_lengths(2)
+            sage: Partition([6, 1]).k_column_lengths(2)                                 # needs sage.combinat
             [1, 0, 0, 0, 1, 1]
 
-            sage: Partition([4, 4, 4, 3, 2]).k_column_lengths(2)
+            sage: Partition([4, 4, 4, 3, 2]).k_column_lengths(2)                        # needs sage.combinat
             [1, 1, 1, 2]
 
         .. SEEALSO::
@@ -1744,10 +1752,10 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([3,2,2,1]).row_standard_tableaux()
+            sage: Partition([3,2,2,1]).row_standard_tableaux()                          # needs sage.combinat
             Row standard tableaux of shape [3, 2, 2, 1]
         """
-        return tableau.RowStandardTableaux(self)
+        return RowStandardTableaux(self)
 
     def standard_tableaux(self):
         """
@@ -1756,10 +1764,10 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([3,2,2,1]).standard_tableaux()
+            sage: Partition([3,2,2,1]).standard_tableaux()                              # needs sage.combinat
             Standard tableaux of shape [3, 2, 2, 1]
         """
-        return tableau.StandardTableaux(self)
+        return StandardTableaux(self)
 
     def up(self):
         r"""
@@ -2402,6 +2410,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: Partition([2,2]).to_dyck_word()
             [1, 1, 0, 0, 1, 1, 0, 0]
             sage: Partition([2,2]).to_dyck_word(4)
@@ -2418,7 +2427,7 @@ class Partition(CombinatorialElement):
         The partition corresponding to ``self.dyck_word()`` is ``self``
         indeed::
 
-            sage: all( p.to_dyck_word().to_partition() == p
+            sage: all( p.to_dyck_word().to_partition() == p                             # needs sage.combinat
             ....:      for p in Partitions(5) )
             True
         """
@@ -2746,10 +2755,10 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([3,2,1]).reading_tableau()
+            sage: Partition([3,2,1]).reading_tableau()                                    # needs sage.combinat
             [[1, 3, 6], [2, 5], [4]]
         """
-        st = tableau.StandardTableaux(self).first()
+        st = StandardTableaux(self).first()
         return st.reading_word_permutation().right_tableau()
 
     @combinatorial_map(name="initial tableau")
@@ -2762,13 +2771,13 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([3,2,2]).initial_tableau()
+            sage: Partition([3,2,2]).initial_tableau()                                    # needs sage.combinat
             [[1, 2, 3], [4, 5], [6, 7]]
         """
         sigma = list(accumulate([1] + self._list))
         tab = [list(range(sigma[i], sigma[i + 1]))
                for i in range(len(sigma) - 1)]
-        return tableau.StandardTableau(tab)
+        return StandardTableau(tab)
 
     def initial_column_tableau(self):
         r"""
@@ -2781,7 +2790,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([3,2]).initial_column_tableau()
+            sage: Partition([3,2]).initial_column_tableau()                               # needs sage.combinat
             [[1, 3, 5], [2, 4]]
         """
         return self.conjugate().initial_tableau().conjugate()
@@ -2814,6 +2823,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: g = Partition([5,3,3,2]).garnir_tableau((0,2)); g.pp()
               1  2  6  7  8
               3  4  5
@@ -2822,7 +2832,6 @@ class Partition(CombinatorialElement):
             sage: g.is_row_strict(); g.is_column_strict()
             True
             False
-
             sage: Partition([5,3,3,2]).garnir_tableau(0,2).pp()
               1  2  6  7  8
               3  4  5
@@ -2853,7 +2862,7 @@ class Partition(CombinatorialElement):
         a = g[row][col]
         g[row][col:] = list(range(a+col+1, g[row+1][col]+1))
         g[row+1][:col+1] = list(range(a, a+col+1))
-        g = tableau.Tableau(g)
+        g = Tableau(g)
         g._garnir_cell = (row, col)
         return g
 
@@ -2883,6 +2892,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: Partition([5,4,3,2]).top_garnir_tableau(2,(0,2)).pp()
                1  2  4  5  8
                3  6  7  9
@@ -2906,7 +2916,7 @@ class Partition(CombinatorialElement):
 
         TESTS::
 
-            sage: Partition([5,4,3,2]).top_garnir_tableau(0,(3,2)).pp()
+            sage: Partition([5,4,3,2]).top_garnir_tableau(0,(3,2)).pp()                 # needs sage.combinat
             Traceback (most recent call last):
             ...
             ValueError: (4,2)=(row+1,col) must be inside the diagram
@@ -2935,7 +2945,7 @@ class Partition(CombinatorialElement):
         # now we will put the number m,m+1,...,t[row+1][col] in order into t
         t[row][col:a+col] = [m+col-b+1+i for i in range(a)]
         t[row+1][col-b+1:col+1] = [m+a+col-b+1+i for i in range(b)]
-        return tableau.StandardTableau(t)
+        return StandardTableau(t)
 
     def ladder_tableau(self, e, ladder_lengths=False):
         r"""
@@ -2958,6 +2968,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: la = Partition([6, 5, 3, 1])
             sage: ascii_art(la.ladder_tableau(3))
               1  2  3  5  7 10
@@ -2966,7 +2977,6 @@ class Partition(CombinatorialElement):
              15
             sage: la.ladder_tableau(3, ladder_lengths=True)[1]
             [1, 1, 2, 2, 3, 3, 3]
-
             sage: ascii_art(la.ladder_tableau(0))
               1  2  3  4  5  6
               7  8  9 10 11
@@ -2995,7 +3005,7 @@ class Partition(CombinatorialElement):
             if ladder_lengths and size:
                 sizes.append(size)
             start += 1
-        ret = tableau.StandardTableaux(self)(Tlad)
+        ret = StandardTableaux(self)(Tlad)
         if ladder_lengths:
             return (ret, sizes)
         return ret
@@ -3145,6 +3155,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: Partition([4,3]).degree(2)
             28
             sage: Partition([4,3]).degree(3)
@@ -3187,6 +3198,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: Partition([4,3]).prime_degree(2)
             36
             sage: Partition([4,3]).prime_degree(3)
@@ -4059,6 +4071,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: Partition([2,1]).contents_tableau()
             [[0, 1], [-1]]
             sage: Partition([3,2,1,1]).contents_tableau().pp()
@@ -4072,8 +4085,8 @@ class Partition(CombinatorialElement):
                 1
                 0
         """
-        return tableau.Tableau([[multicharge[0]-r+c for c in range(self[r])]
-                                for r in range(len(self))])
+        return Tableau([[multicharge[0] - r + c for c in range(self[r])]
+                        for r in range(len(self))])
 
     def is_restricted(self, e, multicharge=(0,)):
         """
@@ -4468,11 +4481,12 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([7,7,5,3,3,3,1]).quotient(3)
+            sage: Partition([7,7,5,3,3,3,1]).quotient(3)                                # needs sage.combinat
             ([2], [1], [2, 2, 2])
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: Partition([8,7,7,4,1,1,1,1,1]).quotient(3)
             ([2, 1], [2, 2], [2])
             sage: Partition([10,8,7,7]).quotient(4)
@@ -4489,7 +4503,6 @@ class Partition(CombinatorialElement):
             ([5, 2], [5, 2, 1], [7, 3, 1])
             sage: Partition([14,12,11,10,10,10,10,9,6,4,3,3,2,1]).quotient(5)
             ([3, 3], [2, 2, 1], [], [3, 3, 3], [1])
-
             sage: all(p == Partition(core=p.core(k), quotient=p.quotient(k))
             ....:     for i in range(10) for p in Partitions(i)
             ....:     for k in range(1,6))
@@ -4586,12 +4599,12 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: p = Partition([3,2,1])
             sage: p.k_boundary(2)
             [3, 2, 1] / [2, 1]
             sage: p.k_boundary(3)
             [3, 2, 1] / [1]
-
             sage: p = Partition([12,8,5,5,2,2,1])
             sage: p.k_boundary(4)
             [12, 8, 5, 5, 2, 2, 1] / [8, 5, 2, 2]
@@ -4710,7 +4723,7 @@ class Partition(CombinatorialElement):
         EXAMPLES::
 
             sage: p = Partition([4,3,2,2,1,1])
-            sage: p.k_skew(4)
+            sage: p.k_skew(4)                                                           # needs sage.combinat
             [9, 5, 3, 2, 1, 1] / [5, 2, 1]
         """
 
@@ -4758,6 +4771,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: p = Partition([4,3,2,2,1,1])
             sage: c = p.to_core(4); c
             [9, 5, 3, 2, 1, 1]
@@ -4780,6 +4794,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: p = Partition([2,1,1])
             sage: p.from_kbounded_to_reduced_word(2)
             [2, 1, 2, 0]
@@ -4816,12 +4831,12 @@ class Partition(CombinatorialElement):
         EXAMPLES::
 
             sage: p = Partition([2,1,1])
-            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.modules
+            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.groups sage.modules
             [-1  1  1]
             [-2  2  1]
             [-2  1  2]
             sage: p = Partition([])
-            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.modules
+            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.groups sage.modules
             [1 0 0]
             [0 1 0]
             [0 0 1]
@@ -5128,7 +5143,7 @@ class Partition(CombinatorialElement):
         EXAMPLES::
 
             sage: p = Partition([4,3,2,2,1,1])
-            sage: p.k_conjugate(4)
+            sage: p.k_conjugate(4)                                                      # needs sage.combinat
             [3, 2, 2, 1, 1, 1, 1, 1, 1]
         """
         return Partition(self.k_skew(k).conjugate().row_lengths())
@@ -5172,12 +5187,12 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([2,1]).atom()
+            sage: Partition([2,1]).atom()                                               # needs sage.combinat
             [[[1, 2], [3]]]
-            sage: Partition([3,2,1]).atom()
+            sage: Partition([3,2,1]).atom()                                             # needs sage.combinat
             [[[1, 2, 3, 6], [4, 5]], [[1, 2, 3], [4, 5], [6]]]
         """
-        return [tab for tab in tableau.StandardTableaux_size(self.size())
+        return [tab for tab in StandardTableaux_size(self.size())
                 if tab.atom() == self]
 
     def k_atom(self, k):
@@ -5187,6 +5202,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: p = Partition([3,2,1])
             sage: p.k_atom(1)
             []
@@ -5200,6 +5216,7 @@ class Partition(CombinatorialElement):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: Partition([1]).k_atom(1)
             [[[1]]]
             sage: Partition([1]).k_atom(2)
@@ -5207,7 +5224,7 @@ class Partition(CombinatorialElement):
             sage: Partition([]).k_atom(1)
             [[]]
         """
-        res = [tableau.Tableau([])]
+        res = [Tableau([])]
         for i in range(len(self)):
             res = (x.promotion_operator(self[-i - 1]) for x in res)
             res = sum(res, [])
@@ -5258,7 +5275,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: part = Partition([3,2,1])
             sage: jt = part.jacobi_trudi(); jt
             [h[3] h[1]    0]
@@ -5299,11 +5316,12 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([1]).character_polynomial()                                 # needs sage.modules
+            sage: # needs sage.combinat sage.modules
+            sage: Partition([1]).character_polynomial()
             x - 1
-            sage: Partition([1,1]).character_polynomial()                               # needs sage.modules
+            sage: Partition([1,1]).character_polynomial()
             1/2*x0^2 - 3/2*x0 - x1 + 1
-            sage: Partition([2,1]).character_polynomial()                               # needs sage.modules
+            sage: Partition([2,1]).character_polynomial()
             1/3*x0^3 - 2*x0^2 + 8/3*x0 - x2
         """
         # Create the polynomial ring we will use
@@ -5364,17 +5382,17 @@ class Partition(CombinatorialElement):
         Same, but removing one 3-ribbon at a time. Note that the 3-core of
         ``mu`` is empty::
 
-            sage: mu.dimension(k=3)
+            sage: mu.dimension(k=3)                                                     # needs sage.combinat
             3
 
         The 2-core of ``mu`` is not the empty partition::
 
-            sage: mu.dimension(k=2)
+            sage: mu.dimension(k=2)                                                     # needs sage.combinat
             0
 
         Indeed, the 2-core of ``mu`` is ``[1]``::
 
-            sage: mu.dimension(Partition([1]),k=2)
+            sage: mu.dimension(Partition([1]), k=2)                                     # needs sage.combinat
             2
 
         TESTS:
@@ -5382,14 +5400,14 @@ class Partition(CombinatorialElement):
         Checks that the sum of squares of dimensions of characters of the
         symmetric group is the order of the group::
 
-            sage: all(sum(mu.dimension()^2 for mu in Partitions(i)) == factorial(i)
+            sage: all(sum(mu.dimension()^2 for mu in Partitions(i)) == factorial(i)     # needs sage.combinat
             ....:     for i in range(10))
             True
 
         A check coming from the theory of `k`-differentiable posets::
 
             sage: k = 2; core = Partition([2,1])
-            sage: all(sum(mu.dimension(core,k=2)^2
+            sage: all(sum(mu.dimension(core, k=2)^2                                     # needs sage.combinat
             ....:         for mu in Partitions(3+i*2) if mu.core(2) == core)
             ....:     == 2^i*factorial(i) for i in range(10))
             True
@@ -5397,7 +5415,7 @@ class Partition(CombinatorialElement):
         Checks that the dimension satisfies the obvious recursion relation::
 
             sage: test = lambda larger, smaller: larger.dimension(smaller) == sum(mu.dimension(smaller) for mu in larger.down())
-            sage: all(test(larger,smaller)                                              # needs sage.modules
+            sage: all(test(larger,smaller)                                              # needs sage.combinat sage.modules
             ....:     for l in range(1,8) for s in range(8)
             ....:     for larger in Partitions(l) for smaller in Partitions(s)
             ....:     if smaller != larger)
@@ -5648,7 +5666,7 @@ class Partition(CombinatorialElement):
         except AttributeError:
             pass
 
-        T = list(tableau.StandardTableaux(self))
+        T = list(StandardTableaux(self))
         n = sum(self)
         edges = []
         to_perms = {t: t.reading_word_permutation() for t in T}
@@ -5688,9 +5706,9 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: SM = Partition([2,2,1]).specht_module(QQ); SM                         # needs sage.modules
+            sage: SM = Partition([2,2,1]).specht_module(QQ); SM                         # needs sage.combinat sage.modules
             Specht module of [2, 2, 1] over Rational Field
-            sage: SM.frobenius_image()                                                  # needs sage.modules
+            sage: SM.frobenius_image()                                                  # needs sage.combinat sage.modules
             s[2, 2, 1]
         """
         from sage.combinat.specht_module import SpechtModule
@@ -5713,14 +5731,14 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: GP = Partition([3,2,1]).garsia_procesi_module(QQ); GP
             Garsia-Procesi module of shape [3, 2, 1] over Rational Field
             sage: GP.graded_frobenius_image()
             q^4*s[3, 2, 1] + q^3*s[3, 3] + q^3*s[4, 1, 1] + (q^3+q^2)*s[4, 2]
              + (q^2+q)*s[5, 1] + s[6]
 
-            sage: Partition([3,2,1]).garsia_procesi_module(GF(3))                       # needs sage.modules
+            sage: Partition([3,2,1]).garsia_procesi_module(GF(3))                       # needs sage.combinat sage.modules
             Garsia-Procesi module of shape [3, 2, 1] over Finite Field of size 3
         """
         from sage.combinat.symmetric_group_representations import GarsiaProcesiModule
@@ -5744,9 +5762,9 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([2,2,1]).specht_module_dimension()
+            sage: Partition([2,2,1]).specht_module_dimension()                          # needs sage.combinat
             5
-            sage: Partition([2,2,1]).specht_module_dimension(GF(2))                     # needs sage.rings.finite_rings
+            sage: Partition([2,2,1]).specht_module_dimension(GF(2))                     # needs sage.combinat sage.rings.finite_rings
             5
         """
         from sage.categories.fields import Fields
@@ -5769,13 +5787,13 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: Partition([2,2,1]).simple_module_dimension()
             5
             sage: Partition([2,2,1]).specht_module_dimension(GF(3))                     # needs sage.rings.finite_rings
             5
             sage: Partition([2,2,1]).simple_module_dimension(GF(3))                     # needs sage.rings.finite_rings
             4
-
             sage: for la in Partitions(6, regular=3):                                   # needs sage.groups sage.modules
             ....:     print(la, la.specht_module_dimension(), la.simple_module_dimension(GF(3)))
             [6] 1 1
@@ -6291,6 +6309,7 @@ class Partitions(UniqueRepresentation, Parent):
         Changing the ``convention`` for partitions also changes the ``convention``
         option for tableaux and vice versa::
 
+            sage: # needs sage.combinat
             sage: T = Tableau([[1,2,3],[4,5]])
             sage: T.pp()
               4  5
@@ -6304,6 +6323,7 @@ class Partitions(UniqueRepresentation, Parent):
             sage: T.pp()
               1  2  3
               4  5
+
             sage: Partitions.options._reset()
         """
         NAME = 'Partitions'
@@ -6334,7 +6354,14 @@ class Partitions(UniqueRepresentation, Parent):
         latex_diagram_str = {'default': "\\ast",
                              'description': 'The character used for the cells when latexing Ferrers diagrams',
                              'checker': lambda char: isinstance(char, str)}
-        convention = {'link_to': (tableau.Tableaux.options, 'convention')}
+        convention = dict(default='English',
+                          description='Sets the convention used for displaying tableaux and partitions',
+                          values=dict(
+                              English='use the English convention',
+                              French='use the French convention',
+                              Russian='use the Russian convention',
+                          ),
+                          case_sensitive=False)
         notation = {'alt_name': 'convention'}
 
     def __reversed__(self):
@@ -6366,6 +6393,7 @@ class Partitions(UniqueRepresentation, Parent):
             sage: P([3, 2, 1, 0])
             [3, 2, 1]
 
+            sage: # needs sage.combinat
             sage: PT = PartitionTuples()
             sage: elt = PT([[4,4,2,2,1]]); elt
             ([4, 4, 2, 2, 1])
@@ -6669,7 +6697,8 @@ class Partitions_all(Partitions):
 
         TESTS::
 
-            sage: all(Partitions().from_zero_one(mu.zero_one_sequence()) == mu for n in range(10) for mu in Partitions(n))
+            sage: all(Partitions().from_zero_one(mu.zero_one_sequence()) == mu
+            ....:     for n in range(10) for mu in Partitions(n))
             True
         """
         tmp = [i for i in range(len(seq)) if seq[i] == 0]
@@ -6683,18 +6712,19 @@ class Partitions_all(Partitions):
 
         EXAMPLES::
 
-            sage: Partitions().from_core_and_quotient([2,1], [[2,1],[3],[1,1,1]])
+            sage: Partitions().from_core_and_quotient([2,1], [[2,1],[3],[1,1,1]])       # needs sage.combinat
             [11, 5, 5, 3, 2, 2, 2]
 
         TESTS::
 
-            sage: Partitions().from_core_and_quotient([2,1], [[2,1],[2,3,1],[1,1,1]])
+            sage: Partitions().from_core_and_quotient([2,1], [[2,1],[2,3,1],[1,1,1]])   # needs sage.combinat
             Traceback (most recent call last):
             ...
             ValueError: the quotient [[2, 1], [2, 3, 1], [1, 1, 1]] must be a tuple of partitions
 
         We check that :issue:`11412` is actually fixed::
 
+            sage: # needs sage.combinat
             sage: test = lambda x, k: x == Partition(core=x.core(k),
             ....:                                    quotient=x.quotient(k))
             sage: all(test(mu,k) for k in range(1,5)
@@ -7071,22 +7101,22 @@ class Partitions_n(Partitions):
 
         EXAMPLES::
 
-            sage: Partitions(5).random_element_plancherel()   # random
+            sage: Partitions(5).random_element_plancherel()   # random                  # needs sage.combinat
             [2, 1, 1, 1]
-            sage: Partitions(20).random_element_plancherel()  # random
+            sage: Partitions(20).random_element_plancherel()  # random                  # needs sage.combinat
             [9, 3, 3, 2, 2, 1]
 
         TESTS::
 
-            sage: all(Part.random_element_plancherel() in Part
+            sage: all(Part.random_element_plancherel() in Part                          # needs sage.combinat
             ....:     for Part in map(Partitions, range(10)))
             True
 
         Check that :issue:`18752` is fixed::
 
             sage: P = Partitions(5)
-            sage: la = P.random_element_plancherel()
-            sage: la.parent() is P
+            sage: la = P.random_element_plancherel()                                    # needs sage.combinat
+            sage: la.parent() is P                                                      # needs sage.combinat
             True
 
         ALGORITHM:
@@ -9428,7 +9458,7 @@ except ImportError:
 
 # October 2012: fixing outdated pickles which use classes being deprecated
 from sage.misc.persist import register_unpickle_override
-from sage.combinat.partition_tuple import PartitionTuples_level_size
+lazy_import('sage.combinat.partition_tuple', 'PartitionTuples_level_size')
 register_unpickle_override('sage.combinat.partition', 'PartitionTuples_nk', PartitionTuples_level_size)
 register_unpickle_override('sage.combinat.partition', 'Partition_class', Partition)
 register_unpickle_override('sage.combinat.partition', 'OrderedPartitions_nk', OrderedPartitions)

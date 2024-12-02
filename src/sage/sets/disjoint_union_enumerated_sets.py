@@ -362,9 +362,9 @@ class DisjointUnionEnumeratedSets(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
-            sage: U4 = DisjointUnionEnumeratedSets(                                     # needs sage.combinat
+            sage: U4 = DisjointUnionEnumeratedSets(
             ....:          Family(NonNegativeIntegers(), Partitions))
-            sage: Partition([]) in U4                                                   # needs sage.combinat
+            sage: Partition([]) in U4
             doctest:...: UserWarning: Disjoint union of Lazy family
             (<class 'sage.combinat.partition.Partitions'>(i))_{i in Non negative integers}
             is an infinite union
@@ -374,7 +374,7 @@ class DisjointUnionEnumeratedSets(UniqueRepresentation, Parent):
         Note: one has to use a different family from the previous one in this
         file otherwise the warning is not re-issued::
 
-            sage: Partition([3,2,1,1]) in U4                                            # needs sage.combinat
+            sage: Partition([3,2,1,1]) in U4
             True
 
         The following call will loop forever::

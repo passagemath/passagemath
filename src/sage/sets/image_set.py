@@ -242,8 +242,8 @@ class ImageSubobject(Parent):
             sage: Im.ambient() is R
             True
 
-            sage: P = Partitions(3).map(attrcall('conjugate'))                          # needs sage.combinat
-            sage: P.ambient() is None                                                   # needs sage.combinat
+            sage: P = Partitions(3).map(attrcall('conjugate'))
+            sage: P.ambient() is None
             True
 
             sage: R = Permutations(10).map(attrcall('reduced_word'))
@@ -297,7 +297,7 @@ class ImageSubobject(Parent):
         r"""
         TESTS::
 
-            sage: Partitions(3).map(attrcall('conjugate'))                              # needs sage.combinat
+            sage: Partitions(3).map(attrcall('conjugate'))
             Image of Partitions of the integer 3 by
              The map *.conjugate() from Partitions of the integer 3
         """

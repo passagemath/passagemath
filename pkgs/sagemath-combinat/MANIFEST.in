@@ -32,6 +32,8 @@ exclude sage/combinat/combinat_cython.p*
 exclude sage/combinat/combination.p*
 exclude sage/combinat/combinatorial_map.p*
 exclude sage/combinat/composition.p*
+exclude sage/combinat/partition.p*                                      # for jordan form
+exclude sage/combinat/partitions.p*
 exclude sage/combinat/permutation.p*
 exclude sage/combinat/permutation_cython.p*
 exclude sage/combinat/ranker.py                                         # for sage.sets.finite_set_map_cy
