@@ -1,0 +1,128 @@
+--- gfan0.7/Makefile.orig	2024-08-12 10:00:15.000000000 -0600
++++ gfan0.7/Makefile	2024-08-15 15:26:30.841689860 -0600
+@@ -226,15 +226,6 @@ CATSOBJECTS =	lp_cdd.o \
+ 	tropicaldeterminant.o \
+ 	determinantpoly.o \
+ 	traverser_sphere.o \
+-	gfanlib_zcone.o \
+-	gfanlib_symmetry.o \
+-	gfanlib_symmetriccomplex.o \
+-	gfanlib_polyhedralfan.o \
+-	gfanlib_zfan.o \
+-	gfanlib_polymakefile.o \
+-	gfanlib_mixedvolume.o \
+-	gfanlib_circuittableint.o \
+-	gfanlib_paralleltraverser.o \
+ 	padic.o \
+ 	integergb.o \
+ 	traverser_resultantfan.o \
+@@ -242,12 +233,9 @@ CATSOBJECTS =	lp_cdd.o \
+ 	traverser_resultantfanspecialization.o \
+ 	myassert.o \
+ 	traverser_bsptree.o \
+-	gfanlib_traversal.o \
+ 	tropicalcurve.o \
+ 	packedmonomial.o \
+ 	gmpallocator.o \
+-	gfanlib_memoryresource.o \
+-	gfanlib_hypersurfaceintersection.o \
+ 	divisionobject.o \
+ 	gfanlibglue.o \
+ #	gfanlib_circuittableinteger.o \
+@@ -413,14 +401,26 @@ GFANLIBFILES= 	gfanlib.h \
+ 				gfanlib_memoryresource.cpp \
+ 	#			gfanlib_tableau.h \   we do not yet support this one
+ 
++GFANLIBOBJECTS =		gfanlib_zcone.o \
++				gfanlib_symmetry.o \
++				gfanlib_symmetriccomplex.o \
++				gfanlib_polyhedralfan.o \
++				gfanlib_zfan.o \
++				gfanlib_polymakefile.o \
++				gfanlib_mixedvolume.o \
++				gfanlib_circuittableint.o \
++				gfanlib_paralleltraverser.o \
++				gfanlib_traversal.o \
++				gfanlib_memoryresource.o \
++				gfanlib_hypersurfaceintersection.o
+ 
+ EXECS	  = $(MAIN)
+ 
+ # When compiling symmetrictraversal.cpp as any other file, it causes the program to crash in certain situations.
+ # (compiling with gcc version 4.7.2 and running gfan _tropicaltraverse on a starting cone for Grassmann3_7)
+ # Either this is a bug in the code or in the compiler. The bug disappears by compiling with -fno-guess-branch-probability
+-src/symmetrictraversal.o: src/symmetrictraversal.cpp
+-	$(CXX) $(CFLAGS) -fno-guess-branch-probability  -c src/symmetrictraversal.cpp -o src/symmetrictraversal.o
++#src/symmetrictraversal.o: src/symmetrictraversal.cpp
++#	$(CXX) $(CFLAGS) -fno-guess-branch-probability  -c src/symmetrictraversal.cpp -o src/symmetrictraversal.o
+ # If compiling with clang, use the line below instead:
+ #	$(CXX) $(CFLAGS) -c src/symmetrictraversal.cpp -o src/symmetrictraversal.o
+ 
+@@ -432,6 +432,7 @@ OBJECTS1 = 	$(addprefix src/,$(SOPLEX_OB
+ 		$(SAGE_OBJECTS) \
+ 		$(addprefix src/,$(CATSOBJECTS)) \
+ 		$(addprefix src/,$(APPOBJECTS)) \
++		src/libgfan.so \
+ 		src/symmetrictraversal.o
+ 
+ OBJECTS2 = src/app_test.o \
+@@ -508,7 +509,48 @@ default: $(OBJECTS) $(ADDITIONALOBJECTS)
+ 
+ $(MAIN): $(OBJECTS)
+ #	$(CCLINKER) $(OBJECTS) $(ADDITIONALLINKOPTIONS) $(GPROFFLAG) -lpthread  -o $(MAIN)
+-	$(CCLINKER) $(OBJECTS) $(ADDITIONALLINKOPTIONS) $(GPROFFLAG) -lpthread -rdynamic -o $(MAIN)
++	$(CCLINKER) $(OBJECTS) $(ADDITIONALLINKOPTIONS) $(GPROFFLAG) -L src -lgfan -lpthread -o $(MAIN)
++
++src/libgfan.so: $(addprefix src/,$(GFANLIBOBJECTS))
++	$(CCLINKER) $(CCFLAGS) $(ADDITIONALLINKOPTIONS) -shared -Wl,-h,libgfan.so.0 -o src/libgfan.so.0.0.0 $^ -lgmp -lpthread
++	ln -s libgfan.so.0.0.0 src/libgfan.so.0
++	ln -s libgfan.so.0 src/libgfan.so
++
++src/gfanlib_zcone.o: src/gfanlib_zcone.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_symmetry.o: src/gfanlib_symmetry.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_symmetriccomplex.o: src/gfanlib_symmetriccomplex.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_polyhedralfan.o: src/gfanlib_polyhedralfan.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_zfan.o: src/gfanlib_zfan.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_polymakefile.o: src/gfanlib_polymakefile.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_mixedvolume.o: src/gfanlib_mixedvolume.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_circuittableint.o: src/gfanlib_circuittableint.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_paralleltraverser.o: src/gfanlib_paralleltraverser.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_traversal.o: src/gfanlib_traversal.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_memoryresource.o: src/gfanlib_memoryresource.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
++
++src/gfanlib_hypersurfaceintersection.o: src/gfanlib_hypersurfaceintersection.cpp
++	$(CXX) $(CCFLAGS) -fPIC -c $< -o $@
+ 
+ release:
+ 	rm -f -r $(RELEASEDIR)/*
+--- gfan0.7/src/gfanlib.h.orig	2024-08-12 10:00:15.000000000 -0600
++++ gfan0.7/src/gfanlib.h	2024-08-15 20:37:05.067450910 -0600
+@@ -8,6 +8,7 @@
+ #ifndef GFANLIB_H_
+ #define GFANLIB_H_
+ 
++#include <assert.h>
+ #include "gfanlib_z.h"
+ #include "gfanlib_vector.h"
+ #include "gfanlib_matrix.h"
