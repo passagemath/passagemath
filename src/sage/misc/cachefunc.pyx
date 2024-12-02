@@ -914,8 +914,8 @@ cdef class CachedFunction():
         TESTS::
 
             sage: from sage.misc.sageinspect import sage_getsource
-            sage: g = CachedFunction(number_of_partitions)                              # needs sage.combinat
-            sage: 'flint' in sage_getsource(g)  # indirect doctest                      # needs sage.combinat
+            sage: g = CachedFunction(number_of_partitions)
+            sage: 'flint' in sage_getsource(g)  # indirect doctest
             True
         """
         from sage.misc.sageinspect import sage_getsource
@@ -1192,8 +1192,8 @@ cdef class CachedFunction():
         """
         EXAMPLES::
 
-            sage: g = CachedFunction(number_of_partitions)                              # needs sage.combinat
-            sage: g     # indirect doctest                                              # needs sage.combinat
+            sage: g = CachedFunction(number_of_partitions)
+            sage: g     # indirect doctest
             Cached version of <function number_of_partitions at 0x...>
         """
         try:

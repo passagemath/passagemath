@@ -355,9 +355,9 @@ class DeprecatedFunctionAlias:
         TESTS::
 
             sage: from sage.misc.superseded import deprecated_function_alias
-            sage: g = deprecated_function_alias(13109, number_of_partitions)            # needs sage.combinat
+            sage: g = deprecated_function_alias(13109, number_of_partitions)
             sage: from sage.misc.superseded import deprecated_function_alias
-            sage: g.__doc__                                                             # needs sage.combinat
+            sage: g.__doc__
             'Deprecated: Use :func:`number_of_partitions` instead.\nSee :issue:`13109` for details.\n\n'
         """
         _check_issue_number(issue_number)
@@ -385,8 +385,8 @@ class DeprecatedFunctionAlias:
         TESTS::
 
             sage: from sage.misc.superseded import deprecated_function_alias
-            sage: g = deprecated_function_alias(13109, number_of_partitions)            # needs sage.combinat
-            sage: g.__name__                                                            # needs sage.combinat
+            sage: g = deprecated_function_alias(13109, number_of_partitions)
+            sage: g.__name__
             'g'
 
             sage: from sage.misc.superseded import deprecated_function_alias
