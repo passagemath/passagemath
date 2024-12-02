@@ -29,7 +29,7 @@
  	divisionobject.o \
  	gfanlibglue.o \
  #	gfanlib_circuittableinteger.o \
-@@ -413,14 +401,26 @@ GFANLIBFILES= 	gfanlib.h \
+@@ -413,7 +401,19 @@ GFANLIBFILES= 	gfanlib.h \
  				gfanlib_memoryresource.cpp \
  	#			gfanlib_tableau.h \   we do not yet support this one
  
@@ -49,17 +49,7 @@
  EXECS	  = $(MAIN)
  
  # When compiling symmetrictraversal.cpp as any other file, it causes the program to crash in certain situations.
- # (compiling with gcc version 4.7.2 and running gfan _tropicaltraverse on a starting cone for Grassmann3_7)
- # Either this is a bug in the code or in the compiler. The bug disappears by compiling with -fno-guess-branch-probability
--src/symmetrictraversal.o: src/symmetrictraversal.cpp
--	$(CXX) $(CFLAGS) -fno-guess-branch-probability  -c src/symmetrictraversal.cpp -o src/symmetrictraversal.o
-+#src/symmetrictraversal.o: src/symmetrictraversal.cpp
-+#	$(CXX) $(CFLAGS) -fno-guess-branch-probability  -c src/symmetrictraversal.cpp -o src/symmetrictraversal.o
- # If compiling with clang, use the line below instead:
- #	$(CXX) $(CFLAGS) -c src/symmetrictraversal.cpp -o src/symmetrictraversal.o
- 
-@@ -432,6 +432,7 @@ OBJECTS1 = 	$(addprefix src/,$(SOPLEX_OB
- 		$(SAGE_OBJECTS) \
+@@ -432,5 +432,6 @@ OBJECTS1 = 	$(addprefix src/,$(SOPLEX_OB
  		$(addprefix src/,$(CATSOBJECTS)) \
  		$(addprefix src/,$(APPOBJECTS)) \
 +		src/libgfan.so \
@@ -70,7 +60,7 @@
  
  $(MAIN): $(OBJECTS)
  #	$(CCLINKER) $(OBJECTS) $(ADDITIONALLINKOPTIONS) $(GPROFFLAG) -lpthread  -o $(MAIN)
--	$(CCLINKER) $(OBJECTS) $(ADDITIONALLINKOPTIONS) $(GPROFFLAG) -lpthread -rdynamic -o $(MAIN)
+-	$(CXX) $(CXXFLAGS) -pthread -o $(MAIN) $(LDFLAGS) $(OBJECTS) -lpthread $(ADDITIONALLINKOPTIONS) $(GPROFFLAG)
 +	$(CCLINKER) $(OBJECTS) $(ADDITIONALLINKOPTIONS) $(GPROFFLAG) -L src -lgfan -lpthread -o $(MAIN)
 +
 +src/libgfan.so: $(addprefix src/,$(GFANLIBOBJECTS))
