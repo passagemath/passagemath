@@ -221,6 +221,8 @@ def q_binomial(n, k, q=None, algorithm='auto'):
         2
         sage: q_binomial(4,2,3.14)                                                      # needs sage.rings.real_mpfr
         152.030056160000
+
+        sage: # needs sage.rings.finite_rings
         sage: R = GF((5, 2), 't')
         sage: t = R.gen(0)
         sage: q_binomial(6, 3, t)
@@ -301,6 +303,7 @@ def q_binomial(n, k, q=None, algorithm='auto'):
 
     Check that the parent is always the parent of ``q``::
 
+        sage: # needs sage.rings.number_field
         sage: R.<q> = CyclotomicField(3)
         sage: for algo in ["naive", "cyclotomic"]:
         ....:     for n in range(4):
