@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-combinat
+# sage_setup: distribution = sagemath-categories
 r"""
 Iterators over the partitions of an integer
 

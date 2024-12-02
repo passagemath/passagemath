@@ -20,6 +20,9 @@ from sage.combinat.combinat import (CombinatorialObject,
 from sage.combinat.combination import Combinations
 from sage.combinat.composition import Composition, Compositions
 from sage.combinat.permutation import Permutation, Permutations, Arrangements, CyclicPermutations, CyclicPermutationsOfPartition
+from sage.combinat.partition import (Partition, Partitions, PartitionsInBox,
+                                     OrderedPartitions, PartitionsGreatestLE,
+                                     PartitionsGreatestEQ, number_of_partitions)
 from sage.combinat.subset import Subsets, subsets, powerset, uniq
 from sage.combinat.tuple import Tuples, UnorderedTuples
 

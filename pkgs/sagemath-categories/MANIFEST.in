@@ -221,6 +221,8 @@ include sage/combinat/combinat_cython.p*
 include sage/combinat/combination.p*
 include sage/combinat/combinatorial_map.p*
 include sage/combinat/composition.p*
+include sage/combinat/partition.p*
+include sage/combinat/partitions.p*
 include sage/combinat/permutation.p*
 include sage/combinat/permutation_cython.p*
 include sage/combinat/ranker.py                                         # for sage.sets.finite_set_map_cy
