@@ -7009,7 +7009,7 @@ class Partitions_n(Partitions):
 
             sage: Partitions(5).random_element()  # random                              # needs sage.libs.flint
             [2, 1, 1, 1]
-            sage: Partitions(5).random_element(measure='Plancherel')  # random          # needs sage.libs.flint
+            sage: Partitions(5).random_element(measure='Plancherel')  # random          # needs sage.combinat sage.libs.flint
             [2, 1, 1, 1]
         """
         if measure == 'uniform':
@@ -7335,7 +7335,7 @@ class Partitions_nk(Partitions):
             [[]]
 
             sage: from sage.combinat.partition import number_of_partitions_length
-            sage: all( len(Partitions(n, length=k).list())                              # needs sage.libs.flint
+            sage: all( len(Partitions(n, length=k).list())                              # needs sage.libs.flint sage.libs.gap
             ....:      == number_of_partitions_length(n, k)
             ....:      for n in range(9) for k in range(n+2) )
             True
@@ -7399,7 +7399,7 @@ class Partitions_nk(Partitions):
             5
             sage: Partitions(8, length=5).cardinality()
             3
-            sage: Partitions(15, length=6).cardinality()
+            sage: Partitions(15, length=6).cardinality()                                # needs sage.libs.gap
             26
             sage: Partitions(0, length=0).cardinality()
             1
@@ -8973,7 +8973,7 @@ class PartitionsGreatestEQ(UniqueRepresentation, IntegerListsLex):
 
         TESTS::
 
-            sage: all(PartitionsGreatestEQ(n, a).cardinality() ==                       # needs sage.libs.flint
+            sage: all(PartitionsGreatestEQ(n, a).cardinality() ==                       # needs sage.libs.flint sage.libs.gap
             ....:     len(PartitionsGreatestEQ(n, a).list())
             ....:     for n in range(20) for a in range(6))
             True
