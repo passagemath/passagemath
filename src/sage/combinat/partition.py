@@ -4831,12 +4831,12 @@ class Partition(CombinatorialElement):
         EXAMPLES::
 
             sage: p = Partition([2,1,1])
-            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.modules
+            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.groups sage.modules
             [-1  1  1]
             [-2  2  1]
             [-2  1  2]
             sage: p = Partition([])
-            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.modules
+            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.groups sage.modules
             [1 0 0]
             [0 1 0]
             [0 0 1]
@@ -5275,7 +5275,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: part = Partition([3,2,1])
             sage: jt = part.jacobi_trudi(); jt
             [h[3] h[1]    0]
@@ -5316,11 +5316,12 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: Partition([1]).character_polynomial()                                 # needs sage.modules
+            sage: # needs sage.combinat sage.modules
+            sage: Partition([1]).character_polynomial()
             x - 1
-            sage: Partition([1,1]).character_polynomial()                               # needs sage.modules
+            sage: Partition([1,1]).character_polynomial()
             1/2*x0^2 - 3/2*x0 - x1 + 1
-            sage: Partition([2,1]).character_polynomial()                               # needs sage.modules
+            sage: Partition([2,1]).character_polynomial()
             1/3*x0^3 - 2*x0^2 + 8/3*x0 - x2
         """
         # Create the polynomial ring we will use
@@ -5705,9 +5706,9 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: SM = Partition([2,2,1]).specht_module(QQ); SM                         # needs sage.modules
+            sage: SM = Partition([2,2,1]).specht_module(QQ); SM                         # needs sage.combinat sage.modules
             Specht module of [2, 2, 1] over Rational Field
-            sage: SM.frobenius_image()                                                  # needs sage.modules
+            sage: SM.frobenius_image()                                                  # needs sage.combinat sage.modules
             s[2, 2, 1]
         """
         from sage.combinat.specht_module import SpechtModule
@@ -5730,14 +5731,14 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: GP = Partition([3,2,1]).garsia_procesi_module(QQ); GP
             Garsia-Procesi module of shape [3, 2, 1] over Rational Field
             sage: GP.graded_frobenius_image()
             q^4*s[3, 2, 1] + q^3*s[3, 3] + q^3*s[4, 1, 1] + (q^3+q^2)*s[4, 2]
              + (q^2+q)*s[5, 1] + s[6]
 
-            sage: Partition([3,2,1]).garsia_procesi_module(GF(3))                       # needs sage.modules
+            sage: Partition([3,2,1]).garsia_procesi_module(GF(3))                       # needs sage.combinat sage.modules
             Garsia-Procesi module of shape [3, 2, 1] over Finite Field of size 3
         """
         from sage.combinat.symmetric_group_representations import GarsiaProcesiModule
