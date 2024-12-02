@@ -9458,8 +9458,7 @@ except ImportError:
 
 # October 2012: fixing outdated pickles which use classes being deprecated
 from sage.misc.persist import register_unpickle_override
-lazy_import('sage.combinat.partition_tuple', 'PartitionTuples_level_size')
-register_unpickle_override('sage.combinat.partition', 'PartitionTuples_nk', PartitionTuples_level_size)
+
 register_unpickle_override('sage.combinat.partition', 'Partition_class', Partition)
 register_unpickle_override('sage.combinat.partition', 'OrderedPartitions_nk', OrderedPartitions)
 register_unpickle_override('sage.combinat.partition', 'PartitionsInBox_hw', PartitionsInBox)
