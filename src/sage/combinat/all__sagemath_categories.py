@@ -26,6 +26,8 @@ from sage.combinat.partition import (Partition, Partitions, PartitionsInBox,
 from sage.combinat.subset import Subsets, subsets, powerset, uniq
 from sage.combinat.tuple import Tuples, UnorderedTuples
 
+lazy_import('sage.combinat.q_analogues', ['gaussian_binomial', 'q_binomial',
+                                          'number_of_irreducible_polynomials'])
 
 from sage.combinat.dlx import DLXMatrix, AllExactCovers, OneExactCover
 

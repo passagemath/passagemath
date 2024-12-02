@@ -144,8 +144,6 @@ from sage.combinat.matrices.all import *
 lazy_import('sage.combinat.integer_vectors_mod_permgroup',
             'IntegerVectorsModPermutationGroup')
 
-lazy_import('sage.combinat.q_analogues', ['gaussian_binomial', 'q_binomial', 'number_of_irreducible_polynomials'])
-
 from sage.combinat.species.all import *
 
 lazy_import('sage.combinat.kazhdan_lusztig', 'KazhdanLusztigPolynomial')
