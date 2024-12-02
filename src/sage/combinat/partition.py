@@ -7416,12 +7416,12 @@ class Partitions_nk(Partitions):
 
             sage: N = [0, 1, 2, 3, 5, 10, 20, 500, 850]
             sage: K = [0, 1, 2, 3, 5, 10, 11, 20, 21, 250, 499, 500]
-            sage: all(Partitions(n, length=k).cardinality()                             # needs sage.libs.flint
+            sage: all(Partitions(n, length=k).cardinality()                             # needs sage.libs.flint sage.libs.gap
             ....:       == Partitions(n,length=k).cardinality('gap')
             ....:     for n in N for k in K)
             True
             sage: P = Partitions(4562, length=2800)
-            sage: P.cardinality() == P.cardinality('gap')                               # needs sage.libs.flint
+            sage: P.cardinality() == P.cardinality('gap')                               # needs sage.libs.flint sage.libs.gap
             True
         """
         return number_of_partitions_length(self.n, self.k, algorithm)
