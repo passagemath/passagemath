@@ -24,6 +24,7 @@ on:
            "ubuntu-jammy",
            "ubuntu-noble",
            "ubuntu-oracular",
+           "ubuntu-plucky",
            "debian-bullseye",
            "debian-bookworm",
            "debian-trixie",

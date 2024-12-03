@@ -322,6 +322,60 @@
 .. |codespace-ubuntu-oracular-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-oracular-maximal%2Fdevcontainer.json
 
+.. |image-ubuntu-plucky-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-system-packages
+
+.. |image-ubuntu-plucky-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-configured
+
+.. |image-ubuntu-plucky-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets-pre
+
+.. |image-ubuntu-plucky-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets
+
+.. |image-ubuntu-plucky-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets-optional
+
+.. |codespace-ubuntu-plucky-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-plucky-minimal%2Fdevcontainer.json
+
+.. |image-ubuntu-plucky-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-with-system-packages
+
+.. |image-ubuntu-plucky-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-configured
+
+.. |image-ubuntu-plucky-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets-pre
+
+.. |image-ubuntu-plucky-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets
+
+.. |image-ubuntu-plucky-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets-optional
+
+.. |codespace-ubuntu-plucky-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-plucky-standard%2Fdevcontainer.json
+
+.. |image-ubuntu-plucky-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-system-packages
+
+.. |image-ubuntu-plucky-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-configured
+
+.. |image-ubuntu-plucky-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets-pre
+
+.. |image-ubuntu-plucky-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets
+
+.. |image-ubuntu-plucky-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets-optional
+
+.. |codespace-ubuntu-plucky-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-plucky-maximal%2Fdevcontainer.json
+
 .. |image-debian-bullseye-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages
 
@@ -2555,6 +2609,17 @@
      - |codespace-ubuntu-oracular-standard|
    * -    ‑*maximal*
      - |image-ubuntu-oracular-maximal-with-system-packages| |image-ubuntu-oracular-maximal-with-targets-pre|
+     -
+   * - **ubuntu**-plucky 
+       
+          ‑*minimal*
+     - |image-ubuntu-plucky-minimal-with-system-packages| |image-ubuntu-plucky-minimal-with-targets-pre| |image-ubuntu-plucky-minimal-with-targets| |image-ubuntu-plucky-minimal-with-targets-optional|
+     - |codespace-ubuntu-plucky-minimal|
+   * -    ‑*standard*
+     - |image-ubuntu-plucky-standard-with-system-packages| |image-ubuntu-plucky-standard-with-targets-pre| |image-ubuntu-plucky-standard-with-targets| |image-ubuntu-plucky-standard-with-targets-optional|
+     - |codespace-ubuntu-plucky-standard|
+   * -    ‑*maximal*
+     - |image-ubuntu-plucky-maximal-with-system-packages| |image-ubuntu-plucky-maximal-with-targets-pre|
      -
    * - **debian**-bullseye 
        
