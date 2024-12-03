@@ -19,7 +19,7 @@ on:
         default: >-
           [
            "ubuntu-xenial-toolchain-gcc_9",
-           "ubuntu-bionic-gcc_8",
+           "ubuntu-bionic-toolchain-gcc_9",
            "ubuntu-focal",
            "ubuntu-jammy",
            "ubuntu-noble",
@@ -62,7 +62,7 @@ on:
            "opensuse-tumbleweed-python3.10",
            "opensuse-tumbleweed",
            "conda-forge-python3.11",
-           "ubuntu-bionic-gcc_8-i386",
+           "ubuntu-bionic-toolchain-gcc_9-i386",
            "debian-bullseye-i386",
           ]
         # 'tox -e update_docker_platforms' updates above
