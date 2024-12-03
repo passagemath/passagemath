@@ -2816,10 +2816,10 @@ cdef class pAdicGenericElement(LocalGenericElement):
             sage: (x^125/125).precision_absolute()
             -775
 
-            sage: # needs sage.libs.ntl
+            sage: # needs sage.libs.ntl sage.rings.padics
             sage: z = 1 - w + O(w^2)
             sage: x = 1 - z
-            sage: z.log().precision_absolute()                                          # needs sage.rings.padics
+            sage: z.log().precision_absolute()
             -1625
             sage: (x^5/5).precision_absolute()
             -615
