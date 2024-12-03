@@ -1558,7 +1558,7 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
             Test that ``coefficient`` also works for those parents that do
             not have an ``element_class``::
 
-                sage: # needs sage.modules sage.rings.padics
+                sage: # needs sage.modules sage.rings.padics sage.schemes
                 sage: H = pAdicWeightSpace(3)
                 sage: F = CombinatorialFreeModule(QQ, H)
                 sage: hasattr(H, "element_class")
