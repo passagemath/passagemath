@@ -3041,8 +3041,8 @@ cdef class EltPair:
         Verify that :issue:`16341` has been resolved::
 
             sage: K.<a> = Qq(9)                                                         # needs sage.rings.padics
-            sage: E = EllipticCurve_from_j(0).base_extend(K)                            # needs sage.rings.padics
-            sage: E.get_action(ZZ)                                                      # needs sage.rings.padics
+            sage: E = EllipticCurve_from_j(0).base_extend(K)                            # needs sage.rings.padics sage.schemes
+            sage: E.get_action(ZZ)                                                      # needs sage.rings.padics sage.schemes
             Right Integer Multiplication
              by Integer Ring
              on Elliptic Curve defined by y^2 + (1+O(3^20))*y = x^3
