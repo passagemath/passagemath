@@ -6,7 +6,7 @@ Description
 
 This package represents the required C and C++ compilers.
 
-- GCC (GNU Compiler Collection) versions 8.x (>= 8.4.0) to 13.x are supported.
+- GCC (GNU Compiler Collection) versions 9.x to 14.x are supported.
 
 - Clang (LLVM) is also supported.
 
@@ -24,16 +24,12 @@ need to run::
 
 Vendor and versions of the C and C++ compilers should match.
 
-Users of older Linux distributions (in particular, ``ubuntu-xenial``
-or older, ``debian-buster`` or older, ``linuxmint-18`` or older)
-should upgrade their systems before attempting to install Sage from
-source.  Users of ``ubuntu-bionic``, ``linuxmint-19.x``, and
-``opensuse-15.x`` can install a versioned ``gcc`` system package
-and then use::
+Users of older Linux distributions (in particular, ``ubuntu-bionic``
+or older, ``debian-buster`` or older, ``linuxmint-19`` or older,
+``opensuse-15.x`` should upgrade their systems before attempting
+to install Sage from source.
 
-    $ ./configure CC=gcc-8 CXX=g++-8 FC=gfortran-8
-
-or similar. Users on ``ubuntu`` can also install a modern compiler
+Users on ``ubuntu`` can also install a modern compiler
 toolchain `using the ubuntu-toolchain-r ppa
 <https://askubuntu.com/questions/1140183/install-gcc-9-on-ubuntu-18-04/1149383#1149383>`_.
 On ``ubuntu-trusty``, also the package ``binutils-2.26`` is required;

@@ -3,13 +3,13 @@
 //      from .devcontainer/portability-devcontainer.json.in
 // See https://aka.ms/devcontainer.json for format details.
 {
-    "name": "ubuntu-bionic-gcc_8-standard (≥ 8-core)",
+    "name": "almalinux-8-toolset-gcc_9-python3.9-minimal (≥ 8-core)",
     "build": {
         "dockerfile": "portability-Dockerfile",
         // See tox.ini for definitions
         "args": {
-            "SYSTEM_FACTOR": "ubuntu-bionic-gcc_8",
-            "PACKAGE_FACTOR": "standard",
+            "SYSTEM_FACTOR": "almalinux-8-toolset-gcc_9-python3.9",
+            "PACKAGE_FACTOR": "minimal",
             "DOCKER_TARGET": "with-targets",
             "DOCKER_TAG": "dev"
         }

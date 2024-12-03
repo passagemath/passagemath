@@ -52,59 +52,59 @@
 .. |codespace-ubuntu-xenial-toolchain-gcc_9-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-xenial-toolchain-gcc_9-maximal%2Fdevcontainer.json
 
-.. |image-ubuntu-bionic-gcc_8-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-with-system-packages
+.. |image-ubuntu-bionic-toolchain-gcc_9-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-with-system-packages
 
-.. |image-ubuntu-bionic-gcc_8-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-configured
+.. |image-ubuntu-bionic-toolchain-gcc_9-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-configured
 
-.. |image-ubuntu-bionic-gcc_8-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-with-targets-pre
+.. |image-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets-pre
 
-.. |image-ubuntu-bionic-gcc_8-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-with-targets
+.. |image-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets
 
-.. |image-ubuntu-bionic-gcc_8-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-minimal-with-targets-optional
+.. |image-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets-optional
 
-.. |codespace-ubuntu-bionic-gcc_8-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-gcc_8-minimal%2Fdevcontainer.json
+.. |codespace-ubuntu-bionic-toolchain-gcc_9-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-toolchain-gcc_9-minimal%2Fdevcontainer.json
 
-.. |image-ubuntu-bionic-gcc_8-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-with-system-packages
+.. |image-ubuntu-bionic-toolchain-gcc_9-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-with-system-packages
 
-.. |image-ubuntu-bionic-gcc_8-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-configured
+.. |image-ubuntu-bionic-toolchain-gcc_9-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-configured
 
-.. |image-ubuntu-bionic-gcc_8-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-with-targets-pre
+.. |image-ubuntu-bionic-toolchain-gcc_9-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-with-targets-pre
 
-.. |image-ubuntu-bionic-gcc_8-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-with-targets
+.. |image-ubuntu-bionic-toolchain-gcc_9-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-with-targets
 
-.. |image-ubuntu-bionic-gcc_8-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-standard-with-targets-optional
+.. |image-ubuntu-bionic-toolchain-gcc_9-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-standard-with-targets-optional
 
-.. |codespace-ubuntu-bionic-gcc_8-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-gcc_8-standard%2Fdevcontainer.json
+.. |codespace-ubuntu-bionic-toolchain-gcc_9-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-toolchain-gcc_9-standard%2Fdevcontainer.json
 
-.. |image-ubuntu-bionic-gcc_8-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-with-system-packages
+.. |image-ubuntu-bionic-toolchain-gcc_9-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-with-system-packages
 
-.. |image-ubuntu-bionic-gcc_8-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-configured
+.. |image-ubuntu-bionic-toolchain-gcc_9-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-configured
 
-.. |image-ubuntu-bionic-gcc_8-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-with-targets-pre
+.. |image-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets-pre
 
-.. |image-ubuntu-bionic-gcc_8-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-with-targets
+.. |image-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets
 
-.. |image-ubuntu-bionic-gcc_8-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-maximal-with-targets-optional
+.. |image-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets-optional
 
-.. |codespace-ubuntu-bionic-gcc_8-maximal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-gcc_8-maximal%2Fdevcontainer.json
+.. |codespace-ubuntu-bionic-toolchain-gcc_9-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-toolchain-gcc_9-maximal%2Fdevcontainer.json
 
 .. |image-ubuntu-focal-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-minimal-with-system-packages
@@ -321,6 +321,60 @@
 
 .. |codespace-ubuntu-oracular-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-oracular-maximal%2Fdevcontainer.json
+
+.. |image-ubuntu-plucky-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-system-packages
+
+.. |image-ubuntu-plucky-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-configured
+
+.. |image-ubuntu-plucky-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets-pre
+
+.. |image-ubuntu-plucky-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets
+
+.. |image-ubuntu-plucky-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-targets-optional
+
+.. |codespace-ubuntu-plucky-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-plucky-minimal%2Fdevcontainer.json
+
+.. |image-ubuntu-plucky-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-with-system-packages
+
+.. |image-ubuntu-plucky-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-configured
+
+.. |image-ubuntu-plucky-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets-pre
+
+.. |image-ubuntu-plucky-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets
+
+.. |image-ubuntu-plucky-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-standard-with-targets-optional
+
+.. |codespace-ubuntu-plucky-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-plucky-standard%2Fdevcontainer.json
+
+.. |image-ubuntu-plucky-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-system-packages
+
+.. |image-ubuntu-plucky-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-configured
+
+.. |image-ubuntu-plucky-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets-pre
+
+.. |image-ubuntu-plucky-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets
+
+.. |image-ubuntu-plucky-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-maximal-with-targets-optional
+
+.. |codespace-ubuntu-plucky-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-plucky-maximal%2Fdevcontainer.json
 
 .. |image-debian-bullseye-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages
@@ -1780,59 +1834,59 @@
 .. |codespace-centos-stream-9-python3.12-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-centos-stream-9-python3.12-maximal%2Fdevcontainer.json
 
-.. |image-almalinux-8-python3.9-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-with-system-packages
+.. |image-almalinux-8-toolset-gcc_9-python3.9-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-system-packages
 
-.. |image-almalinux-8-python3.9-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-configured
+.. |image-almalinux-8-toolset-gcc_9-python3.9-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-configured
 
-.. |image-almalinux-8-python3.9-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-with-targets-pre
+.. |image-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets-pre
 
-.. |image-almalinux-8-python3.9-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-with-targets
+.. |image-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets
 
-.. |image-almalinux-8-python3.9-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-minimal-with-targets-optional
+.. |image-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets-optional
 
-.. |codespace-almalinux-8-python3.9-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-python3.9-minimal%2Fdevcontainer.json
+.. |codespace-almalinux-8-toolset-gcc_9-python3.9-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-toolset-gcc_9-python3.9-minimal%2Fdevcontainer.json
 
-.. |image-almalinux-8-python3.9-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-standard-with-system-packages
+.. |image-almalinux-8-toolset-gcc_9-python3.9-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-with-system-packages
 
-.. |image-almalinux-8-python3.9-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-standard-configured
+.. |image-almalinux-8-toolset-gcc_9-python3.9-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-configured
 
-.. |image-almalinux-8-python3.9-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-standard-with-targets-pre
+.. |image-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets-pre
 
-.. |image-almalinux-8-python3.9-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-standard-with-targets
+.. |image-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets
 
-.. |image-almalinux-8-python3.9-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-standard-with-targets-optional
+.. |image-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets-optional
 
-.. |codespace-almalinux-8-python3.9-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-python3.9-standard%2Fdevcontainer.json
+.. |codespace-almalinux-8-toolset-gcc_9-python3.9-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-toolset-gcc_9-python3.9-standard%2Fdevcontainer.json
 
-.. |image-almalinux-8-python3.9-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-with-system-packages
+.. |image-almalinux-8-toolset-gcc_9-python3.9-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-with-system-packages
 
-.. |image-almalinux-8-python3.9-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-configured
+.. |image-almalinux-8-toolset-gcc_9-python3.9-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-configured
 
-.. |image-almalinux-8-python3.9-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-with-targets-pre
+.. |image-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets-pre
 
-.. |image-almalinux-8-python3.9-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-with-targets
+.. |image-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets
 
-.. |image-almalinux-8-python3.9-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-python3.9-maximal-with-targets-optional
+.. |image-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets-optional
 
-.. |codespace-almalinux-8-python3.9-maximal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-python3.9-maximal%2Fdevcontainer.json
+.. |codespace-almalinux-8-toolset-gcc_9-python3.9-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-toolset-gcc_9-python3.9-maximal%2Fdevcontainer.json
 
 .. |image-almalinux-9-python3.11-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-system-packages
@@ -2374,59 +2428,59 @@
 .. |codespace-conda-forge-python3.11-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-conda-forge-python3.11-maximal%2Fdevcontainer.json
 
-.. |image-ubuntu-bionic-gcc_8-i386-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-with-system-packages
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-system-packages
 
-.. |image-ubuntu-bionic-gcc_8-i386-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-configured
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-configured
 
-.. |image-ubuntu-bionic-gcc_8-i386-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-with-targets-pre
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets-pre
 
-.. |image-ubuntu-bionic-gcc_8-i386-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-with-targets
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets
 
-.. |image-ubuntu-bionic-gcc_8-i386-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-minimal-with-targets-optional
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets-optional
 
-.. |codespace-ubuntu-bionic-gcc_8-i386-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-gcc_8-i386-minimal%2Fdevcontainer.json
+.. |codespace-ubuntu-bionic-toolchain-gcc_9-i386-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-toolchain-gcc_9-i386-minimal%2Fdevcontainer.json
 
-.. |image-ubuntu-bionic-gcc_8-i386-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-with-system-packages
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-system-packages
 
-.. |image-ubuntu-bionic-gcc_8-i386-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-configured
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-configured
 
-.. |image-ubuntu-bionic-gcc_8-i386-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-with-targets-pre
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets-pre
 
-.. |image-ubuntu-bionic-gcc_8-i386-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-with-targets
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets
 
-.. |image-ubuntu-bionic-gcc_8-i386-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-standard-with-targets-optional
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets-optional
 
-.. |codespace-ubuntu-bionic-gcc_8-i386-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-gcc_8-i386-standard%2Fdevcontainer.json
+.. |codespace-ubuntu-bionic-toolchain-gcc_9-i386-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-toolchain-gcc_9-i386-standard%2Fdevcontainer.json
 
-.. |image-ubuntu-bionic-gcc_8-i386-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-with-system-packages
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-system-packages
 
-.. |image-ubuntu-bionic-gcc_8-i386-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-configured
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-configured
 
-.. |image-ubuntu-bionic-gcc_8-i386-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-with-targets-pre
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets-pre
 
-.. |image-ubuntu-bionic-gcc_8-i386-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-with-targets
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets
 
-.. |image-ubuntu-bionic-gcc_8-i386-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-gcc_8-i386-maximal-with-targets-optional
+.. |image-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets-optional
 
-.. |codespace-ubuntu-bionic-gcc_8-i386-maximal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-gcc_8-i386-maximal%2Fdevcontainer.json
+.. |codespace-ubuntu-bionic-toolchain-gcc_9-i386-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-toolchain-gcc_9-i386-maximal%2Fdevcontainer.json
 
 .. |image-debian-bullseye-i386-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-system-packages
@@ -2501,16 +2555,16 @@
    * -    ‑*maximal*
      - |image-ubuntu-xenial-toolchain-gcc_9-maximal-with-system-packages| |image-ubuntu-xenial-toolchain-gcc_9-maximal-with-targets-pre|
      -
-   * - **ubuntu**-bionic-gcc_8 
+   * - **ubuntu**-bionic-toolchain-gcc_9 
        
           ‑*minimal*
-     - |image-ubuntu-bionic-gcc_8-minimal-with-system-packages| |image-ubuntu-bionic-gcc_8-minimal-with-targets-pre| |image-ubuntu-bionic-gcc_8-minimal-with-targets| |image-ubuntu-bionic-gcc_8-minimal-with-targets-optional|
-     - |codespace-ubuntu-bionic-gcc_8-minimal|
+     - |image-ubuntu-bionic-toolchain-gcc_9-minimal-with-system-packages| |image-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets-pre| |image-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets| |image-ubuntu-bionic-toolchain-gcc_9-minimal-with-targets-optional|
+     - |codespace-ubuntu-bionic-toolchain-gcc_9-minimal|
    * -    ‑*standard*
-     - |image-ubuntu-bionic-gcc_8-standard-with-system-packages| |image-ubuntu-bionic-gcc_8-standard-with-targets-pre| |image-ubuntu-bionic-gcc_8-standard-with-targets| |image-ubuntu-bionic-gcc_8-standard-with-targets-optional|
-     - |codespace-ubuntu-bionic-gcc_8-standard|
+     - |image-ubuntu-bionic-toolchain-gcc_9-standard-with-system-packages| |image-ubuntu-bionic-toolchain-gcc_9-standard-with-targets-pre| |image-ubuntu-bionic-toolchain-gcc_9-standard-with-targets| |image-ubuntu-bionic-toolchain-gcc_9-standard-with-targets-optional|
+     - |codespace-ubuntu-bionic-toolchain-gcc_9-standard|
    * -    ‑*maximal*
-     - |image-ubuntu-bionic-gcc_8-maximal-with-system-packages| |image-ubuntu-bionic-gcc_8-maximal-with-targets-pre|
+     - |image-ubuntu-bionic-toolchain-gcc_9-maximal-with-system-packages| |image-ubuntu-bionic-toolchain-gcc_9-maximal-with-targets-pre|
      -
    * - **ubuntu**-focal 
        
@@ -2555,6 +2609,17 @@
      - |codespace-ubuntu-oracular-standard|
    * -    ‑*maximal*
      - |image-ubuntu-oracular-maximal-with-system-packages| |image-ubuntu-oracular-maximal-with-targets-pre|
+     -
+   * - **ubuntu**-plucky 
+       
+          ‑*minimal*
+     - |image-ubuntu-plucky-minimal-with-system-packages| |image-ubuntu-plucky-minimal-with-targets-pre| |image-ubuntu-plucky-minimal-with-targets| |image-ubuntu-plucky-minimal-with-targets-optional|
+     - |codespace-ubuntu-plucky-minimal|
+   * -    ‑*standard*
+     - |image-ubuntu-plucky-standard-with-system-packages| |image-ubuntu-plucky-standard-with-targets-pre| |image-ubuntu-plucky-standard-with-targets| |image-ubuntu-plucky-standard-with-targets-optional|
+     - |codespace-ubuntu-plucky-standard|
+   * -    ‑*maximal*
+     - |image-ubuntu-plucky-maximal-with-system-packages| |image-ubuntu-plucky-maximal-with-targets-pre|
      -
    * - **debian**-bullseye 
        
@@ -2853,16 +2918,16 @@
    * -    ‑*maximal*
      - |image-centos-stream-9-python3.12-maximal-with-system-packages| |image-centos-stream-9-python3.12-maximal-with-targets-pre|
      -
-   * - **almalinux**-8-python3.9 
+   * - **almalinux**-8-toolset-gcc_9-python3.9 
        
           ‑*minimal*
-     - |image-almalinux-8-python3.9-minimal-with-system-packages| |image-almalinux-8-python3.9-minimal-with-targets-pre| |image-almalinux-8-python3.9-minimal-with-targets| |image-almalinux-8-python3.9-minimal-with-targets-optional|
-     - |codespace-almalinux-8-python3.9-minimal|
+     - |image-almalinux-8-toolset-gcc_9-python3.9-minimal-with-system-packages| |image-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets-pre| |image-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets| |image-almalinux-8-toolset-gcc_9-python3.9-minimal-with-targets-optional|
+     - |codespace-almalinux-8-toolset-gcc_9-python3.9-minimal|
    * -    ‑*standard*
-     - |image-almalinux-8-python3.9-standard-with-system-packages| |image-almalinux-8-python3.9-standard-with-targets-pre| |image-almalinux-8-python3.9-standard-with-targets| |image-almalinux-8-python3.9-standard-with-targets-optional|
-     - |codespace-almalinux-8-python3.9-standard|
+     - |image-almalinux-8-toolset-gcc_9-python3.9-standard-with-system-packages| |image-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets-pre| |image-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets| |image-almalinux-8-toolset-gcc_9-python3.9-standard-with-targets-optional|
+     - |codespace-almalinux-8-toolset-gcc_9-python3.9-standard|
    * -    ‑*maximal*
-     - |image-almalinux-8-python3.9-maximal-with-system-packages| |image-almalinux-8-python3.9-maximal-with-targets-pre|
+     - |image-almalinux-8-toolset-gcc_9-python3.9-maximal-with-system-packages| |image-almalinux-8-toolset-gcc_9-python3.9-maximal-with-targets-pre|
      -
    * - **almalinux**-9-python3.11 
        
@@ -2971,16 +3036,16 @@
    * -    ‑*maximal*
      - |image-conda-forge-python3.11-maximal-with-system-packages| |image-conda-forge-python3.11-maximal-with-targets-pre|
      -
-   * - **ubuntu**-bionic-gcc_8-i386 
+   * - **ubuntu**-bionic-toolchain-gcc_9-i386 
        
           ‑*minimal*
-     - |image-ubuntu-bionic-gcc_8-i386-minimal-with-system-packages| |image-ubuntu-bionic-gcc_8-i386-minimal-with-targets-pre| |image-ubuntu-bionic-gcc_8-i386-minimal-with-targets| |image-ubuntu-bionic-gcc_8-i386-minimal-with-targets-optional|
-     - |codespace-ubuntu-bionic-gcc_8-i386-minimal|
+     - |image-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-system-packages| |image-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets-pre| |image-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets| |image-ubuntu-bionic-toolchain-gcc_9-i386-minimal-with-targets-optional|
+     - |codespace-ubuntu-bionic-toolchain-gcc_9-i386-minimal|
    * -    ‑*standard*
-     - |image-ubuntu-bionic-gcc_8-i386-standard-with-system-packages| |image-ubuntu-bionic-gcc_8-i386-standard-with-targets-pre| |image-ubuntu-bionic-gcc_8-i386-standard-with-targets| |image-ubuntu-bionic-gcc_8-i386-standard-with-targets-optional|
-     - |codespace-ubuntu-bionic-gcc_8-i386-standard|
+     - |image-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-system-packages| |image-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets-pre| |image-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets| |image-ubuntu-bionic-toolchain-gcc_9-i386-standard-with-targets-optional|
+     - |codespace-ubuntu-bionic-toolchain-gcc_9-i386-standard|
    * -    ‑*maximal*
-     - |image-ubuntu-bionic-gcc_8-i386-maximal-with-system-packages| |image-ubuntu-bionic-gcc_8-i386-maximal-with-targets-pre|
+     - |image-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-system-packages| |image-ubuntu-bionic-toolchain-gcc_9-i386-maximal-with-targets-pre|
      -
    * - **debian**-bullseye-i386 
        

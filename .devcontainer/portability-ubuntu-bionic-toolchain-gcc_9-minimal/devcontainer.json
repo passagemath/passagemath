@@ -3,12 +3,12 @@
 //      from .devcontainer/portability-devcontainer.json.in
 // See https://aka.ms/devcontainer.json for format details.
 {
-    "name": "ubuntu-bionic-gcc_8-i386-minimal (≥ 8-core)",
+    "name": "ubuntu-bionic-toolchain-gcc_9-minimal (≥ 8-core)",
     "build": {
         "dockerfile": "portability-Dockerfile",
         // See tox.ini for definitions
         "args": {
-            "SYSTEM_FACTOR": "ubuntu-bionic-gcc_8-i386",
+            "SYSTEM_FACTOR": "ubuntu-bionic-toolchain-gcc_9",
             "PACKAGE_FACTOR": "minimal",
             "DOCKER_TARGET": "with-targets",
             "DOCKER_TAG": "dev"
