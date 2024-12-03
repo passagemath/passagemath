@@ -6810,7 +6810,7 @@ class Graph(GenericGraph):
             {0: 2, 1: 4, 2: 4, 3: 4, 4: 4}
             sage: E = C.cliques_maximal(); E                                            # needs cliquer
             [[0, 4], [1, 2, 3, 4]]
-            sage: C.cliques_vertex_clique_number(cliques=E, algorithm='networkx')       # needs networkx
+            sage: C.cliques_vertex_clique_number(cliques=E, algorithm='networkx')       # needs cliquer networkx
             {0: 2, 1: 4, 2: 4, 3: 4, 4: 4}
 
             sage: F = graphs.Grid2dGraph(2,3)
