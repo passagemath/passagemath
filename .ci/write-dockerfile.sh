@@ -120,12 +120,16 @@ EOF
                 1|y*|Y*)
                     ;;
                 *)
+                    if [ -n "$DEVTOOLSET_PRE" ]; then
+                        cat <<EOF
+RUN $INSTALL $DEVTOOLSET_PRE
+EOF
+                    fi
                     cat <<EOF
-RUN $INSTALL centos-release-scl
-RUN $INSTALL devtoolset-$DEVTOOLSET
+RUN $INSTALL $DEVTOOLSET
 EOF
             esac
-            RUN="RUN . /opt/rh/devtoolset-$DEVTOOLSET/enable && "
+            RUN="RUN . /opt/rh/$DEVTOOLSET/enable && "
         fi
         ;;
     gentoo*)
