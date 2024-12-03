@@ -1018,7 +1018,7 @@ class sage__rings__padics(JoinFeature):
     EXAMPLES::
 
         sage: Qp(3)                                                                     # needs sage.rings.padics
-        sage: Qq(125)                                                                   # needs sage.rings.padics
+        3-adic Field with capped relative precision 20
 
     Some other precision models require the additional feature :mod:`sage.libs.flint`::
 
@@ -1044,7 +1044,7 @@ class sage__rings__padics(JoinFeature):
         JoinFeature.__init__(self, 'sage.rings.padics',
                              [PythonModule('sage.rings.padics.factory'),
                               PythonModule('sage.rings.padics.padic_ext_element'),
-                              PythonModule('polynomial_padic_capped_relative_dense')],
+                              PythonModule('sage.rings.polynomial.padics.polynomial_padic_capped_relative_dense')],
                              type='standard')
 
 
