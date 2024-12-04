@@ -30,7 +30,7 @@
     },
     "sage.categories.additive_magmas": {
         "failed": true,
-        "ntests": 134
+        "ntests": 133
     },
     "sage.categories.additive_monoids": {
         "ntests": 16
@@ -572,7 +572,7 @@
         "ntests": 9
     },
     "sage.categories.rings": {
-        "ntests": 204
+        "ntests": 209
     },
     "sage.categories.rngs": {
         "ntests": 6
@@ -705,7 +705,7 @@
         "ntests": 9
     },
     "sage.combinat.partition": {
-        "ntests": 1194
+        "ntests": 1195
     },
     "sage.combinat.partitions": {
         "ntests": 69
@@ -851,6 +851,9 @@
     "sage.features.databases": {
         "ntests": 38
     },
+    "sage.features.dot2tex": {
+        "ntests": 4
+    },
     "sage.features.dvipng": {
         "ntests": 4
     },
@@ -969,7 +972,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "ntests": 178
+        "ntests": 177
     },
     "sage.features.sat": {
         "ntests": 16
@@ -979,6 +982,9 @@
     },
     "sage.features.sirocco": {
         "ntests": 4
+    },
+    "sage.features.sloane_database": {
+        "ntests": 6
     },
     "sage.features.sphinx": {
         "ntests": 8
@@ -1916,7 +1922,7 @@
         "ntests": 382
     },
     "sage.schemes.projective.projective_subscheme": {
-        "ntests": 233
+        "ntests": 234
     },
     "sage.sets.cartesian_product": {
         "ntests": 54
