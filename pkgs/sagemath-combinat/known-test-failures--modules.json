@@ -293,7 +293,7 @@
     },
     "sage.categories.additive_magmas": {
         "failed": true,
-        "ntests": 155
+        "ntests": 154
     },
     "sage.categories.additive_monoids": {
         "ntests": 16
@@ -1046,7 +1046,6 @@
         "ntests": 391
     },
     "sage.combinat.colored_permutations": {
-        "failed": true,
         "ntests": 366
     },
     "sage.combinat.combinat": {
@@ -1253,7 +1252,7 @@
     },
     "sage.combinat.partition": {
         "failed": true,
-        "ntests": 1305
+        "ntests": 1307
     },
     "sage.combinat.partition_algebra": {
         "failed": true,
@@ -1300,7 +1299,7 @@
     },
     "sage.combinat.q_analogues": {
         "failed": true,
-        "ntests": 126
+        "ntests": 121
     },
     "sage.combinat.q_bernoulli": {
         "ntests": 15
@@ -2025,7 +2024,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "ntests": 185
+        "ntests": 184
     },
     "sage.features.sat": {
         "ntests": 16
@@ -3300,7 +3299,7 @@
     },
     "sage.rings.lazy_series_ring": {
         "failed": true,
-        "ntests": 649
+        "ntests": 646
     },
     "sage.rings.localization": {
         "failed": true,
@@ -3664,7 +3663,7 @@
         "ntests": 377
     },
     "sage.schemes.projective.projective_subscheme": {
-        "ntests": 240
+        "ntests": 241
     },
     "sage.sets.cartesian_product": {
         "failed": true,
@@ -3781,7 +3780,7 @@
     },
     "sage.structure.element": {
         "failed": true,
-        "ntests": 661
+        "ntests": 664
     },
     "sage.structure.element.pxd": {
         "failed": true,
