@@ -19,11 +19,34 @@ See https://doc.sagemath.org/html/en/installation/index.html
 for general installation instructions.
 
 
-About this pip-installable source distribution
-----------------------------------------------
+About this pip-installable distribution
+---------------------------------------
 
-This pip-installable source distribution ``sagemath-sirocco`` is a small
-optional distribution for use with ``sagemath-standard``.
+This pip-installable distribution ``sagemath-sirocco`` provides a Cython interface
+to the `sirocco <https://github.com/miguelmarco/SIROCCO2>`_ library for computing
+topologically certified root continuation of bivariate polynomials.
 
-It provides a Cython interface to the ``sirocco`` library for the purpose
-of compute topologically certified root continuation of bivariate polynomials.
+
+What is included
+----------------
+
+* `sage.libs.sirocco <https://github.com/passagemath/passagemath/blob/main/src/sage/libs/sirocco.pyx>`_
+
+
+Examples
+--------
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sirocco[test]" ipython
+
+    In [1]: from sage.all__sagemath_sirocco import *
+
+    In [2]: from sage.libs.sirocco import contpath
+
+    In [3]: pol = list(map(RR,[0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))
+
+    In [4]: contpath(2, pol, RR(0), RR(0))
+    Out[4]:
+    [(0.0, 0.0, 0.0),
+     (0.3535533905932738, -0.12500000000000003, 0.0),
+     (0.7071067811865476, -0.5000000000000001, 0.0),
+     (1.0, -1.0, 0.0)]
