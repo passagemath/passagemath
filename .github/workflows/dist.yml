@@ -652,114 +652,115 @@ jobs:
 
       - name: sagemath-bliss
         id:   sagemath-bliss
-        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*bliss*
 
       - name: sagemath-coxeter3
         id:   sagemath-coxeter3
-        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*coxeter3*
 
       - name: sagemath-mcqd
         id:   sagemath-mcqd
-        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*mcqd*
 
       - name: sagemath-meataxe
         id:   sagemath-meataxe
-        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*meataxe*
 
       - name: sagemath-sirocco
         id:   sagemath-sirocco
-        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*sirocco*
 
       - name: sagemath-tdlib
         id:   sagemath-tdlib
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*tdlib*
 
       - name: sagemath-msolve
         id:   sagemath-msolve
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*msolve*
 
       - name: sagemath-latte-4ti2
         id:   sagemath-latte-4ti2
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*latte*4ti2*
 
       - name: sagemath-topcom
         id:   sagemath-topcom
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*topcom*
 
       - name: sagemath-lrslib
         id:   sagemath-lrslib
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*lrslib*
 
       - name: sagemath-frobby
         id:   sagemath-frobby
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*frobby*
 
       - name: sagemath-qepcad
         id:   sagemath-qepcad
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*qepcad*
 
       - name: sagemath-rubiks
         id:   sagemath-rubiks
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_rubiks*
 
       - name: sagemath-plantri
         id:   sagemath-plantri
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_plantri*
 
       - name: sagemath-buckygen
         id:   sagemath-buckygen
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_buckygen*
 
       - name: sagemath-benzene
         id:   sagemath-benzene
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_benzene*
 
       - name: sagemath-glucose
         id:   sagemath-glucose
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_glucose*
 
       - name: sagemath-kissat
         id:   sagemath-kissat
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_kissat*
 
       - name: sagemath-macaulay2
         id:   sagemath-macaulay2
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_macaulay2*
 
