@@ -1437,8 +1437,8 @@ def sage_getargspec(obj):
     The following tests against various bugs that were fixed in
     :issue:`9976`::
 
-        sage: from sage.rings.polynomial.real_roots import bernstein_polynomial_factory_ratlist     # needs sage.modules
-        sage: sage_getargspec(bernstein_polynomial_factory_ratlist.coeffs_bitsize)                  # needs sage.modules
+        sage: from sage.rings.polynomial.real_roots import bernstein_polynomial_factory_ratlist     # needs sage.libs.linbox sage.modules
+        sage: sage_getargspec(bernstein_polynomial_factory_ratlist.coeffs_bitsize)                  # needs sage.libs.linbox sage.modules
         FullArgSpec(args=['self'], varargs=None, varkw=None, defaults=None,
                     kwonlyargs=[], kwonlydefaults=None, annotations={})
         sage: from sage.rings.polynomial.pbori.pbori import BooleanMonomialMonoid       # needs sage.rings.polynomial.pbori
