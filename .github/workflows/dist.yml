@@ -96,8 +96,6 @@ jobs:
   sdists_for_pypi:
 
     runs-on: ubuntu-latest
-    env:
-      CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
       - name: Install bootstrap prerequisites
@@ -153,8 +151,6 @@ jobs:
   noarch_wheels_for_pypi:
 
     runs-on: ubuntu-latest
-    env:
-      CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
       - name: Install bootstrap prerequisites
@@ -197,7 +193,6 @@ jobs:
             arch: arm64
             build: macosx
     env:
-      CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
@@ -244,12 +239,14 @@ jobs:
         with:
           platforms: all
 
-      - uses: actions/download-artifact@v4
+      - name: Download sdists
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
 
-      - uses: actions/download-artifact@v4
+      - name: Download noarch-wheels
+        uses: actions/download-artifact@v4
         with:
           name: noarch-wheels
           path: dist
@@ -538,7 +535,6 @@ jobs:
             arch: arm64
             build: macosx
     env:
-      CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
@@ -585,17 +581,20 @@ jobs:
         with:
           platforms: all
 
-      - uses: actions/download-artifact@v4
+      - name: Download sdists
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
 
-      - uses: actions/download-artifact@v4
+      - name: Download noarch-wheels
+        uses: actions/download-artifact@v4
         with:
           name: noarch-wheels
           path: dist
 
-      - uses: actions/download-artifact@v4
+      - name: Download wheels
+        uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
           path: dist
