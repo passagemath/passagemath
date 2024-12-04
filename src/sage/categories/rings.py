@@ -11,6 +11,8 @@ Rings
 #  Distributed under the terms of the GNU General Public License (GPL)
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
+import itertools
+
 from functools import reduce
 from types import GeneratorType
 
@@ -1712,6 +1714,24 @@ class Rings(CategoryWithAxiom):
             return q
 
 
+def _gen_words():
+    r"""
+    Generate words.
+
+    EXAMPLES::
+
+        sage: from sage.categories.rings import _gen_words
+        sage: import itertools
+        sage: list(itertools.islice(_gen_words(), 30))[20:]
+        ['u', 'v', 'w', 'x', 'y', 'z', 'aa', 'ab', 'ac', 'ad']
+    """
+    repeat = 1
+    while True:
+        for w in itertools.product("abcdefghijklmnopqrstuvwxyz", repeat=repeat):
+            yield ''.join(w)
+        repeat += 1
+
+
 def _gen_names(elts):
     r"""
     Used to find a name for a generator when rings are created using the
@@ -1719,7 +1739,6 @@ def _gen_names(elts):
 
     EXAMPLES::
 
-        sage: # needs sage.combinat
         sage: from sage.categories.rings import _gen_names
         sage: list(_gen_names([sqrt(5)]))                                               # needs sage.symbolic
         ['sqrt5']
@@ -1730,9 +1749,7 @@ def _gen_names(elts):
     """
     import re
     from sage.structure.category_object import certify_names
-    from sage.combinat.words.words import Words
-    it = iter(Words("abcdefghijklmnopqrstuvwxyz", infinite=False))
-    next(it)  # skip empty word
+    it = _gen_words()
     for x in elts:
         name = str(x)
         m = re.match(r'^sqrt\((\d+)\)$', name)
@@ -1741,5 +1758,5 @@ def _gen_names(elts):
         try:
             certify_names([name])
         except ValueError:
-            name = next(it).string_rep()
+            name = next(it)
         yield name
