@@ -5,6 +5,7 @@ requires = [
     SPKG_INSTALL_REQUIRES_setuptools
     SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
@@ -18,6 +19,7 @@ description = "passagemath: Certified root continuation with sirocco"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
+    SPKG_INSTALL_REQUIRES_sagemath_modules
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
