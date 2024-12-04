@@ -222,7 +222,7 @@ cdef class Matrix:
             Ts = MatrixSpace(ZZ, n, sparse=sparse).zero_matrix().__copy__()
             for i from 0 <= i < n:
                 for j from 0 <= j < n:
-                    Mij = Integer(self.M.sub(i+1,j+1));
+                    Mij = Integer(self.M.sub(i+1,j+1))
                     if Mij:
                         Ts.set_unsafe(i, j, Mij)
             return Ts
@@ -230,7 +230,7 @@ cdef class Matrix:
             Td = MatrixSpace(ZZ, n, sparse=sparse).zero_matrix().__copy__()
             for i from 0 <= i < n:
                 for j from 0 <= j < n:
-                    Mij = Integer(self.M.sub(i+1,j+1));
+                    Mij = Integer(self.M.sub(i+1,j+1))
                     if Mij:
                         Td.set_unsafe(i, j, Mij)
             return Td
