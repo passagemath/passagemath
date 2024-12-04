@@ -374,8 +374,8 @@ class TorsionQuadraticModule(FGP_Module_class, CachedRepresentation):
 
         EXAMPLES::
 
-            sage: D = IntegralLattice("D4").discriminant_group()                        # needs sage.combinat
-            sage: D.all_submodules()                                                    # needs sage.combinat
+            sage: D = IntegralLattice("D4").discriminant_group()                        # needs sage.combinat sage.graphs
+            sage: D.all_submodules()                                                    # needs sage.combinat sage.graphs
             [Finite quadratic module over Integer Ring with invariants ()
               Gram matrix of the quadratic form with values in Q/2Z:
               [],
@@ -426,9 +426,9 @@ class TorsionQuadraticModule(FGP_Module_class, CachedRepresentation):
 
         EXAMPLES::
 
-            sage: L = IntegralLattice("D4")                                             # needs sage.combinat
-            sage: D = L.discriminant_group()                                            # needs sage.combinat
-            sage: D.brown_invariant()                                                   # needs sage.combinat
+            sage: L = IntegralLattice("D4")                                             # needs sage.combinat sage.graphs
+            sage: D = L.discriminant_group()                                            # needs sage.combinat sage.graphs
+            sage: D.brown_invariant()                                                   # needs sage.combinat sage.graphs
             4
 
         We require the quadratic form to be defined modulo `2 \ZZ`::
@@ -549,7 +549,7 @@ class TorsionQuadraticModule(FGP_Module_class, CachedRepresentation):
 
         EXAMPLES::
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.graphs
             sage: L = IntegralLattice("D4").direct_sum(IntegralLattice("A2"))
             sage: D = L.discriminant_group()
             sage: genus = D.genus(L.signature_pair())                                   # needs sage.libs.pari
@@ -566,8 +566,8 @@ class TorsionQuadraticModule(FGP_Module_class, CachedRepresentation):
         Then `L = D_4 + A_2` is primitively embedded in `H`. We compute the discriminant
         form of the orthogonal complement of `L` in `H`::
 
-            sage: DK = D.twist(-1)                                                      # needs sage.combinat sage.libs.pari
-            sage: DK                                                                    # needs sage.combinat sage.libs.pari
+            sage: DK = D.twist(-1)                                                      # needs sage.combinat sage.graphs sage.libs.pari
+            sage: DK                                                                    # needs sage.combinat sage.graphs sage.libs.pari
             Finite quadratic module over Integer Ring with invariants (2, 6)
             Gram matrix of the quadratic form with values in Q/2Z:
             [  1 1/2]
@@ -576,7 +576,7 @@ class TorsionQuadraticModule(FGP_Module_class, CachedRepresentation):
         We know that  `K` has signature `(5, 1)` and thus we can compute
         the genus of `K` as::
 
-            sage: DK.genus((3,1))                                                       # needs sage.combinat sage.libs.pari
+            sage: DK.genus((3,1))                                                       # needs sage.combinat sage.graphs sage.libs.pari
             Genus of
             None
             Signature:  (3, 1)
@@ -757,17 +757,17 @@ class TorsionQuadraticModule(FGP_Module_class, CachedRepresentation):
         EXAMPLES::
 
             sage: L3 = IntegralLattice(3 * Matrix(ZZ, 2, [2,1,1,2]))
-            sage: L = IntegralLattice("D4").direct_sum(L3)                              # needs sage.combinat
-            sage: D = L.discriminant_group()                                            # needs sage.combinat
-            sage: D.is_genus((6,0))                                                     # needs sage.combinat
+            sage: L = IntegralLattice("D4").direct_sum(L3)                              # needs sage.combinat sage.graphs
+            sage: D = L.discriminant_group()                                            # needs sage.combinat sage.graphs
+            sage: D.is_genus((6,0))                                                     # needs sage.combinat sage.graphs
             True
 
         Let us see if there is a lattice in the genus defined by the same discriminant form
         but with a different signature::
 
-            sage: D.is_genus((4,2))                                                     # needs sage.combinat
+            sage: D.is_genus((4,2))                                                     # needs sage.combinat sage.graphs
             False
-            sage: D.is_genus((16,2))                                                    # needs sage.combinat
+            sage: D.is_genus((16,2))                                                    # needs sage.combinat sage.graphs
             True
         """
         s_plus = ZZ(signature_pair[0])
