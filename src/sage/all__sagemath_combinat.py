@@ -11,11 +11,6 @@ This distribution makes the following features available::
     FeatureTestResult('sage.sat', True)
 """
 
-try:  # extra
-    from sage.all__sagemath_modules import *
-except ImportError:
-    pass
-
 from .all__sagemath_categories import *
 
 try:  # extra
@@ -31,3 +26,8 @@ from sage.rings.all__sagemath_combinat import *
 from sage.monoids.all import *
 from sage.games.all import *
 from sage.sat.all import *
+
+try:  # extra, goes last so that the correct RR definition wins
+    from sage.all__sagemath_modules import *
+except ImportError:
+    pass
