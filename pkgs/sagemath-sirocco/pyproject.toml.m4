@@ -7,7 +7,6 @@ requires = [
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_cython
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_pkgconfig
 ]
@@ -17,7 +16,6 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-sirocco"
 description = "passagemath: Certified root continuation with sirocco"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_sagemath_modules
 ]
@@ -27,6 +25,16 @@ include(`pyproject_toml_metadata.m4')dnl'
 [project.readme]
 file = "README.rst"
 content-type = "text/x-rst"
+
+[project.optional-dependencies]
+test = [
+     "passagemath-combinat",
+     "passagemath-graphs",
+     "passagemath-groups",
+     "passagemath-polyhedra",
+     "passagemath-repl",
+     "passagemath-schemes",
+]
 
 [tool.setuptools]
 include-package-data = false
