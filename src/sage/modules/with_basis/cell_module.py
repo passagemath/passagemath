@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-modules
-# sage.doctest: needs sage.combinat
+# sage.doctest: needs sage.graphs
 r"""
 Cell modules
 """

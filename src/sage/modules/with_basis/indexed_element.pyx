@@ -377,7 +377,7 @@ cdef class IndexedFreeModuleElement(ModuleElement):
         We can also get the ascii art when ``one_basis``
         is ``NotImplemented``::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.graphs sage.modules
             sage: TL = TemperleyLiebAlgebra(8, -1, QQ)
             sage: C = TL.cellular_basis()
             sage: ascii_art(list(C.basis())[0])
@@ -473,7 +473,7 @@ cdef class IndexedFreeModuleElement(ModuleElement):
         We can also get the unicode art when ``one_basis``
         is ``NotImplemented``::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.graphs sage.modules
             sage: TL = TemperleyLiebAlgebra(8, -1, QQ)
             sage: C = TL.cellular_basis()
             sage: unicode_art(list(C.basis())[0])

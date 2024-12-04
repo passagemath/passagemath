@@ -1107,7 +1107,7 @@ class WordMorphism(SageObject):
             Full MatrixSpace of 2 by 2 dense matrices over Integer Ring
             sage: p = Mfibo.charpoly(); p
             x^2 - x - 1
-            sage: p.roots(ring=RR, multiplicities=False)
+            sage: p.roots(ring=RR, multiplicities=False)                                # needs numpy
             [-0.618033988749895, 1.61803398874989]
         """
         if R is None:
@@ -2502,7 +2502,7 @@ class WordMorphism(SageObject):
         is::
 
             sage: s = WordMorphism('1->12,2->13,3->1')
-            sage: s.rauzy_fractal_projection()                                          # needs sage.modules
+            sage: s.rauzy_fractal_projection()                                          # needs sage.modules sage.rings.number_field
             {'1': (1.00000000000000, 0.000000000000000),
              '2': (-1.41964337760708, -0.606290729207199),
              '3': (-0.771844506346038, 1.11514250803994)}
@@ -2510,9 +2510,9 @@ class WordMorphism(SageObject):
         TESTS::
 
             sage: t = WordMorphism('1->12,2->3,3->45,4->5,5->6,6->7,7->8,8->1')
-            sage: E = t.incidence_matrix().eigenvalues()                                # needs sage.modules
-            sage: x = [x for x in E if -0.8 < x < -0.7][0]                              # needs sage.modules
-            sage: t.rauzy_fractal_projection(prec=10)                                   # needs sage.modules
+            sage: E = t.incidence_matrix().eigenvalues()                                # needs sage.modules sage.rings.number_field
+            sage: x = [x for x in E if -0.8 < x < -0.7][0]                              # needs sage.modules sage.rings.number_field
+            sage: t.rauzy_fractal_projection(prec=10)                                   # needs sage.modules sage.rings.number_field
             {'1': (1.0, 0.00),
              '2': (-1.7, -0.56),
              '3': (0.79, 1.3),
@@ -2521,7 +2521,7 @@ class WordMorphism(SageObject):
              '6': (0.79, 1.3),
              '7': (0.21, -1.3),
              '8': (-0.88, 0.74)}
-            sage: t.rauzy_fractal_projection(eig=x, prec=10)                            # needs sage.modules
+            sage: t.rauzy_fractal_projection(eig=x, prec=10)                            # needs sage.modules sage.rings.number_field
             {'1': (1.0, 0.00),
              '2': (-0.12, -0.74),
              '3': (-0.66, -0.56),
@@ -2603,21 +2603,23 @@ class WordMorphism(SageObject):
         points in the piece of the fractal associated with ``'1'``, ``'2'``
         and ``'3'`` are respectively::
 
+            sage: # needs sage.modules sage.rings.number_field
             sage: s = WordMorphism('1->12,2->13,3->1')
-            sage: D = s.rauzy_fractal_points(n=100)                                     # needs sage.modules
-            sage: len(D['1'])                                                           # needs sage.modules
+            sage: D = s.rauzy_fractal_points(n=100)
+            sage: len(D['1'])
             54
-            sage: len(D['2'])                                                           # needs sage.modules
+            sage: len(D['2'])
             30
-            sage: len(D['3'])                                                           # needs sage.modules
+            sage: len(D['3'])
             16
 
         TESTS::
 
+            sage: # needs sage.modules sage.rings.number_field
             sage: s = WordMorphism('1->12,2->13,3->1')
-            sage: D = s.rauzy_fractal_points(n=100, exchange=True,                      # needs sage.modules
+            sage: D = s.rauzy_fractal_points(n=100, exchange=True,
             ....:                            translate=[(3,1,-2), (5,-33,8)], prec=40)
-            sage: len(D['1'])                                                           # needs sage.modules
+            sage: len(D['1'])
             108
 
         AUTHOR:
@@ -2827,8 +2829,8 @@ class WordMorphism(SageObject):
         #. Different fractals can be obtained by choosing another (non-Pisot) eigenvalue::
 
             sage: s = WordMorphism('1->12,2->3,3->45,4->5,5->6,6->7,7->8,8->1')
-            sage: E = s.incidence_matrix().eigenvalues()                                # needs sage.modules
-            sage: x = [x for x in E if -0.8 < x < -0.7][0]                              # needs sage.modules
+            sage: E = s.incidence_matrix().eigenvalues()                                # needs sage.modules sage.rings.number_field
+            sage: x = [x for x in E if -0.8 < x < -0.7][0]                              # needs sage.modules sage.rings.number_field
             sage: s.rauzy_fractal_plot()                                    # not tested (> 1 second)
             sage: s.rauzy_fractal_plot(eig=x)                               # not tested (> 1 second)
 
@@ -3315,7 +3317,7 @@ class WordMorphism(SageObject):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.libs.pari sage.modules
             sage: WordMorphism('0->1,1->0').abelian_rotation_subspace()
             Vector space of degree 2 and dimension 2 over Rational Field
             Basis matrix:
@@ -3342,7 +3344,7 @@ class WordMorphism(SageObject):
 
         The domain needs to be equal to the codomain::
 
-            sage: WordMorphism('0->1,1->',codomain=Words('01')).abelian_rotation_subspace()         # needs sage.modules
+            sage: WordMorphism('0->1,1->',codomain=Words('01')).abelian_rotation_subspace()         # needs sage.libs.pari sage.modules
             Vector space of degree 2 and dimension 0 over Rational Field
             Basis matrix:
             []
