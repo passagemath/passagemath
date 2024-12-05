@@ -1796,6 +1796,7 @@ class ProjectivePlaneCurve_field(ProjectivePlaneCurve, ProjectiveCurve_field):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: F.<x0, x1> = FreeGroup()
             sage: G = F / [x1^-1*(x1^-1*x0^-1*x1*x0^-1)^2, (x1^-1*x0^-1)^2*x1^-1*(x0*x1)^2*x0]
             sage: G.order()
@@ -1903,7 +1904,7 @@ class ProjectivePlaneCurve_field(ProjectivePlaneCurve, ProjectiveCurve_field):
 
             sage: R.<x,y,z> = QQ[]
             sage: C = Curve(x^3 + 3*y^3 + 5*z^3)
-            sage: C.riemann_surface()
+            sage: C.riemann_surface()                                                   # needs sage.graphs
             Riemann surface defined by polynomial f = x^3 + 3*y^3 + 5 = 0,
             with 53 bits of precision
         """
