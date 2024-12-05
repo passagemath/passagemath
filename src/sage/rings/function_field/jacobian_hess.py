@@ -903,7 +903,7 @@ class JacobianGroup_finite_field(JacobianGroup, JacobianGroup_finite_field_base)
             sage: C = Curve(y^2 + x^3 + 2*x + 1).projective_closure()
             sage: J = C.jacobian(model='hess')
             sage: G = J.group()
-            sage: len([pt for pt in G])
+            sage: len([pt for pt in G])                                                 # needs sage.combinat
             11
         """
         g = self._parent._function_field.genus()
@@ -976,6 +976,8 @@ class JacobianGroup_finite_field(JacobianGroup, JacobianGroup_finite_field_base)
             11
             sage: K = k.extension(3)
             sage: G3 = J.group(K)
+
+            sage: # needs sage.combinat
             sage: pts1 = G1.get_points(11)
             sage: pts3 = G3.get_points(12)
             sage: pt = next(pt for pt in pts3 if pt not in pts1)

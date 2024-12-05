@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-schemes
-# sage.doctest: needs sage.libs.flint sage.libs.pari
+# sage.doctest: needs sage.combinat sage.libs.flint sage.libs.pari
 """
 Graded rings of modular forms
 
@@ -98,7 +98,8 @@ def _span_of_forms_in_weight(forms, weight, prec, stop_dim=None, use_random=Fals
 
     Test the alternative randomized algorithm::
 
-        sage: f._span_of_forms_in_weight(forms, 24, prec=5, use_random=True, stop_dim=3)
+        sage: f._span_of_forms_in_weight(forms, 24, prec=5,
+        ....:                            use_random=True, stop_dim=3)
         Vector space of degree 5 and dimension 3 over Rational Field
         Basis matrix:
         [          1           0           0    52416000 39007332000]

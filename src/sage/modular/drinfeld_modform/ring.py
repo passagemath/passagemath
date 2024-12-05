@@ -156,7 +156,7 @@ class DrinfeldModularForms(Parent, UniqueRepresentation):
     weight, use the methode :meth:`basis_of_weight`::
 
         sage: M = DrinfeldModularForms(K, 2)
-        sage: M.basis_of_weight(q^3 - 1)
+        sage: M.basis_of_weight(q^3 - 1)                                                # needs sage.combinat
         [g1*g2^3, g1^5*g2^2, g1^9*g2, g1^13]
 
     In order to compute the coefficient forms, use the methods
@@ -730,6 +730,7 @@ class DrinfeldModularForms(Parent, UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: q = 3; A = GF(q)['T']; K = Frac(A);
             sage: M = DrinfeldModularForms(K, 2)
             sage: M.basis_of_weight(q - 1)

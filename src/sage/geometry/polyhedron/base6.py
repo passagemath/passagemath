@@ -977,7 +977,7 @@ class Polyhedron_base6(Polyhedron_base5):
             Traceback (most recent call last):
             ...
             ValueError: the base ring needs to be extended; try with "extend=True"
-            sage: P.affine_hull_projection(orthonormal=True, extend=True)               # needs sage.rings.number_field
+            sage: P.affine_hull_projection(orthonormal=True, extend=True)               # needs sage.rings.number_field sage.symbolic
             A 4-dimensional polyhedron in AA^4 defined as the convex hull of 6 vertices
         """
         result = AffineHullProjectionData()
@@ -1193,13 +1193,13 @@ class Polyhedron_base6(Polyhedron_base5):
             A 1-dimensional polyhedron in QQ^1 defined as the convex hull of 2 vertices
             sage: A.vertices()
             (A vertex at (0), A vertex at (2))
-            sage: A = L.affine_hull_projection(orthonormal=True)                        # needs sage.rings.number_field
+            sage: A = L.affine_hull_projection(orthonormal=True)                        # needs sage.rings.number_field sage.symbolic
             Traceback (most recent call last):
             ...
             ValueError: the base ring needs to be extended; try with "extend=True"
-            sage: A = L.affine_hull_projection(orthonormal=True, extend=True); A        # needs sage.rings.number_field
+            sage: A = L.affine_hull_projection(orthonormal=True, extend=True); A        # needs sage.rings.number_field sage.symbolic
             A 1-dimensional polyhedron in AA^1 defined as the convex hull of 2 vertices
-            sage: A.vertices()                                                          # needs sage.rings.number_field
+            sage: A.vertices()                                                          # needs sage.rings.number_field sage.symbolic
             (A vertex at (1.414213562373095?), A vertex at (0.?e-18))
 
         More generally::

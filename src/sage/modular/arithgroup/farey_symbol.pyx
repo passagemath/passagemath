@@ -151,8 +151,8 @@ cdef class Farey:
     <sage.modular.arithgroup.arithgroup_perm.HsuExample10>` of an
     index 10 arithmetic subgroup given by Tim Hsu::
 
-         sage: from sage.modular.arithgroup.arithgroup_perm import HsuExample10
-         sage: FareySymbol(HsuExample10()).generators()
+         sage: from sage.modular.arithgroup.arithgroup_perm import HsuExample10         # needs sage.groups
+         sage: FareySymbol(HsuExample10()).generators()                                 # needs sage.groups
          [
          [1 2]  [-2  1]  [ 4 -3]
          [0 1], [-7  3], [ 3 -2]
@@ -428,6 +428,7 @@ cdef class Farey:
 
         Check that :issue:`20347` is solved::
 
+            sage: # needs sage.groups
             sage: from sage.misc.misc_c import prod
             sage: G = ArithmeticSubgroup_Permutation(S2="(1,2)(3,4)", S3="(1,2,3)")
             sage: S = G.farey_symbol()

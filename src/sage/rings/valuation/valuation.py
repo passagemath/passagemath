@@ -614,7 +614,7 @@ class DiscreteValuation(DiscretePseudoValuation):
             sage: Delta = (x^12 + 20*x^11 + 154*x^10 + 664*x^9 + 1873*x^8 + 3808*x^7 + 5980*x^6
             ....:           + 7560*x^5 + 7799*x^4 + 6508*x^3 + 4290*x^2 + 2224*x + 887)
             sage: K.<theta> = NumberField(x^6 + 108)
-            sage: K.is_galois()
+            sage: K.is_galois()                                                         # needs sage.groups
             True
             sage: vK = QQ.valuation(2).extension(K)
             sage: vK(2)

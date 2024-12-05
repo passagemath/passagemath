@@ -106,7 +106,7 @@ def algdep(z, degree, known_bits=None, use_bits=None, known_digits=None,
     compute a 200-bit approximation to `sqrt(2)` which is wrong in the
     33'rd bit::
 
-        sage: # needs sage.libs.pari sage.rings.real_mpfr
+        sage: # needs fpylll sage.libs.pari sage.rings.real_mpfr
         sage: z = sqrt(RealField(200)(2)) + (1/2)^33
         sage: p = algdep(z, 4); p
         227004321085*x^4 - 216947902586*x^3 - 99411220986*x^2 + 82234881648*x - 211871195088
@@ -6272,7 +6272,7 @@ def gauss_sum(char_value, finite_field):
 
     EXAMPLES::
 
-        sage: # needs sage.libs.pari sage.rings.number_field
+        sage: # needs sage.libs.gap sage.libs.pari sage.rings.number_field
         sage: from sage.arith.misc import gauss_sum
         sage: F = GF(5); q = 5
         sage: zq = UniversalCyclotomicField().zeta(q - 1)

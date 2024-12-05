@@ -465,6 +465,8 @@ class WeilPolynomials():
         sage: ans1.sort()
         sage: l = [(x-1)^2, (x+1)^2] + [cyclotomic_polynomial(n,x)
         ....:     for n in range(3, 2*d*d) if euler_phi(n) <= d]
+
+        sage: # needs sage.combinat
         sage: w = WeightedIntegerVectors(d, [i.degree() for i in l])
         sage: ans2 = [prod(l[i]^v[i] for i in range(len(l))) for v in w]
         sage: ans2.sort()
