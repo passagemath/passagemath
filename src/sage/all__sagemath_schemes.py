@@ -11,9 +11,9 @@ This distribution makes the following features available::
     FeatureTestResult('sage.modular', True)
 """
 
-from .all__sagemath_polyhedra import *
-
 from .all__sagemath_singular import *
+
+from .all__sagemath_polyhedra import *
 
 from sage.lfunctions.all import *
 from sage.modular.all    import *

@@ -19,10 +19,29 @@ See https://doc.sagemath.org/html/en/installation/index.html
 for general installation instructions.
 
 
-About this pip-installable source distribution
-----------------------------------------------
+About this pip-installable distribution
+---------------------------------------
 
-This pip-installable source distribution ``sagemath-homfly`` is a small
-optional distribution for use with ``sagemath-standard``.
+This pip-installable distribution ``passagemath-homfly`` provides a Cython interface
+to the `libhomfly <https://github.com/miguelmarco/libhomfly>`_ library.
 
-It provides a Cython interface to the ``libhomfly`` library.
+
+What is included
+----------------
+
+* `sage.libs.homfly <https://github.com/passagemath/passagemath/blob/main/src/sage/libs/homfly.pyx>`_
+
+
+Examples
+--------
+
+::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sirocco[test]" ipython
+
+    In [1]: from sage.libs.homfly import homfly_polynomial_dict
+
+    In [2]: trefoil = '1 6 0 1  1 -1  2 1  0 -1  1 1  2 -1 0 1 1 1 2 1'
+
+    In [3]: homfly_polynomial_dict(trefoil)
+    Out[3]: {(-4, 0): -1, (-2, 0): -2, (-2, 2): 1}

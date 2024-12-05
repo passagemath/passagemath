@@ -4328,14 +4328,14 @@ class Link(SageObject):
 
             sage: b = BraidGroup(4)((1, 2, 2, 2, -1, 2, 2, 2, -3, -3, -3))
             sage: Kb = Knot(b)
-            sage: Kb.get_knotinfo()
+            sage: Kb.get_knotinfo()                                                     # optional - database_knotinfo, needs sage.libs.homfly
             KnotInfo['K3_1']^2*KnotInfo['K3_1m']
 
             sage: K = Link([[4, 2, 5, 1], [8, 6, 9, 5], [6, 3, 7, 4], [2, 7, 3, 8],
             ....:  [10, 15, 11, 16], [12, 21, 13, 22], [14, 11, 15, 12], [16, 9, 17, 10],
             ....:  [18, 25, 19, 26], [20, 23, 21, 24], [22, 13, 23, 14], [24, 19, 25, 20],
             ....:  [26, 17, 1, 18]])
-            sage: K.get_knotinfo()    # optional - database_knotinfo, long time
+            sage: K.get_knotinfo()    # optional - database_knotinfo, long time, needs sage.libs.homfly
             KnotInfo['K4_1']*KnotInfo['K9_2m']
 
         TESTS::
@@ -4362,7 +4362,7 @@ class Link(SageObject):
             sage: L = KnotInfo.L6a2_0
             sage: L1 = L.link()
             sage: L2 = L.link(L.items.braid_notation)
-            sage: L1.get_knotinfo() == L2.get_knotinfo()
+            sage: L1.get_knotinfo() == L2.get_knotinfo()                                # optional - database_knotinfo, needs sage.libs.homfly
             True
         """
         non_unique_hint = '\nuse keyword argument `unique` to obtain more details'
@@ -4540,11 +4540,11 @@ class Link(SageObject):
             sage: l2 = Link([[1, 8, 2, 9], [9, 2, 10, 3], [3, 14, 4, 1],
             ....:            [13, 4, 14, 5], [5, 12, 6, 13], [11, 6, 12, 7],
             ....:            [7, 10, 8, 11]])
-            sage: l1.is_isotopic(l2)                                                    # needs sage.libs.braiding
+            sage: l1.is_isotopic(l2)                                                    # needs sage.libs.braiding sage.libs.homfly
             True
 
             sage: l3 = l2.mirror_image()
-            sage: l1.is_isotopic(l3)                                                    # needs sage.libs.braiding
+            sage: l1.is_isotopic(l3)                                                    # needs sage.libs.braiding sage.libs.homfly
             False
 
             sage: # optional - database_knotinfo
@@ -4554,22 +4554,22 @@ class Link(SageObject):
             sage: L == L7a7(0)
             True
             sage: l = L.link()
-            sage: l.is_isotopic(L7a7(1).link())                                         # needs sage.libs.braiding
+            sage: l.is_isotopic(L7a7(1).link())                                         # needs sage.libs.braiding sage.libs.homf;y
             Traceback (most recent call last):
             ...
             NotImplementedError: comparison not possible!
-            sage: l.is_isotopic(L7a7(2).link())                                         # needs sage.libs.braiding
+            sage: l.is_isotopic(L7a7(2).link())                                         # needs sage.libs.braiding sage.libs.homf;y
             True
-            sage: l.is_isotopic(L7a7(3).link())                                         # needs sage.libs.braiding
+            sage: l.is_isotopic(L7a7(3).link())                                         # needs sage.libs.braiding sage.libs.homf;y
             False
 
         Using verbosity::
 
             sage: set_verbose(1)
-            sage: l1.is_isotopic(l2)                                                    # needs sage.libs.braiding
+            sage: l1.is_isotopic(l2)                                                    # needs sage.libs.braiding sage.libs.homf;y
             verbose 1 (... link.py, is_isotopic) identified by KnotInfo (KnotInfo.K7_2, SymmetryMutant.mirror_image)
             True
-            sage: l1.is_isotopic(l3)                                                    # needs sage.libs.braiding
+            sage: l1.is_isotopic(l3)                                                    # needs sage.libs.braiding sage.libs.homf;y
             verbose 1 (... link.py, is_isotopic) different Homfly-PT polynomials
             False
             sage: set_verbose(0)
@@ -4582,14 +4582,14 @@ class Link(SageObject):
             sage: L1 = L.link()
             sage: L2 = L.link(L.items.braid_notation)
             sage: set_verbose(1)
-            sage: L1.is_isotopic(L2)                                                    # needs sage.libs.braiding
+            sage: L1.is_isotopic(L2)                                                    # needs sage.libs.braiding sage.libs.homf;y
             verbose 1 (... link.py, is_isotopic) identified by KnotInfo uniquely (KnotInfo.L6a2_0, SymmetryMutant.itself)
             True
-            sage: KnotInfo.K0_1.link().is_isotopic(KnotInfo.L2a1_0.link())              # needs sage.libs.braiding
+            sage: KnotInfo.K0_1.link().is_isotopic(KnotInfo.L2a1_0.link())              # needs sage.libs.braiding sage.libs.homf;y
             verbose 1 (... link.py, is_isotopic) different number of components
             False
 
-            sage: # optional - database_knotinfo, needs sage.libs.braiding
+            sage: # optional - database_knotinfo, needs sage.libs.braiding sage.libs.homf;y
             sage: K = KnotInfo.K10_67
             sage: K1 = K.link()
             sage: K1r = K.link().reverse()
