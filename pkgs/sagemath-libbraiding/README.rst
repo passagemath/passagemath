@@ -19,17 +19,34 @@ See https://doc.sagemath.org/html/en/installation/index.html
 for general installation instructions.
 
 
-About this pip-installable source distribution
-----------------------------------------------
+About this pip-installable distribution
+---------------------------------------
 
-This pip-installable source distribution ``sagemath-libbraiding`` provides
-an interface to libbraiding, a library to compute several properties of braids,
+This pip-installable source distribution ``passagemath-libbraiding`` provides
+an interface to `libbraiding <https://github.com/miguelmarco/libbraiding>`_,
+a library to compute several properties of braids,
 including centralizer and conjugacy check.
+
+
+What is included
+----------------
+
+* `sage.libs.braiding <https://github.com/passagemath/passagemath/blob/main/src/sage/libs/braiding.pyx>`_
 
 
 Examples
 --------
 
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sirocco[test]" ipython
+
+    In [1]: from sage.all__sagemath_libbraiding import *
+
+    In [2]: from sage.libs.braiding import conjugatingbraid
+
+    In [3]: B = BraidGroup(3); b = B([1,2,1,-2]); c = B([1,2])
+
+    In [4]: conjugatingbraid(b,c)
+    Out[4]: [[0], [2]]
 
 
 Development
