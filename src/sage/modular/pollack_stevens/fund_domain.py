@@ -1523,6 +1523,7 @@ class ManinRelations(PollackStevensModularDomain):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('11a')
             sage: phi = E.pollack_stevens_modular_symbol()
             sage: phi.values()

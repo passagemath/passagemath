@@ -58,6 +58,7 @@ class pAdicLseries(SageObject):
 
     ::
 
+        sage: # needs eclib
         sage: from sage.modular.pollack_stevens.padic_lseries import pAdicLseries
         sage: E = EllipticCurve('20a')
         sage: phi = E.pollack_stevens_modular_symbol()
@@ -93,6 +94,7 @@ class pAdicLseries(SageObject):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: from sage.modular.pollack_stevens.padic_lseries import pAdicLseries
             sage: E = EllipticCurve('11a3')
             sage: phi = E.pollack_stevens_modular_symbol()
@@ -205,6 +207,7 @@ class pAdicLseries(SageObject):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: from sage.modular.pollack_stevens.padic_lseries import pAdicLseries
             sage: E = EllipticCurve('21a4')
             sage: phi = E.pollack_stevens_modular_symbol()
@@ -237,6 +240,7 @@ class pAdicLseries(SageObject):
 
         EXAMPLES::
 
+            sage: # needs eclib
             sage: from sage.modular.pollack_stevens.padic_lseries import pAdicLseries
             sage: E = EllipticCurve('37a')
             sage: phi = E.pollack_stevens_modular_symbol()
@@ -324,6 +328,7 @@ class pAdicLseries(SageObject):
 
         Comparing against a different implementation::
 
+            sage: # needs eclib
             sage: L = E.padic_lseries(3)
             sage: (1-1/L.alpha(prec=4))^2
             3^2 + 3^3 + O(3^5)

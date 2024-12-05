@@ -227,11 +227,11 @@ def low_weight_generators(N, p, m, NN):
     EXAMPLES::
 
         sage: from sage.modular.overconvergent.hecke_series import low_weight_generators
-        sage: low_weight_generators(3, 7, 3, 10)
+        sage: low_weight_generators(3, 7, 3, 10)                                        # needs sage.combinat
         ([[1 + 12*q + 36*q^2 + 12*q^3 + 84*q^4 + 72*q^5 + 36*q^6 + 96*q^7 + 180*q^8 + 12*q^9 + O(q^10)],
         [1 + 240*q^3 + 102*q^6 + 203*q^9 + O(q^10)],
         [1 + 182*q^3 + 175*q^6 + 161*q^9 + O(q^10)]], 6)
-        sage: low_weight_generators(11, 5, 3, 10)
+        sage: low_weight_generators(11, 5, 3, 10)                                       # needs sage.combinat
         ([[1 + 12*q^2 + 12*q^3 + 12*q^4 + 12*q^5 + 24*q^6 + 24*q^7 + 36*q^8 + 36*q^9 + O(q^10),
         q + 123*q^2 + 124*q^3 + 2*q^4 + q^5 + 2*q^6 + 123*q^7 + 123*q^9 + O(q^10)],
         [q + 116*q^4 + 115*q^5 + 102*q^6 + 121*q^7 + 96*q^8 + 106*q^9 + O(q^10)]], 4)
@@ -491,12 +491,12 @@ def complementary_spaces(N, p, k0, n, mdash, elldashp, elldash, modformsring, bo
     EXAMPLES::
 
         sage: from sage.modular.overconvergent.hecke_series import complementary_spaces
-        sage: complementary_spaces(2, 5, 0, 3, 2, 5, 4, True, 6) # random
+        sage: complementary_spaces(2, 5, 0, 3, 2, 5, 4, True, 6)  # random              # needs sage.combinat
         [[1],
         [1 + 23*q + 24*q^2 + 19*q^3 + 7*q^4 + O(q^5)],
         [1 + 21*q + 2*q^2 + 17*q^3 + 14*q^4 + O(q^5)],
         [1 + 19*q + 9*q^2 + 11*q^3 + 9*q^4 + O(q^5)]]
-        sage: complementary_spaces(2, 5, 0, 3, 2, 5, 4, False, 6) # random
+        sage: complementary_spaces(2, 5, 0, 3, 2, 5, 4, False, 6)  # random             # needs sage.combinat
         [[1],
         [3 + 4*q + 2*q^2 + 12*q^3 + 11*q^4 + O(q^5)],
         [2 + 2*q + 14*q^2 + 19*q^3 + 18*q^4 + O(q^5)],
@@ -554,6 +554,7 @@ def higher_level_katz_exp(p, N, k0, m, mdash, elldash, elldashp, modformsring, b
 
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.modular.overconvergent.hecke_series import higher_level_katz_exp
         sage: e, Ep1 = higher_level_katz_exp(5, 2, 0, 1, 2, 4, 20, True, 6)
         sage: e
@@ -700,6 +701,7 @@ def higher_level_UpGj(p, N, klist, m, modformsring, bound, extra_data=False):
 
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.modular.overconvergent.hecke_series import higher_level_UpGj
         sage: A = Matrix([
         ....:     [1,  0,  0,  0,  0,  0],

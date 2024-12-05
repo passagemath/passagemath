@@ -204,8 +204,8 @@ def enumerate_hypergeometric_data(d, weight=None):
     EXAMPLES::
 
         sage: from sage.modular.hypergeometric_motive import enumerate_hypergeometric_data as enum
-        sage: l = [H for H in enum(6, weight=2) if H.hodge_numbers()[0] == 1]
-        sage: len(l)
+        sage: l = [H for H in enum(6, weight=2) if H.hodge_numbers()[0] == 1]           # needs sage.combinat
+        sage: len(l)                                                                    # needs sage.combinat
         112
     """
     bound = 2 * d * d  # to make sure that phi(n) <= d
@@ -238,7 +238,7 @@ def possible_hypergeometric_data(d, weight=None) -> list:
     EXAMPLES::
 
         sage: from sage.modular.hypergeometric_motive import possible_hypergeometric_data as P
-        sage: [len(P(i,weight=2)) for i in range(1, 7)]
+        sage: [len(P(i, weight=2)) for i in range(1, 7)]                                # needs sage.combinat
         [0, 0, 10, 30, 93, 234]
     """
     return list(enumerate_hypergeometric_data(d, weight))
