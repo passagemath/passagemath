@@ -4455,11 +4455,11 @@ cdef class Matrix(Matrix1):
             sage: A*X.transpose() == zero_matrix(ZZ, 4, 3)
             True
 
-            sage: X = A.right_kernel_matrix(algorithm='padic', basis='LLL'); X
+            sage: X = A.right_kernel_matrix(algorithm='padic', basis='LLL'); X          # needs fpylll
             [ -3  -1   5   7   2  -3  -2]
             [  3   1   2   5  -5   2  -6]
             [ -4 -13   2  -7   5   7  -3]
-            sage: A*X.transpose() == zero_matrix(ZZ, 4, 3)
+            sage: A*X.transpose() == zero_matrix(ZZ, 4, 3)                              # needs fpylll
             True
 
             sage: # needs sage.libs.pari
@@ -4994,7 +4994,7 @@ cdef class Matrix(Matrix1):
             [  1   5  -8   3  -1  -1  -1]
             [  0  11 -19   5  -2  -3  -3]
             sage: B = copy(A)
-            sage: B.right_kernel(basis='LLL')
+            sage: B.right_kernel(basis='LLL')                                           # needs fpylll
             Free module of degree 7 and rank 2 over Integer Ring
             User basis matrix:
             [ 2 -1  3  1  0  1  1]
@@ -5011,7 +5011,7 @@ cdef class Matrix(Matrix1):
             [  1   5  -8   3  -1  -1  -1]
             [  0  11 -19   5  -2  -3  -3]
             sage: E = copy(A)
-            sage: E.right_kernel(algorithm='padic', basis='LLL')
+            sage: E.right_kernel(algorithm='padic', basis='LLL')                        # needs fpylll
             Free module of degree 7 and rank 2 over Integer Ring
             User basis matrix:
             [-2  1 -3 -1  0 -1 -1]
