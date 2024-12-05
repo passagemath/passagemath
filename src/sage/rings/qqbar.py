@@ -294,6 +294,7 @@ that algebraic number if you type the string into Sage. We can see
 that until exact computation is triggered, an algebraic number keeps
 track of the computation steps used to produce that number::
 
+    sage: # needs sage.symbolic
     sage: rt2 = AA(sqrt(2))
     sage: rt3 = AA(sqrt(3))
     sage: n = (rt2 + rt3)^5; n
@@ -307,6 +308,7 @@ track of the computation steps used to produce that number::
 But once exact computation is triggered, the computation tree is discarded,
 and we get a way to produce the number directly::
 
+    sage: # needs sage.symbolic
     sage: n == 109*rt2 + 89*rt3
     True
     sage: sage_input(n)
@@ -2831,6 +2833,7 @@ def number_field_elements_from_algebraics(numbers, minimal=False,
 
     Test ``embedded`` for quadratic and cyclotomic fields::
 
+        sage: # needs sage.symbolic
         sage: v = number_field_elements_from_algebraics([QQbar((-1)^(2/3))], embedded=False, minimal=True); v
         (Number Field in zeta6 with defining polynomial x^2 - x + 1,
          [zeta6 - 1],
@@ -2909,6 +2912,7 @@ def number_field_elements_from_algebraics(numbers, minimal=False,
 
     Test that the semantic of ``AA`` constructor does not affect this function (:issue:`36735`)::
 
+        sage: # needs sage.symbolic
         sage: AA((-1)^(2/3))
         1
         sage: number_field_elements_from_algebraics([(-1)^(2/3)])
@@ -4569,16 +4573,17 @@ class AlgebraicNumber_base(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: QQbar(sqrt(-23)).is_integral()
+            sage: QQbar(sqrt(-23)).is_integral()                                        # needs sage.symbolic
             True
-            sage: AA(sqrt(23/2)).is_integral()
+            sage: AA(sqrt(23/2)).is_integral()                                          # needs sage.symbolic
             False
 
         TESTS:
 
         Method should return the same value as :meth:`NumberFieldElement.is_integral`::
 
-             sage: for a in [QQbar(2^(1/3)), AA(2^(1/3)), QQbar(sqrt(1/2)), AA(1/2), AA(2), QQbar(1/2)]:
+             sage: for a in [QQbar(2^(1/3)), AA(2^(1/3)), QQbar(sqrt(1/2)),             # needs sage.symbolic
+             ....:           AA(1/2), AA(2), QQbar(1/2)]:
              ....:    assert a.as_number_field_element()[1].is_integral() == a.is_integral()
         """
         return all(a in ZZ for a in self.minpoly())
