@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-lrslib ~= 10.4.68.0
+passagemath-lrslib ~= 10.5.1.0
