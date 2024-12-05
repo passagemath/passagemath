@@ -2080,6 +2080,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, -3, -2, 3, 1])
             sage: db = b.deformed_burau_matrix(); db
@@ -2089,6 +2090,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         We check how this relates to the nondeformed Burau matrix::
 
+            sage: # needs sage.combinat
             sage: def subs_gen(gen, q):
             ....:     gen_str = str(gen)
             ....:     v = q if 'p' in gen_str else 1/q
@@ -2158,6 +2160,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: b = BraidGroup(2)([1,1,1])
             sage: db = b.deformed_burau_matrix()[1:,1:]; db
             [cp_0*ap_1*bp_2]
@@ -2209,6 +2212,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: trefoil = BraidGroup(2)([1,1,1])
             sage: trefoil.colored_jones_polynomial(2)
             q + q^3 - q^4
@@ -2219,6 +2223,7 @@ class Braid(FiniteTypeArtinGroupElement):
             -q^-21 + q^-20 + q^-19 - q^-17 + q^-15 - q^-14 - q^-13
              + q^-11 - q^-10 + q^-7 + q^-3
 
+            sage: # needs sage.combinat
             sage: figure_eight = BraidGroup(3)([-1, 2, -1, 2])
             sage: figure_eight.colored_jones_polynomial(2)
             q^-2 - q^-1 + 1 - q + q^2
@@ -2275,6 +2280,7 @@ class RightQuantumWord:
 
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.groups.braid import RightQuantumWord
         sage: fig_8 = BraidGroup(3)([-1, 2, -1, 2])
         sage: (
@@ -2295,6 +2301,7 @@ class RightQuantumWord:
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.groups.braid import RightQuantumWord
             sage: fig_8 = BraidGroup(3)([-1, 2, -1, 2])
             sage: (
@@ -2331,6 +2338,7 @@ class RightQuantumWord:
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.groups.braid import RightQuantumWord
             sage: fig_8 = BraidGroup(3)([-1, 2, -1, 2])
             sage: (
@@ -2379,6 +2387,7 @@ class RightQuantumWord:
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.groups.braid import RightQuantumWord
             sage: fig_8 = BraidGroup(3)([-1, 2, -1, 2])
             sage: (
@@ -2397,6 +2406,7 @@ class RightQuantumWord:
 
         Testing the equations (4.1) and (4.2) in [HL2018]_::
 
+            sage: # needs sage.combinat
             sage: RightQuantumWord(ap_3*bp_3).reduced_word()
             bp_3*ap_3
             sage: RightQuantumWord(ap_3*cp_3).reduced_word()
@@ -2434,6 +2444,7 @@ class RightQuantumWord:
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.groups.braid import RightQuantumWord
             sage: B = BraidGroup(3)
             sage: b = B([1,-2,1,2])
@@ -2452,7 +2463,7 @@ class RightQuantumWord:
 
         TESTS::
 
-            sage: rqw.eps(1)
+            sage: rqw.eps(1)                                                            # needs sage.combinat
             0
 
         .. TODO::
@@ -2488,6 +2499,7 @@ class RightQuantumWord:
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.groups.braid import RightQuantumWord
             sage: b = BraidGroup(3)([1,2,-1,2,-1])
             sage: db = b.deformed_burau_matrix(); db[2,2]
