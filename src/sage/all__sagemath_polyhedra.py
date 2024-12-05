@@ -39,6 +39,8 @@ try:  # extra
 except ImportError:
     pass
 
+from .all__sagemath_modules import RR
+
 from sage.geometry.all__sagemath_polyhedra import *
 from sage.geometry.triangulation.all import *
 from sage.numerical.all import *
