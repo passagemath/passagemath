@@ -22,7 +22,7 @@ for general installation instructions.
 About this pip-installable distribution
 ---------------------------------------
 
-This pip-installable distribution ``sagemath-sirocco`` provides a Cython interface
+This pip-installable distribution ``passagemath-sirocco`` provides a Cython interface
 to the `sirocco <https://github.com/miguelmarco/SIROCCO2>`_ library for computing
 topologically certified root continuation of bivariate polynomials.
 
