@@ -36,6 +36,8 @@ What is included
 Examples
 --------
 
+::
+
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sirocco[test]" ipython
 
     In [1]: from sage.all__sagemath_sirocco import *

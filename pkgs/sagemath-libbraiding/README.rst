@@ -37,7 +37,9 @@ What is included
 Examples
 --------
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sirocco[test]" ipython
+::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-libbraiding[test]" ipython
 
     In [1]: from sage.all__sagemath_libbraiding import *
 
