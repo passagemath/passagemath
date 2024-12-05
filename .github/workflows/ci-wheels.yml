@@ -19,20 +19,37 @@ jobs:
       fail-fast: false
       matrix:
         distribution:
+          - sagemath-benzene
           - sagemath-bliss
+          - sagemath-buckygen
           - sagemath-categories
+          - sagemath-cddlib
+          - sagemath-cliquer
           - sagemath-combinat
           - sagemath-coxeter3
           - sagemath-flint
           - sagemath-giac
+          - sagemath-glucose
           - sagemath-graphs
           - sagemath-groups
+          - sagemath-homfly
+          - sagemath-kissat
+          - sagemath-latte-4ti2
+          - sagemath-libbraiding
+          - sagemath-lrslib
           - sagemath-modules
+          - sagemath-msolve
           - sagemath-pari
+          - sagemath-planarity
+          - sagemath-plantri
           - sagemath-plot
           - sagemath-polyhedra
+          - sagemath-qepcad
+          - sagemath-rankwidth
           - sagemath-repl
+          - sagemath-rubiks
           - sagemath-schemes
+          - sagemath-sirocco
           - sagemath-singular
           - sagemath-standard-no-symbolics
           - sagemath-symbolics
