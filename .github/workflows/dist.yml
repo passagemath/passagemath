@@ -513,6 +513,7 @@ jobs:
 
   build_optional_wheels:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }} optional
+    if: (success() || failure())
     runs-on: ${{ matrix.os }}
     needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels]
     strategy:
