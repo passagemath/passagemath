@@ -4362,7 +4362,7 @@ class Link(SageObject):
             sage: L = KnotInfo.L6a2_0
             sage: L1 = L.link()
             sage: L2 = L.link(L.items.braid_notation)
-            sage: L1.get_knotinfo() == L2.get_knotinfo()
+            sage: L1.get_knotinfo() == L2.get_knotinfo()                                # optional - database_knotinfo, needs sage.libs.homfly
             True
         """
         non_unique_hint = '\nuse keyword argument `unique` to obtain more details'
