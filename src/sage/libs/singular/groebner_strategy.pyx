@@ -322,6 +322,8 @@ cdef class NCGroebnerStrategy(SageObject):
         EXAMPLES::
 
             sage: from sage.libs.singular.groebner_strategy import NCGroebnerStrategy
+
+            sage: # needs sage.combinat
             sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
             sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
             sage: I = H.ideal([y^2, x^2, z^2-H.one()])
@@ -399,6 +401,7 @@ cdef class NCGroebnerStrategy(SageObject):
         """
         TESTS::
 
+            sage: # needs sage.combinat
             sage: from sage.libs.singular.groebner_strategy import NCGroebnerStrategy
             sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
             sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
@@ -431,6 +434,7 @@ cdef class NCGroebnerStrategy(SageObject):
         """
         TESTS::
 
+            sage: # needs sage.combinat
             sage: from sage.libs.singular.groebner_strategy import NCGroebnerStrategy
             sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
             sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
@@ -447,6 +451,7 @@ cdef class NCGroebnerStrategy(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.libs.singular.groebner_strategy import NCGroebnerStrategy
             sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
             sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
@@ -463,6 +468,7 @@ cdef class NCGroebnerStrategy(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.libs.singular.groebner_strategy import NCGroebnerStrategy
             sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
             sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
@@ -477,6 +483,7 @@ cdef class NCGroebnerStrategy(SageObject):
         """
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.libs.singular.groebner_strategy import NCGroebnerStrategy
             sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
             sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
@@ -500,6 +507,7 @@ cdef class NCGroebnerStrategy(SageObject):
         """
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.libs.singular.groebner_strategy import NCGroebnerStrategy
             sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
             sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
@@ -517,6 +525,7 @@ cdef class NCGroebnerStrategy(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
             sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
             sage: JL = H.ideal([x^3, y^3, z^3 - 4*z])
@@ -545,6 +554,7 @@ def unpickle_NCGroebnerStrategy0(I):
     """
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.libs.singular.groebner_strategy import NCGroebnerStrategy
         sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
         sage: H.<x,y,z> = A.g_algebra({y*x:x*y-z, z*x:x*z+2*x, z*y:y*z-2*y})
@@ -560,6 +570,7 @@ def unpickle_GroebnerStrategy0(I):
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: from sage.libs.singular.groebner_strategy import GroebnerStrategy
         sage: P.<x,y,z> = PolynomialRing(GF(32003))
         sage: I = Ideal([x + z, y + z])
