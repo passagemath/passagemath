@@ -1237,7 +1237,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         normalized::
 
             sage: E = EllipticCurve('11a2')
-            sage: E.modular_symbol(implementation='eclib')(0)
+            sage: E.modular_symbol(implementation='eclib')(0)                           # needs eclib
             1
             sage: E.modular_symbol(implementation='sage', normalize='L_ratio')(0)   # needs sage.graphs
             1
@@ -1494,7 +1494,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             2
             sage: E.analytic_rank(algorithm='zero_sum')                                 # needs sage.symbolic
             2
-            sage: E.analytic_rank(algorithm='all')
+            sage: E.analytic_rank(algorithm='all')              # needs lcalc
             2
 
         With the optional parameter leading_coefficient set to ``True``,
@@ -1681,7 +1681,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E.analytic_rank_upper_bound(max_Delta=1, adaptive=False)              # needs sage.symbolic
             0
             sage: E = EllipticCurve([-39,123])
-            sage: E.rank()
+            sage: E.rank()                                                              # needs eclib
             1
             sage: E.analytic_rank_upper_bound(max_Delta=1, adaptive=True)
             1
@@ -2342,9 +2342,9 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             2
             sage: E.saturation(E.gens())[1]                             # needs eclib
             1
-            sage: len(E.gens(algorithm='pari'))
+            sage: len(E.gens(algorithm='pari'))                         # needs eclib
             2
-            sage: E.saturation(E.gens(algorithm='pari'))[1]
+            sage: E.saturation(E.gens(algorithm='pari'))[1]             # needs eclib
             1
             sage: E = EllipticCurve([-3/8,-2/3])
             sage: P = E.lift_x(10/9)
@@ -6073,7 +6073,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         ::
 
             sage: E = EllipticCurve([0,0,1,-7,6])
-            sage: a = E.integral_points(both_signs=True); a
+            sage: a = E.integral_points(both_signs=True); a                             # needs eclib
             [(-3 : -1 : 1), (-3 : 0 : 1), (-2 : -4 : 1), (-2 : 3 : 1), (-1 : -4 : 1),
              (-1 : 3 : 1), (0 : -3 : 1), (0 : 2 : 1), (1 : -1 : 1), (1 : 0 : 1),
              (2 : -1 : 1), (2 : 0 : 1), (3 : -4 : 1), (3 : 3 : 1), (4 : -7 : 1),
@@ -6535,8 +6535,8 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         ::
 
-            sage: a = E.S_integral_points([2,3])
-            sage: len(a)
+            sage: a = E.S_integral_points([2,3])                                            # needs eclib
+            sage: len(a)                                                                    # needs eclib
             43
 
         An example with negative discriminant::
