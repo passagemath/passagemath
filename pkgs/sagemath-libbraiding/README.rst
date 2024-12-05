@@ -54,11 +54,11 @@ Examples
 Development
 -----------
 
-```
+::
+
     $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
     $ cd passagemath
     passagemath $ ./bootstrap
     passagemath $ python3 -m venv libbraiding-venv
     passagemath $ source libbraiding-venv/bin/activate
     (libbraiding-venv) passagemath $ pip install -v -e pkgs/sagemath-libbraiding
-```
