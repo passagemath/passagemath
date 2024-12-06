@@ -1853,7 +1853,7 @@ cdef py_atan2(x, y):
 
     Check that :issue:`21428` is fixed::
 
-        sage: plot(real(sqrt(x - 1.*I)), (x,0,1))
+        sage: plot(real(sqrt(x - 1.*I)), (x,0,1))                                       # needs sage.plot
         Graphics object consisting of 1 graphics primitive
 
     Check that :issue:`22553` is fixed::
