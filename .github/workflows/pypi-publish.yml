@@ -34,8 +34,10 @@ jobs:
 
       - name: Remove wheels that are too large
         run: |
+          mkdir -p too-large
+          find wheelhouse -size +99M -exec mv "{}" too-large/ \;
           ls -l wheelhouse
-          find wheelhouse -size +96M -delete
+          ls -l too-large
 
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
