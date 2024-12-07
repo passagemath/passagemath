@@ -1299,7 +1299,7 @@ class LocalGeneric(CommutativeRing):
             sage: # needs sage.modules
             sage: A = ZpCR(5, prec=10)
             sage: M = zero_matrix(A, 2)                                                 # needs sage.geometry.polyhedron
-            sage: M.smith_form(transformation=False)  # indirect doctest
+            sage: M.smith_form(transformation=False)  # indirect doctest                # needs sage.geometry.polyhedron
             [0 0]
             [0 0]
 
@@ -1554,7 +1554,6 @@ class LocalGeneric(CommutativeRing):
             sage: M = matrix(R, 2, 2, [1, 6, 2, 7])
             sage: M.determinant()  # indirect doctest
             4*5 + 4*5^2 + 4*5^3 + 4*5^4 + 4*5^5 + 4*5^6 + 4*5^7 + 4*5^8 + 4*5^9 + O(5^10)
-
             sage: (5*M).determinant()  # indirect doctest
             4*5^3 + 4*5^4 + 4*5^5 + 4*5^6 + 4*5^7 + 4*5^8 + 4*5^9 + 4*5^10 + 4*5^11 + O(5^12)
 

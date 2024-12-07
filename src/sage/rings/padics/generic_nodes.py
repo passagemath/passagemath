@@ -646,7 +646,7 @@ class pAdicLatticeGeneric(pAdicGeneric):
         conversion::
 
             sage: x2,y2 = R2.convert_multiple(x,y)                                      # needs sage.geometry.polyhedron
-            sage: x2 + y2                                                               # needs sage.rings.padics
+            sage: x2 + y2                                                               # needs sage.geometry.polyhedron sage.rings.padics
             2 + O(2^11)
 
             sage: R2.precision().diffused_digits([x2,y2])                               # needs sage.geometry.polyhedron
