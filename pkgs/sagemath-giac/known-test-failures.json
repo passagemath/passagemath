@@ -3807,6 +3807,7 @@
         "ntests": 336
     },
     "sage.sets.set": {
+        "failed": true,
         "ntests": 397
     },
     "sage.sets.set_from_iterator": {
@@ -3980,7 +3981,6 @@
         "ntests": 242
     },
     "sage.symbolic.constants_c_impl.pxi": {
-        "failed": true,
         "ntests": 39
     },
     "sage.symbolic.expression": {
@@ -3988,8 +3988,7 @@
         "ntests": 3076
     },
     "sage.symbolic.expression_conversion_algebraic": {
-        "failed": true,
-        "ntests": 57
+        "ntests": 50
     },
     "sage.symbolic.expression_conversion_sympy": {
         "ntests": 72
@@ -4029,7 +4028,6 @@
         "ntests": 18
     },
     "sage.symbolic.pynac_impl.pxi": {
-        "failed": true,
         "ntests": 330
     },
     "sage.symbolic.random_tests": {
