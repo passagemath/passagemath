@@ -86,6 +86,7 @@ class AlgebraicConverter(Converter):
 
         Test that :issue:`14602` is fixed::
 
+            sage: # needs sage.rings.number_field
             sage: K = QuadraticField(3)
             sage: K(sqrt(3)).parent() is K
             True

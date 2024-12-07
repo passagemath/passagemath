@@ -3274,7 +3274,8 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     With this in mind, plot an analytical curve to compare with a
     numerical solution::
 
-        sage: graph2D_mercator_angle_curve=c.plot_integrated(interpolation_key='interp-angle',
+        sage: # needs scipy sage.plot
+        sage: graph2D_mercator_angle_curve = c.plot_integrated(interpolation_key='interp-angle',
         ....:                               chart=mercator, thickness=1)
         sage: expr_ph = ph0+v_ph0/v_th0*(ln(tan((v_th0*t+th0)/2))-ln(tan(th0/2)))
         sage: c_loxo = S2.curve({polar:[th0+v_th0*t, expr_ph]}, (t,0,2),
@@ -3289,7 +3290,7 @@ class IntegratedAutoparallelCurve(IntegratedCurve):
     But adding the expression to the dictionary is required to plot the
     curve with respect to the Mercator chart::
 
-        sage: expr_mercator = c_loxo.expression(chart2=mercator)
+        sage: expr_mercator = c_loxo.expression(chart2=mercator)                        # needs scipy sage.plot
 
     Plot the curves (for clarity, set a 2 degrees shift in the initial
     value of `\theta_{0}` so that the curves do not overlap)::

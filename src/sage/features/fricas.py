@@ -48,7 +48,7 @@ class FriCAS(Executable):
 
             sage: from sage.features.fricas import FriCAS
             sage: FriCAS().is_functional()  # optional - fricas
-            FeatureTestResult('fricas', True)
+            FeatureTestResult('fricas_executable', True)
         """
         command = ['fricas -nosman -eval ")quit"']
         try:

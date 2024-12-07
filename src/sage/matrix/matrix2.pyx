@@ -10085,7 +10085,7 @@ cdef class Matrix(Matrix1):
             True
             sage: A.change_ring(QQ).is_diagonalizable()                                 # needs sage.libs.pari
             False
-            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()                 # needs sage.libs.pari
+            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()                 # needs sage.libs.pari sage.rings.number_field
             True
         """
         return self.minpoly().is_squarefree()
