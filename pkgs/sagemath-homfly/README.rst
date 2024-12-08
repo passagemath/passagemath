@@ -37,7 +37,7 @@ Examples
 
 ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sirocco[test]" ipython
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-homfly[test]" ipython
 
     In [1]: from sage.libs.homfly import homfly_polynomial_dict
 
