@@ -375,11 +375,9 @@ def _giac(s):
         ...list[-pi/18,7*pi/18]
 
         sage: libgiac.solve('sin(3*x)>2*sin(x)',x)
-        Traceback (most recent call last):
-        ...
-        RuntimeError: Unable to find numeric values solving equation. For
-        trigonometric equations this may be solved using assumptions, e.g.
-        assume(x>-pi && x<pi) Error: Bad Argument Value
+        Inequation on periodic expression without assumptions on variable,
+         adding assumption ((x>=0) and (x<(2*pi)))
+        list[((x>0) and (x<(pi/6))),((x>(5*pi/6)) and (x<pi)),((x>(7*pi/6)) and (x<(11*pi/6)))]
 
 
     You can also add some hypothesis to a giac symbol::
