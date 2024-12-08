@@ -9,7 +9,7 @@ structures and algorithms for manipulating signed, arbitrary length
 integers, and for vectors, matrices, and polynomials over the integers
 and over finite fields.
 
-Website: http://www.shoup.net/ntl/
+Website: https://libntl.org/
 
 License
 -------
@@ -21,8 +21,3 @@ Upstream Contact
 ----------------
 
 -  Victor Shoup - for contact info see http://www.shoup.net/
-
-Special Update/Build Instructions
----------------------------------
-
--  None
