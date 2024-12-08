@@ -19,12 +19,11 @@ See https://doc.sagemath.org/html/en/installation/index.html
 for general installation instructions.
 
 
-About this pip-installable source distribution
-----------------------------------------------
+About this pip-installable distribution
+---------------------------------------
 
-This pip-installable source distribution ``passagemath-gap`` is a small
-distribution that provides modules that depend on the GAP system, see
-https://www.gap-system.org
+This pip-installable distribution ``passagemath-gap`` is a small
+distribution that provides modules that depend on the `GAP system <https://www.gap-system.org>`_.
 
 
 What is included
@@ -34,9 +33,9 @@ What is included
 
 - `Pexpect interface to GAP <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/gap.html>`_
 
-- numerous modules with build-time dependencies on GAP, see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-gap/MANIFEST.in
+- numerous modules with build-time dependencies on GAP, see `MANIFEST <https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-gap/MANIFEST.in>`_
 
-- the binary wheels on PyPI ship a prebuilt copy of GAP 4.13.1
+- the binary wheels on PyPI ship a prebuilt copy of GAP
 
 
 Examples
