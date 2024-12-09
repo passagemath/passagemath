@@ -536,7 +536,6 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
                 else:
                     raise TypeError("no coercion defined")
 
-
     def _repr_(self):
         """
         Return the string representation of ``self``.
