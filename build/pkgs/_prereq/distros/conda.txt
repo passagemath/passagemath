@@ -14,3 +14,5 @@ perl
 python
 tar
 bc
+flex
+bison
