@@ -790,8 +790,10 @@ class DiffScalarField(ScalarField):
             sage: ddg == 0
             True
         """
-        from sage.tensor.modules.format_utilities import (format_unop_txt,
-                                                          format_unop_latex)
+        from sage.tensor.modules.format_utilities import (
+            format_unop_latex,
+            format_unop_txt,
+        )
         if self._differential is None:
             # A new computation is necessary:
             rname = format_unop_txt('d', self._name)
@@ -937,8 +939,8 @@ class DiffScalarField(ScalarField):
             True
         """
         from sage.tensor.modules.format_utilities import (
-            format_unop_txt,
             format_unop_latex,
+            format_unop_txt,
         )
 
         result = self * nondegenerate_tensor.volume_form()

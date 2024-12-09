@@ -25,9 +25,9 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
 
-from sage.tensor.modules.free_module_automorphism import FreeModuleAutomorphism
 from sage.manifolds.differentiable.tensorfield import TensorField
 from sage.manifolds.differentiable.tensorfield_paral import TensorFieldParal
+from sage.tensor.modules.free_module_automorphism import FreeModuleAutomorphism
 
 
 class AutomorphismField(TensorField):
@@ -1169,9 +1169,9 @@ class AutomorphismFieldParal(FreeModuleAutomorphism, TensorFieldParal):
             sage: b is ~a
             True
         """
+        from sage.manifolds.differentiable.vectorframe import CoordFrame
         from sage.matrix.constructor import matrix
         from sage.tensor.modules.comp import Components
-        from sage.manifolds.differentiable.vectorframe import CoordFrame
         if self._is_identity:
             return self
         if self._inverse is None:

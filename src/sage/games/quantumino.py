@@ -207,6 +207,7 @@ pentaminos.append(Polyomino([(0,0,0), (1,0,0), (1,1,0), (2,1,0), (2,1,1)], color
 pentaminos.append(Polyomino([(0,0,0), (0,1,0), (1,1,0), (1,2,0), (1,2,1)], color='purple'))
 pentaminos.append(Polyomino([(0,1,0), (1,0,0), (1,1,0), (1,1,1), (1,2,0)], color='gray'))
 
+
 def show_pentaminos(box=(5, 8, 2)):
     r"""
     Show the 17 3-D pentaminos included in the game and the `5 \times 8
@@ -247,6 +248,8 @@ def show_pentaminos(box=(5, 8, 2)):
 ##############################
 # Class QuantuminoState
 ##############################
+
+
 class QuantuminoState(SageObject):
     r"""
     A state of the Quantumino puzzle.
@@ -388,6 +391,8 @@ class QuantuminoState(SageObject):
 ##############################
 # Class QuantuminoSolver
 ##############################
+
+
 class QuantuminoSolver(SageObject):
     r"""
     Return the Quantumino solver for the given box where one of the

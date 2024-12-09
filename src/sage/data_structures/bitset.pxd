@@ -38,4 +38,3 @@ cdef class Bitset(FrozenBitset):
     cpdef discard(self, unsigned long n)
     cpdef pop(self)
     cpdef clear(self)
-

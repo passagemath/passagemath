@@ -1081,7 +1081,6 @@ class FinitelyPresentedGroup(GroupMixinLibGAP, CachedRepresentation, Group, Pare
             sage: C7 = G / [G.0**7]; C6 =  G / [G.0**6]
             sage: C14 = G / [G.0**14]; C3 =  G / [G.0**3]
             sage: C7.direct_product(C6).is_isomorphic(C14.direct_product(C3))
-            #I  Forcing finiteness test
             True
             sage: F = FreeGroup(2); D = F / [F([1,1,1,1,1]),F([2,2]),F([1,2])**2]
             sage: D.direct_product(D).as_permutation_group().is_isomorphic(
@@ -1175,7 +1174,6 @@ class FinitelyPresentedGroup(GroupMixinLibGAP, CachedRepresentation, Group, Pare
             sage: alpha = (Q.gens(), [a,b])
             sage: S2 = C2.semidirect_product(Q, ([C2.0],[alpha]))
             sage: S1.is_isomorphic(S2)
-            #I  Forcing finiteness test
             True
 
         Dihedral groups can be constructed as semidirect products
@@ -1234,8 +1232,6 @@ class FinitelyPresentedGroup(GroupMixinLibGAP, CachedRepresentation, Group, Pare
             sage: Se2 =  D.semidirect_product(C ,id2)
             sage: Dp1 = C.direct_product(D)
             sage: Dp1.is_isomorphic(Se1), Dp1.is_isomorphic(Se2)
-            #I  Forcing finiteness test
-            #I  Forcing finiteness test
             (True, True)
 
         Most checks for validity of input are left to GAP to handle::
