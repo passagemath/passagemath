@@ -1,6 +1,7 @@
 # sage_setup: distribution = sagemath-libbraiding
 # distutils: libraries = braiding
 # distutils: language = c++
+# distutils: extra_compile_args = -std=c++11
 r"""
 Cython wrapper for the libbraiding library.
 
