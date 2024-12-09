@@ -440,7 +440,7 @@ class DiscreteValueSemigroup(UniqueRepresentation, Parent):
         """
         if generators in QQ:
             generators = [generators]
-        generators = list(set([QQ.coerce(g) for g in generators if g != 0]))
+        generators = list({QQ.coerce(g) for g in generators if g != 0})
         generators.sort()
         simplified_generators = generators
 
@@ -451,7 +451,7 @@ class DiscreteValueSemigroup(UniqueRepresentation, Parent):
                 if g == h:
                     continue
                 from sage.rings.semirings.non_negative_integer_semiring import NN
-                if h/g in NN:
+                if h / g in NN:
                     simplified_generators.remove(h)
                     break
 

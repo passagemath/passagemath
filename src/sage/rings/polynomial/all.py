@@ -29,4 +29,7 @@ from sage.rings.polynomial.polynomial_ring_constructor import BooleanPolynomialR
 # Integer-valued Univariate Polynomial Ring
 lazy_import('sage.rings.polynomial.integer_valued_polynomials',
             'IntegerValuedPolynomialRing')
+lazy_import('sage.rings.polynomial.q_integer_valued_polynomials',
+            'QuantumValuedPolynomialRing')
+
 del lazy_import

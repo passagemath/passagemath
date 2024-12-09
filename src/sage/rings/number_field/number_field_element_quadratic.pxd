@@ -32,4 +32,3 @@ cdef class OrderElement_quadratic(NumberFieldElement_quadratic):
     pass
 
 cpdef bint is_sqrt_disc(Rational ad, Rational bd) noexcept
-

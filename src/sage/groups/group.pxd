@@ -12,4 +12,3 @@ cdef class FiniteGroup(Group):
 
 cdef class AlgebraicGroup(Group):
     pass
-

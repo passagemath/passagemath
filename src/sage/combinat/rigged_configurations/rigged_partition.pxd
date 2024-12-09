@@ -13,4 +13,3 @@ cdef class RiggedPartition(SageObject):
 
 cdef class RiggedPartitionTypeB(RiggedPartition):
     pass
-

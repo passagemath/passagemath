@@ -2571,7 +2571,7 @@ def Zq(q, prec=None, type='capped-rel', modulus=None, names=None,
         True
     """
     if check:
-        if isinstance(q, Factorization) or isinstance(q, (list, tuple)):
+        if isinstance(q, (Factorization, list, tuple)):
             if not isinstance(q, Factorization) and len(q) == 2:
                 F = [(Integer(q[0]), Integer(q[1]))]
             else:
@@ -2593,7 +2593,8 @@ def Zq(q, prec=None, type='capped-rel', modulus=None, names=None,
         if isinstance(names, (list, tuple)):
             names = names[0]
         from sage.structure.element import Expression
-        if not (modulus is None or isinstance(modulus, Polynomial) or isinstance(modulus, Expression)):
+        if not (modulus is None or isinstance(modulus, (Polynomial,
+                                                        Expression))):
             raise TypeError("modulus must be a polynomial")
         if names is not None and not isinstance(names, str):
             names = str(names)

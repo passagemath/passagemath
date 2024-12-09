@@ -99,6 +99,7 @@ from sage.misc.latex import latex
 from sage.rings.integer import Integer
 from sage.structure.sage_object import SageObject
 
+
 class Superincreasing(SageObject):
     r"""
     A class for super-increasing sequences.
@@ -545,6 +546,7 @@ class Superincreasing(SageObject):
             return candidates
         else:
             return []
+
 
 def knapsack(seq, binary=True, max=1, value_only=False, solver=None, verbose=0,
              *, integrality_tolerance=1e-3):

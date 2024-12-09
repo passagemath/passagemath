@@ -41,16 +41,20 @@ REFERENCES:
 # *****************************************************************************
 
 from __future__ import annotations
-from typing import Optional, TYPE_CHECKING
-from sage.structure.element import (CommutativeAlgebraElement,
-                                    ModuleElementWithMutability)
-from sage.symbolic.expression import Expression
+
+from typing import TYPE_CHECKING, Optional
+
 from sage.manifolds.chart_func import ChartFunction
 from sage.misc.cachefunc import cached_method
+from sage.structure.element import (
+    CommutativeAlgebraElement,
+    ModuleElementWithMutability,
+)
+from sage.symbolic.expression import Expression
 
 if TYPE_CHECKING:
-    from sage.tensor.modules.format_utilities import FormattedExpansion
     from sage.manifolds.chart import Chart
+    from sage.tensor.modules.format_utilities import FormattedExpansion
 
 
 class ScalarField(CommutativeAlgebraElement, ModuleElementWithMutability):
@@ -2136,11 +2140,13 @@ class ScalarField(CommutativeAlgebraElement, ModuleElementWithMutability):
             \begin{array}{llcl} f:& M & \longrightarrow & \mathbb{R} \\ \text{on}\ U : & \left(x, y\right) & \longmapsto & y^{2} \end{array}
         """
         from sage.misc.latex import latex
-        from sage.typeset.unicode_characters import (unicode_to,
-                                                     unicode_mapsto,
-                                                     unicode_mathbbR,
-                                                     unicode_mathbbC)
         from sage.tensor.modules.format_utilities import FormattedExpansion
+        from sage.typeset.unicode_characters import (
+            unicode_mapsto,
+            unicode_mathbbC,
+            unicode_mathbbR,
+            unicode_to,
+        )
 
         def _display_expression(self, chart, result):
             r"""
@@ -2765,8 +2771,10 @@ class ScalarField(CommutativeAlgebraElement, ModuleElementWithMutability):
         if other.is_trivial_one():
             return self
         # Generic case:
-        from sage.tensor.modules.format_utilities import (format_mul_txt,
-                                                          format_mul_latex)
+        from sage.tensor.modules.format_utilities import (
+            format_mul_latex,
+            format_mul_txt,
+        )
         com_charts = self.common_charts(other)
         if com_charts is None:
             raise ValueError("no common chart for the multiplication")
@@ -2810,8 +2818,10 @@ class ScalarField(CommutativeAlgebraElement, ModuleElementWithMutability):
             ...
             ZeroDivisionError: division of a scalar field by zero
         """
-        from sage.tensor.modules.format_utilities import format_mul_txt, \
-            format_mul_latex
+        from sage.tensor.modules.format_utilities import (
+            format_mul_latex,
+            format_mul_txt,
+        )
         # Trivial cases:
         if other.is_trivial_zero():
             raise ZeroDivisionError("division of a scalar field by zero")

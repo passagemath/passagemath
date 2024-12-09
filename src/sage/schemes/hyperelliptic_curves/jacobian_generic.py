@@ -186,7 +186,7 @@ class HyperellipticJacobian_generic(Jacobian_generic):
         trivial.
 
         This is related to the warning at the top of the
-        `jacobian_endomorphism_utils.py` module.
+        ``jacobian_endomorphism_utils.py`` module.
 
         INPUT:
 
@@ -215,7 +215,7 @@ class HyperellipticJacobian_generic(Jacobian_generic):
         trivial.
 
         This is related to the warning at the top of the
-        `jacobian_endomorphism_utils.py` module.
+        ``jacobian_endomorphism_utils.py`` module.
 
         INPUT:
 

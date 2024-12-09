@@ -1,6 +1,7 @@
 # sage_setup: distribution = sagemath-eclib
 "Cremona modular symbols"
 
+
 def CremonaModularSymbols(level, sign=0, cuspidal=False, verbose=0):
     """
     Return the space of Cremona modular symbols with given level, sign, etc.

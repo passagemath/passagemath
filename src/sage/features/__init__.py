@@ -419,6 +419,7 @@ class Feature(TrivialUniqueRepresentation):
             return True
         return False
 
+
 class FeatureNotPresentError(RuntimeError):
     r"""
     A missing feature error.

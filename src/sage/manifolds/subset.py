@@ -66,15 +66,17 @@ Families of subsets after the above operations::
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 from __future__ import annotations
-from typing import Optional
-from collections import defaultdict
+
 import itertools
-from sage.structure.parent import Parent
-from sage.structure.unique_representation import UniqueRepresentation
-from sage.misc.superseded import deprecation
+from collections import defaultdict
+from typing import Optional
+
 from sage.categories.sets_cat import Sets
 from sage.manifolds.family import ManifoldObjectFiniteFamily, ManifoldSubsetFiniteFamily
 from sage.manifolds.point import ManifoldPoint
+from sage.misc.superseded import deprecation
+from sage.structure.parent import Parent
+from sage.structure.unique_representation import UniqueRepresentation
 
 
 class ManifoldSubset(UniqueRepresentation, Parent):
@@ -1892,7 +1894,7 @@ class ManifoldSubset(UniqueRepresentation, Parent):
         if self.is_closed():
             return
         self.complement(is_open=True)
-        from .subsets.closure import ManifoldSubsetClosure
+        from sage.manifolds.subsets.closure import ManifoldSubsetClosure
         for closure in self.manifold().subsets():
             if isinstance(closure, ManifoldSubsetClosure):
                 if closure._subset.is_subset(self):
@@ -2756,7 +2758,7 @@ class ManifoldSubset(UniqueRepresentation, Parent):
         """
         if self.is_closed():
             return self
-        from .subsets.closure import ManifoldSubsetClosure
+        from sage.manifolds.subsets.closure import ManifoldSubsetClosure
         return ManifoldSubsetClosure(self, name=name, latex_name=latex_name)
 
     #### End of construction of new sets from self
