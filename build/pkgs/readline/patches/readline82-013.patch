@@ -16,8 +16,8 @@ result in discarding the bytes in the partial character.
 
 Patch (apply with `patch -p0'):
 
-*** ../readline-8.2-patched/text.c	Mon May  1 09:37:52 2023
---- text.c	Mon May 29 12:22:29 2023
+*** a/text.c	Mon May  1 09:37:52 2023
+--- b/text.c	Mon May 29 12:22:29 2023
 ***************
 *** 86,90 ****
   rl_insert_text (const char *string)
@@ -221,8 +221,8 @@ Patch (apply with `patch -p0'):
   }
   
 
-*** ../readline-8.2/patchlevel	2013-11-15 08:11:11.000000000 -0500
---- patchlevel	2014-03-21 08:28:40.000000000 -0400
+*** a/patchlevel	2013-11-15 08:11:11.000000000 -0500
+--- b/patchlevel	2014-03-21 08:28:40.000000000 -0400
 ***************
 *** 1,3 ****
   # Do not edit -- exists only for use by patch
