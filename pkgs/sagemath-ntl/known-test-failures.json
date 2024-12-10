@@ -1544,22 +1544,6 @@
     "sage.libs.ntl.ntl_GF2": {
         "ntests": 50
     },
-    "sage.libs.ntl.ntl_GF2E": {
-        "failed": true,
-        "ntests": 70
-    },
-    "sage.libs.ntl.ntl_GF2EContext": {
-        "failed": true,
-        "ntests": 20
-    },
-    "sage.libs.ntl.ntl_GF2EX": {
-        "failed": true,
-        "ntests": 31
-    },
-    "sage.libs.ntl.ntl_GF2X": {
-        "failed": true,
-        "ntests": 112
-    },
     "sage.libs.ntl.ntl_GF2X_linkage.pxi": {
         "ntests": 86
     },
@@ -1585,15 +1569,13 @@
         "ntests": 304
     },
     "sage.libs.ntl.ntl_ZZ_pEX_linkage.pxi": {
-        "failed": true,
-        "ntests": 80
+        "ntests": 1
     },
     "sage.libs.ntl.ntl_ZZ_pX": {
         "ntests": 279
     },
     "sage.libs.ntl.ntl_lzz_p": {
-        "failed": true,
-        "ntests": 48
+        "ntests": 45
     },
     "sage.libs.ntl.ntl_lzz_pContext": {
         "ntests": 21
@@ -1603,14 +1585,6 @@
     },
     "sage.libs.ntl.ntl_mat_GF2": {
         "ntests": 107
-    },
-    "sage.libs.ntl.ntl_mat_GF2E": {
-        "failed": true,
-        "ntests": 132
-    },
-    "sage.libs.ntl.ntl_mat_ZZ": {
-        "failed": true,
-        "ntests": 119
     },
     "sage.matrix.action": {
         "ntests": 109
@@ -2371,8 +2345,7 @@
         "ntests": 91
     },
     "sage.rings.bernmm": {
-        "failed": true,
-        "ntests": 25
+        "ntests": 18
     },
     "sage.rings.bernoulli_mod_p": {
         "failed": true,
@@ -2685,13 +2658,17 @@
     "sage.rings.polynomial.polynomial_element_generic": {
         "ntests": 198
     },
+    "sage.rings.polynomial.polynomial_gf2x": {
+        "failed": true,
+        "ntests": 43
+    },
     "sage.rings.polynomial.polynomial_integer_dense_ntl": {
         "failed": true,
         "ntests": 188
     },
     "sage.rings.polynomial.polynomial_modn_dense_ntl": {
         "failed": true,
-        "ntests": 383
+        "ntests": 376
     },
     "sage.rings.polynomial.polynomial_quotient_ring": {
         "ntests": 33
