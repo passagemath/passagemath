@@ -29,6 +29,7 @@ def qsieve(n):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: k = 19; n = next_prime(10^k)*next_prime(10^(k+1))
         sage: factor(n)  # (currently) uses PARI
         10000000000000000051 * 100000000000000000039
