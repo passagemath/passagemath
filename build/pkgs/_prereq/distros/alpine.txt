@@ -18,3 +18,5 @@ gcc
 g++
 ca-certificates
 coreutils
+flex
+bison

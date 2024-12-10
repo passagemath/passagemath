@@ -26,3 +26,7 @@ gzip
 # Issue #32368
 findutils
 diffutils
+# flex is needed to build gcc
+flex
+# bison is needed by macaulay2
+bison

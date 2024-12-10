@@ -13,6 +13,8 @@ m4
 perl
 # flex is needed to build gcc
 flex
+# bison is needed by macaulay2
+bison
 # python3-minimal is not enough on debian buster, ubuntu bionic - it does not have urllib
 # system python for bootstrapping the build
 python3
