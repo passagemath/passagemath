@@ -39,6 +39,7 @@ content-type = "text/x-rst"
 test = [
      "passagemath-repl",
      "passagemath-modules",
+     "passagemath-pari",
 ]
 
 [tool.setuptools]
