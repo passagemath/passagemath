@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-flint
+# distutils: extra_compile_args = -std=c++11
 # distutils: libraries = gmp
 # distutils: language = c++
 from cysignals.memory cimport sig_malloc, sig_free
