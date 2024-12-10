@@ -21,6 +21,11 @@ except ImportError:
     pass
 
 try:  # extra
+    from sage.all__sagemath_ntl import *
+except ImportError:
+    pass
+
+try:  # extra
     from sage.all__sagemath_pari import *
 except ImportError:
     pass
