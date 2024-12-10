@@ -2361,7 +2361,7 @@ class PolynomialQuotientRing_domain(PolynomialQuotientRing_generic, IntegralDoma
         Over a finite field, the corresponding field extension is not a
         number field::
 
-            sage: # needs sage.modules sage.rings.finite_rings
+            sage: # needs sage.modules sage.rings.finite_rings sage.rings.number_field
             sage: R.<x> = GF(25, 'a')['x']
             sage: S.<a> = R.quo(x^3 + 2*x + 1)
             sage: F, g, h = S.field_extension('b')
