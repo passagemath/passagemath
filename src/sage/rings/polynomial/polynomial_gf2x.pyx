@@ -5,6 +5,7 @@
 # distutils: extra_compile_args = NTL_CFLAGS M4RI_CFLAGS
 # distutils: include_dirs = NTL_INCDIR M4RI_INCDIR
 # distutils: language = c++
+# sage.doctest: needs sage.libs.linbox
 """
 Univariate Polynomials over GF(2) via NTL's GF2X
 
@@ -26,8 +27,6 @@ include "sage/libs/ntl/ntl_GF2X_linkage.pxi"
 
 # and then the interface
 include "polynomial_template.pxi"
-
-from sage.libs.pari.all import pari
 
 from sage.libs.m4ri cimport mzd_write_bit, mzd_read_bit
 from sage.matrix.matrix_mod2_dense cimport Matrix_mod2_dense
@@ -101,6 +100,7 @@ cdef class Polynomial_GF2X(Polynomial_template):
             sage: pari(f)
             Mod(1, 2)*x^3 + Mod(1, 2)*x^2 + Mod(1, 2)
         """
+        from sage.libs.pari.all import pari
         # TODO: put this in a superclass
         parent = self._parent
         if variable is None:
