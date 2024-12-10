@@ -434,6 +434,7 @@ class Rings(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.number_field
                 sage: x = polygen(ZZ, 'x')
                 sage: K.<a> = NumberField(x^2 + 189*x + 394)
                 sage: R = K.order(2*a)
