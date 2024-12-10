@@ -40,7 +40,7 @@ cdef inline int celement_construct(nmod_poly_t e, unsigned long n) noexcept:
     """
     EXAMPLES::
 
-        sage: P.<x> = GF(32003)[]
+        sage: P.<x> = GF(32003)[]                                                       # needs sage.rings.finite_rings
 
         sage: Q.<x> = GF(7)[]
     """
@@ -50,8 +50,8 @@ cdef inline int celement_destruct(nmod_poly_t e, unsigned long n) noexcept:
     """
     EXAMPLES::
 
-        sage: P.<x> = GF(32003)[]
-        sage: del x
+        sage: P.<x> = GF(32003)[]                                                       # needs sage.rings.finite_rings
+        sage: del x                                                                     # needs sage.rings.finite_rings
 
         sage: Q.<x> = GF(7)[]
         sage: del x
@@ -62,7 +62,7 @@ cdef inline int celement_gen(nmod_poly_t e, long i, unsigned long n) except -2:
     """
     EXAMPLES::
 
-        sage: P.<x> = GF(32003)[]
+        sage: P.<x> = GF(32003)[]                                                       # needs sage.rings.finite_rings
 
         sage: Q.<x> = GF(7)[]
     """
@@ -76,6 +76,7 @@ cdef inline int celement_set(nmod_poly_t res, nmod_poly_t a, unsigned long n) ex
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: y = copy(x)
         sage: y is x
@@ -109,6 +110,7 @@ cdef inline int celement_set_si(nmod_poly_t res, long i, unsigned long n) except
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: P(32003)
         0
@@ -138,6 +140,7 @@ cdef inline bint celement_is_zero(nmod_poly_t a, unsigned long n) except -2:
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: P(1).is_zero()
         False
@@ -156,6 +159,7 @@ cdef inline bint celement_is_one(nmod_poly_t a, unsigned long n) except -2:
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: P(1).is_one()
         True
@@ -175,6 +179,7 @@ cdef inline bint celement_equal(nmod_poly_t a, nmod_poly_t b, unsigned long n) e
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: (3*2)*x == 3*(2*x)
         True
@@ -197,6 +202,7 @@ cdef inline int celement_cmp(nmod_poly_t l, nmod_poly_t r, unsigned long n) exce
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: x > x
         False
@@ -254,6 +260,7 @@ cdef long celement_len(nmod_poly_t a, unsigned long n) except -2:
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: (x + 1).degree()
         1
@@ -276,6 +283,7 @@ cdef inline int celement_add(nmod_poly_t res, nmod_poly_t a, nmod_poly_t b, unsi
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: x + 1
         x + 1
@@ -290,6 +298,7 @@ cdef inline int celement_sub(nmod_poly_t res, nmod_poly_t a, nmod_poly_t b, unsi
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: x - 1
         x + 32002
@@ -304,6 +313,7 @@ cdef inline int celement_neg(nmod_poly_t res, nmod_poly_t a, unsigned long n) ex
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: -(x + 2)
         32002*x + 32001
@@ -319,6 +329,7 @@ cdef inline int celement_mul_scalar(nmod_poly_t res, nmod_poly_t p,
     """
     TESTS::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: p = P.random_element(degree=2)
         sage: (389*p).coefficients() == [389*x for x in p.coefficients()]
@@ -333,6 +344,7 @@ cdef inline int celement_mul(nmod_poly_t res, nmod_poly_t a, nmod_poly_t b, unsi
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: (x + 1) * (x + 2)
         x^2 + 3*x + 2
@@ -355,6 +367,7 @@ cdef inline int celement_truncate(nmod_poly_t res, nmod_poly_t a, long len, unsi
         sage: p.truncate(3)
         2*x^2 + x
 
+        sage: # needs sage.rings.finite_rings
         sage: Q.<x> = GF(32003)[]
         sage: q = 1 + x + x^2 * Q.random_element()
         sage: q.truncate(2)
@@ -367,6 +380,7 @@ cdef inline int celement_floordiv(nmod_poly_t res, nmod_poly_t a, nmod_poly_t b,
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: (x + 1) // (x + 2)
         1
@@ -393,13 +407,12 @@ cdef inline int celement_mod(nmod_poly_t res, nmod_poly_t a, nmod_poly_t b, unsi
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: f = 24998*x^2 + 29761*x + 2252
         sage: g = 20778*x^2 + 15346*x + 12697
-
         sage: f % g
         5815*x + 10280
-
         sage: f^5 % g
         7231*x + 17274
 
@@ -409,13 +422,11 @@ cdef inline int celement_mod(nmod_poly_t res, nmod_poly_t a, nmod_poly_t b, unsi
         x + 1
         sage: g * x^4 + r
         x^7 + x + 1
-
         sage: f = x^3 + 1
         sage: f % 3
         Traceback (most recent call last):
         ...
         ValueError: Leading coefficient of a must be invertible.
-
         sage: f % 0
         Traceback (most recent call last):
         ...
@@ -485,50 +496,42 @@ cdef inline int celement_pow(nmod_poly_t res, nmod_poly_t x, long e, nmod_poly_t
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: f = 24998*x^2 + 29761*x + 2252
-
         sage: f*f
         9426*x^4 + 15477*x^3 + 6531*x^2 + 14980*x + 15030
         sage: f^2
         9426*x^4 + 15477*x^3 + 6531*x^2 + 14980*x + 15030
-
         sage: f*f*f
         25062*x^6 + 30670*x^5 + 15816*x^4 + 20746*x^3 + 9142*x^2 + 5697*x + 20389
         sage: f^3
         25062*x^6 + 30670*x^5 + 15816*x^4 + 20746*x^3 + 9142*x^2 + 5697*x + 20389
-
         sage: f*f*f*f*f
         20269*x^10 + 20535*x^9 + 7313*x^8 + 7311*x^7 + 16853*x^6 + 142*x^5 + 23853*x^4 + 12065*x^3 + 516*x^2 + 8473*x + 17945
         sage: f^5
         20269*x^10 + 20535*x^9 + 7313*x^8 + 7311*x^7 + 16853*x^6 + 142*x^5 + 23853*x^4 + 12065*x^3 + 516*x^2 + 8473*x + 17945
-
         sage: f^0
         1
-
         sage: f^1
         24998*x^2 + 29761*x + 2252
-
         sage: f^-1
         18649/(x^2 + 16863*x + 9612)
-
         sage: f^-5
         24620/(x^10 + 20309*x^9 + 29185*x^8 + 11948*x^7 + 1965*x^6 + 7713*x^5 + 5810*x^4 + 20457*x^3 + 30732*x^2 + 9706*x + 4485)
 
      Testing the modulus::
 
+        sage: # needs sage.rings.finite_rings
         sage: g = 20778*x^2 + 15346*x + 12697
-
         sage: pow(f, 2, g)
         15328*x + 6968
         sage: f^2 % g
         15328*x + 6968
-
         sage: pow(f, -2, g)
         16346/(x + 251)
         sage: (f^2 % g)^-1
         16346/(x + 251)
-
         sage: pow(f, 5, g)
         7231*x + 17274
         sage: f^5 % g
@@ -536,6 +539,7 @@ cdef inline int celement_pow(nmod_poly_t res, nmod_poly_t x, long e, nmod_poly_t
 
     Make sure that exponentiation can be interrupted, see :issue:`17470`::
 
+        sage: # needs sage.rings.finite_rings
         sage: n = 2^23
         sage: alarm(0.2); x^n; cancel_alarm()
         Traceback (most recent call last):
@@ -555,6 +559,7 @@ cdef inline int celement_gcd(nmod_poly_t res, nmod_poly_t a, nmod_poly_t b, unsi
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: f = P.random_element(degree=4)
         sage: g = P.random_element(degree=3)
@@ -614,6 +619,7 @@ cdef inline int celement_xgcd(nmod_poly_t res, nmod_poly_t s, nmod_poly_t t, nmo
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(32003)[]
         sage: f = P.random_element(degree=4)
         sage: g = P.random_element(degree=3)
@@ -663,17 +669,16 @@ cdef factor_helper(Polynomial_zmod_flint poly, bint squarefree=False):
     """
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: P.<x> = GF(1009)[]
         sage: factors = (prod(P.random_element(degree=2) for i in range(5))).factor()
         sage: all(factor.is_irreducible() for factor, mult in factors)
         True
-
         sage: def nonzero_random(P):
         ....:     r = P.random_element()
         ....:     while r == 0:
         ....:         r = P.random_element()
         ....:     return r
-
         sage: p = (prod(nonzero_random(P)^i for i in range(5)))
         sage: decomp = p.squarefree_decomposition()
         sage: any(factor.is_square() for factor, mult in decomp)
