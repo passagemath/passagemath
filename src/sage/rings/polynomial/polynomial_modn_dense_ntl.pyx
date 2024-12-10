@@ -37,8 +37,6 @@ from cysignals.signals cimport sig_on, sig_off
 
 from sage.rings.polynomial.polynomial_element cimport Polynomial, _dict_to_list
 
-from sage.libs.pari.all import pari, pari_gen
-
 from sage.rings.integer cimport smallInteger
 
 from sage.libs.ntl.all import ZZX, ZZ_pX
@@ -55,6 +53,11 @@ from sage.libs.ntl.ZZ_p cimport *
 from sage.libs.ntl.lzz_p cimport *
 from sage.libs.ntl.lzz_pX cimport *
 from sage.libs.ntl.ZZ_pX cimport *
+
+try:
+    from sage.libs.pari.all import pari, pari_gen
+except ImportError:
+    pari_gen = ()
 
 
 def make_element(parent, args):
