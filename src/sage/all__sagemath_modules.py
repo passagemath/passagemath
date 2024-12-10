@@ -16,6 +16,11 @@ This distribution makes the following features available::
 from .all__sagemath_categories import *
 
 try:  # extra
+    from sage.all__sagemath_linbox import *
+except ImportError:
+    pass
+
+try:  # extra
     from sage.all__sagemath_flint import *
 except ImportError:
     pass
