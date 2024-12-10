@@ -1920,6 +1920,7 @@ cdef class Polynomial_dense_mod_p(Polynomial_dense_mod_n):
 
         Canonical coercion should apply::
 
+            sage: # needs sage.libs.flint
             sage: R.<x> = PolynomialRing(GF(101), implementation="FLINT")
             sage: x_ZZ = ZZ["x"].gen()
             sage: pow(x+1, 100, 2)
