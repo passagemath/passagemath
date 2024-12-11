@@ -484,7 +484,7 @@ jobs:
         id:   sagemath-ecl
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_ecl*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_ecl-*
 
       - name: sagemath-symbolics
         id:   sagemath-symbolics
