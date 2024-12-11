@@ -514,7 +514,7 @@ class PolyhedralFan(SageObject):
 
         ::
 
-            sage: fan.Gale_transform()
+            sage: fan.Gale_transform()                                                  # needs sage.libs.linbox
             [ 1  0  0  0  0  1 -2]
             [ 0  1  0  0  1  0 -2]
             [ 0  0  1  1  0  0 -2]
@@ -1046,13 +1046,15 @@ class GroebnerFan(SageObject):
             [y^3 - z^5, x - y^2*z, y^2*z^3 - y, y*z^4 - z, -y^2 + z^8],
             [y^4 - z^2, x - y^2*z, y^2*z^3 - y, y*z^4 - z, -y^3 + z^5],
             [y^9 - z, y^6*z - y, x - y^2*z, -y^4 + z^2]]
+
+            sage: # needs sage.rings.finite_rings
             sage: R3.<x,y,z> = PolynomialRing(GF(2477),3)
-            sage: gf = R3.ideal([300*x^3-y,y^2-z,z^2-12]).groebner_fan()
+            sage: gf = R3.ideal([300*x^3 - y, y^2 - z, z^2 - 12]).groebner_fan()
             sage: gf.reduced_groebner_bases()
             [[z^2 - 12, y^2 - z, x^3 + 933*y],
-            [y^4 - 12, x^3 + 933*y, -y^2 + z],
-            [x^6 - 1062*z, z^2 - 12, -300*x^3 + y],
-            [x^12 + 200, -300*x^3 + y, -828*x^6 + z]]
+             [y^4 - 12, x^3 + 933*y, -y^2 + z],
+             [x^6 - 1062*z, z^2 - 12, -300*x^3 + y],
+             [x^12 + 200, -300*x^3 + y, -828*x^6 + z]]
         """
         try:
             return self.__reduced_groebner_bases
@@ -1612,7 +1614,7 @@ class GroebnerFan(SageObject):
             sage: G
             Groebner fan of the ideal:
             Ideal (-3*x^2 + y^3, 2*x^2 - x - 2*y^3 - y + z^3) of Multivariate Polynomial Ring in x, y, z over Rational Field
-            sage: G.tropical_basis()
+            sage: G.tropical_basis()                                                    # needs sage.libs.singular
             [-3*x^2 + y^3, 2*x^2 - x - 2*y^3 - y + z^3, 3/4*x + y^3 + 3/4*y - 3/4*z^3]
         """
         try:
