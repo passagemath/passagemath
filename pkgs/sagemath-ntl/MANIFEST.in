@@ -15,6 +15,7 @@ include sage/rings/polynomial/*_ntl.p*
 include sage/rings/polynomial/polynomial_zz_pex.p*
 include sage/rings/polynomial/polynomial_template*.pxi
 include sage/rings/polynomial/polynomial_gf2x.p*               # inexplicably also needs m4ri (headers)
+include sage/libs/m4ri.pxd
 
 include sage/rings/bernmm.p*            # dep of sage.rings.bernoulli_mod_p
 
