@@ -1594,6 +1594,7 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
+        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -1639,7 +1640,6 @@
         "ntests": 86
     },
     "sage.libs.pari.convert_sage_complex_double": {
-        "failed": true,
         "ntests": 22
     },
     "sage.libs.pari.convert_sage_matrix": {
@@ -1698,10 +1698,6 @@
     },
     "sage.matrix.matrix_complex_double_dense": {
         "ntests": 3
-    },
-    "sage.matrix.matrix_cyclo_dense": {
-        "failed": true,
-        "ntests": 236
     },
     "sage.matrix.matrix_dense": {
         "ntests": 35
@@ -2922,17 +2918,12 @@
     "sage.rings.polynomial.polynomial_element_generic": {
         "ntests": 209
     },
-    "sage.rings.polynomial.polynomial_gf2x": {
-        "failed": true,
-        "ntests": 43
-    },
     "sage.rings.polynomial.polynomial_quotient_ring": {
         "failed": true,
-        "ntests": 336
+        "ntests": 331
     },
     "sage.rings.polynomial.polynomial_quotient_ring_element": {
-        "failed": true,
-        "ntests": 119
+        "ntests": 114
     },
     "sage.rings.polynomial.polynomial_real_mpfr_dense": {
         "failed": true,
