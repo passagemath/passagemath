@@ -20,7 +20,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-linbox"
-description = "passagemath: Linear Algebra with fflas-ffpack, Givaro, IML, LinBox"
+description = "passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML, m4ri(e)"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
