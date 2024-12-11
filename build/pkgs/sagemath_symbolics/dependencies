@@ -1,2 +1,2 @@
-$(SAGE_ROOT)/pkgs/sagemath-symbolics/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-symbolics/MANIFEST.in $(PYTHON) cysignals gmpy2 sagemath_categories sagemath_flint sagemath_modules sagemath_ntl ecl giac maxima singular sympy numpy | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build
+$(SAGE_ROOT)/pkgs/sagemath-symbolics/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-symbolics/MANIFEST.in $(PYTHON) cysignals gmpy2 sagemath_categories sagemath_flint sagemath_modules sagemath_ntl sagemath_ecl giac maxima singular sympy numpy | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build
 
