@@ -59,7 +59,6 @@ from sage.rings.integer cimport Integer
 from sage.rings.real_mpfr cimport RealNumber
 from sage.rings.real_mpfi cimport RealIntervalFieldElement
 
-from sage.libs.pari.all import pari, pari_gen
 from sage.structure.factorization import Factorization
 from sage.structure.element import coerce_binop
 
@@ -69,6 +68,11 @@ from sage.arith.functions import lcm
 from sage.libs.ntl.ZZX cimport *
 
 from sage.rings.polynomial.evaluation_ntl cimport ZZX_evaluation_mpfr, ZZX_evaluation_mpfi
+
+try:
+    from sage.libs.pari.all import pari, pari_gen
+except ImportError:
+    pari_gen = ()
 
 
 cdef class Polynomial_integer_dense_ntl(Polynomial):

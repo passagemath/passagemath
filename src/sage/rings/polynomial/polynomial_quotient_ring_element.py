@@ -481,7 +481,7 @@ class PolynomialQuotientRingElement(polynomial_singular_interface.Polynomial_sin
         Over a finite field, the corresponding field extension is not a
         number field::
 
-            sage: # needs sage.rings.finite_rings
+            sage: # needs sage.rings.finite_rings sage.rings.number_field
             sage: R.<x> = GF(25,'b')['x']
             sage: S.<a> = R.quo(x^3 + 2*x + 1)
             sage: F.<b>, g, h = a.field_extension()

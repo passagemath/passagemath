@@ -20,7 +20,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-linbox"
-description = "passagemath: Linear Algebra with fflas-ffpack, Givaro, IML, LinBox"
+description = "passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML, m4ri(e)"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
@@ -35,6 +35,12 @@ include(`pyproject_toml_metadata.m4')dnl'
 [project.readme]
 file = "README.rst"
 content-type = "text/x-rst"
+
+[project.optional-dependencies]
+test = [
+     "passagemath-repl",
+     "passagemath-modules",
+]
 
 [tool.setuptools]
 include-package-data = false

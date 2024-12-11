@@ -14,7 +14,6 @@ include sage/matrix/matrix_rational_dense.p*
 include sage/matrix/matrix_rational_sparse.p*
 include sage/matrix/change_ring.p*
 include sage/matrix/misc.p*
-include sage/matrix/matrix_cyclo_dense.p*
 include sage/rings/finite_rings/*_givaro*.p*
 
 # entangled via matrix_integer_dense
@@ -26,7 +25,6 @@ include sage/libs/m4ri*.p*
 include sage/matrix/matrix_gf2e_dense.p*
 include sage/matrix/matrix_mod2_dense.p*
 include sage/modules/vector_mod2_dense.p*
-include sage/rings/polynomial/polynomial_gf2x.p*
 include sage/rings/polynomial/polynomial_template*.pxi                          # FIXME
 
 global-exclude *.c

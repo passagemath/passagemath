@@ -555,7 +555,7 @@ Basic functions::
     Traceback (most recent call last):
     ...
     PariError: incorrect type in gsigne (t_COMPLEX)
-    sage: pari(I).sign()
+    sage: pari(I).sign()                                                                # needs sage.symbolic
     Traceback (most recent call last):
     ...
     PariError: incorrect type in gsigne (t_POLMOD)

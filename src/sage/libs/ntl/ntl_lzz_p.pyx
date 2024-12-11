@@ -354,11 +354,12 @@ cdef class ntl_zz_p():
 
         EXAMPLES::
 
-            sage: ntl.zz_p(3,next_prime(100)).__int__()
+            sage: # needs sage.libs.pari
+            sage: ntl.zz_p(3, next_prime(100)).__int__()
             3
-            sage: int(ntl.zz_p(3,next_prime(100)))
+            sage: int(ntl.zz_p(3, next_prime(100)))
             3
-            sage: type(int(ntl.zz_p(3,next_prime(100))))
+            sage: type(int(ntl.zz_p(3, next_prime(100))))
             <... 'int'>
         """
         return zz_p_rep(self.x)

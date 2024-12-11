@@ -20,12 +20,10 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-ntl"
 description = "passagemath: Computational Number Theory with NTL"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
-    SPKG_INSTALL_REQUIRES_sagemath_pari
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -33,6 +31,12 @@ include(`pyproject_toml_metadata.m4')dnl'
 [project.readme]
 file = "README.rst"
 content-type = "text/x-rst"
+
+[project.optional-dependencies]
+test = [
+     "passagemath-repl",
+     "passagemath-modules",
+]
 
 [tool.setuptools]
 include-package-data = false

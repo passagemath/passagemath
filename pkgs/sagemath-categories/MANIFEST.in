@@ -153,6 +153,7 @@ include sage/rings/padics/local_generic.p*
 include sage/rings/padics/local_generic_element.p*
 include sage/rings/padics/precision_error.p*
 include sage/rings/padics/misc.p*
+include sage/rings/padics/pow_computer.p*
 
 include sage/rings/polynomial/polynomial_ring.p*
 include sage/rings/polynomial/polynomial_ring_constructor.p*

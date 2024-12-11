@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-flint
 # distutils: language = c++
 # distutils: libraries = NTL_LIBRARIES
 # distutils: extra_compile_args = NTL_CFLAGS

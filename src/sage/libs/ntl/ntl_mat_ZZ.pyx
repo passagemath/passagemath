@@ -5,6 +5,7 @@
 # distutils: library_dirs = NTL_LIBDIR
 # distutils: extra_link_args = NTL_LIBEXTRA
 # distutils: language = c++
+# sage.doctest: needs sage.libs.pari
 
 #*****************************************************************************
 #       Copyright (C) 2005 William Stein <wstein@gmail.com>
