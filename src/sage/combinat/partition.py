@@ -1940,7 +1940,7 @@ class Partition(CombinatorialElement):
         Linear extensions of ``p.cell_poset()`` are in 1-to-1 correspondence
         with standard Young tableaux of shape `p`::
 
-            sage: all( len(p.cell_poset().linear_extensions())                          # needs sage.graphs
+            sage: all( len(p.cell_poset().linear_extensions())                          # needs sage.combinat sage.graphs
             ....:      == len(p.standard_tableaux())
             ....:      for n in range(8) for p in Partitions(n) )
             True
@@ -1948,7 +1948,7 @@ class Partition(CombinatorialElement):
         This is not the case for northeast orientation::
 
             sage: q = Partition([3, 1])
-            sage: q.cell_poset(orientation="NE").is_chain()                             # needs sage.graphs
+            sage: q.cell_poset(orientation="NE").is_chain()                             # needs sage.combinat sage.graphs
             True
 
         TESTS:
@@ -5596,7 +5596,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: # needs sage.graphs
+            sage: # needs sage.combinat sage.graphs
             sage: P = Partition([3,1,1])
             sage: G = P.dual_equivalence_graph()
             sage: G.edges(sort=True)
@@ -5617,7 +5617,7 @@ class Partition(CombinatorialElement):
 
         TESTS::
 
-            sage: # needs sage.graphs
+            sage: # needs sage.combinat sage.graphs
             sage: G = Partition([1]).dual_equivalence_graph()
             sage: G.vertices(sort=False)
             [[[1]]]

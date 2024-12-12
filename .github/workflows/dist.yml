@@ -208,7 +208,7 @@ jobs:
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals < 1.12") > constraints.txt
       # Environment during wheel build
-      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal LINBOX_CONFIGURE=--without-ntl PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
+      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal LINBOX_CONFIGURE=--without-ntl SINGULAR_CONFIGURE=--without-ntl GIAC_CONFIGURE=--disable-ntl PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
@@ -486,6 +486,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_ecl-*
 
+      - name: sagemath-maxima
+        id:   sagemath-maxima
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_maxima-*
+
       - name: sagemath-symbolics
         id:   sagemath-symbolics
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
@@ -545,7 +551,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco boost_cropped tdlib brial cliquer giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd msolve cddlib latte_int 4ti2 cmr topcom palp nauty qepcad gfan frobby lrslib sympow elliptic_curves rubiks plantri buckygen benzene macaulay2 glucose kissat pip
+      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -557,7 +563,7 @@ jobs:
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals < 1.12") > constraints.txt
       # Environment during wheel build
-      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal LINBOX_CONFIGURE=--without-ntl PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
+      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal LINBOX_CONFIGURE=--without-ntl GIAC_CONFIGURE=--disable-ntl PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
@@ -771,6 +777,12 @@ jobs:
         if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_kissat*
+
+      - name: sagemath-kenzo
+        id:   sagemath-kenzo
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_kenzo*
 
       - name: sagemath-macaulay2
         id:   sagemath-macaulay2

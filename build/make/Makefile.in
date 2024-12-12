@@ -173,6 +173,8 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_singular			\
 	sagemath_standard_no_symbolics		\
 	sagemath_ecl				\
+	sagemath_kenzo				\
+	sagemath_maxima				\
 	sagemath_symbolics			\
 	sagemath_msolve				\
 	sagemath_latte_4ti2			\

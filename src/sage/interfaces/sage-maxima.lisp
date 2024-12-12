@@ -1,4 +1,4 @@
-; sage_setup: distribution = sagemath-symbolics
+; sage_setup: distribution = sagemath-maxima
 
 ;(setf *prompt-prefix* "<prompt>")
 ;(setf *prompt-suffix* "</prompt>")

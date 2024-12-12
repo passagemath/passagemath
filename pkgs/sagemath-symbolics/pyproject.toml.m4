@@ -29,6 +29,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_ecl
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_flint
+    SPKG_INSTALL_REQUIRES_sagemath_maxima
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_sagemath_ntl
     SPKG_INSTALL_REQUIRES_sage_conf
@@ -57,22 +58,6 @@ sympy           = []  # no extra needed
 
 # extras by other features
 plot            = ["passagemath-plot"]
-
-[tool.cibuildwheel.linux]
-# Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
-# so there is no clean way to refer to the repair_wheel.py script
-# https://github.com/pypa/cibuildwheel/issues/1931
-repair-wheel-command = [
-    'python3 -m pip install passagemath-conf',
-    'python3 pkgs/sagemath-symbolics/repair_wheel.py {wheel}',
-    'auditwheel repair -w {dest_dir} {wheel}',
-]
-[tool.cibuildwheel.macos]
-repair-wheel-command = [
-    'python3 -m pip install passagemath-conf',
-    'python3 pkgs/sagemath-symbolics/repair_wheel.py {wheel}',
-    'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
-]
 
 [tool.setuptools]
 include-package-data = false

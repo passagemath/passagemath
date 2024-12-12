@@ -1,0 +1,26 @@
+prune sage
+
+include VERSION.txt
+
+prune .tox
+exclude *.m4
+include requirements.txt
+
+include sage/interfaces/maxima*.p*
+include sage/interfaces/sage-maxima.lisp
+include sage/libs/maxima.p*
+
+global-exclude all__sagemath_*.py
+global-include all__sagemath_maxima.py
+
+global-exclude *.c
+global-exclude *.cpp
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude *.bak
+global-exclude *.so
+global-exclude *~
+prune .tox
+prune build
+prune dist
