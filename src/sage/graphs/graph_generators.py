@@ -602,6 +602,7 @@ class GraphGenerators:
 
     ::
 
+        sage: # needs nauty
         sage: for G in graphs(3):
         ....:    print(G)
         Graph on 3 vertices
@@ -613,6 +614,7 @@ class GraphGenerators:
 
     ::
 
+        sage: # needs nauty
         sage: L = graphs(5, size=4)
         sage: len(list(L))
         6
@@ -621,6 +623,7 @@ class GraphGenerators:
 
     ::
 
+        sage: # needs nauty
         sage: L = list(graphs(5, lambda G: G.size() <= 4))
         sage: len(L)
         14
@@ -630,6 +633,7 @@ class GraphGenerators:
 
     ::
 
+        sage: # needs nauty
         sage: L = list(graphs(5, lambda G: G.size() <= 4, augment='vertices'))
         sage: len(L)
         31
@@ -639,6 +643,7 @@ class GraphGenerators:
 
     ::
 
+        sage: # needs nauty
         sage: property = lambda G: ( max([G.degree(v) for v in G] + [0]) <= 2 )
         sage: L = list(graphs(6, property, augment='vertices'))
         sage: len(L)
@@ -649,18 +654,21 @@ class GraphGenerators:
 
     ::
 
+        sage: # needs nauty
         sage: L = list( graphs(7, lambda G: G.is_bipartite(), augment='vertices') )
         sage: [len([g for g in L if g.order() == i]) for i in [1..7]]
         [1, 2, 3, 7, 13, 35, 88]
 
     Generate all bipartite graphs on exactly 7 vertices::
 
+        sage: # needs nauty
         sage: L = list( graphs(7, lambda G: G.is_bipartite()) )
         sage: len(L)
         88
 
     Generate all bipartite graphs on exactly 8 vertices::
 
+        sage: # needs nauty
         sage: L = list( graphs(8, lambda G: G.is_bipartite()) ) # long time
         sage: len(L)                                            # long time
         303
@@ -668,12 +676,14 @@ class GraphGenerators:
     Remember that the property argument does not behave as a filter,
     except for appropriately inheritable properties::
 
+        sage: # needs nauty
         sage: property = lambda G: G.is_vertex_transitive()
         sage: len(list(graphs(4, property)))                                            # needs sage.groups
         1
         sage: sum(1 for g in graphs(4) if property(g))                                  # needs sage.groups
         4
 
+        sage: # needs nauty
         sage: property = lambda G: G.is_bipartite()
         sage: len(list(graphs(4, property)))
         7
@@ -684,6 +694,7 @@ class GraphGenerators:
 
     ::
 
+        sage: # needs nauty
         sage: for i in range(7):
         ....:     print(len(list(graphs(i))))
         1
@@ -710,6 +721,7 @@ class GraphGenerators:
 
     Generate all graphs with a specified degree sequence (see :oeis:`A002851`)::
 
+        sage: # needs nauty
         sage: for i in [4,6,8]:  # long time (4s on sage.math, 2012)
         ....:     print((i, len([g for g in graphs(i, degree_sequence=[3]*i) if g.is_connected()])))
         (4, 1)
@@ -723,12 +735,14 @@ class GraphGenerators:
 
     ::
 
+        sage: # needs nauty
         sage: print((10, len([g for g in graphs(10,degree_sequence=[3]*10) if g.is_connected()]))) # not tested
         (10, 19)
 
     Make sure that the graphs are really independent and the generator
     survives repeated vertex removal (:issue:`8458`)::
 
+        sage: # needs nauty
         sage: for G in graphs(3):
         ....:     G.delete_vertex(0)
         ....:     print(G.order())
@@ -758,6 +772,7 @@ class GraphGenerators:
 
         Print graphs on 3 or less vertices::
 
+            sage: # needs nauty
             sage: for G in graphs(3, augment='vertices'):
             ....:    print(G)
             Graph on 0 vertices
@@ -771,6 +786,7 @@ class GraphGenerators:
 
         ::
 
+            sage: # needs nauty
             sage: for g in graphs():
             ....:    if g.num_verts() > 3: break
             ....:    print(g)
@@ -931,6 +947,7 @@ class GraphGenerators:
         create an entire list all at once if there is sufficient memory
         to contain it.  ::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_geng("2")
             sage: next(gen)
             Graph on 2 vertices
@@ -944,6 +961,7 @@ class GraphGenerators:
         A list of all graphs on 7 vertices.  This agrees with
         :oeis:`A000088`.  ::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_geng("7")
             sage: len(list(gen))
             1044
@@ -951,12 +969,14 @@ class GraphGenerators:
         A list of just the connected graphs on 7 vertices.  This agrees with
         :oeis:`A001349`.  ::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_geng("7 -c")
             sage: len(list(gen))
             853
 
         A list of connected degree exactly 2 graphs on 5 vertices. ::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_geng("5 -c -d2 -D2")
             sage: len(list(gen))
             1
@@ -968,6 +988,7 @@ class GraphGenerators:
         the first returned value might be an empty string if ``debug`` is
         ``True``::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_geng("4", debug=True)
             sage: print(next(gen))
             >A ...geng -d0D3 n=4 e=0-6
@@ -979,6 +1000,7 @@ class GraphGenerators:
 
         Wrong input, ``"-c3"`` instead of ``"-c 3"`` (:issue:`14068`)::
 
+            sage: # needs nauty
             sage: list(graphs.nauty_geng("-c3", debug=False))
             Traceback (most recent call last):
             ...
@@ -1087,6 +1109,7 @@ class GraphGenerators:
         create an entire list all at once if there is sufficient memory
         to contain it::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_genbg("1 1")
             sage: next(gen)
             Bipartite graph on 2 vertices
@@ -1100,6 +1123,7 @@ class GraphGenerators:
         Connected bipartite graphs of order 6 with different number of vertices
         in each side::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_genbg("1 5 -c")
             sage: len(list(gen))
             1
@@ -1114,6 +1138,7 @@ class GraphGenerators:
         graphs of order `n`. For instance, the list of all connected bipartite
         graphs of order 6, which agrees with :oeis:`A005142`::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_geng("-b -c 6")
             sage: len(list(gen))
             17
@@ -1122,6 +1147,7 @@ class GraphGenerators:
         input in the ``options`` string. A message starting with ">A" indicates
         success and a message starting with ">E" indicates a failure::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_genbg("2 3", debug=True)
             sage: print(next(gen))
             >A ...genbg... n=2+3 e=0:6 d=0:0 D=3:2
@@ -1131,6 +1157,7 @@ class GraphGenerators:
 
         Check that the partition of the bipartite graph is consistent::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_genbg("3 3")
             sage: left = set(range(3))
             sage: for g in gen:
@@ -1141,6 +1168,7 @@ class GraphGenerators:
 
         Wrong input::
 
+            sage: # needs nauty
             sage: list(graphs.nauty_genbg("-c1 2", debug=False))
             Traceback (most recent call last):
             ...
@@ -1153,6 +1181,7 @@ class GraphGenerators:
         We must have n1=1..30, n2=0..64 and n1+n2=1..64 (:issue:`34179`,
         :issue:`38618`)::
 
+            sage: # needs nauty
             sage: next(graphs.nauty_genbg("31 1", debug=False))
             Traceback (most recent call last):
             ...
@@ -3035,7 +3064,7 @@ def canaug_traverse_edge(g, aut_gens, property, dig=False, loops=False, sparse=T
 
     ::
 
-        sage: for G in graphs(3):
+        sage: for G in graphs(3):                                                                          # needs nauty
         ....:     print(G)
         Graph on 3 vertices
         Graph on 3 vertices
@@ -3046,7 +3075,7 @@ def canaug_traverse_edge(g, aut_gens, property, dig=False, loops=False, sparse=T
 
     ::
 
-        sage: for G in digraphs(3):
+        sage: for G in digraphs(3):                                                                        # needs nauty
         ....:     print(G)
         Digraph on 3 vertices
         Digraph on 3 vertices
