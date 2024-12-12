@@ -104,6 +104,13 @@ TESTS::
     sage: libgiac(-11^1000)
     -2469932918005826334124088385085221477709733385238396234869182951830739390375433175367866116456946191973803561189036523363533798726571008961243792655536655282201820357872673322901148243453211756020067624545609411212063417307681204817377763465511222635167942816318177424600927358163388910854695041070577642045540560963004207926938348086979035423732739933235077042750354729095729602516751896320598857608367865475244863114521391548985943858154775884418927768284663678512441565517194156946312753546771163991252528017732162399536497445066348868438762510366191040118080751580689254476068034620047646422315123643119627205531371694188794408120267120500325775293645416335230014278578281272863450085145349124727476223298887655183167465713337723258182649072572861625150703747030550736347589416285606367521524529665763903537989935510874657420361426804068643262800901916285076966174176854351055183740078763891951775452021781225066361670593917001215032839838911476044840388663443684517735022039957481918726697789827894303408292584258328090724141496484460001
 
+Ensure that signed infinities get converted correctly::
+
+    sage: libgiac(+Infinity)
+    +infinity
+    sage: libgiac(-Infinity)
+    -infinity
+
 .. SEEALSO::
 
     ``libgiac``, ``giacsettings``, ``Pygen``,``loadgiacgen``
@@ -154,22 +161,16 @@ import math
 
 # sage includes
 from sage.ext.stdsage cimport PY_NEW
-
+from sage.interfaces.giac import giac
 from sage.libs.gmp.mpz cimport mpz_set
-
+from sage.rings.abc import SymbolicRing
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.integer cimport Integer
+from sage.rings.infinity import AnInfinity
 from sage.rings.rational cimport Rational
-from sage.structure.element cimport Matrix
-
-from sage.symbolic.expression import symbol_table
-from sage.calculus.calculus import symbolic_expression_from_string, SR_parser_giac
-from sage.symbolic.ring import SR
-from sage.symbolic.expression import Expression
-from sage.symbolic.expression_conversions import InterfaceInit
-from sage.interfaces.giac import giac
+from sage.structure.element cimport Matrix, Expression
 
 
 # Python3 compatibility ############################
@@ -194,7 +195,12 @@ Pygen('I:=sqrt(-1)').eval()   # WTF?
 # for giac/libgiac.
 # NB: We want to do this without starting an external giac program and
 # self._giac_() does.
-SRexpressiontoGiac = InterfaceInit(giac)
+try:
+    from sage.symbolic.expression_conversions import InterfaceInit
+except ImportError:
+    pass
+else:
+    SRexpressiontoGiac = InterfaceInit(giac)
 
 
 #######################################################
@@ -377,11 +383,9 @@ def _giac(s):
         ...list[-pi/18,7*pi/18]
 
         sage: libgiac.solve('sin(3*x)>2*sin(x)',x)
-        Traceback (most recent call last):
-        ...
-        RuntimeError: Unable to find numeric values solving equation. For
-        trigonometric equations this may be solved using assumptions, e.g.
-        assume(x>-pi && x<pi) Error: Bad Argument Value
+        Inequation on periodic expression without assumptions on variable,
+         adding assumption ((x>=0) and (x<(2*pi)))
+        list[((x>0) and (x<(pi/6))),((x>(5*pi/6)) and (x<pi)),((x>(7*pi/6)) and (x<(11*pi/6)))]
 
 
     You can also add some hypothesis to a giac symbol::
@@ -862,6 +866,8 @@ cdef class Pygen(GiacMethods_base):
                     s = s._giac_init_()
                 except AttributeError:
                     s = SRexpressiontoGiac(s)
+            elif isinstance(s, AnInfinity):
+                s = s._giac_init_()
             if not isinstance(s, str):
                 s = s.__str__()
             sig_on()
@@ -1495,6 +1501,7 @@ cdef class Pygen(GiacMethods_base):
                 return result
 
             else:
+                from sage.symbolic.ring import SR
                 return SR(self)
 
         else:
@@ -1530,7 +1537,10 @@ cdef class Pygen(GiacMethods_base):
             sage: libgiac.integrate(cos(y), y).sage()
             sin(π)
         """
-        if isinstance(R, SR.__class__):
+        if isinstance(R, SymbolicRing):
+            from sage.calculus.calculus import symbolic_expression_from_string, SR_parser_giac
+            from sage.symbolic.expression import symbol_table
+
             # Try to convert some functions names to the symbolic ring
             lsymbols = symbol_table['giac'].copy()
             #lsymbols.update(locals)

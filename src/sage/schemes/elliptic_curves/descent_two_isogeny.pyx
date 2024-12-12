@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-flint
+# sage.doctest: needs sage.libs.ntl
 r"""
 Descent on elliptic curves over `\QQ` with a 2-isogeny
 """

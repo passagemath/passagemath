@@ -1,0 +1,2 @@
+$(SAGE_ROOT)/pkgs/sagemath-ecl/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-ecl/MANIFEST.in $(PYTHON) cysignals gmpy2 sagemath_categories ecl maxima | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build
+

@@ -19,12 +19,12 @@ on:
         default: >-
           [
            "ubuntu-xenial-toolchain-gcc_9",
-           "ubuntu-bionic-gcc_8",
+           "ubuntu-bionic-toolchain-gcc_9",
            "ubuntu-focal",
            "ubuntu-jammy",
-           "ubuntu-lunar",
            "ubuntu-noble",
            "ubuntu-oracular",
+           "ubuntu-plucky",
            "debian-bullseye",
            "debian-bookworm",
            "debian-trixie",
@@ -52,7 +52,7 @@ on:
            "fedora-42",
            "centos-stream-9",
            "centos-stream-9-python3.12",
-           "almalinux-8-python3.9",
+           "almalinux-8-toolset-gcc_9-python3.9",
            "almalinux-9-python3.11",
            "alpine",
            "gentoo-python3.10",
@@ -63,7 +63,7 @@ on:
            "opensuse-tumbleweed-python3.10",
            "opensuse-tumbleweed",
            "conda-forge-python3.11",
-           "ubuntu-bionic-gcc_8-i386",
+           "ubuntu-bionic-toolchain-gcc_9-i386",
            "debian-bullseye-i386",
           ]
         # 'tox -e update_docker_platforms' updates above
@@ -88,6 +88,9 @@ on:
         description: 'Elapsed time (seconds) at which to kill the build'
         default: 20000
         type: number
+      logs_artifact:
+        default: true
+        type: boolean
       #
       # Publishing to GitHub Packages
       #
@@ -264,12 +267,12 @@ jobs:
           cp -r .tox/$TOX_ENV/* "artifacts/$LOGS_ARTIFACT_NAME"
           rm -rf "artifacts/$LOGS_ARTIFACT_NAME"/{bin,lib,pyvenv.cfg}
         if: always()
-      - name: Upload log artifact
+      - name: Upload logs artifact
         uses: actions/upload-artifact@v4
         with:
           path: artifacts
           name: ${{ env.LOGS_ARTIFACT_NAME }}-${{ job.container.id }}
-        if: always()
+        if: always() && inputs.logs_artifact
       - name: Print out logs for immediate inspection
         # and markup the output with GitHub Actions logging commands
         run: |

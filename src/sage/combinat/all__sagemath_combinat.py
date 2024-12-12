@@ -41,10 +41,6 @@ from sage.combinat.perfect_matching import PerfectMatching, PerfectMatchings
 from sage.combinat.composition_signed import SignedCompositions
 
 # Partitions
-from sage.combinat.partition import (Partition, Partitions, PartitionsInBox,
-                                     OrderedPartitions, PartitionsGreatestLE,
-                                     PartitionsGreatestEQ, number_of_partitions)
-
 lazy_import('sage.combinat.partition_tuple', ['PartitionTuple', 'PartitionTuples'])
 lazy_import('sage.combinat.partition_kleshchev', ['KleshchevPartitions'])
 lazy_import('sage.combinat.skew_partition', ['SkewPartition', 'SkewPartitions'])
@@ -147,8 +143,6 @@ from sage.combinat.matrices.all import *
 
 lazy_import('sage.combinat.integer_vectors_mod_permgroup',
             'IntegerVectorsModPermutationGroup')
-
-lazy_import('sage.combinat.q_analogues', ['gaussian_binomial', 'q_binomial', 'number_of_irreducible_polynomials'])
 
 from sage.combinat.species.all import *
 

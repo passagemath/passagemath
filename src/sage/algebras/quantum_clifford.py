@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
-# sage.doctest: needs sage.modules
+# sage.doctest: needs sage.libs.singular sage.modules
 r"""
 Quantum Clifford Algebras
 

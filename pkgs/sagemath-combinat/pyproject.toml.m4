@@ -34,6 +34,8 @@ content-type = "text/x-rst"
 test            = ["passagemath-repl"]
 
 # by library
+glucose         = ["passagemath-glucose"]
+kissat          = ["passagemath-kissat"]
 lrcalc          = [SPKG_INSTALL_REQUIRES_lrcalc_python]
 symmetrica      = []
 

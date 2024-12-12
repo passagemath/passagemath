@@ -13,18 +13,9 @@ License
 GPLv3+
 
 
-SPKG Maintainers
-----------------
-
--  Miguel Marco
-
-
 Upstream Contact
 ----------------
 
 Miguel Marco (mmarco@unizar.es)
 
-Dependencies
-------------
-
--  gcc
+https://github.com/miguelmarco/SIROCCO2

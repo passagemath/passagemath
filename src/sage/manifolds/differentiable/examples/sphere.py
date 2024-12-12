@@ -166,13 +166,14 @@ a volume form::
     eps_g = -dchi
 """
 
-from sage.manifolds.differentiable.pseudo_riemannian_submanifold import \
-                                                     PseudoRiemannianSubmanifold
-from sage.categories.metric_spaces import MetricSpaces
 from sage.categories.manifolds import Manifolds
+from sage.categories.metric_spaces import MetricSpaces
 from sage.categories.topological_spaces import TopologicalSpaces
-from sage.rings.real_mpfr import RR
 from sage.manifolds.differentiable.examples.euclidean import EuclideanSpace
+from sage.manifolds.differentiable.pseudo_riemannian_submanifold import (
+    PseudoRiemannianSubmanifold,
+)
+from sage.rings.real_mpfr import RR
 
 
 class Sphere(PseudoRiemannianSubmanifold):
@@ -316,8 +317,9 @@ class Sphere(PseudoRiemannianSubmanifold):
             n = len(names)
 
         # Technical bit for UniqueRepresentation
-        from sage.misc.prandom import getrandbits
         from time import time
+
+        from sage.misc.prandom import getrandbits
         if unique_tag is None:
             unique_tag = getrandbits(128) * time()
 
@@ -610,8 +612,8 @@ class Sphere(PseudoRiemannianSubmanifold):
         A.set_default_frame(spher.frame())
 
         # manage embedding...
-        from sage.misc.misc_c import prod
         from sage.functions.trig import cos, sin
+        from sage.misc.misc_c import prod
 
         R = self._radius
 

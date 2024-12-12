@@ -4466,7 +4466,7 @@ cdef class Polynomial(CommutativePolynomial):
                       if self.get_unsafe(n) else zero for n in range(self.degree() + 1)]
         return S(p)
 
-    def monomial_coefficients(self):
+    def monomial_coefficients(self, copy=None):
         """
         Return a sparse dictionary representation of this univariate
         polynomial.
@@ -10045,7 +10045,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: f.is_irreducible()
             True
 
-        If the base ring implements `_is_irreducible_univariate_polynomial`,
+        If the base ring implements ``_is_irreducible_univariate_polynomial``,
         then this method gets used instead of the generic algorithm which just
         factors the input::
 
@@ -10293,7 +10293,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: f.is_squarefree.cache
             False
 
-        If the base ring implements `_is_squarefree_univariate_polynomial`,
+        If the base ring implements ``_is_squarefree_univariate_polynomial``,
         then this method gets used instead of the generic algorithm in
         :meth:`_is_squarefree_generic`::
 

@@ -490,12 +490,12 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
             We start with the free `\QQ`-module with basis the set of all
             partitions::
 
-                sage: A = Modules(QQ).WithBasis().Filtered().example(); A               # needs sage.combinat sage.modules
+                sage: A = Modules(QQ).WithBasis().Filtered().example(); A               # needs sage.modules
                 An example of a filtered module with basis: the free module
                  on partitions over Rational Field
-                sage: M = A.indices(); M                                                # needs sage.combinat sage.modules
+                sage: M = A.indices(); M                                                # needs sage.modules
                 Partitions
-                sage: p1, p2, p21, p321 = [A.basis()[Partition(i)]                      # needs sage.combinat sage.modules
+                sage: p1, p2, p21, p321 = [A.basis()[Partition(i)]                      # needs sage.modules
                 ....:                      for i in [[1], [2], [2,1], [3,2,1]]]
 
             Let us define a map from ``A`` to itself which acts on the
@@ -776,10 +776,10 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
             EXAMPLES::
 
-                sage: A = GradedModulesWithBasis(QQ).example()                          # needs sage.combinat sage.modules
-                sage: A.degree_on_basis(Partition((2,1)))                               # needs sage.combinat sage.modules
+                sage: A = GradedModulesWithBasis(QQ).example()                          # needs sage.modules
+                sage: A.degree_on_basis(Partition((2,1)))                               # needs sage.modules
                 3
-                sage: A.degree_on_basis(Partition((4,2,1,1,1,1)))                       # needs sage.combinat sage.modules
+                sage: A.degree_on_basis(Partition((4,2,1,1,1,1)))                       # needs sage.modules
                 10
             """
 

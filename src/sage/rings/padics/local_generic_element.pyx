@@ -769,6 +769,7 @@ cdef class LocalGenericElement(CommutativeRingElement):
             1 + t*2^2 + t^2*2^3 + t^2*2^4 + (t^4 + t^3 + t^2)*2^5 + (t^4 + t^2)*2^6
               + (t^5 + t^2)*2^7 + (t^6 + t^5 + t^4 + t^2)*2^8 + O(2^9)
 
+            sage: x = polygen(QQ, 'x')
             sage: R.<a> = Zp(2).extension(x^3 - 2)
             sage: u = R(1 + a^4 + a^5 + a^7 + a^8, 10); u
             1 + a^4 + a^5 + a^7 + a^8 + O(a^10)

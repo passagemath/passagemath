@@ -22,7 +22,8 @@ for general installation instructions.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-qepcad`` provides an interface to QEPCAD.
+This pip-installable source distribution ``sagemath-qepcad`` provides an interface to
+`QEPCAD <https://github.com/chriswestbrown/qepcad>`_.
 
 
 Example

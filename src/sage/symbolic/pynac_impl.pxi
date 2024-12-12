@@ -41,7 +41,6 @@ from sage.arith.functions import lcm
 from sage.cpython.string cimport str_to_bytes, char_to_str
 from sage.ext.stdsage cimport PY_NEW
 from sage.libs.gmp.all cimport *
-from sage.libs.gsl.types cimport *
 from sage.libs.gsl.complex cimport *
 from sage.libs.gsl.gamma cimport gsl_sf_lngamma_complex_e
 from sage.libs.mpmath import utils as mpmath_utils
@@ -1853,7 +1852,7 @@ cdef py_atan2(x, y):
 
     Check that :issue:`21428` is fixed::
 
-        sage: plot(real(sqrt(x - 1.*I)), (x,0,1))
+        sage: plot(real(sqrt(x - 1.*I)), (x,0,1))                                       # needs sage.plot
         Graphics object consisting of 1 graphics primitive
 
     Check that :issue:`22553` is fixed::

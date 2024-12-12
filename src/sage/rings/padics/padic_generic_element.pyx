@@ -1350,7 +1350,7 @@ cdef class pAdicGenericElement(LocalGenericElement):
             sage: Zp(5)(0).gamma()
             1 + O(5^20)
 
-        Check the cached version of `dwork_expansion` from :issue:`24433`::
+        Check the cached version of ``dwork_expansion`` from :issue:`24433`::
 
             sage: p = next_prime(200)
             sage: F = Qp(p)
@@ -2816,10 +2816,10 @@ cdef class pAdicGenericElement(LocalGenericElement):
             sage: (x^125/125).precision_absolute()
             -775
 
-            sage: # needs sage.libs.ntl
+            sage: # needs sage.libs.ntl sage.rings.padics
             sage: z = 1 - w + O(w^2)
             sage: x = 1 - z
-            sage: z.log().precision_absolute()                                          # needs sage.rings.padics
+            sage: z.log().precision_absolute()
             -1625
             sage: (x^5/5).precision_absolute()
             -615

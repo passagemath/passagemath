@@ -88,6 +88,7 @@ cdef class KhuriMakdisi_base(object):
 
         TESTS::
 
+            sage: # long time
             sage: k = GF(7)
             sage: A.<x,y> = AffineSpace(k,2)
             sage: C = Curve(y^2 + x^3 + 2*x + 1).projective_closure()
@@ -182,6 +183,7 @@ cdef class KhuriMakdisi_base(object):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: h = C.function(y/x).divisor_of_poles()
@@ -207,6 +209,7 @@ cdef class KhuriMakdisi_base(object):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: h = C.function(y/x).divisor_of_poles()
@@ -232,6 +235,7 @@ cdef class KhuriMakdisi_base(object):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: h = C.function(y/x).divisor_of_poles()
@@ -257,6 +261,7 @@ cdef class KhuriMakdisi_base(object):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: h = C.function(y/x).divisor_of_poles()
@@ -326,6 +331,7 @@ cdef class KhuriMakdisi_base(object):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: h = C.function(y/x).divisor_of_poles()
@@ -359,6 +365,7 @@ cdef class KhuriMakdisi_large(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: h = C.function(y/x).divisor_of_poles()
@@ -416,6 +423,7 @@ cdef class KhuriMakdisi_large(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(7), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: J = C.jacobian(model='km_large')
@@ -478,6 +486,7 @@ cdef class KhuriMakdisi_large(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: F = C.function_field()
@@ -509,6 +518,7 @@ cdef class KhuriMakdisi_large(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: k = GF(7)
             sage: A.<x,y> = AffineSpace(k,2)
             sage: C = Curve(y^2 + x^3 + 2*x + 1).projective_closure()
@@ -539,6 +549,7 @@ cdef class KhuriMakdisi_medium(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: h = C.function(y/x).divisor_of_poles()
@@ -590,6 +601,7 @@ cdef class KhuriMakdisi_medium(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: h = C.function(y/x).divisor_of_poles()
@@ -625,6 +637,7 @@ cdef class KhuriMakdisi_medium(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: h = C.function(y/x).divisor_of_poles()
@@ -644,6 +657,7 @@ cdef class KhuriMakdisi_medium(KhuriMakdisi_base):
 
         We check the computation in other model::
 
+            sage: # long time
             sage: J = C.jacobian(model='km_large', base_div=h)
             sage: G = J.group()
             sage: p1 = G.point(pl1 - b)
@@ -673,6 +687,7 @@ cdef class KhuriMakdisi_medium(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: k = GF(7)
             sage: A.<x,y> = AffineSpace(k,2)
             sage: C = Curve(y^2 + x^3 + 2*x + 1).projective_closure()
@@ -704,6 +719,7 @@ cdef class KhuriMakdisi_small(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: b = C([0,1,0]).place()
@@ -761,6 +777,7 @@ cdef class KhuriMakdisi_small(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: b = C([0,1,0]).place()
@@ -795,6 +812,7 @@ cdef class KhuriMakdisi_small(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(17), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: b = C([0,1,0]).place()
@@ -814,6 +832,7 @@ cdef class KhuriMakdisi_small(KhuriMakdisi_base):
 
         We check the computation in other model::
 
+            sage: # long time
             sage: h = C.function(y/x).divisor_of_poles()
             sage: Jl = C.jacobian(model='km_large', base_div=h)
             sage: G = J.group()
@@ -842,6 +861,7 @@ cdef class KhuriMakdisi_small(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: P2.<x,y,z> = ProjectiveSpace(GF(7), 2)
             sage: C = Curve(x^3 + 5*z^3 - y^2*z, P2)
             sage: b = C([0,1,0]).place()
@@ -876,6 +896,7 @@ cdef class KhuriMakdisi_small(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # long time
             sage: k = GF(7)
             sage: A.<x,y> = AffineSpace(k,2)
             sage: C = Curve(y^2 + x^3 + 2*x + 1).projective_closure()

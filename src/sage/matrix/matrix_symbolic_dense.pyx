@@ -266,7 +266,8 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         over the rational numbers, then the same matrix but viewed as a symbolic
         matrix. ::
 
-            sage: G=graphs.CycleGraph(5)
+            sage: # needs sage.graphs
+            sage: G = graphs.CycleGraph(5)
             sage: am = G.adjacency_matrix()
             sage: spectrum = am.eigenvectors_left()
             sage: qqbar_evalue = spectrum[2][0]
@@ -274,7 +275,6 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
             <class 'sage.rings.qqbar.AlgebraicNumber'>
             sage: qqbar_evalue
             0.618033988749895?
-
             sage: am = G.adjacency_matrix().change_ring(SR)
             sage: spectrum = am.eigenvectors_left()
             sage: symbolic_evalue = spectrum[2][0]
@@ -282,12 +282,12 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
             <class 'sage.symbolic.expression.Expression'>
             sage: symbolic_evalue
             1/2*sqrt(5) - 1/2
-
             sage: bool(qqbar_evalue == symbolic_evalue)
             True
 
         A slightly larger matrix with a "nice" spectrum. ::
 
+            sage: # needs sage.graphs
             sage: G = graphs.CycleGraph(6)
             sage: am = G.adjacency_matrix().change_ring(SR)
             sage: am.eigenvectors_left()

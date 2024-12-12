@@ -914,8 +914,8 @@ cdef class CachedFunction():
         TESTS::
 
             sage: from sage.misc.sageinspect import sage_getsource
-            sage: g = CachedFunction(number_of_partitions)                              # needs sage.combinat
-            sage: 'flint' in sage_getsource(g)  # indirect doctest                      # needs sage.combinat
+            sage: g = CachedFunction(number_of_partitions)
+            sage: 'flint' in sage_getsource(g)  # indirect doctest
             True
         """
         from sage.misc.sageinspect import sage_getsource
@@ -1192,8 +1192,8 @@ cdef class CachedFunction():
         """
         EXAMPLES::
 
-            sage: g = CachedFunction(number_of_partitions)                              # needs sage.combinat
-            sage: g     # indirect doctest                                              # needs sage.combinat
+            sage: g = CachedFunction(number_of_partitions)
+            sage: g     # indirect doctest
             Cached version of <function number_of_partitions at 0x...>
         """
         try:
@@ -1462,7 +1462,7 @@ class CachedMethodPickle():
         we replace the actual cached method by a place holder,
         that kills itself as soon as any attribute is requested.
         Then, the original cached attribute is reinstated. But the
-        cached values are in fact saved (if `do_pickle` is set.)
+        cached values are in fact saved (if ``do_pickle`` is set.)
 
     EXAMPLES::
 

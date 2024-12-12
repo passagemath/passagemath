@@ -101,7 +101,7 @@ class Gfan:
 
         if cmd:
             cmd = cmd.split(' ')
-            cmd[0] = GfanExecutable(cmd[0]).absolute_filename()
+            cmd = [GfanExecutable().absolute_filename(), '_' + cmd[0]] + cmd[1:]
         else:
             cmd = [GfanExecutable().absolute_filename()]
 

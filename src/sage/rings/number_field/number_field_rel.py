@@ -75,8 +75,6 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-import sage.libs.ntl.all as ntl
-
 from sage.categories.map import Map
 from sage.structure.sequence import Sequence
 
@@ -1891,6 +1889,7 @@ class NumberField_relative(NumberField_generic):
         try:
             return (self.__abs_polynomial_ntl, self.__abs_denominator_ntl)
         except AttributeError:
+            import sage.libs.ntl.all as ntl
             self.__abs_denominator_ntl = ntl.ZZ()
             den = self.absolute_polynomial().denominator()
             self.__abs_denominator_ntl.set_from_sage_int(ZZ(den))

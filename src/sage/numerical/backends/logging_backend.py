@@ -21,6 +21,7 @@ See :class:`LoggingBackendFactory` for more information.
 
 from sage.numerical.backends.generic_backend import GenericBackend
 
+
 def _format_function_call(fn_name, *v, **k):
     """
     Return a Python function call as a string.
@@ -33,6 +34,7 @@ def _format_function_call(fn_name, *v, **k):
     """
     args = [ repr(a) for a in v ] + [ "%s=%r" % (arg,val) for arg, val in k.items() ]
     return "{}({})".format(fn_name, ", ".join(args))
+
 
 def _make_wrapper(backend, attr):
     """
@@ -90,6 +92,7 @@ def _make_wrapper(backend, attr):
     from functools import update_wrapper
     update_wrapper(m, getattr(backend, attr))
     return m
+
 
 class LoggingBackend(GenericBackend):
     """
@@ -232,6 +235,7 @@ r'''
 '''.replace("SAGE:", "sage:") # so that the above test does not get picked up by the doctester
 
 from sage.rings.rational_field import QQ
+
 
 def LoggingBackendFactory(solver=None, printing=True, doctest_file=None, test_method_file=None,
                           test_method=None, base_ring=QQ):

@@ -107,8 +107,28 @@ class CVXOPT(JoinFeature):
                              type='standard')
 
 
+class CVXpy(JoinFeature):
+    r"""
+    A :class:`~sage.features.Feature` describing whether the :class:`MixedIntegerLinearProgram` backend ``CVXpy`` is available.
+    """
+    def __init__(self):
+        r"""
+        TESTS::
+
+            sage: from sage.features.mip_backends import CVXpy
+            sage: CVXpy()._is_present()                                                # needs cvxpy
+            FeatureTestResult('cvxpy', True)
+        """
+        JoinFeature.__init__(self, 'cvxpy',
+                             [MIPBackend('CVXpy'),
+                              PythonModule('cvxpy')],
+                             spkg='cvxpy',
+                             type='optional')
+
+
 def all_features():
     return [CPLEX(),
             Gurobi(),
             COIN(),
-            CVXOPT()]
+            CVXOPT(),
+            CVXpy()]

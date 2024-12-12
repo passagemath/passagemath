@@ -19,20 +19,37 @@ jobs:
       fail-fast: false
       matrix:
         distribution:
+          - sagemath-benzene
           - sagemath-bliss
+          - sagemath-buckygen
           - sagemath-categories
+          - sagemath-cddlib
+          - sagemath-cliquer
           - sagemath-combinat
           - sagemath-coxeter3
           - sagemath-flint
           - sagemath-giac
+          - sagemath-glucose
           - sagemath-graphs
           - sagemath-groups
+          - sagemath-homfly
+          - sagemath-kissat
+          - sagemath-latte-4ti2
+          - sagemath-libbraiding
+          - sagemath-lrslib
           - sagemath-modules
+          - sagemath-msolve
           - sagemath-pari
+          - sagemath-planarity
+          - sagemath-plantri
           - sagemath-plot
           - sagemath-polyhedra
+          - sagemath-qepcad
+          - sagemath-rankwidth
           - sagemath-repl
+          - sagemath-rubiks
           - sagemath-schemes
+          - sagemath-sirocco
           - sagemath-singular
           - sagemath-standard-no-symbolics
           - sagemath-symbolics
@@ -50,7 +67,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || inputs.run-id }}
       - uses: actions/download-artifact@v4
         with:
           pattern: "noarch-wheels"
@@ -58,7 +75,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || inputs.run-id }}
       - uses: actions/download-artifact@v4
         with:
           pattern: "dist"
@@ -66,7 +83,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || inputs.run-id }}
       - uses: actions/setup-python@v5
         id: python
         with:
@@ -105,8 +122,8 @@ jobs:
           pip install pkgs/sagemath-environment pkgs/sagemath-repl
           pkg=${{ matrix.distribution }}
           cd pkgs/$pkg
-          extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;')
+          extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
           for extra in $extras; do
-              sage --fixdoctests --distribution "$pkg$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
+              sage --fixdoctests --distribution "$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
           done
           git diff

@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs requests sage.combinat
 r"""
 FindStat - the search engine for combinatorial statistics and maps
 

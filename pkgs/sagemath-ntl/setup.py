@@ -8,5 +8,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-ntl'],
-           spkgs=['ntl'],
+           required_modules=('m4ri',),
+           spkgs=['ntl', 'm4ri'],
            package_data={'sage.libs.ntl': ['*.h', '*.pxi']})

@@ -486,10 +486,10 @@ def is_iterator(it) -> bool:
         sage: list(x)
         [4, 3, 2, 1]
 
-        sage: P = Partitions(3)                                                         # needs sage.combinat
-        sage: is_iterator(P)                                                            # needs sage.combinat
+        sage: P = Partitions(3)
+        sage: is_iterator(P)
         False
-        sage: is_iterator(iter(P))                                                      # needs sage.combinat
+        sage: is_iterator(iter(P))
         True
     """
     # see trac #7398 for a discussion

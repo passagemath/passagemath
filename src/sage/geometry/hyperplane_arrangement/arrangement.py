@@ -274,7 +274,7 @@ Miscellaneous methods (see documentation for an explanation)::
     True
     sage: b = a.change_ring(GF(5))
     sage: pa = a.intersection_poset()                                                   # needs sage.graphs
-    sage: pb = b.intersection_poset()                                                   # needs sage.rings.finite_rings
+    sage: pb = b.intersection_poset()                                                   # needs sage.graphs sage.rings.finite_rings
     sage: pa.is_isomorphic(pb)                                                          # needs sage.graphs sage.rings.finite_rings
     True
     sage: a.face_vector()                                                               # needs sage.graphs
@@ -1089,6 +1089,7 @@ class HyperplaneArrangementElement(Element):
             sage: H.primitive_eulerian_polynomial()
             z^3 + 28*z^2 + 16*z
 
+            sage: # needs sage.libs.gap
             sage: W = CoxeterGroup(['F',4], implementation='permutation')
             sage: A = HyperplaneArrangements(QQ, tuple(f'x{s}' for s in range(W.rank())))
             sage: H = A([[0] + list(r) for r in W.positive_roots()])

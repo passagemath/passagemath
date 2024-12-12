@@ -1508,7 +1508,7 @@ class LazyLaurentSeriesRing(LazySeriesRing):
             sage: TestSuite(L).run()
 
             sage: L = LazyLaurentSeriesRing(GF(5)['x, y'], 't')
-            sage: TestSuite(L).run()
+            sage: TestSuite(L).run()                                                    # needs sage.libs.singular
 
             sage: L = LazyLaurentSeriesRing(Zmod(6), 't')
             sage: TestSuite(L).run(skip=['_test_revert'])
@@ -2589,6 +2589,7 @@ class LazyPowerSeriesRing(LazySeriesRing):
         For inputs as symbolic functions/expressions, the function must
         not have any poles at `0`::
 
+            sage: # needs sage.symbolic
             sage: L.<z> = LazyPowerSeriesRing(QQ, sparse=True)
             sage: f = 1 / sin(x)
             sage: L.taylor(f)
@@ -2600,12 +2601,12 @@ class LazyPowerSeriesRing(LazySeriesRing):
             sage: def f(x, y): return (1 + x) / (1 + y)
             sage: L.taylor(f)
             1 + (a-b) + (-a*b+b^2) + (a*b^2-b^3) + (-a*b^3+b^4) + (a*b^4-b^5) + (-a*b^5+b^6) + O(a,b)^7
-            sage: g(w, z) = (1 + w) / (1 + z)
-            sage: L.taylor(g)
+            sage: g(w, z) = (1 + w) / (1 + z)                                           # needs sage.symbolic
+            sage: L.taylor(g)                                                           # needs sage.symbolic
             1 + (a-b) + (-a*b+b^2) + (a*b^2-b^3) + (-a*b^3+b^4) + (a*b^4-b^5) + (-a*b^5+b^6) + O(a,b)^7
-            sage: y = SR.var('y')
-            sage: h = (1 + x) / (1 + y)
-            sage: L.taylor(h)
+            sage: y = SR.var('y')                                                       # needs sage.symbolic
+            sage: h = (1 + x) / (1 + y)                                                 # needs sage.symbolic
+            sage: L.taylor(h)                                                           # needs sage.symbolic
             1 + (a-b) + (-a*b+b^2) + (a*b^2-b^3) + (-a*b^3+b^4) + (a*b^4-b^5) + (-a*b^5+b^6) + O(a,b)^7
         """
         try:

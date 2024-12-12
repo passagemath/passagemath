@@ -3058,7 +3058,7 @@ cdef class Matrix(Matrix1):
 
         ALGORITHM:
 
-        If the base ring has a method `_matrix_charpoly`, we use it.
+        If the base ring has a method ``_matrix_charpoly``, we use it.
 
         In the generic case of matrices over a ring (commutative and with
         unity), there is a division-free algorithm, which can be accessed
@@ -4455,11 +4455,11 @@ cdef class Matrix(Matrix1):
             sage: A*X.transpose() == zero_matrix(ZZ, 4, 3)
             True
 
-            sage: X = A.right_kernel_matrix(algorithm='padic', basis='LLL'); X
+            sage: X = A.right_kernel_matrix(algorithm='padic', basis='LLL'); X          # needs fpylll
             [ -3  -1   5   7   2  -3  -2]
             [  3   1   2   5  -5   2  -6]
             [ -4 -13   2  -7   5   7  -3]
-            sage: A*X.transpose() == zero_matrix(ZZ, 4, 3)
+            sage: A*X.transpose() == zero_matrix(ZZ, 4, 3)                              # needs fpylll
             True
 
             sage: # needs sage.libs.pari
@@ -4994,7 +4994,7 @@ cdef class Matrix(Matrix1):
             [  1   5  -8   3  -1  -1  -1]
             [  0  11 -19   5  -2  -3  -3]
             sage: B = copy(A)
-            sage: B.right_kernel(basis='LLL')
+            sage: B.right_kernel(basis='LLL')                                           # needs fpylll
             Free module of degree 7 and rank 2 over Integer Ring
             User basis matrix:
             [ 2 -1  3  1  0  1  1]
@@ -5011,7 +5011,7 @@ cdef class Matrix(Matrix1):
             [  1   5  -8   3  -1  -1  -1]
             [  0  11 -19   5  -2  -3  -3]
             sage: E = copy(A)
-            sage: E.right_kernel(algorithm='padic', basis='LLL')
+            sage: E.right_kernel(algorithm='padic', basis='LLL')                        # needs fpylll
             Free module of degree 7 and rank 2 over Integer Ring
             User basis matrix:
             [-2  1 -3 -1  0 -1 -1]
@@ -10085,7 +10085,7 @@ cdef class Matrix(Matrix1):
             True
             sage: A.change_ring(QQ).is_diagonalizable()                                 # needs sage.libs.pari
             False
-            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()                 # needs sage.libs.pari
+            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()                 # needs sage.libs.pari sage.rings.number_field
             True
         """
         return self.minpoly().is_squarefree()
@@ -11400,7 +11400,7 @@ cdef class Matrix(Matrix1):
         stable::
 
             sage: b = matrix(ZZ, 3, 3, range(9))
-            sage: jf, p = b.jordan_form(RealField(15), transformation=True)             # needs sage.combinat
+            sage: jf, p = b.jordan_form(RealField(15), transformation=True)
             Traceback (most recent call last):
             ...
             ValueError: Jordan normal form not implemented over inexact rings.
@@ -11461,7 +11461,7 @@ cdef class Matrix(Matrix1):
         We verify that the bug from :issue:`6932` is fixed::
 
             sage: M = Matrix(1, 1, [1])
-            sage: M.jordan_form(transformation=True)                                    # needs sage.combinat
+            sage: M.jordan_form(transformation=True)
             ([1], [1])
 
         We now go through three `10 \times 10` matrices to exhibit cases where
@@ -11596,16 +11596,16 @@ cdef class Matrix(Matrix1):
             sage: Qx = PolynomialRing(QQ, 'x11, x12, x13, x21, x22, x23, x31, x32, x33')
             sage: x11, x12, x13, x21, x22, x23, x31, x32, x33 = Qx.gens()
             sage: M = matrix(Qx, [[0, 0, x31], [0, 0, x21], [0, 0, 0]])    # This is a nilpotent matrix.
-            sage: M.jordan_form(eigenvalues=[(0, 3)])                                   # needs sage.combinat
+            sage: M.jordan_form(eigenvalues=[(0, 3)])
             [0 1|0]
             [0 0|0]
             [---+-]
             [0 0|0]
-            sage: M.jordan_form(eigenvalues=[(0, 2)])                                   # needs sage.combinat
+            sage: M.jordan_form(eigenvalues=[(0, 2)])
             Traceback (most recent call last):
             ...
             ValueError: The provided list of eigenvalues is not correct.
-            sage: M.jordan_form(transformation=True, eigenvalues=[(0, 3)])              # needs sage.combinat
+            sage: M.jordan_form(transformation=True, eigenvalues=[(0, 3)])
             (
             [0 1|0]
             [0 0|0]  [x31   0   1]
@@ -11617,7 +11617,7 @@ cdef class Matrix(Matrix1):
         and it needs to be implemented.  ::
 
             sage: A = matrix(Integers(6), 2, 2, range(4))
-            sage: A.jordan_form()                                                       # needs sage.combinat
+            sage: A.jordan_form()
             Traceback (most recent call last):
             ...
             ValueError: Matrix entries must be from a field, not Ring of integers modulo 6

@@ -40,8 +40,8 @@ cpdef inline parent(x):
 
     Some more complicated examples::
 
-        sage: x = Partition([3,2,1,1,1])                                                # needs sage.combinat
-        sage: parent(x)                                                                 # needs sage.combinat
+        sage: x = Partition([3,2,1,1,1])
+        sage: parent(x)
         Partitions
         sage: v = vector(RDF, [1,2,3])                                                  # needs sage.modules
         sage: parent(v)                                                                 # needs sage.modules

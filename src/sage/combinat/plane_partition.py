@@ -2824,10 +2824,10 @@ class PlanePartitions_SSCPP(PlanePartitions):
         TESTS::
 
             sage: PP = PlanePartitions([2, 2, 4], symmetry='SSCPP')
-            sage: TestSuite(PP).run()                                                   # needs sage.modules
+            sage: TestSuite(PP).run()                                                   # needs sage.graphs sage.modules
 
             sage: PP = PlanePartitions([4, 4, 2], symmetry='SSCPP')
-            sage: TestSuite(PP).run()           # long time                             # needs sage.modules
+            sage: TestSuite(PP).run()           # long time                             # needs sage.graphs sage.modules
 
             sage: PlanePartitions([4, 2, 2], symmetry='SSCPP')
             Traceback (most recent call last):
@@ -2861,7 +2861,7 @@ class PlanePartitions_SSCPP(PlanePartitions):
 
         EXAMPLES::
 
-            sage: list(PlanePartitions([4,4,2], symmetry='SSCPP'))                      # needs sage.modules
+            sage: list(PlanePartitions([4,4,2], symmetry='SSCPP'))                      # needs sage.graphs sage.modules
             [Plane partition [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]],
              Plane partition [[2, 2, 2, 1], [2, 1, 1], [2, 1, 1], [1]],
              Plane partition [[2, 2, 1, 1], [2, 2, 1, 1], [1, 1], [1, 1]],
@@ -2933,7 +2933,7 @@ class PlanePartitions_CSTCPP(PlanePartitions):
         TESTS::
 
             sage: PP = PlanePartitions([2,2,2], symmetry='CSTCPP')
-            sage: TestSuite(PP).run()                                                   # needs sage.modules
+            sage: TestSuite(PP).run()                                                   # needs sage.graphs sage.modules
 
             sage: PlanePartitions([4,3,2], symmetry='CSTCPP')
             Traceback (most recent call last):
@@ -2967,7 +2967,7 @@ class PlanePartitions_CSTCPP(PlanePartitions):
 
         EXAMPLES::
 
-            sage: list(PlanePartitions([2,2,2], symmetry='CSTCPP'))                     # needs sage.modules
+            sage: list(PlanePartitions([2,2,2], symmetry='CSTCPP'))                     # needs sage.graphs sage.modules
             [Plane partition [[2, 1], [1]]]
 
         TESTS::
@@ -3019,7 +3019,7 @@ class PlanePartitions_CSSCPP(PlanePartitions):
         TESTS::
 
             sage: PP = PlanePartitions([2,2,2], symmetry='CSSCPP')
-            sage: TestSuite(PP).run()                                                   # needs sage.modules
+            sage: TestSuite(PP).run()                                                   # needs sage.graphs sage.modules
             sage: PlanePartitions([4,3,2], symmetry='CSSCPP')
             Traceback (most recent call last):
             ...
@@ -3051,7 +3051,7 @@ class PlanePartitions_CSSCPP(PlanePartitions):
 
         EXAMPLES::
 
-            sage: list(PlanePartitions([2,2,2], symmetry='CSSCPP'))                     # needs sage.modules
+            sage: list(PlanePartitions([2,2,2], symmetry='CSSCPP'))                     # needs sage.graphs sage.modules
             [Plane partition [[2, 1], [1]]]
         """
         # any CSSCPP is a SCPP and an CSPP, there are much fewer CSPP
@@ -3094,7 +3094,7 @@ class PlanePartitions_TSSCPP(PlanePartitions):
         TESTS::
 
             sage: PP = PlanePartitions([4,4,4], symmetry='TSSCPP')
-            sage: TestSuite(PP).run()                                                   # needs sage.modules
+            sage: TestSuite(PP).run()                                                   # needs sage.graphs sage.modules
             sage: PlanePartitions([4,3,2], symmetry='TSSCPP')
             Traceback (most recent call last):
             ...

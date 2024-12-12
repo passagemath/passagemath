@@ -19,11 +19,6 @@ except ImportError:
     pass
 
 try:  # extra
-    from sage.all__sagemath_graphs import *
-except ImportError:
-    pass
-
-try:  # extra
     from sage.all__sagemath_groups import *
 except ImportError:
     pass
@@ -37,6 +32,14 @@ try:  # extra
     from sage.all__sagemath_plot import *
 except ImportError:
     pass
+
+# This goes last so that sage.combinat.all__sagemath_graphs.Posets wins over sage.categories.all.Posets
+try:  # extra
+    from sage.all__sagemath_graphs import *
+except ImportError:
+    pass
+
+from .all__sagemath_modules import RR
 
 from sage.geometry.all__sagemath_polyhedra import *
 from sage.geometry.triangulation.all import *

@@ -8,4 +8,3 @@ cdef class LaurentSeries(AlgebraElement):
     cdef _normalize(self)
     cpdef _add_(self, other)
     cpdef _mul_(self, other)
-

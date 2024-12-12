@@ -80,7 +80,6 @@ from sage.misc.cachefunc import cached_method
 from sage.misc.superseded import deprecation
 
 
-import sage.libs.ntl.all as ntl
 import sage.rings.abc
 import sage.rings.complex_mpfr
 from sage.rings.polynomial.polynomial_element import Polynomial
@@ -102,10 +101,6 @@ from sage.categories.number_fields import NumberFields
 
 from sage.rings.ring import Ring
 from sage.misc.latex import latex_variable_name
-
-from .unit_group import UnitGroup
-from .class_group import ClassGroup
-from .class_group import SClassGroup
 
 from sage.structure.element import Element
 from sage.structure.parent import Parent
@@ -131,6 +126,8 @@ from sage.rings.real_mpfr import RR
 from sage.interfaces.abc import GapElement
 
 lazy_import('sage.libs.gap.element', 'GapElement', as_='LibGapElement')
+lazy_import('sage.rings.number_field.unit_group', 'UnitGroup')
+lazy_import('sage.rings.number_field.class_group', ['ClassGroup', 'SClassGroup'])
 lazy_import('sage.rings.universal_cyclotomic_field', 'UniversalCyclotomicFieldElement')
 
 
@@ -213,7 +210,6 @@ from sage.structure.factory import UniqueFactory
 from . import number_field_element
 from . import number_field_element_quadratic
 from .number_field_ideal import NumberFieldIdeal, NumberFieldFractionalIdeal
-from sage.libs.pari.all import pari, pari_gen
 
 from sage.rings.rational_field import QQ
 from sage.rings.integer_ring import ZZ
@@ -223,6 +219,11 @@ from sage.rings.real_double import RDF
 from sage.rings.complex_double import CDF
 from sage.rings.real_lazy import RLF, CLF
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
+
+try:
+    from sage.libs.pari.all import pari, pari_gen
+except ImportError:
+    pari_gen = ()
 
 
 def NumberField(polynomial, name=None, check=True, names=None, embedding=None,
@@ -1763,8 +1764,8 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
             return self._convert_from_str(s.replace('!', ''))
         elif isinstance(x, str):
             return self._convert_from_str(x)
-        elif (isinstance(x, (tuple, list)) or
-              isinstance(x, sage.modules.free_module_element.FreeModuleElement)):
+        elif isinstance(x, (tuple, list,
+                            sage.modules.free_module_element.FreeModuleElement)):
             if len(x) != self.relative_degree():
                 raise ValueError("Length must be equal to the degree of this number field")
             base = self.base_ring()
@@ -6773,6 +6774,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         try:
             return (self.__polynomial_ntl, self.__denominator_ntl)
         except AttributeError:
+            import sage.libs.ntl.all as ntl
             self.__denominator_ntl = ntl.ZZ()
             den = self.polynomial().denominator()
             self.__denominator_ntl.set_from_sage_int(ZZ(den))

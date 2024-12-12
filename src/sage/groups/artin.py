@@ -730,14 +730,14 @@ class FiniteTypeArtinGroup(ArtinGroup):
         ....:              ret.add(prod(w))
         ....:     return ret
         sage: A = ArtinGroup(['B',3])                                                   # needs sage.rings.number_field
-        sage: GA = A.cayley_graph(elements=ball(A, 4), generators=A.gens()); GA         # needs sage.rings.number_field
+        sage: GA = A.cayley_graph(elements=ball(A, 4), generators=A.gens()); GA         # needs sage.combinat sage.graphs sage.rings.number_field
         Digraph on 32 vertices
 
     Since the Artin group has nontrivial relations, this graph contains less
     vertices than the one associated to the free group (which is a tree)::
 
         sage: F = FreeGroup(3)
-        sage: GF = F.cayley_graph(elements=ball(F, 4), generators=F.gens()); GF         # needs sage.combinat
+        sage: GF = F.cayley_graph(elements=ball(F, 4), generators=F.gens()); GF         # needs sage.combinat sage.graphs sage.combinat
         Digraph on 40 vertices
     """
     def delta(self):

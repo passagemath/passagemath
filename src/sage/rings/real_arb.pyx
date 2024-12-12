@@ -462,6 +462,8 @@ class RealBallField(UniqueRepresentation, sage.rings.abc.RealBallField):
             False
             sage: RealBallField().has_coerce_map_from(RR)
             False
+
+            sage: # needs sage.rings.number_field
             sage: K = QuadraticField(2, embedding=AA(2).sqrt())
             sage: RBF.has_coerce_map_from(K)
             True
@@ -472,6 +474,7 @@ class RealBallField(UniqueRepresentation, sage.rings.abc.RealBallField):
 
         Check that the map goes through the ``_arb_`` method::
 
+            sage: # needs sage.rings.number_field
             sage: RBF.coerce_map_from(QuadraticField(2, embedding=AA(2).sqrt()))
             Conversion via _arb_ method map:
             ...
@@ -1353,6 +1356,7 @@ cdef class RealBall(RingElement):
             ...
             ValueError: unsupported string format
 
+            sage: # needs sage.rings.number_field
             sage: NF.<a> = QuadraticField(2, embedding=AA(2).sqrt())
             sage: RBF.coerce(a)
             [1.414213562373095 +/- ...e-16]

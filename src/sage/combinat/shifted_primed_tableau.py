@@ -2117,6 +2117,7 @@ class ShiftedPrimedTableaux_shape(ShiftedPrimedTableaux):
     We compare this implementation with the `q(n)`-crystal
     on (tensor products) of letters::
 
+        sage: # needs sage.graphs
         sage: tableau_crystal = crystals.ShiftedPrimedTableaux([4,1], 3)
         sage: tableau_digraph = tableau_crystal.digraph()
         sage: c = crystals.Letters(['Q', 3])

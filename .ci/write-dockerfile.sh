@@ -120,12 +120,16 @@ EOF
                 1|y*|Y*)
                     ;;
                 *)
+                    if [ -n "$DEVTOOLSET_PRE" ]; then
+                        cat <<EOF
+RUN $INSTALL $DEVTOOLSET_PRE
+EOF
+                    fi
                     cat <<EOF
-RUN $INSTALL centos-release-scl
-RUN $INSTALL devtoolset-$DEVTOOLSET
+RUN $INSTALL $DEVTOOLSET
 EOF
             esac
-            RUN="RUN . /opt/rh/devtoolset-$DEVTOOLSET/enable && "
+            RUN="RUN . /opt/rh/$DEVTOOLSET/enable && "
         fi
         ;;
     gentoo*)
@@ -275,10 +279,10 @@ cat <<EOF
 FROM with-system-packages AS bootstrapped
 #:bootstrapping:
 RUN rm -rf /new /sage/.git
-$ADD Makefile VERSION.txt COPYING.txt condarc.yml README.md bootstrap bootstrap-conda configure.ac sage .homebrew-build-env tox.ini Pipfile.m4 .gitignore /new/
+$ADD Makefile VERSION.txt COPYING.txt condarc.yml README.md bootstrap bootstrap-conda configure.ac sage .homebrew-build-env tox.ini .gitignore /new/
 $ADD config/config.rpath /new/config/config.rpath
 $ADD src/bin /new/src/bin
-$ADD src/Pipfile.m4 src/pyproject.toml src/requirements.txt.m4 src/VERSION.txt /new/src/
+$ADD src/pyproject.toml src/requirements.txt.m4 src/VERSION.txt /new/src/
 $ADD m4 /new/m4
 $ADD pkgs /new/pkgs
 $ADD build /new/build

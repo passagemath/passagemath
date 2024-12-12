@@ -92,8 +92,8 @@ class SymmetricFunctionAlgebra_dual(classical.SymmetricFunctionAlgebra_classical
             sage: e = SymmetricFunctions(QQ).e()
             sage: f = e.dual_basis(prefix='m', basis_name="Forgotten symmetric functions"); f
             Symmetric Functions over Rational Field in the Forgotten symmetric functions basis
-            sage: TestSuite(f).run(elements=[f[1,1]+2*f[2], f[1]+3*f[1,1]])
-            sage: TestSuite(f).run() # long time (11s on sage.math, 2011)
+            sage: TestSuite(f).run(elements=[f[1,1]+2*f[2], f[1]+3*f[1,1]])             # needs lrcalc
+            sage: TestSuite(f).run() # long time (11s on sage.math, 2011)               # needs lrcalc
 
         This class defines canonical coercions between ``self`` and
         ``self^*``, as follow:

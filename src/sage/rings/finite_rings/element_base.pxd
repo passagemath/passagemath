@@ -10,4 +10,3 @@ cdef class FinitePolyExtElement(FiniteRingElement):
 
 cdef class Cache_base(SageObject):
     cpdef FinitePolyExtElement fetch_int(self, number)
-

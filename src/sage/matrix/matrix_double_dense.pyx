@@ -446,6 +446,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
 
         And over the complex numbers.  ::
 
+            sage: # needs sage.symbolic
             sage: B = matrix(CDF, 3, [x + x^2*I for x in range(9)]); B
             [         0.0  1.0 + 1.0*I  2.0 + 4.0*I]
             [ 3.0 + 9.0*I 4.0 + 16.0*I 5.0 + 25.0*I]
@@ -2442,8 +2443,8 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
         r"""
         Return ``True`` if the matrix is (skew-)Hermitian.
 
-        For internal purposes. This function is used in `is_hermitian`
-        and `is_skew_hermitian` functions.
+        For internal purposes. This function is used in ``is_hermitian``
+        and ``is_skew_hermitian`` functions.
 
         INPUT:
 

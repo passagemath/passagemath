@@ -627,6 +627,7 @@ def fieldI(field):
     EXAMPLES::
 
         sage: from sage.schemes.curves.zariski_vankampen import fieldI
+        sage: x = polygen(QQ, 'x')
         sage: p = QQ[x](x^5 + 2 * x + 1)
         sage: a0 = p.roots(QQbar, multiplicities=False)[0]
         sage: F0.<a> = NumberField(p, embedding=a0)
@@ -1424,6 +1425,7 @@ def conjugate_positive_form(braid):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.braiding
         sage: from sage.schemes.curves.zariski_vankampen import conjugate_positive_form
         sage: B = BraidGroup(4)
         sage: t = B((1, 3, 2, -3, 1, 1))
@@ -1600,7 +1602,7 @@ def fundamental_group_from_braid_mon(bm, degree=None,
         sage: g = fundamental_group_from_braid_mon(bm, projective=True); g      # needs sirocco
         Finitely presented group
         < x1, x3 | x3^2*x1^2, x1^-1*x3^-1*x1*x3^-1*x1^-1*x3^-1 >
-        sage: print(g.order(), g.abelian_invariants())                         # needs sirocco
+        sage: print(g.order(), g.abelian_invariants())                          # needs sirocco
         12 (4,)
         sage: B2 = BraidGroup(2)
         sage: bm = [B2(3 * [1])]

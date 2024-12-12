@@ -13,14 +13,9 @@ License
 Public domain
 
 
-SPKG Maintainers
-----------------
-
--  Miguel Marco
-
-
 Upstream Contact
 ----------------
 
 Miguel Marco (mmarco@unizar.es)
 
+https://github.com/miguelmarco/libhomfly

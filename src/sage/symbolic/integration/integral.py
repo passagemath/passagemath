@@ -29,7 +29,7 @@ available_integrators['maxima'] = external.maxima_integrator
 available_integrators['sympy'] = external.sympy_integrator
 available_integrators['mathematica_free'] = external.mma_free_integrator
 available_integrators['fricas'] = external.fricas_integrator
-available_integrators['giac'] = external.giac_integrator
+available_integrators['giac'] = external.libgiac_integrator
 available_integrators['libgiac'] = external.libgiac_integrator
 
 ######################################################
@@ -63,7 +63,7 @@ class IndefiniteIntegral(BuiltinFunction):
             sage: # needs sage.libs.giac
             sage: Ex = (1-2*x^(1/3))^(3/4)/x
             sage: integrate(Ex, x, algorithm='giac')  # long time
-            4*(-2*x^(1/3) + 1)^(3/4) + 6*arctan((-2*x^(1/3) + 1)^(1/4)) - 3*log((-2*x^(1/3) + 1)^(1/4) + 1) + 3*log(abs((-2*x^(1/3) + 1)^(1/4) - 1))
+            4*(-2*x^(1/3) + 1)^(3/4) + 6*arctan((-2*x^(1/3) + 1)^(1/4)) - 3*log(abs((-2*x^(1/3) + 1)^(1/4) + 1)) + 3*log(abs((-2*x^(1/3) + 1)^(1/4) - 1))
 
         Check for :issue:`29833`::
 
@@ -213,7 +213,9 @@ class DefiniteIntegral(BuiltinFunction):
             sage: ex = 1/max_symbolic(x, 1)**2
             sage: integral(ex, x, 0, 2, algorithm='giac')
             3/2
-            sage: integral(1/max_symbolic(x, 1)**2, x, 0, oo, algorithm='giac')
+            sage: result = integral(1/max_symbolic(x, 1)**2, x, 0, oo, algorithm='giac')
+            ...
+            sage: result
             2
         """
         # The automatic evaluation routine will try these integrators
@@ -477,9 +479,9 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
       - ``'fricas'`` -- use FriCAS (the optional fricas spkg has to be installed)
 
-      - ``'giac'`` -- use Giac
+      - ``'giac'`` -- use libgiac
 
-      - ``'libgiac'`` -- use libgiac
+      - ``'libgiac'`` -- use libgiac (alias for ``'giac'``)
 
     To prevent automatic evaluation, use the ``hold`` argument.
 
@@ -698,10 +700,15 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
         sage: integrate(f(x), x, 1, 2, algorithm='sympy')                               # needs sympy
         -1/2*pi + arctan(8) + arctan(5) + arctan(2) + arctan(1/2)
 
-    Using Giac to integrate the absolute value of a trigonometric expression::
+    Using Giac to integrate the absolute value of a trigonometric
+    expression. If Giac is installed, this will be attempted
+    automatically in the event that Maxima is unable to integrate the
+    expression::
 
         sage: # needs sage.libs.giac
-        sage: integrate(abs(cos(x)), x, 0, 2*pi, algorithm='giac')
+        sage: result = integrate(abs(cos(x)), x, 0, 2*pi, algorithm='giac')
+        ...
+        sage: result
         4
         sage: result = integrate(abs(cos(x)), x, 0, 2*pi)
         ...

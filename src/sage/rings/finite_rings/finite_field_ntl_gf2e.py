@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-ntl
+# sage.doctest: needs sage.rings.finite_rings
 """
 Finite fields of characteristic 2
 """

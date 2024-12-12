@@ -204,8 +204,8 @@ def enumerate_hypergeometric_data(d, weight=None):
     EXAMPLES::
 
         sage: from sage.modular.hypergeometric_motive import enumerate_hypergeometric_data as enum
-        sage: l = [H for H in enum(6, weight=2) if H.hodge_numbers()[0] == 1]
-        sage: len(l)
+        sage: l = [H for H in enum(6, weight=2) if H.hodge_numbers()[0] == 1]           # needs sage.combinat
+        sage: len(l)                                                                    # needs sage.combinat
         112
     """
     bound = 2 * d * d  # to make sure that phi(n) <= d
@@ -238,7 +238,7 @@ def possible_hypergeometric_data(d, weight=None) -> list:
     EXAMPLES::
 
         sage: from sage.modular.hypergeometric_motive import possible_hypergeometric_data as P
-        sage: [len(P(i,weight=2)) for i in range(1, 7)]
+        sage: [len(P(i, weight=2)) for i in range(1, 7)]                                # needs sage.combinat
         [0, 0, 10, 30, 93, 234]
     """
     return list(enumerate_hypergeometric_data(d, weight))
@@ -688,7 +688,7 @@ class HypergeometricData:
         Count ``alpha``'s at most ``x`` minus ``beta``'s at most ``x``.
 
         This function is used to compute the weight and the Hodge numbers.
-        With `flip_beta` set to ``True``, replace each `b` in `\beta`
+        With ``flip_beta`` set to ``True``, replace each `b` in `\beta`
         with `1-b`.
 
         .. SEEALSO::
@@ -1320,7 +1320,7 @@ class HypergeometricData:
         If left unspecified, `prec` is set to the minimum `p`-adic precision
         needed to recover the Euler factor.
 
-        If `cache_p` is ``True``, then the function caches an intermediate
+        If ``cache_p`` is ``True``, then the function caches an intermediate
         result which depends only on `p` and `f`. This leads to a significant
         speedup when iterating over `t`.
 
@@ -1938,13 +1938,13 @@ class HypergeometricData:
         P = PolynomialRing(ZZ, 'T')
         if t.numerator() % p == 0 or t.denominator() % p == 0:
             ans = P.one()
-            for m in set(j for i in self.cyclotomic_data() for j in i):
+            for m in {j for i in self.cyclotomic_data() for j in i}:
                 ans *= self.euler_factor_tame_contribution(t, p, m, deg)
             if deg is not None:
                 ans = ans.truncate(deg + 1)
             return ans
         # now p is good, or p is tame and t is a p-adic unit
-        elif (t-1) % p == 0:
+        elif (t - 1) % p == 0:
             typ = "mult"
             d = self.degree() - 1
             if d % 2:

@@ -6745,7 +6745,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.graphs
             sage: PR = RootSystem(['A',4]).root_lattice().positive_roots()
             sage: m = matrix([x.to_vector() for x in PR]).transpose()
             sage: M = Matroid(m)
@@ -6754,7 +6754,7 @@ cdef class Matroid(SageObject):
             sage: M.is_k_closed(4)
             True
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.graphs
             sage: PR = RootSystem(['D',4]).root_lattice().positive_roots()
             sage: m = matrix([x.to_vector() for x in PR]).transpose()
             sage: M = Matroid(m)

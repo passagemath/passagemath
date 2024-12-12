@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.rings.real_mpfr sage.symbolic
 r"""
 sine-Gordon Y-system plotter
 

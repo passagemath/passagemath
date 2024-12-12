@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-combinat
+# sage_setup: distribution = sagemath-categories
 r"""
 `q`-Analogues
 """
@@ -12,14 +12,16 @@ r"""
 # (at your option) any later version.
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
-from sage.combinat.dyck_word import DyckWords
 from sage.combinat.partition import _Partitions
 from sage.misc.cachefunc import cached_function
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.laurent_polynomial_ring import LaurentPolynomialRing
 from sage.rings.polynomial.polynomial_ring import polygen
 from sage.structure.element import parent
+
+lazy_import('sage.combinat.dyck_word', 'DyckWords')
 
 
 def q_int(n, q=None):
@@ -217,8 +219,10 @@ def q_binomial(n, k, q=None, algorithm='auto'):
         5
         sage: q_binomial(4,2,-1)
         2
-        sage: q_binomial(4,2,3.14)
+        sage: q_binomial(4,2,3.14)                                                      # needs sage.rings.real_mpfr
         152.030056160000
+
+        sage: # needs sage.rings.finite_rings
         sage: R = GF((5, 2), 't')
         sage: t = R.gen(0)
         sage: q_binomial(6, 3, t)
@@ -227,9 +231,11 @@ def q_binomial(n, k, q=None, algorithm='auto'):
     We can also do this for more complicated objects such as matrices or
     symmetric functions::
 
-        sage: q_binomial(4,2,matrix([[2,1],[-1,3]]))
+        sage: q_binomial(4, 2, matrix([[2,1],[-1,3]]))                                  # needs sage.modules
         [ -6  84]
         [-84  78]
+
+        sage: # needs sage.combinat sage.modules
         sage: Sym = SymmetricFunctions(QQ)
         sage: s = Sym.schur()
         sage: q_binomial(4,1, s[2]+s[1])
@@ -297,6 +303,7 @@ def q_binomial(n, k, q=None, algorithm='auto'):
 
     Check that the parent is always the parent of ``q``::
 
+        sage: # needs sage.rings.number_field
         sage: R.<q> = CyclotomicField(3)
         sage: for algo in ["naive", "cyclotomic"]:
         ....:     for n in range(4):
@@ -526,6 +533,7 @@ def qt_catalan_number(n):
 
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.combinat.q_analogues import qt_catalan_number
         sage: qt_catalan_number(1)
         1
@@ -539,7 +547,7 @@ def qt_catalan_number(n):
     The `q,t`-Catalan number of index `n` is only defined for `n` a
     nonnegative integer (:issue:`11411`)::
 
-        sage: qt_catalan_number(-2)
+        sage: qt_catalan_number(-2)                                                     # needs sage.combinat
         Traceback (most recent call last):
         ...
         ValueError: argument (-2) must be a nonnegative integer

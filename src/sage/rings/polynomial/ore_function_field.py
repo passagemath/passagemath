@@ -479,7 +479,7 @@ class OreFunctionField(Parent, UniqueRepresentation):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.finite_rings
+            sage: # needs sage.libs.singular sage.rings.finite_rings
             sage: R.<t> = ZZ[]
             sage: sigma = R.hom([t+1])
             sage: S.<x> = OrePolynomialRing(R, sigma)

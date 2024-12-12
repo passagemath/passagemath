@@ -96,6 +96,7 @@ from sage.combinat import permutation
 from sage.combinat.combinatorial_map import combinatorial_map
 from sage.combinat.composition import Composition, Compositions
 from sage.combinat.integer_vector import IntegerVectors, integer_vectors_nk_fast_iter
+from sage.combinat.partition import Partitions
 from sage.combinat.subset import powerset
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
 from sage.misc.misc_c import prod
@@ -3801,8 +3802,8 @@ class Tableau(ClonableList, metaclass=InheritComparisonClasscallMetaclass):
             [((0, 2), 2), ((0, 3), 3), ((0, 5), 4), ((1, 3), 1), ((1, 5), 2), ((2, 4), 1)]
 
             sage: B = crystals.Tableaux("A4", shape=[4,3,2,1])                          # needs sage.modules
-            sage: t = B[31].to_tableau()                                                # needs sage.modules
-            sage: sorted(t._segments().items())                                         # needs sage.modules
+            sage: t = B[31].to_tableau()                                                # needs sage.graphs sage.modules
+            sage: sorted(t._segments().items())                                         # needs sage.graphs sage.modules
             [((0, 5), 3), ((1, 4), 2), ((2, 4), 1)]
         """
         segments = {}
@@ -3833,8 +3834,8 @@ class Tableau(ClonableList, metaclass=InheritComparisonClasscallMetaclass):
             6
 
             sage: B = crystals.Tableaux("A4", shape=[4,3,2,1])                          # needs sage.modules
-            sage: t = B[31].to_tableau()                                                # needs sage.modules
-            sage: t.seg()                                                               # needs sage.modules
+            sage: t = B[31].to_tableau()                                                # needs sage.graphs sage.modules
+            sage: t.seg()                                                               # needs sage.graphs sage.modules
             3
         """
         return len(self._segments())
@@ -3861,8 +3862,8 @@ class Tableau(ClonableList, metaclass=InheritComparisonClasscallMetaclass):
             3
 
             sage: B = crystals.Tableaux("A4", shape=[4,3,2,1])                          # needs sage.modules
-            sage: t = B[32].to_tableau()                                                # needs sage.modules
-            sage: t.flush()                                                             # needs sage.modules
+            sage: t = B[32].to_tableau()                                                # needs sage.graphs sage.modules
+            sage: t.flush()                                                             # needs sage.graphs sage.modules
             4
         """
         for i in range(len(self)-1):
@@ -5629,14 +5630,7 @@ class Tableaux(UniqueRepresentation, Parent):
                    values=dict(list='as a list', diagram='as a Young diagram'),
                    alias=dict(array='diagram', ferrers_diagram='diagram', young_diagram='diagram'),
                    case_sensitive=False)
-        convention = dict(default='English',
-                          description='Sets the convention used for displaying tableaux and partitions',
-                          values=dict(
-                              English='use the English convention',
-                              French='use the French convention',
-                              Russian='use the Russian convention',
-                          ),
-                          case_sensitive=False)
+        convention = {'link_to': (Partitions.options, 'convention')}
         notation = dict(alt_name='convention')
 
     def _element_constructor_(self, t):
@@ -5842,7 +5836,7 @@ class SemistandardTableaux(Tableaux):
     OUTPUT:
 
     - The appropriate class, after checking basic consistency tests. (For
-      example, specifying ``eval`` implies a value for `max_entry`).
+      example, specifying ``eval`` implies a value for ``max_entry``).
 
     A semistandard tableau is a tableau whose entries are positive integers,
     which are weakly increasing in rows and strictly increasing down columns.

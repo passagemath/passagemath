@@ -384,7 +384,7 @@ class PolynomialQuotientRing_generic(QuotientRing_generic):
         1
 
     The test suite passes. However, we have to skip the test for its elements,
-    since `an_element` has been cached in the call above and its class does not
+    since ``an_element`` has been cached in the call above and its class does not
     match the new category's element class anymore::
 
         sage: TestSuite(Q).run(skip=['_test_elements'])                                 # needs sage.rings.number_field
@@ -2361,7 +2361,7 @@ class PolynomialQuotientRing_domain(PolynomialQuotientRing_generic, IntegralDoma
         Over a finite field, the corresponding field extension is not a
         number field::
 
-            sage: # needs sage.modules sage.rings.finite_rings
+            sage: # needs sage.modules sage.rings.finite_rings sage.rings.number_field
             sage: R.<x> = GF(25, 'a')['x']
             sage: S.<a> = R.quo(x^3 + 2*x + 1)
             sage: F, g, h = S.field_extension('b')

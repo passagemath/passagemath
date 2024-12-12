@@ -579,6 +579,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
+                    sage: # needs lrcalc
                     sage: N = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = N.ribbon()
                     sage: x = R.an_element(); x
@@ -1046,6 +1047,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                 Testing the `\pi(f^{\ast}) = \pi(f)` relation noticed above::
 
+                    sage: # needs lrcalc
                     sage: NSym = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = NSym.R()
                     sage: all( R(I).star_involution().to_symmetric_function()
@@ -1171,6 +1173,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                 Testing the `\pi(\omega(f)) = \omega(\pi(f))` relation noticed
                 above::
 
+                    sage: # needs lrcalc
                     sage: NSym = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = NSym.R()
                     sage: all( R(I).omega_involution().to_symmetric_function()
@@ -1497,7 +1500,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                     ....:             if x != y:
                     ....:                 return False
                     ....:     return True
-                    sage: testpi(3)
+                    sage: testpi(3)                                                     # needs lrcalc
                     True
 
                 TESTS::
@@ -1516,6 +1519,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                     sage: S(L[2].left_padded_kronecker_product(S[1,1]))
                     S[1, 1] + 2*S[1, 1, 1] + S[1, 1, 1, 1] - S[1, 1, 2]
 
+                    sage: # needs sage.rings.number_field
                     sage: NSym = NonCommutativeSymmetricFunctions(CyclotomicField(12))
                     sage: S = NSym.S()
                     sage: L = NSym.L()
@@ -1681,6 +1685,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
+                    sage: # needs lrcalc
                     sage: N = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = N.ribbon()
                     sage: x = R.an_element(); x
@@ -1732,6 +1737,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
+                    sage: # needs sage.graphs
                     sage: N = NonCommutativeSymmetricFunctions(QQ)
                     sage: S = N.complete()
                     sage: S[2].to_ncsym()
@@ -1747,7 +1753,6 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                      + m{{1, 2, 3}} + 1/2*m{{1, 3}, {2}}
                     sage: S[[]].to_ncsym()
                     m{}
-
                     sage: R = N.ribbon()
                     sage: x = R.an_element(); x
                     2*R[] + 2*R[1] + 3*R[1, 1]
@@ -1756,7 +1761,6 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                     sage: R[2,1].to_ncsym()
                     1/3*m{{1}, {2}, {3}} + 1/6*m{{1}, {2, 3}}
                      + 2/3*m{{1, 2}, {3}} + 1/6*m{{1, 3}, {2}}
-
                     sage: Phi = N.Phi()
                     sage: Phi[1,2].to_ncsym()
                     m{{1}, {2, 3}} + m{{1, 2, 3}}
@@ -1826,6 +1830,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
+                    sage: # needs sage.graphs
                     sage: N = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = N.ribbon()
                     sage: x = 2*R[[]] + 2*R[1] + 3*R[2]
@@ -1837,12 +1842,12 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                     2*R[] + 2*R[1] + 3*R[1, 1]
                     sage: x.to_fqsym()
                     2*F[] + 2*F[1] + 3*F[2, 1]
-
                     sage: y = N.Phi()[1,2]
                     sage: y.to_fqsym()
                     F[1, 2, 3] - F[1, 3, 2] + F[2, 1, 3] + F[2, 3, 1]
                      - F[3, 1, 2] - F[3, 2, 1]
 
+                    sage: # needs sage.graphs
                     sage: S = NonCommutativeSymmetricFunctions(QQ).S()
                     sage: S[2].to_fqsym()
                     F[1, 2]
@@ -2667,6 +2672,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc
                 sage: R = NonCommutativeSymmetricFunctions(QQ).R()
                 sage: R.to_symmetric_function_on_basis(Composition([3,1,1]))
                 s[3, 1, 1]
@@ -3080,6 +3086,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: S = NonCommutativeSymmetricFunctions(QQ).S()
                 sage: S._to_symmetric_group_algebra_on_basis(Composition([1,2]))
                 [1, 2, 3] + [2, 1, 3] + [3, 1, 2]

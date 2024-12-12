@@ -1749,6 +1749,7 @@ def singular_function(name):
         sage: singular_list(resolution)
         [[(-2*y, 2, y + 1, 0), (0, -2, x - 1, 0), (x*y - y, -y + 1, 1, -y), (x^2 + 1, -x - 1, -1, -x)], [(-x - 1, y - 1, 2*x, -2*y)], [(0)]]
 
+        sage: # needs sage.combinat
         sage: A.<x,y> = FreeAlgebra(QQ, 2)
         sage: P.<x,y> = A.g_algebra({y*x:-x*y})
         sage: I= Sequence([x*y,x+y], check=False, immutable=True)

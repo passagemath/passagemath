@@ -22,4 +22,6 @@ for general installation instructions.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-cddlib`` provides an interface to cddlib.
+This pip-installable distribution ``sagemath-cddlib`` provides an interface to
+`cddlib <https://github.com/cddlib/cddlib>`_, the library for polyhedral representation
+conversion using the double description method.

@@ -84,7 +84,7 @@ cdef class dfs_manager:
     """
     Data structure to manage depth-first search.
 
-    Such a structure is created and managed by an instance of `WeilPolynomials_iter`.
+    Such a structure is created and managed by an instance of ``WeilPolynomials_iter``.
     There is generally no need for a user to manipulate it directly.
     """
     cdef int d
@@ -157,8 +157,8 @@ cdef class dfs_manager:
         """
         Count nodes.
 
-        This method should not be called directly. Instead, use the `node_count` method
-        of an instance of `WeilPolynomials` or `WeilPolynomials_iter`.
+        This method should not be called directly. Instead, use the ``node_count`` method
+        of an instance of ``WeilPolynomials`` or ``WeilPolynomials_iter``.
 
         TESTS::
 
@@ -180,7 +180,7 @@ cdef class dfs_manager:
         Advance the tree exhaustion.
 
         This method should not be called directly. Instead, use the iterator
-        `WeilPolynomials_iter` or the iterable `WeilPolynomials`.
+        ``WeilPolynomials_iter`` or the iterable ``WeilPolynomials``.
 
         TESTS::
 
@@ -465,6 +465,8 @@ class WeilPolynomials():
         sage: ans1.sort()
         sage: l = [(x-1)^2, (x+1)^2] + [cyclotomic_polynomial(n,x)
         ....:     for n in range(3, 2*d*d) if euler_phi(n) <= d]
+
+        sage: # needs sage.combinat
         sage: w = WeightedIntegerVectors(d, [i.degree() for i in l])
         sage: ans2 = [prod(l[i]^v[i] for i in range(len(l))) for v in w]
         sage: ans2.sort()

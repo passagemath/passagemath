@@ -153,6 +153,7 @@ include sage/rings/padics/local_generic.p*
 include sage/rings/padics/local_generic_element.p*
 include sage/rings/padics/precision_error.p*
 include sage/rings/padics/misc.p*
+include sage/rings/padics/pow_computer.p*
 
 include sage/rings/polynomial/polynomial_ring.p*
 include sage/rings/polynomial/polynomial_ring_constructor.p*
@@ -221,8 +222,11 @@ include sage/combinat/combinat_cython.p*
 include sage/combinat/combination.p*
 include sage/combinat/combinatorial_map.p*
 include sage/combinat/composition.p*
+include sage/combinat/partition.p*
+include sage/combinat/partitions.p*
 include sage/combinat/permutation.p*
 include sage/combinat/permutation_cython.p*
+include sage/combinat/q_analogues.p*
 include sage/combinat/ranker.py                                         # for sage.sets.finite_set_map_cy
 include sage/combinat/subset.p*
 include sage/combinat/tools.p*

@@ -953,7 +953,7 @@ class AlgebraicScheme_subscheme_projective(AlgebraicScheme_subscheme):
             sage: R = PolynomialRing(Qp(3), 'a,b,c')
             sage: P.<a, b, c> = ProjectiveSpace(2, R.base_ring())
             sage: X = P.subscheme(R.ideal(a*a + 2*b*b + 3*c*c))
-            sage: X.dual()
+            sage: X.dual()                                                              # needs sage.libs.singular
             Traceback (most recent call last):
             ...
             NotImplementedError: base ring must be QQ or a finite field

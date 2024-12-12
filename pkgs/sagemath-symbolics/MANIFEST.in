@@ -31,8 +31,6 @@ include sage/matrix/matrix_symbolic_*.p*
 
 #graft sage/libs/giac
 graft sage/libs/pynac
-include sage/libs/ecl.p*
-include sage/libs/eclsig.h
 
 include sage/interfaces/fricas.p*
 include sage/interfaces/magma*.p*

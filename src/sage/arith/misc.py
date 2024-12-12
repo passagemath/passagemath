@@ -106,7 +106,7 @@ def algdep(z, degree, known_bits=None, use_bits=None, known_digits=None,
     compute a 200-bit approximation to `sqrt(2)` which is wrong in the
     33'rd bit::
 
-        sage: # needs sage.libs.pari sage.rings.real_mpfr
+        sage: # needs fpylll sage.libs.pari sage.rings.real_mpfr
         sage: z = sqrt(RealField(200)(2)) + (1/2)^33
         sage: p = algdep(z, 4); p
         227004321085*x^4 - 216947902586*x^3 - 99411220986*x^2 + 82234881648*x - 211871195088
@@ -3980,7 +3980,7 @@ def multinomial(*ks):
         618970023101454657175683075
         sage: multinomial(Composition([1, 3]))
         4
-        sage: multinomial(Partition([4, 2]))                                            # needs sage.combinat
+        sage: multinomial(Partition([4, 2]))
         15
 
     TESTS:
@@ -6272,7 +6272,7 @@ def gauss_sum(char_value, finite_field):
 
     EXAMPLES::
 
-        sage: # needs sage.libs.pari sage.rings.number_field
+        sage: # needs sage.libs.gap sage.libs.pari sage.rings.number_field
         sage: from sage.arith.misc import gauss_sum
         sage: F = GF(5); q = 5
         sage: zq = UniversalCyclotomicField().zeta(q - 1)
@@ -6376,6 +6376,7 @@ def dedekind_psi(N):
     N = Integer(N)
     return Integer(N * prod(1 + 1 / p for p in N.prime_divisors()))
 
+
 def smooth_part(x, base):
     r"""
     Given an element ``x`` of a Euclidean domain and a factor base ``base``,
@@ -6424,6 +6425,7 @@ def smooth_part(x, base):
             fs.append((p,v))
     from sage.structure.factorization import Factorization
     return Factorization(fs)
+
 
 def coprime_part(x, base):
     r"""

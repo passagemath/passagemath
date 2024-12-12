@@ -75,12 +75,12 @@ def bernmm_bern_rat(long k, int num_threads=1):
     TESTS::
 
         sage: lst1 = [ bernoulli(2*k, algorithm='bernmm', num_threads=2) for k in [2932, 2957, 3443, 3962, 3973] ]
-        sage: lst2 = [ bernoulli(2*k, algorithm='pari') for k in [2932, 2957, 3443, 3962, 3973] ]
-        sage: lst1 == lst2
+        sage: lst2 = [ bernoulli(2*k, algorithm='pari') for k in [2932, 2957, 3443, 3962, 3973] ]   # needs sage.libs.pari
+        sage: lst1 == lst2                                                                          # needs sage.libs.pari
         True
         sage: [ Zmod(101)(t) for t in lst1 ]
         [77, 72, 89, 98, 86]
-        sage: [ Zmod(101)(t) for t in lst2 ]
+        sage: [ Zmod(101)(t) for t in lst2 ]                                                        # needs sage.libs.pari
         [77, 72, 89, 98, 86]
     """
     cdef Rational x
@@ -115,6 +115,7 @@ def bernmm_bern_modp(long p, long k):
 
         sage: from sage.rings.bernmm import bernmm_bern_modp
 
+        sage: # needs sage.libs.flint
         sage: bernoulli(0) % 5, bernmm_bern_modp(5, 0)
         (1, 1)
         sage: bernoulli(1) % 5, bernmm_bern_modp(5, 1)
@@ -131,7 +132,7 @@ def bernmm_bern_modp(long p, long k):
         (0, 0)
 
         sage: p = 10000019; k = 1000
-        sage: bernoulli(k) % p
+        sage: bernoulli(k) % p                                                          # needs sage.libs.flint
         1972762
         sage: bernmm_bern_modp(p, k)
         1972762
@@ -142,7 +143,7 @@ def bernmm_bern_modp(long p, long k):
     arithmetic from :issue:`19874`::
 
         sage: from sage.rings.bernmm import bernmm_bern_modp
-        sage: bernmm_bern_modp(7, 128) == bernoulli(128) % 7
+        sage: bernmm_bern_modp(7, 128) == bernoulli(128) % 7                            # needs sage.libs.flint
         True
     """
     cdef long x

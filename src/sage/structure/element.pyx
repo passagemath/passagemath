@@ -3291,11 +3291,11 @@ cdef class CommutativeRingElement(RingElement):
             x
             sage: f = x^2 - 4*x + 4; f.sqrt(all=True)
             [x - 2, -x + 2]
-            sage: sqrtx = x.sqrt(name='y'); sqrtx
+            sage: sqrtx = x.sqrt(name='y'); sqrtx                                       # needs sage.libs.singular
             y
-            sage: sqrtx^2
+            sage: sqrtx^2                                                               # needs sage.libs.singular
             x
-            sage: x.sqrt(all=true, name='y')
+            sage: x.sqrt(all=true, name='y')                                            # needs sage.libs.singular
             [y, -y]
             sage: x.sqrt(extend=False, all=True)
             []
@@ -3336,11 +3336,11 @@ cdef class CommutativeRingElement(RingElement):
             sage: R.<x> = QQ[]
             sage: a = 2*(x+1)^2 / (2*(x-1)^2); a.sqrt()
             (x + 1)/(x - 1)
-            sage: sqrtx=(1/x).sqrt(name='y'); sqrtx
+            sage: sqrtx = (1/x).sqrt(name='y'); sqrtx                                   # needs sage.libs.singular
             y
-            sage: sqrtx^2
+            sage: sqrtx^2                                                               # needs sage.libs.singular
             1/x
-            sage: (1/x).sqrt(all=true, name='y')
+            sage: (1/x).sqrt(all=true, name='y')                                        # needs sage.libs.singular
             [y, -y]
             sage: (1/x).sqrt(extend=False, all=True)
             []
@@ -4661,7 +4661,7 @@ def coerce_binop(method):
 
     EXAMPLES:
 
-    Sparse polynomial rings uses `@coerce_binop` on `gcd`::
+    Sparse polynomial rings uses ``@coerce_binop`` on ``gcd``::
 
         sage: S.<x> = PolynomialRing(ZZ, sparse=True)
         sage: f = x^2
@@ -4695,7 +4695,7 @@ def coerce_binop(method):
         sage: h.gcd(f, 'modular')
         1
 
-    We demonstrate a small class using `@coerce_binop` on a method::
+    We demonstrate a small class using ``@coerce_binop`` on a method::
 
         sage: from sage.structure.element import coerce_binop
         sage: class MyRational(Rational):

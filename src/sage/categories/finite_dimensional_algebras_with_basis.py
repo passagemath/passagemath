@@ -1521,8 +1521,8 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.groups sage.modules
-                    sage: S.cell_module(Partition([2,1]))                               # needs sage.combinat sage.groups sage.modules
+                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.graphs sage.groups sage.modules
+                    sage: S.cell_module(Partition([2,1]))                               # needs sage.combinat sage.graphs sage.groups sage.modules
                     Cell module indexed by [2, 1] of Cellular basis of
                      Symmetric group algebra of order 3 over Rational Field
                 """

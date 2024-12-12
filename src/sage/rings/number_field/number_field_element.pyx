@@ -73,8 +73,6 @@ from sage.structure.element cimport parent
 from sage.structure.element import canonical_coercion, coerce_binop
 from sage.structure.parent cimport Parent
 
-from sage.libs.pari import pari
-
 QQ = sage.rings.rational_field.QQ
 ZZ = sage.rings.integer_ring.ZZ
 Integer_sage = sage.rings.integer.Integer
@@ -591,6 +589,7 @@ cdef class NumberFieldElement(NumberFieldElement_base):
             sage: a._pari_polynomial('c')
             c
         """
+        from sage.libs.pari import pari
         f = pari(self._coefficients()).Polrev()
         if f.poldegree() > 0:
             alpha = self.number_field()._pari_absolute_structure()[1]
@@ -1799,6 +1798,8 @@ cdef class NumberFieldElement(NumberFieldElement_base):
         from sage.rings.number_field.number_field_rel import NumberField_relative
         if not isinstance(L, NumberField_relative) or L.base_field() != K:
             raise ValueError("L (=%s) must be a relative number field with base field K (=%s) in rnfisnorm" % (L, K))
+
+        from sage.libs.pari import pari
 
         rnf_data = K.pari_rnfnorm_data(L, proof=proof)
         x, q = pari.rnfisnorm(rnf_data, self)

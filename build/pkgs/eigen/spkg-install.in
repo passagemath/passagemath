@@ -1,0 +1,2 @@
+cd src
+sdh_install Eigen unsupported "$SAGE_LOCAL/include/"

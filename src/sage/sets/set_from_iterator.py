@@ -261,9 +261,9 @@ class EnumeratedSetFromIterator(Parent):
         EXAMPLES::
 
             sage: from sage.sets.set_from_iterator import EnumeratedSetFromIterator
-            sage: P = Partitions(12, min_part=2, max_part=5)                            # needs sage.combinat
-            sage: E = EnumeratedSetFromIterator(P.__iter__)                             # needs sage.combinat
-            sage: P([5,5,2]) in E                                                       # needs sage.combinat
+            sage: P = Partitions(12, min_part=2, max_part=5)
+            sage: E = EnumeratedSetFromIterator(P.__iter__)
+            sage: P([5,5,2]) in E
             True
         """
         return any(x == y for y in self)

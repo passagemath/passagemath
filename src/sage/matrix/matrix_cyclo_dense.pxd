@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-flint
 from sage.libs.gmp.types cimport mpz_t
 from sage.matrix.matrix_dense cimport Matrix_dense
 from sage.matrix.matrix_rational_dense cimport Matrix_rational_dense
@@ -14,4 +14,3 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
 
     cdef _randomize_rational_column_unsafe(Matrix_cyclo_dense self,
         Py_ssize_t col, mpz_t nump1, mpz_t denp1, distribution=?)
-
