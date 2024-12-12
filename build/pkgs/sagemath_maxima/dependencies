@@ -1,0 +1,2 @@
+$(SAGE_ROOT)/pkgs/sagemath-maxima/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-maxima/MANIFEST.in $(PYTHON) maxima | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build
+

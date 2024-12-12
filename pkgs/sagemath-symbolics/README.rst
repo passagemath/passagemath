@@ -22,8 +22,8 @@ for general installation instructions.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable distribution `passagemath-symbolics` is a distribution of a part of the Sage Library.
-It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`).
+This pip-installable distribution ``passagemath-symbolics`` is a distribution of a part of the Sage Library.
+It provides a small subset of the modules of the Sage library ("sagelib", ``passagemath-standard``).
 
 
 What is included
@@ -42,38 +42,9 @@ What is included
 
 * `Hyperbolic Geometry <https://doc.sagemath.org/html/en/reference/hyperbolic_geometry/index.html>`_
 
-* Binary wheels on PyPI contain prebuilt copies of `Maxima <https://doc.sagemath.org/html/en/reference/spkg/maxima.html>`_
-  and `Embeddable Common Lisp <https://doc.sagemath.org/html/en/reference/spkg/ecl.html>`_
-
 
 Examples
 --------
-
-Starting Maxima from the command line::
-
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics" sage -maxima
-
-Using the pexpect interface to Maxima::
-
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics[test]" ipython
-
-    In [1]: from sage.interfaces.maxima import maxima
-
-    In [2]: maxima('1+1')
-    Out[2]: 2
-
-Using the library interface to Maxima::
-
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics[test]" ipython
-
-    In [1]: from sage.interfaces.maxima_lib import maxima_lib
-
-    In [2]: F = maxima_lib('x^5 - y^5').factor()
-
-    In [3]: F.display2d()
-    Out[3]:
-                               4      3    2  2    3      4
-                   - (y - x) (y  + x y  + x  y  + x  y + x )
 
 Using `SageManifolds <https://sagemanifolds.obspm.fr/>`_::
 
