@@ -33,7 +33,10 @@ from sage.rings.complex_mpfr cimport ComplexNumber
 from sage.rings.complex_interval cimport ComplexIntervalFieldElement
 from sage.rings.complex_double cimport ComplexDoubleElement
 
-from cypari2.gen cimport Gen
+try:
+    from cypari2.gen import Gen
+except ImportError:
+    Gen = ()
 
 
 cdef inline int return_real(mpfi_ptr im) noexcept:
