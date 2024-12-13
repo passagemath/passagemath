@@ -91,8 +91,8 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
         """
         EXAMPLES::
 
-            sage: P.<x> = GF(32003)[]
-            sage: f = 24998*x^2 + 29761*x + 2252
+            sage: P.<x> = GF(32003)[]                                                   # needs sage.rings.finite_rings
+            sage: f = 24998*x^2 + 29761*x + 2252                                        # needs sage.rings.finite_rings
         """
         cdef long nlen
 
@@ -249,6 +249,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: P.<x> = GF(32003)[]
             sage: f = 24998*x^2 + 29761*x + 2252
             sage: f[100]
@@ -370,6 +371,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: N = 10001
             sage: K = Zmod(10001)
             sage: P.<x> = PolynomialRing(K)
@@ -810,6 +812,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         Test that factorization can be interrupted::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = PolynomialRing(GF(65537), implementation="FLINT")
             sage: f = R.random_element(9973) * R.random_element(10007)
             sage: alarm(0.5); f.factor()
@@ -819,6 +822,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         Test zero polynomial::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = PolynomialRing(GF(65537), implementation="FLINT")
             sage: R.zero().factor()
             Traceback (most recent call last):
