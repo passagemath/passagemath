@@ -5,6 +5,7 @@
 # distutils: library_dirs = NTL_LIBDIR
 # distutils: extra_link_args = NTL_LIBEXTRA
 # distutils: language = c++
+# sage.doctest: needs sage.libs.pari
 r"""
 Bernoulli numbers modulo p
 
