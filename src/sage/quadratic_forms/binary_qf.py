@@ -929,12 +929,12 @@ class BinaryQF(SageObject):
             sage: g = f.reduced_form(algorithm=a)
             sage: g.is_reduced()
             True
-            sage: g.is_equivalent(f)
+            sage: g.is_equivalent(f)                                                    # needs sage.libs.pari
             True
             sage: g,M = f.reduced_form(transformation=True, algorithm=a)
             sage: g.is_reduced()
             True
-            sage: g.is_equivalent(f)
+            sage: g.is_equivalent(f)                                                    # needs sage.libs.pari
             True
             sage: f * M == g
             True

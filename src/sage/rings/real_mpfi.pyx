@@ -3618,7 +3618,7 @@ cdef class RealIntervalFieldElement(RingElement):
             sage: RIF(1/3, 1/2).simplest_rational(high_open=True)
             1/3
             sage: phi = ((RealIntervalField(500)(5).sqrt() + 1)/2)
-            sage: phi.simplest_rational() == fibonacci(362)/fibonacci(361)
+            sage: phi.simplest_rational() == fibonacci(362)/fibonacci(361)              # needs sage.libs.pari
             True
         """
         if mpfr_equal_p(&self.value.left, &self.value.right):

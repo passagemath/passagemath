@@ -56,7 +56,6 @@ from sage.libs.ntl.ntl_ZZX cimport ntl_ZZX
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
 
-from sage.libs.pari.all import pari, pari_gen
 from sage.structure.factorization import Factorization
 
 from sage.rings.fraction_field_element import FractionFieldElement
@@ -76,6 +75,11 @@ from sage.rings.real_mpfr cimport RealNumber
 from sage.rings.real_mpfi cimport RealIntervalFieldElement
 
 from sage.rings.polynomial.evaluation_flint cimport fmpz_poly_evaluation_mpfr, fmpz_poly_evaluation_mpfi
+
+try:
+    from sage.libs.pari.all import pari, pari_gen
+except ImportError:
+    pari_gen = ()
 
 
 cdef class Polynomial_integer_dense_flint(Polynomial):
@@ -179,6 +183,7 @@ cdef class Polynomial_integer_dense_flint(Polynomial):
 
         Coercion from PARI polynomial::
 
+            sage: # needs sage.libs.pari
             sage: f = R([-1, 2, 5]); f
             5*x^2 + 2*x - 1
             sage: type(f)
@@ -1484,9 +1489,9 @@ cdef class Polynomial_integer_dense_flint(Polynomial):
 
             sage: t = PolynomialRing(ZZ,"t").gen()
             sage: f = t^3 + 3*t - 17
-            sage: pari(f)
+            sage: pari(f)                                                               # needs sage.libs.pari
             t^3 + 3*t - 17
-            sage: f.__pari__(variable='y')
+            sage: f.__pari__(variable='y')                                              # needs sage.libs.pari
             y^3 + 3*y - 17
         """
         if variable is None:
@@ -1562,9 +1567,9 @@ cdef class Polynomial_integer_dense_flint(Polynomial):
 
             sage: R.<x> = ZZ[]
             sage: f = (x^2-2)*(x^5-3)^2
-            sage: f._factor_pari()
+            sage: f._factor_pari()                                                      # needs sage.libs.pari
             (x^2 - 2) * (x^5 - 3)^2
-            sage: (1234567898765432123456789876543212345678987*f)._factor_pari()
+            sage: (1234567898765432123456789876543212345678987*f)._factor_pari()        # needs sage.libs.pari
             1234567898765432123456789876543212345678987 * (x^2 - 2) * (x^5 - 3)^2
         """
         return Polynomial.factor(self) # uses pari for integers over ZZ
@@ -1665,6 +1670,7 @@ cdef class Polynomial_integer_dense_flint(Polynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = ZZ['x']
             sage: f = -3*x*(x-2)*(x-9) + x
             sage: f.factor_mod(3)
@@ -1674,7 +1680,6 @@ cdef class Polynomial_integer_dense_flint(Polynomial):
             Traceback (most recent call last):
             ...
             ArithmeticError: factorization of 0 is not defined
-
             sage: f = 2 * x * (x - 2) * (x - 9)
             sage: f.factor_mod(7)
             (2) * x * (x + 5)^2

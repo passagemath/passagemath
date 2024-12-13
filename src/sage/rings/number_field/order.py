@@ -92,8 +92,6 @@ from .number_field_element_quadratic import OrderElement_quadratic
 
 from sage.rings.monomials import monomials
 
-from sage.libs.pari.all import pari
-
 
 def quadratic_order_class_number(disc):
     r"""
@@ -110,6 +108,8 @@ def quadratic_order_class_number(disc):
     ALGORITHM: Either :pari:`qfbclassno` or :pari:`quadclassunit`,
     depending on the size of the discriminant.
     """
+    from sage.libs.pari.all import pari
+
     # cutoffs from PARI documentation
     if disc < -10**25 or disc > 10**10:
         h = pari.quadclassunit(disc)[0]

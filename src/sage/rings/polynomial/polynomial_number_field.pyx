@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-flint
+# sage.doctest: needs sage.rings.number_field
 r"""
 Univariate polynomials over number fields
 

@@ -1062,6 +1062,7 @@ cdef class Polyring_FpT_coerce(RingHomomorphism):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<t> = GF(next_prime(2000))[]
             sage: K = R.fraction_field() # indirect doctest
         """
@@ -1262,6 +1263,7 @@ cdef class FpT_Polyring_section(Section):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<t> = GF(next_prime(2000))[]
             sage: K = R.fraction_field()
             sage: R(K.gen(0)) # indirect doctest
@@ -1378,6 +1380,7 @@ cdef class Fp_FpT_coerce(RingHomomorphism):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<t> = GF(next_prime(3000))[]
             sage: K = R.fraction_field() # indirect doctest
         """
@@ -1562,6 +1565,7 @@ cdef class FpT_Fp_section(Section):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<t> = GF(next_prime(2000))[]
             sage: K = R.fraction_field()
             sage: GF(next_prime(2000))(K(127)) # indirect doctest
@@ -1697,6 +1701,7 @@ cdef class ZZ_FpT_coerce(RingHomomorphism):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<t> = GF(next_prime(3000))[]
             sage: K = R.fraction_field() # indirect doctest
         """

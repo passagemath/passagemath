@@ -3356,7 +3356,7 @@ class PolynomialRing_dense_mod_n(PolynomialRing_commutative):
 
         EXAMPLES::
 
-            sage: # needs sage.libs.ntl
+            sage: # needs sage.libs.ntl sage.libs.pari
             sage: R.<t> = GF(2)[]
             sage: k.<a> = R.residue_field(t^3 + t + 1); k
             Residue field in a
@@ -3380,7 +3380,7 @@ class PolynomialRing_dense_mod_n(PolynomialRing_commutative):
 
         Non-maximal ideals are not accepted::
 
-            sage: # needs sage.libs.ntl
+            sage: # needs sage.libs.ntl sage.libs.pari
             sage: R.residue_field(t^2 + 1)
             Traceback (most recent call last):
             ...
