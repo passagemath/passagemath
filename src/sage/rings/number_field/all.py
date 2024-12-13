@@ -15,6 +15,6 @@ lazy_import('sage.rings.number_field.totallyreal_rel',
 lazy_import('sage.rings.number_field.totallyreal_rel',
             'enumerate_totallyreal_fields_rel')
 
-from sage.rings.number_field.unit_group import UnitGroup
+lazy_import('sage.rings.number_field.unit_group', 'UnitGroup')
 
 del lazy_import
