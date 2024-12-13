@@ -4161,7 +4161,7 @@ cdef class Matrix(sage.structure.element.Matrix):
             sage: A = matrix(QQbar, [[-I, 2+I], [-2+I, 0]])                             # needs sage.rings.number_field
             sage: A._is_hermitian(skew=False, tolerance=0)                              # needs sage.rings.number_field
             False
-            sage: A._is_hermitian(skew=True, tolerance=0)
+            sage: A._is_hermitian(skew=True, tolerance=0)                               # needs sage.libs.pari
             True
         """
         key = ("_is_hermitian", skew, tolerance)

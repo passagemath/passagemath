@@ -15328,8 +15328,8 @@ cdef class Matrix(Matrix1):
         EXAMPLES::
 
             sage: A = Matrix([[1,-1/2,0], [-1/2,1,-1/2], [0,-1/2,1]])
-            sage: B = A.principal_square_root()
-            sage: A == B^2
+            sage: B = A.principal_square_root()                                         # needs libs.pari
+            sage: A == B^2                                                              # needs libs.pari
             True
         """
         from sage.matrix.special import diagonal_matrix
