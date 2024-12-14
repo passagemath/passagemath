@@ -140,7 +140,7 @@ from $distutils_core import setup
 from $distutils_extension import Extension
 from sys import exit
 modules = list((Extension("config_check_distutils", list(("conftest.c",))),))
-setup(name="config_check_distutils", ext_modules=modules)
+setup(name="config_check_distutils", packages=(), py_modules=(), ext_modules=modules)
 exit(0)
 EOF
 ])
@@ -195,7 +195,7 @@ from $distutils_extension import Extension
 from sys import exit
 modules = list((Extension("config_check_distutils_cxx", list(("conftest.cpp",)),
                           extra_compile_args=list(("-std=c++11",)), language="c++"),))
-setup(name="config_check_distutils_cxx", ext_modules=modules)
+setup(name="config_check_distutils_cxx", packages=(), py_modules=(), ext_modules=modules)
 exit(0)
 EOF
 ])
