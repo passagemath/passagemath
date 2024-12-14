@@ -7,6 +7,7 @@ graft   sage/libs/linbox
 recursive-include sage/libs/ntl *.pxd *.pxi *.h                                 # FIXME
 include sage/matrix/matrix_integer_dense*.p*
 include sage/matrix/matrix_integer_sparse.p*
+include sage/matrix/matrix_integer_pari.p*      # FIXME
 include sage/matrix/matrix_modn_dense_*.p*
 include sage/matrix/matrix_modn_dense_.p*
 include sage/matrix/matrix_modn_sparse.p*
