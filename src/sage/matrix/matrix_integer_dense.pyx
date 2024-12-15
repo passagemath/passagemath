@@ -1297,7 +1297,12 @@ cdef class Matrix_integer_dense(Matrix_dense):
         cdef Polynomial_integer_dense_flint g
 
         if algorithm is None:
-            algorithm = 'linbox'
+            try:
+                from .matrix_integer_linbox import _charpoly_linbox
+            except ImportError:
+                algorithm = 'flint'
+            else:
+                algorithm = 'linbox'
 
         cache_key = 'charpoly_%s' % algorithm
         g = self.fetch(cache_key)
@@ -1383,7 +1388,12 @@ cdef class Matrix_integer_dense(Matrix_dense):
         cdef Polynomial_integer_dense_flint g
 
         if algorithm is None:
-            algorithm = 'linbox'
+            try:
+                from .matrix_integer_linbox import _minpoly_linbox
+            except ImportError:
+                algorithm = 'generic'
+            else:
+                algorithm = 'linbox'
 
         key = 'minpoly_%s'%(algorithm)
         g = self.fetch(key)
@@ -2558,12 +2568,22 @@ cdef class Matrix_integer_dense(Matrix_dense):
                 if h < 100:
                     algorithm = 'pari'
                 else:
-                    algorithm = 'padic'
+                    try:
+                        from .matrix_integer_iml import _rational_kernel_iml
+                    except ImportError:
+                        algorithm = 'flint'
+                    else:
+                        algorithm = 'padic'
             elif self._nrows <= self._ncols + 3:
                 # the padic algorithm is much better for bigger
                 # matrices if there are nearly more columns than rows
                 # (that is its forte)
-                algorithm = 'padic'
+                try:
+                    from .matrix_integer_iml import _rational_kernel_iml
+                except ImportError:
+                    algorithm = 'flint'
+                else:
+                    algorithm = 'padic'
             else:
                 algorithm = 'pari'
 
