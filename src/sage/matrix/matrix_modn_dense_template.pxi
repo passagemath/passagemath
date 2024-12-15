@@ -1552,6 +1552,7 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.linbox
             sage: A = random_matrix(GF(19), 10, 10)
             sage: B = copy(A)
             sage: char_p = A._charpoly_linbox()
@@ -1559,7 +1560,6 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
             True
             sage: B == A              # A is not modified
             True
-
             sage: min_p = A.minimal_polynomial(proof=True)
             sage: min_p.divides(char_p)
             True
@@ -1768,6 +1768,7 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.linbox
             sage: A = random_matrix(GF(7), 10, 20)
             sage: B = copy(A)
             sage: A._echelonize_linbox()
