@@ -663,6 +663,67 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         return r
 
+    def _rank_linbox(self):
+        r"""
+        Compute the rank using linbox.
+
+        The result is not cached contrarily to the method ``rank``.
+
+        EXAMPLES::
+
+            sage: M = MatrixSpace(ZZ, 3, sparse=True)
+            sage: m = M([1,0,1,0,2,0,2,0,2])
+            sage: m._rank_linbox()
+            2
+
+        TESTS::
+
+            sage: MatrixSpace(ZZ, 0, 0, sparse=True)()._rank_linbox()
+            0
+            sage: MatrixSpace(ZZ, 1, 0, sparse=True)()._rank_linbox()
+            0
+            sage: MatrixSpace(ZZ, 0, 1, sparse=True)()._rank_linbox()
+            0
+            sage: MatrixSpace(ZZ, 1, 1, sparse=True)()._rank_linbox()
+            0
+        """
+        from .matrix_integer_sparse_linbox import _rank_linbox
+        return _rank_linbox(self)
+
+    def _det_linbox(self):
+        r"""
+        Return the determinant computed with LinBox.
+
+        .. NOTE::
+
+            This method is much slower than converting to a dense matrix and
+            computing the determinant there. There is not much point in making
+            it available. See :issue:`28318`.
+
+        EXAMPLES::
+
+            sage: M = MatrixSpace(ZZ, 2, 2, sparse=True)
+            sage: M([2,0,1,1])._det_linbox()
+            2
+
+        TESTS::
+
+            sage: MatrixSpace(ZZ, 0, 0, sparse=True)()._det_linbox()
+            1
+            sage: MatrixSpace(ZZ, 1, 1, sparse=True)()._det_linbox()
+            0
+
+            sage: m = diagonal_matrix(ZZ, [2] * 46)
+            sage: m._det_linbox() == 2**46
+            True
+
+            sage: m = diagonal_matrix(ZZ, [3] * 100)
+            sage: m._det_linbox() == 3**100
+            True
+        """
+        from .matrix_integer_sparse_linbox import _det_linbox
+        return _det_linbox(self)
+
     def charpoly(self, var='x', algorithm=None):
         r"""
         Return the characteristic polynomial of this matrix.
@@ -719,6 +780,26 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
         self.cache('charpoly', g)
         return g
 
+    def _charpoly_linbox(self, var='x'):
+        r"""
+        Compute the charpoly using LinBox.
+
+        EXAMPLES::
+
+            sage: m = matrix(ZZ, 2, [2,1,1,1], sparse=True)
+            sage: m._charpoly_linbox()
+            x^2 - 3*x + 1
+
+        TESTS::
+
+            sage: matrix(ZZ, 0, 0, sparse=True)._charpoly_linbox()
+            1
+            sage: matrix(ZZ, 1, 1, sparse=True)._charpoly_linbox()
+            x
+        """
+        from .matrix_integer_sparse_linbox import _charpoly_linbox
+        return _charpoly_linbox(self, var)
+
     def minpoly(self, var='x', algorithm=None):
         r"""
         Return the minimal polynomial of this matrix.
@@ -771,6 +852,26 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         self.cache('minpoly', g)
         return g
+
+    def _minpoly_linbox(self, var='x'):
+        r"""
+        Compute the minpoly using LinBox.
+
+        EXAMPLES::
+
+            sage: m = matrix(ZZ, 2, [2,1,1,1], sparse=True)
+            sage: m._minpoly_linbox()
+            x^2 - 3*x + 1
+
+        TESTS::
+
+            sage: matrix(ZZ, 0, 0, sparse=True)._minpoly_linbox()
+            1
+            sage: matrix(ZZ, 1, 1, sparse=True)._minpoly_linbox()
+            x
+        """
+        from .matrix_integer_sparse_linbox import _minpoly_linbox
+        return _minpoly_linbox(self, var)
 
     def _solve_right_nonsingular_square(self, B, algorithm=None, check_rank=False):
         r"""
@@ -853,3 +954,135 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
                 from sage.matrix.matrix_integer_sparse_linbox import _solve_vector_linbox
                 v, d = _solve_vector_linbox(self, B, algorithm)
                 return v / d
+
+    def _solve_vector_linbox(self, v, algorithm=None):
+        r"""
+        Return a pair ``(a, d)`` so that ``d * b = m * a``.
+
+        If there is no solution a :exc:`ValueError` is raised.
+
+        INPUT:
+
+        - ``b`` -- dense integer vector
+
+        - ``algorithm`` -- (optional) either ``None``, ``'dense_elimination'``,
+          ``'sparse_elimination'``, ``'wiedemann'`` or ``'blackbox'``
+
+        OUTPUT: a pair ``(a, d)`` consisting of
+
+        - ``a`` -- dense integer vector
+
+        - ``d`` -- integer
+
+        EXAMPLES::
+
+            sage: m = matrix(ZZ, 4, sparse=True)
+            sage: m[0,0] = m[1,2] = m[2,0] = m[3,3] = 2
+            sage: m[0,2] = m[1,1] = -1
+            sage: m[2,3] = m[3,0] = -3
+
+            sage: b0 = vector((1,1,1,1))
+            sage: m._solve_vector_linbox(b0)
+            ((-1, -7, -3, -1), 1)
+            sage: m._solve_vector_linbox(b0, 'dense_elimination')
+            ((-1, -7, -3, -1), 1)
+            sage: m._solve_vector_linbox(b0, 'sparse_elimination')
+            ((-1, -7, -3, -1), 1)
+            sage: m._solve_vector_linbox(b0, 'wiedemann')
+            ((-1, -7, -3, -1), 1)
+            sage: m._solve_vector_linbox(b0, 'blackbox')
+            ((-1, -7, -3, -1), 1)
+
+            sage: b1 = vector((1,2,3,4))
+            sage: m._solve_vector_linbox(b1)
+            ((-18, -92, -41, -17), 5)
+            sage: m._solve_vector_linbox(b1, 'dense_elimination')
+            ((-18, -92, -41, -17), 5)
+            sage: m._solve_vector_linbox(b1, 'sparse_elimination')
+            ((-18, -92, -41, -17), 5)
+            sage: m._solve_vector_linbox(b1, 'wiedemann')
+            ((-18, -92, -41, -17), 5)
+            sage: m._solve_vector_linbox(b1, 'blackbox')
+            ((-18, -92, -41, -17), 5)
+
+            sage: a1, d1 = m._solve_vector_linbox(b1)
+            sage: d1 * b1 == m * a1
+            True
+
+        TESTS::
+
+            sage: algos = ["default", "dense_elimination", "sparse_elimination",
+            ....:          "blackbox", "wiedemann"]
+            sage: for i in range(20):
+            ....:     dim = randint(1, 30)
+            ....:     M = MatrixSpace(ZZ, dim, sparse=True)
+            ....:     density = min(1, 4/dim)
+            ....:     m = M.random_element(density=density)
+            ....:     while m.rank() != dim:
+            ....:         m = M.random_element(density=density)
+            ....:     U = m.column_space().dense_module()
+            ....:     for algo in algos:
+            ....:         u, d = m._solve_vector_linbox(U.zero(), algorithm=algo)
+            ....:         assert u.is_zero()
+            ....:         b = U.random_element()
+            ....:         x, d = m._solve_vector_linbox(b, algorithm=algo)
+            ....:         assert m * x == d * b
+        """
+        from .matrix_integer_sparse_linbox import _solve_vector_linbox
+        return _solve_vector_linbox(self, v, algorithm)
+
+    def _solve_matrix_linbox(self, mat, algorithm=None):
+        r"""
+        Solve the equation ``A x = mat`` where ``A`` is this matrix.
+
+        EXAMPLES::
+
+            sage: m = matrix(ZZ, [[1,2],[1,0]], sparse=True)
+            sage: b = matrix(ZZ, 2, 4, [1,0,2,0,1,1,2,0], sparse=False)
+            sage: u, d = m._solve_matrix_linbox(b)
+            sage: u
+            [ 1  2  2  0]
+            [ 0 -1  0  0]
+            sage: m * u == b * diagonal_matrix(d)
+            True
+
+            sage: u, d = m._solve_matrix_linbox([[1,3,4],[0,1,0]])
+            sage: u
+            [0 1 0]
+            [1 1 2]
+            sage: d
+            (2, 1, 1)
+
+        Test input::
+
+            sage: m = matrix(ZZ, [[1,2],[1,0]], sparse=True)
+            sage: b = matrix(ZZ, 3, 3, range(9))
+            sage: m._solve_matrix_linbox(b)
+            Traceback (most recent call last):
+            ...
+            ValueError: wrong matrix dimension
+
+            sage: m._solve_matrix_linbox([[1,1],[2,3]], algorithm='hop')
+            Traceback (most recent call last):
+            ...
+            ValueError: unknown algorithm
+
+        TESTS::
+
+            sage: algos = ["default", "dense_elimination", "sparse_elimination",
+            ....:          "blackbox", "wiedemann"]
+
+            sage: for _ in range(10):
+            ....:     dim = randint(2, 10)
+            ....:     M = MatrixSpace(ZZ, dim, sparse=True)
+            ....:     m = M.random_element(density=min(1,10/dim))
+            ....:     while m.rank() != dim:
+            ....:         m = M.random_element(density=min(1,10/dim))
+            ....:     b = random_matrix(ZZ, dim, 7)
+            ....:     Mb = b.parent()
+            ....:     for algo in algos:
+            ....:         u, d = m._solve_matrix_linbox(b, algo)
+            ....:         assert m * u == b * diagonal_matrix(d)
+        """
+        from .matrix_integer_sparse_linbox import _solve_matrix_linbox
+        return _solve_matrix_linbox(self, mat, algorithm)

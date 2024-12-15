@@ -669,6 +669,37 @@ cdef class Matrix_integer_dense(Matrix_dense):
         """
         return self.is_square() and fmpz_mat_is_one(self._matrix)
 
+    def _multiply_linbox(self, Matrix_integer_dense right):
+        """
+        Multiply matrices over ZZ using linbox.
+
+        .. WARNING::
+
+           This is very slow right now, i.e., linbox is very slow.
+
+        EXAMPLES::
+
+            sage: A = matrix(ZZ, 2, 3, range(6))
+            sage: A * A.transpose()
+            [ 5 14]
+            [14 50]
+            sage: A._multiply_linbox(A.transpose())
+            [ 5 14]
+            [14 50]
+
+        TESTS:
+
+        This fixes a bug found in :issue:`17094`::
+
+            sage: A = identity_matrix(ZZ, 3)
+            sage: A._multiply_linbox(A)
+            [1 0 0]
+            [0 1 0]
+            [0 0 1]
+        """
+        from .matrix_integer_linbox import _multiply_linbox
+        return _multiply_linbox(self, right)
+
     def _multiply_classical(self, Matrix_integer_dense right):
         """
         EXAMPLES::
@@ -3589,6 +3620,22 @@ cdef class Matrix_integer_dense(Matrix_dense):
         self.cache('rank', r)
         return r
 
+    def _rank_linbox(self):
+        """
+        Compute the rank of this matrix using Linbox.
+
+        TESTS::
+
+            sage: matrix(ZZ, 4, 6, 0)._rank_linbox()
+            0
+            sage: matrix(ZZ, 3, 4, range(12))._rank_linbox()
+            2
+            sage: matrix(ZZ, 5, 10, [1+i+i^2 for i in range(50)])._rank_linbox()
+            3
+        """
+        from .matrix_integer_linbox import _rank_linbox
+        return _rank_linbox(self)
+
     def _rank_modp(self, p=46337):
         A = self._mod_int_c(p)
         return A.rank()
@@ -3763,6 +3810,41 @@ cdef class Matrix_integer_dense(Matrix_dense):
         self.cache('det', d)
         return d
 
+    def _det_linbox(self):
+        """
+        Compute the determinant of this matrix using Linbox.
+
+        TESTS::
+
+            sage: matrix(ZZ, 0)._det_linbox()
+            1
+        """
+        from .matrix_integer_linbox import _det_linbox
+        return _det_linbox(self)
+
+    def _det_pari(self, int flag=0):
+        """
+        Determinant of this matrix using Gauss-Bareiss. If (optional)
+        flag is set to 1, use classical Gaussian elimination.
+
+        For efficiency purposes, this det is computed entirely on the
+        PARI stack then the PARI stack is cleared. This function is
+        most useful for very small matrices.
+
+        EXAMPLES::
+
+            sage: matrix(ZZ, 0)._det_pari()
+            1
+            sage: matrix(ZZ, 0)._det_pari(1)
+            1
+            sage: matrix(ZZ, 3, [1..9])._det_pari()
+            0
+            sage: matrix(ZZ, 3, [1..9])._det_pari(1)
+            0
+        """
+        from .matrix_integer_pari import _det_pari
+        return _det_pari(self, flag)
+
     def _det_ntl(self):
         """
         Compute the determinant of this matrix using NTL.
@@ -3780,6 +3862,32 @@ cdef class Matrix_integer_dense(Matrix_dense):
         d = self._ntl_().determinant()
         sig_off()
         return Integer(d)
+
+    def _rational_kernel_iml(self):
+        """
+        Return the rational (left) kernel of this matrix.
+
+        OUTPUT:
+
+        A matrix ``K`` such that ``self * K = 0``, and the number of columns of
+        K equals the nullity of ``self``.
+
+        EXAMPLES::
+
+            sage: m = matrix(ZZ, 5, 5, [1+i+i^2 for i in range(25)])
+            sage: m._rational_kernel_iml()
+            [ 1  3]
+            [-3 -8]
+            [ 3  6]
+            [-1  0]
+            [ 0 -1]
+
+            sage: V1 = m._rational_kernel_iml().column_space().change_ring(QQ)
+            sage: V2 = m._rational_kernel_flint().column_space().change_ring(QQ)
+            sage: assert V1 == V2
+        """
+        from .matrix_integer_iml import _rational_kernel_iml
+        return _rational_kernel_iml(self)
 
     def _rational_kernel_flint(self):
         """
@@ -3823,6 +3931,51 @@ cdef class Matrix_integer_dense(Matrix_dense):
                 fmpz_set(fmpz_mat_entry(M._matrix, i, j), fmpz_mat_entry(M0, i, j))
         fmpz_mat_clear(M0)
         return M
+
+    def _invert_iml(self, use_nullspace=False, check_invertible=True):
+        """
+        Invert this matrix using IML. The output matrix is an integer
+        matrix and a denominator.
+
+        INPUT:
+
+        - ``self`` -- an invertible matrix
+
+        - ``use_nullspace`` -- boolean (default: ``False``); whether to
+          use nullspace algorithm, which is slower, but doesn't require
+          checking that the matrix is invertible as a precondition
+
+        - ``check_invertible`` -- boolean (default: ``True``); whether to
+          check that the matrix is invertible
+
+        OUTPUT: `A`, `d` such that ``A*self == d``
+
+        - ``A`` -- a matrix over ZZ
+
+        - ``d`` -- integer
+
+        ALGORITHM: Uses IML's `p`-adic nullspace function.
+
+        EXAMPLES::
+
+            sage: a = matrix(ZZ,3,[1,2,5, 3,7,8, 2,2,1])
+            sage: b, d = a._invert_iml(); b,d
+            (
+            [  9  -8  19]
+            [-13   9  -7]
+            [  8  -2  -1], 23
+            )
+            sage: a*b
+            [23  0  0]
+            [ 0 23  0]
+            [ 0  0 23]
+
+        AUTHORS:
+
+        - William Stein
+        """
+        from .matrix_integer_iml import _invert_iml
+        return _invert_iml(self, use_nullspace, check_invertible)
 
     def _invert_flint(self):
         """
@@ -4089,6 +4242,97 @@ cdef class Matrix_integer_dense(Matrix_dense):
             X = (X.base_ring() ** X.nrows())(X.list())
         verbose('finished solve_right via %s'%algorithm, t)
         return X
+
+    def _solve_iml(self, Matrix_integer_dense B, right=True):
+        """
+        Let A equal ``self`` be a square matrix. Given B return an integer
+        matrix C and an integer d such that ``self`` ``C*A == d*B`` if right is
+        False or ``A*C == d*B`` if right is True.
+
+        OUTPUT:
+
+        - ``C`` -- integer matrix
+
+        - ``d`` -- integer denominator
+
+        EXAMPLES::
+
+            sage: A = matrix(ZZ,4,4,[0, 1, -2, -1, -1, 1, 0, 2, 2, 2, 2, -1, 0, 2, 2, 1])
+            sage: B = matrix(ZZ,3,4, [-1, 1, 1, 0, 2, 0, -2, -1, 0, -2, -2, -2])
+            sage: C,d = A._solve_iml(B,right=False); C
+            [  6 -18 -15  27]
+            [  0  24  24 -36]
+            [  4 -12  -6  -2]
+
+        ::
+
+            sage: d
+            12
+
+        ::
+
+            sage: C*A == d*B
+            True
+
+        ::
+
+            sage: A = matrix(ZZ,4,4,[0, 1, -2, -1, -1, 1, 0, 2, 2, 2, 2, -1, 0, 2, 2, 1])
+            sage: B = matrix(ZZ,4,3, [-1, 1, 1, 0, 2, 0, -2, -1, 0, -2, -2, -2])
+            sage: C,d = A._solve_iml(B)
+            sage: C
+            [ 12  40  28]
+            [-12  -4  -4]
+            [ -6 -25 -16]
+            [ 12  34  16]
+
+        ::
+
+            sage: d
+            12
+
+        ::
+
+            sage: A*C == d*B
+            True
+
+        Test wrong dimensions::
+
+            sage: A = random_matrix(ZZ, 4, 4)
+            sage: B = random_matrix(ZZ, 2, 3)
+            sage: B._solve_iml(A)
+            Traceback (most recent call last):
+            ...
+            ValueError: self must be a square matrix
+            sage: A._solve_iml(B, right=False)
+            Traceback (most recent call last):
+            ...
+            ArithmeticError: B's number of columns must match self's number of rows
+            sage: A._solve_iml(B, right=True)
+            Traceback (most recent call last):
+            ...
+            ArithmeticError: B's number of rows must match self's number of columns
+
+        Check that this can be interrupted properly (:issue:`15453`)::
+
+            sage: A = random_matrix(ZZ, 2000, 2000)
+            sage: B = random_matrix(ZZ, 2000, 2000)
+            sage: t0 = walltime()
+            sage: alarm(2); A._solve_iml(B)  # long time
+            Traceback (most recent call last):
+            ...
+            AlarmInterrupt
+            sage: t = walltime(t0)
+            sage: t < 10 or t
+            True
+
+        ALGORITHM: Uses IML.
+
+        AUTHORS:
+
+        - Martin Albrecht
+        """
+        from .matrix_integer_iml import _solve_iml
+        return _solve_iml(self, B, right)
 
     def _solve_flint(self, Matrix_integer_dense B, right=True):
         """
@@ -5371,6 +5615,80 @@ cdef class Matrix_integer_dense(Matrix_dense):
         """
         from .matrix_integer_pari import _pari
         return _pari(self)
+
+    def _rank_pari(self):
+        """
+        Rank of this matrix, computed using PARI.  The computation is
+        done entirely on the PARI stack, then the PARI stack is
+        cleared.  This function is most useful for very small
+        matrices.
+
+        EXAMPLES::
+
+            sage: matrix(ZZ,3,[1..9])._rank_pari()
+            2
+        """
+        from .matrix_integer_pari import _rank_pari
+        return _rank_pari(self)
+
+    def _hnf_pari(self, int flag=0, bint include_zero_rows=True):
+        """
+        Hermite normal form of this matrix, computed using PARI.
+
+        INPUT:
+
+        - ``flag`` -- 0 (default), 1, 3 or 4 (see docstring for
+          ``pari.mathnf``)
+
+        - ``include_zero_rows`` -- boolean; if ``False``, do not include
+          any of the zero rows at the bottom of the matrix in the output
+
+        .. NOTE::
+
+            In no cases is the transformation matrix returned by this
+            function.
+
+        EXAMPLES::
+
+            sage: matrix(ZZ,3,[1..9])._hnf_pari()
+            [1 2 3]
+            [0 3 6]
+            [0 0 0]
+            sage: matrix(ZZ,3,[1..9])._hnf_pari(1)
+            [1 2 3]
+            [0 3 6]
+            [0 0 0]
+            sage: matrix(ZZ,3,[1..9])._hnf_pari(3)
+            [1 2 3]
+            [0 3 6]
+            [0 0 0]
+            sage: matrix(ZZ,3,[1..9])._hnf_pari(4)
+            [1 2 3]
+            [0 3 6]
+            [0 0 0]
+
+        Check that ``include_zero_rows=False`` works correctly::
+
+            sage: matrix(ZZ,3,[1..9])._hnf_pari(0, include_zero_rows=False)
+            [1 2 3]
+            [0 3 6]
+            sage: matrix(ZZ,3,[1..9])._hnf_pari(1, include_zero_rows=False)
+            [1 2 3]
+            [0 3 6]
+            sage: matrix(ZZ,3,[1..9])._hnf_pari(3, include_zero_rows=False)
+            [1 2 3]
+            [0 3 6]
+            sage: matrix(ZZ,3,[1..9])._hnf_pari(4, include_zero_rows=False)
+            [1 2 3]
+            [0 3 6]
+
+        Check that :issue:`12346` is fixed::
+
+            sage: pari('mathnf(Mat([0,1]), 4)')
+            [Mat(1), [1, 0; 0, 1]]
+        """
+        from .matrix_integer_pari import _hnf_pari
+        return _hnf_pari(self, flag, include_zero_rows)
 
     def p_minimal_polynomials(self, p, s_max=None):
         r"""

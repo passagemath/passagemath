@@ -2719,7 +2719,75 @@ cdef class Matrix_rational_dense(Matrix_dense):
         from .matrix_rational_pari import _pari
         return _pari(self)
 
-    def row(Matrix_rational_dense self, Py_ssize_t i, from_list=False):
+    def _det_pari(self, int flag=0):
+        """
+        Return the determinant of this matrix computed using pari.
+
+        EXAMPLES::
+
+            sage: matrix(QQ,3,[1..9])._det_pari()
+            0
+            sage: matrix(QQ,3,[1..9])._det_pari(1)
+            0
+            sage: matrix(QQ,3,[0]+[2..9])._det_pari()
+            3
+        """
+        from .matrix_rational_pari import _det_pari
+        return _det_pari(self, flag)
+
+    def _rank_pari(self):
+        """
+        Return the rank of this matrix computed using pari.
+
+        EXAMPLES::
+
+            sage: matrix(QQ,3,[1..9])._rank_pari()
+            2
+            sage: matrix(QQ, 0, 0)._rank_pari()
+            0
+        """
+        from .matrix_rational_pari import _rank_pari
+        return _rank_pari(self)
+
+    def _multiply_pari(self, Matrix_rational_dense right):
+        """
+        Return the product of ``self`` and ``right``, computed using PARI.
+
+        EXAMPLES::
+
+            sage: matrix(QQ,2,[1/5,-2/3,3/4,4/9])._multiply_pari(matrix(QQ,2,[1,2,3,4]))
+            [  -9/5 -34/15]
+            [ 25/12  59/18]
+
+        We verify that 0 rows or columns works::
+
+            sage: x = matrix(QQ,2,0); y = matrix(QQ,0,2); x*y
+            [0 0]
+            [0 0]
+            sage: matrix(ZZ, 0, 0) * matrix(QQ, 0, 5)
+            []
+        """
+        from .matrix_rational_pari import _multiply_pari
+        return _multiply_pari(self, right)
+
+    def _invert_pari(self):
+        """
+        Return the inverse of this matrix computed using PARI.
+
+        EXAMPLES::
+
+            sage: matrix(QQ,2,[1,2,3,4])._invert_pari()
+            [  -2    1]
+            [ 3/2 -1/2]
+            sage: matrix(QQ,2,[1,2,2,4])._invert_pari()
+            Traceback (most recent call last):
+            ...
+            PariError: impossible inverse in ginv: [1, 2; 2, 4]
+        """
+        from .matrix_rational_pari import _invert_pari
+        return _invert_pari(self)
+
+    def row(self, Py_ssize_t i, from_list=False):
         """
         Return the `i`-th row of this matrix as a dense vector.
 
