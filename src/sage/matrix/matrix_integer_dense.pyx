@@ -674,7 +674,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: A * A.transpose()
             [ 5 14]
             [14 50]
-            sage: A._multiply_linbox(A.transpose())
+            sage: A._multiply_linbox(A.transpose())                                     # needs sage.libs.linbox
             [ 5 14]
             [14 50]
 
@@ -683,7 +683,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         This fixes a bug found in :issue:`17094`::
 
             sage: A = identity_matrix(ZZ, 3)
-            sage: A._multiply_linbox(A)
+            sage: A._multiply_linbox(A)                                                 # needs sage.libs.linbox
             [1 0 0]
             [0 1 0]
             [0 0 1]
@@ -705,6 +705,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         TESTS::
 
+            sage: # needs sage.libs.linbox
             sage: from sage.matrix.matrix_integer_linbox import _multiply_linbox
             sage: for _ in range(100):
             ....:     nrows = randint(0, 10)
@@ -1252,14 +1253,14 @@ cdef class Matrix_integer_dense(Matrix_dense):
             x^2 - 3*x - 2
             sage: A.charpoly('y')
             y^2 - 3*y - 2
-            sage: A._cache['charpoly_linbox']
+            sage: A._cache['charpoly_linbox']                                           # needs sage.libs.linbox
             x^2 - 3*x - 2
 
         Test corner cases::
 
             sage: matrix([5]).charpoly('z', 'flint')
             z - 5
-            sage: matrix([5]).charpoly('z', 'linbox')
+            sage: matrix([5]).charpoly('z', 'linbox')                                   # needs sage.libs.linbox
             z - 5
             sage: matrix([5]).charpoly('z', 'generic')
             z - 5
@@ -1267,21 +1268,21 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
             sage: matrix([]).charpoly('y', 'flint')
             1
-            sage: matrix([]).charpoly('y', 'linbox')
+            sage: matrix([]).charpoly('y', 'linbox')                                    # needs sage.libs.linbox
             1
             sage: matrix([]).charpoly('y', 'generic')
             1
 
             sage: matrix([0]).charpoly('x', 'flint')
             x
-            sage: matrix([0]).charpoly('x', 'linbox')
+            sage: matrix([0]).charpoly('x', 'linbox')                                   # needs sage.libs.linbox
             x
             sage: matrix([0]).charpoly('x', 'generic')
             x
 
         Consistency on random inputs::
 
-            sage: for _ in range(100):
+            sage: for _ in range(100):                                                  # needs sage.libs.linbox
             ....:     dim = randint(1, 20)
             ....:     m  = random_matrix(ZZ, dim)
             ....:     m._clear_cache(); ans_flint = m.charpoly(algorithm='flint')
@@ -1340,7 +1341,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             x^3 - 105*x^2 - 630*x
 
             sage: A = Mat(ZZ, 6)([k^2 for k in range(36)])
-            sage: A.minpoly(algorithm='linbox')
+            sage: A.minpoly(algorithm='linbox')                                         # needs sage.libs.linbox
             x^4 - 2695*x^3 - 257964*x^2 + 1693440*x
             sage: A.minpoly(algorithm='generic')
             x^4 - 2695*x^3 - 257964*x^2 + 1693440*x
@@ -1356,24 +1357,24 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         Corner cases::
 
-            sage: matrix([5]).minpoly('z', 'linbox')
+            sage: matrix([5]).minpoly('z', 'linbox')                                    # needs sage.libs.linbox
             z - 5
             sage: matrix([5]).minpoly('z', 'generic')
             z - 5
 
-            sage: matrix([]).minpoly('y', 'linbox')
+            sage: matrix([]).minpoly('y', 'linbox')                                     # needs sage.libs.linbox
             1
             sage: matrix([]).minpoly('y', 'generic')
             1
 
-            sage: matrix(ZZ, 2).minpoly('x', 'linbox')
+            sage: matrix(ZZ, 2).minpoly('x', 'linbox')                                  # needs sage.libs.linbox
             x
             sage: matrix(ZZ, 2).minpoly('x', 'generic')
             x
 
         Consistency on random inputs::
 
-            sage: for _ in range(100):
+            sage: for _ in range(100):                                                  # needs sage.libs.linbox
             ....:     dim = randint(1, 20)
             ....:     m  = random_matrix(ZZ, dim)
             ....:     m._clear_cache(); ans_generic = m.minpoly(algorithm='generic')
@@ -1469,10 +1470,10 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
             sage: M = Matrix(ZZ, 2, 3, range(5,11))
             sage: N = Matrix(ZZ, 3, 2, range(15,21))
-            sage: M._multiply_multi_modular(N)
+            sage: M._multiply_multi_modular(N)                                          # needs sage.libs.linbox
             [310 328]
             [463 490]
-            sage: M._multiply_multi_modular(-N)
+            sage: M._multiply_multi_modular(-N)                                         # needs sage.libs.linbox
             [-310 -328]
             [-463 -490]
         """
@@ -1758,19 +1759,19 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         Illustrate using various algorithms.::
 
-            sage: matrix(ZZ,3,[1..9]).hermite_form(algorithm='pari')
+            sage: matrix(ZZ,3,[1..9]).hermite_form(algorithm='pari')                    # needs sage.libs.pari
             [1 2 3]
             [0 3 6]
             [0 0 0]
-            sage: matrix(ZZ,3,[1..9]).hermite_form(algorithm='pari0')
+            sage: matrix(ZZ,3,[1..9]).hermite_form(algorithm='pari0')                   # needs sage.libs.pari
             [1 2 3]
             [0 3 6]
             [0 0 0]
-            sage: matrix(ZZ,3,[1..9]).hermite_form(algorithm='pari4')
+            sage: matrix(ZZ,3,[1..9]).hermite_form(algorithm='pari4')                   # needs sage.libs.linbox
             [1 2 3]
             [0 3 6]
             [0 0 0]
-            sage: matrix(ZZ,3,[1..9]).hermite_form(algorithm='padic')
+            sage: matrix(ZZ,3,[1..9]).hermite_form(algorithm='padic')                   # needs sage.libs.linbox
             [1 2 3]
             [0 3 6]
             [0 0 0]
@@ -1809,7 +1810,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             ....:             (-1, 1, -1, -2, 1, -1, -1, -1, -1, 7),
             ....:             (-2, -1, -1, 1, 1, -2, 1, 0, 2, -4)]).stack(
             ....:             200 * identity_matrix(ZZ, 10))
-            sage: matrix(ZZ,m).hermite_form(algorithm='pari', include_zero_rows=False)
+            sage: matrix(ZZ,m).hermite_form(algorithm='pari', include_zero_rows=False)      # needs sage.libs.pari
             [  1   0   2   0  13   5   1 166  72  69]
             [  0   1   1   0  20   4  15 195  65 190]
             [  0   0   4   0  24   5  23  22  51 123]
@@ -1820,7 +1821,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             [  0   0   0   0   0   0   0 200   0   0]
             [  0   0   0   0   0   0   0   0 200   0]
             [  0   0   0   0   0   0   0   0   0 200]
-            sage: matrix(ZZ,m).hermite_form(algorithm='padic', include_zero_rows=False)
+            sage: matrix(ZZ,m).hermite_form(algorithm='padic', include_zero_rows=False)     # needs sage.libs.linbox
             [  1   0   2   0  13   5   1 166  72  69]
             [  0   1   1   0  20   4  15 195  65 190]
             [  0   0   4   0  24   5  23  22  51 123]
@@ -2476,6 +2477,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             ....:                 [0, 1, 0, 1, 9, 7],
             ....:                 [4, 7, 6, 5, 1, 4]])
 
+            sage: # needs sage.libs.pari
             sage: result = A._right_kernel_matrix(algorithm='pari')
             sage: result[0]
             'computed-pari-int'
@@ -2485,7 +2487,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: A*X.transpose() == zero_matrix(ZZ, 4, 2)
             True
 
-            sage: result = A._right_kernel_matrix(algorithm='padic')
+            sage: result = A._right_kernel_matrix(algorithm='padic')                        # needs sage.libs.linbox
             sage: result[0]
             'computed-iml-int'
             sage: X = result[1]; X
@@ -3564,6 +3566,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         TESTS::
 
+            sage: # needs sage.libs.linbox
             sage: matrix(ZZ, 4, 6, 0)._rank_linbox()
             0
             sage: matrix(ZZ, 3, 4, range(12))._rank_linbox()
@@ -3645,6 +3648,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         ::
 
+            sage: # needs sage.libs.linbox
             sage: A = matrix(ZZ,5,[1,2,3,4,5,4,6,3,2,1,7,9,7,5,2,1,4,6,7,8,3,2,4,6,7])
             sage: A.determinant(algorithm='linbox')
             Traceback (most recent call last):
@@ -3658,13 +3662,13 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         Try the other algorithms on the same example::
 
-            sage: A._clear_cache(); A.determinant(algorithm='padic')
+            sage: A._clear_cache(); A.determinant(algorithm='padic')                    # needs sage.libs.linbox
             -21
-            sage: A._clear_cache(); A.determinant(algorithm='pari')
+            sage: A._clear_cache(); A.determinant(algorithm='pari')                     # needs sage.libs.pari
             -21
             sage: A._clear_cache(); A.determinant(algorithm='ntl')
             -21
-            sage: A._clear_cache(); A.determinant(algorithm='padic')
+            sage: A._clear_cache(); A.determinant(algorithm='padic')                    # needs sage.libs.linbox
             -21
 
         A bigger example::
@@ -3688,6 +3692,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         Check consistency::
 
+            sage: # needs sage.libs.linbox sage.libs.pari
             sage: all(matrix(ZZ, 0).det(algorithm=algo).is_one() for algo in ['flint', 'padic', 'pari', 'ntl'])
             True
             sage: for _ in range(100):
@@ -3754,7 +3759,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         TESTS::
 
-            sage: matrix(ZZ, 0)._det_linbox()
+            sage: matrix(ZZ, 0)._det_linbox()                                           # needs sage.libs.linbox
             1
         """
         from .matrix_integer_linbox import _det_linbox
@@ -3771,6 +3776,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: matrix(ZZ, 0)._det_pari()
             1
             sage: matrix(ZZ, 0)._det_pari(1)
@@ -3789,6 +3795,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.ntl
             sage: matrix(ZZ, 0)._det_ntl()
             1
             sage: matrix(ZZ, 3, [1..9])._det_ntl()
