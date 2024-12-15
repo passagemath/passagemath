@@ -609,7 +609,7 @@ class DiscreteValuation(DiscretePseudoValuation):
 
         Another problematic case::
 
-            sage: # needs sage.rings.number_field sage.rings.padics
+            sage: # needs sage.geometry.polyhedron sage.rings.number_field sage.rings.padics
             sage: R.<x> = QQ[]
             sage: Delta = (x^12 + 20*x^11 + 154*x^10 + 664*x^9 + 1873*x^8 + 3808*x^7 + 5980*x^6
             ....:           + 7560*x^5 + 7799*x^4 + 6508*x^3 + 4290*x^2 + 2224*x + 887)
