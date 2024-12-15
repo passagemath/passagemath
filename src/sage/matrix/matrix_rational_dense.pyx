@@ -1399,7 +1399,10 @@ cdef class Matrix_rational_dense(Matrix_dense):
             from sage.matrix.constructor import identity_matrix
             K = identity_matrix(QQ, self.ncols())
         else:
-            from .matrix_integer_iml import _rational_kernel_iml
+            try:
+                from .matrix_integer_iml import _rational_kernel_iml
+            except ImportError:
+                return self._right_kernel_matrix_over_field()
             A, _ = self._clear_denom()
             K = _rational_kernel_iml(A).transpose().change_ring(QQ)
         verbose("done computing right kernel matrix over the rationals for %sx%s matrix" % (self.nrows(), self.ncols()),level=1, t=tm)
