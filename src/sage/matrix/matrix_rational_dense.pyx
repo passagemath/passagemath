@@ -77,8 +77,6 @@ from sage.misc.randstate cimport randstate, current_randstate
 from cysignals.signals cimport sig_on, sig_off
 from cysignals.memory cimport sig_malloc, sig_free
 
-from sage.arith.rational_reconstruction cimport mpq_rational_reconstruction
-
 from sage.libs.gmp.types cimport mpz_t, mpq_t
 from sage.libs.gmp.mpz cimport mpz_init, mpz_clear, mpz_cmp_si
 from sage.libs.gmp.mpq cimport mpq_init, mpq_clear, mpq_set_si, mpq_mul, mpq_add, mpq_set
@@ -101,7 +99,6 @@ from sage.rings.rational cimport Rational
 from sage.matrix.matrix cimport Matrix
 from sage.matrix.args cimport SparseEntry, MatrixArgs_init
 from sage.matrix.matrix_integer_dense cimport Matrix_integer_dense
-from sage.matrix.matrix_integer_linbox cimport _lift_crt
 from sage.structure.element cimport Element, Vector
 from sage.rings.integer cimport Integer
 from sage.rings.integer_ring import ZZ, IntegerRing_class
@@ -2160,25 +2157,8 @@ cdef class Matrix_rational_dense(Matrix_dense):
 #          return E
 
     def _lift_crt_rr(self, res, mm):
-        cdef Integer m
-        cdef Matrix_integer_dense ZA
-        cdef Matrix_rational_dense QA
-        cdef Py_ssize_t i, j
-        cdef mpz_t tmp
-        cdef mpq_t tmp2
-        mpz_init(tmp)
-        mpq_init(tmp2)
-        ZA = _lift_crt(res, mm)
-        QA = Matrix_rational_dense.__new__(Matrix_rational_dense, self.parent(), None, None, None)
-        m = mm.prod()
-        for i in range(ZA._nrows):
-            for j in range(ZA._ncols):
-                fmpz_get_mpz(tmp, fmpz_mat_entry(ZA._matrix,i,j))
-                mpq_rational_reconstruction(tmp2, tmp, m.value)
-                fmpq_set_mpq(fmpq_mat_entry(QA._matrix, i, j), tmp2)
-        mpz_clear(tmp)
-        mpq_clear(tmp2)
-        return QA
+        from .matrix_rational_linbox import _lift_crt_rr
+        return _lift_crt_rr(self, res, mm)
 
     def randomize(self, density=1, num_bound=2, den_bound=2,
                   distribution=None, nonzero=False):
