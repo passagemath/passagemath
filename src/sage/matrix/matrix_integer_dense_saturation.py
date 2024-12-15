@@ -56,7 +56,7 @@ def p_saturation(A, p, proof=True):
             try:
                 # Faster than change_ring
                 A = H._reduce(p)
-            except OverflowError:
+            except (OverflowError, ImportError):
                 # fall back to generic GF(p) matrices
                 A = H.change_ring(GF(p))
         assert A.nrows() <= A.ncols()
