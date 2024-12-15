@@ -81,8 +81,6 @@ from sage.misc.randstate cimport randstate, current_randstate
 from sage.misc.superseded import deprecated_function_alias
 from sage.matrix.args cimport SparseEntry, MatrixArgs_init
 
-from sage.arith.multi_modular cimport MultiModularBasis
-
 from sage.libs.flint.fmpz cimport *
 from sage.libs.flint.fmpz_mat cimport *
 
@@ -97,12 +95,6 @@ from sage.rings.polynomial.polynomial_integer_dense_flint cimport Polynomial_int
 from sage.structure.element cimport Element, Vector
 from sage.structure.element import Vector
 
-from sage.matrix.matrix_modn_dense_float cimport Matrix_modn_dense_template
-from sage.matrix.matrix_modn_dense_float cimport Matrix_modn_dense_float
-from sage.matrix.matrix_modn_dense_double cimport Matrix_modn_dense_double
-
-from sage.matrix.matrix_mod2_dense import Matrix_mod2_dense
-from sage.matrix.matrix_mod2_dense cimport Matrix_mod2_dense
 from sage.rings.finite_rings.finite_field_constructor import GF
 
 
@@ -1508,6 +1500,8 @@ cdef class Matrix_integer_dense(Matrix_dense):
             [0 0]
             [1 1]
         """
+        from sage.matrix.matrix_mod2_dense import Matrix_mod2_dense
+
         MS = matrix_space.MatrixSpace(GF(2), self._nrows, self._ncols)
         return Matrix_mod2_dense(MS, self, True, True)
 
@@ -1530,57 +1524,8 @@ cdef class Matrix_integer_dense(Matrix_dense):
         raise ValueError("p to big.")
 
     def _reduce(self, moduli):
-        from sage.matrix.matrix_modn_dense_float import MAX_MODULUS as MAX_MODULUS_FLOAT
-        from sage.matrix.matrix_modn_dense_double import MAX_MODULUS as MAX_MODULUS_DOUBLE
-
-        if isinstance(moduli, (int, Integer)):
-            return self._mod_int(moduli)
-        elif isinstance(moduli, list):
-            moduli = MultiModularBasis(moduli)
-
-        cdef MultiModularBasis mm
-        mm = moduli
-
-        res = []
-        for p in mm:
-            if p < MAX_MODULUS_FLOAT:
-                res.append( Matrix_modn_dense_float.__new__(Matrix_modn_dense_float,
-                                                            matrix_space.MatrixSpace(IntegerModRing(p), self._nrows, self._ncols, sparse=False),
-                                                            None, None, None, zeroed_alloc=False) )
-            elif p < MAX_MODULUS_DOUBLE:
-                res.append( Matrix_modn_dense_double.__new__(Matrix_modn_dense_double,
-                                                             matrix_space.MatrixSpace(IntegerModRing(p), self._nrows, self._ncols, sparse=False),
-                                                             None, None, None, zeroed_alloc=False) )
-            else:
-                raise ValueError("p=%d too big."%p)
-
-        cdef size_t i, k, n
-        cdef Py_ssize_t nr, nc
-        cdef mpz_t tmp
-        mpz_init(tmp)
-        n = len(mm)
-        nr = self._nrows
-        nc = self._ncols
-
-        cdef mod_int *entry_list
-        entry_list = <mod_int*>sig_malloc(sizeof(mod_int) * n)
-        if entry_list == NULL:
-            raise MemoryError("out of memory allocating multi-modular coefficient list")
-
-        sig_on()
-        for i from 0 <= i < nr:
-            for j from 0 <= j < nc:
-                self.get_unsafe_mpz(i,j,tmp)
-                mm.mpz_reduce(tmp, entry_list)
-                for k from 0 <= k < n:
-                    if isinstance(res[k], Matrix_modn_dense_float):
-                        (<Matrix_modn_dense_float>res[k])._matrix[i][j] = (<float>entry_list[k])%(<Matrix_modn_dense_float>res[k]).p
-                    else:
-                        (<Matrix_modn_dense_double>res[k])._matrix[i][j] = (<double>entry_list[k])%(<Matrix_modn_dense_double>res[k]).p
-        sig_off()
-        mpz_clear(tmp)
-        sig_free(entry_list)
-        return res
+        from .matrix_integer_linbox import _reduce
+        return _reduce(self, moduli)
 
     cpdef _echelon_in_place(self, str algorithm):
         cdef Matrix_integer_dense E

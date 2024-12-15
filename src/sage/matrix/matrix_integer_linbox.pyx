@@ -200,6 +200,60 @@ def _multiply_multi_modular(Matrix_integer_dense self, Matrix_integer_dense righ
     return result
 
 
+def _reduce(Matrix_integer_dense self, moduli):
+    from sage.matrix.matrix_modn_dense_float import MAX_MODULUS as MAX_MODULUS_FLOAT
+    from sage.matrix.matrix_modn_dense_double import MAX_MODULUS as MAX_MODULUS_DOUBLE
+
+    if isinstance(moduli, (int, Integer)):
+        return self._mod_int(moduli)
+    elif isinstance(moduli, list):
+        moduli = MultiModularBasis(moduli)
+
+    cdef MultiModularBasis mm
+    mm = moduli
+
+    res = []
+    for p in mm:
+        if p < MAX_MODULUS_FLOAT:
+            res.append( Matrix_modn_dense_float.__new__(Matrix_modn_dense_float,
+                                                        matrix_space.MatrixSpace(IntegerModRing(p), self._nrows, self._ncols, sparse=False),
+                                                        None, None, None, zeroed_alloc=False) )
+        elif p < MAX_MODULUS_DOUBLE:
+            res.append( Matrix_modn_dense_double.__new__(Matrix_modn_dense_double,
+                                                         matrix_space.MatrixSpace(IntegerModRing(p), self._nrows, self._ncols, sparse=False),
+                                                         None, None, None, zeroed_alloc=False) )
+        else:
+            raise ValueError("p=%d too big."%p)
+
+    cdef size_t i, k, n
+    cdef Py_ssize_t nr, nc
+    cdef mpz_t tmp
+    mpz_init(tmp)
+    n = len(mm)
+    nr = self._nrows
+    nc = self._ncols
+
+    cdef mod_int *entry_list
+    entry_list = <mod_int*>sig_malloc(sizeof(mod_int) * n)
+    if entry_list == NULL:
+        raise MemoryError("out of memory allocating multi-modular coefficient list")
+
+    sig_on()
+    for i from 0 <= i < nr:
+        for j from 0 <= j < nc:
+            self.get_unsafe_mpz(i,j,tmp)
+            mm.mpz_reduce(tmp, entry_list)
+            for k from 0 <= k < n:
+                if isinstance(res[k], Matrix_modn_dense_float):
+                    (<Matrix_modn_dense_float>res[k])._matrix[i][j] = (<float>entry_list[k])%(<Matrix_modn_dense_float>res[k]).p
+                else:
+                    (<Matrix_modn_dense_double>res[k])._matrix[i][j] = (<double>entry_list[k])%(<Matrix_modn_dense_double>res[k]).p
+    sig_off()
+    mpz_clear(tmp)
+    sig_free(entry_list)
+    return res
+
+
 cpdef _lift_crt(Matrix_integer_dense M, residues, moduli=None):
     """
     INPUT:
