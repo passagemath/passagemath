@@ -673,11 +673,12 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
             sage: M = MatrixSpace(ZZ, 3, sparse=True)
             sage: m = M([1,0,1,0,2,0,2,0,2])
-            sage: m._rank_linbox()
+            sage: m._rank_linbox()                                                      # needs sage.libs.linbox
             2
 
         TESTS::
 
+            sage: # needs sage.libs.linbox
             sage: MatrixSpace(ZZ, 0, 0, sparse=True)()._rank_linbox()
             0
             sage: MatrixSpace(ZZ, 1, 0, sparse=True)()._rank_linbox()
@@ -703,20 +704,19 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
         EXAMPLES::
 
             sage: M = MatrixSpace(ZZ, 2, 2, sparse=True)
-            sage: M([2,0,1,1])._det_linbox()
+            sage: M([2,0,1,1])._det_linbox()                                            # needs sage.libs.linbox
             2
 
         TESTS::
 
+            sage: # needs sage.libs.linbox
             sage: MatrixSpace(ZZ, 0, 0, sparse=True)()._det_linbox()
             1
             sage: MatrixSpace(ZZ, 1, 1, sparse=True)()._det_linbox()
             0
-
             sage: m = diagonal_matrix(ZZ, [2] * 46)
             sage: m._det_linbox() == 2**46
             True
-
             sage: m = diagonal_matrix(ZZ, [3] * 100)
             sage: m._det_linbox() == 3**100
             True
@@ -754,7 +754,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         TESTS::
 
-            sage: matrix(ZZ, 0, 0, sparse=True).charpoly(algorithm='linbox')
+            sage: matrix(ZZ, 0, 0, sparse=True).charpoly(algorithm='linbox')            # needs sage.libs.linbox
             1
             sage: matrix(ZZ, 0, 0, sparse=True).charpoly(algorithm='generic')
             1
@@ -787,11 +787,12 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
         EXAMPLES::
 
             sage: m = matrix(ZZ, 2, [2,1,1,1], sparse=True)
-            sage: m._charpoly_linbox()
+            sage: m._charpoly_linbox()                                                  # needs sage.libs.linbox
             x^2 - 3*x + 1
 
         TESTS::
 
+            sage: # needs sage.libs.linbox
             sage: matrix(ZZ, 0, 0, sparse=True)._charpoly_linbox()
             1
             sage: matrix(ZZ, 1, 1, sparse=True)._charpoly_linbox()
@@ -827,7 +828,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         TESTS::
 
-            sage: matrix(ZZ, 0, 0, sparse=True).minpoly(algorithm='linbox')
+            sage: matrix(ZZ, 0, 0, sparse=True).minpoly(algorithm='linbox')             # needs sage.libs.linbox
             1
             sage: matrix(ZZ, 0, 0, sparse=True).minpoly(algorithm='generic')
             1
@@ -860,11 +861,12 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
         EXAMPLES::
 
             sage: m = matrix(ZZ, 2, [2,1,1,1], sparse=True)
-            sage: m._minpoly_linbox()
+            sage: m._minpoly_linbox()                                                   # needs sage.libs.linbox
             x^2 - 3*x + 1
 
         TESTS::
 
+            sage: # needs sage.libs.linbox
             sage: matrix(ZZ, 0, 0, sparse=True)._minpoly_linbox()
             1
             sage: matrix(ZZ, 1, 1, sparse=True)._minpoly_linbox()
@@ -976,11 +978,11 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.linbox
             sage: m = matrix(ZZ, 4, sparse=True)
             sage: m[0,0] = m[1,2] = m[2,0] = m[3,3] = 2
             sage: m[0,2] = m[1,1] = -1
             sage: m[2,3] = m[3,0] = -3
-
             sage: b0 = vector((1,1,1,1))
             sage: m._solve_vector_linbox(b0)
             ((-1, -7, -3, -1), 1)
@@ -992,7 +994,6 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
             ((-1, -7, -3, -1), 1)
             sage: m._solve_vector_linbox(b0, 'blackbox')
             ((-1, -7, -3, -1), 1)
-
             sage: b1 = vector((1,2,3,4))
             sage: m._solve_vector_linbox(b1)
             ((-18, -92, -41, -17), 5)
@@ -1004,13 +1005,13 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
             ((-18, -92, -41, -17), 5)
             sage: m._solve_vector_linbox(b1, 'blackbox')
             ((-18, -92, -41, -17), 5)
-
             sage: a1, d1 = m._solve_vector_linbox(b1)
             sage: d1 * b1 == m * a1
             True
 
         TESTS::
 
+            sage: # needs sage.libs.linbox
             sage: algos = ["default", "dense_elimination", "sparse_elimination",
             ....:          "blackbox", "wiedemann"]
             sage: for i in range(20):
@@ -1037,6 +1038,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.linbox
             sage: m = matrix(ZZ, [[1,2],[1,0]], sparse=True)
             sage: b = matrix(ZZ, 2, 4, [1,0,2,0,1,1,2,0], sparse=False)
             sage: u, d = m._solve_matrix_linbox(b)
@@ -1045,7 +1047,6 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
             [ 0 -1  0  0]
             sage: m * u == b * diagonal_matrix(d)
             True
-
             sage: u, d = m._solve_matrix_linbox([[1,3,4],[0,1,0]])
             sage: u
             [0 1 0]
@@ -1055,13 +1056,13 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         Test input::
 
+            sage: # needs sage.libs.linbox
             sage: m = matrix(ZZ, [[1,2],[1,0]], sparse=True)
             sage: b = matrix(ZZ, 3, 3, range(9))
             sage: m._solve_matrix_linbox(b)
             Traceback (most recent call last):
             ...
             ValueError: wrong matrix dimension
-
             sage: m._solve_matrix_linbox([[1,1],[2,3]], algorithm='hop')
             Traceback (most recent call last):
             ...
@@ -1069,9 +1070,9 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         TESTS::
 
+            sage: # needs sage.libs.linbox
             sage: algos = ["default", "dense_elimination", "sparse_elimination",
             ....:          "blackbox", "wiedemann"]
-
             sage: for _ in range(10):
             ....:     dim = randint(2, 10)
             ....:     M = MatrixSpace(ZZ, dim, sparse=True)
