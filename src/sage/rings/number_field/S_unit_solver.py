@@ -58,7 +58,6 @@ AUTHORS:
 
 
 from sage.rings.infinity import Infinity
-from sage.symbolic.ring import SR
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
 from sage.rings.real_mpfr import RealField, RR
@@ -71,6 +70,7 @@ from sage.rings.finite_rings.integer_mod_ring import Integers
 from sage.rings.finite_rings.integer_mod import mod
 from sage.rings.padics.factory import Qp
 from sage.combinat.combination import Combinations
+from sage.rings.polynomial.polynomial_ring import polygen
 from sage.misc.misc_c import prod
 from sage.arith.functions import lcm
 from sage.arith.misc import gcd, CRT, factorial
@@ -671,7 +671,7 @@ def Yu_bound(SUK, v, prec=106):
     else:
         # K and v don't satisfy the theorem hypotheses, and we must move to a quadratic extension L.
         # For justification of this next bound, see [AKMRVW].
-        x = SR.var('x')
+        x = polygen(ZZ, 'x')
         if p == 2:
             L_over_K = K.extension(x**2 + x + 1, 'xi0')
         else:
