@@ -1065,7 +1065,7 @@ class FinalAugmentedValuation(AugmentedValuation_base, FinalInductiveValuation):
             sage: R.<x> = K[]
             sage: v0 = GaussValuation(R, valuations.TrivialValuation(K))
             sage: v = v0.augmentation(x^2 + x + 2, 1)
-            sage: v.lift(v.reduce(x)) == x
+            sage: v.lift(v.reduce(x)) == x                                              # needs sage.libs.singular
             True
         """
         F = self.residue_ring().coerce(F)
