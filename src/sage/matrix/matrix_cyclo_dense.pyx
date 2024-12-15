@@ -638,8 +638,12 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
             sage: (-m)*n
             [-23250]
         """
-        from .matrix_cyclo_linbox import _matrix_times_matrix_
-        return _matrix_times_matrix_(self, right)
+        try:
+            from .matrix_cyclo_linbox import _matrix_times_matrix_
+        except ImportError:
+            return Matrix._matrix_times_matrix_(self, right)
+        else:
+            return _matrix_times_matrix_(self, right)
 
     cdef long _hash_(self) except -1:
         """
