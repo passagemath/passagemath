@@ -1461,9 +1461,9 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
         cache[p] = ans
         return ans
 
-    def echelon_form(self, algorithm='multimodular', height_guess=None):
+    def echelon_form(self, algorithm=None, height_guess=None):
         """
-        Find the echelon form of self, using the specified algorithm.
+        Find the echelon form of ``self``, using the specified algorithm.
 
         The result is cached for each algorithm separately.
 
@@ -1531,6 +1531,14 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
             self.cache(key, E)
             self.cache('pivots', ())
             return E
+
+        if algorithm is None:
+            try:
+                from .matrix_cyclo_linbox import _echelon_form_multimodular
+            except ImportError:
+                algorithm = 'classical'
+            else:
+                algorithm = 'multimodular'
 
         if algorithm == 'multimodular':
             E = self._echelon_form_multimodular(height_guess=height_guess)
