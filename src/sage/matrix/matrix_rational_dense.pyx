@@ -1459,17 +1459,22 @@ cdef class Matrix_rational_dense(Matrix_dense):
                 A.subdivide(self.subdivisions())
             return A
 
-        from sage.matrix.matrix_modn_dense_double import MAX_MODULUS
-        if isinstance(R, sage.rings.abc.IntegerModRing) and R.order() < MAX_MODULUS:
-            b = R.order()
-            A, d = self._clear_denom()
-            if not b.gcd(d).is_one():
-                raise TypeError("matrix denominator not coprime to modulus")
-            B = A._mod_int(b)
-            C = (1/(B.base_ring()(d))) * B
-            if self._subdivisions is not None:
-                C.subdivide(self.subdivisions())
-            return C
+        if isinstance(R, sage.rings.abc.IntegerModRing):
+            try:
+                from sage.matrix.matrix_modn_dense_double import MAX_MODULUS
+            except ImportError:
+                pass
+            else:
+                if R.order() < MAX_MODULUS:
+                    b = R.order()
+                    A, d = self._clear_denom()
+                    if not b.gcd(d).is_one():
+                        raise TypeError("matrix denominator not coprime to modulus")
+                    B = A._mod_int(b)
+                    C = (1/(B.base_ring()(d))) * B
+                    if self._subdivisions is not None:
+                        C.subdivide(self.subdivisions())
+                    return C
 
         # fallback to the generic version
         return Matrix_dense.change_ring(self, R)
