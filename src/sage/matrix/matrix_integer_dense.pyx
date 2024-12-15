@@ -3537,16 +3537,26 @@ cdef class Matrix_integer_dense(Matrix_dense):
             return r
         elif algorithm == 'modp':
             # Can very quickly detect full rank by working modulo p.
-            r = self._rank_modp()
-            if r == self._nrows or r == self._ncols:
-                self.cache('rank', r)
-                return r
+            try:
+                r = self._rank_modp()
+            except ImportError:
+                pass
+            else:
+                if r == self._nrows or r == self._ncols:
+                    self.cache('rank', r)
+                    return r
         # Algorithm is 'linbox' or detecting full rank didn't work --
         # use LinBox's general algorithm.
-        from .matrix_integer_linbox import _rank_linbox
-        r = _rank_linbox(self)
-        self.cache('rank', r)
-        return r
+        try:
+            from .matrix_integer_linbox import _rank_linbox
+        except ImportError:
+            pass
+        else:
+            r = _rank_linbox(self)
+            self.cache('rank', r)
+            return r
+        # Fall back to generic
+        return Matrix.rank(self)
 
     def _rank_linbox(self):
         """
