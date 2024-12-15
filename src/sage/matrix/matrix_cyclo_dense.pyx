@@ -63,7 +63,7 @@ from sage.matrix.constructor import matrix
 from sage.matrix.matrix_space import MatrixSpace
 from sage.matrix.matrix cimport Matrix
 from sage.matrix import matrix_dense
-from sage.matrix.matrix_integer_dense cimport _lift_crt
+from sage.matrix.matrix_integer_linbox cimport _lift_crt
 from sage.structure.element cimport Matrix as baseMatrix
 from sage.matrix.misc_flint import matrix_integer_dense_rational_reconstruction
 
