@@ -1,8 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
-# distutils: extra_compile_args = -D_XPG6 M4RI_CFLAGS -std=c++11
-# distutils: libraries = iml m
-# distutils: include_dirs = M4RI_INCDIR
-# distutils: language = c++
+# sage_setup: distribution = sagemath-flint
 """
 Dense matrices over the rational field
 

@@ -10,8 +10,11 @@ recursive-include sage/libs/ntl *.pxi *.h                                       
 include           sage/matrix/matrix_complex_ball_dense.p*
 include           sage/matrix/misc_flint.p*
 include           sage/matrix/matrix_cyclo_dense.p*
-include           sage/matrix/matrix_integer*.pxd
-include           sage/matrix/matrix_rational*.pxd
+include           sage/matrix/matrix_integer_dense.p*
+include           sage/matrix/matrix_integer_sparse.p*
+include           sage/matrix/matrix_rational_dense.p*
+include           sage/matrix/matrix_rational_sparse.p*
+include           sage/matrix/matrix_*_pari.p*      # FIXME
 include           sage/rings/*_arb.p*
 include           sage/rings/*_flint.p*
 include           sage/rings/padics/*_flint*.p*

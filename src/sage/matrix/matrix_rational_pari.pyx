@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-flint
 
 from cysignals.signals cimport sig_on, sig_off
 from cysignals.memory cimport sig_malloc, sig_free

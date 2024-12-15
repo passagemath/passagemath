@@ -1,8 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
-# distutils: extra_compile_args = M4RI_CFLAGS -std=c++11
-# distutils: libraries = gmp m CBLAS_LIBRARIES
-# distutils: library_dirs = CBLAS_LIBDIR
-# distutils: include_dirs = M4RI_INCDIR CBLAS_INCDIR
+# sage_setup: distribution = sagemath-flint
 """
 Dense matrices over the integer ring
 
