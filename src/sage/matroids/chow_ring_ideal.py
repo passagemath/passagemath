@@ -15,6 +15,7 @@ from sage.rings.polynomial.multi_polynomial_sequence import PolynomialSequence
 from sage.combinat.posets.posets import Poset
 from itertools import product
 
+
 class ChowRingIdeal(MPolynomialIdeal):
     def matroid(self):
         r"""
@@ -56,6 +57,7 @@ class ChowRingIdeal(MPolynomialIdeal):
         ranks = {F: self._matroid.rank(F) for F in flats}
         chains = lattice_flats.chains()  #Only chains
         return (ranks, chains)
+
 
 class ChowRingIdeal_nonaug(ChowRingIdeal):
     r"""
