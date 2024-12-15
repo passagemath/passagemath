@@ -1533,38 +1533,22 @@ cdef class Matrix_integer_dense(Matrix_dense):
         return Matrix_mod2_dense(MS, self, True, True)
 
     cdef _mod_int_c(self, mod_int p):
-        from sage.matrix.matrix_modn_dense_float import MAX_MODULUS as MAX_MODULUS_FLOAT
-        from sage.matrix.matrix_modn_dense_double import MAX_MODULUS as MAX_MODULUS_DOUBLE
-
-        cdef Py_ssize_t i, j
-
-        cdef float* res_row_f
-        cdef Matrix_modn_dense_float res_f
-
-        cdef double* res_row_d
-        cdef Matrix_modn_dense_double res_d
-
         if p == 2:
             return self._mod_two()
-        elif p < MAX_MODULUS_FLOAT:
-            res_f = Matrix_modn_dense_float.__new__(Matrix_modn_dense_float,
-                                                    matrix_space.MatrixSpace(IntegerModRing(p), self._nrows, self._ncols, sparse=False), None, None, None, zeroed_alloc=False)
-            for i from 0 <= i < self._nrows:
-                res_row_f = res_f._matrix[i]
-                for j from 0 <= j < self._ncols:
-                    res_row_f[j] = <float>fmpz_fdiv_ui(fmpz_mat_entry(self._matrix,i,j), p)
-            return res_f
 
-        elif p < MAX_MODULUS_DOUBLE:
-            res_d = Matrix_modn_dense_double.__new__(Matrix_modn_dense_double,
-                                                     matrix_space.MatrixSpace(IntegerModRing(p), self._nrows, self._ncols, sparse=False), None, None, None, zeroed_alloc=False)
-            for i from 0 <= i < self._nrows:
-                res_row_d = res_d._matrix[i]
-                for j from 0 <= j < self._ncols:
-                    res_row_d[j] = <double>fmpz_fdiv_ui(fmpz_mat_entry(self._matrix,i,j), p)
-            return res_d
-        else:
-            raise ValueError("p to big.")
+        from sage.matrix.matrix_modn_dense_float import MAX_MODULUS as MAX_MODULUS_FLOAT
+
+        if p < MAX_MODULUS_FLOAT:
+            from .matrix_integer_linbox import _Matrix_modn_dense_float
+            return _Matrix_modn_dense_float(self, p)
+
+        from sage.matrix.matrix_modn_dense_double import MAX_MODULUS as MAX_MODULUS_DOUBLE
+
+        if p < MAX_MODULUS_DOUBLE:
+            from .matrix_integer_linbox import _Matrix_modn_dense_double
+            return _Matrix_modn_dense_double(self, p)
+
+        raise ValueError("p to big.")
 
     def _reduce(self, moduli):
         from sage.matrix.matrix_modn_dense_float import MAX_MODULUS as MAX_MODULUS_FLOAT

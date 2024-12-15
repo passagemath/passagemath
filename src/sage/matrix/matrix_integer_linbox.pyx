@@ -2,10 +2,17 @@
 
 from cysignals.signals cimport sig_check, sig_on, sig_str, sig_off
 
+import sage.matrix.matrix_space as matrix_space
+
+from sage.ext.mod_int cimport *
 from sage.ext.stdsage cimport PY_NEW
 from sage.libs.flint.fmpz cimport *
 from sage.libs.flint.fmpz_mat cimport *
 from sage.matrix.matrix_integer_dense cimport Matrix_integer_dense
+from sage.matrix.matrix_modn_dense_float cimport Matrix_modn_dense_template
+from sage.matrix.matrix_modn_dense_float cimport Matrix_modn_dense_float
+from sage.matrix.matrix_modn_dense_double cimport Matrix_modn_dense_double
+from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.integer cimport Integer
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.polynomial_integer_dense_flint cimport Polynomial_integer_dense_flint
@@ -117,3 +124,33 @@ def _det_linbox(Matrix_integer_dense self):
     fmpz_get_mpz(ans.value, tmp)
     fmpz_clear(tmp)
     return ans
+
+
+def _Matrix_modn_dense_float(Matrix_integer_dense self, mod_int p):
+    cdef Py_ssize_t i, j
+
+    cdef float* res_row_f
+    cdef Matrix_modn_dense_float res_f
+
+    res_f = Matrix_modn_dense_float.__new__(Matrix_modn_dense_float,
+                                            matrix_space.MatrixSpace(IntegerModRing(p), self._nrows, self._ncols, sparse=False), None, None, None, zeroed_alloc=False)
+    for i from 0 <= i < self._nrows:
+        res_row_f = res_f._matrix[i]
+        for j from 0 <= j < self._ncols:
+            res_row_f[j] = <float>fmpz_fdiv_ui(fmpz_mat_entry(self._matrix,i,j), p)
+    return res_f
+
+
+def _Matrix_modn_dense_double(Matrix_integer_dense self, mod_int p):
+    cdef Py_ssize_t i, j
+
+    cdef double* res_row_d
+    cdef Matrix_modn_dense_double res_d
+
+    res_d = Matrix_modn_dense_double.__new__(Matrix_modn_dense_double,
+                                             matrix_space.MatrixSpace(IntegerModRing(p), self._nrows, self._ncols, sparse=False), None, None, None, zeroed_alloc=False)
+    for i from 0 <= i < self._nrows:
+        res_row_d = res_d._matrix[i]
+        for j from 0 <= j < self._ncols:
+            res_row_d[j] = <double>fmpz_fdiv_ui(fmpz_mat_entry(self._matrix,i,j), p)
+    return res_d
