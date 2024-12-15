@@ -1097,7 +1097,12 @@ cdef class Matrix_rational_dense(Matrix_dense):
             return poly.change_variable_name(var)
 
         if algorithm is None:
-            algorithm = 'linbox'
+            try:
+                from .matrix_integer_linbox import _minpoly_linbox
+            except ImportError:
+                algorithm = 'generic'
+            else:
+                algorithm = 'linbox'
 
         if algorithm == 'linbox':
             A, denom = self._clear_denom()
