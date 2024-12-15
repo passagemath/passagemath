@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-flint
 """
 Modular algorithm to compute Hermite normal forms of integer matrices
 
