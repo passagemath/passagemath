@@ -9,7 +9,7 @@ include sage/matrix/matrix_integer_dense*.p*
 include sage/matrix/matrix_integer_sparse.p*
 include sage/matrix/matrix_integer_iml.p*
 include sage/matrix/matrix_*_linbox.p*
-include sage/matrix/matrix_integer_pari.p*      # FIXME
+include sage/matrix/matrix_*_pari.p*      # FIXME
 include sage/matrix/matrix_modn_dense_*.p*
 include sage/matrix/matrix_modn_dense_.p*
 include sage/matrix/matrix_modn_sparse.p*

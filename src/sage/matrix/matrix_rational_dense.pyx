@@ -78,8 +78,6 @@ from sage.modules.vector_rational_dense cimport Vector_rational_dense
 from sage.ext.stdsage cimport PY_NEW
 from sage.misc.randstate cimport randstate, current_randstate
 
-from sage.modules.vector_rational_dense cimport Vector_rational_dense
-
 from cysignals.signals cimport sig_on, sig_off
 from cysignals.memory cimport sig_malloc, sig_free
 
@@ -116,14 +114,6 @@ from sage.rings.rational_field import QQ
 from sage.matrix.matrix2 import decomp_seq
 from sage.misc.verbose import verbose
 
-# ########################################################
-# PARI C library
-from sage.libs.pari.all import PariError
-from sage.libs.pari.convert_gmp cimport INTFRAC_to_mpq
-from sage.libs.pari.convert_flint cimport rational_matrix, _new_GEN_from_fmpq_mat_t
-from cypari2.stack cimport clear_stack
-from cypari2.paridecl cimport *
-# ########################################################
 
 cdef class Matrix_rational_dense(Matrix_dense):
     def __cinit__(self):
@@ -738,13 +728,16 @@ cdef class Matrix_rational_dense(Matrix_dense):
         if algorithm == "flint":
             return self._invert_flint()
         elif algorithm == "pari":
+            from sage.libs.pari.all import PariError
+            from .matrix_rational_pari import _invert_pari
             try:
-                return self._invert_pari()
+                return _invert_pari(self)
             except PariError:
                 raise ZeroDivisionError("input matrix must be nonsingular")
         elif algorithm == "iml":
+            from .matrix_integer_iml import _invert_iml
             AZ, denom = self._clear_denom()
-            B, d = AZ._invert_iml(check_invertible=check_invertible)
+            B, d = _invert_iml(AZ, check_invertible=check_invertible)
             return (denom/d)*B
 
         else:
@@ -839,7 +832,8 @@ cdef class Matrix_rational_dense(Matrix_dense):
         if algorithm is None or algorithm == "flint":
             det = self._det_flint()
         elif algorithm == "pari":
-            det = self._det_pari()
+            from .matrix_rational_pari import _det_pari
+            det = _det_pari(self)
         elif algorithm == "integer":
             A, denom = self._clear_denom()
             det = Rational(A.determinant(proof=proof))
@@ -1406,8 +1400,9 @@ cdef class Matrix_rational_dense(Matrix_dense):
             from sage.matrix.constructor import identity_matrix
             K = identity_matrix(QQ, self.ncols())
         else:
+            from .matrix_integer_iml import _rational_kernel_iml
             A, _ = self._clear_denom()
-            K = A._rational_kernel_iml().transpose().change_ring(QQ)
+            K = _rational_kernel_iml(A).transpose().change_ring(QQ)
         verbose("done computing right kernel matrix over the rationals for %sx%s matrix" % (self.nrows(), self.ncols()),level=1, t=tm)
         return 'computed-iml-rational', K
 
@@ -2500,7 +2495,8 @@ cdef class Matrix_rational_dense(Matrix_dense):
             self.echelon_form(algorithm='flint')
             return self.fetch('rank')
         elif algorithm == "pari":
-            r = self._rank_pari()
+            from .matrix_rational_pari import _rank_pari
+            r = _rank_pari(self)
         elif algorithm == "integer":
             A, _ = self._clear_denom()
             r = A.rank()
@@ -2724,104 +2720,10 @@ cdef class Matrix_rational_dense(Matrix_dense):
             sage: matrix(QQ,2,[1/5,-2/3,3/4,4/9]).__pari__()
             [1/5, -2/3; 3/4, 4/9]
         """
-        return rational_matrix(self._matrix, False)
+        from .matrix_rational_pari import _pari
+        return _pari(self)
 
-    def _det_pari(self, int flag=0):
-        """
-        Return the determinant of this matrix computed using pari.
-
-        EXAMPLES::
-
-            sage: matrix(QQ,3,[1..9])._det_pari()
-            0
-            sage: matrix(QQ,3,[1..9])._det_pari(1)
-            0
-            sage: matrix(QQ,3,[0]+[2..9])._det_pari()
-            3
-        """
-        sig_on()
-        cdef GEN d = det0(_new_GEN_from_fmpq_mat_t(self._matrix), flag)
-        # now convert d to a Sage rational
-        cdef Rational e = <Rational> Rational.__new__(Rational)
-        INTFRAC_to_mpq(e.value, d)
-        clear_stack()
-        return e
-
-    def _rank_pari(self):
-        """
-        Return the rank of this matrix computed using pari.
-
-        EXAMPLES::
-
-            sage: matrix(QQ,3,[1..9])._rank_pari()
-            2
-            sage: matrix(QQ, 0, 0)._rank_pari()
-            0
-        """
-        sig_on()
-        cdef long r = rank(_new_GEN_from_fmpq_mat_t(self._matrix))
-        clear_stack()
-        return r
-
-    def _multiply_pari(self, Matrix_rational_dense right):
-        """
-        Return the product of ``self`` and ``right``, computed using PARI.
-
-        EXAMPLES::
-
-            sage: matrix(QQ,2,[1/5,-2/3,3/4,4/9])._multiply_pari(matrix(QQ,2,[1,2,3,4]))
-            [  -9/5 -34/15]
-            [ 25/12  59/18]
-
-        We verify that 0 rows or columns works::
-
-            sage: x = matrix(QQ,2,0); y = matrix(QQ,0,2); x*y
-            [0 0]
-            [0 0]
-            sage: matrix(ZZ, 0, 0) * matrix(QQ, 0, 5)
-            []
-        """
-        if self._ncols != right._nrows:
-            raise ArithmeticError("self must be a square matrix")
-        if not self._ncols*self._nrows or not right._ncols*right._nrows:
-            # pari doesn't work in case of 0 rows or columns
-            # This case is easy, since the answer must be the 0 matrix.
-            return self.matrix_space(self._nrows, right._ncols).zero_matrix().__copy__()
-        sig_on()
-        cdef GEN M = gmul(_new_GEN_from_fmpq_mat_t(self._matrix),
-                          _new_GEN_from_fmpq_mat_t(right._matrix))
-        A = new_matrix_from_pari_GEN(self.matrix_space(self._nrows, right._ncols), M)
-        clear_stack()
-        return A
-
-    def _invert_pari(self):
-        """
-        Return the inverse of this matrix computed using PARI.
-
-        EXAMPLES::
-
-            sage: matrix(QQ,2,[1,2,3,4])._invert_pari()
-            [  -2    1]
-            [ 3/2 -1/2]
-            sage: matrix(QQ,2,[1,2,2,4])._invert_pari()
-            Traceback (most recent call last):
-            ...
-            PariError: impossible inverse in ginv: [1, 2; 2, 4]
-        """
-        if self._nrows != self._ncols:
-            raise ValueError("self must be a square matrix")
-        cdef GEN M, d
-
-        sig_on()
-        M = _new_GEN_from_fmpq_mat_t(self._matrix)
-        d = ginv(M)
-
-        # Convert matrix back to Sage.
-        A = new_matrix_from_pari_GEN(self._parent, d)
-        clear_stack()
-        return A
-
-    def row(self, Py_ssize_t i, from_list=False):
+    def row(Matrix_rational_dense self, Py_ssize_t i, from_list=False):
         """
         Return the `i`-th row of this matrix as a dense vector.
 
@@ -2987,27 +2889,3 @@ cdef class Matrix_rational_dense(Matrix_dense):
         """
         A, _ = self._clear_denom()
         return A.is_LLL_reduced(delta, eta)
-
-
-cdef new_matrix_from_pari_GEN(parent, GEN d):
-    """
-    Given a PARI GEN with ``t_INT`` or ``t_FRAC entries, create a
-    :class:`Matrix_rational_dense` from it.
-
-    EXAMPLES::
-
-        sage: matrix(QQ,2,[1..4])._multiply_pari(matrix(QQ,2,[2..5]))       # indirect doctest
-        [10 13]
-        [22 29]
-    """
-    cdef Py_ssize_t i, j
-    cdef Matrix_rational_dense B = Matrix_rational_dense.__new__(
-        Matrix_rational_dense, parent, None, None, None)
-    cdef mpq_t tmp
-    mpq_init(tmp)
-    for i in range(B._nrows):
-        for j in range(B._ncols):
-            INTFRAC_to_mpq(tmp, gcoeff(d, i+1, j+1))
-            fmpq_set_mpq(fmpq_mat_entry(B._matrix, i, j), tmp)
-    mpq_clear(tmp)
-    return B
