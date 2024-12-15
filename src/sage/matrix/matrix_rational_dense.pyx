@@ -1564,7 +1564,12 @@ cdef class Matrix_rational_dense(Matrix_dense):
             if self._nrows <= 25 or self._ncols <= 25:
                 algorithm = 'flint'
             else:
-                algorithm = 'multimodular'
+                try:
+                    from sage.matrix.misc import matrix_rational_echelon_form_multimodular
+                except ImportError:
+                    algorithm = 'flint'
+                else:
+                    algorithm = 'multimodular'
 
         if algorithm == 'flint':
             pivots = self._echelonize_flint()
