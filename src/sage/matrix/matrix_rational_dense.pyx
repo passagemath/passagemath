@@ -1008,7 +1008,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         Check consistency::
 
-            sage: for _ in range(100):
+            sage: for _ in range(100):                                                  # needs sage.libs.linbox
             ....:     dim = randint(0, 10)
             ....:     m = random_matrix(QQ, dim, num_bound=8, den_bound=8)
             ....:     p_flint = m.charpoly(algorithm='flint'); m._clear_cache()
@@ -1085,7 +1085,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         Check consistency::
 
-            sage: for _ in range(100):
+            sage: for _ in range(100):                                                  # needs sage.libs.linbox
             ....:     dim = randint(0, 10)
             ....:     m = random_matrix(QQ, dim, num_bound=8, den_bound=8)
             ....:     p_linbox = m.charpoly(algorithm='linbox'); m._clear_cache()
@@ -1536,6 +1536,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         ::
 
+            sage: # needs sage.libs.linbox
             sage: a = matrix(QQ, 4, range(16)); a[0,0] = 1/19; a[0,1] = 1/5
             sage: a.echelonize(algorithm='multimodular')
             sage: a
@@ -1549,7 +1550,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
         Echelonizing a matrix in place throws away the cache of
         the old matrix (:issue:`14506`)::
 
-            sage: for algo in ["flint", "padic", "multimodular", "classical"]:
+            sage: for algo in ["flint", "padic", "multimodular", "classical"]:          # needs sage.libs.linbox
             ....:      a = Matrix(QQ, [[1,2],[3,4]])
             ....:      _ = a.det()          # fills the cache
             ....:      _ = a._clear_denom() # fills the cache
@@ -1710,6 +1711,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.linbox
             sage: m = matrix(QQ, 4, range(16))
             sage: m._echelonize_padic()
             (0, 1)
@@ -1718,7 +1720,6 @@ cdef class Matrix_rational_dense(Matrix_dense):
             [ 0  1  2  3]
             [ 0  0  0  0]
             [ 0  0  0  0]
-
             sage: m = matrix(QQ, 4, 6, [-1,0,0,-2,-1,-2,-1,0,0,-2,-1,0,3,3,-2,0,0,3,-2,-3,1,1,-2,3])
             sage: m._echelonize_padic()
             (0, 1, 2, 5)
@@ -1789,6 +1790,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.linbox
             sage: m = matrix(QQ, 4, range(16))
             sage: m._echelonize_multimodular()
             (0, 1)
