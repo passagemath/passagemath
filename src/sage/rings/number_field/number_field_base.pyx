@@ -311,7 +311,7 @@ cdef class NumberField(Field):
 
         The bound of course also works for the rational numbers::
 
-            sage: QQ.minkowski_bound()
+            sage: QQ.minkowski_bound()                                                  # needs sage.symbolic
             1
         """
         _, s = self.signature()
