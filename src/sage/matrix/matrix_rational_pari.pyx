@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-pari
+# sage.doctest: needs sage.modules
 
 from cysignals.signals cimport sig_on, sig_off
 from cysignals.memory cimport sig_malloc, sig_free
