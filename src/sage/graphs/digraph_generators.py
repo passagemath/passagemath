@@ -574,6 +574,7 @@ class DiGraphGenerators:
 
         EXAMPLES::
 
+            sage: # needs nauty
             sage: for g in digraphs.tournaments_nauty(4):
             ....:     print(g.edges(sort=True, labels = False))
             [(1, 0), (2, 0), (2, 1), (3, 0), (3, 1), (3, 2)]
@@ -672,6 +673,7 @@ class DiGraphGenerators:
 
         EXAMPLES::
 
+            sage: # needs nauty
             sage: gen = graphs.nauty_geng("-c 3")
             sage: dgs = list(digraphs.nauty_directg(gen))
             sage: len(dgs)
@@ -685,6 +687,7 @@ class DiGraphGenerators:
 
         Generate non-isomorphic acyclic orientations::
 
+            sage: # needs nauty
             sage: K = graphs.CompleteGraph(4)
             sage: all(d.is_directed_acyclic() for d in digraphs.nauty_directg(K, options='-a'))
             True
@@ -698,6 +701,7 @@ class DiGraphGenerators:
 
         TESTS::
 
+            sage: # needs nauty
             sage: g = digraphs.nauty_directg(graphs.PetersenGraph(), options="-o -G")
             sage: next(g)
             Traceback (most recent call last):
@@ -791,8 +795,8 @@ class DiGraphGenerators:
 
         EXAMPLES::
 
-            sage: gen = digraphs.nauty_posetg("5 o")
-            sage: len(list(gen))
+            sage: gen = digraphs.nauty_posetg("5 o")                                    # needs nauty
+            sage: len(list(gen))                                                        # needs nauty
             63
 
         This coincides with :oeis:`A000112`.
