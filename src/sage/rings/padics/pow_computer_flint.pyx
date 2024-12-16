@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-flint
+# sage_setup: distribution = sagemath-pari
 # distutils: extra_compile_args = -std=c++11
 # distutils: libraries = gmp
 # distutils: language = c++
