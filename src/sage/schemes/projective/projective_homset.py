@@ -698,6 +698,7 @@ class SchemeHomset_points_abelian_variety_field(SchemeHomset_points_projective_f
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: S = EllipticCurve(GF(5), [1,1]).point_homset()
             sage: S.zero()
             (0 : 1 : 0)
