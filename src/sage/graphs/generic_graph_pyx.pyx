@@ -1280,14 +1280,14 @@ cpdef tuple find_hamiltonian(G, long max_iter=100000, long reset_bound=30000,
 
     :issue:`10206` -- Hamiltonian cycle in small (di)graphs::
 
-        sage: for n in range(3):
+        sage: for n in range(3):                                                        # needs nauty
         ....:     for G in graphs(n):
         ....:         print('order {} and size {}: {}'.format(G.order(),G.size(),fh(G, find_path=False)))
         order 0 and size 0: (False, [])
         order 1 and size 0: (False, [0])
         order 2 and size 0: (False, [0])
         order 2 and size 1: (False, [0, 1])
-        sage: for n in range(3):
+        sage: for n in range(3):                                                        # needs nauty
         ....:     for G in digraphs(n):
         ....:         print('order {} and size {}: {}'.format(G.order(),G.size(),fh(G, find_path=False)))
         order 0 and size 0: (False, [])
@@ -1298,14 +1298,14 @@ cpdef tuple find_hamiltonian(G, long max_iter=100000, long reset_bound=30000,
 
     :issue:`10206` -- Hamiltonian path in small (di)graphs::
 
-        sage: for n in range(3):
+        sage: for n in range(3):                                                        # needs nauty
         ....:     for G in graphs(n):
         ....:         print('order {} and size {}: {}'.format(G.order(),G.size(),fh(G, find_path=True)))
         order 0 and size 0: (False, [])
         order 1 and size 0: (False, [0])
         order 2 and size 0: (False, [0])
         order 2 and size 1: (True, [0, 1])
-        sage: for n in range(3):
+        sage: for n in range(3):                                                        # needs nauty
         ....:     for G in digraphs(n):
         ....:         print('order {} and size {}: {}'.format(G.order(),G.size(),fh(G, find_path=True)))
         order 0 and size 0: (False, [])
