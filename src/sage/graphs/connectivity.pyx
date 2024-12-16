@@ -389,13 +389,13 @@ def connected_components_sizes(G):
     EXAMPLES::
 
         sage: from sage.graphs.connectivity import connected_components_sizes
-        sage: for x in graphs(3):
+        sage: for x in graphs(3):                                                       # needs nauty
         ....:     print(connected_components_sizes(x))
         [1, 1, 1]
         [2, 1]
         [3]
         [3]
-        sage: for x in graphs(3):
+        sage: for x in graphs(3):                                                       # needs nauty
         ....:     print(x.connected_components_sizes())
         [1, 1, 1]
         [2, 1]
