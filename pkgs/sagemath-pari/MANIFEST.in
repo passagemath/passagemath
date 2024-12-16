@@ -59,6 +59,8 @@ include sage/databases/conway.py
 
 include sage/interfaces/genus2reduction.py
 
+include sage/schemes/elliptic_curves/descent_two_isogeny_pari.pyx  # the pxd is shipped in sagemath-flint
+
 global-exclude *.c
 global-exclude *.cpp
 

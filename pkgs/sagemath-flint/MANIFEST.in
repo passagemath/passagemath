@@ -69,6 +69,7 @@ include sage/modular/modsym/apply.p*
 include sage/modular/modsym/heilbronn.p*
 include sage/modular/pollack_stevens/dist.p*
 include sage/schemes/elliptic_curves/descent_two_isogeny.p*
+include sage/schemes/elliptic_curves/descent_two_isogeny_pari.pxd
 
 global-exclude    all__sagemath_*.p*
 global-include    all__sagemath_flint.py
