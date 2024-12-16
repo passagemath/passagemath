@@ -1593,6 +1593,13 @@ class IncidenceStructure:
             sage: I = IncidenceStructure(2, [[0],[0,1]])
             sage: I.is_t_design(return_parameters=True)
             (False, (0, 0, 0, 0))
+
+        Verify that :issue:`38454` is fixed::
+
+            sage: I = IncidenceStructure(points=[0,1,2,3,4,5],
+            ....:                        blocks=[[0,1], [1,2], [0,2]])
+            sage: I.is_t_design(return_parameters=True)
+            (True, (0, 6, 2, 3))
         """
         from sage.arith.misc import binomial
 
@@ -1654,7 +1661,7 @@ class IncidenceStructure:
                 for i in combinations(block, tt):
                     s[i] = s.get(i, 0) + 1
 
-            if len(set(s.values())) != 1:
+            if (len(s) != binomial(v, tt)) or (len(set(s.values())) != 1):
                 tt -= 1
                 break
 
