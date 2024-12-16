@@ -224,7 +224,7 @@ Generators
 
 Use ``graphs(n)`` to iterate through all non-isomorphic graphs of given size::
 
-    sage: for g in graphs(4):
+    sage: for g in graphs(4):                                   # needs nauty
     ....:     print(g.degree_sequence())
     [0, 0, 0, 0]
     [1, 1, 0, 0]
