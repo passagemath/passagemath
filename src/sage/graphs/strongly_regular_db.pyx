@@ -2857,7 +2857,7 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     Test the Claw bound (see 3.D of [BL1984]_)::
 
-        sage: graphs.strongly_regular_graph(2058,242,91,20,existence=True)
+        sage: graphs.strongly_regular_graph(2058, 242, 91, 20, existence=True)          # needs database_graphs
         False
 
     TESTS:

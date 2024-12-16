@@ -15059,7 +15059,7 @@ class GenericGraph(GenericGraph_pyx):
 
             sage: Graph(1).is_chordal()
             True
-            sage: for g in graphs(5):
+            sage: for g in graphs(5):                                                   # needs nauty
             ....:     _ = g.is_chordal()
 
         :issue:`11735`::
@@ -25525,6 +25525,7 @@ class GenericGraph(GenericGraph_pyx):
 
         However, there are still many different SEPs::
 
+            sage: # needs nauty
             sage: len(list(graphs(5)))
             34
             sage: polys = []

@@ -7,7 +7,7 @@ EXAMPLES:
 We build a set from the iterator :obj:`graphs` that returns a canonical
 representative for each isomorphism class of graphs::
 
-    sage: # needs sage.graphs
+    sage: # needs nauty sage.graphs
     sage: from sage.sets.set_from_iterator import EnumeratedSetFromIterator
     sage: E = EnumeratedSetFromIterator(
     ....:   graphs,
@@ -98,21 +98,21 @@ class EnumeratedSetFromIterator(Parent):
     EXAMPLES::
 
         sage: from sage.sets.set_from_iterator import EnumeratedSetFromIterator
-        sage: E = EnumeratedSetFromIterator(graphs, args=(7,)); E                       # needs sage.graphs
+        sage: E = EnumeratedSetFromIterator(graphs, args=(7,)); E                       # needs nauty sage.graphs
         {Graph on 7 vertices, Graph on 7 vertices, Graph on 7 vertices,
          Graph on 7 vertices, Graph on 7 vertices, ...}
-        sage: E.category()                                                              # needs sage.graphs
+        sage: E.category()                                                              # needs nauty sage.graphs
         Category of facade enumerated sets
 
     The same example with a cache and a custom name::
 
-        sage: E = EnumeratedSetFromIterator(graphs, args=(8,), cache=True,              # needs sage.graphs
+        sage: E = EnumeratedSetFromIterator(graphs, args=(8,), cache=True,              # needs nauty sage.graphs
         ....:                               name="Graphs with 8 vertices",
         ....:                               category=FiniteEnumeratedSets()); E
         Graphs with 8 vertices
-        sage: E.unrank(3)                                                               # needs sage.graphs
+        sage: E.unrank(3)                                                               # needs nauty sage.graphs
         Graph on 8 vertices
-        sage: E.category()                                                              # needs sage.graphs
+        sage: E.category()                                                              # needs nauty sage.graphs
         Category of facade finite enumerated sets
 
     TESTS:
@@ -197,7 +197,7 @@ class EnumeratedSetFromIterator(Parent):
 
         TESTS::
 
-            sage: # needs sage.graphs
+            sage: # needs nauty sage.graphs
             sage: from sage.sets.set_from_iterator import EnumeratedSetFromIterator
             sage: from sage.graphs.graph_generators import graphs
             sage: E = EnumeratedSetFromIterator(graphs,
@@ -280,7 +280,7 @@ class EnumeratedSetFromIterator(Parent):
 
         TESTS::
 
-            sage: # needs sage.graphs
+            sage: # needs nauty sage.graphs
             sage: from sage.sets.set_from_iterator import EnumeratedSetFromIterator
             sage: E4 = EnumeratedSetFromIterator(graphs, args=(4,),
             ....:                                category=FiniteEnumeratedSets())
@@ -339,7 +339,7 @@ class EnumeratedSetFromIterator(Parent):
 
         TESTS::
 
-            sage: # needs sage.graphs
+            sage: # needs nauty sage.graphs
             sage: from sage.sets.set_from_iterator import EnumeratedSetFromIterator
             sage: E4 = EnumeratedSetFromIterator(graphs, args=(4,),
             ....:                                category=FiniteEnumeratedSets())
@@ -366,7 +366,7 @@ class EnumeratedSetFromIterator(Parent):
 
         EXAMPLES::
 
-            sage: # needs sage.graphs
+            sage: # needs nauty sage.graphs
             sage: from sage.sets.set_from_iterator import EnumeratedSetFromIterator
             sage: E = EnumeratedSetFromIterator(graphs, args=(8,))
             sage: g1 = next(iter(E)); g1
@@ -387,7 +387,7 @@ class EnumeratedSetFromIterator(Parent):
 
         EXAMPLES::
 
-            sage: # needs sage.graphs
+            sage: # needs nauty sage.graphs
             sage: from sage.sets.set_from_iterator import EnumeratedSetFromIterator
             sage: E = EnumeratedSetFromIterator(graphs, args=(8,), cache=True)
             sage: F = EnumeratedSetFromIterator(graphs, args=(8,), cache=False)
@@ -624,11 +624,11 @@ class EnumeratedSetFromIterator_function_decorator(Decorator):
         ....: @set_from_function(name="Graphs on %(n)d vertices",
         ....:                    category=FiniteEnumeratedSets(), cache=True)
         ....: def Graphs(n): return graphs(n)
-        sage: Graphs(10)                                                                # needs sage.graphs
+        sage: Graphs(10)                                                                # needs nauty sage.graphs
         Graphs on 10 vertices
-        sage: Graphs(10).unrank(0)                                                      # needs sage.graphs
+        sage: Graphs(10).unrank(0)                                                      # needs nauty sage.graphs
         Graph on 10 vertices
-        sage: Graphs(10) is Graphs(10)                                                  # needs sage.graphs
+        sage: Graphs(10) is Graphs(10)                                                  # needs nauty sage.graphs
         True
 
     The ``@cached_function`` must go first::
@@ -637,11 +637,11 @@ class EnumeratedSetFromIterator_function_decorator(Decorator):
         ....:                    category=FiniteEnumeratedSets(), cache=True)
         ....: @cached_function
         ....: def Graphs(n): return graphs(n)
-        sage: Graphs(10)                                                                # needs sage.graphs
+        sage: Graphs(10)                                                                # needs nauty sage.graphs
         Graphs on 10 vertices
-        sage: Graphs(10).unrank(0)                                                      # needs sage.graphs
+        sage: Graphs(10).unrank(0)                                                      # needs nauty sage.graphs
         Graph on 10 vertices
-        sage: Graphs(10) is Graphs(10)                                                  # needs sage.graphs
+        sage: Graphs(10) is Graphs(10)                                                  # needs nauty sage.graphs
         False
     """
     def __init__(self, f=None, name=None, **options):
@@ -877,7 +877,7 @@ class EnumeratedSetFromIterator_method_decorator:
         sage: b = B()
         sage: G3 = b.graphs(3); G3
         Graphs(3)
-        sage: G3.cardinality()                                                          # needs sage.graphs
+        sage: G3.cardinality()                                                          # needs nauty sage.graphs
         4
         sage: G3.category()
         Category of facade finite enumerated sets
