@@ -2,6 +2,7 @@
 # distutils: extra_compile_args = -std=c++11
 # distutils: libraries = gmp
 # distutils: language = c++
+# sage.doctest: needs sage.libs.flint
 from cysignals.memory cimport sig_malloc, sig_free
 from cysignals.signals cimport sig_on, sig_off
 

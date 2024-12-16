@@ -1,5 +1,6 @@
 # sage_setup: distribution = sagemath-pari
 # distutils: libraries = flint
+# sage.doctest: needs sage.libs.flint
 
 include "sage/libs/linkages/padics/fmpz_poly_unram.pxi"
 include "sage/libs/linkages/padics/unram_shared.pxi"
