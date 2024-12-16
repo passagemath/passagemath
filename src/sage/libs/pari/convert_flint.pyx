@@ -131,7 +131,7 @@ cdef Gen integer_matrix(fmpz_mat_t B, bint rotate):
     """
     EXAMPLES::
 
-        sage: matrix(ZZ,2,[1..6]).__pari__()   # indirect doctest                       # needs sage.libs.pari
+        sage: matrix(ZZ,2,[1..6]).__pari__()   # indirect doctest                       # needs sage.libs.pari sage.modules
         [1, 2, 3; 4, 5, 6]
     """
     cdef GEN g
@@ -147,7 +147,7 @@ cdef Gen rational_matrix(fmpq_mat_t B, bint rotate):
     """
     EXAMPLES::
 
-        sage: matrix(QQ, 2, [1/2, 2/3, 3/4, 4/5]).__pari__()  # indirect doctest        # needs sage.libs.pari
+        sage: matrix(QQ, 2, [1/2, 2/3, 3/4, 4/5]).__pari__()  # indirect doctest        # needs sage.libs.pari sage.modules
         [1/2, 2/3; 3/4, 4/5]
     """
     cdef GEN g
