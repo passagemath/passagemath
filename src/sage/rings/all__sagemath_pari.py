@@ -1,5 +1,7 @@
 # sage_setup: distribution = sagemath-pari
 
+from sage.rings.number_field.all__sagemath_pari import *
+
 # Pseudo-ring of PARI objects.
 from sage.rings.pari_ring import PariRing, Pari
 
