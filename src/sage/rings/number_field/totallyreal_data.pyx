@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-flint
+# sage_setup: distribution = sagemath-pari
 # distutils: libraries = gmp
 """
 Enumeration of totally real fields: data
