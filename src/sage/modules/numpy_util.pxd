@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from libc.stdint cimport uintptr_t
 from sage.libs.m4ri cimport *
 

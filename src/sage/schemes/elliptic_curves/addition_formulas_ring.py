@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-schemes
 
 def _add(E, P, Q):
     r"""
