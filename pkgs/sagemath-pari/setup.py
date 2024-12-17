@@ -14,6 +14,10 @@ rebuild()
 sage_setup(['sagemath-pari'],
            required_modules=('gsl',),
            spkgs=['pari', 'gsl'],
+           recurse_packages=[
+               'sage',
+               'cypari2',
+            ],
            package_data={"sage": [
                "ext_data/pari/**",
             ],

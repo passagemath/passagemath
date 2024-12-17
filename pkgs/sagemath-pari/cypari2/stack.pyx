@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 """
 Memory management for Gens on the PARI stack or the heap
 ********************************************************

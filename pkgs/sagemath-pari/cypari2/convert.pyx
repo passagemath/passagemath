@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 # cython: cdivision = True
 """
 Convert PARI objects to/from Python/C native types

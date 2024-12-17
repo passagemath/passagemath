@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-pari
+# cython: language_level=3str
 """
 The Gen class wrapping PARI's GEN type
 **************************************

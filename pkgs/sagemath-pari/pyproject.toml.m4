@@ -16,8 +16,8 @@ requires = [
 ]
 # We need access to the autogen package at build time.
 # Hence we declare a custom build backend.
-build-backend = "_custom_build_meta"  # just re-exports setuptools.build_meta definitions
-backend-path = ["."]
+#build-backend = "_custom_build_meta"  # just re-exports setuptools.build_meta definitions
+#backend-path = ["."]
 
 [project]
 name = "passagemath-pari"

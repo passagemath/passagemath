@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 """
 Convert Python functions to PARI closures
 *****************************************
