@@ -1,11 +1,11 @@
-# sage_setup: distribution = sagemath-ntl
+# sage_setup: distribution = sagemath-pari
 # distutils: libraries = NTL_LIBRARIES
 # distutils: extra_compile_args = NTL_CFLAGS
 # distutils: include_dirs = NTL_INCDIR
 # distutils: library_dirs = NTL_LIBDIR
 # distutils: extra_link_args = NTL_LIBEXTRA
 # distutils: language = c++
-# sage.doctest: needs sage.rings.finite_rings
+# sage.doctest: needs sage.libs.ntl sage.rings.finite_rings
 r"""
 Elements of finite fields of characteristic 2
 

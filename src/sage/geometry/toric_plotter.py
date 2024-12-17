@@ -162,7 +162,7 @@ class ToricPlotter(SageObject):
     For example, the plot from the previous example can be obtained as
     follows::
 
-        sage: # needs palp sage.graphs sage.plot
+        sage: # needs palp sage.graphs sage.plot sage.symbolic
         sage: from sage.geometry.toric_plotter import ToricPlotter
         sage: options = dict()  # use default for everything
         sage: tp = ToricPlotter(options, fan.lattice().degree())

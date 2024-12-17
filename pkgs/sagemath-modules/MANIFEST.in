@@ -162,6 +162,7 @@ exclude sage/matrix/matrix_mpolynom*.*  # depends on singular
 exclude sage/matrix/matrix_rational_*.* # depends on flint, pari
 exclude sage/matrix/matrix_symbolic_*.* # --> sagemath-symbolics
 exclude sage/matrix/change_ring.*       # depends on matrix_integer_*
+exclude sage/matrix/numpy_util.*        # depends on m4ri, numpy
 
 # Can add sage/calculus/functions.p* (jacobian, wronskian) -- excluded from sagemath-categories because it needs matrices
 

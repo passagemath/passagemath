@@ -1020,8 +1020,8 @@ def OA_11_185():
 
         sage: from sage.combinat.designs.designs_pyx import is_orthogonal_array
         sage: from sage.combinat.designs.database import OA_11_185
-        sage: OA = OA_11_185()                                                          # needs sage.rings.finite_rings
-        sage: is_orthogonal_array(OA,11,185,2)                                          # needs sage.rings.finite_rings
+        sage: OA = OA_11_185()                                                          # needs sage.rings.finite_rings sage.schemes
+        sage: is_orthogonal_array(OA,11,185,2)                                          # needs sage.rings.finite_rings sage.schemes
         True
 
     The design is available from the general constructor::

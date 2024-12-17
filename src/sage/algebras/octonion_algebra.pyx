@@ -759,6 +759,7 @@ class OctonionAlgebra(UniqueRepresentation, Parent):
             sage: O = OctonionAlgebra(Zmod(6), -1, 2, 3)
             sage: TestSuite(O).run()
 
+            sage: # needs sage.all (to avoid infinite recursion)
             sage: R.<a, b, c> = QQ[]
             sage: O = OctonionAlgebra(R, a, b, c)
             sage: TestSuite(O).run()
@@ -797,6 +798,7 @@ class OctonionAlgebra(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.all (to avoid infinite recursion)
             sage: R.<a,b,c> = QQ[]
             sage: O = OctonionAlgebra(R, a, b, c)
             sage: O._test_alternative()
@@ -817,6 +819,7 @@ class OctonionAlgebra(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.all (to avoid infinite recursion)
             sage: R.<a,b,c> = QQ[]
             sage: O = OctonionAlgebra(R, a, b, c)
             sage: O._test_hurwitz()

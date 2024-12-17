@@ -968,7 +968,7 @@ cdef class RingHomomorphism(RingMap):
             NotImplementedError: inverse image not implemented...
             sage: f.inverse_image(K.ideal(0)).is_zero()                                 # needs sage.libs.singular
             True
-            sage: f.inverse()(I)                                                        # needs sage.rings.padics
+            sage: f.inverse()(I)                                                        # needs sage.libs.singular sage.rings.padics
             Fractional ideal (-a + 1)
 
         ALGORITHM:

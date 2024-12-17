@@ -1879,7 +1879,12 @@ cdef class Matrix_integer_dense(Matrix_dense):
                 algorithm = 'flint'
             else:
                 if n < 75:
-                    algorithm = 'pari0'
+                    try:
+                        from .matrix_integer_pari import _hnf_pari
+                    except ImportError:
+                        algorithm = 'flint'
+                    else:
+                        algorithm = 'pari0'
                 else:
                     algorithm = 'flint'
         proof = get_proof_flag(proof, "linear_algebra")

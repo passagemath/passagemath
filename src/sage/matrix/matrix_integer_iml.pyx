@@ -1,5 +1,6 @@
 # sage_setup: distribution = sagemath-linbox
 # distutils: libraries = iml
+# sage.doctest: needs sage.libs.flint sage.libs.linbox
 
 from cysignals.signals cimport sig_check, sig_on, sig_str, sig_off
 from cysignals.memory cimport sig_malloc, sig_free, check_allocarray

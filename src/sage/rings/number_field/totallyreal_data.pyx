@@ -1,5 +1,6 @@
-# sage_setup: distribution = sagemath-flint
+# sage_setup: distribution = sagemath-pari
 # distutils: libraries = gmp
+# sage.doctest: needs sage.rings.real_mpfr
 """
 Enumeration of totally real fields: data
 
@@ -205,17 +206,18 @@ cpdef lagrange_degree_3(int n, int an1, int an2, int an3):
 
     EXAMPLES::
 
-        sage: ls = sage.rings.number_field.totallyreal_data.lagrange_degree_3(3,0,1,2)
+        sage: from sage.rings.number_field.totallyreal_data import lagrange_degree_3
+        sage: ls = lagrange_degree_3(3,0,1,2)
         sage: [RealField(10)(x) for x in ls]
         [-1.0, -1.0]
-        sage: sage.rings.number_field.totallyreal_data.lagrange_degree_3(3,6,1,2) # random
+        sage: lagrange_degree_3(3,6,1,2) # random
         [-5.8878, -5.8878]
 
     TESTS:
 
     Check that :issue:`13101` is solved::
 
-        sage: sage.rings.number_field.totallyreal_data.lagrange_degree_3(4,12,19,42)
+        sage: lagrange_degree_3(4,12,19,42)
         [0.0, -1.0]
     """
     cdef long coeffs[7]
@@ -415,10 +417,11 @@ def easy_is_irreducible_py(f):
 
     EXAMPLES::
 
-      sage: sage.rings.number_field.totallyreal_data.easy_is_irreducible_py(pari('x^2+1'))
-      1
-      sage: sage.rings.number_field.totallyreal_data.easy_is_irreducible_py(pari('x^2-1'))
-      0
+        sage: from sage.rings.number_field.totallyreal_data import easy_is_irreducible_py
+        sage: easy_is_irreducible_py(pari('x^2+1'))
+        1
+        sage: easy_is_irreducible_py(pari('x^2-1'))
+        0
     """
     cdef int a[10]
 
@@ -471,7 +474,8 @@ cdef class tr_data:
 
         EXAMPLES::
 
-            sage: T = sage.rings.number_field.totallyreal_data.tr_data(2,100)
+            sage: from sage.rings.number_field.totallyreal_data import tr_data
+            sage: T = tr_data(2,100)
             sage: T.printa()
             k = 0
             a = [0, -1, 1]
@@ -603,7 +607,8 @@ cdef class tr_data:
 
         EXAMPLES::
 
-            sage: T = sage.rings.number_field.totallyreal_data.tr_data(2,100)
+            sage: from sage.rings.number_field.totallyreal_data import tr_data
+            sage: T = tr_data(2,100)
             sage: T.increment()
             [-24, -1, 1]
             sage: for i in range(19): _ = T.increment()
@@ -907,7 +912,8 @@ cdef class tr_data:
 
         EXAMPLES::
 
-            sage: T = sage.rings.number_field.totallyreal_data.tr_data(3,2^10)
+            sage: from sage.rings.number_field.totallyreal_data import tr_data
+            sage: T = tr_data(3,2^10)
             sage: T.printa()
             k = 1
             a = [0, 0, -1, 1]

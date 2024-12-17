@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-flint
+# sage_setup: distribution = sagemath-pari
 cdef inline type element_class_zero = pAdicRelaxedElement_zero
 cdef inline type element_class_one = pAdicRelaxedElement_one
 cdef inline type element_class_bound = pAdicRelaxedElement_bound

@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-linbox
+# sage.doctest: needs sage.libs.flint sage.libs.linbox
 
 from sage.arith.misc import previous_prime
 from sage.libs.flint.fmpq cimport fmpq_is_zero, fmpq_set_mpq, fmpq_canonicalise
