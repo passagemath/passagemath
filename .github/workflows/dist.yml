@@ -390,12 +390,6 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*polyhedra*
 
-      - name: sagemath-pari
-        id:   sagemath-pari
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*pari*
-
       - name: sagemath-ntl
         id:   sagemath-ntl
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
@@ -407,6 +401,12 @@ jobs:
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*flint*
+
+      - name: sagemath-pari
+        id:   sagemath-pari
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*pari*
 
       - name: sagemath-cddlib
         id:   sagemath-cddlib
