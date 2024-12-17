@@ -659,10 +659,10 @@ def modular_decomposition(G, algorithm=None):
         sage: modular_decomposition(Graph(1))
         NORMAL [0]
 
-        sage: check_algos_are_equivalent(5,\
+        sage: check_algos_are_equivalent(5,\                                            # needs networkx
         ....:                   lambda : graphs.RandomProperIntervalGraph(100))
 
-        sage: check_algos_are_equivalent(5, lambda : graphs.RandomGNM(75, 1000))
+        sage: check_algos_are_equivalent(5, lambda : graphs.RandomGNM(75, 1000))        # needs networkx
 
         sage: modular_decomposition(DiGraph())
         Traceback (most recent call last):
