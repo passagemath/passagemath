@@ -1,5 +1,7 @@
 # sage_setup: distribution = sagemath-pari
 
+from sage.libs.gmp.mpz cimport mpz_t
+
 from cypari2.paridecl cimport (GEN, cgetg, t_POL, set_gel, gel, stoi, lg,
                                evalvarn, evalsigne, Z_issquare,
                                hyperellratpoints)
