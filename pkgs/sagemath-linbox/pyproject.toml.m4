@@ -11,7 +11,6 @@ requires = [
     SPKG_INSTALL_REQUIRES_sagemath_pari
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_pkgconfig
@@ -22,7 +21,6 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-linbox"
 description = "passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML, m4ri(e)"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment

@@ -63,6 +63,11 @@ include sage/rings/padics/transcendantal.c  # sic
 
 graft sage/ext_data/pari
 
+# Vendored cypari2
+graft autogen
+graft cypari2
+include _custom_build_meta.py
+
 global-exclude all__sagemath*.*
 global-include all__sagemath_pari.py
 

@@ -11,17 +11,18 @@ requires = [
     SPKG_INSTALL_REQUIRES_mpmath
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_pkgconfig
 ]
-build-backend = "setuptools.build_meta"
+# We need access to the autogen package at build time.
+# Hence we declare a custom build backend.
+#build-backend = "_custom_build_meta"  # just re-exports setuptools.build_meta definitions
+#backend-path = ["."]
 
 [project]
 name = "passagemath-pari"
 description = "passagemath: Computational Number Theory with PARI/GP"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment

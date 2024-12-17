@@ -13,7 +13,7 @@ requires = [
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_cypari
+    SPKG_INSTALL_REQUIRES_sagemath_pari
     SPKG_INSTALL_REQUIRES_memory_allocator
 ]
 build-backend = "setuptools.build_meta"
@@ -22,7 +22,7 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-singular"
 description = "passagemath: Computer algebra, algebraic geometry, singularity theory with Singular"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_cypari
+    SPKG_INSTALL_REQUIRES_sagemath_pari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
