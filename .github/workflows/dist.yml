@@ -834,4 +834,4 @@ jobs:
     if: (success() || failure())
     uses: ./.github/workflows/ci-wheels.yml
     with:
-      run-id: ${{ github.event.workflow_run.id }}
+      run-id: ${{ github.run_id }}
