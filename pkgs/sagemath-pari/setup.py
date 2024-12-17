@@ -7,9 +7,9 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from sage_setup import sage_setup
 
-from autogen import rebuild
-
-rebuild()
+if not (len(sys.argv) > 1 and (sys.argv[1] in ["sdist", "egg_info", "dist_info"])):
+    from autogen import rebuild
+    rebuild()
 
 sage_setup(['sagemath-pari'],
            required_modules=('gsl',),
