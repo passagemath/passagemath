@@ -1739,6 +1739,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         Elliptic curve over ``QQbar``::
 
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: E = EllipticCurve(QQbar, [sqrt(2), I])
             sage: L = E.period_lattice()
             sage: P = E.lift_x(3)
