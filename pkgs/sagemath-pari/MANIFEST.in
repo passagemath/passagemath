@@ -59,6 +59,7 @@ include sage/schemes/elliptic_curves/descent_two_isogeny_pari.pyx  # the pxd is 
 global-exclude *.c
 global-exclude *.cpp
 
+include sage/libs/linkages/padics/relaxed/flint_helper.c
 include sage/rings/padics/transcendantal.c  # sic
 
 graft sage/ext_data/pari
