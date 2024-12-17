@@ -22,6 +22,7 @@ include sage/libs/m4ri*.p*
 include sage/matrix/matrix_gf2e_dense.p*
 include sage/matrix/matrix_mod2_dense.p*
 include sage/modules/vector_mod2_dense.p*
+include sage/modules/numpy_util.p*
 include sage/rings/polynomial/polynomial_template*.pxi                          # FIXME
 
 global-exclude *.c

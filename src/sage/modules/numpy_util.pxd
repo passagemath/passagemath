@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-modules
+# sage_setup: distribution = sagemath-linbox
 from libc.stdint cimport uintptr_t
 from sage.libs.m4ri cimport *
 
