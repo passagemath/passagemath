@@ -123,6 +123,7 @@ satisfying, but we have chosen the latter.
 
 Some default printing options can be set by modifying module globals::
 
+    sage: # needs sage.symbolic
     sage: from sage.rings import real_mpfi
     sage: x = RIF(sqrt(2), sqrt(2)+1e-10); x
     1.4142135624?
