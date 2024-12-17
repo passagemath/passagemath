@@ -4831,12 +4831,12 @@ class Partition(CombinatorialElement):
         EXAMPLES::
 
             sage: p = Partition([2,1,1])
-            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.groups sage.modules
+            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.combinat sage.groups sage.modules
             [-1  1  1]
             [-2  2  1]
             [-2  1  2]
             sage: p = Partition([])
-            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.groups sage.modules
+            sage: p.from_kbounded_to_grassmannian(2)                                    # needs sage.combinat sage.groups sage.modules
             [1 0 0]
             [0 1 0]
             [0 0 1]
@@ -5817,7 +5817,7 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.combinat sage.groups sage.modules
             sage: TM = Partition([2,2,1]).tabloid_module(QQ); TM
             Tabloid module of [2, 2, 1] over Rational Field
             sage: TM.frobenius_image()
