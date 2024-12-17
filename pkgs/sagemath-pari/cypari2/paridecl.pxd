@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 # distutils: libraries = gmp pari
 """
 Declarations for non-inline functions from PARI.

@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-pari
+
 cimport cython
 from cpython.object cimport PyObject
 from .types cimport GEN, pari_sp

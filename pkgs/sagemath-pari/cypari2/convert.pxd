@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-pari
+
 from .paridecl cimport (GEN, t_COMPLEX, dbltor, real_0_bit, stoi, cgetg,
                         set_gel, gen_0)
 from .gen cimport Gen

@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-pari
+
 from .types cimport *
 cimport cython
 

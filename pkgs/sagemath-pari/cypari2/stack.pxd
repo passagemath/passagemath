@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-pari
+
 from .types cimport GEN, pari_sp
 from .gen cimport Gen_base, Gen
 

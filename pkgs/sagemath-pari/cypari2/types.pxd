@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 """
 Declarations for types used by PARI
 

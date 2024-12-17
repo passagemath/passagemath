@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-pari
+
 cdef extern from *:
     int PY_MAJOR_VERSION
 
