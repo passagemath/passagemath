@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-pari
-# sage.doctest: needs sage.modules
+# sage.doctest: needs sage.libs.flint sage.libs.pari sage.modules
 
 from cysignals.signals cimport sig_check, sig_on, sig_str, sig_off
 

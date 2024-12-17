@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-linbox
+# sage.doctest: needs sage.libs.flint sage.libs.linbox
 
 from cpython.long cimport PyLong_FromSize_t
 
