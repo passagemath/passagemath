@@ -613,8 +613,9 @@ class InterfaceShellTransformer(PrefilterTransformer):
 
         EXAMPLES::
 
-            sage: # needs sage.symbolic
             sage: from sage.repl.interpreter import interface_shell_embed, InterfaceShellTransformer
+
+            sage: # needs sage.symbolic
             sage: shell = interface_shell_embed(maxima)
             sage: ift = InterfaceShellTransformer(shell=shell, config=shell.config,
             ....:     prefilter_manager=shell.prefilter_manager)

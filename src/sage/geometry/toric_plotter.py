@@ -180,7 +180,7 @@ class ToricPlotter(SageObject):
     this case they can be passed to the constructor as an optional argument.
     In the example above, the toric plotter can be completely set up using ::
 
-        sage: tp = ToricPlotter(options, fan.lattice().degree(), fan.rays())            # needs palp sage.graphs sage.plot
+        sage: tp = ToricPlotter(options, fan.lattice().degree(), fan.rays())            # needs palp sage.graphs sage.plot sage.symbolic
 
     All options are exposed as attributes of toric plotters and can be modified
     after constructions, however you will have to manually call
