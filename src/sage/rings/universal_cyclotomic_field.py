@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-gap
-# sage.doctest: needs sage.libs.gap
+# sage.doctest: needs sage.libs.gap sage.rings.number_field
 r"""
 Universal cyclotomic field
 
