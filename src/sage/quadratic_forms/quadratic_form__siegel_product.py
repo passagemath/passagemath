@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-pari
-# sage.doctest: needs sage.libs.pari sage.modules
+# sage.doctest: needs sage.libs.flint sage.libs.pari sage.modules
 """
 Siegel Products
 """

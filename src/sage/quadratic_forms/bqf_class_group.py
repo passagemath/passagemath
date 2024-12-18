@@ -47,6 +47,7 @@ The form class group can be constructed as an explicit parent object::
 Structural properties of the form class group, such as the class number,
 the group invariants, and element orders, can be computed::
 
+    sage: # needs sage.rings.number_field
     sage: Cl.order()
     21
     sage: cl1 * Cl.order() == Cl.zero()
@@ -264,6 +265,7 @@ class BQFClassGroup(Parent, UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: BQFClassGroup(-4).order()
             1
             sage: BQFClassGroup(-11).order()
