@@ -1659,7 +1659,7 @@ class RootLatticeRealizations(Category_over_base_ring):
 
                 sage: RootSystem(['F',4]).ambient_space().weyl_group()                  # needs sage.libs.gap
                 Weyl Group of type ['F', 4] (as a matrix group acting on the ambient space)
-                sage: RootSystem(['F',4]).root_space().weyl_group()                     # needs sage.libs.gap
+                sage: RootSystem(['F',4]).root_space().weyl_group()                     # needs sage.graphs sage.libs.gap
                 Weyl Group of type ['F', 4] (as a matrix group acting on the root space)
             """
             from sage.combinat.root_system.weyl_group import WeylGroup
@@ -1691,7 +1691,7 @@ class RootLatticeRealizations(Category_over_base_ring):
             EXAMPLES::
 
                 sage: L = RootSystem(['A',4]).root_lattice()
-                sage: tau = L.tau_epsilon_operator_on_almost_positive_roots([1,3])      # needs sage.libs.gap
+                sage: tau = L.tau_epsilon_operator_on_almost_positive_roots([1,3])      # needs sage.graphs sage.libs.gap
                 sage: alpha = L.simple_roots()                                          # needs sage.graphs
 
             The action on a negative simple root not in `J`::
@@ -2697,8 +2697,8 @@ class RootLatticeRealizations(Category_over_base_ring):
             Here we plot a single alcove::
 
                 sage: L = RootSystem(["A",3,1]).ambient_space()
-                sage: W = L.weyl_group()                                                # needs sage.libs.gap
-                sage: L.plot(alcoves=[W.one()], reflection_hyperplanes=False, bounding_box=2)       # needs sage.libs.gap sage.plot sage.symbolic
+                sage: W = L.weyl_group()                                                # needs sage.graphs sage.libs.gap
+                sage: L.plot(alcoves=[W.one()], reflection_hyperplanes=False, bounding_box=2)       # needs sage.graphs sage.libs.gap sage.plot sage.symbolic
                 Graphics3d Object
 
             TESTS::
@@ -4312,7 +4312,7 @@ class RootLatticeRealizations(Category_over_base_ring):
                 sage: # needs sage.libs.gap
                 sage: W = WeylGroup(['A',3], prefix='s')
                 sage: w = W.from_reduced_word([1, 2])
-                sage: wl.weyl_group() == W
+                sage: wl.weyl_group() == W                                              # needs sage.graphs
                 False
                 sage: mudom.weyl_action(w)                                              # needs sage.graphs
                 Lambda[1] - 2*Lambda[3]

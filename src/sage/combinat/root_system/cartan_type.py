@@ -2659,7 +2659,7 @@ class CartanType_standard_finite(CartanType_standard, CartanType_finite):
         EXAMPLES::
 
             sage: ct = CartanType(['A', 5])
-            sage: ct.opposition_automorphism()                                          # needs sage.libs.gap
+            sage: ct.opposition_automorphism()                                          # needs sage.graphs sage.libs.gap
             Finite family {1: 5, 2: 4, 3: 3, 4: 2, 5: 1}
 
             sage: ct = CartanType(['D', 4])
