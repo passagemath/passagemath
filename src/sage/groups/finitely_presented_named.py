@@ -550,7 +550,7 @@ def BinaryDihedralPresentation(n):
 
     TESTS::
 
-        sage: for n in range(3, 9):                                                     # needs sage.modules
+        sage: for n in range(3, 9):                                                     # needs sage.modules sage.rings.number_field
         ....:     P = groups.presentation.BinaryDihedral(n)
         ....:     M = groups.matrix.BinaryDihedral(n)
         ....:     assert P.is_isomorphic(M)
