@@ -8,7 +8,7 @@ requires = [
     'wheel >=0.36.2',
     'cypari2 >=2.1.1',
     # 1.12 appears broken on macOS, https://github.com/passagemath/passagemath/issues/445
-    'cysignals >=1.10.2,<1.12',
+    'cysignals ==1.12.0rc2',
     # per https://github.com/scipy/scipy/blob/maintenance/1.13.x/pyproject.toml
     'cython >=3.0.8,<3.1.0',
     'gmpy2 ~=2.1.b999',
@@ -28,7 +28,7 @@ dependencies = [
     # From build/pkgs/sagelib/dependencies
     'conway-polynomials >=0.8',
     'cypari2 >=2.1.1',
-    'cysignals >=1.10.2',
+    'cysignals ==1.12.0rc2',
     'cython >=3.0, != 3.0.3, <4.0',
     'gmpy2 ~=2.1.b999',
     # According to https://pypi.org/project/importlib-metadata/,
