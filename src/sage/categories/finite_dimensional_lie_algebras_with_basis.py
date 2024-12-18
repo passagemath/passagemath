@@ -1512,7 +1512,7 @@ class FiniteDimensionalLieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.groups
+                sage: # needs sage.combinat sage.groups
                 sage: SGA3 = SymmetricGroup(3).algebra(QQ)
                 sage: L = LieAlgebra(associative=SGA3)
                 sage: L.hypercenter()
