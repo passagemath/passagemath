@@ -623,7 +623,7 @@ jobs:
       - name: Bootstrap
         run: |
           export PATH=$(pwd)/build/bin:$PATH
-          eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap)
+          eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
           ./bootstrap
 
       - name: Cache SAGE_LOCAL
