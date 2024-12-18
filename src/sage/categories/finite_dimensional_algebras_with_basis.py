@@ -1149,7 +1149,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.groups sage.modules
+                sage: # needs sage.combinat sage.groups
                 sage: S4 = SymmetricGroupAlgebra(QQ, 4)
                 sage: S4.is_commutative()
                 False
@@ -1178,7 +1178,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.groups sage.modules
+                sage: # needs sage.combinat sage.groups
                 sage: QS3 = SymmetricGroupAlgebra(QQ, 3)
                 sage: a = QS3([2,1,3])
                 sage: a.to_matrix(side='left')
@@ -1232,7 +1232,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.groups sage.modules
+                sage: # needs sage.combinat sage.groups
                 sage: QS3 = SymmetricGroupAlgebra(QQ, 3)
                 sage: P = Permutation
                 sage: a = 3 * QS3(P([1,2,3])) + QS3(P([1,3,2])) + QS3(P([2,1,3]))
@@ -1243,8 +1243,6 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
                 [1, 2, 3]
                 sage: ~b == a
                 True
-
-                sage: # needs sage.groups sage.modules
                 sage: a = 3 * QS3.one()
                 sage: b = ~a
                 sage: b * a == QS3.one()
@@ -1255,19 +1253,18 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
                 True
 
                 sage: R.<t> = QQ[]
-                sage: RS3 = SymmetricGroupAlgebra(R, 3)                                 # needs sage.groups sage.modules
-                sage: a = RS3(P([1,2,3])) - RS3(P([1,3,2])) + RS3(P([2,1,3])); ~a       # needs sage.groups sage.modules
+                sage: RS3 = SymmetricGroupAlgebra(R, 3)                                 # needs sage.combinat sage.groups
+                sage: a = RS3(P([1,2,3])) - RS3(P([1,3,2])) + RS3(P([2,1,3])); ~a       # needs sage.combinat sage.groups
                 -1/2*[1, 3, 2] + 1/2*[2, 1, 3] + 1/2*[2, 3, 1] + 1/2*[3, 1, 2]
 
             Some examples on elements that do not have an inverse::
 
-                sage: c = 2 * QS3(P([1,2,3])) + QS3(P([1,3,2])) + QS3(P([2,1,3]))       # needs sage.groups sage.modules
-                sage: ~c                                                                # needs sage.groups sage.modules
+                sage: # needs sage.combinat sage.groups
+                sage: c = 2 * QS3(P([1,2,3])) + QS3(P([1,3,2])) + QS3(P([2,1,3]))
+                sage: ~c
                 Traceback (most recent call last):
                 ...
                 ValueError: cannot invert self (= 2*[1, 2, 3] + [1, 3, 2] + [2, 1, 3])
-
-                sage: # needs sage.groups sage.modules
                 sage: ZS3 = SymmetricGroupAlgebra(ZZ, 3)
                 sage: aZ = 3 * ZS3(P([1,2,3])) + ZS3(P([1,3,2])) + ZS3(P([2,1,3]))
                 sage: ~aZ
@@ -1284,7 +1281,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             An algebra that does not define ``one_basis()``::
 
-                sage: # needs sage.combinat sage.groups sage.modules
+                sage: # needs sage.combinat sage.groups
                 sage: I = DescentAlgebra(QQ, 3).I()
                 sage: a = 3 * I.one()
                 sage: ~a == 1/3 * I.one()
@@ -1409,8 +1406,8 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: S = SymmetricGroupAlgebra(QQ, 4)                              # needs sage.groups sage.modules
-                    sage: S.cell_poset()                                                # needs sage.groups sage.modules
+                    sage: S = SymmetricGroupAlgebra(QQ, 4)                              # needs sage.combinat sage.groups
+                    sage: S.cell_poset()                                                # needs sage.combinat sage.groups
                     Finite poset containing 5 elements
                 """
 
@@ -1424,8 +1421,8 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.groups sage.modules
-                    sage: S.cell_module_indices([2,1])                                  # needs sage.groups sage.modules
+                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.combinat sage.groups
+                    sage: S.cell_module_indices([2,1])                                  # needs sage.combinat sage.groups
                     Standard tableaux of shape [2, 1]
                 """
 
@@ -1437,8 +1434,8 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: S = SymmetricGroupAlgebra(QQ, 3)                                          # needs sage.groups sage.modules
-                    sage: S._to_cellular_element   # no implementation currently uses this          # needs sage.groups sage.modules
+                    sage: S = SymmetricGroupAlgebra(QQ, 3)                                          # needs sage.combinat sage.groups
+                    sage: S._to_cellular_element   # no implementation currently uses this          # needs sage.combinat sage.groups
                     NotImplemented
                 """
 
@@ -1450,7 +1447,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: # needs sage.combinat sage.groups sage.modules
+                    sage: # needs sage.combinat sage.groups
                     sage: S = SymmetricGroupAlgebra(QQ, 3)
                     sage: mu = Partition([2,1])
                     sage: s = StandardTableau([[1,2],[3]])
@@ -1465,8 +1462,8 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.groups sage.modules
-                    sage: for b in S.basis(): b, S.cellular_involution(b)               # needs sage.groups sage.modules
+                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.combinat sage.groups
+                    sage: for b in S.basis(): b, S.cellular_involution(b)               # needs sage.combinat sage.groups
                     ([1, 2, 3], [1, 2, 3])
                     ([1, 3, 2], 49/48*[1, 3, 2] + 7/48*[2, 3, 1]
                                 - 7/48*[3, 1, 2] - 1/48*[3, 2, 1])
@@ -1492,8 +1489,8 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.groups sage.modules
-                    sage: dict(S.cells())                                               # needs sage.groups sage.modules
+                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.combinat sage.groups
+                    sage: dict(S.cells())                                               # needs sage.combinat sage.groups
                     {[1, 1, 1]: Standard tableaux of shape [1, 1, 1],
                      [2, 1]: Standard tableaux of shape [2, 1],
                      [3]: Standard tableaux of shape [3]}
@@ -1507,8 +1504,8 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.groups sage.modules
-                    sage: S.cellular_basis()                                            # needs sage.groups sage.modules
+                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.combinat sage.groups
+                    sage: S.cellular_basis()                                            # needs sage.combinat sage.groups
                     Cellular basis of Symmetric group algebra of order 3
                      over Rational Field
                 """
@@ -1521,8 +1518,8 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.graphs sage.groups sage.modules
-                    sage: S.cell_module(Partition([2,1]))                               # needs sage.combinat sage.graphs sage.groups sage.modules
+                    sage: S = SymmetricGroupAlgebra(QQ, 3)                              # needs sage.combinat sage.graphs sage.groups
+                    sage: S.cell_module(Partition([2,1]))                               # needs sage.combinat sage.graphs sage.groups
                     Cell module indexed by [2, 1] of Cellular basis of
                      Symmetric group algebra of order 3 over Rational Field
                 """
@@ -1578,7 +1575,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: # needs sage.groups sage.modules
+                    sage: # needs sage,combinat sage.groups
                     sage: S = SymmetricGroupAlgebra(QQ, 4)
                     sage: elt = S([3,1,2,4])
                     sage: ci = elt.cellular_involution(); ci
@@ -1616,11 +1613,11 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                     EXAMPLES::
 
-                        sage: # needs sage.groups sage.modules
+                        sage: # needs sage.combinar sage.groups
                         sage: S2 = SymmetricGroupAlgebra(QQ, 2)
                         sage: S3 = SymmetricGroupAlgebra(QQ, 3)
                         sage: T = S2.tensor(S3)
-                        sage: T.cell_poset()                                            # needs sage.combinat sage.graphs
+                        sage: T.cell_poset()                                            # needs sage.graphs
                         Finite poset containing 6 elements
                     """
                     ret = self._sets[0].cell_poset()
@@ -1637,7 +1634,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                     EXAMPLES::
 
-                        sage: # needs sage.groups sage.modules
+                        sage: # needs sage.combinat sage.groups
                         sage: S2 = SymmetricGroupAlgebra(QQ, 2)
                         sage: S3 = SymmetricGroupAlgebra(QQ, 3)
                         sage: T = S2.tensor(S3)
@@ -1657,7 +1654,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                     EXAMPLES::
 
-                        sage: # needs sage.groups sage.modules
+                        sage: # needs sage.combinat sage.groups
                         sage: S2 = SymmetricGroupAlgebra(QQ, 2)
                         sage: S3 = SymmetricGroupAlgebra(QQ, 3)
                         sage: T = S2.tensor(S3)
@@ -1711,7 +1708,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                     EXAMPLES::
 
-                        sage: # needs sage.groups sage.modules
+                        sage: # needs sage.combinat sage.groups
                         sage: S2 = SymmetricGroupAlgebra(QQ, 2)
                         sage: S3 = SymmetricGroupAlgebra(QQ, 3)
                         sage: T = S2.tensor(S3)
@@ -1748,7 +1745,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                     EXAMPLES::
 
-                        sage: # needs sage.groups sage.modules
+                        sage: # needs sage.combinat sage.groups
                         sage: S2 = SymmetricGroupAlgebra(QQ, 2)
                         sage: S3 = SymmetricGroupAlgebra(QQ, 3)
                         sage: T = S2.tensor(S3)

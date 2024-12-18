@@ -589,16 +589,16 @@ class Monoids(CategoryWithAxiom):
 
                 EXAMPLES::
 
-                    sage: SG4 = SymmetricGroupAlgebra(ZZ,4)                             # needs sage.groups sage.modules
-                    sage: SG4(1).is_central()                                           # needs sage.groups sage.modules
+                    sage: SG4 = SymmetricGroupAlgebra(ZZ,4)                             # needs sage.combinat sage.groups
+                    sage: SG4(1).is_central()                                           # needs sage.combinat sage.groups
                     True
-                    sage: SG4(Permutation([1,3,2,4])).is_central()                      # needs sage.groups sage.modules
+                    sage: SG4(Permutation([1,3,2,4])).is_central()                      # needs sage.combinat sage.groups
                     False
 
-                    sage: A = GroupAlgebras(QQ).example(); A                            # needs sage.groups sage.modules
+                    sage: A = GroupAlgebras(QQ).example(); A                            # needs sage.combinat sage.groups
                     Algebra of Dihedral group of order 8
                      as a permutation group over Rational Field
-                    sage: sum(A.basis()).is_central()                                   # needs sage.groups sage.modules
+                    sage: sum(A.basis()).is_central()                                   # needs sage.combinat sage.groups
                     True
                 """
                 return all(i * self == self * i

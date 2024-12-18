@@ -2920,7 +2920,7 @@ class JoinCategory(CategoryWithParameters):
     the underlying implementation is the same for all finite fields,
     we have::
 
-        sage: # needs sage.groups sage.rings.finite_rings
+        sage: # needs sage.combinat sage.groups sage.rings.finite_rings
         sage: G = SymmetricGroup(10)
         sage: A3 = G.algebra(GF(3))
         sage: A5 = G.algebra(GF(5))
