@@ -769,6 +769,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         Test zero polynomial::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = PolynomialRing(GF(65537), implementation="FLINT")
             sage: R.zero().squarefree_decomposition()
             Traceback (most recent call last):

@@ -2272,6 +2272,7 @@ cdef class Polynomial_rational_flint(Polynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = QQ[]
             sage: (x^5 + 17*x^3 + x + 3).factor_mod(3)
             x * (x^2 + 1)^2
@@ -2282,7 +2283,7 @@ cdef class Polynomial_rational_flint(Polynomial):
         are supported (see :issue:`20631`)::
 
             sage: R.<zeta> = QQ[]
-            sage: (zeta^2 + zeta + 1).factor_mod(7)
+            sage: (zeta^2 + zeta + 1).factor_mod(7)                                     # needs sage.libs.pari
             (zeta + 3) * (zeta + 5)
         """
         from sage.rings.finite_rings.finite_field_constructor import FiniteField
@@ -2402,17 +2403,18 @@ cdef class Polynomial_rational_flint(Polynomial):
         EXAMPLES::
 
             sage: R.<x> = QQ[]
-            sage: R((x-1)*(x+1)).hensel_lift(7, 2)
+            sage: R((x-1)*(x+1)).hensel_lift(7, 2)                                      # needs sage.libs.pari
             [x + 1, x + 48]
 
         If the input polynomial `f` is not monic, we get a factorization of
         `f / lc(f)`::
 
-            sage: R(2*x^2 - 2).hensel_lift(7, 2)
+            sage: R(2*x^2 - 2).hensel_lift(7, 2)                                        # needs sage.libs.pari
             [x + 1, x + 48]
 
         TESTS::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = QQ[]
             sage: R(0).hensel_lift(7, 2)
             []
@@ -2424,6 +2426,7 @@ cdef class Polynomial_rational_flint(Polynomial):
         Variable names that are reserved in PARI, such as ``I``, are
         supported (see :issue:`20631`)::
 
+            sage: # needs sage.libs.pari
             sage: R.<I> = QQ[]
             sage: (I^2 + 1).hensel_lift(5, 3)
             [I + 57, I + 68]
@@ -2495,9 +2498,9 @@ cdef class Polynomial_rational_flint(Polynomial):
 
             sage: R.<t> = QQ[]
             sage: f = t^3 + t + 1
-            sage: d = f.discriminant(); d
+            sage: d = f.discriminant(); d                                               # needs sage.libs.pari
             -31
-            sage: d.parent() is QQ
+            sage: d.parent() is QQ                                                      # needs sage.libs.pari
             True
             sage: EllipticCurve([1, 1]).discriminant() / 16                             # needs sage.schemes
             -31
@@ -2506,18 +2509,19 @@ cdef class Polynomial_rational_flint(Polynomial):
 
             sage: R.<t> = QQ[]
             sage: f = 2*t^3 + t + 1
-            sage: d = f.discriminant(); d
+            sage: d = f.discriminant(); d                                               # needs sage.libs.pari
             -116
 
         ::
 
             sage: R.<t> = QQ[]
             sage: f = t^3 + 3*t - 17
-            sage: f.discriminant()
+            sage: f.discriminant()                                                      # needs sage.libs.pari
             -7911
 
         TESTS::
 
+            sage: # needs sage.libs.pari
             sage: R.<t> = QQ[]
             sage: R(0).discriminant()
             0
@@ -2530,7 +2534,7 @@ cdef class Polynomial_rational_flint(Polynomial):
         supported (see :issue:`20631`)::
 
             sage: R.<I> = QQ[]
-            sage: (I^2 + 1).discriminant()
+            sage: (I^2 + 1).discriminant()                                              # needs sage.libs.pari
             -4
         """
         return QQ(self._pari_with_name().poldisc())
@@ -2551,6 +2555,7 @@ cdef class Polynomial_rational_flint(Polynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: P.<x> = QQ[]
             sage: u = x^7 + x + 1
             sage: u.galois_group_davenport_smith_test()
