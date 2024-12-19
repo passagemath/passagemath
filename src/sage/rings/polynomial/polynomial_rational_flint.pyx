@@ -39,8 +39,6 @@ from sage.libs.flint.fmpq_poly_sage cimport *
 from sage.libs.gmp.mpz cimport *
 from sage.libs.gmp.mpq cimport *
 
-from cypari2.gen import Gen as pari_gen
-
 from sage.rings.complex_arb cimport ComplexBall
 from sage.rings.integer cimport Integer, smallInteger
 from sage.rings.integer_ring import ZZ
@@ -56,6 +54,12 @@ from sage.structure.element cimport Element
 from sage.structure.element import coerce_binop
 
 from sage.misc.cachefunc import cached_method
+
+try:
+    from cypari2.gen import Gen as pari_gen
+except ImportError:
+    pari_gen = ()
+
 
 cdef inline bint _do_sig(fmpq_poly_t op) noexcept:
     """
