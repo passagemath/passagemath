@@ -1384,7 +1384,7 @@ cdef class ComplexBall(RingElement):
             sage: NF.<a> = QuadraticField(-1, embedding=None)                           # needs sage.rings.number_field
             sage: CBF(a)                                                                # needs sage.rings.number_field
             1.000000000000000*I
-            sage: CBF.coerce(a)
+            sage: CBF.coerce(a)                                                         # needs sage.rings.number_field
             Traceback (most recent call last):
             ...
             TypeError: no canonical coercion ...

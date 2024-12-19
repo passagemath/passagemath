@@ -417,11 +417,11 @@ class InterfaceInit(Converter):
             sage: f(x) = x
             sage: m.symbol(f)
             '_SAGE_VAR_x'
-            sage: ii = InterfaceInit(gp)
-            sage: ii.symbol(x)
+            sage: ii = InterfaceInit(gp)                                                # needs sage.libs.pari
+            sage: ii.symbol(x)                                                          # needs sage.libs.pari
             'x'
-            sage: g = InterfaceInit(giac)
-            sage: g.symbol(x)
+            sage: g = InterfaceInit(giac)                                               # needs sage.libs.giac
+            sage: g.symbol(x)                                                           # needs sage.libs.giac
             'sageVARx'
         """
         if self.interface.name() == 'maxima':
@@ -434,15 +434,14 @@ class InterfaceInit(Converter):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.symbolic.expression_conversions import InterfaceInit
             sage: ii = InterfaceInit(gp)
             sage: f = 2+SR(I)
             sage: ii.pyobject(f, f.pyobject())
             'I + 2'
-
             sage: ii.pyobject(SR(2), 2)
             '2'
-
             sage: ii.pyobject(pi, pi.pyobject())
             'Pi'
         """
@@ -881,7 +880,7 @@ class PolynomialConverter(Converter):
         TESTS::
 
             sage: t, x, z = SR.var('t,x,z')
-            sage: QQ[i]['x,y,z,t'](4*I*t + 2*x -12*z + 2)
+            sage: QQ[i]['x,y,z,t'](4*I*t + 2*x -12*z + 2)                       # needs sage.rings.number_field
             2*x - 12*z + (4*I)*t + 2
         """
         if not (ring is None or base_ring is None):

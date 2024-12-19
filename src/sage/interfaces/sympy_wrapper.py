@@ -133,7 +133,7 @@ class SageSet(Set):
             sage: sPrimes = Primes()._sympy_(); sPrimes
             SageSet(Set of all prime numbers: 2, 3, 5, 7, ...)
             sage: iter_sPrimes = iter(sPrimes)
-            sage: next(iter_sPrimes), next(iter_sPrimes), next(iter_sPrimes)
+            sage: next(iter_sPrimes), next(iter_sPrimes), next(iter_sPrimes)            # needs sage.libs.pari
             (2, 3, 5)
         """
         for element in self._sage_():

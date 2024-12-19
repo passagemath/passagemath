@@ -57,7 +57,7 @@ cimport gmpy2
 gmpy2.import_gmpy2()
 
 try:
-    from sage.libs.pari.all import pari_gen
+    from sage.libs.pari.all import pari_gen, pari
 except ImportError:
     pari_gen = ()
 
@@ -1435,7 +1435,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
         """
         if self.is_real():
             return self.real().__pari__()
-        return sage.libs.pari.all.pari.complex(self.real() or 0, self.imag())
+        return pari.complex(self.real() or 0, self.imag())
 
     def __mpc__(self):
         """

@@ -146,7 +146,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             False
             sage: SR.has_coerce_map_from(Integers(8))
             True
-            sage: SR.has_coerce_map_from(GF(9, 'a'))
+            sage: SR.has_coerce_map_from(GF(9, 'a'))                                    # needs sage.rings.finite_rings
             True
             sage: SR.has_coerce_map_from(RealBallField())
             True
@@ -157,7 +157,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
 
         TESTS::
 
-            sage: SR.has_coerce_map_from(pari)
+            sage: SR.has_coerce_map_from(pari)                                          # needs sage.libs.pari
             False
 
         Check if arithmetic with bools works (see :issue:`9560`)::
@@ -182,9 +182,9 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             sage: SR.has_coerce_map_from(SR.subring(no_variables=True))
             True
 
-            sage: SR.has_coerce_map_from(AA)
+            sage: SR.has_coerce_map_from(AA)                                            # needs sage.rings.number_field
             True
-            sage: SR.has_coerce_map_from(QQbar)
+            sage: SR.has_coerce_map_from(QQbar)                                         # needs sage.rings.number_field
             True
         """
         if isinstance(R, type):
@@ -246,8 +246,8 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             <class 'sage.symbolic.expression.Expression'>
             sage: a.parent()
             Symbolic Ring
-            sage: K.<a> = QuadraticField(-3)
-            sage: a + sin(x)
+            sage: K.<a> = QuadraticField(-3)                                            # needs sage.rings.number_field
+            sage: a + sin(x)                                                            # needs sage.rings.number_field
             I*sqrt(3) + sin(x)
             sage: x = var('x'); y0,y1 = PolynomialRing(ZZ,2,'y').gens()
             sage: x+y0/y1
@@ -307,6 +307,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
 
         Polynomial ring element factorizations::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = QQ[]
             sage: SR(factor(5*x^2 - 5))
             5*(x + 1)*(x - 1)

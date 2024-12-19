@@ -38,10 +38,10 @@ type the following::
     pi
     sage: gap(pi)                                                                       # needs sage.libs.gap
     pi
-    sage: gp(pi)
+    sage: gp(pi)                                                                        # needs sage.libs.pari
     3.141592653589793238462643383     # 32-bit
     3.1415926535897932384626433832795028842   # 64-bit
-    sage: pari(pi)
+    sage: pari(pi)                                                                      # needs sage.libs.pari
     3.14159265358979
     sage: kash(pi)                    # optional - kash
     3.14159265358979323846264338328
@@ -63,7 +63,7 @@ can be coerced into other systems or evaluated.
     %pi+(4*%e)/5
     sage: RealField(15)(a)           # 15 *bits* of precision
     5.316
-    sage: gp(a)
+    sage: gp(a)                                                                         # needs sage.libs.pari
     5.316218116357029426750873360              # 32-bit
     5.3162181163570294267508733603616328824    # 64-bit
     sage: print(mathematica(a))                  # optional - mathematica
@@ -626,7 +626,7 @@ Note that conversions to real fields will give TypeErrors::
     Traceback (most recent call last):
     ...
     TypeError: unable to simplify to float approximation
-    sage: gp(SR.I())
+    sage: gp(SR.I())                                                                    # needs sage.libs.pari
     I
     sage: RR(SR.I())
     Traceback (most recent call last):
@@ -833,6 +833,7 @@ class GoldenRatio(Constant):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: golden_ratio._algebraic_(QQbar)
             1.618033988749895?
             sage: QQbar(golden_ratio)
@@ -882,7 +883,7 @@ class Log2(Constant):
         log(2)
         sage: maxima(log2).float()
         0.6931471805599453
-        sage: gp(log2)
+        sage: gp(log2)                                                                  # needs sage.libs.pari
         0.6931471805599453094172321215             # 32-bit
         0.69314718055994530941723212145817656807   # 64-bit
         sage: RealField(150)(2).log()
