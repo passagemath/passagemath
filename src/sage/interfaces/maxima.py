@@ -251,7 +251,7 @@ We can also compute the echelon form in Sage::
     [  0   0   0   0]
     [  0   0   0   0]
     [  0   0   0   0]
-    sage: B.charpoly('x').factor()
+    sage: B.charpoly('x').factor()                                                      # needs sage.libs.pari
     (x - 4) * x^3
 
 Laplace Transforms
