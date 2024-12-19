@@ -1237,7 +1237,7 @@ cdef class Expression(Expression_abc):
             'Sin[(Pi)+(2)]'
 
             sage: f = pi + I*e
-            sage: f._pari_init_()
+            sage: f._pari_init_()                                                       # needs sage.libs.pari
             '(Pi)+((exp(1))*(I))'
 
         TESTS:
@@ -1870,7 +1870,7 @@ cdef class Expression(Expression_abc):
 
             sage: ComplexField(200)(SR(1/11))
             0.090909090909090909090909090909090909090909090909090909090909
-            sage: zeta(x).subs(x=I)._complex_mpfr_field_(ComplexField(70))
+            sage: zeta(x).subs(x=I)._complex_mpfr_field_(ComplexField(70))              # needs sage.libs.pari
             0.0033002236853241028742 - 0.41815544914132167669*I
             sage: gamma(x).subs(x=I)._complex_mpfr_field_(ComplexField(60))
             -0.1549498283018106... - 0.49801566811835604*I
@@ -1901,7 +1901,7 @@ cdef class Expression(Expression_abc):
 
             sage: CDF(SR(1/11))
             0.09090909090909091
-            sage: zeta(x).subs(x=I)._complex_double_(CDF)  # rel tol 1e-16
+            sage: zeta(x).subs(x=I)._complex_double_(CDF)  # rel tol 1e-16              # needs sage.libs.pari
             0.003300223685324103 - 0.4181554491413217*I
             sage: gamma(x).subs(x=I)._complex_double_(CDF)
             -0.15494982830181067 - 0.49801566811835607*I
@@ -2004,7 +2004,7 @@ cdef class Expression(Expression_abc):
             4.242640687119285?
             sage: AA(sqrt(2) ^ 4) == 4
             True
-            sage: AA(-golden_ratio)
+            sage: AA(-golden_ratio)                                                     # needs sage.libs.pari
             -1.618033988749895?
             sage: QQbar(SR(2*I)^(1/2))
             1 + 1*I
@@ -2519,7 +2519,7 @@ cdef class Expression(Expression_abc):
             True
             sage: (sqrt(2) + 2^(1/3) - 1).is_algebraic()
             True
-            sage: (I*golden_ratio + sqrt(2)).is_algebraic()
+            sage: (I*golden_ratio + sqrt(2)).is_algebraic()                             # needs sage.libs.pari
             True
             sage: (sqrt(2) + pi).is_algebraic()
             False
@@ -9799,7 +9799,7 @@ cdef class Expression(Expression_abc):
 
         ::
 
-            sage: gp('gamma(1+I)')
+            sage: gp('gamma(1+I)')                                                      # needs sage.libs.pari
             0.4980156681183560427136911175 - 0.1549498283018106851249551305*I # 32-bit
             0.49801566811835604271369111746219809195 - 0.15494982830181068512495513048388660520*I # 64-bit
 
@@ -12209,6 +12209,7 @@ cdef class Expression(Expression_abc):
 
         Now let us find some roots over different rings::
 
+            sage: # needs sage.libs.pari
             sage: f.roots(ring=CC)
             [(-0.0588115223184..., 1),
              (-1.331099917875... - 1.52241655183732*I, 1),
