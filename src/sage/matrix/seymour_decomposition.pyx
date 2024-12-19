@@ -2741,12 +2741,12 @@ cdef class ThreeSumNode(SumNode):
         ``three_sum_strategy="distributed_ranks"`` or ``"Wide_Wide"``.
 
         The matrix representing the first child is
-        `M_1=\begin{bmatrix} A & a_2 & a_2\\ a_1^T & 0 & \epsilon_2\end{bmatrix}`
+        `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon\end{bmatrix}`,
         and the matrix representing the second child is
-        `M_2=\begin{bmatrix} \epsilon_1 & 0 & b_2^T\\ b_1 & b_1 & B\end{bmatrix}`,
-        where `\epsilon_1`, `\epsilon_2` are `1` or `-1`.
+        `M_2=\begin{bmatrix} \varepsilon & 0 & b^T\\ d & d & D\end{bmatrix}`,
+        where `\varepsilon` is `1` or `-1`.
         And the matrix representing ``self`` is a permutation of
-        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a_2 b_2^T \\ b_1 a_1^T & B\end{bmatrix}`.
+        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B\end{bmatrix}`.
 
         ``distributed_ranks`` is named after the two rank 1 off-diagonal blocks.
         ``Wide_Wide`` is named after the structure of the two children.

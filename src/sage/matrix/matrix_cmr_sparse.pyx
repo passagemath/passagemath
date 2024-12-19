@@ -626,8 +626,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         Suppose that ``first_index`` indicates the last column of ``first_mat`` and
         ``second_index`` indicates the first row of ``second_mat``,
         i.e, the first matrix is `M_1=\begin{bmatrix} A & a\end{bmatrix}`
-        and the second matrix is `M_2=\begin{bmatrix} b^T \\ B\end{bmatrix}`. Then
-        the two sum `M_1 \oplus_2 M_2 =\begin{bmatrix}A & ab^T\\ 0 & B\end{bmatrix}`.
+        and the second matrix is `M_2=\begin{bmatrix} b^T \\ D\end{bmatrix}`. Then
+        the two sum `M_1 \oplus_2 M_2 =\begin{bmatrix}A & ab^T\\ 0 & D\end{bmatrix}`.
 
         The terminology "2-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
@@ -811,18 +811,17 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         ``first_index1``, ``first_index2``, ``second_index1``, ``second_index2``.
 
         Suppose that ``three_sum_strategy="distributed_ranks"``.
-        If ``first_index1`` indexes a row vector `a_1^T` and
-        ``first_index2`` indexes a column vector `a_2` of ``first_mat``,
-        then ``second_index1`` indexes a column vector `b_1` and
-        ``second_index2`` indexes a row vector `b_2` of ``second_mat``.
+        If ``first_index1`` indexes a row vector `c^T` and
+        ``first_index2``, ``first_index3`` indexes two column vectors `a` of ``first_mat``,
+        then ``second_index1`` indexes a row vector `b` and
+        ``second_index2``, ``second_index3`` indexes two row vectors `d` of ``second_mat``.
         In this case,
         the first matrix is
-        `M_1=\begin{bmatrix} A & a_2 \\ a_1^T & *\end{bmatrix}`
+        `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon\end{bmatrix}`
         and the second matrix is
-        `M_2=\begin{bmatrix} * & b_2^T\\ b_1 & B\end{bmatrix}`,
-        where the entry `*` is not relevant in the construction.
+        `M_2=\begin{bmatrix} \varepsilon & 0 & b^T\\ d & d & D\end{bmatrix}`.
         Then the Seymour/Schrijver 3-sum is the matrix
-        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a_2 b_2^T \\ b_1 a_1^T & B\end{bmatrix}`.
+        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B\end{bmatrix}`.
 
         Suppose that ``three_sum_strategy="concentrated_rank"``.
         If ``first_index1`` and ``first_index2`` both index row vectors
@@ -973,11 +972,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         Return the 3-sum matrix constructed from the given matrices ``first_mat`` and
         ``second_mat``, assume that ``three_sum_strategy="distributed_ranks"``.
         The first matrix is
-        `M_1=\begin{bmatrix} A & a_2 & a_2\\ a_1^T & 0 & 1\end{bmatrix}`
+        `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon\end{bmatrix}`
         and the second matrix is
-        `M_2=\begin{bmatrix} 1 & 0 & b_2^T\\ b_1 & b_1 & B\end{bmatrix}`.
+        `M_2=\begin{bmatrix} \varepsilon & 0 & b^T\\ d & d & D\end{bmatrix}`.
         Then the Seymour/Schrijver 3-sum is the matrix
-        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a_2 b_2^T \\ b_1 a_1^T & B\end{bmatrix}`.
+        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B\end{bmatrix}`.
 
         The terminology "3-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
@@ -989,10 +988,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         - ``first_mat`` -- the first integer matrix `M_1`
         - ``second_mat`` -- the second integer matrix `M_2`
-        - ``first_row_index`` -- the row index of `a_1^T` in `M_1`
-        - ``first_columns_index`` -- the column indices of `a_2` in `M_1`
-        - ``second_row_index`` -- the row index of `b_2^T` in `M_2`
-        - ``second_columns_index`` -- the column indices of `b_1`  in `M_2`
+        - ``first_row_index`` -- the row index of `c^T` in `M_1`
+        - ``first_columns_index`` -- the column indices of `a` in `M_1`
+        - ``second_row_index`` -- the row index of `b^T` in `M_2`
+        - ``second_columns_index`` -- the column indices of `d`  in `M_2`
         - ``algorithm`` -- ``"cmr"`` or ``"direct"``
           If ``algorithm="cmr"``, then use :meth:`_three_sum_cmr`;
           If ``algorithm="direct"``, then construct three sum directly.
@@ -1081,7 +1080,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             sage: M1.three_sum_wide_wide(M2, 1, [2, 3], 1, [1, -1])
             Traceback (most recent call last):
             ...
-            ValueError: The given two matrices and related indices do not satisfy the rule for three sum!
+            RuntimeError: User input error
             sage: M1.three_sum_wide_wide(M2, 1, [2, 3], 1, [1, -1], algorithm="direct", verify=False)
             [ 1  1  0  0  0  0  0  0]
             [ 0 -1 -1  1  1  1  1 -1]
@@ -1607,20 +1606,20 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         ``first_mat`` and ``second_mat`` are both totally unimodular.
 
         The first matrix is
-        `M_1=\begin{bmatrix} A & a_2 & a_2\\ a_1^T & 0 & \epsilon_2\end{bmatrix}`
+        `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon_2\end{bmatrix}`
         and the second matrix is
-        `M_2=\begin{bmatrix} \epsilon_1 & 0 & b_2^T\\ b_1 & b_1 & B\end{bmatrix}`,
-        where `\epsilon_1`, `\epsilon_2` are `1` or `-1`.
+        `M_2=\begin{bmatrix} \varepsilon_1 & 0 & b^T\\ d & d & D\end{bmatrix}`,
+        where `\varepsilon_1`, `\varepsilon_2` are `1` or `-1`.
         Then the Seymour/Schrijver 3-sum is the matrix
-        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a_2 b_2^T \\ b_1 a_1^T & B\end{bmatrix}`.
+        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B\end{bmatrix}`.
 
         The terminology "3-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
 
-        The signs of `\epsilon_1` (`\epsilon_2`) are determined by
+        The signs of `\varepsilon_1` (`\varepsilon_2`) are determined by
         a shortest path between two sets of vertices in the bipartite graph,
         where the sets of vertices corresponding to the nonzero
-        row and column indices of `a_1^T, a_2` (`b_2^T, b_1`),
+        row and column indices of `c^T, a` (`b^T, d`),
         and the bipartite graph consists of vertices corresponding to the rows
         and columns of `M`, and edges corresponding to the nonzero entry.
         between the rows and columns of `M`, see [Sch1986]_, Ch. 20.3.
@@ -1633,10 +1632,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``three_sum_mat`` -- the large integer matrix `M`
         - ``first_mat`` -- the first integer matrix `M_1`
         - ``second_mat`` -- the second integer matrix `M_2`
-        - ``first_row_index`` -- the row index of `a_1^T` in `M_1`
-        - ``first_columns_index`` -- the column indices of `a_2` in `M_1`
-        - ``second_row_index`` -- the row index of `b_2^T` in `M_2`
-        - ``second_columns_index`` -- the column indices of `b_1`  in `M_2`
+        - ``first_row_index`` -- the row index of `c^T` in `M_1`
+        - ``first_columns_index`` -- the column indices of `a` in `M_1`
+        - ``second_row_index`` -- the row index of `b^T` in `M_2`
+        - ``second_columns_index`` -- the column indices of `d`  in `M_2`
         - ``sign_verify`` -- boolean (default: ``True``);
           whether to check the sign correctness of `\epsilon_1` and `\epsilon_2`.
 
