@@ -5396,7 +5396,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
 
             sage: r = sqrt(2.0); r
             1.41421356237310
-            sage: r.algebraic_dependency(5)
+            sage: r.algebraic_dependency(5)                                             # needs fpylll
             x^2 - 2
         """
         return sage.arith.misc.algdep(self, n)

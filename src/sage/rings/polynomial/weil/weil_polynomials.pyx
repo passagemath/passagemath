@@ -518,6 +518,7 @@ class WeilPolynomials():
 
     Test that :issue:`29475` is resolved::
 
+        sage: # needs sage.libs.pari
         sage: P.<x> = QQ[]
         sage: u = x^6 + x^5 + 6*x^4 - 2*x^3 + 66*x^2 + 121*x + 1331
         sage: u.is_weil_polynomial()
