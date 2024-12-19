@@ -794,6 +794,7 @@ def nintegral(ex, x, a, b,
     Important note: using PARI/GP one can compute numerical integrals
     to high precision::
 
+        sage: # needs sage.libs.pari
         sage: gp.eval('intnum(x=17,42,exp(-x^2)*log(x))')
         '2.565728500561051474934096410 E-127'            # 32-bit
         '2.5657285005610514829176211363206621657 E-127'  # 64-bit
