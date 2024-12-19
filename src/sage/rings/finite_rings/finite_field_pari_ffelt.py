@@ -72,7 +72,7 @@ class FiniteField_pari_ffelt(FiniteField):
         x^2 + 2*x + 2
         sage: [a^i for i in range(8)]
         [1, a, a + 1, 2*a + 1, 2, 2*a, 2*a + 2, a + 2]
-        sage: TestSuite(k).run()
+        sage: TestSuite(k).run()                                                        # needs sage.modules
 
     Next we compute with a finite field of order 16::
 

@@ -212,7 +212,7 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
 
         sage: a = GF(13)(gap('0*Z(13)')); a                                             # needs sage.libs.gap
         0
-        sage: a.parent()
+        sage: a.parent()                                                                # needs sage.libs.gap
         Finite Field of size 13
 
         sage: F = FiniteField(2^4, 'a', impl='pari_ffelt')

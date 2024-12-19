@@ -286,7 +286,7 @@
         "ntests": 10
     },
     "sage.categories.finite_dimensional_algebras_with_basis": {
-        "ntests": 68
+        "ntests": 66
     },
     "sage.categories.finite_dimensional_bialgebras_with_basis": {
         "ntests": 4
@@ -970,6 +970,9 @@
     "sage.features.pandoc": {
         "ntests": 4
     },
+    "sage.features.pari": {
+        "ntests": 4
+    },
     "sage.features.pdf2svg": {
         "ntests": 4
     },
@@ -1491,7 +1494,7 @@
     },
     "sage.repl.interpreter": {
         "failed": true,
-        "ntests": 113
+        "ntests": 114
     },
     "sage.repl.ipython_extension": {
         "failed": true,
@@ -1616,7 +1619,6 @@
         "ntests": 124
     },
     "sage.rings.finite_rings.finite_field_pari_ffelt": {
-        "failed": true,
         "ntests": 41
     },
     "sage.rings.finite_rings.finite_field_prime_modn": {
@@ -1892,7 +1894,7 @@
         "ntests": 265
     },
     "sage.rings.polynomial.multi_polynomial_ideal": {
-        "ntests": 72
+        "ntests": 74
     },
     "sage.rings.polynomial.multi_polynomial_ring": {
         "failed": true,
@@ -2213,6 +2215,7 @@
         "ntests": 336
     },
     "sage.sets.set": {
+        "failed": true,
         "ntests": 382
     },
     "sage.sets.set_from_iterator": {

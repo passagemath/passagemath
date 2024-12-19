@@ -141,10 +141,12 @@ AUTHORS:
 #
 ##########################################################################
 import os
+import shlex
 
 import sage.interfaces.abc
 
 from sage.env import DOT_SAGE
+from sage.features.pari import Gp as gp_executable
 from sage.interfaces.tab_completion import ExtraTabCompletion
 from sage.libs.pari.all import pari
 from sage.misc.instancedoc import instancedoc
@@ -220,7 +222,7 @@ class Gp(ExtraTabCompletion, Expect):
                         name='pari',
                         prompt='\\? ',
                         # --fast so the system gprc isn't read (we configure below)
-                        command=f"gp --fast --emacs --quiet --stacksize {stacksize}",
+                        command=f"{shlex.quote(gp_executable().absolute_filename())} --fast --emacs --quiet --stacksize {stacksize}",
                         maxread=maxread,
                         server=server,
                         server_tmpdir=server_tmpdir,
@@ -1106,7 +1108,7 @@ def gp_console():
     from sage.repl.rich_output.display_manager import get_display_manager
     if not get_display_manager().is_in_terminal():
         raise RuntimeError('Can use the console only in the terminal. Try %%gp magics instead.')
-    os.system('gp')
+    os.system(shlex.quote(gp_executable().absolute_filename()))
 
 
 def gp_version():
