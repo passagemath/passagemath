@@ -292,7 +292,7 @@ class FiniteFieldFactory(UniqueFactory):
         sage: K.<a> = GF(5**5, name='a', modulus=x^5 - x +1 )
         sage: f = K.modulus(); f
         x^5 + 4*x + 1
-        sage: type(f)
+        sage: type(f)                                                                   # needs sage.libs.flint
          <class 'sage.rings.polynomial.polynomial_zmod_flint.Polynomial_zmod_flint'>
 
     By default, the given generator is not guaranteed to be primitive
