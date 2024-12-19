@@ -1522,7 +1522,7 @@ def solve_mod(eqns, modulus, solution_dict=False):
     factors are small, this can be efficient even if the modulus itself
     is large::
 
-        sage: sorted(solve_mod([x^2 == 41], 10^20))
+        sage: sorted(solve_mod([x^2 == 41], 10^20))                                     # needs sage.libs.pari
         [(4538602480526452429,), (11445932736758703821,), (38554067263241296179,),
         (45461397519473547571,), (54538602480526452429,), (61445932736758703821,),
         (88554067263241296179,), (95461397519473547571,)]
@@ -1530,7 +1530,7 @@ def solve_mod(eqns, modulus, solution_dict=False):
     We solve a simple equation modulo 2::
 
         sage: x,y = var('x,y')
-        sage: solve_mod([x == y], 2)
+        sage: solve_mod([x == y], 2)                                                    # needs sage.libs.pari
         [(0, 0), (1, 1)]
 
     .. warning::
@@ -1550,24 +1550,24 @@ def solve_mod(eqns, modulus, solution_dict=False):
 
     Make sure that we short-circuit in at least some cases::
 
-        sage: solve_mod([2*x==1], 2*next_prime(10^50))
+        sage: solve_mod([2*x==1], 2*next_prime(10^50))                                  # needs sage.libs.pari
         []
 
     Try multi-equation cases::
 
         sage: x, y, z = var("x y z")
-        sage: solve_mod([2*x^2 + x*y, -x*y+2*y^2+x-2*y, -2*x^2+2*x*y-y^2-x-y], 12)
+        sage: solve_mod([2*x^2 + x*y, -x*y+2*y^2+x-2*y, -2*x^2+2*x*y-y^2-x-y], 12)      # needs sage.libs.pari
         [(0, 0), (4, 4), (0, 3), (4, 7)]
         sage: eqs = [-y^2+z^2, -x^2+y^2-3*z^2-z-1, -y*z-z^2-x-y+2, -x^2-12*z^2-y+z]
-        sage: solve_mod(eqs, 11)
+        sage: solve_mod(eqs, 11)                                                        # needs sage.libs.pari
         [(8, 5, 6)]
 
     Confirm that modulus 1 now behaves as it should::
 
         sage: x, y = var("x y")
-        sage: solve_mod([x==1], 1)
+        sage: solve_mod([x==1], 1)                                                      # needs sage.libs.pari
         [(0,)]
-        sage: solve_mod([2*x^2+x*y, -x*y+2*y^2+x-2*y, -2*x^2+2*x*y-y^2-x-y], 1)
+        sage: solve_mod([2*x^2+x*y, -x*y+2*y^2+x-2*y, -2*x^2+2*x*y-y^2-x-y], 1)         # needs sage.libs.pari
         [(0, 0)]
     """
     from sage.rings.finite_rings.integer_mod_ring import Integers
