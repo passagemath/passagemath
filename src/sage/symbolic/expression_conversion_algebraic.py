@@ -161,6 +161,7 @@ class AlgebraicConverter(Converter):
 
         Test :issue:`22571`::
 
+            sage: # needs sage.libs.pari
             sage: a.composition(exp(0, hold=True), exp)
             1
             sage: a.composition(exp(1, hold=True), exp)
@@ -180,6 +181,7 @@ class AlgebraicConverter(Converter):
 
         Check that :issue:`24440` is fixed::
 
+            sage: # needs sage.libs.pari
             sage: QQbar(tanh(pi + 0.1))
             Traceback (most recent call last):
             ...

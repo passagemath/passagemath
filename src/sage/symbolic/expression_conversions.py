@@ -420,8 +420,8 @@ class InterfaceInit(Converter):
             sage: ii = InterfaceInit(gp)                                                # needs sage.libs.pari
             sage: ii.symbol(x)                                                          # needs sage.libs.pari
             'x'
-            sage: g = InterfaceInit(giac)
-            sage: g.symbol(x)
+            sage: g = InterfaceInit(giac)                                               # needs sage.libs.giac
+            sage: g.symbol(x)                                                           # needs sage.libs.giac
             'sageVARx'
         """
         if self.interface.name() == 'maxima':
@@ -440,10 +440,8 @@ class InterfaceInit(Converter):
             sage: f = 2+SR(I)
             sage: ii.pyobject(f, f.pyobject())
             'I + 2'
-
             sage: ii.pyobject(SR(2), 2)
             '2'
-
             sage: ii.pyobject(pi, pi.pyobject())
             'Pi'
         """

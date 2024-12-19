@@ -3587,7 +3587,7 @@ cdef class Expression(Expression_abc):
 
             sage: m = 540579833922455191419978421211010409605356811833049025*sqrt(1/2)
             sage: m1 = 382247666339265723780973363167714496025733124557617743
-            sage: (m == m1).test_relation(domain=QQbar)
+            sage: (m == m1).test_relation(domain=QQbar)                                 # needs sage.rings.number_field
             False
             sage: (m == m1).test_relation()
             False
@@ -4035,8 +4035,8 @@ cdef class Expression(Expression_abc):
             ...
             TypeError: unsupported operand parent(s) for *: 'Finite Field of size 5' and 'Symbolic Ring'
 
-            sage: b = polygen(FiniteField(9), 'b')
-            sage: SR('I') * b
+            sage: b = polygen(FiniteField(9), 'b')                                      # needs sage.rings.finite_rings
+            sage: SR('I') * b                                                           # needs sage.rings.finite_rings
             Traceback (most recent call last):
             ...
             TypeError: positive characteristic not allowed in symbolic computations

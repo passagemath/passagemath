@@ -157,7 +157,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
 
         TESTS::
 
-            sage: SR.has_coerce_map_from(pari)
+            sage: SR.has_coerce_map_from(pari)                                          # needs sage.libs.pari
             False
 
         Check if arithmetic with bools works (see :issue:`9560`)::
@@ -307,6 +307,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
 
         Polynomial ring element factorizations::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = QQ[]
             sage: SR(factor(5*x^2 - 5))
             5*(x + 1)*(x - 1)

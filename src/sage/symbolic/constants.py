@@ -883,7 +883,7 @@ class Log2(Constant):
         log(2)
         sage: maxima(log2).float()
         0.6931471805599453
-        sage: gp(log2)
+        sage: gp(log2)                                                                  # needs sage.libs.pari
         0.6931471805599453094172321215             # 32-bit
         0.69314718055994530941723212145817656807   # 64-bit
         sage: RealField(150)(2).log()

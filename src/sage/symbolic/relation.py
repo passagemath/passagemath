@@ -1511,7 +1511,8 @@ def solve_mod(eqns, modulus, solution_dict=False):
 
     We can solve with respect to a bigger modulus if it consists only of small prime factors::
 
-        sage: [d] = solve_mod([5*x + y == 3, 2*x - 3*y == 9], 3*5*7*11*19*23*29, solution_dict = True)
+        sage: # needs sage.libs.pari
+        sage: [d] = solve_mod([5*x + y == 3, 2*x - 3*y == 9], 3*5*7*11*19*23*29, solution_dict=True)
         sage: d[x]
         12915279
         sage: d[y]
