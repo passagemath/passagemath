@@ -411,7 +411,7 @@ cdef class FractionFieldElement(FieldElement):
             sage: R.<x,y,z> = QQbar[]                                                   # needs sage.rings.number_field
             sage: hash(R.0) == hash(FractionField(R).0)
             True
-            sage: ((x+1)/(x^2+1)).subs({x: 1})
+            sage: ((x+1)/(x^2+1)).subs({x: 1})                                          # needs sage.libs.pari
             1
         """
         if self._denominator.is_one():

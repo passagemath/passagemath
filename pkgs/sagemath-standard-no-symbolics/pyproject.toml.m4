@@ -8,7 +8,6 @@ requires = [
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_setuptools
     SPKG_INSTALL_REQUIRES_sage_setup
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_gmpy2
@@ -64,7 +63,6 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_schemes
     SPKG_INSTALL_REQUIRES_sagemath_singular
 dnl From build/pkgs/sagelib/dependencies
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_gmpy2

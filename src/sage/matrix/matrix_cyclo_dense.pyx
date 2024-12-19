@@ -5,6 +5,7 @@
 # distutils: include_dirs = NTL_INCDIR
 # distutils: library_dirs = NTL_LIBDIR
 # distutils: extra_link_args = NTL_LIBEXTRA
+# sage.doctest: needs sagemath-linbox
 """
 Matrices over Cyclotomic Fields
 
@@ -62,11 +63,9 @@ from sage.matrix.constructor import matrix
 from sage.matrix.matrix_space import MatrixSpace
 from sage.matrix.matrix cimport Matrix
 from sage.matrix import matrix_dense
-from sage.matrix.matrix_integer_dense cimport _lift_crt
 from sage.structure.element cimport Matrix as baseMatrix
-from sage.matrix.misc_flint import matrix_integer_dense_rational_reconstruction
 
-from sage.arith.misc import binomial, previous_prime
+from sage.arith.misc import binomial
 from sage.rings.rational_field import QQ
 from sage.rings.integer_ring import ZZ
 from sage.rings.real_mpfr import create_RealNumber as RealNumber
@@ -75,16 +74,7 @@ from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.number_field.number_field_element cimport NumberFieldElement
 from sage.rings.number_field.number_field_element_quadratic cimport NumberFieldElement_quadratic
 
-from sage.structure.proof.proof import get_flag as get_proof_flag
 from sage.misc.verbose import verbose
-
-from sage.matrix.matrix_modn_dense_double import MAX_MODULUS as MAX_MODULUS_modn_dense_double
-from sage.arith.multi_modular import MAX_MODULUS as MAX_MODULUS_multi_modular
-MAX_MODULUS = min(MAX_MODULUS_modn_dense_double, MAX_MODULUS_multi_modular)
-
-# parameters for tuning
-echelon_primes_increment = 15
-echelon_verbose_level = 1
 
 
 cdef class Matrix_cyclo_dense(Matrix_dense):
@@ -648,41 +638,12 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
             sage: (-m)*n
             [-23250]
         """
-        A, denom_self = self._matrix._clear_denom()
-        B, denom_right = (<Matrix_cyclo_dense>right)._matrix._clear_denom()
-
-        # conservative but correct estimate: 2 is there to account for the
-        # sign of the entries
-        bound = 1 + 2 * A.height() * B.height() * self._ncols
-
-        n = self._base_ring._n()
-        p = previous_prime(MAX_MODULUS)
-        prod = 1
-        v = []
-        while prod <= bound:
-            while (n >= 2 and p % n != 1) or denom_self % p == 0 or denom_right % p == 0:
-                if p == 2:
-                    raise RuntimeError("we ran out of primes in matrix multiplication.")
-                p = previous_prime(p)
-            prod *= p
-            Amodp, _ = self._reductions(p)
-            Bmodp, _ = right._reductions(p)
-            _, S = self._reduction_matrix(p)
-            X = Amodp[0]._matrix_from_rows_of_matrices([Amodp[i] * Bmodp[i] for i in range(len(Amodp))])
-            v.append(S*X)
-            p = previous_prime(p)
-        M = matrix(ZZ, self._base_ring.degree(), self._nrows*right.ncols())
-        _lift_crt(M, v)
-        d = denom_self * denom_right
-        if d == 1:
-            M = M.change_ring(QQ)
+        try:
+            from .matrix_cyclo_linbox import _matrix_times_matrix_
+        except ImportError:
+            return Matrix._matrix_times_matrix_(self, right)
         else:
-            M = (1/d)*M
-        cdef Matrix_cyclo_dense C = Matrix_cyclo_dense.__new__(Matrix_cyclo_dense,
-                    MatrixSpace(self._base_ring, self._nrows, right.ncols()),
-                                                               None, None, None)
-        C._matrix = M
-        return C
+            return _matrix_times_matrix_(self, right)
 
     cdef long _hash_(self) except -1:
         """
@@ -1374,56 +1335,8 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
             sage: A = matrix(CyclotomicField(1),2,[1,2,3,4]); A.charpoly()
             x^2 - 5*x - 2
         """
-        cdef Matrix_cyclo_dense A
-        A = Matrix_cyclo_dense.__new__(Matrix_cyclo_dense, self.parent(),
-                                       None, None, None)
-
-        proof = get_proof_flag(proof, "linear_algebra")
-
-        n = self._base_ring._n()
-        p = previous_prime(MAX_MODULUS)
-        prod = 1
-        v = []
-        #A, denom = self._matrix._clear_denom()
-        # TODO: this might be stupidly slow
-        denom = self._matrix.denominator()
-        A._matrix = <Matrix_rational_dense>(denom*self._matrix)
-        bound = A._charpoly_bound()
-        L_last = 0
-        while prod <= bound:
-            while (n >= 2  and p % n != 1) or denom % p == 0:
-                if p == 2:
-                    raise RuntimeError("we ran out of primes in multimodular charpoly algorithm.")
-                p = previous_prime(p)
-
-            X = A._charpoly_mod(p)
-            v.append(X)
-            prod *= p
-            p = previous_prime(p)
-
-            # if we've used enough primes as determined by bound, or
-            # if we've used 3 primes, we check to see if the result is
-            # the same.
-            if prod >= bound or (not proof and (len(v) % 3 == 0)):
-                M = matrix(ZZ, self._base_ring.degree(), self._nrows+1)
-                L = _lift_crt(M, v)
-                if not proof and L == L_last:
-                    break
-                L_last = L
-
-        # Now each column of L encodes a coefficient of the output polynomial,
-        # with column 0 being the constant coefficient.
-        K = self.base_ring()
-        R = K[var]
-        coeffs = [K(w.list()) for w in L.columns()]
-        f = R(coeffs)
-
-        # Rescale to account for denominator, if necessary
-        if denom != 1:
-            x = R.gen()
-            f = f(x * denom) * (1 / (denom**f.degree()))
-
-        return f
+        from .matrix_cyclo_linbox import _charpoly_multimodular
+        return _charpoly_multimodular(self, var, proof)
 
     def _reductions(self, p):
         """
@@ -1552,9 +1465,9 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
         cache[p] = ans
         return ans
 
-    def echelon_form(self, algorithm='multimodular', height_guess=None):
+    def echelon_form(self, algorithm=None, height_guess=None):
         """
-        Find the echelon form of self, using the specified algorithm.
+        Find the echelon form of ``self``, using the specified algorithm.
 
         The result is cached for each algorithm separately.
 
@@ -1623,6 +1536,14 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
             self.cache('pivots', ())
             return E
 
+        if algorithm is None:
+            try:
+                from .matrix_cyclo_linbox import _echelon_form_multimodular
+            except ImportError:
+                algorithm = 'classical'
+            else:
+                algorithm = 'multimodular'
+
         if algorithm == 'multimodular':
             E = self._echelon_form_multimodular(height_guess=height_guess)
         elif algorithm == 'classical':
@@ -1671,122 +1592,8 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
             [   1    0 7/19]
             [   0    1 3/19]
         """
-        cdef Matrix_cyclo_dense res
-        cdef bint is_square
-
-        verbose("entering _echelon_form_multimodular",
-                level=echelon_verbose_level)
-
-        denom = self._matrix.denominator()
-        A = denom * self
-
-        # This bound is chosen somewhat arbitrarily. Changing it affects the
-        # runtime, not the correctness of the result.
-        if height_guess is None:
-            height_guess = (A.coefficient_bound() + 100) * 1000000
-
-        # This is all setup to keep track of various data
-        # in the loop below.
-        p = previous_prime(MAX_MODULUS)
-        found = 0
-        prod = 1
-        n = self._base_ring._n()
-        height_bound = self._ncols * height_guess * A.coefficient_bound() + 1
-        mod_p_ech_ls = []
-        max_pivots = tuple()
-        is_square = self._nrows == self._ncols
-
-        verbose("using height bound %s" % height_bound,
-                level=echelon_verbose_level)
-
-        while True:
-            # Generate primes to use, and find echelon form
-            # modulo those primes.
-            while found < num_primes or prod <= height_bound:
-                if (n == 1) or p % n == 1:
-                    try:
-                        mod_p_ech, piv_ls = A._echelon_form_one_prime(p)
-                    except ValueError:
-                        # This means that we chose a prime which divides
-                        # the denominator of the echelon form of self, so
-                        # just skip it and continue
-                        p = previous_prime(p)
-                        continue
-                    # if we have the identity, just return it, and
-                    # we're done.
-                    if is_square and len(piv_ls) == self._nrows:
-                        self.cache('pivots', tuple(range(self._nrows)))
-                        return self.parent().identity_matrix()
-                    if piv_ls > max_pivots:
-                        mod_p_ech_ls = [mod_p_ech]
-                        max_pivots = piv_ls
-                        # add this to the list of primes
-                        prod = p
-                        found = 1
-                    elif piv_ls == max_pivots:
-                        mod_p_ech_ls.append(mod_p_ech)
-                        # add this to the list of primes
-                        prod *= p
-                        found += 1
-                    else:
-                        # this means that the rank profile mod this
-                        # prime is worse than those that came before,
-                        # so we just loop
-                        p = previous_prime(p)
-                        continue
-
-                p = previous_prime(p)
-
-            if found > num_primes:
-                num_primes = found
-
-            verbose("computed echelon form mod %s primes" % num_primes,
-                    level=echelon_verbose_level)
-            verbose("current product of primes used: %s" % prod,
-                    level=echelon_verbose_level)
-
-            # Use CRT to lift back to ZZ
-            mat_over_ZZ = matrix(ZZ, self._base_ring.degree(),
-                                 self._nrows * self._ncols)
-            _lift_crt(mat_over_ZZ, mod_p_ech_ls)
-            # note: saving the CRT intermediate MultiModularBasis does
-            # not seem to affect the runtime at all
-
-            # Attempt to use rational reconstruction to find
-            # our echelon form
-            try:
-                verbose("attempting rational reconstruction ...",
-                        level=echelon_verbose_level)
-                res = Matrix_cyclo_dense.__new__(Matrix_cyclo_dense,
-                                                 self.parent(),
-                                                 None, None, None)
-                res._matrix = <Matrix_rational_dense>matrix_integer_dense_rational_reconstruction(mat_over_ZZ, prod)
-
-            except ValueError:
-                # If a ValueError is raised here, it means that the
-                # rational reconstruction failed. In this case, add
-                # on a few more primes, and try again.
-
-                num_primes += echelon_primes_increment
-                verbose("rational reconstruction failed, trying with %s primes"%num_primes, level=echelon_verbose_level)
-                continue
-
-            verbose("rational reconstruction succeeded with %s primes!"%num_primes, level=echelon_verbose_level)
-
-            if ((res * res.denominator()).coefficient_bound() *
-                self.coefficient_bound() * self.ncols()) > prod:
-                # In this case, we don't know the result to sufficient
-                # "precision" (here precision is just the modulus,
-                # prod) to guarantee its correctness, so loop.
-
-                num_primes += echelon_primes_increment
-                verbose("height not sufficient to determine echelon form",
-                        level=echelon_verbose_level)
-                continue
-
-            verbose("found echelon form with %s primes, whose product is %s"%(num_primes, prod), level=echelon_verbose_level)
-            self.cache('pivots', max_pivots)
-            return res
+        from .matrix_cyclo_linbox import _echelon_form_multimodular
+        return _echelon_form_multimodular(self, num_primes, height_guess)
 
     def _echelon_form_one_prime(self, p):
         """

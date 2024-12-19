@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-ntl
+# sage_setup: distribution = sagemath-pari
 from sage.libs.flint.types cimport fmpz, fmpz_t, fmpz_poly_t, flint_rand_t
 
 ctypedef fmpz_t cdigit

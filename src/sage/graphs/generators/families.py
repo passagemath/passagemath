@@ -3662,6 +3662,7 @@ def nauty_gentreeg(options='', debug=False):
     (usually inside a loop). Or it can be used to create an entire list all at
     once if there is sufficient memory to contain it::
 
+        sage: # needs nauty
         sage: gen = graphs.nauty_gentreeg("4")
         sage: next(gen)
         Graph on 4 vertices
@@ -3675,7 +3676,7 @@ def nauty_gentreeg(options='', debug=False):
     The number of trees on the first few vertex counts. This agrees with
     :oeis:`A000055`::
 
-        sage: [len(list(graphs.nauty_gentreeg(str(i)))) for i in range(1, 15)]
+        sage: [len(list(graphs.nauty_gentreeg(str(i)))) for i in range(1, 15)]          # needs nauty
         [1, 1, 1, 2, 3, 6, 11, 23, 47, 106, 235, 551, 1301, 3159]
 
     The ``debug`` switch can be used to examine ``gentreeg``'s reaction to the
@@ -3684,6 +3685,7 @@ def nauty_gentreeg(options='', debug=False):
     suppress the indicator of a successful initiation, and so the first returned
     value might be an empty string if ``debug`` is ``True``::
 
+        sage: # needs nauty
         sage: gen = graphs.nauty_gentreeg("4", debug=True)
         sage: print(next(gen))
         >A ...gentreeg ...
@@ -3695,6 +3697,7 @@ def nauty_gentreeg(options='', debug=False):
 
     The number `n` of vertices must be in range 1..128::
 
+        sage: # needs nauty
         sage: list(graphs.nauty_gentreeg("0", debug=False))
         Traceback (most recent call last):
         ...
@@ -3706,6 +3709,7 @@ def nauty_gentreeg(options='', debug=False):
 
     Wrong input::
 
+        sage: # needs nauty
         sage: list(graphs.nauty_gentreeg("3 -x", debug=False))
         Traceback (most recent call last):
         ...

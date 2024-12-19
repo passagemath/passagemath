@@ -646,7 +646,7 @@ class GroupHomset_libgap(HomsetWithBase):
 
         A group homomorphism between a finitely presented group and a subgroup of a permutation group::
 
-            sage: # needs sage.rings.finite_rings
+            sage: # needs sage.combinat sage.rings.finite_rings
             sage: PG = PGU(6,2)
             sage: g, h = PG.gens()
             sage: p1 = h^-3*(h^-1*g^-1)^2*h*g*h^2*g^-1*h^2*g*h^-5*g^-1

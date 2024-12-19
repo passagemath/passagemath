@@ -14721,7 +14721,7 @@ class _FSMProcessIteratorEpsilon_(FSMProcessIterator):
         self.TapeCache = _FSMTapeCacheDetectEpsilon_
         self.visited_states = {}
         kwargs['check_epsilon_transitions'] = False
-        return super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def _push_branch_(self, state, tape_cache, outputs):
         """
@@ -14846,7 +14846,7 @@ class _FSMProcessIteratorAll_(FSMProcessIterator):
         self.TapeCache = _FSMTapeCacheDetectAll_
         self.visited_states = {}
         kwargs['check_epsilon_transitions'] = False
-        return super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 # ****************************************************************************

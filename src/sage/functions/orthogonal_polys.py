@@ -2633,9 +2633,9 @@ class Func_gen_laguerre(OrthogonalFunction):
             sage: gen_laguerre(3, 1/2, sin(x))                                          # needs sage.symbolic
             -1/6*sin(x)^3 + 7/4*sin(x)^2 - 35/8*sin(x) + 35/16
             sage: R.<x> = PolynomialRing(QQ, 'x')
-            sage: gen_laguerre(4, -1/2, x)                                              # needs mpmath
+            sage: gen_laguerre(4, -1/2, x)                                              # needs mpmath sage.libs.pari
             1/24*x^4 - 7/12*x^3 + 35/16*x^2 - 35/16*x + 35/128
-            sage: gen_laguerre(4, -1/2, x + 1)                                          # needs mpmath
+            sage: gen_laguerre(4, -1/2, x + 1)                                          # needs mpmath sage.libs.pari
             1/24*(x + 1)^4 - 7/12*(x + 1)^3 + 35/16*(x + 1)^2 - 35/16*x - 245/128
             sage: gen_laguerre(10, 1, 1 + I)                                            # needs sage.symbolic
             25189/2100*I + 11792/2835

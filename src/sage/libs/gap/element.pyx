@@ -1507,7 +1507,7 @@ cdef class GapElement_Integer(GapElement):
 
             sage: huge = libgap.eval('10^9999');  huge     # gap abbreviates very long ints
             <integer 100...000 (10000 digits)>
-            sage: huge.sage().ndigits()
+            sage: huge.sage().ndigits()                                                 # needs sage.rings.real_interval_field
             10000
         """
         cdef UInt* x
@@ -1963,7 +1963,7 @@ cdef class GapElement_Cyclotomic(GapElement):
 
             sage: libgap.E(3).sage(ring=UniversalCyclotomicField())                     # needs sage.rings.number_field
             E(3)
-            sage: libgap.E(3).sage(ring=CC)
+            sage: libgap.E(3).sage(ring=CC)                                             # needs sage.rings.number_field
             -0.500000000000000 + 0.866025403784439*I
         """
         if ring is None:

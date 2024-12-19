@@ -458,6 +458,8 @@ class sage__libs__flint(JoinFeature):
         JoinFeature.__init__(self, 'sage.libs.flint',
                              [PythonModule('sage.libs.flint.flint_sage'),
                               PythonModule('sage.libs.flint.arith_sage'),
+                              PythonModule('sage.matrix.matrix_integer_dense'),
+                              PythonModule('sage.matrix.matrix_rational_dense'),
                               PythonModule('sage.rings.padics.padic_relaxed_element'),
                               PythonModule('sage.rings.padics.pow_computer_flint'),
                               PythonModule('sage.graphs.chrompoly'),
@@ -584,9 +586,7 @@ class sage__libs__linbox(JoinFeature):
         JoinFeature.__init__(self, 'sage.libs.linbox',
                              [PythonModule('sage.rings.finite_rings.element_givaro'),
                               PythonModule('sage.matrix.matrix_modn_dense_float'),
-                              PythonModule('sage.matrix.matrix_modn_dense_double'),
-                              PythonModule('sage.matrix.matrix_integer_dense'),
-                              PythonModule('sage.matrix.matrix_rational_dense')],
+                              PythonModule('sage.matrix.matrix_modn_dense_double')],
                              spkg='sagemath_linbox', type='standard')
 
 

@@ -128,7 +128,7 @@ Check that :issue:`19839` is fixed::
 
 :issue:`24621`::
 
-    sage: CBF(NumberField(polygen(QQ, 'y')^3 + 20, 'a', embedding=CC(1.35,2.35)).gen())
+    sage: CBF(NumberField(polygen(QQ, 'y')^3 + 20, 'a', embedding=CC(1.35,2.35)).gen())     # needs sage.rings.number_field
     [1.35720880829745...] + [2.35075461245119...]*I
 
 Classes and Methods
@@ -533,9 +533,9 @@ class ComplexBallField(UniqueRepresentation, sage.rings.abc.ComplexBallField):
             True
             sage: CBF.has_coerce_map_from(RealBallField(52))
             False
-            sage: CBF.has_coerce_map_from(QuadraticField(-2))
+            sage: CBF.has_coerce_map_from(QuadraticField(-2))                               # needs sage.rings.number_field
             True
-            sage: CBF.has_coerce_map_from(QuadraticField(2, embedding=None))
+            sage: CBF.has_coerce_map_from(QuadraticField(2, embedding=None))                # needs sage.rings.number_field
             False
 
         Check that there are no coercions from interval or floating-point parents::
@@ -551,6 +551,7 @@ class ComplexBallField(UniqueRepresentation, sage.rings.abc.ComplexBallField):
 
         Check that the map goes through the ``_acb_`` method::
 
+            sage: # needs sage.rings.number_field
             sage: CBF.coerce_map_from(QuadraticField(-2, embedding=AA(-2).sqrt()))
             Conversion via _acb_ method map:
             ...
@@ -606,9 +607,9 @@ class ComplexBallField(UniqueRepresentation, sage.rings.abc.ComplexBallField):
             1.000000000000000*I
             sage: CBF(pi + I/3)                                                         # needs sage.symbolic
             [3.141592653589793 +/- ...e-16] + [0.3333333333333333 +/- ...e-17]*I
-            sage: CBF(QQbar(i/7)) # abs tol 1e-16
+            sage: CBF(QQbar(i/7))  # abs tol 1e-16                                      # needs sage.rings.number_field
             [0.1428571428571429 +/- 4.29e-17]*I
-            sage: CBF(AA(sqrt(2)))                                                      # needs sage.symbolic
+            sage: CBF(AA(sqrt(2)))                                                      # needs sage.rings.number_field sage.symbolic
             [1.414213562373095 +/- ...e-16]
             sage: CBF(CIF(0, 1))
             1.000000000000000*I
@@ -622,8 +623,8 @@ class ComplexBallField(UniqueRepresentation, sage.rings.abc.ComplexBallField):
             [0.3333333333333333 +/- ...e-17] + [0.1666666666666667 +/- ...e-17]*I
             sage: ComplexBallField(106)(1/3, 1/6)
             [0.33333333333333333333333333333333 +/- ...e-33] + [0.16666666666666666666666666666666 +/- ...e-33]*I
-            sage: NF.<a> = QuadraticField(-2)
-            sage: CBF(1/5 + a/2)
+            sage: NF.<a> = QuadraticField(-2)                                           # needs sage.rings.number_field
+            sage: CBF(1/5 + a/2)                                                        # needs sage.rings.number_field
             [0.2000000000000000 +/- ...e-17] + [0.707106781186547 +/- ...e-16]*I
             sage: CBF(infinity, NaN)                                                    # needs sage.symbolic
             [+/- inf] + nan*I
@@ -1104,6 +1105,7 @@ class ComplexBallField(UniqueRepresentation, sage.rings.abc.ComplexBallField):
         We can integrate the real absolute value function by defining a
         piecewise holomorphic extension::
 
+            sage: # needs sage.symbolic
             sage: def real_abs(z, analytic):
             ....:     if z.real().contains_zero():
             ....:         if analytic:
@@ -1375,20 +1377,20 @@ cdef class ComplexBall(RingElement):
             sage: ComplexBall(CBF100, 10^100)
             [1.000000000000000000000000000000e+100 +/- ...]
 
-            sage: NF.<a> = QuadraticField(-1, embedding=CC(0, -1))
-            sage: CBF(a)
+            sage: NF.<a> = QuadraticField(-1, embedding=CC(0, -1))                      # needs sage.rings.number_field
+            sage: CBF(a)                                                                # needs sage.rings.number_field
             -1.000000000000000*I
 
-            sage: NF.<a> = QuadraticField(-1, embedding=None)
-            sage: CBF(a)
+            sage: NF.<a> = QuadraticField(-1, embedding=None)                           # needs sage.rings.number_field
+            sage: CBF(a)                                                                # needs sage.rings.number_field
             1.000000000000000*I
-            sage: CBF.coerce(a)
+            sage: CBF.coerce(a)                                                         # needs sage.rings.number_field
             Traceback (most recent call last):
             ...
             TypeError: no canonical coercion ...
 
-            sage: NF.<a> = QuadraticField(-2)
-            sage: CBF(1/3 + a).real()
+            sage: NF.<a> = QuadraticField(-2)                                           # needs sage.rings.number_field
+            sage: CBF(1/3 + a).real()                                                   # needs sage.rings.number_field
             [0.3333333333333333 +/- ...e-17]
 
             sage: ComplexBall(CBF, 1, 1/2)

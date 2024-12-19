@@ -731,9 +731,9 @@ def is_geodetic(G):
 
     TESTS::
 
-        sage: all(g.is_geodetic() for g in graphs(3))
+        sage: all(g.is_geodetic() for g in graphs(3))                                   # needs nauty
         True
-        sage: all((2*g).is_geodetic() for g in graphs(3))
+        sage: all((2*g).is_geodetic() for g in graphs(3))                               # needs nauty
         True
         sage: G = graphs.CycleGraph(5)
         sage: G.allow_loops(True)

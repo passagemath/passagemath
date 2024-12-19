@@ -30,6 +30,3 @@ cdef class Matrix_integer_dense(Matrix_dense):
             Py_ssize_t nrows, Py_ssize_t ncols) except NULL
 
     cdef Matrix_integer_dense _new(self, Py_ssize_t nrows, Py_ssize_t ncols)
-
-
-cpdef _lift_crt(Matrix_integer_dense M, residues, moduli=*)

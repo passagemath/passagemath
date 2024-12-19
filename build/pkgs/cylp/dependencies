@@ -1,4 +1,4 @@
- numpy scipy cbc | $(PYTHON_TOOLCHAIN) cython $(PYTHON)
+ numpy scipy cbc | $(PYTHON_TOOLCHAIN) cython $(PYTHON) hypothesis
 
 ----------
 All lines of this file are ignored except the first.

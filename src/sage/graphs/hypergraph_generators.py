@@ -12,7 +12,7 @@ To enumerate hypergraphs with certain properties up to isomorphism, one can use
 method :meth:`~nauty`, which calls Brendan McKay's Nauty
 (`<http://cs.anu.edu.au/~bdm/nauty/>`_)::
 
-    sage: list(hypergraphs.nauty(2, 2, connected=True))
+    sage: list(hypergraphs.nauty(2, 2, connected=True))                                 # needs nauty
     [((0,), (0, 1))]
 
 
@@ -102,36 +102,37 @@ class HypergraphGenerators:
 
         Small hypergraphs::
 
-            sage: list(hypergraphs.nauty(4, 2))
+            sage: list(hypergraphs.nauty(4, 2))                                         # needs nauty
             [((), (0,), (1,), (0, 1))]
 
         Only connected ones::
 
-            sage: list(hypergraphs.nauty(2, 2, connected=True))
+            sage: list(hypergraphs.nauty(2, 2, connected=True))                         # needs nauty
             [((0,), (0, 1))]
 
         Non-empty sets only::
 
-            sage: list(hypergraphs.nauty(3, 2, set_min_size=1))
+            sage: list(hypergraphs.nauty(3, 2, set_min_size=1))                         # needs nauty
             [((0,), (1,), (0, 1))]
 
         The Fano Plane, as the only 3-uniform hypergraph with 7 sets and 7
         vertices::
 
-            sage: fano = next(hypergraphs.nauty(7, 7, uniform=3, max_intersection=1))
-            sage: print(fano)
+            sage: fano = next(hypergraphs.nauty(7, 7, uniform=3, max_intersection=1))   # needs nauty
+            sage: print(fano)                                                           # needs nauty
             ((0, 1, 2), (0, 3, 4), (0, 5, 6), (1, 3, 5), (2, 4, 5), (2, 3, 6), (1, 4, 6))
 
         The Fano Plane, as the only 3-regular hypergraph with 7 sets and 7
         vertices::
 
-            sage: fano = next(hypergraphs.nauty(7, 7, regular=3, max_intersection=1))
-            sage: print(fano)
+            sage: fano = next(hypergraphs.nauty(7, 7, regular=3, max_intersection=1))   # needs nauty
+            sage: print(fano)                                                           # needs nauty
             ((0, 1, 2), (0, 3, 4), (0, 5, 6), (1, 3, 5), (2, 4, 5), (2, 3, 6), (1, 4, 6))
 
         TESTS::
 
-            sage: len(list(hypergraphs.nauty(20, 20, uniform=2, regular=2,max_intersection=1)))
+            sage: len(list(hypergraphs.nauty(20, 20, uniform=2, regular=2,              # needs nauty
+            ....:                            max_intersection=1)))
             49
             sage: list(hypergraphs.nauty(40, 40, uniform=2, regular=2,max_intersection=1))
             Traceback (most recent call last):

@@ -1,4 +1,4 @@
-/* sage_setup: distribution = sagemath-flint
+/* sage_setup: distribution = sagemath-pari
  */
 /*****************************************************************************
         Copyright (C) 2021 Xavier Caruso <xavier.caruso@normalesup.org>

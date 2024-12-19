@@ -458,9 +458,9 @@ class Function_gamma_inc(BuiltinFunction):
 
         Check that :issue:`17130` is fixed::
 
-            sage: r = gamma_inc(float(0), float(1)); r                                  # needs sage.rings.real_mpfr
+            sage: r = gamma_inc(float(0), float(1)); r                                  # needs sage.libs.pari sage.rings.real_mpfr
             0.21938393439552029
-            sage: type(r)                                                               # needs sage.rings.real_mpfr
+            sage: type(r)                                                               # needs sage.libs.pari sage.rings.real_mpfr
             <... 'float'>
         """
         R = parent or s_parent(x)

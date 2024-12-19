@@ -5,6 +5,7 @@
 # distutils: library_dirs = NTL_LIBDIR
 # distutils: extra_link_args = NTL_LIBEXTRA
 # distutils: language = c++
+# sage.doctest: needs sage.libs.pari
 r"""
 Dense univariate polynomials over  `\ZZ/n\ZZ`, implemented using NTL
 
@@ -96,6 +97,7 @@ cdef class Polynomial_dense_mod_n(Polynomial):
 
     TESTS::
 
+        sage: # needs sage.libs.pari
         sage: f = Integers(5*2^100)['x'].random_element()
         sage: from sage.rings.polynomial.polynomial_modn_dense_ntl import Polynomial_dense_mod_n
         sage: isinstance(f, Polynomial_dense_mod_n)
@@ -170,7 +172,7 @@ cdef class Polynomial_dense_mod_n(Polynomial):
 
             sage: t = PolynomialRing(IntegerModRing(17), "t", implementation='NTL').gen()
             sage: f = t^3 + 3*t - 17
-            sage: pari(f)
+            sage: pari(f)                                                               # needs sage.libs.pari
             Mod(1, 17)*t^3 + Mod(3, 17)*t
         """
         if variable is None:
@@ -398,6 +400,7 @@ cdef class Polynomial_dense_mod_n(Polynomial):
 
         Random testing::
 
+            sage: # needs sage.libs.pari
             sage: p = random_prime(2^99)
             sage: R.<x> = PolynomialRing(GF(p), implementation='NTL')
             sage: d = randrange(1,50)
@@ -419,6 +422,7 @@ cdef class Polynomial_dense_mod_n(Polynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: N = 10001
             sage: K = Zmod(10001)
             sage: P.<x> = PolynomialRing(K, implementation='NTL')
@@ -442,6 +446,7 @@ cdef class Polynomial_dense_mod_n(Polynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = GF(2**127 - 1)[]
             sage: f = R.random_element()
             sage: g = R.random_element()
@@ -500,6 +505,7 @@ def small_roots(self, X=None, beta=1.0, epsilon=None, **kwds):
 
     First consider a small example::
 
+        sage: # needs sage.libs.pari
         sage: N = 10001
         sage: K = Zmod(10001)
         sage: P.<x> = PolynomialRing(K, implementation='NTL')
@@ -507,18 +513,18 @@ def small_roots(self, X=None, beta=1.0, epsilon=None, **kwds):
 
     This polynomial has no roots without modular reduction (i.e. over `\ZZ`)::
 
-        sage: f.change_ring(ZZ).roots()
+        sage: f.change_ring(ZZ).roots()                                                 # needs sage.libs.pari
         []
 
     To compute its roots we need to factor the modulus `N` and use the Chinese
     remainder theorem::
 
+        sage: # needs sage.libs.pari
         sage: p, q = N.prime_divisors()
         sage: f.change_ring(GF(p)).roots()
         [(4, 1)]
         sage: f.change_ring(GF(q)).roots()
         [(4, 1)]
-
         sage: crt(4, 4, p, q)
         4
 
@@ -526,7 +532,7 @@ def small_roots(self, X=None, beta=1.0, epsilon=None, **kwds):
     recover it without factoring `N` using Coppersmith's small root
     method::
 
-        sage: f.small_roots()                                                           # needs fpylll
+        sage: f.small_roots()                                                           # needs fpylll sage.libs.pari
         [4]
 
     An application of this method is to consider RSA. We are using 512-bit RSA
@@ -562,13 +568,13 @@ def small_roots(self, X=None, beta=1.0, epsilon=None, **kwds):
 
     To recover `K` we consider the following polynomial modulo `N`::
 
-        sage: P.<x> = PolynomialRing(ZmodN, implementation='NTL')
-        sage: f = (2^Nbits - 2^Kbits + x)^e - C
+        sage: P.<x> = PolynomialRing(ZmodN, implementation='NTL')                       # needs sage.libs.pari
+        sage: f = (2^Nbits - 2^Kbits + x)^e - C                                         # needs sage.libs.pari
 
     and recover its small roots::
 
-        sage: Kbar = f.small_roots()[0]                                                 # needs fpylll
-        sage: K == Kbar                                                                 # needs fpylll
+        sage: Kbar = f.small_roots()[0]                                                 # needs fpylll sage.libs.pari
+        sage: K == Kbar                                                                 # needs fpylll sage.libs.pari
         True
 
     The same algorithm can be used to factor `N = pq` if partial
@@ -687,8 +693,8 @@ cdef class Polynomial_dense_modn_ntl_zz(Polynomial_dense_mod_n):
         EXAMPLES::
 
             sage: R = Integers(5**21)
-            sage: S.<x> = PolynomialRing(R, implementation='NTL')
-            sage: S(1/4)
+            sage: S.<x> = PolynomialRing(R, implementation='NTL')                       # needs sage.libs.pari
+            sage: S(1/4)                                                                # needs sage.libs.pari
             357627868652344
         """
         if isinstance(v, Polynomial):

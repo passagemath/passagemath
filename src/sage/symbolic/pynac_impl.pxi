@@ -832,6 +832,7 @@ cdef int py_get_parent_char(o) except -1:
 
     :issue:`24072` fixes the workaround provided in :issue:`21187`::
 
+        sage: # needs sage.rings.finite_rings
         sage: p = next_prime(2^100)
         sage: R.<y> = FiniteField(p)[]
         sage: y = SR(y)
@@ -1136,7 +1137,7 @@ cdef bint py_is_integer(x) noexcept:
         True
         sage: py_is_integer(4/2)
         True
-        sage: py_is_integer(QQbar(sqrt(2))^2)
+        sage: py_is_integer(QQbar(sqrt(2))^2)                                           # needs sage.rings.number_field
         True
         sage: py_is_integer(3.0)
         False
@@ -1256,8 +1257,8 @@ cdef py_numer(n):
         3
         sage: py_numer(2/3)
         2
-        sage: C.<i> = NumberField(x^2+1)
-        sage: py_numer(2/3*i)
+        sage: C.<i> = NumberField(x^2 + 1)                                              # needs sage.rings.number_field
+        sage: py_numer(2/3*i)                                                           # needs sage.rings.number_field
         2*i
         sage: class no_numer:
         ....:   def denominator(self):
@@ -1303,8 +1304,8 @@ cdef py_denom(n):
         1
         sage: py_denom(2/3)
         3
-        sage: C.<i> = NumberField(x^2+1)
-        sage: py_denom(2/3*i)
+        sage: C.<i> = NumberField(x^2 + 1)                                              # needs sage.rings.number_field
+        sage: py_denom(2/3*i)                                                           # needs sage.rings.number_field
         3
     """
     if isinstance(n, (int, Integer)):
@@ -1657,6 +1658,7 @@ cdef py_zeta(x):
 
     TESTS::
 
+        sage: # needs sage.libs.pari
         sage: from sage.symbolic.expression import py_zeta_for_doctests as py_zeta
         sage: py_zeta(CC.0)
         0.00330022368532410 - 0.418155449141322*I
@@ -1677,6 +1679,7 @@ def py_zeta_for_doctests(x):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.symbolic.expression import py_zeta_for_doctests
         sage: py_zeta_for_doctests(CC.0)
         0.00330022368532410 - 0.418155449141322*I
@@ -2396,7 +2399,7 @@ def init_pynac_I():
         Traceback (most recent call last):
         ...
         TypeError: unable to simplify to float approximation
-        sage: gp(symbolic_I)
+        sage: gp(symbolic_I)                                                            # needs sage.libs.pari
         I
         sage: RR(symbolic_I)
         Traceback (most recent call last):

@@ -372,7 +372,7 @@ class Polyhedron_base6(Polyhedron_base5):
             <class 'sage.plot.graphics.Graphics'>
             sage: type(Polyhedron([(0,0,0,0,0), (1,1,1,1,1)]).plot())                   # needs sage.symbolic
             <class 'sage.plot.graphics.Graphics'>
-            sage: type(Polyhedron([(0,0,0,0), (1,1,1,1), (1,0,0,0)]).plot())
+            sage: type(Polyhedron([(0,0,0,0), (1,1,1,1), (1,0,0,0)]).plot())            # needs sage.symbolic
             <class 'sage.plot.graphics.Graphics'>
 
         TESTS:
@@ -1225,9 +1225,9 @@ class Polyhedron_base6(Polyhedron_base5):
              A vertex at (2, 0, 0),
              A vertex at (1, 3/2, 0),
              A vertex at (1, 1/2, 4/3))
-            sage: A = S.affine_hull_projection(orthonormal=True, extend=True); A        # needs sage.rings.number_field
+            sage: A = S.affine_hull_projection(orthonormal=True, extend=True); A        # needs sage.rings.number_field sage.symbolic
             A 3-dimensional polyhedron in AA^3 defined as the convex hull of 4 vertices
-            sage: A.vertices()                                                          # needs sage.rings.number_field
+            sage: A.vertices()                                                          # needs sage.rings.number_field sage.symbolic
             (A vertex at (0.7071067811865475?, 0.4082482904638630?, 1.154700538379252?),
              A vertex at (0.7071067811865475?, 1.224744871391589?, 0.?e-18),
              A vertex at (1.414213562373095?, 0.?e-18, 0.?e-18),

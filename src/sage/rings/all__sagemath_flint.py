@@ -8,7 +8,7 @@ from sage.rings.real_arb import RealBallField, RBF
 from sage.rings.complex_arb import ComplexBallField, CBF
 
 # Number field
-from sage.rings.number_field.all import *
+from sage.rings.number_field.all__sagemath_flint import *
 
 from sage.rings.monomials import monomials
 

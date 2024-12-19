@@ -542,7 +542,7 @@ def is_comparability(g, algorithm='greedy', certificate=False, check=True,
     small graphs::
 
         sage: from sage.graphs.comparability import is_comparability
-        sage: [len([g for g in graphs(i) if is_comparability(g, certificate=True)[0]]) for i in range(7)]
+        sage: [len([g for g in graphs(i) if is_comparability(g, certificate=True)[0]]) for i in range(7)]   # needs nauty
         [1, 1, 2, 4, 11, 33, 144]
     """
     g._scream_if_not_simple()

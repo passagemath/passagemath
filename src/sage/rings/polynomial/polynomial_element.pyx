@@ -8148,7 +8148,7 @@ cdef class Polynomial(CommutativePolynomial):
         An example over RR, which illustrates that only the roots in RR are
         returned::
 
-            sage: # needs numpy sage.rings.real_mpfr
+            sage: # needs numpy sage.libs.pari sage.rings.real_mpfr
             sage: x = RR['x'].0
             sage: f = x^3 - 2
             sage: f.roots()
@@ -8165,7 +8165,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: # needs sage.rings.real_mpfr
             sage: x = CC['x'].0
             sage: f = x^3 - 2
-            sage: f.roots()                                                             # needs numpy
+            sage: f.roots()                                                             # needs numpy sage.libs.pari
             [(1.25992104989487, 1),
              (-0.62996052494743... - 1.09112363597172*I, 1),
              (-0.62996052494743... + 1.09112363597172*I, 1)]
@@ -9155,7 +9155,7 @@ cdef class Polynomial(CommutativePolynomial):
             Complex Double Field
 
             sage: x = polygen(RealField(200))                                           # needs sage.rings.real_mpfr
-            sage: (x^3 - 1).complex_roots()[0].parent()                                 # needs sage.rings.real_mpfr
+            sage: (x^3 - 1).complex_roots()[0].parent()                                 # needs sage.libs.pari sage.rings.real_mpfr
             Complex Field with 200 bits of precision
 
             sage: x = polygen(CDF)                                                      # needs sage.rings.complex_double
@@ -9163,7 +9163,7 @@ cdef class Polynomial(CommutativePolynomial):
             Complex Double Field
 
 
-            sage: # needs sage.rings.real_mpfr
+            sage: # needs sage.libs.pari sage.rings.real_mpfr
             sage: x = polygen(ComplexField(200))
             sage: (x^3 - 1).complex_roots()[0].parent()
             Complex Field with 200 bits of precision
@@ -9544,6 +9544,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: P.<x> = QQ[]
             sage: p1 = x^2
             sage: p1.is_lorentzian()
@@ -9572,6 +9573,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         The method can give a reason for a polynomial failing to be Lorentzian::
 
+            sage: # needs sage.libs.pari
             sage: p = x^2 + 2*x
             sage: p.is_lorentzian(explain=True)
             (False, 'inhomogeneous')

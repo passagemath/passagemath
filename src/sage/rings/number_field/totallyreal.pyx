@@ -1,4 +1,5 @@
-# sage_setup: distribution = sagemath-flint
+# sage_setup: distribution = sagemath-pari
+# sage.doctest: needs sage.libs.pari sage.rings.real_mpfr
 r"""
 Enumeration of primitive totally real fields
 
@@ -472,8 +473,9 @@ def weed_fields(S, Py_ssize_t lenS=0):
 
     EXAMPLES::
 
+        sage: from sage.rings.number_field.totallyreal import weed_fields
         sage: ls = [[5,pari('x^2-3*x+1')],[5,pari('x^2-5')]]
-        sage: sage.rings.number_field.totallyreal.weed_fields(ls)
+        sage: weed_fields(ls)
         1
         sage: ls
         [[5, x^2 - 3*x + 1]]

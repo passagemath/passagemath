@@ -124,6 +124,7 @@ cdef class Polynomial_integer_dense_ntl(Polynomial):
 
         Coercion from PARI polynomial::
 
+            sage: # needs sage.libs.pari
             sage: f = R([-1, 2, 5]); f
             5*x^2 + 2*x - 1
             sage: type(f)
@@ -856,7 +857,7 @@ cdef class Polynomial_integer_dense_ntl(Polynomial):
 
             sage: t = PolynomialRing(ZZ, "t", implementation='NTL').gen()
             sage: f = t^3 + 3*t - 17
-            sage: pari(f)
+            sage: pari(f)                                                               # needs sage.libs.pari
             t^3 + 3*t - 17
         """
         if variable is None:
@@ -918,7 +919,7 @@ cdef class Polynomial_integer_dense_ntl(Polynomial):
             x^2 + 6*x + 9
             sage: f.factor()
             (x + 3)^2
-            sage: f._factor_pari()
+            sage: f._factor_pari()                                                      # needs sage.libs.pari
             (x + 3)^2
         """
         return Polynomial.factor(self) # uses pari for integers over ZZ
@@ -1009,6 +1010,7 @@ cdef class Polynomial_integer_dense_ntl(Polynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = PolynomialRing(ZZ, 'x', implementation='NTL')
             sage: f = -3*x*(x-2)*(x-9) + x
             sage: f.factor_mod(3)
@@ -1018,7 +1020,6 @@ cdef class Polynomial_integer_dense_ntl(Polynomial):
             Traceback (most recent call last):
             ...
             ArithmeticError: factorization of 0 is not defined
-
             sage: f = 2*x*(x-2)*(x-9)
             sage: f.factor_mod(7)
             (2) * x * (x + 5)^2
@@ -1051,14 +1052,14 @@ cdef class Polynomial_integer_dense_ntl(Polynomial):
 
             sage: R.<x> = PolynomialRing(ZZ, implementation='NTL')
             sage: f = x^2 + 1
-            sage: f.factor_padic(5, 4)
+            sage: f.factor_padic(5, 4)                                                  # needs sage.rings.padics
             ((1 + O(5^4))*x + 2 + 5 + 2*5^2 + 5^3 + O(5^4))
             * ((1 + O(5^4))*x + 3 + 3*5 + 2*5^2 + 3*5^3 + O(5^4))
 
         A more difficult example::
 
             sage: f = 100 * (5*x + 1)^2 * (x + 5)^2
-            sage: f.factor_padic(5, 10)
+            sage: f.factor_padic(5, 10)                                                 # needs sage.rings.padics
             (4 + O(5^10)) * (5 + O(5^11))^2 * ((1 + O(5^10))*x + 5 + O(5^10))^2
             * ((5 + O(5^10))*x + 1 + O(5^10))^2
         """

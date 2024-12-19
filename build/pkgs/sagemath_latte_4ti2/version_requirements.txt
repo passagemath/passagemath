@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-latte-4ti2 ~= 10.5.6.0
+passagemath-latte-4ti2 ~= 10.5.10.0

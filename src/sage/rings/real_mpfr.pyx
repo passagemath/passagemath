@@ -752,8 +752,6 @@ cdef class RealField_class(sage.rings.abc.RealField):
             return QQtoRR(QQ, self)
         elif (S is RDF or S is float) and self._prec <= 53:
             return double_toRR(S, self)
-        elif S is long:
-            return int_toRR(long, self)
         elif S is int:
             return int_toRR(int, self)
         elif isinstance(S, RealField_class) and S.prec() >= self._prec:
@@ -5398,7 +5396,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
 
             sage: r = sqrt(2.0); r
             1.41421356237310
-            sage: r.algebraic_dependency(5)
+            sage: r.algebraic_dependency(5)                                             # needs fpylll
             x^2 - 2
         """
         return sage.arith.misc.algdep(self, n)

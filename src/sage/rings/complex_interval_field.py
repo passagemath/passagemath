@@ -440,8 +440,8 @@ class ComplexIntervalField_class(sage.rings.abc.ComplexIntervalField):
             sage: QQi.<i> = QuadraticField(-1)
             sage: CIF(i)
             1*I
-            sage: QQi.<i> = QuadraticField(-1, embedding=CC(0,-1))
-            sage: CIF(i)
+            sage: QQi.<i> = QuadraticField(-1, embedding=CC(0,-1))                      # needs sage.libs.pari
+            sage: CIF(i)                                                                # needs sage.libs.pari
             -1*I
             sage: QQi.<i> = QuadraticField(-1, embedding=None)
             sage: CIF(i)

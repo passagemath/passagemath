@@ -66,7 +66,7 @@ cdef class NumberField(Field):
         +Infinity
     """
     # This token docstring is mostly there to prevent Sphinx from pasting in
-    # the docstring of the __init__ method inherited from IntegralDomain, which
+    # the docstring of the __init__ method inherited from Field, which
     # is rather confusing.
     def _pushout_(self, other):
         r"""
@@ -311,7 +311,7 @@ cdef class NumberField(Field):
 
         The bound of course also works for the rational numbers::
 
-            sage: QQ.minkowski_bound()
+            sage: QQ.minkowski_bound()                                                  # needs sage.symbolic
             1
         """
         _, s = self.signature()

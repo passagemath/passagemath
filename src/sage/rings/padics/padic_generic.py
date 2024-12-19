@@ -1536,7 +1536,7 @@ class pAdicGeneric(LocalGeneric):
 
         but that it has roots in `B`::
 
-            sage: P.roots(B)                                                            # needs sage.geometry.polyhedron sage.libs.ntl
+            sage: P.roots(B)                                                            # needs sage.geometry.polyhedron sage.libs.ntl sage.libs.singular
             [(35149 + 57730*b + 41124*b^2 + O(3^10), 1),
              (23900 + 1318*b + 17925*b^2 + O(3^10), 1),
              (b + O(3^10), 1)]

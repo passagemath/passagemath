@@ -2293,7 +2293,7 @@ cdef class ComplexDoubleElement(FieldElement):
             -0.3715916523517613 + 0.31989466020683*I
             sage: a.agm(b, algorithm='principal')  # rel tol 1e-15
             0.33817546298618006 - 0.013532696956540503*I
-            sage: a.agm(b, algorithm='pari')
+            sage: a.agm(b, algorithm='pari')                                            # needs sage.libs.pari
             -0.37159165235176134 + 0.31989466020683005*I
 
         Some degenerate cases::

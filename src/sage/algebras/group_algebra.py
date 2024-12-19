@@ -134,6 +134,7 @@ class GroupAlgebra_class(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: A = GroupAlgebra(SymmetricGroup(4), QQ)
             sage: B = GroupAlgebra(SymmetricGroup(3), ZZ)
             sage: A.has_coerce_map_from(B)

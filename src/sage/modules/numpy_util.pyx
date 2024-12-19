@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-linbox
 # sage.doctest: optional - numpy
 r"""
 Utility functions for numpy.

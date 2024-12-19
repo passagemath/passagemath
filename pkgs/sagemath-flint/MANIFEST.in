@@ -4,20 +4,19 @@ prune sage
 
 graft             sage/libs/arb
 graft             sage/libs/flint
-graft             sage/libs/linkages
-include           sage/libs/pari/convert_flint.p*
 recursive-include sage/libs/ntl *.pxi *.h                                       # FIXME
+include           sage/matrix/change_ring.p*
 include           sage/matrix/matrix_complex_ball_dense.p*
 include           sage/matrix/misc_flint.p*
 include           sage/matrix/matrix_cyclo_dense.p*
-include           sage/matrix/matrix_integer*.pxd
-include           sage/matrix/matrix_rational*.pxd
+include           sage/matrix/matrix_integer_dense.p*
+include           sage/matrix/matrix_integer_dense_hnf.p*
+include           sage/matrix/matrix_integer_dense_saturation.p*
+include           sage/matrix/matrix_integer_sparse.p*
+include           sage/matrix/matrix_rational_dense.p*
+include           sage/matrix/matrix_rational_sparse.p*
 include           sage/rings/*_arb.p*
 include           sage/rings/*_flint.p*
-include           sage/rings/padics/*_flint*.p*
-include           sage/rings/padics/all.p*
-include           sage/rings/padics/padic_relaxed_*.p*
-include           sage/rings/padics/*.pxi                                       # FIXME
 include           sage/rings/polynomial/polynomial_template*.pxi        # FIXME
 include           sage/rings/polynomial/*_flint.p*
 include           sage/rings/polynomial/*_arb.p*
@@ -52,6 +51,7 @@ graft sage/rings/number_field
 exclude sage/rings/number_field/number_field*_base.p*           # sagemath-categories
 exclude sage/rings/number_field/number_field_ideal.p*           # sagemath-categories
 include           sage/rings/number_field/number_field_element_quadratic.p*   #### this is entangled with NTL
+exclude sage/rings/number_field/totallyreal*.p*
 include sage/rings/monomials.p*
 include sage/rings/qqbar.p*
 # include sage/rings/universal_cyclotomic_field.p*       --> sagemath-gap
@@ -63,6 +63,7 @@ include sage/modular/modsym/apply.p*
 include sage/modular/modsym/heilbronn.p*
 include sage/modular/pollack_stevens/dist.p*
 include sage/schemes/elliptic_curves/descent_two_isogeny.p*
+include sage/schemes/elliptic_curves/descent_two_isogeny_pari.pxd
 
 global-exclude    all__sagemath_*.p*
 global-include    all__sagemath_flint.py

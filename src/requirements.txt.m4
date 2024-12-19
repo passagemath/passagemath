@@ -15,7 +15,7 @@ sage-conf==esyscmd(`printf $(sed "s/[.]p.*//;" ../sage_conf/package-version.txt)
 dnl sage_setup     # Will be split out later.
 
 dnl From build/pkgs/sagelib/dependencies
-cypari2==esyscmd(`printf $(sed "s/[.]p.*//;" ../cypari/package-version.txt)')
+cypari2
 dnl ... but building bdist_wheel of cypari2 fails with recent pip... https://github.com/sagemath/cypari2/issues/93
 cysignals==esyscmd(`printf $(sed "s/[.]p.*//;" ../cysignals/package-version.txt)')
 Cython==esyscmd(`printf $(sed "s/[.]p.*//;" ../cython/package-version.txt)')

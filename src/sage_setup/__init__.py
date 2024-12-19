@@ -2,7 +2,7 @@ def sage_setup(distributions, *,
                interpreters=(),
                required_modules=(), optional_modules=(),
                spkgs=(),
-               recurse_packages=(),
+               recurse_packages=('sage',),
                package_data=None):
     r"""
     Replacement for :func:`setuptools.setup` for building distribution packages of the Sage library
@@ -19,6 +19,8 @@ def sage_setup(distributions, *,
     - ``optional_modules`` -- sequence of strings, pkgconfig modules to checked for the build.
 
     - ``spkgs`` -- sequence of strings, SPKGs required for the build.
+
+    - ``recurse_packages`` -- sequence of strings, namespace packages to search.
 
     - ``package_data`` -- ``None`` or a dictionary mapping package names to lists of filename
       glob patterns, the package data to install.
@@ -113,11 +115,9 @@ def sage_setup(distributions, *,
         t = time.time()
 
         python_packages, python_modules, cython_modules = find_python_sources(
-            '.', ['sage'], distributions=distributions)
+            '.', recurse_packages, distributions=distributions)
         extra_files = find_extra_files(
-            '.', ['sage'], '/doesnotexist', distributions=distributions)
-
-        python_packages += find_namespace_packages(where='.', include=recurse_packages)
+            '.', recurse_packages, '/doesnotexist', distributions=distributions)
 
         if package_data is not None:
             package_data.update({"": [f

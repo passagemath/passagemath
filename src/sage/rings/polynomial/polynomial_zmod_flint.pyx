@@ -18,10 +18,10 @@ EXAMPLES::
     sage: R.<a> = PolynomialRing(Integers(100))
     sage: type(a)
     <class 'sage.rings.polynomial.polynomial_zmod_flint.Polynomial_zmod_flint'>
-    sage: R.<a> = PolynomialRing(Integers(5*2^64))
-    sage: type(a)
+    sage: R.<a> = PolynomialRing(Integers(5*2^64))                                      # needs sage.rings.finite_rings
+    sage: type(a)                                                                       # needs sage.rings.finite_rings
     <class 'sage.rings.polynomial.polynomial_modn_dense_ntl.Polynomial_dense_modn_ntl_ZZ'>
-    sage: R.<a> = PolynomialRing(Integers(5*2^64), implementation="FLINT")
+    sage: R.<a> = PolynomialRing(Integers(5*2^64), implementation="FLINT")              # needs sage.rings.finite_rings
     Traceback (most recent call last):
     ...
     ValueError: FLINT does not support modulus 92233720368547758080
@@ -91,8 +91,8 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
         """
         EXAMPLES::
 
-            sage: P.<x> = GF(32003)[]
-            sage: f = 24998*x^2 + 29761*x + 2252
+            sage: P.<x> = GF(32003)[]                                                   # needs sage.rings.finite_rings
+            sage: f = 24998*x^2 + 29761*x + 2252                                        # needs sage.rings.finite_rings
         """
         cdef long nlen
 
@@ -249,6 +249,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: P.<x> = GF(32003)[]
             sage: f = 24998*x^2 + 29761*x + 2252
             sage: f[100]
@@ -370,6 +371,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: N = 10001
             sage: K = Zmod(10001)
             sage: P.<x> = PolynomialRing(K)
@@ -622,6 +624,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         Check that :issue:`37169` is fixed - it does not throw an error::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = Zmod(4)[]
             sage: _.<z> = R.quotient_ring(x^2 - 1)
             sage: c = 2 * z + 1
@@ -766,6 +769,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         Test zero polynomial::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = PolynomialRing(GF(65537), implementation="FLINT")
             sage: R.zero().squarefree_decomposition()
             Traceback (most recent call last):
@@ -793,8 +797,8 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         It also works for prime-power moduli::
 
-            sage: R.<x> = Zmod(23^5)[]
-            sage: (x^3 + 1).factor()
+            sage: R.<x> = Zmod(23^5)[]                                                  # needs sage.rings.finite_rings
+            sage: (x^3 + 1).factor()                                                    # needs sage.rings.finite_rings
             (x + 1) * (x^2 + 6436342*x + 1)
 
         TESTS::
@@ -810,6 +814,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         Test that factorization can be interrupted::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = PolynomialRing(GF(65537), implementation="FLINT")
             sage: f = R.random_element(9973) * R.random_element(10007)
             sage: alarm(0.5); f.factor()
@@ -819,6 +824,7 @@ cdef class Polynomial_zmod_flint(Polynomial_template):
 
         Test zero polynomial::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = PolynomialRing(GF(65537), implementation="FLINT")
             sage: R.zero().factor()
             Traceback (most recent call last):

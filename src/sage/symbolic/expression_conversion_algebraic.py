@@ -135,13 +135,13 @@ class AlgebraicConverter(Converter):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.symbolic.expression_conversions import AlgebraicConverter
             sage: a = AlgebraicConverter(QQbar)
             sage: a.composition(exp(I*pi/3, hold=True), exp)
             0.500000000000000? + 0.866025403784439?*I
             sage: a.composition(sin(pi/7), sin)
             0.4338837391175581? + 0.?e-18*I
-
             sage: x = SR.var('x')
             sage: a.composition(complex_root_of(x^3 - x^2 - x - 1, 0), complex_root_of)
             1.839286755214161?
@@ -161,6 +161,7 @@ class AlgebraicConverter(Converter):
 
         Test :issue:`22571`::
 
+            sage: # needs sage.libs.pari
             sage: a.composition(exp(0, hold=True), exp)
             1
             sage: a.composition(exp(1, hold=True), exp)
@@ -180,6 +181,7 @@ class AlgebraicConverter(Converter):
 
         Check that :issue:`24440` is fixed::
 
+            sage: # needs sage.libs.pari
             sage: QQbar(tanh(pi + 0.1))
             Traceback (most recent call last):
             ...
@@ -282,11 +284,11 @@ def algebraic(ex, field):
         <class 'sage.rings.qqbar.AlgebraicNumber'>
         sage: QQbar(i)
         I
-        sage: AA(golden_ratio)
+        sage: AA(golden_ratio)                                                          # needs sage.libs.pari
         1.618033988749895?
-        sage: QQbar(golden_ratio)
+        sage: QQbar(golden_ratio)                                                       # needs sage.libs.pari
         1.618033988749895?
-        sage: QQbar(sin(pi/3))
+        sage: QQbar(sin(pi/3))                                                          # needs sage.libs.pari
         0.866025403784439?
 
         sage: QQbar(sqrt(2) + sqrt(8))

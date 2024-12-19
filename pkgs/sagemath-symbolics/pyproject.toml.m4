@@ -12,7 +12,6 @@ requires = [
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_numpy
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
 ]
 build-backend = "setuptools.build_meta"
@@ -22,7 +21,6 @@ name = "passagemath-symbolics"
 description = "passagemath: Symbolic calculus"
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2
-    SPKG_INSTALL_REQUIRES_cypari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_sagemath_categories

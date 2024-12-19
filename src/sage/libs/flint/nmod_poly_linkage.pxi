@@ -274,7 +274,7 @@ cdef long celement_len(nmod_poly_t a, unsigned long n) except -2:
         1
         sage: (x).degree()
         1
-        sage: P(0).degree()
+        sage: Q(0).degree()
         -1
     """
     return <long>nmod_poly_length(a)

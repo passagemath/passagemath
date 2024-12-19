@@ -91,7 +91,7 @@ jobs:
 
   optional:
     if: ${{ success() || failure() }}
-    needs: [minimal]
+    needs: [standard]
     uses: ./.github/workflows/docker.yml
     with:
       incremental: true
@@ -101,10 +101,10 @@ jobs:
       tox_packages_factors: >-
           ["standard"]
       docker_targets: "with-targets-optional"
-      extra_sage_packages: gdbm libxml2
+      extra_sage_packages: gdbm libxml2 perl_cpan_polymake_prereq perl_mongodb graphviz
       # We remove packages starting with _, in particular package _develop
       targets_optional: '$(echo $(export PATH=build/bin:$PATH && sage-package list :optional: --has-file "spkg-install.in|spkg-install|requirements.txt" --no-file "huge|has_nonfree_dependencies" | grep -v sagemath_doc | grep -v ^_))'
-      max_parallel: 4
+      max_parallel: 8
 
   experimental:
     if: ${{ success() || failure() }}
@@ -118,6 +118,6 @@ jobs:
       tox_packages_factors: >-
           ["standard"]
       docker_targets: "with-targets-optional"
-      extra_sage_packages: gdbm libxml2
+      extra_sage_packages: gdbm libxml2 perl_cpan_polymake_prereq perl_mongodb graphviz
       targets_optional: '$(echo $(export PATH=build/bin:$PATH && sage-package list :experimental: --has-file "spkg-install.in|spkg-install|requirements.txt" --no-file "huge|has_nonfree_dependencies" | grep -v sagemath_doc))'
       max_parallel: 4
