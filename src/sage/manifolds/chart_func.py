@@ -2765,6 +2765,7 @@ class ChartFunctionRing(Parent, UniqueRepresentation):
             sage: FR.zero()
             0
 
+            sage: # needs sage.rings.padics
             sage: M = Manifold(2, 'M', structure='topological', field=Qp(5))
             sage: X.<x,y> = M.chart()
             sage: X.function_ring().zero()
@@ -2791,6 +2792,7 @@ class ChartFunctionRing(Parent, UniqueRepresentation):
             sage: FR.one()
             1
 
+            sage: # needs sage.rings.padics
             sage: M = Manifold(2, 'M', structure='topological', field=Qp(5))
             sage: X.<x,y> = M.chart()
             sage: X.function_ring().one()

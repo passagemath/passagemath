@@ -570,6 +570,7 @@ class DifferentiableManifold(TopologicalManifold):
 
     A differentiable manifold over `\QQ_5`, the field of 5-adic numbers::
 
+        sage: # needs sage.rings.padics
         sage: N = Manifold(2, 'N', field=Qp(5)); N
         2-dimensional differentiable manifold N over the 5-adic Field with
          capped relative precision 20
