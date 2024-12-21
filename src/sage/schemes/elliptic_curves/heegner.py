@@ -70,7 +70,7 @@ Here we find that the Heegner point generates a subgroup of index 3::
     sage: P = E.heegner_point(-7)
     sage: z = P.point_exact(); z == E(0, 1, 1)  or -z == E(0, 1, 1)
     True
-    sage: E.regulator()
+    sage: E.regulator()                                                                 # needs eclib
     0.0498083972980648
     sage: z.height()
     0.448275575682583
