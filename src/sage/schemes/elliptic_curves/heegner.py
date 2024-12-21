@@ -70,7 +70,7 @@ Here we find that the Heegner point generates a subgroup of index 3::
     sage: P = E.heegner_point(-7)
     sage: z = P.point_exact(); z == E(0, 1, 1)  or -z == E(0, 1, 1)
     True
-    sage: E.regulator()
+    sage: E.regulator()                                                                 # needs eclib
     0.0498083972980648
     sage: z.height()
     0.448275575682583
@@ -3237,7 +3237,7 @@ class HeegnerPointOnEllipticCurve(HeegnerPoint):
             [-1.2...e-16, -1.00000000000000, 1.00000000000000]
             sage: -2*E.gens()[0]                                                        # needs eclib
             (0 : -1 : 1)
-            sage: P._trace_index()
+            sage: P._trace_index()                                                      # needs eclib
             2
 
             sage: P = E.heegner_point(-68); P
@@ -3245,7 +3245,7 @@ class HeegnerPointOnEllipticCurve(HeegnerPoint):
             sage: N(P)
             (0.219223593595584 - 1.87443160153148*I
              : -1.34232921921325 - 1.52356748877889*I : 1.00000000000000)
-            sage: P._trace_index()
+            sage: P._trace_index()                                                      # needs eclib
             0
         """
         if self.conductor() != 1:
@@ -3356,9 +3356,9 @@ class HeegnerPointOnEllipticCurve(HeegnerPoint):
         the discriminant below is strong confirmation -- but not proof
         -- that this polynomial is correct::
 
-            sage: f = P.numerical_approx(70)[0].algdep(6); f
+            sage: f = P.numerical_approx(70)[0].algdep(6); f                            # needs fpylll
             1225*x^6 + 1750*x^5 - 21675*x^4 - 380*x^3 + 110180*x^2 - 129720*x + 48771
-            sage: f.discriminant().factor()
+            sage: f.discriminant().factor()                                             # needs fpylll
             2^6 * 3^2 * 5^11 * 7^4 * 13^2 * 19^6 * 199^2 * 719^2 * 26161^2
         """
         tau = ComplexField(prec)(self.tau())

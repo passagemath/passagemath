@@ -255,8 +255,14 @@ from sage.misc.sage_eval import sage_eval
 
 import sage.rings.polynomial.polynomial_singular_interface
 
-cimport cypari2.gen
 from sage.rings.polynomial import polynomial_element
+
+
+try:
+    from cypari2.gen import Gen
+except ImportError:
+    Gen = ()
+
 
 permstore=[]
 cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
@@ -965,7 +971,7 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
                 gens_map = dict(zip(Q.variable_names(),self.gens()[:Q.ngens()]))
                 return eval(str(element),gens_map)
 
-        if isinstance(element, (sage.interfaces.abc.SingularElement, cypari2.gen.Gen)):
+        if isinstance(element, (sage.interfaces.abc.SingularElement, Gen)):
             element = str(element)
         elif isinstance(element, sage.interfaces.abc.Macaulay2Element):
             element = element.external_string()

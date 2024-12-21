@@ -21,9 +21,9 @@ EXAMPLES::
       From: Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101
       To:   Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101
       Via:  (Isogeny of degree 7 from Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101 to Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101, Isogeny of degree 7 from Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101 to Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101)
-    sage: phi + phi == phi * E.scalar_multiplication(2)
+    sage: phi + phi == phi * E.scalar_multiplication(2)                                 # needs sage.symbolic
     True
-    sage: phi + phi + phi == phi * E.scalar_multiplication(3)
+    sage: phi + phi + phi == phi * E.scalar_multiplication(3)                           # needs sage.symbolic
     True
 
 An example of computing with a supersingular endomorphism ring::
@@ -452,7 +452,7 @@ class EllipticCurveHom_sum(EllipticCurveHom):
             sage: E = EllipticCurve(GF(419^2), [1,0])
             sage: i = E.automorphisms()[-1]
             sage: j = E.frobenius_isogeny()
-            sage: i + j == j + i
+            sage: i + j == j + i                                                        # needs sage.symbolic
             True
         """
         from sage.structure.richcmp import op_EQ
@@ -590,7 +590,7 @@ class EllipticCurveHom_sum(EllipticCurveHom):
               From: Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101
               To:   Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101
               Via:  (Isogeny of degree 7 from Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101 to Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101, Isogeny of degree 7 from Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101 to Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101)
-            sage: (phi + phi).dual() == phi.dual() + phi.dual()
+            sage: (phi + phi).dual() == phi.dual() + phi.dual()                         # needs sage.symbolic
             True
 
         ::
@@ -605,7 +605,7 @@ class EllipticCurveHom_sum(EllipticCurveHom):
               To:   Elliptic Curve defined by y^2 = x^3 + x over Finite Field in z2 of size 431^2
               Via:  (Scalar-multiplication endomorphism [2] of Elliptic Curve defined by y^2 = x^3 + x over Finite Field in z2 of size 431^2, Elliptic-curve endomorphism of Elliptic Curve defined by y^2 = x^3 + x over Finite Field in z2 of size 431^2
               Via:  (u,r,s,t) = (8*z2 + 427, 0, 0, 0))
-            sage: endo.dual() == (m2 - iota)
+            sage: endo.dual() == (m2 - iota)                                            # needs sage.symbolic
             True
 
         ALGORITHM: Taking the dual distributes over addition.
