@@ -1273,6 +1273,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         Since :issue:`10256`, the interface for negative modular symbols in eclib is available::
 
+            sage: # needs eclib
             sage: E = EllipticCurve('11a1')
             sage: Mplus = E.modular_symbol(+1); Mplus
             Modular symbol with sign 1 over Rational Field attached to
@@ -1695,14 +1696,14 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([-39,123])
             sage: E.rank()                                                              # needs eclib
             1
-            sage: E.analytic_rank_upper_bound(max_Delta=1, adaptive=True)
+            sage: E.analytic_rank_upper_bound(max_Delta=1, adaptive=True)               # needs sage.symbolic
             1
 
         This is especially true for elliptic curves with large rank.
 
         ::
 
-            sage: for r in range(9):
+            sage: for r in range(9):                                                    # needs sage.symbolic
             ....:     E = elliptic_curves.rank(r)[0]
             ....:     print((r, E.analytic_rank_upper_bound(max_Delta=1,
             ....:                                           adaptive=False,
@@ -2113,7 +2114,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([0,0, 1, -7, 6])
             sage: E.gens(use_database=False, algorithm='pari')  # random    # needs eclib
             [(2 : 0 : 1), (-1 : 3 : 1), (11 : 35 : 1)]
-            sage: E.saturation(_)[1]
+            sage: E.saturation(_)[1]                                        # needs eclib
             1
 
         Since :issue:`23962`, the default is to use the Cremona
@@ -6557,25 +6558,25 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         An example with negative discriminant::
 
-            sage: EllipticCurve('900d1').S_integral_points([17], both_signs=True)
+            sage: EllipticCurve('900d1').S_integral_points([17], both_signs=True)           # needs eclib
             [(-11 : -27 : 1), (-11 : 27 : 1), (-4 : -34 : 1), (-4 : 34 : 1), (4 : -18 : 1),
              (4 : 18 : 1), (2636/289 : -98786/4913 : 1), (2636/289 : 98786/4913 : 1),
              (16 : -54 : 1), (16 : 54 : 1)]
 
         Output checked with Magma (corrected in 3 cases)::
 
-            sage: [len(e.S_integral_points([2], both_signs=False)) for e in cremona_curves([11..100])] # long time (17s on sage.math, 2011)
+            sage: [len(e.S_integral_points([2], both_signs=False)) for e in cremona_curves([11..100])] # long time (17s on sage.math, 2011)     # needs eclib
             [2, 0, 2, 3, 3, 1, 3, 1, 3, 5, 3, 5, 4, 1, 1, 2, 2, 2, 3, 1, 2, 1, 0, 1, 3, 3, 1, 1, 5, 3, 4, 2, 1, 1, 5, 3, 2, 2, 1, 1, 1, 0, 1, 3, 0, 1, 0, 1, 1, 3, 7, 1, 3, 3, 3, 1, 1, 2, 3, 1, 2, 3, 1, 2, 1, 3, 3, 1, 1, 1, 0, 1, 3, 3, 1, 1, 7, 1, 0, 1, 1, 0, 1, 2, 0, 3, 1, 2, 1, 3, 1, 2, 2, 4, 5, 3, 2, 1, 1, 6, 1, 0, 1, 3, 1, 3, 3, 1, 1, 1, 1, 1, 3, 1, 5, 1, 2, 4, 1, 1, 1, 1, 1, 0, 1, 0, 2, 2, 0, 0, 1, 0, 1, 1, 6, 1, 0, 1, 1, 0, 4, 3, 1, 2, 1, 2, 3, 1, 1, 1, 1, 8, 3, 1, 2, 1, 2, 0, 8, 2, 0, 6, 2, 3, 1, 1, 1, 3, 1, 3, 2, 1, 3, 1, 2, 1, 6, 9, 3, 3, 1, 1, 2, 3, 1, 1, 5, 5, 1, 1, 0, 1, 1, 2, 3, 1, 1, 2, 3, 1, 3, 1, 1, 1, 1, 0, 0, 1, 3, 3, 1, 3, 1, 1, 2, 2, 0, 0, 6, 1, 0, 1, 1, 1, 1, 3, 1, 2, 6, 3, 1, 2, 2, 1, 1, 1, 1, 7, 5, 4, 3, 3, 1, 1, 1, 1, 1, 1, 8, 5, 1, 1, 3, 3, 1, 1, 3, 3, 1, 1, 2, 3, 6, 1, 1, 7, 3, 3, 4, 5, 9, 6, 1, 0, 7, 1, 1, 3, 1, 1, 2, 3, 1, 2, 1, 1, 1, 1, 1, 1, 1, 7, 8, 2, 3, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1]
 
         An example from [PZGH1999]_::
 
             sage: E = EllipticCurve([0,0,0,-172,505])
-            sage: E.rank(), len(E.S_integral_points([3,5,7]))  # long time (5s on sage.math, 2011)
+            sage: E.rank(), len(E.S_integral_points([3,5,7]))  # long time (5s on sage.math, 2011)      # needs eclib
             (4, 72)
 
         This is curve "7690e1" which failed until :issue:`4805` was fixed::
 
-            sage: EllipticCurve([1,1,1,-301,-1821]).S_integral_points([13,2])
+            sage: EllipticCurve([1,1,1,-301,-1821]).S_integral_points([13,2])                           # needs eclib
             [(-13 : -4 : 1), (-9 : -12 : 1), (-7 : 2 : 1), (21 : -52 : 1),
              (23 : -76 : 1), (63 : -516 : 1), (71 : -620 : 1), (87 : -844 : 1),
              (2711 : -142540 : 1), (7323 : -630376 : 1), (17687 : -2361164 : 1)]

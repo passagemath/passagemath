@@ -132,6 +132,7 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
 
     EXAMPLES::
 
+        sage: # needs eclib
         sage: E = EllipticCurve('37a')
         sage: L = E.padic_lseries(5); L
         5-adic L-series of Elliptic Curve defined by y^2 + y = x^3 - x over Rational Field
