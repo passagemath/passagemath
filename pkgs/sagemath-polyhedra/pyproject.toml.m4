@@ -18,7 +18,6 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-polyhedra"
 description = "passagemath: Convex polyhedra in arbitrary dimension, mixed integer linear optimization"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_pplpy
@@ -35,6 +34,7 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
+conf        = ["passagemath-conf"]
 test        = ["passagemath-repl"]
 
 # general libraries

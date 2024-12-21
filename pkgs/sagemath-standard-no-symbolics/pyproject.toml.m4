@@ -36,7 +36,6 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-standard-no-symbolics"
 description = "passagemath: Sage library without the symbolics subsystem"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_six
     SPKG_INSTALL_REQUIRES_sagemath_brial
     SPKG_INSTALL_REQUIRES_sagemath_categories
