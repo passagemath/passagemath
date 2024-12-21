@@ -1530,7 +1530,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         When the input is horrendous, some of the algorithms just bomb
         out with a :exc:`RuntimeError`::
 
-            sage: EllipticCurve([1234567,89101112]).analytic_rank(algorithm='rubinstein')
+            sage: EllipticCurve([1234567,89101112]).analytic_rank(algorithm='rubinstein')   # needs lcalc
             Traceback (most recent call last):
             ...
             RuntimeError: unable to compute analytic rank using rubinstein algorithm (unable to convert ' 6.19283... and is too large' to an integer)

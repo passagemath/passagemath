@@ -112,7 +112,7 @@ class pAdicLseries(SageObject):
         O(5^4) + O(5)*T + (4 + O(5))*T^2 + (2 + O(5))*T^3 + (3 + O(5))*T^4 + O(T^5)
         sage: L.series(3, prec=10)
         O(5^5) + O(5^2)*T + (4 + 4*5 + O(5^2))*T^2 + (2 + 4*5 + O(5^2))*T^3 + (3 + O(5^2))*T^4 + (1 + O(5))*T^5 + O(5)*T^6 + (4 + O(5))*T^7 + (2 + O(5))*T^8 + O(5)*T^9 + O(T^10)
-        sage: L.series(2,quadratic_twist=-3)
+        sage: L.series(2, quadratic_twist=-3)                                           # needs sage.graphs
         2 + 4*5 + 4*5^2 + O(5^4) + O(5)*T + (1 + O(5))*T^2 + (4 + O(5))*T^3 + O(5)*T^4 + O(T^5)
 
     A prime p such that E[p] is reducible::
@@ -204,7 +204,7 @@ class pAdicLseries(SageObject):
 
             sage: E = EllipticCurve('11a1')
             sage: lp = E.padic_lseries(5)
-            sage: lp.modular_symbol(1/7,sign=-1)  #indirect doctest
+            sage: lp.modular_symbol(1/7, sign=-1)  # indirect doctest                   # needs sage.graphs
             -1/2
         """
         self._negative_modular_symbol = self._E.modular_symbol(sign=-1, implementation='sage', normalize=self._normalize)
@@ -302,9 +302,9 @@ class pAdicLseries(SageObject):
             sage: lp = E.padic_lseries(5)
             sage: [lp.modular_symbol(r) for r in [0,1/5,oo,1/11]]
             [1/5, 6/5, 0, 0]
-            sage: [lp.modular_symbol(r,sign=-1) for r in [0,1/3,oo,1/7]]
+            sage: [lp.modular_symbol(r, sign=-1) for r in [0,1/3,oo,1/7]]               # needs sage.graphs
             [0, 1/2, 0, -1/2]
-            sage: [lp.modular_symbol(r,quadratic_twist=-20) for r in [0,1/5,oo,1/11]]
+            sage: [lp.modular_symbol(r, quadratic_twist=-20) for r in [0,1/5,oo,1/11]]  # needs sage.graphs
             [1, 1, 0, 1/2]
 
             sage: E = EllipticCurve('20a1')
@@ -392,9 +392,9 @@ class pAdicLseries(SageObject):
             sage: L = E.padic_lseries(5)
             sage: L.measure(1,2, prec=9)
             2 + 3*5 + 4*5^3 + 2*5^4 + 3*5^5 + 3*5^6 + 4*5^7 + 4*5^8 + O(5^9)
-            sage: L.measure(1,2, quadratic_twist=8,prec=15)
+            sage: L.measure(1,2, quadratic_twist=8, prec=15)
             O(5^15)
-            sage: L.measure(1,2, quadratic_twist=-4,prec=15)
+            sage: L.measure(1,2, quadratic_twist=-4, prec=15)                           # needs sage.graphs
             4 + 4*5 + 4*5^2 + 3*5^3 + 2*5^4 + 5^5 + 3*5^6 + 5^8 + 2*5^9 + 3*5^12 + 2*5^13 + 4*5^14 + O(5^15)
 
             sage: E = EllipticCurve('11a1')
@@ -817,7 +817,7 @@ class pAdicLseriesOrdinary(pAdicLseries):
 
             sage: E = EllipticCurve('43a1')
             sage: lp = E.padic_lseries(3)
-            sage: lp.series(2,quadratic_twist=-19)
+            sage: lp.series(2, quadratic_twist=-19)                                     # needs sage.graphs
             2 + 2*3 + 2*3^2 + O(3^4) + (1 + O(3))*T + (1 + O(3))*T^2 + O(T^3)
             sage: E.quadratic_twist(-19).label()    # optional -- database_cremona_ellcurve
             '15523a1'

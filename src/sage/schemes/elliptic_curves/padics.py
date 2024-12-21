@@ -158,9 +158,9 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
         sage: f = x^2 - e.ap(3)*x + 3
         sage: f(alpha)
         O(3^9)
-        sage: r = e.lseries().L_ratio(); r
+        sage: r = e.lseries().L_ratio(); r                                              # needs sage.graphs
         1/5
-        sage: (1 - alpha^(-1))^2 * r
+        sage: (1 - alpha^(-1))^2 * r                                                    # needs sage.graphs
         2 + 3 + 3^2 + 2*3^3 + 2*3^5 + 3^6 + 3^7 + O(3^9)
         sage: P(0)
         2 + 3 + 3^2 + 2*3^3 + 2*3^5 + 3^6 + O(3^7)
