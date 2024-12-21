@@ -971,7 +971,7 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
                 gens_map = dict(zip(Q.variable_names(),self.gens()[:Q.ngens()]))
                 return eval(str(element),gens_map)
 
-        if isinstance(element, (sage.interfaces.abc.SingularElement, cypari2.gen.Gen)):
+        if isinstance(element, (sage.interfaces.abc.SingularElement, Gen)):
             element = str(element)
         elif isinstance(element, sage.interfaces.abc.Macaulay2Element):
             element = element.external_string()
