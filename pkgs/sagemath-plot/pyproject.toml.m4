@@ -20,7 +20,6 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-plot"
 description = "passagemath: Plotting and graphics with Matplotlib, Three.JS, etc."
 dependencies = [
-    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
