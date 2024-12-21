@@ -26,6 +26,8 @@ exclude sage/schemes/elliptic_curves/descent_two_isogeny.p*
 #exclude sage/modular/arithgroup/arithgroup_element.pyx          # via Matrix_integer_dense
 #exclude sage/modular/arithgroup/congroup.pyx                    # via Matrix_integer_dense
 
+include sage/rings/polynomial/binary_form_reduce.p*
+
 include sage/databases/cremona.p*
 include sage/databases/db_modular_polynomials.p*
 include sage/databases/stein_watkins.p*
