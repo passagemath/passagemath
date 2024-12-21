@@ -255,8 +255,14 @@ from sage.misc.sage_eval import sage_eval
 
 import sage.rings.polynomial.polynomial_singular_interface
 
-cimport cypari2.gen
 from sage.rings.polynomial import polynomial_element
+
+
+try:
+    from cypari2.gen import Gen
+except ImportError:
+    Gen = ()
+
 
 permstore=[]
 cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
