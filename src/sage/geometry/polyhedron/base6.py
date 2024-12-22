@@ -1235,7 +1235,7 @@ class Polyhedron_base6(Polyhedron_base5):
 
         With the parameter ``minimal`` one can get a minimal base ring::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: s = polytopes.simplex(3)
             sage: s_AA = s.affine_hull_projection(orthonormal=True, extend=True)
             sage: s_AA.base_ring()
@@ -1260,7 +1260,7 @@ class Polyhedron_base6(Polyhedron_base5):
             ....:             orthonormal=True, extend=True).faces(1)]) == {sqrt(AA(2))}
             True
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.groups sage.rings.number_field
             sage: D = polytopes.dodecahedron()
             sage: F = D.faces(2)[0].as_polyhedron()
             sage: F.affine_hull_projection(orthogonal=True)
@@ -1288,7 +1288,7 @@ class Polyhedron_base6(Polyhedron_base5):
             sage: A.vertices()
             (A vertex at (0), A vertex at (2))
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: K.<sqrt3> = QuadraticField(3)
             sage: P = Polyhedron([2*[K.zero()], 2*[sqrt3]]); P
             A 1-dimensional polyhedron in

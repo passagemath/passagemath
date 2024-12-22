@@ -548,7 +548,7 @@ class Polytopes:
             2*a
             sage: TestSuite(octagon).run()      # long time
 
-            sage: TestSuite(polytopes.regular_polygon(5, exact=False)).run()
+            sage: TestSuite(polytopes.regular_polygon(5, exact=False)).run()            # needs scipy
         """
         n = ZZ(n)
         if n <= 2:
@@ -668,7 +668,7 @@ class Polytopes:
         Its volume is `\sqrt{d+1} / d!`::
 
             sage: s5 = polytopes.simplex(5, project=True)
-            sage: s5.volume()      # abs tol 1e-10
+            sage: s5.volume()      # abs tol 1e-10                              # needs scipy
             0.0204124145231931
             sage: sqrt(6.) / factorial(5)
             0.0204124145231931
