@@ -133,7 +133,7 @@ from sage.geometry.point_collection import (PointCollection,
 from sage.geometry.toric_lattice import ToricLattice, ToricLattice_generic
 lazy_import('sage.groups.perm_gps.permgroup_named', 'SymmetricGroup')
 
-from sage.features import PythonModule
+from sage.features import PythonModule, FeatureNotPresentError
 from sage.features.palp import PalpExecutable
 lazy_import('ppl', ['C_Polyhedron', 'Generator_System', 'Linear_Expression'],
                     feature=PythonModule("ppl", spkg='pplpy', type='standard'))
@@ -1320,7 +1320,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
                     if self.dim() == 2 or self.index.is_in_cache():
                         try:
                             parts.insert(-1, "#%d" % self.index())
-                        except ImportError:
+                        except (ImportError, FeatureNotPresentError):
                             pass
             except (ValueError, FileNotFoundError):
                 pass
