@@ -32,7 +32,6 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-linbox",
 ]
 
 [tool.cibuildwheel.linux]
