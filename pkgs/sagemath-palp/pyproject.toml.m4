@@ -29,6 +29,7 @@ content-type = "text/x-rst"
 test = [
     "passagemath-polyhedra",
     "passagemath-flint",
+    "passagemath-pari",
     "passagemath-repl",
 ]
 
