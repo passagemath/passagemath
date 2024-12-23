@@ -133,7 +133,7 @@ from sage.geometry.point_collection import (PointCollection,
 from sage.geometry.toric_lattice import ToricLattice, ToricLattice_generic
 lazy_import('sage.groups.perm_gps.permgroup_named', 'SymmetricGroup')
 
-from sage.features import PythonModule
+from sage.features import PythonModule, FeatureNotPresentError
 from sage.features.palp import PalpExecutable
 lazy_import('ppl', ['C_Polyhedron', 'Generator_System', 'Linear_Expression'],
                     feature=PythonModule("ppl", spkg='pplpy', type='standard'))
@@ -378,9 +378,9 @@ def ReflexivePolytope(dim, n):
 
     The 3rd 2-dimensional polytope is "the diamond"::
 
-        sage: ReflexivePolytope(2, 3)
+        sage: ReflexivePolytope(2, 3)                                                   # optional - polytopes_db
         2-d reflexive polytope #3 in 2-d lattice M
-        sage: lattice_polytope.ReflexivePolytope(2,3).vertices()
+        sage: lattice_polytope.ReflexivePolytope(2,3).vertices()                        # optional - polytopes_db
         M( 1,  0),
         M( 0,  1),
         M( 0, -1),
@@ -437,7 +437,7 @@ def ReflexivePolytopes(dim):
 
     There are 16 reflexive polygons::
 
-        sage: len(ReflexivePolytopes(2))
+        sage: len(ReflexivePolytopes(2))                                                # optional - polytopes_db
         16
 
     It is not possible to load 4-dimensional polytopes in this way::
@@ -487,7 +487,7 @@ def is_LatticePolytope(x):
         See https://github.com/sagemath/sage/issues/34307 for details.
         False
         sage: p = LatticePolytope([(1,0), (0,1), (-1,-1)])
-        sage: p                                                                         # needs palp
+        sage: p                                                                         # optional - polytopes_db, needs palp
         2-d reflexive polytope #0 in 2-d lattice M
         sage: is_LatticePolytope(p)
         True
@@ -961,7 +961,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
         For 2- and 3-d reflexive polytopes the index in the internal database
         appears as a subscript::
 
-            sage: print(ReflexivePolytope(2, 3)._latex_())
+            sage: print(ReflexivePolytope(2, 3)._latex_())                              # optional - polytopes_db
             \Delta^{2}_{3}
         """
         result = r"\Delta^{%d}" % self.dim()
@@ -1320,7 +1320,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
                     if self.dim() == 2 or self.index.is_in_cache():
                         try:
                             parts.insert(-1, "#%d" % self.index())
-                        except ImportError:
+                        except (ImportError, FeatureNotPresentError):
                             pass
             except (ValueError, FileNotFoundError):
                 pass
@@ -2480,7 +2480,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
             M(-1,  0),
             M( 0, -1)
             in 2-d lattice M
-            sage: lattice_polytope.ReflexivePolytope(2,3).vertices()
+            sage: lattice_polytope.ReflexivePolytope(2,3).vertices()                    # optional - polytopes_db
             M( 1,  0),
             M( 0,  1),
             M( 0, -1),
@@ -2496,7 +2496,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
             M( 0, -1),
             M(-1,  0)
             in 2-d lattice M
-            sage: lattice_polytope.ReflexivePolytope(2,3).normal_form()                 # needs sage.groups
+            sage: lattice_polytope.ReflexivePolytope(2,3).normal_form()                 # optional - polytopes_db, needs sage.groups
             M( 1,  0),
             M( 0,  1),
             M( 0, -1),
@@ -2949,12 +2949,12 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
 
             sage: d.index()                                                             # needs palp sage.groups
             3
-            sage: d                                                                     # needs palp sage.groups
+            sage: d                                                                     # optional - polytopes_db, needs palp sage.groups
             2-d reflexive polytope #3 in 2-d lattice M
 
         You can get it in its normal form (in the default lattice) as ::
 
-            sage: lattice_polytope.ReflexivePolytope(2, 3).vertices()
+            sage: lattice_polytope.ReflexivePolytope(2, 3).vertices()                   # optional - polytopes_db
             M( 1,  0),
             M( 0,  1),
             M( 0, -1),
@@ -3299,6 +3299,8 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
             sage: PM_max = PM.permutation_normal_form()                                 # needs sage.graphs
             sage: PM_max == o._palp_PM_max()                                            # needs sage.graphs sage.groups
             True
+
+            sage: # optional - polytopes_db
             sage: P2 = ReflexivePolytope(2, 0)
             sage: PM_max, permutations = P2._palp_PM_max(check=True)                    # needs sage.groups
             sage: PM_max                                                                # needs sage.graphs
@@ -5600,8 +5602,8 @@ def positive_integer_relations(points):
         [1 1 1 0 0 0]
         [0 0 0 0 0 1]
 
-        sage: cm = ReflexivePolytope(2,1).vertices().column_matrix()
-        sage: lattice_polytope.positive_integer_relations(cm)
+        sage: cm = ReflexivePolytope(2,1).vertices().column_matrix()                    # optional - polytopes_db
+        sage: lattice_polytope.positive_integer_relations(cm)                           # optional - polytopes_db
         [2 1 1]
     """
     points = points.transpose().base_extend(QQ)

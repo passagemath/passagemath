@@ -26,7 +26,7 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test = [
     "passagemath-polyhedra",
-    "passagemath-linbox",
+    "passagemath-flint",
     "passagemath-repl",
 ]
 

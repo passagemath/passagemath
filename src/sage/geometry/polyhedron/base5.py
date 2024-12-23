@@ -997,6 +997,7 @@ class Polyhedron_base5(Polyhedron_base4):
             # And that it changes the backend correctly where necessary.
             try:
                 from sage.rings.qqbar import AA
+                import sage.libs.pari
             except ImportError:
                 pass
             else:
@@ -1649,6 +1650,7 @@ class Polyhedron_base5(Polyhedron_base4):
 
         try:
             from sage.rings.qqbar import AA
+            import sage.libs.pari
         except ImportError:
             return
 
@@ -1661,26 +1663,29 @@ class Polyhedron_base5(Polyhedron_base4):
             tester.assertEqual(self.dilation(3).volume(measure='induced'), self.volume(measure='induced')*3**self.dim())
 
         # Testing coercion with algebraic numbers.
-        from sage.rings.number_field.number_field import QuadraticField
-        K1 = QuadraticField(2, embedding=AA(2).sqrt())
-        sqrt2 = K1.gen()
-        K2 = QuadraticField(3, embedding=AA(3).sqrt())
-        sqrt3 = K2.gen()
-
-        if self.base_ring() in (QQ, ZZ, AA, RDF):
-            tester.assertIsInstance(sqrt2*self, Polyhedron_base)
-            tester.assertIsInstance(sqrt3*self, Polyhedron_base)
-        elif hasattr(self.base_ring(), "composite_fields"):
-            for scalar, K in ((sqrt2, K1), (sqrt3, K2)):
-                new_ring = None
-                try:
-                    new_ring = self.base_ring().composite_fields()[0]
-                except (KeyError, AttributeError, TypeError):
-                    # This isn't about testing composite fields.
-                    pass
-                if new_ring:
-                    p = self.change_ring(new_ring)
-                    tester.assertIsInstance(scalar*p, Polyhedron_base)
+        try:
+            from sage.rings.number_field.number_field import QuadraticField
+            K1 = QuadraticField(2, embedding=AA(2).sqrt())
+            sqrt2 = K1.gen()
+            K2 = QuadraticField(3, embedding=AA(3).sqrt())
+            sqrt3 = K2.gen()
+        except ImportError:
+            pass
+        else:
+            if self.base_ring() in (QQ, ZZ, AA, RDF):
+                tester.assertIsInstance(sqrt2*self, Polyhedron_base)
+                tester.assertIsInstance(sqrt3*self, Polyhedron_base)
+            elif hasattr(self.base_ring(), "composite_fields"):
+                for scalar, K in ((sqrt2, K1), (sqrt3, K2)):
+                    new_ring = None
+                    try:
+                        new_ring = self.base_ring().composite_fields()[0]
+                    except (KeyError, AttributeError, TypeError):
+                        # This isn't about testing composite fields.
+                        pass
+                    if new_ring:
+                        p = self.change_ring(new_ring)
+                        tester.assertIsInstance(scalar*p, Polyhedron_base)
 
     def linear_transformation(self, linear_transf, new_base_ring=None):
         """

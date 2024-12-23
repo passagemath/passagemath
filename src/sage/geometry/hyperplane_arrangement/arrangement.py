@@ -1099,8 +1099,8 @@ class HyperplaneArrangementElement(Element):
         We verify Proposition 2.5 in [BHS2023]_ on the braid arrangement
         `B_k` for `k = 2,3,4,5`::
 
-            sage: B = [hyperplane_arrangements.braid(k) for k in range(2,6)]
-            sage: all(H.is_simplicial() for H in B)
+            sage: B = [hyperplane_arrangements.braid(k) for k in range(2,6)]            # needs sage.graphs
+            sage: all(H.is_simplicial() for H in B)                                     # needs sage.graphs
             True
             sage: all(c > 0 for H in B                                                  # needs sage.graphs
             ....:     for c in H.primitive_eulerian_polynomial().coefficients())

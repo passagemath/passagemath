@@ -39,7 +39,7 @@ try:  # extra
 except ImportError:
     pass
 
-from .all__sagemath_modules import RR
+from .all__sagemath_modules import RealNumber, RR
 
 from sage.geometry.all__sagemath_polyhedra import *
 from sage.geometry.triangulation.all import *
