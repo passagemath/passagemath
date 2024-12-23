@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-glucose ~= 10.5.11.0
+passagemath-glucose ~= 10.5.12.0
