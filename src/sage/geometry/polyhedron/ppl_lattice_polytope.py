@@ -817,7 +817,7 @@ class LatticePolytope_PPL_class(C_Polyhedron):
             sage: poly = LatticePolytope_PPL((-9,-6,-1,-1),
             ....:                            (0,0,0,1), (0,0,1,0), (0,1,0,0), (1,0,0,0))
             sage: fiber = next(poly.fibration_generator(2))
-            sage: poly.base_projection(fiber)
+            sage: poly.base_projection(fiber)                                           # needs sage.libs.pari
             Finitely generated module V/W over Integer Ring with invariants (0, 0)
         """
         return self.ambient_space().quotient(fiber.affine_space())
@@ -853,7 +853,7 @@ class LatticePolytope_PPL_class(C_Polyhedron):
 
             sage: proj = poly.base_projection(fiber)
             sage: proj_matrix = poly.base_projection_matrix(fiber)
-            sage: [proj(p) for p in poly.integral_points()]
+            sage: [proj(p) for p in poly.integral_points()]                             # needs sage.libs.pari
             [(-1, -1), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 1), (1, 0)]
             sage: [proj_matrix*p for p in poly.integral_points()]
             [(1, 1), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, -1), (-1, 0)]
@@ -880,12 +880,12 @@ class LatticePolytope_PPL_class(C_Polyhedron):
             sage: poly = LatticePolytope_PPL((-9,-6,-1,-1),
             ....:                            (0,0,0,1), (0,0,1,0), (0,1,0,0), (1,0,0,0))
             sage: fiber = next(poly.fibration_generator(2))
-            sage: poly.base_rays(fiber, poly.integral_points_not_interior_to_facets())
+            sage: poly.base_rays(fiber, poly.integral_points_not_interior_to_facets())  # needs sage.libs.pari
             ((-1, -1), (0, 1), (1, 0))
 
             sage: p = LatticePolytope_PPL((1,0), (1,2), (-1,0))
             sage: f = LatticePolytope_PPL((1,0), (-1,0))
-            sage: p.base_rays(f, p.integral_points())
+            sage: p.base_rays(f, p.integral_points())                                   # needs sage.libs.pari
             ((1),)
         """
         quo = self.base_projection(fiber)
@@ -1141,6 +1141,7 @@ class LatticePolytope_PPL_class(C_Polyhedron):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.geometry.polyhedron.ppl_lattice_polytope import LatticePolytope_PPL
             sage: polygon = LatticePolytope_PPL((0,0,2,1), (0,1,2,0), (2,3,0,0), (2,0,0,3))
             sage: polygon._find_isomorphism_to_subreflexive_polytope()
@@ -1212,6 +1213,7 @@ class LatticePolytope_PPL_class(C_Polyhedron):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.geometry.polyhedron.ppl_lattice_polytope import LatticePolytope_PPL
             sage: polygon = LatticePolytope_PPL((0,0,2,1), (0,1,2,0), (2,3,0,0), (2,0,0,3))
             sage: polygon.embed_in_reflexive_polytope()
@@ -1234,7 +1236,6 @@ class LatticePolytope_PPL_class(C_Polyhedron):
              (2, 1, 0, 2): (2, 1),
              (2, 2, 0, 1): (1, 2),
              (2, 3, 0, 0): (0, 3)}
-
             sage: LatticePolytope_PPL((0,0), (4,0), (0,4)).embed_in_reflexive_polytope()
             Traceback (most recent call last):
             ...

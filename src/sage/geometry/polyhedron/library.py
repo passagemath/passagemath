@@ -603,7 +603,7 @@ class Polytopes:
             1/8*t^4 + 3/4*t^3 + 15/8*t^2 + 9/4*t + 1
             sage: [p3(i) for i in [1,2,3,4]]       # optional - latte_int
             [6, 21, 55, 120]
-            sage: [len((i*b3).integral_points()) for i in [1,2,3,4]]
+            sage: [len((i*b3).integral_points()) for i in [1,2,3,4]]                    # needs sage.libs.pari
             [6, 21, 55, 120]
 
             sage: b4 = polytopes.Birkhoff_polytope(4)
@@ -674,7 +674,7 @@ class Polytopes:
             0.0204124145231931
 
             sage: s6 = polytopes.simplex(6, project=True)
-            sage: s6.volume()      # abs tol 1e-10
+            sage: s6.volume()      # abs tol 1e-10                              # needs scipy
             0.00367465459870082
             sage: sqrt(7.) / factorial(6)
             0.00367465459870082

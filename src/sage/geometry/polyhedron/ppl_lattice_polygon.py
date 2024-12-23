@@ -90,6 +90,7 @@ class LatticePolygon_PPL_class(LatticePolytope_PPL_class):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.geometry.polyhedron.ppl_lattice_polytope import LatticePolytope_PPL, C_Polyhedron
             sage: L1 = LatticePolytope_PPL(C_Polyhedron(2, 'empty'))
             sage: L2 = LatticePolytope_PPL(C_Polyhedron(3, 'empty'))
@@ -99,38 +100,32 @@ class LatticePolygon_PPL_class(LatticePolytope_PPL_class):
             sage: iso = L1._find_isomorphism_degenerate(L2)
             sage: iso(L1) == L2
             True
-
             sage: L1 = LatticePolytope_PPL((-1,4))
             sage: L2 = LatticePolytope_PPL((2,1,5))
             sage: iso = L1.find_isomorphism(L2)
             sage: iso(L1) == L2
             True
-
             sage: L1 = LatticePolytope_PPL((-1,), (3,))
             sage: L2 = LatticePolytope_PPL((2,1,5), (2,-3,5))
             sage: iso = L1.find_isomorphism(L2)
             sage: iso(L1) == L2
             True
-
             sage: L1 = LatticePolytope_PPL((-1,-1), (3,-1))
             sage: L2 = LatticePolytope_PPL((2,1,5), (2,-3,5))
             sage: iso = L1.find_isomorphism(L2)
             sage: iso(L1) == L2
             True
-
             sage: L1 = LatticePolytope_PPL((-1,2), (3,1))
             sage: L2 = LatticePolytope_PPL((1,2,3),(1,2,4))
             sage: iso = L1.find_isomorphism(L2)
             sage: iso(L1) == L2
             True
-
             sage: L1 = LatticePolytope_PPL((-1,2), (3,2))
             sage: L2 = LatticePolytope_PPL((1,2,3),(1,2,4))
             sage: L1.find_isomorphism(L2)
             Traceback (most recent call last):
             ...
             LatticePolytopesNotIsomorphicError: different number of integral points
-
             sage: L1 = LatticePolytope_PPL((-1,2), (3,1))
             sage: L2 = LatticePolytope_PPL((1,2,3),(1,2,5))
             sage: L1.find_isomorphism(L2)
@@ -206,7 +201,7 @@ class LatticePolygon_PPL_class(LatticePolytope_PPL_class):
             sage: L1 = LatticePolytope_PPL((1,0),(0,1),(0,0))
             sage: L2 = LatticePolytope_PPL((1,0,3),(0,1,0),(0,0,1))
             sage: v0, v1, v2 = L2.vertices()
-            sage: L1._find_cyclic_isomorphism_matching_edge(L2, v0, v1-v0, v2-v0)
+            sage: L1._find_cyclic_isomorphism_matching_edge(L2, v0, v1 - v0, v2 - v0)   # needs sage.libs.pari
             The map A*x+b with A=
             [ 0  1]
             [-1 -1]
@@ -264,14 +259,14 @@ class LatticePolygon_PPL_class(LatticePolytope_PPL_class):
             sage: from sage.geometry.polyhedron.ppl_lattice_polytope import LatticePolytope_PPL
             sage: L1 = LatticePolytope_PPL((1,0),(0,1),(0,0))
             sage: L2 = LatticePolytope_PPL((1,0,3),(0,1,0),(0,0,1))
-            sage: iso = L1.find_isomorphism(L2)
-            sage: iso(L1) == L2
+            sage: iso = L1.find_isomorphism(L2)                                         # needs sage.libs.pari
+            sage: iso(L1) == L2                                                         # needs sage.libs.pari
             True
 
             sage: L1 = LatticePolytope_PPL((0, 1), (3, 0), (0, 3), (1, 0))
             sage: L2 = LatticePolytope_PPL((0,0,2,1),(0,1,2,0),(2,0,0,3),(2,3,0,0))
-            sage: iso = L1.find_isomorphism(L2)
-            sage: iso(L1) == L2
+            sage: iso = L1.find_isomorphism(L2)                                         # needs sage.libs.pari
+            sage: iso(L1) == L2                                                         # needs sage.libs.pari
             True
 
         The following polygons are isomorphic over `\QQ`, but not as
@@ -279,11 +274,11 @@ class LatticePolygon_PPL_class(LatticePolytope_PPL_class):
 
             sage: L1 = LatticePolytope_PPL((1,0),(0,1),(-1,-1))
             sage: L2 = LatticePolytope_PPL((0, 0), (0, 1), (1, 0))
-            sage: L1.find_isomorphism(L2)
+            sage: L1.find_isomorphism(L2)                                               # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             LatticePolytopesNotIsomorphicError: different number of integral points
-            sage: L2.find_isomorphism(L1)
+            sage: L2.find_isomorphism(L1)                                               # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             LatticePolytopesNotIsomorphicError: different number of integral points
@@ -347,7 +342,7 @@ class LatticePolygon_PPL_class(LatticePolytope_PPL_class):
             sage: from sage.geometry.polyhedron.ppl_lattice_polytope import LatticePolytope_PPL
             sage: L1 = LatticePolytope_PPL((1,0),(0,1),(0,0))
             sage: L2 = LatticePolytope_PPL((1,0,3),(0,1,0),(0,0,1))
-            sage: L1.is_isomorphic(L2)
+            sage: L1.is_isomorphic(L2)                                                  # needs sage.libs.pari
             True
         """
         from sage.geometry.polyhedron.lattice_euclidean_group_element import \
@@ -373,7 +368,7 @@ class LatticePolygon_PPL_class(LatticePolytope_PPL_class):
 
             sage: from sage.geometry.polyhedron.ppl_lattice_polytope import LatticePolytope_PPL
             sage: P1xP1 = LatticePolytope_PPL((1,0), (0,1), (-1,0), (0,-1))
-            sage: P1xP1.sub_polytopes()
+            sage: P1xP1.sub_polytopes()                                                 # needs sage.libs.pari
             (A 2-dimensional lattice polytope in ZZ^2 with 4 vertices,
              A 2-dimensional lattice polytope in ZZ^2 with 3 vertices,
              A 2-dimensional lattice polytope in ZZ^2 with 3 vertices,
@@ -489,7 +484,7 @@ def subpolygons_of_polar_P2():
     EXAMPLES::
 
         sage: from sage.geometry.polyhedron.ppl_lattice_polygon import subpolygons_of_polar_P2
-        sage: len(subpolygons_of_polar_P2())
+        sage: len(subpolygons_of_polar_P2())                                            # needs sage.libs.pari
         27
     """
     return polar_P2_polytope().sub_polytopes()
@@ -505,7 +500,7 @@ def subpolygons_of_polar_P2_112():
     EXAMPLES::
 
         sage: from sage.geometry.polyhedron.ppl_lattice_polygon import subpolygons_of_polar_P2_112
-        sage: len(subpolygons_of_polar_P2_112())
+        sage: len(subpolygons_of_polar_P2_112())                                        # needs sage.libs.pari
         28
     """
     return polar_P2_112_polytope().sub_polytopes()
@@ -521,7 +516,7 @@ def subpolygons_of_polar_P1xP1():
     EXAMPLES::
 
         sage: from sage.geometry.polyhedron.ppl_lattice_polygon import subpolygons_of_polar_P1xP1
-        sage: len(subpolygons_of_polar_P1xP1())
+        sage: len(subpolygons_of_polar_P1xP1())                                         # needs sage.libs.pari
         20
     """
     return polar_P1xP1_polytope().sub_polytopes()
@@ -539,6 +534,7 @@ def sub_reflexive_polygons():
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.geometry.polyhedron.ppl_lattice_polygon import sub_reflexive_polygons
         sage: l = sub_reflexive_polygons(); l[5]
         (A 2-dimensional lattice polytope in ZZ^2 with 6 vertices,
