@@ -997,6 +997,7 @@ class Polyhedron_base5(Polyhedron_base4):
             # And that it changes the backend correctly where necessary.
             try:
                 from sage.rings.qqbar import AA
+                import sage.libs.pari
             except ImportError:
                 pass
             else:
@@ -1649,6 +1650,7 @@ class Polyhedron_base5(Polyhedron_base4):
 
         try:
             from sage.rings.qqbar import AA
+            import sage.libs.pari
         except ImportError:
             return
 
