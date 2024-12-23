@@ -1310,19 +1310,20 @@ class Polyhedron_base6(Polyhedron_base5):
 
         The affine hull is combinatorially equivalent to the input::
 
-            sage: P.is_combinatorially_isomorphic(P.affine_hull_projection())           # needs sage.rings.number_field
+            sage: # needs sage.graphs sage.rings.number_field
+            sage: P.is_combinatorially_isomorphic(P.affine_hull_projection())
             True
-            sage: P.is_combinatorially_isomorphic(P.affine_hull_projection(             # needs sage.rings.number_field
+            sage: P.is_combinatorially_isomorphic(P.affine_hull_projection(
             ....:     orthogonal=True))
             True
-            sage: P.is_combinatorially_isomorphic(P.affine_hull_projection(             # needs sage.rings.number_field
+            sage: P.is_combinatorially_isomorphic(P.affine_hull_projection(
             ....:     orthonormal=True, extend=True))
             True
 
         The ``orthonormal=True`` parameter preserves volumes;
         it provides an isometric copy of the polyhedron::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.groups sage.rings.number_field
             sage: Pentagon = polytopes.dodecahedron().faces(2)[0].as_polyhedron()
             sage: P = Pentagon.affine_hull_projection(orthonormal=True, extend=True)
             sage: _, c= P.is_inscribed(certificate=True)
@@ -1344,7 +1345,7 @@ class Polyhedron_base6(Polyhedron_base5):
         by the square root of the determinant of the linear part of the
         affine transformation times its transpose::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.groups sage.rings.number_field
             sage: Pentagon = polytopes.dodecahedron().faces(2)[0].as_polyhedron()
             sage: Pnormal = Pentagon.affine_hull_projection(orthonormal=True,
             ....:                                           extend=True)
