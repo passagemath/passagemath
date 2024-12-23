@@ -835,7 +835,7 @@ class Triangulation(Element):
             ( 0, -1,  0,  1)
             in Ambient free module of rank 4
             over the principal ideal domain Integer Ring
-            sage: N.dual().rays()
+            sage: N.dual().rays()                                                       # needs sage.libs.pari
             (1, -1, 1, -1)
             in Ambient free module of rank 4
             over the principal ideal domain Integer Ring
@@ -844,7 +844,7 @@ class Triangulation(Element):
 
             sage: polytopes.simplex(2).triangulate().normal_cone()
             3-d cone in 3-d lattice
-            sage: _.dual().is_trivial()
+            sage: _.dual().is_trivial()                                                 # needs sage.libs.pari
             True
         """
         if not self.point_configuration().base_ring().is_subring(QQ):
