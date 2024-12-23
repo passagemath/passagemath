@@ -247,7 +247,7 @@ def gale_transform_to_polytope(vectors, base_ring=None, backend=None):
 
     One can specify the base ring::
 
-        sage: gale_transform_to_polytope(
+        sage: gale_transform_to_polytope(                                               # needs sage.libs.pari
         ....:     [(1,1), (-1,-1), (1,0),
         ....:      (-1,0), (1,-1), (-2,1)]).vertices()
         (A vertex at (-25, 0, 0),
@@ -392,27 +392,27 @@ def gale_transform_to_primal(vectors, base_ring=None, backend=None):
     One can specify the base ring::
 
         sage: p = [(1,1), (-1,-1), (1,0), (-1,0), (1,-1), (-2,1)]
-        sage: gtpp = gale_transform_to_primal(p); gtpp
+        sage: gtpp = gale_transform_to_primal(p); gtpp                                  # needs sage.libs.pari
         [(16, -35, 54),
          (24, 10, 31),
          (-15, 50, -60),
          (-25, 0, 0),
          (0, -25, 0),
          (0, 0, -25)]
-        sage: (matrix(RDF, gtpp)/25 +
+        sage: (matrix(RDF, gtpp)/25 +                                                   # needs sage.libs.pari
         ....:  matrix(gale_transform_to_primal(p, base_ring=RDF))).norm() < 1e-15
         True
 
     One can also specify the backend to be used internally::
 
-        sage: gale_transform_to_primal(p, backend='field')
+        sage: gale_transform_to_primal(p, backend='field')                              # needs sage.libs.pari
         [(48, -71, 88),
          (84, -28, 99),
          (-77, 154, -132),
          (-55, 0, 0),
          (0, -55, 0),
          (0, 0, -55)]
-        sage: gale_transform_to_primal(p, backend='normaliz')           # optional - pynormaliz
+        sage: gale_transform_to_primal(p, backend='normaliz')           # optional - pynormaliz, needs sage.libs.pari
         [(16, -35, 54),
          (24, 10, 31),
          (-15, 50, -60),
