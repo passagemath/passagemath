@@ -17,7 +17,9 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-maxima"
 description = "passagemath: Symbolic calculus"
 dependencies = [
+    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sagemath_ecl
+    SPKG_INSTALL_REQUIRES_sagemath_environment
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
