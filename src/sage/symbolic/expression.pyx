@@ -3367,7 +3367,7 @@ cdef class Expression(Expression_abc):
 
         Comparisons of infinities::
 
-            sage: assert( (1+I)*oo == (2+2*I)*oo )
+            sage: assert( (1+I)*oo == (2+2*I)*oo )                                      # needs sage.libs.pari
             sage: assert( SR(unsigned_infinity) == SR(unsigned_infinity) )
             sage: assert( SR(I*oo) == I*oo )
             sage: assert( SR(-oo) <= SR(oo) )
@@ -3589,7 +3589,7 @@ cdef class Expression(Expression_abc):
             sage: m1 = 382247666339265723780973363167714496025733124557617743
             sage: (m == m1).test_relation(domain=QQbar)                                 # needs sage.rings.number_field
             False
-            sage: (m == m1).test_relation()
+            sage: (m == m1).test_relation()                                             # needs sage.libs.pari
             False
 
         Try the examples from :issue:`31424` and :issue:`31665`::
