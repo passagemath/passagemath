@@ -64,10 +64,10 @@ def dhsw_snf(mat, verbose=False):
 
         sage: from sage.homology.matrix_utils import dhsw_snf
         sage: mat = matrix(ZZ, 3, 4, range(12))
-        sage: dhsw_snf(mat)
+        sage: dhsw_snf(mat)                                                             # needs sage.libs.pari
         [1, 4, 0]
         sage: mat = random_matrix(ZZ, 20, 20, x=-1, y=2)
-        sage: mat.elementary_divisors() == dhsw_snf(mat)
+        sage: mat.elementary_divisors() == dhsw_snf(mat)                                # needs sage.libs.pari
         True
     """
     ring = mat.base_ring()
