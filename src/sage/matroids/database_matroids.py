@@ -1190,7 +1190,7 @@ def Wheel4(groundset='abcdefgh'):
         Wheel(4): Regular matroid of rank 4 on 8 elements with 45 bases
         sage: M.is_valid() and M.is_graphic() and M.dual().is_graphic()
         True
-        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
+        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())                      # needs sage.libs.pari
         True
         sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False
@@ -1217,7 +1217,7 @@ def Whirl4(groundset='abcdefgh'):
         Whirl(4): Ternary matroid of rank 4 on 8 elements, type 0+
         sage: M.is_valid()
         True
-        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
+        sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())                      # needs sage.libs.pari
         True
         sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
         False

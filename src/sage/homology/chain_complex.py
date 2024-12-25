@@ -812,7 +812,7 @@ class ChainComplex_class(Parent):
 
             sage: G = AdditiveAbelianGroup([0, 3])
             sage: C = ChainComplex(grading_group=G, degree=G(vector([1,2])))
-            sage: C.grading_group()
+            sage: C.grading_group()                                                     # needs sage.libs.pari
             Additive abelian group isomorphic to Z + Z/3
             sage: C.degree_of_differential()
             (1, 2)
@@ -1202,12 +1202,12 @@ class ChainComplex_class(Parent):
         EXAMPLES::
 
             sage: C = ChainComplex({0: matrix(ZZ, 2, 3, [3, 0, 0, 0, 0, 0])})
-            sage: C.homology()
+            sage: C.homology()                                                          # needs sage.libs.pari
             {0: Z x Z, 1: Z x C3}
-            sage: C.homology(deg=1, base_ring=GF(3))
+            sage: C.homology(deg=1, base_ring=GF(3))                                    # needs sage.libs.pari
             Vector space of dimension 2 over Finite Field of size 3
             sage: D = ChainComplex({0: identity_matrix(ZZ, 4), 4: identity_matrix(ZZ, 30)})
-            sage: D.homology()
+            sage: D.homology()                                                          # needs sage.libs.pari
             {0: 0, 1: 0, 4: 0, 5: 0}
 
         Generators: generators are given as a list of cycles, each of
@@ -1224,7 +1224,7 @@ class ChainComplex_class(Parent):
             sage: d1 = matrix(ZZ, 1,3, [[0,0,0]])
             sage: d2 = matrix(ZZ, 3,2, [[1,1], [1,-1], [-1,1]])
             sage: C_k = ChainComplex({0:d0, 1:d1, 2:d2}, degree=-1)
-            sage: C_k.homology(generators=true)
+            sage: C_k.homology(generators=true)                                         # needs sage.libs.pari
             {0: [(Z, Chain(0:(1)))],
              1: [(C2, Chain(1:(0, 1, -1))), (Z, Chain(1:(0, 1, 0)))],
              2: []}
@@ -1233,7 +1233,7 @@ class ChainComplex_class(Parent):
 
             sage: T = simplicial_complexes.Torus()                                      # needs sage.graphs
             sage: C_t = T.chain_complex()                                               # needs sage.graphs
-            sage: C_t.homology(base_ring=QQ, generators=True)                           # needs sage.graphs
+            sage: C_t.homology(base_ring=QQ, generators=True)                           # needs sage.graphs sage.libs.pari
             {0: [(Vector space of dimension 1 over Rational Field,
                Chain(0:(0, 0, 0, 0, 0, 0, 1)))],
              1: [(Vector space of dimension 1 over Rational Field,
@@ -1271,7 +1271,7 @@ class ChainComplex_class(Parent):
         EXAMPLES::
 
             sage: C = ChainComplex({0: matrix(ZZ, 2, 3, [3, 0, 0, 0, 0, 0])})
-            sage: C.homology(1) == C._homology_in_degree(1, ZZ, False, False, 'auto')
+            sage: C.homology(1) == C._homology_in_degree(1, ZZ, False, False, 'auto')   # needs sage.libs.pari
             True
         """
         if deg not in self.nonzero_degrees():
@@ -1347,9 +1347,9 @@ class ChainComplex_class(Parent):
         EXAMPLES::
 
             sage: C = ChainComplex({0: matrix(ZZ, 2, 3, [3, 0, 0, 0, 0, 0])})
-            sage: C.homology(1)
+            sage: C.homology(1)                                                         # needs sage.libs.pari
             Z x C3
-            sage: C._homology_generators_snf(C.differential(0), C.differential(1), 0)
+            sage: C._homology_generators_snf(C.differential(0), C.differential(1), 0)   # needs sage.libs.pari
             ([3, 0], [(1, 0), (0, 1)])
         """
         # Find the kernel of the out-going differential.
@@ -1460,14 +1460,14 @@ class ChainComplex_class(Parent):
         EXAMPLES::
 
             sage: C = ChainComplex({0: matrix(ZZ, 2, 3, [3, 0, 0, 0, 0, 0])})
-            sage: C.homology()
+            sage: C.homology()                                                          # needs sage.libs.pari
             {0: Z x Z, 1: Z x C3}
             sage: C.torsion_list(11)                                                    # needs sage.rings.finite_rings
             [(3, [1])]
             sage: C = ChainComplex([matrix(ZZ, 1, 1, [2]), matrix(ZZ, 1, 1), matrix(1, 1, [3])])
-            sage: C.homology(1)
+            sage: C.homology(1)                                                         # needs sage.libs.pari
             C2
-            sage: C.homology(3)
+            sage: C.homology(3)                                                         # needs sage.libs.pari
             C3
             sage: C.torsion_list(5)                                                     # needs sage.rings.finite_rings
             [(2, [1]), (3, [3])]
@@ -1766,8 +1766,8 @@ class ChainComplex_class(Parent):
 
             sage: G = AdditiveAbelianGroup([0, 0])
             sage: m = matrix([0])
-            sage: C = ChainComplex(grading_group=G, degree=G(vector([1,2])), data={G.zero(): m})
-            sage: C._latex_()
+            sage: C = ChainComplex(grading_group=G, degree=G(vector([1,2])), data={G.zero(): m})    # needs sage.libs.pari
+            sage: C._latex_()                                                                       # needs sage.libs.pari
             '\\Bold{Z}^{1} \\xrightarrow{d_{\\text{\\texttt{(0,{ }0)}}}} \\Bold{Z}^{1}'
         """
 #         Warning: this is likely to screw up if, for example, the
@@ -1885,6 +1885,7 @@ class ChainComplex_class(Parent):
 
         ::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = ZZ[]
             sage: G = AdditiveAbelianGroup([0,7])
             sage: d = {G(vector([1,1])):matrix([[x]])}
@@ -2019,6 +2020,7 @@ class ChainComplex_class(Parent):
 
         ::
 
+            sage: # needs sage.libs.pari
             sage: R.<x,y> = ZZ[]
             sage: G = AdditiveAbelianGroup([0,7])
             sage: d1 = {G(vector([1,1])):matrix([[x]])}

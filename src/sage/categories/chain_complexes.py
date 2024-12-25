@@ -67,7 +67,7 @@ class ChainComplexes(Category_module):
 
             EXAMPLES::
 
-                sage: # needs sage.modules
+                sage: # needs sage.libs.pari sage.modules
                 sage: C = ChainComplex({0: matrix(ZZ, 2, 3, [3, 0, 0, 0, 0, 0])})
                 sage: C.homology(0)
                 Z x Z
@@ -173,7 +173,7 @@ class HomologyFunctor(Functor):
 
         sage: C = ChainComplex({0: matrix(ZZ, 2, 3, [3, 0, 0, 0, 0, 0])})               # needs sage.modules
         sage: H = HomologyFunctor(ChainComplexes(ZZ), 1)
-        sage: H(C)                                                                      # needs sage.modules
+        sage: H(C)                                                                      # needs sage.libs.pari sage.modules
         Z x C3
 
     ::
@@ -231,7 +231,7 @@ class HomologyFunctor(Functor):
 
             sage: C = ChainComplex({0: matrix(ZZ, 2, 3, [3, 0, 0, 0, 0, 0])})           # needs sage.modules
             sage: H = HomologyFunctor(ChainComplexes(ZZ), 1)
-            sage: H._apply_functor(C)                                                   # needs sage.modules
+            sage: H._apply_functor(C)                                                   # needs sage.libs.pari sage.modules
             Z x C3
         """
         return x.homology(self._n)

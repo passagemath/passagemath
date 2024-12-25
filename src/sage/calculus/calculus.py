@@ -997,6 +997,7 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
 
     EXAMPLES: First some simple examples::
 
+        sage: # needs fpylll
         sage: sqrt(2).minpoly()
         x^2 - 2
         sage: minpoly(2^(1/3))
@@ -1011,6 +1012,7 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
 
     ::
 
+        sage: # needs fpylll
         sage: sin(pi/3).minpoly()
         x^2 - 3/4
         sage: sin(pi/7).minpoly()
@@ -1024,6 +1026,7 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
 
     ::
 
+        sage: # needs fpylll
         sage: (sqrt(2) + sqrt(3) + sqrt(6)).minpoly()
         x^4 - 22*x^2 - 48*x - 23
         sage: K.<a,b> = NumberField([x^2-2, x^2-3])
@@ -1033,6 +1036,7 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
     The :func:`minpoly` function is used implicitly when creating
     number fields::
 
+        sage: # needs fpylll
         sage: x = var('x')
         sage: eqn =  x^3 + sqrt(2)*x + 5 == 0
         sage: a = solve(eqn, x)[0].rhs()
@@ -1045,6 +1049,7 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
 
     ::
 
+        sage: # needs fpylll
         sage: f = x^3 - x + 1
         sage: a = f.solve(x)[0].rhs(); a
         -1/2*(1/18*sqrt(23)*sqrt(3) - 1/2)^(1/3)*(I*sqrt(3) + 1)
@@ -1057,7 +1062,8 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
 
     ::
 
-        sage: a = sqrt(2)+sqrt(3)+sqrt(5)
+        sage: # needs fpylll
+        sage: a = sqrt(2) + sqrt(3) + sqrt(5)
         sage: f = a.minpoly(); f
         x^8 - 40*x^6 + 352*x^4 - 960*x^2 + 576
         sage: f(a)
@@ -1069,6 +1075,7 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
 
     ::
 
+        sage: # needs fpylll
         sage: a = sin(pi/7)
         sage: f = a.minpoly(algorithm='numerical'); f
         x^6 - 7/4*x^4 + 7/8*x^2 - 7/64
@@ -1079,6 +1086,7 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
 
     ::
 
+        sage: # needs fpylll
         sage: a = sqrt(3) + sqrt(2)
         sage: a.minpoly(algorithm='numerical', bits=100, degree=3)
         Traceback (most recent call last):
@@ -1089,6 +1097,7 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
 
     ::
 
+        sage: # needs fpylll
         sage: cos(pi/33).minpoly(algorithm='algebraic')
         x^10 + 1/2*x^9 - 5/2*x^8 - 5/4*x^7 + 17/8*x^6 + 17/16*x^5
          - 43/64*x^4 - 43/128*x^3 + 3/64*x^2 + 3/128*x + 1/1024
@@ -1098,7 +1107,7 @@ def minpoly(ex, var='x', algorithm=None, bits=None, degree=None, epsilon=0):
 
     Sometimes it fails, as it must given that some numbers aren't algebraic::
 
-        sage: sin(1).minpoly(algorithm='numerical')
+        sage: sin(1).minpoly(algorithm='numerical')                                     # needs fpylll
         Traceback (most recent call last):
         ...
         ValueError: Could not find minimal polynomial (1000 bits, degree 24).

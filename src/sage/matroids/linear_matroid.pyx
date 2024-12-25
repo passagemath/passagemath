@@ -5888,7 +5888,7 @@ cdef class RegularMatroid(LinearMatroid):
             sage: from sage.matroids.advanced import *
             sage: M = RegularMatroid(reduced_matrix=Matrix([[-1, 0, 1],
             ....:                                    [-1, 1, 0], [0, 1, -1]]))
-            sage: M._projection()
+            sage: M._projection()                                                       # needs sage.libs.pari
             [ 8 -4  4 -4  0  4]
             [-4  8 -4 -4  4  0]
             [ 4 -4  8  0  4 -4]
@@ -5918,9 +5918,9 @@ cdef class RegularMatroid(LinearMatroid):
             sage: M = matroids.catalog.R10()
             sage: N = matroids.catalog.R10().dual()
             sage: O = matroids.catalog.R12()
-            sage: M._invariant() == N._invariant()
+            sage: M._invariant() == N._invariant()                                      # needs sage.libs.pari
             True
-            sage: M._invariant() == O._invariant()
+            sage: M._invariant() == O._invariant()                                      # needs sage.libs.pari
             False
         """
         from sage.matroids.utilities import cmp_elements_key
@@ -6090,7 +6090,7 @@ cdef class RegularMatroid(LinearMatroid):
             ....:  [0,0,0,1,0,0,1,1,0,0,0,1],
             ....:  [0,0,0,0,1,0,1,0,1,0,0,1],
             ....:  [0,0,0,0,0,1,1,0,0,1,0,1]]))
-            sage: Mnew.is_isomorphic(Nnew)
+            sage: Mnew.is_isomorphic(Nnew)                                              # needs sage.libs.pari
             False
             sage: len(Mnew.circuits()) == len(Nnew.circuits())
             False

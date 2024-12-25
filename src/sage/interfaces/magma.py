@@ -1995,6 +1995,7 @@ class MagmaElement(ExtraTabCompletion, ExpectElement, sage.interfaces.abc.MagmaE
         Relative number field elements can be converted from Magma
         to Sage, but the other direction has not yet been implemented.::
 
+            sage: # needs sage.libs.pari
             sage: P.<y> = L[]
             sage: N.<b> = NumberField(y^2-alpha)
             sage: M = magma(N)                   # optional - magma
@@ -2084,6 +2085,7 @@ class MagmaElement(ExtraTabCompletion, ExpectElement, sage.interfaces.abc.MagmaE
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: k.<a> = GF(9)
             sage: magma(k).gen(1)         # optional -- magma
             a
@@ -2822,6 +2824,7 @@ class MagmaGBLogPrettyPrinter:
             ...
             Total Faugere F4 time: 0.000, real time: 0.000
 
+            sage: # needs sage.libs.pari
             sage: set_random_seed(1)
             sage: sr = mq.SR(1,1,2,4)
             sage: F,s = sr.polynomial_system()
