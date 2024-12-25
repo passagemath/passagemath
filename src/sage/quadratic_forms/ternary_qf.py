@@ -624,7 +624,7 @@ class TernaryQF(SageObject):
             Ternary quadratic form with integer coefficients:
             [68 68 3]
             [0 0 -68]
-            sage: Q.adjoint().matrix() == 2*Q.matrix().adjoint_classical()
+            sage: Q.adjoint().matrix() == 2*Q.matrix().adjoint_classical()              # needs sage.libs.pari
             True
         """
         A11 = 4*self._b*self._c - self._r**2

@@ -285,7 +285,7 @@ def complementary_subform_to_vector(self, v):
     EXAMPLES::
 
         sage: Q1 = DiagonalQuadraticForm(ZZ, [1,3,5,7])
-        sage: Q1.complementary_subform_to_vector([1,0,0,0])
+        sage: Q1.complementary_subform_to_vector([1,0,0,0])                             # needs sage.libs.pari
         Quadratic form in 3 variables over Integer Ring with coefficients:
         [ 7 0 0 ]
         [ * 5 0 ]
@@ -293,7 +293,7 @@ def complementary_subform_to_vector(self, v):
 
     ::
 
-        sage: Q1.complementary_subform_to_vector([1,1,0,0])
+        sage: Q1.complementary_subform_to_vector([1,1,0,0])                             # needs sage.libs.pari
         Quadratic form in 3 variables over Integer Ring with coefficients:
         [ 7 0 0 ]
         [ * 5 0 ]
@@ -301,7 +301,7 @@ def complementary_subform_to_vector(self, v):
 
     ::
 
-        sage: Q1.complementary_subform_to_vector([1,1,1,1])
+        sage: Q1.complementary_subform_to_vector([1,1,1,1])                             # needs sage.libs.pari
         Quadratic form in 3 variables over Integer Ring with coefficients:
         [ 880 -480 -160 ]
         [ * 624 -96 ]
