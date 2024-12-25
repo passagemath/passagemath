@@ -126,7 +126,6 @@
         "ntests": 7
     },
     "sage.categories.commutative_rings": {
-        "failed": true,
         "ntests": 91
     },
     "sage.categories.complete_discrete_valuation": {
@@ -677,7 +676,6 @@
         "ntests": 28
     },
     "sage.combinat.combinat": {
-        "failed": true,
         "ntests": 236
     },
     "sage.combinat.combinat_cython": {
@@ -1236,7 +1234,7 @@
     },
     "sage.misc.functional": {
         "failed": true,
-        "ntests": 281
+        "ntests": 283
     },
     "sage.misc.gperftools": {
         "ntests": 17
@@ -1575,7 +1573,6 @@
         "ntests": 91
     },
     "sage.rings.algebraic_closure_finite_field": {
-        "failed": true,
         "ntests": 213
     },
     "sage.rings.big_oh": {
@@ -1600,8 +1597,10 @@
         "ntests": 43
     },
     "sage.rings.finite_rings.element_base": {
-        "failed": true,
         "ntests": 202
+    },
+    "sage.rings.finite_rings.element_givaro": {
+        "ntests": 230
     },
     "sage.rings.finite_rings.element_ntl_gf2e": {
         "ntests": 2
@@ -1615,8 +1614,10 @@
         "ntests": 304
     },
     "sage.rings.finite_rings.finite_field_constructor": {
-        "failed": true,
         "ntests": 124
+    },
+    "sage.rings.finite_rings.finite_field_givaro": {
+        "ntests": 112
     },
     "sage.rings.finite_rings.finite_field_pari_ffelt": {
         "ntests": 41
@@ -1628,14 +1629,15 @@
         "ntests": 1
     },
     "sage.rings.finite_rings.hom_finite_field": {
-        "failed": true,
         "ntests": 193
+    },
+    "sage.rings.finite_rings.hom_finite_field_givaro": {
+        "ntests": 44
     },
     "sage.rings.finite_rings.hom_prime_finite_field": {
         "ntests": 21
     },
     "sage.rings.finite_rings.homset": {
-        "failed": true,
         "ntests": 67
     },
     "sage.rings.finite_rings.integer_mod": {
@@ -1646,6 +1648,9 @@
     },
     "sage.rings.finite_rings.residue_field": {
         "ntests": 135
+    },
+    "sage.rings.finite_rings.residue_field_givaro": {
+        "ntests": 12
     },
     "sage.rings.finite_rings.residue_field_pari_ffelt": {
         "ntests": 11
@@ -1934,7 +1939,6 @@
         "ntests": 114
     },
     "sage.rings.polynomial.polynomial_ring": {
-        "failed": true,
         "ntests": 467
     },
     "sage.rings.polynomial.polynomial_ring_constructor": {
@@ -2093,7 +2097,6 @@
         "ntests": 26
     },
     "sage.schemes.affine.affine_space": {
-        "failed": true,
         "ntests": 167
     },
     "sage.schemes.affine.affine_subscheme": {
@@ -2215,7 +2218,6 @@
         "ntests": 336
     },
     "sage.sets.set": {
-        "failed": true,
         "ntests": 382
     },
     "sage.sets.set_from_iterator": {
