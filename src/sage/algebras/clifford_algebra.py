@@ -2286,7 +2286,7 @@ class ExteriorAlgebraBoundary(ExteriorAlgebraDifferential):
                                   [ 0  0  2]       [0]
                     [0 0 0]       [ 1  0  0]       [0]
          0 <-- C_0 <-------- C_1 <----------- C_2 <---- C_3 <-- 0
-        sage: C.homology()
+        sage: C.homology()                                                              # needs sage.libs.pari
         {0: Z, 1: C2 x C2, 2: 0, 3: Z}
 
     REFERENCES:
@@ -2529,7 +2529,7 @@ class ExteriorAlgebraCoboundary(ExteriorAlgebraDifferential):
                                   [-2  0  0]       [0]
                     [0 0 0]       [ 0  2  0]       [0]
          0 <-- C_3 <-------- C_2 <----------- C_1 <---- C_0 <-- 0
-        sage: C.homology()
+        sage: C.homology()                                                              # needs sage.libs.pari
         {0: Z, 1: 0, 2: C2 x C2, 3: Z}
 
     REFERENCES:
