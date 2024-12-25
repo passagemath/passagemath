@@ -4067,7 +4067,7 @@ cdef class Matroid(SageObject):
 
             sage: M = matroids.Wheel(4)
             sage: N = M.minor(contractions=[7], deletions=[0])
-            sage: N.is_isomorphic(matroids.Wheel(3))
+            sage: N.is_isomorphic(matroids.Wheel(3))                                    # needs sage.libs.pari
             True
 
         The sets of contractions and deletions need not be independent,
