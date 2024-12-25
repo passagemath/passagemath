@@ -139,7 +139,7 @@ class AlgebraicClosureFiniteFieldElement(FieldElement):
         Check that :issue:`19956` is fixed::
 
             sage: R.<x,y> = GF(2).algebraic_closure()[]
-            sage: x.resultant(y)
+            sage: x.resultant(y)                                                        # needs sage.modules
             y
         """
         # TODO: this is *very* slow

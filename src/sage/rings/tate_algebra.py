@@ -91,13 +91,13 @@ bounded by `|2^5|` (`2`-adic norm) on the domain of convergence.
 We can also evaluate series in a point of the domain of convergence
 (in the base field or in an extension)::
 
-    sage: L.<a> = Qq(2^3, 5)
-    sage: f(a^2, 2*a)
+    sage: L.<a> = Qq(2^3, 5)                                                            # needs sage.libs.ntl
+    sage: f(a^2, 2*a)                                                                   # needs sage.libs.ntl
     1 + 2^2 + a*2^4 + O(2^5)
 
     sage: u = polygen(ZZ, 'u')
-    sage: L.<pi> = K.change(print_mode='series').extension(u^3 - 2)
-    sage: g(pi, 2*pi)
+    sage: L.<pi> = K.change(print_mode='series').extension(u^3 - 2)                     # needs sage.libs.ntl
+    sage: g(pi, 2*pi)                                                                   # needs sage.libs.ntl
     pi^7 + pi^8 + pi^19 + pi^20 + O(pi^21)
 
 Computations with ideals in Tate algebras are also supported::

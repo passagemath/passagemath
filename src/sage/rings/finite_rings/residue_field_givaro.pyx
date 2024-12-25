@@ -123,8 +123,8 @@ class ResidueFiniteField_givaro(ResidueField_generic, FiniteField_givaro):
             59*abar + 3
 
             sage: R.<t> = GF(3)[]; P = R.ideal(t^4 - t^3 + t + 1); k.<a> = P.residue_field()
-            sage: V = k.vector_space(map=False); v = V([0,1,2,3])
-            sage: k(v)  # indirect doctest
+            sage: V = k.vector_space(map=False); v = V([0,1,2,3])                       # needs sage.modules
+            sage: k(v)  # indirect doctest                                              # needs sage.modules
             2*a^2 + a
         """
         try:

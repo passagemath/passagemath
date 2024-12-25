@@ -261,9 +261,9 @@ class FiniteField_givaro(FiniteField):
         'little endian'::
 
             sage: k = GF(2**8, 'a')
-            sage: e = k.vector_space(map=False).gen(1); e
+            sage: e = k.vector_space(map=False).gen(1); e                               # needs sage.modules
             (0, 1, 0, 0, 0, 0, 0, 0)
-            sage: k(e)
+            sage: k(e)                                                                  # needs sage.modules
             a
 
         ``None`` yields zero::
