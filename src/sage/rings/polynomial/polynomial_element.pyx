@@ -4666,7 +4666,7 @@ cdef class Polynomial(CommutativePolynomial):
 
             sage: R.<x> = PolynomialRing(Integers(35))
             sage: f = (x^2 + 2*x + 2) * (x^2 + 3*x + 9)
-            sage: f.factor()
+            sage: f.factor()                                                            # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             NotImplementedError: factorization of polynomials over
@@ -8194,7 +8194,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         An example involving large numbers::
 
-            sage: # needs numpy sage.rings.real_mpfr
+            sage: # needs numpy sage.libs.pari sage.rings.real_mpfr
             sage: x = RR['x'].0
             sage: f = x^2 - 1e100
             sage: f.roots()
