@@ -74,6 +74,7 @@ host-requires = [
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
   "pkg:generic/pari",
+  "pkg:generic/givaro",
 ]
 
 dependencies = [

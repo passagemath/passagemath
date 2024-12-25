@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-pari
 r"""
 Finite residue fields (Givaro implementation)
 """

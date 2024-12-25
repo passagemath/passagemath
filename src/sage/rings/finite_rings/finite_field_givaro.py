@@ -1,4 +1,5 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-pari
+# sage.doctest: needs sage.rings.finite_rings
 """
 Givaro finite fields
 

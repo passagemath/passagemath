@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-pari
 from sage.rings.finite_rings.hom_finite_field cimport (SectionFiniteFieldHomomorphism_generic,
     FiniteFieldHomomorphism_generic, FrobeniusEndomorphism_finite_field)
 

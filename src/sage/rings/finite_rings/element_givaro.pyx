@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-pari
 # distutils: libraries = givaro gmp m
 # distutils: language = c++
 r"""

@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-pari
 # distutils: extra_compile_args = -std=c++11
 # distutils: libraries = givaro gmp m
 # distutils: language = c++
