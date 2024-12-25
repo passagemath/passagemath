@@ -777,7 +777,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
             -1/288
 
             sage: m = matrix(QQ, 4, [(-1)**n/n for n in range(1,17)])
-            sage: m.determinant(algorithm='pari')
+            sage: m.determinant(algorithm='pari')                                       # needs sage.libs.pari
             2/70945875
 
             sage: m = matrix(QQ, 5, [1/(i+j+1) for i in range(5) for j in range(5)])
@@ -790,7 +790,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
             Traceback (most recent call last):
             ...
             ValueError: non square matrix
-            sage: matrix(QQ, 2, 3).determinant(algorithm='pari')
+            sage: matrix(QQ, 2, 3).determinant(algorithm='pari')                        # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             ValueError: non square matrix
@@ -1061,9 +1061,9 @@ cdef class Matrix_rational_dense(Matrix_dense):
             sage: f = a.minpoly(); f
             x^3 - 7/12*x^2 - 149/40*x + 97/30
             sage: a = Mat(ZZ,4)(range(16))
-            sage: f = a.minpoly(); f.factor()
+            sage: f = a.minpoly(); f.factor()                                           # needs sage.libs.pari
             x * (x^2 - 30*x - 80)
-            sage: f(a) == 0
+            sage: f(a) == 0                                                             # needs sage.libs.pari
             True
 
         ::
@@ -1286,7 +1286,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
             [1/9 2/9 1/3]
             [4/9 5/9 2/3]
             [7/9 8/9   1]
-            sage: m.adjugate()
+            sage: m.adjugate()                                                          # needs sage.libs.pari
             [-1/27  2/27 -1/27]
             [ 2/27 -4/27  2/27]
             [-1/27  2/27 -1/27]
@@ -1639,7 +1639,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         Check consistency::
 
-            sage: for _ in range(100):
+            sage: for _ in range(100):                                                  # needs sage.libs.linbox
             ....:     nrows = randint(0, 30)
             ....:     ncols = randint(0, 30)
             ....:     m = random_matrix(QQ, nrows, ncols, num_bound=10, den_bound=10)
@@ -2714,7 +2714,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         EXAMPLES::
 
-            sage: matrix(QQ,2,[1/5,-2/3,3/4,4/9]).__pari__()
+            sage: matrix(QQ,2,[1/5,-2/3,3/4,4/9]).__pari__()                            # needs sage.libs.pari
             [1/5, -2/3; 3/4, 4/9]
         """
         from .matrix_rational_pari import _pari
@@ -2726,11 +2726,11 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         EXAMPLES::
 
-            sage: matrix(QQ,3,[1..9])._det_pari()
+            sage: matrix(QQ,3,[1..9])._det_pari()                                       # needs sage.libs.pari
             0
-            sage: matrix(QQ,3,[1..9])._det_pari(1)
+            sage: matrix(QQ,3,[1..9])._det_pari(1)                                      # needs sage.libs.pari
             0
-            sage: matrix(QQ,3,[0]+[2..9])._det_pari()
+            sage: matrix(QQ,3,[0]+[2..9])._det_pari()                                   # needs sage.libs.pari
             3
         """
         from .matrix_rational_pari import _det_pari
@@ -2742,9 +2742,9 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         EXAMPLES::
 
-            sage: matrix(QQ,3,[1..9])._rank_pari()
+            sage: matrix(QQ,3,[1..9])._rank_pari()                                      # needs sage.libs.pari
             2
-            sage: matrix(QQ, 0, 0)._rank_pari()
+            sage: matrix(QQ, 0, 0)._rank_pari()                                         # needs sage.libs.pari
             0
         """
         from .matrix_rational_pari import _rank_pari
@@ -2756,7 +2756,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         EXAMPLES::
 
-            sage: matrix(QQ,2,[1/5,-2/3,3/4,4/9])._multiply_pari(matrix(QQ,2,[1,2,3,4]))
+            sage: matrix(QQ,2,[1/5,-2/3,3/4,4/9])._multiply_pari(matrix(QQ,2,[1,2,3,4]))    # needs sage.libs.pari
             [  -9/5 -34/15]
             [ 25/12  59/18]
 
@@ -2777,10 +2777,10 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         EXAMPLES::
 
-            sage: matrix(QQ,2,[1,2,3,4])._invert_pari()
+            sage: matrix(QQ,2,[1,2,3,4])._invert_pari()                                 # needs sage.libs.pari
             [  -2    1]
             [ 3/2 -1/2]
-            sage: matrix(QQ,2,[1,2,2,4])._invert_pari()
+            sage: matrix(QQ,2,[1,2,2,4])._invert_pari()                                 # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             PariError: impossible inverse in ginv: [1, 2; 2, 4]
