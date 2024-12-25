@@ -471,7 +471,7 @@ def symplectic_basis_over_ZZ(M):
         [ 0  0  0  0  0]
         sage: F == C * E * C.transpose()
         True
-        sage: E.smith_form()[0]
+        sage: E.smith_form()[0]                                                         # needs sage.libs.pari
         [1 0 0 0 0]
         [0 1 0 0 0]
         [0 0 2 0 0]
