@@ -945,7 +945,14 @@ class BinaryQF(SageObject):
             return self
 
         if algorithm == "default":
-            algorithm = 'sage' if self.is_reducible() else 'pari'
+            algorithm = 'sage'
+            if not self.is_reducible():
+                try:
+                    import sage.libs.pari
+                except ImportError:
+                    pass
+                else:
+                    algorithm = 'pari'
 
         if algorithm == 'sage':
             if self.discriminant() <= 0:
