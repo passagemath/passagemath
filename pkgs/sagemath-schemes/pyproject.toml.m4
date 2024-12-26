@@ -25,7 +25,6 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_fpylll
     SPKG_INSTALL_REQUIRES_memory_allocator
-    SPKG_INSTALL_REQUIRES_primecountpy
     SPKG_INSTALL_REQUIRES_scipy
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_sagemath_flint
@@ -56,6 +55,7 @@ mpmath  = []  # No extra needed
 ntl     = ["passagemath-ntl"]
 numpy   = [SPKG_INSTALL_REQUIRES_numpy]
 pari    = ["passagemath-pari"]
+primecountpy = [SPKG_INSTALL_REQUIRES_primecountpy]
 
 # extras by packages (specific to sagemath-schemes)
 
