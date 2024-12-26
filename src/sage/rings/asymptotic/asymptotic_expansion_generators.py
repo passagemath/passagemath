@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-symbolics
+# sage.doctest: needs sage.graphs
 r"""
 Common Asymptotic Expansions
 
