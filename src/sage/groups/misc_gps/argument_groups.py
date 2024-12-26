@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-groups
+# sage_setup: distribution = sagemath-modules
 r"""
 Groups of elements representing (complex) arguments.
 
