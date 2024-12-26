@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-schemes
+# sage.doctest: needs database_cremona_mini_ellcurve
 """
 Cremona's tables of elliptic curves
 
