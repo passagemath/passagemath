@@ -80,11 +80,11 @@ def algdep(z, degree, known_bits=None, use_bits=None, known_digits=None,
 
     EXAMPLES::
 
-        sage: algdep(1.888888888888888, 1)                                              # needs sage.libs.pari
+        sage: algdep(1.888888888888888, 1)                                              # needs fpylll sage.libs.pari
         9*x - 17
-        sage: algdep(0.12121212121212, 1)                                               # needs sage.libs.pari
+        sage: algdep(0.12121212121212, 1)                                               # needs fpylll sage.libs.pari
         33*x - 4
-        sage: algdep(sqrt(2), 2)                                                        # needs sage.libs.pari sage.symbolic
+        sage: algdep(sqrt(2), 2)                                                        # needs fpylll sage.libs.pari sage.symbolic
         x^2 - 2
 
     This example involves a complex number::
@@ -6294,8 +6294,9 @@ def gauss_sum(char_value, finite_field):
 
     TESTS::
 
-        sage: # needs sage.libs.gap sage.libs.pari sage.rings.number_field
         sage: F = GF(11); q = 11
+
+        sage: # needs sage.libs.gap sage.libs.pari sage.rings.number_field
         sage: zq = UniversalCyclotomicField().zeta(q - 1)
         sage: gauss_sum(zq**2, F).n(60)
         2.6361055643248352 + 2.0126965627574471*I
