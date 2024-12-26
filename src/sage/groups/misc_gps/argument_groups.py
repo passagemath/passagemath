@@ -264,10 +264,13 @@ class AbstractArgument(MultiplicativeGroupElement):
             sage: _.parent()
             Symbolic Ring
         """
-        from sage.symbolic.ring import SymbolicRing, SR
+        from sage.rings.abc import SymbolicRing
 
         P = other.parent()
-        S = P if isinstance(P, SymbolicRing) else SR
+        if isinstance(P, SymbolicRing):
+            S = P
+        else:
+            from sage.symbolic.ring import SR as S
         try:
             other = S.coerce(other)
         except (TypeError, ValueError) as e:
