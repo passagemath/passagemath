@@ -927,7 +927,7 @@ class SchemeMorphism_point_projective_ring(SchemeMorphism_point):
             sage: P.<x,y> = ProjectiveSpace(QQ, 1)
             sage: f = DynamicalSystem_projective([x^3 - 3*x*y^2, y^3], domain=P)        # needs sage.schemes
             sage: Q = P(-1, 1)
-            sage: Q.is_preperiodic(f)                                                   # needs sage.libs.singular sage.schemes
+            sage: Q.is_preperiodic(f)                                                   # needs sage.libs.singular sage.schemes sage.symbolic
             True
 
         ::
