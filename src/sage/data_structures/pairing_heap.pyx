@@ -675,8 +675,8 @@ cdef class PairingHeap_of_n_hashables(PairingHeap_class):
         sage: P.push('c', (2, 1))
         sage: P.top()
         ('c', (2, 1))
-        sage: P.push(Graph(2, immutable=True), (1, 7))
-        sage: P.top()
+        sage: P.push(Graph(2, immutable=True), (1, 7))                                  # needs sage.graphs
+        sage: P.top()                                                                   # needs sage.graphs
         (Graph on 2 vertices, (1, 7))
         sage: P.decrease('b', (1, 5))
         sage: P.top()
@@ -1033,7 +1033,7 @@ def _test_PairingHeap_from_C(n=100):
     TESTS::
 
         sage: from sage.data_structures.pairing_heap import _test_PairingHeap_from_C
-        sage: _test_PairingHeap_from_C(100)
+        sage: _test_PairingHeap_from_C(100)                                             # needs sage.symbolic
     """
     from sage.misc.prandom import randint, shuffle
     sig_on()
