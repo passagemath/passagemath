@@ -271,16 +271,16 @@ def isogenies_prime_degree_genus_0(E, l=None, minimal_models=True):
         sage: isogenies_prime_degree_genus_0(E, 5)
         []
 
-        sage: E = EllipticCurve('1450c1')
-        sage: isogenies_prime_degree_genus_0(E)
+        sage: E = EllipticCurve('1450c1')                                               # needs database_cremona_mini_ellcurve
+        sage: isogenies_prime_degree_genus_0(E)                                         # needs database_cremona_mini_ellcurve
         [Isogeny of degree 3
           from Elliptic Curve defined by y^2 + x*y = x^3 + x^2 + 300*x - 1000
                over Rational Field
             to Elliptic Curve defined by y^2 + x*y = x^3 + x^2 - 5950*x - 182250
                over Rational Field]
 
-        sage: E = EllipticCurve('50a1')
-        sage: isogenies_prime_degree_genus_0(E)
+        sage: E = EllipticCurve('50a1')                                                 # needs database_cremona_mini_ellcurve
+        sage: isogenies_prime_degree_genus_0(E)                                         # needs database_cremona_mini_ellcurve
         [Isogeny of degree 3
           from Elliptic Curve defined by y^2 + x*y + y = x^3 - x - 2 over Rational Field
             to Elliptic Curve defined by y^2 + x*y + y = x^3 - 126*x - 552 over Rational Field,

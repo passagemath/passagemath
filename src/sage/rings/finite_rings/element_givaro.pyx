@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-pari
 # distutils: libraries = givaro gmp m
 # distutils: language = c++
 r"""
@@ -22,7 +22,7 @@ EXAMPLES::
     <class 'sage.rings.finite_rings.finite_field_prime_modn.FiniteField_prime_modn_with_category'>
     sage: k = GF(5^2,'c'); type(k)
     <class 'sage.rings.finite_rings.finite_field_givaro.FiniteField_givaro_with_category'>
-    sage: k = GF(2^16,'c'); type(k)
+    sage: k = GF(2^16,'c'); type(k)                                                     # needs sage.libs.ntl
     <class 'sage.rings.finite_rings.finite_field_ntl_gf2e.FiniteField_ntl_gf2e_with_category'>
     sage: k = GF(3^16,'c'); type(k)
     <class 'sage.rings.finite_rings.finite_field_pari_ffelt.FiniteField_pari_ffelt_with_category'>
@@ -166,8 +166,8 @@ cdef class Cache_givaro(Cache_base):
 
         For binary fields, you may ask for a minimal weight polynomial::
 
-            sage: k = GF(2**10, 'a', modulus='minimal_weight')
-            sage: k.modulus()
+            sage: k = GF(2**10, 'a', modulus='minimal_weight')                          # needs sage.libs.ntl
+            sage: k.modulus()                                                           # needs sage.libs.ntl
             x^10 + x^3 + 1
         """
         # we are calling late_import here because this constructor is
@@ -307,9 +307,9 @@ cdef class Cache_givaro(Cache_base):
             sage: k = GF(3^8, 'a')
             sage: type(k)
             <class 'sage.rings.finite_rings.finite_field_givaro.FiniteField_givaro_with_category'>
-            sage: e = k.vector_space(map=False).gen(1); e
+            sage: e = k.vector_space(map=False).gen(1); e                               # needs sage.modules
             (0, 1, 0, 0, 0, 0, 0, 0)
-            sage: k(e) #indirect doctest
+            sage: k(e)  # indirect doctest                                              # needs sage.modules
             a
 
         TESTS:
@@ -1496,7 +1496,7 @@ cdef class FiniteField_givaroElement(FinitePolyExtElement):
             Finite Field in b of size 5^2
             sage: f = (b^2+1).polynomial(); f
             b + 4
-            sage: type(f)
+            sage: type(f)                                                               # needs sage.libs.flint
             <class 'sage.rings.polynomial.polynomial_zmod_flint.Polynomial_zmod_flint'>
             sage: parent(f)
             Univariate Polynomial Ring in b over Finite Field of size 5
@@ -1688,6 +1688,7 @@ cdef class FiniteField_givaroElement(FinitePolyExtElement):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: k.<a> = GF(2^4)
             sage: e = a^2 + 1
             sage: v = vector(e)
@@ -1696,6 +1697,7 @@ cdef class FiniteField_givaroElement(FinitePolyExtElement):
             sage: k(v)
             a^2 + 1
 
+            sage: # needs sage.modules
             sage: k.<a> = GF(3^4)
             sage: e = 2*a^2 + 1
             sage: v = vector(e)
@@ -1706,7 +1708,7 @@ cdef class FiniteField_givaroElement(FinitePolyExtElement):
 
         You can also compute the vector in the other order::
 
-            sage: e._vector_(reverse=True)
+            sage: e._vector_(reverse=True)                                              # needs sage.modules
             (0, 2, 0, 1)
         """
         #vector(foo) might pass in ZZ

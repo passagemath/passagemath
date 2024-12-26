@@ -12,8 +12,8 @@ if not (len(sys.argv) > 1 and (sys.argv[1] in ["sdist", "egg_info", "dist_info"]
     rebuild()
 
 sage_setup(['sagemath-pari'],
-           required_modules=('gsl',),
-           spkgs=['pari', 'gsl'],
+           required_modules=('gsl', 'givaro'),
+           spkgs=['pari', 'gsl', 'givaro'],
            recurse_packages=[
                'sage',
                'cypari2',

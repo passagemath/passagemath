@@ -4,6 +4,7 @@
 # distutils: library_dirs = CBLAS_LIBDIR
 # distutils: include_dirs = CBLAS_INCDIR
 # distutils: extra_compile_args = -D_XPG6
+# sage.doctest: needs sage.rings.finite_rings
 r"""
 Dense matrices over `\ZZ/n\ZZ` for `n < 94906266` using LinBox's ``Modular<double>``
 

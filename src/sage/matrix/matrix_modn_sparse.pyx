@@ -338,6 +338,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: a = matrix(GF(10007), 2, [1,2,3,4], sparse=True)
             sage: b = matrix(GF(10007), 2, 3, [1..6], sparse=True)
             sage: a * b

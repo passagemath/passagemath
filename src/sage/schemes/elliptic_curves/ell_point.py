@@ -201,6 +201,7 @@ class EllipticCurvePoint(AdditiveGroupElement,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: P = E([-1, 1])
             sage: P.curve()
@@ -377,6 +378,7 @@ class EllipticCurvePoint(AdditiveGroupElement,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: P = E([-1,1])
             sage: Q = -P; Q
@@ -409,6 +411,7 @@ class EllipticCurvePoint(AdditiveGroupElement,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: P = E([-1,1]); Q = E([0,0])
             sage: P - Q
@@ -483,6 +486,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
     EXAMPLES::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('37a')
         sage: E([0,0])
         (0 : 0 : 1)
@@ -490,10 +494,8 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
         (0 : 0 : 1)
         sage: E([GF(5)(0), 0])     # entries are coerced
         (0 : 0 : 1)
-
         sage: E(0.000, 0)
         (0 : 0 : 1)
-
         sage: E(1,0,0)
         Traceback (most recent call last):
         ...
@@ -573,6 +575,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('43a')
             sage: P = E([2, -4, 2]); P
             (1 : -2 : 1)
@@ -600,6 +603,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('39a')
             sage: P = E([-2, 1, 1])
             sage: P._repr_()
@@ -613,6 +617,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('40a')
             sage: P = E([3, 0])
             sage: P._latex_()
@@ -626,6 +631,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('42a')
             sage: P = E([-17, -51, 17])
             sage: [P[i] for i in [2,1,0]]
@@ -639,6 +645,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: list(E([0,0]))
             [0, 0, 1]
@@ -651,6 +658,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('44a')
             sage: P = E([1, -2, 1])
             sage: P.__tuple__()
@@ -664,6 +672,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('45a')
             sage: P = E([2, -1, 1])
             sage: P == E(0)
@@ -785,6 +794,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: P = E(0); P
             (0 : 1 : 0)
@@ -810,6 +820,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('26b1')
             sage: P = E(1, 0)
             sage: P.has_order(7)
@@ -962,6 +973,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: P = E([-1,1])
             sage: P.plot(pointsize=30, rgbcolor=(1,0,0))                                # needs sage.plot
@@ -983,6 +995,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: P = E([-1,1]); Q = E([0,0])
             sage: P + Q
@@ -994,6 +1007,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         Example to show that bug :issue:`4820` is fixed::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: [type(c) for c in 2*EllipticCurve('37a1').gen(0)]                     # needs eclib
             [<... 'sage.rings.rational.Rational'>,
              <... 'sage.rings.rational.Rational'>,
@@ -1076,6 +1090,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: P = E([-1,1])
             sage: Q = -P; Q
@@ -1085,6 +1100,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         Example to show that bug :issue:`4820` is fixed::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: [type(c) for c in -EllipticCurve('37a1').gen(0)]                      # needs eclib
             [<... 'sage.rings.rational.Rational'>,
              <... 'sage.rings.rational.Rational'>,
@@ -1103,6 +1119,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: P = E([-1,1])
             sage: P.xy()
@@ -1126,6 +1143,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: P = E([-1,1])
             sage: P.x()
@@ -1149,6 +1167,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: P = E([-1,1])
             sage: P.y()
@@ -1187,6 +1206,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: Q = 5*E(0,0); Q
             (-2739/1444 : -77033/54872 : 1)
@@ -1309,6 +1329,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         We find the five 5-torsion points on an elliptic curve::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a'); E
             Elliptic Curve defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
             sage: P = E(0); P
@@ -1320,6 +1341,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         We create a curve of rank 1 with no torsion and do a consistency check::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a').quadratic_twist(-7)
             sage: Q = E([44,-270])
             sage: (4*Q).division_points(4)
@@ -1364,7 +1386,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         An example over a number field (see :issue:`3383`)::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = EllipticCurve('19a1')
             sage: x = polygen(ZZ, 'x')
             sage: K.<t> = NumberField(x^9 - 3*x^8 - 4*x^7 + 16*x^6 - 3*x^5
@@ -1558,6 +1580,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a1')
             sage: P = E([0, 0])
             sage: R = 12*P
@@ -2088,7 +2111,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         An example over a number field::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = EllipticCurve('11a1').change_ring(CyclotomicField(5))
             sage: P, Q = E.torsion_subgroup().gens()
             sage: P, Q = (P.element(), Q.element())
@@ -2677,6 +2700,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
     EXAMPLES::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('37a')
         sage: E([0,0])
         (0 : 0 : 1)
@@ -2684,10 +2708,8 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
         (0 : 0 : 1)
         sage: E([GF(5)(0), 0])     # entries are coerced
         (0 : 0 : 1)
-
         sage: E(0.000, 0)
         (0 : 0 : 1)
-
         sage: E(1,0,0)
         Traceback (most recent call last):
         ...
@@ -2852,6 +2874,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a3')
             sage: P = next(filter(bool, E.torsion_points()))
             sage: P._has_order_at_least(5)
@@ -2956,6 +2979,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         For `K=\QQ` there is no need to specify an embedding::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('5077a1')
             sage: [E.lift_x(x).is_on_identity_component() for x in srange(-3,5)]
             [False, False, False, False, False, True, True, True]
@@ -3029,7 +3053,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         EXAMPLES::
 
-            sage: # needs eclib
+            sage: # needs database_cremona_mini_ellcurve eclib
             sage: E = EllipticCurve('990e1')
             sage: P = E.gen(0); P
             (15 : 51 : 1)
@@ -3073,15 +3097,16 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         An example showing that :issue:`8498` is fixed::
 
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = EllipticCurve('11a1')
-            sage: K.<t> = NumberField(x^2 + 47)                                         # needs sage.rings.number_field
-            sage: EK = E.base_extend(K)                                                 # needs sage.rings.number_field
-            sage: T = EK(5, 5)                                                          # needs sage.rings.number_field
-            sage: P = EK(-2, -1/2*t - 1/2)                                              # needs sage.rings.number_field
-            sage: p = K.ideal(11)                                                       # needs sage.rings.number_field
-            sage: T.has_good_reduction(p)                                               # needs sage.rings.number_field
+            sage: K.<t> = NumberField(x^2 + 47)
+            sage: EK = E.base_extend(K)
+            sage: T = EK(5, 5)
+            sage: P = EK(-2, -1/2*t - 1/2)
+            sage: p = K.ideal(11)
+            sage: T.has_good_reduction(p)
             False
-            sage: P.has_good_reduction(p)                                               # needs sage.rings.number_field
+            sage: P.has_good_reduction(p)
             True
         """
         if self.is_zero():       # trivial case
@@ -3222,6 +3247,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a'); E
             Elliptic Curve defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
             sage: P = E([5,5]); P
@@ -3234,6 +3260,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         ::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a'); E
             Elliptic Curve defined by y^2 + y = x^3 - x over Rational Field
             sage: P = E([0,0])
@@ -3243,7 +3270,6 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
             +Infinity
             sage: E.regulator()                                 # needs eclib
             0.0511114082399688...
-
             sage: def naive_height(P):
             ....:     return log(RR(max(abs(P[0].numerator()), abs(P[0].denominator()))))
             sage: for n in [1..10]:
@@ -3261,6 +3287,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         ::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('4602a1'); E
             Elliptic Curve defined by y^2 + x*y  = x^3 + x^2 - 37746035*x - 89296920339
             over Rational Field
@@ -3272,11 +3299,13 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         ::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve([17, -60, -120, 0, 0]); E
             Elliptic Curve defined by y^2 + 17*x*y - 120*y = x^3 - 60*x^2 over Rational Field
             sage: E([30, -90]).height()
             0
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a1'); E
             Elliptic Curve defined by y^2 + y = x^3 + x^2 - 2*x over Rational Field
             sage: P, Q = E(-1,1), E(0,-1)
@@ -3308,6 +3337,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         Setting ``normalised=False`` multiplies the height by the degree of `K`::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: P = E([0,0])
             sage: P.height()
@@ -3324,11 +3354,11 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         Some consistency checks::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('5077a1')
             sage: P = E([-2,3,1])
             sage: P.height()
             1.36857250535393
-
             sage: EK = E.change_ring(QuadraticField(-3,'a'))                            # needs sage.rings.number_field
             sage: PK = EK([-2,3,1])                                                     # needs sage.rings.number_field
             sage: PK.height()                                                           # needs sage.rings.number_field
@@ -3344,6 +3374,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
             sage: (15*Q).height() / Q.height()
             225.000000000000
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: P = E([0,-1])
             sage: P.height()
@@ -3935,6 +3966,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: E.discriminant() > 0
             True
@@ -3951,6 +3983,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         An example with negative discriminant, and a torsion point::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a1')
             sage: E.discriminant() < 0
             True
@@ -3976,6 +4009,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         This shows that the bug reported at :issue:`4901` has been fixed::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve("4390c2")
             sage: P = E(683762969925/44944,-565388972095220019/9528128)
             sage: P.elliptic_logarithm()
@@ -4168,6 +4202,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         An example which arose during reviewing :issue:`4741`::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('794a1')
             sage: P = E(-1,2)
             sage: P.padic_elliptic_logarithm(2)  # default precision=20                 # needs sage.rings.padics

@@ -100,6 +100,7 @@ class Dokchitser(SageObject):
 
     We compute with the `L`-series of a rank `1` curve. ::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('37a')
         sage: L = E.lseries().dokchitser(algorithm='gp'); L
         Dokchitser L-function associated to Elliptic Curve defined by y^2 + y = x^3 - x over Rational Field
@@ -121,6 +122,7 @@ class Dokchitser(SageObject):
     We compute the leading coefficient and Taylor expansion of the
     `L`-series of a rank `2` elliptic curve. ::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('389a')
         sage: L = E.lseries().dokchitser(algorithm='gp')
         sage: L.num_coeffs()
@@ -239,6 +241,7 @@ class Dokchitser(SageObject):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a')
             sage: L = E.lseries().dokchitser(algorithm='gp')
             sage: L(2)
@@ -355,6 +358,7 @@ class Dokchitser(SageObject):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a')
             sage: L = E.lseries().dokchitser(algorithm='gp')
             sage: L.num_coeffs()
@@ -502,6 +506,7 @@ class Dokchitser(SageObject):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('5077a')
             sage: L = E.lseries().dokchitser(100, algorithm='gp')
             sage: L(1)
@@ -559,6 +564,7 @@ class Dokchitser(SageObject):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: L = E.lseries().dokchitser(algorithm='gp')
             sage: L.derivative(1,E.rank())
@@ -600,6 +606,8 @@ class Dokchitser(SageObject):
             sage: L = Dokchitser(conductor=1, gammaV=[0], weight=1, eps=1, poles=[1], residues=[-1], init='1')
             sage: L.taylor_series(2, 3)
             1.64493406684823 - 0.937548254315844*z + 0.994640117149451*z^2 + O(z^3)
+
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: L = E.lseries().dokchitser(algorithm='gp')
             sage: L.taylor_series(1)
@@ -608,6 +616,7 @@ class Dokchitser(SageObject):
         We compute a Taylor series where each coefficient is to high
         precision. ::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: L = E.lseries().dokchitser(200, algorithm='gp')
             sage: L.taylor_series(1,3)
@@ -615,12 +624,14 @@ class Dokchitser(SageObject):
 
         Check that :issue:`25402` is fixed::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: L = EllipticCurve("24a1").modular_form().lseries()
             sage: L.taylor_series(-1, 3)
             0.000000000000000 - 0.702565506265199*z + 0.638929001045535*z^2 + O(z^3)
 
         Check that :issue:`25965` is fixed::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: L2 = EllipticCurve("37a1").modular_form().lseries(); L2
             L-series associated to the cusp form q - 2*q^2 - 3*q^3 + 2*q^4 - 2*q^5 + O(q^6)
             sage: L2.taylor_series(0,4)

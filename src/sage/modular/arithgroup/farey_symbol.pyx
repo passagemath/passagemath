@@ -173,10 +173,9 @@ cdef class Farey:
 
     Calculate cusps of arithmetic subgroup defined via permutation group::
 
+        sage: # needs sage.groups
         sage: L = SymmetricGroup(4)('(1, 2, 3)')
-
         sage: R = SymmetricGroup(4)('(1, 2, 4)')
-
         sage: FareySymbol(ArithmeticSubgroup_Permutation(L, R)).cusps()
         [-1, Infinity]
 

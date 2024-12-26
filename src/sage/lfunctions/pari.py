@@ -281,6 +281,7 @@ def lfun_elliptic_curve(E):
 
     EXAMPLES::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: from sage.lfunctions.pari import lfun_elliptic_curve, LFunction
         sage: E = EllipticCurve('11a1')
         sage: L = LFunction(lfun_elliptic_curve(E))
@@ -444,6 +445,7 @@ class LFunction(SageObject):
 
     We compute with the `L`-series of a rank `1` curve. ::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('37a')
         sage: L = E.lseries().dokchitser(algorithm='pari'); L
         PARI L-function associated to Elliptic Curve defined by y^2 + y = x^3 - x over Rational Field
@@ -465,6 +467,7 @@ class LFunction(SageObject):
     We compute the leading coefficient and Taylor expansion of the
     `L`-series of a rank `2` elliptic curve::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('389a')
         sage: L = E.lseries().dokchitser(algorithm='pari')
         sage: L.num_coeffs()
@@ -571,8 +574,8 @@ class LFunction(SageObject):
             sage: from sage.lfunctions.pari import *
             sage: L = LFunction(lfun_number_field(QQ)); L.conductor
             1
-            sage: E = EllipticCurve('11a')
-            sage: L = LFunction(lfun_number_field(E)); L.conductor
+            sage: E = EllipticCurve('11a')                                              # needs database_cremona_mini_ellcurve
+            sage: L = LFunction(lfun_number_field(E)); L.conductor                      # needs database_cremona_mini_ellcurve
             11
         """
         return self._conductor
@@ -585,6 +588,7 @@ class LFunction(SageObject):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a')
             sage: L = E.lseries().dokchitser(algorithm='pari')
             sage: L.num_coeffs()
@@ -757,6 +761,7 @@ class LFunction(SageObject):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('5077a')
             sage: L = E.lseries().dokchitser(100, algorithm='pari')
             sage: L(1)

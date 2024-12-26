@@ -238,7 +238,7 @@ class HeckeModuleElement(ModuleElement):
             True
             sage: (M.0 + M.4).is_cuspidal()
             False
-            sage: EllipticCurve('37a1').newform().is_cuspidal()
+            sage: EllipticCurve('37a1').newform().is_cuspidal()                         # needs database_cremona_mini_ellcurve
             True
 
         It works for modular symbols too::
@@ -276,7 +276,7 @@ class HeckeModuleElement(ModuleElement):
             True
             sage: ModularSymbols(19,4).0.is_eisenstein()
             False
-            sage: EllipticCurve('37a1').newform().element().is_eisenstein()
+            sage: EllipticCurve('37a1').newform().element().is_eisenstein()             # needs database_cremona_mini_ellcurve
             False
         """
         return self in self.parent().ambient().eisenstein_submodule()
