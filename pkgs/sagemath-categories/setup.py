@@ -13,6 +13,7 @@ sage_setup(
     package_data={
         "sage.data_structures": [
             "bitset_intrinsics.h",
+            "pairing_heap.h",
         ],
         "sage.rings.finite_rings": [
             "integer_mod_limits.h",

@@ -1,4 +1,6 @@
+# sage_setup: distribution = sagemath-categories
 # distutils: language = c++
+# distutils: extra_compile_args = -std=c++11
 r"""
 Pairing Heap
 

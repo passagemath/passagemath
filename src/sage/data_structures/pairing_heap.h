@@ -1,3 +1,5 @@
+/* sage_setup: distribution = sagemath-categories
+ */
 /*
  * Pairing heap
  *
