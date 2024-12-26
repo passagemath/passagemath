@@ -1141,9 +1141,9 @@ def log(*args, **kwds):
 
     Check if :issue:`37794` is fixed::
 
-        sage: log(int(0), 2)
+        sage: log(int(0), 2)                                                            # needs sage.symbolic
         -Infinity
-        sage: log(int(0), 1/2)
+        sage: log(int(0), 1/2)                                                          # needs sage.symbolic
         +Infinity
     """
     base = kwds.pop('base', None)
