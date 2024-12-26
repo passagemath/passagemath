@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 # ******************************************************************************
 # Copyright (C) 2024 David Coudert <david.coudert@inria.fr>
 #
