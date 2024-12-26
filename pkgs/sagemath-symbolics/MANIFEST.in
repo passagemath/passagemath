@@ -44,6 +44,7 @@ graft sage/ext_data/kenzo
 graft sage/ext_data/magma
 
 graft sage/rings/asymptotic
+exclude sage/rings/asymptotic/misc.p*
 
 global-exclude all__sagemath_*.py
 global-include all__sagemath_symbolics.py
