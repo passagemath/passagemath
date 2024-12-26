@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-symbolics
+# sage.doctest: needs sage.graphs sage.libs.pari sage.libs.singular
 r"""
 Asymptotics of Multivariate Generating Series
 

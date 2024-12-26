@@ -320,6 +320,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
 
         Asymptotic expansions::
 
+            sage: # needs sage.graphs
             sage: A.<x, y> = AsymptoticRing(growth_group='x^ZZ * y^QQ * log(y)^ZZ', coefficient_ring=ZZ)
             sage: s = SR(3*x^5 * log(y) + 4*y^(3/7) + O(x*log(y))); s
             3*x^5*log(y) + 4*y^(3/7) + Order(x*log(y))
