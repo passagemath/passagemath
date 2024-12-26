@@ -144,29 +144,72 @@ def parent_to_repr_short(P):
         sage: parent_to_repr_short(Zmod(3)['g'])
         'Univariate Polynomial Ring in g over Ring of integers modulo 3'
     """
-    from sage.rings.cc import CC
-    from sage.rings.cif import CIF
-    from sage.rings.complex_arb import CBF
-    from sage.rings.integer_ring import ZZ
-    from sage.rings.rational_field import QQ
-    from sage.rings.real_arb import RBF
-    from sage.rings.real_mpfi import RIF
-    from sage.rings.real_mpfr import RR
-    from sage.symbolic.ring import SR
-
     def abbreviate(P):
         try:
             return P._repr_short_()
         except AttributeError:
             pass
-        abbreviations = {ZZ: 'ZZ', QQ: 'QQ', SR: 'SR',
-                         RR: 'RR', CC: 'CC',
-                         RIF: 'RIF', CIF: 'CIF',
-                         RBF: 'RBF', CBF: 'CBF'}
+
+        from sage.rings.integer_ring import ZZ
+        if P == ZZ:
+            return 'ZZ'
+
+        from sage.rings.rational_field import QQ
+        if P == QQ:
+            return 'QQ'
+
+        from sage.rings.real_mpfr import RR
+        if P == RR:
+            return 'RR'
+
         try:
-            return abbreviations[P]
-        except KeyError:
+            from sage.rings.cc import CC
+        except ImportError:
             pass
+        else:
+            if P == CC:
+                return 'CC'
+
+        try:
+            from sage.rings.cif import CIF
+        except ImportError:
+            pass
+        else:
+            if P == CIF:
+                return 'CIF'
+
+        try:
+            from sage.rings.complex_arb import CBF
+        except ImportError:
+            pass
+        else:
+            if P == CBF:
+                return 'CBF'
+
+        try:
+            from sage.rings.real_arb import RBF
+        except ImportError:
+            pass
+        else:
+            if P == RBF:
+                return 'RBF'
+
+        try:
+            from sage.rings.real_mpfi import RIF
+        except ImportError:
+            pass
+        else:
+            if P == RIF:
+                return 'RIF'
+
+        try:
+            from sage.symbolic.ring import SR
+        except ImportError:
+            pass
+        else:
+            if P == SR:
+                return 'SR'
+
         raise ValueError('Cannot abbreviate %s.' % (P,))
 
     poly = isinstance(P, (PolynomialRing_generic, MPolynomialRing_base))
