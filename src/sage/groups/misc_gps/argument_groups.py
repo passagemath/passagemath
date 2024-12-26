@@ -544,7 +544,7 @@ class UnitCirclePoint(AbstractArgument):
             sage: U(exponent=1/4)^SR(8)
             1
         """
-        from sage.symbolic.ring import SymbolicRing
+        from sage.rings.abc import SymbolicRing
 
         new_exponent = self.exponent * exponent
         parent = new_exponent.parent()
@@ -1814,8 +1814,12 @@ class ArgumentGroupFactory(UniqueFactory):
         """
         from sage.rings.integer_ring import ZZ
         from sage.misc.misc import exactly_one_is_true
-        from sage.rings.qqbar import AA
         from sage.rings.rational_field import QQ
+
+        try:
+            from sage.rings.qqbar import AA
+        except ImportError:
+            AA = None
 
         if not exactly_one_is_true(
                 (data is not None,
