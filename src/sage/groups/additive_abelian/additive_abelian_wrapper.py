@@ -34,7 +34,7 @@ We check that ridiculous operations are being avoided::
 
     sage: from sage.misc.verbose import set_verbose
     sage: set_verbose(2, 'additive_abelian_wrapper.py')
-    sage: 300001 * M.0                                                                  # needs sage.schemes
+    sage: 300001 * M.0                                                                  # needs database_cremona_mini_ellcurve sage.schemes
     verbose 1 (...: additive_abelian_wrapper.py, discrete_exp) Calling discrete exp on (1, 0, 0)
     (4 : -7 : 1)
     sage: set_verbose(0, 'additive_abelian_wrapper.py')
@@ -102,7 +102,7 @@ class UnwrappingMorphism(Morphism):
         r"""
         TESTS::
 
-            sage: # needs sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage.schemes
             sage: E = EllipticCurve("65a1")
             sage: G = E.torsion_subgroup()
             sage: isinstance(G, sage.groups.additive_abelian.additive_abelian_wrapper.AdditiveAbelianGroupWrapper)
@@ -147,11 +147,12 @@ class AdditiveAbelianGroupWrapperElement(addgp.AdditiveAbelianGroupElement):
 
         EXAMPLES::
 
-            sage: T = EllipticCurve('65a').torsion_subgroup().gen(0)                    # needs sage.schemes
-            sage: T; type(T)                                                            # needs sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage
+            sage: T = EllipticCurve('65a').torsion_subgroup().gen(0)
+            sage: T; type(T)
             (0 : 0 : 1)
             <class 'sage.schemes.elliptic_curves.ell_torsion.EllipticCurveTorsionSubgroup_with_category.element_class'>
-            sage: T.element(); type(T.element())                                        # needs sage.schemes
+            sage: T.element(); type(T.element())
             (0 : 0 : 1)
             <class 'sage.schemes.elliptic_curves.ell_point.EllipticCurvePoint_number_field'>
         """
@@ -165,8 +166,9 @@ class AdditiveAbelianGroupWrapperElement(addgp.AdditiveAbelianGroupElement):
 
         EXAMPLES::
 
-            sage: T = EllipticCurve('65a').torsion_subgroup().gen(0)                    # needs sage.schemes
-            sage: repr(T)  # indirect doctest                                           # needs sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage
+            sage: T = EllipticCurve('65a').torsion_subgroup().gen(0)
+            sage: repr(T)  # indirect doctest
             '(0 : 0 : 1)'
         """
         return repr(self.element())
@@ -447,7 +449,7 @@ class AdditiveAbelianGroupWrapper(addgp.AdditiveAbelianGroup_fixed_gens):
 
         ::
 
-            sage: # needs sage.rings.finite_rings sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage.rings.finite_rings sage.schemes
             sage: E = EllipticCurve(GF(487^2), [311,205])
             sage: T = E.abelian_group().torsion_subgroup(42); T
             Additive abelian group isomorphic to Z/42 + Z/6 embedded in
@@ -458,7 +460,7 @@ class AdditiveAbelianGroupWrapper(addgp.AdditiveAbelianGroup_fixed_gens):
 
         ::
 
-            sage: # needs sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage.schemes
             sage: E = EllipticCurve('574i1')
             sage: pts = [E(103,172), E(61,18)]
             sage: assert pts[0].order() == 7 and pts[1].order() == infinity

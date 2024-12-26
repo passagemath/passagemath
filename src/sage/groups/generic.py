@@ -166,7 +166,7 @@ def multiple(a, n, operation='*', identity=None, inverse=None, op=None):
         sage: multiple(1, 10^1000)
         1
 
-        sage: # needs sage.schemes
+        sage: # needs database_cremona_mini_ellcurve sage.schemes
         sage: E = EllipticCurve('389a1')
         sage: P = E(-1,1)
         sage: multiple(P, 10, '+')
@@ -262,9 +262,10 @@ class multiples:
         sage: list(multiples(1, 10, 100))
         [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
 
-        sage: E = EllipticCurve('389a1')                                                # needs sage.schemes
-        sage: P = E(-1,1)                                                               # needs sage.schemes
-        sage: for Q in multiples(P, 5): print((Q, Q.height()/P.height()))               # needs sage.schemes
+        sage: # needs database_cremona_mini_ellcurve sage.schemes
+        sage: E = EllipticCurve('389a1')
+        sage: P = E(-1,1)
+        sage: for Q in multiples(P, 5): print((Q, Q.height()/P.height()))
         ((0 : 1 : 0), 0.000000000000000)
         ((-1 : 1 : 1), 1.00000000000000)
         ((10/9 : -35/27 : 1), 4.00000000000000)
