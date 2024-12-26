@@ -59,7 +59,7 @@ def repr_short_to_parent(s):
         Integer Ring
         sage: repr_short_to_parent('QQ')
         Rational Field
-        sage: repr_short_to_parent('SR')
+        sage: repr_short_to_parent('SR')                                                # needs sage.symbolic
         Symbolic Ring
         sage: repr_short_to_parent('NN')
         Non negative integer semiring
@@ -125,7 +125,7 @@ def parent_to_repr_short(P):
         'ZZ'
         sage: parent_to_repr_short(QQ)
         'QQ'
-        sage: parent_to_repr_short(SR)
+        sage: parent_to_repr_short(SR)                                                  # needs sage.symbolic
         'SR'
         sage: parent_to_repr_short(RR)
         'RR'
@@ -137,7 +137,7 @@ def parent_to_repr_short(P):
         'QQ[d, k]'
         sage: parent_to_repr_short(QQ['e'])
         'QQ[e]'
-        sage: parent_to_repr_short(SR[['a, r']])
+        sage: parent_to_repr_short(SR[['a, r']])                                        # needs sage.symbolic
         'SR[[a, r]]'
         sage: parent_to_repr_short(Zmod(3))
         'Ring of integers modulo 3'
@@ -461,7 +461,7 @@ def substitute_raise_exception(element, e):
     TESTS::
 
         sage: from sage.rings.asymptotic.misc import substitute_raise_exception
-        sage: substitute_raise_exception(x, Exception('blub'))
+        sage: substitute_raise_exception(x, Exception('blub'))                          # needs sage.symbolic
         Traceback (most recent call last):
         ...
         Exception: Cannot substitute in x in Symbolic Ring.
@@ -781,6 +781,7 @@ def strip_symbolic(expression):
 
     EXAMPLES::
 
+        sage: # needs sage.symbolic
         sage: from sage.rings.asymptotic.misc import strip_symbolic
         sage: strip_symbolic(SR(2)); _.parent()
         2
@@ -830,9 +831,10 @@ class NotImplementedOZero(NotImplementedError):
 
         EXAMPLES::
 
-            sage: A = AsymptoticRing('n^ZZ', ZZ)
             sage: from sage.rings.asymptotic.misc import NotImplementedOZero
 
+            sage: # needs sage.symbolic
+            sage: A = AsymptoticRing('n^ZZ', ZZ)
             sage: raise NotImplementedOZero(A)
             Traceback (most recent call last):
             ...
@@ -847,7 +849,7 @@ class NotImplementedOZero(NotImplementedError):
 
         TESTS::
 
-            sage: raise NotImplementedOZero(A, var='m')
+            sage: raise NotImplementedOZero(A, var='m')                                 # needs sage.symbolic
             Traceback (most recent call last):
             ...
             ValueError: specify either 'asymptotic_ring' or 'var'
@@ -894,21 +896,20 @@ class NotImplementedBZero(NotImplementedError):
 
         EXAMPLES::
 
-            sage: A = AsymptoticRing('n^ZZ', ZZ)
             sage: from sage.rings.asymptotic.misc import NotImplementedBZero
 
+            sage: # needs sage.symbolic
+            sage: A = AsymptoticRing('n^ZZ', ZZ)
             sage: raise NotImplementedBZero(A)
             Traceback (most recent call last):
             ...
             NotImplementedBZero: got B(0)
             The error term B(0) means 0 for sufficiently large n.
-
             sage: raise NotImplementedBZero(var='m')
             Traceback (most recent call last):
             ...
             NotImplementedBZero: got B(0)
             The error term B(0) means 0 for sufficiently large m.
-
             sage: AR.<n> = AsymptoticRing('n^QQ', QQ)
             sage: AR(0).B(42)
             Traceback (most recent call last):
@@ -918,7 +919,7 @@ class NotImplementedBZero(NotImplementedError):
 
         TESTS::
 
-            sage: raise NotImplementedBZero(A, var='m')
+            sage: raise NotImplementedBZero(A, var='m')                                 # needs sage.symbolic
             Traceback (most recent call last):
             ...
             ValueError: specify either 'asymptotic_ring' or 'var'
@@ -1035,7 +1036,7 @@ def transform_category(category,
         Category of commutative groups
         sage: transform_category(QQ.category(), S, A)
         Category of commutative groups
-        sage: transform_category(SR.category(), S, A)
+        sage: transform_category(SR.category(), S, A)                                   # needs sage.symbolic
         Category of commutative groups
         sage: transform_category(Fields(), S, A)
         Category of commutative groups
@@ -1193,8 +1194,8 @@ class WithLocals(SageObject):
 
     EXAMPLES::
 
-        sage: A.<n> = AsymptoticRing('n^ZZ', QQ, locals={'a': 42})
-        sage: A.locals()
+        sage: A.<n> = AsymptoticRing('n^ZZ', QQ, locals={'a': 42})                      # needs sage.symbolic
+        sage: A.locals()                                                                # needs sage.symbolic
         {'a': 42}
     """
     @staticmethod
@@ -1204,6 +1205,7 @@ class WithLocals(SageObject):
 
         TESTS::
 
+            sage: # needs sage.symbolic
             sage: A.<n> = AsymptoticRing('n^ZZ', QQ)
             sage: locals = A._convert_locals_({'a': 42}); locals
             {'a': 42}
@@ -1233,6 +1235,7 @@ class WithLocals(SageObject):
 
         TESTS::
 
+            sage: # needs sage.symbolic
             sage: A.<n> = AsymptoticRing('n^ZZ', QQ, locals={'a': 42})
             sage: A.locals()
             {'a': 42}
