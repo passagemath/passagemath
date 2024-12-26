@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-schemes
+# sage.doctest: needs database_cremona_mini_ellcurve
 from sage.rings.integer import Integer
 from sage.structure.sage_object import SageObject
 from sage.lfunctions.dokchitser import Dokchitser

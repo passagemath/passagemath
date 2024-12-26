@@ -20,7 +20,7 @@ cpdef hgm_coeffs(long long p, unsigned int f,
         sage: from sage.modular.hypergeometric_motive import HypergeometricData as Hyp
         sage: from sage.modular.hypergeometric_misc import hgm_coeffs
         sage: H = Hyp(cyclotomic=([3],[4]))
-        sage: H.euler_factor(2, 7, cache_p=True)
+        sage: H.euler_factor(2, 7, cache_p=True)                                        # needs sage.symbolic
         7*T^2 - 3*T + 1
         sage: gamma = H.gamma_array()
         sage: prec, gtable = H.gauss_table(7, 1, 2)
@@ -31,8 +31,8 @@ cpdef hgm_coeffs(long long p, unsigned int f,
     Check issue from :issue:`28404`::
 
         sage: H = Hyp(cyclotomic=[[10,2],[1,1,1,1,1]])
-        sage: u = H.euler_factor(2,79) # indirect doctest
-        sage: u.reverse().is_weil_polynomial()
+        sage: u = H.euler_factor(2,79)  # indirect doctest                              # needs sage.symbolic
+        sage: u.reverse().is_weil_polynomial()                                          # needs sage.symbolic
         True
     """
     from sage.rings.padics.factory import Zp

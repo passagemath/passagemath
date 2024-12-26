@@ -336,11 +336,15 @@ class HeckeSubmodule(module.HeckeModule_free_module):
 
             sage: M = ModularSymbols(15, 6).cuspidal_subspace()
             sage: M.complement()
-            Modular Symbols subspace of dimension 4 of Modular Symbols space of dimension 20 for Gamma_0(15) of weight 6 with sign 0 over Rational Field
+            Modular Symbols subspace of dimension 4 of
+             Modular Symbols space of dimension 20 for Gamma_0(15) of weight 6 with sign 0 over Rational Field
+
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve("128a")
             sage: ME = E.modular_symbol_space()
             sage: ME.complement()
-            Modular Symbols subspace of dimension 17 of Modular Symbols space of dimension 18 for Gamma_0(128) of weight 2 with sign 1 over Rational Field
+            Modular Symbols subspace of dimension 17 of
+             Modular Symbols space of dimension 18 for Gamma_0(128) of weight 2 with sign 1 over Rational Field
         """
 
         if self.dual_free_module.is_in_cache():

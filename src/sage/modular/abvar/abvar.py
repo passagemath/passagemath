@@ -102,7 +102,7 @@ def is_ModularAbelianVariety(x) -> bool:
     Returning ``True`` is a statement about the data type not whether or
     not some abelian variety is modular::
 
-        sage: is_ModularAbelianVariety(EllipticCurve('37a'))
+        sage: is_ModularAbelianVariety(EllipticCurve('37a'))                            # needs database_cremona_mini_ellcurve
         False
     """
     from sage.misc.superseded import deprecation
@@ -633,18 +633,18 @@ class ModularAbelianVariety_abstract(Parent):
         EXAMPLES::
 
             sage: J = J0(11)
-            sage: J.elliptic_curve()
+            sage: J.elliptic_curve()                                                    # needs database_cremona_mini_ellcurve
             Elliptic Curve defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
 
             sage: J = J0(49)
-            sage: J.elliptic_curve()
+            sage: J.elliptic_curve()                                                    # needs database_cremona_mini_ellcurve
             Elliptic Curve defined by y^2 + x*y = x^3 - x^2 - 2*x - 1 over Rational Field
 
             sage: A = J0(37)[1]
-            sage: E = A.elliptic_curve()
+            sage: E = A.elliptic_curve()                                                # needs database_cremona_mini_ellcurve
             sage: A.lseries()(1)
             0.725681061936153
-            sage: E.lseries()(1)
+            sage: E.lseries()(1)                                                        # needs database_cremona_mini_ellcurve
             0.725681061936153
 
         Elliptic curves are of dimension 1. ::
@@ -1793,7 +1793,7 @@ class ModularAbelianVariety_abstract(Parent):
             Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33)
             sage: A.conductor()
             11
-            sage: A.elliptic_curve().conductor()
+            sage: A.elliptic_curve().conductor()                                        # needs database_cremona_mini_ellcurve
             11
         """
         if not self.base_ring() == QQ:
@@ -2763,6 +2763,7 @@ class ModularAbelianVariety_abstract(Parent):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: J = J0(33)
             sage: A = J.new_subvariety()
             sage: A
@@ -3719,8 +3720,8 @@ class ModularAbelianVariety_abstract(Parent):
 
         By a theorem the modular degree must thus be `3`::
 
-            sage: E = EllipticCurve('33a')
-            sage: E.modular_degree()                                                    # needs sympow
+            sage: E = EllipticCurve('33a')                      # needs database_cremona_mini_ellcurve
+            sage: E.modular_degree()                            # needs database_cremona_mini_ellcurve sympow
             3
 
         Next we compute the dual of a `2`-dimensional new simple
