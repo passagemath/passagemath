@@ -230,6 +230,7 @@ class AbstractArgument(MultiplicativeGroupElement):
 
         TESTS::
 
+            sage: # needs sage.symbolic
             sage: from sage.groups.misc_gps.argument_groups import RootsOfUnityGroup
             sage: U = RootsOfUnityGroup()
             sage: U(-1) * 4
@@ -240,7 +241,6 @@ class AbstractArgument(MultiplicativeGroupElement):
             -4
             sage: _.parent()
             Symbolic Ring
-
             sage: P = Permutation([1,2,3])
             sage: U(-1) * P
             Traceback (most recent call last):
@@ -464,6 +464,7 @@ class UnitCirclePoint(AbstractArgument):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: from sage.groups.misc_gps.argument_groups import UnitCircleGroup
             sage: C = UnitCircleGroup(RR)
             sage: C(exponent=1/4)._symbolic_()
@@ -471,6 +472,7 @@ class UnitCirclePoint(AbstractArgument):
             sage: _.parent()
             Symbolic Ring
 
+            sage: # needs sage.symbolic
             sage: from sage.groups.misc_gps.argument_groups import RootsOfUnityGroup
             sage: U = RootsOfUnityGroup()
             sage: U(exponent=1/4)._symbolic_()
@@ -492,6 +494,7 @@ class UnitCirclePoint(AbstractArgument):
 
         TESTS::
 
+            sage: # needs sage.symbolic
             sage: from sage.groups.misc_gps.argument_groups import UnitCircleGroup
             sage: C = UnitCircleGroup(RR)
             sage: C(exponent=0.3) * C(exponent=0.4)
@@ -535,6 +538,7 @@ class UnitCirclePoint(AbstractArgument):
             Unit Circle Group with Exponents in
             Real Field with 53 bits of precision modulo ZZ
 
+            sage: # needs sage.symbolic
             sage: U(exponent=1/3)^x
             (1/2*I*sqrt(3) - 1/2)^x
             sage: U(exponent=1/2)^x
@@ -1118,7 +1122,7 @@ class ArgumentByElement(AbstractArgument):
             sage: C = ArgumentByElementGroup(ZZ)
             sage: C(-2)._symbolic_()                                                    # needs sage.symbolic
             -1
-            sage: _.parent()
+            sage: _.parent()                                                            # needs sage.symbolic
             Symbolic Ring
         """
         from sage.functions.log import exp
@@ -1152,13 +1156,15 @@ class ArgumentByElement(AbstractArgument):
         TESTS::
 
             sage: from sage.groups.misc_gps.argument_groups import ArgumentByElementGroup
+
+            sage: # needs sage.symbolic
             sage: C = ArgumentByElementGroup(CC)
-            sage: C(I)^5  # indirect doctest                                            # needs sage.symbolic
+            sage: C(I)^5  # indirect doctest
             e^(I*arg(1.00000000000000*I))
             sage: _.parent()
             Unit Circle Group with Argument of Elements in
             Complex Field with 53 bits of precision
-            sage: C(1+I)^3  # indirect doctest                                          # needs sage.symbolic
+            sage: C(1+I)^3  # indirect doctest
             e^(I*arg(-2.00000000000000 + 2.00000000000000*I))
             sage: _.parent()
             Unit Circle Group with Argument of Elements in
@@ -1171,6 +1177,7 @@ class ArgumentByElement(AbstractArgument):
             Unit Circle Group with Argument of Elements in
             Complex Field with 53 bits of precision
 
+            sage: # needs sage.symbolic
             sage: C = ArgumentByElementGroup(QQ)
             sage: a = C(-20)^x; a
             (-1)^x
@@ -1469,6 +1476,7 @@ class Sign(AbstractArgument):
 
         Check that the results may live in other parents too::
 
+            sage: # needs sage.symbolic
             sage: x = SR.var('x')
             sage: elem = S(-1)^x; elem  # indirect doctest
             (-1)^x
@@ -1537,7 +1545,7 @@ class Sign(AbstractArgument):
             Complex Field with 53 bits of precision
             sage: S(-1) * SR.var('x')                                                   # needs sage.symbolic
             -x
-            sage: _.parent()
+            sage: _.parent()                                                            # needs sage.symbolic
             Symbolic Ring
 
         ::
@@ -1776,10 +1784,10 @@ class ArgumentGroupFactory(UniqueFactory):
         sage: ArgumentGroup('Arg_CC')                                                   # needs sage.rings.number_field
         Unit Circle Group with Exponents in
         Real Field with 53 bits of precision modulo ZZ
-        sage: ArgumentGroup(CIF)
+        sage: ArgumentGroup(CIF)                                                        # needs sage.rings.real_interval_field
         Unit Circle Group with Exponents in
         Real Interval Field with 53 bits of precision modulo ZZ
-        sage: ArgumentGroup(CBF)
+        sage: ArgumentGroup(CBF)                                                        # needs sage.libs.flint
         Unit Circle Group with Exponents in
         Real ball field with 53 bits of precision modulo ZZ
 
