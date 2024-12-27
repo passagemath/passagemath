@@ -20,7 +20,8 @@ if [ "x$SAGE_FAT_BINARY" = "xyes" ]; then
     elif [[ $os-$machine =~ arm64-apple-darwin* ]]; then
         OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=VORTEX"
     elif [[ $machine =~ (x86_64|amd64)-* ]]; then
-        OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=PRESCOTT"
+        # from https://github.com/MacPython/openblas-libs/blob/main/tools/build_steps.sh#L123
+        OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=PRESCOTT DYNAMIC_LIST=\"PRESCOTT NEHALEM SANDYBRIDGE HASWELL SKYLAKEX\""
     elif [[ $machine =~ (i386|i486|i586|i686)-* ]]; then
         OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=KATMAI"
     elif [[ $machine =~ (ppc64le|powerpc64le)-* ]]; then
@@ -45,7 +46,7 @@ fi
 # Ensure USE_TLS=1 ; see https://github.com/sagemath/sage/issues/27256
 OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE USE_TLS=1"
 
-if ! (sdh_make libs $OPENBLAS_CONFIGURE && sdh_make netlib $OPENBLAS_CONFIGURE && sdh_make shared $OPENBLAS_CONFIGURE); then
+if ! (eval sdh_make libs $OPENBLAS_CONFIGURE && eval sdh_make netlib $OPENBLAS_CONFIGURE && eval sdh_make shared $OPENBLAS_CONFIGURE); then
     if [[ $OPENBLAS_CONFIGURE == *"TARGET"* ]]; then
         sdh_die "Error building OpenBLAS"
     else
@@ -55,11 +56,11 @@ if ! (sdh_make libs $OPENBLAS_CONFIGURE && sdh_make netlib $OPENBLAS_CONFIGURE &
         echo "Error building OpenBLAS"
         echo "Retrying building OpenBLAS: $MAKE $OPENBLAS_CONFIGURE"
         sdh_make clean
-        sdh_make libs $OPENBLAS_CONFIGURE && sdh_make netlib $OPENBLAS_CONFIGURE && sdh_make shared $OPENBLAS_CONFIGURE
+        eval sdh_make libs $OPENBLAS_CONFIGURE && eval sdh_make netlib $OPENBLAS_CONFIGURE && eval sdh_make shared $OPENBLAS_CONFIGURE
     fi
 fi
 
-sdh_make_install PREFIX="$SAGE_LOCAL" NO_STATIC=1 $OPENBLAS_CONFIGURE
+eval sdh_make_install PREFIX="$SAGE_LOCAL" NO_STATIC=1 $OPENBLAS_CONFIGURE
 cd ..
 ./write_pc_file.py
 
