@@ -21,6 +21,7 @@ import importlib.machinery
 import importlib.util
 
 import os
+import sys
 
 from collections import defaultdict
 
@@ -143,6 +144,13 @@ def find_python_sources(src_dir, modules=['sage'], distributions=None,
 
     distribution_filter = SourceDistributionFilter(distributions, exclude_distributions)
 
+    extension_kwds = {}
+    if os.environ.get('CIBUILDWHEEL', None) and sys.version_info >= (3, 12, 0, 0):
+        # https://cibuildwheel.pypa.io/en/stable/options/#examples_8
+        # https://cython.readthedocs.io/en/latest/src/userguide/limited_api.html#setuptools-and-setup-py
+        extension_kwds['define_macros'] = [("Py_LIMITED_API", 0x030C0000)]
+        extension_kwds['py_limited_api'] = True
+
     cwd = os.getcwd()
     try:
         os.chdir(src_dir)
@@ -166,7 +174,8 @@ def find_python_sources(src_dir, modules=['sage'], distributions=None,
                     if ext == '.pyx':
                         if filepath in distribution_filter:
                             cython_modules.append(Extension(package + '.' + base,
-                                                            sources=[os.path.join(dirpath, filename)]))
+                                                            sources=[os.path.join(dirpath, filename)],
+                                                            **extension_kwds))
 
     finally:
         os.chdir(cwd)
