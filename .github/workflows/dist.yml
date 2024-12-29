@@ -196,7 +196,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc boost_cropped brial cliquer giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd  cddlib  palp nauty gfan sympow elliptic_curves pip
+      TARGETS_PRE: ccache libpng gmp mpfr mpc boost_cropped brial cliquer giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd  cddlib  palp nauty gfan sympow elliptic_curves ecm pip
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -437,6 +437,12 @@ jobs:
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*linbox*
+
+      - name: sagemath-libecm
+        id:   sagemath-libecm
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*libecm*
 
       - name: sagemath-lcalc
         id:   sagemath-lcalc
