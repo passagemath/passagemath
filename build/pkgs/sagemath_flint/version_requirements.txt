@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-flint ~= 10.5.13.0
+passagemath-flint ~= 10.5.14.0

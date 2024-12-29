@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-giac ~= 10.5.13.0
+passagemath-giac ~= 10.5.14.0
