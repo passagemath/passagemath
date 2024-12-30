@@ -1,5 +1,8 @@
 cd src
 
+# Allow downloading dependencies
+unset https_proxy
+
 mkdir build
 cd build
 sdh_cmake -DCMAKE_BUILD_TYPE=Release \
