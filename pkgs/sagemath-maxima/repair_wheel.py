@@ -6,7 +6,7 @@ import sys
 
 from pathlib import Path
 
-from sage_conf import MAXIMA_FAS, SAGE_LOCAL
+from sage_conf import SAGE_LOCAL
 
 wheel = sys.argv[1]
 
