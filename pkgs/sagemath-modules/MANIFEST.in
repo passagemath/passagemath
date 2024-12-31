@@ -232,6 +232,8 @@ include sage/rings/polynomial/*integer_valued_polynomials.p*
 
 include sage/rings/ring_extension*.p*
 
+include sage/rings/cfinite_sequence.p*
+
 graft sage/rings/invariants
 
 # mpfr, gsl
