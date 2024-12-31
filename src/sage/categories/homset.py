@@ -535,7 +535,7 @@ def End(X, category=None):
     groups currently implement nothing more than unital magmas about
     their homsets, we have::
 
-        sage: # needs sage.groups
+        sage: # needs sage.groups sage.modules
         sage: G = GL(3, 3)
         sage: G.category()
         Category of finite groups
@@ -912,7 +912,7 @@ class Homset(Set_generic):
 
         TESTS::
 
-            sage: # needs sage.groups
+            sage: # needs sage.combinat sage.groups
             sage: G.<x,y,z> = FreeGroup()
             sage: H = Hom(G, G)
             sage: H(H.identity())
