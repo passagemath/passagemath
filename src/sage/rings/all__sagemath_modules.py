@@ -23,3 +23,6 @@ from sage.rings.complex_mpc import MPComplexField
 
 # invariant theory
 from sage.rings.invariants.all import *
+
+# c-finite sequences
+from sage.rings.cfinite_sequence import CFiniteSequence, CFiniteSequences

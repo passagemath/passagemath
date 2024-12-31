@@ -44,9 +44,6 @@ from sage.rings.polynomial.all import *
 
 # Following will go to all__sagemath_categories.py in #36566
 
-# c-finite sequences
-from sage.rings.cfinite_sequence import CFiniteSequence, CFiniteSequences
-
 from sage.rings.fast_arith import prime_range
 
 # Following will go to all__sagemath_categories.py in #36566

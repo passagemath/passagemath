@@ -1,4 +1,4 @@
-# sage.doctest: needs sage.symbolic
+# sage_setup: distribution = sagemath-modules
 r"""
 C-Finite Sequences
 
@@ -90,8 +90,8 @@ REFERENCES:
 from numbers import Integral
 
 from sage.categories.rings import Rings
-from sage.libs.pari import pari
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
+from sage.misc.lazy_import import lazy_import
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
@@ -102,6 +102,8 @@ from sage.rings.fraction_field import FractionField
 from sage.structure.element import FieldElement, parent
 from sage.structure.parent import Parent
 from sage.structure.unique_representation import UniqueRepresentation
+
+lazy_import('sage.libs.pari', 'pari')
 
 
 def CFiniteSequences(base_ring, names=None, category=None):
