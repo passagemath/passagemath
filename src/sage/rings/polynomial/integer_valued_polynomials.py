@@ -865,8 +865,8 @@ class IntegerValuedPolynomialRing(UniqueRepresentation, Parent):
                     sage: f = ex.fraction();f
                     1/(-t^5 + 5*t^4 - 10*t^3 + 10*t^2 - 5*t + 1)
 
-                    sage: F = LazyPowerSeriesRing(QQ, 't')
-                    sage: F(f)
+                    sage: F = LazyPowerSeriesRing(QQ, 't')                              # needs sage.combinat
+                    sage: F(f)                                                          # needs sage.combinat
                     1 + 5*t + 15*t^2 + 35*t^3 + 70*t^4 + 126*t^5 + 210*t^6 + O(t^7)
 
                     sage: poly = ex.polynomial()
