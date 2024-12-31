@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 r"""
 Polynomial virtual weighted multisort species
 

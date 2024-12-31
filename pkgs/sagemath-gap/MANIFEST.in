@@ -26,6 +26,7 @@ recursive-include sage/groups/semimonomial_transformations *.pxd        # FIXME
 include           sage/interfaces/gap*.p*
 graft             sage/libs/gap
 include           sage/matrix/matrix_gap.p*
+include           sage/rings/species.p*
 include           sage/rings/universal_cyclotomic_field.p*
 
 include           sage/geometry/ribbon_graph.p*
