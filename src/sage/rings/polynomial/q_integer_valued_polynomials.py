@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Quantum-valued polynomial rings
 
@@ -803,7 +804,7 @@ class QuantumValuedPolynomialRing(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: F = QuantumValuedPolynomialRing(ZZ).S()
-                sage: F._poly(4).factor()
+                sage: F._poly(4).factor()                                               # needs sage.libs.singular
                 (1/(q^6 + 3*q^5 + 5*q^4 + 6*q^3 + 5*q^2 + 3*q + 1)) *
                 (q*x + 1) * (q^2*x + q + 1) * (q^3*x + q^2 + q + 1) *
                 (q^4*x + q^3 + q^2 + q + 1)
@@ -959,15 +960,15 @@ class QuantumValuedPolynomialRing(UniqueRepresentation, Parent):
 
                     sage: A = QuantumValuedPolynomialRing(QQ).S()
                     sage: ex = A.basis()[4]
-                    sage: ex.fraction().factor()
+                    sage: ex.fraction().factor()                                        # needs sage.libs.singular
                     (-1) * (t - 1)^-1 * (q*t - 1)^-1 * (q^2*t - 1)^-1 * (q^3*t - 1)^-1 * (q^4*t - 1)^-1
 
                     sage: q = polygen(QQ,'q')
                     sage: x = polygen(q.parent(), 'x')
                     sage: ex = A.from_polynomial((1+q*x)**3)
-                    sage: ex.fraction().factor()
+                    sage: ex.fraction().factor()                                        # needs sage.libs.singular
                     (t - 1)^-1 * (q*t - 1)^-1 * (q^2*t - 1)^-1 * (q^3*t - 1)^-1 * (q^3*t^2 + 2*q^2*t + 2*q*t + 1)
-                    sage: ex.fraction().numerator()
+                    sage: ex.fraction().numerator()                                     # needs sage.libs.singular
                     q^3*t^2 + 2*q^2*t + 2*q*t + 1
                 """
                 v = self.h_vector()
@@ -1212,7 +1213,7 @@ class QuantumValuedPolynomialRing(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: F = QuantumValuedPolynomialRing(ZZ).B()
-                sage: F._poly(4).factor()
+                sage: F._poly(4).factor()                                               # needs sage.libs.singular
                 (1/(q^12 + 3*q^11 + 5*q^10 + 6*q^9 + 5*q^8 + 3*q^7 + q^6)) *
                 (x - 1) * x * (x - q - 1) * (x - q^2 - q - 1)
             """

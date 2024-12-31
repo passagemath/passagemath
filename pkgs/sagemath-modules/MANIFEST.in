@@ -228,8 +228,11 @@ include sage/rings/function_field/khuri_makdisi.p*
 include sage/rings/polynomial/laurent_polynomial_mpair.p*                # cimports Matrix
 include sage/rings/polynomial/ore_*.p*
 include sage/rings/polynomial/skew_*.p*
+include sage/rings/polynomial/*integer_valued_polynomials.p*
 
 include sage/rings/ring_extension*.p*
+
+include sage/rings/cfinite_sequence.p*
 
 graft sage/rings/invariants
 

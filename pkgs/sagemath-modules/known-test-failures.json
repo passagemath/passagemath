@@ -45,7 +45,7 @@
     },
     "sage.arith.misc": {
         "failed": true,
-        "ntests": 929
+        "ntests": 930
     },
     "sage.arith.numerical_approx": {
         "ntests": 4
@@ -768,7 +768,8 @@
         "ntests": 5
     },
     "sage.coding.linear_code": {
-        "ntests": 40
+        "failed": true,
+        "ntests": 0
     },
     "sage.coding.linear_code_no_metric": {
         "ntests": 2
@@ -1073,6 +1074,9 @@
     },
     "sage.data_structures.mutable_poset": {
         "ntests": 441
+    },
+    "sage.data_structures.pairing_heap": {
+        "ntests": 284
     },
     "sage.databases.sql_db": {
         "ntests": 230
@@ -1780,7 +1784,6 @@
         "ntests": 32
     },
     "sage.misc.functional": {
-        "failed": true,
         "ntests": 298
     },
     "sage.misc.gperftools": {
@@ -2300,6 +2303,9 @@
     "sage.rings.big_oh": {
         "ntests": 22
     },
+    "sage.rings.cfinite_sequence": {
+        "ntests": 149
+    },
     "sage.rings.complex_conversion": {
         "ntests": 4
     },
@@ -2522,6 +2528,9 @@
     "sage.rings.polynomial.infinite_polynomial_ring": {
         "ntests": 279
     },
+    "sage.rings.polynomial.integer_valued_polynomials": {
+        "ntests": 231
+    },
     "sage.rings.polynomial.laurent_polynomial": {
         "failed": true,
         "ntests": 426
@@ -2607,6 +2616,9 @@
     },
     "sage.rings.polynomial.polynomial_singular_interface": {
         "ntests": 42
+    },
+    "sage.rings.polynomial.q_integer_valued_polynomials": {
+        "ntests": 207
     },
     "sage.rings.polynomial.skew_polynomial_element": {
         "ntests": 1
