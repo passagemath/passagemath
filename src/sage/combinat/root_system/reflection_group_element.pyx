@@ -1174,7 +1174,7 @@ def _gap_factorization(w, gens):
 
     EXAMPLES::
 
-        sage: from sage.combinat.root_system.reflection_group_element import _gap_factorization
+        sage: from sage.combinat.root_system.reflection_group_element import _gap_factorization  # optional - gap3
         sage: W = ReflectionGroup((1,1,3))                              # optional - gap3
         sage: gens = [W.simple_reflection(i) for i in W.index_set()]    # optional - gap3
         sage: [_gap_factorization(w,gens) for w in W]                   # optional - gap3
@@ -1248,7 +1248,7 @@ def _gap_return(S, coerce_obj='self'):
 
     TESTS::
 
-        sage: from sage.combinat.root_system.reflection_group_complex import _gap_return
+        sage: from sage.combinat.root_system.reflection_group_complex import _gap_return  # optional - gap3
         sage: _gap_return("[ (), (1,4)(2,3)(5,6), (1,6,2)(3,5,4) ]")    # optional - gap3
         ['()', '(1,4)(2,3)(5,6)', '(1,6,2)(3,5,4)']
     """
