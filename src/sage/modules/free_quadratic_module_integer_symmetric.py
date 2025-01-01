@@ -1222,7 +1222,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
             sage: A2 = IntegralLattice(matrix.identity(3),
             ....:                      Matrix(ZZ, 2, 3, [1,-1,0,0,1,-1]))
-            sage: A2.orthogonal_group()                                                 # needs sage.libs.gap
+            sage: A2.orthogonal_group()                                                 # needs sage.libs.gap sage.libs.pari
             Group of isometries with 2 generators (
             [ 2/3  2/3 -1/3]  [1 0 0]
             [ 2/3 -1/3  2/3]  [0 0 1]
@@ -1232,8 +1232,8 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
         It can be negative definite as well::
 
             sage: A2m = IntegralLattice(-Matrix(ZZ, 2, [2,1,1,2]))
-            sage: G = A2m.orthogonal_group()                                            # needs sage.libs.gap
-            sage: G.order()                                                             # needs sage.libs.gap
+            sage: G = A2m.orthogonal_group()                                            # needs sage.libs.gap sage.libs.pari
+            sage: G.order()                                                             # needs sage.libs.gap sage.libs.pari
             12
 
         If the lattice is indefinite, sage does not know how to compute generators.
@@ -1474,7 +1474,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
             sage: G = matrix(ZZ, 3, [0,1,0, 1,0,0, 0,0,7])
             sage: V = matrix(ZZ, 3, [-14,-15,-15, -4,1,16, -5,-5,-4])
             sage: L = IntegralLattice(V * G * V.T)
-            sage: L.lll().gram_matrix()                                                 # needs sage.libs.gap
+            sage: L.lll().gram_matrix()                                                 # needs sage.libs.gap sage.libs.pari
             [0 0 1]
             [0 7 0]
             [1 0 0]
