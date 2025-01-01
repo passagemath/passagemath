@@ -1236,7 +1236,7 @@ class Module_free_ambient(Module):
 
         More exotic comparisons::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: R1 = ZZ[sqrt(2)]
             sage: F1 = R1^3
             sage: V1 = F1.span([[sqrt(2), sqrt(2), 0]])
