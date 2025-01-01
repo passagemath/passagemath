@@ -9,8 +9,8 @@ This distribution makes the following feature available::
     FeatureTestResult('sage.groups', True)
 """
 
-from .all__sagemath_modules import *
 from .all__sagemath_gap import *
+from .all__sagemath_modules import *
 
 try:  # extra
     from sage.all__sagemath_combinat import *
