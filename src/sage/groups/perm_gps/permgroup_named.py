@@ -814,7 +814,7 @@ class CyclicPermutationGroup(PermutationGroup_unique):
             sage: C.is_abelian()
             True
             sage: C = CyclicPermutationGroup(10)
-            sage: C.as_AbelianGroup()
+            sage: C.as_AbelianGroup()                                                   # needs sage.modules
             Multiplicative Abelian group isomorphic to C2 x C5
 
         TESTS::
@@ -868,7 +868,7 @@ class CyclicPermutationGroup(PermutationGroup_unique):
         EXAMPLES::
 
             sage: C = CyclicPermutationGroup(8)
-            sage: C.as_AbelianGroup()
+            sage: C.as_AbelianGroup()                                                   # needs sage.modules
             Multiplicative Abelian group isomorphic to C8
         """
         n = self.order()
