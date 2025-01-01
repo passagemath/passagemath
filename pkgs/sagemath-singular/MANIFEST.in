@@ -14,12 +14,20 @@ include         sage/rings/polynomial/plural.p*
 include         sage/rings/polynomial/*singular*.p*
 exclude         sage/rings/polynomial/polynomial_singular_interface.p*  # in sagemath-categories
 
+graft sage/libs/pynac
+include sage/symbolic/expression.p*
+include sage/symbolic/*.pxi
+include sage/symbolic/pynac_wrap.h
 
 global-exclude *.c
 global-exclude *.cpp
 
 global-exclude all__sagemath_*.py
 global-include all__sagemath_singular.py
+
+graft sage/symbolic/ginac
+
+include sage/cpython/pycore_long.h  # FIXME
 
 global-exclude __pycache__
 global-exclude *.py[co]

@@ -10,6 +10,11 @@ graft sage/symbolic
 # exclude what is included in sagemath-categories
 exclude sage/symbolic/symbols.p*
 exclude sage/symbolic/function.p*
+# exclude what is included in sagemath-singular
+prune sage/symbolic/ginac
+exclude sage/symbolic/expression.p*
+exclude sage/symbolic/*.pxi
+exclude sage/symbolic/pynac_wrap.h
 
 include sage/calculus/all.p*
 include sage/calculus/calculus.p*
@@ -17,8 +22,6 @@ include sage/calculus/desolvers.p*
 include sage/calculus/predefined.p*
 include sage/calculus/tests.p*
 include sage/calculus/var.p*
-
-include sage/cpython/pycore_long.h  # FIXME
 
 graft sage/manifolds
 
@@ -28,9 +31,6 @@ graft sage/dynamics/complex_dynamics
 
 include sage/modules/vector_*symbol*.p*
 include sage/matrix/matrix_symbolic_*.p*
-
-#graft sage/libs/giac
-graft sage/libs/pynac
 
 include sage/interfaces/fricas.p*
 include sage/interfaces/magma*.p*
@@ -51,8 +51,6 @@ global-include all__sagemath_symbolics.py
 
 global-exclude *.c
 global-exclude *.cpp
-
-graft sage/symbolic/ginac
 
 global-exclude __pycache__
 global-exclude *.py[co]

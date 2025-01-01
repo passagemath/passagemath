@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup('sagemath-symbolics',
-           required_modules=('gsl', 'factory', 'ecl'),
+           required_modules=('gsl',),
            spkgs=['maxima'],
            package_data={
                "sage.interfaces": [

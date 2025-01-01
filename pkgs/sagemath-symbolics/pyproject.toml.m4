@@ -30,6 +30,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_maxima
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_sagemath_ntl
+    SPKG_INSTALL_REQUIRES_sagemath_singular
     SPKG_INSTALL_REQUIRES_sympy
 ]
 dynamic = ["version"]
