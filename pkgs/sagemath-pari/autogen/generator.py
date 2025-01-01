@@ -304,7 +304,7 @@ class PariFunctionGenerator(object):
         if doc:
             # Use triple single quotes to make it easier to doctest
             # this within triply double quoted docstrings.
-            s += "        r'''\n        {doc}\n        '''\n"
+            s += "        r'''\n{doc}\n        '''\n"
         # Warning for obsolete functions
         if obsolete:
             s += "        from warnings import warn\n"
