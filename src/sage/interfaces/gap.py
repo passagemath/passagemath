@@ -1023,7 +1023,7 @@ class GapElement_generic(ModuleElement, ExtraTabCompletion, ExpectElement):
 
             sage: s = gap("(Z(7)^0)*[[1,2,3],[4,5,6]]"); s
             [ [ Z(7)^0, Z(7)^2, Z(7) ], [ Z(7)^4, Z(7)^5, Z(7)^3 ] ]
-            sage: s._matrix_(GF(7))
+            sage: s._matrix_(GF(7))                                                     # needs sage.modules
             [1 2 3]
             [4 5 6]
 
@@ -1031,16 +1031,16 @@ class GapElement_generic(ModuleElement, ExtraTabCompletion, ExpectElement):
 
             sage: s = gap("[[1,2], [3/4, 5/6]]"); s
             [ [ 1, 2 ], [ 3/4, 5/6 ] ]
-            sage: m = s._matrix_(QQ); m
+            sage: m = s._matrix_(QQ); m                                                 # needs sage.modules
             [  1   2]
             [3/4 5/6]
-            sage: parent(m)
+            sage: parent(m)                                                             # needs sage.modules
             Full MatrixSpace of 2 by 2 dense matrices over Rational Field
 
         ::
 
             sage: s = gap('[[Z(16),Z(16)^2],[Z(16)^3,Z(16)]]')
-            sage: s._matrix_(GF(16,'a'))                                                # needs sage.rings.finite_rings
+            sage: s._matrix_(GF(16,'a'))                                                # needs sage.modules sage.rings.finite_rings
             [  a a^2]
             [a^3   a]
         """

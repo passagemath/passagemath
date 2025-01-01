@@ -10,10 +10,6 @@ from sage.groups.all__sagemath_gap import *
 
 from sage.misc.lazy_import import lazy_import
 
-lazy_import('sage.groups.class_function', 'ClassFunction')
-
-lazy_import('sage.groups.conjugacy_classes', ['ConjugacyClass', 'ConjugacyClassGAP'])
-
 lazy_import('sage.groups.free_group', 'FreeGroup')
 lazy_import('sage.groups.braid', 'BraidGroup')
 lazy_import('sage.groups.cubic_braid', 'CubicBraidGroup')

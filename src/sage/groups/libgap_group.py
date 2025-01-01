@@ -11,6 +11,7 @@ from this but directly from
 
 EXAMPLES::
 
+    sage: # needs sage.combinat
     sage: F.<a,b> = FreeGroup()
     sage: G_gap = libgap.Group([ (a*b^2).gap() ])
     sage: from sage.groups.libgap_group import GroupLibGAP
@@ -52,6 +53,7 @@ class GroupLibGAP(GroupMixinLibGAP, Group, ParentLibGAP):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: F.<a,b> = FreeGroup()
             sage: G_gap = libgap.Group([ (a*b^2).gap() ])
             sage: from sage.groups.libgap_group import GroupLibGAP

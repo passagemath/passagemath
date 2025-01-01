@@ -126,6 +126,8 @@ class Groups(CategoryWithAxiom):
                 sage: A = AlternatingGroup(4)
                 sage: A.monoid_generators()
                 Family ((1,2,3), (2,3,4))
+
+                sage: # needs sage.combinat
                 sage: F.<x,y> = FreeGroup()
                 sage: F.monoid_generators()
                 Family (x, y, x^-1, y^-1)
@@ -249,7 +251,7 @@ class Groups(CategoryWithAxiom):
             Permutation groups, matrix groups and abelian groups
             can all compute their multiplication tables.  ::
 
-                sage: # needs sage.groups
+                sage: # needs sage.groups sage.modules
                 sage: G = DiCyclicGroup(3)
                 sage: T = G.cayley_table()
                 sage: T.column_keys()
@@ -443,9 +445,9 @@ class Groups(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: A = AbelianGroup([2, 2])                                          # needs sage.groups
-                sage: c = A.conjugacy_class(A.an_element())                             # needs sage.groups
-                sage: type(c)                                                           # needs sage.groups
+                sage: A = AbelianGroup([2, 2])                                          # needs sage.modules
+                sage: c = A.conjugacy_class(A.an_element())                             # needs sage.groups sage.modules
+                sage: type(c)                                                           # needs sage.groups sage.modules
                 <class 'sage.groups.conjugacy_classes.ConjugacyClass_with_category'>
             """
             from sage.groups.conjugacy_classes import ConjugacyClass

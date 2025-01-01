@@ -1776,15 +1776,15 @@ cdef class Parent(sage.structure.category_object.CategoryObject):
         EXAMPLES::
 
             sage: S3 = AlternatingGroup(3)                                              # needs sage.groups
-            sage: G = SL(3, QQ)                                                         # needs sage.groups
-            sage: p = S3[2]; p.matrix()                                                 # needs sage.groups
+            sage: G = SL(3, QQ)                                                         # needs sage.groups sage.modules
+            sage: p = S3[2]; p.matrix()                                                 # needs sage.groups sage.modules
             [0 0 1]
             [1 0 0]
             [0 1 0]
 
         In general one cannot mix matrices and permutations::
 
-            sage: # needs sage.groups
+            sage: # needs sage.groups sage.modules
             sage: G(p)
             Traceback (most recent call last):
             ...
@@ -1800,11 +1800,11 @@ cdef class Parent(sage.structure.category_object.CategoryObject):
         By :issue:`14711`, coerce maps should be copied when using outside of
         the coercion system::
 
-            sage: phi = copy(S3.coerce_embedding()); phi                                # needs sage.groups
+            sage: phi = copy(S3.coerce_embedding()); phi                                # needs sage.groups sage.modules
             Generic morphism:
               From: Alternating group of order 3!/2 as a permutation group
               To:   Special Linear Group of degree 3 over Rational Field
-            sage: phi(p)                                                                # needs sage.groups
+            sage: phi(p)                                                                # needs sage.groups sage.modules
             [0 0 1]
             [1 0 0]
             [0 1 0]
@@ -1816,7 +1816,7 @@ cdef class Parent(sage.structure.category_object.CategoryObject):
 
         Though one can have a permutation act on the rows of a matrix::
 
-            sage: G(1) * p                                                              # needs sage.groups
+            sage: G(1) * p                                                              # needs sage.groups sage.modules
             [0 0 1]
             [1 0 0]
             [0 1 0]

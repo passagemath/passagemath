@@ -90,7 +90,6 @@ from pathlib import Path
 
 from sage.arith.misc import factor, valuation
 from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
-from sage.groups.abelian_gps.abelian_group import AbelianGroup
 from sage.groups.perm_gps.permgroup import PermutationGroup_generic
 from sage.groups.perm_gps.permgroup_element import SymmetricGroupElement
 from sage.libs.gap.libgap import libgap
@@ -108,6 +107,7 @@ from sage.structure.parent import Parent
 from sage.structure.richcmp import richcmp
 from sage.structure.unique_representation import CachedRepresentation
 
+lazy_import('sage.groups.abelian_gps.abelian_group', 'AbelianGroup')
 lazy_import('sage.groups.cactus_group', 'CactusGroup')
 
 
@@ -814,7 +814,7 @@ class CyclicPermutationGroup(PermutationGroup_unique):
             sage: C.is_abelian()
             True
             sage: C = CyclicPermutationGroup(10)
-            sage: C.as_AbelianGroup()
+            sage: C.as_AbelianGroup()                                                   # needs sage.modules
             Multiplicative Abelian group isomorphic to C2 x C5
 
         TESTS::
@@ -868,7 +868,7 @@ class CyclicPermutationGroup(PermutationGroup_unique):
         EXAMPLES::
 
             sage: C = CyclicPermutationGroup(8)
-            sage: C.as_AbelianGroup()
+            sage: C.as_AbelianGroup()                                                   # needs sage.modules
             Multiplicative Abelian group isomorphic to C8
         """
         n = self.order()

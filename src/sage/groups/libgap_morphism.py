@@ -1,9 +1,11 @@
 # sage_setup: distribution = sagemath-gap
+# sage.doctest: needs sage.modules
 r"""
 Group homomorphisms for groups with a GAP backend
 
 EXAMPLES::
 
+    sage: # needs sage.combinat
     sage: from sage.groups.abelian_gps.abelian_group_gap import AbelianGroupGap
     sage: A = AbelianGroupGap([2, 4])
     sage: F.<a,b> = FreeGroup()
@@ -70,6 +72,8 @@ class GroupMorphism_libgap(Morphism):
         [0 1]
         [1 0]
         )
+
+        sage: # needs sage.combinat
         sage: G.<a,b> = FreeGroup()
         sage: H = G / (G([1]), G([2])^3)
         sage: f = G.hom(H.gens())
@@ -708,6 +712,7 @@ class GroupHomset_libgap(HomsetWithBase):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.groups.abelian_gps.abelian_group_gap import AbelianGroupGap
             sage: A = AbelianGroupGap([2,4])
             sage: G.<a,b> = FreeGroup()

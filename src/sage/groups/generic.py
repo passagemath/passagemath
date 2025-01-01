@@ -1689,9 +1689,9 @@ def structure_description(G, latex=False):
 
     Works for finitely presented groups (:issue:`17573`)::
 
-        sage: F.<x, y> = FreeGroup()                                                    # needs sage.groups
-        sage: G = F / [x^2*y^-1, x^3*y^2, x*y*x^-1*y^-1]                                # needs sage.groups
-        sage: G.structure_description()                                                 # needs sage.groups
+        sage: F.<x, y> = FreeGroup()                                                    # needs sage.combinat sage.groups
+        sage: G = F / [x^2*y^-1, x^3*y^2, x*y*x^-1*y^-1]                                # needs sage.combinat sage.groups
+        sage: G.structure_description()                                                 # needs sage.combinat sage.groups
         'C7'
 
     And matrix groups (:issue:`17573`)::
