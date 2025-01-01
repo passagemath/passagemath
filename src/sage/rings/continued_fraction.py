@@ -1202,7 +1202,8 @@ class ContinuedFraction_base(SageObject):
 
         TESTS::
 
-            sage: CF = [continued_fraction(x) for x in [sqrt(2), AA(3).sqrt(),          # needs sage.rings.number_field sage.symbolic
+            sage: # needs sage.combinat sage.rings.number_field sage.symbolic
+            sage: CF = [continued_fraction(x) for x in [sqrt(2), AA(3).sqrt(),
             ....:       AA(3)**(1/3), QuadraticField(37).gen(), pi, 113/27,
             ....:       [3,1,2,2], words.FibonacciWord([1,3])]]
             sage: for _ in range(100):  # not tested, known bug (see :issue:`32086`)

@@ -779,7 +779,7 @@ class ResidueField_generic(Field):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field sage.symbolic
+            sage: # needs fpylll sage.rings.number_field sage.symbolic
             sage: I = QQ[2^(1/3)].factor(2)[0][0]; I
             Fractional ideal (a)
             sage: k = I.residue_field(); k
@@ -825,7 +825,7 @@ class ResidueField_generic(Field):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field sage.symbolic
+            sage: # needs fpylll sage.rings.number_field sage.symbolic
             sage: I = QQ[3^(1/3)].factor(5)[1][0]; I
             Fractional ideal (a - 2)
             sage: k = I.residue_field(); k
@@ -928,7 +928,7 @@ cdef class ReductionMap(Map):
 
     EXAMPLES::
 
-        sage: # needs sage.rings.number_field sage.symbolic
+        sage: # needs fpylll sage.rings.number_field sage.symbolic
         sage: I = QQ[sqrt(17)].factor(5)[0][0]; I
         Fractional ideal (5)
         sage: k = I.residue_field(); k

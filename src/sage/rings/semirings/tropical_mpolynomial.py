@@ -156,6 +156,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
     Another way to represent tropical curve is through dual subdivision,
     which is a subdivision of Newton polytope of tropical polynomial::
 
+        sage: # needs sage.geometry.polyhedron
         sage: p1.newton_polytope()
         A 2-dimensional polyhedron in ZZ^2 defined as the convex hull of 3 vertices
         sage: p1.dual_subdivision()
@@ -423,6 +424,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
         A Newton polytope for a two-variable tropical polynomial::
 
+            sage: # needs sage.geometry.polyhedron
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y> = PolynomialRing(T)
             sage: p1 = x + y
@@ -446,6 +448,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
         A Newton polytope in three dimension::
 
+            sage: # needs sage.geometry.polyhedron
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y,z> = PolynomialRing(T)
             sage: p1 = x^2 + x*y*z + x + y + z + R(0)
@@ -497,6 +500,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
         Dual subdivision of a tropical curve::
 
+            sage: # needs sage.geometry.polyhedron
             sage: T = TropicalSemiring(QQ, use_min=False)
             sage: R.<x,y> = PolynomialRing(T)
             sage: p1 = R(3) + R(2)*x + R(2)*y + R(3)*x*y + x^2 + y^2
@@ -519,6 +523,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
         A subdivision of a pentagonal Newton polytope::
 
+            sage: # needs sage.geometry.polyhedron
             sage: p2 = R(3) + x^2 + R(-2)*y + R(1/2)*x^2*y + R(2)*x*y^3 + R(-1)*x^3*y^4
             sage: pc = p2.dual_subdivision(); pc
             Polyhedral complex with 5 maximal cells
@@ -540,6 +545,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
         A subdivision with many faces, not all of which are triangles::
 
+            sage: # needs sage.geometry.polyhedron
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y> = PolynomialRing(T)
             sage: p3 = (R(8) + R(4)*x + R(2)*y + R(1)*x^2 + x*y + R(1)*y^2
@@ -575,6 +581,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
         Dual subdivision of a tropical surface::
 
+            sage: # needs sage.geometry.polyhedron
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y,z> = PolynomialRing(T)
             sage: p1 = x + y + z + x^2 + R(1)
@@ -600,6 +607,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
         Dual subdivision of a tropical hypersurface::
 
+            sage: # needs sage.geometry.polyhedron
             sage: T = TropicalSemiring(QQ)
             sage: R.<a,b,c,d> = PolynomialRing(T)
             sage: p1 = R(2)*a*b + R(3)*a*c + R(-1)*c^2 + R(-1/3)*a*d

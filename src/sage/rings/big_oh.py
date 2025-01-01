@@ -96,10 +96,10 @@ def O(*x, **kwds):
 
     We can also work with `asymptotic expansions`_::
 
-        sage: A.<n> = AsymptoticRing(growth_group='QQ^n * n^QQ * log(n)^QQ',            # needs sage.symbolic
+        sage: A.<n> = AsymptoticRing(growth_group='QQ^n * n^QQ * log(n)^QQ',            # needs sage.graphs sage.symbolic
         ....:                        coefficient_ring=QQ); A
         Asymptotic Ring <QQ^n * n^QQ * log(n)^QQ * Signs^n> over Rational Field
-        sage: O(n)                                                                      # needs sage.symbolic
+        sage: O(n)                                                                      # needs sage.graphs sage.symbolic
         O(n)
 
     Application with Puiseux series::

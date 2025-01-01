@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-singular
+# sage.doctest: needs sage.combinat
 r"""
 Noncommutative polynomials via libSINGULAR/Plural
 
