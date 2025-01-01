@@ -10,7 +10,6 @@ requires = [
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_sagemath_pari
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_pkgconfig
 ]
@@ -20,7 +19,6 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-gap"
 description = "passagemath: Computational Group Theory with GAP"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_sagemath_pari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sage_conf
