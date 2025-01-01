@@ -338,7 +338,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             Traceback (most recent call last):
             ...
             TypeError: unable to convert <... 'int'> to a symbolic expression
-            sage: r^(1/2)
+            sage: r^(1/2)                                                               # needs R
             Traceback (most recent call last):
             ...
             TypeError: unsupported operand type(s) for ** or pow(): 'R' and 'sage.rings.rational.Rational'

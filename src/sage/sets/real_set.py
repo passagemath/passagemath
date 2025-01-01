@@ -474,7 +474,7 @@ class InternalRealInterval(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
-            sage: RealSet(0, 4)._giac_condition_(x)                                     # needs sage.symbolic
+            sage: RealSet(0, 4)._giac_condition_(x)                                     # needs sage.libs.giac
             '((0 < sageVARx) and (sageVARx < 4))'
         """
         x = variable
@@ -1626,7 +1626,7 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
 
         EXAMPLES::
 
-            sage: # needs sage.symbolic
+            sage: # needs sage.libs.giac
             sage: RealSet(0, 1)._giac_condition_(x)
             '((0 < sageVARx) and (sageVARx < 1))'
             sage: RealSet((0,1), [2,3])._giac_condition_(x)
@@ -1638,9 +1638,9 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
 
         TESTS::
 
-            sage: RealSet(6,6)._giac_condition_(x)                                      # needs sage.symbolic
+            sage: RealSet(6,6)._giac_condition_(x)                                      # needs sage.libs.giac
             'false'
-            sage: RealSet([6,6])._giac_condition_(x)                                    # needs sage.symbolic
+            sage: RealSet([6,6])._giac_condition_(x)                                    # needs sage.libs.giac
             'sageVARx == 6'
         """
         x = variable
