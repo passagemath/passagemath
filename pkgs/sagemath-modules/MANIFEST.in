@@ -234,6 +234,8 @@ include sage/rings/ring_extension*.p*
 
 include sage/rings/cfinite_sequence.p*
 
+graft sage/rings/function_field/drinfeld_modules
+
 graft sage/rings/invariants
 
 # mpfr, gsl

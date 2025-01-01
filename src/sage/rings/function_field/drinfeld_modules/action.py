@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.rings.finite_rings
 r"""
 The module action induced by a Drinfeld module

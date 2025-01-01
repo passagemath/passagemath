@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.rings.finite_rings
 r"""
 Drinfeld modules
@@ -29,7 +30,6 @@ AUTHORS:
 from sage.arith.misc import gcd
 from sage.categories.drinfeld_modules import DrinfeldModules
 from sage.categories.homset import Hom
-from sage.geometry.polyhedron.constructor import Polyhedron
 from sage.misc.latex import latex
 from sage.misc.latex import latex_variable_name
 from sage.misc.lazy_import import lazy_import
@@ -45,6 +45,7 @@ from sage.structure.sequence import Sequence
 from sage.structure.unique_representation import UniqueRepresentation
 
 lazy_import('sage.rings.ring_extension', 'RingExtension_generic')
+lazy_import('sage.geometry.polyhedron.constructor', 'Polyhedron')
 
 
 class DrinfeldModule(Parent, UniqueRepresentation):
