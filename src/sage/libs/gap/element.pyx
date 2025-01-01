@@ -1323,13 +1323,13 @@ cdef class GapElement(RingElement):
 
             sage: G0 = libgap.SymplecticGroup(4,2)
             sage: P = G0.IsomorphismFpGroup().Range()
-            sage: G = P.sage()
-            sage: G.gap() == P
+            sage: G = P.sage()                                                          # needs sage.combinat
+            sage: G.gap() == P                                                          # needs sage.combinat
             True
 
             sage: F0 = libgap.FreeGroup(2)
-            sage: F = F0.sage()
-            sage: F.gap() is F0
+            sage: F = F0.sage()                                                         # needs sage.combinat
+            sage: F.gap() is F0                                                         # needs sage.combinat
             True
 
         TESTS:
@@ -1830,7 +1830,7 @@ cdef class GapElement_FiniteField(GapElement):
             Traceback (most recent call last):
             ...
             ValueError: the given ring is incompatible ...
-            sage: n.sage(ring=CC)
+            sage: n.sage(ring=CC)                                                       # needs sage.rings.real_mpfr
             Traceback (most recent call last):
             ...
             ValueError: the given ring is incompatible ...
@@ -1838,7 +1838,7 @@ cdef class GapElement_FiniteField(GapElement):
             Traceback (most recent call last):
             ...
             ValueError: the given ring is incompatible ...
-            sage: n.sage(ring=GF(2^3))
+            sage: n.sage(ring=GF(2^3))                                                  # needs sage.rings.finite_rings
             Traceback (most recent call last):
             ...
             ValueError: the given ring is incompatible ...
@@ -2912,7 +2912,7 @@ cdef class GapElement_List(GapElement):
             Z(5)^2
             sage: M.IsMatrix()
             true
-            sage: M.matrix()
+            sage: M.matrix()                                                            # needs sage.modules
             [4 1]
             [4 0]
         """
