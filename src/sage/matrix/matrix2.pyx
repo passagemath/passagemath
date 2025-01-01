@@ -813,7 +813,7 @@ cdef class Matrix(Matrix1):
 
         Check that coercions work correctly (:issue:`17405`)::
 
-            sage: # needs sage.rings.complex_double sage.symbolic
+            sage: # needs scipy sage.rings.complex_double sage.symbolic
             sage: A = matrix(RDF, 2, range(4))
             sage: b = vector(CDF, [1+I, 2])
             sage: A.solve_right(b)
@@ -4573,9 +4573,9 @@ cdef class Matrix(Matrix1):
             ....:  [-0.8090169944,           0.0,           0.5],
             ....:  [ 0.8090169944,           0.0,          -0.5],
             ....:  [-0.8090169944,           0.0,          -0.5]]).transpose()
-            sage: (A * A.right_kernel_matrix().transpose()).norm() > 2
+            sage: (A * A.right_kernel_matrix().transpose()).norm() > 2                  # needs scipy
             True
-            sage: (A * A.right_kernel_matrix(basis='computed').transpose()).norm() < 1e-15
+            sage: (A * A.right_kernel_matrix(basis='computed').transpose()).norm() < 1e-15  # needs scipy
             True
 
         Trivial Cases:
@@ -7314,7 +7314,7 @@ cdef class Matrix(Matrix1):
 
         The following example shows that :issue:`20439` has been resolved::
 
-            sage: # needs sage.rings.complex_double sage.symbolic
+            sage: # needs scipy sage.rings.complex_double sage.symbolic
             sage: A = matrix(CDF, [[-2.53634347567,  2.04801738686, -0.0, -62.166145304],
             ....:                  [ 0.7, -0.6, 0.0, 0.0],
             ....:                  [0.547271128842, 0.0, -0.3015, -21.7532081652],
@@ -7326,7 +7326,7 @@ cdef class Matrix(Matrix1):
         The following example shows that the fix for :issue:`20439` (conjugating
         eigenvectors rather than eigenvalues) is the correct one::
 
-            sage: # needs sage.rings.complex_double sage.symbolic
+            sage: # needs scipy sage.rings.complex_double sage.symbolic
             sage: A = Matrix(CDF,[[I,0],[0,1]])
             sage: D, P = A.eigenmatrix_left()
             sage: (P*A - D*P).norm() < 10^(-2)
@@ -11155,7 +11155,7 @@ cdef class Matrix(Matrix1):
             [0 0 0 0]
             [0 0 0 0]
             [0 0 0 0]
-            sage: (G*G.transpose() - identity_matrix(2)).norm() < 10^-10
+            sage: (G*G.transpose() - identity_matrix(2)).norm() < 10^-10                # needs scipy
             True
             sage: G.row_space() == A.row_space()
             True
@@ -15679,7 +15679,7 @@ cdef class Matrix(Matrix1):
             sage: A = matrix(CC, 2, 3, [3*I,4,1-I,1,2,0])
             sage: A.norm('frob')
             5.656854249492381
-            sage: A.norm(2)
+            sage: A.norm(2)                                                             # needs scipy
             5.470684443210...
             sage: A.norm(1)
             6.0
@@ -15913,7 +15913,7 @@ cdef class Matrix(Matrix1):
             sage: a.exp()                                                               # needs sage.symbolic
             [ 1/11882424341266*((11*sqrt(227345670387496707609) + 5941212170633)*e^(3/1275529100*sqrt(227345670387496707609)) - 11*sqrt(227345670387496707609) + 5941212170633)*e^(-3/2551058200*sqrt(227345670387496707609) + 101/200)                            445243650/75781890129165569203*(sqrt(227345670387496707609)*e^(3/1275529100*sqrt(227345670387496707609)) - sqrt(227345670387496707609))*e^(-3/2551058200*sqrt(227345670387496707609) + 101/200)]
             [                                     10000/53470909535697*(sqrt(227345670387496707609)*e^(3/1275529100*sqrt(227345670387496707609)) - sqrt(227345670387496707609))*e^(-3/2551058200*sqrt(227345670387496707609) + 101/200) -1/11882424341266*((11*sqrt(227345670387496707609) - 5941212170633)*e^(3/1275529100*sqrt(227345670387496707609)) - 11*sqrt(227345670387496707609) - 5941212170633)*e^(-3/2551058200*sqrt(227345670387496707609) + 101/200)]
-            sage: a.change_ring(RDF).exp()  # rel tol 6e-14                             # needs sage.symbolic
+            sage: a.change_ring(RDF).exp()  # rel tol 6e-14                             # needs scipy sage.symbolic
             [42748127.31532951 7368259.244159399]
             [234538976.1381042 40426191.45156228]
 

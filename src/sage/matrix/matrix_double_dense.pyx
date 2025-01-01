@@ -1160,7 +1160,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
             [1.0*I, -1.0*I]
 
             sage: m = matrix(CDF, 2, 2, [I,1,-I,0])                                     # needs sage.symbolic
-            sage: m.eigenvalues()                                                       # needs sage.symbolic
+            sage: m.eigenvalues()                                                       # needs scipy sage.symbolic
             [-0.624810533... + 1.30024259...*I, 0.624810533... - 0.30024259...*I]
 
         The adjacency matrix of a graph will be symmetric, and the
@@ -1185,9 +1185,9 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
             ....:             [-2*I + 1,  6*I + 6,  5*I + 5,  -I - 4],
             ....:             [ 5*I + 1,  6*I + 2,    I - 4, -I + 3]])
             sage: C = (A*A.conjugate_transpose()).change_ring(CDF)
-            sage: ev = C.eigenvalues(algorithm='hermitian'); ev
+            sage: ev = C.eigenvalues(algorithm='hermitian'); ev                         # needs scipy
             [2.68144025..., 49.5167998..., 274.086188..., 390.71557...]
-            sage: ev[0].parent()
+            sage: ev[0].parent()                                                        # needs scipy
             Real Double Field
 
         A tolerance can be given to aid in grouping eigenvalues that
@@ -3743,7 +3743,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
             [112.10484685050491 164.07380304920997]
 
             sage: A = matrix(CDF, 2, [1,2+I,3*I,4])                                     # needs sage.symbolic
-            sage: A.exp()  # tol 3e-14                                                  # needs sage.symbolic
+            sage: A.exp()  # tol 3e-14                                                  # needs scipy sage.symbolic
             [-19.614602953804923 + 12.51774384676257*I 3.7949636449582016 + 28.883799306580997*I]
             [-32.38358098092227 + 21.884235957898433*I  2.2696330040935084 + 44.90132482768484*I]
         """

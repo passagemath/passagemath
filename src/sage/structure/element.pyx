@@ -4471,7 +4471,7 @@ cdef class FieldElement(CommutativeRingElement):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field sage.symbolic
+            sage: # needs fpylll sage.rings.number_field sage.symbolic
             sage: K.<rt3> = QQ[sqrt(3)]
             sage: K(0).divides(rt3)
             False

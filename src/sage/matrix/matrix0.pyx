@@ -5818,7 +5818,7 @@ cdef class Matrix(sage.structure.element.Matrix):
 
             sage: M = MatrixSpace(CC, 2)(-1.10220440881763)
             sage: N = ~M
-            sage: (N*M).norm()
+            sage: (N*M).norm()                                                          # needs scipy
             0.9999999999999999
 
         Check that :issue:`28402` is fixed::

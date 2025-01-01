@@ -930,7 +930,7 @@ def krull_dimension(x):
         0
         sage: krull_dimension(ZZ)
         1
-        sage: krull_dimension(ZZ[sqrt(5)])                                              # needs sage.rings.number_field sage.symbolic
+        sage: krull_dimension(ZZ[sqrt(5)])                                              # needs fpylll sage.rings.number_field sage.symbolic
         1
         sage: U.<x,y,z> = PolynomialRing(ZZ, 3); U
         Multivariate Polynomial Ring in x, y, z over Integer Ring
@@ -1309,7 +1309,7 @@ def norm(x):
 
     The norm of matrices::
 
-        sage: # needs sage.modules sage.symbolic
+        sage: # needs scipy sage.modules sage.symbolic
         sage: z = 1 + 2*I
         sage: norm(matrix([[z]]))
         2.23606797749979

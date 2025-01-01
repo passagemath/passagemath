@@ -603,13 +603,13 @@ def small_roots(self, X=None, beta=1.0, epsilon=None, **kwds):
 
         sage: from sage.misc.verbose import set_verbose
         sage: set_verbose(2)
-        sage: d = f.small_roots(X=2^hidden-1, beta=0.5)[0]  # time random               # needs sage.symbolic
+        sage: d = f.small_roots(X=2^hidden-1, beta=0.5)[0]  # time random               # needs fpylll sage.symbolic
         verbose 2 (<module>) m = 4
         verbose 2 (<module>) t = 4
         verbose 2 (<module>) X = 1298074214633706907132624082305023
         verbose 1 (<module>) LLL of 8x8 matrix (algorithm fpLLL:wrapper)
         verbose 1 (<module>) LLL finished (time = 0.006998)
-        sage: q == qbar - d                                                             # needs sage.symbolic
+        sage: q == qbar - d                                                             # needs fpylll sage.symbolic
         True
 
     REFERENCES:

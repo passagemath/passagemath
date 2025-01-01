@@ -3564,7 +3564,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         This is the example from the pari page on ``idealchinese``::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: K.<sqrt2> = NumberField(sqrt(2).minpoly())
             sage: ideals = [K.ideal(4), K.ideal(3)]
             sage: residues = [sqrt2, 1]
@@ -3575,7 +3575,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         The result may be non-integral if the results are non-integral::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: K.<sqrt2> = NumberField(sqrt(2).minpoly())
             sage: ideals = [K.ideal(4), K.ideal(21)]
             sage: residues = [1/sqrt2, 1]
@@ -7772,17 +7772,17 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
             sage: x = polygen(QQ, 'x')
             sage: K.<a> = NumberField(x^2 + 1)
-            sage: K.valuation(2)                                                        # needs sage.rings.padics
+            sage: K.valuation(2)                                                        # needs sage.geometry.polyhedron sage.rings.padics
             2-adic valuation
 
         It can also be unramified in ``R``::
 
-            sage: K.valuation(3)                                                        # needs sage.rings.padics
+            sage: K.valuation(3)                                                        # needs sage.geometry.polyhedron sage.rings.padics
             3-adic valuation
 
         A ``prime`` that factors into pairwise distinct factors, results in an error::
 
-            sage: K.valuation(5)                                                        # needs sage.rings.padics
+            sage: K.valuation(5)                                                        # needs sage.geometry.polyhedron sage.rings.padics
             Traceback (most recent call last):
             ...
             ValueError: The valuation Gauss valuation induced by 5-adic valuation does not

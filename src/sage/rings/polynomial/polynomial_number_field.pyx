@@ -46,7 +46,7 @@ Polynomials are aware of embeddings of the underlying field::
 
 We can also construct polynomials over relative number fields::
 
-    sage: # needs sage.symbolic
+    sage: # needs fpylll sage.symbolic
     sage: N.<i, s2> = QQ[I, sqrt(2)]
     sage: K.<x> = N[]
     sage: f = x - s2
@@ -270,7 +270,7 @@ class Polynomial_relative_number_field_dense(Polynomial_generic_dense_field):
 
         EXAMPLES::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: N = QQ[sqrt(2), sqrt(3)]
             sage: s2, s3 = N.gens()
             sage: x = polygen(N)

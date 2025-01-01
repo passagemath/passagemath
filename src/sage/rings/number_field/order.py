@@ -1096,7 +1096,7 @@ class Order(Parent, sage.rings.abc.Order):
 
         EXAMPLES::
 
-            sage: ZZ[2^(1/3)].class_number()                                            # needs sage.symbolic
+            sage: ZZ[2^(1/3)].class_number()                                            # needs fpylll sage.symbolic
             1
             sage: QQ[sqrt(-23)].maximal_order().class_number()                          # needs sage.symbolic
             3
@@ -1426,7 +1426,7 @@ class Order(Parent, sage.rings.abc.Order):
         The valuation can also be selected by giving a valuation on the base
         ring that extends uniquely::
 
-            sage: CyclotomicField(5).ring_of_integers().valuation(ZZ.valuation(5))
+            sage: CyclotomicField(5).ring_of_integers().valuation(ZZ.valuation(5))      # needs sage.geometry.polyhedron
             5-adic valuation
 
         When the extension is not unique, this does not work::

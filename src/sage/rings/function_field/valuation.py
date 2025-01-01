@@ -89,8 +89,8 @@ Run test suite for extensions over the infinite place::
     sage: v = K.valuation(1/x)
     sage: R.<y> = K[]
     sage: L.<y> = K.extension(y^2 - 1/(x^2 + 1))                                        # needs sage.rings.function_field
-    sage: w = v.extensions(L)                                                           # needs sage.rings.function_field
-    sage: TestSuite(w).run()                    # long time                             # needs sage.rings.function_field
+    sage: w = v.extensions(L)                                                           # needs sage.geometry.polyhedron sage.rings.function_field
+    sage: TestSuite(w).run()                    # long time                             # needs sage.geometry.polyhedron sage.rings.function_field
 
 Run test suite for a valuation with `v(1/x) > 0` which does not come from a
 classical valuation of the infinite place::

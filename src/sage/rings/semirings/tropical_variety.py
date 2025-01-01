@@ -1115,7 +1115,7 @@ class TropicalCurve(TropicalVariety):
         Tropical curve of 0*x + 0*y + 0
         sage: tv1.components()
         [[(t1, t1), [t1 >= 0], 1], [(0, t1), [t1 <= 0], 1], [(t1, 0), [t1 <= 0], 1]]
-        sage: tv1.plot()
+        sage: tv1.plot()                                                                # needs sage.plot
         Graphics object consisting of 3 graphics primitives
 
     .. PLOT::
@@ -1135,7 +1135,7 @@ class TropicalCurve(TropicalVariety):
         [[(1/2*t1 + 5/4, t1), [(-1/3) <= t1], 1],
          [(13/12, t1), [t1 <= (-1/3)], 2],
          [(t1, -1/3), [t1 <= (13/12)], 1]]
-        sage: tv2.plot()
+        sage: tv2.plot()                                                                # needs sage.plot
         Graphics object consisting of 4 graphics primitives
 
     .. PLOT::
@@ -1154,7 +1154,7 @@ class TropicalCurve(TropicalVariety):
         sage: p3 = p1 * p2; p3
         (-2)*x^3 + (-2)*x^2*y + (-1)*x^2 + 1/2*x*y + 1/2*y^2 + 1/6*x + 1/2*y + 1/6
         sage: tv3 = p3.tropical_variety()
-        sage: tv3.plot()
+        sage: tv3.plot()                                                                # needs sage.plot
         Graphics object consisting of 11 graphics primitives
 
     .. PLOT::
