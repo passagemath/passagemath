@@ -100,7 +100,7 @@
     },
     "sage.arith.misc": {
         "failed": true,
-        "ntests": 1123
+        "ntests": 1124
     },
     "sage.arith.numerical_approx": {
         "ntests": 4
@@ -1177,6 +1177,9 @@
     "sage.data_structures.mutable_poset": {
         "ntests": 441
     },
+    "sage.data_structures.pairing_heap": {
+        "ntests": 284
+    },
     "sage.databases.conway": {
         "ntests": 42
     },
@@ -1580,11 +1583,9 @@
         "ntests": 50
     },
     "sage.groups.misc_gps.argument_groups": {
-        "failed": true,
-        "ntests": 329
+        "ntests": 295
     },
     "sage.groups.misc_gps.imaginary_groups": {
-        "failed": true,
         "ntests": 74
     },
     "sage.groups.old": {
@@ -1806,7 +1807,7 @@
     },
     "sage.libs.pari.tests": {
         "failed": true,
-        "ntests": 779
+        "ntests": 777
     },
     "sage.libs.singular.function": {
         "ntests": 284
@@ -2140,7 +2141,6 @@
         "ntests": 32
     },
     "sage.misc.functional": {
-        "failed": true,
         "ntests": 317
     },
     "sage.misc.gperftools": {
@@ -2698,6 +2698,9 @@
     "sage.rings.algebraic_closure_finite_field": {
         "ntests": 213
     },
+    "sage.rings.asymptotic.misc": {
+        "ntests": 138
+    },
     "sage.rings.bernmm": {
         "ntests": 25
     },
@@ -2706,6 +2709,9 @@
     },
     "sage.rings.big_oh": {
         "ntests": 27
+    },
+    "sage.rings.cfinite_sequence": {
+        "ntests": 168
     },
     "sage.rings.complex_arb": {
         "ntests": 648
@@ -2726,8 +2732,7 @@
         "ntests": 406
     },
     "sage.rings.complex_mpfr": {
-        "failed": true,
-        "ntests": 523
+        "ntests": 514
     },
     "sage.rings.continued_fraction": {
         "ntests": 355
@@ -3223,6 +3228,9 @@
     "sage.rings.polynomial.infinite_polynomial_ring": {
         "ntests": 279
     },
+    "sage.rings.polynomial.integer_valued_polynomials": {
+        "ntests": 231
+    },
     "sage.rings.polynomial.laurent_polynomial": {
         "ntests": 459
     },
@@ -3344,6 +3352,9 @@
     },
     "sage.rings.polynomial.polynomial_zz_pex": {
         "ntests": 155
+    },
+    "sage.rings.polynomial.q_integer_valued_polynomials": {
+        "ntests": 207
     },
     "sage.rings.polynomial.real_roots": {
         "ntests": 417
@@ -3804,6 +3815,9 @@
     },
     "sage.structure.unique_representation": {
         "ntests": 237
+    },
+    "sage.symbolic.expression": {
+        "ntests": 56
     },
     "sage.symbolic.function": {
         "failed": true,

@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-singular'],
-           required_modules=('Singular',
+           required_modules=('Singular', 'factory',
                              # from sagemath-linbox
                              'fflas-ffpack', 'givaro', 'gsl', 'linbox', 'cblas',
                              'm4ri', 'gdlib', 'libpng', 'zlib'),
