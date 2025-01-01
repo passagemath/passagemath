@@ -289,6 +289,7 @@ def order_ideal_rowmotion(P):
 
     EXAMPLES::
 
+        sage: # needs sage.combinat sage.graphs sage.modules
         sage: P = RootSystem(["A", 6]).root_poset()
         sage: F = finite_dynamical_systems.order_ideal_rowmotion(P)
         sage: sorted(F.orbit_lengths())
@@ -299,6 +300,7 @@ def order_ideal_rowmotion(P):
         sage: F.is_homomesic(lambda I: sum((-1)**(P.rank(i)) for i in I))
         True
 
+        sage: # needs sage.combinat sage.graphs sage.modules
         sage: P = RootSystem(["A", 3]).root_poset()
         sage: F = finite_dynamical_systems.order_ideal_rowmotion(P)
         sage: F.verify_inverse_evolution()
