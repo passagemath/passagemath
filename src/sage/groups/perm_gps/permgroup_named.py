@@ -90,7 +90,6 @@ from pathlib import Path
 
 from sage.arith.misc import factor, valuation
 from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
-from sage.groups.abelian_gps.abelian_group import AbelianGroup
 from sage.groups.perm_gps.permgroup import PermutationGroup_generic
 from sage.groups.perm_gps.permgroup_element import SymmetricGroupElement
 from sage.libs.gap.libgap import libgap
@@ -108,6 +107,7 @@ from sage.structure.parent import Parent
 from sage.structure.richcmp import richcmp
 from sage.structure.unique_representation import CachedRepresentation
 
+lazy_import('sage.groups.abelian_gps.abelian_group', 'AbelianGroup')
 lazy_import('sage.groups.cactus_group', 'CactusGroup')
 
 
