@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-gap
-# sage.doctest: needs sage.libs.gap sage.modules
+# sage.doctest: needs sage.combinat sage.libs.gap sage.modules
 r"""
 Polynomial virtual weighted multisort species
 
