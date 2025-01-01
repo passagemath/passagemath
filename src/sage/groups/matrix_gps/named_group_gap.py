@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-gap
+# sage.doctest: needs sage.modules
 """
 Base for Classical Matrix Groups with GAP
 """
