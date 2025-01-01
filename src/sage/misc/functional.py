@@ -357,8 +357,8 @@ def gen(x):
         x
         sage: gen(GF(7))
         1
-        sage: A = AbelianGroup(1, [23])                                                 # needs sage.groups
-        sage: gen(A)                                                                    # needs sage.groups
+        sage: A = AbelianGroup(1, [23])                                                 # needs sage.modules
+        sage: gen(A)                                                                    # needs sage.modules
         f
     """
     return x.gen()
@@ -376,8 +376,8 @@ def gens(x):
         sage: gens(R)                                                                   # needs sage.symbolic
         (x, y)
 
-        sage: A = AbelianGroup(5, [5,5,7,8,9])                                          # needs sage.groups
-        sage: gens(A)                                                                   # needs sage.groups
+        sage: A = AbelianGroup(5, [5,5,7,8,9])                                          # needs sage.modules
+        sage: gens(A)                                                                   # needs sage.modules
         (f0, f1, f2, f3, f4)
     """
     return x.gens()
@@ -1223,8 +1223,8 @@ def ngens(x):
         Multivariate Polynomial Ring in x, y over Symbolic Ring
         sage: ngens(R)                                                                  # needs sage.symbolic
         2
-        sage: A = AbelianGroup(5, [5,5,7,8,9])                                          # needs sage.groups
-        sage: ngens(A)                                                                  # needs sage.groups
+        sage: A = AbelianGroup(5, [5,5,7,8,9])                                          # needs sage.modules
+        sage: ngens(A)                                                                  # needs sage.modules
         5
         sage: ngens(ZZ)
         1
