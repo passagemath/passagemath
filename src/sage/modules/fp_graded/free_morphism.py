@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Homomorphisms of finitely generated free graded left modules
 

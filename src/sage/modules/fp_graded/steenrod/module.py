@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Finitely presented graded modules over the Steenrod algebra
 

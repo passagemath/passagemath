@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Homomorphisms of finitely presented modules over the Steenrod algebra
 

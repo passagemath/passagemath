@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Elements of finitely generated free graded left modules
 
