@@ -891,7 +891,7 @@ class CartanMatrix(Base, CartanType_abstract,
 
         EXAMPLES::
 
-            sage: # needs sage.graphs
+            sage: # needs sage.graphs sage.rings.number_field
             sage: M = CartanMatrix([[2,-3],[-3,2]])
             sage: M.is_lorentzian()
             True

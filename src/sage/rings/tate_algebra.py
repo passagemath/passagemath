@@ -438,6 +438,7 @@ class TateTermMonoid(Monoid_class, UniqueRepresentation):
 
         ::
 
+            sage: # needs sage.rings.padics
             sage: S.<a> = Zq(4)
             sage: B.<x,y> = TateAlgebra(S)
             sage: U = B.monoid_of_terms()

@@ -417,7 +417,7 @@ def random_matrix(ring, nrows, ncols=None, algorithm='randomize', implementation
         sage: A = random_matrix(QQ, 2, 8, num_bound=20, den_bound=4)
         sage: A.dimensions()
         (2, 8)
-        sage: type(A)
+        sage: type(A)                                                                   # needs sage.libs.flint
         <class 'sage.matrix.matrix_rational_dense.Matrix_rational_dense'>
         sage: all(a.numerator() in range(-20, 21) and
         ....:     a.denominator() in range(1, 5)

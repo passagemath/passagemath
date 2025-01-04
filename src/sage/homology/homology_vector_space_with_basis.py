@@ -1346,6 +1346,7 @@ class CohomologyRing_mod2(CohomologyRing):
             sage: x1 * x2
             h^{2,0}
 
+            sage: # needs sage.combinat
             sage: H.steenrod_module_map(1, 2)
             [1 0]
             [1 0]
@@ -1445,7 +1446,7 @@ def is_GF2(R):
         sage: from sage.homology.homology_vector_space_with_basis import is_GF2
         sage: is_GF2(GF(2))
         True
-        sage: is_GF2(GF(2, impl='ntl'))
+        sage: is_GF2(GF(2, impl='ntl'))                                                 # needs sage.libs.ntl
         True
         sage: is_GF2(GF(3))
         False

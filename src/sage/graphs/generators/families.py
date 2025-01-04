@@ -3919,9 +3919,9 @@ def MathonPseudocyclicStronglyRegularGraph(t, G=None, L=None):
     Using default ``G`` and ``L``. ::
 
         sage: from sage.graphs.generators.families import MathonPseudocyclicStronglyRegularGraph
-        sage: G = MathonPseudocyclicStronglyRegularGraph(1); G                          # needs sage.modules sage.rings.finite_rings
+        sage: G = MathonPseudocyclicStronglyRegularGraph(1); G                          # needs database_graphs sage.modules sage.rings.finite_rings
         Mathon's PC SRG on 45 vertices: Graph on 45 vertices
-        sage: G.is_strongly_regular(parameters=True)                                    # needs sage.modules sage.rings.finite_rings
+        sage: G.is_strongly_regular(parameters=True)                                    # needs database_graphs sage.modules sage.rings.finite_rings
         (45, 22, 10, 11)
 
     Supplying ``G`` and ``L`` (constructed from the automorphism group

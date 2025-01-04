@@ -8356,7 +8356,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
-            sage: # needs sage.graphs
+            sage: # needs sage.graphs sage.groups
             sage: M = matroids.catalog.Fano()
             sage: G = M.automorphism_group()
             sage: G.is_transitive()

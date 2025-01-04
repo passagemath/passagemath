@@ -862,7 +862,7 @@
         "ntests": 32
     },
     "sage.combinat.tamari_lattices": {
-        "ntests": 1
+        "ntests": 2
     },
     "sage.combinat.tools": {
         "ntests": 2
@@ -1429,7 +1429,7 @@
     },
     "sage.graphs.strongly_regular_db": {
         "failed": true,
-        "ntests": 244
+        "ntests": 246
     },
     "sage.graphs.traversals": {
         "ntests": 222
@@ -2137,7 +2137,7 @@
     },
     "sage.rings.polynomial.polynomial_element": {
         "failed": true,
-        "ntests": 1823
+        "ntests": 1830
     },
     "sage.rings.polynomial.polynomial_element_generic": {
         "ntests": 194
@@ -2247,7 +2247,7 @@
         "ntests": 2
     },
     "sage.sandpiles.sandpile": {
-        "ntests": 89
+        "ntests": 90
     },
     "sage.schemes.affine.affine_homset": {
         "ntests": 52

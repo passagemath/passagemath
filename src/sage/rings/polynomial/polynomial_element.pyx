@@ -4591,11 +4591,11 @@ cdef class Polynomial(CommutativePolynomial):
             x^2 + 3.0000000000000000000000000000
             sage: factor(x^2 + 1)
             (x - I) * (x + I)
-            sage: f = R(I) * (x^2 + 1) ; f
+            sage: f = R(I) * (x^2 + 1) ; f                                              # needs sage.symbolic
             I*x^2 + I
-            sage: F = factor(f); F
+            sage: F = factor(f); F                                                      # needs sage.symbolic
             (1.0000000000000000000000000000*I) * (x - I) * (x + I)
-            sage: expand(F)
+            sage: expand(F)                                                             # needs sage.symbolic
             I*x^2 + I
 
         Over a number field::
@@ -9219,8 +9219,8 @@ cdef class Polynomial(CommutativePolynomial):
             sage: pol2.number_of_roots_in_interval()
             3
             sage: R.<x> = PolynomialRing(CC)
-            sage: pol = (x - 1) * (x - CC(I))
-            sage: pol.number_of_roots_in_interval(0, 2)
+            sage: pol = (x - 1) * (x - CC(I))                                           # needs sage.symbolic
+            sage: pol.number_of_roots_in_interval(0, 2)                                 # needs sage.symbolic
             1
 
         TESTS::
@@ -9272,8 +9272,8 @@ cdef class Polynomial(CommutativePolynomial):
             sage: pol2.number_of_real_roots()
             3
             sage: R.<x> = PolynomialRing(CC)
-            sage: pol = (x - 1) * (x - CC(I))
-            sage: pol.number_of_real_roots()
+            sage: pol = (x - 1) * (x - CC(I))                                           # needs sage.symbolic
+            sage: pol.number_of_real_roots()                                            # needs sage.symbolic
             1
         """
         return self.number_of_roots_in_interval()

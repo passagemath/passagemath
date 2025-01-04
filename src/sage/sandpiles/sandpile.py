@@ -5330,7 +5330,7 @@ class SandpileDivisor(dict):
 
             sage: S = sandpiles.Cycle(6)
             sage: D = SandpileDivisor(S, [0,0,0,0,0,4])         # optional - 4ti2
-            sage: D._set_r_of_D()                               # optional - 4ti2
+            sage: D._set_r_of_D()                               # optional - 4ti2, needs sage.geometry.polyhedron
         """
         eff = self.effective_div()
         n = self._sandpile.num_verts()

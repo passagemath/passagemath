@@ -42,6 +42,9 @@
     "sage.algebras.steenrod.steenrod_algebra_misc": {
         "ntests": 100
     },
+    "sage.algebras.steenrod.steenrod_algebra_mult": {
+        "ntests": 1
+    },
     "sage.algebras.weyl_algebra": {
         "ntests": 4
     },
@@ -223,7 +226,6 @@
         "ntests": 2
     },
     "sage.categories.coxeter_groups": {
-        "failed": true,
         "ntests": 391
     },
     "sage.categories.crystals": {
@@ -683,7 +685,7 @@
     },
     "sage.categories.simplicial_sets": {
         "failed": true,
-        "ntests": 125
+        "ntests": 120
     },
     "sage.categories.subobjects": {
         "ntests": 2
@@ -806,8 +808,7 @@
         "ntests": 68
     },
     "sage.combinat.cluster_algebra_quiver.cluster_seed": {
-        "failed": true,
-        "ntests": 674
+        "ntests": 5
     },
     "sage.combinat.cluster_algebra_quiver.interact": {
         "ntests": 2
@@ -984,7 +985,7 @@
     },
     "sage.combinat.posets.posets": {
         "failed": true,
-        "ntests": 1401
+        "ntests": 1374
     },
     "sage.combinat.q_analogues": {
         "failed": true,
@@ -1004,7 +1005,7 @@
     },
     "sage.combinat.root_system.cartan_matrix": {
         "failed": true,
-        "ntests": 176
+        "ntests": 172
     },
     "sage.combinat.root_system.cartan_type": {
         "failed": true,
@@ -1143,7 +1144,6 @@
         "ntests": 32
     },
     "sage.combinat.tamari_lattices": {
-        "failed": true,
         "ntests": 36
     },
     "sage.combinat.tools": {
@@ -1773,7 +1773,7 @@
     },
     "sage.graphs.strongly_regular_db": {
         "failed": true,
-        "ntests": 247
+        "ntests": 249
     },
     "sage.graphs.traversals": {
         "ntests": 222
@@ -1928,8 +1928,7 @@
         "ntests": 100
     },
     "sage.homology.homology_vector_space_with_basis": {
-        "failed": true,
-        "ntests": 213
+        "ntests": 209
     },
     "sage.homology.koszul_complex": {
         "ntests": 23
@@ -1959,7 +1958,6 @@
         "ntests": 13
     },
     "sage.knots.free_knotinfo_monoid": {
-        "failed": true,
         "ntests": 58
     },
     "sage.knots.gauss_code": {
@@ -2099,8 +2097,7 @@
         "ntests": 6
     },
     "sage.matroids.database_matroids": {
-        "failed": true,
-        "ntests": 467
+        "ntests": 468
     },
     "sage.matroids.dual_matroid": {
         "ntests": 92
@@ -2113,15 +2110,14 @@
         "ntests": 107
     },
     "sage.matroids.graphic_matroid": {
-        "failed": true,
-        "ntests": 362
+        "ntests": 339
     },
     "sage.matroids.linear_matroid": {
         "ntests": 632
     },
     "sage.matroids.matroid": {
         "failed": true,
-        "ntests": 986
+        "ntests": 976
     },
     "sage.matroids.matroids_plot_helpers": {
         "ntests": 22
@@ -2428,8 +2424,11 @@
     "sage.modules.filtered_vector_space": {
         "ntests": 169
     },
+    "sage.modules.fp_graded.element": {
+        "ntests": 1
+    },
     "sage.modules.fp_graded.free_element": {
-        "ntests": 15
+        "ntests": 16
     },
     "sage.modules.fp_graded.free_homspace": {
         "ntests": 8
@@ -2467,7 +2466,7 @@
     },
     "sage.modules.free_quadratic_module_integer_symmetric": {
         "failed": true,
-        "ntests": 209
+        "ntests": 201
     },
     "sage.modules.matrix_morphism": {
         "failed": true,
@@ -2584,6 +2583,9 @@
     "sage.quadratic_forms.binary_qf": {
         "failed": true,
         "ntests": 299
+    },
+    "sage.quadratic_forms.bqf_class_group": {
+        "ntests": 1
     },
     "sage.quadratic_forms.constructions": {
         "ntests": 5
@@ -2775,7 +2777,7 @@
         "ntests": 397
     },
     "sage.rings.complex_mpfr": {
-        "ntests": 488
+        "ntests": 490
     },
     "sage.rings.continued_fraction": {
         "failed": true,
@@ -3047,7 +3049,7 @@
     },
     "sage.rings.polynomial.polynomial_element": {
         "failed": true,
-        "ntests": 1882
+        "ntests": 1889
     },
     "sage.rings.polynomial.polynomial_element_generic": {
         "ntests": 198
@@ -3348,8 +3350,7 @@
         "ntests": 1
     },
     "sage.stats.distributions.discrete_gaussian_lattice": {
-        "failed": true,
-        "ntests": 114
+        "ntests": 115
     },
     "sage.stats.distributions.discrete_gaussian_polynomial": {
         "ntests": 24

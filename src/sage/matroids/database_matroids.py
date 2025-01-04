@@ -74,7 +74,7 @@ def U24(groundset='abcd'):
         sage: N = matroids.Uniform(2, 4)
         sage: M.is_isomorphic(N)
         True
-        sage: M.automorphism_group().structure_description()                            # needs sage.graphs
+        sage: M.automorphism_group().structure_description()                            # needs sage.graphs sage.groups
         'S4'
 
     `U_{2,4}` is isomorphic to `\mathcal{W}^2`::
@@ -200,7 +200,7 @@ def K4(groundset='abcdef'):
 
     It has a transitive automorphism group::
 
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     REFERENCES:
@@ -233,7 +233,7 @@ def Whirl3(groundset='abcdef'):
         False
         sage: W.is_isomorphic(W.dual())
         True
-        sage: W.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: W.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     For all elements `e`, neither `\mathcal{W}_3 \setminus \{e\}` nor `\mathcal{W}_3 / \{e\}`
@@ -281,7 +281,7 @@ def Q6(groundset='abcdef'):
          {'e', 'f'}]
         sage: M.nonspanning_circuits() == M.noncospanning_cocircuits()
         False
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -316,7 +316,7 @@ def P6(groundset=None):
         False
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -346,7 +346,7 @@ def U36(groundset='abcdef'):
         True
         sage: U36.equals(U36.dual())
         True
-        sage: U36.automorphism_group().structure_description()                          # needs sage.graphs
+        sage: U36.automorphism_group().structure_description()                          # needs sage.graphs sage.groups
         'S6'
 
     REFERENCES:
@@ -384,7 +384,7 @@ def R6(groundset='abcdef'):
         True
         sage: M.is_3connected()                                                         # needs sage.graphs
         False
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     REFERENCES:
@@ -412,9 +412,9 @@ def Fano(groundset='abcdefg'):
         sage: from sage.matroids.advanced import setprint
         sage: M = matroids.catalog.Fano(); M
         Fano: Binary matroid of rank 3 on 7 elements, type (3, 0)
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
-        sage: M.automorphism_group().structure_description()                            # needs sage.graphs
+        sage: M.automorphism_group().structure_description()                            # needs sage.graphs sage.groups
         'PSL(3,2)'
 
     Every single-element deletion of `F_7` is isomorphic to `M(K_4)`::
@@ -462,9 +462,9 @@ def FanoDual(groundset='abcdefg'):
         F7*: Binary matroid of rank 4 on 7 elements, type (3, 7)
         sage: F7.is_isomorphic(F7D.dual())
         True
-        sage: F7D.automorphism_group().is_transitive()                                  # needs sage.graphs
+        sage: F7D.automorphism_group().is_transitive()                                  # needs sage.graphs sage.groups
         True
-        sage: F7D.automorphism_group().structure_description()                          # needs sage.graphs
+        sage: F7D.automorphism_group().structure_description()                          # needs sage.graphs sage.groups
         'PSL(3,2)'
 
     Every single-element deletion of `F_7^*` is isomorphic to `M(K_{2, 3})`::
@@ -701,7 +701,7 @@ def AG32prime(groundset=None):
          {'d', 'e', 'f', 'g'}]
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     Self-dual but not identically self-dual::
@@ -759,7 +759,7 @@ def R8(groundset='abcdefgh'):
         True
         sage: M.has_minor(matroids.catalog.Fano())
         False
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     Every single-element deletion is isomorphic to (F_7^-)^* and every
@@ -820,7 +820,7 @@ def F8(groundset=None):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -870,7 +870,7 @@ def Q8(groundset=None):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -910,7 +910,7 @@ def L8(groundset=None):
         True
         sage: M.is_valid()  # long time
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     Every single-element contraction is isomorphic to the free extension of
@@ -967,7 +967,7 @@ def S8(groundset='abcdefgh'):
         [...True...]
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1013,7 +1013,7 @@ def Vamos(groundset=None):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1046,7 +1046,7 @@ def T8(groundset='abcdefgh'):
         False
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1087,7 +1087,7 @@ def J(groundset='abcdefgh'):
         False
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1192,7 +1192,7 @@ def Wheel4(groundset='abcdefgh'):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())                      # needs sage.libs.pari
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1219,7 +1219,7 @@ def Whirl4(groundset='abcdefgh'):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())                      # needs sage.libs.pari
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1249,7 +1249,7 @@ def K33dual(groundset='abcdefghi'):
         False
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     REFERENCES:
@@ -1278,9 +1278,9 @@ def K33(groundset='abcdefghi'):
         M(K3, 3): Regular matroid of rank 5 on 9 elements with 81 bases
         sage: M.is_valid()
         True
-        sage: G1 = M.automorphism_group()
-        sage: G2 = matroids.catalog.K33dual().automorphism_group()
-        sage: G1.is_isomorphic(G2)
+        sage: G1 = M.automorphism_group()                                               # needs sage.groups
+        sage: G2 = matroids.catalog.K33dual().automorphism_group()                      # needs sage.groups
+        sage: G1.is_isomorphic(G2)                                                      # needs sage.groups
         True
 
     REFERENCES:
@@ -1314,7 +1314,7 @@ def AG23(groundset='abcdefghi'):
         sage: e = random.choice(list(M.groundset()))
         sage: M.delete(e).is_isomorphic(matroids.catalog.AG23minus())
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     REFERENCES:
@@ -1342,7 +1342,7 @@ def TernaryDowling3(groundset='abcdefghi'):
         72
         sage: M.fundamental_cycle('abc', 'd')
         {'a': 2, 'b': 1, 'd': 1}
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1380,7 +1380,7 @@ def R9(groundset=None):
         15
         sage: M.is_simple() and M.is_ternary()                                          # needs sage.graphs
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1416,7 +1416,7 @@ def Pappus(groundset=None):
         True
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     REFERENCES:
@@ -1450,7 +1450,7 @@ def NonPappus(groundset=None):
         False
         sage: M.is_valid() and M.is_paving()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1477,7 +1477,7 @@ def K5(groundset='abcdefghij'):
         M(K5): Graphic matroid of rank 4 on 10 elements
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.groups
         True
 
     REFERENCES:
@@ -1502,9 +1502,9 @@ def K5dual(groundset='abcdefghij'):
         M*(K5): Dual of 'Graphic matroid of rank 4 on 10 elements'
         sage: M.is_3connected()
         True
-        sage: G1 = M.automorphism_group()
-        sage: G2 = matroids.catalog.K5().automorphism_group()
-        sage: G1.is_isomorphic(G2)
+        sage: G1 = M.automorphism_group()                                               # needs sage.groups
+        sage: G2 = matroids.catalog.K5().automorphism_group()                           # needs sage.groups
+        sage: G1.is_isomorphic(G2)                                                      # needs sage.groups
         True
 
     REFERENCES:
@@ -1537,7 +1537,7 @@ def R10(groundset='abcdefghij'):
         True
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     Every single-element deletion is isomorphic to `M(K_{3, 3})`, and every
@@ -1591,7 +1591,7 @@ def NonDesargues(groundset=None):
         NonDesargues: Matroid of rank 3 on 10 elements with 9 nonspanning circuits
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1621,7 +1621,7 @@ def R12(groundset='abcdefghijkl'):
         True
         sage: M.is_valid()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1731,7 +1731,7 @@ def T12(groundset='abcdefghijkl'):
         True
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     REFERENCES:
@@ -1767,7 +1767,7 @@ def PG23(groundset=None):
         PG(2, 3): Ternary matroid of rank 3 on 13 elements, type 3+
         sage: M.is_3connected()
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
 
     REFERENCES:
@@ -1819,7 +1819,7 @@ def Wheel(r, field=None, ring=None, groundset=None):
         sage: M = matroids.Wheel(r)
         sage: M.is_isomorphic(M.dual()) and not M.equals(M.dual())                      # needs sage.graphs
         True
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:
@@ -1895,7 +1895,7 @@ def Whirl(r, groundset=None):
 
         sage: r = random.choice(range(3, 8))
         sage: M = matroids.Whirl(r)
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     .. TODO::
@@ -2331,10 +2331,10 @@ def Theta(n, groundset=None):
 
         sage: n = random.choice(range(4, 8))
         sage: M = matroids.Theta(2 + n % 2)
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         True
         sage: M = matroids.Theta(n)
-        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs
+        sage: M.automorphism_group().is_transitive()                                    # needs sage.graphs sage.groups
         False
 
     REFERENCES:

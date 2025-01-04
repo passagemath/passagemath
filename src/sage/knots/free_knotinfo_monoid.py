@@ -376,7 +376,7 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             sage: from sage.knots.free_knotinfo_monoid import FreeKnotInfoMonoid
             sage: FKIM =  FreeKnotInfoMonoid()
             sage: K = KnotInfo.K5_1.link().mirror_image()
-            sage: FKIM._from_knot(K)                                                    # needs sage.modules
+            sage: FKIM._from_knot(K)                                                    # needs sage.groups sage.modules
             (KnotInfo['K5_1m'],)
         """
         hp = knot.homfly_polynomial(normalization='vz')

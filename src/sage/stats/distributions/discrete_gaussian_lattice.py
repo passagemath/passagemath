@@ -240,7 +240,7 @@ class DiscreteGaussianDistributionLatticeSampler(SageObject):
             sage: D._normalisation_factor_zz()
             6.8249...
             sage: D = DGL(ZZ^8, 1000)
-            sage: round(D._normalisation_factor_zz(prec=100))
+            sage: round(D._normalisation_factor_zz(prec=100))                           # needs sage.symbolic
             1558545456544038969634991553
             sage: M = Matrix(ZZ, [[1, 3, 0], [-2, 5, 1], [3, -4, 2]])
             sage: D = DGL(M, 1.7)
@@ -539,7 +539,7 @@ class DiscreteGaussianDistributionLatticeSampler(SageObject):
             [2 1 1]
             [1 2 1]
             [1 1 2]
-            sage: D().parent() is D.c().parent()
+            sage: D().parent() is D.c().parent()                                        # needs sage.symbolic
             True
         """
         precision = DiscreteGaussianDistributionLatticeSampler.compute_precision(precision, sigma)
