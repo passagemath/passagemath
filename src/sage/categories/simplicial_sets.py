@@ -683,7 +683,7 @@ class SimplicialSets(Category_singleton):
 
                 ::
 
-                    sage: # needs sage.graphs sage.modules
+                    sage: # needs sage.combinat sage.graphs sage.groups
                     sage: X = simplicial_sets.Torus()
                     sage: C = X.twisted_chain_complex()
                     sage: C.differential(1)
