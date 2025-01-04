@@ -658,6 +658,35 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         EXAMPLES::
 
             sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: K33 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 4, sparse=True),
+            ....:                            [[1, 1, 0, 0], [1, 1, 1, 0],
+            ....:                             [1, 0, 0,-1], [0, 1, 1, 1],
+            ....:                             [0, 0, 1, 1]]); K33
+            [ 1  1  0  0]
+            [ 1  1  1  0]
+            [ 1  0  0 -1]
+            [ 0  1  1  1]
+            [ 0  0  1  1]
+            sage: K33_dual = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 5, sparse=True),
+            ....:                            [[1, 1, 1, 0, 0], [1, 1, 0, 1, 0],
+            ....:                             [0, 1, 0, 1, 1], [0, 0,-1, 1, 1]]); K33_dual
+            [ 1  1  1  0  0]
+            [ 1  1  0  1  0]
+            [ 0  1  0  1  1]
+            [ 0  0 -1  1  1]
+            sage: M = Matrix_cmr_chr_sparse.two_sum(K33, K33_dual, 0, 0,
+            ....:                                   nonzero_block="bottom_left"); M
+            [ 1  1  1  0| 0  0  0  0]
+            [ 1  0  0 -1| 0  0  0  0]
+            [ 0  1  1  1| 0  0  0  0]
+            [ 0  0  1  1| 0  0  0  0]
+            [-----------+-----------]
+            [ 1  1  0  0| 1  1  0  0]
+            [ 1  1  0  0| 1  0  1  0]
+            [ 0  0  0  0| 1  0  1  1]
+            [ 0  0  0  0| 0 -1  1  1]
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 2, 3, sparse=True),
             ....:                            [[1, 2, 3], [4, 5, 6]]); M1
             [1 2 3]
@@ -750,6 +779,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         """
         cdef Matrix_cmr_chr_sparse sum, first, second
         cdef CMR_CHRMAT *sum_mat = NULL
+        cdef size_t* firstSpecialRow = NULL
+        cdef size_t* firstSpecialColumn = NULL
+        cdef size_t* secondSpecialRow = NULL
+        cdef size_t* secondSpecialColumn = NULL
+        cdef size_t column
+        cdef size_t row
+
         first = Matrix_cmr_chr_sparse._from_data(first_mat)
         second = Matrix_cmr_chr_sparse._from_data(second_mat)
         first_base_ring = first.parent().base_ring()
@@ -772,8 +808,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             column_subdivision = []
             row_subdivision.append(first._mat.numRows)
             column_subdivision.append(first._mat.numColumns - 1)
-            first_marker = CMRcolumnToElement(column)
-            second_marker = CMRrowToElement(row)
+            firstSpecialColumn = &column
+            secondSpecialRow = &row
         else:
             row = first_index
             column = second_index
@@ -785,14 +821,14 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             column_subdivision = []
             row_subdivision.append(first._mat.numRows - 1)
             column_subdivision.append(first._mat.numColumns)
-            first_marker = CMRrowToElement(row)
-            second_marker = CMRcolumnToElement(column)
+            firstSpecialRow = &row
+            secondSpecialColumn = &column
 
         cdef int8_t characteristic = first_base_ring.characteristic()
 
         sig_on()
         try:
-            CMR_CALL(CMRtwoSumCompose(cmr, first._mat, second._mat, first_marker, second_marker, characteristic, &sum_mat))
+            CMR_CALL(CMRtwoSumCompose(cmr, first._mat, second._mat, firstSpecialRow, firstSpecialColumn, secondSpecialRow, secondSpecialColumn, characteristic, &sum_mat))
         finally:
             sig_off()
 
@@ -875,16 +911,16 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  1  1  1  0  1]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
             ....:                            [[1,-1,-1, 1, 0, 0],
-            ....:                             [1, 0, 1, 1, 1,-1],
+            ....:                             [1, 1, 0, 1, 1,-1],
             ....:                             [0, 0, 0,-1, 0, 1],
             ....:                             [1, 0, 0, 0,-1, 0],
             ....:                             [0, 1, 1, 0, 0, 1]]); M2
             [ 1 -1 -1  1  0  0]
-            [ 1  0  1  1  1 -1]
+            [ 1  1  0  1  1 -1]
             [ 0  0  0 -1  0  1]
             [ 1  0  0  0 -1  0]
             [ 0  1  1  0  0  1]
-            sage: M1._three_sum_cmr(M2, 1, 2, 3, 1, 1, 2)
+            sage: M1._three_sum_cmr(M2, 1, 2, 3, 1, 1, 2) # long time ? memory fail
             [ 1  1  0  0  0  0  0  0]
             [ 0 -1  0 -1  1  1  1 -1]
             [ 0  0  1  0 -1 -1 -1  1]
@@ -893,11 +929,59 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  0  0 -1  0  1]
             [ 0  0  0  0  1  0 -1  0]
             [ 1  0 -1  1  0  0  0  1]
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[1, 1, 0, 0],
+            ....:                             [1, 0, 1, 1],
+            ....:                             [0, 1, 0,-1]]); M1
+            [ 1  1  0  0]
+            [ 1  0  1  1]
+            [ 0  1  0 -1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[-1, 0, 1, 0],
+            ....:                             [ 1, 1, 0, 1],
+            ....:                             [ 0, 0, 1, 1]]); M2
+            [-1  0  1  0]
+            [ 1  1  0  1]
+            [ 0  0  1  1]
+            sage: M1._three_sum_cmr(M2, 2, 2, 3, 0, 0, 1)
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[1, 1, 0, 0],
+            ....:                             [1, 0, 1, 1],
+            ....:                             [0, 1, 0, 1]]); M1
+            [1 1 0 0]
+            [1 0 1 1]
+            [0 1 0 1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[1, 0, 1, 0],
+            ....:                             [1, 1, 0, 1],
+            ....:                             [0, 0, 1, 1]]); M2
+            [1 0 1 0]
+            [1 1 0 1]
+            [0 0 1 1]
+            sage: M1._three_sum_cmr(M2, 2, 2, 3, 0, 0, 1)
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
         """
         cdef Matrix_cmr_chr_sparse sum, first, second
         cdef CMR_CHRMAT *sum_mat = NULL
         first = Matrix_cmr_chr_sparse._from_data(first_mat, immutable=False)
         second = Matrix_cmr_chr_sparse._from_data(second_mat, immutable=False)
+        cdef size_t* firstSpecialRows = NULL
+        cdef size_t* firstSpecialColumns = NULL
+        cdef size_t* secondSpecialRows = NULL
+        cdef size_t* secondSpecialColumns = NULL
+        cdef size_t row1 = <size_t>sig_malloc(sizeof(size_t))
+        cdef size_t column1_1 = <size_t>sig_malloc(sizeof(size_t))
+        cdef size_t column1_2 = <size_t>sig_malloc(sizeof(size_t))
+        cdef size_t row2 = <size_t>sig_malloc(sizeof(size_t))
+        cdef size_t column2_1 = <size_t>sig_malloc(sizeof(size_t))
+        cdef size_t column2_2 = <size_t>sig_malloc(sizeof(size_t))
 
         if three_sum_strategy not in ["distributed_ranks", "concentrated_rank"]:
             raise ValueError("Unknown three sum mode", three_sum_strategy)
@@ -921,12 +1005,14 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                 raise ValueError("Second marker 2 should be a column index of the second matrix")
             if column2_2 < 0 or column2_2 >= second._mat.numColumns:
                 raise ValueError("Second marker 3 should be a column index of the second matrix")
-            first_marker1 = CMRrowToElement(row1)
-            first_marker2 = CMRcolumnToElement(column1_1)
-            first_marker3 = CMRcolumnToElement(column1_2)
-            second_marker1 = CMRrowToElement(row2)
-            second_marker2 = CMRcolumnToElement(column2_1)
-            second_marker3 = CMRcolumnToElement(column2_2)
+            firstSpecialRows = &row1
+            firstSpecialColumns = <size_t *>sig_malloc(sizeof(size_t)*2)
+            firstSpecialColumns[0] = column1_1
+            firstSpecialColumns[1] = column1_2
+            secondSpecialRows = &row2
+            secondSpecialColumns = <size_t *>sig_malloc(sizeof(size_t)*2)
+            secondSpecialColumns[0] = column2_1
+            secondSpecialColumns[1] = column2_2
         else:
             raise NotImplementedError
             # row1 = first_index1
@@ -953,7 +1039,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         sig_on()
         try:
-            CMR_CALL(CMRthreeSumSeymourCompose(cmr, first._mat, second._mat, first_marker1, first_marker2, first_marker3, second_marker1, second_marker2, second_marker3, characteristic, &sum_mat))
+            CMR_CALL(CMRthreeSumSeymourCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
         finally:
             sig_off()
 
@@ -1064,7 +1150,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0 -1  0  1  0]
             [ 1  0  0 -1  0  0]
             [ 0  1  0  0  1  1]
-            sage: M = M1.three_sum_wide_wide(M2, 1, [2,-1], 1, [1, -1]); M
+            sage: M = M1.three_sum_wide_wide(M2, 1, [-1, 2], 1, [1, -1]); M
             [ 1  1  0  0  0  0  0  0]
             [ 0 -1  0 -1  1  1  1 -1]
             [ 0  0  1  0 -1 -1 -1  1]
@@ -1073,14 +1159,14 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  0  0 -1  0  1]
             [ 0  0  0  0  1  0 -1  0]
             [ 1  0 -1  1  0  0  0  1]
-            sage: N = M1.three_sum_wide_wide(M2, 1, [2,-1], 1, [1, -1], algorithm="direct")
+            sage: N = M1.three_sum_wide_wide(M2, 1, [-1, 2], 1, [1, -1], algorithm="direct")
             sage: M == N
             True
 
             sage: M1.three_sum_wide_wide(M2, 1, [2, 3], 1, [1, -1])
             Traceback (most recent call last):
             ...
-            RuntimeError: User input error
+            RuntimeError: Invalid matrix structure
             sage: M1.three_sum_wide_wide(M2, 1, [2, 3], 1, [1, -1], algorithm="direct", verify=False)
             [ 1  1  0  0  0  0  0  0]
             [ 0 -1 -1  1  1  1  1 -1]
@@ -1561,7 +1647,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0 -1  0  1  0]
             [ 1  0  0 -1  0  0]
             [ 0  1  0  0  1  1]
-            sage: M1.three_sum(M2, 1, [2,-1], 1, [1, -1])
+            sage: M1.three_sum(M2, 1, [-1, 2], 1, [1, -1])
             [ 1  1  0  0  0  0  0  0]
             [ 0 -1  0 -1  1  1  1 -1]
             [ 0  0  1  0 -1 -1 -1  1]

@@ -15,4 +15,6 @@ cdef CMR_CALL(CMR_ERROR _cmr_error):
         raise RuntimeError("Invalid input")
     if _cmr_error == CMR_ERROR_TIMEOUT:
         raise RuntimeError("Time limit exceeded")
+    if _cmr_error == CMR_ERROR_STRUCTURE:
+        raise RuntimeError("Invalid matrix structure")
     raise RuntimeError("Unknown error")
