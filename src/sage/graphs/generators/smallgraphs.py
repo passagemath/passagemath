@@ -1376,7 +1376,7 @@ def BrouwerHaemersGraph():
 
     Its has as eigenvalues `20,2` and `-7`::
 
-        sage: set(g.spectrum()) == {20,2,-7}                                            # needs sage.modules sage.rings.finite_rings
+        sage: set(g.spectrum()) == {20,2,-7}                                            # needs sage.modules sage.rings.finite_rings sage.rings.number_field
         True
     """
     from sage.rings.finite_rings.finite_field_constructor import FiniteField
@@ -5573,7 +5573,7 @@ def IoninKharaghani765Graph():
 
     TESTS::
 
-        sage: graphs.strongly_regular_graph(765, 192, 48, 48)                           # needs sage.modules sage.rings.finite_rings
+        sage: graphs.strongly_regular_graph(765, 192, 48, 48)                           # needs database_graphs sage.modules sage.rings.finite_rings
         Ionin-Kharaghani: Graph on 765 vertices
 
     .. TODO::
