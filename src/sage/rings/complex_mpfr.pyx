@@ -882,7 +882,7 @@ class ComplexField_class(sage.rings.abc.ComplexField):
             (x - 1.7320508075688772935274463415*I) * (x + 1.7320508075688772935274463415*I)
             sage: k._factor_univariate_polynomial(x^2 + 1)
             (x - I) * (x + I)
-            sage: k._factor_univariate_polynomial(k(I) * (x^2 + 1))
+            sage: k._factor_univariate_polynomial(k(I) * (x^2 + 1))                     # needs sage.symbolic
             (1.0000000000000000000000000000*I) * (x - I) * (x + I)
         """
         R = f.parent()
@@ -2112,7 +2112,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arccos()                                                    # needs sage.libs.pari
+            sage: (1+CC(I)).arccos()                                                    # needs sage.libs.pari sage.symbolic
             0.904556894302381 - 1.06127506190504*I
         """
         return self._parent(self.__pari__().acos())
@@ -2123,7 +2123,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arccosh()                                                   # needs sage.libs.pari
+            sage: (1+CC(I)).arccosh()                                                   # needs sage.libs.pari sage.symbolic
             1.06127506190504 + 0.904556894302381*I
         """
         return self._parent(self.__pari__().acosh())
@@ -2134,7 +2134,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arcsin()                                                    # needs sage.libs.pari
+            sage: (1+CC(I)).arcsin()                                                    # needs sage.libs.pari sage.symbolic
             0.666239432492515 + 1.06127506190504*I
         """
         return self._parent(self.__pari__().asin())
@@ -2145,7 +2145,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arcsinh()                                                   # needs sage.libs.pari
+            sage: (1+CC(I)).arcsinh()                                                   # needs sage.libs.pari sage.symbolic
             1.06127506190504 + 0.666239432492515*I
         """
         return self._parent(self.__pari__().asinh())
@@ -2156,7 +2156,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arctan()                                                    # needs sage.libs.pari
+            sage: (1+CC(I)).arctan()                                                    # needs sage.libs.pari sage.symbolic
             1.01722196789785 + 0.402359478108525*I
         """
         return self._parent(self.__pari__().atan())
@@ -2167,7 +2167,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arctanh()                                                   # needs sage.libs.pari
+            sage: (1+CC(I)).arctanh()                                                   # needs sage.libs.pari sage.symbolic
             0.402359478108525 + 1.01722196789785*I
         """
         return self._parent(self.__pari__().atanh())
@@ -2267,7 +2267,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
         EXAMPLES::
 
             sage: # needs sage.libs.pari
-            sage: (1+CC(I)).cot()
+            sage: (1+CC(I)).cot()                                                       # needs sage.symbolic
             0.217621561854403 - 0.868014142895925*I
             sage: i = ComplexField(200).0
             sage: (1+i).cot()
@@ -2908,7 +2908,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
         Check that :issue:`7099` is fixed::
 
             sage: C = ComplexField(400)
-            sage: C(2 + I).gamma_inc(C(3 + I))  # abs tol 1e-120                        # needs sage.libs.pari
+            sage: C(2 + I).gamma_inc(C(3 + I))  # abs tol 1e-120                        # needs sage.libs.pari sage.symbolic
             0.121515644664508695525971545977439666159749344176962379708992904126499444842886620664991650378432544392118359044438541515 + 0.101533909079826033296475736021224621546966200987295663190553587086145836461236284668967411665020429964946098113930918850*I
         """
         return self._parent(self.__pari__().incgam(t, precision=self.prec()))
