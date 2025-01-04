@@ -301,7 +301,7 @@ class BQFClassGroup(Parent, UniqueRepresentation):
         EXAMPLES::
 
             sage: Cl = BQFClassGroup(-4*777)
-            sage: Cl.order()
+            sage: Cl.order()                                                            # needs sage.rings.number_field
             16
             sage: G = Cl.abelian_group(); G
             Additive abelian group isomorphic to Z/4 + Z/2 + Z/2 embedded in Form Class Group of Discriminant -3108
@@ -637,6 +637,7 @@ class BQFClassGroup_element(AdditiveGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: cl = BinaryQF([11,21,31]).form_class()
             sage: cl.order()
             10

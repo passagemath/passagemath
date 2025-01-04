@@ -133,9 +133,9 @@ def zeta__exact(n):
 
         sage: zeta__exact(4)                                                            # needs sage.symbolic
         1/90*pi^4
-        sage: zeta__exact(-3)
+        sage: zeta__exact(-3)                                                           # needs sage.sage.libs.flint
         1/120
-        sage: zeta__exact(0)
+        sage: zeta__exact(0)                                                            # needs sage.sage.libs.flint
         -1/2
         sage: zeta__exact(5)
         Traceback (most recent call last):
@@ -217,7 +217,7 @@ def quadratic_L_function__exact(n, d):
 
         sage: quadratic_L_function__exact(1, -4)                                        # needs sage.libs.pari sage.symbolic
         1/4*pi
-        sage: quadratic_L_function__exact(-4, -4)                                       # needs sage.libs.pari
+        sage: quadratic_L_function__exact(-4, -4)                                       # needs sage.libs.flint sage.libs.pari
         5/2
         sage: quadratic_L_function__exact(2, 1)                                         # needs sage.libs.pari sage.symbolic
         1/6*pi^2
