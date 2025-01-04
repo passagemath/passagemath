@@ -288,9 +288,15 @@ class Chart(UniqueRepresentation, SageObject):
     """
 
     @staticmethod
-    def __classcall__(cls, domain, coordinates='',
-                      calc_method=None, names=None,
-                      coord_restrictions=None, **coordinate_options):
+    def __classcall__(
+        cls,
+        domain,
+        coordinates='',
+        calc_method=None,
+        names=None,
+        coord_restrictions=None,
+        **coordinate_options,
+    ):
         r"""
         Normalize init args and implement unique representation behavior.
 
@@ -308,8 +314,7 @@ class Chart(UniqueRepresentation, SageObject):
                 for x in names:
                     coordinates += x + ' '
                 coordinates = coordinates[:-1]
-            coordinates, parsed_options = cls._parse_coordinates(domain,
-                                                                 coordinates)
+            coordinates, parsed_options = cls._parse_coordinates(domain, coordinates)
             if not coordinate_options:
                 coordinate_options = parsed_options
 
@@ -319,16 +324,28 @@ class Chart(UniqueRepresentation, SageObject):
             return domain._charts_by_coord[coord_string]
         except KeyError:
             # Make coord_restrictions hashable
-            coord_restrictions = cls._normalize_coord_restrictions(coordinates,
-                                                                   coord_restrictions)
-            self = super().__classcall__(cls, domain, coordinates, calc_method,
-                                         coord_restrictions=coord_restrictions,
-                                         **coordinate_options)
+            coord_restrictions = cls._normalize_coord_restrictions(
+                coordinates, coord_restrictions
+            )
+            self = super().__classcall__(
+                cls,
+                domain,
+                coordinates,
+                calc_method,
+                coord_restrictions=coord_restrictions,
+                **coordinate_options,
+            )
             domain._charts_by_coord[coord_string] = self
             return self
 
-    def __init__(self, domain, coordinates, calc_method=None, periods=None,
-                 coord_restrictions=None):
+    def __init__(
+        self,
+        domain,
+        coordinates,
+        calc_method=None,
+        periods=None,
+        coord_restrictions=None,
+    ):
         r"""
         Construct a chart.
 
@@ -355,23 +372,29 @@ class Chart(UniqueRepresentation, SageObject):
             [Chart (U, (x, y)), Chart (V, (x, y))]
         """
         from sage.manifolds.manifold import TopologicalManifold
+
         if not isinstance(domain, TopologicalManifold):
-            raise TypeError("the first argument must be an open subset of " +
-                            "a topological manifold")
+            raise TypeError(
+                "the first argument must be an open subset of "
+                + "a topological manifold"
+            )
         self._manifold = domain.manifold()
         self._domain = domain
         self._sindex = self._manifold.start_index()
         # Handling of calculus methods available on this chart:
-        self._calc_method = CalculusMethod(current=calc_method,
-                             base_field_type=self.manifold().base_field_type())
+        self._calc_method = CalculusMethod(
+            current=calc_method, base_field_type=self.manifold().base_field_type()
+        )
         self.simplify = self._calc_method.simplify
 
         # Treatment of the coordinates:
         self._periods = periods
 
         if len(coordinates) != self._manifold.dim():
-            raise ValueError("the list of coordinates must contain " +
-                             "{} elements".format(self._manifold.dim()))
+            raise ValueError(
+                "the list of coordinates must contain "
+                + "{} elements".format(self._manifold.dim())
+            )
         self._xx = coordinates
         #
         # Additional restrictions on the coordinates.
@@ -384,8 +407,7 @@ class Chart(UniqueRepresentation, SageObject):
             # the chart is added in the top charts iff its coordinates have
             # not been used on a domain including the chart's domain:
             for chart in sd._atlas:
-                if (domain.is_subset(chart._domain)
-                    and self._xx == chart._xx):
+                if domain.is_subset(chart._domain) and self._xx == chart._xx:
                     break
             else:
                 sd._top_charts.append(self)
@@ -401,9 +423,10 @@ class Chart(UniqueRepresentation, SageObject):
         # restriction of:
         self._supercharts = set([self])
 
-        self._dom_restrict = {}  # dict. of the restrictions of self to
-                                 # subsets of self._domain, with the
-                                 # subsets as keys
+        # dict. of the restrictions of self to
+        # subsets of self._domain, with the
+        # subsets as keys
+        self._dom_restrict = {}
         # The null and one functions of the coordinates:
         # Expression in self of the zero and one scalar fields of open sets
         # containing the domain of self:
@@ -446,13 +469,13 @@ class Chart(UniqueRepresentation, SageObject):
             coord_list = coordinates.split()
         else:
             coord_list = coordinates
-        xx_list = [] # will contain the coordinates as Sage symbolic variables
+        xx_list = []  # will contain the coordinates as Sage symbolic variables
         period_list = []
         for coord_index, coord_field in enumerate(coord_list):
             coord_properties = coord_field.split(':')
-            coord_symb = coord_properties[0].strip() # the coordinate symbol
-            coord_latex = None # possibly redefined below
-            period = None      # possibly redefined below
+            coord_symb = coord_properties[0].strip()  # the coordinate symbol
+            coord_latex = None  # possibly redefined below
+            period = None  # possibly redefined below
             # scan of the properties other than the symbol:
             for prop in coord_properties[1:]:
                 prop1 = prop.strip()
@@ -490,6 +513,7 @@ class Chart(UniqueRepresentation, SageObject):
             sage: Chart._normalize_coord_restrictions(coordinates, [x > y, (x != 0, y != 0), z^2 < x])
             frozenset({(x != 0, y != 0), x > y, z^2 < x})
         """
+
         def normalize(r):
             if isinstance(r, tuple):  # or
                 return tuple(normalize(x) for x in r)
@@ -501,8 +525,9 @@ class Chart(UniqueRepresentation, SageObject):
         if coord_restrictions is None:
             return frozenset()
 
-        if callable(coord_restrictions) and not isinstance(coord_restrictions,
-                                                           Expression):
+        if callable(coord_restrictions) and not isinstance(
+            coord_restrictions, Expression
+        ):
             # lambda-quoted
             coord_restrictions = coord_restrictions(*coordinates)
 
@@ -543,9 +568,9 @@ class Chart(UniqueRepresentation, SageObject):
         """
         description = r'\left(' + latex(self.domain()).strip() + ',('
         n = len(self._xx)
-        for i in range(n-1):
+        for i in range(n - 1):
             description += latex(self._xx[i]).strip() + ', '
-        description += latex(self._xx[n-1]).strip() + r')\right)'
+        description += latex(self._xx[n - 1]).strip() + r')\right)'
         return description
 
     def _first_ngens(self, n):
@@ -609,8 +634,8 @@ class Chart(UniqueRepresentation, SageObject):
                 start -= self._sindex
             if stop is not None:
                 stop -= self._sindex
-            return self._xx[start:stop:i.step]
-        return self._xx[i-self._sindex]
+            return self._xx[start : stop : i.step]
+        return self._xx[i - self._sindex]
 
     def __call__(self, point):
         r"""
@@ -753,8 +778,14 @@ class Chart(UniqueRepresentation, SageObject):
             False
         """
         from sage.misc.superseded import deprecation
-        deprecation(32102, "Chart.add_restrictions is deprecated; provide the restrictions at the time of creating the chart")
-        self._restrictions.extend(self._normalize_coord_restrictions(self._xx, restrictions))
+
+        deprecation(
+            32102,
+            "Chart.add_restrictions is deprecated; provide the restrictions at the time of creating the chart",
+        )
+        self._restrictions.extend(
+            self._normalize_coord_restrictions(self._xx, restrictions)
+        )
 
     def restrict(self, subset, restrictions=None):
         r"""
@@ -808,20 +839,26 @@ class Chart(UniqueRepresentation, SageObject):
             return self
         if subset not in self._dom_restrict:
             if not subset.is_subset(self.domain()):
-                raise ValueError("the specified subset is not a subset " +
-                                 "of the domain of definition of the chart")
+                raise ValueError(
+                    "the specified subset is not a subset "
+                    + "of the domain of definition of the chart"
+                )
             coordinates = ""
             for coord in self._xx:
                 coordinates += repr(coord) + ' '
             res_coord_restrictions = set(self._restrictions)
-            res_coord_restrictions.update(self._normalize_coord_restrictions(self._xx,
-                                                                             restrictions))
-            res = type(self)(subset, coordinates,
-                             calc_method=self._calc_method._current,
-                             periods=self._periods,
-                             # The coordinate restrictions are added
-                             # to the result chart
-                             coord_restrictions=res_coord_restrictions)
+            res_coord_restrictions.update(
+                self._normalize_coord_restrictions(self._xx, restrictions)
+            )
+            res = type(self)(
+                subset,
+                coordinates,
+                calc_method=self._calc_method._current,
+                periods=self._periods,
+                # The coordinate restrictions are added
+                # to the result chart
+                coord_restrictions=res_coord_restrictions,
+            )
             # Update of supercharts and subcharts:
             res._supercharts.update(self._supercharts)
             for schart in self._supercharts:
@@ -927,12 +964,14 @@ class Chart(UniqueRepresentation, SageObject):
             sage: X._check_restrictions([(x<y, y<0), x>0], {x: 2, y: 1})
             False
         """
-        if isinstance(restrict, tuple): # case of 'or' conditions
-            return any(self._check_restrictions(cond, substitutions)
-                       for cond in restrict)
-        elif isinstance(restrict, (list, set, frozenset)): # case of 'and' conditions
-            return all(self._check_restrictions(cond, substitutions)
-                       for cond in restrict)
+        if isinstance(restrict, tuple):  # case of 'or' conditions
+            return any(
+                self._check_restrictions(cond, substitutions) for cond in restrict
+            )
+        elif isinstance(restrict, (list, set, frozenset)):  # case of 'and' conditions
+            return all(
+                self._check_restrictions(cond, substitutions) for cond in restrict
+            )
         # Case of a single condition:
         return bool(restrict.subs(substitutions))
 
@@ -948,6 +987,7 @@ class Chart(UniqueRepresentation, SageObject):
             Vector space of dimension 2 over Complex Field with 53 bits of precision
         """
         from sage.modules.free_module import VectorSpace
+
         ambient = VectorSpace(self.manifold().base_field(), self.manifold().dimension())
         if self._restrictions:
             return self._restrict_set(ambient, self._restrictions)
@@ -978,24 +1018,35 @@ class Chart(UniqueRepresentation, SageObject):
               { (x, y) ∈ Vector space of dimension 2 over Real Field with 53 bits of precision : y < 0 } and
              { (x, y) ∈ Vector space of dimension 2 over Real Field with 53 bits of precision : x > 0 }
         """
-        if isinstance(coord_restrictions, tuple): # case of 'or' conditions
+        if isinstance(coord_restrictions, tuple):  # case of 'or' conditions
             A = self._restrict_set(universe, coord_restrictions[0])
             if len(coord_restrictions) == 1:
                 return A
             else:
                 return A.union(self._restrict_set(universe, coord_restrictions[1:]))
-        elif isinstance(coord_restrictions, (list, set, frozenset)): # case of 'and' conditions
+        elif isinstance(
+            coord_restrictions, (list, set, frozenset)
+        ):  # case of 'and' conditions
             A = self._restrict_set(universe, coord_restrictions[0])
             if len(coord_restrictions) == 1:
                 return A
             else:
-                return A.intersection(self._restrict_set(universe, coord_restrictions[1:]))
+                return A.intersection(
+                    self._restrict_set(universe, coord_restrictions[1:])
+                )
         # Case of a single condition:
         from sage.sets.condition_set import ConditionSet
+
         return ConditionSet(universe, coord_restrictions, vars=self._xx)
 
-    def transition_map(self, other, transformations, intersection_name=None,
-                       restrictions1=None, restrictions2=None):
+    def transition_map(
+        self,
+        other,
+        transformations,
+        intersection_name=None,
+        restrictions1=None,
+        restrictions2=None,
+    ):
         r"""
         Construct the transition map between the current chart,
         `(U, \varphi)` say, and another one, `(V, \psi)` say.
@@ -1113,7 +1164,7 @@ class Chart(UniqueRepresentation, SageObject):
         else:
             chart2 = other.restrict(dom, restrictions2)
         if not isinstance(transformations, (tuple, list)):
-                transformations = [transformations]
+            transformations = [transformations]
         return CoordChange(chart1, chart2, *transformations)
 
     def preimage(self, codomain_subset, name=None, latex_name=None):
@@ -1218,8 +1269,10 @@ class Chart(UniqueRepresentation, SageObject):
             True
         """
         from sage.manifolds.subsets.pullback import ManifoldSubsetPullback
-        return ManifoldSubsetPullback(self, codomain_subset,
-                                      name=name, latex_name=latex_name)
+
+        return ManifoldSubsetPullback(
+            self, codomain_subset, name=name, latex_name=latex_name
+        )
 
     pullback = preimage
 
@@ -1237,8 +1290,7 @@ class Chart(UniqueRepresentation, SageObject):
 
         return ChartFunctionRing(self)
 
-    def function(self, expression, calc_method=None, expansion_symbol=None,
-                 order=None):
+    def function(self, expression, calc_method=None, expansion_symbol=None, order=None):
         r"""
         Define a coordinate function to the base field.
 
@@ -1319,9 +1371,13 @@ class Chart(UniqueRepresentation, SageObject):
         See :class:`~sage.manifolds.chart_func.ChartFunction` for more examples.
         """
         parent = self.function_ring()
-        return parent.element_class(parent, expression, calc_method=calc_method,
-                                    expansion_symbol=expansion_symbol,
-                                    order=order)
+        return parent.element_class(
+            parent,
+            expression,
+            calc_method=calc_method,
+            expansion_symbol=expansion_symbol,
+            order=order,
+        )
 
     def zero_function(self):
         r"""
@@ -1548,10 +1604,12 @@ class Chart(UniqueRepresentation, SageObject):
             <class 'sage.manifolds.chart_func.MultiCoordFunction'>
         """
         from sage.manifolds.chart_func import MultiCoordFunction
+
         return MultiCoordFunction(self, expressions)
 
 
 # *****************************************************************************
+
 
 class RealChart(Chart):
     r"""
@@ -1832,8 +1890,16 @@ class RealChart(Chart):
     Chart grids can be drawn in 2D or 3D graphics thanks to the method
     :meth:`plot`.
     """
-    def __init__(self, domain, coordinates, calc_method=None, bounds=None,
-                 periods=None, coord_restrictions=None):
+
+    def __init__(
+        self,
+        domain,
+        coordinates,
+        calc_method=None,
+        bounds=None,
+        periods=None,
+        coord_restrictions=None,
+    ):
         r"""
         Construct a chart on a real topological manifold.
 
@@ -1850,8 +1916,13 @@ class RealChart(Chart):
             [x is real, y is real]
             sage: TestSuite(X).run()
         """
-        super().__init__(domain, coordinates, calc_method=calc_method,
-                         periods=periods, coord_restrictions=coord_restrictions)
+        super().__init__(
+            domain,
+            coordinates,
+            calc_method=calc_method,
+            periods=periods,
+            coord_restrictions=coord_restrictions,
+        )
         self._bounds = bounds
         self._tighten_bounds()
         self._fast_valid_coordinates = None
@@ -1897,16 +1968,17 @@ class RealChart(Chart):
             'periods': (None, None)})
         """
         from sage.symbolic.assumptions import assume
+
         if isinstance(coordinates, str):
             coord_list = coordinates.split()
         else:
             coord_list = coordinates
-        xx_list = [] # will contain the coordinates as Sage symbolic variables
-        bounds_list = [] # will contain the coordinate bounds
+        xx_list = []  # will contain the coordinates as Sage symbolic variables
+        bounds_list = []  # will contain the coordinate bounds
         period_list = []
         for coord_index, coord_field in enumerate(coord_list):
             coord_properties = coord_field.split(':')
-            coord_symb = coord_properties[0].strip() # the coordinate symbol
+            coord_symb = coord_properties[0].strip()  # the coordinate symbol
             # default values, possibly redefined below:
             coord_latex = None
             xmin = -Infinity
@@ -1921,16 +1993,30 @@ class RealChart(Chart):
                 delim_min = prop1[0]
                 if delim_min in ['[', ']', '(']:
                     # prop1 is the coordinate's range
-                    xmin_str, xmax_str = prop1[1:len(prop1)-1].split(',')
-                    if xmin_str not in ['-inf', '-Inf', '-infinity',
-                                        '-Infinity', '-oo']:
+                    xmin_str, xmax_str = prop1[1 : len(prop1) - 1].split(',')
+                    if xmin_str not in [
+                        '-inf',
+                        '-Inf',
+                        '-infinity',
+                        '-Infinity',
+                        '-oo',
+                    ]:
                         xmin = SR(xmin_str)
-                        xmin_included = ( delim_min == '[' )
-                    if xmax_str not in ['inf', '+inf', 'Inf', '+Inf',
-                                        'infinity', '+infinity', 'Infinity',
-                                        '+Infinity', 'oo', '+oo']:
+                        xmin_included = delim_min == '['
+                    if xmax_str not in [
+                        'inf',
+                        '+inf',
+                        'Inf',
+                        '+Inf',
+                        'infinity',
+                        '+infinity',
+                        'Infinity',
+                        '+Infinity',
+                        'oo',
+                        '+oo',
+                    ]:
                         xmax = SR(xmax_str)
-                        xmax_included = ( prop1[-1] == ']' )
+                        xmax_included = prop1[-1] == ']'
                 elif prop1[0:6] == 'period':
                     # prop1 indicates a periodic coordinate
                     is_periodic = True
@@ -1942,8 +2028,7 @@ class RealChart(Chart):
                     # prop1 is the coordinate's LaTeX symbol
                     coord_latex = prop1
             # Construction of the coordinate as a Sage symbolic variable:
-            coord_var = SR.var(coord_symb, domain='real',
-                               latex_name=coord_latex)
+            coord_var = SR.var(coord_symb, domain='real', latex_name=coord_latex)
             assume(coord_var, 'real')
             if is_periodic:
                 period = xmax - xmin
@@ -1963,8 +2048,9 @@ class RealChart(Chart):
             xx_list.append(coord_var)
             bounds_list.append(((xmin, xmin_included), (xmax, xmax_included)))
             period_list.append(period)
-        return tuple(xx_list), dict(bounds=tuple(bounds_list),
-                                    periods=tuple(period_list))
+        return tuple(xx_list), dict(
+            bounds=tuple(bounds_list), periods=tuple(period_list)
+        )
 
     def coord_bounds(self, i=None):
         r"""
@@ -2026,7 +2112,7 @@ class RealChart(Chart):
         if i is None:
             return self._bounds
         else:
-            return self._bounds[i-self._sindex]
+            return self._bounds[i - self._sindex]
 
     def codomain(self):
         r"""
@@ -2057,13 +2143,20 @@ class RealChart(Chart):
         from sage.categories.cartesian_product import cartesian_product
         from sage.modules.free_module import VectorSpace
         from sage.sets.real_set import RealSet
-        intervals = tuple(RealSet.interval(xmin, xmax,
-                                           lower_closed=(min_included == 'periodic' or min_included),
-                                           upper_closed=(max_included != 'periodic' and max_included))
-                          for ((xmin, min_included), (xmax, max_included)) in self._bounds)
-        if all(interval.is_universe()
-               for interval in intervals):
-            ambient = VectorSpace(self.manifold().base_field(), self.manifold().dimension())
+
+        intervals = tuple(
+            RealSet.interval(
+                xmin,
+                xmax,
+                lower_closed=(min_included == 'periodic' or min_included),
+                upper_closed=(max_included != 'periodic' and max_included),
+            )
+            for ((xmin, min_included), (xmax, max_included)) in self._bounds
+        )
+        if all(interval.is_universe() for interval in intervals):
+            ambient = VectorSpace(
+                self.manifold().base_field(), self.manifold().dimension()
+            )
         else:
             ambient = cartesian_product(intervals)
         if self._restrictions:
@@ -2151,11 +2244,11 @@ class RealChart(Chart):
                 if resu_txt != "":
                     resu_txt += "; "
                     resu_latex += r";\quad "
-                resu_txt, resu_latex = _display_coord_range(self, x, resu_txt,
-                                                            resu_latex)
+                resu_txt, resu_latex = _display_coord_range(
+                    self, x, resu_txt, resu_latex
+                )
         else:
-            resu_txt, resu_latex = _display_coord_range(self, xx, resu_txt,
-                                                        resu_latex)
+            resu_txt, resu_latex = _display_coord_range(self, xx, resu_txt, resu_latex)
         return FormattedExpansion(resu_txt, resu_latex)
 
     def add_restrictions(self, restrictions):
@@ -2240,13 +2333,16 @@ class RealChart(Chart):
             x: (-oo, 0); y: (1/2, +oo)
         """
         import operator
-        bounds = list(self._bounds) # convert to a list for modifications
+
+        bounds = list(self._bounds)  # convert to a list for modifications
         new_restrictions = []
         for restrict in self._restrictions:
-            restrict_used = False # determines whether restrict is used
-                                  # to set some coordinate bound
-            if not isinstance(restrict, (tuple, list, set, frozenset)): # case of combined
-                                                                        # conditions excluded
+            restrict_used = False  # determines whether restrict is used to set some coordinate bound
+            if not isinstance(
+                restrict, (tuple, list, set, frozenset)
+            ):
+                # case of combined
+                # conditions excluded
                 operands = restrict.operands()
                 left = operands[0]
                 right = operands[1]
@@ -2254,15 +2350,14 @@ class RealChart(Chart):
                 if left in self._xx:
                     # the l.h.s. of the restriction is a single
                     # coordinate
-                    right_coord = [coord for coord in self._xx
-                                   if coord in right_var]
+                    right_coord = [coord for coord in self._xx if coord in right_var]
                     if not right_coord:
                         # there is no other coordinate in the r.h.s.
                         ind = self._xx.index(left)
                         left_bounds = list(bounds[ind])
                         oper = restrict.operator()
-                        oinf = left_bounds[0][0] # old coord inf
-                        osup = left_bounds[1][0] # old coord sup
+                        oinf = left_bounds[0][0]  # old coord inf
+                        osup = left_bounds[1][0]  # old coord sup
                         if oper == operator.lt:
                             if osup == Infinity or right <= osup:
                                 left_bounds[1] = (right, False)
@@ -2368,21 +2463,28 @@ class RealChart(Chart):
             return self
         if subset not in self._dom_restrict:
             if not subset.is_subset(self.domain()):
-                raise ValueError("the specified subset is not a subset " +
-                                 "of the domain of definition of the chart")
+                raise ValueError(
+                    "the specified subset is not a subset "
+                    + "of the domain of definition of the chart"
+                )
             coordinates = ""
             for coord in self._xx:
                 coordinates += repr(coord) + ' '
             res_coord_restrictions = set(self._restrictions)
-            res_coord_restrictions.update(self._normalize_coord_restrictions(self._xx,
-                                                                             restrictions))
-            res = type(self)(subset, coordinates,
-                             calc_method=self._calc_method._current,
-                             bounds=self._bounds, periods=self._periods,
-                             # The coordinate restrictions are added
-                             # to the result chart and possibly
-                             # transformed into coordinate bounds:
-                             coord_restrictions=res_coord_restrictions)
+            res_coord_restrictions.update(
+                self._normalize_coord_restrictions(self._xx, restrictions)
+            )
+            res = type(self)(
+                subset,
+                coordinates,
+                calc_method=self._calc_method._current,
+                bounds=self._bounds,
+                periods=self._periods,
+                # The coordinate restrictions are added
+                # to the result chart and possibly
+                # transformed into coordinate bounds:
+                coord_restrictions=res_coord_restrictions,
+            )
             # Update of supercharts and subcharts:
             res._supercharts.update(self._supercharts)
             for schart in self._supercharts:
@@ -2618,11 +2720,26 @@ class RealChart(Chart):
         self._fast_valid_coordinates = evaluate_fast_callable
         return self._fast_valid_coordinates(*coordinates)
 
-    @options(max_range=8, color='red', style='-', thickness=1, plot_points=75,
-             label_axes=True)
-    def plot(self, chart=None, ambient_coords=None, mapping=None,
-             fixed_coords=None, ranges=None, number_values=None,
-             steps=None, parameters=None, **kwds):
+    @options(
+        max_range=8,
+        color='red',
+        style='-',
+        thickness=1,
+        plot_points=75,
+        label_axes=True,
+    )
+    def plot(
+        self,
+        chart=None,
+        ambient_coords=None,
+        mapping=None,
+        fixed_coords=None,
+        ranges=None,
+        number_values=None,
+        steps=None,
+        parameters=None,
+        **kwds,
+    ):
         r"""
         Plot ``self`` as a grid in a Cartesian graph based on
         the coordinates of some ambient chart.
@@ -3037,8 +3154,7 @@ class RealChart(Chart):
                 return resu
             else:
                 rem_coords.remove(coord)
-                return _plot_xx_list(resu, rem_coords, ranges, steps,
-                                     number_values)
+                return _plot_xx_list(resu, rem_coords, ranges, steps, number_values)
 
         if chart is None:
             chart = self
@@ -3060,12 +3176,14 @@ class RealChart(Chart):
                     if coord not in ambient_coords:
                         fixed_coords[coord] = 0
         else:
-            transf = None # to be the MultiCoordFunction object relating self
-                          # to the ambient chart
+            transf = None  # to be the MultiCoordFunction object relating self
+            # to the ambient chart
             if mapping is None:
                 if not self.domain().is_subset(chart.domain()):
-                    raise ValueError("the domain of {} is not ".format(self) +
-                                     "included in that of {}".format(chart))
+                    raise ValueError(
+                        "the domain of {} is not ".format(self)
+                        + "included in that of {}".format(chart)
+                    )
                 coord_changes = chart.domain()._coord_changes
                 for chart_pair in coord_changes:
                     if chart_pair == (self, chart):
@@ -3079,22 +3197,28 @@ class RealChart(Chart):
                                 transf = coord_changes[chart_pair]._transf
             else:
                 if not isinstance(mapping, ContinuousMap):
-                    raise TypeError("the argument 'mapping' must be a "
-                                    "continuous manifold map")
+                    raise TypeError(
+                        "the argument 'mapping' must be a continuous manifold map"
+                    )
                 if not self.domain().is_subset(mapping.domain()):
-                    raise ValueError("the domain of {} is not ".format(self) +
-                                     "included in that of {}".format(mapping))
+                    raise ValueError(
+                        "the domain of {} is not ".format(self)
+                        + "included in that of {}".format(mapping)
+                    )
                 if not chart.domain().is_subset(mapping._codomain):
-                    raise ValueError("the domain of {} is not ".format(chart) +
-                                     "included in the codomain of {}".format(
-                                                                      mapping))
+                    raise ValueError(
+                        "the domain of {} is not ".format(chart)
+                        + "included in the codomain of {}".format(mapping)
+                    )
                 try:
                     transf = mapping.coord_functions(chart1=self, chart2=chart)
                 except ValueError:
                     pass
             if transf is None:
-                raise ValueError("no relation has been found between " +
-                                 "{} and {}".format(self, chart))
+                raise ValueError(
+                    "no relation has been found between "
+                    + "{} and {}".format(self, chart)
+                )
         #
         # 2/ Treatment of input parameters
         #    -----------------------------
@@ -3119,8 +3243,10 @@ class RealChart(Chart):
         ranges0 = {}
         for coord in coords:
             if coord in ranges:
-                ranges0[coord] = (numerical_approx(ranges[coord][0]),
-                                  numerical_approx(ranges[coord][1]))
+                ranges0[coord] = (
+                    numerical_approx(ranges[coord][0]),
+                    numerical_approx(ranges[coord][1]),
+                )
             else:
                 bounds = self._bounds[self._xx.index(coord)]
                 if bounds[0][0] == -Infinity:
@@ -3128,19 +3254,19 @@ class RealChart(Chart):
                 elif bounds[0][1]:
                     xmin = numerical_approx(bounds[0][0])
                 else:
-                    xmin = numerical_approx(bounds[0][0] + 1.e-3)
+                    xmin = numerical_approx(bounds[0][0] + 1.0e-3)
                 if bounds[1][0] == Infinity:
                     xmax = numerical_approx(max_range)
                 elif bounds[1][1]:
                     xmax = numerical_approx(bounds[1][0])
                 else:
-                    xmax = numerical_approx(bounds[1][0] - 1.e-3)
+                    xmax = numerical_approx(bounds[1][0] - 1.0e-3)
                 ranges0[coord] = (xmin, xmax)
         ranges = ranges0
         if number_values is None:
-            if nca == 2: # 2D plot
+            if nca == 2:  # 2D plot
                 number_values = 9
-            else:   # 3D plot
+            else:  # 3D plot
                 number_values = 5
         if not isinstance(number_values, dict):
             number_values0 = {}
@@ -3151,12 +3277,15 @@ class RealChart(Chart):
             steps = {}
         for coord in coords:
             if coord not in steps:
-                steps[coord] = ((ranges[coord][1] - ranges[coord][0])
-                                / (number_values[coord]-1))
+                steps[coord] = (ranges[coord][1] - ranges[coord][0]) / (
+                    number_values[coord] - 1
+                )
             else:
                 from sage.functions.other import floor
-                number_values[coord] = 1 + floor((ranges[coord][1] - ranges[coord][0])
-                                             / steps[coord])
+
+                number_values[coord] = 1 + floor(
+                    (ranges[coord][1] - ranges[coord][0]) / steps[coord]
+                )
         if not isinstance(color, dict):
             color0 = {}
             for coord in coords:
@@ -3195,15 +3324,16 @@ class RealChart(Chart):
             rem_coords.remove(coord)
             xx_list = [xx0]
             if len(rem_coords) >= 1:
-                xx_list = _plot_xx_list(xx_list, rem_coords, ranges, steps,
-                                        number_values)
+                xx_list = _plot_xx_list(
+                    xx_list, rem_coords, ranges, steps, number_values
+                )
             xmin, xmax = ranges[coord]
             nbp = plot_points[coord]
-            dx = (xmax - xmin) / (nbp-1)
+            dx = (xmax - xmin) / (nbp - 1)
             ind_coord = self._xx.index(coord)
             for xx in xx_list:
                 curve = []
-                first_invalid = False # initialization
+                first_invalid = False  # initialization
                 xc = xmin
                 xp = list(xx)
                 if parameters is None:
@@ -3211,48 +3341,58 @@ class RealChart(Chart):
                         xp[ind_coord] = xc
                         if self.valid_coordinates(*xp, tolerance=1e-13):
                             yp = transf(*xp, simplify=False)
-                            curve.append( [numerical_approx(yp[j])
-                                           for j in ind_a] )
-                            first_invalid = True # next invalid point will be
-                                                 # the first one
+                            curve.append([numerical_approx(yp[j]) for j in ind_a])
+                            first_invalid = True  # next invalid point will be
+                        # the first one
                         else:
                             if first_invalid:
                                 # the curve is stopped at previous point and
                                 # added to the graph:
-                                resu += line(curve, color=color_c,
-                                             linestyle=style_c,
-                                             thickness=thickness_c)
-                                curve = [] # a new curve will start at the
-                                           # next valid point
-                            first_invalid = False # next invalid point will not
-                                                  # be the first one
+                                resu += line(
+                                    curve,
+                                    color=color_c,
+                                    linestyle=style_c,
+                                    thickness=thickness_c,
+                                )
+                                curve = []  # a new curve will start at the
+                                # next valid point
+                            first_invalid = False  # next invalid point will not
+                            # be the first one
                         xc += dx
                 else:
                     for i in range(nbp):
                         xp[ind_coord] = xc
-                        if self.valid_coordinates(*xp, tolerance=1e-13,
-                                                  parameters=parameters):
+                        if self.valid_coordinates(
+                            *xp, tolerance=1e-13, parameters=parameters
+                        ):
                             yp = transf(*xp, simplify=False)
-                            curve.append([numerical_approx(yp[j].substitute(parameters))
-                                          for j in ind_a])
-                            first_invalid = True # next invalid point will be
-                                                 # the first one
+                            curve.append(
+                                [
+                                    numerical_approx(yp[j].substitute(parameters))
+                                    for j in ind_a
+                                ]
+                            )
+                            first_invalid = True  # next invalid point will be
+                        # the first one
                         else:
                             if first_invalid:
                                 # the curve is stopped at previous point and
                                 # added to the graph:
-                                resu += line(curve, color=color_c,
-                                             linestyle=style_c,
-                                             thickness=thickness_c)
-                                curve = [] # a new curve will start at the
-                                           # next valid point
-                            first_invalid = False # next invalid point will not
-                                                  # be the first one
+                                resu += line(
+                                    curve,
+                                    color=color_c,
+                                    linestyle=style_c,
+                                    thickness=thickness_c,
+                                )
+                                curve = []  # a new curve will start at the
+                                # next valid point
+                            first_invalid = False  # next invalid point will not
+                            # be the first one
                         xc += dx
                 if curve:
-                    resu += line(curve, color=color_c,
-                                 linestyle=style_c,
-                                 thickness=thickness_c)
+                    resu += line(
+                        curve, color=color_c, linestyle=style_c, thickness=thickness_c
+                    )
         if nca == 2:  # 2D graphic
             resu.set_aspect_ratio(1)
             if label_axes:
@@ -3260,14 +3400,16 @@ class RealChart(Chart):
                 # to show()), instead of using the method
                 # Graphics.axes_labels() since the latter is not robust w.r.t.
                 # graph addition
-                resu._extra_kwds['axes_labels'] = [r'$'+latex(ac)+r'$'
-                                                   for ac in ambient_coords]
-        else: # 3D graphic
+                resu._extra_kwds['axes_labels'] = [
+                    r'$' + latex(ac) + r'$' for ac in ambient_coords
+                ]
+        else:  # 3D graphic
             resu.aspect_ratio(1)
             if label_axes:
                 labels = [str(ac) for ac in ambient_coords]
                 resu = set_axes_labels(resu, *labels)
         return resu
+
 
 # *****************************************************************************
 
@@ -3314,6 +3456,7 @@ class CoordChange(SageObject):
         u = x + y
         v = x - y
     """
+
     def __init__(self, chart1, chart2, *transformations):
         r"""
         Construct a transition map.
@@ -3333,8 +3476,9 @@ class CoordChange(SageObject):
         self._n1 = len(chart1._xx)
         self._n2 = len(chart2._xx)
         if len(transformations) != self._n2:
-            raise ValueError("{} coordinate transformations ".format(self._n2)
-                             + "must be provided")
+            raise ValueError(
+                "{} coordinate transformations ".format(self._n2) + "must be provided"
+            )
         self._chart1 = chart1
         self._chart2 = chart2
         # The coordinate transformations are implemented via the class
@@ -3365,8 +3509,7 @@ class CoordChange(SageObject):
             sage: X_to_Y  # indirect doctest
             Change of coordinates from Chart (M, (x, y)) to Chart (M, (u, v))
         """
-        return "Change of coordinates from {} to {}".format(self._chart1,
-                                                            self._chart2)
+        return "Change of coordinates from {} to {}".format(self._chart1, self._chart2)
 
     def _latex_(self):
         r"""
@@ -3412,9 +3555,11 @@ class CoordChange(SageObject):
             return True
         if not isinstance(other, CoordChange):
             return False
-        return ((self._chart1 == other._chart1)
-                and (self._chart2 == other._chart2)
-                and (self._transf == other._transf))
+        return (
+            (self._chart1 == other._chart1)
+            and (self._chart2 == other._chart2)
+            and (self._transf == other._transf)
+        )
 
     def __ne__(self, other):
         r"""
@@ -3503,6 +3648,7 @@ class CoordChange(SageObject):
             True
         """
         from sage.symbolic.relation import solve
+
         if self._inverse is not None:
             return self._inverse
         # The computation is necessary:
@@ -3511,9 +3657,11 @@ class CoordChange(SageObject):
         n1 = self._n1
         n2 = self._n2
         if n1 != n2:
-            raise ValueError("the change of coordinates is not invertible " +
-                             "(different number of coordinates in the two " +
-                             "charts)")
+            raise ValueError(
+                "the change of coordinates is not invertible "
+                + "(different number of coordinates in the two "
+                + "charts)"
+            )
         # New symbolic variables (different from x2 to allow for a
         #  correct solution even when chart2 = chart1):
         base_field = self._chart1.domain().base_field_type()
@@ -3526,19 +3674,20 @@ class CoordChange(SageObject):
         for i in range(n2):
             if x2[i].is_positive():
                 coord_domain[i] = 'positive'
-        xp2 = [ SR.temp_var(domain=coord_domain[i]) for i in range(n2) ]
+        xp2 = [SR.temp_var(domain=coord_domain[i]) for i in range(n2)]
         xx2 = self._transf.expr()
         equations = [xp2[i] == xx2[i] for i in range(n2)]
         try:
             solutions = solve(equations, *x1, solution_dict=True)
         except RuntimeError:
-            raise RuntimeError("the system could not be solved; use " +
-                               "set_inverse() to set the inverse manually")
+            raise RuntimeError(
+                "the system could not be solved; use "
+                + "set_inverse() to set the inverse manually"
+            )
         substitutions = dict(zip(xp2, x2))
         if len(solutions) == 1:
-            x2_to_x1 = [solutions[0][x1[i]].subs(substitutions)
-                                                            for i in range(n1)]
-            x2_to_x1_simpl = [] # to store simplified transformations
+            x2_to_x1 = [solutions[0][x1[i]].subs(substitutions) for i in range(n1)]
+            x2_to_x1_simpl = []  # to store simplified transformations
             for transf in x2_to_x1:
                 try:
                     transf = self._chart2.simplify(transf)
@@ -3550,14 +3699,16 @@ class CoordChange(SageObject):
             list_x2_to_x1 = []
             for sol in solutions:
                 if x2[0] in sol:
-                    raise ValueError("the system could not be solved; use " +
-                                     "set_inverse() to set the inverse " +
-                                     "manually")
+                    raise ValueError(
+                        "the system could not be solved; use "
+                        + "set_inverse() to set the inverse "
+                        + "manually"
+                    )
                 try:
                     x2_to_x1 = [sol[x1[i]].subs(substitutions) for i in range(n1)]
-                except KeyError: # sol is not a valid solution
+                except KeyError:  # sol is not a valid solution
                     continue
-                x2_to_x1_simpl = [] # to store simplified transformations
+                x2_to_x1_simpl = []  # to store simplified transformations
                 for transf in x2_to_x1:
                     try:
                         transf = self._chart2.simplify(transf)
@@ -3568,15 +3719,18 @@ class CoordChange(SageObject):
                 if self._chart1.valid_coordinates(*x2_to_x1):
                     list_x2_to_x1.append(x2_to_x1)
             if len(list_x2_to_x1) == 0:
-                raise ValueError("no solution found; use set_inverse() to " +
-                                 "set the inverse manually")
+                raise ValueError(
+                    "no solution found; use set_inverse() to "
+                    + "set the inverse manually"
+                )
             if len(list_x2_to_x1) > 1:
                 print("Multiple solutions found: ")
                 print(list_x2_to_x1)
                 raise ValueError(
-                   "non-unique solution to the inverse coordinate " +
-                   "transformation; use set_inverse() to set the inverse " +
-                   "manually")
+                    "non-unique solution to the inverse coordinate "
+                    + "transformation; use set_inverse() to set the inverse "
+                    + "manually"
+                )
             x2_to_x1 = list_x2_to_x1[0]
         self._inverse = type(self)(self._chart2, self._chart1, *x2_to_x1)
         self._inverse._inverse = self
@@ -3694,10 +3848,8 @@ class CoordChange(SageObject):
         check = kwds.pop('check', True)
         verbose = kwds.pop('verbose', False)
         for unknown_key in kwds:
-            raise TypeError("{} is not a valid keyword "
-                            "argument".format(unknown_key))
-        self._inverse = type(self)(self._chart2, self._chart1,
-                                   *transformations)
+            raise TypeError("{} is not a valid keyword argument".format(unknown_key))
+        self._inverse = type(self)(self._chart2, self._chart1, *transformations)
         self._inverse._inverse = self
         if check:
             infos = ["Check of the inverse coordinate transformation:"]
@@ -3723,8 +3875,9 @@ class CoordChange(SageObject):
                     any_failure = True
                 infos.append("  {}  {}".format(eq, resu))
             if any_failure:
-                infos.append("NB: a failed report can reflect a mere lack of "
-                             "simplification.")
+                infos.append(
+                    "NB: a failed report can reflect a mere lack of simplification."
+                )
             if verbose or any_failure:
                 for li in infos:
                     print(li)
@@ -3760,9 +3913,10 @@ class CoordChange(SageObject):
         if not isinstance(other, CoordChange):
             raise TypeError("{} is not a change of coordinate".format(other))
         if other._chart2 != self._chart1:
-            raise ValueError("composition not possible: " +
-                             "{} is different from {}".format(other._chart2,
-                                                              other._chart1))
+            raise ValueError(
+                "composition not possible: "
+                + "{} is different from {}".format(other._chart2, other._chart1)
+            )
         transf = self._transf(*(other._transf.expr()))
         return type(self)(other._chart1, self._chart2, *transf)
 
@@ -3805,8 +3959,11 @@ class CoordChange(SageObject):
         ch2 = self._chart2.restrict(dom2)
         if (ch1, ch2) in dom1.coord_changes():
             return dom1.coord_changes()[(ch1, ch2)]
-        return type(self)(self._chart1.restrict(dom1),
-                          self._chart2.restrict(dom2), *(self._transf.expr()))
+        return type(self)(
+            self._chart1.restrict(dom1),
+            self._chart2.restrict(dom2),
+            *(self._transf.expr()),
+        )
 
     def display(self):
         r"""
@@ -3839,6 +3996,7 @@ class CoordChange(SageObject):
         """
         from sage.misc.latex import latex
         from sage.tensor.modules.format_utilities import FormattedExpansion
+
         coords2 = self._chart2[:]
         n2 = len(coords2)
         expr = self._transf.expr('SR')

@@ -590,11 +590,7 @@ def VectorSpace(K, dimension_or_basis_keys=None, sparse=False, inner_product_mat
         sage: V
         Vector space of dimension 3 over Fraction Field of Univariate Polynomial Ring in x over Integer Ring
         sage: V.basis()
-        [
-        (1, 0, 0),
-        (0, 1, 0),
-        (0, 0, 1)
-        ]
+        [(1, 0, 0), (0, 1, 0), (0, 0, 1)]
 
     The base must be a field or a :exc:`TypeError` is raised.
 
@@ -825,10 +821,7 @@ def basis_seq(V, vecs):
         ...
         ValueError: vector is immutable; please change a copy instead (use copy())
         sage: sage.modules.free_module.basis_seq(V, V.gens())
-        [
-        (1, 0),
-        (0, 1)
-        ]
+        [(1, 0), (0, 1)]
     """
     for z in vecs:
         z.set_immutable()
@@ -898,10 +891,7 @@ class Module_free_ambient(Module):
         sage: M = S**2
         sage: N = M.submodule([vector([x - y, z]), vector([y * z, x * z])])
         sage: N.gens()
-        [
-        (x - y, z),
-        (y*z, x*z)
-        ]
+        [(x - y, z), (y*z, x*z)]
         sage: N.degree()
         2
     """
@@ -2568,11 +2558,7 @@ class FreeModule_generic(Module_free_ambient):
         EXAMPLES::
 
             sage: FreeModule(Integers(12),3).basis()
-            [
-            (1, 0, 0),
-            (0, 1, 0),
-            (0, 0, 1)
-            ]
+            [(1, 0, 0), (0, 1, 0), (0, 0, 1)]
         """
         raise NotImplementedError
 
@@ -5012,9 +4998,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
             sage: v2 = vector(QQ, [1, 5, 2, -2])
             sage: V = QQ^4
             sage: V.linear_dependence([v1,v2])
-            [
-            <BLANKLINE>
-            ]
+            []
 
             sage: v3 = v1 + v2
             sage: v4 = 3*v1 - 4*v2
@@ -5023,21 +5007,13 @@ class FreeModule_generic_field(FreeModule_generic_pid):
 
             sage: relations = V.linear_dependence(L, zeros='left')
             sage: relations
-            [
-            (1, 0, 0, -1, -2),
-            (0, 1, 0, -1/2, -3/2),
-            (0, 0, 1, -3/2, -7/2)
-            ]
+            [(1, 0, 0, -1, -2), (0, 1, 0, -1/2, -3/2), (0, 0, 1, -3/2, -7/2)]
             sage: v2 + (-1/2)*v4 + (-3/2)*v5
             (0, 0, 0, 0)
 
             sage: relations = V.linear_dependence(L, zeros='right')
             sage: relations
-            [
-            (-1, -1, 1, 0, 0),
-            (-3, 4, 0, 1, 0),
-            (1, -2, 0, 0, 1)
-            ]
+            [(-1, -1, 1, 0, 0), (-3, 4, 0, 1, 0), (1, -2, 0, 0, 1)]
             sage: z = sum([relations[2][i]*L[i] for i in range(len(L))])
             sage: z == zero_vector(QQ, 4)
             True
@@ -5049,9 +5025,7 @@ class FreeModule_generic_field(FreeModule_generic_pid):
             sage: v2 = vector(QQ, [4,1,0])
             sage: V = QQ^3
             sage: relations = V.linear_dependence([v1, v2]); relations
-            [
-            <BLANKLINE>
-            ]
+            []
             sage: relations == []
             True
 
@@ -5067,19 +5041,13 @@ class FreeModule_generic_field(FreeModule_generic_pid):
             True
             sage: L = [v1, v2, v3, 2*v1+v2, 3*v2+6*v3]
             sage: (F^5).linear_dependence(L)
-            [
-            (1, 0, 16, 8, 3),
-            (0, 1, 2, 0, 11)
-            ]
+            [(1, 0, 16, 8, 3), (0, 1, 2, 0, 11)]
             sage: v1 + 16*v3 + 8*(2*v1+v2) + 3*(3*v2+6*v3)
             (0, 0, 0, 0, 0)
             sage: v2 + 2*v3 + 11*(3*v2+6*v3)
             (0, 0, 0, 0, 0)
             sage: (F^5).linear_dependence(L, zeros='right')
-            [
-            (15, 16, 0, 1, 0),
-            (0, 14, 11, 0, 1)
-            ]
+            [(15, 16, 0, 1, 0), (0, 14, 11, 0, 1)]
 
         TESTS:
 
@@ -5730,11 +5698,7 @@ class FreeModule_ambient(FreeModule_generic):
         EXAMPLES::
 
             sage: A = ZZ^3; B = A.basis(); B
-            [
-            (1, 0, 0),
-            (0, 1, 0),
-            (0, 0, 1)
-            ]
+            [(1, 0, 0), (0, 1, 0), (0, 0, 1)]
             sage: B.universe()
             Ambient free module of rank 3 over the principal ideal domain Integer Ring
         """
@@ -5758,11 +5722,7 @@ class FreeModule_ambient(FreeModule_generic):
         EXAMPLES::
 
             sage: A = ZZ^3; A.echelonized_basis()
-            [
-            (1, 0, 0),
-            (0, 1, 0),
-            (0, 0, 1)
-            ]
+            [(1, 0, 0), (0, 1, 0), (0, 0, 1)]
         """
         return self.basis()
 
@@ -7051,10 +7011,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
             sage: M.echelon_coordinates([8,10,12])
             [8, -2]
             sage: B = M.echelonized_basis(); B
-            [
-            (1, 2, 3/7),
-            (0, 3, -30/7)
-            ]
+            [(1, 2, 3/7), (0, 3, -30/7)]
             sage: 8*B[0] - 2*B[1]
             (8, 10, 12)
 
@@ -7063,10 +7020,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
             sage: V = VectorSpace(QQ,5, sparse=True)
             sage: W = V.subspace_with_basis([[0,1,2,0,0], [0,-1,0,0,-1/2]])
             sage: W.echelonized_basis()
-            [
-            (0, 1, 0, 0, 1/2),
-            (0, 0, 1, 0, -1/4)
-            ]
+            [(0, 1, 0, 0, 1/2), (0, 0, 1, 0, -1/4)]
             sage: W.echelon_coordinates([0,0,2,0,-1/2])
             [0, 2]
         """
@@ -7102,10 +7056,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
             sage: A = ZZ^3
             sage: M = A.span_of_basis([[1,2,3],[4,5,6]])
             sage: M.echelonized_basis()
-            [
-            (1, 2, 3),
-            (0, 3, 6)
-            ]
+            [(1, 2, 3), (0, 3, 6)]
             sage: M.user_to_echelon_matrix()
             [ 1  0]
             [ 4 -1]
@@ -7151,10 +7102,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
             sage: V = QQ^3
             sage: W = V.span_of_basis([[1,2,3],[4,5,6]])
             sage: W.echelonized_basis()
-            [
-            (1, 0, -1),
-            (0, 1, 2)
-            ]
+            [(1, 0, -1), (0, 1, 2)]
             sage: A = W.echelon_to_user_matrix(); A
             [-5/3  2/3]
             [ 4/3 -1/3]
@@ -7390,16 +7338,10 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
             sage: V = ZZ^3
             sage: V.basis()
-            [
-            (1, 0, 0),
-            (0, 1, 0),
-            (0, 0, 1)
-            ]
+            [(1, 0, 0), (0, 1, 0), (0, 0, 1)]
             sage: M = V.span_of_basis([['1/8',2,1]])
             sage: M.basis()
-            [
-            (1/8, 2, 1)
-            ]
+            [(1/8, 2, 1)]
         """
         return self.__basis
 
@@ -7508,15 +7450,9 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
             sage: V = ZZ^3
             sage: M = V.span_of_basis([['1/2',3,1], [0,'1/6',0]])
             sage: M.basis()
-            [
-            (1/2, 3, 1),
-            (0, 1/6, 0)
-            ]
+            [(1/2, 3, 1), (0, 1/6, 0)]
             sage: B = M.echelonized_basis(); B
-            [
-            (1/2, 0, 1),
-            (0, 1/6, 0)
-            ]
+            [(1/2, 0, 1), (0, 1/6, 0)]
             sage: V.span(B) == M
             True
         """
@@ -7547,10 +7483,7 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
             sage: V = ZZ^3
             sage: M = V.span_of_basis([['1/2',3,1], [0,'1/6',0]])
             sage: B = M.echelonized_basis(); B
-            [
-            (1/2, 0, 1),
-            (0, 1/6, 0)
-            ]
+            [(1/2, 0, 1), (0, 1/6, 0)]
             sage: M.echelon_coordinate_vector(['1/2', 3, 1])
             (1, 18)
         """

@@ -382,11 +382,8 @@ def _giac(s):
         sage: (1+2*sin(3*x)).solve(x).simplify()
         ...list[-pi/18,7*pi/18]
 
-        sage: libgiac.solve('sin(3*x)>2*sin(x)',x)
-        Inequation on periodic expression without assumptions on variable,
-         adding assumption ((x>=0) and (x<(2*pi)))
-        list[((x>0) and (x<(pi/6))),((x>(5*pi/6)) and (x<pi)),((x>(7*pi/6)) and (x<(11*pi/6)))]
-
+        sage: libgiac.solve('x^3-x>x',x)
+        list[((x>(-sqrt(2))) and (x<0)),x>(sqrt(2))]
 
     You can also add some hypothesis to a giac symbol::
 
