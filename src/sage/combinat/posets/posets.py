@@ -4398,7 +4398,7 @@ class FinitePoset(UniqueRepresentation, Parent):
            [1, 1, 1, 1, x^5 + x^4 + x + 1]
            sage: P.coxeter_smith_form(algorithm='gap')                                  # needs sage.libs.gap
            [1, 1, 1, 1, x^5 + x^4 + x + 1]
-           sage: P.coxeter_smith_form(algorithm='pari')                                 # needs sage.libs.pari
+           sage: P.coxeter_smith_form(algorithm='pari')                                 # needs sage.libs.flint sage.libs.pari
            [1, 1, 1, 1, x^5 + x^4 + x + 1]
            sage: P.coxeter_smith_form(algorithm='fricas')       # optional - fricas
            [1, 1, 1, 1, x^5 + x^4 + x + 1]
@@ -7243,15 +7243,14 @@ class FinitePoset(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.flint
             sage: posets.ChainPoset(2).zeta_polynomial()
             q
             sage: posets.ChainPoset(3).zeta_polynomial()
             1/2*q^2 + 1/2*q
-
             sage: P = posets.PentagonPoset()
             sage: P.zeta_polynomial()
             1/6*q^3 + q^2 - 1/6*q
-
             sage: P = posets.DiamondPoset(5)
             sage: P.zeta_polynomial()
             3/2*q^2 - 1/2*q
@@ -7260,6 +7259,7 @@ class FinitePoset(UniqueRepresentation, Parent):
 
         Checking the simplest cases::
 
+            sage: # needs sage.libs.flint
             sage: Poset({}).zeta_polynomial()
             0
             sage: Poset({1: []}).zeta_polynomial()
@@ -7657,28 +7657,27 @@ class FinitePoset(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.flint
             sage: P = posets.ChainPoset(3)
             sage: t = P.chain_polynomial(); t
             q^3 + 3*q^2 + 3*q + 1
             sage: t(1) == len(list(P.chains()))
             True
-
             sage: P = posets.BooleanLattice(3)
             sage: P.chain_polynomial()
             6*q^4 + 18*q^3 + 19*q^2 + 8*q + 1
-
             sage: P = posets.AntichainPoset(5)
             sage: P.chain_polynomial()
             5*q + 1
 
         TESTS::
 
+            sage: # needs sage.libs.flint
             sage: P = Poset()
             sage: P.chain_polynomial()
             1
             sage: parent(P.chain_polynomial())
             Univariate Polynomial Ring in q over Integer Ring
-
             sage: R = Poset({1: []})
             sage: R.chain_polynomial()
             q + 1
@@ -7699,10 +7698,10 @@ class FinitePoset(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.flint
             sage: P = posets.AntichainPoset(3)
             sage: P.order_polynomial()
             q^3
-
             sage: P = posets.ChainPoset(3)
             sage: f = P.order_polynomial(); f
             1/6*q^3 + 1/2*q^2 + 1/3*q

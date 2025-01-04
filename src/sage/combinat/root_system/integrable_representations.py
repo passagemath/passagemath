@@ -1148,8 +1148,8 @@ class IntegrableRepresentation(UniqueRepresentation, CategoryObject):
             O---O---O=>=O---O
             0   1   2   3   4
             F4~
-            sage: A1xC3=WeylCharacterRing("A1xC3",style='coroots')
-            sage: A1xC3.dynkin_diagram()
+            sage: A1xC3 = WeylCharacterRing("A1xC3", style='coroots')                   # needs sage.groups
+            sage: A1xC3.dynkin_diagram()                                                # needs sage.groups
             O
             1
             O---O=<=O
@@ -1161,6 +1161,7 @@ class IntegrableRepresentation(UniqueRepresentation, CategoryObject):
         The nodes `0, 2, 3, 4` of ``F4~`` correspond to ``1, 4, 3, 2``
         of ``A1xC3`` and so we encode this in a dictionary::
 
+            sage: # needs sage.groups
             sage: V.branch(i=1, weyl_character_ring=A1xC3, sequence={0:1,2:4,3:3,4:2})  # long time
             [A1xC3(1,0,0,0),
              A1xC3(0,0,0,1),
