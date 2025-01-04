@@ -156,6 +156,7 @@ class SteenrodModuleMixin:
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.modules.fp_graded.steenrod.module import SteenrodFPModule
             sage: A1 = algebra=SteenrodAlgebra(p=2, profile=[2,1])
             sage: M = SteenrodFPModule(A1, [0])
@@ -198,6 +199,7 @@ class SteenrodModuleMixin:
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: A = SteenrodAlgebra()
             sage: M = A.free_graded_module([])
             sage: M.export_module_definition()
@@ -386,10 +388,10 @@ class SteenrodFPModule(FPModule, SteenrodModuleMixin):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.modules.fp_graded.steenrod.module import SteenrodFPModule
             sage: A = SteenrodAlgebra(2)
             sage: Hko = SteenrodFPModule(A, [0], [[Sq(1)], [Sq(2)]])
-
             sage: res = Hko.resolution(5, verbose=True)
             Computing f_1 (1/5)
             Computing f_2 (2/5)
@@ -418,6 +420,7 @@ class SteenrodFPModule(FPModule, SteenrodModuleMixin):
 
         When there are no relations, the resolution is trivial::
 
+            sage: # needs sage.combinat
             sage: M = SteenrodFPModule(A, [0])
             sage: M.resolution(4)
             [Module endomorphism of Free graded left module on 1 generator over mod 2 Steenrod algebra, milnor basis

@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.combinat
 r"""
 Homomorphisms of finitely presented modules over the Steenrod algebra
 

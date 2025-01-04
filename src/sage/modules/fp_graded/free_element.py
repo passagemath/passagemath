@@ -67,6 +67,8 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
         EXAMPLES::
 
             sage: from sage.modules.fp_graded.free_module import FreeGradedModule
+
+            sage: # needs sage.combinat
             sage: A = SteenrodAlgebra()
             sage: M.<Y,Z> = FreeGradedModule(SteenrodAlgebra(2), (0, 1))
             sage: x = M.an_element(7); x
@@ -98,6 +100,7 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.modules.fp_graded.free_module import *
             sage: A = SteenrodAlgebra(2)
             sage: M = FreeGradedModule(A, (0,1))
@@ -108,15 +111,15 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
 
         The zero element has no degree::
 
-            sage: (x-x).degree()
+            sage: (x-x).degree()                                                        # needs sage.combinat
             Traceback (most recent call last):
             ...
             ValueError: the zero element does not have a well-defined degree
 
         Neither do non-homogeneous elements::
 
-            sage: y = M.an_element(4)
-            sage: (x+y).degree()
+            sage: y = M.an_element(4)                                                   # needs sage.combinat
+            sage: (x+y).degree()                                                        # needs sage.combinat
             Traceback (most recent call last):
             ...
             ValueError: this is a nonhomogeneous element, no well-defined degree
@@ -146,6 +149,7 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.modules.fp_graded.free_module import FreeGradedModule
             sage: A = SteenrodAlgebra(2)
             sage: M = FreeGradedModule(A, (0,1))
@@ -169,6 +173,7 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: from sage.modules.fp_graded.free_module import *
             sage: A2 = SteenrodAlgebra(2, profile=(3,2,1))
             sage: M.<x0,y0,z3> = FreeGradedModule(A2, (0,0,3))
@@ -179,6 +184,7 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: elements = [M.an_element(n) for n in range(1,10)]
             sage: a = A2.Sq(3)
             sage: [a*x for x in elements]
@@ -219,6 +225,7 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: A2 = SteenrodAlgebra(2, profile=(3,2,1))
             sage: M = A2.free_graded_module((0,1))
             sage: x = M.an_element(7)
@@ -230,17 +237,16 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
             (1)
             sage: M.gen(1).vector_presentation()
             (0, 1)
-
             sage: V = M.vector_presentation(7)
             sage: v in V
             True
-
             sage: M.element_from_coordinates(v, 7) == x
             True
 
         We can use the basis for the module elements in the degree of `x`,
         together with the coefficients `v` to recreate the element `x`::
 
+            sage: # needs sage.combinat
             sage: basis = M.basis_elements(7)
             sage: x_ = sum( [c*b for (c,b) in zip(v, basis)] ); x_
             Sq(0,0,1)*g[0] + Sq(3,1)*g[1]
@@ -251,14 +257,14 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
 
         This is not defined for elements that are not homogeneous::
 
-            sage: sum(M.basis()).vector_presentation()
+            sage: sum(M.basis()).vector_presentation()                                  # needs sage.combinat
             Traceback (most recent call last):
             ...
             ValueError: this is a nonhomogeneous element, no well-defined degree
 
         TESTS::
 
-            sage: M.zero().vector_presentation() is None
+            sage: M.zero().vector_presentation() is None                                # needs sage.combinat
             True
         """
         # We cannot represent the zero element since it does not have a degree,

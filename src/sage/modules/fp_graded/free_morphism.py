@@ -196,6 +196,7 @@ class FreeGradedModuleMorphism(FPModuleMorphism):
             sage: M.relations()
             (Sq(2)*g[0],)
 
+            sage: # needs sage.combinat
             sage: from sage.modules.fp_graded.module import FPModule
             sage: A = SteenrodAlgebra(2)
             sage: F1 = A.free_graded_module((2,))
