@@ -1,6 +1,7 @@
 # sage_setup: distribution = sagemath-graphs
 # cython: binding=True
 # distutils: language = c++
+# distutils: extra_compile_args = -std=c++11
 r"""
 Graph traversals
 
