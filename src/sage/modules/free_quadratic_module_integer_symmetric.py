@@ -1535,7 +1535,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         EXAMPLES::
 
-            sage: # needs sage.graphs
+            sage: # needs fpylll sage.graphs
             sage: L = IntegralLattice('A4')
             sage: t = vector([1.2, -3/11, 5.5, -9.1])
             sage: short = L.enumerate_short_vectors()   # implicit doctest
