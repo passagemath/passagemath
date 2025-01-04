@@ -8,7 +8,7 @@
     },
     "sage.arith.misc": {
         "failed": true,
-        "ntests": 919
+        "ntests": 920
     },
     "sage.arith.numerical_approx": {
         "ntests": 1
@@ -912,6 +912,9 @@
     "sage.data_structures.mutable_poset": {
         "ntests": 441
     },
+    "sage.data_structures.pairing_heap": {
+        "ntests": 293
+    },
     "sage.databases.knotinfo_db": {
         "ntests": 100
     },
@@ -1364,7 +1367,7 @@
         "ntests": 8
     },
     "sage.graphs.graph_generators": {
-        "ntests": 171
+        "ntests": 184
     },
     "sage.graphs.graph_generators_pyx": {
         "ntests": 7
@@ -1911,7 +1914,7 @@
         "ntests": 22
     },
     "sage.rings.continued_fraction": {
-        "ntests": 286
+        "ntests": 285
     },
     "sage.rings.continued_fraction_gosper": {
         "ntests": 34
@@ -2232,7 +2235,7 @@
         "ntests": 120
     },
     "sage.rings.semirings.tropical_variety": {
-        "ntests": 6
+        "ntests": 9
     },
     "sage.rings.sum_of_squares": {
         "ntests": 35

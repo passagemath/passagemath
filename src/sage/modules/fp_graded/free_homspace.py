@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Homsets of finitely generated free graded left modules
 
@@ -19,7 +20,7 @@ EXAMPLES::
       To:   Free graded left module on 2 generators over mod 2 Steenrod algebra, milnor basis
       Defn: g[1] |--> Sq(1)*h[2] + h[3]
             g[3] |--> Sq(2)*h[3]
-    sage: TestSuite(homset).run()
+    sage: TestSuite(homset).run()                                                       # needs sage.combinat
 
 AUTHORS:
 

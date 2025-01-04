@@ -33,6 +33,15 @@
         "failed": true,
         "ntests": 125
     },
+    "sage.algebras.steenrod.steenrod_algebra": {
+        "ntests": 2
+    },
+    "sage.algebras.steenrod.steenrod_algebra_bases": {
+        "ntests": 40
+    },
+    "sage.algebras.steenrod.steenrod_algebra_misc": {
+        "ntests": 100
+    },
     "sage.algebras.weyl_algebra": {
         "ntests": 4
     },
@@ -48,7 +57,7 @@
     },
     "sage.arith.misc": {
         "failed": true,
-        "ntests": 929
+        "ntests": 930
     },
     "sage.arith.numerical_approx": {
         "ntests": 4
@@ -716,7 +725,6 @@
         "ntests": 39
     },
     "sage.categories.unital_algebras": {
-        "failed": true,
         "ntests": 43
     },
     "sage.categories.vector_spaces": {
@@ -1232,6 +1240,9 @@
     "sage.data_structures.mutable_poset": {
         "ntests": 441
     },
+    "sage.data_structures.pairing_heap": {
+        "ntests": 293
+    },
     "sage.databases.knotinfo_db": {
         "ntests": 100
     },
@@ -1701,7 +1712,7 @@
     },
     "sage.graphs.graph_generators": {
         "failed": true,
-        "ntests": 179
+        "ntests": 192
     },
     "sage.graphs.graph_generators_pyx": {
         "ntests": 7
@@ -1890,11 +1901,9 @@
         "ntests": 252
     },
     "sage.homology.chain_complex_homspace": {
-        "failed": true,
         "ntests": 40
     },
     "sage.homology.chain_complex_morphism": {
-        "failed": true,
         "ntests": 135
     },
     "sage.homology.chain_homotopy": {
@@ -1916,7 +1925,6 @@
         "ntests": 22
     },
     "sage.homology.homology_morphism": {
-        "failed": true,
         "ntests": 100
     },
     "sage.homology.homology_vector_space_with_basis": {
@@ -2000,19 +2008,19 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2016
+        "ntests": 2018
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
     },
     "sage.matrix.matrix_complex_double_dense": {
-        "ntests": 3
+        "ntests": 4
     },
     "sage.matrix.matrix_dense": {
         "ntests": 35
     },
     "sage.matrix.matrix_double_dense": {
-        "ntests": 27
+        "ntests": 29
     },
     "sage.matrix.matrix_double_sparse": {
         "ntests": 25
@@ -2218,7 +2226,6 @@
         "ntests": 32
     },
     "sage.misc.functional": {
-        "failed": true,
         "ntests": 298
     },
     "sage.misc.gperftools": {
@@ -2421,6 +2428,21 @@
     "sage.modules.filtered_vector_space": {
         "ntests": 169
     },
+    "sage.modules.fp_graded.free_element": {
+        "ntests": 15
+    },
+    "sage.modules.fp_graded.free_homspace": {
+        "ntests": 8
+    },
+    "sage.modules.fp_graded.free_morphism": {
+        "ntests": 47
+    },
+    "sage.modules.fp_graded.steenrod.module": {
+        "ntests": 35
+    },
+    "sage.modules.fp_graded.steenrod.profile": {
+        "ntests": 25
+    },
     "sage.modules.free_module": {
         "failed": true,
         "ntests": 1453
@@ -2560,6 +2582,7 @@
         "ntests": 19
     },
     "sage.quadratic_forms.binary_qf": {
+        "failed": true,
         "ntests": 299
     },
     "sage.quadratic_forms.constructions": {
@@ -2738,6 +2761,9 @@
     "sage.rings.big_oh": {
         "ntests": 22
     },
+    "sage.rings.cfinite_sequence": {
+        "ntests": 149
+    },
     "sage.rings.complex_conversion": {
         "ntests": 4
     },
@@ -2753,7 +2779,7 @@
     },
     "sage.rings.continued_fraction": {
         "failed": true,
-        "ntests": 295
+        "ntests": 294
     },
     "sage.rings.continued_fraction_gosper": {
         "ntests": 34
@@ -2960,6 +2986,9 @@
     "sage.rings.polynomial.infinite_polynomial_ring": {
         "ntests": 279
     },
+    "sage.rings.polynomial.integer_valued_polynomials": {
+        "ntests": 231
+    },
     "sage.rings.polynomial.laurent_polynomial": {
         "failed": true,
         "ntests": 426
@@ -3045,6 +3074,9 @@
     },
     "sage.rings.polynomial.polynomial_singular_interface": {
         "ntests": 42
+    },
+    "sage.rings.polynomial.q_integer_valued_polynomials": {
+        "ntests": 207
     },
     "sage.rings.polynomial.skew_polynomial_element": {
         "ntests": 1
@@ -3148,7 +3180,7 @@
         "ntests": 132
     },
     "sage.rings.semirings.tropical_variety": {
-        "ntests": 6
+        "ntests": 9
     },
     "sage.rings.sum_of_squares": {
         "ntests": 35
@@ -3569,7 +3601,6 @@
         "ntests": 47
     },
     "sage.topology.simplicial_complex_morphism": {
-        "failed": true,
         "ntests": 224
     },
     "sage.topology.simplicial_set": {
@@ -3588,7 +3619,6 @@
         "ntests": 70
     },
     "sage.topology.simplicial_set_morphism": {
-        "failed": true,
         "ntests": 294
     },
     "sage.typeset.ascii_art": {

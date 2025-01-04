@@ -116,7 +116,6 @@ graft sage/modules
 exclude sage/modules/module.*           # in sagemath-objects
 exclude sage/modules/vector_mod2*.*     # depends on m4ri
 exclude sage/modules/vector_*symbol*.*  # --> sagemath-symbolics
-prune sage/modules/fp_graded
 
 include sage/geometry/toric_lattice*.p*
 
@@ -145,6 +144,7 @@ graft sage/algebras/finite_dimensional_algebras  # for hyperplane arrangements
 include sage/algebras/group_algebra.py
 include sage/algebras/commutative_dga.p*
 include sage/algebras/finite_gca.p*
+graft sage/algebras/steenrod
 
 graft sage/matrix
 exclude sage/matrix/misc.p*             # Matrix_integer_sparse

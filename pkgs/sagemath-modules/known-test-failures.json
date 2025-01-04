@@ -33,6 +33,15 @@
         "failed": true,
         "ntests": 80
     },
+    "sage.algebras.steenrod.steenrod_algebra": {
+        "ntests": 2
+    },
+    "sage.algebras.steenrod.steenrod_algebra_bases": {
+        "ntests": 40
+    },
+    "sage.algebras.steenrod.steenrod_algebra_misc": {
+        "ntests": 100
+    },
     "sage.algebras.weyl_algebra": {
         "ntests": 4
     },
@@ -1574,19 +1583,19 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2003
+        "ntests": 2005
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
     },
     "sage.matrix.matrix_complex_double_dense": {
-        "ntests": 3
+        "ntests": 4
     },
     "sage.matrix.matrix_dense": {
         "ntests": 35
     },
     "sage.matrix.matrix_double_dense": {
-        "ntests": 27
+        "ntests": 29
     },
     "sage.matrix.matrix_double_sparse": {
         "ntests": 25
@@ -1986,6 +1995,21 @@
     "sage.modules.filtered_vector_space": {
         "ntests": 169
     },
+    "sage.modules.fp_graded.free_element": {
+        "ntests": 15
+    },
+    "sage.modules.fp_graded.free_homspace": {
+        "ntests": 8
+    },
+    "sage.modules.fp_graded.free_morphism": {
+        "ntests": 47
+    },
+    "sage.modules.fp_graded.steenrod.module": {
+        "ntests": 35
+    },
+    "sage.modules.fp_graded.steenrod.profile": {
+        "ntests": 25
+    },
     "sage.modules.free_module": {
         "failed": true,
         "ntests": 1453
@@ -2125,6 +2149,7 @@
         "ntests": 19
     },
     "sage.quadratic_forms.binary_qf": {
+        "failed": true,
         "ntests": 299
     },
     "sage.quadratic_forms.constructions": {
@@ -2321,7 +2346,7 @@
     },
     "sage.rings.continued_fraction": {
         "failed": true,
-        "ntests": 295
+        "ntests": 294
     },
     "sage.rings.continued_fraction_gosper": {
         "ntests": 34
@@ -2722,7 +2747,7 @@
         "ntests": 132
     },
     "sage.rings.semirings.tropical_variety": {
-        "ntests": 6
+        "ntests": 9
     },
     "sage.rings.sum_of_squares": {
         "ntests": 35

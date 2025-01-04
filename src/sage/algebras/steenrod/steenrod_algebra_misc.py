@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-combinat
+# sage_setup: distribution = sagemath-modules
 """
 Miscellaneous functions for the Steenrod algebra and its elements
 
