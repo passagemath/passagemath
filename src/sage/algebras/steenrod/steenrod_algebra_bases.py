@@ -133,7 +133,7 @@ def convert_to_milnor_matrix(n, basis, p=2, generic='auto'):
 
     EXAMPLES::
 
-        sage: # needs sage.modules
+        sage: # needs sage.combinat sage.modules
         sage: from sage.algebras.steenrod.steenrod_algebra_bases import convert_to_milnor_matrix
         sage: convert_to_milnor_matrix(5, 'adem')  # indirect doctest
         [0 1]
@@ -152,7 +152,7 @@ def convert_to_milnor_matrix(n, basis, p=2, generic='auto'):
     The function takes an optional argument, the prime `p` over
     which to work::
 
-        sage: # needs sage.modules
+        sage: # needs sage.combinat sage.modules
         sage: convert_to_milnor_matrix(17, 'adem', 3)
         [0 0 1 1]
         [0 0 0 1]
@@ -209,7 +209,7 @@ def convert_from_milnor_matrix(n, basis, p=2, generic='auto'):
 
     EXAMPLES::
 
-        sage: # needs sage.modules
+        sage: # needs sage.combinat sage.modules
         sage: from sage.algebras.steenrod.steenrod_algebra_bases import convert_from_milnor_matrix, convert_to_milnor_matrix
         sage: convert_from_milnor_matrix(12, 'wall')
         [1 0 0 1 0 0 0]
@@ -245,7 +245,7 @@ def convert_from_milnor_matrix(n, basis, p=2, generic='auto'):
     The function takes an optional argument, the prime `p` over
     which to work::
 
-        sage: convert_from_milnor_matrix(17, 'adem', 3)                                 # needs sage.modules
+        sage: convert_from_milnor_matrix(17, 'adem', 3)                                 # needs sage.combinat sage.modules
         [2 1 1 2]
         [0 2 0 1]
         [1 2 0 0]
@@ -302,6 +302,7 @@ def steenrod_algebra_basis(n, basis='milnor', p=2, **kwds):
 
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.algebras.steenrod.steenrod_algebra_bases import steenrod_algebra_basis
         sage: steenrod_algebra_basis(7, 'milnor') # indirect doctest
         ((0, 0, 1), (1, 2), (4, 1), (7,))
@@ -310,12 +311,13 @@ def steenrod_algebra_basis(n, basis='milnor', p=2, **kwds):
 
     Bases in negative dimensions are empty::
 
-        sage: steenrod_algebra_basis(-2, 'wall')
+        sage: steenrod_algebra_basis(-2, 'wall')                                        # needs sage.combinat
         ()
 
     The third (optional) argument to 'steenrod_algebra_basis' is the
     prime p::
 
+        sage: # needs sage.combinat
         sage: steenrod_algebra_basis(9, 'milnor', p=3)
         (((1,), (1,)), ((0,), (2,)))
         sage: steenrod_algebra_basis(9, 'milnor', 3)
@@ -325,6 +327,7 @@ def steenrod_algebra_basis(n, basis='milnor', p=2, **kwds):
 
     Other bases::
 
+        sage: # needs sage.combinat
         sage: steenrod_algebra_basis(7, 'admissible')
         ((7,), (6, 1), (4, 2, 1), (5, 2))
         sage: steenrod_algebra_basis(13, 'admissible', p=3)
@@ -543,6 +546,7 @@ def milnor_basis(n, p=2, **kwds):
 
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.algebras.steenrod.steenrod_algebra_bases import milnor_basis
         sage: milnor_basis(7)
         ((0, 0, 1), (1, 2), (4, 1), (7,))
@@ -1021,10 +1025,10 @@ def atomic_basis_odd(n, basis, p, **kwds):
 
     EXAMPLES::
 
+        sage: # needs sage.combinat
         sage: from sage.algebras.steenrod.steenrod_algebra_bases import atomic_basis_odd
         sage: atomic_basis_odd(8, 'pst_rlex', 3)
         (((), (((0, 1), 2),)),)
-
         sage: atomic_basis_odd(18, 'pst_rlex', 3)
         (((0, 2), ()), ((0, 1), (((1, 1), 1),)))
         sage: atomic_basis_odd(18, 'pst_rlex', 3, profile=((), (2,2,2)))
