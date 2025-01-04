@@ -751,7 +751,7 @@ class DrinfeldModuleMorphism(Morphism, UniqueRepresentation,
 
             sage: g = phi.hom(T^2 + 1)
             sage: chi = g.characteristic_polynomial()
-            sage: chi.factor()
+            sage: chi.factor()                                                          # needs sage.libs.singular
             (X + 4*T^2 + 4)^3
 
         An example with another variable name::
@@ -809,7 +809,7 @@ class DrinfeldModuleMorphism(Morphism, UniqueRepresentation,
         is the rank::
 
             sage: g = phi.hom(T^2 + 1)
-            sage: g.charpoly().factor()
+            sage: g.charpoly().factor()                                                 # needs sage.libs.singular
             (X + 4*T^2 + 4)^3
 
         An example with another variable name::
