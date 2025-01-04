@@ -231,7 +231,7 @@ class FreeGradedModuleElement(IndexedFreeModuleElement):
             sage: x = M.an_element(7)
             sage: v = x.vector_presentation(); v
             (1, 0, 0, 0, 0, 1, 0)
-            sage: type(v)
+            sage: type(v)                                                               # needs sage.libs.m4ri
             <class 'sage.modules.vector_mod2_dense.Vector_mod2_dense'>
             sage: M.gen(0).vector_presentation()
             (1)
