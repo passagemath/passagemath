@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.combinat sage.graphs
 r"""
 BGG Category O Dual Modules
 
@@ -1168,7 +1169,7 @@ class FiniteDimensionalSimpleModule(SimpleModule):
             sage: g = LieAlgebra(QQ, cartan_type=['A', 2])
             sage: La = g.cartan_type().root_system().weight_lattice().fundamental_weights()
             sage: L = g.simple_module(La[1] + La[2])
-            sage: L.bgg_resolution()
+            sage: L.bgg_resolution()                                                    # needs sage.groups
             BGG resolution of Simple module with highest weight Lambda[1] + Lambda[2]
              of Lie algebra of ['A', 2] in the Chevalley basis
         """

@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.graphs
 """
 The Poincare-Birkhoff-Witt Basis For A Universal Enveloping Algebra
 
@@ -579,13 +580,13 @@ class PoincareBirkhoffWittBasis(CombinatorialFreeModule):
 
             sage: g = LieAlgebra(QQ, cartan_type=['A', 2])
             sage: U = g.pbw_basis()
-            sage: U.center()
+            sage: U.center()                                                            # needs sage.rings.number_field
             Center of Universal enveloping algebra of Lie algebra of ['A', 2]
              in the Chevalley basis in the Poincare-Birkhoff-Witt basis
 
             sage: g = lie_algebras.Heisenberg(GF(3), 4)
             sage: U = g.pbw_basis()
-            sage: U.center()
+            sage: U.center()                                                            # needs sage.rings.number_field
             Center of Universal enveloping algebra of Heisenberg algebra of rank 4
              over Finite Field of size 3 in the Poincare-Birkhoff-Witt basis
         """

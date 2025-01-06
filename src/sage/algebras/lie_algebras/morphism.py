@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.combinat sage.graphs
 """
 Homomorphisms of Lie Algebras
 
@@ -168,6 +169,7 @@ class LieAlgebraHomomorphism_im_gens(Morphism):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: R.<x> = ZZ[]
             sage: K.<i> = NumberField(x^2 + 1)
             sage: cc = K.hom([-i])
@@ -521,6 +523,7 @@ class LieAlgebraMorphism_from_generators(LieAlgebraHomomorphism_im_gens):
 
         We check that we can specify a base map to get a semi-linear morphism of Lie algebras::
 
+            sage: # needs sage.rings.number_field
             sage: R.<x> = ZZ[]
             sage: K.<i> = NumberField(x^2 + 1)
             sage: cc = K.hom([-i])

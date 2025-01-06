@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.combinat sage.graphs
 r"""
 Representations of Lie algebras
 
@@ -813,6 +814,7 @@ class FaithfulRepresentationPBWPosChar(CombinatorialFreeModule, Representation_a
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: sl2 = LieAlgebra(GF(3), cartan_type=['A',1])
         sage: F = sl2.faithful_representation()
         sage: F
@@ -827,6 +829,7 @@ class FaithfulRepresentationPBWPosChar(CombinatorialFreeModule, Representation_a
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: sl2 = LieAlgebra(GF(3), cartan_type=['A',1])
             sage: F = sl2.faithful_representation()
             sage: TestSuite(F).run()
@@ -877,6 +880,7 @@ class FaithfulRepresentationPBWPosChar(CombinatorialFreeModule, Representation_a
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: sl3 = LieAlgebra(GF(3), cartan_type=['A',2])
             sage: sl3.faithful_representation()
             Faithful representation with p-multiplicities (1, 1, 1, 3, 3, 1, 1, 1)
@@ -890,6 +894,7 @@ class FaithfulRepresentationPBWPosChar(CombinatorialFreeModule, Representation_a
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: sl2 = LieAlgebra(GF(3), cartan_type=['A',1])
             sage: latex(sl2.faithful_representation())
             U(\mathfrak{g}(A_{1})_{\Bold{F}_{3}}) / \langle PBW_{\alpha_{1}}^{3},
@@ -912,6 +917,7 @@ class FaithfulRepresentationPBWPosChar(CombinatorialFreeModule, Representation_a
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: sp4 = LieAlgebra(GF(3), cartan_type=['C',2])
             sage: F = sp4.faithful_representation()
             sage: F.p_exponents()
@@ -925,6 +931,7 @@ class FaithfulRepresentationPBWPosChar(CombinatorialFreeModule, Representation_a
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: sp4 = LieAlgebra(GF(3), cartan_type=['C',2])
             sage: F = sp4.faithful_representation()
             sage: F.groebner_basis()
@@ -947,6 +954,7 @@ class FaithfulRepresentationPBWPosChar(CombinatorialFreeModule, Representation_a
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: sl2 = LieAlgebra(GF(3), cartan_type=['A',1])
             sage: F = sl2.faithful_representation()
             sage: PBW = F._pbw
@@ -960,6 +968,7 @@ class FaithfulRepresentationPBWPosChar(CombinatorialFreeModule, Representation_a
             sage: F._project(elt^3)
             1
 
+            sage: # needs sage.libs.pari
             sage: elt = PBW(sum(sl2.basis())); elt
             PBW[alpha[1]] + PBW[alphacheck[1]] + PBW[-alpha[1]]
             sage: F._project(elt)
@@ -998,6 +1007,7 @@ class FaithfulRepresentationPBWPosChar(CombinatorialFreeModule, Representation_a
 
             EXAMPLES::
 
+                sage: # needs sage.libs.pari
                 sage: sl2 = LieAlgebra(GF(3), cartan_type=['A',1])
                 sage: F = sl2.faithful_representation()
                 sage: v = F.an_element(); v

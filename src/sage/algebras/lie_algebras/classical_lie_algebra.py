@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.graphs
 """
 Classical Lie Algebras
 
@@ -1873,7 +1874,7 @@ class LieAlgebraChevalleyBasis(LieAlgebraWithStructureCoefficients):
         EXAMPLES::
 
             sage: L = LieAlgebra(ZZ, cartan_type=['G',2])
-            sage: L._test_structure_coeffs()
+            sage: L._test_structure_coeffs()                                            # needs sage.libs.gap
         """
         tester = self._tester(**options)
         ct = self.cartan_type()
