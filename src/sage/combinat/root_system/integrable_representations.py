@@ -1172,6 +1172,7 @@ class IntegrableRepresentation(UniqueRepresentation, CategoryObject):
 
         The branch method gives a way of computing the graded dimension of the integrable representation::
 
+            sage: # needs sage.groups
             sage: Lambda = RootSystem("A1~").weight_lattice(extended=true).fundamental_weights()
             sage: V=IntegrableRepresentation(Lambda[0])
             sage: r = [x.degree() for x in V.branch(depth=15)]; r

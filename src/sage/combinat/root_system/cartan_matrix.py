@@ -388,7 +388,7 @@ class CartanMatrix(Base, CartanType_abstract,
         TESTS::
 
             sage: C = CartanMatrix(['A',1,1])  # indirect doctest                       # needs sage.graphs
-            sage: TestSuite(C).run(skip=["_test_category", "_test_change_ring"])        # needs sage.graphs
+            sage: TestSuite(C).run(skip=["_test_category", "_test_change_ring"])        # needs sage.graphs sage.libs.pari
 
         Check that :issue:`37979` is fixed::
 
