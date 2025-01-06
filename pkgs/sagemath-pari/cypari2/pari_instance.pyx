@@ -380,6 +380,35 @@ cpdef long default_bitprec() noexcept:
     return DEFAULT_BITPREC
 
 
+def prec_words_to_dec(long prec_in_words):
+    r"""
+    Deprecated internal function.
+
+    Convert from precision expressed in words to precision expressed in
+    decimal. Note: this adjusts for the two codewords of a pari real,
+    and is architecture-dependent.
+
+    Examples:
+
+    >>> from cypari2.pari_instance import prec_words_to_dec
+    >>> import sys
+    >>> import warnings
+    >>> warnings.simplefilter("ignore")
+    >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
+    >>> prec_words_to_dec(5) == (28 if bitness == '32' else 57)
+    True
+
+    >>> ans32 = [(3, 9), (4, 19), (5, 28), (6, 38), (7, 48), (8, 57), (9, 67)]
+    >>> ans64 = [(3, 19), (4, 38), (5, 57), (6, 77), (7, 96), (8, 115), (9, 134)]
+    >>> [(n, prec_words_to_dec(n)) for n in range(3, 10)] == (ans32 if bitness == '32' else ans64)
+    True
+    """
+    from warnings import warn
+    warn("'prec_words_to_dec` in cypari2 is internal and deprecated",
+         DeprecationWarning)
+    return prec_bits_to_dec(prec_words_to_bits(prec_in_words))
+
+
 # Callbacks from PARI to print stuff using sys.stdout.write() instead
 # of C library functions like puts().
 cdef PariOUT python_pariOut
