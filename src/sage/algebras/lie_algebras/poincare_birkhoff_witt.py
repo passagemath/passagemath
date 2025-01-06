@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 The Poincare-Birkhoff-Witt Basis For A Universal Enveloping Algebra
 

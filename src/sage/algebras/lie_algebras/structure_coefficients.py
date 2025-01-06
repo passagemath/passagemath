@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Lie Algebras Given By Structure Coefficients
 
