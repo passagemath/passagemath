@@ -588,7 +588,10 @@ class SageCustomizations:
         self.init_inspector()
         self.init_line_transforms()
 
-        import sage.all  # noqa: F401
+        try:
+            import sage.all # until sage's import hell is fixed
+        except ImportError:
+            import sage.all__sagemath_repl
 
         self.shell.verbose_quit = True
 
