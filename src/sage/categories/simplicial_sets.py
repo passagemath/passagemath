@@ -697,7 +697,7 @@ class SimplicialSets(Category_singleton):
 
                 ::
 
-                    sage: # needs sage.graphs sage.modules
+                    sage: # needs sage.combinat sage.graphs sage.modules
                     sage: Y = simplicial_sets.RealProjectiveSpace(2)
                     sage: C = Y.twisted_chain_complex()
                     sage: C.differential(1)
