@@ -96,7 +96,10 @@ jobs:
           set -x
           pkg=${{ matrix.distribution }}
           WHEELHOUSE=$(pwd)/wheelhouse
-          export PIP_FIND_LINKS=file://$WHEELHOUSE
+          for whl in "$WHEELHOUSE"/*.whl; do
+              echo "${whl%%-*} @ file://$whl"
+          done > constraints.txt
+          export PIP_CONSTRAINT=$(pwd)/constraints.txt
           cd pkgs/$pkg
           pkg_underscore=${pkg//-/_}
           case "${{ matrix.os }}" in
