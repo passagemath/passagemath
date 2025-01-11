@@ -71,7 +71,6 @@ dnl From build/pkgs/sagelib/dependencies
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_pplpy
-    SPKG_INSTALL_REQUIRES_primecountpy
     SPKG_INSTALL_REQUIRES_requests
 dnl From Makefile.in: SAGERUNTIME
     SPKG_INSTALL_REQUIRES_ipython
@@ -96,6 +95,14 @@ include(`pyproject_toml_metadata.m4')dnl'
 [project.readme]
 file = "README.rst"
 content-type = "text/x-rst"
+
+[project.optional-dependencies]
+test = [
+     "passagemath-repl",
+]
+primecountpy = [
+    SPKG_INSTALL_REQUIRES_primecountpy
+]
 
 [tool.setuptools]
 script-files = [

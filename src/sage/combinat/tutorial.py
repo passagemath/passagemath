@@ -852,7 +852,7 @@ Partial orders on a set of `8` elements, up to isomorphism::
 
 ::
 
-    sage: C.unrank(20).plot()
+    sage: C.unrank(20).plot()                                                           # needs sage.plot
     Graphics object consisting of ... graphics primitives
 
 .. image:: ../../media/a_poset.png

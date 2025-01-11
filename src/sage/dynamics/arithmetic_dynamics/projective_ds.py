@@ -778,7 +778,7 @@ class DynamicalSystem_projective(SchemeMorphism_polynomial_projective_space,
             sage: S.<t> = PolynomialRing(T)
             sage: P.<x,y> = ProjectiveSpace(FractionField(S),1)
             sage: f = DynamicalSystem_projective([t*x^2 - 1/t*y^2, y^2])
-            sage: f.dynatomic_polynomial([1, 2]).parent()                               # needs sage.libs.pari
+            sage: f.dynatomic_polynomial([1, 2]).parent()                               # needs sage.libs.pari sage.symbolic
             Multivariate Polynomial Ring in x, y over Fraction Field of Univariate Polynomial
             Ring in t over Number Field in v with defining polynomial x^2 - 33 with v = 5.744562646538029?
 
