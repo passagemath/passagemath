@@ -37,6 +37,9 @@ test = [
      "passagemath-repl",
      "passagemath-modules",
 ]
+primecountpy = [
+    SPKG_INSTALL_REQUIRES_primecountpy
+]
 
 [tool.setuptools]
 include-package-data = false

@@ -174,8 +174,12 @@ cdef class MultiModularBasis_base():
         self._l_bound = l_bound
         self._u_bound = u_bound
 
-        from primecountpy.primecount import prime_pi
-        self._num_primes = prime_pi(self._u_bound) - prime_pi(self._l_bound-1)
+        try:
+            from primecountpy.primecount import prime_pi
+        except ImportError:
+            self._num_primes = (self._u_bound - self._l_bound + 1) // 2
+        else:
+            self._num_primes = prime_pi(self._u_bound) - prime_pi(self._l_bound-1)
 
         if isinstance(val, (list, tuple, GeneratorType)):
             self.extend_with_primes(val, check=True)
