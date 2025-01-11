@@ -28,6 +28,4 @@ try:
 except ImportError:
     pass
 
-from sage.dynamics.cellular_automata.all import *
-
 del install_doc
