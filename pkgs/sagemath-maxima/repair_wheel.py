@@ -15,3 +15,10 @@ command = f'ln -sf {shlex.quote(SAGE_LOCAL)} sage_wheels && zip -r {shlex.quote(
 print(f'Running {command}')
 sys.stdout.flush()
 os.system(command)
+
+# Remove the sage-conf dependency; it is not needed because our wheels ship what is needed.
+
+command = f'rm -rf *.dist-info && unzip {shlex.quote(wheel)} "*.dist-info/METADATA" && sed -i.bak "/^Requires-Dist: passagemath-conf/d" *.dist-info/METADATA && zip -r {shlex.quote(wheel)} *.dist-info/METADATA'
+print(f'Running {command}')
+sys.stdout.flush()
+os.system(command)
