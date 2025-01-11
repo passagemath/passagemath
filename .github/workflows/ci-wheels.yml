@@ -27,7 +27,10 @@ jobs:
           - sagemath-cliquer
           - sagemath-combinat
           - sagemath-coxeter3
+          - sagemath-ecl
+          - sagemath-eclib
           - sagemath-flint
+          - sagemath-gap
           - sagemath-giac
           - sagemath-glucose
           - sagemath-graphs
@@ -36,9 +39,13 @@ jobs:
           - sagemath-kissat
           - sagemath-latte-4ti2
           - sagemath-libbraiding
+          - sagemath-linbox
           - sagemath-lrslib
+          - sagemath-maxima
           - sagemath-modules
           - sagemath-msolve
+          - sagemath-ntl
+          - sagemath-palp
           - sagemath-pari
           - sagemath-planarity
           - sagemath-plantri
@@ -46,7 +53,6 @@ jobs:
           - sagemath-polyhedra
           - sagemath-qepcad
           - sagemath-rankwidth
-          - sagemath-repl
           - sagemath-rubiks
           - sagemath-schemes
           - sagemath-sirocco
@@ -95,10 +101,15 @@ jobs:
         run: |
           set -x
           pkg=${{ matrix.distribution }}
-          WHEELHOUSE=$(pwd)/wheelhouse
-          export PIP_FIND_LINKS=file://$WHEELHOUSE
-          cd pkgs/$pkg
           pkg_underscore=${pkg//-/_}
+          WHEELHOUSE=$(pwd)/wheelhouse
+          (set +x; cd "$WHEELHOUSE" && for whl in *.whl; do
+               case $whl in
+                   *$pkg_underscore-*) ;;
+                   *-cp310-*)          echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+               esac;
+           done) | tee constraints.txt
+          export PIP_CONSTRAINT=$(pwd)/constraints.txt
           case "${{ matrix.os }}" in
               ubuntu*)  tag="manylinux*_x86_64";;
               macos-13) tag="macosx_*_x86_64";;
@@ -108,6 +119,7 @@ jobs:
           eval ls -l $wheel_pattern
           wheel=$(eval ls $wheel_pattern | head -n1)
           if [ -n "$wheel" ]; then
+              cd pkgs/$pkg
               tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py310-norequirements/')
               eval tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
           fi
