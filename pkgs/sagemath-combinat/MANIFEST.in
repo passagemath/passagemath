@@ -95,6 +95,7 @@ include sage/databases/findstat.py
 include sage/databases/oeis.py
 include sage/databases/sloane.py
 
+graft sage/dynamics/cellular_automata
 include sage/dynamics/finite_dynamical_system*.p*
 
 
