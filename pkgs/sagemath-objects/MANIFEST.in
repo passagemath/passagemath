@@ -98,6 +98,8 @@ include sage/misc/session.p*
 include sage/misc/reset.p*
 include sage/misc/sage_ostools.p*
 
+include sage/tests/*.pyx
+
 global-exclude all__*.py
 global-include all__sagemath_objects.py
 
