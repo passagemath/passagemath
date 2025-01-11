@@ -27,7 +27,10 @@ jobs:
           - sagemath-cliquer
           - sagemath-combinat
           - sagemath-coxeter3
+          - sagemath-ecl
+          - sagemath-eclib
           - sagemath-flint
+          - sagemath-gap
           - sagemath-giac
           - sagemath-glucose
           - sagemath-graphs
@@ -36,9 +39,13 @@ jobs:
           - sagemath-kissat
           - sagemath-latte-4ti2
           - sagemath-libbraiding
+          - sagemath-linbox
           - sagemath-lrslib
+          - sagemath-maxima
           - sagemath-modules
           - sagemath-msolve
+          - sagemath-ntl
+          - sagemath-palp
           - sagemath-pari
           - sagemath-planarity
           - sagemath-plantri
@@ -46,7 +53,6 @@ jobs:
           - sagemath-polyhedra
           - sagemath-qepcad
           - sagemath-rankwidth
-          - sagemath-repl
           - sagemath-rubiks
           - sagemath-schemes
           - sagemath-sirocco
