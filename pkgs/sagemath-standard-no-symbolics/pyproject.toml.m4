@@ -66,7 +66,6 @@ dnl From build/pkgs/sagelib/dependencies
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_jupyter_core
-    SPKG_INSTALL_REQUIRES_lrcalc_python
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_pkgconfig
@@ -99,6 +98,9 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test = [
      "passagemath-repl",
+]
+lrcalc = [
+    SPKG_INSTALL_REQUIRES_lrcalc_python
 ]
 primecountpy = [
     SPKG_INSTALL_REQUIRES_primecountpy
