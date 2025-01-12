@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-objects
+# sage_setup: distribution = sagemath-categories
 """
 This file collects tests requiring Cython.
 """

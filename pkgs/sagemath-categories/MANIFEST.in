@@ -251,6 +251,8 @@ exclude sage/sets/pythonclass.*                                 # sagemath-objec
 
 include sage/numerical/backends/generic*backend.p*
 
+include sage/tests/*.pyx
+
 ## These two should probably go to sagemath-combinat instead.
 # include sage/data_structures/stream.p*
 # include sage/rings/lazy_series*.p*
