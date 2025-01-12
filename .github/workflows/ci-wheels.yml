@@ -103,10 +103,13 @@ jobs:
           pkg=${{ matrix.distribution }}
           pkg_underscore=${pkg//-/_}
           WHEELHOUSE=$(pwd)/wheelhouse
+          export PIP_FIND_LINKS=file://$WHEELHOUSE
           (set +x; cd "$WHEELHOUSE" && for whl in *.whl; do
                case $whl in
-                   *$pkg_underscore-*) ;;
-                   *-cp310-*)          echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                   *$pkg_underscore-*)     ;;
+                   *musllinux*)            ;;
+                   *_i686*)                ;;
+                   *-cp310-*|*-none-any-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                esac;
            done) | tee constraints.txt
           export PIP_CONSTRAINT=$(pwd)/constraints.txt
