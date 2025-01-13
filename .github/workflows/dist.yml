@@ -212,7 +212,7 @@ jobs:
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
-      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel repair -w {dest_dir} {wheel}"
+      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel --version && auditwheel -v -v -v -v repair -w {dest_dir} {wheel}"
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
       # Avoid onetbb build failure on manylinux2014 (https://github.com/passagemath/passagemath/issues/460)
@@ -573,7 +573,7 @@ jobs:
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
-      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel repair -w {dest_dir} {wheel}"
+      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel --version && auditwheel -v -v -v -v repair -w {dest_dir} {wheel}"
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
       # Avoid onetbb build failure on manylinux2014 (https://github.com/passagemath/passagemath/issues/460)
