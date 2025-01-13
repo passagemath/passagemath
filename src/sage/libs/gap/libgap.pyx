@@ -151,7 +151,7 @@ using the recursive expansion of the
     [ [ 1, 2, 9, 10 ], [ 3, 4, 11, 12 ], [ 0, 0, 5, 6 ], [ 0, 0, 7, 8 ] ]
     sage: M.List().sage()   # returns a Sage list of lists
     [[1, 2, 9, 10], [3, 4, 11, 12], [0, 0, 5, 6], [0, 0, 7, 8]]
-    sage: matrix(ZZ, _)
+    sage: matrix(ZZ, _)                                                                 # needs sage.modules
     [ 1  2  9 10]
     [ 3  4 11 12]
     [ 0  0  5  6]
@@ -287,11 +287,11 @@ class Gap(Parent):
             0
             sage: libgap(int(0))
             0
-            sage: libgap(vector((0,1,2)))
+            sage: libgap(vector((0,1,2)))                                               # needs sage.modules
             [ 0, 1, 2 ]
-            sage: libgap(vector((1/3,2/3,4/5)))
+            sage: libgap(vector((1/3,2/3,4/5)))                                         # needs sage.modules
             [ 1/3, 2/3, 4/5 ]
-            sage: libgap(vector((1/3, 0.8, 3)))
+            sage: libgap(vector((1/3, 0.8, 3)))                                         # needs sage.modules
             [ 0.333333, 0.8, 3. ]
         """
         initialize()
@@ -333,21 +333,19 @@ class Gap(Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: M = libgap._construct_matrix(identity_matrix(ZZ,2)); M
             [ [ 1, 0 ], [ 0, 1 ] ]
             sage: M.IsMatrix()
             true
-
             sage: M = libgap(identity_matrix(ZZ,2)); M  # syntactic sugar
             [ [ 1, 0 ], [ 0, 1 ] ]
             sage: M.IsMatrix()
             true
-
             sage: M = libgap(matrix(GF(3),2,2,[4,5,6,7])); M
             [ [ Z(3)^0, Z(3) ], [ 0*Z(3), Z(3)^0 ] ]
             sage: M.IsMatrix()
             true
-
             sage: x = polygen(QQ, 'x')
             sage: M = libgap(matrix(QQ['x'],2,2,[x,5,6,7])); M
             [ [ x, 5 ], [ 6, 7 ] ]
