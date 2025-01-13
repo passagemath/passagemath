@@ -288,8 +288,8 @@ class Groups(CategoryWithAxiom):
 
             ::
 
-                sage: A = AbelianGroup([2, 3])                                          # needs sage.groups
-                sage: A.cayley_table()                                                  # needs sage.groups
+                sage: A = AbelianGroup([2, 3])                                          # needs sage.modules
+                sage: A.cayley_table()                                                  # needs sage.modules
                 *  a b c d e f
                  +------------
                 a| a b c d e f

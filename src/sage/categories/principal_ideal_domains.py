@@ -141,7 +141,7 @@ class PrincipalIdealDomains(Category_singleton):
 
             EXAMPLES::
 
-                sage: QQ.class_group()                                                      # needs sage.groups
+                sage: QQ.class_group()                                                      # needs sage.groups sage.modules
                 Trivial Abelian group
             """
             from sage.groups.abelian_gps.abelian_group import AbelianGroup

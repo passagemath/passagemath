@@ -24,7 +24,7 @@ class FiniteGroups(CategoryWithAxiom):
         Category of finite groups
         sage: C.super_categories()
         [Category of finite monoids, Category of groups]
-        sage: C.example()
+        sage: C.example()                                                               # needs sage.modules
         General Linear Group of degree 2 over Finite Field of size 3
 
     TESTS::
@@ -39,7 +39,7 @@ class FiniteGroups(CategoryWithAxiom):
 
         EXAMPLES::
 
-            sage: G = FiniteGroups().example(); G
+            sage: G = FiniteGroups().example(); G                                       # needs sage.modules
             General Linear Group of degree 2 over Finite Field of size 3
         """
         from sage.groups.matrix_gps.linear import GL
@@ -224,6 +224,7 @@ class FiniteGroups(CategoryWithAxiom):
 
                 EXAMPLES::
 
+                    sage: # needs sage.modules
                     sage: G = groups.permutation.Dihedral(8)
                     sage: A = G.algebra(GF(5))
                     sage: A in Algebras.Semisimple
@@ -232,6 +233,7 @@ class FiniteGroups(CategoryWithAxiom):
                     sage: A in Algebras.Semisimple
                     False
 
+                    sage: # needs sage.modules
                     sage: G = groups.misc.AdditiveCyclic(4)                             # needs sage.rings.number_field
                     sage: Cat = CommutativeAdditiveGroups().Finite()
                     sage: A = G.algebra(GF(5), category=Cat)
