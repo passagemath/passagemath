@@ -34,7 +34,7 @@
     },
     "sage.categories.additive_magmas": {
         "failed": true,
-        "ntests": 137
+        "ntests": 133
     },
     "sage.categories.additive_monoids": {
         "ntests": 16
@@ -79,7 +79,6 @@
         "ntests": 42
     },
     "sage.categories.category": {
-        "failed": true,
         "ntests": 433
     },
     "sage.categories.category_cy_helper": {
@@ -314,8 +313,7 @@
         "ntests": 14
     },
     "sage.categories.finite_groups": {
-        "failed": true,
-        "ntests": 39
+        "ntests": 29
     },
     "sage.categories.finite_lattice_posets": {
         "ntests": 31
@@ -434,8 +432,7 @@
         "ntests": 19
     },
     "sage.categories.hopf_algebras_with_basis": {
-        "failed": true,
-        "ntests": 43
+        "ntests": 23
     },
     "sage.categories.infinite_enumerated_sets": {
         "ntests": 13
@@ -486,7 +483,6 @@
         "ntests": 1
     },
     "sage.categories.magmas": {
-        "failed": true,
         "ntests": 147
     },
     "sage.categories.magmas_and_additive_magmas": {
@@ -521,7 +517,7 @@
     },
     "sage.categories.monoids": {
         "failed": true,
-        "ntests": 86
+        "ntests": 81
     },
     "sage.categories.morphism": {
         "ntests": 132
@@ -557,7 +553,6 @@
         "ntests": 165
     },
     "sage.categories.principal_ideal_domains": {
-        "failed": true,
         "ntests": 29
     },
     "sage.categories.pushout": {
@@ -597,14 +592,12 @@
         "ntests": 39
     },
     "sage.categories.semigroups": {
-        "failed": true,
-        "ntests": 125
+        "ntests": 114
     },
     "sage.categories.semirings": {
         "ntests": 6
     },
     "sage.categories.semisimple_algebras": {
-        "failed": true,
         "ntests": 15
     },
     "sage.categories.sets_cat": {
@@ -1229,7 +1222,7 @@
     },
     "sage.libs.gap.libgap": {
         "failed": true,
-        "ntests": 98
+        "ntests": 89
     },
     "sage.libs.gap.operations": {
         "ntests": 15
@@ -1544,7 +1537,7 @@
         "ntests": 22
     },
     "sage.repl.display.fancy_repr": {
-        "ntests": 27
+        "ntests": 28
     },
     "sage.repl.display.formatter": {
         "ntests": 58
@@ -1591,7 +1584,6 @@
         "ntests": 77
     },
     "sage.repl.ipython_tests": {
-        "failed": true,
         "ntests": 26
     },
     "sage.repl.load": {
@@ -1653,7 +1645,7 @@
         "ntests": 22
     },
     "sage.rings.continued_fraction": {
-        "ntests": 286
+        "ntests": 285
     },
     "sage.rings.continued_fraction_gosper": {
         "ntests": 34
@@ -1870,14 +1862,14 @@
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
         "failed": true,
-        "ntests": 129
+        "ntests": 131
     },
     "sage.rings.polynomial.polydict": {
         "ntests": 396
     },
     "sage.rings.polynomial.polynomial_element": {
         "failed": true,
-        "ntests": 1823
+        "ntests": 1830
     },
     "sage.rings.polynomial.polynomial_element_generic": {
         "ntests": 194
@@ -1960,7 +1952,7 @@
         "ntests": 19
     },
     "sage.rings.ring": {
-        "ntests": 160
+        "ntests": 154
     },
     "sage.rings.semirings.non_negative_integer_semiring": {
         "ntests": 16
@@ -1975,7 +1967,7 @@
         "ntests": 120
     },
     "sage.rings.semirings.tropical_variety": {
-        "ntests": 6
+        "ntests": 9
     },
     "sage.rings.sum_of_squares": {
         "ntests": 35
@@ -2226,7 +2218,7 @@
         "ntests": 84
     },
     "sage.structure.sequence": {
-        "ntests": 183
+        "ntests": 194
     },
     "sage.structure.set_factories": {
         "ntests": 225
@@ -2262,6 +2254,9 @@
     "sage.tests.cmdline": {
         "ntests": 116
     },
+    "sage.tests.cython": {
+        "ntests": 3
+    },
     "sage.tests.finite_poset": {
         "ntests": 1
     },
@@ -2273,6 +2268,9 @@
     },
     "sage.tests.startup": {
         "ntests": 6
+    },
+    "sage.tests.stl_vector": {
+        "ntests": 23
     },
     "sage.tests.test_deprecation": {
         "ntests": 4
