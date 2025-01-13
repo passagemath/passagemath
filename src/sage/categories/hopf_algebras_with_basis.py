@@ -34,24 +34,23 @@ class HopfAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
     We now show how to use a simple Hopf algebra, namely the group algebra of the dihedral group
     (see also AlgebrasWithBasis)::
 
-        sage: A = C.example(); A                                                        # needs sage.groups
+        sage: # needs sage.groups sage.modules
+        sage: A = C.example(); A
         An example of Hopf algebra with basis: the group algebra of the
          Dihedral group of order 6 as a permutation group over Rational Field
-        sage: A.rename('A')                                                             # needs sage.groups
-        sage: A.category()                                                              # needs sage.groups
+        sage: A.rename('A')
+        sage: A.category()
         Category of finite dimensional Hopf algebras with basis over Rational Field
-
-        sage: A.one_basis()                                                             # needs sage.groups
+        sage: A.one_basis()
         ()
-        sage: A.one()                                                                   # needs sage.groups
+        sage: A.one()
         B[()]
-
-        sage: A.base_ring()                                                             # needs sage.groups
+        sage: A.base_ring()
         Rational Field
-        sage: A.basis().keys()                                                          # needs sage.groups
+        sage: A.basis().keys()
         Dihedral group of order 6 as a permutation group
 
-        sage: # needs sage.groups
+        sage: # needs sage.groups sage.modules
         sage: [a,b] = A.algebra_generators()
         sage: a, b
         (B[(1,2,3)], B[(1,3)])
@@ -60,19 +59,19 @@ class HopfAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
         sage: a*b
         B[(1,2)]
 
-        sage: A.product           # todo: not quite ...                                 # needs sage.groups
+        sage: A.product           # todo: not quite ...                                 # needs sage.groups sage.modules
         <bound method MagmaticAlgebras.WithBasis.ParentMethods._product_from_product_on_basis_multiply of A>
-        sage: A.product(b, b)                                                           # needs sage.groups
+        sage: A.product(b, b)                                                           # needs sage.groups sage.modules
         B[()]
 
-        sage: A.zero().coproduct()                                                      # needs sage.groups
+        sage: A.zero().coproduct()                                                      # needs sage.groups sage.modules
         0
-        sage: A.zero().coproduct().parent()                                             # needs sage.groups
+        sage: A.zero().coproduct().parent()                                             # needs sage.groups sage.modules
         A # A
-        sage: a.coproduct()                                                             # needs sage.groups
+        sage: a.coproduct()                                                             # needs sage.groups sage.modules
         B[(1,2,3)] # B[(1,2,3)]
 
-        sage: TestSuite(A).run(verbose=True)                                            # needs sage.groups
+        sage: TestSuite(A).run(verbose=True)                                            # needs sage.groups sage.modules
         running ._test_additive_associativity() . . . pass
         running ._test_an_element() . . . pass
         running ._test_antipode() . . . pass
@@ -104,18 +103,18 @@ class HopfAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
         running ._test_prod() . . . pass
         running ._test_some_elements() . . . pass
         running ._test_zero() . . . pass
-        sage: A.__class__                                                               # needs sage.groups
+        sage: A.__class__                                                               # needs sage.groups sage.modules
         <class 'sage.categories.examples.hopf_algebras_with_basis.MyGroupAlgebra_with_category'>
-        sage: A.element_class                                                           # needs sage.groups
+        sage: A.element_class                                                           # needs sage.groups sage.modules
         <class 'sage.categories.examples.hopf_algebras_with_basis.MyGroupAlgebra_with_category.element_class'>
 
     Let us look at the code for implementing A::
 
-        sage: A??                               # not implemented                       # needs sage.groups
+        sage: A??                               # not implemented                       # needs sage.groups sage.modules
 
     TESTS::
 
-        sage: TestSuite(A).run()                                                        # needs sage.groups
+        sage: TestSuite(A).run()                                                        # needs sage.groups sage.modules
         sage: TestSuite(C).run()
     """
 
@@ -123,14 +122,14 @@ class HopfAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
         """
         Return an example of algebra with basis::
 
-            sage: HopfAlgebrasWithBasis(QQ['x']).example()                              # needs sage.groups
+            sage: HopfAlgebrasWithBasis(QQ['x']).example()                              # needs sage.groups sage.modules
             An example of Hopf algebra with basis: the group algebra of the
             Dihedral group of order 6 as a permutation group
             over Univariate Polynomial Ring in x over Rational Field
 
         An other group can be specified as optional argument::
 
-            sage: HopfAlgebrasWithBasis(QQ).example(SymmetricGroup(4))                  # needs sage.groups
+            sage: HopfAlgebrasWithBasis(QQ).example(SymmetricGroup(4))                  # needs sage.groups sage.modules
             An example of Hopf algebra with basis: the group algebra of the
             Symmetric group of order 4! as a permutation group over Rational Field
         """
@@ -182,7 +181,7 @@ class HopfAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.groups
+                sage: # needs sage.groups sage.modules
                 sage: A = HopfAlgebrasWithBasis(QQ).example()
                 sage: W = A.basis().keys(); W
                 Dihedral group of order 6 as a permutation group
@@ -204,7 +203,7 @@ class HopfAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.groups
+                sage: # needs sage.groups sage.modules
                 sage: A = HopfAlgebrasWithBasis(ZZ).example(); A
                 An example of Hopf algebra with basis: the group algebra of the
                  Dihedral group of order 6 as a permutation group over Integer Ring
@@ -217,7 +216,7 @@ class HopfAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             TESTS::
 
-                sage: all(A.antipode(x) * x == A.one() for x in A.basis())              # needs sage.groups
+                sage: all(A.antipode(x) * x == A.one() for x in A.basis())              # needs sage.groups sage.modules
                 True
             """
             if self.antipode_on_basis is not NotImplemented:

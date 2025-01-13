@@ -464,7 +464,7 @@ class Semigroups(CategoryWithAxiom):
             EXAMPLES::
 
                 sage: G = groups.permutation.Dihedral(4)                                # needs sage.groups
-                sage: G.trivial_representation()                                        # needs sage.groups
+                sage: G.trivial_representation()                                        # needs sage.groups sage.modules
                 Trivial representation of Dihedral group of order 8
                  as a permutation group over Integer Ring
             """
@@ -484,7 +484,7 @@ class Semigroups(CategoryWithAxiom):
             EXAMPLES::
 
                 sage: G = groups.permutation.Dihedral(4)                                # needs sage.groups
-                sage: G.regular_representation()                                        # needs sage.groups
+                sage: G.regular_representation()                                        # needs sage.groups sage.modules
                 Left Regular Representation of Dihedral group of order 8
                  as a permutation group over Integer Ring
             """
@@ -511,7 +511,7 @@ class Semigroups(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: # needs sage.groups
+                sage: # needs sage.groups sage.modules
                 sage: G = CyclicPermutationGroup(3)
                 sage: M = algebras.Exterior(QQ, 'x', 3)
                 sage: def on_basis(g, m):  # cyclically permute generators
@@ -1060,7 +1060,7 @@ class Semigroups(CategoryWithAxiom):
 
                 EXAMPLES::
 
-                    sage: # needs sage.groups
+                    sage: # needs sage.groups sage.modules
                     sage: G = groups.permutation.Dihedral(5)
                     sage: CFM = CombinatorialFreeModule(GF(2), [1, 2, 3, 4, 5])
                     sage: A = G.algebra(GF(2))

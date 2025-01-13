@@ -246,7 +246,7 @@ class Monoids(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: # needs sage.groups
+                sage: # needs sage.combinat sage.groups
                 sage: G = FreeGroup(2)
                 sage: x0, x1 = G.group_generators()
                 sage: c1 = cartesian_product([x0, x1])

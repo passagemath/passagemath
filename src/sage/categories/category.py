@@ -23,7 +23,7 @@ We create a couple of categories::
 
     sage: Sets()
     Category of sets
-    sage: GSets(AbelianGroup([2, 4, 9]))                                                # needs sage.groups
+    sage: GSets(AbelianGroup([2, 4, 9]))                                                # needs sage.groups sage.modules
     Category of G-sets for Multiplicative Abelian group isomorphic to C2 x C4 x C9
     sage: Semigroups()
     Category of semigroups

@@ -887,7 +887,7 @@ class Magmas(Category_singleton):
             ASCII letters.  ::
 
                 sage: G = CyclicPermutationGroup(5)                                     # needs sage.groups
-                sage: G.multiplication_table()                                          # needs sage.groups
+                sage: G.multiplication_table()                                          # needs sage.groups sage.modules
                 *  a b c d e
                  +----------
                 a| a b c d e

@@ -116,7 +116,10 @@ class Bimodules(CategoryWithParameters):
             Category of bimodules over Rational Field on the left and Real Field with 53 bits of precision on the right
         """
         from sage.rings.rational_field import QQ
-        from sage.rings.real_mpfr import RR
+        try:
+            from sage.rings.real_mpfr import RR
+        except ImportError:
+            from sage.rings.real_double import RDF as RR
         return cls(QQ, RR)
 
     def _repr_object_names(self):
