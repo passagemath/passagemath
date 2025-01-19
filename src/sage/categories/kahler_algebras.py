@@ -20,7 +20,6 @@ from sage.categories.graded_algebras_with_basis import GradedAlgebrasWithBasis
 from sage.categories.finite_dimensional_algebras_with_basis import FiniteDimensionalAlgebrasWithBasis
 from sage.categories.filtered_modules_with_basis import FilteredModulesWithBasis
 from sage.misc.abstract_method import abstract_method
-from sage.quadratic_forms.quadratic_form import QuadraticForm
 from sage.misc.cachefunc import cached_method
 
 
@@ -185,6 +184,8 @@ class KahlerAlgebras(Category_over_base_ring):
                 ...
                 ValueError: k must be less than r/2 < 2
             """
+            from sage.quadratic_forms.quadratic_form import QuadraticForm
+
             r = self.top_degree()
             if k > (r/2):
                 raise ValueError("k must be less than r/2 < 2")
