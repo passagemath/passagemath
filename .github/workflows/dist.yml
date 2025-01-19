@@ -203,7 +203,7 @@ jobs:
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.13' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.14' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals ==1.12.0rc2") > constraints.txt
@@ -564,7 +564,7 @@ jobs:
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.13' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.14' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals ==1.12.0rc2") > constraints.txt
