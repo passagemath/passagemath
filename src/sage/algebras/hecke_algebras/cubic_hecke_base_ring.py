@@ -106,8 +106,6 @@ def register_ring_hom(ring_hom):
         except ValueError:
             verbose('\nthe map:\n%s\ncannot be registered as conversion\n' % ring_hom)
 
-    return
-
 
 # -----------------------------------------------------------------------------
 # class for the Galois Group action on the generic extension ring corresponding
@@ -1006,11 +1004,10 @@ class CubicHeckeRingOfDefinition(Localization):
         # Init of data used on demand
         # ----------------------------------------------------------------------
         self._mirror = None
-        return
 
-    ############################################################################
+    # ########################################################################
     # overloaded inherited methods
-    ############################################################################
+    # ########################################################################
     def _defining_names(self):
         r"""
         Return the generators of ``self`` as the defining names.

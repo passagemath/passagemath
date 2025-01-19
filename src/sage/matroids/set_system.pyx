@@ -773,6 +773,9 @@ cdef class SetSystemIterator:
         self._pointer = -1
         self._len = len(H)
 
+    def __iter__(self):
+        return self
+
     def __next__(self):
         """
         Return the next subset of a SetSystem.

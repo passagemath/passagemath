@@ -305,7 +305,7 @@ class FractionalIdealClass(AbelianGroupWithValuesElement):
                 return P
         raise RuntimeError("No prime of norm less than %s found in class %s" % (norm_bound, c))
 
-    def gens(self):
+    def gens(self) -> tuple:
         r"""
         Return generators for a representative ideal in this
         (`S`-)ideal class.

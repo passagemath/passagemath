@@ -1,4 +1,6 @@
 # sage_setup: distribution = sagemath-modules
+from memory_allocator cimport MemoryAllocator
+
 cdef int *hamming_weights() noexcept
 
 ctypedef unsigned int codeword
@@ -12,6 +14,7 @@ cdef struct WordPermutation:
     codeword gate
 
 cdef class BinaryCode:
+    cdef MemoryAllocator mem
     cdef codeword *basis
     cdef codeword *words
     cdef int ncols
@@ -35,6 +38,7 @@ cdef codeword permute_word_by_wp(WordPermutation *, codeword) noexcept
 cdef codeword *expand_to_ortho_basis(BinaryCode, int) noexcept
 
 cdef class OrbitPartition:
+    cdef MemoryAllocator mem
     cdef int nwords
     cdef int ncols
     cdef int *wd_parent
@@ -53,6 +57,7 @@ cdef class OrbitPartition:
     cdef int merge_perm(self, int *, int *) noexcept
 
 cdef class PartitionStack:
+    cdef MemoryAllocator mem
     cdef int *wd_ents
     cdef int *wd_lvls
     cdef int *col_ents
@@ -90,6 +95,7 @@ cdef class PartitionStack:
     cdef void get_permutation(self, PartitionStack, int *, int *) noexcept
 
 cdef class BinaryCodeClassifier:
+    cdef MemoryAllocator mem
     cdef int *ham_wts
     cdef int L
     cdef unsigned int *Phi
