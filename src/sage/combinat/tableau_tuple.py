@@ -4927,7 +4927,6 @@ class StandardTableauTuples_shape(StandardTableauTuples):
             yield tableau_from_list(tab)
 
         # all done!
-        return
 
     def last(self):
         r"""

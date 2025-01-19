@@ -253,7 +253,7 @@ class FunctionFieldIdeal_rational(FunctionFieldIdeal):
         """
         return self._gen
 
-    def gens(self):
+    def gens(self) -> tuple:
         """
         Return the tuple of the unique generator of this ideal.
 
@@ -268,7 +268,7 @@ class FunctionFieldIdeal_rational(FunctionFieldIdeal):
         """
         return (self._gen,)
 
-    def gens_over_base(self):
+    def gens_over_base(self) -> tuple:
         """
         Return the generator of this ideal as a rank one module over the maximal
         order.
@@ -549,7 +549,7 @@ class FunctionFieldIdealInfinite_rational(FunctionFieldIdealInfinite):
         """
         return self._gen
 
-    def gens(self):
+    def gens(self) -> tuple:
         """
         Return the generator of this principal ideal.
 
@@ -564,7 +564,7 @@ class FunctionFieldIdealInfinite_rational(FunctionFieldIdealInfinite):
         """
         return (self._gen,)
 
-    def gens_over_base(self):
+    def gens_over_base(self) -> tuple:
         """
         Return the generator of this ideal as a rank one module
         over the infinite maximal order.

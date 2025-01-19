@@ -2372,7 +2372,7 @@ class GenericGrowthGroup(UniqueRepresentation, Parent, WithLocals):
             from sage.categories.cartesian_product import cartesian_product
             return cartesian_product([self, other])
 
-    def gens_monomial(self):
+    def gens_monomial(self) -> tuple:
         r"""
         Return a tuple containing monomial generators of this growth
         group.
@@ -2401,9 +2401,9 @@ class GenericGrowthGroup(UniqueRepresentation, Parent, WithLocals):
             sage: GrowthGroup('QQ^x').gens_monomial()
             ()
         """
-        return tuple()
+        return ()
 
-    def gens(self):
+    def gens(self) -> tuple:
         r"""
         Return a tuple of all generators of this growth group.
 
@@ -3521,7 +3521,7 @@ class MonomialGrowthGroup(GenericGrowthGroup):
         from sage.functions.other import real, imag
         return real(raw_element), imag(raw_element)
 
-    def gens_monomial(self):
+    def gens_monomial(self) -> tuple:
         r"""
         Return a tuple containing monomial generators of this growth
         group.
@@ -3548,7 +3548,7 @@ class MonomialGrowthGroup(GenericGrowthGroup):
             return tuple()
         return (self(raw_element=self.base().one()),)
 
-    def gens_logarithmic(self):
+    def gens_logarithmic(self) -> tuple:
         r"""
         Return a tuple containing logarithmic generators of this growth
         group.
@@ -4531,7 +4531,7 @@ class ExponentialGrowthGroup(GenericGrowthGroup):
         return iter(self.element_class(self, e)
                     for e in self.base().some_elements() if e > 0)
 
-    def gens(self):
+    def gens(self) -> tuple:
         r"""
         Return a tuple of all generators of this exponential growth
         group.
@@ -4545,7 +4545,7 @@ class ExponentialGrowthGroup(GenericGrowthGroup):
             sage: E.gens()
             ()
         """
-        return tuple()
+        return ()
 
     def construction(self):
         r"""

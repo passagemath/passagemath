@@ -625,7 +625,7 @@ class DiscreteValueSemigroup(UniqueRepresentation, Parent):
         other = QQ.coerce(other)
         return DiscreteValueSemigroup([g*other for g in self._generators])
 
-    def gens(self):
+    def gens(self) -> tuple:
         r"""
         Return the generators of this semigroup.
 

@@ -630,6 +630,5 @@ class NonDecreasingParkingFunctions_n(UniqueRepresentation, Parent):
             return
         for res in iterator_rec(self.n):
             yield NonDecreasingParkingFunction(res)
-        return
 
     Element = NonDecreasingParkingFunction

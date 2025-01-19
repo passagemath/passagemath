@@ -28,7 +28,7 @@ concurrency:
 #
 # The three workflows:
 #
-#  - build.yml (with jobs test-new, test-mod, test-long),
+#  - build.yml (with jobs test-new, test-long),
 #  - doc-build.yml,
 #  - doc-build-pdf.yml
 #
@@ -49,7 +49,7 @@ concurrency:
 # This baseline is transparently improved by our use of the GH Actions cache,
 # see https://docs.docker.com/build/ci/github-actions/cache/#cache-backend-api.
 #
-# Jobs test-mod and test-long are only started after test-new completed;
+# Jobs test-long is only started after test-new completed;
 # but the workflows doc-build.yml and doc-build-pdf.yml are started independently.
 #
 #  - When nothing is cached and the 3 workflows are launched in parallel,
