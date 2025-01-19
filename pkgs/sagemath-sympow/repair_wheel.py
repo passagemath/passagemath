@@ -6,12 +6,15 @@ import sys
 
 from pathlib import Path
 
+from auditwheel.wheeltools import InWheel
+
 from sage_conf import SAGE_LOCAL
 
 wheel = sys.argv[1]
 
 # SAGE_LOCAL/bin/sympow --> sage_wheels/bin/sympow etc.
-command = f'ln -sf {shlex.quote(SAGE_LOCAL)} sage_wheels && zip -r {shlex.quote(wheel)} sage_wheels/bin/sympow sage_wheels/{{lib,share}}/sympow'
-print(f'Running {command}')
-sys.stdout.flush()
-os.system(command)
+with InWheel(wheel, wheel):
+    command = f'(cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/sympow {{lib,share}}/sympow) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
+    print(f'Running {command}')
+    sys.stdout.flush()
+    os.system(command)
