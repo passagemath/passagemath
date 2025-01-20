@@ -164,7 +164,7 @@ class GradedAlgebrasWithBasis(GradedModulesCategory):
 
                 EXAMPLES::
 
-                    sage: # needs sage.modules
+                    sage: # needs sage.graphs sage.modules
                     sage: ch = matroids.Uniform(4,6).chow_ring(QQ, False)
                     sage: ch.top_degree()
                     3
