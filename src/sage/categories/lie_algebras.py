@@ -218,8 +218,8 @@ class LieAlgebras(Category_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: h = lie_algebras.Heisenberg(ZZ, oo)                           # needs sage.combinat sage.modules
-                    sage: h.step()                                                      # needs sage.combinat sage.modules
+                    sage: h = lie_algebras.Heisenberg(ZZ, oo)                           # needs sage.combinat sage.graphs sage.modules
+                    sage: h.step()                                                      # needs sage.combinat sage.graphs sage.modules
                     2
                 """
 
@@ -229,8 +229,8 @@ class LieAlgebras(Category_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: h = lie_algebras.Heisenberg(ZZ, oo)                           # needs sage.combinat sage.modules
-                    sage: h.is_nilpotent()                                              # needs sage.combinat sage.modules
+                    sage: h = lie_algebras.Heisenberg(ZZ, oo)                           # needs sage.combinat sage.graphs sage.modules
+                    sage: h.is_nilpotent()                                              # needs sage.combinat sage.graphs sage.modules
                     True
                 """
                 return True
@@ -267,19 +267,19 @@ class LieAlgebras(Category_over_base_ring):
 
             Constructing the product space::
 
-                sage: L = lie_algebras.Heisenberg(QQ, 1)                                # needs sage.combinat sage.modules
-                sage: Z = L.bracket(L, L); Z                                            # needs sage.combinat sage.modules
+                sage: L = lie_algebras.Heisenberg(QQ, 1)                                # needs sage.combinat sage.graphs sage.modules
+                sage: Z = L.bracket(L, L); Z                                            # needs sage.combinat sage.graphs sage.modules
                 Ideal (z) of Heisenberg algebra of rank 1 over Rational Field
-                sage: L.bracket(L, Z)                                                   # needs sage.combinat sage.modules
+                sage: L.bracket(L, Z)                                                   # needs sage.combinat sage.graphs sage.modules
                 Ideal () of Heisenberg algebra of rank 1 over Rational Field
 
             Constructing ideals::
 
-                sage: p, q, z = L.basis(); p, q, z                                      # needs sage.combinat sage.modules
+                sage: p, q, z = L.basis(); p, q, z                                      # needs sage.combinat sage.graphs sage.modules
                 (p1, q1, z)
-                sage: L.bracket(3*p, L)                                                 # needs sage.combinat sage.modules
+                sage: L.bracket(3*p, L)                                                 # needs sage.combinat sage.graphs sage.modules
                 Ideal (3*p1) of Heisenberg algebra of rank 1 over Rational Field
-                sage: L.bracket(L, q + p)                                               # needs sage.combinat sage.modules
+                sage: L.bracket(L, q + p)                                               # needs sage.combinat sage.graphs sage.modules
                 Ideal (p1 + q1) of Heisenberg algebra of rank 1 over Rational Field
             """
             if lhs in LieAlgebras:
@@ -299,14 +299,14 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat  sage.libs.singular sage.modules
                 sage: L.universal_enveloping_algebra()                                  # needs sage.combinat sage.libs.singular sage.modules
                 Noncommutative Multivariate Polynomial Ring in b0, b1, b2
                  over Rational Field, nc-relations: {}
 
             ::
 
-                sage: L = LieAlgebra(QQ, 3, 'x', abelian=True)                          # needs sage.combinat sage.modules
+                sage: L = LieAlgebra(QQ, 3, 'x', abelian=True)                          # needs sage.combinat sage.libs.singular sage.modules
                 sage: L.universal_enveloping_algebra()                                  # needs sage.combinat sage.libs.singular sage.modules
                 Multivariate Polynomial Ring in x0, x1, x2 over Rational Field
 
@@ -332,7 +332,7 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.libs.singular sage.modules
                 sage: L._construct_UEA()                                                # needs sage.combinat sage.libs.singular sage.modules
                 Noncommutative Multivariate Polynomial Ring in b0, b1, b2
                  over Rational Field, nc-relations: {}
@@ -416,8 +416,8 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: L.module()                                                        # needs sage.combinat sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.libs.singular sage.modules
+                sage: L.module()                                                        # needs sage.combinat sage.libs.singular sage.modules
                 Vector space of dimension 3 over Rational Field
             """
 
@@ -432,10 +432,10 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: u = L.from_vector(vector(QQ, (1, 0, 0))); u                       # needs sage.combinat sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.libs.singular sage.modules
+                sage: u = L.from_vector(vector(QQ, (1, 0, 0))); u                       # needs sage.combinat sage.libs.singular sage.modules
                 (1, 0, 0)
-                sage: parent(u) is L                                                    # needs sage.combinat sage.modules
+                sage: parent(u) is L                                                    # needs sage.combinat sage.libs.singular sage.modules
                 True
             """
 
@@ -470,9 +470,9 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: a, b, c = L.lie_algebra_generators()                              # needs sage.combinat sage.modules
-                sage: L.subalgebra([2*a - c, b + c])                                    # needs sage.combinat sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.libs.singular sage.modules
+                sage: a, b, c = L.lie_algebra_generators()                              # needs sage.combinat sage.libs.singular sage.modules
+                sage: L.subalgebra([2*a - c, b + c])                                    # needs sage.combinat sage.libs.singular sage.modules
                 An example of a finite dimensional Lie algebra with basis:
                  the 2-dimensional abelian Lie algebra over Rational Field
                  with basis matrix:
@@ -499,9 +499,9 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: a, b, c = L.lie_algebra_generators()                              # needs sage.combinat sage.modules
-                sage: L.ideal([2*a - c, b + c])                                         # needs sage.combinat sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.libs.singular sage.modules
+                sage: a, b, c = L.lie_algebra_generators()                              # needs sage.combinat sage.libs.singular sage.modules
+                sage: L.ideal([2*a - c, b + c])                                         # needs sage.combinat sage.libs.singular sage.modules
                 An example of a finite dimensional Lie algebra with basis:
                  the 2-dimensional abelian Lie algebra over Rational Field
                  with basis matrix:

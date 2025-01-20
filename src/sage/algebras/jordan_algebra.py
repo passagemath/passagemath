@@ -1141,7 +1141,7 @@ class ExceptionalJordanAlgebra(JordanAlgebra):
 
         sage: len(J.derivations_basis())  # long time
         52
-        sage: LieAlgebra(QQ, cartan_type='F4').dimension()
+        sage: LieAlgebra(QQ, cartan_type='F4').dimension()                              # needs sage.graphs
         52
 
     REFERENCES:

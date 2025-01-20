@@ -62,7 +62,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.graphs sage.modules
                 sage: L = lie_algebras.so(QQ, 5)
                 sage: L.f()  # indirect doctest
                 Finite family {1: E[-alpha[1]], 2: E[-alpha[2]]}
@@ -109,8 +109,8 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebra(QQ, cartan_type=['E', 6])                          # needs sage.combinat sage.modules
-                sage: list(L._part_generators(False))                                   # needs sage.combinat sage.modules
+                sage: L = LieAlgebra(QQ, cartan_type=['E', 6])                          # needs sage.combinat sage.graphs sage.modules
+                sage: list(L._part_generators(False))                                   # needs sage.combinat sage.graphs sage.modules
                 [E[-alpha[1]], E[-alpha[2]], E[-alpha[3]],
                  E[-alpha[4]], E[-alpha[5]], E[-alpha[6]]]
             """
@@ -137,10 +137,10 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = lie_algebras.so(QQ, 5)                                        # needs sage.combinat sage.modules
-                sage: L.e()                                                             # needs sage.combinat sage.modules
+                sage: L = lie_algebras.so(QQ, 5)                                        # needs sage.combinat sage.graphs sage.modules
+                sage: L.e()                                                             # needs sage.combinat sage.graphs sage.modules
                 Finite family {1: E[alpha[1]], 2: E[alpha[2]]}
-                sage: L.e(1)                                                            # needs sage.combinat sage.modules
+                sage: L.e(1)                                                            # needs sage.combinat sage.graphs sage.modules
                 E[alpha[1]]
             """
             E = self._part_generators(True)
@@ -159,10 +159,10 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = lie_algebras.so(QQ, 5)                                        # needs sage.combinat sage.modules
-                sage: L.f()                                                             # needs sage.combinat sage.modules
+                sage: L = lie_algebras.so(QQ, 5)                                        # needs sage.combinat sage.graphs sage.modules
+                sage: L.f()                                                             # needs sage.combinat sage.graphs sage.modules
                 Finite family {1: E[-alpha[1]], 2: E[-alpha[2]]}
-                sage: L.f(1)                                                            # needs sage.combinat sage.modules
+                sage: L.f(1)                                                            # needs sage.combinat sage.graphs sage.modules
                 E[-alpha[1]]
             """
             F = self._part_generators(False)
@@ -177,8 +177,8 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = lie_algebras.so(QQ, 5)                                        # needs sage.combinat sage.modules
-                sage: L._negative_half_index_set()                                      # needs sage.combinat sage.modules
+                sage: L = lie_algebras.so(QQ, 5)                                        # needs sage.combinat sage.graphs sage.modules
+                sage: L._negative_half_index_set()                                      # needs sage.combinat sage.graphs sage.modules
                 [-alpha[2], -alpha[1], -alpha[1] - alpha[2],
                  -alpha[1] - 2*alpha[2]]
             """
@@ -195,7 +195,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.graphs sage.modules
                 sage: L = lie_algebras.sp(QQ, 6)
                 sage: La = L.cartan_type().root_system().weight_space().fundamental_weights()
                 sage: mu = La[1] - 3/5*La[2]
@@ -215,7 +215,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.graphs sage.modules
                 sage: L = lie_algebras.sl(QQ, 3)
                 sage: La = L.cartan_type().root_system().weight_lattice().fundamental_weights()
                 sage: sorted(L.basis().keys(), key=L._basis_key)
@@ -244,7 +244,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.graphs sage.modules
                 sage: L = lie_algebras.sl(QQ, 3)
                 sage: P = L.cartan_type().root_system().weight_lattice()
                 sage: La = P.fundamental_weights()
@@ -279,7 +279,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.graphs sage.modules
                 sage: g = lie_algebras.sl(QQ, 3)
                 sage: P = g.cartan_type().root_system().weight_lattice()
                 sage: La = P.fundamental_weights()
@@ -312,7 +312,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.graphs sage.modules
                 sage: L = LieAlgebra(QQ, cartan_type='F4')
                 sage: L.inject_variables()
                 Defining e1, e2, e3, e4, f1, f2, f3, f4, h1, h2, h3, h4
@@ -353,7 +353,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: # needs sage.combinat sage.modules
+                    sage: # needs sage.combinat sage.graphs sage.modules
                     sage: g = LieAlgebra(QQ, cartan_type=['A', 2])
                     sage: g._transpose_basis_mapping
                     {-alpha[1]: alpha[1],
@@ -385,7 +385,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: # needs sage.combinat sage.modules
+                    sage: # needs sage.combinat sage.graphs sage.modules
                     sage: g = LieAlgebra(QQ, cartan_type=['B', 2])
                     sage: B = g.basis()
                     sage: [(B[k], g._transpose_on_basis(k)) for k in B.keys()]
@@ -409,7 +409,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: # needs sage.combinat sage.modules
+                    sage: # needs sage.combinat sage.graphs sage.modules
                     sage: g = LieAlgebra(QQ, cartan_type=['B', 2])
                     sage: g.transpose
                     Generic endomorphism of Lie algebra of ['B', 2] in the Chevalley basis
@@ -428,7 +428,7 @@ class TriangularKacMoodyAlgebras(Category_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: # needs sage.combinat sage.modules
+                    sage: # needs sage.combinat sage.graphs sage.modules
                     sage: g = LieAlgebra(QQ, cartan_type=['G', 2])
                     sage: for b in g.basis():
                     ....:     for bp in g.basis():

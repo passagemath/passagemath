@@ -2983,7 +2983,7 @@ def is_square(n, root=False):
     Tests with Polynomial::
 
         sage: R.<v> = LaurentPolynomialRing(QQ, 'v')
-        sage: H = IwahoriHeckeAlgebra('A3', v**2)                                       # needs sage.combinat sage.modules
+        sage: H = IwahoriHeckeAlgebra('A3', v**2)                                       # needs sage.combinat sage.graphs sage.modules
         sage: R.<a,b,c,d> = QQ[]
         sage: p = a*b + c*d*a*d*a + 5
         sage: is_square(p**2)

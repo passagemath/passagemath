@@ -655,7 +655,7 @@ class FiniteEnumeratedSets(CategoryWithAxiom):
                     152
                     153
 
-                    sage: # needs sage.combinat
+                    sage: # needs sage.combinat sage.libs.flint
                     sage: F1 = FiniteEnumeratedSet('abcdefgh')
                     sage: F2 = IntegerRange(250)
                     sage: F3 = Partitions(20)

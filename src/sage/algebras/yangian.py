@@ -164,6 +164,7 @@ class Yangian(CombinatorialFreeModule):
     We check that the natural filtration has a homomorphism
     to `U(\mathfrak{gl}_n)` as algebras::
 
+        sage: # needs sage.graphs
         sage: Y = Yangian(QQ, 4, filtration='natural')
         sage: t = Y.algebra_generators()
         sage: gl4 = lie_algebras.gl(QQ, 4)
@@ -174,7 +175,6 @@ class Yangian(CombinatorialFreeModule):
         t(1)[2,1]*t(2)[1,3] - t(2)[2,3]
         sage: Esq[0,2] * E[1,0] == E[1,0] * Esq[0,2] - Esq[1,2]
         True
-
         sage: Em = [E^k for k in range(1,5)]
         sage: S = list(t.some_elements())[:30:3]
         sage: def convert(x):

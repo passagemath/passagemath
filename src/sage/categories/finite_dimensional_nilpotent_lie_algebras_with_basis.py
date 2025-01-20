@@ -103,13 +103,13 @@ class FiniteDimensionalNilpotentLieAlgebrasWithBasis(CategoryWithAxiom_over_base
 
             We define the Heisenberg group::
 
-                sage: L = lie_algebras.Heisenberg(QQ, 1)                                # needs sage.combinat sage.modules
-                sage: G = L.lie_group('G'); G                                           # needs sage.combinat sage.modules sage.symbolic
+                sage: L = lie_algebras.Heisenberg(QQ, 1)                                # needs sage.combinat sage.graphs sage.modules
+                sage: G = L.lie_group('G'); G                                           # needs sage.combinat sage.graphs sage.modules sage.symbolic
                 Lie group G of Heisenberg algebra of rank 1 over Rational Field
 
             We test multiplying elements of the group::
 
-                sage: # needs sage.combinat sage.modules sage.symbolic
+                sage: # needs sage.combinat sage.graphs sage.modules sage.symbolic
                 sage: p, q, z = L.basis()
                 sage: g = G.exp(p); g
                 exp(p1)
@@ -121,12 +121,12 @@ class FiniteDimensionalNilpotentLieAlgebrasWithBasis(CategoryWithAxiom_over_base
             We extend an element of the Lie algebra to a left-invariant
             vector field::
 
-                sage: X = G.left_invariant_extension(2*p + 3*q, name='X'); X            # needs sage.combinat sage.modules sage.symbolic
+                sage: X = G.left_invariant_extension(2*p + 3*q, name='X'); X            # needs sage.combinat sage.graphs sage.modules sage.symbolic
                 Vector field X on the Lie group G of
                  Heisenberg algebra of rank 1 over Rational Field
-                sage: X.at(G.one()).display()                                           # needs sage.combinat sage.modules sage.symbolic
+                sage: X.at(G.one()).display()                                           # needs sage.combinat sage.graphs sage.modules sage.symbolic
                 X = 2 ∂/∂x_0 + 3 ∂/∂x_1
-                sage: X.display()                                                       # needs sage.combinat sage.modules sage.symbolic
+                sage: X.display()                                                       # needs sage.combinat sage.graphs sage.modules sage.symbolic
                 X = 2 ∂/∂x_0 + 3 ∂/∂x_1 + (3/2*x_0 - x_1) ∂/∂x_2
 
             .. SEEALSO::
