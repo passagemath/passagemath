@@ -2882,7 +2882,7 @@ cdef class ThreeSumNode(SumNode):
             [ 0 -1  0 -1  0  1]
             sage: C.summand_matrices()
             (
-            [ 1  1  0  0]
+                              [ 1  1  0  0]
             [ 1  0  1  1  0]  [ 1  0  1  1]
             [ 0  1  1  1  0]  [ 0 -1  1  1]
             [ 1  0  1  0  1]  [ 1  0  1  0]
@@ -2905,8 +2905,7 @@ cdef class ThreeSumNode(SumNode):
         else:
             three_sum_strategy = 'concentrated_rank'
         return Matrix_cmr_chr_sparse.three_sum(M1, M2,
-                                               three_sum_strategy=three_sum_strategy,
-                                               sign_verify=True)
+                                               three_sum_strategy=three_sum_strategy)
 
 
 cdef class BaseGraphicNode(DecompositionNode):
