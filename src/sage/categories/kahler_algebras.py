@@ -93,6 +93,7 @@ class KahlerAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs sage.modules
                 sage: ch = matroids.catalog.Fano().chow_ring(QQ, True, 'fy')
                 sage: Ba, Bb, Bc, Bd, Be, Bf, Bg, Babf, Bace, Badg, Bbcd, Bbeg, Bcfg, Bdef, Babcdefg = ch.gens()[8:]
                 sage: u = ch(-Babf^2 + Bcfg^2 - 8/7*Bc*Babcdefg + 1/2*Bd*Babcdefg - Bf*Babcdefg - Bg*Babcdefg); u
@@ -110,6 +111,7 @@ class KahlerAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs sage.modules
                 sage: U46 = matroids.Uniform(4, 6)
                 sage: C = U46.chow_ring(QQ, False)
                 sage: w = C.lefschetz_element(); w
@@ -141,6 +143,7 @@ class KahlerAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs sage.modules
                 sage: ch = matroids.Uniform(4, 6).chow_ring(QQ, False)
                 sage: ch.hodge_riemann_relations(1)
                 Quadratic form in 36 variables over Rational Field with coefficients:
