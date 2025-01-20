@@ -6154,10 +6154,10 @@ class Partitions(UniqueRepresentation, Parent):
 
     Check that :issue:`38897` is fixed::
 
-        sage: Partitions(40, min_length=10).cardinality()
+        sage: Partitions(40, min_length=10).cardinality()                               # needs sage.libs.flint
         24000
 
-        sage: Partitions(40, max_length=10).cardinality()
+        sage: Partitions(40, max_length=10).cardinality()                               # needs sage.libs.flint
         16928
     """
     @staticmethod
@@ -9074,7 +9074,7 @@ class Partitions_length_and_parts_constrained(Partitions):
         sage: from sage.combinat.partition import Partitions_length_and_parts_constrained
         sage: Partitions_length_and_parts_constrained(10, 1, 10, 2, 5)
         Partitions of 10 whose parts are between 2 and 5
-        sage: list(Partitions_length_and_parts_constrained(9, 3, 4, 2, 4))
+        sage: list(Partitions_length_and_parts_constrained(9, 3, 4, 2, 4))              # needs sage.libs.flint
         [[4, 3, 2], [3, 3, 3], [3, 2, 2, 2]]
 
         sage: [4,3,2,1] in Partitions_length_and_parts_constrained(10, 1, 10, 2, 10)
@@ -9104,7 +9104,7 @@ class Partitions_length_and_parts_constrained(Partitions):
 
             sage: from sage.combinat.partition import Partitions_length_and_parts_constrained
             sage: p = Partitions_length_and_parts_constrained(10, 2, 5, 3, 4)
-            sage: TestSuite(p).run()
+            sage: TestSuite(p).run()                                                    # needs sage.libs.flint
         """
         if not (1 <= min_part <= max_part <= n):
             raise ValueError(f"min_part (={min_part}) and max_part (={max_part}) should satisfy 1 <= min_part <= max_part <= n (={n})")
@@ -9203,7 +9203,7 @@ class Partitions_length_and_parts_constrained(Partitions):
 
         EXAMPLES::
 
-            sage: list(Partitions(9, min_part=2, max_part=4, min_length=3, max_length=4))
+            sage: list(Partitions(9, min_part=2, max_part=4, min_length=3, max_length=4))   # needs sage.libs.flint
             [[4, 3, 2], [3, 3, 3], [3, 2, 2, 2]]
         """
         yield from IntegerListsLex(self._n, max_slope=0,
@@ -9229,7 +9229,7 @@ class Partitions_length_and_parts_constrained(Partitions):
 
             sage: from itertools import product
             sage: P = Partitions
-            sage: all(P(n, min_length=k, max_length=m, min_part=a, max_part=b).cardinality()
+            sage: all(P(n, min_length=k, max_length=m, min_part=a, max_part=b).cardinality()    # needs sage.libs.flint
             ....:     == len(list(P(n, min_length=k, max_length=m, min_part=a, max_part=b)))
             ....:     for n, k, m, a, b in product(range(-1, 5), repeat=5))
             True
@@ -9321,7 +9321,7 @@ class PartitionsGreatestLE(UniqueRepresentation, IntegerListsLex):
 
         TESTS::
 
-            sage: all(PartitionsGreatestLE(n, a).cardinality() ==
+            sage: all(PartitionsGreatestLE(n, a).cardinality() ==                       # needs sage.libs.flint
             ....:     len(list(PartitionsGreatestLE(n, a)))
             ....:     for n in range(20) for a in range(6))
             True
@@ -9907,7 +9907,7 @@ def number_of_partitions_max_length_max_part(n, k, b):
     This could also be computed using the `q`-binomial coefficient::
 
         sage: from sage.combinat.partition import number_of_partitions_max_length_max_part as f
-        sage: all(f(n, k, b) == q_binomial(k + b, b)[n] for n in range(5) for k in range(n+1) for b in range(n+1))
+        sage: all(f(n, k, b) == q_binomial(k + b, b)[n] for n in range(5) for k in range(n+1) for b in range(n+1))  # needs sage.libs.flint
         True
 
     However, although the `q`-binomial coefficient is faster for
@@ -9923,7 +9923,7 @@ def number_of_partitions_max_length_max_part(n, k, b):
         ....:              for k in range(ceil(m/l), min(m, n-m-l^2-2*l)+1))
         ....:     return s1 + s2
 
-        sage: A(100)
+        sage: A(100)                                                                    # needs sage.libs.flint
         10934714090
     """
     assert n >= 0 and k >= 0 and b >= 0, f"{n, k, b} must be non-negative"
