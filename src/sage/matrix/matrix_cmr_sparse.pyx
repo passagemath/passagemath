@@ -1640,14 +1640,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             sage: M1.three_sum_mixed_mixed(M2, first_rows_index=[1, 2],
             ....:                  first_column_index=1,
             ....:                  second_columns_index=[2, 4], algorithm="direct", verify=False)
-            [ 1  0  0  0  0  0  0  0]
-            [ 0 -1  1  0  0  0  0  0]
-            [ 0  1  0  1  0  0  0  0]
-            [ 1  1 -1  1  1  1 -1  0]
-            [ 1  0 -1  2  0  1  1  1]
-            [-1  0  1 -2  0  0  0  0]
-            [ 0  0  0  0  0  1  0 -1]
-            [ 0  1  0 -1  1  0  1  0]
+            Traceback (most recent call last):
+            ...
+            ValueError: The intersection matrix is not the same!
         """
         m1 = first_mat.nrows()
         n1 = first_mat.ncols()
@@ -1690,17 +1685,19 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             column_index_1 = [j for j in range(n1) if j != i1]
             row_index_2 = [i for i in range(m2) if i != i2]
             column_index_2 = [j for j in range(n2) if j != k1 and j != k2]
-            a1 = first_mat.matrix_from_rows_and_columns([j1], column_index_1)
-            a2 = first_mat.matrix_from_rows_and_columns([j2], column_index_1)
-            b1 = second_mat.matrix_from_rows_and_columns(row_index_2, [k1])
-            b2 = second_mat.matrix_from_rows_and_columns(row_index_2, [k2])
+            a_mat = first_mat.matrix_from_rows_and_columns([j1, j2], column_index_1)
+            b_mat = second_mat.matrix_from_rows_and_columns(row_index_2, [k1, k2])
 
             A = first_mat.matrix_from_rows_and_columns(row_index_1, column_index_1)
             B = second_mat.matrix_from_rows_and_columns(row_index_2, column_index_2)
 
             first_subrows = A.rows()
             second_subrows = B.rows()
-            lower_left_rows = (b1.tensor_product(a1) + b2.tensor_product(a2)).rows()
+            intersection1_mat = first_mat.matrix_from_rows_and_columns([j1, j2], [jk1, jk2])
+            intersection2_mat = second_mat.matrix_from_rows_and_columns([j1k, j2k], [k1, k2])
+            if intersection1_mat != intersection2_mat:
+                raise ValueError('The intersection matrix is not the same!')
+            lower_left_rows = (b_mat * intersection1_mat.inverse() * a_mat).rows()
 
             row_list = []
             for i in range(m1 - 2):
@@ -2294,9 +2291,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  1 -1  0  1  0  0  0]
             [ 0  0  0  0  0  1  0 -1]
             [ 1  1  0 -1  2  0  1  0]
-            sage: M.is_three_sum_mixed_mixed(M1, M2, sign_verify=False)
+            sage: M.is_three_sum_mixed_mixed(M1, M2, first_intersection_columns=[2,1], sign_verify=False)
             True
-            sage: M.is_three_sum_mixed_mixed(M1, M2)
+            sage: M.is_three_sum_mixed_mixed(M1, M2, first_intersection_columns=[2,1])
             True
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 5, sparse=True),
@@ -2372,26 +2369,40 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         if second_mat[i2, k1] == 0 or second_mat[i2, k2] == 0:
             return False
 
+        # Check whether the intersection of two matrices are identical
+        jk1, jk2 = first_intersection_columns
+        jk1 = jk1 if jk1 >= 0 else n1 + jk1
+        jk2 = jk2 if jk2 >= 0 else n1 + jk2
+        j1k, j2k = second_intersection_rows
+        j1k = j1k if j1k >= 0 else m2 + k1
+        j2k = j2k if j2k >= 0 else m2 + k2
+        intersection1_mat = first_mat.matrix_from_rows_and_columns([j1, j2], [jk1, jk2])
+        intersection2_mat = second_mat.matrix_from_rows_and_columns([j1k, j2k], [k1, k2])
+        if intersection1_mat != intersection2_mat:
+            return False, "intersection"
+
         # Check whether the result comes from the three sum
         column_index_1 = [j for j in range(n1) if j != i1]
         for i in range(m1 - 2):
             for j in range(n1 - 1):
                 if first_mat[row_index_1[i], column_index_1[j]] != three_sum_mat[i, j]:
-                    return False
+                    return False, "A"
         row_index_2 = [i for i in range(m2) if i != i2]
         for i in range(m2 - 1):
             for j in range(n2 - 2):
                 if second_mat[row_index_2[i], column_index_2[j]] != three_sum_mat[m1 - 2 + i, n1 - 1 + j]:
-                    return False
+                    return False, "B"
         for i in range(m1 - 2):
             for j in range(n2 - 2):
                 if three_sum_mat[i, n1 - 1 + j] != 0:
-                    return False
+                    return False, "0"
+        a_mat = first_mat.matrix_from_rows_and_columns([j1, j2], column_index_1)
+        b_mat = second_mat.matrix_from_rows_and_columns(row_index_2, [k1, k2])
+        rank2_block = b_mat * intersection1_mat.inverse() * a_mat
         for i in range(m2 - 1):
             for j in range(n1 - 1):
-                rank2_entry = first_mat[j1, column_index_1[j]] * second_mat[row_index_2[i], k1] + first_mat[j2, column_index_1[j]] * second_mat[row_index_2[i], k2]
-                if rank2_entry != three_sum_mat[m1 - 2 + i, j]:
-                    return False
+                if rank2_block[i, j] != three_sum_mat[m1 - 2 + i, j]:
+                    return False, "block"
 
         if sign_verify is not True:
             return True
@@ -2583,9 +2594,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  1 -1  0  1  0  0  0]
             [ 0  0  0  0  0  1  0 -1]
             [ 1  1  0 -1  2  0  1  0]
-            sage: M.is_three_sum(M1, M2, three_sum_strategy="Mixed_Mixed", sign_verify=False)
+            sage: M.is_three_sum(M1, M2, first_special_columns=[2,1,-1], three_sum_strategy="Mixed_Mixed", sign_verify=False)
             True
-            sage: M.is_three_sum(M1, M2, three_sum_strategy="Mixed_Mixed")
+            sage: M.is_three_sum(M1, M2, first_special_columns=[2,1,-1], three_sum_strategy="Mixed_Mixed")
             True
 
             sage: M.is_three_sum(M1, M2, three_sum_strategy="Wide_Mixed")
