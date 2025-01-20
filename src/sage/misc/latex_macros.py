@@ -210,7 +210,7 @@ def sage_latex_macros():
     for x in macros:
         try:
             result.append(produce_latex_macro(*x))
-        except ImportError:
+        except (ImportError, AttributeError):
             pass
     return result + latex_macros + sage_configurable_latex_macros
 
