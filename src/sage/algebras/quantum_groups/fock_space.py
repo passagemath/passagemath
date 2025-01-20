@@ -1476,7 +1476,7 @@ class FockSpaceBases(Category_realization_of_parent):
                  |3, 2, 1, 1, 1, 1>]
 
                 sage: F = FockSpace(3, [0,1]).natural()
-                sage: F.some_elements()[::13]
+                sage: F.some_elements()[::13]                                           # needs sage.libs.flint
                 [2*|[1], []> + 4*|[], [1]> + |[], []>,
                  |[1, 1], [1]>,
                  |[1, 1, 1], [1]>,

@@ -184,6 +184,7 @@ cdef class LieAlgebraElementWrapper(ElementWrapper):
 
     We check comparisons::
 
+        sage: # needs sage.graphs
         sage: L = lie_algebras.sl(QQ, 2, representation='matrix')
         sage: L.bracket(L.gen(0), L.gen(1)) == -L.bracket(L.gen(1), L.gen(0))
         True
@@ -315,6 +316,7 @@ cdef class LieAlgebraElementWrapper(ElementWrapper):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: S = SymmetricGroup(3).algebra(QQ)
             sage: L = LieAlgebra(associative=S)
             sage: x = L.gen(2); x
@@ -340,6 +342,7 @@ cdef class LieAlgebraElementWrapper(ElementWrapper):
 
         TESTS::
 
+            sage: # needs sage.groups
             sage: G = SymmetricGroup(3)
             sage: S = GroupAlgebra(G, QQ)
             sage: L.<x,y> = LieAlgebra(associative=S.gens())
@@ -370,6 +373,7 @@ cdef class LieAlgebraElementWrapper(ElementWrapper):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Heisenberg(QQ, 3)
             sage: x = L.an_element(); x
             p1
@@ -436,6 +440,7 @@ cdef class LieAlgebraElementWrapper(ElementWrapper):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.sl(QQ, 2, representation='matrix')
             sage: m = L.gen(0)
             sage: m[0,0]
@@ -451,6 +456,7 @@ cdef class LieAlgebraElementWrapper(ElementWrapper):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: G = SymmetricGroup(3)
             sage: S = G.algebra(QQ)
             sage: L = LieAlgebra(associative=S)
@@ -476,6 +482,7 @@ cdef class LieAlgebraMatrixWrapper(LieAlgebraElementWrapper):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Heisenberg(QQ, 1, representation='matrix')
             sage: z = L.z()
             sage: z.value.is_immutable()
@@ -923,6 +930,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',2,1])
             sage: x = L.an_element()
             sage: TestSuite(x).run()
@@ -939,6 +947,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['B',3,1])
             sage: x = L.an_element()
             sage: loads(dumps(x)) == x
@@ -1008,6 +1017,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: list(L.lie_algebra_generators())
             [(E[alpha[1]])#t^0,
@@ -1023,7 +1033,6 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
              + c + d
             sage: L.zero()
             0
-
             sage: e1,f1,h1,e0,f0,c,d = list(L.lie_algebra_generators())
             sage: e1 + 2*f1 - h1 + e0 + 3*c - 2*d
             (E[alpha[1]] - h1 + 2*E[-alpha[1]])#t^0 + (E[-alpha[1]])#t^1
@@ -1037,6 +1046,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: [latex(g) for g in L.lie_algebra_generators()]
             [\left(E_{\alpha_{1}}\right) \otimes t^{0},
@@ -1053,7 +1063,6 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
              + c + d
             sage: latex(L.zero())
             0
-
             sage: e1,f1,h1,e0,f0,c,d = list(L.lie_algebra_generators())
             sage: latex(e1 + 2*f1 - h1 + e0 + 3*c - 2*d)
             \left(E_{\alpha_{1}} - E_{\alpha^\vee_{1}} + 2 E_{-\alpha_{1}}\right) \otimes t^{0}
@@ -1068,6 +1077,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: unicode_art([g for g in L.lie_algebra_generators()])
             [ ( alpha[1] )⊗t⁰, ( -alpha[1] )⊗t⁰, ( alphacheck[1] )⊗t⁰, ( -alpha[1] )⊗t¹,
@@ -1079,7 +1089,6 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
             t⁻¹ + c + d
             sage: unicode_art(L.zero())
             0
-
             sage: e1,f1,h1,e0,f0,c,d = list(L.lie_algebra_generators())
             sage: unicode_art(e1 + 2*f1 - h1 + e0 + 3*c - 2*d)
             ( alpha[1] - alphacheck[1] + 2·-alpha[1] )⊗t⁰ + ( -alpha[1] )⊗t¹ + 3⋅c + -2⋅d
@@ -1096,6 +1105,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: x = L.an_element()
             sage: x.t_dict()
@@ -1111,6 +1121,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: x = L.an_element() - 3 * L.c()
             sage: x.c_coefficient()
@@ -1124,6 +1135,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: x = L.an_element() + L.d()
             sage: x.d_coefficient()
@@ -1137,6 +1149,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['C',2,1])
             sage: x = L.an_element()
             sage: c = L.basis()['c']
@@ -1165,6 +1178,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: asl = lie_algebras.Affine(QQ, ['A',4,1])
             sage: x = asl.an_element()
             sage: hash(x) == hash(x)
@@ -1185,6 +1199,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['C',2,1])
             sage: x = L.an_element()
             sage: bool(x)
@@ -1200,6 +1215,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: e1,f1,h1,e0,f0,c,d = list(L.lie_algebra_generators())
             sage: e0.bracket(e1) + d + c + 3*d
@@ -1216,6 +1232,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: e1,f1,h1,e0,f0,c,d = list(L.lie_algebra_generators())
             sage: d - e1 + c - 3*d
@@ -1240,6 +1257,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: e1,f1,h1,e0,f0,c,d = list(L.lie_algebra_generators())
             sage: x = e0.bracket(e1) + d + e1 + c + 3*d
@@ -1255,6 +1273,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['A',1,1])
             sage: e1,f1,h1,e0,f0,c,d = list(L.lie_algebra_generators())
             sage: x = e1 + f0.bracket(f1) + 3*c - 2/5 * d
@@ -1285,6 +1304,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['C',2,1])
             sage: x = L.an_element()
             sage: sorted(x.monomial_coefficients(), key=str)
@@ -1315,6 +1335,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = LieAlgebra(QQ, cartan_type=['A',1,1])
             sage: e1,f1,h1,e0,f0,c,d = list(L.lie_algebra_generators())
             sage: e0.bracket(f0)
@@ -1338,6 +1359,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = LieAlgebra(QQ, cartan_type=['A',1,1])
             sage: e1,f1,h1,e0,f0,c,d = list(L.lie_algebra_generators())
             sage: al = RootSystem(['A',1]).root_lattice().simple_roots()
@@ -1414,6 +1436,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['E',6,1])
             sage: al = RootSystem(['E',6]).root_lattice().simple_roots()
             sage: x = L.basis()[al[2]+al[3]+2*al[4]+al[5],5] + 4*L.c() + L.d()
@@ -1432,6 +1455,7 @@ def _build_untwisted_affine_element(P, t_dict, c, d):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: L = lie_algebras.Affine(QQ, ['A',2,1])
         sage: from sage.algebras.lie_algebras.lie_algebra_element import _build_untwisted_affine_element
         sage: _build_untwisted_affine_element(L, {}, 0, 0) == L.zero()
