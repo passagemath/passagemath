@@ -21,13 +21,11 @@ requires = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_modules
-    SPKG_INSTALL_REQUIRES_sagemath_polyhedra
     SPKG_INSTALL_REQUIRES_sagemath_graphs
     SPKG_INSTALL_REQUIRES_sagemath_combinat
     SPKG_INSTALL_REQUIRES_sagemath_ntl
     SPKG_INSTALL_REQUIRES_sagemath_pari
     SPKG_INSTALL_REQUIRES_sagemath_repl
-    SPKG_INSTALL_REQUIRES_sagemath_schemes
     SPKG_INSTALL_REQUIRES_sagemath_singular
 ]
 build-backend = "setuptools.build_meta"
