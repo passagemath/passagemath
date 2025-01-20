@@ -127,7 +127,7 @@ class Groups(CategoryWithAxiom):
                 sage: A.monoid_generators()
                 Family ((1,2,3), (2,3,4))
 
-                sage: # needs sage.combinat
+                sage: # needs sage.combinat sage.groups
                 sage: F.<x,y> = FreeGroup()
                 sage: F.monoid_generators()
                 Family (x, y, x^-1, y^-1)

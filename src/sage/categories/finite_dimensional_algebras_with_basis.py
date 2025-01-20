@@ -1537,21 +1537,17 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
                 EXAMPLES::
 
-                    sage: # needs sage.combinat sage.modules
+                    sage: # needs sage.combinat sage.graphs sage.modules
                     sage: TL = TemperleyLiebAlgebra(5, 30, QQ)  # semisimple
                     sage: len(TL.radical_basis())
                     0
                     sage: TL.simple_module_parameterization()
                     (1, 3, 5)
-
-                    sage: # needs sage.combinat sage.modules
                     sage: TL = TemperleyLiebAlgebra(5, 1, QQ)  # not semisimple
                     sage: len(TL.radical_basis())
                     24
                     sage: TL.simple_module_parameterization()
                     (1, 3, 5)
-
-                    sage: # needs sage.combinat sage.modules
                     sage: TL = TemperleyLiebAlgebra(6, 30, QQ)  # semisimple
                     sage: all(TL.cell_module(la).dimension()
                     ....:     == TL.cell_module(la).simple_module().dimension()
@@ -1559,8 +1555,6 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
                     True
                     sage: TL.simple_module_parameterization()
                     (0, 2, 4, 6)
-
-                    sage: # needs sage.combinat sage.modules
                     sage: TL = TemperleyLiebAlgebra(6, 0, QQ)  # not semisimple
                     sage: TL.simple_module_parameterization()
                     (2, 4, 6)

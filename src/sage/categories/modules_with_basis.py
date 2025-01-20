@@ -1385,8 +1385,8 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: m = SU(2, 13).algebra(QQ).random_element(1)                       # needs sage.groups sage.libs.pari sage.modules
                 sage: m.parent() is SU(2, 13).algebra(QQ)                               # needs sage.groups sage.libs.pari sage.modules
                 True
-                sage: p = CombinatorialFreeModule(ZZ, Partitions(4)).random_element()   # needs sage.combinat sage.modules
-                sage: p.parent() is CombinatorialFreeModule(ZZ, Partitions(4))          # needs sage.combinat sage.modules
+                sage: p = CombinatorialFreeModule(ZZ, Partitions(4)).random_element()   # needs sage.combinat sage.libs.flint sage.modules
+                sage: p.parent() is CombinatorialFreeModule(ZZ, Partitions(4))          # needs sage.combinat sage.libs.flint sage.modules
                 True
 
             TESTS:
