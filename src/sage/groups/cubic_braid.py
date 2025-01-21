@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-groups
+# sage.doctest: needs sage.combinat
 r"""
 Cubic Braid Groups
 
