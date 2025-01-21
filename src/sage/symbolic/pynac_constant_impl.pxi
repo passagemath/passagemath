@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-singular
+# sage.doctest: needs sage.symbolic
 """
 Wrapper around Pynac's constants
 """

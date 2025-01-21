@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-singular
+# sage.doctest: needs sage.symbolic
 """
 Comparison of Symbolic Expressions
 
