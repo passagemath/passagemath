@@ -1661,6 +1661,7 @@ class FPModuleMorphism(Morphism):
 
         TESTS::
 
+            sage: # needs sage.libs.flint
             sage: from sage.modules.fp_graded.module import FPModule
             sage: s = SymmetricFunctions(QQ).s()
             sage: F = s.free_graded_module([0,0])
@@ -1794,6 +1795,7 @@ class FPModuleMorphism(Morphism):
 
         TESTS::
 
+            sage: # needs sage.libs.flint
             sage: from sage.modules.fp_graded.module import FPModule
             sage: s = SymmetricFunctions(QQ).s()
             sage: F = s.free_graded_module([0,0])

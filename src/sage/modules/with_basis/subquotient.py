@@ -274,6 +274,7 @@ class SubmoduleWithBasis(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.flint
             sage: A = GradedModulesWithBasis(ZZ).example()
             sage: M = A.submodule(list(A.basis(3)), already_echelonized=True)
             sage: [M._support_key(x) for x in M._support_order]
