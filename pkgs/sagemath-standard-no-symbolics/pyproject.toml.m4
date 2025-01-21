@@ -15,7 +15,6 @@ requires = [
     SPKG_INSTALL_REQUIRES_jupyter_core
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_pkgconfig
-    SPKG_INSTALL_REQUIRES_pplpy
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_objects
