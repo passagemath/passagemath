@@ -1362,7 +1362,7 @@ class GraphPlot(SageObject):
         ::
 
             sage: D = graphs.CubeGraph(3)
-            sage: D.graphplot(layout='planar').plot()
+            sage: D.graphplot(layout='planar').plot()                                   # needs planarity
             Graphics object consisting of 21 graphics primitives
 
         .. PLOT::

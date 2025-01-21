@@ -269,7 +269,7 @@ class Monoids(CategoryWithAxiom):
 
             TESTS::
 
-                sage: c1._div_.__module__                                               # needs sage.groups
+                sage: c1._div_.__module__                                               # needs sage.combinat sage.groups
                 'sage.categories.monoids'
             """
             return left * ~right

@@ -2047,6 +2047,7 @@ class ShiftedPrimedTableaux_all(ShiftedPrimedTableaux):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: Tabs = ShiftedPrimedTableaux()
             sage: Tabs[:5]
             [[], [(1,)], [(2,)], [(1, 2)], [(1, 2')]]

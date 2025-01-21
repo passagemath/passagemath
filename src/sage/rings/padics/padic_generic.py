@@ -1546,11 +1546,11 @@ class pAdicGeneric(LocalGeneric):
             sage: # needs sage.libs.ntl
             sage: E = x^3 - 3*x + 3*b
             sage: C.<pi> = B.extension(E)
-            sage: E.roots(C)                                                            # needs sage.geometry.polyhedron
+            sage: E.roots(C)                                                            # needs sage.geometry.polyhedron sage.libs.singular
             [(pi + O(pi^30), 1)]
             sage: S.<x> = C[]
             sage: P = prod(x - (pi+i) for i in range(5))
-            sage: P.roots()                                                             # needs sage.geometry.polyhedron
+            sage: P.roots()                                                             # needs sage.geometry.polyhedron sage.libs.singular
             [(pi + O(pi^29), 1),
              (3 + pi + O(pi^29), 1),
              (1 + pi + O(pi^27), 1),

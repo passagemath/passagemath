@@ -62,7 +62,7 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
             sage: b._latex_()                                                           # needs sage.rings.number_field
             '\\sigma_{1}\\sigma_{2}\\sigma_{3}\\sigma_{1}^{-1}\\sigma_{2}\\sigma_{3}^{-1}'
 
-            sage: # needs sage.graphs
+            sage: # needs sage.combinat sage.graphs
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, 3, -1, 2, -3])
             sage: b._latex_()
@@ -93,7 +93,7 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
             sage: b.exponent_sum()
             0
 
-            sage: # needs sage.graphs
+            sage: # needs sage.combinat sage.graphs
             sage: B = BraidGroup(5)
             sage: b = B([1, 4, -3, 2])
             sage: b.exponent_sum()
@@ -127,6 +127,8 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
             [ a -a  1]
             sage: b.coxeter_group_element().reduced_word()
             [1, 2, 3, 2]
+
+            sage: # neeeds sage.combinat sage.rings.number_field
             sage: A.<s1,s2,s3> = ArtinGroup(['A',3])
             sage: c = s1 * s2 *s3
             sage: c1 = c.coxeter_group_element(); c1
@@ -248,6 +250,7 @@ class FiniteTypeArtinGroupElement(ArtinGroupElement):
             sage: A([1,2,1,3,2,1,3,2,3,3,2,3,1,2,3,1,2,3,1,2]).left_normal_form()
             ((s3*(s2*s3*s1)^2*s2*s1)^2, s3*s2)
 
+            sage: # needs sage.combinat
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, 3, -1, 2, -3])
             sage: b.left_normal_form()                                                  # needs sage.libs.braiding
@@ -434,7 +437,7 @@ class ArtinGroup(UniqueRepresentation, FinitelyPresentedGroup):
             sage: A1 is A2 and A2 is A3
             True
 
-            sage: ArtinGroup(['A',3]) is BraidGroup(4, 's1,s2,s3')                      # needs sage.rings.number_field
+            sage: ArtinGroup(['A',3]) is BraidGroup(4, 's1,s2,s3')                      # needs sage.combinat sage.rings.number_field
             True
 
             sage: # needs sage.graphs sage.rings.number_field
@@ -687,8 +690,8 @@ class ArtinGroup(UniqueRepresentation, FinitelyPresentedGroup):
 
         EXAMPLES::
 
-            sage: A = ArtinGroup(['B',3])                                               # needs sage.rings.number_field
-            sage: A._standard_lift(A.coxeter_group().long_element())                    # needs sage.rings.number_field
+            sage: A = ArtinGroup(['B',3])                                               # needs sage.combinat sage.rings.number_field
+            sage: A._standard_lift(A.coxeter_group().long_element())                    # needs sage.combinat sage.rings.number_field
             s3*(s2*s3*s1)^2*s2*s1
 
             sage: B = BraidGroup(5)
@@ -754,8 +757,8 @@ class FiniteTypeArtinGroup(ArtinGroup):
             sage: A.delta()                                                             # needs sage.rings.number_field
             (s2*s1)^3
 
-            sage: B = BraidGroup(5)
-            sage: B.delta()
+            sage: B = BraidGroup(5)                                                     # needs sage.combinat
+            sage: B.delta()                                                             # needs sage.combinat
             s0*s1*s2*s3*s0*s1*s2*s0*s1*s0
         """
         return self._standard_lift(self._coxeter_group.long_element())

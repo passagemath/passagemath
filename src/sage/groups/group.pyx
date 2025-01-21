@@ -39,8 +39,8 @@ def is_Group(x):
         doctest:warning...DeprecationWarning: use instead G in Groups()
         See https://github.com/sagemath/sage/issues/37449 for details.
         False
-        sage: F.<a,b> = FreeGroup()                                                     # needs sage.combinat
-        sage: is_Group(F)                                                               # needs sage.combinat
+        sage: F.<a,b> = FreeGroup()                                                     # needs sage.combinat sage.groups
+        sage: is_Group(F)                                                               # needs sage.combinat sage.groups
         True
     """
     deprecation(37449, 'use instead G in Groups()')
