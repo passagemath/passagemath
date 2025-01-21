@@ -828,12 +828,12 @@ class DynamicalSystem_projective(SchemeMorphism_polynomial_projective_space,
             Multivariate Polynomial Ring in x, y over Univariate Polynomial Ring in
             c over Rational Field
 
-        Some rings still return :class:`SymoblicRing` elements::
+        Some rings still return :class:`SymbolicRing` elements::
 
             sage: S.<t> = FunctionField(CC)
             sage: P.<x,y> = ProjectiveSpace(S,1)
             sage: f = DynamicalSystem_projective([t*x^2-1*y^2, t*y^2])
-            sage: f.dynatomic_polynomial([1, 2]).parent()                               # needs sage.libs.pari
+            sage: f.dynatomic_polynomial([1, 2]).parent()                               # needs sage.libs.pari sage.symbolic
             Symbolic Ring
 
         ::
@@ -842,9 +842,9 @@ class DynamicalSystem_projective(SchemeMorphism_polynomial_projective_space,
             sage: S = R.quo(R.ideal(y^2 - x + 1))
             sage: P.<u,v> = ProjectiveSpace(FractionField(S),1)
             sage: f = DynamicalSystem_projective([u^2 + S(x^2)*v^2, v^2])
-            sage: dyn = f.dynatomic_polynomial([1,1]); dyn
+            sage: dyn = f.dynatomic_polynomial([1,1]); dyn                              # needs sage.symbolic
             v^3*xbar^2 + u^2*v + u*v^2
-            sage: dyn.parent()
+            sage: dyn.parent()                                                          # needs sage.symbolic
             Symbolic Ring
         """
         if self.domain().ngens() > 2:
