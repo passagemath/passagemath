@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-singular
+# sage.doctest: needs sage.symbolic
 cpdef call_registered_function(unsigned serial,
                                int nargs,
                                list args,
