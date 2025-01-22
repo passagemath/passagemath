@@ -236,9 +236,9 @@ def _isomorphisms(E, F):
     EXAMPLES::
 
         sage: from sage.schemes.elliptic_curves.weierstrass_morphism import _isomorphisms
-        sage: list(_isomorphisms(EllipticCurve_from_j(0), EllipticCurve('27a3')))
+        sage: list(_isomorphisms(EllipticCurve_from_j(0), EllipticCurve('27a3')))       # needs database_cremona_mini_ellcurve
         [(1, 0, 0, 0), (-1, 0, 0, -1)]
-        sage: list(_isomorphisms(EllipticCurve_from_j(0), EllipticCurve('27a1')))
+        sage: list(_isomorphisms(EllipticCurve_from_j(0), EllipticCurve('27a1')))       # needs database_cremona_mini_ellcurve
         []
 
     TESTS:
@@ -426,6 +426,8 @@ class WeierstrassIsomorphism(EllipticCurveHom, baseWI):
           From: Elliptic Curve defined by y^2 + 2*y = x^3 + x^2 + 3*x + 4 over Rational Field
           To:   Elliptic Curve defined by y^2 - 6*x*y - 10*y = x^3 - 2*x^2 - 11*x - 2 over Rational Field
           Via:  (u,r,s,t) = (-1, 2, 3, 4)
+
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve([0,1,2,3,4])
         sage: F = EllipticCurve(E.cremona_label())
         sage: WeierstrassIsomorphism(E, None, F)
@@ -526,6 +528,8 @@ class WeierstrassIsomorphism(EllipticCurveHom, baseWI):
         EXAMPLES::
 
             sage: from sage.schemes.elliptic_curves.weierstrass_morphism import *
+
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a1')
             sage: F = E.change_weierstrass_model(1,2,3,4)
             sage: w1 = E.isomorphism_to(F)
@@ -625,6 +629,7 @@ class WeierstrassIsomorphism(EllipticCurveHom, baseWI):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: from sage.schemes.elliptic_curves.weierstrass_morphism import *
             sage: E = EllipticCurve('37a1')
             sage: w = WeierstrassIsomorphism(E,(2,3,4,5))
@@ -681,6 +686,7 @@ class WeierstrassIsomorphism(EllipticCurveHom, baseWI):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('5077')
             sage: F = E.change_weierstrass_model([2,3,4,5]); F
             Elliptic Curve defined by y^2 + 4*x*y + 11/8*y = x^3 - 7/4*x^2 - 3/2*x - 9/32 over Rational Field
@@ -711,6 +717,7 @@ class WeierstrassIsomorphism(EllipticCurveHom, baseWI):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E1 = EllipticCurve('5077')
             sage: E2 = E1.change_weierstrass_model([2,3,4,5])
             sage: w1 = E1.isomorphism_to(E2)
@@ -751,6 +758,7 @@ class WeierstrassIsomorphism(EllipticCurveHom, baseWI):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E1 = EllipticCurve('5077')
             sage: E2 = E1.change_weierstrass_model([2,3,4,5])
             sage: E1.isomorphism_to(E2)

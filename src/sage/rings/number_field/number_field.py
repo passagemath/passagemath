@@ -7406,7 +7406,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         EXAMPLES::
 
-            sage: # needs fpylll sage.rings.padics
+            sage: # needs fpylll sage.rings.padics sage.symbolic
             sage: x = polygen(QQ, 'x')
             sage: K.<xi> = NumberField(x^2 + x + 1)
             sage: S = K.primes_above(3)
@@ -7415,7 +7415,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         You can get the exponent vectors::
 
-            sage: # needs fpylll sage.rings.padics
+            sage: # needs fpylll sage.rings.padics sage.symbolic
             sage: K.S_unit_solutions(S, include_exponents=True)  # random, due to ordering
             [((2, 1), (4, 0), xi + 2, -xi - 1),
              ((5, -1), (4, -1), 1/3*xi + 2/3, -1/3*xi + 1/3),
@@ -7424,7 +7424,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         And the computed bound::
 
-            sage: # needs fpylll sage.rings.padics
+            sage: # needs fpylll sage.rings.padics sage.symbolic
             sage: solutions, bound = K.S_unit_solutions(S, prec=100, include_bound=True)
             sage: bound
             7
