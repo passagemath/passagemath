@@ -6272,8 +6272,9 @@ def gauss_sum(char_value, finite_field):
 
     EXAMPLES::
 
-        sage: # needs sage.libs.gap sage.libs.pari sage.rings.number_field
         sage: from sage.arith.misc import gauss_sum
+
+        sage: # needs sage.libs.gap sage.libs.pari sage.rings.number_field
         sage: F = GF(5); q = 5
         sage: zq = UniversalCyclotomicField().zeta(q - 1)
         sage: L = [gauss_sum(zq**i, F) for i in range(5)]; L
