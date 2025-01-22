@@ -212,7 +212,7 @@ class Polynomial_padic(Polynomial):
 
         See :issue:`4038`::
 
-            sage: # needs sage.libs.ntl sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage.libs.ntl sage.schemes
             sage: E = EllipticCurve('37a1')
             sage: K = Qp(7,10)
             sage: EK = E.base_extend(K)
