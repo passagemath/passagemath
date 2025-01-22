@@ -137,7 +137,7 @@ class Dokchitser(SageObject):
 
     We compute with the Dedekind zeta function of a number field. ::
 
-        sage: x = var('x')
+        sage: x = polygen(QQ, 'x')
         sage: K = NumberField(x**4 - x**2 - 1,'a')
         sage: L = K.zeta_function(algorithm='gp')
         sage: L.conductor
@@ -517,7 +517,7 @@ class Dokchitser(SageObject):
 
         TESTS::
 
-            sage: L(1+I, 0)
+            sage: L(1+I, 0)                                                             # needs database_cremona_mini_ellcurve
             Traceback (most recent call last):
             ...
             RuntimeError
