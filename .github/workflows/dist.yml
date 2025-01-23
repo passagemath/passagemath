@@ -557,7 +557,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip
+      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -729,6 +729,12 @@ jobs:
         if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*lrslib*
+
+      - name: sagemath-cmr
+        id:   sagemath-cmr
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*cmr*
 
       - name: sagemath-frobby
         id:   sagemath-frobby

@@ -166,6 +166,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_libbraiding			\
 	sagemath_libecm				\
 	sagemath_bliss 				\
+	sagemath_cmr 				\
 	sagemath_mcqd 				\
 	sagemath_tdlib				\
 	sagemath_giac				\
