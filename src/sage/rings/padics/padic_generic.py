@@ -146,20 +146,20 @@ class pAdicGeneric(LocalGeneric):
         """
         return 1
 
-    def gens(self):
+    def gens(self) -> tuple:
         r"""
-        Return a list of generators.
+        Return a tuple of generators.
 
         EXAMPLES::
 
             sage: R = Zp(5); R.gens()
-            [5 + O(5^21)]
+            (5 + O(5^21),)
             sage: Zq(25,names='a').gens()                                               # needs sage.libs.ntl
-            [a + O(5^20)]
+            (a + O(5^20),)
             sage: S.<x> = ZZ[]; f = x^5 + 25*x -5; W.<w> = R.ext(f); W.gens()           # needs sage.libs.ntl
-            [w + O(w^101)]
+            (w + O(w^101),)
         """
-        return [self.gen()]
+        return (self.gen(),)
 
     def __richcmp__(self, other, op):
         r"""
@@ -195,14 +195,6 @@ class pAdicGeneric(LocalGeneric):
             return richcmp_not_equal(lx, rx, op)
 
         return self._printer.richcmp_modes(other._printer, op)
-
-    # def ngens(self):
-    #     return 1
-
-    # def gen(self, n=0):
-    #     if n != 0:
-    #         raise IndexError, "only one generator"
-    #     return self(self.prime())
 
     def print_mode(self):
         r"""
@@ -1554,11 +1546,11 @@ class pAdicGeneric(LocalGeneric):
             sage: # needs sage.libs.ntl
             sage: E = x^3 - 3*x + 3*b
             sage: C.<pi> = B.extension(E)
-            sage: E.roots(C)                                                            # needs sage.geometry.polyhedron
+            sage: E.roots(C)                                                            # needs sage.geometry.polyhedron sage.libs.singular
             [(pi + O(pi^30), 1)]
             sage: S.<x> = C[]
             sage: P = prod(x - (pi+i) for i in range(5))
-            sage: P.roots()                                                             # needs sage.geometry.polyhedron
+            sage: P.roots()                                                             # needs sage.geometry.polyhedron sage.libs.singular
             [(pi + O(pi^29), 1),
              (3 + pi + O(pi^29), 1),
              (1 + pi + O(pi^27), 1),

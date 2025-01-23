@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.graphs sage.modules
 """
 Soliton Cellular Automata
 

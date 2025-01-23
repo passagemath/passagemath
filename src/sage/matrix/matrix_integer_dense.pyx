@@ -39,7 +39,7 @@ EXAMPLES::
 TESTS::
 
     sage: a = matrix(ZZ,2,range(4), sparse=False)
-    sage: TestSuite(a).run()
+    sage: TestSuite(a).run()                                                            # needs sage.libs.pari
     sage: Matrix(ZZ,0,0).inverse()
     []
 """
@@ -1228,7 +1228,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: n=20; A = Mat(ZZ,n)(range(n^2))
             sage: A.charpoly()
             x^20 - 3990*x^19 - 266000*x^18
-            sage: A.minpoly()
+            sage: A.minpoly()                                                           # needs sage.libs.pari
             x^3 - 3990*x^2 - 266000*x
 
         On non square matrices, this method raises an ArithmeticError::
@@ -1337,7 +1337,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         EXAMPLES::
 
             sage: A = matrix(ZZ, 6, range(36))
-            sage: A.minpoly()
+            sage: A.minpoly()                                                           # needs sage.libs.pari
             x^3 - 105*x^2 - 630*x
 
             sage: A = Mat(ZZ, 6)([k^2 for k in range(36)])
@@ -1616,7 +1616,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             [ 0  0  0  0  0]
             sage: F == C * E * C.transpose()
             True
-            sage: E.smith_form()[0]
+            sage: E.smith_form()[0]                                                     # needs sage.libs.pari
             [1 0 0 0 0]
             [0 1 0 0 0]
             [0 0 2 0 0]
@@ -1937,7 +1937,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
                 raise ValueError("ntl only computes HNF for square matrices of full rank.")
 
             import sage.libs.ntl.ntl_mat_ZZ
-            v =  sage.libs.ntl.ntl_mat_ZZ.ntl_mat_ZZ(self._nrows,self._ncols)
+            v = sage.libs.ntl.ntl_mat_ZZ.ntl_mat_ZZ(self._nrows,self._ncols)
             for i from 0 <= i < self._nrows:
                 for j from 0 <= j < self._ncols:
                     v[i,j] = self.get_unsafe(nr-i-1,nc-j-1)
@@ -2213,13 +2213,14 @@ cdef class Matrix_integer_dense(Matrix_dense):
                sage: M
                [3 0 1]
                [0 1 0]
-               sage: M.elementary_divisors()
+               sage: M.elementary_divisors()                                                # needs sage.libs.pari
                [1, 1]
-               sage: M.transpose().elementary_divisors()
+               sage: M.transpose().elementary_divisors()                                    # needs sage.libs.pari
                [1, 1, 0]
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: matrix(3, range(9)).elementary_divisors()
             [1, 3, 0]
             sage: matrix(3, range(9)).elementary_divisors(algorithm='pari')
@@ -2231,15 +2232,15 @@ cdef class Matrix_integer_dense(Matrix_dense):
         ::
 
             sage: M = matrix(ZZ, 3, [1,5,7, 3,6,9, 0,1,2])
-            sage: M.elementary_divisors()
+            sage: M.elementary_divisors()                                               # needs sage.libs.pari
             [1, 1, 6]
 
         This returns a copy, which is safe to change::
 
-            sage: edivs = M.elementary_divisors()
-            sage: edivs.pop()
+            sage: edivs = M.elementary_divisors()                                       # needs sage.libs.pari
+            sage: edivs.pop()                                                           # needs sage.libs.pari
             6
-            sage: M.elementary_divisors()
+            sage: M.elementary_divisors()                                               # needs sage.libs.pari
             [1, 1, 6]
 
         .. SEEALSO::
@@ -2291,6 +2292,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: A = MatrixSpace(IntegerRing(), 3)(range(9))
             sage: D, U, V = A.smith_form()
             sage: D
@@ -2312,6 +2314,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         It also makes sense for nonsquare matrices::
 
+            sage: # needs sage.libs.pari
             sage: A = Matrix(ZZ,3,2,range(6))
             sage: D, U, V = A.smith_form()
             sage: D
@@ -2332,6 +2335,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         Empty matrices are handled sensibly (see :issue:`3068`)::
 
+            sage: # needs sage.libs.pari
             sage: m = MatrixSpace(ZZ, 2,0)(0); d,u,v = m.smith_form(); u*m*v == d
             True
             sage: m = MatrixSpace(ZZ, 0,2)(0); d,u,v = m.smith_form(); u*m*v == d
@@ -2395,6 +2399,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: A = MatrixSpace(ZZ, 3)(range(9))
             sage: A.frobenius_form(0)
             [ 0  0  0]
@@ -2492,7 +2497,8 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: A*X.transpose() == zero_matrix(ZZ, 4, 2)
             True
 
-            sage: result = A._right_kernel_matrix(algorithm='padic')                        # needs sage.libs.linbox
+            sage: # needs sage.libs.linbox
+            sage: result = A._right_kernel_matrix(algorithm='padic')
             sage: result[0]
             'computed-iml-int'
             sage: X = result[1]; X
@@ -2623,7 +2629,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         EXAMPLES::
 
             sage: m = matrix(ZZ,3,[1..9])
-            sage: m.adjugate()  # indirect doctest
+            sage: m.adjugate()  # indirect doctest                                      # needs sage.libs.pari
             [ -3   6  -3]
             [  6 -12   6]
             [ -3   6  -3]
@@ -3000,8 +3006,8 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: U * A == R
             True
 
-            sage: R, U = A.LLL(algorithm='pari', transformation=True)
-            sage: U * A == R
+            sage: R, U = A.LLL(algorithm='pari', transformation=True)                   # needs sage.libs.pari
+            sage: U * A == R                                                            # needs sage.libs.pari
             True
 
         Example with a nonzero kernel::
@@ -3015,7 +3021,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             [0 0 0]
             [0 0 0]
 
-            sage: M.LLL(algorithm='pari')[0:2]
+            sage: M.LLL(algorithm='pari')[0:2]                                         # needs sage.libs.pari
             [0 0 0]
             [0 0 0]
 
@@ -3056,8 +3062,8 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: M._cache
             {'rank': 2}
             sage: M._clear_cache()
-            sage: R = M.LLL(algorithm='pari')
-            sage: M._cache
+            sage: R = M.LLL(algorithm='pari')                                           # needs sage.libs.pari
+            sage: M._cache                                                              # needs sage.libs.pari
             {'rank': 2}
 
         Check that :issue:`37236` is fixed::
@@ -4645,14 +4651,14 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: w.charpoly().factor()
             (x - 3) * (x + 2)
             sage: w.decomposition()
-            [
-            (Free module of degree 2 and rank 1 over Integer Ring
-            Echelon basis matrix:
-            [ 5 -2], True),
-            (Free module of degree 2 and rank 1 over Integer Ring
-            Echelon basis matrix:
-            [0 1], True)
-            ]
+            [(Free module of degree 2 and rank 1 over Integer Ring
+              Echelon basis matrix:
+              [ 5 -2],
+              True),
+             (Free module of degree 2 and rank 1 over Integer Ring
+              Echelon basis matrix:
+              [0 1],
+              True)]
         """
         F = self.charpoly().factor()
         if len(F) == 1:
@@ -4786,11 +4792,11 @@ cdef class Matrix_integer_dense(Matrix_dense):
                 row_i = A.row(i)
                 row_n = A.row(n)
 
-                ag = a//g
-                bg = b//g
+                ag = a // g
+                bg = b // g
 
-                new_top = s*row_i  +  t*row_n
-                new_bot = bg*row_i - ag*row_n
+                new_top = s * row_i + t * row_n
+                new_bot = bg * row_i - ag * row_n
 
                 # OK -- now we have to make sure the top part of the matrix
                 # but with row i replaced by
@@ -5558,9 +5564,9 @@ cdef class Matrix_integer_dense(Matrix_dense):
         ri = nr
         for i from 0 <= i < nr:
             rj = nc
-            ri =  ri-1
+            ri -= 1
             for j from 0 <= j < nc:
-                rj = rj-1
+                rj -= 1
                 fmpz_init_set(fmpz_mat_entry(A._matrix, rj, ri),
                               fmpz_mat_entry(self._matrix, i, j))
         sig_off()
@@ -5577,6 +5583,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: a = matrix(ZZ,2,2,[1,2,3,4])
             sage: a.__pari__()
             [1, 2; 3, 4]
@@ -5597,7 +5604,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
-            sage: matrix(ZZ,3,[1..9])._rank_pari()
+            sage: matrix(ZZ,3,[1..9])._rank_pari()                                      # needs sage.libs.pari
             2
         """
         from .matrix_integer_pari import _rank_pari
@@ -5622,6 +5629,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: matrix(ZZ,3,[1..9])._hnf_pari()
             [1 2 3]
             [0 3 6]
@@ -5641,6 +5649,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         Check that ``include_zero_rows=False`` works correctly::
 
+            sage: # needs sage.libs.pari
             sage: matrix(ZZ,3,[1..9])._hnf_pari(0, include_zero_rows=False)
             [1 2 3]
             [0 3 6]
@@ -5656,7 +5665,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         Check that :issue:`12346` is fixed::
 
-            sage: pari('mathnf(Mat([0,1]), 4)')
+            sage: pari('mathnf(Mat([0,1]), 4)')                                         # needs sage.libs.pari
             [Mat(1), [1, 0; 0, 1]]
         """
         from .matrix_integer_pari import _hnf_pari
@@ -5704,7 +5713,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         EXAMPLES::
 
             sage: B = matrix(ZZ, [[1, 0, 1], [1, -2, -1], [10, 0, 0]])
-            sage: B.p_minimal_polynomials(2)
+            sage: B.p_minimal_polynomials(2)                                            # needs sage.libs.pari
             {2: x^2 + 3*x + 2}
 
         .. SEEALSO::
@@ -5734,6 +5743,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: B = matrix(ZZ, [[1, 0, 1], [1, -2, -1], [10, 0, 0]])
             sage: B.null_ideal()
             Principal ideal (x^3 + x^2 - 12*x - 20) of
@@ -5773,7 +5783,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         EXAMPLES::
 
             sage: B = matrix(ZZ, [[1, 0, 1], [1, -2, -1], [10, 0, 0]])
-            sage: B.integer_valued_polynomials_generators()
+            sage: B.integer_valued_polynomials_generators()                             # needs sage.libs.pari
             (x^3 + x^2 - 12*x - 20, [1, 1/4*x^2 + 3/4*x + 1/2])
 
         .. SEEALSO::

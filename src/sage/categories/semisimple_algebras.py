@@ -39,15 +39,15 @@ class SemisimpleAlgebras(Category_over_base_ring):
 
     Typically, finite group algebras are semisimple::
 
-        sage: DihedralGroup(5).algebra(QQ) in SemisimpleAlgebras                        # needs sage.groups
+        sage: DihedralGroup(5).algebra(QQ) in SemisimpleAlgebras                        # needs sage.groups sage.modules
         True
 
     Unless the characteristic of the field divides the order of the group::
 
-        sage: DihedralGroup(5).algebra(IntegerModRing(5)) in SemisimpleAlgebras         # needs sage.groups
+        sage: DihedralGroup(5).algebra(IntegerModRing(5)) in SemisimpleAlgebras         # needs sage.groups sage.modules
         False
 
-        sage: DihedralGroup(5).algebra(IntegerModRing(7)) in SemisimpleAlgebras         # needs sage.groups
+        sage: DihedralGroup(5).algebra(IntegerModRing(7)) in SemisimpleAlgebras         # needs sage.groups sage.modules
         True
 
     .. SEEALSO:: :wikipedia:`Semisimple_algebra`

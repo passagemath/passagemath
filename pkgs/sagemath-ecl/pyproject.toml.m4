@@ -20,7 +20,6 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_environment
-    SPKG_INSTALL_REQUIRES_sage_conf
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -37,13 +36,13 @@ test            = ["passagemath-repl"]
 # so there is no clean way to refer to the repair_wheel.py script
 # https://github.com/pypa/cibuildwheel/issues/1931
 repair-wheel-command = [
-    'python3 -m pip install passagemath-conf',
+    'python3 -m pip install passagemath-conf auditwheel',
     'python3 pkgs/sagemath-ecl/repair_wheel.py {wheel}',
     'auditwheel repair -w {dest_dir} {wheel}',
 ]
 [tool.cibuildwheel.macos]
 repair-wheel-command = [
-    'python3 -m pip install passagemath-conf',
+    'python3 -m pip install passagemath-conf auditwheel',
     'python3 pkgs/sagemath-ecl/repair_wheel.py {wheel}',
     'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
 ]

@@ -1020,7 +1020,7 @@ cdef class Matrix(sage.structure.element.Matrix):
                     if ind < 0 or ind >= ncols:
                         raise IndexError("matrix index out of range")
             elif isinstance(col_index, slice):
-                col_list =  list(range(*col_index.indices(ncols)))
+                col_list = list(range(*col_index.indices(ncols)))
             else:
                 if not PyIndex_Check(col_index):
                     raise TypeError("index must be an integer")
@@ -5818,7 +5818,7 @@ cdef class Matrix(sage.structure.element.Matrix):
 
             sage: M = MatrixSpace(CC, 2)(-1.10220440881763)
             sage: N = ~M
-            sage: (N*M).norm()
+            sage: (N*M).norm()                                                          # needs scipy
             0.9999999999999999
 
         Check that :issue:`28402` is fixed::

@@ -11,7 +11,6 @@ include sage/matrix/matrix_modn_dense_*.p*
 include sage/matrix/matrix_modn_dense_.p*
 include sage/matrix/matrix_modn_sparse.p*
 include sage/matrix/misc.p*
-include sage/rings/finite_rings/*_givaro*.p*
 
 # entangled via matrix_integer_dense
 include sage/geometry/integral_points_integer_dense.p*

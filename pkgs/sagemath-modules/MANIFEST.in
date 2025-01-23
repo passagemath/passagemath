@@ -116,7 +116,6 @@ graft sage/modules
 exclude sage/modules/module.*           # in sagemath-objects
 exclude sage/modules/vector_mod2*.*     # depends on m4ri
 exclude sage/modules/vector_*symbol*.*  # --> sagemath-symbolics
-prune sage/modules/fp_graded
 
 include sage/geometry/toric_lattice*.p*
 
@@ -145,6 +144,7 @@ graft sage/algebras/finite_dimensional_algebras  # for hyperplane arrangements
 include sage/algebras/group_algebra.py
 include sage/algebras/commutative_dga.p*
 include sage/algebras/finite_gca.p*
+graft sage/algebras/steenrod
 
 graft sage/matrix
 exclude sage/matrix/misc.p*             # Matrix_integer_sparse
@@ -194,6 +194,10 @@ include sage/groups/matrix_gps/coxeter_group.p*
 include sage/groups/perm_gps/partn_ref/refinement_matrices.p*
 include sage/groups/perm_gps/partn_ref/refinement_binary.p*
 
+include sage/groups/misc_gps/argument_groups.p*
+include sage/groups/misc_gps/imaginary_groups.p*
+include sage/rings/asymptotic/misc.p*
+
 graft sage/tensor
 graft sage/matroids            # though many doctests use graphs, finite fields
 include sage/algebras/orlik_solomon.p*
@@ -224,8 +228,13 @@ include sage/rings/function_field/khuri_makdisi.p*
 include sage/rings/polynomial/laurent_polynomial_mpair.p*                # cimports Matrix
 include sage/rings/polynomial/ore_*.p*
 include sage/rings/polynomial/skew_*.p*
+include sage/rings/polynomial/*integer_valued_polynomials.p*
 
 include sage/rings/ring_extension*.p*
+
+include sage/rings/cfinite_sequence.p*
+
+graft sage/rings/function_field/drinfeld_modules
 
 graft sage/rings/invariants
 
@@ -261,6 +270,7 @@ include sage/algebras/octonion_algebra.p*
 include sage/algebras/weyl_algebra.p*
 include sage/algebras/lie_algebras/lie_algebra_element.p*
 
+graft sage/algebras/lie_algebras
 
 graft sage/coding
 prune sage/coding/codecan               # needs sage.groups

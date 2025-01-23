@@ -474,7 +474,7 @@ class FiniteEnumeratedSets(CategoryWithAxiom):
                 sage: n in C
                 True
 
-            TODO: implement _test_random which checks uniformness
+            TODO: implement _test_random which checks uniformity
             """
             from sage.misc.prandom import randint
             c = self.cardinality()
@@ -655,7 +655,7 @@ class FiniteEnumeratedSets(CategoryWithAxiom):
                     152
                     153
 
-                    sage: # needs sage.combinat
+                    sage: # needs sage.combinat sage.libs.flint
                     sage: F1 = FiniteEnumeratedSet('abcdefgh')
                     sage: F2 = IntegerRange(250)
                     sage: F3 = Partitions(20)

@@ -60,7 +60,7 @@ cdef class Matrix_complex_double_dense(Matrix_double_dense):
         sage: m**2
         [-1.0 + 6.0*I       10.0*I]
         [15.0 + 5.0*I 14.0 + 6.0*I]
-        sage: n= m^(-1); n  # abs tol 1e-15
+        sage: n = m^(-1); n  # abs tol 1e-15                                            # needs scipy
         [  0.3333333333333333 + 0.3333333333333333*I 0.16666666666666669 - 0.16666666666666666*I]
         [-0.16666666666666666 - 0.3333333333333333*I 0.08333333333333331 + 0.08333333333333333*I]
 
@@ -68,7 +68,7 @@ cdef class Matrix_complex_double_dense(Matrix_double_dense):
     :meth:`~.Matrix_double_dense.left_eigenvectors` or
     :meth:`~.Matrix_double_dense.right_eigenvectors`::
 
-        sage: p,e = m.right_eigenvectors()                                              # needs sage.symbolic
+        sage: p,e = m.right_eigenvectors()                                              # needs scipy sage.symbolic
 
     The result is a pair ``(p,e)``, where ``p`` is a diagonal matrix of
     eigenvalues and ``e`` is a matrix whose columns are the

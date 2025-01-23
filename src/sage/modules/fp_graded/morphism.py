@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.combinat
 r"""
 Homomorphisms of finitely presented graded modules
@@ -1660,6 +1661,7 @@ class FPModuleMorphism(Morphism):
 
         TESTS::
 
+            sage: # needs sage.libs.flint
             sage: from sage.modules.fp_graded.module import FPModule
             sage: s = SymmetricFunctions(QQ).s()
             sage: F = s.free_graded_module([0,0])
@@ -1793,6 +1795,7 @@ class FPModuleMorphism(Morphism):
 
         TESTS::
 
+            sage: # needs sage.libs.flint
             sage: from sage.modules.fp_graded.module import FPModule
             sage: s = SymmetricFunctions(QQ).s()
             sage: F = s.free_graded_module([0,0])

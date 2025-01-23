@@ -535,7 +535,7 @@ def End(X, category=None):
     groups currently implement nothing more than unital magmas about
     their homsets, we have::
 
-        sage: # needs sage.groups
+        sage: # needs sage.groups sage.modules
         sage: G = GL(3, 3)
         sage: G.category()
         Category of finite groups
@@ -754,10 +754,11 @@ class Homset(Set_generic):
             sage: hash(Hom(QQ, ZZ)) == hash((QQ, ZZ, QQ))
             True
 
-            sage: E = EllipticCurve('37a')                                              # needs sage.schemes
-            sage: H = E(0).parent(); H                                                  # needs sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage.schemes
+            sage: E = EllipticCurve('37a')
+            sage: H = E(0).parent(); H
             Abelian group of points on Elliptic Curve defined by y^2 + y = x^3 - x over Rational Field
-            sage: hash(H) == hash((H.domain(), H.codomain(), H.base()))                 # needs sage.schemes
+            sage: hash(H) == hash((H.domain(), H.codomain(), H.base()))
             True
         """
         return hash((self._domain, self._codomain, self.base()))
@@ -911,7 +912,7 @@ class Homset(Set_generic):
 
         TESTS::
 
-            sage: # needs sage.groups
+            sage: # needs sage.combinat sage.groups
             sage: G.<x,y,z> = FreeGroup()
             sage: H = Hom(G, G)
             sage: H(H.identity())

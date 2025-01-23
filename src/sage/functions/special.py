@@ -217,11 +217,18 @@ class SphericalHarmonic(BuiltinFunction):
 
         sage: spherical_harmonic(1, 1, pi/2, pi).n()  # abs tol 1e-14                   # needs sage.symbolic
         0.345494149471335
-        sage: from scipy.special import sph_harm  # NB: arguments x and y are swapped   # needs scipy
-        sage: import numpy as np                                                        # needs scipy
-        sage: if int(np.version.short_version[0]) > 1:                                  # needs scipy
-        ....:     np.set_printoptions(legacy="1.25")                                    # needs scipy
-        sage: sph_harm(1, 1, pi.n(), (pi/2).n())  # abs tol 1e-14                       # needs scipy sage.symbolic
+
+        sage: # needs scipy sage.symbolic
+        sage: import numpy as np
+        sage: if int(np.version.short_version[0]) > 1:
+        ....:     np.set_printoptions(legacy="1.25")
+        sage: import scipy.version
+        sage: if scipy.version.version < '1.15.0':
+        ....:     from scipy.special import sph_harm # NB: arguments x and y are swapped
+        ....:     sph_harm(1, 1, pi.n(), (pi/2).n())  # abs tol 1e-14
+        ....: else:
+        ....:     from scipy.special import sph_harm_y
+        ....:     sph_harm_y(1, 1, (pi/2).n(), pi.n()).item()  # abs tol 1e-9
         (0.3454941494713355-4.231083042742082e-17j)
 
     Note that this convention differs from the one in Maxima, as revealed by

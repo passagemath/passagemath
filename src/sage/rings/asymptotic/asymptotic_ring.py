@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-symbolics
+# sage.doctest: needs sage.graphs
 r"""
 Asymptotic Ring
 
@@ -428,7 +430,7 @@ from .misc import WithLocals
 
 lazy_import('sage.rings.lazy_series_ring', 'LazyPowerSeriesRing')
 lazy_import('sage.rings.polynomial.multi_polynomial_ring_base', 'MPolynomialRing_base')
-lazy_import('sage.rings.polynomial.polynomial_ring', 'PolynomialRing_general')
+lazy_import('sage.rings.polynomial.polynomial_ring', 'PolynomialRing_generic')
 lazy_import('sage.rings.power_series_ring', 'PowerSeriesRing_generic')
 lazy_import('sage.symbolic.ring', 'SymbolicRing')
 
@@ -4013,7 +4015,7 @@ class AsymptoticRing(Parent, UniqueRepresentation, WithLocals):
                                        (data, self)), e)
                 return sum(summands, self.zero())
 
-        elif isinstance(P, PolynomialRing_general):
+        elif isinstance(P, PolynomialRing_generic):
             p = P.gen()
             try:
                 return sum(iter(self.create_summand('exact', growth=p**i,

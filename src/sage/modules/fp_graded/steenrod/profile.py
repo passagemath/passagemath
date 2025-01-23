@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Functions for computing the profiles of sub-Hopf algebras of the
 mod p Steenrod algebra.

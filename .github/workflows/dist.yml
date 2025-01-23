@@ -196,23 +196,23 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc boost_cropped brial cliquer giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd  cddlib  palp nauty gfan sympow elliptic_curves pip
+      TARGETS_PRE: ccache libpng gmp mpfr mpc boost_cropped brial cliquer giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd  cddlib  palp nauty gfan sympow elliptic_curves ecm pip
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.13' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.14' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals ==1.12.0rc2") > constraints.txt
       # Environment during wheel build
-      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal LINBOX_CONFIGURE=--without-ntl SINGULAR_CONFIGURE=--without-ntl GIAC_CONFIGURE=--disable-ntl PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
+      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal LINBOX_CONFIGURE=--without-ntl GIAC_CONFIGURE=--disable-ntl PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
-      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel repair -w {dest_dir} {wheel}"
+      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel --version && auditwheel -v -v -v -v repair -w {dest_dir} {wheel}"
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
       # Avoid onetbb build failure on manylinux2014 (https://github.com/passagemath/passagemath/issues/460)
@@ -296,7 +296,7 @@ jobs:
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --prefix=$HOME/runner-venv
           make cibuildwheel
           export PATH=build/bin:$PATH
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --without-system-libpng && cat config.log && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc" >> "$GITHUB_ENV"
+          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng && cat config.log && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*) strip -x \$a;; esac; done" >> "$GITHUB_ENV"
           mkdir -p unpacked
           for sdist in dist/$pkg*.tar.gz; do
               (cd unpacked && tar xfz - ) < $sdist
@@ -438,6 +438,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*linbox*
 
+      - name: sagemath-libecm
+        id:   sagemath-libecm
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*libecm*
+
       - name: sagemath-lcalc
         id:   sagemath-lcalc
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
@@ -558,7 +564,7 @@ jobs:
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.13' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.14' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals ==1.12.0rc2") > constraints.txt
@@ -567,7 +573,7 @@ jobs:
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
-      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel repair -w {dest_dir} {wheel}"
+      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel --version && auditwheel -v -v -v -v repair -w {dest_dir} {wheel}"
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
       # Avoid onetbb build failure on manylinux2014 (https://github.com/passagemath/passagemath/issues/460)
@@ -658,7 +664,7 @@ jobs:
           make cibuildwheel
           export PATH=build/bin:$PATH
           rm -f ~/sage-local/config.status /sage-*/config.status  # trigger rebuild
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --without-system-libpng && cat config.log && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc" >> "$GITHUB_ENV"
+          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else ./configure --enable-build-as-root --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng && cat config.log && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*) strip -x \$a;; esac; done" >> "$GITHUB_ENV"
           mkdir -p unpacked
           for sdist in dist/$pkg*.tar.gz; do
               (cd unpacked && tar xfz - ) < $sdist

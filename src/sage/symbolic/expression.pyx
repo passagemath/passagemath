@@ -1,12 +1,13 @@
-# sage_setup: distribution = sagemath-symbolics
+# sage_setup: distribution = sagemath-singular
 # distutils: sources = sage/symbolic/ginac/add.cpp sage/symbolic/ginac/archive.cpp sage/symbolic/ginac/assume.cpp sage/symbolic/ginac/basic.cpp sage/symbolic/ginac/cmatcher.cpp sage/symbolic/ginac/constant.cpp sage/symbolic/ginac/context.cpp sage/symbolic/ginac/ex.cpp sage/symbolic/ginac/expair.cpp sage/symbolic/ginac/expairseq.cpp sage/symbolic/ginac/exprseq.cpp sage/symbolic/ginac/fderivative.cpp sage/symbolic/ginac/function.cpp sage/symbolic/ginac/function_info.cpp sage/symbolic/ginac/infinity.cpp sage/symbolic/ginac/infoflagbase.cpp sage/symbolic/ginac/inifcns.cpp sage/symbolic/ginac/inifcns_comb.cpp sage/symbolic/ginac/inifcns_gamma.cpp sage/symbolic/ginac/inifcns_hyperb.cpp sage/symbolic/ginac/inifcns_hyperg.cpp sage/symbolic/ginac/inifcns_nstdsums.cpp sage/symbolic/ginac/inifcns_orthopoly.cpp sage/symbolic/ginac/inifcns_trans.cpp sage/symbolic/ginac/inifcns_trig.cpp sage/symbolic/ginac/inifcns_zeta.cpp sage/symbolic/ginac/lst.cpp sage/symbolic/ginac/matrix.cpp sage/symbolic/ginac/mpoly-ginac.cpp sage/symbolic/ginac/mpoly-singular.cpp sage/symbolic/ginac/mpoly.cpp sage/symbolic/ginac/mul.cpp sage/symbolic/ginac/normal.cpp sage/symbolic/ginac/numeric.cpp sage/symbolic/ginac/operators.cpp sage/symbolic/ginac/order.cpp sage/symbolic/ginac/power.cpp sage/symbolic/ginac/print.cpp sage/symbolic/ginac/pseries.cpp sage/symbolic/ginac/py_funcs.cpp sage/symbolic/ginac/registrar.cpp sage/symbolic/ginac/relational.cpp sage/symbolic/ginac/remember.cpp sage/symbolic/ginac/sum.cpp sage/symbolic/ginac/symbol.cpp sage/symbolic/ginac/templates.cpp sage/symbolic/ginac/upoly-ginac.cpp sage/symbolic/ginac/useries.cpp sage/symbolic/ginac/utils.cpp sage/symbolic/ginac/wildcard.cpp
 # distutils: language = c++
-# distutils: libraries = flint gmp SINGULAR_LIBRARIES
-# distutils: extra_compile_args = -std=c++11 SINGULAR_CFLAGS
+# distutils: libraries = flint gmp FACTORY_LIBRARIES
+# distutils: extra_compile_args = -std=c++11 FACTORY_CFLAGS
 # distutils: depends = ginac/add.h ginac/archive.h ginac/assertion.h ginac/assume.h ginac/basic.h ginac/class_info.h ginac/cmatcher.h ginac/compiler.h ginac/constant.h ginac/container.h ginac/context.h ginac/ex.h ginac/ex_utils.h ginac/expair.h ginac/expairseq.h ginac/exprseq.h ginac/extern_templates.h ginac/fderivative.h ginac/flags.h ginac/function.h ginac/ginac.h ginac/infinity.h ginac/infoflagbase.h ginac/inifcns.h ginac/lst.h ginac/matrix.h ginac/mpoly.h ginac/mul.h ginac/normal.h ginac/numeric.h ginac/operators.h ginac/order.h ginac/optional.hpp ginac/power.h ginac/print.h ginac/pseries.h ginac/ptr.h ginac/py_funcs.h ginac/pynac-config.h ginac/registrar.h ginac/relational.h ginac/remember.h ginac/sum.h ginac/symbol.h ginac/templates.h ginac/tostring.h ginac/upoly.h ginac/useries-flint.h ginac/useries.h ginac/utils.h ginac/wildcard.h
-# distutils: include_dirs = SINGULAR_INCDIR
+# distutils: include_dirs = FACTORY_INCDIR
 # pynac/basic.h includes
 #   factory/factory.h    so this ^ is needed to find it
+# sage.doctest: needs sage.symbolic
 """
 Symbolic Expressions
 
@@ -3367,7 +3368,7 @@ cdef class Expression(Expression_abc):
 
         Comparisons of infinities::
 
-            sage: assert( (1+I)*oo == (2+2*I)*oo )
+            sage: assert( (1+I)*oo == (2+2*I)*oo )                                      # needs sage.libs.pari
             sage: assert( SR(unsigned_infinity) == SR(unsigned_infinity) )
             sage: assert( SR(I*oo) == I*oo )
             sage: assert( SR(-oo) <= SR(oo) )
@@ -3589,7 +3590,7 @@ cdef class Expression(Expression_abc):
             sage: m1 = 382247666339265723780973363167714496025733124557617743
             sage: (m == m1).test_relation(domain=QQbar)                                 # needs sage.rings.number_field
             False
-            sage: (m == m1).test_relation()
+            sage: (m == m1).test_relation()                                             # needs sage.libs.pari
             False
 
         Try the examples from :issue:`31424` and :issue:`31665`::

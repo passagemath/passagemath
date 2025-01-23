@@ -31,13 +31,11 @@ works out nicely::
     sage: T.invariants()
     [15]
     sage: d = J.decomposition(); d
-    [
-    Simple abelian subvariety 50a(1,50) of dimension 1 of J0(50),
-    Simple abelian subvariety 50b(1,50) of dimension 1 of J0(50)
-    ]
-    sage: d[0].rational_torsion_subgroup().order()
+    [Simple abelian subvariety 50a(1,50) of dimension 1 of J0(50),
+     Simple abelian subvariety 50b(1,50) of dimension 1 of J0(50)]
+    sage: d[0].rational_torsion_subgroup().order()                                      # needs database_cremona_mini_ellcurve
     3
-    sage: d[1].rational_torsion_subgroup().order()
+    sage: d[1].rational_torsion_subgroup().order()                                      # needs database_cremona_mini_ellcurve
     5
 
 Next we make a table of the upper and lower bounds for each new
@@ -193,7 +191,7 @@ class RationalTorsionSubgroup(FiniteSubgroup):
             sage: A.rational_torsion_subgroup().order()
             11
             sage: T = J0(37)[1].rational_torsion_subgroup()
-            sage: T.order()
+            sage: T.order()                                                             # needs database_cremona_mini_ellcurve
             3
 
             sage: J = J1(13)
@@ -346,13 +344,14 @@ class RationalTorsionSubgroup(FiniteSubgroup):
         EXAMPLES::
 
             sage: t = J0(37)[1].rational_torsion_subgroup()
-            sage: t.divisor_of_order()
+            sage: t.divisor_of_order()                                                  # needs database_cremona_mini_ellcurve
             3
 
             sage: J = J1(19)
-            sage: J.rational_torsion_subgroup().divisor_of_order()
+            sage: J.rational_torsion_subgroup().divisor_of_order()                      # needs database_cremona_mini_ellcurve
             4383
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: J = J0(45)
             sage: J.rational_cusp_subgroup().order()
             32
@@ -415,20 +414,20 @@ class RationalTorsionSubgroup(FiniteSubgroup):
 
             sage: J = J1(11); J
             Abelian variety J1(11) of dimension 1
-            sage: J.rational_torsion_subgroup().multiple_of_order()
+            sage: J.rational_torsion_subgroup().multiple_of_order()                     # needs database_cremona_mini_ellcurve
             5
 
             sage: J = J0(17)
-            sage: J.rational_torsion_subgroup().order()
+            sage: J.rational_torsion_subgroup().order()                                 # needs database_cremona_mini_ellcurve
             4
 
         This is an example where proof=False leads to a better bound and better
         performance. ::
 
             sage: J = J1(23)
-            sage: J.rational_torsion_subgroup().multiple_of_order()  # long time (2s)
+            sage: J.rational_torsion_subgroup().multiple_of_order()  # long time (2s)   # needs database_cremona_mini_ellcurve
             9406793
-            sage: J.rational_torsion_subgroup().multiple_of_order(proof=False)
+            sage: J.rational_torsion_subgroup().multiple_of_order(proof=False)          # needs database_cremona_mini_ellcurve
             408991
         """
 

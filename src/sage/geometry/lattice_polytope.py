@@ -133,7 +133,7 @@ from sage.geometry.point_collection import (PointCollection,
 from sage.geometry.toric_lattice import ToricLattice, ToricLattice_generic
 lazy_import('sage.groups.perm_gps.permgroup_named', 'SymmetricGroup')
 
-from sage.features import PythonModule
+from sage.features import PythonModule, FeatureNotPresentError
 from sage.features.palp import PalpExecutable
 lazy_import('ppl', ['C_Polyhedron', 'Generator_System', 'Linear_Expression'],
                     feature=PythonModule("ppl", spkg='pplpy', type='standard'))
@@ -378,9 +378,9 @@ def ReflexivePolytope(dim, n):
 
     The 3rd 2-dimensional polytope is "the diamond"::
 
-        sage: ReflexivePolytope(2, 3)
+        sage: ReflexivePolytope(2, 3)                                                   # optional - polytopes_db
         2-d reflexive polytope #3 in 2-d lattice M
-        sage: lattice_polytope.ReflexivePolytope(2,3).vertices()
+        sage: lattice_polytope.ReflexivePolytope(2,3).vertices()                        # optional - polytopes_db
         M( 1,  0),
         M( 0,  1),
         M( 0, -1),
@@ -437,7 +437,7 @@ def ReflexivePolytopes(dim):
 
     There are 16 reflexive polygons::
 
-        sage: len(ReflexivePolytopes(2))
+        sage: len(ReflexivePolytopes(2))                                                # optional - polytopes_db
         16
 
     It is not possible to load 4-dimensional polytopes in this way::
@@ -487,7 +487,7 @@ def is_LatticePolytope(x):
         See https://github.com/sagemath/sage/issues/34307 for details.
         False
         sage: p = LatticePolytope([(1,0), (0,1), (-1,-1)])
-        sage: p                                                                         # needs palp
+        sage: p                                                                         # optional - polytopes_db, needs palp
         2-d reflexive polytope #0 in 2-d lattice M
         sage: is_LatticePolytope(p)
         True
@@ -961,7 +961,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
         For 2- and 3-d reflexive polytopes the index in the internal database
         appears as a subscript::
 
-            sage: print(ReflexivePolytope(2, 3)._latex_())
+            sage: print(ReflexivePolytope(2, 3)._latex_())                              # optional - polytopes_db
             \Delta^{2}_{3}
         """
         result = r"\Delta^{%d}" % self.dim()
@@ -1251,11 +1251,9 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
             False
             sage: o_copy._read_nef_partitions(s)                                        # needs palp
             sage: o_copy._nef_partitions                                                # needs palp
-            [
-            Nef-partition {0, 1, 3} ⊔ {2, 4, 5},
-            Nef-partition {0, 1, 2} ⊔ {3, 4, 5},
-            Nef-partition {0, 1, 2, 3} ⊔ {4, 5}
-            ]
+            [Nef-partition {0, 1, 3} ⊔ {2, 4, 5},
+             Nef-partition {0, 1, 2} ⊔ {3, 4, 5},
+             Nef-partition {0, 1, 2, 3} ⊔ {4, 5}]
         """
         if isinstance(data, str):
             f = StringIO(data)
@@ -1320,7 +1318,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
                     if self.dim() == 2 or self.index.is_in_cache():
                         try:
                             parts.insert(-1, "#%d" % self.index())
-                        except ImportError:
+                        except (ImportError, FeatureNotPresentError):
                             pass
             except (ValueError, FileNotFoundError):
                 pass
@@ -2480,7 +2478,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
             M(-1,  0),
             M( 0, -1)
             in 2-d lattice M
-            sage: lattice_polytope.ReflexivePolytope(2,3).vertices()
+            sage: lattice_polytope.ReflexivePolytope(2,3).vertices()                    # optional - polytopes_db
             M( 1,  0),
             M( 0,  1),
             M( 0, -1),
@@ -2496,7 +2494,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
             M( 0, -1),
             M(-1,  0)
             in 2-d lattice M
-            sage: lattice_polytope.ReflexivePolytope(2,3).normal_form()                 # needs sage.groups
+            sage: lattice_polytope.ReflexivePolytope(2,3).normal_form()                 # optional - polytopes_db, needs sage.groups
             M( 1,  0),
             M( 0,  1),
             M( 0, -1),
@@ -2714,29 +2712,25 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
 
             sage: p = lattice_polytope.cross_polytope(4)
             sage: p.nef_partitions()                                                    # needs palp
-            [
-            Nef-partition {0, 1, 4, 5} ⊔ {2, 3, 6, 7} (direct product),
-            Nef-partition {0, 1, 2, 4} ⊔ {3, 5, 6, 7},
-            Nef-partition {0, 1, 2, 4, 5} ⊔ {3, 6, 7},
-            Nef-partition {0, 1, 2, 4, 5, 6} ⊔ {3, 7} (direct product),
-            Nef-partition {0, 1, 2, 3} ⊔ {4, 5, 6, 7},
-            Nef-partition {0, 1, 2, 3, 4} ⊔ {5, 6, 7},
-            Nef-partition {0, 1, 2, 3, 4, 5} ⊔ {6, 7},
-            Nef-partition {0, 1, 2, 3, 4, 5, 6} ⊔ {7} (projection)
-            ]
+            [Nef-partition {0, 1, 4, 5} ⊔ {2, 3, 6, 7} (direct product),
+             Nef-partition {0, 1, 2, 4} ⊔ {3, 5, 6, 7},
+             Nef-partition {0, 1, 2, 4, 5} ⊔ {3, 6, 7},
+             Nef-partition {0, 1, 2, 4, 5, 6} ⊔ {3, 7} (direct product),
+             Nef-partition {0, 1, 2, 3} ⊔ {4, 5, 6, 7},
+             Nef-partition {0, 1, 2, 3, 4} ⊔ {5, 6, 7},
+             Nef-partition {0, 1, 2, 3, 4, 5} ⊔ {6, 7},
+             Nef-partition {0, 1, 2, 3, 4, 5, 6} ⊔ {7} (projection)]
 
         Now we omit projections::
 
             sage: p.nef_partitions(keep_projections=False)                              # needs palp
-            [
-            Nef-partition {0, 1, 4, 5} ⊔ {2, 3, 6, 7} (direct product),
-            Nef-partition {0, 1, 2, 4} ⊔ {3, 5, 6, 7},
-            Nef-partition {0, 1, 2, 4, 5} ⊔ {3, 6, 7},
-            Nef-partition {0, 1, 2, 4, 5, 6} ⊔ {3, 7} (direct product),
-            Nef-partition {0, 1, 2, 3} ⊔ {4, 5, 6, 7},
-            Nef-partition {0, 1, 2, 3, 4} ⊔ {5, 6, 7},
-            Nef-partition {0, 1, 2, 3, 4, 5} ⊔ {6, 7}
-            ]
+            [Nef-partition {0, 1, 4, 5} ⊔ {2, 3, 6, 7} (direct product),
+             Nef-partition {0, 1, 2, 4} ⊔ {3, 5, 6, 7},
+             Nef-partition {0, 1, 2, 4, 5} ⊔ {3, 6, 7},
+             Nef-partition {0, 1, 2, 4, 5, 6} ⊔ {3, 7} (direct product),
+             Nef-partition {0, 1, 2, 3} ⊔ {4, 5, 6, 7},
+             Nef-partition {0, 1, 2, 3, 4} ⊔ {5, 6, 7},
+             Nef-partition {0, 1, 2, 3, 4, 5} ⊔ {6, 7}]
 
         Currently Hodge numbers cannot be computed for a given nef-partition::
 
@@ -2749,16 +2743,14 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
         Partitions will be exactly the same::
 
             sage: p.nef_partitions(hodge_numbers=True)  # long time (2s on sage.math, 2011), needs palp
-            [
-            Nef-partition {0, 1, 4, 5} ⊔ {2, 3, 6, 7} (direct product),
-            Nef-partition {0, 1, 2, 4} ⊔ {3, 5, 6, 7},
-            Nef-partition {0, 1, 2, 4, 5} ⊔ {3, 6, 7},
-            Nef-partition {0, 1, 2, 4, 5, 6} ⊔ {3, 7} (direct product),
-            Nef-partition {0, 1, 2, 3} ⊔ {4, 5, 6, 7},
-            Nef-partition {0, 1, 2, 3, 4} ⊔ {5, 6, 7},
-            Nef-partition {0, 1, 2, 3, 4, 5} ⊔ {6, 7},
-            Nef-partition {0, 1, 2, 3, 4, 5, 6} ⊔ {7} (projection)
-            ]
+            [Nef-partition {0, 1, 4, 5} ⊔ {2, 3, 6, 7} (direct product),
+             Nef-partition {0, 1, 2, 4} ⊔ {3, 5, 6, 7},
+             Nef-partition {0, 1, 2, 4, 5} ⊔ {3, 6, 7},
+             Nef-partition {0, 1, 2, 4, 5, 6} ⊔ {3, 7} (direct product),
+             Nef-partition {0, 1, 2, 3} ⊔ {4, 5, 6, 7},
+             Nef-partition {0, 1, 2, 3, 4} ⊔ {5, 6, 7},
+             Nef-partition {0, 1, 2, 3, 4, 5} ⊔ {6, 7},
+             Nef-partition {0, 1, 2, 3, 4, 5, 6} ⊔ {7} (projection)]
 
         Now it is possible to get Hodge numbers::
 
@@ -2776,21 +2768,17 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
 
             sage: p = lattice_polytope.cross_polytope(2)
             sage: p.nef_partitions()                                                    # needs palp
-            [
-            Nef-partition {0, 2} ⊔ {1, 3} (direct product),
-            Nef-partition {0, 1} ⊔ {2, 3},
-            Nef-partition {0, 1, 2} ⊔ {3} (projection)
-            ]
+            [Nef-partition {0, 2} ⊔ {1, 3} (direct product),
+             Nef-partition {0, 1} ⊔ {2, 3},
+             Nef-partition {0, 1, 2} ⊔ {3} (projection)]
             sage: p.nef_partitions(keep_symmetric=True)                                 # needs palp
-            [
-            Nef-partition {0, 1, 3} ⊔ {2} (projection),
-            Nef-partition {0, 2, 3} ⊔ {1} (projection),
-            Nef-partition {0, 3} ⊔ {1, 2},
-            Nef-partition {1, 2, 3} ⊔ {0} (projection),
-            Nef-partition {1, 3} ⊔ {0, 2} (direct product),
-            Nef-partition {2, 3} ⊔ {0, 1},
-            Nef-partition {0, 1, 2} ⊔ {3} (projection)
-            ]
+            [Nef-partition {0, 1, 3} ⊔ {2} (projection),
+             Nef-partition {0, 2, 3} ⊔ {1} (projection),
+             Nef-partition {0, 3} ⊔ {1, 2},
+             Nef-partition {1, 2, 3} ⊔ {0} (projection),
+             Nef-partition {1, 3} ⊔ {0, 2} (direct product),
+             Nef-partition {2, 3} ⊔ {0, 1},
+             Nef-partition {0, 1, 2} ⊔ {3} (projection)]
 
         Nef-partitions can be computed only for reflexive polytopes::
 
@@ -2949,12 +2937,12 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
 
             sage: d.index()                                                             # needs palp sage.groups
             3
-            sage: d                                                                     # needs palp sage.groups
+            sage: d                                                                     # optional - polytopes_db, needs palp sage.groups
             2-d reflexive polytope #3 in 2-d lattice M
 
         You can get it in its normal form (in the default lattice) as ::
 
-            sage: lattice_polytope.ReflexivePolytope(2, 3).vertices()
+            sage: lattice_polytope.ReflexivePolytope(2, 3).vertices()                   # optional - polytopes_db
             M( 1,  0),
             M( 0,  1),
             M( 0, -1),
@@ -3299,6 +3287,8 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
             sage: PM_max = PM.permutation_normal_form()                                 # needs sage.graphs
             sage: PM_max == o._palp_PM_max()                                            # needs sage.graphs sage.groups
             True
+
+            sage: # optional - polytopes_db
             sage: P2 = ReflexivePolytope(2, 0)
             sage: PM_max, permutations = P2._palp_PM_max(check=True)                    # needs sage.groups
             sage: PM_max                                                                # needs sage.graphs
@@ -3312,7 +3302,7 @@ class LatticePolytopeClass(ConvexSet_compact, Hashable, sage.geometry.abc.Lattic
              [(1,2), (1,2)],
              [(), ()],
              [(2,3), (2,3)]]
-            sage: PM_max.automorphisms_of_rows_and_columns()                            # needs sage.graphs
+            sage: PM_max.automorphisms_of_rows_and_columns()                            # needs sage.graphs sage.groups
             [((), ()),
              ((1,2,3), (1,2,3)),
              ((1,3,2), (1,3,2)),
@@ -4139,7 +4129,7 @@ def is_NefPartition(x):
         sage: o = lattice_polytope.cross_polytope(3)
         sage: np = o.nef_partitions()[0]; np                                            # needs palp
         Nef-partition {0, 1, 3} ⊔ {2, 4, 5}
-        sage: isinstance(np, NefPartition)                                                       # needs palp
+        sage: isinstance(np, NefPartition)                                              # needs palp
         True
     """
     from sage.misc.superseded import deprecation
@@ -4280,13 +4270,11 @@ class NefPartition(SageObject, Hashable):
     ``nef.x`` program from PALP)::
 
         sage: o.nef_partitions()                                                        # needs palp
-        [
-        Nef-partition {0, 1, 3} ⊔ {2, 4, 5},
-        Nef-partition {0, 1, 3, 4} ⊔ {2, 5} (direct product),
-        Nef-partition {0, 1, 2} ⊔ {3, 4, 5},
-        Nef-partition {0, 1, 2, 3} ⊔ {4, 5},
-        Nef-partition {0, 1, 2, 3, 4} ⊔ {5} (projection)
-        ]
+        [Nef-partition {0, 1, 3} ⊔ {2, 4, 5},
+         Nef-partition {0, 1, 3, 4} ⊔ {2, 5} (direct product),
+         Nef-partition {0, 1, 2} ⊔ {3, 4, 5},
+         Nef-partition {0, 1, 2, 3} ⊔ {4, 5},
+         Nef-partition {0, 1, 2, 3, 4} ⊔ {5} (projection)]
     """
 
     def __init__(self, data, Delta_polar, check=True):
@@ -5333,13 +5321,11 @@ def all_nef_partitions(polytopes, keep_symmetric=False):
         sage: o = lattice_polytope.cross_polytope(3)
         sage: lattice_polytope.all_nef_partitions([o])                                  # needs palp
         sage: o.nef_partitions()                                                        # needs palp
-        [
-        Nef-partition {0, 1, 3} ⊔ {2, 4, 5},
-        Nef-partition {0, 1, 3, 4} ⊔ {2, 5} (direct product),
-        Nef-partition {0, 1, 2} ⊔ {3, 4, 5},
-        Nef-partition {0, 1, 2, 3} ⊔ {4, 5},
-        Nef-partition {0, 1, 2, 3, 4} ⊔ {5} (projection)
-        ]
+        [Nef-partition {0, 1, 3} ⊔ {2, 4, 5},
+         Nef-partition {0, 1, 3, 4} ⊔ {2, 5} (direct product),
+         Nef-partition {0, 1, 2} ⊔ {3, 4, 5},
+         Nef-partition {0, 1, 2, 3} ⊔ {4, 5},
+         Nef-partition {0, 1, 2, 3, 4} ⊔ {5} (projection)]
 
     You cannot use this function for non-reflexive polytopes::
 
@@ -5600,8 +5586,8 @@ def positive_integer_relations(points):
         [1 1 1 0 0 0]
         [0 0 0 0 0 1]
 
-        sage: cm = ReflexivePolytope(2,1).vertices().column_matrix()
-        sage: lattice_polytope.positive_integer_relations(cm)
+        sage: cm = ReflexivePolytope(2,1).vertices().column_matrix()                    # optional - polytopes_db
+        sage: lattice_polytope.positive_integer_relations(cm)                           # optional - polytopes_db
         [2 1 1]
     """
     points = points.transpose().base_extend(QQ)

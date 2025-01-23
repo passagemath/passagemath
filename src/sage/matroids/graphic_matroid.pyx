@@ -515,6 +515,7 @@ cdef class GraphicMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.numerical.mip
             sage: M = Matroid(range(9), graphs.CompleteBipartiteGraph(3, 3))
             sage: N = Matroid(range(3), graphs.CycleGraph(3))
             sage: N1 = Matroid(range(3), graph=graphs.CycleGraph(3),
@@ -534,6 +535,7 @@ cdef class GraphicMatroid(Matroid):
 
         ::
 
+            sage: # needs sage.numerical.mip
             sage: M = matroids.CompleteGraphic(6)
             sage: N = Matroid(range(8), graphs.WheelGraph(5))
             sage: M._has_minor(N)
@@ -550,6 +552,7 @@ cdef class GraphicMatroid(Matroid):
         If the matroids are not 3-connected, then the default matroid
         algorithms are used::
 
+            sage: # needs sage.numerical.mip
             sage: M = matroids.CompleteGraphic(6)
             sage: N = Matroid(graphs.CycleGraph(4))
             sage: M.has_minor(N)
@@ -609,7 +612,7 @@ cdef class GraphicMatroid(Matroid):
                 # then use method from abstract matroid class
                 conset, delset = sanitize_contractions_deletions(self, contractions, deletions)
                 M = self._minor(contractions=conset, deletions=delset)
-                should_be_true, elements = Matroid._has_minor(M, N, certificate=True)
+                _, elements = Matroid._has_minor(M, N, certificate=True)
 
                 # elements is a tuple (contractions, deletions, dict)
                 # There should be no more contractions

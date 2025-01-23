@@ -1605,7 +1605,7 @@ class LazyLaurentSeriesRing(LazySeriesRing):
         return 1
 
     @cached_method
-    def gens(self):
+    def gens(self) -> tuple:
         """
         Return the generators of ``self``.
 
@@ -2171,7 +2171,7 @@ class LazyPowerSeriesRing(LazySeriesRing):
         return len(self.variable_names())
 
     @cached_method
-    def gens(self):
+    def gens(self) -> tuple:
         """
         Return the generators of ``self``.
 

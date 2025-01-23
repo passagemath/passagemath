@@ -1254,7 +1254,7 @@ class CohomologyRing_mod2(CohomologyRing):
             ret = CombinatorialFreeModule.Element._acted_upon_(self, a, self_on_left)
             if ret is not None:  # did the scalar action
                 return ret
-            if self_on_left: # i.e., module element on left
+            if self_on_left:  # i.e., module element on left
                 a = a.antipode()
             b = a.change_basis('adem')
             ans = self.parent().zero()
@@ -1284,7 +1284,7 @@ class CohomologyRing_mod2(CohomologyRing):
           the action as a left module action or a right module
 
         We will write this with respect to the left action;
-        for the right action, just switch all of the the tensors.
+        for the right action, just switch all of the tensors.
         Writing `m` for ``deg_domain`` and `n` for ``deg_codomain``, this
         returns `A^{n-m} \otimes H^{m} \to H^{n}`, one single
         component of the map making `H` into an `A`-module.
@@ -1346,6 +1346,7 @@ class CohomologyRing_mod2(CohomologyRing):
             sage: x1 * x2
             h^{2,0}
 
+            sage: # needs sage.combinat
             sage: H.steenrod_module_map(1, 2)
             [1 0]
             [1 0]
@@ -1445,7 +1446,7 @@ def is_GF2(R):
         sage: from sage.homology.homology_vector_space_with_basis import is_GF2
         sage: is_GF2(GF(2))
         True
-        sage: is_GF2(GF(2, impl='ntl'))
+        sage: is_GF2(GF(2, impl='ntl'))                                                 # needs sage.libs.ntl
         True
         sage: is_GF2(GF(3))
         False

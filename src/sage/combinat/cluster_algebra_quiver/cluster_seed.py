@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-graphs
-# sage.doctest: needs sage.graphs sage.modules
+# sage.doctest: needs sage.graphs sage.modules sage.libs.singular
 r"""
 ClusterSeed
 

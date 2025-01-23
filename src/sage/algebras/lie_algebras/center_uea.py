@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.graphs sage.rings.number_field
 """
 Center of a Universal Enveloping Algebra
 

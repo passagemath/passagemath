@@ -21,6 +21,7 @@ except ImportError:
 from sage.algebras.all__sagemath_combinat import *
 from sage.combinat.all__sagemath_combinat import *
 from sage.databases.all__sagemath_combinat import *
+from sage.dynamics.all__sagemath_combinat import *
 from sage.libs.all__sagemath_combinat import *
 from sage.rings.all__sagemath_combinat import *
 from sage.monoids.all import *

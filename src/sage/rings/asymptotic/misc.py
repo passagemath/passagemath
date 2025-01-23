@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Asymptotic Expansions --- Miscellaneous
 
@@ -34,7 +35,7 @@ from sage.structure.sage_object import SageObject
 lazy_import('sage.rings.lazy_series_ring', 'LazyPowerSeriesRing')
 lazy_import('sage.rings.multi_power_series_ring', 'MPowerSeriesRing_generic')
 lazy_import('sage.rings.polynomial.multi_polynomial_ring_base', 'MPolynomialRing_base')
-lazy_import('sage.rings.polynomial.polynomial_ring', 'PolynomialRing_general')
+lazy_import('sage.rings.polynomial.polynomial_ring', 'PolynomialRing_generic')
 lazy_import('sage.rings.power_series_ring', 'PowerSeriesRing_generic')
 
 
@@ -58,7 +59,7 @@ def repr_short_to_parent(s):
         Integer Ring
         sage: repr_short_to_parent('QQ')
         Rational Field
-        sage: repr_short_to_parent('SR')
+        sage: repr_short_to_parent('SR')                                                # needs sage.symbolic
         Symbolic Ring
         sage: repr_short_to_parent('NN')
         Non negative integer semiring
@@ -124,7 +125,7 @@ def parent_to_repr_short(P):
         'ZZ'
         sage: parent_to_repr_short(QQ)
         'QQ'
-        sage: parent_to_repr_short(SR)
+        sage: parent_to_repr_short(SR)                                                  # needs sage.symbolic
         'SR'
         sage: parent_to_repr_short(RR)
         'RR'
@@ -136,39 +137,82 @@ def parent_to_repr_short(P):
         'QQ[d, k]'
         sage: parent_to_repr_short(QQ['e'])
         'QQ[e]'
-        sage: parent_to_repr_short(SR[['a, r']])
+        sage: parent_to_repr_short(SR[['a, r']])                                        # needs sage.symbolic
         'SR[[a, r]]'
         sage: parent_to_repr_short(Zmod(3))
         'Ring of integers modulo 3'
         sage: parent_to_repr_short(Zmod(3)['g'])
         'Univariate Polynomial Ring in g over Ring of integers modulo 3'
     """
-    from sage.rings.cc import CC
-    from sage.rings.cif import CIF
-    from sage.rings.complex_arb import CBF
-    from sage.rings.integer_ring import ZZ
-    from sage.rings.rational_field import QQ
-    from sage.rings.real_arb import RBF
-    from sage.rings.real_mpfi import RIF
-    from sage.rings.real_mpfr import RR
-    from sage.symbolic.ring import SR
-
     def abbreviate(P):
         try:
             return P._repr_short_()
         except AttributeError:
             pass
-        abbreviations = {ZZ: 'ZZ', QQ: 'QQ', SR: 'SR',
-                         RR: 'RR', CC: 'CC',
-                         RIF: 'RIF', CIF: 'CIF',
-                         RBF: 'RBF', CBF: 'CBF'}
+
+        from sage.rings.integer_ring import ZZ
+        if P == ZZ:
+            return 'ZZ'
+
+        from sage.rings.rational_field import QQ
+        if P == QQ:
+            return 'QQ'
+
+        from sage.rings.real_mpfr import RR
+        if P == RR:
+            return 'RR'
+
         try:
-            return abbreviations[P]
-        except KeyError:
+            from sage.rings.cc import CC
+        except ImportError:
             pass
+        else:
+            if P == CC:
+                return 'CC'
+
+        try:
+            from sage.rings.cif import CIF
+        except ImportError:
+            pass
+        else:
+            if P == CIF:
+                return 'CIF'
+
+        try:
+            from sage.rings.complex_arb import CBF
+        except ImportError:
+            pass
+        else:
+            if P == CBF:
+                return 'CBF'
+
+        try:
+            from sage.rings.real_arb import RBF
+        except ImportError:
+            pass
+        else:
+            if P == RBF:
+                return 'RBF'
+
+        try:
+            from sage.rings.real_mpfi import RIF
+        except ImportError:
+            pass
+        else:
+            if P == RIF:
+                return 'RIF'
+
+        try:
+            from sage.symbolic.ring import SR
+        except ImportError:
+            pass
+        else:
+            if P == SR:
+                return 'SR'
+
         raise ValueError('Cannot abbreviate %s.' % (P,))
 
-    poly = isinstance(P, (PolynomialRing_general, MPolynomialRing_base))
+    poly = isinstance(P, (PolynomialRing_generic, MPolynomialRing_base))
     power = isinstance(P, (PowerSeriesRing_generic, MPowerSeriesRing_generic, LazyPowerSeriesRing))
 
     if poly or power:
@@ -417,7 +461,7 @@ def substitute_raise_exception(element, e):
     TESTS::
 
         sage: from sage.rings.asymptotic.misc import substitute_raise_exception
-        sage: substitute_raise_exception(x, Exception('blub'))
+        sage: substitute_raise_exception(x, Exception('blub'))                          # needs sage.symbolic
         Traceback (most recent call last):
         ...
         Exception: Cannot substitute in x in Symbolic Ring.
@@ -737,6 +781,7 @@ def strip_symbolic(expression):
 
     EXAMPLES::
 
+        sage: # needs sage.symbolic
         sage: from sage.rings.asymptotic.misc import strip_symbolic
         sage: strip_symbolic(SR(2)); _.parent()
         2
@@ -786,9 +831,10 @@ class NotImplementedOZero(NotImplementedError):
 
         EXAMPLES::
 
-            sage: A = AsymptoticRing('n^ZZ', ZZ)
             sage: from sage.rings.asymptotic.misc import NotImplementedOZero
 
+            sage: # needs sage.symbolic
+            sage: A = AsymptoticRing('n^ZZ', ZZ)
             sage: raise NotImplementedOZero(A)
             Traceback (most recent call last):
             ...
@@ -803,7 +849,7 @@ class NotImplementedOZero(NotImplementedError):
 
         TESTS::
 
-            sage: raise NotImplementedOZero(A, var='m')
+            sage: raise NotImplementedOZero(A, var='m')                                 # needs sage.symbolic
             Traceback (most recent call last):
             ...
             ValueError: specify either 'asymptotic_ring' or 'var'
@@ -850,21 +896,20 @@ class NotImplementedBZero(NotImplementedError):
 
         EXAMPLES::
 
-            sage: A = AsymptoticRing('n^ZZ', ZZ)
             sage: from sage.rings.asymptotic.misc import NotImplementedBZero
 
+            sage: # needs sage.symbolic
+            sage: A = AsymptoticRing('n^ZZ', ZZ)
             sage: raise NotImplementedBZero(A)
             Traceback (most recent call last):
             ...
             NotImplementedBZero: got B(0)
             The error term B(0) means 0 for sufficiently large n.
-
             sage: raise NotImplementedBZero(var='m')
             Traceback (most recent call last):
             ...
             NotImplementedBZero: got B(0)
             The error term B(0) means 0 for sufficiently large m.
-
             sage: AR.<n> = AsymptoticRing('n^QQ', QQ)
             sage: AR(0).B(42)
             Traceback (most recent call last):
@@ -874,7 +919,7 @@ class NotImplementedBZero(NotImplementedError):
 
         TESTS::
 
-            sage: raise NotImplementedBZero(A, var='m')
+            sage: raise NotImplementedBZero(A, var='m')                                 # needs sage.symbolic
             Traceback (most recent call last):
             ...
             ValueError: specify either 'asymptotic_ring' or 'var'
@@ -991,7 +1036,7 @@ def transform_category(category,
         Category of commutative groups
         sage: transform_category(QQ.category(), S, A)
         Category of commutative groups
-        sage: transform_category(SR.category(), S, A)
+        sage: transform_category(SR.category(), S, A)                                   # needs sage.symbolic
         Category of commutative groups
         sage: transform_category(Fields(), S, A)
         Category of commutative groups
@@ -1149,8 +1194,8 @@ class WithLocals(SageObject):
 
     EXAMPLES::
 
-        sage: A.<n> = AsymptoticRing('n^ZZ', QQ, locals={'a': 42})
-        sage: A.locals()
+        sage: A.<n> = AsymptoticRing('n^ZZ', QQ, locals={'a': 42})                      # needs sage.symbolic
+        sage: A.locals()                                                                # needs sage.symbolic
         {'a': 42}
     """
     @staticmethod
@@ -1160,6 +1205,7 @@ class WithLocals(SageObject):
 
         TESTS::
 
+            sage: # needs sage.symbolic
             sage: A.<n> = AsymptoticRing('n^ZZ', QQ)
             sage: locals = A._convert_locals_({'a': 42}); locals
             {'a': 42}
@@ -1189,6 +1235,7 @@ class WithLocals(SageObject):
 
         TESTS::
 
+            sage: # needs sage.symbolic
             sage: A.<n> = AsymptoticRing('n^ZZ', QQ, locals={'a': 42})
             sage: A.locals()
             {'a': 42}

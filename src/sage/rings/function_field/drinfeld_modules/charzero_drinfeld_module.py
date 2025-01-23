@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: optional - sage.rings.finite_rings
 r"""
 Drinfeld modules over rings of characteristic zero

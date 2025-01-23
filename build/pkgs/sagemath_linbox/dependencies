@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-linbox/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-linbox/MANIFEST.in $(PYTHON) memory_allocator sagemath_categories sagemath_flint sagemath_modules sagemath_pari iml linbox m4ri m4rie | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig
+$(SAGE_ROOT)/pkgs/sagemath-linbox/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-linbox/MANIFEST.in $(PYTHON) memory_allocator sagemath_categories sagemath_flint sagemath_modules iml linbox m4ri m4rie | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig

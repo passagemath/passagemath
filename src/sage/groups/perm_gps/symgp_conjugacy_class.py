@@ -10,10 +10,12 @@ AUTHORS:
 from sage.groups.conjugacy_classes import ConjugacyClass, ConjugacyClassGAP
 from sage.groups.perm_gps.permgroup_element import PermutationGroupElement
 from sage.combinat.partition import Partitions_n, _Partitions
-from sage.combinat.set_partition import SetPartitions
 from sage.combinat.permutation import Permutation, from_cycles
+from sage.misc.lazy_import import lazy_import
 from sage.sets.set import Set
 import itertools
+
+lazy_import('sage.combinat.set_partition', 'SetPartitions')
 
 
 class SymmetricGroupConjugacyClassMixin:

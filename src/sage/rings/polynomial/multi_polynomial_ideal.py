@@ -252,7 +252,7 @@ from sage.rings.qqbar_decorators import handle_AA_and_QQbar
 from sage.structure.element import parent
 from sage.structure.richcmp import (op_EQ, op_GE, op_GT, op_LE, op_LT, op_NE,
                                     rich_to_bool, richcmp_method)
-from sage.structure.sequence import Sequence
+from sage.structure.sequence import Sequence, Sequence_generic
 
 try:
     from sage.interfaces.expect import StdOutContext
@@ -449,8 +449,7 @@ class MPolynomialIdeal_magma_repr:
         from sage.rings.polynomial.multi_polynomial_sequence import \
             PolynomialSequence
 
-        B = PolynomialSequence([R(e) for e in mgb], R, immutable=True)
-        return B
+        return PolynomialSequence([R(e) for e in mgb], R, immutable=True)
 
 
 class MPolynomialIdeal_singular_base_repr:
@@ -602,10 +601,10 @@ class MPolynomialIdeal_singular_base_repr:
         """
         from sage.rings.fraction_field import FractionField_generic
         from sage.rings.polynomial.multi_polynomial_ring_base import MPolynomialRing_base
-        from sage.rings.polynomial.polynomial_ring import PolynomialRing_general
+        from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
         F = self.base_ring()
         if (not isinstance(F, FractionField_generic) or
-            not isinstance(F.ring(), (MPolynomialRing_base, PolynomialRing_general))):
+            not isinstance(F.ring(), (MPolynomialRing_base, PolynomialRing_generic))):
             raise TypeError("the base ring must be a field with parameters")
         from sage.arith.functions import lcm
         from sage.libs.singular.function import lib, singular_function
@@ -1163,7 +1162,7 @@ class MPolynomialIdeal_singular_repr(
         else:
             raise TypeError("algorithm '%s' unknown" % algorithm)
 
-        T = Sequence([ MPolynomialIdeal(Q,t) for t in Tbar])
+        T = Sequence([MPolynomialIdeal(Q, t) for t in Tbar])
         return sorted(T, key=lambda x: x.gens())
 
     @require_field
@@ -3923,10 +3922,12 @@ class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
         return 0
 
     @cached_method
-    def gens(self):
+    def gens(self) -> Sequence_generic:
         """
-        Return a set of generators / a basis of this ideal. This is usually the
-        set of generators provided during object creation.
+        Return a set of generators / a basis of this ideal.
+
+        This is usually the set of generators provided during object
+        creation.
 
         EXAMPLES::
 
@@ -4533,8 +4534,7 @@ class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
             sage: R.<x,y,z> = PolynomialRing(Zmod(2233497349584))
             sage: I = R.ideal([z*(x-3*y), 3^2*x^2-y*z, z^2+y^2])
             sage: I.groebner_basis()
-            [2*z^4, y*z^2 + 81*z^3, 248166372176*z^3, 9*x^2 - y*z, y^2 + z^2, x*z +
-            2233497349581*y*z, 248166372176*y*z]
+            [2*z^4, y*z^2 + 81*z^3, 248166372176*z^3, 9*x^2 + 2233497349583*y*z, y^2 + z^2, x*z + 2233497349581*y*z, 248166372176*y*z]
 
         Sage also supports local orderings::
 
@@ -5521,14 +5521,14 @@ class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
         extension fields so we give a simple example involving those::
 
             sage: K.<a> = QuadraticField(1/3)                                           # needs sage.rings.number_field
-            sage: E = EllipticCurve(K, [1,2,3,4,5])                                     # needs sage.rings.number_field
+            sage: E = EllipticCurve(K, [1,2,3,4,5])                                     # needs sage.rings.number_field sage.schemes
 
         We pick a point on ``E``::
 
-            sage: p = E.lift_x(1); p                                                    # needs sage.rings.number_field
+            sage: p = E.lift_x(1); p                                                    # needs sage.rings.number_field sage.schemes
             (1 : -6 : 1)
 
-            sage: I = E.defining_ideal(); I                                             # needs sage.rings.number_field
+            sage: I = E.defining_ideal(); I                                             # needs sage.rings.number_field sage.schemes
             Ideal (-x^3 - 2*x^2*z + x*y*z + y^2*z - 4*x*z^2 + 3*y*z^2 - 5*z^3)
              of Multivariate Polynomial Ring in x, y, z
               over Number Field in a with defining polynomial x^2 - 1/3
@@ -5536,19 +5536,19 @@ class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
 
         Of course, the point ``p`` is a root of all generators of ``I``::
 
-            sage: I.subs(x=1, y=2, z=1)                                                 # needs sage.rings.number_field
+            sage: I.subs(x=1, y=2, z=1)                                                 # needs sage.rings.number_field sage.schemes
             Ideal (0) of Multivariate Polynomial Ring in x, y, z
              over Number Field in a with defining polynomial x^2 - 1/3
               with a = 0.5773502691896258?
 
         ``I`` is also radical::
 
-            sage: I.radical() == I                                                      # needs sage.rings.number_field
+            sage: I.radical() == I                                                      # needs sage.rings.number_field sage.schemes
             True
 
         So we compute its Weil restriction::
 
-            sage: J = I.weil_restriction(); J                                           # needs sage.rings.number_field
+            sage: J = I.weil_restriction(); J                                           # needs sage.rings.number_field sage.schemes
             Ideal (-x0^3 - x0*x1^2 - 2*x0^2*z0 - 2/3*x1^2*z0 + x0*y0*z0 + y0^2*z0
                      + 1/3*x1*y1*z0 + 1/3*y1^2*z0 - 4*x0*z0^2 + 3*y0*z0^2 - 5*z0^3
                      - 4/3*x0*x1*z1 + 1/3*x1*y0*z1 + 1/3*x0*y1*z1 + 2/3*y0*y1*z1
@@ -5561,7 +5561,7 @@ class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
 
         We can check that the point ``p`` is still a root of all generators of ``J``::
 
-            sage: J.subs(x0=1, y0=2, z0=1, x1=0, y1=0, z1=0)                            # needs sage.rings.number_field
+            sage: J.subs(x0=1, y0=2, z0=1, x1=0, y1=0, z1=0)                            # needs sage.rings.number_field sage.schemes
             Ideal (0, 0) of Multivariate Polynomial Ring in x0, x1, y0, y1, z0, z1
              over Rational Field
 

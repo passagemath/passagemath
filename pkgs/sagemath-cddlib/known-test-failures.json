@@ -1,0 +1,260 @@
+{
+    "sage.combinat.root_system.ambient_space": {
+        "ntests": 82
+    },
+    "sage.combinat.root_system.associahedron": {
+        "ntests": 4
+    },
+    "sage.combinat.root_system.braid_orbit": {
+        "ntests": 11
+    },
+    "sage.combinat.root_system.cartan_matrix": {
+        "ntests": 64
+    },
+    "sage.combinat.root_system.cartan_type": {
+        "failed": true,
+        "ntests": 394
+    },
+    "sage.combinat.root_system.coxeter_group": {
+        "ntests": 13
+    },
+    "sage.combinat.root_system.coxeter_type": {
+        "ntests": 81
+    },
+    "sage.combinat.root_system.hecke_algebra_representation": {
+        "ntests": 1
+    },
+    "sage.combinat.root_system.integrable_representations": {
+        "ntests": 4
+    },
+    "sage.combinat.root_system.non_symmetric_macdonald_polynomials": {
+        "ntests": 27
+    },
+    "sage.combinat.root_system.root_lattice_realization_algebras": {
+        "failed": true,
+        "ntests": 284
+    },
+    "sage.combinat.root_system.root_lattice_realizations": {
+        "ntests": 484
+    },
+    "sage.combinat.root_system.root_space": {
+        "ntests": 78
+    },
+    "sage.combinat.root_system.root_system": {
+        "ntests": 123
+    },
+    "sage.combinat.root_system.type_A": {
+        "ntests": 48
+    },
+    "sage.combinat.root_system.type_A_affine": {
+        "ntests": 29
+    },
+    "sage.combinat.root_system.type_A_infinity": {
+        "ntests": 37
+    },
+    "sage.combinat.root_system.type_B": {
+        "ntests": 39
+    },
+    "sage.combinat.root_system.type_BC_affine": {
+        "ntests": 41
+    },
+    "sage.combinat.root_system.type_B_affine": {
+        "ntests": 20
+    },
+    "sage.combinat.root_system.type_C": {
+        "ntests": 40
+    },
+    "sage.combinat.root_system.type_C_affine": {
+        "ntests": 22
+    },
+    "sage.combinat.root_system.type_D": {
+        "ntests": 41
+    },
+    "sage.combinat.root_system.type_D_affine": {
+        "ntests": 22
+    },
+    "sage.combinat.root_system.type_E": {
+        "ntests": 46
+    },
+    "sage.combinat.root_system.type_E_affine": {
+        "ntests": 19
+    },
+    "sage.combinat.root_system.type_F": {
+        "ntests": 39
+    },
+    "sage.combinat.root_system.type_F_affine": {
+        "ntests": 18
+    },
+    "sage.combinat.root_system.type_G": {
+        "ntests": 34
+    },
+    "sage.combinat.root_system.type_G_affine": {
+        "ntests": 18
+    },
+    "sage.combinat.root_system.type_H": {
+        "ntests": 21
+    },
+    "sage.combinat.root_system.type_I": {
+        "ntests": 20
+    },
+    "sage.combinat.root_system.type_Q": {
+        "ntests": 25
+    },
+    "sage.combinat.root_system.type_affine": {
+        "ntests": 67
+    },
+    "sage.combinat.root_system.type_dual": {
+        "ntests": 126
+    },
+    "sage.combinat.root_system.type_folded": {
+        "ntests": 31
+    },
+    "sage.combinat.root_system.type_marked": {
+        "ntests": 119
+    },
+    "sage.combinat.root_system.type_reducible": {
+        "ntests": 82
+    },
+    "sage.combinat.root_system.type_relabel": {
+        "ntests": 135
+    },
+    "sage.combinat.root_system.type_super_A": {
+        "ntests": 127
+    },
+    "sage.combinat.root_system.weight_lattice_realizations": {
+        "ntests": 135
+    },
+    "sage.combinat.root_system.weight_space": {
+        "ntests": 109
+    },
+    "sage.geometry.polyhedron.backend_cdd": {
+        "failed": true,
+        "ntests": 33
+    },
+    "sage.geometry.polyhedron.backend_cdd_rdf": {
+        "ntests": 34
+    },
+    "sage.geometry.polyhedron.backend_field": {
+        "ntests": 64
+    },
+    "sage.geometry.polyhedron.backend_normaliz": {
+        "ntests": 22
+    },
+    "sage.geometry.polyhedron.backend_number_field": {
+        "ntests": 27
+    },
+    "sage.geometry.polyhedron.backend_polymake": {
+        "ntests": 73
+    },
+    "sage.geometry.polyhedron.backend_ppl": {
+        "ntests": 90
+    },
+    "sage.geometry.polyhedron.base": {
+        "ntests": 150
+    },
+    "sage.geometry.polyhedron.base0": {
+        "ntests": 212
+    },
+    "sage.geometry.polyhedron.base1": {
+        "ntests": 144
+    },
+    "sage.geometry.polyhedron.base2": {
+        "ntests": 96
+    },
+    "sage.geometry.polyhedron.base3": {
+        "ntests": 320
+    },
+    "sage.geometry.polyhedron.base4": {
+        "ntests": 11
+    },
+    "sage.geometry.polyhedron.base5": {
+        "ntests": 382
+    },
+    "sage.geometry.polyhedron.base6": {
+        "failed": true,
+        "ntests": 188
+    },
+    "sage.geometry.polyhedron.base7": {
+        "ntests": 128
+    },
+    "sage.geometry.polyhedron.base_QQ": {
+        "ntests": 112
+    },
+    "sage.geometry.polyhedron.base_RDF": {
+        "ntests": 14
+    },
+    "sage.geometry.polyhedron.base_ZZ": {
+        "ntests": 100
+    },
+    "sage.geometry.polyhedron.base_mutable": {
+        "ntests": 57
+    },
+    "sage.geometry.polyhedron.base_number_field": {
+        "ntests": 8
+    },
+    "sage.geometry.polyhedron.cdd_file_format": {
+        "ntests": 10
+    },
+    "sage.geometry.polyhedron.combinatorial_polyhedron.base": {
+        "ntests": 581
+    },
+    "sage.geometry.polyhedron.combinatorial_polyhedron.combinatorial_face": {
+        "ntests": 180
+    },
+    "sage.geometry.polyhedron.combinatorial_polyhedron.conversions": {
+        "ntests": 58
+    },
+    "sage.geometry.polyhedron.combinatorial_polyhedron.face_iterator": {
+        "ntests": 364
+    },
+    "sage.geometry.polyhedron.combinatorial_polyhedron.list_of_faces": {
+        "ntests": 67
+    },
+    "sage.geometry.polyhedron.combinatorial_polyhedron.polyhedron_face_lattice": {
+        "ntests": 52
+    },
+    "sage.geometry.polyhedron.constructor": {
+        "failed": true,
+        "ntests": 109
+    },
+    "sage.geometry.polyhedron.double_description": {
+        "ntests": 116
+    },
+    "sage.geometry.polyhedron.double_description_inhomogeneous": {
+        "ntests": 72
+    },
+    "sage.geometry.polyhedron.face": {
+        "ntests": 159
+    },
+    "sage.geometry.polyhedron.lattice_euclidean_group_element": {
+        "ntests": 27
+    },
+    "sage.geometry.polyhedron.library": {
+        "failed": true,
+        "ntests": 314
+    },
+    "sage.geometry.polyhedron.misc": {
+        "ntests": 12
+    },
+    "sage.geometry.polyhedron.modules.formal_polyhedra_module": {
+        "ntests": 44
+    },
+    "sage.geometry.polyhedron.palp_database": {
+        "ntests": 6
+    },
+    "sage.geometry.polyhedron.parent": {
+        "ntests": 200
+    },
+    "sage.geometry.polyhedron.plot": {
+        "ntests": 199
+    },
+    "sage.geometry.polyhedron.ppl_lattice_polygon": {
+        "ntests": 81
+    },
+    "sage.geometry.polyhedron.ppl_lattice_polytope": {
+        "ntests": 166
+    },
+    "sage.geometry.polyhedron.representation": {
+        "ntests": 343
+    }
+}

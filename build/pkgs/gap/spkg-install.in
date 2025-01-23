@@ -18,7 +18,7 @@ fi
 
 sdh_configure $SAGE_CONFIGURE_GMP --prefix=$SAGE_LOCAL
 sdh_make
-sdh_make_install
+sdh_make_install -j1
 
 # Install only the minimal packages GAP needs to run
 sdh_install pkg/gapdoc pkg/primgrp pkg/smallgrp pkg/transgrp "$GAP_ROOT"/pkg

@@ -1,8 +1,10 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Homsets of finitely presented graded modules over the Steenrod algebra
 
 EXAMPLES::
 
+    sage: # needs sage.combinat
     sage: from sage.modules.fp_graded.steenrod.module import SteenrodFPModule
     sage: from sage.misc.sage_unittest import TestSuite
     sage: A = SteenrodAlgebra(2, profile=(3,2,1))

@@ -1071,7 +1071,6 @@ class BipartiteGraph(Graph):
 
         # add the edge
         Graph.add_edge(self, u, v, label)
-        return
 
     def add_edges(self, edges, loops=True):
         """

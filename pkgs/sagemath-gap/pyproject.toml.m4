@@ -10,7 +10,6 @@ requires = [
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_sagemath_pari
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_pkgconfig
 ]
@@ -20,7 +19,6 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-gap"
 description = "passagemath: Computational Group Theory with GAP"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_sagemath_pari
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sage_conf
@@ -42,13 +40,13 @@ test            = ["passagemath-repl"]
 # so there is no clean way to refer to the repair_wheel.py script
 # https://github.com/pypa/cibuildwheel/issues/1931
 repair-wheel-command = [
-    'python3 -m pip install passagemath-conf',
+    'python3 -m pip install passagemath-conf auditwheel',
     'python3 pkgs/sagemath-gap/repair_wheel.py {wheel}',
     'auditwheel repair -w {dest_dir} {wheel}',
 ]
 [tool.cibuildwheel.macos]
 repair-wheel-command = [
-    'python3 -m pip install passagemath-conf',
+    'python3 -m pip install passagemath-conf auditwheel',
     'python3 pkgs/sagemath-gap/repair_wheel.py {wheel}',
     'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
 ]

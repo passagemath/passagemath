@@ -119,7 +119,7 @@ from sage.arith.functions import lcm
 from sage.rings.polynomial import polynomial_fateman
 
 from sage.rings.ideal import Ideal_generic
-from sage.rings.polynomial.polynomial_ring import PolynomialRing_general
+from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
 from sage.rings.polynomial.multi_polynomial_ring import MPolynomialRing_base
 from sage.rings.polynomial.multi_polynomial cimport MPolynomial
 from sage.rings.polynomial.polynomial_quotient_ring_element import PolynomialQuotientRingElement
@@ -2282,7 +2282,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         - ``degree`` -- ``None`` or positive integer (default: ``None``).
           Used for polynomials over finite fields. If ``None``, returns
-          the the first factor found (usually the smallest). Otherwise,
+          the first factor found (usually the smallest). Otherwise,
           attempts to return an irreducible factor of ``self`` of chosen
           degree ``degree``.
 
@@ -4591,11 +4591,11 @@ cdef class Polynomial(CommutativePolynomial):
             x^2 + 3.0000000000000000000000000000
             sage: factor(x^2 + 1)
             (x - I) * (x + I)
-            sage: f = R(I) * (x^2 + 1) ; f
+            sage: f = R(I) * (x^2 + 1) ; f                                              # needs sage.symbolic
             I*x^2 + I
-            sage: F = factor(f); F
+            sage: F = factor(f); F                                                      # needs sage.symbolic
             (1.0000000000000000000000000000*I) * (x - I) * (x + I)
-            sage: expand(F)
+            sage: expand(F)                                                             # needs sage.symbolic
             I*x^2 + I
 
         Over a number field::
@@ -4666,7 +4666,7 @@ cdef class Polynomial(CommutativePolynomial):
 
             sage: R.<x> = PolynomialRing(Integers(35))
             sage: f = (x^2 + 2*x + 2) * (x^2 + 3*x + 9)
-            sage: f.factor()
+            sage: f.factor()                                                            # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             NotImplementedError: factorization of polynomials over
@@ -7527,7 +7527,7 @@ cdef class Polynomial(CommutativePolynomial):
             raise TypeError("p2 must be a polynomial")
         p1, p2 = coercion_model.canonical_coercion(p1, p2)
         K = p1.parent()
-        assert isinstance(p1.parent(), PolynomialRing_general)
+        assert isinstance(p1.parent(), PolynomialRing_generic)
         S = K.base_ring()
         Sf = S.fraction_field()
 
@@ -8194,7 +8194,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         An example involving large numbers::
 
-            sage: # needs numpy sage.rings.real_mpfr
+            sage: # needs numpy sage.libs.pari sage.rings.real_mpfr
             sage: x = RR['x'].0
             sage: f = x^2 - 1e100
             sage: f.roots()
@@ -9219,8 +9219,8 @@ cdef class Polynomial(CommutativePolynomial):
             sage: pol2.number_of_roots_in_interval()
             3
             sage: R.<x> = PolynomialRing(CC)
-            sage: pol = (x - 1) * (x - CC(I))
-            sage: pol.number_of_roots_in_interval(0, 2)
+            sage: pol = (x - 1) * (x - CC(I))                                           # needs sage.symbolic
+            sage: pol.number_of_roots_in_interval(0, 2)                                 # needs sage.symbolic
             1
 
         TESTS::
@@ -9272,8 +9272,8 @@ cdef class Polynomial(CommutativePolynomial):
             sage: pol2.number_of_real_roots()
             3
             sage: R.<x> = PolynomialRing(CC)
-            sage: pol = (x - 1) * (x - CC(I))
-            sage: pol.number_of_real_roots()
+            sage: pol = (x - 1) * (x - CC(I))                                           # needs sage.symbolic
+            sage: pol.number_of_real_roots()                                            # needs sage.symbolic
             1
         """
         return self.number_of_roots_in_interval()
@@ -11032,11 +11032,10 @@ cdef class Polynomial(CommutativePolynomial):
 
         x, = self.variables()
 
-        if isinstance(var, int) or isinstance(var, Integer):
+        if isinstance(var, (int, Integer)):
             if var:
                 raise TypeError("Variable index %d must be < 1." % var)
-            else:
-                return sum(self.coefficients())*x**self.degree()
+            return sum(self.coefficients()) * x**self.degree()
 
         x_name = self.variable_name()
         var = str(var)

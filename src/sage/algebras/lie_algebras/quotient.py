@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.combinat sage.graphs
 r"""
 Quotients of Lie algebras
 

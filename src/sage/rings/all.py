@@ -36,32 +36,12 @@ from sage.rings.semirings.all import *
 # Double precision floating point numbers
 from sage.rings.real_double import RealDoubleField, RDF, RealDoubleElement
 
-
-# up to here (#36566)
-
 # Polynomial Rings and Polynomial Quotient Rings
 from sage.rings.polynomial.all import *
 
 # Following will go to all__sagemath_categories.py in #36566
 
-# c-finite sequences
-from sage.rings.cfinite_sequence import CFiniteSequence, CFiniteSequences
-
 from sage.rings.fast_arith import prime_range
-
-# Following will go to all__sagemath_categories.py in #36566
-
-# continued fractions
-from sage.rings.continued_fraction import (continued_fraction,
-                                           continued_fraction_list)
-
-# up to here (#36566)
-
-# asymptotic ring
-# from sage.rings.asymptotic.all import *
-lazy_import('sage.rings.asymptotic.asymptotic_ring', 'AsymptoticRing')
-lazy_import('sage.rings.asymptotic.asymptotic_expansion_generators',
-            'asymptotic_expansions')
 
 # Register classes in numbers abc
 from sage.rings import numbers_abc

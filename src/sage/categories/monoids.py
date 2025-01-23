@@ -246,7 +246,7 @@ class Monoids(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: # needs sage.groups
+                sage: # needs sage.combinat sage.groups
                 sage: G = FreeGroup(2)
                 sage: x0, x1 = G.group_generators()
                 sage: c1 = cartesian_product([x0, x1])
@@ -269,7 +269,7 @@ class Monoids(CategoryWithAxiom):
 
             TESTS::
 
-                sage: c1._div_.__module__                                               # needs sage.groups
+                sage: c1._div_.__module__                                               # needs sage.combinat sage.groups
                 'sage.categories.monoids'
             """
             return left * ~right

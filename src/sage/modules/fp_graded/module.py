@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.combinat
 r"""
 Finitely presented graded modules
@@ -1209,6 +1210,7 @@ class FPModule(UniqueRepresentation, IndexedGenerators, Module):
             sage: all((res[i] * res[i+1]).is_zero() for i in range(len(res)-1))
             True
 
+            sage: # needs sage.libs.flint
             sage: e = SymmetricFunctions(QQ).e()
             sage: M = FPModule(e, [0], [[e[2]+e[1,1]], [e[1,1]]])
             sage: res = M.resolution(3, top_dim=10)

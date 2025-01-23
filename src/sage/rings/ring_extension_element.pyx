@@ -1547,13 +1547,13 @@ cdef class RingExtensionWithBasisElement(RingExtensionElement):
 
             sage: S.<x> = K[]                                                           # needs sage.rings.finite_rings
             sage: u = K.random_element()                                                # needs sage.rings.finite_rings
-            sage: L(u).minpoly() == x - u                                               # needs sage.rings.finite_rings
+            sage: L(u).minpoly() == x - u                                               # needs sage.rings.finite_rings sage.libs.singular
             True
 
         In a similar fashion, the minimal polynomial over `F` of an element
         of `K` should have degree 1 or 3::
 
-            sage: L(u).minpoly(F).degree() in [ 1, 3 ]                                  # needs sage.rings.finite_rings
+            sage: L(u).minpoly(F).degree() in [ 1, 3 ]                                  # needs sage.rings.finite_rings sage.libs.singular
             True
         """
         cdef RingExtensionWithBasis parent = self._parent

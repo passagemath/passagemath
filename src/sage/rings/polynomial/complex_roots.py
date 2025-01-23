@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-flint
+# sage.doctest: needs sage.libs.pari
 """
 Isolate Complex Roots of Polynomials
 

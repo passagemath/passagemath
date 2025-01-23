@@ -30,7 +30,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_maxima
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_sagemath_ntl
-    SPKG_INSTALL_REQUIRES_sage_conf
+    SPKG_INSTALL_REQUIRES_sagemath_singular
     SPKG_INSTALL_REQUIRES_sympy
 ]
 dynamic = ["version"]
@@ -41,6 +41,7 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
+conf            = ["passagemath-conf"]
 test            = ["passagemath-repl"]
 
 # extras by libraries

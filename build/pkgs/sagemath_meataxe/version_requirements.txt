@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-meataxe ~= 10.5.10.0
+passagemath-meataxe ~= 10.5.22.0

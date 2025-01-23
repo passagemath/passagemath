@@ -179,7 +179,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
 
     cdef get_unsafe(self, Py_ssize_t i, Py_ssize_t j):
         cdef IntegerMod_int n
-        n =  IntegerMod_int.__new__(IntegerMod_int)
+        n = IntegerMod_int.__new__(IntegerMod_int)
         IntegerMod_abstract.__init__(n, self._base_ring)
         n.ivalue = get_entry(&self.rows[i], j)
         return n
@@ -338,6 +338,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: a = matrix(GF(10007), 2, [1,2,3,4], sparse=True)
             sage: b = matrix(GF(10007), 2, 3, [1..6], sparse=True)
             sage: a * b

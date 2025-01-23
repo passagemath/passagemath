@@ -240,7 +240,7 @@ class DiscreteGaussianDistributionLatticeSampler(SageObject):
             sage: D._normalisation_factor_zz()
             6.8249...
             sage: D = DGL(ZZ^8, 1000)
-            sage: round(D._normalisation_factor_zz(prec=100))
+            sage: round(D._normalisation_factor_zz(prec=100))                           # needs sage.symbolic
             1558545456544038969634991553
             sage: M = Matrix(ZZ, [[1, 3, 0], [-2, 5, 1], [3, -4, 2]])
             sage: D = DGL(M, 1.7)
@@ -482,14 +482,14 @@ class DiscreteGaussianDistributionLatticeSampler(SageObject):
             sage: c = vector(ZZ, [7, 2, 5])
             sage: D = distributions.DiscreteGaussianDistributionLatticeSampler(ZZ^n, Sigma, c)
             sage: f = D.f
-            sage: nf = D._normalisation_factor_zz(); nf # This has not been properly implemented
+            sage: nf = D._normalisation_factor_zz(); nf # This has not been properly implemented    # needs fpylll
             78.6804...
 
         We can compute the expected number of samples before sampling a vector::
 
             sage: v = vector(ZZ, n, (11, 4, 8))
             sage: v.set_immutable()
-            sage: 1 / (f(v) / nf)
+            sage: 1 / (f(v) / nf)                                                                   # needs fpylll
             2553.9461...
 
             sage: counter = defaultdict(Integer); m = 0
@@ -497,7 +497,7 @@ class DiscreteGaussianDistributionLatticeSampler(SageObject):
             ....:     add_samples(1000)
             sage: sum(counter.values())  # random
             3000
-            sage: while abs(m*f(v)*1.0/nf/counter[v] - 1.0) >= 0.1:                     # needs sage.symbolic
+            sage: while abs(m*f(v)*1.0/nf/counter[v] - 1.0) >= 0.1:                     # needs fpylll sage.symbolic
             ....:     add_samples(1000)
 
         If the covariance provided is not positive definite, an error is thrown::
@@ -539,7 +539,7 @@ class DiscreteGaussianDistributionLatticeSampler(SageObject):
             [2 1 1]
             [1 2 1]
             [1 1 2]
-            sage: D().parent() is D.c().parent()
+            sage: D().parent() is D.c().parent()                                        # needs sage.symbolic
             True
         """
         precision = DiscreteGaussianDistributionLatticeSampler.compute_precision(precision, sigma)

@@ -1227,6 +1227,7 @@ cdef class PermutationGroupElement(MultiplicativeGroupElement):
             sage: (f*sigma)*tau
             2*x^2 - y^2 + z^2 + u^2
 
+            sage: # needs sage.modules
             sage: M = matrix(ZZ,[[1,0,0,0,0],[0,2,0,0,0],[0,0,3,0,0],[0,0,0,4,0],[0,0,0,0,5]])
             sage: sigma * M
             [0 2 0 0 0]
@@ -1977,7 +1978,7 @@ cdef class PermutationGroupElement(MultiplicativeGroupElement):
 
             sage: G = PermutationGroup(['(1,2,3)(4,5)'])
             sage: g = G.gen(0)
-            sage: g.matrix()
+            sage: g.matrix()                                                            # needs sage.modules
             [0 1 0 0 0]
             [0 0 1 0 0]
             [1 0 0 0 0]

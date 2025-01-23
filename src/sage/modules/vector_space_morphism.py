@@ -72,7 +72,7 @@ homspace to create a linear transformation.  See
 
 A homomorphism may also be created via a method on the domain.  ::
 
-    sage: # needs sage.rings.number_field sage.symbolic
+    sage: # needs fpylll sage.rings.number_field sage.symbolic
     sage: F = QQ[sqrt(3)]
     sage: a = F.gen(0)
     sage: D = F^2

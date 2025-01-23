@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-groups
+# sage_setup: distribution = sagemath-modules
 r"""
 Groups of imaginary elements
 
@@ -427,7 +427,7 @@ class ImaginaryGroup(UniqueRepresentation, Parent):
             Imaginary Group over Integer Ring
             because it is not purely imaginary
 
-            sage: J(x)
+            sage: J(x)                                                                  # needs sage.symbolic
             Traceback (most recent call last):
             ...
             ValueError: x is not in

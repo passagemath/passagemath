@@ -1202,10 +1202,10 @@ def is_from_GQ_spread(list arr):
 
          sage: from sage.graphs.generators.distance_regular import \
          ....: is_from_GQ_spread, graph_from_GQ_spread
-         sage: is_from_GQ_spread([125, 120, 1, 1, 24, 125])                             # needs sage.libs.pari
+         sage: is_from_GQ_spread([125, 120, 1, 1, 24, 125])                             # needs sage.libs.flint sage.libs.pari
          (5, 25)
-         sage: G = graph_from_GQ_spread(5, 25)                                          # needs sage.libs.pari
-         sage: G.is_distance_regular(True)                                              # needs sage.libs.pari
+         sage: G = graph_from_GQ_spread(5, 25)                                          # needs sage.libs.flint sage.libs.pari
+         sage: G.is_distance_regular(True)                                              # needs sage.libs.flint sage.libs.pari
          ([125, 120, 1, None], [None, 1, 24, 125])
 
     REFERENCES:
@@ -1217,9 +1217,9 @@ def is_from_GQ_spread(list arr):
 
          sage: from sage.graphs.generators.distance_regular import \
          ....: is_from_GQ_spread
-         sage: is_from_GQ_spread([343, 336, 1, 1, 48, 343])                             # needs sage.libs.pari
+         sage: is_from_GQ_spread([343, 336, 1, 1, 48, 343])                             # needs sage.libs.flint sage.libs.pari
          (7, 49)
-         sage: is_from_GQ_spread([343, 336, 1, 2, 48, 343])                             # needs sage.libs.pari
+         sage: is_from_GQ_spread([343, 336, 1, 2, 48, 343])                             # needs sage.libs.flint sage.libs.pari
          False
 
     Check that we don't get ``True`` for inexisting GQs::
@@ -1230,7 +1230,7 @@ def is_from_GQ_spread(list arr):
          sage: t = 6
          sage: [s * t, s * (t-1), 1, 1, t - 1, s * t]
          [30, 25, 1, 1, 5, 30]
-         sage: is_from_GQ_spread([30, 25, 1, 1, 5, 30])                                 # needs sage.libs.pari
+         sage: is_from_GQ_spread([30, 25, 1, 1, 5, 30])                                 # needs sage.libs.flint sage.libs.pari
          False
     """
     from sage.combinat.designs import design_catalog as designs
@@ -1273,8 +1273,8 @@ def graph_from_GQ_spread(const int s, const int t):
 
          sage: from sage.graphs.generators.distance_regular import \
          ....: graph_from_GQ_spread
-         sage: G = graph_from_GQ_spread(4, 16)                                          # needs sage.libs.pari
-         sage: G.is_distance_regular(True)                                              # needs sage.libs.pari
+         sage: G = graph_from_GQ_spread(4, 16)                                          # needs sage.libs.flint sage.libs.pari
+         sage: G.is_distance_regular(True)                                              # needs sage.libs.flint sage.libs.pari
          ([64, 60, 1, None], [None, 1, 15, 64])
 
     REFERENCES:
@@ -1285,11 +1285,11 @@ def graph_from_GQ_spread(const int s, const int t):
 
          sage: from sage.graphs.generators.distance_regular import \
          ....: graph_from_GQ_spread, is_from_GQ_spread
-         sage: is_from_GQ_spread([64, 60, 1, 1, 15, 64])                                # needs sage.libs.pari
+         sage: is_from_GQ_spread([64, 60, 1, 1, 15, 64])                                # needs sage.libs.flint sage.libs.pari
          (4, 16)
-         sage: graph_from_GQ_spread(*is_from_GQ_spread([27, 24, 1, 1, 8, 27]))          # needs sage.libs.pari
+         sage: graph_from_GQ_spread(*is_from_GQ_spread([27, 24, 1, 1, 8, 27]))          # needs sage.libs.flint sage.libs.pari
          Graph on 112 vertices
-         sage: _.is_distance_regular(True)                                              # needs sage.libs.pari
+         sage: _.is_distance_regular(True)                                              # needs sage.libs.flint sage.libs.pari
          ([27, 24, 1, None], [None, 1, 8, 27])
     """
     from sage.combinat.designs import design_catalog as designs

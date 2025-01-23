@@ -7649,7 +7649,7 @@ class StandardPermutations_n(StandardPermutations_n_abstract):
 
         EXAMPLES::
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.combinat sage.groups sage.modules
             sage: P = Permutations(4)
             sage: A = P.algebra(QQ); A
             Symmetric group algebra of order 4 over Rational Field

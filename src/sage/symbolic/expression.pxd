@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-symbolics
+# sage_setup: distribution = sagemath-singular
 cpdef _repr_Expression(x)
 cpdef _latex_Expression(x)
 cpdef new_Expression(parent, x)

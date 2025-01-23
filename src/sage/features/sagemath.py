@@ -1265,9 +1265,7 @@ class sage__symbolic(JoinFeature):
                               PythonModule('sage.geometry.riemannian_manifolds'),
                               PythonModule('sage.geometry.hyperbolic_space'),
                               PythonModule('sage.dynamics.complex_dynamics'),
-                              PythonModule('sage.libs.ecl'),
                               PythonModule('sage.interfaces.fricas'),
-                              PythonModule('sage.interfaces.giac'),
                               PythonModule('sage.interfaces.magma'),
                               PythonModule('sage.interfaces.magma_free'),
                               PythonModule('sage.interfaces.maple'),
@@ -1276,7 +1274,6 @@ class sage__symbolic(JoinFeature):
                               PythonModule('sage.interfaces.maxima'),
                               PythonModule('sage.interfaces.maxima_abstract'),
                               PythonModule('sage.interfaces.maxima_lib'),
-                              PythonModule('sage.interfaces.qepcad'),
                               PythonModule('sage.interfaces.sympy'),
                               PythonModule('sage.interfaces.sympy_wrapper'),
                              ], spkg='sagemath_symbolics', type='standard')

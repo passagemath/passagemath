@@ -299,12 +299,12 @@ def neighbor_iteration(seeds, p, mass=None, max_classes=None,
 
         sage: from sage.quadratic_forms.quadratic_form__neighbors import neighbor_iteration
         sage: Q = QuadraticForm(ZZ, 3, [1, 0, 0, 2, 1, 3])
-        sage: g = neighbor_iteration([Q], 3, mass=Q.conway_mass(), max_classes=2)       # needs sage.symbolic
+        sage: g = neighbor_iteration([Q], 3, mass=Q.conway_mass(), max_classes=2)       # needs sage.libs.gap sage.symbolic
         ...
         UserWarning: reached the maximum number of isometry classes=2.
         Increase the optional argument max_classes to obtain more.
         Warning: not all classes in the genus were found
-        sage: neighbor_iteration([Q], 3,                                                # needs sage.symbolic
+        sage: neighbor_iteration([Q], 3,                                                # needs sage.libs.gap sage.symbolic
         ....:                    mass=Q.conway_mass(), max_neighbors=0, algorithm='random')
         Warning: not all classes in the genus were found
         []
@@ -328,7 +328,7 @@ def neighbor_iteration(seeds, p, mass=None, max_classes=None,
         def p_divisible_vectors(Q, max_neighbors):
             yield from iter(v.lift() for v in Q.orbits_lines_mod_p(p)
                             if v != 0 and Q(v.lift()).valuation(p) > 0)
-            return
+
     elif algorithm == 'exhaustion':
         def p_divisible_vectors(Q, max_neighbors):
             k = 0

@@ -578,7 +578,7 @@ class SchemeHomset_points_abelian_variety_field(SchemeHomset_points_projective_f
 
     The bug reported at :issue:`1785` is fixed::
 
-        sage: # needs sage.rings.number_field sage.schemes
+        sage: # needs database_cremona_mini_ellcurve sage.rings.number_field sage.schemes
         sage: x = polygen(ZZ, 'x')
         sage: K.<a> = NumberField(x^2 + x - (3^3-3))
         sage: E = EllipticCurve('37a')
@@ -626,7 +626,7 @@ class SchemeHomset_points_abelian_variety_field(SchemeHomset_points_projective_f
 
         EXAMPLES::
 
-            sage: # needs sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage.schemes
             sage: E = EllipticCurve('37a')
             sage: X = E(QQ)
             sage: P = X([0,1,0]);  P
@@ -653,9 +653,10 @@ class SchemeHomset_points_abelian_variety_field(SchemeHomset_points_projective_f
 
         EXAMPLES::
 
-            sage: E = EllipticCurve('37a')                                              # needs sage.schemes
-            sage: X = E(QQ)                                                             # needs sage.schemes
-            sage: X._repr_()                                                            # needs sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage.schemes
+            sage: E = EllipticCurve('37a')
+            sage: X = E(QQ)
+            sage: X._repr_()
             'Abelian group of points on Elliptic Curve defined by y^2 + y = x^3 - x over Rational Field'
         """
         s = 'Abelian group of points on ' + str(self.extended_codomain())
@@ -674,7 +675,7 @@ class SchemeHomset_points_abelian_variety_field(SchemeHomset_points_projective_f
 
         EXAMPLES::
 
-            sage: # needs sage.schemes
+            sage: # needs database_cremona_mini_ellcurve sage.schemes
             sage: E = EllipticCurve('37a')
             sage: Hom = E.point_homset();  Hom
             Abelian group of points on Elliptic Curve defined

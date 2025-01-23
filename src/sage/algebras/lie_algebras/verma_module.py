@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.graphs
 r"""
 Verma Modules
 
@@ -701,21 +703,23 @@ class VermaModule(ModulePrinting, CombinatorialFreeModule):
         """
         if not d:
             return frozenset([self.highest_weight_vector()])
-        f = {i: self._pbw(g) for i,g in enumerate(self._g.f())}
-        basis = d.parent().basis() # Standard basis vectors
+        f = {i: self._pbw(g) for i, g in enumerate(self._g.f())}
+        basis = d.parent().basis()  # Standard basis vectors
         ret = set()
 
         def degree(m):
             m = m.dict()
             if not m:
                 return d.parent().zero()
-            return sum(e * self._g.degree_on_basis(k) for k,e in m.items()).to_vector()
-        for i in f:
+            return sum(e * self._g.degree_on_basis(k)
+                       for k, e in m.items()).to_vector()
+        for i, fi in f.items():
             if d[i] == 0:
                 continue
             for b in self._homogeneous_component_f(d + basis[i]):
-                temp = f[i] * b
-                ret.update([self.monomial(m) for m in temp.support() if degree(m) == d])
+                temp = fi * b
+                ret.update([self.monomial(m) for m in temp.support()
+                            if degree(m) == d])
         return frozenset(ret)
 
     def _Hom_(self, Y, category=None, **options):
@@ -1353,10 +1357,10 @@ class VermaModuleHomset(Homset):
             sage: M = L.verma_module(la)
             sage: Mp = L.verma_module(mu)
             sage: H = Hom(Mp, M)
-            sage: v = H.singular_vector(); v
+            sage: v = H.singular_vector(); v                                            # needs sage.rings.number_field
             f[-alpha[2]]*f[-alpha[1]]^3*v[Lambda[1] - Lambda[3]]
              + 3*f[-alpha[1]]^2*f[-alpha[1] - alpha[2]]*v[Lambda[1] - Lambda[3]]
-            sage: v.degree() == Mp.highest_weight()
+            sage: v.degree() == Mp.highest_weight()                                     # needs sage.rings.number_field
             True
 
         ::
@@ -1368,12 +1372,12 @@ class VermaModuleHomset(Homset):
             sage: M = L.verma_module(la)
             sage: Mp = L.verma_module(mu)
             sage: H = Hom(Mp, M)
-            sage: v = H.singular_vector()
+            sage: v = H.singular_vector()                                               # needs sage.rings.number_field
             sage: pbw = M.pbw_basis()
             sage: E = [pbw(e) for e in L.e()]
-            sage: all(e * v == M.zero() for e in E)  # long time
+            sage: all(e * v == M.zero() for e in E)  # long time                        # needs sage.rings.number_field
             True
-            sage: v.degree() == Mp.highest_weight()
+            sage: v.degree() == Mp.highest_weight()                                     # needs sage.rings.number_field
             True
 
         When `w \cdot \lambda \notin \lambda + Q^-`, there does not
@@ -1386,7 +1390,7 @@ class VermaModuleHomset(Homset):
             sage: M = L.verma_module(la)
             sage: Mp = L.verma_module(mu)
             sage: H = Hom(Mp, M)
-            sage: H.singular_vector() is None
+            sage: H.singular_vector() is None                                           # needs sage.rings.number_field
             True
 
         When we need to apply a non-simple reflection, we can compute
@@ -1397,14 +1401,14 @@ class VermaModuleHomset(Homset):
             sage: M = g.verma_module((0*La[1]).dot_action([1]))
             sage: Mp = g.verma_module((0*La[1]).dot_action([1,2]))
             sage: H = Hom(Mp, M)
-            sage: v = H.singular_vector(); v
+            sage: v = H.singular_vector(); v                                            # needs sage.rings.number_field
             1/2*f[-alpha[2]]*f[-alpha[1]]*v[-2*Lambda[1] + Lambda[2]]
              + f[-alpha[1] - alpha[2]]*v[-2*Lambda[1] + Lambda[2]]
             sage: pbw = M.pbw_basis()
             sage: E = [pbw(e) for e in g.e()]
-            sage: all(e * v == M.zero() for e in E)
+            sage: all(e * v == M.zero() for e in E)                                     # needs sage.rings.number_field
             True
-            sage: v.degree() == Mp.highest_weight()
+            sage: v.degree() == Mp.highest_weight()                                     # needs sage.rings.number_field
             True
 
         TESTS::
@@ -1415,7 +1419,7 @@ class VermaModuleHomset(Homset):
             sage: M = L.verma_module(La[1] + La[2])
             sage: pbw = M.pbw_basis()
             sage: E = {i: pbw(L.e(i)) for i in L.cartan_type().index_set()}
-            sage: all(not E[i] * Hom(L.verma_module(mu), M).singular_vector()
+            sage: all(not E[i] * Hom(L.verma_module(mu), M).singular_vector()           # needs sage.rings.number_field
             ....:     for i in L.cartan_type().index_set()
             ....:     for mu in M.highest_weight().dot_orbit())
             True

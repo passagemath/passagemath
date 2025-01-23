@@ -767,7 +767,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
                 """
                 return False
 
-            def is_commutative(self):
+            def is_commutative(self) -> bool:
                 """
                 Return whether this Iwahori-Hecke algebra is commutative.
 

@@ -11,11 +11,9 @@ TESTS::
 
     sage: A = J0(33)
     sage: D = A.decomposition(); D
-    [
-    Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
-    Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
-    Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)
-    ]
+    [Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
+     Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
+     Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)]
     sage: loads(dumps(D)) == D
     True
     sage: loads(dumps(A)) == A
@@ -102,7 +100,7 @@ def is_ModularAbelianVariety(x) -> bool:
     Returning ``True`` is a statement about the data type not whether or
     not some abelian variety is modular::
 
-        sage: is_ModularAbelianVariety(EllipticCurve('37a'))
+        sage: is_ModularAbelianVariety(EllipticCurve('37a'))                            # needs database_cremona_mini_ellcurve
         False
     """
     from sage.misc.superseded import deprecation
@@ -514,9 +512,7 @@ class ModularAbelianVariety_abstract(Parent):
             sage: B = phi.image(); B
             Abelian subvariety of dimension 1 of J0(33)
             sage: B.decomposition()
-            [
-            Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33)
-            ]
+            [Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33)]
             sage: C = J.degeneracy_map(33,3).image(); C
             Abelian subvariety of dimension 1 of J0(33)
             sage: C == B
@@ -633,18 +629,18 @@ class ModularAbelianVariety_abstract(Parent):
         EXAMPLES::
 
             sage: J = J0(11)
-            sage: J.elliptic_curve()
+            sage: J.elliptic_curve()                                                    # needs database_cremona_mini_ellcurve
             Elliptic Curve defined by y^2 + y = x^3 - x^2 - 10*x - 20 over Rational Field
 
             sage: J = J0(49)
-            sage: J.elliptic_curve()
+            sage: J.elliptic_curve()                                                    # needs database_cremona_mini_ellcurve
             Elliptic Curve defined by y^2 + x*y = x^3 - x^2 - 2*x - 1 over Rational Field
 
             sage: A = J0(37)[1]
-            sage: E = A.elliptic_curve()
+            sage: E = A.elliptic_curve()                                                # needs database_cremona_mini_ellcurve
             sage: A.lseries()(1)
             0.725681061936153
-            sage: E.lseries()(1)
+            sage: E.lseries()(1)                                                        # needs database_cremona_mini_ellcurve
             0.725681061936153
 
         Elliptic curves are of dimension 1. ::
@@ -938,11 +934,9 @@ class ModularAbelianVariety_abstract(Parent):
         intersection::
 
             sage: J = J0(67); D = J.decomposition(); D
-            [
-            Simple abelian subvariety 67a(1,67) of dimension 1 of J0(67),
-            Simple abelian subvariety 67b(1,67) of dimension 2 of J0(67),
-            Simple abelian subvariety 67c(1,67) of dimension 2 of J0(67)
-            ]
+            [Simple abelian subvariety 67a(1,67) of dimension 1 of J0(67),
+             Simple abelian subvariety 67b(1,67) of dimension 2 of J0(67),
+             Simple abelian subvariety 67c(1,67) of dimension 2 of J0(67)]
             sage: (D[0] + D[1]).intersection(D[1] + D[2])
             (Finite subgroup with invariants [5, 10] over QQbar of Abelian subvariety of dimension 3 of J0(67), Abelian subvariety of dimension 2 of J0(67))
 
@@ -1778,14 +1772,12 @@ class ModularAbelianVariety_abstract(Parent):
             5^24
 
             sage: A = J0(11^2); A.decomposition()
-            [
-            Simple abelian subvariety 11a(1,121) of dimension 1 of J0(121),
-            Simple abelian subvariety 11a(11,121) of dimension 1 of J0(121),
-            Simple abelian subvariety 121a(1,121) of dimension 1 of J0(121),
-            Simple abelian subvariety 121b(1,121) of dimension 1 of J0(121),
-            Simple abelian subvariety 121c(1,121) of dimension 1 of J0(121),
-            Simple abelian subvariety 121d(1,121) of dimension 1 of J0(121)
-            ]
+            [Simple abelian subvariety 11a(1,121) of dimension 1 of J0(121),
+             Simple abelian subvariety 11a(11,121) of dimension 1 of J0(121),
+             Simple abelian subvariety 121a(1,121) of dimension 1 of J0(121),
+             Simple abelian subvariety 121b(1,121) of dimension 1 of J0(121),
+             Simple abelian subvariety 121c(1,121) of dimension 1 of J0(121),
+             Simple abelian subvariety 121d(1,121) of dimension 1 of J0(121)]
             sage: A.conductor().factor()
             11^10
 
@@ -1793,7 +1785,7 @@ class ModularAbelianVariety_abstract(Parent):
             Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33)
             sage: A.conductor()
             11
-            sage: A.elliptic_curve().conductor()
+            sage: A.elliptic_curve().conductor()                                        # needs database_cremona_mini_ellcurve
             11
         """
         if not self.base_ring() == QQ:
@@ -2763,6 +2755,7 @@ class ModularAbelianVariety_abstract(Parent):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: J = J0(33)
             sage: A = J.new_subvariety()
             sage: A
@@ -3161,11 +3154,9 @@ class ModularAbelianVariety_abstract(Parent):
         EXAMPLES::
 
             sage: D = J0(33).decomposition(); D
-            [
-            Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)
-            ]
+            [Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
+             Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
+             Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)]
             sage: D[0].degen_t()
             (1, 33)
             sage: D[1].degen_t()
@@ -3297,36 +3288,28 @@ class ModularAbelianVariety_abstract(Parent):
             sage: A = w.abelian_variety(); A
             Abelian subvariety of dimension 1 of J0(33)
             sage: D = A.decomposition(); D
-            [
-            Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33)
-            ]
+            [Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33)]
             sage: D[0] == A
             True
             sage: B = A + J0(33)[0]; B
             Abelian subvariety of dimension 2 of J0(33)
             sage: dd = B.decomposition(simple=False); dd
-            [
-            Abelian subvariety of dimension 2 of J0(33)
-            ]
+            [Abelian subvariety of dimension 2 of J0(33)]
             sage: dd[0] == B
             True
             sage: dd = B.decomposition(); dd
-            [
-            Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33)
-            ]
+            [Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
+             Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33)]
             sage: sum(dd) == B
             True
 
         We decompose a product of two Jacobians::
 
             sage: (J0(33) * J0(11)).decomposition()
-            [
-            Simple abelian subvariety 11a(1,11) of dimension 1 of J0(33) x J0(11),
-            Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33) x J0(11),
-            Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33) x J0(11),
-            Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33) x J0(11)
-            ]
+            [Simple abelian subvariety 11a(1,11) of dimension 1 of J0(33) x J0(11),
+             Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33) x J0(11),
+             Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33) x J0(11),
+             Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33) x J0(11)]
         """
         try:
             return self.__decomposition[(simple, bound)]
@@ -3505,11 +3488,11 @@ class ModularAbelianVariety_abstract(Parent):
             sage: A = (d1 + d2).image(); A
             Abelian subvariety of dimension 1 of J0(33)
             sage: A._classify_ambient_factors()
-            ([1], [0, 2], [
-            Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)
-            ])
+            ([1],
+             [0, 2],
+             [Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
+              Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
+              Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)])
         """
         # Decompose an arbitrary abelian variety
         amb = self.ambient_variety()
@@ -3539,10 +3522,8 @@ class ModularAbelianVariety_abstract(Parent):
         EXAMPLES::
 
             sage: J = J0(37) ; J.decomposition()
-            [
-            Simple abelian subvariety 37a(1,37) of dimension 1 of J0(37),
-            Simple abelian subvariety 37b(1,37) of dimension 1 of J0(37)
-            ]
+            [Simple abelian subvariety 37a(1,37) of dimension 1 of J0(37),
+             Simple abelian subvariety 37b(1,37) of dimension 1 of J0(37)]
             sage: phi = J._isogeny_to_product_of_simples() ; phi
             Abelian variety morphism:
               From: Abelian variety J0(37) of dimension 2
@@ -3719,8 +3700,8 @@ class ModularAbelianVariety_abstract(Parent):
 
         By a theorem the modular degree must thus be `3`::
 
-            sage: E = EllipticCurve('33a')
-            sage: E.modular_degree()                                                    # needs sympow
+            sage: E = EllipticCurve('33a')                      # needs database_cremona_mini_ellcurve
+            sage: E.modular_degree()                            # needs database_cremona_mini_ellcurve sympow
             3
 
         Next we compute the dual of a `2`-dimensional new simple
@@ -3775,11 +3756,9 @@ class ModularAbelianVariety_abstract(Parent):
         EXAMPLES::
 
             sage: D = J0(33).decomposition(); D
-            [
-            Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)
-            ]
+            [Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
+             Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
+             Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)]
             sage: D[0]._factors_with_same_label(D[1])
             [Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33)]
             sage: D[0]._factors_with_same_label(D[2])
@@ -3838,11 +3817,9 @@ class ModularAbelianVariety_abstract(Parent):
         elliptic curves with a third nonisogenous curve::
 
             sage: D = J0(33).decomposition(); D
-            [
-            Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)
-            ]
+            [Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
+             Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
+             Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)]
             sage: D[0]._complement_shares_no_factors_with_same_label()
             False
             sage: (D[0]+D[1])._complement_shares_no_factors_with_same_label()
@@ -3856,10 +3833,8 @@ class ModularAbelianVariety_abstract(Parent):
         ::
 
             sage: D = (J0(11) * J0(11)).decomposition(); D
-            [
-            Simple abelian subvariety 11a(1,11) of dimension 1 of J0(11) x J0(11),
-            Simple abelian subvariety 11a(1,11) of dimension 1 of J0(11) x J0(11)
-            ]
+            [Simple abelian subvariety 11a(1,11) of dimension 1 of J0(11) x J0(11),
+             Simple abelian subvariety 11a(1,11) of dimension 1 of J0(11) x J0(11)]
             sage: D[0]._complement_shares_no_factors_with_same_label()
             False
 
@@ -3867,10 +3842,8 @@ class ModularAbelianVariety_abstract(Parent):
         isogeny, class that matters::
 
             sage: D = (J0(11)*J1(11)).decomposition(); D
-            [
-            Simple abelian subvariety 11aG1(1,11) of dimension 1 of J0(11) x J1(11),
-            Simple abelian subvariety 11a(1,11) of dimension 1 of J0(11) x J1(11)
-            ]
+            [Simple abelian subvariety 11aG1(1,11) of dimension 1 of J0(11) x J1(11),
+             Simple abelian subvariety 11a(1,11) of dimension 1 of J0(11) x J1(11)]
             sage: D[0]._complement_shares_no_factors_with_same_label()
             True
             sage: D[0].newform_label()
@@ -3894,28 +3867,22 @@ class ModularAbelianVariety_abstract(Parent):
 
             sage: J = J0(389)
             sage: J.decomposition()
-            [
-            Simple abelian subvariety 389a(1,389) of dimension 1 of J0(389),
-            Simple abelian subvariety 389b(1,389) of dimension 2 of J0(389),
-            Simple abelian subvariety 389c(1,389) of dimension 3 of J0(389),
-            Simple abelian subvariety 389d(1,389) of dimension 6 of J0(389),
-            Simple abelian subvariety 389e(1,389) of dimension 20 of J0(389)
-            ]
+            [Simple abelian subvariety 389a(1,389) of dimension 1 of J0(389),
+             Simple abelian subvariety 389b(1,389) of dimension 2 of J0(389),
+             Simple abelian subvariety 389c(1,389) of dimension 3 of J0(389),
+             Simple abelian subvariety 389d(1,389) of dimension 6 of J0(389),
+             Simple abelian subvariety 389e(1,389) of dimension 20 of J0(389)]
             sage: J[2]
             Simple abelian subvariety 389c(1,389) of dimension 3 of J0(389)
             sage: J[-1]
             Simple abelian subvariety 389e(1,389) of dimension 20 of J0(389)
             sage: J = J0(125); J.decomposition()
-            [
-            Simple abelian subvariety 125a(1,125) of dimension 2 of J0(125),
-            Simple abelian subvariety 125b(1,125) of dimension 2 of J0(125),
-            Simple abelian subvariety 125c(1,125) of dimension 4 of J0(125)
-            ]
+            [Simple abelian subvariety 125a(1,125) of dimension 2 of J0(125),
+             Simple abelian subvariety 125b(1,125) of dimension 2 of J0(125),
+             Simple abelian subvariety 125c(1,125) of dimension 4 of J0(125)]
             sage: J[:2]
-            [
-            Simple abelian subvariety 125a(1,125) of dimension 2 of J0(125),
-            Simple abelian subvariety 125b(1,125) of dimension 2 of J0(125)
-            ]
+            [Simple abelian subvariety 125a(1,125) of dimension 2 of J0(125),
+             Simple abelian subvariety 125b(1,125) of dimension 2 of J0(125)]
         """
         return self.decomposition()[i]
 
@@ -4015,13 +3982,11 @@ class ModularAbelianVariety_modsym_abstract(ModularAbelianVariety_abstract):
         EXAMPLES::
 
             sage: A = J0(42); D = A.decomposition(); D
-            [
-            Simple abelian subvariety 14a(1,42) of dimension 1 of J0(42),
-            Simple abelian subvariety 14a(3,42) of dimension 1 of J0(42),
-            Simple abelian subvariety 21a(1,42) of dimension 1 of J0(42),
-            Simple abelian subvariety 21a(2,42) of dimension 1 of J0(42),
-            Simple abelian subvariety 42a(1,42) of dimension 1 of J0(42)
-            ]
+            [Simple abelian subvariety 14a(1,42) of dimension 1 of J0(42),
+             Simple abelian subvariety 14a(3,42) of dimension 1 of J0(42),
+             Simple abelian subvariety 21a(1,42) of dimension 1 of J0(42),
+             Simple abelian subvariety 21a(2,42) of dimension 1 of J0(42),
+             Simple abelian subvariety 42a(1,42) of dimension 1 of J0(42)]
             sage: D[0] + D[1]
             Abelian subvariety of dimension 2 of J0(42)
             sage: D[1].is_subvariety(D[0] + D[1])
@@ -4313,13 +4278,11 @@ class ModularAbelianVariety_modsym_abstract(ModularAbelianVariety_abstract):
         More examples::
 
             sage: A = J0(42); D = A.decomposition(); D
-            [
-            Simple abelian subvariety 14a(1,42) of dimension 1 of J0(42),
-            Simple abelian subvariety 14a(3,42) of dimension 1 of J0(42),
-            Simple abelian subvariety 21a(1,42) of dimension 1 of J0(42),
-            Simple abelian subvariety 21a(2,42) of dimension 1 of J0(42),
-            Simple abelian subvariety 42a(1,42) of dimension 1 of J0(42)
-            ]
+            [Simple abelian subvariety 14a(1,42) of dimension 1 of J0(42),
+             Simple abelian subvariety 14a(3,42) of dimension 1 of J0(42),
+             Simple abelian subvariety 21a(1,42) of dimension 1 of J0(42),
+             Simple abelian subvariety 21a(2,42) of dimension 1 of J0(42),
+             Simple abelian subvariety 42a(1,42) of dimension 1 of J0(42)]
             sage: D[0].is_subvariety(A)
             True
             sage: D[1].is_subvariety(D[0] + D[1])
@@ -4466,16 +4429,12 @@ class ModularAbelianVariety_modsym_abstract(ModularAbelianVariety_abstract):
 
             sage: J = J0(33)
             sage: J.decomposition()
-            [
-            Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
-            Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)
-            ]
+            [Simple abelian subvariety 11a(1,33) of dimension 1 of J0(33),
+             Simple abelian subvariety 11a(3,33) of dimension 1 of J0(33),
+             Simple abelian subvariety 33a(1,33) of dimension 1 of J0(33)]
             sage: J1(17).decomposition()
-            [
-            Simple abelian subvariety 17aG1(1,17) of dimension 1 of J1(17),
-            Simple abelian subvariety 17bG1(1,17) of dimension 4 of J1(17)
-            ]
+            [Simple abelian subvariety 17aG1(1,17) of dimension 1 of J1(17),
+             Simple abelian subvariety 17bG1(1,17) of dimension 4 of J1(17)]
         """
         try:
             return self.__decomposition[(simple, bound)]
@@ -4986,10 +4945,8 @@ def factor_new_space(M):
 
         sage: M = ModularSymbols(37).cuspidal_subspace()
         sage: sage.modular.abvar.abvar.factor_new_space(M)
-        [
-        Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 5 for Gamma_0(37) of weight 2 with sign 0 over Rational Field,
-        Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 5 for Gamma_0(37) of weight 2 with sign 0 over Rational Field
-        ]
+        [Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 5 for Gamma_0(37) of weight 2 with sign 0 over Rational Field,
+         Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 5 for Gamma_0(37) of weight 2 with sign 0 over Rational Field]
     """
     t = None
     p = 2
@@ -5021,12 +4978,8 @@ def factor_modsym_space_new_factors(M):
 
         sage: M = ModularSymbols(33)
         sage: sage.modular.abvar.abvar.factor_modsym_space_new_factors(M)
-        [[
-        Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 3 for Gamma_0(11) of weight 2 with sign 0 over Rational Field
-        ],
-         [
-        Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field
-        ]]
+        [[Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 3 for Gamma_0(11) of weight 2 with sign 0 over Rational Field],
+         [Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field]]
     """
     eps = M.character()
     K = eps.conductor() if eps is not None else 1
@@ -5052,27 +5005,36 @@ def simple_factorization_of_modsym_space(M, simple=True):
 
         sage: M = ModularSymbols(33)
         sage: sage.modular.abvar.abvar.simple_factorization_of_modsym_space(M)
-        [
-        (11, 0, 1, Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field),
-        (11, 0, 3, Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field),
-        (33, 0, 1, Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field)
-        ]
+        [(11,
+          0,
+          1,
+          Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field),
+         (11,
+          0,
+          3,
+          Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field),
+         (33,
+          0,
+          1,
+          Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field)]
         sage: sage.modular.abvar.abvar.simple_factorization_of_modsym_space(M, simple=False)
-        [
-        (11, 0, None, Modular Symbols subspace of dimension 4 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field),
-        (33, 0, None, Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field)
-        ]
+        [(11,
+          0,
+          None,
+          Modular Symbols subspace of dimension 4 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field),
+         (33,
+          0,
+          None,
+          Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field)]
 
     TESTS:
 
     Check that :issue:`21799` is fixed::
 
         sage: JH(28, [15]).decomposition()
-        [
-        Simple abelian subvariety 14aGH[15](1,28) of dimension 1 of JH(28,[15]),
-        Simple abelian subvariety 14aGH[15](2,28) of dimension 1 of JH(28,[15]),
-        Simple abelian subvariety 28aGH[15](1,28) of dimension 2 of JH(28,[15])
-        ]
+        [Simple abelian subvariety 14aGH[15](1,28) of dimension 1 of JH(28,[15]),
+         Simple abelian subvariety 14aGH[15](2,28) of dimension 1 of JH(28,[15]),
+         Simple abelian subvariety 28aGH[15](1,28) of dimension 2 of JH(28,[15])]
     """
     D = []
     for G in factor_modsym_space_new_factors(M):
@@ -5128,18 +5090,24 @@ def modsym_lattices(M, factors):
         sage: M = ModularSymbols(33)
         sage: factors = sage.modular.abvar.abvar.simple_factorization_of_modsym_space(M, simple=False)
         sage: sage.modular.abvar.abvar.modsym_lattices(M, factors)
-        [
-        (11, 0, None, Modular Symbols subspace of dimension 4 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field, Free module of degree 6 and rank 4 over Integer Ring
-        Echelon basis matrix:
-        [ 1  0  0  0 -1  2]
-        [ 0  1  0  0 -1  1]
-        [ 0  0  1  0 -2  2]
-        [ 0  0  0  1 -1 -1]),
-        (33, 0, None, Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field, Free module of degree 6 and rank 2 over Integer Ring
-        Echelon basis matrix:
-        [ 1  0  0 -1  0  0]
-        [ 0  0  1  0  1 -1])
-        ]
+        [(11,
+          0,
+          None,
+          Modular Symbols subspace of dimension 4 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field,
+          Free module of degree 6 and rank 4 over Integer Ring
+          Echelon basis matrix:
+          [ 1  0  0  0 -1  2]
+          [ 0  1  0  0 -1  1]
+          [ 0  0  1  0 -2  2]
+          [ 0  0  0  1 -1 -1]),
+         (33,
+          0,
+          None,
+          Modular Symbols subspace of dimension 2 of Modular Symbols space of dimension 9 for Gamma_0(33) of weight 2 with sign 0 over Rational Field,
+          Free module of degree 6 and rank 2 over Integer Ring
+          Echelon basis matrix:
+          [ 1  0  0 -1  0  0]
+          [ 0  0  1  0  1 -1])]
     """
     # 1. Change basis of everything to the ambient integral modular symbols space
     # 2. Clear denominator.

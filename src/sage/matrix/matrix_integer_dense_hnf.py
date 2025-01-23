@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-flint
+# sage.doctest: needs sage.libs.pari
 """
 Modular algorithm to compute Hermite normal forms of integer matrices
 

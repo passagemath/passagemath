@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-flint
+# sage.doctest: needs sage.libs.pari
 r"""
 Ideals of (Not Necessarily Maximal) Orders in Number Fields
 
@@ -401,7 +402,7 @@ class NumberFieldOrderIdeal_quadratic(NumberFieldOrderIdeal_generic):
         conj_gens = [g.conjugate() for g in self.gens()]
         return NumberFieldOrderIdeal(self.ring(), conj_gens)
 
-    def gens_two(self):
+    def gens_two(self) -> tuple:
         r"""
         Express this ideal using exactly two generators, the first of
         which is a generator for the intersection of the ideal with `\ZZ`.
@@ -508,7 +509,7 @@ class NumberFieldOrderIdeal_quadratic(NumberFieldOrderIdeal_generic):
             sol = f.solve_integer(-1)
         return sol is not None
 
-    def gens_reduced(self):
+    def gens_reduced(self) -> tuple:
         r"""
         Express this ideal in terms of at most two generators,
         and one if possible (i.e., if the ideal is principal).
@@ -552,7 +553,7 @@ class NumberFieldOrderIdeal_quadratic(NumberFieldOrderIdeal_generic):
             sol = f.solve_integer(-1)
         if sol is None:
             return self.gens_two()
-        gen = sum(c*g for c,g in zip(sol, bas))
+        gen = sum(c * g for c, g in zip(sol, bas))
         assert NumberFieldOrderIdeal(self.ring(), gen) == self
         return (gen,)
 

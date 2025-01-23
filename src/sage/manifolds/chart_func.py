@@ -24,6 +24,7 @@ AUTHORS:
 - Florentin Jaffredo (2018) : series expansion with respect to a given
   parameter
 """
+
 # ****************************************************************************
 #  Copyright (C) 2017 Marco Mancini <marco.mancini@obspm.fr>
 #  Copyright (C) 2018 Florentin Jaffredo <florentin.jaffredo@polytechnique.edu>
@@ -328,8 +329,14 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
     .. automethod:: __call__
     """
 
-    def __init__(self, parent, expression=None, calc_method=None,
-                 expansion_symbol=None, order=None):
+    def __init__(
+        self,
+        parent,
+        expression=None,
+        calc_method=None,
+        expansion_symbol=None,
+        order=None,
+    ):
         r"""
         Initialize ``self``.
 
@@ -371,10 +378,11 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             if calc_method is None:
                 calc_method = self._calc_method._current
             self._express[calc_method] = self._calc_method._tranf[calc_method](
-                                                                    expression)
+                expression
+            )
         # Derived quantities:
         self._der = None  # list of partial derivatives (to be set by diff()
-                          # and unset by del_derived())
+        # and unset by del_derived())
         self._expansion_symbol = expansion_symbol
         self._order = order
 
@@ -400,9 +408,8 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             2*x
         """
         res = self._calc_method.simplify(expr)
-        if (self._expansion_symbol is not None and
-            self._calc_method._current == 'SR'):
-            res = res.series(self._expansion_symbol, self._order+1).truncate()
+        if self._expansion_symbol is not None and self._calc_method._current == 'SR':
+            res = res.series(self._expansion_symbol, self._order + 1).truncate()
         return res
 
     def chart(self):
@@ -455,9 +462,9 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             True
         """
         alg = self._chart.domain().scalar_field_algebra()
-        return alg.element_class(alg,
-                                 coord_expression={self._chart: self},
-                                 name=name, latex_name=latex_name)
+        return alg.element_class(
+            alg, coord_expression={self._chart: self}, name=name, latex_name=latex_name
+        )
 
     def expr(self, method=None):
         r"""
@@ -554,8 +561,7 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
                     return self._express[method]
                 except (KeyError, ValueError):
                     pass
-            raise ValueError("no expression found for converting to {}".format(
-                                                                       method))
+            raise ValueError("no expression found for converting to {}".format(method))
 
     def set_expr(self, calc_method, expression):
         r"""
@@ -589,11 +595,14 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             ValueError: Expressions are not equal
         """
         if self.is_immutable():
-            raise ValueError("the expressions of an immutable element cannot "
-                             "be changed")
+            raise ValueError(
+                "the expressions of an immutable element cannot be changed"
+            )
         for vv in self._express.values():
-            if not bool(self._calc_method._tranf[calc_method](expression) ==
-                        self._calc_method._tranf[calc_method](vv)):
+            if not bool(
+                self._calc_method._tranf[calc_method](expression)
+                == self._calc_method._tranf[calc_method](vv)
+            ):
                 raise ValueError("Expressions are not equal")
         self._express[calc_method] = expression
 
@@ -614,8 +623,7 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             x*y + 1
         """
         curr = self._calc_method._current
-        if (curr == 'SR' and
-            self._chart.manifold().options.textbook_output):
+        if curr == 'SR' and self._chart.manifold().options.textbook_output:
             return str(ExpressionNice(self.expr(curr)))
         else:
             return str(self.expr(curr))
@@ -635,8 +643,7 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             \cos\left(\frac{1}{2} \, x y\right)
         """
         curr = self._calc_method._current
-        if (curr == 'SR' and
-            self._chart.manifold().options.textbook_output):
+        if curr == 'SR' and self._chart.manifold().options.textbook_output:
             out_expr = ExpressionNice(self._express[curr])
         else:
             out_expr = self._express[curr]
@@ -674,15 +681,14 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
         """
         from sage.tensor.modules.format_utilities import FormattedExpansion
         from sage.typeset.unicode_characters import unicode_mapsto
+
         curr = self._calc_method._current
         expr = self.expr(curr)
-        if (curr == 'SR' and
-            self._chart.manifold().options.textbook_output):
+        if curr == 'SR' and self._chart.manifold().options.textbook_output:
             expr = ExpressionNice(expr)
         latex_func = self._calc_method._latex_dict[curr]
         resu_txt = str(self._chart[:]) + ' ' + unicode_mapsto + ' ' + str(expr)
-        resu_latex = latex_func(self._chart[:]) + r' \mapsto ' \
-                     + latex_func(expr)
+        resu_latex = latex_func(self._chart[:]) + r' \mapsto ' + latex_func(expr)
         return FormattedExpansion(resu_txt, resu_latex)
 
     disp = display
@@ -1027,20 +1033,28 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
         """
         from sage.calculus.functional import diff
         from sage.rings.integer import Integer
+
         if self._der is None:
             # the list of partial derivatives has to be updated
             curr = self._calc_method._current
             if curr == 'SR':
-                self._der = [type(self)(self.parent(),
-                                        self._simplify(diff(self.expr(), xx)),
-                                        expansion_symbol=self._expansion_symbol,
-                                        order=self._order)
-                             for xx in self._chart[:]]
+                self._der = [
+                    type(self)(
+                        self.parent(),
+                        self._simplify(diff(self.expr(), xx)),
+                        expansion_symbol=self._expansion_symbol,
+                        order=self._order,
+                    )
+                    for xx in self._chart[:]
+                ]
             elif curr == 'sympy':
-                self._der = [type(self)(self.parent(),
-                                        self._simplify(sympy.diff(self.expr(),
-                                                                  xx._sympy_())))
-                             for xx in self._chart[:]]
+                self._der = [
+                    type(self)(
+                        self.parent(),
+                        self._simplify(sympy.diff(self.expr(), xx._sympy_())),
+                    )
+                    for xx in self._chart[:]
+                ]
         if isinstance(coord, (int, Integer)):
             # NB: for efficiency, we access directly to the "private" attributes
             # of other classes. A more conventional OOP writing would be
@@ -1107,8 +1121,9 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
                     method = list(self._express)[0]  # pick a random method
                 # other.expr(method)
                 if method == 'sympy':
-                    return bool(sympy.simplify(other.expr(method)
-                                - self.expr(method)) == 0)
+                    return bool(
+                        sympy.simplify(other.expr(method) - self.expr(method)) == 0
+                    )
                 return bool(other.expr(method) == self.expr(method))
         else:
             return bool(self.expr(self._calc_method._current) == other)
@@ -1162,7 +1177,7 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
         """
         curr = self._calc_method._current
         resu = type(self)(self.parent())
-        resu._express[curr] = self._simplify(- self.expr())
+        resu._express[curr] = self._simplify(-self.expr())
         resu._order = self._order
         resu._expansion_symbol = self._expansion_symbol
         return resu
@@ -1210,16 +1225,21 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
         """
         curr = self._calc_method._current
         if curr == 'SR':
-            return type(self)(self.parent(),
-                              calc_method='SR',
-                              expression=self._simplify(SR.one() / self.expr()))
+            return type(self)(
+                self.parent(),
+                calc_method='SR',
+                expression=self._simplify(SR.one() / self.expr()),
+            )
             # NB: self._express.__invert__() would return 1/self._express
             # (cf. the code of __invert__ in src/sage/symbolic/expression.pyx)
             # Here we prefer SR(1)/self._express
-        return type(self)(self.parent(),
-                          calc_method=curr,
-                          expression=self._simplify(1 / self.expr()),
-                          expansion_symbol=self._expansion_symbol, order=self._order)
+        return type(self)(
+            self.parent(),
+            calc_method=curr,
+            expression=self._simplify(1 / self.expr()),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def _add_(self, other):
         r"""
@@ -1287,13 +1307,19 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             # NB: "if res == 0" would be too expensive (cf. #22859)
             return self.parent().zero()
         if other._expansion_symbol is not None:
-            return type(self)(self.parent(), res,
-                              expansion_symbol=other._expansion_symbol,
-                              order=other._order)
+            return type(self)(
+                self.parent(),
+                res,
+                expansion_symbol=other._expansion_symbol,
+                order=other._order,
+            )
         else:
-            return type(self)(self.parent(), res,
-                              expansion_symbol=self._expansion_symbol,
-                              order=self._order)
+            return type(self)(
+                self.parent(),
+                res,
+                expansion_symbol=self._expansion_symbol,
+                order=self._order,
+            )
 
     def _sub_(self, other):
         r"""
@@ -1352,13 +1378,19 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             # NB: "if res == 0" would be too expensive (cf. #22859)
             return self.parent().zero()
         if other._expansion_symbol is not None:
-            return type(self)(self.parent(), res,
-                              expansion_symbol=other._expansion_symbol,
-                              order=other._order)
+            return type(self)(
+                self.parent(),
+                res,
+                expansion_symbol=other._expansion_symbol,
+                order=other._order,
+            )
         else:
-            return type(self)(self.parent(), res,
-                              expansion_symbol=self._expansion_symbol,
-                              order=self._order)
+            return type(self)(
+                self.parent(),
+                res,
+                expansion_symbol=self._expansion_symbol,
+                order=self._order,
+            )
 
     def _mul_(self, other):
         r"""
@@ -1413,13 +1445,19 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             # NB: "if res == 0" would be too expensive (cf. #22859)
             return self.parent().zero()
         if other._expansion_symbol is not None:
-            return type(self)(self.parent(), res,
-                              expansion_symbol=other._expansion_symbol,
-                              order=other._order)
+            return type(self)(
+                self.parent(),
+                res,
+                expansion_symbol=other._expansion_symbol,
+                order=other._order,
+            )
         else:
-            return type(self)(self.parent(), res,
-                              expansion_symbol=self._expansion_symbol,
-                              order=self._order)
+            return type(self)(
+                self.parent(),
+                res,
+                expansion_symbol=self._expansion_symbol,
+                order=self._order,
+            )
 
     def _rmul_(self, other):
         """
@@ -1452,9 +1490,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             other = self._calc_method._tranf[curr](other)
         except (TypeError, ValueError):
             return
-        return type(self)(self.parent(), other * self.expr(),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            other * self.expr(),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def _lmul_(self, other):
         """
@@ -1487,9 +1528,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             other = self._calc_method._tranf[curr](other)
         except (TypeError, ValueError):
             return
-        return type(self)(self.parent(), self.expr() * other,
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self.expr() * other,
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def _div_(self, other):
         r"""
@@ -1548,9 +1592,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
         if curr == 'SR' and res.is_trivial_zero():
             # NB: "if res == 0" would be too expensive (cf. #22859)
             return self.parent().zero()
-        return type(self)(self.parent(), res,
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            res,
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def exp(self):
         r"""
@@ -1593,9 +1640,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().exp()
         elif curr == 'sympy':
             val = sympy.exp(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def log(self, base=None):
         r"""
@@ -1646,10 +1696,15 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
         if curr == 'SR':
             val = self.expr().log(base)
         elif curr == 'sympy':
-            val = sympy.log(self.expr()) if base is None else sympy.log(self.expr(), base)
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+            val = (
+                sympy.log(self.expr()) if base is None else sympy.log(self.expr(), base)
+            )
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def __pow__(self, exponent):
         r"""
@@ -1704,9 +1759,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = pow(self.expr(), exponent)
         elif curr == 'sympy':
             val = self.expr() ** exponent
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def sqrt(self):
         r"""
@@ -1736,9 +1794,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().sqrt()
         elif curr == 'sympy':
             val = sympy.sqrt(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def cos(self):
         r"""
@@ -1776,9 +1837,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().cos()
         elif curr == 'sympy':
             val = sympy.cos(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def sin(self):
         r"""
@@ -1821,9 +1885,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().sin()
         elif curr == 'sympy':
             val = sympy.sin(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def tan(self):
         r"""
@@ -1864,9 +1931,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().tan()
         elif curr == 'sympy':
             val = sympy.tan(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def arccos(self):
         r"""
@@ -1911,9 +1981,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().arccos()
         elif curr == 'sympy':
             val = sympy.acos(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def arcsin(self):
         r"""
@@ -1955,9 +2028,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().arcsin()
         elif curr == 'sympy':
             val = sympy.asin(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def arctan(self):
         r"""
@@ -1999,9 +2075,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().arctan()
         elif curr == 'sympy':
             val = sympy.atan(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def cosh(self):
         r"""
@@ -2039,9 +2118,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().cosh()
         elif curr == 'sympy':
             val = sympy.cosh(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def sinh(self):
         r"""
@@ -2079,9 +2161,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().sinh()
         elif curr == 'sympy':
             val = sympy.sinh(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def tanh(self):
         r"""
@@ -2119,9 +2204,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().tanh()
         elif curr == 'sympy':
             val = sympy.tanh(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def arccosh(self):
         r"""
@@ -2163,9 +2251,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().arccosh()
         elif curr == 'sympy':
             val = sympy.acosh(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def arcsinh(self):
         r"""
@@ -2207,9 +2298,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().arcsinh()
         elif curr == 'sympy':
             val = sympy.asinh(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def arctanh(self):
         r"""
@@ -2251,9 +2345,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().arctanh()
         elif curr == 'sympy':
             val = sympy.atanh(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def __abs__(self):
         r"""
@@ -2291,9 +2388,12 @@ class ChartFunction(AlgebraElement, ModuleElementWithMutability):
             val = self.expr().abs()
         elif curr == 'sympy':
             val = abs(self.expr())
-        return type(self)(self.parent(), self._simplify(val),
-                          expansion_symbol=self._expansion_symbol,
-                          order=self._order)
+        return type(self)(
+            self.parent(),
+            self._simplify(val),
+            expansion_symbol=self._expansion_symbol,
+            order=self._order,
+        )
 
     def _del_derived(self):
         r"""
@@ -2653,6 +2753,7 @@ class ChartFunctionRing(Parent, UniqueRepresentation):
         sage: FR_Y.has_coerce_map_from(FR_X)
         False
     """
+
     Element = ChartFunction
 
     def __init__(self, chart):
@@ -2898,6 +2999,7 @@ class MultiCoordFunction(SageObject, Mutability):
         sage: g(1,2)
         (4,)
     """
+
     def __init__(self, chart, expressions):
         r"""
         Initialize ``self``.
@@ -2913,10 +3015,9 @@ class MultiCoordFunction(SageObject, Mutability):
             sage: TestSuite(f).run()
         """
         self._chart = chart
-        self._nc = len(self._chart._xx)   # number of coordinates
-        self._nf = len(expressions)       # number of functions
-        self._functions = tuple(chart.function(express)
-                                for express in expressions)
+        self._nc = len(self._chart._xx)  # number of coordinates
+        self._nf = len(expressions)  # number of functions
+        self._functions = tuple(chart.function(express) for express in expressions)
         Mutability.__init__(self)
 
     def _repr_(self):
@@ -2933,8 +3034,7 @@ class MultiCoordFunction(SageObject, Mutability):
             sage: f
             Coordinate functions (x - y, x*y, cos(x)*e^y) on the Chart (M, (x, y))
         """
-        return "Coordinate functions {} on the {}".format(self._functions,
-                                                          self._chart)
+        return "Coordinate functions {} on the {}".format(self._functions, self._chart)
 
     def _latex_(self):
         r"""
@@ -2951,6 +3051,7 @@ class MultiCoordFunction(SageObject, Mutability):
             \left(x - y, x y, \cos\left(x\right) e^{y}\right)
         """
         from sage.misc.latex import latex
+
         return latex(self._functions)
 
     def expr(self, method=None):
@@ -3051,8 +3152,7 @@ class MultiCoordFunction(SageObject, Mutability):
             return False
         if other._nf != self._nf:
             return False
-        return all(other._functions[i] == self._functions[i]
-                   for i in range(self._nf))
+        return all(other._functions[i] == self._functions[i] for i in range(self._nf))
 
     def __ne__(self, other):
         r"""
@@ -3194,8 +3294,10 @@ class MultiCoordFunction(SageObject, Mutability):
             [[True, True], [True, True], [True, True]]
         """
         from sage.matrix.constructor import matrix
-        mat = matrix([[func.diff(coord) for coord in self._chart[:]]
-                      for func in self._functions])
+
+        mat = matrix(
+            [[func.diff(coord) for coord in self._chart[:]] for func in self._functions]
+        )
         mat.set_immutable()
         return mat
 
@@ -3265,16 +3367,24 @@ class MultiCoordFunction(SageObject, Mutability):
             True
         """
         from sage.matrix.constructor import matrix
+
         if self._nf != self._nc:
             raise ValueError("the Jacobian matrix is not a square matrix")
         mat = self.jacobian()
         # TODO: do the computation without the 'SR' enforcement
-        mat_expr = matrix([[mat[i,j].expr(method='SR') for i in range(self._nc)]
-                            for j in range(self._nc)])
+        mat_expr = matrix(
+            [
+                [mat[i, j].expr(method='SR') for i in range(self._nc)]
+                for j in range(self._nc)
+            ]
+        )
         det = mat_expr.det()  # the unsimplified determinant
         func = self._functions[0]
-        return type(func)(func.parent(), func._calc_method.simplify(det, method='SR'),
-                          calc_method=self._chart._calc_method._current)
+        return type(func)(
+            func.parent(),
+            func._calc_method.simplify(det, method='SR'),
+            calc_method=self._chart._calc_method._current,
+        )
 
     def set_immutable(self):
         r"""

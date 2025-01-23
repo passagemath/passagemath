@@ -85,7 +85,7 @@ def is_skew(seq, verbose=False):
     - ``seq`` -- the sequence that should be checked
 
     - ``verbose`` -- boolean (default: ``False``); if ``True`` the function
-      will be verbose when the sequences do not satisfy the contraints
+      will be verbose when the sequences do not satisfy the constraints
 
     EXAMPLES::
 
@@ -131,7 +131,7 @@ def is_symmetric(seq, verbose=False) -> bool:
     - ``seq`` -- the sequence that should be checked
 
     - ``verbose`` -- boolean (default: ``False``); if ``True`` the function will be
-      verbose when the sequences do not satisfy the contraints
+      verbose when the sequences do not satisfy the constraints
 
     EXAMPLES::
 
@@ -181,7 +181,7 @@ def is_T_sequences_set(sequences, verbose=False):
     - ``sequences`` -- list of four sequences
 
     - ``verbose`` -- boolean (default: ``False``); if ``True`` the function will be
-      verbose when the sequences do not satisfy the contraints
+      verbose when the sequences do not satisfy the constraints
 
     EXAMPLES::
 
@@ -644,7 +644,7 @@ def is_base_sequences_tuple(base_sequences, verbose=False):
     - ``base_sequences`` -- the list of 4 sequences that should be checked
 
     - ``verbose`` -- boolean (default: ``False``); if ``True`` the function
-      will be verbose when the sequences do not satisfy the contraints
+      will be verbose when the sequences do not satisfy the constraints
 
     EXAMPLES::
 
@@ -657,7 +657,7 @@ def is_base_sequences_tuple(base_sequences, verbose=False):
 
         sage: seqs = [[1, -1], [1, 1], [-1], [2]]
         sage: is_base_sequences_tuple(seqs, verbose=True)
-        Base sequences should only contiain -1, +1, found 2
+        Base sequences should only contain -1, +1, found 2
         False
 
     TESTS:
@@ -695,7 +695,7 @@ def is_base_sequences_tuple(base_sequences, verbose=False):
         for el in seq:
             if abs(el) != 1:
                 if verbose:
-                    print(f'Base sequences should only contiain -1, +1, found {el}')
+                    print(f'Base sequences should only contain -1, +1, found {el}')
                 return False
 
     for j in range(1, n+p):

@@ -190,7 +190,7 @@ from sage.rings.number_field.number_field_ideal import NumberFieldIdeal
 from sage.rings.fraction_field import FractionField_generic
 
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
-from sage.rings.polynomial.polynomial_ring import PolynomialRing_general
+from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
 from sage.rings.polynomial.polynomial_element import Polynomial
 
 from sage.structure.element cimport Element, parent, Vector
@@ -338,7 +338,7 @@ class ResidueFieldFactory(UniqueFactory):
                     raise ValueError("p must be an ideal or element of a number field or function field.")
             if not p.is_prime():
                 raise ValueError("p (%s) must be prime" % p)
-            if isinstance(p.ring(), PolynomialRing_general):
+            if isinstance(p.ring(), PolynomialRing_generic):
                 if not p.ring().base_ring().is_finite():
                     raise ValueError("residue fields only supported for polynomial rings over finite fields")
                 if not p.ring().base_ring().is_prime_field():
@@ -374,7 +374,7 @@ class ResidueFieldFactory(UniqueFactory):
 
         if pring is ZZ:
             return ResidueFiniteField_prime_modn(p, names, p.gen(), None, None, None)
-        if isinstance(pring, PolynomialRing_general):
+        if isinstance(pring, PolynomialRing_generic):
             K = pring.fraction_field()
             Kbase = pring.base_ring()
             f = p.gen()
@@ -779,7 +779,7 @@ class ResidueField_generic(Field):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field sage.symbolic
+            sage: # needs fpylll sage.rings.number_field sage.symbolic
             sage: I = QQ[2^(1/3)].factor(2)[0][0]; I
             Fractional ideal (a)
             sage: k = I.residue_field(); k
@@ -825,7 +825,7 @@ class ResidueField_generic(Field):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field sage.symbolic
+            sage: # needs fpylll sage.rings.number_field sage.symbolic
             sage: I = QQ[3^(1/3)].factor(5)[1][0]; I
             Fractional ideal (a - 2)
             sage: k = I.residue_field(); k
@@ -928,7 +928,7 @@ cdef class ReductionMap(Map):
 
     EXAMPLES::
 
-        sage: # needs sage.rings.number_field sage.symbolic
+        sage: # needs fpylll sage.rings.number_field sage.symbolic
         sage: I = QQ[sqrt(17)].factor(5)[0][0]; I
         Fractional ideal (5)
         sage: k = I.residue_field(); k
@@ -1401,7 +1401,7 @@ cdef class ResidueFieldHomomorphism_global(RingHomomorphism):
         # No special code for residue fields of Z, since we just use the normal reduction map to GF(p)
         if self._K is ZZ:
             return self._F(x)
-        if isinstance(self._K, PolynomialRing_general):
+        if isinstance(self._K, PolynomialRing_generic):
             p = self._F.p.gen()
             if p.degree() == 1:
                 return self._F((x % p)[0])
@@ -1659,7 +1659,7 @@ cdef class LiftingMap(Section):
                 return self._K(self._K.ring_of_integers()(x))
             else:
                 return self._K(self._K.ring_of_integers()(x.polynomial().list()))
-        elif isinstance(self._K, PolynomialRing_general):
+        elif isinstance(self._K, PolynomialRing_generic):
             return self._K(x.polynomial().list())
         # Else the lifting map is just x |--> to_order(x * PB)
         x = self._F(x)

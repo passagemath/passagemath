@@ -597,7 +597,7 @@ class DifferentiableManifold(TopologicalManifold):
         True
         sage: M in Manifolds(RR).Smooth()
         True
-        sage: N in Manifolds(Qp(5)).Smooth()
+        sage: N in Manifolds(Qp(5)).Smooth()                                            # needs sage.rings.padics
         True
 
     The corresponding Sage *elements* are points::

@@ -15,19 +15,16 @@ requires = [
     SPKG_INSTALL_REQUIRES_jupyter_core
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_pkgconfig
-    SPKG_INSTALL_REQUIRES_pplpy
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_modules
-    SPKG_INSTALL_REQUIRES_sagemath_polyhedra
     SPKG_INSTALL_REQUIRES_sagemath_graphs
     SPKG_INSTALL_REQUIRES_sagemath_combinat
     SPKG_INSTALL_REQUIRES_sagemath_ntl
     SPKG_INSTALL_REQUIRES_sagemath_pari
     SPKG_INSTALL_REQUIRES_sagemath_repl
-    SPKG_INSTALL_REQUIRES_sagemath_schemes
     SPKG_INSTALL_REQUIRES_sagemath_singular
 ]
 build-backend = "setuptools.build_meta"
@@ -36,7 +33,6 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-standard-no-symbolics"
 description = "passagemath: Sage library without the symbolics subsystem"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_six
     SPKG_INSTALL_REQUIRES_sagemath_brial
     SPKG_INSTALL_REQUIRES_sagemath_categories
@@ -67,12 +63,10 @@ dnl From build/pkgs/sagelib/dependencies
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_jupyter_core
-    SPKG_INSTALL_REQUIRES_lrcalc_python
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_pplpy
-    SPKG_INSTALL_REQUIRES_primecountpy
     SPKG_INSTALL_REQUIRES_requests
 dnl From Makefile.in: SAGERUNTIME
     SPKG_INSTALL_REQUIRES_ipython
@@ -97,6 +91,17 @@ include(`pyproject_toml_metadata.m4')dnl'
 [project.readme]
 file = "README.rst"
 content-type = "text/x-rst"
+
+[project.optional-dependencies]
+test = [
+     "passagemath-repl",
+]
+lrcalc = [
+    SPKG_INSTALL_REQUIRES_lrcalc_python
+]
+primecountpy = [
+    SPKG_INSTALL_REQUIRES_primecountpy
+]
 
 [tool.setuptools]
 script-files = [

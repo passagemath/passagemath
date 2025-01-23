@@ -462,7 +462,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: # needs sage.geometry.polyhedron sage.graphs
+            sage: # needs sage.combinat sage.geometry.polyhedron sage.graphs
             sage: H = hyperplane_arrangements.braid(3)
             sage: O = H.orlik_solomon_algebra(QQ)
             sage: O.as_gca()
@@ -526,7 +526,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: # needs sage.geometry.polyhedron sage.graphs
+            sage: # needs sage.combinat sage.geometry.polyhedron sage.graphs
             sage: H = hyperplane_arrangements.braid(3)
             sage: O = H.orlik_solomon_algebra(QQ)
             sage: O.as_cdga()

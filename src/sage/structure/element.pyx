@@ -817,9 +817,9 @@ cdef class Element(SageObject):
             ngens = parent.ngens()
         except (AttributeError, NotImplementedError, TypeError):
             return self
-        variables=[]
-        # use "gen" instead of "gens" as a ParentWithGens is not
-        # required to have the latter
+        variables = []
+
+        # using gen instead of gens
         for i in range(ngens):
             gen = parent.gen(i)
             if str(gen) in kwds:
@@ -4471,7 +4471,7 @@ cdef class FieldElement(CommutativeRingElement):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field sage.symbolic
+            sage: # needs fpylll sage.rings.number_field sage.symbolic
             sage: K.<rt3> = QQ[sqrt(3)]
             sage: K(0).divides(rt3)
             False

@@ -398,7 +398,7 @@ class Magmas(Category_singleton):
     class Commutative(CategoryWithAxiom):
 
         class ParentMethods:
-            def is_commutative(self):
+            def is_commutative(self) -> bool:
                 """
                 Return ``True``, since commutative magmas are commutative.
 
@@ -887,7 +887,7 @@ class Magmas(Category_singleton):
             ASCII letters.  ::
 
                 sage: G = CyclicPermutationGroup(5)                                     # needs sage.groups
-                sage: G.multiplication_table()                                          # needs sage.groups
+                sage: G.multiplication_table()                                          # needs sage.groups sage.modules
                 *  a b c d e
                  +----------
                 a| a b c d e
@@ -1084,7 +1084,7 @@ class Magmas(Category_singleton):
                     sage: x * x
                     (1/4, 1, 1)
 
-                    sage: # needs sage.groups sage.modules
+                    sage: # needs sage.combinat sage.groups sage.modules
                     sage: A = SymmetricGroupAlgebra(QQ, 3)
                     sage: x = cartesian_product([A([1,3,2]), A([2,3,1])])
                     sage: y = cartesian_product([A([1,3,2]), A([2,3,1])])

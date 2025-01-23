@@ -208,7 +208,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             return False
         else:
             from sage.rings.fraction_field import FractionField_generic
-            from sage.rings.polynomial.polynomial_ring import PolynomialRing_general
+            from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
             from sage.rings.polynomial.multi_polynomial_ring import MPolynomialRing_base
             from sage.rings.polynomial.laurent_polynomial_ring_base import LaurentPolynomialRing_generic
             from sage.rings.infinity import InfinityRing, UnsignedInfinityRing
@@ -220,7 +220,8 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             if R._is_numerical():
                 # Almost anything with a coercion into any precision of CC
                 return R not in (RLF, CLF)
-            elif isinstance(R, PolynomialRing_general) or isinstance(R, MPolynomialRing_base) or isinstance(R, FractionField_generic) or isinstance(R, LaurentPolynomialRing_generic):
+            elif isinstance(R, (PolynomialRing_generic, MPolynomialRing_base,
+                                FractionField_generic, LaurentPolynomialRing_generic)):
                 base = R.base_ring()
                 return base is not self and self.has_coerce_map_from(base)
             elif (R is InfinityRing or R is UnsignedInfinityRing
@@ -320,6 +321,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
 
         Asymptotic expansions::
 
+            sage: # needs sage.graphs
             sage: A.<x, y> = AsymptoticRing(growth_group='x^ZZ * y^QQ * log(y)^ZZ', coefficient_ring=ZZ)
             sage: s = SR(3*x^5 * log(y) + 4*y^(3/7) + O(x*log(y))); s
             3*x^5*log(y) + 4*y^(3/7) + Order(x*log(y))
@@ -337,7 +339,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             Traceback (most recent call last):
             ...
             TypeError: unable to convert <... 'int'> to a symbolic expression
-            sage: r^(1/2)
+            sage: r^(1/2)                                                               # needs R
             Traceback (most recent call last):
             ...
             TypeError: unsupported operand type(s) for ** or pow(): 'R' and 'sage.rings.rational.Rational'

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.rings.finite_rings
 r"""
 Drinfeld modules
@@ -29,7 +30,6 @@ AUTHORS:
 from sage.arith.misc import gcd
 from sage.categories.drinfeld_modules import DrinfeldModules
 from sage.categories.homset import Hom
-from sage.geometry.polyhedron.constructor import Polyhedron
 from sage.misc.latex import latex
 from sage.misc.latex import latex_variable_name
 from sage.misc.lazy_import import lazy_import
@@ -38,13 +38,14 @@ from sage.misc.misc_c import prod
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.ore_polynomial_element import OrePolynomial
-from sage.rings.polynomial.polynomial_ring import PolynomialRing_general
+from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
 from sage.structure.parent import Parent
 from sage.structure.sage_object import SageObject
 from sage.structure.sequence import Sequence
 from sage.structure.unique_representation import UniqueRepresentation
 
 lazy_import('sage.rings.ring_extension', 'RingExtension_generic')
+lazy_import('sage.geometry.polyhedron.constructor', 'Polyhedron')
 
 
 class DrinfeldModule(Parent, UniqueRepresentation):
@@ -564,7 +565,7 @@ class DrinfeldModule(Parent, UniqueRepresentation):
         # duplicate. As a general comment, there are sanity checks both
         # here and in the category constructor, which is not ideal.
         # Check domain is Fq[T]
-        if not isinstance(function_ring, PolynomialRing_general):
+        if not isinstance(function_ring, PolynomialRing_generic):
             raise NotImplementedError('function ring must be a polynomial '
                                       'ring')
         function_ring_base = function_ring.base_ring()
@@ -915,7 +916,7 @@ class DrinfeldModule(Parent, UniqueRepresentation):
             sage: A = GF(5)['T']
             sage: K.<T> = Frac(A)
             sage: phi = DrinfeldModule(A, [T, 0, T+1, T^2 + 1])
-            sage: phi.basic_j_invariant_parameters()
+            sage: phi.basic_j_invariant_parameters()                                    # needs sage.geometry.polyhedron
             [((1,), (31, 1)),
              ((1, 2), (1, 5, 1)),
              ((1, 2), (7, 4, 1)),
@@ -940,7 +941,7 @@ class DrinfeldModule(Parent, UniqueRepresentation):
         Use the ``nonzero=True`` flag to display only the parameters
         whose `j`-invariant value is nonzero::
 
-            sage: phi.basic_j_invariant_parameters(nonzero=True)
+            sage: phi.basic_j_invariant_parameters(nonzero=True)                        # needs sage.geometry.polyhedron
             [((2,), (31, 6))]
 
 
@@ -950,7 +951,7 @@ class DrinfeldModule(Parent, UniqueRepresentation):
             sage: A = GF(2)['T']
             sage: K.<T> = Frac(A)
             sage: phi = DrinfeldModule(A, [T, T, 1, T])
-            sage: phi.basic_j_invariant_parameters([1, 2])
+            sage: phi.basic_j_invariant_parameters([1, 2])                              # needs sage.geometry.polyhedron
             [((1,), (7, 1)),
              ((1, 2), (1, 2, 1)),
              ((1, 2), (4, 1, 1)),
@@ -964,35 +965,35 @@ class DrinfeldModule(Parent, UniqueRepresentation):
             sage: A = GF(5)['T']
             sage: K.<T> = Frac(A)
             sage: phi = DrinfeldModule(A, [T, 0, T+1, T^2 + 1])
-            sage: phi.basic_j_invariant_parameters([1, 'x'])
+            sage: phi.basic_j_invariant_parameters([1, 'x'])                            # needs sage.geometry.polyhedron
             Traceback (most recent call last):
             ...
             TypeError: coefficients indices must be integers
 
         ::
 
-            sage: phi.basic_j_invariant_parameters([1, 10])
+            sage: phi.basic_j_invariant_parameters([1, 10])                             # needs sage.geometry.polyhedron
             Traceback (most recent call last):
             ...
             ValueError: indices must be > 0 and < 3
 
         ::
 
-            sage: phi.basic_j_invariant_parameters([1, 1])
+            sage: phi.basic_j_invariant_parameters([1, 1])                              # needs sage.geometry.polyhedron
             Traceback (most recent call last):
             ...
             ValueError: indices must be distinct and sorted
 
         ::
 
-            sage: phi.basic_j_invariant_parameters([2, 1])
+            sage: phi.basic_j_invariant_parameters([2, 1])                              # needs sage.geometry.polyhedron
             Traceback (most recent call last):
             ...
             ValueError: indices must be distinct and sorted
 
         ::
 
-            sage: phi.basic_j_invariant_parameters('x')
+            sage: phi.basic_j_invariant_parameters('x')                                 # needs sage.geometry.polyhedron
             Traceback (most recent call last):
             ...
             TypeError: indices must be None, a tuple or a list
@@ -1088,13 +1089,13 @@ class DrinfeldModule(Parent, UniqueRepresentation):
             sage: K.<z12> = Fq.extension(6)
             sage: p_root = 2*z12^11 + 2*z12^10 + z12^9 + 3*z12^8 + z12^7 + 2*z12^5 + 2*z12^4 + 3*z12^3 + z12^2 + 2*z12
             sage: phi = DrinfeldModule(A, [p_root, z12^3, z12^5])
-            sage: phi.basic_j_invariants()
+            sage: phi.basic_j_invariants()                                              # needs sage.geometry.polyhedron
             {((1,), (26, 1)): z12^10 + 4*z12^9 + 3*z12^8 + 2*z12^7 + 3*z12^6 + z12^5 + z12^3 + 4*z12^2 + z12 + 2}
 
         ::
 
             sage: phi = DrinfeldModule(A, [p_root, 0, 1, z12])
-            sage: phi.basic_j_invariants(nonzero=True)
+            sage: phi.basic_j_invariants(nonzero=True)                                  # needs sage.geometry.polyhedron
             {((2,), (651, 26)): z12^11 + 3*z12^10 + 4*z12^9 + 3*z12^8 + z12^7 + 2*z12^6 + 3*z12^4 + 2*z12^3 + z12^2 + 4*z12}
 
         ::
@@ -1102,7 +1103,7 @@ class DrinfeldModule(Parent, UniqueRepresentation):
             sage: A = GF(5)['T']
             sage: K.<T> = Frac(A)
             sage: phi = DrinfeldModule(A, [T, T + 2, T+1, 1])
-            sage: J_phi = phi.basic_j_invariants(); J_phi
+            sage: J_phi = phi.basic_j_invariants(); J_phi                               # needs sage.geometry.polyhedron
             {((1,), (31, 1)): T^31 + 2*T^30 + 2*T^26 + 4*T^25 + 2*T^6 + 4*T^5 + 4*T + 3,
              ((1, 2), (1, 5, 1)): T^6 + 2*T^5 + T + 2,
              ((1, 2), (7, 4, 1)): T^11 + 3*T^10 + T^9 + 4*T^8 + T^7 + 2*T^6 + 2*T^4 + 3*T^3 + 2*T^2 + 3,
@@ -1111,7 +1112,7 @@ class DrinfeldModule(Parent, UniqueRepresentation):
              ((1, 2), (10, 19, 4)): T^29 + 4*T^28 + T^27 + 4*T^26 + T^25 + 2*T^24 + 3*T^23 + 2*T^22 + 3*T^21 + 2*T^20 + 4*T^19 + T^18 + 4*T^17 + T^16 + 4*T^15 + T^9 + 4*T^8 + T^7 + 4*T^6 + T^5 + 4*T^4 + T^3 + 4*T^2 + T + 4,
              ...
              ((2,), (31, 6)): T^31 + T^30 + T^26 + T^25 + T^6 + T^5 + T + 1}
-            sage: J_phi[((1, 2), (7, 4, 1))]
+            sage: J_phi[((1, 2), (7, 4, 1))]                                            # needs sage.geometry.polyhedron
             T^11 + 3*T^10 + T^9 + 4*T^8 + T^7 + 2*T^6 + 2*T^4 + 3*T^3 + 2*T^2 + 3
         """
         return {parameter: self.j_invariant(parameter, check=False)
@@ -1593,10 +1594,10 @@ class DrinfeldModule(Parent, UniqueRepresentation):
             sage: A = GF(3)['T']
             sage: K.<T> = Frac(A)
             sage: phi = DrinfeldModule(A, [T, T^2 + T + 1, 0, T^4 + 1, T - 1])
-            sage: param = phi.basic_j_invariant_parameters(nonzero=True)
-            sage: phi.j_invariant(param[1])
+            sage: param = phi.basic_j_invariant_parameters(nonzero=True)                # needs sage.geometry.polyhedron
+            sage: phi.j_invariant(param[1])                                             # needs sage.geometry.polyhedron
             T^13 + 2*T^12 + T + 2
-            sage: phi.j_invariant(param[2])
+            sage: phi.j_invariant(param[2])                                             # needs sage.geometry.polyhedron
             T^35 + 2*T^31 + T^27 + 2*T^8 + T^4 + 2
 
         TESTS::

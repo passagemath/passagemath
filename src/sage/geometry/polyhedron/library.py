@@ -247,7 +247,7 @@ def gale_transform_to_polytope(vectors, base_ring=None, backend=None):
 
     One can specify the base ring::
 
-        sage: gale_transform_to_polytope(
+        sage: gale_transform_to_polytope(                                               # needs sage.libs.pari
         ....:     [(1,1), (-1,-1), (1,0),
         ....:      (-1,0), (1,-1), (-2,1)]).vertices()
         (A vertex at (-25, 0, 0),
@@ -392,27 +392,27 @@ def gale_transform_to_primal(vectors, base_ring=None, backend=None):
     One can specify the base ring::
 
         sage: p = [(1,1), (-1,-1), (1,0), (-1,0), (1,-1), (-2,1)]
-        sage: gtpp = gale_transform_to_primal(p); gtpp
+        sage: gtpp = gale_transform_to_primal(p); gtpp                                  # needs sage.libs.pari
         [(16, -35, 54),
          (24, 10, 31),
          (-15, 50, -60),
          (-25, 0, 0),
          (0, -25, 0),
          (0, 0, -25)]
-        sage: (matrix(RDF, gtpp)/25 +
+        sage: (matrix(RDF, gtpp)/25 +                                                   # needs sage.libs.pari
         ....:  matrix(gale_transform_to_primal(p, base_ring=RDF))).norm() < 1e-15
         True
 
     One can also specify the backend to be used internally::
 
-        sage: gale_transform_to_primal(p, backend='field')
+        sage: gale_transform_to_primal(p, backend='field')                              # needs sage.libs.pari
         [(48, -71, 88),
          (84, -28, 99),
          (-77, 154, -132),
          (-55, 0, 0),
          (0, -55, 0),
          (0, 0, -55)]
-        sage: gale_transform_to_primal(p, backend='normaliz')           # optional - pynormaliz
+        sage: gale_transform_to_primal(p, backend='normaliz')           # optional - pynormaliz, needs sage.libs.pari
         [(16, -35, 54),
          (24, 10, 31),
          (-15, 50, -60),
@@ -548,7 +548,7 @@ class Polytopes:
             2*a
             sage: TestSuite(octagon).run()      # long time
 
-            sage: TestSuite(polytopes.regular_polygon(5, exact=False)).run()
+            sage: TestSuite(polytopes.regular_polygon(5, exact=False)).run()            # needs scipy
         """
         n = ZZ(n)
         if n <= 2:
@@ -603,7 +603,7 @@ class Polytopes:
             1/8*t^4 + 3/4*t^3 + 15/8*t^2 + 9/4*t + 1
             sage: [p3(i) for i in [1,2,3,4]]       # optional - latte_int
             [6, 21, 55, 120]
-            sage: [len((i*b3).integral_points()) for i in [1,2,3,4]]
+            sage: [len((i*b3).integral_points()) for i in [1,2,3,4]]                    # needs sage.libs.pari
             [6, 21, 55, 120]
 
             sage: b4 = polytopes.Birkhoff_polytope(4)
@@ -668,13 +668,13 @@ class Polytopes:
         Its volume is `\sqrt{d+1} / d!`::
 
             sage: s5 = polytopes.simplex(5, project=True)
-            sage: s5.volume()      # abs tol 1e-10
+            sage: s5.volume()      # abs tol 1e-10                              # needs scipy
             0.0204124145231931
             sage: sqrt(6.) / factorial(5)
             0.0204124145231931
 
             sage: s6 = polytopes.simplex(6, project=True)
-            sage: s6.volume()      # abs tol 1e-10
+            sage: s6.volume()      # abs tol 1e-10                              # needs scipy
             0.00367465459870082
             sage: sqrt(7.) / factorial(6)
             0.00367465459870082

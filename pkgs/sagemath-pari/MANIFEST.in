@@ -16,6 +16,8 @@ include sage/rings/pari_ring.p*
 include sage/rings/number_field/totallyreal*.p*
 
 include sage/rings/finite_rings/element_ntl_gf2e.p*  # uses paridecl
+include sage/rings/finite_rings/element_givaro.p*    # uses paridecl
+include sage/rings/finite_rings/*field_givaro*.p*
 
 #
 # padics using PARI.

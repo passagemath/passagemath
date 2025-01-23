@@ -67,6 +67,7 @@ cdef class PathAlgebraElement(RingElement):
     implementations of free algebras (note that the letterplace implementation
     only allows weighted homogeneous elements)::
 
+        sage: # needs sage.combinat
         sage: F.<x,y,z> = FreeAlgebra(GF(25,'t'))
         sage: pF = x+y*z*x+2*y-z+1
         sage: pF2 = x^4+x*y*x*z+2*z^2*x*y
@@ -1309,6 +1310,7 @@ cdef class PathAlgebraElement(RingElement):
         We compare against the multiplication in free algebras, which is
         implemented independently::
 
+            sage: # needs sage.combinat
             sage: F.<x,y,z> = FreeAlgebra(GF(25,'t'))
             sage: A = DiGraph({1:{1:['x','y','z']}}).path_semigroup().algebra(GF(25,'t'))
             sage: pF = x+2*y-z+1

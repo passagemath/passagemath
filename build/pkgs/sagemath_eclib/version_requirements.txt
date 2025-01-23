@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-eclib ~= 10.5.10.0
+passagemath-eclib ~= 10.5.22.0

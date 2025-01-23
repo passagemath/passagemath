@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-combinat
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.rings.finite_rings
 r"""
 Multiplication for elements of the Steenrod algebra
@@ -890,7 +890,7 @@ def make_mono_admissible(mono, p=2, generic=None):
 
     Test the fix from :issue:`13796`::
 
-        sage: SteenrodAlgebra(p=2, basis='adem').Q(2) * (Sq(6) * Sq(2)) # indirect doctest
+        sage: SteenrodAlgebra(p=2, basis='adem').Q(2) * (Sq(6) * Sq(2))  # indirect doctest     # needs sage.combinat
         Sq^10 Sq^4 Sq^1 + Sq^10 Sq^5 + Sq^12 Sq^3 + Sq^13 Sq^2
     """
     from sage.rings.finite_rings.finite_field_constructor import GF

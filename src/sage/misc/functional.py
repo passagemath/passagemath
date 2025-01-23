@@ -106,10 +106,7 @@ def basis(x):
         sage: V = VectorSpace(QQ, 3)                                                    # needs sage.modules
         sage: S = V.subspace([[1,2,0], [2,2,-1]])                                       # needs sage.modules
         sage: basis(S)                                                                  # needs sage.modules
-        [
-        (1, 0, -1),
-        (0, 1, 1/2)
-        ]
+        [(1, 0, -1), (0, 1, 1/2)]
     """
     return x.basis()
 
@@ -221,9 +218,8 @@ def decomposition(x):
 
         sage: M = matrix([[2, 3], [3, 4]])                                              # needs sage.libs.pari sage.modules
         sage: M.decomposition()                                                         # needs sage.libs.pari sage.modules
-        [
-        (Ambient free module of rank 2 over the principal ideal domain Integer Ring, True)
-        ]
+        [(Ambient free module of rank 2 over the principal ideal domain Integer Ring,
+          True)]
 
         sage: # needs sage.schemes
         sage: G.<a,b> = DirichletGroup(20)
@@ -357,8 +353,8 @@ def gen(x):
         x
         sage: gen(GF(7))
         1
-        sage: A = AbelianGroup(1, [23])                                                 # needs sage.groups
-        sage: gen(A)                                                                    # needs sage.groups
+        sage: A = AbelianGroup(1, [23])                                                 # needs sage.modules
+        sage: gen(A)                                                                    # needs sage.modules
         f
     """
     return x.gen()
@@ -376,8 +372,8 @@ def gens(x):
         sage: gens(R)                                                                   # needs sage.symbolic
         (x, y)
 
-        sage: A = AbelianGroup(5, [5,5,7,8,9])                                          # needs sage.groups
-        sage: gens(A)                                                                   # needs sage.groups
+        sage: A = AbelianGroup(5, [5,5,7,8,9])                                          # needs sage.modules
+        sage: gens(A)                                                                   # needs sage.modules
         (f0, f1, f2, f3, f4)
     """
     return x.gens()
@@ -911,11 +907,7 @@ def kernel(x):
         Basis matrix:
         []
         sage: kernel(A.transpose()).basis()
-        [
-        (1, 0, 0),
-        (0, 1, 0),
-        (0, 0, 1)
-        ]
+        [(1, 0, 0), (0, 1, 0), (0, 0, 1)]
     """
     return x.kernel()
 
@@ -930,7 +922,7 @@ def krull_dimension(x):
         0
         sage: krull_dimension(ZZ)
         1
-        sage: krull_dimension(ZZ[sqrt(5)])                                              # needs sage.rings.number_field sage.symbolic
+        sage: krull_dimension(ZZ[sqrt(5)])                                              # needs fpylll sage.rings.number_field sage.symbolic
         1
         sage: U.<x,y,z> = PolynomialRing(ZZ, 3); U
         Multivariate Polynomial Ring in x, y, z over Integer Ring
@@ -1138,6 +1130,13 @@ def log(*args, **kwds):
 
         sage: log(0, 2)
         -Infinity
+
+    Check if :issue:`37794` is fixed::
+
+        sage: log(int(0), 2)                                                            # needs sage.symbolic
+        -Infinity
+        sage: log(int(0), 1/2)                                                          # needs sage.symbolic
+        +Infinity
     """
     base = kwds.pop('base', None)
     if base:
@@ -1216,8 +1215,8 @@ def ngens(x):
         Multivariate Polynomial Ring in x, y over Symbolic Ring
         sage: ngens(R)                                                                  # needs sage.symbolic
         2
-        sage: A = AbelianGroup(5, [5,5,7,8,9])                                          # needs sage.groups
-        sage: ngens(A)                                                                  # needs sage.groups
+        sage: A = AbelianGroup(5, [5,5,7,8,9])                                          # needs sage.modules
+        sage: ngens(A)                                                                  # needs sage.modules
         5
         sage: ngens(ZZ)
         1
@@ -1302,7 +1301,7 @@ def norm(x):
 
     The norm of matrices::
 
-        sage: # needs sage.modules sage.symbolic
+        sage: # needs scipy sage.modules sage.symbolic
         sage: z = 1 + 2*I
         sage: norm(matrix([[z]]))
         2.23606797749979

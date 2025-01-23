@@ -3026,14 +3026,16 @@ cdef class NumberFieldElement(NumberFieldElement_base):
             sage: K.<a> = NumberField(x^3 - 2)
             sage: c = a.galois_conjugates(K); c
             [a]
+
+            sage: # needs sage.groups
             sage: K.<a> = NumberField(x^3 - 2)
-            sage: c = a.galois_conjugates(K.galois_closure('a1')); c                    # needs sage.groups
+            sage: c = a.galois_conjugates(K.galois_closure('a1')); c
             [1/18*a1^4, -1/36*a1^4 + 1/2*a1, -1/36*a1^4 - 1/2*a1]
             sage: c[0]^3
             2
             sage: parent(c[0])
             Number Field in a1 with defining polynomial x^6 + 108
-            sage: parent(c[0]).is_galois()                                              # needs sage.groups
+            sage: parent(c[0]).is_galois()
             True
 
         There is only one Galois conjugate of `\sqrt[3]{2}` in
@@ -3041,6 +3043,7 @@ cdef class NumberFieldElement(NumberFieldElement_base):
 
         ::
 
+            sage: # needs sage.groups
             sage: a.galois_conjugates(K)
             [a]
 

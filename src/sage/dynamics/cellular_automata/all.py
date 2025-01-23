@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-combinat
 import sage.dynamics.cellular_automata.catalog as cellular_automata
 
 from sage.misc.lazy_import import lazy_import

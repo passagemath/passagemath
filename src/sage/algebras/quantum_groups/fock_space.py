@@ -1476,7 +1476,7 @@ class FockSpaceBases(Category_realization_of_parent):
                  |3, 2, 1, 1, 1, 1>]
 
                 sage: F = FockSpace(3, [0,1]).natural()
-                sage: F.some_elements()[::13]
+                sage: F.some_elements()[::13]                                           # needs sage.libs.flint
                 [2*|[1], []> + 4*|[], [1]> + |[], []>,
                  |[1, 1], [1]>,
                  |[1, 1, 1], [1]>,
@@ -1752,7 +1752,7 @@ class FockSpaceTruncated(FockSpace):
             self._removable = lambda la,i: [x for x in la.corners()
                                             if la.content(*x, multicharge=F._multicharge) == i]
 
-            indices = Partitions(F._n, max_length=F._k)
+            indices = Partitions(max_length=F._k)
             CombinatorialFreeModule.__init__(self, F.base_ring(), indices,
                                              prefix='', bracket=['|', '>'],
                                              latex_bracket=['\\lvert', '\\rangle'],

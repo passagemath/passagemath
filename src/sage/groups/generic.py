@@ -166,7 +166,7 @@ def multiple(a, n, operation='*', identity=None, inverse=None, op=None):
         sage: multiple(1, 10^1000)
         1
 
-        sage: # needs sage.schemes
+        sage: # needs database_cremona_mini_ellcurve sage.schemes
         sage: E = EllipticCurve('389a1')
         sage: P = E(-1,1)
         sage: multiple(P, 10, '+')
@@ -262,9 +262,10 @@ class multiples:
         sage: list(multiples(1, 10, 100))
         [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
 
-        sage: E = EllipticCurve('389a1')                                                # needs sage.schemes
-        sage: P = E(-1,1)                                                               # needs sage.schemes
-        sage: for Q in multiples(P, 5): print((Q, Q.height()/P.height()))               # needs sage.schemes
+        sage: # needs database_cremona_mini_ellcurve sage.schemes
+        sage: E = EllipticCurve('389a1')
+        sage: P = E(-1,1)
+        sage: for Q in multiples(P, 5): print((Q, Q.height()/P.height()))
         ((0 : 1 : 0), 0.000000000000000)
         ((-1 : 1 : 1), 1.00000000000000)
         ((10/9 : -35/27 : 1), 4.00000000000000)
@@ -1688,9 +1689,9 @@ def structure_description(G, latex=False):
 
     Works for finitely presented groups (:issue:`17573`)::
 
-        sage: F.<x, y> = FreeGroup()                                                    # needs sage.groups
-        sage: G = F / [x^2*y^-1, x^3*y^2, x*y*x^-1*y^-1]                                # needs sage.groups
-        sage: G.structure_description()                                                 # needs sage.groups
+        sage: F.<x, y> = FreeGroup()                                                    # needs sage.combinat sage.groups
+        sage: G = F / [x^2*y^-1, x^3*y^2, x*y*x^-1*y^-1]                                # needs sage.combinat sage.groups
+        sage: G.structure_description()                                                 # needs sage.combinat sage.groups
         'C7'
 
     And matrix groups (:issue:`17573`)::

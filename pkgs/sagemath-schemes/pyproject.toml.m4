@@ -7,7 +7,6 @@ requires = [
     SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_modules
-    SPKG_INSTALL_REQUIRES_sagemath_polyhedra
     SPKG_INSTALL_REQUIRES_sagemath_flint
     SPKG_INSTALL_REQUIRES_scipy
     SPKG_INSTALL_REQUIRES_cython
@@ -23,6 +22,7 @@ description = "passagemath: Schemes, varieties, elliptic curves, algebraic Riema
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
+    SPKG_INSTALL_REQUIRES_fpylll
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_scipy
     SPKG_INSTALL_REQUIRES_sagemath_modules
@@ -41,8 +41,8 @@ content-type = "text/x-rst"
 test    = ["passagemath-repl"]
 
 # extras by packages (same as sagemath-modules)
-flint   = ["passagemath-flint"]
-fpylll  = [SPKG_INSTALL_REQUIRES_fpylll]
+flint   = []  # No extra needed
+fpylll  = []  # No extra needed
 gsl     = []  # No extra needed
 linbox  = ["passagemath-linbox"]
 m4ri    = ["passagemath-modules[linbox]"]
@@ -54,6 +54,7 @@ mpmath  = []  # No extra needed
 ntl     = ["passagemath-ntl"]
 numpy   = [SPKG_INSTALL_REQUIRES_numpy]
 pari    = ["passagemath-pari"]
+primecountpy = [SPKG_INSTALL_REQUIRES_primecountpy]
 
 # extras by packages (specific to sagemath-schemes)
 
@@ -102,13 +103,13 @@ standard        = ["passagemath-schemes[toric,padics,NumberField,FiniteField,fli
 # so there is no clean way to refer to the repair_wheel.py script
 # https://github.com/pypa/cibuildwheel/issues/1931
 repair-wheel-command = [
-    'python3 -m pip install passagemath-conf',
+    'python3 -m pip install passagemath-conf auditwheel',
     'python3 pkgs/sagemath-schemes/repair_wheel.py {wheel}',
     'auditwheel repair -w {dest_dir} {wheel}',
 ]
 [tool.cibuildwheel.macos]
 repair-wheel-command = [
-    'python3 -m pip install passagemath-conf',
+    'python3 -m pip install passagemath-conf auditwheel',
     'python3 pkgs/sagemath-schemes/repair_wheel.py {wheel}',
     'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
 ]

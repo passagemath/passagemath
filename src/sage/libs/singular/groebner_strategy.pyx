@@ -346,6 +346,7 @@ cdef class NCGroebnerStrategy(SageObject):
 
         Check that tail reduction is applied too::
 
+            sage: # needs sage.combinat
             sage: F = PolynomialRing(QQ,'t').fraction_field()
             sage: FA = FreeAlgebra(F, 6, 'x1,x2,x3,x4,x5,x6')
             sage: N = FA.g_algebra({FA.gen(j)*FA.gen(i):-FA.gen(i)*FA.gen(j) for i in range(5) for j in range(i+1,6)})

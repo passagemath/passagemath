@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-gap
+# sage.doctest: needs sage.combinat sage.libs.gap sage.modules
 r"""
 Polynomial virtual weighted multisort species
 
@@ -39,11 +41,9 @@ from sage.categories.monoids import Monoids
 from sage.categories.sets_cat import cartesian_product
 from sage.categories.sets_with_grading import SetsWithGrading
 from sage.categories.tensor import tensor
-from sage.combinat.cyclic_sieving_phenomenon import orbit_decomposition
 from sage.combinat.free_module import CombinatorialFreeModule
 from sage.combinat.integer_vector import IntegerVectors
 from sage.combinat.partition import Partitions, _Partitions
-from sage.combinat.sf.sf import SymmetricFunctions
 from sage.groups.perm_gps.constructor import PermutationGroupElement
 from sage.groups.perm_gps.permgroup import PermutationGroup, PermutationGroup_generic
 from sage.groups.perm_gps.permgroup_named import SymmetricGroup
@@ -51,6 +51,7 @@ from sage.libs.gap.libgap import libgap
 from sage.misc.cachefunc import cached_method
 from sage.misc.fast_methods import WithEqualityById
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
+from sage.misc.lazy_import import lazy_import
 from sage.modules.free_module_element import vector
 from sage.monoids.indexed_free_monoid import (IndexedFreeAbelianMonoid,
                                               IndexedFreeAbelianMonoidElement)
@@ -65,6 +66,9 @@ from sage.structure.parent import Parent
 from sage.structure.richcmp import op_LT, op_LE, op_EQ, op_NE, op_GT, op_GE
 from sage.structure.unique_representation import (UniqueRepresentation,
                                                   WithPicklingByInitArgs)
+
+lazy_import('sage.combinat.cyclic_sieving_phenomenon', 'orbit_decomposition')
+lazy_import('sage.combinat.sf.sf', 'SymmetricFunctions')
 
 GAP_FAIL = libgap.eval('fail')
 

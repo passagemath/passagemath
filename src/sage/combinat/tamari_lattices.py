@@ -365,7 +365,7 @@ def DexterSemilattice(n):
         15
         sage: len(P.maximal_elements())
         4
-        sage: P.chain_polynomial()
+        sage: P.chain_polynomial()                                                      # needs sage.libs.flint
         q^5 + 19*q^4 + 47*q^3 + 42*q^2 + 14*q + 1
 
     REFERENCES:

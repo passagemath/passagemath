@@ -147,14 +147,16 @@ from sage.libs.gap.libgap import libgap
 from sage.libs.gap.element import GapElement as LibGapElement
 from sage.groups.perm_gps.permgroup_element import PermutationGroupElement
 from sage.groups.perm_gps.constructor import PermutationGroupElement as PermutationConstructor, standardize_generator
-from sage.groups.abelian_gps.abelian_group import AbelianGroup
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 from sage.groups.class_function import ClassFunction_libgap
 from sage.sets.finite_enumerated_set import FiniteEnumeratedSet
 from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
 from sage.groups.conjugacy_classes import ConjugacyClassGAP
 from sage.structure.richcmp import (richcmp_method,
                                     richcmp, rich_to_bool, op_EQ, op_NE)
+
+lazy_import('sage.groups.abelian_gps.abelian_group', 'AbelianGroup')
 
 
 def load_hap():
@@ -728,6 +730,7 @@ class PermutationGroup_generic(FiniteGroup):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: G = GL(2,3)
             sage: P = G.as_permutation_group()
             sage: f = P.hom(G.gens())
@@ -1000,6 +1003,7 @@ class PermutationGroup_generic(FiniteGroup):
 
         Check that :issue:`26903` is fixed::
 
+            sage: # needs sage.modules
             sage: G = SO(4,3,-1)
             sage: P = G.as_permutation_group(algorithm='smaller', seed=5)
             sage: P1 = G.as_permutation_group()
@@ -3145,6 +3149,7 @@ class PermutationGroup_generic(FiniteGroup):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: CyclicPermutationGroup(50).as_finitely_presented_group()
             Finitely presented group < a | a^50 >
             sage: DihedralGroup(4).as_finitely_presented_group()
@@ -3157,13 +3162,14 @@ class PermutationGroup_generic(FiniteGroup):
             sage: G = PermutationGroup(['(1,2,3,4,5)', '(1,5)(2,4)'])
             sage: G.is_isomorphic(DihedralGroup(5))
             True
-            sage: K = G.as_finitely_presented_group(); K
+            sage: K = G.as_finitely_presented_group(); K                                # needs sage.combinat
             Finitely presented group < a, b | b^2, (b*a)^2, b*a^-3*b*a^2 >
-            sage: K.as_permutation_group().is_isomorphic(DihedralGroup(5))
+            sage: K.as_permutation_group().is_isomorphic(DihedralGroup(5))              # needs sage.combinat
             True
 
         We can attempt to reduce the output presentation::
 
+            sage: # needs sage.combinat
             sage: H = PermutationGroup(['(1,2,3,4,5)', '(1,3,5,2,4)'])
             sage: H.as_finitely_presented_group()
             Finitely presented group < a, b | b^-2*a^-1, b*a^-2 >
@@ -3172,6 +3178,7 @@ class PermutationGroup_generic(FiniteGroup):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: PermutationGroup([]).as_finitely_presented_group()
             Finitely presented group < a | a >
             sage: S = SymmetricGroup(6)
@@ -3187,12 +3194,14 @@ class PermutationGroup_generic(FiniteGroup):
         `D_9` is the only non-Abelian group of order 18
         with an automorphism group of order 54 [TW1980]_::
 
+            sage: # needs sage.combinat
             sage: D = DihedralGroup(9).as_finitely_presented_group().gap()
             sage: D.Order(), D.IsAbelian(), D.AutomorphismGroup().Order()
             (18, false, 54)
 
         `S_3` is the only non-Abelian group of order 6 [TW1980]_::
 
+            sage: # needs sage.combinat
             sage: S = SymmetricGroup(3).as_finitely_presented_group().gap()
             sage: S.Order(), S.IsAbelian()
             (6, false)
@@ -3200,6 +3209,7 @@ class PermutationGroup_generic(FiniteGroup):
         We can manually construct a permutation representation using GAP
         coset enumeration methods::
 
+            sage: # needs sage.combinat
             sage: D = GeneralDihedralGroup([3,3,4]).as_finitely_presented_group().gap()
             sage: ctab = D.CosetTable(D.Subgroup([]))
             sage: gen_ls = gap.List(ctab, gap.PermList)
@@ -5063,6 +5073,7 @@ class PermutationGroup_generic(FiniteGroup):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: G = groups.permutation.Dihedral(4)
             sage: G.sign_representation()
             Sign representation of Dihedral group of order 8
