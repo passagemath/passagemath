@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Suffix Tries and Suffix Trees
+Suffix tries and Suffix trees
 """
 # ****************************************************************************
 #       Copyright (C) 2008 Franco Saliola <saliola@gmail.com>

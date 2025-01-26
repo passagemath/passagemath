@@ -1,10 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Super Partitions
-
-AUTHORS:
-
-- Mike Zabrocki
+Super partitions
 
 A super partition of size `n` and fermionic sector `m` is a
 pair consisting of a strict partition of some integer `r` of
@@ -63,6 +59,10 @@ EXAMPLES::
 REFERENCES:
 
 - [JL2016]_
+
+AUTHORS:
+
+- Mike Zabrocki
 """
 
 # ****************************************************************************

@@ -465,7 +465,7 @@ def narayana_number(n: Integer, k: Integer) -> Integer:
 
     - ``n`` -- integer
 
-    - ``k`` -- integer between ``0`` and ``n - 1``
+    - ``k`` -- integer between `0` and `n - 1`
 
     OUTPUT: integer
 
@@ -762,8 +762,6 @@ def lucas_number2(n, P, Q):
     defined by the initial conditions `L^{(2)}_1 = 2`,
     `L^{(2)}_2 = P` and the recurrence relation
     `L^{(2)}_{n+2} = P \cdot L^{(2)}_{n+1} - Q \cdot L^{(2)}_n`.
-
-    Wraps GAP's Lucas(...)[2].
 
     INPUT:
 
@@ -1684,10 +1682,10 @@ def _tuples_native(S, k):
 
 def number_of_tuples(S, k, algorithm='naive') -> Integer:
     """
-    Return the size of ``tuples(S, k)`` when `S` is a set. More
-    generally, return the size of ``tuples(set(S), k)``. (So,
-    unlike :meth:`tuples`, this method removes redundant entries from
-    `S`.)
+    Return the size of ``tuples(S, k)`` for a set `S`.
+
+    `S` is first converted to a set. Hence, unlike :meth:`tuples`, this method
+    removes redundant entries from `S`.
 
     INPUT:
 
