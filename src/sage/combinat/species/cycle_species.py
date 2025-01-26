@@ -1,9 +1,9 @@
 # sage_setup: distribution = sagemath-combinat
 """
-Cycle Species
+Cycle species
 """
 
-#*****************************************************************************
+# ****************************************************************************
 #       Copyright (C) 2008 Mike Hansen <mhansen@gmail.com>,
 #
 # This program is free software: you can redistribute it and/or modify
@@ -11,7 +11,7 @@ Cycle Species
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
 #                  http://www.gnu.org/licenses/
-#*****************************************************************************
+# ***************************************************************************
 
 from sage.arith.misc import divisors, euler_phi
 from sage.combinat.species.misc import accept_size

@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.libs.gap
 """
-Braid Move Calculator
+Braid move calculator
 
 AUTHORS:
 

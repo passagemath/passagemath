@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.graphs sage.groups sage.modules
 """
-Weyl Character Rings
+Weyl character rings
 """
 # ****************************************************************************
 #  Copyright (C) 2011 Daniel Bump <bump at match.stanford.edu>

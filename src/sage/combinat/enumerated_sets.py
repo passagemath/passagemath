@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 """
-Enumerated sets and combinatorial objects
+Enumerated sets
 
 Basic enumerated sets
 ---------------------
@@ -14,7 +14,6 @@ Integer lists
 -------------
 
 - :ref:`sage.combinat.partition`
-  (see also: :ref:`sage.combinat.catalog_partitions`)
 - :ref:`sage.combinat.composition`
 - :class:`~sage.combinat.composition_signed.SignedCompositions`
 - :class:`IntegerListsLex`

@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
-Word Quasi-symmetric functions
+Word quasi-symmetric functions
 
 AUTHORS:
 

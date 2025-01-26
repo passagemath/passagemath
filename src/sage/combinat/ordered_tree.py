@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-graphs
 """
-Ordered Rooted Trees
+Ordered rooted trees
 
 AUTHORS:
 

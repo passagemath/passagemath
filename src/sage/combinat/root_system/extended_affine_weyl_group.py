@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.libs.gap
 r"""
-Extended Affine Weyl Groups
+Extended affine Weyl groups
 
 AUTHORS:
 

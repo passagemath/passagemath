@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-modules
 """
-Coxeter Types
+Coxeter types
 """
 # ****************************************************************************
 #       Copyright (C) 2015 Travis Scrimshaw <tscrim at ucdavis.edu>,

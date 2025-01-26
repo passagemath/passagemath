@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Six Vertex Model
+Six vertex model
 """
 
 from sage.structure.parent import Parent

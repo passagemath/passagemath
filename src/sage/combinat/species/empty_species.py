@@ -1,8 +1,8 @@
 # sage_setup: distribution = sagemath-combinat
 """
-Empty Species
+Empty species
 """
-#*****************************************************************************
+# ****************************************************************************
 #       Copyright (C) 2008 Florent Hivert <Florent.Hivert@univ-rouen,fr>,
 #
 #  Distributed under the terms of the GNU General Public License (GPL)
@@ -15,7 +15,7 @@ Empty Species
 #  The full text of the GPL is available at:
 #
 #                  http://www.gnu.org/licenses/
-#*****************************************************************************
+# ****************************************************************************
 from .species import GenericCombinatorialSpecies
 from sage.structure.unique_representation import UniqueRepresentation
 

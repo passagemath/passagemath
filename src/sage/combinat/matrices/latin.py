@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.groups sage.modules
 r"""
-Latin Squares
+Latin squares
 
 A *latin square* of order `n` is an `n \times n` array such that
 each symbol `s \in \{ 0, 1, \dots, n-1\}` appears precisely once in each

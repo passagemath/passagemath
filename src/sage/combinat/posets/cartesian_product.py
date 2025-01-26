@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-graphs
 """
-Cartesian products of Posets
+Cartesian products of posets
 
 AUTHORS:
 
