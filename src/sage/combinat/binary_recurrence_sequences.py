@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 """
-Binary Recurrence Sequences
+Binary recurrence sequences
 
 This class implements several methods relating to general linear binary
 recurrence sequences, including a sieve to find perfect powers in integral

@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Compute Bell and Uppuluri-Carpenter numbers
+Bell and Uppuluri-Carpenter numbers
 
 AUTHORS:
 

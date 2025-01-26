@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-modules
 r"""
-C-Finite Sequences
+C-Finite sequences
 
 C-finite infinite sequences satisfy homogeneous linear recurrences with constant coefficients:
 
