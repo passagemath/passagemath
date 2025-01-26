@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs lrcalc sage.combinat sage.modules
 """
-Orthogonal Symmetric Functions
+Orthogonal symmetric functions
 
 AUTHORS:
 

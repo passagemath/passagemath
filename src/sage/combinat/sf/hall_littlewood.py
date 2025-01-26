@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
-Hall-Littlewood Polynomials
+Hall-Littlewood polynomials
 
 Notation used in the definitions follows mainly [Mac1995]_.
 """

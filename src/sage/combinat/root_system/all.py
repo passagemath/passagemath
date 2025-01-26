@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-modules
 """
-Root Systems
+Root systems
 
 Quickref
 --------
