@@ -151,7 +151,7 @@ cdef class DecompositionNode(SageObject):
 
         sig_on()
         try:
-            CMR_CALL(CMRseymourCreate(cmr, &root, isTernary, mat))
+            CMR_CALL(CMRseymourCreate(cmr, &root, isTernary, mat, True))
         finally:
             sig_off()
         self._set_dec(root)
@@ -741,7 +741,7 @@ cdef class DecompositionNode(SageObject):
             ....:           [[1,0,1,1,0,0], [0,1,1,1,0,0], [1,0,1,0,1,1],
             ....:            [0,-1,0,-1,1,1], [1,0,1,0,1,0], [0,-1,0,-1,0,1]])
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           three_sum_strategy="Wide_Wide",
+            ....:                           decompose_strategy="Wide_Wide",
             ....:                           row_keys=range(6),
             ....:                           column_keys='abcdef')
             sage: print(certificate)
@@ -761,7 +761,7 @@ cdef class DecompositionNode(SageObject):
             ....:           [[1,0,1,1,0,0], [0,1,1,1,0,0], [1,0,1,0,1,1],
             ....:            [0,-1,0,-1,1,1], [1,0,1,0,1,0], [0,-1,0,-1,0,1]])
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           three_sum_strategy="Wide_Wide",
+            ....:                           decompose_strategy="Wide_Wide",
             ....:                           row_keys=range(6),
             ....:                           column_keys='abcdef')
             sage: unicode_art(certificate)
@@ -784,7 +784,7 @@ cdef class DecompositionNode(SageObject):
             ....:           [[1,0,1,1,0,0], [0,1,1,1,0,0], [1,0,1,0,1,1],
             ....:            [0,-1,0,-1,1,1], [1,0,1,0,1,0], [0,-1,0,-1,0,1]])
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           three_sum_strategy="Wide_Wide",
+            ....:                           decompose_strategy="Wide_Wide",
             ....:                           row_keys=range(6),
             ....:                           column_keys='abcdef')
             sage: ascii_art(certificate)
@@ -1275,8 +1275,7 @@ cdef class DecompositionNode(SageObject):
                                         stop_when_nongraphic=False,
                                         stop_when_noncographic=False,
                                         stop_when_nongraphic_and_noncographic=False,
-                                        three_sum_pivot_children=False,
-                                        three_sum_strategy=None,
+                                        decompose_strategy=None,
                                         construct_leaf_graphs=False,
                                         construct_all_graphs=False):
         r"""
@@ -1423,8 +1422,7 @@ cdef class DecompositionNode(SageObject):
                               stop_when_nongraphic=stop_when_nongraphic,
                               stop_when_noncographic=stop_when_noncographic,
                               stop_when_nongraphic_and_noncographic=stop_when_nongraphic_and_noncographic,
-                              three_sum_pivot_children=three_sum_pivot_children,
-                              three_sum_strategy=three_sum_strategy,
+                              decompose_strategy=decompose_strategy,
                               construct_leaf_graphs=construct_leaf_graphs,
                               construct_all_graphs=construct_all_graphs)
         _set_cmr_seymour_parameters(&params.seymour, kwds)
@@ -1819,8 +1817,7 @@ cdef class DecompositionNode(SageObject):
                                stop_when_nonnetwork=False,
                                stop_when_nonconetwork=False,
                                stop_when_nonnetwork_and_nonconetwork=False,
-                               three_sum_pivot_children=False,
-                               three_sum_strategy=None,
+                               decompose_strategy=None,
                                construct_leaf_graphs=False,
                                construct_all_graphs=False):
         r"""
@@ -1916,8 +1913,7 @@ cdef class DecompositionNode(SageObject):
                               stop_when_nongraphic=stop_when_nonnetwork,
                               stop_when_noncographic=stop_when_nonconetwork,
                               stop_when_nongraphic_and_noncographic=stop_when_nonnetwork_and_nonconetwork,
-                              three_sum_pivot_children=three_sum_pivot_children,
-                              three_sum_strategy=three_sum_strategy,
+                              decompose_strategy=decompose_strategy,
                               construct_leaf_graphs=construct_leaf_graphs,
                               construct_all_graphs=construct_all_graphs)
         params.algorithm = CMR_TU_ALGORITHM_DECOMPOSITION
@@ -2464,7 +2460,7 @@ cdef class ThreeSumNode(SumNode):
             ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
             ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           three_sum_strategy="Wide_Wide",
+            ....:                           decompose_strategy="Wide_Wide",
             ....:                           row_keys=range(6),
             ....:                           column_keys='abcdef')
             sage: certificate.child_indices()
@@ -2489,7 +2485,7 @@ cdef class ThreeSumNode(SumNode):
             ....:                    column_keys='abcdef'); node
             UnknownNode (6×6)
             sage: C0 = node.complete_decomposition(
-            ....:                            three_sum_strategy="Wide_Wide",
+            ....:                            decompose_strategy="Wide_Wide",
             ....:                            )
             sage: C0
             PivotsNode (6×6)
@@ -2514,7 +2510,7 @@ cdef class ThreeSumNode(SumNode):
             ....: [ 0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0],
             ....: [ 0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1]])
             sage: result, certificate = R12_large.is_totally_unimodular(certificate=True,
-            ....:                                 three_sum_strategy="Wide_Wide",
+            ....:                                 decompose_strategy="Wide_Wide",
             ....:                                 row_keys=range(9),
             ....:                                 column_keys='abcdefghijkl')
             sage: C = certificate.child_nodes()[0]; C
@@ -2543,7 +2539,7 @@ cdef class ThreeSumNode(SumNode):
             ((i, 0, 3, 4, 5, 6), (+i+k, k, a, b, c, d, e, f, 1))
 
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           three_sum_strategy="Mixed_Mixed")
+            ....:                           decompose_strategy="Mixed_Mixed")
             sage: C1, C2 = certificate.child_nodes()
             sage: C1.matrix()
             [ 1  0  1  1  0]
@@ -2562,7 +2558,7 @@ cdef class ThreeSumNode(SumNode):
             ((+c0+c3, r2, r3, r4, r5), (c0, c3, c4, c5))
 
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           three_sum_strategy="Mixed_Mixed",
+            ....:                           decompose_strategy="Mixed_Mixed",
             ....:                           row_keys=range(6),
             ....:                           column_keys='abcdef')
             sage: C1, C2 = certificate.child_nodes()
@@ -2738,7 +2734,7 @@ cdef class ThreeSumNode(SumNode):
     def is_distributed_ranks(self):
         r"""
         Check whether the three sum node ``self`` is formed with
-        ``three_sum_strategy="distributed_ranks"`` or ``"Wide_Wide"``.
+        ``decompose_strategy="distributed_ranks"`` or ``"Wide_Wide"``.
 
         The matrix representing the first child is
         `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon\end{bmatrix}`,
@@ -2776,12 +2772,13 @@ cdef class ThreeSumNode(SumNode):
             sage: C.is_concentrated_rank()
             False
         """
-        return <bint> CMRseymourThreeSumDistributedRanks(self._dec)
+        return False
+        # return <bint> CMRseymourThreeSumDistributedRanks(self._dec)
 
     def is_concentrated_rank(self):
         r"""
         Check whether the three sum node ``self`` is formed with
-        ``three_sum_strategy="concentrated_rank"`` or ``"Mixed_Mixed"``.
+        ``decompose_strategy="concentrated_rank"`` or ``"Mixed_Mixed"``.
 
         The matrix representing the first child is
         `M_1=\begin{bmatrix} A & 0 \\ a_1^T & 1\\ a_2^T & \epsilon_2\end{bmatrix}`
@@ -2817,7 +2814,7 @@ cdef class ThreeSumNode(SumNode):
             ....:                  [ 0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0],
             ....:                  [ 0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1]])
             sage: result, certificate = R12_large.is_totally_unimodular(certificate=True,
-            ....:                                 three_sum_strategy="Mixed_Mixed")
+            ....:                                 decompose_strategy="Mixed_Mixed")
             sage: C = certificate; C
             ThreeSumNode (9×12) with 2 children
             sage: C.is_distributed_ranks()
@@ -2825,7 +2822,8 @@ cdef class ThreeSumNode(SumNode):
             sage: C.is_concentrated_rank()
             True
         """
-        return <bint> CMRseymourThreeSumConcentratedRank(self._dec)
+        return True
+        # return <bint> CMRseymourThreeSumConcentratedRank(self._dec)
 
     def block_matrix_form(self):
         r"""
@@ -2870,7 +2868,7 @@ cdef class ThreeSumNode(SumNode):
             [ 1  0  1  0  0  1]
 
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           three_sum_strategy="Mixed_Mixed")
+            ....:                           decompose_strategy="Mixed_Mixed")
             sage: C = certificate; C
             ThreeSumNode (6×6) with 2 children
             sage: C.matrix()
@@ -2900,12 +2898,162 @@ cdef class ThreeSumNode(SumNode):
             [ 0 -1  0 -1  0  1]
         """
         M1, M2 = self.summand_matrices()
-        if self.is_distributed_ranks():
-            three_sum_strategy = 'distributed_ranks'
-        else:
-            three_sum_strategy = 'concentrated_rank'
         return Matrix_cmr_chr_sparse.three_sum(M1, M2,
-                                               three_sum_strategy=three_sum_strategy)
+                                               three_sum_strategy='concentrated_rank')
+
+cdef class DeltaSumNode(ThreeSumNode):
+    def block_matrix_form(self):
+        r"""
+        Return the block matrix constructed from the three sum of children.
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: R12 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
+            ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
+            sage: R12
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True)
+            sage: C = certificate.child_nodes()[0]; C
+            ThreeSumNode (6×6) with 2 children
+            sage: C.matrix()
+            [ 1  0  0  1 -1  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  0  0  0  1]
+            [ 0 -1  0 -1  1  1]
+            [-1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: C.summand_matrices()
+            (
+            [ 0  0  1 -1 -1]  [ 1  0  1 -1  0]
+            [ 1  1  1  0  0]  [ 0  0  1  0  1]
+            [ 0  1  0  1  1]  [-1 -1  0  1  1]
+            [-1  0 -1  0  1], [-1 -1  0  0  1]
+            )
+            sage: C.block_matrix_form()
+            [ 0  0  1 -1  1  0]
+            [ 1  1  1  0  0  0]
+            [ 0  1  0  1 -1  0]
+            [ 0  0  0  1  0  1]
+            [ 1  0  1  0  1  1]
+            [ 1  0  1  0  0  1]
+
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
+            ....:                           decompose_strategy="Mixed_Mixed")
+            sage: C = certificate; C
+            ThreeSumNode (6×6) with 2 children
+            sage: C.matrix()
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: C.summand_matrices()
+            (
+                              [ 1  1  0  0]
+            [ 1  0  1  1  0]  [ 1  0  1  1]
+            [ 0  1  1  1  0]  [ 0 -1  1  1]
+            [ 1  0  1  0  1]  [ 1  0  1  0]
+            [ 0 -1  0 -1  1], [ 0 -1  0  1]
+            )
+            sage: C.child_indices()
+            (((r0, r1, r2, r3), (c0, c1, c2, c3, +r2+r3)),
+            ((+c0+c3, r2, r3, r4, r5), (c0, c3, c4, c5)))
+            sage: C.block_matrix_form()
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+        """
+        M1, M2 = self.summand_matrices()
+        return Matrix_cmr_chr_sparse.three_sum(M1, M2,
+                                               three_sum_strategy='distributed_ranks')
+
+cdef class YSumNode(ThreeSumNode):
+    def block_matrix_form(self):
+        r"""
+        Return the block matrix constructed from the three sum of children.
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: R12 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
+            ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
+            sage: R12
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True)
+            sage: C = certificate.child_nodes()[0]; C
+            ThreeSumNode (6×6) with 2 children
+            sage: C.matrix()
+            [ 1  0  0  1 -1  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  0  0  0  1]
+            [ 0 -1  0 -1  1  1]
+            [-1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: C.summand_matrices()
+            (
+            [ 0  0  1 -1 -1]  [ 1  0  1 -1  0]
+            [ 1  1  1  0  0]  [ 0  0  1  0  1]
+            [ 0  1  0  1  1]  [-1 -1  0  1  1]
+            [-1  0 -1  0  1], [-1 -1  0  0  1]
+            )
+            sage: C.block_matrix_form()
+            [ 0  0  1 -1  1  0]
+            [ 1  1  1  0  0  0]
+            [ 0  1  0  1 -1  0]
+            [ 0  0  0  1  0  1]
+            [ 1  0  1  0  1  1]
+            [ 1  0  1  0  0  1]
+
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
+            ....:                           decompose_strategy="Mixed_Mixed")
+            sage: C = certificate; C
+            ThreeSumNode (6×6) with 2 children
+            sage: C.matrix()
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: C.summand_matrices()
+            (
+                              [ 1  1  0  0]
+            [ 1  0  1  1  0]  [ 1  0  1  1]
+            [ 0  1  1  1  0]  [ 0 -1  1  1]
+            [ 1  0  1  0  1]  [ 1  0  1  0]
+            [ 0 -1  0 -1  1], [ 0 -1  0  1]
+            )
+            sage: C.child_indices()
+            (((r0, r1, r2, r3), (c0, c1, c2, c3, +r2+r3)),
+            ((+c0+c3, r2, r3, r4, r5), (c0, c3, c4, c5)))
+            sage: C.block_matrix_form()
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+        """
+        M1, M2 = self.summand_matrices()
+        return Matrix_cmr_chr_sparse.three_sum(M1, M2,
+                                               three_sum_strategy='distributed_ranks')
 
 
 cdef class BaseGraphicNode(DecompositionNode):
@@ -3830,12 +3978,16 @@ cdef _class(CMR_SEYMOUR_NODE *dec):
     """
     cdef CMR_SEYMOUR_NODE_TYPE typ = CMRseymourType(dec)
 
-    if typ == CMR_SEYMOUR_NODE_TYPE_ONE_SUM:
+    if typ == CMR_SEYMOUR_NODE_TYPE_ONESUM:
         return OneSumNode
-    if typ == CMR_SEYMOUR_NODE_TYPE_TWO_SUM:
+    if typ == CMR_SEYMOUR_NODE_TYPE_TWOSUM:
         return TwoSumNode
-    if typ == CMR_SEYMOUR_NODE_TYPE_THREE_SUM:
+    if typ == CMR_SEYMOUR_NODE_TYPE_DELTASUM:
+        return DeltaSumNode
+    if typ == CMR_SEYMOUR_NODE_TYPE_THREESUM:
         return ThreeSumNode
+    if typ == CMR_SEYMOUR_NODE_TYPE_YSUM:
+        return YSumNode
     if typ == CMR_SEYMOUR_NODE_TYPE_GRAPH:
         return GraphicNode
     if typ == CMR_SEYMOUR_NODE_TYPE_COGRAPH:

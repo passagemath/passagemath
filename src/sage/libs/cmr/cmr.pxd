@@ -19,6 +19,8 @@ cdef extern from "cmr/env.h":
     const int CMR_ERROR_OVERFLOW
     const int CMR_ERROR_TIMEOUT
     const int CMR_ERROR_STRUCTURE
+    const int CMR_ERROR_INCONSISTENT
+    const int CMR_ERROR_PARAMS
 
     ctypedef int CMR_ERROR
 
@@ -47,6 +49,7 @@ cdef extern from "cmr/matrix.h":
 
     CMR_ERROR CMRsubmatCreate(CMR* cmr, size_t numRows, size_t numColumns, CMR_SUBMAT** psubmatrix)
     CMR_ERROR CMRsubmatCreate1x1(CMR* cmr, size_t row, size_t column, CMR_SUBMAT** psubmatrix)
+    CMR_ERROR CMRsubmatCreate2x2(CMR* cmr, size_t row1, size_t row2, size_t column1, size_t column2, CMR_SUBMAT** psubmatrix)
     CMR_ERROR CMRsubmatFree(CMR* cmr, CMR_SUBMAT** psubmatrix)
     # CMR_ERROR CMRsubmatPrint(CMR* cmr, CMR_SUBMAT* submatrix, size_t numRows, size_t numColumns, FILE* stream)
 
@@ -174,8 +177,10 @@ cdef extern from "cmr/matroid.h":
 
     CMR_ERROR CMRchrmatBinaryPivot(CMR* cmr, CMR_CHRMAT* matrix, size_t pivotRow, size_t pivotColumn, CMR_CHRMAT** presult)
     CMR_ERROR CMRchrmatTernaryPivot(CMR* cmr, CMR_CHRMAT* matrix, size_t pivotRow, size_t pivotColumn, CMR_CHRMAT** presult)
+    CMR_ERROR CMRchrmatRegularPivot(CMR* cmr, CMR_CHRMAT* matrix, size_t pivotRow, size_t pivotColumn, CMR_SUBMAT** pviolator, CMR_CHRMAT** presult)
     CMR_ERROR CMRchrmatBinaryPivots(CMR* cmr, CMR_CHRMAT* matrix, size_t numPivots, size_t* pivotRows, size_t* pivotColumns, CMR_CHRMAT** presult)
     CMR_ERROR CMRchrmatTernaryPivots(CMR* cmr, CMR_CHRMAT* matrix, size_t numPivots, size_t* pivotRows, size_t* pivotColumns, CMR_CHRMAT** presult)
+    CMR_ERROR CMRchrmatRegularPivots(CMR* cmr, CMR_CHRMAT* matrix, size_t numPivots, size_t* pivotRows, size_t* pivotColumns, CMR_SUBMAT** pviolator, CMR_CHRMAT** presult)
 
     ctypedef int CMR_MINOR_TYPE
 
@@ -232,6 +237,7 @@ cdef extern from "cmr/separation.h":
 
     CMR_ERROR CMRsepaCreate(CMR* cmr, size_t numRows, size_t numColumns, CMR_SEPA** psepa)
     CMR_ERROR CMRsepaFree(CMR* cmr, CMR_SEPA** psepa)
+    CMR_ERROR CMRsepaTranspose(CMR* cmr, CMR_SEPA* sepa, CMR_SEPA** ptransposed)
     CMR_ERROR CMRsepaComputeSizes(CMR_SEPA* sepa, size_t* pnumRowsTopLeft, size_t* pnumColumnsTopLeft, size_t* pnumRowsBottomRight, size_t* pnumColumnsBottomRight)
     CMR_ERROR CMRsepaFindBinaryRepresentatives(CMR* cmr, CMR_SEPA* sepa, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, bool* pswapped, CMR_SUBMAT** pviolator)
     CMR_ERROR CMRsepaFindBinaryRepresentativesSubmatrix(CMR* cmr, CMR_SEPA* sepa, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SUBMAT* submatrix, bool* pswapped, CMR_SUBMAT** pviolator)
@@ -239,18 +245,24 @@ cdef extern from "cmr/separation.h":
     CMR_ERROR CMRsepaGetProjection(CMR_SEPA* sepa, size_t part, size_t* rowsToPart, size_t* columnsToPart, size_t* pnumPartRows, size_t* pnumPartColumns)
     CMR_ERROR CMRsepaCheckTernary(CMR* cmr, CMR_SEPA* sepa, CMR_CHRMAT* matrix, bool* pisTernary, CMR_SUBMAT** pviolator)
     CMR_ERROR CMRsepaCheckTernarySubmatrix(CMR* cmr, CMR_SEPA* sepa, CMR_CHRMAT* matrix, CMR_SUBMAT* submatrix, bool* pisTernary, CMR_SUBMAT** pviolator)
-    CMR_ERROR CMRoneSumCompose(CMR* cmr, size_t numMatrices, CMR_CHRMAT** matrices, CMR_CHRMAT** presult)
-    CMR_ERROR CMRtwoSumCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, size_t* firstSpecialRows, size_t* firstSpecialColumns, size_t* secondSpecialRows, size_t* secondSpecialColumns, int8_t characteristic, CMR_CHRMAT** presult)
-    CMR_ERROR CMRtwoSumDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, size_t* firstSpecialRows, size_t* firstSpecialColumns)
-    CMR_ERROR CMRtwoSumDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, size_t* secondSpecialRows, size_t* secondSpecialColumns)
-    CMR_ERROR CMRthreeSumSeymourCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, size_t* firstSpecialRows, size_t* firstSpecialColumns, size_t* secondSpecialRows, size_t* secondSpecialColumns, int8_t characteristic, CMR_CHRMAT** presult)
-    CMR_ERROR CMRthreeSumSeymourDecomposeEpsilon(CMR* cmr, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SEPA* sepa, char* pepsilon)
-    CMR_ERROR CMRthreeSumSeymourDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, char epsilon, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, size_t* firstSpecialRows, size_t* firstSpecialColumns)
-    CMR_ERROR CMRthreeSumSeymourDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, char epsilon, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, size_t* secondSpecialRows, size_t* secondSpecialColumns)
-    CMR_ERROR CMRthreeSumTruemperCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, size_t* firstSpecialRows, size_t* firstSpecialColumns, size_t* secondSpecialRows, size_t* secondSpecialColumns, int8_t characteristic, CMR_CHRMAT** presult)
-    CMR_ERROR CMRthreeSumTruemperDecomposeConnecting(CMR* cmr, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char* pgamma, char* pbeta)
-    CMR_ERROR CMRthreeSumTruemperDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char beta, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, size_t* firstSpecialRows, size_t* firstSpecialColumns)
-    CMR_ERROR CMRthreeSumTruemperDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char gamma, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, size_t* secondSpecialRows, size_t* secondSpecialColumns)
+    CMR_ERROR CMRonesumCompose(CMR* cmr, size_t numMatrices, CMR_CHRMAT** matrices, CMR_CHRMAT** presult)
+    CMR_ERROR CMRtwosumCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, size_t* firstSpecialRows, size_t* firstSpecialColumns, size_t* secondSpecialRows, size_t* secondSpecialColumns, int8_t characteristic, CMR_CHRMAT** presult)
+    CMR_ERROR CMRtwosumDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, size_t* firstSpecialRows, size_t* firstSpecialColumns)
+    CMR_ERROR CMRtwosumDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, size_t* secondSpecialRows, size_t* secondSpecialColumns)
+    CMR_ERROR CMRdeltasumCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, size_t* firstSpecialRows, size_t* firstSpecialColumns, size_t* secondSpecialRows, size_t* secondSpecialColumns, int8_t characteristic, CMR_CHRMAT** presult)
+    CMR_ERROR CMRdeltasumDecomposeEpsilon(CMR* cmr, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SEPA* sepa, char* pepsilon)
+    CMR_ERROR CMRdeltasumDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, char epsilon, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, size_t* firstSpecialRows, size_t* firstSpecialColumns)
+    CMR_ERROR CMRdeltasumDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, char epsilon, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, size_t* secondSpecialRows, size_t* secondSpecialColumns)
+
+    CMR_ERROR CMRysumCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, size_t* firstSpecialRows, size_t* firstSpecialColumns, size_t* secondSpecialRows, size_t* secondSpecialColumns, int8_t characteristic, CMR_CHRMAT** presult)
+    CMR_ERROR CMRysumDecomposeEpsilon(CMR* cmr, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SEPA* sepa, char* pepsilon)
+    CMR_ERROR CMRysumDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, char epsilon, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, size_t* firstSpecialRows, size_t* firstSpecialColumns)
+    CMR_ERROR CMRysumDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, char epsilon, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, size_t* secondSpecialRows, size_t* secondSpecialColumns)
+
+    CMR_ERROR CMRthreesumCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, size_t* firstSpecialRows, size_t* firstSpecialColumns, size_t* secondSpecialRows, size_t* secondSpecialColumns, int8_t characteristic, CMR_CHRMAT** presult)
+    CMR_ERROR CMRthreesumDecomposeConnecting(CMR* cmr, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char* pgamma, char* pbeta)
+    CMR_ERROR CMRthreesumDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char beta, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, size_t* firstSpecialRows, size_t* firstSpecialColumns)
+    CMR_ERROR CMRthreesumDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char gamma, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, size_t* secondSpecialRows, size_t* secondSpecialColumns)
 
 cdef extern from "cmr/graphic.h":
 
@@ -322,21 +334,17 @@ cdef extern from "cmr/network.h":
 
 cdef extern from "cmr/seymour.h":
 
-    ctypedef int CMR_SEYMOUR_THREESUM_FLAG
+    ctypedef int CMR_SEYMOUR_DECOMPOSE_FLAG
 
-    const int CMR_SEYMOUR_THREESUM_FLAG_NO_PIVOTS
-    const int CMR_SEYMOUR_THREESUM_FLAG_DISTRIBUTED_RANKS
-    const int CMR_SEYMOUR_THREESUM_FLAG_CONCENTRATED_RANK
-    const int CMR_SEYMOUR_THREESUM_FLAG_FIRST_WIDE
-    const int CMR_SEYMOUR_THREESUM_FLAG_FIRST_TALL
-    const int CMR_SEYMOUR_THREESUM_FLAG_FIRST_MIXED
-    const int CMR_SEYMOUR_THREESUM_FLAG_FIRST_ALLREPR
-    const int CMR_SEYMOUR_THREESUM_FLAG_SECOND_WIDE
-    const int CMR_SEYMOUR_THREESUM_FLAG_SECOND_TALL
-    const int CMR_SEYMOUR_THREESUM_FLAG_SECOND_MIXED
-    const int CMR_SEYMOUR_THREESUM_FLAG_SECOND_ALLREPR
-    const int CMR_SEYMOUR_THREESUM_FLAG_SEYMOUR
-    const int CMR_SEYMOUR_THREESUM_FLAG_TRUEMPER
+    const int CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_MASK
+    const int CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_PIVOT
+    const int CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_DELTASUM
+    const int CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_YSUM
+    const int CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_MASK
+    const int CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_PIVOT
+    const int CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_THREESUM
+    const int CMR_SEYMOUR_DECOMPOSE_FLAG_SEYMOUR
+    const int CMR_SEYMOUR_DECOMPOSE_FLAG_TRUEMPER
 
     ctypedef struct CMR_SEYMOUR_PARAMS:
         bool stopWhenIrregular
@@ -347,8 +355,7 @@ cdef extern from "cmr/seymour.h":
         bool planarityCheck
         bool directGraphicness
         bool preferGraphicness
-        bool threeSumPivotChildren
-        int threeSumStrategy
+        int decomposeStrategy
         bool constructLeafGraphs
         bool constructAllGraphs
 
@@ -377,19 +384,19 @@ cdef extern from "cmr/seymour.h":
 
     const int CMR_SEYMOUR_NODE_TYPE_IRREGULAR
     const int CMR_SEYMOUR_NODE_TYPE_UNKNOWN
-    const int CMR_SEYMOUR_NODE_TYPE_ONE_SUM
-    const int CMR_SEYMOUR_NODE_TYPE_TWO_SUM
-    const int CMR_SEYMOUR_NODE_TYPE_THREE_SUM
     const int CMR_SEYMOUR_NODE_TYPE_SERIES_PARALLEL
     const int CMR_SEYMOUR_NODE_TYPE_PIVOTS
     const int CMR_SEYMOUR_NODE_TYPE_GRAPH
     const int CMR_SEYMOUR_NODE_TYPE_COGRAPH
     const int CMR_SEYMOUR_NODE_TYPE_PLANAR
     const int CMR_SEYMOUR_NODE_TYPE_R10
+    const int CMR_SEYMOUR_NODE_TYPE_ONESUM
+    const int CMR_SEYMOUR_NODE_TYPE_TWOSUM
+    const int CMR_SEYMOUR_NODE_TYPE_DELTASUM
+    const int CMR_SEYMOUR_NODE_TYPE_THREESUM
+    const int CMR_SEYMOUR_NODE_TYPE_YSUM
 
     bool CMRseymourIsTernary(CMR_SEYMOUR_NODE* node)
-    bool CMRseymourThreeSumDistributedRanks(CMR_SEYMOUR_NODE* node)
-    bool CMRseymourThreeSumConcentratedRank(CMR_SEYMOUR_NODE* node)
     bool CMRseymourHasTranspose(CMR_SEYMOUR_NODE* node)
     CMR_CHRMAT* CMRseymourGetMatrix(CMR_SEYMOUR_NODE* node)
     CMR_CHRMAT* CMRseymourGetTranspose(CMR_SEYMOUR_NODE* node)
@@ -405,6 +412,8 @@ cdef extern from "cmr/seymour.h":
     size_t CMRseymourNumColumns(CMR_SEYMOUR_NODE* node)
     CMR_ELEMENT* CMRseymourChildRowsToParent(CMR_SEYMOUR_NODE* node, size_t childIndex)
     CMR_ELEMENT* CMRseymourChildColumnsToParent(CMR_SEYMOUR_NODE* node, size_t childIndex)
+    size_t* CMRseymourChildSpecialRows(CMR_SEYMOUR_NODE* node, size_t childIndex)
+    size_t* CMRseymourChildSpecialColumns(CMR_SEYMOUR_NODE* node, size_t childIndex)
     CMR_GRAPH* CMRseymourGraph(CMR_SEYMOUR_NODE* node)
     CMR_GRAPH_EDGE* CMRseymourGraphForest(CMR_SEYMOUR_NODE* node)
     size_t CMRseymourGraphSizeForest(CMR_SEYMOUR_NODE* node)
@@ -424,7 +433,7 @@ cdef extern from "cmr/seymour.h":
     # CMR_ERROR CMRseymourPrint(CMR* cmr, CMR_SEYMOUR_NODE* node, FILE* stream, bool printChildren, bool printParentElements, bool printMatrices, bool printGraphs, bool printReductions, bool printPivots)
     CMR_ERROR CMRseymourCapture(CMR* cmr, CMR_SEYMOUR_NODE* node)
     CMR_ERROR CMRseymourRelease(CMR* cmr, CMR_SEYMOUR_NODE** pnode)
-    CMR_ERROR CMRseymourCreate(CMR* cmr, CMR_SEYMOUR_NODE** pnode, bool isTernary, CMR_CHRMAT* matrix)
+    CMR_ERROR CMRseymourCreate(CMR* cmr, CMR_SEYMOUR_NODE** pnode, bool isTernary, CMR_CHRMAT* matrix, bool copyMatrix)
     CMR_ERROR CMRseymourCloneUnknown(CMR* cmr, CMR_SEYMOUR_NODE* node, CMR_SEYMOUR_NODE** pclone)
     CMR_ERROR CMRseymourCloneSubtrees(CMR* cmr, size_t numSubtrees, CMR_SEYMOUR_NODE** subtreeRoots,CMR_SEYMOUR_NODE** clonedSubtrees)
 

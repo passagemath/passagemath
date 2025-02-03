@@ -602,7 +602,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                 summand = Matrix_cmr_chr_sparse._from_data(s)
                 tmp_two_mats[0] = sum_mat
                 tmp_two_mats[1] = summand._mat
-                CMR_CALL(CMRoneSumCompose(cmr, 2, &tmp_two_mats[0], &tmp_sum_mat))
+                CMR_CALL(CMRonesumCompose(cmr, 2, &tmp_two_mats[0], &tmp_sum_mat))
                 tmp_two_mats[0] = NULL
                 tmp_two_mats[1] = NULL
                 sum_mat = tmp_sum_mat
@@ -828,7 +828,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         sig_on()
         try:
-            CMR_CALL(CMRtwoSumCompose(cmr, first._mat, second._mat, firstSpecialRow, firstSpecialColumn, secondSpecialRow, secondSpecialColumn, characteristic, &sum_mat))
+            CMR_CALL(CMRtwosumCompose(cmr, first._mat, second._mat, firstSpecialRow, firstSpecialColumn, secondSpecialRow, secondSpecialColumn, characteristic, &sum_mat))
         finally:
             sig_off()
 
@@ -1026,7 +1026,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         sig_on()
         try:
-            CMR_CALL(CMRthreeSumTruemperCompose(cmr, first._mat, second._mat, &firstSpecialRows[0], &firstSpecialColumns[0], &secondSpecialRows[0], &secondSpecialColumns[0], characteristic, &sum_mat))
+            CMR_CALL(CMRthreesumCompose(cmr, first._mat, second._mat, &firstSpecialRows[0], &firstSpecialColumns[0], &secondSpecialRows[0], &secondSpecialColumns[0], characteristic, &sum_mat))
         finally:
             sig_off()
 
@@ -1279,7 +1279,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
             sig_on()
             try:
-                CMR_CALL(CMRthreeSumSeymourCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
+                CMR_CALL(CMRdeltasumCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
             finally:
                 sig_off()
 
@@ -3788,8 +3788,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                                           series_parallel_ok=True,
                                           check_graphic_minors_planar=False,
                                           stop_when_irregular=True,
-                                          three_sum_pivot_children=False,
-                                          three_sum_strategy=None,
+                                          decompose_strategy=None,
                                           construct_leaf_graphs=False,
                                           construct_all_graphs=False,
                                           row_keys=None,
@@ -3963,8 +3962,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                               stop_when_nongraphic=False,
                               stop_when_noncographic=False,
                               stop_when_nongraphic_and_noncographic=False,
-                              three_sum_pivot_children=three_sum_pivot_children,
-                              three_sum_strategy=three_sum_strategy,
+                              decompose_strategy=decompose_strategy,
                               construct_leaf_graphs=construct_leaf_graphs,
                               construct_all_graphs=construct_all_graphs)
 
@@ -3991,8 +3989,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                               series_parallel_ok=True,
                               check_graphic_minors_planar=False,
                               stop_when_nonTU=True,
-                              three_sum_pivot_children=False,
-                              three_sum_strategy=None,
+                              decompose_strategy=None,
                               construct_leaf_graphs=False,
                               construct_all_graphs=False,
                               row_keys=None,
@@ -4155,8 +4152,6 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         cdef CMR_SEYMOUR_NODE **pdec = &dec
         cdef CMR_SUBMAT **psubmat = &submat
 
-        if three_sum_pivot_children:
-            raise NotImplementedError
         cdef dict kwds = dict(use_direct_graphicness_test=use_direct_graphicness_test,
                               prefer_graphicness=prefer_graphicness,
                               series_parallel_ok=series_parallel_ok,
@@ -4165,8 +4160,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                               stop_when_nongraphic=False,
                               stop_when_noncographic=False,
                               stop_when_nongraphic_and_noncographic=False,
-                              three_sum_pivot_children=three_sum_pivot_children,
-                              three_sum_strategy=three_sum_strategy,
+                              decompose_strategy=decompose_strategy,
                               construct_leaf_graphs=construct_leaf_graphs,
                               construct_all_graphs=construct_all_graphs)
 
@@ -4246,11 +4240,7 @@ cdef _set_cmr_seymour_parameters(CMR_SEYMOUR_PARAMS *params, dict kwds):
       whether to first test for (co)graphicness (or being (co)network)
       before applying series-parallel reductions.
 
-    - ``three_sum_pivot_children`` -- boolean;
-      whether pivots for 3-sums shall be applied such that the matrix contains
-      both child matrices as submatrices, if possible.
-
-    - ``three_sum_strategy`` -- ``"Mixed_Mixed"`` or ``"Wide_Wide"`` or integer;
+    - ``decompose_strategy`` -- ``"Mixed_Mixed"`` or ``"Wide_Wide"`` or integer;
       whether to perform pivots to change the rank distribution, and how to construct the children.
 
       The value is a bit-wise "or" of three decisions.
@@ -4307,14 +4297,13 @@ cdef _set_cmr_seymour_parameters(CMR_SEYMOUR_PARAMS *params, dict kwds):
     params.preferGraphicness = kwds['prefer_graphicness']
     params.seriesParallel = kwds['series_parallel_ok']
     params.planarityCheck = kwds['check_graphic_minors_planar']
-    params.threeSumPivotChildren = kwds['three_sum_pivot_children']
-    if kwds['three_sum_strategy'] is not None:
-        if kwds['three_sum_strategy'] == 'Mixed_Mixed':
-            params.threeSumStrategy = CMR_SEYMOUR_THREESUM_FLAG_CONCENTRATED_RANK |                                        CMR_SEYMOUR_THREESUM_FLAG_FIRST_MIXED |                                        CMR_SEYMOUR_THREESUM_FLAG_SECOND_MIXED
-        elif kwds['three_sum_strategy'] == 'Wide_Wide':
-            params.threeSumStrategy = CMR_SEYMOUR_THREESUM_FLAG_DISTRIBUTED_RANKS | CMR_SEYMOUR_THREESUM_FLAG_FIRST_WIDE | CMR_SEYMOUR_THREESUM_FLAG_SECOND_WIDE
+    if kwds['decompose_strategy'] is not None:
+        if kwds['decompose_strategy'] == 'Mixed_Mixed':
+            params.decomposeStrategy = CMR_SEYMOUR_DECOMPOSE_FLAG_SEYMOUR
+        elif kwds['decompose_strategy'] == 'Wide_Wide':
+            params.decomposeStrategy = CMR_SEYMOUR_DECOMPOSE_FLAG_TRUEMPER
         else:
-            params.threeSumStrategy = kwds['three_sum_strategy']
+            params.decomposeStrategy = kwds['decompose_strategy']
     params.constructLeafGraphs = kwds['construct_leaf_graphs']
     params.constructAllGraphs = kwds['construct_all_graphs']
 
