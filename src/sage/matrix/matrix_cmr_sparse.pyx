@@ -1300,7 +1300,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         if second_mat.parent().characteristic() != characteristic:
             raise ValueError("The characteristic of two matrices are different")
 
-        if three_sum_strategy not in ["distributed_ranks", "concentrated_rank"]:
+        if three_sum_strategy not in ["distributed_ranks", "concentrated_rank", "y_sum"]:
             raise ValueError("Unknown three sum mode", three_sum_strategy)
 
         if three_sum_strategy == "distributed_ranks":
@@ -1334,6 +1334,42 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             sig_on()
             try:
                 CMR_CALL(CMRdeltasumCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
+            finally:
+                sig_off()
+
+            sum = Matrix_cmr_chr_sparse._from_cmr(sum_mat)
+            return sum
+        elif three_sum_strategy == "y_sum":
+            column1_1 = first_special_rows[0]
+            column1_2 = first_special_rows[1]
+            row1 = first_special_columns
+            column2_1 = second_special_rows[0]
+            column2_2 = second_special_rows[1]
+            row2 = second_special_columns
+            if column1_1 < 0 or column1_1 >= first._mat.numRows:
+                raise ValueError("First marker 1 should be a row index of the first matrix")
+            if column1_2 < 0 or column1_2 >= first._mat.numRows:
+                raise ValueError("First marker 2 should be a row index of the first matrix")
+            if row1 < 0 or row1 >= first._mat.numColumns:
+                raise ValueError("First marker 3 should be a column index of the first matrix")
+            if column2_1 < 0 or column2_1 >= second._mat.numRows:
+                raise ValueError("Second marker 1 should be a row index of the second matrix")
+            if column2_2 < 0 or column2_2 >= second._mat.numRows:
+                raise ValueError("Second marker 2 should be a row index of the second matrix")
+            if row2 < 0 or row2 >= second._mat.numColumns:
+                raise ValueError("Second marker 3 should be a column index of the second matrix")
+            firstSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
+            firstSpecialRows[0] = column1_1
+            firstSpecialRows[1] = column1_2
+            firstSpecialColumns = &row1
+            secondSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
+            secondSpecialRows[0] = column2_1
+            secondSpecialRows[1] = column2_2
+            secondSpecialColumns = &row2
+
+            sig_on()
+            try:
+                CMR_CALL(CMRysumCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
             finally:
                 sig_off()
 
@@ -1782,6 +1818,195 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             else:
                 return result[1]
 
+    def y_sum(first_mat, second_mat,
+                            first_rows_index=[-2, -1],
+                            first_column_index=-1,
+                            second_rows_index=[0, 1],
+                            second_column_index=0,
+                            algorithm="cmr",
+                            verify=False,
+                            sign_verify=False):
+        r"""
+        Return the 3-sum matrix constructed from the given matrices ``first_mat`` and
+        ``second_mat``, assume that ``three_sum_strategy="distributed_ranks"``.
+        The first matrix is
+        `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon\end{bmatrix}`
+        and the second matrix is
+        `M_2=\begin{bmatrix} \varepsilon & 0 & b^T\\ d & d & D\end{bmatrix}`.
+        Then the Seymour/Schrijver 3-sum is the matrix
+        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B\end{bmatrix}`.
+
+        The terminology "3-sum" is used in the context of Seymour's decomposition
+        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+
+        .. SEEALSO:: :meth:`three_sum`, :meth:`is_three_sum`,
+                     :meth:`three_sum_mixed_mixed`
+
+        INPUT:
+
+        - ``first_mat`` -- the first integer matrix `M_1`
+        - ``second_mat`` -- the second integer matrix `M_2`
+        - ``first_row_index`` -- the row index of `c^T` in `M_1`
+        - ``first_columns_index`` -- the column indices of `a` in `M_1`
+        - ``second_row_index`` -- the row index of `b^T` in `M_2`
+        - ``second_columns_index`` -- the column indices of `d`  in `M_2`
+        - ``algorithm`` -- ``"cmr"`` or ``"direct"``
+          If ``algorithm="cmr"``, then use :meth:`_three_sum_cmr`;
+          If ``algorithm="direct"``, then construct three sum directly.
+        - ``verify`` -- boolean (default: ``True``);
+          whether to check the given two matrices and the related indices
+          satisfying the requirements of 3-sum
+          by calling :meth:`is_three_sum_wide_wide`.
+        - ``sign_verify`` -- boolean (default: ``False``);
+          whether to check the sign correctness.
+          See :meth:`is_three_sum_wide_wide`.
+
+        OUTPUT: A :class:`Matrix_cmr_chr_sparse`
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1, 1, 0, 0, 0, 0],
+            ....:                             [0,-1, 0,-1, 1, 1],
+            ....:                             [0, 0, 1, 0,-1,-1],
+            ....:                             [0, 1, 0, 1, 1, 1],
+            ....:                             [1, 0,-1, 1, 0, 1],]); M1
+            [ 1  1  0  0  0  0]
+            [ 0 -1  0 -1  1  1]
+            [ 0  0  1  0 -1 -1]
+            [ 0  1  0  1  1  1]
+            [ 1  0 -1  1  0  1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[ 1, 0, 1, 1, 1,-1],
+            ....:                             [-1,-1, 1, 1, 0, 0],
+            ....:                             [ 0, 0, 0,-1, 0, 1],
+            ....:                             [ 0, 0, 1, 0,-1, 0],
+            ....:                             [ 1, 1, 0, 0, 0, 1]]); M2
+            [ 1  0  1  1  1 -1]
+            [-1 -1  1  1  0  0]
+            [ 0  0  0 -1  0  1]
+            [ 0  0  1  0 -1  0]
+            [ 1  1  0  0  0  1]
+            sage: Matrix_cmr_chr_sparse.three_sum_wide_wide(M1, M2)
+            [ 1  1  0  0  0  0  0  0]
+            [ 0 -1  0 -1  1  1  1 -1]
+            [ 0  0  1  0 -1 -1 -1  1]
+            [ 0  1  0  1  1  1  1 -1]
+            [-1  0  1 -1  1  1  0  0]
+            [ 0  0  0  0  0 -1  0  1]
+            [ 0  0  0  0  1  0 -1  0]
+            [ 1  0 -1  1  0  0  0  1]
+
+        Three sum can be computed for any row and column indices:
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1, 1, 0, 0, 0, 0],
+            ....:                             [1, 0, 1,-1, 1, 0],
+            ....:                             [0,-1, 1, 0,-1, 1],
+            ....:                             [0, 0,-1, 1, 0,-1],
+            ....:                             [0, 1, 1, 0, 1, 1]]); M1
+            [ 1  1  0  0  0  0]
+            [ 1  0  1 -1  1  0]
+            [ 0 -1  1  0 -1  1]
+            [ 0  0 -1  1  0 -1]
+            [ 0  1  1  0  1  1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1,-1, 1, 0, 0,-1],
+            ....:                             [1, 1, 1, 1,-1, 0],
+            ....:                             [0, 0,-1, 0, 1, 0],
+            ....:                             [1, 0, 0,-1, 0, 0],
+            ....:                             [0, 1, 0, 0, 1, 1]]); M2
+            [ 1 -1  1  0  0 -1]
+            [ 1  1  1  1 -1  0]
+            [ 0  0 -1  0  1  0]
+            [ 1  0  0 -1  0  0]
+            [ 0  1  0  0  1  1]
+            sage: M = M1.three_sum_wide_wide(M2, 1, [-1, 2], 1, [1, -1]); M
+            [ 1  1  0  0  0  0  0  0]
+            [ 0 -1  0 -1  1  1  1 -1]
+            [ 0  0  1  0 -1 -1 -1  1]
+            [ 0  1  0  1  1  1  1 -1]
+            [-1  0  1 -1  1  1  0  0]
+            [ 0  0  0  0  0 -1  0  1]
+            [ 0  0  0  0  1  0 -1  0]
+            [ 1  0 -1  1  0  0  0  1]
+            sage: N = M1.three_sum_wide_wide(M2, 1, [-1, 2], 1, [1, -1], algorithm="direct")
+            sage: M == N
+            True
+
+            sage: M1.three_sum_wide_wide(M2, 1, [2, 3], 1, [1, -1])
+            Traceback (most recent call last):
+            ...
+            RuntimeError: Invalid matrix structure
+            sage: M1.three_sum_wide_wide(M2, 1, [2, 3], 1, [1, -1], algorithm="direct", verify=False)
+            [ 1  1  0  0  0  0  0  0]
+            [ 0 -1 -1  1  1  1  1 -1]
+            [ 0  0  0 -1 -1 -1 -1  1]
+            [ 0  1  1  1  1  1  1 -1]
+            [-1  0 -1  0  1  1  0  0]
+            [ 0  0  0  0  0 -1  0  1]
+            [ 0  0  0  0  1  0 -1  0]
+            [ 1  0  1  0  0  0  0  1]
+        """
+        m1 = first_mat.nrows()
+        n1 = first_mat.ncols()
+        m2 = second_mat.nrows()
+        n2 = second_mat.ncols()
+        j1 = first_rows_index[0]
+        j2 = first_rows_index[1]
+        j1 = j1 if j1 >= 0 else m1 + j1
+        j2 = j2 if j2 >= 0 else m1 + j2
+        i1 = first_column_index
+        i1 = i1 if i1 >= 0 else n1 + i1
+        k1 = second_rows_index[0]
+        k2 = second_rows_index[1]
+        k1 = k1 if k1 >= 0 else m2 + k1
+        k2 = k2 if k2 >= 0 else m2 + k2
+        i2 = second_column_index
+        i2 = i2 if i2 >= 0 else n2 + i2
+
+        if algorithm == "cmr":
+            M = Matrix_cmr_chr_sparse._three_sum_cmr(first_mat, second_mat,
+                                                     [j1, j2], i1,
+                                                     [k1, k2], i2,
+                                                     three_sum_strategy="y_sum")
+        if algorithm == "direct":
+            column_index_1 = [i for i in range(n1) if i != i1]
+            row_index_1 = [j for j in range(m1) if j != j1 and j != j2]
+            column_index_2 = [i for i in range(n2) if i != i2]
+            row_index_2 = [j for j in range(m2) if j != k1 and j != k2]
+            c = first_mat.matrix_from_rows_and_columns([j1], column_index_1)
+            b = second_mat.matrix_from_rows_and_columns([k1], column_index_2)
+
+            a = first_mat.matrix_from_rows_and_columns(row_index_1, [i1])
+            d = second_mat.matrix_from_rows_and_columns(row_index_2, [i2])
+
+            A = first_mat.matrix_from_rows_and_columns(row_index_1, column_index_1)
+            D = second_mat.matrix_from_rows_and_columns(row_index_2, column_index_2)
+
+            first_subrows = A.rows()
+            second_subrows = D.rows()
+            lower_left_rows = d.tensor_product(c).rows()
+            upper_right_rows = a.tensor_product(b).rows()
+
+            row_list = []
+            for i in range(m1 - 2):
+                r = list(first_subrows[i])
+                u = list(upper_right_rows[i])
+                r.extend(u)
+                row_list.append(r)
+            for i in range(m2 - 2):
+                r = list(lower_left_rows[i])
+                u = list(second_subrows[i])
+                r.extend(u)
+                row_list.append(r)
+            M = Matrix_cmr_chr_sparse._from_data(row_list, immutable=False)
+
+        if not verify:
+            return M
+        raise NotImplementedError
+
     def three_sum(first_mat, second_mat,
                   first_special_rows=None,
                   first_special_columns=None,
@@ -1996,6 +2221,21 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                 kwargs["second_columns_index"] = second_special_columns
 
             return first_mat.three_sum_mixed_mixed(second_mat, **kwargs)
+
+        if three_sum_strategy in ["y_sum"]:
+            kwargs = {
+                "algorithm": algorithm
+            }
+            if first_special_rows is not None:
+                kwargs["first_rows_index"] = first_special_rows
+            if first_special_columns is not None:
+                kwargs["first_column_index"] = first_special_columns
+            if second_special_rows is not None:
+                kwargs["second_rows_index"] = second_special_rows
+            if second_special_columns is not None:
+                kwargs["second_column_index"] = second_special_columns
+
+            return first_mat.y_sum(second_mat, **kwargs)
 
         raise ValueError("Unknown three sum mode", three_sum_strategy)
 
@@ -3871,7 +4111,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                                           series_parallel_ok=True,
                                           check_graphic_minors_planar=False,
                                           stop_when_irregular=True,
-                                          decompose_strategy=None,
+                                          decompose_strategy='delta_three',
                                           construct_leaf_graphs=False,
                                           construct_all_graphs=False,
                                           row_keys=None,
@@ -4072,7 +4312,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                               series_parallel_ok=True,
                               check_graphic_minors_planar=False,
                               stop_when_nonTU=True,
-                              decompose_strategy=None,
+                              decompose_strategy='delta_three',
                               construct_leaf_graphs=False,
                               construct_all_graphs=False,
                               row_keys=None,
@@ -4323,7 +4563,7 @@ cdef _set_cmr_seymour_parameters(CMR_SEYMOUR_PARAMS *params, dict kwds):
       whether to first test for (co)graphicness (or being (co)network)
       before applying series-parallel reductions.
 
-    - ``decompose_strategy`` -- ``"Mixed_Mixed"`` or ``"Wide_Wide"`` or integer;
+    - ``decompose_strategy`` -- among ``delta_pivot``, ``y_pivot``, ``three_pivot``, ``delta_three``, ``y_three``} (default: ``delta_three``);
       whether to perform pivots to change the rank distribution, and how to construct the children.
 
       The value is a bit-wise "or" of three decisions.
@@ -4380,11 +4620,15 @@ cdef _set_cmr_seymour_parameters(CMR_SEYMOUR_PARAMS *params, dict kwds):
     params.preferGraphicness = kwds['prefer_graphicness']
     params.seriesParallel = kwds['series_parallel_ok']
     params.planarityCheck = kwds['check_graphic_minors_planar']
-    if kwds['decompose_strategy'] is not None:
-        if kwds['decompose_strategy'] == 'Mixed_Mixed':
+    if kwds['decompose_strategy'] is not 'delta_three':
+        if kwds['decompose_strategy'] == 'delta_pivot':
             params.decomposeStrategy = CMR_SEYMOUR_DECOMPOSE_FLAG_SEYMOUR
-        elif kwds['decompose_strategy'] == 'Wide_Wide':
+        elif kwds['decompose_strategy'] == 'three_pivot':
             params.decomposeStrategy = CMR_SEYMOUR_DECOMPOSE_FLAG_TRUEMPER
+        elif kwds['decompose_strategy'] == 'y_pivot':
+            params.decomposeStrategy = CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_YSUM | CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_PIVOT
+        elif kwds['decompose_strategy'] == 'y_three':
+            params.decomposeStrategy = CMR_SEYMOUR_DECOMPOSE_FLAG_DISTRIBUTED_YSUM | CMR_SEYMOUR_DECOMPOSE_FLAG_CONCENTRATED_THREESUM
         else:
             params.decomposeStrategy = kwds['decompose_strategy']
     params.constructLeafGraphs = kwds['construct_leaf_graphs']
