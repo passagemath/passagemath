@@ -842,25 +842,57 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                   first_special_rows, first_special_columns, second_special_rows, second_special_columns):
         r"""
         Return the 3-sum matrix constructed from the two matrices
-        ``first_mat`` and ``second_index`` via
-        ``first_index1``, ``first_index2``, ``second_index1``, ``second_index2``.
+        ``first_mat`` and ``second_mat`` via connecting rows
+        ``first_special_rows`` and ``second_special_rows`` and columns ``first_special_columns`` and ``second_special_columns``.
 
-        Suppose that ``three_sum_strategy="concentrated_rank"``.
-        If ``first_index1`` and ``first_index2`` both index row vectors
-        `a_1^T, a_2^T` of ``first_mat``,
-        then ``second_index1`` and ``second_index2`` must index column vectors
-        `b_1, b_2` of ``second_mat``. In this case,
-        the first matrix is
-        `M_1=\begin{bmatrix} A \\ a_1^T \\ a_2^T \end{bmatrix}`
-        and the second matrix is
-        `M_2=\begin{bmatrix} b_1 & b_2 & B\end{bmatrix}`.
-        Then the Truemper 3-sum is the matrix
-        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & 0 \\ C & B\end{bmatrix}`,
-        where `\begin{bmatrix}a_1^T \\ a_2^T\end{bmatrix}=\begin{bmatrix} C_1 & \bar{C}\end{bmatrix}`,
-        `\begin{bmatrix}b_1 & b_2\end{bmatrix}=\begin{bmatrix} \bar{C}\\ C_2\end{bmatrix}`,
-        `C_12 = C_2 \bar{C}^{-1} C_1`,
-        `C=\begin{bmatrix} C_1 & \bar{C} \\ C_{12} & C_2\end{bmatrix}`, i.e.,
-        `C=\begin{bmatrix}b_1 & b_2\end{bmatrix}\bar{C}^{-1}\begin{bmatrix}a_1^T\\ a_2^T\end{bmatrix}`
+        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``, let `A` be the matrix
+        `M_1` without the rows ``first_special_rows[0]`` and ``first_special_rows[1]`` and column ``first_special_columns[2]``.
+        After permuting these to be last, `M_1` must be of the form
+        `
+            M_1 = \begin{bmatrix}
+            A & \mathbb{O} \\
+            C_{i,\star} & \alpha \\
+            C_{j,\star} & \beta
+            \end{bmatrix},
+        `
+        where `\alpha,\beta \in \{-1,+1 \}` (otherwise, ``RuntimeError("Invalid matrix structure")`` is returned). Let `D` be the
+        matrix `M_2` without the row ``second_special_rows[0]`` and columns ``second_special_columns[0]`` and
+        ``second_special_columns[1]``. After reordering these to be first, `M_2` must be of the form
+        `
+            M_2 = \begin{bmatrix}
+            \gamma & \delta & \mathbb{O}^{\textsf{T}} \\
+            C_{\star,k} & C_{\star,\ell} & D
+            \end{bmatrix},
+        `
+        where `\gamma,\delta \in \{ -1,+1 \}` (otherwise, ``RuntimeError("Invalid matrix structure")`` is returned) and such that the matrix
+        `
+            N = \begin{bmatrix}
+            \gamma & \delta & 0 \\
+            C_{i,k} & C_{i,\ell} & \alpha \\
+            C_{j,k} & C_{j,\ell} & \beta
+            \end{bmatrix}
+        `
+        is totally unimodular (otherwise, ``RuntimeError("Inconsistent pieces of input")`` is returned). The columns ``first_special_columns[0]`` and
+        ``first_special_columns[1]`` indicate the columns of `M_1` that shall correspond to `C_{\star,k}` and
+        `C_{\star,\ell}`, respectively. Similarly, the rows ``second_special_rows[1]`` and ``second_special_rows[2]``
+        indicate the rows of `M_2` that shall correspond to `C_{i,\star}` and `C_{j,\star}`, respectively.
+
+        .. note::
+            The 2-by-2 submatrix of `M_1` indexed by rows ``first_special_rows[0]`` and ``first_special_rows[1]`` and
+            columns ``first_special_columns[0]`` and ``first_special_columns[1]`` must be identical to the submatrix of
+            `M_2` indexed by rows ``second_special_rows[1]`` and ``second_special_rows[2]`` and columns
+            ``secondSpecialColumns[0]`` and ``secondSpecialColumns[1]``, which is the matrix `C_{\{i,j\},\{k,\ell\}}`.
+            ``second_special_columns[0]`` and ``second_special_columns[1]``, which is the matrix `C_{\{i,j\},\{k,\ell\}}`. Otherwise, ``RuntimeError("Invalid matrix structure")`` is returned.
+
+        The 3-sum of `M_1` and `M_2` (at these rows/columns) is the matrix
+        \[
+            M = \begin{bmatrix}
+            A & \mathbb{O} \\
+            C & D
+            \end{bmatrix},
+        \]
+        where `C` is the unique rank-2 matrix having linearly independent rows `C_{i,\star}` and
+        `C_{j,\star}` and linearly independent columns `C_{\star,k}` and `C_{\star,\ell}`.
 
         The terminology "3-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
@@ -871,13 +903,16 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         INPUT:
 
         - ``first_mat`` -- the first integer matrix
+
         - ``second_mat`` -- the second integer matrix
-        - ``first_index1`` -- the column/row index of the first integer matrix
-        - ``first_index2`` -- the column/row index of the first integer matrix
-        - ``second_index1`` -- the row/column index of the second integer matrix
-        - ``second_index2`` -- the row/column index of the second integer matrix
-        - ``three_sum_strategy`` -- either ``"distributed_ranks"`` (default)
-          or ``"concentrated_rank"``.
+
+        - ``first_special_rows`` -- the indices of two special rows in the first matrix
+
+        - ``first_special_columns`` -- the indices of three special columns in the first matrix, where the last column is an extra column
+
+        - ``second_special_rows`` -- the indices of three special rows in the second matrix, where the first row is an extra row
+
+        - ``second_special_columns`` -- the indices of two special columns in the second matrix
 
         OUTPUT: A :class:`Matrix_cmr_chr_sparse`
 
@@ -896,13 +931,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1  0  1 -1  1  1]
             [ 0 -1  1  0 -1  1]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[ 1, 1, 0, 0, 0],
+            ....:                            [[ 1,-1, 0, 0, 0],
             ....:                             [ 1, 0, 1,-1, 0],
             ....:                             [ 1,-1, 1, 1, 1],
             ....:                             [-1, 1, 0, 0, 0],
             ....:                             [ 0, 0, 1, 0,-1],
             ....:                             [ 0, 1, 0, 1, 0]]); M2
-            [ 1  1  0  0  0]
+            [ 1 -1  0  0  0]
             [ 1  0  1 -1  0]
             [ 1 -1  1  1  1]
             [-1  1  0  0  0]
@@ -930,13 +965,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0 -1  1  0  0]
             [ 0  1  1  0  1  0]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[0, 0, 1, 0, 1],
+            ....:                            [[0, 0, 1, 0,-1],
             ....:                             [1,-1, 1, 0, 0],
             ....:                             [1, 1, 1, 1,-1],
             ....:                             [0, 0,-1, 0, 1],
             ....:                             [1, 0, 0,-1, 0],
             ....:                             [0, 1, 0, 0, 1]]); M2
-            [ 0  0  1  0  1]
+            [ 0  0  1  0 -1]
             [ 1 -1  1  0  0]
             [ 1  1  1  1 -1]
             [ 0  0 -1  0  1]
@@ -957,6 +992,25 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             Traceback (most recent call last):
             ...
             RuntimeError: Invalid matrix structure
+
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
+            ....:                            [[0, 0, 1, 0, 1],
+            ....:                             [1,-1, 1, 0, 0],
+            ....:                             [1, 1, 1, 1,-1],
+            ....:                             [0, 0,-1, 0, 1],
+            ....:                             [1, 0, 0,-1, 0],
+            ....:                             [0, 1, 0, 0, 1]]); M2
+            [ 0  0  1  0  1]
+            [ 1 -1  1  0  0]
+            [ 1  1  1  1 -1]
+            [ 0  0 -1  0  1]
+            [ 1  0  0 -1  0]
+            [ 0  1  0  0  1]
+            sage: M = M1._three_sum_mixed_mixed_cmr(M2, [1, 2], [1,2,5],
+            ....:                  [0,1,2], [4, 2])
+            Traceback (most recent call last):
+            ...
+            RuntimeError: Inconsistent pieces of input
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
             ....:                            [[1, 1, 0, 0, 0, 0],
@@ -1200,29 +1254,29 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1  0  1  0  1  0]
             [ 0 -1  0 -1  0  1]
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 5, sparse=True),
-            ....:                            [[1, 0, 1, 1, 0],
-            ....:                             [0, 1, 1, 1, 0],
+            ....:                            [[1, 0,-1, 1, 0],
+            ....:                             [0, 1,-1, 1, 0],
             ....:                             [1, 0, 1, 0, 1],
             ....:                             [0,-1, 1,-1, 1]]); M1
-            [ 1  0  1  1  0]
-            [ 0  1  1  1  0]
+            [ 1  0 -1  1  0]
+            [ 0  1 -1  1  0]
             [ 1  0  1  0  1]
             [ 0 -1  1 -1  1]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 4, sparse=True),
-            ....:                            [[1, 1, 0, 0],
+            ....:                            [[-1, 1, 0, 0],
             ....:                             [1, 0, 1, 1],
             ....:                             [1,-1, 1, 1],
             ....:                             [1, 0, 1, 0],
             ....:                             [0,-1, 0, 1]]); M2
-            [ 1  1  0  0]
+            [-1  1  0  0]
             [ 1  0  1  1]
             [ 1 -1  1  1]
             [ 1  0  1  0]
             [ 0 -1  0  1]
             sage: M1._three_sum_cmr(M2, [2,3], [2,3,4], [0,1,2], [0,1],
             ....:                   three_sum_strategy="concentrated_rank")
-            [ 1  0  1  1  0  0]
-            [ 0  1  1  1  0  0]
+            [ 1  0 -1  1  0  0]
+            [ 0  1 -1  1  0  0]
             [ 1  0  1  0  1  1]
             [ 0 -1  1 -1  1  1]
             [ 1  0  1  0  1  0]
@@ -1607,13 +1661,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0 -1  1  0  0]
             [ 0  1  1  0  1  0]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[0, 0, 1, 0, 1],
+            ....:                            [[0, 0, 1, 0,-1],
             ....:                             [1,-1, 1, 0, 0],
             ....:                             [1, 1, 1, 1,-1],
             ....:                             [0, 0,-1, 0, 1],
             ....:                             [1, 0, 0,-1, 0],
             ....:                             [0, 1, 0, 0, 1]]); M2
-            [ 0  0  1  0  1]
+            [ 0  0  1  0 -1]
             [ 1 -1  1  0  0]
             [ 1  1  1  1 -1]
             [ 0  0 -1  0  1]
@@ -1814,13 +1868,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1  0  1 -1  1  1]
             [ 0 -1  1  0 -1  1]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[ 1, 1, 0, 0, 0],
+            ....:                            [[ 1,-1, 0, 0, 0],
             ....:                             [ 1, 0, 1,-1, 0],
             ....:                             [ 1,-1, 1, 1, 1],
             ....:                             [-1, 1, 0, 0, 0],
             ....:                             [ 0, 0, 1, 0,-1],
             ....:                             [ 0, 1, 0, 1, 0]]); M2
-            [ 1  1  0  0  0]
+            [ 1 -1  0  0  0]
             [ 1  0  1 -1  0]
             [ 1 -1  1  1  1]
             [-1  1  0  0  0]
@@ -1853,13 +1907,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0 -1  1  0  0]
             [ 0  1  1  0  1  0]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[0, 0, 1, 0, 1],
+            ....:                            [[0, 0, 1, 0,-1],
             ....:                             [1,-1, 1, 0, 0],
             ....:                             [1, 1, 1, 1,-1],
             ....:                             [0, 0,-1, 0, 1],
             ....:                             [1, 0, 0,-1, 0],
             ....:                             [0, 1, 0, 0, 1]]); M2
-            [ 0  0  1  0  1]
+            [ 0  0  1  0 -1]
             [ 1 -1  1  0  0]
             [ 1  1  1  1 -1]
             [ 0  0 -1  0  1]
@@ -2270,13 +2324,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1  0  1 -1  1  1]
             [ 0 -1  1  0 -1  1]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[ 1, 1, 0, 0, 0],
+            ....:                            [[ 1,-1, 0, 0, 0],
             ....:                             [ 1, 0, 1,-1, 0],
             ....:                             [ 1,-1, 1, 1, 1],
             ....:                             [-1, 1, 0, 0, 0],
             ....:                             [ 0, 0, 1, 0,-1],
             ....:                             [ 0, 1, 0, 1, 0]]); M2
-            [ 1  1  0  0  0]
+            [ 1 -1  0  0  0]
             [ 1  0  1 -1  0]
             [ 1 -1  1  1  1]
             [-1  1  0  0  0]
@@ -2325,6 +2379,37 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0 -1  0 -1  0  1]
             sage: Matrix_cmr_chr_sparse.is_three_sum_mixed_mixed(M, M1, M2)
             True
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
+            ....:                            [[ 1, 0,-1, 0],
+            ....:                             [ 1, 1, 0, 0],
+            ....:                             [ 0, 1, 0, 1],
+            ....:                             [ 1, 1,-1, 1]])
+            sage: M1.is_totally_unimodular()
+            True
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
+            ....:                            [[ 1,-1, 0],
+            ....:                             [ 1, 0, 1],
+            ....:                             [ 1,-1, 1]])
+            sage: M2.is_totally_unimodular()
+            True
+            sage: M = Matrix_cmr_chr_sparse.three_sum_mixed_mixed(M1, M2); M
+            [ 1  0 -1  0]
+            [ 1  1  0  0]
+            [ 0  1  0  1]
+            [ 1  1 -1  1]
+            sage: M.is_totally_unimodular()
+            True
+            sage: Matrix_cmr_chr_sparse.is_three_sum_mixed_mixed(M, M1, M2)
+            True
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
+            ....:                            [[ 1, 1, 0],
+            ....:                             [ 1, 0, 1],
+            ....:                             [ 1,-1, 1]])
+            sage: M2.is_totally_unimodular()
+            False
+            sage: Matrix_cmr_chr_sparse.is_three_sum_mixed_mixed(M, M1, M2)
+            False
         """
         if not isinstance(first_rows_index, (list, tuple)) or len(first_rows_index) != 2:
             raise ValueError('The index of two columns needs to be given!')
@@ -2379,30 +2464,30 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         intersection1_mat = first_mat.matrix_from_rows_and_columns([j1, j2], [jk1, jk2])
         intersection2_mat = second_mat.matrix_from_rows_and_columns([j1k, j2k], [k1, k2])
         if intersection1_mat != intersection2_mat:
-            return False, "intersection"
+            return False, "the intersection matrices in the two matrices are inconsistent"
 
         # Check whether the result comes from the three sum
         column_index_1 = [j for j in range(n1) if j != i1]
         for i in range(m1 - 2):
             for j in range(n1 - 1):
                 if first_mat[row_index_1[i], column_index_1[j]] != three_sum_mat[i, j]:
-                    return False, "A"
+                    return False, "A in the first matrix is inconsistent with the three sum"
         row_index_2 = [i for i in range(m2) if i != i2]
         for i in range(m2 - 1):
             for j in range(n2 - 2):
                 if second_mat[row_index_2[i], column_index_2[j]] != three_sum_mat[m1 - 2 + i, n1 - 1 + j]:
-                    return False, "B"
+                    return False, "B in the second matrix is inconsistent with the three sum"
         for i in range(m1 - 2):
             for j in range(n2 - 2):
                 if three_sum_mat[i, n1 - 1 + j] != 0:
-                    return False, "0"
+                    return False, "the upper-right corner in the three sum is not 0"
         a_mat = first_mat.matrix_from_rows_and_columns([j1, j2], column_index_1)
         b_mat = second_mat.matrix_from_rows_and_columns(row_index_2, [k1, k2])
         rank2_block = b_mat * intersection1_mat.inverse() * a_mat
         for i in range(m2 - 1):
             for j in range(n1 - 1):
                 if rank2_block[i, j] != three_sum_mat[m1 - 2 + i, j]:
-                    return False, "block"
+                    return False, "C in the three sum is inconsistent with the two matrices"
 
         if sign_verify is not True:
             return True
@@ -2573,13 +2658,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1  0  1 -1  1  1]
             [ 0 -1  1  0 -1  1]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[ 1, 1, 0, 0, 0],
+            ....:                            [[ 1,-1, 0, 0, 0],
             ....:                             [ 1, 0, 1,-1, 0],
             ....:                             [ 1,-1, 1, 1, 1],
             ....:                             [-1, 1, 0, 0, 0],
             ....:                             [ 0, 0, 1, 0,-1],
             ....:                             [ 0, 1, 0, 1, 0]]); M2
-            [ 1  1  0  0  0]
+            [ 1 -1  0  0  0]
             [ 1  0  1 -1  0]
             [ 1 -1  1  1  1]
             [-1  1  0  0  0]
@@ -2595,8 +2680,6 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  0  0  1  0 -1]
             [ 1  1  0 -1  2  0  1  0]
             sage: M.is_three_sum(M1, M2, first_special_columns=[2,1,-1], three_sum_strategy="Mixed_Mixed", sign_verify=False)
-            True
-            sage: M.is_three_sum(M1, M2, first_special_columns=[2,1,-1], three_sum_strategy="Mixed_Mixed")
             True
 
             sage: M.is_three_sum(M1, M2, three_sum_strategy="Wide_Mixed")
