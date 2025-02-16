@@ -1818,6 +1818,247 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             else:
                 return result[1]
 
+    def three_sum_decomposition(self, first_rows_index, first_columns_index, special_rows=None, special_columns=None):
+        """
+        Decompose the matrix into two children matrices using the 3-sum decomposition with specified sepa.
+
+        INPUT:
+
+        - ``first_rows_index`` -- list of row indices for the first matrix
+        - ``first_columns_index`` -- list of column indices for the first matrix
+        - ``special_rows`` -- list of two special row indices (default: last two rows)
+        - ``special_columns`` -- list of two special column indices (default: last two columns)
+
+        OUTPUT: A tuple of two :class:`Matrix_cmr_chr_sparse`
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[1, 0, 1, 1, 0, 0],
+            ....:                             [0, 1, 1, 1, 0, 0],
+            ....:                             [1, 0, 1, 0, 1, 1],
+            ....:                             [0,-1, 0,-1, 1, 1],
+            ....:                             [1, 0, 1, 0, 1, 0],
+            ....:                             [0,-1, 0,-1, 0, 1]]); M
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3], [2, 3], [2, 3]); M1
+            [ 1  0  1  1  0]
+            [ 0  1  1  1  0]
+            [ 1  0  1  0  1]
+            [ 0 -1  0 -1  1]
+            sage: M2
+            [ 1  1  0  0]
+            [ 1  0  1  1]
+            [ 0 -1  1  1]
+            [ 1  0  1  0]
+            [ 0 -1  0  1]
+
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[-1,  0, -1,  1, 0, 0],
+            ....:                             [ 0, -1,  1, -1, 0, 0],
+            ....:                             [-1,  0, -1,  0, 1, 1],
+            ....:                             [ 0, -1,  0, -1, 1, 1],
+            ....:                             [-1,  0, -1,  0, 1, 0],
+            ....:                             [ 0, -1,  0, -1, 0, 1]]); M
+            [-1  0 -1  1  0  0]
+            [ 0 -1  1 -1  0  0]
+            [-1  0 -1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [-1  0 -1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3], [2, 3], [2, 3]); M1
+            [-1  0 -1  1  0]
+            [ 0 -1  1 -1  0]
+            [-1  0 -1  0  1]
+            [ 0 -1  0 -1  1]
+            sage: M2
+            [-1  1  0  0]
+            [-1  0  1  1]
+            [ 0 -1  1  1]
+            [-1  0  1  0]
+            [ 0 -1  0  1]
+
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[ 1,  0,  1,  1,  0,  0],
+            ....:                             [ 0,  1,  1,  1,  0,  0],
+            ....:                             [ 1,  0,  1,  0,  1, -1],
+            ....:                             [ 0,  1,  0,  1, -1,  1],
+            ....:                             [ 1,  0,  1,  0,  1,  0],
+            ....:                             [ 0,  1,  0,  1,  0,  1]]); M
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1 -1]
+            [ 0  1  0  1 -1  1]
+            [ 1  0  1  0  1  0]
+            [ 0  1  0  1  0  1]
+            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3], [2, 3], [2, 3]); M1
+            [ 1  0  1  1  0]
+            [ 0  1  1  1  0]
+            [ 1  0  1  0  1]
+            [ 0  1  0  1 -1]
+            sage: M2
+            [ 1  1  0  0]
+            [ 1  0  1 -1]
+            [ 0  1 -1  1]
+            [ 1  0  1  0]
+            [ 0  1  0  1]
+
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[ 0,  1, -1,  0,  0,  0],
+            ....:                             [ 0,  0,  1,  1,  0,  0],
+            ....:                             [ 1,  0,  0,  1,  0,  0],
+            ....:                             [ 0,  0,  0,  0,  1,  1],
+            ....:                             [ 1, -1,  0,  0,  1,  0],
+            ....:                             [ 0, -1,  0,  0,  0,  1]]); M
+            [ 0  1 -1  0  0  0]
+            [ 0  0  1  1  0  0]
+            [ 1  0  0  1  0  0]
+            [ 0  0  0  0  1  1]
+            [ 1 -1  0  0  1  0]
+            [ 0 -1  0  0  0  1]
+            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 4, 5], [0, 1, 2, 3], [4, 5], [0, 1]); M1
+            [ 0  1 -1  0  0]
+            [ 0  0  1  1  0]
+            [ 1  0  0  1  0]
+            [ 1 -1  0  0  1]
+            [ 0 -1  0  0  1]
+            sage: M2
+            [-1  1  0  0]
+            [ 0  0  1  1]
+            [ 1 -1  1  0]
+            [ 0 -1  0  1]
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
+            ....:                            [[ 1, 0,-1, 0],
+            ....:                             [ 1, 1, 0, 0],
+            ....:                             [ 0, 1, 0, 1],
+            ....:                             [ 1, 1,-1, 1]])
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
+            ....:                            [[ 1,-1, 0],
+            ....:                             [ 1, 0, 1],
+            ....:                             [ 1,-1, 1]])
+            sage: M = Matrix_cmr_chr_sparse.three_sum_mixed_mixed(M1, M2); M
+            [ 1  0 -1  0]
+            [ 1  1  0  0]
+            [ 0  1  0  1]
+            [ 1  1 -1  1]
+            sage: M.three_sum_decomposition(first_rows_index=[0,1,2,3], first_columns_index=[0,1,2], special_columns=[1,2])
+            (
+            [ 1  0 -1  0]
+            [ 1  1  0  0]  [1 1 0]
+            [ 0  1  0  1]  [0 1 1]
+            [ 1  1 -1  1], [1 1 1]
+            )
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1, 1, 0, 0, 0, 0],
+            ....:                             [0, 0,-1, 1, 0, 0],
+            ....:                             [0, 1, 1, 0, 1, 0],
+            ....:                             [1, 0, 1,-1, 1, 1],
+            ....:                             [0,-1, 1, 0,-1, 1]]); M1
+            [ 1  1  0  0  0  0]
+            [ 0  0 -1  1  0  0]
+            [ 0  1  1  0  1  0]
+            [ 1  0  1 -1  1  1]
+            [ 0 -1  1  0 -1  1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
+            ....:                            [[ 1,-1, 0, 0, 0],
+            ....:                             [ 1, 0, 1,-1, 0],
+            ....:                             [ 1,-1, 1, 1, 1],
+            ....:                             [-1, 1, 0, 0, 0],
+            ....:                             [ 0, 0, 1, 0,-1],
+            ....:                             [ 0, 1, 0, 1, 0]]); M2
+            [ 1 -1  0  0  0]
+            [ 1  0  1 -1  0]
+            [ 1 -1  1  1  1]
+            [-1  1  0  0  0]
+            [ 0  0  1  0 -1]
+            [ 0  1  0  1  0]
+            sage: M = Matrix_cmr_chr_sparse.three_sum_mixed_mixed(M1, M2, first_intersection_columns=[2,1]); M
+            [ 1  1  0  0  0  0  0  0]
+            [ 0  0 -1  1  0  0  0  0]
+            [ 0  1  1  0  1  0  0  0]
+            [ 1  0  1 -1  1  1 -1  0]
+            [ 0 -1  1  0 -1  1  1  1]
+            [ 0  1 -1  0  1  0  0  0]
+            [ 0  0  0  0  0  1  0 -1]
+            [ 1  1  0 -1  2  0  1  0]
+            sage: M.is_three_sum_mixed_mixed(M1, M2, first_intersection_columns=[2,1], sign_verify=False)
+            True
+            sage: M.is_three_sum_mixed_mixed(M1, M2, first_intersection_columns=[2,1])
+            True
+            sage: C1, C2 = M.three_sum_decomposition(first_rows_index=[0,1,2,3,4], first_columns_index=[0,1,2,3,4], special_columns=[2,1])
+            sage: C1 == M1
+            True
+            sage: C2
+            [ 1 -1  0  0  0]
+            [ 1  0  1 -1  0]
+            [ 1 -1  1  1  1]
+            [-1  1  0  0  0]
+            [ 0  0  1  0 -1]
+            [ 0  1  0  1  0]
+        """
+        cdef CMR_CHRMAT *matrix = self._mat
+        cdef CMR_CHRMAT *transpose = NULL
+        cdef CMR_SEPA *sepa = NULL
+        cdef size_t specialRows[2]
+        cdef size_t specialColumns[2]
+        cdef char gamma, beta
+        cdef CMR_CHRMAT *first = NULL
+        cdef CMR_CHRMAT *second = NULL
+
+        if special_rows is None:
+            special_rows = [first_rows_index[-2], first_rows_index[-1]]
+        if special_columns is None:
+            special_columns = [first_columns_index[-2], first_columns_index[-1]]
+
+        sig_on()
+        try:
+            CMR_CALL(CMRchrmatTranspose(cmr, matrix, &transpose))
+            CMR_CALL(CMRsepaCreate(cmr, matrix.numRows, matrix.numColumns, &sepa))
+            sepa.type = CMR_SEPA_TYPE_THREE_CONCENTRATED_RANK
+
+            for i in range(matrix.numRows):
+                if i in first_rows_index and i not in special_rows:
+                    sepa.rowsFlags[i] = CMR_SEPA_FIRST
+                elif i == special_rows[0]:
+                    sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK1
+                elif i == special_rows[1]:
+                    sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK2
+                else:
+                    sepa.rowsFlags[i] = CMR_SEPA_SECOND
+
+            for j in range(matrix.numColumns):
+                if j in first_columns_index and j not in special_columns:
+                    sepa.columnsFlags[j] = CMR_SEPA_FIRST
+                elif j == special_columns[0]:
+                    sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK1
+                elif j == special_columns[1]:
+                    sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK2
+                else:
+                    sepa.columnsFlags[j] = CMR_SEPA_SECOND
+
+            CMR_CALL(CMRthreesumDecomposeConnecting(cmr, matrix, transpose, sepa, specialRows, specialColumns, &gamma, &beta))
+            CMR_CALL(CMRthreesumDecomposeFirst(cmr, matrix, sepa, specialRows, specialColumns, beta, &first, NULL, NULL, NULL, NULL, NULL, NULL))
+            CMR_CALL(CMRthreesumDecomposeSecond(cmr, matrix, sepa, specialRows, specialColumns, gamma, &second, NULL, NULL, NULL, NULL, NULL, NULL))
+
+            first_matrix = Matrix_cmr_chr_sparse._from_cmr(first)
+            second_matrix = Matrix_cmr_chr_sparse._from_cmr(second)
+        finally:
+            if sepa is not NULL:
+                CMR_CALL(CMRsepaFree(cmr, &sepa))
+            if transpose is not NULL:
+                CMR_CALL(CMRchrmatFree(cmr, &transpose))
+            sig_off()
+
+        return first_matrix, second_matrix
+
     def y_sum(first_mat, second_mat,
                             first_rows_index=[-2, -1],
                             first_column_index=-1,
