@@ -625,9 +625,29 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         of the second matrix ``second_index``.
         Suppose that ``first_index`` indicates the last column of ``first_mat`` and
         ``second_index`` indicates the first row of ``second_mat``,
-        i.e, the first matrix is `M_1=\begin{bmatrix} A & a\end{bmatrix}`
-        and the second matrix is `M_2=\begin{bmatrix} b^T \\ D\end{bmatrix}`. Then
-        the two sum `M_1 \oplus_2 M_2 =\begin{bmatrix}A & ab^T\\ 0 & D\end{bmatrix}`.
+        i.e, the first matrix is
+        `M_1=\begin{bmatrix} A & a\end{bmatrix}`
+        and the second matrix is
+        `M_2=\begin{bmatrix} b^T \\ D\end{bmatrix}`.
+        Then the two sum
+        `
+        M_1 \oplus_2 M_2 = \begin{bmatrix}
+        A & ab^{\textsf{T}} \\
+        \mathbb{O} & D
+        \end{bmatrix},
+        `
+        Suppose that ``first_index`` indicates the last row of ``first_mat`` and
+        ``second_index`` indicates the first column of ``second_mat``,
+        i.e, the first matrix is
+        `M_1=\begin{bmatrix} A \\ c^T\end{bmatrix}`
+        and the second matrix is
+        `M_2=\begin{bmatrix} d & D\end{bmatrix}`.
+        Then the two sum
+        `M_1 \oplus_2 M_2 = \begin{bmatrix}
+        A & \mathbb{O} \\
+        dc^{\textsf{T}} & D
+        \end{bmatrix},
+        `
 
         The terminology "2-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
@@ -838,10 +858,213 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         sum.set_immutable()
         return sum
 
+    def _delta_sum_cmr(first_mat, second_mat, first_special_row, first_special_columns, second_special_row, second_special_columns):
+        r"""
+        Return the `\Delta`-sum matrix constructed from the two matrices
+        ``first_mat`` and ``second_mat`` via connecting rows
+        ``first_special_row`` and columns ``first_special_columns``.
+
+        This function implements the "distributed_ranks" strategy for the 3-sum operation.
+
+        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``. If ``first_special_row``
+        indexes a row vector `c^T` and ``first_special_columns`` indexes two column vectors `a` of ``first_mat``,
+        then ``second_special_row`` indexes a row vector `b` and ``second_special_columns`` indexes two column
+        vectors `d` of ``second_mat``. In this case, the first matrix is
+        `
+            M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix}
+        `
+        and the second matrix is
+        `
+            M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}.
+        `
+        Then the Seymour/Schrijver 3-sum is the matrix
+        `
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B \end{bmatrix}.
+        `
+
+        The terminology "3-sum" is used in the context of Seymour's decomposition
+        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`, :meth:`three_sum`,
+                    :meth:`three_sum_wide_wide`, :meth:`three_sum_mixed_mixed`
+
+        INPUT:
+
+        - ``first_mat`` -- the first integer matrix
+        - ``second_mat`` -- the second integer matrix
+        - ``first_special_row`` -- the index of the special row in the first matrix
+        - ``first_special_columns`` -- the indices of the two special columns in the first matrix
+        - ``second_special_row`` -- the index of the special row in the second matrix
+        - ``second_special_columns`` -- the indices of the two special columns in the second matrix
+
+        OUTPUT: A :class:`Matrix_cmr_chr_sparse`
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1, 1, 0, 0, 0, 0],
+            ....:                             [1, 0, 0, 1,-1, 1],
+            ....:                             [0,-1, 1, 1, 0,-1],
+            ....:                             [0, 0,-1,-1, 1, 0],
+            ....:                             [0, 1, 1, 1, 0, 1]]); M1
+            [ 1  1  0  0  0  0]
+            [ 1  0  0  1 -1  1]
+            [ 0 -1  1  1  0 -1]
+            [ 0  0 -1 -1  1  0]
+            [ 0  1  1  1  0  1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1,-1,-1, 1, 0, 0],
+            ....:                             [1, 1, 0, 1, 1,-1],
+            ....:                             [0, 0, 0,-1, 0, 1],
+            ....:                             [1, 0, 0, 0,-1, 0],
+            ....:                             [0, 1, 1, 0, 0, 1]]); M2
+            [ 1 -1 -1  1  0  0]
+            [ 1  1  0  1  1 -1]
+            [ 0  0  0 -1  0  1]
+            [ 1  0  0  0 -1  0]
+            [ 0  1  1  0  0  1]
+            sage: M1._delta_sum_cmr(M2, 1, [2, 3], 1, [1, 2])
+            [ 1  1  0  0  0  0  0  0]
+            [ 0 -1  0 -1  1  1  1 -1]
+            [ 0  0  1  0 -1 -1 -1  1]
+            [ 0  1  0  1  1  1  1 -1]
+            [-1  0  1 -1  1  1  0  0]
+            [ 0  0  0  0  0 -1  0  1]
+            [ 0  0  0  0  1  0 -1  0]
+            [ 1  0 -1  1  0  0  0  1]
+        """
+        cdef Matrix_cmr_chr_sparse sum, first, second
+        cdef CMR_CHRMAT *sum_mat = NULL
+        first = Matrix_cmr_chr_sparse._from_data(first_mat, immutable=False)
+        second = Matrix_cmr_chr_sparse._from_data(second_mat, immutable=False)
+        cdef size_t* firstSpecialRows = <size_t *>sig_malloc(sizeof(size_t))
+        cdef size_t* firstSpecialColumns = <size_t *>sig_malloc(sizeof(size_t)*2)
+        cdef size_t* secondSpecialRows = <size_t *>sig_malloc(sizeof(size_t))
+        cdef size_t* secondSpecialColumns = <size_t *>sig_malloc(sizeof(size_t)*2)
+        cdef int8_t characteristic = first_mat.parent().characteristic()
+
+        if second_mat.parent().characteristic() != characteristic:
+            raise ValueError("The characteristic of two matrices are different")
+
+        # Check if indices are within range
+        if first_special_row < 0 or first_special_row >= first._mat.numRows:
+            raise ValueError("First special row index out of range")
+        if first_special_columns[0] < 0 or first_special_columns[0] >= first._mat.numColumns:
+            raise ValueError("First special column index 1 out of range")
+        if first_special_columns[1] < 0 or first_special_columns[1] >= first._mat.numColumns:
+            raise ValueError("First special column index 2 out of range")
+        if second_special_row < 0 or second_special_row >= second._mat.numRows:
+            raise ValueError("Second special row index out of range")
+        if second_special_columns[0] < 0 or second_special_columns[0] >= second._mat.numColumns:
+            raise ValueError("Second special column index 1 out of range")
+        if second_special_columns[1] < 0 or second_special_columns[1] >= second._mat.numColumns:
+            raise ValueError("Second special column index 2 out of range")
+
+        firstSpecialRows[0] = first_special_row
+        firstSpecialColumns[0] = first_special_columns[0]
+        firstSpecialColumns[1] = first_special_columns[1]
+        secondSpecialRows[0] = second_special_row
+        secondSpecialColumns[0] = second_special_columns[0]
+        secondSpecialColumns[1] = second_special_columns[1]
+
+        sig_on()
+        try:
+            CMR_CALL(CMRdeltasumCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
+        finally:
+            sig_off()
+
+        sum = Matrix_cmr_chr_sparse._from_cmr(sum_mat)
+        return sum
+
+    def _y_sum_cmr(first_mat, second_mat, first_special_rows, first_special_column, second_special_rows, second_special_column):
+        r"""
+        Return the Y-sum matrix constructed from the two matrices
+        ``first_mat`` and ``second_mat`` via connecting rows
+        ``first_special_rows`` and column ``first_special_column``.
+
+        This function implements the "y_sum" strategy for the 3-sum operation.
+
+        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``. If ``first_special_rows``
+        indexes two row vectors `c^T` of ``first_mat`` and ``first_special_column`` indexes a column vector `a` of
+        ``first_mat``, then ``second_special_rows`` indexes two row vectors `b^T` of ``second_mat`` and
+        ``second_special_column`` indexes a column vector `d` of ``second_mat``. In this case, the first matrix is
+        `
+            M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix}
+        `
+        and the second matrix is
+        `
+            M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}.
+        `
+        Then the Y-sum is the matrix
+        `
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
+        `
+
+        The terminology "3-sum" is used in the context of Seymour's decomposition
+        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`, :meth:`three_sum`,
+                    :meth:`three_sum_wide_wide`, :meth:`three_sum_mixed_mixed`
+
+        INPUT:
+
+        - ``first_mat`` -- the first integer matrix
+        - ``second_mat`` -- the second integer matrix
+        - ``first_special_rows`` -- the indices of the two special rows in the first matrix
+        - ``first_special_column`` -- the index of the special column in the first matrix
+        - ``second_special_rows`` -- the indices of the two special rows in the second matrix
+        - ``second_special_column`` -- the index of the special column in the second matrix
+
+        OUTPUT: A :class:`Matrix_cmr_chr_sparse`
+        """
+        cdef Matrix_cmr_chr_sparse sum, first, second
+        cdef CMR_CHRMAT *sum_mat = NULL
+        first = Matrix_cmr_chr_sparse._from_data(first_mat, immutable=False)
+        second = Matrix_cmr_chr_sparse._from_data(second_mat, immutable=False)
+        cdef size_t* firstSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
+        cdef size_t* firstSpecialColumns = <size_t *>sig_malloc(sizeof(size_t))
+        cdef size_t* secondSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
+        cdef size_t* secondSpecialColumns = <size_t *>sig_malloc(sizeof(size_t))
+        cdef int8_t characteristic = first_mat.parent().characteristic()
+
+        if second_mat.parent().characteristic() != characteristic:
+            raise ValueError("The characteristic of two matrices are different")
+
+        # Check if indices are within range
+        if first_special_rows[0] < 0 or first_special_rows[0] >= first._mat.numRows:
+            raise ValueError("First special row index 1 out of range")
+        if first_special_rows[1] < 0 or first_special_rows[1] >= first._mat.numRows:
+            raise ValueError("First special row index 2 out of range")
+        if first_special_column < 0 or first_special_column >= first._mat.numColumns:
+            raise ValueError("First special column index out of range")
+        if second_special_rows[0] < 0 or second_special_rows[0] >= second._mat.numRows:
+            raise ValueError("Second special row index 1 out of range")
+        if second_special_rows[1] < 0 or second_special_rows[1] >= second._mat.numRows:
+            raise ValueError("Second special row index 2 out of range")
+        if second_special_column < 0 or second_special_column >= second._mat.numColumns:
+            raise ValueError("Second special column index out of range")
+
+        firstSpecialRows[0] = first_special_rows[0]
+        firstSpecialRows[1] = first_special_rows[1]
+        firstSpecialColumns[0] = first_special_column
+        secondSpecialRows[0] = second_special_rows[0]
+        secondSpecialRows[1] = second_special_rows[1]
+        secondSpecialColumns[0] = second_special_column
+
+        sig_on()
+        try:
+            CMR_CALL(CMRysumCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
+        finally:
+            sig_off()
+
+        sum = Matrix_cmr_chr_sparse._from_cmr(sum_mat)
+        return sum
+
     def _three_sum_mixed_mixed_cmr(first_mat, second_mat,
                   first_special_rows, first_special_columns, second_special_rows, second_special_columns):
         r"""
-        Return the 3-sum matrix constructed from the two matrices
+        Return the `\Delta`-sum matrix constructed from the two matrices
         ``first_mat`` and ``second_mat`` via connecting rows
         ``first_special_rows`` and ``second_special_rows`` and columns ``first_special_columns`` and ``second_special_columns``.
 
@@ -885,12 +1108,12 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ``second_special_columns[0]`` and ``second_special_columns[1]``, which is the matrix `C_{\{i,j\},\{k,\ell\}}`. Otherwise, ``RuntimeError("Invalid matrix structure")`` is returned.
 
         The 3-sum of `M_1` and `M_2` (at these rows/columns) is the matrix
-        \[
+        `
             M = \begin{bmatrix}
             A & \mathbb{O} \\
             C & D
             \end{bmatrix},
-        \]
+        `
         where `C` is the unique rank-2 matrix having linearly independent rows `C_{i,\star}` and
         `C_{j,\star}` and linearly independent columns `C_{\star,k}` and `C_{\star,\ell}`.
 
@@ -903,15 +1126,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         INPUT:
 
         - ``first_mat`` -- the first integer matrix
-
         - ``second_mat`` -- the second integer matrix
-
         - ``first_special_rows`` -- the indices of two special rows in the first matrix
-
         - ``first_special_columns`` -- the indices of three special columns in the first matrix, where the last column is an extra column
-
         - ``second_special_rows`` -- the indices of three special rows in the second matrix, where the first row is an extra row
-
         - ``second_special_columns`` -- the indices of two special columns in the second matrix
 
         OUTPUT: A :class:`Matrix_cmr_chr_sparse`
@@ -1011,38 +1229,6 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             Traceback (most recent call last):
             ...
             RuntimeError: Inconsistent pieces of input
-
-            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
-            ....:                            [[1, 1, 0, 0, 0, 0],
-            ....:                             [1, 0, 0, 1,-1, 1],
-            ....:                             [0,-1, 1, 1, 0,-1],
-            ....:                             [0, 0,-1,-1, 1, 0],
-            ....:                             [0, 1, 1, 1, 0, 1]]); M1
-            [ 1  1  0  0  0  0]
-            [ 1  0  0  1 -1  1]
-            [ 0 -1  1  1  0 -1]
-            [ 0  0 -1 -1  1  0]
-            [ 0  1  1  1  0  1]
-            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
-            ....:                            [[1,-1,-1, 1, 0, 0],
-            ....:                             [1, 1, 0, 1, 1,-1],
-            ....:                             [0, 0, 0,-1, 0, 1],
-            ....:                             [1, 0, 0, 0,-1, 0],
-            ....:                             [0, 1, 1, 0, 0, 1]]); M2
-            [ 1 -1 -1  1  0  0]
-            [ 1  1  0  1  1 -1]
-            [ 0  0  0 -1  0  1]
-            [ 1  0  0  0 -1  0]
-            [ 0  1  1  0  0  1]
-            sage: M1._three_sum_cmr(M2, 1, 2, 3, 1, 1, 2) # long time ? memory fail
-            [ 1  1  0  0  0  0  0  0]
-            [ 0 -1  0 -1  1  1  1 -1]
-            [ 0  0  1  0 -1 -1 -1  1]
-            [ 0  1  0  1  1  1  1 -1]
-            [-1  0  1 -1  1  1  0  0]
-            [ 0  0  0  0  0 -1  0  1]
-            [ 0  0  0  0  1  0 -1  0]
-            [ 1  0 -1  1  0  0  0  1]
         """
         cdef Matrix_cmr_chr_sparse sum, first, second
         cdef CMR_CHRMAT *sum_mat = NULL
@@ -1091,15 +1277,15 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                   first_special_rows, first_special_columns, second_special_rows, second_special_columns,
                   three_sum_strategy="distributed_ranks"):
         r"""
-        Return the 3-sum matrix constructed from the two matrices
-        ``first_mat`` and ``second_index`` via
-        ``first_index1``, ``first_index2``, ``second_index1``, ``second_index2``.
+        Return the 3-sum or `\Delta`-sum or `Y`-sum matrix constructed from the two matrices
+        ``first_mat`` and ``second_mat`` via
+        ``first_special_rows``, ``first_special_columns``, ``second_special_rows``, ``second_special_columns``.
 
         Suppose that ``three_sum_strategy="distributed_ranks"``.
-        If ``first_index1`` indexes a row vector `c^T` and
-        ``first_index2``, ``first_index3`` indexes two column vectors `a` of ``first_mat``,
-        then ``second_index1`` indexes a row vector `b` and
-        ``second_index2``, ``second_index3`` indexes two row vectors `d` of ``second_mat``.
+        If ``first_special_rows`` indexes a row vector `c^T` and
+        ``first_special_columns`` indexes two column vectors `a` of ``first_mat``,
+        then ``second_special_rows`` indexes a row vector `b` and
+        ``second_special_columns`` indexes two column vectors `d` of ``second_mat``.
         In this case,
         the first matrix is
         `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon\end{bmatrix}`
@@ -1107,6 +1293,19 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `M_2=\begin{bmatrix} \varepsilon & 0 & b^T\\ d & d & D\end{bmatrix}`.
         Then the Seymour/Schrijver 3-sum is the matrix
         `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B\end{bmatrix}`.
+
+        Suppose that ``three_sum_strategy="y_sum"``.
+        If ``first_special_rows`` indexes two row vectors `c^T` of ``first_mat`` and
+        ``first_special_columns`` indexes a column vector `a` of ``first_mat``,
+        then ``second_special_rows`` indexes two row vectors `b^T` of ``second_mat`` and
+        ``second_special_columns`` indexes a column vector `d` of ``second_mat``.
+        In this case,
+        the first matrix is
+        `M_1=\begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon\end{bmatrix}`
+        and the second matrix is
+        `M_2=\begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D\end{bmatrix}`.
+        Then the Y-sum is the matrix
+        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D\end{bmatrix}`.
 
         Suppose that ``three_sum_strategy="concentrated_rank"``.
         If ``first_index1`` and ``first_index2`` both index row vectors
@@ -1123,7 +1322,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `\begin{bmatrix}b_1 & b_2\end{bmatrix}=\begin{bmatrix} \bar{C}\\ C_2\end{bmatrix}`,
         `C_12 = C_2 \bar{C}^{-1} C_1`,
         `C=\begin{bmatrix} C_1 & \bar{C} \\ C_{12} & C_2\end{bmatrix}`, i.e.,
-        `C=\begin{bmatrix}b_1 & b_2\end{bmatrix}\bar{C}^{-1}\begin{bmatrix}a_1^T\\ a_2^T\end{bmatrix}`
+        `C=\begin{bmatrix}b_1 & b_2\end{bmatrix}\bar{C}^{-1}\begin{bmatrix}a_1^T\\ a_2^T\end{bmatrix}`.
 
         The terminology "3-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
@@ -1281,103 +1480,48 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0 -1  1 -1  1  1]
             [ 1  0  1  0  1  0]
             [-1 -1  0 -1  0  1]
-        """
-        cdef Matrix_cmr_chr_sparse sum, first, second
-        cdef CMR_CHRMAT *sum_mat = NULL
-        first = Matrix_cmr_chr_sparse._from_data(first_mat, immutable=False)
-        second = Matrix_cmr_chr_sparse._from_data(second_mat, immutable=False)
-        cdef size_t* firstSpecialRows = NULL
-        cdef size_t* firstSpecialColumns = NULL
-        cdef size_t* secondSpecialRows = NULL
-        cdef size_t* secondSpecialColumns = NULL
-        cdef size_t row1 = <size_t>sig_malloc(sizeof(size_t))
-        cdef size_t column1_1 = <size_t>sig_malloc(sizeof(size_t))
-        cdef size_t column1_2 = <size_t>sig_malloc(sizeof(size_t))
-        cdef size_t row2 = <size_t>sig_malloc(sizeof(size_t))
-        cdef size_t column2_1 = <size_t>sig_malloc(sizeof(size_t))
-        cdef size_t column2_2 = <size_t>sig_malloc(sizeof(size_t))
-        cdef int8_t characteristic = first_mat.parent().characteristic()
-        if second_mat.parent().characteristic() != characteristic:
-            raise ValueError("The characteristic of two matrices are different")
 
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1, 1, 0, 0, 0, 0],
+            ....:                             [1, 0, 0, 1,-1, 1],
+            ....:                             [0,-1, 1, 1, 0,-1],
+            ....:                             [0, 0,-1,-1, 1, 0],
+            ....:                             [0, 1, 1, 1, 0, 1]]); M1
+            [ 1  1  0  0  0  0]
+            [ 1  0  0  1 -1  1]
+            [ 0 -1  1  1  0 -1]
+            [ 0  0 -1 -1  1  0]
+            [ 0  1  1  1  0  1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1,-1,-1, 1, 0, 0],
+            ....:                             [1, 1, 0, 1, 1,-1],
+            ....:                             [0, 0, 0,-1, 0, 1],
+            ....:                             [1, 0, 0, 0,-1, 0],
+            ....:                             [0, 1, 1, 0, 0, 1]]); M2
+            [ 1 -1 -1  1  0  0]
+            [ 1  1  0  1  1 -1]
+            [ 0  0  0 -1  0  1]
+            [ 1  0  0  0 -1  0]
+            [ 0  1  1  0  0  1]
+            sage: M1._three_sum_cmr(M2, 1, [2, 3], 1, [1, 2])
+            [ 1  1  0  0  0  0  0  0]
+            [ 0 -1  0 -1  1  1  1 -1]
+            [ 0  0  1  0 -1 -1 -1  1]
+            [ 0  1  0  1  1  1  1 -1]
+            [-1  0  1 -1  1  1  0  0]
+            [ 0  0  0  0  0 -1  0  1]
+            [ 0  0  0  0  1  0 -1  0]
+            [ 1  0 -1  1  0  0  0  1]
+        """
         if three_sum_strategy not in ["distributed_ranks", "concentrated_rank", "y_sum"]:
             raise ValueError("Unknown three sum mode", three_sum_strategy)
 
         if three_sum_strategy == "distributed_ranks":
-            row1 = first_special_rows
-            column1_1 = first_special_columns[0]
-            column1_2 = first_special_columns[1]
-            row2 = second_special_rows
-            column2_1 = second_special_columns[0]
-            column2_2 = second_special_columns[1]
-            if row1 < 0 or row1 >= first._mat.numRows:
-                raise ValueError("First marker 1 should be a row index of the first matrix")
-            if column1_1 < 0 or column1_1 >= first._mat.numColumns:
-                raise ValueError("First marker 2 should be a column index of the first matrix")
-            if column1_2 < 0 or column1_2 >= first._mat.numColumns:
-                raise ValueError("First marker 3 should be a column index of the first matrix")
-            if row2 < 0 or row2 >= second._mat.numRows:
-                raise ValueError("Second marker 1 should be a row index of the second matrix")
-            if column2_1 < 0 or column2_1 >= second._mat.numColumns:
-                raise ValueError("Second marker 2 should be a column index of the second matrix")
-            if column2_2 < 0 or column2_2 >= second._mat.numColumns:
-                raise ValueError("Second marker 3 should be a column index of the second matrix")
-            firstSpecialRows = &row1
-            firstSpecialColumns = <size_t *>sig_malloc(sizeof(size_t)*2)
-            firstSpecialColumns[0] = column1_1
-            firstSpecialColumns[1] = column1_2
-            secondSpecialRows = &row2
-            secondSpecialColumns = <size_t *>sig_malloc(sizeof(size_t)*2)
-            secondSpecialColumns[0] = column2_1
-            secondSpecialColumns[1] = column2_2
-
-            sig_on()
-            try:
-                CMR_CALL(CMRdeltasumCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
-            finally:
-                sig_off()
-
-            sum = Matrix_cmr_chr_sparse._from_cmr(sum_mat)
-            return sum
+            return first_mat._delta_sum_cmr(second_mat, first_special_rows, first_special_columns, second_special_rows, second_special_columns)
         elif three_sum_strategy == "y_sum":
-            column1_1 = first_special_rows[0]
-            column1_2 = first_special_rows[1]
-            row1 = first_special_columns
-            column2_1 = second_special_rows[0]
-            column2_2 = second_special_rows[1]
-            row2 = second_special_columns
-            if column1_1 < 0 or column1_1 >= first._mat.numRows:
-                raise ValueError("First marker 1 should be a row index of the first matrix")
-            if column1_2 < 0 or column1_2 >= first._mat.numRows:
-                raise ValueError("First marker 2 should be a row index of the first matrix")
-            if row1 < 0 or row1 >= first._mat.numColumns:
-                raise ValueError("First marker 3 should be a column index of the first matrix")
-            if column2_1 < 0 or column2_1 >= second._mat.numRows:
-                raise ValueError("Second marker 1 should be a row index of the second matrix")
-            if column2_2 < 0 or column2_2 >= second._mat.numRows:
-                raise ValueError("Second marker 2 should be a row index of the second matrix")
-            if row2 < 0 or row2 >= second._mat.numColumns:
-                raise ValueError("Second marker 3 should be a column index of the second matrix")
-            firstSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
-            firstSpecialRows[0] = column1_1
-            firstSpecialRows[1] = column1_2
-            firstSpecialColumns = &row1
-            secondSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
-            secondSpecialRows[0] = column2_1
-            secondSpecialRows[1] = column2_2
-            secondSpecialColumns = &row2
-
-            sig_on()
-            try:
-                CMR_CALL(CMRysumCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
-            finally:
-                sig_off()
-
-            sum = Matrix_cmr_chr_sparse._from_cmr(sum_mat)
-            return sum
+            return first_mat._y_sum_cmr(second_mat, first_special_rows, first_special_columns, second_special_rows, second_special_columns)
         else:
-            return first_mat._three_sum_mixed_mixed_cmr(second_mat,
-                  first_special_rows, first_special_columns, second_special_rows, second_special_columns)
+            return first_mat._three_sum_mixed_mixed_cmr(second_mat, first_special_rows, first_special_columns, second_special_rows, second_special_columns)
 
     def three_sum_wide_wide(first_mat, second_mat,
                             first_row_index=-1,
