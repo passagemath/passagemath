@@ -2084,7 +2084,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ....:                             [ 0, 1, 0, 1],
             ....:                             [ 1, 1,-1, 1]])
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
-            ....:                            [[ 1,-1, 0],
+            ....:                            [[-1, 1, 0],
             ....:                             [ 1, 0, 1],
             ....:                             [ 1,-1, 1]])
             sage: M = Matrix_cmr_chr_sparse.three_sum_mixed_mixed(M1, M2); M
@@ -2095,9 +2095,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             sage: M.three_sum_decomposition(first_rows_index=[0,1,2,3], first_columns_index=[0,1,2], special_columns=[1,2])
             (
             [ 1  0 -1  0]
-            [ 1  1  0  0]  [1 1 0]
-            [ 0  1  0  1]  [0 1 1]
-            [ 1  1 -1  1], [1 1 1]
+            [ 1  1  0  0]  [-1  1  0]
+            [ 0  1  0  1]  [ 1  0  1]
+            [ 1  1 -1  1], [ 1 -1  1]
             )
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
@@ -2112,13 +2112,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1  0  1 -1  1  1]
             [ 0 -1  1  0 -1  1]
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[ 1,-1, 0, 0, 0],
+            ....:                            [[-1, 1, 0, 0, 0],
             ....:                             [ 1, 0, 1,-1, 0],
             ....:                             [ 1,-1, 1, 1, 1],
             ....:                             [-1, 1, 0, 0, 0],
             ....:                             [ 0, 0, 1, 0,-1],
             ....:                             [ 0, 1, 0, 1, 0]]); M2
-            [ 1 -1  0  0  0]
+            [-1  1  0  0  0]
             [ 1  0  1 -1  0]
             [ 1 -1  1  1  1]
             [-1  1  0  0  0]
@@ -2141,12 +2141,45 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             sage: C1 == M1
             True
             sage: C2
-            [ 1 -1  0  0  0]
+            [-1  1  0  0  0]
             [ 1  0  1 -1  0]
             [ 1 -1  1  1  1]
             [-1  1  0  0  0]
             [ 0  0  1  0 -1]
             [ 0  1  0  1  0]
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 5, sparse=True),
+            ....:                            [[ 0,  1, -1,  0, 0],
+            ....:                             [ 0,  0,  1,  1, 0],
+            ....:                             [ 1,  0,  0,  1, 0],
+            ....:                             [ 1, -1,  0,  0, 1],
+            ....:                             [ 0, -1,  0,  0, 1]])
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
+            ....:                            [[-1,  1,  0, 0],
+            ....:                             [ 0,  0,  1, 1],
+            ....:                             [ 1, -1,  1, 0],
+            ....:                             [ 0, -1,  0, 1]])
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[ 0,  1, -1,  0, 0, 0],
+            ....:                             [ 0,  0,  1,  1, 0, 0],
+            ....:                             [ 1,  0,  0,  1, 0, 0],
+            ....:                             [ 0,  0,  0,  0, 1, 1],
+            ....:                             [ 1, -1,  0,  0, 1, 0],
+            ....:                             [ 0, -1,  0,  0, 0, 1]])
+            sage: M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1]) == (M1, M2)
+            True
+
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[ 0,  1, -1,  0, 0, 0],
+            ....:                             [ 0,  0,  1,  1, 0, 0],
+            ....:                             [ 1,  0,  0,  1, 0, 0],
+            ....:                             [ 0,  0,  0,  0, 1, 1],
+            ....:                             [ 1,  0, -1,  0, 1, 0],
+            ....:                             [ 0, -1,  0,  0, 0, 1]])
+            sage: M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1])
+            Traceback (most recent call last):
+            ...
+            RuntimeError: User input error
         """
         cdef CMR_CHRMAT *matrix = self._mat
         cdef CMR_CHRMAT *transpose = NULL
@@ -2161,6 +2194,14 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             special_rows = [first_rows_index[-2], first_rows_index[-1]]
         if special_columns is None:
             special_columns = [first_columns_index[-2], first_columns_index[-1]]
+        specialRows[0] = special_rows[0]
+        specialRows[1] = special_rows[1]
+        specialColumns[0] = special_columns[0]
+        specialColumns[1] = special_columns[1]
+        Cik = self[special_rows[0], special_columns[0]]
+        Cjk = self[special_rows[1], special_columns[0]]
+        Cil = self[special_rows[0], special_columns[1]]
+        Cjl = self[special_rows[1], special_columns[1]]
 
         sig_on()
         try:
@@ -2176,11 +2217,25 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                 elif i == special_rows[1]:
                     sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK2
                 else:
-                    sepa.rowsFlags[i] = CMR_SEPA_SECOND
+                    val1 = self[i, special_columns[0]]
+                    val2 = self[i, special_columns[1]]
+                    if (val1 == Cik and val2 == Cil) or (val1 == -Cik and val2 == -Cil):
+                        sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK1
+                    elif (val1 == Cjk and val2 == Cjl) or (val1 == -Cjk and val2 == -Cjl):
+                        sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK2
+                    else:
+                        sepa.rowsFlags[i] = CMR_SEPA_SECOND
 
             for j in range(matrix.numColumns):
                 if j in first_columns_index and j not in special_columns:
-                    sepa.columnsFlags[j] = CMR_SEPA_FIRST
+                    val1 = self[special_rows[0], j]
+                    val2 = self[special_rows[1], j]
+                    if (val1 == Cik and val2 == Cjk) or (val1 == -Cik and val2 == -Cjk):
+                        sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK1
+                    elif (val1 == Cil and val2 == Cjl) or (val1 == -Cil and val2 == -Cjl):
+                        sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK2
+                    else:
+                        sepa.columnsFlags[j] = CMR_SEPA_FIRST
                 elif j == special_columns[0]:
                     sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK1
                 elif j == special_columns[1]:
@@ -2188,7 +2243,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                 else:
                     sepa.columnsFlags[j] = CMR_SEPA_SECOND
 
-            CMR_CALL(CMRthreesumDecomposeConnecting(cmr, matrix, transpose, sepa, specialRows, specialColumns, &gamma, &beta))
+            CMR_CALL(CMRthreesumDecomposeSignConnecting(cmr, matrix, transpose, sepa, specialRows, specialColumns, &gamma, &beta))
             CMR_CALL(CMRthreesumDecomposeFirst(cmr, matrix, sepa, specialRows, specialColumns, beta, &first, NULL, NULL, NULL, NULL, NULL, NULL))
             CMR_CALL(CMRthreesumDecomposeSecond(cmr, matrix, sepa, specialRows, specialColumns, gamma, &second, NULL, NULL, NULL, NULL, NULL, NULL))
 
@@ -3034,7 +3089,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             sage: M2.is_totally_unimodular()
             False
             sage: Matrix_cmr_chr_sparse.is_three_sum_mixed_mixed(M, M1, M2)
-            False
+            (False, 'gamma in second_mat should be -1. ')
         """
         if not isinstance(first_rows_index, (list, tuple)) or len(first_rows_index) != 2:
             raise ValueError('The index of two columns needs to be given!')
@@ -3117,81 +3172,77 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         if sign_verify is not True:
             return True
         # Check the sign
-        sign_2 = first_mat[j1, i1] * first_mat[j2, i1]
-        sign_1 = second_mat[i2, k1] * second_mat[i2, k2]
+        cdef CMR_CHRMAT *matrix = three_sum_mat._mat
+        cdef CMR_CHRMAT *transpose = NULL
+        cdef CMR_SEPA *sepa = NULL
+        cdef size_t specialRows[2]
+        cdef size_t specialColumns[2]
+        cdef char gamma, beta
 
-        from sage.graphs.graph import Graph
-        G = Graph()
+        special_rows = [m1 - 2 + j1k - 1, m1 - 2 + j2k - 1]
+        special_columns = [jk1, jk2]
+        specialRows[0] = special_rows[0]
+        specialRows[1] = special_rows[1]
+        specialColumns[0] = special_columns[0]
+        specialColumns[1] = special_columns[1]
+        Cik = three_sum_mat[special_rows[0], special_columns[0]]
+        Cjk = three_sum_mat[special_rows[1], special_columns[0]]
+        Cil = three_sum_mat[special_rows[0], special_columns[1]]
+        Cjl = three_sum_mat[special_rows[1], special_columns[1]]
 
-        rows = ['r' + str(i) for i in range(m)]
-        cols = ['c' + str(j) for j in range(n)]
-        G.add_vertices(rows + cols)
+        sig_on()
+        try:
+            CMR_CALL(CMRchrmatTranspose(cmr, matrix, &transpose))
+            CMR_CALL(CMRsepaCreate(cmr, matrix.numRows, matrix.numColumns, &sepa))
+            sepa.type = CMR_SEPA_TYPE_THREE_CONCENTRATED_RANK
 
-        for i in range(m):
-            for j in range(n):
-                if three_sum_mat[i, j] != 0:
-                    G.add_edge('r' + str(i), 'c' + str(j))
-        dist_dict = G.distance_all_pairs()
+            for i in range(matrix.numRows):
+                if i in list(range(m1 - 2)):
+                    sepa.rowsFlags[i] = CMR_SEPA_FIRST
+                elif i == special_rows[0]:
+                    sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK1
+                elif i == special_rows[1]:
+                    sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK2
+                else:
+                    val1 = three_sum_mat[i, special_columns[0]]
+                    val2 = three_sum_mat[i, special_columns[1]]
+                    if (val1 == Cik and val2 == Cil) or (val1 == -Cik and val2 == -Cil):
+                        sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK1
+                    elif (val1 == Cjk and val2 == Cjl) or (val1 == -Cjk and val2 == -Cjl):
+                        sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK2
+                    else:
+                        sepa.rowsFlags[i] = CMR_SEPA_SECOND
 
-        K1 = []
-        K2 = []
-        b1 = second_mat.matrix_from_rows_and_columns(row_index_2, [k1])
-        b2 = second_mat.matrix_from_rows_and_columns(row_index_2, [k2])
-        for j in range(n1 - 1):
-            bb = three_sum_mat.matrix_from_rows_and_columns(range(m1 - 2, m), [j])
-            if bb == b1 or bb == -b1:
-                K1.append('c'+str(j))
-            elif bb == b2 or bb == -b2:
-                K2.append('c'+str(j))
+            for j in range(matrix.numColumns):
+                if j in list(range(n1 - 1)) and j not in special_columns:
+                    val1 = three_sum_mat[special_rows[0], j]
+                    val2 = three_sum_mat[special_rows[1], j]
+                    if (val1 == Cik and val2 == Cjk) or (val1 == -Cik and val2 == -Cjk):
+                        sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK1
+                    elif (val1 == Cil and val2 == Cjl) or (val1 == -Cil and val2 == -Cjl):
+                        sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK2
+                    else:
+                        sepa.columnsFlags[j] = CMR_SEPA_FIRST
+                elif j == special_columns[0]:
+                    sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK1
+                elif j == special_columns[1]:
+                    sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK2
+                else:
+                    sepa.columnsFlags[j] = CMR_SEPA_SECOND
 
-        min_distance = float('inf')
-        min_pair = None
-        for v1 in K1:
-            for v2 in K2:
-                if v2 in dist_dict[v1]:
-                    if dist_dict[v1][v2] < min_distance:
-                        min_distance = dist_dict[v1][v2]
-                        min_pair = (v1, v2)
-        path_1 = G.shortest_path(min_pair[0], min_pair[1])
-        path_1_num = [int(v[1:]) for v in path_1]
-        q = (len(path_1) + 1)/2
-        path_1_len = (-1)**q
-        for i in range(q - 1):
-            path_1_len *= three_sum_mat[path_1_num[2*i + 1], path_1_num[2*i]]
-            path_1_len *= three_sum_mat[path_1_num[2*i + 1], path_1_num[2*i + 2]]
-
-        R1 = []
-        R2 = []
-        a1 = first_mat.matrix_from_rows_and_columns([j1], column_index_1)
-        a2 = first_mat.matrix_from_rows_and_columns([j2], column_index_1)
-        for i in range(m2 - 1):
-            aa = three_sum_mat.matrix_from_rows_and_columns([m1 - 2 + i], range(n1 - 1))
-            if aa == a1 or aa == -a1:
-                R1.append('r'+str(i))
-            elif aa == a2 or aa == -a2:
-                R2.append('r'+str(i))
-
-        min_distance = float('inf')
-        min_pair = None
-        for v1 in R1:
-            for v2 in R2:
-                if v2 in dist_dict[v1]:
-                    if dist_dict[v1][v2] < min_distance:
-                        min_distance = dist_dict[v1][v2]
-                        min_pair = (v1, v2)
-        path_2 = G.shortest_path(min_pair[0], min_pair[1])
-        path_2_num = [int(v[1:]) for v in path_2]
-        p = (len(path_2) + 1)/2
-        path_2_len = (-1)**p
-        for i in range(p - 1):
-            path_2_len *= three_sum_mat[path_2_num[2*i], path_2_num[2*i + 1]]
-            path_2_len *= three_sum_mat[path_2_num[2*i + 2], path_2_num[2*i + 1]]
+            CMR_CALL(CMRthreesumDecomposeSignConnecting(cmr, matrix, transpose, sepa, specialRows, specialColumns, &gamma, &beta))
+        finally:
+            if sepa is not NULL:
+                CMR_CALL(CMRsepaFree(cmr, &sepa))
+            if transpose is not NULL:
+                CMR_CALL(CMRchrmatFree(cmr, &transpose))
+            sig_off()
 
         msg = ""
-        if (sign_1 - path_1_len) % 4 != 0:
-            msg += f'sign_1 in second_mat should be {-sign_1}. '
-        if (sign_2 - path_2_len) % 4 != 0:
-            msg += f'sign_2 in first_mat should be {-sign_2}. '
+        if (first_mat[j1, i1] * first_mat[j2, i1] - beta) % 4 != 0:
+            msg += f'beta in first_mat should be {beta}. '
+        if (second_mat[i2, k1] * second_mat[i2, k2] - gamma) % 4 != 0:
+            msg += f'gamma in second_mat should be {gamma}. '
         if msg:
             return False, msg
         return True

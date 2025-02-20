@@ -261,7 +261,8 @@ cdef extern from "cmr/separation.h":
     CMR_ERROR CMRysumDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, char epsilon, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, size_t* secondSpecialRows, size_t* secondSpecialColumns)
 
     CMR_ERROR CMRthreesumCompose(CMR* cmr, CMR_CHRMAT* first, CMR_CHRMAT* second, size_t* firstSpecialRows, size_t* firstSpecialColumns, size_t* secondSpecialRows, size_t* secondSpecialColumns, int8_t characteristic, CMR_CHRMAT** presult)
-    CMR_ERROR CMRthreesumDecomposeConnecting(CMR* cmr, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char* pgamma, char* pbeta)
+    CMR_ERROR CMRthreesumDecomposeSearchConnecting(CMR* cmr, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char* pgamma, char* pbeta)
+    CMR_ERROR CMRthreesumDecomposeSignConnecting(CMR* cmr, CMR_CHRMAT* matrix, CMR_CHRMAT* transpose, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char* pgamma, char* pbeta)
     CMR_ERROR CMRthreesumDecomposeFirst(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char beta, CMR_CHRMAT** pfirst, size_t* firstRowsOrigin, size_t* firstColumnsOrigin, size_t* rowsToFirst, size_t* columnsToFirst, size_t* firstSpecialRows, size_t* firstSpecialColumns)
     CMR_ERROR CMRthreesumDecomposeSecond(CMR* cmr, CMR_CHRMAT* matrix, CMR_SEPA* sepa, size_t* specialRows, size_t* specialColumns, char gamma, CMR_CHRMAT** psecond, size_t* secondRowsOrigin, size_t* secondColumnsOrigin, size_t* rowsToSecond, size_t* columnsToSecond, size_t* secondSpecialRows, size_t* secondSpecialColumns)
 
