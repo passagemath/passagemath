@@ -2659,7 +2659,7 @@ cdef class ThreeSumNode(SumNode):
 
         .. SEEALSO::
 
-            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum_wide_wide`
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.delta_sum`
 
         EXAMPLES::
 
@@ -2708,7 +2708,7 @@ cdef class ThreeSumNode(SumNode):
 
         .. SEEALSO::
 
-            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum_mixed_mixed`
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum`
 
         EXAMPLES::
 
@@ -2782,8 +2782,7 @@ cdef class ThreeSumNode(SumNode):
             [ 0 -1  0 -1  0  1]
         """
         M1, M2 = self.summand_matrices()
-        return Matrix_cmr_chr_sparse.three_sum(M1, M2,
-                                               three_sum_strategy='concentrated_rank')
+        return Matrix_cmr_chr_sparse.three_sum(M1, M2)
 
 cdef class DeltaSumNode(ThreeSumNode):
 
@@ -3009,7 +3008,7 @@ cdef class DeltaSumNode(ThreeSumNode):
 
         .. SEEALSO::
 
-            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum_wide_wide`
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.delta_sum`
 
         EXAMPLES::
 
@@ -3093,8 +3092,7 @@ cdef class DeltaSumNode(ThreeSumNode):
             [-1  0 -1  0  0  1]
         """
         M1, M2 = self.summand_matrices()
-        return Matrix_cmr_chr_sparse.three_sum(M1, M2,
-                                               three_sum_strategy='distributed_ranks')
+        return Matrix_cmr_chr_sparse.delta_sum(M1, M2)
 
 cdef class YSumNode(DeltaSumNode):
 
@@ -3261,7 +3259,7 @@ cdef class YSumNode(DeltaSumNode):
 
         .. SEEALSO::
 
-            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum_wide_wide`
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.delta_sum`
 
         EXAMPLES::
 
@@ -3346,8 +3344,7 @@ cdef class YSumNode(DeltaSumNode):
             [-1  0 -1  0  0  1]
         """
         M1, M2 = self.summand_matrices()
-        return Matrix_cmr_chr_sparse.three_sum(M1, M2,
-                                               three_sum_strategy='y_sum')
+        return Matrix_cmr_chr_sparse.y_sum(M1, M2)
 
 
 cdef class BaseGraphicNode(DecompositionNode):
