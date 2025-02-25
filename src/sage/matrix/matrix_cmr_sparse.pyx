@@ -1807,7 +1807,6 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             M = Matrix_cmr_chr_sparse._three_sum_cmr(first_mat, second_mat,
                                                      [j1, j2], [jk1, jk2, i1],
                                                      [i2, j1k, j2k], [k1, k2])
-            return M
         if algorithm == "direct":
             row_index_1 = [i for i in range(m1) if i != j1 and i != j2]
             column_index_1 = [j for j in range(n1) if j != i1]
@@ -1840,19 +1839,61 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                 row_list.append(r)
             M = Matrix_cmr_chr_sparse._from_data(row_list, immutable=False)
 
-            result = M.is_three_sum(first_mat, second_mat,
-                                                first_rows_index=first_rows_index,
-                                                first_column_index=first_column_index,
-                                                second_row_index=second_row_index,
-                                                second_columns_index=second_columns_index,
-                                                sign_verify=sign_verify)
-            if result is True:
-                return M
-            elif result is False:
-                raise ValueError('The given two matrices and related indices '
-                                'do not satisfy the rule for three sum!')
-            else:
-                return result[1]
+        result = M.is_three_sum(first_mat, second_mat,
+                                first_rows_index=first_rows_index,
+                                first_column_index=first_column_index,
+                                first_intersection_columns=first_intersection_columns,
+                                second_row_index=second_row_index,
+                                second_columns_index=second_columns_index,
+                                second_intersection_rows=second_intersection_rows,
+                                sign_verify=sign_verify)
+        if result is True:
+            return M
+        elif result is False:
+            raise ValueError('The given two matrices and related indices '
+                            'do not satisfy the rule for three sum!')
+        else:
+            return result[1]
+
+    def _is_submatrix_rank1(self, rows, columns, special_row=None, special_column=None):
+        if special_row is None:
+            special_row = rows[0]
+        if special_column is None:
+            special_column = columns[0]
+        Cij = self[special_row, special_column]
+        if Cij == 0:
+            raise RuntimeError("The submatrix indexed by special row and column should be non-zero")
+        Ci = self.matrix_from_rows_and_columns([special_row], columns)
+        for r in rows:
+            if r != special_row:
+                Cr = self.matrix_from_rows_and_columns([r], columns)
+                if Cr - (self[r, special_column] / Cij) * Ci != 0:
+                    return False
+        return True
+
+    def _is_submatrix_rank2(self, rows, columns, special_rows=None, special_columns=None):
+        if special_rows is None:
+            special_rows = rows[:2]
+        if special_columns is None:
+            special_columns = columns[:2]
+        Cik = self[special_rows[0], special_columns[0]]
+        Cjk = self[special_rows[1], special_columns[0]]
+        Cil = self[special_rows[0], special_columns[1]]
+        Cjl = self[special_rows[1], special_columns[1]]
+        det = Cik * Cjl - Cjk * Cil
+        if det == 0:
+            raise RuntimeError("The submatrix indexed by special rows and columns should be rank 2")
+
+        Ci = self.matrix_from_rows_and_columns([special_rows[0]], columns)
+        Cj = self.matrix_from_rows_and_columns([special_rows[1]], columns)
+        for r in rows:
+            if r not in special_rows:
+                Cr = self.matrix_from_rows_and_columns([r], columns)
+                Crk = self[r, special_columns[0]]
+                Crl = self[r, special_columns[1]]
+                if det * Cr - (Crk * Cjl - Crl * Cjk) * Ci - (- Crk * Cil + Crl * Cik) * Cj != 0:
+                    return False
+        return True
 
     def three_sum_decomposition(self, first_rows_index, first_columns_index, special_rows=None, special_columns=None):
         """
@@ -2111,6 +2152,49 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             Traceback (most recent call last):
             ...
             RuntimeError: User input error
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 5, sparse=True),
+            ....:                            [[ 0,  1, -1,  0, 0],
+            ....:                             [ 0,  0,  1,  1, 0],
+            ....:                             [ 1,  0,  0,  1, 0],
+            ....:                             [ 1, -1,  0,  0, 1],
+            ....:                             [ 0, -1,  0,  0, 1]])
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
+            ....:                            [[-1,  1,  0, 0],
+            ....:                             [ 0,  0,  1, 1],
+            ....:                             [ 1, -1,  1, 0],
+            ....:                             [ 0, -1,  0, 1]])
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[ 0,  1, -1,  0, 0, 0],
+            ....:                             [ 0,  0,  1,  1, 0, 0],
+            ....:                             [ 1,  0,  0,  1, 0, 0],
+            ....:                             [ 0,  0,  1,  0, 1, 1],
+            ....:                             [ 1, -1,  0,  0, 1, 0],
+            ....:                             [ 0, -1,  0,  0, 0, 1]])
+            sage: M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1])
+            Traceback (most recent call last):
+            ...
+            RuntimeError: The bottom left submatrix is not of rank 2
+            sage: M.is_three_sum(M1, M2, [4, 5], -1, [0, 1], 0, [0, 1], [2, 3])
+            False
+
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[ 0,  1, -1,  0, 0, 0],
+            ....:                             [ 0,  0,  1,  1, 0, 0],
+            ....:                             [ 1,  0,  0,  1, 0, 0],
+            ....:                             [ 0,  0,  0,  0, 1, 1],
+            ....:                             [ 1, -1,  1,  0, 1, 0],
+            ....:                             [ 0, -1, -1,  0, 0, 1]])
+            sage: C1, C2 = M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1]); (C1, C2)
+            (
+            [ 0  1 -1  0  0]
+            [ 0  0  1  1  0]  [-1  1  0  0]
+            [ 1  0  0  1  0]  [ 0  0  1  1]
+            [ 1 -1  1  0  1]  [ 1 -1  1  0]
+            [ 0 -1 -1  0  1], [ 0 -1  0  1]
+            )
+            sage: M.is_three_sum(C1, C2, [3, 4], -1, [0, 1], 0, [0, 1], [2, 3])
+            True
         """
         cdef CMR_CHRMAT *matrix = self._mat
         cdef CMR_CHRMAT *transpose = NULL
@@ -2129,10 +2213,16 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         specialRows[1] = special_rows[1]
         specialColumns[0] = special_columns[0]
         specialColumns[1] = special_columns[1]
-        Cik = self[special_rows[0], special_columns[0]]
-        Cjk = self[special_rows[1], special_columns[0]]
-        Cil = self[special_rows[0], special_columns[1]]
-        Cjl = self[special_rows[1], special_columns[1]]
+
+        C_rows = [i for i in range(matrix.numRows) if i not in first_rows_index or i in special_rows]
+        C_columns = first_columns_index
+        if not self._is_submatrix_rank2(C_rows, C_columns, special_rows, special_columns):
+            raise RuntimeError("The bottom left submatrix is not of rank 2")
+
+        B_rows = [i for i in first_rows_index if i not in special_rows]
+        B_columns = [j for j in range(matrix.numColumns) if j not in C_columns]
+        if self.matrix_from_rows_and_columns(B_rows, B_columns) != 0:
+            raise RuntimeError("The upper right submatrix is not zero")
 
         sig_on()
         try:
@@ -2143,36 +2233,15 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             for i in range(matrix.numRows):
                 if i in first_rows_index and i not in special_rows:
                     sepa.rowsFlags[i] = CMR_SEPA_FIRST
-                elif i == special_rows[0]:
-                    sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK1
-                elif i == special_rows[1]:
-                    sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK2
                 else:
-                    val1 = self[i, special_columns[0]]
-                    val2 = self[i, special_columns[1]]
-                    if (val1 == Cik and val2 == Cil) or (val1 == -Cik and val2 == -Cil):
-                        sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK1
-                    elif (val1 == Cjk and val2 == Cjl) or (val1 == -Cjk and val2 == -Cjl):
-                        sepa.rowsFlags[i] = CMR_SEPA_SECOND | CMR_SEPA_FLAG_RANK2
-                    else:
-                        sepa.rowsFlags[i] = CMR_SEPA_SECOND
+                    sepa.rowsFlags[i] = CMR_SEPA_SECOND
 
             for j in range(matrix.numColumns):
-                if j in first_columns_index and j not in special_columns:
-                    val1 = self[special_rows[0], j]
-                    val2 = self[special_rows[1], j]
-                    if (val1 == Cik and val2 == Cjk) or (val1 == -Cik and val2 == -Cjk):
-                        sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK1
-                    elif (val1 == Cil and val2 == Cjl) or (val1 == -Cil and val2 == -Cjl):
-                        sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK2
-                    else:
-                        sepa.columnsFlags[j] = CMR_SEPA_FIRST
-                elif j == special_columns[0]:
-                    sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK1
-                elif j == special_columns[1]:
-                    sepa.columnsFlags[j] = CMR_SEPA_FIRST | CMR_SEPA_FLAG_RANK2
+                if j in first_columns_index:
+                    sepa.columnsFlags[j] = CMR_SEPA_FIRST
                 else:
                     sepa.columnsFlags[j] = CMR_SEPA_SECOND
+            CMR_CALL(CMRsepaFindBinaryRepresentatives(cmr, sepa, matrix, transpose, NULL, NULL))
 
             CMR_CALL(CMRthreesumDecomposeSignConnecting(cmr, matrix, transpose, sepa, specialRows, specialColumns, &gamma, &beta))
             CMR_CALL(CMRthreesumDecomposeFirst(cmr, matrix, sepa, specialRows, specialColumns, beta, &first, NULL, NULL, NULL, NULL, NULL, NULL))
@@ -2280,7 +2349,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             sage: M1.y_sum(M2, [-2, -1], 4, [0, 1], 1, algorithm="direct")
             Traceback (most recent call last):
             ...
-            ValueError: The given two matrices and related indices do not satisfy the rule for delta sum!
+            ValueError: The given two matrices and related indices do not satisfy the rule for y sum!
         """
         m1 = first_mat.nrows()
         n1 = first_mat.ncols()
