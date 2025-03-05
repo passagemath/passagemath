@@ -849,7 +849,8 @@ cdef class DecompositionNode(SageObject):
         The terminology "1-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_.
 
-        .. SEEALSO:: :meth:`two_sum`, :meth:`three_sum`
+        .. SEEALSO:: :meth:`two_sum`
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
 
         EXAMPLES::
 
@@ -2203,7 +2204,8 @@ cdef class UnknownNode(DecompositionNode):
 
 cdef class SumNode(DecompositionNode):
     r"""
-    Base class for 1-sum, 2-sum, and 3-sum nodes in Seymour's decomposition
+    Base class for 1-sum, 2-sum, and 3-sums (`\Delta`-sum, 3-sum, `Y`-sum) nodes
+    in Seymour's decomposition
     """
 
     def _repr_(self):
@@ -2358,6 +2360,10 @@ cdef class TwoSumNode(SumNode):
         r"""
         Return the block matrix representing the two sum node.
 
+        .. SEEALSO::
+
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.two_sum`
+
         EXAMPLES::
 
             sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
@@ -2468,332 +2474,16 @@ cdef class TwoSumNode(SumNode):
         M1, M2 = self.summand_matrices()
         return Matrix_cmr_chr_sparse.two_sum(M1, M2, M1.nrows() - 1, 0, "bottom_left")
 
-cdef class ThreeSumNode(SumNode):
+cdef class DeltaSumNode(SumNode):
 
     def _children(self):
         r"""
         Return a tuple of the tuples of the two children
         and their row and column keys.
-
-        .. SEEALSO::
-
-            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum`
-
-        TESTS:
-
-        This is test ``ThreesumR12`` in CMR's ``test_tu.cpp``::
-
-            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
-            sage: R12 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
-            ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
-            ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
-            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           decompose_strategy="three_pivot")
-            sage: C1, C2 = certificate.child_nodes()
-            sage: C1.matrix()
-            [ 1  0  1  1  0]
-            [ 0  1  1  1  0]
-            [ 1  0  1  0  1]
-            [ 0 -1  0 -1  1]
-            sage: C2.matrix()
-            [ 1  1  0  0]
-            [ 1  0  1  1]
-            [ 0 -1  1  1]
-            [ 1  0  1  0]
-            [ 0 -1  0  1]
-            sage: certificate.child_indices()[0]
-            ((r0, r1, r2, r3), (c0, c1, c2, c3, +r2+r3))
-            sage: certificate.child_indices()[1]
-            ((+c0+c3, r2, r3, r4, r5), (c0, c3, c4, c5))
-
-            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           decompose_strategy="three_pivot",
-            ....:                           row_keys=range(6),
-            ....:                           column_keys='abcdef')
-            sage: C1, C2 = certificate.child_nodes()
-            sage: C1.matrix()
-            [ 1  0  1  1  0]
-            [ 0  1  1  1  0]
-            [ 1  0  1  0  1]
-            [ 0 -1  0 -1  1]
-            sage: C2.matrix()
-            [ 1  1  0  0]
-            [ 1  0  1  1]
-            [ 0 -1  1  1]
-            [ 1  0  1  0]
-            [ 0 -1  0  1]
-            sage: certificate.child_indices()[0]
-            ((0, 1, 2, 3), (a, b, c, d, +2+3))
-            sage: certificate.child_indices()[1]
-            ((+a+d, 2, 3, 4, 5), (a, d, e, f))
-        """
-        if self._child_nodes is not None:
-            return self._child_nodes
-
-        if self.nchildren() != 2:
-            raise ValueError(f"ThreeSumNode has exactly two children not {self.nchildren()}!")
-
-        self.set_default_keys()
-
-        cdef CMR_SEYMOUR_NODE *child1_dec = CMRseymourChild(self._dec, 0)
-        cdef CMR_ELEMENT *parent_rows1 = CMRseymourChildRowsToParent(self._dec, 0)
-        cdef CMR_ELEMENT *parent_columns1 = CMRseymourChildColumnsToParent(self._dec, 0)
-        cdef CMR_CHRMAT *mat1 = CMRseymourGetMatrix(child1_dec)
-        cdef size_t *first_special_rows = CMRseymourChildSpecialRows(self._dec, 0)
-        cdef size_t *first_special_columns = CMRseymourChildSpecialColumns(self._dec, 0)
-
-        cdef CMR_SEYMOUR_NODE *child2_dec = CMRseymourChild(self._dec, 1)
-        cdef CMR_ELEMENT *parent_rows2 = CMRseymourChildRowsToParent(self._dec, 1)
-        cdef CMR_ELEMENT *parent_columns2 = CMRseymourChildColumnsToParent(self._dec, 1)
-        cdef CMR_CHRMAT *mat2 = CMRseymourGetMatrix(child2_dec)
-        cdef size_t *second_special_rows = CMRseymourChildSpecialRows(self._dec, 1)
-        cdef size_t *second_special_columns = CMRseymourChildSpecialColumns(self._dec, 1)
-
-        cdef size_t index1, index2
-
-        child1_nrows = CMRseymourNumRows(child1_dec)
-        child1_ncols = CMRseymourNumColumns(child1_dec)
-
-        child1_row_keys = tuple(self._CMRelement_to_key(parent_rows1[i])
-                                for i in range(child1_nrows))
-        child1_column_keys = tuple(self._CMRelement_to_key(parent_columns1[i])
-                                for i in range(child1_ncols - 1))
-
-        row1_index = first_special_rows[0]
-        extra_column_index = first_special_columns[2]
-        CMR_CALL(CMRchrmatFindEntry(mat1, row1_index, extra_column_index, &index1))
-        if index1 == SIZE_MAX:
-            eps1 = Integer(0)
-        else:
-            eps1 = Integer(mat1.entryValues[index1])
-        if eps1 != 1:
-            raise ValueError(f"First child in the Mixed_Mixed Three Sum "
-                                f"has 1 in the entry "
-                                f"row {row1_index} and column {extra_column_index} "
-                                f"but got {eps1}")
-
-        row2_index = first_special_rows[1]
-        CMR_CALL(CMRchrmatFindEntry(mat1, row2_index, extra_column_index, &index2))
-        if index2 == SIZE_MAX:
-            eps2 = Integer(0)
-        else:
-            eps2 = Integer(mat1.entryValues[index2])
-        if eps2 != 1 and eps2 != -1:
-            raise ValueError(f"First child in the Mixed_Mixed Three Sum "
-                                f"has 1 or -1 in the entry "
-                                f"row {row2_index} and column {extra_column_index} "
-                                f"but got {eps2}")
-
-        extra_key = ElementKey((eps1, child1_row_keys[row1_index],
-                                eps2, child1_row_keys[row2_index]),
-                                composition=True)
-        child1_column_keys += (extra_key,)
-
-        child1 = create_DecompositionNode(child1_dec, matrix=None,
-                                          row_keys=child1_row_keys,
-                                          column_keys=child1_column_keys,
-                                          base_ring=self.base_ring())
-
-        child2_nrows = CMRseymourNumRows(child2_dec)
-        child2_ncols = CMRseymourNumColumns(child2_dec)
-
-        child2_row_keys = tuple(self._CMRelement_to_key(parent_rows2[i])
-                                for i in range(1, child2_nrows))
-        child2_column_keys = tuple(self._CMRelement_to_key(parent_columns2[i])
-                                    for i in range(child2_ncols))
-
-        column1_index = second_special_columns[0]
-        extra_row_index = second_special_rows[0]
-        CMR_CALL(CMRchrmatFindEntry(mat2, extra_row_index, column1_index, &index1))
-        if index1 == SIZE_MAX:
-            eps1 = Integer(0)
-        else:
-            eps1 = Integer(mat1.entryValues[index1])
-        if eps1 != 1 and eps1 != -1:
-            raise ValueError(f"Second child in the Mixed_Mixed Three Sum "
-                                f"has 1 or -1 in the entry "
-                                f"row {extra_row_index} and column {column1_index} "
-                                f"but got {eps1}")
-
-        column2_index = second_special_columns[1]
-        CMR_CALL(CMRchrmatFindEntry(mat2, extra_row_index, column2_index, &index2))
-        if index2 == SIZE_MAX:
-            eps2 = Integer(0)
-        else:
-            eps2 = Integer(mat2.entryValues[index2])
-        if eps2 != 1:
-            raise ValueError(f"Second child in the Mixed_Mixed Three Sum "
-                                f"has 1 in the entry "
-                                f"row {extra_row_index} and column {column2_index} "
-                                f"but got {eps2}")
-
-        extra_key = ElementKey((eps1, child2_column_keys[column1_index],
-                                eps2, child2_column_keys[column2_index]),
-                                composition=True)
-        child2_row_keys = (extra_key,) + child2_row_keys
-
-        child2 = create_DecompositionNode(child2_dec, matrix=None,
-                                          row_keys=child2_row_keys,
-                                          column_keys=child2_column_keys,
-                                          base_ring=self.base_ring())
-
-        self._child_nodes = ((child1, child1_row_keys, child1_column_keys),
-                             (child2, child2_row_keys, child2_column_keys))
-        return self._child_nodes
-
-    def is_distributed_ranks(self):
-        r"""
-        Check whether the three sum node ``self`` is formed with
-        ``decompose_strategy="distributed_ranks"`` or ``"Wide_Wide"``.
-
-        The matrix representing the first child is
-        `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon\end{bmatrix}`,
-        and the matrix representing the second child is
-        `M_2=\begin{bmatrix} \varepsilon & 0 & b^T\\ d & d & D\end{bmatrix}`,
-        where `\varepsilon` is `1` or `-1`.
-        And the matrix representing ``self`` is a permutation of
-        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B\end{bmatrix}`.
-
-        ``distributed_ranks`` is named after the two rank 1 off-diagonal blocks.
-        ``Wide_Wide`` is named after the structure of the two children.
 
         .. SEEALSO::
 
             :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.delta_sum`
-
-        EXAMPLES::
-
-            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
-            sage: R12_large = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 9, 12, sparse=True),
-            ....:                 [[ 1, -1,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1],
-            ....:                  [ 0,  0,  0,  1, -1,  0,  0,  0,  1,  1,  1,  1],
-            ....:                  [ 0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1],
-            ....:                  [ 1,  0,  1,  0,  0,  0,  0,  0,  1,  1,  0,  0],
-            ....:                  [ 0,  1,  1,  0,  0,  0,  0,  0,  0,  0, -1, -1],
-            ....:                  [ 0,  0,  0,  1,  0,  1,  0,  0,  1,  1,  0,  0],
-            ....:                  [ 0,  0,  0,  0,  1,  1,  0,  0,  0,  0, -1, -1],
-            ....:                  [ 0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0],
-            ....:                  [ 0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1]])
-            sage: result, certificate = R12_large.is_totally_unimodular(certificate=True,
-            ....:                                 decompose_strategy="delta_pivot")
-            sage: C = certificate.child_nodes()[0]; C
-            DeltaSumNode (9×12) with 2 children
-            sage: C.is_distributed_ranks()
-            True
-            sage: C.is_concentrated_rank()
-            False
-        """
-        return False
-
-    def is_concentrated_rank(self):
-        r"""
-        Check whether the three sum node ``self`` is formed with
-        ``decompose_strategy="concentrated_rank"`` or ``"Mixed_Mixed"``.
-
-        The matrix representing the first child is
-        `M_1=\begin{bmatrix} A & 0 \\ a_1^T & 1\\ a_2^T & \epsilon_2\end{bmatrix}`
-        and the matrix representing the second child is
-        `M_2=\begin{bmatrix} \epsilon_1 & 1 & 0\\ b_1 & b_2 & B\end{bmatrix}`,
-        where `\epsilon_1`, `\epsilon_2` are `1` or `-1`.
-        And the matrix representing ``self`` is a permutation of
-        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & 0 \\ C & B\end{bmatrix}`,
-        where `\begin{bmatrix}a_1^T \\ a_2^T\end{bmatrix}=\begin{bmatrix} C_1 & \bar{C}\end{bmatrix}`,
-        `\begin{bmatrix}b_1 & b_2\end{bmatrix}=\begin{bmatrix} \bar{C}\\ C_2\end{bmatrix}`,
-        `C_12 = C_2 \bar{C}^{-1} C_1`,
-        `C=\begin{bmatrix} C_1 & \bar{C} \\ C_{12} & C_2\end{bmatrix}`, i.e.,
-        `C=\begin{bmatrix}b_1 & b_2\end{bmatrix}\bar{C}^{-1}\begin{bmatrix}a_1^T\\ a_2^T\end{bmatrix}`
-
-        ``concentrated_rank`` is named after the rank 2 off-diagonal block.
-        ``Mixed_Mixed`` is named after the structure of the two children.
-
-        .. SEEALSO::
-
-            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum`
-
-        EXAMPLES::
-
-            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
-            sage: R12_large = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 9, 12, sparse=True),
-            ....:                 [[ 1, -1,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1],
-            ....:                  [ 0,  0,  0,  1, -1,  0,  0,  0,  1,  1,  1,  1],
-            ....:                  [ 0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1],
-            ....:                  [ 1,  0,  1,  0,  0,  0,  0,  0,  1,  1,  0,  0],
-            ....:                  [ 0,  1,  1,  0,  0,  0,  0,  0,  0,  0, -1, -1],
-            ....:                  [ 0,  0,  0,  1,  0,  1,  0,  0,  1,  1,  0,  0],
-            ....:                  [ 0,  0,  0,  0,  1,  1,  0,  0,  0,  0, -1, -1],
-            ....:                  [ 0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0],
-            ....:                  [ 0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1]])
-            sage: result, certificate = R12_large.is_totally_unimodular(certificate=True,
-            ....:                                 decompose_strategy="three_pivot")
-            sage: C = certificate; C
-            ThreeSumNode (9×12) with 2 children
-            sage: C.is_distributed_ranks()
-            False
-            sage: C.is_concentrated_rank()
-            True
-        """
-        return True
-
-    def block_matrix_form(self):
-        r"""
-        Return the block matrix constructed from the three sum of children.
-
-        EXAMPLES::
-
-            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
-            sage: R12 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
-            ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
-            ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
-            sage: R12
-            [ 1  0  1  1  0  0]
-            [ 0  1  1  1  0  0]
-            [ 1  0  1  0  1  1]
-            [ 0 -1  0 -1  1  1]
-            [ 1  0  1  0  1  0]
-            [ 0 -1  0 -1  0  1]
-            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
-            ....:                           decompose_strategy="three_pivot")
-            sage: C = certificate; C
-            ThreeSumNode (6×6) with 2 children
-            sage: C.matrix()
-            [ 1  0  1  1  0  0]
-            [ 0  1  1  1  0  0]
-            [ 1  0  1  0  1  1]
-            [ 0 -1  0 -1  1  1]
-            [ 1  0  1  0  1  0]
-            [ 0 -1  0 -1  0  1]
-            sage: C.summand_matrices()
-            (
-                              [ 1  1  0  0]
-            [ 1  0  1  1  0]  [ 1  0  1  1]
-            [ 0  1  1  1  0]  [ 0 -1  1  1]
-            [ 1  0  1  0  1]  [ 1  0  1  0]
-            [ 0 -1  0 -1  1], [ 0 -1  0  1]
-            )
-            sage: C.child_indices()
-            (((r0, r1, r2, r3), (c0, c1, c2, c3, +r2+r3)),
-            ((+c0+c3, r2, r3, r4, r5), (c0, c3, c4, c5)))
-            sage: C.block_matrix_form()
-            [ 1  0  1  1  0  0]
-            [ 0  1  1  1  0  0]
-            [ 1  0  1  0  1  1]
-            [ 0 -1  0 -1  1  1]
-            [ 1  0  1  0  1  0]
-            [ 0 -1  0 -1  0  1]
-        """
-        M1, M2 = self.summand_matrices()
-        return Matrix_cmr_chr_sparse.three_sum(M1, M2)
-
-cdef class DeltaSumNode(ThreeSumNode):
-
-    def _children(self):
-        r"""
-        Return a tuple of the tuples of the two children
-        and their row and column keys.
-
-        .. SEEALSO::
-
-            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum`
 
         TESTS:
 
@@ -2939,10 +2629,10 @@ cdef class DeltaSumNode(ThreeSumNode):
         else:
             eps1 = Integer(mat1.entryValues[index1])
         if eps1 != 1 and eps1 != -1:
-            raise ValueError(f"First child in the Wide_Wide Three Sum "
-                                f"has 1 or -1 in the entry "
-                                f"row {row1_index} and column {column1_index} "
-                                f"but got {eps1}")
+            raise ValueError(f"First child in the Delta Sum "
+                             f"has 1 or -1 in the entry "
+                             f"row {row1_index} and column {column1_index} "
+                             f"but got {eps1}")
 
         extra_key = ElementKey((1, child1_column_keys[column1_index - 1],
                                 eps1, child1_row_keys[row1_index]),
@@ -2969,10 +2659,10 @@ cdef class DeltaSumNode(ThreeSumNode):
             eps1 = Integer(mat2.entryValues[index1])
 
         if eps1 != 1 and eps1 != -1:
-            raise ValueError(f"Second child in the Wide_Wide Three Sum "
-                                f"has 1 or -1 in the entry "
-                                f"row {row2_index} and column {column2_index} "
-                                f"but got {eps1}")
+            raise ValueError(f"Second child in the Delta Sum "
+                             f"has 1 or -1 in the entry "
+                             f"row {row2_index} and column {column2_index} "
+                             f"but got {eps1}")
 
         child2_column_keys = tuple(self._CMRelement_to_key(parent_columns2[i])
                                     for i in range(1, child2_ncols))
@@ -2992,19 +2682,9 @@ cdef class DeltaSumNode(ThreeSumNode):
 
     def is_distributed_ranks(self):
         r"""
-        Check whether the three sum node ``self`` is formed with
-        ``decompose_strategy="distributed_ranks"`` or ``"Wide_Wide"``.
-
-        The matrix representing the first child is
-        `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon\end{bmatrix}`,
-        and the matrix representing the second child is
-        `M_2=\begin{bmatrix} \varepsilon & 0 & b^T\\ d & d & D\end{bmatrix}`,
-        where `\varepsilon` is `1` or `-1`.
-        And the matrix representing ``self`` is a permutation of
-        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B\end{bmatrix}`.
+        Return ``True`` for the `\Delta`-sum node ``self``.
 
         ``distributed_ranks`` is named after the two rank 1 off-diagonal blocks.
-        ``Wide_Wide`` is named after the structure of the two children.
 
         .. SEEALSO::
 
@@ -3036,14 +2716,19 @@ cdef class DeltaSumNode(ThreeSumNode):
 
     def is_concentrated_rank(self):
         r"""
-        Check whether the three sum node ``self`` is formed with
-        ``decompose_strategy="concentrated_rank"`` or ``"Mixed_Mixed"``.
+        Return ``False`` for the `\Delta`-sum node ``self``.
+
+        ``concentrated_rank`` is named after the rank 2 and rank 0 off-diagonal blocks.
+
+        .. SEEALSO::
+
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.delta_sum`
         """
         return False
 
     def block_matrix_form(self):
         r"""
-        Return the block matrix constructed from the three sum of children.
+        Return the block matrix constructed from the `\Delta`-sum of children.
 
         EXAMPLES::
 
@@ -3094,7 +2779,7 @@ cdef class DeltaSumNode(ThreeSumNode):
         M1, M2 = self.summand_matrices()
         return Matrix_cmr_chr_sparse.delta_sum(M1, M2)
 
-cdef class YSumNode(DeltaSumNode):
+cdef class ThreeSumNode(SumNode):
 
     def _children(self):
         r"""
@@ -3104,6 +2789,274 @@ cdef class YSumNode(DeltaSumNode):
         .. SEEALSO::
 
             :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum`
+
+        TESTS:
+
+        This is test ``ThreesumR12`` in CMR's ``test_tu.cpp``::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: R12 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
+            ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
+            ....:                           decompose_strategy="three_pivot")
+            sage: C1, C2 = certificate.child_nodes()
+            sage: C1.matrix()
+            [ 1  0  1  1  0]
+            [ 0  1  1  1  0]
+            [ 1  0  1  0  1]
+            [ 0 -1  0 -1  1]
+            sage: C2.matrix()
+            [ 1  1  0  0]
+            [ 1  0  1  1]
+            [ 0 -1  1  1]
+            [ 1  0  1  0]
+            [ 0 -1  0  1]
+            sage: certificate.child_indices()[0]
+            ((r0, r1, r2, r3), (c0, c1, c2, c3, +r2+r3))
+            sage: certificate.child_indices()[1]
+            ((+c0+c3, r2, r3, r4, r5), (c0, c3, c4, c5))
+
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
+            ....:                           decompose_strategy="three_pivot",
+            ....:                           row_keys=range(6),
+            ....:                           column_keys='abcdef')
+            sage: C1, C2 = certificate.child_nodes()
+            sage: C1.matrix()
+            [ 1  0  1  1  0]
+            [ 0  1  1  1  0]
+            [ 1  0  1  0  1]
+            [ 0 -1  0 -1  1]
+            sage: C2.matrix()
+            [ 1  1  0  0]
+            [ 1  0  1  1]
+            [ 0 -1  1  1]
+            [ 1  0  1  0]
+            [ 0 -1  0  1]
+            sage: certificate.child_indices()[0]
+            ((0, 1, 2, 3), (a, b, c, d, +2+3))
+            sage: certificate.child_indices()[1]
+            ((+a+d, 2, 3, 4, 5), (a, d, e, f))
+        """
+        if self._child_nodes is not None:
+            return self._child_nodes
+
+        if self.nchildren() != 2:
+            raise ValueError(f"ThreeSumNode has exactly two children not {self.nchildren()}!")
+
+        self.set_default_keys()
+
+        cdef CMR_SEYMOUR_NODE *child1_dec = CMRseymourChild(self._dec, 0)
+        cdef CMR_ELEMENT *parent_rows1 = CMRseymourChildRowsToParent(self._dec, 0)
+        cdef CMR_ELEMENT *parent_columns1 = CMRseymourChildColumnsToParent(self._dec, 0)
+        cdef CMR_CHRMAT *mat1 = CMRseymourGetMatrix(child1_dec)
+        cdef size_t *first_special_rows = CMRseymourChildSpecialRows(self._dec, 0)
+        cdef size_t *first_special_columns = CMRseymourChildSpecialColumns(self._dec, 0)
+
+        cdef CMR_SEYMOUR_NODE *child2_dec = CMRseymourChild(self._dec, 1)
+        cdef CMR_ELEMENT *parent_rows2 = CMRseymourChildRowsToParent(self._dec, 1)
+        cdef CMR_ELEMENT *parent_columns2 = CMRseymourChildColumnsToParent(self._dec, 1)
+        cdef CMR_CHRMAT *mat2 = CMRseymourGetMatrix(child2_dec)
+        cdef size_t *second_special_rows = CMRseymourChildSpecialRows(self._dec, 1)
+        cdef size_t *second_special_columns = CMRseymourChildSpecialColumns(self._dec, 1)
+
+        cdef size_t index1, index2
+
+        child1_nrows = CMRseymourNumRows(child1_dec)
+        child1_ncols = CMRseymourNumColumns(child1_dec)
+
+        child1_row_keys = tuple(self._CMRelement_to_key(parent_rows1[i])
+                                for i in range(child1_nrows))
+        child1_column_keys = tuple(self._CMRelement_to_key(parent_columns1[i])
+                                for i in range(child1_ncols - 1))
+
+        row1_index = first_special_rows[0]
+        extra_column_index = first_special_columns[2]
+        CMR_CALL(CMRchrmatFindEntry(mat1, row1_index, extra_column_index, &index1))
+        if index1 == SIZE_MAX:
+            eps1 = Integer(0)
+        else:
+            eps1 = Integer(mat1.entryValues[index1])
+        if eps1 != 1:
+            raise ValueError(f"First child in the Three Sum "
+                             f"has 1 in the entry "
+                             f"row {row1_index} and column {extra_column_index} "
+                             f"but got {eps1}")
+
+        row2_index = first_special_rows[1]
+        CMR_CALL(CMRchrmatFindEntry(mat1, row2_index, extra_column_index, &index2))
+        if index2 == SIZE_MAX:
+            eps2 = Integer(0)
+        else:
+            eps2 = Integer(mat1.entryValues[index2])
+        if eps2 != 1 and eps2 != -1:
+            raise ValueError(f"First child in the Three Sum "
+                             f"has 1 or -1 in the entry "
+                             f"row {row2_index} and column {extra_column_index} "
+                             f"but got {eps2}")
+
+        extra_key = ElementKey((eps1, child1_row_keys[row1_index],
+                                eps2, child1_row_keys[row2_index]),
+                                composition=True)
+        child1_column_keys += (extra_key,)
+
+        child1 = create_DecompositionNode(child1_dec, matrix=None,
+                                          row_keys=child1_row_keys,
+                                          column_keys=child1_column_keys,
+                                          base_ring=self.base_ring())
+
+        child2_nrows = CMRseymourNumRows(child2_dec)
+        child2_ncols = CMRseymourNumColumns(child2_dec)
+
+        child2_row_keys = tuple(self._CMRelement_to_key(parent_rows2[i])
+                                for i in range(1, child2_nrows))
+        child2_column_keys = tuple(self._CMRelement_to_key(parent_columns2[i])
+                                    for i in range(child2_ncols))
+
+        column1_index = second_special_columns[0]
+        extra_row_index = second_special_rows[0]
+        CMR_CALL(CMRchrmatFindEntry(mat2, extra_row_index, column1_index, &index1))
+        if index1 == SIZE_MAX:
+            eps1 = Integer(0)
+        else:
+            eps1 = Integer(mat1.entryValues[index1])
+        if eps1 != 1 and eps1 != -1:
+            raise ValueError(f"Second child in the Three Sum "
+                             f"has 1 or -1 in the entry "
+                             f"row {extra_row_index} and column {column1_index} "
+                             f"but got {eps1}")
+        column2_index = second_special_columns[1]
+        CMR_CALL(CMRchrmatFindEntry(mat2, extra_row_index, column2_index, &index2))
+        if index2 == SIZE_MAX:
+            eps2 = Integer(0)
+        else:
+            eps2 = Integer(mat2.entryValues[index2])
+        if eps2 != 1:
+            raise ValueError(f"Second child in the Three Sum "
+                             f"has 1 in the entry "
+                             f"row {extra_row_index} and column {column2_index} "
+                             f"but got {eps2}")
+
+        extra_key = ElementKey((eps1, child2_column_keys[column1_index],
+                                eps2, child2_column_keys[column2_index]),
+                                composition=True)
+        child2_row_keys = (extra_key,) + child2_row_keys
+
+        child2 = create_DecompositionNode(child2_dec, matrix=None,
+                                          row_keys=child2_row_keys,
+                                          column_keys=child2_column_keys,
+                                          base_ring=self.base_ring())
+
+        self._child_nodes = ((child1, child1_row_keys, child1_column_keys),
+                             (child2, child2_row_keys, child2_column_keys))
+        return self._child_nodes
+
+    def is_distributed_ranks(self):
+        r"""
+        Return ``False`` for the 3-sum node ``self``.
+
+        ``distributed_ranks`` is named after the two rank 1 off-diagonal blocks.
+
+        .. SEEALSO::
+
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum`
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: R12_large = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 9, 12, sparse=True),
+            ....:                 [[ 1, -1,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1],
+            ....:                  [ 0,  0,  0,  1, -1,  0,  0,  0,  1,  1,  1,  1],
+            ....:                  [ 0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1],
+            ....:                  [ 1,  0,  1,  0,  0,  0,  0,  0,  1,  1,  0,  0],
+            ....:                  [ 0,  1,  1,  0,  0,  0,  0,  0,  0,  0, -1, -1],
+            ....:                  [ 0,  0,  0,  1,  0,  1,  0,  0,  1,  1,  0,  0],
+            ....:                  [ 0,  0,  0,  0,  1,  1,  0,  0,  0,  0, -1, -1],
+            ....:                  [ 0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0],
+            ....:                  [ 0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1]])
+            sage: result, certificate = R12_large.is_totally_unimodular(certificate=True,
+            ....:                                 decompose_strategy="three_pivot")
+            sage: C = certificate; C
+            ThreeSumNode (9×12) with 2 children
+            sage: C.is_distributed_ranks()
+            False
+            sage: C.is_concentrated_rank()
+            True
+        """
+        return False
+
+    def is_concentrated_rank(self):
+        r"""
+        Return ``True`` for the 3-sum node ``self``.
+
+        ``concentrated_rank`` is named after the rank 2 and rank 0 off-diagonal blocks.
+
+        .. SEEALSO::
+
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.three_sum`
+        """
+        return True
+
+    def block_matrix_form(self):
+        r"""
+        Return the block matrix constructed from the 3-sum of children.
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: R12 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
+            ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
+            sage: R12
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
+            ....:                           decompose_strategy="three_pivot")
+            sage: C = certificate; C
+            ThreeSumNode (6×6) with 2 children
+            sage: C.matrix()
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: C.summand_matrices()
+            (
+                              [ 1  1  0  0]
+            [ 1  0  1  1  0]  [ 1  0  1  1]
+            [ 0  1  1  1  0]  [ 0 -1  1  1]
+            [ 1  0  1  0  1]  [ 1  0  1  0]
+            [ 0 -1  0 -1  1], [ 0 -1  0  1]
+            )
+            sage: C.child_indices()
+            (((r0, r1, r2, r3), (c0, c1, c2, c3, +r2+r3)),
+            ((+c0+c3, r2, r3, r4, r5), (c0, c3, c4, c5)))
+            sage: C.block_matrix_form()
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+        """
+        M1, M2 = self.summand_matrices()
+        return Matrix_cmr_chr_sparse.three_sum(M1, M2)
+
+cdef class YSumNode(SumNode):
+
+    def _children(self):
+        r"""
+        Return a tuple of the tuples of the two children
+        and their row and column keys.
+
+        .. SEEALSO::
+
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.y_sum`
 
         TESTS:
 
@@ -3158,7 +3111,7 @@ cdef class YSumNode(DeltaSumNode):
             return self._child_nodes
 
         if self.nchildren() != 2:
-            raise ValueError(f"DeltaSumNode has exactly two children not {self.nchildren()}!")
+            raise ValueError(f"YSumNode has exactly two children not {self.nchildren()}!")
 
         self.set_default_keys()
 
@@ -3190,10 +3143,10 @@ cdef class YSumNode(DeltaSumNode):
         else:
             eps1 = Integer(mat1.entryValues[index1])
         if eps1 != 1 and eps1 != -1:
-            raise ValueError(f"First child in the Wide_Wide Three Sum "
-                                f"has 1 or -1 in the entry "
-                                f"row {row1_index} and column {column1_index} "
-                                f"but got {eps1}")
+            raise ValueError(f"First child in the Y Sum "
+                             f"has 1 or -1 in the entry "
+                             f"row {row1_index} and column {column1_index} "
+                             f"but got {eps1}")
 
         extra_key = ElementKey((1, child1_row_keys[row1_index - 1],
                                 eps1, child1_column_keys[column1_index]),
@@ -3222,10 +3175,10 @@ cdef class YSumNode(DeltaSumNode):
             eps1 = Integer(mat2.entryValues[index1])
 
         if eps1 != 1 and eps1 != -1:
-            raise ValueError(f"Second child in the Wide_Wide Three Sum "
-                                f"has 1 or -1 in the entry "
-                                f"row {row2_index} and column {column2_index} "
-                                f"but got {eps1}")
+            raise ValueError(f"Second child in the Y Sum "
+                             f"has 1 or -1 in the entry "
+                             f"row {row2_index} and column {column2_index} "
+                             f"but got {eps1}")
 
         extra_key = ElementKey((1, child2_row_keys[row2_index],
                                 eps1, child2_column_keys[column2_index]),
@@ -3243,23 +3196,13 @@ cdef class YSumNode(DeltaSumNode):
 
     def is_distributed_ranks(self):
         r"""
-        Check whether the three sum node ``self`` is formed with
-        ``decompose_strategy="distributed_ranks"`` or ``"Wide_Wide"``.
-
-        The matrix representing the first child is
-        `M_1=\begin{bmatrix} A & a & a\\ c^T & 0 & \varepsilon\end{bmatrix}`,
-        and the matrix representing the second child is
-        `M_2=\begin{bmatrix} \varepsilon & 0 & b^T\\ d & d & D\end{bmatrix}`,
-        where `\varepsilon` is `1` or `-1`.
-        And the matrix representing ``self`` is a permutation of
-        `M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & B\end{bmatrix}`.
+        Return ``True`` for the `\Delta`-sum node ``self``.
 
         ``distributed_ranks`` is named after the two rank 1 off-diagonal blocks.
-        ``Wide_Wide`` is named after the structure of the two children.
 
         .. SEEALSO::
 
-            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.delta_sum`
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.y_sum`
 
         EXAMPLES::
 
@@ -3287,14 +3230,19 @@ cdef class YSumNode(DeltaSumNode):
 
     def is_concentrated_rank(self):
         r"""
-        Check whether the three sum node ``self`` is formed with
-        ``decompose_strategy="concentrated_rank"`` or ``"Mixed_Mixed"``.
+        Return ``False`` for the `\Delta`-sum node ``self``.
+
+        ``concentrated_rank`` is named after the rank 2 and rank 0 off-diagonal blocks.
+
+        .. SEEALSO::
+
+            :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.y_sum`
         """
         return False
 
     def block_matrix_form(self):
         r"""
-        Return the block matrix constructed from the three sum of children.
+        Return the block matrix constructed from the Y-sum of children.
 
         EXAMPLES::
 
