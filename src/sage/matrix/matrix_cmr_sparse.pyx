@@ -861,18 +861,22 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         sum.set_immutable()
         return sum
 
-    def _delta_sum_cmr(first_mat, second_mat, first_special_row, first_special_columns, second_special_row, second_special_columns):
+    def _delta_sum_cmr(first_mat, second_mat,
+                       first_special_row,
+                       first_special_columns,
+                       second_special_row,
+                       second_special_columns):
         r"""
         Return the `\Delta`-sum matrix constructed from the two matrices
         ``first_mat`` and ``second_mat`` via connecting rows
         ``first_special_row`` and columns ``first_special_columns``.
 
-        This function implements the "distributed_ranks" strategy for the 3-sum operation.
-
-        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``. If ``first_special_row``
-        indexes a row vector `c^T` and ``first_special_columns`` indexes two column vectors `a` of ``first_mat``,
-        then ``second_special_row`` indexes a row vector `b` and ``second_special_columns`` indexes two column
-        vectors `d` of ``second_mat``. In this case, the first matrix is
+        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``.
+        If ``first_special_row`` indexes a row vector `c^T` and
+        ``first_special_columns`` indexes two column vectors `a` of ``first_mat``,
+        then ``second_special_row`` indexes a row vector `b` and
+        ``second_special_columns`` indexes two column vectors `d` of ``second_mat``.
+        In this case, the first matrix is
         `
             M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix}
         `
@@ -880,16 +884,25 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `
             M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}.
         `
-        Then the Seymour/Schrijver 3-sum is the matrix
+        Then the `\Delta`-sum is the matrix
         `
             M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
         `
 
-        The terminology "3-sum" is used in the context of Seymour's decomposition
-        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+        The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
+        In the context of totally unimodular matrices, there are different interpretations
+        in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
+        satisfying `rank(B) + rank(C) = 2`.
+        Three types of 3-sum operations are implemented in CMR:
+        `\Delta`-sum, 3-sum, and `Y`-sum.
+        The `\Delta`-sum is referenced in [Sch1986], Chapter 19.4.
+
+        - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
+        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
         .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
-                    :meth:`delta_sum`,:meth:`y_sum`, :meth:`three_sum`
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+                     :meth:`delta_sum_decomposition`, :meth:`is_delta_sum`
 
         INPUT:
 
@@ -904,7 +917,49 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         EXAMPLES::
 
+        This is test ``DeltasumComposition`` in CMR's ``test_separation.cpp``::
+
             sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[1, 1, 0, 0],
+            ....:                             [1, 0, 1, 1],
+            ....:                             [0, 1, 0,-1]]); M1
+            [ 1  1  0  0]
+            [ 1  0  1  1]
+            [ 0  1  0 -1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[-1, 0, 1, 0],
+            ....:                             [ 1, 1, 0, 1],
+            ....:                             [ 0, 0, 1, 1]]); M2
+            [-1  0  1  0]
+            [ 1  1  0  1]
+            [ 0  0  1  1]
+            sage: M1._delta_sum_cmr(M2, 2, [2, 3], 0, [0, 1])
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[1, 1, 0, 0],
+            ....:                             [1, 0, 1, 1],
+            ....:                             [0, 1, 0, 1]]); M1
+            [1 1 0 0]
+            [1 0 1 1]
+            [0 1 0 1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[1, 0, 1, 0],
+            ....:                             [1, 1, 0, 1],
+            ....:                             [0, 0, 1, 1]]); M2
+            [1 0 1 0]
+            [1 1 0 1]
+            [0 0 1 1]
+            sage: M1._delta_sum_cmr(M2, 2, [2, 3], 0, [0, 1])
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
+
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
             ....:                            [[1, 1, 0, 0, 0, 0],
             ....:                             [1, 0, 0, 1,-1, 1],
@@ -937,44 +992,37 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  0  1  0 -1  0]
             [ 1  0 -1  1  0  0  0  1]
 
-            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
-            ....:                            [[1, 1, 0, 0],
-            ....:                             [1, 0, 1, 1],
-            ....:                             [0, 1, 0,-1]]); M1
-            [ 1  1  0  0]
-            [ 1  0  1  1]
-            [ 0  1  0 -1]
-            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
-            ....:                            [[-1, 0, 1, 0],
-            ....:                             [ 1, 1, 0, 1],
-            ....:                             [ 0, 0, 1, 1]]); M2
-            [-1  0  1  0]
-            [ 1  1  0  1]
-            [ 0  0  1  1]
-            sage: M1._delta_sum_cmr(M2, 2, [2, 3], 0, [0, 1])
-            [1 1 0 0]
-            [1 0 1 0]
-            [0 1 0 1]
-            [0 0 1 1]
-            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
-            ....:                            [[1, 1, 0, 0],
-            ....:                             [1, 0, 1, 1],
-            ....:                             [0, 1, 0, 1]]); M1
-            [1 1 0 0]
-            [1 0 1 1]
-            [0 1 0 1]
-            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
-            ....:                            [[1, 0, 1, 0],
-            ....:                             [1, 1, 0, 1],
-            ....:                             [0, 0, 1, 1]]); M2
-            [1 0 1 0]
-            [1 1 0 1]
-            [0 0 1 1]
-            sage: M1._delta_sum_cmr(M2, 2, [2, 3], 0, [0, 1])
-            [1 1 0 0]
-            [1 0 1 0]
-            [0 1 0 1]
-            [0 0 1 1]
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1, 1, 0, 0, 0, 0],
+            ....:                             [1, 0, 1,-1, 1, 0],
+            ....:                             [0,-1, 1, 0,-1, 1],
+            ....:                             [0, 0,-1,-1, 0,-1],
+            ....:                             [0, 1, 1, 0, 1, 1]]); M1
+            [ 1  1  0  0  0  0]
+            [ 1  0  1 -1  1  0]
+            [ 0 -1  1  0 -1  1]
+            [ 0  0 -1 -1  0 -1]
+            [ 0  1  1  0  1  1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
+            ....:                            [[1,-1,-1, 0, 0,-1],
+            ....:                             [1, 1, 1, 1,-1, 0],
+            ....:                             [0, 0,-1, 0, 1, 0],
+            ....:                             [1, 0, 0,-1, 0, 0],
+            ....:                             [0, 1, 0, 0, 1, 1]]); M2
+            [ 1 -1 -1  0  0 -1]
+            [ 1  1  1  1 -1  0]
+            [ 0  0 -1  0  1  0]
+            [ 1  0  0 -1  0  0]
+            [ 0  1  0  0  1  1]
+            sage: M1._delta_sum_cmr(M2, 1, [5, 2], 1, [1, 5])
+            [ 1  1  0  0  0  0  0  0]
+            [ 0 -1  0 -1  1  1  1 -1]
+            [ 0  0 -1  0 -1 -1 -1  1]
+            [ 0  1  0  1  1  1  1 -1]
+            [-1  0  1 -1  1 -1  0  0]
+            [ 0  0  0  0  0 -1  0  1]
+            [ 0  0  0  0  1  0 -1  0]
+            [ 1  0 -1  1  0  0  0  1]
         """
         cdef Matrix_cmr_chr_sparse sum, first, second
         cdef CMR_CHRMAT *sum_mat = NULL
@@ -1019,99 +1067,19 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         sum = Matrix_cmr_chr_sparse._from_cmr(sum_mat)
         return sum
 
-    def _y_sum_cmr(first_mat, second_mat, first_special_rows, first_special_column, second_special_rows, second_special_column):
-        r"""
-        Return the Y-sum matrix constructed from the two matrices
-        ``first_mat`` and ``second_mat`` via connecting rows
-        ``first_special_rows`` and column ``first_special_column``.
-
-        This function implements the "y_sum" strategy for the 3-sum operation.
-
-        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``. If ``first_special_rows``
-        indexes two row vectors `c^T` of ``first_mat`` and ``first_special_column`` indexes a column vector `a` of
-        ``first_mat``, then ``second_special_rows`` indexes two row vectors `b^T` of ``second_mat`` and
-        ``second_special_column`` indexes a column vector `d` of ``second_mat``. In this case, the first matrix is
-        `
-            M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix}
-        `
-        and the second matrix is
-        `
-            M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}.
-        `
-        Then the Y-sum is the matrix
-        `
-            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
-        `
-
-        The terminology "3-sum" is used in the context of Seymour's decomposition
-        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
-
-        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
-                     :meth:`delta_sum`, :meth:`y_sum`, :meth:`three_sum`
-
-        INPUT:
-
-        - ``first_mat`` -- the first integer matrix
-        - ``second_mat`` -- the second integer matrix
-        - ``first_special_rows`` -- the indices of the two special rows in the first matrix
-        - ``first_special_column`` -- the index of the special column in the first matrix
-        - ``second_special_rows`` -- the indices of the two special rows in the second matrix
-        - ``second_special_column`` -- the index of the special column in the second matrix
-
-        OUTPUT: A :class:`Matrix_cmr_chr_sparse`
-        """
-        cdef Matrix_cmr_chr_sparse sum, first, second
-        cdef CMR_CHRMAT *sum_mat = NULL
-        first = Matrix_cmr_chr_sparse._from_data(first_mat, immutable=False)
-        second = Matrix_cmr_chr_sparse._from_data(second_mat, immutable=False)
-        cdef size_t* firstSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
-        cdef size_t* firstSpecialColumns = <size_t *>sig_malloc(sizeof(size_t))
-        cdef size_t* secondSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
-        cdef size_t* secondSpecialColumns = <size_t *>sig_malloc(sizeof(size_t))
-        cdef int8_t characteristic = first_mat.parent().characteristic()
-
-        if second_mat.parent().characteristic() != characteristic:
-            raise ValueError("The characteristic of two matrices are different")
-
-        # Check if indices are within range
-        if first_special_rows[0] < 0 or first_special_rows[0] >= first._mat.numRows:
-            raise ValueError("First special row index 1 out of range")
-        if first_special_rows[1] < 0 or first_special_rows[1] >= first._mat.numRows:
-            raise ValueError("First special row index 2 out of range")
-        if first_special_column < 0 or first_special_column >= first._mat.numColumns:
-            raise ValueError("First special column index out of range")
-        if second_special_rows[0] < 0 or second_special_rows[0] >= second._mat.numRows:
-            raise ValueError("Second special row index 1 out of range")
-        if second_special_rows[1] < 0 or second_special_rows[1] >= second._mat.numRows:
-            raise ValueError("Second special row index 2 out of range")
-        if second_special_column < 0 or second_special_column >= second._mat.numColumns:
-            raise ValueError("Second special column index out of range")
-
-        firstSpecialRows[0] = first_special_rows[0]
-        firstSpecialRows[1] = first_special_rows[1]
-        firstSpecialColumns[0] = first_special_column
-        secondSpecialRows[0] = second_special_rows[0]
-        secondSpecialRows[1] = second_special_rows[1]
-        secondSpecialColumns[0] = second_special_column
-
-        sig_on()
-        try:
-            CMR_CALL(CMRysumCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
-        finally:
-            sig_off()
-
-        sum = Matrix_cmr_chr_sparse._from_cmr(sum_mat)
-        return sum
-
     def _three_sum_cmr(first_mat, second_mat,
-                  first_special_rows, first_special_columns, second_special_rows, second_special_columns):
+                       first_special_rows,
+                       first_special_columns,
+                       second_special_rows,
+                       second_special_columns):
         r"""
         Return the 3-sum matrix constructed from the two matrices
         ``first_mat`` and ``second_mat`` via connecting rows
         ``first_special_rows`` and ``second_special_rows`` and columns ``first_special_columns`` and ``second_special_columns``.
 
-        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``, let `A` be the matrix
-        `M_1` without the rows ``first_special_rows[0]`` and ``first_special_rows[1]`` and column ``first_special_columns[2]``.
+        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``,
+        let `A` be the matrix `M_1` without the rows ``first_special_rows[0]`` and
+        ``first_special_rows[1]`` and column ``first_special_columns[2]``.
         After permuting these to be last, `M_1` must be of the form
         `
             M_1 = \begin{bmatrix}
@@ -1120,16 +1088,20 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             C_{j,\star} & \beta
             \end{bmatrix},
         `
-        where `\alpha,\beta \in \{-1,+1 \}` (otherwise, ``RuntimeError("Invalid matrix structure")`` is returned). Let `D` be the
-        matrix `M_2` without the row ``second_special_rows[0]`` and columns ``second_special_columns[0]`` and
-        ``second_special_columns[1]``. After reordering these to be first, `M_2` must be of the form
+        where `\alpha, \beta \in \{-1,+1 \}`
+        (otherwise, ``RuntimeError("Invalid matrix structure")`` is returned).
+        Let `D` be the matrix `M_2` without the row ``second_special_rows[0]`` and
+        columns ``second_special_columns[0]`` and ``second_special_columns[1]``.
+        After reordering these to be first, `M_2` must be of the form
         `
             M_2 = \begin{bmatrix}
             \gamma & \delta & 0^T \\
             C_{\star,k} & C_{\star,\ell} & D
             \end{bmatrix},
         `
-        where `\gamma,\delta \in \{ -1,+1 \}` (otherwise, ``RuntimeError("Invalid matrix structure")`` is returned) and such that the matrix
+        where `\gamma, \delta \in \{ -1,+1 \}`
+        (otherwise, ``RuntimeError("Invalid matrix structure")`` is returned)
+        and such that the matrix
         `
             N = \begin{bmatrix}
             \gamma & \delta & 0 \\
@@ -1137,17 +1109,24 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             C_{j,k} & C_{j,\ell} & \beta
             \end{bmatrix}
         `
-        is totally unimodular (otherwise, ``RuntimeError("Inconsistent pieces of input")`` is returned). The columns ``first_special_columns[0]`` and
-        ``first_special_columns[1]`` indicate the columns of `M_1` that shall correspond to `C_{\star,k}` and
-        `C_{\star,\ell}`, respectively. Similarly, the rows ``second_special_rows[1]`` and ``second_special_rows[2]``
-        indicate the rows of `M_2` that shall correspond to `C_{i,\star}` and `C_{j,\star}`, respectively.
+        is totally unimodular
+        (otherwise, ``RuntimeError("Inconsistent pieces of input")`` is returned).
+        The columns ``first_special_columns[0]`` and
+        ``first_special_columns[1]`` indicate the columns of `M_1` that
+        shall correspond to `C_{\star,k}` and `C_{\star,\ell}`, respectively.
+        Similarly, the rows ``second_special_rows[1]`` and
+        ``second_special_rows[2]`` indicate the rows of `M_2` that shall
+        correspond to `C_{i,\star}` and `C_{j,\star}`, respectively.
 
         .. note::
-            The 2-by-2 submatrix of `M_1` indexed by rows ``first_special_rows[0]`` and ``first_special_rows[1]`` and
-            columns ``first_special_columns[0]`` and ``first_special_columns[1]`` must be identical to the submatrix of
-            `M_2` indexed by rows ``second_special_rows[1]`` and ``second_special_rows[2]`` and columns
-            ``secondSpecialColumns[0]`` and ``secondSpecialColumns[1]``, which is the matrix `C_{\{i,j\},\{k,\ell\}}`.
-            ``second_special_columns[0]`` and ``second_special_columns[1]``, which is the matrix `C_{\{i,j\},\{k,\ell\}}`. Otherwise, ``RuntimeError("Invalid matrix structure")`` is returned.
+            The 2-by-2 submatrix of `M_1` indexed by rows
+            ``first_special_rows[0]`` and ``first_special_rows[1]`` and
+            columns ``first_special_columns[0]`` and ``first_special_columns[1]``
+            must be identical to the submatrix of `M_2` indexed by rows
+            ``second_special_rows[1]`` and ``second_special_rows[2]`` and
+            columns ``secondSpecialColumns[0]`` and ``secondSpecialColumns[1]``,
+            which is the matrix `C_{\{i,j\},\{k,\ell\}}`.
+            Otherwise, ``RuntimeError("Invalid matrix structure")`` is returned.
 
         The 3-sum of `M_1` and `M_2` (at these rows/columns) is the matrix
         `
@@ -1159,11 +1138,19 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         where `C` is the unique rank-2 matrix having linearly independent rows `C_{i,\star}` and
         `C_{j,\star}` and linearly independent columns `C_{\star,k}` and `C_{\star,\ell}`.
 
-        The terminology "3-sum" is used in the context of Seymour's decomposition
-        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+        The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
+        In the context of totally unimodular matrices, there are different interpretations
+        in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
+        satisfying `rank(B) + rank(C) = 2`.
+        Three types of 3-sum operations are implemented in CMR:
+        `\Delta`-sum, 3-sum, and `Y`-sum.
 
-        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`,
-                     :meth:`delta_sum`, :meth:`y_sum`, :meth:`three_sum`
+        - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
+        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+                     :meth:`three_sum_decomposition`, :meth:`is_three_sum`
 
         INPUT:
 
@@ -1177,6 +1164,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         OUTPUT: A :class:`Matrix_cmr_chr_sparse`
 
         EXAMPLES::
+
+        This is test ``ThreesumComposition`` in CMR's ``test_separation.cpp``::
 
             sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 5, sparse=True),
@@ -1199,20 +1188,21 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0 -1  1  1]
             [ 1  0  1  0]
             [ 0 -1  0  1]
-            sage: M1._three_sum_cmr(M2, [2,3], [2,3,4], [0,1,2], [0,1])
+            sage: M1._three_sum_cmr(M2, [2, 3], [2, 3, 4], [0, 1, 2], [0, 1])
             [ 1  0  1  1  0  0]
             [ 0  1  1  1  0  0]
             [ 1  0  1  0  1  1]
             [ 0 -1  0 -1  1  1]
             [ 1  0  1  0  1  0]
             [ 0 -1  0 -1  0  1]
-            sage: M1._three_sum_cmr(M2, [2,3], [0,1,4], [0,3,2], [0,1])
+            sage: M1._three_sum_cmr(M2, [2, 3], [0, 1, 4], [0, 3, 2], [0, 1])
             [ 1  0  1  1  0  0]
             [ 0  1  1  1  0  0]
             [ 1  0  1  0  1  1]
             [ 0 -1  0 -1  1  1]
             [ 1  0  1  0  1  0]
             [ 0 -1  0 -1  0  1]
+
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 5, sparse=True),
             ....:                            [[1, 0,-1, 1, 0],
             ....:                             [0, 1,-1, 1, 0],
@@ -1233,7 +1223,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1 -1  1  1]
             [ 1  0  1  0]
             [ 0 -1  0  1]
-            sage: M1._three_sum_cmr(M2, [2,3], [2,3,4], [0,1,2], [0,1])
+            sage: M1._three_sum_cmr(M2, [2, 3], [2, 3, 4], [0, 1, 2], [0, 1])
             [ 1  0 -1  1  0  0]
             [ 0  1 -1  1  0  0]
             [ 1  0  1  0  1  1]
@@ -1241,98 +1231,30 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1  0  1  0  1  0]
             [-1 -1  0 -1  0  1]
 
-            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
-            ....:                            [[1, 1, 0, 0, 0, 0],
-            ....:                             [0, 0,-1, 1, 0, 0],
-            ....:                             [0, 1, 1, 0, 1, 0],
-            ....:                             [1, 0, 1,-1, 1, 1],
-            ....:                             [0,-1, 1, 0,-1, 1]]); M1
-            [ 1  1  0  0  0  0]
-            [ 0  0 -1  1  0  0]
-            [ 0  1  1  0  1  0]
-            [ 1  0  1 -1  1  1]
-            [ 0 -1  1  0 -1  1]
-            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[ 1,-1, 0, 0, 0],
-            ....:                             [ 1, 0, 1,-1, 0],
-            ....:                             [ 1,-1, 1, 1, 1],
-            ....:                             [-1, 1, 0, 0, 0],
-            ....:                             [ 0, 0, 1, 0,-1],
-            ....:                             [ 0, 1, 0, 1, 0]]); M2
-            [ 1 -1  0  0  0]
-            [ 1  0  1 -1  0]
-            [ 1 -1  1  1  1]
-            [-1  1  0  0  0]
-            [ 0  0  1  0 -1]
-            [ 0  1  0  1  0]
-            sage: Matrix_cmr_chr_sparse._three_sum_cmr(M1, M2, [3,4], [1,2,5], [0,1,2], [1,0])
-            [ 1  1  0  0  0  0  0  0]
-            [ 0  0 -1  1  0  0  0  0]
-            [ 0  1  1  0  1  0  0  0]
-            [ 1  0  1 -1  1  1 -1  0]
-            [ 0 -1  1  0 -1  1  1  1]
-            [ 0  1 -1  0  1  0  0  0]
-            [ 0  0  0  0  0  1  0 -1]
-            [ 1  1  0 -1  2  0  1  0]
-
-            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
-            ....:                            [[1, 1, 0, 0, 0, 0],
-            ....:                             [1, 0, 1,-1, 1, 1],
-            ....:                             [0,-1, 1, 0,-1, 1],
-            ....:                             [0, 0,-1, 1, 0, 0],
-            ....:                             [0, 1, 1, 0, 1, 0]]); M1
-            [ 1  1  0  0  0  0]
-            [ 1  0  1 -1  1  1]
-            [ 0 -1  1  0 -1  1]
-            [ 0  0 -1  1  0  0]
-            [ 0  1  1  0  1  0]
-            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[0, 0, 1, 0,-1],
-            ....:                             [1,-1, 1, 0, 0],
-            ....:                             [1, 1, 1, 1,-1],
-            ....:                             [0, 0,-1, 0, 1],
-            ....:                             [1, 0, 0,-1, 0],
-            ....:                             [0, 1, 0, 0, 1]]); M2
-            [ 0  0  1  0 -1]
-            [ 1 -1  1  0  0]
-            [ 1  1  1  1 -1]
-            [ 0  0 -1  0  1]
-            [ 1  0  0 -1  0]
-            [ 0  1  0  0  1]
-            sage: M = M1._three_sum_cmr(M2, [1, 2], [1,2,5],
-            ....:                  [0,1,2], [4, 2]); M
-            [ 1  1  0  0  0  0  0  0]
-            [ 0  0 -1  1  0  0  0  0]
-            [ 0  1  1  0  1  0  0  0]
-            [ 1  0  1 -1  1  1 -1  0]
-            [ 0 -1  1  0 -1  1  1  1]
-            [ 0  1 -1  0  1  0  0  0]
-            [ 0  0  0  0  0  1  0 -1]
-            [ 1  1  0 -1  2  0  1  0]
-            sage: M1._three_sum_cmr(M2, [1, 2], [1,2,5],
-            ....:                  [0,1,2], [2, 4])
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 5, sparse=True),
+            ....:                            [[1, 0, 1, 1, 0],
+            ....:                             [0, 1, 1, 1, 0],
+            ....:                             [1, 0, 1, 0, 1],
+            ....:                             [0,-1, 1,-1, 1]]); M1
+            [ 1  0  1  1  0]
+            [ 0  1  1  1  0]
+            [ 1  0  1  0  1]
+            [ 0 -1  1 -1  1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 4, sparse=True),
+            ....:                            [[1, 1, 0, 0],
+            ....:                             [1, 0, 1, 1],
+            ....:                             [0,-1, 1, 1],
+            ....:                             [1, 0, 1, 0],
+            ....:                             [0,-1, 0, 1]]); M2
+            [ 1  1  0  0]
+            [ 1  0  1  1]
+            [ 0 -1  1  1]
+            [ 1  0  1  0]
+            [ 0 -1  0  1]
+            sage: M1._three_sum_cmr(M2, [2, 3], [2, 3, 4], [0, 1, 2], [0, 1])
             Traceback (most recent call last):
             ...
             RuntimeError: Invalid matrix structure
-
-            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[0, 0, 1, 0, 1],
-            ....:                             [1,-1, 1, 0, 0],
-            ....:                             [1, 1, 1, 1,-1],
-            ....:                             [0, 0,-1, 0, 1],
-            ....:                             [1, 0, 0,-1, 0],
-            ....:                             [0, 1, 0, 0, 1]]); M2
-            [ 0  0  1  0  1]
-            [ 1 -1  1  0  0]
-            [ 1  1  1  1 -1]
-            [ 0  0 -1  0  1]
-            [ 1  0  0 -1  0]
-            [ 0  1  0  0  1]
-            sage: M = M1._three_sum_cmr(M2, [1, 2], [1,2,5],
-            ....:                  [0,1,2], [4, 2])
-            Traceback (most recent call last):
-            ...
-            RuntimeError: Inconsistent pieces of input
         """
         cdef Matrix_cmr_chr_sparse sum, first, second
         cdef CMR_CHRMAT *sum_mat = NULL
@@ -1377,13 +1299,160 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         sum = Matrix_cmr_chr_sparse._from_cmr(sum_mat)
         return sum
 
+    def _y_sum_cmr(first_mat, second_mat,
+                   first_special_rows,
+                   first_special_column,
+                   second_special_rows,
+                   second_special_column):
+        r"""
+        Return the `Y`-sum matrix constructed from the two matrices
+        ``first_mat`` and ``second_mat`` via connecting rows
+        ``first_special_rows`` and column ``first_special_column``.
+
+        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``.
+        If ``first_special_rows`` indexes two row vectors `c^T` of ``first_mat`` and ``first_special_column`` indexes a column vector `a` of ``first_mat``,
+        then ``second_special_rows`` indexes two row vectors `b^T` of ``second_mat`` and
+        ``second_special_column`` indexes a column vector `d` of ``second_mat``.
+        In this case, the first matrix is
+        `
+            M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix}
+        `
+        and the second matrix is
+        `
+            M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}.
+        `
+        Then the Y-sum is the matrix
+        `
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
+        `
+
+        The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
+        In the context of totally unimodular matrices, there are different interpretations
+        in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
+        satisfying `rank(B) + rank(C) = 2`.
+        Three types of 3-sum operations are implemented in CMR:
+        `\Delta`-sum, 3-sum, and `Y`-sum.
+        The `Y`-sum can be derived from the `Delta`-sum of the transpose of the matrices.
+
+        - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
+        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+                     :meth:`y_sum_decomposition`, :meth:`is_y_sum`
+
+        INPUT:
+
+        - ``first_mat`` -- the first integer matrix
+        - ``second_mat`` -- the second integer matrix
+        - ``first_special_rows`` -- the indices of the two special rows in the first matrix
+        - ``first_special_column`` -- the index of the special column in the first matrix
+        - ``second_special_rows`` -- the indices of the two special rows in the second matrix
+        - ``second_special_column`` -- the index of the special column in the second matrix
+
+        OUTPUT: A :class:`Matrix_cmr_chr_sparse`
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 3, sparse=True),
+            ....:                            [[1, 1, 0],
+            ....:                             [1, 0, 1],
+            ....:                             [0, 1, 0],
+            ....:                             [0, 1,-1]]); M1
+            [ 1  1  0]
+            [ 1  0  1]
+            [ 0  1  0]
+            [ 0  1 -1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 3, sparse=True),
+            ....:                            [[-1, 1, 0],
+            ....:                             [ 0, 1, 0],
+            ....:                             [ 1, 0, 1],
+            ....:                             [ 0, 1, 1]]); M2
+            [-1  1  0]
+            [ 0  1  0]
+            [ 1  0  1]
+            [ 0  1  1]
+            sage: M1._y_sum_cmr(M2, [2, 3], 2, [0, 1], 0)
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 3, sparse=True),
+            ....:                            [[1, 1, 0],
+            ....:                             [1, 0, 1],
+            ....:                             [0, 1, 0],
+            ....:                             [0, 1, 1]]); M1
+            [1 1 0]
+            [1 0 1]
+            [0 1 0]
+            [0 1 1]
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 3, sparse=True),
+            ....:                            [[1, 1, 0],
+            ....:                             [0, 1, 0],
+            ....:                             [1, 0, 1],
+            ....:                             [0, 1, 1]]); M2
+            [1 1 0]
+            [0 1 0]
+            [1 0 1]
+            [0 1 1]
+            sage: M1._y_sum_cmr(M2, [2, 3], 2, [0, 1], 0)
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
+        """
+        cdef Matrix_cmr_chr_sparse sum, first, second
+        cdef CMR_CHRMAT *sum_mat = NULL
+        first = Matrix_cmr_chr_sparse._from_data(first_mat, immutable=False)
+        second = Matrix_cmr_chr_sparse._from_data(second_mat, immutable=False)
+        cdef size_t* firstSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
+        cdef size_t* firstSpecialColumns = <size_t *>sig_malloc(sizeof(size_t))
+        cdef size_t* secondSpecialRows = <size_t *>sig_malloc(sizeof(size_t)*2)
+        cdef size_t* secondSpecialColumns = <size_t *>sig_malloc(sizeof(size_t))
+        cdef int8_t characteristic = first_mat.parent().characteristic()
+
+        if second_mat.parent().characteristic() != characteristic:
+            raise ValueError("The characteristic of two matrices are different")
+
+        # Check if indices are within range
+        if first_special_rows[0] < 0 or first_special_rows[0] >= first._mat.numRows:
+            raise ValueError("First special row index 1 out of range")
+        if first_special_rows[1] < 0 or first_special_rows[1] >= first._mat.numRows:
+            raise ValueError("First special row index 2 out of range")
+        if first_special_column < 0 or first_special_column >= first._mat.numColumns:
+            raise ValueError("First special column index out of range")
+        if second_special_rows[0] < 0 or second_special_rows[0] >= second._mat.numRows:
+            raise ValueError("Second special row index 1 out of range")
+        if second_special_rows[1] < 0 or second_special_rows[1] >= second._mat.numRows:
+            raise ValueError("Second special row index 2 out of range")
+        if second_special_column < 0 or second_special_column >= second._mat.numColumns:
+            raise ValueError("Second special column index out of range")
+
+        firstSpecialRows[0] = first_special_rows[0]
+        firstSpecialRows[1] = first_special_rows[1]
+        firstSpecialColumns[0] = first_special_column
+        secondSpecialRows[0] = second_special_rows[0]
+        secondSpecialRows[1] = second_special_rows[1]
+        secondSpecialColumns[0] = second_special_column
+
+        sig_on()
+        try:
+            CMR_CALL(CMRysumCompose(cmr, first._mat, second._mat, firstSpecialRows, firstSpecialColumns, secondSpecialRows, secondSpecialColumns, characteristic, &sum_mat))
+        finally:
+            sig_off()
+
+        sum = Matrix_cmr_chr_sparse._from_cmr(sum_mat)
+        return sum
+
     def delta_sum(first_mat, second_mat,
-                            first_row_index=-1,
-                            first_columns_index=[-2, -1],
-                            second_row_index=0,
-                            second_columns_index=[0, 1],
-                            algorithm="cmr",
-                            sign_verify=False):
+                  first_row_index=-1,
+                  first_columns_index=[-2, -1],
+                  second_row_index=0,
+                  second_columns_index=[0, 1],
+                  algorithm="cmr",
+                  sign_verify=False):
         r"""
         Return the `\Delta`-sum matrix constructed from the two matrices
         ``first_mat`` and ``second_mat``.
@@ -1404,12 +1473,21 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
         `
 
-        The terminology "`\Delta`-sum" is one type of "3-sum",
-        which is used in the context of Seymour's decomposition
-        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+        The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
+        In the context of totally unimodular matrices, there are different interpretations
+        in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
+        satisfying `rank(B) + rank(C) = 2`.
+        Three types of 3-sum operations are implemented in CMR:
+        `\Delta`-sum, 3-sum, and `Y`-sum.
+        The `\Delta`-sum is referenced in [Sch1986], Chapter 19.4.
 
-        .. SEEALSO:: :meth:`y_sum`, :meth:`three_sum`
-                     :meth:`is_delta_sum`
+        - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
+        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+
+        .. SEEALSO:: :meth:`_delta_sum_cmr`
+                     :meth:`delta_sum_decomposition`, :meth:`is_delta_sum`
+                     :meth:`one_sum`, :meth:`two_sum`
+                     :meth:`three_sum`, :meth:`y_sum`
 
         INPUT:
 
@@ -1423,11 +1501,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
           If ``algorithm="cmr"``, then use :meth:`_delta_sum_cmr`;
           If ``algorithm="direct"``, then construct three sum directly.
           Both options will check the given two matrices and the related indices
-          satisfying the requirements of 3-sum.
+          satisfying the requirements of `\Delta`-sum.
         - ``sign_verify`` -- boolean (default: ``False``);
-          whether to check the sign correctness.
-          Note that ``algorithm="cmr"`` will always check the sign consistency.
-          See :meth:`is_delta_sum`.
+          whether to check the sign consistency of `\varepsilon`.
+          See :meth:`is_delta_sum`, :meth:`delta_sum_decomposition`.
 
         OUTPUT: A :class:`Matrix_cmr_chr_sparse`
 
@@ -1503,6 +1580,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             sage: M == N
             True
 
+        Both algorithm options will check the given two matrices
+        and the related indices satisfying the requirements of `\Delta`-sum:
+
             sage: M1.delta_sum(M2, 1, [2, 3], 1, [1, -1])
             Traceback (most recent call last):
             ...
@@ -1528,16 +1608,47 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ...
             RuntimeError: Inconsistent pieces of input
             sage: M1.delta_sum(M2, 1, [-1, 2], 1, [1, -1], algorithm="direct")
-            [ 1  1  0  0  0  0  0  0]
-            [ 0 -1  0 -1  1  1  1 -1]
-            [ 0  0  1  0 -1 -1 -1  1]
-            [ 0  1  0  1  1  1  1 -1]
-            [-1  0  1 -1  1  1  0  0]
-            [ 0  0  0  0  0 -1  0  1]
-            [ 0  0  0  0  1  0 -1  0]
-            [ 1  0 -1  1  0  0  0  1]
-            sage: M1.delta_sum(M2, 1, [-1, 2], 1, [1, -1], algorithm="direct", sign_verify=True)
-            'sign_2 in first_mat should be 1. '
+            Traceback (most recent call last):
+            ...
+            ValueError: the epsilon in the two matrices are inconsistent
+
+        ``sign_verify=True`` will check the sign consistency:
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[ 1,  1,  0,  0],
+            ....:                             [ 1,  0,  1,  1],
+            ....:                             [ 0,  1,  0, -1]]);
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[-1,  0,  1,  0],
+            ....:                             [ 1,  1,  0,  1],
+            ....:                             [ 0,  0,  1,  1]]);
+            sage: M1.delta_sum(M2, sign_verify=True)
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
+            sage: M1.delta_sum(M2, algorithm="direct", sign_verify=True)
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[ 1,  1,  0,  0],
+            ....:                             [ 1,  0,  1,  1],
+            ....:                             [ 0,  1,  0,  1]]);
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[ 1,  0,  1,  0],
+            ....:                             [ 1,  1,  0,  1],
+            ....:                             [ 0,  0,  1,  1]]);
+            sage: M1.delta_sum(M2, sign_verify=True)
+            Traceback (most recent call last):
+            ...
+            ValueError: epsilon in first_mat should be -1. epsilon in second_mat should be -1.
+            sage: M1.delta_sum(M2, algorithm="direct", sign_verify=True)
+            Traceback (most recent call last):
+            ...
+            ValueError: epsilon in first_mat should be -1. epsilon in second_mat should be -1.
         """
         m1 = first_mat.nrows()
         n1 = first_mat.ncols()
@@ -1568,19 +1679,19 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             column_index_1 = [j for j in range(n1) if j != j1 and j != j2]
             row_index_2 = [i for i in range(m2) if i != i2]
             column_index_2 = [j for j in range(n2) if j != k1 and j != k2]
-            a2 = first_mat.matrix_from_rows_and_columns(row_index_1, [j2])
-            b1 = second_mat.matrix_from_rows_and_columns(row_index_2, [k1])
+            a = first_mat.matrix_from_rows_and_columns(row_index_1, [j2])
+            d = second_mat.matrix_from_rows_and_columns(row_index_2, [k1])
 
-            a1 = first_mat.matrix_from_rows_and_columns([i1], column_index_1)
-            b2 = second_mat.matrix_from_rows_and_columns([i2], column_index_2)
+            c = first_mat.matrix_from_rows_and_columns([i1], column_index_1)
+            b = second_mat.matrix_from_rows_and_columns([i2], column_index_2)
 
             A = first_mat.matrix_from_rows_and_columns(row_index_1, column_index_1)
-            B = second_mat.matrix_from_rows_and_columns(row_index_2, column_index_2)
+            D = second_mat.matrix_from_rows_and_columns(row_index_2, column_index_2)
 
             first_subrows = A.rows()
-            second_subrows = B.rows()
-            upper_right_rows = a2.tensor_product(b2).rows()
-            lower_left_rows = b1.tensor_product(a1).rows()
+            second_subrows = D.rows()
+            upper_right_rows = a.tensor_product(b).rows()
+            lower_left_rows = d.tensor_product(c).rows()
 
             row_list = []
             for i in range(m1 - 1):
@@ -1596,31 +1707,31 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             M = Matrix_cmr_chr_sparse._from_data(row_list, immutable=False)
 
         result = M.is_delta_sum(first_mat, second_mat,
-                                          first_row_index=first_row_index,
-                                          first_columns_index=first_columns_index,
-                                          second_row_index=second_row_index,
-                                          second_columns_index=second_columns_index,
-                                          sign_verify=sign_verify)
+                                first_row_index=first_row_index,
+                                first_columns_index=first_columns_index,
+                                second_row_index=second_row_index,
+                                second_columns_index=second_columns_index,
+                                sign_verify=sign_verify)
         if result is True:
             return M
         elif result is False:
             raise ValueError('The given two matrices and related indices '
                              'do not satisfy the rule for delta sum!')
         else:
-            return result[1]
+            raise ValueError(result[1])
 
     def three_sum(first_mat, second_mat,
-                              first_rows_index=[-2, -1],
-                              first_column_index=-1,
-                              first_intersection_columns=[-3, -2],
-                              second_row_index=0,
-                              second_columns_index=[0, 1],
-                              second_intersection_rows=[1, 2],
-                              algorithm="cmr",
-                              sign_verify=False):
+                  first_rows_index=[-2, -1],
+                  first_column_index=-1,
+                  first_intersection_columns=[-3, -2],
+                  second_row_index=0,
+                  second_columns_index=[0, 1],
+                  second_intersection_rows=[1, 2],
+                  algorithm="cmr",
+                  sign_verify=False):
         r"""
-        Return the 3-sum matrix constructed from the given matrices ``first_mat`` and
-        ``second_mat``.
+        Return the 3-sum matrix constructed from the given matrices
+        ``first_mat`` and ``second_mat``.
         In this case,
         the first matrix is
         `
@@ -1630,7 +1741,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             C_{j,\star} & \beta
             \end{bmatrix},
         `
-        where `\alpha,\beta \in \{-1,+1 \}`,
+        where `\alpha, \beta \in \{-1,+1 \}`,
         and the second matrix is
         `
             M_2 = \begin{bmatrix}
@@ -1638,7 +1749,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             C_{\star,k} & C_{\star,\ell} & D
             \end{bmatrix},
         `
-        where `\gamma,\delta \in \{ -1,+1 \}` such that the matrix
+        where `\gamma, \delta \in \{ -1,+1 \}` such that the matrix
         `
             N = \begin{bmatrix}
             \gamma & \delta & 0 \\
@@ -1657,10 +1768,20 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         where `C` is the unique rank-2 matrix having linearly independent rows `C_{i,\star}` and
         `C_{j,\star}` and linearly independent columns `C_{\star,k}` and `C_{\star,\ell}`.
 
-        The terminology "3-sum" is used in the context of Seymour's decomposition
-        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+        The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
+        In the context of totally unimodular matrices, there are different interpretations
+        in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
+        satisfying `rank(B) + rank(C) = 2`.
+        Three types of 3-sum operations are implemented in CMR:
+        `\Delta`-sum, 3-sum, and `Y`-sum.
 
-        .. SEEALSO:: :meth:`delta_sum`, :meth:`y_sum`, :meth:`is_three_sum`
+        - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
+        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+
+        .. SEEALSO:: :meth:`_three_sum_cmr`
+                     :meth:`three_sum_decomposition`, :meth:`is_three_sum`
+                     :meth:`one_sum`, :meth:`two_sum`
+                     :meth:`delta_sum`, :meth:`y_sum`
 
         INPUT:
 
@@ -1678,8 +1799,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
           Both options will check the give two matrices and the related indices
           satisfying the requirements of 3-sum.
         - ``sign_verify`` -- boolean (default: ``False``);
-          whether to check the sign correctness.
-          See :meth:`is_three_sum`.
+          whether to check the sign consistency of `\alpha, \beta, \gamma, \delta`.
+          See :meth:`is_three_sum`, :meth:`three_sum_decomposition`.
 
         OUTPUT: A :class:`Matrix_cmr_chr_sparse`
 
@@ -1765,6 +1886,17 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1  0  1 -1  1  0  0  0]
             [ 0  0  0  0  0  1  0 -1]
             [ 0 -1  1  0 -1  0  1  0]
+            sage: M = M1.three_sum(M2, first_rows_index=[1, 2],
+            ....:                  first_intersection_columns=[1, 2],
+            ....:                  second_columns_index=[4, 2]); M
+            [ 1  1  0  0  0  0  0  0]
+            [ 0  0 -1  1  0  0  0  0]
+            [ 0  1  1  0  1  0  0  0]
+            [ 1  0  1 -1  1  1 -1  0]
+            [ 0 -1  1  0 -1  1  1  1]
+            [ 0  1 -1  0  1  0  0  0]
+            [ 0  0  0  0  0  1  0 -1]
+            [ 1  1  0 -1  2  0  1  0]
             sage: M1.three_sum(M2, first_rows_index=[1, 2],
             ....:                  first_column_index=1,
             ....:                  second_columns_index=[2, 4])
@@ -1772,11 +1904,68 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ...
             RuntimeError: Invalid matrix structure
             sage: M1.three_sum(M2, first_rows_index=[1, 2],
-            ....:                  first_column_index=1,
+            ....:                  first_intersection_columns=[1, 2],
             ....:                  second_columns_index=[2, 4], algorithm="direct")
             Traceback (most recent call last):
             ...
             ValueError: The intersection matrix is not the same!
+
+        The connecting matrix `N` should be totally unimodular::
+
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
+            ....:                            [[0, 0, 1, 0, 1],
+            ....:                             [1,-1, 1, 0, 0],
+            ....:                             [1, 1, 1, 1,-1],
+            ....:                             [0, 0,-1, 0, 1],
+            ....:                             [1, 0, 0,-1, 0],
+            ....:                             [0, 1, 0, 0, 1]]); M2
+            [ 0  0  1  0  1]
+            [ 1 -1  1  0  0]
+            [ 1  1  1  1 -1]
+            [ 0  0 -1  0  1]
+            [ 1  0  0 -1  0]
+            [ 0  1  0  0  1]
+            sage: M = M1.three_sum(M2, first_rows_index=[1, 2],
+            ....:                  first_intersection_columns=[1, 2],
+            ....:                  second_columns_index=[4, 2])
+            Traceback (most recent call last):
+            ...
+            RuntimeError: Inconsistent pieces of input
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
+            ....:                            [[ 1, 0,-1, 0],
+            ....:                             [ 1, 1, 0, 0],
+            ....:                             [ 0, 1, 0, 1],
+            ....:                             [ 1, 1,-1, 1]])
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
+            ....:                            [[ 1, 1, 0],
+            ....:                             [ 1, 0, 1],
+            ....:                             [ 1,-1, 1]])
+            sage: M = Matrix_cmr_chr_sparse.three_sum(M1, M2)
+            Traceback (most recent call last):
+            ...
+            RuntimeError: Inconsistent pieces of input
+            sage: M = Matrix_cmr_chr_sparse.three_sum(M1, M2, algorithm='direct'); M
+            Traceback (most recent call last):
+            ...
+            ValueError: the connecting matrix N should be totally unimodular
+
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
+            ....:                            [[ 1,-1, 0],
+            ....:                             [ 1, 0, 1],
+            ....:                             [ 1,-1, 1]])
+            sage: M = Matrix_cmr_chr_sparse.three_sum(M1, M2); M
+            [ 1  0 -1  0]
+            [ 1  1  0  0]
+            [ 0  1  0  1]
+            [ 1  1 -1  1]
+            sage: M.three_sum_decomposition(first_rows_index=[0,1,2,3], first_columns_index=[0,1,2], special_columns=[1,2])
+            (
+            [ 1  0 -1  0]
+            [ 1  1  0  0]  [-1  1  0]
+            [ 0  1  0  1]  [ 1  0  1]
+            [ 1  1 -1  1], [ 1 -1  1]
+            )
         """
         m1 = first_mat.nrows()
         n1 = first_mat.ncols()
@@ -1854,18 +2043,18 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             raise ValueError('The given two matrices and related indices '
                             'do not satisfy the rule for three sum!')
         else:
-            return result[1]
+            raise ValueError(result[1])
 
     def y_sum(first_mat, second_mat,
-                            first_rows_index=[-2, -1],
-                            first_column_index=-1,
-                            second_rows_index=[0, 1],
-                            second_column_index=0,
-                            algorithm="cmr",
-                            sign_verify=False):
+              first_rows_index=[-2, -1],
+              first_column_index=-1,
+              second_rows_index=[0, 1],
+              second_column_index=0,
+              algorithm="cmr",
+              sign_verify=False):
         r"""
-        Return the Y-sum matrix constructed from the given matrices ``first_mat`` and
-        ``second_mat``.
+        Return the `Y`-sum matrix constructed from the given matrices
+        ``first_mat`` and ``second_mat``.
         In this case, the first matrix is
         `
             M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix}
@@ -1878,10 +2067,21 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `
             M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
 
-        The terminology "3-sum" is used in the context of Seymour's decomposition
-        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+        The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
+        In the context of totally unimodular matrices, there are different interpretations
+        in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
+        satisfying `rank(B) + rank(C) = 2`.
+        Three types of 3-sum operations are implemented in CMR:
+        `\Delta`-sum, 3-sum, and `Y`-sum.
+        The `Y`-sum can be derived from the `Delta`-sum of the transpose of the matrices.
 
-        .. SEEALSO:: :meth:`delta_sum`, :meth:`three_sum`
+        - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
+        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+
+        .. SEEALSO:: :meth:`_y_sum_cmr`
+                     :meth:`y_sum_decomposition`, :meth:`is_y_sum`
+                     :meth:`one_sum`, :meth:`two_sum`
+                     :meth:`delta_sum`, :meth:`three_sum`
 
         INPUT:
 
@@ -1895,9 +2095,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
           If ``algorithm="cmr"``, then use :meth:`_y_sum_cmr`;
           If ``algorithm="direct"``, then construct three sum directly.
           Both options will check the given two matrices and the related indices
-          satisfying the requirements of 3-sum.
+          satisfying the requirements of `Y`-sum.
         - ``sign_verify`` -- boolean (default: ``False``);
-          NotImplemented yet.
+          whether to check the sign consistency of `\varepsilon`.
+          See :meth:`is_y_sum`, :meth:`y_sum_decomposition`.
 
         OUTPUT: A :class:`Matrix_cmr_chr_sparse`
 
@@ -1948,6 +2149,48 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             Traceback (most recent call last):
             ...
             ValueError: The given two matrices and related indices do not satisfy the rule for y sum!
+
+        ``sign_verify=True`` will check the sign consistency:
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 3, sparse=True),
+            ....:                            [[1, 1, 0],
+            ....:                             [1, 0, 1],
+            ....:                             [0, 1, 0],
+            ....:                             [0, 1,-1]]);
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 3, sparse=True),
+            ....:                            [[-1, 1, 0],
+            ....:                             [ 0, 1, 0],
+            ....:                             [ 1, 0, 1],
+            ....:                             [ 0, 1, 1]]);
+            sage: M1.y_sum(M2, sign_verify=True)
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
+            sage: M1.y_sum(M2, algorithm="direct", sign_verify=True)
+            [1 1 0 0]
+            [1 0 1 0]
+            [0 1 0 1]
+            [0 0 1 1]
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 3, sparse=True),
+            ....:                            [[1, 1, 0],
+            ....:                             [1, 0, 1],
+            ....:                             [0, 1, 0],
+            ....:                             [0, 1, 1]]);
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 3, sparse=True),
+            ....:                            [[1, 1, 0],
+            ....:                             [0, 1, 0],
+            ....:                             [1, 0, 1],
+            ....:                             [0, 1, 1]]);
+            sage: M1.y_sum(M2, sign_verify=True)
+            Traceback (most recent call last):
+            ...
+            ValueError: epsilon in first_mat should be -1. epsilon in second_mat should be -1.
+            sage: M1.y_sum(M2, algorithm="direct", sign_verify=True)
+            Traceback (most recent call last):
+            ...
+            ValueError: epsilon in first_mat should be -1. epsilon in second_mat should be -1.
         """
         m1 = first_mat.nrows()
         n1 = first_mat.ncols()
@@ -1966,10 +2209,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         i2 = second_column_index
         i2 = i2 if i2 >= 0 else n2 + i2
 
+        if algorithm not in ["cmr", "direct"]:
+            raise ValueError("Unknown algorithm", algorithm)
+
         if algorithm == "cmr":
             M = Matrix_cmr_chr_sparse._y_sum_cmr(first_mat, second_mat,
-                                                     [j1, j2], i1,
-                                                     [k1, k2], i2)
+                                                 [j1, j2], i1,
+                                                 [k1, k2], i2)
         if algorithm == "direct":
             column_index_1 = [i for i in range(n1) if i != i1]
             row_index_1 = [j for j in range(m1) if j != j1 and j != j2]
@@ -2003,20 +2249,28 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             M = Matrix_cmr_chr_sparse._from_data(row_list, immutable=False)
 
         result = M.is_y_sum(first_mat, second_mat,
-                                first_rows_index=first_rows_index,
-                                first_column_index=first_column_index,
-                                second_rows_index=second_rows_index,
-                                second_column_index=second_column_index,
-                                sign_verify=sign_verify)
+                            first_rows_index=first_rows_index,
+                            first_column_index=first_column_index,
+                            second_rows_index=second_rows_index,
+                            second_column_index=second_column_index,
+                            sign_verify=sign_verify)
         if result is True:
             return M
         elif result is False:
             raise ValueError('The given two matrices and related indices '
                             'do not satisfy the rule for y sum!')
         else:
-            return result[1]
+            raise ValueError(result[1])
 
     def _is_submatrix_rank0(self, rows, columns, entry_index=False):
+        r"""
+        Check if the submatrix of ``self`` formed by
+        the row indices ``rows`` and column indices ``columns``
+        has rank 0.
+
+        If ``entry_index`` is ``True``,
+        return the index of the first non-zero entry.
+        """
         if entry_index:
             for i in rows:
                 for j in columns:
@@ -2026,6 +2280,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         return self.matrix_from_rows_and_columns(rows, columns) == 0
 
     def _is_submatrix_rank1(self, rows, columns):
+        r"""
+        Check if the submatrix of ``self`` formed by
+        the row indices ``rows`` and column indices ``columns``
+        has rank 1.
+        """
         if self.matrix_from_rows_and_columns(rows, columns) == 0:
             return False
         i, j = self._is_submatrix_rank0(rows, columns, entry_index=True)
@@ -2039,6 +2298,15 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         return True
 
     def _is_submatrix_rank2(self, rows, columns, special_rows=None, special_columns=None):
+        r"""
+        Check if the submatrix of ``self`` formed by
+        the row indices ``rows`` and column indices ``columns``
+        has rank 2.
+
+        A 2-by-2 invertible submatrix is given by
+        the row indices ``special_rows``
+        and column indices ``special_columns``.
+        """
         if special_rows is None:
             special_rows = rows[:2]
         if special_columns is None:
@@ -2267,10 +2535,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         return first_matrix, second_matrix
 
     def delta_sum_decomposition(self, A_rows, A_columns):
-        """
-        Decompose the matrix into two children matrices using the delta sum decomposition with specified indices.
+        r"""
+        Decompose the matrix into two children matrices using
+        the `\Delta`-sum decomposition with specified indices.
 
-        Let `M` denote the matrix given by ``delta_sum_mat``. Then
+        Let `M` denote the matrix given by ``self``. Then
         `
             M = \begin{bmatrix}
             A & a b^T \\
@@ -2278,7 +2547,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             \end{bmatrix},
         `
         where `a, b, c, d` are vectors and `A, D` are submatrices.
-        The two components of the delta sum `M_1` and `M_2`, given by ``first_mat`` and ``second_mat``, must be of the form
+        The two components of the delta sum `M_1` and `M_2`,
+        given by ``first_mat`` and ``second_mat``, must be of the form
         `
             M_1 = \begin{bmatrix}
             A & a & a \\
@@ -2292,13 +2562,24 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             d & d & D
             \end{bmatrix}.
         `
+        The value of `\varepsilon \in \{-1,+1\}` must be so that
+        there exists a singular submatrix of `M_1` with exactly
+        two nonzeros per row and per column that covers
+        the top-left `\varepsilon`-entry.
+        Therefore, `M` is totally unimodular if and only if
+        both `M_1` and `M_2` are totally unimodular.
+
+        If `M` is not totally unimodular, then `\varepsilon`
+        may not be unique and the algorithm just finds one
+        such that at least one of `M_1` and `M_2` is
+        not totally unimodular.
+
+        .. SEEALSO:: :meth:`delta_sum`, :meth:`is_delta_sum`
 
         INPUT:
 
-        - ``A_rows`` -- list of row indices for the first matrix
-        - ``A_columns`` -- list of column indices for the first matrix
-        - ``special_rows`` -- list of special row index (default: last row)
-        - ``special_columns`` -- list of two special column index (default: last column)
+        - ``A_rows`` -- list of row indices for the submatrix `A`
+        - ``A_columns`` -- list of column indices for the submatrix `A`
 
         OUTPUT: A tuple of two :class:`Matrix_cmr_chr_sparse`
 
@@ -2328,6 +2609,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [-1  0  1  1]
             [ 1  1  0  1]
             [ 1  1  1  1]
+
+        This is test ``DeltasumDecomposition`` in CMR's ``test_separation.cpp``::
 
             sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
             ....:                            [[ 1,  1,  0,  0],
@@ -2384,6 +2667,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [-1  0  1  0]
             [ 1  1  0  1]
             [ 0  0  1  1]
+
+        TESTS::
 
             sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
             ....:                            [[ 1,  1,  0,  0],
@@ -2447,8 +2732,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         return first_matrix, second_matrix
 
-    def three_sum_decomposition(self, first_rows_index, first_columns_index, special_rows=None, special_columns=None):
-        """
+    def three_sum_decomposition(self, first_rows_index, first_columns_index,
+                                special_rows=None, special_columns=None):
+        r"""
         Decompose the matrix into two children matrices using the 3-sum decomposition with specified sepa.
 
         Let `M` denote the matrix given by ``three_sum_mat``. Then
@@ -2490,6 +2776,22 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         The value of `\beta \in \{-1,+1\}` must be so that there exists a singular submatrix of `M_1` with exactly two nonzeros per row and per column that covers the bottom-right `\beta`-entry.
 
+        If the matrix is in the form
+        `
+            M = \begin{bmatrix}
+            A & B \\
+            0 & D
+            \end{bmatrix},
+        `
+        then by permutating the rows and columns, it can be viewed as
+        `
+            \begin{bmatrix}
+            D & 0 \\
+            B & A
+            \end{bmatrix}.
+        `
+        Thus, the 3-sum decomposition can be applied.
+
         INPUT:
 
         - ``first_rows_index`` -- list of row indices for the first matrix
@@ -2500,6 +2802,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         OUTPUT: A tuple of two :class:`Matrix_cmr_chr_sparse`
 
         EXAMPLES::
+
+        This is test ``ThreesumDecomposition`` in CMR's ``test_separation.cpp``::
 
             sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
             sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
@@ -2602,96 +2906,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1 -1  1  0]
             [ 0 -1  0  1]
 
-            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
-            ....:                            [[ 1, 0,-1, 0],
-            ....:                             [ 1, 1, 0, 0],
-            ....:                             [ 0, 1, 0, 1],
-            ....:                             [ 1, 1,-1, 1]])
-            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
-            ....:                            [[-1, 1, 0],
-            ....:                             [ 1, 0, 1],
-            ....:                             [ 1,-1, 1]])
-            sage: M = Matrix_cmr_chr_sparse.three_sum(M1, M2); M
-            [ 1  0 -1  0]
-            [ 1  1  0  0]
-            [ 0  1  0  1]
-            [ 1  1 -1  1]
-            sage: M.three_sum_decomposition(first_rows_index=[0,1,2,3], first_columns_index=[0,1,2], special_columns=[1,2])
-            (
-            [ 1  0 -1  0]
-            [ 1  1  0  0]  [-1  1  0]
-            [ 0  1  0  1]  [ 1  0  1]
-            [ 1  1 -1  1], [ 1 -1  1]
-            )
-
-            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
-            ....:                            [[1, 1, 0, 0, 0, 0],
-            ....:                             [0, 0,-1, 1, 0, 0],
-            ....:                             [0, 1, 1, 0, 1, 0],
-            ....:                             [1, 0, 1,-1, 1, 1],
-            ....:                             [0,-1, 1, 0,-1, 1]]); M1
-            [ 1  1  0  0  0  0]
-            [ 0  0 -1  1  0  0]
-            [ 0  1  1  0  1  0]
-            [ 1  0  1 -1  1  1]
-            [ 0 -1  1  0 -1  1]
-            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
-            ....:                            [[-1, 1, 0, 0, 0],
-            ....:                             [ 1, 0, 1,-1, 0],
-            ....:                             [ 1,-1, 1, 1, 1],
-            ....:                             [-1, 1, 0, 0, 0],
-            ....:                             [ 0, 0, 1, 0,-1],
-            ....:                             [ 0, 1, 0, 1, 0]]); M2
-            [-1  1  0  0  0]
-            [ 1  0  1 -1  0]
-            [ 1 -1  1  1  1]
-            [-1  1  0  0  0]
-            [ 0  0  1  0 -1]
-            [ 0  1  0  1  0]
-            sage: M = Matrix_cmr_chr_sparse.three_sum(M1, M2, first_intersection_columns=[2,1]); M
-            [ 1  1  0  0  0  0  0  0]
-            [ 0  0 -1  1  0  0  0  0]
-            [ 0  1  1  0  1  0  0  0]
-            [ 1  0  1 -1  1  1 -1  0]
-            [ 0 -1  1  0 -1  1  1  1]
-            [ 0  1 -1  0  1  0  0  0]
-            [ 0  0  0  0  0  1  0 -1]
-            [ 1  1  0 -1  2  0  1  0]
-            sage: M.is_three_sum(M1, M2, first_intersection_columns=[2,1], sign_verify=False)
-            True
-            sage: M.is_three_sum(M1, M2, first_intersection_columns=[2,1])
-            True
-            sage: C1, C2 = M.three_sum_decomposition(first_rows_index=[0,1,2,3,4], first_columns_index=[0,1,2,3,4], special_columns=[2,1])
-            sage: C1 == M1
-            True
-            sage: C2
-            [-1  1  0  0  0]
-            [ 1  0  1 -1  0]
-            [ 1 -1  1  1  1]
-            [-1  1  0  0  0]
-            [ 0  0  1  0 -1]
-            [ 0  1  0  1  0]
-
-            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 5, sparse=True),
-            ....:                            [[ 0,  1, -1,  0, 0],
-            ....:                             [ 0,  0,  1,  1, 0],
-            ....:                             [ 1,  0,  0,  1, 0],
-            ....:                             [ 1, -1,  0,  0, 1],
-            ....:                             [ 0, -1,  0,  0, 1]])
-            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
-            ....:                            [[-1,  1,  0, 0],
-            ....:                             [ 0,  0,  1, 1],
-            ....:                             [ 1, -1,  1, 0],
-            ....:                             [ 0, -1,  0, 1]])
-            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
-            ....:                            [[ 0,  1, -1,  0, 0, 0],
-            ....:                             [ 0,  0,  1,  1, 0, 0],
-            ....:                             [ 1,  0,  0,  1, 0, 0],
-            ....:                             [ 0,  0,  0,  0, 1, 1],
-            ....:                             [ 1, -1,  0,  0, 1, 0],
-            ....:                             [ 0, -1,  0,  0, 0, 1]])
-            sage: M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1]) == (M1, M2)
-            True
+        The given 2-by-2 submatrix should have rank 2::
 
             sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
             ....:                            [[ 0,  1, -1,  0, 0, 0],
@@ -2704,6 +2919,35 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             Traceback (most recent call last):
             ...
             RuntimeError: User input error
+
+        For `\text{rank}(B) = 2`, we can still compute three_sum_decomposition::
+
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[ 1,  1,  0,  0,  0,  0],
+            ....:                             [ 1,  0,  1, -1,  0,  0],
+            ....:                             [ 0,  1,  0, -1,  0,  0],
+            ....:                             [ 0,  0,  0,  1, -1,  0],
+            ....:                             [ 0,  0,  0,  0,  1,  1],
+            ....:                             [ 0,  0,  1,  0,  0,  1]]); M
+            [ 1  1  0  0  0  0]
+            [ 1  0  1 -1  0  0]
+            [ 0  1  0 -1  0  0]
+            [ 0  0  0  1 -1  0]
+            [ 0  0  0  0  1  1]
+            [ 0  0  1  0  0  1]
+            sage: M1, M2 = M.three_sum_decomposition([3, 4, 5, 1, 2], [2, 3, 4, 5], [1, 2], [2, 3]); M1
+            [ 0  1 -1  0  0]
+            [ 0  0  1  1  0]
+            [ 1  0  0  1  0]
+            [ 1 -1  0  0  1]
+            [ 0 -1  0  0  1]
+            sage: M2
+            [-1  1  0  0]
+            [ 0  0  1  1]
+            [ 1 -1  1  0]
+            [ 0 -1  0  1]
+
+        TESTS::
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 5, sparse=True),
             ....:                            [[ 0,  1, -1,  0, 0],
@@ -2729,24 +2973,6 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             RuntimeError: The bottom left submatrix is not of rank 2
             sage: M.is_three_sum(M1, M2, [4, 5], -1, [0, 1], 0, [0, 1], [2, 3])
             False
-
-            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
-            ....:                            [[ 0,  1, -1,  0, 0, 0],
-            ....:                             [ 0,  0,  1,  1, 0, 0],
-            ....:                             [ 1,  0,  0,  1, 0, 0],
-            ....:                             [ 0,  0,  0,  0, 1, 1],
-            ....:                             [ 1, -1,  1,  0, 1, 0],
-            ....:                             [ 0, -1, -1,  0, 0, 1]])
-            sage: C1, C2 = M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1]); (C1, C2)
-            (
-            [ 0  1 -1  0  0]
-            [ 0  0  1  1  0]  [-1  1  0  0]
-            [ 1  0  0  1  0]  [ 0  0  1  1]
-            [ 1 -1  1  0  1]  [ 1 -1  1  0]
-            [ 0 -1 -1  0  1], [ 0 -1  0  1]
-            )
-            sage: M.is_three_sum(C1, C2, [3, 4], -1, [0, 1], 0, [0, 1], [2, 3])
-            True
         """
         cdef CMR_CHRMAT *matrix = self._mat
         cdef CMR_CHRMAT *transpose = NULL
@@ -2811,10 +3037,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         return first_matrix, second_matrix
 
     def y_sum_decomposition(self, A_rows, A_columns):
-        """
-        Decompose the matrix into two children matrices using the Y-sum decomposition with specified indices.
+        r"""
+        Decompose the matrix into two children matrices using
+        the `Y`-sum decomposition with specified indices.
 
-        Let `M` denote the matrix given by ``y_sum_mat``. Then
+        Let `M` denote the matrix given by ``self``. Then
         `
             M = \begin{bmatrix}
             A & a b^T \\
@@ -2838,13 +3065,24 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             d & D
             \end{bmatrix}.
         `
+        The value of `\varepsilon \in \{-1,+1\}` must be so that
+        there exists a singular submatrix of `M_1` with exactly
+        two nonzeros per row and per column that covers
+        the top-left `\varepsilon`-entry.
+        Therefore, `M` is totally unimodular if and only if
+        both `M_1` and `M_2` are totally unimodular.
+
+        If `M` is not totally unimodular, then `\varepsilon`
+        may not be unique and the algorithm just finds one
+        such that at least one of `M_1` and `M_2` is
+        not totally unimodular.
+
+        .. SEEALSO:: :meth:`y_sum`, :meth:`is_y_sum`
 
         INPUT:
 
-        - ``A_rows`` -- list of row indices for the first matrix
-        - ``A_columns`` -- list of column indices for the first matrix
-        - ``special_rows`` -- list of two special row indices (default: last two rows)
-        - ``special_columns`` -- list of special column index (default: last column)
+        - ``A_rows`` -- list of row indices for the submatrix `A`
+        - ``A_columns`` -- list of column indices for the submatrix `A`
 
         OUTPUT: A tuple of two :class:`Matrix_cmr_chr_sparse`
 
@@ -2930,23 +3168,24 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         return first_matrix, second_matrix
 
     def is_delta_sum(three_sum_mat, first_mat, second_mat,
-                               first_row_index=-1,
-                               first_columns_index=[-2, -1],
-                               second_row_index=0,
-                               second_columns_index=[0, 1],
-                               sign_verify=True):
+                     first_row_index=-1,
+                     first_columns_index=[-2, -1],
+                     second_row_index=0,
+                     second_columns_index=[0, 1],
+                     sign_verify=True):
         r"""
         Check whether ``first_mat`` and ``second_mat`` form ``three_sum_mat``
-        via the 3-sum operation.
-        Assume that ``three_sum_strategy="distributed_ranks"`` or ``"Wide_Wide"``.
-        If ``sign_verify=True``, also check whether the 3-sum satisfies that
+        via the `\Delta`-sum operation.
+        If ``sign_verify=True``, also check whether the `\Delta`-sum satisfies that
         ``three_sum_mat`` is totally unimodular, if and only if,
         ``first_mat`` and ``second_mat`` are both totally unimodular.
 
-        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``. If ``first_row_index``
-        indexes a row vector `c^T` and ``first_columns_index`` indexes two column vectors `a` of ``first_mat``,
-        then ``second_row_index`` indexes a row vector `b` and ``second_columns_index`` indexes two column
-        vectors `d` of ``second_mat``. In this case, the first matrix is
+        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``.
+        If ``first_row_index`` indexes a row vector `c^T` and
+        ``first_columns_index`` indexes two column vectors `a` of ``first_mat``,
+        then ``second_row_index`` indexes a row vector `b` and
+        ``second_columns_index`` indexes two column vectors `d` of ``second_mat``.
+        In this case, the first matrix is
         `
             M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix}
         `
@@ -2958,10 +3197,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `
             M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
 
-        The terminology "3-sum" is used in the context of Seymour's decomposition
-        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+        The value of `\varepsilon \in \{-1,+1\}` must be so that
+        there exists a singular submatrix of `M_1` with exactly
+        two nonzeros per row and per column that covers
+        the top-left `\varepsilon`-entry.
 
-        The value of `\varepsilon \in \{-1,+1\}` must be so that there exists a singular submatrix of `M_1` with exactly two nonzeros per row and per column that covers the top-left `\varepsilon`-entry.
         The signs of `\varepsilon` are determined by
         a shortest path between two sets of vertices in the bipartite graph,
         where the sets of vertices corresponding to the nonzero
@@ -2970,7 +3210,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         and columns of `M`, and edges corresponding to the nonzero entry.
         between the rows and columns of `M`, see [Sch1986]_, Ch. 20.3.
 
-        .. SEEALSO:: :meth:`delta_sum`, :meth:`is_three_sum`
+        If you don't know the indices, please use :meth:`is_totally_unimodular`.
+
+        .. SEEALSO:: :meth:`delta_sum`, :meth:`delta_sum_decomposition`
                      :meth:`is_totally_unimodular`
 
         INPUT:
@@ -2983,7 +3225,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``second_row_index`` -- the row index of `b^T` in `M_2`
         - ``second_columns_index`` -- the column indices of `d`  in `M_2`
         - ``sign_verify`` -- boolean (default: ``True``);
-          whether to check the sign correctness of `\epsilon_1` and `\epsilon_2`.
+          whether to check the sign correctness of `\varepsilon`.
 
         OUTPUT: boolean, or (boolean, string)
 
@@ -3053,9 +3295,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  1  0  1]
             [ 1  0  1  0  1  1]
             [ 1  0  1  0  0  1]
+            sage: M.is_delta_sum(M1, M2, sign_verify=False)
+            True
             sage: Matrix_cmr_chr_sparse.is_delta_sum(M, M1, M2)
             (False,
-             'sign_1 in second_mat should be -1. sign_2 in first_mat should be -1. ')
+             'epsilon in first_mat should be -1. epsilon in second_mat should be -1. ')
 
             sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
             ....:                            [[ 1,  1,  0,  0],
@@ -3070,10 +3314,28 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [-1  0  1  0]
             [ 1  1  0  1]
             [ 0  0  1  1]
-            sage: M.is_totally_unimodular()
-            True
             sage: Matrix_cmr_chr_sparse.is_delta_sum(M, M1, M2)
             True
+
+        TESTS::
+
+            sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[ 1,  1,  0,  0],
+            ....:                             [ 1,  0,  1,  1],
+            ....:                             [ 0,  1,  0,  1]]);
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[ 1,  0,  1,  0],
+            ....:                             [ 1,  1,  0,  1],
+            ....:                             [ 0,  0,  1,  1]]);
+            sage: Matrix_cmr_chr_sparse.is_delta_sum(M, M1, M2)
+            (False,
+             'epsilon in first_mat should be -1. epsilon in second_mat should be -1. ')
+            sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
+            ....:                            [[-1,  0,  1,  0],
+            ....:                             [ 1,  1,  0,  1],
+            ....:                             [ 0,  0,  1,  1]]);
+            sage: Matrix_cmr_chr_sparse.is_delta_sum(M, M1, M2)
+            (False, 'the epsilon in the two matrices are inconsistent')
         """
         if not isinstance(first_columns_index, (list, tuple)) or len(first_columns_index) != 2:
             raise ValueError('The index of two columns needs to be given!')
@@ -3102,7 +3364,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         for i in row_index_1:
             if first_mat[i, j1] != first_mat[i, j2]:
                 return False
-        sign_2 = first_mat[i1, j2] if first_mat[i1, j1] == 0 else first_mat[i1, j1]
+        sign_2 = first_mat[i1, j2]
         if sign_2 == 0:
             return False
 
@@ -3116,9 +3378,12 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         for i in row_index_2:
             if second_mat[i, k1] != second_mat[i, k2]:
                 return False
-        sign_1 = second_mat[i2, k2] if second_mat[i2, k1] == 0 else second_mat[i2, k1]
+        sign_1 = second_mat[i2, k1]
         if sign_1 == 0:
             return False
+
+        if sign_1 != sign_2:
+            return False, "the epsilon in the two matrices are inconsistent"
 
         # Check whether the result comes from the three sum
         column_index_1 = [j for j in range(n1) if j != j1 and j != j2]
@@ -3180,25 +3445,24 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         msg = ""
         if (first_mat[i1, j2] - epsilon) % 4 != 0:
-            msg += f'sign_1 in second_mat should be {epsilon}. '
+            msg += f'epsilon in first_mat should be {epsilon}. '
         if (second_mat[i2, k1] - epsilon) % 4 != 0:
-            msg += f'sign_2 in first_mat should be {epsilon}. '
+            msg += f'epsilon in second_mat should be {epsilon}. '
         if msg:
             return False, msg
         return True
 
     def is_three_sum(three_sum_mat, first_mat, second_mat,
-                                 first_rows_index=[-2, -1],
-                                 first_column_index=-1,
-                                 first_intersection_columns=[-3, -2],
-                                 second_row_index=0,
-                                 second_columns_index=[0, 1],
-                                 second_intersection_rows=[1, 2],
-                                 sign_verify=True):
+                     first_rows_index=[-2, -1],
+                     first_column_index=-1,
+                     first_intersection_columns=[-3, -2],
+                     second_row_index=0,
+                     second_columns_index=[0, 1],
+                     second_intersection_rows=[1, 2],
+                     sign_verify=True):
         r"""
         Check whether ``first_mat`` and ``second_mat`` form ``three_sum_mat``
         via the 3-sum operation with the given special rows and columns.
-        Assume that ``three_sum_strategy="concentrated_ranks"`` or ``"Mixed_Mixed"``.
         If ``sign_verify=True``, also check whether the 3-sum satisfies that
         ``three_sum_mat`` is totally unimodular, if and only if,
         ``first_mat`` and ``second_mat`` are both totally unimodular.
@@ -3235,17 +3499,20 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             C_{j,k} & C_{j,\ell} & \beta
             \end{bmatrix}
         `
-        is totally unimodular. The columns ``first_special_columns[0]`` and
-        ``first_special_columns[1]`` indicate the columns of `M_1` that shall correspond to `C_{\star,k}` and
-        `C_{\star,\ell}`, respectively. Similarly, the rows ``second_special_rows[1]`` and ``second_special_rows[2]``
-        indicate the rows of `M_2` that shall correspond to `C_{i,\star}` and `C_{j,\star}`, respectively.
+        is totally unimodular.
+        The columns ``first_intersection_columns`` indicate the columns of `M_1` that
+        shall correspond to `C_{\star,k}` and `C_{\star,\ell}`, respectively.
+        Similarly, the rows ``second_intersection_rows`` indicate the rows of `M_2` that shall
+        correspond to `C_{i,\star}` and `C_{j,\star}`, respectively.
 
-        The value of `\beta \in \{-1,+1\}` must be so that there exists a singular submatrix of `M_1` with exactly two nonzeros per row and per column that covers the bottom-right `\beta`-entry.
+        The value of `\beta \in \{-1,+1\}` must be so that
+        there exists a singular submatrix of `M_1` with
+        exactly two nonzeros per row and per column that
+        covers the bottom-right `\beta`-entry.
 
-        The terminology "3-sum" is used in the context of Seymour's decomposition
-        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+        If you don't know the indices, please use :meth:`is_totally_unimodular`.
 
-        .. SEEALSO:: :meth:`is_delta_sum`, :meth:`three_sum`
+        .. SEEALSO:: :meth:`three_sum`, :meth:`three_sum_decomposition`
                      :meth:`is_totally_unimodular`
 
         INPUT:
@@ -3254,15 +3521,17 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``first_mat`` -- the first integer matrix `M_1`
         - ``second_mat`` -- the second integer matrix `M_2`
         - ``first_rows_index`` -- the indices of rows `a_1^T` and `a_2^T` in `M_1`
-        - ``first_column_index`` -- the index of the column with `\epsilon_2` in `M_1`
-        - ``second_row_index`` -- the index of the row with `\epsilon_1` in `M_2`
+        - ``first_column_index`` -- the index of the extra column in `M_1`
+        - ``first_intersection_columns`` -- the indices of columns `k` and `\ell`
+        - ``second_row_index`` -- the index of the extra row in `M_2`
         - ``second_columns_index`` -- the indices of columns `b_1` and `b_2`  in `M_2`
+        - ``second_intersection_rows`` -- the indices of rows `i` and `j`
         - ``sign_verify`` -- boolean (default: ``True``);
-          whether to check the sign correctness of `\epsilon_1` and `\epsilon_2`.
+          whether to check the sign consistency of `\beta` and `\gamma`.
 
         OUTPUT: boolean, or (boolean, string)
 
-        If it is False only because of the sign, then also output the correct sign.
+        The string is the error message.
 
         EXAMPLES::
 
@@ -3300,9 +3569,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  1 -1  0  1  0  0  0]
             [ 0  0  0  0  0  1  0 -1]
             [ 1  1  0 -1  2  0  1  0]
-            sage: M.is_three_sum(M1, M2, first_intersection_columns=[2,1], sign_verify=False)
+            sage: M.is_three_sum(M1, M2, first_intersection_columns=[2, 1], sign_verify=False)
             True
-            sage: M.is_three_sum(M1, M2, first_intersection_columns=[2,1])
+            sage: M.is_three_sum(M1, M2, first_intersection_columns=[2, 1])
             True
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 5, sparse=True),
@@ -3335,36 +3604,53 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             sage: Matrix_cmr_chr_sparse.is_three_sum(M, M1, M2)
             True
 
+            sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....:                            [[ 0,  1, -1,  0, 0, 0],
+            ....:                             [ 0,  0,  1,  1, 0, 0],
+            ....:                             [ 1,  0,  0,  1, 0, 0],
+            ....:                             [ 0,  0,  0,  0, 1, 1],
+            ....:                             [ 1, -1,  1,  0, 1, 0],
+            ....:                             [ 0, -1, -1,  0, 0, 1]])
+            sage: C1, C2 = M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1]); (C1, C2)
+            (
+            [ 0  1 -1  0  0]
+            [ 0  0  1  1  0]  [-1  1  0  0]
+            [ 1  0  0  1  0]  [ 0  0  1  1]
+            [ 1 -1  1  0  1]  [ 1 -1  1  0]
+            [ 0 -1 -1  0  1], [ 0 -1  0  1]
+            )
+            sage: M.is_three_sum(C1, C2, [3, 4], -1, [0, 1], 0, [0, 1], [2, 3])
+            True
+
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 4, sparse=True),
             ....:                            [[ 1, 0,-1, 0],
             ....:                             [ 1, 1, 0, 0],
             ....:                             [ 0, 1, 0, 1],
             ....:                             [ 1, 1,-1, 1]])
-            sage: M1.is_totally_unimodular()
-            True
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
             ....:                            [[ 1,-1, 0],
             ....:                             [ 1, 0, 1],
             ....:                             [ 1,-1, 1]])
-            sage: M2.is_totally_unimodular()
-            True
             sage: M = Matrix_cmr_chr_sparse.three_sum(M1, M2); M
             [ 1  0 -1  0]
             [ 1  1  0  0]
             [ 0  1  0  1]
             [ 1  1 -1  1]
-            sage: M.is_totally_unimodular()
-            True
             sage: Matrix_cmr_chr_sparse.is_three_sum(M, M1, M2)
             True
             sage: M2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
             ....:                            [[ 1, 1, 0],
             ....:                             [ 1, 0, 1],
             ....:                             [ 1,-1, 1]])
-            sage: M2.is_totally_unimodular()
-            False
-            sage: Matrix_cmr_chr_sparse.is_three_sum(M, M1, M2)
-            (False, 'gamma in second_mat should be -1. ')
+            sage: Matrix_cmr_chr_sparse.is_three_sum(M, M1, M2, sign_verify=False)
+            (False, 'the connecting matrix N should be totally unimodular')
+            sage: M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2], [2, 3], [1, 2])
+            (
+            [ 1  0 -1  0]
+            [ 1  1  0  0]  [-1  1  0]
+            [ 0  1  0  1]  [ 1  0  1]
+            [ 1  1 -1  1], [ 1 -1  1]
+            )
         """
         if not isinstance(first_rows_index, (list, tuple)) or len(first_rows_index) != 2:
             raise ValueError('The index of two columns needs to be given!')
@@ -3421,6 +3707,14 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         if intersection1_mat != intersection2_mat:
             return False, "the intersection matrices in the two matrices are inconsistent"
 
+        # Check whether the connecting matrix N is totally unimodular
+        N = Matrix_cmr_chr_sparse._from_data(
+                [[second_mat[i2, k1], second_mat[i2, k2], 0],
+                 [first_mat[j1, jk1], first_mat[j1, jk2], first_mat[j1, i1]],
+                 [first_mat[j2, jk1], first_mat[j2, jk2], first_mat[j2, i1]]])
+        if not N.is_totally_unimodular():
+            return False, "the connecting matrix N should be totally unimodular"
+
         # Check whether the result comes from the three sum
         column_index_1 = [j for j in range(n1) if j != i1]
         for i in range(m1 - 2):
@@ -3460,10 +3754,6 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         specialRows[1] = special_rows[1]
         specialColumns[0] = special_columns[0]
         specialColumns[1] = special_columns[1]
-        Cik = three_sum_mat[special_rows[0], special_columns[0]]
-        Cjk = three_sum_mat[special_rows[1], special_columns[0]]
-        Cil = three_sum_mat[special_rows[0], special_columns[1]]
-        Cjl = three_sum_mat[special_rows[1], special_columns[1]]
 
         sig_on()
         try:
@@ -3502,18 +3792,20 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         return True
 
     def is_y_sum(three_sum_mat, first_mat, second_mat,
-                    first_rows_index=[-2, -1],
-                    first_column_index=-1,
-                    second_rows_index=[0, 1],
-                    second_column_index=0,
-                    sign_verify=True):
+                 first_rows_index=[-2, -1],
+                 first_column_index=-1,
+                 second_rows_index=[0, 1],
+                 second_column_index=0,
+                 sign_verify=True):
         r"""
         Check whether ``first_mat`` and ``second_mat`` form ``three_sum_mat``
-        via the Y-sum operation.
+        via the `Y`-sum operation.
 
-        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``. If ``first_rows_index``
-        indexes row vectors `c^T` in ``first_mat`` and ``first_column_index`` indexes a column vector `a` in ``first_mat``,
-        then ``second_rows_index`` indexes row vectors `b^T` and ``second_column_index`` indexes a column vector `d` in ``second_mat``.
+        Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``.
+        If ``first_rows_index`` indexes row vectors `c^T` in ``first_mat`` and
+        ``first_column_index`` indexes a column vector `a` in ``first_mat``,
+        then ``second_rows_index`` indexes row vectors `b^T` and
+        ``second_column_index`` indexes a column vector `d` in ``second_mat``.
         In this case, the first matrix is
         `
             M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix}
@@ -3526,10 +3818,15 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `
             M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
 
-        The terminology "Y-sum" is used in the context of Seymour's decomposition
-        of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
+        The value of `\varepsilon \in \{-1,+1\}` must be so that
+        there exists a singular submatrix of `M_1` with exactly
+        two nonzeros per row and per column that covers
+        the top-left `\varepsilon`-entry.
 
-        .. SEEALSO:: :meth:`delta_sum`, :meth:`three_sum`
+        If you don't know the indices, please use :meth:`is_totally_unimodular`.
+
+        .. SEEALSO:: :meth:`y_sum`, :meth:`y_sum_decomposition`
+                     :meth:`is_totally_unimodular`
 
         INPUT:
 
@@ -3541,7 +3838,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``second_rows_index`` -- the row indices of `b^T` in `M_2`
         - ``second_column_index`` -- the column index of `d`  in `M_2`
         - ``sign_verify`` -- boolean (default: ``True``);
-            whether to check the sign correctness of `\epsilon_1` and `\epsilon_2`.
+            whether to check the sign consistency of `\varepsilon`.
 
         OUTPUT: boolean, or (boolean, string)
 
@@ -3589,7 +3886,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             True
             sage: M.is_y_sum(M1, M2)
             (False,
-                'sign_1 in second_mat should be -1. sign_2 in first_mat should be -1. ')
+             'epsilon in first_mat should be -1. epsilon in second_mat should be -1. ')
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 5, sparse=True),
             ....:                            [[1, 1, 0, 0, 0],
@@ -3627,7 +3924,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ....:    [ 0,  0,  0,  0,  1,  0, -1,  0],
             ....:    [ 1,  0, -1,  1,  0,  0,  0,  1]])
             sage: Matrix_cmr_chr_sparse.is_y_sum(M, M1, M2)
-            (False, 'sign_1 in second_mat should be -1. ')
+            (False, 'the epsilon in the two matrices are inconsistent')
 
             sage: M.y_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3])
             (
@@ -3684,7 +3981,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         for j in column_index_1:
             if first_mat[j1, j] != first_mat[j2, j]:
                 return False
-        sign_2 = first_mat[j2, i1] if first_mat[j1, i1] == 0 else first_mat[j1, i1]
+        sign_2 = first_mat[j2, i1]
         if sign_2 == 0:
             return False
 
@@ -3698,9 +3995,12 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         for j in column_index_2:
             if second_mat[k1, j] != second_mat[k2, j]:
                 return False
-        sign_1 = second_mat[k2, i2] if second_mat[k1, i2] == 0 else second_mat[k1, i2]
+        sign_1 = second_mat[k1, i2]
         if sign_1 == 0:
             return False
+
+        if sign_1 != sign_2:
+            return False, "the epsilon in the two matrices are inconsistent"
 
         # Check whether the result comes from the Y-sum
         row_index_1 = [i for i in range(m1) if i != j1 and i != j2]
@@ -3762,9 +4062,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         msg = ""
         if (first_mat[j2, i1] - epsilon) % 4 != 0:
-            msg += f'sign_1 in second_mat should be {epsilon}. '
+            msg += f'epsilon in first_mat should be {epsilon}. '
         if (second_mat[k1, i2] - epsilon) % 4 != 0:
-            msg += f'sign_2 in first_mat should be {epsilon}. '
+            msg += f'epsilon in second_mat should be {epsilon}. '
         if msg:
             return False, msg
         return True
