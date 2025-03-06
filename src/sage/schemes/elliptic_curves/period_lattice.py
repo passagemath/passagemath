@@ -74,7 +74,7 @@ upper half plane::
 
 We test that bug :issue:`8415` (caused by a PARI bug fixed in v2.3.5) is OK::
 
-    sage: # needs sage.rings.number_field
+    sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
     sage: E = EllipticCurve('37a')
     sage: K.<a> = QuadraticField(-7)
     sage: EK = E.change_ring(K)
@@ -175,6 +175,8 @@ class PeriodLattice_ell(PeriodLattice):
         ell_number_field and ell_rational_field::
 
             sage: from sage.schemes.elliptic_curves.period_lattice import PeriodLattice_ell
+
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: PeriodLattice_ell(E)
             Period lattice associated to
@@ -332,6 +334,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.period_lattice()
             Period lattice associated to Elliptic Curve defined by y^2 + y = x^3 - x over Rational Field
@@ -377,6 +380,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: L = E.period_lattice()
             sage: E.discriminant() > 0
@@ -396,11 +400,12 @@ class PeriodLattice_ell(PeriodLattice):
 
         Note that this is actually the inverse of the Weierstrass isomorphism::
 
-            sage: L.elliptic_exponential(L(Q))
+            sage: L.elliptic_exponential(L(Q))                                          # needs database_cremona_mini_ellcurve
             (3.00000000000000 : 5.00000000000000 : 1.00000000000000)
 
         An example with negative discriminant, and a torsion point::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a1')
             sage: L = E.period_lattice()
             sage: E.discriminant() < 0
@@ -444,12 +449,14 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.period_lattice().basis()
             (2.99345864623196, 2.45138938198679*I)
 
         This shows that the issue reported at :issue:`3954` is fixed::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: b1 = E.period_lattice().basis(prec=30)
             sage: b2 = E.period_lattice().basis(prec=30)
@@ -458,6 +465,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         This shows that the issue reported at :issue:`4064` is fixed::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.period_lattice().basis(prec=30)[0].parent()
             Real Field with 30 bits of precision
@@ -529,10 +537,10 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.period_lattice().gens()
             (2.99345864623196, 2.45138938198679*I)
-
             sage: E.period_lattice().gens(prec=100)
             (2.9934586462319596298320099794, 2.4513893819867900608542248319*I)
         """
@@ -564,6 +572,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.period_lattice().normalised_basis()
             (2.99345864623196, -2.45138938198679*I)
@@ -619,6 +628,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: L = E.period_lattice()
             sage: L.tau()
@@ -812,6 +822,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: f = EllipticCurve('11a')
             sage: f.period_lattice().is_real()
             True
@@ -852,6 +863,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: f = EllipticCurve('11a')
             sage: f.period_lattice().basis()
             (1.26920930427955, 0.634604652139777 + 1.45881661693850*I)
@@ -860,6 +872,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         ::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: f = EllipticCurve('37b')
             sage: f.period_lattice().basis()
             (1.08852159290423, 1.76761067023379*I)
@@ -897,6 +910,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.period_lattice().real_period()
             2.99345864623196
@@ -946,6 +960,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.period_lattice().omega()
             5.98691729246392
@@ -1019,6 +1034,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.period_lattice().basis_matrix()
             [ 2.99345864623196 0.000000000000000]
@@ -1038,6 +1054,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         See :issue:`4388`::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: L = EllipticCurve('11a1').period_lattice()
             sage: L.basis_matrix()
             [ 1.26920930427955 0.000000000000000]
@@ -1048,6 +1065,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         ::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: L = EllipticCurve('389a1').period_lattice()
             sage: L.basis_matrix()
             [ 2.49021256085505 0.000000000000000]
@@ -1079,6 +1097,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.period_lattice().complex_area()
             7.33813274078958
@@ -1130,6 +1149,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: EllipticCurve('389a1').period_lattice().sigma(CC(2,1))
             2.60912163570108 - 0.200865080824587*I
         """
@@ -1146,6 +1166,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: L = E.period_lattice()
             sage: L.curve() is E
@@ -1174,6 +1195,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: L = E.period_lattice()
             sage: L.ei()
@@ -1234,6 +1256,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: L = E.period_lattice()
             sage: w1, w2 = L.basis(prec=100)
@@ -1244,7 +1267,6 @@ class PeriodLattice_ell(PeriodLattice):
             (0.19249290511394227352563996419, 0.50000000000000000000000000000)
             sage: sum([x*w for x, w in zip(L.coordinates(zP), L.basis(prec=100))])  # abs tol 1e-28
             0.47934825019021931612953301006 + 0.98586885077582410221120384908*I
-
             sage: L.coordinates(12*w1 + 23*w2)  # abs tol 1e-28
             (12.000000000000000000000000000, 23.000000000000000000000000000)
             sage: L.coordinates(12*w1 + 23*w2, rounding='floor')
@@ -1299,6 +1321,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: L = E.period_lattice()
             sage: w1, w2 = L.basis(prec=100)
@@ -1386,6 +1409,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: L = E.period_lattice()
             sage: P = E([-1,1])
@@ -1393,12 +1417,12 @@ class PeriodLattice_ell(PeriodLattice):
 
         The elliptic log from the real coordinates::
 
-            sage: L.e_log_RC(xP, yP)  # abs tol 1e-15
+            sage: L.e_log_RC(xP, yP)  # abs tol 1e-15                                   # needs database_cremona_mini_ellcurve
             0.479348250190219 + 0.985868850775824*I
 
         The same elliptic log from the algebraic point::
 
-            sage: L(P)  # abs tol 1e-15
+            sage: L(P)  # abs tol 1e-15                                                 # needs database_cremona_mini_ellcurve
             0.479348250190219 + 0.985868850775824*I
 
         A number field example::
@@ -1589,6 +1613,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: L = E.period_lattice()
             sage: E.discriminant() > 0
@@ -1608,11 +1633,12 @@ class PeriodLattice_ell(PeriodLattice):
 
         Note that this is actually the inverse of the Weierstrass isomorphism::
 
-            sage: L.elliptic_exponential(_)  # abs tol 1e-26
+            sage: L.elliptic_exponential(_)  # abs tol 1e-26                            # needs database_cremona_mini_ellcurve
             (3.000000000000000000000000000 : 5.000000000000000000000000000 : 1.000000000000000000000000000)
 
         An example with negative discriminant, and a torsion point::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a1')
             sage: L = E.period_lattice()
             sage: E.discriminant() < 0
@@ -1900,7 +1926,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         Test to show that :issue:`8820` is fixed::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = EllipticCurve('37a')
             sage: K.<a> = QuadraticField(-5)
             sage: L = E.change_ring(K).period_lattice(K.places()[0])
@@ -1922,7 +1948,7 @@ class PeriodLattice_ell(PeriodLattice):
 
         ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = EllipticCurve('37a')
             sage: K.<a> = QuadraticField(-5)
             sage: L = E.change_ring(K).period_lattice(K.places()[0])

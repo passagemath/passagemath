@@ -1397,6 +1397,7 @@ cdef number *sa2si_NF(object elem, ring *_ring) noexcept:
 
     Ensures :issue:`36101` is fixed::
 
+        sage: # needs sage.symbolic
         sage: RR.<x, y, r, s0, c0, s1, c1> = AA[]
         sage: f = -4*r^2+(((1+2*AA(cos(pi/6)))*c0*r+2*c1*r+(1+2*AA(cos(pi/6)))*s0*r+2*s1*r)/2-1/2)^2+((1-(1+2*AA(cos(pi/6)))*c0*r-2*c1*r+(1+2*AA(cos(pi/6)))*s0*r+2*s1*r)/2-1/2)^2
         sage: f.change_ring( QuadraticField(3) )

@@ -160,6 +160,8 @@ class EllipticCurveSaturator(SageObject):
         Over `\QQ`::
 
             sage: from sage.schemes.elliptic_curves.saturation import EllipticCurveSaturator
+
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a1')
             sage: saturator = EllipticCurveSaturator(E)
             sage: saturator._reductions
@@ -225,6 +227,7 @@ class EllipticCurveSaturator(SageObject):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: from sage.schemes.elliptic_curves.saturation import EllipticCurveSaturator
             sage: E = EllipticCurve('389a')
             sage: K.<i> = QuadraticField(-1)
@@ -235,7 +238,6 @@ class EllipticCurveSaturator(SageObject):
              --starting full 2-saturation
             Points were not 2-saturated, exponent was 3
             ([(i + 1 : -2*i - 1 : 1)], 3)
-
             sage: Q = EK(0, 0)
             sage: R = EK(-1, 1)
             sage: saturator = EllipticCurveSaturator(EK, verbose=False)
@@ -248,7 +250,7 @@ class EllipticCurveSaturator(SageObject):
         `p`-rank 2 (which occurs for the reduction modulo `(16-5i)`),
         which uses the Weil pairing::
 
-            sage: saturator.full_p_saturation([P, Q + 3*R, Q - 4*R], 7)
+            sage: saturator.full_p_saturation([P, Q + 3*R, Q - 4*R], 7)                 # needs database_cremona_mini_ellcurve
             ([(i + 1 : -2*i - 1 : 1),
               (2869/676 : 154413/17576 : 1),
               (-7095/502681 : -366258864/356400829 : 1)], 1)
@@ -324,6 +326,7 @@ class EllipticCurveSaturator(SageObject):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: from sage.schemes.elliptic_curves.saturation import EllipticCurveSaturator
             sage: E = EllipticCurve('389a')
             sage: K.<i> = QuadraticField(-1)
@@ -334,7 +337,6 @@ class EllipticCurveSaturator(SageObject):
             False
             sage: saturator.p_saturation([2*P], 2)
             (0, (i + 1 : -2*i - 1 : 1))
-
             sage: Q = EK(0, 0)
             sage: R = EK(-1, 1)
             sage: saturator.p_saturation([P, Q, R], 3)
@@ -343,6 +345,7 @@ class EllipticCurveSaturator(SageObject):
         Here we see an example where 19-saturation is proved, with the
         verbose flag set to ``True`` so that we can see what is going on::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: saturator = EllipticCurveSaturator(EK, verbose=True)
             sage: saturator.p_saturation([P, Q, R], 19)
             Using sieve method to saturate...
@@ -360,6 +363,7 @@ class EllipticCurveSaturator(SageObject):
 
         An example where the points are not 11-saturated::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: saturator = EllipticCurveSaturator(EK, verbose=False)
             sage: res = saturator.p_saturation([P + 5*Q, P - 6*Q, R], 11); res
             (0, (-5783311/14600041*i + 1396143/14600041
@@ -368,7 +372,7 @@ class EllipticCurveSaturator(SageObject):
         That means that the 0'th point may be replaced by the displayed
         point to achieve an index gain of 11::
 
-            sage: saturator.p_saturation([res[1], P - 6*Q, R], 11)
+            sage: saturator.p_saturation([res[1], P - 6*Q, R], 11)                      # needs database_cremona_mini_ellcurve
             False
 
         TESTS:

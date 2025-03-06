@@ -12,7 +12,7 @@ EXAMPLES:
 
 We create a toy example based on the Mordell-Weil group of an elliptic curve over `\QQ`::
 
-    sage: # needs sage.schemes
+    sage: # needs database_cremona_mini_ellcurve sage.schemes
     sage: E = EllipticCurve('30a2')
     sage: pts = [E(4,-7,1), E(7/4, -11/8, 1), E(3, -2, 1)]
     sage: M = AdditiveAbelianGroupWrapper(pts[0].parent(), pts, [3, 2, 2]); M

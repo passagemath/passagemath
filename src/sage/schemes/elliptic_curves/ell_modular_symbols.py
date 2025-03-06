@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-schemes
+# sage.doctest: neeeds database_cremona_mini_ellcurve
 r"""
 Modular symbols attached to elliptic curves over `\QQ`
 

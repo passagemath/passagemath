@@ -17,6 +17,7 @@ EXAMPLES:
 
 An example over `\QQ`::
 
+    sage: # needs database_cremona_mini_ellcurve
     sage: E = EllipticCurve('389a1')
     sage: P = E(-1,1); P
     (-1 : 1 : 1)
@@ -530,6 +531,8 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         sage: loads(S.dumps()) == S
         True
+
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('37a')
         sage: P = E(0,0); P
         (0 : 0 : 1)

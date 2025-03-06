@@ -45,8 +45,8 @@ def is_Jacobian(J):
 
     ::
 
-        sage: E = EllipticCurve('37a1')
-        sage: is_Jacobian(E)
+        sage: E = EllipticCurve('37a1')                                                 # needs database_cremona_mini_ellcurve
+        sage: is_Jacobian(E)                                                            # needs database_cremona_mini_ellcurve
         False
     """
     from sage.misc.superseded import deprecation
