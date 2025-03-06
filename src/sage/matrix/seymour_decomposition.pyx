@@ -2228,8 +2228,71 @@ cdef class SumNode(DecompositionNode):
         return result
 
     def permuted_block_matrix(self):
-        r"Return (Prow, BlockMatrix, Pcolumn) so that self.matrix() == Prow * BlockMatrix * Pcolumn ????"
-        raise NotImplementedError
+        r"""
+        Return the permutation matrices between the matrix
+        and the block matrix form.
+
+        OUTPUT: a tuple ``(Prow, BlockMatrix, Pcolumn)``, where
+        ``self.matrix() == Prow * BlockMatrix * Pcolumn``, and
+        ``BlockMatrix == self.block_matrix_form()``.
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+
+            sage: M = Matrix_cmr_chr_sparse.one_sum([[1, 0], [-1, 1]],
+            ....:                                    [[1, 1], [-1, 0]],
+            ....:                                    [[1, 0], [0, 1]]); M
+            [ 1  0| 0  0| 0  0]
+            [-1  1| 0  0| 0  0]
+            [-----+-----+-----]
+            [ 0  0| 1  1| 0  0]
+            [ 0  0|-1  0| 0  0]
+            [-----+-----+-----]
+            [ 0  0| 0  0| 1  0]
+            [ 0  0| 0  0| 0  1]
+            sage: M_perm = M.matrix_from_rows_and_columns([2, 4, 3, 0, 5, 1], [0, 1, 3, 5, 4, 2]); M_perm
+            [ 0  0  1  0  0  1]
+            [ 0  0  0  0  1  0]
+            [ 0  0  0  0  0 -1]
+            [ 1  0  0  0  0  0]
+            [ 0  0  0  1  0  0]
+            [-1  1  0  0  0  0]
+            sage: result, certificate = M_perm.is_totally_unimodular(certificate=True); certificate
+            OneSumNode (6×6) with 4 children
+            sage: P_row, block_matrix, P_column = certificate.permuted_block_matrix()
+            sage: P_row^(-1) * M_perm * P_column^(-1) == block_matrix
+            True
+        """
+        from sage.combinat.permutation import Permutation
+        cdef CMR_SEYMOUR_NODE *child_dec
+        cdef CMR_ELEMENT *parent_rows
+        cdef CMR_ELEMENT *parent_columns
+        children_row = tuple()
+        children_column = tuple()
+        for index in range(self.nchildren()):
+            child_dec = CMRseymourChild(self._dec, index)
+            parent_rows = CMRseymourChildRowsToParent(self._dec, index)
+            parent_columns = CMRseymourChildColumnsToParent(self._dec, index)
+            child_nrows = CMRseymourNumRows(child_dec)
+            child_ncols = CMRseymourNumColumns(child_dec)
+
+            if parent_rows == NULL or all(parent_rows[i] == 0 for i in range(child_nrows)):
+                raise ValueError(f"Child {index} does not have parents rows")
+            parent_rows_tuple = tuple(parent_rows[i] for i in range(child_nrows))
+
+            if parent_columns == NULL or all(parent_columns[i] == 0 for i in range(child_ncols)):
+                raise ValueError(f"Child {index} does not have parents columns")
+            parent_columns_tuple = tuple(parent_columns[i] for i in range(child_ncols))
+            child_row = tuple(CMRelementToRowIndex(element) + 1
+                              for element in parent_rows_tuple)
+            child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                 for element in parent_columns_tuple)
+            children_row += child_row
+            children_column += child_column
+        P_row = Permutation(list(children_row)).to_matrix()
+        P_column = Permutation(list(children_column)).to_matrix().transpose()
+        return (P_row, self.block_matrix_form(), P_column)
 
     summands = DecompositionNode.child_nodes
 
@@ -2473,6 +2536,7 @@ cdef class TwoSumNode(SumNode):
         """
         M1, M2 = self.summand_matrices()
         return Matrix_cmr_chr_sparse.two_sum(M1, M2, M1.nrows() - 1, 0, "bottom_left")
+
 
 cdef class DeltaSumNode(SumNode):
 
@@ -2779,6 +2843,85 @@ cdef class DeltaSumNode(SumNode):
         M1, M2 = self.summand_matrices()
         return Matrix_cmr_chr_sparse.delta_sum(M1, M2)
 
+    def permuted_block_matrix(self):
+        r"""
+        Return the permutation matrices between the matrix
+        and the block matrix form.
+
+        OUTPUT: a tuple ``(Prow, BlockMatrix, Pcolumn)``, where
+        ``self.matrix() == Prow * BlockMatrix * Pcolumn``, and
+        ``BlockMatrix == self.block_matrix_form()``.
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: R12 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
+            ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
+            sage: R12
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
+            ....:                           decompose_strategy="delta_pivot")
+            sage: C = certificate.child_nodes()[0]; C
+            DeltaSumNode (6×6) with 2 children
+            sage: C.matrix()
+            [ 1  0  0  1 -1 -1]
+            [ 0  1  1  1  0  0]
+            [-1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  0  0  0 -1]
+            [ 0 -1  0 -1  0  1]
+            sage: C.block_matrix_form()
+            [ 0  0  1  1 -1 -1]
+            [ 1  1  1  0  0  0]
+            [ 0  1  0 -1  1  1]
+            [-1  0 -1  0  1  1]
+            [ 0  0  0  1  0 -1]
+            [-1  0 -1  0  0  1]
+            sage: P_row, block_matrix, P_column = C.permuted_block_matrix()
+            sage: P_row^(-1) * C.matrix() * P_column^(-1) == block_matrix
+            True
+        """
+        from sage.combinat.permutation import Permutation
+        cdef CMR_SEYMOUR_NODE *child_dec
+        cdef CMR_ELEMENT *parent_rows
+        cdef CMR_ELEMENT *parent_columns
+        children_row = tuple()
+        children_column = tuple()
+        for index in range(self.nchildren()):
+            child_dec = CMRseymourChild(self._dec, index)
+            parent_rows = CMRseymourChildRowsToParent(self._dec, index)
+            parent_columns = CMRseymourChildColumnsToParent(self._dec, index)
+            child_nrows = CMRseymourNumRows(child_dec)
+            child_ncols = CMRseymourNumColumns(child_dec)
+
+            if parent_rows == NULL or all(parent_rows[i] == 0 for i in range(child_nrows)):
+                raise ValueError(f"Child {index} does not have parents rows")
+            parent_rows_tuple = tuple(parent_rows[i] for i in range(child_nrows))
+
+            if parent_columns == NULL or all(parent_columns[i] == 0 for i in range(child_ncols)):
+                raise ValueError(f"Child {index} does not have parents columns")
+            parent_columns_tuple = tuple(parent_columns[i] for i in range(child_ncols))
+            child_row = tuple(CMRelementToRowIndex(element) + 1
+                              for element in parent_rows_tuple)
+            child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                 for element in parent_columns_tuple)
+            if index == 0:
+                children_row += child_row[:-1]
+                children_column += child_column[:-2]
+            else:
+                children_row += child_row[1:]
+                children_column += child_column[2:]
+        P_row = Permutation(list(children_row)).to_matrix()
+        P_column = Permutation(list(children_column)).to_matrix().transpose()
+        return (P_row, self.block_matrix_form(), P_column)
+
+
 cdef class ThreeSumNode(SumNode):
 
     def _children(self):
@@ -3047,6 +3190,85 @@ cdef class ThreeSumNode(SumNode):
         M1, M2 = self.summand_matrices()
         return Matrix_cmr_chr_sparse.three_sum(M1, M2)
 
+    def permuted_block_matrix(self):
+        r"""
+        Return the permutation matrices between the matrix
+        and the block matrix form.
+
+        OUTPUT: a tuple ``(Prow, BlockMatrix, Pcolumn)``, where
+        ``self.matrix() == Prow * BlockMatrix * Pcolumn``, and
+        ``BlockMatrix == self.block_matrix_form()``.
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: R12 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
+            ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
+            sage: R12
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
+            ....:                           decompose_strategy="three_pivot")
+            sage: C = certificate; C
+            ThreeSumNode (6×6) with 2 children
+            sage: C.matrix()
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: C.block_matrix_form()
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: P_row, block_matrix, P_column = C.permuted_block_matrix()
+            sage: P_row^(-1) * C.matrix() * P_column^(-1) == block_matrix
+            True
+        """
+        from sage.combinat.permutation import Permutation
+        cdef CMR_SEYMOUR_NODE *child_dec
+        cdef CMR_ELEMENT *parent_rows
+        cdef CMR_ELEMENT *parent_columns
+        children_row = tuple()
+        children_column = tuple()
+        for index in range(self.nchildren()):
+            child_dec = CMRseymourChild(self._dec, index)
+            parent_rows = CMRseymourChildRowsToParent(self._dec, index)
+            parent_columns = CMRseymourChildColumnsToParent(self._dec, index)
+            child_nrows = CMRseymourNumRows(child_dec)
+            child_ncols = CMRseymourNumColumns(child_dec)
+            
+            if parent_rows == NULL or all(parent_rows[i] == 0 for i in range(child_nrows)):
+                raise ValueError(f"Child {index} does not have parents rows")
+            parent_rows_tuple = tuple(parent_rows[i] for i in range(child_nrows))
+
+            if parent_columns == NULL or all(parent_columns[i] == 0 for i in range(child_ncols)):
+                raise ValueError(f"Child {index} does not have parents columns")
+            parent_columns_tuple = tuple(parent_columns[i] for i in range(child_ncols))
+            child_row = tuple(CMRelementToRowIndex(element) + 1
+                              for element in parent_rows_tuple)
+            child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                 for element in parent_columns_tuple)
+            if index == 0:
+                children_row += child_row[:-2]
+                children_column += child_column[:-1]
+            else:
+                children_row += child_row[1:]
+                children_column += child_column[2:]
+        P_row = Permutation(list(children_row)).to_matrix()
+        P_column = Permutation(list(children_column)).to_matrix().transpose()
+        return (P_row, self.block_matrix_form(), P_column)
+
+
 cdef class YSumNode(SumNode):
 
     def _children(self):
@@ -3293,6 +3515,84 @@ cdef class YSumNode(SumNode):
         """
         M1, M2 = self.summand_matrices()
         return Matrix_cmr_chr_sparse.y_sum(M1, M2)
+
+    def permuted_block_matrix(self):
+        r"""
+        Return the permutation matrices between the matrix
+        and the block matrix form.
+
+        OUTPUT: a tuple ``(Prow, BlockMatrix, Pcolumn)``, where
+        ``self.matrix() == Prow * BlockMatrix * Pcolumn``, and
+        ``BlockMatrix == self.block_matrix_form()``.
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: R12 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
+            ....: [[1,0,1,1,0,0],[0,1,1,1,0,0],[1,0,1,0,1,1],
+            ....: [0,-1,0,-1,1,1],[1,0,1,0,1,0],[0,-1,0,-1,0,1]])
+            sage: R12
+            [ 1  0  1  1  0  0]
+            [ 0  1  1  1  0  0]
+            [ 1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  1  0  1  0]
+            [ 0 -1  0 -1  0  1]
+            sage: result, certificate = R12.is_totally_unimodular(certificate=True,
+            ....:                           decompose_strategy="y_pivot")
+            sage: C = certificate.child_nodes()[0]; C
+            YSumNode (6×6) with 2 children
+            sage: C.matrix()
+            [ 1  0  0  1 -1 -1]
+            [ 0  1  1  1  0  0]
+            [-1  0  1  0  1  1]
+            [ 0 -1  0 -1  1  1]
+            [ 1  0  0  0  0 -1]
+            [ 0 -1  0 -1  0  1]
+            sage: C.block_matrix_form()
+            [ 0  0  1  1 -1 -1]
+            [ 1  1  1  0  0  0]
+            [ 0  1  0 -1  1  1]
+            [-1  0 -1  0  1  1]
+            [ 0  0  0  1  0 -1]
+            [-1  0 -1  0  0  1]
+            sage: P_row, block_matrix, P_column = C.permuted_block_matrix()
+            sage: P_row^(-1) * C.matrix() * P_column^(-1) == block_matrix
+            True
+        """
+        from sage.combinat.permutation import Permutation
+        cdef CMR_SEYMOUR_NODE *child_dec
+        cdef CMR_ELEMENT *parent_rows
+        cdef CMR_ELEMENT *parent_columns
+        children_row = tuple()
+        children_column = tuple()
+        for index in range(self.nchildren()):
+            child_dec = CMRseymourChild(self._dec, index)
+            parent_rows = CMRseymourChildRowsToParent(self._dec, index)
+            parent_columns = CMRseymourChildColumnsToParent(self._dec, index)
+            child_nrows = CMRseymourNumRows(child_dec)
+            child_ncols = CMRseymourNumColumns(child_dec)
+
+            if parent_rows == NULL or all(parent_rows[i] == 0 for i in range(child_nrows)):
+                raise ValueError(f"Child {index} does not have parents rows")
+            parent_rows_tuple = tuple(parent_rows[i] for i in range(child_nrows))
+
+            if parent_columns == NULL or all(parent_columns[i] == 0 for i in range(child_ncols)):
+                raise ValueError(f"Child {index} does not have parents columns")
+            parent_columns_tuple = tuple(parent_columns[i] for i in range(child_ncols))
+            child_row = tuple(CMRelementToRowIndex(element) + 1
+                              for element in parent_rows_tuple)
+            child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                 for element in parent_columns_tuple)
+            if index == 0:
+                children_row += child_row[:-2]
+                children_column += child_column[:-1]
+            else:
+                children_row += child_row[2:]
+                children_column += child_column[1:]
+        P_row = Permutation(list(children_row)).to_matrix()
+        P_column = Permutation(list(children_column)).to_matrix().transpose()
+        return (P_row, self.block_matrix_form(), P_column)
 
 
 cdef class BaseGraphicNode(DecompositionNode):
