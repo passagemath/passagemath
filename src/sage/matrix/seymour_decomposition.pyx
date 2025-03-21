@@ -4491,11 +4491,11 @@ cdef class ElementKey:
         """
         Return a hash of this element key
         """
-        return hash(self._key)
+        return hash(self.key)
 
     def __eq__(self, other):
         if isinstance(other, ElementKey):
-            return self._key == other._key
+            return self.key == other.key
         return False
 
     def __repr__(self):
@@ -4504,10 +4504,10 @@ cdef class ElementKey:
         The composition key is sorted by the string of keys.
         """
         if self._composition:
-            sorted_key = sorted(self._key, key=lambda x: (str(x[1]), x[0]))
+            sorted_key = sorted(self.key, key=lambda x: (str(x[1]), x[0]))
             return "".join(['+'+str(a[1]) if a[0] == 1 else '-'+str(a[1]) for a in sorted_key])
         else:
-            return "".join([str(a) for a in self._key])
+            return "".join([str(a) for a in self.key])
 
 
 cdef _class(CMR_SEYMOUR_NODE *dec):
