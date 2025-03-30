@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.graphs
 r"""
 Transversal matroids
 
