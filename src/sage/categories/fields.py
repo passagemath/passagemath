@@ -742,7 +742,7 @@ class Fields(CategoryWithAxiom):
 
             TESTS::
 
-                sage: QQbar(0).gcd(QQbar.zeta(3))
+                sage: QQbar(0).gcd(QQbar.zeta(3))                                       # needs sage.rings.number_field
                 1
 
             AUTHOR:

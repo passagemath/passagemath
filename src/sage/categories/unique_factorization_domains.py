@@ -170,6 +170,7 @@ class UniqueFactorizationDomains(Category_singleton):
 
             A slightly more exotic base ring::
 
+                sage: # needs sage.rings.number_field
                 sage: P = PolynomialRing(QQbar, 4, "x")
                 sage: p = sum(QQbar.zeta(i + 1) * P.gen(i) for i in range(4))
                 sage: ((p^4 - 1).gcd(p^3 + 1) / (p + 1)).is_unit()
