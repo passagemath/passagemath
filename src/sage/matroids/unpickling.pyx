@@ -278,6 +278,7 @@ def unpickle_gammoid(version, data):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: from sage.matroids.gammoid import Gammoid
         sage: M = Gammoid(digraphs.TransitiveTournament(5), roots=[3, 4])
         sage: M == loads(dumps(M))  # indirect doctest
@@ -822,6 +823,7 @@ def unpickle_transversal_matroid(version, data):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: from sage.matroids.transversal_matroid import *
         sage: sets = [range(6)] * 3
         sage: M = TransversalMatroid(sets)
