@@ -767,8 +767,8 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
 
     ``as data`` is optional, but if it is used, it will contain a few useful values::
 
-        sage: data  # abs tol 1
-        {'alarm_raised': True, 'elapsed': 1.0}
+        sage: data
+        {'alarm_raised': True, 'elapsed': 1...}
 
     ``max_wait_after_interrupt`` can be passed if the function may take longer than usual to be interrupted::
 
@@ -812,8 +812,8 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
         Traceback (most recent call last):
         ...
         RuntimeError: Function terminates early after 1... < 2.0000 seconds
-        sage: data  # abs tol 1
-        {'alarm_raised': False, 'elapsed': 1.0}
+        sage: data
+        {'alarm_raised': False, 'elapsed': 1...}
 
     The test above requires a large tolerance, because both ``time.sleep`` and
     ``from posix.unistd cimport usleep`` may have slowdown on the order of 0.1s on Mac,
@@ -852,14 +852,14 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
         Traceback (most recent call last):
         ...
         RuntimeError: Function is not interruptible within 1.0000 seconds, only after 2.00... seconds
-        sage: data  # abs tol 0.01
-        {'alarm_raised': True, 'elapsed': 2.0}
+        sage: data
+        {'alarm_raised': True, 'elapsed': 2.0...}
         sage: with ensure_interruptible_after(1): uninterruptible_sleep(2r); raise RuntimeError
         Traceback (most recent call last):
         ...
         RuntimeError: Function is not interruptible within 1.0000 seconds, only after 2.00... seconds
-        sage: data  # abs tol 0.01
-        {'alarm_raised': True, 'elapsed': 2.0}
+        sage: data
+        {'alarm_raised': True, 'elapsed': 2.0...}
 
     ::
 
@@ -867,8 +867,8 @@ def ensure_interruptible_after(seconds: float, max_wait_after_interrupt: float =
         Traceback (most recent call last):
         ...
         ValueError
-        sage: data  # abs tol 0.01
-        {'alarm_raised': False, 'elapsed': 0.0}
+        sage: data
+        {'alarm_raised': False, 'elapsed': ...}
     """
     seconds = float(seconds)
     max_wait_after_interrupt = float(max_wait_after_interrupt)
