@@ -283,7 +283,7 @@ cdef class Matrix_dense(matrix.Matrix):
         Verify that :issue:`15067` is fixed::
 
             sage: u = matrix(1, 2, [-1, 1])
-            sage: derivative(u, x)
+            sage: derivative(u, x)                                                      # needs sage.symbolic
             [0 0]
         """
         # We could just use apply_map

@@ -818,7 +818,7 @@ cdef class Matrix_sparse(matrix.Matrix):
         Verify that :issue:`15067` is fixed::
 
             sage: m = matrix(3, 3, {(1, 1): 2, (0,2): 5})
-            sage: derivative(m, x)
+            sage: derivative(m, x)                                                      # needs sage.symbolic
             [0 0 0]
             [0 0 0]
             [0 0 0]
