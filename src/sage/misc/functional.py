@@ -781,9 +781,9 @@ def integral(x, *args, **kwds):
 
     Verify that :issue:`33034` is fixed::
 
-        sage: f(x) = (x + sin(3*x)) * exp(-3*x*I)
-        sage: h(x) = f(x) - f(x).expand()
-        sage: integral(h(x), (x, 0, 2*pi))
+        sage: f(x) = (x + sin(3*x)) * exp(-3*x*I)                                       # needs sage.symbolic
+        sage: h(x) = f(x) - f(x).expand()                                               # needs sage.symbolic
+        sage: integral(h(x), (x, 0, 2*pi))                                              # needs sage.symbolic
         0
     """
     if hasattr(x, 'integral'):
