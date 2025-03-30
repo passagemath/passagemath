@@ -7,7 +7,6 @@ from sage.misc.misc import (BackslashOperator,
                             exists, forall, is_iterator,
                             random_sublist,
                             pad_zeros,
-                            SAGE_DB,
                             newton_method_sizes, compose,
                             nest)
 

@@ -77,7 +77,8 @@ from sage.rings.real_mpfi cimport RealIntervalFieldElement
 from sage.rings.polynomial.evaluation_flint cimport fmpz_poly_evaluation_mpfr, fmpz_poly_evaluation_mpfi
 
 try:
-    from sage.libs.pari.all import pari, pari_gen
+    from sage.libs.pari import pari
+    from cypari2.gen import Gen as pari_gen
 except ImportError:
     pari_gen = ()
 

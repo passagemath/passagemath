@@ -613,8 +613,7 @@ class WordGenerator:
             for i in it:
                 n += 1
                 yield alphabet[i]
-            else:
-                Fib1, Fib0 = Fib1 + Fib0, Fib1
+            Fib1, Fib0 = Fib1 + Fib0, Fib1
 
     def FixedPointOfMorphism(self, morphism, first_letter):
         r"""
@@ -963,8 +962,7 @@ class WordGenerator:
                 for i in s1[n:]:
                     n += 1
                     yield alphabet[i]
-                else:
-                    s1, s0 = s1*next(cf) + s0, s1
+                s1, s0 = s1*next(cf) + s0, s1
             except StopIteration:
                 return
 
@@ -1307,8 +1305,7 @@ class WordGenerator:
             for x in w[n:]:
                 n += 1
                 yield x
-            else:
-                w = W(w * W(next(d))).palindromic_closure()
+            w = W(w * W(next(d))).palindromic_closure()
 
     def MinimalSmoothPrefix(self, n):
         r"""

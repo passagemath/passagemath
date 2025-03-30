@@ -260,7 +260,7 @@ cdef class LinearMatroid(BasisExchangeMatroid):
     """
     def __init__(self, matrix=None, groundset=None, reduced_matrix=None, ring=None, keep_initial_representation=True):
         """
-        See class definition for full documentation.
+        See the class definition for full documentation.
 
         EXAMPLES::
 
@@ -1286,9 +1286,9 @@ cdef class LinearMatroid(BasisExchangeMatroid):
 
         .. WARNING::
 
-            This method is linked to __richcmp__ (in Cython) and __cmp__ or
-            __eq__/__ne__ (in Python). If you override one, you should (and in
-            Cython: MUST) override the other!
+            This method is linked to ``__richcmp__`` (in Cython) and ``__cmp__``
+            or ``__eq__``/``__ne__`` (in Python). If you override one, you
+            should (and, in Cython, \emph{must}) override the other!
 
         EXAMPLES::
 
@@ -3080,7 +3080,7 @@ cdef class BinaryMatroid(LinearMatroid):
     """
     def __init__(self, matrix=None, groundset=None, reduced_matrix=None, ring=None, keep_initial_representation=True, basis=None):
         """
-        See class definition for full documentation.
+        See the class definition for full documentation.
 
         .. NOTE::
 
@@ -4113,7 +4113,7 @@ cdef class TernaryMatroid(LinearMatroid):
     """
     def __init__(self, matrix=None, groundset=None, reduced_matrix=None, ring=None, keep_initial_representation=True, basis=None):
         """
-        See class definition for full documentation.
+        See the class definition for full documentation.
 
         .. NOTE::
 
@@ -4991,7 +4991,7 @@ cdef class QuaternaryMatroid(LinearMatroid):
     """
     def __init__(self, matrix=None, groundset=None, reduced_matrix=None, ring=None, keep_initial_representation=True, basis=None):
         """
-        See class definition for full documentation.
+        See the class definition for full documentation.
 
         .. NOTE::
 
@@ -5698,7 +5698,7 @@ cdef class RegularMatroid(LinearMatroid):
     """
     def __init__(self, matrix=None, groundset=None, reduced_matrix=None, ring=None, keep_initial_representation=True):
         """
-        See class definition for full documentation.
+        See the class definition for full documentation.
 
         .. NOTE::
 

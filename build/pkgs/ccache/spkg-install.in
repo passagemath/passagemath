@@ -7,7 +7,6 @@ mkdir build
 cd build
 sdh_cmake -DCMAKE_BUILD_TYPE=Release \
           -DENABLE_TESTING=OFF \
-		  -DREDIS_STORAGE_BACKEND=OFF \
 		  ..
 sdh_make
 sdh_make_install

@@ -40,9 +40,9 @@ from sage.matroids.linear_matroid cimport LinearMatroid, RegularMatroid, BinaryM
 from sage.matroids.minor_matroid import MinorMatroid
 
 
-#############################################################################
+# ------------
 # BasisMatroid
-#############################################################################
+# ------------
 
 def unpickle_basis_matroid(version, data):
     """
@@ -86,9 +86,9 @@ def unpickle_basis_matroid(version, data):
     return M
 
 
-#############################################################################
+# ---------------
 # CircuitsMatroid
-#############################################################################
+# ---------------
 
 def unpickle_circuits_matroid(version, data):
     """
@@ -127,9 +127,9 @@ def unpickle_circuits_matroid(version, data):
     return M
 
 
-#############################################################################
+# ----------------------
 # CircuitClosuresMatroid
-#############################################################################
+# ----------------------
 
 def unpickle_circuit_closures_matroid(version, data):
     """
@@ -168,9 +168,9 @@ def unpickle_circuit_closures_matroid(version, data):
     return M
 
 
-#############################################################################
+# ------------
 # FlatsMatroid
-#############################################################################
+# ------------
 
 def unpickle_flats_matroid(version, data):
     """
@@ -211,9 +211,9 @@ def unpickle_flats_matroid(version, data):
     return M
 
 
-#############################################################################
+# -----------
 # DualMatroid
-#############################################################################
+# -----------
 
 def unpickle_dual_matroid(version, data):
     """
@@ -250,9 +250,52 @@ def unpickle_dual_matroid(version, data):
     return M
 
 
-#############################################################################
+# -------
+# Gammoid
+# -------
+
+def unpickle_gammoid(version, data):
+    """
+    Unpickle a :class:`Gammoid`.
+
+    *Pickling* is Python's term for the loading and saving of objects.
+    Functions like these serve to reconstruct a saved object. This all happens
+    transparently through the ``load`` and ``save`` commands, and you should
+    never have to call this function directly.
+
+    INPUT:
+
+    - ``version`` -- integer; expected to be 0
+    - ``data`` -- tuple ``(D, roots, E, name)`` in which ``D`` is a loopless
+      DiGraph representing the gammoid, ``roots`` is a subset of the vertices,
+      ``E`` is the groundset of the matroid, and ``name`` is a custom name.
+
+    OUTPUT: matroid
+
+    .. WARNING::
+
+        Users should never call this function directly.
+
+    EXAMPLES::
+
+        sage: from sage.matroids.gammoid import Gammoid
+        sage: M = Gammoid(digraphs.TransitiveTournament(5), roots=[3, 4])
+        sage: M == loads(dumps(M))  # indirect doctest
+        True
+    """
+    from sage.matroids.gammoid import Gammoid
+
+    if version != 0:
+        raise TypeError("object was created with newer version of Sage. Please upgrade.")
+    M = Gammoid(D=data[0], roots=data[1], groundset=data[2])
+    if data[3] is not None:
+        M.rename(data[3])
+    return M
+
+
+# ---------------------
 # LeanMatrix subclasses
-#############################################################################
+# ---------------------
 
 def unpickle_generic_matrix(version, data):
     """
@@ -437,9 +480,9 @@ def unpickle_rational_matrix(version, data):
     return A
 
 
-#############################################################################
+# ----------------------------
 # LinearMatroid and subclasses
-#############################################################################
+# ----------------------------
 
 def unpickle_linear_matroid(version, data):
     """
@@ -669,9 +712,9 @@ def unpickle_regular_matroid(version, data):
     return M
 
 
-#############################################################################
-# Minor matroids
-#############################################################################
+# ------------
+# MinorMatroid
+# ------------
 
 def unpickle_minor_matroid(version, data):
     """
@@ -710,9 +753,9 @@ def unpickle_minor_matroid(version, data):
     return M
 
 
-#############################################################################
-# Graphic Matroids
-#############################################################################
+# --------------
+# GraphicMatroid
+# --------------
 
 def unpickle_graphic_matroid(version, data):
     """
@@ -745,6 +788,54 @@ def unpickle_graphic_matroid(version, data):
         raise TypeError("object was created with newer version of Sage. Please upgrade.")
     G, name = data
     M = GraphicMatroid(G)
+    if name is not None:
+        M.rename(name)
+    return M
+
+
+# ------------------
+# TransversalMatroid
+# ------------------
+
+def unpickle_transversal_matroid(version, data):
+    """
+    Unpickle a TransversalMatroid.
+
+    *Pickling* is Python's term for the loading and saving of objects.
+    Functions like these serve to reconstruct a saved object. This all happens
+    transparently through the ``load`` and ``save`` commands, and you should
+    never have to call this function directly.
+
+    INPUT:
+
+    - ``version`` -- integer (currently `0`)
+    - ``data`` -- tuple ``(sets, groundset, name)``, where ``groundset`` is a
+      ``frozenset`` of elements, and ``sets`` is a ``frozenset`` of tuples
+      consisting of a name for the set, and a ``frozenset`` of groundset
+      elements it contains.
+
+    OUTPUT: :class:`TransversalMatroid`
+
+    .. WARNING::
+
+        Users should never call this function directly.
+
+    EXAMPLES::
+
+        sage: from sage.matroids.transversal_matroid import *
+        sage: sets = [range(6)] * 3
+        sage: M = TransversalMatroid(sets)
+        sage: M == loads(dumps(M))
+        True
+        sage: M.rename('U36')
+        sage: loads(dumps(M))
+        U36
+    """
+    from sage.matroids.transversal_matroid import TransversalMatroid
+    if version != 0:
+        raise TypeError("object was created with newer version of Sage. Please upgrade.")
+    sets, groundset, set_labels, matching, name = data
+    M = TransversalMatroid(sets, groundset, set_labels, matching)
     if name is not None:
         M.rename(name)
     return M

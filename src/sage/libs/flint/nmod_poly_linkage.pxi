@@ -541,10 +541,8 @@ cdef inline int celement_pow(nmod_poly_t res, nmod_poly_t x, long e, nmod_poly_t
 
         sage: # needs sage.rings.finite_rings
         sage: n = 2^23
-        sage: alarm(0.2); x^n; cancel_alarm()
-        Traceback (most recent call last):
-        ...
-        AlarmInterrupt
+        sage: from sage.doctest.util import ensure_interruptible_after
+        sage: with ensure_interruptible_after(0.2): (x^n).degree()
     """
     if modulus != NULL:
         sig_on()

@@ -1071,7 +1071,7 @@ cdef class InteractiveLPBackend:
         EXAMPLES::
 
             sage: p = MixedIntegerLinearProgram(maximization=True,\
-                                                solver='InteractiveLP')
+            ....:                               solver='InteractiveLP')
             sage: x = p.new_variable(nonnegative=True)
             sage: p.add_constraint(-x[0] + x[1] <= 2)
             sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)
@@ -1101,7 +1101,7 @@ cdef class InteractiveLPBackend:
         EXAMPLES::
 
             sage: p = MixedIntegerLinearProgram(maximization=True,\
-                                                solver='InteractiveLP')
+            ....:                               solver='InteractiveLP')
             sage: x = p.new_variable(nonnegative=True)
             sage: p.add_constraint(-x[0] + x[1] <= 2)
             sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)
@@ -1131,7 +1131,7 @@ cdef class InteractiveLPBackend:
         EXAMPLES::
 
             sage: p = MixedIntegerLinearProgram(maximization=True,\
-                                                solver='InteractiveLP')
+            ....:                               solver='InteractiveLP')
             sage: x = p.new_variable(nonnegative=True)
             sage: p.add_constraint(-x[0] + x[1] <= 2)
             sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)
@@ -1161,7 +1161,7 @@ cdef class InteractiveLPBackend:
         EXAMPLES::
 
             sage: p = MixedIntegerLinearProgram(maximization=True,\
-                                                solver='InteractiveLP')
+            ....:                               solver='InteractiveLP')
             sage: x = p.new_variable(nonnegative=True)
             sage: p.add_constraint(-x[0] + x[1] <= 2)
             sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)
@@ -1186,7 +1186,7 @@ cdef class InteractiveLPBackend:
         EXAMPLES::
 
             sage: p = MixedIntegerLinearProgram(maximization=True,\
-                                                solver='InteractiveLP')
+            ....:                               solver='InteractiveLP')
             sage: x = p.new_variable(nonnegative=True)
             sage: p.add_constraint(-x[0] + x[1] <= 2)
             sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)
@@ -1219,7 +1219,7 @@ cdef class InteractiveLPBackend:
         EXAMPLES::
 
             sage: p = MixedIntegerLinearProgram(maximization=True,\
-                                                solver='InteractiveLP')
+            ....:                               solver='InteractiveLP')
             sage: x = p.new_variable(nonnegative=True)
             sage: p.add_constraint(-x[0] + x[1] <= 2)
             sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)

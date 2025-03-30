@@ -10,7 +10,6 @@ from sage.misc.misc import (BackslashOperator,               # Depends on sage.e
                             exists, forall, is_iterator,
                             random_sublist,
                             pad_zeros,
-                            SAGE_DB,
                             newton_method_sizes, compose,
                             nest)
 
