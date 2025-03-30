@@ -823,7 +823,7 @@ def unpickle_transversal_matroid(version, data):
 
     EXAMPLES::
 
-        sage: # needs sage.graphs
+        sage: # needs networkx sage.graphs
         sage: from sage.matroids.transversal_matroid import *
         sage: sets = [range(6)] * 3
         sage: M = TransversalMatroid(sets)
