@@ -10,7 +10,7 @@ from auditwheel.wheeltools import InWheel
 
 from sage_conf import SAGE_LOCAL
 
-wheel = sys.argv[1]
+wheel = Path(sys.argv[1])
 
 # SAGE_LOCAL/bin/giac --> sage_wheels/bin/giac
 with InWheel(wheel, wheel):

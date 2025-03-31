@@ -10,7 +10,7 @@ from auditwheel.wheeltools import InWheel
 
 from sage_conf import SAGE_LOCAL
 
-wheel = sys.argv[1]
+wheel = Path(sys.argv[1])
 
 # SAGE_LOCAL/lib/ecl/kenzo.fas --> sage_wheels/lib/ecl/kenzo.fas
 with InWheel(wheel, wheel):

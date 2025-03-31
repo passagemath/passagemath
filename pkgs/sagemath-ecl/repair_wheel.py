@@ -10,7 +10,7 @@ from auditwheel.wheeltools import InWheel
 
 from sage_conf import MAXIMA_FAS, SAGE_LOCAL
 
-wheel = sys.argv[1]
+wheel = Path(sys.argv[1])
 
 with InWheel(wheel, wheel):
     # SAGE_LOCAL/bin/ecl --> sage_wheels/bin/ecl

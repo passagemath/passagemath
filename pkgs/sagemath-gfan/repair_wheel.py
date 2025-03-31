@@ -10,7 +10,7 @@ from auditwheel.wheeltools import InWheel
 
 from sage_conf import SAGE_LOCAL
 
-wheel = sys.argv[1]
+wheel = Path(sys.argv[1])
 
 # SAGE_LOCAL/bin/gfan --> sage_wheels/bin/gfan
 # Do not include the symlinks -- they are expanded to copies in the wheel.

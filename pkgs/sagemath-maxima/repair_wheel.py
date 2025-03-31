@@ -10,7 +10,7 @@ from auditwheel.wheeltools import InWheel
 
 from sage_conf import SAGE_LOCAL
 
-wheel = sys.argv[1]
+wheel = Path(sys.argv[1])
 
 with InWheel(wheel, wheel):
     # SAGE_LOCAL/bin/maxima --> sage_wheels/bin/maxima

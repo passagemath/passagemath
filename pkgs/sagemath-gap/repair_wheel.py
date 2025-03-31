@@ -10,7 +10,7 @@ from auditwheel.wheeltools import InWheel
 
 from sage_conf import GAP_ROOT_PATHS
 
-wheel = sys.argv[1]
+wheel = Path(sys.argv[1])
 
 with InWheel(wheel, wheel):
     for dir in GAP_ROOT_PATHS.split(';'):
