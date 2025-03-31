@@ -68,12 +68,12 @@ def find_root(f, a, b, xtol=10e-13, rtol=2.0**-50, maxiter=100, full_output=Fals
     than `2.01` that could have been used in the formulation of the Riemann
     Hypothesis::
 
-        sage: find_root(f, 2, 4, rtol=0.0001)
+        sage: find_root(f, 2, 4, rtol=0.0001)                                           # needs sage.symbolic
         2.0082...
 
     This agrees with the plot::
 
-        sage: plot(f,2,2.01)
+        sage: plot(f, 2, 2.01)                                                          # needs sage.symbolic
         Graphics object consisting of 1 graphics primitive
 
     The following example was added due to :issue:`4942` and demonstrates that

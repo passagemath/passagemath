@@ -43,6 +43,7 @@ factor.
 
 ::
 
+    sage: # needs database_cremona_mini_ellcurve
     sage: for N in range(1,38):
     ....:    for A in J0(N).new_subvariety().decomposition():
     ....:        T = A.rational_torsion_subgroup()

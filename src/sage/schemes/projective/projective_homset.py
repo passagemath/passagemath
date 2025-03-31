@@ -636,7 +636,7 @@ class SchemeHomset_points_abelian_variety_field(SchemeHomset_points_projective_f
 
         TESTS::
 
-            sage: X._element_constructor_([0,1,0])                                      # needs sage.schemes
+            sage: X._element_constructor_([0,1,0])                                      # needs database_cremona_mini_ellcurve sage.schemes
             (0 : 1 : 0)
         """
         if len(v) == 1:

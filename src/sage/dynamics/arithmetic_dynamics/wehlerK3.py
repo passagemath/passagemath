@@ -1658,7 +1658,7 @@ class WehlerK3Surface_ring(AlgebraicScheme_subscheme_product_projective):
             sage: Y = x0*y0 + x1*y1 + x2*y2
             sage: X = WehlerK3Surface([Z, Y])
             sage: P = X([0, 0, 1, 1, 0, 0])
-            sage: X.lambda_plus(P, 0, 10, 2, 0)
+            sage: X.lambda_plus(P, 0, 10, 2, 0)                                         # needs sage.symbolic
             0.89230705169161608922595928129
         """
         if not (v == 0 or v.is_prime()):
@@ -1758,7 +1758,7 @@ class WehlerK3Surface_ring(AlgebraicScheme_subscheme_product_projective):
             sage: Y = x0*y0 + x1*y1 + x2*y2
             sage: X = WehlerK3Surface([Z, Y])
             sage: P = X([0, 0, 1, 1, 0, 0])
-            sage: X.lambda_minus(P, 2, 20, 2, 0, 200)
+            sage: X.lambda_minus(P, 2, 20, 2, 0, 200)                                   # needs sage.symbolic
             -0.18573351672047135037172805779671791488351056677474271893705
         """
         R = RealField(prec)
@@ -1989,7 +1989,7 @@ class WehlerK3Surface_ring(AlgebraicScheme_subscheme_product_projective):
             sage: Y = x0*y0 + x1*y1 + x2*y2
             sage: X = WehlerK3Surface([Z, Y])
             sage: P = X(0, 1, 0, 0, 0, 1)
-            sage: X.canonical_height(P, 4)
+            sage: X.canonical_height(P, 4)                                              # needs sage.symbolic
             0.69826458668659859569990618895
         """
         if badprimes is None:

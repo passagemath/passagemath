@@ -905,6 +905,7 @@ class ModularForm_abstract(ModuleElement):
         associated to `E`, then the periods of `f` are in the period
         lattice of `E` up to an integer multiple::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a3')
             sage: f = E.newform()
             sage: g = Gamma0(11)([3, 1, 11, 4])
@@ -924,7 +925,7 @@ class ModularForm_abstract(ModuleElement):
         These can be used to express the periods of `f` as exact
         linear combinations of the real and the imaginary period of `E`::
 
-            sage: # needs eclib
+            sage: # needs database_cremona_mini_ellcurve eclib
             sage: s = E.modular_symbol(sign=+1)
             sage: t = E.modular_symbol(sign=-1, implementation='sage')
             sage: s(3/11), t(3/11)
@@ -975,6 +976,7 @@ class ModularForm_abstract(ModuleElement):
             ...
             NotImplementedError: don't know how to compute Atkin-Lehner matrix acting on this space (try using a newform constructor instead)
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('19a1')
             sage: M = Gamma0(19)([10, 1, 19, 2])
             sage: E.newform().period(M)  # abs tol 1e-14
@@ -1121,6 +1123,7 @@ class ModularForm_abstract(ModuleElement):
 
         We check that :issue:`5262` is fixed::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37b2')
             sage: h = Newforms(37)[1]
             sage: Lh = h.lseries()
@@ -1474,6 +1477,7 @@ class ModularForm_abstract(ModuleElement):
 
         Here is a non-cm example coming from elliptic curves. ::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a')
             sage: f = E.modular_form()
             sage: f.has_cm()
@@ -2623,10 +2627,10 @@ class ModularFormElement(ModularForm_abstract, element.HeckeModuleElement):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: f = EllipticCurve('37a').modular_form()
             sage: f.q_expansion()  # indirect doctest
             q - 2*q^2 - 3*q^3 + 2*q^4 - 2*q^5 + O(q^6)
-
             sage: f._compute_q_expansion(10)
             q - 2*q^2 - 3*q^3 + 2*q^4 - 2*q^5 + 6*q^6 - q^7 + 6*q^9 + O(q^10)
         """
@@ -2908,6 +2912,7 @@ class ModularFormElement_elliptic_curve(Newform):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('389a')
             sage: f = E.modular_form()
             sage: f
@@ -2917,8 +2922,9 @@ class ModularFormElement_elliptic_curve(Newform):
             sage: f.parent()
             Modular Forms space of dimension 33 for Congruence Subgroup Gamma0(389) of weight 2 over Rational Field
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
-            sage: f = E.modular_form() ; f
+            sage: f = E.modular_form(); f
             q - 2*q^2 - 3*q^3 + 2*q^4 - 2*q^5 + O(q^6)
             sage: f == loads(dumps(f))
             True
@@ -2932,6 +2938,7 @@ class ModularFormElement_elliptic_curve(Newform):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a')
             sage: f = E.modular_form()
             sage: f.elliptic_curve()
@@ -2948,6 +2955,7 @@ class ModularFormElement_elliptic_curve(Newform):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: EllipticCurve('11a1').modular_form()._compute_element()
             (1, 0)
             sage: EllipticCurve('389a1').modular_form()._compute_element()
@@ -2966,13 +2974,12 @@ class ModularFormElement_elliptic_curve(Newform):
 
         EXAMPLES::
 
-            sage: E = EllipticCurve('11a') ; f = E.modular_form()
+            sage: # needs database_cremona_mini_ellcurve
+            sage: E = EllipticCurve('11a'); f = E.modular_form()
             sage: f._compute_q_expansion(10)
             q - 2*q^2 - q^3 + 2*q^4 + q^5 + 2*q^6 - 2*q^7 - 2*q^9 + O(q^10)
-
             sage: f._compute_q_expansion(30)
             q - 2*q^2 - q^3 + 2*q^4 + q^5 + 2*q^6 - 2*q^7 - 2*q^9 - 2*q^10 + q^11 - 2*q^12 + 4*q^13 + 4*q^14 - q^15 - 4*q^16 - 2*q^17 + 4*q^18 + 2*q^20 + 2*q^21 - 2*q^22 - q^23 - 4*q^25 - 8*q^26 + 5*q^27 - 4*q^28 + O(q^30)
-
             sage: f._compute_q_expansion(10)
             q - 2*q^2 - q^3 + 2*q^4 + q^5 + 2*q^6 - 2*q^7 - 2*q^9 + O(q^10)
         """
@@ -2999,6 +3006,7 @@ class ModularFormElement_elliptic_curve(Newform):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: EllipticCurve('57a1').newform().atkin_lehner_eigenvalue()
             1
             sage: EllipticCurve('57b1').newform().atkin_lehner_eigenvalue()

@@ -1634,7 +1634,7 @@ def rank(x):
     We compute the rank of an elliptic curve::
 
         sage: E = EllipticCurve([0,0,1,-1,0])                                           # needs sage.schemes
-        sage: rank(E)                                                                   # needs sage.schemes
+        sage: rank(E)                                                                   # needs eclib sage.schemes
         1
     """
     return x.rank()

@@ -56,6 +56,7 @@ def __check_padic_hypotheses(self, p):
 
     EXAMPLES::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('11a1')
         sage: from sage.schemes.elliptic_curves.padics import __check_padic_hypotheses
         sage: __check_padic_hypotheses(E,5)
@@ -132,7 +133,7 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
 
     EXAMPLES::
 
-        sage: # needs eclib
+        sage: # needs database_cremona_mini_ellcurve eclib
         sage: E = EllipticCurve('37a')
         sage: L = E.padic_lseries(5); L
         5-adic L-series of Elliptic Curve defined by y^2 + y = x^3 - x over Rational Field
@@ -143,6 +144,7 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
     rank `0` and in each case verify the interpolation property
     for their leading coefficient (i.e., value at 0)::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: e = EllipticCurve('11a')
         sage: ms = e.modular_symbol()
         sage: [ms(1/11), ms(1/3), ms(0), ms(oo)]
@@ -168,6 +170,7 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
 
     Next consider the curve 37b::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: e = EllipticCurve('37b')
         sage: L = e.padic_lseries(3)
         sage: P = L.series(5)
@@ -182,8 +185,9 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
 
     We can use Sage modular symbols instead to compute the `L`-series::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: e = EllipticCurve('11a')
-        sage: L = e.padic_lseries(3, implementation = 'sage')
+        sage: L = e.padic_lseries(3, implementation='sage')
         sage: L.series(5,prec=10)
         2 + 3 + 3^2 + 2*3^3 + 2*3^5 + 3^6 + O(3^7) + (1 + 3 + 2*3^2 + 3^3 + O(3^4))*T + (1 + 2*3 + O(3^4))*T^2 + (3 + 2*3^2 + O(3^3))*T^3 + (2*3 + 3^2 + O(3^3))*T^4 + (2 + 2*3 + 2*3^2 + O(3^3))*T^5 + (1 + 3^2 + O(3^3))*T^6 + (2 + 3^2 + O(3^3))*T^7 + (2 + 2*3 + 2*3^2 + O(3^3))*T^8 + (2 + O(3^2))*T^9 + O(T^10)
 
@@ -197,8 +201,9 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
 
     Finally, we can use the overconvergent method of Pollack-Stevens.::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: e = EllipticCurve('11a')
-        sage: L = e.padic_lseries(3, implementation = 'pollackstevens', precision = 6)
+        sage: L = e.padic_lseries(3, implementation='pollackstevens', precision=6)
         sage: L.series(5)
         2 + 3 + 3^2 + 2*3^3 + 2*3^5 + O(3^6) + (1 + 3 + 2*3^2 + 3^3 + O(3^4))*T + (1 + 2*3 + O(3^2))*T^2 + (3 + O(3^2))*T^3 + O(3^0)*T^4 + O(T^5)
         sage: L[3]
@@ -206,8 +211,9 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
 
     Another example with a semistable prime.::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve("11a1")
-        sage: L = E.padic_lseries(11, implementation = 'pollackstevens', precision=3)
+        sage: L = E.padic_lseries(11, implementation='pollackstevens', precision=3)
         sage: L[1]
         10 + 3*11 + O(11^2)
         sage: L[3]
@@ -273,23 +279,26 @@ def padic_regulator(self, p, prec=20, height=None, check_hypotheses=True):
 
     EXAMPLES::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve("37a")
         sage: E.padic_regulator(5, 10)
         5 + 5^2 + 5^3 + 3*5^6 + 4*5^7 + 5^9 + O(5^10)
 
     An anomalous case::
 
-        sage: E.padic_regulator(53, 10)
+        sage: E.padic_regulator(53, 10)                                                 # needs database_cremona_mini_ellcurve
         26*53^-1 + 30 + 20*53 + 47*53^2 + 10*53^3 + 32*53^4 + 9*53^5 + 22*53^6 + 35*53^7 + 30*53^8 + O(53^9)
 
     An anomalous case where the precision drops some::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve("5077a")
         sage: E.padic_regulator(5, 10)
         5 + 5^2 + 4*5^3 + 2*5^4 + 2*5^5 + 2*5^6 + 4*5^7 + 2*5^8 + 5^9 + O(5^10)
 
     Check that answers agree over a range of precisions::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: max_prec = 30    # make sure we get past p^2    # long time
         sage: full = E.padic_regulator(5, max_prec)           # long time
         sage: for prec in range(1, max_prec):                 # long time
@@ -311,6 +320,7 @@ def padic_regulator(self, p, prec=20, height=None, check_hypotheses=True):
 
     Allow a python int as input::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('37a')
         sage: E.padic_regulator(int(5))
         5 + 5^2 + 5^3 + 3*5^6 + 4*5^7 + 5^9 + 5^10 + 3*5^11 + 3*5^12 + 5^13 + 4*5^14 + 5^15 + 2*5^16 + 5^17 + 2*5^18 + 4*5^19 + O(5^20)
@@ -375,13 +385,15 @@ def padic_height_pairing_matrix(self, p, prec=20, height=None, check_hypotheses=
 
     EXAMPLES::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve("37a")
         sage: E.padic_height_pairing_matrix(5, 10)
         [5 + 5^2 + 5^3 + 3*5^6 + 4*5^7 + 5^9 + O(5^10)]
 
     A rank two example::
 
-        sage: e =EllipticCurve('389a')
+        sage: # needs database_cremona_mini_ellcurve
+        sage: e = EllipticCurve('389a')
         sage: e._set_gens([e(-1, 1), e(1,0)])  # avoid platform dependent gens
         sage: e.padic_height_pairing_matrix(5,10)
         [                      3*5 + 2*5^2 + 5^4 + 5^5 + 5^7 + 4*5^9 + O(5^10) 5 + 4*5^2 + 5^3 + 2*5^4 + 3*5^5 + 4*5^6 + 5^7 + 5^8 + 2*5^9 + O(5^10)]
@@ -389,6 +401,7 @@ def padic_height_pairing_matrix(self, p, prec=20, height=None, check_hypotheses=
 
     An anomalous rank 3 example::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: e = EllipticCurve("5077a")
         sage: e._set_gens([e(-1,3), e(2,0), e(4,6)])
         sage: e.padic_height_pairing_matrix(5,4)
@@ -467,6 +480,7 @@ def _multiply_point(E, R, P, m):
     37a has trivial Tamagawa numbers so all points have nonsingular
     reduction at all primes::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve("37a")
         sage: P = E([0, -1]); P
         (0 : -1 : 1)
@@ -485,6 +499,7 @@ def _multiply_point(E, R, P, m):
 
     Trivial cases (:issue:`3632`)::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: _multiply_point(E, R, P, 1)
         (0, 624, 1)
         sage: _multiply_point(E, R, 19*P, 1)
@@ -710,6 +725,7 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     EXAMPLES::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve("37a")
         sage: P = E.gens()[0]
         sage: h = E.padic_height(5, 10)
@@ -718,22 +734,23 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     An anomalous case::
 
-        sage: h = E.padic_height(53, 10)
-        sage: h(P)
+        sage: h = E.padic_height(53, 10)                                                # needs database_cremona_mini_ellcurve
+        sage: h(P)                                                                      # needs database_cremona_mini_ellcurve
         26*53^-1 + 30 + 20*53 + 47*53^2 + 10*53^3 + 32*53^4 + 9*53^5 + 22*53^6 + 35*53^7 + 30*53^8 + 17*53^9 + O(53^10)
 
     Boundary case::
 
-        sage: E.padic_height(5, 3)(P)
+        sage: E.padic_height(5, 3)(P)                                                   # needs database_cremona_mini_ellcurve
         5 + 5^2 + O(5^3)
 
     A case that works the division polynomial code a little harder::
 
-        sage: E.padic_height(5, 10)(5*P)
+        sage: E.padic_height(5, 10)(5*P)                                                # needs database_cremona_mini_ellcurve
         5^3 + 5^4 + 5^5 + 3*5^8 + 4*5^9 + O(5^10)
 
     Check that answers agree over a range of precisions::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: max_prec = 30    # make sure we get past p^2    # long time
         sage: full = E.padic_height(5, max_prec)(P)           # long time
         sage: for prec in range(1, max_prec):                 # long time
@@ -741,6 +758,7 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     A supersingular prime for a curve::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('37a')
         sage: E.is_supersingular(3)
         True
@@ -754,6 +772,7 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     A torsion point in both the good and supersingular cases::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('11a')
         sage: P = E.torsion_subgroup().gen(0).element(); P
         (5 : 5 : 1)
@@ -779,6 +798,7 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     Check that issue :issue:`20798` is solved::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve("91b")
         sage: h = E.padic_height(7,10)
         sage: P = E.gen(0)
@@ -905,6 +925,7 @@ def padic_height_via_multiply(self, p, prec=20, E2=None, check_hypotheses=True):
 
     EXAMPLES::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve("37a")
         sage: P = E.gens()[0]
         sage: h = E.padic_height_via_multiply(5, 10)
@@ -913,12 +934,13 @@ def padic_height_via_multiply(self, p, prec=20, E2=None, check_hypotheses=True):
 
     An anomalous case::
 
-        sage: h = E.padic_height_via_multiply(53, 10)
-        sage: h(P)
+        sage: h = E.padic_height_via_multiply(53, 10)                                   # needs database_cremona_mini_ellcurve
+        sage: h(P)                                                                      # needs database_cremona_mini_ellcurve
         26*53^-1 + 30 + 20*53 + 47*53^2 + 10*53^3 + 32*53^4 + 9*53^5 + 22*53^6 + 35*53^7 + 30*53^8 + 17*53^9 + O(53^10)
 
     Supply the value of E2 manually::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E2 = E.padic_E2(5, 8)
         sage: E2
         2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + O(5^8)
@@ -928,11 +950,12 @@ def padic_height_via_multiply(self, p, prec=20, E2=None, check_hypotheses=True):
 
     Boundary case::
 
-        sage: E.padic_height_via_multiply(5, 3)(P)
+        sage: E.padic_height_via_multiply(5, 3)(P)                                      # needs database_cremona_mini_ellcurve
         5 + 5^2 + O(5^3)
 
     Check that answers agree over a range of precisions::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: max_prec = 30    # make sure we get past p^2    # long time
         sage: full = E.padic_height(5, max_prec)(P)           # long time
         sage: for prec in range(2, max_prec):                 # long time
@@ -1602,6 +1625,7 @@ def matrix_of_frobenius(self, p, prec=20, check=False, check_hypotheses=True, al
 
     EXAMPLES::
 
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('37a1')
         sage: E.matrix_of_frobenius(7)
         [             2*7 + 4*7^2 + 5*7^4 + 6*7^5 + 6*7^6 + 7^8 + 4*7^9 + 3*7^10 + 2*7^11 + 5*7^12 + 4*7^14 + 7^16 + 2*7^17 + 3*7^18 + 4*7^19 + 3*7^20 + O(7^21)                                   2 + 3*7 + 6*7^2 + 7^3 + 3*7^4 + 5*7^5 + 3*7^7 + 7^8 + 3*7^9 + 6*7^13 + 7^14 + 7^16 + 5*7^17 + 4*7^18 + 7^19 + O(7^20)]

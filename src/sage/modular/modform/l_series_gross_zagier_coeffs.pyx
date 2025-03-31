@@ -132,7 +132,6 @@ def gross_zagier_L_series(an_list, Q, long N, long u, var=None):
         + 2*t^53 + 20*t^55 + O(t^61)
         sage: len(gross_zagier_L_series(an,Q,N,u))
         61
-
         sage: LA + gross_zagier_L_series(an,Q2,N,u,t)
         t - 2*t^2 + 2*t^4 - 2*t^5 - 2*t^7 + 3*t^9 + 4*t^10 - 10*t^11 - 4*t^13
         + 4*t^14 - 4*t^16 - 6*t^18 - 4*t^20 + 20*t^22 + 4*t^23 - t^25 + 8*t^26
