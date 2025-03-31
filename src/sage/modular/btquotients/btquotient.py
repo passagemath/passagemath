@@ -43,7 +43,6 @@ from copy import copy
 from collections import deque
 
 from sage.arith.misc import gcd, xgcd, kronecker_symbol, fundamental_discriminant
-from sage.interfaces.magma import magma
 from sage.matrix.constructor import Matrix
 from sage.matrix.matrix_space import MatrixSpace
 from sage.misc.cachefunc import cached_method
@@ -1463,6 +1462,7 @@ class BruhatTitsQuotient(SageObject, UniqueRepresentation):
         self._Nminus = Nminus
         self._Nplus = Nplus
         if use_magma or self._Nplus != 1 or self._p == 2:
+            from sage.interfaces.magma import magma
             try:
                 if magma_session is None:
                     self._magma = magma
