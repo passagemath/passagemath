@@ -1118,7 +1118,7 @@ cdef class GraphicMatroid(Matroid):
         """
         return True if not certificate else (True, {})
 
-    cpdef bint is_graphic(self) noexcept:
+    cpdef bint is_graphic(self, algorithm=None) except -1:
         r"""
         Return if ``self`` is graphic.
 
@@ -1132,7 +1132,7 @@ cdef class GraphicMatroid(Matroid):
         """
         return True
 
-    cpdef bint is_regular(self) noexcept:
+    cpdef bint is_regular(self, algorithm=None) except -1:
         r"""
         Return if ``self`` is regular.
 
