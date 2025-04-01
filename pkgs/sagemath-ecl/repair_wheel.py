@@ -10,6 +10,8 @@ from auditwheel.wheeltools import InWheel
 
 from sage_conf import MAXIMA_FAS, SAGE_LOCAL
 
+if "TMPDIR" in os.environ: os.environ["TMPDIR"] = str(Path(os.environ["TMPDIR"]).resolve())
+
 wheel = Path(sys.argv[1])
 
 with InWheel(wheel, wheel):
