@@ -10,7 +10,9 @@ from auditwheel.wheeltools import InWheel
 
 from sage_conf import SAGE_LOCAL
 
-wheel = sys.argv[1]
+if "TMPDIR" in os.environ: os.environ["TMPDIR"] = str(Path(os.environ["TMPDIR"]).resolve())
+
+wheel = Path(sys.argv[1])
 
 # SAGE_LOCAL/bin/Singular --> sage_wheels/bin/Singular etc.
 with InWheel(wheel, wheel):
