@@ -335,7 +335,8 @@ class AnInfinity:
             sage: pari(oo)                                                              # needs sage.libs.pari
             +oo
         """
-        from sage.libs.pari.all import pari
+        from sage.libs.pari import pari
+
         if self._sign >= 0:
             return pari('oo')
         else:

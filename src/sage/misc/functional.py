@@ -24,6 +24,7 @@ import builtins
 import math
 
 from sage.misc.lazy_import import lazy_import
+from sage.misc.superseded import deprecation
 
 lazy_import('sage.rings.complex_double', 'CDF')
 lazy_import('sage.rings.real_double', ['RDF', 'RealDoubleElement'])
@@ -777,6 +778,13 @@ def integral(x, *args, **kwds):
         ...
         sage: result                                                                    # needs sage.symbolic
         -1/4
+
+    Verify that :issue:`33034` is fixed::
+
+        sage: f(x) = (x + sin(3*x)) * exp(-3*x*I)                                       # needs sage.symbolic
+        sage: h(x) = f(x) - f(x).expand()                                               # needs sage.symbolic
+        sage: integral(h(x), (x, 0, 2*pi))                                              # needs sage.symbolic
+        0
     """
     if hasattr(x, 'integral'):
         return x.integral(*args, **kwds)
@@ -919,16 +927,20 @@ def krull_dimension(x):
     EXAMPLES::
 
         sage: krull_dimension(QQ)
+        doctest:warning...:
+        DeprecationWarning: please use the krull_dimension method
+        See https://github.com/sagemath/sage/issues/39311 for details.
         0
-        sage: krull_dimension(ZZ)
+        sage: ZZ.krull_dimension()
         1
-        sage: krull_dimension(ZZ[sqrt(5)])                                              # needs fpylll sage.rings.number_field sage.symbolic
+        sage: ZZ[sqrt(5)].krull_dimension()                                             # needs fpylll sage.rings.number_field sage.symbolic
         1
         sage: U.<x,y,z> = PolynomialRing(ZZ, 3); U
         Multivariate Polynomial Ring in x, y, z over Integer Ring
         sage: U.krull_dimension()
         4
     """
+    deprecation(39311, "please use the krull_dimension method")
     return x.krull_dimension()
 
 

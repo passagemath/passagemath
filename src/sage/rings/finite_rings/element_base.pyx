@@ -88,14 +88,13 @@ cdef class FiniteRingElement(CommutativeRingElement):
         gcd = n.gcd(q-1)
         if self.is_one():
             if gcd == 1:
-                if all: return [self]
-                else: return self
-            else:
-                nthroot = K.zeta(gcd)
-                return [nthroot**a for a in range(gcd)] if all else nthroot
+                return [self] if all else self
+            nthroot = K.zeta(gcd)
+            return [nthroot**a for a in range(gcd)] if all else nthroot
         if gcd == q-1:
-            if all: return []
-            else: raise ValueError("no nth root")
+            if all:
+                return []
+            raise ValueError("no nth root")
         gcd, alpha, _ = n.xgcd(q-1)  # gcd = alpha*n + beta*(q-1), so 1/n = alpha/gcd (mod q-1)
         if gcd == 1:
             return [self**alpha] if all else self**alpha
@@ -103,8 +102,9 @@ cdef class FiniteRingElement(CommutativeRingElement):
         n = gcd
         q1overn = (q-1)//n
         if self**q1overn != 1:
-            if all: return []
-            else: raise ValueError("no nth root")
+            if all:
+                return []
+            raise ValueError("no nth root")
         self = self**alpha
         if cunningham:
             from sage.rings.factorint import factor_cunningham
@@ -134,12 +134,11 @@ cdef class FiniteRingElement(CommutativeRingElement):
             if all:
                 nthroot = K.zeta(n)
                 L = [self]
-                for i in range(1,n):
+                for i in range(1, n):
                     self *= nthroot
                     L.append(self)
                 return L
-            else:
-                return self
+            return self
         else:
             raise ValueError("unknown algorithm")
 
@@ -241,10 +240,11 @@ cdef class FinitePolyExtElement(FiniteRingElement):
             from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
             R = PolynomialRing(self.parent().prime_subfield(), var)
             return R(self.__pari__().minpoly('x').lift())
-        elif algorithm == 'matrix':
+
+        if algorithm == 'matrix':
             return self.matrix().minpoly(var)
-        else:
-            raise ValueError("unknown algorithm '%s'" % algorithm)
+
+        raise ValueError("unknown algorithm '%s'" % algorithm)
 
     # We have two names for the same method
     # for compatibility with sage.matrix
@@ -505,8 +505,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
         """
         if self.parent().degree()>1:
             return self.polynomial()._latex_()
-        else:
-            return str(self)
+        return str(self)
 
     def __pari__(self, var=None):
         r"""
@@ -626,10 +625,11 @@ cdef class FinitePolyExtElement(FiniteRingElement):
             from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
             R = PolynomialRing(self.parent().prime_subfield(), var)
             return R(self.__pari__().charpoly('x').lift())
-        elif algorithm == 'matrix':
+
+        if algorithm == 'matrix':
             return self.matrix().charpoly(var)
-        else:
-            raise ValueError("unknown algorithm '%s'" % algorithm)
+
+        raise ValueError("unknown algorithm '%s'" % algorithm)
 
     def norm(self):
         """
@@ -659,10 +659,7 @@ cdef class FinitePolyExtElement(FiniteRingElement):
         """
         f = self.charpoly('x')
         n = f[0]
-        if f.degree() % 2:
-            return -n
-        else:
-            return n
+        return -n if f.degree() % 2 else n
 
     def trace(self):
         """
@@ -924,20 +921,22 @@ cdef class FinitePolyExtElement(FiniteRingElement):
         """
         if self.is_zero():
             if n <= 0:
-                if all: return []
-                else: raise ValueError
-            if all: return [self]
-            else: return self
+                if all:
+                    return []
+                raise ValueError
+            return [self] if all else self
         if n < 0:
             self = ~self
             n = -n
         elif n == 0:
             if self == 1:
-                if all: return [a for a in self.parent().list() if a != 0]
-                else: return self
+                if all:
+                    return [a for a in self.parent().list() if a != 0]
+                return self
             else:
-                if all: return []
-                else: raise ValueError
+                if all:
+                    return []
+                raise ValueError
         if extend:
             raise NotImplementedError
         n = Integer(n)

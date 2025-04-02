@@ -15,7 +15,7 @@ AUTHORS:
 - Ander Steele
 - Kiran Kedlaya (modified gauss_sum 2017/09)
 """
-#*****************************************************************************
+# ****************************************************************************
 #       Copyright (C) 2007-2013 David Roe <roed.math@gmail.com>
 #                               William Stein <wstein@gmail.com>
 #
@@ -23,8 +23,8 @@ AUTHORS:
 #  as published by the Free Software Foundation; either version 2 of
 #  the License, or (at your option) any later version.
 #
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ****************************************************************************
 
 from sage.rings.infinity import infinity
 
@@ -215,7 +215,7 @@ def precprint(prec_type, prec_cap, p):
 
 def trim_zeros(L):
     r"""
-    Strips trailing zeros/empty lists from a list.
+    Strip trailing zeros/empty lists from a list.
 
     EXAMPLES::
 
@@ -229,7 +229,7 @@ def trim_zeros(L):
         sage: trim_zeros([])
         []
 
-    Zeros are also trimmed from nested lists (one deep):
+    Zeros are also trimmed from nested lists (one deep)::
 
         sage: trim_zeros([[1,0]])
         [[1]]

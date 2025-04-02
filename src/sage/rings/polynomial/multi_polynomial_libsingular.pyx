@@ -626,8 +626,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
 
             sage: P._singular_()
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ
-            //   number of vars : 3
+            // coefficients: QQ...
+            // number of vars : 3
             //        block   1 : ordering dp
             //                  : names    x y z
             //        block   2 : ordering C
@@ -1189,8 +1189,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: P.<x,y,z> = QQ[]
             sage: P._singular_()
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ
-            //   number of vars : 3
+            // coefficients: QQ...
+            // number of vars : 3
             //        block   1 : ordering dp
             //                  : names    x y z
             //        block   2 : ordering C
@@ -1205,8 +1205,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: P.<x,y,z> = PolynomialRing(k, 3)                                      # needs sage.rings.finite_rings
             sage: P._singular_()                                                        # needs sage.rings.finite_rings
             polynomial ring, over a field, global ordering
-            //   coefficients: ZZ/3[a]/(a^3-a+1)
-            //   number of vars : 3
+            // coefficients: ZZ/3[a]/(a^3-a+1)...
+            // number of vars : 3
             //        block   1 : ordering dp
             //                  : names    x y z
             //        block   2 : ordering C
@@ -1222,8 +1222,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: P.<x> = QQ[]
             sage: P._singular_()
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ
-            //   number of vars : 1
+            // coefficients: QQ...
+            // number of vars : 1
             //        block   1 : ordering lp
             //                  : names    x
             //        block   2 : ordering C
@@ -1264,8 +1264,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: P.<x,y,z> = QQ[]
             sage: P._singular_init_()
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ
-            //   number of vars : 3
+            // coefficients: QQ...
+            // number of vars : 3
             //        block   1 : ordering dp
             //                  : names    x y z
             //        block   2 : ordering C
@@ -1279,8 +1279,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R.<x,y> = PolynomialRing(NumberField(w^2 + 1,'s'))                    # needs sage.rings.number_field
             sage: singular(R)                                                           # needs sage.rings.number_field
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ[s]/(s^2+1)
-            //   number of vars : 2
+            // coefficients: QQ[s]/(s^2+1)...
+            // number of vars : 2
             //        block   1 : ordering dp
             //                  : names    x y
             //        block   2 : ordering C
@@ -1288,8 +1288,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R = PolynomialRing(GF(2**8,'a'),10,'x', order='invlex')               # needs sage.rings.finite_rings
             sage: singular(R)                                                           # needs sage.rings.finite_rings
             polynomial ring, over a field, global ordering
-            //   coefficients: ZZ/2[a]/(a^8+a^4+a^3+a^2+1)
-            //   number of vars : 10
+            // coefficients: ZZ/2[a]/(a^8+a^4+a^3+a^2+1)...
+            // number of vars : 10
             //        block   1 : ordering ip
             //                  : names    x0 x1 x2 x3 x4 x5 x6 x7 x8 x9
             //        block   2 : ordering C
@@ -1297,8 +1297,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R = PolynomialRing(GF(127),2,'x', order='invlex')
             sage: singular(R)                                                           # needs sage.rings.finite_rings
             polynomial ring, over a field, global ordering
-            //   coefficients: ZZ/127
-            //   number of vars : 2
+            // coefficients: ZZ/127...
+            // number of vars : 2
             //        block   1 : ordering ip
             //                  : names    x0 x1
             //        block   2 : ordering C
@@ -1306,8 +1306,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R = PolynomialRing(QQ,2,'x', order='invlex')
             sage: singular(R)                                                           # needs sage.rings.function_field
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ
-            //   number of vars : 2
+            // coefficients: QQ...
+            // number of vars : 2
             //        block   1 : ordering ip
             //                  : names    x0 x1
             //        block   2 : ordering C
@@ -1315,8 +1315,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R = PolynomialRing(QQ,2,'x', order='degneglex')
             sage: singular(R)                                                           # needs sage.rings.function_field
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ
-            //   number of vars : 2
+            // coefficients: QQ...
+            // number of vars : 2
             //        block   1 : ordering a
             //                  : names    x0 x1
             //                  : weights   1  1
@@ -1327,8 +1327,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R = PolynomialRing(QQ,'x')
             sage: singular(R)                                                           # needs sage.rings.function_field
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ
-            //   number of vars : 1
+            // coefficients: QQ...
+            // number of vars : 1
             //        block   1 : ordering lp
             //                  : names    x
             //        block   2 : ordering C
@@ -1336,8 +1336,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R = PolynomialRing(GF(127),'x')
             sage: singular(R)                                                           # needs sage.rings.finite_rings
             polynomial ring, over a field, global ordering
-            //   coefficients: ZZ/127
-            //   number of vars : 1
+            // coefficients: ZZ/127...
+            // number of vars : 1
             //        block   1 : ordering lp
             //                  : names    x
             //        block   2 : ordering C
@@ -1345,8 +1345,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R = ZZ['x,y']
             sage: singular(R)                                                           # needs sage.rings.function_field
             polynomial ring, over a domain, global ordering
-            //   coefficients: ZZ
-            //   number of vars : 2
+            // coefficients: ZZ...
+            // number of vars : 2
             //        block   1 : ordering dp
             //                  : names    x y
             //        block   2 : ordering C
@@ -1354,8 +1354,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R = IntegerModRing(1024)['x,y']
             sage: singular(R)                                                           # needs sage.rings.function_field
             polynomial ring, over a ring (with zero-divisors), global ordering
-            //   coefficients: ZZ/(2^10)
-            //   number of vars : 2
+            // coefficients: ZZ/(2^10)...
+            // number of vars : 2
             //        block   1 : ordering dp
             //                  : names    x y
             //        block   2 : ordering C
@@ -1363,8 +1363,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: R = IntegerModRing(15)['x,y']
             sage: singular(R)                                                           # needs sage.rings.function_field
             polynomial ring, over a ring (with zero-divisors), global ordering
-            //   coefficients: ZZ/...(15)
-            //   number of vars : 2
+            // coefficients: ZZ/(15)...
+            // number of vars : 2
             //        block   1 : ordering dp
             //                  : names    x y
             //        block   2 : ordering C
@@ -1374,8 +1374,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
             sage: P.<x> = QQ[]
             sage: P._singular_init_()
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ
-            //   number of vars : 1
+            // coefficients: QQ...
+            // number of vars : 1
             //        block   1 : ordering lp
             //                  : names    x
             //        block   2 : ordering C
@@ -4319,9 +4319,9 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
             sage: R.<a,b,c,d> = QQ[]
             sage: f =  (-2) * (a - d) * (-a + b) * (b - d) * (a - c) * (b - c) * (c - d)
             sage: F = f.factor(); F
-            (-2) * (c - d) * (-b + c) * (b - d) * (-a + c) * (-a + b) * (a - d)
+            (-2) * (-a + c) * (-a + b) * (-b + c) * (c - d) * (b - d) * (a - d)
             sage: F[0][0]
-            c - d
+            -a + c
             sage: F.unit()
             -2
 

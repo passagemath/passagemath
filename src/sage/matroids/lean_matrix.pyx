@@ -674,7 +674,7 @@ cdef class GenericMatrix(LeanMatrix):
 
     def __init__(self, long nrows, long ncols, M=None, ring=None):
         """
-        See class docstring for full information.
+        See the class docstring for full information.
 
         EXAMPLES::
 
@@ -983,7 +983,7 @@ cdef class BinaryMatrix(LeanMatrix):
 
     def __init__(self, long m, long n, object M=None, object ring=None):
         """
-        See class docstring for full specification.
+        See the class docstring for full specification.
 
         EXAMPLES::
 
@@ -1606,7 +1606,7 @@ cdef class TernaryMatrix(LeanMatrix):
 
     def __init__(self, long m, long n, M=None, ring=None):
         """
-        See class docstring for full specification.
+        See the class docstring for full specification.
 
         EXAMPLES::
 
@@ -2158,7 +2158,7 @@ cdef class QuaternaryMatrix(LeanMatrix):
 
     def __init__(self, long m, long n, M=None, ring=None):
         """
-        See class docstring for full specification.
+        See the class docstring for full specification.
 
         EXAMPLES::
 
@@ -2777,7 +2777,7 @@ cdef class PlusMinusOneMatrix(LeanMatrix):
 
     def __init__(self, long nrows, long ncols, M=None, ring=None):
         """
-        See class docstring for full information.
+        See the class docstring for full information.
 
         EXAMPLES::
 
@@ -3212,7 +3212,7 @@ cdef class RationalMatrix(LeanMatrix):
 
     def __init__(self, long nrows, long ncols, M=None, ring=None):
         """
-        See class docstring for full information.
+        See the class docstring for full information.
 
         EXAMPLES::
 

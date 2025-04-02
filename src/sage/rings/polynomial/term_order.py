@@ -661,7 +661,7 @@ class TermOrder(SageObject):
             sage: R.<x,y,z> = PolynomialRing(QQ, order=T)
             sage: R._singular_()                                                        # needs sage.libs.singular
             polynomial ring, over a field, global ordering
-            // coefficients: QQ
+            // coefficients: QQ...
             // number of vars : 3
             //        block   1 : ordering dp
             //                  : names    x y z
@@ -677,7 +677,7 @@ class TermOrder(SageObject):
             False
             sage: S._singular_()                                                        # needs sage.libs.singular
             polynomial ring, over a field, global ordering
-            // coefficients: QQ
+            // coefficients: QQ...
             // number of vars : 3
             //        block   1 : ordering C
             //        block   2 : ordering dp
@@ -1662,8 +1662,8 @@ class TermOrder(SageObject):
             '(lp(3),Dp(5),lp(2))'
             sage: P._singular_()                                                        # needs sage.libs.singular
             polynomial ring, over a field, global ordering
-            //   coefficients: ZZ/127
-            //   number of vars : 10
+            // coefficients: ZZ/127...
+            // number of vars : 10
             //        block   1 : ordering lp
             //                  : names    x0 x1 x2
             //        block   2 : ordering Dp
@@ -1688,8 +1688,8 @@ class TermOrder(SageObject):
             '(a(1:2),ls(2),a(1:2),ls(2))'
             sage: P._singular_()                                                        # needs sage.libs.singular
             polynomial ring, over a field, global ordering
-            //   coefficients: QQ
-            //   number of vars : 4
+            // coefficients: QQ...
+            // number of vars : 4
             //        block   1 : ordering a
             //                  : names    x0 x1
             //                  : weights   1  1
@@ -1710,7 +1710,7 @@ class TermOrder(SageObject):
             sage: P = PolynomialRing(QQ, 4, names='x', order=T)
             sage: P._singular_()                                                        # needs sage.libs.singular
             polynomial ring, over a field, global ordering
-            // coefficients: QQ
+            // coefficients: QQ...
             // number of vars : 4
             //        block   1 : ordering C
             //        block   2 : ordering a
@@ -1728,7 +1728,7 @@ class TermOrder(SageObject):
             sage: P = PolynomialRing(QQ, 4, names='y', order=T)
             sage: P._singular_()                                                        # needs sage.libs.singular
             polynomial ring, over a field, global ordering
-            // coefficients: QQ
+            // coefficients: QQ...
             // number of vars : 4
             //        block   1 : ordering c
             //        block   2 : ordering a
@@ -1746,7 +1746,7 @@ class TermOrder(SageObject):
             sage: P = PolynomialRing(QQ, 4, names='z', order=T)
             sage: P._singular_()                                                        # needs sage.libs.singular
             polynomial ring, over a field, global ordering
-            // coefficients: QQ
+            // coefficients: QQ...
             // number of vars : 4
             //        block   1 : ordering a
             //                  : names    z0 z1
@@ -2184,7 +2184,7 @@ def termorder_from_singular(S):
         sage: # needs sage.libs.singular
         sage: singular.ring(0, '(x,y,z,w)', '(C,dp(2),lp(2))')
         polynomial ring, over a field, global ordering
-        // coefficients: QQ
+        // coefficients: QQ...
         // number of vars : 4
         //        block   1 : ordering C
         //        block   2 : ordering dp
@@ -2202,7 +2202,7 @@ def termorder_from_singular(S):
         sage: # needs sage.libs.singular
         sage: singular.ring(0, '(x,y,z,w)', '(c,dp(2),lp(2))')
         polynomial ring, over a field, global ordering
-        // coefficients: QQ
+        // coefficients: QQ...
         // number of vars : 4
         //        block   1 : ordering c
         //        block   2 : ordering dp

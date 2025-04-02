@@ -56,7 +56,8 @@ from sage.libs.ntl.lzz_pX cimport *
 from sage.libs.ntl.ZZ_pX cimport *
 
 try:
-    from sage.libs.pari.all import pari, pari_gen
+    from sage.libs.pari import pari
+    from cypari2.gen import Gen as pari_gen
 except ImportError:
     pari_gen = ()
 

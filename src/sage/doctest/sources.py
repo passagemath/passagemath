@@ -212,7 +212,7 @@ class DocTestSource:
             sage: from sage.doctest.control import DocTestDefaults
             sage: from sage.doctest.sources import FileDocTestSource
             sage: from sage.doctest.parsing import SageDocTestParser
-            sage: filename = sage.doctest.util.__file__
+            sage: filename = sage.doctest.marked_output.__file__
             sage: FDS = FileDocTestSource(filename, DocTestDefaults())
             sage: doctests, _ = FDS.create_doctests({})
             sage: manual_doctests = []
@@ -923,7 +923,7 @@ class SourceLanguage:
             sage: from sage.doctest.sources import FileDocTestSource
             sage: from sage.doctest.parsing import SageDocTestParser
             sage: from sage.doctest.util import NestedName
-            sage: filename = sage.doctest.util.__file__
+            sage: filename = sage.doctest.marked_output.__file__
             sage: FDS = FileDocTestSource(filename, DocTestDefaults())
             sage: doctests, _ = FDS.create_doctests({})
             sage: for dt in doctests:
@@ -943,7 +943,7 @@ class PythonSource(SourceLanguage):
 
         sage: from sage.doctest.control import DocTestDefaults
         sage: from sage.doctest.sources import FileDocTestSource
-        sage: filename = sage.doctest.sources.__file__
+        sage: filename = sage.doctest.marked_output.__file__
         sage: FDS = FileDocTestSource(filename, DocTestDefaults())
         sage: type(FDS)
         <class 'sage.doctest.sources.PythonFileSource'>
@@ -959,7 +959,7 @@ class PythonSource(SourceLanguage):
 
             sage: from sage.doctest.control import DocTestDefaults
             sage: from sage.doctest.sources import FileDocTestSource
-            sage: filename = sage.doctest.sources.__file__
+            sage: filename = sage.doctest.marked_output.__file__
             sage: FDS = FileDocTestSource(filename, DocTestDefaults())
             sage: FDS._init()
             sage: FDS.last_indent
@@ -994,7 +994,7 @@ class PythonSource(SourceLanguage):
 
             sage: from sage.doctest.control import DocTestDefaults
             sage: from sage.doctest.sources import FileDocTestSource
-            sage: filename = sage.doctest.sources.__file__
+            sage: filename = sage.doctest.marked_output.__file__
             sage: FDS = FileDocTestSource(filename, DocTestDefaults())
             sage: FDS._init()
             sage: FDS._update_quotetype('\"\"\"'); print(" ".join(list(FDS.quotetype)))
@@ -1087,7 +1087,7 @@ class PythonSource(SourceLanguage):
             sage: from sage.doctest.control import DocTestDefaults
             sage: from sage.doctest.sources import FileDocTestSource
             sage: from sage.doctest.util import NestedName
-            sage: filename = sage.doctest.sources.__file__
+            sage: filename = sage.doctest.marked_output.__file__
             sage: FDS = FileDocTestSource(filename, DocTestDefaults())
             sage: FDS._init()
             sage: FDS.starting_docstring("r'''")
@@ -1100,7 +1100,7 @@ class PythonSource(SourceLanguage):
             sage: FDS.starting_docstring("        '''")
             <...Match object...>
             sage: FDS.qualified_name
-            sage.doctest.sources.MyClass.hello_world
+            sage.doctest.marked_output.MyClass.hello_world
             sage: FDS.ending_docstring("    '''")
             <...Match object...>
             sage: FDS.starting_docstring("class NewClass():")
@@ -1109,7 +1109,7 @@ class PythonSource(SourceLanguage):
             sage: FDS.ending_docstring("    '''")
             <...Match object...>
             sage: FDS.qualified_name
-            sage.doctest.sources.NewClass
+            sage.doctest.marked_output.NewClass
             sage: FDS.starting_docstring("print(")
             sage: FDS.starting_docstring("    '''Not a docstring")
             sage: FDS.starting_docstring("    ''')")
@@ -1160,7 +1160,7 @@ class PythonSource(SourceLanguage):
             sage: from sage.doctest.control import DocTestDefaults
             sage: from sage.doctest.sources import FileDocTestSource
             sage: from sage.doctest.util import NestedName
-            sage: filename = sage.doctest.sources.__file__
+            sage: filename = sage.doctest.marked_output.__file__
             sage: FDS = FileDocTestSource(filename, DocTestDefaults())
             sage: FDS._init()
             sage: FDS.quotetype = "'''"
