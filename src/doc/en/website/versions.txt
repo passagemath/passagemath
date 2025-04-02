@@ -7,6 +7,7 @@
 # The sage-update-version script adds a new line for a new stable release
 # when run by the Sage release manager to prepare a new release
 #
+10.5.23 doc-10-5-23--passagemath.netlify.app
 10.5.22 doc-10-5-22--passagemath.netlify.app
 10.5.21 doc-10-5-21--passagemath.netlify.app
 10.5.20 doc-10-5-20--passagemath.netlify.app
@@ -16,4 +17,3 @@
 10.5.16 doc-10-5-16--passagemath.netlify.app
 10.5.15 doc-10-5-15--passagemath.netlify.app
 10.5.14 doc-10-5-14--passagemath.netlify.app
-10.5.13 doc-10-5-13--passagemath.netlify.app
