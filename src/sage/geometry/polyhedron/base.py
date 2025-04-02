@@ -882,7 +882,7 @@ class Polyhedron_base(Polyhedron_base7):
 
             sage: polytopes.simplex(backend='field').barycentric_subdivision().backend()
             'field'
-            sage: polytopes.cube(backend='cdd').barycentric_subdivision().backend()
+            sage: polytopes.cube(backend='cdd').barycentric_subdivision().backend()     # needs cddexec_gmp
             'cdd'
         """
         if subdivision_frac is None:

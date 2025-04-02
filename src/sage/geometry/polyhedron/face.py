@@ -1023,7 +1023,7 @@ def combinatorial_face_to_polyhedral_face(polyhedron, combinatorial_face):
         4
         sage: polytopes.simplex(backend='ppl').equations()[0].index()
         0
-        sage: polytopes.simplex(backend='cdd').equations()[0].index()
+        sage: polytopes.simplex(backend='cdd').equations()[0].index()                   # needs cddexec_gmp
         4
         sage: polytopes.simplex(backend='normaliz').equations()[0].index()   # optional - pynormaliz
         4
