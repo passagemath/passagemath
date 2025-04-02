@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
+# sage.doctest: needs cddexec_gmp
 r"""
 The cdd backend for polyhedral computations
 """

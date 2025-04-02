@@ -33,6 +33,7 @@ Except for affine hull and affine hull projection.
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
+from sage.features import FeatureNotPresentError
 from sage.structure.element import coerce_binop, Vector, Matrix
 
 from sage.rings.integer_ring import ZZ
@@ -196,7 +197,8 @@ class Polyhedron_base5(Polyhedron_base4):
 
         Check that :issue:`25081` is fixed::
 
-            sage: C = polytopes.hypercube(4,backend='cdd')
+            sage: # needs cddexec_gmp
+            sage: C = polytopes.hypercube(4, backend='cdd')
             sage: C.polar().backend()
             'cdd'
 
@@ -296,7 +298,7 @@ class Polyhedron_base5(Polyhedron_base4):
 
         TESTS::
 
-            sage: polytopes.simplex(backend='cdd').pyramid().backend()
+            sage: polytopes.simplex(backend='cdd').pyramid().backend()                  # needs cddexec_gmp
             'cdd'
         """
         assert self.is_compact(), "Not a polytope."
@@ -413,7 +415,7 @@ class Polyhedron_base5(Polyhedron_base4):
 
         TESTS::
 
-            sage: polytopes.simplex(backend='cdd').bipyramid().backend()
+            sage: polytopes.simplex(backend='cdd').bipyramid().backend()                # needs cddexec_gmp
             'cdd'
         """
         c = self.center()
@@ -504,7 +506,7 @@ class Polyhedron_base5(Polyhedron_base4):
 
         TESTS::
 
-            sage: polytopes.simplex(backend='cdd').prism().backend()
+            sage: polytopes.simplex(backend='cdd').prism().backend()                    # needs cddexec_gmp
             'cdd'
         """
         from itertools import chain
@@ -989,8 +991,12 @@ class Polyhedron_base5(Polyhedron_base4):
 
         if self.n_vertices() + self.n_rays() < 40 and self.n_facets() < 40:
             # Check that the product preserves the backend, where possible.
-            P = polytopes.simplex(backend='cdd')
-            tester.assertEqual((self*P).backend(), self.backend())
+            try:
+                P = polytopes.simplex(backend='cdd')
+            except FeatureNotPresentError:
+                pass
+            else:
+                tester.assertEqual((self*P).backend(), self.backend())
             Q = polytopes.simplex(backend='ppl')
             tester.assertEqual((self*Q).backend(), self.backend())
 
@@ -1059,6 +1065,7 @@ class Polyhedron_base5(Polyhedron_base4):
             sage: C.join(S).is_combinatorially_isomorphic(C.pyramid())                  # needs sage.graphs
             True
 
+            sage: # needs cddexec_gmp
             sage: P = polytopes.simplex(backend='cdd')
             sage: Q = polytopes.simplex(backend='ppl')
             sage: P.join(Q).backend()
@@ -1175,6 +1182,7 @@ class Polyhedron_base5(Polyhedron_base4):
 
         TESTS::
 
+            sage: # needs cddexec_gmp
             sage: P = polytopes.simplex(backend='cdd')
             sage: Q = polytopes.simplex(backend='ppl')
             sage: P.subdirect_sum(Q).backend()
@@ -1241,6 +1249,7 @@ class Polyhedron_base5(Polyhedron_base4):
 
         Check that the backend is preserved::
 
+            sage: # needs cddexec_gmp
             sage: P = polytopes.simplex(backend='cdd')
             sage: Q = polytopes.simplex(backend='ppl')
             sage: P.direct_sum(Q).backend()
