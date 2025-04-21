@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-sagemath-cmr ~= 10.1
+passagemath-cmr ~= 10.5.24.0
