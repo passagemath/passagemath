@@ -220,7 +220,8 @@ from sage.rings.real_lazy import RLF, CLF
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 
 try:
-    from sage.libs.pari.all import pari, pari_gen
+    from sage.libs.pari import pari
+    from cypari2.gen import Gen as pari_gen
 except ImportError:
     pari_gen = ()
 
@@ -7406,7 +7407,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         EXAMPLES::
 
-            sage: # needs fpylll sage.rings.padics
+            sage: # needs fpylll sage.rings.padics sage.symbolic
             sage: x = polygen(QQ, 'x')
             sage: K.<xi> = NumberField(x^2 + x + 1)
             sage: S = K.primes_above(3)
@@ -7415,7 +7416,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         You can get the exponent vectors::
 
-            sage: # needs fpylll sage.rings.padics
+            sage: # needs fpylll sage.rings.padics sage.symbolic
             sage: K.S_unit_solutions(S, include_exponents=True)  # random, due to ordering
             [((2, 1), (4, 0), xi + 2, -xi - 1),
              ((5, -1), (4, -1), 1/3*xi + 2/3, -1/3*xi + 1/3),
@@ -7424,7 +7425,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
 
         And the computed bound::
 
-            sage: # needs fpylll sage.rings.padics
+            sage: # needs fpylll sage.rings.padics sage.symbolic
             sage: solutions, bound = K.S_unit_solutions(S, prec=100, include_bound=True)
             sage: bound
             7
@@ -8785,40 +8786,10 @@ class NumberField_absolute(NumberField_generic):
         polynomials are supported (:issue:`252`)::
 
             sage: K.<a> = NumberField(2*x^4 + 6*x^2 + 1/2)
-            sage: sorted(K.subfields(), key=lambda x: x[0].discriminant())
-            [(Number Field in a3 with defining polynomial x^2 + 2,
-              Ring morphism:
-                From: Number Field in a3 with defining polynomial x^2 + 2
-                To:   Number Field in a with defining polynomial 2*x^4 + 6*x^2 + 1/2
-                Defn: a3 |--> 2*a^3 + 5*a,
-              None),
-             (Number Field in a2 with defining polynomial x^2 + 4,
-              Ring morphism:
-                From: Number Field in a2 with defining polynomial x^2 + 4
-                To:   Number Field in a with defining polynomial 2*x^4 + 6*x^2 + 1/2
-                Defn: a2 |--> 2*a^3 + 7*a,
-              None),
-             (Number Field in a0 with defining polynomial x,
-              Ring morphism:
-                From: Number Field in a0 with defining polynomial x
-                To:   Number Field in a with defining polynomial 2*x^4 + 6*x^2 + 1/2
-                Defn: 0 |--> 0,
-              None),
-             (Number Field in a1 with defining polynomial x^2 - 2,
-              Ring morphism:
-                From: Number Field in a1 with defining polynomial x^2 - 2
-                To:   Number Field in a with defining polynomial 2*x^4 + 6*x^2 + 1/2
-                Defn: a1 |--> a^2 + 3/2,
-              None),
-             (Number Field in a4 with defining polynomial x^4 + 1,
-              Ring morphism:
-                From: Number Field in a4 with defining polynomial x^4 + 1
-                To:   Number Field in a with defining polynomial 2*x^4 + 6*x^2 + 1/2
-                Defn: a4 |--> a^3 + 1/2*a^2 + 5/2*a + 3/4,
-              Ring morphism:
-                From: Number Field in a with defining polynomial 2*x^4 + 6*x^2 + 1/2
-                To:   Number Field in a4 with defining polynomial x^4 + 1
-                Defn: a |--> -1/2*a4^3 + a4^2 - 1/2*a4)]
+            sage: K
+            Number Field in a with defining polynomial 2*x^4 + 6*x^2 + 1/2
+            sage: sorted([F.discriminant() for F, _, _ in K.subfields()])
+            [-8, -4, 1, 8, 256]
         """
         return self._subfields_helper(degree=degree, name=name,
                                       both_maps=True, optimize=False)

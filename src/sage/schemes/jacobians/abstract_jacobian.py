@@ -45,8 +45,8 @@ def is_Jacobian(J):
 
     ::
 
-        sage: E = EllipticCurve('37a1')
-        sage: is_Jacobian(E)
+        sage: E = EllipticCurve('37a1')                                                 # needs database_cremona_mini_ellcurve
+        sage: is_Jacobian(E)                                                            # needs database_cremona_mini_ellcurve
         False
     """
     from sage.misc.superseded import deprecation
@@ -102,14 +102,14 @@ class Jacobian_generic(Scheme):
         Note: this is an abstract parent, so we skip element tests::
 
             sage: TestSuite(J).run(skip =["_test_an_element", \
-                                          "_test_zero", \
-                                          "_test_elements", \
-                                          "_test_elements_eq_reflexive", \
-                                          "_test_elements_eq_symmetric", \
-                                          "_test_elements_eq_transitive", \
-                                          "_test_additive_associativity", \
-                                          "_test_elements_neq", \
-                                          "_test_some_elements"])
+            ....:                         "_test_zero", \
+            ....:                         "_test_elements", \
+            ....:                         "_test_elements_eq_reflexive", \
+            ....:                         "_test_elements_eq_symmetric", \
+            ....:                         "_test_elements_eq_transitive", \
+            ....:                         "_test_additive_associativity", \
+            ....:                         "_test_elements_neq", \
+            ....:                         "_test_some_elements"])
 
         ::
 

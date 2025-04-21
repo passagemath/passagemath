@@ -158,10 +158,10 @@ class InformationSetAlgorithm(SageObject):
         EXAMPLES::
 
             sage: M = matrix(GF(2), [[1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0],\
-                                     [0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1],\
-                                     [0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0],\
-                                     [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1],\
-                                     [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1]])
+            ....:                    [0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1],\
+            ....:                    [0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0],\
+            ....:                    [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1],\
+            ....:                    [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1]])
             sage: C = codes.LinearCode(M)
             sage: from sage.coding.information_set_decoder import LeeBrickellISDAlgorithm
             sage: A = LeeBrickellISDAlgorithm(C, (2,2))
@@ -449,10 +449,10 @@ class LeeBrickellISDAlgorithm(InformationSetAlgorithm):
         EXAMPLES::
 
             sage: M = matrix(GF(2), [[1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0],\
-                                     [0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1],\
-                                     [0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0],\
-                                     [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1],\
-                                     [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1]])
+            ....:                    [0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1],\
+            ....:                    [0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0],\
+            ....:                    [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1],\
+            ....:                    [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1]])
             sage: C = codes.LinearCode(M)
             sage: from sage.coding.information_set_decoder import LeeBrickellISDAlgorithm
             sage: A = LeeBrickellISDAlgorithm(C, (2,2))
@@ -930,10 +930,10 @@ class LinearCodeInformationSetDecoder(Decoder):
         EXAMPLES::
 
             sage: M = matrix(GF(2), [[1,0,0,0,0,0,1,0,1,0,1,1,0,0,1],\
-                                     [0,1,0,0,0,1,1,1,1,0,0,0,0,1,1],\
-                                     [0,0,1,0,0,0,0,1,0,1,1,1,1,1,0],\
-                                     [0,0,0,1,0,0,1,0,1,0,0,0,1,1,0],\
-                                     [0,0,0,0,1,0,0,0,1,0,1,1,0,1,0]])
+            ....:                    [0,1,0,0,0,1,1,1,1,0,0,0,0,1,1],\
+            ....:                    [0,0,1,0,0,0,0,1,0,1,1,1,1,1,0],\
+            ....:                    [0,0,0,1,0,0,1,0,1,0,0,0,1,1,0],\
+            ....:                    [0,0,0,0,1,0,0,0,1,0,1,1,0,1,0]])
             sage: C = LinearCode(M)
             sage: c = C.random_element()
             sage: Chan = channels.StaticErrorRateChannel(C.ambient_space(), 2)

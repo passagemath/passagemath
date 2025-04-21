@@ -722,7 +722,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
         if algorithm == "flint":
             return self._invert_flint()
         elif algorithm == "pari":
-            from sage.libs.pari.all import PariError
+            from cypari2.handle_error import PariError
             from .matrix_rational_pari import _invert_pari
             try:
                 return _invert_pari(self)

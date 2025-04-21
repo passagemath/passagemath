@@ -68,12 +68,12 @@ def find_root(f, a, b, xtol=10e-13, rtol=2.0**-50, maxiter=100, full_output=Fals
     than `2.01` that could have been used in the formulation of the Riemann
     Hypothesis::
 
-        sage: find_root(f, 2, 4, rtol=0.0001)
+        sage: find_root(f, 2, 4, rtol=0.0001)                                           # needs sage.symbolic
         2.0082...
 
     This agrees with the plot::
 
-        sage: plot(f,2,2.01)
+        sage: plot(f, 2, 2.01)                                                          # needs sage.symbolic
         Graphics object consisting of 1 graphics primitive
 
     The following example was added due to :issue:`4942` and demonstrates that
@@ -382,7 +382,7 @@ def minimize(func, x0, gradient=None, hessian=None, algorithm='default',
         ....:    return sum(100.0r*(x[1r:]-x[:-1r]**2.0r)**2.0r + (1r-x[:-1r])**2.0r)
         sage: import numpy
         sage: if int(numpy.version.short_version[0]) > 1:
-        ....:     numpy.set_printoptions(legacy="1.25")
+        ....:     _ = numpy.set_printoptions(legacy="1.25")
         sage: from numpy import zeros
         sage: def rosen_der(x):
         ....:    xm = x[1r:-1r]

@@ -23,7 +23,7 @@ from sage.rings.fraction_field_element import FractionFieldElement
 from sage.rings.integer cimport Integer
 
 try:
-    from sage.libs.pari.all import pari_gen
+    from cypari2.gen import Gen as pari_gen
 except ImportError:
     pari_gen = ()
 

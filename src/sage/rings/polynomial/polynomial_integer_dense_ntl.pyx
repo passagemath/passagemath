@@ -70,7 +70,8 @@ from sage.libs.ntl.ZZX cimport *
 from sage.rings.polynomial.evaluation_ntl cimport ZZX_evaluation_mpfr, ZZX_evaluation_mpfi
 
 try:
-    from sage.libs.pari.all import pari, pari_gen
+    from sage.libs.pari import pari
+    from cypari2.gen import Gen as pari_gen
 except ImportError:
     pari_gen = ()
 
@@ -624,7 +625,7 @@ cdef class Polynomial_integer_dense_ntl(Polynomial):
         since they need not exist.  Instead, over the integers, we
         first multiply `g` by a divisor of the resultant of `a/g` and
         `b/g`, up to sign, and return ``g, u, v`` such that
-        ``g = s*self + s*right``.  But note that this `g` may be a
+        ``g = u*self + v*right``.  But note that this `g` may be a
         multiple of the gcd.
 
         If ``self`` and ``right`` are coprime as polynomials over the

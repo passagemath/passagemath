@@ -948,7 +948,7 @@ def get_bound_dynamical(F, f, m=1, dynatomic=True, prec=53, emb=None):
         sage: from sage.dynamics.arithmetic_dynamics.endPN_minimal_model import get_bound_dynamical
         sage: P.<x,y> = ProjectiveSpace(QQ,1)
         sage: f = DynamicalSystem([50*x^2 + 795*x*y + 2120*y^2, 265*x^2 + 106*y^2])
-        sage: get_bound_dynamical(f.dynatomic_polynomial(1), f)
+        sage: get_bound_dynamical(f.dynatomic_polynomial(1), f)                         # needs sage.symbolic
         35.5546923182219
     """
     from sage.symbolic.constants import e

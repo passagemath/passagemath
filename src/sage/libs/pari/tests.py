@@ -1257,7 +1257,7 @@ Elliptic curves::
     sage: e.ellglobalred()
     [20144, [1, -2, 0, -1], 1, [2, 4; 1259, 1], [[4, 2, 0, 1], [1, 5, 0, 1]]]
 
-    sage: # needs sage.schemes
+    sage: # needs database_cremona_mini_ellcurve sage.schemes
     sage: e = pari(EllipticCurve('17a').a_invariants()).ellinit()
     sage: e.ellglobalred()
     [17, [1, 0, 0, 0], 4, Mat([17, 1]), [[1, 8, 0, 4]]]

@@ -365,8 +365,8 @@ class Polyhedron_base2(Polyhedron_base1):
         the answer is an integer even though there are no guarantees for
         exactness::
 
-            sage: Q = P*RDF(8/9)
-            sage: Q.integral_points_count()
+            sage: Q = P*RDF(8/9)                                        # needs cddexec_gmp
+            sage: Q.integral_points_count()                             # needs cddexec_gmp
             1
 
         Unbounded polyhedra (with or without lattice points) are not supported::

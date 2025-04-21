@@ -108,7 +108,7 @@ def quadratic_order_class_number(disc):
     ALGORITHM: Either :pari:`qfbclassno` or :pari:`quadclassunit`,
     depending on the size of the discriminant.
     """
-    from sage.libs.pari.all import pari
+    from sage.libs.pari import pari
 
     # cutoffs from PARI documentation
     if disc < -10**25 or disc > 10**10:

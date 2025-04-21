@@ -39,7 +39,7 @@ class VoronoiDiagram(SageObject):
 
     Get the Voronoi diagram for some points in `\RR^3`::
 
-        sage: V = VoronoiDiagram([[1, 3, .3], [2, -2, 1], [-1, 2, -.1]]); V
+        sage: V = VoronoiDiagram([[1, 3, .3], [2, -2, 1], [-1, 2, -.1]]); V             # needs cddexec_gmp
         The Voronoi diagram of 3 points of dimension 3 in the Real Double Field
 
         sage: VoronoiDiagram([])
@@ -162,7 +162,7 @@ class VoronoiDiagram(SageObject):
 
         EXAMPLES::
 
-            sage: V = VoronoiDiagram([[.5, 3], [2, 5], [4, 5], [4, -1]]); V.points()
+            sage: V = VoronoiDiagram([[.5, 3], [2, 5], [4, 5], [4, -1]]); V.points()    # needs cddexec_gmp
             A point configuration in affine 2-space over Real Field
             with 53 bits of precision consisting of 4 points.
             The triangulations of this point configuration are
@@ -177,6 +177,7 @@ class VoronoiDiagram(SageObject):
 
         EXAMPLES::
 
+            sage: # needs cddexec_gmp
             sage: V = VoronoiDiagram([[.5, 3], [2, 5], [4, 5], [4, -1]])
             sage: V.ambient_dim()
             2
@@ -192,6 +193,7 @@ class VoronoiDiagram(SageObject):
 
         EXAMPLES::
 
+            sage: # needs cddexec_gmp
             sage: V = VoronoiDiagram([[1, 3, .3], [2, -2, 1], [-1, 2, -.1]])
             sage: P = V.points()
             sage: V.regions() == {P[0]: Polyhedron(base_ring=RDF, lines=[(-RDF(0.375), RDF(0.13888888890000001), RDF(1.5277777779999999))],
@@ -215,7 +217,7 @@ class VoronoiDiagram(SageObject):
 
             sage: V = VoronoiDiagram([[1, 3, 1], [2, -2, 1], [-1, 2, 1/2]]); V.base_ring()
             Rational Field
-            sage: V = VoronoiDiagram([[1, 3.14], [2, -2/3], [-1, 22]]); V.base_ring()
+            sage: V = VoronoiDiagram([[1, 3.14], [2, -2/3], [-1, 22]]); V.base_ring()   # needs cddexec_gmp
             Real Double Field
             sage: V = VoronoiDiagram([[1, 3], [2, 4]]); V.base_ring()
             Rational Field
@@ -256,10 +258,10 @@ class VoronoiDiagram(SageObject):
 
         EXAMPLES::
 
-            sage: # needs sage.plot
+            sage: # needs cddexec_gmp sage.plot
             sage: P = [[0.671, 0.650], [0.258, 0.767], [0.562, 0.406],
             ....:      [0.254, 0.709], [0.493, 0.879]]
-            sage: V = VoronoiDiagram(P); S=V.plot()
+            sage: V = VoronoiDiagram(P); S = V.plot()
             sage: show(S, xmin=0, xmax=1, ymin=0, ymax=1, aspect_ratio=1, axes=false)
             sage: S = V.plot(cell_colors={0: 'red', 1: 'blue', 2: 'green',
             ....:                         3: 'white', 4: 'yellow'})

@@ -2368,8 +2368,7 @@ class FiniteWord_class(Word_class):
         for i, (b, c) in iter:
             if b != c:
                 return self[-i:]
-        else:
-            return self[-i-1:]
+        return self[-i-1:]
 
     def is_palindrome(self, f=None):
         r"""
@@ -3740,8 +3739,7 @@ class FiniteWord_class(Word_class):
             for e in other:
                 if s == e:
                     s = next(its)
-            else:
-                return False
+            return False
         except StopIteration:
             return True
 
@@ -3882,8 +3880,7 @@ class FiniteWord_class(Word_class):
             else:
                 # we found the first word in the lyndon factorization;
                 return False
-        else:
-            return i == 0
+        return i == 0
 
     def lyndon_factorization(self):
         r"""

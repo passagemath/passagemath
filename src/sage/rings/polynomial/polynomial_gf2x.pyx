@@ -100,7 +100,7 @@ cdef class Polynomial_GF2X(Polynomial_template):
             sage: pari(f)
             Mod(1, 2)*x^3 + Mod(1, 2)*x^2 + Mod(1, 2)
         """
-        from sage.libs.pari.all import pari
+        from sage.libs.pari import pari
         # TODO: put this in a superclass
         parent = self._parent
         if variable is None:

@@ -17,6 +17,7 @@ EXAMPLES:
 
 An example over `\QQ`::
 
+    sage: # needs database_cremona_mini_ellcurve
     sage: E = EllipticCurve('389a1')
     sage: P = E(-1,1); P
     (-1 : 1 : 1)
@@ -159,7 +160,8 @@ lazy_import('sage.rings.padics.factory', 'Qp')
 lazy_import('sage.schemes.generic.morphism', 'SchemeMorphism')
 
 try:
-    from sage.libs.pari.all import pari, PariError
+    from sage.libs.pari import pari
+    from cypari2.handle_error import PariError
 except ImportError:
     PariError = ()
 
@@ -530,6 +532,8 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
         sage: loads(S.dumps()) == S
         True
+
+        sage: # needs database_cremona_mini_ellcurve
         sage: E = EllipticCurve('37a')
         sage: P = E(0,0); P
         (0 : 0 : 1)

@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-cddlib ~= 10.5.22.0
+passagemath-cddlib ~= 10.5.23.0

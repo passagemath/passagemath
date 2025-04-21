@@ -235,6 +235,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a1')
             sage: E.two_torsion_rank()
             0
@@ -246,6 +247,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         ::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('14a1')
             sage: E.two_torsion_rank()
             1
@@ -256,7 +258,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         ::
 
-            sage: EllipticCurve('15a1').two_torsion_rank()
+            sage: EllipticCurve('15a1').two_torsion_rank()      # needs database_cremona_mini_ellcurve
             2
         """
         f = self.division_polynomial(Integer(2))
@@ -377,6 +379,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a1')
             sage: Et = E.quadratic_twist(-24)
             sage: E.is_quadratic_twist(Et)
@@ -719,7 +722,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         Check that :issue:`16456` is fixed::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: K.<a> = NumberField(x^3 - 2)
             sage: E = EllipticCurve('11a1').quadratic_twist(2)
             sage: EK = E.change_ring(K)
@@ -853,7 +856,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
         The 2-division field is the same as the splitting field of
         the 2-division polynomial (therefore, it has degree 1, 2, 3 or 6)::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = EllipticCurve('15a1')
             sage: K.<b> = E.division_field(2); K
             Number Field in b with defining polynomial x
@@ -872,7 +875,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
         field of the `n`-division polynomial, or a quadratic extension
         of it. ::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = EllipticCurve('50a1')
             sage: F.<a> = E.division_polynomial(3).splitting_field(simplify_all=True); F
             Number Field in a
@@ -885,7 +888,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
         3-division polynomial remains the same, but the 3-division field
         becomes a quadratic extension::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = E.quadratic_twist(5)  # 50b3
             sage: F.<a> = E.division_polynomial(3).splitting_field(simplify_all=True); F
             Number Field in a
@@ -896,7 +899,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         Try another quadratic twist, this time over a subfield of `F`::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: G.<c>,_,_ = F.subfields(3)[0]
             sage: E = E.base_extend(G).quadratic_twist(c); E
             Elliptic Curve defined
@@ -907,7 +910,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         Some higher-degree examples::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = EllipticCurve('11a1')
             sage: K.<b> = E.division_field(2); K
             Number Field in b with defining polynomial
@@ -923,7 +926,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
              defined by y^2 + y = x^3 + (-1)*x^2 + (-10)*x + (-20)
              over Number Field in b with defining polynomial x^4 - x^3 + x^2 - x + 1
 
-            sage: # needs sage.rings.number_field
+            sage: # needs database_cremona_mini_ellcurve sage.rings.number_field
             sage: E = EllipticCurve('27a1')
             sage: K.<b> = E.division_field(3); K
             Number Field in b with defining polynomial x^2 + 3*x + 9
@@ -1296,6 +1299,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         ::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a1')
             sage: P = E.torsion_points()[1]
             sage: E.isogeny(P)
@@ -1508,6 +1512,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('17a1')
             sage: R.<x> = QQ[]
             sage: E2 = E.isogeny_codomain(x - 11/4); E2
@@ -2314,6 +2319,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('11a1')
             sage: E.weierstrass_p(prec=10)
             z^-2 + 31/15*z^2 + 2501/756*z^4 + 961/675*z^6 + 77531/41580*z^8 + O(z^10)
@@ -2581,9 +2587,9 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
         A = []  # adjacency matrix
         labels = []  # list of vertex labels
         for (i, E) in enumerate(Es):
-            if 0 < curve_max and curve_max < len(Es):
+            if 0 < curve_max < len(Es):
                 warn('Isogeny graph contains more than '
-                        + str(curve_max) + ' curves.')
+                     + str(curve_max) + ' curves.')
                 curve_max = 0
 
             r = [0] * len(Es)  # adjacency matrix row

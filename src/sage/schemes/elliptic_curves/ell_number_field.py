@@ -3574,7 +3574,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             over Rational Field does not have CM
             sage: EllipticCurve(j=1728).cm_discriminant()
             -4
-            sage: EllipticCurve(j=8000).cm_discriminant()
+            sage: EllipticCurve(j=8000).cm_discriminant()                               # needs database_cremona_mini_ellcurve
             -8
             sage: K.<a> = QuadraticField(5)
             sage: EllipticCurve(j=282880*a + 632000).cm_discriminant()
@@ -4172,6 +4172,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         EXAMPLES::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve('37a')
             sage: E.rational_points(bound=8) # long time
             [(-1 : -1 : 1),
@@ -4188,6 +4189,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         Check that :issue:`26677` is fixed::
 
+            sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve("11a1")
             sage: E.rational_points(bound=5)
             [(0 : 1 : 0), (5 : 5 : 1)]

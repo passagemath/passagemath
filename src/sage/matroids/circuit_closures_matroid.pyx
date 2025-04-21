@@ -128,7 +128,7 @@ cdef class CircuitClosuresMatroid(Matroid):
 
     def __init__(self, M=None, groundset=None, circuit_closures=None):
         """
-        Initialization of the matroid. See class docstring for full
+        Initialization of the matroid. See the class docstring for full
         documentation.
 
         EXAMPLES::
@@ -428,9 +428,9 @@ cdef class CircuitClosuresMatroid(Matroid):
 
         .. WARNING::
 
-            This method is linked to __richcmp__ (in Cython) and __cmp__ or
-            __eq__/__ne__ (in Python). If you override one, you should
-            (and in Cython: MUST) override the other!
+            This method is linked to ``__richcmp__`` (in Cython) and ``__cmp__``
+            or ``__eq__``/``__ne__`` (in Python). If you override one, you
+            should (and, in Cython, \emph{must}) override the other!
 
         EXAMPLES::
 
