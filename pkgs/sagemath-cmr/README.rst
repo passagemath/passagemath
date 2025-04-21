@@ -24,7 +24,7 @@ About this pip-installable distribution
 
 This pip-installable distribution ``passagemath-cmr`` is a small
 optional distribution for use with `passagemath-modules <https://pypi.org/project/passagemath-modules/>`_ and
-`passagemath-graphs <https://pypi.org/project/passagemath-graphs/`_.
+`passagemath-graphs <https://pypi.org/project/passagemath-graphs/>`_.
 
 It provides a Cython interface to the
 `CMR library <https://github.com/discopt/cmr>`_,
