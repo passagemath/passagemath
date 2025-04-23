@@ -11,6 +11,7 @@
 binutils
 make
 m4
+gawk
 # a system python is needed for downloading the sage packages, https://github.com/sagemath/sage/issues/29090
 python3
 perl
