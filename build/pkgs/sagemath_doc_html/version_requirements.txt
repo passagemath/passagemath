@@ -1,2 +1,2 @@
 # This file is updated on every release by the sage-update-version script
-passagemath-doc-html ~= 10.5.24.0
+passagemath-doc-html ~= 10.5.25.0
