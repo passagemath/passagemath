@@ -6662,10 +6662,10 @@ cdef class Matroid(SageObject):
             sage: M.is_graphic()
             False
             sage: M = matroids.catalog.Wheel4()
-            sage: M.is_graphic(algorithm="cmr") # optional - cmr
+            sage: M.is_graphic(algorithm="cmr")  # optional - sage.libs.cmr
             True
             sage: M = matroids.catalog.U24()
-            sage: M.is_graphic(algorithm="cmr") # optional - cmr
+            sage: M.is_graphic(algorithm="cmr")  # optional - sage.libs.cmr
             False
 
         REFERENCES:
@@ -6729,11 +6729,11 @@ cdef class Matroid(SageObject):
             sage: M.is_regular()
             True
             sage: M = matroids.catalog.R9()
-            sage: M.is_regular(algorithm="cmr") # optional - cmr
+            sage: M.is_regular(algorithm="cmr")  # optional - sage.libs.cmr
             False
             sage: from sage.matroids.advanced import LinearMatroid
             sage: M1 = LinearMatroid(Matrix(ZZ,[[1,0,1,1],[0,1,1,-1]]))
-            sage: M1.is_regular(algorithm="cmr") # optional - cmr
+            sage: M1.is_regular(algorithm="cmr")  # optional - sage.libs.cmr
             False
 
         REFERENCES:
