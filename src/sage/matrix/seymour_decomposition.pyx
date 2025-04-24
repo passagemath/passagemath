@@ -2907,16 +2907,18 @@ cdef class DeltaSumNode(SumNode):
             if parent_columns == NULL or all(parent_columns[i] == 0 for i in range(child_ncols)):
                 raise ValueError(f"Child {index} does not have parents columns")
             parent_columns_tuple = tuple(parent_columns[i] for i in range(child_ncols))
-            child_row = tuple(CMRelementToRowIndex(element) + 1
-                              for element in parent_rows_tuple)
-            child_column = tuple(CMRelementToColumnIndex(element) + 1
-                                 for element in parent_columns_tuple)
             if index == 0:
-                children_row += child_row[:-1]
-                children_column += child_column[:-2]
+                child_row = tuple(CMRelementToRowIndex(element) + 1
+                                  for element in parent_rows_tuple[:-1])
+                child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                     for element in parent_columns_tuple[:-2])
             else:
-                children_row += child_row[1:]
-                children_column += child_column[2:]
+                child_row = tuple(CMRelementToRowIndex(element) + 1
+                                  for element in parent_rows_tuple[1:])
+                child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                     for element in parent_columns_tuple[2:])
+            children_row += child_row
+            children_column += child_column
         P_row = Permutation(list(children_row)).to_matrix()
         P_column = Permutation(list(children_column)).to_matrix().transpose()
         return (P_row, self.block_matrix_form(), P_column)
@@ -3254,16 +3256,18 @@ cdef class ThreeSumNode(SumNode):
             if parent_columns == NULL or all(parent_columns[i] == 0 for i in range(child_ncols)):
                 raise ValueError(f"Child {index} does not have parents columns")
             parent_columns_tuple = tuple(parent_columns[i] for i in range(child_ncols))
-            child_row = tuple(CMRelementToRowIndex(element) + 1
-                              for element in parent_rows_tuple)
-            child_column = tuple(CMRelementToColumnIndex(element) + 1
-                                 for element in parent_columns_tuple)
             if index == 0:
-                children_row += child_row[:-2]
-                children_column += child_column[:-1]
+                child_row = tuple(CMRelementToRowIndex(element) + 1
+                                  for element in parent_rows_tuple[:-2])
+                child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                     for element in parent_columns_tuple[:-1])
             else:
-                children_row += child_row[1:]
-                children_column += child_column[2:]
+                child_row = tuple(CMRelementToRowIndex(element) + 1
+                                  for element in parent_rows_tuple[1:])
+                child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                     for element in parent_columns_tuple[2:])
+            children_row += child_row
+            children_column += child_column
         P_row = Permutation(list(children_row)).to_matrix()
         P_column = Permutation(list(children_column)).to_matrix().transpose()
         return (P_row, self.block_matrix_form(), P_column)
@@ -3580,16 +3584,18 @@ cdef class YSumNode(SumNode):
             if parent_columns == NULL or all(parent_columns[i] == 0 for i in range(child_ncols)):
                 raise ValueError(f"Child {index} does not have parents columns")
             parent_columns_tuple = tuple(parent_columns[i] for i in range(child_ncols))
-            child_row = tuple(CMRelementToRowIndex(element) + 1
-                              for element in parent_rows_tuple)
-            child_column = tuple(CMRelementToColumnIndex(element) + 1
-                                 for element in parent_columns_tuple)
             if index == 0:
-                children_row += child_row[:-2]
-                children_column += child_column[:-1]
+                child_row = tuple(CMRelementToRowIndex(element) + 1
+                                  for element in parent_rows_tuple[:-2])
+                child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                     for element in parent_columns_tuple[:-1])
             else:
-                children_row += child_row[2:]
-                children_column += child_column[1:]
+                child_row = tuple(CMRelementToRowIndex(element) + 1
+                                  for element in parent_rows_tuple[2:])
+                child_column = tuple(CMRelementToColumnIndex(element) + 1
+                                     for element in parent_columns_tuple[1:])
+            children_row += child_row
+            children_column += child_column
         P_row = Permutation(list(children_row)).to_matrix()
         P_column = Permutation(list(children_column)).to_matrix().transpose()
         return (P_row, self.block_matrix_form(), P_column)
