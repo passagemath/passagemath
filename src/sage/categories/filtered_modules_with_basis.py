@@ -279,6 +279,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
             EXAMPLES::
 
+                sage: # needs sage.combinat
                 sage: A = GradedModulesWithBasis(ZZ).example()
                 sage: A.hilbert_series()
                 1 + t + 2*t^2 + 3*t^3 + 5*t^4 + 7*t^5 + 11*t^6 + O(t^7)
@@ -343,6 +344,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
             EXAMPLES::
 
+                sage: # needs sage.combinat sage.modules
                 sage: A = ModulesWithBasis(ZZ).Filtered().example()
                 sage: A.graded_algebra()
                 Graded Module of An example of a filtered module with basis:
@@ -1187,12 +1189,12 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
                     sage: OS.hilbert_series()
                     2*t^2 + 3*t + 1
 
-                    sage: # needs sage.modules
+                    sage: # needs sage.combinat sage.modules
                     sage: OS = matroids.Uniform(5, 3).orlik_solomon_algebra(ZZ)
                     sage: OS.hilbert_series()
                     t^3 + 3*t^2 + 3*t + 1
 
-                    sage: # needs sage.modules
+                    sage: # needs sage.combinat sage.modules
                     sage: OS = matroids.PG(2, 3).orlik_solomon_algebra(ZZ['x','y'])
                     sage: OS.hilbert_series()
                     27*t^3 + 39*t^2 + 13*t + 1

@@ -5505,7 +5505,7 @@ class GenericGraph(GenericGraph_pyx):
         Check that the method is valid for immutable graphs::
 
             sage: G = Graph(graphs.CycleGraph(3), immutable=True)
-            sage: G.cycle_basis()
+            sage: G.cycle_basis()                                                       # needs networkx
             [[0, 1, 2]]
             sage: G = Graph([(1, 2, 'a'), (2, 3, 'b'), (2, 3, 'c'),
             ....:            (3, 4, 'd'), (3, 4, 'e'), (4, 1, 'f')],
@@ -8359,6 +8359,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Check the behavior of parameter ``immutable``::
 
+            sage: # needs sage.numerical.mip
             sage: G = Graph([(0, 1), (1, 2), (0, 2)], immutable=True)
             sage: G.longest_cycle().is_immutable()
             True

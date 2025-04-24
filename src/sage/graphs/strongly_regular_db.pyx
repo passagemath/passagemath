@@ -2868,7 +2868,7 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
         descendant of (540, 264, 138, 120)-strongly regular graph at ... 539 vertices
         sage: graphs.strongly_regular_graph(539, 250, 105, 125)                         # needs sage.combinat
         descendant of (540, 275, 130, 150)-strongly regular graph at ... 539 vertices
-        sage: graphs.strongly_regular_graph(209, 100, 45, 50)                           # needs sage.libs.pari
+        sage: graphs.strongly_regular_graph(209, 100, 45, 50)                           # needs database_graphs sage.libs.pari
         descendant of complement(merging of S_7 on Circulant(6,[1,4])s) at ... 209 vertices
 
 
@@ -2886,6 +2886,7 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     `\mu=0` behaves correctly (:issue:`19712`)::
 
+        sage: # needs database_graphs
         sage: graphs.strongly_regular_graph(10,2,1)
         Traceback (most recent call last):
         ...

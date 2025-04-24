@@ -438,6 +438,7 @@ class BCHUnderlyingGRSDecoder(Decoder):
         We check that it still works when, while list-decoding, the GRS decoder
         output some words which do not lie in the BCH code::
 
+            sage: # needs sage.symbolic
             sage: C = codes.BCHCode(GF(2), 31, 15)
             sage: C
             [31, 6] BCH Code over GF(2) with designed distance 15

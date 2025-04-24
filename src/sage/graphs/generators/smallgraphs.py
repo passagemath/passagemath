@@ -4664,6 +4664,7 @@ def TricornGraph():
     `(5, 6)` and `(8, 9)` are the only removable edges of the Tricorn
     graph::
 
+        sage: # needs sage.symbolic
         sage: g = graphs.TricornGraph()
         sage: g.name()
         'Tricorn Graph'
