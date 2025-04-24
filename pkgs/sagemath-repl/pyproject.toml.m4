@@ -16,6 +16,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_ipython
     SPKG_INSTALL_REQUIRES_ipywidgets
     SPKG_INSTALL_REQUIRES_jupyter_client
+    SPKG_INSTALL_REQUIRES_typing_extensions
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
