@@ -1,11 +1,13 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: SageMath
-abstract: SageMath is a free open-source mathematics software system.
+title: passagemath
+abstract: General purpose mathematical software system, a fork of SageMath.
 authors:
-- name: "The SageMath Developers"
-version: 10.5.25
-doi: 10.5281/zenodo.8042260
-date-released: 2025-04-23
-repository-code: "https://github.com/sagemath/sage"
-url: "https://www.sagemath.org/"
+- name: Matthias Köppe
+  orcid: "https://orcid.org/0000-0003-2492-4139"
+- name: "the passagemath contributors"
+- name: "the Sage developers"
+version: 10.5.26
+doi: 10.5281/zenodo.15265940
+date-released: 2025-04-25
+repository-code: "https://github.com/passagemath/passagemath"
