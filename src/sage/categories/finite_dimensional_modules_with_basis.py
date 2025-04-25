@@ -891,6 +891,18 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
         @cached_method
         def _matrix_cmr(self):
+            r"""
+            Return ``self`` as a :class:`Matrix_cmr_chr_sparse`.
+
+            EXAMPLES::
+
+                sage: # needs sage.libs.cmr
+                sage: M = matrix(ZZ, [[1, 0, 1], [0, 1, 1], [1, 2, 3]],
+                ....:            column_keys=['a', 'b', 'c'],
+                ....:            row_keys=['u', 'v', 'w']); M
+                sage: M_cmr = M._matrix_cmr(); M_cmr
+                sage: type(M_cmr)
+            """
             from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
             from sage.matrix.matrix_space import MatrixSpace
             M = self.matrix()
@@ -907,6 +919,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: M = matrix(ZZ, [[1, 0, 0], [0, 1, 0]],
                 ....:            column_keys=['a', 'b', 'c'],
                 ....:            row_keys=['v', 'w']); M
@@ -935,6 +948,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: M = matrix(ZZ, [[1, 0, 1], [0, 1, 1], [1, 2, 3]],
                 ....:            column_keys=['a', 'b', 'c'],
                 ....:            row_keys=['u', 'v', 'w']); M
@@ -993,6 +1007,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: M = matrix(ZZ, [[1, 0, 1], [0, 1, 1], [1, 2, 3]],
                 ....:            column_keys=['a', 'b', 'c'],
                 ....:            row_keys=['u', 'v', 'w']); M
@@ -1023,6 +1038,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: M = matrix(ZZ, [[1, 0, 1], [0, 1, 1], [1, 2, 3]],
                 ....:            column_keys=['a', 'b', 'c'],
                 ....:            row_keys=['u', 'v', 'w']); M

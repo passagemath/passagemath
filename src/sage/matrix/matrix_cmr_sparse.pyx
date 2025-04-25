@@ -104,7 +104,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         - ``copy`` -- ignored (for backwards compatibility)
 
-        - ``coerce`` -- if False, assume without checking that the
+        - ``coerce`` -- if ``False``, assume without checking that the
           entries lie in the base ring
 
         - ``immutable`` -- ignored (for backwards compatibility)?
@@ -1089,7 +1089,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             \end{bmatrix},
         `
         where `\alpha, \beta \in \{-1,+1 \}`
-        (otherwise, ``RuntimeError("Invalid matrix structure")`` is returned).
+        (otherwise, ``RuntimeError("Invalid matrix structure")`` is raised).
         Let `D` be the matrix `M_2` without the row ``second_special_rows[0]`` and
         columns ``second_special_columns[0]`` and ``second_special_columns[1]``.
         After reordering these to be first, `M_2` must be of the form
@@ -1100,7 +1100,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             \end{bmatrix},
         `
         where `\gamma, \delta \in \{ -1,+1 \}`
-        (otherwise, ``RuntimeError("Invalid matrix structure")`` is returned)
+        (otherwise, ``RuntimeError("Invalid matrix structure")`` is raised)
         and such that the matrix
         `
             N = \begin{bmatrix}
@@ -1110,7 +1110,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             \end{bmatrix}
         `
         is totally unimodular
-        (otherwise, ``RuntimeError("Inconsistent pieces of input")`` is returned).
+        (otherwise, ``RuntimeError("Inconsistent pieces of input")`` is raised).
         The columns ``first_special_columns[0]`` and
         ``first_special_columns[1]`` indicate the columns of `M_1` that
         shall correspond to `C_{\star,k}` and `C_{\star,\ell}`, respectively.
@@ -1126,7 +1126,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ``second_special_rows[1]`` and ``second_special_rows[2]`` and
             columns ``secondSpecialColumns[0]`` and ``secondSpecialColumns[1]``,
             which is the matrix `C_{\{i,j\},\{k,\ell\}}`.
-            Otherwise, ``RuntimeError("Invalid matrix structure")`` is returned.
+            Otherwise, ``RuntimeError("Invalid matrix structure")`` is raised.
 
         The 3-sum of `M_1` and `M_2` (at these rows/columns) is the matrix
         `
@@ -3229,7 +3229,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         OUTPUT: boolean, or (boolean, string)
 
-        If it is False only because of the sign, then also output the correct sign.
+        If it is ``False`` only because of the sign, then also output the correct sign.
 
         EXAMPLES::
 
@@ -3842,7 +3842,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         OUTPUT: boolean, or (boolean, string)
 
-        If it is False only because of the sign, then also output the correct sign.
+        If it is ``False`` only because of the sign, then also output the correct sign.
 
         EXAMPLES::
 

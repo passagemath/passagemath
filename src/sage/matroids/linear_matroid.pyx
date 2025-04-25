@@ -3835,17 +3835,17 @@ cdef class BinaryMatroid(LinearMatroid):
             sage: R10 = matroids.catalog.R10()
             sage: M = Matroid(ring=GF(2), reduced_matrix=R10.representation(
             ....:                                 reduced=True, labels=False))
-            sage: M.is_graphic(algorithm="cmr") # optional - cmr
+            sage: M.is_graphic(algorithm="cmr")  # optional - sage.libs.cmr
             False
             sage: K5 = Matroid(graphs.CompleteGraph(5))                                 # needs sage.graphs
-            sage: K5.is_graphic(algorithm="cmr") # optional - cmr                       # needs sage.graphs
+            sage: K5.is_graphic(algorithm="cmr")  # optional - sage.libs.cmr                       # needs sage.graphs
             True
             sage: K5 = Matroid(graphs.CompleteGraph(5), regular=True)                   # needs sage.graphs
             sage: M = Matroid(ring=GF(2), reduced_matrix=K5.representation(             # needs sage.graphs sage.rings.finite_rings
             ....:                                 reduced=True, labels=False))
-            sage: M.is_graphic(algorithm="cmr") # optional - cmr                        # needs sage.graphs sage.rings.finite_rings
+            sage: M.is_graphic(algorithm="cmr")  # optional - sage.libs.cmr                        # needs sage.graphs sage.rings.finite_rings
             True
-            sage: M.dual().is_graphic(algorithm="cmr") # optional - cmr                 # needs sage.graphs
+            sage: M.dual().is_graphic(algorithm="cmr")  # optional - sage.libs.cmr                 # needs sage.graphs
             False
         """
         if algorithm is None:
@@ -3949,14 +3949,14 @@ cdef class BinaryMatroid(LinearMatroid):
             sage: R10 = matroids.catalog.R10()
             sage: M = Matroid(ring=GF(2), reduced_matrix=R10.representation(
             ....:                                 reduced=True, labels=False))
-            sage: M._is_graphic_cmr() # optional - cmr
+            sage: M._is_graphic_cmr()  # optional - sage.libs.cmr
             False
             sage: K5 = Matroid(graphs.CompleteGraph(5), regular=True)                   # needs sage.graphs
             sage: M = Matroid(ring=GF(2), reduced_matrix=K5.representation(             # needs sage.graphs sage.rings.finite_rings
             ....:                                 reduced=True, labels=False))
-            sage: M._is_graphic_cmr() # optional - cmr                                  # needs sage.graphs sage.rings.finite_rings
+            sage: M._is_graphic_cmr()  # optional - sage.libs.cmr                                  # needs sage.graphs sage.rings.finite_rings
             True
-            sage: M.dual()._is_graphic_cmr() # optional - cmr                           # needs sage.graphs
+            sage: M.dual()._is_graphic_cmr()  # optional - sage.libs.cmr                           # needs sage.graphs
             False
 
         ALGORITHM:
@@ -6391,12 +6391,12 @@ cdef class RegularMatroid(LinearMatroid):
         EXAMPLES::
 
             sage: M = matroids.catalog.R10()
-            sage: M.is_graphic(algorithm="cmr") # optional - cmr
+            sage: M.is_graphic(algorithm="cmr")  # optional - sage.libs.cmr
             False
             sage: M = Matroid(graphs.CompleteGraph(5), regular=True)                    # needs sage.graphs
-            sage: M.is_graphic(algorithm="cmr")  # optional - cmr                       # needs sage.graphs sage.rings.finite_rings
+            sage: M.is_graphic(algorithm="cmr")   # optional - sage.libs.cmr                       # needs sage.graphs sage.rings.finite_rings
             True
-            sage: M.dual().is_graphic(algorithm="cmr") # optional - cmr                 # needs sage.graphs
+            sage: M.dual().is_graphic(algorithm="cmr")  # optional - sage.libs.cmr                 # needs sage.graphs
             False
         """
         return BinaryMatroid(reduced_matrix=self._reduced_representation()).is_graphic(algorithm=algorithm)
