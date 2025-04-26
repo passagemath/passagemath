@@ -910,6 +910,8 @@ class FinitePoset(UniqueRepresentation, Parent):
         sage: Q = Poset([[1,2],[],[1]])
         sage: Q == P
         False
+
+        sage: # needs nauty
         sage: p1, p2 = Posets(2).list()
         sage: p2 == p1, p1 != p2
         (False, True)
@@ -923,9 +925,9 @@ class FinitePoset(UniqueRepresentation, Parent):
          [False, False, True, False, False],
          [False, False, False, True, False],
          [False, False, False, False, True]]
-
         sage: [[p1.__ne__(p2) for p1 in Posets(2)] for p2 in Posets(2)]
         [[False, True], [True, False]]
+
         sage: P = Poset([[1,2,4],[3],[3]])
         sage: Q = Poset([[1,2],[],[1],[4]])
         sage: P != Q
@@ -934,7 +936,7 @@ class FinitePoset(UniqueRepresentation, Parent):
         False
         sage: Q != Q
         False
-        sage: [[p1.__ne__(p2) for p1 in Posets(2)] for p2 in Posets(2)]
+        sage: [[p1.__ne__(p2) for p1 in Posets(2)] for p2 in Posets(2)]                 # needs nauty
         [[False, True], [True, False]]
 
         sage: P = Poset((divisors(12), attrcall("divides")), linear_extension=True)
@@ -3208,7 +3210,7 @@ class FinitePoset(UniqueRepresentation, Parent):
             sage: N5.has_isomorphic_subposet(D)
             True
 
-            sage: len([P for P in Posets(5) if P.has_isomorphic_subposet(D)])
+            sage: len([P for P in Posets(5) if P.has_isomorphic_subposet(D)])           # needs nauty
             11
         """
         if not hasattr(other, 'hasse_diagram'):
@@ -3242,7 +3244,7 @@ class FinitePoset(UniqueRepresentation, Parent):
             False
             sage: Poset({1:[]}).is_bounded()  # Here top == bottom
             True
-            sage: ( len([P for P in Posets(5) if P.is_bounded()]) ==
+            sage: ( len([P for P in Posets(5) if P.is_bounded()]) ==                    # needs nauty
             ....: Posets(3).cardinality() )
             True
         """
@@ -3269,7 +3271,7 @@ class FinitePoset(UniqueRepresentation, Parent):
 
         TESTS::
 
-            sage: [len([P for P in Posets(n) if P.is_chain()]) for n in range(5)]
+            sage: [len([P for P in Posets(n) if P.is_chain()]) for n in range(5)]       # needs nauty
             [1, 1, 1, 1, 1]
         """
         return self._hasse_diagram.is_chain()
@@ -4496,7 +4498,7 @@ class FinitePoset(UniqueRepresentation, Parent):
 
             sage: Poset().is_meet_semilattice()  # Test empty lattice
             True
-            sage: len([P for P in Posets(4) if P.is_meet_semilattice()])
+            sage: len([P for P in Posets(4) if P.is_meet_semilattice()])                # needs nauty
             5
 
             sage: P = Poset({1: [2], 3: []})
@@ -4567,7 +4569,7 @@ class FinitePoset(UniqueRepresentation, Parent):
 
             sage: Poset().is_join_semilattice()  # Test empty lattice
             True
-            sage: len([P for P in Posets(4) if P.is_join_semilattice()])
+            sage: len([P for P in Posets(4) if P.is_join_semilattice()])                # needs nauty
             5
 
             sage: X = Poset({1: [3], 2: [3], 3: [4, 5]})
@@ -8876,6 +8878,7 @@ class FinitePosets_n(UniqueRepresentation, Parent):
 
     EXAMPLES::
 
+        sage: # needs nauty
         sage: P = Posets(3)
         sage: P.cardinality()
         5
@@ -8897,7 +8900,7 @@ class FinitePosets_n(UniqueRepresentation, Parent):
             Category of finite enumerated sets
             sage: P.__class__
             <class 'sage.combinat.posets.posets.FinitePosets_n_with_category'>
-            sage: TestSuite(P).run()
+            sage: TestSuite(P).run()                                                    # needs nauty
         """
         Parent.__init__(self, category=FiniteEnumeratedSets())
         self._n = n
@@ -8940,13 +8943,13 @@ class FinitePosets_n(UniqueRepresentation, Parent):
         EXAMPLES::
 
             sage: P = Posets(2)
-            sage: list(P)
+            sage: list(P)                                                               # needs nauty
             [Finite poset containing 2 elements, Finite poset containing 2 elements]
 
         TESTS::
 
-            sage: it = iter(Posets(17))
-            sage: next(it)
+            sage: it = iter(Posets(17))                                                 # needs nauty
+            sage: next(it)                                                              # needs nauty
             Finite poset containing 17 elements
         """
         if self._n <= 16:
@@ -8976,7 +8979,7 @@ class FinitePosets_n(UniqueRepresentation, Parent):
             sage: P = Posets(3)
             sage: P.cardinality()
             5
-            sage: P.cardinality(from_iterator=True)
+            sage: P.cardinality(from_iterator=True)                                     # needs nauty
             5
         """
         # Obtained from The On-Line Encyclopedia of Integer Sequences;
