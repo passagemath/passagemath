@@ -58,17 +58,8 @@ import types
 
 from sage.structure.sage_object cimport SageObject
 
-cdef sage_version
-from sage.version import version as sage_version
+cdef sage_version = None
 from sage.cpython.string cimport bytes_to_str
-
-sage_version = sage_version.split('.')
-for i in range(len(sage_version)):
-    try:
-        sage_version[i] = int(sage_version[i])
-    except ValueError:
-        pass
-sage_version = tuple(sage_version)
 
 cimport sage.misc.weak_dict
 from sage.misc.cachefunc cimport cache_key as _cache_key
@@ -455,6 +446,16 @@ cdef class UniqueFactory(SageObject):
             sage: test_factory.get_version((3,1,0))
             (3, 1, 0)
         """
+        global sage_version
+        if sage_version is None:
+            from sage.version import version as sage_version
+            sage_version = sage_version.split('.')
+            for i in range(len(sage_version)):
+                try:
+                    sage_version[i] = int(sage_version[i])
+                except ValueError:
+                    pass
+            sage_version = tuple(sage_version)
         return sage_version
 
     def create_key_and_extra_args(self, *args, **kwds):
