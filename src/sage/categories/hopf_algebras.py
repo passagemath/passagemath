@@ -68,7 +68,7 @@ class HopfAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.groups
+                sage: # needs sage.groups sage.modules
                 sage: A = HopfAlgebrasWithBasis(QQ).example(); A
                 An example of Hopf algebra with basis: the group algebra of the
                  Dihedral group of order 6 as a permutation group over Rational Field
