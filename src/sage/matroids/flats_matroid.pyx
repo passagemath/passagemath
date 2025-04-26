@@ -379,6 +379,7 @@ cdef class FlatsMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.flats_matroid import FlatsMatroid
             sage: M = FlatsMatroid(matroids.catalog.RelaxedNonFano())
             sage: sorted(M.groundset())
@@ -392,6 +393,7 @@ cdef class FlatsMatroid(Matroid):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.flats_matroid import FlatsMatroid
             sage: M = FlatsMatroid(matroids.catalog.RelaxedNonFano())
             sage: f = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g'}
@@ -522,6 +524,7 @@ cdef class FlatsMatroid(Matroid):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.matroids.flats_matroid import FlatsMatroid
             sage: M = FlatsMatroid(matroids.catalog.XY13())
             sage: M.whitney_numbers2()
