@@ -755,6 +755,7 @@ class GraphGenerators:
 
     Returned graphs can be mutable or immutable::
 
+        sage: # needs nauty
         sage: G = next(graphs(3, immutable=False))
         sage: G.delete_vertex(0)
         sage: G = next(graphs(3, immutable=True))
