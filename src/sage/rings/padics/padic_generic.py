@@ -25,7 +25,6 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from sage.misc.misc import some_tuples
 from copy import copy
 
 from sage.structure.richcmp import richcmp
@@ -712,6 +711,8 @@ class pAdicGeneric(LocalGeneric):
 
             :class:`TestSuite`
         """
+        from sage.misc.misc import some_tuples
+
         tester = self._tester(**options)
         elements = tester.some_elements()
 
@@ -751,6 +752,8 @@ class pAdicGeneric(LocalGeneric):
 
             :class:`TestSuite`
         """
+        from sage.misc.misc import some_tuples
+
         tester = self._tester(**options)
 
         elements = list(tester.some_elements())
@@ -828,6 +831,8 @@ class pAdicGeneric(LocalGeneric):
 
             :class:`TestSuite`
         """
+        from sage.misc.misc import some_tuples
+
         tester = self._tester(**options)
 
         elements = list(tester.some_elements())
@@ -857,6 +862,8 @@ class pAdicGeneric(LocalGeneric):
 
             :class:`TestSuite`
         """
+        from sage.misc.misc import some_tuples
+
         tester = self._tester(**options)
 
         elements = list(tester.some_elements())
