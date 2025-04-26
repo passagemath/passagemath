@@ -817,14 +817,14 @@ class Polyhedron_base7(Polyhedron_base6):
             sage: P = Polyhedron(vertices=[[0,0], [1,1]])
             sage: P.integrate(x*y)
             0
-            sage: ixy = P.integrate(x*y, measure='induced'); ixy        # optional - latte_int
+            sage: ixy = P.integrate(x*y, measure='induced'); ixy        # optional - latte_int, needs sage.rings.number_field sage.symbolic
             0.4714045207910317?
-            sage: ixy.parent()                                          # optional - latte_int
+            sage: ixy.parent()                                          # optional - latte_int, needs sage.rings.number_field sage.symbolic
             Algebraic Real Field
 
         Convert to a symbolic expression::
 
-            sage: ixy.radical_expression()                              # optional - latte_int
+            sage: ixy.radical_expression()                              # optional - latte_int, needs sage.rings.number_field sage.symbolic
             1/3*sqrt(2)
 
         Another non full-dimensional polytope integration::

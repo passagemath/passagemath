@@ -1410,7 +1410,7 @@ class Projection(SageObject):
 
             sage: P = Polyhedron(vertices=[[0,0,0], [1,0,0],
             ....:                          [0,0,1], [0,1,0]])
-            sage: P.projection().tikz(output_type='kawai')
+            sage: P.projection().tikz(output_type='kawai')                              # needs sage.plot
             Traceback (most recent call last):
             ...
             ValueError: output_type (='kawai') must be 'LatexExpr' or 'TikzPicture'
