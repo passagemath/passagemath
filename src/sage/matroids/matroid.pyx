@@ -8054,7 +8054,7 @@ cdef class Matroid(SageObject):
             sage: M = matroids.CompleteGraphic(5)
             sage: M.characteristic_polynomial()
             l^4 - 10*l^3 + 35*l^2 - 50*l + 24
-            sage: M.characteristic_polynomial().factor()
+            sage: M.characteristic_polynomial().factor()                                # needs sage.libs.pari
             (l - 4) * (l - 3) * (l - 2) * (l - 1)
             sage: M.characteristic_polynomial(5)
             24
