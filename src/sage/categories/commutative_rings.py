@@ -112,7 +112,7 @@ class CommutativeRings(CategoryWithAxiom):
                 ...
                 NotImplementedError
 
-                sage: # needs sage.rings.finite_rings
+                sage: # needs sage.groups sage.rings.finite_rings
                 sage: R = GF(9).galois_group().algebra(QQ)
                 sage: R.krull_dimension()
                 Traceback (most recent call last):
