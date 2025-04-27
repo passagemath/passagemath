@@ -1215,7 +1215,7 @@ class ChainComplex_class(Parent):
         is represented as a vector. Each summand of the homology is
         listed separately, with a corresponding generator::
 
-            sage: C.homology(1, generators=True)
+            sage: C.homology(1, generators=True)                                        # needs sage.libs.pari
             [(C3, Chain(1:(1, 0))), (Z, Chain(1:(0, 1)))]
 
         Tests for :issue:`6100`, the Klein bottle with generators::
