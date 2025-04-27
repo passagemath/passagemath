@@ -16,6 +16,7 @@ from sage.rings.integer cimport Integer
 ########## iml -- integer matrix library ###########
 from sage.libs.iml cimport *
 
+
 def _rational_kernel_iml(Matrix_integer_dense self):
     """
     Return the rational (left) kernel of this matrix.

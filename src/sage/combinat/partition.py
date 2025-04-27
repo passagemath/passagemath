@@ -9896,6 +9896,7 @@ def partitions_in_box(r, s):
     return [x for n in range(r*s+1)
             for x in Partitions(n, max_part=s, max_length=r)]
 
+
 @cached_function
 def number_of_partitions_max_length_max_part(n, k, b):
     r"""

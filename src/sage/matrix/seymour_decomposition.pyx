@@ -3248,7 +3248,7 @@ cdef class ThreeSumNode(SumNode):
             parent_columns = CMRseymourChildColumnsToParent(self._dec, index)
             child_nrows = CMRseymourNumRows(child_dec)
             child_ncols = CMRseymourNumColumns(child_dec)
-            
+
             if parent_rows == NULL or all(parent_rows[i] == 0 for i in range(child_nrows)):
                 raise ValueError(f"Child {index} does not have parents rows")
             parent_rows_tuple = tuple(parent_rows[i] for i in range(child_nrows))

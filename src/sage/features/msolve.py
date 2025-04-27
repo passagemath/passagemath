@@ -23,7 +23,6 @@ from . import Executable, FeatureTestResult, PythonModule
 from .join_feature import JoinFeature
 
 
-
 class msolve(Executable):
     r"""
     A :class:`~sage.features.Feature` describing the presence of :ref:`msolve <spkg_msolve>`.

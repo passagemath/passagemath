@@ -5489,7 +5489,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
 
 cdef _set_cmr_seymour_parameters(CMR_SEYMOUR_PARAMS *params, dict kwds):
-    """
+    r"""
     Set the parameters for Seymour's decomposition from the dictionary ``kwds``.
 
     INPUT:
