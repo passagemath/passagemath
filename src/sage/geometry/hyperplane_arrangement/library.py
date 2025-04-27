@@ -148,6 +148,7 @@ class HyperplaneArrangementLibrary:
         time, so we can make a doctest by running it repeatedly
         (see :issue:`39167`). ::
 
+            sage: # needs sage.graphs
             sage: G = graphs.CycleGraph(4)
             sage: any(hyperplane_arrangements.bigraphical(G,
             ....:   'generic').n_regions() == 65 for _ in range(5))
