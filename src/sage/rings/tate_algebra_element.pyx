@@ -55,9 +55,9 @@ def _pushout_family(elements, initial=ZZ):
 
         sage: R = Zp(2)
         sage: A.<x,y> = TateAlgebra(R)
-        sage: S.<a> = Zq(4)
+        sage: S.<a> = Zq(4)                                                             # needs sage.libs.ntl
 
-        sage: _pushout_family([a, x, 3])
+        sage: _pushout_family([a, x, 3])                                                # needs sage.libs.ntl
         Tate Algebra in x (val >= 0), y (val >= 0)
          over 2-adic Unramified Extension Field in a defined by x^2 + x + 1
     """
@@ -1836,15 +1836,14 @@ cdef class TateAlgebraElement(CommutativeAlgebraElement):
 
         Evaluation at points in extensions is allowed::
 
+            sage: # needs sage.libs.ntl
             sage: S.<a> = Zq(2^3)
             sage: f(a, 2)
             a^2 + 2^2 + O(2^20)
-
             sage: x = polygen(ZZ, 'x')
             sage: T.<pi> = S.extension(x^2 - 2)
             sage: f(pi, 2)
             pi^2 + pi^4 + O(pi^42)
-
             sage: f(pi, pi)
             Traceback (most recent call last):
             ...
@@ -1852,12 +1851,12 @@ cdef class TateAlgebraElement(CommutativeAlgebraElement):
 
         This method can also be used to compose Tate series::
 
-            sage: f(u + v, 2*u)
+            sage: f(u + v, 2*u)                                                         # needs sage.libs.ntl
             (1 + 2^2 + O(2^20))*u^2 + (2 + O(2^20))*u*v + (1 + O(2^20))*v^2
 
         or for partial evaluation::
 
-            sage: f(pi, v)
+            sage: f(pi, v)                                                              # needs sage.libs.ntl
             (pi^2 + O(pi^42)) + (1 + O(pi^40))*v^2
         """
         cdef TateAlgebraTerm t
@@ -3207,6 +3206,7 @@ cdef class TateAlgebraElement(CommutativeAlgebraElement):
             sage: f % [2,u]  # indirect doctest
             O(2^10 * <u, v>)
 
+            sage: # needs sage.libs.ntl
             sage: x = polygen(ZZ, 'x')
             sage: S.<pi> = R.extension(x^2 - 2)
             sage: f % (pi*u)  # indirect doctest

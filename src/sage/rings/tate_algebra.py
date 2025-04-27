@@ -449,6 +449,7 @@ class TateTermMonoid(Monoid_class, UniqueRepresentation):
 
         Note that a Tate algebra does not coerce into a monoid of terms::
 
+            sage: # needs sage.rings.padics
             sage: U.has_coerce_map_from(A) # indirect doctest
             False
             sage: T.has_coerce_map_from(B) # indirect doctest
@@ -763,6 +764,7 @@ class TateAlgebra_generic(Parent):
         the only if the base rings coerce, the variable names, the term order
         and the domain of convergence match::
 
+            sage: # needs sage.libs.ntl
             sage: S.<a> = Zq(4)
             sage: B.<x,y> = TateAlgebra(S)
             sage: B.has_coerce_map_from(A)  # indirect doctest
@@ -827,12 +829,12 @@ class TateAlgebra_generic(Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.ntl
             sage: from sage.categories.pushout import pushout
             sage: R = Zp(2)
             sage: R1.<a> = Zq(4)
             sage: x = polygen(ZZ, 'x')
             sage: R2.<pi> = R.extension(x^2 - 2)
-
             sage: A.<u,v> = TateAlgebra(R, log_radii=[1,2])
             sage: A1 = pushout(A, R1); A1
             Tate Algebra in u (val >= -1), v (val >= -2)
@@ -840,7 +842,6 @@ class TateAlgebra_generic(Parent):
             sage: A2 = pushout(A, R2); A2
             Tate Algebra in u (val >= -2), v (val >= -4)
              over 2-adic Eisenstein Extension Field in pi defined by x^2 - 2
-
             sage: Ao = A.integer_ring()
             sage: pushout(Ao, R1)
             Integer ring of the Tate Algebra in u (val >= -1), v (val >= -2)
@@ -851,11 +852,11 @@ class TateAlgebra_generic(Parent):
 
         TESTS::
 
+            sage: # needs sage.libs.ntl
             sage: a*u
             (a + O(2^20))*u
             sage: (a*u).parent() is A1
             True
-
             sage: pi*v
             (pi + O(pi^41))*v
             sage: (pi*v).parent() is A2
@@ -1172,6 +1173,7 @@ class TateAlgebra_generic(Parent):
             sage: A.absolute_e()
             1
 
+            sage: # needs sage.libs.ntl
             sage: R.<a> = Zq(2^3)
             sage: A.<u,v> = TateAlgebra(R)
             sage: A.absolute_e()
