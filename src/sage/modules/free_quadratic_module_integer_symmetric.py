@@ -392,6 +392,7 @@ def IntegralLatticeGluing(Lattices, glue, return_embeddings=False):
 
     A single lattice can be glued. This is the same as taking an overlattice::
 
+        sage: # needs sage.libs.pari
         sage: from sage.modules.free_quadratic_module_integer_symmetric import IntegralLatticeGluing
         sage: L1 = IntegralLattice(matrix([[4]]))
         sage: g1 = L1.discriminant_group().gens()[0]
@@ -792,6 +793,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: L = IntegralLattice(Matrix(ZZ, 2, 2, [2,1,1,-2]) * 2)
             sage: L.discriminant_group()
             Finite quadratic module over Integer Ring with invariants (2, 10)
@@ -810,6 +812,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         TESTS::
 
+            sage: # needs sage.libs.pari
             sage: L = IntegralLattice("H")
             sage: L.discriminant_group()
             Finite quadratic module over Integer Ring with invariants ()
@@ -818,6 +821,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         Test that the memory leak in :issue:`31625` is fixed::
 
+            sage: # needs sage.libs.pari
             sage: import gc
             sage: gc.freeze()
             sage: L = IntegralLattice("A2")                                             # needs sage.graphs
@@ -912,6 +916,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: U = IntegralLattice("U")
             sage: L1 = U.span([vector([1,1])])
             sage: L2 = U.span([vector([1,-1])])
@@ -924,7 +929,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         We can also compute the index::
 
-            sage: (L1 + L2).index_in(U)
+            sage: (L1 + L2).index_in(U)                                                 # needs sage.libs.pari
             2
         """
         return gcd((self/M).invariants()) == 0

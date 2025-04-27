@@ -1856,6 +1856,7 @@ class Module_free_ambient(Module):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: V1 = ZZ^2; W1 = V1.span([[1,2],[3,4]])
             sage: V1/W1
             Finitely generated module V/W over Integer Ring with invariants (2)
@@ -4350,6 +4351,7 @@ class FreeModule_generic_pid(FreeModule_generic_domain):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: A = ZZ^3; V = A.span([[1,2,3], [4,5,6]])
             sage: Q = V.quotient( [V.0 + V.1] ); Q
             Finitely generated module V/W over Integer Ring with invariants (0)

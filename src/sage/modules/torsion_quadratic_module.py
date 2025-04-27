@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.libs.pari
 r"""
 Finite `\ZZ`-modules with bilinear and quadratic forms
 
