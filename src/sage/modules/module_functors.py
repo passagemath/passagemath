@@ -76,7 +76,7 @@ class QuotientModuleFunctor(ConstructionFunctor):
         sage: B2 = A.submodule([2*x])
         sage: Q1 = A1 / B1
         sage: Q2 = A2 / B2
-        sage: q3 = Q1.an_element() + Q2.an_element()
+        sage: q3 = Q1.an_element() + Q2.an_element()                                    # needs sage.libs.pari
     """
     rank = 5  # ranking of functor, not rank of module
 
