@@ -1343,7 +1343,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: A = Mat(ZZ, 6)([k^2 for k in range(36)])
             sage: A.minpoly(algorithm='linbox')                                         # needs sage.libs.linbox
             x^4 - 2695*x^3 - 257964*x^2 + 1693440*x
-            sage: A.minpoly(algorithm='generic')
+            sage: A.minpoly(algorithm='generic')                                        # needs sage.libs.pari
             x^4 - 2695*x^3 - 257964*x^2 + 1693440*x
 
         On non square matrices, this method raises an ArithmeticError::
@@ -1359,22 +1359,22 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
             sage: matrix([5]).minpoly('z', 'linbox')                                    # needs sage.libs.linbox
             z - 5
-            sage: matrix([5]).minpoly('z', 'generic')
+            sage: matrix([5]).minpoly('z', 'generic')                                   # needs sage.libs.pari
             z - 5
 
             sage: matrix([]).minpoly('y', 'linbox')                                     # needs sage.libs.linbox
             1
-            sage: matrix([]).minpoly('y', 'generic')
+            sage: matrix([]).minpoly('y', 'generic')                                    # needs sage.libs.pari
             1
 
             sage: matrix(ZZ, 2).minpoly('x', 'linbox')                                  # needs sage.libs.linbox
             x
-            sage: matrix(ZZ, 2).minpoly('x', 'generic')
+            sage: matrix(ZZ, 2).minpoly('x', 'generic')                                 # needs sage.libs.pari
             x
 
         Consistency on random inputs::
 
-            sage: for _ in range(100):                                                  # needs sage.libs.linbox
+            sage: for _ in range(100):                                                  # needs sage.libs.linbox sage.libs.pari
             ....:     dim = randint(1, 20)
             ....:     m  = random_matrix(ZZ, dim)
             ....:     m._clear_cache(); ans_generic = m.minpoly(algorithm='generic')
@@ -1487,10 +1487,10 @@ cdef class Matrix_integer_dense(Matrix_dense):
         EXAMPLES::
 
             sage: M = Matrix(ZZ, 2, [1,2,-2,3])
-            sage: M._mod_int(2)
+            sage: M._mod_int(2)                                                         # needs sage.libs.linbox
             [1 0]
             [0 1]
-            sage: M._mod_int(1000000)
+            sage: M._mod_int(1000000)                                                   # needs sage.libs.linbox
             [     1      2]
             [999998      3]
         """
@@ -1507,7 +1507,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         Check that bug discovered in :issue:`29839` is fixed::
 
             sage: M = Matrix(ZZ, [[0,1],[0,1]])
-            sage: M._mod_int(2).transpose()
+            sage: M._mod_int(2).transpose()                                             # needs sage.libs.linbox
             [0 0]
             [1 1]
         """
@@ -2528,16 +2528,16 @@ cdef class Matrix_integer_dense(Matrix_dense):
         magnitude of the entries. ::
 
             sage: A = random_matrix(ZZ, 18, 11)
-            sage: A._right_kernel_matrix(algorithm='default')[0]
+            sage: A._right_kernel_matrix(algorithm='default')[0]                        # needs sage.libs.pari
             'computed-pari-int'
             sage: A = random_matrix(ZZ, 18, 11, x = 10^200)
-            sage: A._right_kernel_matrix(algorithm='default')[0]
+            sage: A._right_kernel_matrix(algorithm='default')[0]                        # needs sage.libs.iml
             'computed-iml-int'
             sage: A = random_matrix(ZZ, 60, 60)
-            sage: A._right_kernel_matrix(algorithm='default')[0]
+            sage: A._right_kernel_matrix(algorithm='default')[0]                        # needs sage.libs.iml
             'computed-iml-int'
             sage: A = random_matrix(ZZ, 60, 55)
-            sage: A._right_kernel_matrix(algorithm='default')[0]
+            sage: A._right_kernel_matrix(algorithm='default')[0]                        # needs sage.libs.pari
             'computed-pari-int'
 
         TESTS:
@@ -3224,6 +3224,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         r"""
         EXAMPLES::
 
+            sage: # needs sage.libs.cmr
             sage: M = matrix(ZZ, [[1, 0, 0], [0, 1, 0]]); M
             [1 0 0]
             [0 1 0]
@@ -3853,16 +3854,16 @@ cdef class Matrix_integer_dense(Matrix_dense):
         EXAMPLES::
 
             sage: m = matrix(ZZ, 5, 5, [1+i+i^2 for i in range(25)])
-            sage: m._rational_kernel_iml()
+            sage: m._rational_kernel_iml()                                              # needs sage.libs.iml
             [ 1  3]
             [-3 -8]
             [ 3  6]
             [-1  0]
             [ 0 -1]
 
-            sage: V1 = m._rational_kernel_iml().column_space().change_ring(QQ)
+            sage: V1 = m._rational_kernel_iml().column_space().change_ring(QQ)          # needs sage.libs.iml
             sage: V2 = m._rational_kernel_flint().column_space().change_ring(QQ)
-            sage: assert V1 == V2
+            sage: assert V1 == V2                                                       # needs sage.libs.iml
         """
         from .matrix_integer_iml import _rational_kernel_iml
         return _rational_kernel_iml(self)
@@ -3887,10 +3888,10 @@ cdef class Matrix_integer_dense(Matrix_dense):
             [     0  -1728      0]
             [     0      0  -1728]
 
-            sage: from sage.matrix.matrix_integer_iml import _rational_kernel_iml
-            sage: V1 = _rational_kernel_iml(m).column_space().change_ring(QQ)
+            sage: from sage.matrix.matrix_integer_iml import _rational_kernel_iml       # needs sage.libs.iml
+            sage: V1 = _rational_kernel_iml(m).column_space().change_ring(QQ)           # needs sage.libs.iml
             sage: V2 = m._rational_kernel_flint().column_space().change_ring(QQ)
-            sage: assert V1 == V2
+            sage: assert V1 == V2                                                       # needs sage.libs.iml
         """
         if self._nrows == 0 or self._ncols == 0:
             return self.matrix_space(self._ncols, 0).zero_matrix()
@@ -3937,13 +3938,13 @@ cdef class Matrix_integer_dense(Matrix_dense):
         EXAMPLES::
 
             sage: a = matrix(ZZ,3,[1,2,5, 3,7,8, 2,2,1])
-            sage: b, d = a._invert_iml(); b,d
+            sage: b, d = a._invert_iml(); b,d                                           # needs sage.libs.iml
             (
             [  9  -8  19]
             [-13   9  -7]
             [  8  -2  -1], 23
             )
-            sage: a*b
+            sage: a*b                                                                   # needs sage.libs.iml
             [23  0  0]
             [ 0 23  0]
             [ 0  0 23]
@@ -4237,27 +4238,27 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
             sage: A = matrix(ZZ,4,4,[0, 1, -2, -1, -1, 1, 0, 2, 2, 2, 2, -1, 0, 2, 2, 1])
             sage: B = matrix(ZZ,3,4, [-1, 1, 1, 0, 2, 0, -2, -1, 0, -2, -2, -2])
-            sage: C,d = A._solve_iml(B,right=False); C
+            sage: C,d = A._solve_iml(B, right=False); C                                 # needs sage.libs.iml
             [  6 -18 -15  27]
             [  0  24  24 -36]
             [  4 -12  -6  -2]
 
         ::
 
-            sage: d
+            sage: d                                                                     # needs sage.libs.iml
             12
 
         ::
 
-            sage: C*A == d*B
+            sage: C*A == d*B                                                            # needs sage.libs.iml
             True
 
         ::
 
             sage: A = matrix(ZZ,4,4,[0, 1, -2, -1, -1, 1, 0, 2, 2, 2, 2, -1, 0, 2, 2, 1])
             sage: B = matrix(ZZ,4,3, [-1, 1, 1, 0, 2, 0, -2, -1, 0, -2, -2, -2])
-            sage: C,d = A._solve_iml(B)
-            sage: C
+            sage: C,d = A._solve_iml(B)                                                 # needs sage.libs.iml
+            sage: C                                                                     # needs sage.libs.iml
             [ 12  40  28]
             [-12  -4  -4]
             [ -6 -25 -16]
@@ -4265,27 +4266,27 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         ::
 
-            sage: d
+            sage: d                                                                     # needs sage.libs.iml
             12
 
         ::
 
-            sage: A*C == d*B
+            sage: A*C == d*B                                                            # needs sage.libs.iml
             True
 
         Test wrong dimensions::
 
             sage: A = random_matrix(ZZ, 4, 4)
             sage: B = random_matrix(ZZ, 2, 3)
-            sage: B._solve_iml(A)
+            sage: B._solve_iml(A)                                                       # needs sage.libs.iml
             Traceback (most recent call last):
             ...
             ValueError: self must be a square matrix
-            sage: A._solve_iml(B, right=False)
+            sage: A._solve_iml(B, right=False)                                          # needs sage.libs.iml
             Traceback (most recent call last):
             ...
             ArithmeticError: B's number of columns must match self's number of rows
-            sage: A._solve_iml(B, right=True)
+            sage: A._solve_iml(B, right=True)                                           # needs sage.libs.iml
             Traceback (most recent call last):
             ...
             ArithmeticError: B's number of rows must match self's number of columns
@@ -4295,7 +4296,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: A = random_matrix(ZZ, 2000, 2000)
             sage: B = random_matrix(ZZ, 2000, 2000)
             sage: from sage.doctest.util import ensure_interruptible_after
-            sage: with ensure_interruptible_after(2, max_wait_after_interrupt=8): A._solve_iml(B)
+            sage: with ensure_interruptible_after(2, max_wait_after_interrupt=8): A._solve_iml(B)   # needs sage.libs.iml
 
         ALGORITHM: Uses IML.
 

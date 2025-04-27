@@ -662,6 +662,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
             [1 0]
             [0 1]
 
+            sage: # needs sage.libs.iml
             sage: a = matrix(QQ, 2, [-1, 5, 12, -3])
             sage: a.inverse(algorithm='iml')
             [1/19 5/57]
@@ -671,7 +672,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
             [0 1]
 
             sage: a = matrix(QQ, 4, primes_first_n(16))
-            sage: a.inverse(algorithm='pari')
+            sage: a.inverse(algorithm='pari')                                           # needs sage.libs.pari
             [   3/11  -12/55    -1/5    2/11]
             [  -5/11   -2/55    3/10   -3/22]
             [ -13/22 307/440   -1/10   -9/88]
@@ -684,11 +685,11 @@ cdef class Matrix_rational_dense(Matrix_dense):
             Traceback (most recent call last):
             ...
             ZeroDivisionError: input matrix must be nonsingular
-            sage: a.inverse(algorithm='iml')
+            sage: a.inverse(algorithm='iml')                                            # needs sage.libs.iml
             Traceback (most recent call last):
             ...
             ZeroDivisionError: input matrix must be nonsingular
-            sage: a.inverse(algorithm='pari')
+            sage: a.inverse(algorithm='pari')                                           # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             ZeroDivisionError: input matrix must be nonsingular
@@ -807,6 +808,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         Check that the four algorithms agree::
 
+            sage: # needs sage.libs.pari
             sage: for _ in range(20):
             ....:     dim = randint(0, 30)
             ....:     m = random_matrix(QQ, dim, num_bound=10, den_bound=10)
@@ -1068,6 +1070,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         ::
 
+            sage: # needs sage.libs.pari
             sage: a = matrix(QQ, 4, [1..4^2])
             sage: factor(a.minpoly())
             x * (x^2 - 34*x - 80)
@@ -1085,7 +1088,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         Check consistency::
 
-            sage: for _ in range(100):                                                  # needs sage.libs.linbox
+            sage: for _ in range(100):                                                  # needs sage.libs.linbox sage.libs.pari
             ....:     dim = randint(0, 10)
             ....:     m = random_matrix(QQ, dim, num_bound=8, den_bound=8)
             ....:     p_linbox = m.charpoly(algorithm='linbox'); m._clear_cache()
@@ -1361,7 +1364,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
             ....:                 [0, -1, -4, 6, -2],
             ....:                 [4, -1, 0, -6, 2]])
             sage: result = A._right_kernel_matrix()
-            sage: result[0]
+            sage: result[0]                                               # needs sage.libs.iml
             'computed-iml-rational'
             sage: result[1]
             [-1  2 -2 -1  0]
@@ -2473,7 +2476,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         TESTS::
 
-            sage: for _ in range(100):
+            sage: for _ in range(100):                                                  # needs sage.libs.pari
             ....:     dim = randint(0, 30)
             ....:     m = random_matrix(QQ, dim, num_bound=2, density=0.5)
             ....:     r_pari = m.rank('pari'); m._clear_cache()
