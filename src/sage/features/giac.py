@@ -7,7 +7,6 @@ from . import Executable, FeatureTestResult, PythonModule
 from .join_feature import JoinFeature
 
 
-
 class Giac(Executable):
     r"""
     A :class:`~sage.features.Feature` describing the presence of :ref:`giac <spkg_giac>`.

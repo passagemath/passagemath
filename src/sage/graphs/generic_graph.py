@@ -464,8 +464,10 @@ try:
 except ImportError:
     from sage.rings.real_double import RDF as Reals
 
+
 def _weight_if_real(x):
     return x if x in Reals else 1
+
 
 def _weight_1(x):
     return 1

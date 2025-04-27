@@ -17,6 +17,7 @@ from . import Executable, PythonModule
 from . import FeatureTestResult
 from .join_feature import JoinFeature
 
+
 class Macaulay2(Executable):
     r"""
     A :class:`~sage.features.Feature` describing the presence of :ref:`macaulay2 <spkg_macaulay2>`.

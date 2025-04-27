@@ -18,7 +18,6 @@ from . import Executable, FeatureTestResult, PythonModule
 from .join_feature import JoinFeature
 
 
-
 class FriCAS(Executable):
     r"""
     A :class:`~sage.features.Feature` which checks for the :ref:`fricas <fricas>` binary.
