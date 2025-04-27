@@ -561,6 +561,32 @@ class sage__libs__homfly(JoinFeature):
                              spkg='sagemath_homfly', type='standard')
 
 
+class sage__libs__iml(JoinFeature):
+    r"""
+    A :class:`sage.features.Feature` describing the presence of :mod:`sage.matrix.matrix_integer_iml`.
+
+    In addition to the modularization purposes that this tag serves,
+    it also provides attribution to the upstream project.
+
+    TESTS::
+
+        sage: from sage.features.sagemath import sage__libs__iml
+        sage: sage__libs__iml().is_present()                                           # needs sage.libs.iml
+        FeatureTestResult('sage.libs.iml', True)
+    """
+    def __init__(self):
+        r"""
+        TESTS::
+
+            sage: from sage.features.sagemath import sage__libs__iml
+            sage: isinstance(sage__libs__iml(), sage__libs__iml)
+            True
+        """
+        JoinFeature.__init__(self, 'sage.libs.iml',
+                             [PythonModule('sage.matrix.matrix_integer_iml')],
+                             spkg='sagemath_linbox', type='standard')
+
+
 class sage__libs__linbox(JoinFeature):
     r"""
     A :class:`sage.features.Feature` describing the presence of :mod:`sage.libs.linbox`
@@ -1315,6 +1341,7 @@ def all_features():
             sage__libs__gap(),
             sage__libs__giac(),
             sage__libs__homfly(),
+            sage__libs__iml(),
             sage__libs__linbox(),
             sage__libs__m4ri(),
             sage__libs__ntl(),
