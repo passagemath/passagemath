@@ -473,6 +473,7 @@ class CenterUEA(CombinatorialFreeModule):
 
     An example with a free 4-step nilpotent Lie algebras on 2 generators::
 
+        sage: # needs sage.combinat
         sage: L = LieAlgebra(QQ, 2, step=4); L
         Free Nilpotent Lie algebra on 8 generators
          (X_1, X_2, X_12, X_112, X_122, X_1112, X_1122, X_1222) over Rational Field

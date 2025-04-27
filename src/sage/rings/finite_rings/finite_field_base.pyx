@@ -1667,9 +1667,9 @@ cdef class FiniteField(Field):
         We check that :issue:`23801` is resolved::
 
             sage: k.<a> = GF(5^240)
-            sage: l, inc = k.subfield(3, 'z', map=True); l
+            sage: l, inc = k.subfield(3, 'z', map=True); l                              # needs sage.modules
             Finite Field in z of size 5^3
-            sage: inc
+            sage: inc                                                                   # needs sage.modules
             Ring morphism:
               From: Finite Field in z of size 5^3
               To:   Finite Field in a of size 5^240
@@ -1678,11 +1678,12 @@ cdef class FiniteField(Field):
         There is no coercion since we can't ensure compatibility with larger
         fields in this case::
 
-            sage: k.has_coerce_map_from(l)
+            sage: k.has_coerce_map_from(l)                                              # needs sage.modules
             False
 
         But there is still a compatibility among the generators chosen for the subfields::
 
+            sage: # needs sage.modules
             sage: ll, iinc = k.subfield(12, 'w', map=True)
             sage: x = iinc(ll.gen())^((5^12-1)/(5^3-1))
             sage: x.minimal_polynomial() == l.modulus()

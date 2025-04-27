@@ -237,8 +237,8 @@ cdef class FiniteFieldElement_pari_ffelt(FinitePolyExtElement):
         2
         sage: a.parent()
         Finite Field in a of size 3^2
-        sage: V = k.vector_space(map=False); v = V((1,2))
-        sage: k(v)
+        sage: V = k.vector_space(map=False); v = V((1,2))                               # needs sage.modules
+        sage: k(v)                                                                      # needs sage.modules
         2*a + 1
 
     We create elements using a list and verify that :issue:`10486` has

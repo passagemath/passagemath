@@ -255,7 +255,7 @@
     },
     "sage.categories.commutative_rings": {
         "failed": true,
-        "ntests": 117
+        "ntests": 115
     },
     "sage.categories.complete_discrete_valuation": {
         "ntests": 30
@@ -1577,7 +1577,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "ntests": 184
+        "ntests": 188
     },
     "sage.features.sat": {
         "ntests": 16
@@ -1844,7 +1844,7 @@
         "ntests": 8
     },
     "sage.graphs.graph_generators": {
-        "ntests": 200
+        "ntests": 183
     },
     "sage.graphs.graph_generators_pyx": {
         "ntests": 7
@@ -2073,7 +2073,6 @@
         "ntests": 23
     },
     "sage.homology.matrix_utils": {
-        "failed": true,
         "ntests": 5
     },
     "sage.interfaces.abc": {
@@ -3560,11 +3559,10 @@
     },
     "sage.rings.tate_algebra": {
         "failed": true,
-        "ntests": 262
+        "ntests": 238
     },
     "sage.rings.tate_algebra_element": {
-        "failed": true,
-        "ntests": 672
+        "ntests": 662
     },
     "sage.rings.tate_algebra_ideal": {
         "failed": true,

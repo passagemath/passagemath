@@ -58,6 +58,7 @@ class QuotientModuleFunctor(ConstructionFunctor):
 
     We can construct quotients from different modules::
 
+        sage: # needs sage.libs.pari
         sage: F((1/2)*ZZ^2)
         Finitely generated module V/W over Integer Ring with invariants (4, 4)
         sage: F(ZZ^2)
@@ -75,7 +76,7 @@ class QuotientModuleFunctor(ConstructionFunctor):
         sage: B2 = A.submodule([2*x])
         sage: Q1 = A1 / B1
         sage: Q2 = A2 / B2
-        sage: q3 = Q1.an_element() + Q2.an_element()
+        sage: q3 = Q1.an_element() + Q2.an_element()                                    # needs sage.libs.pari
     """
     rank = 5  # ranking of functor, not rank of module
 
@@ -178,8 +179,8 @@ class QuotientModuleFunctor(ConstructionFunctor):
             sage: F1 = Q1.construction()[0]
             sage: F2 = Q2.construction()[0]
             sage: F3 = F1.merge(F2)
-            sage: q3 = Q1.an_element() + Q2.an_element()
-            sage: q3.parent() == F3(A1 + A2)
+            sage: q3 = Q1.an_element() + Q2.an_element()                                # needs sage.libs.pari
+            sage: q3.parent() == F3(A1 + A2)                                            # needs sage.libs.pari
             True
 
             sage: G = A1.construction()[0]; G

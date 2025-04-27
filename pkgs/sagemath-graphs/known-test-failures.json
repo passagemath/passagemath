@@ -1122,7 +1122,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "ntests": 177
+        "ntests": 181
     },
     "sage.features.sat": {
         "ntests": 16
@@ -1373,7 +1373,7 @@
         "ntests": 8
     },
     "sage.graphs.graph_generators": {
-        "ntests": 192
+        "ntests": 175
     },
     "sage.graphs.graph_generators_pyx": {
         "ntests": 7
@@ -1936,7 +1936,7 @@
         "ntests": 14
     },
     "sage.rings.finite_rings.finite_field_base": {
-        "ntests": 32
+        "ntests": 35
     },
     "sage.rings.finite_rings.finite_field_constructor": {
         "ntests": 22
@@ -2253,7 +2253,7 @@
         "ntests": 2
     },
     "sage.sandpiles.sandpile": {
-        "ntests": 90
+        "ntests": 91
     },
     "sage.schemes.affine.affine_homset": {
         "ntests": 52

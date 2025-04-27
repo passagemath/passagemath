@@ -1420,7 +1420,7 @@ class QuadraticForm(SageObject):
         EXAMPLES::
 
             sage: Q = QuadraticForm(ZZ, 2, [1,2,3])
-            sage: Q.adjoint_primitive()
+            sage: Q.adjoint_primitive()                                                 # needs sage.libs.pari
             Quadratic form in 2 variables over Integer Ring with coefficients:
             [ 3 -2 ]
             [ *  1 ]

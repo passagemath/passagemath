@@ -421,7 +421,8 @@ class Polyhedron_base7(Polyhedron_base6):
 
         Testing inexact rings::
 
-            sage: P = Polyhedron(vertices=[[0,0], [1,0], [0,1]],base_ring=RDF)
+            sage: # needs cddexec_gmp
+            sage: P = Polyhedron(vertices=[[0,0], [1,0], [0,1]], base_ring=RDF)
             sage: P.volume(engine='latte')
             Traceback (most recent call last):
             ...
@@ -805,7 +806,7 @@ class Polyhedron_base7(Polyhedron_base6):
         If the polyhedron has floating point coordinates, an inexact result can
         be obtained if we transform to rational coordinates::
 
-            sage: # needs sage.rings.real_interval_field
+            sage: # needs cddexec_gmp sage.rings.real_interval_field
             sage: P = 1.4142*polytopes.cube()
             sage: P_QQ = Polyhedron(vertices=[[QQ(vi) for vi in v] for v in P.vertex_generator()])
             sage: RDF(P_QQ.integrate(x^2*y^2*z^2))                      # optional - latte_int

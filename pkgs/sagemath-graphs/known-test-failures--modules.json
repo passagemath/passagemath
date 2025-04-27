@@ -1493,7 +1493,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "ntests": 184
+        "ntests": 188
     },
     "sage.features.sat": {
         "ntests": 16
@@ -1760,7 +1760,7 @@
     },
     "sage.graphs.graph_generators": {
         "failed": true,
-        "ntests": 200
+        "ntests": 183
     },
     "sage.graphs.graph_generators_pyx": {
         "ntests": 7
@@ -2143,8 +2143,7 @@
         "ntests": 160
     },
     "sage.matroids.database_collections": {
-        "failed": true,
-        "ntests": 6
+        "ntests": 2
     },
     "sage.matroids.database_matroids": {
         "ntests": 468
@@ -2156,8 +2155,7 @@
         "ntests": 48
     },
     "sage.matroids.flats_matroid": {
-        "failed": true,
-        "ntests": 107
+        "ntests": 92
     },
     "sage.matroids.graphic_matroid": {
         "ntests": 339
@@ -2166,7 +2164,6 @@
         "ntests": 648
     },
     "sage.matroids.matroid": {
-        "failed": true,
         "ntests": 986
     },
     "sage.matroids.matroids_plot_helpers": {
@@ -2459,17 +2456,8 @@
     "sage.modules.complex_double_vector": {
         "ntests": 2
     },
-    "sage.modules.fg_pid.fgp_element": {
-        "failed": true,
-        "ntests": 119
-    },
     "sage.modules.fg_pid.fgp_module": {
-        "failed": true,
-        "ntests": 435
-    },
-    "sage.modules.fg_pid.fgp_morphism": {
-        "failed": true,
-        "ntests": 117
+        "ntests": 12
     },
     "sage.modules.filtered_vector_space": {
         "ntests": 169
@@ -2494,7 +2482,7 @@
     },
     "sage.modules.free_module": {
         "failed": true,
-        "ntests": 1455
+        "ntests": 1449
     },
     "sage.modules.free_module_element": {
         "failed": true,
@@ -2516,7 +2504,7 @@
     },
     "sage.modules.free_quadratic_module_integer_symmetric": {
         "failed": true,
-        "ntests": 201
+        "ntests": 174
     },
     "sage.modules.matrix_morphism": {
         "failed": true,
@@ -2530,7 +2518,7 @@
         "ntests": 47
     },
     "sage.modules.module_functors": {
-        "ntests": 57
+        "ntests": 54
     },
     "sage.modules.multi_filtered_vector_space": {
         "ntests": 122
@@ -2549,8 +2537,7 @@
         "ntests": 91
     },
     "sage.modules.torsion_quadratic_module": {
-        "failed": true,
-        "ntests": 171
+        "ntests": 24
     },
     "sage.modules.tutorial_free_modules": {
         "ntests": 43
@@ -2643,7 +2630,6 @@
         "ntests": 16
     },
     "sage.quadratic_forms.extras": {
-        "failed": true,
         "ntests": 17
     },
     "sage.quadratic_forms.quadratic_form": {

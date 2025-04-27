@@ -10,7 +10,7 @@ AUTHORS:
 TESTS::
 
     sage: a = matrix(ZZ,2,range(4), sparse=True)
-    sage: TestSuite(a).run()
+    sage: TestSuite(a).run()                                                            # needs sage.libs.pari
     sage: Matrix(ZZ,0,0,sparse=True).inverse()
     []
 """
@@ -438,6 +438,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
             ....:                 [4, 7, 6, 5, 1, 4]],
             ....:            sparse = True)
 
+            sage: # needs sage.libs.pari
             sage: result = A._right_kernel_matrix(algorithm='pari')
             sage: result[0]
             'computed-pari-int'
@@ -823,7 +824,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
             [ 0  1  0  0]
             [ 0 -8  2 -1]
             [ 0  0  0  1]
-            sage: m.minpoly()
+            sage: m.minpoly()                                                           # needs sage.libs.pari
             x^2 - 3*x + 2
 
         TESTS::

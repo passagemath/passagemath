@@ -10444,12 +10444,12 @@ cdef class Matrix(Matrix1):
             sage: A = matrix(ZZ, 0, 0)
             sage: A
             []
-            sage: A._adjugate()
+            sage: A._adjugate()                                                         # needs sage.libs.pari
             []
             sage: A = matrix(ZZ, [[2]])
             sage: A
             [2]
-            sage: A._adjugate()
+            sage: A._adjugate()                                                         # needs sage.libs.pari
             [1]
 
         Ensure proper computation of the adjugate matrix even in the

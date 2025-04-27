@@ -93,12 +93,12 @@ def extend_to_primitive(A_input):
     EXAMPLES::
 
         sage: A = Matrix(ZZ, 3, 2, range(6))
-        sage: extend_to_primitive(A)
+        sage: extend_to_primitive(A)                                                    # needs sage.libs.pari
         [ 0  1 -1]
         [ 2  3  0]
         [ 4  5  0]
 
-        sage: extend_to_primitive([vector([1,2,3])])
+        sage: extend_to_primitive([vector([1,2,3])])                                    # needs sage.libs.pari
         [(1, 2, 3), (0, 1, 1), (-1, 0, 0)]
     """
     # Deal with a list of vectors
