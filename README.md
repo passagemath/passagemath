@@ -175,7 +175,6 @@ Table of Contents
 * [\[Windows\] Preparing the Platform](#windows-preparing-the-platform)
 * [\[macOS\] Preparing the Platform](#macos-preparing-the-platform)
 * [Instructions to Build from Source](#instructions-to-build-from-source)
-* [SageMath Docker Images](#sagemath-docker-images)
 * [Directory Layout](#directory-layout)
 * [Build System](#build-system)
 * [Relocation](#relocation)
@@ -185,15 +184,6 @@ Table of Contents
 
 Getting Started
 ---------------
-
-Those who are impatient may use prebuilt Sage available online from any of
-
-<!-- [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sagemath/sage-binder-env/master
-) &nbsp; --->
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/passagemath/passagemath/tree/main
-) &nbsp; [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-black?logo=github)](https://codespaces.new/passagemath/passagemath/tree/main)
-
-without local installation. Otherwise read on.
 
 The [Sage Installation Guide](https://doc.sagemath.org/html/en/installation/index.html)
 provides a decision tree that guides you to the type of installation
@@ -232,8 +222,8 @@ Make sure you allocate WSL sufficient RAM; 5GB is known to work, while
 2GB might be not enough for building Sage from source.
 Then all instructions for installation in Linux apply.
 
-As an alternative, you can also run Linux on Windows using Docker ([see
-below](#sagemath-docker-images)) or other virtualization solutions.
+As an alternative, you can also run Linux on Windows using Docker
+or other virtualization solutions.
 
 [macOS] Preparing the Platform
 ------------------------------
