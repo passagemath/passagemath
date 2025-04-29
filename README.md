@@ -6,16 +6,14 @@ Licence GPLv2+.
 
 It is a fork of [SageMath](https://www.sagemath.org/), created in October 2024 with the following goals:
 
-* providing [modularized installation with pip](https://github.com/sagemath/sage/issues/29705),
+* providing modularized installation with pip, thus completing a [major project started in 2020 in the Sage codebase](https://github.com/sagemath/sage/issues/29705),
 * establishing first-class membership in the scientific Python ecosystem,
 * giving [clear attribution of upstream projects](https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ),
+* providing independently usable Python interfaces to upstream libraries,
 * inviting collaborations with upstream projects,
-* [maintaining a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ),
+* [building a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ),
 * developing a port to [Pyodide](https://pyodide.org/en/stable/) for serverless deployment with Javascript,
 * developing a native Windows port.
-
-[People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
-development of SageMath since 2005, and hence of passagemath.
 
 [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
 
@@ -25,9 +23,14 @@ passagemath community
 
 Join [passagemath.discourse.group](https://passagemath.discourse.group/) for help and discussions.
 
-Join the BlueSky platform and follow https://bsky.app/profile/passagemath.org to receive announcements.
+Join the BlueSky platform and follow [@passagemath.org](https://bsky.app/profile/passagemath.org) to receive announcements.
+
+[People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
+development of SageMath since 2005, and hence of passagemath.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how you can contribute.
+
+passagemath is a major integrating force in the [mathematical software landscape](https://github.com/passagemath#passagemath-in-the-mathematical-software-landscape).
 
 
 Full installation of passagemath from binary wheels on PyPI
@@ -71,7 +74,9 @@ Authors of packages that depend on the Sage library can declare dependencies on 
 - [sage-numerical-interactive-mip](https://github.com/passagemath/sage-numerical-interactive-mip) is an example of a pure Python package that [declares dependencies](https://github.com/passagemath/sage-numerical-interactive-mip/blob/master/pyproject.toml) on four distributions: passagemath-polyhedra, passagemath-plot, passagemath-repl, and passagemath-flint.
 - [kerrgeodesic_gw](https://github.com/BlackHolePerturbationToolkit/kerrgeodesic_gw) is an example of a pure Python package that [declares optional dependencies ("extras-require")](https://github.com/BlackHolePerturbationToolkit/kerrgeodesic_gw/blob/master/setup.py#L49) on three distributions: passagemath-symbolics, passagemath-plot, and passagemath-repl.
 
-Here is an overview of the available distribution packages.
+- See https://github.com/passagemath/passagemath/issues/248 for many more examples how to change a user package to make it ready for passagemath and the Python ecosystem.
+
+Here is an overview of the distribution packages of passagemath.
 
 ### Distributions named after a basic mathematical structure
 
@@ -96,11 +101,11 @@ The packages may also cover a wide range of generalizations/applications of the 
 This makes technical sense because the dependencies will be localized to this distribution package, but it also helps give **attribution and visibility** to these libraries and projects that Sage depends on.
    | Standard packages | Optional packages  |
    | :---------------- | :----------------  |
-   | [![PyPI: passagemath-cddlib](https://img.shields.io/pypi/v/passagemath-cddlib.svg?label=passagemath-cddlib)](https://pypi.python.org/pypi/passagemath-cddlib) provides the functionality of [cddlib](https://github.com/cddlib/cddlib), the library for polyhedral representation conversion. | [![PyPI: passagemath-benzene](https://img.shields.io/pypi/v/passagemath-benzene.svg?label=passagemath-benzene)](https://pypi.python.org/pypi/passagemath-benzene)  |
+   | [![PyPI: passagemath-cddlib](https://img.shields.io/pypi/v/passagemath-cddlib.svg?label=passagemath-cddlib)](https://pypi.python.org/pypi/passagemath-cddlib) provides the functionality of [cddlib](https://github.com/cddlib/cddlib), the library for polyhedral representation conversion. | [![PyPI: passagemath-benzene](https://img.shields.io/pypi/v/passagemath-benzene.svg?label=passagemath-benzene)](https://pypi.python.org/pypi/passagemath-benzene) provides the functionality of benzene, generating nonisomorphic fusene and benzenoid graphs. |
    | [![PyPI: passagemath-cliquer](https://img.shields.io/pypi/v/passagemath-cliquer.svg?label=passagemath-cliquer)](https://pypi.python.org/pypi/passagemath-cliquer) provides the functionality of [cliquer](https://users.aalto.fi/~pat/cliquer.html), finding cliques in weighted graphs. | [![PyPI: passagemath-bliss](https://img.shields.io/pypi/v/passagemath-bliss.svg?label=passagemath-bliss)](https://pypi.python.org/pypi/passagemath-bliss) provides the functionality of [bliss](https://users.aalto.fi/~tjunttil/bliss/index.html), a tool for computing automorphism groups and canonical forms of graphs.  |
    | [![PyPI: passagemath-eclib](https://img.shields.io/pypi/v/passagemath-eclib.svg?label=passagemath-eclib)](https://pypi.python.org/pypi/passagemath-eclib) provides modules depending on [eclib](https://github.com/JohnCremona/eclib), the library for enumerating and computing with elliptic curves defined over the rational numbers. | [![PyPI: passagemath-brial](https://img.shields.io/pypi/v/passagemath-brial.svg?label=passagemath-brial)](https://pypi.python.org/pypi/passagemath-brial) provides the functionality of [BRiAl](https://github.com/BRiAl/BRiAl), a Boolean Ring Algebra implementation using binary decision diagrams, the successor to PolyBoRi.  |
-   | [![PyPI: passagemath-flint](https://img.shields.io/pypi/v/passagemath-flint.svg?label=passagemath-flint)](https://pypi.python.org/pypi/passagemath-flint) provides modules depending on [FLINT](https://flintlib.org), the Fast Library for Number Theory. | [![PyPI: passagemath-buckygen](https://img.shields.io/pypi/v/passagemath-buckygen.svg?label=passagemath-buckygen)](https://pypi.python.org/pypi/passagemath-buckygen)  |
-   | [![PyPI: passagemath-gap](https://img.shields.io/pypi/v/passagemath-gap.svg?label=passagemath-gap)](https://pypi.python.org/pypi/passagemath-gap) provides modules depending on [GAP](https://www.gap-system.org), the system for computational discrete algebra with particular emphasis on Computational Group Theory. |  [![PyPI: passagemath-cmr](https://img.shields.io/pypi/v/passagemath-cmr.svg?label=passagemath-cmr)](https://pypi.python.org/pypi/passagemath-cmr) provides the functionality of the Combinatorial Matrix Recognition library, Seymour decomposition of TU matrices etc.  |
+   | [![PyPI: passagemath-flint](https://img.shields.io/pypi/v/passagemath-flint.svg?label=passagemath-flint)](https://pypi.python.org/pypi/passagemath-flint) provides modules depending on [FLINT](https://flintlib.org), the Fast Library for Number Theory. | [![PyPI: passagemath-buckygen](https://img.shields.io/pypi/v/passagemath-buckygen.svg?label=passagemath-buckygen)](https://pypi.python.org/pypi/passagemath-buckygen) provides the functionality of buckygen, generating nonisomorphic fullerene graphs. |
+   | [![PyPI: passagemath-gap](https://img.shields.io/pypi/v/passagemath-gap.svg?label=passagemath-gap)](https://pypi.python.org/pypi/passagemath-gap) provides modules depending on [GAP](https://www.gap-system.org), the system for computational discrete algebra with particular emphasis on Computational Group Theory. |  [![PyPI: passagemath-cmr](https://img.shields.io/pypi/v/passagemath-cmr.svg?label=passagemath-cmr)](https://pypi.python.org/pypi/passagemath-cmr) provides the functionality of the [Combinatorial Matrix Recognition library](https://discopt.github.io/cmr/), Seymour decomposition of TU matrices etc.  |
    | [![PyPI: passagemath-gfan](https://img.shields.io/pypi/v/passagemath-gfan.svg?label=passagemath-gfan)](https://pypi.python.org/pypi/passagemath-gfan) provides the functionality of [gfan](https://users-math.au.dk/jensen/software/gfan/gfan.html), computing Groebner fans and tropical varieties. | [![PyPI: passagemath-coxeter3](https://img.shields.io/pypi/v/passagemath-coxeter3.svg?label=passagemath-coxeter3)](https://pypi.python.org/pypi/passagemath-coxeter3)  |
    | [![PyPI: passagemath-giac](https://img.shields.io/pypi/v/passagemath-giac.svg?label=passagemath-giac)](https://pypi.python.org/pypi/passagemath-giac) provides the functionality of [Giac](http://www-fourier.ujf-grenoble.fr/~parisse/giac.html), a general purpose computer algebra system. | [![PyPI: passagemath-frobby](https://img.shields.io/pypi/v/passagemath-frobby.svg?label=passagemath-frobby)](https://pypi.python.org/pypi/passagemath-frobby)  |
    | [![PyPI: passagemath-glpk](https://img.shields.io/pypi/v/passagemath-glpk.svg?label=passagemath-glpk)](https://pypi.python.org/pypi/passagemath-glpk) provides a mixed integer linear optimization backend using [GLPK](http://www.gnu.org/software/glpk), the GNU Linear Programming Kit. | [![PyPI: passagemath-glucose](https://img.shields.io/pypi/v/passagemath-glucose.svg?label=passagemath-glucose)](https://pypi.python.org/pypi/passagemath-glucose)  |
