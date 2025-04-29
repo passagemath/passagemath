@@ -15,7 +15,7 @@ It is a fork of [SageMath](https://www.sagemath.org/), created in October 2024 w
 * developing a native Windows port.
 
 [People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
-development of SageMath, and hence of passagemath.
+development of SageMath since 2005, and hence of passagemath.
 
 [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
 
@@ -25,11 +25,21 @@ passagemath community
 
 Join [passagemath.discourse.group](https://passagemath.discourse.group/) for help and discussions.
 
+Join the BlueSky platform and follow https://bsky.app/profile/passagemath.org to receive announcements.
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how you can contribute.
 
 
-Full installation
------------------
+Full installation of passagemath from binary wheels on PyPI
+-----------------------------------------------------------
+
+passagemath attempts to support all major Linux distributions and recent versions of
+macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
+virtualization.
+
+Complete sets of binary wheels are provided on PyPI for Python versions 3.9.x-3.12.x.
+Python 3.13.x is also supported, but some third-party packages are still missing wheels,
+so compilation from source is triggered for those.
 
 Unless you need to install passagemath into a specific existing environment, we recommend
 to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.12.x),
@@ -40,54 +50,21 @@ for example `~/passagemath-venv/`:
             $ python3 -m venv ~/passagemath-venv
             $ source ~/passagemath-venv/bin/activate
 
-Next, if you want to build from PyPI, use the following command:
+Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
 
-            passagemath $ export SAGE_CONF_TARGETS=build
+            $ pip install -v --prefer-binary passagemath-standard
 
-If you want to build from a local clone of the passagemath repository instead,
-use the following command first.
+Start the Sage REPL:
 
-            passagemath $ export SAGE_ROOT=$(pwd)
-            passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
-            passagemath $ export SAGE_CONF_TARGETS=build-local
+            $ sage
 
-As the first installation step, install [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf),
-which builds various prerequisite non-Python packages in a subdirectory of `~/.sage/`.
-The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
+Alternatively, use a Python or IPython REPL, or use a Python or Sage kernel in Jupyter.
 
-            (passagemath-venv) $ python3 -m pip install -v passagemath-conf
-
-After a successful installation, a wheelhouse provides various Python packages.
-You can list the wheels using the command:
-
-            (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
-
-If this gives an error saying that `sage-config` is not found, check any messages
-that the `pip install` command may have printed. You may need to adjust your `PATH`,
-for example by:
-
-            $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
-
-Now install the packages from the wheelhouse:
-
-            (passagemath-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl
-
-Next, install the [![PyPI: passagemath-setup](https://img.shields.io/pypi/v/passagemath-setup.svg?label=passagemath-setup)](https://pypi.python.org/pypi/passagemath-setup) package:
-
-            (passagemath-venv) $ python3 -m pip install passagemath-setup
-
-Finally, install the Sage library from the package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard):
-
-            (passagemath-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
-
-The above instructions install the latest stable release of passagemath.
-To install the latest development version instead, add the switch `--pre` to all invocations of
-`python3 -m pip install`.
 
 Modularized distributions
 -------------------------
 
-passagemath provides the Sage library in a number of distributions (pip-installable packages) that can be installed separately.
+As the installation using pip shows, passagemath provides the Sage library in a large number of distributions (pip-installable packages) that can also be installed separately.
 
 Authors of packages that depend on the Sage library can declare dependencies on these distributions. The benefit for users of the package: There is no longer a need to first install Sage. Instead, the parts of the Sage library that are needed by the package are automatically installed. Thus, the package becomes a first-class member of the Python ecosystem.
 
@@ -121,9 +98,9 @@ This makes technical sense because the dependencies will be localized to this di
    | :---------------- | :----------------  |
    | [![PyPI: passagemath-cddlib](https://img.shields.io/pypi/v/passagemath-cddlib.svg?label=passagemath-cddlib)](https://pypi.python.org/pypi/passagemath-cddlib) provides the functionality of [cddlib](https://github.com/cddlib/cddlib), the library for polyhedral representation conversion. | [![PyPI: passagemath-benzene](https://img.shields.io/pypi/v/passagemath-benzene.svg?label=passagemath-benzene)](https://pypi.python.org/pypi/passagemath-benzene)  |
    | [![PyPI: passagemath-cliquer](https://img.shields.io/pypi/v/passagemath-cliquer.svg?label=passagemath-cliquer)](https://pypi.python.org/pypi/passagemath-cliquer) provides the functionality of [cliquer](https://users.aalto.fi/~pat/cliquer.html), finding cliques in weighted graphs. | [![PyPI: passagemath-bliss](https://img.shields.io/pypi/v/passagemath-bliss.svg?label=passagemath-bliss)](https://pypi.python.org/pypi/passagemath-bliss) provides the functionality of [bliss](https://users.aalto.fi/~tjunttil/bliss/index.html), a tool for computing automorphism groups and canonical forms of graphs.  |
-   | [![PyPI: passagemath-eclib](https://img.shields.io/pypi/v/passagemath-eclib.svg?label=passagemath-eclib)](https://pypi.python.org/pypi/passagemath-eclib) provides modules depending on [eclib](https://github.com/JohnCremona/eclib), the library for enumerating and computing with elliptic curves defined over the rational numbers. |   |
-   | [![PyPI: passagemath-flint](https://img.shields.io/pypi/v/passagemath-flint.svg?label=passagemath-flint)](https://pypi.python.org/pypi/passagemath-flint) provides modules depending on [FLINT](https://flintlib.org), the Fast Library for Number Theory. | [![PyPI: passagemath-brial](https://img.shields.io/pypi/v/passagemath-brial.svg?label=passagemath-brial)](https://pypi.python.org/pypi/passagemath-brial) provides the functionality of [BRiAl](https://github.com/BRiAl/BRiAl), a Boolean Ring Algebra implementation using binary decision diagrams, the successor to PolyBoRi.  |
-   | [![PyPI: passagemath-gap](https://img.shields.io/pypi/v/passagemath-gap.svg?label=passagemath-gap)](https://pypi.python.org/pypi/passagemath-gap) provides modules depending on [GAP](https://www.gap-system.org), the system for computational discrete algebra with particular emphasis on Computational Group Theory. | [![PyPI: passagemath-buckygen](https://img.shields.io/pypi/v/passagemath-buckygen.svg?label=passagemath-buckygen)](https://pypi.python.org/pypi/passagemath-buckygen)  |
+   | [![PyPI: passagemath-eclib](https://img.shields.io/pypi/v/passagemath-eclib.svg?label=passagemath-eclib)](https://pypi.python.org/pypi/passagemath-eclib) provides modules depending on [eclib](https://github.com/JohnCremona/eclib), the library for enumerating and computing with elliptic curves defined over the rational numbers. | [![PyPI: passagemath-brial](https://img.shields.io/pypi/v/passagemath-brial.svg?label=passagemath-brial)](https://pypi.python.org/pypi/passagemath-brial) provides the functionality of [BRiAl](https://github.com/BRiAl/BRiAl), a Boolean Ring Algebra implementation using binary decision diagrams, the successor to PolyBoRi.  |
+   | [![PyPI: passagemath-flint](https://img.shields.io/pypi/v/passagemath-flint.svg?label=passagemath-flint)](https://pypi.python.org/pypi/passagemath-flint) provides modules depending on [FLINT](https://flintlib.org), the Fast Library for Number Theory. | [![PyPI: passagemath-buckygen](https://img.shields.io/pypi/v/passagemath-buckygen.svg?label=passagemath-buckygen)](https://pypi.python.org/pypi/passagemath-buckygen)  |
+   | [![PyPI: passagemath-gap](https://img.shields.io/pypi/v/passagemath-gap.svg?label=passagemath-gap)](https://pypi.python.org/pypi/passagemath-gap) provides modules depending on [GAP](https://www.gap-system.org), the system for computational discrete algebra with particular emphasis on Computational Group Theory. |  [![PyPI: passagemath-cmr](https://img.shields.io/pypi/v/passagemath-cmr.svg?label=passagemath-cmr)](https://pypi.python.org/pypi/passagemath-cmr) provides the functionality of the Combinatorial Matrix Recognition library, Seymour decomposition of TU matrices etc.  |
    | [![PyPI: passagemath-gfan](https://img.shields.io/pypi/v/passagemath-gfan.svg?label=passagemath-gfan)](https://pypi.python.org/pypi/passagemath-gfan) provides the functionality of [gfan](https://users-math.au.dk/jensen/software/gfan/gfan.html), computing Groebner fans and tropical varieties. | [![PyPI: passagemath-coxeter3](https://img.shields.io/pypi/v/passagemath-coxeter3.svg?label=passagemath-coxeter3)](https://pypi.python.org/pypi/passagemath-coxeter3)  |
    | [![PyPI: passagemath-giac](https://img.shields.io/pypi/v/passagemath-giac.svg?label=passagemath-giac)](https://pypi.python.org/pypi/passagemath-giac) provides the functionality of [Giac](http://www-fourier.ujf-grenoble.fr/~parisse/giac.html), a general purpose computer algebra system. | [![PyPI: passagemath-frobby](https://img.shields.io/pypi/v/passagemath-frobby.svg?label=passagemath-frobby)](https://pypi.python.org/pypi/passagemath-frobby)  |
    | [![PyPI: passagemath-glpk](https://img.shields.io/pypi/v/passagemath-glpk.svg?label=passagemath-glpk)](https://pypi.python.org/pypi/passagemath-glpk) provides a mixed integer linear optimization backend using [GLPK](http://www.gnu.org/software/glpk), the GNU Linear Programming Kit. | [![PyPI: passagemath-glucose](https://img.shields.io/pypi/v/passagemath-glucose.svg?label=passagemath-glucose)](https://pypi.python.org/pypi/passagemath-glucose)  |
@@ -165,59 +142,33 @@ This makes technical sense because the dependencies will be localized to this di
 
 
 
-Table of Contents
------------------
+Building from Source: Table of Contents
+---------------------------------------
 
-* [Getting Started](#getting-started)
+**The remainder of this README contains self-contained instructions for building passagemath from source.**
+This requires you to clone the git repository (as described in this README).
+
 * [Supported Platforms](#supported-platforms)
 * [\[Windows\] Preparing the Platform](#windows-preparing-the-platform)
 * [\[macOS\] Preparing the Platform](#macos-preparing-the-platform)
-* [Instructions to Build from Source](#instructions-to-build-from-source)
-* [SageMath Docker Images](#sagemath-docker-images)
+* [Preparation for Building from Source](#preparation-for-building-from-source)
+* [Full Installation from Source as passagemath](#full-installation-from-source-as-passagemath)
+* [Traditional Installation from Source as Sage-the-Distribution](#traditional-installation-from-source-as-sage-the-distribution)
 * [Directory Layout](#directory-layout)
-* [Build System](#build-system)
-* [Relocation](#relocation)
-* [Redistribution](#redistribution)
-* [Build System](#build-system)
-* [Changes to Included Software](#changes-to-included-software)
-
-Getting Started
----------------
-
-Those who are impatient may use prebuilt Sage available online from any of
-
-<!-- [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sagemath/sage-binder-env/master
-) &nbsp; --->
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/passagemath/passagemath/tree/main
-) &nbsp; [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-black?logo=github)](https://codespaces.new/passagemath/passagemath/tree/main)
-
-without local installation. Otherwise read on.
-
-The [Sage Installation Guide](https://doc.sagemath.org/html/en/installation/index.html)
-provides a decision tree that guides you to the type of installation
-that will work best for you. This includes building from source,
-obtaining Sage from a package manager, using a container image, or using
-Sage in the cloud.
-
-**This README contains self-contained instructions for building Sage from source.**
-This requires you to clone the git repository (as described in this README) or download the
-[sources](https://www.sagemath.org/download-source.html) in the form
-of a tarball.
 
 Supported Platforms
 -------------------
 
-Sage attempts to support all major Linux distributions, recent versions of
-macOS, and Windows (using Windows Subsystem for Linux or
-virtualization).
+passagemath attempts to support all major Linux distributions and recent versions of
+macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
+virtualization.
 
 Detailed information on supported platforms for a specific version of Sage
 can be found in the section _Availability and installation help_ of the
 [release notes for this version](https://github.com/passagemath/passagemath/releases).
 
-We highly appreciate contributions to Sage that fix portability bugs
-and help port Sage to new platforms; let us know at the [sage-devel
-mailing list](https://groups.google.com/group/sage-devel).
+We highly appreciate contributions to passagemath that fix portability bugs
+and help port Sage to new platforms.
 
 [Windows] Preparing the Platform
 --------------------------------
@@ -230,8 +181,8 @@ Make sure you allocate WSL sufficient RAM; 5GB is known to work, while
 2GB might be not enough for building Sage from source.
 Then all instructions for installation in Linux apply.
 
-As an alternative, you can also run Linux on Windows using Docker ([see
-below](#sagemath-docker-images)) or other virtualization solutions.
+As an alternative, you can also run Linux on Windows using Docker
+or other virtualization solutions.
 
 [macOS] Preparing the Platform
 ------------------------------
@@ -240,14 +191,10 @@ below](#sagemath-docker-images)) or other virtualization solutions.
   you set up your Mac by transferring files from an older Mac, make sure
   that the directory ``/usr/local`` does not contain an old copy of Homebrew
   (or other software) for the x86_64 architecture that you may have copied
-  over.  Note that Homebrew for the M1 is installed in ``/opt/homebrew``, not
-  ``/usr/local``.
+  over.  Note that Homebrew for Apple Silicon is installed in ``/opt/homebrew``,
+  not ``/usr/local``.
 
-- If you wish to use conda, please see the [section on
-  conda](https://doc.sagemath.org/html/en/installation/conda.html) in the Sage
-  Installation Manual for guidance.
-
-- Otherwise, we strongly recommend to use Homebrew ("the missing package
+- We strongly recommend to use Homebrew ("the missing package
   manager for macOS") from https://brew.sh/, which provides the ``gfortran``
   compiler and many libraries.
 
@@ -257,12 +204,8 @@ below](#sagemath-docker-images)) or other virtualization solutions.
   the Xcode Command Line Tools are already installed, you may want to check if
   they need to be updated by typing `softwareupdate -l`.
 
-Instructions to Build from Source
----------------------------------
-
-Like many other software packages, Sage is built from source using
-`./configure`, followed by `make`.  However, we strongly recommend to
-read the following step-by-step instructions for building Sage.
+Preparation for Building from Source
+------------------------------------
 
 The instructions cover all of Linux, macOS, and WSL.
 
@@ -273,8 +216,7 @@ in the Installation Guide.
 
 1.  Decide on the source/build directory (`SAGE_ROOT`):
 
-    - On personal computers, any subdirectory of your :envvar:`HOME`
-      directory should do.
+    - Any subdirectory of your :envvar:`HOME` directory should do.
 
     - For example, you could use `SAGE_ROOT=~/sage/sage`, which we
       will use as the running example below.
@@ -332,7 +274,7 @@ in the Installation Guide.
 
             $ cd passagemath
 
-    - [Windows] The Sage source tree contains symbolic links, and the
+    - [Windows] The passagemath source tree contains symbolic links, and the
       build will not work if Windows line endings rather than UNIX
       line endings are used.
 
@@ -344,7 +286,13 @@ in the Installation Guide.
     Either refer for this to the [section on installation from
     source](https://doc.sagemath.org/html/en/installation/source.html) in the
     Sage Installation Manual for compilations of system packages
-    that you can install. When done, skip to step 7 (bootstrapping).
+    that you can install.
+
+    The precise list of packages varies with the version of your
+    distribution. If a package is not available and gives an error, just skip it
+    and try again with the rest of the packages.
+
+    When done, skip to step 7 (bootstrapping).
 
     Alternatively, follow the more fine-grained approach below.
 
@@ -362,7 +310,7 @@ in the Installation Guide.
       more details.
 
     - Python 3.4 or later, or Python 2.7, a full installation including
-      `urllib`; but ideally version 3.9.x, 3.10.x, 3.11.x, 3.12.x, which
+      `urllib`; but ideally version 3.9.x-3.13.x, which
       will avoid having to build Sage's own copy of Python 3.
       See [build/pkgs/python3/SPKG.rst](build/pkgs/python3/SPKG.rst)
       for more details.
@@ -385,21 +333,12 @@ in the Installation Guide.
     the ImageMagick tools (e.g. the "convert" command) installed
     since some plotting functionality benefits from them.
 
-6.  [Development] If you plan to do Sage development or otherwise work with
-    ticket branches and not only releases, install the bootstrapping
-    prerequisites. See the files in the folder
+6.  Install the bootstrapping prerequisites. See the files in the folder
     [build/pkgs/_bootstrap/distros](build/pkgs/_bootstrap/distros), or
     visit
     https://doc.sagemath.org/html/en/reference/spkg/_bootstrap.html#spkg-bootstrap
 
-7.  Bootstrap the source tree using the following command:
-
-        $ make configure
-
-    (If the bootstrapping prerequisites are not installed, this command
-    will download a package providing pre-built bootstrap output instead.)
-
-8.  Sanitize the build environment. Use the command
+7.  Sanitize the build environment. Use the command
 
         $ env
 
@@ -430,6 +369,69 @@ in the Installation Guide.
       session, or after installing additional homebrew packages.  (You
       can also add it to your shell profile so that it gets run
       automatically in all future sessions.)
+
+8.  Bootstrap the source tree using the following command:
+
+        $ make configure
+
+Full Installation from Source as passagemath
+--------------------------------------------
+
+Unless you need to install passagemath into a specific existing environment, we recommend
+to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.13.x),
+for example `~/passagemath-venv/`:
+
+            $ python3 --version
+            Python 3.12.7
+            $ python3 -m venv ~/passagemath-venv
+            $ source ~/passagemath-venv/bin/activate
+
+Next, if you want to build from PyPI, use the following command:
+
+            passagemath $ export SAGE_CONF_TARGETS=build
+
+If you want to build from a local clone of the passagemath repository instead,
+use the following command first.
+
+            passagemath $ export SAGE_ROOT=$(pwd)
+            passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
+            passagemath $ export SAGE_CONF_TARGETS=build-local
+
+As the first installation step, install [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf),
+which builds various prerequisite non-Python packages in a subdirectory of `~/.sage/`.
+The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
+
+            (passagemath-venv) $ python3 -m pip install -v passagemath-conf
+
+After a successful installation, a wheelhouse provides various Python packages.
+You can list the wheels using the command:
+
+            (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
+
+If this gives an error saying that `sage-config` is not found, check any messages
+that the `pip install` command may have printed. You may need to adjust your `PATH`,
+for example by:
+
+            $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
+
+Now install the packages from the wheelhouse:
+
+            (passagemath-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl
+
+Next, install the [![PyPI: passagemath-setup](https://img.shields.io/pypi/v/passagemath-setup.svg?label=passagemath-setup)](https://pypi.python.org/pypi/passagemath-setup) package:
+
+            (passagemath-venv) $ python3 -m pip install passagemath-setup
+
+Finally, install the Sage library from the package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard):
+
+            (passagemath-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
+
+The above instructions install the latest stable release of passagemath.
+To install the latest development version instead, add the switch `--pre` to all invocations of
+`python3 -m pip install`.
+
+Traditional Installation from Source as Sage-the-Distribution
+-------------------------------------------------------------
 
 9.  Optionally, decide on the installation prefix (`SAGE_LOCAL`):
 
@@ -556,7 +558,7 @@ in the Installation Guide.
     [packages documentation page](https://doc.sagemath.org/html/en/reference/spkg/).
 
 20. Optional: Create a symlink to the installed `sage` script in a
-    directory in your `PATH`, for example `/usr/local`. This will
+    directory in your `PATH`, for example `/usr/local/bin/`. This will
     allow you to start Sage by typing `sage` from anywhere rather than
     having to either type the full path or navigate to the Sage
     directory and type `./sage`. This can be done by running:
@@ -571,15 +573,9 @@ in the Installation Guide.
 Directory Layout
 ----------------
 
-Simplified directory layout (only essential files/directories):
+Simplified directory layout:
 ```
 SAGE_ROOT                 Root directory (create by git clone)
-├── build
-│   └── pkgs              Every package is a subdirectory here
-│       ├── 4ti2/
-│       …
-│       └── zlib/
-├── configure             Top-level configure script
 ├── COPYING.txt           Copyright information
 ├── pkgs                  Source trees of Python distribution packages
 │   ├── sage-conf
@@ -594,152 +590,16 @@ SAGE_ROOT                 Root directory (create by git clone)
 │   ├── sage-sws2rst
 │   │   ├── sage_sws2rst/
 │   │   └── setup.py
+│   ...
 │   └── sagemath-standard
 │       ├── bin/
 │       ├── sage -> ../../src/sage
 │       └── setup.py
-├── local  (SAGE_LOCAL)   Installation hierarchy for non-Python packages
-│   ├── bin               Executables
-│   ├── include           C/C++ headers
-│   ├── lib               Shared libraries, architecture-dependent data
-│   ├── share             Databases, architecture-independent data, docs
-│   │   └── doc           Viewable docs of Sage and of some components
-│   └── var
-│       ├── lib/sage
-│       │   ├── installed/
-│       │   │             Records of installed non-Python packages
-│       │   ├── scripts/  Scripts for uninstalling installed packages
-│       │   └── venv-python3.9  (SAGE_VENV)
-│       │       │         Installation hierarchy (virtual environment)
-│       │       │         for Python packages
-│       │       ├── bin/  Executables and installed scripts
-│       │       ├── lib/python3.9/site-packages/
-│       │       │         Python modules/packages are installed here
-│       │       └── var/lib/sage/
-│       │           └── wheels/
-│       │                 Python wheels for all installed Python packages
-│       │
-│       └── tmp/sage/     Temporary files when building Sage
-├── logs
-│   ├── install.log       Full install log
-│   └── pkgs              Build logs of individual packages
-│       ├── alabaster-0.7.12.log
-│       …
-│       └── zlib-1.2.11.log
-├── m4                    M4 macros for generating the configure script
-│   └── *.m4
-├── Makefile              Running "make" uses this file
-├── prefix -> SAGE_LOCAL  Convenience symlink to the installation tree
-├── README.md             This file
 ├── sage                  Script to start Sage
 ├── src                   Monolithic Sage library source tree
 │   ├── bin/              Scripts that Sage uses internally
 │   ├── doc/              Sage documentation sources
 │   └── sage/             The Sage library source code
-├── upstream              Source tarballs of packages
-│   ├── Babel-2.9.1.tar.gz
-│   …
-│   └── zlib-1.2.11.tar.gz
-├── venv -> SAGE_VENV     Convenience symlink to the virtual environment
 └── VERSION.txt
 ```
 For more details see [our Developer's Guide](https://doc.sagemath.org/html/en/developer/coding_basics.html#files-and-directory-structure).
-
-Build System
-------------
-
-This is a brief summary of the Sage software distribution's build system.
-There are two components to the full Sage system--the Sage Python library
-and its associated user interfaces, and the larger software distribution of
-Sage's main dependencies (for those dependencies not supplied by the user's
-system).
-
-Sage's Python library is built and installed using a `setup.py` script as is
-standard for Python packages (Sage's `setup.py` is non-trivial, but not
-unusual).
-
-Most of the rest of the build system is concerned with building all of Sage's
-dependencies in the correct order in relation to each other.  The dependencies
-included by Sage are referred to as SPKGs (i.e. "Sage Packages") and are listed
-under `build/pkgs`.
-
-The main entrypoint to Sage's build system is the top-level `Makefile` at the
-root of the source tree.  Unlike most normal projects that use autoconf (Sage
-does as well, as described below), this `Makefile` is not generated.  Instead,
-it contains a few high-level targets and targets related to bootstrapping the
-system.  Nonetheless, we still run `make <target>` from the root of the source
-tree--targets not explicitly defined in the top-level `Makefile` are passed
-through to another Makefile under `build/make/Makefile`.
-
-The latter `build/make/Makefile` *is* generated by an autoconf-generated
-`configure` script, using the template in `build/make/Makefile.in`.  This
-includes rules for building the Sage library itself (`make sagelib`), and for
-building and installing each of Sage's dependencies (e.g. `make gf2x`).
-
-The `configure` script itself, if it is not already built, can be generated by
-running the `bootstrap` script (the latter requires _GNU autotools_ being installed).
-The top-level `Makefile` also takes care of this automatically.
-
-To summarize, running a command like `make python3` at the top-level of the
-source tree goes something like this:
-
-1.  `make python3`
-2.  run `./bootstrap` if `configure` needs updating
-3.  run `./configure` with any previously configured options if `build/make/Makefile`
-    needs updating
-4.  change directory into `build/make` and run the `install` script--this is
-    little more than a front-end to running `make -f build/make/Makefile python3`,
-    which sets some necessary environment variables and logs some information
-5.  `build/make/Makefile` contains the actual rule for building `python3`; this
-    includes building all of `python3`'s dependencies first (and their
-    dependencies, recursively); the actual package installation is performed
-    with the `sage-spkg` program
-
-Relocation
-----------
-
-It is not supported to move the `SAGE_ROOT` or `SAGE_LOCAL` directory
-after building Sage.  If you do move the directories, you will have to
-run ``make distclean`` and build Sage again from scratch.
-
-For a system-wide installation, you have to build Sage as a "normal" user
-and then as root you can change permissions. See the [Installation Guide](https://doc.sagemath.org/html/en/installation/source.html#installation-in-a-multiuser-environment)
-for further information.
-
-Redistribution
---------------
-
-Your local Sage install is almost exactly the same as any "developer"
-install. You can make changes to documentation, source, etc., and very
-easily package the complete results up for redistribution just like we
-do.
-
-1.  To make a binary distribution with your currently installed packages,
-    visit [sagemath/binary-pkg](https://github.com/sagemath/binary-pkg).
-
-2.  To make your own source tarball of Sage, type:
-
-        $ make dist
-
-    The result is placed in the directory `dist/`.
-
-Changes to Included Software
-----------------------------
-
-All software included with Sage is copyrighted by the respective authors
-and released under an open source license that is __GPL version 3 or
-later__ compatible. See [COPYING.txt](./COPYING.txt) for more details.
-
-Sources are in unmodified (as far as possible) tarballs in the
-`upstream/` directory. The remaining description, version
-information, patches, and build scripts are in the accompanying
-`build/pkgs/<packagename>` directory. This directory is
-part of the Sage git repository.
-
-<p align="center">
-   Copyright (C) 2005-2025 The Sage Development Team
-</p>
-<p align="center">
-   https://www.sagemath.org
-</p>
-
