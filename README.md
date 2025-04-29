@@ -25,6 +25,8 @@ passagemath community
 
 Join [passagemath.discourse.group](https://passagemath.discourse.group/) for help and discussions.
 
+Join the BlueSky platform and follow https://bsky.app/profile/passagemath.org to receive announcements.
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how you can contribute.
 
 
