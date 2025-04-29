@@ -563,15 +563,9 @@ in the Installation Guide.
 Directory Layout
 ----------------
 
-Simplified directory layout (only essential files/directories):
+Simplified directory layout:
 ```
 SAGE_ROOT                 Root directory (create by git clone)
-├── build
-│   └── pkgs              Every package is a subdirectory here
-│       ├── 4ti2/
-│       …
-│       └── zlib/
-├── configure             Top-level configure script
 ├── COPYING.txt           Copyright information
 ├── pkgs                  Source trees of Python distribution packages
 │   ├── sage-conf
@@ -586,61 +580,16 @@ SAGE_ROOT                 Root directory (create by git clone)
 │   ├── sage-sws2rst
 │   │   ├── sage_sws2rst/
 │   │   └── setup.py
+│   ...
 │   └── sagemath-standard
 │       ├── bin/
 │       ├── sage -> ../../src/sage
 │       └── setup.py
-├── local  (SAGE_LOCAL)   Installation hierarchy for non-Python packages
-│   ├── bin               Executables
-│   ├── include           C/C++ headers
-│   ├── lib               Shared libraries, architecture-dependent data
-│   ├── share             Databases, architecture-independent data, docs
-│   │   └── doc           Viewable docs of Sage and of some components
-│   └── var
-│       ├── lib/sage
-│       │   ├── installed/
-│       │   │             Records of installed non-Python packages
-│       │   ├── scripts/  Scripts for uninstalling installed packages
-│       │   └── venv-python3.9  (SAGE_VENV)
-│       │       │         Installation hierarchy (virtual environment)
-│       │       │         for Python packages
-│       │       ├── bin/  Executables and installed scripts
-│       │       ├── lib/python3.9/site-packages/
-│       │       │         Python modules/packages are installed here
-│       │       └── var/lib/sage/
-│       │           └── wheels/
-│       │                 Python wheels for all installed Python packages
-│       │
-│       └── tmp/sage/     Temporary files when building Sage
-├── logs
-│   ├── install.log       Full install log
-│   └── pkgs              Build logs of individual packages
-│       ├── alabaster-0.7.12.log
-│       …
-│       └── zlib-1.2.11.log
-├── m4                    M4 macros for generating the configure script
-│   └── *.m4
-├── Makefile              Running "make" uses this file
-├── prefix -> SAGE_LOCAL  Convenience symlink to the installation tree
-├── README.md             This file
 ├── sage                  Script to start Sage
 ├── src                   Monolithic Sage library source tree
 │   ├── bin/              Scripts that Sage uses internally
 │   ├── doc/              Sage documentation sources
 │   └── sage/             The Sage library source code
-├── upstream              Source tarballs of packages
-│   ├── Babel-2.9.1.tar.gz
-│   …
-│   └── zlib-1.2.11.tar.gz
-├── venv -> SAGE_VENV     Convenience symlink to the virtual environment
 └── VERSION.txt
 ```
 For more details see [our Developer's Guide](https://doc.sagemath.org/html/en/developer/coding_basics.html#files-and-directory-structure).
-
-<p align="center">
-   Copyright (C) 2005-2025 The Sage Development Team
-</p>
-<p align="center">
-   https://www.sagemath.org
-</p>
-
