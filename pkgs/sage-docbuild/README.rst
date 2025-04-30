@@ -2,22 +2,49 @@
  passagemath: Build system of the Sage documentation
 ================================================================================
 
-About SageMath
---------------
+`passagemath <https://github.com/passagemath/passagemath>`__ is open
+source mathematical software in Python, released under the GNU General
+Public Licence GPLv2+.
 
-   "Creating a Viable Open Source Alternative to
-    Magma, Maple, Mathematica, and MATLAB"
+It is a fork of `SageMath <https://www.sagemath.org/>`__, which has been
+developed 2005-2025 under the motto “Creating a Viable Open Source
+Alternative to Magma, Maple, Mathematica, and MATLAB”.
 
-   Copyright (C) 2005-2020 The Sage Development Team
+The passagemath fork was created in October 2024 with the following
+goals:
 
-   https://www.sagemath.org
+-  providing modularized installation with pip, thus completing a `major
+   project started in 2020 in the Sage
+   codebase <https://github.com/sagemath/sage/issues/29705>`__,
+-  establishing first-class membership in the scientific Python
+   ecosystem,
+-  giving `clear attribution of upstream
+   projects <https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ>`__,
+-  providing independently usable Python interfaces to upstream
+   libraries,
+-  providing `platform portability and integration testing
+   services <https://github.com/passagemath/passagemath/issues/704>`__
+   to upstream projects,
+-  inviting collaborations with upstream projects,
+-  `building a professional, respectful, inclusive
+   community <https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ>`__,
+-  developing a port to `Pyodide <https://pyodide.org/en/stable/>`__ for
+   serverless deployment with Javascript,
+-  developing a native Windows port.
 
-SageMath fully supports all major Linux distributions, recent versions of macOS, and Windows (using Windows Subsystem for Linux).
+`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+available online.
 
-The traditional and recommended way to install SageMath is from source via Sage-the-distribution (https://www.sagemath.org/download-source.html).  Sage-the-distribution first builds a large number of open source packages from source (unless it finds suitable versions installed in the system) and then installs the Sage Library (sagelib, implemented in Python and Cython).
+passagemath attempts to support all major Linux distributions and recent versions of
+macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
+virtualization.
+
+Complete sets of binary wheels are provided on PyPI for Python versions 3.9.x-3.12.x.
+Python 3.13.x is also supported, but some third-party packages are still missing wheels,
+so compilation from source is triggered for those.
 
 
-About this pip-installable source distribution
+About this pip-installable distribution package
 ----------------------------------------------
 
 This is the build system of the Sage documentation, based on Sphinx.
