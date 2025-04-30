@@ -1,10 +1,52 @@
-sage_conf: Configuration module for the SageMath library (distributable version)
-================================================================================
+passagemath: Configuration module for the SageMath library
+==========================================================
 
-Description
------------
+`passagemath <https://github.com/passagemath/passagemath>`__ is open
+source mathematical software in Python, released under the GNU General
+Public Licence GPLv2+.
 
-This distribution package provides:
+It is a fork of `SageMath <https://www.sagemath.org/>`__, which has been
+developed 2005-2025 under the motto “Creating a Viable Open Source
+Alternative to Magma, Maple, Mathematica, and MATLAB”.
+
+The passagemath fork was created in October 2024 with the following
+goals:
+
+-  providing modularized installation with pip, thus completing a `major
+   project started in 2020 in the Sage
+   codebase <https://github.com/sagemath/sage/issues/29705>`__,
+-  establishing first-class membership in the scientific Python
+   ecosystem,
+-  giving `clear attribution of upstream
+   projects <https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ>`__,
+-  providing independently usable Python interfaces to upstream
+   libraries,
+-  providing `platform portability and integration testing
+   services <https://github.com/passagemath/passagemath/issues/704>`__
+   to upstream projects,
+-  inviting collaborations with upstream projects,
+-  `building a professional, respectful, inclusive
+   community <https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ>`__,
+-  developing a port to `Pyodide <https://pyodide.org/en/stable/>`__ for
+   serverless deployment with Javascript,
+-  developing a native Windows port.
+
+`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+available online.
+
+passagemath attempts to support all major Linux distributions and recent versions of
+macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
+virtualization.
+
+Complete sets of binary wheels are provided on PyPI for Python versions 3.9.x-3.12.x.
+Python 3.13.x is also supported, but some third-party packages are still missing wheels,
+so compilation from source is triggered for those.
+
+
+About this pip-installable distribution package
+-----------------------------------------------
+
+This distribution package ``passagemath-conf`` provides:
 
 - a single Python module, ``sage_conf``, providing configuration information
   to the SageMath library at the time of its installation and at its runtime
@@ -15,21 +57,20 @@ This distribution package provides:
 - a sourcable shell script ``sage-env-config``, providing additional configuration
   information in the form of environment variables
 
-The Sage library (distribution package https://pypi.org/project/sagemath-standard/)
-declares ``sage_conf`` both as a PEP 518 build-system requirement and a run-time
+The modularized distribution packages of the Sage library
+may declare ``passagemath-conf`` both as a PEP 518 build-system requirement and a run-time
 dependency ("install-requires").
 
-The ``sage_conf`` distribution package is polymorphic:  It has several implementations.
+The ``passagemath-conf`` distribution package is polymorphic:  It has several implementations.
 
 
-sage_conf sdist on PyPI
------------------------
+passagemath-conf sdist on PyPI
+------------------------------
 
-This implementation of the ``sage_conf`` distribution package comes
-from the directory
-`pkgs/sage-conf_pypi <https://github.com/sagemath/sage/tree/develop/pkgs/sage-conf_pypi/>`_.
+This implementation of the package comes from the directory
+`pkgs/sage-conf_pypi <https://github.com/passagemath/passagemath/tree/main/pkgs/sage-conf_pypi/>`_.
 
-To install, use ``pip install -v sage_conf``.  Using ``-v`` ensures that diagnostic
+To install, use ``pip install -v passagemath-conf``.  Using ``-v`` ensures that diagnostic
 messages are displayed.
 
 On installation (or building a wheel), it invokes ``sage_bootstrap`` to establish
@@ -37,9 +78,9 @@ a build tree (``SAGE_ROOT``) and installation tree (``SAGE_LOCAL``) for
 the SageMath distribution.  By default, it uses a subdirectory of ``$HOME/.sage``
 that is specific to the version of the distribution and the version of Python in
 use.  If several virtual environments over the same version of Python install
-``sage_conf``, they will share these trees.
+``passagemath-conf``, they will share these trees.
 
-After installation of ``sage_conf``, a wheelhouse containing wheels of
+After installation of ``passagemath-conf``, a wheelhouse containing wheels of
 various libraries is available; type ``ls $(sage-config
 SAGE_SPKG_WHEELS)`` to list them and ``pip install $(sage-config
 SAGE_SPKG_WHEELS)/*.whl`` to install them.  After this, you can install the Sage
@@ -72,58 +113,28 @@ Customization with environment variables:
     export SAGE_CONF_TARGETS=build-local
 
 
-sage_conf wheels
-----------------
+passagemath-conf in the traditional installation as Sage-the-distribution
+-------------------------------------------------------------------------
 
-Prebuilt binary wheels of the ``sage_conf`` distribution package are available
-at https://github.com/sagemath/sage-wheels/releases/
-
-This implementation of ``sage_conf`` comes from https://github.com/sagemath/sage/issues/31396,
-which adds the directory ``pkgs/sage-conf_relocatable/``.
-
-On building a wheel, it invokes ``sage_bootstrap`` to establish a
-build and installation tree (``SAGE_ROOT``, ``SAGE_LOCAL``) in a
-subdirectory of the directory ``/var/tmp/``, whose name is specific to
-the version of the distribution and the version of Python in use.
-
-The wheel distributes a copy of the prebuilt ``SAGE_ROOT`` and
-``SAGE_LOCAL``.  Importing ``sage_conf`` (or using the installed
-``sage-config`` script), makes sure that a symlink from the
-``/var/tmp`` location to the actual persistent installation location
-is created.  As the relocated libraries and programs contain the
-hardcoded path ``SAGE_LOCAL`` in various ways (including as rpaths),
-this symlink is necessary for the prebuilt libraries and programs to
-work.
-
-``/var/tmp`` is a sticky directory on all Linux distributions
-following the Filesystem Hierarchy Standard, as well as on macOS.
-On multi-user systems, only one user can use a given
-version of the distribution; other installation schemes are recommended
-for systems with multiple Sage users.
-
-
-sage_conf in the SageMath distribution
---------------------------------------
-
-The original version of the distribution package ``sage_conf`` is used
-internally in the SageMath distribution.  It is provided in the directory
-`pkgs/sage-conf <https://github.com/sagemath/sage/tree/develop/pkgs/sage-conf/>`_.
+The original version of the distribution package ``passagemath-conf`` is used
+internally in Sage-the-distribution.  It is provided in the directory
+`pkgs/sage-conf <https://github.com/passagemath/passagemath/tree/main/pkgs/sage-conf/>`_.
 This version of the package is generated by the Sage distribution's ``./configure``
 script.
 
 
-sage_conf for conda
--------------------
+passagemath-conf for conda
+--------------------------
 
 The version of the distribution package in the directory
-`pkgs/sage-conf_conda <https://github.com/sagemath/sage/tree/develop/pkgs/sage-conf_conda/>`_
+`pkgs/sage-conf_conda <https://github.com/passagemath/passagemath/tree/main/pkgs/sage-conf_conda/>`_
 may be used in an installation method of SageMath, where all packages
 are provided by conda.  This method is described in
 https://doc.sagemath.org/html/en/installation/conda.html#using-conda-to-provide-all-dependencies-for-the-sage-library-experimental
 
 
-sage_conf in downstream distributions
--------------------------------------
+passagemath-conf in downstream distributions
+--------------------------------------------
 
 If the customization through the environment variables ``SAGE_CONF_...``
 does not give enough flexibility, downstream packagers and advanced developers
@@ -139,7 +150,5 @@ GNU General Public License (GPL) v3 or later
 Upstream Contact
 ----------------
 
-https://www.sagemath.org
-
-This package is included in the source code of the Sage distribution,
-in `pkgs/sage-conf* <https://github.com/sagemath/sage/tree/develop/pkgs/>`_.
+This package is included in the main repository of passagemath
+in `pkgs/sage-conf* <https://github.com/passagemath/passagemath/tree/main/pkgs/>`_.

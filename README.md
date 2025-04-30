@@ -1,15 +1,20 @@
 passagemath: General purpose mathematical software system, a fork of SageMath
 =============================================================================
 
-passagemath is open source mathematical software released under the GNU General Public
-Licence GPLv2+.
+[passagemath](https://github.com/passagemath/passagemath) is open source mathematical
+software in Python, released under the GNU General Public Licence GPLv2+.
 
-It is a fork of [SageMath](https://www.sagemath.org/), created in October 2024 with the following goals:
+It is a fork of [SageMath](https://www.sagemath.org/), which has been developed 2005-2025
+under the motto "Creating a Viable Open Source Alternative to Magma, Maple, Mathematica,
+and MATLAB".
+
+The passagemath fork was created in October 2024 with the following goals:
 
 * providing modularized installation with pip, thus completing a [major project started in 2020 in the Sage codebase](https://github.com/sagemath/sage/issues/29705),
 * establishing first-class membership in the scientific Python ecosystem,
 * giving [clear attribution of upstream projects](https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ),
 * providing independently usable Python interfaces to upstream libraries,
+* providing [platform portability and integration testing services](https://github.com/passagemath/passagemath/issues/704) to upstream projects,
 * inviting collaborations with upstream projects,
 * [building a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ),
 * developing a port to [Pyodide](https://pyodide.org/en/stable/) for serverless deployment with Javascript,
