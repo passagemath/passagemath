@@ -7,6 +7,11 @@ for l in bzip2 texinfo polymake; do
         PATH="$HOMEBREW/opt/$l/bin:$PATH"
     fi
 done
+for l in gpatch; do
+    if [ -d "$HOMEBREW/opt/$l/libexec/gnubin" ]; then
+        PATH="$HOMEBREW/opt/$l/libexec/gnubin:$PATH"
+    fi
+done
 export PATH
 PKG_CONFIG_PATH="$HOMEBREW/lib/pkgconfig:$PKG_CONFIG_PATH"
 # libpng.pc depends on zlib.pc
