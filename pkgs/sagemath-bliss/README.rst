@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
-----------------------------------------------
+-----------------------------------------------
 
 This pip-installable source distribution ``sagemath-bliss`` is a small
 optional distribution for use with ``sagemath-standard``.

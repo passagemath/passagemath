@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
-----------------------------------------------
+-----------------------------------------------
 
 This pip-installable source distribution ``sagemath-pari`` is a small
 distribution that provides modules that depend on the computer algebra

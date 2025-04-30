@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
----------------------------------------
+-----------------------------------------------
 
 This pip-installable distribution ``passagemath-polyhedra`` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`), sufficient for computations with convex polyhedra in arbitrary dimension (in exact rational arithmetic), and linear and mixed integer linear optimization (in floating point arithmetic).
 

@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
----------------------------------------
+-----------------------------------------------
 
 This pip-installable distribution ``passagemath-sirocco`` provides a Cython interface
 to the `sirocco <https://github.com/miguelmarco/SIROCCO2>`_ library for computing

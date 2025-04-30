@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
----------------------------------------
+-----------------------------------------------
 
 Creating a user project
 ~~~~~~~~~~~~~~~~~~~~~~~

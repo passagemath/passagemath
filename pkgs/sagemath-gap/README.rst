@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
----------------------------------------
+-----------------------------------------------
 
 This pip-installable distribution ``passagemath-gap`` is a small
 distribution that provides modules that depend on the `GAP system <https://www.gap-system.org>`_.

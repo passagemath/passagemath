@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
----------------------------------------
+-----------------------------------------------
 
 This pip-installable source distribution ``passagemath-libbraiding`` provides
 an interface to `libbraiding <https://github.com/miguelmarco/libbraiding>`_,

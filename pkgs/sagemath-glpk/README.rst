@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
-----------------------------------------------
+-----------------------------------------------
 
 This pip-installable source distribution ``sagemath-glpk`` provides
 a backend for linear and mixed integer linear optimization backend using GLPK.

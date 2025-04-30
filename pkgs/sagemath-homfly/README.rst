@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
----------------------------------------
+-----------------------------------------------
 
 This pip-installable distribution ``passagemath-homfly`` provides a Cython interface
 to the `libhomfly <https://github.com/miguelmarco/libhomfly>`_ library.

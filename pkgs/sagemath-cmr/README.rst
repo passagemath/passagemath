@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
----------------------------------------
+-----------------------------------------------
 
 This pip-installable distribution ``passagemath-cmr`` is a small
 optional distribution for use with `passagemath-modules <https://pypi.org/project/passagemath-modules/>`_ and

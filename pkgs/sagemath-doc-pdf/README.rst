@@ -45,7 +45,7 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
-----------------------------------------------
+-----------------------------------------------
 
 When installed from source, the distribution `sagemath-doc-pdf` uses Sphinx
 and LuaLaTeX to build the SageMath documentation in PDF format.

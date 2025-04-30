@@ -80,7 +80,7 @@ What is included
 * Facilities for `Parallel Computing <https://doc.sagemath.org/html/en/reference/parallel/index.html>`_, `Formatted Output <https://doc.sagemath.org/html/en/reference/misc/index.html#formatted-output>`_
 
 Available in other distribution packages
-----------------------------------------
+-----------------------------------------------
 
 * `sagemath-combinat <https://pypi.org/project/sagemath-combinat>`_:
   Algebraic combinatorics, combinatorial representation theory
