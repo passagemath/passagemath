@@ -1,0 +1,22 @@
+From 84f53386bde9c994c49373075ce91353a7767bc8 Mon Sep 17 00:00:00 2001
+From: gorloffslava <31761951+gorloffslava@users.noreply.github.com>
+Date: Mon, 9 Sep 2024 12:37:49 +0500
+Subject: [PATCH] BUILD: fix missing include for std::ptrdiff_t for C++23
+ language mode
+
+---
+ numpy/_core/src/umath/string_fastsearch.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/numpy/_core/src/umath/string_fastsearch.h b/numpy/_core/src/umath/string_fastsearch.h
+index 61abdcb5ad19..96c1e2d30140 100644
+--- a/numpy/_core/src/umath/string_fastsearch.h
++++ b/numpy/_core/src/umath/string_fastsearch.h
+@@ -9,6 +9,7 @@
+ #include <wchar.h>
+ 
+ #include <type_traits>
++#include <cstddef>
+ 
+ #include <numpy/npy_common.h>
+ 
