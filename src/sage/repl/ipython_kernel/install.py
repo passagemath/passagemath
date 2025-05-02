@@ -156,8 +156,7 @@ class SageKernelSpec:
              '{connection_file}']
         """
         return [
-            os.path.join(SAGE_VENV, 'bin', 'sage'),
-            '--python',
+            'python3',
             '-m', 'sage.repl.ipython_kernel',
             '-f', '{connection_file}',
         ]
