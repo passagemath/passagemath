@@ -3,7 +3,8 @@ def sage_setup(distributions, *,
                required_modules=(), optional_modules=(),
                spkgs=(),
                recurse_packages=('sage',),
-               package_data=None):
+               package_data=None,
+               cmdclass=None):
     r"""
     Replacement for :func:`setuptools.setup` for building distribution packages of the Sage library
 
@@ -28,6 +29,8 @@ def sage_setup(distributions, *,
       * If ``None``, all of ``package_data`` is taken from ``pyproject.toml``.
 
       * If a dictionary, use it as package data and ignore ``package_data`` in ``pyproject.toml``.
+
+    - ``cmdclass` -- ``None`` or a dictionary.
     """
     import time
 
@@ -73,8 +76,12 @@ def sage_setup(distributions, *,
     from sage_setup.excepthook import excepthook
     sys.excepthook = excepthook
 
-    cmdclass = dict(build_ext=sage_build_ext_minimal,
-                    build_py=sage_build_py)
+    if cmdclass is None:
+        cmdclass = dict()
+    else:
+        cmdclass = dict(cmdclass)
+    cmdclass.update(dict(build_ext=sage_build_ext_minimal,
+                         build_py=sage_build_py))
 
     sdist = len(sys.argv) > 1 and (sys.argv[1] in ["sdist", "egg_info", "dist_info"])
 
@@ -132,28 +139,31 @@ def sage_setup(distributions, *,
 
         log.info(f"Discovered Python/Cython sources, time: {(time.time() - t):.2f} seconds.")
 
-        # from sage_build_cython:
-        import Cython.Compiler.Options
-        Cython.Compiler.Options.embed_pos_in_docstring = True
-        gdb_debug = os.environ.get('SAGE_DEBUG', None) != 'no'
+        if cython_modules:
+            # from sage_build_cython:
+            import Cython.Compiler.Options
+            Cython.Compiler.Options.embed_pos_in_docstring = True
+            gdb_debug = os.environ.get('SAGE_DEBUG', None) != 'no'
 
-        try:
-            from Cython.Build import cythonize
-            from sage.env import cython_aliases, sage_include_directories
-            from sage.misc.package_dir import cython_namespace_package_support
-            with cython_namespace_package_support():
-                extensions = cythonize(
-                    cython_modules,
-                    include_path=sage_include_directories(use_sources=True) + ['.'],
-                    compile_time_env=compile_time_env_variables(),
-                    compiler_directives=compiler_directives(False),
-                    aliases=cython_aliases(),
-                    create_extension=create_extension,
-                    gdb_debug=gdb_debug,
-                    nthreads=4)
-        except Exception as exception:
-            log.warn(f"Exception while cythonizing source files: {repr(exception)}")
-            raise
+            try:
+                from Cython.Build import cythonize
+                from sage.env import cython_aliases, sage_include_directories
+                from sage.misc.package_dir import cython_namespace_package_support
+                with cython_namespace_package_support():
+                    extensions = cythonize(
+                        cython_modules,
+                        include_path=sage_include_directories(use_sources=True) + ['.'],
+                        compile_time_env=compile_time_env_variables(),
+                        compiler_directives=compiler_directives(False),
+                        aliases=cython_aliases(),
+                        create_extension=create_extension,
+                        gdb_debug=gdb_debug,
+                        nthreads=4)
+            except Exception as exception:
+                log.warn(f"Exception while cythonizing source files: {repr(exception)}")
+                raise
+        else:
+            extensions = []
 
     kwds = {}
 
