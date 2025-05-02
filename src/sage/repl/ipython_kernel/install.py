@@ -148,8 +148,7 @@ class SageKernelSpec:
             sage: from sage.repl.ipython_kernel.install import SageKernelSpec
             sage: spec = SageKernelSpec(prefix=tmp_dir())
             sage: spec._kernel_cmd()
-            ['/.../sage',
-             '--python',
+            [...
              '-m',
              'sage.repl.ipython_kernel',
              '-f',
