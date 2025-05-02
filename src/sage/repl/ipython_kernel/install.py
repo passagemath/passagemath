@@ -263,7 +263,7 @@ class SageKernelSpec:
                           '(see https://docs.jupyter.org/en/latest/use/jupyter-directories.html)')
         else:
             from pathlib import Path
-            if Path(spec.argv[0]).resolve() != Path(os.path.join(SAGE_VENV, 'bin', 'sage')).resolve():
+            if spec.argv[0] != 'python3' and Path(spec.argv[0]).resolve() != Path(os.path.join(SAGE_VENV, 'bin', 'sage')).resolve():
                 warnings.warn(f'the kernel named {ident} does not seem to correspond to this '
                               'installation of SageMath; check your Jupyter configuration '
                               '(see https://docs.jupyter.org/en/latest/use/jupyter-directories.html)')
