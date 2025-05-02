@@ -43,11 +43,11 @@ class SageKernelSpec:
             sage: prefix = tmp_dir()
             sage: spec = SageKernelSpec(prefix=prefix)
             sage: spec._display_name    # random output
-            'SageMath 6.9'
+            'passagemath 6.9'
             sage: spec.kernel_dir == SageKernelSpec(prefix=prefix).kernel_dir
             True
         """
-        self._display_name = 'SageMath {0}'.format(SAGE_VERSION)
+        self._display_name = 'passagemath {0}'.format(SAGE_VERSION)
         if prefix is None:
             from sys import prefix
         jupyter_dir = os.path.join(prefix, "share", "jupyter")
@@ -172,7 +172,7 @@ class SageKernelSpec:
             sage: from sage.repl.ipython_kernel.install import SageKernelSpec
             sage: spec = SageKernelSpec(prefix=tmp_dir())
             sage: spec.kernel_spec()
-            {'argv': ..., 'display_name': 'SageMath ...', 'language': 'sage'}
+            {'argv': ..., 'display_name': 'passagemath ...', 'language': 'sage'}
         """
         return dict(
             argv=self._kernel_cmd(),
