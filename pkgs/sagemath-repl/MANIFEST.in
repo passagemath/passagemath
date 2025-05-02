@@ -30,6 +30,9 @@ include sage/misc/python.py
 include sage/misc/remote_file.py
 include sage/misc/sh.py
 
+graft sage/ext_data/notebook-ipython
+exclude sage/ext_data/notebook-ipython/kernel.json.in
+
 # expect_objects from sage.interfaces.quit is needed to compute the
 # CPU time used by each doctest. We include sage.interfaces.cleaner
 # because it is conditionally imported by sage.interfaces.quit.

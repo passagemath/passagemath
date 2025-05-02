@@ -2,6 +2,8 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 [build-system]
 # Minimum requirements for the build system to execute.
 requires = [
+    SPKG_INSTALL_REQUIRES_sage_setup
+    SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_setuptools
 ]
 build-backend = "setuptools.build_meta"
@@ -32,39 +34,6 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [tool.setuptools]
-py-modules = [
-    "sage.all__sagemath_repl",
-    "sage.misc.all__sagemath_repl",
-    "sage.misc.banner",
-    "sage.misc.sagedoc",
-    "sage.misc.sage_input",
-    "sage.misc.sage_eval",
-    "sage.misc.explain_pickle",
-    "sage.misc.trace",
-    "sage.misc.profiler",
-    "sage.misc.dev_tools",
-    "sage.misc.edit_module",
-    "sage.misc.pager",
-    "sage.misc.cython",
-    "sage.misc.inline_fortran",
-    "sage.misc.benchmark",
-    "sage.misc.classgraph",
-    "sage.misc.copying",
-    "sage.misc.gperftools",
-    "sage.misc.messaging",
-    "sage.misc.python",
-    "sage.misc.remote_file",
-    "sage.misc.sh",
-]
-packages = [
-    "sage.doctest",
-    "sage.interfaces",
-    "sage.repl",
-    "sage.repl.display",
-    "sage.repl.ipython_kernel",
-    "sage.repl.rich_output",
-    "sage.tests",
-]
 script-files = [
     # Other scripts that should be in the path also for OS packaging of sage:
     "bin/sage-eval",
@@ -94,7 +63,3 @@ include-package-data = false
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
-
-[tool.setuptools.package-data]
-"sage.doctest" = ["tests/*"]
-"sage.repl.rich_output" = ["example*"]

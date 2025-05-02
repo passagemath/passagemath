@@ -43,11 +43,11 @@ class SageKernelSpec:
             sage: prefix = tmp_dir()
             sage: spec = SageKernelSpec(prefix=prefix)
             sage: spec._display_name    # random output
-            'SageMath 6.9'
+            'passagemath 6.9'
             sage: spec.kernel_dir == SageKernelSpec(prefix=prefix).kernel_dir
             True
         """
-        self._display_name = 'SageMath {0}'.format(SAGE_VERSION)
+        self._display_name = 'passagemath {0}'.format(SAGE_VERSION)
         if prefix is None:
             from sys import prefix
         jupyter_dir = os.path.join(prefix, "share", "jupyter")
@@ -148,16 +148,14 @@ class SageKernelSpec:
             sage: from sage.repl.ipython_kernel.install import SageKernelSpec
             sage: spec = SageKernelSpec(prefix=tmp_dir())
             sage: spec._kernel_cmd()
-            ['/.../sage',
-             '--python',
+            [...
              '-m',
              'sage.repl.ipython_kernel',
              '-f',
              '{connection_file}']
         """
         return [
-            os.path.join(SAGE_VENV, 'bin', 'sage'),
-            '--python',
+            'python3',
             '-m', 'sage.repl.ipython_kernel',
             '-f', '{connection_file}',
         ]
@@ -173,7 +171,7 @@ class SageKernelSpec:
             sage: from sage.repl.ipython_kernel.install import SageKernelSpec
             sage: spec = SageKernelSpec(prefix=tmp_dir())
             sage: spec.kernel_spec()
-            {'argv': ..., 'display_name': 'SageMath ...', 'language': 'sage'}
+            {'argv': ..., 'display_name': 'passagemath ...', 'language': 'sage'}
         """
         return dict(
             argv=self._kernel_cmd(),
@@ -265,7 +263,7 @@ class SageKernelSpec:
                           '(see https://docs.jupyter.org/en/latest/use/jupyter-directories.html)')
         else:
             from pathlib import Path
-            if Path(spec.argv[0]).resolve() != Path(os.path.join(SAGE_VENV, 'bin', 'sage')).resolve():
+            if spec.argv[0] != 'python3' and Path(spec.argv[0]).resolve() != Path(os.path.join(SAGE_VENV, 'bin', 'sage')).resolve():
                 warnings.warn(f'the kernel named {ident} does not seem to correspond to this '
                               'installation of SageMath; check your Jupyter configuration '
                               '(see https://docs.jupyter.org/en/latest/use/jupyter-directories.html)')
