@@ -918,24 +918,25 @@ class BinaryQF(SageObject):
 
         Some randomized testing::
 
+            sage: # needs sage.libs.pari
             sage: while True:
             ....:     f = BinaryQF([randrange(-10^3, 10^3) for _ in 'abc'])
             ....:     if not f.discriminant().is_square():
             ....:         break
             sage: algos = ['default']
-            sage: assert pari; algos.append('pari')                                     # needs sage.libs.pari
+            sage: assert pari; algos.append('pari')
             sage: if f.discriminant() > 0:
             ....:     algos.append('sage')
             sage: a = choice(algos)
             sage: g = f.reduced_form(algorithm=a)
             sage: g.is_reduced()
             True
-            sage: g.is_equivalent(f)                                                    # needs sage.libs.pari
+            sage: g.is_equivalent(f)
             True
             sage: g,M = f.reduced_form(transformation=True, algorithm=a)
             sage: g.is_reduced()
             True
-            sage: g.is_equivalent(f)                                                    # needs sage.libs.pari
+            sage: g.is_equivalent(f)
             True
             sage: f * M == g
             True
