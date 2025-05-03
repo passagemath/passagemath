@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-repl
+# sage.doctest: needs numpy sage.modules
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#

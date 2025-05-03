@@ -1005,7 +1005,7 @@
         "ntests": 9
     },
     "sage.doctest.external": {
-        "ntests": 40
+        "ntests": 41
     },
     "sage.doctest.fixtures": {
         "ntests": 59
@@ -1083,7 +1083,7 @@
         "ntests": 4
     },
     "sage.features.four_ti_2": {
-        "ntests": 5
+        "ntests": 6
     },
     "sage.features.fricas": {
         "ntests": 4
@@ -1101,7 +1101,7 @@
         "ntests": 3
     },
     "sage.features.graph_generators": {
-        "ntests": 12
+        "ntests": 14
     },
     "sage.features.graphviz": {
         "ntests": 16
@@ -1137,7 +1137,7 @@
         "ntests": 7
     },
     "sage.features.lrs": {
-        "ntests": 11
+        "ntests": 16
     },
     "sage.features.macaulay2": {
         "ntests": 3
@@ -1194,7 +1194,7 @@
         "ntests": 138
     },
     "sage.features.sat": {
-        "ntests": 12
+        "ntests": 14
     },
     "sage.features.singular": {
         "ntests": 4
@@ -1221,7 +1221,7 @@
         "ntests": 5
     },
     "sage.features.topcom": {
-        "ntests": 6
+        "ntests": 8
     },
     "sage.functions.airy": {
         "ntests": 30
@@ -2114,7 +2114,7 @@
         "ntests": 17
     },
     "sage.quadratic_forms.binary_qf": {
-        "ntests": 258
+        "ntests": 249
     },
     "sage.quadratic_forms.constructions": {
         "ntests": 4
@@ -2966,6 +2966,27 @@
     "sage.tensor.modules.tensor_with_indices": {
         "ntests": 233
     },
+    "sage.tests.books.judson-abstract-algebra.homomorph-sage": {
+        "ntests": 42
+    },
+    "sage.tests.books.judson-abstract-algebra.homomorph-sage-exercises": {
+        "ntests": 9
+    },
+    "sage.tests.books.judson-abstract-algebra.normal-sage": {
+        "ntests": 37
+    },
+    "sage.tests.books.judson-abstract-algebra.permute-sage": {
+        "ntests": 75
+    },
+    "sage.tests.books.judson-abstract-algebra.struct-sage": {
+        "ntests": 11
+    },
+    "sage.tests.books.judson-abstract-algebra.sylow-sage": {
+        "ntests": 47
+    },
+    "sage.tests.books.judson-abstract-algebra.vect-sage-exercises": {
+        "ntests": 5
+    },
     "sage.tests.cmdline": {
         "ntests": 101
     },
@@ -2974,6 +2995,9 @@
     },
     "sage.tests.functools_partial_src": {
         "ntests": 3
+    },
+    "sage.tests.memcheck.run_tests_in_valgrind": {
+        "ntests": 1
     },
     "sage.tests.startup": {
         "ntests": 6

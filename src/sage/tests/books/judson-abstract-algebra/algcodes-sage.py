@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-repl
+# sage.doctest: needs sage.libs.pari sage.modules
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#

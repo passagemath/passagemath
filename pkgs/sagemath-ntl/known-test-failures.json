@@ -2223,8 +2223,7 @@
         "ntests": 19
     },
     "sage.quadratic_forms.binary_qf": {
-        "failed": true,
-        "ntests": 299
+        "ntests": 287
     },
     "sage.quadratic_forms.bqf_class_group": {
         "ntests": 1
@@ -3220,6 +3219,12 @@
     "sage.tests.book_stein_ent": {
         "ntests": 8
     },
+    "sage.tests.books.judson-abstract-algebra.cyclic-sage": {
+        "ntests": 5
+    },
+    "sage.tests.books.judson-abstract-algebra.vect-sage-exercises": {
+        "ntests": 5
+    },
     "sage.tests.cmdline": {
         "ntests": 108
     },
@@ -3231,6 +3236,9 @@
     },
     "sage.tests.functools_partial_src": {
         "ntests": 3
+    },
+    "sage.tests.memcheck.run_tests_in_valgrind": {
+        "ntests": 2
     },
     "sage.tests.parigp": {
         "ntests": 4
