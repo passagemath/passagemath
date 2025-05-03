@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-repl
-# sage.doctest: needs sage.modules sage.groups
+# sage.doctest: needs sage.modules sage.groups sage.symbolics
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#
