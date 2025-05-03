@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-repl
+# sage.doctest: needs sage.groups sage.rings.number_field
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#
