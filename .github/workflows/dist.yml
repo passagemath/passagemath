@@ -259,7 +259,7 @@ jobs:
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
         id: python
         with:
-          python-version: "3.8 - 3.12"
+          python-version: "3.9 - 3.12"
           update-environment: false
 
       - name: Bootstrap
@@ -629,7 +629,7 @@ jobs:
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
         id: python
         with:
-          python-version: "3.8 - 3.12"
+          python-version: "3.9 - 3.12"
           update-environment: false
 
       - name: Bootstrap
