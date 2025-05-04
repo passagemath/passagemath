@@ -32,7 +32,6 @@ graft sage/dynamics/complex_dynamics
 include sage/modules/vector_*symbol*.p*
 include sage/matrix/matrix_symbolic_*.p*
 
-include sage/interfaces/fricas.p*
 include sage/interfaces/magma*.p*
 include sage/interfaces/maple*.p*
 include sage/interfaces/mathematica.p*
