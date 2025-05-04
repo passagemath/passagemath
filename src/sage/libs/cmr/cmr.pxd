@@ -8,7 +8,7 @@ from libc.stdint cimport int8_t, uint32_t, int64_t
 
 cdef extern from "stdbool.h":
 
-    ctypedef int bool
+    ctypedef bint bool
 
 cdef extern from "cmr/env.h":
     const int CMR_OKAY
@@ -452,7 +452,7 @@ cdef extern from "cmr/regular.h":
 
     CMR_ERROR CMRregularStatsInit(CMR_REGULAR_STATS* stats)
     # CMR_ERROR CMRstatsRegularPrint(FILE* stream, CMR_REGULAR_STATS* stats, const char* prefix)
-    CMR_ERROR CMRregularTest(CMR* cmr, CMR_CHRMAT* matrix, bint *pisRegular, CMR_SEYMOUR_NODE** pnode, CMR_MINOR** pminor, CMR_REGULAR_PARAMS* params, CMR_REGULAR_STATS* stats, double timeLimit)
+    CMR_ERROR CMRregularTest(CMR* cmr, CMR_CHRMAT* matrix, bool* pisRegular, CMR_SEYMOUR_NODE** pnode, CMR_MINOR** pminor, CMR_REGULAR_PARAMS* params, CMR_REGULAR_STATS* stats, double timeLimit)
     CMR_ERROR CMRregularCompleteDecomposition(CMR* cmr, CMR_SEYMOUR_NODE* node, CMR_REGULAR_PARAMS* params, CMR_REGULAR_STATS* stats, double timeLimit)
     CMR_ERROR CMRregularRefineDecomposition(CMR* cmr, size_t numNodes, CMR_SEYMOUR_NODE** nodes, CMR_REGULAR_PARAMS* params, CMR_REGULAR_STATS* stats, double timeLimit)
 
