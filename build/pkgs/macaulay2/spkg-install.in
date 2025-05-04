@@ -12,6 +12,7 @@ git clone https://github.com/Macaulay2/mathicgb.git M2/submodules/mathicgb
 # https://github.com/Macaulay2/M2/wiki/Building-M2-from-source-using-CMake
 cd M2/BUILD/build
 sdh_cmake -GNinja -S../.. -B. \
-      -DCMAKE_BUILD_TYPE=Release
+      -DCMAKE_BUILD_TYPE=Release \
+      -DPython3_EXECUTABLE=python3
 cmake --build . --target M2-core M2-emacs
 cmake --install .
