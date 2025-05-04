@@ -221,6 +221,8 @@ jobs:
       # Avoid onetbb build failure on manylinux2014 (https://github.com/passagemath/passagemath/issues/460)
       # manylinux_2_28 will be default from May 2025 - https://cibuildwheel.pypa.io/en/stable/options/#linux-image
       CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
+      # Avoid ancient zlib on manylinux2014
+      CIBW_MANYLINUX_AARCH64_IMAGE: manylinux_2_28
     steps:
       - name: Maximize build disk space
         if: runner.os == 'Linux' && matrix.arch != 'aarch64'
@@ -586,6 +588,8 @@ jobs:
       # Avoid onetbb build failure on manylinux2014 (https://github.com/passagemath/passagemath/issues/460)
       # manylinux_2_28 will be default from May 2025 - https://cibuildwheel.pypa.io/en/stable/options/#linux-image
       CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
+      # Avoid ancient zlib on manylinux2014
+      CIBW_MANYLINUX_AARCH64_IMAGE: manylinux_2_28
     steps:
       - name: Maximize build disk space
         if: runner.os == 'Linux' && matrix.arch != 'aarch64'
