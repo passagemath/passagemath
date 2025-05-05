@@ -266,9 +266,11 @@ jobs:
       fail-fast: false
       matrix:
         targets:
+          # Standard
           - sagemath_categories-check
           - sagemath_combinat-check
           - sagemath_flint-check
+          - sagemath_giac-check
           - sagemath_graphs-check
           - sagemath_groups-check
           - sagemath_modules-check
@@ -278,7 +280,8 @@ jobs:
           - sagemath_schemes-check
           - sagemath_standard_no_symbolics-check
           - sagemath_symbolics-check
-          - sagemath_giac-check
+          # Optional
+          - "sagemath_cmr sagemath_cmr-check"
     steps:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10

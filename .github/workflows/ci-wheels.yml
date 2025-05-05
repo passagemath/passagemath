@@ -25,6 +25,7 @@ jobs:
           - sagemath-categories
           - sagemath-cddlib
           - sagemath-cliquer
+          - sagemath-cmr
           - sagemath-combinat
           - sagemath-coxeter3
           - sagemath-ecl
