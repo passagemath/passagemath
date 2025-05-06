@@ -4,6 +4,7 @@ include VERSION.txt
 
 include sage/libs/fricas.p*
 include sage/interfaces/fricas.p*
+include sage/symbolic/expression_conversion_fricas.p*
 
 global-exclude *.c
 global-exclude *.cpp
