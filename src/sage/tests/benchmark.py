@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-repl
-# sage.doctest: needs sage.symbolic
+# sage.doctest: needs sage.schemes sage.symbolic
 """
 Benchmarks
 
