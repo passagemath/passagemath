@@ -84,14 +84,14 @@ def algdep(z, degree, known_bits=None, use_bits=None, known_digits=None,
         9*x - 17
         sage: algdep(0.12121212121212, 1)                                               # needs fpylll sage.libs.pari
         33*x - 4
-        sage: algdep(sqrt(2), 2)                                                        # needs fpylll sage.libs.pari sage.symbolic
+        sage: algdep(sqrt(2), 2)                                                        # needs sage.libs.pari sage.symbolic
         x^2 - 2
 
     This example involves a complex number::
 
         sage: z = (1/2) * (1 + RDF(sqrt(3)) * CC.0); z                                  # needs sage.symbolic
         0.500000000000000 + 0.866025403784439*I
-        sage: algdep(z, 6)                                                              # needs sage.symbolic
+        sage: algdep(z, 6)                                                              # needs fpylll sage.symbolic
         x^2 - x + 1
 
     This example involves a `p`-adic number::
@@ -3036,9 +3036,10 @@ def is_squarefree(n):
 
     This method fails on domains which are not Unique Factorization Domains::
 
-        sage: O = ZZ[sqrt(-5)]                                                          # needs sage.rings.number_field sage.symbolic
-        sage: a = O.gen(1)                                                              # needs sage.rings.number_field sage.symbolic
-        sage: is_squarefree(a - 3)                                                      # needs sage.rings.number_field sage.symbolic
+        sage: # needs fpylll sage.rings.number_field sage.symbolic
+        sage: O = ZZ[sqrt(-5)]
+        sage: a = O.gen(1)
+        sage: is_squarefree(a - 3)
         Traceback (most recent call last):
         ...
         ArithmeticError: non-principal ideal in factorization
@@ -4472,7 +4473,7 @@ def nth_prime(n):
 
     TESTS::
 
-        sage: all(prime_pi(nth_prime(j)) == j for j in range(1, 1000, 10))              # needs sage.libs.pari sage.symbolic
+        sage: all(prime_pi(nth_prime(j)) == j for j in range(1, 1000, 10))              # needs primecountpy sage.libs.pari sage.symbolic
         True
         sage: from numpy import int8                                                    # needs numpy
         sage: nth_prime(int8(10))                                                       # needs numpy sage.libs.pari
@@ -6310,7 +6311,7 @@ def gauss_sum(char_value, finite_field):
         sage: gauss_sum(zq**2, F)                                                       # needs sage.libs.pari sage.rings.number_field
         2.6361055643248352 + 2.0126965627574471*I
 
-        sage: # needs sage.libs.pari sage.rings.number_field
+        sage: # needs sage.libs.pari sage.rings.number_field sage.schemes
         sage: F = GF(7); q = 7
         sage: zq = QQbar.zeta(q - 1)
         sage: D = DirichletGroup(7, QQbar)
