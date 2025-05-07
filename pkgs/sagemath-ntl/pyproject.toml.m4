@@ -55,6 +55,7 @@ host-requires = [
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
   "pkg:generic/ntl",
+  "pkg:generic/mpfi",
 ]
 
 dependencies = [
