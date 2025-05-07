@@ -125,12 +125,12 @@ def algdep(z, degree, known_bits=None, use_bits=None, known_digits=None,
     `pi` is not the root of an integer polynomial of degree at most 5
     and coefficients bounded above by 10::
 
-        sage: algdep(pi.n(), 5, height_bound=10, proof=True) is None                    # needs sage.libs.pari sage.symbolic
+        sage: algdep(pi.n(), 5, height_bound=10, proof=True) is None                    # needs fpylll sage.libs.pari sage.symbolic
         True
 
     For stronger results, we need more precision::
 
-        sage: # needs sage.libs.pari sage.symbolic
+        sage: # needs fpylll sage.libs.pari sage.symbolic
         sage: algdep(pi.n(), 5, height_bound=100, proof=True) is None
         Traceback (most recent call last):
         ...
@@ -146,7 +146,7 @@ def algdep(z, degree, known_bits=None, use_bits=None, known_digits=None,
 
     We can also use ``proof=True`` to get positive results::
 
-        sage: # needs sage.libs.pari sage.symbolic
+        sage: # needs fpylll sage.libs.pari sage.symbolic
         sage: a = sqrt(2) + sqrt(3) + sqrt(5)
         sage: algdep(a.n(), 8, height_bound=1000, proof=True)
         Traceback (most recent call last):
@@ -159,7 +159,7 @@ def algdep(z, degree, known_bits=None, use_bits=None, known_digits=None,
 
     TESTS::
 
-        sage: algdep(complex("1+2j"), 4)                                                # needs sage.libs.pari sage.rings.complex_double
+        sage: algdep(complex("1+2j"), 4)                                                # needs fpylll sage.libs.pari sage.rings.complex_double
         x^2 - 2*x + 5
 
     We get an irreducible polynomial even if PARI returns a reducible
@@ -168,14 +168,14 @@ def algdep(z, degree, known_bits=None, use_bits=None, known_digits=None,
         sage: z = CDF(1, RR(3).sqrt())/2                                                # needs sage.rings.complex_double
         sage: pari(z).algdep(5)                                                         # needs sage.libs.pari sage.rings.complex_double sage.symbolic
         x^5 + x^2
-        sage: algdep(z, 5)                                                              # needs sage.libs.pari sage.rings.complex_double sage.symbolic
+        sage: algdep(z, 5)                                                              # needs fpylll sage.libs.pari sage.rings.complex_double sage.symbolic
         x^2 - x + 1
 
     Check that cases where a constant polynomial might look better
     get handled correctly::
 
         sage: z = CC(-1)**(1/3)                                                         # needs sage.rings.real_mpfr
-        sage: algdep(z, 1)                                                              # needs sage.libs.pari sage.symbolic
+        sage: algdep(z, 1)                                                              # needs fpylll sage.libs.pari sage.symbolic
         x
 
     Tests with numpy and gmpy2 numbers::
