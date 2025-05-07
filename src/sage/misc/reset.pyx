@@ -142,12 +142,15 @@ def restore(vars=None):
                 import sage.all__sagemath_polyhedra as toplevel
             except ImportError:
                 try:
-                    import sage.all__sagemath_modules as toplevel
+                    import sage.all__sagemath_symbolics as toplevel
                 except ImportError:
                     try:
-                        import sage.all__sagemath_categories as toplevel
+                        import sage.all__sagemath_modules as toplevel
                     except ImportError:
-                        import sage.all__sagemath_objects as toplevel
+                        try:
+                            import sage.all__sagemath_categories as toplevel
+                        except ImportError:
+                            import sage.all__sagemath_objects as toplevel
     else:
         mode = G['sage_mode']
         if mode == 'cmdline':
