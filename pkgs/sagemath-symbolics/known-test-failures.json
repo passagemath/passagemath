@@ -102,7 +102,7 @@
         "ntests": 36
     },
     "sage.arith.misc": {
-        "ntests": 1068
+        "ntests": 1067
     },
     "sage.arith.numerical_approx": {
         "ntests": 3
@@ -135,7 +135,6 @@
         "ntests": 34
     },
     "sage.calculus.tests": {
-        "failed": true,
         "ntests": 78
     },
     "sage.calculus.transforms.dft": {

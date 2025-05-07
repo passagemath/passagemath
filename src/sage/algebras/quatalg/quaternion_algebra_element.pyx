@@ -1676,8 +1676,8 @@ cdef class QuaternionAlgebraElement_number_field(QuaternionAlgebraElement_abstra
 
         EXAMPLES::
 
-            sage: K.<a> = QQ[2^(1/5)]; Q.<i,j,k> = QuaternionAlgebra(K,-a,a*17/3)       # needs sage.symbolic
-            sage: Q([a,-2/3,a^2-1/2,a*2])           # implicit doctest                  # needs sage.symbolic
+            sage: K.<a> = QQ[2^(1/5)]; Q.<i,j,k> = QuaternionAlgebra(K,-a,a*17/3)       # needs fpylll sage.symbolic
+            sage: Q([a,-2/3,a^2-1/2,a*2])           # implicit doctest                  # needs fpylll sage.symbolic
             a + (-2/3)*i + (a^2 - 1/2)*j + 2*a*k
         """
         fmpz_poly_init(self.x)
@@ -1706,8 +1706,8 @@ cdef class QuaternionAlgebraElement_number_field(QuaternionAlgebraElement_abstra
         """
         EXAMPLES::
 
-            sage: K.<a> = QQ[2^(1/3)]; Q.<i,j,k> = QuaternionAlgebra(K,-a,a+1)          # needs sage.symbolic
-            sage: Q([a,-2/3,a^2-1/2,a*2])           # implicit doctest                  # needs sage.symbolic
+            sage: K.<a> = QQ[2^(1/3)]; Q.<i,j,k> = QuaternionAlgebra(K,-a,a+1)          # needs fpylll sage.symbolic
+            sage: Q([a,-2/3,a^2-1/2,a*2])           # implicit doctest                  # needs fpylll sage.symbolic
             a + (-2/3)*i + (a^2 - 1/2)*j + 2*a*k
         """
         self._parent = parent
@@ -1750,7 +1750,7 @@ cdef class QuaternionAlgebraElement_number_field(QuaternionAlgebraElement_abstra
         """
         EXAMPLES::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: K.<a> = QQ[2^(1/3)]; Q.<i,j,k> = QuaternionAlgebra(K,-a,a+1)
             sage: Q([a,-2/3,a^2-1/2,a*2])
             a + (-2/3)*i + (a^2 - 1/2)*j + 2*a*k
@@ -1792,7 +1792,7 @@ cdef class QuaternionAlgebraElement_number_field(QuaternionAlgebraElement_abstra
         """
         EXAMPLES::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: K.<a> = QQ[2^(1/3)]; Q.<i,j,k> = QuaternionAlgebra(K, -3, a)
             sage: z = (i+j+k+a)^2; z
             a^2 + 4*a - 3 + 2*a*i + 2*a*j + 2*a*k
@@ -1811,7 +1811,7 @@ cdef class QuaternionAlgebraElement_number_field(QuaternionAlgebraElement_abstra
 
         EXAMPLES::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: K.<a> = QQ[2^(1/3)]; Q.<i,j,k> = QuaternionAlgebra(K, -3, a)
             sage: z = a + i + (2/3)*a^3*j + (1+a)*k
             sage: w = a - i - (2/3)*a^3*j + (1/3+a)*k
@@ -1885,7 +1885,7 @@ cdef class QuaternionAlgebraElement_number_field(QuaternionAlgebraElement_abstra
 
         EXAMPLES::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: K.<a> = QQ[2^(1/3)]; Q.<i,j,k> = QuaternionAlgebra(K, -3, a)
             sage: z = a + i + (2/3)*a^3*j + (1+a)*k
             sage: w = a - i - (2/3)*a^3*j + (1/3+a)*k
@@ -1936,7 +1936,7 @@ cdef class QuaternionAlgebraElement_number_field(QuaternionAlgebraElement_abstra
 
         EXAMPLES::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: K.<a> = QQ[2^(1/3)]; Q.<i,j,k> = QuaternionAlgebra(K, -3, a)
             sage: z = a + i + (2/3)*a^3*j + (1+a)*k
             sage: w = a - i - (2/3)*a^3*j + (1/3+a)*k
@@ -2086,7 +2086,7 @@ cdef class QuaternionAlgebraElement_number_field(QuaternionAlgebraElement_abstra
 
         TESTS::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: F = QQ[3^(1/3)]
             sage: a = F.gen()
             sage: K.<i,j,k> = QuaternionAlgebra(F, -10 + a, -7 - a)
@@ -2165,7 +2165,7 @@ def unpickle_QuaternionAlgebraElement_number_field_v0(*args):
     """
     EXAMPLES::
 
-        sage: # needs sage.symbolic
+        sage: # needs fpylll sage.symbolic
         sage: K.<a> = QQ[2^(1/3)]; Q.<i,j,k> = QuaternionAlgebra(K, -3, a); z = i + j
         sage: f, t = z.__reduce__()
         sage: sage.algebras.quatalg.quaternion_algebra_element.unpickle_QuaternionAlgebraElement_number_field_v0(*t)
