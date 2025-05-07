@@ -157,8 +157,8 @@ def is_function_or_cython_function(obj):
     functions::
 
         sage: from ipywidgets.widgets.interaction import signature
-        sage: from sage.dynamics.complex_dynamics.mandel_julia_helper import fast_mandelbrot_plot   # needs sage.symbolic
-        sage: signature(fast_mandelbrot_plot)  # random                                 # needs sage.symbolic
+        sage: from sage.dynamics.complex_dynamics.mandel_julia_helper import fast_mandelbrot_plot   # needs sage.plot sage.symbolic
+        sage: signature(fast_mandelbrot_plot)  # random                                 # needs sage.plot sage.symbolic
         <IPython.utils._signatures.Signature object at 0x7f3ec8274e10>
     """
     # We use type(obj) instead of just obj to avoid __getattr__().
@@ -2318,7 +2318,7 @@ def sage_getsourcelines(obj):
           '                       MPolynomialIdeal_macaulay2_repr,\n',
           '                       MPolynomialIdeal_magma_repr,\n',
           '                       Ideal_generic):\n',
-          '    def __init__(self, ring, gens, coerce=True):\n',
+          '    def __init__(self, ring, gens, coerce=True...):\n',
           ...)
     """
     # First try the method _sage_src_lines_(), which is meant to give
