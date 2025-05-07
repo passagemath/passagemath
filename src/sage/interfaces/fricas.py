@@ -309,7 +309,7 @@ class FriCAS(ExtraTabCompletion, Expect):
         """
         if command is None:
             from sage.features.fricas import FriCAS
-            command = [str(FriCAS().absolute_filename()), "-nosman"]
+            command = [FriCAS(), "-nosman"]
 
         eval_using_file_cutoff = 4096 - 5  # magic number from Expect._eval_line (there might be a bug)
         assert max(len(c) for c in FRICAS_INIT_CODE) < eval_using_file_cutoff
