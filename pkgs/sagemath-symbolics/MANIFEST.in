@@ -15,6 +15,8 @@ prune sage/symbolic/ginac
 exclude sage/symbolic/expression.p*
 exclude sage/symbolic/*.pxi
 exclude sage/symbolic/pynac_wrap.h
+# exclude what is included in sagemath-fricas
+exclude sage/symbolic/expression_conversion_fricas.p*
 
 include sage/calculus/all.p*
 include sage/calculus/calculus.p*
