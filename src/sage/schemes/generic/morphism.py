@@ -1602,6 +1602,7 @@ class SchemeMorphism_polynomial(SchemeMorphism):
 
         ::
 
+            sage: # needs sage.schemes
             sage: R1.<alpha, beta> = QQ[]
             sage: A.<x> = AffineSpace(Frac(R1), 1)
             sage: f = DynamicalSystem_affine([alpha/(x^2 + 1/alpha)/(x - 1/beta^2)])

@@ -7787,12 +7787,12 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         The valuation can also be selected by giving a valuation on the base
         ring that extends uniquely::
 
-            sage: CyclotomicField(5).valuation(ZZ.valuation(5))                         # needs sage.rings.padics
+            sage: CyclotomicField(5).valuation(ZZ.valuation(5))                         # needs sage.geometry.polyhedron sage.rings.padics
             5-adic valuation
 
         When the extension is not unique, this does not work::
 
-            sage: K.valuation(ZZ.valuation(5))                                          # needs sage.rings.padics
+            sage: K.valuation(ZZ.valuation(5))                                          # needs sage.geometry.polyhedron sage.rings.padics
             Traceback (most recent call last):
             ...
             ValueError: The valuation Gauss valuation induced by 5-adic valuation does not

@@ -1441,6 +1441,7 @@ class Order(Parent, sage.rings.abc.Order):
         valuation by providing a discrete pseudo-valuation on `K[x]` which
         sends `G` to infinity::
 
+            sage: # needs sage.geometry.polyhedron
             sage: R.<x> = QQ[]
             sage: GV5 = GaussValuation(R, QQ.valuation(5))
             sage: v = GaussianIntegers().valuation(GV5.augmentation(x + 2, infinity))
