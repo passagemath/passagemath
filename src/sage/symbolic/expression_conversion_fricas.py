@@ -14,6 +14,8 @@ Conversion of symbolic expressions to FriCAS
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
+from sage.rings.number_field.number_field_element_base import NumberFieldElement_base
+from sage.structure.element import Expression
 from sage.symbolic.expression_conversions import InterfaceInit
 from sage.symbolic.ring import SR
 

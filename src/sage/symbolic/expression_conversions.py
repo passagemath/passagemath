@@ -31,7 +31,7 @@ from sage.rings.number_field.number_field_element_base import NumberFieldElement
 lazy_import('sage.rings.universal_cyclotomic_field', 'UniversalCyclotomicField')
 lazy_import('sage.symbolic.expression_conversion_sympy', ['SympyConverter', 'sympy_converter'])
 lazy_import('sage.symbolic.expression_conversion_algebraic', ['AlgebraicConverter', 'algebraic'])
-lazy_import('sage.symbolic.expression_conversion_fricas', ['AlgebraicConverter', 'fricas_converter'])
+lazy_import('sage.symbolic.expression_conversion_fricas', ['FriCASConverter', 'fricas_converter'])
 
 
 class FakeExpression:
