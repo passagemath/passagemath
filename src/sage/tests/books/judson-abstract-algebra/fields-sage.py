@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-repl
-# sage.doctest: needs sage.symbolic
+# sage.doctest: needs fpylll sage.rings.number_field sage.symbolic
 ##          Sage Doctest File         ##
 #**************************************#
 #*    Generated from PreTeXt source   *#

@@ -6154,10 +6154,10 @@ class Partitions(UniqueRepresentation, Parent):
 
     Check that :issue:`38897` is fixed::
 
-        sage: Partitions(40, min_length=10).cardinality()                               # needs sage.libs.flint
+        sage: Partitions(40, min_length=10).cardinality()                               # needs sage.libs.flint sage.libs.gap
         24000
 
-        sage: Partitions(40, max_length=10).cardinality()                               # needs sage.libs.flint
+        sage: Partitions(40, max_length=10).cardinality()                               # needs sage.libs.flint sage.libs.gap
         16928
     """
     @staticmethod
@@ -9229,7 +9229,7 @@ class Partitions_length_and_parts_constrained(Partitions):
 
             sage: from itertools import product
             sage: P = Partitions
-            sage: all(P(n, min_length=k, max_length=m, min_part=a, max_part=b).cardinality()    # needs sage.libs.flint
+            sage: all(P(n, min_length=k, max_length=m, min_part=a, max_part=b).cardinality()    # needs sage.libs.flint sage.libs.gap
             ....:     == len(list(P(n, min_length=k, max_length=m, min_part=a, max_part=b)))
             ....:     for n, k, m, a, b in product(range(-1, 5), repeat=5))
             True
@@ -9321,7 +9321,7 @@ class PartitionsGreatestLE(UniqueRepresentation, IntegerListsLex):
 
         TESTS::
 
-            sage: all(PartitionsGreatestLE(n, a).cardinality() ==                       # needs sage.libs.flint
+            sage: all(PartitionsGreatestLE(n, a).cardinality() ==                       # needs sage.libs.flint sage.libs.gap
             ....:     len(list(PartitionsGreatestLE(n, a)))
             ....:     for n in range(20) for a in range(6))
             True
@@ -9908,7 +9908,7 @@ def number_of_partitions_max_length_max_part(n, k, b):
     This could also be computed using the `q`-binomial coefficient::
 
         sage: from sage.combinat.partition import number_of_partitions_max_length_max_part as f
-        sage: all(f(n, k, b) == q_binomial(k + b, b)[n] for n in range(5) for k in range(n+1) for b in range(n+1))  # needs sage.libs.flint
+        sage: all(f(n, k, b) == q_binomial(k + b, b)[n] for n in range(5) for k in range(n+1) for b in range(n+1))  # needs sage.libs.flint sage.libs.gap
         True
 
     However, although the `q`-binomial coefficient is faster for
@@ -9924,7 +9924,7 @@ def number_of_partitions_max_length_max_part(n, k, b):
         ....:              for k in range(ceil(m/l), min(m, n-m-l^2-2*l)+1))
         ....:     return s1 + s2
 
-        sage: A(100)                                                                    # needs sage.libs.flint
+        sage: A(100)                                                                    # needs sage.libs.flint sage.libs.gap
         10934714090
     """
     assert n >= 0 and k >= 0 and b >= 0, f"{n, k, b} must be non-negative"

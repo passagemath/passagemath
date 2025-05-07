@@ -1281,7 +1281,7 @@ cdef class Matrix_double_dense(Matrix_numpy_dense):
 
             sage: A = matrix.identity(CDF, 2)
             sage: B = matrix(CDF, [[2, 1 + I], [1 - I, 3]])                                 # needs sage.symbolic
-            sage: A.eigenvalues(B, algorithm='hermitian', homogeneous=True)  # tol 1e-14    # needs sage.symbolic
+            sage: A.eigenvalues(B, algorithm='hermitian', homogeneous=True)  # tol 1e-14    # needs scipy sage.symbolic
             [(0.25, 1.0), (1.0, 1.0)]
 
         Test the deprecation::

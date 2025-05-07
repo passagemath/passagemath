@@ -153,6 +153,7 @@ class NumberFields(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.libs.pari
                 sage: K.<a> = NumberField(ZZ['x'].0^2 + ZZ['x'].0 - 1)                  # needs sage.rings.number_field
                 sage: Z = K.zeta_function(); Z                                          # needs sage.rings.number_field sage.symbolic
                 PARI zeta function associated to Number Field in a
@@ -160,6 +161,7 @@ class NumberFields(Category_singleton):
                 sage: Z(-1)                                                             # needs sage.rings.number_field sage.symbolic
                 0.0333333333333333
 
+                sage: # needs sage.libs.pari
                 sage: x = polygen(QQ, 'x')
                 sage: L.<a, b, c> = NumberField([x^2 - 5, x^2 + 3, x^2 + 1])            # needs sage.rings.number_field
                 sage: Z = L.zeta_function()                                             # needs sage.rings.number_field sage.symbolic
@@ -168,11 +170,13 @@ class NumberFields(Category_singleton):
 
             Using the algorithm "pari"::
 
+                sage: # needs sage.libs.pari
                 sage: K.<a> = NumberField(ZZ['x'].0^2 + ZZ['x'].0 - 1)                  # needs sage.rings.number_field
                 sage: Z = K.zeta_function(algorithm='pari')                             # needs sage.rings.number_field sage.symbolic
                 sage: Z(-1)                                                             # needs sage.rings.number_field sage.symbolic
                 0.0333333333333333
 
+                sage: # needs sage.libs.pari
                 sage: x = polygen(QQ, 'x')
                 sage: L.<a, b, c> = NumberField([x^2 - 5, x^2 + 3, x^2 + 1])            # needs sage.rings.number_field
                 sage: Z = L.zeta_function(algorithm='pari')                             # needs sage.rings.number_field sage.symbolic
@@ -181,6 +185,7 @@ class NumberFields(Category_singleton):
 
             TESTS::
 
+                sage: # needs sage.libs.pari
                 sage: QQ.zeta_function()                                                # needs sage.symbolic
                 PARI zeta function associated to Rational Field
             """
