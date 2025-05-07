@@ -199,7 +199,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc boost_cropped brial cliquer giac glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd  cddlib  palp nauty gfan sympow elliptic_curves ecm pip
+      TARGETS_PRE: ccache libpng gmp mpfr mpc boost_cropped cliquer glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd  cddlib  palp nauty gfan sympow elliptic_curves ecm pip
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -327,18 +327,6 @@ jobs:
         id:   sagemath-categories
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*categories*
-
-      - name: sagemath-brial
-        id:   sagemath-brial
-        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*brial*
-
-      - name: sagemath-giac
-        id:   sagemath-giac
-        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*giac*
 
       - name: sagemath-glpk
         id:   sagemath-glpk
@@ -566,7 +554,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc bliss fricas coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip
+      TARGETS_PRE: ccache libpng gmp mpfr mpc brial giac bliss fricas coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -687,6 +675,18 @@ jobs:
         if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*bliss*
+
+      - name: sagemath-brial
+        id:   sagemath-brial
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*brial*
+
+      - name: sagemath-giac
+        id:   sagemath-giac
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*giac*
 
       - name: sagemath-fricas
         id:   sagemath-fricas
