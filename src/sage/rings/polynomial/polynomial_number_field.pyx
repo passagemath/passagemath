@@ -309,7 +309,7 @@ class Polynomial_relative_number_field_dense(Polynomial_generic_dense_field):
 
         Test for hardcoded variables::
 
-            sage: # needs sage.symbolic
+            sage: # needs fpylll sage.symbolic
             sage: R = N['sqrt2sqrt3']
             sage: x = R.gen()
             sage: f = x^2 - 2

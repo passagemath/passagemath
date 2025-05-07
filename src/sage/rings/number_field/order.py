@@ -1098,18 +1098,18 @@ class Order(Parent, sage.rings.abc.Order):
 
             sage: ZZ[2^(1/3)].class_number()                                            # needs fpylll sage.symbolic
             1
-            sage: QQ[sqrt(-23)].maximal_order().class_number()                          # needs sage.symbolic
+            sage: QQ[sqrt(-23)].maximal_order().class_number()                          # needs fpylll sage.symbolic
             3
-            sage: ZZ[120*sqrt(-23)].class_number()                                      # needs sage.symbolic
+            sage: ZZ[120*sqrt(-23)].class_number()                                      # needs fpylll sage.symbolic
             288
 
         Note that non-maximal orders are only supported in quadratic fields::
 
-            sage: ZZ[120*sqrt(-23)].class_number()                                      # needs sage.symbolic
+            sage: ZZ[120*sqrt(-23)].class_number()                                      # needs fpylll sage.symbolic
             288
-            sage: ZZ[100*sqrt(3)].class_number()                                        # needs sage.symbolic
+            sage: ZZ[100*sqrt(3)].class_number()                                        # needs fpylll sage.symbolic
             4
-            sage: ZZ[11*2^(1/3)].class_number()                                         # needs sage.symbolic
+            sage: ZZ[11*2^(1/3)].class_number()                                         # needs fpylll sage.symbolic
             Traceback (most recent call last):
             ...
             NotImplementedError: computation of class numbers of non-maximal orders
@@ -1431,7 +1431,7 @@ class Order(Parent, sage.rings.abc.Order):
 
         When the extension is not unique, this does not work::
 
-            sage: GaussianIntegers().valuation(ZZ.valuation(5))
+            sage: GaussianIntegers().valuation(ZZ.valuation(5))                         # needs sage.geometry.polyhedron
             Traceback (most recent call last):
             ...
             ValueError: The valuation Gauss valuation induced by 5-adic valuation does not
