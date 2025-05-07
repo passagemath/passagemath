@@ -250,7 +250,7 @@ class DiscreteGaussianDistributionLatticeSampler(SageObject):
             NotImplementedError: center must be at zero and basis must be trivial
             sage: Sigma = Matrix(ZZ, [[5, -2, 4], [-2, 10, -5], [4, -5, 5]])
             sage: D = DGL(ZZ^3, Sigma, [7, 2, 5])
-            sage: D._normalisation_factor_zz()
+            sage: D._normalisation_factor_zz()                                          # needs fpylll
             78.6804...
             sage: M = Matrix(ZZ, [[1, 3, 0], [-2, 5, 1]])
             sage: D = DGL(M, 3)

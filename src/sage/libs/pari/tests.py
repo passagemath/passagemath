@@ -1597,10 +1597,10 @@ General number fields::
     sage: b = F(nf.idealchinese(moduli,residues))                                       # needs sage.symbolic
     sage: b.valuation(P) >= 4                                                           # needs sage.symbolic
     True
-    sage: (b-1).valuation(Q) >= 2
+    sage: (b-1).valuation(Q) >= 2                                                       # needs sage.symbolic
     True
 
-    sage: # needs sage.symbolic
+    sage: # needs sage.rings.number_field sage.symbolic
     sage: F = NumberField(x^3-2, 'alpha')
     sage: nf = F.__pari__()
     sage: x = pari('[1, -1, 2]~')
