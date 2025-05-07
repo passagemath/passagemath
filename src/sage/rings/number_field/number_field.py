@@ -7803,7 +7803,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         `G` to infinity. This lets us specify which extension of the 5-adic
         valuation we care about in the above example::
 
-            sage: # needs sage.rings.padics
+            sage: # needs sage.geometry.polyhedron sage.rings.padics
             sage: R.<x> = QQ[]
             sage: G5 = GaussValuation(R, QQ.valuation(5))
             sage: v = K.valuation(G5.augmentation(x + 2, infinity))
@@ -7814,7 +7814,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         Note that you get the same valuation, even if you write down the
         pseudo-valuation differently::
 
-            sage: # needs sage.rings.padics
+            sage: # needs sage.geometry.polyhedron sage.rings.padics
             sage: ww = K.valuation(G5.augmentation(x + 3, infinity))
             sage: w is ww
             True
@@ -7825,7 +7825,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         completion, i.e., if it is not possible to write down one of the factors
         within the number field::
 
-            sage: # needs sage.rings.padics
+            sage: # needs sage.geometry.polyhedron sage.rings.padics
             sage: v = G5.augmentation(x + 3, 1)
             sage: K.valuation(v)
             [ 5-adic valuation, v(x + 3) = 1 ]-adic valuation
@@ -7833,7 +7833,7 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         Finally, ``prime`` can also be a fractional ideal of a number field if it
         singles out an extension of a `p`-adic valuation of the base field::
 
-            sage: K.valuation(K.fractional_ideal(a + 1))                                # needs sage.rings.padics
+            sage: K.valuation(K.fractional_ideal(a + 1))                                # needs sage.geometry.polyhedron sage.rings.padics
             2-adic valuation
 
         .. SEEALSO::
