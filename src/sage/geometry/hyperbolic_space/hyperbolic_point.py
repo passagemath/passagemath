@@ -321,7 +321,7 @@ class HyperbolicPoint(Element):
 
             sage: B = diagonal_matrix([-1, -1, 1])
             sage: B = HyperbolicPlane().HM().get_isometry(B)                            # needs scipy
-            sage: B * HyperbolicPlane().HM().get_point((0, 1, sqrt(2)))
+            sage: B * HyperbolicPlane().HM().get_point((0, 1, sqrt(2)))                 # needs scipy
             Point in HM (0, -1, sqrt(2))
         """
         if isinstance(other, HyperbolicIsometry):
