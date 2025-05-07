@@ -77,7 +77,7 @@ class DedekindDomains(Category):
 
                 sage: QQ.is_integrally_closed()
                 True
-                sage: S = ZZ[sqrt(5)]; S.is_integrally_closed()                             # needs sage.rings.number_field sage.symbolic
+                sage: S = ZZ[sqrt(5)]; S.is_integrally_closed()                             # needs fpylll sage.rings.number_field sage.symbolic
                 False
                 sage: T.<x,y> = PolynomialRing(QQ, 2); T
                 Multivariate Polynomial Ring in x, y over Rational Field

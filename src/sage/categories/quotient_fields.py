@@ -412,16 +412,16 @@ class QuotientFields(Category_singleton):
 
             We can decompose over a given algebraic extension::
 
-                sage: R.<x> = QQ[sqrt(2)][]                                             # needs sage.rings.number_field sage.symbolic
-                sage: r = 1/(x^4+1)                                                     # needs sage.rings.number_field sage.symbolic
-                sage: r.partial_fraction_decomposition()                                # needs sage.rings.number_field sage.symbolic
+                sage: R.<x> = QQ[sqrt(2)][]                                             # needs fpylll sage.rings.number_field sage.symbolic
+                sage: r = 1/(x^4+1)                                                     # needs fpylll sage.rings.number_field sage.symbolic
+                sage: r.partial_fraction_decomposition()                                # needs fpylll sage.rings.number_field sage.symbolic
                 (0,
                  [(-1/4*sqrt2*x + 1/2)/(x^2 - sqrt2*x + 1),
                   (1/4*sqrt2*x + 1/2)/(x^2 + sqrt2*x + 1)])
 
-                sage: R.<x> = QQ[I][]  # of QQ[sqrt(-1)]                                # needs sage.rings.number_field sage.symbolic
-                sage: r =  1/(x^4+1)                                                    # needs sage.rings.number_field sage.symbolic
-                sage: r.partial_fraction_decomposition()                                # needs sage.rings.number_field sage.symbolic
+                sage: R.<x> = QQ[I][]  # of QQ[sqrt(-1)]                                # needs fpylll sage.rings.number_field sage.symbolic
+                sage: r =  1/(x^4+1)                                                    # needs fpylll sage.rings.number_field sage.symbolic
+                sage: r.partial_fraction_decomposition()                                # needs fpylll sage.rings.number_field sage.symbolic
                 (0, [(-1/2*I)/(x^2 - I), 1/2*I/(x^2 + I)])
 
             We can also ask Sage to find the least extension where the
