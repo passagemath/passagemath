@@ -1,4 +1,4 @@
-$(MP_LIBRARY)
+$(MP_LIBRARY) | flex
 
 ----------
 All lines of this file are ignored except the first.

@@ -21,7 +21,6 @@ dev-lang/perl
 sys-devel/m4
 sys-devel/bc
 dev-lang/python
-sys-devel/flex
 app-misc/ca-certificates
 dev-libs/libxml2
 sys-apps/findutils
