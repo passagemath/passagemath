@@ -199,7 +199,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi boost_cropped cliquer glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular eclib gap ecl maxima libgd  cddlib  palp nauty gfan sympow elliptic_curves ecm pip
+      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi boost_cropped cliquer glpk libhomfly gsl pari ntl flint linbox iml lcalc libbraiding m4ri m4rie planarity rw symmetrica singular gap ecl maxima libgd  cddlib   nauty gfan elliptic_curves ecm pip
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -414,12 +414,6 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*gfan*
 
-      - name: sagemath-palp
-        id:   sagemath-palp
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*palp*
-
       - name: sagemath-nauty
         id:   sagemath-nauty
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
@@ -449,12 +443,6 @@ jobs:
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*libbraiding*
-
-      - name: sagemath-eclib
-        id:   sagemath-eclib
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*eclib*
 
       - name: sagemath-gap
         id:   sagemath-gap
@@ -497,12 +485,6 @@ jobs:
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_symbolics*
-
-      - name: sagemath-sympow
-        id:   sagemath-sympow
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_sympow*
 
       - name: sagemath-standard-no-symbolics
         id:   sagemath-standard-no-symbolics
@@ -554,7 +536,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc brial giac bliss fricas coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip
+      TARGETS_PRE: ccache libpng gmp mpfr mpc brial giac palp eclib sympow bliss fricas coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
       CIBW_SKIP: "pp*"
@@ -676,6 +658,8 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*bliss*
 
+      # Standard packages
+
       - name: sagemath-brial
         id:   sagemath-brial
         if:   (success() || failure())
@@ -687,6 +671,26 @@ jobs:
         if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*giac*
+
+      - name: sagemath-palp
+        id:   sagemath-palp
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*palp*
+
+      - name: sagemath-eclib
+        id:   sagemath-eclib
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*eclib*
+
+      - name: sagemath-sympow
+        id:   sagemath-sympow
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_sympow*
+
+      # Optional packages
 
       - name: sagemath-fricas
         id:   sagemath-fricas
