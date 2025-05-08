@@ -223,6 +223,8 @@ jobs:
       CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
       # Avoid ancient zlib on manylinux2014
       CIBW_MANYLINUX_AARCH64_IMAGE: manylinux_2_28
+      # Avoid ancient zlib on manylinux2014; manylinux_2_28 is not supported for i686 architecture.
+      CIBW_MANYLINUX_I686_IMAGE: manylinux_2_24
     steps:
       - name: Maximize build disk space
         if: runner.os == 'Linux' && matrix.arch != 'aarch64'
@@ -560,6 +562,8 @@ jobs:
       CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
       # Avoid ancient zlib on manylinux2014
       CIBW_MANYLINUX_AARCH64_IMAGE: manylinux_2_28
+      # Avoid ancient zlib on manylinux2014; manylinux_2_28 is not supported for i686 architecture.
+      CIBW_MANYLINUX_I686_IMAGE: manylinux_2_24
     steps:
       - name: Maximize build disk space
         if: runner.os == 'Linux' && matrix.arch != 'aarch64'
