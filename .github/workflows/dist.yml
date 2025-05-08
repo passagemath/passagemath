@@ -180,7 +180,7 @@ jobs:
         arch: >-
           ${{ github.event_name == 'pull_request'
                 && fromJson('["x86_64"]')
-                || fromJson('["x86_64", "i686"]') }}
+                || fromJson('["x86_64"]') }}
         build: >-
           ${{ github.event_name == 'pull_request'
                 && fromJson('["manylinux"]')
@@ -517,7 +517,7 @@ jobs:
         arch: >-
           ${{ github.event_name == 'pull_request'
                 && fromJson('["x86_64"]')
-                || fromJson('["x86_64", "i686"]') }}
+                || fromJson('["x86_64"]') }}
         build: >-
           ${{ github.event_name == 'pull_request'
                 && fromJson('["manylinux"]')
