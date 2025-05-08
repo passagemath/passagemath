@@ -177,14 +177,8 @@ jobs:
       fail-fast: false
       matrix:
         os:      [ubuntu-latest]
-        arch: >-
-          ${{ github.event_name == 'pull_request'
-                && fromJson('["x86_64"]')
-                || fromJson('["x86_64", "i686"]') }}
-        build: >-
-          ${{ github.event_name == 'pull_request'
-                && fromJson('["manylinux"]')
-                || fromJson('["manylinux", "musllinux"]') }}
+        arch:    [i686]
+        build:   ["manylinux", "musllinux"]
         include:
           - os: ubuntu-24.04-arm
             arch: aarch64
@@ -516,14 +510,8 @@ jobs:
       fail-fast: false
       matrix:
         os:      [ubuntu-latest]
-        arch: >-
-          ${{ github.event_name == 'pull_request'
-                && fromJson('["x86_64"]')
-                || fromJson('["x86_64", "i686"]') }}
-        build: >-
-          ${{ github.event_name == 'pull_request'
-                && fromJson('["manylinux"]')
-                || fromJson('["manylinux", "musllinux"]') }}
+        arch:    [i686]
+        build:   ["manylinux", "musllinux"]
         include:
           - os: ubuntu-24.04-arm
             arch: aarch64
