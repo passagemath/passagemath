@@ -33,11 +33,11 @@ class GfanExecutable(Executable):
             executable = "gfan"
         else:
             executable = name = f"gfan_{cmd}"
-        Executable.__init__(self, name, executable=executable, spkg='gfan', type='standard')
+        Executable.__init__(self, name, executable=executable, spkg='gfan', type='optional')
 
 
 def all_features():
     return [JoinFeature("gfan",
                         (GfanExecutable(),
                          PythonModule('sage.interfaces.gfan')),
-                        spkg='sagemath_gfan', type='standard')]
+                        spkg='sagemath_gfan', type='optional')]
