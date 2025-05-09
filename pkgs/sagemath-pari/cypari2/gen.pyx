@@ -1968,35 +1968,6 @@ cdef class Gen(Gen_base):
         from sage.libs.pari.convert_sage import gen_to_sage
         return gen_to_sage(self, locals)
 
-    def __long__(self):
-        """
-        Convert ``self`` to a Python ``long``.
-
-        Examples:
-
-        >>> from cypari2 import Pari
-        >>> pari = Pari()
-        >>> import sys
-
-        >>> if sys.version_info.major == 3:
-        ...     long = int
-        >>> assert isinstance(long(pari(0)), long)
-        >>> assert long(pari(0)) == 0
-        >>> assert long(pari(10)) == 10
-        >>> assert long(pari(-10)) == -10
-        >>> assert long(pari(123456789012345678901234567890)) == 123456789012345678901234567890
-        >>> assert long(pari(-123456789012345678901234567890)) == -123456789012345678901234567890
-        >>> assert long(pari(2**31-1)) == 2147483647
-        >>> assert long(pari(-2**31)) == -2147483648
-        >>> assert long(pari("Pol(10)")) == 10
-        >>> assert long(pari("Mod(2, 7)")) == 2
-        """
-        x = gen_to_integer(self)
-        if isinstance(x, long):
-            return x
-        else:
-            return long(x)
-
     def __float__(self):
         """
         Return Python float.

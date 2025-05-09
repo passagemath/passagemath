@@ -43,7 +43,7 @@ some bit shuffling.
 from cysignals.signals cimport sig_on, sig_off, sig_error
 
 from cpython.version cimport PY_MAJOR_VERSION
-from cpython.int cimport PyInt_AS_LONG, PyInt_FromLong
+from cpython.long cimport PyLong_AsLong, PyLong_FromLong
 from cpython.longintrepr cimport (_PyLong_New,
                                   digit, PyLong_SHIFT, PyLong_MASK)
 from libc.limits cimport LONG_MIN, LONG_MAX
@@ -354,7 +354,7 @@ cdef PyInt_FromGEN(GEN g):
         reset_avma()
 
     if not signe(g):
-        return PyInt_FromLong(0)
+        return PyLong_FromLong(0)
 
     cdef ulong u
     if PY_MAJOR_VERSION == 2:
@@ -366,10 +366,10 @@ cdef PyInt_FromGEN(GEN g):
             # Check that <long>(u) or <long>(-u) does not overflow
             if signe(g) >= 0:
                 if u <= <ulong>LONG_MAX:
-                    return PyInt_FromLong(u)
+                    return PyLong_FromLong(u)
             else:
                 if u <= -<ulong>LONG_MIN:
-                    return PyInt_FromLong(-u)
+                    return PyLong_FromLong(-u)
 
     # Result does not fit in a C long
     res = PyLong_FromINT(g)
@@ -546,13 +546,9 @@ cdef GEN PyObject_AsGEN(x) except? NULL:
         sig_on()
         g = gp_read_str(<bytes>x)
         sig_off()
-    elif isinstance(x, long):
-        sig_on()
-        g = PyLong_AS_GEN(x)
-        sig_off()
     elif isinstance(x, int):
         sig_on()
-        g = PyInt_AS_GEN(x)
+        g = PyLong_AS_GEN(x)
         sig_off()
     elif isinstance(x, float):
         sig_on()
@@ -610,11 +606,8 @@ def integer_to_gen(x):
     ...     if pari(long(x)) != pari(x) or pari(int(x)) != pari(x):
     ...         print(x)
     """
-    if isinstance(x, long):
-        sig_on()
-        return new_gen(PyLong_AS_GEN(x))
     if isinstance(x, int):
         sig_on()
-        return new_gen(stoi(PyInt_AS_LONG(x)))
+        return new_gen(PyLong_AS_GEN(x))
     raise TypeError("integer_to_gen() needs an int or long "
                     "argument, not {}".format(type(x).__name__))
