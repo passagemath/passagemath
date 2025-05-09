@@ -1,5 +1,6 @@
 SAGE_SPKG_CONFIGURE([cmake], [dnl
-        AC_CACHE_CHECK([for cmake >= 3.22], [ac_cv_path_CMAKE], [dnl
+        dnl macaulay2 1.24.11 needs 3.24
+        AC_CACHE_CHECK([for cmake >= 3.24], [ac_cv_path_CMAKE], [dnl
         dnl Do not accept cmake installed via https://pypi.org/project/cmake/
         dnl in the default user scheme; it will not work in our venv because
         dnl we set PYTHONUSERBASE in sage-env.
