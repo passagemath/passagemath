@@ -1,0 +1,654 @@
+--- a/include/sacproto.h	2018-01-30 14:09:32.000000000 -0700
++++ b/include/sacproto.h	2018-08-29 19:50:42.037428413 -0600
+@@ -1,6 +1,6 @@
+ extern void FAIL P__((const char *algName, const char *msg,...)) __noreturn;
+ extern void AADV	P__((Word L, Word *a_, Word *Lp_));
+-extern Word ABS	P__((Word a));
++extern Word ABS	P__((Word a)) __constfunc;
+ extern Word ACLOCK	P__((void));
+ extern void ADDTO	P__((Word *A, Word *B, Word n));
+ extern void ADV2	P__((Word L, Word *a_, Word *b_, Word *Lp_));
+@@ -94,9 +94,9 @@ extern void AGIRSUM	P__((BDigit **A, BDi
+ extern void AGISUM	P__((BDigit **A, BDigit **B, BDigit **C));
+ extern void AGITR	P__((BDigit **A, BDigit n, BDigit k, BDigit **B));
+ extern void AGIWRITE	P__((BDigit **A));
+-extern BDigit AGIZERO	P__((BDigit **A));
+-extern BDigit AICOMP	P__((BDigit *A, BDigit *B));
+-extern void AICOPY	P__((BDigit *A, BDigit *B));
++extern BDigit AGIZERO	P__((BDigit **A)) __pure;
++extern BDigit AICOMP	P__((const BDigit *A, const BDigit *B)) __pure;
++extern void AICOPY	P__((const BDigit *A, BDigit *B));
+ extern void AIDP2	P__((BDigit *A, BDigit k, BDigit *B));
+ extern void AIFAN	P__((Word M, Word *mh_, Word *Mh_));
+ extern Word AII	P__((BDigit *A));
+@@ -106,9 +106,9 @@ extern void AIPROD	P__((BDigit *A, BDigi
+ extern void AIQR	P__((BDigit *A, BDigit *B, BDigit *Q, BDigit *R, BDigit *T));
+ extern void AISUM	P__((BDigit *A, BDigit *B, BDigit *C));
+ extern void AITR	P__((BDigit *A, BDigit n, BDigit k, BDigit *B));
+-extern BDigit AITRS	P__((BDigit *A, BDigit n, BDigit k));
++extern BDigit AITRS	P__((const BDigit *A, BDigit n, BDigit k)) __pure;
+ extern void AIWRITE	P__((BDigit *A));
+-extern BDigit AIZERO	P__((BDigit *A));
++extern BDigit AIZERO	P__((const BDigit *A)) __pure;
+ extern Word ALSIL	P__((Word A, Word L));
+ extern Word AMLM	P__((BDigit **M, BDigit m, BDigit n));
+ extern Word AMPDMV	P__((Word r, Word A));
+@@ -147,7 +147,7 @@ extern void ARIE	P__((Word A, Word n, Wo
+ extern void ASSPR	P__((Word A, Word *p_, Word *m_));
+ extern void AWCOPY	P__((Word *A, BDigit n, Word *B));
+ extern void AWRITE	P__((Word A));
+-extern Word BDGCD	P__((Word a, Word b));
++extern Word BDGCD	P__((Word a, Word b)) __constfunc;
+ extern void BEGINSACLIB	P__((Word *p));
+ extern Word BERNOULLINUM	P__((BDigit n));
+ extern Word BERNOULLIPOL	P__((BDigit n, Word L));
+@@ -169,7 +169,7 @@ extern void COPYTO	P__((Word *A, Word *B
+ extern void CPLEXN	P__((Word L, Word *I_, Word *M_));
+ extern Word CREADB	P__((void));
+ extern Word CREAD	P__((void));
+-extern BDigit CSFAM	P__((BDigit n, BDigit *A));
++extern BDigit CSFAM	P__((BDigit n, const BDigit *A)) __pure;
+ extern Word CSFPAR	P__((Word L));
+ extern Word CSFS	P__((Word S));
+ extern Word CSINT	P__((Word A, Word B));
+@@ -181,27 +181,27 @@ extern Word DAND	P__((Word a, Word b));
+ extern void DDPCC	P__((Word a1, Word a0, Word b1, Word b0, Word *u1_, Word *u2_, Word *v1_, Word *v2_));
+ extern void DDRPCC	P__((Word m, Word a1, Word a0, Word b1, Word b0, Word *u1_, Word *u2_, Word *v1_, Word *v2_));
+ extern void DEGCD	P__((Word a, Word b, Word *c_, Word *u_, Word *v_));
+-extern Word DGCD	P__((Word a, Word b));
++extern Word DGCD	P__((Word a, Word b)) __constfunc;
+ extern void DIELOC	P__((void));
+-extern Word DIGIT	P__((Word C));
++extern Word DIGIT	P__((Word C)) __pure;
+ extern Word DIIPREAD	P__((Word V));
+ extern void DIIPWRITE	P__((Word r, Word A, Word V));
+-extern Word DIPDEG	P__((Word r, Word A));
++extern Word DIPDEG	P__((Word r, Word A)) __pure;
+ extern Word DIPFP	P__((Word r, Word A));
+ extern void DIPINS	P__((Word a, Word d, Word A, Word *t_, Word *B_));
+ extern Word DIRPREAD	P__((Word V));
+ extern void DIRPWRITE	P__((Word r, Word A, Word V));
+ extern void DLINIT	P__((BDigit p, BDigit n, BDigit **Fp, BDigit **Gp, BDigit **A, BDigit **B, BDigit **C));
+-extern BDigit DLINV	P__((BDigit a));
+-extern BDigit DLNEG	P__((BDigit a));
+-extern Word DLOG2	P__((Word a));
+-extern BDigit DLPROD	P__((BDigit a, BDigit b));
+-extern BDigit DLSUM	P__((BDigit a, BDigit b));
++extern BDigit DLINV	P__((BDigit a)) __pure;
++extern BDigit DLNEG	P__((BDigit a)) __pure;
++extern Word DLOG2	P__((Word a)) __pure;
++extern BDigit DLPROD	P__((BDigit a, BDigit b)) __pure;
++extern BDigit DLSUM	P__((BDigit a, BDigit b)) __pure;
+ extern Word DMPPRD	P__((Word r, Word m, Word A, Word B));
+ extern Word DMPSUM	P__((Word r, Word m, Word A, Word B));
+ extern Word DMUPNR	P__((Word p, Word A, Word B));
+ extern Word DNIMP	P__((Word a, Word b));
+-extern Word DNOT	P__((Word a));
++extern Word DNOT	P__((Word a)) __constfunc;
+ extern Word DOR	P__((Word a, Word b));
+ extern void DPCC	P__((Word a, Word b, Word *u1_, Word *u2_, Word *v1_, Word *v2_));
+ extern Word DPFP	P__((Word r, Word A));
+@@ -218,9 +218,9 @@ extern Word DVCMP	P__((Word d1, Word d2)
+ extern void ENDSACLIB	P__((Word f));
+ extern Word EQUAL	P__((Word a, Word b));
+ extern Word EVEN	P__((Word a));
+-extern Word EXPF	P__((Word a, Word b));
++extern Word EXPF	P__((Word a, Word b)) __constfunc;
+ extern Word EXTENT	P__((Word a));
+-extern BDigit FCOMP	P__((BDigit *I, BDigit *J));
++extern BDigit FCOMP	P__((const BDigit *I, const BDigit *J)) __pure;
+ extern void FCOPY	P__((Word *A, Word *B));
+ extern void FDIF	P__((Word *A, Word *B, BDigit d, Word *C));
+ extern void FILINE	P__((void));
+@@ -229,9 +229,9 @@ extern void FIRST3	P__((Word L, Word *a1
+ extern void FIRST4	P__((Word L, Word *a1_, Word *a2_, Word *a3_, Word *a4_));
+ extern void FIRST5	P__((Word L, Word *a1_, Word *a2_, Word *a3_, Word *a4_, Word *a5_));
+ extern void FIRST6	P__((Word L, Word *a1_, Word *a2_, Word *a3_, Word *a4_, Word *a5_, Word *a6_));
+-extern Word FIRST	P__((Word L));
++extern Word FIRST	P__((Word L)) __pure;
+ extern Word FLBRN	P__((BDigit *F));
+-extern Word FOURTH	P__((Word L));
++extern Word FOURTH	P__((Word L)) __pure;
+ extern void FPCATCH	P__((void));
+ extern Word FPCHECK	P__((void));
+ extern void FPROD1	P__((Word *A, Word *B, BDigit d, Word *C));
+@@ -260,7 +260,7 @@ extern void FSUMSEOS	P__((Word *A, Word
+ extern void FSUMSESS	P__((Word *A, Word *B, BDigit d, Word *C));
+ extern Word *GCA2PTR	P__((Word A));
+ extern void GCAFREE	P__((Word A));
+-extern Word GCAGET	P__((Word A, Word i));
++extern Word GCAGET	P__((Word A, Word i)) __pure;
+ extern Word GCAMALLOC	P__((Word s, Word f));
+ extern void GCASET	P__((Word A, Word i, Word a));
+ extern Word GCATL	P__((Word A, Word n));
+@@ -291,7 +291,7 @@ extern Word GISUM	P__((Word A, Word B));
+ extern void GIWRITE	P__((Word a));
+ extern Word GREAD	P__((void));
+ extern void GWRITE	P__((Word a));
+-extern BDigit HEXP	P__((double a));
++extern BDigit HEXP	P__((double a)) __constfunc;
+ extern BDigit HIACC	P__((interval I));
+ extern void HIDWRITE	P__((interval I, BDigit k));
+ extern Word HILBRI	P__((interval I));
+@@ -309,15 +309,15 @@ extern interval HIPROD	P__((interval I,
+ extern void HIPRRID	P__((BDigit n, interval *A, Word *L_, BDigit *t_));
+ extern void HIPRRISD	P__((BDigit n, interval *A, Word a, Word b, Word *L_, BDigit *t_));
+ extern interval *HIPRT	P__((BDigit n, interval *A));
+-extern Word HIPSV	P__((BDigit n, interval *A));
++extern Word HIPSV	P__((BDigit n, const interval *A)) __pure;
+ extern interval *HIPTR1	P__((BDigit n, interval A[]));
+ extern void HIPVCHT	P__((BDigit n, interval *A, BDigit *v_, BDigit *t_));
+ extern interval HIQUOT	P__((interval I, interval J));
+-extern Word HISIGN	P__((interval I));
++extern Word HISIGN	P__((interval I)) __pure;
+ extern interval HISUM	P__((interval I, interval J));
+-extern BDigit HSIGN	P__((double a));
++extern BDigit HSIGN	P__((double a)) __constfunc;
+ extern Word IABSF	P__((Word A));
+-extern Word IACOMPA	P__((Word *A, Word m, Word *B, Word n));
++extern Word IACOMPA	P__((Word *A, Word m, Word *B, Word n)) __pure;
+ extern BDigit *IAI	P__((Word A));
+ extern Word IBCIND	P__((Word A, Word n, Word k));
+ extern Word IBCOEF	P__((Word n, Word k));
+@@ -348,7 +348,7 @@ extern void IEEEROUND	P__((ieee F, BDigi
+ extern void IEEEWRITE	P__((ieee F));
+ extern void IEGCD	P__((Word a, Word b, Word *c_, Word *u1_, Word *v1_));
+ extern Word IEQ	P__((Word A, Word B));
+-extern Word IEVEN	P__((Word A));
++extern Word IEVEN	P__((Word A)) __pure;
+ extern Word IEXP	P__((Word A, Word n));
+ extern Word IFACT	P__((Word n));
+ extern Word IFACTL	P__((Word n));
+@@ -359,7 +359,7 @@ extern BDigit IFEC	P__((Word I, BDigit p
+ extern void IFLTA	P__((Word A, Word *B, Word b, Word **Bp_, Word *n_, Word *s_, Word *o_));
+ extern Word IGCD	P__((Word A, Word B));
+ extern void IGCDCF	P__((Word A, Word B, Word *C_, Word *Ab_, Word *Bb_));
+-extern Word IHDREM	P__((Word *A, Word n, Word b));
++extern Word IHDREM	P__((const Word *A, Word n, Word b)) __pure;
+ extern void IHEAS	P__((Word *A1, Word m1, Word *A2, Word m2, Word *V1, Word n1, Word *V2, Word n2, Word *mp_, Word *np_));
+ extern void IHEGCD	P__((Word A, Word B, Word *C_, Word *V_));
+ extern void IHI	P__((Word A, interval *I_, BDigit *u_));
+@@ -369,8 +369,8 @@ extern void IIEEET	P__((Word A, ieee *F_
+ extern Word ILBRN	P__((Word I));
+ extern Word ILCM	P__((Word A, Word B));
+ extern Word ILCOMB	P__((Word A, Word B, Word u, Word v));
+-extern Word ILOG2	P__((Word A));
+-extern Word ILOGB	P__((Word A));
++extern Word ILOG2	P__((Word A)) __pure;
++extern Word ILOGB	P__((Word A)) __pure;
+ extern void ILPDS	P__((Word n, Word a, Word b, Word *p_, Word *np_));
+ extern void ILSA	P__((BDigit *A, BDigit n, BDigit k));
+ extern void ILWORD	P__((Word *A, Word m, Word *B, Word n, Word *a_, Word *b_));
+@@ -390,8 +390,8 @@ extern void INQR	P__((Word A, Word B, Wo
+ extern Word INSET	P__((Word S, Word a));
+ extern Word INV	P__((Word L));
+ extern BDigit *INVPERM	P__((BDigit n, BDigit *A));
+-extern Word IODD	P__((Word A));
+-extern Word IORD2	P__((Word A));
++extern Word IODD	P__((Word A)) __pure;
++extern Word IORD2	P__((Word A)) __pure;
+ extern Word IPABS	P__((Word r, Word A));
+ extern Word IPAFME	P__((Word r, Word M, Word A, Word b));
+ extern Word IPBEILV	P__((Word r, Word A, Word c, Word k, Word m));
+@@ -403,7 +403,7 @@ extern Word IPBREI	P__((Word r, Word A,
+ extern void IPCA	P__((BDigit r, Word A, BDigit *n_, BDigit *h_, BDigit *k_, BDigit *t_));
+ extern Word IPC	P__((Word r, Word A));
+ extern void IPCEVP	P__((Word r, Word A, Word *B_, Word *L_));
+-extern Word IPCONST	P__((Word r, Word A));
++extern Word IPCONST	P__((Word r, Word A)) __pure;
+ extern void IPCPP	P__((Word r, Word A, Word *C_, Word *Ab_));
+ extern Word IPCRA	P__((Word M, Word m, Word mp, Word r, Word A, Word a));
+ extern Word IPCSFB	P__((Word r, Word A));
+@@ -456,7 +456,7 @@ extern Word IPMAXN	P__((Word r, Word A))
+ extern void IPMONFACT	P__((Word r, Word A, Word *L_, Word *Ap_));
+ extern Word IPNEG	P__((Word r, Word A));
+ extern Word IPNT	P__((Word r, Word A, Word i));
+-extern Word IPONE	P__((Word r, Word A));
++extern Word IPONE	P__((Word r, Word A)) __pure;
+ extern void IPOWER	P__((Word A, Word L, Word *B_, Word *n_));
+ extern Word IPP2P	P__((Word r, Word B, Word m));
+ extern Word IPPFAC2	P__((Word r, Word A));
+@@ -546,28 +546,28 @@ extern Word IREAD	P__((void));
+ extern Word IREM	P__((Word A, Word B));
+ extern void IRLSA	P__((Word *A, Word n, Word k, Word *np_));
+ extern void IROOT	P__((Word A, Word n, Word *B_, Word *t_));
+-extern Word ISATOM	P__((Word a));
+-extern Word ISCSELT	P__((Word i, Word C));
++extern Word ISATOM	P__((Word a)) __constfunc;
++extern Word ISCSELT	P__((Word i, Word C)) __pure;
+ extern void ISEM	P__((Word A, BDigit *s_, BDigit *e_, BDigit *m1_, BDigit *m0_, BDigit *t_));
+ extern Word ISFPF	P__((Word r, Word A));
+ extern Word ISFPIR	P__((Word A, Word I, Word k));
+-extern Word ISGCA	P__((Word a));
++extern Word ISGCA	P__((Word a)) __pure;
+ extern void ISI	P__((Word I, BDigit p, BDigit *A));
+ extern Word ISIGNF	P__((Word A));
+ extern void ISLCOMB	P__((Word *A, Word m, Word *B, Word n, Word v, Word s, Word *mp_));
+-extern Word ISLIST	P__((Word a));
++extern Word ISLIST	P__((Word a)) __pure;
+ extern Word ISMC	P__((Word M, Word Mp, Word m, Word U));
+-extern Word ISNIL	P__((Word a));
+-extern Word ISOBJECT	P__((Word a));
++extern Word ISNIL	P__((Word a)) __constfunc;
++extern Word ISOBJECT	P__((Word a)) __pure;
+ extern void ISPD	P__((Word n, Word *F_, Word *m_));
+ extern Word ISPFAC2	P__((Word r, Word A));
+ extern void ISPROD	P__((Word *A, BDigit n1, Word *B, BDigit n2, Word *C));
+ extern Word ISPSFB	P__((Word r, Word A));
+ extern Word ISPT	P__((Word m, Word mp, Word F));
+ extern void ISQRT	P__((Word A, Word *B_, Word *t_));
+-extern Word ISSUBSET	P__((Word A, Word B));
++extern Word ISSUBSET	P__((Word A, Word B)) __pure;
+ extern Word ISUM	P__((Word A, Word B));
+-extern Word ISZERO	P__((Word a));
++extern Word ISZERO	P__((Word a)) __constfunc;
+ extern Word ITRUNC	P__((Word A, Word n));
+ extern Word IUPBEI	P__((Word A, Word c, Word k));
+ extern Word IUPBES	P__((Word A, Word a));
+@@ -619,8 +619,8 @@ extern Word IUSFPF	P__((Word A));
+ extern void IUSFPMF	P__((Word A, Word *p_, Word *F_, Word *C_, Word *L_));
+ extern void IWRITE	P__((Word A));
+ extern void KARATSUBA	P__((Word *A, Word n1, Word *B, Word n2, Word *C, Word *W));
+-extern Word LAST	P__((Word L));
+-extern Word LASTCELL	P__((Word L));
++extern Word LAST	P__((Word L)) __pure;
++extern Word LASTCELL	P__((Word L)) __pure;
+ extern Word LBIBMS	P__((Word L));
+ extern void LBIBS	P__((Word L));
+ extern Word LBIM	P__((Word L1, Word L2));
+@@ -657,10 +657,10 @@ extern Word LDELETE	P__((Word e, Word L)
+ extern void LDSMKB	P__((Word A, Word b, Word *xs_, Word *N_));
+ extern void LDSSBR	P__((Word A, Word b, Word *xs_, Word *N_));
+ extern Word LEINST	P__((Word A, Word i, Word a));
+-extern Word LELTI	P__((Word A, Word i));
+-extern Word LENGTH	P__((Word L));
++extern Word LELTI	P__((Word A, Word i)) __pure;
++extern Word LENGTH	P__((Word L)) __pure;
+ extern Word LEROT	P__((Word L, Word i, Word j));
+-extern Word LETTER	P__((Word C));
++extern Word LETTER	P__((Word C)) __constfunc;
+ extern Word LEXNEX	P__((Word A));
+ extern BDigit LEXNEXT	P__((BDigit n, BDigit m, BDigit *A));
+ extern void LEXNEXTC	P__((Word n, Word k, Word *I, Word *t_));
+@@ -714,24 +714,24 @@ extern void MAPPROD	P__((Word m, Word *A
+ extern void MAPQR	P__((Word m, Word *A, Word *B, Word *Q));
+ extern void MAPRS	P__((BDigit p, Word *A, Word *B));
+ extern void MAPSE	P__((Word m, Word *A, Word *B, Word *S, Word *T, Word *C, Word *U, Word *V));
+-extern BDigit MAPSEV	P__((BDigit *A, BDigit a));
++extern BDigit MAPSEV	P__((BDigit *A, BDigit a)) __pure;
+ extern void MAPSUM	P__((Word m, Word *A, Word *B, Word *C));
+ extern void MAPTPR	P__((Word m, Word n, Word *A, Word *B, Word *C));
+ extern void MARK	P__((Word L));
+-extern Word MAX	P__((Word a, Word b));
++extern Word MAX	P__((Word a, Word b)) __constfunc;
+ extern Word MCPMV	P__((Word n, Word L));
+ extern Word MDCRA	P__((Word m1, Word m2, Word mp1, Word a1, Word a2));
+-extern Word MDDIF	P__((Word m, Word a, Word b));
++extern Word MDDIF	P__((Word m, Word a, Word b)) __constfunc;
+ extern Word MDEXP	P__((Word m, Word a, Word n));
+ extern Word MDHOM	P__((Word m, Word A));
+ extern Word MDINVB	P__((Word a));
+-extern Word MDINV	P__((Word m, Word a));
++extern Word MDINV	P__((Word m, Word a)) __constfunc;
+ extern Word MDLCRA	P__((Word m1, Word m2, Word L1, Word L2));
+-extern Word MDNEG	P__((Word m, Word a));
++extern Word MDNEG	P__((Word m, Word a)) __constfunc;
+ extern Word MDPROD	P__((Word m, Word a, Word b));
+ extern Word MDQ	P__((Word m, Word a, Word b));
+ extern Word MDRAN	P__((Word m));
+-extern Word MDSUM	P__((Word m, Word a, Word b));
++extern Word MDSUM	P__((Word m, Word a, Word b)) __constfunc;
+ extern Word MEMBER	P__((Word a, Word L));
+ extern Word MIAIM	P__((Word A));
+ extern Word MICINS	P__((Word A, Word V));
+@@ -741,7 +741,7 @@ extern Word MIDIF	P__((Word M, Word A, W
+ extern Word MIEXP	P__((Word M, Word A, Word N));
+ extern Word MIHOM	P__((Word M, Word A));
+ extern Word MIINV	P__((Word M, Word A));
+-extern Word MIN	P__((Word a, Word b));
++extern Word MIN	P__((Word a, Word b)) __constfunc;
+ extern Word MINEG	P__((Word M, Word A));
+ extern Word MINNCT	P__((Word A));
+ extern Word MIPDIF	P__((Word r, Word M, Word A, Word B));
+@@ -765,7 +765,7 @@ extern void MIUPSE	P__((Word M, Word A,
+ extern Word MMAMNSB	P__((Word p, Word n, Word **M));
+ extern Word **MMAPBM	P__((Word p, Word *A));
+ extern void MMAPDEFL	P__((Word m, Word *A, Word c));
+-extern Word MMAPEVAL	P__((Word m, Word *A, Word s));
++extern Word MMAPEVAL	P__((Word m, const Word *A, Word s)) __pure;
+ extern Word *MMAPEXP	P__((Word m, Word *A, Word n));
+ extern Word MMAPFS	P__((Word p, Word *A, Word B, Word d));
+ extern Word *MMAPGCD	P__((Word p, Word *A, Word *B));
+@@ -861,17 +861,17 @@ extern Word PARTR	P__((Word n));
+ extern Word PARTSS	P__((Word p));
+ extern Word PBIN	P__((Word a1, Word e1, Word a2, Word e2));
+ extern Word PCL	P__((Word A));
+-extern Word PCOEFF	P__((Word A, Word i));
+-extern Word PCONST	P__((Word r, Word A));
++extern Word PCOEFF	P__((Word A, Word i)) __pure;
++extern Word PCONST	P__((Word r, Word A)) __pure;
+ extern Word PCPV	P__((Word r, Word A, Word i, Word j));
+ extern Word PDBORD	P__((Word A));
+ extern Word PDE	P__((BDigit i, BDigit k, BDigit r, Word A));
+-extern Word PDEG	P__((Word A));
++extern Word PDEG	P__((Word A)) __pure;
+ extern Word PDEGSV	P__((Word r, Word A, Word i));
+ extern Word PDEGV	P__((Word r, Word A));
+-extern Word PDLOG2	P__((Word a));
++extern Word PDLOG2	P__((Word a)) __pure;
+ extern Word PDPV	P__((Word r, Word A, Word i, Word n));
+-extern BDigit PDVAR	P__((BDigit r, BDigit i, Word A));
++extern BDigit PDVAR	P__((BDigit r, BDigit i, Word A)) __pure;
+ extern Word PERMCY	P__((Word P));
+ extern Word PERMR	P__((Word n));
+ extern Word PFBRE	P__((Word r, Word a));
+@@ -882,12 +882,12 @@ extern BDigit *PFFAP	P__((BDigit p, BDig
+ extern BDigit PFFGEN	P__((BDigit p));
+ extern Word PGCDE	P__((BDigit i, BDigit r, Word A));
+ extern void PHDQR	P__((Word a1, Word a0, Word b, Word *q_, Word *r_));
+-extern Word PHDREM	P__((Word a1, Word a0, Word b));
++extern Word PHDREM	P__((Word a1, Word a0, Word b)) __constfunc;
+ extern Word PICPV	P__((Word r, Word A, Word i, Word j));
+ extern Word PINV	P__((Word r, Word A, Word k));
+-extern Word PLBCF	P__((Word r, Word A));
+-extern Word PLDCF	P__((Word A));
+-extern Word PMDEG	P__((Word A));
++extern Word PLBCF	P__((Word r, Word A)) __pure;
++extern Word PLDCF	P__((Word A)) __pure;
++extern Word PMDEG	P__((Word A)) __pure;
+ extern Word PME	P__((BDigit i, BDigit k, BDigit r, Word A));
+ extern Word PMON	P__((Word a, Word e));
+ extern Word PMONSV	P__((Word r, Word a, Word i, Word e));
+@@ -898,7 +898,7 @@ extern BDigit PNM	P__((BDigit r, Word A)
+ extern Word PORD	P__((Word A));
+ extern Word PPERMV	P__((Word r, Word A, Word P));
+ extern Word PPLT	P__((Word e, Word a, Word A));
+-extern Word PRED	P__((Word A));
++extern Word PRED	P__((Word A)) __pure;
+ extern void PRODUCT	P__((Word *A, Word n1, Word *B, Word n2, Word *C));
+ extern Word PRT	P__((Word A));
+ extern Word PSDSV	P__((Word r, Word A, Word i, Word n));
+@@ -910,18 +910,18 @@ extern void PTRADV	P__((Word L, Word **a
+ extern Word PTRCF	P__((Word A));
+ extern Word PTRCOMP	P__((Word *p, Word L));
+ extern Word* PTRFIRST	P__((Word L));
+-extern Word PTRLENGTH	P__((Word L));
++extern Word PTRLENGTH	P__((Word L)) __pure;
+ extern Word PTRLIST1	P__((Word *a));
+-extern Word PTRRED	P__((Word L));
++extern Word PTRRED	P__((Word L)) __pure;
+ extern Word PTV	P__((Word r, Word A, Word i));
+ extern Word PUFP	P__((Word r, Word A));
+-extern Word PUNT	P__((Word r, Word A));
++extern Word PUNT	P__((Word r, Word A)) __pure;
+ extern void QREM	P__((Word a, Word b, Word *q_, Word *r_));
+-extern Word RED2	P__((Word L));
+-extern Word RED3	P__((Word L));
+-extern Word RED4	P__((Word L));
+-extern Word RED	P__((Word L));
+-extern Word REDI	P__((Word A, Word i));
++extern Word RED2	P__((Word L)) __pure;
++extern Word RED3	P__((Word L)) __pure;
++extern Word RED4	P__((Word L)) __pure;
++extern Word RED	P__((Word L)) __pure;
++extern Word REDI	P__((Word A, Word i)) __pure;
+ extern Word REM	P__((Word a, Word b));
+ extern void RHI	P__((Word a, Word b, interval *I_, BDigit *t_));
+ extern Word RIB	P__((Word r, Word s));
+@@ -941,7 +941,7 @@ extern void RNBCR	P__((Word A, Word B, W
+ extern Word RNCEIL	P__((Word r));
+ extern Word RNCOMP	P__((Word R, Word S));
+ extern void RNDDWRITE	P__((Word R, Word n, Word t));
+-extern Word RNDEN	P__((Word R));
++extern Word RNDEN	P__((Word R)) __pure;
+ extern Word RNDIF	P__((Word R, Word S));
+ extern void RNDWRITE	P__((Word R, Word n));
+ extern void RNFCL2	P__((Word a, Word *m_, Word *n_));
+@@ -954,7 +954,7 @@ extern Word RNLBRN	P__((Word A));
+ extern Word RNMAX	P__((Word a, Word b));
+ extern Word RNMIN	P__((Word a, Word b));
+ extern Word RNNEG	P__((Word R));
+-extern Word RNNUM	P__((Word R));
++extern Word RNNUM	P__((Word R)) __pure;
+ extern Word RNP2	P__((Word k));
+ extern Word RNPROD	P__((Word R, Word S));
+ extern Word RNQ	P__((Word R, Word S));
+@@ -993,14 +993,14 @@ extern void RUPFMRC	P__((Word M1, Word M
+ extern void RUPWRITE	P__((Word A, Word v));
+ extern Word SDIFF	P__((Word A, Word B));
+ extern void SDR	P__((Word S, Word *A_, Word *I_));
+-extern Word SECOND	P__((Word L));
++extern Word SECOND	P__((Word L)) __pure;
+ extern Word SEQUAL	P__((Word A, Word B));
+ extern Word SFCS	P__((Word A));
+ extern void SFIRST	P__((Word L, Word a));
+ extern Word SIAFEE	P__((Word B, Word I, BDigit p));
+ extern void SICOPY	P__((BDigit *A, BDigit *B));
+ extern void SIDWRITE	P__((BDigit *I, BDigit k));
+-extern Word SIGN	P__((Word a));
++extern Word SIGN	P__((Word a)) __constfunc;
+ extern Word SILBRI	P__((BDigit *I));
+ extern Word SINTER	P__((Word A, Word B));
+ extern void SIPBHT	P__((BDigit *A, BDigit k));
+@@ -1016,11 +1016,11 @@ extern void SIPR	P__((Word *A, Word *B))
+ extern void SIPROD	P__((BDigit *I, BDigit *J, BDigit *K));
+ extern Word SIPRRID	P__((BDigit *A));
+ extern Word SIPRRISD	P__((BDigit *A, Word a, Word b));
+-extern BDigit SIPSIZE	P__((BDigit *A));
++extern BDigit SIPSIZE	P__((const BDigit *A)) __pure;
+ extern void SIPTR1	P__((BDigit *A, BDigit *B));
+ extern BDigit  SIPVCHT	P__((BDigit *A));
+ extern void SIQUOT	P__((BDigit *I, BDigit *J, BDigit *K));
+-extern BDigit SISIGN	P__((Word *I));
++extern BDigit SISIGN	P__((const Word *I)) __pure;
+ extern void SISUM	P__((BDigit *I, BDigit *J, BDigit *K));
+ extern Word SLBRNIM	P__((Word a, Word b));
+ extern void SLELTI	P__((Word A, Word i, Word a));
+@@ -1029,7 +1029,7 @@ extern BDigit **SMDM	P__((Word A, Word B
+ extern Word SMFMI	P__((Word M, Word A));
+ extern Word SMFMIP	P__((Word r, Word M, Word A));
+ extern Word SNLBRN	P__((Word a, BDigit k));
+-extern Word SPOWER	P__((Word s, Word a));
++extern Word SPOWER	P__((Word s, Word a)) __constfunc;
+ extern void SRED	P__((Word L, Word Lp));
+ extern void STATSACLIB	P__((void));
+ extern void SUBFROM	P__((Word *A, Word *B, Word n));
+@@ -1037,13 +1037,13 @@ extern Word SUFFIX	P__((Word L, Word b))
+ extern Word SUNION	P__((Word A, Word B));
+ extern void SWRITE	P__((const char *s));
+ extern Word TANGENTNUM	P__((BDigit n));
+-extern Word THIRD	P__((Word L));
+-extern Word TLIL	P__((BDigit a, Word L));
++extern Word THIRD	P__((Word L)) __pure;
++extern Word TLIL	P__((BDigit a, Word L)) __pure;
+ extern Word TSVSLI	P__((Word A, Word I));
+ extern Word USDIFF	P__((Word A, Word B));
+ extern Word USINT	P__((Word A, Word B));
+ extern Word USUN	P__((Word A, Word B));
+-extern Word VAR	P__((Word L));
++extern Word VAR	P__((Word L)) __pure;
+ extern Word VCOMP	P__((Word U, Word V));
+ extern Word VIAZ	P__((Word A, Word n));
+ extern Word VIDIF	P__((Word A, Word B));
+--- a/include/sacsys.h	2018-01-30 14:09:32.000000000 -0700
++++ b/include/sacsys.h	2018-08-29 19:48:11.937635474 -0600
+@@ -35,7 +35,6 @@ typedef int     Word;
+ #define LARGE 2000
+ #define SMALL 50
+ 
+-
+ /* Does the compiler support function prototypes? */
+ #ifdef __STDC__
+ #define P__(A)  A
+@@ -52,6 +51,33 @@ typedef int     Word;
+ # endif
+ #endif
+ 
++/* Indicate that an ELF symbol is weak. */
++#ifndef __weak
++# ifdef __GNUC__
++#  define __weak __attribute__ ((weak))
++# else
++#  define __weak
++# endif
++#endif
++
++/* Mark functions that have no side effects and read only their parameters. */
++#ifndef __constfunc
++# ifdef __GNUC__
++#  define __constfunc __attribute__ ((const))
++# else
++#  define __constfunc
++# endif
++#endif
++
++/* Mark functions that have no side effects and read only their parameters and
++ * global variables. */
++#ifndef __pure
++# ifdef __GNUC__
++#  define __pure __attribute__ ((pure))
++# else
++#  define __pure
++# endif
++#endif
+ 
+ 
+ #endif
+--- a/src/AICOMP.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/AICOMP.c	2018-08-29 19:48:11.937635474 -0600
+@@ -12,7 +12,7 @@ Output
+ #include "saclib.h"
+ 
+ BDigit AICOMP(A,B)
+-	BDigit *A,*B;
++	const BDigit *A,*B;
+ {
+ 	BDigit d,i,m,n,s,t,u;
+ 
+--- a/src/AICOPY.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/AICOPY.c	2018-08-29 19:48:11.939635472 -0600
+@@ -13,8 +13,8 @@ Effect
+ #include "saclib.h"
+ 
+ void AICOPY(A,B)
+-
+-	BDigit *A,*B;
++	const BDigit *A;
++	BDigit *B;
+ {
+ 	BDigit i,n;
+ 
+--- a/src/AITRS.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/AITRS.c	2018-08-29 19:48:11.941635469 -0600
+@@ -16,7 +16,8 @@ Output
+ #include "saclib.h"
+ 
+ BDigit AITRS(A,n,k)
+-	BDigit *A,n,k;
++	const BDigit *A;
++	BDigit n,k;
+ {
+ 	BDigit a,b,c,d,h,p;;
+ 
+--- a/src/AIZERO.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/AIZERO.c	2018-08-29 19:48:11.943635466 -0600
+@@ -12,7 +12,7 @@ Output
+ #include "saclib.h"
+ 
+ BDigit AIZERO(A)
+-	BDigit *A;
++	const BDigit *A;
+ {
+ 	BDigit t;
+ 
+--- a/src/CSFAM.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/CSFAM.c	2018-08-29 19:48:11.945635463 -0600
+@@ -16,7 +16,8 @@ Output
+ #include "saclib.h"
+ 
+ BDigit CSFAM(n,A)
+-	BDigit n,*A;
++	BDigit n;
++	const BDigit *A;
+ {
+ 	BDigit c,i;
+ 
+--- a/src/FCOMP.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/FCOMP.c	2018-08-29 19:48:11.946635462 -0600
+@@ -12,7 +12,7 @@ Output
+ #include "saclib.h"
+ 
+ BDigit FCOMP(I,J)
+-	BDigit *I,*J;
++	const BDigit *I,*J;
+ {
+ 	BDigit i,p,s;
+ 
+--- a/src/HIPSV.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/HIPSV.c	2018-08-29 19:48:11.948635459 -0600
+@@ -18,7 +18,7 @@ Output
+ 
+ Word HIPSV(n,A)
+ 	BDigit n;
+-	interval *A;
++	const interval *A;
+ {
+ 	BDigit h,i,k,s,t,v;
+ 
+--- a/src/IHDREM.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/IHDREM.c	2018-08-29 19:48:11.950635457 -0600
+@@ -14,7 +14,8 @@ Output
+ #include "saclib.h"
+ 
+ Word IHDREM(A,n,b)
+-       Word *A,n,b;
++       const Word *A;
++       Word n,b;
+ {
+        Word a0,a1,np,r;
+ 
+--- a/src/main.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/main.c	2018-08-29 19:48:11.952635454 -0600
+@@ -9,7 +9,7 @@ Inputs
+ ======================================================================*/
+ #include "saclib.h"
+ 
+-extern int sacMain  P__((int ac, char **av));
++extern int sacMain  P__((int ac, char **av)) __weak;
+ 
+ 
+ void main(argc, argv)
+--- a/src/MMAPEVAL.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/MMAPEVAL.c	2018-08-29 19:48:11.954635451 -0600
+@@ -14,7 +14,8 @@ Output
+ #include "saclib.h"
+ 
+ Word MMAPEVAL(m,A,s)
+-       Word m,*A,s;
++       Word m,s;
++       const Word *A;
+ {
+        Word n,e,i;
+ 
+--- a/src/SIPSIZE.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/SIPSIZE.c	2018-08-29 19:48:11.955635450 -0600
+@@ -13,7 +13,7 @@ Output
+ #include "saclib.h"
+ 
+ BDigit SIPSIZE(A)
+-	BDigit *A;
++	const BDigit *A;
+ {
+ 	BDigit n,p,q1,q2,S;
+ 
+--- a/src/SISIGN.c	2018-01-30 14:09:32.000000000 -0700
++++ b/src/SISIGN.c	2018-08-29 19:48:11.957635447 -0600
+@@ -15,7 +15,7 @@ Outputs
+ #include "saclib.h"
+ 
+ BDigit SISIGN(I)
+-       Word *I;
++       const Word *I;
+ {
+        BDigit p,s,s1,s2;
+ 

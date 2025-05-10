@@ -1,5 +1,8 @@
 cd src
 
+cp -p ../patches/GC.c src
+cp -p ../patches/sysdep.h include
+
 saclib=$(pwd -P)
 export saclib
 bin/sconf && bin/mkproto && bin/mkmake && bin/mklib all
