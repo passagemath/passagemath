@@ -1726,6 +1726,60 @@
 .. |codespace-fedora-42-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-42-maximal%2Fdevcontainer.json
 
+.. |image-fedora-43-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-minimal-with-system-packages
+
+.. |image-fedora-43-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-minimal-configured
+
+.. |image-fedora-43-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-minimal-with-targets-pre
+
+.. |image-fedora-43-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-minimal-with-targets
+
+.. |image-fedora-43-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-minimal-with-targets-optional
+
+.. |codespace-fedora-43-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-43-minimal%2Fdevcontainer.json
+
+.. |image-fedora-43-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-standard-with-system-packages
+
+.. |image-fedora-43-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-standard-configured
+
+.. |image-fedora-43-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-standard-with-targets-pre
+
+.. |image-fedora-43-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-standard-with-targets
+
+.. |image-fedora-43-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-standard-with-targets-optional
+
+.. |codespace-fedora-43-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-43-standard%2Fdevcontainer.json
+
+.. |image-fedora-43-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-maximal-with-system-packages
+
+.. |image-fedora-43-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-maximal-configured
+
+.. |image-fedora-43-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-maximal-with-targets-pre
+
+.. |image-fedora-43-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-maximal-with-targets
+
+.. |image-fedora-43-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-maximal-with-targets-optional
+
+.. |codespace-fedora-43-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-43-maximal%2Fdevcontainer.json
+
 .. |image-centos-stream-9-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-minimal-with-system-packages
 
@@ -2644,6 +2698,222 @@
 .. |codespace-debian-bullseye-i386-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-debian-bullseye-i386-maximal%2Fdevcontainer.json
 
+.. |image-fedora-40-arm64v8-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-with-system-packages
+
+.. |image-fedora-40-arm64v8-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-configured
+
+.. |image-fedora-40-arm64v8-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-with-targets-pre
+
+.. |image-fedora-40-arm64v8-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-with-targets
+
+.. |image-fedora-40-arm64v8-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-minimal-with-targets-optional
+
+.. |codespace-fedora-40-arm64v8-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-40-arm64v8-minimal%2Fdevcontainer.json
+
+.. |image-fedora-40-arm64v8-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-standard-with-system-packages
+
+.. |image-fedora-40-arm64v8-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-standard-configured
+
+.. |image-fedora-40-arm64v8-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-standard-with-targets-pre
+
+.. |image-fedora-40-arm64v8-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-standard-with-targets
+
+.. |image-fedora-40-arm64v8-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-standard-with-targets-optional
+
+.. |codespace-fedora-40-arm64v8-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-40-arm64v8-standard%2Fdevcontainer.json
+
+.. |image-fedora-40-arm64v8-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-with-system-packages
+
+.. |image-fedora-40-arm64v8-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-configured
+
+.. |image-fedora-40-arm64v8-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-with-targets-pre
+
+.. |image-fedora-40-arm64v8-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-with-targets
+
+.. |image-fedora-40-arm64v8-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-40-arm64v8-maximal-with-targets-optional
+
+.. |codespace-fedora-40-arm64v8-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-40-arm64v8-maximal%2Fdevcontainer.json
+
+.. |image-fedora-41-arm64v8-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-system-packages
+
+.. |image-fedora-41-arm64v8-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-configured
+
+.. |image-fedora-41-arm64v8-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-targets-pre
+
+.. |image-fedora-41-arm64v8-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-targets
+
+.. |image-fedora-41-arm64v8-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-targets-optional
+
+.. |codespace-fedora-41-arm64v8-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-41-arm64v8-minimal%2Fdevcontainer.json
+
+.. |image-fedora-41-arm64v8-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-standard-with-system-packages
+
+.. |image-fedora-41-arm64v8-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-standard-configured
+
+.. |image-fedora-41-arm64v8-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-standard-with-targets-pre
+
+.. |image-fedora-41-arm64v8-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-standard-with-targets
+
+.. |image-fedora-41-arm64v8-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-standard-with-targets-optional
+
+.. |codespace-fedora-41-arm64v8-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-41-arm64v8-standard%2Fdevcontainer.json
+
+.. |image-fedora-41-arm64v8-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-with-system-packages
+
+.. |image-fedora-41-arm64v8-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-configured
+
+.. |image-fedora-41-arm64v8-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-with-targets-pre
+
+.. |image-fedora-41-arm64v8-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-with-targets
+
+.. |image-fedora-41-arm64v8-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-maximal-with-targets-optional
+
+.. |codespace-fedora-41-arm64v8-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-41-arm64v8-maximal%2Fdevcontainer.json
+
+.. |image-fedora-42-arm64v8-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-with-system-packages
+
+.. |image-fedora-42-arm64v8-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-configured
+
+.. |image-fedora-42-arm64v8-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-with-targets-pre
+
+.. |image-fedora-42-arm64v8-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-with-targets
+
+.. |image-fedora-42-arm64v8-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-minimal-with-targets-optional
+
+.. |codespace-fedora-42-arm64v8-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-42-arm64v8-minimal%2Fdevcontainer.json
+
+.. |image-fedora-42-arm64v8-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-standard-with-system-packages
+
+.. |image-fedora-42-arm64v8-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-standard-configured
+
+.. |image-fedora-42-arm64v8-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-standard-with-targets-pre
+
+.. |image-fedora-42-arm64v8-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-standard-with-targets
+
+.. |image-fedora-42-arm64v8-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-standard-with-targets-optional
+
+.. |codespace-fedora-42-arm64v8-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-42-arm64v8-standard%2Fdevcontainer.json
+
+.. |image-fedora-42-arm64v8-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-with-system-packages
+
+.. |image-fedora-42-arm64v8-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-configured
+
+.. |image-fedora-42-arm64v8-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-with-targets-pre
+
+.. |image-fedora-42-arm64v8-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-with-targets
+
+.. |image-fedora-42-arm64v8-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-42-arm64v8-maximal-with-targets-optional
+
+.. |codespace-fedora-42-arm64v8-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-42-arm64v8-maximal%2Fdevcontainer.json
+
+.. |image-fedora-43-arm64v8-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-with-system-packages
+
+.. |image-fedora-43-arm64v8-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-configured
+
+.. |image-fedora-43-arm64v8-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-with-targets-pre
+
+.. |image-fedora-43-arm64v8-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-with-targets
+
+.. |image-fedora-43-arm64v8-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-minimal-with-targets-optional
+
+.. |codespace-fedora-43-arm64v8-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-43-arm64v8-minimal%2Fdevcontainer.json
+
+.. |image-fedora-43-arm64v8-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-standard-with-system-packages
+
+.. |image-fedora-43-arm64v8-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-standard-configured
+
+.. |image-fedora-43-arm64v8-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-standard-with-targets-pre
+
+.. |image-fedora-43-arm64v8-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-standard-with-targets
+
+.. |image-fedora-43-arm64v8-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-standard-with-targets-optional
+
+.. |codespace-fedora-43-arm64v8-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-43-arm64v8-standard%2Fdevcontainer.json
+
+.. |image-fedora-43-arm64v8-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-with-system-packages
+
+.. |image-fedora-43-arm64v8-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-configured
+
+.. |image-fedora-43-arm64v8-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-with-targets-pre
+
+.. |image-fedora-43-arm64v8-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-with-targets
+
+.. |image-fedora-43-arm64v8-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-43-arm64v8-maximal-with-targets-optional
+
+.. |codespace-fedora-43-arm64v8-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-43-arm64v8-maximal%2Fdevcontainer.json
+
 .. list-table::
    :widths: 50 50 40
    :header-rows: 1
@@ -3004,6 +3274,17 @@
    * -    ‑*maximal*
      - |image-fedora-42-maximal-with-system-packages| |image-fedora-42-maximal-with-targets-pre|
      -
+   * - **fedora**-43 
+       
+          ‑*minimal*
+     - |image-fedora-43-minimal-with-system-packages| |image-fedora-43-minimal-with-targets-pre| |image-fedora-43-minimal-with-targets| |image-fedora-43-minimal-with-targets-optional|
+     - |codespace-fedora-43-minimal|
+   * -    ‑*standard*
+     - |image-fedora-43-standard-with-system-packages| |image-fedora-43-standard-with-targets-pre| |image-fedora-43-standard-with-targets| |image-fedora-43-standard-with-targets-optional|
+     - |codespace-fedora-43-standard|
+   * -    ‑*maximal*
+     - |image-fedora-43-maximal-with-system-packages| |image-fedora-43-maximal-with-targets-pre|
+     -
    * - **centos**-stream-9 
        
           ‑*minimal*
@@ -3187,4 +3468,48 @@
      - |codespace-debian-bullseye-i386-standard|
    * -    ‑*maximal*
      - |image-debian-bullseye-i386-maximal-with-system-packages| |image-debian-bullseye-i386-maximal-with-targets-pre|
+     -
+   * - **fedora**-40-arm64v8 
+       
+          ‑*minimal*
+     - |image-fedora-40-arm64v8-minimal-with-system-packages| |image-fedora-40-arm64v8-minimal-with-targets-pre| |image-fedora-40-arm64v8-minimal-with-targets| |image-fedora-40-arm64v8-minimal-with-targets-optional|
+     - |codespace-fedora-40-arm64v8-minimal|
+   * -    ‑*standard*
+     - |image-fedora-40-arm64v8-standard-with-system-packages| |image-fedora-40-arm64v8-standard-with-targets-pre| |image-fedora-40-arm64v8-standard-with-targets| |image-fedora-40-arm64v8-standard-with-targets-optional|
+     - |codespace-fedora-40-arm64v8-standard|
+   * -    ‑*maximal*
+     - |image-fedora-40-arm64v8-maximal-with-system-packages| |image-fedora-40-arm64v8-maximal-with-targets-pre|
+     -
+   * - **fedora**-41-arm64v8 
+       
+          ‑*minimal*
+     - |image-fedora-41-arm64v8-minimal-with-system-packages| |image-fedora-41-arm64v8-minimal-with-targets-pre| |image-fedora-41-arm64v8-minimal-with-targets| |image-fedora-41-arm64v8-minimal-with-targets-optional|
+     - |codespace-fedora-41-arm64v8-minimal|
+   * -    ‑*standard*
+     - |image-fedora-41-arm64v8-standard-with-system-packages| |image-fedora-41-arm64v8-standard-with-targets-pre| |image-fedora-41-arm64v8-standard-with-targets| |image-fedora-41-arm64v8-standard-with-targets-optional|
+     - |codespace-fedora-41-arm64v8-standard|
+   * -    ‑*maximal*
+     - |image-fedora-41-arm64v8-maximal-with-system-packages| |image-fedora-41-arm64v8-maximal-with-targets-pre|
+     -
+   * - **fedora**-42-arm64v8 
+       
+          ‑*minimal*
+     - |image-fedora-42-arm64v8-minimal-with-system-packages| |image-fedora-42-arm64v8-minimal-with-targets-pre| |image-fedora-42-arm64v8-minimal-with-targets| |image-fedora-42-arm64v8-minimal-with-targets-optional|
+     - |codespace-fedora-42-arm64v8-minimal|
+   * -    ‑*standard*
+     - |image-fedora-42-arm64v8-standard-with-system-packages| |image-fedora-42-arm64v8-standard-with-targets-pre| |image-fedora-42-arm64v8-standard-with-targets| |image-fedora-42-arm64v8-standard-with-targets-optional|
+     - |codespace-fedora-42-arm64v8-standard|
+   * -    ‑*maximal*
+     - |image-fedora-42-arm64v8-maximal-with-system-packages| |image-fedora-42-arm64v8-maximal-with-targets-pre|
+     -
+   * - **fedora**-43-arm64v8 
+       
+          ‑*minimal*
+     - |image-fedora-43-arm64v8-minimal-with-system-packages| |image-fedora-43-arm64v8-minimal-with-targets-pre| |image-fedora-43-arm64v8-minimal-with-targets| |image-fedora-43-arm64v8-minimal-with-targets-optional|
+     - |codespace-fedora-43-arm64v8-minimal|
+   * -    ‑*standard*
+     - |image-fedora-43-arm64v8-standard-with-system-packages| |image-fedora-43-arm64v8-standard-with-targets-pre| |image-fedora-43-arm64v8-standard-with-targets| |image-fedora-43-arm64v8-standard-with-targets-optional|
+     - |codespace-fedora-43-arm64v8-standard|
+   * -    ‑*maximal*
+     - |image-fedora-43-arm64v8-maximal-with-system-packages| |image-fedora-43-arm64v8-maximal-with-targets-pre|
      -
