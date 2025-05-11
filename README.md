@@ -45,26 +45,34 @@ passagemath attempts to support all major Linux distributions and recent version
 macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
 virtualization.
 
-Complete sets of binary wheels are provided on PyPI for Python versions 3.9.x-3.12.x.
-Python 3.13.x is also supported, but some third-party packages are still missing wheels,
-so compilation from source is triggered for those.
+Complete sets of binary wheels are provided on PyPI for Python versions 3.9.x-3.13.x
+for Linux and macOS, both for the x86_64 and ARM architectures.
 
 Unless you need to install passagemath into a specific existing environment, we recommend
-to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.12.x),
+to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.13.x),
 for example `~/passagemath-venv/`:
 
-            $ python3 --version
-            Python 3.12.7
-            $ python3 -m venv ~/passagemath-venv
-            $ source ~/passagemath-venv/bin/activate
+    $ python3 --version
+    Python 3.12.7
+    $ python3 -m venv ~/passagemath-venv
+    $ source ~/passagemath-venv/bin/activate
+
+For Python 3.13.x on any platform, and for any Python version on the Linux aarch64 (ARM)
+and macOS arm64 (Apple Silicon M1/M2/M3/M4) platforms,
+[some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
+Build these wheels from source:
+
+    (passagemath-venv) $ export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python pplpy"
+    (passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
+    (passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
 
 Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
 
-            $ pip install -v --prefer-binary passagemath-standard
+    (passagemath-venv) $ pip install -v --prefer-binary passagemath-standard
 
 Start the Sage REPL:
 
-            $ sage
+    (passagemath-venv) $ sage
 
 Alternatively, use a Python or IPython REPL, or use a Python or Sage kernel in Jupyter.
 
