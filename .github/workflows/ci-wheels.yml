@@ -120,6 +120,8 @@ jobs:
               ubuntu*-arm) SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python pplpy";;
           esac
           if [ -n "$SAGE_CONF_TARGETS" ]; then
+              sudo apt-get update
+              sudo apt-get install binutils make m4 perl flex bison tar bc gcc g++ ca-certificates libbz2-dev bzip2 xz-utils libffi-dev
               pip install --force-reinstall -v passagemath-conf
               export PIP_FIND_LINKS="$PIP_FIND_LINKS $(sage-config SAGE_SPKG_WHEELS)"
           fi
