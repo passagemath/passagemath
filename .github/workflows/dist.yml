@@ -189,6 +189,9 @@ jobs:
           - os: ubuntu-24.04-arm
             arch: aarch64
             build: manylinux
+          - os: ubuntu-24.04-arm
+            arch: aarch64
+            build: musllinux
           - os: macos-13
             arch: x86_64
             build: macosx
@@ -484,6 +487,9 @@ jobs:
           - os: ubuntu-24.04-arm
             arch: aarch64
             build: manylinux
+          - os: ubuntu-24.04-arm
+            arch: aarch64
+            build: musllinux
           - os: macos-13
             arch: x86_64
             build: macosx
