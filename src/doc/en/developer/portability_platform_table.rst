@@ -2374,6 +2374,114 @@
 .. |codespace-opensuse-tumbleweed-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-tumbleweed-maximal%2Fdevcontainer.json
 
+.. |image-voidlinux-musl-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-minimal-with-system-packages
+
+.. |image-voidlinux-musl-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-minimal-configured
+
+.. |image-voidlinux-musl-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-minimal-with-targets-pre
+
+.. |image-voidlinux-musl-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-minimal-with-targets
+
+.. |image-voidlinux-musl-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-minimal-with-targets-optional
+
+.. |codespace-voidlinux-musl-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-voidlinux-musl-minimal%2Fdevcontainer.json
+
+.. |image-voidlinux-musl-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-standard-with-system-packages
+
+.. |image-voidlinux-musl-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-standard-configured
+
+.. |image-voidlinux-musl-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-standard-with-targets-pre
+
+.. |image-voidlinux-musl-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-standard-with-targets
+
+.. |image-voidlinux-musl-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-standard-with-targets-optional
+
+.. |codespace-voidlinux-musl-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-voidlinux-musl-standard%2Fdevcontainer.json
+
+.. |image-voidlinux-musl-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-maximal-with-system-packages
+
+.. |image-voidlinux-musl-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-maximal-configured
+
+.. |image-voidlinux-musl-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-maximal-with-targets-pre
+
+.. |image-voidlinux-musl-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-maximal-with-targets
+
+.. |image-voidlinux-musl-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-musl-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-musl-maximal-with-targets-optional
+
+.. |codespace-voidlinux-musl-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-voidlinux-musl-maximal%2Fdevcontainer.json
+
+.. |image-voidlinux-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-minimal-with-system-packages
+
+.. |image-voidlinux-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-minimal-configured
+
+.. |image-voidlinux-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-minimal-with-targets-pre
+
+.. |image-voidlinux-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-minimal-with-targets
+
+.. |image-voidlinux-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-minimal-with-targets-optional
+
+.. |codespace-voidlinux-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-voidlinux-minimal%2Fdevcontainer.json
+
+.. |image-voidlinux-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-standard-with-system-packages
+
+.. |image-voidlinux-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-standard-configured
+
+.. |image-voidlinux-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-standard-with-targets-pre
+
+.. |image-voidlinux-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-standard-with-targets
+
+.. |image-voidlinux-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-standard-with-targets-optional
+
+.. |codespace-voidlinux-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-voidlinux-standard%2Fdevcontainer.json
+
+.. |image-voidlinux-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-maximal-with-system-packages
+
+.. |image-voidlinux-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-maximal-configured
+
+.. |image-voidlinux-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-maximal-with-targets-pre
+
+.. |image-voidlinux-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-maximal-with-targets
+
+.. |image-voidlinux-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-voidlinux-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-voidlinux-maximal-with-targets-optional
+
+.. |codespace-voidlinux-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-voidlinux-maximal%2Fdevcontainer.json
+
 .. |image-conda-forge-python3.11-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-system-packages
 
@@ -3027,6 +3135,28 @@
      - |codespace-opensuse-tumbleweed-standard|
    * -    ‑*maximal*
      - |image-opensuse-tumbleweed-maximal-with-system-packages| |image-opensuse-tumbleweed-maximal-with-targets-pre|
+     -
+   * - **voidlinux**-musl 
+       
+          ‑*minimal*
+     - |image-voidlinux-musl-minimal-with-system-packages| |image-voidlinux-musl-minimal-with-targets-pre| |image-voidlinux-musl-minimal-with-targets| |image-voidlinux-musl-minimal-with-targets-optional|
+     - |codespace-voidlinux-musl-minimal|
+   * -    ‑*standard*
+     - |image-voidlinux-musl-standard-with-system-packages| |image-voidlinux-musl-standard-with-targets-pre| |image-voidlinux-musl-standard-with-targets| |image-voidlinux-musl-standard-with-targets-optional|
+     - |codespace-voidlinux-musl-standard|
+   * -    ‑*maximal*
+     - |image-voidlinux-musl-maximal-with-system-packages| |image-voidlinux-musl-maximal-with-targets-pre|
+     -
+   * - **voidlinux** 
+       
+          ‑*minimal*
+     - |image-voidlinux-minimal-with-system-packages| |image-voidlinux-minimal-with-targets-pre| |image-voidlinux-minimal-with-targets| |image-voidlinux-minimal-with-targets-optional|
+     - |codespace-voidlinux-minimal|
+   * -    ‑*standard*
+     - |image-voidlinux-standard-with-system-packages| |image-voidlinux-standard-with-targets-pre| |image-voidlinux-standard-with-targets| |image-voidlinux-standard-with-targets-optional|
+     - |codespace-voidlinux-standard|
+   * -    ‑*maximal*
+     - |image-voidlinux-maximal-with-system-packages| |image-voidlinux-maximal-with-targets-pre|
      -
    * - **conda**-forge-python3.11 
        
