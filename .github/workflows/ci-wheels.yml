@@ -117,7 +117,7 @@ jobs:
            done) | tee constraints.txt
           export PIP_CONSTRAINT=$(pwd)/constraints.txt
           case "${{ matrix.os }}" in
-              ubuntu*-arm) SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python pplpy";;
+              ubuntu*-arm) export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python pplpy";;
           esac
           if [ -n "$SAGE_CONF_TARGETS" ]; then
               sudo apt-get update
