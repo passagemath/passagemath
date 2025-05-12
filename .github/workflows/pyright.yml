@@ -2,6 +2,9 @@ name: Static check with Pyright
 
 on:
   pull_request:
+    paths:
+      - 'src/sage/**'
+      - '.github/workflows/pyright.yml'
   merge_group:
   push:
     branches:
