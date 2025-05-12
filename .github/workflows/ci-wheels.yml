@@ -138,20 +138,14 @@ jobs:
               cd pkgs/$pkg
               tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py310-norequirements/')
               eval tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
+              status=$?
+              # Update known test failures
+              cd ../..
+              pip install passagemath-environment passagemath-repl
+              extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
+              for extra in $extras; do
+                  sage --fixdoctests --distribution "$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
+              done
+              git diff
+              exit $status
           fi
-      - name: Update known test failures
-        if: (success() || failure())
-        run: |
-          set -x
-          export SAGE_ROOT=$(pwd)
-          WHEELHOUSE=$(pwd)/wheelhouse
-          export PIP_FIND_LINKS=file://$WHEELHOUSE
-          ./bootstrap sagemath_environment sagemath_repl
-          pip install pkgs/sagemath-environment pkgs/sagemath-repl
-          pkg=${{ matrix.distribution }}
-          cd pkgs/$pkg
-          extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
-          for extra in $extras; do
-              sage --fixdoctests --distribution "$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
-          done
-          git diff
