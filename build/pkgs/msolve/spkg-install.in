@@ -1,4 +1,6 @@
 cd src
+# 0.7.5 tarball misses configure - https://github.com/algebraic-solving/msolve/issues/208
+autoreconf -fi
 sdh_configure
 sdh_make
 sdh_make_install
