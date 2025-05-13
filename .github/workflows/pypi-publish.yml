@@ -13,8 +13,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pattern: ["ubuntu-latest-*-wheels",
-                  "ubuntu-24.04-arm-*-wheels",
+        pattern: ["ubuntu-latest-manylinux-*-wheels",
+                  "ubuntu-latest-musllinux-*-wheels",
+                  "ubuntu-24.04-arm-manylinux-*-wheels",
+                  "ubuntu-24.04-arm-musllinux-*-wheels",
                   "macos-13-*-wheels",
                   "macos-14-*-wheels",
                   "dist"]
