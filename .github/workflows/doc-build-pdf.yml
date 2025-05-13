@@ -2,6 +2,19 @@ name: Build documentation (PDF)
 
 on:
   pull_request:
+    paths:
+      - '!.devcontainer/**'
+      - '!.github/workflows/**'
+      - '!*.md'
+      - '!*.txt'
+      - '!condarc.yml'
+      - '!environment*.yml'
+      - '!**/meson.*'
+      - '!pyrightconfig.json'
+      - '!pkgs/*/README.rst'
+      - '!src/tox.ini'
+      - '!tools/**'
+      - '.github/workflows/doc-build-pdf.yml'
   merge_group:
   workflow_dispatch:
     # Allow to run manually

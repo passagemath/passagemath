@@ -2,6 +2,19 @@ name: Build documentation
 
 on:
   pull_request:
+    paths:
+      - '!.devcontainer/**'
+      - '!.github/workflows/**'
+      - '!*.md'
+      - '!*.txt'
+      - '!condarc.yml'
+      - '!environment*.yml'
+      - '!**/meson.*'
+      - '!pyrightconfig.json'
+      - '!pkgs/*/README.rst'
+      - '!src/tox.ini'
+      - '!tools/**'
+      - '.github/workflows/doc-build.yml'
   merge_group:
   push:
     tags:

@@ -5,6 +5,11 @@ on:
     branches:
       - main
   pull_request:
+    paths:
+      - 'pyproject.toml'
+      - 'ruff.toml'
+      - 'src/**'
+      - '.github/workflows/lint.yml'
   merge_group:
 
 concurrency:

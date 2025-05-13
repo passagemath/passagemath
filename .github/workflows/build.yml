@@ -2,6 +2,20 @@ name: Build & Test
 
 on:
   pull_request:
+    paths:
+      - '!.devcontainer/**'
+      - '!.github/workflows/**'
+      - '!*.md'
+      - '!*.txt'
+      - '!condarc.yml'
+      - '!environment*.yml'
+      - '!**/meson.*'
+      - '!pyrightconfig.json'
+      - '!pkgs/*/README.rst'
+      - '!src/tox.ini'
+      - '!src/doc/**'
+      - '!tools/**'
+      - '.github/workflows/build.yml'
   merge_group:
   push:
     branches:
