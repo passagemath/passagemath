@@ -124,6 +124,7 @@ jobs:
               sudo apt-get install binutils make m4 perl flex bison tar bc gcc g++ ca-certificates libbz2-dev bzip2 xz-utils liblzma-dev libffi-dev
               pip install --force-reinstall -v passagemath-conf
               export PIP_FIND_LINKS="$PIP_FIND_LINKS $(sage-config SAGE_SPKG_WHEELS)"
+              export PIP_PREFER_BINARY=1
           fi
           case "${{ matrix.os }}" in
               ubuntu*-arm) tag="manylinux*_aarch64";;
