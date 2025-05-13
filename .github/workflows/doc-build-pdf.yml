@@ -3,6 +3,7 @@ name: Build documentation (PDF)
 on:
   pull_request:
     paths:
+      - '**'
       - '!.devcontainer/**'
       - '!.github/workflows/**'
       - '!*.md'
