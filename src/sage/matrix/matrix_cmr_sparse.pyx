@@ -5102,10 +5102,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
           For a description of other parameters, see :meth:`_set_cmr_seymour_parameters`
 
         - ``row_keys`` -- a finite or enumerated family of arbitrary objects
-        that index the rows of the matrix
+          that index the rows of the matrix
 
         - ``column_keys`` -- a finite or enumerated family of arbitrary objects
-        that index the columns of the matrix
+          that index the columns of the matrix
 
         EXAMPLES::
 
