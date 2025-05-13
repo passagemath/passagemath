@@ -10,22 +10,23 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pattern: ["ubuntu-latest-manylinux-*-wheels",
+                  "ubuntu-latest-musllinux-*-wheels",
+                  "ubuntu-24.04-arm-manylinux-*-wheels",
+                  "ubuntu-24.04-arm-musllinux-*-wheels",
+                  "macos-13-*-wheels",
+                  "macos-14-*-wheels",
+                  "dist"]
     env:
       CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
     steps:
 
       - uses: actions/download-artifact@v4
         with:
-          pattern: "*-wheels"
-          path: wheelhouse
-          merge-multiple: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
-
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: "dist"
+          pattern: ${{ matrix.pattern }}
           path: wheelhouse
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
