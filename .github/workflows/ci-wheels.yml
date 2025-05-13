@@ -145,7 +145,8 @@ jobs:
               cd ../..
               pip install passagemath-environment passagemath-repl
               for extra in $extras; do
-                  sage --fixdoctests --distribution "$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
+                  # Setting SAGE_ROOT is a workaround for https://github.com/passagemath/passagemath/issues/800
+                  SAGE_ROOT=$(pwd) sage --fixdoctests --distribution "$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
               done
               git diff
               exit $status
