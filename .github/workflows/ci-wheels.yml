@@ -138,12 +138,12 @@ jobs:
           if [ -n "$wheel" ]; then
               cd pkgs/$pkg
               tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py310-norequirements/')
+              extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
               eval tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
               status=$?
               # Update known test failures
               cd ../..
               pip install passagemath-environment passagemath-repl
-              extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
               for extra in $extras; do
                   sage --fixdoctests --distribution "$extra" --toxenv py310-norequirements --update-known-test-failures || echo "(ignored)"
               done
