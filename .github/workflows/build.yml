@@ -3,6 +3,7 @@ name: Build & Test
 on:
   pull_request:
     paths:
+      - '**'
       - '!.devcontainer/**'
       - '!.github/workflows/**'
       - '!*.md'

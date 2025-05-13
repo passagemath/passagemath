@@ -3,6 +3,7 @@ name: Build documentation
 on:
   pull_request:
     paths:
+      - '**'
       - '!.devcontainer/**'
       - '!.github/workflows/**'
       - '!*.md'
@@ -146,7 +147,7 @@ jobs:
           RESPONSE=$(curl -s -L \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/runs?event=push&branch=develop&status=completed")
+            "https://api.github.com/repos/${{ github.repository }}/actions/runs?event=push&branch=main&status=completed")
           RUN_ID=$(echo "$RESPONSE" | jq -r --arg name "${{ github.workflow }}" --arg conclusion "success" \
             '.workflow_runs[] | select(.name == $name and .conclusion == $conclusion) | .id' | head -n 1)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
@@ -204,7 +205,7 @@ jobs:
 
       - name: Build doc
         id: docbuild
-        if: steps.container.outcome == 'success' && !startsWith(github.ref, 'refs/tags/')
+        if: (success() || failure()) && steps.container.outcome == 'success' && !startsWith(github.ref, 'refs/tags/')
         # Always non-incremental because of the concern that
         # incremental docbuild may introduce broken links (inter-file references) though build succeeds
         run: |
@@ -219,7 +220,7 @@ jobs:
 
       - name: Copy doc
         id: copy
-        if: steps.docbuild.outcome == 'success'
+        if: (success() || failure()) && steps.docbuild.outcome == 'success'
         run: |
           set -ex
           # Remove any existing html directory before copying a new one
@@ -289,7 +290,7 @@ jobs:
 
       - name: Build live doc
         id: buildlivedoc
-        if: startsWith(github.ref, 'refs/tags/')
+        if: (success() || failure()) && startsWith(github.ref, 'refs/tags/')
         run: |
           # Avoid running out of disk space
           rm -rf upstream
@@ -307,7 +308,7 @@ jobs:
 
       - name: Copy live doc
         id: copylivedoc
-        if: steps.buildlivedoc.outcome == 'success'
+        if: (success() || failure()) && steps.buildlivedoc.outcome == 'success'
         run: |
           mkdir -p ./livedoc
           # We copy everything to a local folder
@@ -319,7 +320,7 @@ jobs:
           unzip sagemath_doc_wheels.zip
 
       - name: Upload live doc
-        if: steps.copylivedoc.outcome == 'success'
+        if: (success() || failure()) && steps.copylivedoc.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: livedoc
