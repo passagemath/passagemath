@@ -3,6 +3,7 @@ name: Prepare source distributions and wheels
 on:
   pull_request:
     paths:
+      - '**'
       - '!.github/workflows/**'
       - '!*.md'
       - '!*.txt'
