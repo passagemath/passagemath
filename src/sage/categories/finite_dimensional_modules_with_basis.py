@@ -892,7 +892,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
         @cached_method
         def _matrix_cmr(self):
             r"""
-            Return ``self`` as a :class:`Matrix_cmr_chr_sparse`.
+            Return ``self`` as a :class:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse`.
 
             EXAMPLES::
 
@@ -924,6 +924,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             This does not depend on the choice of bases for
             domain and codomain.
 
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_unimodular` for
+            the detailed documentation.
+
             EXAMPLES::
 
                 sage: # needs sage.modules
@@ -953,6 +956,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             This does not depend on the choice of bases for
             domain and codomain.
 
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_strongly_unimodular` for
+            the detailed documentation.
+
             EXAMPLES::
 
                 sage: # needs sage.modules
@@ -980,6 +986,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
         def equimodulus(self):
             r"""
             Return the integer `k` such that ``self`` is equimodular with determinant gcd `k`.
+
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.equimodulus` for
+            the detailed documentation.
             """
             try:
                 matrix = self._matrix_cmr()
@@ -994,6 +1003,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
         def strong_equimodulus(self):
             r"""
             Return the integer `k` such that ``self`` is strongly equimodular with determinant gcd `k`.
+
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.strong_equimodulus` for
+            the detailed documentation.
             """
             try:
                 matrix = self._matrix_cmr()
@@ -1011,6 +1023,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             This does not depend on the choice of bases for
             domain and codomain.
+
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_k_equimodular` for
+            the detailed documentation.
 
             EXAMPLES::
 
@@ -1042,6 +1057,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             This does not depend on the choice of bases for
             domain and codomain.
+
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_strongly_k_equimodular` for
+            the detailed documentation.
 
             EXAMPLES::
 
@@ -1089,6 +1107,14 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
         @lazy_attribute
         def is_conetwork_matrix(self):
             r"""
+            Return whether the matrix of ``self`` is a conetwork matrix.
+
+            A matrix is a conetwork matrix if and only if its transpose is a network matrix.
+
+            This depends on the choice of bases for domain and codomain.
+
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_conetwork_matrix` for
+            the detailed documentation.
 
             EXAMPLES::
 
@@ -1118,6 +1144,12 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
         @lazy_attribute
         def is_network_matrix(self):
             r"""
+            Return whether the matrix of ``self`` is a network matrix.
+
+            This depends on the choice of bases for domain and codomain.
+
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_network_matrix` for
+            the detailed documentation.
 
             EXAMPLES::
 
@@ -1161,6 +1193,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             Return whether the matrix of ``self`` is totally unimodular.
 
             This depends on the choice of bases for domain and codomain.
+
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_totally_unimodular` for
+            the detailed documentation.
 
             EXAMPLES::
 
