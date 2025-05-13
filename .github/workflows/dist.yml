@@ -2,6 +2,17 @@ name: Prepare source distributions and wheels
 
 on:
   pull_request:
+    paths:
+      - '!.github/workflows/**'
+      - '!*.md'
+      - '!*.txt'
+      - '!condarc.yml'
+      - '!environment*.yml'
+      - '!pyrightconfig.json'
+      - '!src/doc/**'
+      - '!tools/**'
+      - '.github/workflows/dist.yml'
+      - '.github/workflows/ci-wheels.yml'
   merge_group:
   push:
     tags:
