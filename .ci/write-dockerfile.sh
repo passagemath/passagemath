@@ -298,10 +298,10 @@ RUN if [ -d /sage ]; then \\
                 if [ -d /sage/\$a ]; then mv /sage/\$a /new/; fi; \\
             done; \\
             rm -rf /sage; \\
-            mv /new /sage; \\
+            cp -a /new /sage; \\
         fi; \\
     else \\
-        mv /new /sage; \\
+        cp -a /new /sage; \\
     fi
 WORKDIR /sage
 ARG BOOTSTRAP="${BOOTSTRAP-./bootstrap}"
