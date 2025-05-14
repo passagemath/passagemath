@@ -47,6 +47,9 @@ on:
         description: 'Elapsed time (seconds) at which to kill the build'
         default: 20000
         type: number
+      merge_ci_fixes:
+        default: false
+        type: boolean
       #
       # For use in upstream CIs.
       #
@@ -102,6 +105,7 @@ jobs:
         if: inputs.upstream_artifact
 
       - name: Merge CI fixes from sagemath/sage
+        if: inputs.merge_ci_fixes
         run: |
           .ci/merge-fixes.sh
         env:

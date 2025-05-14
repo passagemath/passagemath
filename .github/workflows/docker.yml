@@ -98,6 +98,9 @@ on:
       logs_artifact:
         default: true
         type: boolean
+      merge_ci_fixes:
+        default: false
+        type: boolean
       #
       # Publishing to GitHub Packages
       #
@@ -235,6 +238,7 @@ jobs:
             echo "EXTRA_DOCKER_TAGS=$EXTRA_DOCKER_TAGS" >> $GITHUB_ENV
 
       - name: Merge CI fixes from sagemath/sage
+        if: inputs.merge_ci_fixes
         # This step needs to happen after the commit sha is put in DOCKER_TAG
         # so that multi-stage builds can work correctly.
         run: |
