@@ -60,7 +60,7 @@ for example `~/passagemath-venv/`:
 For Python 3.13.x on any platform, and for any Python version on the Linux aarch64 (ARM)
 and macOS arm64 (Apple Silicon M1/M2/M3/M4) platforms,
 [some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
-Build these wheels from source:
+Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
 
     (passagemath-venv) $ export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python pplpy"
     (passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
@@ -172,6 +172,7 @@ This requires you to clone the git repository (as described in this README).
 * [Preparation for Building from Source](#preparation-for-building-from-source)
 * [Full Installation from Source as passagemath](#full-installation-from-source-as-passagemath)
 * [Traditional Installation from Source as Sage-the-Distribution](#traditional-installation-from-source-as-sage-the-distribution)
+* [Use With an Existing Jupyter Installation](#use-with-an-existing-jupyter-installation)
 * [Directory Layout](#directory-layout)
 
 Supported Platforms
@@ -236,7 +237,7 @@ in the Installation Guide.
 
     - Any subdirectory of your :envvar:`HOME` directory should do.
 
-    - For example, you could use `SAGE_ROOT=~/sage/sage`, which we
+    - For example, you could use `SAGE_ROOT=~/sage/passagemath`, which we
       will use as the running example below.
 
     - You need at least 10 GB of free disk space.
@@ -540,12 +541,12 @@ Traditional Installation from Source as Sage-the-Distribution
     adjusted by `./configure` parameters (check again the output of
     `./configure --help`).
 
-14. Type `make`.  That's it! Everything is automatic and
+14. Type `make build`.  That's it! Everything is automatic and
     non-interactive.
 
     If you followed the above instructions, in particular regarding the
     installation of system packages recommended by the output of
-    `./configure` (step 11), and regarding the parallel build (step 10),
+    `./configure` (step 10), and regarding the parallel build (step 11),
     building Sage takes less than one hour on a modern computer.
     (Otherwise, it can take much longer.)
 
@@ -564,8 +565,9 @@ Traditional Installation from Source as Sage-the-Distribution
     contains errors to the [sage-support mailing list](https://groups.google.com/group/sage-support).
     If there are numerous failures, there was a serious problem with your build.
 
-17. The HTML version of the [documentation](https://doc.sagemath.org/html/en/index.html)
-    is built during the compilation process of Sage and resides in the directory
+17. Optional: If you want to build a local HTML version of the
+    [documentation](https://doc.sagemath.org/html/en/index.html), run
+    `make doc-html`. After a successful build, it resides in the directory
     `local/share/doc/sage/html/`. You may want to bookmark it in your browser.
 
 18. Optional: If you want to build the PDF version of the documentation,
@@ -582,6 +584,9 @@ Traditional Installation from Source as Sage-the-Distribution
     directory and type `./sage`. This can be done by running:
 
         $ sudo ln -s $(./sage -sh -c 'ls $SAGE_ROOT/venv/bin/sage') /usr/local/bin
+
+Use With an Existing Jupyter Installation
+-----------------------------------------
 
 21. Optional: Set up SageMath as a Jupyter kernel in an existing Jupyter notebook
     or JupyterLab installation, as described in the section
