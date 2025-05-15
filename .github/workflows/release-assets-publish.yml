@@ -1,0 +1,33 @@
+name: Publish to Release Assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag'
+        required: true
+      run-id:
+        description: 'Workflow run id'
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: release_dist
+          path: dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - run: |
+
+          gh release upload ${{ inputs.tag }} dist/*
+
+    permissions:
+      contents: write
