@@ -3,12 +3,12 @@
 //      from .devcontainer/portability-devcontainer.json.in
 // See https://aka.ms/devcontainer.json for format details.
 {
-    "name": "opensuse-15.5-gcc_11-python3.11-minimal (≥ 8-core)",
+    "name": "opensuse-15.6-gcc_11-python3.11-minimal (≥ 8-core)",
     "build": {
         "dockerfile": "portability-Dockerfile",
         // See tox.ini for definitions
         "args": {
-            "SYSTEM_FACTOR": "opensuse-15.5-gcc_11-python3.11",
+            "SYSTEM_FACTOR": "opensuse-15.6-gcc_11-python3.11",
             "PACKAGE_FACTOR": "minimal",
             "DOCKER_TARGET": "with-targets",
             "DOCKER_TAG": "dev"
