@@ -32,8 +32,9 @@ jobs:
           run-id: ${{ github.event.inputs.run-id }}
 
       - run: |
-
           gh release upload ${{ inputs.tag }} dist/*
+        env:
+          GH_TOKEN: ${{ github.token }}
 
     permissions:
       contents: write
