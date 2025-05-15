@@ -11,9 +11,12 @@ git clone https://github.com/Macaulay2/memtailor.git M2/submodules/memtailor
 git clone https://github.com/Macaulay2/mathic.git M2/submodules/mathic
 git clone https://github.com/Macaulay2/mathicgb.git M2/submodules/mathicgb
 
+BUILD_OPTIONS=
+
 # https://github.com/Macaulay2/M2/wiki/Building-M2-from-source-using-CMake
 cd M2/BUILD/build
 sdh_cmake -GNinja -S../.. -B. \
-      -DCMAKE_BUILD_TYPE=Release
+      -DCMAKE_BUILD_TYPE=Release \
+      $BUILD_OPTIONS
 cmake --build . --target M2-core M2-emacs
 cmake --install .
