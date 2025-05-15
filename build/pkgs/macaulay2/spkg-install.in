@@ -2,6 +2,8 @@ cd src
 
 unset https_proxy
 
+set -e
+
 # https://github.com/Macaulay2/homebrew-tap/blob/main/Formula/macaulay2.rb#L69
 # Place the submodules, since the tarfile doesn't include them
 git clone https://github.com/Macaulay2/M2-emacs.git M2/Macaulay2/editors/emacs
