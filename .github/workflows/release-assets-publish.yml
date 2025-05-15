@@ -19,11 +19,17 @@ jobs:
         with:
           name: release_dist
           path: dist
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.inputs.run-id }}
 
       - uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.inputs.run-id }}
 
       - run: |
 
