@@ -2,6 +2,8 @@ cd src
 
 unset https_proxy
 
+set -e
+
 # https://github.com/Macaulay2/homebrew-tap/blob/main/Formula/macaulay2.rb#L69
 # Place the submodules, since the tarfile doesn't include them
 git clone https://github.com/Macaulay2/M2-emacs.git M2/Macaulay2/editors/emacs
@@ -9,9 +11,14 @@ git clone https://github.com/Macaulay2/memtailor.git M2/submodules/memtailor
 git clone https://github.com/Macaulay2/mathic.git M2/submodules/mathic
 git clone https://github.com/Macaulay2/mathicgb.git M2/submodules/mathicgb
 
+BUILD_OPTIONS=
+
 # https://github.com/Macaulay2/M2/wiki/Building-M2-from-source-using-CMake
 cd M2/BUILD/build
 sdh_cmake -GNinja -S../.. -B. \
-      -DCMAKE_BUILD_TYPE=Release
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
+      -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
+      $BUILD_OPTIONS
 cmake --build . --target M2-core M2-emacs
 cmake --install .
