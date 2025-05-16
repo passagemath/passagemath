@@ -147,7 +147,14 @@ jobs:
                    esac;
                done) | tee constraints.txt
               export PIP_CONSTRAINT=$(pwd)/constraints.txt
+          else
+              mkdir -p $WHEELHOUSE
+              pip download -v --only-binary :all: --no-deps -d $WHEELHOUSE pas$pkg
           fi
+          # Use passagemath-conf wheelhouse for missing wheels of third-party projects
+          case "$python_version" in
+              3.13)        export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python pplpy";;
+          esac
           case "${{ matrix.os }}" in
               ubuntu*-arm) export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python pplpy";;
           esac
@@ -164,10 +171,7 @@ jobs:
               macos-13) tag="macosx_*_x86_64";;
               macos-14) tag="macosx_*_arm64";;
           esac
-          if [ ! -d $WHEELHOUSE ]; then
-              mkdir -p $WHEELHOUSE
-              pip download -v --only-binary :all: --no-deps -d $WHEELHOUSE pas$pkg
-          fi
+          # Run tox
           wheel_pattern="$WHEELHOUSE/*$pkg_underscore*-cp$python_version_no_dot-$tag.whl"
           eval ls -l $wheel_pattern
           wheel=$(eval ls $wheel_pattern | head -n1)
