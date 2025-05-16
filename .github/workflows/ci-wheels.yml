@@ -132,7 +132,7 @@ jobs:
         run: |
           set -x
           python_version=${{ matrix.python-version }}
-          python_version_no_dot=${python_version/.//}
+          python_version_no_dot=${python_version/./}
           pkg=${{ matrix.distribution }}
           pkg_underscore=${pkg//-/_}
           WHEELHOUSE=$(pwd)/wheelhouse
@@ -143,7 +143,7 @@ jobs:
                        *$pkg_underscore-*)     ;;
                        *musllinux*)            ;;
                        *_i686*)                ;;
-                       *-cp3$python_version_no_dot-*|*-none-any-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                       *-cp$python_version_no_dot-*|*-none-any-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
               export PIP_CONSTRAINT=$(pwd)/constraints.txt
@@ -164,12 +164,12 @@ jobs:
               macos-13) tag="macosx_*_x86_64";;
               macos-14) tag="macosx_*_arm64";;
           esac
-          wheel_pattern="$WHEELHOUSE/*$pkg_underscore*-cp3$python_version_no_dot-$tag.whl"
+          wheel_pattern="$WHEELHOUSE/*$pkg_underscore*-cp$python_version_no_dot-$tag.whl"
           eval ls -l $wheel_pattern
           wheel=$(eval ls $wheel_pattern | head -n1)
           if [ -n "$wheel" ]; then
               cd pkgs/$pkg
-              tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py3$python_version_no_dot-norequirements/')
+              tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py$python_version_no_dot-norequirements/')
               extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
               set +e
               eval tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
@@ -179,7 +179,7 @@ jobs:
               cd ../..
               pip install passagemath-environment passagemath-repl
               for extra in $extras; do
-                  sage --fixdoctests --distribution "$extra" --toxenv py3$python_version_no_dot-norequirements --update-known-test-failures || echo "(ignored)"
+                  sage --fixdoctests --distribution "$extra" --toxenv py$python_version_no_dot-norequirements --update-known-test-failures || echo "(ignored)"
               done
               git diff || :
               exit $status
