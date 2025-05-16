@@ -13,7 +13,6 @@ on:
       - '!src/doc/**'
       - '!tools/**'
       - '.github/workflows/dist.yml'
-      - '.github/workflows/ci-wheels.yml'
   merge_group:
   push:
     tags:
