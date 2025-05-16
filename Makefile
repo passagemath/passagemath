@@ -89,11 +89,11 @@ dist: build/make/Makefile
 	./sage --sdist
 
 ci-build-with-fallback:
-	$(MAKE) build;						\
+	$(MAKE) build sagemath_doc_html-build-deps;						\
 	if [ $$? != 0 ]; then					\
             echo "Incremental build failed, falling back";	\
 	    $(MAKE) doc-clean doc-uninstall sagelib-clean;	\
-	    $(MAKE) build;					\
+	    $(MAKE) build sagemath_doc_html-build-deps;					\
 	fi
 
 ###############################################################################
