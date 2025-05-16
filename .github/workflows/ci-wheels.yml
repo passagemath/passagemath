@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       run-id:
-        description: 'Workflow run id'
-        required: true
+        description: 'Use wheels built by dist.yml workflow with this run id (default: use PyPI)'
+        required: false
       distributions:
         description: 'Distributions to test (stringified JSON object; default: all)'
         required: false
@@ -35,13 +35,62 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        distribution: >-
+          ${{ fromJson(inputs.distributions
+                       || '["sagemath-benzene",
+                            "sagemath-bliss",
+                            "sagemath-buckygen",
+                            "sagemath-categories",
+                            "sagemath-cddlib",
+                            "sagemath-cliquer",
+                            "sagemath-cmr",
+                            "sagemath-combinat",
+                            "sagemath-coxeter3",
+                            "sagemath-ecl",
+                            "sagemath-eclib",
+                            "sagemath-flint",
+                            "sagemath-fricas",
+                            "sagemath-gap",
+                            "sagemath-giac",
+                            "sagemath-glucose",
+                            "sagemath-graphs",
+                            "sagemath-groups",
+                            "sagemath-homfly",
+                            "sagemath-kissat",
+                            "sagemath-latte-4ti2",
+                            "sagemath-libbraiding",
+                            "sagemath-linbox",
+                            "sagemath-lrslib",
+                            "sagemath-maxima",
+                            "sagemath-modules",
+                            "sagemath-msolve",
+                            "sagemath-ntl",
+                            "sagemath-palp",
+                            "sagemath-pari",
+                            "sagemath-planarity",
+                            "sagemath-plantri",
+                            "sagemath-plot",
+                            "sagemath-polyhedra",
+                            "sagemath-qepcad",
+                            "sagemath-rankwidth",
+                            "sagemath-rubiks",
+                            "sagemath-schemes",
+                            "sagemath-sirocco",
+                            "sagemath-singular",
+                            "sagemath-standard-no-symbolics",
+                            "sagemath-symbolics",
+                           ]') }}
         python-version: >-
           ${{ fromJson(inputs.python-versions
-                       || '["3.10"]') }}
-        distribution: >-
-          ${{ fromJson(inputs.distributions || '["sagemath-benzene", "sagemath-bliss", "sagemath-buckygen", "sagemath-categories", "sagemath-cddlib", "sagemath-cliquer", "sagemath-cmr", "sagemath-combinat", "sagemath-coxeter3", "sagemath-ecl", "sagemath-eclib", "sagemath-flint", "sagemath-fricas", "sagemath-gap", "sagemath-giac", "sagemath-glucose", "sagemath-graphs", "sagemath-groups", "sagemath-homfly", "sagemath-kissat", "sagemath-latte-4ti2", "sagemath-libbraiding", "sagemath-linbox", "sagemath-lrslib", "sagemath-maxima", "sagemath-modules", "sagemath-msolve", "sagemath-ntl", "sagemath-palp", "sagemath-pari", "sagemath-planarity", "sagemath-plantri", "sagemath-plot", "sagemath-polyhedra", "sagemath-qepcad", "sagemath-rankwidth", "sagemath-rubiks", "sagemath-schemes", "sagemath-sirocco", "sagemath-singular", "sagemath-standard-no-symbolics", "sagemath-symbolics"') }}
+                       || '["3.10",
+                           ]') }}
         os: >-
-          ${{ fromJson(inputs.oss || '["ubuntu-latest", "ubuntu-24.04-arm", "macos-13", "macos-14"]') }}
+          ${{ fromJson(inputs.oss
+                       || '["ubuntu-latest",
+                            "ubuntu-24.04-arm",
+                            "macos-13",
+                            "macos-14",
+                           ]') }}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -53,6 +102,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           run-id: ${{ github.event.inputs.run-id || inputs.run-id }}
+        if: github.event.inputs.run-id || inputs.run-id
       - uses: actions/download-artifact@v4
         with:
           pattern: "noarch-wheels"
@@ -61,6 +111,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           run-id: ${{ github.event.inputs.run-id || inputs.run-id }}
+        if: github.event.inputs.run-id || inputs.run-id
       - uses: actions/download-artifact@v4
         with:
           pattern: "dist"
@@ -69,6 +120,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           run-id: ${{ github.event.inputs.run-id || inputs.run-id }}
+        if: github.event.inputs.run-id || inputs.run-id
       - uses: actions/setup-python@v5
         id: python
         with:
@@ -84,16 +136,18 @@ jobs:
           pkg=${{ matrix.distribution }}
           pkg_underscore=${pkg//-/_}
           WHEELHOUSE=$(pwd)/wheelhouse
-          export PIP_FIND_LINKS=file://$WHEELHOUSE
-          (set +x; cd "$WHEELHOUSE" && for whl in *.whl; do
-               case $whl in
-                   *$pkg_underscore-*)     ;;
-                   *musllinux*)            ;;
-                   *_i686*)                ;;
-                   *-cp3$python_version_no_dot-*|*-none-any-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
-               esac;
-           done) | tee constraints.txt
-          export PIP_CONSTRAINT=$(pwd)/constraints.txt
+          if [ -d "$WHEELHOUSE" ]; then
+              export PIP_FIND_LINKS=file://$WHEELHOUSE
+              (set +x; cd "$WHEELHOUSE" && for whl in *.whl; do
+                   case $whl in
+                       *$pkg_underscore-*)     ;;
+                       *musllinux*)            ;;
+                       *_i686*)                ;;
+                       *-cp3$python_version_no_dot-*|*-none-any-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                   esac;
+               done) | tee constraints.txt
+              export PIP_CONSTRAINT=$(pwd)/constraints.txt
+          fi
           case "${{ matrix.os }}" in
               ubuntu*-arm) export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python pplpy";;
           esac
