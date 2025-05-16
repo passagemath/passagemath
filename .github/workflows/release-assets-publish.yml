@@ -9,6 +9,13 @@ on:
       run-id:
         description: 'Workflow run id'
         required: true
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
+      run-id:
+        type: string
 
 jobs:
   publish:
