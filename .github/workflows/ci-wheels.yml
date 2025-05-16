@@ -7,15 +7,15 @@ on:
         description: 'Use wheels built by dist.yml workflow with this run id (default: use PyPI)'
         required: false
       distributions:
-        description: 'Distributions to test (stringified JSON object; default: all)'
+        description: 'Distributions to test (JSON list; default: all)'
         required: false
       python-versions:
-        description: 'Python versions to test (stringified JSON object)'
+        description: 'Python versions to test (JSON list)'
         default: >-
           ['3.10']
         required: true
       oss:
-        description: 'OSs to test (stringified JSON object; default: all)'
+        description: 'OSs to test (JSON list; default: all)'
         required: false
   workflow_call:
     inputs:
