@@ -7,17 +7,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-conf"
-description = "passagemath: Configuration module"
+description = "passagemath: Confectionery and configuration module"
 readme = "README.rst"
 dnl Not including the standard metadata from pyproject_toml_metadata.m4
 dnl because sage-conf is GPL v3+.
 license = {text = "GNU General Public License (GPL) v3 or later"}
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
+maintainers = [
+    {name = "Matthias Köppe"},
+    {name = "passagemath contributors"},
+]
 classifiers = [
     "Development Status :: 6 - Mature",
     "Intended Audience :: Education",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
     "Operating System :: POSIX",
     "Operating System :: MacOS :: MacOS X",
     "Programming Language :: Python :: 3 :: Only",
@@ -29,9 +33,18 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
-urls = {Homepage = "https://www.sagemath.org"}
 requires-python = ">=3.9, <3.14"
 dynamic = ["version"]
+
+[project.urls]
+"release notes" = "https://github.com/passagemath/passagemath/releases"
+"repo (upstream)" = "https://github.com/sagemath/sage"
+"repo" = "https://github.com/passagemath/passagemath"
+documentation = "https://doc.sagemath.org"
+"homepage (upstream)" = "https://www.sagemath.org"
+"discourse" = "https://passagemath.discourse.group"
+"tracker (upstream)" = "https://github.com/sagemath/sage/issues"
+"tracker" = "https://github.com/passagemath/passagemath/issues"
 
 [project.scripts]
 sage-config = "sage_conf:_main"
