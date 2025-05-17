@@ -188,18 +188,18 @@ def variety(ideal, ring, *, proof=True):
          {y: 0.31944845973567631118267671892 - 1.6331702409152376561188467320*I, x: 0.11535382288068429237979526783 + 0.58974280502220550164728074602*I},
          {y: 0.31944845973567631118267671892 + 1.6331702409152376561188467320*I, x: 0.11535382288068429237979526783 - 0.58974280502220550164728074602*I}]
 
-        sage: Ideal(x^2 + y^2 - 1, x - y).variety(RBF, algorithm='msolve', proof=False) # optional - msolve
+        sage: Ideal(x^2 + y^2 - 1, x - y).variety(RBF, algorithm='msolve', proof=False)
         [{x: [-0.707106781186547 +/- 6.29e-16], y: [-0.707106781186547 +/- 6.29e-16]},
          {x: [0.707106781186547 +/- 6.29e-16], y: [0.707106781186547 +/- 6.29e-16]}]
-        sage: sorted(Ideal(x^2 - 1, y^2 - 1).variety(QQ, algorithm='msolve', proof=False), key=str) # optional - msolve
+        sage: sorted(Ideal(x^2 - 1, y^2 - 1).variety(QQ, algorithm='msolve', proof=False), key=str)
         [{x: -1, y: -1}, {x: -1, y: 1}, {x: 1, y: -1}, {x: 1, y: 1}]
-        sage: Ideal(x^2-1, y^2-2).variety(CC, algorithm='msolve', proof=False) # optional - msolve
-        [{x: 1.00000000000000, y: 1.41421356237310},
+        sage: sorted(Ideal(x^2 - 1, y^2 - 2).variety(CC, algorithm='msolve', proof=False),  # abs tol 1e-10
+        ....:        key=lambda d: (sign(d['x']), sign(d['y'])))
+        [{x: -1.00000000000000, y: -1.41421356237309},
          {x: -1.00000000000000, y: 1.41421356237309},
          {x: 1.00000000000000, y: -1.41421356237309},
-         {x: -1.00000000000000, y: -1.41421356237310}]
-
-        sage: Ideal([x, y, x + y]).variety(algorithm='msolve', proof=False) # optional - msolve
+         {x: 1.00000000000000, y: 1.41421356237309}]
+        sage: Ideal([x, y, x + y]).variety(algorithm='msolve', proof=False)
         [{x: 0, y: 0}]
 
         sage: Ideal([x, y, x + y - 1]).variety(algorithm='msolve', proof=False) # optional - msolve
