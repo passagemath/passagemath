@@ -490,12 +490,10 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         ::
 
-            sage: macaulay2(Integers(10)) # optional - macaulay2
-            Traceback (most recent call last):
-            ...
-            TypeError: Error evaluating Macaulay2 code.
-            IN:...
-            OUT:...error: ZZ/n not implemented yet for composite n...
+            sage: macaulay2(Integers(10))                       # optional - macaulay2
+            ZZ[]
+            ----
+            10
         """
         return "ZZ/{}".format(self.order())
 

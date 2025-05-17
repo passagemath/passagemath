@@ -984,12 +984,10 @@ class PolynomialRing_generic(Ring):
         EXAMPLES::
 
             sage: R = QQ['x']
-            sage: macaulay2(R).describe()  # optional - macaulay2
-            QQ[x, Degrees => {1}, Heft => {1}, MonomialOrder => {MonomialSize => 16},
+            sage: macaulay2(R).describe()                       # optional - macaulay2
+            QQ[x, Degrees => {1}, Heft => {1}, MonomialOrder => {MonomialSize => 16}]
                                                                 {GRevLex => {1}    }
                                                                 {Position => Up    }
-            --------------------------------------------------------------------------------
-            DegreeRank => 1]
 
         TESTS:
 
