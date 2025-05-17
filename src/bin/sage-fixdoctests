@@ -87,6 +87,13 @@ parser.add_argument("filename", nargs='*', help="input filenames; or (deprecated
 
 runtest_default_environment = "sage.repl.ipython_kernel.all_jupyter"
 
+
+if Path('pkgs').exists():
+   repo_root = str(Path('.').resolve())
+else:
+   repo_root = SAGE_ROOT
+
+
 def plain_distribution_and_extras(distribution):
     # shortcuts / variants
     distribution = distribution.replace('_', '-')
@@ -103,7 +110,7 @@ def default_venv_environment_from_distribution(distribution, toxenv):
         tox_env_name = toxenv or 'sagepython-sagewheels-nopypi-norequirements'
         if extras:
             tox_env_name += '-' + extras.replace(',', '-')
-        default_venv = os.path.join(SAGE_ROOT, 'pkgs', plain_distribution, '.tox', tox_env_name)
+        default_venv = os.path.join(repo_root, 'pkgs', plain_distribution, '.tox', tox_env_name)
         if plain_distribution == 'sagemath-standard-no-symbolics':
             default_environment = 'sage.all'
         else:
@@ -403,7 +410,7 @@ def doctest_blocks(args, input_filenames, distribution=None, venv=None, environm
     doc_file = tmp_filename()
     if venv or environment_args:
         # Test the doctester, putting the output of the test into sage's temporary directory
-        input = os.path.join(os.path.relpath(SAGE_ROOT), 'src', 'sage', 'version.py')
+        input = os.path.join(os.path.relpath(repo_root), 'src', 'sage', 'version.py')
         cmdline = f'{shlex.quote(executable)} -t {environment_args}{long_args}{probe_args}'.rstrip()
         if cmdline not in tested_doctesters:
             if args.verbose:
@@ -529,10 +536,10 @@ def process_grouped_blocks(grouped_iterator, distribution=None, venv=None, envir
                 if input != output:
                     print("sage-fixdoctests: The fixed doctests have been saved as '{0}'.".format(output))
                 else:
-                    relative = os.path.relpath(output, SAGE_ROOT)
+                    relative = os.path.relpath(output, repo_root)
                     print(f"sage-fixdoctests: The input file '{output}' has been overwritten.")
                     if not args.no_diff and not relative.startswith('..'):
-                        subprocess.call(['git', '--no-pager', 'diff', relative], cwd=SAGE_ROOT)
+                        subprocess.call(['git', '--no-pager', 'diff', relative], cwd=repo_root)
             for other_distribution, file_set in venv_files.items():
                 if input not in venv_ignored_files[other_distribution]:
                     file_set.add(input)
@@ -688,7 +695,7 @@ if __name__ == "__main__":
                         with open(stats_filename, 'r') as stats_file:
                             stats = json.load(stats_file)
                     except FileNotFoundError:
-                        print(f"sage-fixdoctests: {os.path.relpath(stats_filename, SAGE_ROOT)} "
+                        print(f"sage-fixdoctests: {os.path.relpath(stats_filename, repo_root)} "
                               "does not exist (ignoring)")
                     else:
                         for d in stats.values():
@@ -699,11 +706,11 @@ if __name__ == "__main__":
                             extras_suffix = '--' + '--'.join(extras.split(','))
                         else:
                             extras_suffix = ''
-                        failures_file = os.path.join(SAGE_ROOT, 'pkgs', plain_distribution,
+                        failures_file = os.path.join(repo_root, 'pkgs', plain_distribution,
                                                      f'known-test-failures{extras_suffix}.json')
                         with open(failures_file, 'w') as f:
                             json.dump(stats, f, sort_keys=True, indent=4)
-                        print(f"sage-fixdoctests: Updated {os.path.relpath(failures_file, SAGE_ROOT)}")
+                        print(f"sage-fixdoctests: Updated {os.path.relpath(failures_file, repo_root)}")
 
     except Exception:
         print(f"sage-fixdoctests: Internal error")
