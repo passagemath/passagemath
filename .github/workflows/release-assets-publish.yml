@@ -38,7 +38,13 @@ jobs:
           run-id: ${{ github.event.inputs.run-id }}
 
       - run: |
-          gh release upload -R ${{ github.repository }} ${{ inputs.tag }} dist/* upstream/* --clobber
+          gh release upload -R ${{ github.repository }} ${{ inputs.tag }} dist/* --clobber
+          status=0
+          for a in upstream/*; do
+              gh release upload -R ${{ github.repository }} ${{ inputs.tag }} $a || gh release upload -R ${{ github.repository }} ${{ inputs.tag }} $a --clobber || status=1
+              sleep 5
+          done
+          exit $status
         env:
           GH_TOKEN: ${{ github.token }}
 
