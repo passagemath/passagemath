@@ -128,6 +128,12 @@ jobs:
       - name: Install tox
         run: |
           pip install tox
+      - name: Cache passagemath-conf wheelhouse
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.sage/sage-*
+          key: ci-wheels-${{ matrix.os }}-${{ github.event.inputs.run-id || inputs.run-id }}-${{ matrix.python-version }}
       - name: Run tox
         run: |
           set -x
