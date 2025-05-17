@@ -17,6 +17,9 @@ on:
       oss:
         description: 'OSs to test (JSON list; default: all)'
         required: false
+      constraints:
+        description: 'Extra constraints'
+        required: false
   workflow_call:
     inputs:
       run-id:
@@ -152,11 +155,12 @@ jobs:
                        *-cp$python_version_no_dot-*|*-none-any-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
-              export PIP_CONSTRAINT=$(pwd)/constraints.txt
           else
               mkdir -p $WHEELHOUSE
               pip download -v --only-binary :all: --no-deps -d $WHEELHOUSE pas$pkg
           fi
+          echo "${{ inputs.constraints }}" >> constraints.txt
+          export PIP_CONSTRAINT=$(pwd)/constraints.txt
           # Use passagemath-conf wheelhouse for missing wheels of third-party projects
           case "$python_version" in
               3.13)        export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python pplpy";;
