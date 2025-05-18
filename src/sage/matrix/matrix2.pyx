@@ -18189,6 +18189,29 @@ cdef class Matrix(Matrix1):
         return all(s * (self * x) == 0
                    for (x, s) in K.discrete_complementarity_set())
 
+    def is_unimodular(self):
+        r"""
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix(ZZ, [[1, 0, 0], [0, 1, 0]]); M
+            [1 0 0]
+            [0 1 0]
+            sage: M.is_unimodular()
+            True
+            sage: M = matrix(ZZ, [[1, 1, 0], [-1, 1, 1]]); M
+            [ 1  1  0]
+            [-1  1  1]
+            sage: M.is_unimodular()
+            False
+        """
+        from .matrix_cmr_sparse import Matrix_cmr_chr_sparse
+        from .matrix_space import MatrixSpace
+
+        MS = MatrixSpace(ZZ, self.nrows(), self.ncols(), sparse=True)
+        M = Matrix_cmr_chr_sparse(MS, self)
+        return M.is_unimodular()
+
     def LLL_gram(self, flag=0):
         """
         Return the LLL transformation matrix for this Gram matrix.
