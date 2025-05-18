@@ -3,6 +3,12 @@ cd src
 # Use newer version of config.guess and config.sub (see Issue #23847)
 cp "$SAGE_ROOT"/config/config.* config
 
-sdh_configure --with-lisp="$SAGE_FRICAS_LISP" --enable-case-insensitive-file-system-check=no
+mkdir _build
+cd _build
+# First line of configure options is from sdh_configure,
+# which we cannot use because we must use an out-of-tree build.
+../configure --prefix="$SAGE_INST_LOCAL" --libdir="$SAGE_INST_LOCAL/lib" --disable-static --disable-maintainer-mode --disable-dependency-tracking \
+   --srcdir=.. \
+   --with-lisp="$SAGE_FRICAS_LISP"
 sdh_make
 sdh_make_install -j1
