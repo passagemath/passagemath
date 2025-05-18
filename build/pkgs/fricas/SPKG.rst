@@ -15,4 +15,4 @@ Modified BSD license.
 Upstream Contact
 ----------------
 
-http://fricas.sourceforge.net/
+https://github.com/fricas/fricas
