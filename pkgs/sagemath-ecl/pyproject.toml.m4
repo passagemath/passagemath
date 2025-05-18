@@ -64,6 +64,7 @@ build-requires = [
 host-requires = [
   "pkg:generic/ecl",
   "pkg:generic/gmp",
+  "pkg:generic/gsl",
   "pkg:generic/maxima",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
