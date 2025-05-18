@@ -42,7 +42,7 @@ esac
 cmd="$1"
 logfile="$2"
 export SAGE_LOGFILE="$logfile"
-logname="$(basename $logfile .log)"
+logname="$(basename "$logfile" .log)"
 logdir=`dirname "$logfile"`
 
 if [[ $use_prefix = true && -z "$prefix" ]]; then
@@ -71,7 +71,7 @@ fi
 if [ -z "$logfile" ]; then
     # Just prefix, nothing else
     ( exec 2>&1; sh -c "$cmd" ) | \
-        ( trap '' SIGINT; if [ -n "$GITHUB_ACTIONS" -a -n "$prefix" ]; then echo "::group::${logname}"; fi; $SED; if [ -n "$GITHUB_ACTIONS" -a -n "$prefix" ]; then echo "::endgroup::"; fi )
+        ( trap '' SIGINT; if [ -n "$GITHUB_ACTIONS" -a -n "$prefix" -a -n "$logname" ]; then echo "::group::${logname}"; fi; $SED; if [ -n "$GITHUB_ACTIONS" -a -n "$prefix" -a -n "$logname" ]; then echo "::endgroup::"; fi )
 
     pipestatus=(${PIPESTATUS[*]})
 
@@ -141,7 +141,7 @@ else
     # run, not the logging.
 
     ( exec 2>&1; time_cmd "$cmd"; status=$?; report_time; exit $status ) | \
-        ( trap '' SIGINT; if [ -n "$GITHUB_ACTIONS" -a -n "$prefix" ]; then echo "::group::${logname}"; fi; tee -a "$logfile" | $SED; if [ -n "$GITHUB_ACTIONS" -a -n "$prefix" ]; then echo "::endgroup::"; fi )
+        ( trap '' SIGINT; if [ -n "$GITHUB_ACTIONS" -a -n "$prefix" -a -n "$logname" ]; then echo "::group::${logname}"; fi; tee -a "$logfile" | $SED; if [ -n "$GITHUB_ACTIONS" -a -n "$prefix" -a -n "$logname" ]; then echo "::endgroup::"; fi )
 
     pipestatus=(${PIPESTATUS[*]})
 
