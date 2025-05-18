@@ -84,7 +84,7 @@
     },
     "sage.algebras.quatalg.quaternion_algebra_element": {
         "failed": true,
-        "ntests": 299
+        "ntests": 262
     },
     "sage.algebras.steenrod.steenrod_algebra_bases": {
         "ntests": 40
@@ -108,8 +108,7 @@
         "ntests": 42
     },
     "sage.arith.misc": {
-        "failed": true,
-        "ntests": 1142
+        "ntests": 1134
     },
     "sage.arith.numerical_approx": {
         "ntests": 4
@@ -136,7 +135,6 @@
         "ntests": 42
     },
     "sage.calculus.functional": {
-        "failed": true,
         "ntests": 121
     },
     "sage.calculus.functions": {
@@ -161,7 +159,6 @@
         "ntests": 78
     },
     "sage.calculus.tests": {
-        "failed": true,
         "ntests": 78
     },
     "sage.calculus.transforms.dft": {
@@ -177,7 +174,6 @@
         "ntests": 98
     },
     "sage.calculus.wester": {
-        "failed": true,
         "ntests": 202
     },
     "sage.categories.action": {
@@ -442,7 +438,6 @@
         "ntests": 34
     },
     "sage.categories.finite_dimensional_modules_with_basis": {
-        "failed": true,
         "ntests": 171
     },
     "sage.categories.finite_dimensional_nilpotent_lie_algebras_with_basis": {
@@ -1870,6 +1865,7 @@
         "ntests": 16
     },
     "sage.libs.pari.convert_sage": {
+        "failed": true,
         "ntests": 100
     },
     "sage.libs.pari.convert_sage_complex_double": {
@@ -2532,18 +2528,15 @@
         "ntests": 34
     },
     "sage.misc.reset": {
-        "failed": true,
         "ntests": 35
     },
     "sage.misc.rest_index_of_methods": {
         "ntests": 22
     },
     "sage.misc.sage_eval": {
-        "failed": true,
         "ntests": 35
     },
     "sage.misc.sage_input": {
-        "failed": true,
         "ntests": 737
     },
     "sage.misc.sage_ostools": {
@@ -3011,7 +3004,6 @@
         "ntests": 213
     },
     "sage.rings.asymptotic.misc": {
-        "failed": true,
         "ntests": 157
     },
     "sage.rings.bernmm": {
@@ -3202,6 +3194,7 @@
         "ntests": 309
     },
     "sage.rings.function_field.function_field_polymod": {
+        "failed": true,
         "ntests": 437
     },
     "sage.rings.function_field.function_field_rational": {
@@ -3322,8 +3315,7 @@
         "ntests": 46
     },
     "sage.rings.number_field.number_field": {
-        "failed": true,
-        "ntests": 2288
+        "ntests": 2279
     },
     "sage.rings.number_field.number_field_base": {
         "ntests": 89
@@ -3350,8 +3342,7 @@
         "ntests": 591
     },
     "sage.rings.number_field.order": {
-        "failed": true,
-        "ntests": 662
+        "ntests": 657
     },
     "sage.rings.number_field.order_ideal": {
         "ntests": 200
@@ -3593,7 +3584,6 @@
         "ntests": 1338
     },
     "sage.rings.polynomial.multi_polynomial_ring": {
-        "failed": true,
         "ntests": 160
     },
     "sage.rings.polynomial.multi_polynomial_ring_base": {
@@ -3888,8 +3878,7 @@
         "ntests": 136
     },
     "sage.schemes.generic.morphism": {
-        "failed": true,
-        "ntests": 479
+        "ntests": 473
     },
     "sage.schemes.generic.point": {
         "ntests": 35
@@ -4011,7 +4000,7 @@
     },
     "sage.stats.distributions.discrete_gaussian_lattice": {
         "failed": true,
-        "ntests": 150
+        "ntests": 0
     },
     "sage.stats.distributions.discrete_gaussian_polynomial": {
         "ntests": 24
@@ -4240,7 +4229,6 @@
         "ntests": 2
     },
     "sage.symbolic.units": {
-        "failed": true,
         "ntests": 89
     },
     "sage.tensor.modules.alternating_contr_tensor": {
@@ -4294,48 +4282,15 @@
     "sage.tensor.modules.tensor_free_submodule_basis": {
         "ntests": 31
     },
-    "sage.tests.benchmark": {
-        "failed": true,
-        "ntests": 217
-    },
     "sage.tests.book_stein_ent": {
-        "failed": true,
-        "ntests": 248
-    },
-    "sage.tests.books.computational-mathematics-with-sagemath.calculus_doctest": {
-        "failed": true,
-        "ntests": 145
+        "ntests": 7
     },
     "sage.tests.books.computational-mathematics-with-sagemath.combinat_doctest": {
         "failed": true,
         "ntests": 258
     },
-    "sage.tests.books.computational-mathematics-with-sagemath.domaines_doctest": {
-        "failed": true,
-        "ntests": 114
-    },
-    "sage.tests.books.computational-mathematics-with-sagemath.float_doctest": {
-        "failed": true,
-        "ntests": 139
-    },
-    "sage.tests.books.computational-mathematics-with-sagemath.integration_doctest": {
-        "failed": true,
-        "ntests": 88
-    },
-    "sage.tests.books.computational-mathematics-with-sagemath.mpoly_doctest": {
-        "failed": true,
-        "ntests": 160
-    },
-    "sage.tests.books.computational-mathematics-with-sagemath.nonlinear_doctest": {
-        "failed": true,
-        "ntests": 144
-    },
     "sage.tests.books.computational-mathematics-with-sagemath.numbertheory_doctest": {
         "ntests": 31
-    },
-    "sage.tests.books.computational-mathematics-with-sagemath.polynomes_doctest": {
-        "failed": true,
-        "ntests": 109
     },
     "sage.tests.books.computational-mathematics-with-sagemath.premierspas_doctest": {
         "ntests": 51
@@ -4343,10 +4298,6 @@
     "sage.tests.books.computational-mathematics-with-sagemath.programmation_doctest": {
         "failed": true,
         "ntests": 174
-    },
-    "sage.tests.books.computational-mathematics-with-sagemath.recequadiff_doctest": {
-        "failed": true,
-        "ntests": 114
     },
     "sage.tests.books.computational-mathematics-with-sagemath.sol.calculus_doctest": {
         "failed": true,
@@ -4368,10 +4319,6 @@
     "sage.tests.books.computational-mathematics-with-sagemath.sol.linalg_doctest": {
         "ntests": 15
     },
-    "sage.tests.books.computational-mathematics-with-sagemath.sol.mpoly_doctest": {
-        "failed": true,
-        "ntests": 30
-    },
     "sage.tests.books.computational-mathematics-with-sagemath.sol.nonlinear_doctest": {
         "ntests": 25
     },
@@ -4380,10 +4327,6 @@
     },
     "sage.tests.books.computational-mathematics-with-sagemath.sol.polynomes_doctest": {
         "ntests": 31
-    },
-    "sage.tests.books.computational-mathematics-with-sagemath.sol.recequadiff_doctest": {
-        "failed": true,
-        "ntests": 23
     },
     "sage.tests.books.judson-abstract-algebra.algcodes-sage": {
         "ntests": 17
@@ -4396,14 +4339,6 @@
     },
     "sage.tests.books.judson-abstract-algebra.cyclic-sage": {
         "ntests": 5
-    },
-    "sage.tests.books.judson-abstract-algebra.domains-sage": {
-        "failed": true,
-        "ntests": 29
-    },
-    "sage.tests.books.judson-abstract-algebra.fields-sage": {
-        "failed": true,
-        "ntests": 68
     },
     "sage.tests.books.judson-abstract-algebra.finite-sage": {
         "ntests": 16
