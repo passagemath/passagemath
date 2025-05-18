@@ -10,6 +10,7 @@ on:
     inputs:
       run-id:
         type: string
+        required: false
 
 jobs:
   publish:
@@ -36,7 +37,7 @@ jobs:
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ github.event.inputs.run-id }}
+          run-id: ${{ github.event.inputs.run-id || inputs.run-id || github.run_id }}
 
       - name: Remove wheels that are too large
         run: |
