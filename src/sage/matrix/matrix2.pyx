@@ -18260,7 +18260,7 @@ cdef class Matrix(Matrix1):
 
         EXAMPLES::
 
-            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: # needs sage.libs.cmr
             sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
             [1 0 1]
             [0 1 1]
@@ -18276,6 +18276,152 @@ cdef class Matrix(Matrix1):
             True
         """
         return self._matrix_cmr().is_strongly_unimodular(*args, **kwds)
+
+    def equimodulus(self, *args, **kwds):
+        r"""
+        Return the integer `k` such that ``self`` is
+        equimodular with determinant gcd `k`.
+
+        A matrix `M` of rank `r` is equimodular with determinant gcd `k`
+        if the following two conditions are satisfied:
+
+        - for some column basis `B` of `M`, the greatest common divisor of
+          the determinants of all `r`-by-`r` submatrices of `B` is `k`;
+
+        - the matrix `X` such that `M=BX` is totally unimodular.
+
+        OUTPUT:
+
+        - ``k``: ``self`` is equimodular with determinant gcd `k`
+        - ``None``: ``self`` is not equimodular for any `k`
+
+        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`strong_equimodulus`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.equimodulus()
+            1
+            sage: M = matrix([[1, 1, 1], [0, 1, 3]]); M
+            [1 1 1]
+            [0 1 3]
+            sage: M.equimodulus()
+        """
+        return self._matrix_cmr().equimodulus(*args, **kwds)
+
+    def strong_equimodulus(self, *args, **kwds):
+        r"""
+        Return the integer `k` such that ``self`` is
+        strongly equimodular with determinant gcd `k`.
+
+        Return whether ``self`` is strongly `k`-equimodular.
+
+        A matrix is strongly equimodular if ``self`` and ``self.transpose()``
+        are both equimodular, which implies that they are equimodular for
+        the same determinant gcd `k`.
+        A matrix `M` of rank-`r` is `k`-equimodular if the following two conditions
+        are satisfied:
+
+        - for some column basis `B` of `M`, the greatest common divisor of the
+          determinants of all `r`-by-`r` submatrices of `B` is `k`;
+
+        - the matrix `X` such that `M=BX` is totally unimodular.
+
+        OUTPUT:
+
+        - ``k``: ``self`` is  `k`-equimodular
+        - ``None``: ``self`` is not `k`-equimodular for any `k`
+
+        .. SEEALSO:: :meth:`is_strongly_k_equimodular`, :meth:`equimodulus`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.strong_equimodulus()
+            sage: M = matrix([[1, 0, 0], [0, 1, 0]]); M
+            [1 0 0]
+            [0 1 0]
+            sage: M.strong_equimodulus()
+            1
+        """
+        return self._matrix_cmr().strong_equimodulus(*args, **kwds)
+
+    def is_k_equimodular(self, k, *args, **kwds):
+        r"""
+        Return whether ``self`` is equimodular with determinant gcd `k`.
+
+        A matrix `M` of rank-`r` is `k`-equimodular if the following two
+        conditions are satisfied:
+
+        - for some column basis `B` of `M`, the greatest common divisor of
+          the determinants of all `r`-by-`r` submatrices of `B` is `k`;
+
+        - the matrix `X` such that `M=BX` is totally unimodular.
+
+        If the matrix has full row rank, it is `k`-equimodular if
+        every full rank minor of the matrix has determinant `0,\pm k`.
+
+        .. NOTE::
+
+            In parts of the literature, a matrix with the above properties
+            is called *strictly* `k`-modular.
+
+        .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`,
+                     :meth:`equimodulus`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.is_k_equimodular(1)
+            True
+            sage: M.is_k_equimodular(2)
+            False
+            sage: M = matrix([[1, 1, 1], [0, 1, 3]]); M
+            [1 1 1]
+            [0 1 3]
+            sage: M.is_k_equimodular(1)
+            False
+        """
+        return self._matrix_cmr().is_k_equimodular(k, *args, **kwds)
+
+    def is_strongly_k_equimodular(self, k, *args, **kwds):
+        r"""
+        Return whether ``self`` is strongly `k`-equimodular.
+
+        A matrix is strongly `k`-equimodular if ``self`` and ``self.transpose()``
+        are both `k`-equimodular.
+
+        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`,
+                     :meth:`strong_equimodulus`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.is_strongly_k_equimodular(1)
+            False
+            sage: M = matrix([[1, 0, 0], [0, 1, 0]]); M
+            [1 0 0]
+            [0 1 0]
+            sage: M.is_strongly_k_equimodular(1)
+            True
+        """
+        return self._matrix_cmr().is_strongly_k_equimodular(k, *args, **kwds)
 
     def LLL_gram(self, flag=0):
         """
