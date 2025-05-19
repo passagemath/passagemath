@@ -130,4 +130,3 @@ EOF
 fi
 
 # Build succeeded.
-echo "Sage build/upgrade complete!"
