@@ -4071,7 +4071,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
     def binary_pivot(self, row, column):
         r"""
-        Apply a pivot to ``self`` and returns the resulting matrix.
+        Apply a pivot to ``self`` and return the resulting matrix.
+
         Calculations are done over the binary field.
 
         Suppose a matrix is `\begin{bmatrix} 1 & c^T \\ b & D\end{bmatrix}`.
@@ -4130,7 +4131,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
     def binary_pivots(self, rows, columns):
         r"""
-        Apply a sequence of pivots to ``self`` and returns the resulting matrix.
+        Apply a sequence of pivots to ``self`` and return the resulting matrix.
+
         Calculations are done over the binary field.
 
         .. SEEALSO:: :meth:`binary_pivot`, :meth:`ternary_pivot`, :meth:`ternary_pivots`
@@ -4193,7 +4195,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
     def ternary_pivot(self, row, column):
         r"""
-        Apply a pivot to ``self`` and returns the resulting matrix.
+        Apply a pivot to ``self`` and return the resulting matrix.
+
         Calculations are done over the ternary field.
 
         Suppose a matrix is `\begin{bmatrix} \epsilon & c^T \\ b & D\end{bmatrix}`,
@@ -4289,7 +4292,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
     def ternary_pivots(self, rows, columns):
         r"""
-        Apply a sequence of pivots to ``self`` and returns the resulting matrix.
+        Apply a sequence of pivots to ``self`` and return the resulting matrix.
+
         Calculations are done over the ternary field.
 
         .. SEEALSO:: :meth:`binary_pivot`, :meth:`binary_pivots`, :meth:`ternary_pivot`
@@ -4371,7 +4375,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         A matrix is strongly unimodular if ``self`` and ``self.transpose()`` are both unimodular.
 
-        .. SEEALSO:: meth:`is_unimodular`, :meth:`is_strongly_k_modular`
+        .. SEEALSO:: meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
 
         EXAMPLES::
 
