@@ -18423,6 +18423,149 @@ cdef class Matrix(Matrix1):
         """
         return self._matrix_cmr().is_strongly_k_equimodular(k, *args, **kwds)
 
+    def is_network_matrix(self, *args, **kwds):
+        r"""
+        Return whether the matrix ``self`` over `\GF{3}` or `\QQ` is a network matrix.
+
+        If there is some entry not in `\{-1, 0, 1\}`, return ``False``.
+
+        Let `D = (V,A)` be a digraph and let `T` be an (arbitrarily) directed
+        spanning forest of the underlying undirected graph.
+        The matrix `M(D,T) \in \{-1,0,1\}^{T \times (A \setminus T)}` defined via
+
+        .. MATH::
+
+            M(D,T)_{a,(v,w)} := \begin{cases}
+                +1 & \text{if the unique $v$-$w$-path in $T$ passes through $a$ forwardly}, \\
+                -1 & \text{if the unique $v$-$w$-path in $T$ passes through $a$ backwardly}, \\
+                0  & \text{otherwise}
+            \end{cases}
+
+        is called the network matrix of `D` with respect to `T`.
+        A matrix `M` is called network matrix if there exists a digraph `D`
+        with a directed spanning forest `T` such that `M = M(D,T)`.
+        Moreover, `M` is called conetwork matrix if `M^T` is a network matrix.
+
+        ALGORITHM:
+
+        The implemented recognition algorithm first tests the binary matroid of
+        the support matrix of `M` for being graphic and
+        uses camion for testing whether `M` is signed correctly.
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0], [2, 1], [0, -1]]); M
+            [ 1  0]
+            [ 2  1]
+            [ 0 -1]
+            sage: M.is_network_matrix()
+            False
+            sage: M = matrix([[1, 0], [-1, 1], [0, -1]]); M
+            [ 1  0]
+            [-1  1]
+            [ 0 -1]
+            sage: M.is_network_matrix()
+            True
+            sage: result, certificate = M.is_network_matrix(certificate=True)
+            sage: graph, forest_edges, coforest_edges = certificate
+            sage: graph
+            Digraph on 4 vertices
+            sage: graph.vertices(sort=True)  # the numbers have no meaning
+            [1, 2, 7, 12]
+            sage: graph.edges(sort=True, labels=False)
+            [(2, 1), (2, 7), (7, 1), (7, 12), (12, 1)]
+            sage: forest_edges    # indexed by rows of M
+            ((2, 1), (7, 1), (7, 12))
+            sage: coforest_edges  # indexed by cols of M
+            ((2, 7), (12, 1))
+            sage: K33 = matrix([[-1, -1, -1, -1],
+            ....:               [ 1,  1,  0,  0],
+            ....:               [ 0,  0,  1,  1],
+            ....:               [ 1,  0,  1,  0],
+            ....:               [ 0,  1,  0,  1]]); K33
+            [-1 -1 -1 -1]
+            [ 1  1  0  0]
+            [ 0  0  1  1]
+            [ 1  0  1  0]
+            [ 0  1  0  1]
+            sage: K33.is_network_matrix()
+            True
+
+        This is test ``Basic`` in CMR's ``test_network.cpp``::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[-1,  0,  0,  0,  1, -1,  0],
+            ....:             [ 1,  0,  0,  1, -1,  1,  0],
+            ....:             [ 0, -1,  0, -1,  1, -1,  0],
+            ....:             [ 0,  1,  0,  0,  0,  0,  1],
+            ....:             [ 0,  0,  1, -1,  1,  0,  1],
+            ....:             [ 0,  0, -1,  1, -1,  0,  0]])
+            sage: M.is_network_matrix()
+            True
+            sage: result, certificate = M.is_network_matrix(certificate=True)
+            sage: result, certificate
+            (True,
+             (Digraph on 7 vertices,
+              ((9, 8), (3, 8), (3, 4), (5, 4), (4, 6), (0, 6)),
+              ((3, 9), (5, 3), (4, 0), (0, 8), (9, 0), (4, 9), (5, 6))))
+            sage: digraph, forest_arcs, coforest_arcs = certificate
+            sage: list(digraph.edges(sort=True))
+            [(0, 6, None), (0, 8, None),
+             (3, 4, None), (3, 8, None), (3, 9, None),
+             (4, 0, None), (4, 6, None), (4, 9, None),
+             (5, 3, None), (5, 4, None), (5, 6, None),
+             (9, 0, None), (9, 8, None)]
+            sage: digraph.plot(edge_colors={'red': forest_arcs})                        # needs sage.plot
+            Graphics object consisting of 21 graphics primitives
+        """
+        return self._matrix_cmr().is_network_matrix(*args, **kwds)
+
+    def is_conetwork_matrix(self, *args, **kwds):
+        r"""
+        Return whether the matrix ``self`` over `\GF{3}` or `QQ` is a conetwork matrix.
+
+        A matrix is conetwork if and only if its transpose is network.
+
+        .. SEEALSO:: :meth:`is_network_matrix`,
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 0, 0, 1, -1, 1, 0, 0],
+            ....:             [0, 1, 0, 0, 0, 1, -1, 1, 0],
+            ....:             [0, 0, 1, 0, 0, 0, 1, -1, 1],
+            ....:             [0, 0, 0, 1, 1, 0, 0, 1, -1]]); M
+            [ 1  0  0  0  1 -1  1  0  0]
+            [ 0  1  0  0  0  1 -1  1  0]
+            [ 0  0  1  0  0  0  1 -1  1]
+            [ 0  0  0  1  1  0  0  1 -1]
+            sage: M.is_conetwork_matrix()
+            True
+            sage: K33 = matrix([[-1, -1, -1, -1],
+            ....:               [ 1,  1,  0,  0],
+            ....:               [ 0,  0,  1,  1],
+            ....:               [ 1,  0,  1,  0],
+            ....:               [ 0,  1,  0,  1]]); K33
+            [-1 -1 -1 -1]
+            [ 1  1  0  0]
+            [ 0  0  1  1]
+            [ 1  0  1  0]
+            [ 0  1  0  1]
+            sage: K33.is_conetwork_matrix()
+            False
+            sage: C3 = matrix([[1, 1, 0],
+            ....:              [1, 0, 1],
+            ....:              [0, 1, 1]]); C3
+            [1 1 0]
+            [1 0 1]
+            [0 1 1]
+            sage: result, certificate = C3.is_conetwork_matrix(certificate=True)
+            sage: result
+            False
+        """
+        return self._matrix_cmr().is_conetwork_matrix(*args, **kwds)
+
     def LLL_gram(self, flag=0):
         """
         Return the LLL transformation matrix for this Gram matrix.
