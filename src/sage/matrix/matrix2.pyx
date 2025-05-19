@@ -18212,9 +18212,24 @@ cdef class Matrix(Matrix1):
         MS = MatrixSpace(ZZ, self.nrows(), self.ncols(), sparse=True)
         return Matrix_cmr_chr_sparse(MS, self)
 
-    def is_unimodular(self):
+    def is_unimodular(self, *args, **kwds):
         r"""
         Return whether ``self`` is a unimodular matrix.
+
+        A nonsingular square matrix `A` is called unimodular if it is integral
+        and has determinant `\pm1`, i.e., an element of
+        `\mathop{\operatorname{GL}}_n(\ZZ)` [Sch1986]_, Ch. 4.3.
+
+        A rectangular matrix `A` of full row rank is called unimodular if it
+        is integral and every basis `B` of `A` has determinant `\pm1`.
+        [Sch1986]_, Ch. 19.1.
+
+        More generally, a matrix `A` of rank `r` is called unimodular if it is
+        integral and for every submatrix `B` formed by `r` linearly independent columns,
+        the greatest common divisor of the determinants of all `r`-by-`r`
+        submatrices of `B` is `1`. [Sch1986]_, Ch. 21.4.
+
+        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`, :meth:`is_totally_unimodular`
 
         See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_unimodular` for
         the detailed documentation.
@@ -18233,7 +18248,34 @@ cdef class Matrix(Matrix1):
             sage: M.is_unimodular()
             False
         """
-        return self._matrix_cmr().is_unimodular()
+        return self._matrix_cmr().is_unimodular(*args, **kwds)
+
+    def is_strongly_unimodular(self, *args, **kwds):
+        r"""
+        Return whether ``self`` is a strongly unimodular matrix.
+
+        A matrix is strongly unimodular if ``self`` and ``self.transpose()`` are both unimodular.
+
+        .. SEEALSO:: meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
+
+        EXAMPLES::
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.is_unimodular()
+            True
+            sage: M.is_strongly_unimodular()
+            False
+            sage: M = matrix([[1, 0, 0], [0, 1, 0]]); M
+            [1 0 0]
+            [0 1 0]
+            sage: M.is_strongly_unimodular()
+            True
+        """
+        return self._matrix_cmr().is_strongly_unimodular(*args, **kwds)
 
     def LLL_gram(self, flag=0):
         """
