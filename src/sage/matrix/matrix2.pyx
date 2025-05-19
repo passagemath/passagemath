@@ -18189,8 +18189,36 @@ cdef class Matrix(Matrix1):
         return all(s * (self * x) == 0
                    for (x, s) in K.discrete_complementarity_set())
 
+    def _matrix_cmr(self):
+        r"""
+        Return ``self`` as a :class:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse`.
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix(ZZ, [[1, 0, 1], [0, 1, 1], [1, 2, 3]],
+            ....:            column_keys=['a', 'b', 'c'],
+            ....:            row_keys=['u', 'v', 'w'])
+            sage: M_cmr = M._matrix_cmr(); M_cmr
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: type(M_cmr)
+            <class 'sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse'>
+        """
+        from .matrix_cmr_sparse import Matrix_cmr_chr_sparse
+        from .matrix_space import MatrixSpace
+
+        MS = MatrixSpace(ZZ, self.nrows(), self.ncols(), sparse=True)
+        return Matrix_cmr_chr_sparse(MS, self)
+
     def is_unimodular(self):
         r"""
+        Return whether ``self`` is a unimodular matrix.
+
+        See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_unimodular` for
+        the detailed documentation.
+
         EXAMPLES::
 
             sage: # needs sage.libs.cmr
@@ -18205,12 +18233,7 @@ cdef class Matrix(Matrix1):
             sage: M.is_unimodular()
             False
         """
-        from .matrix_cmr_sparse import Matrix_cmr_chr_sparse
-        from .matrix_space import MatrixSpace
-
-        MS = MatrixSpace(ZZ, self.nrows(), self.ncols(), sparse=True)
-        M = Matrix_cmr_chr_sparse(MS, self)
-        return M.is_unimodular()
+        return self._matrix_cmr().is_unimodular()
 
     def LLL_gram(self, flag=0):
         """
