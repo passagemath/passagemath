@@ -1,0 +1,32 @@
+From 71a69df528afdb2922af3078fdb9f288959e3082 Mon Sep 17 00:00:00 2001
+From: Qian Yun <oldk1331@gmail.com>
+Date: Tue, 3 Dec 2024 18:58:54 +0800
+Subject: [PATCH] Fix build with gcc-14 on musl
+
+---
+ ChangeLog          | 4 ++++
+ src/lib/sockio-c.c | 4 ++--
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/lib/sockio-c.c b/src/lib/sockio-c.c
+index d8a629995..51071e167 100644
+--- a/src/lib/sockio-c.c
++++ b/src/lib/sockio-c.c
+@@ -758,7 +758,7 @@ connect_to_local_server(char *server_name, int purpose, int time_out)
+   uaddr->sun_family = FRICAS_AF_LOCAL;
+   strncpy(uaddr->sun_path, name, sizeof(uaddr->sun_path) - 1);
+   for(i=0; i<max_con; i++) {
+-    code = connect(sock->socket, uaddr, sizeof(*uaddr));
++    code = connect(sock->socket, (struct sockaddr *)uaddr, sizeof(*uaddr));
+     if (code == -1) {
+       if (
+         /* @@@ Why we need this */
+@@ -932,7 +932,7 @@ open_server(char *server_name)
+     struct sockaddr_un * uaddr = &(sock->addr.u_addr);
+     uaddr->sun_family = FRICAS_AF_LOCAL;
+     strncpy(uaddr->sun_path, name, sizeof(uaddr->sun_path) - 1);
+-    if (bind(sock->socket, uaddr, sizeof(*uaddr))) {
++    if (bind(sock->socket, (struct sockaddr *)uaddr, sizeof(*uaddr))) {
+       perror("binding local server socket");
+       server[1].socket = 0;
+       return -2;
