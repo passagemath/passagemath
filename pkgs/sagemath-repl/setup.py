@@ -19,6 +19,7 @@ sage_setup(
     },
     package_data={
         "sage.doctest": ["tests/*"],
+        "sage.ext_data": ["notebook-ipython/*"],
         "sage.repl.rich_output": ["example*"],
     }
 )

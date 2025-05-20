@@ -5,7 +5,7 @@
     },
     "sage.arith.misc": {
         "failed": true,
-        "ntests": 921
+        "ntests": 918
     },
     "sage.arith.numerical_approx": {
         "ntests": 1
@@ -296,7 +296,7 @@
         "ntests": 34
     },
     "sage.categories.finite_dimensional_modules_with_basis": {
-        "ntests": 63
+        "ntests": 64
     },
     "sage.categories.finite_dimensional_nilpotent_lie_algebras_with_basis": {
         "ntests": 19
@@ -521,7 +521,7 @@
         "ntests": 19
     },
     "sage.categories.number_fields": {
-        "ntests": 41
+        "ntests": 39
     },
     "sage.categories.objects": {
         "ntests": 12
@@ -984,7 +984,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "ntests": 181
+        "ntests": 185
     },
     "sage.features.sat": {
         "ntests": 16
@@ -1449,7 +1449,6 @@
         "ntests": 76
     },
     "sage.repl.ipython_kernel.install": {
-        "failed": true,
         "ntests": 35
     },
     "sage.repl.ipython_kernel.interact": {
@@ -1543,7 +1542,7 @@
         "ntests": 14
     },
     "sage.rings.finite_rings.finite_field_base": {
-        "ntests": 32
+        "ntests": 35
     },
     "sage.rings.finite_rings.finite_field_constructor": {
         "ntests": 22
@@ -1891,7 +1890,7 @@
     },
     "sage.schemes.generic.morphism": {
         "failed": true,
-        "ntests": 387
+        "ntests": 381
     },
     "sage.schemes.generic.point": {
         "ntests": 35
@@ -2129,6 +2128,9 @@
     "sage.tests.book_stein_ent": {
         "ntests": 8
     },
+    "sage.tests.books.judson-abstract-algebra.cyclic-sage": {
+        "ntests": 5
+    },
     "sage.tests.cmdline": {
         "ntests": 108
     },
@@ -2140,6 +2142,9 @@
     },
     "sage.tests.functools_partial_src": {
         "ntests": 3
+    },
+    "sage.tests.memcheck.run_tests_in_valgrind": {
+        "ntests": 2
     },
     "sage.tests.parigp": {
         "ntests": 4
