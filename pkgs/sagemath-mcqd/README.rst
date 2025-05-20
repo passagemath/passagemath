@@ -47,8 +47,8 @@ so compilation from source is triggered for those.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-mcqd`` is a small
-optional distribution for use with ``sagemath-standard``.
+This pip-installable distribution ``passagemath-mcqd`` is a small
+optional distribution for use with ``passagemath-standard``.
 
 It provides a Cython interface to the ``mcqd`` library,
 providing a fast exact algorithm for finding a maximum clique in
