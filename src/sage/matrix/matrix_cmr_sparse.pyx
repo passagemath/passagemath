@@ -1461,17 +1461,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         indexes a row vector `c^T` and ``first_columns_index`` indexes two column vectors `a` of ``first_mat``,
         then ``second_row_index`` indexes a row vector `b` and ``second_columns_index`` indexes two column
         vectors `d` of ``second_mat``. In this case, the first matrix is
-        `
-            M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix}
-        `
+        ` M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix} `
         and the second matrix is
-        `
-            M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}.
-        `
+        ` M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}. `
         Then the Seymour/Schrijver 3-sum is the matrix
-        `
-            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
-        `
+        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
 
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
@@ -1581,7 +1575,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             True
 
         Both algorithm options will check the given two matrices
-        and the related indices satisfying the requirements of `\Delta`-sum:
+        and the related indices satisfying the requirements of `\Delta`-sum::
 
             sage: M1.delta_sum(M2, 1, [2, 3], 1, [1, -1])
             Traceback (most recent call last):
@@ -1612,7 +1606,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ...
             ValueError: the epsilon in the two matrices are inconsistent
 
-        ``sign_verify=True`` will check the sign consistency:
+        ``sign_verify=True`` will check the sign consistency::
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 4, sparse=True),
             ....:                            [[ 1,  1,  0,  0],
@@ -1735,35 +1729,35 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         In this case,
         the first matrix is
         `
-            M_1 = \begin{bmatrix}
-            A & 0 \\
-            C_{i,\star} & \alpha \\
-            C_{j,\star} & \beta
-            \end{bmatrix},
+        M_1 = \begin{bmatrix}
+        A & 0 \\
+        C_{i,\star} & \alpha \\
+        C_{j,\star} & \beta
+        \end{bmatrix},
         `
         where `\alpha, \beta \in \{-1,+1 \}`,
         and the second matrix is
         `
-            M_2 = \begin{bmatrix}
-            \gamma & \delta & 0^T \\
-            C_{\star,k} & C_{\star,\ell} & D
-            \end{bmatrix},
+        M_2 = \begin{bmatrix}
+        \gamma & \delta & 0^T \\
+        C_{\star,k} & C_{\star,\ell} & D
+        \end{bmatrix},
         `
         where `\gamma, \delta \in \{ -1,+1 \}` such that the matrix
         `
-            N = \begin{bmatrix}
-            \gamma & \delta & 0 \\
-            C_{i,k} & C_{i,\ell} & \alpha \\
-            C_{j,k} & C_{j,\ell} & \beta
-            \end{bmatrix}
+        N = \begin{bmatrix}
+        \gamma & \delta & 0 \\
+        C_{i,k} & C_{i,\ell} & \alpha \\
+        C_{j,k} & C_{j,\ell} & \beta
+        \end{bmatrix}
         `
         is totally unimodular.
         Then the 3-sum of `M_1` and `M_2` (at these rows/columns) is the matrix
         `
-            M = \begin{bmatrix}
-            A & 0 \\
-            C & D
-            \end{bmatrix},
+        M = \begin{bmatrix}
+        A & 0 \\
+        C & D
+        \end{bmatrix},
         `
         where `C` is the unique rank-2 matrix having linearly independent rows `C_{i,\star}` and
         `C_{j,\star}` and linearly independent columns `C_{\star,k}` and `C_{\star,\ell}`.
@@ -2056,16 +2050,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         Return the `Y`-sum matrix constructed from the given matrices
         ``first_mat`` and ``second_mat``.
         In this case, the first matrix is
-        `
-            M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix}
-        `
+        ` M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix} `
         and the second matrix is
-        `
-            M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}.
-        `
+        ` M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}. `
         Then the Y-sum is the matrix
-        `
-            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
+        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
 
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
@@ -2150,7 +2139,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ...
             ValueError: The given two matrices and related indices do not satisfy the rule for y sum!
 
-        ``sign_verify=True`` will check the sign consistency:
+        ``sign_verify=True`` will check the sign consistency::
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 3, sparse=True),
             ....:                            [[1, 1, 0],
@@ -2541,26 +2530,26 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Let `M` denote the matrix given by ``self``. Then
         `
-            M = \begin{bmatrix}
-            A & a b^T \\
-            d c^T & D
-            \end{bmatrix},
+        M = \begin{bmatrix}
+        A & a b^T \\
+        d c^T & D
+        \end{bmatrix},
         `
         where `a, b, c, d` are vectors and `A, D` are submatrices.
         The two components of the delta sum `M_1` and `M_2`,
         given by ``first_mat`` and ``second_mat``, must be of the form
         `
-            M_1 = \begin{bmatrix}
-            A & a & a \\
-            c^T & 0 & \varepsilon
-            \end{bmatrix},
+        M_1 = \begin{bmatrix}
+        A & a & a \\
+        c^T & 0 & \varepsilon
+        \end{bmatrix},
         `
         and
         `
-            M_2 = \begin{bmatrix}
-            \varepsilon & 0 & b^T \\
-            d & d & D
-            \end{bmatrix}.
+        M_2 = \begin{bmatrix}
+        \varepsilon & 0 & b^T \\
+        d & d & D
+        \end{bmatrix}.
         `
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
@@ -2739,35 +2728,35 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Let `M` denote the matrix given by ``three_sum_mat``. Then
         `
-            M = \begin{bmatrix}
-            A & 0 \\
-            C & D
-            \end{bmatrix},
+        M = \begin{bmatrix}
+        A & 0 \\
+        C & D
+        \end{bmatrix},
         `
         where `\text{rank}(C) = 2`.
         The two components of the 3-sum `M_1` and `M_2`, given by ``first_mat`` and ``second_mat``, must be of the form
         `
-            M_1 = \begin{bmatrix}
-            A & 0 \\
-            C_{i,\star} & 1 \\
-            C_{j,\star} & \beta
-            \end{bmatrix},
+        M_1 = \begin{bmatrix}
+        A & 0 \\
+        C_{i,\star} & 1 \\
+        C_{j,\star} & \beta
+        \end{bmatrix},
         `
         where `\beta \in \{-1,+1 \}`,
         and
         `
-            M_2 = \begin{bmatrix}
-            \gamma & 1 & 0^T \\
-            C_{\star,k} & C_{\star,\ell} & D
-            \end{bmatrix},
+        M_2 = \begin{bmatrix}
+        \gamma & 1 & 0^T \\
+        C_{\star,k} & C_{\star,\ell} & D
+        \end{bmatrix},
         `
         where `\gamma \in \{ -1,+1 \}` such that the matrix
         `
-            N = \begin{bmatrix}
-            \gamma & 1 & 0 \\
-            C_{i,k} & C_{i,\ell} & 1 \\
-            C_{j,k} & C_{j,\ell} & \beta
-            \end{bmatrix}
+        N = \begin{bmatrix}
+        \gamma & 1 & 0 \\
+        C_{i,k} & C_{i,\ell} & 1 \\
+        C_{j,k} & C_{j,\ell} & \beta
+        \end{bmatrix}
         `
         is totally unimodular. The columns ``first_special_columns[0]`` and
         ``first_special_columns[1]`` indicate the columns of `M_1` that shall correspond to `C_{\star,k}` and
@@ -2778,17 +2767,17 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         If the matrix is in the form
         `
-            M = \begin{bmatrix}
-            A & B \\
-            0 & D
-            \end{bmatrix},
+        M = \begin{bmatrix}
+        A & B \\
+        0 & D
+        \end{bmatrix},
         `
         then by permutating the rows and columns, it can be viewed as
         `
-            \begin{bmatrix}
-            D & 0 \\
-            B & A
-            \end{bmatrix}.
+        \begin{bmatrix}
+        D & 0 \\
+        B & A
+        \end{bmatrix}.
         `
         Thus, the 3-sum decomposition can be applied.
 
@@ -3043,27 +3032,27 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Let `M` denote the matrix given by ``self``. Then
         `
-            M = \begin{bmatrix}
-            A & a b^T \\
-            d c^T & D
-            \end{bmatrix},
+        M = \begin{bmatrix}
+        A & a b^T \\
+        d c^T & D
+        \end{bmatrix},
         `
         where `a, b, c, d` are vectors and `A, D` are submatrices.
         The two components of the Y-sum `M_1` and `M_2`, given by ``first_mat`` and ``second_mat``, must be of the form
         `
-            M_1 = \begin{bmatrix}
-            A & a \\
-            c^T & 0 \\
-            c^T & \varepsilon
-            \end{bmatrix},
+        M_1 = \begin{bmatrix}
+        A & a \\
+        c^T & 0 \\
+        c^T & \varepsilon
+        \end{bmatrix},
         `
         and
         `
-            M_2 = \begin{bmatrix}
-            \varepsilon & b^T \\
-            0 & b^T \\
-            d & D
-            \end{bmatrix}.
+        M_2 = \begin{bmatrix}
+        \varepsilon & b^T \\
+        0 & b^T \\
+        d & D
+        \end{bmatrix}.
         `
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
@@ -3186,17 +3175,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         then ``second_row_index`` indexes a row vector `b` and
         ``second_columns_index`` indexes two column vectors `d` of ``second_mat``.
         In this case, the first matrix is
-        `
-            M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix}
-        `
+        ` M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix} `
         and the second matrix is
-        `
-            M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}.
-        `
+        ` M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}. `
         Then the Seymour/Schrijver 3-sum is the matrix
-        `
-            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
-
+        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
         two nonzeros per row and per column that covers
@@ -3469,35 +3452,35 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Let `M` denote the matrix given by ``three_sum_mat``. Then
         `
-            M = \begin{bmatrix}
-            A & 0 \\
-            C & D
-            \end{bmatrix},
+        M = \begin{bmatrix}
+        A & 0 \\
+        C & D
+        \end{bmatrix},
         `
         where `\text{rank}(C) = 2`.
         The two components of the 3-sum `M_1` and `M_2`, given by ``first_mat`` and ``second_mat``, must be of the form
         `
-            M_1 = \begin{bmatrix}
-            A & 0 \\
-            C_{i,\star} & 1 \\
-            C_{j,\star} & \beta
-            \end{bmatrix},
+        M_1 = \begin{bmatrix}
+        A & 0 \\
+        C_{i,\star} & 1 \\
+        C_{j,\star} & \beta
+        \end{bmatrix},
         `
         where `\beta \in \{-1,+1 \}`,
         and
         `
-            M_2 = \begin{bmatrix}
-            \gamma & 1 & 0^T \\
-            C_{\star,k} & C_{\star,\ell} & D
-            \end{bmatrix},
+        M_2 = \begin{bmatrix}
+        \gamma & 1 & 0^T \\
+        C_{\star,k} & C_{\star,\ell} & D
+        \end{bmatrix},
         `
         where `\gamma \in \{ -1,+1 \}` such that the matrix
         `
-            N = \begin{bmatrix}
-            \gamma & 1 & 0 \\
-            C_{i,k} & C_{i,\ell} & 1 \\
-            C_{j,k} & C_{j,\ell} & \beta
-            \end{bmatrix}
+        N = \begin{bmatrix}
+        \gamma & 1 & 0 \\
+        C_{i,k} & C_{i,\ell} & 1 \\
+        C_{j,k} & C_{j,\ell} & \beta
+        \end{bmatrix}
         `
         is totally unimodular.
         The columns ``first_intersection_columns`` indicate the columns of `M_1` that
@@ -3807,17 +3790,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         then ``second_rows_index`` indexes row vectors `b^T` and
         ``second_column_index`` indexes a column vector `d` in ``second_mat``.
         In this case, the first matrix is
-        `
-            M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix}
-        `
+        ` M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix} `
         and the second matrix is
-        `
-            M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}.
-        `
+        ` M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}. `
         Then the Y-sum is the matrix
-        `
-            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
-
+        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
         two nonzeros per row and per column that covers
