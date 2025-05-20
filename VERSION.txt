@@ -1,1 +1,1 @@
-passagemath version 10.5.35, Release Date: 2025-05-18
+passagemath version 10.5.36, Release Date: 2025-05-20
