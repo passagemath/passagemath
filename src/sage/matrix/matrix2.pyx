@@ -18566,6 +18566,144 @@ cdef class Matrix(Matrix1):
         """
         return self._matrix_cmr().is_conetwork_matrix(*args, **kwds)
 
+    def is_totally_unimodular(self, *args, **kwds):
+        r"""
+        Return whether ``self`` is a totally unimodular matrix.
+
+        A matrix is totally unimodular if every subdeterminant is `0`, `1`, or `-1`.
+
+        REFERENCES:
+
+        - [Sch1986]_, Chapter 19
+
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``);
+          if ``True``, then return
+          a :class:`DecompositionNode` if ``self`` is totally unimodular;
+          a submatrix with determinant not in `\{0, \pm1\}` if not.
+
+        - ``stop_when_nonTU`` -- boolean (default: ``True``);
+          whether to stop decomposing once not TU is determined.
+
+          For a description of other parameters, see :meth:`_set_cmr_seymour_parameters`
+
+        - ``row_keys`` -- a finite or enumerated family of arbitrary objects
+          that index the rows of the matrix
+
+        - ``column_keys`` -- a finite or enumerated family of arbitrary objects
+          that index the columns of the matrix
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0], [2, 1], [0, 1]]); M
+            [1 0]
+            [2 1]
+            [0 1]
+            sage: M.is_totally_unimodular()
+            False
+            sage: M = matrix([[1, 0], [-1, 1], [0, 1]]); M
+            [ 1  0]
+            [-1  1]
+            [ 0  1]
+            sage: M.is_totally_unimodular()
+            True
+            sage: M.is_totally_unimodular(certificate=True)
+            (True, GraphicNode (3×2))
+            sage: MF = matroids.catalog.Fano(); MF
+            Fano: Binary matroid of rank 3 on 7 elements, type (3, 0)
+            sage: MFR = MF.representation().change_ring(ZZ); MFR
+            [1 0 0 0 1 1 1]
+            [0 1 0 1 0 1 1]
+            [0 0 1 1 1 0 1]
+            sage: MFR2 = block_diagonal_matrix(MFR, MFR, sparse=True); MFR2
+            [1 0 0 0 1 1 1|0 0 0 0 0 0 0]
+            [0 1 0 1 0 1 1|0 0 0 0 0 0 0]
+            [0 0 1 1 1 0 1|0 0 0 0 0 0 0]
+            [-------------+-------------]
+            [0 0 0 0 0 0 0|1 0 0 0 1 1 1]
+            [0 0 0 0 0 0 0|0 1 0 1 0 1 1]
+            [0 0 0 0 0 0 0|0 0 1 1 1 0 1]
+            sage: MFR2.is_totally_unimodular(certificate=True)
+            (False, (OneSumNode (6×14) with 2 children, ((2, 1, 0), (5, 4, 3))))
+            sage: result, certificate = MFR2.is_totally_unimodular(certificate=True,
+            ....:                                                  stop_when_nonTU=True)
+            sage: result, certificate
+            (False, (OneSumNode (6×14) with 2 children, ((2, 1, 0), (5, 4, 3))))
+            sage: submatrix = MFR2.matrix_from_rows_and_columns(*certificate[1]); submatrix
+            [0 1 1]
+            [1 0 1]
+            [1 1 0]
+            sage: submatrix.determinant()
+            2
+
+        If the matrix is totally unimodular, it always returns
+        a full decomposition as a certificate::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[-1,-1,-1,-1, 0, 0, 0, 0, 0],
+            ....:             [1, 1, 0, 0, 0, 0, 0, 0, 0],
+            ....:             [0, 0, 1, 1, 0, 0, 0, 0, 0],
+            ....:             [1, 0, 1, 0, 0, 0, 0, 0, 0],
+            ....:             [0, 1, 0, 1, 0, 0, 0, 0, 0],
+            ....:             [0, 0, 0, 0,-1, 1, 0, 1, 0],
+            ....:             [0, 0, 0, 0,-1, 1, 0, 0, 1],
+            ....:             [0, 0, 0, 0,-1, 0, 1, 1, 0],
+            ....:             [0, 0, 0, 0,-1, 0, 1, 0, 1]])
+            sage: result, certificate = M.is_totally_unimodular(certificate=True)
+            sage: result, certificate
+            (True, OneSumNode (9×9) with 2 children)
+            sage: unicode_art(certificate)
+            ╭───────────OneSumNode (9×9) with 2 children
+            │                 │
+            GraphicNode (5×4) CographicNode (4×5)
+            sage: result, certificate = M.is_totally_unimodular(
+            ....:                           certificate=True, stop_when_nonTU=False)
+            sage: result, certificate
+            (True, OneSumNode (9×9) with 2 children)
+            sage: unicode_art(certificate)
+            ╭───────────OneSumNode (9×9) with 2 children
+            │                 │
+            GraphicNode (5×4) CographicNode (4×5)
+
+        This is test ``TreeFlagsNorecurse``, ``TreeFlagsStopNoncographic``,
+        and ``TreeFlagsStopNongraphic`` in CMR's ``test_regular.cpp``,
+        the underlying binary linear matroid is regular,
+        but the matrix is not totally unimodular::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 1, 0, 0, 0, 0, 0, 0, 0],
+            ....:             [1, 1, 1, 0, 0, 0, 0, 0, 0],
+            ....:             [1, 0, 0, 1, 0, 0, 0, 0, 0],
+            ....:             [0, 1, 1, 1, 0, 0, 0, 0, 0],
+            ....:             [0, 0, 1, 1, 0, 0, 0, 0, 0],
+            ....:             [0, 0, 0, 0, 1, 1, 1, 0, 0],
+            ....:             [0, 0, 0, 0, 1, 1, 0, 1, 0],
+            ....:             [0, 0, 0, 0, 0, 1, 0, 1, 1],
+            ....:             [0, 0, 0, 0, 0, 0, 1, 1, 1]])
+            sage: result, certificate = M.is_totally_unimodular(certificate=True)
+            sage: result, certificate
+            (False, (OneSumNode (9×9) with 2 children, ((3, 2, 0), (3, 1, 0))))
+            sage: unicode_art(certificate[0])
+            ╭OneSumNode (9×9) with 2 children─╮
+            │                                 │
+            ThreeConnectedIrregularNode (5×4) UnknownNode (4×5)
+            sage: result, certificate = M.is_totally_unimodular(
+            ....:                           certificate=True,
+            ....:                           stop_when_nonTU=False)
+            sage: result, certificate
+            (False, (OneSumNode (9×9) with 2 children, ((3, 2, 0), (3, 1, 0))))
+            sage: unicode_art(certificate[0])
+            ╭OneSumNode (9×9) with 2 children─╮
+            │                                 │
+            ThreeConnectedIrregularNode (5×4) ThreeConnectedIrregularNode (4×5)
+        """
+        return self._matrix_cmr().is_totally_unimodular(*args, **kwds)
+
+    def is_complement_totally_unimodular(self, *args, **kwds):
+        return self._matrix_cmr().is_complement_totally_unimodular(*args, **kwds)
+
     def LLL_gram(self, flag=0):
         """
         Return the LLL transformation matrix for this Gram matrix.
