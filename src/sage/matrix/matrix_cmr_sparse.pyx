@@ -626,7 +626,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         of the second matrix ``second_index``.
         Suppose that ``first_index`` indicates the last column of ``first_mat`` and
         ``second_index`` indicates the first row of ``second_mat``,
-        i.e, the first matrix is
+        i.e., the first matrix is
         `M_1=\begin{bmatrix} A & a\end{bmatrix}`
         and the second matrix is
         `M_2=\begin{bmatrix} b^T \\ D\end{bmatrix}`.
@@ -639,7 +639,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `
         Suppose that ``first_index`` indicates the last row of ``first_mat`` and
         ``second_index`` indicates the first column of ``second_mat``,
-        i.e, the first matrix is
+        i.e., the first matrix is
         `M_1=\begin{bmatrix} A \\ c^T\end{bmatrix}`
         and the second matrix is
         `M_2=\begin{bmatrix} d & D\end{bmatrix}`.
@@ -647,7 +647,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `M_1 \oplus_2 M_2 = \begin{bmatrix}
         A & 0 \\
         dc^T & D
-        \end{bmatrix},
+        \end{bmatrix}.
         `
 
         The terminology "2-sum" is used in the context of Seymour's decomposition
@@ -2790,7 +2790,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         OUTPUT: A tuple of two :class:`Matrix_cmr_chr_sparse`
 
-        EXAMPLES::
+        EXAMPLES:
 
         This is test ``ThreesumDecomposition`` in CMR's ``test_separation.cpp``::
 
