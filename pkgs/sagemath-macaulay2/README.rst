@@ -48,7 +48,7 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable distribution ``passagemath-macaulay2`` provides an interface to
-`https://github.com/Macaulay2/M2 <Macaulay2>`_.
+`Macaulay2 <https://github.com/Macaulay2/M2>`_.
 
 
 What is included

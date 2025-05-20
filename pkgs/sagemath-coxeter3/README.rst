@@ -47,7 +47,7 @@ so compilation from source is triggered for those.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-coxeter3`` is a small
-optional distribution for use with ``sagemath-standard``.
+This pip-installable source distribution ``passagemath-coxeter3`` is a small
+optional distribution for use with ``passagemath-standard``.
 
 It provides a Cython interface to the ``coxeter3`` library.

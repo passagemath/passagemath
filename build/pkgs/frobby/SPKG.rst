@@ -22,14 +22,6 @@ License
 Upstream Contact
 ----------------
 
-- http://www.broune.com/frobby/
+- http://www.broune.com/frobby/  (defunct)
 
 - https://github.com/Macaulay2/frobby
-
-Special Update/Build instructions
----------------------------------
-
-Download Frobby at www.broune.com/ and then type "make spkg VER=blah"
-which wil create an spkg named frobby-VER.spkg in bin/. The files
-related to doing this is in the sage/ sub-directory of the Frobby source
-distribution.

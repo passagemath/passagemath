@@ -47,8 +47,8 @@ so compilation from source is triggered for those.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-meataxe`` is a small
-optional distribution for use with ``sagemath-standard``.
+This pip-installable distribution ``passagemath-meataxe`` is a small
+optional distribution for use with ``passagemath-standard``.
 
 This distribution provides the SageMath modules ``sage.libs.meataxe``
 and ``sage.matrix.matrix_gfpn_dense``.

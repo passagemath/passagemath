@@ -47,7 +47,8 @@ so compilation from source is triggered for those.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-frobby`` provides an interface to Frobby.
+This pip-installable source distribution ``passagemath-frobby`` provides an interface to Frobby,
+the package for computations on monomial ideals.
 
 
 Examples
