@@ -46,6 +46,7 @@ from sage.arith.misc import (hilbert_conductor_inverse,
                              kronecker as kronecker_symbol,
                              prime_divisors,
                              valuation)
+from sage.misc.lazy_import import lazy_import
 from sage.rings.real_mpfr import RR
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
@@ -76,7 +77,8 @@ from .quaternion_algebra_element import (
     QuaternionAlgebraElement_number_field)
 from . import quaternion_algebra_cython
 
-from sage.modular.modsym.p1list import P1List
+
+lazy_import('sage.modular.modsym.p1list', 'P1List')
 
 from sage.misc.cachefunc import cached_method
 
@@ -3801,13 +3803,13 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: B = BrandtModule(2,37); I = B.right_ideals()[0]
             sage: I.cyclic_right_subideals(3)
             [Fractional ideal (12, 444*i, 8 + 404*i + 4*j, 2 + 150*i + 2*j + 2*k),
              Fractional ideal (12, 444*i, 4 + 256*i + 4*j, 10 + 150*i + 2*j + 2*k),
              Fractional ideal (12, 444*i, 8 + 256*i + 4*j, 6 + 298*i + 2*j + 2*k),
              Fractional ideal (12, 444*i, 4 + 404*i + 4*j, 6 + 2*i + 2*j + 2*k)]
-
             sage: B = BrandtModule(5,389); I = B.right_ideals()[0]
             sage: C = I.cyclic_right_subideals(3); C
             [Fractional ideal (12, 4668*i, 10 + 3426*i + 2*j, 6 + 379*i + k),
@@ -3828,7 +3830,6 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
              Fractional ideal (4/3, 8/9 + 1556/9*i, 2/3 + 314/3*i + 2/3*j, 2/9 + 1007/9*i + 4/9*j + 1/9*k)]
             sage: [(I.scale(1/9).free_module()/J.free_module()).invariants() for J in C]
             [(3, 3), (3, 3), (3, 3), (3, 3)]
-
             sage: Q.<i,j,k> = QuaternionAlgebra(-2,-5)
             sage: I = Q.ideal([Q(1),i,j,k])
             sage: I.cyclic_right_subideals(3)
