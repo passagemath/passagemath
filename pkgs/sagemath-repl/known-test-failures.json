@@ -18,7 +18,7 @@
     },
     "sage.doctest.parsing": {
         "failed": true,
-        "ntests": 229
+        "ntests": 224
     },
     "sage.doctest.reporting": {
         "ntests": 126
@@ -31,7 +31,7 @@
         "ntests": 23
     },
     "sage.doctest.util": {
-        "ntests": 166
+        "ntests": 173
     },
     "sage.misc.sage_eval": {
         "failed": true,
@@ -49,7 +49,7 @@
     },
     "sage.repl.display.fancy_repr": {
         "failed": true,
-        "ntests": 24
+        "ntests": 25
     },
     "sage.repl.display.formatter": {
         "ntests": 46
@@ -73,14 +73,13 @@
     },
     "sage.repl.interpreter": {
         "failed": true,
-        "ntests": 104
+        "ntests": 105
     },
     "sage.repl.ipython_extension": {
         "failed": true,
-        "ntests": 72
+        "ntests": 70
     },
     "sage.repl.ipython_kernel.install": {
-        "failed": true,
         "ntests": 35
     },
     "sage.repl.ipython_kernel.interact": {
