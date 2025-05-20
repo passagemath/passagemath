@@ -202,6 +202,7 @@ components are in the correct ring::
 
 Check that we can invert matrices::
 
+    sage: # needs sage.modules
     sage: L.<z> = LazyLaurentSeriesRing(QQ)
     sage: a11 = 1 + L(lambda n: 1 if not n else 0, valuation=0)
     sage: a12 = 1 + L(lambda n: 1 if n == 1 else 0, valuation=0)
@@ -2241,7 +2242,7 @@ class LazyModuleElement(Element):
         TESTS::
 
             sage: L.<z> = LazyLaurentSeriesRing(QQ); x = var("x")                       # needs sage.symbolic
-            sage: sin(z)[0:6] == sin(x).series(x, 6).coefficients(sparse=False)
+            sage: sin(z)[0:6] == sin(x).series(x, 6).coefficients(sparse=False)         # needs sage.symbolic
             True
         """
         from .lazy_series_ring import LazyLaurentSeriesRing
