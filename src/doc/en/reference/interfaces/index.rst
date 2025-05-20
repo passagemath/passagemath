@@ -127,17 +127,6 @@ and testing to make sure nothing funny is going on).
 
    sage/interfaces/lie
    sage/interfaces/lisp
-
-.. ONLY:: feature_macaulay2
-
-   .. toctree::
-      :maxdepth: 1
-
-      sage/interfaces/macaulay2
-
-.. toctree::
-   :maxdepth: 1
-
    sage/interfaces/magma
    sage/interfaces/magma_free
    sage/interfaces/maple
