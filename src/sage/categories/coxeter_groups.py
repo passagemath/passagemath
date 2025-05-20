@@ -1236,8 +1236,8 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: A = AffinePermutationGroup(['A', 2, 1])                           # needs sage.combinat
-                sage: [len(list(A.elements_of_length(i))) for i in [0..5]]              # needs sage.combinat
+                sage: A = AffinePermutationGroup(['A', 2, 1])                           # needs sage.combinat sage.groups
+                sage: [len(list(A.elements_of_length(i))) for i in [0..5]]              # needs sage.combinat sage.groups
                 [1, 3, 6, 9, 12, 15]
 
                 sage: W = CoxeterGroup(['H', 3])                                        # needs sage.combinat sage.groups

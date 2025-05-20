@@ -1616,6 +1616,7 @@ cdef class Polynomial(CommutativePolynomial):
         At the time of writing :meth:`inverse_mod` is not implemented in general for the following ring,
         but it should fallback to :meth:`inverse_of_unit` when possible::
 
+            sage: # needs sage.libs.pari
             sage: R.<u,v> = ZZ[]
             sage: S = R.localization(u)
             sage: T.<x> = S[]
@@ -1634,6 +1635,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         The behavior of ``xgcd`` over rings like ``ZZ`` are nonstandard, we check the behavior::
 
+            sage: # needs sage.libs.pari
             sage: R.<x> = ZZ[]
             sage: a = 2*x^2+1
             sage: b = -2*x^2+1
