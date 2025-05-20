@@ -39,7 +39,7 @@ jobs:
       extra_sage_packages: gdbm libxml2
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
-      targets: build
+      targets: build sagemath_doc_html-build-deps
       targets_optional: doc-html ptest-nodoc
       tox_system_factors: >-
         ["ubuntu-jammy"]
@@ -61,7 +61,7 @@ jobs:
       extra_sage_packages: gdbm libxml2
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
-      targets: build
+      targets: build sagemath_doc_html-build-deps
       targets_optional: doc-html ptest-nodoc
       tox_packages_factors: >-
           ["standard"]
@@ -80,7 +80,7 @@ jobs:
       extra_sage_packages: gdbm libxml2
       # FIXME: duplicated from env.TARGETS
       targets_pre: all-sage-local
-      targets: build
+      targets: build sagemath_doc_html-build-deps
       targets_optional: doc-html ptest-nodoc
       tox_packages_factors: >-
           ["minimal"]
