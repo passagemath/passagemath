@@ -937,18 +937,18 @@ cdef class Matrix_sparse(matrix.Matrix):
 
         cdef Py_ssize_t nrows, ncols, k, i, j
 
-        ncols = PyList_GET_SIZE(columns)
-        nrows = PyList_GET_SIZE(rows)
+        ncols = len(columns)
+        nrows = len(rows)
         cdef Matrix_sparse A = self.new_matrix(nrows=nrows, ncols=ncols)
 
         tmp = [el for el in columns if 0 <= el < self._ncols]
         columns = tmp
-        if ncols != PyList_GET_SIZE(columns):
+        if ncols != len(columns):
             raise IndexError("column index out of range")
 
         tmp = [el for el in rows if 0 <= el < self._nrows]
         rows = tmp
-        if nrows != PyList_GET_SIZE(rows):
+        if nrows != len(rows):
             raise IndexError("row index out of range")
 
         row_map = {}
