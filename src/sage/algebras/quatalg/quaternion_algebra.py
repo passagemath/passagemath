@@ -160,8 +160,8 @@ class QuaternionAlgebraFactory(UniqueFactory):
         Traceback (most recent call last):
         ...
         ValueError: 2 is not invertible in Finite Field of size 2
-        sage: a = PermutationGroupElement([1,2,3])
-        sage: QuaternionAlgebra(a, a)
+        sage: a = PermutationGroupElement([1,2,3])                                      # needs sage.groups
+        sage: QuaternionAlgebra(a, a)                                                   # needs sage.groups
         Traceback (most recent call last):
         ...
         ValueError: a and b must be elements of a ring with characteristic not 2
@@ -171,7 +171,7 @@ class QuaternionAlgebraFactory(UniqueFactory):
 
         sage: QuaternionAlgebra(QQ, -7, -21)
         Quaternion Algebra (-7, -21) with base ring Rational Field
-        sage: QuaternionAlgebra(QQ[sqrt(2)], -2,-3)                                     # needs sage.symbolic
+        sage: QuaternionAlgebra(QQ[sqrt(2)], -2,-3)                                     # needs sage.rings.number_field sage.symbolic
         Quaternion Algebra (-2, -3) with base ring Number Field in sqrt2
          with defining polynomial x^2 - 2 with sqrt2 = 1.414213562373095?
 
@@ -1887,6 +1887,7 @@ class QuaternionOrder(Parent):
 
         We intersect various orders in the quaternion algebra ramified at 11::
 
+            sage: # needs sage.schemes
             sage: B = BrandtModule(11,3)
             sage: R = B.maximal_order(); S = B.order_of_level_N()
             sage: R.intersection(S)
@@ -1954,6 +1955,8 @@ class QuaternionOrder(Parent):
 
             sage: QuaternionAlgebra(-11,-1).maximal_order().discriminant()
             11
+
+            sage: # needs sage.schemes
             sage: S = BrandtModule(11,5).order_of_level_N()
             sage: S.discriminant()
             55
@@ -2242,6 +2245,7 @@ class QuaternionOrder(Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: R = BrandtModule(11,13).order_of_level_N()
             sage: Q = R.quadratic_form(); Q
             Quadratic form in 4 variables over Rational Field with coefficients:
@@ -2285,6 +2289,7 @@ class QuaternionOrder(Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: R = BrandtModule(11,13).order_of_level_N()
             sage: Q = R.ternary_quadratic_form(); Q
             Quadratic form in 3 variables over Rational Field with coefficients:
@@ -2296,7 +2301,7 @@ class QuaternionOrder(Parent):
 
         The following theta series is a modular form of weight 3/2 and level 4*11*13::
 
-            sage: Q.theta_series(100)
+            sage: Q.theta_series(100)                                                   # needs sage.schemes
             1 + 2*q^23 + 2*q^55 + 2*q^56 + 2*q^75 + 4*q^92 + O(q^100)
         """
         if self.base_ring() != ZZ:
@@ -2587,7 +2592,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         Check that :issue:`31582` is fixed::
 
-            sage: BrandtModule(23).right_ideals()[0].parent()
+            sage: BrandtModule(23).right_ideals()[0].parent()                           # needs sage.schemes
             Monoid of ideals of Quaternion Algebra (-1, -23) with base ring Rational Field
         """
         if check:
@@ -2621,6 +2626,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: B = BrandtModule(5,37); I = B.right_ideals()[0]
             sage: i,j,k = B.quaternion_algebra().gens(); I
             Fractional ideal (4, 148*i, 2 + 106*i + 2*j, 2 + 147*i + k)
@@ -2688,6 +2694,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(3, 5).right_ideals()[1]; I
             Fractional ideal (8, 40*i, 6 + 28*i + 2*j, 4 + 18*i + 2*k)
             sage: I.quaternion_algebra()
@@ -2771,6 +2778,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: B = BrandtModule(11)
             sage: R = B.maximal_order()
             sage: I = R.unit_ideal()
@@ -2780,6 +2788,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         We do a consistency check::
 
+            sage: # needs sage.schemes
             sage: B = BrandtModule(11,19); R = B.right_ideals()
             sage: [r.left_order().discriminant() for r in R]
             [209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209]
@@ -2796,6 +2805,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(389).right_ideals()[1]; I
             Fractional ideal (8, 8*i, 2 + 6*i + 2*j, 6 + 3*i + k)
             sage: I.right_order()
@@ -2810,6 +2820,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
         corresponding left orders, then take ideals in the left orders
         and from those compute the right order again::
 
+            sage: # needs sage.schemes
             sage: B = BrandtModule(11,19); R = B.right_ideals()
             sage: O = [r.left_order() for r in R]
             sage: J = [O[i].left_ideal(R[i].basis()) for i in range(len(R))]
@@ -2830,6 +2841,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(11).right_ideals()[1]
             sage: type(I)
             <class 'sage.algebras.quatalg.quaternion_algebra.QuaternionFractionalIdeal_rational'>
@@ -2970,6 +2982,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: B = BrandtModule(2,37); I = B.right_ideals()[0]
             sage: I
             Fractional ideal (4, 148*i, 108*i + 4*j, 2 + 2*i + 2*j + 2*k)
@@ -3005,6 +3018,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(37).right_ideals()[1]; I
             Fractional ideal (8, 8*i, 2 + 6*i + 2*j, 6 + 3*i + k)
             sage: I.theta_series_vector(5)
@@ -3035,6 +3049,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(11).right_ideals()[1]
             sage: Q = I.quadratic_form(); Q
             Quadratic form in 4 variables over Rational Field with coefficients:
@@ -3106,6 +3121,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(11).right_ideals()[1]; I
             Fractional ideal (8, 8*i, 6 + 4*i + 2*j, 4 + 2*i + 2*k)
             sage: I.norm()
@@ -3141,6 +3157,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(3,5).right_ideals()[1]; I
             Fractional ideal (8, 40*i, 6 + 28*i + 2*j, 4 + 18*i + 2*k)
             sage: I.gram_matrix()
@@ -3163,6 +3180,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: M = BrandtModule(37)
             sage: C = M.right_ideals()
             sage: [I.norm() for I in C]
@@ -3177,6 +3195,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
             sage: [ magma('rideal<O | %s>' % str(list(I.basis()))).Norm() for I in C]
             [16, 32, 32]
 
+            sage: # needs sage.schemes
             sage: A.<i,j,k> = QuaternionAlgebra(-1,-1)
             sage: R = A.ideal([i,j,k,1/2 + 1/2*i + 1/2*j + 1/2*k])      # this is actually an order, so has reduced norm 1
             sage: R.norm()
@@ -3202,6 +3221,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(3,5).right_ideals()[1]; I
             Fractional ideal (8, 40*i, 6 + 28*i + 2*j, 4 + 18*i + 2*k)
             sage: I.conjugate()
@@ -3221,6 +3241,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(3,5).right_ideals()[1]; I
             Fractional ideal (8, 40*i, 6 + 28*i + 2*j, 4 + 18*i + 2*k)
             sage: I*I
@@ -3248,6 +3269,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: I = BrandtModule(11,5).right_ideals()[1]; I
             Fractional ideal (8, 40*i, 2 + 20*i + 2*j, 4 + 14*i + 2*k)
             sage: J = BrandtModule(11,5).right_ideals()[2]; J
@@ -3290,6 +3312,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: X = BrandtModule(3,5).right_ideals()
             sage: X[0]
             Fractional ideal (4, 20*i, 2 + 8*i + 2*j, 18*i + 2*k)
@@ -3317,6 +3340,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
         The free module method is also useful since it allows for checking if
         one ideal is contained in another, computing quotients `I/J`, etc.::
 
+            sage: # needs sage.schemes
             sage: X = BrandtModule(3,17).right_ideals()
             sage: I = X[0].intersection(X[2]); I
             Fractional ideal (2 + 2*j + 164*k, 2*i + 4*j + 46*k, 16*j + 224*k, 272*k)
@@ -3348,6 +3372,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: X = BrandtModule(3,5).right_ideals()
             sage: I = X[0].intersection(X[1]); I
             Fractional ideal (2 + 6*j + 4*k, 2*i + 4*j + 34*k, 8*j + 32*k, 40*k)
@@ -3370,6 +3395,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: R = BrandtModule(3,5).right_ideals()
             sage: R[0].multiply_by_conjugate(R[1])
             Fractional ideal (32, 160*i, 8 + 112*i + 8*j, 16 + 72*i + 8*k)
@@ -3594,6 +3620,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: R = BrandtModule(3,5).right_ideals(); len(R)
             2
             sage: OO = R[0].left_order()
@@ -3654,6 +3681,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.schemes
             sage: R = BrandtModule(3,5).right_ideals(); len(R)
             2
             sage: R[0].is_right_equivalent(R[1])
