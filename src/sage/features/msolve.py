@@ -54,7 +54,7 @@ class msolve(Executable):
             sage: msolve().is_functional()  # optional - msolve
             FeatureTestResult('msolve', True)
         """
-        msolve_out = subprocess.run(["msolve", "-h"], capture_output=True)
+        msolve_out = subprocess.run([self.absolute_filename(), "-h"], capture_output=True)
 
 #        if msolve_out.returncode != 0:
 #            return FeatureTestResult(self, False, reason="msolve -h returned "
