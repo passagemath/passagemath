@@ -62,7 +62,7 @@ jobs:
           SAGE_NUM_THREADS: 2
 
       - name: Static code check with pyright
-        uses: jakebailey/pyright-action@v1
+        uses: jakebailey/pyright-action@v2
         with:
           version: 1.1.332
           # Many warnings issued by pyright are not yet helpful because there is not yet enough type information.
@@ -74,7 +74,7 @@ jobs:
 
       - name: Static code check with pyright (annotated)
         if: (success() || failure()) && steps.incremental.outcome == 'success'
-        uses: jakebailey/pyright-action@v1
+        uses: jakebailey/pyright-action@v2
         with:
           version: 1.1.332
           # Issue errors
