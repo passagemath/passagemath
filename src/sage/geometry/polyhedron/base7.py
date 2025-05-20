@@ -876,8 +876,8 @@ class Polyhedron_base7(Polyhedron_base6):
 
         Testing a polytope with floating point coordinates::
 
-            sage: P = Polyhedron(vertices=[[0, 0], [1, 0], [1.1, 1.1], [0, 1]])
-            sage: P.integrate('[[1,[2,2]]]')
+            sage: P = Polyhedron(vertices=[[0, 0], [1, 0], [1.1, 1.1], [0, 1]])     # needs cddexec_gmp
+            sage: P.integrate('[[1,[2,2]]]')                                        # needs cddexec_gmp
             Traceback (most recent call last):
             ...
             TypeError: LattE integrale cannot be applied over inexact rings
