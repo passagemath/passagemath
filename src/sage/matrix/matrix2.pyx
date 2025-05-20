@@ -18189,6 +18189,521 @@ cdef class Matrix(Matrix1):
         return all(s * (self * x) == 0
                    for (x, s) in K.discrete_complementarity_set())
 
+    def _matrix_cmr(self):
+        r"""
+        Return ``self`` as a :class:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse`.
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix(ZZ, [[1, 0, 1], [0, 1, 1], [1, 2, 3]],
+            ....:            column_keys=['a', 'b', 'c'],
+            ....:            row_keys=['u', 'v', 'w'])
+            sage: M_cmr = M._matrix_cmr(); M_cmr
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: type(M_cmr)
+            <class 'sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse'>
+        """
+        from .matrix_cmr_sparse import Matrix_cmr_chr_sparse
+        from .matrix_space import MatrixSpace
+
+        MS = MatrixSpace(ZZ, self.nrows(), self.ncols(), sparse=True)
+        return Matrix_cmr_chr_sparse(MS, self)
+
+    def is_unimodular(self, *args, **kwds):
+        r"""
+        Return whether ``self`` is a unimodular matrix.
+
+        A nonsingular square matrix `A` is called unimodular if it is integral
+        and has determinant `\pm1`, i.e., an element of
+        `\mathop{\operatorname{GL}}_n(\ZZ)` [Sch1986]_, Ch. 4.3.
+
+        A rectangular matrix `A` of full row rank is called unimodular if it
+        is integral and every basis `B` of `A` has determinant `\pm1`.
+        [Sch1986]_, Ch. 19.1.
+
+        More generally, a matrix `A` of rank `r` is called unimodular if it is
+        integral and for every submatrix `B` formed by `r` linearly independent columns,
+        the greatest common divisor of the determinants of all `r`-by-`r`
+        submatrices of `B` is `1`. [Sch1986]_, Ch. 21.4.
+
+        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`, :meth:`is_totally_unimodular`
+
+        See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_unimodular` for
+        the detailed documentation.
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix(ZZ, [[1, 0, 0], [0, 1, 0]]); M
+            [1 0 0]
+            [0 1 0]
+            sage: M.is_unimodular()
+            True
+            sage: M = matrix(ZZ, [[1, 1, 0], [-1, 1, 1]]); M
+            [ 1  1  0]
+            [-1  1  1]
+            sage: M.is_unimodular()
+            False
+        """
+        return self._matrix_cmr().is_unimodular(*args, **kwds)
+
+    def is_strongly_unimodular(self, *args, **kwds):
+        r"""
+        Return whether ``self`` is a strongly unimodular matrix.
+
+        A matrix is strongly unimodular if ``self`` and ``self.transpose()`` are both unimodular.
+
+        .. SEEALSO:: meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.is_unimodular()
+            True
+            sage: M.is_strongly_unimodular()
+            False
+            sage: M = matrix([[1, 0, 0], [0, 1, 0]]); M
+            [1 0 0]
+            [0 1 0]
+            sage: M.is_strongly_unimodular()
+            True
+        """
+        return self._matrix_cmr().is_strongly_unimodular(*args, **kwds)
+
+    def equimodulus(self, *args, **kwds):
+        r"""
+        Return the integer `k` such that ``self`` is
+        equimodular with determinant gcd `k`.
+
+        A matrix `M` of rank `r` is equimodular with determinant gcd `k`
+        if the following two conditions are satisfied:
+
+        - for some column basis `B` of `M`, the greatest common divisor of
+          the determinants of all `r`-by-`r` submatrices of `B` is `k`;
+
+        - the matrix `X` such that `M=BX` is totally unimodular.
+
+        OUTPUT:
+
+        - ``k``: ``self`` is equimodular with determinant gcd `k`
+        - ``None``: ``self`` is not equimodular for any `k`
+
+        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`strong_equimodulus`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.equimodulus()
+            1
+            sage: M = matrix([[1, 1, 1], [0, 1, 3]]); M
+            [1 1 1]
+            [0 1 3]
+            sage: M.equimodulus()
+        """
+        return self._matrix_cmr().equimodulus(*args, **kwds)
+
+    def strong_equimodulus(self, *args, **kwds):
+        r"""
+        Return the integer `k` such that ``self`` is
+        strongly equimodular with determinant gcd `k`.
+
+        Return whether ``self`` is strongly `k`-equimodular.
+
+        A matrix is strongly equimodular if ``self`` and ``self.transpose()``
+        are both equimodular, which implies that they are equimodular for
+        the same determinant gcd `k`.
+        A matrix `M` of rank-`r` is `k`-equimodular if the following two conditions
+        are satisfied:
+
+        - for some column basis `B` of `M`, the greatest common divisor of the
+          determinants of all `r`-by-`r` submatrices of `B` is `k`;
+
+        - the matrix `X` such that `M=BX` is totally unimodular.
+
+        OUTPUT:
+
+        - ``k``: ``self`` is  `k`-equimodular
+        - ``None``: ``self`` is not `k`-equimodular for any `k`
+
+        .. SEEALSO:: :meth:`is_strongly_k_equimodular`, :meth:`equimodulus`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.strong_equimodulus()
+            sage: M = matrix([[1, 0, 0], [0, 1, 0]]); M
+            [1 0 0]
+            [0 1 0]
+            sage: M.strong_equimodulus()
+            1
+        """
+        return self._matrix_cmr().strong_equimodulus(*args, **kwds)
+
+    def is_k_equimodular(self, k, *args, **kwds):
+        r"""
+        Return whether ``self`` is equimodular with determinant gcd `k`.
+
+        A matrix `M` of rank-`r` is `k`-equimodular if the following two
+        conditions are satisfied:
+
+        - for some column basis `B` of `M`, the greatest common divisor of
+          the determinants of all `r`-by-`r` submatrices of `B` is `k`;
+
+        - the matrix `X` such that `M=BX` is totally unimodular.
+
+        If the matrix has full row rank, it is `k`-equimodular if
+        every full rank minor of the matrix has determinant `0,\pm k`.
+
+        .. NOTE::
+
+            In parts of the literature, a matrix with the above properties
+            is called *strictly* `k`-modular.
+
+        .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`,
+                     :meth:`equimodulus`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.is_k_equimodular(1)
+            True
+            sage: M.is_k_equimodular(2)
+            False
+            sage: M = matrix([[1, 1, 1], [0, 1, 3]]); M
+            [1 1 1]
+            [0 1 3]
+            sage: M.is_k_equimodular(1)
+            False
+        """
+        return self._matrix_cmr().is_k_equimodular(k, *args, **kwds)
+
+    def is_strongly_k_equimodular(self, k, *args, **kwds):
+        r"""
+        Return whether ``self`` is strongly `k`-equimodular.
+
+        A matrix is strongly `k`-equimodular if ``self`` and ``self.transpose()``
+        are both `k`-equimodular.
+
+        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`,
+                     :meth:`strong_equimodulus`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 1], [0, 1, 1], [1, 2, 3]]); M
+            [1 0 1]
+            [0 1 1]
+            [1 2 3]
+            sage: M.is_strongly_k_equimodular(1)
+            False
+            sage: M = matrix([[1, 0, 0], [0, 1, 0]]); M
+            [1 0 0]
+            [0 1 0]
+            sage: M.is_strongly_k_equimodular(1)
+            True
+        """
+        return self._matrix_cmr().is_strongly_k_equimodular(k, *args, **kwds)
+
+    def is_network_matrix(self, *args, **kwds):
+        r"""
+        Return whether the matrix ``self`` over `\GF{3}` or `\QQ` is a network matrix.
+
+        If there is some entry not in `\{-1, 0, 1\}`, return ``False``.
+
+        Let `D = (V,A)` be a digraph and let `T` be an (arbitrarily) directed
+        spanning forest of the underlying undirected graph.
+        The matrix `M(D,T) \in \{-1,0,1\}^{T \times (A \setminus T)}` defined via
+
+        .. MATH::
+
+            M(D,T)_{a,(v,w)} := \begin{cases}
+                +1 & \text{if the unique $v$-$w$-path in $T$ passes through $a$ forwardly}, \\
+                -1 & \text{if the unique $v$-$w$-path in $T$ passes through $a$ backwardly}, \\
+                0  & \text{otherwise}
+            \end{cases}
+
+        is called the network matrix of `D` with respect to `T`.
+        A matrix `M` is called network matrix if there exists a digraph `D`
+        with a directed spanning forest `T` such that `M = M(D,T)`.
+        Moreover, `M` is called conetwork matrix if `M^T` is a network matrix.
+
+        ALGORITHM:
+
+        The implemented recognition algorithm first tests the binary matroid of
+        the support matrix of `M` for being graphic and
+        uses camion for testing whether `M` is signed correctly.
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0], [2, 1], [0, -1]]); M
+            [ 1  0]
+            [ 2  1]
+            [ 0 -1]
+            sage: M.is_network_matrix()
+            False
+            sage: M = matrix([[1, 0], [-1, 1], [0, -1]]); M
+            [ 1  0]
+            [-1  1]
+            [ 0 -1]
+            sage: M.is_network_matrix()
+            True
+            sage: result, certificate = M.is_network_matrix(certificate=True)
+            sage: graph, forest_edges, coforest_edges = certificate
+            sage: graph
+            Digraph on 4 vertices
+            sage: graph.vertices(sort=True)  # the numbers have no meaning
+            [1, 2, 7, 12]
+            sage: graph.edges(sort=True, labels=False)
+            [(2, 1), (2, 7), (7, 1), (7, 12), (12, 1)]
+            sage: forest_edges    # indexed by rows of M
+            ((2, 1), (7, 1), (7, 12))
+            sage: coforest_edges  # indexed by cols of M
+            ((2, 7), (12, 1))
+            sage: K33 = matrix([[-1, -1, -1, -1],
+            ....:               [ 1,  1,  0,  0],
+            ....:               [ 0,  0,  1,  1],
+            ....:               [ 1,  0,  1,  0],
+            ....:               [ 0,  1,  0,  1]]); K33
+            [-1 -1 -1 -1]
+            [ 1  1  0  0]
+            [ 0  0  1  1]
+            [ 1  0  1  0]
+            [ 0  1  0  1]
+            sage: K33.is_network_matrix()
+            True
+
+        This is test ``Basic`` in CMR's ``test_network.cpp``::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[-1,  0,  0,  0,  1, -1,  0],
+            ....:             [ 1,  0,  0,  1, -1,  1,  0],
+            ....:             [ 0, -1,  0, -1,  1, -1,  0],
+            ....:             [ 0,  1,  0,  0,  0,  0,  1],
+            ....:             [ 0,  0,  1, -1,  1,  0,  1],
+            ....:             [ 0,  0, -1,  1, -1,  0,  0]])
+            sage: M.is_network_matrix()
+            True
+            sage: result, certificate = M.is_network_matrix(certificate=True)
+            sage: result, certificate
+            (True,
+             (Digraph on 7 vertices,
+              ((9, 8), (3, 8), (3, 4), (5, 4), (4, 6), (0, 6)),
+              ((3, 9), (5, 3), (4, 0), (0, 8), (9, 0), (4, 9), (5, 6))))
+            sage: digraph, forest_arcs, coforest_arcs = certificate
+            sage: list(digraph.edges(sort=True))
+            [(0, 6, None), (0, 8, None),
+             (3, 4, None), (3, 8, None), (3, 9, None),
+             (4, 0, None), (4, 6, None), (4, 9, None),
+             (5, 3, None), (5, 4, None), (5, 6, None),
+             (9, 0, None), (9, 8, None)]
+            sage: digraph.plot(edge_colors={'red': forest_arcs})                        # needs sage.plot
+            Graphics object consisting of 21 graphics primitives
+        """
+        return self._matrix_cmr().is_network_matrix(*args, **kwds)
+
+    def is_conetwork_matrix(self, *args, **kwds):
+        r"""
+        Return whether the matrix ``self`` over `\GF{3}` or `QQ` is a conetwork matrix.
+
+        A matrix is conetwork if and only if its transpose is network.
+
+        .. SEEALSO:: :meth:`is_network_matrix`,
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0, 0, 0, 1, -1, 1, 0, 0],
+            ....:             [0, 1, 0, 0, 0, 1, -1, 1, 0],
+            ....:             [0, 0, 1, 0, 0, 0, 1, -1, 1],
+            ....:             [0, 0, 0, 1, 1, 0, 0, 1, -1]]); M
+            [ 1  0  0  0  1 -1  1  0  0]
+            [ 0  1  0  0  0  1 -1  1  0]
+            [ 0  0  1  0  0  0  1 -1  1]
+            [ 0  0  0  1  1  0  0  1 -1]
+            sage: M.is_conetwork_matrix()
+            True
+            sage: K33 = matrix([[-1, -1, -1, -1],
+            ....:               [ 1,  1,  0,  0],
+            ....:               [ 0,  0,  1,  1],
+            ....:               [ 1,  0,  1,  0],
+            ....:               [ 0,  1,  0,  1]]); K33
+            [-1 -1 -1 -1]
+            [ 1  1  0  0]
+            [ 0  0  1  1]
+            [ 1  0  1  0]
+            [ 0  1  0  1]
+            sage: K33.is_conetwork_matrix()
+            False
+            sage: C3 = matrix([[1, 1, 0],
+            ....:              [1, 0, 1],
+            ....:              [0, 1, 1]]); C3
+            [1 1 0]
+            [1 0 1]
+            [0 1 1]
+            sage: result, certificate = C3.is_conetwork_matrix(certificate=True)
+            sage: result
+            False
+        """
+        return self._matrix_cmr().is_conetwork_matrix(*args, **kwds)
+
+    def is_totally_unimodular(self, *args, **kwds):
+        r"""
+        Return whether ``self`` is a totally unimodular matrix.
+
+        A matrix is totally unimodular if every subdeterminant is `0`, `1`, or `-1`.
+
+        REFERENCES:
+
+        - [Sch1986]_, Chapter 19
+
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``);
+          if ``True``, then return
+          a :class:`DecompositionNode` if ``self`` is totally unimodular;
+          a submatrix with determinant not in `\{0, \pm1\}` if not.
+
+        - ``stop_when_nonTU`` -- boolean (default: ``True``);
+          whether to stop decomposing once not TU is determined.
+
+          For a description of other parameters, see :meth:`_set_cmr_seymour_parameters`
+
+        - ``row_keys`` -- a finite or enumerated family of arbitrary objects
+          that index the rows of the matrix
+
+        - ``column_keys`` -- a finite or enumerated family of arbitrary objects
+          that index the columns of the matrix
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 0], [2, 1], [0, 1]]); M
+            [1 0]
+            [2 1]
+            [0 1]
+            sage: M.is_totally_unimodular()
+            False
+            sage: M = matrix([[1, 0], [-1, 1], [0, 1]]); M
+            [ 1  0]
+            [-1  1]
+            [ 0  1]
+            sage: M.is_totally_unimodular()
+            True
+            sage: M.is_totally_unimodular(certificate=True)
+            (True, GraphicNode (3×2))
+            sage: MF = matroids.catalog.Fano(); MF
+            Fano: Binary matroid of rank 3 on 7 elements, type (3, 0)
+            sage: MFR = MF.representation().change_ring(ZZ); MFR
+            [1 0 0 0 1 1 1]
+            [0 1 0 1 0 1 1]
+            [0 0 1 1 1 0 1]
+            sage: MFR2 = block_diagonal_matrix(MFR, MFR, sparse=True); MFR2
+            [1 0 0 0 1 1 1|0 0 0 0 0 0 0]
+            [0 1 0 1 0 1 1|0 0 0 0 0 0 0]
+            [0 0 1 1 1 0 1|0 0 0 0 0 0 0]
+            [-------------+-------------]
+            [0 0 0 0 0 0 0|1 0 0 0 1 1 1]
+            [0 0 0 0 0 0 0|0 1 0 1 0 1 1]
+            [0 0 0 0 0 0 0|0 0 1 1 1 0 1]
+            sage: MFR2.is_totally_unimodular(certificate=True)
+            (False, (OneSumNode (6×14) with 2 children, ((2, 1, 0), (5, 4, 3))))
+            sage: result, certificate = MFR2.is_totally_unimodular(certificate=True,
+            ....:                                                  stop_when_nonTU=True)
+            sage: result, certificate
+            (False, (OneSumNode (6×14) with 2 children, ((2, 1, 0), (5, 4, 3))))
+            sage: submatrix = MFR2.matrix_from_rows_and_columns(*certificate[1]); submatrix
+            [0 1 1]
+            [1 0 1]
+            [1 1 0]
+            sage: submatrix.determinant()
+            2
+
+        If the matrix is totally unimodular, it always returns
+        a full decomposition as a certificate::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[-1,-1,-1,-1, 0, 0, 0, 0, 0],
+            ....:             [1, 1, 0, 0, 0, 0, 0, 0, 0],
+            ....:             [0, 0, 1, 1, 0, 0, 0, 0, 0],
+            ....:             [1, 0, 1, 0, 0, 0, 0, 0, 0],
+            ....:             [0, 1, 0, 1, 0, 0, 0, 0, 0],
+            ....:             [0, 0, 0, 0,-1, 1, 0, 1, 0],
+            ....:             [0, 0, 0, 0,-1, 1, 0, 0, 1],
+            ....:             [0, 0, 0, 0,-1, 0, 1, 1, 0],
+            ....:             [0, 0, 0, 0,-1, 0, 1, 0, 1]])
+            sage: result, certificate = M.is_totally_unimodular(certificate=True)
+            sage: result, certificate
+            (True, OneSumNode (9×9) with 2 children)
+            sage: unicode_art(certificate)
+            ╭───────────OneSumNode (9×9) with 2 children
+            │                 │
+            GraphicNode (5×4) CographicNode (4×5)
+            sage: result, certificate = M.is_totally_unimodular(
+            ....:                           certificate=True, stop_when_nonTU=False)
+            sage: result, certificate
+            (True, OneSumNode (9×9) with 2 children)
+            sage: unicode_art(certificate)
+            ╭───────────OneSumNode (9×9) with 2 children
+            │                 │
+            GraphicNode (5×4) CographicNode (4×5)
+
+        This is test ``TreeFlagsNorecurse``, ``TreeFlagsStopNoncographic``,
+        and ``TreeFlagsStopNongraphic`` in CMR's ``test_regular.cpp``,
+        the underlying binary linear matroid is regular,
+        but the matrix is not totally unimodular::
+
+            sage: # needs sage.libs.cmr
+            sage: M = matrix([[1, 1, 0, 0, 0, 0, 0, 0, 0],
+            ....:             [1, 1, 1, 0, 0, 0, 0, 0, 0],
+            ....:             [1, 0, 0, 1, 0, 0, 0, 0, 0],
+            ....:             [0, 1, 1, 1, 0, 0, 0, 0, 0],
+            ....:             [0, 0, 1, 1, 0, 0, 0, 0, 0],
+            ....:             [0, 0, 0, 0, 1, 1, 1, 0, 0],
+            ....:             [0, 0, 0, 0, 1, 1, 0, 1, 0],
+            ....:             [0, 0, 0, 0, 0, 1, 0, 1, 1],
+            ....:             [0, 0, 0, 0, 0, 0, 1, 1, 1]])
+            sage: result, certificate = M.is_totally_unimodular(certificate=True)
+            sage: result, certificate
+            (False, (OneSumNode (9×9) with 2 children, ((3, 2, 0), (3, 1, 0))))
+            sage: unicode_art(certificate[0])
+            ╭OneSumNode (9×9) with 2 children─╮
+            │                                 │
+            ThreeConnectedIrregularNode (5×4) UnknownNode (4×5)
+            sage: result, certificate = M.is_totally_unimodular(
+            ....:                           certificate=True,
+            ....:                           stop_when_nonTU=False)
+            sage: result, certificate
+            (False, (OneSumNode (9×9) with 2 children, ((3, 2, 0), (3, 1, 0))))
+            sage: unicode_art(certificate[0])
+            ╭OneSumNode (9×9) with 2 children─╮
+            │                                 │
+            ThreeConnectedIrregularNode (5×4) ThreeConnectedIrregularNode (4×5)
+        """
+        return self._matrix_cmr().is_totally_unimodular(*args, **kwds)
+
+    def is_complement_totally_unimodular(self, *args, **kwds):
+        return self._matrix_cmr().is_complement_totally_unimodular(*args, **kwds)
+
     def LLL_gram(self, flag=0):
         """
         Return the LLL transformation matrix for this Gram matrix.
