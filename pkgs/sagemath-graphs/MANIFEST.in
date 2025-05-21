@@ -30,6 +30,7 @@ include sage/combinat/finite_state_machine*.p*
 #include src/sage/combinat/rigged_configurations/kleber_tree.py # want?
 
 graft sage/ext_data/graphs
+graft sage/ext_data/kenzo
 
 graft sage/graphs
 exclude sage/graphs/bliss.p*

@@ -1043,7 +1043,7 @@ class Polyhedron_base3(Polyhedron_base2):
 
         Check that :issue:`28828` is fixed::
 
-            sage: s4.facet_adjacency_matrix().is_immutable()
+            sage: s4.facet_adjacency_matrix().is_immutable()                            # needs cddexec
             True
 
         Checks that :issue:`22455` is fixed::

@@ -62,7 +62,7 @@ Sage example in ./graphtheory.tex, line 212::
 Sage example in ./graphtheory.tex, line 252::
 
   sage: P = graphs.PetersenGraph()
-  sage: P.is_planar()
+  sage: P.is_planar()                                                                   # needs planarity
   False
   sage: P.minor(graphs.CompleteBipartiteGraph(3,3))  # random
   {0: [1], 1: [8], 2: [4], 3: [6, 7, 9], 4: [2, 3], 5: [0, 5]}

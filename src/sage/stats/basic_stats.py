@@ -193,8 +193,8 @@ def std(v, bias=False):
 
     EXAMPLES::
 
-        sage: # needs sage.symbolic
-        sage: std([1..6], bias=True)
+        sage: data = [random() for i in [1 .. 20]]
+        sage: s = std(data)
         doctest:warning...
         DeprecationWarning: sage.stats.basic_stats.std is deprecated;
         use numpy.std or numpy.nanstd instead
@@ -207,6 +207,11 @@ def std(v, bias=False):
         DeprecationWarning: sage.stats.basic_stats.mean is deprecated;
         use numpy.mean or numpy.nanmean instead
         See https://github.com/sagemath/sage/issues/29662 for details.
+        sage: s  # random
+        0.29487771726609185
+
+        sage: # needs sage.symbolic
+        sage: std([1..6], bias=True)
         1/2*sqrt(35/3)
         sage: std([1..6], bias=False)
         sqrt(7/2)
@@ -230,12 +235,6 @@ def std(v, bias=False):
         sage: x = stats.TimeSeries([1..100])
         sage: std(x)
         29.011491975882016
-
-    TESTS::
-
-        sage: data = [random() for i in [1 .. 20]]
-        sage: std(data)  # random
-        0.29487771726609185
     """
     deprecation(29662, 'sage.stats.basic_stats.std is deprecated; use numpy.std or numpy.nanstd instead')
 
@@ -291,7 +290,7 @@ def variance(v, bias=False):
         35/12
         sage: variance([e, pi])                                                         # needs sage.symbolic
         1/2*(pi - e)^2
-        sage: variance([])
+        sage: variance([])                                                              # needs sage.symbolic
         NaN
         sage: variance([I, sqrt(2), 3/5])                                               # needs sage.symbolic
         1/450*(10*sqrt(2) - 5*I - 3)^2 + 1/450*(5*sqrt(2) - 10*I + 3)^2
