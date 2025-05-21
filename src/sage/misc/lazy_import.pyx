@@ -88,7 +88,7 @@ cdef inline obj(x):
 
 
 # boolean to determine whether Sage is still starting up
-cdef bint startup_guard = True
+cdef bint startup_guard = False
 
 cdef bint finish_startup_called = False
 
@@ -112,6 +112,17 @@ cpdef finish_startup():
     assert startup_guard, 'finish_startup() must be called exactly once'
     startup_guard = False
     finish_startup_called = True
+
+
+cpdef commence_startup():
+    """
+    Begin the startup phase.
+
+    This should only be called once, and only during the monolithic startup (:mod:`~sage.all`).
+    """
+    global startup_guard
+    assert not startup_guard and not finish_startup_called, 'commence_startup() can only be called once, and not after finish_startup()'
+    startup_guard = True
 
 
 cpdef ensure_startup_finished():

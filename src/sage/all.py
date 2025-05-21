@@ -54,6 +54,10 @@ Check that :issue:`34506` is resolved::
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
+import sage.misc.lazy_import
+
+sage.misc.lazy_import.commence_startup()
+
 import os
 import operator
 import math
@@ -68,8 +72,6 @@ from time import sleep
 from functools import reduce  # in order to keep reduce in python3
 
 # ##################################################################
-
-import sage.misc.lazy_import
 
 from sage.misc.all       import *         # takes a while
 
