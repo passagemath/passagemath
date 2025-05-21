@@ -1,4 +1,5 @@
 #!/usr/bin/env sage-python
+# -*- python -*-
 """
 Given the output of doctest and a file, adjust the doctests so they won't fail.
 
@@ -238,6 +239,9 @@ def process_block(block, src_in_lines, file_optional_tags, venv_explainer=''):
         return
 
     # Error testing.
+
+    asked_why = re.search('#.*(why|explain)', src_in_lines[first_line_num - 1])
+
     if m := re.search(r"(?:ModuleNotFoundError: No module named|ImportError: cannot import name '(.*?)' from) '(.*?)'|AttributeError: module '(.*)?' has no attribute '(.*?)'", block):
         if m.group(1):
             # "ImportError: cannot import name 'function_field_polymod' from 'sage.rings.function_field' (unknown location)"
@@ -248,11 +252,21 @@ def process_block(block, src_in_lines, file_optional_tags, venv_explainer=''):
         else:
             # AttributeError: module 'sage.rings' has no attribute 'qqbar'
             module = m.group(3) + '.' + m.group(4)
-        asked_why = re.search('#.*(why|explain)', src_in_lines[first_line_num - 1])
         optional = module_feature(module)
         if optional and optional.name not in file_optional_tags:
             update_line_optional_tags(first_line_num - 1, add_tags=[optional.name],
                                       message=f"Module '{module}' may be provided by feature '{optional.name}'; adding this tag")
+            if not asked_why:
+                # When no explanation has been demanded,
+                # we just mark the doctest with the feature
+                return
+            # Otherwise, continue and show the backtrace as 'GOT'
+
+    elif m := re.search(r"(?:FeatureNotPresentError: (.*?) is not available.)", block):
+        optional_name = m.group(1)
+        if optional_name not in file_optional_tags:
+            update_line_optional_tags(first_line_num - 1, add_tags=[optional_name],
+                                      message=f"Adding the tag '{optional_name}'")
             if not asked_why:
                 # When no explanation has been demanded,
                 # we just mark the doctest with the feature
