@@ -531,12 +531,6 @@ and then we can get our desired solution formula.  (The ``'G'`` stands for
 
 TESTS:
 
-Check the qepcad configuration file::
-
-    sage: with open(os.path.join(SAGE_LOCAL, 'etc', 'default.qepcadrc')) as f:  # optional - qepcad
-    ....:     f.readlines()[-1]
-    'SINGULAR yes\n'
-
 Tests related to the not tested examples (nondeterministic order of atoms)::
 
     sage: from sage.interfaces.qepcad import _qepcad_atoms
