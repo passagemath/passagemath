@@ -32,6 +32,7 @@ def all_features():
             PythonModule('primecountpy', spkg='primecountpy', type='standard'),
             PythonModule('ptyprocess', spkg='ptyprocess', type='standard'),
             PythonModule('pyparsing', spkg='pyparsing', type='standard'),
+            PythonModule('pytest', spkg='pytest', type='standard'),
             PythonModule('requests', spkg='requests', type='standard'),
             PythonModule('rpy2', spkg='rpy2', type='standard'),
             PythonModule('scipy', spkg='scipy', type='standard'),

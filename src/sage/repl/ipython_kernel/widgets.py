@@ -9,6 +9,7 @@ TESTS:
 
 We need to setup a proper test environment for widgets::
 
+    sage: # needs pytest
     sage: from ipywidgets.widgets.tests.utils import setup_test_comm
     sage: setup_test_comm()
 """
