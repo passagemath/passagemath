@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
-# sage.doctest: needs sage.rings.real_double
+# sage.doctest: needs cddexec sage.rings.real_double
 """
 Base class for polyhedra over ``RDF``
 """

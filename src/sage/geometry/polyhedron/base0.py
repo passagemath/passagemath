@@ -394,6 +394,7 @@ class Polyhedron_base0(Element, sage.geometry.abc.Polyhedron):
             sage: P.change_ring(ZZ) == P
             True
 
+            sage: # needs cddexec
             sage: P = Polyhedron(vertices=[(-1.3,0), (0,2.3)], base_ring=RDF); P.vertices()
             (A vertex at (-1.3, 0.0), A vertex at (0.0, 2.3))
             sage: P.change_ring(QQ).vertices()
@@ -792,10 +793,10 @@ class Polyhedron_base0(Element, sage.geometry.abc.Polyhedron):
 
         EXAMPLES::
 
-            sage: p = polytopes.simplex(4, project=True)
-            sage: p.Vrepresentation(0)
+            sage: p = polytopes.simplex(4, project=True)                                # needs cddexec
+            sage: p.Vrepresentation(0)                                                  # needs cddexec
             A vertex at (0.7071067812, 0.4082482905, 0.2886751346, 0.2236067977)
-            sage: p.Vrepresentation(0) == p.Vrepresentation() [0]
+            sage: p.Vrepresentation(0) == p.Vrepresentation() [0]                       # needs cddexec
             True
         """
         if index is None:
@@ -922,8 +923,9 @@ class Polyhedron_base0(Element, sage.geometry.abc.Polyhedron):
 
         EXAMPLES::
 
-            sage: p = polytopes.regular_polygon(8,base_ring=RDF)
-            sage: p3 = Polyhedron(vertices = [x+[0] for x in p.vertices()], base_ring=RDF)
+            sage: # needs cddexec
+            sage: p = polytopes.regular_polygon(8, base_ring=RDF)
+            sage: p3 = Polyhedron(vertices=[x+[0] for x in p.vertices()], base_ring=RDF)
             sage: next(p3.equation_generator())
             An equation (0.0, 0.0, 1.0) x + 0.0 == 0
         """
@@ -1299,8 +1301,8 @@ class Polyhedron_base0(Element, sage.geometry.abc.Polyhedron):
             sage: D = polytopes.dodecahedron()                                          # needs sage.groups sage.rings.number_field
             sage: D.backend()                                                           # needs sage.groups sage.rings.number_field
             'field'
-            sage: P = Polyhedron([[1.23]])
-            sage: P.backend()
+            sage: P = Polyhedron([[1.23]])                                              # needs cddexec
+            sage: P.backend()                                                           # needs cddexec
             'cdd'
         """
         return self.parent().backend()

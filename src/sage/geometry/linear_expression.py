@@ -478,7 +478,7 @@ class LinearExpressionModule(Parent, UniqueRepresentation):
             sage: TestSuite(L).run()
 
             sage: L = LinearExpressionModule(QQ)
-            sage: TestSuite(L).run()
+            sage: TestSuite(L).run()                                                    # needs sage.rings.real_interval_field
         """
         from sage.categories.modules import Modules
         super().__init__(base_ring, category=Modules(base_ring).WithBasis().FiniteDimensional())

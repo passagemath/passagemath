@@ -382,7 +382,7 @@ class Polyhedron_base6(Polyhedron_base5):
             sage: fcube = polytopes.hypercube(4)
             sage: tfcube = fcube.face_truncation(fcube.faces(0)[0])
             sage: sp = tfcube.schlegel_projection()
-            sage: for face in tfcube.faces(2):
+            sage: for face in tfcube.faces(2):                                          # needs cddexec
             ....:     vertices = face.ambient_Vrepresentation()
             ....:     indices = [sp.coord_index_of(vector(x)) for x in vertices]
             ....:     projected_vertices = [sp.transformed_coords[i] for i in indices]
