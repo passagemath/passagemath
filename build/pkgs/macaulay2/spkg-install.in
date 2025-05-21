@@ -13,6 +13,10 @@ git clone https://github.com/Macaulay2/mathicgb.git M2/submodules/mathicgb
 
 BUILD_OPTIONS=
 
+export Eigen3_DIR=$SAGE_LOCAL
+export Flint_DIR=$SAGE_LOCAL
+export Factory_DIR=$SAGE_LOCAL
+
 # https://github.com/Macaulay2/M2/wiki/Building-M2-from-source-using-CMake
 cd M2/BUILD/build
 sdh_cmake -GNinja -S../.. -B. \
