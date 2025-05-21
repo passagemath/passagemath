@@ -39,4 +39,5 @@ class CddExecutable(Executable):
 
 
 def all_features():
-    return [CddExecutable()]
+    return [CddExecutable(),
+            CddExecutable('cddexec')]

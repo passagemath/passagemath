@@ -611,10 +611,10 @@ class Polyhedra_base(UniqueRepresentation, Parent):
             sage: p = P.plot()                                                          # needs sage.plot
 
             sage: Q = Polyhedron(ieqs=[[-499999, 1000000], [1499999, -1000000]])
-            sage: P = Polyhedron(ieqs=[[0, 1.0], [1.0, -1.0]], base_ring=RDF)
-            sage: Q.intersection(P)
+            sage: P = Polyhedron(ieqs=[[0, 1.0], [1.0, -1.0]], base_ring=RDF)           # needs cddexec
+            sage: Q.intersection(P)                                                     # needs cddexec
             A 1-dimensional polyhedron in RDF^1 defined as the convex hull of 2 vertices
-            sage: P.intersection(Q)
+            sage: P.intersection(Q)                                                     # needs cddexec
             A 1-dimensional polyhedron in RDF^1 defined as the convex hull of 2 vertices
 
         The default is not to copy an object if the parent is ``self``::
@@ -719,7 +719,7 @@ class Polyhedra_base(UniqueRepresentation, Parent):
             sage: p = Polyhedron(vertices=[(0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)])
             sage: p
             A 3-dimensional polyhedron in ZZ^3 defined as the convex hull of 4 vertices
-            sage: P(p)
+            sage: P(p)                                                                  # needs cddexec_gmp
             A 3-dimensional polyhedron in QQ^3 defined as the convex hull of 4 vertices
 
             sage: P = Polyhedra(AA, 3, backend='field')                                 # needs sage.rings.number_field
@@ -841,20 +841,20 @@ class Polyhedra_base(UniqueRepresentation, Parent):
         EXAMPLES::
 
             sage: triangle_QQ  = Polyhedron(vertices=[[1,0],[0,1],[1,1]], base_ring=QQ).parent()
-            sage: triangle_RDF = Polyhedron(vertices=[[1,0],[0,1],[1,1]], base_ring=RDF).parent()
+            sage: triangle_RDF = Polyhedron(vertices=[[1,0],[0,1],[1,1]], base_ring=RDF).parent()   # needs cddexec
             sage: triangle_QQ._coerce_base_ring(QQ)
             Rational Field
-            sage: triangle_QQ._coerce_base_ring(triangle_RDF)
+            sage: triangle_QQ._coerce_base_ring(triangle_RDF)                                       # needs cddexec
             Real Double Field
-            sage: triangle_RDF._coerce_base_ring(triangle_QQ)
+            sage: triangle_RDF._coerce_base_ring(triangle_QQ)                                       # needs cddexec
             Real Double Field
-            sage: triangle_QQ._coerce_base_ring(RDF)
+            sage: triangle_QQ._coerce_base_ring(RDF)                                                # needs cddexec
             Real Double Field
             sage: triangle_QQ._coerce_base_ring(ZZ)
             Rational Field
             sage: triangle_QQ._coerce_base_ring(1/2)
             Rational Field
-            sage: triangle_QQ._coerce_base_ring(0.5)
+            sage: triangle_QQ._coerce_base_ring(0.5)                                                # needs cddexec
             Real Double Field
 
         TESTS:
@@ -1184,7 +1184,7 @@ class Polyhedra_ZZ_ppl(Polyhedra_base):
             sage: P(p)
             A 3-dimensional polyhedron in ZZ^3 defined as the convex hull of 4 vertices
 
-            sage: p = Polyhedron(vertices=[(0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)], backend='cdd')
+            sage: p = Polyhedron(vertices=[(0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)], backend='cdd')                  # needs cddexec_gmp
             sage: P(p)
             A 3-dimensional polyhedron in ZZ^3 defined as the convex hull of 4 vertices
         """
@@ -1218,7 +1218,7 @@ class Polyhedra_QQ_ppl(Polyhedra_base):
             sage: P(p)
             A 3-dimensional polyhedron in QQ^3 defined as the convex hull of 4 vertices
 
-            sage: p = Polyhedron(vertices=[(0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)], backend='cdd')
+            sage: p = Polyhedron(vertices=[(0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)], backend='cdd')                  # needs cddexec_gmp
             sage: P(p)
             A 3-dimensional polyhedron in QQ^3 defined as the convex hull of 4 vertices
         """

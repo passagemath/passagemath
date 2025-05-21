@@ -596,8 +596,8 @@ class Projection(SageObject):
 
         EXAMPLES::
 
-            sage: p = polytopes.simplex(4, project=True).projection()
-            sage: p.coordinates_of([1])
+            sage: p = polytopes.simplex(4, project=True).projection()                   # needs cddexec
+            sage: p.coordinates_of([1])                                                 # needs cddexec
             [[-0.7071067812, 0.4082482905, 0.2886751346, 0.2236067977]]
         """
         return [self.transformed_coords[i] for i in coord_index_list]
@@ -610,9 +610,9 @@ class Projection(SageObject):
 
         TESTS::
 
-            sage: p = polytopes.simplex(2, project=True).projection()
-            sage: test = p._init_dimension()
-            sage: p.plot.__doc__ == p.render_2d.__doc__
+            sage: p = polytopes.simplex(2, project=True).projection()                   # needs cddexec
+            sage: test = p._init_dimension()                                            # needs cddexec
+            sage: p.plot.__doc__ == p.render_2d.__doc__                                 # needs cddexec
             True
         """
         if self.transformed_coords:

@@ -217,11 +217,11 @@ triangle, that would be::
     constructor converts automatically the base ring to ``RDF``. Otherwise,
     it returns an error::
 
-        sage: Polyhedron(vertices = [[1.12345678901234, 2.12345678901234]])
+        sage: Polyhedron(vertices=[[1.12345678901234, 2.12345678901234]])               # needs cddexec
         A 0-dimensional polyhedron in RDF^2 defined as the convex hull of 1 vertex
-        sage: Polyhedron(vertices = [[1.12345678901234, 2.123456789012345]])
+        sage: Polyhedron(vertices=[[1.12345678901234, 2.123456789012345]])              # needs cddexec
         A 0-dimensional polyhedron in RDF^2 defined as the convex hull of 1 vertex
-        sage: Polyhedron(vertices = [[1.123456789012345, 2.123456789012345]])           # needs sage.rings.real_mpfr
+        sage: Polyhedron(vertices=[[1.123456789012345, 2.123456789012345]])             # needs sage.rings.real_mpfr
         Traceback (most recent call last):
         ...
         ValueError: the only allowed inexact ring is 'RDF' with backend 'cdd'
@@ -229,7 +229,7 @@ triangle, that would be::
     The strongly suggested method to input floating point numbers is to specify the
     ``base_ring`` to be ``RDF``::
 
-        sage: Polyhedron(vertices = [[1.123456789012345, 2.123456789012345]], base_ring=RDF)
+        sage: Polyhedron(vertices=[[1.123456789012345, 2.123456789012345]], base_ring=RDF)  # needs cddexec
         A 0-dimensional polyhedron in RDF^2 defined as the convex hull of 1 vertex
 
 .. SEEALSO::
@@ -392,8 +392,8 @@ def Polyhedron(vertices=None, rays=None, lines=None,
 
     Construct some polyhedra::
 
-        sage: square_from_vertices = Polyhedron(vertices = [[1, 1], [1, -1], [-1, 1], [-1, -1]])
-        sage: square_from_ieqs = Polyhedron(ieqs = [[1, 0, 1], [1, 1, 0], [1, 0, -1], [1, -1, 0]])
+        sage: square_from_vertices = Polyhedron(vertices=[[1, 1], [1, -1], [-1, 1], [-1, -1]])
+        sage: square_from_ieqs = Polyhedron(ieqs=[[1, 0, 1], [1, 1, 0], [1, 0, -1], [1, -1, 0]])
         sage: list(square_from_ieqs.vertex_generator())
         [A vertex at (1, -1),
          A vertex at (1, 1),
@@ -404,13 +404,13 @@ def Polyhedron(vertices=None, rays=None, lines=None,
          An inequality (0, 1) x + 1 >= 0,
          An inequality (-1, 0) x + 1 >= 0,
          An inequality (0, -1) x + 1 >= 0]
-        sage: p = Polyhedron(vertices = [[1.1, 2.2], [3.3, 4.4]], base_ring=RDF)
-        sage: p.n_inequalities()
+        sage: p = Polyhedron(vertices=[[1.1, 2.2], [3.3, 4.4]], base_ring=RDF)  # needs cddexec
+        sage: p.n_inequalities()                                                # needs cddexec
         2
 
     The same polyhedron given in two ways::
 
-        sage: p = Polyhedron(ieqs = [[0,1,0,0],[0,0,1,0]])
+        sage: p = Polyhedron(ieqs=[[0,1,0,0],[0,0,1,0]])
         sage: p.Vrepresentation()
         (A line in the direction (0, 0, 1),
          A ray in the direction (1, 0, 0),
@@ -530,7 +530,7 @@ def Polyhedron(vertices=None, rays=None, lines=None,
     Check that giving ``float`` input gets converted to ``RDF`` (see :issue:`22605`)::
 
         sage: f = float(1.1)
-        sage: Polyhedron(vertices=[[f]])
+        sage: Polyhedron(vertices=[[f]])                                                # needs cddexec
         A 0-dimensional polyhedron in RDF^1 defined as the convex hull of 1 vertex
 
     Check that giving ``int`` input gets converted to ``ZZ`` (see :issue:`22605`)::
@@ -598,7 +598,7 @@ def Polyhedron(vertices=None, rays=None, lines=None,
         sage: Polyhedron(ambient_dim=2, ieqs=[], eqns=[], base_ring=QQ, backend='field')
         A 2-dimensional polyhedron in QQ^2 defined as the convex hull
          of 1 vertex and 2 lines
-        sage: Polyhedron(ambient_dim=0, ieqs=[], eqns=[[1]], base_ring=QQ, backend='cdd')
+        sage: Polyhedron(ambient_dim=0, ieqs=[], eqns=[[1]], base_ring=QQ, backend='cdd')           # needs cddexec_gmp
         The empty polyhedron in QQ^0
         sage: Polyhedron(ambient_dim=0, ieqs=[], eqns=[[1]], base_ring=QQ, backend='ppl')
         The empty polyhedron in QQ^0

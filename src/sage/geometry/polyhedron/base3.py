@@ -1015,8 +1015,8 @@ class Polyhedron_base3(Polyhedron_base2):
 
         EXAMPLES::
 
-            sage: s4 = polytopes.simplex(4, project=True)
-            sage: s4.facet_adjacency_matrix()
+            sage: s4 = polytopes.simplex(4, project=True)                               # needs cddexec
+            sage: s4.facet_adjacency_matrix()                                           # needs cddexec
             [0 1 1 1 1]
             [1 0 1 1 1]
             [1 1 0 1 1]
@@ -1217,8 +1217,8 @@ class Polyhedron_base3(Polyhedron_base2):
             sage: p = polytopes.hypercube(3)
             sage: p.is_simplicial()
             False
-            sage: q = polytopes.simplex(5, project=True)
-            sage: q.is_simplicial()
+            sage: q = polytopes.simplex(5, project=True)                                # needs cddexec
+            sage: q.is_simplicial()                                                     # needs cddexec
             True
             sage: p = Polyhedron([[0,0,0],[1,0,0],[0,1,0],[0,0,1]])
             sage: p.is_simplicial()

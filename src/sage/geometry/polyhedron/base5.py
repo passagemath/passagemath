@@ -911,7 +911,7 @@ class Polyhedron_base5(Polyhedron_base4):
             A 2-dimensional polyhedron in QQ^2 defined as the convex hull of 4 vertices
             sage: 2 * P1
             A 1-dimensional polyhedron in ZZ^1 defined as the convex hull of 2 vertices
-            sage: P1 * 2.0
+            sage: P1 * 2.0                                                              # needs cddexec
             A 1-dimensional polyhedron in RDF^1 defined as the convex hull of 2 vertices
 
         An alias is :meth:`cartesian_product`::
@@ -1304,6 +1304,7 @@ class Polyhedron_base5(Polyhedron_base4):
 
         EXAMPLES::
 
+            sage: # needs cddexec
             sage: a_simplex = polytopes.simplex(3, project=True)
             sage: verts = a_simplex.vertices()
             sage: verts = [[x[0]*3/5 + x[1]*4/5, -x[0]*4/5 + x[1]*3/5, x[2]] for x in verts]
@@ -1619,7 +1620,7 @@ class Polyhedron_base5(Polyhedron_base4):
             sage: p = Polyhedron(vertices = [[t,t^2,t^3] for t in srange(2,4)])
             sage: (p/5).Vrepresentation()
             (A vertex at (2/5, 4/5, 8/5), A vertex at (3/5, 9/5, 27/5))
-            sage: (p/int(5)).Vrepresentation()
+            sage: (p/int(5)).Vrepresentation()                                          # needs cddexec
             (A vertex at (0.4, 0.8, 1.6), A vertex at (0.6, 1.8, 5.4))
         """
         return self.dilation(1/scalar)
@@ -1765,7 +1766,7 @@ class Polyhedron_base5(Polyhedron_base4):
 
         Check that coercion works::
 
-            sage: (1.0 * proj_mat) * b3
+            sage: (1.0 * proj_mat) * b3                                                 # needs cddexec
             A 3-dimensional polyhedron in RDF^4 defined as the convex hull of 5 vertices
             sage: (1/1 * proj_mat) * b3
             A 3-dimensional polyhedron in QQ^4 defined as the convex hull of 5 vertices
@@ -1988,8 +1989,8 @@ class Polyhedron_base5(Polyhedron_base4):
              A vertex at (-1, 0, -1),
              A vertex at (0, -1, -1),
              A vertex at (-1, -1, 0))
-            sage: vertex_trunc3 = Cube.face_truncation(Cube.faces(0)[0], cut_frac=0.3)
-            sage: vertex_trunc3.vertices()
+            sage: vertex_trunc3 = Cube.face_truncation(Cube.faces(0)[0], cut_frac=0.3)  # needs cddexec
+            sage: vertex_trunc3.vertices()                                              # needs cddexec
             (A vertex at (-1.0, -1.0, 1.0),
              A vertex at (-1.0, 1.0, -1.0),
              A vertex at (-1.0, 1.0, 1.0),
@@ -2321,7 +2322,7 @@ class Polyhedron_base5(Polyhedron_base4):
              A vertex at (4, 16, 64, 2),
              A vertex at (6, 36, 216, 10),
              A vertex at (5, 25, 125, 5))
-            sage: W2 = P.wedge(P.faces(2)[2], width=1.0); W2.base_ring(); W2.backend()
+            sage: W2 = P.wedge(P.faces(2)[2], width=1.0); W2.base_ring(); W2.backend()  # needs cddexec
             Real Double Field
             'cdd'
         """

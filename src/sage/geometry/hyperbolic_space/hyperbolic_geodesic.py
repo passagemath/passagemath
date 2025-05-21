@@ -1566,7 +1566,7 @@ class HyperbolicGeodesicUHP(HyperbolicGeodesic):
             ....:     return bool(x.dist(m) < 1e-9)
             sage: c, d, e = CC(1, 1), CC(2, 1), CC(2, 0.5)
             sage: pairs = [(c, d), (d, c), (c, e), (e, c), (d, e), (e, d)]
-            sage: all(bisector_gets_midpoint(a, b) for a, b in pairs)                   # needs scipy
+            sage: all(bisector_gets_midpoint(a, b) for a, b in pairs)
             True
         """
         if self.length() == infinity:

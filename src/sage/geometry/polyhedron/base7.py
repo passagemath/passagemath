@@ -664,7 +664,7 @@ class Polyhedron_base7(Polyhedron_base6):
         Induced volumes work with lrs (:issue:`33410`)::
 
             sage: P = Polyhedron([[0, 0], [1, 1]])
-            sage: P.volume(measure='induced', engine='lrs')             # optional - lrslib sage.rings.number_field
+            sage: P.volume(measure='induced', engine='lrs')             # optional - lrslib, needs sage.rings.number_field
             1.414213562373095?
         """
         from sage.features import FeatureNotPresentError
@@ -876,8 +876,8 @@ class Polyhedron_base7(Polyhedron_base6):
 
         Testing a polytope with floating point coordinates::
 
-            sage: P = Polyhedron(vertices=[[0, 0], [1, 0], [1.1, 1.1], [0, 1]])     # needs cddexec_gmp
-            sage: P.integrate('[[1,[2,2]]]')                                        # needs cddexec_gmp
+            sage: P = Polyhedron(vertices=[[0, 0], [1, 0], [1.1, 1.1], [0, 1]])         # needs cddexec
+            sage: P.integrate('[[1,[2,2]]]')                                            # needs cddexec
             Traceback (most recent call last):
             ...
             TypeError: LattE integrale cannot be applied over inexact rings

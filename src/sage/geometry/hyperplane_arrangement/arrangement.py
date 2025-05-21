@@ -317,7 +317,7 @@ TESTS::
     Hyperplane arrangements in 0-dimensional linear space over Rational Field with coordinate
     sage: Zero()
     Empty hyperplane arrangement of dimension 0
-    sage: Zero.an_element()
+    sage: Zero.an_element()                                                             # needs sage.rings.real_interval_field
     Empty hyperplane arrangement of dimension 0
 
 AUTHORS:
@@ -3626,7 +3626,7 @@ class HyperplaneArrangements(Parent, UniqueRepresentation):
             sage: H.<x,y> = HyperplaneArrangements(QQ)
             sage: TestSuite(H).run()
             sage: K = HyperplaneArrangements(QQ)
-            sage: TestSuite(K).run()
+            sage: TestSuite(K).run()                                                    # needs sage.rings.real_interval_field
         """
         from sage.categories.sets_cat import Sets
         from sage.rings.ring import _Fields

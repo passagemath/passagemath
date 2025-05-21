@@ -256,7 +256,7 @@ def gale_transform_to_polytope(vectors, base_ring=None, backend=None):
          A vertex at (0, 0, -25),
          A vertex at (16, -35, 54),
          A vertex at (24, 10, 31))
-        sage: gale_transform_to_polytope(
+        sage: gale_transform_to_polytope(                                               # needs cddexec
         ....:     [(1,1), (-1,-1), (1,0),
         ....:      (-1,0), (1,-1), (-2,1)],
         ....:     base_ring=RDF).vertices()
@@ -274,7 +274,7 @@ def gale_transform_to_polytope(vectors, base_ring=None, backend=None):
         ....:      (-1,0), (1,-1), (-2,1)],
         ....:     backend='field').backend()
         'field'
-        sage: gale_transform_to_polytope(
+        sage: gale_transform_to_polytope(                                               # needs cddexec
         ....:     [(1,1), (-1,-1), (1,0),
         ....:      (-1,0), (1,-1), (-2,1)],
         ....:     backend='cdd', base_ring=RDF).backend()
@@ -529,11 +529,11 @@ class Polytopes:
 
         Its non exact version::
 
-            sage: polytopes.regular_polygon(3, exact=False).vertices()
+            sage: polytopes.regular_polygon(3, exact=False).vertices()                  # needs cddexec
             (A vertex at (0.0, 1.0),
              A vertex at (0.8660254038, -0.5),
              A vertex at (-0.8660254038, -0.5))
-            sage: polytopes.regular_polygon(25, exact=False).n_vertices()
+            sage: polytopes.regular_polygon(25, exact=False).n_vertices()               # needs cddexec
             25
 
         TESTS::
@@ -655,26 +655,24 @@ class Polytopes:
 
         EXAMPLES::
 
-            sage: s5 = polytopes.simplex(5)
-            sage: s5
+            sage: s5 = polytopes.simplex(5); s5
             A 5-dimensional polyhedron in ZZ^6 defined as the convex hull of 6 vertices
             sage: s5.f_vector()
             (1, 6, 15, 20, 15, 6, 1)
 
-            sage: s5 = polytopes.simplex(5, project=True)
-            sage: s5
+            sage: s5 = polytopes.simplex(5, project=True); s5                           # needs cddexec
             A 5-dimensional polyhedron in RDF^5 defined as the convex hull of 6 vertices
 
         Its volume is `\sqrt{d+1} / d!`::
 
-            sage: s5 = polytopes.simplex(5, project=True)
-            sage: s5.volume()      # abs tol 1e-10                              # needs scipy
+            sage: s5 = polytopes.simplex(5, project=True)                               # needs cddexec
+            sage: s5.volume()      # abs tol 1e-10                                      # needs cddexec scipy
             0.0204124145231931
             sage: sqrt(6.) / factorial(5)
             0.0204124145231931
 
-            sage: s6 = polytopes.simplex(6, project=True)
-            sage: s6.volume()      # abs tol 1e-10                              # needs scipy
+            sage: s6 = polytopes.simplex(6, project=True)                               # needs cddexec
+            sage: s6.volume()      # abs tol 1e-10                                      # needs cddexec scipy
             0.00367465459870082
             sage: sqrt(7.) / factorial(6)
             0.00367465459870082
@@ -866,7 +864,7 @@ class Polytopes:
 
         Its non exact version::
 
-            sage: sr = polytopes.small_rhombicuboctahedron(False)
+            sage: sr = polytopes.small_rhombicuboctahedron(False)                       # needs cddexec
             sage: sr
             A 3-dimensional polyhedron in RDF^3 defined as the convex hull of
             24 vertices
@@ -929,6 +927,7 @@ class Polytopes:
 
         A faster implementation is obtained by setting ``exact=False``::
 
+            sage: # needs cddexec
             sage: gr = polytopes.great_rhombicuboctahedron(exact=False)
             sage: gr.f_vector()
             (1, 48, 72, 26, 1)
@@ -1548,6 +1547,7 @@ class Polytopes:
 
         A much faster implementation using floating point approximations::
 
+            sage: # needs cddexec
             sage: id = polytopes.icosidodecahedron_V2(exact=False)
             sage: id.f_vector()
             (1, 30, 60, 32, 1)
@@ -1563,7 +1563,7 @@ class Polytopes:
 
         TESTS::
 
-            sage: # optional - pynormaliz
+            sage: # optional - pynormaliz, needs sage.rings.number_field
             sage: id = polytopes.icosidodecahedron_V2(backend='normaliz')
             sage: id.f_vector()
             (1, 30, 60, 32, 1)
@@ -1631,6 +1631,7 @@ class Polytopes:
         fully work unfortunately, see https://github.com/cddlib/cddlib/pull/7
         for a detailed discussion of this case::
 
+            sage: # needs cddexec
             sage: td = polytopes.truncated_dodecahedron(exact=False)  # random
             doctest:warning
             ...
@@ -1792,6 +1793,7 @@ class Polytopes:
 
         A much faster implementation using floating point approximations::
 
+            sage: # needs cddexec
             sage: rid = polytopes.rhombicosidodecahedron(exact=False)
             sage: rid.f_vector()
             (1, 60, 120, 62, 1)
@@ -1871,7 +1873,8 @@ class Polytopes:
 
         The implementation using floating point approximations is much faster::
 
-            sage: ti = polytopes.truncated_icosidodecahedron(exact=False) # random
+            sage: # needs cddexec
+            sage: ti = polytopes.truncated_icosidodecahedron(exact=False)  # random
             sage: ti.f_vector()
             (1, 120, 180, 62, 1)
             sage: ti.base_ring()
@@ -2328,6 +2331,7 @@ class Polytopes:
 
         Computation with approximated coordinates is also faster, but inexact::
 
+            sage: # needs cddexec
             sage: gap = polytopes.grand_antiprism(exact=False) # random
             sage: gap
             A 4-dimensional polyhedron in RDF^4 defined as the convex hull of 100 vertices
@@ -2528,16 +2532,15 @@ class Polytopes:
 
         EXAMPLES::
 
-            sage: perm4 = polytopes.permutahedron(4)
-            sage: perm4
+            sage: perm4 = polytopes.permutahedron(4); perm4
             A 3-dimensional polyhedron in ZZ^4 defined as the convex hull of 24 vertices
             sage: perm4.is_lattice_polytope()
             True
             sage: perm4.ehrhart_polynomial()   # optional - latte_int
             16*t^3 + 15*t^2 + 6*t + 1
 
-            sage: perm4 = polytopes.permutahedron(4, project=True)
-            sage: perm4
+            sage: # needs cddexec
+            sage: perm4 = polytopes.permutahedron(4, project=True); perm4
             A 3-dimensional polyhedron in RDF^3 defined as the convex hull of 24 vertices
             sage: perm4.plot()                                                          # needs sage.plot
             Graphics3d Object
@@ -2559,7 +2562,7 @@ class Polytopes:
 
         TESTS::
 
-            sage: p4 = polytopes.permutahedron(4,backend='normaliz')   # optional - pynormaliz
+            sage: p4 = polytopes.permutahedron(4, backend='normaliz')  # optional - pynormaliz
             sage: TestSuite(p4).run()                                  # optional - pynormaliz
 
         Check that precomputed data is correct::
@@ -3267,7 +3270,7 @@ class Polytopes:
         Check that coercion for input invervals is handled correctly::
 
             sage: P = polytopes.hypercube(2, [[1/2, 2], [0, 1]])
-            sage: P = polytopes.hypercube(2, [[1/2, 2], [0, 1.0]])
+            sage: P = polytopes.hypercube(2, [[1/2, 2], [0, 1.0]])                      # needs cddexec
             sage: P = polytopes.hypercube(2, [[1/2, 2], [0, AA(2).sqrt()]])             # needs sage.rings.number_field
             sage: P = polytopes.hypercube(2, [[1/2, 2], [0, 1.0]], backend='ppl')       # needs pplpy
             Traceback (most recent call last):
