@@ -1,0 +1,6 @@
+cd src
+# have setup.py build the extension modules
+export _4ti2_INT32=1 _4ti2_INT64=1 _4ti2_HAVE_GMP=1
+# update for 4ti2 1.6.11, which uses standard C types
+export CPPFLAGS="$CPPFLAGS -D_4ti2_int32_t=int32_t -D_4ti2_int64_t=int64_t"
+sdh_pip_install .
