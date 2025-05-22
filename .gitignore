@@ -208,6 +208,7 @@ build/bin/sage-build-env-config
 /pkgs/sage-conf_pypi/sage_root/venv
 
 /pkgs/sage-docbuild/pyproject.toml
+/pkgs/sage-setup/pyproject.toml
 
 /pkgs/sagemath-*/pyproject.toml
 /pkgs/sagemath-*/requirements*.txt
