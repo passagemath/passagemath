@@ -375,7 +375,7 @@ in the Installation Guide.
       It is best to remove all of them from the environment variables.
       For example, you can set `PATH` using the command:
 
-            $ export PATH=/usr/sbin/:/sbin/:/bin/:/usr/lib/wsl/lib/
+            $ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/wsl/lib
 
     - [macOS with homebrew] Set required environment variables for the build:
 
