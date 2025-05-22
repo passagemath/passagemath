@@ -53,9 +53,9 @@ class CommutativeRings(CategoryWithAxiom):
         True
         sage: ZpCA(7).is_commutative()                                              # needs sage.rings.padics
         True
-        sage: A = QuaternionAlgebra(QQ, -1, -3, names=('i','j','k')); A             # needs sage.combinat sage.modules
+        sage: A = QuaternionAlgebra(QQ, -1, -3, names=('i','j','k')); A             # needs sage.combinat sage.libs.singular sage.modules
         Quaternion Algebra (-1, -3) with base ring Rational Field
-        sage: A.is_commutative()                                                    # needs sage.combinat sage.modules
+        sage: A.is_commutative()                                                    # needs sage.combinat sage.libs.singular sage.modules
         False
     """
     class ParentMethods:

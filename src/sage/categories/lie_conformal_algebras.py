@@ -170,7 +170,7 @@ class LieConformalAlgebras(Category_over_base_ring):
 
     The base ring needs to be a commutative ring::
 
-        sage: LieConformalAlgebras(QuaternionAlgebra(2))                                # needs sage.combinat sage.modules
+        sage: LieConformalAlgebras(QuaternionAlgebra(2))                                # needs sage.combinat sage.libs.singular sage.modules
         Traceback (most recent call last):
         ValueError: base must be a commutative ring
         got Quaternion Algebra (-1, -1) with base ring Rational Field

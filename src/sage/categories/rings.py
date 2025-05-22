@@ -337,8 +337,8 @@ class Rings(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: Q.<i,j,k> = QuaternionAlgebra(QQ, -1, -1)                             # needs sage.combinat sage.modules
-                sage: Q.is_commutative()                                                    # needs sage.combinat sage.modules
+                sage: Q.<i,j,k> = QuaternionAlgebra(QQ, -1, -1)                             # needs sage.combinat sage.libs.singular sage.modules
+                sage: Q.is_commutative()                                                    # needs sage.combinat sage.libs.singular sage.modules
                 False
             """
             return False

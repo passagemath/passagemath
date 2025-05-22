@@ -481,7 +481,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         We evaluate a polynomial over a quaternion algebra::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.singular sage.modules
             sage: A.<i,j,k> = QuaternionAlgebra(QQ, -1, -1)
             sage: R.<w> = PolynomialRing(A, sparse=True)
             sage: f = i*j*w^5 - 13*i*w^2 + (i+j)*w + i
@@ -3462,7 +3462,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         A non-commutative example::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.singular sage.modules
             sage: A.<i,j,k> = QuaternionAlgebra(QQ, -1,-1)
             sage: R.<w> = PolynomialRing(A)
             sage: f = i*w + j
@@ -3677,7 +3677,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         A noncommutative example::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.singular sage.modules
             sage: A.<i,j,k> = QuaternionAlgebra(QQ, -1,-1)
             sage: R.<w> = PolynomialRing(A)
             sage: f = i*w + j
@@ -12482,7 +12482,7 @@ cdef class Polynomial_generic_dense(Polynomial):
         Polynomials over noncommutative rings are also allowed
         (after :issue:`34733`)::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.singular sage.modules
             sage: HH = QuaternionAlgebra(QQ, -1, -1)
             sage: P.<x> = HH[]
             sage: f = P.random_element(5)
