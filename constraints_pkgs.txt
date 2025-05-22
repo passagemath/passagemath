@@ -7,11 +7,10 @@
 # Example: Building a sagemath-standard-no-symbolics wheel
 #
 # [alice@localhost sage]$ ./bootstrap
-# [alice@localhost sage]$ ./configure
 # [alice@localhost sage]$ export MAKE="make -j16" SAGE_NUM_THREADS=16
 # [alice@localhost sage]$ make all-sage-local
 # [alice@localhost sage]$ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
-# [alice@localhost sage]$ ./sage -sh -c 'python3 -m build -v -v pkgs/sagemath-standard-no-symbolics'
+# [alice@localhost sage]$ python3 -m build -v -v pkgs/sagemath-standard-no-symbolics
 #
 # Non-example: Installing the built wheel using the same
 # constraints file will fail because sagemath-standard is one
@@ -22,7 +21,7 @@
 # Reference on the format:
 # https://pip.pypa.io/en/stable/user_guide/#constraints-files
 #
-passagemath-conf                  @ file://${SAGE_ROOT}/pkgs/sage-conf
+passagemath-conf                  @ file://${SAGE_ROOT}/pkgs/sage-conf_pypi
 passagemath-docbuild              @ file://${SAGE_ROOT}/pkgs/sage-docbuild
 passagemath-setup                 @ file://${SAGE_ROOT}/pkgs/sage-setup
 passagemath-sws2rst               @ file://${SAGE_ROOT}/pkgs/sage-sws2rst
