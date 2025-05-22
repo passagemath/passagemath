@@ -17,18 +17,30 @@ build-backend = 'mesonpy'
 name = "passagemath-doc-html"
 description = "passagemath: Documentation in HTML format"
 dependencies = []
-license = {text = "GNU General Public License (GPL) v2 or later; Creative Commons Attribution-ShareAlike 3.0 Unported"}
+license = "GPL-2.0-or-later AND CC-BY-SA-3.0"
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
+maintainers = [
+    {name = "Matthias Köppe"},
+    {name = "passagemath contributors"},
+]
 classifiers = [
     "Development Status :: 6 - Mature",
     "Intended Audience :: Education",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved",
     "Programming Language :: Python :: 3 :: Only",
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
-urls = {Homepage = "https://www.sagemath.org"}
 dynamic = ["version"]
+
+[project.urls]
+"release notes" = "https://github.com/passagemath/passagemath/releases"
+"repo (upstream)" = "https://github.com/sagemath/sage"
+"repo" = "https://github.com/passagemath/passagemath"
+documentation = "https://doc.sagemath.org"
+"homepage (upstream)" = "https://www.sagemath.org"
+"discourse" = "https://passagemath.discourse.group"
+"tracker (upstream)" = "https://github.com/sagemath/sage/issues"
+"tracker" = "https://github.com/passagemath/passagemath/issues"
 
 [project.readme]
 file = "README.rst"
