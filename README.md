@@ -400,50 +400,51 @@ Unless you need to install passagemath into a specific existing environment, we 
 to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.13.x),
 for example `~/passagemath-venv/`:
 
-            $ python3 --version
-            Python 3.12.7
-            $ python3 -m venv ~/passagemath-venv
-            $ source ~/passagemath-venv/bin/activate
+    $ python3 --version
+    Python 3.12.7
+    $ python3 -m venv ~/passagemath-venv
+    $ source ~/passagemath-venv/bin/activate
 
 Next, if you want to build from PyPI, use the following command:
 
-            passagemath $ export SAGE_CONF_TARGETS=build
+    (passagemath-venv) $ export SAGE_CONF_TARGETS=build
 
 If you want to build from a local clone of the passagemath repository instead,
 use the following command first.
 
-            passagemath $ export SAGE_ROOT=$(pwd)
-            passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
-            passagemath $ export SAGE_CONF_TARGETS=build-local
+    (passagemath-venv) $ export SAGE_ROOT=$(pwd)
+    (passagemath-venv) $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
+    (passagemath-venv) $ export SAGE_CONF_TARGETS=build-local
 
 As the first installation step, install [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf),
 which builds various prerequisite non-Python packages in a subdirectory of `~/.sage/`.
 The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
 
-            (passagemath-venv) $ python3 -m pip install -v passagemath-conf
+    (passagemath-venv) $ python3 -m pip install -v passagemath-conf
 
 After a successful installation, a wheelhouse provides various Python packages.
 You can list the wheels using the command:
 
-            (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
+    (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
 
 If this gives an error saying that `sage-config` is not found, check any messages
 that the `pip install` command may have printed. You may need to adjust your `PATH`,
 for example by:
 
-            $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
+    (passagemath-venv) $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
+    (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
 
 Now install the packages from the wheelhouse:
 
-            (passagemath-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl
+    (passagemath-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl
 
 Next, install the [![PyPI: passagemath-setup](https://img.shields.io/pypi/v/passagemath-setup.svg?label=passagemath-setup)](https://pypi.python.org/pypi/passagemath-setup) package:
 
-            (passagemath-venv) $ python3 -m pip install passagemath-setup
+    (passagemath-venv) $ python3 -m pip install passagemath-setup
 
 Finally, install the Sage library from the package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard):
 
-            (passagemath-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
+    (passagemath-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
 
 The above instructions install the latest stable release of passagemath.
 To install the latest development version instead, add the switch `--pre` to all invocations of
