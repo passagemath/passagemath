@@ -11,7 +11,7 @@ description = "passagemath: Confectionery and configuration module"
 readme = "README.rst"
 dnl Not including the standard metadata from pyproject_toml_metadata.m4
 dnl because sage-conf is GPL v3+.
-license = {text = "GNU General Public License (GPL) v3 or later"}
+license = "GPL-3.0-or-later"
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
 maintainers = [
     {name = "Matthias Köppe"},
@@ -21,7 +21,6 @@ classifiers = [
     "Development Status :: 6 - Mature",
     "Intended Audience :: Education",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
     "Operating System :: POSIX",
     "Operating System :: MacOS :: MacOS X",
     "Programming Language :: Python :: 3 :: Only",
