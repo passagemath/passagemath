@@ -3,7 +3,8 @@
 requires = [
     # 68.1.0 Promote pyproject.toml's [tool.setuptools] out of beta.
     # 68.1.1 Fix editable install finder handling of nested packages
-    'setuptools >= 68.1.1',
+    # 77.0.0 SPDX license expressions
+    'setuptools >= 77.0.0',
     # version constraint for macOS Big Sur support (see https://github.com/sagemath/sage/issues/31050)
     'wheel >=0.36.2',
     'cypari2 >=2.1.1',
