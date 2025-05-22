@@ -93,13 +93,12 @@ Development
 
 ::
 
-    $ git clone --origin passagemath https://github.com/passagemath/passagemath.git
+    $ git clone --origin passagemath https://github.com/passagemath/passagemath.git  # or use your fork
     $ cd passagemath
     passagemath $ ./bootstrap
     passagemath $ source ./.homebrew-build-env         # on macOS when homebrew is in use
     passagemath $ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/wsl/lib  # on WSL
     passagemath $ export PIP_CONSTRAINT="$(pwd)/constraints_cmr.txt"
-    passagemath $ echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf_pypi" > constraints_cmr.txt
     passagemath $ echo "passagemath-categories @ file://$(pwd)/pkgs/sagemath-categories" >> constraints_cmr.txt
     passagemath $ echo "passagemath-modules @ file://$(pwd)/pkgs/sagemath-modules" >> constraints_cmr.txt
     passagemath $ python3 -m venv cmr-venv
