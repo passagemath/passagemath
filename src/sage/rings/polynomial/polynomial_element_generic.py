@@ -844,7 +844,7 @@ class Polynomial_generic_sparse(Polynomial):
 
         Polynomials over noncommutative rings are also allowed::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.singular sage.modules
             sage: HH = QuaternionAlgebra(QQ, -1, -1)
             sage: P.<x> = PolynomialRing(HH, sparse=True)
             sage: f = P.random_element(5)

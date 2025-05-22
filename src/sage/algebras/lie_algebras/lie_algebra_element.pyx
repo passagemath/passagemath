@@ -192,10 +192,10 @@ cdef class LieAlgebraElementWrapper(ElementWrapper):
     The next doctests show similar behavior, although on elements of
     other classes::
 
+        sage: # needs sage.graphs
         sage: L = lie_algebras.three_dimensional_by_rank(QQ, 3)
         sage: L.bracket(L.gen(0), L.gen(1)) == -L.bracket(L.gen(1), L.gen(0))
         True
-
         sage: L = lie_algebras.three_dimensional_by_rank(QQ, 1)
         sage: L.bracket(L.gen(0), L.gen(1)) == -L.bracket(L.gen(1), L.gen(0))
         True
@@ -972,6 +972,7 @@ cdef class UntwistedAffineLieAlgebraElement(Element):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: L = lie_algebras.Affine(QQ, ['B', 3, 1])
             sage: elt = L.an_element()
             sage: elt._repr_generic(str, str, lambda t: "T^{}".format(t), '.', '(x)')

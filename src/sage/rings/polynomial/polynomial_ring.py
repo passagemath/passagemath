@@ -47,7 +47,7 @@ structures in Sage)::
 
 We create a polynomial ring over a quaternion algebra::
 
-    sage: # needs sage.combinat sage.modules
+    sage: # needs sage.combinat sage.libs.singular sage.modules
     sage: A.<i,j,k> = QuaternionAlgebra(QQ, -1,-1)
     sage: R.<w> = PolynomialRing(A, sparse=True)
     sage: f = w^3 + (i+j)*w + 1

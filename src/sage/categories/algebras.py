@@ -170,7 +170,7 @@ class Algebras(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.libs.singular sage.modules
                 sage: B = QuaternionAlgebra(2)
                 sage: B.has_standard_involution()
                 True

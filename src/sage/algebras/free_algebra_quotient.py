@@ -389,7 +389,7 @@ def hamilton_quatalg(R):
     quaternion algebras in Sage; the one here is mainly for testing
     purposes::
 
-        sage: R.<i,j,k> = QuaternionAlgebra(QQ,-1,-1)  # much fast than the above
+        sage: R.<i,j,k> = QuaternionAlgebra(QQ,-1,-1)  # much fast than the above       # needs sage.libs.singular
     """
     from sage.algebras.free_algebra import FreeAlgebra
     from sage.matrix.matrix_space import MatrixSpace

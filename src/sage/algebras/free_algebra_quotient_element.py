@@ -247,8 +247,8 @@ class FreeAlgebraQuotientElement(AlgebraElement):
 
         Double check that the above is actually right::
 
-            sage: R.<i,j,k> = QuaternionAlgebra(QQ,-1,-1)
-            sage: a = (5 + 2*i - 3/5*j + 17*k); a*(a+10)
+            sage: R.<i,j,k> = QuaternionAlgebra(QQ,-1,-1)                               # needs sage.libs.singular
+            sage: a = (5 + 2*i - 3/5*j + 17*k); a*(a+10)                                # needs sage.libs.singular
             -5459/25 + 40*i - 12*j + 340*k
         """
         A = self.parent()
