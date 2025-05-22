@@ -1,0 +1,49 @@
+From 45d1c4162b9666281857f3b5d38fdefdbf9b1979 Mon Sep 17 00:00:00 2001
+From: Andrew Murray <radarhere@users.noreply.github.com>
+Date: Thu, 22 May 2025 15:55:43 +1000
+Subject: [PATCH] Do not build against libavif < 1
+
+---
+ setup.py | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 5d41e27d981..ab36c6b1783 100644
+--- a/setup.py
++++ b/setup.py
+@@ -224,13 +224,14 @@ def _add_directory(
+         path.insert(where, subdir)
+ 
+ 
+-def _find_include_file(self: pil_build_ext, include: str) -> int:
++def _find_include_file(self: pil_build_ext, include: str) -> str | None:
+     for directory in self.compiler.include_dirs:
+         _dbg("Checking for include file %s in %s", (include, directory))
+-        if os.path.isfile(os.path.join(directory, include)):
++        path = os.path.join(directory, include)
++        if os.path.isfile(path):
+             _dbg("Found %s", include)
+-            return 1
+-    return 0
++            return path
++    return None
+ 
+ 
+ def _find_library_file(self: pil_build_ext, library: str) -> str | None:
+@@ -852,9 +853,13 @@ def build_extensions(self) -> None:
+ 
+         if feature.want("avif"):
+             _dbg("Looking for avif")
+-            if _find_include_file(self, "avif/avif.h"):
+-                if _find_library_file(self, "avif"):
+-                    feature.set("avif", "avif")
++            if avif_h := _find_include_file(self, "avif/avif.h"):
++                with open(avif_h, "rb") as fp:
++                    major_version = int(
++                        fp.read().split(b"#define AVIF_VERSION_MAJOR ")[1].split()[0]
++                    )
++                    if major_version >= 1 and _find_library_file(self, "avif"):
++                        feature.set("avif", "avif")
+ 
+         for f in feature:
+             if not feature.get(f) and feature.require(f):
