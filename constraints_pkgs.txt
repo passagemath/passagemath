@@ -32,9 +32,11 @@ passagemath-categories            @ file://${SAGE_ROOT}/pkgs/sagemath-categories
 passagemath-cddlib                @ file://${SAGE_ROOT}/pkgs/sagemath-cddlib
 passagemath-combinat              @ file://${SAGE_ROOT}/pkgs/sagemath-combinat
 passagemath-coxeter3              @ file://${SAGE_ROOT}/pkgs/sagemath-coxeter3
+passagemath-ecl                   @ file://${SAGE_ROOT}/pkgs/sagemath-eclib
 passagemath-eclib                 @ file://${SAGE_ROOT}/pkgs/sagemath-eclib
 passagemath-environment           @ file://${SAGE_ROOT}/pkgs/sagemath-environment
 passagemath-flint                 @ file://${SAGE_ROOT}/pkgs/sagemath-flint
+passagemath-fricas                @ file://${SAGE_ROOT}/pkgs/sagemath-fricas
 passagemath-frobby                @ file://${SAGE_ROOT}/pkgs/sagemath-frobby
 passagemath-gap                   @ file://${SAGE_ROOT}/pkgs/sagemath-gap
 passagemath-gfan                  @ file://${SAGE_ROOT}/pkgs/sagemath-gfan
@@ -50,6 +52,7 @@ passagemath-libecm                @ file://${SAGE_ROOT}/pkgs/sagemath-libecm
 passagemath-linbox                @ file://${SAGE_ROOT}/pkgs/sagemath-linbox
 passagemath-lrslib                @ file://${SAGE_ROOT}/pkgs/sagemath-lrslib
 passagemath-macaulay2             @ file://${SAGE_ROOT}/pkgs/sagemath-macaulay2
+passagemath-maxima                @ file://${SAGE_ROOT}/pkgs/sagemath-maxima
 passagemath-mcqd                  @ file://${SAGE_ROOT}/pkgs/sagemath-mcqd
 passagemath-meataxe               @ file://${SAGE_ROOT}/pkgs/sagemath-meataxe
 passagemath-modules               @ file://${SAGE_ROOT}/pkgs/sagemath-modules
