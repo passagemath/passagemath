@@ -1834,6 +1834,60 @@
 .. |codespace-centos-stream-9-python3.12-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-centos-stream-9-python3.12-maximal%2Fdevcontainer.json
 
+.. |image-centos-stream-10-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-minimal-with-system-packages
+
+.. |image-centos-stream-10-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-minimal-configured
+
+.. |image-centos-stream-10-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-minimal-with-targets-pre
+
+.. |image-centos-stream-10-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-minimal-with-targets
+
+.. |image-centos-stream-10-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-minimal-with-targets-optional
+
+.. |codespace-centos-stream-10-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-centos-stream-10-minimal%2Fdevcontainer.json
+
+.. |image-centos-stream-10-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-standard-with-system-packages
+
+.. |image-centos-stream-10-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-standard-configured
+
+.. |image-centos-stream-10-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-standard-with-targets-pre
+
+.. |image-centos-stream-10-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-standard-with-targets
+
+.. |image-centos-stream-10-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-standard-with-targets-optional
+
+.. |codespace-centos-stream-10-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-centos-stream-10-standard%2Fdevcontainer.json
+
+.. |image-centos-stream-10-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-maximal-with-system-packages
+
+.. |image-centos-stream-10-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-maximal-configured
+
+.. |image-centos-stream-10-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-maximal-with-targets-pre
+
+.. |image-centos-stream-10-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-maximal-with-targets
+
+.. |image-centos-stream-10-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-10-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-10-maximal-with-targets-optional
+
+.. |codespace-centos-stream-10-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-centos-stream-10-maximal%2Fdevcontainer.json
+
 .. |image-almalinux-8-toolset-gcc_9-python3.9-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-8-toolset-gcc_9-python3.9-minimal-with-system-packages
 
@@ -3241,6 +3295,17 @@
      - |codespace-centos-stream-9-python3.12-standard|
    * -    ‑*maximal*
      - |image-centos-stream-9-python3.12-maximal-with-system-packages| |image-centos-stream-9-python3.12-maximal-with-targets-pre|
+     -
+   * - **centos**-stream-10 
+       
+          ‑*minimal*
+     - |image-centos-stream-10-minimal-with-system-packages| |image-centos-stream-10-minimal-with-targets-pre| |image-centos-stream-10-minimal-with-targets| |image-centos-stream-10-minimal-with-targets-optional|
+     - |codespace-centos-stream-10-minimal|
+   * -    ‑*standard*
+     - |image-centos-stream-10-standard-with-system-packages| |image-centos-stream-10-standard-with-targets-pre| |image-centos-stream-10-standard-with-targets| |image-centos-stream-10-standard-with-targets-optional|
+     - |codespace-centos-stream-10-standard|
+   * -    ‑*maximal*
+     - |image-centos-stream-10-maximal-with-system-packages| |image-centos-stream-10-maximal-with-targets-pre|
      -
    * - **almalinux**-8-toolset-gcc_9-python3.9 
        
