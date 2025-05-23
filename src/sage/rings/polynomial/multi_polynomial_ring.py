@@ -393,6 +393,7 @@ class MPolynomialRing_polydict(MPolynomialRing_macaulay2_repr, PolynomialRing_si
         It is possible to convert `f` into `B` by using ``f.sage()``,
         but this requires specifying a ``locals`` argument::
 
+            sage: # needs sage.libs.pari
             sage: f
             d*a
             sage: f.sage()
