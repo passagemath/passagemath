@@ -35,6 +35,7 @@
         "ntests": 98
     },
     "sage.algebras.finite_dimensional_algebras.finite_dimensional_algebra_morphism": {
+        "failed": true,
         "ntests": 59
     },
     "sage.algebras.finite_gca": {
@@ -47,11 +48,9 @@
         "ntests": 59
     },
     "sage.algebras.free_algebra_quotient": {
-        "failed": true,
         "ntests": 76
     },
     "sage.algebras.free_algebra_quotient_element": {
-        "failed": true,
         "ntests": 42
     },
     "sage.algebras.free_zinbiel_algebra": {
@@ -90,7 +89,7 @@
     },
     "sage.algebras.lie_algebras.lie_algebra_element": {
         "failed": true,
-        "ntests": 328
+        "ntests": 321
     },
     "sage.algebras.lie_algebras.morphism": {
         "ntests": 9
@@ -200,14 +199,6 @@
     "sage.algebras.quantum_oscillator": {
         "ntests": 114
     },
-    "sage.algebras.quaternion_algebra": {
-        "failed": true,
-        "ntests": 3
-    },
-    "sage.algebras.quaternion_algebra_element": {
-        "failed": true,
-        "ntests": 10
-    },
     "sage.algebras.rational_cherednik_algebra": {
         "failed": true,
         "ntests": 41
@@ -249,7 +240,7 @@
     },
     "sage.arith.misc": {
         "failed": true,
-        "ntests": 931
+        "ntests": 928
     },
     "sage.arith.numerical_approx": {
         "ntests": 4
@@ -323,8 +314,7 @@
         "ntests": 9
     },
     "sage.categories.algebras": {
-        "failed": true,
-        "ntests": 36
+        "ntests": 31
     },
     "sage.categories.algebras_with_basis": {
         "ntests": 53
@@ -817,7 +807,7 @@
         "ntests": 19
     },
     "sage.categories.number_fields": {
-        "ntests": 41
+        "ntests": 39
     },
     "sage.categories.objects": {
         "ntests": 12
@@ -2361,7 +2351,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2008
+        "ntests": 2004
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
@@ -2771,12 +2761,14 @@
         "ntests": 52
     },
     "sage.modules.fp_graded.free_homspace": {
+        "failed": true,
         "ntests": 8
     },
     "sage.modules.fp_graded.free_module": {
         "ntests": 178
     },
     "sage.modules.fp_graded.free_morphism": {
+        "failed": true,
         "ntests": 54
     },
     "sage.modules.fp_graded.homspace": {
@@ -2889,6 +2881,7 @@
         "ntests": 222
     },
     "sage.modules.with_basis.morphism": {
+        "failed": true,
         "ntests": 353
     },
     "sage.modules.with_basis.subquotient": {
@@ -3066,22 +3059,21 @@
         "ntests": 76
     },
     "sage.repl.ipython_kernel.install": {
-        "failed": true,
         "ntests": 35
     },
     "sage.repl.ipython_kernel.interact": {
         "failed": true,
-        "ntests": 42
+        "ntests": 40
     },
     "sage.repl.ipython_kernel.kernel": {
         "ntests": 12
     },
     "sage.repl.ipython_kernel.widgets": {
-        "ntests": 98
+        "ntests": 96
     },
     "sage.repl.ipython_kernel.widgets_sagenb": {
         "failed": true,
-        "ntests": 77
+        "ntests": 75
     },
     "sage.repl.ipython_tests": {
         "ntests": 26
@@ -3445,11 +3437,10 @@
     },
     "sage.rings.polynomial.polynomial_element": {
         "failed": true,
-        "ntests": 1944
+        "ntests": 1906
     },
     "sage.rings.polynomial.polynomial_element_generic": {
-        "failed": true,
-        "ntests": 204
+        "ntests": 198
     },
     "sage.rings.polynomial.polynomial_quotient_ring": {
         "ntests": 33
@@ -3462,8 +3453,7 @@
         "ntests": 128
     },
     "sage.rings.polynomial.polynomial_ring": {
-        "failed": true,
-        "ntests": 420
+        "ntests": 412
     },
     "sage.rings.polynomial.polynomial_ring_constructor": {
         "failed": true,
@@ -3633,7 +3623,7 @@
     },
     "sage.schemes.generic.morphism": {
         "failed": true,
-        "ntests": 391
+        "ntests": 385
     },
     "sage.schemes.generic.point": {
         "ntests": 35
@@ -3745,13 +3735,13 @@
     },
     "sage.stats.basic_stats": {
         "failed": true,
-        "ntests": 52
+        "ntests": 53
     },
     "sage.stats.distributions.catalog": {
         "ntests": 1
     },
     "sage.stats.distributions.discrete_gaussian_lattice": {
-        "ntests": 115
+        "ntests": 116
     },
     "sage.stats.distributions.discrete_gaussian_polynomial": {
         "ntests": 24
@@ -3953,6 +3943,9 @@
     },
     "sage.tests.book_stein_ent": {
         "ntests": 8
+    },
+    "sage.tests.books.computational-mathematics-with-sagemath.graphtheory_doctest": {
+        "ntests": 1
     },
     "sage.tests.books.judson-abstract-algebra.cyclic-sage": {
         "ntests": 5

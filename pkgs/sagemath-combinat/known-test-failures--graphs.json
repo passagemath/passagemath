@@ -5,6 +5,12 @@
     "sage.algebras.free_algebra": {
         "ntests": 7
     },
+    "sage.algebras.free_algebra_quotient": {
+        "ntests": 1
+    },
+    "sage.algebras.free_algebra_quotient_element": {
+        "ntests": 2
+    },
     "sage.algebras.hecke_algebras.cubic_hecke_algebra": {
         "ntests": 31
     },
@@ -29,7 +35,7 @@
     },
     "sage.arith.misc": {
         "failed": true,
-        "ntests": 921
+        "ntests": 918
     },
     "sage.arith.numerical_approx": {
         "ntests": 1
@@ -333,7 +339,7 @@
         "ntests": 34
     },
     "sage.categories.finite_dimensional_modules_with_basis": {
-        "ntests": 61
+        "ntests": 62
     },
     "sage.categories.finite_dimensional_nilpotent_lie_algebras_with_basis": {
         "ntests": 19
@@ -564,7 +570,7 @@
         "ntests": 19
     },
     "sage.categories.number_fields": {
-        "ntests": 41
+        "ntests": 39
     },
     "sage.categories.objects": {
         "ntests": 12
@@ -1010,13 +1016,12 @@
     },
     "sage.combinat.permutation": {
         "failed": true,
-        "ntests": 1256
+        "ntests": 1252
     },
     "sage.combinat.permutation_cython": {
         "ntests": 39
     },
     "sage.combinat.plane_partition": {
-        "failed": true,
         "ntests": 352
     },
     "sage.combinat.posets.cartesian_product": {
@@ -1036,7 +1041,7 @@
     },
     "sage.combinat.posets.linear_extensions": {
         "failed": true,
-        "ntests": 174
+        "ntests": 169
     },
     "sage.combinat.posets.mobile": {
         "ntests": 36
@@ -1138,7 +1143,6 @@
         "ntests": 289
     },
     "sage.combinat.skew_tableau": {
-        "failed": true,
         "ntests": 372
     },
     "sage.combinat.species.characteristic_species": {
@@ -1232,7 +1236,6 @@
         "ntests": 121
     },
     "sage.combinat.tableau_tuple": {
-        "failed": true,
         "ntests": 658
     },
     "sage.combinat.tamari_lattices": {
@@ -1839,7 +1842,7 @@
         "ntests": 8
     },
     "sage.graphs.graph_generators": {
-        "ntests": 192
+        "ntests": 175
     },
     "sage.graphs.graph_generators_pyx": {
         "ntests": 7
@@ -2346,22 +2349,21 @@
         "ntests": 76
     },
     "sage.repl.ipython_kernel.install": {
-        "failed": true,
         "ntests": 35
     },
     "sage.repl.ipython_kernel.interact": {
-        "ntests": 42
+        "ntests": 40
     },
     "sage.repl.ipython_kernel.kernel": {
         "ntests": 12
     },
     "sage.repl.ipython_kernel.widgets": {
         "failed": true,
-        "ntests": 98
+        "ntests": 96
     },
     "sage.repl.ipython_kernel.widgets_sagenb": {
         "failed": true,
-        "ntests": 77
+        "ntests": 75
     },
     "sage.repl.ipython_tests": {
         "ntests": 26
@@ -2550,7 +2552,7 @@
     },
     "sage.rings.lazy_series": {
         "failed": true,
-        "ntests": 1514
+        "ntests": 1507
     },
     "sage.rings.lazy_series_ring": {
         "failed": true,
@@ -2654,7 +2656,7 @@
     },
     "sage.rings.polynomial.polynomial_element": {
         "failed": true,
-        "ntests": 1845
+        "ntests": 1830
     },
     "sage.rings.polynomial.polynomial_element_generic": {
         "ntests": 194
@@ -2809,7 +2811,7 @@
     },
     "sage.schemes.generic.morphism": {
         "failed": true,
-        "ntests": 387
+        "ntests": 381
     },
     "sage.schemes.generic.point": {
         "ntests": 35
@@ -3050,6 +3052,9 @@
     },
     "sage.tests.book_stein_ent": {
         "ntests": 8
+    },
+    "sage.tests.books.computational-mathematics-with-sagemath.graphtheory_doctest": {
+        "ntests": 1
     },
     "sage.tests.books.computational-mathematics-with-sagemath.sol.graphtheory_doctest": {
         "ntests": 6
