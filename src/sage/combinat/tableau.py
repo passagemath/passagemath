@@ -7292,7 +7292,7 @@ class RowStandardTableaux_all(RowStandardTableaux, DisjointUnionEnumeratedSets):
         TESTS::
 
             sage: ST = RowStandardTableaux()
-            sage: TestSuite(ST).run()                                                   # needs sage.graphs
+            sage: TestSuite(ST).run()                                                   # needs sage.graphs sage.modules
         """
         RowStandardTableaux.__init__(self)
         DisjointUnionEnumeratedSets.__init__(self,
@@ -7317,9 +7317,9 @@ class RowStandardTableaux_size(RowStandardTableaux, DisjointUnionEnumeratedSets)
 
         sage: [t for t in RowStandardTableaux(1)]                                       # needs sage.graphs
         [[[1]]]
-        sage: [t for t in RowStandardTableaux(2)]                                       # needs sage.graphs
+        sage: [t for t in RowStandardTableaux(2)]                                       # needs sage.graphs sage.modules
         [[[1, 2]], [[2], [1]], [[1], [2]]]
-        sage: list(RowStandardTableaux(3))                                              # needs sage.graphs
+        sage: list(RowStandardTableaux(3))                                              # needs sage.graphs sage.modules
         [[[1, 2, 3]],
          [[2, 3], [1]],
          [[1, 2], [3]],
@@ -7356,8 +7356,8 @@ class RowStandardTableaux_size(RowStandardTableaux, DisjointUnionEnumeratedSets)
 
         TESTS::
 
-            sage: TestSuite(RowStandardTableaux(0)).run()                               # needs sage.graphs
-            sage: TestSuite(RowStandardTableaux(3)).run()                               # needs sage.graphs
+            sage: TestSuite(RowStandardTableaux(0)).run()                               # needs sage.graphs sage.modules
+            sage: TestSuite(RowStandardTableaux(3)).run()                               # needs sage.graphs sage.modules
         """
         RowStandardTableaux.__init__(self)
         from sage.combinat.partition import Partitions_n
@@ -7380,10 +7380,10 @@ class RowStandardTableaux_size(RowStandardTableaux, DisjointUnionEnumeratedSets)
         TESTS::
 
             sage: ST3 = RowStandardTableaux(3)
-            sage: all(st in ST3 for st in ST3)                                          # needs sage.graphs
+            sage: all(st in ST3 for st in ST3)                                          # needs sage.graphs sage.modules
             True
             sage: ST4 = RowStandardTableaux(4)
-            sage: [x for x in ST4 if x in ST3]                                          # needs sage.graphs
+            sage: [x for x in ST4 if x in ST3]                                          # needs sage.graphs sage.modules
             []
 
         Check that :issue:`14145` is fixed::
@@ -7426,7 +7426,7 @@ class RowStandardTableaux_shape(RowStandardTableaux):
 
         TESTS::
 
-            sage: TestSuite( RowStandardTableaux([2,1,1]) ).run()                       # needs sage.graphs
+            sage: TestSuite( RowStandardTableaux([2,1,1]) ).run()                       # needs sage.graphs sage.modules
         """
         super().__init__(category=FiniteEnumeratedSets())
         self.shape = p
@@ -7436,9 +7436,9 @@ class RowStandardTableaux_shape(RowStandardTableaux):
         EXAMPLES::
 
             sage: ST = RowStandardTableaux([2,1,1])
-            sage: all(st in ST for st in ST)                                            # needs sage.graphs
+            sage: all(st in ST for st in ST)                                            # needs sage.graphs sage.modules
             True
-            sage: len([x for x in RowStandardTableaux(4) if x in ST])                   # needs sage.graphs
+            sage: len([x for x in RowStandardTableaux(4) if x in ST])                   # needs sage.graphs sage.modules
             12
             sage: ST.cardinality()
             12
@@ -7461,14 +7461,14 @@ class RowStandardTableaux_shape(RowStandardTableaux):
 
         EXAMPLES::
 
-            sage: [t for t in RowStandardTableaux([2,2])]                               # needs sage.graphs
+            sage: [t for t in RowStandardTableaux([2,2])]                               # needs sage.graphs sage.modules
             [[[2, 4], [1, 3]],
              [[3, 4], [1, 2]],
              [[1, 4], [2, 3]],
              [[1, 3], [2, 4]],
              [[1, 2], [3, 4]],
              [[2, 3], [1, 4]]]
-            sage: [t for t in RowStandardTableaux([3,2])]                               # needs sage.graphs
+            sage: [t for t in RowStandardTableaux([3,2])]                               # needs sage.graphs sage.modules
             [[[2, 4, 5], [1, 3]],
              [[3, 4, 5], [1, 2]],
              [[1, 4, 5], [2, 3]],
@@ -7480,7 +7480,7 @@ class RowStandardTableaux_shape(RowStandardTableaux):
              [[2, 3, 4], [1, 5]],
              [[2, 3, 5], [1, 4]]]
             sage: st = RowStandardTableaux([2,1])
-            sage: st[0].parent() is st                                                  # needs sage.graphs
+            sage: st[0].parent() is st                                                  # needs sage.graphs sage.modules
             True
         """
         partial_sums = [sum(self.shape[:i]) for i in range(len(self.shape)+1)]

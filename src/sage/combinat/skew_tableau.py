@@ -2088,7 +2088,7 @@ class StandardSkewTableaux_all(StandardSkewTableaux):
         EXAMPLES::
 
             sage: s = StandardSkewTableaux()
-            sage: TestSuite(s).run()                                                    # needs sage.graphs
+            sage: TestSuite(s).run()                                                    # needs sage.graphs sage.modules
         """
         StandardSkewTableaux.__init__(self, category=InfiniteEnumeratedSets())
 

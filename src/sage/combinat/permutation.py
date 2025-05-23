@@ -5510,7 +5510,7 @@ class Permutation(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: # needs sage.combinat sage.graphs
+            sage: # needs sage.combinat sage.graphs sage.modules
             sage: sigma = Permutations(5).identity()
             sage: list(sigma.nth_roots(3))
             [[1, 4, 3, 5, 2], [1, 5, 3, 2, 4], [1, 2, 4, 5, 3], [1, 2, 5, 3, 4],
@@ -8752,7 +8752,7 @@ class StandardPermutations_recoilsfatter(Permutations):
         TESTS::
 
             sage: P = Permutations(recoils_fatter=[2,2])
-            sage: TestSuite(P).run()                                                    # needs sage.graphs
+            sage: TestSuite(P).run()                                                    # needs sage.graphs sage.modules
         """
         Permutations.__init__(self, category=FiniteEnumeratedSets())
         self.recoils = recoils
@@ -8827,7 +8827,7 @@ class StandardPermutations_recoils(Permutations):
         TESTS::
 
             sage: P = Permutations(recoils=[2,2])
-            sage: TestSuite(P).run()                                                    # needs sage.graphs
+            sage: TestSuite(P).run()                                                    # needs sage.graphs sage.modules
         """
         Permutations.__init__(self, category=FiniteEnumeratedSets())
         self.recoils = recoils
