@@ -2092,6 +2092,7 @@ class FreeModule_generic(Module_free_ambient):
 
         Next we create a subspace::
 
+            sage: # needs sage.libs.pari
             sage: M = FreeModule(QQ, 3, sparse=True)
             sage: V = M.span([ [1,2,3] ] ); V
             Sparse vector space of degree 3 and dimension 1 over Rational Field
@@ -2149,6 +2150,7 @@ class FreeModule_generic(Module_free_ambient):
 
         Next we convert a subspace::
 
+            sage: # needs sage.libs.pari
             sage: M = FreeModule(QQ,3)
             sage: V = M.span([ [1,2,3] ] ); V
             Vector space of degree 3 and dimension 1 over Rational Field
@@ -6807,9 +6809,10 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
         ::
 
-            sage: M = FreeModule(ZZ,8,sparse=True)
-            sage: N = M.submodule_with_basis([ M.gen(i) - M.gen(0) for i in range(1,8) ])
-            sage: N # indirect doctest
+            sage: # needs sage.libs.pari
+            sage: M = FreeModule(ZZ, 8, sparse=True)
+            sage: N = M.submodule_with_basis([M.gen(i) - M.gen(0) for i in range(1,8)])
+            sage: N  # indirect doctest
             Sparse free module of degree 8 and rank 7 over Integer Ring
             User basis matrix:
             [-1  1  0  0  0  0  0  0]
@@ -7037,7 +7040,8 @@ class FreeModule_submodule_with_basis_pid(FreeModule_generic_pid):
 
         We do an example with a sparse vector space::
 
-            sage: V = VectorSpace(QQ,5, sparse=True)
+            sage: # needs sage.libs.pari
+            sage: V = VectorSpace(QQ, 5, sparse=True)
             sage: W = V.subspace_with_basis([[0,1,2,0,0], [0,-1,0,0,-1/2]])
             sage: W.echelonized_basis()
             [(0, 1, 0, 0, 1/2), (0, 0, 1, 0, -1/4)]
@@ -7800,9 +7804,10 @@ class FreeModule_submodule_with_basis_field(FreeModule_generic_field, FreeModule
 
         ::
 
-            sage: VV = VectorSpace(QQ,5,sparse=True)
-            sage: UU = VV.submodule([ VV.gen(i) - VV.gen(0) for i in range(1,5) ])
-            sage: UU # indirect doctest
+            sage: # needs sage.libs.pari
+            sage: VV = VectorSpace(QQ, 5, sparse=True)
+            sage: UU = VV.submodule([VV.gen(i) - VV.gen(0) for i in range(1,5)])
+            sage: UU  # indirect doctest
             Sparse vector space of degree 5 and dimension 4 over Rational Field
             Basis matrix:
             [ 1  0  0  0 -1]
@@ -8001,9 +8006,10 @@ class FreeModule_submodule_field(FreeModule_submodule_with_basis_field):
 
         ::
 
-            sage: VV = VectorSpace(QQ,5,sparse=True)
-            sage: UU = VV.submodule([ VV.gen(i) - VV.gen(0) for i in range(1,5) ])
-            sage: UU # indirect doctest
+            sage: # needs sage.libs.pari
+            sage: VV = VectorSpace(QQ, 5, sparse=True)
+            sage: UU = VV.submodule([VV.gen(i) - VV.gen(0) for i in range(1,5)])
+            sage: UU  # indirect doctest
             Sparse vector space of degree 5 and dimension 4 over Rational Field
             Basis matrix:
             [ 1  0  0  0 -1]
@@ -8136,7 +8142,8 @@ class FreeModule_submodule_field(FreeModule_submodule_with_basis_field):
 
         ::
 
-            sage: V = VectorSpace(QQ,5, sparse=True)
+            sage: # needs sage.libs.pari
+            sage: V = VectorSpace(QQ, 5, sparse=True)
             sage: W = V.subspace([[0,1,2,0,0], [0,-1,0,0,-1/2]])
             sage: W.coordinate_vector([0,0,2,0,-1/2])
             (0, 2)
