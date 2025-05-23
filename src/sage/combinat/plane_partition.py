@@ -2117,7 +2117,7 @@ class PlanePartitions_CSPP(PlanePartitions):
             sage: PP = PlanePartitions([3,3,3], symmetry='CSPP')
             sage: PP.to_poset()                                                         # needs sage.graphs
             Finite poset containing 11 elements
-            sage: PP.to_poset().order_ideals_lattice().cardinality() == PP.cardinality()            # needs sage.graphs
+            sage: PP.to_poset().order_ideals_lattice().cardinality() == PP.cardinality()            # needs sage.graphs sage.modules
             True
         """
         a = self._box[0]

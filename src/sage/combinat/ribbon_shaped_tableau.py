@@ -411,7 +411,7 @@ class StandardRibbonShapedTableaux_shape(StandardRibbonShapedTableaux):
         TESTS::
 
             sage: S = StandardRibbonShapedTableaux([2,2])
-            sage: TestSuite(S).run()                                                    # needs sage.graphs
+            sage: TestSuite(S).run()                                                    # needs sage.graphs sage.modules
         """
         self.shape = shape
         StandardRibbonShapedTableaux.__init__(self, FiniteEnumeratedSets())

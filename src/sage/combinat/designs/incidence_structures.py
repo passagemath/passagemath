@@ -365,11 +365,11 @@ class IncidenceStructure:
             True
             sage: ["Am", "I", "finally", "done ?"] in IS
             False
-            sage: IS = designs.ProjectiveGeometryDesign(3, 1, GF(2),                    # needs sage.combinat
+            sage: IS = designs.ProjectiveGeometryDesign(3, 1, GF(2),                    # needs sage.combinat sage.modules
             ....:                                       point_coordinates=False)
-            sage: [3,8,7] in IS                                                         # needs sage.combinat
+            sage: [3,8,7] in IS                                                         # needs sage.combinat sage.modules
             True
-            sage: [3,8,9] in IS                                                         # needs sage.combinat
+            sage: [3,8,9] in IS                                                         # needs sage.combinat sage.modules
             False
         """
         try:
@@ -1508,10 +1508,10 @@ class IncidenceStructure:
             sage: BD.is_t_design(0,6,3,7) or BD.is_t_design(0,7,4,7) or BD.is_t_design(0,7,3,8)
             False
 
-            sage: BD = designs.AffineGeometryDesign(3, 1, GF(2))                        # needs sage.combinat
-            sage: BD.is_t_design(1)                                                     # needs sage.combinat
+            sage: BD = designs.AffineGeometryDesign(3, 1, GF(2))                        # needs sage.combinat sage.modules
+            sage: BD.is_t_design(1)                                                     # needs sage.combinat sage.modules
             True
-            sage: BD.is_t_design(2)                                                     # needs sage.combinat
+            sage: BD.is_t_design(2)                                                     # needs sage.combinat sage.modules
             True
 
         Steiner triple and quadruple systems are other names for `2-(v,3,1)` and
@@ -1924,8 +1924,8 @@ class IncidenceStructure:
             sage: TD.is_resolvable()
             True
 
-            sage: AG = designs.AffineGeometryDesign(3,1,GF(2))                          # needs sage.combinat
-            sage: AG.is_resolvable()                                                    # needs sage.combinat
+            sage: AG = designs.AffineGeometryDesign(3,1,GF(2))                          # needs sage.combinat sage.modules
+            sage: AG.is_resolvable()                                                    # needs sage.combinat sage.modules
             True
 
         Their classes::

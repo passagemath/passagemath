@@ -3519,9 +3519,9 @@ class RowStandardTableauTuples_shape(RowStandardTableauTuples):
 
         EXAMPLES::
 
-            sage: RowStandardTableauTuples([[2],[2,1]]).an_element()                    # needs sage.graphs
+            sage: RowStandardTableauTuples([[2],[2,1]]).an_element()                    # needs sage.graphs sage.modules
             ([[4, 5]], [[1, 3], [2]])
-            sage: RowStandardTableauTuples([[10],[],[]]).an_element()                   # needs sage.graphs
+            sage: RowStandardTableauTuples([[10],[],[]]).an_element()                   # needs sage.graphs sage.modules
             ([[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [], [])
         """
         c = self.cardinality()

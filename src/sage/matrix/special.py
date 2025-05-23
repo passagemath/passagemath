@@ -3130,7 +3130,7 @@ def random_diagonalizable_matrix(parent, eigenvalues=None, dimensions=None):
         sage: M = random_matrix(K, 3, 3, algorithm="diagonalizable")
         sage: M.parent()
         Full MatrixSpace of 3 by 3 dense matrices over Finite Field of size 3
-        sage: M.is_diagonalizable()
+        sage: M.is_diagonalizable()                                                     # needs sage.libs.pari
         True
         sage: M  # random
         [0 0 1]

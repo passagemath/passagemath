@@ -532,7 +532,7 @@ class LinearExtensionsOfPoset(UniqueRepresentation, Parent):
             True
             sage: L._poset is P
             True
-            sage: TestSuite(L).run()
+            sage: TestSuite(L).run()                                                    # needs sage.modules
 
             sage: P = Poset((divisors(15), attrcall("divides")))
             sage: L = P.linear_extensions()
@@ -732,6 +732,7 @@ class LinearExtensionsOfPoset(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: P = Poset(([1,2,3,4], [[1,3],[1,4],[2,3]]), linear_extension=True)
             sage: L = P.linear_extensions()
             sage: G = L.markov_chain_digraph(); G

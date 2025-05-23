@@ -160,6 +160,8 @@ def _linear_extension_gen(_D, list _le, list _a, list _b, list _is_plus, Py_ssiz
     if i == -1:
         return
 
+    import sage.matrix  # otherwise there will be a lot of "Exception ignored in: 'linear_extension_iterator._linear_extension_right_b'"
+
     for e in _linear_extension_gen(_D, _le, _a, _b, _is_plus, i-1):
         yield e
     mrb = 0
