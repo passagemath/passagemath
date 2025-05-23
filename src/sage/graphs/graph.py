@@ -379,7 +379,7 @@ suitable for inclusion in a `\LaTeX` document.  More details on this are at the
 
     sage: from sage.graphs.graph_latex import check_tkz_graph
     sage: check_tkz_graph()  # random - depends on TeX installation
-    sage: latex(G)
+    sage: latex(G)                                                                      # needs sage.plot
     \begin{tikzpicture}
     ...
     \end{tikzpicture}

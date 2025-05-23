@@ -529,7 +529,7 @@ def _default_engine():
         sage: def crash():
         ....:     raise ValueError
         sage: sage.misc.latex._default_engine = crash
-        sage: latex(matrix.identity(QQ, 2))
+        sage: latex(matrix.identity(QQ, 2))                                             # needs sage.modules
         \left(\begin{array}{rr}
         1 & 0 \\
         0 & 1

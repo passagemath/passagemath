@@ -2746,7 +2746,7 @@ def distance_regular_graph(list arr, existence=False, check=True):
         Graph on 1024 vertices
         sage: graphs.distance_regular_graph([6,5,5,5,1,1,1,6])  # optional - database_graphs
         Generalised octagon of order (1, 5): Graph on 312 vertices
-        sage: graphs.distance_regular_graph([64, 60, 1, 1, 15, 64], check=True)
+        sage: graphs.distance_regular_graph([64, 60, 1, 1, 15, 64], check=True)         # needs sage.libs.gap
         Graph on 325 vertices
     """
     from sage.misc.unknown import Unknown
