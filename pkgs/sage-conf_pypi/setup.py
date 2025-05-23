@@ -130,6 +130,7 @@ class build_py(setuptools_build_py):
             ### ignore more stuff --- .tox etc.
             return [name for name in names
                     if name in ('.tox', '.git', '__pycache__',
+                                'sage-env-config',
                                 'prefix', 'local', 'venv', 'upstream',
                                 'config.status', 'config.log', 'logs')]
 
