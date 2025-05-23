@@ -375,18 +375,18 @@ class MPolynomialRing_polydict(MPolynomialRing_macaulay2_repr, PolynomialRing_si
         Check that conversion from PARI works correctly (see
         :issue:`17974`)::
 
+            sage: # needs sage.libs.pari
             sage: A.<a> = PolynomialRing(QQ)
             sage: B.<d,e> = PolynomialRing(A)
-            sage: f = pari(a*d)                                                         # needs sage.libs.pari
+            sage: f = pari(a*d)
             sage: B(f)
             a*d
-            sage: f = pari(a*d - (a+1)*d*e^3 + a*d^2)                                   # needs sage.libs.pari
+            sage: f = pari(a*d - (a+1)*d*e^3 + a*d^2)
             sage: B(f)
             (-a - 1)*d*e^3 + a*d^2 + a*d
-
             sage: A.<a,b> = PolynomialRing(QQ)
             sage: B.<d,e> = PolynomialRing(A)
-            sage: f = pari(a*d)                                                         # needs sage.libs.pari
+            sage: f = pari(a*d)
             sage: B(f)
             a*d
 
