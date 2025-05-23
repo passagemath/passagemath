@@ -31,7 +31,7 @@ passagemath-categories            @ file://${SAGE_ROOT}/pkgs/sagemath-categories
 passagemath-cddlib                @ file://${SAGE_ROOT}/pkgs/sagemath-cddlib
 passagemath-combinat              @ file://${SAGE_ROOT}/pkgs/sagemath-combinat
 passagemath-coxeter3              @ file://${SAGE_ROOT}/pkgs/sagemath-coxeter3
-passagemath-ecl                   @ file://${SAGE_ROOT}/pkgs/sagemath-eclib
+passagemath-ecl                   @ file://${SAGE_ROOT}/pkgs/sagemath-ecl
 passagemath-eclib                 @ file://${SAGE_ROOT}/pkgs/sagemath-eclib
 passagemath-environment           @ file://${SAGE_ROOT}/pkgs/sagemath-environment
 passagemath-flint                 @ file://${SAGE_ROOT}/pkgs/sagemath-flint
