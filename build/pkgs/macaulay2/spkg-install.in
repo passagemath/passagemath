@@ -21,6 +21,7 @@ export Factory_DIR=$SAGE_LOCAL
 cd M2/BUILD/build
 sdh_cmake -GNinja -S../.. -B. \
       -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_PREFIX_PATH="$SAGE_LOCAL" \
       -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
       -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
       $BUILD_OPTIONS
