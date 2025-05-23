@@ -1243,19 +1243,6 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except AttributeError:
                 return NotImplemented
 
-            @functools.wraps(matrix.is_complement_totally_unimodular)
-            def is_complement_totally_unimodular(*, certificate=False, **kwds):
-                if not certificate:
-                    return matrix.is_complement_totally_unimodular(**kwds)
-                column_keys = self.domain().basis().keys()
-                row_keys = self.codomain().basis().keys()
-                return matrix.is_complement_totally_unimodular(certificate=True,
-                                                    column_keys=column_keys,
-                                                    row_keys=row_keys,
-                                                    **kwds)
-
-            return is_complement_totally_unimodular
-
     class Homsets(HomsetsCategory):
 
         class Endset(CategoryWithAxiom):
