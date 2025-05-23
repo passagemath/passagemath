@@ -440,7 +440,7 @@ Now install the packages from the wheelhouse:
 
 Next, install the [![PyPI: passagemath-setup](https://img.shields.io/pypi/v/passagemath-setup.svg?label=passagemath-setup)](https://pypi.python.org/pypi/passagemath-setup) package:
 
-    (passagemath-venv) $ python3 -m pip install passagemath-setup
+    (passagemath-venv) $ python3 -m pip install "passagemath-setup[autogen]"
 
 Finally, install the Sage library from the package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard):
 
