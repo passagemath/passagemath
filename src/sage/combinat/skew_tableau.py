@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Skew Tableaux
+Skew tableaux
 
 AUTHORS:
 

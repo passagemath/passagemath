@@ -1,10 +1,10 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Composition Tableaux
+Composition tableaux
 
 AUTHORS:
 
-- Chris Berg, Jeff Ferreira (2012-9): Initial version
+- Chris Berg, Jeff Ferreira (2012-9): initial version
 """
 from sage.sets.disjoint_union_enumerated_sets import DisjointUnionEnumeratedSets
 from sage.sets.non_negative_integers import NonNegativeIntegers

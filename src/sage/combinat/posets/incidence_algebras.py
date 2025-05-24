@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.modules
 r"""
-Incidence Algebras
+Incidence algebras
 """
 # ****************************************************************************
 #       Copyright (C) 2014 Travis Scrimshaw <tscrim at ucdavis.edu>

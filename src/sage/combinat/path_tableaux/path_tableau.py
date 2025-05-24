@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Path Tableaux
+Path tableaux
 
 This is an abstract base class for using local rules to construct
 rectification and the action of the cactus group [Wes2017]_.

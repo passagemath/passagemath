@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
-Macdonald Polynomials
+Macdonald polynomials
 
 Notation used in the definitions follows mainly [Mac1995]_.
 

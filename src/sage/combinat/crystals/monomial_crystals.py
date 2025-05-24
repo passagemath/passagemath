@@ -1,13 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
-Crystals of Modified Nakajima Monomials
-
-AUTHORS:
-
-- Arthur Lubovsky: Initial version
-
-- Ben Salisbury: Initial version
+Crystals of modified Nakajima monomials
 
 Let `Y_{i,k}`, for `i \in I` and `k \in \ZZ`, be a commuting set of
 variables, and let `\boldsymbol{1}` be a new variable which commutes with
@@ -75,6 +69,11 @@ WARNING:
     `C = (c_{ij})_{i\neq j}` satisfying the condition `c_{ij}+c_{ji}=1`.
     We have chosen such integers uniformly such that `c_{ij} = 1` if
     `i < j` and `c_{ij} = 0` if `i>j`.
+
+AUTHORS:
+
+- Arthur Lubovsky: initial version
+- Ben Salisbury: initial version
 """
 
 # *****************************************************************************

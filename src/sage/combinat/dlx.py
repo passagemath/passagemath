@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-categories
 """
-Exact Cover Problem via Dancing Links
+Exact cover problem via dancing links
 """
 # dlx.py
 # Copyright (c) 2006,2008 Antti Ajanki <antti.ajanki@iki.fi>

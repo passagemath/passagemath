@@ -1,8 +1,8 @@
 # sage_setup: distribution = sagemath-combinat
 """
-Characteristic Species
+Characteristic species
 """
-#*****************************************************************************
+# ****************************************************************************
 #       Copyright (C) 2008 Mike Hansen <mhansen@gmail.com>,
 #
 #  Distributed under the terms of the GNU General Public License (GPL)
@@ -15,7 +15,7 @@ Characteristic Species
 #  The full text of the GPL is available at:
 #
 #                  http://www.gnu.org/licenses/
-#*****************************************************************************
+# ****************************************************************************
 
 from .species import GenericCombinatorialSpecies
 from sage.arith.misc import factorial

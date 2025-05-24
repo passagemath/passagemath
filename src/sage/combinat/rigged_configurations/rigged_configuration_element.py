@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
-Rigged Configuration Elements
+Rigged configuration elements
 
 A rigged configuration element is a sequence of
 :class:`~sage.combinat.rigged_configurations.rigged_partition.RiggedPartition`
@@ -9,8 +9,8 @@ objects.
 
 AUTHORS:
 
-- Travis Scrimshaw (2010-09-26): Initial version
-- Travis Scrimshaw (2012-10-25): Added virtual rigged configurations
+- Travis Scrimshaw (2010-09-26): initial version
+- Travis Scrimshaw (2012-10-25): added virtual rigged configurations
 """
 
 # ****************************************************************************

@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-singular
 """
-Fusion Rings
+Fusion rings
 """
 # ****************************************************************************
 #  Copyright (C) 2019 Daniel Bump <bump at match.stanford.edu>

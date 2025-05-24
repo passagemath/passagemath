@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-categories
 """
-Weighted Integer Vectors
+Weighted integer vectors
 
 AUTHORS:
 

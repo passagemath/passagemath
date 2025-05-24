@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.graphs
 """
-Coxeter Groups
+Coxeter groups
 """
 # ***************************************************************************
 #       Copyright (C) 2010 Nicolas Thiery <nthiery at users.sf.net>

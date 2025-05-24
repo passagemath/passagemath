@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Dyck Words
+Dyck words
 
 A class of an object enumerated by the
 :func:`Catalan numbers<sage.combinat.combinat.catalan_number>`,

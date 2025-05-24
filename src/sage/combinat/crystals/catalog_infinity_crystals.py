@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Catalog Of Crystal Models For `B(\infty)`
+Catalog of crystal models For `B(\infty)`
 
 We currently have the following models:
 

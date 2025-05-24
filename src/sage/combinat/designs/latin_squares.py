@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.modules
 r"""
-Mutually Orthogonal Latin Squares (MOLS)
+Mutually orthogonal Latin squares (MOLS)
 
 The main function of this module is :func:`mutually_orthogonal_latin_squares`
 and can be can be used to generate MOLS (or check that they exist)::

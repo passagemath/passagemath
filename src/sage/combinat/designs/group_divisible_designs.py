@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.rings.finite_rings
 r"""
-Group-Divisible Designs (GDD)
+Group-divisible designs (GDD)
 
 This module gathers everything related to Group-Divisible Designs. The
 constructions defined here can be accessed through ``designs.<tab>``::

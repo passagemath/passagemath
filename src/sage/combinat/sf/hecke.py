@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
-Hecke Character Basis
+Hecke character basis
 
 The basis of symmetric functions given by characters of the
 Hecke algebra (of type `A`).

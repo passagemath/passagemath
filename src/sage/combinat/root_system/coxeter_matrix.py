@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.graphs
 """
-Coxeter Matrices
+Coxeter matrices
 """
 # ****************************************************************************
 #       Copyright (C) 2007 Mike Hansen <mhansen@gmail.com>,

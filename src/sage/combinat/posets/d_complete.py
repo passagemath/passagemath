@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.combinat sage.modules
 r"""
-D-Complete Posets
+D-complete posets
 
 AUTHORS:
 

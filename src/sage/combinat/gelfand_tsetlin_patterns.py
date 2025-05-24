@@ -1,10 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Gelfand-Tsetlin Patterns
-
-AUTHORS:
-
-- Travis Scrimshaw (2013-15-03): Initial version
+Gelfand-Tsetlin patterns
 
 REFERENCES:
 
@@ -20,6 +16,10 @@ REFERENCES:
    A Generating Function of Strict Gelfand Patterns and Some Formulas on
    Characters of General Linear Groups.
    J. Math. Soc. Japan **40** (4), pp. 671--685, 1988.
+
+AUTHORS:
+
+- Travis Scrimshaw (2013-15-03): initial version
 """
 # ****************************************************************************
 #       Copyright (C) 2013 Travis Scrimshaw <tscrim@ucdavis.edu>

@@ -1,13 +1,12 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
-Star-Crystal Structure On `B(\infty)`
+Star-crystal structure on `B(\infty)`
 
 AUTHORS:
 
-- Ben Salisbury: Initial version
-
-- Travis Scrimshaw: Initial version
+- Ben Salisbury: initial version
+- Travis Scrimshaw: initial version
 """
 
 #*****************************************************************************

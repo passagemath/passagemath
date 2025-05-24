@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Colored Permutations
+Colored permutations
 
 .. TODO::
 

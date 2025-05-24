@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Brent Yorgey's fast algorithm for integer vector (multiset) partitions.
+Brent Yorgey's fast algorithm for integer vector (multiset) partitions
 
 ALGORITHM:
 

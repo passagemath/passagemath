@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 """
-Catalog Of Crystal Models For Kirillov-Reshetikhin Crystals
+Catalog of crystal models for Kirillov-Reshetikhin crystals
 
 We currently have the following models:
 

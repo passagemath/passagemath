@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Parking Functions
+Parking functions
 
 INFORMALLY (reference [Beck]_):
 

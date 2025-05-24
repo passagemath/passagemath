@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs sage.modules
 """
-Tensor Products of Crystals
+Tensor products of crystals
 
 Main entry points:
 
@@ -10,11 +10,11 @@ Main entry points:
 
 AUTHORS:
 
-- Anne Schilling, Nicolas Thiery (2007): Initial version
-- Ben Salisbury, Travis Scrimshaw (2013): Refactored tensor products to handle
+- Anne Schilling, Nicolas Thiery (2007): initial version
+- Ben Salisbury, Travis Scrimshaw (2013): refactored tensor products to handle
   non-regular crystals and created new subclass to take advantage of
   the regularity
-- Travis Scrimshaw (2020): Added queer crystal
+- Travis Scrimshaw (2020): added queer crystal
 """
 #*****************************************************************************
 #       Copyright (C) 2007 Anne Schilling <anne at math.ucdavis.edu>

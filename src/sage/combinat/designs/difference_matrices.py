@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-graphs
 # sage.doctest: needs sage.rings.finite_rings
 r"""
-Difference Matrices
+Difference matrices
 
 This module gathers code related to difference matrices. One can build those
 objects (or know if they can be built) with :func:`difference_matrix`::

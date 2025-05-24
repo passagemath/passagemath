@@ -1,8 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
-Schubert Polynomials
-
+Schubert polynomials
 
 See :wikipedia:`Schubert_polynomial` and
 `SymmetricFunctions.com <https://www.symmetricfunctions.com/schubert.htm#schubert>`_.

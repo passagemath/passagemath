@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
-Jack Symmetric Functions
+Jack symmetric functions
 
 Jack's symmetric functions appear in [Ma1995]_ Chapter VI, section 10.
 Zonal polynomials are the subject of [Ma1995]_ Chapter VII.

@@ -1,9 +1,9 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 """
-Non-Commutative Symmetric Functions
+Noncommutative symmetric functions
 """
-#*****************************************************************************
+# ****************************************************************************
 #       Copyright (C) 2009 Nicolas M. Thiery <nthiery at users.sf.net>,
 #                     2012 Franco Saliola <saliola@gmail.com>,
 #                     2012 Chris Berg <chrisjamesberg@gmail.com>
@@ -18,12 +18,9 @@ Non-Commutative Symmetric Functions
 #  The full text of the GPL is available at:
 #
 #                  http://www.gnu.org/licenses/
-#*****************************************************************************
+# ****************************************************************************
 
-########################################
-# TODO:
-# 1. Make Coercion run faster between multiple bases.
-########################################
+# TODO: Make Coercion run faster between multiple bases
 
 from sage.misc.bindable_class import BindableClass
 from sage.misc.cachefunc import cached_method

@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
-Kostka-Foulkes Polynomials
+Kostka-Foulkes polynomials
 
 Based on the algorithms in John Stembridge's SF package for Maple
 which can be found at http://www.math.lsa.umich.edu/~jrs/maple.html

@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Introduction to combinatorics in Sage
+Combinatorics in Sage
 
 This thematic tutorial is a translation by Hugh Thomas of the
 combinatorics chapter written by Nicolas M. Thiéry in the book "Calcul
@@ -17,8 +17,6 @@ of elements in a finite field), or in the analysis of
 algorithms. Combinatorics covers a much wider domain (partial orders,
 representation theory, …) for which we only give a few pointers
 towards the possibilities offered by ``Sage``.
-
-.. TODO:: Add link to some thematic tutorial on graphs
 
 A characteristic of computational combinatorics is the profusion of
 types of objects and sets that one wants to manipulate. It would be
@@ -1842,9 +1840,10 @@ etc. This can be applied to generate:
 
 REFERENCES:
 
-   .. [CMS2012] Alexandre Casamayou, Nathann Cohen, Guillaume Connan, Thierry Dumont, Laurent Fousse, François Maltey, Matthias Meulien, Marc Mezzarobba, Clément Pernet, Nicolas M. Thiéry, Paul Zimmermann
-         *Calcul Mathématique avec Sage*
-         https://www.sagemath.org/sagebook/french.html
+.. [CMS2012] Alexandre Casamayou, Nathann Cohen, Guillaume Connan, Thierry
+   Dumont, Laurent Fousse, François Maltey, Matthias Meulien, Marc Mezzarobba,
+   Clément Pernet, Nicolas M. Thiéry, Paul Zimmermann *Calcul Mathématique avec
+   Sage* https://www.sagemath.org/sagebook/french.html
 
 .. [1]
    Or at least that should be the case; there are still many corners to

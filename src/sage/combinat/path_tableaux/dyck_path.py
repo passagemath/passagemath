@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Dyck Paths
+Dyck paths
 
 This is an implementation of the abstract base class
 :class:`sage.combinat.path_tableaux.path_tableau.PathTableau`.
