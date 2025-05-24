@@ -1,13 +1,12 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Super Tableaux
+Super tableaux
 
 AUTHORS:
 
 - Matthew Lancellotti (2007): initial version
-
-- Chaman Agrawal (2019-07-23): Modify standard and semistandard tableaux for
-  super tableaux.
+- Chaman Agrawal (2019-07-23): modify standard and semistandard tableaux for
+  super tableaux
 """
 
 # ****************************************************************************

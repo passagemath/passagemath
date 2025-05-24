@@ -1,11 +1,11 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs age.modules
 r"""
-Free Dendriform Algebras
+Free dendriform algebras
 
 AUTHORS:
 
-Frédéric Chapoton (2017)
+- Frédéric Chapoton (2017)
 """
 # ****************************************************************************
 #       Copyright (C) 2010-2015 Frédéric Chapoton <chapoton@unistra.fr>,

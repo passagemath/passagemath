@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
-Rigged Partitions
+Rigged partitions
 
 Class and methods of the rigged partition which are used by the rigged
 configuration class. This is an internal class used by the rigged
@@ -16,13 +16,13 @@ The data for the vacancy number is also stored in a 1-dim array which each
 entry corresponds to the row of the tableau, and similarly for the
 partition values.
 
-AUTHORS:
-
-- Travis Scrimshaw (2010-09-26): Initial version
-
 .. TODO::
 
     Convert this to using multiplicities `m_i` (perhaps with a dictionary?)?
+
+AUTHORS:
+
+- Travis Scrimshaw (2010-09-26): initial version
 """
 
 #*****************************************************************************

@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Knutson-Tao Puzzles
+Knutson-Tao puzzles
 
 This module implements a generic algorithm to solve Knutson-Tao puzzles. An
 instance of this class will be callable: the arguments are the labels of
@@ -10,8 +10,9 @@ of the fillings of the puzzle with the specified pieces.
 Acknowledgements
 ----------------
 
-This code was written during Sage Days 45 at ICERM with Franco Saliola, Anne Schilling, and Avinash Dalal in discussions with Allen Knutson.
-The code was tested afterwards by Liz Beazley and Ed Richmond.
+This code was written during Sage Days 45 at ICERM with Franco Saliola, Anne
+Schilling, and Avinash Dalal in discussions with Allen Knutson.  The code was
+tested afterwards by Liz Beazley and Ed Richmond.
 
 .. TODO::
 

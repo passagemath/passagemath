@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-categories
 r"""
-`q`-Analogues
+`q`-analogues
 """
 
 # ****************************************************************************

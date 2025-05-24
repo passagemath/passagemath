@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-combinat
 r"""
-Non-commutative symmetric functions and quasi-symmetric functions
+Noncommutative symmetric functions and quasi-symmetric functions
 
 - :ref:`sage.combinat.ncsf_qsym.tutorial`
 

@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
-Elementary Crystals
+Elementary crystals
 
 Let `\lambda` be a weight. The crystals `T_{\lambda}`, `R_{\lambda}`, `B_i`,
 and `C` are important objects in the tensor category of crystals.

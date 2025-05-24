@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 r"""
-Introduction to Quasisymmetric Functions
+Introduction to quasisymmetric functions
 
 In this document we briefly explain the quasisymmetric function bases and
 related functionality in Sage.   We assume the reader is familiar with the

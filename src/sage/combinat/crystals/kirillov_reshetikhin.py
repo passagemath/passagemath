@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
-Kirillov-Reshetikhin Crystals
+Kirillov-Reshetikhin crystals
 """
 
 # ****************************************************************************
