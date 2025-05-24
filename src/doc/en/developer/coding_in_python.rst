@@ -40,18 +40,18 @@ using one of two mechanisms:
 
   - `importlib_metadata <../reference/spkg/importlib_metadata>`_
     (to be used in place of ``importlib.metadata`` when Python older
-    than 3.11 is in use if you need a newer feature),
+    than 3.13 is in use if you need a newer feature),
   - `importlib_resources <../reference/spkg/importlib_resources>`_
     (to be used in place of ``importlib.resources`` when Python older than
-    3.11 is in use if you need a newer feature),
+    3.13 is in use if you need a newer feature),
   - `typing_extensions <../reference/spkg/typing_extensions>`_
     (to be used in place of ``typing`` when Python older than
-    3.11 is in use and any of the features introduced after Python
+    3.13 is in use and any of the features introduced after Python
     3.9.0 are used).
 
   The Sage library declares these backport packages as conditional
-  dependencies for use with Python older than 3.12 and ensures that
-  versions of the packages that provide features of Python 3.12
+  dependencies for use with Python older than 3.13 and ensures that
+  versions of the packages that provide features of Python 3.13
   are available.
 
   The backport packages should not be imported unconditionally.
@@ -64,8 +64,8 @@ using one of two mechanisms:
 
         import sys
 
-        if sys.version_info < (3, 11):
-            # Use backport package providing Python 3.11 features
+        if sys.version_info < (3, 13):
+            # Use backport package providing Python 3.13 features
             from importlib_resources import files
         else:
             from importlib.resources import files
