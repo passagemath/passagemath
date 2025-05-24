@@ -14,9 +14,9 @@ Python language standard
 
 Sage library code needs to be compatible with all versions of Python
 that Sage supports.  The information regarding the supported versions
-can be found in the files ``build/pkgs/python3/spkg-configure.m4``
-(for the Sage distribution), ``src/pyproject.toml`` (for the Sage
-library), and ``m4/pyproject_toml_metadata.m4`` (for most other
+can be found in the files :sage_root:`build/pkgs/python3/spkg-configure.m4`
+(for the Sage distribution), :sage_root:`src/pyproject.toml` (for the Sage
+library), and :sage_root:`m4/pyproject_toml_metadata.m4` (for most other
 distribution packages in ``pkgs/``).
 
 Python 3.9 is the oldest supported version.  Hence,
