@@ -33,11 +33,11 @@ dependencies = [
     'cython >=3.0, != 3.0.3, <4.0',
     'gmpy2 ~=2.1.b999',
     # According to https://pypi.org/project/importlib-metadata/,
-    # 4.13 provides the features of Python 3.11 importlib.metadata
-    'importlib_metadata >=4.13; python_version<"3.11"',
+    # 6.5 provides the features of Python 3.12 importlib.metadata
+    'importlib_metadata >=6.5; python_version<"3.12"',
     # According to https://pypi.org/project/importlib-resources/,
-    # version 5.7 provides the features of Python 3.11 importlib.resources
-    'importlib_resources >= 5.7; python_version<"3.11"',
+    # version 5.7 provides the features of Python 3.12 importlib.resources
+    'importlib_resources >= 5.12; python_version<"3.12"',
     'lrcalc ~=2.1',
     'memory_allocator',
     'numpy >=1.19',
@@ -47,8 +47,8 @@ dependencies = [
     'primecountpy',
     'requests >=2.13.0',
     # According to https://github.com/python/typing_extensions/blob/main/CHANGELOG.md,
-    # version 4.4.0 adds another Python 3.11 typing backport
-    'typing_extensions >= 4.4.0; python_version<"3.11"',
+    # version 4.7.0 adds another Python 3.12 typing backport
+    'typing_extensions >= 4.7.0; python_version<"3.12"',
     # From Makefile.in: SAGERUNTIME
     'ipython >=7.13.0',
     'pexpect >=4.8.0',
