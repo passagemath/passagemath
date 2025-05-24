@@ -1508,6 +1508,7 @@ class AlgebraicScheme_subscheme_projective_field(AlgebraicScheme_subscheme_proje
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: P3.<x0,x1,x2,x3> = ProjectiveSpace(QQ, 3)
             sage: X = P3.subscheme(x0^3 + x1^3 + x2^3 + x3^3)
             sage: S = X.coordinate_ring()
@@ -1532,6 +1533,7 @@ class AlgebraicScheme_subscheme_projective_field(AlgebraicScheme_subscheme_proje
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: P3.<x0,x1,x2,x3> = ProjectiveSpace(QQ, 3)
             sage: X = P3.subscheme(x0^3 + x1^3 + x2^3 + x3^3)
             sage: X.structure_sheaf()
@@ -1555,6 +1557,7 @@ class AlgebraicScheme_subscheme_projective_field(AlgebraicScheme_subscheme_proje
         This is an example of a curve whose geometric genus is smaller than
         arithmetic genus due to a singular point::
 
+            sage: # needs sage.schemes
             sage: A2.<x,y> = AffineSpace(QQ,2)
             sage: C = Curve(x^4 - 5*x^2 - y^2 + 4, A2)
             sage: X = C.projective_closure()

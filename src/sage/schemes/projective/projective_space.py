@@ -2275,6 +2275,7 @@ class ProjectiveSpace_field(ProjectiveSpace_ring):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: P2 = ProjectiveSpace(QQ, 2, 'x')
             sage: S = P2.coordinate_ring()
             sage: SS = FreeModule(S, 2)
@@ -2298,7 +2299,7 @@ class ProjectiveSpace_field(ProjectiveSpace_ring):
         EXAMPLES::
 
             sage: P3.<x0,x1,x2,x3> = ProjectiveSpace(QQ, 3)
-            sage: P3.structure_sheaf()
+            sage: P3.structure_sheaf()                                                  # needs sage.modules
             Coherent sheaf on Projective Space of dimension 3 over Rational Field
         """
         M = FreeModule(self.coordinate_ring(), rank=1)
@@ -2322,7 +2323,7 @@ class ProjectiveSpace_field(ProjectiveSpace_ring):
             sage: P2 = ProjectiveSpace(QQ, 2)
             sage: P2.arithmetic_genus()
             0
-            sage: P2.structure_sheaf().euler_characteristic() - 1
+            sage: P2.structure_sheaf().euler_characteristic() - 1                       # needs sage.modules
             0
         """
         return 0
