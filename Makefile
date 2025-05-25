@@ -34,11 +34,13 @@ SAGE_ROOT_LOGS = logs
 # See https://github.com/sagemath/sage/issues/24617
 
 # Defer unknown targets to build/make/Makefile
+# $@ is deliberately not quoted - this allows sequences of target groups
+# such as: make V=0 build "V=1 normaliz pynormaliz"
 %::
 	@if [ -x relocate-once.py ]; then ./relocate-once.py; fi
 	$(MAKE) build/make/Makefile --stop
 	+build/bin/sage-logger \
-		"cd build/make && ./install '$@'" logs/install.log
+		"cd build/make && ./install $@" logs/install.log
 
 # CONFIG_FILES lists all files that appear in AC_CONFIG_FILES in configure.ac;
 # except for build/make/Makefile-auto, which is unused by the build system
