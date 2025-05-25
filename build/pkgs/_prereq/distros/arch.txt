@@ -19,3 +19,5 @@ gcc
 flex
 # Needed for 4ti2:
 which
+# Needed for macaulay2:
+bison
