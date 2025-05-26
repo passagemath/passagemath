@@ -184,6 +184,9 @@ bootstrap-clean:
 maintainer-clean: distclean bootstrap-clean
 	rm -rf upstream
 
+tox-clean:
+	rm -rf .tox pkgs/*/.tox src/.tox
+
 # Remove everything that is not necessary to run Sage and pass all its
 # doctests.
 micro_release:
