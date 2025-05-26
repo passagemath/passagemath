@@ -20,6 +20,7 @@ export Factory_DIR=$SAGE_LOCAL
 # https://github.com/Macaulay2/M2/wiki/Building-M2-from-source-using-CMake
 cd M2/BUILD/build
 sdh_cmake -GNinja -S../.. -B. \
+      -DBUILD_SHARED_LIBS=ON \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_PREFIX_PATH="$SAGE_LOCAL" \
       -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
