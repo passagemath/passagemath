@@ -24,7 +24,7 @@ SAGE_SPKG_CONFIGURE([python3], [
       dnl Check if we can do venv with a system python3
       dnl instead of building our own copy.
       dnl  Issue #31160: We no longer check for readline here.
-      check_modules="sqlite3, ctypes, math, hashlib, socket, zlib, ssl, ensurepip"
+      check_modules="sqlite3, ctypes, math, hashlib, socket, zlib, ssl, ensurepip, _posixsubprocess"
       AC_CACHE_CHECK([for python3 >= ]MIN_VERSION[, < ]LT_VERSION[ with modules $check_modules and setuptools/distutils], [ac_cv_path_PYTHON3], [
         AS_IF([test x"$ac_path_PYTHON3" != x], [dnl checking explicitly specified $with_python
            AC_MSG_RESULT([])
