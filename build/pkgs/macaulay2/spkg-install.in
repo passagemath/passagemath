@@ -25,5 +25,9 @@ sdh_cmake -GNinja -S../.. -B. \
       -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
       -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
       $BUILD_OPTIONS
-cmake --build . --target $SAGE_MACAULAY2_TARGETS M2-core M2-emacs
+if [ -n "$SAGE_MACAULAY2_TARGETS" ]; then
+   # "Note that this target must be built separately, before proceeding to M2-binary."
+   cmake --build . --target $SAGE_MACAULAY2_TARGETS
+fi
+cmake --build . --target M2-core M2-emacs
 cmake --install .
