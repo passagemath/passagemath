@@ -1,4 +1,7 @@
 cd src
+# FTBFS on alpine, voidlinux-musl: 'mallopt' was not declared in this scope
+# https://github.com/uxlfoundation/oneTBB/issues/1740
+sed -i.bak '/REQUIRE.*mallopt/d' test/tbbmalloc/test_malloc_overload.cpp
 mkdir build
 cd build
 # TBB_ENABLE_IPO=OFF is a workaround for https://github.com/passagemath/passagemath/issues/509
