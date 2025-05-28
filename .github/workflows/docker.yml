@@ -25,6 +25,7 @@ on:
            "ubuntu-noble",
            "ubuntu-oracular",
            "ubuntu-plucky",
+           "ubuntu-questing",
            "debian-bullseye",
            "debian-bookworm",
            "debian-trixie",

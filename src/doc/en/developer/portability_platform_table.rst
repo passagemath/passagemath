@@ -376,6 +376,60 @@
 .. |codespace-ubuntu-plucky-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-plucky-maximal%2Fdevcontainer.json
 
+.. |image-ubuntu-questing-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-minimal-with-system-packages
+
+.. |image-ubuntu-questing-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-minimal-configured
+
+.. |image-ubuntu-questing-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-minimal-with-targets-pre
+
+.. |image-ubuntu-questing-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-minimal-with-targets
+
+.. |image-ubuntu-questing-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-minimal-with-targets-optional
+
+.. |codespace-ubuntu-questing-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-questing-minimal%2Fdevcontainer.json
+
+.. |image-ubuntu-questing-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-standard-with-system-packages
+
+.. |image-ubuntu-questing-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-standard-configured
+
+.. |image-ubuntu-questing-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-standard-with-targets-pre
+
+.. |image-ubuntu-questing-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-standard-with-targets
+
+.. |image-ubuntu-questing-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-standard-with-targets-optional
+
+.. |codespace-ubuntu-questing-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-questing-standard%2Fdevcontainer.json
+
+.. |image-ubuntu-questing-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-maximal-with-system-packages
+
+.. |image-ubuntu-questing-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-maximal-configured
+
+.. |image-ubuntu-questing-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-maximal-with-targets-pre
+
+.. |image-ubuntu-questing-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-maximal-with-targets
+
+.. |image-ubuntu-questing-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-questing-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-questing-maximal-with-targets-optional
+
+.. |codespace-ubuntu-questing-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-questing-maximal%2Fdevcontainer.json
+
 .. |image-debian-bullseye-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages
 
@@ -2998,6 +3052,17 @@
      - |codespace-ubuntu-plucky-standard|
    * -    ‑*maximal*
      - |image-ubuntu-plucky-maximal-with-system-packages| |image-ubuntu-plucky-maximal-with-targets-pre|
+     -
+   * - **ubuntu**-questing 
+       
+          ‑*minimal*
+     - |image-ubuntu-questing-minimal-with-system-packages| |image-ubuntu-questing-minimal-with-targets-pre| |image-ubuntu-questing-minimal-with-targets| |image-ubuntu-questing-minimal-with-targets-optional|
+     - |codespace-ubuntu-questing-minimal|
+   * -    ‑*standard*
+     - |image-ubuntu-questing-standard-with-system-packages| |image-ubuntu-questing-standard-with-targets-pre| |image-ubuntu-questing-standard-with-targets| |image-ubuntu-questing-standard-with-targets-optional|
+     - |codespace-ubuntu-questing-standard|
+   * -    ‑*maximal*
+     - |image-ubuntu-questing-maximal-with-system-packages| |image-ubuntu-questing-maximal-with-targets-pre|
      -
    * - **debian**-bullseye 
        
