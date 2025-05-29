@@ -1,4 +1,4 @@
- zeromq | $(PYTHON_TOOLCHAIN) scikit_build_core packaging cython cmake ninja $(PYTHON)
+ zeromq | $(PYTHON_TOOLCHAIN) scikit_build_core packaging cython cmake ninja_build $(PYTHON)
 
 ----------
 All lines of this file are ignored except the first.
