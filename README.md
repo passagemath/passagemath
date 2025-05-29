@@ -65,6 +65,7 @@ Build these wheels from source using [![PyPI: passagemath-conf](https://img.shie
     (passagemath-venv) $ export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python memory_allocator pplpy primecountpy"
     (passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
     (passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
+    (passagemath-venv) $ export PIP_PREFER_BINARY=1
 
 Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
 
@@ -434,9 +435,10 @@ for example by:
     (passagemath-venv) $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
     (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
 
-Now install the packages from the wheelhouse:
+Now arrange for the packages from the wheelhouse to be picked up:
 
-    (passagemath-venv) $ python3 -m pip install $(sage-config SAGE_SPKG_WHEELS)/*.whl
+    (passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
+    (passagemath-venv) $ export PIP_PREFER_BINARY=1
 
 Next, install the [![PyPI: passagemath-setup](https://img.shields.io/pypi/v/passagemath-setup.svg?label=passagemath-setup)](https://pypi.python.org/pypi/passagemath-setup) package:
 
