@@ -11,8 +11,12 @@ SAGE_SPKG_CONFIGURE([cmake], [dnl
                     | $SED -n -e 's/cmake version *\([[0-9]]*\.[[0-9]]*\.[[0-9]]*\)/\1/p'`
                 AS_IF([test -n "$cmake_version"], [dnl
                     AX_COMPARE_VERSION([$cmake_version], [ge], CMAKE_MIN_VERSION, [dnl
-                        ac_cv_path_CMAKE="$ac_path_CMAKE"
-                        ac_path_CMAKE_found=:
+                        dnl https://github.com/Macaulay2/M2/issues/3855
+                        dnl https://gitlab.kitware.com/cmake/cmake/-/issues/26824
+                        AX_COMPARE_VERSION([$cmake_version], [ne], [4.0.0], [dnl
+                            ac_cv_path_CMAKE="$ac_path_CMAKE"
+                            ac_path_CMAKE_found=:
+                        ])
                     ])
                 ])
             ])
