@@ -120,9 +120,6 @@ for more information.
    * - :ref:`CVXpy <spkg_cvxpy>`
      - ``:class:`~cvxpy.atoms.log_det.log_det```
      - :class:`~cvxpy.atoms.log_det.log_det`
-   * - :ref:`cypari2 <spkg_cypari>`
-     - ``:class:`cypari2.gen.Gen```
-     - :class:`cypari2.gen.Gen`
    * - :ref:`cysignals <spkg_cysignals>`
      - ``:envvar:`CYSIGNALS_CRASH_DAYS```
      - :envvar:`CYSIGNALS_CRASH_DAYS`
