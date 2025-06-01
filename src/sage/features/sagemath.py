@@ -677,8 +677,8 @@ class sage__libs__pari(JoinFeature):
     r"""
     A :class:`~sage.features.Feature` describing the presence of :mod:`sage.libs.pari`.
 
-    SageMath uses the :ref:`PARI <spkg_pari>` library (via :ref:`cypari2
-    <spkg_cypari>`) for numerous purposes.  Doctests that involves such features
+    SageMath uses the :ref:`PARI <spkg_pari>` library (via :mod:`cypari2`)
+    for numerous purposes.  Doctests that involves such features
     should be marked ``# needs sage.libs.pari``.
 
     In addition to the modularization purposes that this tag serves, it also
