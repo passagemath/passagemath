@@ -624,6 +624,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         Return the 2-sum matrix constructed from the given matrices ``first_mat`` and
         ``second_mat``, with index of the first matrix ``first_index`` and index
         of the second matrix ``second_index``.
+
         Suppose that ``first_index`` indicates the last column of ``first_mat`` and
         ``second_index`` indicates the first row of ``second_mat``,
         i.e., the first matrix is
@@ -635,8 +636,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         M_1 \oplus_2 M_2 = \begin{bmatrix}
         A & ab^T \\
         0 & D
-        \end{bmatrix},
+        \end{bmatrix}.
         `
+
         Suppose that ``first_index`` indicates the last row of ``first_mat`` and
         ``second_index`` indicates the first column of ``second_mat``,
         i.e., the first matrix is
@@ -644,7 +646,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         and the second matrix is
         `M_2=\begin{bmatrix} d & D\end{bmatrix}`.
         Then the two sum
-        `M_1 \oplus_2 M_2 = \begin{bmatrix}
+        `
+        M_1 \oplus_2 M_2 = \begin{bmatrix}
         A & 0 \\
         dc^T & D
         \end{bmatrix}.
