@@ -4,7 +4,7 @@ build-backend = 'mesonpy'
 requires = [
     'meson-python',
     'cypari2 >=2.2.1',
-    # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212
+    # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212, https://github.com/passagemath/passagemath/issues/445
     'cysignals >=1.11.2, != 1.12.0',
     # Exclude 3.0.3 because of https://github.com/cython/cython/issues/5748
     'cython >=3.0, != 3.0.3',
