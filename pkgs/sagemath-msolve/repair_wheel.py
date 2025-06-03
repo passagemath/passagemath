@@ -19,4 +19,4 @@ with InWheel(wheel, wheel):
     command = f'(cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/msolve) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
     print(f'Running {command}')
     sys.stdout.flush()
-    os.system(command)
+    if os.system(command) != 0: sys.exit(1)

@@ -20,7 +20,7 @@ with InWheel(wheel, wheel):
     command = f'(cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/ecl lib/ecl-* lib/maxima) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
     print(f'Running {command}')
     sys.stdout.flush()
-    os.system(command)
+    if os.system(command) != 0: sys.exit(1)
     # Include maxima.fas, which is linked through to libecl
     # SAGE_LOCAL/lib/ecl/maxima.fas --> ecl/maxima.fas
     parent = Path(MAXIMA_FAS).parent.parent
@@ -28,4 +28,4 @@ with InWheel(wheel, wheel):
     command = f'(cd {shlex.quote(str(parent))} && tar cf - --dereference {name}) | tar xvf -'
     print(f'Running {command}')
     sys.stdout.flush()
-    os.system(command)
+    if os.system(command) != 0: sys.exit(1)
