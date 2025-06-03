@@ -23,11 +23,11 @@ with InWheel(wheel, wheel):
         command = f'(cd {shlex.quote(str(parent))} && tar cf - {name}) | tar xvf -'
         print(f'Running {command}')
         sys.stdout.flush()
-        os.system(command)
+        if os.system(command) != 0: sys.exit(1)
 
     # Remove the sage-conf dependency; it is not needed because our wheels ship what is needed.
 
     command = f'sed -i.bak "/^Requires-Dist: passagemath-conf/d" *.dist-info/METADATA'
     print(f'Running {command}')
     sys.stdout.flush()
-    os.system(command)
+    if os.system(command) != 0: sys.exit(1)

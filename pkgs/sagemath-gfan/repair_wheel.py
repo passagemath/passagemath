@@ -21,4 +21,4 @@ with InWheel(wheel, wheel):
 
     print(f'Running {command}')
     sys.stdout.flush()
-    os.system(command)
+    if os.system(command) != 0: sys.exit(1)
