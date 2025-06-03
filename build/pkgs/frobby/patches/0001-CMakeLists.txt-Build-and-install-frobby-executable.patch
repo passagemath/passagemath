@@ -1,0 +1,28 @@
+From 8d9d0de9fb6a2cab27fa7042568a32bc25661e07 Mon Sep 17 00:00:00 2001
+From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
+Date: Tue, 3 Jun 2025 12:37:32 -0700
+Subject: [PATCH] CMakeLists.txt: Build and install 'frobby' executable
+
+---
+ CMakeLists.txt | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5cb46c1..6dfc3e2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -210,6 +210,11 @@ set_target_properties(frobby PROPERTIES PUBLIC_HEADER src/frobby.h)
+ install(TARGETS frobby LIBRARY DESTINATION lib)
+ install(FILES GPL-header COPYING DESTINATION licenses/frobby)
+ 
++add_executable(frobby-executable src/main.cpp)
++set_target_properties(frobby-executable PROPERTIES OUTPUT_NAME frobby)
++target_link_libraries(frobby-executable frobby)
++install(TARGETS frobby-executable)
++
+ include(CTest)
+ if(BUILD_TESTING)
+   add_executable(frobby-tests
+-- 
+2.47.0
+
