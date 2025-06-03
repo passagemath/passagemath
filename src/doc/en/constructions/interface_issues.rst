@@ -27,11 +27,6 @@ appears as ``sage``.
 .. index::
    pair: referencing; Sage
 
-Referencing Sage
-================
-
-See `citing Sage <https://doc.sagemath.org/html/en/faq/faq-general.html#i-want-to-cite-sage-in-a-publication-how-do-i-do-it>`_.
-
 Logging your Sage session
 =========================
 
@@ -286,47 +281,3 @@ functions.
     0.0455907718407551 + 0.0289192946582081*I
     sage: pari('2').besselk(3)
     0.0615104584717420
-
-
-What is Sage?
-=============
-
-Sage is a framework for number theory, algebra, and geometry
-computation that is initially being designed for computing with
-elliptic curves and modular forms. The long-term goal is to make it
-much more generally useful for algebra, geometry, and number
-theory. It is open source and freely available under the terms of
-the GPL. The section titles in the reference manual gives a rough
-idea of the topics covered in Sage.
-
-.. index::
-   pair: Sage; history
-
-History of Sage
----------------
-
-Sage was started by William Stein while at Harvard University in
-the Fall of 2004, with version 0.1 released in January of 2005.
-That version included Pari, but not GAP or Singular. Version 0.2
-was released in March, version 0.3 in April, version 0.4 in July.
-During this time, support for Cremona's database, multivariate
-polynomials and large finite fields was added. Also, more
-documentation was written. Version 0.5 beta was released in August,
-version 0.6 beta in September, and version 0.7 later that month.
-During this time, more support for vector spaces, rings, modular
-symbols, and windows users was added. As of 0.8, released in
-October 2005, Sage contained the full distribution of GAP, though
-some of the GAP databases have to be added separately, and
-Singular. Adding Singular was not easy, due to the difficulty of
-compiling Singular from source. Version 0.9 was released in
-November. This version went through 34 releases! As of version
-0.9.34 (definitely by version 0.10.0), Maxima and clisp were
-included with Sage. Version 0.10.0 was released January 12, 2006.
-The release of Sage 1.0 was made early February, 2006. As of
-February 2008, the latest release is 2.10.2.
-
-Many people have contributed significant code and other expertise,
-such as assistance in compiling on various OS's. Generally code
-authors are acknowledged in the AUTHOR section of the Python
-docstring of their file and the credits section of the Sage
-website.
