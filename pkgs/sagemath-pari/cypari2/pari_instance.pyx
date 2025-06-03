@@ -235,9 +235,9 @@ Verify that ``nfroots()`` (which has an unusual signature with a
 non-default argument following a default argument) works:
 
 >>> pari.nfroots(x='x^4 - 1')
-[-1, 1]
+[-1, 1]...
 >>> pari.nfroots(pari.nfinit('t^2 + 1'), "x^4 - 1")
-[-1, 1, Mod(-t, t^2 + 1), Mod(t, t^2 + 1)]
+[-1, 1, Mod(-t, t^2 + 1), Mod(t, t^2 + 1)]...
 
 Reset default precision for the following tests:
 
@@ -299,10 +299,6 @@ from .stack cimport (new_gen, new_gen_noclear, clear_stack,
 from .handle_error cimport _pari_init_error_handling
 from .closure cimport _pari_init_closure
 
-# Default precision (in PARI words) for the PARI library interface,
-# when no explicit precision is given and the inputs are exact.
-cdef long prec = prec_bits_to_words(53)
-
 
 #################################################################
 # conversions between various real precision models
@@ -341,36 +337,10 @@ def prec_dec_to_bits(long prec_in_dec):
     return int(prec_in_dec*log_10 + 1.0)  # Add one to round up
 
 
-cpdef long prec_bits_to_words(unsigned long prec_in_bits) noexcept:
-    r"""
-    Convert from precision expressed in bits to pari real precision
-    expressed in words. Note: this rounds up to the nearest word,
-    adjusts for the two codewords of a pari real, and is
-    architecture-dependent.
-
-    Examples:
-
-    >>> from cypari2.pari_instance import prec_bits_to_words
-    >>> import sys
-    >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
-    >>> prec_bits_to_words(70) == (5 if bitness == '32' else 4)
-    True
-
-    >>> ans32 = [(32, 3), (64, 4), (96, 5), (128, 6), (160, 7), (192, 8), (224, 9), (256, 10)]
-    >>> ans64 = [(32, 3), (64, 3), (96, 4), (128, 4), (160, 5), (192, 5), (224, 6), (256, 6)]
-    >>> [(32*n, prec_bits_to_words(32*n)) for n in range(1, 9)] == (ans32 if bitness == '32' else ans64)
-    True
-    """
-    if not prec_in_bits:
-        return prec
-    cdef unsigned long wordsize = BITS_IN_LONG
-
-    # This equals ceil(prec_in_bits/wordsize) + 2
-    return (prec_in_bits - 1)//wordsize + 3
-
-
 cpdef long prec_words_to_bits(long prec_in_words) noexcept:
     r"""
+    Deprecated internal function. Used (incorrectly) in sagemath < 10.5.
+
     Convert from pari real precision expressed in words to precision
     expressed in bits. Note: this adjusts for the two codewords of a
     pari real, and is architecture-dependent.
@@ -379,6 +349,8 @@ cpdef long prec_words_to_bits(long prec_in_words) noexcept:
 
     >>> from cypari2.pari_instance import prec_words_to_bits
     >>> import sys
+    >>> import warnings
+    >>> warnings.simplefilter("ignore")
     >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
     >>> prec_words_to_bits(10) == (256 if bitness == '32' else 512)
     True
@@ -388,6 +360,9 @@ cpdef long prec_words_to_bits(long prec_in_words) noexcept:
     >>> [(n, prec_words_to_bits(n)) for n in range(3, 10)] == (ans32 if bitness == '32' else ans64)
     True
     """
+    from warnings import warn
+    warn("'prec_words_to_bits` in cypari2 is internal and deprecated",
+         DeprecationWarning)
     # see user's guide to the pari library, page 10
     return (prec_in_words - 2) * BITS_IN_LONG
 
@@ -402,33 +377,13 @@ cpdef long default_bitprec() noexcept:
     >>> default_bitprec()
     64
     """
-    return (prec - 2) * BITS_IN_LONG
-
-
-def prec_dec_to_words(long prec_in_dec):
-    r"""
-    Convert from precision expressed in decimal to precision expressed
-    in words. Note: this rounds up to the nearest word, adjusts for the
-    two codewords of a pari real, and is architecture-dependent.
-
-    Examples:
-
-    >>> from cypari2.pari_instance import prec_dec_to_words
-    >>> import sys
-    >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
-    >>> prec_dec_to_words(38) == (6 if bitness == '32' else 4)
-    True
-
-    >>> ans32 = [(10, 4), (20, 5), (30, 6), (40, 7), (50, 8), (60, 9), (70, 10), (80, 11)]
-    >>> ans64 = [(10, 3), (20, 4), (30, 4), (40, 5), (50, 5), (60, 6), (70, 6), (80, 7)] # 64-bit
-    >>> [(n, prec_dec_to_words(n)) for n in range(10, 90, 10)] == (ans32 if bitness == '32' else ans64)
-    True
-    """
-    return prec_bits_to_words(prec_dec_to_bits(prec_in_dec))
+    return DEFAULT_BITPREC
 
 
 def prec_words_to_dec(long prec_in_words):
     r"""
+    Deprecated internal function.
+
     Convert from precision expressed in words to precision expressed in
     decimal. Note: this adjusts for the two codewords of a pari real,
     and is architecture-dependent.
@@ -437,6 +392,8 @@ def prec_words_to_dec(long prec_in_words):
 
     >>> from cypari2.pari_instance import prec_words_to_dec
     >>> import sys
+    >>> import warnings
+    >>> warnings.simplefilter("ignore")
     >>> bitness = '64' if sys.maxsize > (1 << 32) else '32'
     >>> prec_words_to_dec(5) == (28 if bitness == '32' else 57)
     True
@@ -446,6 +403,9 @@ def prec_words_to_dec(long prec_in_words):
     >>> [(n, prec_words_to_dec(n)) for n in range(3, 10)] == (ans32 if bitness == '32' else ans64)
     True
     """
+    from warnings import warn
+    warn("'prec_words_to_dec` in cypari2 is internal and deprecated",
+         DeprecationWarning)
     return prec_bits_to_dec(prec_words_to_bits(prec_in_words))
 
 

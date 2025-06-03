@@ -289,7 +289,7 @@ def get_rest_doc(function):
         >>> from autogen.doc import get_rest_doc
         >>> print(get_rest_doc("teichmuller"))
         Teichmüller character of the :math:`p`-adic number :math:`x`, i.e. the unique
-        :math:`(p-1)`-th root of unity congruent to :math:`x / p^{v_p(x)}` modulo :math:`p`...
+        :math:`(p-1)`-th root of unity congruent to :math:`x / p^{v_...(x)}` modulo :math:`p`...
 
     ::
 
@@ -300,24 +300,24 @@ def get_rest_doc(function):
         .. MATH::
         <BLANKLINE>
             f(x) = \exp (-i\pi/24).\eta ((x+1)/2)/\eta (x) {such that}
-            j = (f^{24}-16)^3/f^{24},
+            j = (f^{24}-16)^.../f^{24},
         <BLANKLINE>
         where :math:`j` is the elliptic :math:`j`-invariant (see the function :literal:`ellj`).
         If :math:`flag = 1`, returns
         <BLANKLINE>
         .. MATH::
         <BLANKLINE>
-            f_1(x) = \eta (x/2)/\eta (x) {such that}
-            j = (f_1^{24}+16)^3/f_1^{24}.
+            f_...(x) = \eta (x/2)/\eta (x) {such that}
+            j = (f_...^{24}+16)^.../f_...^{24}.
         <BLANKLINE>
         Finally, if :math:`flag = 2`, returns
         <BLANKLINE>
         .. MATH::
         <BLANKLINE>
-            f_2(x) = \sqrt{2}\eta (2x)/\eta (x) {such that}
-            j = (f_2^{24}+16)^3/f_2^{24}.
+            f_...(x) = \sqrt{2}\eta (2x)/\eta (x) {such that}
+            j = (f_...^{24}+16)^.../f_...^{24}.
         <BLANKLINE>
-        Note the identities :math:`f^8 = f_1^8+f_2^8` and :math:`ff_1f_2 = \sqrt2`.
+        Note the identities :math:`f^... = f_...^...+f_...^...` and :math:`ff_...f_... = \sqrt2`.
 
 
     ::
@@ -333,7 +333,7 @@ def get_rest_doc(function):
         .. MATH::
         <BLANKLINE>
             \sum
-            (x_i or y_i) 2^i
+            (x_... or y_...) 2^...
         <BLANKLINE>
         See ``bitand`` (in the PARI manual) for the behavior for negative arguments.
     """

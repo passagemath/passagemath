@@ -5,9 +5,15 @@ cimport cython
 
 from .gen cimport Gen
 
-cpdef long prec_bits_to_words(unsigned long prec_in_bits) noexcept
+# DEPRECATED INTERNAL FUNCTION used (incorrectly) in sagemath < 10.5
 cpdef long prec_words_to_bits(long prec_in_words) noexcept
 cpdef long default_bitprec() noexcept
+
+cdef extern from *:
+    """
+    #define DEFAULT_BITPREC prec2nbits(DEFAULTPREC)
+    """
+    long DEFAULT_BITPREC
 
 cdef class Pari_auto:
     pass

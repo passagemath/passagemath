@@ -68,8 +68,7 @@ from .types cimport *
 from .string_utils cimport to_string, to_bytes
 from .paripriv cimport *
 from .convert cimport PyObject_AsGEN, gen_to_integer
-from .pari_instance cimport (prec_bits_to_words,
-                             default_bitprec, get_var)
+from .pari_instance cimport DEFAULT_BITPREC, get_var
 from .stack cimport (new_gen, new_gens2, new_gen_noclear,
                      clone_gen, clear_stack, reset_avma,
                      remove_from_pari_stack, move_gens_to_heap)
@@ -649,7 +648,7 @@ cdef class Gen(Gen_base):
         if m is not None:
             t0 = t0.Mod(m)
         sig_on()
-        return new_gen(gpow(t0.g, t1.g, prec_bits_to_words(0)))
+        return new_gen(gpow(t0.g, t1.g, nbits2prec(DEFAULT_BITPREC)))
 
     def __neg__(self):
         sig_on()
@@ -904,6 +903,7 @@ cdef class Gen(Gen_base):
 
         >>> x = pari('x')
 
+        >>> pari.setrand(1)
         >>> (x**2 - 65).bnfinit().bnf_get_fu()
         [Mod(x - 8, x^2 - 65)]
         >>> (x**4 - x**2 + 1).bnfinit().bnf_get_fu()
@@ -953,6 +953,7 @@ cdef class Gen(Gen_base):
         >>> import warnings
         >>> with warnings.catch_warnings(record=True) as w:
         ...     warnings.simplefilter('always')
+        ...     pari.setrand(1)
         ...     funits = (x**2 - 65).bnfinit().bnfunit()
         ...     assert len(w) == 1
         ...     assert issubclass(w[0].category, DeprecationWarning)
@@ -1967,35 +1968,6 @@ cdef class Gen(Gen_base):
         from sage.libs.pari.convert_sage import gen_to_sage
         return gen_to_sage(self, locals)
 
-    def __long__(self):
-        """
-        Convert ``self`` to a Python ``long``.
-
-        Examples:
-
-        >>> from cypari2 import Pari
-        >>> pari = Pari()
-        >>> import sys
-
-        >>> if sys.version_info.major == 3:
-        ...     long = int
-        >>> assert isinstance(long(pari(0)), long)
-        >>> assert long(pari(0)) == 0
-        >>> assert long(pari(10)) == 10
-        >>> assert long(pari(-10)) == -10
-        >>> assert long(pari(123456789012345678901234567890)) == 123456789012345678901234567890
-        >>> assert long(pari(-123456789012345678901234567890)) == -123456789012345678901234567890
-        >>> assert long(pari(2**31-1)) == 2147483647
-        >>> assert long(pari(-2**31)) == -2147483648
-        >>> assert long(pari("Pol(10)")) == 10
-        >>> assert long(pari("Mod(2, 7)")) == 2
-        """
-        x = gen_to_integer(self)
-        if isinstance(x, long):
-            return x
-        else:
-            return long(x)
-
     def __float__(self):
         """
         Return Python float.
@@ -2913,7 +2885,7 @@ cdef class Gen(Gen_base):
         sig_on()
         return new_gen(bernfrac(self))
 
-    def bernreal(self, unsigned long precision=0):
+    def bernreal(self, unsigned long precision=DEFAULT_BITPREC):
         r"""
         The Bernoulli number `B_x`, as for the function bernfrac,
         but `B_x` is returned as a real number (with the current
@@ -2928,9 +2900,9 @@ cdef class Gen(Gen_base):
         54.9711779448622
         """
         sig_on()
-        return new_gen(bernreal(self, prec_bits_to_words(precision)))
+        return new_gen(bernreal(self, nbits2prec(precision)))
 
-    def besselk(nu, x, unsigned long precision=0):
+    def besselk(nu, x, unsigned long precision=DEFAULT_BITPREC):
         """
         nu.besselk(x): K-Bessel function (modified Bessel function
         of the second kind) of index nu, which can be complex, and argument
@@ -2965,9 +2937,9 @@ cdef class Gen(Gen_base):
         """
         cdef Gen t0 = objtogen(x)
         sig_on()
-        return new_gen(kbessel(nu.g, t0.g, prec_bits_to_words(precision)))
+        return new_gen(kbessel(nu.g, t0.g, nbits2prec(precision)))
 
-    def eint1(x, long n=0, unsigned long precision=0):
+    def eint1(x, long n=0, unsigned long precision=DEFAULT_BITPREC):
         r"""
         x.eint1(n): exponential integral E1(x):
 
@@ -2993,13 +2965,14 @@ cdef class Gen(Gen_base):
         """
         sig_on()
         if n <= 0:
-            return new_gen(eint1(x.g, prec_bits_to_words(precision)))
+            return new_gen(eint1(x.g, nbits2prec(precision)))
         else:
-            return new_gen(veceint1(x.g, stoi(n), prec_bits_to_words(precision)))
+            return new_gen(veceint1(x.g, stoi(n), nbits2prec(precision)))
 
     log_gamma = Gen_base.lngamma
 
-    def polylog(x, long m, long flag=0, unsigned long precision=0):
+    def polylog(x, long m, long flag=0,
+                unsigned long precision=DEFAULT_BITPREC):
         """
         x.polylog(m,flag=0): m-th polylogarithm of x. flag is optional, and
         can be 0: default, 1: D_m -modified m-th polylog of x, 2:
@@ -3028,9 +3001,9 @@ cdef class Gen(Gen_base):
         -0.400459056163451
         """
         sig_on()
-        return new_gen(polylog0(m, x.g, flag, prec_bits_to_words(precision)))
+        return new_gen(polylog0(m, x.g, flag, nbits2prec(precision)))
 
-    def sqrtn(x, n, unsigned long precision=0):
+    def sqrtn(x, n, unsigned long precision=DEFAULT_BITPREC):
         r"""
         x.sqrtn(n): return the principal branch of the n-th root of x,
         i.e., the one such that
@@ -3092,7 +3065,7 @@ cdef class Gen(Gen_base):
         cdef GEN ans, zetan
         cdef Gen t0 = objtogen(n)
         sig_on()
-        ans = gsqrtn(x.g, t0.g, &zetan, prec_bits_to_words(precision))
+        ans = gsqrtn(x.g, t0.g, &zetan, nbits2prec(precision))
         return new_gens2(ans, zetan)
 
     def ffprimroot(self):
@@ -4533,7 +4506,8 @@ cdef class Gen(Gen_base):
         g = polint(self.g, t0.g, t1.g, &dy)
         return new_gens2(g, dy)
 
-    def ellwp(self, z='z', long n=20, long flag=0, unsigned long precision=0):
+    def ellwp(self, z='z', long n=20, long flag=0,
+              unsigned long precision=DEFAULT_BITPREC):
         """
         Return the value or the series expansion of the Weierstrass
         `P`-function at `z` on the lattice `self` (or the lattice
@@ -4611,7 +4585,7 @@ cdef class Gen(Gen_base):
         elif typ(g0) == t_RFRAC:
             g0 = rfrac_to_ser(g0, n+4)
 
-        cdef GEN r = ellwp0(self.g, g0, flag, prec_bits_to_words(precision))
+        cdef GEN r = ellwp0(self.g, g0, flag, nbits2prec(precision))
         if flag == 1 and have_ellwp_flag1_bug():
             # Work around ellwp() bug: double the second element
             set_gel(r, 2, gmulgs(gel(r, 2), 2))

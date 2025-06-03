@@ -2,7 +2,7 @@
 Auto-generate methods for PARI functions.
 """
 
-#*****************************************************************************
+# ****************************************************************************
 #       Copyright (C) 2015 Jeroen Demeyer <jdemeyer@cage.ugent.be>
 #                     2017 Vincent Delecroix <vincent.delecroix@labri.fr>
 #
@@ -10,11 +10,15 @@ Auto-generate methods for PARI functions.
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ****************************************************************************
 
 from __future__ import absolute_import, print_function, unicode_literals
-import os, re, sys, io
+import io
+import os
+import re
+import sys
+
 
 from .args import PariArgumentGEN, PariInstanceArgument
 from .parser import read_pari_desc, parse_prototype
@@ -58,17 +62,17 @@ cdef extern from *:
 
 
 function_re = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
-function_blacklist = {"O",  # O(p^e) needs special parser support
-        "alias",            # Not needed and difficult documentation
-        "listcreate",       # "redundant and obsolete" according to PARI
-        "print",            # Conflicts with Python builtin
-        "allocatemem",      # Dangerous; overridden in PariInstance
-        "global",           # Invalid in Python (and obsolete)
-        "inline",           # Total confusion
-        "uninline",         # idem
-        "local",            # idem
-        "my",               # idem
-        }
+function_blacklist = {"O",            # O(p^e) needs special parser support
+                      "alias",        # Not needed and difficult documentation
+                      "listcreate",   # "redundant and obsolete" according to PARI
+                      "print",        # Conflicts with Python builtin
+                      "allocatemem",  # Dangerous; overridden in PariInstance
+                      "global",       # Invalid in Python (and obsolete)
+                      "inline",       # Total confusion
+                      "uninline",     # idem
+                      "local",        # idem
+                      "my",           # idem
+                      }
 
 
 class PariFunctionGenerator(object):
@@ -119,7 +123,8 @@ class PariFunctionGenerator(object):
             return False
         return True
 
-    def handle_pari_function(self, function, cname, prototype="", help="", obsolete=None, **kwds):
+    def handle_pari_function(self, function, cname, prototype="", help="",
+                             obsolete=None, **kwds):
         r"""
         Handle one PARI function: decide whether or not to add the
         function, in which file (as method of :class:`Gen` or
@@ -139,7 +144,7 @@ class PariFunctionGenerator(object):
             ...     help=r"bnfinit(P,{flag=0},{tech=[]}): compute...",
             ...     **{"class":"basic", "section":"number_fields"})
                 GEN bnfinit0(GEN, long, GEN, long)
-                def bnfinit(P, long flag=0, tech=None, long precision=0):
+                def bnfinit(P, long flag=0, tech=None, long precision=DEFAULT_BITPREC):
                     ...
                     cdef bint _have_tech = (tech is not None)
                     if _have_tech:
@@ -149,7 +154,7 @@ class PariFunctionGenerator(object):
                     cdef GEN _tech = NULL
                     if _have_tech:
                         _tech = (<Gen>tech).g
-                    precision = prec_bits_to_words(precision)
+                    precision = nbits2prec(precision)
                     cdef GEN _ret = bnfinit0(_P, flag, _tech, precision)
                     return new_gen(_ret)
             <BLANKLINE>
@@ -239,13 +244,13 @@ class PariFunctionGenerator(object):
             # If the first argument is a GEN, write a method of the
             # Gen class.
             self.write_method(function, cname, args, ret, args,
-                    self.gen_file, doc, obsolete)
+                              self.gen_file, doc, obsolete)
 
         # In any case, write a method of the Pari class.
         # Parse again with an extra "self" argument.
         args, ret = parse_prototype(prototype, help, [PariInstanceArgument()])
         self.write_method(function, cname, args, ret, args[1:],
-                self.instance_file, doc, obsolete)
+                          self.instance_file, doc, obsolete)
 
     def write_declaration(self, cname, args, ret, file):
         """
@@ -261,10 +266,12 @@ class PariFunctionGenerator(object):
           written to
         """
         args = ", ".join(a.ctype() for a in args)
-        s = '    {ret} {function}({args})'.format(ret=ret.ctype(), function=cname, args=args)
+        s = '    {ret} {function}({args})'.format(ret=ret.ctype(),
+                                                  function=cname, args=args)
         print(s, file=file)
 
-    def write_method(self, function, cname, args, ret, cargs, file, doc, obsolete):
+    def write_method(self, function, cname, args, ret, cargs,
+                     file, doc, obsolete):
         """
         Write Cython code with a method to call one PARI function.
 
@@ -286,7 +293,9 @@ class PariFunctionGenerator(object):
         - ``obsolete`` -- if ``True``, a deprecation warning will be
           given whenever this method is called
         """
-        doc = doc.replace("\n", "\n        ")  # Indent doc
+        doc = "\n".join("        " + line.strip() if line else line
+                        for line in doc.splitlines())
+        # Indent doc, no trailing whitespaces
 
         protoargs = ", ".join(a.prototype_code() for a in args)
         callargs = ", ".join(a.call_code() for a in cargs)
@@ -295,7 +304,7 @@ class PariFunctionGenerator(object):
         if doc:
             # Use triple single quotes to make it easier to doctest
             # this within triply double quoted docstrings.
-            s += "        r'''\n        {doc}\n        '''\n"
+            s += "        r'''\n{doc}\n        '''\n"
         # Warning for obsolete functions
         if obsolete:
             s += "        from warnings import warn\n"
@@ -311,7 +320,8 @@ class PariFunctionGenerator(object):
         s += ret.assign_code("{cname}({callargs})")
         s += ret.return_code()
 
-        s = s.format(function=function, protoargs=protoargs, cname=cname, callargs=callargs, doc=doc, obsolete=obsolete)
+        s = s.format(function=function, protoargs=protoargs, cname=cname,
+                     callargs=callargs, doc=doc, obsolete=obsolete)
         print(s, file=file)
 
     def __call__(self):
@@ -322,11 +332,14 @@ class PariFunctionGenerator(object):
         D = sorted(D.values(), key=lambda d: d['function'])
         sys.stdout.write("Generating PARI functions:")
 
-        self.gen_file = io.open(self.gen_filename + '.tmp', 'w', encoding='utf-8')
+        self.gen_file = io.open(self.gen_filename + '.tmp',
+                                'w', encoding='utf-8')
         self.gen_file.write(gen_banner)
-        self.instance_file = io.open(self.instance_filename + '.tmp', 'w', encoding='utf-8')
+        self.instance_file = io.open(self.instance_filename + '.tmp',
+                                     'w', encoding='utf-8')
         self.instance_file.write(instance_banner)
-        self.decl_file = io.open(self.decl_filename + '.tmp', 'w', encoding='utf-8')
+        self.decl_file = io.open(self.decl_filename + '.tmp',
+                                 'w', encoding='utf-8')
         self.decl_file.write(decl_banner)
 
         # Check for availability of hi-res SVG plotting. This requires
@@ -345,7 +358,7 @@ class PariFunctionGenerator(object):
                 sys.stdout.write(" (%s)" % func)
         sys.stdout.write("\n")
 
-        self.instance_file.write("DEF HAVE_PLOT_SVG = {}".format(have_plot_svg))
+        self.instance_file.write(f"DEF HAVE_PLOT_SVG = {have_plot_svg}")
 
         self.gen_file.close()
         self.instance_file.close()

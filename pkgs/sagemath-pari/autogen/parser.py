@@ -109,7 +109,7 @@ def parse_prototype(proto, help, initial_args=[]):
         >>> parse_prototype(proto, help)
         ([GEN x, GEN* r=NULL], GEN)
         >>> parse_prototype("lp", "foo()", [str("TEST")])
-        (['TEST', prec precision=0], long)
+        (['TEST', prec precision=DEFAULT_BITPREC], long)
     """
     # Use the help string just for the argument names.
     # "names" should be an iterator over the argument names.
