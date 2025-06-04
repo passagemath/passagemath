@@ -35,6 +35,7 @@ import subprocess
 import shlex
 from time import sleep
 
+from sage.features.sat import Glucose as Glucose_executable, Kissat as Kissat_executable
 from sage.sat.solvers.satsolver import SatSolver
 from sage.misc.temporary_file import tmp_filename
 
@@ -60,8 +61,8 @@ class DIMACS(SatSolver):
 
         INPUT:
 
-        - ``command`` -- a named format string with the command to
-          run. The string must contain {input} and may contain
+        - ``command`` -- a named format string or list of strings with the
+          command to run. The string must contain {input} and may contain
           {output} if the solvers writes the solution to an output
           file. For example "sat-solver {input}" is a valid
           command. If ``None`` then the class variable ``command`` is
@@ -107,7 +108,11 @@ class DIMACS(SatSolver):
             sage: DIMACS(command="iliketurtles {input}")
             DIMACS Solver: 'iliketurtles {input}'
         """
-        return "DIMACS Solver: '%s'" % (self._command)
+        command = self._command
+        if not isinstance(command, str):
+            command = ' '.join((arg if isinstance(arg, str) else arg.executable)
+                               for arg in command)
+        return "DIMACS Solver: '%s'" % command
 
     def __del__(self):
         """
@@ -412,16 +417,22 @@ class DIMACS(SatSolver):
         output_filename = None
         self._output = []
 
-        command = self._command.strip()
+        command = self._command
 
         if not command:
             raise ValueError("no SAT solver command selected")
 
         if "{output}" in command:
             output_filename = tmp_filename()
-        command = command.format(input=self._headname, output=output_filename)
 
-        args = shlex.split(command)
+        if isinstance(command, str):
+            command = command.strip().format(input=self._headname, output=output_filename)
+            args = shlex.split(command)
+        else:
+            args = [(arg.format(input=self._headname, output=output_filename)
+                     if isinstance(arg, str)
+                     else arg.absolute_filename())
+                    for arg in command]
 
         try:
             process = subprocess.Popen(args, stdout=subprocess.PIPE)
@@ -575,7 +586,7 @@ class RSat(DIMACS):
         sage: solver()                            # optional - rsat
         False
     """
-    command = "rsat {input} -v -s"
+    command = ["rsat", "{input}", "-v", "-s"]
 
 
 class Glucose(DIMACS):
@@ -640,7 +651,7 @@ class Glucose(DIMACS):
         s SATISFIABLE
         v -1 -2 ... 100 0
     """
-    command = "glucose -verb=0 -model {input}"
+    command = [Glucose_executable(), "-verb=0", "-model", "{input}"]
 
 
 class GlucoseSyrup(DIMACS):
@@ -704,7 +715,7 @@ class GlucoseSyrup(DIMACS):
         s SATISFIABLE
         v -1 -2 ... 100 0
     """
-    command = "glucose-syrup -model -verb=0 {input}"
+    command = [Glucose_executable("glucose-syrup"), "-model", "-verb=0", "{input}"]
 
 
 class Kissat(DIMACS):
@@ -769,4 +780,4 @@ class Kissat(DIMACS):
         v ... 100 0
     """
 
-    command = "kissat -q {input}"
+    command = [Kissat_executable(), "-q", "{input}"]
