@@ -39,8 +39,7 @@ type the following::
     sage: gap(pi)                                                                       # needs sage.libs.gap
     pi
     sage: gp(pi)                                                                        # needs sage.libs.pari
-    3.141592653589793238462643383     # 32-bit
-    3.1415926535897932384626433832795028842   # 64-bit
+    3.1415926535897932384626433832795028842
     sage: pari(pi)                                                                      # needs sage.libs.pari
     3.14159265358979
     sage: kash(pi)                    # optional - kash
@@ -64,8 +63,7 @@ can be coerced into other systems or evaluated.
     sage: RealField(15)(a)           # 15 *bits* of precision
     5.316
     sage: gp(a)                                                                         # needs sage.libs.pari
-    5.316218116357029426750873360              # 32-bit
-    5.3162181163570294267508733603616328824    # 64-bit
+    5.3162181163570294267508733603616328824
     sage: print(mathematica(a))                  # optional - mathematica
      4 E
      --- + Pi
@@ -884,8 +882,7 @@ class Log2(Constant):
         sage: maxima(log2).float()
         0.6931471805599453
         sage: gp(log2)                                                                  # needs sage.libs.pari
-        0.6931471805599453094172321215             # 32-bit
-        0.69314718055994530941723212145817656807   # 64-bit
+        0.69314718055994530941723212145817656807
         sage: RealField(150)(2).log()
         0.69314718055994530941723212145817656807550013
     """
