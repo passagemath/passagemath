@@ -20,7 +20,7 @@ with InWheel(wheel, wheel):
         sys.stdout.flush()
         parent = Path(dir).parent
         name = Path(dir).name
-        command = f'(cd {shlex.quote(str(parent))} && tar cf - {name}) | tar xvf -'
+        command = f'set -o pipefail; (cd {shlex.quote(str(parent))} && tar cf - {name}) | tar xvf -'
         print(f'Running {command}')
         sys.stdout.flush()
         if os.system(command) != 0: sys.exit(1)
