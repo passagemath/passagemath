@@ -16,7 +16,7 @@ wheel = Path(sys.argv[1])
 
 with InWheel(wheel, wheel):
     # SAGE_LOCAL/bin/maxima --> sage_wheels/bin/maxima
-    command = f'(cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/maxima share/maxima share/info/*maxima*) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
+    command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/maxima share/maxima share/info/*maxima*) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
     print(f'Running {command}')
     sys.stdout.flush()
     if os.system(command) != 0: sys.exit(1)
