@@ -344,7 +344,7 @@ class FreeZinbielAlgebra(CombinatorialFreeModule):
         return FreeZinbielAlgebra(R, n=len(A), names=A, side=self._side)
 
     @cached_method
-    def gens(self):
+    def gens(self) -> tuple:
         """
         Return the generators of ``self``.
 

@@ -19,9 +19,9 @@ can be found in the files :sage_root:`build/pkgs/python3/spkg-configure.m4`
 library), and :sage_root:`m4/pyproject_toml_metadata.m4` (for most other
 distribution packages in ``pkgs/``).
 
-Python 3.9 is the oldest supported version.  Hence,
-all language and library features that are available in Python 3.9 can
-be used; but features introduced in Python 3.10 cannot be used.  If a
+Python 3.10 is the oldest supported version.  Hence,
+all language and library features that are available in Python 3.10 can
+be used; but features introduced in Python 3.11 cannot be used.  If a
 feature is deprecated in a newer supported version, it must be ensured
 that deprecation warnings issued by Python do not lead to failures in
 doctests.
@@ -47,7 +47,7 @@ using one of two mechanisms:
   - `typing_extensions <../reference/spkg/typing_extensions>`_
     (to be used in place of ``typing`` when Python older than
     3.13 is in use and any of the features introduced after Python
-    3.9.0 are used).
+    3.10.0 are used).
 
   The Sage library declares these backport packages as conditional
   dependencies for use with Python older than 3.13 and ensures that

@@ -47,7 +47,7 @@ def _rational_kernel_iml(Matrix_integer_dense self):
     cdef long dim
     cdef unsigned long i,j,k
     cdef mpz_t *mp_N
-    time = verbose('computing null space of %s x %s matrix using IML'%(self._nrows, self._ncols))
+    time = verbose('computing null space of %s x %s matrix using IML' % (self._nrows, self._ncols))
     cdef mpz_t * m = fmpz_mat_to_mpz_array(self._matrix)
     sig_on()
     dim = nullspaceMP(self._nrows, self._ncols, m, &mp_N)
@@ -113,7 +113,7 @@ def _invert_iml(Matrix_integer_dense self, use_nullspace=False, check_invertible
         raise TypeError("self must be a square matrix.")
 
     P = self.parent()
-    time = verbose('computing inverse of %s x %s matrix using IML'%(self._nrows, self._ncols))
+    time = verbose('computing inverse of %s x %s matrix using IML' % (self._nrows, self._ncols))
     if use_nullspace:
         A = self.augment(P.identity_matrix())
         K = A._rational_kernel_iml()
@@ -275,7 +275,7 @@ def _solve_iml(Matrix_integer_dense self, Matrix_integer_dense B, right=True):
     cdef mpz_t * mself = fmpz_mat_to_mpz_array(self._matrix)
     cdef mpz_t * mB = fmpz_mat_to_mpz_array(B._matrix)
     try:
-        verbose('Calling solver n = %s, m = %s'%(n,m))
+        verbose('Calling solver n = %s, m = %s' % (n,m))
         sig_on()
         nonsingSolvLlhsMM(solu_pos, n, m, mself, mB, mp_N, mp_D)
         sig_off()

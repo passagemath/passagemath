@@ -321,7 +321,7 @@ class PrimitiveLocalComponent(LocalComponentBase):
     Base class for primitive (twist-minimal) local components.
     """
 
-    def is_primitive(self):
+    def is_primitive(self) -> bool:
         r"""
         Return ``True`` if this local component is primitive (has minimal level
         among its character twists).
@@ -965,7 +965,7 @@ class ImprimitiveLocalComponent(LocalComponentBase):
         self._min_twist = min_twist
         self._chi = chi
 
-    def is_primitive(self):
+    def is_primitive(self) -> bool:
         r"""
         Return ``True`` if this local component is primitive (has minimal level
         among its character twists).

@@ -549,7 +549,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
 
     def is_finite(self):
         """
-        Return False, since the Symbolic Ring is infinite.
+        Return ``False``, since the Symbolic Ring is infinite.
 
         EXAMPLES::
 
@@ -560,7 +560,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
 
     cpdef bint is_exact(self) except -2:
         """
-        Return False, because there are approximate elements in the
+        Return ``False``, because there are approximate elements in the
         symbolic ring.
 
         EXAMPLES::

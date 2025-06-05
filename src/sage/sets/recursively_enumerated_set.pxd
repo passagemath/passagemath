@@ -1,12 +1,12 @@
 # sage_setup: distribution = sagemath-categories
-#*****************************************************************************
+# ****************************************************************************
 #       Copyright (C) 2014 Sage
 #
 #  Distributed under the terms of the GNU General Public License (GPL)
 #  The full text of the GPL is available at:
-#                  http://www.gnu.org/licenses/
+#                  https://www.gnu.org/licenses/
 #
-###############################################################################
+# #############################################################################
 
 cimport sage.structure.parent
 
