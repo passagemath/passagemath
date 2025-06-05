@@ -2367,6 +2367,15 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: P = E.lift_x(10/9)
             sage: set(E.gens()) <= set([P,-P])                          # needs eclib
             True
+
+        Check that :issue:`38813` has been fixed::
+
+            sage: # long time
+            sage: E = EllipticCurve([-127^2,0])
+            sage: l = E.gens(use_database=False, algorithm='pari', pari_effort=4); l   # random
+            [(611429153205013185025/9492121848205441 : 15118836457596902442737698070880/924793900700594415341761 : 1)]
+            sage: a = E(611429153205013185025/9492121848205441, 15118836457596902442737698070880/924793900700594415341761)
+            sage: assert len(l) == 1 and ((l[0] - a).is_finite_order() or (l[0] + a).is_finite_order())
         """
         if proof is None:
             from sage.structure.proof.proof import get_flag
@@ -2419,14 +2428,15 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             True
 
             sage: E = EllipticCurve([-127^2,0])
-            sage: E.gens(use_database=False, algorithm='pari',pari_effort=4)   # random, needs eclib
+            sage: E.gens(use_database=False, algorithm='pari', pari_effort=4)   # long time, needs eclib  # random
             [(611429153205013185025/9492121848205441 : 15118836457596902442737698070880/924793900700594415341761 : 1)]
 
         TESTS::
 
+            sage: E = EllipticCurve([-127^2,0])
             sage: P = E.lift_x(611429153205013185025/9492121848205441)
-            sage: ge = set(E.gens(use_database=False, algorithm='pari', pari_effort=4))     # needs eclib
-            sage: ge <= set([P+T for T in E.torsion_points()]                               # needs eclib
+            sage: ge = set(E.gens(use_database=False, algorithm='pari', pari_effort=4))     # long time, needs eclib
+            sage: ge <= set([P+T for T in E.torsion_points()]                               # long time, needs eclib
             ....:        + [-P+T for T in E.torsion_points()])
             True
         """

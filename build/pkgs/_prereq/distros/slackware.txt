@@ -30,3 +30,4 @@ libxml2
 cyrus-sasl
 # bison is needed by macaulay2
 bison
+patch

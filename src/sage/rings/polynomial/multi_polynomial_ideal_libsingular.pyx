@@ -122,7 +122,6 @@ cdef ideal *sage_ideal_to_singular_ideal(I) except NULL:
         gens = I.gens()
     except AttributeError:
         gens = I
-    cdef ideal *result
     cdef ring *r
     cdef ideal *i
     cdef int j = 0
@@ -246,7 +245,6 @@ def slimgb_libsingular(I):
     """
     global singular_options
 
-    cdef tHomog hom=testHomog
     cdef ideal *i
     cdef ring *r
     cdef ideal *result

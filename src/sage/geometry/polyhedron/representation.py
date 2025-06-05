@@ -1092,7 +1092,7 @@ class Equation(Hrepresentation):
 
         .. NOTE::
 
-            Return False for any equation.
+            Return ``False`` for any equation.
 
         EXAMPLES::
 

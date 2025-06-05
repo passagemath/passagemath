@@ -18,3 +18,4 @@ gcc
 bash
 flex
 bison
+gnupatch

@@ -34,3 +34,4 @@ perl-IPC-Cmd
 flex
 # bison is needed by macaulay2
 bison
+patch

@@ -1764,7 +1764,7 @@ class ClusterAlgebra(Parent, UniqueRepresentation):
 
             This method implements the piecewise-linear map `\\nu_c` introduced in Section 9.1 of [ReSt2020]_.
 
-        .. WARNING:
+        .. WARNING::
 
             This implementation works only when the initial exchange matrix is acyclic.
 
@@ -1790,7 +1790,7 @@ class ClusterAlgebra(Parent, UniqueRepresentation):
 
             This method implements the inverse of the piecewise-linear map `\\nu_c` introduced in Section 9.1 of [ReSt2020]_.
 
-        .. WARNING:
+        .. WARNING::
 
             This implementation works only when the initial exchange matrix is acyclic.
 
@@ -2095,7 +2095,7 @@ class ClusterAlgebra(Parent, UniqueRepresentation):
         return self(x)
 
     @cached_method
-    def gens(self):
+    def gens(self) -> tuple:
         r"""
         Return the list of initial cluster variables and coefficients of ``self``.
 

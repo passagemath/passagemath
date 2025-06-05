@@ -24,14 +24,14 @@ from cpython.object cimport *
 
 from sage.misc.fast_methods cimport hash_by_id
 from sage.structure.element cimport ModuleElement, Element
-from sage.numerical.linear_functions cimport LinearFunction, is_LinearFunction
+from sage.numerical.linear_functions cimport LinearFunction
 
 
-#*****************************************************************************
+# ***************************************************************************
 #
 # Elements of linear functions tensored with a free module
 #
-#*****************************************************************************
+# ***************************************************************************
 
 cdef class LinearTensor(ModuleElement):
     r"""
@@ -422,7 +422,7 @@ cdef class LinearTensor(ModuleElement):
         elif op == Py_GE:
             return LC(right, left, False)
         else:
-            assert(False)   # unreachable
+            assert False   # unreachable
 
     def __hash__(self):
         r"""

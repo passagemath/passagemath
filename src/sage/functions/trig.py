@@ -1,6 +1,24 @@
 # sage_setup: distribution = sagemath-categories
 r"""
 Trigonometric functions
+
+TESTS:
+
+Check that :issue:`35696` is fixed::
+
+    sage: # needs sage.symbolic
+    sage: sin(x*(x+1)-x^2-x)
+    0
+    sage: cos(x*(x+1)-x^2-x)
+    1
+    sage: tan(x*(x+1)-x^2-x)
+    0
+    sage: csc(x*(x+1)-x^2-x)
+    Infinity
+    sage: sec(x*(x+1)-x^2-x)
+    1
+    sage: cot(x*(x+1)-x^2-x)
+    Infinity
 """
 import math
 
@@ -643,6 +661,9 @@ class Function_arccos(GinacFunction):
             (0.9045568943023814-1.0612750619050357j)
             sage: acos(SR(2.1))                                                         # needs sage.symbolic
             1.37285914424258*I
+
+            sage: arcsin(sqrt(2)/2)                                                     # needs sage.symbolic
+            1/4*pi
         """
         GinacFunction.__init__(self, 'arccos', latex_name=r"\arccos",
                 conversions=dict(maxima='acos', sympy='acos',

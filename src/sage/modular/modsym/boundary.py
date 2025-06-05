@@ -341,7 +341,7 @@ class BoundarySpace(hecke.HeckeModule_generic):
                        (other.group(), other.weight(), other.character()),
                        op)
 
-    def _known_cusps(self):
+    def _known_cusps(self) -> list:
         """
         Return the list of non-vanishing cusps found so far.
 
@@ -356,7 +356,7 @@ class BoundarySpace(hecke.HeckeModule_generic):
         """
         return list(self._known_gens)
 
-    def is_ambient(self):
+    def is_ambient(self) -> bool:
         """
         Return ``True`` if ``self`` is a space of boundary symbols
         associated to an ambient space of modular symbols.

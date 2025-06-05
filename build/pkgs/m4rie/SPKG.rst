@@ -18,4 +18,10 @@ Upstream Contact
 
 -  Authors: Martin Albrecht
 -  Email: <m4ri-devel@googlegroups.com>
--  Repository: https://bitbucket.org/malb/m4rie/src/master/
+-  Website: http://m4ri.sagemath.org
+
+Dependencies
+------------
+
+-  M4RI
+-  Givaro

@@ -88,6 +88,11 @@ class FriCASConverter(InterfaceInit):
             sage: (ex^2)._fricas_()                                             # optional - fricas
                        +-+
             (4 + 2 %i)\|2  + 5 + 4 %i
+
+        Check that :issue:`40101` is fixed::
+
+            sage: SR(-oo)._fricas_().domainOf()                                 # optional - fricas
+            OrderedCompletion(Integer)
         """
         try:
             result = getattr(obj, self.name_init)()
@@ -98,6 +103,9 @@ class FriCASConverter(InterfaceInit):
                 from sage.rings.number_field.number_field_element_quadratic import NumberFieldElement_gaussian
                 if isinstance(obj, NumberFieldElement_gaussian):
                     return "((%s)::EXPR COMPLEX INT)" % result
+            elif isinstance(obj, InfinityElement):
+                # in this case, we leave the decision about the domain best to FriCAS
+                return result
         return "((%s)::EXPR INT)" % result
 
     def symbol(self, ex):

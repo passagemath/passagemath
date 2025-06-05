@@ -617,7 +617,7 @@ def is_hyperbolic(self, p) -> bool:
             self.hasse_invariant(p) == 1)
 
 
-def is_anisotropic(self, p):
+def is_anisotropic(self, p) -> bool:
     r"""
     Check if the quadratic form is anisotropic over the `p`-adic numbers `\QQ_p` or `\RR`.
 
@@ -687,7 +687,7 @@ def is_anisotropic(self, p):
     raise NotImplementedError("we have not established a convention for 0-dim'l quadratic forms")
 
 
-def is_isotropic(self, p):
+def is_isotropic(self, p) -> bool:
     r"""
     Check if `Q` is isotropic over the `p`-adic numbers `\QQ_p` or `\RR`.
 
@@ -926,9 +926,9 @@ def compute_definiteness_string_by_determinants(self):
     return "pos_def" if first_coeff > 0 else "neg_def"
 
 
-def is_positive_definite(self):
+def is_positive_definite(self) -> bool:
     """
-    Determines if the given quadratic form is positive-definite.
+    Determine if the given quadratic form is positive-definite.
 
     .. NOTE::
 
@@ -963,9 +963,9 @@ def is_positive_definite(self):
     return (def_str == "pos_def") or (def_str == "zero")
 
 
-def is_negative_definite(self):
+def is_negative_definite(self) -> bool:
     """
-    Determines if the given quadratic form is negative-definite.
+    Determine if the given quadratic form is negative-definite.
 
     .. NOTE::
 
@@ -1000,9 +1000,9 @@ def is_negative_definite(self):
     return (def_str == "neg_def") or (def_str == "zero")
 
 
-def is_indefinite(self):
+def is_indefinite(self) -> bool:
     """
-    Determines if the given quadratic form is indefinite.
+    Determine if the given quadratic form is indefinite.
 
     .. NOTE::
 
@@ -1037,9 +1037,9 @@ def is_indefinite(self):
     return def_str == "indefinite"
 
 
-def is_definite(self):
+def is_definite(self) -> bool:
     """
-    Determines if the given quadratic form is (positive or negative) definite.
+    Determine if the given quadratic form is (positive or negative) definite.
 
     .. NOTE::
 

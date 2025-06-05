@@ -10,7 +10,7 @@ AUTHORS:
 - Bill Cauchois (2009): improvements for inclusion into Sage.
 """
 
-#*****************************************************************************
+# ***************************************************************************
 #      Copyright (C) 2009 Carl Witty <Carl.Witty@gmail.com>
 #
 #  Distributed under the terms of the GNU General Public License (GPL)
@@ -22,8 +22,8 @@ AUTHORS:
 #
 #  The full text of the GPL is available at:
 #
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ***************************************************************************
 
 # Pieces of this file are strongly based on the marching cubes
 # implementation in Jmol located at src/org/jmol/jvxl/calc/MarchingCubes.java.
@@ -521,7 +521,7 @@ cdef class MarchingCubesTriangles(MarchingCubes):
                                                    cur[y+i,z-1] if z>0 else 0,
                                                    cur[y+i,z+1] if z<nz-1 else 0)
                             interpolate_point_c(&v.gradient, frac, gradients)
-                    if not(self.color_function is None):
+                    if self.color_function is not None:
                         self.apply_color_func(&v.color, self.color_function,
                                               self.colormap, v)
                     y_vertices[y,z] = <object>v
@@ -555,7 +555,7 @@ cdef class MarchingCubesTriangles(MarchingCubes):
                                                    cur[y,z+i-1] if z+i>0 else 0,
                                                    cur[y,z+i+1] if z+i<nz-1 else 0)
                             interpolate_point_c(&v.gradient, frac, gradients)
-                    if not(self.color_function is None):
+                    if self.color_function is not None:
                         self.apply_color_func(&v.color, self.color_function,
                                               self.colormap, v)
                     z_vertices[y,z] = <object>v
@@ -631,7 +631,7 @@ cdef class MarchingCubesTriangles(MarchingCubes):
                                                right[y,z-1] if z>0 else 0,
                                                right[y,z+1] if z<nz-1 else 0)
                             interpolate_point_c(&v.gradient, frac, gradients)
-                    if not(self.color_function is None):
+                    if self.color_function is not None:
                         self.apply_color_func(&v.color, self.color_function,
                                               self.colormap, v)
                     x_vertices[y,z] = <object>v
@@ -827,7 +827,7 @@ cdef class MarchingCubesTriangles(MarchingCubes):
 
         face = (v1_ev_pt, v2_ev_pt, v3_ev_pt)
 
-        if not(self.color_function is None):
+        if self.color_function is not None:
             v1_col = v1.color
             v2_col = v2.color
             v3_col = v3.color
