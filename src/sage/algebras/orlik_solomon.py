@@ -193,7 +193,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
 
             sage: M = matroids.Wheel(3)
             sage: OS = M.orlik_solomon_algebra(QQ)
-            sage: OS.one_basis() == frozenset([])
+            sage: OS.one_basis() == frozenset()
             True
         """
         return frozenset({})
@@ -348,7 +348,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
             [[(1, 2), (1, 4), (2, 3), (3, 4)],
              [(3, 5), (3, 6), (5, 6)]]
             sage: OSMG = MG.orlik_solomon_algebra(QQ, ordering=s)
-            sage: OSMG.subset_image(frozenset([]))
+            sage: OSMG.subset_image(frozenset())
             OS{}
             sage: OSMG.subset_image(frozenset([(1,2),(3,4),(1,4),(2,3)]))
             0
@@ -376,7 +376,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
              [0, 3, 5], [1, 2, 4], [1, 2, 5], [1, 3, 4],
              [1, 3, 5], [2, 3], [4, 5]]
             sage: OSMG = MG.orlik_solomon_algebra(QQ)
-            sage: OSMG.subset_image(frozenset([]))
+            sage: OSMG.subset_image(frozenset())
             OS{}
             sage: OSMG.subset_image(frozenset([1, 2, 3]))
             0
@@ -395,7 +395,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
             sage: sorted([sorted(c) for c in MG.circuits()])
             [[0, 1], [2, 3, 4]]
             sage: OSMG = MG.orlik_solomon_algebra(QQ)
-            sage: OSMG.subset_image(frozenset([]))
+            sage: OSMG.subset_image(frozenset())
             OS{}
             sage: OSMG.subset_image(frozenset([1, 3, 4]))
             -OS{0, 2, 3} + OS{0, 2, 4}

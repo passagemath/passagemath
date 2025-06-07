@@ -70,7 +70,7 @@ class IncidenceAlgebra(CombinatorialFreeModule):
         CombinatorialFreeModule.__init__(self, R, map(tuple, P.relations()),
                                          prefix=prefix, category=cat)
 
-    def _repr_term(self, A):
+    def _repr_term(self, A) -> str:
         """
         Return a string representation of the term labeled by ``A``.
 
@@ -83,7 +83,7 @@ class IncidenceAlgebra(CombinatorialFreeModule):
         """
         return self.prefix() + str(list(A))
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return a string representation of ``self``.
 
@@ -148,7 +148,7 @@ class IncidenceAlgebra(CombinatorialFreeModule):
         """
         return self._poset
 
-    def some_elements(self):
+    def some_elements(self) -> list:
         """
         Return a list of elements of ``self``.
 
@@ -279,7 +279,7 @@ class IncidenceAlgebra(CombinatorialFreeModule):
         return self.monomial(A)
 
     @lazy_attribute
-    def _linear_extension(self):
+    def _linear_extension(self) -> tuple:
         """
         Return a fixed linear extension of the defining poset of ``self``.
 
@@ -362,7 +362,7 @@ class IncidenceAlgebra(CombinatorialFreeModule):
             M.set_immutable()
             return M
 
-        def is_unit(self):
+        def is_unit(self) -> bool:
             """
             Return if ``self`` is a unit.
 
@@ -471,7 +471,7 @@ class ReducedIncidenceAlgebra(CombinatorialFreeModule):
                                          sorted(self._equiv_classes.keys()),
                                          prefix=prefix, category=cat)
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return a string representation of ``self``.
 
@@ -500,7 +500,7 @@ class ReducedIncidenceAlgebra(CombinatorialFreeModule):
         """
         return self._ambient._poset
 
-    def some_elements(self):
+    def some_elements(self) -> list:
         """
         Return a list of elements of ``self``.
 
@@ -748,7 +748,7 @@ class ReducedIncidenceAlgebra(CombinatorialFreeModule):
             """
             return self.parent().lift(self).to_matrix()
 
-        def is_unit(self):
+        def is_unit(self) -> bool:
             """
             Return if ``self`` is a unit.
 

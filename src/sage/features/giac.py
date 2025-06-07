@@ -26,11 +26,11 @@ class Giac(Executable):
             True
         """
         Executable.__init__(self, 'giac_executable', executable='giac',
-                            spkg='giac', type='standard')
+                            spkg='giac', type='optional')
 
 
 def all_features():
     return [JoinFeature("giac",
                         (Giac(),
                          PythonModule('sage.interfaces.giac')),
-                        spkg='sagemath_giac', type='standard')]
+                        spkg='sagemath_giac', type='optional')]

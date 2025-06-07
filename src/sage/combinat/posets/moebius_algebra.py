@@ -114,7 +114,7 @@ class MoebiusAlgebra(Parent, UniqueRepresentation):
         self._category = cat
         Parent.__init__(self, base=R, category=self._category.WithRealizations())
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         """
         Return a string representation of ``self``.
 
@@ -412,7 +412,7 @@ class QuantumMoebiusAlgebra(Parent, UniqueRepresentation):
         self._category = cat
         Parent.__init__(self, base=R, category=self._category.WithRealizations())
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         """
         Return a string representation of ``self``.
 
@@ -694,7 +694,7 @@ class MoebiusAlgebraBases(Category_realization_of_parent):
         sage: M.E() in bases
         True
     """
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return the representation of ``self``.
 
@@ -725,7 +725,7 @@ class MoebiusAlgebraBases(Category_realization_of_parent):
         return [self.base()._category, Realizations(self.base())]
 
     class ParentMethods:
-        def _repr_(self):
+        def _repr_(self) -> str:
             """
             Text representation of this basis of a Möbius algebra.
 

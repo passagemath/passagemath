@@ -945,7 +945,7 @@ class InfinitePolynomialRing_sparse(CommutativeRing):
         if not hasattr(x, 'variables'):
             try:
                 return sage_eval(repr(x), self.gens_dict())
-            except (TypeError, ValueError, SyntaxError):
+            except (TypeError, ValueError, SyntaxError, NameError):
                 raise ValueError(f"cannot convert {x} into an element of {self}")
 
         # direct conversion will only be used if the underlying polynomials are libsingular.
