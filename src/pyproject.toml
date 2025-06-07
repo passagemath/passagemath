@@ -142,8 +142,6 @@ script-files = [
     "bin/sage-runtests",
     "bin/sage-fixdoctests",
     "bin/sage-coverage",
-    # The following is deprecated but might still be used in user package install scripts
-    "bin/sage-cython",
     # Helper scripts invoked by sage script
     # (they would actually belong to something like libexec)
     "bin/sage-cachegrind",
@@ -173,7 +171,6 @@ script-files = [
     "bin/sage-run",
     "bin/sage-run-cython",
     "bin/sage-startuptime.py",
-    "bin/sage-update-version",
 ]
 license-files = ["LICENSE.txt"]
 include-package-data = false

@@ -106,13 +106,11 @@ primecountpy = [
 
 [tool.setuptools]
 script-files = [
-    "bin/sage-cython",
     # Only makes sense in sage-the-distribution. TODO: Move to another installation script.
     "bin/sage-list-packages",
     # Uncategorized scripts in alphabetical order
     "bin/sage-grep",
     "bin/sage-grepdoc",
-    "bin/sage-update-version",
 ]
 include-package-data = false
 
