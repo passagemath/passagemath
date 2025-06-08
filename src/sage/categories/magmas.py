@@ -391,7 +391,7 @@ class Magmas(Category_singleton):
                     False
                     sage: SymmetricGroup(2).algebra(QQ).is_field()                      # needs sage.combinat sage.groups
                     False
-                    sage: Magmas().example().algebra(QQ).is_field()
+                    sage: Magmas().example().algebra(QQ).is_field()                     # needs sage.combinat sage.modules
                     False
 
                 """
