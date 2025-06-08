@@ -87,7 +87,7 @@ Finding the installation location of the mwrank program::
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib" python
     >>> from sage.features.eclib import Mwrank
     >>> Mwrank().absolute_filename()
-    '/Users/mkoeppe/.local/pipx/.cache/6c494549ef80bf7/lib/python3.11/site-packages/sage_wheels/bin/mwrank'
+    '.../bin/mwrank'
 
 Use with `sage.schemes.elliptic_curves <https://doc.sagemath.org/html/en/reference/arithmetic_curves/index.html#elliptic-curves>`_::
 
