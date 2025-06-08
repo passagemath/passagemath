@@ -6543,7 +6543,7 @@ cdef class Matrix(Matrix1):
         matrices with symbolic entries.  ::
 
             sage: A = matrix(QQ, 3, 3, range(9))
-            sage: A.change_ring(RR).eigenspaces_left()
+            sage: A.change_ring(RR).eigenspaces_left()                                  # needs sage.rings.number_field
             doctest:warning...
             UserWarning: eigenspaces cannot be computed reliably for inexact rings such as Real Field with 53 bits of precision,
             consult numerical or symbolic matrix classes for other options
@@ -7078,6 +7078,7 @@ cdef class Matrix(Matrix1):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: A = matrix(QQ, [[1, 2], [3, 4]])
             sage: l = A.eigenvectors_left(); l
             [(-0.3722813232690144?, [(1, -0.4574271077563382?)], 1),
@@ -7097,6 +7098,7 @@ cdef class Matrix(Matrix1):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: A = matrix(QQ, [[1, 2], [3, 4]])
             sage: A.eigenvalues(algorithm="sage")  # indirect doctest
             [-0.3722813232690144?, 5.372281323269015?]
@@ -7235,6 +7237,7 @@ cdef class Matrix(Matrix1):
 
         ::
 
+            sage: # needs sage.libs.flint
             sage: import warnings
             sage: warnings.simplefilter("always")
             sage: m = matrix(RR, [[0, 1], [-2, 0]])
@@ -7278,6 +7281,7 @@ cdef class Matrix(Matrix1):
 
         TESTS::
 
+            sage: # needs sage.libs.flint
             sage: m = matrix(RR, [[0, 1], [-2, 0]])
             sage: m._eigenvectors_left(extend=False, algorithm="flint", suppress_future_warning=True)
             []
@@ -7308,6 +7312,7 @@ cdef class Matrix(Matrix1):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: import warnings
             sage: warnings.simplefilter("always")
             sage: m = matrix(RR, [[0, 1], [-2, 0]])
@@ -7383,7 +7388,7 @@ cdef class Matrix(Matrix1):
         TESTS::
 
             sage: m = matrix(RR, [[0, 1], [-2, 0]])
-            sage: l = m.eigenvectors_left(algorithm="pari"); l  # abs tol 1e-14
+            sage: l = m.eigenvectors_left(algorithm="pari"); l  # abs tol 1e-14  # needs sage.libs.pari
             [(-1.4142135623730950487637880730318329370*I,
               [(0.707106781186547524*I, 1.00000000000000000)],
               1),
@@ -7433,6 +7438,7 @@ cdef class Matrix(Matrix1):
         only raises the warning at most once, because of doctest ordering
         the warning is not seen below. See :issue:`39811`. ::
 
+            sage: # needs sage.libs.flint
             sage: m = matrix(RR, [[0, 1], [-2, 0]])
             sage: m.eigenvectors_left(algorithm="flint")  # indirect doctest
             [(-1.41421356237309*I, [(-0.816496580927726, -0.577350269189626*I)], 1),
@@ -7483,6 +7489,7 @@ cdef class Matrix(Matrix1):
 
         Only works for matrices over ``RealField`` or ``ComplexField``.
 
+            sage: # needs sage.libs.pari
             sage: m = matrix(RR, [[0, 1], [-2, 0]])
             sage: m.eigenvectors_left(algorithm="pari")  # abs tol 1e-14
             [(-1.4142135623730950487637880730318329370*I,
@@ -13397,6 +13404,7 @@ cdef class Matrix(Matrix1):
 
         Here we use the extended decomposition, where the result may not be a lower triangular matrix::
 
+            sage: # needs sage.rings.finite_rings
             sage: U = matrix(GF(17**2),[[0,1],[1,0]])
             sage: B = U._cholesky_extended_ff(); B
             [13*z2 + 6 3*z2 + 16]
@@ -13422,6 +13430,7 @@ cdef class Matrix(Matrix1):
 
         If the matrix is not full rank, we compute the rank and throw an exception.
 
+            sage: # needs sage.rings.finite_rings
             sage: U = matrix(GF(3**2),[[1,4,7],[4,1,4],[7,4,1]])
             sage: U._cholesky_extended_ff()
             Traceback (most recent call last):
