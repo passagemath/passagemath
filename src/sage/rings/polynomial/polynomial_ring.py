@@ -2460,7 +2460,7 @@ class PolynomialRing_field(PolynomialRing_integral_domain):
 
             sage: R = PolynomialRing(QQ, 'x')
             sage: data = [(0,1), (2,5), (3,10)]
-            sage: p = R.lagrange_polynomial(data, algorithm='pari'); p
+            sage: p = R.lagrange_polynomial(data, algorithm='pari'); p                  # needs sage.libs.pari
             x^2 + 1
 
         TESTS:

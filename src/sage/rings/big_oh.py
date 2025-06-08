@@ -135,8 +135,8 @@ def O(*x, **kwds):
         Traceback (most recent call last):
         ...
         NotImplementedError: completion only currently defined for the maximal ideal (x)
-        sage: R.<x> = LazyPowerSeriesRing(QQ)
-        sage: O(x^5)
+        sage: R.<x> = LazyPowerSeriesRing(QQ)                                           # needs sage.combinat
+        sage: O(x^5)                                                                    # needs sage.combinat
         O(x^5)
         sage: t = O(Zp(5)(2*5^2)); t
         O(5^2)

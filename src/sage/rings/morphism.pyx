@@ -1117,6 +1117,7 @@ cdef class RingHomomorphism(RingMap):
         Check that the case in which the domain is a quotient ring
         and codomain a finite field of same characteristic is handled correctly::
 
+            sage: # needs sage.rings.finite_rings
             sage: F8.<a> = GF(2^3)
             sage: PR.<y> = PolynomialRing(F8)
             sage: IP = y^4 + a*y^3 + (a^2 + 1)*y + a^2 + 1
@@ -1163,6 +1164,7 @@ cdef class RingHomomorphism(RingMap):
         This example illustrates the error message we get if the domain and codomain have different cardinality.
         In that case, we certainly know the morphism is not an isomorphism::
 
+            sage: # needs sage.rings.finite_rings
             sage: F4.<a> = GF(2^2, modulus=[1,1,1])
             sage: PR.<y> = PolynomialRing(F4)
             sage: IP = y^5 + y + 1
