@@ -584,7 +584,7 @@ class FractionField_generic(ring.Field):
         TESTS::
 
             sage: F = QQ['x'].fraction_field()
-            sage: R = LaurentSeriesRing(QQ, 'x')
+            sage: R.<x> = LaurentSeriesRing(QQ)
             sage: f = ~R(x^2 + x + 3); f
             1/3 - 1/9*x - 2/27*x^2 + 5/81*x^3 + ... + O(x^20)
             sage: F._convert_from_finite_precision_laurent_series(f)
