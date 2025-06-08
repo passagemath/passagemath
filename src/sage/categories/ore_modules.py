@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from sage.misc.lazy_attribute import lazy_attribute
 from sage.misc.lazy_import import lazy_import
 

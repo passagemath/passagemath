@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 r"""
 Feature for testing if Meson editable install is used.
 """

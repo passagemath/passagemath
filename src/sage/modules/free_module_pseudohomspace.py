@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 """
 Space of pseudomorphisms of free modules
 

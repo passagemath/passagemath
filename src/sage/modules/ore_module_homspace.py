@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 r"""
 Space of morphisms between Ore modules
 
