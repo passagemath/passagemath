@@ -5,5 +5,7 @@ cd src
 
 # Finally install
 # https://matplotlib.org/stable/install/dependencies.html#use-system-libraries
-sdh_pip_install -C setup-args="-Dsystem-freetype=true" \
+# --no-build-isolation is to avoid [matplotlib-3.10.3] [spkg-install] < ERROR: No matching distribution found for meson-python<0.17.0,>=0.13.1
+sdh_pip_install --no-build-isolation \
+                -C setup-args="-Dsystem-freetype=true" \
                 -C setup-args="-Dsystem-qhull=true" .
