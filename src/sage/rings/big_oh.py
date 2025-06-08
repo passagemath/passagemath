@@ -13,6 +13,9 @@ Big O for various types (power series, `p`-adics, etc.)
 from sage.misc.lazy_import import lazy_import
 
 lazy_import('sage.rings.padics.factory', ['Qp', 'Zp'])
+lazy_import('sage.rings.padics.padic_ZZ_pX_FM_element', 'pAdicZZpXFMElement')
+lazy_import('sage.rings.padics.padic_fixed_mod_element', 'pAdicFixedModElement')
+
 from sage.rings.polynomial.polynomial_element import Polynomial
 
 try:
@@ -208,8 +211,6 @@ def O(*x, **kwds):
         # zero.add_bigoh() because zero has ramification index 1
         return x.add_bigoh(x.valuation(), **kwds)
 
-    from sage.rings.padics.padic_ZZ_pX_FM_element import pAdicZZpXFMElement
-    from sage.rings.padics.padic_fixed_mod_element import pAdicFixedModElement
     if isinstance(x, (pAdicZZpXFMElement, pAdicFixedModElement)):
         # fixed modulus elements does not keep track of their own precision,
         # we must return zero (that said it is not recommended to use O()
