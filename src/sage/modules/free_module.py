@@ -3130,6 +3130,7 @@ class FreeModule_generic(Module_free_ambient):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: F = GF(25)
             sage: Frob = F.frobenius_endomorphism()
             sage: M = F^2
@@ -3186,6 +3187,7 @@ class FreeModule_generic(Module_free_ambient):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: K.<z> = GF(5^5)
             sage: Frob = K.frobenius_endomorphism()
             sage: V = K^2; W = K^3
@@ -3199,6 +3201,7 @@ class FreeModule_generic(Module_free_ambient):
 
         We check that `f` is indeed semi-linear::
 
+            sage: # needs sage.rings.finite_rings
             sage: v = V([z+1, z+2])
             sage: f(z*v)
             (2*z^2 + z + 4, z^4 + 2*z^3 + 3*z^2 + z, 4*z^4 + 2*z^2 + 3*z + 2)
@@ -3207,6 +3210,7 @@ class FreeModule_generic(Module_free_ambient):
 
         An example with a derivation::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<t> = ZZ[]
             sage: d = R.derivation()
             sage: M = R^2
@@ -3217,7 +3221,6 @@ class FreeModule_generic(Module_free_ambient):
             [t^2 t^3]
             Domain: Ambient free module of rank 2 over the integral domain Univariate Polynomial Ring in t over Integer Ring
             Codomain: Ambient free module of rank 2 over the integral domain Univariate Polynomial Ring in t over Integer Ring
-
             sage: v = M([1,1])
             sage: Nabla(v)
             (t + 1, t^3 + t^2)
@@ -3229,6 +3232,7 @@ class FreeModule_generic(Module_free_ambient):
         If the twisting derivation is not zero, the domain must
         coerce into the codomain::
 
+            sage: # needs sage.rings.finite_rings
             sage: N = R^3
             sage: M.pseudohom([[1, t, t^2], [1, t^2, t^4]], d, codomain=N)
             Traceback (most recent call last):
