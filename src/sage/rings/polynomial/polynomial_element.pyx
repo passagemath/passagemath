@@ -1655,7 +1655,7 @@ cdef class Polynomial(CommutativePolynomial):
             from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
             try:
                 R = PolynomialRing(P.base_ring(), P.variable_names(), implementation="singular")
-            except NotImplementedError:
+            except (NotImplementedError, ImportError):
                 # PolynomialRing over RDF/CDF etc. are still not implemented in libsingular
                 # (in particular singular_ring_new) even though they are implemented in _do_singular_init_
                 pass
