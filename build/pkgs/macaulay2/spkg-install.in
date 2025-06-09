@@ -11,7 +11,7 @@ git clone https://github.com/Macaulay2/memtailor.git M2/submodules/memtailor
 git clone https://github.com/Macaulay2/mathic.git M2/submodules/mathic
 git clone https://github.com/Macaulay2/mathicgb.git M2/submodules/mathicgb
 
-BUILD_OPTIONS=
+BUILD_OPTIONS=$SAGE_MACAULAY2_BUILD_OPTIONS
 
 export Eigen3_DIR=$SAGE_LOCAL
 export Flint_DIR=$SAGE_LOCAL
