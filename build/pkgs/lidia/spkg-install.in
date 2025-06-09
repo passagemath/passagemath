@@ -1,7 +1,7 @@
 cd src/
 
 # https://github.com/passagemath/passagemath/issues/821 lidia manylinux-aarch64: Build error
-cp "$SAGE_ROOT"/config/config.* config
+cp "$SAGE_ROOT"/config/config.* .
 
 if [ -n "$SAGE_GMP_PREFIX" ]; then
    GMP_CONFIGURE="--with-extra-includes=$SAGE_GMP_PREFIX/include --with-extra-libs=$SAGE_GMP_PREFIX/lib"
