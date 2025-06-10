@@ -21,4 +21,4 @@ with InWheel(wheel, wheel):
 
     print(f'Running {command}')
     sys.stdout.flush()
-    if os.system(command) != 0: sys.exit(1)
+    if os.system(f"bash -c {shlex.quote(command)}") != 0: sys.exit(1)
