@@ -1,4 +1,8 @@
 # sage_setup: distribution = sagemath-schemes
+r"""
+Addition formula for elliptic curves over rings
+"""
+
 
 def _add(E, P, Q):
     r"""

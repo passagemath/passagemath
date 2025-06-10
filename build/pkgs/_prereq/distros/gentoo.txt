@@ -28,3 +28,4 @@ sys-apps/which
 sys-apps/diffutils
 sys-devel/flex
 sys-devel/bison
+sys-devel/patch

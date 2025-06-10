@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 r"""
 Coherent sheaves on projective schemes
 

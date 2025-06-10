@@ -19,7 +19,7 @@ the additional constraints that:
 * the last element of `X` is -1
 * the last element of `U` is 1
 
-The nonperiodic autocorrelation of a familiy of sequences
+The nonperiodic autocorrelation of a family of sequences
 `X=\{A_1, A_2, ..., A_n\}` is defined as (see Definition 7.2 of [Seb2017]_):
 
 .. MATH::
@@ -46,7 +46,7 @@ from sage.structure.sequence import Sequence
 
 def _nonperiodic_autocorrelation(sequences, j):
     r"""
-    Compute the nonperiodic autocorrelation of a familiy of sequences.
+    Compute the nonperiodic autocorrelation of a family of sequences.
 
     Namely, given a family of sequences `X` it computes:
 

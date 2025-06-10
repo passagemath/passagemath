@@ -1743,7 +1743,7 @@ class ToricDivisorGroup(DivisorGroup_generic):
         return self.scheme().fan().nrays()
 
     @cached_method
-    def gens(self):
+    def gens(self) -> tuple:
         r"""
         Return the generators of the divisor group.
 

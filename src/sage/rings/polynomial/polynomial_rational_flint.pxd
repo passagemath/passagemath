@@ -1,11 +1,11 @@
 # sage_setup: distribution = sagemath-flint
-###############################################################################
+# ############################################################################
 #          Copyright (C) 2010 Sebastian Pancratz <sfp@pancratz.org>           #
 #                                                                             #
 #     Distributed under the terms of the GNU General Public License (GPL)     #
 #                                                                             #
-#                        http://www.gnu.org/licenses/                         #
-###############################################################################
+#                        https://www.gnu.org/licenses/                        #
+# ############################################################################
 
 from sage.libs.flint.types cimport fmpq_poly_t
 

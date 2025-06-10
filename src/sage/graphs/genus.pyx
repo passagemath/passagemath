@@ -147,7 +147,7 @@ cdef class simple_connected_genus_backtracker:
 
         for v in range(self.num_verts):
             if not G.has_vertex(v):
-                raise ValueError("Please relabel G so vertices are 0, ..., n-1")
+                raise ValueError("please relabel G so vertices are 0, ..., n-1")
 
             dv = G.in_degrees[v]
             self.degree[v] = 0
@@ -207,7 +207,6 @@ cdef class simple_connected_genus_backtracker:
         Quickly store the current face_map so we can recover
         the embedding it corresponds to later.
         """
-
         memcpy(self.face_freeze, self.face_map, self.num_darts * sizeof(int))
 
     def get_embedding(self):
@@ -586,7 +585,7 @@ def simple_connected_graph_genus(G, set_embedding=False, check=True, minimal=Tru
 
     REFERENCES:
 
-    [1] http://www.springerlink.com/content/0776127h0r7548v7/
+    [1] :doi:`10.1007/s00373-007-0729-9`
     """
     cdef int style, cutoff
     oG = G  # original graph
@@ -596,7 +595,7 @@ def simple_connected_graph_genus(G, set_embedding=False, check=True, minimal=Tru
 
     if check:
         if not G.is_connected():
-            raise ValueError("Cannot compute the genus of a disconnected graph")
+            raise ValueError("cannot compute the genus of a disconnected graph")
 
         if G.is_directed() or G.has_multiple_edges() or G.has_loops():
             G = G.to_simple()

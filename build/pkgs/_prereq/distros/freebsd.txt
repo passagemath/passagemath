@@ -18,3 +18,4 @@ dash
 python # python metaport for bootstrapping the build
 flex
 bison
+patch

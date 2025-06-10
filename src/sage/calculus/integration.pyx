@@ -74,7 +74,7 @@ cdef double c_f(double t, void *params) noexcept:
 
 def numerical_integral(func, a, b=None,
                        algorithm='qag',
-                       max_points=87, params=[], eps_abs=1e-6,
+                       max_points=87, params=None, eps_abs=1e-6,
                        eps_rel=1e-6, rule=6):
     r"""
     Return the numerical integral of the function on the interval
@@ -268,8 +268,6 @@ def numerical_integral(func, a, b=None,
     """
     cdef double abs_err  # step size
     cdef double result
-    cdef int i
-    cdef int j
     cdef double _a, _b
     cdef PyFunctionWrapper wrapper  # struct to pass information into GSL C function
 
@@ -288,6 +286,9 @@ def numerical_integral(func, a, b=None,
     cdef gsl_function F
     cdef gsl_integration_workspace* W
     W = NULL
+
+    if params is None:
+        params = []
 
     if True:
         from sage.rings.infinity import Infinity
@@ -620,7 +621,7 @@ def monte_carlo_integral(func, xl, xu, size_t calls, algorithm='plain',
         if len(vars) < target_dim:
             raise ValueError(("The function to be integrated depends on "
                               "{} variables {}, and so cannot be "
-                                 "integrated in {} dimensions. Please fix "
+                              "integrated in {} dimensions. Please fix "
                               "additional variables with the 'params' "
                               "argument").format(len(vars), tuple(vars),
                                                  target_dim))
@@ -629,7 +630,7 @@ def monte_carlo_integral(func, xl, xu, size_t calls, algorithm='plain',
                               "{} variables {}, and so cannot be "
                               "integrated in {} dimensions. Please add "
                               "more items in upper and lower limits"
-                             ).format(len(vars), tuple(vars), target_dim))
+                              ).format(len(vars), tuple(vars), target_dim))
 
         from sage.structure.element import Expression
         if isinstance(func, Expression):

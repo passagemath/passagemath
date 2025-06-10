@@ -16,7 +16,11 @@ TESTS::
 
     sage: import sage.tests.benchmark
 """
-from cysignals.alarm import alarm, cancel_alarm, AlarmInterrupt
+import sys
+
+if sys.platform != 'win32':
+    from cysignals.alarm import AlarmInterrupt, alarm, cancel_alarm
+
 from sage.combinat.combinat import fibonacci
 from sage.functions.other import factorial
 from sage.interfaces.gp import gp
@@ -34,10 +38,10 @@ from sage.modular.modsym.modsym import ModularSymbols
 from sage.rings.complex_mpfr import ComplexField
 from sage.rings.finite_rings.finite_field_constructor import GF
 from sage.rings.finite_rings.integer_mod_ring import Integers
-from sage.rings.rational_field import QQ
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
+from sage.rings.rational_field import QQ
 from sage.schemes.elliptic_curves.constructor import EllipticCurve
 
 lazy_import('sage.interfaces.macaulay2', 'macaulay2')
