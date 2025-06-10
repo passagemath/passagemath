@@ -1,7 +1,7 @@
 From c9f3ec32c92971bd193147a98a956b6876caf1be Mon Sep 17 00:00:00 2001
 From: Petr Ambroz <petrambroz@icloud.com>
 Date: Tue, 5 Nov 2024 12:29:01 +0000
-Subject: [PATCH] fix FPU control preventing compilation on ARM CPUs
+Subject: [PATCH 2/3] fix FPU control preventing compilation on ARM CPUs
 
 ---
  parallel/Main.cc | 2 +-
@@ -34,3 +34,6 @@ index c2327df..8302179 100644
          fpu_control_t oldcw, newcw;
          _FPU_GETCW(oldcw); newcw = (oldcw & ~_FPU_EXTENDED) | _FPU_DOUBLE; _FPU_SETCW(newcw);
          //printf("c WARNING: for repeatability, setting FPU to use double precision\n");
+-- 
+2.47.0
+
