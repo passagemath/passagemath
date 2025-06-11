@@ -10,7 +10,9 @@ if conda --version > /dev/null 2>&1; then
         exit
     fi
 fi
-if emerge --version > /dev/null 2>&1; then
+if nix-env --version > /dev/null 2>&1; then
+    echo nix
+elif emerge --version > /dev/null 2>&1; then
     echo gentoo
 elif apt-get --version > /dev/null 2>&1; then
     echo debian
