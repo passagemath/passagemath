@@ -165,7 +165,7 @@ RUN nix-channel --update
 ENV PACKAGES="$SYSTEM_PACKAGES"
 EOF
         esac
-        INSTALL="nix-env --install"
+        INSTALL="nix-env -f '<nixpkgs>' --install --attr"
         RUN="RUN nix-shell --packages \$PACKAGES --run "\'
         ENDRUN=\'
         ;;
