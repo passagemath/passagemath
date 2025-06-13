@@ -26,7 +26,6 @@ AUTHORS:
 # ****************************************************************************
 
 
-import sage.misc.misc as misc
 from sage.modules.matrix_morphism import MatrixMorphism
 from sage.categories.morphism import Morphism
 
@@ -165,9 +164,11 @@ class HeckeModuleMorphism_matrix(MatrixMorphism, HeckeModuleMorphism):
             sage: t.name('spam'); t._repr_()
             'Hecke module morphism spam defined by the matrix\n[0 1 2]\n[3 4 5]\n[6 7 8]\nDomain: Modular Symbols space of dimension 3 for Gamma_0(6) of weight ...\nCodomain: Modular Symbols space of dimension 3 for Gamma_0(6) of weight ...'
         """
+        from sage.misc.misc import strunc
+
         name = self.__name
         if name:
             name += ' '
-        return "Hecke module morphism %sdefined by the matrix\n%r\nDomain: %s\nCodomain: %s" % (name, self.matrix(), misc.strunc(self.domain()), misc.strunc(self.codomain()))
+        return "Hecke module morphism %sdefined by the matrix\n%r\nDomain: %s\nCodomain: %s" % (name, self.matrix(), strunc(self.domain()), strunc(self.codomain()))
 
 # __mul__ method removed by David Loeffler 2009-04-14 as it is an exact duplicate of sage.modules.matrix_morphism.__mul__
