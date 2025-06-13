@@ -29,7 +29,6 @@ from sage.arith.misc import valuation
 from sage.matrix.constructor import Matrix as matrix
 from sage.misc.cachefunc import cached_method
 from sage.misc.lazy_import import lazy_import
-from sage.misc.misc import newton_method_sizes
 from sage.rings.big_oh import O
 from sage.rings.finite_rings.finite_field_constructor import FiniteField as GF
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing as Integers
@@ -1790,6 +1789,8 @@ def _brent(F, p, N):
 
     # initial approximation:
     G = Rx.one()
+
+    from sage.misc.misc import newton_method_sizes
 
     # loop over an appropriate increasing sequence of lengths s
     for s in newton_method_sizes(N):
