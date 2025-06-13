@@ -123,7 +123,6 @@ from sage.rings.rational_field import RationalField
 from sage.rings.finite_rings.finite_field_base import FiniteField
 
 from sage.misc.latex import latex
-from sage.misc.misc import is_iterator
 
 from sage.structure.all import Sequence
 from sage.structure.richcmp import richcmp, richcmp_method
@@ -937,11 +936,13 @@ class AlgebraicScheme_subscheme(AlgebraicScheme):
             polynomials = I.gens()
             if I.ring() is R:  # Otherwise we will recompute I later after
                 self.__I = I  # converting generators to the correct ring
-        if isinstance(polynomials, (tuple, PolynomialSequence_generic)) or is_iterator(polynomials):
-            polynomials = list(polynomials)
-        elif not isinstance(polynomials, list):
+        try:
+            it = iter(polynomials)
+        except Exception:
             # Looks like we got a single polynomial
             polynomials = [polynomials]
+        else:
+            polynomials = list(polynomials)
         for n, f in enumerate(polynomials):
             try:
                 polynomials[n] = R(f)
