@@ -593,7 +593,6 @@ from sage.categories.action import Action
 from sage.misc.cachefunc import cached_method
 from sage.misc.fast_methods import Singleton
 from sage.misc.lazy_string import lazy_string
-from sage.misc.misc import increase_recursion_limit
 from sage.rings import infinity
 from sage.rings.cc import CC
 from sage.rings.cif import CIF
@@ -8791,6 +8790,8 @@ class ANBinaryExpr(ANDescr):
             1000
             sage: sys.setrecursionlimit(old_recursion_limit)
         """
+        from sage.misc.misc import increase_recursion_limit
+
         with increase_recursion_limit(10):
             left = self._left
             right = self._right
