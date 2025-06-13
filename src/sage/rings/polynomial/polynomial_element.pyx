@@ -1796,8 +1796,10 @@ cdef class Polynomial(CommutativePolynomial):
         except AttributeError:
             first_coeff = A(~const_term)
 
+        from sage.misc.misc import newton_method_sizes
+
         current = R(first_coeff)
-        for next_prec in sage.misc.misc.newton_method_sizes(prec)[1:]:
+        for next_prec in newton_method_sizes(prec)[1:]:
             z = current._mul_trunc_(self, next_prec)._mul_trunc_(current, next_prec)
             current = current + current - z
         return current
