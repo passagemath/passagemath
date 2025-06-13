@@ -36,7 +36,6 @@ import sage.rings.rational_field as rational_field
 import sage.rings.integer_ring as integer_ring
 from sage.arith.misc import kronecker as kronecker_symbol
 from sage.arith.misc import GCD as gcd
-import sage.misc.misc as misc
 from sage.rings.finite_rings.finite_field_constructor import FiniteField
 
 from sage.rings.ideal import Ideal_generic, Ideal_fractional
@@ -1862,7 +1861,7 @@ class NumberFieldFractionalIdeal(MultiplicativeGroupElement, NumberFieldIdeal, I
             raise ValueError("gens must have length at least 1 (zero ideal is not a fractional ideal)")
         if len(gens) == 1 and isinstance(gens[0], (list, tuple)):
             gens = gens[0]
-        if misc.exists(gens,bool)[0]:
+        if any(bool(x) for x in gens):
             NumberFieldIdeal.__init__(self, field, gens)
         else:
             raise ValueError("gens must have a nonzero element (zero ideal is not a fractional ideal)")

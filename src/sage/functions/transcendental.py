@@ -20,7 +20,6 @@ import math
 import sys
 
 from sage.misc.lazy_import import lazy_import
-from sage.misc.misc import increase_recursion_limit
 from sage.rings.integer_ring import ZZ
 from sage.symbolic.function import GinacFunction, BuiltinFunction
 
@@ -555,6 +554,9 @@ class DickmanRho(BuiltinFunction):
             return 1 - x.log()
         n = x.floor()
         if self._cur_prec < x.parent().prec() or n not in self._f:
+
+            from sage.misc.misc import increase_recursion_limit
+
             self._cur_prec = rel_prec = x.parent().prec()
             # Go a bit beyond so we're not constantly re-computing.
             max = x.parent()(1.1)*x + 10

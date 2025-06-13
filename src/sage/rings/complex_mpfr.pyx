@@ -33,8 +33,6 @@ AUTHORS:
 import re
 import weakref
 
-import sage.misc.misc
-
 from sage.libs.mpfr cimport *
 
 from sage.structure.parent cimport Parent

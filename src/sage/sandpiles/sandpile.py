@@ -339,7 +339,6 @@ from sage.graphs.digraph import DiGraph
 from sage.graphs.graph import Graph
 from sage.misc.functional import det, denominator
 from sage.misc.lazy_import import lazy_import
-from sage.misc.misc import exists
 from sage.misc.misc_c import prod
 from sage.misc.temporary_file import tmp_filename
 from sage.rings.integer import Integer
@@ -1542,7 +1541,7 @@ class Sandpile(DiGraph):
         else:
             rec = list(self.recurrents())
             for r in self.recurrents():
-                if exists(rec, lambda x: r > x)[0]:
+                if any(r > x for x in rec):
                     rec.remove(r)
         self._min_recurrents = rec
 

@@ -79,7 +79,7 @@ AUTHORS:
 import sqlite3 as sqlite
 import os
 import re
-from sage.misc.temporary_file import tmp_filename
+
 from sage.structure.sage_object import SageObject
 
 sqlite_keywords = ['ABORT','ACTION','ADD','AFTER','ALL','ALTER','ANALYZE',
@@ -1087,6 +1087,7 @@ class SQLDatabase(SageObject):
         if filename is None:
             if read_only is None:
                 read_only = False
+            from sage.misc.temporary_file import tmp_filename
             filename = tmp_filename() + '.db'
         elif (filename[-3:] != '.db'):
             raise ValueError('Please enter a valid database path (file name '
@@ -1189,6 +1190,7 @@ class SQLDatabase(SageObject):
             4                    1                    978932
         """
         # copy .db file
+        from sage.misc.temporary_file import tmp_filename
         new_loc = tmp_filename() + '.db'
         if not self.__read_only__:
             self.commit()
