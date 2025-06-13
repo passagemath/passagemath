@@ -18,7 +18,6 @@ AUTHORS:
 # ****************************************************************************
 
 import os
-import sage.misc.misc
 
 
 def coefficients_to_power_sums(n, m, a):
@@ -101,7 +100,8 @@ def __lagrange_bounds_phc(n, m, a, tmpfile=None):
 
     # Initialization.
     if tmpfile is None:
-        tmpfile = sage.misc.misc.tmp_filename()
+        from sage.misc.temporary_file import tmp_filename
+        tmpfile = tmp_filename()
     f = open(tmpfile + '.phc', 'w')
     f.close()
 
