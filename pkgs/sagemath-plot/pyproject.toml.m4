@@ -39,7 +39,10 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl"]
+test            = [
+    "passagemath-plot[tachyon]",
+    "passagemath-repl",
+]
 
 # extras by libraries
 jsmol           = [SPKG_INSTALL_REQUIRES_jupyter_jsmol]
