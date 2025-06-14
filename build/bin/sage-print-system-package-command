@@ -187,7 +187,7 @@ case $system:$command in
         [ -n "$system_packages" ] && print_shell_command ${SUDO}pkg install $system_packages
         ;;
     nix*:install)
-        [ -n "$system_packages" ] && print_shell_command nix-env --install $system_packages
+        [ -n "$system_packages" ] && print_shell_command "nix-env -f '<nixpkgs>' --install --attr $system_packages"
         ;;
     alpine:update)
         print_shell_command "apk update"
