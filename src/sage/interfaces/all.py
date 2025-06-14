@@ -8,6 +8,11 @@ try:
 except ImportError:
     pass
 
+try:
+    from sage.all__sagemath_tachyon import *
+except ImportError:
+    pass
+
 from sage.misc.lazy_import import lazy_import
 
 lazy_import('sage.interfaces.sage0', ['sage0', 'sage0_version', 'Sage'])
@@ -44,7 +49,6 @@ lazy_import('sage.interfaces.r', ['r', 'R', 'r_version'])
 lazy_import('sage.interfaces.read_data', 'read_data')
 lazy_import('sage.interfaces.scilab', 'scilab')
 lazy_import('sage.interfaces.singular', ['singular', 'singular_version', 'Singular'])
-lazy_import('sage.interfaces.tachyon', 'tachyon_rt')
 
 # The following variable is used by sage-shell-mode in emacs:
 interfaces = ['gap', 'gap3', 'giac', 'gp', 'mathematica', 'gnuplot',
