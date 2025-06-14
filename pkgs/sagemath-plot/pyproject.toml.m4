@@ -47,6 +47,7 @@ test            = [
 # extras by libraries
 jsmol           = [SPKG_INSTALL_REQUIRES_jupyter_jsmol]
 matplotlib      = []  # no extra needed
+playwright      = [SPKG_INSTALL_REQUIRES_playwright]
 tachyon         = [SPKG_INSTALL_REQUIRES_sagemath_tachyon]
 threejs         = []  # no extra needed
 
