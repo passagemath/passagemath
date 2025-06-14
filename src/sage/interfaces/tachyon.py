@@ -777,13 +777,15 @@ class TachyonRT(SageObject):
         EXAMPLES::
 
             sage: from sage.interfaces.tachyon import TachyonRT
+            sage: t = TachyonRT()
+            sage: import os
+
+            sage: # needs sage.plot
             sage: tgen = Tachyon()
             sage: tgen.texture('t1')
             sage: tgen.sphere((0,0,0),1,'t1')
             sage: tgen.str()[30:40]
             'resolution'
-            sage: t = TachyonRT()
-            sage: import os
             sage: t(tgen.str(), outfile=os.devnull)
             tachyon ...
             Tachyon Parallel/Multiprocessor Ray Tracer...
