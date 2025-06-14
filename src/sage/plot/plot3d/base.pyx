@@ -61,13 +61,14 @@ from random import randint
 
 from sage.misc.temporary_file import tmp_filename
 from sage.misc.fast_methods cimport hash_by_id
+from sage.misc.lazy_import import lazy_import
 from sage.modules.free_module_element import vector
 from sage.rings.real_double import RDF
 from sage.plot.plot3d.texture import Texture
 from sage.plot.plot3d.transform cimport Transformation, point_c, face_c
 include "point_c.pxi"
 
-from sage.interfaces.tachyon import tachyon_rt
+lazy_import('sage.interfaces.tachyon', 'tachyon_rt')
 
 from libc.math cimport INFINITY
 
