@@ -164,7 +164,6 @@ and testing to make sure nothing funny is going on).
    sage/interfaces/tachyon
    sage/interfaces/tides
 
-   sage/interfaces/cleaner
    sage/interfaces/quit
    sage/interfaces/read_data
 
