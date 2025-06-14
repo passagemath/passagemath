@@ -59,6 +59,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_repl
     SPKG_INSTALL_REQUIRES_sagemath_schemes
     SPKG_INSTALL_REQUIRES_sagemath_singular
+    SPKG_INSTALL_REQUIRES_sagemath_tachyon
 dnl From build/pkgs/sagelib/dependencies
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_cython
