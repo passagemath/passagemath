@@ -31,3 +31,6 @@ flex
 # bison is needed by macaulay2
 bison
 patch
+# spkg-configure checks for both the program and the library
+bzip2
+pkgconfig(bzip2)

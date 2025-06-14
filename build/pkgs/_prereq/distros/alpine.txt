@@ -23,3 +23,4 @@ bison
 # needed by openblas
 linux-headers
 patch
+bzip2

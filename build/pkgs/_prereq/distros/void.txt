@@ -37,3 +37,4 @@ flex
 # bison is needed by macaulay2
 bison
 patch
+bzip2-devel

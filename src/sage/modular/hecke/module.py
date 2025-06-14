@@ -321,7 +321,7 @@ class HeckeModule_generic(Module):
             sage: sage.modular.hecke.module.HeckeModule_generic(QQ, 10).character() is None
             True
         """
-        return None
+        return
 
     def dimension(self):
         r"""

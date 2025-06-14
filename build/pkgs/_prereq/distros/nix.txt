@@ -19,3 +19,4 @@ bash
 flex
 bison
 gnupatch
+bzip2

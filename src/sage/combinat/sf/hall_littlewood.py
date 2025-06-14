@@ -20,13 +20,36 @@ Notation used in the definitions follows mainly [Mac1995]_.
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
+<<<<<<< HEAD
 from sage.structure.unique_representation import UniqueRepresentation
 from . import sfa
+||||||| 9352a3258c0
+from sage.structure.unique_representation import UniqueRepresentation
+from sage.libs.symmetrica.all import hall_littlewood
+from . import sfa
+=======
+>>>>>>> 10.7.beta6
 import sage.combinat.partition
+<<<<<<< HEAD
 from sage.categories.morphism import SetMorphism
+||||||| 9352a3258c0
+from sage.matrix.constructor import matrix
+from sage.categories.morphism import SetMorphism
+=======
+>>>>>>> 10.7.beta6
 from sage.categories.homset import Hom
+<<<<<<< HEAD
 from sage.misc.lazy_import import lazy_import
+||||||| 9352a3258c0
+=======
+from sage.categories.morphism import SetMorphism
+from sage.libs.symmetrica.all import hall_littlewood
+from sage.matrix.constructor import matrix
+>>>>>>> 10.7.beta6
 from sage.rings.rational_field import QQ
+from sage.structure.unique_representation import UniqueRepresentation
+
+from . import sfa
 
 lazy_import('sage.libs.symmetrica.all', 'hall_littlewood')
 lazy_import('sage.matrix.constructor', 'matrix')

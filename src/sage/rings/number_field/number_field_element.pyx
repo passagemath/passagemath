@@ -5582,8 +5582,9 @@ cdef class OrderElement_relative(NumberFieldElement_relative):
         """
         Return a canonical associate.
 
-        Only implemented here because order elements inherit from field elements,
-        but the canonical associate implemented there does not apply here.
+        Only implemented here because order elements inherit from
+        field elements, but the canonical associate implemented there
+        does not apply here.
 
         EXAMPLES::
 
@@ -5594,6 +5595,7 @@ cdef class OrderElement_relative(NumberFieldElement_relative):
             NotImplemented
         """
         return NotImplemented
+
 
 class CoordinateFunction():
     r"""

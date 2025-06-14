@@ -15,8 +15,13 @@ python # system python for bootstrapping the build
 tar
 bc
 gcc
+<<<<<<< HEAD
 # Needed when building gcc
 flex
+||||||| 9352a3258c0
+=======
+bzip2
+>>>>>>> 10.7.beta6
 # Needed for 4ti2:
 which
 # Needed for macaulay2:

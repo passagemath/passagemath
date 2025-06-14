@@ -790,7 +790,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
     additive_order = order
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         """
         Return ``True`` if this is not the zero point on the curve.
 
@@ -808,7 +808,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
         """
         return bool(self._coords[2])
 
-    def has_order(self, n):
+    def has_order(self, n) -> bool:
         r"""
         Test if this point has order exactly `n`.
 
@@ -907,7 +907,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
             self._order = n
         return ret
 
-    def has_finite_order(self):
+    def has_finite_order(self) -> bool:
         """
         Return ``True`` if this point has finite additive order as an
         element of the group of points on this curve.
@@ -937,7 +937,7 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
 
     is_finite_order = has_finite_order  # for backward compatibility
 
-    def has_infinite_order(self):
+    def has_infinite_order(self) -> bool:
         """
         Return ``True`` if this point has infinite additive order as an element
         of the group of points on this curve.
@@ -2816,7 +2816,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
     additive_order = order
 
-    def has_finite_order(self):
+    def has_finite_order(self) -> bool:
         """
         Return ``True`` iff this point has finite order on the elliptic curve.
 
@@ -2839,7 +2839,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
             return True
         return self.order() != oo
 
-    def has_infinite_order(self):
+    def has_infinite_order(self) -> bool:
         r"""
         Return ``True`` iff this point has infinite order on the elliptic curve.
 
@@ -3037,7 +3037,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
         gxdd = gxd.derivative()
         return (e(gxd(self[0])) > 0 and e(gxdd(self[0])) > 0)
 
-    def has_good_reduction(self, P=None):
+    def has_good_reduction(self, P=None) -> bool:
         r"""
         Return ``True`` iff this point has good reduction modulo a prime.
 
@@ -4673,7 +4673,7 @@ class EllipticCurvePoint_finite_field(EllipticCurvePoint_field):
 
         return ZZ(k % p)
 
-    def has_finite_order(self):
+    def has_finite_order(self) -> bool:
         r"""
         Return ``True`` if this point has finite additive order as an element
         of the group of points on this curve.

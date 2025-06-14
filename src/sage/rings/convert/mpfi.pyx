@@ -38,11 +38,17 @@ from sage.rings.complex_mpfr cimport ComplexNumber
 from sage.rings.complex_interval cimport ComplexIntervalFieldElement
 from sage.rings.complex_double cimport ComplexDoubleElement
 
+<<<<<<< HEAD
 try:
     from cypari2.gen import Gen
 except ImportError:
     Gen = ()
 
+||||||| 9352a3258c0
+from cypari2.gen cimport Gen
+
+=======
+>>>>>>> 10.7.beta6
 
 cdef inline int return_real(mpfi_ptr im) noexcept:
     """
@@ -445,6 +451,7 @@ cdef int mpfi_set_sage(mpfi_ptr re, mpfi_ptr im, x, field, int base) except -1:
             return return_real(im)
 
         # Complex
+        from cypari2.gen import Gen
         if isinstance(x, Gen):
             imag = x.imag()
             if im is NULL:

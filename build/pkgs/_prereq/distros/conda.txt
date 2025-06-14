@@ -17,3 +17,4 @@ bc
 flex
 bison
 patch
+bzip2
