@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-plot
+# sage.doctest: needs tachyon
 r"""
 The Tachyon 3D Ray Tracer
 
