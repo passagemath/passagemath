@@ -5,6 +5,8 @@ include VERSION.txt
 include sage/interfaces/tachyon.p*
 include sage/libs/tachyon.p*
 
+graft sage/ext_data/doctest/invalid
+
 global-exclude *.c
 global-exclude *.cpp
 

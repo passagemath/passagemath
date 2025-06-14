@@ -34,6 +34,7 @@ exclude sage/interfaces/mathics.p*
 exclude sage/interfaces/maxima*.p*
 exclude sage/interfaces/qepcad.p*
 exclude sage/interfaces/sympy*.p*
+exclude sage/interfaces/tachyon.p*
 exclude sage/interfaces/tides.p*
 
 
