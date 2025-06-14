@@ -113,6 +113,8 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
+import collections.abc
+
 import sage.rings.abc
 
 from sage.categories.number_fields import NumberFields
@@ -936,13 +938,21 @@ class AlgebraicScheme_subscheme(AlgebraicScheme):
             polynomials = I.gens()
             if I.ring() is R:  # Otherwise we will recompute I later after
                 self.__I = I  # converting generators to the correct ring
-        try:
-            it = iter(polynomials)
-        except Exception:
-            # Looks like we got a single polynomial
-            polynomials = [polynomials]
-        else:
+        if isinstance(polynomials, (collections.abc.Sequence, PolynomialSequence_generic)):
             polynomials = list(polynomials)
+        else:
+            try:
+                it = iter(polynomials)
+            except Exception:
+                # Looks like we got a single polynomial
+                polynomials = [polynomials]
+            else:
+                if it is polynomials:
+                    # case of an iterator
+                    polynomials = list(polynomials)
+                else:
+                    # Looks like we got a single polynomial
+                    polynomials = [polynomials]
         for n, f in enumerate(polynomials):
             try:
                 polynomials[n] = R(f)
