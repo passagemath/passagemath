@@ -687,6 +687,7 @@ import os
 import re
 
 from sage.cpython.string import bytes_to_str
+from sage.features.tachyon import Tachyon
 from sage.misc.pager import pager
 from sage.misc.superseded import deprecation
 from sage.misc.temporary_file import tmp_filename
@@ -809,7 +810,7 @@ class TachyonRT(SageObject):
         modelfile = tmp_filename(ext='.dat')
         with open(modelfile, 'w') as file:
             file.write(model)
-        cmd = ['tachyon', modelfile]
+        cmd = [Tachyon().absolute_filename(), modelfile]
         ext = outfile[-4:].lower()
         if ext == '.png':
             cmd += ['-format', 'PNG']
@@ -853,7 +854,7 @@ class TachyonRT(SageObject):
             Model file formats supported:
               filename.dat ...
         """
-        with os.popen('tachyon') as f:
+        with os.popen(Tachyon().absolute_filename()) as f:
             r = f.read()
         if use_pager:
             pager()(r)
@@ -872,7 +873,7 @@ class TachyonRT(SageObject):
             sage: tachyon_rt.version() >= '0.98.9'
             True
         """
-        with os.popen('tachyon') as f:
+        with os.popen(Tachyon().absolute_filename()) as f:
             r = f.readline()
         res = re.search(r"Version ([\d.]*)", r)
         # debian patches tachyon so it won't report the version
