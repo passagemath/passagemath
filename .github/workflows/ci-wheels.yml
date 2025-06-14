@@ -91,6 +91,7 @@ jobs:
                             "sagemath-standard-no-symbolics",
                             "sagemath-symbolics",
                             "sagemath-sympow",
+                            "sagemath-tachyon",
                             "sagemath-tdlib",
                             "sagemath-topcom",
                            ]') }}

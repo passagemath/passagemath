@@ -1,1 +1,1 @@
-../sagemath_categories/dependencies_check
+tox sagemath_repl sagemath_tachyon

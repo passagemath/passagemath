@@ -3,33 +3,22 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 # Minimum requirements for the build system to execute.
 requires = [
     SPKG_INSTALL_REQUIRES_setuptools
-    SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_pkgconfig
+    SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sagemath_environment
-    SPKG_INSTALL_REQUIRES_sagemath_categories
-    SPKG_INSTALL_REQUIRES_sagemath_modules
-    SPKG_INSTALL_REQUIRES_numpy
+    SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_cython
-    SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_memory_allocator
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "passagemath-plot"
-description = "passagemath: Plotting and graphics with Matplotlib, Three.JS, etc."
+name = "passagemath-tachyon"
+description = "passagemath: Computations on monomial ideals with Frobby"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_memory_allocator
-    SPKG_INSTALL_REQUIRES_sagemath_categories
-    SPKG_INSTALL_REQUIRES_sagemath_modules
-    SPKG_INSTALL_REQUIRES_numpy
-    SPKG_INSTALL_REQUIRES_scipy
-    SPKG_INSTALL_REQUIRES_pillow
-    SPKG_INSTALL_REQUIRES_matplotlib
-    SPKG_INSTALL_REQUIRES_threejs
+    SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sagemath_objects
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -39,19 +28,25 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = [
-    "passagemath-plot[tachyon]",
+test = [
     "passagemath-repl",
 ]
 
-# extras by libraries
-jsmol           = [SPKG_INSTALL_REQUIRES_jupyter_jsmol]
-matplotlib      = []  # no extra needed
-tachyon         = [SPKG_INSTALL_REQUIRES_sagemath_tachyon]
-threejs         = []  # no extra needed
-
-# extras by other features
-polyhedra       = ["passagemath-polyhedra"]
+[tool.cibuildwheel.linux]
+# Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
+# so there is no clean way to refer to the repair_wheel.py script
+# https://github.com/pypa/cibuildwheel/issues/1931
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf auditwheel',
+    'python3 pkgs/sagemath-tachyon/repair_wheel.py {wheel}',
+    'auditwheel repair -w {dest_dir} {wheel}',
+]
+[tool.cibuildwheel.macos]
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf auditwheel',
+    'python3 pkgs/sagemath-tachyon/repair_wheel.py {wheel}',
+    'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
+]
 
 [tool.setuptools]
 include-package-data = false
@@ -68,6 +63,7 @@ build-requires = [
 ]
 
 host-requires = [
+  "pkg:generic/tachyon",
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",

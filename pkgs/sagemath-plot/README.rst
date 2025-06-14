@@ -94,3 +94,7 @@ Available as extras, from other distributions
 
 `pip install "passagemath-plot[symbolics]"`
  Defining and plotting symbolic functions and manifolds: `passagemath-symbolics <https://pypi.org/project/passagemath-symbolics/>`_
+
+`pip install "passagemath-plot[tachyon]"`
+ Ray tracing system, needed for saving 3D graphics as 2D image files:
+ `passagemath-tachyon <https://pypi.org/project/passagemath-tachyon/>`_
