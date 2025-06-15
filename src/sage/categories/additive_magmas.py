@@ -71,6 +71,9 @@ class AdditiveMagmas(Category_singleton):
         """
         return [Sets()]
 
+    def __lean_init__(self):
+        return 'has_add'
+
     class SubcategoryMethods:
 
         @cached_method

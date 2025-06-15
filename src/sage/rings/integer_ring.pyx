@@ -1480,6 +1480,9 @@ cdef class IntegerRing_class(CommutativeRing):
         """
         return 'Integer'
 
+    def _lean_init_(self):
+        return 'int'
+
     def _magma_init_(self, magma):
         """
         Return a magma representation of ``self``.

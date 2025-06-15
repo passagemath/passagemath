@@ -2599,6 +2599,18 @@ class Category(UniqueRepresentation, SageObject):
                 pass
         return cls(*args, **keywords)
 
+    def __lean_init__(self):
+        r"""
+        Return the category as Lean mathlib input for a typeclass.
+        """
+        raise NotImplementedError
+
+    def _lean_init_(self):
+        r"""
+        Return the category as Lean mathlib input for a typeclass.
+        """
+        return self.__lean_init__()
+
 
 def is_Category(x):
     """
@@ -3364,3 +3376,15 @@ class JoinCategory(CategoryWithParameters):
             except ValueError:
                 pass
         return "Join of " + " and ".join(str(cat) for cat in self._super_categories)
+
+    def __lean_init__(self):
+        r"""
+        Return the category as Lean mathlib input for a typeclass.
+
+        EXAMPLES::
+
+            sage: QQ.category()
+            Join of Category of number fields and Category of quotient fields and Category of metric spaces
+            sage: QQ.category().__lean_init__()
+        """
+        return " ".join(cat._lean_init_() for cat in self._super_categories)
