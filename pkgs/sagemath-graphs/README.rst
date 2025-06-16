@@ -133,11 +133,11 @@ automorphism groups of graphs and digraphs.
 
 ``pip install passagemath-graphs[pari]`` additionally installs `passagemath-pari <https://pypi.org/project/passagemath-pari/>`_
 
-``pip install passagemath-graphs[planarity]`` additionally installs `passagemath-planarity <https://pypi.org/project/passagemath-planarity/>`_
+``pip install passagemath-graphs[planarity]`` additionally installs `passagemath-planarity <https://pypi.org/project/passagemath-planarity/>`_ for planarity testing.
 
-``pip install passagemath-graphs[rankwidth]`` additionally installs `passagemath-rankwidth <https://pypi.org/project/passagemath-rankwidth/>`_
+``pip install passagemath-graphs[rankwidth]`` additionally installs `passagemath-rankwidth <https://pypi.org/project/passagemath-rankwidth/>`_ for rank width and rank decompositions.
 
-``pip install passagemath-graphs[tdlib]`` additionally installs `passagemath-tdlib <https://pypi.org/project/passagemath-tdlib/>`_
+``pip install passagemath-graphs[tdlib]`` additionally installs `passagemath-tdlib <https://pypi.org/project/passagemath-tdlib/>`_ for computing tree decompositions.
 
 
 Features
@@ -167,7 +167,7 @@ available via `passagemath-gap <https://pypi.org/project/passagemath-gap/>`_, `p
 ``pip install passagemath-graphs[homology]`` provides homological computations for abstract complexes via `passagemath-modules <https://pypi.org/project/passagemath-modules/>`_.
 
 ``pip install passagemath-graphs[mip]`` additionally makes the mixed-integer programming
-solver GLPK available via `passagemath-glpk <https://pypi.org/project/passagemath-glpk/>`_ and `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra/>`_.::
+solver GLPK available via `passagemath-glpk <https://pypi.org/project/passagemath-glpk/>`_ and `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra/>`_ (see there for other available solvers).::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[mip,test]" ipython
     In [1]: from sage.all__sagemath_graphs import *
