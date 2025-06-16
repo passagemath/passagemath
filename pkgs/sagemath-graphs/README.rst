@@ -94,8 +94,20 @@ A quick way to try it out interactively::
 Available as extras, from other distributions
 ---------------------------------------------
 
+Libraries
+~~~~~~~~~
+
+``pip install passagemath-graphs[igraph]`` additionally installs
+`igraph <https://python.igraph.org/en/stable/>`_::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[igraph,test]" ipython
+    In [1]: from sage.all__sagemath_graphs import *
+
+    In [2]: ## Example depending on igraph goes here
+
+
 ``pip install passagemath-graphs[networkx]`` additionally installs
-`NetworkX <https://networkx.github.io>`::
+`NetworkX <https://networkx.github.io>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[networkx,test]" ipython
     In [1]: from sage.all__sagemath_graphs import *
@@ -103,14 +115,9 @@ Available as extras, from other distributions
     In [2]: ## Example depending on networkx goes here
 
 
-``pip install passagemath-graphs[igraph]`` additionally installs
-`igraph <https://python.igraph.org/en/stable/>`::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[igraph,test]" ipython
-    In [1]: from sage.all__sagemath_graphs import *
-
-    In [2]: ## Example depending on igraph goes here
-
+Features
+~~~~~~~~
 
 ``pip install passagemath-graphs[groups]`` additionally makes group-theoretic features
 available::
