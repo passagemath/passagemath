@@ -162,7 +162,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             [(52 : 111 : 1)]
             sage: EK = E.base_extend(K)
             sage: EK.gens()                                                             # needs eclib
-            [(52 : 111 : 1)]
+            ((52 : 111 : 1),)
         """
         E = super().base_extend(R)
         if isinstance(E, EllipticCurve_number_field):
@@ -1064,7 +1064,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         return self.local_data(P, proof, algorithm).minimal_model()
 
-    def has_good_reduction(self, P):
+    def has_good_reduction(self, P) -> bool:
         r"""
         Return ``True`` if this elliptic curve has good reduction at the prime `P`.
 
@@ -1099,7 +1099,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         """
         return self.local_data(P).has_good_reduction()
 
-    def has_bad_reduction(self, P):
+    def has_bad_reduction(self, P) -> bool:
         r"""
         Return ``True`` if this elliptic curve has bad reduction at the prime `P`.
 
@@ -1134,7 +1134,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         """
         return self.local_data(P).has_bad_reduction()
 
-    def has_multiplicative_reduction(self, P):
+    def has_multiplicative_reduction(self, P) -> bool:
         r"""
         Return ``True`` if this elliptic curve has (bad) multiplicative
         reduction at the prime `P`.
@@ -1170,7 +1170,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         """
         return self.local_data(P).has_multiplicative_reduction()
 
-    def has_split_multiplicative_reduction(self, P):
+    def has_split_multiplicative_reduction(self, P) -> bool:
         r"""
         Return ``True`` if this elliptic curve has (bad) split multiplicative reduction at the prime `P`.
 
@@ -1200,7 +1200,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         """
         return self.local_data(P).has_split_multiplicative_reduction()
 
-    def has_nonsplit_multiplicative_reduction(self, P):
+    def has_nonsplit_multiplicative_reduction(self, P) -> bool:
         r"""
         Return ``True`` if this elliptic curve has (bad) non-split
         multiplicative reduction at the prime `P`.
@@ -1231,7 +1231,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         """
         return self.local_data(P).has_nonsplit_multiplicative_reduction()
 
-    def has_additive_reduction(self, P):
+    def has_additive_reduction(self, P) -> bool:
         r"""
         Return ``True`` if this elliptic curve has (bad) additive reduction at
         the prime `P`.
@@ -1296,7 +1296,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
         return self.local_data(P, proof).tamagawa_number()
 
-    def tamagawa_numbers(self):
+    def tamagawa_numbers(self) -> list:
         """
         Return a list of all Tamagawa numbers for all prime divisors of the
         conductor (in order).
@@ -1775,7 +1775,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
                  K.ideal(1))
         return Cl(I)
 
-    def has_global_minimal_model(self):
+    def has_global_minimal_model(self) -> bool:
         r"""
         Return whether this elliptic curve has a global minimal model.
 
@@ -2375,9 +2375,9 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: K.<a> = NumberField(x^2 + 23, 'a')
             sage: E = EllipticCurve(K,[0,0,0,101,0])
             sage: E.gens()                                                              # needs eclib
-            [(23831509/8669448*a - 2867471/8669448 : 76507317707/18049790736*a - 424166479633/18049790736 : 1),
+            ((23831509/8669448*a - 2867471/8669448 : 76507317707/18049790736*a - 424166479633/18049790736 : 1),
              (-2031032029/969232392*a + 58813561/969232392 : -15575984630401/21336681877488*a + 451041199309/21336681877488 : 1),
-             (-186948623/4656964 : 549438861195/10049728312*a : 1)]
+             (-186948623/4656964 : 549438861195/10049728312*a : 1))
 
         It can happen that no points are found if the height bounds
         used in the search are too small (see :issue:`10745`)::
@@ -2386,11 +2386,11 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: K.<t> = NumberField(x^4 + x^2 - 7)
             sage: E = EllipticCurve(K, [1, 0, 5*t^2 + 16, 0, 0])
             sage: E.gens(lim1=1, lim3=1)
-            []
+            ()
             sage: E.rank()
             1
             sage: gg = E.gens(lim3=13); gg  # long time (about 4s)
-            [(... : 1)]
+            ((... : 1),)
 
         Check that the point found has infinite order, and that it is on the curve::
 
@@ -2405,7 +2405,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: K.<t> = NumberField(x^2 - 17)
             sage: E = EllipticCurve(K, [-4, 0])
             sage: E.gens()                                                              # needs eclib
-            [(-1/2*t + 1/2 : -1/2*t + 1/2 : 1), (-t + 3 : -2*t + 10 : 1)]
+            ((-1/2*t + 1/2 : -1/2*t + 1/2 : 1), (-t + 3 : -2*t + 10 : 1))
             sage: E.rank()
             2
 
@@ -2417,7 +2417,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: EK.rank()
             0
             sage: EK.gens()                                                             # needs eclib
-            []
+            ()
 
         IMPLEMENTATION:
 
@@ -2427,10 +2427,10 @@ class EllipticCurve_number_field(EllipticCurve_field):
         PARI/GP scripts from http://www.math.unicaen.fr/~simon/.
         """
         try:
-            return self.gens_quadratic(**kwds)
+            return tuple(self.gens_quadratic(**kwds))
         except ValueError:
             self.simon_two_descent(**kwds)
-            return self._known_points
+            return tuple(self._known_points)
 
     def period_lattice(self, embedding):
         r"""
@@ -3596,7 +3596,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             return ZZ.zero()
 
     @cached_method
-    def has_cm(self):
+    def has_cm(self) -> bool:
         """
         Return whether or not this curve has a CM `j`-invariant.
 
@@ -3637,7 +3637,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         return not self.cm_discriminant().is_zero()
 
     @cached_method
-    def has_rational_cm(self, field=None):
+    def has_rational_cm(self, field=None) -> bool:
         r"""
         Return whether or not this curve has CM defined over its
         base field or a given extension.

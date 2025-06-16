@@ -179,7 +179,7 @@ def _multiply_multi_modular(Matrix_integer_dense self, Matrix_integer_dense righ
     """
     cdef Integer h
     cdef Matrix_integer_dense left = <Matrix_integer_dense>self
-    cdef int i, k
+    cdef Py_ssize_t i, k
 
     nr = left._nrows
     nc = right._ncols
@@ -187,7 +187,8 @@ def _multiply_multi_modular(Matrix_integer_dense self, Matrix_integer_dense righ
     cdef Matrix_integer_dense result
 
     h = left.height() * right.height() * left.ncols()
-    verbose('multiplying matrices of height %s and %s'%(left.height(),right.height()))
+    verbose('multiplying matrices of height %s and %s' % (left.height(),
+                                                          right.height()))
     mm = MultiModularBasis(h)
     res = left._reduce(mm)
     res_right = right._reduce(mm)
@@ -195,7 +196,7 @@ def _multiply_multi_modular(Matrix_integer_dense self, Matrix_integer_dense righ
     for i in range(k):  # yes, I could do this with zip, but to conserve memory...
         t = cputime()
         res[i] *= res_right[i]
-        verbose('multiplied matrices modulo a prime (%s/%s)'%(i+1,k), t)
+        verbose('multiplied matrices modulo a prime (%s/%s)' % (i+1, k), t)
     result = left.new_matrix(nr,nc)
     _lift_crt(result, res, mm)  # changes result
     return result
@@ -224,7 +225,7 @@ def _reduce(Matrix_integer_dense self, moduli):
                                                          matrix_space.MatrixSpace(IntegerModRing(p), self._nrows, self._ncols, sparse=False),
                                                          None, None, None, zeroed_alloc=False) )
         else:
-            raise ValueError("p=%d too big."%p)
+            raise ValueError("p=%d too big." % p)
 
     cdef size_t i, k, n
     cdef Py_ssize_t nr, nc
@@ -246,9 +247,9 @@ def _reduce(Matrix_integer_dense self, moduli):
             mm.mpz_reduce(tmp, entry_list)
             for k from 0 <= k < n:
                 if isinstance(res[k], Matrix_modn_dense_float):
-                    (<Matrix_modn_dense_float>res[k])._matrix[i][j] = (<float>entry_list[k])%(<Matrix_modn_dense_float>res[k]).p
+                    (<Matrix_modn_dense_float>res[k])._matrix[i][j] = (<float>entry_list[k]) % (<Matrix_modn_dense_float>res[k]).p
                 else:
-                    (<Matrix_modn_dense_double>res[k])._matrix[i][j] = (<double>entry_list[k])%(<Matrix_modn_dense_double>res[k]).p
+                    (<Matrix_modn_dense_double>res[k])._matrix[i][j] = (<double>entry_list[k]) % (<Matrix_modn_dense_double>res[k]).p
     sig_off()
     mpz_clear(tmp)
     sig_free(entry_list)
@@ -316,7 +317,7 @@ cpdef _lift_crt(Matrix_integer_dense M, residues, moduli=None):
         moduli = MultiModularBasis([m.base_ring().order() for m in residues])
     else:
         if len(residues) != len(moduli):
-            raise IndexError("Number of residues (%s) does not match number of moduli (%s)"%(len(residues), len(moduli)))
+            raise IndexError("Number of residues (%s) does not match number of moduli (%s)" % (len(residues), len(moduli)))
 
     cdef MultiModularBasis mm
     mm = moduli

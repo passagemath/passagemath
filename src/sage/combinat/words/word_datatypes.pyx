@@ -728,7 +728,7 @@ cdef class WordDatatype_str(WordDatatype):
             return [self._parent(z) for z in self._data.partition(sep._data)]
         raise ValueError("the separator must be a string")
 
-    def is_suffix(self, other):
+    def is_suffix(self, other) -> bool:
         r"""
         Test whether ``self`` is a suffix of ``other``.
 
@@ -766,7 +766,7 @@ cdef class WordDatatype_str(WordDatatype):
         else:
             return super().is_suffix(other)
 
-    def has_suffix(self, other):
+    def has_suffix(self, other) -> bool:
         """
         Test whether ``self`` has ``other`` as a suffix.
 
@@ -795,7 +795,7 @@ cdef class WordDatatype_str(WordDatatype):
         else:
             return super().has_suffix(other)
 
-    def is_prefix(self, other):
+    def is_prefix(self, other) -> bool:
         r"""
         Test whether ``self`` is a prefix of ``other``.
 
@@ -832,7 +832,7 @@ cdef class WordDatatype_str(WordDatatype):
             return other.startswith(self._data)
         return super().is_prefix(other)
 
-    def has_prefix(self, other):
+    def has_prefix(self, other) -> bool:
         r"""
         Test whether ``self`` has ``other`` as a prefix.
 

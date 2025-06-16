@@ -1157,9 +1157,9 @@ class NuDyckWords(Parent):
 
     Element = NuDyckWord
 
-    def __init__(self, nu=()):
+    def __init__(self, nu=()) -> None:
         """
-        Intialize ``self``.
+        Initialize ``self``.
 
         EXAMPLES::
 

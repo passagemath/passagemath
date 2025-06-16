@@ -341,7 +341,7 @@ Sage example in ./domaines.tex, line 1422::
 Sage example in ./domaines.tex, line 1428::
 
   sage: SR.category()
-  Category of fields
+  Category of commutative rings
 
 Sage example in ./domaines.tex, line 1482::
 

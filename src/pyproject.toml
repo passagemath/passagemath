@@ -87,7 +87,6 @@ classifiers = [
     "Operating System :: POSIX",
     "Operating System :: MacOS :: MacOS X",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -96,7 +95,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
 urls = {Homepage = "https://www.sagemath.org"}
-requires-python = ">=3.9, <3.14"
+requires-python = ">=3.10, <3.14"
 
 [project.optional-dependencies]
 R = [
@@ -143,8 +142,6 @@ script-files = [
     "bin/sage-runtests",
     "bin/sage-fixdoctests",
     "bin/sage-coverage",
-    # The following is deprecated but might still be used in user package install scripts
-    "bin/sage-cython",
     # Helper scripts invoked by sage script
     # (they would actually belong to something like libexec)
     "bin/sage-cachegrind",
@@ -174,7 +171,6 @@ script-files = [
     "bin/sage-run",
     "bin/sage-run-cython",
     "bin/sage-startuptime.py",
-    "bin/sage-update-version",
 ]
 license-files = ["LICENSE.txt"]
 include-package-data = false
@@ -236,7 +232,6 @@ host-requires = [
   "pkg:generic/libgd",
   "pkg:generic/gap",
   "pkg:generic/gfan",
-  "pkg:generic/giac",
   "pkg:generic/givaro",
   "pkg:generic/glpk",
   "pkg:generic/gmp",

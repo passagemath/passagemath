@@ -295,11 +295,11 @@ def variance(v, bias=False):
         sage: variance([I, sqrt(2), 3/5])                                               # needs sage.symbolic
         1/450*(10*sqrt(2) - 5*I - 3)^2 + 1/450*(5*sqrt(2) - 10*I + 3)^2
         + 1/450*(5*sqrt(2) + 5*I - 6)^2
-        sage: variance([RIF(1.0103, 1.0103), RIF(2)])
+        sage: variance([RIF(1.0103, 1.0103), RIF(2)])                                   # needs sage.rings.real_interval_field
         0.4897530450000000?
         sage: import numpy                                                              # needs numpy
         sage: if int(numpy.version.short_version[0]) > 1:                               # needs numpy
-        ....:     _ = numpy.set_printoptions(legacy="1.25")                                 # needs numpy
+        ....:     _ = numpy.set_printoptions(legacy="1.25")
         sage: x = numpy.array([1,2,3,4,5])                                              # needs numpy
         sage: variance(x, bias=False)                                                   # needs numpy
         2.5

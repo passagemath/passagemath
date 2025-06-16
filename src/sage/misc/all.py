@@ -11,7 +11,6 @@ from sage.misc.misc import (BackslashOperator,
                             nest)
 
 lazy_import('sage.misc.banner', 'banner', deprecation=34259)
-lazy_import('sage.misc.dev_tools', 'runsnake', deprecation=34259)
 lazy_import('sage.misc.edit_module', 'set_edit_template', deprecation=34259)
 lazy_import('sage.misc.profiler', 'Profiler', deprecation=34259)
 lazy_import('sage.misc.trace', 'trace', deprecation=34259)

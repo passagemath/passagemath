@@ -127,8 +127,8 @@ class DCompletePoset(FiniteJoinSemilattice):
                     queue.append(c)
                     enqueued.add(c)
 
-        poset_hooks = {self._vertex_to_element(key): ZZ(value) for (key, value) in hooks.items()}
-        return poset_hooks
+        return {self._vertex_to_element(key): ZZ(value)
+                for (key, value) in hooks.items()}
 
     def get_hook(self, elmt):
         r"""
@@ -143,7 +143,7 @@ class DCompletePoset(FiniteJoinSemilattice):
         """
         return self._hooks[elmt]
 
-    def get_hooks(self):
+    def get_hooks(self) -> dict:
         r"""
         Return all the hook lengths as a dictionary.
 

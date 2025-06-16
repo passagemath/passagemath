@@ -1230,7 +1230,7 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
             sage: Matrix(CyclotomicField(10),0).charpoly()
             1
         """
-        key = 'charpoly-%s-%s'%(algorithm,proof)
+        key = 'charpoly-%s-%s' % (algorithm, proof)
         f = self.fetch(key)
         if f is not None:
             return f.change_variable_name(var)
@@ -1525,7 +1525,7 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
             sage: a == b  # long time (depends on previous)
             True
         """
-        key = 'echelon_form-%s'%algorithm
+        key = 'echelon_form-%s' % algorithm
         E = self.fetch(key)
         if E is not None:
             return E
@@ -1631,7 +1631,7 @@ cdef class Matrix_cyclo_dense(Matrix_dense):
             ...
             ValueError: echelon form mod 7 not defined
         """
-        cdef int i
+        cdef Py_ssize_t i
 
         # Initialize variables
         ls, _ = self._reductions(p)

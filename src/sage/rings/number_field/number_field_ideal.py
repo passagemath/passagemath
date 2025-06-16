@@ -242,7 +242,7 @@ class NumberFieldIdeal(Ideal_generic):
             Number Field in a with defining polynomial x^2 + 3
             sage: f = K.factor(15); f
             (Fractional ideal (-a))^2 * (Fractional ideal (5))
-            sage: (f[0][0] < f[1][0])
+            sage: (f[0][0] < f[1][0])  # potentially random
             True
             sage: (f[0][0] == f[0][0])
             True

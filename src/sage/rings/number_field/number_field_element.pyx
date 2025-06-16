@@ -891,6 +891,43 @@ cdef class NumberFieldElement(NumberFieldElement_base):
 
             sage: x = polygen(ZZ, 'x')
             sage: K.<a> = NumberField(x^3 - 2)
+            sage: a._random_element()  # random
+            -1/2*a^2 - 4
+            sage: K.<a> = NumberField(x^2 - 5)
+            sage: a._random_element()  # random
+            -1/48*a - 1/2
+
+        With denominator bound one, we always get integral elements::
+
+            sage: K = QuadraticField(2)
+            sage: uu = [K.random_element(den_bound=1) for _ in range(5)]
+            sage: uu  # random
+            [0, a + 2, -12*a - 2, -a + 1, -a - 2]
+            sage: all(u.is_integral() for u in uu)
+            True
+
+        Without this constraint, we do not always get them::
+
+            sage: K = QuadraticField(2)
+            sage: uu = [K.random_element() for _ in range(100)]
+            sage: all(u.is_integral() for u in uu)
+            False
+
+        Random integral elements can also be picked using the random_element
+        method of the number field's "ring of integers" or "maximal order" ::
+
+            sage: K = QuadraticField(2)
+            sage: O = K.maximal_order()
+            sage: O.random_element()  # random
+            5*a - 6
+            sage: O = K.ring_of_integers()
+            sage: O.random_element()  # random
+            -4*a + 1
+
+        TESTS::
+
+            sage: x = polygen(ZZ, 'x')
+            sage: K.<a> = NumberField(x^3 - 2)
             sage: a._random_element().parent() is K
             True
             sage: K.<a> = NumberField(x^2 - 5)
@@ -5311,6 +5348,23 @@ cdef class OrderElement_absolute(NumberFieldElement_absolute):
         """
         return self._parent.number_field()(NumberFieldElement_absolute.__invert__(self))
 
+    def canonical_associate(self):
+        """
+        Return a canonical associate.
+
+        Only implemented here because order elements inherit from field elements,
+        but the canonical associate implemented there does not apply here.
+
+        EXAMPLES::
+
+            sage: x = polygen(ZZ, 'x')
+            sage: K = NumberField(x^3 - x + 2, 'a')
+            sage: OK = K.ring_of_integers()
+            sage: (OK.1).canonical_associate()
+            NotImplemented
+        """
+        return NotImplemented
+
 
 cdef class OrderElement_relative(NumberFieldElement_relative):
     """
@@ -5523,6 +5577,24 @@ cdef class OrderElement_relative(NumberFieldElement_relative):
         K = self.parent().number_field()
         R = ZZ[var]
         return R(K(self).absolute_minpoly(var))
+
+    def canonical_associate(self):
+        """
+        Return a canonical associate.
+
+        Only implemented here because order elements inherit from
+        field elements, but the canonical associate implemented there
+        does not apply here.
+
+        EXAMPLES::
+
+            sage: x = ZZ['x'].0
+            sage: K.<a,b> = NumberField([x^2 + 1, x^2 - 3])
+            sage: OK = K.maximal_order()
+            sage: (OK.1).canonical_associate()
+            NotImplemented
+        """
+        return NotImplemented
 
 
 class CoordinateFunction():

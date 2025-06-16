@@ -3929,7 +3929,7 @@ class StrongTableaux(UniqueRepresentation, Parent):
 
     options = Tableaux.options
 
-    def an_element(self):
+    def _an_element_(self):
         r"""
         Return the first generated element of the class of ``StrongTableaux``.
 

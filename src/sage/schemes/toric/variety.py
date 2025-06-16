@@ -3212,7 +3212,7 @@ class CohomologyRing(QuotientRing_generic, UniqueRepresentation):
         """
         return self._element_constructor_(x)
 
-    def gens(self):
+    def gens(self) -> tuple:
         r"""
         Return the generators of the cohomology ring.
 
@@ -3236,7 +3236,7 @@ class CohomologyRing(QuotientRing_generic, UniqueRepresentation):
 
     def gen(self, i):
         r"""
-        Return the generators of the cohomology ring.
+        Return a generator of the cohomology ring.
 
         INPUT:
 
