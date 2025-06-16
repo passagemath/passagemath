@@ -24,7 +24,7 @@ AUTHORS:
 
 from sage.misc.functional import log
 from sage.misc.latex import tuple_function
-from sage.modules.free_module_element import vector
+from sage.misc.lazy_import import lazy_import
 from sage.rings.integer import Integer
 from sage.rings.padics.factory import QqFP, Zp
 from sage.rings.polynomial.multi_polynomial_ring_base import MPolynomialRing_base
@@ -32,6 +32,8 @@ from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.structure.element import CommutativeRingElement
 from sage.structure.richcmp import op_EQ, op_NE
+
+lazy_import('sage.modules.free_module_element', 'vector')
 
 
 class WittVector(CommutativeRingElement):
