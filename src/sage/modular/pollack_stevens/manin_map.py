@@ -45,7 +45,10 @@ EXAMPLES::
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from typing import Self
+try:
+    from typing import Self  # type: ignore (Python >= 3.11)
+except ImportError:
+    from typing_extensions import Self  # type: ignore (Python 3.10)
 
 from sage.matrix.matrix_space import MatrixSpace
 from sage.rings.continued_fraction import convergents

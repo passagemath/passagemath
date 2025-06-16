@@ -38,7 +38,10 @@ EXAMPLES::
 # *****************************************************************************
 
 import operator
-from typing import Self
+try:
+    from typing import Self  # type: ignore (Python >= 3.11)
+except ImportError:
+    from typing_extensions import Self  # type: ignore (Python 3.10)
 
 from sage.arith.misc import gcd, kronecker, next_prime
 from sage.categories.action import Action

@@ -27,7 +27,10 @@ Coercion via construction functors
 # ****************************************************************************
 
 import operator
-from typing import Self
+try:
+    from typing import Self  # type: ignore (Python >= 3.11)
+except ImportError:
+    from typing_extensions import Self  # type: ignore (Python 3.10)
 
 from sage.categories.functor import Functor, IdentityFunctor_generic
 from sage.misc.lazy_import import lazy_import

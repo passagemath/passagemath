@@ -4,7 +4,10 @@ Lazy format strings
 """
 
 
-from typing import Self
+try:
+    from typing import Self  # type: ignore (Python >= 3.11)
+except ImportError:
+    from typing_extensions import Self  # type: ignore (Python 3.10)
 
 
 class LazyFormat(str):
