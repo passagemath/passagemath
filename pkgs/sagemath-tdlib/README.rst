@@ -47,8 +47,7 @@ so compilation from source is triggered for those.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-tdlib`` is a small
-optional distribution for use with ``sagemath-standard``.
+This pip-installable distribution `passagemath-tdlib` is a small optional distribution for use with `passagemath-graphs <https://pypi.org/project/passagemath-graphs>`_.
 
-It provides a Cython interface to the ``tdlib`` library, providing
+It provides a Cython interface to the ``tdlib`` library, now also known as `treedec <https://gitlab.com/freetdi/treedec>`_, providing
 algorithms concerning tree decompositions.

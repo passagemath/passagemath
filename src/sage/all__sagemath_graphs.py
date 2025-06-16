@@ -12,6 +12,11 @@ This distribution makes the following feature available::
 from .all__sagemath_categories import *
 
 try:  # extra
+    from sage.all__sagemath_gap import *
+except ImportError:
+    pass
+
+try:  # extra
     from sage.all__sagemath_modules import *
 except ImportError:
     pass
