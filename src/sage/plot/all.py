@@ -29,7 +29,7 @@ from sage.plot.arc import arc
 
 from sage.plot.animate import animate
 
-from sage.plot.plot3d.tachyon import Tachyon
+lazy_import('sage.plot.plot3d.tachyon', 'Tachyon')
 
 from sage.plot.colors import Color, hue, rainbow, colors, colormaps
 

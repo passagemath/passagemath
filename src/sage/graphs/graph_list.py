@@ -19,10 +19,7 @@ AUTHORS:
 # ****************************************************************************
 
 
-from sage.misc.misc import try_read
-
-
-def from_whatever(data, immutable=False):
+def from_whatever(data):
     r"""
     Return a list of Sage Graphs, given a list of whatever kind of data.
 
@@ -100,6 +97,8 @@ def _from_whatever(data, fmt=None, immutable=False):
     if isinstance(data, str):
         lines = data.splitlines()
     else:
+        from sage.misc.misc import try_read
+
         lines = try_read(data, splitlines=True)
 
         if lines is not None and fmt is None:

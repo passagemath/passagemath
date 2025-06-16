@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-plot
+# sage.doctest: needs tachyon
 r"""
 The Tachyon 3D Ray Tracer
 
@@ -585,7 +586,7 @@ class Tachyon(WithEqualityById, SageObject):
             ....:        num_colors=60)  # increase min_depth for better picture
             sage: set_verbose(1)
             sage: s.show()                                                              # needs sage.symbolic
-            tachyon ...
+            ...tachyon...
             Scene contains 2713 objects.
             ...
 
@@ -609,7 +610,7 @@ class Tachyon(WithEqualityById, SageObject):
             sage: get_verbose()
             0
             sage: d.show(verbose=2)                                                     # needs sage.symbolic
-            tachyon ...
+            ...tachyon...
             Scene contains 2713 objects.
             ...
             Scene contains 1 non-gridded objects
@@ -1011,7 +1012,7 @@ class Tachyon(WithEqualityById, SageObject):
             sage: t.plot(f, (-4,4), (-4,4), "t0", max_depth=5, initial_depth=3,         # needs sage.symbolic
             ....:        num_colors=60)  # increase min_depth for better picture
             sage: t.show(verbose=1)                                                     # needs sage.symbolic
-            tachyon ...
+            ...tachyon...
             Scene contains 2713 objects.
             ...
 
@@ -1028,7 +1029,7 @@ class Tachyon(WithEqualityById, SageObject):
             sage: t.plot(f, (-4,4), (-4,4), "t0", max_depth=5, initial_depth=3,         # needs sage.symbolic
             ....:        grad_f=g)  # increase min_depth for better picture
             sage: t.show(verbose=1)                                                     # needs sage.symbolic
-            tachyon ...
+            ...tachyon...
             Scene contains 2713 objects.
             ...
 
@@ -1066,7 +1067,7 @@ class Tachyon(WithEqualityById, SageObject):
             sage: t.light((-20,-20,40), 0.2, (1,1,1))
             sage: t.parametric_plot(f,-5,5,'t',min_depth=6)
             sage: t.show(verbose=1)
-            tachyon ...
+            ...tachyon...
             Scene contains 482 objects.
             ...
         """

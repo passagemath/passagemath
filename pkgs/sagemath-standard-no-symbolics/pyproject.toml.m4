@@ -59,6 +59,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_repl
     SPKG_INSTALL_REQUIRES_sagemath_schemes
     SPKG_INSTALL_REQUIRES_sagemath_singular
+    SPKG_INSTALL_REQUIRES_sagemath_tachyon
 dnl From build/pkgs/sagelib/dependencies
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_cython
@@ -119,8 +120,6 @@ sage = [
     "ext_data/*",
     "ext_data/kenzo/*",
     "ext_data/images/*",
-    "ext_data/doctest/*",
-    "ext_data/doctest/invalid/*",
     "ext_data/mwrank/*",
     "ext_data/notebook-ipython/*",
     "ext_data/nbconvert/*",

@@ -114,15 +114,21 @@ Modularized use::
     ... sage.all is not available ...
     sage: from sage.all__sagemath_modules import *
     sage: matroids.Uniform(3, 4)
+    U(3, 4): Matroid of rank 3 on 4 elements with circuit-closures
+    {3: {{0, 1, 2, 3}}}
 
 In plain Python::
 
     (cmr-venv) passagemath $ python3
     >>> from sage.all__sagemath_modules import *
     >>> matroids.Uniform(3, 4)
+    U(3, 4): Matroid of rank 3 on 4 elements with circuit-closures
+    {3: {{0, 1, 2, 3}}}
 
 For full functionality of Sage::
 
     (cmr-venv) passagemath $ pip install -v passagemath-standard
     (cmr-venv) passagemath $ sage
     sage: matroids.Uniform(3, 4)
+    U(3, 4): Matroid of rank 3 on 4 elements with circuit-closures
+    {3: {{0, 1, 2, 3}}}

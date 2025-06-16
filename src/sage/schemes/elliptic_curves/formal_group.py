@@ -14,7 +14,6 @@ AUTHORS:
 
 from sage.structure.sage_object import SageObject
 
-import sage.misc.misc as misc
 from sage.rings.power_series_ring import PowerSeriesRing
 from sage.rings.laurent_series_ring import LaurentSeriesRing
 from sage.rings.big_oh import O
@@ -182,8 +181,10 @@ class EllipticCurveFormalGroup(SageObject):
         numerator_const = w.parent()([0, 0, 0, 1])      # z^3
         denominator_const = w.parent()([1, -a1, -a2])   # 1 - a_1 z - a_2 z^2
 
+        from sage.misc.misc import newton_method_sizes
+
         last_prec = 0
-        for next_prec in misc.newton_method_sizes(prec):
+        for next_prec in newton_method_sizes(prec):
             if next_prec > current_prec:
                 if w.degree() - 1 > last_prec:
                     # Here it's best to throw away some precision to get us

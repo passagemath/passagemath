@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-plot
+# sage_setup: distribution = sagemath-tachyon
 r"""
 The Tachyon Ray Tracer
 
@@ -687,6 +687,7 @@ import os
 import re
 
 from sage.cpython.string import bytes_to_str
+from sage.features.tachyon import Tachyon
 from sage.misc.pager import pager
 from sage.misc.superseded import deprecation
 from sage.misc.temporary_file import tmp_filename
@@ -776,13 +777,15 @@ class TachyonRT(SageObject):
         EXAMPLES::
 
             sage: from sage.interfaces.tachyon import TachyonRT
+            sage: t = TachyonRT()
+            sage: import os
+
+            sage: # needs sage.plot
             sage: tgen = Tachyon()
             sage: tgen.texture('t1')
             sage: tgen.sphere((0,0,0),1,'t1')
             sage: tgen.str()[30:40]
             'resolution'
-            sage: t = TachyonRT()
-            sage: import os
             sage: t(tgen.str(), outfile=os.devnull)
             tachyon ...
             Tachyon Parallel/Multiprocessor Ray Tracer...
@@ -809,7 +812,7 @@ class TachyonRT(SageObject):
         modelfile = tmp_filename(ext='.dat')
         with open(modelfile, 'w') as file:
             file.write(model)
-        cmd = ['tachyon', modelfile]
+        cmd = [Tachyon().absolute_filename(), modelfile]
         ext = outfile[-4:].lower()
         if ext == '.png':
             cmd += ['-format', 'PNG']
@@ -848,12 +851,12 @@ class TachyonRT(SageObject):
             sage: t = TachyonRT()
             sage: t.usage(use_pager=False)
             ...
-              tachyon modelfile [options]...
+            ...tachyon... modelfile [options]...
             <BLANKLINE>
             Model file formats supported:
               filename.dat ...
         """
-        with os.popen('tachyon') as f:
+        with os.popen(Tachyon().absolute_filename()) as f:
             r = f.read()
         if use_pager:
             pager()(r)
@@ -872,7 +875,7 @@ class TachyonRT(SageObject):
             sage: tachyon_rt.version() >= '0.98.9'
             True
         """
-        with os.popen('tachyon') as f:
+        with os.popen(Tachyon().absolute_filename()) as f:
             r = f.readline()
         res = re.search(r"Version ([\d.]*)", r)
         # debian patches tachyon so it won't report the version

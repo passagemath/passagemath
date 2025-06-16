@@ -102,7 +102,6 @@ from sage.rings.infinity import infinity, InfinityElement
 from sage.rings.rational_field import QQ
 
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
-import sage.misc.misc
 import sage.arith.all as arith
 import sage.misc.latex
 from sage.rings.integer import Integer
@@ -1756,8 +1755,10 @@ cdef class PowerSeries(AlgebraElement):
             a = a.change_ring(R)
         half = ~R(2)
 
+        from sage.misc.misc import newton_method_sizes
+
         s = a.parent()([s])
-        for cur_prec in sage.misc.misc.newton_method_sizes(prec)[1:]:
+        for cur_prec in newton_method_sizes(prec)[1:]:
             (<PowerSeries>s)._prec = cur_prec
             s = half * (s + a/s)
 

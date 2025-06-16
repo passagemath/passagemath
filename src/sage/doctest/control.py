@@ -166,6 +166,10 @@ class DocTestDefaults(SageObject):
         # < 0: disable GC
         self.gc = 0
 
+        # Do not assume that sage.misc.misc has been loaded,
+        # which creates DOT_SAGE as a side effect.
+        os.makedirs(DOT_SAGE, mode=0o700, exist_ok=True)
+
         # We don't want to use the real stats file by default so that
         # we don't overwrite timings for the actual running doctests.
         self.stats_path = os.path.join(
@@ -501,7 +505,7 @@ class DocTestController(SageObject):
                         if pkg.name in options.hide:
                             continue
                         # Skip features for which we have a more specific runtime feature test.
-                        if pkg.name in ['4ti2', 'bliss', 'buckygen', 'coxeter3', 'cvxpy', 'database_graphs', 'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac', 'jmol', 'kenzo', 'latte_int', 'macaulay2', 'mcqd', 'meataxe', 'msolve', 'palp', 'plantri', 'polytopes_db', 'qepcad', 'rubiks', 'sirocco', 'sympow', 'tdlib', 'topcom']:
+                        if pkg.name in ['4ti2', 'bliss', 'buckygen', 'coxeter3', 'cvxpy', 'database_graphs', 'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac', 'jmol', 'kenzo', 'latte_int', 'macaulay2', 'mcqd', 'meataxe', 'msolve', 'palp', 'plantri', 'polytopes_db', 'qepcad', 'rubiks', 'sirocco', 'sympow', 'tachyon', 'tdlib', 'topcom']:
                             continue
                         if pkg.is_installed() and pkg.installed_version == pkg.remote_version:
                             options.optional.add(pkg.name)

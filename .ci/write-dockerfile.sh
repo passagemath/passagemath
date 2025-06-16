@@ -165,7 +165,7 @@ RUN nix-channel --update
 ENV PACKAGES="$SYSTEM_PACKAGES"
 EOF
         esac
-        INSTALL="nix-env --install"
+        INSTALL="nix-env -f '<nixpkgs>' --install --attr"
         RUN="RUN nix-shell --packages \$PACKAGES --run "\'
         ENDRUN=\'
         ;;
@@ -205,10 +205,6 @@ EOF
         RUN="RUN . /opt/conda/etc/profile.d/conda.sh; conda activate base; "  # to activate the conda env
         ;;
     *)
-        cat <<EOF
-ARG BASE_IMAGE
-FROM \${BASE_IMAGE} AS with-system-packages
-EOF
         INSTALL=$(sage-print-system-package-command $SYSTEM install " ")
         ;;
 esac

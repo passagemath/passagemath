@@ -53,6 +53,7 @@ AUTHORS:
 from cpython.list cimport *
 
 import os
+import sys
 import zipfile
 
 from functools import reduce
@@ -66,8 +67,6 @@ from sage.rings.real_double import RDF
 from sage.plot.plot3d.texture import Texture
 from sage.plot.plot3d.transform cimport Transformation, point_c, face_c
 include "point_c.pxi"
-
-from sage.interfaces.tachyon import tachyon_rt
 
 from libc.math cimport INFINITY
 
@@ -223,6 +222,9 @@ cdef class Graphics3d(SageObject):
             if opts["shade"] not in ["full", "medium", "low", "lowest"]:
                 raise ValueError("shade must be set to 'full', 'medium', 'low' or 'lowest'")
             extra_opts += " -" + opts["shade"] + "shade"
+
+        from sage.interfaces.tachyon import tachyon_rt
+
         tachyon_rt(T.tachyon(**tachyon_args), filename, opts['verbosity'], extra_opts)
         from sage.repl.rich_output.buffer import OutputBuffer
         import sage.repl.rich_output.output_catalog as catalog
@@ -1814,7 +1816,23 @@ end_scene""".format(
         opts = self._process_viewing_options(kwds)
         viewer = opts['viewer']
         if viewer == 'threejs':
-            viewer = 'jmol'  # since threejs has no png dump
+            try:
+                scene = self._rich_repr_threejs(**opts)
+                from playwright.sync_api import sync_playwright
+                import subprocess
+                # From https://github.com/jupyter/nbconvert/blob/55ff3e9ac1d892165bfb4352379672019b66ddff/nbconvert/exporters/webpdf.py#L87
+                cmd = [sys.executable, "-m", "playwright", "install", "chromium"]
+                subprocess.check_call(cmd)
+                with sync_playwright() as p:
+                    browser_type = getattr(p, kwds.pop('browser_type', 'chromium'))
+                    browser = browser_type.launch()
+                    page = browser.new_page()
+                    page.goto('file://' + scene.html.filename('html'))
+                    page.screenshot(path=filename)
+                    browser.close()
+                return
+            except Exception:
+                viewer = 'jmol'
         if viewer == 'tachyon':
             from sage.repl.rich_output.output_catalog import OutputImagePng
             render = self._rich_repr_tachyon(OutputImagePng, **opts)

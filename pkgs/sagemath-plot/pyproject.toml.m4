@@ -39,15 +39,22 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl"]
+test            = [
+    "passagemath-plot[tachyon]",
+    "passagemath-repl",
+]
 
 # extras by libraries
 jsmol           = [SPKG_INSTALL_REQUIRES_jupyter_jsmol]
 matplotlib      = []  # no extra needed
+playwright      = [SPKG_INSTALL_REQUIRES_playwright]
+tachyon         = [SPKG_INSTALL_REQUIRES_sagemath_tachyon]
 threejs         = []  # no extra needed
 
 # extras by other features
+graphs          = ["passagemath-graphs"]
 polyhedra       = ["passagemath-polyhedra"]
+symbolics       = ["passagemath-symbolics"]
 
 [tool.setuptools]
 include-package-data = false

@@ -1534,6 +1534,9 @@ class RationalField(Singleton, number_field_base.NumberField):
         """
         return 'Rationals'
 
+    def _lean_init_(self):
+        return 'rat'
+
     def _magma_init_(self, magma):
         r"""
         Return the magma representation of `\QQ`.

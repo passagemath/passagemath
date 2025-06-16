@@ -51,6 +51,9 @@ class AdditiveSemigroups(CategoryWithAxiom_singleton):
     """
     _base_category_class_and_axiom = (AdditiveMagmas, "AdditiveAssociative")
 
+    def __lean_init__(self):
+        return 'add_semigroup'
+
     AdditiveCommutative = LazyImport('sage.categories.commutative_additive_semigroups', 'CommutativeAdditiveSemigroups', at_startup=True)
     AdditiveUnital = LazyImport('sage.categories.additive_monoids', 'AdditiveMonoids', at_startup=True)
 

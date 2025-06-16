@@ -1807,8 +1807,10 @@ cdef class Polynomial(CommutativePolynomial):
         except AttributeError:
             first_coeff = A(~const_term)
 
+        from sage.misc.misc import newton_method_sizes
+
         current = R(first_coeff)
-        for next_prec in sage.misc.misc.newton_method_sizes(prec)[1:]:
+        for next_prec in newton_method_sizes(prec)[1:]:
             z = current._mul_trunc_(self, next_prec)._mul_trunc_(current, next_prec)
             current = current + current - z
         return current
@@ -7027,6 +7029,13 @@ cdef class Polynomial(CommutativePolynomial):
     #####################################################################
     # Conversions to other systems
     #####################################################################
+    def _lean_init_(self):
+        r"""
+        Return polynomial as Lean mathlib input.
+        """
+        # as in https://github.com/leanprover-community/mathlib/blob/master/scripts/polyrith_sage_helper.py
+        raise NotImplementedError
+
     def __pari__(self):
         r"""
         Return polynomial as a PARI object.

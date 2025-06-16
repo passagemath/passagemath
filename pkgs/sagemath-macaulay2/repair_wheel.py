@@ -19,4 +19,4 @@ with InWheel(wheel, wheel):
     command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/M2* {{share,lib,libexec}}/Macaulay2) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
     print(f'Running {command}')
     sys.stdout.flush()
-    if os.system(command) != 0: sys.exit(1)
+    if os.system(f"bash -c {shlex.quote(command)}") != 0: sys.exit(1)

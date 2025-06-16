@@ -151,6 +151,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_graphs				\
 	sagemath_planarity			\
 	sagemath_rankwidth			\
+	sagemath_tachyon			\
 	sagemath_combinat			\
 	sagemath_schemes			\
 	sagemath_gap				\

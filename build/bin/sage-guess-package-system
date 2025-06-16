@@ -1,6 +1,7 @@
 #!/bin/sh
 #
-# First test for user-installable package systems, then system package systems
+# First test for user-installable package systems, then system package systems.
+# #32753: However, check linuxbrew after linux package managers because it is untested.
 if conda --version > /dev/null 2>&1; then
     if [ -z "$CONDA_DEFAULT_ENV" ]; then
         printf >&2 "(ignoring conda because no environment is active) "
@@ -9,10 +10,8 @@ if conda --version > /dev/null 2>&1; then
         exit
     fi
 fi
-if brew --version > /dev/null 2>&1; then
-    echo homebrew
-elif port version > /dev/null 2>&1; then
-    echo macports
+if nix-env --version > /dev/null 2>&1; then
+    echo nix
 elif emerge --version > /dev/null 2>&1; then
     echo gentoo
 elif apt-get --version > /dev/null 2>&1; then
@@ -29,6 +28,10 @@ elif apk --version > /dev/null 2>&1; then
     echo alpine
 elif xbps-install --version > /dev/null 2>&1; then
     echo void
+elif brew --version > /dev/null 2>&1; then
+    echo homebrew
+elif port version > /dev/null 2>&1; then
+    echo macports
 elif pkg -v > /dev/null 2>&1; then
     echo freebsd
 else

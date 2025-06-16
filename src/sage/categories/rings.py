@@ -65,6 +65,9 @@ class Rings(CategoryWithAxiom):
     """
     _base_category_class_and_axiom = (Rngs, "Unital")
 
+    def __lean_init__(self):
+        return 'ring'
+
     class MorphismMethods:
         @cached_method
         def is_injective(self) -> bool:

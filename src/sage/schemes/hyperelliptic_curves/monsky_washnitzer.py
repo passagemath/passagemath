@@ -53,7 +53,6 @@ from sage.categories.integral_domains import IntegralDomains
 from sage.matrix.constructor import matrix
 from sage.misc.cachefunc import cached_method
 from sage.misc.lazy_import import lazy_import
-from sage.misc.misc import newton_method_sizes
 from sage.misc.profiler import Profiler
 from sage.misc.repr import repr_lincomb
 from sage.modules.free_module import FreeModule
@@ -3736,6 +3735,8 @@ class MonskyWashnitzerDifferentialRing(UniqueRepresentation, Module):
         #        t = self.base_ring()(1)
         t = self.base_ring()(three_halves) - half_a
         # first iteration trivial, start with prec 2
+
+        from sage.misc.misc import newton_method_sizes
 
         for cur_prec in newton_method_sizes(prec)[2:]:
             # newton_method_sizes = [1, 2, ...]
