@@ -100,13 +100,15 @@ Libraries
 ``pip install passagemath-graphs[benzene,buckygen,plantri]`` additionally installs
 various graph generators.
 
-``pip install passagemath-graphs[bliss]``
+``pip install passagemath-graphs[bliss]`` additionally installs `passagemath-bliss <https://pypi.org/project/passagemath-cmr/>`_ for the purpose
+of computing graph (iso/auto)morphisms.
 
 ``pip install passagemath-graphs[cliquer]``
 
-``pip install passagemath-graphs[cmr]``
+``pip install passagemath-graphs[cmr]`` additionally installs `passagemath-cmr <https://pypi.org/project/passagemath-cmr/>`_ for recognition and decomposition algorithms
+for network matrices, totally unimodular matrices and regular matroids, series-parallel matroids, etc.
 
-``pip install passagemath-graphs[gap]``
+``pip install passagemath-graphs[gap]`` additionally installs `passagemath-gap <https://pypi.org/project/passagemath-gap/>`_ for group-theoretic functionality.
 
 ``pip install passagemath-graphs[igraph]`` additionally installs
 `igraph <https://python.igraph.org/en/stable/>`_::
