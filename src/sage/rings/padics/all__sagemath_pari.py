@@ -7,3 +7,5 @@ from sage.rings.padics.factory import Qp, Qq, Qp as pAdicField, QpCR, QpFP, QpLC
 from sage.rings.padics.factory import pAdicExtension
 
 from sage.rings.padics.padic_printing import _printer_defaults as padic_printing
+
+from sage.rings.padics.witt_vector_ring import WittVectorRing
