@@ -55,7 +55,7 @@ tdlib       = ["passagemath-tdlib"]
 # features
 combinat    = ["passagemath-combinat"]
 editor      = [SPKG_INSTALL_REQUIRES_phitigra]
-groups      = ["passagemath-groups"]
+groups      = ["passagemath-groups", "passagemath-graphs[nauty]"]
 homology    = ["passagemath-modules"]
 mip         = ["passagemath-polyhedra"]
 modules     = ["passagemath-modules"]
