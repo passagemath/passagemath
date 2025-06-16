@@ -97,13 +97,13 @@ Available as extras, from other distributions
 Libraries
 ~~~~~~~~~
 
-``pip install passagemath-graphs[benzene,buckygen,plantri]`` additionally installs
-various graph generators.
+``pip install passagemath-graphs[benzene,buckygen,plantri]`` additionally make
+various graph generators available via `passagemath-benzene <https://pypi.org/project/passagemath-benzene/>`_, `passagemath-buckygen <https://pypi.org/project/passagemath-buckygen/>`_, and `passagemath-plantri <https://pypi.org/project/passagemath-plantri/>`_.
 
-``pip install passagemath-graphs[bliss]`` additionally installs `passagemath-bliss <https://pypi.org/project/passagemath-cmr/>`_ for the purpose
+``pip install passagemath-graphs[bliss]`` additionally installs `passagemath-bliss <https://pypi.org/project/passagemath-bliss/>`_ for the purpose
 of computing graph (iso/auto)morphisms.
 
-``pip install passagemath-graphs[cliquer]``
+``pip install passagemath-graphs[cliquer]`` additionally installs `passagemath-cliquer <https://pypi.org/project/passagemath-cliquer/>`_
 
 ``pip install passagemath-graphs[cmr]`` additionally installs `passagemath-cmr <https://pypi.org/project/passagemath-cmr/>`_ for recognition and decomposition algorithms
 for network matrices, totally unimodular matrices and regular matroids, series-parallel matroids, etc.
@@ -118,9 +118,10 @@ for network matrices, totally unimodular matrices and regular matroids, series-p
 
     In [2]: ## Example depending on igraph goes here
 
-``pip install passagemath-graphs[mcqd]``
+``pip install passagemath-graphs[mcqd]`` additionally installs `passagemath-mcqd <https://pypi.org/project/passagemath-mcqd/>`_
 
-``pip install passagemath-graphs[nauty]``
+``pip install passagemath-graphs[nauty]`` additionally installs `passagemath-nauty <https://pypi.org/project/passagemath-nauty/>`_ for computing
+automorphism groups of graphs and digraphs.
 
 ``pip install passagemath-graphs[networkx]`` additionally installs
 `NetworkX <https://networkx.github.io>`_::
@@ -130,24 +131,24 @@ for network matrices, totally unimodular matrices and regular matroids, series-p
 
     In [2]: ## Example depending on networkx goes here
 
-``pip install passagemath-graphs[pari]``
+``pip install passagemath-graphs[pari]`` additionally installs `passagemath-pari <https://pypi.org/project/passagemath-pari/>`_
 
-``pip install passagemath-graphs[planarity]``
+``pip install passagemath-graphs[planarity]`` additionally installs `passagemath-planarity <https://pypi.org/project/passagemath-planarity/>`_
 
-``pip install passagemath-graphs[rankwidth]``
+``pip install passagemath-graphs[rankwidth]`` additionally installs `passagemath-rankwidth <https://pypi.org/project/passagemath-rankwidth/>`_
 
-``pip install passagemath-graphs[tdlib]``
+``pip install passagemath-graphs[tdlib]`` additionally installs `passagemath-tdlib <https://pypi.org/project/passagemath-tdlib/>`_
 
 
 Features
 ~~~~~~~~
 
-``pip install passagemath-graphs[combinat]``
+``pip install passagemath-graphs[combinat]`` additionally installs `passagemath-combinat <https://pypi.org/project/passagemath-combinat/>`_
 
-``pip install passagemath-graphs[editor]``
+``pip install passagemath-graphs[editor]`` additionally installs the interactive graph editor `phitigra <https://pypi.org/project/phitigra/>`_.
 
 ``pip install passagemath-graphs[groups]`` additionally makes group-theoretic features
-available::
+available via `passagemath-gap <https://pypi.org/project/passagemath-gap/>`_, `passagemath-groups <https://pypi.org/project/passagemath-groups/>`_, and `passagemath-nauty <https://pypi.org/project/passagemath-nauty/>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[groups,test]" ipython
     In [1]: from sage.all__sagemath_graphs import *
@@ -163,25 +164,25 @@ available::
 
     In [4]: print(aut.order())
 
-``pip install passagemath-graphs[homology]``
+``pip install passagemath-graphs[homology]`` provides homological computations for abstract complexes via `passagemath-modules <https://pypi.org/project/passagemath-modules/>`_.
 
 ``pip install passagemath-graphs[mip]`` additionally makes the mixed-integer programming
-solver GLPK available::
+solver GLPK available via `passagemath-glpk <https://pypi.org/project/passagemath-glpk/>`_ and `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra/>`_.::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[mip,test]" ipython
     In [1]: from sage.all__sagemath_graphs import *
 
     In [2]: ## Example depending on MIP goes here
 
-``pip install passagemath-graphs[modules]``
+``pip install passagemath-graphs[modules]`` additionally makes linear algebra features available via `passagemath-modules <https://pypi.org/project/passagemath-modules/>`_.
 
-``pip install passagemath-graphs[plot]``
+``pip install passagemath-graphs[plot]`` additionally installs `passagemath-plot <https://pypi.org/project/passagemath-plot/>`_.
 
-``pip install passagemath-graphs[polyhedra]``
+``pip install passagemath-graphs[polyhedra]`` additionally installs `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra/>`_.
 
-``pip install passagemath-graphs[sat]``
+``pip install passagemath-graphs[sat]`` additionally provides SAT features via `passagemath-combinat <https://pypi.org/project/passagemath-combinat/>`_.
 
-``pip install passagemath-graphs[standard]`` installs all features related to graphs that
+``pip install passagemath-graphs[standard]`` installs all libraries and features related to graphs that
 are available in a standard installation of Sage.
 
 
