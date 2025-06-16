@@ -48,7 +48,7 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable source distribution ``passagemath-tachyon`` provides an interface to
-the ray tracing system [tachyon](http://jedi.ks.uiuc.edu/~johns/raytracer/).
+the ray tracing system `tachyon <http://jedi.ks.uiuc.edu/~johns/raytracer/>`_.
 
 
 Examples
