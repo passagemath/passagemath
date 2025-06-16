@@ -54,6 +54,7 @@ tdlib       = ["passagemath-tdlib"]
 # features
 combinat    = ["passagemath-combinat"]
 editor      = [SPKG_INSTALL_REQUIRES_phitigra]
+groups      = ["passagemath-groups"]
 homology    = ["passagemath-modules"]
 mip         = ["passagemath-polyhedra"]
 modules     = ["passagemath-modules"]
@@ -62,7 +63,7 @@ polyhedra   = ["passagemath-polyhedra"]
 repl        = ["passagemath-repl"]
 sat         = ["passagemath-combinat"]
 
-standard    = ["passagemath-graphs[combinat,databases,mip,modules,planarity,plot,polyhedra,rankwidth,repl]"]
+standard    = ["passagemath-graphs[combinat,databases,groups,mip,modules,planarity,plot,polyhedra,rankwidth,repl]"]
 
 [tool.setuptools]
 include-package-data = false

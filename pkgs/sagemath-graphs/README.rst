@@ -47,7 +47,7 @@ so compilation from source is triggered for those.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable package `passagemath-graphs` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`) for computations with graphs, posets, complexes, etc.
+This pip-installable package `passagemath-graphs` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`) for computations with graphs, posets, complexes, etc.
 
 It consists of over 170 first-party Python and Cython modules and uses the `Boost Graph Library <https://github.com/boostorg/graph>`_, with additional functionality from `NetworkX <https://networkx.github.io/>`_ and several other libraries.
 
@@ -110,6 +110,24 @@ Available as extras, from other distributions
     In [1]: from sage.all__sagemath_graphs import *
 
     In [2]: ## Example depending on igraph goes here
+
+
+``pip install passagemath-graphs[groups]`` additionally makes group-theoretic features
+available::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[groups,test]" ipython
+    In [1]: from sage.all__sagemath_graphs import *
+
+    In [2]: g = Graph({
+                0: [1, 2],
+                1: [0, 2],
+                2: [0, 1, 3],
+                3: [2]
+            })
+
+    In [3]: aut = g.automorphism_group()
+
+    In [4]: print(aut.order())
 
 
 ``pip install passagemath-graphs[mip]`` additionally makes the mixed-integer programming
