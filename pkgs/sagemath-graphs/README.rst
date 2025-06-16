@@ -97,6 +97,17 @@ Available as extras, from other distributions
 Libraries
 ~~~~~~~~~
 
+``pip install passagemath-graphs[benzene,buckygen,plantri]`` additionally installs
+various graph generators.
+
+``pip install passagemath-graphs[bliss]``
+
+``pip install passagemath-graphs[cliquer]``
+
+``pip install passagemath-graphs[cmr]``
+
+``pip install passagemath-graphs[gap]``
+
 ``pip install passagemath-graphs[igraph]`` additionally installs
 `igraph <https://python.igraph.org/en/stable/>`_::
 
@@ -105,6 +116,9 @@ Libraries
 
     In [2]: ## Example depending on igraph goes here
 
+``pip install passagemath-graphs[mcqd]``
+
+``pip install passagemath-graphs[nauty]``
 
 ``pip install passagemath-graphs[networkx]`` additionally installs
 `NetworkX <https://networkx.github.io>`_::
@@ -114,10 +128,21 @@ Libraries
 
     In [2]: ## Example depending on networkx goes here
 
+``pip install passagemath-graphs[pari]``
+
+``pip install passagemath-graphs[planarity]``
+
+``pip install passagemath-graphs[rankwidth]``
+
+``pip install passagemath-graphs[tdlib]``
 
 
 Features
 ~~~~~~~~
+
+``pip install passagemath-graphs[combinat]``
+
+``pip install passagemath-graphs[editor]``
 
 ``pip install passagemath-graphs[groups]`` additionally makes group-theoretic features
 available::
@@ -136,6 +161,7 @@ available::
 
     In [4]: print(aut.order())
 
+``pip install passagemath-graphs[homology]``
 
 ``pip install passagemath-graphs[mip]`` additionally makes the mixed-integer programming
 solver GLPK available::
@@ -145,6 +171,16 @@ solver GLPK available::
 
     In [2]: ## Example depending on MIP goes here
 
+``pip install passagemath-graphs[modules]``
+
+``pip install passagemath-graphs[plot]``
+
+``pip install passagemath-graphs[polyhedra]``
+
+``pip install passagemath-graphs[sat]``
+
+``pip install passagemath-graphs[standard]`` installs all features related to graphs that
+are available in a standard installation of Sage.
 
 
 Development
