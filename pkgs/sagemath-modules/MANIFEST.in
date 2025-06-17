@@ -240,6 +240,8 @@ graft sage/rings/function_field/drinfeld_modules
 
 graft sage/rings/invariants
 
+include sage/schemes/*/coh*.p*
+
 # mpfr, gsl
 graft sage/libs/mpfr
 graft sage/libs/gsl
