@@ -395,6 +395,7 @@ class BipartiteGraph(Graph):
 
         Check that :issue:`39295` is fixed::
 
+            sage: # needs sage.modules
             sage: B = BipartiteGraph(matrix([[1, 1], [1, 1]]), immutable=True)
             sage: print(B.vertices(), B.edges())
             [0, 1, 2, 3] [(0, 2, None), (0, 3, None), (1, 2, None), (1, 3, None)]

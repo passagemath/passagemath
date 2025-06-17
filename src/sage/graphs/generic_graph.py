@@ -1272,6 +1272,8 @@ class GenericGraph(GenericGraph_pyx):
             sage: G.get_vertices()
             {0: Cycle graph: Graph on 3 vertices, 1: 'abc'}
             sage: G.get_embedding()
+
+            sage: # needs planarity
             sage: G.genus()
             0
             sage: G.get_embedding()
@@ -21853,13 +21855,14 @@ class GenericGraph(GenericGraph_pyx):
 
         EXAMPLES::
 
+            sage: # needs sage.modules sage.plot
             sage: g = graphs.WheelGraph(n=7)
-            sage: g.plot(layout='tutte', external_face=[0,1,2])                        # needs sage.plot
+            sage: g.plot(layout='tutte', external_face=[0,1,2])
             Graphics object consisting of 20 graphics primitives
             sage: g = graphs.CubeGraph(n=3, embedding=2)
             sage: g.plot(layout='tutte', external_face=['101','111','001',
             ....:       '011'], external_face_pos={'101':(1,0), '111':(0,0),
-            ....:       '001':(2,1), '011':(-1,1)})                                    # needs sage.plot
+            ....:       '001':(2,1), '011':(-1,1)})
             Graphics object consisting of 21 graphics primitives
             sage: g = graphs.CompleteGraph(n=5)
             sage: g.plot(layout='tutte', external_face=[0,1,2])
@@ -24771,6 +24774,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Check the behavior with immutable graphs::
 
+            sage: # needs sage.groups
             sage: G = Graph(graphs.PetersenGraph(), immutable=True)
             sage: G.automorphism_group(return_group=False, orbits=True, algorithm='sage')
             [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]

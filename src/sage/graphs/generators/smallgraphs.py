@@ -4023,7 +4023,7 @@ def MurtyGraph():
         3
         sage: g.diameter()
         2
-        sage: g.is_hamiltonian()
+        sage: g.is_hamiltonian()                                                        # needs sage.numerical.mip
         True
         sage: g.show()                          # long time                             # needs sage.plot
 

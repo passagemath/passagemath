@@ -2997,6 +2997,7 @@ class Graph(GenericGraph):
 
         A 6-cycle graph is not chordal bipartite::
 
+            sage: # needs sage.modules
             sage: g = graphs.CycleGraph(6)
             sage: g.is_chordal_bipartite()
             False
@@ -3006,6 +3007,7 @@ class Graph(GenericGraph):
 
         A `2 \times n` grid graph is chordal bipartite::
 
+            sage: # needs sage.modules
             sage: g = graphs.Grid2dGraph(2, 6)
             sage: result, pewveo = g.is_chordal_bipartite(certificate=True)
             sage: result
@@ -3014,6 +3016,7 @@ class Graph(GenericGraph):
         Let us check the certificate given by Sage is indeed a perfect
         edge without vertex elimination ordering::
 
+            sage: # needs sage.modules
             sage: for e in pewveo:
             ....:     a = g.subgraph(vertices=g.neighbors(e[0]) + g.neighbors(e[1]))
             ....:     b = BipartiteGraph(a).complement_bipartite()
@@ -3024,6 +3027,7 @@ class Graph(GenericGraph):
         Let us check the certificate given by Sage is indeed a
         chordless cycle of length at least 6::
 
+            sage: # needs sage.modules
             sage: g = graphs.Grid2dGraph(3, 6)
             sage: result, cycle = g.is_chordal_bipartite(certificate=True)
             sage: result
@@ -3041,6 +3045,7 @@ class Graph(GenericGraph):
 
         The algorithm works correctly for disconnected graphs::
 
+            sage: # needs sage.modules
             sage: c4 = graphs.CycleGraph(4)
             sage: g = c4.disjoint_union(graphs.CycleGraph(6))
             sage: g.is_chordal_bipartite()
