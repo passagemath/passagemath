@@ -18,6 +18,7 @@ description = "passagemath: Sage objects, elements, parents, categories, coercio
 dependencies = [
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_cysignals
+    SPKG_INSTALL_REQUIRES_typing_extensions
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
