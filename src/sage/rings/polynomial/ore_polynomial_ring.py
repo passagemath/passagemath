@@ -634,13 +634,12 @@ class OrePolynomialRing(UniqueRepresentation, Parent):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: F.<z> = GF(5^3)
             sage: Frob = F.frobenius_endomorphism()
-
             sage: S.<x> = OrePolynomialRing(F, Frob)
             sage: S._repr_twist()
             'twisted by z |--> z^5'
-
             sage: T.<y> = OrePolynomialRing(F, Frob^3, polcast=False)
             sage: T._repr_twist()
             'untwisted'
@@ -665,13 +664,12 @@ class OrePolynomialRing(UniqueRepresentation, Parent):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: F.<z> = GF(5^3)
             sage: Frob = F.frobenius_endomorphism()
-
             sage: S.<x> = OrePolynomialRing(F, Frob)
             sage: S._latex_twist()
             z \mapsto z^{5}
-
             sage: T.<y> = OrePolynomialRing(F, Frob^3, polcast=False)
             sage: T._latex_twist()
             ''
@@ -1266,6 +1264,7 @@ class OrePolynomialRing(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: k.<a> = GF(5^3)
             sage: S.<x> = k['a', k.frobenius_endomorphism()]
             sage: P = x^3 + a*x^2 + a^2 + 1
@@ -1276,26 +1275,26 @@ class OrePolynomialRing(UniqueRepresentation, Parent):
         The argument ``names`` can be used to give chosen names
         to the vectors in the canonical basis::
 
-            sage: M = S.quotient_module(P, names=('u', 'v', 'w'))
-            sage: M.basis()
+            sage: M = S.quotient_module(P, names=('u', 'v', 'w'))                       # needs sage.rings.finite_rings
+            sage: M.basis()                                                             # needs sage.rings.finite_rings
             [u, v, w]
 
         or even::
 
-            sage: M = S.quotient_module(P, names='e')
-            sage: M.basis()
+            sage: M = S.quotient_module(P, names='e')                                   # needs sage.rings.finite_rings
+            sage: M.basis()                                                             # needs sage.rings.finite_rings
             [e0, e1, e2]
 
         Note that the bracket construction also works::
 
-            sage: M.<u,v,w> = S.quotient_module(P)
-            sage: M.basis()
+            sage: M.<u,v,w> = S.quotient_module(P)                                      # needs sage.rings.finite_rings
+            sage: M.basis()                                                             # needs sage.rings.finite_rings
             [u, v, w]
 
         With this construction, the vectors `u`, `v` and `w`
         are directly available in the namespace::
 
-            sage: x*u + v
+            sage: x*u + v                                                               # needs sage.rings.finite_rings
             2*v
 
         We refer to :mod:`sage.modules.ore_module` for a

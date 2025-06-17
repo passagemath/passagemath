@@ -432,7 +432,7 @@ def can_convert_to_singular(R):
 
     Check that :issue:`39106` is fixed::
 
-        sage: # needs sage.combinat sage.modules
+        sage: # needs lrcalc sage.combinat sage.modules
         sage: s = SymmetricFunctions(QQ).s()
         sage: R.<x> = PolynomialRing(s.fraction_field())
         sage: can_convert_to_singular(R)

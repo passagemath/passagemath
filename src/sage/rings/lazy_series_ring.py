@@ -701,6 +701,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: f = L.undefined(0)
             sage: F = diff(f, 2)
@@ -720,6 +721,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         From Exercise 6.63b in [EnumComb2]_::
 
+            sage: # needs sage.modules
             sage: g = L.undefined()
             sage: z1 = z*diff(g, z)
             sage: z2 = z1 + z^2 * diff(g, z, 2)
@@ -754,6 +756,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
         We solve the recurrence relation in (3.12) of Prellberg and Brak
         :doi:`10.1007/BF02183685`::
 
+            sage: # needs sage.modules
             sage: q, y = QQ['q,y'].fraction_field().gens()
             sage: L.<x> = LazyPowerSeriesRing(q.parent())
             sage: R = L.undefined()
@@ -767,7 +770,6 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             sage: R[3].factor()
             (-1) * y * q^3 * (q*y - 1)^-2 * (q^2*y - 1)^-1 * (q^3*y - 1)^-1
              * (q^4*y^3 + q^3*y^2 + q^2*y^2 - q^2*y - q*y - 1)
-
             sage: Rp = L.undefined(1)
             sage: L.define_implicitly([Rp], [(y*q*x+y)*Rp(q*x) + q*x*Rp*Rp(q*x) + x*y*q - (1-q*x)*Rp])
             sage: all(R[n] == Rp[n] for n in range(7))
@@ -775,6 +777,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         Another example::
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ["x,y,f1,f2"].fraction_field())
             sage: L.base_ring().inject_variables()
             Defining x, y, f1, f2
@@ -791,6 +794,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
         We need to specify the initial values for the degree 1 and 2
         components to get a unique solution in the previous example::
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ['x','y','f1'].fraction_field())
             sage: L.base_ring().inject_variables()
             Defining x, y, f1
@@ -807,6 +811,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
         The equation which has no unique solution is now
         ``6*series[3] + (-2*x - 2*y)*series[2] + (x*y*f1) == 0``.::
 
+            sage: # needs sage.modules
             sage: F = L.undefined()
             sage: L.define_implicitly([(F, [0, f1])], [F(2*z) - (1+exp(x*z)+exp(y*z))*F - exp((x+y)*z)*F(-z)])
             sage: F
@@ -818,6 +823,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         Laurent series examples::
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyLaurentSeriesRing(QQ)
             sage: f = L.undefined(-1)
             sage: L.define_implicitly([(f, [5])], [2+z*f(z^2) - f])
@@ -833,6 +839,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         A bivariate example::
 
+            sage: # needs sage.modules
             sage: L.<x, y> = LazyPowerSeriesRing(QQ)
             sage: B = L.undefined()
             sage: eq = y*B^2 + 1 - B(x, x-y)
@@ -845,6 +852,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         Knödel walks::
 
+            sage: # needs sage.modules
              sage: L.<z, x> = LazyPowerSeriesRing(QQ)
              sage: F = L.undefined()
              sage: eq = F(z, x)*(x^2*z-x+z) - (z - x*z^2 - x^2*z^2)*F(z, 0) + x
@@ -856,6 +864,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         Bicolored rooted trees with black and white roots::
 
+            sage: # needs sage.modules
             sage: L.<x, y> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined()
             sage: B = L.undefined()
@@ -866,6 +875,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             + (1/24*x^5*y+8/3*x^4*y^2+27/4*x^3*y^3+4/3*x^2*y^4+1/120*x*y^5)
             + O(x,y)^7
 
+            sage: # needs sage.modules
             sage: h = SymmetricFunctions(QQ).h()
             sage: S = LazySymmetricFunctions(h)
             sage: E = S(lambda n: h[n])
@@ -882,6 +892,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
         contains at least one element of each kind (defined
         implicitly to have a test)::
 
+            sage: # needs sage.modules
             sage: p = SymmetricFunctions(QQ).p()
             sage: S = LazySymmetricFunctions(p)
             sage: P = S(lambda n: sum(p[la] for la in Partitions(n)))
@@ -895,6 +906,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         The Frobenius character of labelled Dyck words::
 
+            sage: # needs sage.modules
             sage: h = SymmetricFunctions(QQ).h()
             sage: L.<t, u> = LazyPowerSeriesRing(h.fraction_field())
             sage: D = L.undefined()
@@ -907,12 +919,14 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         TESTS::
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: f = L.undefined(1)
             sage: L.define_implicitly([f], [log(1+f) - ~(1 + f) + 1])
             sage: f
             O(z^8)
 
+            sage: # needs sage.modules
             sage: f = L.undefined(0)
             sage: fp = f.derivative()
             sage: g = L(lambda n: 0 if n < 10 else 1, 0)
@@ -930,6 +944,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         Some systems of coupled functional equations::
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined()
             sage: B = L.undefined()
@@ -939,6 +954,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             sage: B
             -1 + O(z^7)
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined()
             sage: B = L.undefined()
@@ -950,6 +966,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             sage: B^2 - A
             O(z^7)
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined()
             sage: B = L.undefined()
@@ -961,6 +978,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             sage: B^3 + 2*A^3 - 3 - z*(A + B)
             O(z^7)
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined(valuation=3)
             sage: B = L.undefined(valuation=2)
@@ -976,6 +994,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             sage: C
             O(z^23)
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined()
             sage: B = L.undefined()
@@ -989,6 +1008,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
         be zero.  Therefore, asking for a coefficient of `B` will
         loop forever::
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined()
             sage: B = L.undefined()
@@ -999,6 +1019,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         A bivariate example involving composition of series::
 
+            sage: # needs sage.modules
             sage: R.<z,q> = LazyPowerSeriesRing(QQ)
             sage: g = R.undefined()
             sage: R.define_implicitly([g], [g - (z*q + z*g*~(1-g))])
@@ -1008,6 +1029,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
         The following does not work, because the equations
         determining the coefficients come in bad order::
 
+            sage: # needs sage.modules
             sage: L.<x,y,t> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined(name="A")
             sage: B = L.undefined(name="B")
@@ -1026,6 +1048,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         Check the error message in the case of symmetric functions::
 
+            sage: # needs sage.modules
             sage: p = SymmetricFunctions(QQ).p()
             sage: T = LazySymmetricFunctions(tensor([p, p]))
             sage: X = tensor([p[1],p[[]]])
@@ -1040,6 +1063,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
         An example we cannot solve because we only look at the next
         non-vanishing equations::
 
+            sage: # needs sage.modules
             sage: L.<x> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined()
             sage: eq1 = diff(A, x) + diff(A, x, 2)
@@ -1054,6 +1078,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             equation 1:
                 coefficient [0]: 2*series[2] + series[1] == 0
 
+            sage: # needs sage.modules
             sage: A = L.undefined()
             sage: eq1 = diff(A, x) + diff(A, x, 2)
             sage: eq2 = A + diff(A, x) + diff(A, x, 2)
@@ -1394,10 +1419,10 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             sage: L.prod(lambda n: t^-2 + t^n / n, -4, -2)
             1/24*t^-9 - 1/8*t^-8 - 1/6*t^-7 + 1/2*t^-6
 
+            sage: # needs sage.libs.pari
             sage: D = LazyDirichletSeriesRing(QQ, "s")
             sage: D.prod(lambda p: (1+D(1, valuation=p)).inverse(), Primes())
             1 - 1/(2^s) - 1/(3^s) + 1/(4^s) - 1/(5^s) + 1/(6^s) - 1/(7^s) + O(1/(8^s))
-
             sage: D.prod(lambda p: D(1, valuation=p), Primes(), add_one=True)
             1 + 1/(2^s) + 1/(3^s) + 1/(5^s) + 1/(6^s) + 1/(7^s) + O(1/(8^s))
         """
@@ -1494,6 +1519,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         ::
 
+            sage: # needs sage.libs.pari
             sage: D = LazyDirichletSeriesRing(QQ, "s")
             sage: D.sum(lambda p: D(1, valuation=p), Primes())
             1/(2^s) + 1/(3^s) + 1/(5^s) + 1/(7^s) + O(1/(9^s))
@@ -2576,6 +2602,7 @@ class LazyLaurentSeriesRing(LazySeriesRing):
         We give an example over the :class:`SymbolicRing` with the input
         `w = e^{\pi i z}` and verify the periodicity::
 
+            sage: # needs sage.symbolic
             sage: L.<q> = LazyLaurentSeriesRing(SR)
             sage: z = SR.var('z')
             sage: theta = L.jacobi_theta(exp(pi*I*z))
@@ -2584,13 +2611,11 @@ class LazyLaurentSeriesRing(LazySeriesRing):
              + (e^(4*I*pi*z) + e^(-4*I*pi*z))*q^4
              + (e^(6*I*pi*z) + e^(-6*I*pi*z))*q^9
              + (e^(8*I*pi*z) + e^(-8*I*pi*z))*q^16 + O(q^17)
-
             sage: theta.map_coefficients(lambda c: c(z=z+1))
             1 + (e^(2*I*pi*z) + e^(-2*I*pi*z))*q
              + (e^(4*I*pi*z) + e^(-4*I*pi*z))*q^4
              + (e^(6*I*pi*z) + e^(-6*I*pi*z))*q^9
              + (e^(8*I*pi*z) + e^(-8*I*pi*z))*q^16 + O(q^17)
-
             sage: L.options._reset()  # reset options
 
         REFERENCES:
@@ -2694,6 +2719,7 @@ class LazyLaurentSeriesRing(LazySeriesRing):
             sage: L.polylog(2)
             z + 1/4*z^2 + 1/9*z^3 + 1/16*z^4 + 1/25*z^5 + 1/36*z^6 + 1/49*z^7 + O(z^8)
 
+            sage: # needs sage.symbolic
             sage: L.<x> = LazyLaurentSeriesRing(SR)
             sage: L.dilog()
             x + 1/4*x^2 + 1/9*x^3 + 1/16*x^4 + 1/25*x^5 + 1/36*x^6 + 1/49*x^7 + O(x^8)
@@ -4278,6 +4304,7 @@ class LazyDirichletSeriesRing(LazySeriesRing):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: R.<z> = ZZ[]
             sage: L = LazyDirichletSeriesRing(R, 's')
             sage: L.polylogarithm(z)
@@ -4285,12 +4312,12 @@ class LazyDirichletSeriesRing(LazySeriesRing):
 
         At `z = 1`, this is the Riemann zeta function::
 
-            sage: L.polylogarithm(1)
+            sage: L.polylogarithm(1)                                                    # needs sage.symbolic
             1 + 1/(2^s) + 1/(3^s) + 1/(4^s) + 1/(5^s) + 1/(6^s) + 1/(7^s) + O(1/(8^s))
 
         At `z = -1`, this is the negative of the Dirichlet eta function::
 
-            sage: -L.polylogarithm(-1)
+            sage: -L.polylogarithm(-1)                                                  # needs sage.symbolic
             1 - 1/(2^s) + 1/(3^s) - 1/(4^s) + 1/(5^s) - 1/(6^s) + 1/(7^s) + O(1/(8^s))
 
         REFERENCES:
