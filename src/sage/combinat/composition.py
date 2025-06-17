@@ -1434,7 +1434,7 @@ class Composition(CombinatorialElement):
             sage: SM = Composition([1,2,2]).specht_module(QQ); SM                       # needs sage.combinat sage.modules
             Specht module of [(0, 0), (1, 0), (1, 1), (2, 0), (2, 1)] over Rational Field
             sage: s = SymmetricFunctions(QQ).s()                                        # needs sage.combinat sage.modules
-            sage: s(SM.frobenius_image())                                               # needs sage.combinat sage.modules
+            sage: s(SM.frobenius_image())                                               # needs sage.combinat sage.libs.flint sage.modules
             s[2, 2, 1]
         """
         from sage.combinat.specht_module import SpechtModule

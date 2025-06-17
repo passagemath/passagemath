@@ -184,8 +184,8 @@ def is_integer_valued(matrices):
 
     ::
 
-        sage: matrices = [Matrix([[1, pi], [-1, 0]])]
-        sage: is_integer_valued(matrices)
+        sage: matrices = [Matrix([[1, pi], [-1, 0]])]                                   # needs sage.symbolic
+        sage: is_integer_valued(matrices)                                               # needs sage.symbolic
         False
 
     ::
@@ -322,26 +322,26 @@ def has_bounded_matrix_powers(matrices) -> bool:
         sage: from sage.combinat.regular_sequence_bounded import has_bounded_matrix_powers
         sage: matrices = [Matrix([[-1, 1, 1], [-1, 1, 1], [1, -1, 1]]),
         ....:             Matrix([[-1, 1, 1], [-1, 0, 0], [1, 1, 1]])]
-        sage: has_bounded_matrix_powers(matrices)
+        sage: has_bounded_matrix_powers(matrices)                                       # needs sage.rings.number_field
         True
 
     Maximum of the absolute value of the eigenvalues `>1`::
 
         sage: matrices = [Matrix([[1, 1], [1/2, -1]])]
-        sage: has_bounded_matrix_powers(matrices)
+        sage: has_bounded_matrix_powers(matrices)                                       # needs sage.rings.number_field
         False
 
     Maximum of the absolute value of the eigenvalues `=1`,
     algebraic and geometric multiplicities different for eigenvalue `1`::
 
         sage: matrices = [Matrix([[1,1],[0,1]])]
-        sage: has_bounded_matrix_powers(matrices)
+        sage: has_bounded_matrix_powers(matrices)                                       # needs sage.rings.number_field
         False
 
     Maximum of the absolute value of the eigenvalues `<1`::
 
         sage: matrices = [Matrix([[1, -1], [1/2, -1]])]
-        sage: has_bounded_matrix_powers(matrices)
+        sage: has_bounded_matrix_powers(matrices)                                       # needs sage.rings.number_field
         True
     """
     return all(abs(eVn[0]) < 1 or
@@ -431,35 +431,35 @@ def regular_sequence_is_bounded(S):
 
         sage: SD = Seq2([Matrix([[1, 0], [0, 1]]), Matrix([[0, -1], [1, 2]])],
         ....:           left=vector([0, 1]), right=vector([1, 0]))
-        sage: regular_sequence_is_bounded(SD)
+        sage: regular_sequence_is_bounded(SD)                                           # needs sage.rings.number_field
         False
 
     Sequence of All Natural Numbers::
 
         sage: N = Seq2([Matrix([[2, 0], [2, 1]]), Matrix([[0, 1], [-2, 3]])],
         ....:          left=vector([1, 0]), right=vector([0, 1]))
-        sage: regular_sequence_is_bounded(N)
+        sage: regular_sequence_is_bounded(N)                                            # needs sage.rings.number_field
         False
 
     Indicator Function of Even Integers::
 
         sage: E = Seq2([Matrix([[0, 1], [0, 1]]), Matrix([[0, 0], [0, 1]])],
         ....:          left=vector([1, 0]), right=vector([1, 1]))
-        sage: regular_sequence_is_bounded(E)
+        sage: regular_sequence_is_bounded(E)                                            # needs sage.rings.number_field
         True
 
     Indicator Function of Odd Integers::
 
         sage: O = Seq2([Matrix([[0, 0], [0, 1]]), Matrix([[0, 1], [0, 1]])],
         ....:          left=vector([1, 0]), right=vector([0, 1]))
-        sage: regular_sequence_is_bounded(O)
+        sage: regular_sequence_is_bounded(O)                                            # needs sage.rings.number_field
         True
 
     Number of Odd Entries in Pascal's Triangle::
 
         sage: U = Seq2([Matrix([[3, 0], [6, 1]]), Matrix([[0, 1], [-6, 5]])],
         ....:          left=vector([1, 0]), right=vector([0, 1]))
-        sage: regular_sequence_is_bounded(U)
+        sage: regular_sequence_is_bounded(U)                                            # needs sage.rings.number_field
         False
 
     Counting '10' in the Binary Representation::
@@ -470,7 +470,7 @@ def regular_sequence_is_bounded(S):
         ....:                   [0, 0, 1, 0], [-1, 0, 1, 1]])],
         ....:                  left=vector([1, 0, 0, 0]),
         ....:                  right=vector([0, 0, 1, 0]))
-        sage: regular_sequence_is_bounded(C)
+        sage: regular_sequence_is_bounded(C)                                            # needs sage.rings.number_field
         False
 
     Numbers Starting with '10'::
@@ -481,14 +481,14 @@ def regular_sequence_is_bounded(S):
         ....:                   [0, 2, 0, 1], [0, -2, 0, 3]])],
         ....:                  left=vector([1, 0, 0, 0]),
         ....:                  right=vector([2, 2, 2, 5]))
-        sage: regular_sequence_is_bounded(D)
+        sage: regular_sequence_is_bounded(D)                                            # needs sage.rings.number_field
         False
 
     Signum Function::
 
         sage: S = Seq2([Matrix([[1, 0], [0, 1]]), Matrix([[0, 1], [0, 1]])],
         ....:          left=vector([1, 0]), right=vector([0, 1]))
-        sage: regular_sequence_is_bounded(S)
+        sage: regular_sequence_is_bounded(S)                                            # needs sage.rings.number_field
         True
 
     Number of Digits from the Right to the First '1'::
@@ -496,7 +496,7 @@ def regular_sequence_is_bounded(S):
         sage: S = Seq2([Matrix([[0, 1, 0], [-1, 2, 0], [0, 0, 1]]),
         ....:           Matrix([[0, 0, 1], [0, 0, 2], [0, 0, 1]])],
         ....:          left=vector([1, 0, 0]), right=vector([0, 0, 1]))
-        sage: regular_sequence_is_bounded(S)
+        sage: regular_sequence_is_bounded(S)                                            # needs sage.rings.number_field
         False
 
     TESTS::
@@ -504,7 +504,7 @@ def regular_sequence_is_bounded(S):
         sage: S = Seq2((Matrix([[0, 1, 0], [0, 0, 1], [-1, 2, 0]]),
         ....: Matrix([[-1, 0, 0], [-3/4, -1/4, 3/4], [-1/4, 1/4, -3/4]])),
         ....: left=vector([1, 0, 0]), right=vector([-4, -4, -4]))
-        sage: regular_sequence_is_bounded(S)
+        sage: regular_sequence_is_bounded(S)                                            # needs sage.rings.number_field
         False
 
     ::
@@ -512,7 +512,7 @@ def regular_sequence_is_bounded(S):
         sage: S = Seq2((Matrix([[1, 0], [1, 0]]), Matrix([[0, 1],[1, 0]])),
         ....:          left = vector([1, 1]), right = vector([1, 0]),
         ....:          allow_degenerated_sequence=True)
-        sage: regular_sequence_is_bounded(S)
+        sage: regular_sequence_is_bounded(S)                                            # needs sage.rings.number_field
         True
     """
     from sage.arith.srange import srange
