@@ -299,9 +299,9 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
             sage: m = D(moebius)
             sage: s = L(m, valuation=0)                                                 # needs sage.symbolic
-            sage: s[0]
+            sage: s[0]                                                                  # needs sage.symbolic
             1 - 1/(2^s) - 1/(3^s) - 1/(5^s) + 1/(6^s) - 1/(7^s) + O(1/(8^s))
-            sage: s[1]
+            sage: s[1]                                                                  # needs sage.symbolic
             0
 
         Converting various series from a univariate power series::
