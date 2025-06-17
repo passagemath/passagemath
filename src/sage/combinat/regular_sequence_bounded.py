@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.modules
 r"""
 Boundedness of `k`-Regular Sequences
 
