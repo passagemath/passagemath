@@ -1832,6 +1832,7 @@ class SignedPermutations(ColoredPermutations):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: B4 = SignedPermutations(4)
             sage: TM = B4.tabloid_module([[2,1], [1]], GF(2))
             sage: TM.dimension()
@@ -1850,6 +1851,7 @@ class SignedPermutations(ColoredPermutations):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: B4 = SignedPermutations(4)
             sage: SM = B4.specht_module([[2,1], [1]], GF(2))
             sage: SM.dimension()
@@ -1867,6 +1869,7 @@ class SignedPermutations(ColoredPermutations):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: B4 = SignedPermutations(4)
             sage: L = B4.simple_module([[], [3,1]], GF(2))
             sage: L.dimension()
@@ -1915,6 +1918,7 @@ class SignedPermutations(ColoredPermutations):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: G = SignedPermutations(5)
             sage: g = G([1,-3,2,5,-4])
             sage: G.conjugacy_class(g)
@@ -1931,6 +1935,7 @@ class SignedPermutations(ColoredPermutations):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.flint
             sage: G = SignedPermutations(3)
             sage: G.conjugacy_classes()
             [Conjugacy class of cycle type ([3], []) in Signed permutations of 3,
