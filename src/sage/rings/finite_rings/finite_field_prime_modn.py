@@ -315,10 +315,10 @@ class FiniteField_prime_modn(FiniteField_generic, integer_mod_ring.IntegerModRin
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: k = GF(1009, modulus='primitive')
             sage: k.gens()
             (11,)
-
             sage: k = GF(1009)
             sage: k.gens()
             (1,)

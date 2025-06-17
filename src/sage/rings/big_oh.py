@@ -138,6 +138,8 @@ def O(*x, **kwds):
         sage: R.<x> = LazyPowerSeriesRing(QQ)                                           # needs sage.combinat
         sage: O(x^5)                                                                    # needs sage.combinat
         O(x^5)
+
+        sage: # needs sage.rings.padics
         sage: t = O(Zp(5)(2*5^2)); t
         O(5^2)
         sage: t.parent()

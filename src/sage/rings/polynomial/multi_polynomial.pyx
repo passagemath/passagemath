@@ -2040,7 +2040,7 @@ cdef class MPolynomial(CommutativePolynomial):
         TESTS::
 
             sage: R.<x,y> = ZZ[]
-            sage: x.inverse_mod(x*y-1)
+            sage: x.inverse_mod(x*y - 1)                                                 # needs sage.libs.singular
             y
         """
         P = self.parent()
@@ -2924,6 +2924,7 @@ cdef class MPolynomial(CommutativePolynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x> = PolynomialRing(QQ, implementation="singular")
             sage: f = R(3)
             sage: f.crt(5, x-1, x-2) % ((x-1)*(x-2))

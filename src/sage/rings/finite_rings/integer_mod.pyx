@@ -1177,7 +1177,7 @@ cdef class IntegerMod_abstract(FiniteRingElement):
 
         Error message as requested in :issue:`38802`::
 
-            sage: sqrt(Mod(2, 101010), all=True)
+            sage: sqrt(Mod(2, 101010), all=True)                                        # needs sage.rings.finite_rings
             Traceback (most recent call last):
             ...
             NotImplementedError: Finding all square roots in extensions is not implemented; try extend=False to find only roots in the base ring Zmod(n).
@@ -1185,7 +1185,7 @@ cdef class IntegerMod_abstract(FiniteRingElement):
         Using the suggested ``extend=False`` works and returns an empty list
         as expected::
 
-            sage: sqrt(Mod(2, 101010), all=True, extend=False)
+            sage: sqrt(Mod(2, 101010), all=True, extend=False)                          # needs sage.rings.finite_rings
             []
 
         ::
