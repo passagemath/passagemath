@@ -21,4 +21,3 @@ flex
 which
 # Needed for macaulay2:
 bison
-patch

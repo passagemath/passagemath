@@ -16,4 +16,3 @@ tar
 bc
 flex
 bison
-patch
