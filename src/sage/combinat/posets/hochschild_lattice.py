@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-graphs
+# sage.doctest: needs sage.modules
 r"""
 Hochschild lattices
 
@@ -106,6 +107,7 @@ def hochschild_fan(n):
 
     EXAMPLES::
 
+        sage: # needs sage.geometry.polyhedron
         sage: from sage.combinat.posets.hochschild_lattice import hochschild_fan
         sage: F = hochschild_fan(4); F
         Rational polyhedral fan in 4-d lattice N
@@ -144,6 +146,7 @@ def hochschild_simplicial_complex(n) -> SimplicialComplex:
 
     EXAMPLES::
 
+        sage: # needs sage.geometry.polyhedron
         sage: C = simplicial_complexes.HochschildSphere(3); C
         Simplicial complex with 8 vertices and 12 facets
         sage: H = C.flip_graph()
