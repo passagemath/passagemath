@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-graphs
+# sage.doctest: needs sage.combinat
 r"""
 Bubble and Shuffle lattices
 
@@ -19,11 +20,13 @@ from typing import Iterator
 
 from sage.combinat.posets.lattices import LatticePoset
 from sage.combinat.subset import subsets
-from sage.combinat.shuffle import ShuffleProduct
 from sage.graphs.digraph import DiGraph
 from sage.graphs.graph import Graph
+from sage.misc.lazy_import import lazy_import
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
+
+lazy_import('sage.combinat.shuffle', 'ShuffleProduct')
 
 
 def bubble_cardinality(m, n) -> Integer:
