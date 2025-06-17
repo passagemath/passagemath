@@ -1188,9 +1188,6 @@ are available:
   installation of Sage, including the HTML documentation, but ``make
   ptest`` has not been run yet.
 
-Note that some of these images are outdated due to build errors.
-Moreover, standard and minimal images are discontinued.
-
 .. only:: html
 
    .. include:: portability_platform_table.rst
