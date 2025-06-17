@@ -7414,7 +7414,7 @@ class RowStandardTableaux_size(RowStandardTableaux, DisjointUnionEnumeratedSets)
 
         EXAMPLES::
 
-            sage: RowStandardTableaux(4).an_element()
+            sage: RowStandardTableaux(4).an_element()                                   # needs sage.graphs sage.modules
             [[1, 2, 3, 4]]
         """
         if self._size == 0:
