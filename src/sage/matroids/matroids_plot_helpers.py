@@ -72,10 +72,6 @@ EXAMPLES::
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
 
-import scipy
-import scipy.interpolate
-import numpy as np
-
 from sage.matroids.advanced import newlabel
 from sage.misc.lazy_import import lazy_import
 from sage.sets.set import Set
@@ -340,6 +336,10 @@ def createline(ptsdict, ll, lineorders2=None) -> tuple[list, list, list, list]:
 
         This method does NOT do any checks.
     """
+    import scipy
+    import scipy.interpolate
+    import numpy as np
+
     x, lo = line_hasorder(ll, lineorders2)
     flip = False
     if not x:
