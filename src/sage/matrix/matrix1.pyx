@@ -750,7 +750,7 @@ cdef class Matrix(Matrix0):
 
         EXAMPLES::
 
-            sage: # needs mpmath
+            sage: # needs mpmath sage.symbolic
             sage: m = matrix(SR, 2, 2, [1, 2, 3, pi])
             sage: from mpmath import mp
             sage: mp.dps = 30
@@ -2728,10 +2728,10 @@ cdef class Matrix(Matrix0):
 
             sage: M = MatrixSpace(QQ, 3, implementation='generic')
             sage: m = M.an_element()
-            sage: m.matrix_space()
+            sage: m.matrix_space()                                                      # needs sage.libs.flint
             Full MatrixSpace of 3 by 3 dense matrices over Rational Field
              (using Matrix_generic_dense)
-            sage: m.matrix_space(nrows=2, ncols=12)
+            sage: m.matrix_space(nrows=2, ncols=12)                                     # needs sage.libs.flint
             Full MatrixSpace of 2 by 12 dense matrices over Rational Field
              (using Matrix_generic_dense)
             sage: m.matrix_space(nrows=2, sparse=True)
