@@ -19,7 +19,7 @@ AUTHORS:
 # ****************************************************************************
 
 
-def from_whatever(data):
+def from_whatever(data, immutable=False):
     r"""
     Return a list of Sage Graphs, given a list of whatever kind of data.
 
