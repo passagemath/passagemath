@@ -1254,6 +1254,7 @@ class QuotientRing_nc(Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y> = PolynomialRing(QQ)
             sage: S = R.quotient_ring(x^2 + y^2)
             sage: S.gens()
@@ -1532,6 +1533,8 @@ class QuotientRingIdeal_generic(ideal.Ideal_generic):
             Principal ideal (3) of Integer Ring
             sage: ZZ.ideal(Zmod(15).ideal(6))  # different from the above!
             Principal ideal (6) of Integer Ring
+
+            sage: # needs sage.libs.singular
             sage: R.<x,y> = QQ[]
             sage: S = R.quotient(x)
             sage: S.ideal(y)._lift()
