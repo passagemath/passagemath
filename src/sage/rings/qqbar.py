@@ -8665,7 +8665,7 @@ class ANBinaryExpr(ANDescr):
             sage: n = sqrt(AA(2)) + one
             sage: one == 1                                                              # needs sage.symbolic
             True
-            sage: sage_input(n)
+            sage: sage_input(n)                                                         # needs sage.symbolic
             R.<x> = AA[]
             QQbar.polynomial_root(AA.common_polynomial(x^2 - 2), RIF(RR(1.4142135623730949), RR(1.4142135623730951))) + 1
             sage: from sage.rings.qqbar import *
