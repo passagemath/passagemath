@@ -14,7 +14,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-tachyon"
-description = "passagemath: Computations on monomial ideals with Frobby"
+description = "passagemath: Interface to the ray tracing system tachyon"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_sagemath_environment

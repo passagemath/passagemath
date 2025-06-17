@@ -48,10 +48,10 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable distribution ``passagemath-rankwidth`` is a small
-optional distribution for use with ``passagemath-graphs``.
+optional distribution for use with `passagemath-graphs <https://pypi.org/project/passagemath-graphs>`_.
 
 It provides a Cython interface to `rw <https://sourceforge.net/projects/rankwidth/>`_ by
-Philipp Klaus Krause.
+Philipp Klaus Krause, which calculates rank width and rank decompositions.
 
 
 What is included

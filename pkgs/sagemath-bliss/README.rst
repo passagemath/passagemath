@@ -47,8 +47,13 @@ so compilation from source is triggered for those.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-bliss`` is a small
-optional distribution for use with ``sagemath-standard``.
+This pip-installable package `passagemath-bliss` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`).
 
-It provides a Cython interface to the ``bliss`` library for the purpose
+It provides a Cython interface to the `bliss <https://users.aalto.fi/~tjunttil/bliss/index.html>`_ library for the purpose
 of computing graph (iso/auto)morphisms.
+
+
+What is included
+----------------
+
+* see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-bliss/MANIFEST.in

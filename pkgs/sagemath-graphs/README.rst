@@ -47,7 +47,7 @@ so compilation from source is triggered for those.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable package `passagemath-graphs` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`) for computations with graphs, posets, complexes, etc.
+This pip-installable package `passagemath-graphs` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`) for computations with graphs, posets, complexes, etc.
 
 It consists of over 170 first-party Python and Cython modules and uses the `Boost Graph Library <https://github.com/boostorg/graph>`_, with additional functionality from `NetworkX <https://networkx.github.io/>`_ and several other libraries.
 
@@ -94,32 +94,96 @@ A quick way to try it out interactively::
 Available as extras, from other distributions
 ---------------------------------------------
 
-``pip install passagemath-graphs[networkx]`` additionally installs
-`NetworkX <https://networkx.github.io>`::
+Libraries
+~~~~~~~~~
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[networkx,test]" ipython
-    In [1]: from sage.all__sagemath_graphs import *
+``pip install passagemath-graphs[benzene,buckygen,plantri]`` additionally make
+various graph generators available via `passagemath-benzene <https://pypi.org/project/passagemath-benzene/>`_, `passagemath-buckygen <https://pypi.org/project/passagemath-buckygen/>`_, and `passagemath-plantri <https://pypi.org/project/passagemath-plantri/>`_.
 
-    In [2]: ## Example depending on networkx goes here
+``pip install passagemath-graphs[bliss]`` additionally installs `passagemath-bliss <https://pypi.org/project/passagemath-bliss/>`_ for the purpose
+of computing graph (iso/auto)morphisms.
 
+``pip install passagemath-graphs[cliquer]`` additionally installs `passagemath-cliquer <https://pypi.org/project/passagemath-cliquer/>`_
+
+``pip install passagemath-graphs[cmr]`` additionally installs `passagemath-cmr <https://pypi.org/project/passagemath-cmr/>`_ for recognition and decomposition algorithms
+for network matrices, totally unimodular matrices and regular matroids, series-parallel matroids, etc.
+
+``pip install passagemath-graphs[gap]`` additionally installs `passagemath-gap <https://pypi.org/project/passagemath-gap/>`_ for group-theoretic functionality.
 
 ``pip install passagemath-graphs[igraph]`` additionally installs
-`igraph <https://python.igraph.org/en/stable/>`::
+`igraph <https://python.igraph.org/en/stable/>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[igraph,test]" ipython
     In [1]: from sage.all__sagemath_graphs import *
 
     In [2]: ## Example depending on igraph goes here
 
+``pip install passagemath-graphs[mcqd]`` additionally installs `passagemath-mcqd <https://pypi.org/project/passagemath-mcqd/>`_
+
+``pip install passagemath-graphs[nauty]`` additionally installs `passagemath-nauty <https://pypi.org/project/passagemath-nauty/>`_ for computing
+automorphism groups of graphs and digraphs.
+
+``pip install passagemath-graphs[networkx]`` additionally installs
+`NetworkX <https://networkx.github.io>`_::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[networkx,test]" ipython
+    In [1]: from sage.all__sagemath_graphs import *
+
+    In [2]: ## Example depending on networkx goes here
+
+``pip install passagemath-graphs[pari]`` additionally installs `passagemath-pari <https://pypi.org/project/passagemath-pari/>`_
+
+``pip install passagemath-graphs[planarity]`` additionally installs `passagemath-planarity <https://pypi.org/project/passagemath-planarity/>`_ for planarity testing.
+
+``pip install passagemath-graphs[rankwidth]`` additionally installs `passagemath-rankwidth <https://pypi.org/project/passagemath-rankwidth/>`_ for rank width and rank decompositions.
+
+``pip install passagemath-graphs[tdlib]`` additionally installs `passagemath-tdlib <https://pypi.org/project/passagemath-tdlib/>`_ for computing tree decompositions.
+
+
+Features
+~~~~~~~~
+
+``pip install passagemath-graphs[combinat]`` additionally installs `passagemath-combinat <https://pypi.org/project/passagemath-combinat/>`_
+
+``pip install passagemath-graphs[editor]`` additionally installs the interactive graph editor `phitigra <https://pypi.org/project/phitigra/>`_.
+
+``pip install passagemath-graphs[groups]`` additionally makes group-theoretic features
+available via `passagemath-gap <https://pypi.org/project/passagemath-gap/>`_, `passagemath-groups <https://pypi.org/project/passagemath-groups/>`_, and `passagemath-nauty <https://pypi.org/project/passagemath-nauty/>`_::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[groups,test]" ipython
+    In [1]: from sage.all__sagemath_graphs import *
+
+    In [2]: g = Graph({
+                0: [1, 2],
+                1: [0, 2],
+                2: [0, 1, 3],
+                3: [2]
+            })
+
+    In [3]: aut = g.automorphism_group()
+
+    In [4]: print(aut.order())
+
+``pip install passagemath-graphs[homology]`` provides homological computations for abstract complexes via `passagemath-modules <https://pypi.org/project/passagemath-modules/>`_.
 
 ``pip install passagemath-graphs[mip]`` additionally makes the mixed-integer programming
-solver GLPK available::
+solver GLPK available via `passagemath-glpk <https://pypi.org/project/passagemath-glpk/>`_ and `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra/>`_ (see there for other available solvers).::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[mip,test]" ipython
     In [1]: from sage.all__sagemath_graphs import *
 
     In [2]: ## Example depending on MIP goes here
 
+``pip install passagemath-graphs[modules]`` additionally makes linear algebra features available via `passagemath-modules <https://pypi.org/project/passagemath-modules/>`_.
+
+``pip install passagemath-graphs[plot]`` additionally installs `passagemath-plot <https://pypi.org/project/passagemath-plot/>`_.
+
+``pip install passagemath-graphs[polyhedra]`` additionally installs `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra/>`_.
+
+``pip install passagemath-graphs[sat]`` additionally provides SAT features via `passagemath-combinat <https://pypi.org/project/passagemath-combinat/>`_.
+
+``pip install passagemath-graphs[standard]`` installs all libraries and features related to graphs that
+are available in a standard installation of Sage.
 
 
 Development

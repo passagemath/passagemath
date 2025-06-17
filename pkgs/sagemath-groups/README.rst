@@ -45,12 +45,14 @@ so compilation from source is triggered for those.
 
 
 About this pip-installable distribution package
------------------------------------------------------------
+-----------------------------------------------
 
-This pip-installable source distribution `sagemath-groups` is an experimental distribution of a part of the Sage Library.  Use at your own risk.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`).
+This pip-installable package `passagemath-groups` a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`) for computations with groups.
 
 
 What is included
 ----------------
 
 * `Groups <https://doc.sagemath.org/html/en/reference/groups/index.html>`_
+
+* see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-groups/MANIFEST.in
