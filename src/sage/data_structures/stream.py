@@ -1453,6 +1453,7 @@ class CoefficientRing(UniqueRepresentation, FractionField_generic):
             sage: s(g).parent()
             Multivariate Lazy Taylor Series Ring in a, b over CoefficientRing over Integer Ring
 
+            sage: # needs sage.combinat sage.modules
             sage: S = SymmetricFunctions(QQ).h().fraction_field()
             sage: PF = CoefficientRing(S)
             sage: L.<a, b> = LazyPowerSeriesRing(S)
@@ -1574,6 +1575,7 @@ class Stream_uninitialized(Stream):
 
         TESTS::
 
+            sage: # needs sage.modules
             sage: import gc
             sage: L.<x,y,t> = LazyPowerSeriesRing(ZZ)
             sage: A = L.undefined(name="A")
@@ -1676,6 +1678,7 @@ class Stream_uninitialized(Stream):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import Stream_uninitialized, Stream_exact, Stream_cauchy_mul, Stream_add, Stream_sub
             sage: terms_of_degree = lambda n, R: [R.one()]
             sage: x = Stream_exact([1], order=1)
@@ -1775,6 +1778,7 @@ class Stream_uninitialized(Stream):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import Stream_uninitialized, Stream_exact, Stream_cauchy_mul, Stream_add, Stream_sub
             sage: terms_of_degree = lambda n, R: [R.one()]
             sage: x = Stream_exact([1], order=1)
@@ -1933,6 +1937,7 @@ class Stream_uninitialized(Stream):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import Stream_uninitialized, Stream_exact, Stream_cauchy_mul, Stream_add, Stream_sub
             sage: terms_of_degree = lambda n, R: [R.one()]
             sage: x = Stream_exact([1], order=1)
@@ -2138,6 +2143,7 @@ class Stream_uninitialized(Stream):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import Stream_uninitialized, Stream_exact, Stream_cauchy_mul, Stream_add, Stream_sub
             sage: terms_of_degree = lambda n, R: [R.one()]
             sage: x = Stream_exact([1], order=1)
@@ -3417,6 +3423,7 @@ class Stream_plethysm(Stream_binary):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import Stream_function, Stream_plethysm
             sage: s = SymmetricFunctions(QQ).s()
             sage: p = SymmetricFunctions(QQ).p()
