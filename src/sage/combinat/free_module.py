@@ -1784,6 +1784,7 @@ class CombinatorialFreeModule_CartesianProduct(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: Q = RootSystem(['A',3]).root_space(GF(3))
             sage: W = WeylGroup(['A',3], prefix='s')
             sage: CP = cartesian_product([Q, W])

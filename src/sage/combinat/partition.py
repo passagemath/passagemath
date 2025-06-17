@@ -7683,14 +7683,14 @@ class Partitions_parts_in(Partitions):
 
         Ensure that :issue:`38640` is fixed::
 
-            sage: # needs sage.modules
-            sage: list(Partitions(4,parts_in=vector(QQ,[2,4])))
+            sage: # needs sage.libs.gap sage.modules
+            sage: list(Partitions(4, parts_in=vector(QQ, [2, 4])))
             [[4], [2, 2]]
-            sage: list(Partitions(4,parts_in=vector(QQ,[2,1/4])))
+            sage: list(Partitions(4, parts_in=vector(QQ, [2, 1/4])))
             Traceback (most recent call last):
             ...
             TypeError: no conversion of this rational to integer
-            sage: list(Partitions(4,parts_in=vector(ZZ,[2,4])))
+            sage: list(Partitions(4, parts_in=vector(ZZ, [2, 4])))
             [[4], [2, 2]]
         """
         parts = tuple(sorted(set(map(ZZ, parts))))
