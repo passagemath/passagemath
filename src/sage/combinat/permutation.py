@@ -3210,6 +3210,7 @@ class Permutation(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: w = Permutation([2, 1, 5, 4, 3])
             sage: w.to_matrix()
             [0 1 0 0 0]
@@ -3259,6 +3260,7 @@ class Permutation(CombinatorialElement):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: w = Permutation([3, 1, 4, 2])
             sage: Iw = w.schubert_determinant_ideal()
             sage: Iw.gens()
@@ -3270,6 +3272,7 @@ class Permutation(CombinatorialElement):
             sage: Iw.is_prime()
             True
 
+            sage: # needs sage.modules
             sage: w = Permutation([2, 1, 5, 4, 3])
             sage: Iw = w.schubert_determinant_ideal()
             sage: Iw.dimension()

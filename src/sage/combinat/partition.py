@@ -7683,6 +7683,7 @@ class Partitions_parts_in(Partitions):
 
         Ensure that :issue:`38640` is fixed::
 
+            sage: # needs sage.modules
             sage: list(Partitions(4,parts_in=vector(QQ,[2,4])))
             [[4], [2, 2]]
             sage: list(Partitions(4,parts_in=vector(QQ,[2,1/4])))
