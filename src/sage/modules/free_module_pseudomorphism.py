@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs sage.rings.finite_rings
 """
 Pseudomorphisms of free modules
 
