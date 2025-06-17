@@ -113,6 +113,7 @@ class FiniteFields(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.finite_rings
                 sage: GF(9,'a').zeta_order()
                 8
                 sage: GF(9,'a').zeta()
@@ -135,6 +136,7 @@ class FiniteFields(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.finite_rings
                 sage: k = GF(7)
                 sage: k.zeta()
                 3
@@ -156,6 +158,7 @@ class FiniteFields(CategoryWithAxiom):
 
             Even more examples::
 
+                sage: # needs sage.rings.finite_rings
                 sage: GF(9,'a').zeta_order()
                 8
                 sage: GF(9,'a').zeta()
@@ -168,6 +171,7 @@ class FiniteFields(CategoryWithAxiom):
             This works even in very large finite fields, provided that ``n``
             can be factored (see :issue:`25203`)::
 
+                sage: # needs sage.rings.finite_rings
                 sage: k.<a> = GF(2^2000)
                 sage: p = 8877945148742945001146041439025147034098690503591013177336356694416517527310181938001
                 sage: z = k.zeta(p)
@@ -209,6 +213,7 @@ class FiniteFields(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.finite_rings
                 sage: k = Zmod(1913)
                 sage: k in Fields()  # to let k be a finite field
                 True

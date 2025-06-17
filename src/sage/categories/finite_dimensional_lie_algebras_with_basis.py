@@ -2736,6 +2736,7 @@ class FiniteDimensionalLieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
                 We can reduce elements of a subalgebra `A` by an ideal `B`
                 (:issue:`40137`)::
 
+                    sage: # needs sage.combinat sage.modules
                     sage: L.<a,b,c,d> = LieAlgebra(QQ, {('a','b'): {'c': 1, 'd':1}, ('a','c'): {'b':1}})
                     sage: A = L.ideal([b, c, d])
                     sage: B = L.ideal([c+d])

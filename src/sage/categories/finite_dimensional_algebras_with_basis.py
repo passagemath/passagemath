@@ -565,6 +565,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             For another example::
 
+                sage: # needs sage.modules
                 sage: A = MatrixSpace(QQ, 2)
                 sage: A.basis()
                 Finite family {(0, 0): [1 0]
@@ -742,6 +743,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             A less trivial example::
 
+                sage: # needs sage.combinat sage.modules
                 sage: B = DescentAlgebra(QQ, 4).B()
                 sage: a = 1/8*B[[1, 1, 1, 1]] - 1/2*B[[2, 1, 1]] + 1/2*B[[2, 2]]
                 sage: a ** 2 == a  # not idempotent, but idempotent mod radical

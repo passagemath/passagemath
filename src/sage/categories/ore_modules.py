@@ -28,13 +28,13 @@ class OreModules(Category_over_base_ring):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.categories.ore_modules import OreModules
             sage: K.<a> = GF(5^3)
             sage: Frob = K.frobenius_endomorphism()
             sage: cat = OreModules(K, Frob)
             sage: cat
             Category of Ore modules over Finite Field in a of size 5^3 twisted by a |--> a^5
-
             sage: S = cat.ore_ring('y')
             sage: cat is OreModules(K, S)
             True
@@ -53,11 +53,11 @@ class OreModules(Category_over_base_ring):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.categories.ore_modules import OreModules
             sage: K.<a> = GF(5^3)
             sage: Frob = K.frobenius_endomorphism()
             sage: cat = OreModules(K, Frob)
-
             sage: TestSuite(cat).run()
         """
         base = ore.base_ring()
@@ -72,6 +72,7 @@ class OreModules(Category_over_base_ring):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.categories.ore_modules import OreModules
             sage: K.<a> = GF(5^3)
             sage: Frob = K.frobenius_endomorphism()
@@ -88,6 +89,7 @@ class OreModules(Category_over_base_ring):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.categories.ore_modules import OreModules
             sage: K.<a> = GF(5^3)
             sage: Frob = K.frobenius_endomorphism()
@@ -104,6 +106,7 @@ class OreModules(Category_over_base_ring):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.categories.ore_modules import OreModules
             sage: K.<a> = GF(5^3)
             sage: Frob = K.frobenius_endomorphism()
@@ -123,13 +126,13 @@ class OreModules(Category_over_base_ring):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: from sage.categories.ore_modules import OreModules
             sage: K.<a> = GF(5^3)
             sage: Frob = K.frobenius_endomorphism()
             sage: cat = OreModules(K, Frob)
             sage: cat.ore_ring()
             Ore Polynomial Ring in x over Finite Field in a of size 5^3 twisted by a |--> a^5
-
             sage: cat.ore_ring('y')
             Ore Polynomial Ring in y over Finite Field in a of size 5^3 twisted by a |--> a^5
         """
@@ -142,14 +145,17 @@ class OreModules(Category_over_base_ring):
         EXAMPLES::
 
             sage: from sage.categories.ore_modules import OreModules
+
+            sage: # needs sage.rings.finite_rings
             sage: K.<a> = GF(5^3)
             sage: Frob = K.frobenius_endomorphism()
             sage: cat = OreModules(K, Frob)
             sage: cat.twisting_morphism()
             Frobenius endomorphism a |--> a^5 on Finite Field in a of size 5^3
 
-        If the twising morphism is the identity, nothing is returned::
+        If the twisting morphism is the identity, nothing is returned::
 
+            sage: # needs sage.modules
             sage: R.<t> = QQ[]
             sage: d = R.derivation()
             sage: cat = OreModules(R, d)
@@ -163,6 +169,7 @@ class OreModules(Category_over_base_ring):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.categories.ore_modules import OreModules
             sage: R.<t> = QQ[]
             sage: d = R.derivation()
@@ -170,8 +177,9 @@ class OreModules(Category_over_base_ring):
             sage: cat.twisting_derivation()
             d/dt
 
-        If the twising derivation is zero, nothing is returned::
+        If the twisting derivation is zero, nothing is returned::
 
+            sage: # needs sage.rings.finite_rings
             sage: K.<a> = GF(5^3)
             sage: Frob = K.frobenius_endomorphism()
             sage: cat = OreModules(K, Frob)

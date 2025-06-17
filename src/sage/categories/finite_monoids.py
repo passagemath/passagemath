@@ -30,6 +30,7 @@ class FiniteMonoids(CategoryWithAxiom):
 
         sage: TestSuite(FiniteMonoids()).run()
 
+        sage: # needs sage.combinat
         sage: R = IntegerModRing(15)
         sage: M = R.subsemigroup([R(5)], one=R(10),
         ....:     category=Semigroups().Finite().Subobjects() & Groups())
@@ -286,6 +287,7 @@ class FiniteMonoids(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.combinat
                 sage: R = IntegerModRing(15)
                 sage: M = R.subsemigroup([R(5)], one=R(10),
                 ....:     category=Semigroups().Finite().Subobjects() & Groups())
@@ -294,6 +296,7 @@ class FiniteMonoids(CategoryWithAxiom):
 
             TESTS::
 
+                sage: # needs sage.combinat
                 sage: R = IntegerModRing(15)
                 sage: M = R.subsemigroup([R(3)], one=R(1),
                 ....:     category=Semigroups().Finite().Subobjects())

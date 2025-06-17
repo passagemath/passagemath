@@ -1329,8 +1329,8 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: R.rank()
                 +Infinity
 
-                sage: F = CombinatorialFreeModule(QQ, ['a','b','c'])
-                sage: F.rank()
+                sage: F = CombinatorialFreeModule(QQ, ['a','b','c'])                    # needs sage.modules
+                sage: F.rank()                                                          # needs sage.modules
                 3
             """
             return self.dimension()

@@ -254,6 +254,7 @@ class MagmaticAlgebras(Category_over_base_ring):
 
                     EXAMPLES::
 
+                        sage: # needs sage.combinat sage.modules
                         sage: B = DescentAlgebra(QQ,3).B()
                         sage: list(B.basis())
                         [B[1, 1, 1], B[1, 2], B[2, 1], B[3]]
