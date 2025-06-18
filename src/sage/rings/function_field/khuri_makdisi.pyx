@@ -509,6 +509,7 @@ cdef class KhuriMakdisi_large(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: k = GF(7)
             sage: A.<x,y> = AffineSpace(k,2)
             sage: C = Curve(y^2 + x^3 + 2*x + 1).projective_closure()
@@ -673,6 +674,7 @@ cdef class KhuriMakdisi_medium(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: k = GF(7)
             sage: A.<x,y> = AffineSpace(k,2)
             sage: C = Curve(y^2 + x^3 + 2*x + 1).projective_closure()
@@ -914,6 +916,7 @@ cdef class KhuriMakdisi_small(KhuriMakdisi_base):
 
         TESTS::
 
+            sage: # needs sage.combinat
             sage: k = GF(7)
             sage: A.<x,y> = AffineSpace(k,2)
             sage: C = Curve(y^2 + x^3 + 2*x + 1).projective_closure()

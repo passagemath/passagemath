@@ -923,7 +923,7 @@ class PolynomialSequence_generic(Sequence_generic):
             sage: L = Sequence([2*x*z - y*z + 2*z^2 + 3*x - 1,
             ....:               2*x^2 - 3*y*z + z^2 - 3*y + 3,
             ....:               -x^2 - 2*x*z - 3*y*z + 3*x])
-            sage: L.macaulay_matrix(0)                                                  # needs sage.modules
+            sage: L.macaulay_matrix(0)                                                  # needs sage.combinat sage.modules
             [0 0 2 0 6 2 3 0 0 6]
             [2 0 0 0 4 1 0 4 0 3]
             [6 0 5 0 4 0 3 0 0 0]
@@ -934,7 +934,7 @@ class PolynomialSequence_generic(Sequence_generic):
             sage: L = Sequence([x*y^2 + y^3 + x*y*z + y*z^2,
             ....:               x^2*y + x*y^2 + x*y*z + 3*x*z^2 + z^3,
             ....:               x^3 + 2*y^3 + x^2*z + 2*x*y*z + 2*z^3])
-            sage: L.macaulay_matrix(1, homogeneous=True)                                # needs sage.modules
+            sage: L.macaulay_matrix(1, homogeneous=True)                                # needs sage.combinat sage.modules
             [0 0 0 0 0 0 0 1 1 0 1 0 0 1 0]
             [0 0 0 1 1 0 0 1 0 0 0 1 0 0 0]
             [0 0 1 1 0 0 1 0 0 0 1 0 0 0 0]
@@ -951,7 +951,7 @@ class PolynomialSequence_generic(Sequence_generic):
 
             sage: R.<x,y,z> = PolynomialRing(QQ)
             sage: L = Sequence([x*y + 2*z^2, y^2 + y*z, x*z])
-            sage: L.macaulay_matrix(1, homogeneous=True, remove_zero=True,              # needs sage.modules
+            sage: L.macaulay_matrix(1, homogeneous=True, remove_zero=True,              # needs sage.combinat sage.modules
             ....:                   return_indices=True)
             (
             [0 0 0 0 1 0 0 0 2]
@@ -974,7 +974,7 @@ class PolynomialSequence_generic(Sequence_generic):
             sage: L = Sequence([2*y*z - 2*z^2 - 3*x + z - 3,
             ....:               -3*y^2 + 3*y*z + 2*z^2 - 2*x - 2*y,
             ....:               -2*y - z - 3])
-            sage: L.macaulay_matrix(1, variables=['x'], remove_zero=True,               # needs sage.modules
+            sage: L.macaulay_matrix(1, variables=['x'], remove_zero=True,               # needs sage.combinat sage.modules
             ....:                   return_indices=True)
             (
             [ 0  0  0  0  0  0  0  0  0  2 -2 -3  0  1 -3]

@@ -136,6 +136,7 @@ class WittVector(CommutativeRingElement):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: W = WittVectorRing(GF(3), prec=3)
             sage: w = W([1,1,1])
             sage: ~w

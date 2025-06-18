@@ -178,6 +178,7 @@ class WittVectorRing(Parent, UniqueRepresentation):
 
     TESTS::
 
+        sage: # needs sage.combinat sage.groups sage.modules
         sage: A = SymmetricGroup(3).algebra(QQ)
         sage: WittVectorRing(A)
         Traceback (most recent call last):
