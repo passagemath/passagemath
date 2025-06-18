@@ -705,9 +705,10 @@ class WittVector_finotti(WittVector):
 
         EXAMPLES::
 
-            sage: W = WittVectorRing(PolynomialRing(GF(7), 'x'), prec=2, algorithm='finotti')
-            sage: t = W([x+3,x+2])
-            sage: u = W([6,x])
+            sage: R.<x> = PolynomialRing(GF(7))
+            sage: W = WittVectorRing(R, prec=2, algorithm='finotti')
+            sage: t = W([x + 3, x + 2])
+            sage: u = W([6, x])
             sage: t + u
             (x + 2, x^6 + x^5 + 4*x^4 + 3*x^3 + 3*x^2 + 2*x + 2)
         """
@@ -735,9 +736,10 @@ class WittVector_finotti(WittVector):
 
         EXAMPLES::
 
-            sage: W = WittVectorRing(PolynomialRing(GF(5), 'x'), prec=3, algorithm='finotti')
-            sage: t = W([1,2,3])
-            sage: u = W([x,x^2,x^3])
+            sage: R.<x> = PolynomialRing(GF(5))
+            sage: W = WittVectorRing(R, prec=3, algorithm='finotti')
+            sage: t = W([1, 2, 3])
+            sage: u = W([x, x^2, x^3])
             sage: t * u
             (x, 2*x^5 + x^2, 3*x^25 + 4*x^22 + 4*x^19 + 2*x^16 + 3*x^13 + 2*x^10 + x^3)
         """
