@@ -64,7 +64,11 @@ polyhedra   = ["passagemath-polyhedra"]
 repl        = ["passagemath-repl"]
 sat         = ["passagemath-combinat"]
 
-standard    = ["passagemath-graphs[combinat,databases,groups,mip,modules,planarity,plot,polyhedra,rankwidth,repl]"]
+# the whole package
+standard    = [
+    "passagemath-graphs[combinat,databases,groups,mip,modules,planarity,polyhedra,rankwidth,repl]",
+    "passagemath-plot[tachyon]",
+]
 
 [tool.setuptools]
 include-package-data = false
