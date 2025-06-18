@@ -82,7 +82,10 @@ groups      = ["passagemath-groups"]
 plot        = ["passagemath-plot"]
 
 # the whole package
-standard    = ["passagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,pari,plot,RDF]"]
+standard    = [
+    "passagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,pari,RDF]",
+    "passagemath-plot[tachyon]",
+]
 
 [tool.setuptools]
 include-package-data = false
