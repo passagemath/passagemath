@@ -96,7 +96,6 @@ from sage.misc.fast_methods import WithEqualityById
 from sage.misc.functional import is_odd, lift
 from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
-from sage.misc.sage_eval import sage_eval
 from sage.rings.infinity import Infinity
 from sage.rings.finite_rings.integer_mod import mod
 from sage.categories.number_fields import NumberFields
@@ -126,6 +125,7 @@ from sage.interfaces.abc import GapElement
 from sage.rings.number_field.morphism import RelativeNumberFieldHomomorphism_from_abs
 
 lazy_import('sage.libs.gap.element', 'GapElement', as_='LibGapElement')
+lazy_import('sage.misc.sage_eval', 'sage_eval')
 lazy_import('sage.rings.number_field.unit_group', 'UnitGroup')
 lazy_import('sage.rings.number_field.class_group', ['ClassGroup', 'SClassGroup'])
 lazy_import('sage.rings.universal_cyclotomic_field', 'UniversalCyclotomicFieldElement')
