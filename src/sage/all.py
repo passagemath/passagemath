@@ -109,9 +109,6 @@ from sage.logic.all      import *
 
 from sage.numerical.all import *
 
-if sys.platform != 'win32':
-    from cysignals.alarm import alarm, cancel_alarm
-
 # Lazily import interacts (#15335)
 lazy_import('sage.interacts', 'all', 'interacts')
 
