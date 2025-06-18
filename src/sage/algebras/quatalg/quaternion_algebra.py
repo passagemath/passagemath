@@ -60,7 +60,6 @@ from sage.rings.ideal import Ideal_fractional
 from sage.rings.rational_field import RationalField, QQ
 from sage.rings.infinity import infinity
 from sage.rings.number_field.number_field_base import NumberField
-from sage.rings.qqbar import AA
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.polynomial_ring import polygen
 from sage.rings.power_series_ring import PowerSeriesRing
@@ -93,8 +92,6 @@ from sage.categories.algebras import Algebras
 from sage.categories.number_fields import NumberFields
 
 from sage.structure.richcmp import richcmp_method
-from sage.libs.pari.all import pari
-from sage.combinat.words.word import Word
 
 ########################################################
 # Constructor
@@ -397,6 +394,9 @@ class QuaternionAlgebraFactory(UniqueFactory):
                     raise ValueError("must specify ramification at all real places of the number field")
                 if is_odd(len(primes) + 2 * sum(arg2)):
                     raise ValueError("quaternion algebra over a number field must have an even number of ramified places")
+
+                from sage.combinat.words.word import Word
+                from sage.rings.qqbar import AA
 
                 # We want to compute the correct quaternion algebra over K with PARI
                 # As PARI computes an alternative representation of K given by an integral
@@ -1438,6 +1438,8 @@ class QuaternionAlgebra_ab(QuaternionAlgebra_abstract):
         if F not in NumberFields():
             raise ValueError("base field must be rational numbers or a number field")
 
+        from sage.rings.qqbar import AA
+
         # Since we need the list of real embeddings of the number field (instead
         # of just the number of them), we avoid a call of the `is_totally_real()`-
         # method by directly comparing the embedding list's length to the degree
@@ -1578,6 +1580,8 @@ class QuaternionAlgebra_ab(QuaternionAlgebra_abstract):
 
         if not inf:
             return ram_fin
+
+        from sage.rings.qqbar import AA
 
         # At this point the infinite ramified places also need to be computed
         return ram_fin, [e for e in F.embeddings(AA) if F.hilbert_symbol(a, b, e) == -1]
