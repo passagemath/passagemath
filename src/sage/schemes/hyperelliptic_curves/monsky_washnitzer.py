@@ -53,7 +53,6 @@ from sage.categories.integral_domains import IntegralDomains
 from sage.matrix.constructor import matrix
 from sage.misc.cachefunc import cached_method
 from sage.misc.lazy_import import lazy_import
-from sage.misc.profiler import Profiler
 from sage.misc.repr import repr_lincomb
 from sage.modules.free_module import FreeModule
 from sage.modules.free_module_element import FreeModuleElement, vector
@@ -1805,7 +1804,14 @@ def matrix_of_frobenius_hyperelliptic(Q, p=None, prec=None, M=None):
         [    4*5 + 4*5^2 + O(5^3)     3*5 + 2*5^2 + O(5^3)       5 + 3*5^2 + O(5^3)     2*5 + 2*5^2 + O(5^3)]
         [            5^2 + O(5^3)       5 + 4*5^2 + O(5^3)     4*5 + 3*5^2 + O(5^3)             2*5 + O(5^3)]
     """
-    prof = Profiler()
+    try:
+        from sage.misc.profiler import Profiler
+    except ImportError:
+        def prof():
+            pass
+    else:
+        prof = Profiler()
+
     prof("setup")
     if p is None:
         try:
@@ -3711,7 +3717,13 @@ class MonskyWashnitzerDifferentialRing(UniqueRepresentation, Module):
              - (39452448*y^-20-26148752*y^-18+8085490*y^-16-2007040*y^-14+376320*y^-12-37632*y^-10+1568*y^-8)*x^3
              + (21102144*y^-20-18120592*y^-18+8028160*y^-16-2007040*y^-14+250880*y^-12-12544*y^-10)*x^4) dx/2y
         """
-        prof = Profiler()
+        try:
+            from sage.misc.profiler import Profiler
+        except ImportError:
+            def prof():
+                pass
+        else:
+            prof = Profiler()
         prof("setup")
         # TODO, would it be useful to be able to take Frobenius of any element? Less efficient?
         x, y = self.base_ring().gens()
