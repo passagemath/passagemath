@@ -1085,7 +1085,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
             We recover that the group algebra of the symmetric group
             `S_4` is a block matrix algebra::
 
-                sage: # needs sage.groups sage.modules sage.rings.number_field
+                sage: # needs sage.combinat sage.groups sage.modules sage.rings.number_field
                 sage: A = SymmetricGroup(4).algebra(QQ)
                 sage: decomposition = A.peirce_decomposition()  # long time
                 sage: [[decomposition[i][j].dimension()         # long time (4s)
