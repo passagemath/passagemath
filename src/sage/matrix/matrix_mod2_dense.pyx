@@ -2186,6 +2186,7 @@ cdef class Matrix_mod2_dense(matrix_dense.Matrix_dense):   # dense or sparse
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: A = Matrix(GF(2), [[0, 1],
             ....:                    [1, 0]])
             sage: r, c = A.doubly_lexical_ordering()
@@ -2199,6 +2200,7 @@ cdef class Matrix_mod2_dense(matrix_dense.Matrix_dense):   # dense or sparse
 
         ::
 
+            sage: # needs sage.groups
             sage: A = Matrix(GF(2), [[0, 1],
             ....:                    [1, 0]])
             sage: r, c = A.doubly_lexical_ordering(inplace=True); A
@@ -2210,6 +2212,7 @@ cdef class Matrix_mod2_dense(matrix_dense.Matrix_dense):   # dense or sparse
         This algorithm works correctly for the matrix in
         Example 3.7 in [HAM1985]_::
 
+            sage: # needs sage.groups
             sage: A = Matrix(GF(2), [[1, 1, 0, 0, 0, 0, 0],
             ....:                    [1, 1, 0, 0, 0, 0, 0],
             ....:                    [1, 1, 0, 1, 0, 0, 0],
@@ -2248,6 +2251,7 @@ cdef class Matrix_mod2_dense(matrix_dense.Matrix_dense):   # dense or sparse
 
         The algorithm works collectly for a matrix with nrows=0 or ncols=0::
 
+            sage: # needs sage.groups
             sage: A = Matrix(GF(2), 0, 2, [])
             sage: A.doubly_lexical_ordering()
             ((), ())
