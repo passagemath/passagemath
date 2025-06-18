@@ -148,7 +148,6 @@ from sage.misc.cachefunc import cached_method
 from sage.misc.lazy_attribute import lazy_attribute
 from sage.misc.lazy_import import lazy_import
 from sage.misc.persist import register_unpickle_override
-from sage.misc.sage_eval import sage_eval
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import IntegerRing
 from sage.rings.polynomial.multi_polynomial_element import degree_lowest_rational_function
@@ -159,6 +158,7 @@ from sage.schemes.projective.projective_subscheme import (AlgebraicScheme_subsch
                                                           AlgebraicScheme_subscheme_projective_field)
 
 lazy_import('sage.interfaces.singular', 'singular')
+lazy_import('sage.misc.sage_eval', 'sage_eval')
 lazy_import('sage.rings.number_field.number_field', 'NumberField')
 lazy_import('sage.rings.qqbar', ['number_field_elements_from_algebraics', 'QQbar'])
 

@@ -194,7 +194,6 @@ from sage.modules.free_module_element import vector
 
 from copy import copy
 import sys
-import pexpect
 
 
 from sage.geometry.triangulation.base import \
@@ -283,6 +282,11 @@ class PointConfiguration(UniqueRepresentation, PointConfiguration_base):
         """
         if PointConfiguration._have_TOPCOM_cached is not None:
             return PointConfiguration._have_TOPCOM_cached
+
+        try:
+            import pexpect
+        except ImportError:
+            return False
 
         try:
             out = next(PointConfiguration._TOPCOM_exec('points2placingtriang',
@@ -611,6 +615,8 @@ class PointConfiguration(UniqueRepresentation, PointConfiguration_base):
             #######################
             ['{{0,1,2,4},{1,2,3,4}}']
         """
+        import pexpect
+
         timeout = 600
         executable_name, *args = executable.split()
         executable_absname = TOPCOMExecutable(executable_name).absolute_filename()

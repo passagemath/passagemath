@@ -15,6 +15,7 @@ name = "passagemath-topcom"
 description = "passagemath: Triangulations of point configurations and oriented matroids with TOPCOM"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_pexpect
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'

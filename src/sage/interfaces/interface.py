@@ -47,7 +47,6 @@ from sage.structure.parent_base import ParentWithBase
 from sage.structure.element import Element, parent
 from sage.structure.richcmp import rich_to_bool
 
-import sage.misc.sage_eval
 from sage.misc.fast_methods import WithEqualityById
 from sage.misc.instancedoc import instancedoc
 
@@ -1098,7 +1097,9 @@ class InterfaceElement(Element):
         """
         string = self._sage_repr()
         try:
-            return sage.misc.sage_eval.sage_eval(string)
+            from sage.misc.sage_eval import sage_eval
+
+            return sage_eval(string)
         except Exception:
             raise NotImplementedError("Unable to parse output: %s" % string)
 
