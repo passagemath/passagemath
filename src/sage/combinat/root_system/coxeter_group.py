@@ -105,12 +105,12 @@ def CoxeterGroup(data, implementation='reflection', base_ring=None, index_set=No
 
     We use the different options for the "reflection" implementation::
 
-        sage: W = CoxeterGroup(["H",3], implementation='reflection', base_ring=RR); W   # needs sage.libs.gap
+        sage: W = CoxeterGroup(["H",3], implementation='reflection', base_ring=RR); W   # needs sage.libs.gap sage.symbolic
         Finite Coxeter group over Real Field with 53 bits of precision with Coxeter matrix:
         [1 3 2]
         [3 1 5]
         [2 5 1]
-        sage: W = CoxeterGroup([[1,10],[10,1]], implementation='reflection',            # needs sage.symbolics
+        sage: W = CoxeterGroup([[1,10],[10,1]], implementation='reflection',            # needs sage.symbolic
         ....:                  index_set=['a','b'], base_ring=SR); W
         Finite Coxeter group over Symbolic Ring with Coxeter matrix:
         [ 1 10]

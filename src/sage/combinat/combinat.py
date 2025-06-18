@@ -1011,7 +1011,7 @@ def lah_number(n, k) -> Integer:
     We verify a well-known identity::
 
         sage: S1 = stirling_number1; S2 = stirling_number2
-        sage: all(lah_number(n, k) == sum(S1(n, j) * S2(j, k) for j in [k..n])
+        sage: all(lah_number(n, k) == sum(S1(n, j) * S2(j, k) for j in [k..n])          # needs sage.libs.gap
         ....:     for n in range(10) for k in range(10))
         True
 

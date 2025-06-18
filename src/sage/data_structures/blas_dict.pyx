@@ -344,7 +344,7 @@ cpdef dict linear_combination(dict_factor_iter, bint factor_on_left=True):
 
     Check right multiplication with coefficients in a noncommutative ring::
 
-        sage: # needs sage.groups sage.modules
+        sage: # needs sage.combinat sage.groups sage.modules
         sage: SGA = SymmetricGroupAlgebra(QQ, 3)
         sage: s1 = SGA([2, 1, 3]) # (1 2)
         sage: s2 = SGA([3, 1, 2]) # (1 3)
@@ -354,7 +354,7 @@ cpdef dict linear_combination(dict_factor_iter, bint factor_on_left=True):
 
     Check left multiplication with coefficients in a noncommutative ring::
 
-        sage: # needs sage.groups sage.modules
+        sage: # needs sage.combinat sage.groups sage.modules
         sage: blas.linear_combination([(D1, s2)], factor_on_left=True) # s2 * s1
         {0: [3, 2, 1]}
     """

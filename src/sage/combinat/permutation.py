@@ -1399,7 +1399,7 @@ class Permutation(CombinatorialElement):
         """
         TESTS::
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.combinat sage.groups sage.modules
             sage: SGA = SymmetricGroupAlgebra(QQ, 3)
             sage: SM = SGA.specht_module([2,1])
             sage: p213 = Permutations(3)([2,1,3])
@@ -1445,8 +1445,8 @@ class Permutation(CombinatorialElement):
             [3, 2, 1]
             sage: Permutations.options.mult='l2r'
 
-            sage: SGA = SymmetricGroupAlgebra(QQ, 3)                                    # needs sage.groups sage.modules
-            sage: SGA.an_element() * Permutations(3)(p213)                              # needs sage.groups sage.modules
+            sage: SGA = SymmetricGroupAlgebra(QQ, 3)                                    # needs sage.combinat sage.groups sage.modules
+            sage: SGA.an_element() * Permutations(3)(p213)                              # needs sage.combinat sage.groups sage.modules
             3*[1, 2, 3] + [2, 1, 3] + 2*[2, 3, 1] + [3, 2, 1]
         """
         if not isinstance(lp, Permutation) and isinstance(lp, Element):
