@@ -9512,7 +9512,7 @@ cdef class Polynomial(CommutativePolynomial):
         We check that this function works for rings
         that have a coercion to the reals::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: K.<a> = NumberField(x^2 - 2, embedding=1.4)
             sage: u = x^4 + a*x^3 + 3*x^2 + 2*a*x + 4
             sage: u.trace_polynomial()

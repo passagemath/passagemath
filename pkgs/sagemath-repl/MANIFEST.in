@@ -33,10 +33,6 @@ include sage/misc/sh.py
 graft sage/ext_data/notebook-ipython
 exclude sage/ext_data/notebook-ipython/kernel.json.in
 
-# expect_objects from sage.interfaces.quit is needed to compute the
-# CPU time used by each doctest.
-include sage/interfaces/quit.py
-
 include VERSION.txt
 
 global-exclude all__*.py

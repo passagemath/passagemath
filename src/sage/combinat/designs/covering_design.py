@@ -49,7 +49,6 @@ Classes and methods
 from urllib.request import urlopen
 from ssl import create_default_context as default_context
 
-from sage.misc.sage_eval import sage_eval
 from sage.structure.sage_object import SageObject
 from sage.rings.rational import Rational
 from sage.arith.misc import binomial
@@ -512,6 +511,8 @@ def best_known_covering_design_www(v, k, t, verbose=False):
     A :exc:`ValueError` is raised if the ``(v, k, t)`` parameters are not
     found in the database.
     """
+    from sage.misc.sage_eval import sage_eval
+
     v = int(v)
     k = int(k)
     t = int(t)

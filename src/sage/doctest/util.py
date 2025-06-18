@@ -333,7 +333,10 @@ class Timer:
             sage: Timer().start()
             {'cputime': ..., 'walltime': ...}
         """
-        from sage.interfaces.quit import expect_objects
+        try:
+            from sage.interfaces.quit import expect_objects
+        except ImportError:
+            expect_objects = []
         self.cputime = self._quick_cputime(expect_objects)
         self.walltime = walltime()
         return self
@@ -352,7 +355,10 @@ class Timer:
             sage: timer.stop()
             {'cputime': ..., 'walltime': ...}
         """
-        from sage.interfaces.quit import expect_objects
+        try:
+            from sage.interfaces.quit import expect_objects
+        except ImportError:
+            expect_objects = []
         self.cputime = self._quick_cputime(expect_objects) - self.cputime
         self.walltime = walltime() - self.walltime
         return self

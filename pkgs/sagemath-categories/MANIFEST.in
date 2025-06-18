@@ -41,7 +41,6 @@ include sage/misc/object_multiplexer.p*
 include sage/misc/multireplace.p*
 include sage/interfaces/sagespawn.p*
 include sage/interfaces/quit.p*
-include sage/interfaces/cleaner.p*
 include sage/interfaces/expect.p*
 include sage/interfaces/interface.p*
 include sage/interfaces/sage0.p*
@@ -96,7 +95,6 @@ include sage/misc/citation.p*
 include sage/misc/binary_tree.p*
 graft sage/data_structures               # bitset needed by sage.graphs and sage.geometry.polyhedron
 exclude sage/data_structures/bounded_integer_sequences.*   # depends on flint
-exclude sage/data_structures/stream.*
 graft sage/groups/perm_gps/partn_ref  # but not partn_ref2, which depends on GAP
 exclude sage/groups/perm_gps/partn_ref/refinement_graphs.p*    # sagemath-graphs
 exclude sage/groups/perm_gps/partn_ref/refinement_matrices.p*  # sagemath-modules
@@ -205,6 +203,7 @@ include sage/rings/multi_power_series_ring.py
 include sage/rings/multi_power_series_ring_element.py
 include sage/rings/laurent_series_ring*.p*
 include sage/rings/puiseux_series_ring*.p*
+include sage/rings/lazy_series*.p*
 
 graft sage/rings/semirings
 

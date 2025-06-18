@@ -254,7 +254,6 @@ from sage.rings.real_mpfr import RealField
 import sage.interfaces.abc
 
 from sage.misc.misc_c import prod as mul
-from sage.misc.sage_eval import sage_eval
 
 import sage.rings.polynomial.polynomial_singular_interface
 
@@ -990,6 +989,8 @@ cdef class MPolynomialRing_libsingular(MPolynomialRing_base):
                     d[str(self.base_ring().gen())] = self.base_ring_gen()
             try:
                 if '/' in element:
+                    from sage.misc.sage_eval import sage_eval
+
                     element = sage_eval(element,d)
                 else:
                     element = element.replace("^","**")
