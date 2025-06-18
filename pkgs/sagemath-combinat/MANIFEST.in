@@ -14,9 +14,6 @@ exclude sage/monoids/indexed_free_monoid.p*     # sagemath-categories
 graft sage/games
 graft sage/sat
 
-include sage/data_structures/stream.p*
-include sage/rings/lazy_series*.p*
-
 include sage/groups/indexed_free_group.p*               # these words go together well
 
 graft sage/libs/lrcalc

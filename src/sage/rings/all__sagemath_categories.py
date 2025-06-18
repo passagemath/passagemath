@@ -85,6 +85,10 @@ from sage.rings.localization import Localization
 from sage.rings.continued_fraction import (continued_fraction,
                                            continued_fraction_list)
 
+# Lazy Laurent series ring
+lazy_import('sage.rings.lazy_series_ring', ['LazyLaurentSeriesRing', 'LazyPowerSeriesRing',
+                                            'LazySymmetricFunctions', 'LazyDirichletSeriesRing'])
+
 # Preliminary version of real numbers for doctesting without sage.rings.real_mpfr.
 # sage.rings.all redefines it.
 RealNumber = RR = RDF             # used by the preparser to wrap real literals

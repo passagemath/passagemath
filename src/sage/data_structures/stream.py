@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-combinat
+# sage_setup: distribution = sagemath-categories
 r"""
 Streams
 
@@ -2234,7 +2234,7 @@ class Stream_plethysm(Stream_binary):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: from sage.data_structures.stream import Stream_function, Stream_plethysm
             sage: p = SymmetricFunctions(QQ).p()
             sage: f = Stream_function(lambda n: p[n], True, 1)
@@ -2261,7 +2261,7 @@ class Stream_plethysm(Stream_binary):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: from sage.data_structures.stream import Stream_function, Stream_plethysm
             sage: s = SymmetricFunctions(QQ).s()
             sage: p = SymmetricFunctions(QQ).p()
@@ -2299,7 +2299,7 @@ class Stream_plethysm(Stream_binary):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: from sage.data_structures.stream import Stream_plethysm, Stream_exact, Stream_function, Stream_zero
             sage: s = SymmetricFunctions(QQ).s()
             sage: p = SymmetricFunctions(QQ).p()
@@ -2377,7 +2377,7 @@ class Stream_plethysm(Stream_binary):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: from sage.data_structures.stream import Stream_plethysm, Stream_exact, Stream_function, Stream_zero
             sage: s = SymmetricFunctions(QQ).s()
             sage: p = SymmetricFunctions(QQ).p()
