@@ -20,3 +20,9 @@ with InWheel(wheel, wheel):
     print(f'Running {command}')
     sys.stdout.flush()
     if os.system(f"bash -c {shlex.quote(command)}") != 0: sys.exit(1)
+
+    # Remove the sage-conf dependency; it is not needed because our wheels ship what is needed.
+    command = f'sed -i.bak "/^Requires-Dist: passagemath-conf/d" *.dist-info/METADATA'
+    print(f'Running {command}')
+    sys.stdout.flush()
+    if os.system(f"bash -c {shlex.quote(command)}") != 0: sys.exit(1)

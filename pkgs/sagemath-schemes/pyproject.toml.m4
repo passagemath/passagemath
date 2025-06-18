@@ -29,6 +29,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_flint
     SPKG_INSTALL_REQUIRES_sagemath_polyhedra
     SPKG_INSTALL_REQUIRES_sagemath_singular
+    SPKG_INSTALL_REQUIRES_sage_conf
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
