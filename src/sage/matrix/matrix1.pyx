@@ -2812,10 +2812,10 @@ cdef class Matrix(Matrix0):
 
             sage: M = MatrixSpace(ZZ, 2, 3, implementation='generic')
             sage: m = M.an_element()
-            sage: m.new_matrix().parent()
+            sage: m.new_matrix().parent()                                               # needs sage.libs.flint
             Full MatrixSpace of 2 by 3 dense matrices over Integer Ring
              (using Matrix_generic_dense)
-            sage: m.new_matrix(3,3).parent()
+            sage: m.new_matrix(3,3).parent()                                            # needs sage.libs.flint
             Full MatrixSpace of 3 by 3 dense matrices over Integer Ring
              (using Matrix_generic_dense)
             sage: m.new_matrix(3,3, sparse=True).parent()
