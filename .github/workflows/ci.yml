@@ -1,4 +1,4 @@
-name: CI Linux
+name: CI Linux (monolithic, Meson)
 
 on:
   push:
