@@ -108,9 +108,15 @@ cdef class DecompositionNode(SageObject):
                 self._matrix = Matrix_cmr_chr_sparse(matrix.parent(), matrix)
             else:
                 if row_keys is None:
-                    row_keys = matrix.codomain().basis().keys()
+                    try:
+                        row_keys = matrix.codomain().basis().keys()
+                    except:
+                        row_keys = None
                 if column_keys is None:
-                    column_keys = matrix.domain().basis().keys()
+                    try:
+                        column_keys = matrix.domain().basis().keys()
+                    except:
+                        column_keys = None
         if row_keys is not None:
             self._set_row_keys(row_keys)
         if column_keys is not None:
