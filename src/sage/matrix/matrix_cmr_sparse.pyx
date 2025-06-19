@@ -5186,13 +5186,31 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ....:                           certificate=True,
             ....:                           use_direct_graphicness_test=False)
             sage: result, certificate
-            (True, TwoSumNode (11×11) with 2 children)
+            (True, DeltaSumNode (11×11))
             sage: unicode_art(certificate)
-            ╭──────────TwoSumNode (11×11) with 2 children
-            │                 │
-            GraphicNode (7×8) SeriesParallelReductionNode (5×4)
-                              │
-                              GraphicNode (4×4)
+            ╭───────DeltaSumNode (11×11)────────╮
+            │                                   │
+            GraphicNode (3×4)                   SeriesParallelReductionNode (10×11)
+                                                │
+                              ╭───────DeltaSumNode (10×10)───────╮
+                              │                                  │
+                              GraphicNode (3×4)                  SeriesParallelReductionNode (9×10)
+                                                                 │
+                                                ╭───────DeltaSumNode (9×9)────────╮
+                                                │                                 │
+                                                GraphicNode (3×4)                 SeriesParallelReductionNode (8×9)
+                                                                                  │
+                                                                  ╭──────DeltaSumNode (8×8)───────╮
+                                                                  │                               │
+                                                                  GraphicNode (3×4)               SeriesParallelReductionNode (7×8)
+                                                                                                  │
+                                                                                    ╭────DeltaSumNode (7×7)────╮
+                                                                                    │                          │
+                                                                                    GraphicNode (3×4)          SeriesParallelReductionNode (6×7)
+                                                                                                               │
+                                                                                                      DeltaSumNode (4×5)╮
+                                                                                                      │                 │
+                                                                                                      GraphicNode (3×4) GraphicNode (3×5)
 
         Base ring check::
 

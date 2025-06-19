@@ -108,9 +108,15 @@ cdef class DecompositionNode(SageObject):
                 self._matrix = Matrix_cmr_chr_sparse(matrix.parent(), matrix)
             else:
                 if row_keys is None:
-                    row_keys = matrix.codomain().basis().keys()
+                    try:
+                        row_keys = matrix.codomain().basis().keys()
+                    except:
+                        row_keys = None
                 if column_keys is None:
-                    column_keys = matrix.domain().basis().keys()
+                    try:
+                        column_keys = matrix.domain().basis().keys()
+                    except:
+                        column_keys = None
         if row_keys is not None:
             self._set_row_keys(row_keys)
         if column_keys is not None:
@@ -713,7 +719,7 @@ cdef class DecompositionNode(SageObject):
             ....:                           column_keys=['a','b','c','d','e','f',
             ....:                                        'g','h','i','j','k','l'])
             sage: C = certificate.child_nodes()[0]; C
-            DeltaSumNode (9×12) with 2 children
+            DeltaSumNode (9×12)
             sage: C1, C2 = C.child_nodes()
             sage: C1.matrix()
             [ 0  0  1  1  1  1  1]
@@ -793,11 +799,11 @@ cdef class DecompositionNode(SageObject):
             ....:                           row_keys=range(6),
             ....:                           column_keys='abcdef')
             sage: unicode_art(certificate)
-                    PivotsNode (6×6)
-                    │
-            ╭─────────────DeltaSumNode (6×6) with 2 children
-            │                   │
-            CographicNode (4×5) GraphicNode (4×5)
+                              PivotsNode (6×6)
+                              │
+                    ╭DeltaSumNode (6×6)─╮
+                    │                   │
+                    CographicNode (4×5) GraphicNode (4×5)
         """
         return self.as_ordered_tree()._unicode_art_()
 
@@ -816,11 +822,11 @@ cdef class DecompositionNode(SageObject):
             ....:                           row_keys=range(6),
             ....:                           column_keys='abcdef')
             sage: ascii_art(certificate)
-                               PivotsNode (6×6)
-                               |
-                      _________DeltaSumNode (6×6) with 2 children
-                     /                   /
-                    CographicNode (4×5) GraphicNode (4×5)
+                                          PivotsNode (6×6)
+                                          |
+                                 _________DeltaSumNode (6×6)
+                                /                   /
+                               CographicNode (4×5) GraphicNode (4×5)
         """
         return self.as_ordered_tree()._ascii_art_()
 
@@ -2224,7 +2230,8 @@ cdef class SumNode(DecompositionNode):
             OneSumNode (4×4) with 2 children
         """
         result = super()._repr_()
-        result += f' with {self.nchildren()} children'
+        if isinstance(self, OneSumNode):
+            result += f' with {self.nchildren()} children'
         return result
 
     def permuted_block_matrix(self):
@@ -2451,7 +2458,7 @@ cdef class TwoSumNode(SumNode):
             [0 0 0 0|1 0 0 1 1]
             [0 0 0 0|1 1 0 0 1]
             sage: result, certificate = M3.is_totally_unimodular(certificate=True); certificate
-            TwoSumNode (9×9) with 2 children
+            TwoSumNode (9×9)
 
             sage: K33 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 4, sparse=True),
             ....:                            [[1, 1, 0, 0], [1, 1, 1, 0],
@@ -2481,7 +2488,7 @@ cdef class TwoSumNode(SumNode):
             [ 0  0  0  0| 1  0  1  1]
             [ 0  0  0  0| 0 -1  1  1]
             sage: result1, certificate1 = M.is_totally_unimodular(certificate=True); certificate1
-            TwoSumNode (8×8) with 2 children
+            TwoSumNode (8×8)
             sage: certificate1.summand_matrices()
             (
             [ 1  1  1  0]
@@ -2588,11 +2595,11 @@ cdef class DeltaSumNode(SumNode):
             sage: C0
             PivotsNode (6×6)
             sage: unicode_art(C0)
-                    PivotsNode (6×6)
-                    │
-            ╭─────────────DeltaSumNode (6×6) with 2 children
-            │                   │
-            CographicNode (4×5) GraphicNode (4×5)
+                              PivotsNode (6×6)
+                              │
+                    ╭DeltaSumNode (6×6)─╮
+                    │                   │
+                    CographicNode (4×5) GraphicNode (4×5)
             sage: unicode_art(node)
             UnknownNode (6×6)
 
@@ -2633,7 +2640,7 @@ cdef class DeltaSumNode(SumNode):
             ....:                                 row_keys=range(9),
             ....:                                 column_keys='abcdefghijkl')
             sage: C = certificate.child_nodes()[0]; C
-            DeltaSumNode (9×12) with 2 children
+            DeltaSumNode (9×12)
             sage: C1, C2 = C.child_nodes()
             sage: C1.matrix()
             [ 0  0  1  1  1  1  1]
@@ -2770,7 +2777,7 @@ cdef class DeltaSumNode(SumNode):
             sage: result, certificate = R12_large.is_totally_unimodular(certificate=True,
             ....:                                 decompose_strategy="delta_pivot")
             sage: C = certificate.child_nodes()[0]; C
-            DeltaSumNode (9×12) with 2 children
+            DeltaSumNode (9×12)
             sage: C.is_distributed_ranks()
             True
             sage: C.is_concentrated_rank()
@@ -2810,7 +2817,7 @@ cdef class DeltaSumNode(SumNode):
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
             ....:                           decompose_strategy="delta_pivot")
             sage: C = certificate.child_nodes()[0]; C
-            DeltaSumNode (6×6) with 2 children
+            DeltaSumNode (6×6)
             sage: C.matrix()
             [ 1  0  0  1 -1 -1]
             [ 0  1  1  1  0  0]
@@ -2868,7 +2875,7 @@ cdef class DeltaSumNode(SumNode):
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
             ....:                           decompose_strategy="delta_pivot")
             sage: C = certificate.child_nodes()[0]; C
-            DeltaSumNode (6×6) with 2 children
+            DeltaSumNode (6×6)
             sage: C.matrix()
             [ 1  0  0  1 -1 -1]
             [ 0  1  1  1  0  0]
@@ -3122,7 +3129,7 @@ cdef class ThreeSumNode(SumNode):
             sage: result, certificate = R12_large.is_totally_unimodular(certificate=True,
             ....:                                 decompose_strategy="three_pivot")
             sage: C = certificate; C
-            ThreeSumNode (9×12) with 2 children
+            ThreeSumNode (9×12)
             sage: C.is_distributed_ranks()
             False
             sage: C.is_concentrated_rank()
@@ -3162,7 +3169,7 @@ cdef class ThreeSumNode(SumNode):
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
             ....:                           decompose_strategy="three_pivot")
             sage: C = certificate; C
-            ThreeSumNode (6×6) with 2 children
+            ThreeSumNode (6×6)
             sage: C.matrix()
             [ 1  0  1  1  0  0]
             [ 0  1  1  1  0  0]
@@ -3217,7 +3224,7 @@ cdef class ThreeSumNode(SumNode):
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
             ....:                           decompose_strategy="three_pivot")
             sage: C = certificate; C
-            ThreeSumNode (6×6) with 2 children
+            ThreeSumNode (6×6)
             sage: C.matrix()
             [ 1  0  1  1  0  0]
             [ 0  1  1  1  0  0]
@@ -3325,11 +3332,11 @@ cdef class YSumNode(SumNode):
             sage: C0
             PivotsNode (6×6)
             sage: unicode_art(C0)
-                    PivotsNode (6×6)
-                    │
-            ╭────────────YSumNode (6×6) with 2 children
-            │                 │
-            GraphicNode (5×4) GraphicNode (5×4)
+                             PivotsNode (6×6)
+                             │
+                    ╭─YSumNode (6×6)──╮
+                    │                 │
+                    GraphicNode (5×4) GraphicNode (5×4)
             sage: unicode_art(node)
             UnknownNode (6×6)
         """
@@ -3446,7 +3453,7 @@ cdef class YSumNode(SumNode):
             sage: result, certificate = R12_large.is_totally_unimodular(certificate=True,
             ....:                                 decompose_strategy="y_pivot")
             sage: C = certificate.child_nodes()[0]; C
-            YSumNode (9×12) with 2 children
+            YSumNode (9×12)
             sage: C.is_distributed_ranks()
             True
             sage: C.is_concentrated_rank()
@@ -3486,7 +3493,7 @@ cdef class YSumNode(SumNode):
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
             ....:                           decompose_strategy="y_pivot")
             sage: C = certificate.child_nodes()[0]; C
-            YSumNode (6×6) with 2 children
+            YSumNode (6×6)
             sage: C.matrix()
             [ 1  0  0  1 -1 -1]
             [ 0  1  1  1  0  0]
@@ -3545,7 +3552,7 @@ cdef class YSumNode(SumNode):
             sage: result, certificate = R12.is_totally_unimodular(certificate=True,
             ....:                           decompose_strategy="y_pivot")
             sage: C = certificate.child_nodes()[0]; C
-            YSumNode (6×6) with 2 children
+            YSumNode (6×6)
             sage: C.matrix()
             [ 1  0  0  1 -1 -1]
             [ 0  1  1  1  0  0]
@@ -4392,7 +4399,7 @@ cdef class PivotsNode(DecompositionNode):
             PivotsNode (9×12)
             sage: certificate.row_keys()
             sage: certificate.child_nodes()
-            (DeltaSumNode (9×12) with 2 children,)
+            (DeltaSumNode (9×12),)
             sage: certificate.row_keys()
             (r0, r1, r2, r3, r4, r5, r6, r7, r8)
         """
