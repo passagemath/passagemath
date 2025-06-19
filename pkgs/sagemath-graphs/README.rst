@@ -124,7 +124,7 @@ for network matrices, totally unimodular matrices and regular matroids, series-p
 automorphism groups of graphs and digraphs.
 
 ``pip install passagemath-graphs[networkx]`` additionally installs
-`NetworkX <https://networkx.github.io>`_::
+`NetworkX <https://networkx.github.io>`__::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[networkx,test]" ipython
     In [1]: from sage.all__sagemath_graphs import *
