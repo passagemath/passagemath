@@ -271,7 +271,7 @@ cdef class AbelianGroup(Group):
     """
     def is_abelian(self):
         """
-        Return True.
+        Return ``True``.
 
         EXAMPLES::
 

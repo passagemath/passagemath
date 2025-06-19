@@ -1138,7 +1138,8 @@ makes them available on `GitHub Packages
 <https://github.com/features/packages>`_ (ghcr.io).
 
 This makes it easy for developers to debug problems that showed up in
-the build logs for a given platform.
+the build logs for a given platform. These images are not intended for production
+deployment.
 
 The image version corresponding to the latest development release
 receives the additional Docker tag ``dev``, see for example the Docker

@@ -42,7 +42,7 @@ jobs:
       targets: build sagemath_doc_html-build-deps
       targets_optional: doc-html ptest-nodoc
       tox_system_factors: >-
-        ["ubuntu-jammy"]
+        ["ubuntu-noble"]
       tox_packages_factors: >-
         ["standard"]
       docker_push_repository: ghcr.io/${{ github.repository }}/

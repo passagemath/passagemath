@@ -6,6 +6,11 @@ Dedekind Domains
 #  Distributed under the terms of the GNU General Public License (GPL)
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
+try:
+    from typing import Self  # type: ignore (Python >= 3.11)
+except ImportError:
+    from typing_extensions import Self  # type: ignore (Python 3.10)
+
 from sage.categories.category import Category
 from sage.categories.integral_domains import IntegralDomains
 
@@ -86,7 +91,7 @@ class DedekindDomains(Category):
             """
             return True
 
-        def integral_closure(self):
+        def integral_closure(self) -> Self:
             r"""
             Return ``self`` since Dedekind domains are integrally closed.
 

@@ -1,8 +1,7 @@
 # sage_setup: distribution = sagemath-graphs
 r"""
-Interactive window for cluster seed mutations
+Interactive display of quivers
 """
-
 import ipywidgets as widgets
 from sage.misc.latex import latex
 from sage.repl.rich_output.pretty_print import pretty_print

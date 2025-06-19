@@ -244,7 +244,7 @@ jobs:
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.14' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.14' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup") > constraints.txt
@@ -300,14 +300,16 @@ jobs:
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
         id: python
         with:
-          python-version: "3.9 - 3.12"
+          python-version: "3.10 - 3.12"
           update-environment: false
 
       - name: Bootstrap
+        # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
           export PATH=$(pwd)/build/bin:$PATH
           eval $(sage-print-system-package-command auto --sudo --yes update)
           eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+          sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
           ./bootstrap
 
       - name: Cache SAGE_LOCAL
@@ -549,7 +551,7 @@ jobs:
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.9, <3.11' || '>=3.9, <3.14' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.14' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup") > constraints.txt
@@ -611,14 +613,16 @@ jobs:
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
         id: python
         with:
-          python-version: "3.9 - 3.12"
+          python-version: "3.10 - 3.12"
           update-environment: false
 
       - name: Bootstrap
+        # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
           export PATH=$(pwd)/build/bin:$PATH
           eval $(sage-print-system-package-command auto --sudo --yes update)
           eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+          sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
           ./bootstrap
 
       - name: Cache SAGE_LOCAL

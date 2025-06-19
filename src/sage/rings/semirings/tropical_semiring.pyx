@@ -641,7 +641,7 @@ class TropicalSemiring(Parent, UniqueRepresentation):
 
     multiplicative_identity = one
 
-    def gens(self):
+    def gens(self) -> tuple:
         """
         Return the generators of ``self``.
 

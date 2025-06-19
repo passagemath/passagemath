@@ -17,7 +17,6 @@ Number-theoretic functions
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 import math
-import sys
 
 from sage.misc.lazy_import import lazy_import
 from sage.rings.integer_ring import ZZ
@@ -391,7 +390,7 @@ class Function_zetaderiv(GinacFunction):
         """
         return _mpmath_utils_call(_mpmath_zeta, x, 1, n, parent=parent)
 
-    def _method_arguments(self, k, x, **args):
+    def _method_arguments(self, k, x):
         r"""
         TESTS::
 

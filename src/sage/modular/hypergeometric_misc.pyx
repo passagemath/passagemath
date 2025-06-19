@@ -1,7 +1,8 @@
 # sage_setup: distribution = sagemath-schemes
 """
-Some utility routines for the hypergeometric motives package that benefit
-significantly from Cythonization.
+Utility routines for hypergeometric motives
+
+These are functions that benefit significantly from Cythonization.
 """
 from cpython cimport array
 from cysignals.signals cimport sig_check

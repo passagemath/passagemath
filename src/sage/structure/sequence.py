@@ -71,8 +71,7 @@ specifying the universe of the sequence::
 # ****************************************************************************
 
 from sage.misc.persist import register_unpickle_override
-import sage.structure.sage_object
-import sage.structure.coerce
+from sage.structure.sage_object import SageObject
 
 from sage.misc.lazy_import import lazy_import
 
@@ -301,7 +300,7 @@ def Sequence(x, universe=None, check=True, immutable=False, cr=False, cr_str=Non
     return Sequence_generic(x, universe, check, immutable, cr, cr_str, use_sage_types)
 
 
-class Sequence_generic(sage.structure.sage_object.SageObject, list):
+class Sequence_generic(SageObject, list):
     """
     A mutable list of elements with a common guaranteed universe,
     which can be set immutable.

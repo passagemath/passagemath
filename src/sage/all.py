@@ -61,6 +61,7 @@ sage.misc.lazy_import.commence_startup()
 import os
 import operator
 import math
+import sys
 
 # ############### end setup warnings ###############################
 
@@ -107,8 +108,6 @@ from sage.quadratic_forms.all import *
 from sage.logic.all      import *
 
 from sage.numerical.all import *
-
-from cysignals.alarm import alarm, cancel_alarm
 
 # Lazily import interacts (#15335)
 lazy_import('sage.interacts', 'all', 'interacts')

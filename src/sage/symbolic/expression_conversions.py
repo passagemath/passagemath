@@ -19,11 +19,9 @@ overridden by subclasses.
 from operator import eq, ne, gt, lt, ge, le, mul, pow, neg, add, truediv
 from functools import reduce
 
-import sage.rings.abc
-
 from sage.misc.lazy_import import lazy_import
 from sage.symbolic.ring import SR
-from sage.structure.element import Expression
+from sage.structure.element import Expression, InfinityElement
 from sage.functions.log import exp
 from sage.symbolic.operators import arithmetic_operators, relation_operators, FDerivativeOperator, add_vararg, mul_vararg
 from sage.rings.number_field.number_field_element_base import NumberFieldElement_base
@@ -216,7 +214,7 @@ class Converter:
             return self.relation(ex, operator)
         elif isinstance(operator, FDerivativeOperator):
             return self.derivative(ex, operator)
-        elif operator == tuple:
+        elif operator is tuple:
             return self.tuple(ex)
         else:
             return self.composition(ex, operator)
@@ -1532,7 +1530,7 @@ class DeMoivre(ExpressionTreeWalker):
     def __init__(self, ex, force=False):
         r"""
         A class that walks a symbolic expression tree and replaces
-        occurences of complex exponentials (optionally, all
+        occurrences of complex exponentials (optionally, all
         exponentials) by their respective trigonometric expressions.
 
         INPUT:

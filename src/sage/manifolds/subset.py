@@ -1795,7 +1795,7 @@ class ManifoldSubset(UniqueRepresentation, Parent):
             raise TypeError('cannot be nonempty because it has already been declared empty')
         self._has_defined_points = True
 
-    def has_defined_points(self, subsets=True):
+    def has_defined_points(self, subsets=True) -> bool:
         r"""
         Return whether any points have been defined on ``self`` or any of its subsets.
 

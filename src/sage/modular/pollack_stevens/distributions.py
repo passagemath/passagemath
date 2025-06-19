@@ -703,7 +703,7 @@ class Symk_class(OverconvergentDistributions_abstract):
             s += " twisted by %s" % self._character
         return s
 
-    def is_symk(self):
+    def is_symk(self) -> bool:
         """
         Whether or not this distributions space is `Sym^k(R)` for some ring `R`.
 
@@ -803,7 +803,7 @@ class OverconvergentDistributions_class(OverconvergentDistributions_abstract):
             s += " twistted by " + " * ".join(twiststuff)
         return s
 
-    def is_symk(self):
+    def is_symk(self) -> bool:
         """
         Whether or not this distributions space is `Sym^k(R)` for some ring `R`.
 

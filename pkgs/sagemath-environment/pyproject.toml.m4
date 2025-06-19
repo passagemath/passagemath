@@ -10,7 +10,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "passagemath-environment"
 description = "passagemath: System and software environment"
-dependencies = []
+dependencies = [
+    SPKG_INSTALL_REQUIRES_platformdirs
+]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
 

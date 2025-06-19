@@ -1051,8 +1051,7 @@ class ModularSymbolsAmbient(ModularSymbolsSpace, AmbientHeckeModule):
         hom = self.Hom(M)
         if self.dimension() == 0 or M.dimension() == 0:
             A = MS(0)
-            phi = hom(A, "Heilbronn operator(%s,%s)" % (H, t))
-            return phi
+            return hom(A, "Heilbronn operator(%s,%s)" % (H, t))
 
         rows = []
         B = self.manin_basis()
@@ -1776,7 +1775,7 @@ class ModularSymbolsAmbient(ModularSymbolsSpace, AmbientHeckeModule):
 
     factor = factorization
 
-    def is_cuspidal(self):
+    def is_cuspidal(self) -> bool:
         r"""
         Return ``True`` if this space is cuspidal, else ``False``.
 
@@ -1799,7 +1798,8 @@ class ModularSymbolsAmbient(ModularSymbolsSpace, AmbientHeckeModule):
             self.__is_cuspidal = (S.dimension() == self.dimension())
         return self.__is_cuspidal
 
-    def is_eisenstein(self):
+    @cached_method
+    def is_eisenstein(self) -> bool:
         r"""
         Return ``True`` if this space is Eisenstein, else ``False``.
 
@@ -1815,12 +1815,8 @@ class ModularSymbolsAmbient(ModularSymbolsSpace, AmbientHeckeModule):
             sage: S.is_eisenstein()
             False
         """
-        try:
-            return self.__is_eisenstein
-        except AttributeError:
-            S = self.ambient_hecke_module().eisenstein_submodule()
-            self.__is_eisenstein = self.dimension() == S.dimension()
-        return self.__is_eisenstein
+        S = self.ambient_hecke_module().eisenstein_submodule()
+        return self.dimension() == S.dimension()
 
     def manin_symbols_basis(self):
         """
@@ -2672,8 +2668,7 @@ class ModularSymbolsAmbient_wtk_g0(ModularSymbolsAmbient):
                 z += M((i, hg[1, 0], hg[1, 1]))
             rows.append(z.element())
 
-        A = MS(rows)
-        return A
+        return MS(rows)
 
     def _cuspidal_new_submodule_dimension_formula(self):
         r"""
@@ -3262,8 +3257,7 @@ class ModularSymbolsAmbient_wtk_g1(ModularSymbolsAmbient):
                 z += M((i, hg[1, 0], hg[1, 1]))
             rows.append(z.element())
 
-        A = MS(rows)
-        return A
+        return MS(rows)
 
     def boundary_space(self):
         r"""
@@ -3340,7 +3334,7 @@ class ModularSymbolsAmbient_wtk_gamma_h(ModularSymbolsAmbient):
             9
             sage: M._dimension_formula()
         """
-        return None
+        return
 
     def _repr_(self):
         r"""
@@ -3364,7 +3358,7 @@ class ModularSymbolsAmbient_wtk_gamma_h(ModularSymbolsAmbient):
             sage: ModularSymbols(GammaH(15,[4]),2)._cuspidal_submodule_dimension_formula() is None
             True
         """
-        return None
+        return
 
     def _cuspidal_new_submodule_dimension_formula(self):
         r"""
@@ -3375,7 +3369,7 @@ class ModularSymbolsAmbient_wtk_gamma_h(ModularSymbolsAmbient):
             sage: ModularSymbols(GammaH(15,[4]),2)._cuspidal_new_submodule_dimension_formula() is None
             True
         """
-        return None
+        return
 
     def _compute_hecke_matrix_prime_power(self, p, r):
         r"""
@@ -3669,8 +3663,7 @@ class ModularSymbolsAmbient_wtk_eps(ModularSymbolsAmbient):
                 hg = h * g
                 z += eps(h[0, 0]) * M((i, hg[1, 0], hg[1, 1]))
             rows.append(z.element())
-        A = MS(rows)
-        return A
+        return MS(rows)
 
     def _dimension_formula(self):
         r"""
@@ -3684,7 +3677,7 @@ class ModularSymbolsAmbient_wtk_eps(ModularSymbolsAmbient):
             0
             sage: M._dimension_formula()
         """
-        return None
+        return
 
     def boundary_space(self):
         r"""

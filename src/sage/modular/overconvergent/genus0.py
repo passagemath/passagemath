@@ -195,6 +195,7 @@ classical) does not apply.
 #  Distributed under the terms of the GNU General Public License (GPL)
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
+from typing import Iterator
 
 import weakref
 
@@ -429,7 +430,7 @@ class OverconvergentModularFormsSpace(Module):
     # Boring functions that access internal data #
     ##############################################
 
-    def is_exact(self):
+    def is_exact(self) -> bool:
         r"""
         Return ``True`` if elements of this space are represented exactly.
 
@@ -694,7 +695,7 @@ class OverconvergentModularFormsSpace(Module):
         """
         return self._radius
 
-    def gens(self):
+    def gens(self) -> Iterator:
         r"""
         Return a generator object that iterates over the (infinite) set of
         basis vectors of ``self``.
@@ -1501,7 +1502,7 @@ class OverconvergentModularFormElement(ModuleElement):
         """
         return self.gexp().prec()
 
-    def is_eigenform(self):
+    def is_eigenform(self) -> bool:
         r"""
         Return ``True`` if this is an eigenform.
 
@@ -1668,7 +1669,7 @@ class OverconvergentModularFormElement(ModuleElement):
         self._eigenvalue = eigenvalue
         self._slope = eigenvalue.normalized_valuation()
 
-    def is_integral(self):
+    def is_integral(self) -> bool:
         r"""
         Test whether this element has `q`-expansion coefficients that are `p`-adically integral.
 

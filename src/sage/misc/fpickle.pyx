@@ -45,8 +45,7 @@ def reduce_code(co):
         raise ValueError("Cannot pickle code objects from closures")
 
     co_args = (co.co_argcount,)
-    if sys.version_info.minor >= 8:
-        co_args += (co.co_posonlyargcount,)
+    co_args += (co.co_posonlyargcount,)
     co_args += (co.co_kwonlyargcount, co.co_nlocals,
                 co.co_stacksize, co.co_flags, co.co_code,
                 co.co_consts, co.co_names, co.co_varnames, co.co_filename,

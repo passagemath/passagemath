@@ -294,7 +294,7 @@ class LocalizationElement(IntegralDomainElement):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.real_mpfr
+            sage: # needs sage.libs.pari sage.rings.real_mpfr
             sage: from sage.rings.localization import LocalizationElement
             sage: P.<x> = CC[]
             sage: L = Localization(P, x**2 + x + 1)

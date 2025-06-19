@@ -3338,7 +3338,7 @@ def HoffmanSingletonGraph():
             D.append(p)
         vv = 'q%s' % (int(p[1]) + 1)
         v = [v[-1] for v in H.neighbors(p) if v[:2] == vv]
-        if len(v):
+        if v:
             s = int(v[0])
         l += 1
     map = H.relabel(range(50), return_map=True)
@@ -4023,7 +4023,7 @@ def MurtyGraph():
         3
         sage: g.diameter()
         2
-        sage: g.is_hamiltonian()
+        sage: g.is_hamiltonian()                                                        # needs sage.numerical.mip
         True
         sage: g.show()                          # long time                             # needs sage.plot
 
@@ -5644,7 +5644,7 @@ def IoninKharaghani765Graph():
     # Associate a matrix to every entry of W
     int_to_matrix = {0: matrix.zero(45)}
     for i in range(15):
-        vec = [frozenset([]), L[0, 0], L[1, 0], L[2, 0], L[3, 0]]
+        vec = [frozenset(), L[0, 0], L[1, 0], L[2, 0], L[3, 0]]
         vec = f_pow(pi_vec, i % 3, vec)
         vec = f_pow(sigma2, i % 5, vec)
         int_to_matrix[i + 1] = N(vec)

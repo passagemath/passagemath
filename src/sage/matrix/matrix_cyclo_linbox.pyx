@@ -163,7 +163,7 @@ def _charpoly_multimodular(Matrix_cyclo_dense self, var='x', proof=None):
     p = previous_prime(MAX_MODULUS)
     prod = 1
     v = []
-    #A, denom = self._matrix._clear_denom()
+    # A, denom = self._matrix._clear_denom()
     # TODO: this might be stupidly slow
     denom = self._matrix.denominator()
     A._matrix = <Matrix_rational_dense>(denom*self._matrix)

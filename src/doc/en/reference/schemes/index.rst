@@ -47,6 +47,7 @@ Projective Schemes
    sage/schemes/projective/projective_homset
    sage/schemes/projective/coherent_sheaf
    sage/schemes/projective/cohomology
+   sage/schemes/projective/proj_bdd_height
 
 Products of Projective Spaces
 -----------------------------

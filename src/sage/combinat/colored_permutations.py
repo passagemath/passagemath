@@ -10,7 +10,7 @@ Colored permutations
 import itertools
 from random import choice
 
-from sage.structure.element import MultiplicativeGroupElement
+from sage.structure.element import MultiplicativeGroupElement, parent
 from sage.structure.parent import Parent
 from sage.structure.unique_representation import UniqueRepresentation
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass
@@ -19,6 +19,7 @@ from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.arith.functions import lcm
 
+from sage.combinat.partition_tuple import PartitionTuples, PartitionTuple
 from sage.combinat.permutation import Permutations
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
@@ -32,7 +33,6 @@ class ColoredPermutation(MultiplicativeGroupElement):
     """
     A colored permutation.
     """
-
     def __init__(self, parent, colors, perm):
         """
         Initialize ``self``.
@@ -277,7 +277,7 @@ class ColoredPermutation(MultiplicativeGroupElement):
         D = diagonal_matrix(Cp, [g ** i for i in self._colors])
         return self._perm.to_matrix() * D
 
-    def has_left_descent(self, i):
+    def has_left_descent(self, i) -> bool:
         r"""
         Return ``True`` if ``i`` is a left descent of ``self``.
 
@@ -1436,7 +1436,7 @@ class SignedPermutation(ColoredPermutation,
         """
         return self._perm.to_matrix() * diagonal_matrix(self._colors)
 
-    def has_left_descent(self, i):
+    def has_left_descent(self, i) -> bool:
         """
         Return ``True`` if ``i`` is a left descent of ``self``.
 
@@ -1476,7 +1476,7 @@ class SignedPermutation(ColoredPermutation,
 
         .. WARNING::
 
-            The arugment ``negative_cycles`` does not refer to the usual
+            The argument ``negative_cycles`` does not refer to the usual
             definition of a negative cycle; see :meth:`cycle_type`.
 
         EXAMPLES::
@@ -1572,7 +1572,6 @@ class SignedPermutation(ColoredPermutation,
         pos_type.sort(reverse=True)
         neg_type = [len(C) // 2 for C in neg_cycles]
         neg_type.sort(reverse=True)
-        from sage.combinat.partition_tuple import PartitionTuples
         PT = PartitionTuples(2, self.parent()._n)
         return PT([pos_type, neg_type])
 
@@ -1826,6 +1825,58 @@ class SignedPermutations(ColoredPermutations):
                                                 x._perm)
         return super()._coerce_map_from_(C)
 
+    def tabloid_module(self, shape, base_ring):
+        """
+        Return the tabloid module of ``self`` with shape ``shape``
+        over ``base_ring``.
+
+        EXAMPLES::
+
+            sage: # needs sage.groups sage.modules
+            sage: B4 = SignedPermutations(4)
+            sage: TM = B4.tabloid_module([[2,1], [1]], GF(2))
+            sage: TM.dimension()
+            96
+            sage: TM = B4.tabloid_module([[], [3,1]], GF(2))
+            sage: TM.dimension()
+            4
+        """
+        from .colored_permutations_representations import TabloidModule
+        return TabloidModule(self, base_ring, shape)
+
+    def specht_module(self, shape, base_ring):
+        """
+        Return the Specht module of ``self`` with shape ``shape``
+        over ``base_ring``.
+
+        EXAMPLES::
+
+            sage: # needs sage.groups sage.modules
+            sage: B4 = SignedPermutations(4)
+            sage: SM = B4.specht_module([[2,1], [1]], GF(2))
+            sage: SM.dimension()
+            8
+            sage: SM = B4.specht_module([[], [3,1]], GF(2))
+            sage: SM.dimension()
+            3
+        """
+        return self.tabloid_module(shape, base_ring).specht_module()
+
+    def simple_module(self, shape, base_ring):
+        """
+        Return the simple module of ``self`` with shape ``shape``
+        over ``base_ring``.
+
+        EXAMPLES::
+
+            sage: # needs sage.groups sage.modules
+            sage: B4 = SignedPermutations(4)
+            sage: L = B4.simple_module([[], [3,1]], GF(2))
+            sage: L.dimension()
+            2
+        """
+        return self.specht_module(shape, base_ring).simple_module()
+
     def long_element(self, index_set=None):
         """
         Return the longest element of ``self``, or of the
@@ -1856,6 +1907,49 @@ class SignedPermutations(ColoredPermutations):
         if index_set is not None:
             return super().long_element()
         return self.element_class(self, [-ZZ.one()] * self._n, self._P.one())
+
+    def conjugacy_class(self, g):
+        r"""
+        Return the conjugacy class of ``g`` in ``self``.
+
+        INPUT:
+
+        - ``g`` -- a pair of partitions or an element of ``self``
+
+        EXAMPLES::
+
+            sage: # needs sage.groups sage.modules
+            sage: G = SignedPermutations(5)
+            sage: g = G([1,-3,2,5,-4])
+            sage: G.conjugacy_class(g)
+            Conjugacy class of cycle type ([1], [2, 2]) in Signed permutations of 5
+            sage: G.conjugacy_class([[2,1], [1,1]])
+            Conjugacy class of cycle type ([2, 1], [1, 1]) in Signed permutations of 5
+        """
+        from .colored_permutations_representations import SignedPermutationGroupConjugacyClass
+        return SignedPermutationGroupConjugacyClass(self, g)
+
+    def conjugacy_classes(self):
+        """
+        Return the list of conjugacy classes of ``self``.
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.flint
+            sage: G = SignedPermutations(3)
+            sage: G.conjugacy_classes()
+            [Conjugacy class of cycle type ([3], []) in Signed permutations of 3,
+             Conjugacy class of cycle type ([2, 1], []) in Signed permutations of 3,
+             Conjugacy class of cycle type ([1, 1, 1], []) in Signed permutations of 3,
+             Conjugacy class of cycle type ([2], [1]) in Signed permutations of 3,
+             Conjugacy class of cycle type ([1, 1], [1]) in Signed permutations of 3,
+             Conjugacy class of cycle type ([1], [2]) in Signed permutations of 3,
+             Conjugacy class of cycle type ([1], [1, 1]) in Signed permutations of 3,
+             Conjugacy class of cycle type ([], [3]) in Signed permutations of 3,
+             Conjugacy class of cycle type ([], [2, 1]) in Signed permutations of 3,
+             Conjugacy class of cycle type ([], [1, 1, 1]) in Signed permutations of 3]
+        """
+        return [self.conjugacy_class(la) for la in PartitionTuples(2, self._n)]
 
     def conjugacy_class_representative(self, nu):
         r"""
@@ -1894,11 +1988,7 @@ class SignedPermutations(ColoredPermutations):
             ....:     for n in range(1, 6) for nu in PartitionTuples(2, n))
             True
         """
-        from sage.combinat.partition_tuple import PartitionTuple
-        nu = PartitionTuple(nu)
-        if nu.size() != self._n:
-            raise ValueError("the size of the partition pair (=%s) must equal"
-                             " the rank (=%s)" % (nu.size(), self._n))
+        nu = PartitionTuples(2, self._n)(nu)
         la, mu = nu
         cyc = []
         cnt = 0
@@ -1945,3 +2035,5 @@ class SignedPermutations(ColoredPermutations):
 #
 #            if total % 2 == 0:
 #                yield s
+
+# Conjugacy classes, representation theory moved to colored_permutations_representations.py

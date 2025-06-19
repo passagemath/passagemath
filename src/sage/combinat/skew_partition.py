@@ -1281,7 +1281,7 @@ class SkewPartition(CombinatorialElement):
             sage: mu = SkewPartition([[3,2,1], [2]])
             sage: SM = mu.specht_module(QQ)                                             # needs sage.modules
             sage: s = SymmetricFunctions(QQ).s()                                        # needs sage.modules
-            sage: s(SM.frobenius_image())                                               # needs sage.modules
+            sage: s(SM.frobenius_image())                                               # needs sage.libs.flint sage.modules
             s[2, 1, 1] + s[2, 2] + s[3, 1]
 
         We verify that the Frobenius image is the corresponding
@@ -1294,7 +1294,7 @@ class SkewPartition(CombinatorialElement):
 
             sage: mu = SkewPartition([[4,2,1], [2,1]])
             sage: SM = mu.specht_module(QQ)                                             # needs sage.modules
-            sage: s(SM.frobenius_image())                                               # needs sage.modules
+            sage: s(SM.frobenius_image())                                               # needs sage.libs.flint sage.modules
             s[2, 1, 1] + s[2, 2] + 2*s[3, 1] + s[4]
             sage: s(mu)                                                                 # needs sage.modules
             s[2, 1, 1] + s[2, 2] + 2*s[3, 1] + s[4]

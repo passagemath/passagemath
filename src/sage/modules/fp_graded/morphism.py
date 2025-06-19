@@ -612,7 +612,7 @@ class FPModuleMorphism(Morphism):
         return homset([self(g(x)) for x in g.domain().generators()])
 
     @cached_method
-    def is_zero(self):
+    def is_zero(self) -> bool:
         r"""
         Decide if ``self`` is the zero homomorphism.
 
@@ -648,7 +648,7 @@ class FPModuleMorphism(Morphism):
     __bool__ = is_zero
 
     @cached_method
-    def is_identity(self):
+    def is_identity(self) -> bool:
         r"""
         Decide if ``self`` is the identity endomorphism.
 
@@ -1584,7 +1584,7 @@ class FPModuleMorphism(Morphism):
         # its image equals im(self)
         return Hom(I, j0.codomain())(j0._values)
 
-    def is_injective(self, top_dim=None, verbose=False):
+    def is_injective(self, top_dim=None, verbose=False) -> bool:
         r"""
         Return ``True`` if and only if ``self`` has a trivial kernel.
 
@@ -1615,7 +1615,7 @@ class FPModuleMorphism(Morphism):
         j0 = self._resolve_kernel(top_dim, verbose)
         return j0.domain().is_trivial()
 
-    def is_surjective(self):
+    def is_surjective(self) -> bool:
         r"""
         Return ``True`` if and only if ``self`` has a trivial cokernel.
 

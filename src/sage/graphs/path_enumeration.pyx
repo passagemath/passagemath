@@ -1856,7 +1856,7 @@ def all_paths_iterator(self, starting_vertices=None, ending_vertices=None,
             idx_to_path[idx] = path
             pq.push((-len(path), idx))
             idx = idx + 1
-        except(StopIteration):
+        except StopIteration:
             pass
     # Since we always extract a shortest path, using a heap
     # can speed up the algorithm
@@ -1876,7 +1876,7 @@ def all_paths_iterator(self, starting_vertices=None, ending_vertices=None,
             idx_to_path[idx] = path
             pq.push((-len(path), idx))
             idx = idx + 1
-        except(StopIteration):
+        except StopIteration:
             pass
 
 

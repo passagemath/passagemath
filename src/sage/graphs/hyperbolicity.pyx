@@ -1160,6 +1160,7 @@ def hyperbolicity(G,
 
     Asking for an approximation in a grid graph::
 
+        sage: # needs sage.rings.real_mpfr
         sage: from sage.graphs.hyperbolicity import hyperbolicity
         sage: G = graphs.Grid2dGraph(2, 10)
         sage: L,C,U = hyperbolicity(G, algorithm='CCL', approximation_factor=1.5); L,U
@@ -1175,6 +1176,7 @@ def hyperbolicity(G,
 
     Asking for an approximation in a cycle graph::
 
+        sage: # needs sage.rings.real_mpfr
         sage: from sage.graphs.hyperbolicity import hyperbolicity
         sage: G = graphs.CycleGraph(10)
         sage: L,C,U = hyperbolicity(G, algorithm='CCL', approximation_factor=1.5); L,U

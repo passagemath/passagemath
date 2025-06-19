@@ -674,7 +674,11 @@ class MPowerSeries(PowerSeries):
 
     def __getitem__(self, n):
         """
-        Return summand of total degree ``n``.
+        Return the coefficient of the monomial ``x1^e1 * x2^e2 * ... * xk^ek``
+        if ``n = (e_1, e2, ..., ek)`` is a tuple whose length is the number of
+        variables ``x1,x2,...,xk`` in the power series ring.
+
+        Return the sum of the monomials of degree ``n`` if ``n`` is an integer.
 
         TESTS::
 
@@ -691,9 +695,30 @@ class MPowerSeries(PowerSeries):
             ...
             IndexError: Cannot return terms of total degree greater than or
             equal to precision of self.
+
+        Ensure that the enhancement detailed in :issue:`39314` works as intended::
+
+            sage: R.<x,y> = QQ[[]]
+            sage: ((x+y)^3)[2,1]
+            3
+            sage: f = 1/(1 + x + y)
+            sage: f[2,5]
+            -21
+            sage: f[0,30]
+            Traceback (most recent call last):
+            ...
+            IndexError: Cannot return the coefficients of terms of total degree
+            greater than or equal to precision of self.
         """
+        if type(n) is tuple:
+            if sum(n) >= self.prec():
+                raise IndexError("Cannot return the coefficients of terms of " +
+                                 "total degree greater than or equal to " +
+                                 "precision of self.")
+            return self._bg_value[sum(n)][n]
         if n >= self.prec():
-            raise IndexError("Cannot return terms of total degree greater than or equal to precision of self.")
+            raise IndexError("Cannot return terms of total degree greater " +
+                             "than or equal to precision of self.")
         return self.parent(self._bg_value[n])
 
     def __invert__(self):
@@ -1943,7 +1968,7 @@ class MPowerSeries(PowerSeries):
         Another workaround for this limitation is to change base ring
         to one which is closed under exponentiation, such as `\RR` or `\CC`::
 
-            sage: exp(g.change_ring(RDF))
+            sage: exp(g.change_ring(RDF))                                               # needs sage.symbolic
             7.38905609... + 7.38905609...*a + 7.38905609...*b + 3.69452804...*a^2 +
             14.7781121...*a*b + 3.69452804...*b^2 + O(a, b)^3
 
@@ -2035,7 +2060,7 @@ class MPowerSeries(PowerSeries):
         Another workaround for this limitation is to change base ring
         to one which is closed under exponentiation, such as `\RR` or `\CC`::
 
-            sage: log(g.change_ring(RDF))
+            sage: log(g.change_ring(RDF))                                               # needs sage.symbolic
             1.09861228... + 0.333333333...*a + 0.333333333...*b - 0.0555555555...*a^2
             + 0.222222222...*a*b - 0.0555555555...*b^2 + 0.0123456790...*a^3
             - 0.0740740740...*a^2*b - 0.0740740740...*a*b^2 + 0.0123456790...*b^3

@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-environment/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-environment/MANIFEST.in  | $(PYTHON_TOOLCHAIN) python_build $(PYTHON)
+$(SAGE_ROOT)/pkgs/sagemath-environment/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-environment/MANIFEST.in  platformdirs | $(PYTHON_TOOLCHAIN) python_build $(PYTHON)

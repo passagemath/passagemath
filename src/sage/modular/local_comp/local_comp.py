@@ -21,22 +21,31 @@ AUTHORS:
 - Jared Weinstein
 """
 
-from sage.structure.sage_object import SageObject
+try:
+    from typing import Self  # type: ignore (Python >= 3.11)
+except ImportError:
+    from typing_extensions import Self  # type: ignore (Python 3.10)
+
+from sage.misc.abstract_method import abstract_method
+from sage.misc.cachefunc import cached_method
+from sage.misc.flatten import flatten
+from sage.misc.lazy_import import lazy_import
+from sage.misc.verbose import verbose
+from sage.modular.modform.element import Newform
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.polynomial_ring import polygen
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
-from sage.misc.abstract_method import abstract_method
-from sage.misc.cachefunc import cached_method
-from sage.misc.lazy_import import lazy_import
-from sage.misc.verbose import verbose
-from sage.misc.flatten import flatten
-from sage.modular.modform.element import Newform
+from sage.structure.sage_object import SageObject
 from sage.structure.sequence import Sequence
 
 lazy_import('sage.rings.qqbar', 'QQbar')
 
+from .smoothchar import (
+    SmoothCharacterGroupQp,
+    SmoothCharacterGroupRamifiedQuadratic,
+    SmoothCharacterGroupUnramifiedQuadratic,
+)
 from .type_space import TypeSpace
-from .smoothchar import SmoothCharacterGroupQp, SmoothCharacterGroupUnramifiedQuadratic, SmoothCharacterGroupRamifiedQuadratic
 
 
 def LocalComponent(f, p, twist_factor=None):
@@ -321,7 +330,7 @@ class PrimitiveLocalComponent(LocalComponentBase):
     Base class for primitive (twist-minimal) local components.
     """
 
-    def is_primitive(self):
+    def is_primitive(self) -> bool:
         r"""
         Return ``True`` if this local component is primitive (has minimal level
         among its character twists).
@@ -333,7 +342,7 @@ class PrimitiveLocalComponent(LocalComponentBase):
         """
         return True
 
-    def minimal_twist(self):
+    def minimal_twist(self) -> Self:
         r"""
         Return a twist of this local component which has the minimal possible
         conductor.
@@ -801,8 +810,7 @@ class PrimitiveSupercuspidal(PrimitiveLocalComponent):
                             verbose("  chisB FAILED", level=1)
                             B_fail = 1
                             break
-                        else:
-                            verbose("  Trace identity check works for both", level=1)
+                        verbose("  Trace identity check works for both", level=1)
 
                 if B_fail and not A_fail:
                     chi1, chi2 = chisA
@@ -965,7 +973,7 @@ class ImprimitiveLocalComponent(LocalComponentBase):
         self._min_twist = min_twist
         self._chi = chi
 
-    def is_primitive(self):
+    def is_primitive(self) -> bool:
         r"""
         Return ``True`` if this local component is primitive (has minimal level
         among its character twists).

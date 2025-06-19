@@ -319,7 +319,7 @@ class FreeModule_submodule_with_basis_integer(FreeModule_submodule_with_basis_pi
             True
 
             sage: LLL = L.LLL()
-            sage: LLL == L.reduced_basis or bool(LLL[0].norm() >= M[0].norm())
+            sage: LLL == L.reduced_basis or bool(LLL[0].norm() >= M[0].norm())          # needs sage.symbolic
             True
         """
         return self._reduced_basis
@@ -511,7 +511,7 @@ class FreeModule_submodule_with_basis_integer(FreeModule_submodule_with_basis_pi
         return abs(self.gram_matrix().determinant())
 
     @cached_method
-    def is_unimodular(self):
+    def is_unimodular(self) -> bool:
         """
         Return ``True`` if this lattice is unimodular.
 

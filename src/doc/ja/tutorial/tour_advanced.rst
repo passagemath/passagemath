@@ -53,6 +53,7 @@ Sageでは，3次元射影空間における捻れ3次曲線のトーリック�
 
 ::
 
+    sage: # needs gfan
     sage: R.<a,b,c,d> = PolynomialRing(QQ, 4)
     sage: I = ideal(b^2-a*c, c^2-b*d, a*d-b*c)
     sage: F = I.groebner_fan(); F

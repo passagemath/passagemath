@@ -121,7 +121,7 @@ class LinearExtensionOfPoset(ClonableArray,
             return linear_extension
         return LinearExtensionsOfPoset(poset)(linear_extension)
 
-    def check(self):
+    def check(self) -> None:
         r"""
         Check whether ``self`` is indeed a linear extension of the underlying poset.
 
@@ -152,7 +152,7 @@ class LinearExtensionOfPoset(ClonableArray,
         """
         return self.parent().poset()
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
         Return the latex string for ``self``.
 
@@ -208,12 +208,12 @@ class LinearExtensionOfPoset(ClonableArray,
             True
         """
         P = self.parent().poset()
-        old = [P.unwrap(x) for x in self]
+        old = (P.unwrap(x) for x in self)
         new = [P.unwrap(x) for x in P]
         relabelling = dict(zip(old, new))
         return P.relabel(relabelling).with_linear_extension(new)
 
-    def is_greedy(self):
+    def is_greedy(self) -> bool:
         r"""
         Return ``True`` if the linear extension is greedy.
 
@@ -247,7 +247,7 @@ class LinearExtensionOfPoset(ClonableArray,
                         return False
         return True
 
-    def is_supergreedy(self):
+    def is_supergreedy(self) -> bool:
         r"""
         Return ``True`` if the linear extension is supergreedy.
 
@@ -421,7 +421,7 @@ class LinearExtensionOfPoset(ClonableArray,
                 self = self.tau(j)
         return self
 
-    def jump_count(self):
+    def jump_count(self) -> int:
         r"""
         Return the number of jumps in the linear extension.
 
@@ -541,7 +541,7 @@ class LinearExtensionsOfPoset(UniqueRepresentation, Parent):
             facade = (list,)
         Parent.__init__(self, category=FiniteEnumeratedSets(), facade=facade)
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         """
         TESTS::
 
@@ -700,7 +700,7 @@ class LinearExtensionsOfPoset(UniqueRepresentation, Parent):
         return (isinstance(obj, (list, tuple)) and
                 self.poset().is_linear_extension(obj))
 
-    def markov_chain_digraph(self, action='promotion', labeling='identity'):
+    def markov_chain_digraph(self, action='promotion', labeling='identity') -> DiGraph:
         r"""
         Return the digraph of the action of generalized promotion or tau on ``self``.
 
@@ -737,7 +737,6 @@ class LinearExtensionsOfPoset(UniqueRepresentation, Parent):
              ([2, 1, 3, 4], [1, 2, 4, 3], 1), ([2, 1, 3, 4], [2, 1, 3, 4], 4), ([2, 1, 3, 4], [2, 1, 4, 3], 2),
              ([2, 1, 3, 4], [2, 1, 4, 3], 3), ([2, 1, 4, 3], [1, 4, 2, 3], 1), ([2, 1, 4, 3], [2, 1, 3, 4], 2),
              ([2, 1, 4, 3], [2, 1, 3, 4], 3), ([2, 1, 4, 3], [2, 1, 4, 3], 4)]
-
             sage: G = L.markov_chain_digraph(labeling='source')
             sage: G.vertices(sort=True, key=repr)
             [[1, 2, 3, 4], [1, 2, 4, 3], [1, 4, 2, 3], [2, 1, 3, 4], [2, 1, 4, 3]]
@@ -899,11 +898,10 @@ class LinearExtensionsOfPoset(UniqueRepresentation, Parent):
             lst = list(lst)
         if not isinstance(lst, (list, tuple)):
             raise TypeError("input should be a list or tuple")
-        lst = [self._poset(_) for _ in lst]
+        lst = [self._poset(e) for e in lst]
         if self._is_facade:
             return lst
-        else:
-            return self.element_class(self, lst, check)
+        return self.element_class(self, lst, check)
 
     Element = LinearExtensionOfPoset
 

@@ -10,6 +10,11 @@ Complete Discrete Valuation Rings (CDVR) and Fields (CDVF)
 #**************************************************************************
 
 
+try:
+    from typing import Self  # type: ignore (Python >= 3.11)
+except ImportError:
+    from typing_extensions import Self  # type: ignore (Python 3.10)
+
 from sage.categories.category_singleton import Category_singleton
 from sage.categories.discrete_valuation import (
     DiscreteValuationFields,
@@ -97,7 +102,7 @@ class CompleteDiscreteValuationRings(Category_singleton):
             """
             return self.parent()(1)
 
-        def numerator(self):
+        def numerator(self) -> Self:
             """
             Return the numerator of this element, normalized in such a
             way that `x = x.numerator() / x.denominator()` always holds
