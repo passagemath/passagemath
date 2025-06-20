@@ -72,9 +72,18 @@ done
             version=$(cat "$spkg"/package-version.txt)
             version=${version//.beta/b}
             version=${version//.rc/rc}
-            # ~= asks for a compatible release. https://peps.python.org/pep-0440/#compatible-release
-            # we append .0, thus pinning the micro release
-            echo "$pkg ~= $version.0" ) > "$spkg"/version_requirements.txt
+            case "$version" in
+                *a*|*b*|*rc*|*dev*)
+                    # pin exactly
+                    echo "$pkg == $version"
+                    ;;
+                *)
+                    # ~= asks for a compatible release. https://peps.python.org/pep-0440/#compatible-release
+                    # we append .0, thus pinning the micro release
+                    echo "$pkg ~= $version.0"
+                    ;;
+            esac
+          ) > "$spkg"/version_requirements.txt
       fi
   done )
 
