@@ -103,10 +103,7 @@ A parent ``P`` is in a category ``C`` if ``P.category()`` is a subcategory of
 # ****************************************************************************
 
 import inspect
-try:
-    from typing import Self  # type: ignore (Python >= 3.11)
-except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.10)
+from typing import Self
 from warnings import warn
 
 from sage.categories.category_cy_helper import (
