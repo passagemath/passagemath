@@ -40,7 +40,7 @@ from typing import Any
 try:
     from typing import Self  # type: ignore (Python >= 3.11)
 except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.10)
+    from typing_extensions import Self  # type: ignore (Python 3.9, 3.10)
 
 from sage.repl.rich_output.output_basic import (
     OutputAsciiArt,
