@@ -9,10 +9,7 @@ Additive magmas
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
 
-try:
-    from typing import Self  # type: ignore (Python >= 3.11)
-except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.10)
+from typing import Self
 
 from sage.categories.algebra_functor import AlgebrasCategory
 from sage.categories.cartesian_product import CartesianProductsCategory

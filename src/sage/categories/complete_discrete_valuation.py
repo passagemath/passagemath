@@ -10,10 +10,7 @@ Complete Discrete Valuation Rings (CDVR) and Fields (CDVF)
 #**************************************************************************
 
 
-try:
-    from typing import Self  # type: ignore (Python >= 3.11)
-except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.10)
+from typing import Self
 
 from sage.categories.category_singleton import Category_singleton
 from sage.categories.discrete_valuation import (
