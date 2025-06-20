@@ -6,10 +6,7 @@ AUTHOR:
 
 - Martin Albrecht (2009-05): inspired by a conversation with and code by Mike Hansen
 """
-try:
-    from typing import Self  # type: ignore (Python >= 3.11)
-except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.10)
+from typing import Self
 
 from sage.structure.sage_object import SageObject
 
