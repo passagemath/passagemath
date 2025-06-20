@@ -45,11 +45,11 @@ passagemath attempts to support all major Linux distributions and recent version
 macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
 virtualization.
 
-Complete sets of binary wheels are provided on PyPI for Python versions 3.9.x-3.13.x
+Complete sets of binary wheels are provided on PyPI for Python versions 3.11.x-3.14.x
 for Linux and macOS, both for the x86_64 and ARM architectures.
 
 Unless you need to install passagemath into a specific existing environment, we recommend
-to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.13.x),
+to create and activate a fresh virtual environment over a suitable Python (3.11.x-3.14.x),
 for example `~/passagemath-venv/`:
 
     $ python3 --version
@@ -57,7 +57,7 @@ for example `~/passagemath-venv/`:
     $ python3 -m venv ~/passagemath-venv
     $ source ~/passagemath-venv/bin/activate
 
-For Python 3.13.x on any platform, and for any Python version on the Linux aarch64 (ARM)
+For Python 3.13.x-3.14.x on any platform, and for any Python version on the Linux aarch64 (ARM)
 and macOS arm64 (Apple Silicon M1/M2/M3/M4) platforms,
 [some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
 Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
@@ -331,7 +331,7 @@ in the Installation Guide.
       more details.
 
     - Python 3.4 or later, or Python 2.7, a full installation including
-      `urllib`; but ideally version 3.10.x or later, which
+      `urllib`; but ideally version 3.11.x or later, which
       will avoid having to build Sage's own copy of Python 3.
       See [build/pkgs/python3/SPKG.rst](build/pkgs/python3/SPKG.rst)
       for more details.
