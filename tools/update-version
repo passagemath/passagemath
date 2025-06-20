@@ -118,12 +118,7 @@ echo "$SAGE_VERSION_BANNER" > "$SAGE_ROOT/VERSION.txt"
 #UPSTREAM_D_FILE="$SAGE_ROOT/.upstream.d/20-github.com-sagemath-sage-releases"
 REPO=https://github.com/passagemath/passagemath
 UPSTREAM_D_FILE="$SAGE_ROOT/.upstream.d/15-github.com-passagemath-passagemath-releases"
-SAGE_MINOR_VERSION=${SAGE_VERSION//.alpha*/}
-SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.beta*/}
-SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.dev*/}
-SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.post*/}
-SAGE_MINOR_VERSION=${SAGE_MINOR_VERSION//.rc*/}
-( echo "${REPO}/releases/download/passagemath-$SAGE_MINOR_VERSION/"
+( echo "${REPO}/releases/download/passagemath-$SAGE_VERSION/"
   sed '/^#/d' "${UPSTREAM_D_FILE}"
 ) | uniq | head -n 3 > "${UPSTREAM_D_FILE}.tmp"
 ( cat <<EOF
