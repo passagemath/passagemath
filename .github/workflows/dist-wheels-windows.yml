@@ -34,76 +34,6 @@ concurrency:
 
 jobs:
 
-  release_dist:
-
-    # This job first checks whether "configure --enable-download-from-upstream-url"
-    # (the default since #32390) is needed.
-    #
-    # In this way, we check that all necessary package tarballs
-    # have already been uploaded to the Sage server at the time
-    # of pushing a release tag.
-    #
-    # It also uses "bootstrap -D", thus checking that the "configure"
-    # tarball has been uploaded to the Sage server at the time
-    # of pushing a release tag.
-
-    if: startsWith(github.ref, 'refs/tags')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install bootstrap prerequisites
-        run: |
-          sudo DEBIAN_FRONTEND=noninteractive apt-get update
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install $(build/bin/sage-get-system-packages debian _bootstrap)
-      - name: bootstrap -D
-        run: |
-          ./bootstrap -D
-      - name: bootstrap
-        if: failure()
-        run: |
-          ./bootstrap
-      - name: make dist (--disable-download-from-upstream-url)
-        if: (success() || failure())
-        id: make_dist
-        run: |
-          ./configure --disable-download-from-upstream-url && make dist
-        env:
-          MAKE: make -j8
-      - name: make download (--disable-download-from-upstream-url)
-        if: (success() || failure())
-        id: make_download
-        run: |
-          make -k download DOWNLOAD_PACKAGES=":all: --no-file huge"
-        env:
-          MAKE: make -j8
-      - name: Reconfigure with --enable-download-from-upstream-url
-        if: (success() || failure()) && (steps.make_dist.outcome != 'success' || steps.make_download.outcome != 'success')
-        run: |
-          ./configure
-      - name: make dist (--enable-download-from-upstream-url)
-        if: (success() || failure()) && steps.make_dist.outcome != 'success'
-        run: |
-          make dist
-        env:
-          MAKE: make -j8
-      - name: make download (--enable-download-from-upstream-url)
-        if: (success() || failure()) && steps.make_download.outcome != 'success'
-        run: |
-          make -k download DOWNLOAD_PACKAGES=":all: --no-file huge --allow-upstream --on-error warn"
-        env:
-          MAKE: make -j8
-      - name: Remove what cannot be distributed
-        if: success() || failure()
-        run: |
-          rm -f upstream/*do-not-distribute*
-      - uses: actions/upload-artifact@v4
-        if: success() || failure()
-        with:
-          path: |
-            dist/*.tar.gz
-            upstream
-          name: release_dist
-
   sdists_for_pypi:
 
     runs-on: ubuntu-latest
@@ -130,58 +60,11 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           path: "dist/*.tar.gz"
-          name: dist
+          name: dist-windows
       - name: twine check
         run: |
           ./sage -pip install twine
           ./sage -sh -c 'twine check dist/*.tar.gz'
-
-  release:
-
-    needs: [release_dist, sdists_for_pypi]
-    runs-on: ubuntu-latest
-    if: (success() || failure()) && github.repository == 'passagemath/passagemath' && startsWith(github.ref, 'refs/tags/passagemath-')
-    steps:
-      - name: Create release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          latest_release_tag=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases \
-          | jq -r 'sort_by(.created_at) | last(.[]).tag_name')
-          release_notes=$(curl -s \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/repos/${{ github.repository }}/releases/generate-notes \
-            -d "{
-              \"tag_name\": \"${{ github.ref_name }}\",
-              \"previous_tag_name\": \"$latest_release_tag\"
-            }" | jq -r '.body')
-          # escape special characters for json
-          release_notes=$(jq -R -s '.' <<< "$release_notes")
-          curl -L \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/repos/${{ github.repository }}/releases \
-            -d "{
-              \"tag_name\": \"${{ github.ref_name }}\",
-              \"prerelease\": ${{ contains(github.ref, 'beta') || contains(github.ref, 'rc') }},
-              \"body\": $release_notes
-            }"
-    permissions:
-      contents: write
-
-  release_assets:
-    needs: [release_dist, sdists_for_pypi, release]
-    if: (success() || failure()) && github.repository == 'passagemath/passagemath' && startsWith(github.ref, 'refs/tags/passagemath-')
-    uses: ./.github/workflows/release-assets-publish.yml
-    with:
-      tag: ${{ github.ref_name }}
-    permissions:
-      contents: write
 
   noarch_wheels_for_pypi:
 
@@ -202,7 +85,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           path: "dist/*.whl"
-          name: noarch-wheels
+          name: noarch-wheels-windows
 
   build_wheels:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }}
@@ -286,13 +169,13 @@ jobs:
       - name: Download sdists
         uses: actions/download-artifact@v4
         with:
-          name: dist
+          name: dist-windows
           path: dist
 
       - name: Download noarch-wheels
         uses: actions/download-artifact@v4
         with:
-          name: noarch-wheels
+          name: noarch-wheels-windows
           path: dist
 
       - uses: actions/setup-python@v5
