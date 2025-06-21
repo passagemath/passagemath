@@ -183,9 +183,9 @@ jobs:
           install: >-
             mingw-w64-ucrt-x86_64-gcc
             autotools
-            mingw-w64-ucrt-x86_64-python
-            mingw-w64-ucrt-x86_64-python-pip
-            mingw-w64-ucrt-x86_64-python-setuptools
+            python
+            python-pip
+            python-setuptools
           msystem: ucrt64
           path-type: inherit
         if: matrix.os == 'windows-2022'
@@ -269,8 +269,8 @@ jobs:
         run: |
           if [ -n "${{ steps.python.outputs.python-path }}" ]; then "${{ steps.python.outputs.python-path }}" -m pip install setuptools; fi
           . ./.homebrew-build-env 2> /dev/null || :
-          if [ ! -x ./configure ]; then ./bootstrap -d; fi
-          status=0; ./configure --with-python="${{ steps.python.outputs.python-path || 'python3' }}" --with-system-python3=force --prefix=$HOME/runner-venv || status=$? || :
+          if [ ! -x ./configure ]; then ./bootstrap -D; fi
+          status=0; ./configure --with-python="${{ steps.python.outputs.python-path || 'python3' }}" --with-system-python3=force --disable-python-distutils-check --prefix=$HOME/runner-venv || status=$? || :
           (echo ::group::config.log && cat config.log && echo ::endgroup:: && exit $status)
           make cibuildwheel
           export PATH=build/bin:$PATH
