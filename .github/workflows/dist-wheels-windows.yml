@@ -39,18 +39,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Cache sdists
+        id: cache-sdists
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: sdists-${{ hashFiles('build/**', 'src/**', 'pkgs/**') }}
+
       - name: Install bootstrap prerequisites
+        if: steps.cache-sdists.outputs.cache-hit != 'true'
         run: |
           sudo DEBIAN_FRONTEND=noninteractive apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install $(build/bin/sage-get-system-packages debian _bootstrap)
+
       - name: Cache SAGE_LOCAL
+        if: steps.cache-sdists.outputs.cache-hit != 'true'
         uses: actions/cache@v4
         with:
           path: |
             config.status
             local
-          key: sdists_for_pypi
+          key: sdists-SAGE_LOCAL-${{ hashFiles('build/**') }}
+
       - name: make pypi-sdists
+        if: steps.cache-sdists.outputs.cache-hit != 'true'
         run: |
           ./bootstrap
           if [ -x ./config.status ]; then ./config.status; else ./configure; fi
@@ -62,6 +75,7 @@ jobs:
           path: "dist/*.tar.gz"
           name: dist-windows
       - name: twine check
+        if: steps.cache-sdists.outputs.cache-hit != 'true'
         run: |
           ./sage -pip install twine
           ./sage -sh -c 'twine check dist/*.tar.gz'
@@ -71,6 +85,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Cache sdists
+        id: cache-sdists
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: sdists-${{ hashFiles('build/**', 'src/**', 'pkgs/**') }}
+
       - name: Install bootstrap prerequisites
         run: |
           sudo DEBIAN_FRONTEND=noninteractive apt-get update
@@ -181,8 +202,8 @@ jobs:
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
           export PATH=$(pwd)/build/bin:$PATH
-          eval $(sage-print-system-package-command auto --sudo --yes update)
-          eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+          eval $(sage-print-system-package-command auto --sudo --yes update) || eval $(sage-print-system-package-command auto --yes update)
+          eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma) || eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
           sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
           ./bootstrap
         shell: msys2 {0}
@@ -223,6 +244,7 @@ jobs:
           for sdist in dist/$pkg*.tar.gz; do
               (cd unpacked && tar xfz - ) < $sdist
           done
+        shell: msys2 {0}
 
       - name: sagemath-objects
         id:   sagemath-objects
@@ -399,3 +421,4 @@ jobs:
     uses: ./.github/workflows/ci-wheels.yml
     with:
       run-id: ${{ github.run_id }}
+      oss: "['windows-2022']"
