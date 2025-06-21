@@ -159,6 +159,7 @@ dnl The following are all supported platforms.
 *-*-freebsd*);;
 *-*-linux*);;
 *-*-darwin*);;
+*-*-mingw*);;
 
 dnl Wildcard for unsupported platforms
 *)
