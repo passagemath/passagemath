@@ -34,7 +34,7 @@ AC_DEFUN([SAGE_CHECK_PYTHON_FOR_VENV], [
                             rm -rf conftest_venv
                             AS_IF(["]PYTHON_EXE[" build/bin/sage-venv $conftest_venv_options conftest_venv && conftest_venv/bin/python3 -c "import $all_required_modules" 2>& ]AS_MESSAGE_LOG_FD, [
                               AS_VAR_SET([python3_result], [yes])
-                              AS_IF([$enable_python_distutils_check], [yes], [dnl
+                              AS_VAR_IF([enable_python_distutils_check], [yes], [dnl
                                 SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" conftest_venv/bin/python3], [
                                     SAGE_ARCHFLAGS="unset"
                                 ], [
@@ -52,12 +52,12 @@ AC_DEFUN([SAGE_CHECK_PYTHON_FOR_VENV], [
                                                        ["no, the version is in the supported range, and the modules can be imported, but $reason"])
                                         ])
                                 ])
-                                AS_VAR_IF([python3_result], [yes], [
-                                    dnl these commands are expected to call AC_MSG_RESULT
-                                    COMMANDS_IF_GOOD
-                                ], [
-                                    AC_MSG_RESULT([$python3_result])
-                                ])
+                              ])
+                              AS_VAR_IF([python3_result], [yes], [
+                                  dnl these commands are expected to call AC_MSG_RESULT
+                                  COMMANDS_IF_GOOD
+                              ], [
+                                  AC_MSG_RESULT([$python3_result])
                               ])
                             ], [
                                 AC_MSG_RESULT([no, the version is in the supported range but cannot import one of the required modules: $all_required_modules])
@@ -81,8 +81,9 @@ AC_DEFUN([SAGE_CHECK_PYTHON_FOR_VENV], [
 
 ])
 
-AC_ARG_ENABLE([--disable-python-distutils-check],
-              [do not check that Python can build C/C++ extensions],
+AC_ARG_ENABLE([python-distutils-check],
+              [AS_HELP_STRING([--disable-python-distutils-check],
+                              [do not check that Python can build C/C++ extensions])],
               [enable_python_distutils_check=$enableval],
               [enable_python_distutils_check=yes])
 
