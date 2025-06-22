@@ -69,6 +69,7 @@ build/make/Makefile: configure $(SPKG_COLLECT_FILES) $(CONFIG_FILES:%=%.in)
 reconfigure:
 	rm -f config.log
 	mkdir -p logs/pkgs
+	touch logs/pkgs/config.log
 	ln -s logs/pkgs/config.log config.log
 	@if [ -x config.status ]; then \
 		./config.status --recheck && ./config.status; \

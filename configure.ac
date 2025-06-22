@@ -159,6 +159,7 @@ dnl The following are all supported platforms.
 *-*-freebsd*);;
 *-*-linux*);;
 *-*-darwin*);;
+*-*-mingw*);;
 
 dnl Wildcard for unsupported platforms
 *)
@@ -553,16 +554,23 @@ AC_CONFIG_COMMANDS(mkdirs,
         mkdir -p "$SAGE_BUILD_DIR" || AC_MSG_ERROR([error creating directory $SAGE_BUILD_DIR (SAGE_BUILD_DIR)])
         rm -f "$SAGE_BUILD_DIR"/conftest
         touch "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([error creating a file in $SAGE_BUILD_DIR])
-        chmod +x "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([error setting file permissions +x in $SAGE_BUILD_DIR])
-        test -x "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([file permissions +x did not persist in $SAGE_BUILD_DIR])
-        chmod -x "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([error setting file permissions -x in $SAGE_BUILD_DIR])
-        test -x "$SAGE_BUILD_DIR"/conftest && AC_MSG_ERROR([file permissions -x did not persist in $SAGE_BUILD_DIR])
-        rm -f "$SAGE_BUILD_DIR"/conftest
+        case $host in
+            *-*-mingw*)
+                ;;
+            *)
+                chmod +x "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([error setting file permissions +x in $SAGE_BUILD_DIR])
+                test -x "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([file permissions +x did not persist in $SAGE_BUILD_DIR])
+                chmod -x "$SAGE_BUILD_DIR"/conftest || AC_MSG_ERROR([error setting file permissions -x in $SAGE_BUILD_DIR])
+                test -x "$SAGE_BUILD_DIR"/conftest && AC_MSG_ERROR([file permissions -x did not persist in $SAGE_BUILD_DIR])
+                rm -f "$SAGE_BUILD_DIR"/conftest
+                ;;
+        esac
     ],
     [
         SAGE_LOGS="$SAGE_ROOT/logs/pkgs"
         SAGE_LOCAL="$SAGE_LOCAL"
         SAGE_SHARE="$SAGE_LOCAL/share"
+        host="$host"
     ])
 
 AC_CONFIG_COMMANDS(links, [
