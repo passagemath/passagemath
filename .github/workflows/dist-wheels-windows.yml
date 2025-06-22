@@ -269,17 +269,18 @@ jobs:
         #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
         #
         run: |
-          if [ -n "${{ steps.python.outputs.python-path }}" ]; then "${{ steps.python.outputs.python-path }}" -m pip install setuptools; fi
-          . ./.homebrew-build-env 2> /dev/null || :
-          if [ ! -x ./configure ]; then ./bootstrap -D && touch configure; fi
-          status=0; ./configure --with-python="${{ steps.python.outputs.python-path || 'python3' }}" --with-system-python3=force --disable-python-distutils-check --prefix=$HOME/runner-venv || status=$? || :
-          (echo && echo ::group::config.log && cat config.log && echo ::endgroup:: && exit $status)
-          make cibuildwheel V=0
+          # if [ -n "${{ steps.python.outputs.python-path }}" ]; then "${{ steps.python.outputs.python-path }}" -m pip install setuptools; fi
+          # . ./.homebrew-build-env 2> /dev/null || :
+          # if [ ! -x ./configure ]; then ./bootstrap -D && touch configure; fi
+          # status=0; ./configure --with-python="${{ steps.python.outputs.python-path || 'python3' }}" --with-system-python3=force --disable-python-distutils-check --prefix=$HOME/runner-venv || status=$? || :
+          # (echo && echo ::group::config.log && cat config.log && echo ::endgroup:: && exit $status)
+          # make cibuildwheel V=0
           export PATH=build/bin:$PATH
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng; status=$?; echo && echo ::group::config.log && cat config.log && echo ::endgroup:: && (exit $status) && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done" >> "$GITHUB_ENV"
+          echo CIBW_BEFORE_ALL="msys2 -c 'echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng; status=$?; echo && echo ::group::config.log && cat config.log && echo ::endgroup:: && (exit $status) && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done'" >> "$GITHUB_ENV"
           mkdir -p unpacked
+          set -x
           for sdist in dist/$pkg*.tar.gz; do
-              (cd unpacked && tar xfz - ) < $sdist
+              (cd unpacked && tar xfz - && base=${sdist#dist/} && mv ${base%.tar.gz} ${base%-*}) < $sdist
           done
         shell: msys2 {0}
 
@@ -292,11 +293,16 @@ jobs:
             ~/sage-*
           key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
 
-      - name: sagemath-objects
-        id:   sagemath-objects
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*objects*
-        shell: msys2 {0}
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_objects
+
+      ## - name: sagemath-objects
+      ##   id:   sagemath-objects
+      ##   run: |
+      ##     ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*objects*
+      ##   shell: msys2 {0}
 
       - name: Save SAGE_LOCAL cache again
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
