@@ -269,7 +269,7 @@ jobs:
         run: |
           if [ -n "${{ steps.python.outputs.python-path }}" ]; then "${{ steps.python.outputs.python-path }}" -m pip install setuptools; fi
           . ./.homebrew-build-env 2> /dev/null || :
-          if [ ! -x ./configure ]; then ./bootstrap -D; fi
+          if [ ! -x ./configure ]; then ./bootstrap -D && touch configure; fi
           status=0; ./configure --with-python="${{ steps.python.outputs.python-path || 'python3' }}" --with-system-python3=force --disable-python-distutils-check --prefix=$HOME/runner-venv || status=$? || :
           (echo && echo ::group::config.log && cat config.log && echo ::endgroup:: && exit $status)
           make cibuildwheel
