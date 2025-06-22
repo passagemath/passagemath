@@ -362,8 +362,12 @@ CONFIGURE_DEPENDENCIES =							\
 	src/pyproject.toml							\
 	build/pkgs/*/spkg-configure.m4						\
 	build/pkgs/*/type build/pkgs/*/SPKG.rst					\
+	build/pkgs/*/version_requirements.txt build/pkgs/*/package-version.txt
+
+# The existence/non-existence of these files influences the generation of 'configure'.
+# It is not useful to have the files as a dependency of the 'configure' target.
+CONFIGURE_DEPENDENCIES_EXISTENCE_ONLY =						\
 	build/pkgs/*/checksums.ini build/pkgs/*/requirements.txt		\
-	build/pkgs/*/version_requirements.txt build/pkgs/*/package-version.txt	\
 	build/pkgs/*/spkg-install build/pkgs/*/spkg-install.in
 
 # SPKG_INFO_DEPENDENCIES is the list of files that influence the run of 'sage-spkg-info' and hence
