@@ -72,6 +72,7 @@ def sage_setup(distributions, *,
     import setuptools.command.egg_info
     setuptools.command.egg_info.walk_revctrl = lambda: ()
 
+    import os
     import sys
 
     from sage_setup.excepthook import excepthook
