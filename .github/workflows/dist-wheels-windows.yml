@@ -141,9 +141,21 @@ jobs:
       CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.14' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
-        (echo passagemath-conf @ file://D:\a\sage\sage\pkgs\sage-conf && echo passagemath-setup @ file://D:\a\sage\sage\pkgs\sage-setup) > constraints.txt
+        msys2 -c "set -x; cat constraints.txt && (echo passagemath-conf @ file:///D:/a/sage/sage/pkgs/sage-conf && echo passagemath-setup @ file:///D:/a/sage/sage/pkgs/sage-setup) > constraints.txt && cat constraints.txt"
       # Environment during wheel build
-      CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$(pwd)/build/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal LINBOX_CONFIGURE=--without-ntl GIAC_CONFIGURE=--disable-ntl SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off PIP_CONSTRAINT=D:\\\\a\\\\sage\\\\sage\\\\constraints.txt PIP_FIND_LINKS=D:\\\\a\\\\sage\\\\sage\\\\wheelhouse' 'D:\\\\a\\\\sage\\\\sage\\\\dist MAKEFLAGS=-j6 SAGE_NUM_THREADS=6"
+      CIBW_ENVIRONMENT: >-
+        PATH=$(pwd)/prefix/bin:$(pwd)/build/bin:$PATH
+        CPATH=$(pwd)/prefix/include:$CPATH
+        LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH
+        PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH
+        ACLOCAL_PATH=/usr/share/aclocal
+        LINBOX_CONFIGURE=--without-ntl
+        GIAC_CONFIGURE=--disable-ntl
+        SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off
+        PIP_CONSTRAINT=D:\\a\\sage\\sage\\constraints.txt
+        PIP_FIND_LINKS=D:\\a\\sage\\sage\\wheelhouse' 'D:\\a\\sage\\sage\\dist
+        MAKEFLAGS=-j6
+        SAGE_NUM_THREADS=6
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
