@@ -218,7 +218,6 @@ save () {
 	$(find src/doc/en/reference/spkg -maxdepth 1 -name index.rst -prune -o -name "*.rst" -print) \
         $(for a in pkgs/*/*.m4; do echo ${a%.m4}; done) \
 	environment-3.1[0-9]-*.yml \
-	src/pyproject.toml \
 	src/requirements.txt
 
     # Update version; this re-computes the checksum
