@@ -379,6 +379,7 @@ SPKG_INFO_DEPENDENCIES =							\
 	build/pkgs/*/distros/*.txt
 
 configure: bootstrap $(CONFIGURE_DEPENDENCIES) $(SPKG_INFO_DEPENDENCIES)
+	@echo Running bootstrap because $? changed
 	./bootstrap -d
 
 install: all
