@@ -1,4 +1,4 @@
-filelock
+filelock certifi dependency_groups platformdirs packaging
 
 ----------
 All lines of this file are ignored except the first.
