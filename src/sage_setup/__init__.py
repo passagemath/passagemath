@@ -45,8 +45,9 @@ def sage_setup(distributions, *,
 
     # Work around a Cython problem in Python 3.8.x on macOS
     # https://github.com/cython/cython/issues/3262
-    import os
-    if os.uname().sysname == 'Darwin':
+
+    import platform
+    if platform.system() == 'Darwin':
         import multiprocessing
         multiprocessing.set_start_method('fork', force=True)
 
