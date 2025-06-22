@@ -285,6 +285,7 @@ jobs:
         id:   sagemath-objects
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*objects*
+        shell: msys2 {0}
 
       - name: Save SAGE_LOCAL cache
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
@@ -301,48 +302,56 @@ jobs:
         id:   sagemath-categories
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*categories*
+        shell: msys2 {0}
 
       - name: sagemath-glpk
         id:   sagemath-glpk
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*glpk*
+        shell: msys2 {0}
 
       - name: sagemath-homfly
         id:   sagemath-homfly
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*homfly*
+        shell: msys2 {0}
 
       - name: sagemath-combinat
         id:   sagemath-combinat
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*combinat*
+        shell: msys2 {0}
 
       - name: sagemath-graphs
         id:   sagemath-graphs
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*graphs*
+        shell: msys2 {0}
 
       - name: sagemath-planarity
         id:   sagemath-planarity
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*planarity*
+        shell: msys2 {0}
 
       - name: sagemath-rankwidth
         id:   sagemath-rankwidth
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*rankwidth*
+        shell: msys2 {0}
 
       - name: sagemath-tachyon
         id:   sagemath-tachyon
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*tachyon*
+        shell: msys2 {0}
 
         ####### sagemath-modules and what depends on it
 
@@ -351,90 +360,105 @@ jobs:
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*modules*
+        shell: msys2 {0}
 
       - name: sagemath-plot
         id:   sagemath-plot
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*plot*
+        shell: msys2 {0}
 
       - name: sagemath-polyhedra
         id:   sagemath-polyhedra
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*polyhedra*
+        shell: msys2 {0}
 
       - name: sagemath-ntl
         id:   sagemath-ntl
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*ntl*
+        shell: msys2 {0}
 
       - name: sagemath-flint
         id:   sagemath-flint
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*flint*
+        shell: msys2 {0}
 
       - name: sagemath-pari
         id:   sagemath-pari
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*pari*
+        shell: msys2 {0}
 
       - name: sagemath-cddlib
         id:   sagemath-cddlib
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*cddlib*
+        shell: msys2 {0}
 
       - name: sagemath-gfan
         id:   sagemath-gfan
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*gfan*
+        shell: msys2 {0}
 
       - name: sagemath-nauty
         id:   sagemath-nauty
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*nauty*
+        shell: msys2 {0}
 
       - name: sagemath-libecm
         id:   sagemath-libecm
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*libecm*
+        shell: msys2 {0}
 
       - name: sagemath-lcalc
         id:   sagemath-lcalc
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*lcalc*
+        shell: msys2 {0}
 
       - name: sagemath-libbraiding
         id:   sagemath-libbraiding
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*libbraiding*
+        shell: msys2 {0}
 
       - name: sagemath-gap
         id:   sagemath-gap
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*gap*
+        shell: msys2 {0}
 
       - name: sagemath-groups
         id:   sagemath-groups
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*groups*
+        shell: msys2 {0}
 
       - name: sagemath-cliquer
         id:   sagemath-cliquer
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_cliquer*
+        shell: msys2 {0}
 
 
       - uses: actions/upload-artifact@v4
