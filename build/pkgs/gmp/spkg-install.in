@@ -73,7 +73,7 @@ export ABI CFLAGS CXXFLAGS LDFLAGS # Partially redundant, but safe(r).
 # Now configure GMP, eventually modifying CFLAGS [further]:
 ###############################################################################
 
-GMP_CONFIGURE="--enable-shared $GMP_CONFIGURE"
+GMP_CONFIGURE="--enable-shared --disable-static $GMP_CONFIGURE"
 
 echo "Building GMP with the C++ interface."
 GMP_CONFIGURE="--enable-cxx $GMP_CONFIGURE"
