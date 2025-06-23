@@ -262,7 +262,7 @@ jobs:
           path: |
             config.status
             sage-local
-          key: ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
+          key: ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}
 
       - name: Unpack and prepare
         id: unpack
@@ -323,7 +323,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          name: ${{ matrix.os }}-${{ matrix.arch }}-wheels
           path: ./wheelhouse/*.whl
 
 
