@@ -155,7 +155,6 @@ jobs:
         SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off
         PIP_CONSTRAINT=D:\\a\\sage\\sage\\constraints.txt
         PIP_FIND_LINKS=D:\\a\\sage\\sage\\wheelhouse' 'D:\\a\\sage\\sage\\dist
-        MAKEFLAGS=-j6
         SAGE_NUM_THREADS=6
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
