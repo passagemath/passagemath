@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-linbox
-# distutils: libraries = m4rie M4RI_LIBRARIES m
+# distutils: libraries = m4rie M4RI_LIBRARIES M_LIBRARIES
 # distutils: library_dirs = M4RI_LIBDIR
 # distutils: include_dirs = M4RI_INCDIR
 # distutils: extra_compile_args = M4RI_CFLAGS

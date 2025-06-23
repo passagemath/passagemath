@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-categories
-# distutils: libraries = m
+# distutils: libraries = M_LIBRARIES
 r"""
 Fast decomposition of small integers into sums of squares
 

@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-pari
 # distutils: extra_compile_args = -std=c++11
-# distutils: libraries = givaro gmp m
+# distutils: libraries = givaro gmp M_LIBRARIES
 # distutils: language = c++
 """
 Givaro finite field morphisms

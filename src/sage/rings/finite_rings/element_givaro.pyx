@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-pari
-# distutils: libraries = givaro gmp m
+# distutils: libraries = givaro gmp M_LIBRARIES
 # distutils: language = c++
 r"""
 Givaro finite field elements

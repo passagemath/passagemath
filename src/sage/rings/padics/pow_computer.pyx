@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-categories
 # distutils: extra_compile_args = -std=c++11
-# distutils: libraries = gmp m
+# distutils: libraries = gmp M_LIBRARIES
 # distutils: language = c++
 """
 PowComputer
