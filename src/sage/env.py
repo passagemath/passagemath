@@ -518,10 +518,11 @@ def cython_aliases(required_modules=None, optional_modules=None):
         aliases[var + "LIBRARIES"] = pc['libraries']
 
     # uname-specific flags
-    UNAME = os.uname()
+    import platform
+    system = platform.system()
 
     def uname_specific(name, value, alternative):
-        if name in UNAME[0]:
+        if system == name:
             return value
         else:
             return alternative
