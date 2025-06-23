@@ -146,7 +146,7 @@ jobs:
       # Environment during wheel build
       CIBW_ENVIRONMENT: >-
         PATH=$(pwd)/prefix/bin:$(pwd)/build/bin:$PATH
-        CPATH=$(pwd)/prefix/include:$CPATH
+        CPATH=D:/a/sage/prefix/include:$CPATH
         LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH
         PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH
         ACLOCAL_PATH=/usr/share/aclocal
