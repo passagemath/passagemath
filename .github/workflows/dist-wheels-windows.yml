@@ -260,8 +260,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            /sage-*
-            ~/sage-*
+            sage-local
           key: ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
 
       - name: Unpack and prepare
@@ -302,8 +301,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
-            /sage-*
-            ~/sage-*
+            sage-local
           key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
 
       - name: sagemath-objects
@@ -320,8 +318,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
-            /sage-*
-            ~/sage-*
+            sage-local
           key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
 
         ####### sagemath-categories and what depends on it
