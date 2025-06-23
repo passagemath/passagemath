@@ -147,7 +147,7 @@ jobs:
       CIBW_ENVIRONMENT: >-
         PATH=$(pwd)/prefix/bin:$(pwd)/build/bin:$PATH
         INCLUDE="D:\\a\\sage\\sage\\sage-local\\include;%INCLUDE%"
-        LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH
+        LIB="D:\\a\\sage\\sage\\sage-local\\lib;%LIB%"
         PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH
         ACLOCAL_PATH=/usr/share/aclocal
         LINBOX_CONFIGURE=--without-ntl
