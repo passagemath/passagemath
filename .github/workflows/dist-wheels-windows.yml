@@ -260,6 +260,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
+            config.status
             sage-local
           key: ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
 
@@ -285,10 +286,7 @@ jobs:
           # status=0; ./configure --with-python="${{ steps.python.outputs.python-path || 'python3' }}" --with-system-python3=force --disable-python-distutils-check --prefix=$HOME/runner-venv || status=$? || :
           # (echo && echo ::group::config.log && cat config.log && echo ::endgroup:: && exit $status)
           # make cibuildwheel V=0
-          rm -rf sage-local/lib64  # avoid 'lib64 is not a symlink, see Issue #19782'
           export PATH=build/bin:$PATH
-          # echo CIBW_BEFORE_ALL="msys2 -c \"echo > constraints.txt && ( eval \\\$(sage-print-system-package-command auto update) && eval \\\$(sage-print-system-package-command auto --yes --spkg --no-install-recommends install $SPKGS) || echo error ignored ) && rm -f config.status && PREFIX=\\\$HOME/sage-local && if cp \\\$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --prefix=\\\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng; status=$?; echo && echo ::group::config.log && cat config.log && echo ::endgroup:: && (exit \\\$status) && cp config.status prefix/ && (make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc && for a in \\\$(find prefix/lib -type f -name 'lib*'); do case \\\$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*) strip -x \\\$a;; esac; done; for a in \\\$(find prefix/bin -type f); do case \\\$a in *M2-binary*) strip -x \\\$a;; esac; done\"" >> "$GITHUB_ENV"
-          ### above fails - quoting puzzle
           echo CIBW_BEFORE_ALL="msys2 tools/cibw_before_all_windows.sh" >> "$GITHUB_ENV"
           mkdir -p unpacked
           set -x
@@ -308,6 +306,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
+            config.status
             sage-local
             !sage-local/lib64
           key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
