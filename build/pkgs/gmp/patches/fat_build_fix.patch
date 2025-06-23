@@ -1,5 +1,5 @@
---- mpn/x86_64/fat/fat.c
-+++ mpn/x86_64/fat/fat.c
+--- a/mpn/x86_64/fat/fat.c
++++ b/mpn/x86_64/fat/fat.c
 @@ -375,6 +375,7 @@ __gmpn_cpuvec_init (void)
 	      CPUVEC_SETUP_core2;
 	      CPUVEC_SETUP_coreinhm;
