@@ -28,7 +28,21 @@ from ptyprocess import PtyProcess
 from cpython.ref cimport Py_INCREF
 from libc.signal cimport *
 from posix.signal cimport killpg
-from posix.unistd cimport getpid, getpgid, fork
+
+IF UNAME_SYSNAME == "Linux" or UNAME_SYSNAME == "Darwin":
+
+    from posix.unistd cimport getpid, getpgid, fork
+
+ELSE:
+
+    def getpid():
+        return 0
+
+    def getpgid(x):
+        return 0
+
+    def fork():
+        return 0
 
 from time import sleep
 

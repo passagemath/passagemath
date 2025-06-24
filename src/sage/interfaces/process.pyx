@@ -19,7 +19,17 @@ import sys
 
 from contextlib import contextmanager
 
-from posix.unistd cimport getpid, _exit
+IF UNAME_SYSNAME == "Linux" or UNAME_SYSNAME == "Darwin":
+
+    from posix.unistd cimport getpid, _exit
+
+ELSE:
+
+    def getpid():
+        return 0
+
+    def _exit():
+        sys.exit(0)
 
 from cysignals.pselect import PSelecter
 from cysignals.pysignals import changesignal
