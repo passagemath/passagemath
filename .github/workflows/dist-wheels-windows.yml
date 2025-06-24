@@ -130,7 +130,7 @@ jobs:
         build:   ["win_*64"]
     env:
       # SPKGs to install as system packages
-      SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
+      SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm
       # Non-Python packages to install as spkgs
       #TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty gfan ecm tachyon pip
       TARGETS_PRE: gmp
@@ -161,17 +161,7 @@ jobs:
         PYTHONUTF8=1
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
-      # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
-      CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel --version && auditwheel -v -v -v -v repair -w {dest_dir} {wheel}"
-      CIBW_REPAIR_WHEEL_COMMAND_MACOS: "set -x && export DYLD_FALLBACK_LIBRARY_PATH=$(pwd)/prefix/lib:$DYLD_FALLBACK_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}"
-      CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: "delvewheel repair -vv --namespace-pkg 'sage;sage.arith;sage.calculus;sage.categories;sage.categories.examples;sage.combinat;sage.combinat.matrices;sage.data_structures;sage.ext;sage.functions;sage.geometry;sage.groups;sage.groups.perm_gps;sage.groups.perm_gps.partn_ref;sage.interfaces;sage.libs;sage.misc;sage.modules;sage.numerical;sage.numerical.backends;sage.rings;sage.rings.finite_rings;sage.rings.function_field;sage.rings.number_field;sage.rings.padics;sage.rings.polynomial;sage.rings.semirings;sage.schemes;sage.sets;sage.symbolic;sage.tests' -w {dest_dir} {wheel}"
-      # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
-      MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
-      # Avoid onetbb build failure on manylinux2014 (https://github.com/passagemath/passagemath/issues/460)
-      # manylinux_2_28 will be default from May 2025 - https://cibuildwheel.pypa.io/en/stable/options/#linux-image
-      CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
-      # Avoid ancient zlib on manylinux2014
-      CIBW_MANYLINUX_AARCH64_IMAGE: manylinux_2_28
+      CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: "delvewheel repair -vv --namespace-pkg 'sage;sage.arith;sage.calculus;sage.categories;sage.categories.examples;sage.combinat;sage.combinat.matrices;sage.databases;sage.data_structures;sage.ext;sage.functions;sage.geometry;sage.groups;sage.groups.perm_gps;sage.groups.perm_gps.partn_ref;sage.interfaces;sage.libs;sage.misc;sage.modules;sage.monoids;sage.numerical;sage.numerical.backends;sage.parallel;sage.rings;sage.rings.finite_rings;sage.rings.function_field;sage.rings.number_field;sage.rings.padics;sage.rings.polynomial;sage.rings.semirings;sage.schemes;sage.schemes.affine;sage.schemes.generic;sage.schemes.product_projective;sage.schemes.projective;sage.sets;sage.symbolic;sage.tests;sage.typeset' -w {dest_dir} {wheel}"
       #
       CIBW_PLATFORM: windows
     steps:
@@ -220,15 +210,6 @@ jobs:
         with:
           name: noarch-wheels-windows
           path: dist
-
-      - uses: actions/setup-python@v5
-        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
-        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
-        id: python
-        with:
-          python-version: "3.10 - 3.12"
-          update-environment: false
-        if: matrix.os != 'windows-2022'
 
       - name: Retrieve configure tarball cache
         id: cache-configure
