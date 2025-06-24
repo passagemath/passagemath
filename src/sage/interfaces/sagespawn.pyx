@@ -26,11 +26,12 @@ from pexpect import *
 from ptyprocess import PtyProcess
 
 from cpython.ref cimport Py_INCREF
-from libc.signal cimport *
-from posix.signal cimport killpg
 
 IF UNAME_SYSNAME == "Linux" or UNAME_SYSNAME == "Darwin":
 
+    from libc.signal cimport *
+
+    from posix.signal cimport killpg
     from posix.unistd cimport getpid, getpgid, fork
 
 ELSE:
@@ -43,6 +44,15 @@ ELSE:
 
     def fork():
         return 0
+
+    def killpg(x):
+        return 0
+
+    cdef int SIGCONT = 0
+    cdef int SIGINT = 0
+    cdef int SIGHUP = 0
+    cdef int SIGTERM = 0
+    cdef int SIGKILL = 0
 
 from time import sleep
 
