@@ -108,6 +108,7 @@ jobs:
                             "ubuntu-24.04-arm",
                             "macos-13",
                             "macos-14",
+                            "windows-2022",
                            ]') }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -123,7 +124,7 @@ jobs:
         if: github.event.inputs.run-id || inputs.run-id
       - uses: actions/download-artifact@v4
         with:
-          pattern: "noarch-wheels"
+          pattern: "noarch-wheels*"
           path: wheelhouse
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -132,7 +133,7 @@ jobs:
         if: github.event.inputs.run-id || inputs.run-id
       - uses: actions/download-artifact@v4
         with:
-          pattern: "dist"
+          pattern: "dist*"
           path: wheelhouse
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -159,7 +160,7 @@ jobs:
           python_version_no_dot=${python_version/./}
           pkg=${{ matrix.distribution }}
           pkg_underscore=${pkg//-/_}
-          WHEELHOUSE=$(pwd)/wheelhouse
+          WHEELHOUSE=${GITHUB_WORKSPACE}/wheelhouse
           if [ -d "$WHEELHOUSE" ]; then
               export PIP_FIND_LINKS=file://$WHEELHOUSE
               (set +x; cd "$WHEELHOUSE" && for whl in *.whl; do
@@ -170,7 +171,7 @@ jobs:
                        *-cp$python_version_no_dot-*|*-none-any*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
-              export PIP_CONSTRAINT=$(pwd)/constraints.txt
+              export PIP_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt
           else
               mkdir -p $WHEELHOUSE
               pip download -v --only-binary :all: --no-deps -d $WHEELHOUSE pas$pkg
@@ -196,17 +197,16 @@ jobs:
               ubuntu*)  tag="manylinux*_x86_64";;
               macos-13) tag="macosx_*_x86_64";;
               macos-14) tag="macosx_*_arm64";;
+              windows*) tag="win_amd64";;
           esac
           # Run tox
-          wheel_pattern="$WHEELHOUSE/*$pkg_underscore*-cp$python_version_no_dot-$tag.whl"
-          eval ls -l $wheel_pattern
-          wheel=$(eval ls $wheel_pattern | head -n1)
-          if [ -n "$wheel" ]; then
+          for wheel in "$WHEELHOUSE"/*$pkg_underscore*-cp$python_version_no_dot-$tag.whl; do
+            if [ -r "$wheel" ]; then
               cd pkgs/$pkg
-              tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py$python_version_no_dot-norequirements/')
+              tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py'$python_version_no_dot'-norequirements/')
               extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
               set +e
-              eval tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
+              tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
               status=$?
               set -e
               # Update known test failures
@@ -217,4 +217,6 @@ jobs:
               done
               git diff || :
               exit $status
-          fi
+            fi
+          done
+        shell: bash
