@@ -11,6 +11,9 @@ on:
       run-id:
         type: string
         required: false
+      patterns:
+        type: string
+        required: false
 
 jobs:
   publish:
@@ -18,14 +21,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pattern: ["ubuntu-latest-manylinux-*-wheels",
-                  "ubuntu-latest-musllinux-*-wheels",
-                  "ubuntu-24.04-arm-manylinux-*-wheels",
-                  "ubuntu-24.04-arm-musllinux-*-wheels",
-                  "macos-13-*-wheels",
-                  "macos-14-*-wheels",
-                  "noarch-wheels",
-                  "dist"]
+        pattern: >-
+          ${{ fromJson(inputs.patterns
+                       || '["ubuntu-latest-manylinux-*-wheels",
+                            "ubuntu-latest-musllinux-*-wheels",
+                            "ubuntu-24.04-arm-manylinux-*-wheels",
+                            "ubuntu-24.04-arm-musllinux-*-wheels",
+                            "macos-13-*-wheels",
+                            "macos-14-*-wheels",
+                            "windows-*-wheels",
+                            "noarch-wheels",
+                            "dist"]') }}
     env:
       CAN_DEPLOY: ${{ secrets.SAGEMATH_PYPI_API_TOKEN != '' }}
     steps:

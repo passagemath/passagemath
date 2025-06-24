@@ -530,6 +530,8 @@ def cython_aliases(required_modules=None, optional_modules=None):
     aliases["LINUX_NOEXECSTACK"] = uname_specific("Linux", ["-Wl,-z,noexecstack"],
                                                   [])
 
+    aliases["M_LIBRARIES"] = uname_specific("Windows", [], ["m"])
+
     # LinBox needs special care because it actually requires C++11 with
     # GNU extensions: -std=c++11 does not work, you need -std=gnu++11
     # (this is true at least with GCC 7.2.0).

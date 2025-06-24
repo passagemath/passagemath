@@ -28,6 +28,9 @@ on:
       python-versions:
         type: string
         required: false
+      oss:
+        type: string
+        required: false
 
 jobs:
 

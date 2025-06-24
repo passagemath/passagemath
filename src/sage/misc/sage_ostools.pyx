@@ -3,8 +3,25 @@
 Miscellaneous operating system functions
 """
 
-from posix.unistd cimport dup, dup2, close
-from cpython.exc cimport PyErr_SetFromErrno
+IF UNAME_SYSNAME == "Linux" or UNAME_SYSNAME == "Darwin":
+
+    from posix.unistd cimport dup, dup2, close
+
+    from cpython.exc cimport PyErr_SetFromErrno
+
+ELSE:
+
+    def dup(x):
+        return -1
+
+    def dup2(x, y):
+        return -1
+
+    def close():
+        return
+
+    def PyErr_SetFromErrno(x):
+        return
 
 import os
 import contextlib

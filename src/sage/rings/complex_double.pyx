@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-modules
 # distutils: extra_compile_args = -D_XPG6
-# distutils: libraries = m
+# distutils: libraries = M_LIBRARIES
 # distutils: language = c++
 r"""
 Double precision floating point complex numbers
