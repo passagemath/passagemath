@@ -286,7 +286,7 @@ namespace pairing_heap {
 
     // Remove the top element from the heap. Do nothing if empty
     void pop() {
-      if (not empty()) {
+      if (!empty()) {
 	PairingHeapNode<TI, TV> *p = root->child;
 	nodes.erase(root->item);
 	delete root;
