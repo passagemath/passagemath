@@ -517,7 +517,7 @@ sdh_generate_windows_lib_files() {
         PATH="$PATH:$(find "/c/Program Files/Microsoft Visual Studio/2022/" -name "Hostx86")/x64/"
 
         # See http://stackoverflow.com/questions/9946322/
-        cd "$DESTDIR$SAGE_LOCAL/bin"
+        cd "$SAGE_DESTDIR$SAGE_LOCAL/bin"
         for dll_file in lib${pattern}-*.dll
         do
             lib_name=$(basename -s .dll ${dll_file})
