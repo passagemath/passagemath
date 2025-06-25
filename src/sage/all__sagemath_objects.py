@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-objects
+# delvewheel: patch
 import os
 import sys
 import operator

@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-singular
+# delvewheel: patch
 
 from sage.all__sagemath_flint import *
 from sage.all__sagemath_linbox import *

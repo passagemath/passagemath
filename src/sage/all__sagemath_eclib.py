@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-eclib
+# delvewheel: patch
 
 try:
     from sage.all__sagemath_repl import *

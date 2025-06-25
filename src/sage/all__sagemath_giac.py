@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-giac
+# delvewheel: patch
 
 from sage.all__sagemath_categories import *
 

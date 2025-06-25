@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-flint
+# delvewheel: patch
 r"""
 Top level of the distribution package sagemath-flint
 

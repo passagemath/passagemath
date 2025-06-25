@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-schemes
+# delvewheel: patch
 r"""
 Top level of the distribution package sagemath-schemes
 

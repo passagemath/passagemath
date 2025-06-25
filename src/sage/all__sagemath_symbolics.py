@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-symbolics
+# delvewheel: patch
 from .all__sagemath_modules import *
 
 from sage.dynamics.complex_dynamics import *
