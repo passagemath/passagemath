@@ -49,7 +49,7 @@ jobs:
         with:
           path: dist
           # FIXME: hashFiles returns empty
-          key: "sdists-${{ hashFiles('/build/**/*', '/src/**/*', '/pkgs/**/*') }}"
+          key: "sdists-build=${{ hashFiles('/build/**/*') }}-pkgs=${{ hashFiles('/pkgs/**/*') }}-src=${{ hashFiles('/src/**/*') }}"
 
       - name: Install bootstrap prerequisites
         if: steps.cache-sdists.outputs.cache-hit != 'true'
@@ -64,7 +64,7 @@ jobs:
           path: |
             config.status
             local
-          key: "sdists-SAGE_LOCAL-${{ hashFiles('/build/**/*') }}"
+          key: "sdists-SAGE_LOCAL-build=${{ hashFiles('/build/**/*') }}"
 
       - name: make pypi-sdists
         if: steps.cache-sdists.outputs.cache-hit != 'true'
@@ -96,7 +96,7 @@ jobs:
         with:
           path: dist
           # FIXME: hashFiles returns empty
-          key: "noarch-wheels-${{ hashFiles('/build/**/*', '/src/**/*', '/pkgs/**/*') }}"
+          key: "noarch-wheels-build=${{ hashFiles('/build/**/*') }}-pkgs=${{ hashFiles('/pkgs/**/*') }}-src=${{ hashFiles('/src/**/*') }}"
 
       - name: Install bootstrap prerequisites
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
@@ -218,15 +218,15 @@ jobs:
           path: |
             build/pkgs/configure
             upstream/configure*
-          key: "configure-${{ hashFiles('/build/**/*') }}"
+          key: "configure-build=${{ hashFiles('/build/**/*') }}"
 
       - name: Bootstrap
         if: steps.cache-configure.outputs.cache-hit != 'true'
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
           export PATH=$(pwd)/build/bin:$PATH
-          eval $(sage-print-system-package-command auto --sudo --yes update) || eval $(sage-print-system-package-command auto --yes update)
-          eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma) || eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+          eval $(sage-print-system-package-command auto --yes update)
+          eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
           sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
           ./bootstrap -s
         shell: msys2 {0}
