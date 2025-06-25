@@ -1,3 +1,6 @@
+# Undo "export MSYS=winsymlinks" done in top-level Makefile
+unset MSYS
+
 cd src
 
 sdh_configure LIBS="`pkg-config --libs-only-l cblas` -lm" \
