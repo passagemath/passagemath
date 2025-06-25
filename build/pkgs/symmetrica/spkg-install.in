@@ -5,3 +5,5 @@ export CFLAGS="-O2 -g $CFLAGS -fPIC -DFAST -DALLTRUE"
 cp "$SAGE_ROOT"/config/config.* build-aux/
 sdh_configure
 sdh_make_install
+
+sdh_generate_windows_lib_files symmetrica
