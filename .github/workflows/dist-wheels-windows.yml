@@ -300,7 +300,14 @@ jobs:
           path: |
             config.status
             sage-local
-          key: ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}
+          key: >-
+            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}
+          restore-keys: |
+            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}
 
       - name: Unpack and prepare
         id: unpack
@@ -320,11 +327,8 @@ jobs:
         #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
         #
         run: |
-          if [ ! -x ./configure ]; then ./bootstrap -D && touch configure; fi
-          # status=0; ./configure --with-python="${{ steps.python.outputs.python-path || 'python3' }}" --with-system-python3=force --disable-python-distutils-check --prefix=$HOME/runner-venv || status=$? || :
-          # (echo && echo ::group::config.log && cat config.log && echo ::endgroup:: && exit $status)
-          # make cibuildwheel V=0
-
+          if [ ! -x ./configure ]; then ./bootstrap -D; fi
+          touch configure
           SAGE_LOCAL=$(pwd)/sage-local
           # We set the installation records to the same mtime so that no rebuilds due to dependencies
           # among these packages are triggered.
