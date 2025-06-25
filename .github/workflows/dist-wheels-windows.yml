@@ -65,6 +65,8 @@ jobs:
             config.status
             local
           key: "sdists-SAGE_LOCAL-build=${{ hashFiles('/build/**/*') }}"
+          restore-keys: |
+            sdists-SAGE_LOCAL
 
       - name: make pypi-sdists
         if: steps.cache-sdists.outputs.cache-hit != 'true'
