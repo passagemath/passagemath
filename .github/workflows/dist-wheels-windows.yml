@@ -48,8 +48,21 @@ jobs:
         uses: actions/cache@v4
         with:
           path: dist
-          # FIXME: hashFiles returns empty
-          key: "sdists-${{ hashFiles('/build/**/*', '/src/**/*', '/pkgs/**/*') }}"
+          # Exclude dangling symlinks from hashFiles
+          key: >-
+            sdists-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}-pkgs=${{
+              hashFiles('pkgs',
+                        '!pkgs/sage-conf/bin/**',
+                        '!pkgs/sage-conf*/pyproject.toml',
+                        '!pkgs/sage-conf_conda/**',
+                        '!pkgs/sage-conf_pypi/sage_root/**',
+                        '!pkgs/sage-project-cookiecutter/**',
+                        '!pkgs/sagemath-standard/requirements.txt')
+            }}-src=${{ hashFiles('src') }}
 
       - name: Install bootstrap prerequisites
         if: steps.cache-sdists.outputs.cache-hit != 'true'
@@ -64,7 +77,14 @@ jobs:
           path: |
             config.status
             local
-          key: "sdists-SAGE_LOCAL-${{ hashFiles('/build/**/*') }}"
+          key: >-
+            sdists-SAGE_LOCAL-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}
+          restore-keys: |
+            sdists-SAGE_LOCAL
 
       - name: make pypi-sdists
         if: steps.cache-sdists.outputs.cache-hit != 'true'
@@ -95,14 +115,42 @@ jobs:
         uses: actions/cache@v4
         with:
           path: dist
-          # FIXME: hashFiles returns empty
-          key: "noarch-wheels-${{ hashFiles('/build/**/*', '/src/**/*', '/pkgs/**/*') }}"
+          key: >-
+            noarch-wheels-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}-pkgs=${{
+              hashFiles('pkgs',
+                        '!pkgs/sage-conf/bin/**',
+                        '!pkgs/sage-conf*/pyproject.toml',
+                        '!pkgs/sage-conf_conda/**',
+                        '!pkgs/sage-conf_pypi/sage_root/**',
+                        '!pkgs/sage-project-cookiecutter/**',
+                        '!pkgs/sagemath-standard/requirements.txt')
+            }}-src=${{ hashFiles('src') }}
 
       - name: Install bootstrap prerequisites
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
         run: |
           sudo DEBIAN_FRONTEND=noninteractive apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install $(build/bin/sage-get-system-packages debian _bootstrap)
+
+      - name: Cache SAGE_LOCAL
+        if: steps.cache-sdists.outputs.cache-hit != 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            config.status
+            local
+          key: >-
+            noarch-wheels-SAGE_LOCAL-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}
+          restore-keys: |
+            noarch-wheels-SAGE_LOCAL
 
       - name: make pypi-noarch-wheels
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
@@ -218,15 +266,20 @@ jobs:
           path: |
             build/pkgs/configure
             upstream/configure*
-          key: "configure-${{ hashFiles('/build/**/*') }}"
+          key: >-
+            configure-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}
 
       - name: Bootstrap
         if: steps.cache-configure.outputs.cache-hit != 'true'
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
           export PATH=$(pwd)/build/bin:$PATH
-          eval $(sage-print-system-package-command auto --sudo --yes update) || eval $(sage-print-system-package-command auto --yes update)
-          eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma) || eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+          eval $(sage-print-system-package-command auto --yes update)
+          eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
           sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
           ./bootstrap -s
         shell: msys2 {0}
