@@ -211,7 +211,7 @@ jobs:
         PYTHONUTF8=1
       # Use 'build', not 'pip wheel'
       CIBW_BUILD_FRONTEND: build
-      CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: "delvewheel repair -vv --namespace-pkg 'sage;sage.algebras;sage.arith;sage.calculus;sage.categories;sage.categories.examples;sage.combinat;sage.combinat.chas;sage.combinat.crystals;sage.combinat.matrices;sage.combinat.ncsf_qsym;sage.combinat.ncsym;sage.combinat.path_tableaux;sage.combinat.rigged_configurations;sage.combinat.sf;sage.combinat.species;sage.combinat.words;sage.databases;sage.data_structures;sage.dynamics;sage.ext;sage.functions;sage.games;sage.geometry;sage.groups;sage.groups.perm_gps;sage.groups.perm_gps.partn_ref;sage.interfaces;sage.libs;sage.misc;sage.modules;sage.monoids;sage.numerical;sage.numerical.backends;sage.parallel;sage.rings;sage.rings.finite_rings;sage.rings.function_field;sage.rings.number_field;sage.rings.padics;sage.rings.polynomial;sage.rings.semirings;sage.schemes;sage.schemes.affine;sage.schemes.generic;sage.schemes.product_projective;sage.schemes.projective;sage.sat;sage.sets;sage.symbolic;sage.tests;sage.typeset' -w {dest_dir} {wheel}"
+      CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: "delvewheel repair -vv --custom-patch -w {dest_dir} {wheel}"
       #
       CIBW_PLATFORM: windows
     steps:
