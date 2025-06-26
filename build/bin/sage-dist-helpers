@@ -536,7 +536,9 @@ sdh_generate_windows_lib_files() {
             lib //def:${def_file} //out:${lib_file} //machine:x64
 
             rm ${exports_file} ${def_file} ${lib_name}.exp
-            mv ${lib_file} ${name}.lib
+            if [ "${lib_file}" != "${name}.lib" ]; then
+                mv ${lib_file} ${name}.lib
+            fi
         done
     fi
 }
