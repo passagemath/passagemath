@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
+# delvewheel: patch
 r"""
 Top level of the distribution package sagemath-polyhedra
 

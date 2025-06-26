@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-ntl
+# delvewheel: patch
 
 from .all__sagemath_categories import *
 

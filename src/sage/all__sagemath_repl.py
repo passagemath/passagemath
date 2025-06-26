@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-repl
+# delvewheel: patch
 
 # Set up warning filters before importing Sage stuff
 

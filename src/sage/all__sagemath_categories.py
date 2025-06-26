@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-categories
+# delvewheel: patch
 from sage.all__sagemath_objects import *
 
 try:
