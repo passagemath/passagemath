@@ -1,5 +1,8 @@
 cd src
 
+# Undo "export MSYS=winsymlinks" done in top-level Makefile
+unset MSYS
+
 NAUTY_CONFIGURE=""
 
 if [ "$SAGE_FAT_BINARY" = "yes" ]; then
