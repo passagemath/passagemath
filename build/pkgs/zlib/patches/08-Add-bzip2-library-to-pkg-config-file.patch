@@ -4,13 +4,13 @@ Date: Tue, 28 Oct 2014 14:15:56 +0300
 Subject: [PATCH 3/3] Add bzip2 library to pkg-config file.
 
 ---
- minizip.pc.in | 2 +-
+ contrib/minizip/minizip.pc.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/minizip.pc.in b/minizip.pc.in
+diff --git a/contrib/minizip/minizip.pc.in b/contrib/minizip/minizip.pc.in
 index 69b5b7f..2cc4787 100644
---- a/minizip.pc.in
-+++ b/minizip.pc.in
+--- a/contrib/minizip/minizip.pc.in
++++ b/contrib/minizip/minizip.pc.in
 @@ -8,5 +8,5 @@ Description: Minizip zip file manipulation library
  Requires:
  Version: @PACKAGE_VERSION@

@@ -5,13 +5,13 @@ Subject: [PATCH 2/3] Add -no-undefined to link to enable build shared version
  with mingw.
 
 ---
- Makefile.am | 2 +-
+ contrib/minizip/Makefile.am | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Makefile.am b/Makefile.am
+diff --git a/contrib/minizip/Makefile.am b/contrib/minizip/Makefile.am
 index e2958e6..9a6ab44 100644
---- a/Makefile.am
-+++ b/Makefile.am
+--- a/contrib/minizip/Makefile.am
++++ b/contrib/minizip/Makefile.am
 @@ -22,7 +22,7 @@ libminizip_la_SOURCES = \
  	ioapi_mem.c \
  	${iowin32_src}
