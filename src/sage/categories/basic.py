@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-objects
+# delvewheel: patch
 r"""
 A subset of sage.categories.all with just the basic categories needed
 for sage startup (i.e. to define ZZ, QQ, ...).

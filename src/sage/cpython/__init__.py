@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-objects
+# delvewheel: patch
 # sage.cpython is an ordinary package, not a namespace package.
 
 # This package is imported very early, which is why workarounds/monkey-patching
