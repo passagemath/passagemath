@@ -14,7 +14,6 @@ Finite fields
 
 from sage.categories.category_with_axiom import CategoryWithAxiom
 from sage.categories.enumerated_sets import EnumeratedSets
-from sage.rings.integer import Integer
 
 
 class FiniteFields(CategoryWithAxiom):
@@ -220,6 +219,7 @@ class FiniteFields(CategoryWithAxiom):
                 sage: k._element_of_factored_order(factor(1912))
                 3
             """
+            from sage.rings.integer import Integer
             n = Integer(1)
             primes = []
             for p, e in F:
