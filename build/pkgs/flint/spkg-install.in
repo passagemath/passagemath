@@ -1,2 +1,5 @@
+# Undo "export MSYS=winsymlinks" done in top-level Makefile
+unset MSYS
+
 cd src
 sdh_make_install
