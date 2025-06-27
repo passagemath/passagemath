@@ -4,3 +4,5 @@ sed -i.bak "s|@SAGE_LOCAL@|$SAGE_LOCAL|g" directories.h
 
 sdh_make
 sdh_make_install
+
+sdh_generate_windows_lib_files coxeter3
