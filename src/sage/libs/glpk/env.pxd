@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-glpk
-# distutils: libraries = glpk z gmp
+# distutils: libraries = glpk ZLIB_LIBRARIES gmp
 
 cdef extern from "glpk.h":
     int glp_init_env()
