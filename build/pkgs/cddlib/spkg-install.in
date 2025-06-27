@@ -12,3 +12,5 @@ sdh_make_install
 # This can be removed as soon as all packages that detect cddlib have been
 # updated to check the official prefix "cddlib/" first.
 (cd $SAGE_DESTDIR$SAGE_LOCAL/include/ && ln -sf cddlib cdd && ln -sf cddlib/*.h .)
+
+sdh_generate_windows_lib_files cdd
