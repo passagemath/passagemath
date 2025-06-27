@@ -5,3 +5,5 @@ sdh_configure $SAGE_CONFIGURE_GMP --with-glpk=$SAGE_GLPK_PREFIX \
     --enable-shared=yes --enable-static=no
 sdh_make
 sdh_make_install
+
+sdh_generate_windows_lib_files
