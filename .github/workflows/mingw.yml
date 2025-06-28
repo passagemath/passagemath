@@ -1,0 +1,149 @@
+name: Reusable workflow for MinGW portability CI
+
+on:
+  workflow_call:
+    inputs:
+      targets_pre:
+        default: build/make/Makefile
+        type: string
+      targets:
+        default: build/make/Makefile
+        type: string
+      targets_optional:
+        default: build/make/Makefile
+        type: string
+      extra_sage_packages:
+        description: 'Extra Sage packages to install as system packages'
+        type: string
+        default: ""
+      merge_ci_fixes:
+        default: false
+        type: boolean
+      #
+      # For use in upstream CIs.
+      #
+      upstream_artifact:
+        required: false
+        type: string
+      sage_repo:
+        required: false
+        type: string
+      sage_ref:
+        required: false
+        type: string
+
+jobs:
+  local-mingw:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:      [windows-2022]
+    steps:
+      - name: Check out SageMath
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.sage_repo }}
+          ref: ${{ inputs.sage_ref }}
+          fetch-depth: 10000
+
+      - uses: msys2/setup-msys2@v2
+        name: Setup msys2
+        with:
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+            autotools
+            python
+            python-pip
+            python-setuptools
+            patch
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-ninja
+            mingw-w64-ucrt-x86_64-gtest
+          msystem: ucrt64
+          path-type: inherit
+        if: matrix.os == 'windows-2022'
+
+      - name: Download upstream artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: upstream
+          name: ${{ inputs.upstream_artifact }}
+        if: inputs.upstream_artifact
+
+      - name: Update Sage packages from upstream artifact
+        run: |
+          (export PATH=$(pwd)/build/bin:$PATH; (cd upstream && bash -x update-pkgs.sh) && git diff)
+        shell: msys2 {0}
+        if: inputs.upstream_artifact
+
+      - name: Merge CI fixes from sagemath/sage
+        if: inputs.merge_ci_fixes
+        run: |
+          .ci/merge-fixes.sh
+        shell: msys2 {0}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SAGE_CI_FIXES_FROM_REPOSITORIES: ${{ vars.SAGE_CI_FIXES_FROM_REPOSITORIES }}
+
+      - name: Retrieve configure tarball cache
+        id: cache-configure
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            build/pkgs/configure
+            upstream/configure*
+          key: >-
+            configure-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}
+
+      - name: Bootstrap
+        if: steps.cache-configure.outputs.cache-hit != 'true'
+        # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
+        run: |
+          export PATH=$(pwd)/build/bin:$PATH
+          eval $(sage-print-system-package-command auto --yes update)
+          eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+          ./bootstrap -s
+        shell: msys2 {0}
+
+      - name: Save configure tarball cache
+        if: steps.cache-configure.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            build/pkgs/configure
+            upstream/configure*
+          key: ${{ steps.cache-configure.outputs.cache-primary-key }}
+
+      - name: Retrieve SAGE_LOCAL cache
+        id:   cache-sage-local
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            config.status
+            sage-local
+          key: >-
+            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}
+          restore-keys: |
+            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}
+
+      - name: Build and test
+        run: |
+          if [ ! -x ./configure ]; then ./bootstrap -D; fi
+          touch configure
+          if [ -x ./config.status ]; then
+              ./config.status
+          else
+              ./configure --enable-build-as-root --prefix=$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng --without-system-zlib
+          fi
+          export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }} TARGETS_OPTIONAL="${{ inputs.targets_optional }}
+          MAKE="make -j6" make -k V=0 $TARGETS_PRE $TARGETS $TARGETS_OPTIONAL
+        shell: msys2 {0}

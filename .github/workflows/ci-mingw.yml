@@ -1,0 +1,17 @@
+name: CI MinGW
+
+on:
+  push:
+    branches:
+      - '*windows*'
+      - '*mingw*'
+    tags:
+      - '*'
+  workflow_dispatch:
+    # Allow to run manually
+
+jobs:
+  mingw:
+    uses: ./.github/workflows/mingw.yml
+    with:
+      targets: "build"
