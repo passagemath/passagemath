@@ -5,11 +5,12 @@ unset https_proxy
 
 mkdir build
 cd build
-sdh_cmake -DCMAKE_BUILD_TYPE=Release \
+sdh_cmake -GNinja \
+          -DCMAKE_BUILD_TYPE=Release \
           -DENABLE_TESTING=OFF \
 		  ..
-sdh_make
-sdh_make_install
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
 
 set -e
 

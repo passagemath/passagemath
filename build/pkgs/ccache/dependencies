@@ -1,4 +1,4 @@
-cmake xz
+cmake ninja_build xz
 
 ----------
 All lines of this file are ignored except the first.
