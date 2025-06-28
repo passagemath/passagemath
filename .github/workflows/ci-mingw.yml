@@ -14,4 +14,4 @@ jobs:
   mingw:
     uses: ./.github/workflows/mingw.yml
     with:
-      targets: "build"
+      targets: "build-local"
