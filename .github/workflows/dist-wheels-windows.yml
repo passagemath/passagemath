@@ -183,6 +183,7 @@ jobs:
       #TARGETS_PRE: ccache libpng mpfr mpc mpfi givaro gsl pari ntl flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
       TARGETS_PRE: >-
         gmp
+        benzene
         rw
         cddlib
         planarity
@@ -386,6 +387,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_categories
 
+      - name: sagemath-benzene
+        id:   sagemath-benzene
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_benzene
+
       - name: sagemath-rankwidth
         id:   sagemath-rankwidth
         uses: pypa/cibuildwheel@v2.23.0
@@ -446,7 +453,8 @@ jobs:
       run-id: ${{ github.run_id }}
       oss: "['windows-2022']"
       distributions: >-
-        ['sagemath-categories',
+        ['sagemath-benzene',
+         'sagemath-categories',
          'sagemath-cliquer',
          'sagemath-rankwidth',
          'sagemath-cddlib',
