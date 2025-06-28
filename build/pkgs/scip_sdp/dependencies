@@ -1,1 +1,1 @@
-scip dsdp | cmake
+scip dsdp | cmake ninja_build

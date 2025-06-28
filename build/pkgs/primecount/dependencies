@@ -1,1 +1,1 @@
-primesieve | cmake
+primesieve | cmake ninja_build

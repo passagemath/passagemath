@@ -26,7 +26,8 @@ echo "Configuring primecount: building primesieve $1"
 # Thus this will cause system includes take precedence over SAGE_LOCAL/include.
 # In particular, an old system package primesieve will take precedence
 # over primesieve in SAGE_LOCAL.
-sdh_cmake -DCMAKE_VERBOSE_MAKEFILE=ON \
+sdh_cmake -GNinja \
+          -DCMAKE_VERBOSE_MAKEFILE=ON \
           -DCMAKE_NO_SYSTEM_FROM_IMPORTED=ON \
           -DBUILD_STATIC_LIBS=OFF \
           -DBUILD_SHARED_LIBS=ON \
@@ -37,7 +38,7 @@ sdh_cmake -DCMAKE_VERBOSE_MAKEFILE=ON \
           -DCMAKE_INSTALL_PREFIX=$SAGE_LOCAL \
           -DWITH_POPCNT=OFF \
           . \
-          && sdh_make_install
+          && cmake --build . && DESTDIR=$SAGE_DESTDIR cmake --install .
 }
 
 # we try to use the external primesieve first, and if

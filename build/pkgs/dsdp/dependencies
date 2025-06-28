@@ -1,1 +1,1 @@
-$(BLAS) | cmake
+$(BLAS) | cmake ninja_build
