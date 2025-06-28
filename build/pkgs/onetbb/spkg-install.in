@@ -6,10 +6,10 @@ mkdir build
 cd build
 # TBB_ENABLE_IPO=OFF is a workaround for https://github.com/passagemath/passagemath/issues/509
 # TBB_TEST=OFF is a workaround for https://github.com/uxlfoundation/oneTBB/issues/1740
-sdh_cmake \
+sdh_cmake -GNinja \
     -DTBB_STRICT=off \
     -DTBB_ENABLE_IPO=OFF \
     -DTBB_TEST=OFF \
     ..
-sdh_make
-sdh_make_install
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
