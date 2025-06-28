@@ -117,7 +117,7 @@ class DocTestDefaults(SageObject):
         # from Python, which is not the typical use case.
         self.nthreads = 1
         try:
-            import signal
+            from signal import SIGCHLD
         except ImportError:
             self.serial = True
         else:
