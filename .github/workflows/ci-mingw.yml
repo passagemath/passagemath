@@ -10,8 +10,13 @@ on:
   workflow_dispatch:
     # Allow to run manually
 
+concurrency:
+  # Cancel previous runs of this workflow for the same branch
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   mingw:
     uses: ./.github/workflows/mingw.yml
     with:
-      targets: "build"
+      targets: "build-local"
