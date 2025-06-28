@@ -1,6 +1,7 @@
 cd src
 cp ../patches/CMakeLists.txt .
 sdh_cmake -GNinja \
+          -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
           -DCMAKE_VERBOSE_MAKEFILE=ON \
           -DBUILD_SHARED_LIBS=ON \
           -DBLA_VENDOR=OpenBLAS \
