@@ -250,6 +250,7 @@ jobs:
             python-pip
             python-setuptools
             patch
+            mingw-w64-ucrt-x86_64-cmake
           msystem: ucrt64
           path-type: inherit
         if: matrix.os == 'windows-2022'
