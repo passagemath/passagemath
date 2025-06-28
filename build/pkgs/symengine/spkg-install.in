@@ -1,7 +1,8 @@
 cd src
 mkdir build
 cd build
-sdh_cmake -DCMAKE_PREFIX_PATH="$SAGE_LOCAL" \
+sdh_cmake -GNinja \
+          -DCMAKE_PREFIX_PATH="$SAGE_LOCAL" \
           -DWITH_SYMENGINE_THREAD_SAFE=yes \
           -DWITH_ECM=yes \
           -DWITH_FLINT=yes \
@@ -14,6 +15,5 @@ sdh_cmake -DCMAKE_PREFIX_PATH="$SAGE_LOCAL" \
           -DBUILD_SHARED_LIBS=yes \
           -DBUILD_TESTS=yes \
           ..
-
-sdh_make
-sdh_make install
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
