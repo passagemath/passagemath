@@ -10,7 +10,8 @@ echo "Configuring suitesparse"
 # * SUITESPARSE_ENABLE_PROJECTS semi column separated list of the desired packages. Default is
 # all the packages in the suitesparse tarball.
 # On macOS ARM cvxopt does not start if suitesparse uses @rpath, set explicit install name dir instead
-sdh_cmake -DCMAKE_VERBOSE_MAKEFILE=ON \
+sdh_cmake -GNinja \
+          -DCMAKE_VERBOSE_MAKEFILE=ON \
           -DCMAKE_INSTALL_NAME_DIR="$SAGE_LOCAL/lib" \
           -DCMAKE_MACOSX_RPATH=OFF \
           -DNSTATIC=ON \
@@ -19,4 +20,5 @@ sdh_cmake -DCMAKE_VERBOSE_MAKEFILE=ON \
           -DSUITESPARSE_ENABLE_PROJECTS="suitesparse_config;amd;camd;ccolamd;colamd;cholmod;umfpack" \
           .
 
-sdh_make_install
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
