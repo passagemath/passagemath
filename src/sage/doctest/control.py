@@ -116,7 +116,12 @@ class DocTestDefaults(SageObject):
         # These are only basic defaults when invoking the doctest runner
         # from Python, which is not the typical use case.
         self.nthreads = 1
-        self.serial = False
+        try:
+            from signal import SIGCHLD
+        except ImportError:
+            self.serial = True
+        else:
+            self.serial = False
         self.timeout = -1
         self.die_timeout = -1
         self.all = False
@@ -324,7 +329,7 @@ def skipfile(filename, tested_optional_tags=False, *,
                 log(f"Skipping '{filename}' because module {e.name} cannot be imported")
             return True
 
-    with open(filename) as F:
+    with open(filename, encoding="utf-8") as F:
         file_optional_tags = parse_file_optional_tags(enumerate(F))
 
     if 'not tested' in file_optional_tags:

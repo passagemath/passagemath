@@ -43,8 +43,6 @@ AUTHORS:
 
 import re
 from sys import stdout
-from signal import (SIGABRT, SIGALRM, SIGBUS, SIGFPE, SIGHUP, SIGILL,
-                    SIGINT, SIGKILL, SIGPIPE, SIGQUIT, SIGSEGV, SIGTERM)
 from sage.structure.sage_object import SageObject
 from sage.doctest.util import count_noun
 from sage.doctest.sources import DictAsObject
@@ -66,30 +64,36 @@ def signal_name(sig):
         sage: signal_name(12345)
         'signal 12345'
     """
-    if sig == SIGHUP:
-        return "hangup"
-    if sig == SIGINT:
-        return "interrupt"
-    if sig == SIGQUIT:
-        return "quit"
-    if sig == SIGILL:
-        return "illegal instruction"
-    if sig == SIGABRT:
-        return "abort"
-    if sig == SIGFPE:
-        return "floating point exception"
-    if sig == SIGKILL:
-        return "kill signal"
-    if sig == SIGSEGV:
-        return "segmentation fault"
-    if sig == SIGPIPE:
-        return "broken pipe"
-    if sig == SIGALRM:
-        return "alarm"
-    if sig == SIGTERM:
-        return "terminate"
-    if sig == SIGBUS:
-        return "bus error"
+    try:
+        from signal import (SIGABRT, SIGALRM, SIGBUS, SIGFPE, SIGHUP, SIGILL,
+                            SIGINT, SIGKILL, SIGPIPE, SIGQUIT, SIGSEGV, SIGTERM)
+    except ImportError:
+        pass
+    else:
+        if sig == SIGHUP:
+            return "hangup"
+        if sig == SIGINT:
+            return "interrupt"
+        if sig == SIGQUIT:
+            return "quit"
+        if sig == SIGILL:
+            return "illegal instruction"
+        if sig == SIGABRT:
+            return "abort"
+        if sig == SIGFPE:
+            return "floating point exception"
+        if sig == SIGKILL:
+            return "kill signal"
+        if sig == SIGSEGV:
+            return "segmentation fault"
+        if sig == SIGPIPE:
+            return "broken pipe"
+        if sig == SIGALRM:
+            return "alarm"
+        if sig == SIGTERM:
+            return "terminate"
+        if sig == SIGBUS:
+            return "bus error"
     return "signal %s" % sig
 
 

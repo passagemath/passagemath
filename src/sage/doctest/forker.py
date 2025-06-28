@@ -56,7 +56,6 @@ import multiprocessing
 import os
 import platform
 import re
-import signal
 import sys
 import tempfile
 import time
@@ -1473,8 +1472,13 @@ class SageDocTestRunner(doctest.DocTestRunner):
                         # to make the current process group the
                         # foreground group.
                         restore_tcpgrp = os.tcgetpgrp(0)
-                        signal.signal(signal.SIGTTIN, signal.SIG_IGN)
-                        signal.signal(signal.SIGTTOU, signal.SIG_IGN)
+                        try:
+                            import signal
+                        except ImportError:
+                            pass
+                        else:
+                            signal.signal(signal.SIGTTIN, signal.SIG_IGN)
+                            signal.signal(signal.SIGTTOU, signal.SIG_IGN)
                         os.tcsetpgrp(0, os.getpgrp())
                     print("*" * 70)
                     print("Previously executed commands:")
@@ -1505,12 +1509,14 @@ class SageDocTestRunner(doctest.DocTestRunner):
                     # Assume this is a *real* interrupt. We need to
                     # escalate this to the master doctesting process.
                     if not self.options.serial:
+                        import signal
                         os.kill(os.getppid(), signal.SIGINT)
                     raise
                 finally:
                     # Restore the foreground process group.
                     if restore_tcpgrp is not None:
                         os.tcsetpgrp(0, restore_tcpgrp)
+                        import signal
                         signal.signal(signal.SIGTTIN, signal.SIG_DFL)
                         signal.signal(signal.SIGTTOU, signal.SIG_DFL)
                     print("Returning to doctests...")
@@ -1634,6 +1640,7 @@ class SageDocTestRunner(doctest.DocTestRunner):
                         # to make the current process group the
                         # foreground group.
                         restore_tcpgrp = os.tcgetpgrp(0)
+                        import signal
                         signal.signal(signal.SIGTTIN, signal.SIG_IGN)
                         signal.signal(signal.SIGTTOU, signal.SIG_IGN)
                         os.tcsetpgrp(0, os.getpgrp())
@@ -1656,6 +1663,7 @@ class SageDocTestRunner(doctest.DocTestRunner):
                     # Restore the foreground process group.
                     if restore_tcpgrp is not None:
                         os.tcsetpgrp(0, restore_tcpgrp)
+                        import signal
                         signal.signal(signal.SIGTTIN, signal.SIG_DFL)
                         signal.signal(signal.SIGTTOU, signal.SIG_DFL)
                     self._fakeout.start_spoofing()
@@ -1921,6 +1929,7 @@ class DocTestDispatcher(SageObject):
         follow = None
 
         # Install signal handler for SIGCHLD
+        import signal
         signal.signal(signal.SIGCHLD, dummy_handler)
 
         # Logger
@@ -2492,6 +2501,7 @@ class DocTestWorker(multiprocessing.Process):
             self.rmessages = None
 
         try:
+            import signal
             if not self.killed:
                 self.killed = True
                 os.killpg(self.pid, signal.SIGQUIT)
