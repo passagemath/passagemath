@@ -329,7 +329,7 @@ def skipfile(filename, tested_optional_tags=False, *,
                 log(f"Skipping '{filename}' because module {e.name} cannot be imported")
             return True
 
-    with open(filename) as F:
+    with open(filename, encoding="utf-8") as F:
         file_optional_tags = parse_file_optional_tags(enumerate(F))
 
     if 'not tested' in file_optional_tags:
