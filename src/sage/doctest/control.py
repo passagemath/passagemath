@@ -116,12 +116,7 @@ class DocTestDefaults(SageObject):
         # These are only basic defaults when invoking the doctest runner
         # from Python, which is not the typical use case.
         self.nthreads = 1
-        try:
-            from signal import SIGCHLD
-        except ImportError:
-            self.serial = True
-        else:
-            self.serial = False
+        self.serial = False
         self.timeout = -1
         self.die_timeout = -1
         self.all = False
@@ -465,6 +460,10 @@ class DocTestController(SageObject):
                 print("Debugging is not compatible with logging, disabling logfile.")
             options.serial = True
             options.logfile = None
+        try:
+            from signal import SIGCHLD
+        except ImportError:
+            options.serial = True
         if options.serial:
             options.nthreads = 1
         if options.verbose:
