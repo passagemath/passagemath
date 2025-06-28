@@ -116,7 +116,12 @@ class DocTestDefaults(SageObject):
         # These are only basic defaults when invoking the doctest runner
         # from Python, which is not the typical use case.
         self.nthreads = 1
-        self.serial = False
+        try:
+            import signal
+        except ImportError:
+            self.serial = True
+        else:
+            self.serial = False
         self.timeout = -1
         self.die_timeout = -1
         self.all = False
