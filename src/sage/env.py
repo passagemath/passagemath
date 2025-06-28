@@ -467,6 +467,16 @@ def cython_aliases(required_modules=None, optional_modules=None):
 
     aliases = {}
 
+    # uname-specific flags
+    import platform
+    system = platform.system()
+
+    def uname_specific(name, value, alternative):
+        if system == name:
+            return value
+        else:
+            return alternative
+
     for lib, required in itertools.chain(((lib, True) for lib in required_modules),
                                          ((lib, False) for lib in optional_modules)):
         var = lib.upper().replace("-", "") + "_"
@@ -481,6 +491,10 @@ def cython_aliases(required_modules=None, optional_modules=None):
                 from collections import defaultdict
                 pc = defaultdict(list, {'libraries': ['z']})
                 libs = "-lz"
+        elif lib == 'gsl' and system == 'Windows':
+            aliases["GSL_CFLAGS"] = aliases["GSL_INCDIR"] = aliases["GSL_LIBDIR"] = aliases["GSL_LIBEXTRA"] = []
+            aliases["GSL_LIBRARIES"] = "gsl"
+            continue
         elif lib == 'ecl':
             try:
                 # Determine ecl-specific compiler arguments using the ecl-config script
@@ -516,16 +530,6 @@ def cython_aliases(required_modules=None, optional_modules=None):
         aliases[var + "LIBDIR"] = pc['library_dirs']
         aliases[var + "LIBEXTRA"] = list(filter(lambda s: not s.startswith(('-l', '-L')), libs.split()))
         aliases[var + "LIBRARIES"] = pc['libraries']
-
-    # uname-specific flags
-    import platform
-    system = platform.system()
-
-    def uname_specific(name, value, alternative):
-        if system == name:
-            return value
-        else:
-            return alternative
 
     aliases["LINUX_NOEXECSTACK"] = uname_specific("Linux", ["-Wl,-z,noexecstack"],
                                                   [])
