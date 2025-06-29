@@ -220,25 +220,7 @@ jobs:
       #
       CIBW_PLATFORM: windows
     steps:
-      - name: Maximize build disk space
-        if: runner.os == 'Linux' && matrix.arch != 'aarch64'
-        uses: easimon/maximize-build-space@v10
-        with:
-          # need space in /var for Docker images
-          root-reserve-mb:      30000
-          remove-dotnet:        true
-          remove-android:       true
-          remove-haskell:       true
-          remove-codeql:        true
-          remove-docker-images: true
-
       - uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        if: runner.os == 'Linux' && matrix.arch != 'x86_64' && matrix.arch != 'i686' && matrix.arch != 'aarch64'
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: all
 
       - uses: msys2/setup-msys2@v2
         name: Setup msys2
