@@ -74,7 +74,7 @@ fi
 for PY in $PYTHONS; do
     PYTHON="$(PATH="$SAGE_ORIG_PATH" command -v $PY)"
     if [ -n "$PYTHON" ]; then
-        if CHECK_PATH="$PATH" "$PYTHON" -c "import argparse; import urllib; from hashlib import sha1; from ssl import HAS_SNI; assert HAS_SNI; from os import listdir, environ; listdir(\"$(pwd)\"); assert environ[\"PATH\"] == environ[\"CHECK_PATH\"];" 2>/dev/null; then
+        if CHECK_PATH="$PATH" "$PYTHON" -c "import argparse; import urllib; from hashlib import sha1; from ssl import HAS_SNI; assert HAS_SNI; from os import listdir, environ; listdir(\"$(pwd)\"); assert environ[\"PATH\"] == environ[\"CHECK_PATH\"]; from urllib.request import FancyURLopener" 2>/dev/null; then
             exec "$PYTHON" "$@"
         fi
     fi
@@ -83,7 +83,7 @@ done
 for PY in $PYTHONS; do
     PYTHON="$(PATH="$SAGE_ORIG_PATH" command -v $PY)"
     if [ -n "$PYTHON" ]; then
-        if CHECK_PATH="$PATH" "$PYTHON" -c "import argparse; import urllib; from hashlib import sha1; from os import listdir, environ; listdir(\"$(pwd)\"); assert environ[\"PATH\"] == environ[\"CHECK_PATH\"];" 2>/dev/null; then
+        if CHECK_PATH="$PATH" "$PYTHON" -c "import argparse; import urllib; from hashlib import sha1; from os import listdir, environ; listdir(\"$(pwd)\"); assert environ[\"PATH\"] == environ[\"CHECK_PATH\"]; from urllib.request import FancyURLopener" 2>/dev/null; then
             exec "$PYTHON" "$@"
         fi
     fi
