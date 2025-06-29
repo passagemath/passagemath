@@ -5003,6 +5003,29 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             False
 
             sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
+            sage: C1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 4, 5, sparse=True),
+            ....:                           [[1, 0, 1, 0, 0],
+            ....:                            [0, 1, 0, 1, 0],
+            ....:                            [1, 1, 0, 0, 1],
+            ....:                            [0, 0,-1,-1, 1]])
+            sage: C1.is_conetwork_matrix(certificate=True)
+            (True,
+            (Digraph on 6 vertices,
+            ((4, 5), (2, 3), (5, 0), (1, 2), (5, 2)),
+            ((4, 0), (1, 3), (4, 3), (0, 1))))
+            sage: C2 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 4, sparse=True),
+            ....:                           [[1, 1, 0, 0],
+            ....:                            [1, 0, 1, 0],
+            ....:                            [1, 0, 0, 1],
+            ....:                            [0,-1, 1, 0],
+            ....:                            [0,-1, 0, 1]])
+            sage: C2.is_conetwork_matrix(certificate=True)
+            (True,
+            (Digraph on 5 vertices,
+            ((3, 4), (4, 0), (4, 1), (4, 2)),
+            ((3, 0), (3, 1), (3, 2), (0, 1), (0, 2))))
+
+            sage: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
             sage: C3 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 3, 3, sparse=True),
             ....:                           [[1, 1, 0],
             ....:                            [1, 0, 1],
@@ -5044,8 +5067,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         if <bint> result:
             sage_digraph = _sage_digraph(digraph, arcs_reversed)
-            sage_forest_arcs = _sage_arcs(digraph, forest_arcs, arcs_reversed, self.nrows(), row_keys)
-            sage_coforest_arcs = _sage_arcs(digraph, coforest_arcs, arcs_reversed, self.ncols(), column_keys)
+            sage_forest_arcs = _sage_arcs(digraph, forest_arcs, arcs_reversed, self.ncols(), row_keys)
+            sage_coforest_arcs = _sage_arcs(digraph, coforest_arcs, arcs_reversed, self.nrows(), column_keys)
             return True, (sage_digraph, sage_forest_arcs, sage_coforest_arcs)
 
         return False, NotImplemented  # submatrix TBD
