@@ -1,4 +1,5 @@
 cd src
-echo "using gcc : : $CXX ;" > user-config.jam
-./bootstrap.sh --prefix="$SAGE_LOCAL" --with-libraries=regex
-./b2 --user-config=user-config.jam toolset=gcc install
+sdh_cmake -GNinja \
+          .
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
