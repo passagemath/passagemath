@@ -491,9 +491,9 @@ def cython_aliases(required_modules=None, optional_modules=None):
                 from collections import defaultdict
                 pc = defaultdict(list, {'libraries': ['z']})
                 libs = "-lz"
-        elif lib == 'gsl' and system == 'Windows':
-            aliases["GSL_CFLAGS"] = aliases["GSL_INCDIR"] = aliases["GSL_LIBDIR"] = aliases["GSL_LIBEXTRA"] = []
-            aliases["GSL_LIBRARIES"] = "gsl"
+        elif system == 'Windows':
+            aliases[var + "CFLAGS"] = aliases[var + "INCDIR"] = aliases[var + "LIBDIR"] = aliases[var + "LIBEXTRA"] = []
+            aliases[var + "LIBRARIES"] = lib
             continue
         elif lib == 'ecl':
             try:
