@@ -170,7 +170,7 @@ EOF
         ENDRUN=\'
         ;;
     void*)
-        UPDATE="xbps-install -u xbps && xbps-install -Suy &&"
+        UPDATE="xbps-install -Sy && xbps-install -uy xbps && xbps-install -uy &&"
         EXISTS="xbps-query -R"
         INSTALL="xbps-install --yes"
         ;;
