@@ -14,3 +14,5 @@ sdh_make
 
 # Installing
 sdh_make_install
+
+sdh_generate_windows_lib_files mpc

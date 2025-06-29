@@ -50,14 +50,21 @@
  * \brief Macro to help with branch prediction.
  */
 
+#ifdef __GNUC__
 #define __DGS_LIKELY(cond)    __builtin_expect ((cond) != 0, 1)
+#else
+#define __DGS_LIKELY(cond) (cond)
+#endif
 
 /**
  * \brief Macro to help with branch prediction.
  */
 
+#ifdef __GNUC__
 #define __DGS_UNLIKELY(cond)  __builtin_expect ((cond) != 0, 0)
-
+#else
+#define __DGS_UNLIKELY(cond) (cond)
+#endif
 
 static int const dgs_radix = sizeof(unsigned long)<<3;
 static unsigned long const dgs_ffff = -1;

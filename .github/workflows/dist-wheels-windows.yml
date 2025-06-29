@@ -180,9 +180,12 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm
       # Non-Python packages to install as spkgs
-      #TARGETS_PRE: ccache libpng mpfr mpc mpfi givaro gsl pari ntl flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
+      #TARGETS_PRE: ccache libpng mpfi givaro pari ntl flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
       TARGETS_PRE: >-
         gmp
+        gsl
+        mpc
+        mpfr
         rw
         cddlib
         planarity
@@ -407,6 +410,15 @@ jobs:
         with:
           package-dir: unpacked/passagemath_combinat
 
+        ####### sagemath-modules and what depends on it
+
+      - name: sagemath-modules
+        id:   sagemath-modules
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_modules
+
+
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
@@ -437,4 +449,5 @@ jobs:
          'sagemath-cddlib',
          'sagemath-homfly',
          'sagemath-combinat',
+         'sagemath-modules',
          'sagemath-planarity']

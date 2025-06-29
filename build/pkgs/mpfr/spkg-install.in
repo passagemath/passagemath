@@ -151,3 +151,5 @@ mpfr_build()
 cd src
 
 mpfr_build
+
+sdh_generate_windows_lib_files mpfr
