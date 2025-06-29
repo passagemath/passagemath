@@ -90,7 +90,7 @@ jobs:
         if: steps.cache-sdists.outputs.cache-hit != 'true'
         run: |
           ./bootstrap
-          if [ -x ./config.status ]; then ./config.status; else ./configure; fi
+          ./configure
           make pypi-sdists V=0
           (mkdir dist && mv upstream/*sage*.tar.gz dist/)
           ls -l dist
