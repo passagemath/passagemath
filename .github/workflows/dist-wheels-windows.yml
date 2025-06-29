@@ -182,6 +182,7 @@ jobs:
       # Non-Python packages to install as spkgs
       #TARGETS_PRE: ccache libpng mpfr mpc mpfi givaro gsl pari ntl flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
       TARGETS_PRE: >-
+        boost_cropped
         gmp
         rw
         cddlib
@@ -371,6 +372,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_categories
 
+      - name: sagemath-graphs
+        id:   sagemath-graphs
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_graphs
+
       - name: sagemath-rankwidth
         id:   sagemath-rankwidth
         uses: pypa/cibuildwheel@v2.23.0
@@ -437,4 +444,5 @@ jobs:
          'sagemath-cddlib',
          'sagemath-homfly',
          'sagemath-combinat',
-         'sagemath-planarity']
+         'sagemath-planarity',
+         'sagemath-graphs']
