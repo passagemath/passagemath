@@ -144,11 +144,28 @@ jobs:
         run: |
           if [ ! -x ./configure ]; then ./bootstrap -D; fi
           touch configure
+          PREFIX=$(pwd)/sage-local
           if [ -x ./config.status ]; then
               ./config.status
           else
+              rm -f config.log
+              mkdir -p logs/pkgs
+              touch logs/pkgs/config.log
+              ln -s logs/pkgs/config.log config.log
               ./configure --enable-build-as-root --prefix=$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng --without-system-zlib
           fi
           export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }} TARGETS_OPTIONAL="${{ inputs.targets_optional }}
           MAKE="make -j6" make -k V=0 $TARGETS_PRE $TARGETS $TARGETS_OPTIONAL
         shell: msys2 {0}
+
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: mingw-logs-${{ matrix.os }}
+          path: ./logs
+
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: mingw-sage-local-${{ matrix.os }}
+          path: ./local
