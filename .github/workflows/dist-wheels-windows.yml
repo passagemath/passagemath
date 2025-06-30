@@ -194,6 +194,7 @@ jobs:
         gmp
         rw
         cddlib
+        tdlib
         planarity
         cliquer
         libhomfly
@@ -396,6 +397,11 @@ jobs:
         uses: pypa/cibuildwheel@v2.23.0
         with:
           package-dir: unpacked/passagemath_cddlib
+      - name: sagemath-tdlib
+        id:   sagemath-tdlib
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_tdlib
 
       - name: sagemath-planarity
         id:   sagemath-planarity
@@ -467,6 +473,7 @@ jobs:
          'sagemath-cliquer',
          'sagemath-rankwidth',
          'sagemath-cddlib',
+         'sagemath-tdlib',
          'sagemath-homfly',
          'sagemath-combinat',
          'sagemath-planarity',
