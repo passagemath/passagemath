@@ -1,1 +1,1 @@
-mingw-w64-x86_64-zeromq
+${MINGW_PACKAGE_PREFIX}-zeromq

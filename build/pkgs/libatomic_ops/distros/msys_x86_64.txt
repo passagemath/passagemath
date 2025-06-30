@@ -1,1 +1,1 @@
-mingw-w64-x86_64-libatomic_ops
+${MINGW_PACKAGE_PREFIX}-libatomic_ops

@@ -1,1 +1,1 @@
-mingw-w64-x86_64-pcre
+${MINGW_PACKAGE_PREFIX}-pcre

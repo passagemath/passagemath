@@ -1,1 +1,1 @@
-mingw-w64-x86_64-ncurses
+${MINGW_PACKAGE_PREFIX}-ncurses

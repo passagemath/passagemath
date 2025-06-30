@@ -1,1 +1,1 @@
-mingw-w64-x86_64-suitesparse
+${MINGW_PACKAGE_PREFIX}-suitesparse

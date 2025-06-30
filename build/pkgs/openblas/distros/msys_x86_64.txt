@@ -1,1 +1,1 @@
-mingw-w64-x86_64-openblas
+${MINGW_PACKAGE_PREFIX}-openblas

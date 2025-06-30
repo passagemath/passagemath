@@ -1,1 +1,1 @@
-mingw-w64-x86_64-ninja
+${MINGW_PACKAGE_PREFIX}-ninja

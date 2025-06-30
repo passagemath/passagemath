@@ -1,1 +1,1 @@
-mingw-w64-x86_64-python
+${MINGW_PACKAGE_PREFIX}-python

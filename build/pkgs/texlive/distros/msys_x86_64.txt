@@ -1,1 +1,1 @@
-mingw-w64-x86_64-texlive-full
+${MINGW_PACKAGE_PREFIX}-texlive-full

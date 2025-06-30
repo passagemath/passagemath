@@ -1,1 +1,1 @@
-mingw-w64-x86_64-gsl
+${MINGW_PACKAGE_PREFIX}-gsl

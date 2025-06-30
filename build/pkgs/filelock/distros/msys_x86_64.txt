@@ -1,1 +1,1 @@
-mingw-w64-x86_64-python-filelock
+${MINGW_PACKAGE_PREFIX}-python-filelock

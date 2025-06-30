@@ -1,1 +1,1 @@
-mingw-w64-x86_64-graphviz
+${MINGW_PACKAGE_PREFIX}-graphviz

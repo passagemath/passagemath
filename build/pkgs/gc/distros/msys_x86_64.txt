@@ -1,1 +1,1 @@
-mingw-w64-x86_64-gc
+${MINGW_PACKAGE_PREFIX}-gc

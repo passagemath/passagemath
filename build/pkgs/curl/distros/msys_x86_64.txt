@@ -1,1 +1,1 @@
-mingw-w64-x86_64-curl
+${MINGW_PACKAGE_PREFIX}-curl

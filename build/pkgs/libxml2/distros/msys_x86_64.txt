@@ -1,1 +1,1 @@
-mingw-w64-x86_64-libxml2
+${MINGW_PACKAGE_PREFIX}-libxml2

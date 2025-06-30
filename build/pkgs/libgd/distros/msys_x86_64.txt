@@ -1,1 +1,1 @@
-mingw-w64-x86_64-libgd
+${MINGW_PACKAGE_PREFIX}-libgd
