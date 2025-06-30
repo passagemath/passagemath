@@ -1,5 +1,11 @@
 cd src/
 
+if [ -n "$MSYSTEM" ]; then
+    for a in ../patches/mingw/*.patch; do
+        patch -p1 < $a
+    done
+fi
+
 # Issue #28890: zlib does not use a standard autoconf-generated configure
 # script, so don't use the sdh_configure helper as it may have minor
 # incompatibilities
