@@ -179,7 +179,7 @@ jobs:
           remove-codeql:        true
           remove-docker-images: true
         continue-on-error: true
-        if: inputs.free_disk_space
+        if: inputs.free_disk_space && !contains(matrix.tox_system_factor, 'arm64')
       - name: Check out SageMath
         uses: actions/checkout@v4
         with:
