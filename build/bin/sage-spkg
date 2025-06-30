@@ -321,7 +321,13 @@ fi
 # Set the $SAGE_DESTDIR variable to be passed to the spkg-install
 # script (the script itself could set this, but better to standardize
 # this in one place)
-export SAGE_DESTDIR="${SAGE_BUILD_DIR}/${PKG_NAME}/inst"
+#
+# Do not attempt DESTDIR staging on MinGW - it fails at least for boost_cropped
+# https://github.com/passagemath/passagemath/pull/1081#issuecomment-3017283258
+#
+if [ -z "$MSYSTEM" ]; then
+    export SAGE_DESTDIR="${SAGE_BUILD_DIR}/${PKG_NAME}/inst"
+fi
 
 # The actual prefix where the installation will be staged. This is the
 # directory that you need to work in if you want to change the staged
