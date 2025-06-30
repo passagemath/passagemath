@@ -197,6 +197,7 @@ jobs:
         planarity
         cliquer
         libhomfly
+        glpk
         symmetrica
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
@@ -397,6 +398,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_cddlib
 
+      - name: sagemath-glpk
+        id:   sagemath-glpk
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_glpk
+
       - name: sagemath-planarity
         id:   sagemath-planarity
         uses: pypa/cibuildwheel@v2.23.0
@@ -469,5 +476,6 @@ jobs:
          'sagemath-cddlib',
          'sagemath-homfly',
          'sagemath-combinat',
+         'sagemath-glpk',
          'sagemath-planarity',
          'sagemath-graphs']
