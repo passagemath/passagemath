@@ -1,5 +1,6 @@
 cd src
 sdh_cmake -GNinja \
-          .
+      -DBOOST_INSTALL_LAYOUT=tagged \
+      .
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
