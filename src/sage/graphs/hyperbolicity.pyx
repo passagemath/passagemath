@@ -1524,8 +1524,8 @@ cdef dict __hyperbolicity_distribution__(int N, unsigned short** distances):
 
 # We use this trick since it is way faster than using the sage randint function.
 cdef extern from "stdlib.h":
-    long c_libc_random "random"()
-    void c_libc_srandom "srandom"(unsigned int seed)
+    long c_libc_random "rand"()
+    void c_libc_srandom "srand"(unsigned int seed)
 
 
 cdef dict __hyperbolicity_sampling__(int N, unsigned short** distances, uint64_t sampling_size):

@@ -90,7 +90,7 @@ jobs:
         if: steps.cache-sdists.outputs.cache-hit != 'true'
         run: |
           ./bootstrap
-          if [ -x ./config.status ]; then ./config.status; else ./configure; fi
+          ./configure
           make pypi-sdists V=0
           (mkdir dist && mv upstream/*sage*.tar.gz dist/)
           ls -l dist
@@ -182,6 +182,7 @@ jobs:
       # Non-Python packages to install as spkgs
       #TARGETS_PRE: ccache libpng mpfr mpc mpfi givaro gsl pari ntl flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
       TARGETS_PRE: >-
+        boost_cropped
         gmp
         rw
         cddlib
@@ -371,6 +372,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_categories
 
+      - name: sagemath-graphs
+        id:   sagemath-graphs
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_graphs
+
       - name: sagemath-rankwidth
         id:   sagemath-rankwidth
         uses: pypa/cibuildwheel@v2.23.0
@@ -413,6 +420,24 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.arch }}-wheels
           path: ./wheelhouse/*.whl
 
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: unpacked-windows
+          path: ./unpacked
+
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: sage-local-windows
+          path: ./sage-local
+
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: logs-windows
+          path: ./logs
+
 
   upload_wheels:
     # This needs to be a separate job because pypa/gh-action-pypi-publish cannot run on macOS
@@ -437,4 +462,5 @@ jobs:
          'sagemath-cddlib',
          'sagemath-homfly',
          'sagemath-combinat',
-         'sagemath-planarity']
+         'sagemath-planarity',
+         'sagemath-graphs']
