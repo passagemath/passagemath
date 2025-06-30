@@ -245,6 +245,8 @@ jobs:
             mingw-w64-${{ matrix.env }}-cmake
             mingw-w64-${{ matrix.env }}-ninja
             mingw-w64-${{ matrix.env }}-gtest
+            mingw-w64-${{ matrix.env }}-ncurses
+            mingw-w64-${{ matrix.env }}-readline
           msystem: ${{ matrix.msystem }}
           path-type: inherit
 
