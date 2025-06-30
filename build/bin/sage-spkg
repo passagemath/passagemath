@@ -649,7 +649,9 @@ fi
 unload_destdir() { ###############################################
 # To work around #26996: Remove the symlink set,
 # or we get "cp: cannot overwrite directory"
-rm -f "$SAGE_DESTDIR_LOCAL/lib64"
+if [ -d "$SAGE_DESTDIR" ]; then
+    rm -f "$SAGE_DESTDIR_LOCAL/lib64"
+fi
 
 # All spkgs should eventually support this, but fall back on old behavior in
 # case DESTDIR=$SAGE_DESTDIR installation was not used
@@ -671,7 +673,7 @@ if [ -d "$SAGE_DESTDIR" ]; then
     # Remove the $SAGE_DESTDIR entirely once all files have been moved to their
     # final location.
     rm -rf "$SAGE_DESTDIR"
-else
+elif [ -n "$SAGE_DESTDIR" ]; then
     echo "The temporary location $SAGE_DESTDIR does not exist; has it been unloaded already?"
     exit 1
 fi
