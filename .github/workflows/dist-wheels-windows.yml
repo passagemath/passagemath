@@ -194,6 +194,7 @@ jobs:
         gmp
         rw
         cddlib
+        msolve
         planarity
         cliquer
         libhomfly
@@ -397,6 +398,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_cddlib
 
+      - name: sagemath-msolve
+        id:   sagemath-msolve
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_msolve
+
       - name: sagemath-planarity
         id:   sagemath-planarity
         uses: pypa/cibuildwheel@v2.23.0
@@ -464,6 +471,7 @@ jobs:
       oss: "['windows-2022']"
       distributions: >-
         ['sagemath-categories',
+         'sagemath-msolve',
          'sagemath-cliquer',
          'sagemath-rankwidth',
          'sagemath-cddlib',
