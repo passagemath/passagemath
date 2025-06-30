@@ -38,7 +38,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:      [windows-2022]
+        include:
+        - os:      windows-2022
+          msystem: ucrt64
+          env:     ucrt-x86_64
+        - os:      windows-11-arm
+          msystem: clang64
+          env:     clang-aarch64
     steps:
       - name: Check out SageMath
         uses: actions/checkout@v4
@@ -51,18 +57,17 @@ jobs:
         name: Setup msys2
         with:
           install: >-
-            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-${{ matrix.env }}-gcc
             autotools
             python
             python-pip
             python-setuptools
             patch
-            mingw-w64-ucrt-x86_64-cmake
-            mingw-w64-ucrt-x86_64-ninja
-            mingw-w64-ucrt-x86_64-gtest
-          msystem: ucrt64
+            mingw-w64-${{ matrix.env }}-cmake
+            mingw-w64-${{ matrix.env }}-ninja
+            mingw-w64-${{ matrix.env }}-gtest
+          msystem: ${{ matrix.msystem }}
           path-type: inherit
-        if: matrix.os == 'windows-2022'
 
       - name: Download upstream artifact
         uses: actions/download-artifact@v4

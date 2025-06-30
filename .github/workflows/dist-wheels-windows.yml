@@ -167,15 +167,23 @@ jobs:
           name: noarch-wheels-windows
 
   build_wheels:
-    name: wheels ${{ matrix.build }}*_${{ matrix.arch }}
+    name: wheels ${{ matrix.env }}
     runs-on: ${{ matrix.os }}
     needs: [sdists_for_pypi, noarch_wheels_for_pypi]
     strategy:
       fail-fast: false
       matrix:
-        os:      [windows-2022]
-        arch:    [auto]
-        build:   ["win_*64"]
+        include:
+        - os:      windows-2022
+          msystem: ucrt64
+          env:     ucrt-x86_64
+          arch:    auto
+          build:   "win_*64"
+        - os:      windows-11-arm
+          msystem: clang64
+          env:     clang-aarch64
+          arch:    auto
+          build:   "win_*64"
     env:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm
@@ -227,18 +235,17 @@ jobs:
         name: Setup msys2
         with:
           install: >-
-            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-${{ matrix.env }}-gcc
             autotools
             python
             python-pip
             python-setuptools
             patch
-            mingw-w64-ucrt-x86_64-cmake
-            mingw-w64-ucrt-x86_64-ninja
-            mingw-w64-ucrt-x86_64-gtest
-          msystem: ucrt64
+            mingw-w64-${{ matrix.env }}-cmake
+            mingw-w64-${{ matrix.env }}-ninja
+            mingw-w64-${{ matrix.env }}-gtest
+          msystem: ${{ matrix.msystem }}
           path-type: inherit
-        if: matrix.os == 'windows-2022'
 
       - name: Download sdists
         uses: actions/download-artifact@v4
@@ -423,19 +430,19 @@ jobs:
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: unpacked-windows
+          name: unpacked-${{ matrix.os }}
           path: ./unpacked
 
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: sage-local-windows
+          name: sage-local-${{ matrix.os }}
           path: ./sage-local
 
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: logs-windows
+          name: logs-${{ matrix.os }}
           path: ./logs
 
 
