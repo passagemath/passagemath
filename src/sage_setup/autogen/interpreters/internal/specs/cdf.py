@@ -73,8 +73,6 @@ class CDFInterpreter(StackInterpreter):
 
         super(CDFInterpreter, self).__init__(ty_double_complex)
         self.mc_py_constants = MemoryChunkConstants('py_constants', ty_python)
-        # See comment for RDFInterpreter
-        self.err_return = '-1094648119105371'
         self.adjust_retval = "dz_to_CDE"
         self.chunks = [self.mc_args, self.mc_constants, self.mc_py_constants,
                        self.mc_stack,
@@ -84,27 +82,23 @@ class CDFInterpreter(StackInterpreter):
         self.pg = pg
         self.c_header = ri(0,"""
             #include <stdlib.h>
-            #include <complex.h>
+            #include <complex>
 
-            /* On Solaris, we need to define _Imaginary_I when compiling with GCC,
-             * otherwise the constant I doesn't work. The definition below is based
-             * on glibc. */
-            #ifdef __GNUC__
-            #undef  _Imaginary_I
-            #define _Imaginary_I  (__extension__ 1.0iF)
-            #endif
+            typedef std::complex<double> double_complex;
 
-            typedef double complex double_complex;
-
-            static inline double complex csquareX(double complex z) {
-                double complex res;
-                __real__(res) = __real__(z) * __real__(z) - __imag__(z) * __imag__(z);
-                __imag__(res) = 2 * __real__(z) * __imag__(z);
-                return res;
+            static inline double_complex csquareX(double_complex z) {
+                return double_complex(
+                           z.real() * z.real() - z.imag() * z.imag(),
+                           2 * z.real() * z.imag()
+                       );
             }
 
-            static inline double complex cpow_int(double complex z, int exp) {
-                if (exp < 0) return 1/cpow_int(z, -exp);
+            const double_complex ONE(1.0, 0.0);
+
+            const double_complex I(0.0, 1.0);
+
+            static inline double_complex cpow_int(double_complex z, int exp) {
+                if (exp < 0) return ONE / cpow_int(z, -exp);
                 switch (exp) {
                     case 0: return 1;
                     case 1: return z;
@@ -116,8 +110,8 @@ class CDFInterpreter(StackInterpreter):
                     case 7:
                     case 8:
                     {
-                        double complex z2 = csquareX(z);
-                        double complex z4 = csquareX(z2);
+                        double_complex z2 = csquareX(z);
+                        double_complex z4 = csquareX(z2);
                         if (exp == 4) return z4;
                         if (exp == 5) return z4 * z;
                         if (exp == 6) return z4 * z2;
@@ -125,9 +119,9 @@ class CDFInterpreter(StackInterpreter):
                         if (exp == 8) return z4 * z4;
                     }
                 }
-                if (cimag(z) == 0) return pow(creal(z), exp);
-                if (creal(z) == 0) {
-                    double r = pow(cimag(z), exp);
+                if (z.imag() == 0) return pow(z.real(), exp);
+                if (z.real() == 0) {
+                    double r = pow(z.imag(), exp);
                     switch (exp % 4) {
                         case 0:
                             return r;
@@ -139,16 +133,14 @@ class CDFInterpreter(StackInterpreter):
                             return -r * I;
                     }
                 }
-                return cpow(z, exp);
+                return pow(z, exp);
             }
             """)
 
         self.pxd_header = ri(0, """
-            # We need the type double_complex to work around
-            #   http://trac.cython.org/ticket/869
-            # so this is a bit hackish.
-            cdef extern from "complex.h":
-                ctypedef double double_complex "double complex"
+            # distutils: language = c++
+            cimport libcpp.complex
+            ctypedef libcpp.complex.complex[double] double_complex
             """)
 
         self.pyx_header = ri(0, """
@@ -157,18 +149,13 @@ class CDFInterpreter(StackInterpreter):
             import sage.rings.complex_double
             cdef object CDF = sage.rings.complex_double.CDF
 
-            cdef extern from "complex.h":
-                cdef double creal(double_complex)
-                cdef double cimag(double_complex)
-                cdef double_complex _Complex_I
-
             cdef inline double_complex CDE_to_dz(zz) noexcept:
                 cdef ComplexDoubleElement z = <ComplexDoubleElement>(zz if isinstance(zz, ComplexDoubleElement) else CDF(zz))
-                return GSL_REAL(z._complex) + _Complex_I * GSL_IMAG(z._complex)
+                return double_complex(GSL_REAL(z._complex), GSL_IMAG(z._complex))
 
             cdef inline ComplexDoubleElement dz_to_CDE(double_complex dz):
                 cdef ComplexDoubleElement z = <ComplexDoubleElement>ComplexDoubleElement.__new__(ComplexDoubleElement)
-                GSL_SET_COMPLEX(&z._complex, creal(dz), cimag(dz))
+                GSL_SET_COMPLEX(&z._complex, dz.real(), dz.imag())
                 return z
 
             cdef public bint cdf_py_call_helper(object fn,
@@ -207,15 +194,15 @@ if (!cdf_py_call_helper(i0, n_i1, i1, &o0)) {
                          ('mul', '*'), ('div', '/'),
                          ('truediv', '/')]:
             instrs.append(instr_infix(name, pg('SS', 'S'), op))
-        instrs.append(instr_funcall_2args('pow', pg('SS', 'S'), 'cpow'))
+        instrs.append(instr_funcall_2args('pow', pg('SS', 'S'), 'pow'))
         instrs.append(instr_funcall_2args('ipow', pg('SD', 'S'), 'cpow_int'))
-        for (name, op) in [('neg', '-i0'), ('invert', '1/i0'),
-                           ('abs', 'cabs(i0)')]:
+        for (name, op) in [('neg', '-i0'), ('invert', 'ONE/i0'),
+                           ('abs', 'abs(i0)')]:
             instrs.append(instr_unary(name, pg('S', 'S'), op))
         for name in ['sqrt', 'sin', 'cos', 'tan',
                      'asin', 'acos', 'atan', 'sinh', 'cosh', 'tanh',
                      'asinh', 'acosh', 'atanh', 'exp', 'log']:
-            instrs.append(instr_unary(name, pg('S', 'S'), "c%s(i0)" % name))
+            instrs.append(instr_unary(name, pg('S', 'S'), "%s(i0)" % name))
         self.instr_descs = instrs
         self._set_opcodes()
         # supported for exponents that fit in an int
