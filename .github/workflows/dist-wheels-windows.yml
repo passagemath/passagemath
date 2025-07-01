@@ -241,6 +241,7 @@ jobs:
             python-pip
             python-setuptools
             patch
+            bison
             mingw-w64-${{ matrix.env }}-cmake
             mingw-w64-${{ matrix.env }}-ninja
             mingw-w64-${{ matrix.env }}-gtest
