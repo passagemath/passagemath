@@ -197,6 +197,7 @@ jobs:
         planarity
         cliquer
         libhomfly
+        ecl
         symmetrica
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable building PyPy wheels on all platforms
@@ -244,6 +245,9 @@ jobs:
             mingw-w64-${{ matrix.env }}-cmake
             mingw-w64-${{ matrix.env }}-ninja
             mingw-w64-${{ matrix.env }}-gtest
+            mingw-w64-${{ matrix.env }}-ncurses
+            mingw-w64-${{ matrix.env }}-readline
+            mingw-w64-${{ matrix.env }}-texinfo
           msystem: ${{ matrix.msystem }}
           path-type: inherit
 
@@ -379,6 +383,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_categories
 
+      - name: sagemath-ecl
+        id:   sagemath-ecl
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_ecl
+
       - name: sagemath-graphs
         id:   sagemath-graphs
         uses: pypa/cibuildwheel@v2.23.0
@@ -470,4 +480,5 @@ jobs:
          'sagemath-homfly',
          'sagemath-combinat',
          'sagemath-planarity',
-         'sagemath-graphs']
+         'sagemath-graphs',
+         'sagemath-ecl']
