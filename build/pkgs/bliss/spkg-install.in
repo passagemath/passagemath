@@ -6,3 +6,5 @@ cd src
 sdh_cmake -GNinja -DUSE_GMP=ON -DCMAKE_VERBOSE_MAKEFILE=ON .
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
+
+sdh_generate_windows_lib_files bliss
