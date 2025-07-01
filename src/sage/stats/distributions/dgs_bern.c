@@ -36,6 +36,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <math.h>
+#include <gsl/gsl_rng.h>
 
 /*
  * balanced Bernoulli distribution, machine-precision version
@@ -190,7 +191,7 @@ dgs_bern_dp_t* dgs_bern_dp_init(double p) {
 }
 
 long dgs_bern_dp_call(dgs_bern_dp_t *self) {
-  double c = drand48();
+  double c = gsl_rng_uniform(gsl_rng_rand48);
   if (c<self->p)
     return 1;
   else
