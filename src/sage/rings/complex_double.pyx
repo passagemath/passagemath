@@ -76,9 +76,8 @@ from sage.misc.randstate cimport randstate, current_randstate
 
 from sage.libs.gsl.complex cimport *
 
-cdef extern from "<complex>" namespace "std" nogil:
-    double abs (double complex x)
-    double complex sqrt (double complex x)
+cimport libcpp.complex
+from libcpp.complex cimport abs, sqrt
 
 import sage.rings.abc
 cimport sage.rings.integer
@@ -2306,7 +2305,7 @@ cdef class ComplexDoubleElement(FieldElement):
             sage: a.agm(-a)
             0.0
         """
-        cdef double complex a, b, a1, b1, r
+        cdef libcpp.complex.complex[double] a, b, a1, b1, r
         cdef double d, e, eps = 2.0**-51
 
         if algorithm == "pari":
@@ -2334,14 +2333,14 @@ cdef class ComplexDoubleElement(FieldElement):
                 if e < d:
                     b1=-b1
                     d = e
-                if d < eps: return ComplexDoubleElement_from_doubles(a1.real, a1.imag)
+                if d < eps: return ComplexDoubleElement_from_doubles(a1.real(), a1.imag())
                 a, b = a1, b1
 
         elif algorithm=="principal":
             while True:
                 a1 = (a+b)/2
                 b1 = sqrt(a*b)
-                if abs((b1/a1)-1) < eps: return ComplexDoubleElement_from_doubles(a1.real, a1.imag)
+                if abs((b1/a1)-1) < eps: return ComplexDoubleElement_from_doubles(a1.real(), a1.imag())
                 a, b = a1, b1
 
         else:
@@ -2629,13 +2628,13 @@ def ComplexDoubleField():
 from sage.misc.parser import Parser
 cdef cdf_parser = Parser(float, float,  {"I": _CDF.gen(), "i": _CDF.gen()})
 
-cdef inline double complex extract_double_complex(ComplexDoubleElement x) noexcept:
+cdef inline libcpp.complex.complex[double] extract_double_complex(ComplexDoubleElement x) noexcept:
     """
-    Return the value of ``x`` as a c99 complex double.
+    Return the value of ``x`` as a C++ complex<double>
     """
-    cdef double complex z
-    z.real = GSL_REAL(x._complex)
-    z.imag = GSL_IMAG(x._complex)
+    cdef libcpp.complex.complex[double] z
+    z.real(GSL_REAL(x._complex))
+    z.imag(GSL_IMAG(x._complex))
     return z
 
 

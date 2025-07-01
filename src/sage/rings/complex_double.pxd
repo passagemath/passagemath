@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# distutils: language = c++
 from sage.libs.gsl.types cimport gsl_complex
 
 cimport sage.structure.element
