@@ -2,7 +2,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 01ed093..cfdb0a6 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -51,14 +51,20 @@ if(USE_GMP)
+@@ -51,14 +51,41 @@ if(USE_GMP)
  # Add the shared library
  add_library(bliss SHARED ${BLISS_SOURCE_FILES})
 +if(USE_GMP)
