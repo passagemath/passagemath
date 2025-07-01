@@ -1,6 +1,8 @@
 # sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.symbolic
-#
+# distutils: libraries = GSL_LIBRARIES
+# distutils: library_dirs = GSL_LIBDIR
+# distutils: include_dirs = GSL_INCDIR
 # distutils: sources = sage/stats/distributions/dgs_gauss_mp.c sage/stats/distributions/dgs_gauss_dp.c sage/stats/distributions/dgs_bern.c
 # distutils: depends = sage/stats/distributions/dgs_gauss.h sage/stats/distributions/dgs_bern.h sage/stats/distributions/dgs_misc.h
 # distutils: extra_compile_args = -D_XOPEN_SOURCE=600
