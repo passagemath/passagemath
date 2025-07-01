@@ -21,10 +21,7 @@ elif dnf5 --version > /dev/null 2>&1; then
 elif pacman --version > /dev/null 2>&1; then
     case `uname -s` in
         MINGW64*)
-            # All the package names for MSYS hardcode the
-            # architecture and whether they're 32 or 64-bit
-            # so just assume we're on x86 on 64-bit for now
-            echo msys_x86_64
+            echo mingw
             ;;
         *)
             echo arch

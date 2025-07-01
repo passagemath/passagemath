@@ -159,10 +159,10 @@ case $system:$command in
     gentoo*:install)
         [ -n "$system_packages" ] && print_shell_command ${SUDO}emerge $system_packages
         ;;
-    @(arch|msys)*:update)
+    @(arch|msys|mingw)*:update)
         print_shell_command "${SUDO}pacman -Sy"
         ;;
-    @(arch|msys)*:install)
+    @(arch|msys|mingw)*:install)
         [ "$YES" = yes ] && options="$options --noconfirm"
         if [ "$IGNORE_MISSING" = yes ]; then
             [ -n "$system_packages" ] && echo "for pkg in $system_packages; do ${SUDO}pacman -S $options \$pkg || true; done"

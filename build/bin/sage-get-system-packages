@@ -58,7 +58,7 @@ case "$SYSTEM" in
             fi
         fi
         SYSTEM_PACKAGES_FILE_NAMES="distros/$SYSTEM.txt"
-        STRIP_COMMENTS="sed s/#.*//;s/\${PYTHON_MINOR}/${PYTHON_MINOR}/g"
+        STRIP_COMMENTS="sed s/#.*//;s/\${PYTHON_MINOR}/${PYTHON_MINOR}/g;s/\${MINGW_PACKAGE_PREFIX}/${MINGW_PACKAGE_PREFIX}/g"
         COLLECT=echo
         ;;
 esac

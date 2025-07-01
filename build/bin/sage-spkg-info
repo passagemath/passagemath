@@ -91,6 +91,7 @@ for system in $systems; do
             gentoo)     tab "Gentoo Linux";;
             homebrew)   tab "Homebrew";;
             macports)   tab "MacPorts";;
+            mingw)      tab "mingw-w64";;
             nix)        tab "Nixpkgs";;
             openbsd)    tab "OpenBSD";;
             opensuse)   tab "openSUSE";;
