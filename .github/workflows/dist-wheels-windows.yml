@@ -247,6 +247,7 @@ jobs:
             mingw-w64-${{ matrix.env }}-gtest
             mingw-w64-${{ matrix.env }}-ncurses
             mingw-w64-${{ matrix.env }}-readline
+            mingw-w64-${{ matrix.env }}-texinfo
           msystem: ${{ matrix.msystem }}
           path-type: inherit
 
