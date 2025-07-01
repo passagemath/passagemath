@@ -2,4 +2,13 @@
 unset MSYS
 
 cd src
-sdh_make_install
+
+if [ -n $MSYSTEM ]; then
+    sdh_cmake -G Ninja \
+        -DENABLE_ARCH=NO \
+        .
+    cmake --build .
+    DESTDIR=$SAGE_DESTDIR cmake --install .
+else
+    sdh_make_install
+fi
