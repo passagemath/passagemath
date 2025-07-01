@@ -1,6 +1,13 @@
 # SAGE_CHECK_PYTHON_FOR_VENV(PYTHON_EXE, MIN_VERSION, LT_VERSION, REQUIRED_MODULES, COMMANDS_IF_GOOD)
 
 AC_DEFUN([SAGE_CHECK_PYTHON_FOR_VENV], [
+
+                AC_ARG_ENABLE([python-distutils-check],
+                              [AS_HELP_STRING([--disable-python-distutils-check],
+                                              [do not check that Python can build C/C++ extensions])],
+                              [enable_python_distutils_check=$enableval],
+                              [enable_python_distutils_check=yes])
+
                 m4_pushdef([PYTHON_EXE],       [$1])
                 m4_pushdef([MIN_VERSION],      [$2])
                 m4_pushdef([LT_VERSION],       [$3])
@@ -80,12 +87,6 @@ AC_DEFUN([SAGE_CHECK_PYTHON_FOR_VENV], [
                 m4_popdef([COMMANDS_IF_GOOD])
 
 ])
-
-AC_ARG_ENABLE([python-distutils-check],
-              [AS_HELP_STRING([--disable-python-distutils-check],
-                              [do not check that Python can build C/C++ extensions])],
-              [enable_python_distutils_check=$enableval],
-              [enable_python_distutils_check=yes])
 
 dnl distutils test
 AC_DEFUN([SAGE_PYTHON_CHECK_DISTUTILS], [
