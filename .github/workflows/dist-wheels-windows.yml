@@ -425,6 +425,15 @@ jobs:
         with:
           package-dir: unpacked/passagemath_combinat
 
+        ####### sagemath-modules and what depends on it
+
+      - name: sagemath-modules
+        id:   sagemath-modules
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_modules
+
+
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
