@@ -2,7 +2,21 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 01ed093..cfdb0a6 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -62,3 +62,27 @@ if(USE_GMP)
+@@ -51,14 +51,41 @@ if(USE_GMP)
+ # Add the shared library
+ add_library(bliss SHARED ${BLISS_SOURCE_FILES})
++if(USE_GMP)
++  target_link_libraries(bliss ${GMP_LIBRARIES})
++endif(USE_GMP)
+ set_property(TARGET bliss PROPERTY POSITION_INDEPENDENT_CODE 1)
+
+ # Add the static library
+ add_library(bliss_static STATIC ${BLISS_SOURCE_FILES})
+
+ # Add the executable
+ add_executable(bliss-executable src/bliss.cc)
+ target_link_libraries(bliss-executable bliss_static)
+ if(USE_GMP)
    target_link_libraries(bliss-executable ${GMP_LIBRARIES})
  endif(USE_GMP)
  set_target_properties(bliss-executable PROPERTIES OUTPUT_NAME bliss)
