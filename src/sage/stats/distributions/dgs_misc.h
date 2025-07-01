@@ -69,9 +69,9 @@ static inline unsigned long _dgs_randomb_libc(size_t nbits) {
   size_t n = __DGS_LSB_BITMASK(nbits);
   assert(((RAND_MAX | (RAND_MAX >> 1)) == RAND_MAX));
   if (__DGS_LIKELY(n <= RAND_MAX))
-    return random() & n;
+    return rand() & n;
   assert(RAND_MAX >= __DGS_LSB_BITMASK(22));
-  unsigned long pool = (((unsigned long)random()) << 0) ^ (((unsigned long)random()) << 22) ^ (((unsigned long)random()) << 44);
+  unsigned long pool = (((unsigned long)rand()) << 0) ^ (((unsigned long)rand()) << 22) ^ (((unsigned long)rand()) << 44);
   return pool & n;
 }
 
@@ -80,7 +80,7 @@ static inline unsigned long _dgs_randomm_libc(unsigned long n) {
   long r;
   unsigned long k = RAND_MAX/n;
   do {
-    r = random();
+    r = rand();
   } while (r >= k*n);
   return r%n;
 }
