@@ -495,12 +495,17 @@ class DocTestReporter(SageObject):
                     fail_msg += " (with error after interrupt)"
                 elif return_code < 0:
                     sig = -return_code
-                    if sig == SIGQUIT:
-                        pass  # and interrupt succeeded
-                    elif sig == SIGKILL:
-                        fail_msg += " (and interrupt failed)"
-                    else:
+                    try:
+                        from signal import SIGKILL, SIGQUIT
+                    except ImportError:
                         fail_msg += " (with %s after interrupt)" % signal_name(sig)
+                    else:
+                        if sig == SIGQUIT:
+                            pass  # and interrupt succeeded
+                        elif sig == SIGKILL:
+                            fail_msg += " (and interrupt failed)"
+                        else:
+                            fail_msg += " (with %s after interrupt)" % signal_name(sig)
                 self._log_failure(source, fail_msg, f"{process_name} timed out", output)
                 postscript['lines'].append(self.report_head(source, fail_msg))
                 stats[basename] = {"failed": True, "walltime": 1e6, "ntests": ntests}
