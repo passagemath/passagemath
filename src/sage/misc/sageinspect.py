@@ -2669,7 +2669,7 @@ def __internal_tests():
 
         sage: import sage.all__sagemath_objects
         sage: sage_getsource(sage.all__sagemath_objects)
-        '...all...'
+        "...all..."
 
     A cython function with default arguments (one of which is a string)::
 
