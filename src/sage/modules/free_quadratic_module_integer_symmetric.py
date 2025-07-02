@@ -392,8 +392,9 @@ def IntegralLatticeGluing(Lattices, glue, return_embeddings=False):
 
     A single lattice can be glued. This is the same as taking an overlattice::
 
-        sage: # needs sage.libs.pari
         sage: from sage.modules.free_quadratic_module_integer_symmetric import IntegralLatticeGluing
+
+        sage: # needs sage.libs.pari
         sage: L1 = IntegralLattice(matrix([[4]]))
         sage: g1 = L1.discriminant_group().gens()[0]
         sage: glue = [[2 * g1]]
