@@ -48,7 +48,7 @@ class CDFInterpreter(StackInterpreter):
             sage: instrs['add']
             add: SS->S = 'o0 = i0 + i1;'
             sage: instrs['sin']
-            sin: S->S = 'o0 = csin(i0);'
+            sin: S->S = 'o0 = sin(i0);'
             sage: instrs['py_call']
             py_call: *->S = '\nif (!cdf_py_call_...goto error;\n}\n'
 
