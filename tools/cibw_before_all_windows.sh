@@ -4,6 +4,7 @@ pwd
 echo > constraints.txt
 PREFIX=$(pwd)/sage-local
 rm -rf sage-local/lib64  # avoid 'lib64 is not a symlink, see Issue #19782'
+export MSYS=winsymlinks
 if [ -x ./config.status ]; then
     ./config.status
 else
