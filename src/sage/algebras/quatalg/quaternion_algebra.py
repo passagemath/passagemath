@@ -3113,7 +3113,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         Scaling by `1` should not change anything (see :issue:`32245`)::
 
-            sage: I.scale(1) == I
+            sage: I.scale(1) == I                                                       # needs sage.schemes
             True
 
         Check that :issue:`32726` is fixed::
@@ -4145,7 +4145,6 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
             2
             sage: R[0].is_right_equivalent(R[1])
             False
-
             sage: R[0].is_right_equivalent(R[0])
             True
             sage: OO = R[0].left_order()
@@ -4327,7 +4326,7 @@ class QuaternionFractionalIdeal_rational(QuaternionFractionalIdeal):
 
         The general algorithm is not yet implemented here::
 
-            sage: I.cyclic_right_subideals(3)[0].cyclic_right_subideals(3)
+            sage: I.cyclic_right_subideals(3)[0].cyclic_right_subideals(3)              # needs sage.schemes
             Traceback (most recent call last):
             ...
             NotImplementedError: general algorithm not implemented

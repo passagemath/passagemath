@@ -630,7 +630,7 @@ class WeierstrassIsomorphism(EllipticCurveHom, baseWI):
         EXAMPLES::
 
             sage: # needs database_cremona_mini_ellcurve
-            sage: from sage.schemes.elliptic_curves.weierstrass_morphism import *
+            sage: from sage.schemes.elliptic_curves.weierstrass_morphism import WeierstrassIsomorphism
             sage: E = EllipticCurve('37a1')
             sage: w = WeierstrassIsomorphism(E,(2,3,4,5))
             sage: P = E(0,-1)
@@ -736,7 +736,7 @@ class WeierstrassIsomorphism(EllipticCurveHom, baseWI):
             sage: phi = E1.isogeny(E1(0,0))
             sage: E2 = phi.codomain()
             sage: psi = E2.isogeny(E2(0,0))
-            sage: w1._composition_impl(psi, phi)
+            sage: w1._composition_impl(psi, phi)                                        # needs database_cremona_mini_ellcurve
             NotImplemented
         """
         if isinstance(left, WeierstrassIsomorphism) and isinstance(right, WeierstrassIsomorphism):

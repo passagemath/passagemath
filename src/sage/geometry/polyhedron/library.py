@@ -1894,10 +1894,11 @@ class Polytopes:
 
         TESTS::
 
-            sage: ti = polytopes.truncated_icosidodecahedron(backend='normaliz')  # optional - pynormaliz
+            sage: # optional - pynormaliz
+            sage: ti = polytopes.truncated_icosidodecahedron(backend='normaliz')
             sage: ti.f_vector()
             (1, 120, 180, 62, 1)
-            sage: ti.base_ring()                                                  # optional - pynormaliz
+            sage: ti.base_ring()
             Number Field in sqrt5 with defining polynomial x^2 - 5 with sqrt5 = 2.236067977499790?
         """
         if base_ring is None and exact:

@@ -169,8 +169,9 @@ class OreModules(Category_over_base_ring):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
             sage: from sage.categories.ore_modules import OreModules
+
+            sage: # needs sage.modules
             sage: R.<t> = QQ[]
             sage: d = R.derivation()
             sage: cat = OreModules(R, d)
