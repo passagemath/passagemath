@@ -3,7 +3,7 @@ r"""
 Features for testing the presence of ``4ti2``
 """
 
-from . import Executable
+from . import Executable, PythonModule
 from .join_feature import JoinFeature
 
 
@@ -48,7 +48,8 @@ class FourTi2(JoinFeature):
                              [FourTi2Executable(x)
                               # same list is tested in build/pkgs/4ti2/spkg-configure.m4
                               for x in ('hilbert', 'markov', 'graver', 'zsolve', 'qsolve',
-                                        'rays', 'ppi', 'circuits', 'groebner')])
+                                        'rays', 'ppi', 'circuits', 'groebner')]
+                             + [PythonModule('sage.interfaces.four_ti_2')])
 
 
 def all_features():
