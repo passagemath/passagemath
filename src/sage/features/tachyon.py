@@ -12,7 +12,6 @@ Feature for testing the presence of Tachyon
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
 
-import subprocess
 from . import Executable, FeatureTestResult, PythonModule
 from .join_feature import JoinFeature
 
