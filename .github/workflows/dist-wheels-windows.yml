@@ -479,11 +479,14 @@ jobs:
       run-id: ${{ github.run_id }}
       oss: "['windows-2022']"
       distributions: >-
-        ['sagemath-categories',
-         'sagemath-cliquer',
-         'sagemath-rankwidth',
+        [
+         'sagemath-categories',
          'sagemath-cddlib',
-         'sagemath-homfly',
+         'sagemath-cliquer',
          'sagemath-combinat',
+         'sagemath-graphs',
+         'sagemath-homfly',
+         'sagemath-modules',
          'sagemath-planarity',
-         'sagemath-graphs']
+         'sagemath-rankwidth',
+        ]
