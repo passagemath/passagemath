@@ -9,7 +9,10 @@ on purpose because it does print stuff, see :issue:`31655`.::
     sage: from sage.misc.lazy_import import LazyImport
     sage: G = globals()
     sage: for name, obj in sorted(G.items()):
-    ....:     if name == 'libgiac':
+    ....:     if name in ('libgiac', 'FriCAS', 'Gfan', 'Macaulay2', 'four_ti_2',
+    ....:                 'fricas', 'fricas_console', 'frobby', 'gfan', 'macaulay2',
+    ....:                 'macaulay2_console', 'qepcad', 'qepcad_console',
+    ....:                 'qepcad_formula', 'qepcad_version'):
     ....:          continue
     ....:     if type(obj) is LazyImport and obj._get_deprecation_issue() == 0:
     ....:         try:

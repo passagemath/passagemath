@@ -3361,8 +3361,7 @@ class LazyCauchyProductSeries(LazyModuleElement):
             sage: E = L(lambda n: h[n])
             sage: (~E)[:4]
             [p[], -p[1], 1/2*p[1, 1] - 1/2*p[2], -1/6*p[1, 1, 1] + 1/2*p[2, 1] - 1/3*p[3]]
-
-            sage: (E * ~E)[:6]                                                          # needs sage.modules
+            sage: (E * ~E)[:6]
             [p[], 0, 0, 0, 0, 0]
 
         TESTS::
@@ -3714,7 +3713,7 @@ class LazyCauchyProductSeries(LazyModuleElement):
         TESTS::
 
             sage: L.<z> = LazyLaurentSeriesRing(QQ); x = var("x")                       # needs sage.symbolic
-            sage: exp(z)[0:6] == exp(x).series(x, 6).coefficients(sparse=False)
+            sage: exp(z)[0:6] == exp(x).series(x, 6).coefficients(sparse=False)         # needs sage.symbolic
             True
 
         Check the exponential when the base ring is a lazy ring::
@@ -6903,7 +6902,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
         The species `C` of cyclic orderings and the species `L` of linear
         orderings satisfy the relationship `C' = L`::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: p = SymmetricFunctions(QQ).p()
             sage: C = T(lambda n: (sum(euler_phi(k)*p([k])**(n//k)
             ....:                      for k in divisors(n))/n if n > 0 else 0))
@@ -6913,7 +6912,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         TESTS::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: T = LazySymmetricFunctions(p)
             sage: a = T(p([1,1,1]))
             sage: a.derivative_with_respect_to_p1()
@@ -7043,7 +7042,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         The symmetric function `\sum_n h_n` is a left absorbing element::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: H.functorial_composition(f) - H
             O^7
 

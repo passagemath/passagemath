@@ -864,11 +864,10 @@ class Polytopes:
 
         Its non exact version::
 
-            sage: sr = polytopes.small_rhombicuboctahedron(False)                       # needs cddexec
-            sage: sr
+            sage: sr = polytopes.small_rhombicuboctahedron(False); sr                   # needs cddexec
             A 3-dimensional polyhedron in RDF^3 defined as the convex hull of
             24 vertices
-            sage: sr.f_vector()
+            sage: sr.f_vector()                                                         # needs cddexec
             (1, 24, 48, 26, 1)
 
         TESTS::
@@ -934,6 +933,7 @@ class Polytopes:
 
         Its facets are 4 squares, 8 regular hexagons and 6 regular octagons::
 
+            sage: # needs cddexec
             sage: sum(1 for f in gr.facets() if len(f.vertices()) == 4)
             12
             sage: sum(1 for f in gr.facets() if len(f.vertices()) == 6)
@@ -1556,6 +1556,7 @@ class Polytopes:
 
         Its facets are 20 triangles and 12 regular pentagons::
 
+            sage: # needs cddexec
             sage: sum(1 for f in id.facets() if len(f.vertices()) == 3)
             20
             sage: sum(1 for f in id.facets() if len(f.vertices()) == 5)
@@ -1802,6 +1803,7 @@ class Polytopes:
 
         Its facets are 20 triangles, 30 squares and 12 pentagons::
 
+            sage: # needs cddexec
             sage: sum(1 for f in rid.facets() if len(f.vertices()) == 3)
             20
             sage: sum(1 for f in rid.facets() if len(f.vertices()) == 4)
@@ -1882,6 +1884,7 @@ class Polytopes:
 
         Its facets are 30 squares, 20 hexagons and 12 decagons::
 
+            sage: # needs cddexec
             sage: sum(1 for f in ti.facets() if len(f.vertices()) == 4)
             30
             sage: sum(1 for f in ti.facets() if len(f.vertices()) == 6)
