@@ -180,7 +180,7 @@ jobs:
           arch:    auto
           build:   "win_*64"
         - os:      windows-11-arm
-          msystem: clang64
+          msystem: clangarm64
           env:     clang-aarch64
           arch:    auto
           build:   "win_*64"
