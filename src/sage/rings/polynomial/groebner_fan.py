@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-gfan
+# sage.doctest: optional - gfan
 r"""
 Groebner Fans
 
