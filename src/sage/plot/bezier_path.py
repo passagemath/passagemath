@@ -261,9 +261,9 @@ class BezierPath(GraphicPrimitive_xydata):
             sage: b = bezier_path([[(0,0),(.5,.5),(1,0)],[(.5,1),(0,0)]])
             sage: d = b.get_minmax_data()
             sage: d['xmin']
-            0.0
+            np.float64(0.0)
             sage: d['xmax']
-            1.0
+            np.float64(1.0)
         """
         return {'xmin': self.vertices[:,0].min(),
                 'xmax': self.vertices[:,0].max(),
