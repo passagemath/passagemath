@@ -1936,7 +1936,7 @@ class IncidenceStructure:
             sage: cls # random
             [[[0, 3], [1, 2]], [[1, 3], [0, 2]]]
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.modules
             sage: b, cls = AG.is_resolvable(True)
             sage: b
             True
@@ -1959,7 +1959,7 @@ class IncidenceStructure:
 
         TESTS::
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.modules
             sage: _, cls1 = AG.is_resolvable(certificate=True)
             sage: _, cls2 = AG.is_resolvable(certificate=True)
             sage: cls1 is cls2
