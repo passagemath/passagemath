@@ -3303,8 +3303,6 @@ class Stream_plethysm(Stream_binary):
              + 1/12*p[4, 1, 1, 1] + 1/4*p[4, 2, 1] + 1/6*p[4, 3]
             sage: A == p[2, 1](s[2] + s[3]).homogeneous_component(7)
             True
-
-            sage: # needs sage.modules
             sage: p2 = tensor([p, p])
             sage: f = Stream_exact([1]) # irrelevant for this test
             sage: g = Stream_function(lambda n: sum(tensor([p[k], p[n-k]])
@@ -3316,8 +3314,6 @@ class Stream_plethysm(Stream_binary):
             ....:                           if sum(mu.size() for mu in m) == 7})
             sage: A == B
             True
-
-            sage: # needs sage.modules
             sage: f = Stream_exact([1]) # irrelevant for this test
             sage: g = Stream_function(lambda n: s[n], True, 0)
             sage: h = Stream_plethysm(f, g, True, p)
@@ -3379,8 +3375,6 @@ class Stream_plethysm(Stream_binary):
             sage: A = h.stretched_power_restrict_degree(2, 3, 6)
             sage: A == p[2,2,2](s[2] + s[3]).homogeneous_component(12)
             True
-
-            sage: # needs sage.modules
             sage: p2 = tensor([p, p])
             sage: f = Stream_exact([1]) # irrelevant for this test
             sage: g = Stream_function(lambda n: sum(tensor([p[k], p[n-k]])
