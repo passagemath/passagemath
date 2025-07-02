@@ -166,10 +166,6 @@ class DocTestDefaults(SageObject):
         # < 0: disable GC
         self.gc = 0
 
-        # Do not assume that sage.misc.misc has been loaded,
-        # which creates DOT_SAGE as a side effect.
-        os.makedirs(DOT_SAGE, mode=0o700, exist_ok=True)
-
         # We don't want to use the real stats file by default so that
         # we don't overwrite timings for the actual running doctests.
         self.stats_path = os.path.join(
@@ -584,6 +580,10 @@ class DocTestController(SageObject):
             self.logger = self._real_stdout
         else:
             self.logger = Logger(self._real_stdout, self.logfile)
+
+        # Do not assume that sage.misc.misc has been loaded,
+        # which creates DOT_SAGE as a side effect.
+        os.makedirs(DOT_SAGE, mode=0o700, exist_ok=True)
 
         self.stats = {}
         self.load_stats(options.stats_path)
