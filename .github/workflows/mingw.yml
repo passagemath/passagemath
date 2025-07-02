@@ -43,7 +43,7 @@ jobs:
           msystem: ucrt64
           env:     ucrt-x86_64
         - os:      windows-11-arm
-          msystem: clang64
+          msystem: clangarm64
           env:     clang-aarch64
     steps:
       - name: Check out SageMath
