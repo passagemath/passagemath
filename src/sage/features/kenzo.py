@@ -16,7 +16,8 @@ Feature for testing the presence of ``kenzo``
 # ****************************************************************************
 
 
-from . import Feature, FeatureTestResult
+from . import Feature, FeatureTestResult, PythonModule
+from .join_feature import JoinFeature
 
 
 class Kenzo(Feature):
@@ -37,7 +38,7 @@ class Kenzo(Feature):
             sage: isinstance(Kenzo(), Kenzo)
             True
         """
-        Feature.__init__(self, name='kenzo', spkg='kenzo',
+        Feature.__init__(self, name='kenzo_module', spkg='kenzo',
                          url='https://github.com/miguelmarco/kenzo/')
 
     def _is_present(self):
@@ -75,4 +76,7 @@ class Kenzo(Feature):
 
 
 def all_features():
-    return [Kenzo()]
+    return [JoinFeature("kenzo",
+                        (Kenzo(),
+                         PythonModule('sage.interfaces.kenzo')),
+                        spkg='sagemath_kenzo')]
