@@ -101,6 +101,10 @@ warnings.filterwarnings('ignore', category=DeprecationWarning,
                         message=r"Pickle, copy, and deepcopy support will be "
                                 r"removed from itertools in Python 3.14.")
 
+# ipykernel
+warnings.filterwarnings('ignore', category=DeprecationWarning,
+                        message=r"Parsing dates involving a day of month without a year.*")
+
 from sage.all__sagemath_objects import *
 from sage.all__sagemath_environment import *
 
