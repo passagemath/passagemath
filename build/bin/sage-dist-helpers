@@ -518,7 +518,7 @@ sdh_generate_windows_lib_files() {
 
         # See http://stackoverflow.com/questions/9946322/
         cd "$SAGE_DESTDIR$SAGE_LOCAL/bin"
-        for dll_file in lib${pattern}-*.dll
+        for dll_file in *${pattern}*.dll
         do
             lib_name=$(basename -s .dll ${dll_file})
             exports_file=${lib_name}-exports.txt
@@ -536,7 +536,9 @@ sdh_generate_windows_lib_files() {
             lib //def:${def_file} //out:${lib_file} //machine:x64
 
             rm ${exports_file} ${def_file} ${lib_name}.exp
-            mv ${lib_file} ${name}.lib
+            if [ "${lib_file}" != "${name}.lib" ]; then
+                mv ${lib_file} ${name}.lib
+            fi
         done
     fi
 }

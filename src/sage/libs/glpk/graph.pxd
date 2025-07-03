@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-glpk
-# distutils: libraries = glpk z gmp
+# distutils: libraries = glpk ZLIB_LIBRARIES gmp
 
 #*****************************************************************************
 #       Copyright (C) 2012 Christian Kuper <christian.kuper@t-online.de>

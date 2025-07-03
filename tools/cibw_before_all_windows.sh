@@ -12,6 +12,6 @@ else
     mkdir -p logs/pkgs
     touch logs/pkgs/config.log
     ln -s logs/pkgs/config.log config.log
-    ./configure --enable-build-as-root --enable-fat-binary --prefix=$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --disable-python-distutils-check --without-system-libpng
+    ./configure --enable-build-as-root --enable-fat-binary --prefix=$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --disable-python-distutils-check --without-system-libpng --without-system-zlib
 fi
 MAKE="make -j6" make V=0 $TARGETS_PRE
