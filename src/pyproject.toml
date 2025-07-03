@@ -44,7 +44,7 @@ dependencies = [
     'numpy >=1.19',
     'pkgconfig',
     'passagemath-ppl',
-    'primecountpy',
+    'passagemath-primesieve-primecount',
     'requests >=2.13.0',
     # According to https://github.com/python/typing_extensions/blob/main/CHANGELOG.md,
     # version 4.7.0 adds another Python 3.12 typing backport
