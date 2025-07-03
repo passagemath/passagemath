@@ -8,5 +8,5 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-glpk'],
-           required_modules=('z',),
+           required_modules=('zlib',),
            spkgs=['glpk'])
