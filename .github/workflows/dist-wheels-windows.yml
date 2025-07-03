@@ -482,6 +482,10 @@ jobs:
          'windows-2022',
          'windows-11-arm',
         ]
+      python-versions: >-
+        [
+         '3.13',
+        ]
       distributions: >-
         [
          'sagemath-categories',
