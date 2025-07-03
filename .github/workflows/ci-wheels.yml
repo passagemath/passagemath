@@ -109,6 +109,7 @@ jobs:
                             "macos-13",
                             "macos-14",
                             "windows-2022",
+                            "windows-11-arm",
                            ]') }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -197,6 +198,7 @@ jobs:
               ubuntu*)  tag="manylinux*_x86_64";;
               macos-13) tag="macosx_*_x86_64";;
               macos-14) tag="macosx_*_arm64";;
+              windows*-arm) tag="win_arm64";;
               windows*) tag="win_amd64";;
           esac
           # Run tox
