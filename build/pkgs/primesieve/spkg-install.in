@@ -15,3 +15,5 @@ sdh_cmake -GNinja \
 
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
+
+sdh_generate_windows_lib_files primesieve
