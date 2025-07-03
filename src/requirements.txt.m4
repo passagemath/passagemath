@@ -30,7 +30,7 @@ memory_allocator==esyscmd(`printf $(sed "s/[.]p.*//;" ../memory_allocator/packag
 numpy==esyscmd(`printf $(sed "s/[.]p.*//;" ../numpy/package-version.txt)')
 dnl ... already needed by sage.env
 pkgconfig==esyscmd(`printf $(sed "s/[.]p.*//;" ../pkgconfig/package-version.txt)')
-pplpy==esyscmd(`printf $(sed "s/[.]p.*//;" ../pplpy/package-version.txt)')
+passagemath-ppl==esyscmd(`printf $(sed "s/[.]p.*//;" ../pplpy/package-version.txt)')
 primecountpy==esyscmd(`printf $(sed "s/[.]p.*//;" ../primecountpy/package-version.txt)')
 requests==esyscmd(`printf $(sed "s/[.]p.*//;" ../requests/package-version.txt)')
 typing_extensions==esyscmd(`printf $(sed "s/[.]p.*//;" ../typing_extensions/package-version.txt)')
