@@ -490,7 +490,15 @@ jobs:
     uses: ./.github/workflows/ci-wheels.yml
     with:
       run-id: ${{ github.run_id }}
-      oss: "['windows-2022']"
+      oss: >-
+        [
+         'windows-2022',
+         'windows-11-arm',
+        ]
+      python-versions: >-
+        [
+         '3.13',
+        ]
       distributions: >-
         [
          'sagemath-categories',
