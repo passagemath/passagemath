@@ -482,6 +482,10 @@ def cython_aliases(required_modules=None, optional_modules=None):
         var = lib.upper().replace("-", "") + "_"
         if lib == 'cblas':
             lib = get_cblas_pc_module_name()
+        if system == 'Windows':
+            aliases[var + "CFLAGS"] = aliases[var + "INCDIR"] = aliases[var + "LIBDIR"] = aliases[var + "LIBEXTRA"] = []
+            aliases[var + "LIBRARIES"] = lib
+            continue
         if lib == 'zlib':
             aliases[var + "CFLAGS"] = ""
             try:
@@ -491,10 +495,6 @@ def cython_aliases(required_modules=None, optional_modules=None):
                 from collections import defaultdict
                 pc = defaultdict(list, {'libraries': ['z']})
                 libs = "-lz"
-        elif system == 'Windows':
-            aliases[var + "CFLAGS"] = aliases[var + "INCDIR"] = aliases[var + "LIBDIR"] = aliases[var + "LIBEXTRA"] = []
-            aliases[var + "LIBRARIES"] = lib
-            continue
         elif lib == 'ecl':
             try:
                 # Determine ecl-specific compiler arguments using the ecl-config script
