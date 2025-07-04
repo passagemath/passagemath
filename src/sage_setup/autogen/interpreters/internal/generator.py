@@ -503,11 +503,11 @@ class InterpreterGenerator:
 
         w(je(ri(0, """
             # {{ warn }}
+            {% print(s.pxd_header) %}
 
             from cpython.ref cimport PyObject
 
             from sage.ext.fast_callable cimport Wrapper
-            {% print(s.pxd_header) %}
 
             cdef class Wrapper_{{ s.name }}(Wrapper):
             {% for ty in types %}
