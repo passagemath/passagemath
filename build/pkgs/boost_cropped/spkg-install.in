@@ -1,5 +1,7 @@
 cd src
 sdh_cmake -GNinja \
+      -DBUILD_STATIC_LIBS=OFF \
+      -DBUILD_SHARED_LIBS=ON \
       -DBOOST_INSTALL_LAYOUT=tagged \
       .
 cmake --build .
