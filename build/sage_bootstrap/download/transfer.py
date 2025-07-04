@@ -15,6 +15,7 @@ Download files from the internet
 #*****************************************************************************
 
 
+import os
 import sys
 import logging
 log = logging.getLogger()
@@ -120,6 +121,11 @@ class Download(object):
             self.progress_bar.error_stop()
     
     def run(self):
+        if os.system('curl --version > /dev/null') == 0:
+            if os.system('curl -L --fail "{0}" -o "{1}"'.format(self.url, self.destination)) != 0:
+                if not self.ignore_errors:
+                    raise IOError
+            return
         opener = urllib.FancyURLopener()
         opener.http_error_default = self.http_error_default
         self.start_progress_bar()
