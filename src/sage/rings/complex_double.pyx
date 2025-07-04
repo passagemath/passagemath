@@ -2,6 +2,7 @@
 # distutils: extra_compile_args = -D_XPG6
 # distutils: libraries = M_LIBRARIES
 # distutils: language = c++
+# distutils: extra_compile_args = -std=c++11
 r"""
 Double precision floating point complex numbers
 
