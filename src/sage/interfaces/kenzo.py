@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-kenzo
+# sage.doctest: optional - kenzo
 r"""
 Library interface to Kenzo
 
