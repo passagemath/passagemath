@@ -1,0 +1,163 @@
+commit 36593fecc1f586c826d680db91fa2bc02403195a
+Author: Kim Walisch <kim.walisch@gmail.com>
+Date:   Fri Jul 4 12:54:53 2025 +0200
+
+    Support building primecount.dll using MinGW #89
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f9f8cdcc..eacfe2f8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -46,8 +46,11 @@ option(WITH_LIBDIVIDE "Use libdivide.h" ${DEFAULT_LIBDIVIDE})
+ # Option sanity checks ###############################################
+ 
+ # We don't yet support building libprimecount as a shared DLL
+-# library on Windows. If you need this let me know...
+-if(WIN32)
++# library on Windows using the MSVC compiler. The MSVC compiler
++# by default does not allow accessing global variables that
++# are inside a DLL, unless all those variables are annotated
++# using __declspec(dllexport) and __declspec(dllimport).
++if(WIN32 AND NOT MINGW)
+     set(BUILD_SHARED_LIBS OFF)
+ endif()
+ 
+@@ -326,6 +329,16 @@ if(BUILD_PRIMECOUNT)
+     target_compile_features(primecount PRIVATE cxx_auto_type)
+     install(TARGETS primecount DESTINATION ${CMAKE_INSTALL_BINDIR})
+ 
++    # Copy primesieve.dll into the same directory as primecount.exe.
++    # On Windows the DLLs must be in the same directory as the
++    # binaries that depend on them.
++    if (WIN32 AND NOT STATICALLY_LINK_LIBPRIMECOUNT)
++        add_custom_command(TARGET primecount POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimesieve>
++                $<TARGET_FILE_DIR:primecount>)
++    endif()
++
+     if(WITH_MSVC_CRT_STATIC)
+         set_target_properties(primecount PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded")
+     endif()
+diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
+index dbeffaf2..bbc0db46 100644
+--- a/test/CMakeLists.txt
++++ b/test/CMakeLists.txt
+@@ -14,6 +14,21 @@ foreach(file ${files})
+         ${CMAKE_SOURCE_DIR}/src/lmo)
+ 
+     add_test(NAME ${binary_name} COMMAND ${binary_name})
++
++    # Copy primecount.dll and primesieve.dll to test directory.
++    # On Windows the DLLs must be in the same directory as the
++    # binaries that depend on them.
++    if (WIN32 AND NOT STATICALLY_LINK_LIBPRIMECOUNT)
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimecount>
++                $<TARGET_FILE_DIR:${binary_name}>)
++
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimesieve>
++                $<TARGET_FILE_DIR:${binary_name}>)
++    endif()
+ endforeach()
+ 
+ # The order here is important, we want simpler implementations
+diff --git a/test/api/CMakeLists.txt b/test/api/CMakeLists.txt
+index c9d40a61..bf54f4a5 100644
+--- a/test/api/CMakeLists.txt
++++ b/test/api/CMakeLists.txt
+@@ -15,4 +15,19 @@ foreach(file ${files})
+         ${CMAKE_SOURCE_DIR}/src/lmo)
+ 
+     add_test(NAME ${binary_name} COMMAND ${binary_name})
++
++    # Copy primecount.dll and primesieve.dll to test directory.
++    # On Windows the DLLs must be in the same directory as the
++    # binaries that depend on them.
++    if (WIN32 AND NOT STATICALLY_LINK_LIBPRIMECOUNT)
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimecount>
++                $<TARGET_FILE_DIR:${binary_name}>)
++
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimesieve>
++                $<TARGET_FILE_DIR:${binary_name}>)
++    endif()
+ endforeach()
+diff --git a/test/deleglise-rivat/CMakeLists.txt b/test/deleglise-rivat/CMakeLists.txt
+index aa3d0a05..696fb7fe 100644
+--- a/test/deleglise-rivat/CMakeLists.txt
++++ b/test/deleglise-rivat/CMakeLists.txt
+@@ -14,4 +14,19 @@ foreach(file ${files})
+         ${CMAKE_SOURCE_DIR}/src/lmo)
+ 
+     add_test(NAME ${binary_name} COMMAND ${binary_name})
++
++    # Copy primecount.dll and primesieve.dll to test directory.
++    # On Windows the DLLs must be in the same directory as the
++    # binaries that depend on them.
++    if (WIN32 AND NOT STATICALLY_LINK_LIBPRIMECOUNT)
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimecount>
++                $<TARGET_FILE_DIR:${binary_name}>)
++
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimesieve>
++                $<TARGET_FILE_DIR:${binary_name}>)
++    endif()
+ endforeach()
+diff --git a/test/gourdon/CMakeLists.txt b/test/gourdon/CMakeLists.txt
+index aa3d0a05..696fb7fe 100644
+--- a/test/gourdon/CMakeLists.txt
++++ b/test/gourdon/CMakeLists.txt
+@@ -14,4 +14,19 @@ foreach(file ${files})
+         ${CMAKE_SOURCE_DIR}/src/lmo)
+ 
+     add_test(NAME ${binary_name} COMMAND ${binary_name})
++
++    # Copy primecount.dll and primesieve.dll to test directory.
++    # On Windows the DLLs must be in the same directory as the
++    # binaries that depend on them.
++    if (WIN32 AND NOT STATICALLY_LINK_LIBPRIMECOUNT)
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimecount>
++                $<TARGET_FILE_DIR:${binary_name}>)
++
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimesieve>
++                $<TARGET_FILE_DIR:${binary_name}>)
++    endif()
+ endforeach()
+diff --git a/test/lmo/CMakeLists.txt b/test/lmo/CMakeLists.txt
+index aa3d0a05..696fb7fe 100644
+--- a/test/lmo/CMakeLists.txt
++++ b/test/lmo/CMakeLists.txt
+@@ -14,4 +14,19 @@ foreach(file ${files})
+         ${CMAKE_SOURCE_DIR}/src/lmo)
+ 
+     add_test(NAME ${binary_name} COMMAND ${binary_name})
++
++    # Copy primecount.dll and primesieve.dll to test directory.
++    # On Windows the DLLs must be in the same directory as the
++    # binaries that depend on them.
++    if (WIN32 AND NOT STATICALLY_LINK_LIBPRIMECOUNT)
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimecount>
++                $<TARGET_FILE_DIR:${binary_name}>)
++
++        add_custom_command(TARGET ${binary_name} POST_BUILD
++            COMMAND ${CMAKE_COMMAND} -E copy_if_different
++                $<TARGET_FILE:libprimesieve>
++                $<TARGET_FILE_DIR:${binary_name}>)
++    endif()
+ endforeach()
