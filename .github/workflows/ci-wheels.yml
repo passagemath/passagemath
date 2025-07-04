@@ -174,10 +174,10 @@ jobs:
           fi
           # Use passagemath-conf wheelhouse for missing wheels of third-party projects
           case "$python_version" in
-              3.13)        export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python memory_allocator primecountpy";;
+              3.13)        export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python memory_allocator";;
           esac
           case "${{ matrix.os }}" in
-              ubuntu*-arm) export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python memory_allocator primecountpy";;
+              ubuntu*-arm) export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python memory_allocator;;
           esac
           if [ -n "$SAGE_CONF_TARGETS" ]; then
               case "${{ matrix.os }}" in
