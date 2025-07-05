@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-cmr
 from sage.libs.cmr.cmr cimport CMR_CHRMAT, CMR_SEYMOUR_PARAMS, CMR_GRAPH, CMR_GRAPH_EDGE, bool
 
-from .matrix_sparse cimport Matrix_sparse
+from sage.matrix.matrix_sparse cimport Matrix_sparse
 
 cdef class Matrix_cmr_sparse(Matrix_sparse):
     pass
