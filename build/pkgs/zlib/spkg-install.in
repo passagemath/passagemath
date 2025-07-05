@@ -11,7 +11,7 @@ fi
 # incompatibilities
 ./configure --shared --prefix="$SAGE_LOCAL" --libdir="$SAGE_LOCAL/lib" || sdh_die "Error configuring $PKG_NAME"
 
-sdh_make
-sdh_make_install
+sdh_make -j1
+sdh_make_install -j1
 
 sdh_generate_windows_lib_files z
