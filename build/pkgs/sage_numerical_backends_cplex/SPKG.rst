@@ -14,5 +14,5 @@ GPLv2+
 Upstream Contact
 ----------------
 
-https://pypi.org/project/sage-numerical-backends-cplex/
+https://pypi.org/project/passagemath-cplex/
 
