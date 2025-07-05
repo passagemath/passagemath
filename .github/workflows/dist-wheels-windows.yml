@@ -215,16 +215,16 @@ jobs:
       # Environment during wheel build
       # PYTHONUTF8=1 is for delvewheel
       CIBW_ENVIRONMENT: >-
-        PATH="D:\\a\\sage\\sage\\sage-local\\bin;D:\\a\\sage\\sage\\build\\bin;$PATH"
-        INCLUDE="D:\\a\\sage\\sage\\sage-local\\include;%INCLUDE%"
-        LIB="D:\\a\\sage\\sage\\sage-local\\bin;D:\\a\\sage\\sage\\sage-local\\lib;%LIB%"
+        PATH="${GITHUB_WORKSPACE}\\sage-local\\bin;${GITHUB_WORKSPACE}\\build\\bin;$PATH"
+        INCLUDE="${GITHUB_WORKSPACE}\\sage-local\\include;%INCLUDE%"
+        LIB="${GITHUB_WORKSPACE}\\sage-local\\bin;${GITHUB_WORKSPACE}\\sage-local\\lib;%LIB%"
         PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH
         ACLOCAL_PATH=/usr/share/aclocal
         LINBOX_CONFIGURE=--without-ntl
         GIAC_CONFIGURE=--disable-ntl
         SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off
-        PIP_CONSTRAINT=D:\\a\\sage\\sage\\constraints.txt
-        PIP_FIND_LINKS=D:\\a\\sage\\sage\\wheelhouse' 'D:\\a\\sage\\sage\\dist
+        PIP_CONSTRAINT=${GITHUB_WORKSPACE}\\constraints.txt
+        PIP_FIND_LINKS=${GITHUB_WORKSPACE}\\wheelhouse' '${GITHUB_WORKSPACE}\\dist
         SAGE_NUM_THREADS=6
         PYTHONUTF8=1
       # Use 'build', not 'pip wheel'
