@@ -267,6 +267,23 @@ jobs:
           name: noarch-wheels-windows
           path: dist
 
+      - name: Retrieve SAGE_LOCAL cache
+        id:   cache-sage-local
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            config.status
+            sage-local
+          key: >-
+            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4',
+                        '!build/pkgs/*/src')
+            }}
+          restore-keys: |
+            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}
+
       - name: Retrieve configure tarball cache
         id: cache-configure
         uses: actions/cache/restore@v4
@@ -300,22 +317,6 @@ jobs:
             build/pkgs/configure
             upstream/configure*
           key: ${{ steps.cache-configure.outputs.cache-primary-key }}
-
-      - name: Retrieve SAGE_LOCAL cache
-        id:   cache-sage-local
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            config.status
-            sage-local
-          key: >-
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-build=${{
-              hashFiles('build',
-                        'configure.ac',
-                        'm4')
-            }}
-          restore-keys: |
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}
 
       - name: Unpack and prepare
         id: unpack
