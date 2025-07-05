@@ -1,6 +1,11 @@
 cd src
+# BOOST_EXCLUDE_LIBRARIES: A semicolon-separated list of libraries to exclude
+# - we exclude cobalt to avoid 'file INSTALL cannot find ".../libboost_cobalt-mt.a"'
 sdh_cmake -GNinja \
+      -DBUILD_STATIC_LIBS=OFF \
+      -DBUILD_SHARED_LIBS=ON \
       -DBOOST_INSTALL_LAYOUT=tagged \
+      -DBOOST_EXCLUDE_LIBRARIES="cobalt" \
       .
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
