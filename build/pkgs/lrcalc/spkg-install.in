@@ -4,3 +4,5 @@ cp "$SAGE_ROOT"/config/config.* .
 sdh_configure
 sdh_make
 sdh_make_install
+
+sdh_generate_windows_lib_files lrcalc
