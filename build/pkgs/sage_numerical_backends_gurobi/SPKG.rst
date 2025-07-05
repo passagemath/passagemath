@@ -14,5 +14,5 @@ GPLv2+
 Upstream Contact
 ----------------
 
-https://pypi.org/project/sage-numerical-backends-gurobi/
+https://pypi.org/project/passagemath-gurobi/
 

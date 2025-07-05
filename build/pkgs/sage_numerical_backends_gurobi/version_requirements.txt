@@ -1,1 +1,1 @@
-sage_numerical_backends_gurobi >=9.0.0
+passagemath-gurobi

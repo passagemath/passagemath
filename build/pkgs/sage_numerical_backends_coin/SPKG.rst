@@ -14,5 +14,5 @@ GPLv2+
 Upstream Contact
 ----------------
 
-https://pypi.org/project/sage-numerical-backends-coin/
+https://pypi.org/project/passagemath-coin-or-cbc
 
