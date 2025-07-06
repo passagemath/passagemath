@@ -1,10 +1,14 @@
 cd src
 set -ex
 # BOOST_EXCLUDE_LIBRARIES: A semicolon-separated list of libraries to exclude
+#
+#     [boost_cropped-1.88.0]   [spkg-install] C:/a/passagemath/passagemath/sage-local/var/tmp/sage/build/boost_cropped-1.88.0/src/libs/process/include/boost/process/v2/detail/environment_win.hpp:43:8: error: constexpr function's return type 'void' is not a literal type
+#    [boost_cropped-1.88.0]   [spkg-install]    43 |   void assign(char_type& c1, const char_type& c2) BOOST_NOEXCEPT
 sdh_cmake -GNinja \
       -DBUILD_STATIC_LIBS=OFF \
       -DBUILD_SHARED_LIBS=ON \
       -DBOOST_INSTALL_LAYOUT=tagged \
+      -DBOOST_EXCLUDE_LIBRARIES="process" \
       .
 cmake --build .
 if [ -n "$MSYSTEM" ]; then
