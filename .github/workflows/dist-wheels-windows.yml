@@ -15,9 +15,6 @@ on:
       - '.github/workflows/dist.yml'
   merge_group:
   push:
-    branches:
-      - '*windows*'
-      - '*delvewheel*'
     tags:
       # Match all release tags including beta, rc
       - 'passagemath-[0-9]+.[0-9]+'
