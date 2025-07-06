@@ -12,6 +12,8 @@ cd src/
 # Undo "export MSYS=winsymlinks" done in top-level Makefile
 unset MSYS
 
+cp "$SAGE_ROOT"/config/config.* .
+
 user_cflags=$CFLAGS # Save them. 'sage-env' sets CC, but not CFLAGS.
 required_cflags=""  # Additional mandatory settings required by Sage, accumulated below.
 user_ldflags=$LDFLAGS # Save them.
