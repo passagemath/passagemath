@@ -2,9 +2,6 @@ name: CI MinGW
 
 on:
   push:
-    branches:
-      - '*windows*'
-      - '*mingw*'
     tags:
       - '*'
   workflow_dispatch:
