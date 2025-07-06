@@ -142,3 +142,11 @@ ntl_install()
 ntl_configure
 ntl_build
 ntl_install
+
+sdh_generate_windows_lib_files ntl
+
+if [ -n "$MSYSTEM" ]; then
+    # Make installed NTL header files compatible with the native toolchain
+    sed -i.bak '/HAVE_BUILTIN_CLZL/d' "${SAGE_DESTDIR_LOCAL}"/include/NTL/ALL_FEATURES.h
+    rm -f "${SAGE_DESTDIR_LOCAL}"/include/NTL/ALL_FEATURES.h.bak
+fi
