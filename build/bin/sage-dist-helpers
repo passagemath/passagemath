@@ -516,7 +516,7 @@ sdh_generate_windows_lib_files() {
         # Set path to dumpbin & lib
         if [ "${RUNNER_ARCH}" = "ARM64" ]
         then
-            PATH="$PATH:$(find "/c/Program Files/Microsoft Visual Studio/2022/" -name "HostARM64")/ARM64/"
+            PATH="$PATH:$(find "/c/Program Files/Microsoft Visual Studio/2022/" -name "ARM64")"
         else
             PATH="$PATH:$(find "/c/Program Files/Microsoft Visual Studio/2022/" -name "Hostx86")/x64/"
         fi
