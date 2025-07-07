@@ -514,12 +514,8 @@ sdh_generate_windows_lib_files() {
         set -ex
 
         # Set path to dumpbin & lib
-        if [ "${RUNNER_ARCH}" = "ARM64" ]
-        then
-            PATH="$PATH:/c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/Llvm/ARM64/"
-        else
-            PATH="$PATH:$(find "/c/Program Files/Microsoft Visual Studio/2022/" -name "Hostx86")/x64/"
-        fi
+        PATH="$PATH:$(find "/c/Program Files/Microsoft Visual Studio/2022/" -name "Hostx86")/x64/"
+        find "/c/Program Files/Microsoft Visual Studio/2022/" -name dumpbin.exe
 
         # See http://stackoverflow.com/questions/9946322/
         cd "$SAGE_DESTDIR$SAGE_LOCAL/bin"
