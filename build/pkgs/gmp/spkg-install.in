@@ -15,12 +15,13 @@ unset MSYS
 case "$MSYSTEM" in
     *ARM*)
         GMP_CONFIGURE="--build=aarch64-w64-mingw32 --disable-assembly $GMP_CONFIGURE"
+        mv config.guess config.guess.bak
+        # https://github.com/mstorsjo/llvm-mingw/blob/master/README.md#known-issues
+        # Need to autoreconf -- not just copy in newer build-aux files.
+        autoreconf -fi
+        mv config.guess.bak config.guess
         ;;
 esac
-
-mv config.guess config.guess.bak
-cp "$SAGE_ROOT"/config/config.* .
-mv config.guess.bak config.guess
 
 user_cflags=$CFLAGS # Save them. 'sage-env' sets CC, but not CFLAGS.
 required_cflags=""  # Additional mandatory settings required by Sage, accumulated below.
