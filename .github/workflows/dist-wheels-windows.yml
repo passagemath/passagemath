@@ -235,7 +235,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: msys2/setup-msys2@v2
+      - uses: msys2/setup-msys2@v2.27.0
+        # Pin as done in https://github.com/aleaxit/gmpy/pull/583
         name: Setup msys2
         with:
           install: >-
@@ -275,14 +276,14 @@ jobs:
             config.status
             sage-local
           key: >-
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-build=${{
+            ${{ matrix.os }}-cibuildwheel-${{ matrix.arch }}-build=${{
               hashFiles('build',
                         'configure.ac',
                         'm4',
                         '!build/pkgs/*/src')
             }}
           restore-keys: |
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}
+            ${{ matrix.os }}-cibuildwheel-${{ matrix.arch }}
 
       - name: Retrieve configure tarball cache
         id: cache-configure
@@ -291,8 +292,9 @@ jobs:
           path: |
             build/pkgs/configure
             upstream/configure*
+          # Keyed to matrix.os because msys2 has important patches for libtool
           key: >-
-            configure-build=${{
+            ${{ matrix.os }}-configure-build=${{
               hashFiles('build',
                         'configure.ac',
                         'm4')
@@ -303,8 +305,8 @@ jobs:
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
           export PATH=$(pwd)/build/bin:$PATH
-          eval $(sage-print-system-package-command auto --yes update)
-          eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+          # eval $(sage-print-system-package-command auto --yes update)
+          # eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
           sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
           ./bootstrap -s
         shell: msys2 {0}

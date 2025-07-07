@@ -2,6 +2,14 @@ cd src
 
 GC_CONFIGURE="--enable-large-config --enable-cplusplus"
 
+case "$MSYSTEM" in
+    *ARM*)
+        # https://github.com/mstorsjo/llvm-mingw/blob/master/README.md#known-issues
+        # Need to autoreconf -- not just copy in newer build-aux files.
+        autoreconf -fi
+        ;;
+esac
+
 sdh_configure $GC_CONFIGURE
 sdh_make
 sdh_make_install
