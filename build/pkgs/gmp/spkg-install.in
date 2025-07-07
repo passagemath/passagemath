@@ -14,7 +14,7 @@ unset MSYS
 
 case "$MSYSTEM" in
     *ARM*)
-        GMP_CONFIGURE="--build=aarch64-w64-mingw32 $GMP_CONFIGURE"
+        GMP_CONFIGURE="--build=aarch64-w64-mingw32 --disable-assembly $GMP_CONFIGURE"
         ;;
 esac
 
