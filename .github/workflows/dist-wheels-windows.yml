@@ -276,14 +276,14 @@ jobs:
             config.status
             sage-local
           key: >-
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-build=${{
+            ${{ matrix.os }}-cibuildwheel-${{ matrix.arch }}-build=${{
               hashFiles('build',
                         'configure.ac',
                         'm4',
                         '!build/pkgs/*/src')
             }}
           restore-keys: |
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}
+            ${{ matrix.os }}-cibuildwheel-${{ matrix.arch }}
 
       - name: Retrieve configure tarball cache
         id: cache-configure
@@ -292,8 +292,9 @@ jobs:
           path: |
             build/pkgs/configure
             upstream/configure*
+          # Keyed to matrix.os because msys2 has important patches for libtool
           key: >-
-            configure-build=${{
+            ${{ matrix.os }}-configure-build=${{
               hashFiles('build',
                         'configure.ac',
                         'm4')
