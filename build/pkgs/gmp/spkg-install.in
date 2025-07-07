@@ -12,6 +12,12 @@ cd src/
 # Undo "export MSYS=winsymlinks" done in top-level Makefile
 unset MSYS
 
+case "$MSYSTEM" in
+    *ARM*)
+        GMP_CONFIGURE="--build=aarch64-w64-mingw32 $GMP_CONFIGURE"
+        ;;
+esac
+
 mv config.guess config.guess.bak
 cp "$SAGE_ROOT"/config/config.* .
 mv config.guess.bak config.guess
