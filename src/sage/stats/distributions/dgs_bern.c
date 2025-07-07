@@ -36,7 +36,10 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <math.h>
-#include <gsl/gsl_rng.h>
+
+#ifndef __GLIBC__
+#define drand48() ((double)rand()/(RAND_MAX+1.0))
+#endif
 
 /*
  * balanced Bernoulli distribution, machine-precision version
@@ -191,7 +194,7 @@ dgs_bern_dp_t* dgs_bern_dp_init(double p) {
 }
 
 long dgs_bern_dp_call(dgs_bern_dp_t *self) {
-  double c = gsl_rng_uniform(gsl_rng_rand48);
+  double c = drand48();
   if (c<self->p)
     return 1;
   else
