@@ -36,7 +36,6 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <math.h>
-#include <gsl/gsl_rng.h>
 
 static inline void _dgs_disc_gauss_dp_init_bexp(dgs_disc_gauss_dp_t *self, double sigma, long upper_bound) {
   self->f = (2*sigma*sigma);
@@ -161,7 +160,7 @@ long dgs_disc_gauss_dp_call_uniform_online(dgs_disc_gauss_dp_t *self) {
   do {
     x = self->c_z + _dgs_randomm_libc(self->two_upper_bound_minus_one) - self->upper_bound_minus_one;
     z = exp(((double)x-c)*((double)x-c)*self->f);
-    y = gsl_rng_uniform(gsl_rng_rand48);
+    y = drand48();
   } while (y >= z);
 
   return x;
@@ -172,7 +171,7 @@ long dgs_disc_gauss_dp_call_uniform_table(dgs_disc_gauss_dp_t *self) {
   double y;
   do {
     x = _dgs_randomm_libc(self->upper_bound);
-    y = gsl_rng_uniform(gsl_rng_rand48);
+    y = drand48();
   } while (y >= self->rho[x]);
 
   if(dgs_bern_uniform_call_libc(self->B))
@@ -185,7 +184,7 @@ long dgs_disc_gauss_dp_call_uniform_table_offset(dgs_disc_gauss_dp_t *self) {
   double y;
   do {
     x = _dgs_randomm_libc(self->two_upper_bound_minus_one);
-    y = gsl_rng_uniform(gsl_rng_rand48);
+    y = drand48();
   } while (y >= self->rho[x]);
 
   return x + self->c_z - self->upper_bound_minus_one;
