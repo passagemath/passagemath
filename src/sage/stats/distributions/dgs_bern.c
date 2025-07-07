@@ -37,6 +37,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+#ifndef __GLIBC__
+#define drand48() ((double)rand()/(RAND_MAX+1.0))
+#endif
+
 /*
  * balanced Bernoulli distribution, machine-precision version
  */

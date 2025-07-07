@@ -37,6 +37,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+#ifndef __GLIBC__
+#define drand48() ((double)rand()/(RAND_MAX+1.0))
+#endif
+
 static inline void _dgs_disc_gauss_dp_init_bexp(dgs_disc_gauss_dp_t *self, double sigma, long upper_bound) {
   self->f = (2*sigma*sigma);
   size_t l = 2*ceil(log2(upper_bound));
