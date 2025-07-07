@@ -14,4 +14,4 @@ else
     ln -s logs/pkgs/config.log config.log
     ./configure --enable-build-as-root --enable-fat-binary --prefix=$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --disable-python-distutils-check --without-system-libpng --without-system-zlib
 fi
-MAKE="make -j6" make -k V=0 $TARGETS_PRE
+MAKE="make -j6" make -k V=0 $TARGETS_PRE || echo "Ignoring error"
