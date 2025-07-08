@@ -7,6 +7,8 @@ if [ -n "$MSYSTEM" ]; then
     for a in ../patches/mingw/*.patch; do
         patch -p1 < $a
     done
+    sed -i "s|-version-info|-no-undefined -version-info|g" src/Makefile.am
+    autoreconf -vfi
 fi
 
 # Note: The following doesn't work with spaces in `$SAGE_LOCAL`, but we don't
