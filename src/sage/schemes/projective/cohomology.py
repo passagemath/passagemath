@@ -389,7 +389,7 @@ class MaruyamaMethod(SageObject):
                     basis = H0.summands_basis[j]
                     for c, m in zip(f.coefficients(), f.exponents()):
                         u = v + vector(m)
-                        assert(sum(u) == -H0.shifts[j])
+                        assert (sum(u) == -H0.shifts[j])
                         if any(e < 0 for e in u):
                             continue
                         k = H0.summands_index[j] + basis.index(u)
@@ -432,7 +432,7 @@ class MaruyamaMethod(SageObject):
                     basis = H0.summands_basis[j]
                     for c, m in zip(f.coefficients(), f.exponents()):
                         u = v + vector(m)
-                        assert(sum(u) == -H0.shifts[j])
+                        assert (sum(u) == -H0.shifts[j])
                         if any(e >= 0 for e in u):
                             continue
                         k = H0.summands_index[j] + basis.index(u)
