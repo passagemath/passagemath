@@ -105,10 +105,6 @@ from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.rational_field import QQ, RationalField
 from sage.schemes.generic.ambient_space import AmbientSpace
-from sage.structure.category_object import normalize_names
-from sage.structure.unique_representation import UniqueRepresentation
-
-from sage.schemes.generic.ambient_space import AmbientSpace
 from sage.schemes.projective.projective_homset import (SchemeHomset_points_projective_ring,
                                                        SchemeHomset_points_projective_field,
                                                        SchemeHomset_polynomial_projective_space)
@@ -118,6 +114,8 @@ from sage.schemes.projective.projective_morphism import (SchemeMorphism_polynomi
 from sage.schemes.projective.projective_point import (SchemeMorphism_point_projective_ring,
                                                       SchemeMorphism_point_projective_field,
                                                       SchemeMorphism_point_projective_finite_field)
+from sage.structure.category_object import normalize_names
+from sage.structure.unique_representation import UniqueRepresentation
 
 lazy_import('sage.combinat.integer_vector', 'IntegerVectors')
 lazy_import('sage.combinat.permutation', 'Permutation')

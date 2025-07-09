@@ -35,11 +35,6 @@ from sage.rings.rational import Rational
 from sage.rings.rational_field import RationalField, QQ
 Rationals = RationalField
 
-# Integers modulo n.
-from sage.rings.finite_rings.integer_mod_ring import IntegerModRing, Zmod
-from sage.rings.finite_rings.integer_mod import IntegerMod, Mod, mod
-Integers = IntegerModRing
-
 # Function field
 from sage.rings.function_field.all__sagemath_categories import *
 

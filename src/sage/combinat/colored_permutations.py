@@ -10,7 +10,7 @@ Colored permutations
 import itertools
 from random import choice
 
-from sage.structure.element import MultiplicativeGroupElement, parent
+from sage.structure.element import MultiplicativeGroupElement
 from sage.structure.parent import Parent
 from sage.structure.unique_representation import UniqueRepresentation
 from sage.misc.inherit_comparison import InheritComparisonClasscallMetaclass

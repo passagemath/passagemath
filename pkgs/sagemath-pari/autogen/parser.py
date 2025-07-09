@@ -12,9 +12,9 @@ Read and parse the file pari.desc
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
-from __future__ import absolute_import, unicode_literals
-
-import os, re, io
+import io
+import os
+import re
 
 from .args import pari_arg_types
 from .ret import pari_ret_types
@@ -58,12 +58,14 @@ def read_pari_desc():
     while n < N:
         fun = {}
         while True:
-            L = lines[n]; n += 1
+            L = lines[n]
+            n += 1
             if L == "\n":
                 break
             # As long as the next lines start with a space, append them
             while lines[n].startswith(" "):
-                L += (lines[n])[1:]; n += 1
+                L += (lines[n])[1:]
+                n += 1
             key, value = L.split(":", 1)
             # Change key to an allowed identifier name
             key = key.lower().replace("-", "")
@@ -135,18 +137,21 @@ def parse_prototype(proto, help, initial_args=[]):
     args = list(initial_args)
     have_default = False  # Have we seen any default argument?
     while n < len(proto):
-        c = proto[n]; n += 1
+        c = proto[n]
+        n += 1
 
         # Parse default value
         if c == "D":
             default = ""
             if proto[n] not in pari_arg_types:
                 while True:
-                    c = proto[n]; n += 1
+                    c = proto[n]
+                    n += 1
                     if c == ",":
                         break
                     default += c
-            c = proto[n]; n += 1
+            c = proto[n]
+            n += 1
         else:
             default = None
 

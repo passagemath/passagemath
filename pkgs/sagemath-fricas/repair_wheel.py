@@ -14,4 +14,5 @@ wheel = sys.argv[1]
 command = f'ln -sf {shlex.quote(SAGE_LOCAL)} sage_wheels && zip -r {shlex.quote(wheel)} sage_wheels/bin/{{fricas,efricas}} sage_wheels/lib/fricas'
 print(f'Running {command}')
 sys.stdout.flush()
-if os.system(f"bash -c {shlex.quote(command)}") != 0: sys.exit(1)
+if os.system(f"bash -c {shlex.quote(command)}") != 0:
+    sys.exit(1)

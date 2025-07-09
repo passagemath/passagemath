@@ -209,6 +209,8 @@ dev = [
 # Python 3.11 is the minimum supported version
 target-version = "py311"
 
+extend-exclude = ["pkgs/*/pyproject*"]
+
 [tool.ruff.lint]
 select = [
   "E", # pycodestyle errors - https://docs.astral.sh/ruff/rules/#error-e

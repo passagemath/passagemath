@@ -10,7 +10,8 @@ from auditwheel.wheeltools import InWheel
 
 from sage_conf import MAXIMA_FAS, SAGE_LOCAL
 
-if "TMPDIR" in os.environ: os.environ["TMPDIR"] = str(Path(os.environ["TMPDIR"]).resolve())
+if "TMPDIR" in os.environ:
+    os.environ["TMPDIR"] = str(Path(os.environ["TMPDIR"]).resolve())
 
 wheel = Path(sys.argv[1])
 
@@ -20,7 +21,8 @@ with InWheel(wheel, wheel):
     command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/ecl lib/ecl-* lib/maxima) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
     print(f'Running {command}')
     sys.stdout.flush()
-    if os.system(f"bash -c {shlex.quote(command)}") != 0: sys.exit(1)
+    if os.system(f"bash -c {shlex.quote(command)}") != 0:
+        sys.exit(1)
     # Include maxima.fas, which is linked through to libecl
     # SAGE_LOCAL/lib/ecl/maxima.fas --> ecl/maxima.fas
     parent = Path(MAXIMA_FAS).parent.parent
@@ -28,4 +30,5 @@ with InWheel(wheel, wheel):
     command = f'set -o pipefail; (cd {shlex.quote(str(parent))} && tar cf - --dereference {name}) | tar xvf -'
     print(f'Running {command}')
     sys.stdout.flush()
-    if os.system(f"bash -c {shlex.quote(command)}") != 0: sys.exit(1)
+    if os.system(f"bash -c {shlex.quote(command)}") != 0:
+        sys.exit(1)

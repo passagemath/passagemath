@@ -74,14 +74,14 @@ from functools import reduce  # in order to keep reduce in python3
 
 # ##################################################################
 
-from sage.misc.all       import *         # takes a while
+from sage.misc.all import *         # takes a while
 
 from sage.libs.all import *
 from sage.data_structures.all import *
 
-from sage.rings.all      import *
+from sage.rings.all import *
 
-from sage.algebras.all   import *
+from sage.algebras.all import *
 
 from sage.all__sagemath_schemes import *
 from sage.all__sagemath_combinat import *
@@ -89,15 +89,15 @@ from sage.all__sagemath_graphs import *
 from sage.all__sagemath_groups import *
 from sage.all__sagemath_polyhedra import *
 
-from sage.databases.all  import *
-from sage.sets.all       import *
+from sage.databases.all import *
+from sage.sets.all import *
 from sage.interfaces.all import *
 
 
-from sage.combinat.all   import *
+from sage.combinat.all import *
 
-from sage.geometry.all   import *
-from sage.geometry.triangulation.all   import *
+from sage.geometry.all import *
+from sage.geometry.triangulation.all import *
 
 from sage.dynamics.all import *
 
@@ -105,7 +105,7 @@ from sage.homology.all import *
 
 from sage.quadratic_forms.all import *
 
-from sage.logic.all      import *
+from sage.logic.all import *
 
 from sage.numerical.all import *
 
