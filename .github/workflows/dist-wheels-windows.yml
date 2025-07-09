@@ -198,6 +198,7 @@ jobs:
         mpfr
         rw
         cddlib
+        msolve
         planarity
         cliquer
         libhomfly
@@ -414,6 +415,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_glpk
 
+      - name: sagemath-msolve
+        id:   sagemath-msolve
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_msolve
+
       - name: sagemath-planarity
         id:   sagemath-planarity
         uses: pypa/cibuildwheel@v2.23.0
@@ -512,6 +519,7 @@ jobs:
          'sagemath-graphs',
          'sagemath-homfly',
          'sagemath-modules',
+         'sagemath-msolve',
          'sagemath-planarity',
          'sagemath-plot',
          'sagemath-rankwidth',
