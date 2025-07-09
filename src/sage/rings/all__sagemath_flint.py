@@ -1,6 +1,11 @@
 # sage_setup: distribution = sagemath-flint
 
-from sage.rings.all__sagemath_ntl import *
+from sage.rings.all__sagemath_categories import *
+
+try:
+    from sage.rings.all__sagemath_ntl import *
+except ImportError:
+    pass
 
 # Real numbers
 from sage.rings.real_arb import RealBallField, RBF
