@@ -27,9 +27,9 @@ try:  # extra
 except ImportError:
     pass
 
-from sage.graphs.all     import *
+from sage.graphs.all import *
 
-from sage.topology.all   import *
+from sage.topology.all import *
 
 from sage.combinat.all__sagemath_graphs import *
 
