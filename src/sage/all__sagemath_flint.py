@@ -16,7 +16,7 @@ This distribution makes the following features available::
     FeatureTestResult('sage.rings.real_interval_field', True)
 """
 
-from .all__sagemath_ntl import *
+from .all__sagemath_categories import *
 
 from .libs.all__sagemath_flint import *
 
