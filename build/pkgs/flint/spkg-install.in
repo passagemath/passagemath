@@ -10,5 +10,7 @@ if [ -n $MSYSTEM ]; then
     cmake --build .
     DESTDIR=$SAGE_DESTDIR cmake --install .
 else
+    sdh_configure
+    sdh_make
     sdh_make_install
 fi
