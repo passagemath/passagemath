@@ -188,7 +188,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm
       # Non-Python packages to install as spkgs
-      #TARGETS_PRE: ccache libpng mpfi givaro pari ntl flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
+      #TARGETS_PRE: ccache libpng mpfi givaro ntl iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
       TARGETS_PRE: >-
         boost_cropped
         gmp
@@ -199,6 +199,7 @@ jobs:
         rw
         cddlib
         flint
+        pari
         planarity
         cliquer
         libhomfly
@@ -459,6 +460,11 @@ jobs:
         with:
           package-dir: unpacked/passagemath_flint
 
+      - name: sagemath-pari
+        id:   sagemath-pari
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_pari
 
       - uses: actions/upload-artifact@v4
         if:   always()
@@ -520,6 +526,7 @@ jobs:
          'sagemath-graphs',
          'sagemath-homfly',
          'sagemath-modules',
+         'sagemath-pari',
          'sagemath-planarity',
          'sagemath-plot',
          'sagemath-rankwidth',
