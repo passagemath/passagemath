@@ -3,7 +3,7 @@ unset MSYS
 
 cd src
 
-if [ -n $MSYSTEM ]; then
+if [ -n "$MSYSTEM" ]; then
     sdh_cmake -G Ninja \
         -DENABLE_ARCH=NO \
         .
