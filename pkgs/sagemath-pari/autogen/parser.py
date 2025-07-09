@@ -12,9 +12,9 @@ Read and parse the file pari.desc
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
-from __future__ import absolute_import, unicode_literals
-
-import os, re, io
+import io
+import os
+import re
 
 from .args import pari_arg_types
 from .ret import pari_ret_types
