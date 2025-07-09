@@ -7,7 +7,7 @@ cd src
 # configure_file(... COPYONLY) somehow leads to the creation of unusable Windows .lnk files
 sed -i.bak 's/COPYONLY//' CMakeLists.txt
 
-if [ -n $MSYSTEM ]; then
+if [ -n "$MSYSTEM" ]; then
     sdh_cmake -G Ninja \
         -DENABLE_ARCH=NO \
         .
