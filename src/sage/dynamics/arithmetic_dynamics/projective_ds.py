@@ -1737,7 +1737,7 @@ class DynamicalSystem_projective(SchemeMorphism_polynomial_projective_space,
                 res = (f.lc() ** (d - g.degree()) * g.lc() ** (d - f.degree())
                        * f.__pari__().polresultant(g, x))
                 return self.domain().base_ring()(res)
-            except (TypeError, PariError):
+            except (TypeError, PariError):  # type: ignore
                 pass
         #Otherwise, use Macaulay
         R = F[0].parent()
