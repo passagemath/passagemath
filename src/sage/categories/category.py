@@ -3386,5 +3386,8 @@ class JoinCategory(CategoryWithParameters):
             sage: QQ.category()
             Join of Category of number fields and Category of quotient fields and Category of metric spaces
             sage: QQ.category().__lean_init__()
+            Traceback (most recent call last):
+            ...
+            NotImplementedError
         """
         return " ".join(cat._lean_init_() for cat in self._super_categories)
