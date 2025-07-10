@@ -12,3 +12,5 @@ fi
 sdh_cmake -GNinja -DGENERATORS=on -DCMAKE_SYSTEM_PREFIX_PATH="$SAGE_LOCAL" -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" -DHAVE_FLAG_SEARCH_PATHS_FIRST=0 -DSHARED=on $BUILD_OPTIONS ..
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
+
+sdh_generate_windows_lib_files cmr

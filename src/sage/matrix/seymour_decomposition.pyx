@@ -28,10 +28,10 @@ from sage.rings.integer cimport Integer
 from sage.rings.integer_ring import ZZ
 from sage.structure.sage_object cimport SageObject
 
-from .constructor import Matrix
-from .matrix_cmr_sparse cimport Matrix_cmr_chr_sparse, _sage_edges, _sage_graph, _set_cmr_seymour_parameters
-from .matrix_cmr_sparse cimport _sage_arcs, _sage_digraph
-from .matrix_space import MatrixSpace
+from sage.matrix.constructor import Matrix
+from sage.matrix.matrix_cmr_sparse cimport Matrix_cmr_chr_sparse, _sage_edges, _sage_graph, _set_cmr_seymour_parameters
+from sage.matrix.matrix_cmr_sparse cimport _sage_arcs, _sage_digraph
+from sage.matrix.matrix_space import MatrixSpace
 
 
 cdef class DecompositionNode(SageObject):

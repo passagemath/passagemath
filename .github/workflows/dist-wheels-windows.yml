@@ -196,6 +196,7 @@ jobs:
         gsl
         mpc
         mpfr
+        cmr
         rw
         cddlib
         planarity
@@ -452,6 +453,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_plot
 
+      - name: sagemath-cmr
+        id:   sagemath-cmr
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_cmr
+
 
       - uses: actions/upload-artifact@v4
         if:   always()
@@ -507,6 +514,7 @@ jobs:
          'sagemath-categories',
          'sagemath-cddlib',
          'sagemath-cliquer',
+         'sagemath-cmr',
          'sagemath-combinat',
          'sagemath-glpk',
          'sagemath-graphs',
