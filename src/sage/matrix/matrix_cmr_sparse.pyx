@@ -79,7 +79,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         sage: Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 1, 3, sparse=True), [126, 127, 128])
         Traceback (most recent call last):
         ...
-        OverflowError: value too large to convert to char
+        OverflowError: value too large to convert to signed char
 
     Arithmetic does not preserve the implementation class (even if the numbers would fit)::
 
@@ -2465,7 +2465,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         cdef CMR_CHRMAT *matrix = self._mat
         cdef CMR_CHRMAT *transpose = NULL
         cdef CMR_SEPA *sepa = NULL
-        cdef char epsilon
+        cdef signed char epsilon
         cdef CMR_CHRMAT *first = NULL
         cdef CMR_CHRMAT *second = NULL
 
@@ -2675,7 +2675,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         cdef CMR_CHRMAT *matrix = self._mat
         cdef CMR_CHRMAT *transpose = NULL
         cdef CMR_SEPA *sepa = NULL
-        cdef char epsilon
+        cdef signed char epsilon
         cdef CMR_CHRMAT *first = NULL
         cdef CMR_CHRMAT *second = NULL
 
@@ -2971,7 +2971,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         cdef CMR_SEPA *sepa = NULL
         cdef size_t specialRows[2]
         cdef size_t specialColumns[2]
-        cdef char gamma, beta
+        cdef signed char gamma, beta
         cdef CMR_CHRMAT *first = NULL
         cdef CMR_CHRMAT *second = NULL
 
@@ -3110,7 +3110,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         cdef CMR_CHRMAT *matrix = self._mat
         cdef CMR_CHRMAT *transpose = NULL
         cdef CMR_SEPA *sepa = NULL
-        cdef char epsilon
+        cdef signed char epsilon
         cdef CMR_CHRMAT *first = NULL
         cdef CMR_CHRMAT *second = NULL
 
@@ -3399,7 +3399,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         cdef CMR_CHRMAT *matrix = three_sum_mat._mat
         cdef CMR_CHRMAT *transpose = NULL
         cdef CMR_SEPA *sepa = NULL
-        cdef char epsilon
+        cdef signed char epsilon
 
         sig_on()
         try:
@@ -3732,7 +3732,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         cdef CMR_SEPA *sepa = NULL
         cdef size_t specialRows[2]
         cdef size_t specialColumns[2]
-        cdef char gamma, beta
+        cdef signed char gamma, beta
 
         special_rows = [m1 - 2 + j1k - 1, m1 - 2 + j2k - 1]
         special_columns = [jk1, jk2]
@@ -4010,7 +4010,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         cdef CMR_CHRMAT *matrix = three_sum_mat._mat
         cdef CMR_CHRMAT *transpose = NULL
         cdef CMR_SEPA *sepa = NULL
-        cdef char epsilon
+        cdef signed char epsilon
 
         sig_on()
         try:
