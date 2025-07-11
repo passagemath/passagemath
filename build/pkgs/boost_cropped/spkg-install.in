@@ -23,7 +23,7 @@ sdh_cmake -GNinja \
       -DBUILD_SHARED_LIBS=ON \
       -DBOOST_INSTALL_LAYOUT=tagged \
       -DBOOST_EXCLUDE_LIBRARIES="cobalt;process" \
-      -DBOOST_STACKTRACE_LIBCXX_RUNTIME_MAY_CAUSE_MEMORY_LEAK=ON \
+      -DBOOST_STACKTRACE_ENABLE_FROM_EXCEPTION=0 \
       .
 cmake --build .
 if [ -n "$MSYSTEM" ]; then
