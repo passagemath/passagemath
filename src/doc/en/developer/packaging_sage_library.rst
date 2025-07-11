@@ -1,9 +1,9 @@
 
 .. _chapter-modularization:
 
-=======================================================
-Packaging the Sage Library for Modularized Distribution
-=======================================================
+======================================================================
+Packaging the Sage Library for Modularized Distribution in passagemath
+======================================================================
 
 
 Modules, packages, distribution packages
@@ -24,9 +24,8 @@ For example,
 
 There is another notion of "package" in Python, the **distribution
 package** (also known as a "distribution" or a "pip-installable
-package").  Currently, the entire Sage library is provided by a
-single distribution,
-`sagemath-standard <https://pypi.org/project/sagemath-standard/>`_,
+package").  In passagemath, the entire Sage library is provided by a
+distribution `passagemath-standard <https://pypi.org/project/passagemath-standard/>`_,
 which is generated from the directory
 :sage_root:`pkgs/sagemath-standard`.
 
@@ -36,43 +35,44 @@ distribution names; **setuptools** and other parts of Python's packaging
 infrastructure normalize underscores to dashes. (Using dots in
 distribution names, to indicate ownership by organizations, still
 mentioned in `PEP 423 <https://www.python.org/dev/peps/pep-0423/>`_, appears to
-have largely fallen out of favor, and we will not use it in the SageMath
-project.)
+have largely fallen out of favor, and we are not using it in passagemath.
 
-A distribution that provides Python modules in the :mod:`sage.*` namespace, say
-mainly from :mod:`sage.PAC.KAGE`, should be named **sagemath-DISTRI-BUTION**.
+Any distribution that provides Python modules in the :mod:`sage.*` namespace, say
+mainly from :mod:`sage.PAC.KAGE`, should be named **passagemath-DISTRI-BUTION**.
 Example:
 
 - The distribution
-  `sagemath-categories <https://pypi.org/project/sagemath-categories/>`_
+  `passagemath-categories <https://pypi.org/project/passagemath-categories/>`_
   provides a small subset of the modules of the Sage library, mostly
   from the packages :mod:`sage.structure`, :mod:`sage.categories`, and
   :mod:`sage.misc`.
-
-Other distributions should not use the prefix **sagemath-** in the
-distribution name. Example:
-
-- The distribution `sage-sws2rst <https://pypi.org/project/sage-sws2rst/>`_
-  provides the Python package :mod:`sage_sws2rst`, so it does not fill
-  the :mod:`sage.*` namespace and therefore does not use the prefix
-  **sagemath-**.
 
 A distribution that provides functionality that does not need to
 import anything from the :mod:`sage` namespace should not use the
 :mod:`sage` namespace for its own packages/modules. It should be
 positioned as part of the general Python ecosystem instead of as a
-Sage-specific distribution.  Examples:
+Sage-specific (or passagemath-specific) distribution.  Example:
 
-- The distribution `pplpy <https://pypi.org/project/pplpy/>`_ provides the Python
+- The distribution `memory-allocator <https://pypi.org/project/memory-allocator/>`_
+  provides the Python package :mod:`memory_allocator`. This used to be
+  :mod:`sage.ext.memory_allocator`, a part of the Sage library.
+
+However, forks of packages made for the passagemath project can also be named
+**passagemath-DISTRI-BUTION** for branding purposes, regardless of what
+namespace they fill.
+
+- The distribution `passagemath-sws2rst <https://pypi.org/project/passagemath-sws2rst/>`_
+  is a fork of `sage-sws2rst <https://pypi.org/project/sage-sws2rst/>`_.
+  It provides the Python package :mod:`sage_sws2rst`, so it does not fill
+  the :mod:`sage.*` namespace.
+
+- The distribution `passagemath-ppl <https://pypi.org/project/passagemath-ppl/>`_
+  is a fork of `pplpy <https://pypi.org/project/pplpy/>`_. It provides the Python
   package :mod:`ppl` and is a much extended version of what used to be
   :mod:`sage.libs.ppl`, a part of the Sage library. The package :mod:`sage.libs.ppl` had
   dependencies on :mod:`sage.rings` to convert to/from Sage number
   types. **pplpy** has no such dependencies and is therefore usable in a
   wider range of Python projects.
-
-- The distribution `memory-allocator <https://pypi.org/project/memory-allocator/>`_
-  provides the Python package :mod:`memory_allocator`. This used to be
-  :mod:`sage.ext.memory_allocator`, a part of the Sage library.
 
 
 .. _section_namespace_packages:
@@ -96,11 +96,11 @@ cannot be an ``__init__.py`` file.
 
 For example,
 
-- **sagemath-tdlib** will provide :mod:`sage.graphs.graph_decompositions.tdlib`,
+- **passagemath-tdlib** provides :mod:`sage.graphs.graph_decompositions.tdlib`,
 
-- **sagemath-rw** will provide :mod:`sage.graphs.graph_decompositions.rankwidth`,
+- **passagemath-rw** provides :mod:`sage.graphs.graph_decompositions.rankwidth`,
 
-- **sagemath-graphs** will provide all of the rest of
+- **passagemath-graphs** provides all of the rest of
   :mod:`sage.graphs.graph_decompositions` (and most of :mod:`sage.graphs`).
 
 Then, none of
@@ -118,9 +118,7 @@ each of them has to be an implicit namespace package (no
 For an implicit namespace package, ``__init__.py`` cannot be used any more for
 initializing the package.
 
-In the Sage 9.6 development cycle, we still use ordinary packages by
-default, but several packages are converted to implicit namespace
-packages to support modularization.
+In passagemath, most packages have been made implicit namespace packages.
 
 
 Source directories of distribution packages
@@ -137,7 +135,7 @@ there will be a new release of some distribution where the only thing
 changing is the version number.
 
 The source directory of a distribution package, such as
-:sage_root:`pkgs/sagemath-standard`, contains the following files:
+:sage_root:`pkgs/sagemath-modules`, contains the following files:
 
 - ``sage`` -- a relative symbolic link to the monolithic Sage library
   source tree :sage_root:`src/sage/`
@@ -263,13 +261,9 @@ modules into distribution packages has to respect the hard constraints
 that are imposed by the build-time dependencies.
 
 We can define some meaningful small distributions that just consist of
-a single or a few Cython modules. For example, **sagemath-tdlib**
-(:issue:`29864`) would just package the single
-Cython module that must be linked with ``tdlib``,
-:mod:`sage.graphs.graph_decompositions.tdlib`. Starting with the Sage
-9.6 development cycle, as soon as namespace packages are activated, we
-can start to create these distributions. This is quite a mechanical
-task.
+a single or a few Cython modules. For example, **passagemath-tdlib**
+just packages the single Cython module that must be linked with ``tdlib``,
+:mod:`sage.graphs.graph_decompositions.tdlib`.
 
 *Reducing build-time dependencies:* Sometimes it is possible to
 replace build-time dependencies of a Cython module on a library by a
@@ -453,18 +447,18 @@ Apparently it does not in a very substantial way:
   symbolics comes in. In fact, for this reason, two doctests there are
   already marked as ``# needs sage.symbolic``.
 
-So if packaged as **sagemath-coding**, now a domain expert would have
+So if packaged as **passagemath-coding**, now a domain expert would have
 to decide whether these dependencies on symbolics are strong enough to
 declare a runtime dependency (``install_requires``) on
-**sagemath-symbolics**. This declaration would mean that any user who
-installs **sagemath-coding** (``pip install sagemath-coding``) would
-pull in **sagemath-symbolics**, which has heavy compile-time
+**passagemath-symbolics**. This declaration would mean that any user who
+installs **passagemath-coding** (``pip install passagemath-coding``) would
+pull in **passagemath-symbolics**, which has heavy compile-time
 dependencies (ECL/Maxima/FLINT/Singular/...).
 
 The alternative is to consider the use of symbolics by
-**sagemath-coding** merely as something that provides some extra
+**passagemath-coding** merely as something that provides some extra
 features, which will only be working if the user also has installed
-**sagemath-symbolics**.
+**passagemath-symbolics**.
 
 *Declaring optional run-time dependencies:* It is possible to declare
 such dependencies as `[project.optional-dependencies] <https://setuptools.pypa.io/en/latest/userguide/dependency_management.html#optional-dependencies>`_ in ``pyproject.toml``
@@ -477,7 +471,7 @@ distribution in any way. It basically only provides a way to give a
 nickname to a distribution that can be installed as an add-on.
 
 In our example, we could declare an optional dependency so that users
-could use ``pip install "sagemath-coding[symbolics]"``.
+could use ``pip install "passagemath-coding[symbolics]"``.
 
 
 Doctest-only dependencies
@@ -534,18 +528,18 @@ Hierarchy of distribution packages
     def extras_require(start, end):
         return edge(start, end, linestyle='dashed')
     g = Graphics()
-    g += (extras_require((0.5,0),(0.5,1)) + node("sage_conf", (0.5,0)))
+    g += (extras_require((0.5,0),(0.5,1)) + node("passagemath-conf", (0.5,0)))
     g += (edge((1.5,0),(0.75,2)) + edge((1.5,0),(1.5,1))
-          + node("sagemath-objects", (1.5,0)))
+          + node("passagemath-objects", (1.5,0)))
     g += (edge((0.5,1),(0,2)) + edge((0.5,1),(0.6,2)) + edge((0.5,1),(1.25,2)) + edge((0.5,1),(1.8,2))
-          + node("sagemath-environment", (0.5,1)))
+          + node("passagemath-environment", (0.5,1)))
     g += (edge((1.5,1),(0.2,2)) + edge((1.5,1),(1.41,2)) + edge((1.5,1),(2,2))
-          + node("sagemath-categories", (1.5,1)))
+          + node("passagemath-categories", (1.5,1)))
     g += (edge((0,2),(0,3)) + edge((0,2),(0.75,3)) + edge((0.67,2),(1,3)) + edge((1.33,2),(1.25,3)) + edge((2,2),(2,3))
-          + node("sagemath-graphs", (0,2)) + node("sagemath-repl", (0.67,2)) + node("sagemath-polyhedra", (1.33,2)) + node("sagemath-singular", (2,2)))
+          + node("passagemath-graphs", (0,2)) + node("passagemath-repl", (0.67,2)) + node("passagemath-polyhedra", (1.33,2)) + node("passagemath-singular", (2,2)))
     g += (edge((1,3),(1,4)) + edge((2,3),(1.2,4))
-          + node("sagemath-tdlib", (0,3)) + node("sagemath-standard-no-symbolics", (1,3)) + node("sagemath-symbolics", (2,3)))
-    g += node("sagemath-standard", (1,4))
+          + node("passagemath-tdlib", (0,3)) + node("passagemath-standard-no-symbolics", (1,3)) + node("passagemath-symbolics", (2,3)))
+    g += node("passagemath-standard", (1,4))
     sphinx_plot(g, figsize=(8, 4), axes=False)
 
 
@@ -553,24 +547,24 @@ Solid arrows indicate declared runtime dependencies (``install_requires``).
 Dashed arrows indicate declared optional runtime dependencies (``extras_require``).
 Not shown in the diagram are build dependencies and optional dependencies for testing.
 
-- `sage_conf <https://pypi.org/project/sage-conf/>`_ is a configuration
+- `passagemath-conf <https://pypi.org/project/passagemath-conf/>`_ is a configuration
   module. It provides the configuration variable settings determined by the
   ``configure`` script.
 
-- `sagemath-environment <https://pypi.org/project/sagemath-environment/>`_
+- `passagemath-environment <https://pypi.org/project/passagemath-environment/>`_
   provides the connection to the system and software environment. It includes
   :mod:`sage.env`, :mod:`sage.features`, :mod:`sage.misc.package_dir`, etc.
 
-- `sagemath-objects <https://pypi.org/project/sagemath-objects/>`_
+- `passagemath-objects <https://pypi.org/project/passagemath-objects/>`_
   provides a small fundamental subset of the modules of the Sage library,
   in particular all of :mod:`sage.structure`, a small portion of :mod:`sage.categories`,
   and a portion of :mod:`sage.misc`.
 
-- `sagemath-categories <https://pypi.org/project/sagemath-categories/>`_
-  provides a small subset of the modules of the Sage library, building upon sagemath-objects.
+- `passagemath-categories <https://pypi.org/project/passagemath-categories/>`_
+  provides a small subset of the modules of the Sage library, building upon passagemath-objects.
   It provides all of :mod:`sage.categories` and a small portion of :mod:`sage.rings`.
 
-- `sagemath-repl <https://pypi.org/project/sagemath-repl/>`_ provides
+- `passagemath-repl <https://pypi.org/project/passagemath-repl/>`_ provides
   the IPython kernel and Sage preparser (:mod:`sage.repl`),
   the Sage doctester (:mod:`sage.doctest`), and some related modules from :mod:`sage.misc`.
 
@@ -639,7 +633,7 @@ we use a virtual environment in which we only install the
 distribution to be tested (and its Python dependencies).
 
 Let's try it out first with the entire Sage library, represented by
-the distribution **sagemath-standard**.  Note that after Sage has been
+the distribution **passagemath-standard**.  Note that after Sage has been
 built normally, a set of wheels for most installed Python distribution
 packages is available in ``SAGE_VENV/var/lib/sage/wheels/``::
 
@@ -665,13 +659,13 @@ To create these wheels, use the command ``make wheels``::
   ...
   $ ls venv/var/lib/sage/wheels/sage*
   ...
-  sage_conf-10.0b2-py3-none-any.whl
+  passagemath_conf-10.5.45-py3-none-any.whl
   ...
 
 (You can also use ``./configure --enable-wheels`` to ensure that
 these wheels are always available and up to date.)
 
-Note in particular the wheel for **sage-conf**, which provides
+Note in particular the wheel for **passagemath-conf**, which provides
 configuration variable settings and the connection to the non-Python
 packages installed in ``SAGE_LOCAL``.
 
@@ -703,7 +697,7 @@ We can also run parts of the testsuite::
 The whole ``.tox`` directory can be safely deleted at any time.
 
 We can do the same with other distributions, for example the large
-distribution **sagemath-standard-no-symbolics**
+distribution **passagemath-standard-no-symbolics**
 (from :issue:`35095`), which is intended to provide
 everything that is currently in the standard Sage library, i.e.,
 without depending on optional packages, but without the packages
@@ -714,8 +708,8 @@ Again we can run the test with ``tox`` in a separate virtual environment::
   $ ./bootstrap && make wheels && ./sage -sh -c '(cd pkgs/sagemath-standard-no-symbolics && SAGE_NUM_THREADS=16 tox -v -v -v -e sagepython-sagewheels-nopypi-norequirements)'
 
 Some small distributions, for example the ones providing the two
-lowest levels, `sagemath-objects <https://pypi.org/project/sagemath-objects/>`_
-and `sagemath-categories <https://pypi.org/project/sagemath-categories/>`_
+lowest levels, `passagemath-objects <https://pypi.org/project/passagemath-objects/>`_
+and `passagemath-categories <https://pypi.org/project/passagemath-categories/>`_
 (from :issue:`29865`), can be installed and tested
 without relying on the wheels from the Sage build::
 
@@ -724,7 +718,7 @@ without relying on the wheels from the Sage build::
 This command finds the declared build-time and run-time dependencies
 on PyPI, either as source tarballs or as prebuilt wheels, and builds
 and installs the distribution
-`sagemath-objects <https://pypi.org/project/sagemath-objects/>`_ in a virtual
+`passagemath-objects <https://pypi.org/project/passagemath-objects/>`_ in a virtual
 environment in a subdirectory of ``pkgs/sagemath-objects/.tox``.
 
 Building these small distributions serves as a valuable regression
