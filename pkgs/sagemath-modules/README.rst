@@ -110,19 +110,19 @@ A quick way to try it out interactively::
 Available as extras, from other distributions
 ---------------------------------------------
 
-``pip install "sagemath-modules[RDF,CDF]"``
+``pip install "passagemath-modules[RDF,CDF]"``
  Linear algebra over fields of real and complex numbers using NumPy
 
-``pip install "sagemath-modules[RBF,CBF]"``
+``pip install "passagemath-modules[RBF,CBF]"``
  Linear algebra over fields of real and complex numbers with ball arithmetic using FLINT/arb
 
-``pip install "sagemath-modules[GF,GF2,GF2e,GFpn]"``
+``pip install "passagemath-modules[GF,GF2,GF2e,GFpn]"``
  Linear algebra over finite fields (various implementations)
 
-``pip install "sagemath-modules[QQbar,NumberField,CyclotomicField]"``
+``pip install "passagemath-modules[QQbar,NumberField,CyclotomicField]"``
  Linear algebra over the algebraic numbers or number fields
 
-``pip install "sagemath-modules[flint,fpylll,linbox]"``
+``pip install "passagemath-modules[flint,fpylll,linbox]"``
  Lattice basis reduction (LLL, BKZ)::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-modules[flint,fpylll,linbox,test]" ipython
@@ -137,16 +137,16 @@ Available as extras, from other distributions
     [-1  0  1]
     [ 1  1  1]
 
-`pip install "sagemath-modules[padics]"`
+`pip install "passagemath-modules[padics]"`
  Linear algebra over p-adic rings and fields
 
-`pip install "sagemath-modules[combinat]"`
+`pip install "passagemath-modules[combinat]"`
  Modules and algebras with combinatorial bases; algebraic combinatorics
 
-`pip install "sagemath-modules[invariant]"`
+`pip install "passagemath-modules[invariant]"`
  Submodules invariant under group actions
 
-`pip install "sagemath-modules[standard]"`
+`pip install "passagemath-modules[standard]"`
  All related features as in a standard installation of SageMath
 
 
