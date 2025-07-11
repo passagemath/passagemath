@@ -53,7 +53,7 @@ a backend for linear and mixed integer linear optimization backend using GLPK.
 It can be installed as an extra of the distribution
 `sagemath-polyhedra <https://pypi.org/project/sagemath-polyhedra>`_::
 
-  $ pip install "sagemath-polyhedra[glpk]"
+  $ pip install "passagemath-polyhedra[glpk]"
 
 
 What is included
