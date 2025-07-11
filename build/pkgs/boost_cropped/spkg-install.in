@@ -1,14 +1,21 @@
 cd src
 set -ex
 # BOOST_EXCLUDE_LIBRARIES: A semicolon-separated list of libraries to exclude
-#
+# cobalt:
+#     [boost_cropped-1.88.0]   [spkg-install] /Users/runner/work/PyNormaliz/PyNormaliz/local/var/tmp/sage/build/boost_cropped-1.88.0/src/libs/cobalt/include/boost/cobalt/detail/handler.hpp:275:17: error: 'uncaught_exceptions' is unavailable: introduced in macOS 10.12
+#     [boost_cropped-1.88.0]   [spkg-install]         && std::uncaught_exceptions() > 0)
+#     [boost_cropped-1.88.0]   [spkg-install]                 ^
+#     [boost_cropped-1.88.0]   [spkg-install] /Applications/Xcode_15.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/__exception/operations.h:34:72: note: 'uncaught_exceptions' has been explicitly marked unavailable here
+#     [boost_cropped-1.88.0]   [spkg-install] _LIBCPP_EXPORTED_FROM_ABI _LIBCPP_AVAILABILITY_UNCAUGHT_EXCEPTIONS int uncaught_exceptions() _NOEXCEPT;
+#     [boost_cropped-1.88.0]   [spkg-install]                                                                        ^
+# process:
 #     [boost_cropped-1.88.0]   [spkg-install] C:/a/passagemath/passagemath/sage-local/var/tmp/sage/build/boost_cropped-1.88.0/src/libs/process/include/boost/process/v2/detail/environment_win.hpp:43:8: error: constexpr function's return type 'void' is not a literal type
 #    [boost_cropped-1.88.0]   [spkg-install]    43 |   void assign(char_type& c1, const char_type& c2) BOOST_NOEXCEPT
 sdh_cmake -GNinja \
       -DBUILD_STATIC_LIBS=OFF \
       -DBUILD_SHARED_LIBS=ON \
       -DBOOST_INSTALL_LAYOUT=tagged \
-      -DBOOST_EXCLUDE_LIBRARIES="process" \
+      -DBOOST_EXCLUDE_LIBRARIES="cobalt;process" \
       .
 cmake --build .
 if [ -n "$MSYSTEM" ]; then
