@@ -21,7 +21,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_typing_extensions
 ]
 dynamic = ["version"]
-include(`pyproject_toml_metadata.m4')dnl'
+include(`pyproject_toml_metadata_supports_windows.m4')dnl'
 
 [project.optional-dependencies]
 # Improved formatting of docstrings in the help system

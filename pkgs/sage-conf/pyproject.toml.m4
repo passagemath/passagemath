@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-conf"
 description = "passagemath: Confectionery and configuration module"
 readme = "README.rst"
-dnl Not including the standard metadata from pyproject_toml_metadata.m4
+dnl Not including the standard metadata from pyproject_toml_metadata_supports_windows.m4
 dnl because sage-conf is GPL v3+.
 license = "GPL-3.0-or-later"
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
