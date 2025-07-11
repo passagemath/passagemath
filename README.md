@@ -8,17 +8,20 @@ It is a fork of [SageMath](https://www.sagemath.org/), which has been developed 
 under the motto "Creating a Viable Open Source Alternative to Magma, Maple, Mathematica,
 and MATLAB".
 
-The passagemath fork was created in October 2024 with the following goals:
+The passagemath fork uses the motto "Creating a Free Passage Between the Scientific Python Ecosystem
+and Mathematical Software Communities." It was created in October 2024 with the following goals:
 
-* providing modularized installation with pip, thus completing a [major project started in 2020 in the Sage codebase](https://github.com/sagemath/sage/issues/29705),
+* providing modularized installation with pip ([this major project was started in May 2020 in the Sage codebase](https://github.com/sagemath/sage/issues/29705) and completed in May 2025 in passagemath),
 * establishing first-class membership in the scientific Python ecosystem,
 * giving [clear attribution of upstream projects](https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ),
 * providing independently usable Python interfaces to upstream libraries,
-* providing [platform portability and integration testing services](https://github.com/passagemath/passagemath/issues/704) to upstream projects,
-* inviting collaborations with upstream projects,
+* offering [platform portability and integration testing services](https://github.com/passagemath/passagemath/issues/704) to upstream projects,
+* [inviting collaborations](https://github.com/passagemath/passagemath/issues/700) with upstream projects,
 * [building a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ),
-* developing a port to [Pyodide](https://pyodide.org/en/stable/) for serverless deployment with Javascript,
-* developing a native Windows port.
+* [empowering Sage users to participate in the scientific Python ecosystem](https://github.com/passagemath/passagemath/issues/248) by publishing packages,
+* developing a port to [Pyodide](https://pyodide.org/en/stable/) (WebAssembly) for serverless deployment with Javascript,
+* developing a [native Windows port](https://github.com/passagemath/passagemath/issues/1044)
+  (passagemath 10.6.1 publishes the first pip-installable packages for native Windows on x86_64).
 
 [Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
 
@@ -42,11 +45,13 @@ Full installation of passagemath from binary wheels on PyPI
 -----------------------------------------------------------
 
 passagemath attempts to support all major Linux distributions and recent versions of
-macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
-virtualization.
+macOS. Use of the full functionality on Windows currently requires the use of Windows
+Subsystem for Linux or virtualization.
 
 Complete sets of binary wheels are provided on PyPI for Python versions 3.9.x-3.13.x
 for Linux and macOS, both for the x86_64 and ARM architectures.
+Binary wheels for native Windows (x86_64) are gradually made available in the passagemath
+10.6.x series.
 
 Unless you need to install passagemath into a specific existing environment, we recommend
 to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.13.x),
@@ -57,8 +62,7 @@ for example `~/passagemath-venv/`:
     $ python3 -m venv ~/passagemath-venv
     $ source ~/passagemath-venv/bin/activate
 
-For Python 3.13.x on any platform, and for any Python version on the Linux aarch64 (ARM)
-and macOS arm64 (Apple Silicon M1/M2/M3/M4) platforms,
+For the Linux aarch64 (ARM) platform,
 [some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
 Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
 
@@ -75,7 +79,7 @@ Start the Sage REPL:
 
     (passagemath-venv) $ sage
 
-Alternatively, use a Python or IPython REPL, or use a Python or Sage kernel in Jupyter.
+Alternatively, use a Python or IPython REPL, or use the Python kernel or the provided Sage kernel in Jupyter.
 
 
 Modularized distributions

@@ -23,7 +23,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
 ]
 dynamic = ["version"]
-include(`pyproject_toml_metadata.m4')dnl'
+include(`pyproject_toml_metadata_supports_windows.m4')dnl'
 
 [project.readme]
 file = "README.rst"
