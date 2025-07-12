@@ -38,6 +38,3 @@ include-package-data = false
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
-
-[tool.setuptools.package-data]
-"sage.graphs" = ["mcqd.pxd"]
