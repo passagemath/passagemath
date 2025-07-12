@@ -33,7 +33,6 @@ test = [
 ]
 
 [tool.setuptools]
-packages = ["sage.graphs"]
 include-package-data = false
 
 [tool.setuptools.dynamic]
