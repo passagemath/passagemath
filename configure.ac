@@ -593,6 +593,14 @@ AC_CONFIG_COMMANDS(links, [
     ], [
         AC_MSG_NOTICE([cannot create convenience symlink $SYMLINK -> $SAGE_VENV because the file exists and is not a symlink; this is harmless])
     ])
+    SYMLINK="${ac_top_build_prefix}wheels"
+    AS_IF([test -L "$SYMLINK" -o ! -e "$SYMLINK"], [
+        AC_MSG_NOTICE([creating convenience symlink $SYMLINK -> venv/var/lib/sage/wheels])
+        rm -f "$SYMLINK"
+        ln -sf venv/var/lib/sage/wheels "$SYMLINK"
+    ], [
+        AC_MSG_NOTICE([cannot create convenience symlink $SYMLINK -> $SAGE_VENV because the file exists and is not a symlink; this is harmless])
+    ])
 ], [
     SAGE_LOCAL="$SAGE_LOCAL"
     eval SAGE_VENV="$SAGE_VENV"dnl eval so as to evaluate the embedded ${SAGE_LOCAL}

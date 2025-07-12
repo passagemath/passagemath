@@ -21,6 +21,8 @@
 /configure
 /conftest*
 /confdefs.h
+/prefix
+/wheels
 
 /m4/sage_spkg_configures.m4
 /m4/sage_spkg_versions*.m4
@@ -262,7 +264,6 @@ src/venv.bak/
 /.tox
 /build/.tox
 **/.tox
-/prefix
 
 # code coverage generated files
 src/.coverage/
