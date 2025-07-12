@@ -33,7 +33,6 @@ test = [
 ]
 
 [tool.setuptools]
-packages = ["sage.libs.coxeter3"]
 include-package-data = false
 
 [tool.setuptools.dynamic]
