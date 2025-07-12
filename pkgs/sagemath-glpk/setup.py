@@ -9,4 +9,5 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-glpk'],
            required_modules=('zlib',),
-           spkgs=['glpk'])
+           spkgs=['glpk'],
+           package_data={})

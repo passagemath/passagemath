@@ -8,4 +8,5 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-gfan'],
-           spkgs=['gfan'])
+           spkgs=['gfan'],
+           package_data={})
