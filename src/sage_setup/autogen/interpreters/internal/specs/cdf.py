@@ -73,6 +73,7 @@ class CDFInterpreter(StackInterpreter):
 
         super(CDFInterpreter, self).__init__(ty_double_complex)
         self.mc_py_constants = MemoryChunkConstants('py_constants', ty_python)
+        self.err_return = '*'
         self.adjust_retval = "dz_to_CDE"
         self.chunks = [self.mc_args, self.mc_constants, self.mc_py_constants,
                        self.mc_stack,
