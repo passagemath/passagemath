@@ -26,6 +26,12 @@ include(`pyproject_toml_metadata.m4')dnl'
 file = "README.rst"
 content-type = "text/x-rst"
 
+[project.optional-dependencies]
+test = [
+    "passagemath-repl",
+    "passagemath-graphs",
+]
+
 [tool.setuptools]
 packages = ["sage.graphs"]
 include-package-data = false
