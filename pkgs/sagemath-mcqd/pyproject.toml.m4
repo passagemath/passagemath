@@ -30,6 +30,7 @@ content-type = "text/x-rst"
 test = [
     "passagemath-repl",
     "passagemath-graphs",
+    "passagemath-cliquer",
 ]
 
 [tool.setuptools]
