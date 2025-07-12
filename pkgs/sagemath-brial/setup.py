@@ -9,4 +9,5 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-brial'],
            required_modules=('m4ri', 'libpng'),
-           spkgs=['brial', 'm4ri', 'libpng', 'gmp', 'mpc', 'mpfr'])
+           spkgs=['brial', 'm4ri', 'libpng', 'gmp', 'mpc', 'mpfr'],
+           package_data={})

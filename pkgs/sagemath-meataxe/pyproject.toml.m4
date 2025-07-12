@@ -34,7 +34,3 @@ include-package-data = false
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
-
-[tool.setuptools.package-data]
-"sage.libs" = ["meataxe.pxd"]
-"sage.matrix" = ["matrix_gfpn_dense.pxd"]

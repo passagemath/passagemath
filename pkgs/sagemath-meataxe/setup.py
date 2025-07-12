@@ -8,4 +8,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-meataxe'],
-           spkgs=['meataxe'])
+           spkgs=['meataxe'],
+           package_data={
+               "sage.libs": ["meataxe.pxd"],
+               "sage.matrix": ["matrix_gfpn_dense.pxd"],
+           })
