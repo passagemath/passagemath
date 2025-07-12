@@ -292,7 +292,7 @@ class InterpreterGenerator:
               }
             {% if myself.uses_error_handler %}
             error:
-              return {{ s.err_return }};
+              return {{ s.err_return if s.err_return != '*' else s.return_type.c_decl_type() + '()' }};
             {% endif %}
             }
 
@@ -377,8 +377,11 @@ class InterpreterGenerator:
             cdef extern from "interp_{{ s.name }}.c":
                 {{ myself.func_header(cython=true) -}}
 
-            {% if s.err_return != 'NULL' %}
+            {% if s.err_return not in ['NULL', '*'] %}
              except? {{ s.err_return }}
+            {% endif %}
+            {% if s.err_return == '*' %}
+             except *
             {% endif %}
 
             cdef class Wrapper_{{ s.name }}(Wrapper):
