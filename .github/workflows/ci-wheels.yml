@@ -108,8 +108,6 @@ jobs:
                             "ubuntu-24.04-arm",
                             "macos-13",
                             "macos-14",
-                            "windows-2022",
-                            "windows-11-arm",
                            ]') }}
     runs-on: ${{ matrix.os }}
     steps:
