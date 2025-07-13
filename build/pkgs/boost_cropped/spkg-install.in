@@ -11,6 +11,8 @@ set -ex
 # process:
 #     [boost_cropped-1.88.0]   [spkg-install] C:/a/passagemath/passagemath/sage-local/var/tmp/sage/build/boost_cropped-1.88.0/src/libs/process/include/boost/process/v2/detail/environment_win.hpp:43:8: error: constexpr function's return type 'void' is not a literal type
 #    [boost_cropped-1.88.0]   [spkg-install]    43 |   void assign(char_type& c1, const char_type& c2) BOOST_NOEXCEPT
+# locale:
+#     see https://github.com/passagemath/passagemath/issues/1227
 #
 # BOOST_STACKTRACE_LIBCXX_RUNTIME_MAY_CAUSE_MEMORY_LEAK:
 # While building 32-bit Linux wheels:
@@ -22,7 +24,7 @@ sdh_cmake -GNinja \
       -DBUILD_STATIC_LIBS=OFF \
       -DBUILD_SHARED_LIBS=ON \
       -DBOOST_INSTALL_LAYOUT=tagged \
-      -DBOOST_EXCLUDE_LIBRARIES="cobalt;process" \
+      -DBOOST_EXCLUDE_LIBRARIES="cobalt;process;locale" \
       -DBOOST_STACKTRACE_ENABLE_FROM_EXCEPTION=0 \
       .
 cmake --build .
