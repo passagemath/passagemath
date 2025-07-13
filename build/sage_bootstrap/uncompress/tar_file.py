@@ -55,6 +55,11 @@ class SageBaseTarFile(tarfile.TarFile):
         # and then restore it
         super(SageBaseTarFile, self).__init__(*args, **kwargs)
 
+        # Our 'chmod' method is incompatible with the new Python 3.14 default
+        # of using the 'data_filter'. Restore old behavior.
+        # https://docs.python.org/3/library/tarfile.html#supporting-older-python-versions
+        self.extraction_filter = (lambda member, path: member)
+
         # Extracted files will have this timestamp
         self._extracted_mtime = time.time()
 
