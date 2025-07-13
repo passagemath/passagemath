@@ -13,7 +13,7 @@ set -ex
 #    [boost_cropped-1.88.0]   [spkg-install]    43 |   void assign(char_type& c1, const char_type& c2) BOOST_NOEXCEPT
 # locale:
 #     see https://github.com/passagemath/passagemath/issues/1227
-# context:
+# context (and dependents asio, coroutine, fiber, log):
 #     see https://github.com/passagemath/passagemath/issues/1231
 #
 # BOOST_STACKTRACE_LIBCXX_RUNTIME_MAY_CAUSE_MEMORY_LEAK:
@@ -26,7 +26,7 @@ sdh_cmake -GNinja \
       -DBUILD_STATIC_LIBS=OFF \
       -DBUILD_SHARED_LIBS=ON \
       -DBOOST_INSTALL_LAYOUT=tagged \
-      -DBOOST_EXCLUDE_LIBRARIES="cobalt;process;locale;context" \
+      -DBOOST_EXCLUDE_LIBRARIES="cobalt;process;locale;context;asio;coroutine;fiber;log" \
       -DBOOST_STACKTRACE_ENABLE_FROM_EXCEPTION=0 \
       .
 cmake --build .
