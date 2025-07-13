@@ -26,15 +26,7 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [tool.setuptools]
-packages = [
-    "sage.libs",
-    "sage.matrix",
-]
 include-package-data = false
 
 [tool.setuptools.dynamic]
 version = {file = ["VERSION.txt"]}
-
-[tool.setuptools.package-data]
-"sage.libs" = ["meataxe.pxd"]
-"sage.matrix" = ["matrix_gfpn_dense.pxd"]
