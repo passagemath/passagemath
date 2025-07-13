@@ -15,5 +15,11 @@
   // In this case, adding the label "backport-to-production" will backport the PR to the "production" branch
   "branchLabelMapping": {
     "^backport-to-(.+)$": "$1"
-  }
+  },
+
+  "targetPRLabels": ["backport"],
+
+  "sourcePRLabels": ["backport-pr-created"],
+
+  "commitConflicts": true
 }
