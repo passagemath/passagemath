@@ -1,0 +1,19 @@
+// .backportrc.json -- for https://github.com/sorenlouv/backport
+{
+  // Required
+  "repoOwner": "passagemath",
+  "repoName": "passagemath",
+
+  // the branches available to backport to
+  "targetBranchChoices": ["passagemath-10.5.x"],
+
+  // Optional: automatically merge backport PR
+  "autoMerge": true,
+  "autoMergeMethod": "merge",
+
+  // Optional: Automatically detect which branches a pull request should be backported to based on the pull request labels.
+  // In this case, adding the label "backport-to-production" will backport the PR to the "production" branch
+  "branchLabelMapping": {
+    "^backport-to-(.+)$": "$1"
+  }
+}
