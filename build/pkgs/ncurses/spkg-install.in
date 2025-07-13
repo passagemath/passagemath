@@ -7,6 +7,8 @@ fi
 
 cd src
 
+export CFLAGS="$CFLAGS -std=gnu17"
+
 # Ncurses cannot build narrow and wide (unicode, --enable-widec)
 # versions in one go. Need to compile twice. Note that Python's curses
 # module will want the wide version, and readline the narrow version.
