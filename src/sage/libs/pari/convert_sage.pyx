@@ -198,7 +198,6 @@ cpdef gen_to_sage(Gen z, locals=None):
         2/3*x^3 + x + y - 5/7
         sage: parent(gen_to_sage(f, {'x': x, 'y': y}))
         Symbolic Ring
-
         sage: gen_to_sage(f)
         Traceback (most recent call last):
         ...
