@@ -4442,6 +4442,7 @@ cdef class Expression(Expression_abc):
 
         Check that :issue:`23921` is resolved::
 
+            sage: # needs sage.graphs
             sage: assume(SR.an_element() > 0)
             sage: A.<n> = AsymptoticRing('(SR_+)^n * n^SR', SR)
             sage: elem = SR(2)^n
