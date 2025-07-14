@@ -677,7 +677,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: s = SymmetricFunctions(ZZ).s()
             sage: L = LazySymmetricFunctions(s)
             sage: m = L._terms_of_degree(3, ZZ); m
@@ -731,7 +731,6 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             sage: e3 = g * z2 - 3 * z1^2
             sage: e = e1^2 + 32 * e2^3 - g^10 * e3^2
             sage: L.define_implicitly([(g, [1, 2])], [e])
-
             sage: sol = L(lambda n: 1 if not n else (2 if is_square(n) else 0)); sol
             1 + 2*z + 2*z^4 + O(z^7)
             sage: all(g[i] == sol[i] for i in range(50))
@@ -839,7 +838,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         A bivariate example::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: L.<x, y> = LazyPowerSeriesRing(QQ)
             sage: B = L.undefined()
             sage: eq = y*B^2 + 1 - B(x, x-y)
@@ -852,7 +851,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         Knödel walks::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
              sage: L.<z, x> = LazyPowerSeriesRing(QQ)
              sage: F = L.undefined()
              sage: eq = F(z, x)*(x^2*z-x+z) - (z - x*z^2 - x^2*z^2)*F(z, 0) + x
@@ -864,7 +863,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         Bicolored rooted trees with black and white roots::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: L.<x, y> = LazyPowerSeriesRing(QQ)
             sage: A = L.undefined()
             sage: B = L.undefined()
@@ -892,7 +891,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
         contains at least one element of each kind (defined
         implicitly to have a test)::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: p = SymmetricFunctions(QQ).p()
             sage: S = LazySymmetricFunctions(p)
             sage: P = S(lambda n: sum(p[la] for la in Partitions(n)))
@@ -906,7 +905,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         The Frobenius character of labelled Dyck words::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: h = SymmetricFunctions(QQ).h()
             sage: L.<t, u> = LazyPowerSeriesRing(h.fraction_field())
             sage: D = L.undefined()
@@ -2933,9 +2932,9 @@ class LazyPowerSeriesRing(LazySeriesRing):
             sage: m[0].parent()
             Univariate Polynomial Ring in z over Rational Field
             sage: L.<x, y> = LazyPowerSeriesRing(ZZ)
-            sage: m = L._terms_of_degree(3, QQ["z"]); m
+            sage: m = L._terms_of_degree(3, QQ["z"]); m                                 # needs sage.combinat
             [y^3, x*y^2, x^2*y, x^3]
-            sage: m[0].parent()
+            sage: m[0].parent()                                                         # needs sage.combinat
             Multivariate Polynomial Ring in x, y over Univariate Polynomial Ring in z over Rational Field
         """
         if self._arity == 1:
@@ -3618,7 +3617,7 @@ class LazyCompletionGradedAlgebra(LazySeriesRing):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: s = SymmetricFunctions(ZZ).s()
             sage: L = LazySymmetricFunctions(s)
             sage: m = L._terms_of_degree(3, QQ["x"]); m

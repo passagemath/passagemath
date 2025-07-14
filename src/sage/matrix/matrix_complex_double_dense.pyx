@@ -78,7 +78,7 @@ cdef class Matrix_complex_double_dense(Matrix_double_dense):
     ``b = [5,6]``::
 
         sage: b = vector(CDF,[5,6])                                                     # needs sage.symbolic
-        sage: m.solve_right(b)  # abs tol 1e-14                                         # needs sage.symbolic
+        sage: m.solve_right(b)  # abs tol 1e-14                                         # needs scipy sage.symbolic
         (2.6666666666666665 + 0.6666666666666669*I, -0.3333333333333333 - 1.1666666666666667*I)
 
     See the methods :meth:`~.Matrix_double_dense.QR`,

@@ -1575,7 +1575,7 @@ class Stream_uninitialized(Stream):
 
         TESTS::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: import gc
             sage: L.<x,y,t> = LazyPowerSeriesRing(ZZ)
             sage: A = L.undefined(name="A")
@@ -3184,7 +3184,7 @@ class Stream_plethysm(Stream_binary):
 
         TESTS::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: from sage.data_structures.stream import Stream_function, Stream_plethysm
             sage: s = SymmetricFunctions(QQ).s()
             sage: p = SymmetricFunctions(QQ).p()
@@ -3418,7 +3418,7 @@ class Stream_plethysm(Stream_binary):
 
         EXAMPLES::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: from sage.data_structures.stream import Stream_function, Stream_plethysm
             sage: s = SymmetricFunctions(QQ).s()
             sage: p = SymmetricFunctions(QQ).p()

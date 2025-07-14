@@ -4661,6 +4661,7 @@ cdef class Matrix(Matrix1):
         The "usual" quaternions are a non-commutative ring and computations
         of kernels over these rings are not implemented. ::
 
+            sage: # needs sage.libs.singular
             sage: Q.<i,j,k> = QuaternionAlgebra(-1,-1)
             sage: A = matrix(Q, 2, [i,j,-1,k])
             sage: A.right_kernel_matrix()
@@ -5111,6 +5112,7 @@ cdef class Matrix(Matrix1):
         Matrices over non-commutative rings are not a good idea either.
         These are the "usual" quaternions.  ::
 
+            sage: # needs sage.libs.singular
             sage: Q.<i,j,k> = QuaternionAlgebra(-1,-1)
             sage: A = matrix(Q, 2, [i,j,-1,k])
             sage: A.right_kernel()

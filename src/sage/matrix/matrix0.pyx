@@ -91,6 +91,7 @@ cdef class Matrix(sage.structure.element.Matrix):
 
     ::
 
+        sage: # needs sage.libs.singular
         sage: Q.<i,j,k> = QuaternionAlgebra(QQ, -1,-1)
         sage: matrix(Q,2,1,[1,2])
         [1]

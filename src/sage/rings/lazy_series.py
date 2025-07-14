@@ -6545,7 +6545,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
         The Frobenius character of the permutation action on set
         partitions is a plethysm::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: s = SymmetricFunctions(QQ).s()
             sage: S = LazySymmetricFunctions(s)
             sage: E1 = S(lambda n: s[n], valuation=1)
@@ -6556,7 +6556,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         The plethysm with a tensor product is also implemented::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: s = SymmetricFunctions(QQ).s()
             sage: X = tensor([s[1],s[[]]])
             sage: Y = tensor([s[[]],s[1]])
@@ -6581,7 +6581,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         TESTS::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: s = SymmetricFunctions(QQ).s()
             sage: S = LazySymmetricFunctions(s)
             sage: f = 1 / (1 - S(s[2]))
@@ -6607,7 +6607,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
         Check that composing the zero series with anything yields
         zero in the correct parent::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: e = SymmetricFunctions(QQ).e()
             sage: h = SymmetricFunctions(QQ).h()
             sage: s = SymmetricFunctions(QQ).s()
@@ -6620,10 +6620,11 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         Check that composing `f` with zero series yields the constant term of `f`::
 
-            sage: f = 3*L(tensor([s[1], s[1]]))                                         # needs sage.modules
-            sage: f(0, 0)                                                               # needs sage.modules
+            sage: # needs sage.combinat sage.modules
+            sage: f = 3*L(tensor([s[1], s[1]]))
+            sage: f(0, 0)
             0
-            sage: (3+f)(0, 0)                                                           # needs sage.modules
+            sage: (3+f)(0, 0)
             3
         """
         fP = parent(self)
@@ -6728,7 +6729,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
             ...
             ValueError: compositional inverse does not exist
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: R.<a,b> = QQ[]
             sage: p = SymmetricFunctions(R.fraction_field()).p()
             sage: L = LazySymmetricFunctions(p)
@@ -7264,7 +7265,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         Check that the product with zero works::
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: s = SymmetricFunctions(QQ).s()
             sage: L = LazySymmetricFunctions(s)
             sage: L(0).arithmetic_product(s[2])
@@ -7275,27 +7276,30 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
         Check that the arithmetic product of symmetric functions of
         finite support works::
 
-            sage: L(s([2])).arithmetic_product(s([1,1,1]))                              # needs sage.modules
+            sage: # needs sage.combinat sage.modules
+            sage: L(s([2])).arithmetic_product(s([1,1,1]))
             s[2, 2, 1, 1] + s[3, 1, 1, 1] + s[3, 2, 1] + s[3, 3] + 2*s[4, 1, 1]
 
-            sage: f = 1/(1-L(s[1]))                                                     # needs sage.modules
-            sage: f.arithmetic_product(s[1]) - f                                        # needs lrcalc_python sage.modules
+            sage: f = 1/(1-L(s[1]))
+            sage: f.arithmetic_product(s[1]) - f                                        # needs lrcalc_python
             O^7
 
         Check that the arithmetic product of symmetric functions with
         constant a term works as advertised::
 
-            sage: p = SymmetricFunctions(QQ).p()                                        # needs sage.modules
-            sage: L = LazySymmetricFunctions(p)                                         # needs sage.modules
-            sage: L(5).arithmetic_product(3*p[2,1])                                     # needs sage.modules
+            sage: # needs sage.combinat sage.modules
+            sage: p = SymmetricFunctions(QQ).p()
+            sage: L = LazySymmetricFunctions(p)
+            sage: L(5).arithmetic_product(3*p[2,1])
             15*p[]
 
         Check the arithmetic product of symmetric functions over a
         finite field works::
 
-            sage: s = SymmetricFunctions(FiniteField(2)).s()                            # needs sage.modules
-            sage: L = LazySymmetricFunctions(s)                                         # needs sage.modules
-            sage: L(s([2])).arithmetic_product(s([1,1,1]))                              # needs sage.modules
+            sage: # needs sage.combinat sage.modules
+            sage: s = SymmetricFunctions(FiniteField(2)).s()
+            sage: L = LazySymmetricFunctions(s)
+            sage: L(s([2])).arithmetic_product(s([1,1,1]))
             s[2, 2, 1, 1] + s[3, 1, 1, 1] + s[3, 2, 1] + s[3, 3]
         """
         if len(args) != self.parent()._arity:
