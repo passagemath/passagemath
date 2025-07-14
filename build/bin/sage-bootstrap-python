@@ -53,14 +53,35 @@ if [ "$LC_ALL" = "C" -o "$LANG" = "C" -o "$LC_CTYPE" = "C" ]; then
     export LANG
 fi
 
-PYTHONS="python python3 python3.12 python3.11 python3.10 python3.9 python3.8 python3.7 python2.7 python3.6 python2"
+PYTHONS="python python3 python3.14 python3.13 python3.12 python3.11 python3.10 python3.9 python3.8 python3.7 python2.7 python3.6 python2"
+
+# MSYS has 2 different Pythons installed when targeting mingw: a cygwin-based Python located
+# at /usr/bin/python that uses the cygwin APIs, and a Windows-based Python located at
+# /mingw64/bin/python that uses the regular Windows APIs
+#
+# The latter will be first on PATH and is what we want to use as the Python for running sage itself,
+# but the code in the build system is expecting filepaths that work from the current shell to
+# also work when passed to Python (see the CHECK_PATH check below), so make sure that we find the
+# cygwin Python for bootstrapping
+if [ -n "$MSYSTEM" ]; then
+    PYTHONS="/usr/bin/python $PYTHONS"
+fi
+
+# If curl is present, sage_bootstrap uses it instead of the code using FancyURLopener.
+if command -v curl >/dev/null; then
+    URLLIB_REQUEST_TEST=0
+else
+    URLLIB_REQUEST_TEST="from urllib.request import FancyURLopener"
+fi
+
+# Trac #32405: Prefer a Python that provides ssl with SNI, which allows developers
 # Issue #32405: Prefer a Python that provides ssl with SNI, which allows developers
 # to download from upstream URLs (configure --enable-download-from-upstream-url),
 # in particular from PyPI, which requires SNI.
 for PY in $PYTHONS; do
     PYTHON="$(PATH="$SAGE_ORIG_PATH" command -v $PY)"
     if [ -n "$PYTHON" ]; then
-        if CHECK_PATH="$PATH" "$PYTHON" -c "import argparse; import urllib; from hashlib import sha1; from ssl import HAS_SNI; assert HAS_SNI; from os import listdir, environ; listdir(\"$(pwd)\"); assert environ[\"PATH\"] == environ[\"CHECK_PATH\"]; from urllib.request import FancyURLopener" 2>/dev/null; then
+        if CHECK_PATH="$PATH" "$PYTHON" -c "import argparse; import urllib; from hashlib import sha1; from ssl import HAS_SNI; assert HAS_SNI; from os import listdir, environ; listdir(\"$(pwd)\"); assert environ[\"PATH\"] == environ[\"CHECK_PATH\"]; $URLLIB_REQUEST_TEST" 2>/dev/null; then
             exec "$PYTHON" "$@"
         fi
     fi
@@ -69,7 +90,7 @@ done
 for PY in $PYTHONS; do
     PYTHON="$(PATH="$SAGE_ORIG_PATH" command -v $PY)"
     if [ -n "$PYTHON" ]; then
-        if CHECK_PATH="$PATH" "$PYTHON" -c "import argparse; import urllib; from hashlib import sha1; from os import listdir, environ; listdir(\"$(pwd)\"); assert environ[\"PATH\"] == environ[\"CHECK_PATH\"]; from urllib.request import FancyURLopener" 2>/dev/null; then
+        if CHECK_PATH="$PATH" "$PYTHON" -c "import argparse; import urllib; from hashlib import sha1; from os import listdir, environ; listdir(\"$(pwd)\"); assert environ[\"PATH\"] == environ[\"CHECK_PATH\"]; $URLLIB_REQUEST_TEST" 2>/dev/null; then
             exec "$PYTHON" "$@"
         fi
     fi
