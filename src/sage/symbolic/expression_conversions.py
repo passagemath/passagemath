@@ -21,7 +21,7 @@ from functools import reduce
 
 from sage.misc.lazy_import import lazy_import
 from sage.symbolic.ring import SR
-from sage.structure.element import Expression, InfinityElement
+from sage.structure.element import Expression
 from sage.functions.log import exp
 from sage.symbolic.operators import arithmetic_operators, relation_operators, FDerivativeOperator, add_vararg, mul_vararg
 from sage.rings.number_field.number_field_element_base import NumberFieldElement_base
