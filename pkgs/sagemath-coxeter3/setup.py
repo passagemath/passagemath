@@ -8,4 +8,10 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-coxeter3'],
-           spkgs=['coxeter3'])
+           spkgs=['coxeter3'],
+           package_data={
+               "sage.libs.coxeter3": [
+                   "coxeter.pxd",
+                   "decl.pxd",
+               ],
+           })

@@ -15,6 +15,7 @@ def mcqd(G):
 
     TESTS::
 
+        sage: # needs cliquer
         sage: from sage.graphs.mcqd import mcqd         # optional - mcqd
         sage: for i in range(10):                       # optional - mcqd
         ....:     g = graphs.RandomGNP(15,.5)
