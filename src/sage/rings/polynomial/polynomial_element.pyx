@@ -5503,7 +5503,7 @@ cdef class Polynomial(CommutativePolynomial):
         One can easily add gcd functionality to new rings by providing a method
         ``_gcd_univariate_polynomial``::
 
-            sage: # needs sage.rings.number_field sage.symbolic
+            sage: # needs fpylll sage.rings.number_field sage.symbolic
             sage: O = ZZ[-sqrt(5)]
             sage: R.<x> = O[]
             sage: a = O.1
@@ -8813,7 +8813,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         We lose precision if we first change coefficients to `\QQ_p`::
 
-            sage: # needs sage.rings.padics
+            sage: # needs sage.geometry.polyhedron sage.rings.padics
             sage: pol.change_ring(Qp(3, 5)).roots()
             [(1 + O(3^3), 2)]
             sage: (pol - 3^6).roots(Qp(3, 5))
