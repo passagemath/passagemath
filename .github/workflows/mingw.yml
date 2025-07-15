@@ -142,7 +142,7 @@ jobs:
 
       - name: Build and test
         run: |
-          export MSYS=winsymlinks
+          export MSYS=winsymlinks:nativestrict
           if [ ! -x ./configure ]; then ./bootstrap -D; fi
           touch configure
           PREFIX=$(pwd)/sage-local

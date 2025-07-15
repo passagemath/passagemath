@@ -68,7 +68,7 @@ AC_SUBST(SHLIBEXT, "${acl_shlibext}")
 # Set various environment variables (needed at configure time)
 ########################################################################
 
-export MSYS=winsymlinks
+export MSYS=winsymlinks:nativestrict
 
 # Assume current directory is SAGE_ROOT.
 SAGE_ROOT=`pwd -P`
