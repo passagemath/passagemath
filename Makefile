@@ -11,7 +11,7 @@
 # don't break
 # TODO: Is it better to enable symlinks where necessary and leave it disabled by
 # default instead of enabling it everywhere by default?
-export MSYS=winsymlinks
+export MSYS=winsymlinks:nativestrict
 
 default: all
 
