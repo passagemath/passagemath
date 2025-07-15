@@ -162,12 +162,12 @@ jobs:
           WHEELHOUSE=${GITHUB_WORKSPACE}/wheelhouse
           if [ -d "$WHEELHOUSE" ]; then
               export PIP_FIND_LINKS=file://$WHEELHOUSE
-              (set +x; cd "$WHEELHOUSE" && for whl in *.whl; do
+              (set +x; cd "$WHEELHOUSE" && for whl in *.whl *.tar.gz; do
                    case $whl in
-                       *$pkg_underscore-*)     ;;
+                       *$pkg_underscore-*.whl) ;;
                        *musllinux*)            ;;
                        *_i686*)                ;;
-                       *-cp$python_version_no_dot-*|*-none-any*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                       *-cp$python_version_no_dot-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
               export PIP_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt
