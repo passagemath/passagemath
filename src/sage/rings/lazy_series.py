@@ -6566,12 +6566,11 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
             sage: B = S2(X+Y)
             sage: A(B)                                                                  # needs lrcalc_python
             (s[]#s[1,1,1]+s[1]#s[1,1]+s[1,1]#s[1]+s[1,1,1]#s[])
-
-            sage: H = S(lambda n: s[n])                                                 # needs sage.modules
-            sage: H(S2(X*Y))                                                            # needs lrcalc_python sage.modules
+            sage: H = S(lambda n: s[n])
+            sage: H(S2(X*Y))                                                            # needs lrcalc_python
             (s[]#s[]) + (s[1]#s[1]) + (s[1,1]#s[1,1]+s[2]#s[2])
              + (s[1,1,1]#s[1,1,1]+s[2,1]#s[2,1]+s[3]#s[3]) + O^7
-            sage: H(S2(X+Y))                                                            # needs sage.modules
+            sage: H(S2(X+Y))
             (s[]#s[]) + (s[]#s[1]+s[1]#s[]) + (s[]#s[2]+s[1]#s[1]+s[2]#s[])
              + (s[]#s[3]+s[1]#s[2]+s[2]#s[1]+s[3]#s[])
              + (s[]#s[4]+s[1]#s[3]+s[2]#s[2]+s[3]#s[1]+s[4]#s[])
@@ -7279,7 +7278,6 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
             sage: # needs sage.combinat sage.modules
             sage: L(s([2])).arithmetic_product(s([1,1,1]))
             s[2, 2, 1, 1] + s[3, 1, 1, 1] + s[3, 2, 1] + s[3, 3] + 2*s[4, 1, 1]
-
             sage: f = 1/(1-L(s[1]))
             sage: f.arithmetic_product(s[1]) - f                                        # needs lrcalc_python
             O^7
