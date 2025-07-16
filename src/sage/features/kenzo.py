@@ -28,7 +28,7 @@ class Kenzo(Feature):
 
         sage: from sage.features.kenzo import Kenzo
         sage: Kenzo().is_present()  # optional - kenzo
-        FeatureTestResult('kenzo', True)
+        FeatureTestResult('kenzo_module', True)
     """
     def __init__(self):
         r"""
@@ -49,7 +49,7 @@ class Kenzo(Feature):
 
             sage: from sage.features.kenzo import Kenzo
             sage: Kenzo()._is_present()  # optional - kenzo
-            FeatureTestResult('kenzo', True)
+            FeatureTestResult('kenzo_module', True)
         """
         try:
             from sage.libs.ecl import ecl_eval
