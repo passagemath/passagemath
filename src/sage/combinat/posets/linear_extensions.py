@@ -756,6 +756,7 @@ class LinearExtensionsOfPoset(UniqueRepresentation, Parent):
 
         Alternatively, one may get the graph of the action of the ``tau`` operator::
 
+            sage: # needs sage.modules
             sage: G = L.markov_chain_digraph(action='tau'); G
             Looped multi-digraph on 5 vertices
             sage: G.vertices(sort=True, key=repr)
