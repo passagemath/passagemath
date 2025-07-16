@@ -8,6 +8,9 @@ from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.polynomial_ring import polygen, polygens
 from sage.rings.polynomial.polynomial_element import Polynomial
 
+# Boolean Polynomial Rings
+from sage.rings.polynomial.polynomial_ring_constructor import BooleanPolynomialRing_constructor as BooleanPolynomialRing
+
 # Multivariate Polynomial Rings
 from sage.rings.polynomial.term_order import TermOrder
 from sage.rings.polynomial.multi_polynomial_element import degree_lowest_rational_function
