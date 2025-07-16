@@ -18,12 +18,5 @@ Polynomials
 
 from sage.rings.polynomial.all__sagemath_polyhedra import *
 
-from sage.misc.lazy_import import lazy_import
-
 # Generic convolution
 from sage.rings.polynomial.convolution import convolution
-
-# Boolean Polynomial Rings
-from sage.rings.polynomial.polynomial_ring_constructor import BooleanPolynomialRing_constructor as BooleanPolynomialRing
-
-del lazy_import
