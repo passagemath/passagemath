@@ -1246,6 +1246,7 @@ cdef class FiniteField(Field):
 
         There is no coercion from a `p`-adic ring to its residue field::
 
+            sage: # needs sage.libs.ntl sage.rings.padics
             sage: R.<a> = Zq(81); k = R.residue_field()
             sage: k.has_coerce_map_from(R)
             False

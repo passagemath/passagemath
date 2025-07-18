@@ -120,6 +120,7 @@ cdef class pAdicTemplateElement(pAdicGenericElement):
 
         Check that bug :issue:`28555` is fixed::
 
+            sage: # needs sage.libs.ntl
             sage: A.<a> = Qq(5^2)
             sage: A.base_ring()(A(1))
             1 + O(5^20)
@@ -130,6 +131,7 @@ cdef class pAdicTemplateElement(pAdicGenericElement):
 
         Check that bug :issue:`33527` is fixed::
 
+            sage: # needs sage.libs.ntl
             sage: K = Qq(25, names='a')
             sage: K0 = K.base_ring()
             sage: K0(K(1))
