@@ -831,7 +831,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
             sage: matrix(ZZ, 0, 0, sparse=True).minpoly(algorithm='linbox')             # needs sage.libs.linbox
             1
-            sage: matrix(ZZ, 0, 0, sparse=True).minpoly(algorithm='generic')
+            sage: matrix(ZZ, 0, 0, sparse=True).minpoly(algorithm='generic')            # needs sage.libs.pari
             1
         """
         if self._nrows != self._ncols:

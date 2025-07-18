@@ -7025,7 +7025,7 @@ cdef class Matrix(Matrix1):
 
         Test different algorithms::
 
-            sage: m.eigenvalues(algorithm="sage")
+            sage: m.eigenvalues(algorithm="sage")                                       # needs sage.libs.pari
             doctest:warning...
             UserWarning: Using generic algorithm for an inexact ring,
             which will probably give incorrect results due to numerical precision issues.
@@ -7038,10 +7038,10 @@ cdef class Matrix(Matrix1):
             [-1.41421356237309*I, 1.41421356237310*I]
             sage: m.eigenvalues(algorithm="mpmath")  # abs tol 1e-14
             [-1.41421356237309*I, 1.41421356237309*I]
-            sage: m.eigenvalues(algorithm="pari")  # abs tol 1e-14
+            sage: m.eigenvalues(algorithm="pari")  # abs tol 1e-14                      # needs sage.libs.pari
             [-1.4142135623730950487637880730318329370*I,
              1.4142135623730950487637880730318329370*I]
-            sage: m.eigenvalues(algorithm="pari_charpoly")  # abs tol 1e-14
+            sage: m.eigenvalues(algorithm="pari_charpoly")  # abs tol 1e-14             # needs sage.libs.pari
             [-1.41421356237309505*I, 1.41421356237309505*I]
             sage: m.eigenvalues()
             [-1.41421356237309505*I, 1.41421356237309505*I]
@@ -7397,14 +7397,14 @@ cdef class Matrix(Matrix1):
              (1.4142135623730950487637880730318329370*I,
               [(-0.707106781186547524*I, 1.00000000000000000)],
               1)]
-            sage: m._fix_eigenvectors_extend(l, extend=True)  # abs tol 1e-14
+            sage: m._fix_eigenvectors_extend(l, extend=True)  # abs tol 1e-14    # needs sage.libs.pari
             [(-1.4142135623730950487637880730318329370*I,
               [(0.707106781186547524*I, 1.00000000000000000)],
               1),
              (1.4142135623730950487637880730318329370*I,
               [(-0.707106781186547524*I, 1.00000000000000000)],
               1)]
-            sage: m._fix_eigenvectors_extend(l, extend=False)
+            sage: m._fix_eigenvectors_extend(l, extend=False)                    # needs sage.libs.pari
             []
         """
         if extend:
@@ -13782,6 +13782,7 @@ cdef class Matrix(Matrix1):
         Here we use the extended decomposition, where the result
         may not be a lower triangular matrix::
 
+            sage: # needs sage.rings.finite_rings
             sage: U = matrix(GF(5**2),[[0,1],[1,0]])
             sage: B = U.cholesky(extended=True); B
             [3*z2 4*z2]
