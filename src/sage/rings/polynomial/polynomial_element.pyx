@@ -8320,7 +8320,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         ::
 
-            sage: # needs numpy sage.rings.real_mpfr
+            sage: # needs numpy sage.libs.pari sage.rings.real_mpfr
             sage: x = CC['x'].0
             sage: i = CC.0
             sage: f = (x - 1) * (x - i)

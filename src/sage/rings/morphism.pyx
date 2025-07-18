@@ -1676,6 +1676,7 @@ cdef class RingHomomorphism(RingMap):
 
         Check case where domain is quotient ring and codomain a finite field of same characteristic. Fixes (:issue:`39690`)::
 
+            sage: # needs sage.rings.finite_rings
             sage: F4.<a> = GF(2^2, modulus=[1,1,1])
             sage: PR.<y> = PolynomialRing(F4)
             sage: IP = y^3 + y + 1
