@@ -2321,7 +2321,7 @@ class ProjectiveSpace_field(ProjectiveSpace_ring):
             sage: P2 = ProjectiveSpace(QQ, 2)
             sage: P2.arithmetic_genus()
             0
-            sage: P2.structure_sheaf().euler_characteristic() - 1                       # needs sage.modules
+            sage: P2.structure_sheaf().euler_characteristic() - 1                       # needs sage.libs.singular sage.modules
             0
         """
         return 0
