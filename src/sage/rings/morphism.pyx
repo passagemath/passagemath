@@ -1127,7 +1127,7 @@ cdef class RingHomomorphism(RingMap):
             sage: r = z^9 + z^7 + z^3 + z + 1
             sage: assert IP.change_ring(SF)(r) == 0
             sage: f = Q.hom([r,], SF)
-            sage: f.inverse_image(z)                # indirect doctest
+            sage: f.inverse_image(z)                # indirect doctest                  # needs sage.modules
             w^3 + (a^2 + a + 1)*w^2 + (a^2 + 1)*w + a^2 + 1
         """
         from sage.rings.finite_rings.finite_field_base import FiniteField
@@ -1692,7 +1692,7 @@ cdef class RingHomomorphism(RingMap):
                 From: Univariate Quotient Polynomial Ring in w over Finite Field in a of size 2^2 with modulus y^3 + y + 1
                 To:   Finite Field in z of size 2^6
                 Defn: w |--> z^4 + z^2 + z + 1
-            sage: f.inverse()                   # indirect doctest
+            sage: f.inverse()                   # indirect doctest                      # needs sage.modules
             Ring morphism:
               From: Finite Field in z of size 2^6
               To:   Univariate Quotient Polynomial Ring in w over Finite Field in a of size 2^2 with modulus y^3 + y + 1
