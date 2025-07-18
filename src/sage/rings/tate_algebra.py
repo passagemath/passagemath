@@ -794,6 +794,7 @@ class TateAlgebra_generic(Parent):
             sage: B.has_coerce_map_from(A)  # indirect doctest
             False
 
+            sage: # needs sage.libs.ntl
             sage: PP.<u> = R[]
             sage: S.<pi> = R.extension(u^2 - 2)
             sage: C.<x,y> = TateAlgebra(S, log_radii=[1,-1])
@@ -1179,6 +1180,7 @@ class TateAlgebra_generic(Parent):
             sage: A.absolute_e()
             1
 
+            sage: # needs sage.libs.ntl
             sage: x = polygen(ZZ, 'x')
             sage: S.<a> = R.extension(x^2 - 2)
             sage: A.<u,v> = TateAlgebra(S)
