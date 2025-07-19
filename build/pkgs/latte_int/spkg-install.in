@@ -1,5 +1,6 @@
 cd src
 
+export CXX="$CXX -std=c++17"
 sdh_configure --enable-shared=yes --enable-static=false \
               $SAGE_CONFIGURE_GMP $SAGE_CONFIGURE_NTL \
               --with-cddlib=$SAGE_LOCAL --with-4ti2=$SAGE_LOCAL \
