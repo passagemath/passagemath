@@ -29,7 +29,6 @@ from sphinx.util.docutils import SphinxDirective
 
 import sage.version
 from sage.env import MATHJAX_DIR, PPLPY_DOCS, SAGE_DOC, SAGE_DOC_SRC
-from sage.features.all import all_features
 from sage.features.sphinx import JupyterSphinx
 from sage.misc.latex_macros import sage_mathjax_macros
 from sage.misc.sagedoc import extlinks as extlinks  # noqa: PLC0414
@@ -1113,6 +1112,26 @@ def setup(app):
 # https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#tags
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#conf-tags
 # https://github.com/readthedocs/readthedocs.org/issues/4603#issuecomment-1411594800
+def all_features():
+    r"""
+    Yield features used in `.. ONLY:: feature_...` directives
+    """
+    yield JupyterSphinx()
+
+    from sage.features import graphviz, sagemath, sphinx
+    yield graphviz.Graphviz()
+    yield sagemath.sage__symbolic()
+    yield sagemath.sage__libs__cmr()
+    yield sagemath.sage__rings__polynomial__pbori()
+
+    from sage.features import four_ti_2, frobby, gfan, giac, latte
+    yield from four_ti_2.all_features()
+    yield from frobby.all_features()
+    yield from gfan.all_features()
+    yield from giac.all_features()
+    yield from latte.all_features()
+
+
 def feature_tags():
     for feature in all_features():
         if feature.is_present():
