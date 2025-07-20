@@ -232,9 +232,7 @@ jobs:
             shopt -s extglob
             case "$GITHUB_REF_NAME" in
               passagemath-+([0-9]).+([0-9])?(.+([0-9])) )
-                EXTRA_DOCKER_TAGS="latest dev $EXTRA_DOCKER_TAGS";;
-              passagemath-+([0-9]).+([0-9])?(.+([0-9]))?(.)@(a|alpha|b|beta|rc)+([0-9]) )
-                EXTRA_DOCKER_TAGS="dev $EXTRA_DOCKER_TAGS";;
+                EXTRA_DOCKER_TAGS="latest $EXTRA_DOCKER_TAGS";;
             esac
             echo "EXTRA_DOCKER_TAGS=$EXTRA_DOCKER_TAGS" >> $GITHUB_ENV
 
