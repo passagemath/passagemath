@@ -41,20 +41,34 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how you can contribute.
 passagemath is a major integrating force in the [mathematical software landscape](https://github.com/passagemath#passagemath-in-the-mathematical-software-landscape).
 
 
+Supported Platforms
+-------------------
+
+passagemath attempts to support and provides binary wheels suitable for
+all major Linux distributions and recent versions of macOS.
+Binary wheels for native Windows (x86_64) are gradually made available in the passagemath
+10.6.x series. Use of the full functionality on Windows currently requires the use of Windows
+Subsystem for Linux (WSL) or virtualization.
+
+| Version | Python    | Toolchain       | OS                | Arch        |
+|---------|-----------|-----------------|-------------------|-------------|
+| 10.5.x  | 3.9-3.13  | GCC 9-14, clang | Linux, macOS, WSL | x86_64, ARM |
+| 10.6.x  | 3.10-3.13 | GCC 9-15, clang | Linux, macOS, WSL | x86_64, ARM |
+|         |           | mingw32 + MSVC  | Windows (partial) | x86_64      |
+
+Detailed information on supported platforms for a specific version of passagemath
+can be found in the
+[release notes](https://github.com/passagemath/passagemath/releases).
+
+
 Full installation of passagemath from binary wheels on PyPI
 -----------------------------------------------------------
 
-passagemath attempts to support all major Linux distributions and recent versions of
-macOS. Use of the full functionality on Windows currently requires the use of Windows
-Subsystem for Linux or virtualization.
-
-Complete sets of binary wheels are provided on PyPI for Python versions 3.9.x-3.13.x
+Complete sets of binary wheels are provided on PyPI for the supported Python versions
 for Linux and macOS, both for the x86_64 and ARM architectures.
-Binary wheels for native Windows (x86_64) are gradually made available in the passagemath
-10.6.x series.
 
 Unless you need to install passagemath into a specific existing environment, we recommend
-to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.13.x),
+to create and activate a fresh virtual environment over a supported Python
 for example `~/passagemath-venv/`:
 
 ```bash session
@@ -185,7 +199,6 @@ Building from Source: Table of Contents
 **The remainder of this README contains self-contained instructions for building passagemath from source.**
 This requires you to clone the git repository (as described in this README).
 
-* [Supported Platforms](#supported-platforms)
 * [\[Windows\] Preparing the Platform](#windows-preparing-the-platform)
 * [\[macOS\] Preparing the Platform](#macos-preparing-the-platform)
 * [Preparation for Building from Source](#preparation-for-building-from-source)
@@ -193,20 +206,6 @@ This requires you to clone the git repository (as described in this README).
 * [Traditional Installation from Source as Sage-the-Distribution](#traditional-installation-from-source-as-sage-the-distribution)
 * [Use With an Existing Jupyter Installation](#use-with-an-existing-jupyter-installation)
 * [Directory Layout](#directory-layout)
-
-Supported Platforms
--------------------
-
-passagemath attempts to support all major Linux distributions and recent versions of
-macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
-virtualization.
-
-Detailed information on supported platforms for a specific version of Sage
-can be found in the section _Availability and installation help_ of the
-[release notes for this version](https://github.com/passagemath/passagemath/releases).
-
-We highly appreciate contributions to passagemath that fix portability bugs
-and help port Sage to new platforms.
 
 [Windows] Preparing the Platform
 --------------------------------
