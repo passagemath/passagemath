@@ -50,13 +50,13 @@ Binary wheels for native Windows (x86_64) are gradually made available in the pa
 10.6.x series. Use of the full functionality on Windows currently requires the use of Windows
 Subsystem for Linux (WSL) or virtualization.
 
-| Version                                                                                  | CPython   | Toolchains      | Operating Systems | Architectures | Notes       |
-|------------------------------------------------------------------------------------------|-----------|-----------------|-------------------|---------------|-------------|
-| [passagemath-10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9-3.12  |                 |                   |               | EOL 2024-12 |
-| [passagemath-10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9-3.13  | GCC 9-14, clang | Linux, macOS, WSL | x86_64, ARM   | stable      |
-| passagemath-10.6.x (main)                                                                | 3.10-3.13 | GCC 9-15, clang | Linux, macOS, WSL | x86_64, ARM   | rc          |
-|                                                                                          |           | mingw32 + MSVC  | Windows (partial) | x86_64        |             |
-| passagemath-10.7.x (#1071)                                                               | 3.11-3.14 |                 |                   |               | planned     |
+| Version                                                                      | CPython   | Toolchains        | Operating Systems | Architectures | Notes       |
+|------------------------------------------------------------------------------|-----------|-------------------|-------------------|---------------|-------------|
+| [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9-3.12  | GCC 8.4-14, clang | Linux, macOS, WSL | x86_64, ARM   | EOL 2024-12 |
+| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9-3.13  | GCC 9-14, clang   | Linux, macOS, WSL | x86_64, ARM   | stable      |
+| 10.6.x (main)                                                                | 3.10-3.13 | GCC 9-15, clang   | Linux, macOS, WSL | x86_64, ARM   | rc          |
+|                                                                              |           | mingw32 + MSVC    | Windows (partial) | x86_64        |             |
+| 10.7.x ([#1071](https://github.com/passagemath/passagemath/pull/1071))       | 3.11-3.14 |                   |                   |               | planned     |
 
 Detailed information on supported platforms for a specific version of passagemath
 can be found in the
