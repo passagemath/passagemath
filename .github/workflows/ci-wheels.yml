@@ -28,6 +28,9 @@ on:
       python-versions:
         type: string
         required: false
+      oss:
+        type: string
+        required: false
 
 jobs:
 
@@ -156,28 +159,25 @@ jobs:
           python_version_no_dot=${python_version/./}
           pkg=${{ matrix.distribution }}
           pkg_underscore=${pkg//-/_}
-          WHEELHOUSE=$(pwd)/wheelhouse
+          WHEELHOUSE=${GITHUB_WORKSPACE}/wheelhouse
           if [ -d "$WHEELHOUSE" ]; then
               export PIP_FIND_LINKS=file://$WHEELHOUSE
-              (set +x; cd "$WHEELHOUSE" && for whl in *.whl; do
+              (set +x; cd "$WHEELHOUSE" && for whl in *.whl *.tar.gz; do
                    case $whl in
-                       *$pkg_underscore-*)     ;;
+                       *$pkg_underscore-*.whl) ;;
                        *musllinux*)            ;;
                        *_i686*)                ;;
-                       *-cp$python_version_no_dot-*|*-none-any*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                       *-cp$python_version_no_dot-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
-              export PIP_CONSTRAINT=$(pwd)/constraints.txt
+              export PIP_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt
           else
               mkdir -p $WHEELHOUSE
               pip download -v --only-binary :all: --no-deps -d $WHEELHOUSE pas$pkg
           fi
           # Use passagemath-conf wheelhouse for missing wheels of third-party projects
-          case "$python_version" in
-              3.13)        export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python memory_allocator";;
-          esac
           case "${{ matrix.os }}" in
-              ubuntu*-arm) export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python memory_allocator;;
+              ubuntu*-arm) export SAGE_CONF_TARGETS="gmpy2 memory_allocator";;
           esac
           if [ -n "$SAGE_CONF_TARGETS" ]; then
               case "${{ matrix.os }}" in
@@ -195,15 +195,13 @@ jobs:
               macos-14) tag="macosx_*_arm64";;
           esac
           # Run tox
-          wheel_pattern="$WHEELHOUSE/*$pkg_underscore*-cp$python_version_no_dot-$tag.whl"
-          eval ls -l $wheel_pattern
-          wheel=$(eval ls $wheel_pattern | head -n1)
-          if [ -n "$wheel" ]; then
+          for wheel in "$WHEELHOUSE"/*$pkg_underscore*-cp$python_version_no_dot-$tag.whl; do
+            if [ -r "$wheel" ]; then
               cd pkgs/$pkg
-              tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py$python_version_no_dot-norequirements/')
+              tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py'$python_version_no_dot'-norequirements/')
               extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
               set +e
-              eval tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
+              tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
               status=$?
               set -e
               # Update known test failures
@@ -214,4 +212,6 @@ jobs:
               done
               git diff || :
               exit $status
-          fi
+            fi
+          done
+        shell: bash
