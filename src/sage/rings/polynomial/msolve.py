@@ -102,6 +102,7 @@ def groebner_basis_degrevlex(ideal, proof=True):
 
     TESTS::
 
+        sage: # needs sage.rings.finite_rings
         sage: R.<foo, bar> = PolynomialRing(GF(536870909), 2)
         sage: I = Ideal([ foo^2 - 1, bar^2 - 1 ])
         sage: I.groebner_basis(algorithm='msolve') # optional - msolve
@@ -126,6 +127,7 @@ def variety(ideal, ring, *, proof=True):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.finite_rings
         sage: from sage.rings.polynomial.msolve import variety
         sage: p = 536870909
         sage: R.<x, y> = PolynomialRing(GF(p), 2, order='lex')
@@ -138,13 +140,12 @@ def variety(ideal, ring, *, proof=True):
 
     TESTS::
 
+        sage: # needs sage.rings.finite_rings
         sage: p = 536870909
         sage: R.<x, y> = PolynomialRing(GF(p), 2, order='lex')
         sage: I = Ideal([ x*y - 1, (x-2)^2 + (y-1)^2 - 1])
-
         sage: sorted(I.variety(algorithm='msolve', proof=False), key=str) # optional - msolve
         [{x: 1, y: 1}, {x: 267525699, y: 473946006}]
-
         sage: K.<a> = GF(p^2)
         sage: sorted(I.variety(K, algorithm='msolve', proof=False), key=str) # optional - msolve
         [{x: 1, y: 1},
@@ -152,6 +153,7 @@ def variety(ideal, ring, *, proof=True):
          {x: 267525699, y: 473946006},
          {x: 418120060*a + 75297182, y: 26575196*a + 44750050}]
 
+        sage: # needs sage.rings.finite_rings
         sage: R.<x, y> = PolynomialRing(GF(2147483659), 2, order='lex')
         sage: ideal([x, y]).variety(algorithm='msolve', proof=False)
         Traceback (most recent call last):
