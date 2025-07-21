@@ -667,7 +667,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``first_index`` -- the column/row index of the first integer matrix
         - ``second_index`` -- the row/column index of the second integer matrix
         - ``nonzero_block`` -- either ``"top_right"`` (default) or ``"bottom_left"``;
-          whether the nonzero block in the 2-sum matrix locates in the top right or bottom left.
+          whether the nonzero block in the 2-sum matrix is located in the top right or bottom left.
           If ``nonzero_block="top_right"``,
           ``first_index`` is the column index of the first integer matrix,
           ``second_index`` is the row index of the second integer matrix.
@@ -1335,7 +1335,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         satisfying `rank(B) + rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
         `\Delta`-sum, 3-sum, and `Y`-sum.
-        The `Y`-sum can be derived from the `Delta`-sum of the transpose of the matrices.
+        The `Y`-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
@@ -1540,7 +1540,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  0  1  0 -1  0]
             [ 1  0 -1  1  0  0  0  1]
 
-        Three sum can be computed for any row and column indices:
+        The `\Delta`-sum can be computed for any row and column indices::
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
             ....:                            [[1, 1, 0, 0, 0, 0],
@@ -2065,7 +2065,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         satisfying `rank(B) + rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
         `\Delta`-sum, 3-sum, and `Y`-sum.
-        The `Y`-sum can be derived from the `Delta`-sum of the transpose of the matrices.
+        The `Y`-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
@@ -4355,7 +4355,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         A matrix is strongly unimodular if ``self`` and ``self.transpose()`` are both unimodular.
 
-        .. SEEALSO:: meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
+        .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
 
         EXAMPLES::
 
