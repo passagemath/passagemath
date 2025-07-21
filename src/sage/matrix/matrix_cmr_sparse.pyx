@@ -631,7 +631,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `M_1=\begin{bmatrix} A & a\end{bmatrix}`
         and the second matrix is
         `M_2=\begin{bmatrix} b^T \\ D\end{bmatrix}`.
-        Then the two sum
+        Then the 2-sum is
         `
         M_1 \oplus_2 M_2 = \begin{bmatrix}
         A & ab^T \\
@@ -667,7 +667,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``first_index`` -- the column/row index of the first integer matrix
         - ``second_index`` -- the row/column index of the second integer matrix
         - ``nonzero_block`` -- either ``"top_right"`` (default) or ``"bottom_left"``;
-          whether the nonzero block in the 2-sum matrix locates in the top right or bottom left.
+          whether the nonzero block in the 2-sum matrix is located in the top right or bottom left.
           If ``nonzero_block="top_right"``,
           ``first_index`` is the column index of the first integer matrix,
           ``second_index`` is the row index of the second integer matrix.
@@ -895,7 +895,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
         `\Delta`-sum, 3-sum, and `Y`-sum.
         The `\Delta`-sum is referenced in [Sch1986], Chapter 19.4.
@@ -1144,7 +1144,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
         `\Delta`-sum, 3-sum, and `Y`-sum.
 
@@ -1332,10 +1332,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
         `\Delta`-sum, 3-sum, and `Y`-sum.
-        The `Y`-sum can be derived from the `Delta`-sum of the transpose of the matrices.
+        The `Y`-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
@@ -1473,7 +1473,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
         `\Delta`-sum, 3-sum, and `Y`-sum.
         The `\Delta`-sum is referenced in [Sch1986], Chapter 19.4.
@@ -1540,7 +1540,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  0  1  0 -1  0]
             [ 1  0 -1  1  0  0  0  1]
 
-        Three sum can be computed for any row and column indices:
+        The `\Delta`-sum can be computed for any row and column indices::
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
             ....:                            [[1, 1, 0, 0, 0, 0],
@@ -1768,7 +1768,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
         `\Delta`-sum, 3-sum, and `Y`-sum.
 
@@ -2062,10 +2062,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
         `\Delta`-sum, 3-sum, and `Y`-sum.
-        The `Y`-sum can be derived from the `Delta`-sum of the transpose of the matrices.
+        The `Y`-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
@@ -4355,7 +4355,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         A matrix is strongly unimodular if ``self`` and ``self.transpose()`` are both unimodular.
 
-        .. SEEALSO:: meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
+        .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
 
         EXAMPLES::
 
@@ -4456,7 +4456,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         A matrix is strongly equimodular if ``self`` and ``self.transpose()``
         are both equimodular, which implies that they are equimodular for
         the same determinant gcd `k`.
-        A matrix `M` of rank-`r` is `k`-equimodular if the following two conditions
+        A matrix `M` of rank `r` is `k`-equimodular if the following two conditions
         are satisfied:
 
         - for some column basis `B` of `M`, the greatest common divisor of the
@@ -4508,7 +4508,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         r"""
         Return whether ``self`` is equimodular with determinant gcd `k`.
 
-        A matrix `M` of rank-`r` is `k`-equimodular if the following two
+        A matrix `M` of rank `r` is `k`-equimodular if the following two
         conditions are satisfied:
 
         - for some column basis `B` of `M`, the greatest common divisor of
@@ -4965,7 +4965,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
     def is_conetwork_matrix(self, *, time_limit=60.0, certificate=False,
                                row_keys=None, column_keys=None):
         r"""
-        Return whether the matrix ``self`` over `\GF{3}` or `QQ` is a conetwork matrix.
+        Return whether the matrix ``self`` over `\GF{3}` or `\QQ` is a conetwork matrix.
         If there is some entry not in `\{-1, 0, 1\}`, return ``False``.
 
         A matrix is conetwork if and only if its transpose is network.
