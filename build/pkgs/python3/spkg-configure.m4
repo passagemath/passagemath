@@ -15,6 +15,12 @@ SAGE_SPKG_CONFIGURE([python3], [
          [AC_MSG_ERROR([building Sage --without-python is not supported])])
    ac_path_PYTHON3="$with_python"
 
+   AC_ARG_ENABLE([python-distutils-check],
+                 [AS_HELP_STRING([--disable-python-distutils-check],
+                                 [do not check that Python can build C/C++ extensions])],
+                 [enable_python_distutils_check=$enableval],
+                 [enable_python_distutils_check=yes])
+
    dnl Issue #30559:  Removed the DEPCHECK for sqlite.  We never use libsqlite3 from SPKG for anything
    dnl other than building the python3 SPKG; so our libsqlite3 cannot create shared library conflicts.
    dnl
@@ -64,7 +70,7 @@ SAGE_SPKG_CONFIGURE([python3], [
                         ac_path_PYTHON3_found=:
                         AC_MSG_RESULT([yes])
                         dnl introduction for AC_MSG_RESULT printed by AC_CACHE_CHECK
-                        AC_MSG_CHECKING([for python3 >= ]MIN_VERSION[, < ]LT_VERSION[ with modules $check_modules])
+                        AC_MSG_CHECKING([for python3 >= ]MIN_VERSION[, < ]LT_VERSION[ with $all_check_modules_text])
                     ])
                 ])
             ])
