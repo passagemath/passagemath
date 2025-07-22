@@ -204,8 +204,6 @@ jobs:
         libhomfly
         symmetrica
       CIBW_BUILD: "*${{ matrix.build }}*"
-      # Disable building PyPy wheels on all platforms
-      CIBW_SKIP: "pp*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
