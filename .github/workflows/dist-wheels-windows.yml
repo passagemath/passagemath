@@ -226,8 +226,6 @@ jobs:
         PIP_FIND_LINKS=${GITHUB_WORKSPACE}\\wheelhouse' '${GITHUB_WORKSPACE}\\dist
         SAGE_NUM_THREADS=6
         PYTHONUTF8=1
-      # Use 'build', not 'pip wheel'
-      CIBW_BUILD_FRONTEND: build
       CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: "delvewheel repair -vv --custom-patch -w {dest_dir} {wheel}"
       #
       CIBW_PLATFORM: windows
