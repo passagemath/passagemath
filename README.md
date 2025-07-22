@@ -134,6 +134,17 @@ $ python3 -m venv ~/passagemath-venv
 $ source ~/passagemath-venv/bin/activate
 ```
 
+For the Linux aarch64 (ARM) platform and for Python 3.14.x on any platform,
+[some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
+Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
+
+```bash session
+(passagemath-venv) $ export SAGE_CONF_TARGETS="gmpy2 memory_allocator"
+(passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
+(passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
+(passagemath-venv) $ export PIP_PREFER_BINARY=1
+```
+
 (Activating the virtual environment only takes effect for the current terminal session;
 repeat the last command whenever you open a new terminal session in which you wish to
 use passagemath.)
@@ -422,7 +433,7 @@ in the Installation Guide.
       more details.
 
     - Python 3.4 or later, or Python 2.7, a full installation including
-      `urllib`; but ideally version 3.10.x or later, which
+      `urllib`; but ideally version 3.11.x or later, which
       will avoid having to build Sage's own copy of Python 3.
       See [build/pkgs/python3/SPKG.rst](build/pkgs/python3/SPKG.rst)
       for more details.
