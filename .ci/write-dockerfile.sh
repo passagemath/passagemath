@@ -253,7 +253,7 @@ EOF
   esac
 esac
 
-case ${DOCKER_BUILDKIT-0} in
+case ${DOCKER_BUILDKIT-1} in
     1)
         # With buildkit we cannot retrieve failed builds.
         # So we do not allow the main step of a build stage to fail.
