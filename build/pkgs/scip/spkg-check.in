@@ -1,5 +1,8 @@
-cd src/build/
+cd src
+
+set -e
 
 # Do the tests with the installed version of SCIP.
 # (The uninstalled ones do not work because we did not adjust their library dependencies.)
-$MAKE test  | tee testsuite.log
+
+make test EXECUTABLE=$(command -v scip)
