@@ -25,7 +25,12 @@ SAGE_SPKG_CONFIGURE([python3], [
       dnl instead of building our own copy.
       dnl  Issue #31160: We no longer check for readline here.
       check_modules="sqlite3, ctypes, math, hashlib, socket, zlib, ssl, ensurepip, _posixsubprocess"
-      AC_CACHE_CHECK([for python3 >= ]MIN_VERSION[, < ]LT_VERSION[ with modules $check_modules and setuptools/distutils], [ac_cv_path_PYTHON3], [
+      AS_VAR_IF([enable_python_distutils_check], [yes], [dnl
+          all_check_modules_text="modules $check_modules and setuptools/distutils"
+      ], [dnl
+          all_check_modules_text="modules $check_modules"
+      ])
+      AC_CACHE_CHECK([for python3 >= ]MIN_VERSION[, < ]LT_VERSION[ with $all_check_modules_text], [ac_cv_path_PYTHON3], [dnl
         AS_IF([test x"$ac_path_PYTHON3" != x], [dnl checking explicitly specified $with_python
            AC_MSG_RESULT([])
            AC_PATH_PROG([ac_path_PYTHON3], [$ac_path_PYTHON3])
@@ -40,7 +45,7 @@ SAGE_SPKG_CONFIGURE([python3], [
                     ac_path_PYTHON3_found=:
                     AC_MSG_RESULT([yes])
                     dnl introduction for AC_MSG_RESULT printed by AC_CACHE_CHECK
-                    AC_MSG_CHECKING([for python3 >= ]MIN_VERSION[, < ]LT_VERSION[ with modules $check_modules and setuptools/distutils])
+                    AC_MSG_CHECKING([for python3 >= ]MIN_VERSION[, < ]LT_VERSION[ with $all_check_modules_text])
            ])
            AS_IF([test -z "$ac_cv_path_PYTHON3"], [
                AC_MSG_ERROR([the python3 selected using --with-python=$with_python is not suitable])
@@ -105,7 +110,7 @@ SAGE_SPKG_CONFIGURE([python3], [
             SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" CFLAGS="$CFLAGS $OPENMP_CFLAGS" CXXFLAGS="$CXXFLAGS $OPENMP_CXXFLAGS" conftest_venv/bin/python3], [
                 AC_MSG_RESULT([yes])
             ], [
-                AC_MSG_RESULT([no, $reason; disabling use OpenMP])
+                AC_MSG_RESULT([no, $reason; disabling use of OpenMP])
                 OPENMP_CFLAGS=""
                 OPENMP_CXXFLAGS=""
             ])

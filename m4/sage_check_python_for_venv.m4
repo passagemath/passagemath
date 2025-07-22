@@ -25,18 +25,22 @@ AC_DEFUN([SAGE_CHECK_PYTHON_FOR_VENV], [
                             dnl Because the system python is not used directly but rather in a venv without site-packages,
                             dnl we should test whether the module will be available in a venv.
                             dnl Otherwise, some system site-package may be providing this module to the system python.
-                            dnl However, on Python >= 3.12, we need setuptools to run our extension compilation tests
-                            dnl because distutils has been removed from the standard library.
-                            AX_COMPARE_VERSION([$python3_version], [ge], [3.12.0], [
-                                conftest_venv_options="--system-site-packages"
-                                distutils_core="setuptools"
-                                distutils_extension="setuptools.extension"
-                            ], [
-                                conftest_venv_options=
-                                distutils_core="distutils.core"
-                                distutils_extension="distutils.extension"
+                            AS_VAR_IF([enable_python_distutils_check], [yes], [dnl
+                                dnl However, on Python >= 3.12, we need setuptools to run our extension compilation tests
+                                dnl because distutils has been removed from the standard library.
+                                AX_COMPARE_VERSION([$python3_version], [ge], [3.12.0], [
+                                    conftest_venv_options="--system-site-packages"
+                                    distutils_core="setuptools"
+                                    distutils_extension="setuptools.extension"
+                                ], [
+                                    conftest_venv_options=
+                                    distutils_core="distutils.core"
+                                    distutils_extension="distutils.extension"
+                                ])
+                                all_required_modules="]REQUIRED_MODULES[, $distutils_core, $distutils_extension"
+                            ], [dnl
+                                all_required_modules="]REQUIRED_MODULES["
                             ])
-                            all_required_modules="]REQUIRED_MODULES[, $distutils_core, $distutils_extension"
                             dnl m4_define([conftest_venv], [config-venv]) .... for debugging only
                             rm -rf conftest_venv
                             AS_IF(["]PYTHON_EXE[" build/bin/sage-venv $conftest_venv_options conftest_venv && conftest_venv/bin/python3 -c "import $all_required_modules" 2>& ]AS_MESSAGE_LOG_FD, [
