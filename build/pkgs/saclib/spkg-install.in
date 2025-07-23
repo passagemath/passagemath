@@ -1,19 +1,18 @@
 cd src
 
+set -e
+
 cp -p ../patches/GC.c src
 cp -p ../patches/sysdep.h include
 
 saclib=$(pwd -P)
 export saclib
-bin/sconf && bin/mkproto && bin/mkmake && bin/mklib all
-if [ $? -ne 0 ]; then
-   echo >&2 "Error building saclib."
-   exit 1
-fi
+bin/sconf && bin/mkproto && bin/mkmake
 
+(cd lib/objd && ${MAKE:-make} CC="$CC" SACFLAG="-std=gnu17 -g -DNO_SACLIB_MACROS" EXTENSION=d)
+
+(cd lib/objo && ${MAKE:-make} CC="$CC" SACFLAG="-std=gnu17" EXTENSION=o)
 
 # install saclib to the Sage tree
 cd ..
-rm -rf $SAGE_LOCAL/lib/saclib
-mv src $SAGE_LOCAL/lib/saclib
-
+mv src $SAGE_DESTDIR_LOCAL/lib/saclib
