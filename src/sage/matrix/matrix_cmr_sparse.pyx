@@ -627,31 +627,41 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Suppose that ``first_index`` indicates the last column of ``first_mat`` and
         ``second_index`` indicates the first row of ``second_mat``,
-        i.e., the first matrix is
-        `M_1=\begin{bmatrix} A & a\end{bmatrix}`
-        and the second matrix is
-        `M_2=\begin{bmatrix} b^T \\ D\end{bmatrix}`.
+        i.e., the two matrices are
+
+        .. MATH::
+
+            M_1=\begin{bmatrix} A & a\end{bmatrix},
+            \qquad
+            M_2=\begin{bmatrix} b^T \\ D\end{bmatrix}.
+
         Then the 2-sum is
-        `
-        M_1 \oplus_2 M_2 = \begin{bmatrix}
-        A & ab^T \\
-        0 & D
-        \end{bmatrix}.
-        `
+
+        .. MATH::
+
+            M_1 \oplus_2 M_2 = \begin{bmatrix}
+            A & ab^T \\
+            0 & D
+            \end{bmatrix}.
 
         Suppose that ``first_index`` indicates the last row of ``first_mat`` and
         ``second_index`` indicates the first column of ``second_mat``,
-        i.e., the first matrix is
-        `M_1=\begin{bmatrix} A \\ c^T\end{bmatrix}`
-        and the second matrix is
-        `M_2=\begin{bmatrix} d & D\end{bmatrix}`.
-        Then the two sum
-        `
-        M_1 \oplus_2 M_2 = \begin{bmatrix}
-        A & 0 \\
-        dc^T & D
-        \end{bmatrix}.
-        `
+        i.e., the two matrices are
+
+        .. MATH::
+
+            M_1=\begin{bmatrix} A \\ c^T\end{bmatrix},
+            \qquad
+            M_2=\begin{bmatrix} d & D\end{bmatrix}.
+
+        Then the 2-sum is
+
+        .. MATH::
+
+            M_1 \oplus_2 M_2 = \begin{bmatrix}
+            A & 0 \\
+            dc^T & D
+            \end{bmatrix}.
 
         The terminology "2-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
@@ -1463,12 +1473,19 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``. If ``first_row_index``
         indexes a row vector `c^T` and ``first_columns_index`` indexes two column vectors `a` of ``first_mat``,
         then ``second_row_index`` indexes a row vector `b` and ``second_columns_index`` indexes two column
-        vectors `d` of ``second_mat``. In this case, the first matrix is
-        ` M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix} `
-        and the second matrix is
-        ` M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}. `
+        vectors `d` of ``second_mat``. In this case, the two matrices are
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}.
+
         Then the Seymour/Schrijver 3-sum is the matrix
-        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
+
+        .. MATH::
+
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
 
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
@@ -2052,12 +2069,19 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         r"""
         Return the `Y`-sum matrix constructed from the given matrices
         ``first_mat`` and ``second_mat``.
-        In this case, the first matrix is
-        ` M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix} `
-        and the second matrix is
-        ` M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}. `
+        In this case, the matrices are
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}.
+
         Then the Y-sum is the matrix
-        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
+
+        .. MATH::
+
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
 
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
@@ -2329,16 +2353,26 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The input matrix `M` must have a 2-separation that can be reordered to look like
         `M = \begin{bmatrix} A & B \\ C & D \end{bmatrix}`,
         where `\text{rank}(B) + \text{rank}(C) = 1`.
+
         If `\text{rank}(B) = 0`, then the two components of the 2-sum are matrices
-        `M_1 = \begin{bmatrix} A \\ c^T \end{bmatrix}`
-        and
-        `M_2 = \begin{bmatrix} d & D \end{bmatrix}`
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A \\ c^T \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} d & D \end{bmatrix}
+
         such that `C = d c^T` holds and such that
         `c^T` is an actual row of `M`.
+
         Otherwise, the two components of the 2-sum are matrices
-        `M_1 = \begin{bmatrix} A & a \end{bmatrix}`
-        and
-        `M_2 = \begin{bmatrix} b^T \\ D \end{bmatrix}`
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} b^T \\ D \end{bmatrix}
+
         such that `B = a b^T` holds and such
         that `a` is an actual column of `M`.
 
@@ -3177,12 +3211,20 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         ``first_columns_index`` indexes two column vectors `a` of ``first_mat``,
         then ``second_row_index`` indexes a row vector `b` and
         ``second_columns_index`` indexes two column vectors `d` of ``second_mat``.
-        In this case, the first matrix is
-        ` M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix} `
-        and the second matrix is
-        ` M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}. `
+        In this case, the matrices are
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}.
+
         Then the Seymour/Schrijver 3-sum is the matrix
-        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
+
+        .. MATH::
+
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
+
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
         two nonzeros per row and per column that covers
@@ -3191,7 +3233,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The signs of `\varepsilon` are determined by
         a shortest path between two sets of vertices in the bipartite graph,
         where the sets of vertices corresponding to the nonzero
-        row and column indices of `c^T, a`,
+        row and column indices of `c^T`, `a`,
         and the bipartite graph consists of vertices corresponding to the rows
         and columns of `M`, and edges corresponding to the nonzero entry.
         between the rows and columns of `M`, see [Sch1986]_, Ch. 20.3.
@@ -3785,19 +3827,27 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                  sign_verify=True):
         r"""
         Check whether ``first_mat`` and ``second_mat`` form ``three_sum_mat``
-        via the `Y`-sum operation.
+        via the Y-sum operation.
 
         Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``.
         If ``first_rows_index`` indexes row vectors `c^T` in ``first_mat`` and
         ``first_column_index`` indexes a column vector `a` in ``first_mat``,
         then ``second_rows_index`` indexes row vectors `b^T` and
         ``second_column_index`` indexes a column vector `d` in ``second_mat``.
-        In this case, the first matrix is
-        ` M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix} `
-        and the second matrix is
-        ` M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}. `
+        In this case, the matrices are
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}.
+
         Then the Y-sum is the matrix
-        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
+
+        .. MATH::
+
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
+
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
         two nonzeros per row and per column that covers
