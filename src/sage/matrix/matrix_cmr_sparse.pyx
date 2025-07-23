@@ -907,11 +907,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
         satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
+        `\Delta`-sum, 3-sum, and Y-sum.
         The `\Delta`-sum is referenced in [Sch1986], Chapter 19.4.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
         .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
                      :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
@@ -1156,10 +1156,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
         satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
+        `\Delta`-sum, 3-sum, and Y-sum.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
         .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
                      :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
@@ -1318,7 +1318,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                    second_special_rows,
                    second_special_column):
         r"""
-        Return the `Y`-sum matrix constructed from the two matrices
+        Return the Y-sum matrix constructed from the two matrices
         ``first_mat`` and ``second_mat`` via connecting rows
         ``first_special_rows`` and column ``first_special_column``.
 
@@ -1344,11 +1344,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
         satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
-        The `Y`-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
+        `\Delta`-sum, 3-sum, and Y-sum.
+        The Y-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
         .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
                      :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
@@ -1492,11 +1492,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
         satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
+        `\Delta`-sum, 3-sum, and Y-sum.
         The `\Delta`-sum is referenced in [Sch1986], Chapter 19.4.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
         .. SEEALSO:: :meth:`_delta_sum_cmr`
                      :meth:`delta_sum_decomposition`, :meth:`is_delta_sum`
@@ -1787,10 +1787,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
         satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
+        `\Delta`-sum, 3-sum, and Y-sum.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
         .. SEEALSO:: :meth:`_three_sum_cmr`
                      :meth:`three_sum_decomposition`, :meth:`is_three_sum`
@@ -2067,7 +2067,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
               algorithm="cmr",
               sign_verify=False):
         r"""
-        Return the `Y`-sum matrix constructed from the given matrices
+        Return the Y-sum matrix constructed from the given matrices
         ``first_mat`` and ``second_mat``.
         In this case, the matrices are
 
@@ -2088,11 +2088,11 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
         satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
-        The `Y`-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
+        `\Delta`-sum, 3-sum, and Y-sum.
+        The Y-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
         .. SEEALSO:: :meth:`_y_sum_cmr`
                      :meth:`y_sum_decomposition`, :meth:`is_y_sum`
@@ -2111,7 +2111,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
           If ``algorithm="cmr"``, then use :meth:`_y_sum_cmr`;
           If ``algorithm="direct"``, then construct three sum directly.
           Both options will check the given two matrices and the related indices
-          satisfying the requirements of `Y`-sum.
+          satisfying the requirements of Y-sum.
         - ``sign_verify`` -- boolean (default: ``False``);
           whether to check the sign consistency of `\varepsilon`.
           See :meth:`is_y_sum`, :meth:`y_sum_decomposition`.
@@ -3065,7 +3065,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
     def y_sum_decomposition(self, A_rows, A_columns):
         r"""
         Decompose the matrix into two children matrices using
-        the `Y`-sum decomposition with specified indices.
+        the Y-sum decomposition with specified indices.
 
         Let `M` denote the matrix given by ``self``. Then
         `
