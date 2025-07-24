@@ -3,7 +3,7 @@
 r"""
 Sparse Matrices from the Combinatorial Matrix Recognition Library
 
-This module is provided by the distribution :ref:`sagemath-cmr <spkg_sagemath_cmr>`.
+This module is provided by the pip-installable package :ref:`passagemath-cmr <spkg_sagemath_cmr>`.
 """
 
 # ****************************************************************************
