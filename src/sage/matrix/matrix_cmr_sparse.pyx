@@ -546,7 +546,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "1-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_.
 
-        .. SEEALSO:: :meth:`two_sum`
+        .. SEEALSO:: :meth:`two_sum`,
                      :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
 
         EXAMPLES::
@@ -666,8 +666,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "2-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
 
-        .. SEEALSO:: :meth:`one_sum`
-                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+        .. SEEALSO:: :meth:`one_sum`,
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`,
                      :meth:`two_sum_decomposition`
 
         INPUT:
@@ -913,8 +913,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
-                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`,
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`,
                      :meth:`delta_sum_decomposition`, :meth:`is_delta_sum`
 
         INPUT:
@@ -1161,8 +1161,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
-                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`,
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`,
                      :meth:`three_sum_decomposition`, :meth:`is_three_sum`
 
         INPUT:
@@ -1350,8 +1350,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
-                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`,
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`,
                      :meth:`y_sum_decomposition`, :meth:`is_y_sum`
 
         INPUT:
@@ -1498,9 +1498,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`_delta_sum_cmr`
-                     :meth:`delta_sum_decomposition`, :meth:`is_delta_sum`
-                     :meth:`one_sum`, :meth:`two_sum`
+        .. SEEALSO:: :meth:`_delta_sum_cmr`,
+                     :meth:`delta_sum_decomposition`, :meth:`is_delta_sum`,
+                     :meth:`one_sum`, :meth:`two_sum`,
                      :meth:`three_sum`, :meth:`y_sum`
 
         INPUT:
@@ -1796,9 +1796,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`_three_sum_cmr`
-                     :meth:`three_sum_decomposition`, :meth:`is_three_sum`
-                     :meth:`one_sum`, :meth:`two_sum`
+        .. SEEALSO:: :meth:`_three_sum_cmr`,
+                     :meth:`three_sum_decomposition`, :meth:`is_three_sum`,
+                     :meth:`one_sum`, :meth:`two_sum`,
                      :meth:`delta_sum`, :meth:`y_sum`
 
         INPUT:
@@ -2100,9 +2100,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
         - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`_y_sum_cmr`
-                     :meth:`y_sum_decomposition`, :meth:`is_y_sum`
-                     :meth:`one_sum`, :meth:`two_sum`
+        .. SEEALSO:: :meth:`_y_sum_cmr`,
+                     :meth:`y_sum_decomposition`, :meth:`is_y_sum`,
+                     :meth:`one_sum`, :meth:`two_sum`,
                      :meth:`delta_sum`, :meth:`three_sum`
 
         INPUT:
@@ -3270,7 +3270,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         If you don't know the indices, please use :meth:`is_totally_unimodular`.
 
-        .. SEEALSO:: :meth:`delta_sum`, :meth:`delta_sum_decomposition`
+        .. SEEALSO:: :meth:`delta_sum`, :meth:`delta_sum_decomposition`,
                      :meth:`is_totally_unimodular`
 
         INPUT:
@@ -3576,7 +3576,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         If you don't know the indices, please use :meth:`is_totally_unimodular`.
 
-        .. SEEALSO:: :meth:`three_sum`, :meth:`three_sum_decomposition`
+        .. SEEALSO:: :meth:`three_sum`, :meth:`three_sum_decomposition`,
                      :meth:`is_totally_unimodular`
 
         INPUT:
@@ -3893,7 +3893,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         If you don't know the indices, please use :meth:`is_totally_unimodular`.
 
-        .. SEEALSO:: :meth:`y_sum`, :meth:`y_sum_decomposition`
+        .. SEEALSO:: :meth:`y_sum`, :meth:`y_sum_decomposition`,
                      :meth:`is_totally_unimodular`
 
         INPUT:
@@ -4143,7 +4143,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Calculations are done over the binary field.
 
-        Suppose a matrix is `\begin{bmatrix} 1 & c^T \\ b & D\end{bmatrix}`.
+        Suppose a matrix is of the form `\begin{bmatrix} 1 & c^T \\ b & D\end{bmatrix}`.
         Then the pivot of the matrix with respect to `1` is
         `\begin{bmatrix} 1 & c^T \\ b & D - bc^T\end{bmatrix}`.
 
@@ -4267,7 +4267,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Calculations are done over the ternary field.
 
-        Suppose a matrix is `\begin{bmatrix} \epsilon & c^T \\ b & D\end{bmatrix}`,
+        Suppose a matrix is of the form `\begin{bmatrix} \epsilon & c^T \\ b & D\end{bmatrix}`,
         where `\epsilon\in\{\pm 1\}`.
         Then the pivot of the matrix with respect to `\epsilon` is
         `\begin{bmatrix} -\epsilon & \epsilon c^T \\ \epsilon b & D-\epsilon bc^T\end{bmatrix}`.
@@ -4725,7 +4725,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         .. SEEALSO::
 
             :meth:`M._is_graphic_cmr() <sage.matroids.linear_matroid.
-            BinaryMatroid._is_graphic_cmr>`
+            BinaryMatroid._is_graphic_cmr>`,
             :meth:`M.is_graphic() <sage.matroids.matroid.
             Matroid.is_graphic>`
 
@@ -5058,7 +5058,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         A matrix is conetwork if and only if its transpose is network.
 
-        .. SEEALSO:: :meth:`is_network_matrix`,
+        .. SEEALSO:: :meth:`is_network_matrix`
 
         EXAMPLES::
 
