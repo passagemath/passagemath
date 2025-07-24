@@ -1230,19 +1230,6 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except AttributeError:
                 return NotImplemented
 
-        @lazy_attribute
-        def is_complement_totally_unimodular(self):
-            r"""
-            """
-            try:
-                matrix = self._matrix_cmr()
-            except (ImportError, TypeError):
-                matrix = self.matrix()
-            try:
-                return self._wrapped_method_with_certificate(matrix.is_complement_totally_unimodular)
-            except AttributeError:
-                return NotImplemented
-
     class Homsets(HomsetsCategory):
 
         class Endset(CategoryWithAxiom):
