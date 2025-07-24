@@ -2210,7 +2210,7 @@ cdef class UnknownNode(DecompositionNode):
 
 cdef class SumNode(DecompositionNode):
     r"""
-    Base class for 1-sum, 2-sum, and 3-sums (`\Delta`-sum, 3-sum, `Y`-sum) nodes
+    Base class for 1-sum, 2-sum, and 3-sums (`\Delta`-sum, 3-sum, Y-sum) nodes
     in Seymour's decomposition
     """
 
@@ -2258,14 +2258,16 @@ cdef class SumNode(DecompositionNode):
             [-----+-----+-----]
             [ 0  0| 0  0| 1  0]
             [ 0  0| 0  0| 0  1]
-            sage: M_perm = M.matrix_from_rows_and_columns([2, 4, 3, 0, 5, 1], [0, 1, 3, 5, 4, 2]); M_perm
+            sage: M_perm = M.matrix_from_rows_and_columns([2, 4, 3, 0, 5, 1],
+            ....:                                         [0, 1, 3, 5, 4, 2]); M_perm
             [ 0  0  1  0  0  1]
             [ 0  0  0  0  1  0]
             [ 0  0  0  0  0 -1]
             [ 1  0  0  0  0  0]
             [ 0  0  0  1  0  0]
             [-1  1  0  0  0  0]
-            sage: result, certificate = M_perm.is_totally_unimodular(certificate=True); certificate
+            sage: result, certificate = M_perm.is_totally_unimodular(certificate=True)
+            sage: certificate
             OneSumNode (6×6) with 4 children
             sage: P_row, block_matrix, P_column = certificate.permuted_block_matrix()
             sage: P_row^(-1) * M_perm * P_column^(-1) == block_matrix
