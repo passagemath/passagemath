@@ -32,7 +32,7 @@ passagemath community
 
 Join [passagemath.discourse.group](https://passagemath.discourse.group/) for help and discussions.
 
-Subscribe to https://groups.google.com/g/sage-packaging, or join the BlueSky platform and follow [@passagemath.org](https://bsky.app/profile/passagemath.org), to receive announcements.
+Join the BlueSky platform and follow [@passagemath.org](https://bsky.app/profile/passagemath.org) to receive announcements.
 
 As of 2025-07-11, the [passagemath GitHub organization](https://github.com/passagemath) has 111 members.
 
