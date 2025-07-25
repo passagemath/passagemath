@@ -1056,6 +1056,7 @@ cdef class LinearFunction(LinearFunctionOrConstraint):
             sage: f._coeff_formatter(13/45)
             '13/45*'
 
+            sage: # needs sage.rings.number_field
             sage: from sage.rings.number_field.number_field import QuadraticField
             sage: K.<sqrt5> = QuadraticField(5, 'sqrt5')
             sage: p = MixedIntegerLinearProgram(solver='interactivelp', base_ring=K)
@@ -1064,6 +1065,7 @@ cdef class LinearFunction(LinearFunctionOrConstraint):
             sage: f._coeff_formatter(sqrt5)
             'sqrt5*'
 
+            sage: # needs sage.rings.number_field
             sage: from sage.rings.qqbar import AA
             sage: sqrt5 = AA(5).sqrt()
             sage: p = MixedIntegerLinearProgram(solver='interactivelp', base_ring=AA)
