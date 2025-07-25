@@ -5500,18 +5500,6 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         return result, (node, submat_tuple)
 
-    def is_complement_totally_unimodular(self, *, time_limit=60.0, certificate=False,
-                                         use_direct_graphicness_test=True,
-                                         series_parallel_ok=True,
-                                         check_graphic_minors_planar=False,
-                                         complete_tree='find_irregular',
-                                         construct_matrices=False,
-                                         construct_transposes=False,
-                                         construct_graphs=False,
-                                         row_keys=None,
-                                         column_keys=None):
-        raise NotImplementedError
-
 
 cdef _set_cmr_seymour_parameters(CMR_SEYMOUR_PARAMS *params, dict kwds):
     r"""

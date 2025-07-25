@@ -19356,9 +19356,6 @@ cdef class Matrix(Matrix1):
         """
         return self._matrix_cmr().is_totally_unimodular(*args, **kwds)
 
-    def is_complement_totally_unimodular(self, *args, **kwds):
-        return self._matrix_cmr().is_complement_totally_unimodular(*args, **kwds)
-
     def LLL_gram(self, flag=0):
         """
         Return the LLL transformation matrix for this Gram matrix.
