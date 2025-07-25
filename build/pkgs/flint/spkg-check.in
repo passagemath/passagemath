@@ -5,4 +5,8 @@
 ###############################################################################
 
 cd src
-$MAKE check AT= QUIET_CC= QUIET_CXX= QUIET_AR=
+if [ -n "$MSYSTEM" ]; then
+    ctest .
+else
+    $MAKE check AT= QUIET_CC= QUIET_CXX= QUIET_AR=
+fi
