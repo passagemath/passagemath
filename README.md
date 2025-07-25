@@ -62,10 +62,20 @@ and macOS arm64 (Apple Silicon M1/M2/M3/M4) platforms,
 [some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
 Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
 
+<<<<<<< HEAD
     (passagemath-venv) $ export SAGE_CONF_TARGETS="fpylll gmpy2 lrcalc_python memory_allocator"
     (passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
     (passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
     (passagemath-venv) $ export PIP_PREFER_BINARY=1
+=======
+```bash session
+(passagemath-venv) $ export SAGE_CONF_TARGETS="gmpy2 memory_allocator"
+(passagemath-venv) $ export SAGE_CONF_CONFIGURE_ARGS="--disable-gcc-version-check"
+(passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
+(passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
+(passagemath-venv) $ export PIP_PREFER_BINARY=1
+```
+>>>>>>> d1327b153af (README.md (wheelhouse procedure): Recommend --disable-gcc-version-check)
 
 Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
 
