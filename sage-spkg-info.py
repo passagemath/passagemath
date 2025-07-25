@@ -15,17 +15,54 @@ export SAGE_ROOT="$PWD"
 export PATH="$PWD/build/bin:$PATH"
 python3 build/bin/sage-spkg-info.py 4ti2 --output-rst --log-level INFO
 """
+#!/usr/bin/env python3
 from __future__ import annotations
+from functools import cached_property
+import sys
+from pathlib import Path
+
+# Make .../build importable so `import sage_bootstrap` works
+BUILD_DIR = Path(__file__).resolve().parents[1]  # .../build
+sys.path.insert(0, str(BUILD_DIR))
+
+# To emulate the env the shell script sets up
+import os
+os.environ.setdefault("SAGE_ROOT", str(BUILD_DIR.parent))  # .../passagemath
+os.environ["PATH"] = f"{(BUILD_DIR / 'bin')}:{os.environ.get('PATH', '')}"
 
 import argparse
 import logging
-import os
 import re
 import shlex
 import subprocess
-from pathlib import Path
 from typing import Dict, Iterable, Optional
+
 from sage_bootstrap.package import Package
+
+
+SYSTEM_NAME_MAP = {
+    "alpine": "Alpine",
+    "arch": "Arch Linux",
+    "conda": "conda-forge",
+    "debian": "Debian/Ubuntu",
+    "fedora": "Fedora/Redhat/CentOS",
+    "freebsd": "FreeBSD",
+    "gentoo": "Gentoo Linux",
+    "homebrew": "Homebrew",
+    "macports": "MacPorts",
+    "mingw": "mingw-w64",
+    "nix": "Nixpkgs",
+    "openbsd": "OpenBSD",
+    "opensuse": "openSUSE",
+    "slackware": "Slackware",
+    "void": "Void Linux",
+}
+# This is to map system names to display names 
+def _strip_comments_and_collapse(path: Path) -> str:
+    """Mimic `sed 's/#.*//'` + whitespace collapsing from the bash script."""
+    txt = path.read_text(encoding="utf-8")
+    txt = re.sub(r"#.*", "", txt)
+    return " ".join(txt.split()).strip()
 
 # Logging
 try:  # pragma: no cover - to choose optional path
@@ -42,7 +79,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Fetch and format Sage package information (Python rewrite)."
     )
-    parser.add_argument("pkg_base", help="Package base name (e.g. 4ti2)")
+    parser.add_argument(
+        "packages",
+        nargs="+",
+        help="One or more package base names (separate by space) (e.g. 4ti2 pari ntl)",
+    )
     parser.add_argument(
         "--output-dir", dest="output_dir", default=None,
         help="Directory to write the formatted output (default: stdout)",
@@ -170,62 +211,73 @@ def handle_system_packages(pkg_base: str, pkg_scripts: Path, fmt: Formatter, out
     distros_dir = pkg_scripts / "distros"
     if not distros_dir.is_dir():
         logger.info("No distros directory for %s", pkg_base)
+        print("(none known)", file=out)
         return
 
     systems: list[str] = []
     have_repology = False
-
-    for entry in sorted(distros_dir.iterdir()):
-        if entry.suffix != ".txt":
-            continue
+    for entry in sorted(distros_dir.glob("*.txt")):
         name = entry.stem
         if name == "repology":
             have_repology = True
         else:
             systems.append(name)
 
-    if systems:
+    if not systems and not have_repology:
         print("Equivalent System Packages", file=out)
         print("--------------------------", file=out)
+        print("(none known)", file=out)
+        return
 
-# To Run sage-print-system-package-command for this corrected version
+    print("Equivalent System Packages", file=out)
+    print("--------------------------", file=out)
+
+    # To Match bash script's indentation behavior
+    rst_indent = "   " if fmt.rst else ""
+
     for system in systems:
-        try:
-            cmd_out = run([
+        system_file = distros_dir / f"{system}.txt"
+        sys_pkgs = _strip_comments_and_collapse(system_file)
+
+        tab_name = SYSTEM_NAME_MAP.get(system, system)
+        print(fmt.tab(tab_name), file=out)
+
+        if sys_pkgs:
+            args = [
                 "sage-print-system-package-command",
                 system,
-                pkg_base,
-            ], check=True).stdout.strip()
-        except subprocess.CalledProcessError as e:
-            logger.warning("Failed to get system package command for %s on %s: %s", pkg_base, system, e.stderr.strip())
-            cmd_out = "(no package needed or unknown)"
-
-        print(fmt.tab(system), file=out)
-        print(cmd_out or "(no package needed)", file=out)
+                "--wrap",
+                f"--prompt={rst_indent}    $ ",
+                f"--continuation={rst_indent}          ",
+                "--sudo",
+                "install",
+            ] + sys_pkgs.split()
+            try:
+                cp = run(args)
+                print(cp.stdout.rstrip(), file=out)
+            except subprocess.CalledProcessError as e:
+                logger.warning("Failed to get system package command for %s on %s: %s",
+                               pkg_base, system, e.stderr.strip())
+                print(f"{rst_indent}No package needed.", file=out)
+        else:
+            print(f"{rst_indent}No package needed.", file=out)
         print("", file=out)
 
     if have_repology:
-        print(fmt.tab("repology"), file=out)
-        print("(repology badge handled separately)", file=out)
+        # To show bekiw the tabs, like the shell script
+        repology_file = distros_dir / "repology.txt"
+        sys_pkgs = _strip_comments_and_collapse(repology_file)
+        try:
+            cp = run([
+                "sage-print-system-package-command", "repology",
+                "--wrap", "--prompt=    $ ", "--continuation=          ",
+                "--sudo", "install",
+            ] + sys_pkgs.split())
+            print(cp.stdout.rstrip(), file=out)
+        except subprocess.CalledProcessError as e:
+            logger.warning("repology cmd failed: %s", e.stderr.strip())
 
 # To print message about spkg-configure.m4. Optionally: expose as @property later.
-def handle_configuration(pkg_base: str, pkg_scripts: Path, out) -> None:
-    cfg = pkg_scripts / "spkg-configure.m4"
-    print("Configuration", file=out)
-    print("-------------", file=out)
-    if not cfg.is_file():
-        print("No configuration file found for this package.", file=out)
-        return
-
-    content = cfg.read_text(encoding="utf-8", errors="ignore")
-    # Simple heuristic check inspired by correction suggestion. (Added for additional help info).
-    uses_python_pkg_check = "SAGE_PYTHON_PACKAGE_CHECK" in content
-    if uses_python_pkg_check:
-        print("This package uses SAGE_PYTHON_PACKAGE_CHECK; if a system package is installed, use --enable-system-site-packages to check compatibility.", file=out)
-    else:
-        print("If the system package is installed, ./configure will check whether it can be used.", file=out)
-
-
 def handle_configuration(pkg_base: str, pkg_scripts: Path, fmt: Formatter, out) -> None:
     print("", file=out)
     pkg = Package(pkg_base)   # or to change to Package.from_base(pkg_base), depending on types of API
@@ -242,6 +294,39 @@ def handle_configuration(pkg_base: str, pkg_scripts: Path, fmt: Formatter, out) 
             print("However, these system packages will not be used for building Sage", file=out)
             print(f"because {fmt.code('spkg-configure.m4')} has not been written for this package;", file=out)
             print(f"see {fmt.issue('27330')} for more information.", file=out)
+
+# To Emit info for multiple packages.
+def emit_for_package(pkg_base: str, fmt: Formatter, out_dir: Optional[Path]) -> None:
+    props = get_package_properties(pkg_base)
+
+    pkg_scripts_str = props.get("PKG_SCRIPTS") or props.get(f"path_{pkg_base}")
+    if not pkg_scripts_str:
+        logger.error("Cannot determine PKG_SCRIPTS/path_%s from properties.", pkg_base)
+        raise SystemExit(1)
+    pkg_scripts = Path(pkg_scripts_str)
+
+    if out_dir:
+        out_dir.mkdir(parents=True, exist_ok=True)
+        target = out_dir / (f"{pkg_base}.rst" if fmt.rst else f"{pkg_base}.txt")
+        with target.open("w", encoding="utf-8") as out:
+            logger.info("Writing output to %s", target)
+            if fmt.rst:
+                print(f".. _spkg_{pkg_base}:\n", file=out)
+            process_spkg_file(pkg_base, pkg_scripts, fmt, out)
+            display_dependencies(pkg_base, fmt, out)
+            display_version_info(pkg_base, out)
+            handle_system_packages(pkg_base, pkg_scripts, fmt, out)
+            handle_configuration(pkg_base, pkg_scripts, fmt, out)
+    else:
+        out = os.sys.stdout
+        if fmt.rst:
+            print(f".. _spkg_{pkg_base}:\n", file=out)
+        process_spkg_file(pkg_base, pkg_scripts, fmt, out)
+        display_dependencies(pkg_base, fmt, out)
+        display_version_info(pkg_base, out)
+        handle_system_packages(pkg_base, pkg_scripts, fmt, out)
+        handle_configuration(pkg_base, pkg_scripts, fmt, out)
+
 # Main
 
 def main() -> None:
@@ -249,41 +334,14 @@ def main() -> None:
     logging.getLogger().setLevel(getattr(logging, args.log_level))
     logger.debug("Arguments: %s", args)
 
-    pkg_base: str = args.pkg_base
-    out_path: Optional[Path] = Path(args.output_dir) if args.output_dir else None
     fmt = Formatter(rst=args.output_rst)
+    out_dir = Path(args.output_dir) if args.output_dir else None
 
-    props = get_package_properties(pkg_base)
-
-    # To look for the package’s PKG_SCRIPTS file and prints a brief message telling the user if the path is eligable.
-    pkg_scripts_str = props.get("PKG_SCRIPTS") or props.get(f"path_{pkg_base}")
-    if not pkg_scripts_str:
-        logger.error("Cannot determine PKG_SCRIPTS/path_%s from properties.", pkg_base)
-        raise SystemExit(1)
-    pkg_scripts = Path(pkg_scripts_str)
-
-    if out_path:
-        out_path.mkdir(parents=True, exist_ok=True)
-        target = out_path / f"{pkg_base}.rst" if fmt.rst else out_path / f"{pkg_base}.txt"
-        out_file = target.open("w", encoding="utf-8")
-        logger.info("Writing output to %s", target)
-    else:
-        out_file = None  
-
-    # To Ensure to always close if opened a file
-    try:
-        out = out_file or os.sys.stdout
-
-        process_spkg_file(pkg_base, pkg_scripts, fmt, out)
-        display_dependencies(pkg_base, fmt, out)
-        display_version_info(pkg_base, out)
-        handle_system_packages(pkg_base, pkg_scripts, fmt, out)
-        handle_configuration(pkg_base, pkg_scripts, out)
-
-    finally:
-        if out_file:
-            out_file.close()
-
+    for i, pkg_base in enumerate(args.packages):
+        # Nice visual separator when writing to stdout
+        if not out_dir and i > 0:
+            print("\n" + "-" * 79 + "\n")
+        emit_for_package(pkg_base, fmt, out_dir)
 
 if __name__ == "__main__":
     main()
