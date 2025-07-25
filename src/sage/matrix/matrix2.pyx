@@ -19178,7 +19178,7 @@ cdef class Matrix(Matrix1):
 
     def is_conetwork_matrix(self, *args, **kwds):
         r"""
-        Return whether the matrix ``self`` over `\GF{3}` or `QQ` is a conetwork matrix.
+        Return whether the matrix ``self`` over `\GF{3}` or `\QQ` is a conetwork matrix.
 
         A matrix is conetwork if and only if its transpose is network.
 
