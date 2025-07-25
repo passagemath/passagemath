@@ -72,7 +72,8 @@ SAGE_SPKG_CONFIGURE([gfortran], [
     if test "x$sage_spkg_install_gcc" = "xyes" -o x$SAGE_INSTALL_GCC = xexists; then
         sage_spkg_install_gfortran=no
 
-    else
+    elif test $enable_gcc_version_check = yes; then
+
         # AX_COMPILER_VENDOR does not work for Fortran. So we just match the name of the executable
         AS_CASE(["$FC"],
             [*gfortran*], [
