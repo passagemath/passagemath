@@ -91,6 +91,7 @@ jobs:
                             "sagemath-schemes",
                             "sagemath-singular",
                             "sagemath-sirocco",
+                            "sagemath-standard",
                             "sagemath-standard-no-symbolics",
                             "sagemath-symbolics",
                             "sagemath-sympow",
