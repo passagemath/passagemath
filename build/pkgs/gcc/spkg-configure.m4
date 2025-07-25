@@ -60,6 +60,12 @@ SAGE_SPKG_CONFIGURE_BASE([gcc], [
         AC_REQUIRE([AC_PROG_OBJCXX])
         AC_REQUIRE([AC_CANONICAL_HOST])
 
+    AC_ARG_ENABLE([gcc-version-check],
+                  [AS_HELP_STRING([--disable-gcc-version-check],
+                                  [do not check the version of gcc/gfortran])],
+                  [enable_gcc_version_check=$enableval],
+                  [enable_gcc_version_check=yes])
+
     AC_MSG_CHECKING([whether gcc is already installed in SAGE_LOCAL])
     if test -f "$SAGE_LOCAL/bin/gcc"; then
         CONFIGURED_CC_PROGNAME=$($CC --print-prog-name gcc 2>/dev/null)
@@ -148,7 +154,7 @@ SAGE_SPKG_CONFIGURE_BASE([gcc], [
         true
     elif test x$GCC != xyes; then
         SAGE_SHOULD_INSTALL_GCC([your C compiler isn't GCC (GNU C)])
-    else
+    elif test $enable_gcc_version_check = yes; then
         # Since sage_spkg_install_gcc is "no", we know that
         # at least C, C++ and Fortran compilers are available.
         # We also know that all compilers are GCC.
