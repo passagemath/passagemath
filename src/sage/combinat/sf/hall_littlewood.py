@@ -228,7 +228,7 @@ class HallLittlewood(UniqueRepresentation):
         The method :meth:`sage.combinat.sf.sfa.SymmetricFunctionAlgebra_generic_Element.hl_creation_operator`
         is a creation operator for the `Q` basis::
 
-            sage: HLQp[1].hl_creation_operator([3]).hl_creation_operator([3])           # needs lrcalc
+            sage: HLQp[1].hl_creation_operator([3]).hl_creation_operator([3])           # needs lrcalc_python
             HLQp[3, 3, 1]
 
         Transitions between bases with the parameter `t` specialized::
@@ -534,15 +534,15 @@ class HallLittlewood_generic(sfa.SymmetricFunctionAlgebra_generic):
 
             sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
             sage: HLP = Sym.hall_littlewood().P()
-            sage: HLP([2])^2  # indirect doctest                                        # needs lrcalc
+            sage: HLP([2])^2  # indirect doctest                                        # needs lrcalc_python
             (t+1)*HLP[2, 2] + (-t+1)*HLP[3, 1] + HLP[4]
 
             sage: HLQ = Sym.hall_littlewood().Q()
-            sage: HLQ([2])^2  # indirect doctest                                        # needs lrcalc
+            sage: HLQ([2])^2  # indirect doctest                                        # needs lrcalc_python
             HLQ[2, 2] + (-t+1)*HLQ[3, 1] + (-t+1)*HLQ[4]
 
             sage: HLQp = Sym.hall_littlewood().Qp()
-            sage: HLQp([2])^2  # indirect doctest                                       # needs lrcalc
+            sage: HLQp([2])^2  # indirect doctest                                       # needs lrcalc_python
             HLQp[2, 2] + (-t+1)*HLQp[3, 1] + (-t+1)*HLQp[4]
         """
         return self(self._s(left) * self._s(right))
@@ -714,7 +714,7 @@ class HallLittlewood_p(HallLittlewood_generic):
 
         EXAMPLES::
 
-            sage: # needs lrcalc
+            sage: # needs lrcalc_python
             sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
             sage: P = Sym.hall_littlewood().P()
             sage: TestSuite(P).run(skip=['_test_associativity', '_test_distributivity', '_test_prod']) # products are too expensive

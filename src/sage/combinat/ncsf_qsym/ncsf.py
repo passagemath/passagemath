@@ -576,7 +576,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
-                    sage: # needs lrcalc
+                    sage: # needs lrcalc_python
                     sage: N = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = N.ribbon()
                     sage: x = R.an_element(); x
@@ -1044,7 +1044,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                 Testing the `\pi(f^{\ast}) = \pi(f)` relation noticed above::
 
-                    sage: # needs lrcalc
+                    sage: # needs lrcalc_python
                     sage: NSym = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = NSym.R()
                     sage: all( R(I).star_involution().to_symmetric_function()
@@ -1170,7 +1170,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                 Testing the `\pi(\omega(f)) = \omega(\pi(f))` relation noticed
                 above::
 
-                    sage: # needs lrcalc
+                    sage: # needs lrcalc_python
                     sage: NSym = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = NSym.R()
                     sage: all( R(I).omega_involution().to_symmetric_function()
@@ -1497,7 +1497,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                     ....:             if x != y:
                     ....:                 return False
                     ....:     return True
-                    sage: testpi(3)                                                     # needs lrcalc
+                    sage: testpi(3)                                                     # needs lrcalc_python
                     True
 
                 TESTS::
@@ -1682,7 +1682,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
-                    sage: # needs lrcalc
+                    sage: # needs lrcalc_python
                     sage: N = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = N.ribbon()
                     sage: x = R.an_element(); x
@@ -2669,7 +2669,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
             EXAMPLES::
 
-                sage: # needs lrcalc
+                sage: # needs lrcalc_python
                 sage: R = NonCommutativeSymmetricFunctions(QQ).R()
                 sage: R.to_symmetric_function_on_basis(Composition([3,1,1]))
                 s[3, 1, 1]
