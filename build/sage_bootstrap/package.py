@@ -2,7 +2,6 @@
 """
 Sage Packages
 """
-from __future__ import annotations
 # ****************************************************************************
 #       Copyright (C) 2015-2016 Volker Braun <vbraun.name@gmail.com>
 #                     2018      Jeroen Demeyer
@@ -18,7 +17,6 @@ from __future__ import annotations
 import logging
 import os
 import re
-from pathlib import Path
 from functools import lru_cache  
 from sage_bootstrap.env import SAGE_ROOT
 
@@ -88,31 +86,44 @@ class Package(object):
         self._init_requirements()
         self._init_dependencies()
         self._init_trees()
-
+    
     def __repr__(self):
         return 'Package {0}'.format(self.name)
 
-    # Change Starts (Modification on the original Code.）
-    @lru_cache(maxsize=None)
-    def spkg_configure_path(self) -> Path:
-        return Path(self.path) / "spkg-configure.m4"
+    # Compatibility additions 
+    def _compute_spkg_configure_flags(self):
+        """
+        To Compute and cache information about spkg-configure.m4.
+
+        Returns a tuple: (path, has_file, uses_python_package_check)
+        """
+        cache = getattr(self, "_spkg_cfg_cache", None)
+        if cache is None:
+            cfg = os.path.join(self.path, "spkg-configure.m4")
+            has_cfg = os.path.isfile(cfg)
+            uses_chk = False
+            if has_cfg:
+                try:
+                    with open(cfg, "r") as f:
+                        uses_chk = "SAGE_PYTHON_PACKAGE_CHECK" in f.read()
+                except (IOError, OSError):
+                    # leave uses_chk = False on read error
+                    pass
+            cache = (cfg, has_cfg, uses_chk)
+            self._spkg_cfg_cache = cache
+        return cache
+    
+    @property
+    def spkg_configure_path(self):
+        return self._compute_spkg_configure_flags()[0]
 
     @property
-    def has_spkg_configure(self) -> bool:
-        return self.spkg_configure_path().is_file()
+    def has_spkg_configure(self):
+        return self._compute_spkg_configure_flags()[1]
 
     @property
-    def uses_python_package_check(self) -> bool:
-        """True if spkg-configure.m4 contains SAGE_PYTHON_PACKAGE_CHECK."""
-        if not self.has_spkg_configure:
-            return False
-        try:
-            txt = self.spkg_configure_path().read_text(encoding="utf-8", errors="ignore")
-        except OSError:
-            return False
-        return "SAGE_PYTHON_PACKAGE_CHECK" in txt
-
-    # Change ends.
+    def uses_python_package_check(self):
+        return self._compute_spkg_configure_flags()[2]
 
     @property
     def name(self):
