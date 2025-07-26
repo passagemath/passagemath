@@ -929,7 +929,7 @@ class FreeSymmetricFunctions_Dual(UniqueRepresentation, Parent):
 
             This mapping is a Hopf algebra morphism::
 
-                sage: all(TF(s[p1] * s[p2]) == TF(s[p1]) * TF(s[p2])
+                sage: all(TF(s[p1] * s[p2]) == TF(s[p1]) * TF(s[p2])                    # needs lrcalc_python
                 ....:     for p1 in Partitions(2)
                 ....:     for p2 in Partitions(3))
                 True
@@ -938,7 +938,7 @@ class FreeSymmetricFunctions_Dual(UniqueRepresentation, Parent):
                 sage: phi = s2.module_morphism(
                 ....:               lambda x: tensor([TF(s[x[0]]), TF(s[x[1]])]),
                 ....:               codomain=TF.tensor_square())
-                sage: all(phi(s[p].coproduct()) == TF(s[p]).coproduct()
+                sage: all(phi(s[p].coproduct()) == TF(s[p]).coproduct()                 # needs lrcalc_python
                 ....:     for p in Partitions(4))
                 True
             """

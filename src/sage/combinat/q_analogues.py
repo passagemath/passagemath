@@ -238,7 +238,7 @@ def q_binomial(n, k, q=None, algorithm='auto'):
         sage: # needs sage.combinat sage.modules
         sage: Sym = SymmetricFunctions(QQ)
         sage: s = Sym.schur()
-        sage: q_binomial(4,1, s[2]+s[1])
+        sage: q_binomial(4,1, s[2]+s[1])                                                # needs lrcalc_python
         s[] + s[1] + s[1, 1] + s[1, 1, 1] + 2*s[2] + 4*s[2, 1] + 3*s[2, 1, 1]
          + 4*s[2, 2] + 3*s[2, 2, 1] + s[2, 2, 2] + 3*s[3] + 7*s[3, 1] + 3*s[3, 1, 1]
          + 6*s[3, 2] + 2*s[3, 2, 1] + s[3, 3] + 4*s[4] + 6*s[4, 1] + s[4, 1, 1]

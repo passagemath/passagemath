@@ -15,6 +15,7 @@ Moreover, the set of all posets of order `n` is represented by ``Posets(n)``::
 
 The infinite set of all posets can be used to find minimal examples::
 
+    sage: # needs nauty
     sage: for P in Posets():
     ....:     if not P.is_series_parallel():
     ....:         break
@@ -700,6 +701,7 @@ class Posets(metaclass=ClasscallMetaclass):
 
         EXAMPLES::
 
+            sage: # needs nauty
             sage: P3 = posets.PowerPoset(3); P3
             Finite meet-semilattice containing 19 elements
             sage: all(P.is_chain() for P in P3.maximal_elements())
@@ -707,6 +709,7 @@ class Posets(metaclass=ClasscallMetaclass):
 
         TESTS::
 
+            sage: # needs nauty
             sage: P0 = posets.PowerPoset(0); P0
             Finite meet-semilattice containing 1 elements
             sage: P0[0]

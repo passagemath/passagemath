@@ -115,7 +115,7 @@ def SetPartitionsAk(k):
         {{1, 2, 3, -1, -3, -2}}
         sage: A3.last() #random
         {{-1}, {-2}, {3}, {1}, {-3}, {2}}
-        sage: A3.random_element()  #random
+        sage: A3.random_element()  #random                                              # needs sage.symbolic
         {{1, 3, -3, -1}, {2, -2}}
 
         sage: A3.cardinality()
@@ -130,7 +130,7 @@ def SetPartitionsAk(k):
         {{1, 2, 3, -1, -3, -2}}
         sage: A2p5.last() #random
         {{-1}, {-2}, {2}, {3, -3}, {1}}
-        sage: A2p5.random_element() #random
+        sage: A2p5.random_element() #random                                             # needs sage.symbolic
         {{-1}, {-2}, {3, -3}, {1, 2}}
     """
     is_int, k = _int_or_half_int(k)
@@ -272,7 +272,7 @@ def SetPartitionsSk(k):
         {{2, -2}, {3, -3}, {1, -1}}
         sage: S3.last() #random
         {{1, -3}, {2, -2}, {3, -1}}
-        sage: S3.random_element() #random
+        sage: S3.random_element() #random                                               # needs sage.symbolic
         {{1, -3}, {2, -1}, {3, -2}}
 
         sage: S3p5 = SetPartitionsSk(3.5); S3p5
@@ -291,7 +291,7 @@ def SetPartitionsSk(k):
         {{2, -2}, {3, -3}, {1, -1}, {4, -4}}
         sage: S3p5.last() #random
         {{1, -3}, {2, -2}, {4, -4}, {3, -1}}
-        sage: S3p5.random_element() #random
+        sage: S3p5.random_element() #random                                             # needs sage.symbolic
         {{1, -3}, {2, -2}, {4, -4}, {3, -1}}
     """
     is_int, k = _int_or_half_int(k)
@@ -460,7 +460,7 @@ def SetPartitionsIk(k):
         {{1, 2, 3, -1, -3, -2}}
         sage: I3.last() #random
         {{-1}, {-2}, {3}, {1}, {-3}, {2}}
-        sage: I3.random_element() #random
+        sage: I3.random_element() #random                                               # needs sage.symbolic
         {{-1}, {-3, -2}, {2, 3}, {1}}
 
         sage: I2p5 = SetPartitionsIk(2.5); I2p5
@@ -472,7 +472,7 @@ def SetPartitionsIk(k):
         {{1, 2, 3, -1, -3, -2}}
         sage: I2p5.last() #random
         {{-1}, {-2}, {2}, {3, -3}, {1}}
-        sage: I2p5.random_element() #random
+        sage: I2p5.random_element() #random                                             # needs sage.symbolic
         {{-1}, {-2}, {1, 3, -3}, {2}}
     """
     is_int, k = _int_or_half_int(k)
@@ -620,7 +620,7 @@ def SetPartitionsBk(k):
         {{2, -2}, {1, -3}, {3, -1}}
         sage: B3.last() #random
         {{1, 2}, {3, -2}, {-3, -1}}
-        sage: B3.random_element() #random
+        sage: B3.random_element() #random                                               # needs sage.symbolic
         {{2, -1}, {1, -3}, {3, -2}}
 
         sage: B3.cardinality()
@@ -633,7 +633,7 @@ def SetPartitionsBk(k):
         {{2, -1}, {3, -3}, {1, -2}}
         sage: B2p5.last() #random
         {{1, 2}, {3, -3}, {-1, -2}}
-        sage: B2p5.random_element() #random
+        sage: B2p5.random_element() #random                                             # needs sage.symbolic
         {{2, -2}, {3, -3}, {1, -1}}
 
         sage: B2p5.cardinality()
@@ -833,7 +833,7 @@ def SetPartitionsPk(k):
         {{1, 2, 3, -1, -3, -2}}
         sage: P3.last() #random
         {{-1}, {-2}, {3}, {1}, {-3}, {2}}
-        sage: P3.random_element() #random
+        sage: P3.random_element() #random                                               # needs sage.symbolic
         {{1, 2, -1}, {-3}, {3, -2}}
 
         sage: P2p5 = SetPartitionsPk(2.5); P2p5
@@ -845,7 +845,7 @@ def SetPartitionsPk(k):
         {{1, 2, 3, -1, -3, -2}}
         sage: P2p5.last() #random
         {{-1}, {-2}, {2}, {3, -3}, {1}}
-        sage: P2p5.random_element() #random
+        sage: P2p5.random_element() #random                                             # needs sage.symbolic
         {{1, 2, 3, -3}, {-1, -2}}
     """
     is_int, k = _int_or_half_int(k)
@@ -1002,7 +1002,7 @@ def SetPartitionsTk(k):
         {{1, -3}, {2, 3}, {-1, -2}}
         sage: T3.last()              # random
         {{1, 2}, {3, -1}, {-3, -2}}
-        sage: T3.random_element()    # random
+        sage: T3.random_element()    # random                                           # needs sage.symbolic
         {{1, -3}, {2, 3}, {-1, -2}}
 
         sage: T2p5 = SetPartitionsTk(2.5); T2p5

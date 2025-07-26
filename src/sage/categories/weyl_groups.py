@@ -183,14 +183,14 @@ class WeylGroups(Category_singleton):
                 sage: W = WeylGroup(['A',2])
                 sage: x = W.from_reduced_word([1])
                 sage: y = W.w0
-                sage: W.bruhat_cone(x, y)
+                sage: W.bruhat_cone(x, y)                                               # needs cddexec_gmp
                 A 2-dimensional polyhedron in QQ^3
                  defined as the convex hull of 1 vertex and 2 rays
 
                 sage: W = WeylGroup(['E',6])
                 sage: x = W.one()
                 sage: y = W.w0
-                sage: W.bruhat_cone(x, y, side='lower')
+                sage: W.bruhat_cone(x, y, side='lower')                                 # needs cddexec_gmp
                 A 6-dimensional polyhedron in QQ^8
                  defined as the convex hull of 1 vertex and 6 rays
 

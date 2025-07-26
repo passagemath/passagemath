@@ -778,7 +778,7 @@ class JackPolynomials_generic(sfa.SymmetricFunctionAlgebra_generic):
         EXAMPLES::
 
             sage: Sym = SymmetricFunctions(QQ['t'].fraction_field())
-            sage: Sym.jack().P()[2,2].coproduct()  # indirect doctest                   # needs lrcalc
+            sage: Sym.jack().P()[2,2].coproduct()  # indirect doctest                   # needs lrcalc_python
             JackP[] # JackP[2, 2] + (2/(t+1))*JackP[1] # JackP[2, 1] + ((8*t+4)/(t^3+4*t^2+5*t+2))*JackP[1, 1] # JackP[1, 1] + JackP[2] # JackP[2] + (2/(t+1))*JackP[2, 1] # JackP[1] + JackP[2, 2] # JackP[]
         """
         from sage.categories.tensor import tensor
@@ -867,7 +867,7 @@ class JackPolynomials_p(JackPolynomials_generic):
 
         EXAMPLES::
 
-            sage: # needs lrcalc
+            sage: # needs lrcalc_python
             sage: P = SymmetricFunctions(FractionField(QQ['t'])).jack().P()
             sage: TestSuite(P).run(skip=['_test_associativity', '_test_distributivity', '_test_prod']) # products are too expensive
             sage: TestSuite(P).run(elements = [P.t*P[1,1]+P[2], P[1]+(1+P.t)*P[1,1]])
@@ -1071,7 +1071,7 @@ class JackPolynomials_j(JackPolynomials_generic):
 
         EXAMPLES::
 
-            sage: # needs lrcalc
+            sage: # needs lrcalc_python
             sage: J = SymmetricFunctions(FractionField(QQ['t'])).jack().J()
             sage: TestSuite(J).run(skip=['_test_associativity', '_test_distributivity', '_test_prod']) # products are too expensive
             sage: TestSuite(J).run(elements = [J.t*J[1,1]+J[2], J[1]+(1+J.t)*J[1,1]])  # long time (3s on sage.math, 2012)
@@ -1108,7 +1108,7 @@ class JackPolynomials_q(JackPolynomials_generic):
 
         EXAMPLES::
 
-            sage: # needs lrcalc
+            sage: # needs lrcalc_python
             sage: Q = SymmetricFunctions(FractionField(QQ['t'])).jack().Q()
             sage: TestSuite(Q).run(skip=['_test_associativity', '_test_distributivity', '_test_prod']) # products are too expensive
             sage: TestSuite(Q).run(elements = [Q.t*Q[1,1]+Q[2], Q[1]+(1+Q.t)*Q[1,1]])  # long time (3s on sage.math, 2012)
@@ -1338,7 +1338,7 @@ class SymmetricFunctionAlgebra_zonal(sfa.SymmetricFunctionAlgebra_generic):
 
         EXAMPLES::
 
-            sage: # needs lrcalc
+            sage: # needs lrcalc_python
             sage: Z = SymmetricFunctions(QQ).zonal()
             sage: Z([2])^2
             64/45*Z[2, 2] + 16/21*Z[3, 1] + Z[4]

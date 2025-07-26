@@ -263,6 +263,8 @@ class PolyhedralComplex(GenericCellComplex):
         sage: P = Polyhedron(vertices=[(0, 0), (1, 1)])
         sage: P.backend()
         'ppl'
+
+        sage: # needs cddexec_gmp
         sage: pc = PolyhedralComplex([P], backend='cdd')
         sage: Q = pc.maximal_cells_sorted()[0]
         sage: Q.backend()
@@ -753,7 +755,7 @@ class PolyhedralComplex(GenericCellComplex):
             sage: pc1 = PolyhedralComplex([p1, p2, p3, -p1, -p2, -p3])
             sage: bb = dict(xmin=-2, xmax=2, ymin=-3, ymax=3, axes=False)
             sage: g0 = pc1.plot(color='rainbow', **bb)                                  # needs sage.plot
-            sage: g1 = pc1.plot(explosion_factor=0.5, **bb)                             # needs sage.plot
+            sage: g1 = pc1.plot(explosion_factor=0.5, **bb)                             # needs cddexec sage.plot
             sage: g2 = pc1.plot(explosion_factor=1, color='rainbow', alpha=0.5, **bb)   # needs sage.plot
             sage: graphics_array([g0, g1, g2]).show(axes=False)                        # not tested
 
@@ -773,7 +775,7 @@ class PolyhedralComplex(GenericCellComplex):
             ....:         Polyhedron(rays=[[-1,0,0], [0,-1,0], [0,0,1]]),
             ....:         Polyhedron(rays=[[-1,0,0], [0,1,0], [0,0,-1]]),
             ....:         Polyhedron(rays=[[-1,0,0], [0,1,0], [0,0,1]])])
-            sage: g5 = pc5.plot(explosion_factor=0.3, color='rainbow', alpha=0.8,       # needs sage.plot
+            sage: g5 = pc5.plot(explosion_factor=0.3, color='rainbow', alpha=0.8,       # needs cddexec sage.plot
             ....:               point={'size': 20}, axes=False, online=True)
         """
         if self.dimension() > 3:

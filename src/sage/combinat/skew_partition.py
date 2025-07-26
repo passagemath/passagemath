@@ -1287,7 +1287,7 @@ class SkewPartition(CombinatorialElement):
         We verify that the Frobenius image is the corresponding
         skew Schur function::
 
-            sage: s[3,2,1].skew_by(s[2])                                                # needs sage.modules
+            sage: s[3,2,1].skew_by(s[2])                                                # needs lrcalc_python sage.modules
             s[2, 1, 1] + s[2, 2] + s[3, 1]
 
         ::
@@ -1296,7 +1296,7 @@ class SkewPartition(CombinatorialElement):
             sage: SM = mu.specht_module(QQ)                                             # needs sage.modules
             sage: s(SM.frobenius_image())                                               # needs sage.libs.flint sage.modules
             s[2, 1, 1] + s[2, 2] + 2*s[3, 1] + s[4]
-            sage: s(mu)                                                                 # needs sage.modules
+            sage: s(mu)                                                                 # needs lrcalc_python sage.modules
             s[2, 1, 1] + s[2, 2] + 2*s[3, 1] + s[4]
         """
         from sage.combinat.specht_module import SpechtModule

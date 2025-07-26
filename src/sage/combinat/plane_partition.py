@@ -662,7 +662,7 @@ class PlanePartition(ClonableArray,
         EXAMPLES::
 
             sage: PP = PlanePartition([[4,3,3,1],[2,1,1],[1,1]])
-            sage: PP.plot()                                                             # needs sage.plot
+            sage: PP.plot()                                                             # needs sage.plot sage.symbolic
             Graphics object consisting of 27 graphics primitives
         """
         from sage.functions.trig import cos, sin

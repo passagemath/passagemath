@@ -22,7 +22,7 @@ functions from this definition.
 ::
 
     sage: s2 = SymmetricFunctions(QQ).s()
-    sage: s2([2,1])^2                                                                   # needs lrcalc
+    sage: s2([2,1])^2                                                                   # needs lrcalc_python
     s[2, 2, 1, 1] + s[2, 2, 2] + s[3, 1, 1, 1] + 2*s[3, 2, 1] + s[3, 3] + s[4, 1, 1] + s[4, 2]
 """
 # ****************************************************************************
@@ -104,7 +104,7 @@ class SymmetricFunctionAlgebra_orthotriang(sfa.SymmetricFunctionAlgebra_generic)
 
         TESTS::
 
-            sage: # needs lrcalc
+            sage: # needs lrcalc_python
             sage: TestSuite(s).run(elements=[s[1,1]+2*s[2], s[1]+3*s[1,1]])
             sage: TestSuite(s).run(skip=["_test_associativity", "_test_prod"])  # long time (7s on sage.math, 2011)
 

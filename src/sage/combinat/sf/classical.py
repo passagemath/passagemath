@@ -79,7 +79,7 @@ class SymmetricFunctionAlgebra_classical(sfa.SymmetricFunctionAlgebra_generic):
 
     TESTS::
 
-        sage: # needs lrcalc
+        sage: # needs lrcalc_python
         sage: TestSuite(SymmetricFunctions(QQ).s()).run()
         sage: TestSuite(SymmetricFunctions(QQ).h()).run()
         sage: TestSuite(SymmetricFunctions(QQ).m()).run()
