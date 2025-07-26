@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
-# sage.doctest: needs sage.geometry.polyhedron sage.graphs
+# sage.doctest: needs palp sage.geometry.polyhedron sage.graphs
 r"""
 Toric divisors and divisor classes
 
