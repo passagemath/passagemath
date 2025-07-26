@@ -31,7 +31,7 @@ Check that the issues from :issue:`27199` are fixed::
 
     sage: n = 16262093986406371
     sage: ecm = ECM()
-    sage: ecm.factor(n, B1=10)
+    sage: ecm.factor(n, B1=10)                                                          # needs sage.libs.pari
     [1009, 1009, 1733, 3023, 3049]
 
     sage: n = 1308301 * (10^499 + 153)
@@ -613,6 +613,7 @@ class ECM(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: ecm.factor(602400691612422154516282778947806249229526581)
             [45949729863572179, 13109994191499930367061460439]
             sage: ecm.factor((2^197 + 1)/3)  # long time
@@ -671,6 +672,7 @@ class ECM(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: ecm.factor((2^197 + 1)/3)             # long time
             [197002597249, 1348959352853811313, 251951573867253012259144010843]
             sage: ecm.get_last_params()                 # random output
@@ -703,10 +705,10 @@ class ECM(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: n = next_prime(11^23)*next_prime(11^37)
             sage: ecm.time(n, 35)                  # random output
             Expected curves: 910, Expected time: 23.95m
-
             sage: ecm.time(n, 30, verbose=True)     # random output
             GMP-ECM 6.4.4 [configured with MPIR 2.6.0, --enable-asm-redc] [ECM]
             Running on localhost.localdomain
