@@ -3955,10 +3955,10 @@ def MathonPseudocyclicStronglyRegularGraph(t, G=None, L=None):
         (441, 220, 109, 110)
         sage: G3x3.automorphism_group(algorithm='bliss').order()  # optional - bliss
         27
-        sage: G9 = graphs.MathonPseudocyclicStronglyRegularGraph(2)
-        sage: G9.is_strongly_regular(parameters=True)
+        sage: G9 = graphs.MathonPseudocyclicStronglyRegularGraph(2)     # needs database_graphs
+        sage: G9.is_strongly_regular(parameters=True)                   # needs database_graphs
         (441, 220, 109, 110)
-        sage: G9.automorphism_group(algorithm='bliss').order()  # optional - bliss
+        sage: G9.automorphism_group(algorithm='bliss').order()  # optional - bliss, needs database_graphs
         9
 
     TESTS::

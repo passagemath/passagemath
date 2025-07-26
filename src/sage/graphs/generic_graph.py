@@ -21857,20 +21857,20 @@ class GenericGraph(GenericGraph_pyx):
 
             sage: # needs sage.modules sage.plot
             sage: g = graphs.WheelGraph(n=7)
-            sage: g.plot(layout='tutte', external_face=[0,1,2])
+            sage: g.plot(layout='tutte', external_face=[0,1,2])                         # needs planarity
             Graphics object consisting of 20 graphics primitives
             sage: g = graphs.CubeGraph(n=3, embedding=2)
-            sage: g.plot(layout='tutte', external_face=['101','111','001',
+            sage: g.plot(layout='tutte', external_face=['101','111','001',              # needs planarity
             ....:       '011'], external_face_pos={'101':(1,0), '111':(0,0),
             ....:       '001':(2,1), '011':(-1,1)})
             Graphics object consisting of 21 graphics primitives
             sage: g = graphs.CompleteGraph(n=5)
-            sage: g.plot(layout='tutte', external_face=[0,1,2])
+            sage: g.plot(layout='tutte', external_face=[0,1,2])                         # needs planarity
             Traceback (most recent call last):
             ...
             ValueError: graph must be planar
             sage: g = graphs.CycleGraph(n=10)
-            sage: g.layout(layout='tutte', external_face=[0,1,2,3,4,5,6,7,8,9])
+            sage: g.layout(layout='tutte', external_face=[0,1,2,3,4,5,6,7,8,9])         # needs planarity
             Traceback (most recent call last):
             ...
             ValueError: graph must be 3-connected
@@ -26266,6 +26266,7 @@ class GenericGraph(GenericGraph_pyx):
 
         However, there are still many different EPs::
 
+            sage: # needs nauty
             sage: len(list(graphs(5)))
             34
             sage: polys = []

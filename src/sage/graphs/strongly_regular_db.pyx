@@ -1199,7 +1199,7 @@ def SRG_from_RSHCD(v, k, l, mu, existence=False, check=True):
         False
         sage: SRG_from_RSHCD(784, 377, 180, 182, existence=True)                        # needs sage.combinat sage.modules
         True
-        sage: SRG_from_RSHCD(144, 65, 28, 30)                                           # needs sage.combinat sage.modules
+        sage: SRG_from_RSHCD(144, 65, 28, 30)                                           # needs database_graphs sage.combinat sage.modules
         Graph on 144 vertices
 
     an example with vertex-transitive automorphism group, found during the
@@ -1603,7 +1603,7 @@ def is_switch_skewhad(int v, int k, int l, int mu):
 
     EXAMPLES::
 
-        sage: graphs.strongly_regular_graph(226, 105, 48, 49)                           # needs sage.combinat sage.modules
+        sage: graphs.strongly_regular_graph(226, 105, 48, 49)                           # needs database_graphs sage.combinat sage.modules
         switch skewhad^2+*_4: Graph on 226 vertices
 
     TESTS::
@@ -1649,7 +1649,7 @@ def is_switch_OA_srg(int v, int k, int l, int mu):
 
     EXAMPLES::
 
-        sage: graphs.strongly_regular_graph(170, 78, 35, 36)  # indirect doctest        # needs sage.combinat sage.modules
+        sage: graphs.strongly_regular_graph(170, 78, 35, 36)  # indirect doctest        # needs database_graphs sage.combinat sage.modules
         Graph on 170 vertices
 
     TESTS::
@@ -1707,7 +1707,7 @@ def is_nowhere0_twoweight(int v, int k, int l, int mu):
 
     EXAMPLES::
 
-        sage: graphs.strongly_regular_graph(196, 60, 14, 20)                            # needs sage.combinat sage.modules
+        sage: graphs.strongly_regular_graph(196, 60, 14, 20)                            # needs database_graphs sage.combinat sage.modules
         Nowhere0WordsTwoWeightCodeGraph(8): Graph on 196 vertices
 
     TESTS::
@@ -1816,9 +1816,9 @@ def eigenmatrix(int v, int k, int l, int mu):
     strongly regular graph::
 
         sage: # needs sage.modules
-        sage: graphs.strongly_regular_graph(243,220,199,200, existence=True)            # needs sage.combinat
+        sage: graphs.strongly_regular_graph(243,220,199,200, existence=True)            # needs database_graphs sage.combinat
         True
-        sage: graphs.strongly_regular_graph(243,110,37,60, existence=True)              # needs sage.combinat
+        sage: graphs.strongly_regular_graph(243,110,37,60, existence=True)              # needs database_graphs sage.combinat
         True
         sage: P = eigenmatrix(243,220,199,200); P
         [  1 220  22]
@@ -2696,7 +2696,7 @@ cdef bint seems_feasible(int v, int k, int l, int mu) noexcept:
     :issue:`32306` is fixed::
 
         sage: from sage.graphs.strongly_regular_db import strongly_regular_graph
-        sage: strongly_regular_graph(16384, 8256, 4160, 4160, existence=True)           # needs sage.combinat sage.modules
+        sage: strongly_regular_graph(16384, 8256, 4160, 4160, existence=True)           # needs database_graphs sage.combinat sage.modules
         True
     """
     cdef uint_fast32_t tmp[2]
@@ -2825,9 +2825,9 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     A set of parameters proved in a paper to be infeasible::
 
-        sage: graphs.strongly_regular_graph(324,57,0,12,existence=True)                 # needs sage.combinat sage.modules
+        sage: graphs.strongly_regular_graph(324,57,0,12, existence=True)                # needs database_graphs sage.combinat sage.modules
         False
-        sage: graphs.strongly_regular_graph(324,57,0,12)                                # needs sage.combinat sage.modules
+        sage: graphs.strongly_regular_graph(324,57,0,12)                                # needs database_graphs sage.combinat sage.modules
         Traceback (most recent call last):
         ...
         EmptySetError: Andries Brouwer's database reports that no (324, 57, 0,
@@ -2836,9 +2836,9 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     A set of parameters unknown to be realizable in Andries Brouwer's database::
 
-        sage: graphs.strongly_regular_graph(324,95,22,30,existence=True)                # needs sage.combinat
+        sage: graphs.strongly_regular_graph(324,95,22,30, existence=True)               # needs database_graphs sage.combinat
         Unknown
-        sage: graphs.strongly_regular_graph(324,95,22,30)                               # needs sage.combinat
+        sage: graphs.strongly_regular_graph(324,95,22,30)                               # needs database_graphs sage.combinat
         Traceback (most recent call last):
         ...
         RuntimeError: Andries Brouwer's database reports that no
@@ -2847,9 +2847,9 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     A large unknown set of parameters (not in Andries Brouwer's database)::
 
-        sage: graphs.strongly_regular_graph(1394,175,0,25,existence=True)               # needs sage.combinat
+        sage: graphs.strongly_regular_graph(1394,175,0,25, existence=True)              # needs database_graphs sage.combinat
         Unknown
-        sage: graphs.strongly_regular_graph(1394,175,0,25)                              # needs sage.combinat
+        sage: graphs.strongly_regular_graph(1394,175,0,25)                              # needs database_graphs sage.combinat
         Traceback (most recent call last):
         ...
         RuntimeError: Sage cannot figure out if a (1394, 175, 0, 25)-strongly
@@ -2864,9 +2864,9 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     Check that :issue:`26513` is fixed::
 
-        sage: graphs.strongly_regular_graph(539, 288, 162, 144)                         # needs sage.combinat
+        sage: graphs.strongly_regular_graph(539, 288, 162, 144)                         # needs database_graphs sage.combinat
         descendant of (540, 264, 138, 120)-strongly regular graph at ... 539 vertices
-        sage: graphs.strongly_regular_graph(539, 250, 105, 125)                         # needs sage.combinat
+        sage: graphs.strongly_regular_graph(539, 250, 105, 125)                         # needs database_graphs sage.combinat
         descendant of (540, 275, 130, 150)-strongly regular graph at ... 539 vertices
         sage: graphs.strongly_regular_graph(209, 100, 45, 50)                           # needs database_graphs sage.libs.pari
         descendant of complement(merging of S_7 on Circulant(6,[1,4])s) at ... 209 vertices
