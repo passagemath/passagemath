@@ -3,7 +3,7 @@ r"""
 Feature for testing the presence of ``ecm`` or ``gmp-ecm``
 """
 # ****************************************************************************
-#       Copyright (C) 2032 Dima Pasechnik <dima@pasechnik.info>
+#       Copyright (C) 2024 Dima Pasechnik <dima@pasechnik.info>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

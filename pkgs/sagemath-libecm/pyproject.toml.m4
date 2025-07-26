@@ -20,6 +20,7 @@ description = "passagemath: Elliptic curve method for integer factorization usin
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_cysignals
 ]
