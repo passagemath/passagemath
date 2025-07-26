@@ -65,6 +65,8 @@ What is included
 Examples
 --------
 
+::
+
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-libecm[test]" ipython
 
     In [1]: from sage.libs.libecm import ecmfactor
@@ -80,3 +82,9 @@ Examples
     Performing one curve with B1=100
     Found no factor.
     Out[4]: (False, None)
+
+
+Available as extras, from other distributions
+---------------------------------------------
+
+``pip install passagemath-libecm[pari]`` additionally makes PARI available (for primality testing)
