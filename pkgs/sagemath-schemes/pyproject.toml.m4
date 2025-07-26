@@ -61,6 +61,7 @@ primecountpy = [SPKG_INSTALL_REQUIRES_primecountpy]
 
 eclib   = ["passagemath-eclib"]
 msolve  = ["passagemath-msolve"]
+palp    = ["passagemath-palp"]
 qepcad  = ["passagemath-qepcad"]
 singular = []  # no extra needed
 sympow  = ["passagemath-sympow"]
@@ -92,7 +93,8 @@ QuadraticField  = ["passagemath-schemes[NumberField]"]
 CyclotomicField = ["passagemath-schemes[NumberField]"]
 
 # extras by features
-toric           = ["passagemath-polyhedra",
+toric           = ["passagemath-palp",
+                   "passagemath-polyhedra",
                    "passagemath-graphs"]
 padics          = ["passagemath-schemes[Zp]"]
 
