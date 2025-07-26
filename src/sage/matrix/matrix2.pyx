@@ -1887,7 +1887,7 @@ cdef class Matrix(Matrix1):
 
         The number of derangements of length `n` is the permanent
         of a matrix with 0 on the diagonal and 1 elsewhere;
-        for `n=21` it is `18795307255050944540` (see :oeis:`A000166`):
+        for `n=21` it is `18795307255050944540` (see :oeis:`A000166`)::
 
            sage: A = identity_matrix(21)
            sage: A.rook_vector(complement=True)[-1]
@@ -16793,7 +16793,7 @@ cdef class Matrix(Matrix1):
             sage: d, u, v = m.smith_form(); u * m * v == d
             True
 
-        Over local fields, we can request the transformation matrices to be integral:;
+        Over local fields, we can request the transformation matrices to be integral::
 
             sage: K = Qp(2, 5, print_mode='terse')                                      # needs sage.rings.padics
             sage: M = matrix(K, 2, 3, [1/2, 1, 2, 1/3, 1, 3])                           # needs sage.rings.padics
@@ -18911,7 +18911,7 @@ cdef class Matrix(Matrix1):
 
         A matrix is strongly unimodular if ``self`` and ``self.transpose()`` are both unimodular.
 
-        .. SEEALSO:: meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
+        .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
 
         EXAMPLES::
 
