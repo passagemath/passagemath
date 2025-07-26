@@ -47,8 +47,8 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
             sage: s = SymmetricFunctions(QQ).s()
             sage: s == loads(dumps(s))
             True
-            sage: TestSuite(s).run(skip=['_test_associativity', '_test_distributivity', '_test_prod'])
-            sage: TestSuite(s).run(elements = [s[1,1]+s[2], s[1]+2*s[1,1]])
+            sage: TestSuite(s).run(skip=['_test_associativity', '_test_distributivity', '_test_prod'])  # needs lrcalc_python
+            sage: TestSuite(s).run(elements=[s[1,1]+s[2], s[1]+2*s[1,1]])                               # needs lrcalc_python
         """
         classical.SymmetricFunctionAlgebra_classical.__init__(self, Sym, "Schur", 's')
 
@@ -92,6 +92,7 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
 
         TESTS::
 
+            sage: # needs lrcalc_python
             sage: s = SymmetricFunctions(QQ).s()
             sage: a = s([2,1]) + 1; a
             s[] + s[2, 1]
@@ -101,6 +102,7 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
 
         Examples failing with three different messages in symmetrica::
 
+            sage: # needs lrcalc_python
             sage: s[123,1]*s[1,1]
             s[123, 1, 1, 1] + s[123, 2, 1] + s[124, 1, 1] + s[124, 2]
             sage: s[123]*s[2,1]
@@ -110,6 +112,7 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
 
         ::
 
+            sage: # needs lrcalc_python
             sage: QQx.<x> = QQ[]
             sage: s = SymmetricFunctions(QQx).s()
             sage: a = x^2*s([2,1]) + 2*x; a
@@ -121,11 +124,12 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
 
         ::
 
-            sage: 0*s([2,1])
+            sage: 0*s([2,1])                                                            # needs lrcalc_python
             0
 
         Example over a field with positive characteristic::
 
+            sage: # needs lrcalc_python
             sage: s[2,1]^2
             s[2, 2, 1, 1] + s[2, 2, 2] + s[3, 1, 1, 1] + 2*s[3, 2, 1]
              + s[3, 3] + s[4, 1, 1] + s[4, 2]
@@ -155,6 +159,7 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
 
         EXAMPLES::
 
+            sage: # needs lrcalc_python
             sage: Sym = SymmetricFunctions(QQ)
             sage: s = Sym.schur()
             sage: s.coproduct_on_basis([2])
@@ -162,8 +167,8 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
 
         TESTS::
 
-            sage: s = SymmetricFunctions(QQ['t']).s()
-            sage: s[2].coproduct() / 2
+            sage: s = SymmetricFunctions(QQ['t']).s()                                   # needs lrcalc_python
+            sage: s[2].coproduct() / 2                                                  # needs lrcalc_python
             1/2*s[] # s[2] + 1/2*s[1] # s[1] + 1/2*s[2] # s[]
         """
         T = self.tensor_square()
@@ -177,9 +182,9 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
         TESTS::
 
             sage: s = SymmetricFunctions(QQ).s()
-            sage: s([[2,1],[1]])
+            sage: s([[2,1],[1]])                                                        # needs lrcalc_python
             s[1, 1] + s[2]
-            sage: s([[],[]])
+            sage: s([[],[]])                                                            # needs lrcalc_python
             s[]
         """
         ###################
@@ -486,6 +491,7 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(ZZ)
                 sage: s = Sym.s()
                 sage: s[5].verschiebung(2)
@@ -509,6 +515,7 @@ class SymmetricFunctionAlgebra_schur(classical.SymmetricFunctionAlgebra_classica
             same result as the implementation in sfa.py on the monomial
             basis::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: s = Sym.s(); h = Sym.h()
                 sage: all( h(s(lam)).verschiebung(3) == h(s(lam).verschiebung(3))

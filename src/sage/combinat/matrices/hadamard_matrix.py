@@ -350,20 +350,21 @@ def hadamard_matrix_from_symmetric_conference_matrix(n, existence=False, check=T
     By default the function returns the Hadamard matrix ::
 
         sage: from sage.combinat.matrices.hadamard_matrix import hadamard_matrix_from_symmetric_conference_matrix
-        sage: hadamard_matrix_from_symmetric_conference_matrix(20)
+        sage: hadamard_matrix_from_symmetric_conference_matrix(20)                      # needs database_graphs
         20 x 20 dense matrix over Integer Ring...
 
     If ``existence`` is set to True, the function returns True if the matrix exists,
     False if the conference matrix does not exist, and Unknown if the conference
     matrix cannot be constructed yet ::
 
-        sage: hadamard_matrix_from_symmetric_conference_matrix(12, existence=True)
+        sage: hadamard_matrix_from_symmetric_conference_matrix(12, existence=True)      # needs database_graphs
         True
-        sage: hadamard_matrix_from_symmetric_conference_matrix(4*787, existence=True)
+        sage: hadamard_matrix_from_symmetric_conference_matrix(4*787, existence=True)   # needs database_graphs
         True
 
     TESTS::
 
+        sage: # needs database_graphs
         sage: from sage.combinat.matrices.hadamard_matrix import is_hadamard_matrix
         sage: is_hadamard_matrix(hadamard_matrix_from_symmetric_conference_matrix(60, check=False))
         True
@@ -430,16 +431,17 @@ def hadamard_matrix_miyamoto_construction(n, existence=False, check=True):
     By default the function returns the Hadamard matrix ::
 
         sage: from sage.combinat.matrices.hadamard_matrix import hadamard_matrix_miyamoto_construction
-        sage: hadamard_matrix_miyamoto_construction(20)
+        sage: hadamard_matrix_miyamoto_construction(20)                                 # needs database_graphs
         20 x 20 dense matrix over Integer Ring...
 
     If ``existence`` is set to True, the function returns a boolean ::
 
-        sage: hadamard_matrix_miyamoto_construction(36, existence=True)
+        sage: hadamard_matrix_miyamoto_construction(36, existence=True)                 # needs database_graphs
         True
 
     TESTS::
 
+        sage: # needs database_graphs
         sage: from sage.combinat.matrices.hadamard_matrix import is_hadamard_matrix
         sage: is_hadamard_matrix(hadamard_matrix_miyamoto_construction(68, check=False))
         True
@@ -1808,7 +1810,7 @@ def hadamard_matrix(n, existence=False, check=True, construction_name=False):
         False
         sage: matrix.hadamard(12,existence=True)
         True
-        sage: matrix.hadamard(668,existence=True)
+        sage: matrix.hadamard(668,existence=True)                                       # needs database_graphs
         Unknown
         sage: matrix.hadamard(10)
         Traceback (most recent call last):
@@ -2037,7 +2039,7 @@ def regular_symmetric_hadamard_matrix_with_constant_diagonal(n, e, existence=Fal
 
     Recursive construction::
 
-        sage: regular_symmetric_hadamard_matrix_with_constant_diagonal(144,-1)
+        sage: regular_symmetric_hadamard_matrix_with_constant_diagonal(144,-1)    # needs database_graphs
         144 x 144 dense matrix over Integer Ring (use the '.str()' method to see the entries)
 
     REFERENCE:
@@ -3378,7 +3380,7 @@ def symmetric_conference_matrix(n, check=True, existence=False):
     EXAMPLES::
 
         sage: from sage.combinat.matrices.hadamard_matrix import symmetric_conference_matrix
-        sage: C = symmetric_conference_matrix(10); C
+        sage: C = symmetric_conference_matrix(10); C                              # needs database_graphs
         [ 0  1  1  1  1  1  1  1  1  1]
         [ 1  0 -1 -1  1 -1  1  1  1 -1]
         [ 1 -1  0 -1  1  1 -1 -1  1  1]
@@ -3389,7 +3391,7 @@ def symmetric_conference_matrix(n, check=True, existence=False):
         [ 1  1 -1  1  1  1 -1  0 -1 -1]
         [ 1  1  1 -1 -1  1  1 -1  0 -1]
         [ 1 -1  1  1  1 -1  1 -1 -1  0]
-        sage: C^2 == 9*identity_matrix(10) and C == C.T
+        sage: C^2 == 9*identity_matrix(10) and C == C.T                           # needs database_graphs
         True
     """
     from sage.graphs.strongly_regular_db import strongly_regular_graph as srg
@@ -3505,6 +3507,7 @@ def rshcd_from_prime_power_and_conference_matrix(n):
 
     A 36x36 example ::
 
+        sage: # needs database_graphs
         sage: from sage.combinat.matrices.hadamard_matrix import rshcd_from_prime_power_and_conference_matrix
         sage: from sage.combinat.matrices.hadamard_matrix import is_hadamard_matrix
         sage: H = rshcd_from_prime_power_and_conference_matrix(7); H
@@ -3514,6 +3517,7 @@ def rshcd_from_prime_power_and_conference_matrix(n):
 
     Bigger examples, only provided by this construction ::
 
+        sage: # needs database_graphs
         sage: H = rshcd_from_prime_power_and_conference_matrix(27)  # long time
         sage: H == H.T and is_hadamard_matrix(H)                    # long time
         True
@@ -3522,7 +3526,7 @@ def rshcd_from_prime_power_and_conference_matrix(n):
 
     In this example the conference matrix is not Paley, as 45 is not a prime power ::
 
-        sage: H = rshcd_from_prime_power_and_conference_matrix(47)  # not tested (long time)
+        sage: H = rshcd_from_prime_power_and_conference_matrix(47)  # not tested (long time), needs database_graphs
 
     REFERENCE:
 

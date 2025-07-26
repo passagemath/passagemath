@@ -293,7 +293,7 @@ class HallLittlewood(UniqueRepresentation):
             1/45*p[1, 1, 1, 1, 1, 1] - 1/9*p[3, 1, 1, 1] - 1/9*p[3, 3] + 1/5*p[5, 1]
             sage: SP(p[3,3])
             -4*HLP[3, 2, 1] + 2*HLP[4, 2] - 2*HLP[5, 1] + HLP[6]
-            sage: SQ( SQ[1]*SQ[3] -2*(1-q)*SQ[4] )
+            sage: SQ( SQ[1]*SQ[3] -2*(1-q)*SQ[4] )                                      # needs lrcalc_python
             HLQ[3, 1] + 2*q*HLQ[4]
 
         TESTS::

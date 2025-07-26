@@ -120,8 +120,8 @@ def Associahedron(cartan_type, backend='ppl'):
 
         sage: p1 = polytopes.associahedron(['A',4], backend='normaliz')   # optional - pynormaliz
         sage: TestSuite(p1).run(skip='_test_pickling')                    # optional - pynormaliz
-        sage: p2 = polytopes.associahedron(['A',4], backend='cdd')
-        sage: TestSuite(p2).run()
+        sage: p2 = polytopes.associahedron(['A',4], backend='cdd')        # needs cddexec_gmp
+        sage: TestSuite(p2).run()                                         # needs cddexec_gmp
         sage: p3 = polytopes.associahedron(['A',4], backend='field')
         sage: TestSuite(p3).run()
     """
@@ -141,7 +141,7 @@ class Associahedron_class_base:
 
         sage: Asso = polytopes.associahedron(['A',2]); Asso
         Generalized associahedron of type ['A', 2] with 5 vertices
-        sage: TestSuite(Asso).run()
+        sage: TestSuite(Asso).run()                                       # needs cddexec
     """
     def __new__(typ, parent=None, Vrep=None, Hrep=None, cartan_type=None, **kwds):
         r"""
@@ -181,7 +181,7 @@ class Associahedron_class_base:
             A 4-dimensional polyhedron in QQ^4 defined as the convex hull of 42 vertices
             sage: A.dilation(2)
             A 4-dimensional polyhedron in QQ^4 defined as the convex hull of 42 vertices
-            sage: A.dilation(2.0)
+            sage: A.dilation(2.0)                                         # needs cddexec
             A 4-dimensional polyhedron in RDF^4 defined as the convex hull of 42 vertices
             sage: A.convex_hull(A)
             A 4-dimensional polyhedron in QQ^4 defined as the convex hull of 42 vertices

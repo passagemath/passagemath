@@ -1284,7 +1284,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                     sage: NSym = NonCommutativeSymmetricFunctions(QQ)
                     sage: R = NSym.R()
-                    sage: all( R(I).psi_involution().to_symmetric_function()
+                    sage: all( R(I).psi_involution().to_symmetric_function()            # needs lrcalc_python
                     ....:      == R(I).to_symmetric_function().omega()
                     ....:      for I in Compositions(4) )
                     True
@@ -1296,7 +1296,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                     sage: M = QSym.M()
                     sage: NSym = NonCommutativeSymmetricFunctions(QQ)
                     sage: S = NSym.S()
-                    sage: all( all( M(I).psi_involution().duality_pairing(S(J))
+                    sage: all( all( M(I).psi_involution().duality_pairing(S(J))         # needs lrcalc_python
                     ....:           == M(I).duality_pairing(S(J).psi_involution())
                     ....:           for I in Compositions(2) )
                     ....:      for J in Compositions(3) )
