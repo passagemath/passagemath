@@ -36,6 +36,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_six
     SPKG_INSTALL_REQUIRES_sagemath_brial
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_cddlib
     SPKG_INSTALL_REQUIRES_sagemath_combinat
     SPKG_INSTALL_REQUIRES_sagemath_eclib
     SPKG_INSTALL_REQUIRES_sagemath_environment
@@ -65,10 +66,12 @@ dnl From build/pkgs/sagelib/dependencies
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_gmpy2
     SPKG_INSTALL_REQUIRES_jupyter_core
+    SPKG_INSTALL_REQUIRES_lrcalc_python
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_pplpy
+    SPKG_INSTALL_REQUIRES_primecountpy
     SPKG_INSTALL_REQUIRES_requests
 dnl From Makefile.in: SAGERUNTIME
     SPKG_INSTALL_REQUIRES_ipython
@@ -96,13 +99,6 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-     "passagemath-repl",
-]
-lrcalc = [
-    SPKG_INSTALL_REQUIRES_lrcalc_python
-]
-primecountpy = [
-    SPKG_INSTALL_REQUIRES_primecountpy
 ]
 
 [tool.setuptools]
