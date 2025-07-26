@@ -2503,8 +2503,8 @@ class MatchingCoveredGraph(Graph):
             sage: K = graphs.CompleteBipartiteGraph(3, 3)
             sage: J = graphs.HeawoodGraph()
             sage: H = MatchingCoveredGraph(J)
-            sage: H.is_brace() and not H.is_planar() and \
-            ....: H.is_regular(k=3) and H.girth() == 6
+            sage: (H.is_brace() and not H.is_planar() and                               # needs planarity
+            ....:  H.is_regular(k=3) and H.girth() == 6)
             True
 
         Braces of order six or more are 3-connected::

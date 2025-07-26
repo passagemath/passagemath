@@ -280,7 +280,7 @@ class AlgebraicScheme(scheme.Scheme):
         projective spaces. This is why this method returns ``False``
         for toric varieties::
 
-            sage: # needs sage.geometry.polyhedron sage.graphs
+            sage: # needs palp sage.geometry.polyhedron sage.graphs
             sage: PP.<x,y,z,w> = toric_varieties.P(3)
             sage: V = PP.subscheme(x^3 + y^3 + z^3 + w^3)
             sage: V.is_projective()
@@ -390,7 +390,7 @@ class AlgebraicScheme(scheme.Scheme):
               To:   Affine Space of dimension 2 over Rational Field
               Defn: Defined on coordinates by sending (x, y) to (x, y)
 
-            sage: # needs sage.geometry.polyhedron sage.graphs sage.libs.singular
+            sage: # needs palp sage.geometry.polyhedron sage.graphs sage.libs.singular
             sage: P1xP1.<x,y,u,v> = toric_varieties.P1xP1()
             sage: P1 = P1xP1.subscheme(x - y)
             sage: P1.embedding_morphism()
@@ -432,7 +432,7 @@ class AlgebraicScheme(scheme.Scheme):
 
         A couple more examples::
 
-            sage: # needs sage.geometry.polyhedron sage.graphs sage.libs.singular
+            sage: # needs palp sage.geometry.polyhedron sage.graphs sage.libs.singular
             sage: patch1 = P1xP1.affine_patch(1); patch1
             2-d affine toric variety
             sage: patch1.embedding_morphism()
@@ -555,7 +555,7 @@ class AlgebraicScheme(scheme.Scheme):
 
         ::
 
-            sage: # needs sage.geometry.polyhedron sage.graphs
+            sage: # needs palp sage.geometry.polyhedron sage.graphs
             sage: P1xP1 = toric_varieties.P1xP1()
             sage: P1 = toric_varieties.P1()
             sage: P1xP1._homset(P1xP1, P1)

@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
-# sage.doctest: needs sage.geometry.polyhedron sage.graphs
+# sage.doctest: needs palp sage.geometry.polyhedron sage.graphs
 r"""
 The Chow group of a toric variety
 

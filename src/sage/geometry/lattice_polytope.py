@@ -5580,7 +5580,7 @@ def positive_integer_relations(points):
     numbers. This function transforms them in such a way, that all
     coefficients are nonnegative integers::
 
-        sage: points = p.points().column_matrix()
+        sage: points = p.points().column_matrix()                                       # needs palp
         sage: lattice_polytope.positive_integer_relations(points)                       # needs palp
         [1 0 0 1 1 0]
         [1 1 1 0 0 0]

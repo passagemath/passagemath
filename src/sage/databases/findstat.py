@@ -4006,7 +4006,7 @@ def _finite_lattices(n):
     TESTS::
 
         sage: from sage.databases.findstat import _finite_lattices
-        sage: sorted((L.cover_relations() for L in _finite_lattices(4)),
+        sage: sorted((L.cover_relations() for L in _finite_lattices(4)),        # needs nauty
         ....:        key=len)
         [[['bottom', 0], [0, 1], [1, 'top']],
          [['bottom', 0], ['bottom', 1], [0, 'top'], [1, 'top']]]

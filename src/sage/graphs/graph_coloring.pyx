@@ -1859,7 +1859,7 @@ def linear_arboricity(g, plus_one=None, hex_colors=False, value_only=False,
     Asking for the value of the linear arboricity only (:issue:`24991`)::
 
         sage: from sage.graphs.graph_coloring import linear_arboricity
-        sage: sorted(linear_arboricity(G, value_only=True) for G in graphs(4))          # needs sage.numerical.mip
+        sage: sorted(linear_arboricity(G, value_only=True) for G in graphs(4))          # needs nauty sage.numerical.mip
         [0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2]
 
     Test parameter ``hex_color`` (:issue:`26228`)::
@@ -2079,7 +2079,7 @@ def acyclic_edge_coloring(g, hex_colors=False, value_only=False, k=0,
     Issue :issue:`24991` is fixed::
 
         sage: from sage.graphs.graph_coloring import acyclic_edge_coloring
-        sage: sorted(acyclic_edge_coloring(G, value_only=True) for G in graphs(4))      # needs sage.numerical.mip
+        sage: sorted(acyclic_edge_coloring(G, value_only=True) for G in graphs(4))      # needs nauty sage.numerical.mip
         [2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5]
 
     Test parameter ``hex_color`` (:issue:`26228`)::

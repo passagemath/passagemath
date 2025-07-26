@@ -115,10 +115,10 @@ class SequencePrettyPrinter(SageObject):
         EXAMPLES::
 
             sage: from sage.repl.rich_output.pretty_print import SequencePrettyPrinter
-            sage: plt = SequencePrettyPrinter(*list(graphs(3)))._concatenate_graphs()   # needs sage.graphs sage.plot
-            sage: type(plt)                                                             # needs sage.graphs sage.plot
+            sage: plt = SequencePrettyPrinter(*list(graphs(3)))._concatenate_graphs()   # needs nauty sage.graphs sage.plot
+            sage: type(plt)                                                             # needs nauty sage.graphs sage.plot
             <class 'sage.plot.multigraphics.GraphicsArray'>
-            sage: plt                                                                   # needs sage.graphs sage.plot
+            sage: plt                                                                   # needs nauty sage.graphs sage.plot
             Graphics Array of size 1 x 4
         """
         import sage.graphs.graph_list as graphs_list

@@ -1164,7 +1164,7 @@ class HypergeometricData:
             2-d lattice polytope in 2-d lattice M
             sage: P.polyhedron().f_vector()
             (1, 4, 4, 1)
-            sage: len(P.points())
+            sage: len(P.points())                                                       # needs palp
             7
 
         The Chebyshev example from [RV2019]_::
@@ -1172,7 +1172,7 @@ class HypergeometricData:
             sage: H = Hyp(gamma_list=[-30, -1, 6, 10, 15])
             sage: P = H.lattice_polytope(); P
             3-d lattice polytope in 3-d lattice M
-            sage: len(P.points())
+            sage: len(P.points())                                                       # needs palp
             19
             sage: P.polyhedron().f_vector()
             (1, 5, 9, 6, 1)
