@@ -89,7 +89,7 @@ def ecmfactor(number, double B1, verbose=False, sigma=0):
     This number has a small factor which is easy to find for ECM::
 
         sage: N = 2^167 - 1
-        sage: factor(N)
+        sage: factor(N)                                                                 # needs sage.libs.pari
         2349023 * 79638304766856507377778616296087448490695649
         sage: ecmfactor(N, 2e5)
         (True, 2349023, ...)
@@ -111,7 +111,7 @@ def ecmfactor(number, double B1, verbose=False, sigma=0):
     the input number back as factorization)::
 
         sage: N = 2^127 - 1
-        sage: N.is_prime()
+        sage: N.is_prime()                                                              # needs sage.libs.pari
         True
         sage: ecmfactor(N, 1e3)
         (False, None)
@@ -120,7 +120,7 @@ def ecmfactor(number, double B1, verbose=False, sigma=0):
     product of primes as factor::
 
         sage: N = 2^179 - 1
-        sage: factor(N)
+        sage: factor(N)                                                                 # needs sage.libs.pari
         359 * 1433 * 1489459109360039866456940197095433721664951999121
         sage: ecmfactor(N, 1e3)  # random
         (True, 514447, 3475102204)
@@ -128,7 +128,7 @@ def ecmfactor(number, double B1, verbose=False, sigma=0):
     We can ask for verbose output::
 
         sage: N = 12^97 - 1
-        sage: factor(N)
+        sage: factor(N)                                                                 # needs sage.libs.pari
         11 * 43570062353753446053455610056679740005056966111842089407838902783209959981593077811330507328327968191581
         sage: ecmfactor(N, 100, verbose=True)
         Performing one curve with B1=100

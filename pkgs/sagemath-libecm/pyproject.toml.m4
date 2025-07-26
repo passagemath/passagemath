@@ -20,6 +20,7 @@ description = "passagemath: Elliptic curve method for integer factorization usin
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_cysignals
 ]
@@ -31,8 +32,13 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-# No test requirements; see comment in tox.ini
-test = []
+test = [
+    SPKG_INSTALL_REQUIRES_sagemath_repl
+]
+
+pari = [
+    SPKG_INSTALL_REQUIRES_sagemath_pari
+]
 
 [tool.setuptools]
 include-package-data = false
