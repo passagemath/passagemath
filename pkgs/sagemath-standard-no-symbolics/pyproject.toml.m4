@@ -52,9 +52,12 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_libecm
     SPKG_INSTALL_REQUIRES_sagemath_linbox
     SPKG_INSTALL_REQUIRES_sagemath_modules
+    SPKG_INSTALL_REQUIRES_sagemath_nauty
     SPKG_INSTALL_REQUIRES_sagemath_ntl
     SPKG_INSTALL_REQUIRES_sagemath_objects
+    SPKG_INSTALL_REQUIRES_sagemath_palp
     SPKG_INSTALL_REQUIRES_sagemath_pari
+    SPKG_INSTALL_REQUIRES_sagemath_planarity
     SPKG_INSTALL_REQUIRES_sagemath_plot
     SPKG_INSTALL_REQUIRES_sagemath_polyhedra
     SPKG_INSTALL_REQUIRES_sagemath_repl
