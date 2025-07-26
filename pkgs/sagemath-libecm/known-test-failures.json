@@ -1,0 +1,12 @@
+{
+    "sage.interfaces.ecm": {
+        "ntests": 41
+    },
+    "sage.libs.libecm": {
+        "ntests": 29
+    },
+    "sage.rings.integer": {
+        "failed": true,
+        "ntests": 1084
+    }
+}
