@@ -36,6 +36,10 @@ test = [
     SPKG_INSTALL_REQUIRES_sagemath_repl
 ]
 
+pari = [
+    SPKG_INSTALL_REQUIRES_sagemath_pari
+]
+
 [tool.setuptools]
 include-package-data = false
 
