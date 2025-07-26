@@ -18884,10 +18884,10 @@ cdef class Matrix(Matrix1):
         the greatest common divisor of the determinants of all `r`-by-`r`
         submatrices of `B` is `1`. [Sch1986]_, Ch. 21.4.
 
-        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`, :meth:`is_totally_unimodular`
-
-        See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_unimodular` for
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_unimodular` for
         the detailed documentation.
+
+        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`, :meth:`is_totally_unimodular`
 
         EXAMPLES::
 
@@ -18910,6 +18910,9 @@ cdef class Matrix(Matrix1):
         Return whether ``self`` is a strongly unimodular matrix.
 
         A matrix is strongly unimodular if ``self`` and ``self.transpose()`` are both unimodular.
+
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_strongly_unimodular` for
+        the detailed documentation.
 
         .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
 
@@ -18949,6 +18952,9 @@ cdef class Matrix(Matrix1):
 
         - ``k``: ``self`` is equimodular with determinant gcd `k`
         - ``None``: ``self`` is not equimodular for any `k`
+
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.equimodulus` for
+        the detailed documentation.
 
         .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`strong_equimodulus`
 
@@ -18991,6 +18997,9 @@ cdef class Matrix(Matrix1):
         - ``k``: ``self`` is  `k`-equimodular
         - ``None``: ``self`` is not `k`-equimodular for any `k`
 
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.strong_equimodulus` for
+        the detailed documentation.
+
         .. SEEALSO:: :meth:`is_strongly_k_equimodular`, :meth:`equimodulus`
 
         EXAMPLES::
@@ -19029,6 +19038,9 @@ cdef class Matrix(Matrix1):
             In parts of the literature, a matrix with the above properties
             is called *strictly* `k`-modular.
 
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_k_equimodular` for
+        the detailed documentation.
+
         .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`,
                      :meth:`equimodulus`
 
@@ -19057,6 +19069,9 @@ cdef class Matrix(Matrix1):
 
         A matrix is strongly `k`-equimodular if ``self`` and ``self.transpose()``
         are both `k`-equimodular.
+
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_strongly_k_equimodular` for
+        the detailed documentation.
 
         .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`,
                      :meth:`strong_equimodulus`
@@ -19106,6 +19121,9 @@ cdef class Matrix(Matrix1):
         The implemented recognition algorithm first tests the binary matroid of
         the support matrix of `M` for being graphic and
         uses camion for testing whether `M` is signed correctly.
+
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_network_matrix` for
+        the detailed documentation.
 
         EXAMPLES::
 
@@ -19180,9 +19198,12 @@ cdef class Matrix(Matrix1):
         r"""
         Return whether the matrix ``self`` over `\GF{3}` or `\QQ` is a conetwork matrix.
 
-        A matrix is conetwork if and only if its transpose is network.
+        A matrix is a conetwork matrix if and only if its transpose is a network matrix.
 
-        .. SEEALSO:: :meth:`is_network_matrix`,
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_conetwork_matrix` for
+        the detailed documentation.
+
+        .. SEEALSO:: :meth:`is_network_matrix`
 
         EXAMPLES::
 
@@ -19241,13 +19262,14 @@ cdef class Matrix(Matrix1):
         - ``stop_when_nonTU`` -- boolean (default: ``True``);
           whether to stop decomposing once not TU is determined.
 
-          For a description of other parameters, see :meth:`_set_cmr_seymour_parameters`
-
         - ``row_keys`` -- a finite or enumerated family of arbitrary objects
           that index the rows of the matrix
 
         - ``column_keys`` -- a finite or enumerated family of arbitrary objects
           that index the columns of the matrix
+
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_totally_unimodular` for
+        the detailed documentation.
 
         EXAMPLES::
 
@@ -19322,8 +19344,8 @@ cdef class Matrix(Matrix1):
             │                 │
             GraphicNode (5×4) CographicNode (4×5)
 
-        This is test ``TreeFlagsNorecurse``, ``TreeFlagsStopNoncographic``,
-        and ``TreeFlagsStopNongraphic`` in CMR's ``test_regular.cpp``,
+        These are tests ``TreeFlagsNorecurse``, ``TreeFlagsStopNoncographic``,
+        and ``TreeFlagsStopNongraphic`` in CMR's ``test_regular.cpp``;
         the underlying binary linear matroid is regular,
         but the matrix is not totally unimodular::
 
