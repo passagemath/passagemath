@@ -128,14 +128,14 @@ def integral_elements_in_box(K, C):
         sage: K.<alpha> = NumberField(x^2 - 2)
         sage: eps = 10e-6
         sage: C = [[0-eps, 5+eps], [0-eps, 10+eps]]
-        sage: ls = sage.rings.number_field.totallyreal_rel.integral_elements_in_box(K, C)
-        sage: sorted(a.trace() for a in ls)
+        sage: ls = sage.rings.number_field.totallyreal_rel.integral_elements_in_box(K, C)   # needs palp
+        sage: sorted(a.trace() for a in ls)                                                 # needs palp
         [0, 2, 4, 4, 4, 6, 6, 6, 6, 8, 8, 8, 10, 10, 10, 10, 12, 12, 14]
-        sage: len(ls)
+        sage: len(ls)                                                                       # needs palp
         19
 
-        sage: v = sage.rings.number_field.totallyreal_rel.integral_elements_in_box(K, C)
-        sage: sorted(v)
+        sage: v = sage.rings.number_field.totallyreal_rel.integral_elements_in_box(K, C)    # needs palp
+        sage: sorted(v)                                                                     # needs palp
         [0, -alpha + 2, 1, -alpha + 3, 2, 3, alpha + 2, 4, alpha + 3, 5, alpha + 4,
          2*alpha + 3, alpha + 5, 2*alpha + 4, alpha + 6, 2*alpha + 5, 2*alpha + 6,
          3*alpha + 5, 2*alpha + 7]
@@ -146,12 +146,12 @@ def integral_elements_in_box(K, C):
         sage: K.<a> = NumberField(x^3 - 16*x +16)
         sage: eps = 10e-6
         sage: C = [[0-eps,5+eps]]*3
-        sage: v = sage.rings.number_field.totallyreal_rel.integral_elements_in_box(K, C)
+        sage: v = sage.rings.number_field.totallyreal_rel.integral_elements_in_box(K, C)    # needs palp
 
     Note that the output is platform dependent (sometimes a 5 is listed
     below, and sometimes it isn't)::
 
-        sage: sorted(v)
+        sage: sorted(v)                                                                     # needs palp
         [-1/2*a + 2, 1/4*a^2 + 1/2*a, 0, 1, 2, 3, 4,...-1/4*a^2 - 1/2*a + 5,
          1/2*a + 3, -1/4*a^2 + 5]
     """
