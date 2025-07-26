@@ -198,7 +198,7 @@ jobs:
               windows*) tag="win_amd64";;
           esac
           # Run tox
-          for wheel in "$WHEELHOUSE"/*$pkg_underscore*-cp$python_version_no_dot-$tag.whl; do
+          for wheel in "$WHEELHOUSE"/*$pkg_underscore-*-cp$python_version_no_dot-$tag.whl; do
             if [ -r "$wheel" ]; then
               cd pkgs/$pkg
               tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py'$python_version_no_dot'-norequirements/')
