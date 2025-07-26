@@ -850,7 +850,7 @@ Partial orders on a set of `8` elements, up to isomorphism::
 
 ::
 
-    sage: C.unrank(20).plot()                                                           # needs sage.plot
+    sage: C.unrank(20).plot()                                                           # needs nauty sage.plot
     Graphics object consisting of ... graphics primitives
 
 .. image:: ../../media/a_poset.png
@@ -858,7 +858,7 @@ Partial orders on a set of `8` elements, up to isomorphism::
 One can iterate through all graphs up to isomorphism. For example,
 there are 34 simple graphs with 5 vertices::
 
-    sage: len(list(graphs(5)))
+    sage: len(list(graphs(5)))                                                          # needs nauty
     34
 
 Here are those with at most `4` edges::
@@ -1623,7 +1623,7 @@ iterator or non-naive counting::
 
     sage: A = random_matrix(ZZ, 6, 3, x=7)
     sage: L = LatticePolytope(A.rows())
-    sage: L.points()                               # random
+    sage: L.points()                               # random                             # needs palp
     M(4, 1, 0),
     M(0, 3, 5),
     M(2, 2, 3),
@@ -1636,7 +1636,7 @@ iterator or non-naive counting::
     M(4, 2, 3),
     M(5, 2, 3)
     in 3-d lattice M
-    sage: L.npoints()                                 # random
+    sage: L.npoints()                                 # random                          # needs palp
     11
 
 This polytope can be visualized in 3D with ``L.plot3d()`` (see
@@ -1820,7 +1820,7 @@ graph; so planar graphs form a subtree of the previous tree. To generate
 them, exactly the same algorithm can be used,
 selecting only the children which are planar::
 
-    sage: [len(list(graphs(n, property=lambda G: G.is_planar())))
+    sage: [len(list(graphs(n, property=lambda G: G.is_planar())))       # needs planarity
     ....:  for n in range(7)]
     [1, 1, 2, 4, 11, 33, 142]
 
