@@ -573,7 +573,7 @@ def line2d(points, **options):
 
     A purple plot of the Hasse-Weil `L`-function `L(E, 1 + it)`, `-1 < t < 10`::
 
-        sage: # needs sage.schemes
+        sage: # needs lcalc sage.schemes
         sage: E = EllipticCurve('37a')
         sage: vals = E.lseries().values_along_line(1-I, 1+10*I, 100)  # critical line
         sage: L = [(z[1].real(), z[1].imag()) for z in vals]
