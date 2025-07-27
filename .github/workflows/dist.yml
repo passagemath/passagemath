@@ -313,7 +313,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty gfan ecm tachyon graphs pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
+      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty gfan ecm tachyon graphs polytopes_db pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
