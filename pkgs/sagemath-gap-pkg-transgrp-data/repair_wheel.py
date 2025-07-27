@@ -1,4 +1,4 @@
-# Add GAP pkg transgrp data to the wheel
+# Add the GAP pkg transgrp data to the wheel
 
 import os
 import shlex
