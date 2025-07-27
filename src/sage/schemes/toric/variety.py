@@ -3104,7 +3104,7 @@ class CohomologyRing(QuotientRing_generic, UniqueRepresentation):
         EXAMPLES::
 
             sage: cohomology_ring = toric_varieties.P2().cohomology_ring()
-            sage: print(cohomology_ring._latex_())
+            sage: print(cohomology_ring._latex_())                                      # needs polytopes_db
             H^\ast\left(\mathbb{P}_{\Delta^{2}_{15}},\Bold{Q}\right)
         """
         return fr'H^\ast\left({self._variety._latex_()},{latex(QQ)}\right)'

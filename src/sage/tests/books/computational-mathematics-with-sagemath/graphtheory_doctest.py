@@ -72,7 +72,7 @@ Sage example in ./graphtheory.tex, line 252::
   5
   sage: P.is_regular(3)
   True
-  sage: P.chromatic_number()
+  sage: P.chromatic_number()                                                            # needs cliquer
   3
   sage: P.is_vertex_transitive()
   True
@@ -86,7 +86,7 @@ Sage example in ./graphtheory.tex, line 332::
 
 Sage example in ./graphtheory.tex, line 340::
 
-  sage: all( graphs.KneserGraph(n,k).chromatic_number() == n - 2*k + 2
+  sage: all( graphs.KneserGraph(n,k).chromatic_number() == n - 2*k + 2                  # needs cliquer
   ....:      for n in range(5, 9) for k in range(2, n // 2) )
   True
 
@@ -139,7 +139,7 @@ Sage example in ./graphtheory.tex, line 568::
 
 Sage example in ./graphtheory.tex, line 583::
 
-  sage: C.show(partition = [C.independent_set()])
+  sage: C.show(partition = [C.independent_set()])                                       # needs cliquer
 
 Sage example in ./graphtheory.tex, line 597::
 
@@ -361,10 +361,10 @@ Sage example in ./graphtheory.tex, line 2070::
 
 Sage example in ./graphtheory.tex, line 2084::
 
-  sage: X = G.independent_set(); X  # random with python3
+  sage: X = G.independent_set(); X  # random with python3                               # needs cliquer
   [4, 6, 9, 11, 16, 21, 23, 26, 28, 33, 38, 43, 50,
   56, 61, 71, 76, 78, 83, 88, 93, 95, 98, 100]
-  sage: G.is_independent_set(X)
+  sage: G.is_independent_set(X)                                                         # needs cliquer
   True
 
 Sage example in ./graphtheory.tex, line 2139::

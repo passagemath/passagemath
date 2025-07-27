@@ -205,6 +205,7 @@ class NaiveFinitePointEnumerator:
 
         EXAMPLES::
 
+            sage: # needs polytopes_db
             sage: fan = NormalFan(ReflexivePolytope(2, 0))
             sage: X = ToricVariety(fan, base_ring=GF(7))
             sage: X.Chow_group().degree(1)
@@ -233,6 +234,7 @@ class NaiveFinitePointEnumerator:
 
         EXAMPLES::
 
+            sage: # needs polytopes_db
             sage: fan = NormalFan(ReflexivePolytope(2, 0))
             sage: X = ToricVariety(fan, base_ring=GF(7))
             sage: X.Chow_group().degree(1)
@@ -497,6 +499,7 @@ class FiniteFieldPointEnumerator(NaiveFinitePointEnumerator):
 
         EXAMPLES::
 
+            sage: # needs polytopes_db
             sage: fan = NormalFan(ReflexivePolytope(2, 0))
             sage: X = ToricVariety(fan, base_ring=GF(7))
             sage: X.Chow_group().degree(1)
@@ -526,6 +529,7 @@ class FiniteFieldPointEnumerator(NaiveFinitePointEnumerator):
 
         EXAMPLES::
 
+            sage: # needs polytopes_db
             sage: fan = NormalFan(ReflexivePolytope(2, 0))
             sage: X = ToricVariety(fan, base_ring=GF(7))
             sage: X.Chow_group().degree(1)
@@ -655,6 +659,7 @@ class FiniteFieldPointEnumerator(NaiveFinitePointEnumerator):
 
         EXAMPLES::
 
+            sage: # needs polytopes_db
             sage: fan = NormalFan(ReflexivePolytope(2, 0))
             sage: X = ToricVariety(fan, base_ring=GF(7))
             sage: point_set = X.point_set()
@@ -711,6 +716,7 @@ class FiniteFieldPointEnumerator(NaiveFinitePointEnumerator):
             [(0, 0, 1), (1, 0, 0), (0, 1, 0), (0, 1, 1),
              (1, 0, 1), (1, 1, 0), (1, 1, 1)]
 
+            sage: # needs polytopes_db
             sage: fan = NormalFan(ReflexivePolytope(2, 0))
             sage: X = ToricVariety(fan, base_ring=GF(7))
             sage: point_set = X.point_set()
@@ -741,6 +747,7 @@ class FiniteFieldPointEnumerator(NaiveFinitePointEnumerator):
 
         EXAMPLES::
 
+            sage: # needs polytopes_db
             sage: fan = NormalFan(ReflexivePolytope(2, 0))
             sage: X = ToricVariety(fan, base_ring=GF(7))
             sage: point_set = X.point_set()
