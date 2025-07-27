@@ -1,6 +1,6 @@
-==================================================================================
- passagemath: Computational Number Theory with PARI/GP
-==================================================================================
+=============================================================================
+ passagemath: Computational Number Theory with PARI/GP: Galois group data
+=============================================================================
 
 `passagemath <https://github.com/passagemath/passagemath>`__ is open
 source mathematical software in Python, released under the GNU General
@@ -47,6 +47,11 @@ so compilation from source is triggered for those.
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``passagemath-pari`` is a small
-distribution that provides modules that depend on the computer algebra
-system PARI/GP.
+This pip-installable distribution ``passagemath-pari-galdata`` is a
+distribution of data for use with ``passagemath-pari``.
+
+
+What is included
+----------------
+
+- Wheels on PyPI include the galdata files
