@@ -37,9 +37,12 @@ test            = ["passagemath-repl"]
 
 # GAP packages
 transgrp        = ["passagemath-gap-pkg-transgrp-data"]
+ctbllib         = ["passagemath-gap-pkg-ctbllib-data"]
+tomlib          = ["passagemath-gap-pkg-tomlib-data"]
+irredsol        = ["passagemath-gap-pkg-irredsol-data"]
 
 # Everything as in standard Sage
-standard        = ["passagemath-gap[transgrp]"]
+standard        = ["passagemath-gap[transgrp,ctbllib,tomlib,irredsol]"]
 
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
