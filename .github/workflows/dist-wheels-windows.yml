@@ -91,6 +91,7 @@ jobs:
         run: |
           ./bootstrap
           ./configure
+          make sagemath_environment V=0
           make pypi-sdists V=0
           (mkdir dist && mv upstream/*sage*.tar.gz dist/)
           ls -l dist

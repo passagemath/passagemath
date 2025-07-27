@@ -158,6 +158,7 @@ jobs:
         run: |
           ./bootstrap
           if [ -x ./config.status ]; then ./config.status; else ./configure; fi
+          make sagemath_environment V=0
           make pypi-sdists V=0
           (mkdir dist && mv upstream/*sage*.tar.gz dist/)
           ls -l dist
