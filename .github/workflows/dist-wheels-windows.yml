@@ -91,6 +91,7 @@ jobs:
         run: |
           ./bootstrap
           ./configure
+          make sagemath_environment V=0
           make pypi-sdists V=0
           (mkdir dist && mv upstream/*sage*.tar.gz dist/)
           ls -l dist
@@ -157,7 +158,7 @@ jobs:
         run: |
           ./bootstrap
           ./configure
-          make pypi-noarch-wheels V=0
+          make pypi-noarch-wheels PYPI_NOARCH_WHEEL_PACKAGES="sage_sws2rst sage_setup sagemath_environment sagemath_repl sagelib" V=0
           (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/)
           ls -l dist
 
