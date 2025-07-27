@@ -199,6 +199,7 @@ jobs:
         cmr
         rw
         cddlib
+        graphs
         planarity
         cliquer
         libhomfly
