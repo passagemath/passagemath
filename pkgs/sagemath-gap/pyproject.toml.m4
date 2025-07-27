@@ -35,6 +35,12 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test            = ["passagemath-repl"]
 
+# GAP packages
+transgrp        = ["passagemath-gap-pkg-transgrp-data"]
+
+# Everything as in standard Sage
+standard        = ["passagemath-gap[transgrp]"]
+
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
 # so there is no clean way to refer to the repair_wheel.py script

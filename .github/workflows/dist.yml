@@ -270,9 +270,24 @@ jobs:
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
         run: |
           ./bootstrap
-          ./configure
+          ./configure --without-system-gap
           make pypi-noarch-wheels V=0
           (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/)
+          ls -l dist
+
+      - name: Repair wheels
+        if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
+        run: |
+          make auditwheel_or_delocate V=0
+          cd pkgs
+          set -x
+          for pkg in sagemath-*-data; do
+              if [ -r $pkg/repair_wheel.py ]; then
+                  pkg_underscore=${pkg//-/_}
+                  ../sage -sh -c "python3 $pkg/repair_wheel.py ../dist/*$pkg_underscore*-none-any.whl"
+              fi
+          done
+          cd ..
           ls -l dist
 
       - uses: actions/upload-artifact@v4

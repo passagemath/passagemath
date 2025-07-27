@@ -138,6 +138,7 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sage_setup				\
 	sagemath_environment			\
 	sagemath_repl				\
+	sagemath_gap_pkg_transgrp_data		\
 	sagelib
 
 # Packages for which we build wheels for PyPI

@@ -42,6 +42,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_flint
     SPKG_INSTALL_REQUIRES_sagemath_gap
+    SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_transgrp_data
     SPKG_INSTALL_REQUIRES_sagemath_giac
     SPKG_INSTALL_REQUIRES_sagemath_glpk
     SPKG_INSTALL_REQUIRES_sagemath_graphs
