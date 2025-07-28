@@ -1,4 +1,4 @@
-
+#!/usr/bin/env sage-bootstrap-python
 """
 Python rewrite of `build/bin/sage-spkg-info` with suggestions applied:
   - Rewrote actually most of the original script because 
@@ -15,7 +15,7 @@ export SAGE_ROOT="$PWD"
 export PATH="$PWD/build/bin:$PATH"
 python3 build/bin/sage-spkg-info.py 4ti2 --output-rst --log-level INFO
 """
-#!/usr/bin/env python3
+
 from __future__ import annotations
 from functools import cached_property
 import sys
@@ -173,19 +173,18 @@ def process_spkg_file(pkg_base: str, pkg_scripts: Path, fmt: Formatter, out) -> 
         return
 
     content = spkg_file.read_text(encoding="utf-8")
-
-    # To replace emulating sed tweaks in original script (hopefully this works)
-    content = content.replace("https://github.com/sagemath/sage/issues/", ":issue:`")
-    content = content.replace("https://arxiv.org/abs/cs/", ":arxiv:`cs/")
-    # To Ensure underline length (example from original sed).（ This is heuristic.）
-    content = content.replace("====", "==============")
-
+    # Tweaks to make identical to the bash script 
+    content = re.sub(r'https://github\.com/sagemath/sage/issues/(\d+)',
+                     r':issue:`\1`', content)
+    content = re.sub(r'https://arxiv\.org/abs/cs/(\d+)',
+                     r':arxiv:`cs/\1`', content)
     print(content, file=out)
 
 
 def display_dependencies(pkg_base: str, fmt: Formatter, out) -> None:
     try:
-        result = run(["sage-package", "dependencies", f"--format={'rst' if fmt.rst else 'plain'}", pkg_base], check=True)
+        result = run(["sage-package", "dependencies", "--format=plain", pkg_base],
+                     check=True)
     except subprocess.CalledProcessError as e:
         logger.warning("Could not get dependencies for %s: %s", pkg_base, e.stderr.strip())
         return
@@ -239,8 +238,9 @@ def handle_system_packages(pkg_base: str, pkg_scripts: Path, fmt: Formatter, out
         system_file = distros_dir / f"{system}.txt"
         sys_pkgs = _strip_comments_and_collapse(system_file)
 
-        tab_name = SYSTEM_NAME_MAP.get(system, system)
-        print(fmt.tab(tab_name), file=out)
+        heading = f"{SYSTEM_NAME_MAP.get(system, system)}:"
+        print(heading, file=out)
+        rst_indent = "       " if fmt.rst else "    "
 
         if sys_pkgs:
             args = [
@@ -287,8 +287,11 @@ def handle_configuration(pkg_base: str, pkg_scripts: Path, fmt: Formatter, out) 
             print(f"{fmt.code('--enable-system-site-packages')} is passed to {fmt.code('./configure')}, "
                   f"then {fmt.code('./configure')} will check if the system package can be used.", file=out)
         else:
-            print(f"If the system package is installed, {fmt.code('./configure')} will check if it can be used.",
-                  file=out)
+            cfg_word = "./configure"
+            if fmt.rst:
+                cfg_word = f"``{cfg_word}``"
+            print(f"If the system package is installed, {cfg_word} will check if it can be used.", file=out)
+
     else:
         if not pkg_base.startswith("_"):
             print("However, these system packages will not be used for building Sage", file=out)
@@ -304,28 +307,31 @@ def emit_for_package(pkg_base: str, fmt: Formatter, out_dir: Optional[Path]) -> 
         logger.error("Cannot determine PKG_SCRIPTS/path_%s from properties.", pkg_base)
         raise SystemExit(1)
     pkg_scripts = Path(pkg_scripts_str)
+    # Changed to defining an inner helper function
+    def _emit_sections(out_stream):
+        if fmt.rst:
+            print(f".. _spkg_{pkg_base}:\n", file=out_stream)
+        # Title / underline already come from SPKG.rst; blank line before next hdr
+        print("", file=out_stream)
+        process_spkg_file(pkg_base, pkg_scripts, fmt, out_stream)
+        pkg_type = props.get("PKG_TYPE")
+        if pkg_type:
+            print("\nType\n----\n\n" + pkg_type + "\n", file=out_stream)
+        display_dependencies(pkg_base, fmt, out_stream)
+        print("", file=out_stream)
+        display_version_info(pkg_base, out_stream)
+        print("", file=out_stream)
+        handle_system_packages(pkg_base, pkg_scripts, fmt, out_stream)
+        handle_configuration(pkg_base, pkg_scripts, fmt, out_stream)
 
     if out_dir:
         out_dir.mkdir(parents=True, exist_ok=True)
         target = out_dir / (f"{pkg_base}.rst" if fmt.rst else f"{pkg_base}.txt")
+        logger.info("Writing output to %s", target)
         with target.open("w", encoding="utf-8") as out:
-            logger.info("Writing output to %s", target)
-            if fmt.rst:
-                print(f".. _spkg_{pkg_base}:\n", file=out)
-            process_spkg_file(pkg_base, pkg_scripts, fmt, out)
-            display_dependencies(pkg_base, fmt, out)
-            display_version_info(pkg_base, out)
-            handle_system_packages(pkg_base, pkg_scripts, fmt, out)
-            handle_configuration(pkg_base, pkg_scripts, fmt, out)
+            _emit_sections(out)
     else:
-        out = os.sys.stdout
-        if fmt.rst:
-            print(f".. _spkg_{pkg_base}:\n", file=out)
-        process_spkg_file(pkg_base, pkg_scripts, fmt, out)
-        display_dependencies(pkg_base, fmt, out)
-        display_version_info(pkg_base, out)
-        handle_system_packages(pkg_base, pkg_scripts, fmt, out)
-        handle_configuration(pkg_base, pkg_scripts, fmt, out)
+        _emit_sections(sys.stdout)
 
 # Main
 
