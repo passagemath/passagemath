@@ -143,6 +143,7 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sagemath_gap_pkg_tomlib_data		\
 	sagemath_gap_pkg_irredsol_data		\
 	sagemath_pari_galdata			\
+	sagemath_pari_seadata_small		\
 	sagelib
 
 # Packages for which we build wheels for PyPI

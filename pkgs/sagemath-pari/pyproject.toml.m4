@@ -40,10 +40,11 @@ content-type = "text/x-rst"
 test = ["passagemath-repl"]
 
 # GAP packages
-galdata        = ["passagemath-pari-galdata"]
+galdata         = ["passagemath-pari-galdata"]
+seadata-small   = ["passagemath-pari-seadata-small"]
 
 # Everything as in standard Sage
-standard        = ["passagemath-pari[galdata]"]
+standard        = ["passagemath-pari[galdata,seadata-small]"]
 
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
