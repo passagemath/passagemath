@@ -112,13 +112,12 @@ done
 #
 # nq         : none
 # io         : none
-# semigroups needs to use external libsemigroups
 # digraphs   needs to use external planarity
-pararr=( " " " " "--with-external-planarity" "--with-external-libsemigroups" )
+pararr=( " " " " "--with-external-planarity" )
 ##############################################################################
 
 parind=0
-for pkg in nq io digraphs semigroups
+for pkg in nq io digraphs
 do
     echo "Building GAP package $pkg"
     cd "$PKG_SRC_DIR/$pkg"
@@ -126,5 +125,19 @@ do
     ((parind+=1))
     sdh_make
     install_compiled_pkg "$pkg"
+    cd "$PKG_SRC_DIR"
+done
+
+for pkg in semigroups
+do
+    echo "Building GAP package $pkg"
+    cd "$PKG_SRC_DIR/$pkg"
+    # https://src.fedoraproject.org/rpms/gap-pkg-semigroups/blob/rawhide/f/gap-pkg-semigroups.spec#_101
+    rm -fr libsemigroups
+    sdh_configure --with-gaproot="$GAP_ROOT" "--with-external-libsemigroups"
+    ((parind+=1))
+    sdh_make
+    # https://src.fedoraproject.org/rpms/gap-pkg-semigroups/blob/rawhide/f/gap-pkg-semigroups.spec#_128
+    sdh_install *.g bin data gap tst "$SAGE_LOCAL/lib/gap/pkg/$pkg"
     cd "$PKG_SRC_DIR"
 done
