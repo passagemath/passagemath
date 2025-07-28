@@ -54,4 +54,4 @@ distribution of data for use with ``passagemath-pari``.
 What is included
 ----------------
 
-- Wheels on PyPI include the galdata files
+- Wheels on PyPI include the seadata_small files

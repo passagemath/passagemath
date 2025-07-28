@@ -285,7 +285,7 @@ jobs:
           for pkg in sagemath-*; do
               if [ -r $pkg/repair_wheel.py ]; then
                   pkg_underscore=${pkg//-/_}
-                  for whl in ../dist/*$pkg_underscore*-none-any.whl; do
+                  for whl in ../dist/*$pkg_underscore-*-none-any.whl; do
                       if [ -r "$whl" ]; then
                           ../sage -sh -c "python3 $pkg/repair_wheel.py $whl"
                       fi
