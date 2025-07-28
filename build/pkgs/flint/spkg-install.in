@@ -3,6 +3,9 @@ unset MSYS
 
 cd src
 
+# See https://github.com/flintlib/flint/issues/2340
+export CFLAGS="$CFLAGS -fno-strict-aliasing"
+
 if [ -n "$MSYSTEM" ]; then
     sdh_cmake -G Ninja \
         -DENABLE_ARCH=NO \

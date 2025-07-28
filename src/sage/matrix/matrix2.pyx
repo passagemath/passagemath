@@ -1887,7 +1887,7 @@ cdef class Matrix(Matrix1):
 
         The number of derangements of length `n` is the permanent
         of a matrix with 0 on the diagonal and 1 elsewhere;
-        for `n=21` it is `18795307255050944540` (see :oeis:`A000166`):
+        for `n=21` it is `18795307255050944540` (see :oeis:`A000166`)::
 
            sage: A = identity_matrix(21)
            sage: A.rook_vector(complement=True)[-1]
@@ -7025,7 +7025,7 @@ cdef class Matrix(Matrix1):
 
         Test different algorithms::
 
-            sage: m.eigenvalues(algorithm="sage")
+            sage: m.eigenvalues(algorithm="sage")                                       # needs sage.libs.pari
             doctest:warning...
             UserWarning: Using generic algorithm for an inexact ring,
             which will probably give incorrect results due to numerical precision issues.
@@ -7038,10 +7038,10 @@ cdef class Matrix(Matrix1):
             [-1.41421356237309*I, 1.41421356237310*I]
             sage: m.eigenvalues(algorithm="mpmath")  # abs tol 1e-14
             [-1.41421356237309*I, 1.41421356237309*I]
-            sage: m.eigenvalues(algorithm="pari")  # abs tol 1e-14
+            sage: m.eigenvalues(algorithm="pari")  # abs tol 1e-14                      # needs sage.libs.pari
             [-1.4142135623730950487637880730318329370*I,
              1.4142135623730950487637880730318329370*I]
-            sage: m.eigenvalues(algorithm="pari_charpoly")  # abs tol 1e-14
+            sage: m.eigenvalues(algorithm="pari_charpoly")  # abs tol 1e-14             # needs sage.libs.pari
             [-1.41421356237309505*I, 1.41421356237309505*I]
             sage: m.eigenvalues()
             [-1.41421356237309505*I, 1.41421356237309505*I]
@@ -7397,14 +7397,14 @@ cdef class Matrix(Matrix1):
              (1.4142135623730950487637880730318329370*I,
               [(-0.707106781186547524*I, 1.00000000000000000)],
               1)]
-            sage: m._fix_eigenvectors_extend(l, extend=True)  # abs tol 1e-14
+            sage: m._fix_eigenvectors_extend(l, extend=True)  # abs tol 1e-14    # needs sage.libs.pari
             [(-1.4142135623730950487637880730318329370*I,
               [(0.707106781186547524*I, 1.00000000000000000)],
               1),
              (1.4142135623730950487637880730318329370*I,
               [(-0.707106781186547524*I, 1.00000000000000000)],
               1)]
-            sage: m._fix_eigenvectors_extend(l, extend=False)
+            sage: m._fix_eigenvectors_extend(l, extend=False)                    # needs sage.libs.pari
             []
         """
         if extend:
@@ -13782,6 +13782,7 @@ cdef class Matrix(Matrix1):
         Here we use the extended decomposition, where the result
         may not be a lower triangular matrix::
 
+            sage: # needs sage.rings.finite_rings
             sage: U = matrix(GF(5**2),[[0,1],[1,0]])
             sage: B = U.cholesky(extended=True); B
             [3*z2 4*z2]
@@ -16792,7 +16793,7 @@ cdef class Matrix(Matrix1):
             sage: d, u, v = m.smith_form(); u * m * v == d
             True
 
-        Over local fields, we can request the transformation matrices to be integral:;
+        Over local fields, we can request the transformation matrices to be integral::
 
             sage: K = Qp(2, 5, print_mode='terse')                                      # needs sage.rings.padics
             sage: M = matrix(K, 2, 3, [1/2, 1, 2, 1/3, 1, 3])                           # needs sage.rings.padics
@@ -18883,10 +18884,10 @@ cdef class Matrix(Matrix1):
         the greatest common divisor of the determinants of all `r`-by-`r`
         submatrices of `B` is `1`. [Sch1986]_, Ch. 21.4.
 
-        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`, :meth:`is_totally_unimodular`
-
-        See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_unimodular` for
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_unimodular` for
         the detailed documentation.
+
+        .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`, :meth:`is_totally_unimodular`
 
         EXAMPLES::
 
@@ -18910,7 +18911,10 @@ cdef class Matrix(Matrix1):
 
         A matrix is strongly unimodular if ``self`` and ``self.transpose()`` are both unimodular.
 
-        .. SEEALSO:: meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_strongly_unimodular` for
+        the detailed documentation.
+
+        .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
 
         EXAMPLES::
 
@@ -18948,6 +18952,9 @@ cdef class Matrix(Matrix1):
 
         - ``k``: ``self`` is equimodular with determinant gcd `k`
         - ``None``: ``self`` is not equimodular for any `k`
+
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.equimodulus` for
+        the detailed documentation.
 
         .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`strong_equimodulus`
 
@@ -18990,6 +18997,9 @@ cdef class Matrix(Matrix1):
         - ``k``: ``self`` is  `k`-equimodular
         - ``None``: ``self`` is not `k`-equimodular for any `k`
 
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.strong_equimodulus` for
+        the detailed documentation.
+
         .. SEEALSO:: :meth:`is_strongly_k_equimodular`, :meth:`equimodulus`
 
         EXAMPLES::
@@ -19028,6 +19038,9 @@ cdef class Matrix(Matrix1):
             In parts of the literature, a matrix with the above properties
             is called *strictly* `k`-modular.
 
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_k_equimodular` for
+        the detailed documentation.
+
         .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`,
                      :meth:`equimodulus`
 
@@ -19056,6 +19069,9 @@ cdef class Matrix(Matrix1):
 
         A matrix is strongly `k`-equimodular if ``self`` and ``self.transpose()``
         are both `k`-equimodular.
+
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_strongly_k_equimodular` for
+        the detailed documentation.
 
         .. SEEALSO:: :meth:`is_k_equimodular`, :meth:`is_strongly_unimodular`,
                      :meth:`strong_equimodulus`
@@ -19105,6 +19121,9 @@ cdef class Matrix(Matrix1):
         The implemented recognition algorithm first tests the binary matroid of
         the support matrix of `M` for being graphic and
         uses camion for testing whether `M` is signed correctly.
+
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_network_matrix` for
+        the detailed documentation.
 
         EXAMPLES::
 
@@ -19177,11 +19196,14 @@ cdef class Matrix(Matrix1):
 
     def is_conetwork_matrix(self, *args, **kwds):
         r"""
-        Return whether the matrix ``self`` over `\GF{3}` or `QQ` is a conetwork matrix.
+        Return whether the matrix ``self`` over `\GF{3}` or `\QQ` is a conetwork matrix.
 
-        A matrix is conetwork if and only if its transpose is network.
+        A matrix is a conetwork matrix if and only if its transpose is a network matrix.
 
-        .. SEEALSO:: :meth:`is_network_matrix`,
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_conetwork_matrix` for
+        the detailed documentation.
+
+        .. SEEALSO:: :meth:`is_network_matrix`
 
         EXAMPLES::
 
@@ -19240,13 +19262,14 @@ cdef class Matrix(Matrix1):
         - ``stop_when_nonTU`` -- boolean (default: ``True``);
           whether to stop decomposing once not TU is determined.
 
-          For a description of other parameters, see :meth:`_set_cmr_seymour_parameters`
-
         - ``row_keys`` -- a finite or enumerated family of arbitrary objects
           that index the rows of the matrix
 
         - ``column_keys`` -- a finite or enumerated family of arbitrary objects
           that index the columns of the matrix
+
+        See :meth:`sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_totally_unimodular` for
+        the detailed documentation.
 
         EXAMPLES::
 
@@ -19321,8 +19344,8 @@ cdef class Matrix(Matrix1):
             │                 │
             GraphicNode (5×4) CographicNode (4×5)
 
-        This is test ``TreeFlagsNorecurse``, ``TreeFlagsStopNoncographic``,
-        and ``TreeFlagsStopNongraphic`` in CMR's ``test_regular.cpp``,
+        These are tests ``TreeFlagsNorecurse``, ``TreeFlagsStopNoncographic``,
+        and ``TreeFlagsStopNongraphic`` in CMR's ``test_regular.cpp``;
         the underlying binary linear matroid is regular,
         but the matrix is not totally unimodular::
 
@@ -19354,9 +19377,6 @@ cdef class Matrix(Matrix1):
             ThreeConnectedIrregularNode (5×4) ThreeConnectedIrregularNode (4×5)
         """
         return self._matrix_cmr().is_totally_unimodular(*args, **kwds)
-
-    def is_complement_totally_unimodular(self, *args, **kwds):
-        return self._matrix_cmr().is_complement_totally_unimodular(*args, **kwds)
 
     def LLL_gram(self, flag=0):
         """

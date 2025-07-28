@@ -1,0 +1,1 @@
+sagemath_combinat sagemath_flint sagemath_graphs sagemath_groups sagemath_modules sagemath_pari sagemath_polyhedra sagemath_repl scipy | $(PYTHON_TOOLCHAIN) $(PYTHON)

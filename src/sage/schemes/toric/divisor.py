@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
-# sage.doctest: needs sage.geometry.polyhedron sage.graphs
+# sage.doctest: needs palp sage.geometry.polyhedron sage.graphs
 r"""
 Toric divisors and divisor classes
 
@@ -1201,7 +1201,7 @@ class ToricDivisor_generic(Divisor_generic):
         From [Cox]_ page 38::
 
             sage: lp = LatticePolytope([(1,0), (1,1), (0,1), (-1,0), (0,-1)])
-            sage: lp
+            sage: lp                                                                    # needs polytopes_db
             2-d reflexive polytope #5 in 2-d lattice M
             sage: dP7 = ToricVariety(FaceFan(lp), 'x1, x2, x3, x4, x5')
             sage: AK = -dP7.K()
@@ -1697,7 +1697,7 @@ class ToricDivisorGroup(DivisorGroup_generic):
 
         TESTS::
 
-            sage: print(toric_varieties.P2().toric_divisor_group()._latex_())
+            sage: print(toric_varieties.P2().toric_divisor_group()._latex_())           # needs polytopes_db
             \mathrm{Div_T}\left(\mathbb{P}_{\Delta^{2}_{15}}, \Bold{Z}\right)
         """
         return (r"\mathrm{Div_T}\left(%s, %s\right)"
@@ -1971,7 +1971,7 @@ class ToricRationalDivisorClassGroup(FreeModule_ambient_field, UniqueRepresentat
 
             sage: P2 = toric_varieties.P2()
             sage: from sage.schemes.toric.divisor import ToricRationalDivisorClassGroup
-            sage: print(ToricRationalDivisorClassGroup(P2)._latex_())
+            sage: print(ToricRationalDivisorClassGroup(P2)._latex_())                   # needs polytopes_db
             \mathop{Cl}_{\QQ}\left(\mathbb{P}_{\Delta^{2}_{15}}\right)
         """
         return '\\mathop{Cl}_{\\QQ}\\left(' + self._variety._latex_() + '\\right)'
@@ -2073,7 +2073,7 @@ class ToricRationalDivisorClassGroup_basis_lattice(FreeModule_ambient_pid):
 
             sage: P1xP1 = toric_varieties.P1xP1()
             sage: L = P1xP1.Kaehler_cone().lattice()
-            sage: print(L._latex_())
+            sage: print(L._latex_())                                                    # needs polytopes_db
             \text{Basis lattice of }
             \mathop{Cl}_{\QQ}\left(\mathbb{P}_{\Delta^{2}_{14}}\right)
         """

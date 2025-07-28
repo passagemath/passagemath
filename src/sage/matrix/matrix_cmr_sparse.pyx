@@ -3,7 +3,7 @@
 r"""
 Sparse Matrices from the Combinatorial Matrix Recognition Library
 
-This module is provided by the distribution :ref:`sagemath-cmr <spkg_sagemath_cmr>`.
+This module is provided by the pip-installable package :ref:`passagemath-cmr <spkg_sagemath_cmr>`.
 """
 
 # ****************************************************************************
@@ -546,7 +546,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "1-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_.
 
-        .. SEEALSO:: :meth:`two_sum`
+        .. SEEALSO:: :meth:`two_sum`,
                      :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
 
         EXAMPLES::
@@ -627,37 +627,47 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Suppose that ``first_index`` indicates the last column of ``first_mat`` and
         ``second_index`` indicates the first row of ``second_mat``,
-        i.e., the first matrix is
-        `M_1=\begin{bmatrix} A & a\end{bmatrix}`
-        and the second matrix is
-        `M_2=\begin{bmatrix} b^T \\ D\end{bmatrix}`.
-        Then the two sum
-        `
-        M_1 \oplus_2 M_2 = \begin{bmatrix}
-        A & ab^T \\
-        0 & D
-        \end{bmatrix}.
-        `
+        i.e., the two matrices are
+
+        .. MATH::
+
+            M_1=\begin{bmatrix} A & a\end{bmatrix},
+            \qquad
+            M_2=\begin{bmatrix} b^T \\ D\end{bmatrix}.
+
+        Then the 2-sum is
+
+        .. MATH::
+
+            M_1 \oplus_2 M_2 = \begin{bmatrix}
+            A & ab^T \\
+            0 & D
+            \end{bmatrix}.
 
         Suppose that ``first_index`` indicates the last row of ``first_mat`` and
         ``second_index`` indicates the first column of ``second_mat``,
-        i.e., the first matrix is
-        `M_1=\begin{bmatrix} A \\ c^T\end{bmatrix}`
-        and the second matrix is
-        `M_2=\begin{bmatrix} d & D\end{bmatrix}`.
-        Then the two sum
-        `
-        M_1 \oplus_2 M_2 = \begin{bmatrix}
-        A & 0 \\
-        dc^T & D
-        \end{bmatrix}.
-        `
+        i.e., the two matrices are
+
+        .. MATH::
+
+            M_1=\begin{bmatrix} A \\ c^T\end{bmatrix},
+            \qquad
+            M_2=\begin{bmatrix} d & D\end{bmatrix}.
+
+        Then the 2-sum is
+
+        .. MATH::
+
+            M_1 \oplus_2 M_2 = \begin{bmatrix}
+            A & 0 \\
+            dc^T & D
+            \end{bmatrix}.
 
         The terminology "2-sum" is used in the context of Seymour's decomposition
         of totally unimodular matrices and regular matroids, see [Sch1986]_, Ch. 19.4.
 
-        .. SEEALSO:: :meth:`one_sum`
-                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+        .. SEEALSO:: :meth:`one_sum`,
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`,
                      :meth:`two_sum_decomposition`
 
         INPUT:
@@ -667,7 +677,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``first_index`` -- the column/row index of the first integer matrix
         - ``second_index`` -- the row/column index of the second integer matrix
         - ``nonzero_block`` -- either ``"top_right"`` (default) or ``"bottom_left"``;
-          whether the nonzero block in the 2-sum matrix locates in the top right or bottom left.
+          whether the nonzero block in the 2-sum matrix is located in the top right or bottom left.
           If ``nonzero_block="top_right"``,
           ``first_index`` is the column index of the first integer matrix,
           ``second_index`` is the row index of the second integer matrix.
@@ -895,16 +905,16 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
+        `\Delta`-sum, 3-sum, and Y-sum.
         The `\Delta`-sum is referenced in [Sch1986], Chapter 19.4.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
-                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`,
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`,
                      :meth:`delta_sum_decomposition`, :meth:`is_delta_sum`
 
         INPUT:
@@ -1144,15 +1154,15 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
+        `\Delta`-sum, 3-sum, and Y-sum.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
-                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`,
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`,
                      :meth:`three_sum_decomposition`, :meth:`is_three_sum`
 
         INPUT:
@@ -1308,7 +1318,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                    second_special_rows,
                    second_special_column):
         r"""
-        Return the `Y`-sum matrix constructed from the two matrices
+        Return the Y-sum matrix constructed from the two matrices
         ``first_mat`` and ``second_mat`` via connecting rows
         ``first_special_rows`` and column ``first_special_column``.
 
@@ -1332,16 +1342,16 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
-        The `Y`-sum can be derived from the `Delta`-sum of the transpose of the matrices.
+        `\Delta`-sum, 3-sum, and Y-sum.
+        The Y-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`
-                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`
+        .. SEEALSO:: :meth:`one_sum`, :meth:`two_sum`,
+                     :meth:`delta_sum`, :meth:`three_sum`, :meth:`y_sum`,
                      :meth:`y_sum_decomposition`, :meth:`is_y_sum`
 
         INPUT:
@@ -1463,27 +1473,34 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``. If ``first_row_index``
         indexes a row vector `c^T` and ``first_columns_index`` indexes two column vectors `a` of ``first_mat``,
         then ``second_row_index`` indexes a row vector `b` and ``second_columns_index`` indexes two column
-        vectors `d` of ``second_mat``. In this case, the first matrix is
-        ` M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix} `
-        and the second matrix is
-        ` M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}. `
+        vectors `d` of ``second_mat``. In this case, the two matrices are
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}.
+
         Then the Seymour/Schrijver 3-sum is the matrix
-        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
+
+        .. MATH::
+
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
 
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
+        `\Delta`-sum, 3-sum, and Y-sum.
         The `\Delta`-sum is referenced in [Sch1986], Chapter 19.4.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`_delta_sum_cmr`
-                     :meth:`delta_sum_decomposition`, :meth:`is_delta_sum`
-                     :meth:`one_sum`, :meth:`two_sum`
+        .. SEEALSO:: :meth:`_delta_sum_cmr`,
+                     :meth:`delta_sum_decomposition`, :meth:`is_delta_sum`,
+                     :meth:`one_sum`, :meth:`two_sum`,
                      :meth:`three_sum`, :meth:`y_sum`
 
         INPUT:
@@ -1540,7 +1557,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  0  1  0 -1  0]
             [ 1  0 -1  1  0  0  0  1]
 
-        Three sum can be computed for any row and column indices:
+        The `\Delta`-sum can be computed for any row and column indices::
 
             sage: M1 = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 5, 6, sparse=True),
             ....:                            [[1, 1, 0, 0, 0, 0],
@@ -1729,55 +1746,59 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         r"""
         Return the 3-sum matrix constructed from the given matrices
         ``first_mat`` and ``second_mat``.
-        In this case,
-        the first matrix is
-        `
-        M_1 = \begin{bmatrix}
-        A & 0 \\
-        C_{i,\star} & \alpha \\
-        C_{j,\star} & \beta
-        \end{bmatrix},
-        `
-        where `\alpha, \beta \in \{-1,+1 \}`,
-        and the second matrix is
-        `
-        M_2 = \begin{bmatrix}
-        \gamma & \delta & 0^T \\
-        C_{\star,k} & C_{\star,\ell} & D
-        \end{bmatrix},
-        `
-        where `\gamma, \delta \in \{ -1,+1 \}` such that the matrix
-        `
-        N = \begin{bmatrix}
-        \gamma & \delta & 0 \\
-        C_{i,k} & C_{i,\ell} & \alpha \\
-        C_{j,k} & C_{j,\ell} & \beta
-        \end{bmatrix}
-        `
+
+        In this case, the two matrices are of the form
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix}
+            A & 0 \\
+            C_{i,\star} & \alpha \\
+            C_{j,\star} & \beta
+            \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix}
+            \gamma & \delta & 0^T \\
+            C_{\star,k} & C_{\star,\ell} & D
+            \end{bmatrix},
+
+        where `\alpha, \beta \in \{-1,+1 \}`
+        and `\gamma, \delta \in \{ -1,+1 \}` such that the matrix
+
+        .. MATH::
+
+            N = \begin{bmatrix}
+            \gamma & \delta & 0 \\
+            C_{i,k} & C_{i,\ell} & \alpha \\
+            C_{j,k} & C_{j,\ell} & \beta
+            \end{bmatrix}
+
         is totally unimodular.
         Then the 3-sum of `M_1` and `M_2` (at these rows/columns) is the matrix
-        `
-        M = \begin{bmatrix}
-        A & 0 \\
-        C & D
-        \end{bmatrix},
-        `
+
+        .. MATH::
+
+            M = \begin{bmatrix}
+            A & 0 \\
+            C & D
+            \end{bmatrix},
+
         where `C` is the unique rank-2 matrix having linearly independent rows `C_{i,\star}` and
         `C_{j,\star}` and linearly independent columns `C_{\star,k}` and `C_{\star,\ell}`.
 
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
+        `\Delta`-sum, 3-sum, and Y-sum.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`_three_sum_cmr`
-                     :meth:`three_sum_decomposition`, :meth:`is_three_sum`
-                     :meth:`one_sum`, :meth:`two_sum`
+        .. SEEALSO:: :meth:`_three_sum_cmr`,
+                     :meth:`three_sum_decomposition`, :meth:`is_three_sum`,
+                     :meth:`one_sum`, :meth:`two_sum`,
                      :meth:`delta_sum`, :meth:`y_sum`
 
         INPUT:
@@ -1956,7 +1977,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 1  1  0  0]
             [ 0  1  0  1]
             [ 1  1 -1  1]
-            sage: M.three_sum_decomposition(first_rows_index=[0,1,2,3], first_columns_index=[0,1,2], special_columns=[1,2])
+            sage: M.three_sum_decomposition(first_rows_index=[0,1,2,3],
+            ....:                           first_columns_index=[0,1,2],
+            ....:                           special_columns=[1,2])
             (
             [ 1  0 -1  0]
             [ 1  1  0  0]  [-1  1  0]
@@ -2050,29 +2073,36 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
               algorithm="cmr",
               sign_verify=False):
         r"""
-        Return the `Y`-sum matrix constructed from the given matrices
+        Return the Y-sum matrix constructed from the given matrices
         ``first_mat`` and ``second_mat``.
-        In this case, the first matrix is
-        ` M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix} `
-        and the second matrix is
-        ` M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}. `
+        In this case, the matrices are
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}.
+
         Then the Y-sum is the matrix
-        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
+
+        .. MATH::
+
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
 
         The terminology "3-sum" originates from Seymour's decomposition of regular matroids.
         In the context of totally unimodular matrices, there are different interpretations
         in the form of matrix operations for `\begin{bmatrix} A & B \\ C & D \end{bmatrix}`
-        satisfying `rank(B) + rank(C) = 2`.
+        satisfying `\rank(B) + \rank(C) = 2`.
         Three types of 3-sum operations are implemented in CMR:
-        `\Delta`-sum, 3-sum, and `Y`-sum.
-        The `Y`-sum can be derived from the `Delta`-sum of the transpose of the matrices.
+        `\Delta`-sum, 3-sum, and Y-sum.
+        The Y-sum can be derived from the `\Delta`-sum of the transpose of the matrices.
 
         - For 3-sum, one of `B` and `C` is a zero matrix, also known as "concentrated_rank".
-        - For `\Delta`-sum and `Y`-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
+        - For `\Delta`-sum and Y-sum, both `B` and `C` are of rank 1, also known as "distributed_ranks".
 
-        .. SEEALSO:: :meth:`_y_sum_cmr`
-                     :meth:`y_sum_decomposition`, :meth:`is_y_sum`
-                     :meth:`one_sum`, :meth:`two_sum`
+        .. SEEALSO:: :meth:`_y_sum_cmr`,
+                     :meth:`y_sum_decomposition`, :meth:`is_y_sum`,
+                     :meth:`one_sum`, :meth:`two_sum`,
                      :meth:`delta_sum`, :meth:`three_sum`
 
         INPUT:
@@ -2087,7 +2117,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
           If ``algorithm="cmr"``, then use :meth:`_y_sum_cmr`;
           If ``algorithm="direct"``, then construct three sum directly.
           Both options will check the given two matrices and the related indices
-          satisfying the requirements of `Y`-sum.
+          satisfying the requirements of Y-sum.
         - ``sign_verify`` -- boolean (default: ``False``);
           whether to check the sign consistency of `\varepsilon`.
           See :meth:`is_y_sum`, :meth:`y_sum_decomposition`.
@@ -2328,17 +2358,27 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         The input matrix `M` must have a 2-separation that can be reordered to look like
         `M = \begin{bmatrix} A & B \\ C & D \end{bmatrix}`,
-        where `\text{rank}(B) + \text{rank}(C) = 1`.
-        If `\text{rank}(B) = 0`, then the two components of the 2-sum are matrices
-        `M_1 = \begin{bmatrix} A \\ c^T \end{bmatrix}`
-        and
-        `M_2 = \begin{bmatrix} d & D \end{bmatrix}`
+        where `\rank(B) + \rank(C) = 1`.
+
+        If `\rank(B) = 0`, then the two components of the 2-sum are matrices
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A \\ c^T \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} d & D \end{bmatrix}
+
         such that `C = d c^T` holds and such that
         `c^T` is an actual row of `M`.
+
         Otherwise, the two components of the 2-sum are matrices
-        `M_1 = \begin{bmatrix} A & a \end{bmatrix}`
-        and
-        `M_2 = \begin{bmatrix} b^T \\ D \end{bmatrix}`
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} b^T \\ D \end{bmatrix}
+
         such that `B = a b^T` holds and such
         that `a` is an actual column of `M`.
 
@@ -2532,28 +2572,30 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         the `\Delta`-sum decomposition with specified indices.
 
         Let `M` denote the matrix given by ``self``. Then
-        `
-        M = \begin{bmatrix}
-        A & a b^T \\
-        d c^T & D
-        \end{bmatrix},
-        `
+
+        .. MATH::
+
+            M = \begin{bmatrix}
+            A & a b^T \\
+            d c^T & D
+            \end{bmatrix},
+
         where `a, b, c, d` are vectors and `A, D` are submatrices.
         The two components of the delta sum `M_1` and `M_2`,
         given by ``first_mat`` and ``second_mat``, must be of the form
-        `
-        M_1 = \begin{bmatrix}
-        A & a & a \\
-        c^T & 0 & \varepsilon
-        \end{bmatrix},
-        `
-        and
-        `
-        M_2 = \begin{bmatrix}
-        \varepsilon & 0 & b^T \\
-        d & d & D
-        \end{bmatrix}.
-        `
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix}
+            A & a & a \\
+            c^T & 0 & \varepsilon
+            \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix}
+            \varepsilon & 0 & b^T \\
+            d & d & D
+            \end{bmatrix}.
+
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
         two nonzeros per row and per column that covers
@@ -2730,37 +2772,41 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         Decompose the matrix into two children matrices using the 3-sum decomposition with specified sepa.
 
         Let `M` denote the matrix given by ``three_sum_mat``. Then
-        `
-        M = \begin{bmatrix}
-        A & 0 \\
-        C & D
-        \end{bmatrix},
-        `
-        where `\text{rank}(C) = 2`.
-        The two components of the 3-sum `M_1` and `M_2`, given by ``first_mat`` and ``second_mat``, must be of the form
-        `
-        M_1 = \begin{bmatrix}
-        A & 0 \\
-        C_{i,\star} & 1 \\
-        C_{j,\star} & \beta
-        \end{bmatrix},
-        `
-        where `\beta \in \{-1,+1 \}`,
-        and
-        `
-        M_2 = \begin{bmatrix}
-        \gamma & 1 & 0^T \\
-        C_{\star,k} & C_{\star,\ell} & D
-        \end{bmatrix},
-        `
-        where `\gamma \in \{ -1,+1 \}` such that the matrix
-        `
-        N = \begin{bmatrix}
-        \gamma & 1 & 0 \\
-        C_{i,k} & C_{i,\ell} & 1 \\
-        C_{j,k} & C_{j,\ell} & \beta
-        \end{bmatrix}
-        `
+
+        .. MATH::
+
+            M = \begin{bmatrix}
+            A & 0 \\
+            C & D
+            \end{bmatrix},
+
+        where `\rank(C) = 2`.
+        The two components of the 3-sum `M_1` and `M_2`, given by ``first_mat`` and ``second_mat``,
+        must be of the form
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix}
+            A & 0 \\
+            C_{i,\star} & 1 \\
+            C_{j,\star} & \beta
+            \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix}
+            \gamma & 1 & 0^T \\
+            C_{\star,k} & C_{\star,\ell} & D
+            \end{bmatrix},
+
+        where `\beta \in \{-1,+1 \}` and `\gamma \in \{ -1,+1 \}` such that the matrix
+
+        .. MATH::
+
+            N = \begin{bmatrix}
+            \gamma & 1 & 0 \\
+            C_{i,k} & C_{i,\ell} & 1 \\
+            C_{j,k} & C_{j,\ell} & \beta
+            \end{bmatrix}
+
         is totally unimodular. The columns ``first_special_columns[0]`` and
         ``first_special_columns[1]`` indicate the columns of `M_1` that shall correspond to `C_{\star,k}` and
         `C_{\star,\ell}`, respectively. Similarly, the rows ``second_special_rows[1]`` and ``second_special_rows[2]``
@@ -2768,21 +2814,27 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         The value of `\beta \in \{-1,+1\}` must be so that there exists a singular submatrix of `M_1` with exactly two nonzeros per row and per column that covers the bottom-right `\beta`-entry.
 
-        If the matrix is in the form
-        `
-        M = \begin{bmatrix}
-        A & B \\
-        0 & D
-        \end{bmatrix},
-        `
-        then by permutating the rows and columns, it can be viewed as
-        `
-        \begin{bmatrix}
-        D & 0 \\
-        B & A
-        \end{bmatrix}.
-        `
-        Thus, the 3-sum decomposition can be applied.
+        .. NOTE::
+
+            If the matrix is instead in the form
+
+            .. MATH::
+
+                M = \begin{bmatrix}
+                A & B \\
+                0 & D
+                \end{bmatrix},
+
+            then by permutating the rows and columns, it can be viewed as
+
+            .. MATH::
+
+                \begin{bmatrix}
+                D & 0 \\
+                B & A
+                \end{bmatrix}.
+
+            Thus, the 3-sum decomposition as described above can be applied.
 
         INPUT:
 
@@ -2811,7 +2863,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0 -1  0 -1  1  1]
             [ 1  0  1  0  1  0]
             [ 0 -1  0 -1  0  1]
-            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3], [2, 3], [2, 3]); M1
+            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3],
+            ....:                                    [2, 3], [2, 3]); M1
             [ 1  0  1  1  0]
             [ 0  1  1  1  0]
             [ 1  0  1  0  1]
@@ -2836,7 +2889,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0 -1  0 -1  1  1]
             [-1  0 -1  0  1  0]
             [ 0 -1  0 -1  0  1]
-            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3], [2, 3], [2, 3]); M1
+            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3],
+            ....:                                    [2, 3], [2, 3]); M1
             [-1  0 -1  1  0]
             [ 0 -1  1 -1  0]
             [-1  0 -1  0  1]
@@ -2861,7 +2915,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  1  0  1 -1  1]
             [ 1  0  1  0  1  0]
             [ 0  1  0  1  0  1]
-            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3], [2, 3], [2, 3]); M1
+            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 3], [0, 1, 2, 3],
+            ....:                                    [2, 3], [2, 3]); M1
             [ 1  0  1  1  0]
             [ 0  1  1  1  0]
             [ 1  0  1  0  1]
@@ -2886,7 +2941,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  0  1  1]
             [ 1 -1  0  0  1  0]
             [ 0 -1  0  0  0  1]
-            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 4, 5], [0, 1, 2, 3], [4, 5], [0, 1]); M1
+            sage: M1, M2 = M.three_sum_decomposition([0, 1, 2, 4, 5], [0, 1, 2, 3],
+            ....:                                    [4, 5], [0, 1]); M1
             [ 0  1 -1  0  0]
             [ 0  0  1  1  0]
             [ 1  0  0  1  0]
@@ -2907,12 +2963,14 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ....:                             [ 0,  0,  0,  0, 1, 1],
             ....:                             [ 1,  0, -1,  0, 1, 0],
             ....:                             [ 0, -1,  0,  0, 0, 1]])
-            sage: M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1])
+            sage: M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5],
+            ....:                           first_columns_index=[0, 1, 2, 3],
+            ....:                           special_columns=[0, 1])
             Traceback (most recent call last):
             ...
             RuntimeError: User input error
 
-        For `\text{rank}(B) = 2`, we can still compute three_sum_decomposition::
+        For `\rank(B) = 2`, we can still compute three_sum_decomposition::
 
             sage: M = Matrix_cmr_chr_sparse(MatrixSpace(ZZ, 6, 6, sparse=True),
             ....:                            [[ 1,  1,  0,  0,  0,  0],
@@ -2927,7 +2985,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             [ 0  0  0  1 -1  0]
             [ 0  0  0  0  1  1]
             [ 0  0  1  0  0  1]
-            sage: M1, M2 = M.three_sum_decomposition([3, 4, 5, 1, 2], [2, 3, 4, 5], [1, 2], [2, 3]); M1
+            sage: M1, M2 = M.three_sum_decomposition([3, 4, 5, 1, 2], [2, 3, 4, 5],
+            ....:                                    [1, 2], [2, 3]); M1
             [ 0  1 -1  0  0]
             [ 0  0  1  1  0]
             [ 1  0  0  1  0]
@@ -2959,7 +3018,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ....:                             [ 0,  0,  1,  0, 1, 1],
             ....:                             [ 1, -1,  0,  0, 1, 0],
             ....:                             [ 0, -1,  0,  0, 0, 1]])
-            sage: M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1])
+            sage: M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5],
+            ....:                           first_columns_index=[0, 1, 2, 3],
+            ....:                           special_columns=[0, 1])
             Traceback (most recent call last):
             ...
             RuntimeError: The bottom left submatrix is not of rank 2
@@ -3031,32 +3092,35 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
     def y_sum_decomposition(self, A_rows, A_columns):
         r"""
         Decompose the matrix into two children matrices using
-        the `Y`-sum decomposition with specified indices.
+        the Y-sum decomposition with specified indices.
 
         Let `M` denote the matrix given by ``self``. Then
-        `
-        M = \begin{bmatrix}
-        A & a b^T \\
-        d c^T & D
-        \end{bmatrix},
-        `
+
+        .. MATH::
+
+            M = \begin{bmatrix}
+            A & a b^T \\
+            d c^T & D
+            \end{bmatrix},
+
         where `a, b, c, d` are vectors and `A, D` are submatrices.
-        The two components of the Y-sum `M_1` and `M_2`, given by ``first_mat`` and ``second_mat``, must be of the form
-        `
-        M_1 = \begin{bmatrix}
-        A & a \\
-        c^T & 0 \\
-        c^T & \varepsilon
-        \end{bmatrix},
-        `
-        and
-        `
-        M_2 = \begin{bmatrix}
-        \varepsilon & b^T \\
-        0 & b^T \\
-        d & D
-        \end{bmatrix}.
-        `
+        The two components `M_1` and `M_2` of the Y-sum,
+        given by ``first_mat`` and ``second_mat``, must be of the form
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix}
+            A & a \\
+            c^T & 0 \\
+            c^T & \varepsilon
+            \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix}
+            \varepsilon & b^T \\
+            0 & b^T \\
+            d & D
+            \end{bmatrix}.
+
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
         two nonzeros per row and per column that covers
@@ -3065,8 +3129,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         both `M_1` and `M_2` are totally unimodular.
 
         If `M` is not totally unimodular, then `\varepsilon`
-        may not be unique and the algorithm just finds one
-        such that at least one of `M_1` and `M_2` is
+        may not be unique, and the algorithm just finds one
+        choice such that at least one of `M_1` and `M_2` is
         not totally unimodular.
 
         .. SEEALSO:: :meth:`y_sum`, :meth:`is_y_sum`
@@ -3177,12 +3241,20 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         ``first_columns_index`` indexes two column vectors `a` of ``first_mat``,
         then ``second_row_index`` indexes a row vector `b` and
         ``second_columns_index`` indexes two column vectors `d` of ``second_mat``.
-        In this case, the first matrix is
-        ` M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix} `
-        and the second matrix is
-        ` M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}. `
+        In this case, the matrices are
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a & a \\ c^T & 0 & \varepsilon \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} \varepsilon & 0 & b^T \\ d & d & D \end{bmatrix}.
+
         Then the Seymour/Schrijver 3-sum is the matrix
-        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
+
+        .. MATH::
+
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
+
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
         two nonzeros per row and per column that covers
@@ -3191,14 +3263,14 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         The signs of `\varepsilon` are determined by
         a shortest path between two sets of vertices in the bipartite graph,
         where the sets of vertices corresponding to the nonzero
-        row and column indices of `c^T, a`,
+        row and column indices of `c^T`, `a`,
         and the bipartite graph consists of vertices corresponding to the rows
         and columns of `M`, and edges corresponding to the nonzero entry.
         between the rows and columns of `M`, see [Sch1986]_, Ch. 20.3.
 
         If you don't know the indices, please use :meth:`is_totally_unimodular`.
 
-        .. SEEALSO:: :meth:`delta_sum`, :meth:`delta_sum_decomposition`
+        .. SEEALSO:: :meth:`delta_sum`, :meth:`delta_sum_decomposition`,
                      :meth:`is_totally_unimodular`
 
         INPUT:
@@ -3454,38 +3526,44 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         ``first_mat`` and ``second_mat`` are both totally unimodular.
 
         Let `M` denote the matrix given by ``three_sum_mat``. Then
-        `
-        M = \begin{bmatrix}
-        A & 0 \\
-        C & D
-        \end{bmatrix},
-        `
-        where `\text{rank}(C) = 2`.
-        The two components of the 3-sum `M_1` and `M_2`, given by ``first_mat`` and ``second_mat``, must be of the form
-        `
-        M_1 = \begin{bmatrix}
-        A & 0 \\
-        C_{i,\star} & 1 \\
-        C_{j,\star} & \beta
-        \end{bmatrix},
-        `
-        where `\beta \in \{-1,+1 \}`,
-        and
-        `
-        M_2 = \begin{bmatrix}
-        \gamma & 1 & 0^T \\
-        C_{\star,k} & C_{\star,\ell} & D
-        \end{bmatrix},
-        `
-        where `\gamma \in \{ -1,+1 \}` such that the matrix
-        `
-        N = \begin{bmatrix}
-        \gamma & 1 & 0 \\
-        C_{i,k} & C_{i,\ell} & 1 \\
-        C_{j,k} & C_{j,\ell} & \beta
-        \end{bmatrix}
-        `
+
+        .. MATH::
+
+            M = \begin{bmatrix}
+            A & 0 \\
+            C & D
+            \end{bmatrix},
+
+        where `\rank(C) = 2`.
+        The two components `M_1` and `M_2` of the 3-sum, given by ``first_mat``
+        and ``second_mat``, must be of the form
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix}
+            A & 0 \\
+            C_{i,\star} & 1 \\
+            C_{j,\star} & \beta
+            \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix}
+            \gamma & 1 & 0^T \\
+            C_{\star,k} & C_{\star,\ell} & D
+            \end{bmatrix},
+
+        where `\beta \in \{-1,+1 \}` and `\gamma \in \{ -1,+1 \}`
+        such that the matrix
+
+        .. MATH::
+
+            N = \begin{bmatrix}
+            \gamma & 1 & 0 \\
+            C_{i,k} & C_{i,\ell} & 1 \\
+            C_{j,k} & C_{j,\ell} & \beta
+            \end{bmatrix}
+
         is totally unimodular.
+
         The columns ``first_intersection_columns`` indicate the columns of `M_1` that
         shall correspond to `C_{\star,k}` and `C_{\star,\ell}`, respectively.
         Similarly, the rows ``second_intersection_rows`` indicate the rows of `M_2` that shall
@@ -3498,7 +3576,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         If you don't know the indices, please use :meth:`is_totally_unimodular`.
 
-        .. SEEALSO:: :meth:`three_sum`, :meth:`three_sum_decomposition`
+        .. SEEALSO:: :meth:`three_sum`, :meth:`three_sum_decomposition`,
                      :meth:`is_totally_unimodular`
 
         INPUT:
@@ -3597,7 +3675,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ....:                             [ 0,  0,  0,  0, 1, 1],
             ....:                             [ 1, -1,  1,  0, 1, 0],
             ....:                             [ 0, -1, -1,  0, 0, 1]])
-            sage: C1, C2 = M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5], first_columns_index=[0, 1, 2, 3], special_columns=[0, 1]); (C1, C2)
+            sage: C1, C2 = M.three_sum_decomposition(first_rows_index=[0, 1, 2, 4, 5],
+            ....:                                    first_columns_index=[0, 1, 2, 3],
+            ....:                                    special_columns=[0, 1]); (C1, C2)
             (
             [ 0  1 -1  0  0]
             [ 0  0  1  1  0]  [-1  1  0  0]
@@ -3785,19 +3865,27 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                  sign_verify=True):
         r"""
         Check whether ``first_mat`` and ``second_mat`` form ``three_sum_mat``
-        via the `Y`-sum operation.
+        via the Y-sum operation.
 
         Let `M_1` and `M_2` denote the matrices given by ``first_mat`` and ``second_mat``.
         If ``first_rows_index`` indexes row vectors `c^T` in ``first_mat`` and
         ``first_column_index`` indexes a column vector `a` in ``first_mat``,
         then ``second_rows_index`` indexes row vectors `b^T` and
         ``second_column_index`` indexes a column vector `d` in ``second_mat``.
-        In this case, the first matrix is
-        ` M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix} `
-        and the second matrix is
-        ` M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}. `
+        In this case, the matrices are
+
+        .. MATH::
+
+            M_1 = \begin{bmatrix} A & a \\ c^T & 0 \\ c^T & \varepsilon \end{bmatrix},
+            \qquad
+            M_2 = \begin{bmatrix} \varepsilon & b^T \\ 0 & b^T \\ d & D \end{bmatrix}.
+
         Then the Y-sum is the matrix
-        ` M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}. `
+
+        .. MATH::
+
+            M_1 \oplus_3 M_2 = \begin{bmatrix} A & a b^T \\ d c^T & D \end{bmatrix}.
+
         The value of `\varepsilon \in \{-1,+1\}` must be so that
         there exists a singular submatrix of `M_1` with exactly
         two nonzeros per row and per column that covers
@@ -3805,7 +3893,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         If you don't know the indices, please use :meth:`is_totally_unimodular`.
 
-        .. SEEALSO:: :meth:`y_sum`, :meth:`y_sum_decomposition`
+        .. SEEALSO:: :meth:`y_sum`, :meth:`y_sum_decomposition`,
                      :meth:`is_totally_unimodular`
 
         INPUT:
@@ -4055,7 +4143,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Calculations are done over the binary field.
 
-        Suppose a matrix is `\begin{bmatrix} 1 & c^T \\ b & D\end{bmatrix}`.
+        Suppose a matrix is of the form `\begin{bmatrix} 1 & c^T \\ b & D\end{bmatrix}`.
         Then the pivot of the matrix with respect to `1` is
         `\begin{bmatrix} 1 & c^T \\ b & D - bc^T\end{bmatrix}`.
 
@@ -4179,7 +4267,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         Calculations are done over the ternary field.
 
-        Suppose a matrix is `\begin{bmatrix} \epsilon & c^T \\ b & D\end{bmatrix}`,
+        Suppose a matrix is of the form `\begin{bmatrix} \epsilon & c^T \\ b & D\end{bmatrix}`,
         where `\epsilon\in\{\pm 1\}`.
         Then the pivot of the matrix with respect to `\epsilon` is
         `\begin{bmatrix} -\epsilon & \epsilon c^T \\ \epsilon b & D-\epsilon bc^T\end{bmatrix}`.
@@ -4355,7 +4443,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         A matrix is strongly unimodular if ``self`` and ``self.transpose()`` are both unimodular.
 
-        .. SEEALSO:: meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
+        .. SEEALSO:: :meth:`is_unimodular`, :meth:`is_strongly_k_equimodular`
 
         EXAMPLES::
 
@@ -4456,7 +4544,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         A matrix is strongly equimodular if ``self`` and ``self.transpose()``
         are both equimodular, which implies that they are equimodular for
         the same determinant gcd `k`.
-        A matrix `M` of rank-`r` is `k`-equimodular if the following two conditions
+        A matrix `M` of rank `r` is `k`-equimodular if the following two conditions
         are satisfied:
 
         - for some column basis `B` of `M`, the greatest common divisor of the
@@ -4508,7 +4596,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         r"""
         Return whether ``self`` is equimodular with determinant gcd `k`.
 
-        A matrix `M` of rank-`r` is `k`-equimodular if the following two
+        A matrix `M` of rank `r` is `k`-equimodular if the following two
         conditions are satisfied:
 
         - for some column basis `B` of `M`, the greatest common divisor of
@@ -4637,7 +4725,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         .. SEEALSO::
 
             :meth:`M._is_graphic_cmr() <sage.matroids.linear_matroid.
-            BinaryMatroid._is_graphic_cmr>`
+            BinaryMatroid._is_graphic_cmr>`,
             :meth:`M.is_graphic() <sage.matroids.matroid.
             Matroid.is_graphic>`
 
@@ -4965,12 +5053,12 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
     def is_conetwork_matrix(self, *, time_limit=60.0, certificate=False,
                                row_keys=None, column_keys=None):
         r"""
-        Return whether the matrix ``self`` over `\GF{3}` or `QQ` is a conetwork matrix.
+        Return whether the matrix ``self`` over `\GF{3}` or `\QQ` is a conetwork matrix.
         If there is some entry not in `\{-1, 0, 1\}`, return ``False``.
 
         A matrix is conetwork if and only if its transpose is network.
 
-        .. SEEALSO:: :meth:`is_network_matrix`,
+        .. SEEALSO:: :meth:`is_network_matrix`
 
         EXAMPLES::
 
@@ -5499,18 +5587,6 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
                             tuple(submat.columns[i] for i in range(submat.numColumns)))
 
         return result, (node, submat_tuple)
-
-    def is_complement_totally_unimodular(self, *, time_limit=60.0, certificate=False,
-                                         use_direct_graphicness_test=True,
-                                         series_parallel_ok=True,
-                                         check_graphic_minors_planar=False,
-                                         complete_tree='find_irregular',
-                                         construct_matrices=False,
-                                         construct_transposes=False,
-                                         construct_graphs=False,
-                                         row_keys=None,
-                                         column_keys=None):
-        raise NotImplementedError
 
 
 cdef _set_cmr_seymour_parameters(CMR_SEYMOUR_PARAMS *params, dict kwds):

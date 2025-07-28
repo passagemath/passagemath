@@ -179,7 +179,7 @@ components are in the correct ring::
 
     sage: L = LazyDirichletSeriesRing(QQbar, "s")                                       # needs sage.rings.number_field
     sage: check(L, lambda n: n, valuation=2)                                            # needs sage.rings.number_field
-    sage: check(L, gen(), valuation=2)
+    sage: check(L, gen(), valuation=2)                                                  # needs sage.rings.number_field
 
     sage: L.<z> = LazyPowerSeriesRing(GF(2))
     sage: check(L, lambda n: n, valuation=0)
@@ -2894,6 +2894,7 @@ class LazyModuleElement(Element):
 
         We can pass more general values::
 
+            sage: # needs sage.symbolic
             sage: L.<z> = LazyPowerSeriesRing(SR)
             sage: s = SR.var('s')
             sage: z.polylog(s)
@@ -3529,7 +3530,7 @@ class LazyCauchyProductSeries(LazyModuleElement):
             sage: D = LazyDirichletSeriesRing(QQ, "s")
             sage: zeta = D(constant=1)
             sage: L.<t> = LazyLaurentSeriesRing(D)
-            sage: 1 / (1 - t*zeta)
+            sage: 1 / (1 - t*zeta)                                                      # needs sage.symbolic
             (1 + O(1/(8^s)))
              + (1 + 1/(2^s) + 1/(3^s) + 1/(4^s) + 1/(5^s) + 1/(6^s) + 1/(7^s) + O(1/(8^s)))*t
              + ... + O(t^7)

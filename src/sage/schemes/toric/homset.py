@@ -445,6 +445,7 @@ class SchemeHomset_points_toric_field(SchemeHomset_points_toric_base):
     action. This is tricky because the base field has a 3-rd root of
     unity::
 
+        sage: # needs polytopes_db
         sage: fan = NormalFan(ReflexivePolytope(2, 0))
         sage: X = ToricVariety(fan, base_field=GF(7))
         sage: point_set = X.point_set()
@@ -506,6 +507,7 @@ class SchemeHomset_points_toric_field(SchemeHomset_points_toric_base):
         For non-smooth varieties over finite fields, the homogeneous
         rescalings are solved. This is somewhat slower::
 
+            sage: # needs polytopes_db
             sage: fan = NormalFan(ReflexivePolytope(2, 0))
             sage: X = ToricVariety(fan, base_field=GF(7))
             sage: X.point_set().cardinality()
@@ -515,6 +517,7 @@ class SchemeHomset_points_toric_field(SchemeHomset_points_toric_base):
         smooth. And, indeed, naive application gives a different
         result::
 
+            sage: # needs polytopes_db
             sage: q = X.base_ring().order()
             sage: n = X.dimension()
             sage: d = map(len, fan().cones())

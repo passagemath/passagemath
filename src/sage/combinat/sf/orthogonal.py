@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
-# sage.doctest: needs lrcalc sage.combinat sage.modules
+# sage.doctest: needs lrcalc_python sage.combinat sage.modules
 """
 Orthogonal symmetric functions
 

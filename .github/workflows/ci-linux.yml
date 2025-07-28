@@ -68,7 +68,7 @@ jobs:
       docker_push_repository: ghcr.io/${{ github.repository }}/
       # Make sure that all "standard" jobs can start simultaneously,
       # so that runners are available by the time that "default" starts.
-      max_parallel: 10
+      max_parallel: 16
 
   minimal:
     if: ${{ success() || failure() }}
@@ -87,7 +87,7 @@ jobs:
       docker_push_repository: ghcr.io/${{ github.repository }}/
       # Reduced from 30 because it may run in parallel with 'standard' and 'standard-sitepackages' above.
       # Calibrated for clogging the job pipeline until the "default" job has finished.
-      max_parallel: 10
+      max_parallel: 16
 
   optional:
     if: ${{ success() || failure() }}

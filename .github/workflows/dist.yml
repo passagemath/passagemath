@@ -158,6 +158,7 @@ jobs:
         run: |
           ./bootstrap
           if [ -x ./config.status ]; then ./config.status; else ./configure; fi
+          make sagemath_environment V=0
           make pypi-sdists V=0
           (mkdir dist && mv upstream/*sage*.tar.gz dist/)
           ls -l dist
@@ -270,9 +271,28 @@ jobs:
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
         run: |
           ./bootstrap
-          ./configure
+          ./configure --without-system-gap
           make pypi-noarch-wheels V=0
           (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/)
+          ls -l dist
+
+      - name: Repair wheels
+        if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
+        run: |
+          make auditwheel_or_delocate V=0
+          cd pkgs
+          set -x
+          for pkg in sagemath-*; do
+              if [ -r $pkg/repair_wheel.py ]; then
+                  pkg_underscore=${pkg//-/_}
+                  for whl in ../dist/*$pkg_underscore-*-none-any.whl; do
+                      if [ -r "$whl" ]; then
+                          ../sage -sh -c "python3 $pkg/repair_wheel.py $whl"
+                      fi
+                  done
+              fi
+          done
+          cd ..
           ls -l dist
 
       - uses: actions/upload-artifact@v4
@@ -313,10 +333,8 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty gfan ecm tachyon pip
+      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty gfan ecm tachyon graphs polytopes_db pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
-      # Disable building PyPy wheels on all platforms
-      CIBW_SKIP: "pp*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
@@ -326,18 +344,11 @@ jobs:
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup") > constraints.txt
       # Environment during wheel build
       CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal LINBOX_CONFIGURE=--without-ntl GIAC_CONFIGURE=--disable-ntl SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
-      # Use 'build', not 'pip wheel'
-      CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
       CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel --version && auditwheel -v -v -v -v repair -w {dest_dir} {wheel}"
       CIBW_REPAIR_WHEEL_COMMAND_MACOS: "set -x && export DYLD_FALLBACK_LIBRARY_PATH=$(pwd)/prefix/lib:$DYLD_FALLBACK_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}"
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
-      # Avoid onetbb build failure on manylinux2014 (https://github.com/passagemath/passagemath/issues/460)
-      # manylinux_2_28 will be default from May 2025 - https://cibuildwheel.pypa.io/en/stable/options/#linux-image
-      CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
-      # Avoid ancient zlib on manylinux2014
-      CIBW_MANYLINUX_AARCH64_IMAGE: manylinux_2_28
     steps:
       - name: Maximize build disk space
         if: runner.os == 'Linux' && matrix.arch != 'aarch64'
@@ -390,7 +401,7 @@ jobs:
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
         id: python
         with:
-          python-version: "3.10 - 3.12"
+          python-version: "3.11 - 3.13"
           update-environment: false
 
       - name: Bootstrap
@@ -453,16 +464,17 @@ jobs:
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --disable-python-distutils-check --prefix=$HOME/runner-venv
           make cibuildwheel
           export PATH=build/bin:$PATH
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng && echo ::group::config.log && cat config.log && echo ::endgroup:: && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done" >> "$GITHUB_ENV"
+          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng --without-system-patchelf && echo ::group::config.log && cat config.log && echo ::endgroup:: && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done" >> "$GITHUB_ENV"
           mkdir -p unpacked
+          set -x
           for sdist in dist/$pkg*.tar.gz; do
-              (cd unpacked && tar xfz - ) < $sdist
+              (cd unpacked && tar xfz - && base=${sdist#dist/} && mv ${base%.tar.gz} ${base%-*}) < $sdist
           done
 
       - name: sagemath-objects
         id:   sagemath-objects
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*objects*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_objects
 
       - name: Save SAGE_LOCAL cache
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
@@ -478,49 +490,49 @@ jobs:
       - name: sagemath-categories
         id:   sagemath-categories
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*categories*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_categories
 
       - name: sagemath-glpk
         id:   sagemath-glpk
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*glpk*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_glpk
 
       - name: sagemath-homfly
         id:   sagemath-homfly
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*homfly*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_homfly
 
       - name: sagemath-combinat
         id:   sagemath-combinat
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*combinat*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_combinat
 
       - name: sagemath-graphs
         id:   sagemath-graphs
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*graphs*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_graphs
 
       - name: sagemath-planarity
         id:   sagemath-planarity
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*planarity*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_planarity
 
       - name: sagemath-rankwidth
         id:   sagemath-rankwidth
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*rankwidth*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_rankwidth
 
       - name: sagemath-tachyon
         id:   sagemath-tachyon
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*tachyon*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_tachyon
 
         ####### sagemath-modules and what depends on it
 
@@ -528,91 +540,91 @@ jobs:
         id:   sagemath-modules
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*modules*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_modules
 
       - name: sagemath-plot
         id:   sagemath-plot
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*plot*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_plot
 
       - name: sagemath-polyhedra
         id:   sagemath-polyhedra
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*polyhedra*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_polyhedra
 
       - name: sagemath-ntl
         id:   sagemath-ntl
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*ntl*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_ntl
 
       - name: sagemath-flint
         id:   sagemath-flint
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*flint*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_flint
 
       - name: sagemath-pari
         id:   sagemath-pari
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*pari*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_pari
 
       - name: sagemath-cddlib
         id:   sagemath-cddlib
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*cddlib*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cddlib
 
       - name: sagemath-gfan
         id:   sagemath-gfan
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*gfan*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gfan
 
       - name: sagemath-nauty
         id:   sagemath-nauty
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*nauty*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_nauty
 
       - name: sagemath-libecm
         id:   sagemath-libecm
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*libecm*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_libecm
 
       - name: sagemath-lcalc
         id:   sagemath-lcalc
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*lcalc*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_lcalc
 
       - name: sagemath-libbraiding
         id:   sagemath-libbraiding
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*libbraiding*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_libbraiding
 
       - name: sagemath-gap
         id:   sagemath-gap
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*gap*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap
 
       - name: sagemath-groups
         id:   sagemath-groups
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*groups*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_groups
 
       - name: sagemath-cliquer
         id:   sagemath-cliquer
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_cliquer*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cliquer
 
 
       - uses: actions/upload-artifact@v4
@@ -655,10 +667,8 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc m4ri m4rie linbox libgd singular ecl maxima brial giac palp eclib sympow bliss fricas coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip elliptic_curves
+      TARGETS_PRE: ccache libpng gmp mpfr mpc m4ri m4rie linbox libgd singular ecl maxima brial giac palp eclib sympow bliss fricas coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip elliptic_curves ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
-      # Disable building PyPy wheels on all platforms
-      CIBW_SKIP: "pp*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
@@ -668,18 +678,11 @@ jobs:
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup") > constraints.txt
       # Environment during wheel build
       CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include:$CPATH LIBRARY_PATH=$(pwd)/prefix/lib:$LIBRARY_PATH PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal LINBOX_CONFIGURE=--without-ntl GIAC_CONFIGURE=--disable-ntl SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran-14 LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
-      # Use 'build', not 'pip wheel'
-      CIBW_BUILD_FRONTEND: build
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
       CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel --version && auditwheel -v -v -v -v repair -w {dest_dir} {wheel}"
       CIBW_REPAIR_WHEEL_COMMAND_MACOS: "set -x && export DYLD_FALLBACK_LIBRARY_PATH=$(pwd)/prefix/lib:$DYLD_FALLBACK_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}"
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
-      # Avoid onetbb build failure on manylinux2014 (https://github.com/passagemath/passagemath/issues/460)
-      # manylinux_2_28 will be default from May 2025 - https://cibuildwheel.pypa.io/en/stable/options/#linux-image
-      CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
-      # Avoid ancient zlib on manylinux2014
-      CIBW_MANYLINUX_AARCH64_IMAGE: manylinux_2_28
     steps:
       - name: Maximize build disk space
         if: runner.os == 'Linux' && matrix.arch != 'aarch64'
@@ -724,7 +727,7 @@ jobs:
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
         id: python
         with:
-          python-version: "3.10 - 3.12"
+          python-version: "3.11 - 3.13"
           update-environment: false
 
       - name: Bootstrap
@@ -768,7 +771,7 @@ jobs:
           make cibuildwheel
           export PATH=build/bin:$PATH
           rm -f ~/sage-local/config.status /sage-*/config.status  # trigger rebuild
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng && echo ::group::config.log && cat config.log && echo ::endgroup:: && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/lib/gap/pkg/{transgrp/data,ctbllib/data,tomlib/data,irredsol/data} prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done" >> "$GITHUB_ENV"
+          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng --without-system-patchelf && echo ::group::config.log && cat config.log && echo ::endgroup:: && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done" >> "$GITHUB_ENV"
           mkdir -p unpacked
           for sdist in dist/$pkg*.tar.gz; do
               (cd unpacked && tar xfz - ) < $sdist
@@ -778,7 +781,7 @@ jobs:
         id:   sagemath-bliss
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*bliss*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_bliss
 
       # Standard packages
 
@@ -786,73 +789,73 @@ jobs:
         id:   sagemath-linbox
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*linbox*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_linbox
 
       - name: sagemath-singular
         id:   sagemath-singular
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*singular*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_singular
 
       - name: sagemath-schemes
         id:   sagemath-schemes
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*schemes*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_schemes
 
       - name: sagemath-ecl
         id:   sagemath-ecl
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_ecl-*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_ecl
 
       - name: sagemath-maxima
         id:   sagemath-maxima
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_maxima-*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_maxima
 
       - name: sagemath-symbolics
         id:   sagemath-symbolics
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_symbolics*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_symbolics
 
       - name: sagemath-standard-no-symbolics
         id:   sagemath-standard-no-symbolics
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*standard*no*symbolics*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_standard_no_symbolics
 
       - name: sagemath-brial
         id:   sagemath-brial
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*brial*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_brial
 
       - name: sagemath-giac
         id:   sagemath-giac
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*giac*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_giac
 
       - name: sagemath-palp
         id:   sagemath-palp
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*palp*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_palp
 
       - name: sagemath-eclib
         id:   sagemath-eclib
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*eclib*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_eclib
 
       - name: sagemath-sympow
         id:   sagemath-sympow
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_sympow*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_sympow
 
       # Optional packages
 
@@ -860,127 +863,127 @@ jobs:
         id:   sagemath-fricas
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*fricas*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_fricas
 
       - name: sagemath-coxeter3
         id:   sagemath-coxeter3
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*coxeter3*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_coxeter3
 
       - name: sagemath-mcqd
         id:   sagemath-mcqd
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*mcqd*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_mcqd
 
       - name: sagemath-meataxe
         id:   sagemath-meataxe
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*meataxe*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_meataxe
 
       - name: sagemath-sirocco
         id:   sagemath-sirocco
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*sirocco*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_sirocco
 
       - name: sagemath-tdlib
         id:   sagemath-tdlib
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*tdlib*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_tdlib
 
       - name: sagemath-msolve
         id:   sagemath-msolve
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*msolve*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_msolve
 
       - name: sagemath-latte-4ti2
         id:   sagemath-latte-4ti2
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*latte*4ti2*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_latte_4ti2
 
       - name: sagemath-topcom
         id:   sagemath-topcom
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*topcom*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_topcom
 
       - name: sagemath-lrslib
         id:   sagemath-lrslib
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*lrslib*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_lrslib
 
       - name: sagemath-cmr
         id:   sagemath-cmr
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*cmr*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cmr
 
       - name: sagemath-frobby
         id:   sagemath-frobby
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*frobby*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_frobby
 
       - name: sagemath-qepcad
         id:   sagemath-qepcad
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath*qepcad*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_qepcad
 
       - name: sagemath-rubiks
         id:   sagemath-rubiks
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_rubiks*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_rubiks
 
       - name: sagemath-plantri
         id:   sagemath-plantri
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_plantri*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_plantri
 
       - name: sagemath-buckygen
         id:   sagemath-buckygen
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_buckygen*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_buckygen
 
       - name: sagemath-benzene
         id:   sagemath-benzene
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_benzene*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_benzene
 
       - name: sagemath-glucose
         id:   sagemath-glucose
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_glucose*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_glucose
 
       - name: sagemath-kissat
         id:   sagemath-kissat
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_kissat*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_kissat
 
       - name: sagemath-kenzo
         id:   sagemath-kenzo
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_kenzo*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_kenzo
 
       - name: sagemath-macaulay2
         id:   sagemath-macaulay2
         if:   (success() || failure())
         run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/*sagemath_macaulay2*
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_macaulay2
 
 
 

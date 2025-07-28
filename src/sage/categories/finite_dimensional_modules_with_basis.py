@@ -924,7 +924,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             This does not depend on the choice of bases for
             domain and codomain.
 
-            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_unimodular` for
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.is_unimodular` for
             the detailed documentation.
 
             EXAMPLES::
@@ -956,7 +956,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             This does not depend on the choice of bases for
             domain and codomain.
 
-            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_strongly_unimodular` for
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.is_strongly_unimodular` for
             the detailed documentation.
 
             EXAMPLES::
@@ -987,7 +987,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             r"""
             Return the integer `k` such that ``self`` is equimodular with determinant gcd `k`.
 
-            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.equimodulus` for
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.equimodulus` for
             the detailed documentation.
             """
             try:
@@ -1004,7 +1004,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             r"""
             Return the integer `k` such that ``self`` is strongly equimodular with determinant gcd `k`.
 
-            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.strong_equimodulus` for
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.strong_equimodulus` for
             the detailed documentation.
             """
             try:
@@ -1024,7 +1024,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             This does not depend on the choice of bases for
             domain and codomain.
 
-            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_k_equimodular` for
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.is_k_equimodular` for
             the detailed documentation.
 
             EXAMPLES::
@@ -1058,7 +1058,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             This does not depend on the choice of bases for
             domain and codomain.
 
-            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_strongly_k_equimodular` for
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.is_strongly_k_equimodular` for
             the detailed documentation.
 
             EXAMPLES::
@@ -1113,7 +1113,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             This depends on the choice of bases for domain and codomain.
 
-            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_conetwork_matrix` for
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.is_conetwork_matrix` for
             the detailed documentation.
 
             EXAMPLES::
@@ -1155,7 +1155,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             This depends on the choice of bases for domain and codomain.
 
-            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_network_matrix` for
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.is_network_matrix` for
             the detailed documentation.
 
             EXAMPLES::
@@ -1201,7 +1201,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             This depends on the choice of bases for domain and codomain.
 
-            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_sparse.is_totally_unimodular` for
+            See :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.is_totally_unimodular` for
             the detailed documentation.
 
             EXAMPLES::
@@ -1227,19 +1227,6 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 matrix = self.matrix()
             try:
                 return self._wrapped_method_with_certificate(matrix.is_totally_unimodular)
-            except AttributeError:
-                return NotImplemented
-
-        @lazy_attribute
-        def is_complement_totally_unimodular(self):
-            r"""
-            """
-            try:
-                matrix = self._matrix_cmr()
-            except (ImportError, TypeError):
-                matrix = self.matrix()
-            try:
-                return self._wrapped_method_with_certificate(matrix.is_complement_totally_unimodular)
             except AttributeError:
                 return NotImplemented
 

@@ -79,13 +79,13 @@ and testing to make sure nothing funny is going on).
 
    sage/interfaces/fricas
 
-..
-   .. ONLY:: feature_frobby
 
-      .. toctree::
-         :maxdepth: 1
+.. ONLY:: feature_frobby
 
-         sage/interfaces/frobby
+   .. toctree::
+      :maxdepth: 1
+
+      sage/interfaces/frobby
 
 .. toctree::
    :maxdepth: 1

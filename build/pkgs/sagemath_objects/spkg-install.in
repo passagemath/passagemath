@@ -10,9 +10,9 @@ if [ "$SAGE_WHEELS" = yes ]; then
     sdh_build_wheel --sdist-then-wheel .
     if [ "$SAGE_EDITABLE" = yes ]; then
         # Do not install the wheel
-        wheel=$(cd "$DIST_DIR" && sdh_store_wheel . >&2 && echo $wheel)
+        wheel=$(sdh_store_wheel . >&2 && echo $wheel)
     else
-        wheel=$(cd "$DIST_DIR" && sdh_store_and_pip_install_wheel . >&2 && echo $wheel)
+        wheel=$(sdh_store_and_pip_install_wheel . >&2 && echo $wheel)
     fi
     ls -l "$wheel"
 fi

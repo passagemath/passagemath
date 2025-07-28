@@ -3,7 +3,7 @@
 r"""
 Seymour's decomposition of totally unimodular matrices and regular matroids
 
-This module is provided by the distribution :ref:`sagemath-cmr <spkg_sagemath_cmr>`.
+This module is provided by the pip-installable package :ref:`passagemath-cmr <spkg_sagemath_cmr>`.
 """
 
 # ****************************************************************************
@@ -2210,7 +2210,7 @@ cdef class UnknownNode(DecompositionNode):
 
 cdef class SumNode(DecompositionNode):
     r"""
-    Base class for 1-sum, 2-sum, and 3-sums (`\Delta`-sum, 3-sum, `Y`-sum) nodes
+    Base class for 1-sum, 2-sum, and 3-sums (`\Delta`-sum, 3-sum, Y-sum) nodes
     in Seymour's decomposition
     """
 
@@ -2258,14 +2258,16 @@ cdef class SumNode(DecompositionNode):
             [-----+-----+-----]
             [ 0  0| 0  0| 1  0]
             [ 0  0| 0  0| 0  1]
-            sage: M_perm = M.matrix_from_rows_and_columns([2, 4, 3, 0, 5, 1], [0, 1, 3, 5, 4, 2]); M_perm
+            sage: M_perm = M.matrix_from_rows_and_columns([2, 4, 3, 0, 5, 1],
+            ....:                                         [0, 1, 3, 5, 4, 2]); M_perm
             [ 0  0  1  0  0  1]
             [ 0  0  0  0  1  0]
             [ 0  0  0  0  0 -1]
             [ 1  0  0  0  0  0]
             [ 0  0  0  1  0  0]
             [-1  1  0  0  0  0]
-            sage: result, certificate = M_perm.is_totally_unimodular(certificate=True); certificate
+            sage: result, certificate = M_perm.is_totally_unimodular(certificate=True)
+            sage: certificate
             OneSumNode (6×6) with 4 children
             sage: P_row, block_matrix, P_column = certificate.permuted_block_matrix()
             sage: P_row^(-1) * M_perm * P_column^(-1) == block_matrix
@@ -4410,60 +4412,6 @@ cdef class PivotsNode(DecompositionNode):
                                for index in range(self.nchildren()))
         self._child_nodes = children_tuple
         return self._child_nodes
-
-
-cdef class SymbolicNode(DecompositionNode):
-
-    def __init__(self, symbol, *, row_keys=None, column_keys=None, base_ring=None):
-        r"""
-        EXAMPLES::
-
-            sage: from sage.matrix.seymour_decomposition import SymbolicNode
-            sage: X = SymbolicNode('X', row_keys='abc', column_keys=range(6)); X
-            SymbolicNode X (3×6)
-            sage: XX = X.one_sum(X)
-            Traceback (most recent call last):
-            ...
-            ValueError: keys must be disjoint...
-            sage: XX = X.one_sum(X, summand_ids=(0, 1)); XX
-            OneSumNode (6×12) with 2 children
-            sage: XX.row_keys()
-            ((0, 'a'), (0, 'b'), (0, 'c'), (1, 'a'), (1, 'b'), (1, 'c'))
-            sage: T = XX.as_ordered_tree(); T
-            OneSumNode (6×12) with 2 children[SymbolicNode X (3×6)[],
-                                              SymbolicNode X (3×6)[]]
-            sage: unicode_art(T)
-            ╭────────────────OneSumNode (6×12) with 2 children
-            │                    │
-            SymbolicNode X (3×6) SymbolicNode X (3×6)
-            sage: Y = SymbolicNode('Y', row_keys='de', column_keys='fg'); Y
-            SymbolicNode Y (2×2)
-            sage: XY = X.one_sum(Y); XY
-            OneSumNode (5×8) with 2 children
-        """
-        super().__init__(row_keys=row_keys, column_keys=column_keys, base_ring=base_ring)
-        self._symbol = symbol
-
-    def _repr_(self):
-        r"""
-        Return a string representation of ``self``.
-
-        EXAMPLES::
-
-            sage: from sage.matrix.seymour_decomposition import SymbolicNode
-            sage: X = SymbolicNode('X', row_keys='abc', column_keys=range(6))
-            sage: print(X)
-            SymbolicNode X (3×6)
-        """
-        nrows, ncols = self.dimensions()
-        symbol = self.symbol()
-        return f'{self.__class__.__name__} {symbol} ({nrows}×{ncols})'
-
-    def matrix(self):
-        raise ValueError('symbolic nodes are not backed by CMR matrices')
-
-    def symbol(self):
-        return self._symbol
 
 
 cdef class ElementKey:

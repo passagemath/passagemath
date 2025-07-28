@@ -2927,6 +2927,7 @@ cdef class pAdicGenericElement(LocalGenericElement):
 
         Verify that :issue:`38037` is fixed::
 
+            sage: # needs sage.libs.ntl
             sage: R.<a> = Zq(9)
             sage: exp(R.zero())
             1 + O(3^20)

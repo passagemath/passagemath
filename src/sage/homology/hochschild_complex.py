@@ -226,13 +226,13 @@ class HochschildComplex(UniqueRepresentation, Parent):
             sage: d1 = H.boundary(1)
             sage: x = d1.domain().an_element(); x
             2*s[] # s[] + 2*s[] # s[1] + 3*s[] # s[2]
-            sage: d1(x)                                                                 # needs lrcalc
+            sage: d1(x)                                                                 # needs lrcalc_python
             0
             sage: y = tensor([s.an_element(), s.an_element()])
-            sage: d1(y)                                                                 # needs lrcalc
+            sage: d1(y)                                                                 # needs lrcalc_python
             0
             sage: z = tensor([s[2,1] + s[3], s.an_element()])
-            sage: d1(z)                                                                 # needs lrcalc
+            sage: d1(z)                                                                 # needs lrcalc_python
             0
 
         TESTS::

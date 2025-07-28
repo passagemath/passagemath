@@ -43,7 +43,7 @@ class SymmetricFunctionAlgebra_monomial(classical.SymmetricFunctionAlgebra_class
 
         TESTS::
 
-            sage: # needs lrcalc
+            sage: # needs lrcalc_python
             sage: m = SymmetricFunctions(QQ).m()
             sage: m == loads(dumps(m))
             True

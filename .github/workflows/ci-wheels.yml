@@ -91,6 +91,7 @@ jobs:
                             "sagemath-schemes",
                             "sagemath-singular",
                             "sagemath-sirocco",
+                            "sagemath-standard",
                             "sagemath-standard-no-symbolics",
                             "sagemath-symbolics",
                             "sagemath-sympow",
@@ -197,7 +198,7 @@ jobs:
               windows*) tag="win_amd64";;
           esac
           # Run tox
-          for wheel in "$WHEELHOUSE"/*$pkg_underscore*-cp$python_version_no_dot-$tag.whl; do
+          for wheel in "$WHEELHOUSE"/*$pkg_underscore-*-cp$python_version_no_dot-$tag.whl "$WHEELHOUSE"/*$pkg_underscore-*-py3-none-any.whl; do
             if [ -r "$wheel" ]; then
               cd pkgs/$pkg
               tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py'$python_version_no_dot'-norequirements/')
@@ -216,4 +217,6 @@ jobs:
               exit $status
             fi
           done
+          echo "Wheel missing" >&2
+          exit 1
         shell: bash

@@ -40,11 +40,6 @@ cdef class PlanarNode(BaseGraphicNode):
     cdef object _cograph_coforest_edges
 
 
-cdef class SymbolicNode(DecompositionNode):
-
-    cdef object _symbol
-
-
 cdef create_DecompositionNode(CMR_SEYMOUR_NODE *dec,
                               matrix=?,
                               row_keys=?, column_keys=?,

@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
-# sage.doctest: needs sage.combinat sage.modules
+# sage.doctest: needs lrcalc_python sage.combinat sage.modules
 """
 Symplectic symmetric functions
 

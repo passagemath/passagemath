@@ -100,7 +100,7 @@ class Character_generic(SFA_generic):
             sage: s = Sym.s()
             sage: st._other_to_self(s[1] + s([]))
             2*st[] + st[1]
-            sage: 7 * st[[]] * st[[]]
+            sage: 7 * st[[]] * st[[]]                                                   # needs lrcalc_python
             7*st[]
         """
         if sexpr == 0:
@@ -182,7 +182,7 @@ class InducedTrivialCharacterBasis(Character_generic):
         st[] + 2*st[1] + st[1, 1] + 2*st[2] + st[2, 1] + st[3]
         sage: ht(st[2,1])
         ht[1] - ht[1, 1] + ht[2, 1] - ht[3]
-        sage: ht[2]*ht[1,1]
+        sage: ht[2]*ht[1,1]                                                             # needs lrcalc_python
         ht[1, 1] + 2*ht[1, 1, 1] + ht[2, 1, 1]
         sage: h[4,2].kronecker_product(h[4,1,1])
         h[2, 2, 1, 1] + 2*h[3, 1, 1, 1] + h[4, 1, 1]
@@ -190,14 +190,14 @@ class InducedTrivialCharacterBasis(Character_generic):
         3*s[1] - 2*s[1, 1] - 2*s[2] + s[2, 1]
         sage: st(s[2,1])
         st[] + 3*st[1] + 2*st[1, 1] + 2*st[2] + st[2, 1]
-        sage: st[2]*st[1]
+        sage: st[2]*st[1]                                                               # needs lrcalc_python
         st[1] + st[1, 1] + st[2] + st[2, 1] + st[3]
         sage: s[4,2].kronecker_product(s[5,1])
         s[3, 2, 1] + s[3, 3] + s[4, 1, 1] + s[4, 2] + s[5, 1]
 
     TESTS::
 
-        sage: TestSuite(ht).run()
+        sage: TestSuite(ht).run()                                                       # needs lrcalc_python
     """
 
     def __init__(self, Sym):
@@ -399,20 +399,20 @@ class IrreducibleCharacterBasis(Character_generic):
         3*s[1] - 2*s[1, 1] - 2*s[2] + s[2, 1]
         sage: st(s[2,1])
         st[] + 3*st[1] + 2*st[1, 1] + 2*st[2] + st[2, 1]
-        sage: st[2]*st[1]
+        sage: st[2]*st[1]                                                               # needs lrcalc_python
         st[1] + st[1, 1] + st[2] + st[2, 1] + st[3]
         sage: s[4,2].kronecker_product(s[5,1])
         s[3, 2, 1] + s[3, 3] + s[4, 1, 1] + s[4, 2] + s[5, 1]
         sage: st[1,1,1].counit()
         -1
-        sage: all(sum(c*st(la)*st(mu).antipode() for
+        sage: all(sum(c*st(la)*st(mu).antipode() for                                    # needs lrcalc_python
         ....:    ((la,mu),c) in st(ga).coproduct())==st(st(ga).counit())
         ....:    for ga in Partitions(3))
         True
 
     TESTS::
 
-        sage: TestSuite(st).run()
+        sage: TestSuite(st).run()                                                       # needs lrcalc_python
     """
 
     def __init__(self, Sym):

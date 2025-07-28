@@ -744,7 +744,6 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             sage: L.define_implicitly([(G, [ln(2)])], [diff(G) - exp(-G(-z))])
             sage: G
             log(2) + z + 1/2*z^2 + (-1/12*z^4) + 1/45*z^6 + O(z^7)
-
             sage: L.<z> = LazyPowerSeriesRing(RR)
             sage: G = L.undefined(0)
             sage: L.define_implicitly([(G, [log(2)])], [diff(G) - exp(-G(-z))])

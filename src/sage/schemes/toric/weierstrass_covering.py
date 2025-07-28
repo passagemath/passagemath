@@ -217,7 +217,7 @@ def WeierstrassMap(polynomial, variables=None):
 
     TESTS::
 
-        sage: for P in ReflexivePolytopes(2):
+        sage: for P in ReflexivePolytopes(2):                                           # needs polytopes_db
         ....:     S = ToricVariety(FaceFan(P))
         ....:     p = sum( (-S.K()).sections_monomials() )
         ....:     f, g = WeierstrassForm(p)

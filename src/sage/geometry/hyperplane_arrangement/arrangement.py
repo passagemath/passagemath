@@ -575,6 +575,7 @@ class HyperplaneArrangementElement(Element):
             sage: B.rank()
             2
 
+            sage: # needs cddexec
             sage: p = polytopes.simplex(5, project=True)
             sage: H = p.hyperplane_arrangement()
             sage: H.rank()

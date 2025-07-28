@@ -26,7 +26,7 @@ find . -name *.a -exec cp {} "$SAGE_LOCAL/lib/" \;
 cp source/qepcad "$SAGE_LOCAL/bin/"
 mkdir -p "${SAGE_LOCAL}/share/qepcad"
 cp bin/qepcad.help "$SAGE_LOCAL/share/qepcad"
-chmod 0644 "$SAGE_LOCAL/bin/qepcad.help"
+chmod 0644 "$SAGE_LOCAL/share/qepcad/qepcad.help"
 cp ../sage-qepcad "$SAGE_LOCAL/bin/"
 
 cat > "$SAGE_LOCAL/etc/default.qepcadrc" <<EOF

@@ -156,7 +156,7 @@ class NilCoxeterAlgebra(IwahoriHeckeAlgebra.T):
         EXAMPLES::
 
             sage: A = NilCoxeterAlgebra(WeylGroup(['A',3,1]))
-            sage: A.k_schur_noncommutative_variables([2,2])
+            sage: A.k_schur_noncommutative_variables([2,2])                             # needs lrcalc_python
             u[0,3,1,0] + u[3,1,2,0] + u[1,2,0,1] + u[3,2,0,3] + u[2,0,3,1] + u[2,3,1,2]
 
         TESTS::

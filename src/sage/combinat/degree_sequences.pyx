@@ -244,9 +244,9 @@ The sequences produced by random graphs *are* degree sequences::
 
 Checking that we indeed enumerate *all* the degree sequences for `n=5`::
 
-    sage: ds1 = Set([tuple(g.degree_sequence()) for g in graphs(5)])                    # needs sage.graphs
+    sage: ds1 = Set([tuple(g.degree_sequence()) for g in graphs(5)])                    # needs nauty sage.graphs
     sage: ds2 = Set(map(tuple,list(DegreeSequences(5))))
-    sage: ds1 == ds2                                                                    # needs sage.graphs
+    sage: ds1 == ds2                                                                    # needs nauty sage.graphs
     True
 
 Checking the consistency of enumeration and test::
