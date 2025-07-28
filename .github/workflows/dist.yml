@@ -282,10 +282,14 @@ jobs:
           make auditwheel_or_delocate V=0
           cd pkgs
           set -x
-          for pkg in sagemath-*-data; do
+          for pkg in sagemath-*; do
               if [ -r $pkg/repair_wheel.py ]; then
                   pkg_underscore=${pkg//-/_}
-                  ../sage -sh -c "python3 $pkg/repair_wheel.py ../dist/*$pkg_underscore*-none-any.whl"
+                  for whl in ../dist/*$pkg_underscore-*-none-any.whl; do
+                      if [ -r "$whl" ]; then
+                          ../sage -sh -c "python3 $pkg/repair_wheel.py $whl"
+                      fi
+                  done
               fi
           done
           cd ..

@@ -61,6 +61,8 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_palp
     SPKG_INSTALL_REQUIRES_sagemath_pari
+    SPKG_INSTALL_REQUIRES_sagemath_pari_galdata
+    SPKG_INSTALL_REQUIRES_sagemath_pari_seadata_small
     SPKG_INSTALL_REQUIRES_sagemath_planarity
     SPKG_INSTALL_REQUIRES_sagemath_plot
     SPKG_INSTALL_REQUIRES_sagemath_polyhedra
