@@ -38,7 +38,7 @@ SAGE_VERSION_BANNER="passagemath version $SAGE_VERSION, Release Date: $SAGE_RELE
 
 # Passagemath fork for any newly added packages
 sed -i.bak 's/"sagemath-/"passagemath-/' pkgs/*/pyproject.toml.m4
-git grep -l 'Sage: Open Source Mathematics Software:' pkgs | xargs sed -i.bak 's/Sage: Open Source Mathematics Software:/passagemath:/'
+git grep -l 'Sage: Open Source Mathematics Software:' pkgs | xargs sed -i.bak 's/Sage: Open Source Mathematics Software:/passagemath:/' || :
 if ! git diff --exit-code pkgs; then
     die "commit these changes first"
     exit 1
