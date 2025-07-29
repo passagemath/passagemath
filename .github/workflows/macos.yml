@@ -19,19 +19,22 @@ on:
         type: string
       # System configuration
       osversion_xcodeversion_toxenv_tuples:
-        # As of 2025-05, "runs-on: macos-latest" (= "runs-on: macos-14") and "runs-on: macos-15" select the new M1 runners.
+        # As of 2025-07, "runs-on: macos-14" and "runs-on: macos-15" select the new M1 runners.
         #  https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
         description: 'Stringified JSON object'
         default: >-
           [["13",     "",             "homebrew-macos-usrlocal-minimal"],
            ["13",     "",             "homebrew-macos-usrlocal-standard"],
            ["13",     "",             "conda-forge-macos-standard"],
-           ["latest", "",             "homebrew-macos-opthomebrew-minimal"],
-           ["latest", "",             "homebrew-macos-opthomebrew-standard"],
-           ["latest", "",             "conda-forge-macos-standard"],
+           ["14",     "",             "homebrew-macos-opthomebrew-minimal"],
+           ["14",     "",             "homebrew-macos-opthomebrew-standard"],
+           ["15",     "",             "conda-forge-macos-standard"],
            ["15",     "",             "homebrew-macos-opthomebrew-minimal"],
            ["15",     "",             "homebrew-macos-opthomebrew-standard"],
-           ["15",     "",             "conda-forge-macos-standard"]]
+           ["15",     "",             "conda-forge-macos-standard"],
+           ["15",     "xcode_26.0",   "homebrew-macos-opthomebrew-minimal"],
+           ["15",     "xcode_26.0",   "homebrew-macos-opthomebrew-standard"],
+           ["15",     "xcode_26.0",   "conda-forge-macos-standard"]]
         type: string
       extra_sage_packages:
         description: 'Extra Sage packages to install as system packages'
