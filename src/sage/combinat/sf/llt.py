@@ -73,6 +73,7 @@ class LLT_class(UniqueRepresentation):
 
     We require that the parameter `t` must be in the base ring::
 
+        sage: # needs sage.symbolic
         sage: Symxt = SymmetricFunctions(QQ['x','t'].fraction_field())
         sage: (x,t) = Symxt.base_ring().gens()
         sage: LLT3x = Symxt.llt(3,t=x)
@@ -399,6 +400,7 @@ class LLT_class(UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
             sage: HSp3 = Sym.llt(3).hspin(); HSp3
             Symmetric Functions over Fraction Field of Univariate Polynomial Ring in t over Rational Field in the level 3 LLT spin basis
@@ -490,6 +492,7 @@ class LLT_generic(sfa.SymmetricFunctionAlgebra_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
             sage: HSp3 = Sym.llt(3).hspin()
             sage: m = Sym.monomial()
@@ -517,6 +520,7 @@ class LLT_generic(sfa.SymmetricFunctionAlgebra_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
             sage: HSp3 = Sym.llt(3).hspin()
             sage: m = Sym.monomial()
@@ -525,7 +529,7 @@ class LLT_generic(sfa.SymmetricFunctionAlgebra_generic):
 
         This is for internal use only. Please use instead::
 
-            sage: m(HSp3[2,1])
+            sage: m(HSp3[2,1])                                                          # needs sage.symbolic
             (t+2)*m[1, 1, 1] + (t+1)*m[2, 1] + t*m[3]
         """
         return self._m._from_cache(x, self._m_cache, self._self_to_m_cache,
@@ -581,6 +585,7 @@ class LLT_generic(sfa.SymmetricFunctionAlgebra_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: HSp3 = SymmetricFunctions(FractionField(QQ['t'])).llt(3).hspin()
             sage: HSp3.product(HSp3([1]), HSp3([2]))
             HSp3[2, 1] + (-t+1)*HSp3[3]
@@ -602,6 +607,7 @@ class LLT_generic(sfa.SymmetricFunctionAlgebra_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: HSp3 = SymmetricFunctions(FractionField(QQ['t'])).llt(3).hspin()
             sage: HSp3._m_cache(2)
             sage: l = lambda c: [ (i[0],[j for j in sorted(i[1].items())]) for i in sorted(c.items())]
@@ -651,7 +657,8 @@ class LLT_spin(LLT_generic):
 
         ::
 
-            sage: HS3x = SymmetricFunctions(FractionField(QQ['x'])).llt(3,t=x).hspin()
+            sage: R.<x> = QQ[]
+            sage: HS3x = SymmetricFunctions(FractionField(R)).llt(3, t=x).hspin()
             sage: TestSuite(HS3x).run(skip = ["_test_associativity", "_test_distributivity", "_test_prod"]) # products are too expensive, long time (4s on sage.math, 2012)
             sage: TestSuite(HS3x).run(elements = [HS3x.t*HS3x[1,1]+HS3x.t*HS3x[2], HS3x[1]+(1+HS3x.t)*HS3x[1,1]])  # long time (depends on previous)
         """
@@ -681,6 +688,7 @@ class LLT_spin(LLT_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: HSp3 = SymmetricFunctions(FractionField(QQ['t'])).llt(3).hspin()
             sage: f21 = HSp3._to_m(Partition([2,1]))
             sage: [f21(p) for p in Partitions(3)]
@@ -720,7 +728,8 @@ class LLT_cospin(LLT_generic):
 
         ::
 
-            sage: HC3x = SymmetricFunctions(FractionField(QQ['x'])).llt(3,t=x).hcospin()
+            sage: R.<x> = QQ[]
+            sage: HC3x = SymmetricFunctions(FractionField(R)).llt(3, t=x).hcospin()
             sage: TestSuite(HC3x).run(skip = ["_test_associativity", "_test_distributivity", "_test_prod"]) # products are too expensive, long time (5s on sage.math, 2012)
             sage: TestSuite(HC3x).run(elements = [HC3x.t*HC3x[1,1]+HC3x.t*HC3x[2], HC3x[1]+(1+HC3x.t)*HC3x[1,1]])  # long time (depends on previous)
         """
