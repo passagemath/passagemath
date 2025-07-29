@@ -256,6 +256,12 @@ else:
             ECLDIR = dir + '/'
             os.environ['ECLDIR'] = ECLDIR
             break
+    for p in sage_wheels.__path__:
+        pari_datadir = os.path.join(p, 'share/pari')
+        if any(os.path.exists(os.path.join(pari_datadir, data))
+               for data in ['galdata', 'seadata']):
+            os.environ['GP_DATA_DIR'] = pari_datadir
+            break
 
 try:
     import ecl
