@@ -275,7 +275,7 @@ jobs:
           ./bootstrap
           ./configure --without-system-gap
           make pypi-noarch-wheels V=0
-          (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/)
+          (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/ && rm -f dist/*sage*conf-*-none-any.whl)
           ls -l dist
 
       - name: Repair wheels
