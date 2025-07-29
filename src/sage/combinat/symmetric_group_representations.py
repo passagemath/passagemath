@@ -136,9 +136,12 @@ def SymmetricGroupRepresentation(partition, implementation='specht',
 
     The unitary representation::
 
-        sage: unitary = SymmetricGroupRepresentation([3,1], "unitary"); unitary
+        sage: unitary = SymmetricGroupRepresentation([3,1], "unitary"); unitary         # needs sage.symbolic
         Unitary representation of the symmetric group corresponding to [3, 1]
-        sage: unitary_GF49 = SymmetricGroupRepresentation([3,1], "unitary", ring=GF(7**2)); unitary_GF49
+
+        sage: # needs sage.rings.finite_rings
+        sage: unitary_GF49 = SymmetricGroupRepresentation([3,1], "unitary", ring=GF(7**2))
+        sage: unitary_GF49
         Unitary representation of the symmetric group corresponding to [3, 1]
         sage: unitary_GF49([2,1,3,4])
         [6 0 0]
@@ -263,8 +266,10 @@ def SymmetricGroupRepresentations(n, implementation='specht', ring=None,
 
     ::
 
-        sage: unitary = SymmetricGroupRepresentations(3, "unitary"); unitary
+        sage: unitary = SymmetricGroupRepresentations(3, "unitary"); unitary            # needs sage.symbolic
         Unitary representations of the symmetric group of order 3! over Symbolic Ring
+
+        sage: # needs sage.rings.finite_rings
         sage: unitary_GF49 = SymmetricGroupRepresentations(4, "unitary", ring=GF(7**2)); unitary_GF49
         Unitary representations of the symmetric group of order 4! over Finite Field in z2 of size 7^2
         sage: unitary_GF49([3,1])([2,1,3,4])
@@ -1059,12 +1064,16 @@ class UnitaryRepresentation(SymmetricGroupRepresentation_generic_class):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: U = SymmetricGroupRepresentation([2,1], "unitary")
             sage: TestSuite(U).run()
+
             sage: U = SymmetricGroupRepresentation([2,1], "unitary", GF(7))
             Traceback (most recent call last):
             ...
             ValueError: the base ring must be a finite field of square order
+
+            sage: # needs sage.rings.finite_rings
             sage: U = SymmetricGroupRepresentation([2,1], "unitary", GF(7**2))
             sage: TestSuite(U).run()
         """
@@ -1090,7 +1099,7 @@ class UnitaryRepresentation(SymmetricGroupRepresentation_generic_class):
 
         EXAMPLES::
 
-            sage: SymmetricGroupRepresentation([2,1], "unitary")
+            sage: SymmetricGroupRepresentation([2,1], "unitary")                        # needs sage.symbolic
             Unitary representation of the symmetric group corresponding to [2, 1]
         """
         return f"Unitary representation of the symmetric group corresponding to {self._partition}"
@@ -1107,6 +1116,7 @@ class UnitaryRepresentation(SymmetricGroupRepresentation_generic_class):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: unitary_specht = SymmetricGroupRepresentation([3,1], 'unitary', ring=GF(7**2))
             sage: unitary_specht.representation_matrix(Permutation([2,1,3,4]))
             [6 0 0]
@@ -1138,6 +1148,7 @@ class UnitaryRepresentation(SymmetricGroupRepresentation_generic_class):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: unitary_specht = SymmetricGroupRepresentation([3,1], 'unitary', ring=GF(7**2))
             sage: unitary_specht._unitary_change_basis_matrix
             [       1        4        4]
@@ -1196,6 +1207,7 @@ class UnitaryRepresentation(SymmetricGroupRepresentation_generic_class):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: unitary_specht = SymmetricGroupRepresentation([2,2], 'unitary', ring=GF(7**2))
             sage: unitary_specht._representation_matrix_uncached(Permutation([3,1,4,2]))
             [       4 5*z2 + 4]
