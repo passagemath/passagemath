@@ -83,6 +83,7 @@ not...::
 
   ::
 
+    sage: # needs sage.symbolic
     sage: x = libgiac('x')
     sage: f = 1/(2+sin(5*x))
     sage: oldrep = 2/5/sqrt(3)*(atan((2*tan(5*x/2)+1)/sqrt(3))+pi*floor(5*x/2/pi+1/2))
@@ -228,6 +229,7 @@ def _giac(s):
     Warning: The complex number sqrt(-1) is exported in python as I. (But it
     may appears as i)::
 
+        sage: # needs sage.symbolic
         sage: libgiac((1+I*sqrt(3))^3).normal()
         -8
         sage: libgiac(1+I)
