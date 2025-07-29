@@ -28,7 +28,7 @@ on:
            ["13",     "",             "conda-forge-macos-standard"],
            ["14",     "",             "homebrew-macos-opthomebrew-minimal"],
            ["14",     "",             "homebrew-macos-opthomebrew-standard"],
-           ["15",     "",             "conda-forge-macos-standard"],
+           ["14",     "",             "conda-forge-macos-standard"],
            ["15",     "",             "homebrew-macos-opthomebrew-minimal"],
            ["15",     "",             "homebrew-macos-opthomebrew-standard"],
            ["15",     "",             "conda-forge-macos-standard"],
