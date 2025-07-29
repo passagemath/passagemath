@@ -1502,7 +1502,7 @@ def is_twograph_descendant_of_srg(int v, int k0, int l, int mu):
 
     TESTS::
 
-        sage: graphs.strongly_regular_graph(279, 150, 85, 75, existence=True)           # needs sage.combinat
+        sage: graphs.strongly_regular_graph(279, 150, 85, 75, existence=True)           # needs sage.combinat sage.modules
         True
         sage: graphs.strongly_regular_graph(279, 150, 85, 75).is_strongly_regular(parameters=True)  # optional - gap_package_design internet
         (279, 150, 85, 75)
@@ -2836,9 +2836,9 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     A set of parameters unknown to be realizable in Andries Brouwer's database::
 
-        sage: graphs.strongly_regular_graph(324,95,22,30, existence=True)               # needs database_graphs sage.combinat
+        sage: graphs.strongly_regular_graph(324,95,22,30, existence=True)               # needs database_graphs sage.combinat sage.modules
         Unknown
-        sage: graphs.strongly_regular_graph(324,95,22,30)                               # needs database_graphs sage.combinat
+        sage: graphs.strongly_regular_graph(324,95,22,30)                               # needs database_graphs sage.combinat sage.modules
         Traceback (most recent call last):
         ...
         RuntimeError: Andries Brouwer's database reports that no
@@ -3120,11 +3120,11 @@ def _build_small_srg_database():
         complement(two-intersection set in PG(4,3)): Graph on 81 vertices
         sage: graphs.strongly_regular_graph(243, 220, 199, 200)                 # long time, needs sage.rings.finite_rings
         two-weight code: [55, 5] linear code over GF(3): Graph on 243 vertices
-        sage: graphs.strongly_regular_graph(256, 153, 92, 90)                           # needs sage.combinat
+        sage: graphs.strongly_regular_graph(256, 153, 92, 90)                           # needs sage.combinat sage.modules
         complement(two-intersection set in PG(4,4)): Graph on 256 vertices
-        sage: graphs.strongly_regular_graph(256, 170, 114, 110)                         # needs sage.combinat
+        sage: graphs.strongly_regular_graph(256, 170, 114, 110)                         # needs sage.combinat sage.modules
         complement(two-intersection set in PG(8,2)): Graph on 256 vertices
-        sage: graphs.strongly_regular_graph(256, 187, 138, 132)                         # needs sage.combinat
+        sage: graphs.strongly_regular_graph(256, 187, 138, 132)                         # needs sage.combinat sage.modules
         complement(two-intersection set in PG(8,2)): Graph on 256 vertices
         sage: graphs.strongly_regular_graph(512, 73, 12, 10)                    # not tested (too long), needs sage.rings.finite_rings
         two-weight code: [219, 9] linear code over GF(2): Graph on 512 vertices
