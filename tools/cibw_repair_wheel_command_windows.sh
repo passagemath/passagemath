@@ -1,6 +1,6 @@
 #! /bin/sh
-dest_dir=$1
-wheel=$2
+wheel=$1
+dest_dir=$2
 
 set -ex
 pkg=$(basename ${wheel})
