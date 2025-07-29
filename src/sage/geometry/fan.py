@@ -3009,7 +3009,7 @@ class RationalPolyhedralFan(IntegralRayCollection, Callable, Container):
         EXAMPLES::
 
             sage: fan = toric_varieties.dP6().fan()                                     # needs palp
-            sage: fan.plot()                                                            # needs palp sage.plot
+            sage: fan.plot()                                                            # needs palp sage.plot sage.symbolic
             Graphics object consisting of 31 graphics primitives
         """
         tp = ToricPlotter(options, self.lattice().degree(), self.rays())
