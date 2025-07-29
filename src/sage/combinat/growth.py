@@ -2427,6 +2427,7 @@ class RuleLLMS(Rule):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: LLMS4 = GrowthDiagram.rules.LLMS(4)
             sage: v = LLMS4.vertices(3)[1]; v
             [2, 1]
@@ -3711,12 +3712,12 @@ class RuleRSK(RulePartitions):
     Instead of passing the rule to :class:`GrowthDiagram`, we can
     also call the rule to create growth diagrams.  For example::
 
+        sage: # needs sage.modules
         sage: m = matrix([[0,0,0,0,1],[1,1,0,2,0], [0,3,0,0,0]])
         sage: G = RuleRSK(m); G
         0  0  0  0  1
         1  1  0  2  0
         0  3  0  0  0
-
         sage: ascii_art([G.P_symbol(), G.Q_symbol()])
         [   1  2  2  2  3    1  2  2  2  2 ]
         [   2  3             4  4          ]
@@ -3736,13 +3737,12 @@ class RuleRSK(RulePartitions):
     Because the of the coordinate conventions in
     :func:`~sage.combinat.rsk.RSK`, we have to transpose matrices::
 
+        sage: # needs sage.modules
         sage: [G.P_symbol(), G.Q_symbol()] == RSK(m.transpose())
         True
-
         sage: n = 5; l = [(pi, RuleRSK(pi)) for pi in Permutations(n)]
         sage: all([G.P_symbol(), G.Q_symbol()] == RSK(pi) for pi, G in l)
         True
-
         sage: n = 5; l = [(w, RuleRSK(w)) for w in Words([1,2,3], 5)]
         sage: all([G.P_symbol(), G.Q_symbol()] == RSK(pi) for pi, G in l)
         True
@@ -3876,12 +3876,12 @@ class RuleBurge(RulePartitions):
     Instead of passing the rule to :class:`GrowthDiagram`, we can
     also call the rule to create growth diagrams.  For example::
 
+        sage: # needs sage.modules
         sage: m = matrix([[2,0,0,1,0],[1,1,0,0,0], [0,0,0,0,3]])
         sage: G = Burge(m); G
         2  0  0  1  0
         1  1  0  0  0
         0  0  0  0  3
-
         sage: ascii_art([G.P_symbol(), G.Q_symbol()])
         [   1  2  3    1  2  5 ]
         [   1  3       1  5    ]

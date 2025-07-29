@@ -86,7 +86,7 @@ def coincidence_index(S, n=1):
     EXAMPLES::
 
         sage: S = strip_encoding("The cat in the hat.")
-        sage: coincidence_index(S)
+        sage: coincidence_index(S)                                                      # needs sage.rings.real_mpfr
         0.120879120879121
     """
     if not isinstance(S, str):

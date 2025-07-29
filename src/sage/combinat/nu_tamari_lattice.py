@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-graphs
-# sage.doctest: needs sage.combinat
+# sage.doctest: needs sage.combinat sage.modules
 r"""
 `\nu`-Tamari lattice
 

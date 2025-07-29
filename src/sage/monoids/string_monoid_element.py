@@ -242,6 +242,7 @@ class StringMonoidElement(FreeMonoidElement):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.real_mpfr
             sage: t = AlphabeticStrings()('SHRUBBERY')
             sage: next(t.__iter__())
             S
@@ -260,6 +261,7 @@ class StringMonoidElement(FreeMonoidElement):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.real_mpfr
             sage: t = AlphabeticStrings()('SHRUBBERY')
             sage: t[0]
             S
@@ -374,6 +376,7 @@ class StringMonoidElement(FreeMonoidElement):
         Count the character frequency in an object comprised of capital
         letters of the English alphabet::
 
+            sage: # needs sage.rings.real_mpfr
             sage: M = AlphabeticStrings().encoding("abcabf")
             sage: sorted(M.character_count().items())
             [(A, 2), (B, 2), (C, 1), (F, 1)]
@@ -476,6 +479,7 @@ class StringMonoidElement(FreeMonoidElement):
 
         Capital letters of the English alphabet::
 
+            sage: # needs sage.rings.real_mpfr
             sage: M = AlphabeticStrings().encoding("abcd")
             sage: L = M.frequency_distribution().function()
             sage: sorted(L.items())

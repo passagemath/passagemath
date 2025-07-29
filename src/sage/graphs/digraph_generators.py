@@ -1452,11 +1452,11 @@ class DiGraphGenerators:
         EXAMPLES::
 
             sage: D = digraphs.RandomDirectedAcyclicGraph(5, .5); D
-            RandomDAG(5, 0.500000000000000): Digraph on 5 vertices
+            RandomDAG(5, 0.5...): Digraph on 5 vertices
             sage: D.is_directed_acyclic()
             True
             sage: D = digraphs.RandomDirectedAcyclicGraph(5, .5, weight_max=3); D
-            RandomWeightedDAG(5, 0.500000000000000, 3): Digraph on 5 vertices
+            RandomWeightedDAG(5, 0.5..., 3): Digraph on 5 vertices
             sage: D.is_directed_acyclic()
             True
 

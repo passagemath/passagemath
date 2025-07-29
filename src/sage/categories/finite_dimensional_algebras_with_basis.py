@@ -327,7 +327,7 @@ class FiniteDimensionalAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: [ DescentAlgebra(QQ,n).B().semisimple_quotient().dimension()      # needs sage.combinat sage.groups sage.modules
                 ....:   for n in range(6) ]
                 [1, 1, 2, 3, 5, 7]
-                sage: [Partitions(n).cardinality() for n in range(10)]                  # needs sage.combinat
+                sage: [Partitions(n).cardinality() for n in range(10)]                  # needs sage.combinat sage.libs.flint
                 [1, 1, 2, 3, 5, 7, 11, 15, 22, 30]
 
             .. TODO::
