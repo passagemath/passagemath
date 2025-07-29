@@ -273,7 +273,7 @@ class CoxeterGroups(Category_singleton):
             EXAMPLES::
 
                 sage: W = CoxeterGroups().example()
-                sage: sorted(W.braid_orbit_iter([0, 1, 2, 1]))                          # needs sage.combinat sage.graphs
+                sage: sorted(W.braid_orbit_iter([0, 1, 2, 1]))                          # needs sage.combinat sage.graphs sage.modules
                 [[0, 1, 2, 1], [0, 2, 1, 2], [2, 0, 1, 2]]
             """
             word = list(word)
@@ -328,10 +328,10 @@ class CoxeterGroups(Category_singleton):
                 sage: word = w.reduced_word(); word
                 [0, 1, 2, 1]
 
-                sage: sorted(W.braid_orbit(word))                                       # needs sage.combinat sage.graphs
+                sage: sorted(W.braid_orbit(word))                                       # needs sage.combinat sage.graphs sage.modules
                 [[0, 1, 2, 1], [0, 2, 1, 2], [2, 0, 1, 2]]
 
-                sage: sorted(W.braid_orbit([2,1,1,2,1]))                                # needs sage.combinat sage.graphs
+                sage: sorted(W.braid_orbit([2,1,1,2,1]))                                # needs sage.combinat sage.graphs sage.modules
                 [[1, 2, 1, 1, 2], [2, 1, 1, 2, 1], [2, 1, 2, 1, 2], [2, 2, 1, 2, 2]]
 
                 sage: # optional - gap3
@@ -979,8 +979,8 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: W = CoxeterGroup(['D', 4])                                        # needs sage.graphs
-                sage: W.reflection_representation()                                     # needs sage.graphs
+                sage: W = CoxeterGroup(['D', 4])                                        # needs sage.graphs sage.groups
+                sage: W.reflection_representation()                                     # needs sage.graphs sage.groups
                 Reflection representation of Finite Coxeter group over
                  Integer Ring with Coxeter matrix:
                 [1 3 2 2]
@@ -988,8 +988,8 @@ class CoxeterGroups(Category_singleton):
                 [2 3 1 2]
                 [2 3 2 1]
 
-                sage: W = CoxeterGroup(['I', 13])                                       # needs sage.graphs sage.rings.number_field
-                sage: W.reflection_representation()                                     # needs sage.graphs sage.rings.number_field
+                sage: W = CoxeterGroup(['I', 13])                                       # needs sage.graphs sage.modules sage.rings.number_field
+                sage: W.reflection_representation()                                     # needs sage.graphs sage.modules sage.rings.number_field
                 Reflection representation of Finite Coxeter group over
                  Universal Cyclotomic Field with Coxeter matrix:
                 [ 1 13]
@@ -1389,8 +1389,8 @@ class CoxeterGroups(Category_singleton):
 
             TESTS::
 
-                sage: A = AffinePermutationGroup(['A', 7, 1])                           # needs sage.combinat
-                sage: A._test_coxeter_relations()                                       # needs sage.combinat
+                sage: A = AffinePermutationGroup(['A', 7, 1])                           # needs sage.combinat sage.modules
+                sage: A._test_coxeter_relations()                                       # needs sage.combinat sage.modules
 
                 sage: cm = CartanMatrix([[2,-5,0], [-2,2,-1], [0,-1,2]])                # needs sage.graphs
                 sage: W = WeylGroup(cm)                                                 # needs sage.combinat sage.graphs sage.groups
@@ -1737,7 +1737,7 @@ class CoxeterGroups(Category_singleton):
                 sage: W = CoxeterGroups().example()
                 sage: s = W.simple_reflections()
                 sage: w = s[0] * s[2]
-                sage: sorted(w.reduced_words_iter())                                    # needs sage.combinat sage.graphs
+                sage: sorted(w.reduced_words_iter())                                    # needs sage.combinat sage.graphs sage.modules
                 [[0, 2], [2, 0]]
             """
             return self.parent().braid_orbit_iter(self.reduced_word())
@@ -2015,7 +2015,7 @@ class CoxeterGroups(Category_singleton):
                 sage: (s[3]*s[2]*s[1]).absolute_length()                                # needs sage.combinat sage.groups
                 3
 
-                sage: # needs sage.graphs
+                sage: # needs sage.graphs sage.groups
                 sage: W = CoxeterGroup(["A",2,1])
                 sage: (r, s, t) = W.simple_reflections()
                 sage: (r * s * r * t).absolute_length()
@@ -2083,7 +2083,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: # needs sage.graphs
+                sage: # needs sage.graphs sage.groups
                 sage: W = CoxeterGroup(["A",2,1])
                 sage: W.one().absolute_chain_reflections()
                 []
