@@ -372,7 +372,9 @@ class LLT_class(UniqueRepresentation):
 
             sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
             sage: HCosp3 = Sym.llt(3).hcospin(); HCosp3
-            Symmetric Functions over Fraction Field of Univariate Polynomial Ring in t over Rational Field in the level 3 LLT cospin basis
+            Symmetric Functions
+             over Fraction Field of Univariate Polynomial Ring in t over Rational Field
+             in the level 3 LLT cospin basis
             sage: HCosp3([1])^2
             1/t*HCosp3[1, 1] + ((t-1)/t)*HCosp3[2]
 
@@ -400,10 +402,13 @@ class LLT_class(UniqueRepresentation):
 
         EXAMPLES::
 
-            sage: # needs sage.symbolic
             sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
+
+            sage: # needs sage.symbolic
             sage: HSp3 = Sym.llt(3).hspin(); HSp3
-            Symmetric Functions over Fraction Field of Univariate Polynomial Ring in t over Rational Field in the level 3 LLT spin basis
+            Symmetric Functions
+             over Fraction Field of Univariate Polynomial Ring in t over Rational Field
+             in the level 3 LLT spin basis
             sage: HSp3([1])^2
             HSp3[1, 1] + (-t+1)*HSp3[2]
 
@@ -433,12 +438,16 @@ class LLT_generic(sfa.SymmetricFunctionAlgebra_generic):
         EXAMPLES::
 
             sage: SymmetricFunctions(FractionField(QQ['t'])).llt(3).hspin()
-            Symmetric Functions over Fraction Field of Univariate Polynomial Ring in t over Rational Field in the level 3 LLT spin basis
+            Symmetric Functions
+             over Fraction Field of Univariate Polynomial Ring in t over Rational Field
+             in the level 3 LLT spin basis
             sage: SymmetricFunctions(QQ).llt(3,t=2).hspin()
             Symmetric Functions over Rational Field in the level 3 LLT spin with t=2 basis
             sage: QQz = FractionField(QQ['z']); z = QQz.gen()
             sage: SymmetricFunctions(QQz).llt(3,t=z).hspin()
-            Symmetric Functions over Fraction Field of Univariate Polynomial Ring in z over Rational Field in the level 3 LLT spin with t=z basis
+            Symmetric Functions
+             over Fraction Field of Univariate Polynomial Ring in z over Rational Field
+             in the level 3 LLT spin with t=z basis
         """
         s = self.__class__.__name__[4:]
         sfa.SymmetricFunctionAlgebra_generic.__init__(
@@ -501,7 +510,7 @@ class LLT_generic(sfa.SymmetricFunctionAlgebra_generic):
 
         This is for internal use only. Please use instead::
 
-            sage: HSp3(m[2,1])
+            sage: HSp3(m[2,1])                                                          # needs sage.symbolic
             -2*HSp3[1, 1, 1] + (2*t^2+2*t+1)*HSp3[2, 1] + (-2*t^2-t)*HSp3[3]
         """
         return self._from_cache(x, self._m_cache, self._m_to_self_cache,
@@ -567,7 +576,8 @@ class LLT_generic(sfa.SymmetricFunctionAlgebra_generic):
 
             sage: HSp3 = SymmetricFunctions(FractionField(QQ['t'])).llt(3).hspin()
             sage: HSp3.llt_family()
-            level 3 LLT polynomials over Fraction Field of Univariate Polynomial Ring in t over Rational Field
+            level 3 LLT polynomials
+             over Fraction Field of Univariate Polynomial Ring in t over Rational Field
         """
         return self._llt
 

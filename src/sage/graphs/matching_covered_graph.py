@@ -2877,6 +2877,7 @@ class MatchingCoveredGraph(Graph):
         Each of Petersen graph, Bicorn graph, Tricorn graph, Cubeplex graph,
         Twinplex graph, Wagner graph is a brick::
 
+            sage: # needs sage.symbolic
             sage: MatchingCoveredGraph(graphs.PetersenGraph()).is_brick() and \
             ....: MatchingCoveredGraph(graphs.StaircaseGraph(4)).is_brick() and \
             ....: MatchingCoveredGraph(graphs.TricornGraph()).is_brick() and \

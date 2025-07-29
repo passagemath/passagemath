@@ -1250,11 +1250,11 @@ class Polyhedron_base6(Polyhedron_base5):
 
             sage: P = polytopes.permutahedron(3); P
             A 2-dimensional polyhedron in ZZ^3 defined as the convex hull of 6 vertices
-            sage: set([F.as_polyhedron().affine_hull_projection(                        # needs sage.combinat sage.rings.number_field
+            sage: set([F.as_polyhedron().affine_hull_projection(                        # needs sage.combinat sage.rings.number_field sage.symbolic
             ....:          orthonormal=True, extend=True).volume()
             ....:     for F in P.affine_hull_projection().faces(1)]) == {1, sqrt(AA(2))}
             True
-            sage: set([F.as_polyhedron().affine_hull_projection(                        # needs sage.combinat sage.rings.number_field
+            sage: set([F.as_polyhedron().affine_hull_projection(                        # needs sage.combinat sage.rings.number_field sage.symbolic
             ....:          orthonormal=True, extend=True).volume()
             ....:     for F in P.affine_hull_projection(
             ....:             orthonormal=True, extend=True).faces(1)]) == {sqrt(AA(2))}

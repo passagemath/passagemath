@@ -1889,7 +1889,7 @@ class HyperplaneArrangementElement(Element):
             (6, 21, 16)
             sage: A.vertices()
             ((-2/3, 1/3), (-1/3, -1/3), (0, -1), (0, 0), (1/3, -2/3), (2/3, -1/3))
-            sage: point2d(A.vertices(), size=20) + A.plot()                             # needs sage.plot
+            sage: point2d(A.vertices(), size=20) + A.plot()                             # needs sage.plot sage.symbolic
             Graphics object consisting of 7 graphics primitives
 
             sage: H.<x,y> = HyperplaneArrangements(QQ)
