@@ -453,7 +453,7 @@ class StandardRibbonShapedTableaux_shape(StandardRibbonShapedTableaux):
 
         EXAMPLES::
 
-            sage: [t for t in StandardRibbonShapedTableaux([2,2])]                      # needs sage.graphs
+            sage: [t for t in StandardRibbonShapedTableaux([2,2])]                      # needs sage.graphs sage.modules
             [[[None, 1, 3], [2, 4]],
              [[None, 1, 2], [3, 4]],
              [[None, 2, 3], [1, 4]],

@@ -6469,7 +6469,7 @@ class Partitions(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
-            sage: [x for x in reversed(Partitions(4))]
+            sage: [x for x in reversed(Partitions(4))]                                  # needs sage.libs.flint
             [[1, 1, 1, 1], [2, 1, 1], [2, 2], [3, 1], [4]]
         """
         if not self.is_finite():
@@ -7041,7 +7041,7 @@ class Partitions_n(Partitions):
 
         TESTS::
 
-            sage: TestSuite(  Partitions(5) ).run()
+            sage: TestSuite(  Partitions(5) ).run()                                     # needs sage.libs.flint
         """
         Partitions.__init__(self)
         self.n = n

@@ -775,7 +775,7 @@ class LinearExtensionsOfPoset(UniqueRepresentation, Parent):
 
             sage: P = Poset(([1,2,3,4], [[1,3],[1,4],[2,3]]), linear_extension=True, facade=True)
             sage: L = P.linear_extensions()
-            sage: G = L.markov_chain_digraph(labeling='source'); G
+            sage: G = L.markov_chain_digraph(labeling='source'); G                      # needs sage.modules
             Looped multi-digraph on 5 vertices
         """
         L = sorted(self)

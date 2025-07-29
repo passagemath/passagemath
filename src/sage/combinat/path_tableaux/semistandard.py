@@ -137,7 +137,7 @@ class SemistandardPathTableau(PathTableau):
         [(), (5/2,), (7/2, 2)]
 
         sage: path_tableaux.SemistandardPathTableau([[], [2.5], [3.5,2]])
-        [(), (2.50000000000000,), (3.50000000000000, 2)]
+        [(), (2.5...,), (3.5..., 2)]
     """
 
     @staticmethod

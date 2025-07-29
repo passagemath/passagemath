@@ -194,7 +194,7 @@ class CycleSpecies(GenericCombinatorialSpecies, UniqueRepresentation):
             sage: P = species.CycleSpecies()
             sage: g = P.generating_series(RR)
             sage: g[0:3]
-            [0.000000000000000, 1.00000000000000, 0.500000000000000]
+            [0.0..., 1.0..., 0.5...]
         """
         if n:
             return self._weight * base_ring.one() / n
@@ -229,7 +229,7 @@ class CycleSpecies(GenericCombinatorialSpecies, UniqueRepresentation):
             sage: P = species.CycleSpecies()
             sage: g = P.isotype_generating_series(RR)
             sage: g[0:3]
-            [0.000000000000000, 1.00000000000000, 1.00000000000000]
+            [0.0..., 1.0..., 1.0...]
         """
         if n:
             return self._weight * base_ring.one()
