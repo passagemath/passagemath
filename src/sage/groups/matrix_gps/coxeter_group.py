@@ -256,7 +256,7 @@ class CoxeterMatrixGroup(UniqueRepresentation, FinitelyGeneratedMatrixGroup_gene
             sage: CoxeterGroup(['D',4], base_ring=QQ).category()
             Category of finite irreducible Coxeter groups
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: CoxeterGroup(['H',4], base_ring=QQbar).category()
             Category of finite irreducible Coxeter groups
             sage: F = CoxeterGroups().Finite()
