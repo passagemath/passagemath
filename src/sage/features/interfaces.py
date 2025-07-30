@@ -71,7 +71,7 @@ class InterfaceFeature(Feature):
             sage: from sage.features.interfaces import InterfaceFeature
             sage: from sage.interfaces.sage0 import Sage
             sage: f = InterfaceFeature("sage0", "sage.interfaces.sage0")
-            sage: f.is_present()
+            sage: f.is_present()                                                        # needs sage.all
             FeatureTestResult('sage0', True)
         """
         result = self.module.is_present()
