@@ -56,12 +56,16 @@ done
       if [ -f "$spkg"/version_requirements.txt -a -d "$spkg"/src ]; then
           ( echo "# This file is updated on every release by the update-version script"
             # Normalize the package name to PyPI convention (dashes, not underscores)
+            suffix=
             case "$spkg" in
                 sagelib)
                     pkg=passagemath-standard;;
                 sagemath*)
                     pkg=${spkg#sagemath_}
                     pkg=passagemath-${pkg//_/-};;
+                sage_conf)
+                    pkg=passagemath-conf
+                    suffix=" ; sys_platform != 'win32'";;
                 sage*)
                     pkg=${spkg#sage_}
                     pkg=passagemath-${pkg//_/-};;
@@ -75,12 +79,12 @@ done
             case "$version" in
                 *a*|*b*|*rc*|*dev*)
                     # pin exactly
-                    echo "$pkg == $version"
+                    echo "$pkg == $version$suffix"
                     ;;
                 *)
                     # ~= asks for a compatible release. https://peps.python.org/pep-0440/#compatible-release
                     # we append .0, thus pinning the micro release
-                    echo "$pkg ~= $version.0"
+                    echo "$pkg ~= $version.0$suffix"
                     ;;
             esac
           ) > "$spkg"/version_requirements.txt
