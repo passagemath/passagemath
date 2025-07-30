@@ -3,10 +3,10 @@
         "ntests": 9
     },
     "sage.doctest.external": {
-        "ntests": 41
+        "ntests": 40
     },
     "sage.doctest.fixtures": {
-        "ntests": 58
+        "ntests": 55
     },
     "sage.doctest.forker": {
         "failed": true,
@@ -25,12 +25,13 @@
     },
     "sage.doctest.sources": {
         "failed": true,
-        "ntests": 341
+        "ntests": 343
     },
     "sage.doctest.test": {
         "ntests": 23
     },
     "sage.doctest.util": {
+        "failed": true,
         "ntests": 173
     },
     "sage.misc.sage_eval": {
@@ -84,18 +85,18 @@
     },
     "sage.repl.ipython_kernel.interact": {
         "failed": true,
-        "ntests": 35
+        "ntests": 33
     },
     "sage.repl.ipython_kernel.kernel": {
         "ntests": 12
     },
     "sage.repl.ipython_kernel.widgets": {
         "failed": true,
-        "ntests": 91
+        "ntests": 89
     },
     "sage.repl.ipython_kernel.widgets_sagenb": {
         "failed": true,
-        "ntests": 77
+        "ntests": 75
     },
     "sage.repl.ipython_tests": {
         "failed": true,
