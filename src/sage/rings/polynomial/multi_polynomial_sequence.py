@@ -165,7 +165,6 @@ Classes
 from sage.misc.persist import register_unpickle_override
 from sage.misc.cachefunc import cached_method
 from sage.misc.converting_dict import KeyConvertingDict
-from sage.misc.method_decorator import MethodDecorator
 from sage.rings.finite_rings.finite_field_base import FiniteField
 from sage.rings.finite_rings.finite_field_constructor import FiniteField as GF
 from sage.rings.infinity import Infinity
@@ -182,7 +181,9 @@ try:
         libsingular_gb_standard_options
 except ImportError:
     singular = None
-    singular_gb_standard_options = libsingular_gb_standard_options = MethodDecorator
+    def singular_gb_standard_options(func):
+        return func
+    libsingular_gb_standard_options = singular_gb_standard_options
 
 
 def is_PolynomialSequence(F):
