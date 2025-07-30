@@ -1249,7 +1249,7 @@ def hyperbolicity(G,
 
         sage: from sage.graphs.hyperbolicity import hyperbolicity
         sage: G = graphs.PetersenGraph()
-        sage: hyperbolicity(G, algorithm='CCL', approximation_factor=0.1)
+        sage: hyperbolicity(G, algorithm='CCL', approximation_factor=0.1)               # needs sage.rings.real_mpfr
         Traceback (most recent call last):
         ...
         ValueError: the approximation factor must be >= 1.0
