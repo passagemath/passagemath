@@ -1539,23 +1539,23 @@ class PolynomialSequence_generic(Sequence_generic):
             sage: R.<t>=QQ['t']
             sage: K.<x,y>=R.fraction_field()['x,y']
             sage: I=t*x*K
-            sage: I.basis.reduced()
+            sage: I.basis.reduced()                                                     # needs sage.libs.singular
             [x]
 
         The interreduced basis of 0 is 0::
 
             sage: P.<x,y,z> = GF(2)[]
-            sage: Sequence([P(0)]).reduced()
+            sage: Sequence([P(0)]).reduced()                                            # needs sage.libs.singular
             [0]
 
         Leading coefficients are reduced to 1::
 
             sage: P.<x,y> = QQ[]
-            sage: Sequence([2*x,y]).reduced()
+            sage: Sequence([2*x,y]).reduced()                                           # needs sage.libs.singular
             [x, y]
 
             sage: P.<x,y> = CC[]                                                        # needs sage.rings.real_mpfr
-            sage: Sequence([2*x,y]).reduced()
+            sage: Sequence([2*x,y]).reduced()                                           # needs sage.libs.singular sage.rings.real_mpfr
             [x, y]
 
         ALGORITHM:

@@ -406,7 +406,7 @@ class MPolynomialRing_polydict(MPolynomialRing_macaulay2_repr, PolynomialRing_si
         Check that :issue:`21999` is fixed::
 
             sage: R = QQbar['s,t']                                                      # needs sage.rings.number_field
-            sage: type(R({(1,2): 3}).coefficients()[0])
+            sage: type(R({(1,2): 3}).coefficients()[0])                                 # needs sage.rings.number_field
             <class 'sage.rings.qqbar.AlgebraicNumber'>
         """
         from sage.rings.polynomial.multi_polynomial_element import MPolynomial_polydict
