@@ -31,7 +31,7 @@ A lazy import that is marked as "at_startup" will print a message if
 it is actually resolved after the startup, so that the developer knows
 that (s)he can remove the flag::
 
-    sage: ZZ
+    sage: ZZ                                                                            # needs sage.all
     doctest:warning...
     UserWarning: Option ``at_startup=True`` for lazy import ZZ not needed anymore
     Integer Ring
