@@ -917,7 +917,7 @@ class Rings(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: QQ['x,y'].nilradical()
+                sage: QQ['x,y'].nilradical()                                                # needs sage.libs.singular
                 Ideal (0) of Multivariate Polynomial Ring in x, y over Rational Field
 
             .. SEEALSO::

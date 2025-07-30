@@ -49,6 +49,7 @@ Test that the signature is displayed even with ``binding=False``
 as long as ``embedsignature=True`` is set
 (unfortunately the type is not displayed, see ``sage_signature``)::
 
+    sage: # needs sage.misc.cython
     sage: shell.run_cell(r"""
     ....: %%cython
     ....: # cython: binding=False, embedsignature=True
