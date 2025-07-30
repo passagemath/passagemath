@@ -2,6 +2,7 @@
 
 import os
 import shlex
+import subprocess
 import sys
 
 from pathlib import Path
@@ -22,5 +23,4 @@ with InWheel(wheel, wheel):
 
     print(f'Running {command}')
     sys.stdout.flush()
-    if os.system(f"bash -c {shlex.quote(command)}") != 0:
-        sys.exit(1)
+    subprocess.run(["bash", "-c", command], check=True)
