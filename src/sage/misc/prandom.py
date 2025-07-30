@@ -72,7 +72,7 @@ def _pyrand():
         sage: from sage.misc.prandom import _pyrand
         sage: _pyrand()
         <...random.Random object at 0x...>
-        sage: _pyrand().getrandbits(10)
+        sage: _pyrand().getrandbits(int(10))
         114
     """
     return current_randstate().python_random()
@@ -91,7 +91,7 @@ def getrandbits(k):
         sage: getrandbits(4) in range(2^4)
         True
     """
-    return _pyrand().getrandbits(k)
+    return _pyrand().getrandbits(int(k))
 
 
 def randrange(start, stop=None, step=1):
