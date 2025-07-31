@@ -2354,7 +2354,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
     def two_sum_decomposition(self, A_rows, A_columns):
         r"""
-        Decompose the matrix into two children matrices using the two sum decomposition with specified indices.
+        Decompose the matrix into two child matrices using the two sum decomposition with specified indices.
 
         The input matrix `M` must have a 2-separation that can be reordered to look like
         `M = \begin{bmatrix} A & B \\ C & D \end{bmatrix}`,
@@ -2568,7 +2568,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
     def delta_sum_decomposition(self, A_rows, A_columns):
         r"""
-        Decompose the matrix into two children matrices using
+        Decompose the matrix into two child matrices using
         the `\Delta`-sum decomposition with specified indices.
 
         Let `M` denote the matrix given by ``self``. Then
@@ -2769,7 +2769,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
     def three_sum_decomposition(self, first_rows, first_columns,
                                 special_rows=None, special_columns=None):
         r"""
-        Decompose the matrix into two children matrices using the 3-sum decomposition with specified sepa.
+        Decompose the matrix into two child matrices using the 3-sum decomposition with specified sepa.
 
         Let `M` denote the matrix given by ``three_sum_mat``. Then
 
@@ -3091,7 +3091,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
     def y_sum_decomposition(self, A_rows, A_columns):
         r"""
-        Decompose the matrix into two children matrices using
+        Decompose the matrix into two child matrices using
         the Y-sum decomposition with specified indices.
 
         Let `M` denote the matrix given by ``self``. Then
