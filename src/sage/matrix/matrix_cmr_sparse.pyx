@@ -5242,7 +5242,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             ....:                           certificate=True)
             sage: result, certificate
             (False, (OneSumNode (6×14) with 2 children, NotImplemented))
-            sage: certificate[0].child_indices()
+            sage: certificate[0].child_keys()
             (((0, 1, 2), (0, 4, 5, 6, 2, 3, 1)), ((3, 4, 5), (7, 11, 12, 13, 9, 10, 8)))
             sage: unicode_art(certificate[0])  # random (whether the left or the right branch has been followed)
             ╭OneSumNode (6×14) with 2 children╮
