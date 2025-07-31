@@ -1124,10 +1124,10 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         `
         is totally unimodular
         (otherwise, ``RuntimeError("Inconsistent pieces of input")`` is raised).
-        The columns ``first_special_columns[0]`` and
+        The indices ``first_special_columns[0]`` and
         ``first_special_columns[1]`` indicate the columns of `M_1` that
         shall correspond to `C_{\star,k}` and `C_{\star,\ell}`, respectively.
-        Similarly, the rows ``second_special_rows[1]`` and
+        Similarly, the indices ``second_special_rows[1]`` and
         ``second_special_rows[2]`` indicate the rows of `M_2` that shall
         correspond to `C_{i,\star}` and `C_{j,\star}`, respectively.
 
@@ -2807,9 +2807,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
             C_{j,k} & C_{j,\ell} & \beta
             \end{bmatrix}
 
-        is totally unimodular. The columns ``first_special_columns[0]`` and
+        is totally unimodular. The indices ``first_special_columns[0]`` and
         ``first_special_columns[1]`` indicate the columns of `M_1` that shall correspond to `C_{\star,k}` and
-        `C_{\star,\ell}`, respectively. Similarly, the rows ``second_special_rows[1]`` and ``second_special_rows[2]``
+        `C_{\star,\ell}`, respectively. Similarly, the indices ``second_special_rows[1]`` and ``second_special_rows[2]``
         indicate the rows of `M_2` that shall correspond to `C_{i,\star}` and `C_{j,\star}`, respectively.
 
         The value of `\beta \in \{-1,+1\}` must be so that there exists a singular submatrix of `M_1` with exactly two nonzeros per row and per column that covers the bottom-right `\beta`-entry.
@@ -3564,9 +3564,9 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         is totally unimodular.
 
-        The columns ``first_intersection_columns`` indicate the columns of `M_1` that
+        The indices in ``first_intersection_columns`` indicate the columns of `M_1` that
         shall correspond to `C_{\star,k}` and `C_{\star,\ell}`, respectively.
-        Similarly, the rows ``second_intersection_rows`` indicate the rows of `M_2` that shall
+        Similarly, the indices in ``second_intersection_rows`` indicate the rows of `M_2` that shall
         correspond to `C_{i,\star}` and `C_{j,\star}`, respectively.
 
         The value of `\beta \in \{-1,+1\}` must be so that
@@ -3906,7 +3906,7 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         - ``second_rows`` -- the row indices of `b^T` in `M_2`
         - ``second_column`` -- the column index of `d`  in `M_2`
         - ``sign_verify`` -- boolean (default: ``True``);
-            whether to check the sign consistency of `\varepsilon`.
+          whether to check the sign consistency of `\varepsilon`.
 
         OUTPUT: boolean, or (boolean, string)
 
