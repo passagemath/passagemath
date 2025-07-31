@@ -1128,9 +1128,16 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: result, certificate
                 (True,
                  (Digraph on 10 vertices,
-                  {0: (8, 7), 1: (1, 29), 2: (34, 2), 3: (41, 7)},
-                  {'a': (8, 22), 'b': (22, 29), 'c': (34, 0), 'd': (41, 2), 'e': (8, 7),
-                   'f': (7, 8), 'g': (0, 0), 'h': (7, 8), 'i': (36, 37)}))
+                  {'a': (8, 7),
+                   'b': (1, 29),
+                   'c': (34, 2),
+                   'd': (41, 7),
+                   'e': (7, 3),
+                   'f': (22, 0),
+                   'g': (3, 0),
+                   'h': (3, 1),
+                   'i': (2, 1)},
+                  {0: (8, 22), 1: (22, 29), 2: (34, 0), 3: (41, 2)}))
             """
             try:
                 matrix = self._matrix_cmr()
