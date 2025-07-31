@@ -5155,8 +5155,8 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
 
         if <bint> result:
             sage_digraph = _sage_digraph(digraph, arcs_reversed)
-            sage_forest_arcs = _sage_arcs(digraph, forest_arcs, arcs_reversed, self.ncols(), row_keys)
-            sage_coforest_arcs = _sage_arcs(digraph, coforest_arcs, arcs_reversed, self.nrows(), column_keys)
+            sage_forest_arcs = _sage_arcs(digraph, forest_arcs, arcs_reversed, self.ncols(), column_keys)
+            sage_coforest_arcs = _sage_arcs(digraph, coforest_arcs, arcs_reversed, self.nrows(), row_keys)
             return True, (sage_digraph, sage_forest_arcs, sage_coforest_arcs)
 
         return False, NotImplemented  # submatrix TBD
