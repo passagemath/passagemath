@@ -3025,8 +3025,8 @@ cdef class ThreeSumNode(SumNode):
                                 for i in range(child1_ncols - 1))
 
         row1_index = first_special_rows[0]
-        extra_column_index = first_special_columns[2]
-        CMR_CALL(CMRchrmatFindEntry(mat1, row1_index, extra_column_index, &index1))
+        extra_column = first_special_columns[2]
+        CMR_CALL(CMRchrmatFindEntry(mat1, row1_index, extra_column, &index1))
         if index1 == SIZE_MAX:
             eps1 = Integer(0)
         else:
@@ -3034,11 +3034,11 @@ cdef class ThreeSumNode(SumNode):
         if eps1 != 1:
             raise ValueError(f"First child in the Three Sum "
                              f"has 1 in the entry "
-                             f"row {row1_index} and column {extra_column_index} "
+                             f"row {row1_index} and column {extra_column} "
                              f"but got {eps1}")
 
         row2_index = first_special_rows[1]
-        CMR_CALL(CMRchrmatFindEntry(mat1, row2_index, extra_column_index, &index2))
+        CMR_CALL(CMRchrmatFindEntry(mat1, row2_index, extra_column, &index2))
         if index2 == SIZE_MAX:
             eps2 = Integer(0)
         else:
@@ -3046,7 +3046,7 @@ cdef class ThreeSumNode(SumNode):
         if eps2 != 1 and eps2 != -1:
             raise ValueError(f"First child in the Three Sum "
                              f"has 1 or -1 in the entry "
-                             f"row {row2_index} and column {extra_column_index} "
+                             f"row {row2_index} and column {extra_column} "
                              f"but got {eps2}")
 
         extra_key = ElementKey((eps1, child1_row_keys[row1_index],
@@ -3068,8 +3068,8 @@ cdef class ThreeSumNode(SumNode):
                                     for i in range(child2_ncols))
 
         column1_index = second_special_columns[0]
-        extra_row_index = second_special_rows[0]
-        CMR_CALL(CMRchrmatFindEntry(mat2, extra_row_index, column1_index, &index1))
+        extra_row = second_special_rows[0]
+        CMR_CALL(CMRchrmatFindEntry(mat2, extra_row, column1_index, &index1))
         if index1 == SIZE_MAX:
             eps1 = Integer(0)
         else:
@@ -3077,10 +3077,10 @@ cdef class ThreeSumNode(SumNode):
         if eps1 != 1 and eps1 != -1:
             raise ValueError(f"Second child in the Three Sum "
                              f"has 1 or -1 in the entry "
-                             f"row {extra_row_index} and column {column1_index} "
+                             f"row {extra_row} and column {column1_index} "
                              f"but got {eps1}")
         column2_index = second_special_columns[1]
-        CMR_CALL(CMRchrmatFindEntry(mat2, extra_row_index, column2_index, &index2))
+        CMR_CALL(CMRchrmatFindEntry(mat2, extra_row, column2_index, &index2))
         if index2 == SIZE_MAX:
             eps2 = Integer(0)
         else:
@@ -3088,7 +3088,7 @@ cdef class ThreeSumNode(SumNode):
         if eps2 != 1:
             raise ValueError(f"Second child in the Three Sum "
                              f"has 1 in the entry "
-                             f"row {extra_row_index} and column {column2_index} "
+                             f"row {extra_row} and column {column2_index} "
                              f"but got {eps2}")
 
         extra_key = ElementKey((eps1, child2_column_keys[column1_index],
