@@ -916,8 +916,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             MS = MatrixSpace(self.base_ring(), M.nrows(), M.ncols(), sparse=True)
             return Matrix_cmr_chr_sparse(MS, M)
 
-        @lazy_attribute
-        def is_unimodular(self):
+        def is_unimodular(self, **kwds):
             r"""
             Return whether ``self`` is a unimodular morphism.
 
@@ -944,12 +943,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.is_unimodular
+                return matrix.is_unimodular(**kwds)
             except AttributeError:
-                return NotImplemented
+                raise NotImplementedError
 
-        @lazy_attribute
-        def is_strongly_unimodular(self):
+        def is_strongly_unimodular(self, **kwds):
             r"""
             Return whether ``self`` is a strongly unimodular morphism.
 
@@ -978,12 +976,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.is_strongly_unimodular
+                return matrix.is_strongly_unimodular(**kwds)
             except AttributeError:
-                return NotImplemented
+                raise NotImplementedError
 
-        @lazy_attribute
-        def equimodulus(self):
+        def equimodulus(self, **kwds):
             r"""
             Return the integer `k` such that ``self`` is equimodular with determinant gcd `k`.
 
@@ -995,12 +992,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.equimodulus
+                return matrix.equimodulus(**kwds)
             except AttributeError:
-                return NotImplemented
+                raise NotImplementedError
 
-        @lazy_attribute
-        def strong_equimodulus(self):
+        def strong_equimodulus(self, **kwds):
             r"""
             Return the integer `k` such that ``self`` is strongly equimodular with determinant gcd `k`.
 
@@ -1012,12 +1008,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.strong_equimodulus
+                return matrix.strong_equimodulus(**kwds)
             except AttributeError:
-                return NotImplemented
+                raise NotImplementedError
 
-        @lazy_attribute
-        def is_k_equimodular(self):
+        def is_k_equimodular(self, k, **kwds):
             r"""
             Return whether ``self`` is an equimodular morphism with determinant gcd `k`.
 
@@ -1046,12 +1041,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.is_k_equimodular
+                return matrix.is_k_equimodular(k, **kwds)
             except AttributeError:
-                return NotImplemented
+                raise NotImplementedError
 
-        @lazy_attribute
-        def is_strongly_k_equimodular(self):
+        def is_strongly_k_equimodular(self, k, **kwds):
             r"""
             Return whether ``self`` is a strongly equimodular morphism with determinant gcd `k`.
 
@@ -1086,9 +1080,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.is_strongly_k_equimodular
+                return matrix.is_strongly_k_equimodular(k, **kwds)
             except AttributeError:
-                return NotImplemented
+                raise NotImplementedError
 
         def _wrapped_method_with_certificate(self, matrix_method):
 
@@ -1104,8 +1098,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                                      **kwds)
             return wrapper
 
-        @lazy_attribute
-        def is_conetwork_matrix(self):
+        def is_conetwork_matrix(self, **kwds):
             r"""
             Return whether the matrix of ``self`` is a conetwork matrix.
 
@@ -1144,12 +1137,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return self._wrapped_method_with_certificate(matrix.is_conetwork_matrix)
+                return self._wrapped_method_with_certificate(matrix.is_conetwork_matrix)(**kwds)
             except AttributeError:
-                return NotImplemented
+                raise NotImplementedError
 
-        @lazy_attribute
-        def is_network_matrix(self):
+        def is_network_matrix(self, **kwds):
             r"""
             Return whether the matrix of ``self`` is a network matrix.
 
@@ -1190,12 +1182,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return self._wrapped_method_with_certificate(matrix.is_network_matrix)
+                return self._wrapped_method_with_certificate(matrix.is_network_matrix)(**kwds)
             except AttributeError:
-                return NotImplemented
+                raise NotImplementedError
 
-        @lazy_attribute
-        def is_totally_unimodular(self):
+        def is_totally_unimodular(self, **kwds):
             r"""
             Return whether the matrix of ``self`` is totally unimodular.
 
@@ -1226,9 +1217,9 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return self._wrapped_method_with_certificate(matrix.is_totally_unimodular)
+                return self._wrapped_method_with_certificate(matrix.is_totally_unimodular)(**kwds)
             except AttributeError:
-                return NotImplemented
+                raise NotImplementedError
 
     class Homsets(HomsetsCategory):
 
