@@ -212,7 +212,7 @@ jobs:
       CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.14' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD_WINDOWS: |
-        pip install delvewheel && msys2 -c "set -x; cat constraints.txt && (echo passagemath-conf @ file:///${GITHUB_WORKSPACE}/pkgs/sage-conf && echo passagemath-setup @ file:///${GITHUB_WORKSPACE}/pkgs/sage-setup && echo passagemath-environment @ file:///${GITHUB_WORKSPACE}/pkgs/sagemath-environment) > constraints.txt && cat constraints.txt"
+        msys2 -c "set -x; cat constraints.txt && (echo passagemath-conf @ file:///${GITHUB_WORKSPACE}/pkgs/sage-conf && echo passagemath-setup @ file:///${GITHUB_WORKSPACE}/pkgs/sage-setup && echo passagemath-environment @ file:///${GITHUB_WORKSPACE}/pkgs/sagemath-environment) > constraints.txt && cat constraints.txt" && pip install delvewheel auditwheel passagemath-conf
       # Environment during wheel build
       # PYTHONUTF8=1 is for delvewheel
       CIBW_ENVIRONMENT: >-
@@ -228,7 +228,7 @@ jobs:
         PIP_FIND_LINKS=${GITHUB_WORKSPACE}\\wheelhouse' '${GITHUB_WORKSPACE}\\dist
         SAGE_NUM_THREADS=6
         PYTHONUTF8=1
-      CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: "delvewheel repair -vv --custom-patch -w {dest_dir} {wheel}"
+      CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: "bash tools/cibw_repair_wheel_command_windows.sh {wheel} {dest_dir}"
       #
       CIBW_PLATFORM: windows
     steps:
