@@ -201,6 +201,7 @@ jobs:
         rw
         cddlib
         graphs
+        flint
         planarity
         cliquer
         libhomfly
@@ -211,8 +212,10 @@ jobs:
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
       CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.14' }}
       # Run before wheel build
-      CIBW_BEFORE_BUILD_WINDOWS: |
-        pip install delvewheel && msys2 -c "set -x; cat constraints.txt && (echo passagemath-conf @ file:///${GITHUB_WORKSPACE}/pkgs/sage-conf && echo passagemath-setup @ file:///${GITHUB_WORKSPACE}/pkgs/sage-setup && echo passagemath-environment @ file:///${GITHUB_WORKSPACE}/pkgs/sagemath-environment) > constraints.txt && cat constraints.txt"
+      CIBW_BEFORE_BUILD_WINDOWS: >-
+        pip install delvewheel
+        && pip install --config-settings setup-args="--vsenv" cysignals
+        && msys2 -c "set -x; cat constraints.txt && (echo passagemath-conf @ file:///${GITHUB_WORKSPACE}/pkgs/sage-conf && echo passagemath-setup @ file:///${GITHUB_WORKSPACE}/pkgs/sage-setup && echo passagemath-environment @ file:///${GITHUB_WORKSPACE}/pkgs/sagemath-environment) > constraints.txt && cat constraints.txt"
       # Environment during wheel build
       # PYTHONUTF8=1 is for delvewheel
       CIBW_ENVIRONMENT: >-
@@ -457,6 +460,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_cmr
 
+      - name: sagemath-flint
+        id:   sagemath-flint
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_flint
+
 
       - uses: actions/upload-artifact@v4
         if:   always()
@@ -514,6 +523,7 @@ jobs:
          'sagemath-cliquer',
          'sagemath-cmr',
          'sagemath-combinat',
+         'sagemath-flint',
          'sagemath-glpk',
          'sagemath-graphs',
          'sagemath-homfly',
