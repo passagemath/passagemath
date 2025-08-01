@@ -201,6 +201,7 @@ jobs:
         rw
         cddlib
         graphs
+        flint
         planarity
         cliquer
         libhomfly
@@ -457,6 +458,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_cmr
 
+      - name: sagemath-flint
+        id:   sagemath-flint
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_flint
+
 
       - uses: actions/upload-artifact@v4
         if:   always()
@@ -514,6 +521,7 @@ jobs:
          'sagemath-cliquer',
          'sagemath-cmr',
          'sagemath-combinat',
+         'sagemath-flint',
          'sagemath-glpk',
          'sagemath-graphs',
          'sagemath-homfly',
