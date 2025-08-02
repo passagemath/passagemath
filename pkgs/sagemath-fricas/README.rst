@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -62,9 +62,9 @@ algebra system.
 What is included
 ----------------
 
-- `Python interface to FriCAS <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/fricas.html>`_
+- `Python interface to FriCAS <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/fricas.html>`_
 
-- Raw access to the FriCAS executable from Python using `sage.features.fricas <https://doc.sagemath.org/html/en/reference/spkg/sage/features/fricas.html>`_
+- Raw access to the FriCAS executable from Python using `sage.features.fricas <https://passagemath.org/docs/latest/html/en/reference/spkg/sage/features/fricas.html>`_
 
 - Binary wheels on PyPI contain prebuilt copies of FriCAS.
 

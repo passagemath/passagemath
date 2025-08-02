@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -64,7 +64,7 @@ Philipp Klaus Krause, which calculates rank width and rank decompositions.
 What is included
 ----------------
 
-- `Cython interface to rw <https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/graph_decompositions/rankwidth.html>`_
+- `Cython interface to rw <https://passagemath.org/docs/latest/html/en/reference/graphs/sage/graphs/graph_decompositions/rankwidth.html>`_
 
 
 Examples

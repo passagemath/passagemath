@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -72,10 +72,10 @@ When building from source, development packages of `gmp`, `mpfr`, and `mpc` are 
 Documentation
 -------------
 
-* `Categories <https://doc.sagemath.org/html/en/reference/categories/index.html>`_
+* `Categories <https://passagemath.org/docs/latest/html/en/reference/categories/index.html>`_
 
-* `Structure <https://doc.sagemath.org/html/en/reference/structure/index.html>`_
+* `Structure <https://passagemath.org/docs/latest/html/en/reference/structure/index.html>`_
 
-* `Coercion <https://doc.sagemath.org/html/en/reference/coercion/index.html>`_
+* `Coercion <https://passagemath.org/docs/latest/html/en/reference/coercion/index.html>`_
 
-* `Classes, Metaclasses <https://doc.sagemath.org/html/en/reference/misc/index.html#special-base-classes-decorators-etc>`_
+* `Classes, Metaclasses <https://passagemath.org/docs/latest/html/en/reference/misc/index.html#special-base-classes-decorators-etc>`_

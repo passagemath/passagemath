@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -62,19 +62,19 @@ with elliptic curves defined over the rational numbers.
 What is included
 ----------------
 
-- `Sage interface to Cremona’s eclib library (also known as mwrank) <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/interface.html>`_
+- `Sage interface to Cremona’s eclib library (also known as mwrank) <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/interface.html>`_
 
-- `Cython interface to Cremona’s eclib library (also known as mwrank) <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/mwrank.html>`_
+- `Cython interface to Cremona’s eclib library (also known as mwrank) <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/mwrank.html>`_
 
-- `Cremona matrices <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/mat.html>`_
+- `Cremona matrices <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/mat.html>`_
 
-- `Modular symbols using eclib newforms <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/newforms.html>`_
+- `Modular symbols using eclib newforms <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/newforms.html>`_
 
-- `Cremona modular symbols <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/homspace.html>`_
+- `Cremona modular symbols <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/homspace.html>`_
 
-- `Cremona modular symbols (constructor) <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/constructor.html>`_
+- `Cremona modular symbols (constructor) <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/constructor.html>`_
 
-- `Interface to the mwrank program <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/mwrank.html#module-sage.interfaces.mwrank>`_
+- `Interface to the mwrank program <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/mwrank.html#module-sage.interfaces.mwrank>`_
 
 
 Examples
@@ -96,7 +96,7 @@ Finding the installation location of the mwrank program::
     >>> Mwrank().absolute_filename()
     '.../bin/mwrank'
 
-Use with `sage.schemes.elliptic_curves <https://doc.sagemath.org/html/en/reference/arithmetic_curves/index.html#elliptic-curves>`_::
+Use with `sage.schemes.elliptic_curves <https://passagemath.org/docs/latest/html/en/reference/arithmetic_curves/index.html#elliptic-curves>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib[test]" ipython
 

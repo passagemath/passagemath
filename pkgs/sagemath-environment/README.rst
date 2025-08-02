@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -66,16 +66,16 @@ What is included
 ----------------
 
 * `sage` script for launching the Sage REPL and accessing various developer tools
-  (see `sage --help`, `Invoking Sage <https://doc.sagemath.org/html/en/reference/repl/options.html>`_).
+  (see `sage --help`, `Invoking Sage <https://passagemath.org/docs/latest/html/en/reference/repl/options.html>`_).
 
 * sage.env
 
-* `sage.features <https://doc.sagemath.org/html/en/reference/misc/sage/features.html>`_: Testing for features of the environment at runtime
+* `sage.features <https://passagemath.org/docs/latest/html/en/reference/misc/sage/features.html>`_: Testing for features of the environment at runtime
 
-* `sage.misc.package <https://doc.sagemath.org/html/en/reference/misc/sage/misc/package.html>`_: Listing packages of the Sage distribution
+* `sage.misc.package <https://passagemath.org/docs/latest/html/en/reference/misc/sage/misc/package.html>`_: Listing packages of the Sage distribution
 
-* `sage.misc.package_dir <https://doc.sagemath.org/html/en/reference/misc/sage/misc/package_dir.html>`_
+* `sage.misc.package_dir <https://passagemath.org/docs/latest/html/en/reference/misc/sage/misc/package_dir.html>`_
 
-* `sage.misc.temporary_file <https://doc.sagemath.org/html/en/reference/misc/sage/misc/temporary_file.html>`_
+* `sage.misc.temporary_file <https://passagemath.org/docs/latest/html/en/reference/misc/sage/misc/temporary_file.html>`_
 
-* `sage.misc.viewer <https://doc.sagemath.org/html/en/reference/misc/sage/misc/viewer.html>`_
+* `sage.misc.viewer <https://passagemath.org/docs/latest/html/en/reference/misc/sage/misc/viewer.html>`_

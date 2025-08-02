@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -78,9 +78,9 @@ Eric Dietz (GPL) https://web.archive.org/web/20121212175710/http://www.wrongway.
 What is included
 ----------------
 
-* `Interface <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/rubik.html#module-sage.interfaces.rubik>`_
+* `Interface <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/rubik.html#module-sage.interfaces.rubik>`_
 
-* `Features <https://doc.sagemath.org/html/en/reference/spkg/sage/features/rubiks.html#module-sage.features.rubiks>`_ (via passagemath-environment)
+* `Features <https://passagemath.org/docs/latest/html/en/reference/spkg/sage/features/rubiks.html#module-sage.features.rubiks>`_ (via passagemath-environment)
 
 * Binary wheels on PyPI contain prebuilt copies of rubiks executables.
 

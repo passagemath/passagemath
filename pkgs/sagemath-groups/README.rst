@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -60,6 +60,6 @@ This pip-installable package `passagemath-groups` a distribution of a part of th
 What is included
 ----------------
 
-* `Groups <https://doc.sagemath.org/html/en/reference/groups/index.html>`_
+* `Groups <https://passagemath.org/docs/latest/html/en/reference/groups/index.html>`_
 
 * see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-groups/MANIFEST.in

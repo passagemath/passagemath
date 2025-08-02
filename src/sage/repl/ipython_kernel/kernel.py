@@ -115,7 +115,7 @@ class SageKernel(IPythonKernel):
                 return f'http://127.0.0.1:{port}/{path}'
         else:
             def doc_url(path):
-                return f'https://doc.sagemath.org/{path}'
+                return f'https://passagemath.org/docs/latest/{path}'
 
         return [
             {

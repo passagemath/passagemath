@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -67,14 +67,14 @@ from Python and provides integration with the Sage Mathematical Software System.
 What is included
 ----------------
 
-- `Cython interface to GIAC <https://doc.sagemath.org/html/en/reference/libs/sage/libs/giac.html>`_
+- `Cython interface to GIAC <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/giac.html>`_
 
   The Cython interface is by Frederic Han and was previously available under the name
   `giacpy-sage <https://gitlab.math.univ-paris-diderot.fr/han/giacpy-sage/>`_.
   It was `merged into the Sage library <https://github.com/sagemath/sage/issues/29171>`_
   in 2020.
 
-- `Pexpect interface to GIAC <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/giac.html>`_
+- `Pexpect interface to GIAC <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/giac.html>`_
 
 - see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-giac/MANIFEST.in
 

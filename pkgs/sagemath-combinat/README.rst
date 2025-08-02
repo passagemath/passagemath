@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -60,11 +60,11 @@ This pip-installable source distribution ``passagemath-combinat`` is a distribut
 What is included
 ----------------
 
-* `Enumerative Combinatorics <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/enumerated_sets.html#sage-combinat-enumerated-sets>`_: `Partitions, Tableaux <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/catalog_partitions.html>`_
+* `Enumerative Combinatorics <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/enumerated_sets.html#sage-combinat-enumerated-sets>`_: `Partitions, Tableaux <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/catalog_partitions.html>`_
 
-* `Combinatorics on Words <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/words/all.html#sage-combinat-words-all>`_, `Free Monoids <https://doc.sagemath.org/html/en/reference/monoids/index.html>`_, `Automatic Semigroups <https://doc.sagemath.org/html/en/reference/monoids/sage/monoids/automatic_semigroup.html>`_
+* `Combinatorics on Words <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/words/all.html#sage-combinat-words-all>`_, `Free Monoids <https://passagemath.org/docs/latest/html/en/reference/monoids/index.html>`_, `Automatic Semigroups <https://passagemath.org/docs/latest/html/en/reference/monoids/sage/monoids/automatic_semigroup.html>`_
 
-* `Symmetric Functions <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/sf/all.html#sage-combinat-sf-all>`_, other `Algebras with combinatorial bases <https://doc.sagemath.org/html/en/reference/algebras/index.html>`_
+* `Symmetric Functions <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/sf/all.html#sage-combinat-sf-all>`_, other `Algebras with combinatorial bases <https://passagemath.org/docs/latest/html/en/reference/algebras/index.html>`_
 
 * see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-combinat/MANIFEST.in
 

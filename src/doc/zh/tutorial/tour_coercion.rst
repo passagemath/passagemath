@@ -11,7 +11,7 @@
 
 请注意，我们在这里只解释概念，不展示具体实现。
 面向实现的教程可以参见
-`Sage thematic tutorial <http://doc.sagemath.org/html/en/thematic_tutorials/coercion_and_categories.html>`_ 。
+`Sage thematic tutorial <http://passagemath.org/docs/latest/html/en/thematic_tutorials/coercion_and_categories.html>`_ 。
 
 元素
 --------
@@ -170,7 +170,7 @@ Sage 中也有转换和强制转换的概念。但 Sage 中的概念集中在 *�
 
 我们在这里给出一个相当简短的说明。
 详细描述和实现信息，请参阅参考手册中的强制转换章节以及
-`thematic tutorial <http://doc.sagemath.org/html/en/thematic_tutorials/coercion_and_categories.html>`_.
+`thematic tutorial <http://passagemath.org/docs/latest/html/en/thematic_tutorials/coercion_and_categories.html>`_.
 
 关于在 *不同* 环的元素上进行算术运算的可能性，有两种极端观点：
 
@@ -313,7 +313,7 @@ Sage 选择了一种折衷方案。如果 ``P1`` 和 ``P2`` 是父结构，``p1`
 然而，Sage 会尝试选择一个 *规范的* 共同父结构，使得看起来最自然（在我们的例子中是 ``QQ['x']``）。
 如果几个潜在的共同父结构看起来同样自然，为了获得可靠的结果，Sage *不会* 随机选择其中一个。
 该选择所基于的机制在
-`thematic tutorial <http://doc.sagemath.org/html/en/thematic_tutorials/coercion_and_categories.html>`_
+`thematic tutorial <http://passagemath.org/docs/latest/html/en/thematic_tutorials/coercion_and_categories.html>`_
 中进行了解释。
 
 以下示例不会发生强制转换到共同父结构：

@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -65,6 +65,6 @@ and doctester.
 What is included
 ----------------
 
-* `Doctesting Framework <https://doc.sagemath.org/html/en/reference/doctest/index.html>`_
+* `Doctesting Framework <https://passagemath.org/docs/latest/html/en/reference/doctest/index.html>`_
 
-* `The Sage REPL <https://doc.sagemath.org/html/en/reference/repl/sage/repl/index.html>`_
+* `The Sage REPL <https://passagemath.org/docs/latest/html/en/reference/repl/sage/repl/index.html>`_

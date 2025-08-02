@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -62,7 +62,7 @@ algorithm for finding cliques in an arbitrary weighted graph by Patric Östergå
 What is included
 ----------------
 
-* `Cython interface to cliquer <https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/cliquer.html>`_
+* `Cython interface to cliquer <https://passagemath.org/docs/latest/html/en/reference/graphs/sage/graphs/cliquer.html>`_
 
 
 Examples

@@ -24,7 +24,7 @@ and Mathematical Software Communities." It was created in October 2024 with the 
 * developing a [native Windows port](https://github.com/passagemath/passagemath/issues/1044)
   - passagemath 10.6.1 publishes the first pip-installable packages for native Windows on x86_64.
 
-[Full documentation](https://doc.sagemath.org/html/en/index.html) is available online.
+[Full documentation](https://passagemath.org/docs/latest/html/en/index.html) is available online.
 
 
 passagemath community
@@ -185,7 +185,7 @@ This makes technical sense because the dependencies will be localized to this di
 
 [![PyPI: passagemath-repl](https://img.shields.io/pypi/v/passagemath-repl.svg?label=passagemath-repl)](https://pypi.python.org/pypi/passagemath-repl) The top-level interactive environment with the preparser that defines the surface language of Sage. This distribution also includes the doctesting facilities (`sage -t`), as the doctests are written in the surface language. (Available on Windows.)
 
-[![PyPI: passagemath-plot](https://img.shields.io/pypi/v/passagemath-plot.svg?label=passagemath-plot)](https://pypi.python.org/pypi/passagemath-plot) Plotting facilities, depending on [matplotlib](https://matplotlib.org) for 2D graphics, [three.js](https://doc.sagemath.org/html/en/reference/spkg/threejs.html) for 3D graphics. (Available on Windows.)
+[![PyPI: passagemath-plot](https://img.shields.io/pypi/v/passagemath-plot.svg?label=passagemath-plot)](https://pypi.python.org/pypi/passagemath-plot) Plotting facilities, depending on [matplotlib](https://matplotlib.org) for 2D graphics, [three.js](https://passagemath.org/docs/latest/html/en/reference/spkg/threejs.html) for 3D graphics. (Available on Windows.)
 
 [![PyPI: passagemath-standard-no-symbolics](https://img.shields.io/pypi/v/passagemath-standard-no-symbolics.svg?label=passagemath-standard-no-symbolics)](https://pypi.python.org/pypi/passagemath-standard-no-symbolics) Ideally an empty meta-package that depends on everything that is not in passagemath-symbolics; as a catch-all mechanism, this distribution ships all modules that do not carry a `# sage_setup: distribution = ...` directive.
 
@@ -253,7 +253,7 @@ Preparation for Building from Source
 The instructions cover all of Linux, macOS, and WSL.
 
 More details, providing a background for these instructions, can be found
-in the section [Install from Source Code](https://doc.sagemath.org/html/en/installation/source.html)
+in the section [Install from Source Code](https://passagemath.org/docs/latest/html/en/installation/source.html)
 in the Installation Guide.
 
 
@@ -309,7 +309,7 @@ in the Installation Guide.
                         https://github.com/passagemath/passagemath.git
 
       This will create the subdirectory `~/sage/passagemath`. (See the section
-      [Setting up git](https://doc.sagemath.org/html/en/developer/git_setup.html)
+      [Setting up git](https://passagemath.org/docs/latest/html/en/developer/git_setup.html)
       and the following sections in the Sage Developer's Guide
       for more information.)
 
@@ -327,7 +327,7 @@ in the Installation Guide.
 3.  Install system packages.
 
     Either refer for this to the [section on installation from
-    source](https://doc.sagemath.org/html/en/installation/source.html) in the
+    source](https://passagemath.org/docs/latest/html/en/installation/source.html) in the
     Sage Installation Manual for compilations of system packages
     that you can install.
 
@@ -370,7 +370,7 @@ in the Installation Guide.
     [opensuse.txt](build/pkgs/_prereq/distros/opensuse.txt),
     [slackware.txt](build/pkgs/_prereq/distros/slackware.txt), and
     [void.txt](build/pkgs/_prereq/distros/void.txt), or visit
-    https://doc.sagemath.org/html/en/reference/spkg/_prereq.html#spkg-prereq
+    https://passagemath.org/docs/latest/html/en/reference/spkg/_prereq.html#spkg-prereq
 
 5.  Optional: It is recommended that you have both LaTeX and
     the ImageMagick tools (e.g. the "convert" command) installed
@@ -379,7 +379,7 @@ in the Installation Guide.
 6.  Install the bootstrapping prerequisites. See the files in the folder
     [build/pkgs/_bootstrap/distros](build/pkgs/_bootstrap/distros), or
     visit
-    https://doc.sagemath.org/html/en/reference/spkg/_bootstrap.html#spkg-bootstrap
+    https://passagemath.org/docs/latest/html/en/reference/spkg/_bootstrap.html#spkg-bootstrap
 
 7.  Sanitize the build environment. Use the command
 
@@ -562,7 +562,7 @@ Traditional Installation from Source as Sage-the-Distribution
 
     For an in-depth discussion of more environment variables for
     building Sage, see [the installation
-    guide](https://doc.sagemath.org/html/en/installation/source.html#environment-variables).
+    guide](https://passagemath.org/docs/latest/html/en/installation/source.html#environment-variables).
 
 12. Type `./configure`, followed by any options that you wish to use.
     For example, to build Sage with `gf2x` package supplied by Sage,
@@ -616,7 +616,7 @@ Traditional Installation from Source as Sage-the-Distribution
     If there are numerous failures, there was a serious problem with your build.
 
 17. Optional: If you want to build a local HTML version of the
-    [documentation](https://doc.sagemath.org/html/en/index.html), run
+    [documentation](https://passagemath.org/docs/latest/html/en/index.html), run
     `make doc-html`. After a successful build, it resides in the directory
     `local/share/doc/sage/html/`. You may want to bookmark it in your browser.
 
@@ -625,7 +625,7 @@ Traditional Installation from Source as Sage-the-Distribution
 
 19. Optional: Install optional packages of interest to you:
     get a list by typing  `./sage --optional` or by visiting the
-    [packages documentation page](https://doc.sagemath.org/html/en/reference/spkg/).
+    [packages documentation page](https://passagemath.org/docs/latest/html/en/reference/spkg/).
 
 20. Optional: Create a symlink to the installed `sage` script in a
     directory in your `PATH`, for example `/usr/local/bin/`. This will
@@ -640,7 +640,7 @@ Use With an Existing Jupyter Installation
 
 21. Optional: Set up SageMath as a Jupyter kernel in an existing Jupyter notebook
     or JupyterLab installation, as described in the section
-    [Launching SageMath](https://doc.sagemath.org/html/en/installation/launching.html)
+    [Launching SageMath](https://passagemath.org/docs/latest/html/en/installation/launching.html)
     in the Sage Installation Guide.
 
 Directory Layout
@@ -675,4 +675,4 @@ SAGE_ROOT                 Root directory (create by git clone)
 │   └── sage/             The Sage library source code
 └── VERSION.txt
 ```
-For more details see [our Developer's Guide](https://doc.sagemath.org/html/en/developer/coding_basics.html#files-and-directory-structure).
+For more details see [our Developer's Guide](https://passagemath.org/docs/latest/html/en/developer/coding_basics.html#files-and-directory-structure).

@@ -16,7 +16,7 @@ polares; gráficos de contorno e gráficos de campos vetoriais.
 Apresentamos alguns exemplos desses gráficos aqui. Para mais exemplos
 de gráficos com o Sage, veja :ref:`section-systems` e
 :ref:`section-maxima`, e também a documentação `Sage Constructions
-<http://doc.sagemath.org/html/en/constructions/>`_.
+<http://passagemath.org/docs/latest/html/en/constructions/>`_.
 
 Este comando produz um círculo amarelo de raio 1, centrado na origem.
 

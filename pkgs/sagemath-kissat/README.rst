@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -81,7 +81,7 @@ Finding the installation location of the kissat program::
     In [2]: Kissat().absolute_filename()
     Out[2]: '.../bin/kissat'
 
-Use with `sage.sat <https://doc.sagemath.org/html/en/reference/sat/index.html>`_::
+Use with `sage.sat <https://passagemath.org/docs/latest/html/en/reference/sat/index.html>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-kissat[test]" ipython
 

@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -64,11 +64,11 @@ and `4ti2 <https://github.com/4ti2/4ti2>`_
 What is included
 ----------------
 
-- `Python interface to LattE integrale programs <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/latte.html#module-sage.interfaces.latte>`_
+- `Python interface to LattE integrale programs <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/latte.html#module-sage.interfaces.latte>`_
 
-- `Python interface to 4ti2 programs <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/four_ti_2.html>`_
+- `Python interface to 4ti2 programs <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/four_ti_2.html>`_
 
-- Raw access to all executables from Python using `sage.features.latte <https://doc.sagemath.org/html/en/reference/spkg/sage/features/latte.html>`_ and `sage.features.four_ti_2 <https://doc.sagemath.org/html/en/reference/spkg/sage/features/four_ti_2.html>`_
+- Raw access to all executables from Python using `sage.features.latte <https://passagemath.org/docs/latest/html/en/reference/spkg/sage/features/latte.html>`_ and `sage.features.four_ti_2 <https://passagemath.org/docs/latest/html/en/reference/spkg/sage/features/four_ti_2.html>`_
 
 - The binary wheels published on PyPI include a prebuilt copy of
   LattE integrale and 4ti2.

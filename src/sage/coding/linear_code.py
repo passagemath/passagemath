@@ -99,10 +99,10 @@ Further references
 ------------------
 
 If you want to get started on Sage's linear codes library, see
-https://doc.sagemath.org/html/en/thematic_tutorials/coding_theory.html
+https://passagemath.org/docs/latest/html/en/thematic_tutorials/coding_theory.html
 
 If you want to learn more on the design of this library, see
-https://doc.sagemath.org/html/en/thematic_tutorials/structures_in_coding_theory.html
+https://passagemath.org/docs/latest/html/en/thematic_tutorials/structures_in_coding_theory.html
 
 REFERENCES:
 

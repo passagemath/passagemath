@@ -157,7 +157,7 @@ Now hit the start button or key and type the name you gave it. it should appear 
 ------------------------------------------------------------------------
 
 For further reading you can have a look at the other documents in the
-SageMath documentation at http://doc.sagemath.org/.
+SageMath documentation at http://passagemath.org/docs/latest/.
 
 
 .. _sec-launching-system-jupyter:

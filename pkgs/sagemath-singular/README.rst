@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -66,9 +66,9 @@ It also ships various modules of the Sage library that depend on Singular.
 What is included
 ----------------
 
-- `Cython interface to libSingular <https://doc.sagemath.org/html/en/reference/libs/index.html#libsingular>`_
+- `Cython interface to libSingular <https://passagemath.org/docs/latest/html/en/reference/libs/index.html#libsingular>`_
 
-- `pexpect interface to Singular <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/singular.html>`_
+- `pexpect interface to Singular <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/singular.html>`_
 
 - various other modules, see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-singular/MANIFEST.in
 

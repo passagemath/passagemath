@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -62,9 +62,9 @@ of the Elliptic Curve Method for integer factorization.
 What is included
 ----------------
 
-- Python interface to the ECM program <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/ecm.html#module-sage.interfaces.ecm>`_
+- Python interface to the ECM program <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/ecm.html#module-sage.interfaces.ecm>`_
 
-- Cython interface to the libecm library <https://doc.sagemath.org/html/en/reference/libs/sage/libs/libecm.html#module-sage.libs.libecm>`_
+- Cython interface to the libecm library <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/libecm.html#module-sage.libs.libecm>`_
 
 - The binary wheels published on PyPI include a prebuilt copy of GMP-ECM (executable and library).
 

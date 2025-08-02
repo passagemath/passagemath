@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -61,7 +61,7 @@ This pip-installable distribution ``passagemath-macaulay2`` provides an interfac
 What is included
 ----------------
 
-- `Python interface to Macaulay 2 <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/macaulay2.html>`_
+- `Python interface to Macaulay 2 <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/macaulay2.html>`_
 
 - The binary wheels published on PyPI include a prebuilt copy of Macaulay 2.
 

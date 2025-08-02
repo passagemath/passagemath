@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -61,9 +61,9 @@ distribution that provides modules that depend on the `GAP system <https://www.g
 What is included
 ----------------
 
-- `Cython interface to libgap <https://doc.sagemath.org/html/en/reference/libs/sage/libs/gap/libgap.html>`_
+- `Cython interface to libgap <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/gap/libgap.html>`_
 
-- `Pexpect interface to GAP <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/gap.html>`_
+- `Pexpect interface to GAP <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/gap.html>`_
 
 - numerous modules with build-time dependencies on GAP, see `MANIFEST <https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-gap/MANIFEST.in>`_
 

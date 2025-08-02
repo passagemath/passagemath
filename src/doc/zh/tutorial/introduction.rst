@@ -65,7 +65,7 @@ Python 初学者指南 [PyB]_ 列出了许多选择。如果你只是想快速�
 #. Sage 的预编译二进制版本（可以在 Sage 官网上找到）可能比源代码版本更容易和更快安装。只需解压文件并运行 ``sage``。
 
 #. 如果你想使用 SageTeX 包（允许你将 Sage 计算结果嵌入到 LaTeX 文件中），
-   你需要让 TeX 发行版识别 SageTeX。请参阅 `Sage 安装指南 <http://doc.sagemath.org/html/en/>`_
+   你需要让 TeX 发行版识别 SageTeX。请参阅 `Sage 安装指南 <http://passagemath.org/docs/latest/html/en/>`_
    中的“让 TeX 识别 SageTeX”章节（这个链接 `<../installation/index.html>`_ 会为你打开安装指南）。
    其实非常简单；你只需要设置一个环境变量或复制一个文件到 TeX 的搜索目录中。
 

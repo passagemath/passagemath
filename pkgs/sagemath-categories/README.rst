@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -68,23 +68,23 @@ libraries.
 What is included
 ----------------
 
-* `Structure <https://doc.sagemath.org/html/en/reference/structure/index.html>`_, `Coercion framework <https://doc.sagemath.org/html/en/reference/coercion/index.html>`_, `Base Classes, Metaclasses <https://doc.sagemath.org/html/en/reference/misc/index.html#special-base-classes-decorators-etc>`_
+* `Structure <https://passagemath.org/docs/latest/html/en/reference/structure/index.html>`_, `Coercion framework <https://passagemath.org/docs/latest/html/en/reference/coercion/index.html>`_, `Base Classes, Metaclasses <https://passagemath.org/docs/latest/html/en/reference/misc/index.html#special-base-classes-decorators-etc>`_
 
-* `Categories and functorial constructions <https://doc.sagemath.org/html/en/reference/categories/index.html>`_
+* `Categories and functorial constructions <https://passagemath.org/docs/latest/html/en/reference/categories/index.html>`_
 
-* `Sets <https://doc.sagemath.org/html/en/reference/sets/index.html>`_
+* `Sets <https://passagemath.org/docs/latest/html/en/reference/sets/index.html>`_
 
-* Basic Combinatorial and Data Structures: `Binary trees <https://doc.sagemath.org/html/en/reference/data_structures/sage/misc/binary_tree.html>`_, `Bitsets <https://doc.sagemath.org/html/en/reference/data_structures/sage/data_structures/bitset.html>`_, `Permutations <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/permutation.html>`_, Combinations
+* Basic Combinatorial and Data Structures: `Binary trees <https://passagemath.org/docs/latest/html/en/reference/data_structures/sage/misc/binary_tree.html>`_, `Bitsets <https://passagemath.org/docs/latest/html/en/reference/data_structures/sage/data_structures/bitset.html>`_, `Permutations <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/permutation.html>`_, Combinations
 
-* Basic Rings and Fields: `Integers, Rationals <https://doc.sagemath.org/html/en/reference/rings_standard/index.html>`_, `Double Precision Reals <https://doc.sagemath.org/html/en/reference/rings_numerical/sage/rings/real_double.html>`_, `Z/nZ <https://doc.sagemath.org/html/en/reference/finite_rings/sage/rings/finite_rings/integer_mod_ring.html>`_
+* Basic Rings and Fields: `Integers, Rationals <https://passagemath.org/docs/latest/html/en/reference/rings_standard/index.html>`_, `Double Precision Reals <https://passagemath.org/docs/latest/html/en/reference/rings_numerical/sage/rings/real_double.html>`_, `Z/nZ <https://passagemath.org/docs/latest/html/en/reference/finite_rings/sage/rings/finite_rings/integer_mod_ring.html>`_
 
-* `Commutative Polynomials <https://doc.sagemath.org/html/en/reference/polynomial_rings/index.html>`_, `Power Series and Laurent Series <https://doc.sagemath.org/html/en/reference/power_series/index.html>`_, `Rational Function Fields <https://doc.sagemath.org/html/en/reference/function_fields/index.html>`_
+* `Commutative Polynomials <https://passagemath.org/docs/latest/html/en/reference/polynomial_rings/index.html>`_, `Power Series and Laurent Series <https://passagemath.org/docs/latest/html/en/reference/power_series/index.html>`_, `Rational Function Fields <https://passagemath.org/docs/latest/html/en/reference/function_fields/index.html>`_
 
-* Arithmetic Functions, `Elementary and Special Functions <https://doc.sagemath.org/html/en/reference/functions/index.html>`_ as generic entry points
+* Arithmetic Functions, `Elementary and Special Functions <https://passagemath.org/docs/latest/html/en/reference/functions/index.html>`_ as generic entry points
 
-* Base classes for Groups, Rings, `Finite Fields <https://doc.sagemath.org/html/en/reference/finite_rings/sage/rings/finite_rings/finite_field_constructor.html>`_, `Number Fields <https://doc.sagemath.org/html/en/reference/number_fields/sage/rings/number_field/number_field_base.html>`_, `Schemes <https://doc.sagemath.org/html/en/reference/schemes/index.html>`_
+* Base classes for Groups, Rings, `Finite Fields <https://passagemath.org/docs/latest/html/en/reference/finite_rings/sage/rings/finite_rings/finite_field_constructor.html>`_, `Number Fields <https://passagemath.org/docs/latest/html/en/reference/number_fields/sage/rings/number_field/number_field_base.html>`_, `Schemes <https://passagemath.org/docs/latest/html/en/reference/schemes/index.html>`_
 
-* Facilities for `Parallel Computing <https://doc.sagemath.org/html/en/reference/parallel/index.html>`_, `Formatted Output <https://doc.sagemath.org/html/en/reference/misc/index.html#formatted-output>`_
+* Facilities for `Parallel Computing <https://passagemath.org/docs/latest/html/en/reference/parallel/index.html>`_, `Formatted Output <https://passagemath.org/docs/latest/html/en/reference/misc/index.html#formatted-output>`_
 
 Available in other distribution packages
 -----------------------------------------------

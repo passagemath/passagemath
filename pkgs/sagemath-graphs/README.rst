@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -62,23 +62,23 @@ It consists of over 170 first-party Python and Cython modules and uses the `Boos
 What is included
 ----------------
 
-* `Graph Theory <https://doc.sagemath.org/html/en/reference/graphs/index.html>`_
+* `Graph Theory <https://passagemath.org/docs/latest/html/en/reference/graphs/index.html>`_
 
-* `Trees <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/enumerated_sets.html#trees>`_
+* `Trees <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/enumerated_sets.html#trees>`_
 
-* `Posets <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/posets/all.html>`_
+* `Posets <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/posets/all.html>`_
 
-* `Abstract Complexes <https://doc.sagemath.org/html/en/reference/topology/index.html>`_
+* `Abstract Complexes <https://passagemath.org/docs/latest/html/en/reference/topology/index.html>`_
 
-* `Combinatorial Designs and Incidence Structure <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/designs/all.html>`_
+* `Combinatorial Designs and Incidence Structure <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/designs/all.html>`_
 
-* `Finite State Machines, Automata, Transducers <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/finite_state_machine.html>`_
+* `Finite State Machines, Automata, Transducers <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/finite_state_machine.html>`_
 
-* `Cluster Algebras and Quivers <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/cluster_algebra_quiver/all.html>`_
+* `Cluster Algebras and Quivers <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/cluster_algebra_quiver/all.html>`_
 
-* `Knot Theory <https://doc.sagemath.org/html/en/reference/knots/index.html>`_
+* `Knot Theory <https://passagemath.org/docs/latest/html/en/reference/knots/index.html>`_
 
-* `Sandpiles <https://doc.sagemath.org/html/en/reference/dynamics/sage/sandpiles/sandpile.html>`_
+* `Sandpiles <https://passagemath.org/docs/latest/html/en/reference/dynamics/sage/sandpiles/sandpile.html>`_
 
 * see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-graphs/MANIFEST.in
 

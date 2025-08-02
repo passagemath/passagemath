@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -83,7 +83,7 @@ Finding the installation location of an lrslib program::
     In [2]: LrsNash().absolute_filename()
     Out[2]: '/Users/mkoeppe/.local/pipx/.cache/db3f5a0e2996f81/lib/python3.11/site-packages/sage_wheels/bin/lrsnash'
 
-Use with `sage.game_theory <https://doc.sagemath.org/html/en/reference/game_theory/index.html>`_::
+Use with `sage.game_theory <https://passagemath.org/docs/latest/html/en/reference/game_theory/index.html>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-lrslib[test]" ipython
 

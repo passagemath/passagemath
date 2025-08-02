@@ -5,7 +5,7 @@ Sage kann viele zur elementaren Algebra und Analysis gehörende
 Probleme lösen. Zum Beispiel: Lösungen von Gleichungen finden,
 Differentiation, Integration, und Laplace-Transformationen
 berechnen. Lesen Sie die `Sage Constructions
-<http://doc.sagemath.org/html/en/constructions/>`_ Dokumentation um
+<http://passagemath.org/docs/latest/html/en/constructions/>`_ Dokumentation um
 weitere Beispiele zu finden.
 
 Lösen von Gleichungen

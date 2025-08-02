@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -63,7 +63,7 @@ oriented matroids by Jörg Rambau.
 What is included
 ----------------
 
-- Raw access to all executables from Python using `sage.features.topcom <https://doc.sagemath.org/html/en/reference/spkg/sage/features/topcom.html>`_
+- Raw access to all executables from Python using `sage.features.topcom <https://passagemath.org/docs/latest/html/en/reference/spkg/sage/features/topcom.html>`_
 
 - The binary wheels published on PyPI include a prebuilt copy of TOPCOM.
 
@@ -97,7 +97,7 @@ Finding the installation location of a TOPCOM program::
     In [2]: TOPCOMExecutable('points2allfinetriangs').absolute_filename()
     Out[2]: '/Users/mkoeppe/.local/pipx/.cache/cef1668ecbdb8cf/lib/python3.11/site-packages/sage_wheels/bin/points2allfinetriangs'
 
-Using `sage.geometry.triangulation.point_configuration <https://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/triangulation/point_configuration.html>`_::
+Using `sage.geometry.triangulation.point_configuration <https://passagemath.org/docs/latest/html/en/reference/discrete_geometry/sage/geometry/triangulation/point_configuration.html>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-topcom[test]" ipython
 

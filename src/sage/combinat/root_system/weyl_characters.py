@@ -91,7 +91,7 @@ class WeylCharacterRing(CombinatorialFreeModule):
     For more information, see the thematic tutorial *Lie Methods and
     Related Combinatorics in Sage*, available at:
 
-    https://doc.sagemath.org/html/en/thematic_tutorials/lie.html
+    https://passagemath.org/docs/latest/html/en/thematic_tutorials/lie.html
     """
     @staticmethod
     def __classcall__(cls, ct, base_ring=ZZ, prefix=None, style='lattice', k=None, conjugate=False, cyclotomic_order=None, fusion_labels=None, inject_variables=False):

@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -60,21 +60,21 @@ This pip-installable source distribution `sagemath-schemes` is an experimental d
 What is included
 ----------------
 
-* `Ideals and Varieties <https://doc.sagemath.org/html/en/reference/polynomial_rings/sage/rings/polynomial/multi_polynomial_ideal.html>`_
+* `Ideals and Varieties <https://passagemath.org/docs/latest/html/en/reference/polynomial_rings/sage/rings/polynomial/multi_polynomial_ideal.html>`_
 
-* `Schemes <https://doc.sagemath.org/html/en/reference/schemes/index.html>`_
+* `Schemes <https://passagemath.org/docs/latest/html/en/reference/schemes/index.html>`_
 
-* `Plane and Space Curves <https://doc.sagemath.org/html/en/reference/curves/index.html>`_
+* `Plane and Space Curves <https://passagemath.org/docs/latest/html/en/reference/curves/index.html>`_
 
-* `Elliptic and Hyperelliptic Curves <https://doc.sagemath.org/html/en/reference/arithmetic_curves/index.html>`_
+* `Elliptic and Hyperelliptic Curves <https://passagemath.org/docs/latest/html/en/reference/arithmetic_curves/index.html>`_
 
-* `Modular Forms <https://doc.sagemath.org/html/en/reference/modfrm/index.html>`_
+* `Modular Forms <https://passagemath.org/docs/latest/html/en/reference/modfrm/index.html>`_
 
-* `Modular Symbols <https://doc.sagemath.org/html/en/reference/modsym/index.html>`_
+* `Modular Symbols <https://passagemath.org/docs/latest/html/en/reference/modsym/index.html>`_
 
-* `Modular Abelian Varieties <https://doc.sagemath.org/html/en/reference/modabvar/index.html>`_
+* `Modular Abelian Varieties <https://passagemath.org/docs/latest/html/en/reference/modabvar/index.html>`_
 
-* `Arithmetic Dynamical Systems <https://doc.sagemath.org/html/en/reference/dynamics/index.html#arithmetic-dynamical-systems>`_
+* `Arithmetic Dynamical Systems <https://passagemath.org/docs/latest/html/en/reference/dynamics/index.html#arithmetic-dynamical-systems>`_
 
 
 Status

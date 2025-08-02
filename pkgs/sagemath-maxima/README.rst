@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -55,13 +55,13 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable distribution ``passagemath-maxima`` provides
-interfaces to `Maxima <https://doc.sagemath.org/html/en/reference/spkg/maxima.html>`_.
+interfaces to `Maxima <https://passagemath.org/docs/latest/html/en/reference/spkg/maxima.html>`_.
 
 
 What is included
 ----------------
 
-* Binary wheels on PyPI contain prebuilt copies of `Maxima <https://doc.sagemath.org/html/en/reference/spkg/maxima.html>`_.
+* Binary wheels on PyPI contain prebuilt copies of `Maxima <https://passagemath.org/docs/latest/html/en/reference/spkg/maxima.html>`_.
 
 
 Examples

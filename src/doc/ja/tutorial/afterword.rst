@@ -120,7 +120,7 @@ Sageプロジェクトに助力いただけるのなら，たいへん有難い�
 
 開発者向けの情報については、SageのWebページをご覧いただきたい．
 優先順位とカテゴリー順に整理されたSage関連プロジェクトの長いリストが見つかるはずだ．
-開発に役立つ情報は `Sage Developer's Guide <http://doc.sagemath.org/html/en/developer/>`_ にも載っているし，Googleグループ ``sage-devel`` も役立つ．
+開発に役立つ情報は `Sage Developer's Guide <http://passagemath.org/docs/latest/html/en/developer/>`_ にも載っているし，Googleグループ ``sage-devel`` も役立つ．
 
 
 Sageを引用するには

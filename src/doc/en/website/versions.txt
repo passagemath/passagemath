@@ -9,4 +9,4 @@
 #
 passagemath-10.6.x passagemath.org/doc/10.6
 sagemath-develop https://doc-develop--sagemath.netlify.app
-sagemath-stable https://doc.sagemath.org/
+sagemath-stable https://passagemath.org/docs/latest/

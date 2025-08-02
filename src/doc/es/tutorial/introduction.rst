@@ -82,7 +82,7 @@ Sage en tu computador. Aquí hacemos simplemente dos comentarios:
    necesitarás hacerle conocer SageTeX a tu distribución de TeX.
    Para hacer esto, consulta la sección
    "Haciendo que TeX conozca a SageTeX" en la guía de instalación de Sage
-   `Sage installation guide <http://doc.sagemath.org/html/en/installation/index.html>`_
+   `Sage installation guide <http://passagemath.org/docs/latest/html/en/installation/index.html>`_
    (`Este enlace
    <../../en/installation/index.html>`_ debería llevarte a tu copia
    local de la guía de instalación). Es bastante sencillo: sólo

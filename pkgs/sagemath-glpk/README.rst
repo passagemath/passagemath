@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -66,4 +66,4 @@ It can be installed as an extra of the distribution
 What is included
 ----------------
 
-* `GLPK backends <https://doc.sagemath.org/html/en/reference/numerical/index.html#linear-optimization-lp-and-mixed-integer-linear-optimization-mip-solver-backends>`_ for LP, MILP, and graphs
+* `GLPK backends <https://passagemath.org/docs/latest/html/en/reference/numerical/index.html#linear-optimization-lp-and-mixed-integer-linear-optimization-mip-solver-backends>`_ for LP, MILP, and graphs

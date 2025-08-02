@@ -33,7 +33,7 @@ It was created in October 2024 with the following goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support and provides binary wheels suitable for
@@ -61,15 +61,15 @@ It provides the namespace packages ``sage.plot`` and ``sage.plot.plot3d``, which
 What is included
 ----------------
 
-* `2D Graphics <https://doc.sagemath.org/html/en/reference/plotting/index.html>`_
+* `2D Graphics <https://passagemath.org/docs/latest/html/en/reference/plotting/index.html>`_
 
-* Backend for 2D graphics: `matplotlib <https://doc.sagemath.org/html/en/reference/spkg/matplotlib.html>`_
+* Backend for 2D graphics: `matplotlib <https://passagemath.org/docs/latest/html/en/reference/spkg/matplotlib.html>`_
 
-* `3D Graphics <https://doc.sagemath.org/html/en/reference/plot3d/index.html>`_
+* `3D Graphics <https://passagemath.org/docs/latest/html/en/reference/plot3d/index.html>`_
 
-* Backend for 3D graphics: `three.js <https://doc.sagemath.org/html/en/reference/spkg/threejs.html>`_
+* Backend for 3D graphics: `three.js <https://passagemath.org/docs/latest/html/en/reference/spkg/threejs.html>`_
 
-* Interfaces: `Gnuplot <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/gnuplot.html>`_, `Jmol <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/jmoldata.html>`_, `POV-Ray <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/povray.html>`_, `Tachyon <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/tachyon.html>`_
+* Interfaces: `Gnuplot <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/gnuplot.html>`_, `Jmol <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/jmoldata.html>`_, `POV-Ray <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/povray.html>`_, `Tachyon <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/tachyon.html>`_
 
 Examples
 --------
@@ -94,7 +94,7 @@ Available as extras, from other distributions
  Graphs and networks: `sagemath-graphs <https://pypi.org/project/passagemath-graphs/>`_
 
 `pip install "passagemath-plot[jsmol]"`
- Alternative backend for 3D graphics: `jupyter-jsmol <https://doc.sagemath.org/html/en/reference/spkg/jupyter_jsmol.html>`_
+ Alternative backend for 3D graphics: `jupyter-jsmol <https://passagemath.org/docs/latest/html/en/reference/spkg/jupyter_jsmol.html>`_
 
 `pip install "passagemath-plot[playwright]"`
  Screenshotting tool for saving 3D graphics as 2D image files: `playwright <https://pypi.org/project/playwright/>`_
