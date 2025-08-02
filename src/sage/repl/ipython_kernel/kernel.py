@@ -95,7 +95,7 @@ class SageKernel(IPythonKernel):
             sage: from sage.repl.ipython_kernel.kernel import SageKernel
             sage: sk = SageKernel.__new__(SageKernel)
             sage: sk.help_links
-            [{'text': 'Sage Documentation',
+            [{'text': 'passagemath Documentation',
               'url': '.../html/en/index.html'},
              ...]
         """
@@ -119,7 +119,7 @@ class SageKernel(IPythonKernel):
 
         return [
             {
-                'text': 'Sage Documentation',
+                'text': 'passagemath Documentation',
                 'url': doc_url('html/en/index.html'),
             },
             {

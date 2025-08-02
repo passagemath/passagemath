@@ -143,7 +143,7 @@ Testing Sage
 
 .. _section-updating-documentation:
 
-Updating Sage Documentation
+Updating passagemath Documentation
 ---------------------------
 
 .. toctree::
