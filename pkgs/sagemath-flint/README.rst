@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-flint`` provides
+This pip-installable source distribution ``passagemath-flint`` provides
 Cython interfaces to the ``MPFI`` and ``FLINT`` libraries.
 
 It also ships the implementation of number fields.

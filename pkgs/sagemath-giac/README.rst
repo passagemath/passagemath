@@ -70,8 +70,7 @@ What is included
 
   The Cython interface is by Frederic Han and was previously available under the name
   `giacpy-sage <https://gitlab.math.univ-paris-diderot.fr/han/giacpy-sage/>`_.
-  It was `merged into the Sage library <https://github.com/sagemath/sage/issues/29171>`_
-  in 2020.
+  It was merged into the Sage library in 2020.
 
 - `Pexpect interface to GIAC <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/giac.html>`_
 

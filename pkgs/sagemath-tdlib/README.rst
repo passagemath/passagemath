@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable distribution `passagemath-tdlib` is a small optional distribution for use with `passagemath-graphs <https://pypi.org/project/passagemath-graphs>`_.
+This pip-installable distribution ``passagemath-tdlib`` is a small optional distribution for use with `passagemath-graphs <https://pypi.org/project/passagemath-graphs>`_.
 
 It provides a Cython interface to the ``tdlib`` library, now also known as `treedec <https://gitlab.com/freetdi/treedec>`_, providing
 algorithms concerning tree decompositions.

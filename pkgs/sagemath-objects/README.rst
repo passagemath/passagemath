@@ -53,11 +53,11 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-The pip-installable distribution package `sagemath-objects` is a
+The pip-installable distribution package ``passagemath-objects`` is a
 distribution of a small part of the Sage Library.
 
 It provides a small, fundamental subset of the modules of the Sage library
-("sagelib", `sagemath-standard`), making Sage objects, the element/parent
+("sagelib", ``passagemath-standard``), making Sage objects, the element/parent
 framework, categories, the coercion system and the related metaclasses
 available.
 
@@ -65,7 +65,7 @@ available.
 Dependencies
 ------------
 
-When building from source, development packages of `gmp`, `mpfr`, and `mpc` are needed.
+When building from source, development packages of ``gmp``, ``mpfr``, and ``mpc`` are needed.
 
 
 Documentation

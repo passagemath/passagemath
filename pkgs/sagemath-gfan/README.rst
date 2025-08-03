@@ -53,6 +53,6 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``passagemath-gfan`` provides an interface to
+This pip-installable distribution ``passagemath-gfan`` provides an interface to
 `gfan <https://users-math.au.dk/jensen/software/gfan/gfan.html>`_, the package for
 Groebner fans and tropical varieties.

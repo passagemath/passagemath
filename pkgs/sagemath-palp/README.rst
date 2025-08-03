@@ -54,7 +54,7 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable source distribution ``passagemath-palp`` provides
-an interface to the `Package for Analyzing Lattice Polytopes <http://hep.itp.tuwien.ac.at/~kreuzer/CY/CYpalp.html>` (PALP)
+an interface to the `Package for Analyzing Lattice Polytopes <http://hep.itp.tuwien.ac.at/~kreuzer/CY/CYpalp.html>`__ (PALP)
 by M. Kreuzer and H. Skarke, a set of C programs for calculations
 with lattice polytopes and applications to toric geometry.
 

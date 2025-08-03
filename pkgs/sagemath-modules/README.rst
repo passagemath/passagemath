@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution `sagemath-modules` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`).
+This pip-installable distribution ``passagemath-modules`` is a distribution of a part of the Sage Library.  It provides a subset of the modules of the Sage library ("sagelib", `passagemath-standard`).
 
 
 What is included
@@ -143,16 +143,16 @@ Available as extras, from other distributions
     [-1  0  1]
     [ 1  1  1]
 
-`pip install "passagemath-modules[padics]"`
+``pip install "passagemath-modules[padics]"``
  Linear algebra over p-adic rings and fields
 
-`pip install "passagemath-modules[combinat]"`
+``pip install "passagemath-modules[combinat]"``
  Modules and algebras with combinatorial bases; algebraic combinatorics
 
-`pip install "passagemath-modules[invariant]"`
+``pip install "passagemath-modules[invariant]"``
  Submodules invariant under group actions
 
-`pip install "passagemath-modules[standard]"`
+``pip install "passagemath-modules[standard]"``
  All related features as in a standard installation of SageMath
 
 

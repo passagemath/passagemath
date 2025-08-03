@@ -53,19 +53,19 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-The pip-installable distribution package `sagemath-environment` is a
+The pip-installable distribution package ``passagemath-environment`` is a
 distribution of a small part of the Sage Library.
 
 It provides a small, fundamental subset of the modules of the Sage
-library ("sagelib", `sagemath-standard`), providing the connection to the
+library ("sagelib", ``passagemath-standard``), providing the connection to the
 system and software environment.
 
 
 What is included
 ----------------
 
-* `sage` script for launching the Sage REPL and accessing various developer tools
-  (see `sage --help`, `Invoking Sage <https://passagemath.org/docs/latest/html/en/reference/repl/options.html>`_).
+* ``sage`` script for launching the Sage REPL and accessing various developer tools
+  (see ``sage --help``, `Invoking Sage <https://passagemath.org/docs/latest/html/en/reference/repl/options.html>`_).
 
 * sage.env
 
