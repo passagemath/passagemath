@@ -1,9 +1,9 @@
 .. _sec-launching:
 
-Launching SageMath
-==================
+Launching Sage
+==============
 
-Now we assume that you installed SageMath properly on your system. This
+Now we assume that you installed Sage properly on your system. This
 section quickly explains how to start the Sage console and the Jupyter
 Notebook from the command line.
 
@@ -95,7 +95,7 @@ the internet, e.g. https://www.ssh.com/ssh/tunneling/example.
 WSL Post-installation steps
 ---------------------------
 
-If you've installed SageMath from source on WSL, there are a couple of extra steps you can do to make your life easier:
+If you've installed Sage from source on WSL, there are a couple of extra steps you can do to make your life easier:
 
 
 Create a notebook launch script
@@ -157,19 +157,19 @@ Now hit the start button or key and type the name you gave it. it should appear 
 ------------------------------------------------------------------------
 
 For further reading you can have a look at the other documents in the
-SageMath documentation at http://passagemath.org/docs/latest/.
+documentation at http://passagemath.org/docs/latest/.
 
 
 .. _sec-launching-system-jupyter:
 
-Setting up SageMath as a Jupyter kernel in an existing Jupyter notebook or JupyterLab installation
+Setting up Sage as a Jupyter kernel in an existing Jupyter notebook or JupyterLab installation
 --------------------------------------------------------------------------------------------------
 
-By default, SageMath installs itself as a Jupyter kernel in the same
-environment as the SageMath installation. This is the most convenient way to
-use SageMath in a Jupyter notebook. To check if the Sage kernel is
+By default, Sage installs itself as a Jupyter kernel in the same
+environment as the Sage installation. This is the most convenient way to
+use Sage in a Jupyter notebook. To check if the Sage kernel is
 available, start a Jupyter notebook and look for the kernel named
-``SageMath <x.y.z>`` in the list of available kernels.
+``passagemath <x.y.z>`` in the list of available kernels.
 Alternatively, you can use the following command to check which kernels are
 available:
 

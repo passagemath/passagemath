@@ -2,8 +2,8 @@
 
 .. _sec-installation-from-sources:
 
-Install from Source Code
-========================
+Building from Source
+====================
 
 Building Sage from the source code has the major
 advantage that your install will be optimized for your particular computer and
@@ -42,11 +42,7 @@ Sage depends on `a large number of software packages
 <../reference/spkg/index.html>`_.  Sage provides its own software
 distribution providing most of these packages, so you do not have to
 worry about having to download and install these packages yourself.
-
-If you extracted Sage from a source tarball, the subdirectory
-:file:`upstream` contains the source distributions for all standard
-packages on which Sage depends.  If cloned from a git repository, the
-upstream tarballs will be downloaded, verified, and cached as part of
+The upstream tarballs will be downloaded, verified, and cached as part of
 the Sage installation process.
 
 However, there are minimal prerequisites for building Sage that
@@ -286,14 +282,6 @@ WSL post-installation notes
 When the installation is complete, you may be interested in :ref:`sec-launching-wsl-post-installation`.
 
 
-Other platforms
-^^^^^^^^^^^^^^^
-
-On Solaris, you would use ``pkgadd`` and on OpenSolaris ``ipf`` to install
-the necessary software.
-
-On other systems, check the documentation for your particular operating system.
-
 .. _section_conda_compilers:
 
 
@@ -367,14 +355,13 @@ does not raise an :class:`ImportError`, then it worked.
 
 .. _build-from-source-step-by-step:
 
-Installation steps
-------------------
+Traditional Installation from Source as Sage-the-Distribution
+-------------------------------------------------------------
 
 .. hint:: 
 
-  The following steps use the classical ``./configure && make`` build
-  process. The modern Meson build system is also supported, see
-  :ref:`build-source-meson`.
+  The following steps use the classical ``make configure && ./configure && make`` build
+  process.
 
 #. Follow the procedure in the file `README.md <https://github.com/sagemath/sage/#readme>`_
    in ``SAGE_ROOT``.
@@ -385,39 +372,6 @@ Installation steps
    - After running ``configure``, you can use ``make download`` to force
      downloading packages before building. After this, the packages
      are in the subdirectory ``upstream``.
-
-   - Alternatively, instead of cloning the git repository, you
-     can download a self-contained release tarball for any
-     stable release from the Sage project's
-     `GitHub Releases <https://github.com/sagemath/sage/releases>`_.
-     Use the file named ``sage-x.y.tar.gz`` (1.25 GB as of Sage 10.2)
-     in the Release Assets, which contains a prepopulated subdirectory
-     ``upstream``.
-
-     After downloading the source tarball ``sage-x.y.tar.gz`` into
-     a directory ``~/sage/``::
-
-       $ cd ~/sage/
-       $ tar xf sage-x.y.tar.gz  # adapt x.y; takes a while
-
-     This creates the subdirectory ``sage-x.y``. Now change into it::
-
-       $ cd sage-x.y/  # adapt x.y
-
-     .. note::
-
-        On Windows, it is crucial that you unpack the source tree from the
-        WSL `bash` using the WSL `tar` utility and not using other
-        Windows tools (including mingw).
-
-        This is because the Sage source tree contains symbolic links, and the
-        build will not work if Windows line endings rather than UNIX
-        line endings are used.
-
-   - The Sage mirrors also provide such self-contained tarballs
-     for all `stable releases <https://www.sagemath.org/download-source.html>`_
-     and additionally for all `development releases
-     <https://www.sagemath.org/download-latest.html>`_.
 
 #. Additional remarks:
    You do not need to be logged in as root, since no files are
@@ -437,17 +391,10 @@ Installation steps
    If the build of Sage fails, you will see a message mentioning which
    package(s) failed to build and the location of the log file for each
    failed package.
-   If this happens, then paste the contents of these log file(s)
-   to the Sage support
-   newsgroup at https://groups.google.com/group/sage-support.
-   If the log files are very large (and many are), then don't paste the whole
-   file, but make sure to include any error messages.
    It would also be helpful to include the type of operating system
-   (Linux, macOS, Solaris, OpenSolaris, or any other system),
+   (Linux, macOS, or other system),
    the version and release date of that operating system and the version of
    the copy of Sage you are using.
-   (There are no formal requirements for bug reports -- just send them;
-   we appreciate everything.)
 
    See :ref:`section_make` for some targets for the ``make`` command and
    :ref:`section_envvar` for additional information on useful environment
@@ -475,8 +422,6 @@ Installation steps
    correctly.
    Note that this should have been already automatically tested during the
    build process.
-   If the above is not displayed (e.g., if you get a massive traceback), please
-   report the problem, e.g., at https://groups.google.com/group/sage-support.
 
    After Sage has started, try a simple command:
 
