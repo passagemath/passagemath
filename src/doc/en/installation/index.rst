@@ -6,11 +6,9 @@ Welcome to the passagemath Installation Guide
 
 This is the installation guide for passagemath, the free open-source mathematics software system.
 
-Installation is easy, as shown in the README: Just use `pip install`.
+`Installation from the provided binary wheels on PYPI <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__
+is easy, just use ``pip install passagemath-standard`` to install.
 
-If you are planning to do development on SageMath, please refer instead to the
-`Sage Developer's Guide <../developer/walkthrough.html>`_ for instructions on
-obtaining the source code and building SageMath.
 
 .. toctree::
    :maxdepth: 2
