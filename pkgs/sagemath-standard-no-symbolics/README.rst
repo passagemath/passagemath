@@ -53,6 +53,6 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution `sagemath-standard-no-symbolics` is a distribution of a part of the Sage Library.
+This pip-installable distribution ``passagemath-standard-no-symbolics`` is a distribution of a part of the Sage Library.
 
 Its main purpose is as a technical tool for the modularization project, to test that large parts of the Sage library are independent of the symbolics subsystem.

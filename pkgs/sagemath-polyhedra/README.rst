@@ -103,7 +103,7 @@ Available as extras, from other distributions
 Additional features
 ~~~~~~~~~~~~~~~~~~~
 
-`pip install "passagemath-polyhedra[graphs]"`
+``pip install "passagemath-polyhedra[graphs]"``
  Face lattices, combinatorial polyhedra, graph-theoretic constructions
 
  ::
@@ -118,7 +118,7 @@ Additional features
     In [3]: c5_10_fl = c5_10.face_lattice(); [len(x) for x in c5_10_fl.level_sets()]
     Out[3]: [1, 10, 45, 100, 105, 42, 1]
 
-`pip install "passagemath-polyhedra[graphs,groups]"`
+``pip install "passagemath-polyhedra[graphs,groups]"``
  Constructing symmetric polyhedra, computing automorphisms, lattice point counting modulo group actions
 
  ::
@@ -133,7 +133,7 @@ Additional features
     In [3]: AutP24 = P24.restricted_automorphism_group(); AutP24.order()
     Out[3]: 1152
 
-`pip install "passagemath-polyhedra[toric]"`
+``pip install "passagemath-polyhedra[toric]"``
  `Toric varieties <https://passagemath.org/docs/latest/html/en/reference/schemes/index.html#toric-varieties>`_
 
  ::
@@ -148,7 +148,7 @@ Additional features
     In [3]: TV3.is_orbifold()
     Out[3]: False
 
-`pip install "passagemath-polyhedra[latte]"`
+``pip install "passagemath-polyhedra[latte]"``
  Installs `LattE integrale <https://passagemath.org/docs/latest/html/en/reference/spkg/latte_int.html#spkg-latte-int>`_
  for lattice point counting and volume computation using generating function techniques.
 
@@ -175,7 +175,7 @@ Additional features
 Additional backends for polyhedral computations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`pip install "passagemath-polyhedra[normaliz]"`
+``pip install "passagemath-polyhedra[normaliz]"``
  `Normaliz <https://passagemath.org/docs/latest/html/en/reference/spkg/normaliz.html#spkg-normaliz>`_, via `PyNormaliz <https://passagemath.org/docs/latest/html/en/reference/spkg/pynormaliz.html#spkg-pynormaliz>`_,
  provides very fast computations in particular for polyhedra with data in algebraic number fields.
 
@@ -189,7 +189,7 @@ Additional backends for polyhedral computations
 
     In [3]: gap_norm.f_vector()
 
-`pip install "passagemath-polyhedra[cddlib]"`
+``pip install "passagemath-polyhedra[cddlib]"``
  cddlib provides support for computations with polyhedra in floating-point arithmetic.
 
  ::
@@ -201,7 +201,7 @@ Additional backends for polyhedral computations
     In [2]: P1 = polytopes.regular_polygon(5, exact=False); P1
     Out[2]: A 2-dimensional polyhedron in RDF^2 defined as the convex hull of 5 vertices
 
-`pip install "passagemath-polyhedra[lrslib]"`
+``pip install "passagemath-polyhedra[lrslib]"``
  `lrslib <https://passagemath.org/docs/latest/html/en/reference/spkg/lrslib.html#spkg-lrslib>`_
  can be used for polytope volume computations and for enumerating Nash equilibria.
 
@@ -216,7 +216,7 @@ Additional backends for polyhedral computations
     In [3]: g = NormalFormGame([A, B]); g.obtain_nash(algorithm='lrs')
     Out[3]: [[(1/5, 4/5), (3/5, 2/5)]]
 
-`pip install "passagemath-polyhedra[polymake]"`
+``pip install "passagemath-polyhedra[polymake]"``
  `Polymake <https://passagemath.org/docs/latest/html/en/reference/spkg/polymake.html#spkg-polymake>`_, via `JuPyMake <https://pypi.org/project/JuPyMake/>`_
 
  This currently requires a separate installation of polymake.
@@ -224,21 +224,21 @@ Additional backends for polyhedral computations
 Optional backends for optimization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`pip install "passagemath-polyhedra[cbc]"`
+``pip install "passagemath-polyhedra[cbc]"``
  `COIN/OR CBC <https://passagemath.org/docs/latest/html/en/reference/spkg/cbc.html#spkg-cbc>`_ Mixed Integer Linear Optimization solver,
  via `sage_numerical_backends_coin <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_coin.html#spkg-sage-numerical-backends-coin>`_
 
-`pip install "passagemath-polyhedra[cplex]"`
+``pip install "passagemath-polyhedra[cplex]"``
  CPLEX Mixed Integer Optimization solver (proprietary; requires licensed installation),
  via `sage_numerical_backends_cplex <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_cplex.html#spkg-sage-numerical-backends-cplex>`_
 
-`pip install "passagemath-polyhedra[cvxpy]"`
+``pip install "passagemath-polyhedra[cvxpy]"``
  `CVXPy <https://passagemath.org/docs/latest/html/en/reference/spkg/cvxpy.html#spkg-cvxpy>`_ as middle-end for `various backends <https://www.cvxpy.org/install/>`_
 
-`pip install "passagemath-polyhedra[gurobi]"`
+``pip install "passagemath-polyhedra[gurobi]"``
  Gurobi Mixed Integer Optimization solver (proprietary; requires licensed installation), via `sage_numerical_backends_gurobi <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_gurobi.html#spkg-sage-numerical-backends-gurobi>`_
 
-`pip install "passagemath-polyhedra[scip]"`
+``pip install "passagemath-polyhedra[scip]"``
  `SCIP <https://passagemath.org/docs/latest/html/en/reference/spkg/scip.html#spkg-scip>`_ Mixed Integer Optimization solver,
  via `PySCIPOpt <https://passagemath.org/docs/latest/html/en/reference/spkg/pyscipopt.html#spkg-pyscipopt>`_
 

@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable package `passagemath-graphs` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`) for computations with graphs, posets, complexes, etc.
+This pip-installable package ``passagemath-graphs`` is a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", ``passagemath-standard``) for computations with graphs, posets, complexes, etc.
 
 It consists of over 170 first-party Python and Cython modules and uses the `Boost Graph Library <https://github.com/boostorg/graph>`_, with additional functionality from `NetworkX <https://networkx.github.io/>`_ and several other libraries.
 

@@ -53,11 +53,11 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-The pip-installable distribution package `sagemath-categories` is a
+The pip-installable distribution package ``passagemath-categories`` is a
 distribution of a small part of the Sage Library.
 
 It provides a small subset of the modules of the Sage library
-("sagelib", `sagemath-standard`) that is a superset of `sagemath-objects`
+("sagelib", ``passagemath-standard``) building on top of ``passagemath-objects``
 (providing Sage objects, the element/parent framework, categories, the coercion
 system and the related metaclasses), making various additional categories
 available without introducing dependencies on additional mathematical
@@ -120,4 +120,4 @@ Available in other distribution packages
 Dependencies
 ------------
 
-When building from source, development packages of `gmp`, `mpfr`, and `mpc` are needed.
+When building from source, development packages of ``gmp``, ``mpfr``, and ``mpc`` are needed.

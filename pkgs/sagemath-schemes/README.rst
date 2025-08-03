@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------------------
 
-This pip-installable source distribution `sagemath-schemes` is an experimental distribution of a part of the Sage Library.  Use at your own risk.  It provides a small subset of the modules of the Sage library ("sagelib", `sagemath-standard`).
+This pip-installable distribution ``passagemath-schemes`` is a distribution of a part of the Sage Library.  It provides a subset of the modules of the Sage library ("sagelib", ``passagemath-standard``).
 
 
 What is included
@@ -74,13 +74,3 @@ What is included
 * `Modular Abelian Varieties <https://passagemath.org/docs/latest/html/en/reference/modabvar/index.html>`_
 
 * `Arithmetic Dynamical Systems <https://passagemath.org/docs/latest/html/en/reference/dynamics/index.html#arithmetic-dynamical-systems>`_
-
-
-Status
-------
-
-The wheel builds. Some Cython modules that depend on FLINT or NTL are excluded.
-
-`sage.all__sagemath_schemes` can be imported.
-
-Many tests fail; see ``known-test-failures.json``.

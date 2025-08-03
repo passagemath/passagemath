@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-qepcad`` provides an interface to
+This pip-installable source distribution ``passagemath-qepcad`` provides an interface to
 `QEPCAD <https://github.com/chriswestbrown/qepcad>`_.
 
 
@@ -61,14 +61,15 @@ Example
 -------
 
 ::
-   $ pipx run  --pip-args="--prefer-binary" --spec "passagemath-qepcad[test]" ipython
 
-   In [1]: from sage.all__sagemath_symbolics import *
+    $ pipx run  --pip-args="--prefer-binary" --spec "passagemath-qepcad[test]" ipython
 
-   In [2]: var('x,y')
+    In [1]: from sage.all__sagemath_symbolics import *
 
-   In [3]: ellipse = 3*x^2 + 2*x*y + y^2 - x + y - 7
+    In [2]: var('x,y')
 
-   In [4]: F = qepcad_formula.exists(y, ellipse == 0); F
+    In [3]: ellipse = 3*x^2 + 2*x*y + y^2 - x + y - 7
 
-   In [5]: qepcad(F)
+    In [4]: F = qepcad_formula.exists(y, ellipse == 0); F
+
+    In [5]: qepcad(F)

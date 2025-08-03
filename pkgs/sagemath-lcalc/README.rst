@@ -53,5 +53,5 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-lcalc`` provides
+This pip-installable distribution ``passagemath-lcalc`` provides
 an interface to Michael Rubinstein's L-function calculator.

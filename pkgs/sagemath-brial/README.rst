@@ -53,6 +53,6 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-brial`` provides
+This pip-installable source distribution ``passagemath-brial`` provides
 a Boolean Ring Algebra implementation using binary decision diagrams,
 implemented by the BRiAl library, the successor to PolyBoRi.

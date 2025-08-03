@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-glpk`` provides
+This pip-installable distribution ``passagemath-glpk`` provides
 a backend for linear and mixed integer linear optimization backend using GLPK.
 
 It can be installed as an extra of the distribution

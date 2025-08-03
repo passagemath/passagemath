@@ -54,16 +54,16 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable package ``passagemath-libecm`` provides
-interfaces to [GMP-ECM](https://gitlab.inria.fr/zimmerma/ecm), the implementation
+interfaces to `GMP-ECM <https://gitlab.inria.fr/zimmerma/ecm>`_, the implementation
 of the Elliptic Curve Method for integer factorization.
 
 
 What is included
 ----------------
 
-- Python interface to the ECM program <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/ecm.html#module-sage.interfaces.ecm>`_
+- `Python interface to the ECM program <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/ecm.html#module-sage.interfaces.ecm>`_
 
-- Cython interface to the libecm library <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/libecm.html#module-sage.libs.libecm>`_
+- `Cython interface to the libecm library <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/libecm.html#module-sage.libs.libecm>`_
 
 - The binary wheels published on PyPI include a prebuilt copy of GMP-ECM (executable and library).
 

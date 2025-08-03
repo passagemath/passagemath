@@ -10,46 +10,6 @@ This section is a concise overview of the Sage development process. We will see
 how to make changes to the Sage source code and record them in the Git revision
 control system.
 
-.. _section-quick-start:
-
-Quick start
-===========
-
-If you are in a hurry, you can skip the details and just follow these steps:
-
-1. Install Git (see :ref:`section-git-install`) and `Conda <https://github.com/conda-forge/miniforge?tab=readme-ov-file#install>`_.
-
-2. Clone the Sage repository from GitHub::
-
-    $ git clone --origin upstream https://github.com/sagemath/sage.git
-
-3. Change into the directory::
-    
-    $ cd sage
-
-4. Create a new Conda environment::
-    
-    $ conda env create --file environment-3.12-linux.yml --name sage-dev
-    $ conda activate sage-dev
-
-    Replace ``environment-3.12-linux.yml`` with the appropriate file for your system.
-
-5. Build and install Sage::
-
-    $ pip install --no-build-isolation --editable .
-
-6. Create a new branch for your changes::
-
-    $ git checkout -b my_branch develop
-
-7. Make your changes, and push them to your fork on GitHub::
-
-    $ git add .
-    $ git commit -m "Your commit message here"
-    $ git push origin my_branch
-
-8. Create a pull request on GitHub to merge your changes into the Sage repository.
-
 .. _section-walkthrough-setup-git:
 
 Checking Git
@@ -82,44 +42,9 @@ before you forget! This only needs to be done once. See
 Obtaining the Sage source code
 ==============================
 
-Obviously one needs the Sage source code to develop. You can download it 
-from our Sage repository on GitHub::
+Obviously one needs the Sage source code to develop.
+Follow the instructions for building from source in the README.
 
-    $ git clone --origin upstream https://github.com/sagemath/sage.git
-    Cloning into 'sage'...
-    $ cd sage
-
-This creates a directory named ``sage`` containing the most recent version of
-the Sage source code.
-
-Building Sage
-=============
-
-Sage is a large project with many dependencies. To build it, we
-recommend using Conda. If you don't have Conda installed, you can install it
-by following the `official instructions <https://github.com/conda-forge/miniforge?tab=readme-ov-file#install>`_::
-    
-    $ curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-    $ bash Miniforge3-$(uname)-$(uname -m).sh
-
-Now create and activate a new conda environment with the dependencies of Sage 
-and a few additional developer tools::
-
-    $ conda env create --file environment-3.12-linux.yml --name sage-dev
-    $ conda activate sage-dev
-
-Replace ``environment-3.12-linux.yml`` with the appropriate file for your system.
-You can find the environment files in the root directory of the Sage repository.
-
-Now you can build and install Sage:::
-
-    $ pip install --no-build-isolation --editable .
-
-This will install Sage in the current Conda environment.
-You can then start Sage from the command line with ``sage``.
-
-For more information on building Sage we refer to the section `building
-from source <../installation/meson.html>`_ in the Sage installation guide. 
 
 .. _section-walkthrough-branch:
 
@@ -201,11 +126,9 @@ to show you the differences.
 Testing changes
 ===============
 
-Once you have made any changes, you of course want to try out
-your edits. All changes to Python and Cython files take effect immediately 
-after restarting Sage, so there is no need to explicitly rebuild Sage.
+Once you have made any changes, you need to rebuild Sage.
 
-The changes can be tested by running Sage and verifying that the modifications 
+The changes can then be tested by running Sage and verifying that the modifications 
 work as expected. For example, if you modified a function, you can call it 
 directly in Sage to ensure it behaves as intended. 
 

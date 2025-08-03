@@ -53,6 +53,6 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable distribution ``sagemath-cddlib`` provides an interface to
+This pip-installable distribution ``passagemath-cddlib`` provides an interface to
 `cddlib <https://github.com/cddlib/cddlib>`_, the library for polyhedral representation
 conversion using the double description method.

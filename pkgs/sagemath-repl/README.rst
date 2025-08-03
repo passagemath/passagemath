@@ -53,11 +53,11 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-The pip-installable source distribution `sagemath-repl` is a
+The pip-installable distribution ``passagemath-repl`` is a
 distribution of a small part of the Sage Library.
 
 It provides a small, fundamental subset of the modules of the Sage library
-("sagelib", `sagemath-standard`), providing the IPython kernel, Sage preparser,
+("sagelib", ``passagemath-standard``), providing the IPython kernel, Sage preparser,
 and doctester.
 
 

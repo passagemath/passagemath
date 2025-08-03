@@ -109,15 +109,15 @@ Using `SageManifolds <https://sagemanifolds.obspm.fr/>`_::
 Available as extras, from other distributions
 ---------------------------------------------
 
-`pip install "passagemath-symbolics[giac]"`
+``pip install "passagemath-symbolics[giac]"``
  Computer algebra system `Giac <https://passagemath.org/docs/latest/html/en/reference/spkg/giac.html>`_, via `passagemath-giac <https://passagemath.org/docs/latest/html/en/reference/spkg/sagemath_giac.html>`_
 
-`pip install "passagemath-symbolics[primecount]"`
+``pip install "passagemath-symbolics[primecount]"``
  `Prime counting function <https://passagemath.org/docs/latest/html/en/reference/functions/sage/functions/prime_pi.html>`_
  implementation `primecount <https://passagemath.org/docs/latest/html/en/reference/spkg/primecount.html>`_, via `primecountpy <https://passagemath.org/docs/latest/html/en/reference/spkg/primecountpy.html>`_
 
-`pip install "passagemath-symbolics[sympy]"`
+``pip install "passagemath-symbolics[sympy]"``
  Python library for symbolic mathematics / computer algebra system `SymPy <https://passagemath.org/docs/latest/html/en/reference/spkg/sympy.html>`_
 
-`pip install "passagemath-symbolics[plot]"`
+``pip install "passagemath-symbolics[plot]"``
  Plotting facilities

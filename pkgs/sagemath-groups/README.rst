@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable package `passagemath-groups` a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", `passagemath-standard`) for computations with groups.
+This pip-installable package ``passagemath-groups`` a distribution of a part of the Sage Library.  It provides a small subset of the modules of the Sage library ("sagelib", ``passagemath-standard``) for computations with groups.
 
 
 What is included
