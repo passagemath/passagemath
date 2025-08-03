@@ -34,7 +34,13 @@ eval PKG_SCRIPTS=\$path_$PKG_BASE
 SPKG_FILE="$PKG_SCRIPTS/SPKG.rst"
 if [ -f "$SPKG_FILE" ]; then
     # for sphinx 4.4 we need to replace all direct links by some "extlink" (issue 33272)
-    sed -e "1,3s/^ *passagemath:/$PKG_BASE:/;1,3s/^====/==============/" -e "s|https://github.com/sagemath/sage/issues/\([0-9]*\)|:issue:\`\1\`|g" -e "s|https://arxiv.org/abs/cs/\([0-9]*\)|:arxiv:\`cs/\1\`|g" "$SPKG_FILE"
+    if grep -q "About this pip-installable distribution package" "$SPKG_FILE"; then
+        # Remove intro boilerplate up to section
+        # title "About this pip-installable distribution package"
+        sed -e "1,3s/^ *passagemath:/$PKG_BASE:/;1,3s/^====/==============/" -e "4,/^-------------/d" -e "s|https://github.com/sagemath/sage/issues/\([0-9]*\)|:issue:\`\1\`|g" -e "s|https://arxiv.org/abs/cs/\([0-9]*\)|:arxiv:\`cs/\1\`|g" "$SPKG_FILE"
+    else
+        sed -e "1,3s/^ *passagemath:/$PKG_BASE:/;1,3s/^====/==============/" -e "s|https://github.com/sagemath/sage/issues/\([0-9]*\)|:issue:\`\1\`|g" -e "s|https://arxiv.org/abs/cs/\([0-9]*\)|:arxiv:\`cs/\1\`|g" "$SPKG_FILE"
+    fi
     break
 fi
 if [ -r "$PKG_SCRIPTS/type" ] ; then
