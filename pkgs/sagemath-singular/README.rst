@@ -54,7 +54,7 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable distribution ``passagemath-singular``
-provides interfaces to [Singular](https://www.singular.uni-kl.de/),
+provides interfaces to `Singular <https://www.singular.uni-kl.de/>`__,
 the computer algebra system for polynomial computations, with
 special emphasis on commutative and non-commutative algebra, algebraic
 geometry, and singularity theory.

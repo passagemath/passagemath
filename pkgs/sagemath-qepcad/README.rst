@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-qepcad`` provides an interface to
+This pip-installable source distribution ``passagemath-qepcad`` provides an interface to
 `QEPCAD <https://github.com/chriswestbrown/qepcad>`_.
 
 
