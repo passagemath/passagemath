@@ -52,10 +52,10 @@ you will need the ``local::lib`` Perl module installed::
 
 Before installing the ``polymake`` package, refer to the SPKG pages for the following packages to ensure a more featureful Polymake installation:
 
-- [4ti2](https://doc.sagemath.org/html/en/reference/spkg/4ti2.html)
-- [latte_int](https://doc.sagemath.org/html/en/reference/spkg/latte_int.html)
-- [topcom](https://doc.sagemath.org/html/en/reference/spkg/topcom.html)
-- [qhull](https://doc.sagemath.org/html/en/reference/spkg/qhull.html)
+- [4ti2](https://passagemath.org/docs/latest/html/en/reference/spkg/4ti2.html)
+- [latte_int](https://passagemath.org/docs/latest/html/en/reference/spkg/latte_int.html)
+- [topcom](https://passagemath.org/docs/latest/html/en/reference/spkg/topcom.html)
+- [qhull](https://passagemath.org/docs/latest/html/en/reference/spkg/qhull.html)
 
 For additional software that may enhance your Polymake installation (but for which no Sage package is available), you can manually install the following:
 
@@ -70,7 +70,7 @@ Information on missing Polymake prerequisites after installing polymake::
    (sage-sh) $ polymake
    polytope> show_unconfigured;
 
-In order to use Polymake from Sage, please refer to the [Jupymake SPKG page](https://doc.sagemath.org/html/en/reference/spkg/jupymake.html) for installation instructions.
+In order to use Polymake from Sage, please refer to the [Jupymake SPKG page](https://passagemath.org/docs/latest/html/en/reference/spkg/jupymake.html) for installation instructions.
 
 
 

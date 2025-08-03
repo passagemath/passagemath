@@ -32,7 +32,7 @@ goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support all major Linux distributions and recent versions of

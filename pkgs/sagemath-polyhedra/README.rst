@@ -27,8 +27,8 @@ It was created in October 2024 with the following goals:
 -  inviting collaborations with upstream projects,
 -  `building a professional, respectful, inclusive
    community <https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ>`__,
--  `[empowering Sage users to participate in the scientific Python ecosystem
-   <https://github.com/passagemath/passagemath/issues/248](https://github.com/passagemath/passagemath/issues/248)https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
+-  `empowering Sage users to participate in the scientific Python ecosystem
+   <https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
 -  developing a port to `Pyodide <https://pyodide.org/en/stable/>`__ for
    serverless deployment with Javascript,
 -  developing a native Windows port.
@@ -39,16 +39,15 @@ available online.
 passagemath attempts to support and provides binary wheels suitable for
 all major Linux distributions and recent versions of macOS.
 
-For the Linux aarch64 (ARM) platform, some third-party packages are still missing wheels;
-see ` <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__
-for instructions for building them from source.
+For the Linux aarch64 (ARM) platform, some third-party packages are still missing
+wheels; see the `instructions for building them from source <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__.
 
 Binary wheels for native Windows (x86_64) are are available for a subset of
 the passagemath distributions. Use of the full functionality of passagemath
 on Windows currently requires the use of Windows Subsystem for Linux (WSL)
 or virtualization.
 
-The supported Python versions in the passagemath 10.6.x series are 3.9.x-3.13.x.
+The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x.
 
 
 About this pip-installable distribution package
@@ -60,17 +59,17 @@ This pip-installable distribution ``passagemath-polyhedra`` is a distribution of
 What is included
 ----------------
 
-* `Combinatorial and Discrete Geometry <https://doc.sagemath.org/html/en/reference/discrete_geometry/index.html>`_: Polyhedra, lattice polyhedra, lattice points in polyhedra, triangulations, fans, polyhedral complexes, hyperplane arrrangements
+* `Combinatorial and Discrete Geometry <https://passagemath.org/docs/latest/html/en/reference/discrete_geometry/index.html>`_: Polyhedra, lattice polyhedra, lattice points in polyhedra, triangulations, fans, polyhedral complexes, hyperplane arrrangements
 
-* `Parma Polyhedra Library (PPL) backends for rational polyhedra <https://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/backend_ppl.html>`_, `lattice polygons <https://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/ppl_lattice_polygon.html>`_, `lattice polytopes <https://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/ppl_lattice_polytope.html>`_; via `pplpy <https://doc.sagemath.org/html/en/reference/spkg/pplpy.html#spkg-pplpy>`_
+* `Parma Polyhedra Library (PPL) backends for rational polyhedra <https://passagemath.org/docs/latest/html/en/reference/discrete_geometry/sage/geometry/polyhedron/backend_ppl.html>`_, `lattice polygons <https://passagemath.org/docs/latest/html/en/reference/discrete_geometry/sage/geometry/polyhedron/ppl_lattice_polygon.html>`_, `lattice polytopes <https://passagemath.org/docs/latest/html/en/reference/discrete_geometry/sage/geometry/polyhedron/ppl_lattice_polytope.html>`_; via `pplpy <https://passagemath.org/docs/latest/html/en/reference/spkg/pplpy.html#spkg-pplpy>`_
 
-* `Python backend for polyhedra over general ordered fields <https://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/backend_field.html>`_
+* `Python backend for polyhedra over general ordered fields <https://passagemath.org/docs/latest/html/en/reference/discrete_geometry/sage/geometry/polyhedron/backend_field.html>`_
 
-* `Linear, Mixed Integer Linear, and Semidefinite Optimization frontends <https://doc.sagemath.org/html/en/reference/numerical/index.html#numerical-optimization>`_
+* `Linear, Mixed Integer Linear, and Semidefinite Optimization frontends <https://passagemath.org/docs/latest/html/en/reference/numerical/index.html#numerical-optimization>`_
 
-* `GNU Linear Programming Kit (GLPK) backend for large-scale linear and mixed integer linear optimization (floating point arithmetic) <https://doc.sagemath.org/html/en/reference/numerical/sage/numerical/backends/glpk_backend.html>`_
+* `GNU Linear Programming Kit (GLPK) backend for large-scale linear and mixed integer linear optimization (floating point arithmetic) <https://passagemath.org/docs/latest/html/en/reference/numerical/sage/numerical/backends/glpk_backend.html>`_
 
-* `Interactive Simplex Method <https://doc.sagemath.org/html/en/reference/numerical/sage/numerical/interactive_simplex_method.html>`_
+* `Interactive Simplex Method <https://passagemath.org/docs/latest/html/en/reference/numerical/sage/numerical/interactive_simplex_method.html>`_
 
 * see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-polyhedra/MANIFEST.in
 
@@ -135,7 +134,7 @@ Additional features
     Out[3]: 1152
 
 `pip install "passagemath-polyhedra[toric]"`
- `Toric varieties <https://doc.sagemath.org/html/en/reference/schemes/index.html#toric-varieties>`_
+ `Toric varieties <https://passagemath.org/docs/latest/html/en/reference/schemes/index.html#toric-varieties>`_
 
  ::
 
@@ -150,7 +149,7 @@ Additional features
     Out[3]: False
 
 `pip install "passagemath-polyhedra[latte]"`
- Installs `LattE integrale <https://doc.sagemath.org/html/en/reference/spkg/latte_int.html#spkg-latte-int>`_
+ Installs `LattE integrale <https://passagemath.org/docs/latest/html/en/reference/spkg/latte_int.html#spkg-latte-int>`_
  for lattice point counting and volume computation using generating function techniques.
 
  ::
@@ -177,7 +176,7 @@ Additional backends for polyhedral computations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `pip install "passagemath-polyhedra[normaliz]"`
- `Normaliz <https://doc.sagemath.org/html/en/reference/spkg/normaliz.html#spkg-normaliz>`_, via `PyNormaliz <https://doc.sagemath.org/html/en/reference/spkg/pynormaliz.html#spkg-pynormaliz>`_,
+ `Normaliz <https://passagemath.org/docs/latest/html/en/reference/spkg/normaliz.html#spkg-normaliz>`_, via `PyNormaliz <https://passagemath.org/docs/latest/html/en/reference/spkg/pynormaliz.html#spkg-pynormaliz>`_,
  provides very fast computations in particular for polyhedra with data in algebraic number fields.
 
  ::
@@ -203,7 +202,7 @@ Additional backends for polyhedral computations
     Out[2]: A 2-dimensional polyhedron in RDF^2 defined as the convex hull of 5 vertices
 
 `pip install "passagemath-polyhedra[lrslib]"`
- `lrslib <https://doc.sagemath.org/html/en/reference/spkg/lrslib.html#spkg-lrslib>`_
+ `lrslib <https://passagemath.org/docs/latest/html/en/reference/spkg/lrslib.html#spkg-lrslib>`_
  can be used for polytope volume computations and for enumerating Nash equilibria.
 
  ::
@@ -218,7 +217,7 @@ Additional backends for polyhedral computations
     Out[3]: [[(1/5, 4/5), (3/5, 2/5)]]
 
 `pip install "passagemath-polyhedra[polymake]"`
- `Polymake <https://doc.sagemath.org/html/en/reference/spkg/polymake.html#spkg-polymake>`_, via `JuPyMake <https://pypi.org/project/JuPyMake/>`_
+ `Polymake <https://passagemath.org/docs/latest/html/en/reference/spkg/polymake.html#spkg-polymake>`_, via `JuPyMake <https://pypi.org/project/JuPyMake/>`_
 
  This currently requires a separate installation of polymake.
 
@@ -226,22 +225,22 @@ Optional backends for optimization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `pip install "passagemath-polyhedra[cbc]"`
- `COIN/OR CBC <https://doc.sagemath.org/html/en/reference/spkg/cbc.html#spkg-cbc>`_ Mixed Integer Linear Optimization solver,
- via `sage_numerical_backends_coin <https://doc.sagemath.org/html/en/reference/spkg/sage_numerical_backends_coin.html#spkg-sage-numerical-backends-coin>`_
+ `COIN/OR CBC <https://passagemath.org/docs/latest/html/en/reference/spkg/cbc.html#spkg-cbc>`_ Mixed Integer Linear Optimization solver,
+ via `sage_numerical_backends_coin <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_coin.html#spkg-sage-numerical-backends-coin>`_
 
 `pip install "passagemath-polyhedra[cplex]"`
  CPLEX Mixed Integer Optimization solver (proprietary; requires licensed installation),
- via `sage_numerical_backends_cplex <https://doc.sagemath.org/html/en/reference/spkg/sage_numerical_backends_cplex.html#spkg-sage-numerical-backends-cplex>`_
+ via `sage_numerical_backends_cplex <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_cplex.html#spkg-sage-numerical-backends-cplex>`_
 
 `pip install "passagemath-polyhedra[cvxpy]"`
- `CVXPy <https://doc.sagemath.org/html/en/reference/spkg/cvxpy.html#spkg-cvxpy>`_ as middle-end for `various backends <https://www.cvxpy.org/install/>`_
+ `CVXPy <https://passagemath.org/docs/latest/html/en/reference/spkg/cvxpy.html#spkg-cvxpy>`_ as middle-end for `various backends <https://www.cvxpy.org/install/>`_
 
 `pip install "passagemath-polyhedra[gurobi]"`
- Gurobi Mixed Integer Optimization solver (proprietary; requires licensed installation), via `sage_numerical_backends_gurobi <https://doc.sagemath.org/html/en/reference/spkg/sage_numerical_backends_gurobi.html#spkg-sage-numerical-backends-gurobi>`_
+ Gurobi Mixed Integer Optimization solver (proprietary; requires licensed installation), via `sage_numerical_backends_gurobi <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_gurobi.html#spkg-sage-numerical-backends-gurobi>`_
 
 `pip install "passagemath-polyhedra[scip]"`
- `SCIP <https://doc.sagemath.org/html/en/reference/spkg/scip.html#spkg-scip>`_ Mixed Integer Optimization solver,
- via `PySCIPOpt <https://doc.sagemath.org/html/en/reference/spkg/pyscipopt.html#spkg-pyscipopt>`_
+ `SCIP <https://passagemath.org/docs/latest/html/en/reference/spkg/scip.html#spkg-scip>`_ Mixed Integer Optimization solver,
+ via `PySCIPOpt <https://passagemath.org/docs/latest/html/en/reference/spkg/pyscipopt.html#spkg-pyscipopt>`_
 
 
 Development

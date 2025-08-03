@@ -3,7 +3,7 @@
 
 Sage 能够进行多种与基本代数和微积分相关的计算，例如求解方程、微分、积分和拉普拉斯变换。
 更多示例，请参阅
-`Sage Constructions <http://doc.sagemath.org/html/en/constructions/>`_
+`Sage Constructions <http://passagemath.org/docs/latest/html/en/constructions/>`_
 。
 
 在所有这些示例中，函数中的变量都需要使用 ``var(...)`` 定义。例如：
@@ -397,4 +397,4 @@ Sage 利用 PARI [GAP]_ 和 Maxima [Max]_ ,实现了多种正交多项式和特�
 ---------------
 
 参见
-`Vector Calculus Tutorial <http://doc.sagemath.org/html/en/thematic_tutorials/vector_calculus.html>`__.
+`Vector Calculus Tutorial <http://passagemath.org/docs/latest/html/en/thematic_tutorials/vector_calculus.html>`__.

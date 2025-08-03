@@ -1232,8 +1232,8 @@ vollständigen Dokumentation. Das Einführungstutorial ist jedoch auch auf deuts
 .. rubric:: Footnotes
 
 .. [#keywords] https://docs.python.org/3/reference/lexical_analysis.html#keywords
-.. [#tutorial] http://doc.sagemath.org/html/de/tutorial/
-.. [#units] http://doc.sagemath.org/html/en/reference/calculus/sage/symbolic/units.html
-.. [#2dgraphics] http://doc.sagemath.org/html/en/reference/plotting/index.html
-.. [#scatterplot] http://doc.sagemath.org/html/en/reference/plotting/sage/plot/scatter_plot.html
+.. [#tutorial] http://passagemath.org/docs/latest/html/de/tutorial/
+.. [#units] http://passagemath.org/docs/latest/html/en/reference/calculus/sage/symbolic/units.html
+.. [#2dgraphics] http://passagemath.org/docs/latest/html/en/reference/plotting/index.html
+.. [#scatterplot] http://passagemath.org/docs/latest/html/en/reference/plotting/sage/plot/scatter_plot.html
 .. [#listcomp] https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions

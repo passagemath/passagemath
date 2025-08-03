@@ -13,7 +13,7 @@ Sage 可以生成二维和三维图形。
 在二维中，Sage 可以绘制圆、线和多边形；在直角坐标系中绘制函数图形；
 还可以绘制极坐标图、轮廓图和矢量场图。本文档展示了若干这些图形的例子。
 有关使用 Sage 绘图的更多例子，请参见 :ref:`section-systems` 和 :ref:`section-maxima`，
-以及 `Sage Constructions <http://doc.sagemath.org/html/en/constructions/>`_ 文档。
+以及 `Sage Constructions <http://passagemath.org/docs/latest/html/en/constructions/>`_ 文档。
 
 该命令生成一个位于原点的半径为 1 的黄色圆：
 

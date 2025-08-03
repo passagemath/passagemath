@@ -27,8 +27,8 @@ It was created in October 2024 with the following goals:
 -  inviting collaborations with upstream projects,
 -  `building a professional, respectful, inclusive
    community <https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ>`__,
--  `[empowering Sage users to participate in the scientific Python ecosystem
-   <https://github.com/passagemath/passagemath/issues/248](https://github.com/passagemath/passagemath/issues/248)https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
+-  `empowering Sage users to participate in the scientific Python ecosystem
+   <https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
 -  developing a port to `Pyodide <https://pyodide.org/en/stable/>`__ for
    serverless deployment with Javascript,
 -  developing a native Windows port.
@@ -39,16 +39,15 @@ available online.
 passagemath attempts to support and provides binary wheels suitable for
 all major Linux distributions and recent versions of macOS.
 
-For the Linux aarch64 (ARM) platform, some third-party packages are still missing wheels;
-see ` <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__
-for instructions for building them from source.
+For the Linux aarch64 (ARM) platform, some third-party packages are still missing
+wheels; see the `instructions for building them from source <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__.
 
 Binary wheels for native Windows (x86_64) are are available for a subset of
 the passagemath distributions. Use of the full functionality of passagemath
 on Windows currently requires the use of Windows Subsystem for Linux (WSL)
 or virtualization.
 
-The supported Python versions in the passagemath 10.6.x series are 3.9.x-3.13.x.
+The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x.
 
 
 About this pip-installable distribution package
@@ -62,19 +61,19 @@ with elliptic curves defined over the rational numbers.
 What is included
 ----------------
 
-- `Sage interface to Cremona’s eclib library (also known as mwrank) <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/interface.html>`_
+- `Sage interface to Cremona’s eclib library (also known as mwrank) <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/interface.html>`_
 
-- `Cython interface to Cremona’s eclib library (also known as mwrank) <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/mwrank.html>`_
+- `Cython interface to Cremona’s eclib library (also known as mwrank) <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/mwrank.html>`_
 
-- `Cremona matrices <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/mat.html>`_
+- `Cremona matrices <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/mat.html>`_
 
-- `Modular symbols using eclib newforms <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/newforms.html>`_
+- `Modular symbols using eclib newforms <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/newforms.html>`_
 
-- `Cremona modular symbols <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/homspace.html>`_
+- `Cremona modular symbols <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/homspace.html>`_
 
-- `Cremona modular symbols (constructor) <https://doc.sagemath.org/html/en/reference/libs/sage/libs/eclib/constructor.html>`_
+- `Cremona modular symbols (constructor) <https://passagemath.org/docs/latest/html/en/reference/libs/sage/libs/eclib/constructor.html>`_
 
-- `Interface to the mwrank program <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/mwrank.html#module-sage.interfaces.mwrank>`_
+- `Interface to the mwrank program <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/mwrank.html#module-sage.interfaces.mwrank>`_
 
 
 Examples
@@ -96,7 +95,7 @@ Finding the installation location of the mwrank program::
     >>> Mwrank().absolute_filename()
     '.../bin/mwrank'
 
-Use with `sage.schemes.elliptic_curves <https://doc.sagemath.org/html/en/reference/arithmetic_curves/index.html#elliptic-curves>`_::
+Use with `sage.schemes.elliptic_curves <https://passagemath.org/docs/latest/html/en/reference/arithmetic_curves/index.html#elliptic-curves>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib[test]" ipython
 

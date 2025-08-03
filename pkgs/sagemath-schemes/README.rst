@@ -27,8 +27,8 @@ It was created in October 2024 with the following goals:
 -  inviting collaborations with upstream projects,
 -  `building a professional, respectful, inclusive
    community <https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ>`__,
--  `[empowering Sage users to participate in the scientific Python ecosystem
-   <https://github.com/passagemath/passagemath/issues/248](https://github.com/passagemath/passagemath/issues/248)https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
+-  `empowering Sage users to participate in the scientific Python ecosystem
+   <https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
 -  developing a port to `Pyodide <https://pyodide.org/en/stable/>`__ for
    serverless deployment with Javascript,
 -  developing a native Windows port.
@@ -39,16 +39,15 @@ available online.
 passagemath attempts to support and provides binary wheels suitable for
 all major Linux distributions and recent versions of macOS.
 
-For the Linux aarch64 (ARM) platform, some third-party packages are still missing wheels;
-see ` <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__
-for instructions for building them from source.
+For the Linux aarch64 (ARM) platform, some third-party packages are still missing
+wheels; see the `instructions for building them from source <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__.
 
 Binary wheels for native Windows (x86_64) are are available for a subset of
 the passagemath distributions. Use of the full functionality of passagemath
 on Windows currently requires the use of Windows Subsystem for Linux (WSL)
 or virtualization.
 
-The supported Python versions in the passagemath 10.6.x series are 3.9.x-3.13.x.
+The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x.
 
 
 About this pip-installable distribution package
@@ -60,21 +59,21 @@ This pip-installable source distribution `sagemath-schemes` is an experimental d
 What is included
 ----------------
 
-* `Ideals and Varieties <https://doc.sagemath.org/html/en/reference/polynomial_rings/sage/rings/polynomial/multi_polynomial_ideal.html>`_
+* `Ideals and Varieties <https://passagemath.org/docs/latest/html/en/reference/polynomial_rings/sage/rings/polynomial/multi_polynomial_ideal.html>`_
 
-* `Schemes <https://doc.sagemath.org/html/en/reference/schemes/index.html>`_
+* `Schemes <https://passagemath.org/docs/latest/html/en/reference/schemes/index.html>`_
 
-* `Plane and Space Curves <https://doc.sagemath.org/html/en/reference/curves/index.html>`_
+* `Plane and Space Curves <https://passagemath.org/docs/latest/html/en/reference/curves/index.html>`_
 
-* `Elliptic and Hyperelliptic Curves <https://doc.sagemath.org/html/en/reference/arithmetic_curves/index.html>`_
+* `Elliptic and Hyperelliptic Curves <https://passagemath.org/docs/latest/html/en/reference/arithmetic_curves/index.html>`_
 
-* `Modular Forms <https://doc.sagemath.org/html/en/reference/modfrm/index.html>`_
+* `Modular Forms <https://passagemath.org/docs/latest/html/en/reference/modfrm/index.html>`_
 
-* `Modular Symbols <https://doc.sagemath.org/html/en/reference/modsym/index.html>`_
+* `Modular Symbols <https://passagemath.org/docs/latest/html/en/reference/modsym/index.html>`_
 
-* `Modular Abelian Varieties <https://doc.sagemath.org/html/en/reference/modabvar/index.html>`_
+* `Modular Abelian Varieties <https://passagemath.org/docs/latest/html/en/reference/modabvar/index.html>`_
 
-* `Arithmetic Dynamical Systems <https://doc.sagemath.org/html/en/reference/dynamics/index.html#arithmetic-dynamical-systems>`_
+* `Arithmetic Dynamical Systems <https://passagemath.org/docs/latest/html/en/reference/dynamics/index.html#arithmetic-dynamical-systems>`_
 
 
 Status

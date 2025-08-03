@@ -27,8 +27,8 @@ It was created in October 2024 with the following goals:
 -  inviting collaborations with upstream projects,
 -  `building a professional, respectful, inclusive
    community <https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ>`__,
--  `[empowering Sage users to participate in the scientific Python ecosystem
-   <https://github.com/passagemath/passagemath/issues/248](https://github.com/passagemath/passagemath/issues/248)https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
+-  `empowering Sage users to participate in the scientific Python ecosystem
+   <https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
 -  developing a port to `Pyodide <https://pyodide.org/en/stable/>`__ for
    serverless deployment with Javascript,
 -  developing a native Windows port.
@@ -39,16 +39,15 @@ available online.
 passagemath attempts to support and provides binary wheels suitable for
 all major Linux distributions and recent versions of macOS.
 
-For the Linux aarch64 (ARM) platform, some third-party packages are still missing wheels;
-see ` <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__
-for instructions for building them from source.
+For the Linux aarch64 (ARM) platform, some third-party packages are still missing
+wheels; see the `instructions for building them from source <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__.
 
 Binary wheels for native Windows (x86_64) are are available for a subset of
 the passagemath distributions. Use of the full functionality of passagemath
 on Windows currently requires the use of Windows Subsystem for Linux (WSL)
 or virtualization.
 
-The supported Python versions in the passagemath 10.6.x series are 3.9.x-3.13.x.
+The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x.
 
 
 About this pip-installable distribution package
@@ -61,18 +60,18 @@ It provides a small subset of the modules of the Sage library ("sagelib", ``pass
 What is included
 ----------------
 
-* `Symbolic Calculus <https://doc.sagemath.org/html/en/reference/calculus/index.html>`_
+* `Symbolic Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/index.html>`_
 
 * `Pynac <http://pynac.org/>`_ (fork of GiNaC)
 
-* Arithmetic Functions, `Elementary and Special Functions <https://doc.sagemath.org/html/en/reference/functions/index.html>`_
-  (via `sagemath-categories <https://doc.sagemath.org/html/en/reference/spkg/sagemath_categories.html>`_)
+* Arithmetic Functions, `Elementary and Special Functions <https://passagemath.org/docs/latest/html/en/reference/functions/index.html>`_
+  (via `sagemath-categories <https://passagemath.org/docs/latest/html/en/reference/spkg/sagemath_categories.html>`_)
 
-* `Asymptotic Expansions <https://doc.sagemath.org/html/en/reference/asymptotic/index.html>`_
+* `Asymptotic Expansions <https://passagemath.org/docs/latest/html/en/reference/asymptotic/index.html>`_
 
-* `SageManifolds <https://sagemanifolds.obspm.fr/>`_: `Topological, Differentiable, Pseudo-Riemannian, Poisson Manifolds <https://doc.sagemath.org/html/en/reference/manifolds/index.html>`_
+* `SageManifolds <https://sagemanifolds.obspm.fr/>`_: `Topological, Differentiable, Pseudo-Riemannian, Poisson Manifolds <https://passagemath.org/docs/latest/html/en/reference/manifolds/index.html>`_
 
-* `Hyperbolic Geometry <https://doc.sagemath.org/html/en/reference/hyperbolic_geometry/index.html>`_
+* `Hyperbolic Geometry <https://passagemath.org/docs/latest/html/en/reference/hyperbolic_geometry/index.html>`_
 
 
 Examples
@@ -111,14 +110,14 @@ Available as extras, from other distributions
 ---------------------------------------------
 
 `pip install "passagemath-symbolics[giac]"`
- Computer algebra system `Giac <https://doc.sagemath.org/html/en/reference/spkg/giac.html>`_, via `passagemath-giac <https://doc.sagemath.org/html/en/reference/spkg/sagemath_giac.html>`_
+ Computer algebra system `Giac <https://passagemath.org/docs/latest/html/en/reference/spkg/giac.html>`_, via `passagemath-giac <https://passagemath.org/docs/latest/html/en/reference/spkg/sagemath_giac.html>`_
 
 `pip install "passagemath-symbolics[primecount]"`
- `Prime counting function <https://doc.sagemath.org/html/en/reference/functions/sage/functions/prime_pi.html>`_
- implementation `primecount <https://doc.sagemath.org/html/en/reference/spkg/primecount.html>`_, via `primecountpy <https://doc.sagemath.org/html/en/reference/spkg/primecountpy.html>`_
+ `Prime counting function <https://passagemath.org/docs/latest/html/en/reference/functions/sage/functions/prime_pi.html>`_
+ implementation `primecount <https://passagemath.org/docs/latest/html/en/reference/spkg/primecount.html>`_, via `primecountpy <https://passagemath.org/docs/latest/html/en/reference/spkg/primecountpy.html>`_
 
 `pip install "passagemath-symbolics[sympy]"`
- Python library for symbolic mathematics / computer algebra system `SymPy <https://doc.sagemath.org/html/en/reference/spkg/sympy.html>`_
+ Python library for symbolic mathematics / computer algebra system `SymPy <https://passagemath.org/docs/latest/html/en/reference/spkg/sympy.html>`_
 
 `pip install "passagemath-symbolics[plot]"`
  Plotting facilities

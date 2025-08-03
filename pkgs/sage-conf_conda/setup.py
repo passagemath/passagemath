@@ -26,7 +26,7 @@ class build_py(setuptools_build_py):
 
         if not os.environ.get('CONDA_PREFIX', ''):
             raise SetupError('No conda environment is active. '
-                             'See https://doc.sagemath.org/html/en/installation/conda.html on how to get started.')
+                             'See https://passagemath.org/docs/latest/html/en/installation/conda.html on how to get started.')
 
         cmd = f"cd {SAGE_ROOT} && ./configure --enable-build-as-root --with-system-python3=force --disable-notebook --disable-sagelib --disable-sage_conf --disable-doc"
         cmd += ' --with-python=$CONDA_PREFIX/bin/python --prefix="$CONDA_PREFIX"'

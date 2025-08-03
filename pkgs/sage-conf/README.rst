@@ -31,7 +31,7 @@ goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support all major Linux distributions and recent versions of
@@ -130,7 +130,7 @@ The version of the distribution package in the directory
 `pkgs/sage-conf_conda <https://github.com/passagemath/passagemath/tree/main/pkgs/sage-conf_conda/>`_
 may be used in an installation method of SageMath, where all packages
 are provided by conda.  This method is described in
-https://doc.sagemath.org/html/en/installation/conda.html#using-conda-to-provide-all-dependencies-for-the-sage-library-experimental
+https://passagemath.org/docs/latest/html/en/installation/conda.html#using-conda-to-provide-all-dependencies-for-the-sage-library-experimental
 
 
 passagemath-conf in downstream distributions

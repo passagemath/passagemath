@@ -27,8 +27,8 @@ It was created in October 2024 with the following goals:
 -  inviting collaborations with upstream projects,
 -  `building a professional, respectful, inclusive
    community <https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ>`__,
--  `[empowering Sage users to participate in the scientific Python ecosystem
-   <https://github.com/passagemath/passagemath/issues/248](https://github.com/passagemath/passagemath/issues/248)https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
+-  `empowering Sage users to participate in the scientific Python ecosystem
+   <https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
 -  developing a port to `Pyodide <https://pyodide.org/en/stable/>`__ for
    serverless deployment with Javascript,
 -  developing a native Windows port.
@@ -39,16 +39,15 @@ available online.
 passagemath attempts to support and provides binary wheels suitable for
 all major Linux distributions and recent versions of macOS.
 
-For the Linux aarch64 (ARM) platform, some third-party packages are still missing wheels;
-see ` <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__
-for instructions for building them from source.
+For the Linux aarch64 (ARM) platform, some third-party packages are still missing
+wheels; see the `instructions for building them from source <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__.
 
 Binary wheels for native Windows (x86_64) are are available for a subset of
 the passagemath distributions. Use of the full functionality of passagemath
 on Windows currently requires the use of Windows Subsystem for Linux (WSL)
 or virtualization.
 
-The supported Python versions in the passagemath 10.6.x series are 3.9.x-3.13.x.
+The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x.
 
 
 About this pip-installable distribution package
@@ -60,11 +59,11 @@ This pip-installable source distribution ``passagemath-combinat`` is a distribut
 What is included
 ----------------
 
-* `Enumerative Combinatorics <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/enumerated_sets.html#sage-combinat-enumerated-sets>`_: `Partitions, Tableaux <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/catalog_partitions.html>`_
+* `Enumerative Combinatorics <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/enumerated_sets.html#sage-combinat-enumerated-sets>`_: `Partitions, Tableaux <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/catalog_partitions.html>`_
 
-* `Combinatorics on Words <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/words/all.html#sage-combinat-words-all>`_, `Free Monoids <https://doc.sagemath.org/html/en/reference/monoids/index.html>`_, `Automatic Semigroups <https://doc.sagemath.org/html/en/reference/monoids/sage/monoids/automatic_semigroup.html>`_
+* `Combinatorics on Words <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/words/all.html#sage-combinat-words-all>`_, `Free Monoids <https://passagemath.org/docs/latest/html/en/reference/monoids/index.html>`_, `Automatic Semigroups <https://passagemath.org/docs/latest/html/en/reference/monoids/sage/monoids/automatic_semigroup.html>`_
 
-* `Symmetric Functions <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/sf/all.html#sage-combinat-sf-all>`_, other `Algebras with combinatorial bases <https://doc.sagemath.org/html/en/reference/algebras/index.html>`_
+* `Symmetric Functions <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/sf/all.html#sage-combinat-sf-all>`_, other `Algebras with combinatorial bases <https://passagemath.org/docs/latest/html/en/reference/algebras/index.html>`_
 
 * see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-combinat/MANIFEST.in
 

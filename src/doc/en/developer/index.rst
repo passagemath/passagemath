@@ -21,7 +21,7 @@ the globe.
 
 To begin with, you need of course your own copy of Sage source code to change
 it. Use our `Installation guide
-<http://doc.sagemath.org/html/en/installation/source.html>`_ to get the source
+<http://passagemath.org/docs/latest/html/en/installation/source.html>`_ to get the source
 code and build Sage from source. If you have never worked on software before,
 pay close attention to the prerequisites to build on your platform.
 

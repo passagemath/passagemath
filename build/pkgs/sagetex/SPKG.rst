@@ -52,8 +52,8 @@ Notes
 To use SageTeX, both Sage and LaTeX need to know about it. SageTeX comes
 standard with Sage, so you only need to make sure LaTeX can find what it
 needs. Full details are in the Sage installation guide at
-http://doc.sagemath.org/html/en/installation/ and
-http://doc.sagemath.org/html/en/tutorial/sagetex.html .
+http://passagemath.org/docs/latest/html/en/installation/ and
+http://passagemath.org/docs/latest/html/en/tutorial/sagetex.html .
 
 The directory ``$SAGE_ROOT/venv/share/doc/sagetex`` contains
 documentation and an example file. See

@@ -84,7 +84,7 @@ computador. Aqui faremos apenas alguns comentários.
    cálculos do Sage em um arquivo LaTeX), você deve tornar
    o SageTex disponível para a sua distribuição TeX. Para fazer isso,
    consulte a seção "Make SageTex known to TeX" no `Sage installation
-   guide <http://doc.sagemath.org/html/en/>`_. O procedimento é bem
+   guide <http://passagemath.org/docs/latest/html/en/>`_. O procedimento é bem
    simples; você precisa apenas definir algumas variáveis no seu
    sistema ou copiar um arquivo para um diretório onde o TeX poderá
    encontrá-lo.
