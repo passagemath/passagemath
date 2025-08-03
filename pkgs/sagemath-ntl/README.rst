@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``sagemath-ntl`` is a small
+This pip-installable package ``passagemath-ntl`` is a small
 distribution that provides modules that depend on
 `NTL <https://libntl.org/>`_, the library for doing number theory.
 
