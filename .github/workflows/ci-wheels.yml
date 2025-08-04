@@ -202,7 +202,7 @@ jobs:
             if [ -r "$wheel" ]; then
               cd pkgs/$pkg
               tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py'$python_version_no_dot'-norequirements/')
-              extras=$(tox -l -q| sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
+              extras=$(tox -l -q| grep -v notest | sed -E 's/sagepython-.*nopypi-norequirements//;s/^-(.*)/[\1]/;s/-/,/;s/^/'$pkg'/;')
               set +e
               tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --installpkg "$wheel"
               status=$?
