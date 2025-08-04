@@ -173,9 +173,13 @@ by Sage, you can link toward it without specifying its full path:
    :widths: 4 4 4
    :header-rows: 0
 
-   * - GitHub issue
+   * - GitHub issue (in sagemath/sage)
      - ``:issue:`17596```
      - :issue:`17596`
+
+   * - GitHub issue (in passagemath/passagemath)
+     - ``:passagemathissue:`700```
+     - :passagemathissue:`700`
 
    * - Sage repository file or directory
      - ``:sage_root:`src/doc/en```

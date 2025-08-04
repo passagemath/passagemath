@@ -508,8 +508,9 @@ def process_dollars(s):
 pythonversion = sys.version.split(' ')[0]
 extlinks = {
     'python': (f'https://docs.python.org/release/{pythonversion}/%s', None),
-    'issue': ('https://github.com/sagemath/sage/issues/%s', 'Issue #%s'),
-    'sage_root': ('https://github.com/sagemath/sage/tree/develop/%s', 'SAGE_ROOT/%s'),
+    'issue': ('https://github.com/sagemath/sage/issues/%s', 'upstream Issue #%s'),
+    'passagemathissue': ('https://github.com/passagemath/passagemath/issues/%s', 'passagemath Issue #%s'),
+    'sage_root': ('https://github.com/passagemath/passagemath/tree/main/%s', 'SAGE_ROOT/%s'),
     'wikipedia': ('https://en.wikipedia.org/wiki/%s', 'Wikipedia article %s'),
     'arxiv': ('https://arxiv.org/abs/%s', 'arXiv %s'),
     'oeis': ('https://oeis.org/%s', 'OEIS sequence %s'),

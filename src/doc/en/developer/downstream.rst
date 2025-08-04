@@ -1,6 +1,6 @@
-=============================
-Packaging SageMath Downstream
-=============================
+===============================================================
+Packaging the Sage Library for Monolithic Distribution (ignore)
+===============================================================
 
 This document is intended for downstream maintainers (e.g., Linux distribution
 package maintainers) who wish to create redistributable builds of Sage.
