@@ -1,0 +1,1 @@
+dual_pairs @ git+https://github.com/passagemath/passagemath-pkg-dual-pairs
