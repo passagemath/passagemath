@@ -25,25 +25,8 @@ Testing PRs with GitHub Actions
 `GitHub Actions <https://github.com/passagemath/passagemath/actions>`_ are automatically
 and constantly testing GitHub PRs to identify errors early and ensure code
 quality. In particular, Build & Test workflows perform an incremental build of
-Sage and run doctests on a selection of major platforms including Ubuntu,
+passagemath and run doctests on a selection of major platforms including Ubuntu,
 macOS, and Conda.
-
-
-Sage buildbots
-==============
-
-Before a new release, the release manager runs a fleet of `buildbots
-<http://build.sagemath.org>`_ to make it sure that Sage builds correctly on all
-of our supported platforms.
-
-
-Test reports on sage-release
-============================
-
-Sage developers and users are encouraged to test releases that are announced on
-`Sage Release <https://groups.google.com/forum/#!forum/sage-release>`_ on their
-machines and to report the results (successes and failures) by responding to the
-announcements.
 
 
 Testing on multiple platforms using Docker
@@ -73,7 +56,7 @@ setting is in Preferences -> Resources -> Advanced.
 
    As an alternative, you can also run Docker in GitHub Codespaces
    (or another cloud service) using a container with the Docker-in-Docker
-   feature. Sage provides a suitable dev container configuration
+   feature. passagemath provides a suitable dev container configuration
    `.devcontainer/tox-docker-in-docker
    <https://github.com/passagemath/passagemath/tree/develop/.devcontainer/tox-docker-in-docker>`_:
 
@@ -89,7 +72,7 @@ or other container registries.  For
 example, to run the current stable (LTS) version of Ubuntu
 interactively, you can use the shell command::
 
-  [mkoeppe@sage sage]$ docker run -it ubuntu:latest
+  [alice@localhost passagemath]$ docker run -it ubuntu:latest
   root@9f3398da43c2:/#
 
 Here ``ubuntu`` is referred to as the "image (name)" and ``latest`` as
@@ -113,26 +96,26 @@ The above command drops you in a root shell on the container::
 Exiting the shell terminates the container::
 
   root@9f3398da43c2:/# ^D
-  [mkoeppe@sage sage]$
+  [alice@localhost passagemath]$
 
-Let us work with a distclean Sage source tree.  If you are using git,
+Let us work with a distclean passagemath source tree.  If you are using git,
 a good way to get one (without losing a precious installation in
 ``SAGE_LOCAL``) is by creating a new worktree::
 
-  [mkoeppe@sage sage] git worktree add worktree-ubuntu-latest
-  [mkoeppe@sage sage] cd worktree-ubuntu-latest
-  [mkoeppe@sage worktree-ubuntu-latest] ls
+  [alice@localhost passagemath] git worktree add worktree-ubuntu-latest
+  [alice@localhost passagemath] cd worktree-ubuntu-latest
+  [alice@localhost worktree-ubuntu-latest] ls
   COPYING.txt ... Makefile ... configure.ac ... src tox.ini
 
 This is not bootstrapped (``configure`` is missing), so let's bootstrap it::
 
-  [mkoeppe@sage worktree-ubuntu-latest] make configure
+  [alice@localhost worktree-ubuntu-latest] make configure
   ...
 
 We can start a container again with same image, ``ubuntu:latest``, but
 this time let's mount the current directory into it::
 
-  [mkoeppe@sage worktree-ubuntu-latest]$ docker run -it --mount type=bind,source=$(pwd),target=/sage ubuntu:latest
+  [alice@localhost worktree-ubuntu-latest]$ docker run -it --mount type=bind,source=$(pwd),target=/sage ubuntu:latest
   root@39d693b2a75d:/# mount | grep sage
   osxfs on /sage type fuse.osxfs (rw,nosuid,nodev,relatime,user_id=0,group_id=0,allow_other,max_read=1048576)
   root@39d693b2a75d:/# cd sage
@@ -146,10 +129,10 @@ Typical Docker images provide minimal installations of packages only::
   root@39d693b2a75d:/sage#
 
 As you can see above, the image ``ubuntu:latest`` has neither a Python nor
-a GCC installed, which are among the build prerequisites of Sage.  We
+a GCC installed, which are among the build prerequisites of passagemath.  We
 need to install them using the Linux distribution's package manager first.
 
-Sage facilitates testing various Linux distributions on Docker as follows.
+passagemath facilitates testing various Linux distributions on Docker as follows.
 
 Discovering the system's package system
 ---------------------------------------
@@ -161,7 +144,7 @@ Discovering the system's package system
 
 Let's install gcc, hoping that the Ubuntu package providing it is
 simply named ``gcc``.  If we forgot what the package manager on
-Debian-derived Linux distributions is called, we can ask Sage for a
+Debian-derived Linux distributions is called, we can ask passagemath for a
 reminder::
 
   root@39d693b2a75d:/sage# build/bin/sage-print-system-package-command debian install gcc
@@ -173,8 +156,8 @@ from the server first::
   root@39d693b2a75d:/sage# apt-get update
   root@39d693b2a75d:/sage# apt-get install gcc
 
-Using Sage's database of distribution prerequisites
----------------------------------------------------
+Using passagemath's database of distribution prerequisites
+----------------------------------------------------------
 
 The source code of the Sage distribution contains a database of
 package names in various distributions' package managers.  For
@@ -219,7 +202,7 @@ on our container to install the necessary build prerequisites::
   ...
   Done.
 
-(The Sage `Installation Guide <../installation/index.html>`_ also
+(The passagemath `Installation Guide <../installation/index.html>`_ also
 provides such command lines for some distributions; these are
 automatically generated from the database of package names.)
 
@@ -240,10 +223,10 @@ Let's just follow this helpful hint::
 
 .. _section-equiv-distro-packages:
 
-Using Sage's database of equivalent distribution packages
----------------------------------------------------------
+Using passagemath's database of equivalent distribution packages
+----------------------------------------------------------------
 
-At the end of the ``./configure`` run, Sage issued a message like the
+At the end of the ``./configure`` run, passagemath issued a message like the
 following::
 
   configure: notice: the following SPKGs did not find equivalent system packages:
@@ -255,7 +238,7 @@ following::
   configure: After installation, re-run configure using:
   configure:   $ make reconfigure
 
-This information comes from Sage's database of equivalent system
+This information comes from passagemath's database of equivalent system
 packages.  For example::
 
   $ ls build/pkgs/flint/distros/
@@ -291,14 +274,14 @@ After terminating the container, the following command shows the status
 of the container you just exited::
 
   root@39d693b2a75d:/sage# ^D
-  [mkoeppe@sage worktree-ubuntu-latest]$ docker ps -a | head -n3
+  [alice@localhost worktree-ubuntu-latest]$ docker ps -a | head -n3
   CONTAINER ID   IMAGE           COMMAND       CREATED         STATUS
   39d693b2a75d   ubuntu:latest   "/bin/bash"   8 minutes ago   Exited (0) 6 seconds ago
   9f3398da43c2   ubuntu:latest   "/bin/bash"   8 minutes ago   Exited (0) 8 minutes ago
 
 We can go back to the container with the command::
 
-  [mkoeppe@sage worktree-ubuntu-latest]$ docker start -a -i 39d693b2a75d
+  [alice@localhost worktree-ubuntu-latest]$ docker start -a -i 39d693b2a75d
   root@9f3398da43c2:/#
 
 Here, ``39d693b2a75d`` is the container id, which appeared in the
@@ -307,7 +290,7 @@ shell prompts and in the output of ``docker ps``.
 We can create a new image corresponding to its current state::
 
   root@39d693b2a75d:/# ^D
-  [mkoeppe@sage worktree-ubuntu-latest]$ docker commit 39d693b2a75d ubuntu-latest-minimal-17
+  [alice@localhost worktree-ubuntu-latest]$ docker commit 39d693b2a75d ubuntu-latest-minimal-17
   sha256:4151c5ca4476660f6181cdb13923da8fe44082222b984c377fb4fd6cc05415c1
 
 where ``ubuntu-latest-minimal-17`` is an arbitrary symbolic name for the new
@@ -319,7 +302,7 @@ the one that we terminated.  Again we want to mount our worktree into
 it; otherwise, because we did not make a copy, the new container will
 have no access to the worktree::
 
-  [mkoeppe@sage worktree-ubuntu-latest]$ docker run -it \
+  [alice@localhost worktree-ubuntu-latest]$ docker run -it \
     --mount type=bind,source=$(pwd),target=/sage ubuntu-latest-minimal-17
   root@73987568712c:/# cd sage
   root@73987568712c:/sage# command -v gcc
@@ -327,7 +310,7 @@ have no access to the worktree::
   root@73987568712c:/sage# command -v bunzip2
   /usr/bin/bunzip2
   root@73987568712c:/sage# ^D
-  [mkoeppe@sage worktree-ubuntu-latest]$
+  [alice@localhost worktree-ubuntu-latest]$
 
 The image ``ubuntu-latest-minimal-17`` can be run in as many
 containers as we want and can also be shared with other users or
@@ -346,10 +329,10 @@ on their respective machines.
 Generating dockerfiles
 ----------------------
 
-Sage also provides a script for generating a ``Dockerfile``, which is
+passagemath also provides a script for generating a ``Dockerfile``, which is
 a recipe for automatically building a new image::
 
-  [mkoeppe@sage sage]$ .ci/write-dockerfile.sh debian ":standard: :optional:" > Dockerfile
+  [alice@localhost passagemath]$ .ci/write-dockerfile.sh debian ":standard: :optional:" > Dockerfile
 
 (The second argument is passed to ``sage -package list`` to find packages for the listed package types.)
 
@@ -359,7 +342,7 @@ The ``Dockerfile`` instructs the command ``docker build`` to build a
 new Docker image.  Let us take a quick look at the generated file;
 this is slightly simplified::
 
-  [mkoeppe@sage sage]$ cat Dockerfile
+  [alice@localhost passagemath]$ cat Dockerfile
   # Automatically generated by SAGE_ROOT/.ci/write-dockerfile.sh
   # the :comments: separate the generated file into sections
   # to simplify writing scripts that customize this file
@@ -405,7 +388,7 @@ Finally, to build and test...::
 You can customize the image build process by passing build arguments to the
 command ``docker build``.  For example::
 
-  [mkoeppe@sage sage]$ docker build . -f Dockerfile \
+  [alice@localhost passagemath]$ docker build . -f Dockerfile \
     --build-arg BASE_IMAGE=ubuntu:latest \
     --build-arg NUMPROC=4 \
     --build-arg EXTRA_CONFIGURE_ARGS="--with-python=/usr/bin/python3.42"
@@ -418,7 +401,7 @@ quite long.  Let us instead just do a partial build, consisting of one
 small package, by setting the arguments ``TARGETS_PRE`` and
 ``TARGETS``.  We use a silent build (``make V=0``)::
 
-  [mkoeppe@sage sage]$ docker build . -f Dockerfile \
+  [alice@localhost passagemath]$ docker build . -f Dockerfile \
     --build-arg TARGETS_PRE=ratpoints \
     --build-arg TARGETS=ratpoints \
     --build-arg USE_MAKEFLAGS="V=0"
@@ -446,7 +429,7 @@ small package, by setting the arguments ``TARGETS_PRE`` and
 
 We can now start a container using the image id shown in the last step::
 
-  [mkoeppe@sage sage]$ docker run -it 2d06689d39fa bash
+  [alice@localhost passagemath]$ docker run -it 2d06689d39fa bash
   root@fab59e09a641:/sage# ls -l logs/pkgs/
   total 236
   -rw-r--r-- 1 root root 231169 Mar 26 22:07 config.log
@@ -490,7 +473,7 @@ Let us do another partial build.  We choose a package that we suspect
 might not work on all platforms, ``surf``, which was marked as
 "experimental" in 2017::
 
-  [mkoeppe@sage sage]$ docker build . -f Dockerfile \
+  [alice@localhost passagemath]$ docker build . -f Dockerfile \
     --build-arg BASE_IMAGE=ubuntu:latest \
     --build-arg NUMPROC=4 \
     --build-arg TARGETS_PRE=surf \
@@ -546,15 +529,15 @@ Note that no image id is shown at the end; the build failed, and no
 image is created.  However, the container in which the last step of
 the build was attempted exists::
 
-  [mkoeppe@sage sage]$ docker ps -a |head -n3
+  [alice@localhost passagemath]$ docker ps -a |head -n3
   CONTAINER ID        IMAGE                      COMMAND                   CREATED             STATUS
   61833bea6a6d        7b51411520c3               "/bin/sh -c 'make SA…"    9 minutes ago       Exited (2) 1 minute ago
   73987568712c        ubuntu-latest-minimal-17   "/bin/bash"               24 hours ago        Exited (0) 23 hours ago
 
 We can copy the build directory from the container for inspection::
 
-  [mkoeppe@sage sage]$ docker cp 61833bea6a6d:/sage/local/var/tmp/sage/build ubuntu-build
-  [mkoeppe@sage sage]$ ls ubuntu-build/surf*/src
+  [alice@localhost passagemath]$ docker cp 61833bea6a6d:/sage/local/var/tmp/sage/build ubuntu-build
+  [alice@localhost passagemath]$ ls ubuntu-build/surf*/src
   AUTHORS         TODO            curve           misc
   COPYING         acinclude.m4    debug           missing
   ChangeLog       aclocal.m4      dither          mkinstalldirs
@@ -569,9 +552,9 @@ We can copy the build directory from the container for inspection::
 Alternatively, we can use ``docker commit`` as explained earlier to
 create an image from the container::
 
-  [mkoeppe@sage sage]$ docker commit 61833bea6a6d
+  [alice@localhost passagemath]$ docker commit 61833bea6a6d
   sha256:003fbd511016fe305bd8494bb1747f0fbf4cb2c788b4e755e9099d9f2014a60d
-  [mkoeppe@sage sage]$ docker run -it 003fbd511 bash
+  [alice@localhost passagemath]$ docker run -it 003fbd511 bash
   root@2d9ac65f4572:/sage# (cd /sage/local/var/tmp/sage/build/surf* && /sage/sage --buildsh)
 
   Starting subshell with Sage environment variables set.  Don't forget
@@ -596,7 +579,7 @@ create an image from the container::
   make[1]: Leaving directory '/sage/local/var/tmp/sage/build/surf-1.0.6-gcc6/src'
   (sage-buildsh) root@2d9ac65f4572:surf-1.0.6-gcc6$ exit
   root@2d9ac65f4572:/sage# exit
-  [mkoeppe@sage sage]$
+  [alice@localhost passagemath]$
 
 A standard case of bitrot.
 
@@ -610,14 +593,14 @@ is widely used for automating tests of Python projects.
 If you are using Docker locally, install ``tox`` for use with your system Python,
 for example using::
 
-  [mkoeppe@sage sage]$ pip install --user tox
+  [alice@localhost passagemath]$ pip install --user tox
 
 If you run Docker-in-Docker on GitHub Codespaces using our dev container
 configuration `.devcontainer/tox-docker-in-docker
 <https://github.com/passagemath/passagemath/tree/develop/.devcontainer/tox-docker-in-docker>`_,
 ``tox`` is already installed.
 
-Sage provides a sophisticated tox configuration in the file
+passagemath provides a sophisticated tox configuration in the file
 :sage_root:`tox.ini` for the purpose of portability testing.
 
 A tox "environment" is identified by a symbolic name composed of
@@ -654,12 +637,12 @@ installed on the system before building Sage:
   which the mechanism ``spkg-configure.m4`` is implemented.
   This corresponds to the packages listed by::
 
-    [mkoeppe@sage sage]$ sage --package list --has-file=spkg-configure.m4 :standard:
+    [alice@localhost passagemath]$ sage --package list --has-file=spkg-configure.m4 :standard:
 
 - ``maximal`` does the same for all standard and optional packages.
   This corresponds to the packages listed by::
 
-    [mkoeppe@sage sage]$ sage --package list :standard: :optional:
+    [alice@localhost passagemath]$ sage --package list :standard: :optional:
 
 The factors are connected by a hyphen to name a system configuration,
 such as ``debian-buster-standard`` and ``centos-7-i386-minimal``.
@@ -674,14 +657,14 @@ use the factors in the listed order.)
 
 To run an environment::
 
-  [mkoeppe@sage sage]$ tox -e docker-slackware-14.2-minimal
-  [mkoeppe@sage sage]$ tox -e docker-ubuntu-bionic-standard
+  [alice@localhost passagemath]$ tox -e docker-slackware-14.2-minimal
+  [alice@localhost passagemath]$ tox -e docker-ubuntu-bionic-standard
 
 Arbitrary extra arguments to ``docker build`` can be supplied through
 the environment variable ``EXTRA_DOCKER_BUILD_ARGS``.  For example,
 for a non-silent build (``make V=1``), use::
 
-  [mkoeppe@sage sage]$ EXTRA_DOCKER_BUILD_ARGS="--build-arg USE_MAKEFLAGS=\"V=1\"" \
+  [alice@localhost passagemath]$ EXTRA_DOCKER_BUILD_ARGS="--build-arg USE_MAKEFLAGS=\"V=1\"" \
     tox -e docker-ubuntu-bionic-standard
 
 By default, tox uses ``TARGETS_PRE=all-sage-local`` and
@@ -691,7 +674,7 @@ from tox options by ``--``), then both ``TARGETS_PRE`` and ``TARGETS``
 are set to these arguments.  In this way, you can build some specific
 packages instead of all of Sage, for example::
 
-  [mkoeppe@sage sage]$ tox -e docker-centos-8-standard -- ratpoints
+  [alice@localhost passagemath]$ tox -e docker-centos-8-standard -- ratpoints
 
 If the build succeeds, this will create a new image named
 ``sage-centos-8-standard-with-targets:9.1.beta9-431-gca4b5b2f33-dirty``,
@@ -709,7 +692,7 @@ example, to create the images corresponding to the state of the OS
 after installing all system packages (``with-system-packages``) and
 the one just after running the ``configure`` script (``configured``)::
 
-  [mkoeppe@sage sage]$ DOCKER_TARGETS="with-system-packages configured with-targets" \
+  [alice@localhost passagemath]$ DOCKER_TARGETS="with-system-packages configured with-targets" \
     tox -e docker-centos-8-standard -- ratpoints
   ...
   Sending build context to Docker daemon ...
@@ -730,7 +713,7 @@ the one just after running the ``configure`` script (``configured``)::
 
 Let's verify that the images are available::
 
-  [mkoeppe@sage sage]$ docker images | head
+  [alice@localhost passagemath]$ docker images | head
   REPOSITORY                                    TAG                               IMAGE ID
   sage-centos-8-standard-with-targets           9.1.beta9-435-g861ba33bbc-dirty   7ecfa86fceab
   sage-centos-8-standard-configured             9.1.beta9-435-g861ba33bbc-dirty   4314929e2b4c
@@ -756,16 +739,16 @@ provide these prerequisites.
 
 We start by creating a fresh (distclean) git worktree::
 
-  [mkoeppe@sage sage] git worktree add worktree-local
-  [mkoeppe@sage sage] cd worktree-local
-  [mkoeppe@sage worktree-local] ls
+  [alice@localhost passagemath] git worktree add worktree-local
+  [alice@localhost passagemath] cd worktree-local
+  [alice@localhost worktree-local] ls
   COPYING.txt ... Makefile ... configure.ac ... src tox.ini
 
 Again we build only a small package.  Build targets can be passed as
 positional arguments (separated from tox options by ``--``)::
 
-  [mkoeppe@sage worktree-local] tox -e local-direct -- ratpoints
-  local-direct create: /Users/mkoeppe/.../worktree-local/.tox/local-direct
+  [alice@localhost worktree-local] tox -e local-direct -- ratpoints
+  local-direct create: /Users/alice/.../worktree-local/.tox/local-direct
   local-direct run-test-pre: PYTHONHASHSEED='2211987514'
   ...
   bootstrap:48: installing src/doc/en/installation/debian.txt...
@@ -785,7 +768,7 @@ positional arguments (separated from tox options by ``--``)::
 
 Let's investigate what happened here::
 
-  [mkoeppe@sage worktree-local]$ ls -la
+  [alice@localhost worktree-local]$ ls -la
   total 2576
   drwxr-xr-x  35 mkoeppe  staff    1120 Mar 26 22:20 .
   drwxr-xr-x  63 mkoeppe  staff    2016 Mar 27 09:35 ..
@@ -820,7 +803,7 @@ keep the source tree clean to the extent possible. In particular:
   ``.tox/local-direct``.  It created a symbolic link ``prefix`` that
   points there, for convenience::
 
-    [mkoeppe@sage worktree-local]$ ls -l prefix/lib/*rat*
+    [alice@localhost worktree-local]$ ls -l prefix/lib/*rat*
     -rw-r--r--  1 mkoeppe  staff  165968 Mar 26 20:46 prefix/lib/libratpoints.a
 
 - Likewise, it created a separate ``logs`` directory, again under the
@@ -864,10 +847,10 @@ XCode on macOS does not provide the prerequisites for bootstrapping
 the Sage distribution.  A good way to install them is using the
 Homebrew package manager.
 
-In fact, Sage provides a tox environment that automatically installs
+In fact, passagemath provides a tox environment that automatically installs
 an isolated copy of Homebrew with all prerequisites for bootstrapping::
 
-  [mkoeppe@sage worktree-local]$ tox -e local-homebrew-macos-minimal -- lrslib
+  [alice@localhost worktree-local]$ tox -e local-homebrew-macos-minimal -- lrslib
   local-homebrew-macos-minimal create: .../worktree-local/.tox/local-homebrew-macos-minimal
   local-homebrew-macos-minimal run-test-pre: PYTHONHASHSEED='4246149402'
   ...
@@ -948,7 +931,7 @@ packages provided by python.org install themselves.
 Automatic build testing with a best-effort isolated installation of Conda
 -------------------------------------------------------------------------
 
-Sage provides environments ``local-conda-forge-standard`` and
+passagemath provides environments ``local-conda-forge-standard`` and
 ``local-conda-forge-minimal`` that create isolated installations of
 Miniconda in the subdirectory ``conda`` of the environment directory.
 They do not interact in any way with other installations of Anaconda
@@ -985,13 +968,13 @@ Instead of building anything with ``make``, it just starts an
 interactive shell.  For example, in combination with the above
 options::
 
-  [mkoeppe@sage worktree-local]$ SKIP_SYSTEM_PKG_INSTALL=yes SKIP_BOOTSTRAP=1 SKIP_CONFIGURE=1 tox -e local-homebrew-macos-minimal -- bash
+  [alice@localhost worktree-local]$ SKIP_SYSTEM_PKG_INSTALL=yes SKIP_BOOTSTRAP=1 SKIP_CONFIGURE=1 tox -e local-homebrew-macos-minimal -- bash
 
 
 Automatic testing on multiple platforms on GitHub Actions
 =========================================================
 
-The Sage source tree includes a default configuration for GitHub
+The passagemath source tree includes a default configuration for GitHub
 Actions that runs our portability tests on a multitude of platforms on
 every push of a tag (but not of a branch) to a repository for which
 GitHub Actions are enabled.
@@ -1021,17 +1004,17 @@ Build logs can be inspected during the run and become available as
 generates one tarball.  "Annotations" highlight certain top-level
 errors or warnings issued during the build.
 
-In addition to these automatic runs in our main repository, all Sage
+In addition to these automatic runs in our main repository, all
 developers can run the same tests on GitHub Actions in their personal
-forks of the Sage repository. To prepare this, `enable GitHub Actions <https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#managing-github-actions-permissions-for-your-repository>`_
-in your fork of the Sage repository.
+forks of the passagemath repository. To prepare this, `enable GitHub Actions <https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#managing-github-actions-permissions-for-your-repository>`_
+in your fork of the passagemath repository.
 
 As usual we assume that ``origin`` is the name of the remote
-corresponding to your GitHub fork of the Sage repository::
+corresponding to your GitHub fork of the passagemath repository::
 
   $ git remote -v | grep origin
-  origin         https://github.com/mkoeppe/sage.git (fetch)
-  origin         https://github.com/mkoeppe/sage.git (push)
+  origin         https://github.com/alice/passagemath.git (fetch)
+  origin         https://github.com/alice/passagemath.git (push)
 
 Then the following procedure triggers a run of tests with the default set
 of system configurations.
@@ -1124,15 +1107,15 @@ where you replace the token by your token, of course, and
 
 Now you can pull the image and run it::
 
-  $ docker pull ghcr.io/YOUR-GITHUB-USERNAME/sage/sage-fedora-31-standard-configured:f4bd671
-  $ docker run -it ghcr.io/YOUR-GITHUB-USERNAME/sage/sage-fedora-31-standard-configured:f4bd671 bash
+  $ docker pull ghcr.io/YOUR-GITHUB-USERNAME/passagemath/sage-fedora-31-standard-configured:f4bd671
+  $ docker run -it ghcr.io/YOUR-GITHUB-USERNAME/passagemath/sage-fedora-31-standard-configured:f4bd671 bash
 
 
 Using our pre-built Docker images published on ghcr.io
 ======================================================
 
 Our portability CI on GitHub Actions builds `Docker images
-<https://github.com/orgs/sagemath/packages?tab=packages&q=with-targets-optional>`_
+<https://github.com/orgs/passagemath/packages?tab=packages&q=with-targets-optional>`_
 for all tested Linux platforms (and system package configurations) and
 makes them available on `GitHub Packages
 <https://github.com/features/packages>`_ (ghcr.io).
@@ -1170,7 +1153,7 @@ contain a copy of the source tree and the full logs of the build and
 test.
 
 Also `smaller images corresponding to earlier build stages
-<https://github.com/orgs/sagemath/packages?tab=packages&q=sage-debian-bullseye-standard>`_
+<https://github.com/orgs/passagemath/packages?tab=packages&q=sage-debian-bullseye-standard>`_
 are available:
 
 * ``-with-system-packages`` provides a system installation with
