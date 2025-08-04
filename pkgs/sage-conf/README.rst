@@ -1,4 +1,4 @@
-passagemath: Configuration module for the SageMath library
+passagemath: Configuration module for the Sage library
 ==========================================================
 
 `passagemath <https://github.com/passagemath/passagemath>`__ is open
@@ -49,7 +49,7 @@ About this pip-installable distribution package
 This distribution package ``passagemath-conf`` provides:
 
 - a single Python module, ``sage_conf``, providing configuration information
-  to the SageMath library at the time of its installation and at its runtime
+  to the Sage library at the time of its installation and at its runtime
 
 - a console script ``sage-config``, for querying the variables of ``sage_conf``
   from the shell
@@ -139,7 +139,7 @@ passagemath-conf in downstream distributions
 If the customization through the environment variables ``SAGE_CONF_...``
 does not give enough flexibility, downstream packagers and advanced developers
 and users can provide their own implementation of the distribution package
-to support the intended deployment of the SageMath library.
+to support the intended deployment of the Sage library.
 
 
 License
