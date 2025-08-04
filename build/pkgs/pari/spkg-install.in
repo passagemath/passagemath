@@ -115,6 +115,11 @@ if [ "$SAGE_DEBUG" = yes ]; then
     PARI_MAKEFLAGS="KERNELCFLAGS=-O1 $PARI_MAKEFLAGS"
 fi
 
+if [ -n "$MSYSTEM" ]; then
+    PARI_CONFIGURE_MT=
+else
+    PARI_CONFIGURE_MT=--mt=pthread
+fi
 
 # Build PARI/GP
 # Configure PARI/GP, forcing bash instead of /bin/sh.  It is not
@@ -127,7 +132,7 @@ fi
 bash ./Configure --prefix="$SAGE_LOCAL" \
     --with-readline="$SAGE_LOCAL" $SAGE_CONFIGURE_GMP \
     --with-runtime-perl="/usr/bin/env perl" \
-    --mt=pthread \
+    $PARI_CONFIGURE_MT \
     --kernel=gmp $PARI_CONFIGURE || \
     sdh_die "Error configuring PARI with readline and GMP kernel failed."
 
