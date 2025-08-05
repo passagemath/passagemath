@@ -56,8 +56,8 @@ Then import the top level:
     from sage.all import *
 
 
-Supported Platforms
--------------------
+Local installation of passagemath: Supported platforms
+------------------------------------------------------
 
 passagemath attempts to support and provides binary wheels suitable for
 all major Linux distributions and recent versions of macOS.
