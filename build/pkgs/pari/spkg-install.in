@@ -117,6 +117,7 @@ fi
 
 if [ -n "$MSYSTEM" ]; then
     PARI_CONFIGURE_MT=
+    sed -i.bak '/define PARI_TUNE/d' src/headers/paritune.h
 else
     PARI_CONFIGURE_MT=--mt=pthread
 fi
