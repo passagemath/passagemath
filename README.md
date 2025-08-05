@@ -55,6 +55,10 @@ Then import the top level:
 
     from sage.all import *
 
+Note that the Colab notebook uses a Python kernel, so no Sage-specific preparsing is in effect.
+When following [code examples in the documentation](https://passagemath.org/docs/10.6/html/en/a_tour_of_sage/index.html),
+be sure to switch to the "Python" tab.
+
 
 Local installation of passagemath: Supported platforms
 ------------------------------------------------------
