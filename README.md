@@ -44,6 +44,18 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how you can contribute.
 passagemath is a major integrating force in the [mathematical software landscape](https://github.com/passagemath#passagemath-in-the-mathematical-software-landscape).
 
 
+Running passagemath in the cloud (Google Colab)
+-----------------------------------------------
+
+Just create a [Google Colab](https://colab.google/) notebook and type:
+
+    %pip install --prefer-binary passagemath-standard
+
+Then import the top level:
+
+    from sage.all import *
+
+
 Supported Platforms
 -------------------
 
