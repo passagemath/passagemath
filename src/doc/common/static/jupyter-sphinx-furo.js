@@ -107,17 +107,13 @@ function changeVersion() {
     let selected_ver = select_element.options[select_element.selectedIndex].text;
     let selected_url = select_element.value;
     if (selected_url) {
-        if (window.location.protocol == 'file:') {
-            let pathname = window.location.pathname;
-            let cutoff_point = pathname.indexOf('/html');
-            if (cutoff_point !== -1) {
-                pathname = pathname.substring(cutoff_point);
-                window.location.href = selected_url + pathname;
-            } else {
-                window.location.href = selected_url + '/index.html';
-            }
+        let pathname = window.location.pathname;
+        let cutoff_point = pathname.indexOf('/html');
+        if (cutoff_point !== -1) {
+            pathname = pathname.substring(cutoff_point);
+            window.location.href = selected_url + pathname;
         } else {
-            window.location.href = selected_url + window.location.pathname;
+            window.location.href = selected_url + '/index.html';
         }
     }
 }
