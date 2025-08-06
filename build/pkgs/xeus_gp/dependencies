@@ -1,0 +1,1 @@
+pari xeus xeus_zmq nlohmann_json | cmake ninja_build

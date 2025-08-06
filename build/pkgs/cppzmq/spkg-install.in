@@ -1,0 +1,9 @@
+cd src
+mkdir build
+cd build
+sdh_cmake -GNinja \
+          -DCMAKE_SYSTEM_PREFIX_PATH="$SAGE_LOCAL" \
+          -DCPPZMQ_BUILD_TESTS=OFF \
+          ..
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
