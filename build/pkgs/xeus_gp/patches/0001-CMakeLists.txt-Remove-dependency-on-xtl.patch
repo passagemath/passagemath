@@ -1,0 +1,38 @@
+From 10a3c946e24675bfd7213db76761e131035887ef Mon Sep 17 00:00:00 2001
+From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
+Date: Wed, 6 Aug 2025 00:06:46 -0700
+Subject: [PATCH 1/2] CMakeLists.txt: Remove dependency on xtl
+
+---
+ CMakeLists.txt | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 06626a7..c8e2409 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -60,13 +60,9 @@ option(XEUS_GP_INSTALL_CMAKE_FILES "Install the .cmake files" OFF)
+ # Dependencies
+ # ============
+ 
+-set(xtl_REQUIRED_VERSION 0.7.0)
+ set(xeus_REQUIRED_VERSION 5.0.0)
+ set(xeus-zmq_REQUIRED_VERSION 3.0.0)
+ 
+-if (NOT TARGET xtl)
+-    find_package(xtl ${xtl_REQUIRED_VERSION} REQUIRED)
+-endif ()
+ if (NOT TARGET xeus AND NOT TARGET xeus-static)
+     find_package(xeus ${xeus_REQUIRED_VERSION} REQUIRED)
+ endif ()
+@@ -206,7 +202,6 @@ macro(xeus_gp_create_target target_name linkage output_name)
+         set(XEUS_GP_XEUS_TARGET xeus-static)
+     endif ()
+ 
+-    target_link_libraries(${target_name} PUBLIC ${XEUS_GP_XEUS_TARGET} xtl)
+     if (WIN32 OR CYGWIN)
+         #
+     elseif (APPLE)
+-- 
+2.47.0
+

@@ -1,0 +1,56 @@
+From 5c8f25a36c779240ad87676c739fe8e0672f24dd Mon Sep 17 00:00:00 2001
+From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
+Date: Wed, 6 Aug 2025 00:13:48 -0700
+Subject: [PATCH 2/2] CMakeLists.txt: Do not overwrite std=c++17 with std=c++14
+
+---
+ CMakeLists.txt | 19 ++-----------------
+ 1 file changed, 2 insertions(+), 17 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c8e2409..f0ff526 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -122,21 +122,6 @@ macro(xeus_gp_set_common_options target_name)
+         target_compile_options(${target_name} PUBLIC /wd4018 /wd4267 /wd4715 /wd4146 /wd4129)
+     endif ()
+ 
+-    if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
+-        CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR
+-        CMAKE_CXX_COMPILER_ID MATCHES "Intel")
+-
+-        target_compile_options(${target_name} PUBLIC -Wunused-parameter -Wextra -Wreorder)
+-
+-        # C++14 flag
+-        CHECK_CXX_COMPILER_FLAG("-std=c++14" HAS_CPP_14_FLAG)
+-        if (HAS_CPP_14_FLAG)
+-            target_compile_features(${target_name} PRIVATE cxx_std_14)
+-        else ()
+-            message(FATAL_ERROR "Unsupported compiler -- xeus-gp requires C++14 support!")
+-        endif ()
+-    endif ()
+-
+     if (APPLE)
+         set_target_properties(${target_name} PROPERTIES
+             MACOSX_RPATH ON
+@@ -189,7 +174,7 @@ macro(xeus_gp_create_target target_name linkage output_name)
+ 
+     target_compile_definitions(${target_name} PUBLIC "XEUS_GP_EXPORTS")
+ 
+-    target_compile_features(${target_name} PRIVATE cxx_std_14)
++    target_compile_features(${target_name} PRIVATE cxx_std_17)
+ 
+     target_include_directories(${target_name}
+                                PUBLIC
+@@ -243,7 +228,7 @@ endif ()
+ if (XEUS_GP_BUILD_EXECUTABLE)
+     find_package(xeus-zmq ${xeus-zmq_REQUIRED_VERSION} REQUIRED)
+     add_executable(xeus-gp ${XEUS_GP_MAIN_SRC})
+-    target_compile_features(xeus-gp PRIVATE cxx_std_14)
++    target_compile_features(xeus-gp PRIVATE cxx_std_17)
+     xeus_gp_set_common_options(xeus-gp)
+     xeus_gp_set_kernel_options(xeus-gp)
+     target_link_libraries(xeus-gp PRIVATE xeus-zmq)
+-- 
+2.47.0
+
