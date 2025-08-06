@@ -1,1 +1,1 @@
-pari | cmake
+pari xeus nlohmann_json | cmake ninja_build
