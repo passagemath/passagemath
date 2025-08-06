@@ -1,1 +1,1 @@
-nlohmann_json | cmake ninja_build
+nlohmann_json libuuid | cmake ninja_build
