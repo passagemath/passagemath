@@ -90,7 +90,8 @@ for Linux and macOS, both for the x86_64 and ARM architectures.
 
 Unless you need to install passagemath into a specific existing environment, we recommend
 to create and activate a fresh virtual environment over a supported Python
-for example `~/passagemath-venv/`:
+for example `~/passagemath-venv/`. (The dollar sign ($) indicates the shell prompt;
+do not type it.)
 
 ```bash session
 $ python3 --version
