@@ -99,6 +99,10 @@ $ python3 -m venv ~/passagemath-venv
 $ source ~/passagemath-venv/bin/activate
 ```
 
+(Activating the virtual environment only takes effect for the current terminal session;
+repeat the last command whenever you open a new terminal session in which you wish to
+use passagemath.)
+
 For the Linux aarch64 (ARM) platform,
 [some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
 Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
