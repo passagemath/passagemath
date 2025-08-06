@@ -417,81 +417,91 @@ in the Installation Guide.
 
         $ make configure
 
+
 Full Installation from Source as passagemath
 --------------------------------------------
 
-Unless you need to install passagemath into a specific existing environment, we recommend
-to create and activate a fresh virtual environment over a suitable Python (3.9.x-3.13.x),
-for example `~/passagemath-venv/`:
+9.  Unless you need to install passagemath into a specific existing environment, we recommend
+    to create and activate a fresh virtual environment over a suitable Python (3.10.x-3.13.x),
+    for example `~/passagemath-venv/` as follows. (Dollar signs are prompts; do not type them.)
 
-```bash session
-$ python3 --version
-Python 3.12.7
-$ python3 -m venv ~/passagemath-venv
-$ source ~/passagemath-venv/bin/activate
-```
+    ```bash session
+    $ python3 --version
+    Python 3.12.7
+    $ python3 -m venv ~/passagemath-venv
+    $ source ~/passagemath-venv/bin/activate
+    ```
 
-Next, if you want to build from PyPI, use the following command:
+10. Let's configure it so that all ``passagemath-*`` packages are built from your
+    local clone of the passagemath repository.
 
-```bash session
-(passagemath-venv) $ export SAGE_CONF_TARGETS=build
-```
+    ```bash session
+    (passagemath-venv) $ export SAGE_ROOT=$(pwd)
+    (passagemath-venv) $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
+    (passagemath-venv) $ export SAGE_CONF_TARGETS="build-local"
+    ```
 
-If you want to build from a local clone of the passagemath repository instead,
-use the following command first.
+    If you are on the Linux aarch64 (ARM) platform,
+    [some third-party packages are still missing binary wheels on PyPI](https://github.com/passagemath/passagemath/issues/347).
+    Arrange for these wheels to be built from source as well,
+    by replacing the last command by the following:
 
-```bash session
-(passagemath-venv) $ export SAGE_ROOT=$(pwd)
-(passagemath-venv) $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
-(passagemath-venv) $ export SAGE_CONF_TARGETS=build-local
-```
+    ```bash session
+    (passagemath-venv) $ export SAGE_CONF_TARGETS="build-local gmpy2 memory_allocator"
+    ```
 
-As the first installation step, install [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf),
-which builds various prerequisite non-Python packages in a subdirectory of `~/.sage/`.
-The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
+    If you wish to build all Python dependencies from source as well (instead of
+    taking them from binary wheels on PyPI), replace the last command by:
 
-```bash session
-(passagemath-venv) $ python3 -m pip install -v passagemath-conf
-```
+    ```bash session
+    (passagemath-venv) $ export SAGE_CONF_TARGETS="build"
+    ```
 
-After a successful installation, a wheelhouse provides various Python packages.
-You can list the wheels using the command:
+11. Now install [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf),
+    which builds various all prerequisite non-Python packages in a subdirectory of `~/.sage/`,
+    as well as the requested wheels.
 
-```bash session
-(passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
-```
+    The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
 
-If this gives an error saying that `sage-config` is not found, check any messages
-that the `pip install` command may have printed. You may need to adjust your `PATH`,
-for example by:
+    ```bash session
+    (passagemath-venv) $ python3 -m pip install -v passagemath-conf
+    ```
 
-```bash session
-(passagemath-venv) $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
-(passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
-```
+12. Depending on what you chose above, a wheelhouse may now provide various
+    Python packages. You can list the wheels using the command:
 
-Now arrange for the packages from the wheelhouse to be picked up:
+    ```bash session
+    (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
+    ```
 
-```bash session
-(passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
-(passagemath-venv) $ export PIP_PREFER_BINARY=1
-```
+    If this gives an error saying that `sage-config` is not found, check any messages
+    that the `pip install` command may have printed. You may need to adjust your `PATH`,
+    for example by:
 
-Next, install the [![PyPI: passagemath-setup](https://img.shields.io/pypi/v/passagemath-setup.svg?label=passagemath-setup)](https://pypi.python.org/pypi/passagemath-setup) package:
+    ```bash session
+    (passagemath-venv) $ export PATH="$(python3 -c 'import sysconfig; print(sysconfig.get_path("scripts", "posix_user"))'):$PATH"
+    (passagemath-venv) $ ls $(sage-config SAGE_SPKG_WHEELS)
+    ```
 
-```bash session
-(passagemath-venv) $ python3 -m pip install "passagemath-setup[autogen]"
-```
+13. If there are any wheels, arrange for them to be picked up from the wheelhouse:
 
-Finally, install the Sage library from the package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard):
+    ```bash session
+    (passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
+    (passagemath-venv) $ export PIP_PREFER_BINARY=1
+    ```
 
-```bash session
-(passagemath-venv) $ python3 -m pip install --no-build-isolation -v passagemath-standard
-```
+14. Finally, install the Sage library into your virtual environment
+    using the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard):
 
-The above instructions install the latest stable release of passagemath.
-To install the latest development version instead, add the switch `--pre` to all invocations of
-`python3 -m pip install`.
+    ```bash session
+    (passagemath-venv) $ python3 -m pip install -v passagemath-standard
+    ```
+
+15. Type `sage` to try it out. At the Sage prompt, try for example `2 + 2`,
+    `plot(x^2)`, `plot3d(lambda x, y: x*y, (-1, 1), (-1, 1))`
+    to test a simple computation and plotting in 2D and 3D.
+    Type <kbd>Ctrl</kbd>+<kbd>D</kbd> or `quit` to quit Sage.
+
 
 Traditional Installation from Source as Sage-the-Distribution
 -------------------------------------------------------------
