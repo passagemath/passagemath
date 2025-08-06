@@ -100,6 +100,10 @@ $ source ~/passagemath-venv/bin/activate
 $ rehash
 ```
 
+(Activating the virtual environment only takes effect for the current terminal session;
+repeat the last command whenever you open a new terminal session in which you wish to
+use passagemath.)
+
 Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
 
 ```bash session
