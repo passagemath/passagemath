@@ -1,5 +1,5 @@
-pari_seadata: PARI data package needed by ellap for large primes (big version)
-==============================================================================
+pari_seadata_big: PARI data package needed by ellap for large primes (big version)
+==================================================================================
 
 Description
 -----------
@@ -22,9 +22,3 @@ Upstream Contact
 ----------------
 
 http://pari.math.u-bordeaux.fr/
-
-Dependencies
-------------
-
--  Installation: None
--  Runtime: PARI/GP
