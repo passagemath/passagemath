@@ -1,5 +1,7 @@
 # Add data to the wheel
 
+import glob
+import json
 import os
 import shlex
 import sys
@@ -22,3 +24,13 @@ with InWheel(wheel, wheel):
     sys.stdout.flush()
     if os.system(f"bash -c {shlex.quote(command)}") != 0:
         sys.exit(1)
+
+    for kernel_file_name in glob.iglob('passagemath_pari-*.data/data/share/jupyter/kernels/xeus-gp/kernel.json'):
+        with open(kernel_file_name, "r") as f:
+            spec = json.load(f)
+        spec["argv"] = ["sage",
+                        "-sh",
+                        "-c",
+                        "xeus-gp -f {connection_file}"]
+        with open(kernel_file_name, "w") as f:
+            json.dump(spec, f, indent=True)
