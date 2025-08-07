@@ -1,0 +1,2 @@
+libuuid
+util-linux-dev
