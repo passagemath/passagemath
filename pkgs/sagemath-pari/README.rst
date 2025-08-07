@@ -137,4 +137,6 @@ See https://pari.math.u-bordeaux.fr/packages.html for detailed descriptions.
 
 ``pip install "passagemath-pari[seadata]"``
 
+``pip install "passagemath-pari[seadata-big]"``
+
 ``pip install "passagemath-pari[seadata-small]"``
