@@ -117,3 +117,24 @@ Using the ``cypari2`` library interface::
     >>> fq = p.factorff(3, modulus)
     >>> fq.lift().centerlift()
     [x - t, 1; x + (t^2 + t - 1), 1; x + (-t^2 - 1), 1]
+
+
+Available as extras, from other distributions
+---------------------------------------------
+
+PARI/GP data packages
+~~~~~~~~~~~~~~~~~~~~~
+
+See https://pari.math.u-bordeaux.fr/packages.html for detailed descriptions.
+
+``pip install "passagemath-pari[elldata]"``
+
+``pip install "passagemath-pari[galdata]"``
+
+``pip install "passagemath-pari[galpol]"``
+
+``pip install "passagemath-pari[nftables]"``
+
+``pip install "passagemath-pari[seadata]"``
+
+``pip install "passagemath-pari[seadata-small]"``

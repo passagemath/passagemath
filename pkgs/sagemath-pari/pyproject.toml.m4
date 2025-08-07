@@ -39,8 +39,12 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test = ["passagemath-repl"]
 
-# GAP packages
+# PARI data packages
+elldata         = ["passagemath-pari-elldata"]
 galdata         = ["passagemath-pari-galdata"]
+galpol          = ["passagemath-pari-galpol"]
+nftables        = ["passagemath-pari-nftables"]
+seadata         = ["passagemath-pari-seadata"]
 seadata-small   = ["passagemath-pari-seadata-small"]
 
 # Everything as in standard Sage
