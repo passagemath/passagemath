@@ -464,7 +464,7 @@ Full Installation from Source as passagemath
     The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
 
     ```bash session
-    (passagemath-venv) $ python3 -m pip install -v passagemath-conf
+    (passagemath-venv) $ python3 -m pip install --force-reinstall -v passagemath-conf
     ```
 
 12. Depending on what you chose above, a wheelhouse may now provide various
