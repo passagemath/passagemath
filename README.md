@@ -451,8 +451,9 @@ Full Installation from Source as passagemath
     (passagemath-venv) $ export SAGE_CONF_TARGETS="build-local gmpy2 memory_allocator"
     ```
 
-    If you wish to build all Python dependencies from source as well (instead of
-    taking them from binary wheels on PyPI), replace the last command by:
+    If you wish to build all Python dependencies from source as well,
+    using the pinned and patched versions defined by the Sage distribution,
+    instead of taking them from binary wheels on PyPI, replace the last command by:
 
     ```bash session
     (passagemath-venv) $ export SAGE_CONF_TARGETS="build"

@@ -6,6 +6,7 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 # but it is not part of the install-requires.
 requires = [
     SPKG_INSTALL_REQUIRES_setuptools
+    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_jinja2
     SPKG_INSTALL_REQUIRES_pkgconfig
