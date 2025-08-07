@@ -145,6 +145,7 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sagemath_pari_elldata			\
 	sagemath_pari_galdata			\
 	sagemath_pari_galpol			\
+	sagemath_pari_nflistdata		\
 	sagemath_pari_nftables			\
 	sagemath_pari_seadata			\
 	sagemath_pari_seadata_big		\
