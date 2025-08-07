@@ -44,8 +44,10 @@ test = ["passagemath-repl"]
 elldata         = ["passagemath-pari-elldata"]
 galdata         = ["passagemath-pari-galdata"]
 galpol          = ["passagemath-pari-galpol"]
+nflistdata      = ["passagemath-pari-nflistdata"]
 nftables        = ["passagemath-pari-nftables"]
 seadata         = ["passagemath-pari-seadata"]
+seadata-big     = ["passagemath-pari-seadata-big"]
 seadata-small   = ["passagemath-pari-seadata-small"]
 
 # Everything as in standard Sage

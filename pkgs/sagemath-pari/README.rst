@@ -133,8 +133,12 @@ See https://pari.math.u-bordeaux.fr/packages.html for detailed descriptions.
 
 ``pip install "passagemath-pari[galpol]"``
 
+``pip install "passagemath-pari[nflistdata]"``
+
 ``pip install "passagemath-pari[nftables]"``
 
 ``pip install "passagemath-pari[seadata]"``
+
+``pip install "passagemath-pari[seadata-big]"``
 
 ``pip install "passagemath-pari[seadata-small]"``
