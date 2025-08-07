@@ -90,6 +90,7 @@ Build these wheels from source using [![PyPI: passagemath-conf](https://img.shie
 ```bash session
 (passagemath-venv) $ export SAGE_CONF_TARGETS="gmpy2 memory_allocator"
 (passagemath-venv) $ export SAGE_CONF_CONFIGURE_ARGS="--disable-gcc-version-check"
+(passagemath-venv) $ pip cache remove passagemath_conf
 (passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
 (passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
 (passagemath-venv) $ export PIP_PREFER_BINARY=1
@@ -464,6 +465,7 @@ Full Installation from Source as passagemath
     The build can be customized by setting `SAGE_CONF_CONFIGURE_ARGS`.
 
     ```bash session
+    (passagemath-venv) $ python3 -m pip cache remove passagemath_conf
     (passagemath-venv) $ python3 -m pip install --force-reinstall -v passagemath-conf
     ```
 
