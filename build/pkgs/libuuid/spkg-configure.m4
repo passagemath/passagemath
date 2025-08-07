@@ -5,4 +5,8 @@ SAGE_SPKG_CONFIGURE([libuuid], [dnl
             sage_spkg_install_libuuid=no
         ])
     ])
+], [dnl REQUIRED-CHECK
+  AS_CASE([$host],
+    [*-*-linux*], [],
+    [AS_VAR_SET([SPKG_REQUIRE], [no])])
 ])
