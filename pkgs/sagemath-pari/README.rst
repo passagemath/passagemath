@@ -53,6 +53,18 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable source distribution ``passagemath-pari`` is a small
+This pip-installable distribution ``passagemath-pari`` is a small
 distribution that provides modules that depend on the computer algebra
 system PARI/GP.
+
+
+What is included
+----------------
+
+- numerous modules with build-time dependencies on PARI/GP, see `MANIFEST <https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-pari/MANIFEST.in>`_
+
+- the binary wheels on PyPI ship a prebuilt copy of PARI/GP
+
+
+Examples
+--------
