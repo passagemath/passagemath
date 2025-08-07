@@ -16,7 +16,7 @@ export PATH="$PWD/build/bin:$PATH"
 python3 build/bin/sage-spkg-info.py 4ti2 --output-rst --log-level INFO
 """
 
-from __future__ import annotations
+from __future__ import print_function, unicode_literals
 import sys
 import os
 import io
@@ -58,13 +58,7 @@ import logging
 import re
 import shlex
 import subprocess
-from typing import Iterable, Optional
 from sage_bootstrap.package import Package
-# Try to import PackageDir
-try:
-    from sage_bootstrap.package import PackageDir 
-except Exception:
-    PackageDir = None
 
 def _package_from_dir(pkg_base, pkg_dir):
     """
@@ -82,13 +76,6 @@ def _package_from_dir(pkg_base, pkg_dir):
         return Package(directory=pkg_dir)
     except TypeError:
         pass
-
-    # If PackageDir exists, only pass a *name* to it (instead of the path).
-    if PackageDir is not None:
-        try:
-            return Package(PackageDir(pkg_base))
-        except Exception:
-            pass
 
     # Last resort: lowercased name-based constructor
     return Package(pkg_base)
@@ -152,7 +139,7 @@ if not logger.handlers:  # To go back to basic config if none set by sage_bootst
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 # CLI: To parse arguments (Rewrite version)
-def parse_args() -> argparse.Namespace:
+def parse_args():
     parser = argparse.ArgumentParser(
         description="Fetch and format Sage package information (Python rewrite)."
     )
@@ -179,7 +166,7 @@ def parse_args() -> argparse.Namespace:
 
 # To run the Helpers
 
-def run(cmd: Iterable[str], *, check: bool = True, text: bool = True) -> subprocess.CompletedProcess:
+def run(cmd, check=True, text=True):
     # To Run the subprocess and log on DEBUG.
     logger.debug("Running command: %s", " ".join(map(shlex.quote, cmd)))
     return subprocess.run(cmd, capture_output=True, text=text, check=check)
@@ -189,15 +176,26 @@ def run(cmd: Iterable[str], *, check: bool = True, text: bool = True) -> subproc
 # Splitted the helper into two small classes, RstFormatter and PlainFormatter
 class _BaseFormatter(ABC):
     """Common API For fixing output behavior."""
-    rst: bool = False
+    rst = False
 
     # To default for plain text
-    def ref(self, x: str) -> str: return x
-    def spkg(self, x: str) -> str: return x
-    def issue(self, x: str) -> str: return f"https://github.com/sagemath/sage/issues/{x}"
-    def code(self, *args: str) -> str: return " ".join(args)
-    def tab(self, x: str) -> str: return f"{x}:"
-    def anchor(self, name: str) -> str: return ""     # optional helper
+    def ref(self, x):               # type: (str) -> str
+            return x
+
+    def spkg(self, x):              # type: (str) -> str
+        return x
+
+    def issue(self, x):             # type: (str) -> str
+        return "https://github.com/sagemath/sage/issues/{}".format(x)
+
+    def code(self, *args):          # type: (*str) -> str
+        return " ".join(args)
+
+    def tab(self, x):               # type: (str) -> str
+        return "{}:".format(x)
+
+    def anchor(self, name):         # type: (str) -> str
+        return ""                   # optional helper
 
 class PlainFormatter(_BaseFormatter):
     rst = False
@@ -205,19 +203,30 @@ class PlainFormatter(_BaseFormatter):
 
 class RstFormatter(_BaseFormatter):
     rst = True
-    def ref(self, x: str) -> str: return f":ref:`{x}`"
-    def spkg(self, x: str) -> str: return self.ref(f"spkg_{x}")
-    def issue(self, x: str) -> str: return f":issue:`{x}`"
-    def code(self, *args: str) -> str: return f"``{' '.join(args)}``"
-    def tab(self, x: str) -> str: return f".. tab:: {x}"
-    def anchor(self, name: str) -> str: return f".. _{name}:\n"
+    def ref(self, x):
+        return ":ref:`{}`".format(x)
+
+    def spkg(self, x):
+        return self.ref("spkg_{}".format(x))
+
+    def issue(self, x):
+        return ":issue:`{}`".format(x)
+
+    def code(self, *args):
+        return "``{}``".format(" ".join(args))
+
+    def tab(self, x):
+        return ".. tab:: {}".format(x)
+
+    def anchor(self, name):
+        return ".. _{}:\n".format(name)
 
 def make_formatter(output_rst: bool) -> _BaseFormatter:
     return RstFormatter() if output_rst else PlainFormatter()
 
 # Core functionality
 # To Read and post-process SPKG.rst (README).
-def process_spkg_file(pkg_base: str, pkg_scripts: str, fmt, out) -> None:
+def process_spkg_file(pkg_base: str, pkg_scripts: str, fmt, out):
     spkg_file = os.path.join(pkg_scripts, "SPKG.rst")
     if not os.path.isfile(spkg_file):
         logger.info("No SPKG.rst for %s", pkg_base)
@@ -233,7 +242,7 @@ def process_spkg_file(pkg_base: str, pkg_scripts: str, fmt, out) -> None:
     print(content, file=out)
 
 
-def display_dependencies(pkg_base: str, fmt, out) -> None:
+def display_dependencies(pkg_base: str, fmt, out):
     try:
         result = run(["sage-package", "dependencies", "--format=plain", pkg_base],
                      check=True)
@@ -243,10 +252,11 @@ def display_dependencies(pkg_base: str, fmt, out) -> None:
 
     print("Dependencies", file=out)
     print("------------", file=out)
+    print("", file=out)
     print(result.stdout.strip(), file=out)
+    
 
-
-def display_version_info(pkg_base: str, out) -> None:
+def display_version_info(pkg_base: str, out):
     try:
         result = run(["sage-get-system-packages", "versions", pkg_base], check=True)
     except subprocess.CalledProcessError as e:
@@ -255,17 +265,18 @@ def display_version_info(pkg_base: str, out) -> None:
 
     print("Version Information", file=out)
     print("-------------------", file=out)
+    print("", file=out)
     print(result.stdout.strip(), file=out)
 
 # To Build the "Equivalent System Packages" section and Use sage-print-system-package-command.
-def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out) -> None:
+def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
     distros_dir = os.path.join(pkg_scripts, "distros")
     if not os.path.isdir(distros_dir):
         logger.info("No distros directory for %s", pkg_base)
         print("(none known)", file=out)
         return
 
-    systems: list[str] = []
+    systems = []
     have_repology = False
     for entry in sorted(glob.glob(os.path.join(distros_dir, "*.txt"))):
         name = os.path.splitext(os.path.basename(entry))[0]
@@ -282,6 +293,7 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out) -> None:
 
     print("Equivalent System Packages", file=out)
     print("--------------------------", file=out)
+    print("", file=out)
 
     for system in systems:
         system_file = os.path.join(distros_dir, "{}.txt".format(system))
@@ -297,8 +309,8 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out) -> None:
                 "sage-print-system-package-command",
                 system,
                 "--wrap",
-                "--prompt={}    $ ".format(rst_indent),
-                "--continuation={}          ".format(rst_indent),
+                "--prompt={}{}".format(rst_indent, "$ "),
+                "--continuation={}".format(rst_indent),
                 "--sudo",
                 "install",
             ] + sys_pkgs.split()
@@ -328,33 +340,37 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out) -> None:
             logger.warning("repology cmd failed: %s", e.stderr.strip())
 
 # To print message about spkg-configure.m4. Optionally: expose as @property later.
-def handle_configuration(pkg_base: str, pkg_scripts: str, fmt, out) -> None:
+def handle_configuration(pkg_base: str, pkg_scripts: str, fmt, out):
     print("", file=out)
     pkg = _package_from_dir(pkg_base, pkg_scripts)  # or to change to Package.from_base(pkg_base), depending on types of API
     if pkg.has_spkg_configure:
         if pkg.uses_python_package_check:
             print("If the system package is installed and if the (experimental) option", file=out)
-            print(f"{fmt.code('--enable-system-site-packages')} is passed to {fmt.code('./configure')}, "
-                  f"then {fmt.code('./configure')} will check if the system package can be used.", file=out)
+            print("{} is passed to {}, then {} will check if the system package can be used."
+                  .format(fmt.code('--enable-system-site-packages'),
+                          fmt.code('./configure'),
+                          fmt.code('./configure')),
+                  file=out)
+
         else:
             cfg_word = "./configure"
             if fmt.rst:
-                cfg_word = f"``{cfg_word}``"
+                cfg_word = "``{}``".format(cfg_word)
             print("If the system package is installed, {} will check if it can be used.".format(cfg_word), file=out)
     else:
         if not pkg_base.startswith("_"):
             print("However, these system packages will not be used for building Sage", file=out)
-            print(f"because {fmt.code('spkg-configure.m4')} has not been written for this package;", file=out)
-            print(f"see {fmt.issue('27330')} for more information.", file=out)
+            print("because {} has not been written for this package;".format(fmt.code('spkg-configure.m4')), file=out)
+            print("see {} for more information.".format(fmt.issue('27330')), file=out)
 
 # To Emit info for multiple packages.
-def emit_for_package(pkg_base: str, fmt, out_dir: Optional[str]) -> None:
+def emit_for_package(pkg_base, fmt, out_dir):
     pkg, pkg_dir, pkg_scripts, pkg_type = resolve_package(pkg_base)
 
     # Local helper to print all sections
     def _emit_sections(out_stream):
-        if fmt.rst:
-            print(f".. _spkg_{pkg_base}:\n", file=out_stream)
+        if fmt.rst and out_dir:
+            print(".. _spkg_{}:\n".format(pkg_base), file=out_stream)
 
         # SPKG.rst content
         process_spkg_file(pkg_base, pkg_scripts, fmt, out_stream)
@@ -395,7 +411,7 @@ def emit_for_package(pkg_base: str, fmt, out_dir: Optional[str]) -> None:
 
 # Main
 
-def main() -> None:
+def main():
     args = parse_args()
     logging.getLogger().setLevel(getattr(logging, args.log_level))
     logger.debug("Arguments: %s", args)
