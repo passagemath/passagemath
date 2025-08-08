@@ -37,9 +37,9 @@ if [ -f "$SPKG_FILE" ]; then
     if grep -q "About this pip-installable distribution package" "$SPKG_FILE"; then
         # Remove intro boilerplate up to section
         # title "About this pip-installable distribution package"
-        sed -e "1,3s/^ *passagemath:/$PKG_BASE:/;1,3s/^====/==============/" -e "4,/^-------------/d" -e "s|https://github.com/sagemath/sage/issues/\([0-9]*\)|:issue:\`\1\`|g" -e "s|https://arxiv.org/abs/cs/\([0-9]*\)|:arxiv:\`cs/\1\`|g" "$SPKG_FILE"
+        sed -e "1,3s/^ *passagemath:/$PKG_BASE:/;1,3s/^====/==================/" -e "4,/^-------------/d" -e "s|https://github.com/sagemath/sage/issues/\([0-9]*\)|:issue:\`\1\`|g" -e "s|https://arxiv.org/abs/cs/\([0-9]*\)|:arxiv:\`cs/\1\`|g" "$SPKG_FILE"
     else
-        sed -e "1,3s/^ *passagemath:/$PKG_BASE:/;1,3s/^====/==============/" -e "s|https://github.com/sagemath/sage/issues/\([0-9]*\)|:issue:\`\1\`|g" -e "s|https://arxiv.org/abs/cs/\([0-9]*\)|:arxiv:\`cs/\1\`|g" "$SPKG_FILE"
+        sed -e "1,3s/^ *passagemath:/$PKG_BASE:/;1,3s/^====/==================/" -e "s|https://github.com/sagemath/sage/issues/\([0-9]*\)|:issue:\`\1\`|g" -e "s|https://arxiv.org/abs/cs/\([0-9]*\)|:arxiv:\`cs/\1\`|g" "$SPKG_FILE"
     fi
     break
 fi
