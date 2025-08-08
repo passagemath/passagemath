@@ -1,6 +1,5 @@
 cd src
 
-autoreconf -fi
 sdh_configure \
     $SAGE_CONFIGURE_GMP
 
