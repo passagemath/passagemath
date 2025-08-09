@@ -40,6 +40,7 @@ sdh_install \
     uuid \
     json \
     jupyterkernel \
+    jupyterviz \
     "$PKG_DIR"
 
 install_compiled_pkg()
