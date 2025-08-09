@@ -21,7 +21,7 @@ with InWheel(wheel, wheel):
         sys.stdout.flush()
         parent = Path(dir).parent
         name = Path(dir).name
-        command = f'set -o pipefail; (cd {shlex.quote(str(parent))} && tar cf - --exclude "*/transgrp/data" --exclude "*/ctbllib/data" --exclude "*/tomlib/data" --exclude "*/irredsol/data" --exclude "*/*/doc" --exclude "*/*/tutorial" --exclude "*/**/*.o" {name}) | tar xvf -'
+        command = f'set -o pipefail; (cd {shlex.quote(str(parent))} && tar cf - --exclude "*/transgrp/data" --exclude "*/ctbllib/data" --exclude "*/tomlib/data" --exclude "*/irredsol/data" --exclude "*/*/doc" --exclude "*/*/tutorial" --exclude "*/**/*.o" --exclude "*/digraphs/extern" --exclude "*/digraphs/gen" --exclude "*/grape/nauty*" --exclude "*/*/src" --exclude "*/*/www" --exclude "*/*/htm" {name}) | tar xvf -'
         print(f'Running {command}')
         sys.stdout.flush()
         if os.system(f"bash -c {shlex.quote(command)}") != 0:
