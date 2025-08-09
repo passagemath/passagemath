@@ -37,10 +37,10 @@ content-type = "text/x-rst"
 test            = ["passagemath-repl"]
 
 # GAP packages
-transgrp        = ["passagemath-gap-pkg-transgrp-data"]
 ctbllib         = ["passagemath-gap-pkg-ctbllib-data"]
-tomlib          = ["passagemath-gap-pkg-tomlib-data"]
 irredsol        = ["passagemath-gap-pkg-irredsol-data"]
+tomlib          = ["passagemath-gap-pkg-tomlib-data"]
+transgrp        = ["passagemath-gap-pkg-transgrp-data"]
 
 # Jupyter
 jupyterkernel   = ["passagemath-gap-pkg-jupyterkernel"]
