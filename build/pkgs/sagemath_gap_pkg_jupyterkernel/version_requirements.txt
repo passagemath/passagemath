@@ -1,0 +1,1 @@
+passagemath-gap-pkg-jupyterkernel

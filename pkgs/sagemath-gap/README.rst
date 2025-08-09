@@ -68,6 +68,8 @@ What is included
 
 - the binary wheels on PyPI ship a prebuilt copy of GAP
 
+- the binary wheels on PyPI ship a prebuilt copy of the native Jupyter kernel for GAP
+
 
 Examples
 --------
@@ -92,3 +94,23 @@ A quick way to try it out interactively::
     [ ()^G, (4,7)^G, (3,4,7)^G, (2,3)(4,7)^G, (2,3,4,7)^G, (1,2)(3,4,7)^G, (1,2,3,4,7)^G ]
     (3,4,7)^G
     (3,4,7)
+
+
+Available as extras, from other distributions
+---------------------------------------------
+
+Jupyter kernel spec
+~~~~~~~~~~~~~~~~~~~
+
+``pip install "passagemath-gap[jupyterkernel]"``
+
+GAP packages
+~~~~~~~~~~~~
+
+``pip install "passagemath-gap[ctbllib]"``
+
+``pip install "passagemath-gap[irredsol]"``
+
+``pip install "passagemath-gap[tomllib]"``
+
+``pip install "passagemath-gap[transgrp]"``
