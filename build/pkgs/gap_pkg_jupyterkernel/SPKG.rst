@@ -9,6 +9,8 @@ This GAP package implements the Jupyter protocol.
 It is shipped together with some GAP packages that are dependencies
 or additional functionality.
 
+See also: ``sagemath_gap_pkg_jupyterkernel``
+
 
 License
 -------
