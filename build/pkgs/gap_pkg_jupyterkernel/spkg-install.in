@@ -38,7 +38,6 @@ cd "$PKG_SRC_DIR"
 
 sdh_install \
     uuid \
-    json \
     jupyterkernel \
     jupyterviz \
     "$PKG_DIR"
@@ -62,6 +61,20 @@ install_compiled_pkg()
 
 # Build and install compiled packages:
 #
+# These packages have an old ./configure that take the GAP_ROOT as a positional
+# argument
+for pkg in json
+do
+    echo "Building GAP package $pkg"
+    CFLAGS="$CFLAGS -Wno-implicit-function-declaration"
+    export CFLAGS
+    cd "$PKG_SRC_DIR/$pkg"
+    ./configure "$GAP_ROOT"
+    sdh_make
+    install_compiled_pkg "$pkg"
+    cd "$PKG_SRC_DIR"
+done
+
 # These packages have a new-style autoconf ./configure
 # that takes --with-gaproot
 
