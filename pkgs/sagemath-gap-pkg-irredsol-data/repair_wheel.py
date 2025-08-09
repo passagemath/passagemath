@@ -16,6 +16,7 @@ if "TMPDIR" in os.environ:
 wheel = Path(sys.argv[1])
 
 datadir = "pkg/irredsol/data"
+datadir2 = "pkg/irredsol/fp"
 
 with InWheel(wheel, wheel):
     found = False
@@ -26,7 +27,7 @@ with InWheel(wheel, wheel):
         name = Path(dir).name
         if (Path(dir) / datadir).exists():
             found = True
-            command = f'set -o pipefail; (cd {shlex.quote(str(parent))} && tar cf - {name}/{datadir}) | tar xvf -'
+            command = f'set -o pipefail; (cd {shlex.quote(str(parent))} && tar cf - {name}/{datadir} {name}/{datadir2}) | tar xvf -'
             print(f'Running {command}')
             sys.stdout.flush()
             if os.system(f"bash -c {shlex.quote(command)}") != 0:
