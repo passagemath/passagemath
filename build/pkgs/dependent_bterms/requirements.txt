@@ -1,0 +1,1 @@
+dependent-bterms[passagemath] @ git+https://github.com/passagemath/passagemath-pkg-dependent_bterms.git
