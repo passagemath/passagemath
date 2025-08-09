@@ -81,6 +81,7 @@ $ python3 --version
 Python 3.12.7
 $ python3 -m venv ~/passagemath-venv
 $ source ~/passagemath-venv/bin/activate
+$ rehash
 ```
 
 For the Linux aarch64 (ARM) platform,
@@ -431,6 +432,7 @@ Full Installation from Source as passagemath
     Python 3.12.7
     $ python3 -m venv ~/passagemath-venv
     $ source ~/passagemath-venv/bin/activate
+    $ rehash
     ```
 
 10. Let's configure it so that all ``passagemath-*`` packages are built from your
