@@ -42,6 +42,17 @@ ctbllib         = ["passagemath-gap-pkg-ctbllib-data"]
 tomlib          = ["passagemath-gap-pkg-tomlib-data"]
 irredsol        = ["passagemath-gap-pkg-irredsol-data"]
 
+# Jupyter
+jupyterkernel   = ["passagemath-gap-pkg-jupyterkernel"]
+jupyterlab      = [
+    "passagemath-gap[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_jupyterlab
+]
+notebook        = [
+    "passagemath-gap[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_notebook
+]
+
 # Everything as in standard Sage
 standard        = ["passagemath-gap[transgrp,ctbllib,tomlib,irredsol]"]
 
