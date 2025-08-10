@@ -181,4 +181,4 @@ cat <<EOF
 
 EOF
 ) > "$OUTPUT_DIR"/index_alph.rst
-sage-package list --has-file SPKG.rst | OUTPUT_DIR=$OUTPUT_DIR OUTPUT_RST=1 xargs -P 16 -n 1 sage-spkg-info
+sage-package list --has-file SPKG.rst | xargs -P 16 -n 20 sage-spkg-info --output-rst --output-dir="$OUTPUT_DIR"

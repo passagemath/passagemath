@@ -6,8 +6,9 @@ IF_VERBOSE=:
 SUDO=
 PROMPT=
 SPKG=no
+INDENT=
 if [ -n "$OUTPUT_RST" ]; then
-    COMMENT="$RST_INDENT"
+    COMMENT=""
 else
     COMMENT="# "
 fi
@@ -17,6 +18,14 @@ do
         --spkg)
             # Whether given package names are SPKG names instead of system package names
             SPKG=yes
+            ;;
+        --format=plain)
+            unset OUTPUT_RST
+            COMMENT="# "
+            ;;
+        --format=rst)
+            OUTPUT_RST=1
+            COMMENT=""
             ;;
         --verbose=*)
             IF_VERBOSE=
@@ -28,6 +37,9 @@ do
         --sudo)
             # Whether to print sudo for package managers that need sudo for non-root users
             SUDO="sudo "
+            ;;
+        --indent=*)
+            INDENT="${1#--indent=}"
             ;;
         --prompt=*)
             PROMPT="${1#--prompt=}"
@@ -65,6 +77,9 @@ do
 done
 command=$1
 shift
+COMMENT="${INDENT}${COMMENT}"
+PROMPT="${INDENT}${PROMPT}"
+CONTINUATION="${INDENT}${PROMPT}"
 if [ -z "$system" -o -z "$command" ]; then
     echo >&2 "usage: $0 {auto|debian|arch|conda|...} [--verbose] [--sudo] [--prompt] {update|install|setup-build-env|remove|...} PACKAGES..."
     exit 1
@@ -89,7 +104,7 @@ function print_shell_command()
 {
     if [ -n "$OUTPUT_RST" ]; then
         echo
-        echo "$RST_INDENT.. CODE-BLOCK:: bash"
+        echo "${INDENT}.. CODE-BLOCK:: bash"
         echo
     fi
     # shell-quote arguments if necessary
