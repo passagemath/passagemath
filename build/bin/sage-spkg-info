@@ -21,7 +21,6 @@ import sys
 import os
 import io
 import glob
-from abc import ABC
 
 # Make .../build importable so `import sage_bootstrap` works
 BUILD_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
@@ -80,7 +79,7 @@ def _package_from_dir(pkg_base, pkg_dir):
     # Last resort: lowercased name-based constructor
     return Package(pkg_base)
 
-def resolve_package(pkg_base: str):
+def resolve_package(pkg_base):
     """
     To Return (pkg, pkg_dir: Path, pkg_scripts: Path, pkg_type: Optional[str])
     instead of using 'sage-package properties'.
@@ -105,7 +104,7 @@ def resolve_package(pkg_base: str):
     # Scripts & metadata files (SPKG.rst, distros/, etc.) live in pkg_dir
     pkg_scripts = pkg_dir
 
-    # To Get package type (optional/standard/doc/experimental/…)
+    # Get package type (base/standard/optional/experimental)
     pkg_type = None
     # To Handle both Enum and plain-string representations with grace,
     if hasattr(pkg, "package_type"):
@@ -174,7 +173,7 @@ def run(cmd, check=True, text=True):
 
 # For the purpose of better looking, Output formatting helpers 
 # Splitted the helper into two small classes, RstFormatter and PlainFormatter
-class _BaseFormatter(ABC):
+class _BaseFormatter:
     """Common API For fixing output behavior."""
     rst = False
 
@@ -221,12 +220,12 @@ class RstFormatter(_BaseFormatter):
     def anchor(self, name):
         return ".. _{}:\n".format(name)
 
-def make_formatter(output_rst: bool) -> _BaseFormatter:
+def make_formatter(output_rst):
     return RstFormatter() if output_rst else PlainFormatter()
 
 # Core functionality
 # To Read and post-process SPKG.rst (README).
-def process_spkg_file(pkg_base: str, pkg_scripts: str, fmt, out):
+def process_spkg_file(pkg_base, pkg_scripts, fmt, out):
     spkg_file = os.path.join(pkg_scripts, "SPKG.rst")
     if not os.path.isfile(spkg_file):
         logger.info("No SPKG.rst for %s", pkg_base)
@@ -254,7 +253,7 @@ def process_spkg_file(pkg_base: str, pkg_scripts: str, fmt, out):
     print(content, file=out)
 
 
-def display_dependencies(pkg_base: str, fmt, out):
+def display_dependencies(pkg_base, fmt, out):
     try:
         result = run(["sage-package", "dependencies",
                       "--format={}".format("rst" if fmt.rst else "plain"),
@@ -270,7 +269,7 @@ def display_dependencies(pkg_base: str, fmt, out):
     print(result.stdout.strip(), file=out)
     
 
-def display_version_info(pkg_base: str, out):
+def display_version_info(pkg_base, out):
     try:
         result = run(["sage-get-system-packages", "versions", pkg_base], check=True)
     except subprocess.CalledProcessError as e:
@@ -284,7 +283,7 @@ def display_version_info(pkg_base: str, out):
 
 
 # To Build the "Equivalent System Packages" section and Use sage-print-system-package-command.
-def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
+def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
 
     print("Equivalent System Packages", file=out)
     print("--------------------------", file=out)
