@@ -123,7 +123,7 @@ What is included
   - `sophus <https://gap-packages.github.io/sophus/>`__: Computing in nilpotent Lie algebras
   - `toric <https://gap-packages.github.io/toric>`__: Toric varieties and some combinatorial geometry computations
   - `utils <https://gap-packages.github.io/utils>`__: Utility functions
-  - `uuid <https://gap-packages.github.io/uuid/`__: RFC 4122 UUIDs
+  - `uuid <https://gap-packages.github.io/uuid/>`__: RFC 4122 UUIDs
   - `ZeroMQInterface <https://gap-packages.github.io/ZeroMQInterface/>`__: ZeroMQ bindings
 
 - the binary wheels on PyPI ship a prebuilt copy of the native Jupyter kernel for GAP
