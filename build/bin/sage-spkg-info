@@ -270,8 +270,14 @@ def display_version_info(pkg_base: str, out):
     print("", file=out)
     print(result.stdout.strip(), file=out)
 
+
 # To Build the "Equivalent System Packages" section and Use sage-print-system-package-command.
 def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
+
+    print("Equivalent System Packages", file=out)
+    print("--------------------------", file=out)
+    print("", file=out)
+
     distros_dir = os.path.join(pkg_scripts, "distros")
     if not os.path.isdir(distros_dir):
         logger.info("No distros directory for %s", pkg_base)
@@ -288,14 +294,8 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
             systems.append(name)
 
     if not systems and not have_repology:
-        print("Equivalent System Packages", file=out)
-        print("--------------------------", file=out)
         print("(none known)", file=out)
         return
-
-    print("Equivalent System Packages", file=out)
-    print("--------------------------", file=out)
-    print("", file=out)
 
     for system in systems:
         system_file = os.path.join(distros_dir, "{}.txt".format(system))
