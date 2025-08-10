@@ -55,7 +55,6 @@ SYSTEM_NAME_MAP = {
 import argparse
 import logging
 import re
-import shlex
 import subprocess
 from sage_bootstrap.package import Package
 
@@ -165,9 +164,16 @@ def parse_args():
 
 # To run the Helpers
 
+try:
+    from shlex import quote
+except ImportError:
+    def quote(s):
+        return "'" + s + "'"
+
+
 def run(cmd, check=True, text=True):
     # To Run the subprocess and log on DEBUG.
-    logger.debug("Running command: %s", " ".join(map(shlex.quote, cmd)))
+    logger.debug("Running command: %s", " ".join(map(quote, cmd)))
     return subprocess.run(cmd, capture_output=True, text=text, check=check)
 
 
