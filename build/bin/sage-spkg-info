@@ -164,17 +164,21 @@ def parse_args():
 
 # To run the Helpers
 
+from sage_bootstrap.compat import quote
+
 try:
-    from shlex import quote
+    from subprocess import run as subprocess_run
 except ImportError:
-    def quote(s):
-        return "'" + s + "'"
+    from subprocess import check_output
 
-
-def run(cmd, check=True, text=True):
-    # To Run the subprocess and log on DEBUG.
-    logger.debug("Running command: %s", " ".join(map(quote, cmd)))
-    return subprocess.run(cmd, capture_output=True, text=text, check=check)
+    def run(cmd, check=True, text=True):
+        logger.debug("Running command: %s", " ".join(map(quote, cmd)))
+        return check_output(cmd).decode('utf8')
+else:
+    def run(cmd, check=True, text=True):
+        # Run the subprocess and log on DEBUG.
+        logger.debug("Running command: %s", " ".join(map(quote, cmd)))
+        return subprocess_run(cmd, capture_output=True, text=text, check=check).stdout
 
 
 # For the purpose of better looking, Output formatting helpers 
@@ -272,7 +276,7 @@ def display_dependencies(pkg_base, fmt, out):
     print("Dependencies", file=out)
     print("------------", file=out)
     print("", file=out)
-    print(result.stdout.strip(), file=out)
+    print(result.strip(), file=out)
     
 
 def display_version_info(pkg_base, out):
@@ -285,7 +289,7 @@ def display_version_info(pkg_base, out):
     print("Version Information", file=out)
     print("-------------------", file=out)
     print("", file=out)
-    print(result.stdout.strip(), file=out)
+    print(result.strip(), file=out)
 
 
 # To Build the "Equivalent System Packages" section and Use sage-print-system-package-command.
@@ -337,7 +341,7 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
             ] + sys_pkgs.split()
             try:
                 cp = run(args)
-                print(cp.stdout.rstrip(), file=out)
+                print(cp.rstrip(), file=out)
             except subprocess.CalledProcessError as e:
                 logger.warning("Failed to get system package command for %s on %s: %s",
                                pkg_base, system, e.stderr.strip())
@@ -356,7 +360,7 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
                 "--wrap", "--prompt=    $ ", "--continuation=          ",
                 "--sudo", "install",
             ] + sys_pkgs.split())
-            print(cp.stdout.rstrip(), file=out)
+            print(cp.rstrip(), file=out)
         except subprocess.CalledProcessError as e:
             logger.warning("repology cmd failed: %s", e.stderr.strip())
 
