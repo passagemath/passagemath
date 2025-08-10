@@ -244,7 +244,9 @@ def process_spkg_file(pkg_base: str, pkg_scripts: str, fmt, out):
 
 def display_dependencies(pkg_base: str, fmt, out):
     try:
-        result = run(["sage-package", "dependencies", "--format=plain", pkg_base],
+        result = run(["sage-package", "dependencies",
+                      "--format={}".format("rst" if fmt.rst else "plain"),
+                      pkg_base],
                      check=True)
     except subprocess.CalledProcessError as e:
         logger.warning("Could not get dependencies for %s: %s", pkg_base, e.stderr.strip())
