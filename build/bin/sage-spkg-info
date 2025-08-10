@@ -322,6 +322,7 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
             args = [
                 "sage-print-system-package-command",
                 system,
+                "--format={}".format("rst" if fmt.rst else "plain"),
                 "--wrap",
                 "--prompt={}{}".format(rst_indent, "$ "),
                 "--continuation={}".format(rst_indent),
