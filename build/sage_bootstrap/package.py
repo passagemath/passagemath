@@ -17,7 +17,7 @@ Sage Packages
 import logging
 import os
 import re
-from functools import lru_cache  
+
 from sage_bootstrap.env import SAGE_ROOT
 
 log = logging.getLogger()
