@@ -18,6 +18,14 @@ do
             # Whether given package names are SPKG names instead of system package names
             SPKG=yes
             ;;
+        --format=plain)
+            unset OUTPUT_RST
+            COMMENT="# "
+            ;;
+        --format=rst)
+            OUTPUT_RST=1
+            COMMENT="$RST_INDENT"
+            ;;
         --verbose=*)
             IF_VERBOSE=
             COMMENT="${1#--verbose=}"
