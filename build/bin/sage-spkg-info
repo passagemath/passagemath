@@ -234,6 +234,18 @@ def process_spkg_file(pkg_base: str, pkg_scripts: str, fmt, out):
 
     with io.open(spkg_file, "r", encoding="utf-8") as fh:
         content = fh.read()
+
+    # Modify SPKG.rst that are symlinks to a README.rst
+    # - change title
+    # - remove boilerplate
+    if "About this pip-installable distribution package" in content:
+        content = re.sub('^ *passagemath:' ,
+                         pkg_base + ':', content, flags=re.MULTILINE)
+        content = re.sub('^====',
+                         '==================', content, flags=re.MULTILINE)
+        content = re.sub('`passagemath.*\nAbout this pip-installable distribution package\n-+\n',
+                         '', content, flags=re.DOTALL|re.MULTILINE)
+
     # Tweaks to make identical to the bash script 
     content = re.sub(r'https://github\.com/sagemath/sage/issues/(\d+)',
                      r':issue:`\1`', content)
