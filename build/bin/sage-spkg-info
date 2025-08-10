@@ -341,8 +341,7 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
         except subprocess.CalledProcessError as e:
             logger.warning("repology cmd failed: %s", e.stderr.strip())
 
-# To print message about spkg-configure.m4. Optionally: expose as @property later.
-def handle_configuration(pkg_base: str, pkg_scripts: str, fmt, out):
+    # To print message about spkg-configure.m4. Optionally: expose as @property later.
     print("", file=out)
     pkg = _package_from_dir(pkg_base, pkg_scripts)  # or to change to Package.from_base(pkg_base), depending on types of API
     if pkg.has_spkg_configure:
@@ -394,10 +393,6 @@ def emit_for_package(pkg_base, fmt, out_dir):
         # System packages
         print("", file=out_stream)
         handle_system_packages(pkg_base, pkg_scripts, fmt, out_stream)
-
-        # To Configure behavior (will use Package(pkg_scripts))
-        print("", file=out_stream)
-        handle_configuration(pkg_base, pkg_scripts, fmt, out_stream)
 
     if out_dir:
         if not os.path.isdir(out_dir):
