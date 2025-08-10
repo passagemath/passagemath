@@ -16,7 +16,7 @@ Polarkoordinaten, Konturplots und Plots von Vektorfeldern. Wir geben
 davon im Folgenden einige Beispiele an. Für weitere Beispiele zum
 Plotten mit Sage lesen Sie :ref:`section-systems` und
 :ref:`section-maxima`, sowie die `Sage Constructions
-<http://doc.sagemath.org/html/en/constructions/>`_ Dokumentation.
+<http://passagemath.org/docs/latest/html/en/constructions/>`_ Dokumentation.
 
 Dieser Befehl erstellt einen gelben Kreis vom Radius 1 mit dem
 Ursprung als Zentrum:

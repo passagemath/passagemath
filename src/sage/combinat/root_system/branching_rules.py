@@ -645,7 +645,7 @@ def branch_weyl_character(chi, R, S, rule='default'):
     These embeddings are described more completely (with references
     to the literature) in the thematic tutorial at:
 
-    https://doc.sagemath.org/html/en/thematic_tutorials/lie.html
+    https://passagemath.org/docs/latest/html/en/thematic_tutorials/lie.html
 
     EXAMPLES::
 

@@ -7,7 +7,7 @@ License.
 
 The full text of both licenses is included below.
 
-The SageMath library depends on many other software packages,
+The Sage library depends on many other software packages,
 which are licensed under separate terms.
 
 =========================================================================

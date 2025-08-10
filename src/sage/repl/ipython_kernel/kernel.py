@@ -95,7 +95,7 @@ class SageKernel(IPythonKernel):
             sage: from sage.repl.ipython_kernel.kernel import SageKernel
             sage: sk = SageKernel.__new__(SageKernel)
             sage: sk.help_links
-            [{'text': 'Sage Documentation',
+            [{'text': 'passagemath Documentation',
               'url': '.../html/en/index.html'},
              ...]
         """
@@ -115,11 +115,11 @@ class SageKernel(IPythonKernel):
                 return f'http://127.0.0.1:{port}/{path}'
         else:
             def doc_url(path):
-                return f'https://doc.sagemath.org/{path}'
+                return f'https://passagemath.org/docs/latest/{path}'
 
         return [
             {
-                'text': 'Sage Documentation',
+                'text': 'passagemath Documentation',
                 'url': doc_url('html/en/index.html'),
             },
             {

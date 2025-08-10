@@ -1657,13 +1657,14 @@ class FiniteWord_class(Word_class):
 
         For ultimately periodic words::
 
+            sage: # needs sage.graphs sage.modules
             sage: sigma = WordMorphism('a->abcd,b->cd,c->cd,d->cd')
-            sage: w = sigma.fixed_point('a')[:100]; w                                   # needs sage.modules
+            sage: w = sigma.fixed_point('a')[:100]; w
             word: abcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd...
-            sage: g = w.reduced_rauzy_graph(5)                                          # needs sage.graphs
-            sage: g.vertices(sort=True)                                                 # needs sage.graphs
+            sage: g = w.reduced_rauzy_graph(5)
+            sage: g.vertices(sort=True)
             [word: abcdc, word: cdcdc]
-            sage: g.edges(sort=True)                                                    # needs sage.graphs
+            sage: g.edges(sort=True)
             [(word: abcdc, word: cdcdc, word: dc), (word: cdcdc, word: cdcdc, word: dc)]
 
         AUTHOR:

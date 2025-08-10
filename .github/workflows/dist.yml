@@ -112,6 +112,7 @@ jobs:
 
       - name: Cache sdists
         id: cache-sdists
+        if: "!startsWith(github.ref, 'refs/tags/passagemath-')"
         uses: actions/cache@v4
         with:
           path: dist
@@ -226,6 +227,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Cache noarch-wheels
+        if: "!startsWith(github.ref, 'refs/tags/passagemath-')"
         id: cache-noarch-wheels
         uses: actions/cache@v4
         with:
@@ -273,7 +275,7 @@ jobs:
           ./bootstrap
           ./configure --without-system-gap
           make pypi-noarch-wheels V=0
-          (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/)
+          (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/ && rm -f dist/*sage*conf-*-none-any.whl)
           ls -l dist
 
       - name: Repair wheels
@@ -331,9 +333,9 @@ jobs:
             build: macosx
     env:
       # SPKGs to install as system packages
-      SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
+      SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm libuuid ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty gfan ecm tachyon graphs polytopes_db pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
+      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari xeus_gp gp2c gap_packages gap_pkg_jupyterkernel ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty gfan ecm tachyon graphs polytopes_db pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
@@ -773,8 +775,9 @@ jobs:
           rm -f ~/sage-local/config.status /sage-*/config.status  # trigger rebuild
           echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS)) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --without-system-libpng --without-system-patchelf && echo ::group::config.log && cat config.log && echo ::endgroup:: && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); fi && rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done" >> "$GITHUB_ENV"
           mkdir -p unpacked
+          set -x
           for sdist in dist/$pkg*.tar.gz; do
-              (cd unpacked && tar xfz - ) < $sdist
+              (cd unpacked && tar xfz - && base=${sdist#dist/} && mv ${base%.tar.gz} ${base%-*}) < $sdist
           done
 
       - name: sagemath-bliss

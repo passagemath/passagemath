@@ -10,24 +10,25 @@ It is a fork of `SageMath <https://www.sagemath.org/>`__, which has been
 developed 2005-2025 under the motto “Creating a Viable Open Source
 Alternative to Magma, Maple, Mathematica, and MATLAB”.
 
-The passagemath fork was created in October 2024 with the following
-goals:
+The passagemath fork uses the motto "Creating a Free Passage Between the
+Scientific Python Ecosystem and Mathematical Software Communities."
+It was created in October 2024 with the following goals:
 
--  providing modularized installation with pip, thus completing a `major
-   project started in 2020 in the Sage
-   codebase <https://github.com/sagemath/sage/issues/29705>`__,
+-  providing modularized installation with pip,
 -  establishing first-class membership in the scientific Python
    ecosystem,
 -  giving `clear attribution of upstream
    projects <https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ>`__,
 -  providing independently usable Python interfaces to upstream
    libraries,
--  providing `platform portability and integration testing
+-  offering `platform portability and integration testing
    services <https://github.com/passagemath/passagemath/issues/704>`__
    to upstream projects,
 -  inviting collaborations with upstream projects,
 -  `building a professional, respectful, inclusive
    community <https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ>`__,
+-  `empowering Sage users to participate in the scientific Python ecosystem
+   <https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
 -  developing a port to `Pyodide <https://pyodide.org/en/stable/>`__ for
    serverless deployment with Javascript,
 -  developing a native Windows port.
@@ -35,23 +36,28 @@ goals:
 `Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
 available online.
 
-passagemath attempts to support all major Linux distributions and recent versions of
-macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
-virtualization.
+passagemath attempts to support and provides binary wheels suitable for
+all major Linux distributions and recent versions of macOS.
 
-Complete sets of binary wheels are provided on PyPI for Python versions 3.10.x-3.13.x.
-Python 3.13.x is also supported, but some third-party packages are still missing wheels,
-so compilation from source is triggered for those.
+For the Linux aarch64 (ARM) platform, some third-party packages are still missing
+wheels; see the `instructions for building them from source <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__.
+
+Binary wheels for native Windows (x86_64) are are available for a subset of
+the passagemath distributions. Use of the full functionality of passagemath
+on Windows currently requires the use of Windows Subsystem for Linux (WSL)
+or virtualization.
+
+The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x.
 
 
 About this pip-installable distribution package
 -----------------------------------------------
 
-The pip-installable distribution package `sagemath-categories` is a
+The pip-installable distribution package ``passagemath-categories`` is a
 distribution of a small part of the Sage Library.
 
 It provides a small subset of the modules of the Sage library
-("sagelib", `sagemath-standard`) that is a superset of `sagemath-objects`
+("sagelib", ``passagemath-standard``) building on top of ``passagemath-objects``
 (providing Sage objects, the element/parent framework, categories, the coercion
 system and the related metaclasses), making various additional categories
 available without introducing dependencies on additional mathematical
@@ -61,23 +67,23 @@ libraries.
 What is included
 ----------------
 
-* `Structure <https://doc.sagemath.org/html/en/reference/structure/index.html>`_, `Coercion framework <https://doc.sagemath.org/html/en/reference/coercion/index.html>`_, `Base Classes, Metaclasses <https://doc.sagemath.org/html/en/reference/misc/index.html#special-base-classes-decorators-etc>`_
+* `Structure <https://passagemath.org/docs/latest/html/en/reference/structure/index.html>`_, `Coercion framework <https://passagemath.org/docs/latest/html/en/reference/coercion/index.html>`_, `Base Classes, Metaclasses <https://passagemath.org/docs/latest/html/en/reference/misc/index.html#special-base-classes-decorators-etc>`_
 
-* `Categories and functorial constructions <https://doc.sagemath.org/html/en/reference/categories/index.html>`_
+* `Categories and functorial constructions <https://passagemath.org/docs/latest/html/en/reference/categories/index.html>`_
 
-* `Sets <https://doc.sagemath.org/html/en/reference/sets/index.html>`_
+* `Sets <https://passagemath.org/docs/latest/html/en/reference/sets/index.html>`_
 
-* Basic Combinatorial and Data Structures: `Binary trees <https://doc.sagemath.org/html/en/reference/data_structures/sage/misc/binary_tree.html>`_, `Bitsets <https://doc.sagemath.org/html/en/reference/data_structures/sage/data_structures/bitset.html>`_, `Permutations <https://doc.sagemath.org/html/en/reference/combinat/sage/combinat/permutation.html>`_, Combinations
+* Basic Combinatorial and Data Structures: `Binary trees <https://passagemath.org/docs/latest/html/en/reference/data_structures/sage/misc/binary_tree.html>`_, `Bitsets <https://passagemath.org/docs/latest/html/en/reference/data_structures/sage/data_structures/bitset.html>`_, `Permutations <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/permutation.html>`_, Combinations
 
-* Basic Rings and Fields: `Integers, Rationals <https://doc.sagemath.org/html/en/reference/rings_standard/index.html>`_, `Double Precision Reals <https://doc.sagemath.org/html/en/reference/rings_numerical/sage/rings/real_double.html>`_, `Z/nZ <https://doc.sagemath.org/html/en/reference/finite_rings/sage/rings/finite_rings/integer_mod_ring.html>`_
+* Basic Rings and Fields: `Integers, Rationals <https://passagemath.org/docs/latest/html/en/reference/rings_standard/index.html>`_, `Double Precision Reals <https://passagemath.org/docs/latest/html/en/reference/rings_numerical/sage/rings/real_double.html>`_, `Z/nZ <https://passagemath.org/docs/latest/html/en/reference/finite_rings/sage/rings/finite_rings/integer_mod_ring.html>`_
 
-* `Commutative Polynomials <https://doc.sagemath.org/html/en/reference/polynomial_rings/index.html>`_, `Power Series and Laurent Series <https://doc.sagemath.org/html/en/reference/power_series/index.html>`_, `Rational Function Fields <https://doc.sagemath.org/html/en/reference/function_fields/index.html>`_
+* `Commutative Polynomials <https://passagemath.org/docs/latest/html/en/reference/polynomial_rings/index.html>`_, `Power Series and Laurent Series <https://passagemath.org/docs/latest/html/en/reference/power_series/index.html>`_, `Rational Function Fields <https://passagemath.org/docs/latest/html/en/reference/function_fields/index.html>`_
 
-* Arithmetic Functions, `Elementary and Special Functions <https://doc.sagemath.org/html/en/reference/functions/index.html>`_ as generic entry points
+* Arithmetic Functions, `Elementary and Special Functions <https://passagemath.org/docs/latest/html/en/reference/functions/index.html>`_ as generic entry points
 
-* Base classes for Groups, Rings, `Finite Fields <https://doc.sagemath.org/html/en/reference/finite_rings/sage/rings/finite_rings/finite_field_constructor.html>`_, `Number Fields <https://doc.sagemath.org/html/en/reference/number_fields/sage/rings/number_field/number_field_base.html>`_, `Schemes <https://doc.sagemath.org/html/en/reference/schemes/index.html>`_
+* Base classes for Groups, Rings, `Finite Fields <https://passagemath.org/docs/latest/html/en/reference/finite_rings/sage/rings/finite_rings/finite_field_constructor.html>`_, `Number Fields <https://passagemath.org/docs/latest/html/en/reference/number_fields/sage/rings/number_field/number_field_base.html>`_, `Schemes <https://passagemath.org/docs/latest/html/en/reference/schemes/index.html>`_
 
-* Facilities for `Parallel Computing <https://doc.sagemath.org/html/en/reference/parallel/index.html>`_, `Formatted Output <https://doc.sagemath.org/html/en/reference/misc/index.html#formatted-output>`_
+* Facilities for `Parallel Computing <https://passagemath.org/docs/latest/html/en/reference/parallel/index.html>`_, `Formatted Output <https://passagemath.org/docs/latest/html/en/reference/misc/index.html#formatted-output>`_
 
 Available in other distribution packages
 -----------------------------------------------
@@ -114,4 +120,4 @@ Available in other distribution packages
 Dependencies
 ------------
 
-When building from source, development packages of `gmp`, `mpfr`, and `mpc` are needed.
+When building from source, development packages of ``gmp``, ``mpfr``, and ``mpc`` are needed.

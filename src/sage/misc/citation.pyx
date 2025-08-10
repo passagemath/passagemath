@@ -77,8 +77,8 @@ def get_systems(cmd):
         sage: get_systems('integrate(x^2, x)')                                          # needs sage.symbolic
         ['Maxima', 'ginac']
         sage: R.<x,y,z> = QQ[]
-        sage: I = R.ideal(x^2+y^2, z^2+y)
-        sage: get_systems('I.primary_decomposition()')
+        sage: I = R.ideal(x^2 + y^2, z^2 + y)
+        sage: get_systems('I.primary_decomposition()')                                  # needs sage.libs.singular
         ['Singular']
     """
     import cProfile

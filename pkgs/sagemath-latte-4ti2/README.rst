@@ -10,24 +10,25 @@ It is a fork of `SageMath <https://www.sagemath.org/>`__, which has been
 developed 2005-2025 under the motto “Creating a Viable Open Source
 Alternative to Magma, Maple, Mathematica, and MATLAB”.
 
-The passagemath fork was created in October 2024 with the following
-goals:
+The passagemath fork uses the motto "Creating a Free Passage Between the
+Scientific Python Ecosystem and Mathematical Software Communities."
+It was created in October 2024 with the following goals:
 
--  providing modularized installation with pip, thus completing a `major
-   project started in 2020 in the Sage
-   codebase <https://github.com/sagemath/sage/issues/29705>`__,
+-  providing modularized installation with pip,
 -  establishing first-class membership in the scientific Python
    ecosystem,
 -  giving `clear attribution of upstream
    projects <https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ>`__,
 -  providing independently usable Python interfaces to upstream
    libraries,
--  providing `platform portability and integration testing
+-  offering `platform portability and integration testing
    services <https://github.com/passagemath/passagemath/issues/704>`__
    to upstream projects,
 -  inviting collaborations with upstream projects,
 -  `building a professional, respectful, inclusive
    community <https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ>`__,
+-  `empowering Sage users to participate in the scientific Python ecosystem
+   <https://github.com/passagemath/passagemath/issues/248>`__ by publishing packages,
 -  developing a port to `Pyodide <https://pyodide.org/en/stable/>`__ for
    serverless deployment with Javascript,
 -  developing a native Windows port.
@@ -35,13 +36,18 @@ goals:
 `Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
 available online.
 
-passagemath attempts to support all major Linux distributions and recent versions of
-macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
-virtualization.
+passagemath attempts to support and provides binary wheels suitable for
+all major Linux distributions and recent versions of macOS.
 
-Complete sets of binary wheels are provided on PyPI for Python versions 3.10.x-3.13.x.
-Python 3.13.x is also supported, but some third-party packages are still missing wheels,
-so compilation from source is triggered for those.
+For the Linux aarch64 (ARM) platform, some third-party packages are still missing
+wheels; see the `instructions for building them from source <https://github.com/passagemath/passagemath?tab=readme-ov-file#full-installation-of-passagemath-from-binary-wheels-on-pypi>`__.
+
+Binary wheels for native Windows (x86_64) are are available for a subset of
+the passagemath distributions. Use of the full functionality of passagemath
+on Windows currently requires the use of Windows Subsystem for Linux (WSL)
+or virtualization.
+
+The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x.
 
 
 About this pip-installable distribution package
@@ -57,11 +63,11 @@ and `4ti2 <https://github.com/4ti2/4ti2>`_
 What is included
 ----------------
 
-- `Python interface to LattE integrale programs <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/latte.html#module-sage.interfaces.latte>`_
+- `Python interface to LattE integrale programs <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/latte.html#module-sage.interfaces.latte>`_
 
-- `Python interface to 4ti2 programs <https://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/four_ti_2.html>`_
+- `Python interface to 4ti2 programs <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/four_ti_2.html>`_
 
-- Raw access to all executables from Python using `sage.features.latte <https://doc.sagemath.org/html/en/reference/spkg/sage/features/latte.html>`_ and `sage.features.four_ti_2 <https://doc.sagemath.org/html/en/reference/spkg/sage/features/four_ti_2.html>`_
+- Raw access to all executables from Python using `sage.features.latte <https://passagemath.org/docs/latest/html/en/reference/spkg/sage/features/latte.html>`_ and `sage.features.four_ti_2 <https://passagemath.org/docs/latest/html/en/reference/spkg/sage/features/four_ti_2.html>`_
 
 - The binary wheels published on PyPI include a prebuilt copy of
   LattE integrale and 4ti2.

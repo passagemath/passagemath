@@ -809,7 +809,7 @@ class WordGenerator:
 
             sage: from itertools import cycle, chain
             sage: it = chain([0], cycle([2, 1]))
-            sage: words.CharacteristicSturmianWord(it)
+            sage: words.CharacteristicSturmianWord(it)                                  # needs sage.rings.real_mpfr
             word: 0100100101001001001010010010010100100101...
 
         The first terms of the standard sequence of the characteristic

@@ -20,9 +20,3 @@ Upstream Contact
 ----------------
 
 http://pari.math.u-bordeaux.fr/
-
-Dependencies
-------------
-
--  Installation: None
--  Runtime: PARI/GP

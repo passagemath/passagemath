@@ -3,14 +3,15 @@
 
 .. _chapter-github:
 
-=============================
-The Sage Repository on GitHub
-=============================
+====================================
+The passagemath Repository on GitHub
+====================================
 
-The center of Sage development is `the SageMath organization on GitHub
-<https://github.com/sagemath>`_, which consists of many repositories related
-with Sage. The most important one among them is of course `the Sage repository
-<https://github.com/sagemath/sage>`_, which we call "the Sage repo" for short.
+The center of passagemath development is `the passagemath organization on GitHub
+<https://github.com/passagemath>`_, which hosts many repositories related
+with passagemath. The most important one among them is `the main passagemath repository
+<https://github.com/passagemath/passagemath>`_, which we call "the passagemath repo"
+for short.
 
 
 .. _section-github-account:
@@ -18,7 +19,7 @@ with Sage. The most important one among them is of course `the Sage repository
 Obtaining a GitHub account
 ==========================
 
-To share your work on Sage, you need a GitHub account. If you do not have one
+To share your work on passagemath, you need a GitHub account. If you do not have one
 yet, choose a username and `create an account <https://github.com/join>`_. In
 the following, we assume your username "alice". So you always read your own
 username if you see "alice".
@@ -45,7 +46,7 @@ Configuration
 You have to authenticate to your GitHub account to allow ``gh`` command to
 interact with GitHub. Typically the authorization proceeds as follows::
 
-    [alice@localhost sage]$ gh auth login
+    [alice@localhost passagemath]$ gh auth login
     ? What is your preferred protocol for Git operations? HTTPS
     ? Authenticate Git with your GitHub credentials? Yes
     ? How would you like to authenticate GitHub CLI? Login with a web browser
@@ -63,12 +64,12 @@ Access Token here <https://github.com/settings/tokens>`_.
 
 Next set the default repo for the ``gh`` command::
 
-    [alice@localhost sage]$ gh repo set-default sagemath/sage
+    [alice@localhost passagemath]$ gh repo set-default passagemath/passagemath
 
 and check::
 
-    [alice@localhost sage]$ gh repo view
-    sagemath/sage
+    [alice@localhost passagemath]$ gh repo view
+    passagemath/passagemath
     ...
 
 which will show the default repo along with its readme, which is quite long.
@@ -76,11 +77,11 @@ which will show the default repo along with its readme, which is quite long.
 ``gh`` extensions
 -----------------
 
-``gh`` is extendable; e.g.  a useful extension to ``gh`` allows testing of
+``gh`` is extendable; e.g., a useful extension to ``gh`` allows testing of
 Sage's GitHub Actions locally, using Docker. It is called ``act`` and can be
 installed by running::
 
-    [alice@localhost sage]$ gh extension install https://github.com/nektos/gh-act
+    [alice@localhost passagemath]$ gh extension install https://github.com/nektos/gh-act
 
 Append ``--force`` flag to the command above to force an upgrade of the extension.
 More details on configuring and using ``gh act`` are in :ref:`chapter-portability_testing`.
@@ -139,7 +140,7 @@ your fork
     Resolving deltas: 100% (725438/725438), done.
     Updating files: 100% (9936/9936), done.
     [alice@localhost ~]$ cd sage
-    [alice@localhost sage]$ git remote -v
+    [alice@localhost passagemath]$ git remote -v
     origin  https://github.com/alice/passagemath.git (fetch)
     origin  https://github.com/alice/passagemath.git (push)
 
@@ -157,7 +158,7 @@ your fork
     Resolving deltas: 100% (725438/725438), done.
     Updating files: 100% (9936/9936), done.
     [alice@localhost ~]$ cd sage
-    [alice@localhost sage]$ git remote -v
+    [alice@localhost passagemath]$ git remote -v
     origin  git@github.com:alice/passagemath.git (fetch)
     origin  git@github.com:alice/passagemath.git (push)
 
@@ -168,11 +169,11 @@ If you already have a local Git repo and only want to link your fork as ``origin
 
    ::
 
-    [alice@localhost sage]$ git remote add origin https://github.com/alice/passagemath.git
-    [alice@localhost sage]$ git remote -v
+    [alice@localhost passagemath]$ git remote add origin https://github.com/alice/passagemath.git
+    [alice@localhost passagemath]$ git remote -v
     origin  https://github.com/alice/passagemath.git (fetch)
     origin  https://github.com/alice/passagemath.git (push)
-    [alice@localhost sage]$ git fetch origin
+    [alice@localhost passagemath]$ git fetch origin
     remote: Enumerating objects: 1136, done.
     remote: Counting objects: 100% (1084/1084), done.
     remote: Compressing objects: 100% (308/308), done.
@@ -186,11 +187,11 @@ If you already have a local Git repo and only want to link your fork as ``origin
 
    ::
 
-    [alice@localhost sage]$ git remote add origin git@github.com:alice/passagemath.git
-    [alice@localhost sage]$ git remote -v
+    [alice@localhost passagemath]$ git remote add origin git@github.com:alice/passagemath.git
+    [alice@localhost passagemath]$ git remote -v
     origin  git@github.com:alice/passagemath.git (fetch)
     origin  git@github.com:alice/passagemath.git (push)
-    [alice@localhost sage]$ git fetch origin
+    [alice@localhost passagemath]$ git fetch origin
     remote: Enumerating objects: 1136, done.
     remote: Counting objects: 100% (1084/1084), done.
     remote: Compressing objects: 100% (308/308), done.
@@ -206,8 +207,8 @@ You also add the repo ``passagemath/passagemath`` as your remote ``passagemath``
 
    ::
 
-    [alice@localhost sage]$ git remote add passagemath https://github.com/passagemath/passagemath.git
-    [alice@localhost sage]$ git remote -v
+    [alice@localhost passagemath]$ git remote add passagemath https://github.com/passagemath/passagemath.git
+    [alice@localhost passagemath]$ git remote -v
     origin  https://github.com/alice/passagemath.git (fetch)
     origin  https://github.com/alice/passagemath.git (push)
     passagemath    https://github.com/passagemath/passagemath.git (fetch)
@@ -217,8 +218,8 @@ You also add the repo ``passagemath/passagemath`` as your remote ``passagemath``
 
    ::
 
-    [alice@localhost sage]$ git remote add passagemath git@github.com:passagemath/passagemath.git
-    [alice@localhost sage]$ git remote -v
+    [alice@localhost passagemath]$ git remote add passagemath git@github.com:passagemath/passagemath.git
+    [alice@localhost passagemath]$ git remote -v
     origin  git@github.com:alice/passagemath.git (fetch)
     origin  git@github.com:alice/passagemath.git (push)
     passagemath    git@github.com:passagemath/passagemath.git (fetch)
@@ -226,7 +227,7 @@ You also add the repo ``passagemath/passagemath`` as your remote ``passagemath``
 
 To prevent accidental pushes to ``passagemath`` (instead of ``origin``), you may want to disable it by running::
 
-    [alice@localhost sage]$ git remote set-url --push passagemath DISABLE
+    [alice@localhost passagemath]$ git remote set-url --push passagemath DISABLE
 
 Finally, to add the repository of the upstream project SageMath as a remote:
 
@@ -234,12 +235,12 @@ Finally, to add the repository of the upstream project SageMath as a remote:
 
    ::
 
-    [alice@localhost sage]$ git remote add upstream https://github.com/sagemath/sage.git
-    [alice@localhost sage]$ git remote -v
+    [alice@localhost passagemath]$ git remote add upstream https://github.com/sagemath/sage.git
+    [alice@localhost passagemath]$ git remote -v
     origin  https://github.com/alice/passagemath.git (fetch)
     origin  https://github.com/alice/passagemath.git (push)
-    passagemath    https://github.com/sagemath/passagemath.git (fetch)
-    passagemath    https://github.com/sagemath/passagemath.git (push)
+    passagemath    https://github.com/passagemath/passagemath.git (fetch)
+    passagemath    https://github.com/passagemath/passagemath.git (push)
     upstream    https://github.com/sagemath/sage.git (fetch)
     upstream    https://github.com/sagemath/sage.git (push)
 
@@ -247,8 +248,8 @@ Finally, to add the repository of the upstream project SageMath as a remote:
 
    ::
 
-    [alice@localhost sage]$ git remote add passagemath git@github.com:sagemath/passagemath.git
-    [alice@localhost sage]$ git remote -v
+    [alice@localhost passagemath]$ git remote add passagemath git@github.com:sagemath/sage.git
+    [alice@localhost passagemath]$ git remote -v
     origin  git@github.com:alice/passagemath.git (fetch)
     origin  git@github.com:alice/passagemath.git (push)
     passagemath    git@github.com:sagemath/passagemath.git (fetch)
@@ -257,7 +258,7 @@ Finally, to add the repository of the upstream project SageMath as a remote:
     upstream    git@github.com:sagemath/sage.git (push)
 
 Of course, you can give arbitrary names to your Git remotes, but ``origin`` and
-``upstream`` are the established defaults, which will make it easier to use tools
+``upstream`` are good defaults, which will make it easier to use tools
 such as the GitHub CLI.
 
 
@@ -372,7 +373,7 @@ Creating a Pull Request
 If you worked on an issue, and prepared a fix for a bug or wrote code for
 enhancing Sage, then you create a PR:
 
-- either in the passagemath repo `passagemath/passagemath <https://github.com/sagemath/sage/issues>`_,
+- either in the passagemath repo `passagemath/passagemath <https://github.com/passagemath/passagemath/issues>`_,
 - or in the upstream repo `sagemath/sage <https://github.com/sagemath/sage/issues>`_.
 
 In addition to what were said about opening an issue, the following applies:

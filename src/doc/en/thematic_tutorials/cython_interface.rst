@@ -11,7 +11,7 @@ use, this document is for you.
 
 - Do you want to **contribute** to Sage by adding your interface to its code? The
   (more complex) instructions are `available here
-  <http://doc.sagemath.org/html/en/developer/index.html#packaging-third-party-code>`_.
+  <http://passagemath.org/docs/latest/html/en/developer/index.html#packaging-third-party-code>`_.
 
 .. _section-cython-interface-helloworld:
 

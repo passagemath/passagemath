@@ -397,6 +397,17 @@ class CoxeterType(SageObject, metaclass=ClasscallMetaclass):
                     return R((E(2*x) + ~E(2*x)).to_cyclotomic_field()) / R(-2)
                 else:
                     return R(x)
+        elif all(mat[i,j] in (1, 2, 3) or mat[i, j] <= -1 for i in range(n) for j in range(n)):
+            def val(x):
+                if x > -1:
+                    if x == 1:
+                        return R(1)
+                    elif x == 2:
+                        return R(0)
+                    elif x == 3:
+                        return R(1)/R(-2)
+                else:
+                    return R(x)
         else:
             from sage.functions.trig import cos
             from sage.symbolic.constants import pi

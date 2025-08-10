@@ -1,4 +1,4 @@
-passagemath: Configuration module for the SageMath library
+passagemath: Configuration module for the Sage library
 ==========================================================
 
 `passagemath <https://github.com/passagemath/passagemath>`__ is open
@@ -31,7 +31,7 @@ goals:
    serverless deployment with Javascript,
 -  developing a native Windows port.
 
-`Full documentation <https://doc.sagemath.org/html/en/index.html>`__ is
+`Full documentation <https://passagemath.org/docs/latest/html/en/index.html>`__ is
 available online.
 
 passagemath attempts to support all major Linux distributions and recent versions of
@@ -49,7 +49,7 @@ About this pip-installable distribution package
 This distribution package ``passagemath-conf`` provides:
 
 - a single Python module, ``sage_conf``, providing configuration information
-  to the SageMath library at the time of its installation and at its runtime
+  to the Sage library at the time of its installation and at its runtime
 
 - a console script ``sage-config``, for querying the variables of ``sage_conf``
   from the shell
@@ -130,7 +130,7 @@ The version of the distribution package in the directory
 `pkgs/sage-conf_conda <https://github.com/passagemath/passagemath/tree/main/pkgs/sage-conf_conda/>`_
 may be used in an installation method of SageMath, where all packages
 are provided by conda.  This method is described in
-https://doc.sagemath.org/html/en/installation/conda.html#using-conda-to-provide-all-dependencies-for-the-sage-library-experimental
+https://passagemath.org/docs/latest/html/en/installation/conda.html#using-conda-to-provide-all-dependencies-for-the-sage-library-experimental
 
 
 passagemath-conf in downstream distributions
@@ -139,7 +139,7 @@ passagemath-conf in downstream distributions
 If the customization through the environment variables ``SAGE_CONF_...``
 does not give enough flexibility, downstream packagers and advanced developers
 and users can provide their own implementation of the distribution package
-to support the intended deployment of the SageMath library.
+to support the intended deployment of the Sage library.
 
 
 License

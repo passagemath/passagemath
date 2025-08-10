@@ -704,8 +704,8 @@ class FiniteCoxeterGroups(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: W = CoxeterGroup(['H',3], base_ring=RDF)
-                sage: W.permutahedron()
+                sage: W = CoxeterGroup(['H',3], base_ring=RDF)                          # needs sage.symbolic
+                sage: W.permutahedron()                                                 # needs sage.symbolic
                 doctest:warning
                 ...
                 UserWarning: This polyhedron data is numerically complicated; cdd could not convert between the inexact V and H representation without loss of data. The resulting object might show inconsistencies.

@@ -2225,13 +2225,12 @@ class ClusterQuiver(SageObject):
             ...
             ValueError: only makes sense for quivers of finite type
         """
-        from sage.geometry.fan import Fan
-
         if not self.is_finite():
             raise ValueError('only makes sense for quivers of finite type')
 
         from .cluster_seed import ClusterSeed
         from sage.geometry.cone import Cone
+        from sage.geometry.fan import Fan
 
         seed = ClusterSeed(self)
         return Fan([Cone(s.d_matrix().columns())

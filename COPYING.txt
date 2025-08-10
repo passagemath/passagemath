@@ -1,18 +1,18 @@
-This file is about the copyright on Sage and all included components.
+This file is about the copyright on passagemath and all included components.
 
-Sage is a compilation both of original Python, C, C++, and Cython code,
+passagemath is a compilation both of original Python, C, C++, and Cython code,
 and of existing free mathematics-related software.  All standard
-components of sage (those included in sage-*.tar) are licensed under a
+components of passagemath (those included in sage-*.tar) are licensed under a
 free open source license as defined at http://www.opensource.org/.
 
-The whole Sage software distribution is licensed under the General
+The whole passagemath software distribution is licensed under the General
 Public License, version 3 (no other versions!).
 
-All Sage documentation is licensed under Creative Commons 3.0 BY-SA
+All passagemath documentation is licensed under Creative Commons 3.0 BY-SA
 License.
 
-Some of the code available in *optional* Sage packages (not included
-in sage-*.tar) are licensed under more restrictive conditions.
+Some of the code available in *optional* passagemath packages
+are licensed under more restrictive conditions.
 
 * ORIGINAL SAGE LIBRARY CODE:
   All original Sage code is distributed under the terms of the
@@ -129,9 +129,6 @@ threejs                     MIT License
 tornado                     Apache License
 zlib                        Custom (Modified BSD)
 
-CONTACT INFO:
-     William Stein; wstein@gmail.com;
-     http://www.sagemath.org
 
 =========================================================================
 

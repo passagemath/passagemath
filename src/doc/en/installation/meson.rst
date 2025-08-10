@@ -1,10 +1,13 @@
 .. _build-source-meson:
 
-================================
-Building from source using Meson
-================================
+===========================================================
+Monolithic build using Meson (not supported in passagemath)
+===========================================================
 
-This is a short guide on how to build the Sage from source using Meson.
+This is a short guide on how to build Sage from source using Meson.
+
+This is not supported by passagemath, but patches are welcome.
+
 
 Walkthrough
 ===========

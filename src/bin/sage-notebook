@@ -15,7 +15,7 @@ logger = logging.getLogger()
 from sage.misc.banner import banner
 
 
-_system_jupyter_url = "https://doc.sagemath.org/html/en/installation/launching.html#setting-up-sagemath-as-a-jupyter-kernel-in-an-existing-jupyter-notebook-or-jupyterlab-installation"
+_system_jupyter_url = "https://passagemath.org/docs/latest/html/en/installation/launching.html#setting-up-sagemath-as-a-jupyter-kernel-in-an-existing-jupyter-notebook-or-jupyterlab-installation"
 
 
 class NotebookJupyter():

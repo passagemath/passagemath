@@ -601,7 +601,7 @@ class SimplicialSets(Category_singleton):
 
                 EXAMPLES::
 
-                    sage: # needs sage.combinat sage.graphs
+                    sage: # needs sage.combinat sage.graphs sage.groups
                     sage: X = simplicial_sets.Torus()
                     sage: d = X._canonical_twisting_operator()
                     sage: d

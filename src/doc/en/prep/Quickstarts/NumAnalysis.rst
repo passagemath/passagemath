@@ -256,7 +256,7 @@ above.
 The question mark notation means that the number is contained in the
 interval found by incrementing and decrementing the last digit of the
 number.  See the `documentation for real interval fields
-<http://doc.sagemath.org/html/en/reference/sage/rings/real_mpfi.html>`_ for
+<http://passagemath.org/docs/latest/html/en/reference/sage/rings/real_mpfi.html>`_ for
 details.  In the above case, Sage is saying that 1/9 is somewhere
 between 0.111 and 0.113.  Below, we see that ``1/a`` is somewhere
 between 8.9 and 9.1.

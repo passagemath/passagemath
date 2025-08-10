@@ -3214,6 +3214,7 @@ class A000720(SloaneSequence):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: a = sloane.A000720;a
             pi(n), the number of primes <= n. Sometimes called PrimePi(n)
             sage: a(0)
@@ -3248,7 +3249,7 @@ class A000720(SloaneSequence):
         """
         EXAMPLES::
 
-            sage: [sloane.A000720._eval(n) for n in range(1,11)]
+            sage: [sloane.A000720._eval(n) for n in range(1,11)]                        # needs sage.symbolic
             [0, 1, 2, 2, 3, 3, 4, 4, 4, 4]
         """
         return prime_pi(n)
@@ -3269,7 +3270,8 @@ class A064553(SloaneSequence):
 
         EXAMPLES::
 
-            sage: a = sloane.A064553;a
+            sage: # needs sage.symbolic
+            sage: a = sloane.A064553; a
             a(1) = 1, a(prime(i)) = i+1 for i > 0 and a(u*v) = a(u)*a(v) for u,v > 0
             sage: a(0)
             Traceback (most recent call last):
@@ -3303,7 +3305,7 @@ class A064553(SloaneSequence):
         """
         EXAMPLES::
 
-            sage: [sloane.A064553._eval(n) for n in range(1,11)]
+            sage: [sloane.A064553._eval(n) for n in range(1,11)]                        # needs sage.symbolic
             [1, 2, 3, 4, 4, 6, 5, 8, 9, 8]
         """
         return prod([(prime_pi(p)+1)**e for p, e in arith.factor(n)])

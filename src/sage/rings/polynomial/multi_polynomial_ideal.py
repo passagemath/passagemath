@@ -261,14 +261,17 @@ try:
     from sage.libs.singular.standard_options import \
         libsingular_gb_standard_options
 except ImportError:
-    singular_gb_standard_options = libsingular_gb_standard_options = MethodDecorator
+    def singular_gb_standard_options(func):
+        return func
+    libsingular_gb_standard_options = singular_gb_standard_options
 
 try:
     from sage.interfaces.magma import magma as magma_default
     from sage.interfaces.magma import magma_gb_standard_options
 except ImportError:
     magma_default = None
-    magma_gb_standard_options = MethodDecorator
+    def magma_gb_standard_options(func):
+        return func
 
 
 class RequireField(MethodDecorator):

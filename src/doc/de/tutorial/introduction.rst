@@ -66,7 +66,7 @@ Falls Sie Sage auf Ihrem Computer nicht installiert haben und nur ein
 paar Befehle ausführen möchten, können Sie es online unter
 http://sagecell.sagemath.org benutzen.
 
-Schauen Sie sich den `Sage Installation Guide <http://doc.sagemath.org/html/en/installation/index.html>`_ an, um Anleitungen
+Schauen Sie sich den `Sage Installation Guide <http://passagemath.org/docs/latest/html/en/installation/index.html>`_ an, um Anleitungen
 zur Installation von Sage auf Ihrem Computer zu erhalten.
 Hier geben wir nur ein paar Kommentare ab.
 
@@ -89,7 +89,7 @@ Hier geben wir nur ein paar Kommentare ab.
    die Ergebnisse von Sage Berechnungen in eine LaTeX-Datei
    einbauen können), müssen Sie SageTeX Ihrer TeX-Distribution bekannt
    machen. Um dies zu tun, lesen Sie den Abschnitt `Make SageTeX known
-   to TeX <http://doc.sagemath.org/html/en/installation/sagetex.html>`_ im
+   to TeX <http://passagemath.org/docs/latest/html/en/installation/sagetex.html>`_ im
    Sage Installation Guide
    (`Dieser Link <../../en/installation/index.html>`_ sollte Sie zu
    eine lokalen Kopie des Installation Guides führen). Es ist ziemlich

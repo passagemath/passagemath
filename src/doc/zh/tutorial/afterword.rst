@@ -114,7 +114,7 @@ Python 的一些数学方面可能会令人困惑，因此 Sage 在多个方面�
 如果你想为 Sage 做出贡献，我们会非常感谢你的帮助！贡献可以从实质性代码贡献到向 Sage 添加文档或报告错误。
 
 浏览 Sage 网页以获取开发者信息。你还可以找到一份按优先级和类别排序的 Sage 相关项目列表。
-`Sage 开发者指南 <http://doc.sagemath.org/html/en/developer/>`_ 也有一些有用的信息，
+`Sage 开发者指南 <http://passagemath.org/docs/latest/html/en/developer/>`_ 也有一些有用的信息，
 你还可以查看 ``sage-devel`` Google 讨论组。
 
 如何引用 Sage？

@@ -521,7 +521,7 @@ class GelfandTsetlinPattern(ClonableArray,
 
             sage: G = GelfandTsetlinPattern([[3,2,0],[2.2,0],[2]])
             sage: G.bender_knuth_involution(2)
-            [[3, 2, 0], [2.80000000000000, 2], [2]]
+            [[3, 2, 0], [2.8..., 2], [2]]
 
         TESTS::
 

@@ -464,7 +464,7 @@ class FunctionFieldMaximalOrderInfinite_rational(FunctionFieldMaximalOrderInfini
 
             sage: K.<t> = FunctionField(QQ)
             sage: O = K.maximal_order_infinite()
-            sage: TestSuite(O).run(skip='_test_gcd_vs_xgcd')
+            sage: TestSuite(O).run(skip='_test_gcd_vs_xgcd')                                        # needs sage.rings.real_interval_field
         """
         FunctionFieldMaximalOrderInfinite.__init__(self, field, ideal_class=FunctionFieldIdealInfinite_rational,
                                                    category=PrincipalIdealDomains().or_subcategory(category))

@@ -38,7 +38,7 @@ SAGE_VERSION_BANNER="passagemath version $SAGE_VERSION, Release Date: $SAGE_RELE
 
 # Passagemath fork for any newly added packages
 sed -i.bak 's/"sagemath-/"passagemath-/' pkgs/*/pyproject.toml.m4
-git grep -l 'Sage: Open Source Mathematics Software:' pkgs | xargs sed -i.bak 's/Sage: Open Source Mathematics Software:/passagemath:/'
+git grep -l 'Sage: Open Source Mathematics Software:' pkgs | xargs sed -i.bak 's/Sage: Open Source Mathematics Software:/passagemath:/' || :
 if ! git diff --exit-code pkgs; then
     die "commit these changes first"
     exit 1
@@ -56,12 +56,16 @@ done
       if [ -f "$spkg"/version_requirements.txt -a -d "$spkg"/src ]; then
           ( echo "# This file is updated on every release by the update-version script"
             # Normalize the package name to PyPI convention (dashes, not underscores)
+            suffix=
             case "$spkg" in
                 sagelib)
                     pkg=passagemath-standard;;
                 sagemath*)
                     pkg=${spkg#sagemath_}
                     pkg=passagemath-${pkg//_/-};;
+                sage_conf)
+                    pkg=passagemath-conf
+                    suffix=" ; sys_platform != 'win32'";;
                 sage*)
                     pkg=${spkg#sage_}
                     pkg=passagemath-${pkg//_/-};;
@@ -75,12 +79,12 @@ done
             case "$version" in
                 *a*|*b*|*rc*|*dev*)
                     # pin exactly
-                    echo "$pkg == $version"
+                    echo "$pkg == $version$suffix"
                     ;;
                 *)
                     # ~= asks for a compatible release. https://peps.python.org/pep-0440/#compatible-release
                     # we append .0, thus pinning the micro release
-                    echo "$pkg ~= $version.0"
+                    echo "$pkg ~= $version.0$suffix"
                     ;;
             esac
           ) > "$spkg"/version_requirements.txt
@@ -138,24 +142,24 @@ export SAGE_RELEASE_DATE
 envsubst <"$SAGE_ROOT/CITATION.cff.in" >"$SAGE_ROOT/CITATION.cff"
 
 # Update src/doc/versions.txt file storing the URLs of the docs for the recent stable releases
-if [[ $SAGE_VERSION =~ ^[0-9]+(\.[0-9]+)*$ ]]; then
-    file_path="$SAGE_ROOT/src/doc/en/website/versions.txt"
-    # Extract the most recent version line from versions.txt
-    line_number=$(grep -n '^[0-9]' "$file_path" | head -n 1 | cut -d: -f1)
-    version_line=$(sed -n "${line_number}p" "$file_path")
-    domain=${version_line#*--}
-    version=${SAGE_VERSION//./-}
-    # For the origin of this format, see .github/workflows/doc-publish.yml
-    url="doc-$version--$domain"
-    # Add new line to versions.txt
-    sed -i.bak "${line_number}i\\"$'\n'"$SAGE_VERSION $url"$'\n' "$file_path"
-    # If the number of version lines is more than 10, remove the last line
-    line_count=$(grep -c '^[0-9]' "$file_path")
-    if [ "$line_count" -gt 10 ]; then
-      sed -i.bak '$ d' "$file_path"
-    fi
-    rm -f "$file_path".bak
-fi
+## if [[ $SAGE_VERSION =~ ^[0-9]+(\.[0-9]+)*$ ]]; then
+##     file_path="$SAGE_ROOT/src/doc/en/website/versions.txt"
+##     # Extract the most recent version line from versions.txt
+##     line_number=$(grep -n '^[0-9]' "$file_path" | head -n 1 | cut -d: -f1)
+##     version_line=$(sed -n "${line_number}p" "$file_path")
+##     domain=${version_line#*--}
+##     version=${SAGE_VERSION//./-}
+##     # For the origin of this format, see .github/workflows/doc-publish.yml
+##     url="doc-$version--$domain"
+##     # Add new line to versions.txt
+##     sed -i.bak "${line_number}i\\"$'\n'"$SAGE_VERSION $url"$'\n' "$file_path"
+##     # If the number of version lines is more than 10, remove the last line
+##     line_count=$(grep -c '^[0-9]' "$file_path")
+##     if [ "$line_count" -gt 10 ]; then
+##       sed -i.bak '$ d' "$file_path"
+##     fi
+##     rm -f "$file_path".bak
+## fi
 
 # Commit auto-generated changes
 git commit -m "Updated SageMath version to $SAGE_VERSION" -- \

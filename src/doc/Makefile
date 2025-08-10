@@ -63,7 +63,7 @@ doc-html-other: doc-html-reference
 doc-html: doc-html-reference doc-html-other
 	SAGE_DOC=$$(sage --python -c "from sage.env import SAGE_DOC; print(SAGE_DOC)")
 	find $${SAGE_DOC}/html -type d -path "*/jupyter_execute" -exec rm -rf {} +
-	find $${SAGE_DOC}/html -name "*.html" | xargs sed -i.bak 's,_static/,../%5fstatic/,g'
+	find $${SAGE_DOC}/html/en/reference -name "*.html" | xargs sed -i.bak 's,_static/,../%5fstatic/,g'
 	find $${SAGE_DOC}/html -name "*.bak" -exec rm -rf {} +
 
 # Matches doc-pdf--developer, doc-pdf--reference-manifolds etc.

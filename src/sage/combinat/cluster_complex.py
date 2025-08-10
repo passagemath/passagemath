@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
-# sage.doctest: needs sage.combinat sage.graphs
+# sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
 Cluster complex (or generalized dual associahedron)
 

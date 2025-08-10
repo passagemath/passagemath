@@ -874,7 +874,7 @@ cdef class FractionFieldElement(FieldElement):
             sage: RDF(x)
             Traceback (most recent call last):
             ...
-            TypeError: cannot convert nonconstant polynomial
+            TypeError: ...not...constant polynomial
 
             sage: K.<x> = Frac(QQ['x'])
             sage: QQ(K(1/2))

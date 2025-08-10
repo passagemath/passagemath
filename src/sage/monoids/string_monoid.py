@@ -503,6 +503,7 @@ class AlphabeticStringMonoid(StringMonoid_class):
 
     EXAMPLES::
 
+        sage: # needs sage.rings.real_mpfr
         sage: S = AlphabeticStrings(); S
         Free alphabetic string monoid on A-Z
         sage: S.gen(0)
@@ -519,6 +520,7 @@ class AlphabeticStringMonoid(StringMonoid_class):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.real_mpfr
             sage: S = AlphabeticStrings(); S
             Free alphabetic string monoid on A-Z
             sage: S.gen(0)
@@ -577,6 +579,7 @@ class AlphabeticStringMonoid(StringMonoid_class):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.real_mpfr
             sage: S = AlphabeticStrings()
             sage: S.gen(0)
             A
@@ -654,6 +657,7 @@ class AlphabeticStringMonoid(StringMonoid_class):
         The characteristic frequency probability distribution table of
         Beker and Piper [BP1982]_::
 
+            sage: # needs sage.rings.real_mpfr
             sage: A = AlphabeticStrings()
             sage: table = A.characteristic_frequency(table_name='beker_piper')
             sage: sorted(table.items())
@@ -797,6 +801,7 @@ class AlphabeticStringMonoid(StringMonoid_class):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.real_mpfr
             sage: S = AlphabeticStrings()
             sage: s = S.encoding("The cat in the hat."); s
             THECATINTHEHAT

@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-pari
+# sage.doctest: needs numpy sage.libs.singular
 r"""
 Witt vector rings
 

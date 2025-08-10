@@ -89,7 +89,7 @@ Nous nous limiterons ici à quelques remarques.
    version correspondant à la version de Sage que vous utilisez). Pour
    ce faire, consultez la section "Make SageTeX known to TeX" dans le
    guide d'installation (`Sage installation guide
-   <http://doc.sagemath.org/html/en/installation/>`_, `ce lien
+   <http://passagemath.org/docs/latest/html/en/installation/>`_, `ce lien
    <../../en/installation/index.html>`_ devrait pointer vers une copie
    locale). L'installation est facile : il suffit de copier un fichier
    dans un répertoire que TeX examine, ou de régler une variable

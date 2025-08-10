@@ -5,10 +5,10 @@ Eine begleitende Tour
 Dieser Abschnitt ist eine begleitende Tour einiger in Sage vorhandener
 Funktionen. Um viele weitere Beispiele zu sehen, schauen Sie sich
 `Sage Constructions
-<http://doc.sagemath.org/html/en/constructions/index.html>`_ an. Dies ist
+<http://passagemath.org/docs/latest/html/en/constructions/index.html>`_ an. Dies ist
 dazu gedacht, die allgemeine Frage  "Wie konstruiere ich ... in Sage?"
 zu beantworten. Schauen Sie sich auch das `Sage Reference Manual
-<http://doc.sagemath.org/html/en/reference/index.html>`_  an, welches
+<http://passagemath.org/docs/latest/html/en/reference/index.html>`_  an, welches
 Tausende weiterer Beispiele beinhaltet. Beachten Sie auch, dass Sie
 diese Tour interaktiv im Sage-Notebook durcharbeiten können,
 indem Sie auf den ``Help`` Link klicken.

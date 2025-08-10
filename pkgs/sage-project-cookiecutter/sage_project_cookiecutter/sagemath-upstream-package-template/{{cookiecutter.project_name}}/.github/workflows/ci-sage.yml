@@ -17,7 +17,7 @@ name: Run Sage CI
 ##
 ## This GitHub Actions workflow uses the portability testing framework
 ## of SageMath (https://www.sagemath.org/).  For more information, see
-## https://doc.sagemath.org/html/en/developer/portability_testing.html
+## https://passagemath.org/docs/latest/html/en/developer/portability_testing.html
 
 ## The workflow consists of two jobs:
 ##

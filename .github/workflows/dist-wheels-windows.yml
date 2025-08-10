@@ -159,7 +159,7 @@ jobs:
           ./bootstrap
           ./configure
           make pypi-noarch-wheels PYPI_NOARCH_WHEEL_PACKAGES="sage_sws2rst sage_setup sagemath_environment sagemath_repl sagelib" V=0
-          (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/)
+          (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/ && rm -f dist/*sage*conf-*-none-any.whl)
           ls -l dist
 
       - uses: actions/upload-artifact@v4

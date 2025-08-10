@@ -3,6 +3,7 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 # Minimum requirements for the build system to execute.
 requires = [
     SPKG_INSTALL_REQUIRES_setuptools
+    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
@@ -39,8 +40,14 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test = ["passagemath-repl"]
 
-# GAP packages
+# PARI data packages
+elldata         = ["passagemath-pari-elldata"]
 galdata         = ["passagemath-pari-galdata"]
+galpol          = ["passagemath-pari-galpol"]
+nflistdata      = ["passagemath-pari-nflistdata"]
+nftables        = ["passagemath-pari-nftables"]
+seadata         = ["passagemath-pari-seadata"]
+seadata-big     = ["passagemath-pari-seadata-big"]
 seadata-small   = ["passagemath-pari-seadata-small"]
 
 # Everything as in standard Sage

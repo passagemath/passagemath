@@ -7348,7 +7348,7 @@ class RowStandardTableaux_size(RowStandardTableaux, DisjointUnionEnumeratedSets)
 
     TESTS::
 
-        sage: TestSuite(RowStandardTableaux(4)).run()                                   # needs sage.graphs
+        sage: TestSuite(RowStandardTableaux(4)).run()                                   # needs sage.graphs sage.libs.flint
 
         sage: RowStandardTableaux(3).cardinality()                                      # needs sage.libs.flint
         10

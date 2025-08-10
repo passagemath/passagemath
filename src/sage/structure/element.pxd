@@ -23,7 +23,7 @@ cpdef inline parent(x):
 
     .. SEEALSO::
 
-        `Parents, Conversion and Coercion <http://doc.sagemath.org/html/en/tutorial/tour_coercion.html>`_
+        `Parents, Conversion and Coercion <http://passagemath.org/docs/latest/html/en/tutorial/tour_coercion.html>`_
         Section in the Sage Tutorial
 
     EXAMPLES::

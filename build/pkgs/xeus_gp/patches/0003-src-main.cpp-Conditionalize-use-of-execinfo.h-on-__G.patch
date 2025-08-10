@@ -1,0 +1,44 @@
+From de82ff527cc08aaa1079828c9ad43f58da996f92 Mon Sep 17 00:00:00 2001
+From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
+Date: Wed, 6 Aug 2025 14:11:07 -0700
+Subject: [PATCH 3/3] src/main.cpp: Conditionalize use of execinfo.h on 
+ __GLIBC__, not __GNUC__
+
+---
+ src/main.cpp | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/main.cpp b/src/main.cpp
+index 6bda459..d00e7d8 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. */
+ #include <string>
+ #include <utility>
+ 
+-#ifdef __GNUC__
++#ifdef __GLIBC__
+ #include <stdio.h>
+ #include <execinfo.h>
+ #include <signal.h>
+@@ -38,7 +38,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. */
+ 
+ #include <pari/pari.h>
+ 
+-#ifdef __GNUC__
++#ifdef __GLIBC__
+ void handler(int sig)
+ {
+     void* array[10];
+@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
+     }
+ 
+     // Registering SIGSEGV handler
+-#ifdef __GNUC__
++#ifdef __GLIBC__
+     std::clog << "registering handler for SIGSEGV" << std::endl;
+     signal(SIGSEGV, handler);
+ #endif
+-- 
+2.47.0
+

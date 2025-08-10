@@ -173,7 +173,7 @@ def project_points(*points, **kwds):
 
         sage: V = list(map(vector, IntegerVectors(n=5, length=3)))
         sage: P = project_points(*V)
-        sage: for i in range(21):                                                       # needs sage.combinat
+        sage: for i in range(21):                                                       # needs sage.combinat sage.symbolic
         ....:     for j in range(21):
         ....:         assert abs((V[i]-V[j]).norm() - (P[i]-P[j]).norm()) < 0.00001
 

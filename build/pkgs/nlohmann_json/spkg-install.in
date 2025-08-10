@@ -1,0 +1,13 @@
+cd src
+mkdir build
+cd build
+sdh_cmake -GNinja -DGENERATORS=on \
+          -DCMAKE_SYSTEM_PREFIX_PATH="$SAGE_LOCAL" \
+          -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
+          -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
+          -DBUILD_TESTING=OFF \
+          -DJSON_BuildTests=OFF \
+          -DJSON_MultipleHeaders=ON \
+          ..
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .

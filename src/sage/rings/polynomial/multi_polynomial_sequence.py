@@ -165,7 +165,6 @@ Classes
 from sage.misc.persist import register_unpickle_override
 from sage.misc.cachefunc import cached_method
 from sage.misc.converting_dict import KeyConvertingDict
-from sage.misc.method_decorator import MethodDecorator
 from sage.rings.finite_rings.finite_field_base import FiniteField
 from sage.rings.finite_rings.finite_field_constructor import FiniteField as GF
 from sage.rings.infinity import Infinity
@@ -182,7 +181,9 @@ try:
         libsingular_gb_standard_options
 except ImportError:
     singular = None
-    singular_gb_standard_options = libsingular_gb_standard_options = MethodDecorator
+    def singular_gb_standard_options(func):
+        return func
+    libsingular_gb_standard_options = singular_gb_standard_options
 
 
 def is_PolynomialSequence(F):
@@ -1539,23 +1540,23 @@ class PolynomialSequence_generic(Sequence_generic):
             sage: R.<t>=QQ['t']
             sage: K.<x,y>=R.fraction_field()['x,y']
             sage: I=t*x*K
-            sage: I.basis.reduced()
+            sage: I.basis.reduced()                                                     # needs sage.libs.singular
             [x]
 
         The interreduced basis of 0 is 0::
 
             sage: P.<x,y,z> = GF(2)[]
-            sage: Sequence([P(0)]).reduced()
+            sage: Sequence([P(0)]).reduced()                                            # needs sage.libs.singular
             [0]
 
         Leading coefficients are reduced to 1::
 
             sage: P.<x,y> = QQ[]
-            sage: Sequence([2*x,y]).reduced()
+            sage: Sequence([2*x,y]).reduced()                                           # needs sage.libs.singular
             [x, y]
 
             sage: P.<x,y> = CC[]                                                        # needs sage.rings.real_mpfr
-            sage: Sequence([2*x,y]).reduced()
+            sage: Sequence([2*x,y]).reduced()                                           # needs sage.libs.singular sage.rings.real_mpfr
             [x, y]
 
         ALGORITHM:

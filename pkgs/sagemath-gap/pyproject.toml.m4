@@ -3,6 +3,7 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 # Minimum requirements for the build system to execute.
 requires = [
     SPKG_INSTALL_REQUIRES_setuptools
+    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
@@ -36,10 +37,21 @@ content-type = "text/x-rst"
 test            = ["passagemath-repl"]
 
 # GAP packages
-transgrp        = ["passagemath-gap-pkg-transgrp-data"]
 ctbllib         = ["passagemath-gap-pkg-ctbllib-data"]
-tomlib          = ["passagemath-gap-pkg-tomlib-data"]
 irredsol        = ["passagemath-gap-pkg-irredsol-data"]
+tomlib          = ["passagemath-gap-pkg-tomlib-data"]
+transgrp        = ["passagemath-gap-pkg-transgrp-data"]
+
+# Jupyter
+jupyterkernel   = ["passagemath-gap-pkg-jupyterkernel"]
+jupyterlab      = [
+    "passagemath-gap[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_jupyterlab
+]
+notebook        = [
+    "passagemath-gap[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_notebook
+]
 
 # Everything as in standard Sage
 standard        = ["passagemath-gap[transgrp,ctbllib,tomlib,irredsol]"]

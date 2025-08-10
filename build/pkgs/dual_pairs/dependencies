@@ -1,0 +1,1 @@
+sagemath_flint sagemath_groups sagemath_modules sagemath_pari sagemath_pari_galdata sagemath_repl sagemath_schemes sagemath_singular | $(PYTHON_TOOLCHAIN) $(PYTHON)
