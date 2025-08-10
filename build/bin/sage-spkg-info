@@ -316,7 +316,7 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
 
         heading = "{}:".format(SYSTEM_NAME_MAP.get(system, system))
         print(fmt.tab(heading), file=out)
-        rst_indent = "       " if fmt.rst else "    "
+        indent = "   " if fmt.rst else ""
 
         if sys_pkgs:
             args = [
@@ -324,8 +324,9 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
                 system,
                 "--format={}".format("rst" if fmt.rst else "plain"),
                 "--wrap",
-                "--prompt={}{}".format(rst_indent, "$ "),
-                "--continuation={}".format(rst_indent),
+                "--prompt={}".format("    $ "),
+                "--continuation={}".format("          "),
+                "--indent={}".format(indent),
                 "--sudo",
                 "install",
             ] + sys_pkgs.split()
@@ -335,9 +336,9 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
             except subprocess.CalledProcessError as e:
                 logger.warning("Failed to get system package command for %s on %s: %s",
                                pkg_base, system, e.stderr.strip())
-                print("{}No package needed.".format(rst_indent), file=out)
+                print("{}No package needed.".format(indent), file=out)
         else:
-            print("{}No package needed.".format(rst_indent), file=out)
+            print("{}No package needed.".format(indent), file=out)
         print("", file=out)
 
     if have_repology:
