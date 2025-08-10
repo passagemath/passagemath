@@ -315,7 +315,7 @@ def handle_system_packages(pkg_base: str, pkg_scripts: str, fmt, out):
 
 
         heading = "{}:".format(SYSTEM_NAME_MAP.get(system, system))
-        print(heading, file=out)
+        print(fmt.tab(heading), file=out)
         rst_indent = "       " if fmt.rst else "    "
 
         if sys_pkgs:
