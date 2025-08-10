@@ -85,7 +85,7 @@ pararr=( " " )
 ##############################################################################
 
 parind=0
-for pkg in ZeroMQInterface
+for pkg in zeromqinterface
 do
     echo "Building GAP package $pkg"
     cd "$PKG_SRC_DIR/$pkg"
