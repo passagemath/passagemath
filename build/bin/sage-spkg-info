@@ -345,8 +345,10 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
             except subprocess.CalledProcessError as e:
                 logger.warning("Failed to get system package command for %s on %s: %s",
                                pkg_base, system, e.stderr.strip())
+                print("", file=out)
                 print("{}No package needed.".format(indent), file=out)
         else:
+            print("", file=out)
             print("{}No package needed.".format(indent), file=out)
         print("", file=out)
 
