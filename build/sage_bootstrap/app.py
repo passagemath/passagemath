@@ -96,7 +96,7 @@ class Application(object):
         source_maxima='normal'
         trees_maxima='SAGE_LOCAL'
         """
-        props = kwds.pop('props', ['path', 'version_with_patchlevel', 'type', 'source', 'trees', 'purl'])
+        props = kwds.pop('props', ['path', 'version_with_patchlevel', 'type', 'source', 'trees', 'purl', 'description'])
         format = kwds.pop('format', 'plain')
         log.debug('Looking up properties')
         pc = PackageClass(*package_classes)
@@ -115,7 +115,7 @@ class Application(object):
                 if format == 'plain':
                     print("        {0:28} {1}".format(p + ":", value))
                 else:
-                    print("{0}_{1}='{2}'".format(p, package_name, value))
+                    print("{0}_{1}={2}".format(p, package_name, quote(value)))
 
     def dependencies(self, *package_classes, **kwds):
         """
