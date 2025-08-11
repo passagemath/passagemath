@@ -532,6 +532,25 @@ class Package(object):
         """
         return os.path.join(SAGE_ROOT, 'build', 'pkgs', self.name)
 
+    NAME_DESCRIPTION = re.compile(r'(?P<name>[^:]*): (?P<description>.*)')
+
+    @property
+    def description(self):
+        """
+        Return the one-line description of the package
+        """
+        try:
+            with open(os.path.join(self.path, 'SPKG.rst')) as f:
+                l = f.readline()
+                if l.startswith('='):
+                    l = f.readline()
+                match = self.NAME_DESCRIPTION.match(l)
+                if match:
+                    return match.group('description')
+        except IOError:
+            pass
+        return None
+
     def has_file(self, filename):
         """
         Return whether the file exists in the package directory
