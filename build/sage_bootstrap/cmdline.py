@@ -254,6 +254,10 @@ EXAMPLE:
     type_standard=272
 """
 
+epilog_bootstrap = \
+"""
+Run the bootstrap scripts of the given packages
+"""
 
 def make_parser():
     """
@@ -482,6 +486,17 @@ def make_parser():
               'or designator for all packages of a given type '
               '(one of :all:, :standard:, :optional:, and :experimental:; default: :all:)'))
 
+    parser_bootstrap = subparsers.add_parser(
+        'bootstrap', epilog=epilog_bootstrap,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        help='run the bootstrap scripts of given packages')
+    parser_bootstrap.add_argument(
+        'package_class', metavar='[PACKAGE_NAME|pkg:pypi/DISTRIBUTION-NAME|:PACKAGE_TYPE:]',
+        type=str, nargs='*', default=[':all:'],
+        help=('package name, pkg:pypi/ followed by a distribution name, '
+              'or designator for all packages of a given type '
+              '(one of :all:, :standard:, :optional:, and :experimental:; default: :all:)'))
+
     return parser
 
 
@@ -561,6 +576,8 @@ def run():
         app.clean()
     elif args.subcommand == 'metrics':
         app.metrics_cls(*args.package_class)
+    elif args.subcommand == 'bootstrap':
+        app.bootstrap_cls(*args.package_class)
     else:
         raise RuntimeError('unknown subcommand: {0}'.format(args))
 

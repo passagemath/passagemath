@@ -12,9 +12,9 @@ for infile in src/*.m4; do
         m4 "$infile" > "$outfile".tmp
         if diff -q >/dev/null 2>/dev/null "$outfile" "$outfile".tmp; then
             rm -f "$outfile".tmp
-            if [ "${BOOTSTRAP_QUIET}" = "no" ]; then
-                echo "$0: $outfile unchanged"
-            fi
+            # if [ "${BOOTSTRAP_QUIET}" = "no" ]; then
+            #     echo "$0: $outfile unchanged"
+            # fi
         else
             mv "$outfile".tmp "$outfile"
             if [ "${BOOTSTRAP_QUIET}" = "no" ]; then

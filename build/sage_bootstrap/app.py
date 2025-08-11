@@ -38,7 +38,7 @@ from sage_bootstrap.pypi import PyPiVersion, PyPiNotFound, PyPiError
 from sage_bootstrap.fileserver import FileServer
 from sage_bootstrap.expand_class import PackageClass
 from sage_bootstrap.env import SAGE_DISTFILES
-
+from sage_bootstrap.compat import quote
 
 # Approximation of https://peps.python.org/pep-0508/#names dependency specification
 dep_re = re.compile('^ *([-A-Z0-9._]+)', re.IGNORECASE)
@@ -584,3 +584,15 @@ class Application(object):
             metrics['has_tarball_upstream_url'] += int(bool(package.tarball_upstream_url_pattern))
         for key, value in sorted(metrics.items()):
             print('{0}={1}'.format(key, value))
+
+    def bootstrap_cls(self, *package_classes):
+        """
+        Run the bootstrap scripts of given packages
+        """
+        log.debug('Computing metrics')
+        metrics = defaultdict(int)
+        pc = PackageClass(*package_classes)
+        for package_name in pc.names:
+            package = Package(package_name)
+            if os.system('cd {} && if [ -x bootstrap ]; then ./bootstrap; else echo >&2 "bootstrap:$LINENO: Nothing to do for $pkgname"; fi'.format(quote(package.path))) != 0:
+                raise RuntimeError('bootstrapping {} failed'.format(package.name))
