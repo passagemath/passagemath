@@ -110,10 +110,7 @@ $spkg_configures_python
 $spkg_finalizes
 EOF
 
-    for pkgname in $(sage-package list --has-file bootstrap "$@"); do
-        eval DIR=\$path_$pkgname
-        (cd "$DIR" && if [ -x bootstrap ]; then ./bootstrap; else echo >&2 "bootstrap:$LINENO: Nothing to do for $pkgname"; fi) || exit 1
-    done
+    sage-package list --has-file bootstrap "$@" | xargs -P 16 -n 8 sage-package bootstrap
 
     if [ $# != 0 ]; then
         return
