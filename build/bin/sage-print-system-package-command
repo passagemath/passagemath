@@ -79,7 +79,7 @@ command=$1
 shift
 COMMENT="${INDENT}${COMMENT}"
 PROMPT="${INDENT}${PROMPT}"
-CONTINUATION="${INDENT}${PROMPT}"
+CONTINUATION="${INDENT}${CONTINUATION}"
 if [ -z "$system" -o -z "$command" ]; then
     echo >&2 "usage: $0 {auto|debian|arch|conda|...} [--verbose] [--sudo] [--prompt] {update|install|setup-build-env|remove|...} PACKAGES..."
     exit 1
