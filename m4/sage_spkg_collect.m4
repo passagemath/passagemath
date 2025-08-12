@@ -80,7 +80,7 @@ AS_BOX([Build status for each package:                                         ]
 dnl Intialize the collection variables.
 SPKGS="$1"
 dnl Obtain dependencies and versions at configure time.
-AS_IF([properties=$($SAGE_BOOTSTRAP_PYTHON build/bin/sage-package properties --format=shell $SPKGS 2>& AS_MESSAGE_LOG_FD) && eval $properties && dependencies=$($SAGE_BOOTSTRAP_PYTHON build/bin/sage-package dependencies --format=shell $SPKGS) && eval $dependencies], [], [
+AS_IF([properties=$(PYTHONIOENCODING=utf-8 $SAGE_BOOTSTRAP_PYTHON build/bin/sage-package properties --format=shell $SPKGS 2>& AS_MESSAGE_LOG_FD) && eval $properties && dependencies=$($SAGE_BOOTSTRAP_PYTHON build/bin/sage-package dependencies --format=shell $SPKGS) && eval $dependencies], [], [
     AC_MSG_ERROR([Package directory missing. Re-run bootstrap.])dnl
 ])
 
