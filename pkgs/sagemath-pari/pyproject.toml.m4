@@ -50,6 +50,19 @@ seadata         = ["passagemath-pari-seadata"]
 seadata-big     = ["passagemath-pari-seadata-big"]
 seadata-small   = ["passagemath-pari-seadata-small"]
 
+# Jupyter
+jupyterkernel   = [
+    SPKG_INSTALL_REQUIRES_ipykernel
+]
+jupyterlab      = [
+    "passagemath-pari[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_jupyterlab
+]
+notebook        = [
+    "passagemath-pari[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_notebook
+]
+
 # Everything as in standard Sage
 standard        = ["passagemath-pari[galdata,seadata-small]"]
 
