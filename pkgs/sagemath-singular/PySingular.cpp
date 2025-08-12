@@ -21,16 +21,6 @@ string singular_warning;
 bool singular_python_initialized = false;
 
 /*
- * Python different version stuff
- */
-
-#if PY_MAJOR_VERSION >= 3
-#define to_python_string(o) PyUnicode_FromString(o)
-#else
-#define to_python_string(o) PyString_FromString(const_cast<char*>(o))
-#endif
-
-/*
  * Singular init stuff
  */
 
@@ -87,7 +77,7 @@ static PyObject * InitializeSingular( PyObject* self, PyObject* args ){
 static PyObject * RunSingularCommand( PyObject* self, PyObject* args ){
     
     if ( ! singular_python_initialized )
-        return PyTuple_Pack( 2, Py_True, to_python_string( "Please use InitializeSingular first" ) );
+        return PyTuple_Pack( 2, Py_True, PyUnicode_FromString( "Please use InitializeSingular first" ) );
     
     singular_return.erase();
     singular_error.erase();
@@ -116,7 +106,7 @@ static PyObject * RunSingularCommand( PyObject* self, PyObject* args ){
         error = Py_True;
     }
     
-    return PyTuple_Pack( 2, error, to_python_string( return_string ) );
+    return PyTuple_Pack( 2, error, PyUnicode_FromString( return_string ) );
     
 }
 
@@ -125,7 +115,7 @@ extern char** singular_completion( char*, int, int );
 static PyObject * GetSingularCompletion( PyObject* self, PyObject* args ){
     
     if ( ! singular_python_initialized )
-        return PyTuple_Pack( 2, Py_True, to_python_string( "Please use InitializeSingular first" ) );
+        return PyTuple_Pack( 2, Py_True, PyUnicode_FromString( "Please use InitializeSingular first" ) );
     
     const char * input_string;
     int begin;
@@ -141,7 +131,7 @@ static PyObject * GetSingularCompletion( PyObject* self, PyObject* args ){
     int pos = 0;
     PyObject * python_list = PyList_New(0);
     while( singular_complete_return[ pos ] ){
-        PyList_Append( python_list, to_python_string( singular_complete_return[ pos ] ) );
+        PyList_Append( python_list, PyUnicode_FromString( singular_complete_return[ pos ] ) );
         pos++;
     }
     
@@ -260,8 +250,6 @@ static PyMethodDef PySingularMethods[] = {
 };
 
 
-#if PY_MAJOR_VERSION >= 3
-
 static int PySingular_traverse(PyObject *m, visitproc visit, void *arg) {
     Py_VISIT(GETSTATE(m)->error);
     return 0;
@@ -285,30 +273,19 @@ static struct PyModuleDef moduledef = {
         NULL
 };
 
-#define INITERROR return NULL
 
 PyMODINIT_FUNC PyInit_PySingular(void)
-
-#else
-#define INITERROR return
-
-extern "C" void initPySingular(void)
-#endif
 {
-#if PY_MAJOR_VERSION >= 3
     PyObject *module = PyModule_Create(&moduledef);
-#else
-    PyObject *module = Py_InitModule("PySingular", PySingularMethods);
-#endif
 
     if (module == NULL)
-        INITERROR;
+        return NULL;
     struct module_state *st = GETSTATE(module);
 
 //     st->error = PyErr_NewException(const_cast<char*>("PyNormaliz.INITError"), NULL, NULL);
 //     if (st->error == NULL) {
 //         Py_DECREF(module);
-//         INITERROR;
+//         return NULL;
 //     }
     
 //     NormalizError = PyErr_NewException(const_cast<char*>("Normaliz.error"), NULL, NULL );
@@ -319,7 +296,5 @@ extern "C" void initPySingular(void)
 //     PyModule_AddObject( module, "error", NormalizError );
 //     PyModule_AddObject( module, "error", PyNormalizError );
 
-#if PY_MAJOR_VERSION >= 3
     return module;
-#endif
 }
