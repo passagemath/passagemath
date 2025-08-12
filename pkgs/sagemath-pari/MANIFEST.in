@@ -71,6 +71,12 @@ graft autogen
 graft cypari2
 include _custom_build_meta.py
 
+# Vendored pari-jupyter
+graft gp-mode
+graft PARIKernel
+graft spec
+include gp-mode.json
+
 global-exclude all__sagemath*.*
 global-include all__sagemath_pari.py
 

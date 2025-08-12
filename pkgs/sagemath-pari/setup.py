@@ -13,6 +13,8 @@ from distutils.command.install import install
 from setuptools.command.develop import develop
 
 
+# xeus-gp
+
 class install_kernel_spec_mixin:
 
     def install_kernel_spec(self):
@@ -49,6 +51,12 @@ class sage_develop(develop, install_kernel_spec_mixin):
             self.install_kernel_spec()
 
 
+# pari-jupyter
+kernelpath = os.path.join("share", "jupyter", "kernels", "pari_jupyter")
+nbextpath = os.path.join("share", "jupyter", "nbextensions", "gp-mode")
+nbconfpath = os.path.join("etc", "jupyter", "nbconfig", "notebook.d")
+
+
 if not (len(sys.argv) > 1 and (sys.argv[1] in ["sdist", "egg_info", "dist_info"])):
     from autogen import rebuild
     rebuild()
@@ -64,6 +72,7 @@ sage_setup(['sagemath-pari'],
            recurse_packages=[
                'sage',
                'cypari2',
+               'PARIKernel',
             ],
            package_data={"sage": [
                "ext_data/pari/**",
@@ -72,4 +81,9 @@ sage_setup(['sagemath-pari'],
                 'declinl.pxi',
                 '*.pxd',
                 '*.h'
-            ]})
+            ]},
+           data_files=[
+               (kernelpath, ["pari-jupyter/spec/*"]),
+               (nbextpath, ["pari-jupyter/gp-mode/*"]),
+               (nbconfpath, ["pari-jupyter/gp-mode.json"]),
+           ])
