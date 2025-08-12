@@ -177,7 +177,6 @@ def sage_setup(distributions, *,
     setup(cmdclass=cmdclass,
           packages=python_packages,
           py_modules=python_modules,
-          ext_modules=extensions,
           data_files=data_files,
           ext_modules=extensions + list(ext_modules),
           **kwds
