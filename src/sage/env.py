@@ -501,6 +501,15 @@ def cython_aliases(required_modules=None, optional_modules=None):
                 from collections import defaultdict
                 pc = defaultdict(list, {'libraries': ['z']})
                 libs = "-lz"
+        elif lib == 'readline':
+            aliases[var + "CFLAGS"] = ""
+            try:
+                pc = pkgconfig.parse('readline')
+                libs = pkgconfig.libs(lib)
+            except pkgconfig.PackageNotFoundError:
+                from collections import defaultdict
+                pc = defaultdict(list, {'libraries': ['readline']})
+                libs = "-lreadline"
         elif lib == 'ecl':
             try:
                 # Determine ecl-specific compiler arguments using the ecl-config script
