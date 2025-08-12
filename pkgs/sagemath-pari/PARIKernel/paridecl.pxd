@@ -88,3 +88,8 @@ cdef extern from "pari/paripriv.h" nogil:
     char**  pari_completion_matches(pari_rl_interface*, char* s, long pos, long* wordpos)
 
     void    init_graph()
+
+
+# It is important that this gets included *after* all PARI includes
+cdef extern from "parifix.h":
+    pass
