@@ -572,6 +572,7 @@ jobs:
         id:   sagemath-pari
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
+          . ./.homebrew-build-env 2> /dev/null || :
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_pari
 
       - name: sagemath-cddlib
