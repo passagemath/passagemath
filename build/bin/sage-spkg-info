@@ -166,15 +166,17 @@ def parse_args():
 
 from sage_bootstrap.compat import quote
 
-try:
-    from subprocess import run as subprocess_run
-except ImportError:
+if sys.version_info < (3, 7, 0, 0, 0):
+
     from subprocess import check_output
 
     def run(cmd, check=True, text=True):
         logger.debug("Running command: %s", " ".join(map(quote, cmd)))
         return check_output(cmd).decode('utf8')
 else:
+
+    from subprocess import run as subprocess_run
+
     def run(cmd, check=True, text=True):
         # Run the subprocess and log on DEBUG.
         logger.debug("Running command: %s", " ".join(map(quote, cmd)))
