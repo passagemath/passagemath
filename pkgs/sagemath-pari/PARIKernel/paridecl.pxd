@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 cdef extern from "pari/pari.h" nogil:
     ctypedef unsigned long ulong "pari_ulong"
     ctypedef long* GEN

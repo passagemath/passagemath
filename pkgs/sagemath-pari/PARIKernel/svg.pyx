@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 #cython: language_level=3
 #
 # Helper module to handle SVG images produced by PARI

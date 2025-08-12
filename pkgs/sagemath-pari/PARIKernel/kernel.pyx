@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 #cython: language_level=3
 #
 # Jupyter kernel for PARI/GP

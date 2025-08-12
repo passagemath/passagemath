@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 from .paridecl cimport PariOUT
 
 cdef class PARIKernelIO(object):
