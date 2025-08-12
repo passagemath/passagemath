@@ -211,6 +211,7 @@ import os
 import pexpect
 import time
 import platform
+import shlex
 import string
 import warnings
 
@@ -230,7 +231,7 @@ if SAGE_GAP_COMMAND is None:
     # Passing -A allows us to use a minimal GAP installation without
     # producing errors at start-up. The files sage.g and sage.gaprc are
     # used to load any additional packages that may be available.
-    gap_cmd = f'{gap_executable} -A -l "{GAP_ROOT_PATHS}"'
+    gap_cmd = f'{shlex.quote(gap_executable)} -A -l {shlex.quote(GAP_ROOT_PATHS)}'
     if SAGE_GAP_MEMORY is not None:
         gap_cmd += " -s " + SAGE_GAP_MEMORY + " -o " + SAGE_GAP_MEMORY
 else:
