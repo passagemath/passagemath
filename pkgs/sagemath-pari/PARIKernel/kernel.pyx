@@ -1,4 +1,7 @@
 # sage_setup: distribution = sagemath-pari
+# distutils: include_dirs = READLINE_INCDIR
+# distutils: library_dirs = READLINE_LIBDIR
+# distutils: extra_link_args = READLINE_LIBEXTRA
 # distutils: libraries = readline
 #cython: language_level=3
 #
