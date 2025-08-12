@@ -4,15 +4,9 @@ def sage_setup(distributions, *,
                spkgs=(),
                recurse_packages=('sage',),
                package_data=None,
-<<<<<<< HEAD
                data_files=(),
-               cmdclass=None):
-||||||| parent of 5a48a8c363d (src/sage_setup/__init__.py (sage_setup): Accept keyword 'ext_modules')
-               cmdclass=None):
-=======
                cmdclass=None,
                ext_modules=()):
->>>>>>> 5a48a8c363d (src/sage_setup/__init__.py (sage_setup): Accept keyword 'ext_modules')
     r"""
     Replacement for :func:`setuptools.setup` for building distribution packages of the Sage library
 
