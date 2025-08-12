@@ -44,6 +44,19 @@ content-type = "text/x-rst"
 test = [
     "passagemath-repl",
 ]
+jupyterkernel = [
+    SPKG_INSTALL_REQUIRES_jupyter_client
+    SPKG_INSTALL_REQUIRES_singular_jupyter
+]
+jupyterlab      = [
+    "passagemath-singular[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_jupyterlab
+]
+notebook        = [
+    "passagemath-singular[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_notebook
+]
+
 
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),

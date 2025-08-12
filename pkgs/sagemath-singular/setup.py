@@ -5,7 +5,18 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
 
+from setuptools import Extension
+
 from sage_setup import sage_setup
+from sage.env import cython_aliases
+
+aliases = cython_aliases(required_modules=('Singular',), optional_modules=())
+ext_modules = [Extension("PySingular", ["PySingular.cpp"],
+                         extra_compile_args=aliases['SINGULAR_CFLAGS'],
+                         include_dirs=aliases['SINGULAR_INCDIR'],
+                         libraries=aliases['SINGULAR_LIBRARIES'],
+                         library_dirs=aliases['SINGULAR_LIBDIR'],
+                         extra_link_args=aliases['SINGULAR_LIBEXTRA'])]
 
 sage_setup(['sagemath-singular'],
            required_modules=('Singular', 'factory',
@@ -15,4 +26,5 @@ sage_setup(['sagemath-singular'],
            spkgs=['singular'],
            package_data={"sage": [
                "ext_data/singular/**",
-           ]})
+           ]},
+           ext_modules=ext_modules)
