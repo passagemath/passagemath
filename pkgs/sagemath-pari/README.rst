@@ -75,11 +75,13 @@ What is included
 
 - various other modules with dependencies on PARI/GP, see `MANIFEST <https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-pari/MANIFEST.in>`_
 
-- the ``cypari2`` API
+- the `cypari2 <https://pypi.org/project/cypari2/>`_ API
+
+- the `pari-jupyter kernel <https://github.com/passagemath/upstream-pari-jupyter>`__
 
 - the binary wheels on PyPI ship a prebuilt copy of PARI/GP
 
-- the binary wheels on PyPI ship XEUS-GP, a Jupyter kernel for PARI/GP
+- the binary wheels on PyPI ship XEUS-GP, another Jupyter kernel for PARI/GP
 
 
 Examples

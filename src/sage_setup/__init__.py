@@ -4,6 +4,7 @@ def sage_setup(distributions, *,
                spkgs=(),
                recurse_packages=('sage',),
                package_data=None,
+               data_files=(),
                cmdclass=None):
     r"""
     Replacement for :func:`setuptools.setup` for building distribution packages of the Sage library
@@ -176,5 +177,6 @@ def sage_setup(distributions, *,
           packages=python_packages,
           py_modules=python_modules,
           ext_modules=extensions,
+          data_files=data_files,
           **kwds
     )

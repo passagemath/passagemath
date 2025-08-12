@@ -1,0 +1,6 @@
+{
+    "argv":["python", "-m", "PARIKernel", "-f", "{connection_file}"],
+    "display_name":"PARI/GP",
+    "codemirror_mode": "gp",
+    "language":"gp"
+}
