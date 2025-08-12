@@ -71,6 +71,8 @@ What is included
 
 - various other modules, see https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-singular/MANIFEST.in
 
+- the `PySingular <https://pypi.org/project/PySingular/>`__ API
+
 - The binary wheels published on PyPI include a prebuilt copy of Singular.
 
 
@@ -114,3 +116,19 @@ Using the Cython interface to Singular::
     Out[6]: [a + b + c + d, b^2 + 2*b*d + d^2, b*c^2 + c^2*d - b*d^2 - d^3,
              b*c*d^2 + c^2*d^2 - b*d^3 + c*d^3 - d^4 - 1, b*d^4 + d^5 - b - d,
              c^3*d^2 + c^2*d^3 - c - d, c^2*d^4 + b*c - b*d + c*d - 2*d^2]
+
+
+Available as extras, from other distributions
+---------------------------------------------
+
+Jupyter kernel
+~~~~~~~~~~~~~~
+
+``pip install "passagemath-singular[jupyterkernel]"``
+ installs the kernel for use in the Jupyter notebook and JupyterLab
+
+``pip install "passagemath-singular[notebook]"``
+ installs the kernel and the Jupyter notebook
+
+``pip install "passagemath-singular[jupyterlab]"``
+ installs the kernel and JupyterLab
