@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from glob import glob
 from pathlib import Path
 import shutil
 
@@ -83,7 +84,7 @@ sage_setup(['sagemath-pari'],
                 '*.h'
             ]},
            data_files=[
-               (kernelpath, ["pari-jupyter/spec/*"]),
-               (nbextpath, ["pari-jupyter/gp-mode/*"]),
+               (kernelpath, glob("pari-jupyter/spec/*")),
+               (nbextpath, glob("pari-jupyter/gp-mode/*")),
                (nbconfpath, ["pari-jupyter/gp-mode.json"]),
            ])
