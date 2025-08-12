@@ -104,7 +104,7 @@ class Package(object):
             uses_chk = False
             if has_cfg:
                 try:
-                    with open(cfg, "r") as f:
+                    with open(cfg, "rt", encoding='utf-8') as f:
                         uses_chk = "SAGE_PYTHON_PACKAGE_CHECK" in f.read()
                 except (IOError, OSError):
                     # leave uses_chk = False on read error
@@ -540,7 +540,7 @@ class Package(object):
         Return the one-line description of the package
         """
         try:
-            with open(os.path.join(self.path, 'SPKG.rst')) as f:
+            with open(os.path.join(self.path, 'SPKG.rst'), 'rt', encoding='utf-8') as f:
                 l = f.readline()
                 if l.startswith('='):
                     l = f.readline()
