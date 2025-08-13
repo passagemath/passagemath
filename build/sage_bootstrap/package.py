@@ -103,6 +103,7 @@ class Package(object):
             has_cfg = os.path.isfile(cfg)
             uses_chk = False
             if has_cfg:
+                from io import open
                 try:
                     with open(cfg, "rt", encoding='utf-8') as f:
                         uses_chk = "SAGE_PYTHON_PACKAGE_CHECK" in f.read()
@@ -540,6 +541,7 @@ class Package(object):
         Return the one-line description of the package
         """
         try:
+            from io import open
             with open(os.path.join(self.path, 'SPKG.rst'), 'rt', encoding='utf-8') as f:
                 l = f.readline()
                 if l.startswith('='):
