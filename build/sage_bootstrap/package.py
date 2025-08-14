@@ -88,6 +88,7 @@ class Package(object):
         self._init_requirements()
         self._init_dependencies()
         self._init_trees()
+        self._init_purl()
         self._init_pyproject()
 
     def __repr__(self):
@@ -436,10 +437,16 @@ class Package(object):
         See https://github.com/package-url/purl-spec/blob/master/PURL-SPECIFICATION.rst#package-url-specification-v10x
         for details
         """
+        try:
+            return self.__purl
+        except AttributeError:
+            pass
         dist = self.distribution_name
         if dist:
-            return 'pkg:pypi/' + dist.lower().replace('_', '-')
-        return 'pkg:generic/' + self.name.replace('_', '-')
+            self.__purl = 'pkg:pypi/' + dist.lower().replace('_', '-')
+        else:
+            self.__purl = 'pkg:generic/' + self.name.replace('_', '-')
+        return self.__purl
 
     @property
     def distribution_name(self):
@@ -693,6 +700,13 @@ class Package(object):
                 self.__trees = f.readline().partition('#')[0].strip()
         except IOError:
             self.__trees = None
+
+    def _init_purl(self):
+        try:
+            with open(os.path.join(self.path, 'purl.txt')) as f:
+                self.__purl = f.readline().partition('#')[0].strip()
+        except IOError:
+            pass
 
     TOML_LIST_BEGIN = re.compile(r'^(?P<key>[-a-z]*) *= *\[ *$')
     TOML_LIST_END = re.compile(r'^[]]')
