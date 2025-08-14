@@ -479,10 +479,10 @@ class Package(object):
             deps = self.__dependencies
         else:
             deps = self.__dependencies_build
-        return (deps.partition('|')[0].strip().split()
-                + list(self.__pyproject['requires'])
-                + list(self.__pyproject['build-requires'])
-                + list(self.__pyproject['host-requires']))
+        return sorted(set(deps.partition('|')[0].strip().split()
+                          + [Package(p).name for p in self.__pyproject['requires']]
+                          + [Package(p).name for p in self.__pyproject['build-requires']]
+                          + [Package(p).name for p in self.__pyproject['host-requires']]))
 
     @property
     def dependencies_order_only(self):
@@ -493,14 +493,15 @@ class Package(object):
             deps = self.__dependencies
         else:
             deps = self.__dependencies_build
-        return deps.partition('|')[2].strip().split() + self.__dependencies_order_only.strip().split()
+        return sorted(set(deps.partition('|')[2].strip().split()
+                          + self.__dependencies_order_only.strip().split()))
 
     @property
     def dependencies_optional(self):
         """
         Return a list of strings, the package names of the optional build dependencies
         """
-        return self.__dependencies_optional.strip().split()
+        return sorted(set(self.__dependencies_optional.strip().split()))
 
     @property
     def dependencies_runtime(self):
@@ -508,9 +509,9 @@ class Package(object):
         Return a list of strings, the package names of the runtime dependencies
         """
         # after a '|', we have order-only build dependencies
-        return (self.__dependencies.partition('|')[0].strip().split()
-                + list(self.__pyproject['dependencies'])
-                + list(self.__pyproject['host-requires']))
+        return sorted(set(self.__dependencies.partition('|')[0].strip().split()
+                          + [Package(p).name for p in self.__pyproject['dependencies']]
+                          + [Package(p).name for p in self.__pyproject['host-requires']]))
 
     dependencies = dependencies_runtime  # noqa
 
@@ -519,8 +520,8 @@ class Package(object):
         """
         Return a list of strings, the package names of the check dependencies
         """
-        return (self.__dependencies_check.strip().split()
-                + list(self.__pyproject['test']))
+        return sorted(set(self.__dependencies_check.strip().split()
+                          + [Package(p).name for p in self.__pyproject['test']]))
 
     def __eq__(self, other):
         return self.tarball == other.tarball
@@ -717,7 +718,8 @@ class Package(object):
     TOML_LIST_BEGIN = re.compile(r'^(?P<key>[-a-z]*) *= *\[ *$')
     TOML_LIST_END = re.compile(r'^[]]')
     SPKG_INSTALL_REQUIRES = re.compile(r'^ *SPKG_INSTALL_REQUIRES_(?P<spkg>[a-z0-9_]*)')
-    PURL = re.compile(r'^ *"(?P<purl>.*)"')
+    PURL = re.compile(r'^ *"(?P<purl>pkg:.*)"')
+    DISTRIBUTION = re.compile(r'^ *"(?P<distribution>[-_A-Za-z0-9.]*)"')
 
     def _init_pyproject(self):
         from io import open
@@ -743,5 +745,10 @@ class Package(object):
                     match = self.PURL.match(line)
                     if match:
                         self.__pyproject[key].add(match.group('purl'))
+                        continue
+                    match = self.DISTRIBUTION.match(line)
+                    if match:
+                        self.__pyproject[key].add('pkg:pypi/' + match.group('distribution'))
+                        continue
         except IOError:
             return
