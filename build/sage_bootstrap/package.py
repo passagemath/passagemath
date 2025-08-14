@@ -530,6 +530,11 @@ class Package(object):
         """
         Return all packages
         """
+        try:
+            return cls.__all
+        except AttributeError:
+            pass
+        cls.__all = []
         base = os.path.join(SAGE_ROOT, 'build', 'pkgs')
         for subdir in os.listdir(base):
             path = os.path.join(base, subdir)
@@ -537,10 +542,11 @@ class Package(object):
                 log.debug('%s has no type', subdir)
                 continue
             try:
-                yield cls(subdir)
+                cls.__all.append(cls(subdir))
             except Exception:
                 log.error('Failed to open %s', subdir)
                 raise
+        return cls.__all
 
     @property
     def path(self):
