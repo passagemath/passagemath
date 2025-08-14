@@ -132,7 +132,19 @@ What is included
 Examples
 --------
 
-A quick way to try it out interactively::
+Running GAP from the command line::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-gap[test]" sage -gap
+     ┌───────┐   GAP 4.14.0 of 2024-12-05
+     │  GAP  │   https://www.gap-system.org
+     └───────┘   Architecture: x86_64-apple-darwin22-default64-kv9
+     Configuration:  gmp 6.3.0, GASMAN, readline
+     Loading the library and packages ...
+     Packages:   GAPDoc 1.6.7, PrimGrp 3.4.4, SmallGrp 1.5.4, TransGrp 3.6.5
+     Try '??help' for help. See also '?copyright', '?cite' and '?authors'
+    gap>
+
+Using the library interface from Python::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-gap[test]" IPython
 
