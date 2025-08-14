@@ -22,6 +22,7 @@ description = "passagemath: Computational Group Theory with GAP"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
+    SPKG_INSTALL_REQUIRES_pexpect
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
