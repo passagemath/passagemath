@@ -493,7 +493,17 @@ class Package(object):
             deps = self.__dependencies
         else:
             deps = self.__dependencies_build
+        extra_deps = []
+        if self.distribution_name:
+            extra_deps.append('$(PYTHON)')
+            if self.name == 'pip':
+                pass
+            elif self.source == 'wheel':
+                extra_deps.append('pip')
+            else:
+                extra_deps.append('$(PYTHON_TOOLCHAIN)')
         return sorted(set(deps.partition('|')[2].strip().split()
+                          + extra_deps
                           + self.__dependencies_order_only.strip().split()))
 
     @property

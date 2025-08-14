@@ -135,12 +135,6 @@ class PackageCreator(object):
         """
         if pypi_package_name is None:
             pypi_package_name = self.package_name
-        with open(os.path.join(self.path, 'dependencies_build'), 'w+') as f:
-            if source == 'wheel':
-                f.write(' | pip $(PYTHON)\n\n')
-            else:
-                f.write(' | $(PYTHON_TOOLCHAIN) $(PYTHON)\n\n')
-            f.write('----------\nAll lines of this file are ignored except the first.\n')
         with open(os.path.join(self.path, 'dependencies'), 'w+') as f:
             f.write('# No dependencies\n\n')
             f.write('----------\nAll lines of this file are ignored except the first.\n')
