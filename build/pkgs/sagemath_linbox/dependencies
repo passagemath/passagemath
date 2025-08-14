@@ -1,1 +1,0 @@
-memory_allocator sagemath_categories sagemath_flint sagemath_modules iml libgd linbox m4ri m4rie | sage_setup sagemath_environment cython pkgconfig

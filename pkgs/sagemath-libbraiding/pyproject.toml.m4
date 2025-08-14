@@ -57,6 +57,10 @@ host-requires = [
   "pkg:generic/libbraiding",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
+  "pkg:generic/iml",
+  "pkg:generic/linbox",
+  "pkg:generic/m4ri",
+  "pkg:generic/m4rie",
 ]
 
 dependencies = [

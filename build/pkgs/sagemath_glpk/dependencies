@@ -1,1 +1,0 @@
-sagemath_objects sagemath_categories glpk memory_allocator cysignals | sage_setup sagemath_environment cython pkgconfig sage_conf 

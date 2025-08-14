@@ -43,6 +43,7 @@ build-requires = [
 ]
 
 host-requires = [
+  "pkg:generic/boost",
   "pkg:generic/planarity",
 ]
 

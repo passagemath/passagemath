@@ -1,1 +1,0 @@
-macaulay2 cysignals sagemath_categories sagemath_flint sagemath_modules sagemath_repl | sage_setup sage_conf sagemath_environment cython pkgconfig 

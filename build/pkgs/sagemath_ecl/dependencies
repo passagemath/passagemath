@@ -1,2 +1,0 @@
-cysignals gmpy2 sagemath_categories ecl gsl maxima singular | sagemath_environment sage_setup cython pkgconfig python_build
-

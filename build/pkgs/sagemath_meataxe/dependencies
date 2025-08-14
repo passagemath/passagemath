@@ -1,1 +1,0 @@
-meataxe cysignals sagemath_modules | sage_setup sagemath_environment cython pkgconfig 

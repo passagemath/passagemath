@@ -1,1 +1,0 @@
-sagemath_categories sagemath_ntl flint | sage_setup cython pkgconfig sage_conf

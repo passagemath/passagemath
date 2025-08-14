@@ -1,1 +1,0 @@
-sagemath_environment sagemath_categories sagemath_modules gap | sage_setup cython pkgconfig
