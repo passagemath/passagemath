@@ -470,6 +470,8 @@ class Package(object):
                 return part
         return None
 
+    ORDER_ONLY_PACKAGES = ['sage_conf']
+
     @property
     def dependencies_build(self):
         """
@@ -487,7 +489,8 @@ class Package(object):
                 src_deps.append(os.path.join(self.path, 'src/MANIFEST.in').replace(SAGE_ROOT, '$(SAGE_ROOT)', 1))
         return sorted(set(deps.partition('|')[0].strip().split()
                           + src_deps
-                          + [Package(p).name for p in self.__pyproject['requires']]
+                          + [Package(p).name for p in self.__pyproject['requires']
+                             if Package(p).name not in self.ORDER_ONLY_PACKAGES]
                           + [Package(p).name for p in self.__pyproject['build-requires']]
                           + [Package(p).name for p in self.__pyproject['host-requires']]))
 
@@ -511,6 +514,8 @@ class Package(object):
                 extra_deps.append('$(PYTHON_TOOLCHAIN)')
         return sorted(set(deps.partition('|')[2].strip().split()
                           + extra_deps
+                          + [Package(p).name for p in self.__pyproject['requires']
+                             if Package(p).name in self.ORDER_ONLY_PACKAGES]
                           + self.__dependencies_order_only.strip().split()))
 
     @property
