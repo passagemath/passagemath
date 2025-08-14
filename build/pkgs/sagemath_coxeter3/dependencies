@@ -1,1 +1,0 @@
-$(SAGE_ROOT)/pkgs/sagemath-coxeter3/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-coxeter3/MANIFEST.in  coxeter3 | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig $(PYTHON)

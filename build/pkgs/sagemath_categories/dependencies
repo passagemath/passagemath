@@ -1,1 +1,0 @@
-$(SAGE_ROOT)/pkgs/sagemath-categories/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-categories/MANIFEST.in  sagemath_objects memory_allocator | $(PYTHON_TOOLCHAIN) sagemath_environment sage_setup cython pkgconfig python_build $(PYTHON)

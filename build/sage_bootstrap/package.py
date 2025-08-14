@@ -18,6 +18,8 @@ import logging
 import os
 import re
 
+from collections import defaultdict
+
 from sage_bootstrap.env import SAGE_ROOT
 
 log = logging.getLogger()
@@ -86,7 +88,9 @@ class Package(object):
         self._init_requirements()
         self._init_dependencies()
         self._init_trees()
-    
+        self._init_purl()
+        self._init_pyproject()
+
     def __repr__(self):
         return 'Package {0}'.format(self.name)
 
@@ -433,10 +437,16 @@ class Package(object):
         See https://github.com/package-url/purl-spec/blob/master/PURL-SPECIFICATION.rst#package-url-specification-v10x
         for details
         """
+        try:
+            return self.__purl
+        except AttributeError:
+            pass
         dist = self.distribution_name
         if dist:
-            return 'pkg:pypi/' + dist.lower().replace('_', '-')
-        return 'pkg:generic/' + self.name.replace('_', '-')
+            self.__purl = 'pkg:pypi/' + dist.lower().replace('_', '-')
+        else:
+            self.__purl = 'pkg:generic/' + self.name.replace('_', '-')
+        return self.__purl
 
     @property
     def distribution_name(self):
@@ -460,6 +470,8 @@ class Package(object):
                 return part
         return None
 
+    ORDER_ONLY_PACKAGES = ['sage_conf']
+
     @property
     def dependencies_build(self):
         """
@@ -469,7 +481,18 @@ class Package(object):
             deps = self.__dependencies
         else:
             deps = self.__dependencies_build
-        return deps.partition('|')[0].strip().split()
+        src_deps = []
+        if self.distribution_name:
+            if os.path.exists(os.path.join(self.path, 'src/pyproject.toml.m4')):
+                src_deps.append(os.path.join(self.path, 'src/pyproject.toml').replace(SAGE_ROOT, '$(SAGE_ROOT)', 1))
+            if os.path.exists(os.path.join(self.path, 'src/MANIFEST.in')):
+                src_deps.append(os.path.join(self.path, 'src/MANIFEST.in').replace(SAGE_ROOT, '$(SAGE_ROOT)', 1))
+        return sorted(set(deps.partition('|')[0].strip().split()
+                          + src_deps
+                          + [Package(p).name for p in self.__pyproject['requires']
+                             if Package(p).name not in self.ORDER_ONLY_PACKAGES]
+                          + [Package(p).name for p in self.__pyproject['build-requires']]
+                          + [Package(p).name for p in self.__pyproject['host-requires']]))
 
     @property
     def dependencies_order_only(self):
@@ -480,14 +503,27 @@ class Package(object):
             deps = self.__dependencies
         else:
             deps = self.__dependencies_build
-        return deps.partition('|')[2].strip().split() + self.__dependencies_order_only.strip().split()
+        extra_deps = []
+        if self.distribution_name:
+            extra_deps.append('$(PYTHON)')
+            if self.name == 'pip':
+                pass
+            elif self.source == 'wheel':
+                extra_deps.append('pip')
+            else:
+                extra_deps.append('$(PYTHON_TOOLCHAIN)')
+        return sorted(set(deps.partition('|')[2].strip().split()
+                          + extra_deps
+                          + [Package(p).name for p in self.__pyproject['requires']
+                             if Package(p).name in self.ORDER_ONLY_PACKAGES]
+                          + self.__dependencies_order_only.strip().split()))
 
     @property
     def dependencies_optional(self):
         """
         Return a list of strings, the package names of the optional build dependencies
         """
-        return self.__dependencies_optional.strip().split()
+        return sorted(set(self.__dependencies_optional.strip().split()))
 
     @property
     def dependencies_runtime(self):
@@ -495,7 +531,9 @@ class Package(object):
         Return a list of strings, the package names of the runtime dependencies
         """
         # after a '|', we have order-only build dependencies
-        return self.__dependencies.partition('|')[0].strip().split()
+        return sorted(set(self.__dependencies.partition('|')[0].strip().split()
+                          + [Package(p).name for p in self.__pyproject['dependencies']]
+                          + [Package(p).name for p in self.__pyproject['host-requires']]))
 
     dependencies = dependencies_runtime  # noqa
 
@@ -504,7 +542,8 @@ class Package(object):
         """
         Return a list of strings, the package names of the check dependencies
         """
-        return self.__dependencies_check.strip().split()
+        return sorted(set(self.__dependencies_check.strip().split()
+                          + [Package(p).name for p in self.__pyproject['test']]))
 
     def __eq__(self, other):
         return self.tarball == other.tarball
@@ -514,6 +553,11 @@ class Package(object):
         """
         Return all packages
         """
+        try:
+            return cls.__all
+        except AttributeError:
+            pass
+        cls.__all = []
         base = os.path.join(SAGE_ROOT, 'build', 'pkgs')
         for subdir in os.listdir(base):
             path = os.path.join(base, subdir)
@@ -521,10 +565,11 @@ class Package(object):
                 log.debug('%s has no type', subdir)
                 continue
             try:
-                yield cls(subdir)
+                cls.__all.append(cls(subdir))
             except Exception:
                 log.error('Failed to open %s', subdir)
                 raise
+        return cls.__all
 
     @property
     def path(self):
@@ -684,3 +729,48 @@ class Package(object):
                 self.__trees = f.readline().partition('#')[0].strip()
         except IOError:
             self.__trees = None
+
+    def _init_purl(self):
+        try:
+            with open(os.path.join(self.path, 'purl.txt')) as f:
+                self.__purl = f.readline().partition('#')[0].strip()
+        except IOError:
+            pass
+
+    TOML_LIST_BEGIN = re.compile(r'^(?P<key>[-a-z]*) *= *\[')
+    TOML_LIST_END = re.compile(r'^[]]')
+    SPKG_INSTALL_REQUIRES = re.compile(r'^ *SPKG_INSTALL_REQUIRES_(?P<spkg>[a-z0-9_]*)')
+    PURL = re.compile(r'^ *"(?P<purl>pkg:.*)"')
+    DISTRIBUTION = re.compile(r'^ *"(?P<distribution>[-_A-Za-z0-9.]*)"')
+
+    def _init_pyproject(self):
+        from io import open
+        self.__pyproject = defaultdict(set)
+        key = None
+        try:
+            with open(os.path.join(self.path, 'src/pyproject.toml.m4'), 'rt', encoding='utf-8') as f:
+                for line in f.readlines():
+                    match = self.TOML_LIST_BEGIN.match(line)
+                    if match:
+                        key = match.group('key')
+                        line = line[match.end():]
+                    match = self.TOML_LIST_END.match(line)
+                    if match:
+                        key = None
+                        line = line[match.end():]
+                    if not key:
+                        continue
+                    match = self.SPKG_INSTALL_REQUIRES.match(line)
+                    if match:
+                        self.__pyproject[key].add(match.group('spkg'))
+                        continue
+                    match = self.PURL.match(line)
+                    if match:
+                        self.__pyproject[key].add(match.group('purl'))
+                        continue
+                    match = self.DISTRIBUTION.match(line)
+                    if match:
+                        self.__pyproject[key].add('pkg:pypi/' + match.group('distribution'))
+                        continue
+        except IOError:
+            return

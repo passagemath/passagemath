@@ -188,7 +188,7 @@ class Application(object):
                 elif format == 'shell':
                     # We single-quote the values because dependencies
                     # may contain Makefile variable substitutions
-                    print("{0}_deps_{1}='{2}'".format(t, package_name, ' '.join(deps)))
+                    print("{0}_deps_{1}={2}".format(t, package_name, quote(' '.join(deps))))
 
     def name(self, tarball_filename):
         """

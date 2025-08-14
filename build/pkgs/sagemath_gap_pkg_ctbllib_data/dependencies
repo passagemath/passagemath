@@ -1,1 +1,1 @@
-sagemath_environment gap | $(PYTHON_TOOLCHAIN) sage_setup sage_conf
+sagemath_environment gap | sage_setup sage_conf

@@ -1,1 +1,1 @@
-sagemath_environment pari_galdata | $(PYTHON_TOOLCHAIN) sage_setup sage_conf
+sagemath_environment pari_galdata | sage_setup sage_conf

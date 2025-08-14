@@ -1,1 +1,1 @@
-tox sagemath_polyhedra sagemath_linbox sagemath_repl
+tox
