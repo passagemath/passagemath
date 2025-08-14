@@ -18,6 +18,8 @@ import logging
 import os
 import re
 
+from collections import defaultdict
+
 from sage_bootstrap.env import SAGE_ROOT
 
 log = logging.getLogger()
@@ -86,7 +88,8 @@ class Package(object):
         self._init_requirements()
         self._init_dependencies()
         self._init_trees()
-    
+        self._init_pyproject()
+
     def __repr__(self):
         return 'Package {0}'.format(self.name)
 
@@ -469,7 +472,10 @@ class Package(object):
             deps = self.__dependencies
         else:
             deps = self.__dependencies_build
-        return deps.partition('|')[0].strip().split()
+        return (deps.partition('|')[0].strip().split()
+                + list(self.__pyproject['requires'])
+                + list(self.__pyproject['build-requires'])
+                + list(self.__pyproject['host-requires']))
 
     @property
     def dependencies_order_only(self):
@@ -495,7 +501,9 @@ class Package(object):
         Return a list of strings, the package names of the runtime dependencies
         """
         # after a '|', we have order-only build dependencies
-        return self.__dependencies.partition('|')[0].strip().split()
+        return (self.__dependencies.partition('|')[0].strip().split()
+                + list(self.__pyproject['dependencies'])
+                + list(self.__pyproject['host-requires']))
 
     dependencies = dependencies_runtime  # noqa
 
@@ -504,7 +512,8 @@ class Package(object):
         """
         Return a list of strings, the package names of the check dependencies
         """
-        return self.__dependencies_check.strip().split()
+        return (self.__dependencies_check.strip().split()
+                + list(self.__pyproject['test']))
 
     def __eq__(self, other):
         return self.tarball == other.tarball
@@ -684,3 +693,35 @@ class Package(object):
                 self.__trees = f.readline().partition('#')[0].strip()
         except IOError:
             self.__trees = None
+
+    TOML_LIST_BEGIN = re.compile(r'^(?P<key>[-a-z]*) *= *\[ *$')
+    TOML_LIST_END = re.compile(r'^[]]')
+    SPKG_INSTALL_REQUIRES = re.compile(r'^ *SPKG_INSTALL_REQUIRES_(?P<spkg>[a-z0-9_]*)')
+    PURL = re.compile(r'^ *"(?P<purl>.*)"')
+
+    def _init_pyproject(self):
+        from io import open
+        self.__pyproject = defaultdict(set)
+        key = None
+        try:
+            with open(os.path.join(self.path, 'src/pyproject.toml.m4'), 'rt', encoding='utf-8') as f:
+                for line in f.readlines():
+                    match = self.TOML_LIST_BEGIN.match(line)
+                    if match:
+                        key = match.group('key')
+                        continue
+                    match = self.TOML_LIST_END.match(line)
+                    if match:
+                        key = None
+                        continue
+                    if not key:
+                        continue
+                    match = self.SPKG_INSTALL_REQUIRES.match(line)
+                    if match:
+                        self.__pyproject[key].add(match.group('spkg'))
+                        continue
+                    match = self.PURL.match(line)
+                    if match:
+                        self.__pyproject[key].add(match.group('purl'))
+        except IOError:
+            return
