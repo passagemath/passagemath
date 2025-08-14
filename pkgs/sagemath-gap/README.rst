@@ -134,7 +134,7 @@ Examples
 
 Running GAP from the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-gap[test]" sage -gap
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-gap" sage -gap
      ┌───────┐   GAP 4.14.0 of 2024-12-05
      │  GAP  │   https://www.gap-system.org
      └───────┘   Architecture: x86_64-apple-darwin22-default64-kv9
