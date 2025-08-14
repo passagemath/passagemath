@@ -1,4 +1,4 @@
-$(SAGE_ROOT)/pkgs/sagemath-standard/pyproject.toml sagemath_standard_no_symbolics sagemath_symbolics | $(PYTHON_TOOLCHAIN) $(PYTHON)
+$(SAGE_ROOT)/pkgs/sagemath-standard/pyproject.toml sagemath_standard_no_symbolics sagemath_symbolics | 
 
 ----------
 All lines of this file are ignored except the first.

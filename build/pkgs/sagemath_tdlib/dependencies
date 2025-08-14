@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-tdlib/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-tdlib/MANIFEST.in  tdlib cysignals boost_cropped | $(PYTHON_TOOLCHAIN) sage_setup sagemath_environment cython pkgconfig $(PYTHON)
+$(SAGE_ROOT)/pkgs/sagemath-tdlib/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-tdlib/MANIFEST.in  tdlib cysignals boost_cropped | sage_setup sagemath_environment cython pkgconfig 
