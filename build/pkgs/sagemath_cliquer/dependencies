@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-cliquer/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-cliquer/MANIFEST.in  cliquer cysignals | sage_setup sage_conf sagemath_environment cython pkgconfig 
+cliquer cysignals | sage_setup sage_conf sagemath_environment cython pkgconfig 

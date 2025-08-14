@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-lrslib/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-lrslib/MANIFEST.in  lrslib cysignals | sage_setup sage_conf sagemath_environment cython pkgconfig 
+lrslib cysignals | sage_setup sage_conf sagemath_environment cython pkgconfig 

@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-meataxe/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-meataxe/MANIFEST.in  meataxe cysignals sagemath_modules | sage_setup sagemath_environment cython pkgconfig 
+meataxe cysignals sagemath_modules | sage_setup sagemath_environment cython pkgconfig 

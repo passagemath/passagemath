@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-giac/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-giac/MANIFEST.in sagemath_categories giac | sage_setup cython pkgconfig
+sagemath_categories giac | sage_setup cython pkgconfig

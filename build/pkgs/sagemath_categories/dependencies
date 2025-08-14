@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-categories/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-categories/MANIFEST.in  | sagemath_environment sage_setup cython pkgconfig python_build 
+| sagemath_environment sage_setup cython pkgconfig python_build 

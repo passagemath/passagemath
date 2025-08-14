@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-repl/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-repl/MANIFEST.in  sagemath_objects sagemath_environment ipython ipywidgets | python_build sage_setup 
+sagemath_objects sagemath_environment ipython ipywidgets | python_build sage_setup 

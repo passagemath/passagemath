@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-topcom/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-topcom/MANIFEST.in  topcom cysignals | sage_setup sage_conf sagemath_environment cython pkgconfig 
+topcom cysignals | sage_setup sage_conf sagemath_environment cython pkgconfig 

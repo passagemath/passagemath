@@ -479,7 +479,14 @@ class Package(object):
             deps = self.__dependencies
         else:
             deps = self.__dependencies_build
+        src_deps = []
+        if self.distribution_name:
+            if os.path.exists(os.path.join(self.path, 'src/pyproject.toml.m4')):
+                src_deps.append(os.path.join(self.path, 'src/pyproject.toml').replace(SAGE_ROOT, '$(SAGE_ROOT)', 1))
+            if os.path.exists(os.path.join(self.path, 'src/MANIFEST.in')):
+                src_deps.append(os.path.join(self.path, 'src/MANIFEST.in').replace(SAGE_ROOT, '$(SAGE_ROOT)', 1))
         return sorted(set(deps.partition('|')[0].strip().split()
+                          + src_deps
                           + [Package(p).name for p in self.__pyproject['requires']]
                           + [Package(p).name for p in self.__pyproject['build-requires']]
                           + [Package(p).name for p in self.__pyproject['host-requires']]))

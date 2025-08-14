@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-ntl/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-ntl/MANIFEST.in memory_allocator sagemath_categories sagemath_modules ntl m4ri mpfi | sage_setup sagemath_environment cython pkgconfig
+memory_allocator sagemath_categories sagemath_modules ntl m4ri mpfi | sage_setup sagemath_environment cython pkgconfig

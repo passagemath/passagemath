@@ -1,2 +1,2 @@
-$(SAGE_ROOT)/pkgs/sagemath-objects/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-objects/MANIFEST.in  cysignals gmpy2 | sagemath_environment sage_setup cython pkgconfig python_build 
+cysignals gmpy2 | sagemath_environment sage_setup cython pkgconfig python_build 
 

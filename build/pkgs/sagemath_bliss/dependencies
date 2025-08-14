@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-bliss/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-bliss/MANIFEST.in  bliss cysignals | sage_setup sage_conf sagemath_environment cython pkgconfig 
+bliss cysignals | sage_setup sage_conf sagemath_environment cython pkgconfig 

@@ -1,1 +1,1 @@
-$(SAGE_ROOT)/pkgs/sagemath-flint/pyproject.toml $(SAGE_ROOT)/pkgs/sagemath-flint/MANIFEST.in sagemath_categories sagemath_ntl flint | sage_setup cython pkgconfig sage_conf
+sagemath_categories sagemath_ntl flint | sage_setup cython pkgconfig sage_conf

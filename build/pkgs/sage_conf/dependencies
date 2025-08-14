@@ -1,1 +1,1 @@
- $(SAGE_ROOT)/pkgs/sage-conf/_sage_conf/_conf.py $(SAGE_ROOT)/pkgs/sage-conf/pyproject.toml $(SAGE_ROOT)/pkgs/sage-conf/bin/sage-env-config | 
+ $(SAGE_ROOT)/pkgs/sage-conf/_sage_conf/_conf.py $(SAGE_ROOT)/pkgs/sage-conf/bin/sage-env-config | 
