@@ -725,7 +725,7 @@ class Package(object):
         except IOError:
             pass
 
-    TOML_LIST_BEGIN = re.compile(r'^(?P<key>[-a-z]*) *= *\[ *$')
+    TOML_LIST_BEGIN = re.compile(r'^(?P<key>[-a-z]*) *= *\[')
     TOML_LIST_END = re.compile(r'^[]]')
     SPKG_INSTALL_REQUIRES = re.compile(r'^ *SPKG_INSTALL_REQUIRES_(?P<spkg>[a-z0-9_]*)')
     PURL = re.compile(r'^ *"(?P<purl>pkg:.*)"')
@@ -741,11 +741,11 @@ class Package(object):
                     match = self.TOML_LIST_BEGIN.match(line)
                     if match:
                         key = match.group('key')
-                        continue
+                        line = line[match.end():]
                     match = self.TOML_LIST_END.match(line)
                     if match:
                         key = None
-                        continue
+                        line = line[match.end():]
                     if not key:
                         continue
                     match = self.SPKG_INSTALL_REQUIRES.match(line)
