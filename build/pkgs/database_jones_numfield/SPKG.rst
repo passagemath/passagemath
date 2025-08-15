@@ -17,8 +17,3 @@ Upstream Contact
 ----------------
 
 sage-devel@googlegroups.com
-
-Special Update/Build Instructions
----------------------------------
-
-Created by taking the original old-style spkg and removing crud from it.
