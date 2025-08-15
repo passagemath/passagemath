@@ -451,7 +451,7 @@ def make_parser():
         'package_name', default=None, type=str,
         help='package name')
     parser_create.add_argument(
-        '--source', type=str, default=None, help='package source (one of normal, wheel, script, pip); default depends on provided arguments')
+        '--source', type=str, default=None, help='package source (one of normal, wheel, script, pip, pkgs); default depends on provided arguments')
     parser_create.add_argument(
         '--version', type=str, default=None, help='package version')
     parser_create.add_argument(
