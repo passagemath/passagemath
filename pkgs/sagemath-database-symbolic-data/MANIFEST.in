@@ -1,0 +1,20 @@
+include VERSION.txt
+
+include sage/databases/symbolic_data.p*
+
+global-exclude all__*.py
+global-include all__sagemath_database_symbolic_data.py
+
+global-exclude *.c
+global-exclude *.cpp
+
+include repair_wheel.py
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude *.bak
+global-exclude *.so
+global-exclude *~
+prune .tox
+prune build
+prune dist
