@@ -1,5 +1,5 @@
 import os
-from sage.all import save
+from sage.misc.persist import save
 from sage.env import SAGE_SHARE
 
 install_root = os.path.join(SAGE_SHARE, 'odlyzko')
