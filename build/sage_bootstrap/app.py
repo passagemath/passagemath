@@ -491,7 +491,10 @@ class Application(object):
             creator.set_type(pkg_type)
         if description or license or upstream_contact:
             creator.set_description(description, license, upstream_contact)
-        if pypi or source == 'pip':
+        if source == 'pkgs':
+            creator.set_python_data_and_scripts(pypi_package_name='pas' + package_name.replace('_', '-'),
+                                                source=source, dependencies=dependencies)
+        elif pypi or source == 'pip':
             creator.set_python_data_and_scripts(pypi_package_name=pypi_version.name, source=source,
                                                 dependencies=dependencies)
         if source == 'wheel':

@@ -135,9 +135,6 @@ class PackageCreator(object):
         """
         if pypi_package_name is None:
             pypi_package_name = self.package_name
-        with open(os.path.join(self.path, 'dependencies'), 'w+') as f:
-            f.write('# No dependencies\n\n')
-            f.write('----------\nAll lines of this file are ignored except the first.\n')
         if source == 'normal':
             with open(os.path.join(self.path, 'spkg-install.in'), 'w+') as f:
                 f.write('cd src\nsdh_pip_install .\n')
@@ -161,5 +158,29 @@ class PackageCreator(object):
             self._remove_files(['checksums.ini', 'spkg-build.in', 'spkg-install.in', 'spkg-install', 'install-requires.txt'])
         elif source == 'script':
             self._remove_files(['checksums.ini', 'requirements.txt'])
+        elif source == 'pkgs':
+            # Script package with source tree in pkgs/
+            self._remove_files(['checksums.ini', 'requirements.txt',
+                                'version_requirements.txt', 'src', 'SPKG.rst',
+                                'package-version.txt', 'spkg-check', 'spkg-install.in',
+                                'spkg-src', 'bootstrap', 'dependencies_check'])
+            with open(os.path.join(self.path, 'version_requirements.txt'), 'w+') as f:
+                f.write('{0}\n'.format(pypi_package_name))
+            os.symlink(os.path.join('../../../pkgs', pypi_package_name[3:]),
+                       os.path.join(self.path, 'src'))
+            os.symlink('src/README.rst',
+                       os.path.join(self.path, 'SPKG.rst'))
+            os.symlink('src/VERSION.txt',
+                       os.path.join(self.path, 'package-version.txt'))
+            os.symlink('../sagemath_objects/dependencies_check',
+                       os.path.join(self.path, 'dependencies_check'))
+            os.symlink('../sagemath_objects/spkg-check',
+                       os.path.join(self.path, 'spkg-check'))
+            os.symlink('../sagemath_objects/spkg-install.in',
+                       os.path.join(self.path, 'spkg-install.in'))
+            os.symlink('../sagemath_objects/spkg-src',
+                       os.path.join(self.path, 'spkg-src'))
+            os.symlink('../sagelib/bootstrap',
+                       os.path.join(self.path, 'bootstrap'))
         else:
-            raise ValueError('package source must be one of normal, script, pip, or wheel')
+            raise ValueError('package source must be one of normal, script, pip, wheel, or pkgs')
