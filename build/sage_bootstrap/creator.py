@@ -172,15 +172,16 @@ class PackageCreator(object):
                        os.path.join(self.path, 'SPKG.rst'))
             os.symlink('src/VERSION.txt',
                        os.path.join(self.path, 'package-version.txt'))
-            os.symlink('../sagemath_objects/dependencies_check',
-                       os.path.join(self.path, 'dependencies_check'))
-            os.symlink('../sagemath_objects/spkg-check',
-                       os.path.join(self.path, 'spkg-check'))
             os.symlink('../sagemath_objects/spkg-install.in',
                        os.path.join(self.path, 'spkg-install.in'))
             os.symlink('../sagemath_objects/spkg-src',
                        os.path.join(self.path, 'spkg-src'))
             os.symlink('../sagelib/bootstrap',
                        os.path.join(self.path, 'bootstrap'))
+            if os.path.exists(os.path.join(self.path, 'src/tox.ini')):
+                os.symlink('../sagemath_objects/dependencies_check',
+                           os.path.join(self.path, 'dependencies_check'))
+                os.symlink('../sagemath_objects/spkg-check',
+                           os.path.join(self.path, 'spkg-check'))
         else:
             raise ValueError('package source must be one of normal, script, pip, wheel, or pkgs')
