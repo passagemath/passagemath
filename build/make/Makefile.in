@@ -902,13 +902,13 @@ endef
 
 $(foreach pkgname,$(SCRIPT_PACKAGES),\
     $(foreach tree, $(trees_$(pkgname)), \
-	$(eval $(call SCRIPT_PACKAGE_templ,$(pkgname),$(vers_$(pkgname)),$(call pkg_deps,$(pkgname),build_),$(call pkg_deps,$(pkgname),check_),$(tree)))))
+	$(eval $(call SCRIPT_PACKAGE_templ,$(pkgname),$(vers_$(pkgname)),$(call pkg_deps,$(pkgname),build_) $(call pkg_deps,$(pkgname)),$(call pkg_deps,$(pkgname),check_),$(tree)))))
 
 ifdef DEBUG_RULES
 $(info # Rules for script packages)
 $(foreach pkgname,$(SCRIPT_PACKAGES),\
     $(foreach tree, $(trees_$(pkgname)), \
-	$(info $(call SCRIPT_PACKAGE_templ,$(pkgname),$(vers_$(pkgname)),$(call pkg_deps,$(pkgname),build_),$(call pkg_deps,$(pkgname),check_),$(tree)))))
+	$(info $(call SCRIPT_PACKAGE_templ,$(pkgname),$(vers_$(pkgname)),$(call pkg_deps,$(pkgname),build_) $(call pkg_deps,$(pkgname)),$(call pkg_deps,$(pkgname),check_),$(tree)))))
 endif
 
 # sagelib depends on this so that its install script is always executed
