@@ -1,6 +1,7 @@
 include VERSION.txt
 
-include sage/databases/odlyzko.py
+include sage/databases/db_modular_polynomials.p*
+include sage/databases/db_class_polynomials.p*
 
 global-exclude all__*.py
 global-include all__sagemath_database_kohel.py
