@@ -224,7 +224,8 @@ WHEEL_PACKAGES = $(PYPI_WHEEL_PACKAGES)		\
 	sagemath_doc_pdf
 
 # Packages for which we build sdists for PyPI
-PYPI_SDIST_PACKAGES = $(WHEEL_PACKAGES)
+PYPI_SDIST_PACKAGES = $(WHEEL_PACKAGES) \
+	sagemath_polytopes_db_4d
 
 # Generate the actual inst_<pkgname> variables; for each package that is
 # actually built this generates a line like:
