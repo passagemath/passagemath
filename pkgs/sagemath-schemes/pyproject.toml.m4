@@ -99,6 +99,9 @@ toric           = ["passagemath-palp",
                    "passagemath-graphs"]
 padics          = ["passagemath-schemes[Zp]"]
 
+# databases
+database-kohel = ["passagemath-database-kohel"]
+
 # the whole package
 standard        = ["passagemath-schemes[toric,padics,NumberField,FiniteField,flint,linbox,mpfi,ntl,numpy,pari,singular,eclib,sympow]"]
 

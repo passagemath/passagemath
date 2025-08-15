@@ -19,8 +19,7 @@ from sage.rings.integer_ring import ZZ
 from sage.libs.pari import pari
 from cypari2.handle_error import PariError
 
-from sage.databases.db_modular_polynomials import ClassicalModularPolynomialDatabase
-_db = ClassicalModularPolynomialDatabase()
+_db = None
 
 _cache_bound = 100
 _cache = {}
@@ -106,6 +105,7 @@ def classical_modular_polynomial(l, j=None):
         sage: classical_modular_polynomial(l, j) == classical_modular_polynomial(l)(j, Y)
         True
     """
+    global _db
     l = ZZ(l)
 
     if j is None:
@@ -118,8 +118,11 @@ def classical_modular_polynomial(l, j=None):
             pass
 
         try:
+            if _db is None:
+                from sage.databases.db_modular_polynomials import ClassicalModularPolynomialDatabase
+                _db = ClassicalModularPolynomialDatabase()
             Phi = ZZ['X,Y'](_db[l])
-        except (FileNotFoundError, ValueError):
+        except (FileNotFoundError, ImportError, ValueError):
             try:
                 pari_Phi = pari.polmodular(l)
             except PariError:
@@ -141,8 +144,11 @@ def classical_modular_polynomial(l, j=None):
     if l in _cache:
         return _cache[l](j, Y)
     try:
+        if _db is None:
+            from sage.databases.db_modular_polynomials import ClassicalModularPolynomialDatabase
+            _db = ClassicalModularPolynomialDatabase()
         Phi = _db[l]
-    except (ValueError, FileNotFoundError):
+    except (ValueError, ImportError, FileNotFoundError):
         pass
     else:
         if l <= _cache_bound:

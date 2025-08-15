@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-schemes
+# sage_setup: distribution = sagemath-database-kohel
 """
 Database of modular polynomials
 
