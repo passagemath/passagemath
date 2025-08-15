@@ -53,10 +53,9 @@ from sage.databases.all__sagemath_pari import *
 from sage.databases.all__sagemath_schemes import *
 from sage.databases.all__sagemath_database_kohel import *
 from sage.databases.all__sagemath_database_jones_numfield import *
+from sage.databases.all__sagemath_database_symbolic_data import *
 
 from sage.misc.lazy_import import lazy_import
-
-lazy_import('sage.databases.symbolic_data', 'SymbolicData')
 
 lazy_import('sage.databases.odlyzko', 'zeta_zeros')
 
