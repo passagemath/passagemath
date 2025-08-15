@@ -72,6 +72,9 @@ gurobi      = ["passagemath-polyhedra[gurobi_sage]"]
 gurobi_sage = [SPKG_INSTALL_REQUIRES_sage_numerical_backends_gurobi]
 scip        = [SPKG_INSTALL_REQUIRES_pyscipopt]
 
+# databases
+polytopes-db-4d = ["passagemath-polytopes-db-4d"]
+
 # supported rings
 QQ          = []
 ZZ          = []
@@ -79,14 +82,14 @@ RDF         = ["passagemath-polyhedra[cddlib]"]
 NumberField = ["passagemath-polyhedra[flint]"]
 
 # features
-databases   = []
+databases   = ["passagemath-polyhedra[polytopes-db-4d]"]
 graphs      = ["passagemath-graphs"]
 groups      = ["passagemath-groups"]
 plot        = ["passagemath-plot"]
 
 # the whole package
 standard    = [
-    "passagemath-polyhedra[databases,flint,fpylll,linbox,glpk,graphs,groups,pari,RDF]",
+    "passagemath-polyhedra[flint,fpylll,linbox,glpk,graphs,groups,pari,RDF]",
     "passagemath-plot[tachyon]",
 ]
 
