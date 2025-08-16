@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-database-cunningham
 r"""
 Cunningham tables
 
