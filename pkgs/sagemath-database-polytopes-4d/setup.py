@@ -7,5 +7,5 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from sage_setup import sage_setup
 
-sage_setup(['sagemath-polytopes-db-4d'],
+sage_setup(['sagemath-database-polytopes-4d'],
            spkgs=['polytopes_db_4d'])

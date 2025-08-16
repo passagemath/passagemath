@@ -10,7 +10,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "passagemath-polytopes-db-4d"
+name = "passagemath-database-polytopes-4d"
 description = "passagemath: Database of 4-dimensional reflexive polytopes"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sage_conf

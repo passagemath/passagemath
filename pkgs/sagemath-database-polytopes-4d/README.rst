@@ -53,7 +53,7 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable distribution ``passagemath-polytopes-db-4d`` is a
+This pip-installable distribution ``passagemath-database-polytopes-4d`` is a
 distribution of data for use with ``passagemath-polyhedra``.
 
 It provides the database of 4-d reflexive polytopes with Hodge
