@@ -1,1 +1,2 @@
-passagemath-database-odlyzko-zeta
+# This file is updated on every release by the update-version script
+passagemath-database-odlyzko-zeta ~= 10.6.5.0

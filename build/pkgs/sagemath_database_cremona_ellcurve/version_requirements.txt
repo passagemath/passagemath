@@ -1,1 +1,2 @@
-passagemath-database-cremona-ellcurve
+# This file is updated on every release by the update-version script
+passagemath-database-cremona-ellcurve ~= 10.6.5.0

@@ -1,1 +1,2 @@
-passagemath-database-cunningham
+# This file is updated on every release by the update-version script
+passagemath-database-cunningham ~= 10.6.5.0

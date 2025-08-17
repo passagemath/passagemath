@@ -1,1 +1,2 @@
-passagemath-database-polytopes-4d
+# This file is updated on every release by the update-version script
+passagemath-database-polytopes-4d ~= 10.6.5.0

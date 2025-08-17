@@ -1,1 +1,2 @@
-passagemath-database-symbolic-data
+# This file is updated on every release by the update-version script
+passagemath-database-symbolic-data ~= 10.6.5.0
