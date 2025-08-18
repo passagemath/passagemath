@@ -26,6 +26,9 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_factint_data
+    SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_primgrp_data
+    SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_smallgrp_data
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
