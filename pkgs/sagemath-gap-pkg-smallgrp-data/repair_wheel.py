@@ -24,7 +24,7 @@ with InWheel(wheel, wheel):
         sys.stdout.flush()
         parent = Path(dir).parent
         name = Path(dir).name
-        if (Path(dir) / datadir).exists():
+        if (Path(dir) / pkgdir).exists():
             found = True
             command = f'set -o pipefail; (cd {shlex.quote(str(parent))} && tar cf - {name}/{pkgdir}/{{id*,small*}}) | tar xvf -'
             print(f'Running {command}')
@@ -32,7 +32,7 @@ with InWheel(wheel, wheel):
             if os.system(f"bash -c {shlex.quote(command)}") != 0:
                 sys.exit(1)
     if not found:
-        printf(f'Not found: {datadir}')
+        printf(f'Not found: {pkgdir}')
         sys.exit(1)
 
     # Remove the sage-conf dependency; it is not needed because our wheels ship what is needed.
