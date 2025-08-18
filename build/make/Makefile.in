@@ -144,10 +144,11 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sagemath_database_mutation_class	\
 	sagemath_database_odlyzko_zeta		\
 	sagemath_database_symbolic_data		\
-	sagemath_gap_pkg_transgrp_data		\
 	sagemath_gap_pkg_ctbllib_data		\
-	sagemath_gap_pkg_tomlib_data		\
 	sagemath_gap_pkg_irredsol_data		\
+	sagemath_gap_pkg_primgrp_data		\
+	sagemath_gap_pkg_tomlib_data		\
+	sagemath_gap_pkg_transgrp_data		\
 	sagemath_pari_elldata			\
 	sagemath_pari_galdata			\
 	sagemath_pari_galpol			\
