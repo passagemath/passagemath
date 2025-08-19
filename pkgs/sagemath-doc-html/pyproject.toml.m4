@@ -10,6 +10,20 @@ requires = [
     SPKG_INSTALL_REQUIRES_furo
     SPKG_INSTALL_REQUIRES_jupyter_sphinx
     SPKG_INSTALL_REQUIRES_sagelib
+    SPKG_INSTALL_REQUIRES_sagemath_cmr
+    SPKG_INSTALL_REQUIRES_sagemath_fricas
+    SPKG_INSTALL_REQUIRES_sagemath_frobby
+    SPKG_INSTALL_REQUIRES_sagemath_gfan
+    SPKG_INSTALL_REQUIRES_sagemath_kenzo
+    SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2
+    SPKG_INSTALL_REQUIRES_sagemath_msolve
+    SPKG_INSTALL_REQUIRES_sagemath_qepcad
+    SPKG_INSTALL_REQUIRES_sagemath_rubiks
+    SPKG_INSTALL_REQUIRES_sagemath_database_cunningham
+    SPKG_INSTALL_REQUIRES_sagemath_database_jones_numfield
+    SPKG_INSTALL_REQUIRES_sagemath_database_kohel
+    SPKG_INSTALL_REQUIRES_sagemath_database_odlyzko_zeta
+    SPKG_INSTALL_REQUIRES_sagemath_database_symbolic_data
 ]
 build-backend = 'mesonpy'
 
