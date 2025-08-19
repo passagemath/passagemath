@@ -26,7 +26,7 @@ with InWheel(wheel, wheel):
         name = Path(dir).name
         if (Path(dir) / pkgdir).exists():
             found = True
-            command = f'set -o pipefail; (cd {shlex.quote(str(parent))} && tar cf - --exclude "*/semigroups/gen" {name}/{pkgdir}) | tar xvf -'
+            command = f'set -o pipefail; (cd {shlex.quote(str(parent))} && tar cf - --exclude "*/semigroups/gen" --exclude "*/semigroups/libsemigroups" --exclude "*/semigroups/doc" --exclude "*/semigroups/src" {name}/{pkgdir}) | tar xvf -'
             print(f'Running {command}')
             sys.stdout.flush()
             if os.system(f"bash -c {shlex.quote(command)}") != 0:
