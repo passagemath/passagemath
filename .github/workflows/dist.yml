@@ -335,7 +335,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm libuuid ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari xeus_gp gp2c gap_packages gap_pkg_jupyterkernel semigroups ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty gfan ecm tachyon graphs polytopes_db pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
+      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari xeus_gp gp2c gap_packages gap_pkg_jupyterkernel semigroups ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty ecm tachyon graphs polytopes_db pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
@@ -581,12 +581,6 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cddlib
 
-      - name: sagemath-gfan
-        id:   sagemath-gfan
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gfan
-
       - name: sagemath-nauty
         id:   sagemath-nauty
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
@@ -676,7 +670,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm ${{ startsWith(matrix.os, 'macos') && 'gfortran' || '' }}
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc m4ri m4rie linbox libgd singular ecl maxima brial giac palp eclib sympow bliss fricas coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip elliptic_curves ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
+      TARGETS_PRE: ccache libpng gmp mpfr mpc m4ri m4rie linbox libgd singular ecl maxima brial giac palp eclib sympow bliss gfan fricas coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip elliptic_curves ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
@@ -868,6 +862,12 @@ jobs:
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_sympow
 
       # Optional packages
+
+      - name: sagemath-gfan
+        id:   sagemath-gfan
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gfan
 
       - name: sagemath-fricas
         id:   sagemath-fricas
