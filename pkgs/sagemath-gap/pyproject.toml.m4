@@ -43,6 +43,7 @@ test            = ["passagemath-repl"]
 # GAP packages
 ctbllib         = ["passagemath-gap-pkg-ctbllib-data"]
 irredsol        = ["passagemath-gap-pkg-irredsol-data"]
+semigroups      = ["passagemath-gap-pkg-semigroups"]
 tomlib          = ["passagemath-gap-pkg-tomlib-data"]
 transgrp        = ["passagemath-gap-pkg-transgrp-data"]
 
