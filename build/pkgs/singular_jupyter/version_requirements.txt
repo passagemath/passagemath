@@ -1,1 +1,1 @@
-jupyter-kernel-singular
+passagemath-singular-jupyterkernel
