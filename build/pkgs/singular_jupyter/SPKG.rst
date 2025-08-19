@@ -4,7 +4,7 @@ singular_jupyter: Jupyter kernel for Singular
 Description
 -----------
 
-This is a beta version of a jupyter kernel for Singular.
+This is a Jupyter kernel for Singular.
 
 License
 -------
@@ -16,3 +16,4 @@ Upstream Contact
 ----------------
 
 -  https://github.com/sebasguts/jupyter_kernel_singular
+-  https://pypi.org/project/passagemath-singular-jupyterkernel/

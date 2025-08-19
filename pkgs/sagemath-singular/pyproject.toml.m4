@@ -45,7 +45,6 @@ test = [
     "passagemath-repl",
 ]
 jupyterkernel = [
-    SPKG_INSTALL_REQUIRES_jupyter_client
     SPKG_INSTALL_REQUIRES_singular_jupyter
 ]
 jupyterlab      = [
