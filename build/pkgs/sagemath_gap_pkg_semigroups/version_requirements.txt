@@ -1,1 +1,2 @@
-passagemath-gap-pkg-semigroups
+# This file is updated on every release by the update-version script
+passagemath-gap-pkg-semigroups ~= 10.6.6.0
