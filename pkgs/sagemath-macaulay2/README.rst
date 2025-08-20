@@ -99,3 +99,19 @@ Using the Python interface::
 
     In [4]: S.gens()
     Out[4]: {x, y}
+
+
+Available as extras, from other distributions
+---------------------------------------------
+
+Jupyter kernel
+~~~~~~~~~~~~~~
+
+``pip install "passagemath-macaulay2[jupyterkernel]"``
+ installs the kernel for use in the Jupyter notebook and JupyterLab
+
+``pip install "passagemath-macaulay2[notebook]"``
+ installs the kernel and the Jupyter notebook
+
+``pip install "passagemath-macaulay2[jupyterlab]"``
+ installs the kernel and JupyterLab
