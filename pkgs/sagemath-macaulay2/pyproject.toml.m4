@@ -35,6 +35,17 @@ content-type = "text/x-rst"
 test = [
     "passagemath-linbox",
 ]
+jupyterkernel = [
+    SPKG_INSTALL_REQUIRES_macaulay2_jupyter
+]
+jupyterlab      = [
+    "passagemath-macaulay2[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_jupyterlab
+]
+notebook        = [
+    "passagemath-macaulay2[jupyterkernel]",
+    SPKG_INSTALL_REQUIRES_notebook
+]
 
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
