@@ -36,7 +36,7 @@ test = [
     "passagemath-linbox",
 ]
 jupyterkernel = [
-    SPKG_INSTALL_REQUIRES_macaulay2_jupyter
+    SPKG_INSTALL_REQUIRES_sagemath_macaulay2_jupyterkernel
 ]
 jupyterlab      = [
     "passagemath-macaulay2[jupyterkernel]",
