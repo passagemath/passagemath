@@ -51,13 +51,28 @@ from sage.databases.all__sagemath_combinat import *
 from sage.databases.all__sagemath_graphs import *
 from sage.databases.all__sagemath_pari import *
 from sage.databases.all__sagemath_schemes import *
-from sage.databases.all__sagemath_database_cunningham import *
-from sage.databases.all__sagemath_database_kohel import *
-from sage.databases.all__sagemath_database_jones_numfield import *
-from sage.databases.all__sagemath_database_symbolic_data import *
 
-from sage.misc.lazy_import import lazy_import
+try:
+    from sage.databases.all__sagemath_database_cunningham import *
+except ImportError:
+    pass
 
-lazy_import('sage.databases.odlyzko', 'zeta_zeros')
+try:
+    from sage.databases.all__sagemath_database_kohel import *
+except ImportError:
+    pass
 
-del lazy_import
+try:
+    from sage.databases.all__sagemath_database_jones_numfield import *
+except ImportError:
+    pass
+
+try:
+    from sage.databases.all__sagemath_database_odlyzko_zeta import *
+except ImportError:
+    pass
+
+try:
+    from sage.databases.all__sagemath_database_symbolic_data import *
+except ImportError:
+    pass
