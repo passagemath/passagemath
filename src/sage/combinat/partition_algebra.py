@@ -118,7 +118,7 @@ def SetPartitionsAk(k):
         sage: A3.random_element()  #random                                              # needs sage.symbolic
         {{1, 3, -3, -1}, {2, -2}}
 
-        sage: A3.cardinality()
+        sage: A3.cardinality()                                                          # needs sage.libs.flint
         203
 
         sage: A2p5 = SetPartitionsAk(2.5); A2p5
@@ -616,6 +616,7 @@ def SetPartitionsBk(k):
         sage: B3 = SetPartitionsBk(3); B3
         Set partitions of {1, ..., 3, -1, ..., -3} with block size 2
 
+        sage: # needs sage.graphs
         sage: B3.first() #random
         {{2, -2}, {1, -3}, {3, -1}}
         sage: B3.last() #random
@@ -629,6 +630,7 @@ def SetPartitionsBk(k):
         sage: B2p5 = SetPartitionsBk(2.5); B2p5
         Set partitions of {1, ..., 3, -1, ..., -3} with 3 and -3 in the same block and with block size 2
 
+        sage: # needs sage.graphs
         sage: B2p5.first() #random
         {{2, -1}, {3, -3}, {1, -2}}
         sage: B2p5.last() #random
@@ -703,14 +705,14 @@ class SetPartitionsBk_k(SetPartitionsAk_k):
         """
         TESTS::
 
-            sage: SetPartitionsBk(1).list()
+            sage: SetPartitionsBk(1).list()                                             # needs sage.graphs
             [{{-1, 1}}]
 
         ::
 
-            sage: SetPartitionsBk(2).list() #random
+            sage: SetPartitionsBk(2).list() #random                                     # needs sage.graphs
             [{{2, -1}, {1, -2}}, {{2, -2}, {1, -1}}, {{1, 2}, {-1, -2}}]
-            sage: SetPartitionsBk(3).list() #random
+            sage: SetPartitionsBk(3).list() #random                                     # needs sage.graphs
             [{{2, -2}, {1, -3}, {3, -1}},
              {{2, -1}, {1, -3}, {3, -2}},
              {{1, -3}, {2, 3}, {-1, -2}},
@@ -733,7 +735,7 @@ class SetPartitionsBk_k(SetPartitionsAk_k):
         ::
 
             sage: bks = [SetPartitionsBk(i) for i in range(1, 6)]
-            sage: all(bk.cardinality() == len(bk.list()) for bk in bks)
+            sage: all(bk.cardinality() == len(bk.list()) for bk in bks)                 # needs sage.graphs
             True
         """
         for sp in SetPartitions(self._set, [2] * (len(self._set) // 2)):
