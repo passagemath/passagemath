@@ -121,10 +121,10 @@ class LieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: u = L.from_vector(vector(QQ, (1, 0, 0))); u                       # needs sage.combinat sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.libs.singular sage.modules
+                sage: u = L.from_vector(vector(QQ, (1, 0, 0))); u                       # needs sage.combinat sage.libs.singular sage.modules
                 (1, 0, 0)
-                sage: parent(u) is L                                                    # needs sage.combinat sage.modules
+                sage: parent(u) is L                                                    # needs sage.combinat sage.libs.singular sage.modules
                 True
             """
             B = self.basis()
@@ -137,8 +137,8 @@ class LieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: L.dimension()                                                     # needs sage.combinat sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.libs.singular sage.modules
+                sage: L.dimension()                                                     # needs sage.combinat sage.libs.singular sage.modules
                 3
 
             ::
@@ -156,8 +156,8 @@ class LieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = lie_algebras.sl(QQ, 2)                                        # needs sage.combinat sage.modules
-                sage: PBW = L.pbw_basis()                                               # needs sage.combinat sage.modules
+                sage: L = lie_algebras.sl(QQ, 2)                                        # needs sage.combinat sage.graphs sage.modules
+                sage: PBW = L.pbw_basis()                                               # needs sage.combinat sage.graphs sage.modules
             """
             from sage.algebras.lie_algebras.poincare_birkhoff_witt \
                 import PoincareBirkhoffWittBasis
@@ -209,8 +209,8 @@ class LieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: L.an_element().to_vector()                                        # needs sage.combinat sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.libs.singular sage.modules
+                sage: L.an_element().to_vector()                                        # needs sage.combinat sage.libs.singular sage.modules
                 (0, 0, 0)
 
             .. TODO::

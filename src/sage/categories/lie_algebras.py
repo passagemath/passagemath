@@ -550,9 +550,10 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: a, b, c = L.lie_algebra_generators()                              # needs sage.combinat sage.modules
-                sage: L.killing_form(a, b + c)                                          # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.libs.singular sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()
+                sage: a, b, c = L.lie_algebra_generators()
+                sage: L.killing_form(a, b + c)
                 0
             """
 
@@ -617,8 +618,9 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: L.is_solvable()                                                   # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.libs.singular sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()
+                sage: L.is_solvable()
                 True
             """
 
@@ -629,8 +631,9 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: L.is_nilpotent()                                                  # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.libs.singular sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()
+                sage: L.is_nilpotent()
                 True
             """
 
@@ -658,14 +661,14 @@ class LieAlgebras(Category_over_base_ring):
                 sage: L = LieAlgebra(QQ, 2, step=4)                                     # needs sage.combinat sage.modules
                 sage: L.inject_variables()                                              # needs sage.combinat sage.modules
                 Defining X_1, X_2, X_12, X_112, X_122, X_1112, X_1122, X_1222
-                sage: L.bch(X_1, X_2)                                                   # needs sage.combinat sage.modules
+                sage: L.bch(X_1, X_2)                                                   # needs sage.combinat sage.libs.flint sage.modules
                 X_1 + X_2 + 1/2*X_12 + 1/12*X_112 + 1/12*X_122 + 1/24*X_1122
 
             An example of the BCH formula in a quotient::
 
                 sage: Q = L.quotient(X_112 + X_122)                                     # needs sage.combinat sage.modules
                 sage: x, y = Q.basis().list()[:2]                                       # needs sage.combinat sage.modules
-                sage: Q.bch(x, y)                                                       # needs sage.combinat sage.modules
+                sage: Q.bch(x, y)                                                       # needs sage.combinat sage.libs.flint sage.modules
                 X_1 + X_2 + 1/2*X_12 - 1/24*X_1112
 
             The BCH formula for a non-nilpotent Lie algebra requires the
@@ -677,7 +680,7 @@ class LieAlgebras(Category_over_base_ring):
                 ...
                 ValueError: the Lie algebra is not known to be nilpotent,
                 so you must specify the precision
-                sage: L.bch(X, Y, 4)                                                    # needs sage.combinat sage.modules
+                sage: L.bch(X, Y, 4)                                                    # needs sage.combinat sage.libs.flint sage.modules
                 X + 1/12*[X, [X, Y]] + 1/24*[X, [[X, Y], Y]]
                 + 1/2*[X, Y] + 1/12*[[X, Y], Y] + Y
 
@@ -713,8 +716,8 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = lie_algebras.Heisenberg(QQ, 1)                                # needs sage.combinat sage.modules
-                sage: G = L.lie_group('G'); G                                           # needs sage.combinat sage.modules sage.symbolic
+                sage: L = lie_algebras.Heisenberg(QQ, 1)                                # needs sage.combinat sage.graphs sage.modules
+                sage: G = L.lie_group('G'); G                                           # needs sage.combinat sage.graphs sage.modules sage.symbolic
                 Lie group G of Heisenberg algebra of rank 1 over Rational Field
             """
 
@@ -946,10 +949,11 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: u = L((1, 0, 0)).to_vector(); u                                   # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.libs.singular sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()
+                sage: u = L((1, 0, 0)).to_vector(); u
                 (1, 0, 0)
-                sage: parent(u)                                                         # needs sage.combinat sage.modules
+                sage: parent(u)
                 Vector space of dimension 3 over Rational Field
             """
 
@@ -961,7 +965,7 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.libs.singularsage.modules
+                sage: # needs sage.combinat sage.libs.singular sage.modules
                 sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()
                 sage: a, b, c = L.lie_algebra_generators()
                 sage: elt = 3*a + b - c
@@ -981,9 +985,10 @@ class LieAlgebras(Category_over_base_ring):
 
             EXAMPLES::
 
-                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()     # needs sage.combinat sage.modules
-                sage: a, b, c = L.lie_algebra_generators()                              # needs sage.combinat sage.modules
-                sage: a.killing_form(b)                                                 # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.libs.singular sage.modules
+                sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()
+                sage: a, b, c = L.lie_algebra_generators()
+                sage: a.killing_form(b)
                 0
             """
             return self.parent().killing_form(self, x)
@@ -1040,7 +1045,7 @@ class LiftMorphism(Morphism):
 
         EXAMPLES::
 
-            sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()         # needs sage.combinat sage.modules
+            sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()         # needs sage.combinat sage.libs.singular sage.modules
             sage: f = L.lift                                                            # needs sage.combinat sage.libs.singular sage.modules
 
         We skip the category test since this is currently not an element of
@@ -1056,9 +1061,10 @@ class LiftMorphism(Morphism):
 
         EXAMPLES::
 
-            sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()         # needs sage.combinat sage.modules
-            sage: a, b, c = L.lie_algebra_generators()                                  # needs sage.combinat sage.modules
-            sage: L.lift(3*a + b - c)                                                   # needs sage.combinat sage.libs.singular sage.modules
+            sage: # needs sage.combinat sage.libs.singular sage.modules
+            sage: L = LieAlgebras(QQ).FiniteDimensional().WithBasis().example()
+            sage: a, b, c = L.lie_algebra_generators()
+            sage: L.lift(3*a + b - c)
             3*b0 + b1 - b2
         """
         return x.lift()
