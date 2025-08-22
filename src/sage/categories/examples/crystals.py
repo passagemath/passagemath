@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-categories
-# sage.doctest: needs sage.combinat sage.graphs
+# sage.doctest: needs sage.combinat sage.graphs sage.modules
 r"""
 Example of a crystal
 """
