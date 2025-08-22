@@ -2847,9 +2847,9 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
 
     A large unknown set of parameters (not in Andries Brouwer's database)::
 
-        sage: graphs.strongly_regular_graph(1394,175,0,25, existence=True)              # needs database_graphs sage.combinat
+        sage: graphs.strongly_regular_graph(1394,175,0,25, existence=True)              # needs database_graphs sage.combinat sage.modules
         Unknown
-        sage: graphs.strongly_regular_graph(1394,175,0,25)                              # needs database_graphs sage.combinat
+        sage: graphs.strongly_regular_graph(1394,175,0,25)                              # needs database_graphs sage.combinat sage.modules
         Traceback (most recent call last):
         ...
         RuntimeError: Sage cannot figure out if a (1394, 175, 0, 25)-strongly

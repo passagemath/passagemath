@@ -413,8 +413,8 @@ class StringMonoidElement(FreeMonoidElement):
 
         Empty strings return no counts of character frequency::
 
-            sage: M = AlphabeticStrings().encoding("")
-            sage: M.character_count()
+            sage: M = AlphabeticStrings().encoding("")                                  # needs sage.rings.real_mpfr
+            sage: M.character_count()                                                   # needs sage.rings.real_mpfr
             {}
             sage: M = BinaryStrings().encoding("")
             sage: M.character_count()
@@ -479,7 +479,7 @@ class StringMonoidElement(FreeMonoidElement):
 
         Capital letters of the English alphabet::
 
-            sage: # needs sage.rings.real_mpfr
+            sage: # needs sage.modules sage.rings.real_mpfr
             sage: M = AlphabeticStrings().encoding("abcd")
             sage: L = M.frequency_distribution().function()
             sage: sorted(L.items())
@@ -491,6 +491,7 @@ class StringMonoidElement(FreeMonoidElement):
 
         The binary number system::
 
+            sage: # needs sage.modules
             sage: M = BinaryStrings().encoding("abcd")
             sage: L = M.frequency_distribution().function()
             sage: sorted(L.items())
@@ -498,6 +499,7 @@ class StringMonoidElement(FreeMonoidElement):
 
         The hexadecimal number system::
 
+            sage: # needs sage.modules
             sage: M = HexadecimalStrings().encoding("abcd")
             sage: L = M.frequency_distribution().function()
             sage: sorted(L.items())
@@ -513,6 +515,7 @@ class StringMonoidElement(FreeMonoidElement):
         "BC", and "CD". Now find out the frequency probability of each of
         these digrams as they occur in the string "ABCD"::
 
+            sage: # needs sage.modules sage.rings.real_mpfr
             sage: M = AlphabeticStrings().encoding("abcd")
             sage: D = M.frequency_distribution(length=2).function()
             sage: sorted(D.items())

@@ -1463,7 +1463,7 @@ class ParallelogramPolyomino(ClonableList,
             ....:         [1, 1, 0, 1, 1, 0, 0, 0, 1, 0]
             ....:     ]
             ....: )
-            sage: pp._to_binary_tree_Aval_Boussicault()
+            sage: pp._to_binary_tree_Aval_Boussicault()                                 # needs sage.graphs
             [[., [[., .], [[., [., .]], .]]], [[., .], .]]
 
             sage: pp = ParallelogramPolyomino([[0, 1], [1, 0]])
@@ -1522,7 +1522,7 @@ class ParallelogramPolyomino(ClonableList,
             ....:         [1, 1, 0, 1, 1, 0, 0, 0, 1, 0]
             ....:     ]
             ....: )
-            sage: pp.to_binary_tree()
+            sage: pp.to_binary_tree()                                                   # needs sage.graphs
             [[., [[., .], [[., [., .]], .]]], [[., .], .]]
 
             sage: pp = ParallelogramPolyomino([[0, 1], [1, 0]])

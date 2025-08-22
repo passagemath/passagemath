@@ -1392,9 +1392,9 @@ class CoxeterGroups(Category_singleton):
                 sage: A = AffinePermutationGroup(['A', 7, 1])                           # needs sage.combinat sage.modules
                 sage: A._test_coxeter_relations()                                       # needs sage.combinat sage.modules
 
-                sage: cm = CartanMatrix([[2,-5,0], [-2,2,-1], [0,-1,2]])                # needs sage.graphs
-                sage: W = WeylGroup(cm)                                                 # needs sage.combinat sage.graphs sage.groups
-                sage: W._test_coxeter_relations()                                       # needs sage.combinat sage.graphs sage.groups
+                sage: cm = CartanMatrix([[2,-5,0], [-2,2,-1], [0,-1,2]])                # needs sage.graphs sage.modules
+                sage: W = WeylGroup(cm)                                                 # needs sage.combinat sage.graphs sage.groups sage.modules
+                sage: W._test_coxeter_relations()                                       # needs sage.combinat sage.graphs sage.groups sage.modules
 
                 sage: # needs sage.combinat sage.groups
                 sage: W = Permutations(4)
@@ -2050,7 +2050,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: # needs sage.graphs
+                sage: # needs sage.graphs sage.groups
                 sage: W = CoxeterGroup(['A', 2, 1])
                 sage: (r, s, t) = W.simple_reflections()
                 sage: (r * s * r * t).absolute_chain()

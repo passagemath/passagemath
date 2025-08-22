@@ -1260,7 +1260,7 @@ def load_data(n: int, user=True) -> dict:
     We test data from the ``database_mutation_class`` optional package::
 
         sage: load_data(2, user=False)      # optional - database_mutation_class
-        {('G', 2): [('AO', (((0, 1), (1, -3)), )), ('AO', (((0, 1), (3, -1)), ))]}
+        {('G', 2): [('AO', (((0, 1), (1, -3)),)), ('AO', (((0, 1), (3, -1)),))]}
         sage: D = load_data(3, user=False)  # optional - database_mutation_class
         sage: sorted(D.items())             # optional - database_mutation_class
         [(('G', 2, -1),
