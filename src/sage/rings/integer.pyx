@@ -2854,6 +2854,7 @@ cdef class Integer(sage.structure.element.EuclideanDomainElement):
 
         Check that negative bases yield complex logarithms (:issue:`39959`)::
 
+            sage: # needs sage.symbolic
             sage: 8.log(-2)
             3*log(2)/(I*pi + log(2))
             sage: (-10).log(prec=53)
@@ -2861,7 +2862,7 @@ cdef class Integer(sage.structure.element.EuclideanDomainElement):
 
         Check that zero base  yield complex logarithms (:issue:`39959`)::
 
-            sage: 8.log(0)
+            sage: 8.log(0)                                                              # needs sage.symbolic
             0
 
         TESTS::

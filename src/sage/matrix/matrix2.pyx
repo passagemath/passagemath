@@ -13853,6 +13853,7 @@ cdef class Matrix(Matrix1):
 
         Perform the extended decomposition over finite fields, which may result in non upper/lower triangular matrices::
 
+            sage: # needs sage.rings.finite_rings
             sage: A = matrix(GF(11**2),[[1,4,7],[4,1,4],[7,4,1]])
             sage: B = A.cholesky(extended=True)
             sage: A == B * B.H

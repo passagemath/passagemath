@@ -460,7 +460,6 @@ class sage__libs__flint(JoinFeature):
                               PythonModule('sage.libs.flint.arith_sage'),
                               PythonModule('sage.matrix.matrix_integer_dense'),
                               PythonModule('sage.matrix.matrix_rational_dense'),
-                              PythonModule('sage.rings.padics.padic_relaxed_element'),
                               PythonModule('sage.rings.padics.pow_computer_flint'),
                               PythonModule('sage.graphs.chrompoly'),
                               PythonModule('sage.graphs.matchpoly')],
