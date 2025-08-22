@@ -12,7 +12,7 @@ The passagemath fork uses the motto "Creating a Free Passage Between the Scienti
 and Mathematical Software Communities." It was created in October 2024 with the following goals:
 
 * providing modularized installation with pip
-  - [this major project was started in May 2020 in the Sage codebase](https://github.com/sagemath/sage/issues/29705) and completed in May 2025 in passagemath,
+  - [this major project was started in May 2020 in the Sage codebase](https://github.com/sagemath/sage/issues/29705) and completed passagemath 10.5.29 (May 2025),
 * establishing first-class membership in the scientific Python ecosystem,
 * giving [clear attribution of upstream projects](https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ),
 * providing independently usable Python interfaces to upstream libraries,
@@ -22,7 +22,7 @@ and Mathematical Software Communities." It was created in October 2024 with the 
 * [empowering Sage users to participate in the scientific Python ecosystem](https://github.com/passagemath/passagemath/issues/248) by publishing packages,
 * developing a port to [Pyodide](https://pyodide.org/en/stable/) (WebAssembly) for serverless deployment with Javascript,
 * developing a [native Windows port](https://github.com/passagemath/passagemath/issues/1044)
-  - passagemath 10.6.1 publishes the first pip-installable packages for native Windows on x86_64.
+  - passagemath 10.6.1 (July 2025) published the first pip-installable packages for native Windows on x86_64.
 
 [Full documentation](https://passagemath.org/docs/latest/html/en/index.html) is available online.
 
@@ -34,7 +34,7 @@ Join [passagemath.discourse.group](https://passagemath.discourse.group/) for hel
 
 Join the BlueSky platform and follow [@passagemath.org](https://bsky.app/profile/passagemath.org) to receive announcements.
 
-As of 2025-07-11, the [passagemath GitHub organization](https://github.com/passagemath) has 111 members.
+As of 2025-08-20, the [passagemath GitHub organization](https://github.com/passagemath) has 120 members.
 
 [People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
 development of SageMath since 2005, and hence of passagemath.
@@ -82,19 +82,6 @@ Python 3.12.7
 $ python3 -m venv ~/passagemath-venv
 $ source ~/passagemath-venv/bin/activate
 $ rehash
-```
-
-For the Linux aarch64 (ARM) platform,
-[some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
-Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
-
-```bash session
-(passagemath-venv) $ export SAGE_CONF_TARGETS="gmpy2 memory_allocator"
-(passagemath-venv) $ export SAGE_CONF_CONFIGURE_ARGS="--disable-gcc-version-check"
-(passagemath-venv) $ pip cache remove passagemath_conf
-(passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
-(passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
-(passagemath-venv) $ export PIP_PREFER_BINARY=1
 ```
 
 Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
