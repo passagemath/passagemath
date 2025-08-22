@@ -235,6 +235,36 @@ class DatabaseMatroids(PythonModule):
         PythonModule.__init__(self, "matroid_database", spkg="matroid_database")
 
 
+class DatabaseMutationClass(StaticFile):
+    r"""
+    A :class:`~sage.features.Feature` which describes the presence of the
+    :ref:`database of exceptional mutation classes of quivers <spkg_database_mutation_class>`.
+
+    EXAMPLES::
+
+        sage: from sage.features.databases import DatabaseMutationClass
+        sage: bool(DatabaseMutationClass().is_present())  # optional - database_mutation_class
+        True
+    """
+
+    def __init__(self):
+        r"""
+        TESTS::
+
+            sage: from sage.features.databases import DatabaseMutationClass
+            sage: isinstance(DatabaseMutationClass(), DatabaseMutationClass)
+            True
+        """
+        StaticFile.__init__(
+            self,
+            "database_mutation_class",
+            filename="cluster_algebra_quiver",
+            search_path=sage_data_paths(None),
+            spkg="database_mutation_class",
+            description="Database of exceptional mutation classes of quivers",
+        )
+
+
 class DatabaseCubicHecke(PythonModule):
     r"""
     A :class:`~sage.features.Feature` which describes the presence of the
@@ -319,6 +349,7 @@ def all_features():
         )),
         DatabaseKnotInfo(),
         DatabaseMatroids(),
+        DatabaseMutationClass(),
         DatabaseReflexivePolytopes(),
         DatabaseReflexivePolytopes("polytopes_db_4d"),
         JoinFeature("database_symbolic_data", (
