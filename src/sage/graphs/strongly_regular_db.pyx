@@ -2868,7 +2868,7 @@ def strongly_regular_graph(int v, int k, int l, int mu=-1, bint existence=False,
         descendant of (540, 264, 138, 120)-strongly regular graph at ... 539 vertices
         sage: graphs.strongly_regular_graph(539, 250, 105, 125)                         # needs database_graphs sage.combinat
         descendant of (540, 275, 130, 150)-strongly regular graph at ... 539 vertices
-        sage: graphs.strongly_regular_graph(209, 100, 45, 50)                           # needs database_graphs sage.libs.pari
+        sage: graphs.strongly_regular_graph(209, 100, 45, 50)                           # needs database_graphs sage.combinat sage.libs.pari sage.modules
         descendant of complement(merging of S_7 on Circulant(6,[1,4])s) at ... 209 vertices
 
 
@@ -3071,7 +3071,7 @@ def apparently_feasible_parameters(int n):
          (16, 9, 4, 6),
          (16, 10, 6, 6),
          (17, 8, 3, 4)}
-        sage: all(graphs.strongly_regular_graph(*x,existence=True) is True              # needs database_graphs sage.libs.pari
+        sage: all(graphs.strongly_regular_graph(*x,existence=True) is True              # needs database_graphs sage.combinat sage.libs.pari sage.modules
         ....:     for x in small_feasible)
         True
 
@@ -3079,7 +3079,7 @@ def apparently_feasible_parameters(int n):
     `(49,16,3,6)`-strongly regular graph)::
 
         sage: small_feasible = apparently_feasible_parameters(60)
-        sage: all(graphs.strongly_regular_graph(*x,existence=True) is True              # needs database_graphs sage.libs.pari
+        sage: all(graphs.strongly_regular_graph(*x,existence=True) is True              # needs database_graphs sage.combinat sage.libs.pari sage.modules
         ....:     for x in small_feasible)
         False
     """

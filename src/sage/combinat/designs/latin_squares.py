@@ -347,7 +347,7 @@ def mutually_orthogonal_latin_squares(k, n, partitions=False, check=True):
 
     Verify the construction from [KD2015]_::
 
-        sage: designs.mutually_orthogonal_latin_squares(2, 9)
+        sage: designs.mutually_orthogonal_latin_squares(2, 9)                           # needs sage.libs.pari
         [
         [0 1 2 3 4 5 6 7 8]  [0 1 2 3 4 5 6 7 8]
         [2 3 6 4 1 8 0 5 7]  [3 8 4 7 5 2 1 0 6]

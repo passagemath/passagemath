@@ -1453,7 +1453,7 @@ class CoefficientRing(UniqueRepresentation, FractionField_generic):
             sage: s(g).parent()
             Multivariate Lazy Taylor Series Ring in a, b over CoefficientRing over Integer Ring
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.modules sage.rings.real_interval_field
             sage: S = SymmetricFunctions(QQ).h().fraction_field()
             sage: PF = CoefficientRing(S)
             sage: L.<a, b> = LazyPowerSeriesRing(S)

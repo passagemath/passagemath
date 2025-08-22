@@ -7,7 +7,7 @@ Features for testing the presence of various databases
 #       Copyright (C) 2016      Julian Rüth
 #                     2018-2019 Jeroen Demeyer
 #                     2018      Timo Kaufmann
-#                     2020-2022 Matthias Koeppe
+#                     2020-2025 Matthias Koeppe
 #                     2020-2022 Sebastian Oehms
 #                     2021      Kwankyu Lee
 #
@@ -19,6 +19,7 @@ Features for testing the presence of various databases
 
 from sage.env import sage_data_paths
 from sage.features import PythonModule, StaticFile
+from sage.features.join_feature import JoinFeature
 
 
 class DatabaseCremona(StaticFile):
@@ -172,7 +173,7 @@ class DatabaseJones(StaticFile):
         """
         StaticFile.__init__(
             self,
-            "database_jones_numfield",
+            "database_jones_numfield_data",
             filename="jones.sobj",
             search_path=sage_data_paths("jones"),
             spkg="database_jones_numfield",
@@ -232,6 +233,36 @@ class DatabaseMatroids(PythonModule):
             True
         """
         PythonModule.__init__(self, "matroid_database", spkg="matroid_database")
+
+
+class DatabaseMutationClass(StaticFile):
+    r"""
+    A :class:`~sage.features.Feature` which describes the presence of the
+    :ref:`database of exceptional mutation classes of quivers <spkg_database_mutation_class>`.
+
+    EXAMPLES::
+
+        sage: from sage.features.databases import DatabaseMutationClass
+        sage: bool(DatabaseMutationClass().is_present())  # optional - database_mutation_class
+        True
+    """
+
+    def __init__(self):
+        r"""
+        TESTS::
+
+            sage: from sage.features.databases import DatabaseMutationClass
+            sage: isinstance(DatabaseMutationClass(), DatabaseMutationClass)
+            True
+        """
+        StaticFile.__init__(
+            self,
+            "database_mutation_class",
+            filename="cluster_algebra_quiver",
+            search_path=sage_data_paths(None),
+            spkg="database_mutation_class",
+            description="Database of exceptional mutation classes of quivers",
+        )
 
 
 class DatabaseCubicHecke(PythonModule):
@@ -306,12 +337,22 @@ def all_features():
         PythonModule("conway_polynomials", spkg="conway_polynomials", type="standard"),
         DatabaseCremona(),
         DatabaseCremona("cremona_mini", type="standard"),
+        DatabaseCubicHecke(),
+        JoinFeature("cunningham_tables", (
+            PythonModule("sage.databases.cunningham_tables"),
+        )),
         DatabaseEllcurves(),
         DatabaseGraphs(),
-        DatabaseJones(),
+        JoinFeature("database_jones_numfield", (
+            DatabaseJones(),
+            PythonModule("sage.databases.jones")
+        )),
         DatabaseKnotInfo(),
         DatabaseMatroids(),
-        DatabaseCubicHecke(),
+        DatabaseMutationClass(),
         DatabaseReflexivePolytopes(),
         DatabaseReflexivePolytopes("polytopes_db_4d"),
+        JoinFeature("database_symbolic_data", (
+            PythonModule("sage.databases.symbolic_data"),
+        )),
     ]
