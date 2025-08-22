@@ -692,6 +692,7 @@ class AlphabeticStringMonoid(StringMonoid_class):
         The characteristic frequency probability distribution table
         of Lewand [Lew2000]_::
 
+            sage: # needs sage.rings.real_mpfr
             sage: table = A.characteristic_frequency(table_name='lewand')
             sage: sorted(table.items())
             <BLANKLINE>
@@ -725,6 +726,7 @@ class AlphabeticStringMonoid(StringMonoid_class):
         Illustrating the difference between :func:`characteristic_frequency`
         and :func:`frequency_distribution() <sage.monoids.string_monoid_element.StringMonoidElement.frequency_distribution>`::
 
+            sage: # needs sage.rings.real_mpfr
             sage: A = AlphabeticStrings()
             sage: M = A.encoding("abcd")
             sage: FD = M.frequency_distribution().function()
@@ -768,6 +770,7 @@ class AlphabeticStringMonoid(StringMonoid_class):
 
         The table name must be either "beker_piper" or "lewand"::
 
+            sage: # needs sage.rings.real_mpfr
             sage: table = A.characteristic_frequency(table_name="")
             Traceback (most recent call last):
             ...
