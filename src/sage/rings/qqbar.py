@@ -3895,6 +3895,8 @@ class AlgebraicNumber_base(sage.structure.element.FieldElement):
             0.9324722294043558? + 0.3612416661871530? \sqrt{-1}
             sage: latex(AA(19).sqrt())
             4.358898943540674?
+
+            sage: # needs sage.symbolic
             sage: AA.options.display_format = 'radical'
             sage: latex(AA(19).sqrt())
             \sqrt{19}

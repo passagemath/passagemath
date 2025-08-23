@@ -873,7 +873,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             + (1/24*x^5*y+8/3*x^4*y^2+27/4*x^3*y^3+4/3*x^2*y^4+1/120*x*y^5)
             + O(x,y)^7
 
-            sage: # needs sage.modules
+            sage: # needs sage.combinat sage.modules
             sage: h = SymmetricFunctions(QQ).h()
             sage: S = LazySymmetricFunctions(h)
             sage: E = S(lambda n: h[n])
