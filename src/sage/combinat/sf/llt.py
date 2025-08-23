@@ -411,7 +411,6 @@ class LLT_class(UniqueRepresentation):
              in the level 3 LLT spin basis
             sage: HSp3([1])^2
             HSp3[1, 1] + (-t+1)*HSp3[2]
-
             sage: s = Sym.schur()
             sage: HSp3(s([2]))
             HSp3[2]
