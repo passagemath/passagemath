@@ -28,13 +28,13 @@ EXAMPLES::
     sage: CremonaDatabase()
     Cremona's database of elliptic curves with conductor...
 
-    sage: JonesDatabase()
+    sage: JonesDatabase()                                       # optional - database_jones_numfield
     John Jones's table of number fields with bounded ramification and degree <= 6
 
     sage: oeis
     The On-Line Encyclopedia of Integer Sequences (https://oeis.org/)
 
-    sage: SymbolicData()
+    sage: SymbolicData()                                        # optional - database_symbolic_data
     SymbolicData with ... ideals
 """
 

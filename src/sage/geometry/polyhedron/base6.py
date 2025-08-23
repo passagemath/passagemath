@@ -1268,7 +1268,7 @@ class Polyhedron_base6(Polyhedron_base5):
              (Number Field in sqrt5 with defining polynomial x^2 - 5
               with sqrt5 = 2.236067977499790?)^2
              defined as the convex hull of 5 vertices
-            sage: F.affine_hull_projection(orthonormal=True, extend=True)
+            sage: F.affine_hull_projection(orthonormal=True, extend=True)               # needs sage.symbolic
             A 2-dimensional polyhedron in AA^2 defined as the convex hull of 5 vertices
 
             sage: # needs sage.rings.number_field
@@ -1329,15 +1329,15 @@ class Polyhedron_base6(Polyhedron_base5):
             sage: _, c= P.is_inscribed(certificate=True)
             sage: c
             (0.4721359549995794?, 0.6498393924658126?)
-            sage: circumradius = (c - vector(P.vertices()[0])).norm()
+            sage: circumradius = (c - vector(P.vertices()[0])).norm()                   # needs sage.symbolic
             sage: p = polytopes.regular_polygon(5)
             sage: p.volume()
             2.377641290737884?
             sage: P.volume()
             1.53406271079097?
-            sage: p.volume()*circumradius^2
+            sage: p.volume()*circumradius^2                                             # needs sage.symbolic
             1.534062710790965?
-            sage: P.volume() == p.volume()*circumradius^2
+            sage: P.volume() == p.volume()*circumradius^2                               # needs sage.symbolic
             True
 
         One can also use ``orthogonal`` parameter to calculate volumes;
@@ -1355,7 +1355,7 @@ class Polyhedron_base6(Polyhedron_base5):
             sage: Adet = (A.matrix().transpose()*A.matrix()).det()
             sage: Pnormal.volume()
             1.53406271079097?
-            sage: Pgonal.volume()/Adet.sqrt(extend=True)
+            sage: Pgonal.volume()/Adet.sqrt(extend=True)                                # needs sage.symbolic
             -80*(55*sqrt(5) - 123)/sqrt(-6368*sqrt(5) + 14240)
             sage: Pgonal.volume()/AA(Adet).sqrt().n(digits=20)
             1.5340627107909646813
