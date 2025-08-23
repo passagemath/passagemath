@@ -17,6 +17,7 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-meataxe"
 description = "passagemath: Matrices over small finite fields with meataxe"
 dependencies = [
+    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sagemath_modules
 ]
 dynamic = ["version"]
@@ -25,6 +26,12 @@ include(`pyproject_toml_metadata.m4')dnl'
 [project.readme]
 file = "README.rst"
 content-type = "text/x-rst"
+
+[project.optional-dependencies]
+test = [
+     "passagemath-pari",
+     "passagemath-repl",
+]
 
 [tool.setuptools]
 include-package-data = false
