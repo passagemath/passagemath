@@ -1,1 +1,1 @@
-slabbe
+slabbe @ git+https://github.com/passagemath/passagemath-pkg-slabbe.git
