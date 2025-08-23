@@ -1,0 +1,9 @@
+{
+    "sage.matrix.matrix_gfpn_dense": {
+        "ntests": 275
+    },
+    "sage.matrix.matrix_space": {
+        "failed": true,
+        "ntests": 396
+    }
+}
