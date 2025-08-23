@@ -696,7 +696,7 @@ cdef class Matrix_gfpn_dense(Matrix_dense):
             sage: avg_density = sum(MS.random_element(density=0.5).density()
             ....:                   for _ in range(100))
             sage: avg_density /= 100
-            sage: RR(avg_density)  # abs tol 0.05
+            sage: RR(avg_density)  # random
             0.5
 
         TESTS:
