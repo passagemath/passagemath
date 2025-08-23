@@ -7030,7 +7030,7 @@ cdef class Matrix(Matrix1):
             UserWarning: Using generic algorithm for an inexact ring,
             which will probably give incorrect results due to numerical precision issues.
             [-1.41421356237310*I, 1.41421356237310*I]
-            sage: m.eigenvalues(algorithm="flint")
+            sage: m.eigenvalues(algorithm="flint")                                      # needs sage.libs.flint
             doctest:warning...
             FutureWarning: This class/method/function is marked as experimental.
             It, its functionality or its interface might change without a formal deprecation.
