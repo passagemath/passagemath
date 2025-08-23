@@ -17,6 +17,7 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-meataxe"
 description = "passagemath: Matrices over small finite fields with meataxe"
 dependencies = [
+    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sagemath_modules
 ]
 dynamic = ["version"]
