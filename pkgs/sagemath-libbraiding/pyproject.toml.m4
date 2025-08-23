@@ -32,6 +32,7 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
+     "passagemath-combinat",
      "passagemath-graphs",
      "passagemath-groups",
      "passagemath-repl",
