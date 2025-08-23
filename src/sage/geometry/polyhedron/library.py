@@ -181,7 +181,7 @@ def project_points(*points, **kwds):
 
         sage: V = [ vector(v) for v in IntegerVectors(n=4, length=2) ]
         sage: P = project_points(*V, base_ring=AA)                                      # needs sage.combinat sage.rings.number_field
-        sage: for i in range(len(V)):                                                   # needs sage.combinat sage.rings.number_field
+        sage: for i in range(len(V)):                                                   # needs sage.combinat sage.rings.number_field sage.symbolic
         ....:     for j in range(len(V)):
         ....:         assert (V[i]-V[j]).norm() == (P[i]-P[j]).norm()
     """

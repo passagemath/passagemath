@@ -1268,7 +1268,7 @@ class Polyhedron_base6(Polyhedron_base5):
              (Number Field in sqrt5 with defining polynomial x^2 - 5
               with sqrt5 = 2.236067977499790?)^2
              defined as the convex hull of 5 vertices
-            sage: F.affine_hull_projection(orthonormal=True, extend=True)
+            sage: F.affine_hull_projection(orthonormal=True, extend=True)               # needs sage.symbolic
             A 2-dimensional polyhedron in AA^2 defined as the convex hull of 5 vertices
 
             sage: # needs sage.rings.number_field
