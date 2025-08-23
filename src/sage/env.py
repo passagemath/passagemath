@@ -262,6 +262,12 @@ else:
                for data in ['galdata', 'seadata']):
             os.environ['GP_DATA_DIR'] = pari_datadir
             break
+    for p in sage_wheels.__path__:
+        sympow_new_data = os.path.join(p, 'libexec', 'sympow', 'new_data')
+        if os.path.exists(sympow_new_data):
+            os.environ['SYMPOW_PKGDATADIR'] = os.path.join(p, 'share', 'sympow')
+            os.environ['SYMPOW_PKGLIBEXECDIR'] = os.path.join(p, 'libexec', 'sympow')
+            break
 
 try:
     import ecl

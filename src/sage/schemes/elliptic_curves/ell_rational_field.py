@@ -1726,9 +1726,9 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve("974b1")
             sage: r = E.rank(); r
             0
-            sage: E.analytic_rank_upper_bound(max_Delta=1, root_number='ignore')
+            sage: E.analytic_rank_upper_bound(max_Delta=1, root_number='ignore')        # needs sage.symbolic
             1
-            sage: E.analytic_rank_upper_bound(max_Delta=1.3, root_number='ignore')
+            sage: E.analytic_rank_upper_bound(max_Delta=1.3, root_number='ignore')      # needs sage.symbolic
             0
 
         Knowing the root number of `E` allows us to use smaller Delta values
@@ -1736,7 +1736,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         ::
 
-            sage: E.analytic_rank_upper_bound(max_Delta=0.6, root_number='compute')
+            sage: E.analytic_rank_upper_bound(max_Delta=0.6, root_number='compute')     # needs sage.symbolic
             0
 
         There are a small number of curves which have pathologically low-lying
@@ -1751,9 +1751,9 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([0, -1, 0, -7460362000712, -7842981500851012704])
             sage: N, r = E.conductor(), E.analytic_rank(); N, r
             (256944, 0)
-            sage: E.analytic_rank_upper_bound(max_Delta=1, adaptive=False)
+            sage: E.analytic_rank_upper_bound(max_Delta=1, adaptive=False)              # needs sage.symbolic
             2
-            sage: E.analytic_rank_upper_bound(max_Delta=2, adaptive=False)
+            sage: E.analytic_rank_upper_bound(max_Delta=2, adaptive=False)              # needs sage.symbolic
             2
 
         This method is can be called on curves with large conductor.
@@ -1761,7 +1761,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         ::
 
             sage: E = EllipticCurve([-2934,19238])
-            sage: E.analytic_rank_upper_bound()
+            sage: E.analytic_rank_upper_bound()                                         # needs sage.symbolic
             1
 
         And it can bound rank on curves with *very* large conductor, so long as
@@ -1777,7 +1777,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: E = EllipticCurve([1, -1, 1, a4, a6])
             sage: bad_primes = [2, 3, 5, 7, 11, 13, 17, 19, 48463]
             sage: N = 3455601108357547341532253864901605231198511505793733138900595189472144724781456635380154149870961231592352897621963802238155192936274322687070
-            sage: E.analytic_rank_upper_bound(max_Delta=2.37, adaptive=False,  # long time
+            sage: E.analytic_rank_upper_bound(max_Delta=2.37, adaptive=False,  # long time, needs sage.symbolic
             ....:                             N=N, root_number=1,
             ....:                             bad_primes=bad_primes, ncpus=2)
             32
@@ -6138,7 +6138,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         The bug reported at :issue:`4897` is now fixed::
 
-            sage: [P[0] for P in EllipticCurve([0,0,0,-468,2592]).integral_points()]
+            sage: [P[0] for P in EllipticCurve([0,0,0,-468,2592]).integral_points()]    # needs sage.symbolic
             [-24, -18, -14, -6, -3, 4, 6, 18, 21, 24, 36, 46, 102, 168, 186, 381, 1476, 2034, 67246]
 
         See :issue:`22063`::
