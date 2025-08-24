@@ -133,9 +133,9 @@ including exponentiation::
     sage: M^2
     [x^2 + x   2*x^3]
     [      2 x^2 + x]
-    sage: e^M                                                                           # needs sage.libs.maxima
-    [          1/2*(e^(2*sqrt(x)) + 1)*e^(x - sqrt(x)) 1/2*(x*e^(2*sqrt(x)) - x)*sqrt(x)*e^(x - sqrt(x))]
-    [  1/2*(e^(2*sqrt(x)) - 1)*e^(x - sqrt(x))/x^(3/2)           1/2*(e^(2*sqrt(x)) + 1)*e^(x - sqrt(x))]
+    sage: e^M
+    [        1/2*(e^(2*sqrt(x)) + 1)*e^(x - sqrt(x)) 1/2*x^(3/2)*(e^(2*sqrt(x)) - 1)*e^(x - sqrt(x))]
+    [1/2*(e^(2*sqrt(x)) - 1)*e^(x - sqrt(x))/x^(3/2)         1/2*(e^(2*sqrt(x)) + 1)*e^(x - sqrt(x))]
 
 Complex exponentiation works, but may require a patched version of
 maxima (:issue:`32898`) for now::
@@ -1865,9 +1865,9 @@ def laplace(ex, t, s, algorithm='maxima'):
         (a, s, t)
         sage: f = exp(2*t + a) * sin(t) * t; f
         t*e^(a + 2*t)*sin(t)
-        sage: L = laplace(f, t, s); L.simplify_rational()                               # needs sage.libs.maxima
-        2*(s*e^a - 2*e^a)/(s^4 - 8*s^3 + 26*s^2 - 40*s + 25)
-        sage: inverse_laplace(L, s, t)                                                  # needs sage.libs.maxima
+        sage: L = laplace(f, t, s); L
+        2*(s - 2)*e^a/(s^4 - 8*s^3 + 26*s^2 - 40*s + 25)
+        sage: inverse_laplace(L, s, t)
         t*e^(a + 2*t)*sin(t)
 
     The Laplace transform of the exponential function::
