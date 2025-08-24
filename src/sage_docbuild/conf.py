@@ -547,7 +547,7 @@ mathjax3_config = {
     },
 }
 
-if os.environ.get('SAGE_USE_CDNS', 'no') == 'yes':
+if os.environ.get('SAGE_USE_CDNS', 'yes') == 'yes':
     mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
 else:
     mathjax_path = os.path.join(MATHJAX_DIR, 'tex-chtml.js')
