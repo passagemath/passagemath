@@ -625,11 +625,8 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
                     z        Pi                2
                  x y  + Sqrt[--] FresnelS[Sqrt[--] x]
                              2                 Pi
-        sage: print(f.integral(x))                                                      # needs sage.libs.maxima
-        x*y^z + 1/16*sqrt(pi)*((I + 1)*sqrt(2)*erf((1/2*I + 1/2)*sqrt(2)*x)
-                                + (I - 1)*sqrt(2)*erf((1/2*I - 1/2)*sqrt(2)*x)
-                                - (I - 1)*sqrt(2)*erf(sqrt(-I)*x)
-                                + (I + 1)*sqrt(2)*erf((-1)^(1/4)*x))
+        sage: print(f.integral(x))
+        x*y^z + 1/16*sqrt(pi)*((I + 1)*sqrt(2)*erf((1/2*I + 1/2)*sqrt(2)*x) - (I - 1)*sqrt(2)*erf(sqrt(-I)*x) - 2*sqrt(2)*imag_part(erf((-1)^(1/4)*x)) + 2*sqrt(2)*real_part(erf((-1)^(1/4)*x)))
 
     Alternatively, just use algorithm='mathematica_free' to integrate via Mathematica
     over the internet (does NOT require a Mathematica license!)::
@@ -1068,8 +1065,8 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
         sage: a = SR.var('a')
         sage: assume(a > 0)
         sage: assume(a < 1)
-        sage: integrate(x*log(1/(a*x+(1-x)^2)), x, 0, 1, algorithm='maxima')            # needs sage.libs.maxima
-        1/4*a^2*log(a) + 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)*(a - 2)/(a^2 - 4*a)) - 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)/(a - 4)) - a*log(a) - sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)*(a - 2)/(a^2 - 4*a)) + sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)/(a - 4)) - 1/2*a + 3/2
+        sage: integrate(x*log(1/(a*x+(1-x)^2)), x, 0, 1, algorithm='maxima')
+        1/4*a^2*log(a) - 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)/(a - 4)) + 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)*(a - 2)/((a - 4)*a)) - a*log(a) + sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)/(a - 4)) - sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)*(a - 2)/((a - 4)*a)) - 1/2*a + 3/2
 
     Check that :issue:`25905` is fixed::
 
