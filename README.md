@@ -431,15 +431,6 @@ Full Installation from Source as passagemath
     (passagemath-venv) $ export SAGE_CONF_TARGETS="build-local"
     ```
 
-    If you are on the Linux aarch64 (ARM) platform,
-    [some third-party packages are still missing binary wheels on PyPI](https://github.com/passagemath/passagemath/issues/347).
-    Arrange for these wheels to be built from source as well,
-    by replacing the last command by the following:
-
-    ```bash session
-    (passagemath-venv) $ export SAGE_CONF_TARGETS="build-local gmpy2 memory_allocator"
-    ```
-
     If you wish to build all Python dependencies from source as well,
     using the pinned and patched versions defined by the Sage distribution,
     instead of taking them from binary wheels on PyPI, replace the last command by:
