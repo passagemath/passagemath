@@ -8,7 +8,7 @@
     },
     "sage.arith.misc": {
         "failed": true,
-        "ntests": 1080
+        "ntests": 1086
     },
     "sage.arith.numerical_approx": {
         "ntests": 1
@@ -36,7 +36,7 @@
         "ntests": 136
     },
     "sage.categories.additive_monoids": {
-        "ntests": 16
+        "ntests": 20
     },
     "sage.categories.additive_semigroups": {
         "ntests": 28
@@ -78,7 +78,7 @@
         "ntests": 42
     },
     "sage.categories.category": {
-        "ntests": 450
+        "ntests": 452
     },
     "sage.categories.category_cy_helper": {
         "ntests": 27
@@ -90,7 +90,7 @@
         "ntests": 74
     },
     "sage.categories.category_with_axiom": {
-        "ntests": 328
+        "ntests": 330
     },
     "sage.categories.chain_complexes": {
         "ntests": 20
@@ -126,7 +126,7 @@
         "ntests": 7
     },
     "sage.categories.commutative_rings": {
-        "ntests": 101
+        "ntests": 103
     },
     "sage.categories.complete_discrete_valuation": {
         "ntests": 30
@@ -177,7 +177,7 @@
         "ntests": 1
     },
     "sage.categories.enumerated_sets": {
-        "ntests": 132
+        "ntests": 134
     },
     "sage.categories.euclidean_domains": {
         "ntests": 22
@@ -203,9 +203,6 @@
     },
     "sage.categories.examples.filtered_modules_with_basis": {
         "ntests": 12
-    },
-    "sage.categories.examples.finite_dimensional_lie_algebras_with_basis": {
-        "ntests": 1
     },
     "sage.categories.examples.finite_enumerated_sets": {
         "ntests": 29
@@ -262,7 +259,7 @@
         "ntests": 27
     },
     "sage.categories.fields": {
-        "ntests": 137
+        "ntests": 149
     },
     "sage.categories.filtered_algebras": {
         "ntests": 5
@@ -285,7 +282,7 @@
         "ntests": 172
     },
     "sage.categories.finite_coxeter_groups": {
-        "ntests": 10
+        "ntests": 12
     },
     "sage.categories.finite_dimensional_algebras_with_basis": {
         "ntests": 66
@@ -306,7 +303,7 @@
         "ntests": 34
     },
     "sage.categories.finite_dimensional_modules_with_basis": {
-        "ntests": 58
+        "ntests": 59
     },
     "sage.categories.finite_dimensional_nilpotent_lie_algebras_with_basis": {
         "ntests": 19
@@ -318,7 +315,8 @@
         "ntests": 123
     },
     "sage.categories.finite_fields": {
-        "ntests": 14
+        "failed": true,
+        "ntests": 39
     },
     "sage.categories.finite_groups": {
         "ntests": 7
@@ -429,7 +427,7 @@
         "ntests": 207
     },
     "sage.categories.homsets": {
-        "ntests": 56
+        "ntests": 57
     },
     "sage.categories.hopf_algebras": {
         "ntests": 15
@@ -472,7 +470,7 @@
         "ntests": 4
     },
     "sage.categories.lie_algebras": {
-        "ntests": 112
+        "ntests": 96
     },
     "sage.categories.lie_algebras_with_basis": {
         "ntests": 19
@@ -490,7 +488,7 @@
         "ntests": 1
     },
     "sage.categories.magmas": {
-        "ntests": 147
+        "ntests": 148
     },
     "sage.categories.magmas_and_additive_magmas": {
         "ntests": 21
@@ -517,13 +515,13 @@
         "ntests": 117
     },
     "sage.categories.modules_with_basis": {
-        "ntests": 271
+        "ntests": 277
     },
     "sage.categories.monoid_algebras": {
         "ntests": 4
     },
     "sage.categories.monoids": {
-        "ntests": 81
+        "ntests": 84
     },
     "sage.categories.morphism": {
         "ntests": 131
@@ -532,10 +530,14 @@
         "ntests": 19
     },
     "sage.categories.number_fields": {
-        "ntests": 41
+        "ntests": 39
     },
     "sage.categories.objects": {
         "ntests": 12
+    },
+    "sage.categories.ore_modules": {
+        "failed": true,
+        "ntests": 44
     },
     "sage.categories.partially_ordered_monoids": {
         "ntests": 4
@@ -580,9 +582,6 @@
     "sage.categories.realizations": {
         "ntests": 21
     },
-    "sage.categories.regular_crystals": {
-        "ntests": 3
-    },
     "sage.categories.right_modules": {
         "ntests": 4
     },
@@ -590,10 +589,10 @@
         "ntests": 9
     },
     "sage.categories.rings": {
-        "ntests": 211
+        "ntests": 240
     },
     "sage.categories.rngs": {
-        "ntests": 6
+        "ntests": 20
     },
     "sage.categories.schemes": {
         "ntests": 39
@@ -602,13 +601,13 @@
         "ntests": 112
     },
     "sage.categories.semirings": {
-        "ntests": 7
+        "ntests": 10
     },
     "sage.categories.semisimple_algebras": {
         "ntests": 15
     },
     "sage.categories.sets_cat": {
-        "ntests": 412
+        "ntests": 430
     },
     "sage.categories.sets_with_grading": {
         "ntests": 23
@@ -681,13 +680,13 @@
         "ntests": 28
     },
     "sage.combinat.combinat": {
-        "ntests": 236
+        "ntests": 241
     },
     "sage.combinat.combinat_cython": {
         "ntests": 22
     },
     "sage.combinat.combination": {
-        "ntests": 97
+        "ntests": 108
     },
     "sage.combinat.combinatorial_map": {
         "ntests": 75
@@ -699,7 +698,7 @@
         "ntests": 61
     },
     "sage.combinat.integer_lists.base": {
-        "ntests": 116
+        "ntests": 118
     },
     "sage.combinat.integer_lists.invlex": {
         "ntests": 304
@@ -723,19 +722,19 @@
         "ntests": 9
     },
     "sage.combinat.partition": {
-        "ntests": 1282
+        "ntests": 1292
     },
     "sage.combinat.partitions": {
         "ntests": 69
     },
     "sage.combinat.permutation": {
-        "ntests": 1184
+        "ntests": 1174
     },
     "sage.combinat.permutation_cython": {
         "ntests": 39
     },
     "sage.combinat.q_analogues": {
-        "ntests": 125
+        "ntests": 126
     },
     "sage.combinat.ranker": {
         "ntests": 48
@@ -753,7 +752,7 @@
         "ntests": 2
     },
     "sage.combinat.tuple": {
-        "ntests": 33
+        "ntests": 69
     },
     "sage.cpython.atexit": {
         "ntests": 19
@@ -779,9 +778,6 @@
     "sage.cpython.type": {
         "ntests": 7
     },
-    "sage.cpython.wrapperdescr": {
-        "ntests": 13
-    },
     "sage.data_structures.bitset": {
         "ntests": 431
     },
@@ -796,6 +792,9 @@
     },
     "sage.data_structures.pairing_heap": {
         "ntests": 284
+    },
+    "sage.data_structures.stream": {
+        "ntests": 1071
     },
     "sage.databases.conway": {
         "ntests": 42
@@ -813,7 +812,7 @@
         "ntests": 42
     },
     "sage.doctest.fixtures": {
-        "ntests": 59
+        "ntests": 55
     },
     "sage.doctest.forker": {
         "ntests": 254
@@ -841,7 +840,7 @@
         "ntests": 173
     },
     "sage.env": {
-        "ntests": 40
+        "ntests": 42
     },
     "sage.ext.fast_callable": {
         "failed": true,
@@ -875,7 +874,7 @@
         "ntests": 3
     },
     "sage.features.databases": {
-        "ntests": 38
+        "ntests": 40
     },
     "sage.features.dot2tex": {
         "ntests": 4
@@ -896,7 +895,7 @@
         "ntests": 6
     },
     "sage.features.fricas": {
-        "ntests": 6
+        "ntests": 8
     },
     "sage.features.frobby": {
         "ntests": 4
@@ -957,6 +956,9 @@
     },
     "sage.features.meataxe": {
         "ntests": 4
+    },
+    "sage.features.meson_editable": {
+        "ntests": 6
     },
     "sage.features.mip_backends": {
         "ntests": 9
@@ -1024,6 +1026,9 @@
     "sage.features.sympow": {
         "ntests": 4
     },
+    "sage.features.tachyon": {
+        "ntests": 4
+    },
     "sage.features.tdlib": {
         "ntests": 2
     },
@@ -1071,7 +1076,7 @@
     },
     "sage.functions.other": {
         "failed": true,
-        "ntests": 238
+        "ntests": 239
     },
     "sage.functions.piecewise": {
         "ntests": 6
@@ -1089,7 +1094,7 @@
         "ntests": 55
     },
     "sage.functions.trig": {
-        "ntests": 126
+        "ntests": 127
     },
     "sage.functions.wigner": {
         "ntests": 24
@@ -1098,7 +1103,7 @@
         "ntests": 15
     },
     "sage.groups.generic": {
-        "ntests": 170
+        "ntests": 174
     },
     "sage.groups.group": {
         "ntests": 45
@@ -1156,7 +1161,7 @@
         "ntests": 16
     },
     "sage.libs.pari.convert_sage": {
-        "ntests": 84
+        "ntests": 83
     },
     "sage.libs.pari.convert_sage_complex_double": {
         "ntests": 2
@@ -1166,7 +1171,7 @@
     },
     "sage.libs.pari.tests": {
         "failed": true,
-        "ntests": 627
+        "ntests": 628
     },
     "sage.misc.abstract_method": {
         "ntests": 33
@@ -1184,7 +1189,7 @@
         "ntests": 150
     },
     "sage.misc.cachefunc": {
-        "ntests": 692
+        "ntests": 718
     },
     "sage.misc.call": {
         "ntests": 28
@@ -1193,7 +1198,6 @@
         "ntests": 12
     },
     "sage.misc.citation": {
-        "failed": true,
         "ntests": 10
     },
     "sage.misc.classcall_metaclass": {
@@ -1206,7 +1210,7 @@
         "ntests": 21
     },
     "sage.misc.converting_dict": {
-        "ntests": 53
+        "ntests": 59
     },
     "sage.misc.decorators": {
         "ntests": 127
@@ -1219,7 +1223,7 @@
     },
     "sage.misc.dev_tools": {
         "failed": true,
-        "ntests": 62
+        "ntests": 59
     },
     "sage.misc.edit_module": {
         "ntests": 16
@@ -1242,7 +1246,7 @@
     },
     "sage.misc.functional": {
         "failed": true,
-        "ntests": 286
+        "ntests": 288
     },
     "sage.misc.gperftools": {
         "ntests": 17
@@ -1261,7 +1265,7 @@
     },
     "sage.misc.latex": {
         "failed": true,
-        "ntests": 220
+        "ntests": 221
     },
     "sage.misc.latex_macros": {
         "ntests": 11
@@ -1276,7 +1280,6 @@
         "ntests": 23
     },
     "sage.misc.lazy_import": {
-        "failed": true,
         "ntests": 279
     },
     "sage.misc.lazy_import_cache": {
@@ -1302,7 +1305,7 @@
         "ntests": 162
     },
     "sage.misc.misc_c": {
-        "ntests": 121
+        "ntests": 122
     },
     "sage.misc.mrange": {
         "ntests": 96
@@ -1376,7 +1379,7 @@
         "ntests": 102
     },
     "sage.misc.sageinspect": {
-        "ntests": 322
+        "ntests": 371
     },
     "sage.misc.search": {
         "ntests": 4
@@ -1392,7 +1395,6 @@
         "ntests": 11
     },
     "sage.misc.superseded": {
-        "failed": true,
         "ntests": 59
     },
     "sage.misc.table": {
@@ -1435,7 +1437,7 @@
         "ntests": 3
     },
     "sage.parallel.decorate": {
-        "ntests": 89
+        "ntests": 92
     },
     "sage.parallel.map_reduce": {
         "ntests": 284
@@ -1507,22 +1509,21 @@
         "ntests": 76
     },
     "sage.repl.ipython_kernel.install": {
-        "failed": true,
         "ntests": 35
     },
     "sage.repl.ipython_kernel.interact": {
-        "ntests": 42
+        "ntests": 40
     },
     "sage.repl.ipython_kernel.kernel": {
         "ntests": 12
     },
     "sage.repl.ipython_kernel.widgets": {
         "failed": true,
-        "ntests": 98
+        "ntests": 96
     },
     "sage.repl.ipython_kernel.widgets_sagenb": {
         "failed": true,
-        "ntests": 77
+        "ntests": 75
     },
     "sage.repl.ipython_tests": {
         "ntests": 26
@@ -1583,7 +1584,7 @@
         "ntests": 213
     },
     "sage.rings.big_oh": {
-        "ntests": 22
+        "ntests": 26
     },
     "sage.rings.continued_fraction": {
         "ntests": 285
@@ -1604,7 +1605,7 @@
         "ntests": 43
     },
     "sage.rings.finite_rings.element_base": {
-        "ntests": 202
+        "ntests": 206
     },
     "sage.rings.finite_rings.element_givaro": {
         "ntests": 230
@@ -1618,7 +1619,7 @@
     },
     "sage.rings.finite_rings.finite_field_base": {
         "failed": true,
-        "ntests": 301
+        "ntests": 275
     },
     "sage.rings.finite_rings.finite_field_constructor": {
         "ntests": 124
@@ -1630,7 +1631,7 @@
         "ntests": 41
     },
     "sage.rings.finite_rings.finite_field_prime_modn": {
-        "ntests": 38
+        "ntests": 42
     },
     "sage.rings.finite_rings.galois_group": {
         "ntests": 1
@@ -1648,7 +1649,7 @@
         "ntests": 67
     },
     "sage.rings.finite_rings.integer_mod": {
-        "ntests": 580
+        "ntests": 582
     },
     "sage.rings.finite_rings.integer_mod_ring": {
         "ntests": 367
@@ -1664,11 +1665,10 @@
     },
     "sage.rings.fraction_field": {
         "failed": true,
-        "ntests": 208
+        "ntests": 237
     },
     "sage.rings.fraction_field_element": {
-        "failed": true,
-        "ntests": 201
+        "ntests": 203
     },
     "sage.rings.function_field.constructor": {
         "ntests": 34
@@ -1708,7 +1708,7 @@
         "ntests": 20
     },
     "sage.rings.function_field.order_rational": {
-        "ntests": 82
+        "ntests": 80
     },
     "sage.rings.function_field.place": {
         "ntests": 51
@@ -1727,7 +1727,7 @@
         "ntests": 44
     },
     "sage.rings.ideal": {
-        "ntests": 357
+        "ntests": 358
     },
     "sage.rings.ideal_monoid": {
         "ntests": 22
@@ -1737,7 +1737,7 @@
     },
     "sage.rings.integer": {
         "failed": true,
-        "ntests": 1134
+        "ntests": 1147
     },
     "sage.rings.integer_fake.pxd": {
         "ntests": 1
@@ -1746,17 +1746,25 @@
         "ntests": 223
     },
     "sage.rings.laurent_series_ring": {
-        "ntests": 168
+        "ntests": 172
     },
     "sage.rings.laurent_series_ring_element": {
-        "ntests": 393
+        "ntests": 399
+    },
+    "sage.rings.lazy_series": {
+        "failed": true,
+        "ntests": 1558
+    },
+    "sage.rings.lazy_series_ring": {
+        "failed": true,
+        "ntests": 680
     },
     "sage.rings.localization": {
         "failed": true,
         "ntests": 141
     },
     "sage.rings.morphism": {
-        "ntests": 522
+        "ntests": 553
     },
     "sage.rings.multi_power_series_ring": {
         "failed": true,
@@ -1764,7 +1772,7 @@
     },
     "sage.rings.multi_power_series_ring_element": {
         "failed": true,
-        "ntests": 438
+        "ntests": 443
     },
     "sage.rings.number_field.number_field_base": {
         "ntests": 2
@@ -1801,7 +1809,7 @@
         "ntests": 408
     },
     "sage.rings.padics.generic_nodes": {
-        "ntests": 190
+        "ntests": 191
     },
     "sage.rings.padics.lattice_precision": {
         "ntests": 456
@@ -1829,7 +1837,7 @@
     },
     "sage.rings.padics.padic_generic_element": {
         "failed": true,
-        "ntests": 602
+        "ntests": 589
     },
     "sage.rings.padics.padic_lattice_element": {
         "ntests": 269
@@ -1860,6 +1868,10 @@
     },
     "sage.rings.padics.unramified_extension_generic": {
         "ntests": 29
+    },
+    "sage.rings.padics.witt_vector": {
+        "failed": true,
+        "ntests": 145
     },
     "sage.rings.pari_ring": {
         "ntests": 46
@@ -1899,7 +1911,7 @@
     },
     "sage.rings.polynomial.multi_polynomial": {
         "failed": true,
-        "ntests": 499
+        "ntests": 505
     },
     "sage.rings.polynomial.multi_polynomial_element": {
         "failed": true,
@@ -1917,8 +1929,7 @@
         "ntests": 245
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
-        "failed": true,
-        "ntests": 135
+        "ntests": 172
     },
     "sage.rings.polynomial.padics.polynomial_padic": {
         "ntests": 25
@@ -1934,7 +1945,7 @@
     },
     "sage.rings.polynomial.polynomial_element": {
         "failed": true,
-        "ntests": 2220
+        "ntests": 2232
     },
     "sage.rings.polynomial.polynomial_element_generic": {
         "ntests": 205
@@ -1943,23 +1954,21 @@
         "ntests": 313
     },
     "sage.rings.polynomial.polynomial_quotient_ring_element": {
+        "failed": true,
         "ntests": 116
     },
     "sage.rings.polynomial.polynomial_ring": {
-        "ntests": 467
+        "ntests": 472
     },
     "sage.rings.polynomial.polynomial_ring_constructor": {
         "failed": true,
-        "ntests": 130
+        "ntests": 131
     },
     "sage.rings.polynomial.polynomial_ring_homomorphism": {
         "ntests": 30
     },
     "sage.rings.polynomial.polynomial_singular_interface": {
         "ntests": 52
-    },
-    "sage.rings.polynomial.symmetric_ideal": {
-        "ntests": 37
     },
     "sage.rings.polynomial.symmetric_reduction": {
         "ntests": 9
@@ -1990,7 +1999,7 @@
         "ntests": 241
     },
     "sage.rings.power_series_ring_element": {
-        "ntests": 476
+        "ntests": 484
     },
     "sage.rings.puiseux_series_ring": {
         "ntests": 72
@@ -2000,7 +2009,7 @@
     },
     "sage.rings.quotient_ring": {
         "failed": true,
-        "ntests": 200
+        "ntests": 203
     },
     "sage.rings.quotient_ring_element": {
         "ntests": 100
@@ -2020,7 +2029,7 @@
         "ntests": 19
     },
     "sage.rings.ring": {
-        "ntests": 146
+        "ntests": 100
     },
     "sage.rings.semirings.non_negative_integer_semiring": {
         "ntests": 16
@@ -2041,11 +2050,10 @@
         "ntests": 35
     },
     "sage.rings.tate_algebra": {
-        "failed": true,
-        "ntests": 238
+        "ntests": 228
     },
     "sage.rings.tate_algebra_element": {
-        "ntests": 662
+        "ntests": 665
     },
     "sage.rings.tate_algebra_ideal": {
         "failed": true,
@@ -2059,7 +2067,7 @@
         "ntests": 174
     },
     "sage.rings.valuation.developing_valuation": {
-        "ntests": 27
+        "ntests": 34
     },
     "sage.rings.valuation.gauss_valuation": {
         "ntests": 92
@@ -2096,7 +2104,6 @@
         "ntests": 307
     },
     "sage.schemes.affine.affine_point": {
-        "failed": true,
         "ntests": 69
     },
     "sage.schemes.affine.affine_rational_point": {
@@ -2123,7 +2130,7 @@
     },
     "sage.schemes.generic.morphism": {
         "failed": true,
-        "ntests": 385
+        "ntests": 379
     },
     "sage.schemes.generic.point": {
         "ntests": 35
@@ -2163,14 +2170,13 @@
         "ntests": 490
     },
     "sage.schemes.projective.projective_point": {
-        "failed": true,
         "ntests": 291
     },
     "sage.schemes.projective.projective_rational_point": {
         "ntests": 31
     },
     "sage.schemes.projective.projective_space": {
-        "ntests": 382
+        "ntests": 389
     },
     "sage.schemes.projective.projective_subscheme": {
         "ntests": 234
@@ -2224,7 +2230,7 @@
         "ntests": 336
     },
     "sage.sets.set": {
-        "ntests": 382
+        "ntests": 389
     },
     "sage.sets.set_from_iterator": {
         "ntests": 150
@@ -2256,7 +2262,7 @@
     },
     "sage.structure.element": {
         "failed": true,
-        "ntests": 588
+        "ntests": 591
     },
     "sage.structure.element.pxd": {
         "ntests": 18
@@ -2358,11 +2364,31 @@
         "ntests": 2
     },
     "sage.tests.book_stein_ent": {
-        "failed": true,
-        "ntests": 245
+        "ntests": 8
+    },
+    "sage.tests.books.computational-mathematics-with-sagemath.graphtheory_doctest": {
+        "ntests": 6
+    },
+    "sage.tests.books.judson-abstract-algebra.cosets-sage-exercises": {
+        "ntests": 14
+    },
+    "sage.tests.books.judson-abstract-algebra.crypt-sage": {
+        "ntests": 39
+    },
+    "sage.tests.books.judson-abstract-algebra.cyclic-sage": {
+        "ntests": 5
+    },
+    "sage.tests.books.judson-abstract-algebra.finite-sage": {
+        "ntests": 16
+    },
+    "sage.tests.books.judson-abstract-algebra.integers-sage": {
+        "ntests": 53
+    },
+    "sage.tests.books.judson-abstract-algebra.poly-sage": {
+        "ntests": 69
     },
     "sage.tests.cmdline": {
-        "ntests": 113
+        "ntests": 114
     },
     "sage.tests.cython": {
         "ntests": 3
@@ -2372,6 +2398,9 @@
     },
     "sage.tests.functools_partial_src": {
         "ntests": 3
+    },
+    "sage.tests.memcheck.run_tests_in_valgrind": {
+        "ntests": 2
     },
     "sage.tests.parigp": {
         "ntests": 4
