@@ -113,9 +113,11 @@ class Application(object):
                     else:
                         value = ''
                 if format == 'plain':
-                    print("        {0:28} {1}".format(p + ":", value))
+                    print(u"        {0:28} {1}".format(p + ":", value))
                 else:
-                    print("{0}_{1}={2}".format(p, package_name, quote(str(value))))
+                    if isinstance(value, bool):
+                        value = str(value)
+                    print(u"{0}_{1}={2}".format(p, package_name, quote(value)))
 
     def dependencies(self, *package_classes, **kwds):
         """
