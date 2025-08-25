@@ -197,9 +197,6 @@
     "sage.categories.examples.filtered_modules_with_basis": {
         "ntests": 12
     },
-    "sage.categories.examples.finite_dimensional_lie_algebras_with_basis": {
-        "ntests": 1
-    },
     "sage.categories.examples.finite_enumerated_sets": {
         "ntests": 29
     },
@@ -461,7 +458,7 @@
         "ntests": 4
     },
     "sage.categories.lie_algebras": {
-        "ntests": 112
+        "ntests": 96
     },
     "sage.categories.lie_algebras_with_basis": {
         "ntests": 19
@@ -858,7 +855,7 @@
         "ntests": 3
     },
     "sage.features.databases": {
-        "ntests": 36
+        "ntests": 40
     },
     "sage.features.dot2tex": {
         "ntests": 4
@@ -1238,7 +1235,6 @@
         "ntests": 23
     },
     "sage.misc.lazy_import": {
-        "failed": true,
         "ntests": 279
     },
     "sage.misc.lazy_import_cache": {
@@ -1354,7 +1350,6 @@
         "ntests": 11
     },
     "sage.misc.superseded": {
-        "failed": true,
         "ntests": 59
     },
     "sage.misc.table": {
@@ -1642,7 +1637,7 @@
     },
     "sage.rings.integer": {
         "failed": true,
-        "ntests": 1085
+        "ntests": 1083
     },
     "sage.rings.integer_fake.pxd": {
         "ntests": 1
@@ -1753,7 +1748,7 @@
         "ntests": 245
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
-        "ntests": 163
+        "ntests": 168
     },
     "sage.rings.polynomial.polydict": {
         "ntests": 396
@@ -1783,9 +1778,6 @@
     },
     "sage.rings.polynomial.polynomial_singular_interface": {
         "ntests": 42
-    },
-    "sage.rings.polynomial.symmetric_ideal": {
-        "ntests": 36
     },
     "sage.rings.polynomial.symmetric_reduction": {
         "ntests": 9
