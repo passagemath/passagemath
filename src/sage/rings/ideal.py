@@ -513,7 +513,7 @@ class Ideal_generic(MonoidElement):
 
         TESTS::
 
-            sage: # needs sage.rings.number_fields
+            sage: # needs sage.rings.number_field
             sage: x = polygen(ZZ)
             sage: K.<a> = NumberField(x^2 + 1)
             sage: A = K.ideal(a)
@@ -527,7 +527,7 @@ class Ideal_generic(MonoidElement):
 
         ::
 
-            sage: # needs sage.rings.number_fields
+            sage: # needs sage.rings.number_field
             sage: K.<a> = NumberField(x^2 + 5)
             sage: B = K.ideal([2, a + 1]); B
             Fractional ideal (2, a + 1)
@@ -537,9 +537,9 @@ class Ideal_generic(MonoidElement):
 
         Since 2 is totally ramified, complex conjugation fixes it::
 
-            sage: B.apply_morphism(taus[1])  # complex conjugation                      # needs sage.rings.number_fields
+            sage: B.apply_morphism(taus[1])  # complex conjugation                      # needs sage.rings.number_field
             Fractional ideal (2, a + 1)
-            sage: taus[1](B)                                                            # needs sage.rings.number_fields
+            sage: taus[1](B)                                                            # needs sage.rings.number_field
             Fractional ideal (2, a + 1)
         """
         from sage.categories.morphism import Morphism

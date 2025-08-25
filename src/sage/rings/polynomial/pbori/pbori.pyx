@@ -78,7 +78,7 @@ ring
 
     sage: P.<a,b,c,d,e> = PolynomialRing(GF(2), 5, order='lex')
     sage: I1 = ideal([a*b + c*d + 1, a*c*e + d*e, a*b*e + c*e, b*c + c*d*e + 1])
-    sage: for f in I1.groebner_basis():
+    sage: for f in I1.groebner_basis():                                                 # needs sage.libs.singular
     ....:   f
     a + c^2*d + c + d^2*e
     b*c + d^3*e^2 + d^3*e + d^2*e^2 + d*e + e + 1
@@ -93,8 +93,8 @@ to the ideal to force the solutions in `\GF{2}`.
 
 ::
 
-    sage: J = I1 + sage.rings.ideal.FieldIdeal(P)
-    sage: for f in J.groebner_basis():
+    sage: J = I1 + sage.rings.ideal.FieldIdeal(P)                                       # needs sage.libs.singular
+    sage: for f in J.groebner_basis():                                                  # needs sage.libs.singular
     ....:   f
     a + d + 1
     b + 1
@@ -114,6 +114,7 @@ x_n]` containing `I` (that is, the ideals `J` satisfying `I \subset J
 
 ::
 
+    sage: # needs sage.libs.singular
     sage: Q = P.quotient( sage.rings.ideal.FieldIdeal(P) )
     sage: I2 = ideal([Q(f) for f in I1.gens()])
     sage: for f in I2.groebner_basis():
@@ -668,6 +669,7 @@ cdef class BooleanPolynomialRing(BooleanPolynomialRing_base):
 
         Check that :issue:`13284` is fixed::
 
+            sage: # needs sage.libs.singular
             sage: from sage.rings.ideal import Cyclic
             sage: R = BooleanPolynomialRing(10, 'x')
             sage: I = Cyclic(R)
@@ -1425,7 +1427,7 @@ cdef class BooleanPolynomialRing(BooleanPolynomialRing_base):
         EXAMPLES::
 
             sage: B.<x,y> = BooleanPolynomialRing(2)
-            sage: B._singular_() # indirect doctest
+            sage: B._singular_() # indirect doctest                                     # needs sage.libs.singular
             polynomial ring, over a field, global ordering
             // coefficients: ZZ/2...
             // number of vars : 2
@@ -3005,7 +3007,7 @@ cdef class BooleanPolynomial(MPolynomial):
         EXAMPLES::
 
             sage: B.<a,b,z> = BooleanPolynomialRing(3)
-            sage: latex(a+b+a*z^2+1) # indirect doctest
+            sage: latex(a + b + a*z^2 + 1) # indirect doctest                           # needs sage.libs.singular
             a z + a + b + 1
         """
         R = self.parent().cover_ring()
@@ -4831,6 +4833,7 @@ class BooleanPolynomialIdeal(MPolynomialIdeal):
 
         Check that :issue:`13155` is solved::
 
+            sage: # needs sage.libs.singular
             sage: R = BooleanPolynomialRing(11, 'x')
             sage: R2 = PolynomialRing(GF(2), 11, 'x')
             sage: I = ideal([ R(f) for f in sage.rings.ideal.Cyclic(R2, 11).gens() ])
@@ -5027,6 +5030,7 @@ class BooleanPolynomialIdeal(MPolynomialIdeal):
 
         A simple example::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y,z> = BooleanPolynomialRing()
             sage: I = ideal( [ x*y*z + x*z + y + 1, x+y+z+1 ] )
             sage: I.variety()
@@ -5047,7 +5051,7 @@ class BooleanPolynomialIdeal(MPolynomialIdeal):
             ....:     x1*x2 + x1*x4 + x1*x5 + x1*x6 + x2*x3 + x2*x4 + x2*x5 + x3*x5 + x5*x6 + x5 + x6,
             ....:     x1*x2 + x1*x6 + x2*x4 + x2*x5 + x2*x6 + x3*x6 + x4*x6 + x5*x6 + x5]
             sage: I = R.ideal( polys )
-            sage: I.variety()
+            sage: I.variety()                                                           # needs sage.libs.singular
              [{x6: 0, x5: 0, x4: 0, x3: 0, x2: 0, x1: 0},
               {x6: 1, x5: 0, x4: 0, x3: 1, x2: 1, x1: 1}]
 
@@ -5090,6 +5094,7 @@ class BooleanPolynomialIdeal(MPolynomialIdeal):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: P = PolynomialRing(GF(2),10, 'x')
             sage: B = BooleanPolynomialRing(10,'x')
             sage: I = sage.rings.ideal.Cyclic(P)
@@ -6457,7 +6462,7 @@ cdef class FGLMStrategy:
         Check that :issue:`13883` is fixed::
 
             sage: nonreduced = BooleanPolynomialVector([x+z, x+y])
-            sage: FGLMStrategy(old_ring, new_ring, nonreduced) # optional - debug
+            sage: FGLMStrategy(old_ring, new_ring, nonreduced)  # known bug
             Traceback (most recent call last):
             ...
             RuntimeError...

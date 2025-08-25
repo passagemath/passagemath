@@ -532,10 +532,10 @@ class PolynomialSequence_generic(Sequence_generic):
             sage: F, s = sr.polynomial_system()
             sage: P = F.ring()
             sage: I = F.ideal()
-            sage: J = I.elimination_ideal(P.gens()[4:-4])
-            sage: J <= I
+            sage: J = I.elimination_ideal(P.gens()[4:-4])                               # needs sage.libs.singular
+            sage: J <= I                                                                # needs sage.libs.singular
             True
-            sage: set(J.gens().variables()).issubset(P.gens()[:4] + P.gens()[-4:])
+            sage: set(J.gens().variables()).issubset(P.gens()[:4] + P.gens()[-4:])      # needs sage.libs.singular
             True
         """
         return self._ring.ideal(tuple(self))
@@ -558,8 +558,8 @@ class PolynomialSequence_generic(Sequence_generic):
             sage: # needs sage.rings.polynomial.pbori
             sage: sr = mq.SR(allow_zero_inversions=True)
             sage: F, s = sr.polynomial_system()
-            sage: gb = F.groebner_basis()
-            sage: Ideal(gb).basis_is_groebner()
+            sage: gb = F.groebner_basis()                                               # needs sage.libs.singular
+            sage: Ideal(gb).basis_is_groebner()                                         # needs sage.libs.singular
             True
 
         TESTS:
@@ -1334,7 +1334,7 @@ class PolynomialSequence_generic(Sequence_generic):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.polynomial.pbori
+            sage: # needs sage.graphs sage.rings.polynomial.pbori
             sage: B.<x,y,z> = BooleanPolynomialRing()
             sage: F = Sequence([x*y + y + 1, z + 1])
             sage: G = F.connection_graph(); G
@@ -1347,7 +1347,7 @@ class PolynomialSequence_generic(Sequence_generic):
 
         TESTS::
 
-            sage: # needs sage.rings.polynomial.pbori
+            sage: # needs sage.graphs sage.rings.polynomial.pbori
             sage: F = Sequence([], B)
             sage: F.connection_graph()
             Graph on 0 vertices
