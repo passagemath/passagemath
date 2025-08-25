@@ -681,7 +681,7 @@ def schur(ambient_dim=None, lattice=None):
     generators of the Schur cone and the nonnegative orthant in
     dimension five is `\left(3/4\right)\pi`::
 
-        sage: # needs sage.rings.number_fields
+        sage: # needs sage.rings.number_field
         sage: P = cones.schur(5)
         sage: Q = cones.nonnegative_orthant(5)
         sage: G = ( g.change_ring(QQbar).normalized() for g in P )
