@@ -1,0 +1,1 @@
+multipolynomial-bases @ git+https://github.com/passagemath/passagemath-pkg-multipolynomial-bases.git
