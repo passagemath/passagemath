@@ -19,8 +19,12 @@ AUTHORS:
 
 from sage.structure.element import RingElement
 from sage.structure.richcmp import richcmp, rich_to_bool
-from sage.features import FeatureNotPresentError
 
+try:
+    from sage.features import FeatureNotPresentError
+except ImportError:
+    class FeatureNotPresentError(BaseException):
+        pass
 
 try:
     from sage.interfaces.singular import singular as singular_default
