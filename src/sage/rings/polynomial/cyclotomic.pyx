@@ -252,7 +252,7 @@ def cyclotomic_value(n, x):
 
         sage: elements = [-1, 0, 1, 2, 1/2, Mod(3, 8), Mod(3,11)]
         sage: R.<x> = QQ[]; elements += [x^2 + 2]
-        sage: K.<i> = NumberField(x^2 + 1); elements += [i]                             # needs sage.rings.number_fields
+        sage: K.<i> = NumberField(x^2 + 1); elements += [i]                             # needs sage.rings.number_field
         sage: elements += [GF(9,'a').gen()]                                             # needs sage.rings.finite_rings
         sage: elements += [Zp(3)(54)]                                                   # needs sage.rings.padics
         sage: for y in elements:
@@ -287,8 +287,8 @@ def cyclotomic_value(n, x):
 
     Check that the issue with symbolic element in :issue:`14982` is fixed::
 
-        sage: a = cyclotomic_value(3, I)                                                # needs sage.rings.number_fields
-        sage: parent(a)                                                                 # needs sage.rings.number_fields
+        sage: a = cyclotomic_value(3, I)                                                # needs sage.rings.number_field
+        sage: parent(a)                                                                 # needs sage.rings.number_field
         Number Field in I with defining polynomial x^2 + 1 with I = 1*I
     """
     n = ZZ(n)
