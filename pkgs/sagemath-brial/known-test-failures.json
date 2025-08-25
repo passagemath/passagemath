@@ -1,0 +1,259 @@
+{
+    "sage.crypto.block_cipher.des": {
+        "ntests": 156
+    },
+    "sage.crypto.block_cipher.present": {
+        "ntests": 138
+    },
+    "sage.crypto.boolean_function": {
+        "ntests": 262
+    },
+    "sage.crypto.classical": {
+        "ntests": 13
+    },
+    "sage.crypto.classical_cipher": {
+        "ntests": 2
+    },
+    "sage.crypto.cryptosystem": {
+        "ntests": 14
+    },
+    "sage.crypto.key_exchange.catalog": {
+        "ntests": 1
+    },
+    "sage.crypto.key_exchange.diffie_hellman": {
+        "ntests": 38
+    },
+    "sage.crypto.key_exchange.key_exchange_scheme": {
+        "ntests": 14
+    },
+    "sage.crypto.lattice": {
+        "ntests": 18
+    },
+    "sage.crypto.lfsr": {
+        "ntests": 29
+    },
+    "sage.crypto.mq.mpolynomialsystemgenerator": {
+        "ntests": 30
+    },
+    "sage.crypto.mq.rijndael_gf": {
+        "ntests": 342
+    },
+    "sage.crypto.mq.sr": {
+        "ntests": 366
+    },
+    "sage.crypto.public_key.blum_goldwasser": {
+        "ntests": 6
+    },
+    "sage.crypto.sbox": {
+        "failed": true,
+        "ntests": 283
+    },
+    "sage.crypto.sboxes": {
+        "ntests": 37
+    },
+    "sage.rings.polynomial.commutative_polynomial": {
+        "ntests": 7
+    },
+    "sage.rings.polynomial.complex_roots": {
+        "ntests": 42
+    },
+    "sage.rings.polynomial.cyclotomic": {
+        "ntests": 37
+    },
+    "sage.rings.polynomial.flatten": {
+        "ntests": 150
+    },
+    "sage.rings.polynomial.hilbert": {
+        "ntests": 24
+    },
+    "sage.rings.polynomial.ideal": {
+        "ntests": 13
+    },
+    "sage.rings.polynomial.infinite_polynomial_element": {
+        "ntests": 304
+    },
+    "sage.rings.polynomial.infinite_polynomial_ring": {
+        "ntests": 279
+    },
+    "sage.rings.polynomial.integer_valued_polynomials": {
+        "ntests": 231
+    },
+    "sage.rings.polynomial.laurent_polynomial": {
+        "ntests": 459
+    },
+    "sage.rings.polynomial.laurent_polynomial_ideal": {
+        "ntests": 115
+    },
+    "sage.rings.polynomial.laurent_polynomial_mpair": {
+        "ntests": 386
+    },
+    "sage.rings.polynomial.laurent_polynomial_ring": {
+        "ntests": 160
+    },
+    "sage.rings.polynomial.laurent_polynomial_ring_base": {
+        "ntests": 129
+    },
+    "sage.rings.polynomial.multi_polynomial": {
+        "ntests": 595
+    },
+    "sage.rings.polynomial.multi_polynomial_element": {
+        "failed": true,
+        "ntests": 534
+    },
+    "sage.rings.polynomial.multi_polynomial_ideal": {
+        "ntests": 887
+    },
+    "sage.rings.polynomial.multi_polynomial_ideal_libsingular": {
+        "ntests": 25
+    },
+    "sage.rings.polynomial.multi_polynomial_libsingular": {
+        "ntests": 1342
+    },
+    "sage.rings.polynomial.multi_polynomial_ring": {
+        "ntests": 149
+    },
+    "sage.rings.polynomial.multi_polynomial_ring_base": {
+        "ntests": 264
+    },
+    "sage.rings.polynomial.multi_polynomial_sequence": {
+        "ntests": 313
+    },
+    "sage.rings.polynomial.ore_function_element": {
+        "ntests": 251
+    },
+    "sage.rings.polynomial.ore_function_field": {
+        "ntests": 279
+    },
+    "sage.rings.polynomial.padics.polynomial_padic": {
+        "ntests": 64
+    },
+    "sage.rings.polynomial.padics.polynomial_padic_capped_relative_dense": {
+        "ntests": 150
+    },
+    "sage.rings.polynomial.padics.polynomial_padic_flat": {
+        "ntests": 3
+    },
+    "sage.rings.polynomial.pbori.PyPolyBoRi": {
+        "ntests": 28
+    },
+    "sage.rings.polynomial.pbori.blocks": {
+        "ntests": 2
+    },
+    "sage.rings.polynomial.pbori.cnf": {
+        "ntests": 49
+    },
+    "sage.rings.polynomial.pbori.easy_polynomials": {
+        "ntests": 10
+    },
+    "sage.rings.polynomial.pbori.fglm": {
+        "ntests": 32
+    },
+    "sage.rings.polynomial.pbori.frontend": {
+        "ntests": 13
+    },
+    "sage.rings.polynomial.pbori.gbcore": {
+        "ntests": 19
+    },
+    "sage.rings.polynomial.pbori.ll": {
+        "ntests": 33
+    },
+    "sage.rings.polynomial.pbori.nf": {
+        "ntests": 9
+    },
+    "sage.rings.polynomial.pbori.parallel": {
+        "ntests": 34
+    },
+    "sage.rings.polynomial.pbori.pbori": {
+        "ntests": 1575
+    },
+    "sage.rings.polynomial.pbori.randompoly": {
+        "ntests": 13
+    },
+    "sage.rings.polynomial.polydict": {
+        "ntests": 402
+    },
+    "sage.rings.polynomial.polynomial_complex_arb": {
+        "ntests": 144
+    },
+    "sage.rings.polynomial.polynomial_element": {
+        "ntests": 2694
+    },
+    "sage.rings.polynomial.polynomial_element_generic": {
+        "ntests": 229
+    },
+    "sage.rings.polynomial.polynomial_gf2x": {
+        "ntests": 43
+    },
+    "sage.rings.polynomial.polynomial_integer_dense_flint": {
+        "ntests": 308
+    },
+    "sage.rings.polynomial.polynomial_integer_dense_ntl": {
+        "ntests": 188
+    },
+    "sage.rings.polynomial.polynomial_modn_dense_ntl": {
+        "ntests": 383
+    },
+    "sage.rings.polynomial.polynomial_number_field": {
+        "ntests": 82
+    },
+    "sage.rings.polynomial.polynomial_quotient_ring": {
+        "ntests": 524
+    },
+    "sage.rings.polynomial.polynomial_quotient_ring_element": {
+        "ntests": 153
+    },
+    "sage.rings.polynomial.polynomial_rational_flint": {
+        "ntests": 396
+    },
+    "sage.rings.polynomial.polynomial_real_mpfr_dense": {
+        "ntests": 136
+    },
+    "sage.rings.polynomial.polynomial_ring": {
+        "ntests": 541
+    },
+    "sage.rings.polynomial.polynomial_ring_constructor": {
+        "ntests": 162
+    },
+    "sage.rings.polynomial.polynomial_ring_homomorphism": {
+        "ntests": 30
+    },
+    "sage.rings.polynomial.polynomial_singular_interface": {
+        "ntests": 63
+    },
+    "sage.rings.polynomial.polynomial_template.pxi": {
+        "ntests": 133
+    },
+    "sage.rings.polynomial.polynomial_zmod_flint": {
+        "ntests": 184
+    },
+    "sage.rings.polynomial.polynomial_zz_pex": {
+        "ntests": 155
+    },
+    "sage.rings.polynomial.q_integer_valued_polynomials": {
+        "ntests": 207
+    },
+    "sage.rings.polynomial.real_roots": {
+        "ntests": 417
+    },
+    "sage.rings.polynomial.symmetric_ideal": {
+        "ntests": 104
+    },
+    "sage.rings.polynomial.symmetric_reduction": {
+        "ntests": 97
+    },
+    "sage.rings.polynomial.term_order": {
+        "ntests": 360
+    },
+    "sage.rings.polynomial.toy_buchberger": {
+        "ntests": 51
+    },
+    "sage.rings.polynomial.toy_d_basis": {
+        "ntests": 60
+    },
+    "sage.rings.polynomial.toy_variety": {
+        "ntests": 45
+    },
+    "sage.rings.polynomial.weil.weil_polynomials": {
+        "ntests": 90
+    }
+}
