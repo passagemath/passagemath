@@ -2112,7 +2112,7 @@ class FiniteDimensionalLieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
             on the coefficients, even though it's not a Lie algebra morphism
             (since it isn't linear)::
 
-                sage: # needs sage.combinat sage.modules sage.rings.number_fields
+                sage: # needs sage.combinat sage.modules sage.rings.number_field
                 sage: R.<x> = ZZ[]
                 sage: K.<i> = NumberField(x^2 + 1)
                 sage: cc = K.hom([-i])
