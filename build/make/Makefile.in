@@ -575,8 +575,10 @@ define SET_SAGE_CHECK
 $(eval SAGE_CHECK_$(1) := $(2))
 endef
 # Set defaults
-$(foreach pkgname, $(NORMAL_PACKAGES) $(SCRIPT_PACKAGES),\
-	$(eval $(call SET_SAGE_CHECK,$(pkgname),$(SAGE_CHECK))))
+$(foreach pkgname, $(NORMAL_PACKAGES) $(SCRIPT_PACKAGES),			\
+     $(if $(findstring sagemath_,$(pkgname)),					\
+	  $(eval $(call SET_SAGE_CHECK,$(pkgname),no))				\
+          $(eval $(call SET_SAGE_CHECK,$(pkgname),$(SAGE_CHECK)))))
 
 # Parsing the SAGE_CHECK_PACKAGES variable:
 # - if this contains "!pkg", set SAGE_CHECK_pkg=no.
