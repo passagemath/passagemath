@@ -73,7 +73,7 @@ Examples
 
 Starting FriCAS from the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-fricas[test]" sage -sh -c fricas
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-fricas[test]" sage --fricas
 
 Finding the installation location of a FriCAS in Python::
 
