@@ -112,7 +112,7 @@ def default_venv_environment_from_distribution(distribution, toxenv):
         if extras:
             tox_env_name += '-' + extras.replace(',', '-')
         default_venv = os.path.join(repo_root, 'pkgs', plain_distribution, '.tox', tox_env_name)
-        if plain_distribution == 'sagemath-standard-no-symbolics':
+        if plain_distribution.startswith('sagemath-standard'):
             default_environment = 'sage.all'
         else:
             default_environment = 'sage.all__' + plain_distribution.replace('-', '_')
