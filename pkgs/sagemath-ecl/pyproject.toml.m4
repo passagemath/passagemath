@@ -18,6 +18,7 @@ name = "passagemath-ecl"
 description = "passagemath: Embeddable Common Lisp"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
+    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_environment
 ]
