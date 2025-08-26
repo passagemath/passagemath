@@ -1,8 +1,8 @@
 From 44428d08903f6a76cf167474f36a52e7613c9e8b Mon Sep 17 00:00:00 2001
 From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
 Date: Sun, 18 May 2025 10:11:20 -0700
-Subject: [PATCH] Makefile.in (install-src): Change installed fricas script to
- make installation relocatable
+Subject: [PATCH 1/2] Makefile.in (install-src): Change installed fricas script
+ to make installation relocatable
 
 ---
  Makefile.in             |  7 ++--
