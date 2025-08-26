@@ -127,6 +127,8 @@ usage() {
     echo
     echo "Running external programs:"
     echo
+    command -v fricas &>/dev/null && \
+    echo "  --fricas [...]      -- run Sage's FriCAS with given arguments"
     command -v gap &>/dev/null && \
     echo "  --gap [...]         -- run Sage's Gap with given arguments"
     command -v gp &>/dev/null && \
@@ -366,6 +368,9 @@ usage_advanced() {
     echo "                         (not installed, run sage --pip install cython)"
     echo "  --ecl [...], --lisp [...]  -- run Sage's copy of ECL (Embeddable"
     echo "                                Common Lisp) with the given arguments"
+    echo "  --fricas [...]      -- run Sage's FriCAS with given arguments"
+    command -v fricas &>/dev/null && \
+    echo "                         (not installed currently, run sage -i fricas)"
     echo "  --gap [...]         -- run Sage's Gap with the given arguments"
     echo "  --gap3 [...]        -- run Sage's Gap3 with the given arguments"
     command -v gap3 &>/dev/null || \
@@ -633,6 +638,11 @@ fi
 if [ "$1" = "-cython" -o "$1" = '--cython' -o "$1" = '-pyrex' -o "$1" = "--pyrex" ]; then
     shift
     exec cython "$@"
+fi
+
+if [ "$1" = '-fricas' -o "$1" = '--fricas' ]; then
+    shift
+    exec fricas "$@"
 fi
 
 if [ "$1" = '-gap' -o "$1" = '--gap' ]; then
