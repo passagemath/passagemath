@@ -28,8 +28,13 @@ try:
 except ImportError:
     pass
 else:
+    from glob import glob as _glob
     import os as _os
-    SAGE_WHEELS_PATH = ':'.join(_os.path.join(p, 'bin') for p in sage_wheels.__path__)
+    SAGE_WHEELS_PATH = ':'.join(_os.path.join(_p, 'bin') for _p in sage_wheels.__path__)
+    for _p in sage_wheels.__path__:
+        for _dir in _glob(_os.path.join(_p, 'lib/ecl-*')):
+            ECLDIR = _dir + '/'
+            break
 
 
 def _main():
