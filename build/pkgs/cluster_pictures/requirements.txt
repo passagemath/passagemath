@@ -1,0 +1,1 @@
+sage_cluster_pictures @ git+https://github.com/passagemath/passagemath-pkg-cluster-pictures.git
