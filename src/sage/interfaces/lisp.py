@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-ecl
 r"""
 Lisp Interface
 
@@ -57,6 +58,7 @@ from .expect import Expect, ExpectElement, ExpectFunction, FunctionElement, gc_d
 from sage.structure.element import RingElement, parent
 from sage.misc.instancedoc import instancedoc
 from sage.structure.richcmp import rich_to_bool
+from sage.features.ecl import Ecl
 
 
 class Lisp(Expect):
@@ -82,7 +84,7 @@ class Lisp(Expect):
                         prompt='> ',
 
                         # This is the command that starts up your program
-                        command='ecl',
+                        command=Ecl().absolute_filename(),
 
                         server=server,
                         server_tmpdir=server_tmpdir,
