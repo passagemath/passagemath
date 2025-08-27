@@ -36,7 +36,7 @@ class Ecl(Executable):
             True
         """
         Executable.__init__(self, "ecl", executable='ecl',
-                            spkg='ecl')
+                            spkg='ecl', type='standard')
 
 
 def all_features():

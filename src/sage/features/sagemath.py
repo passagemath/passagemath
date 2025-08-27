@@ -430,7 +430,7 @@ class sage__libs__ecl(PythonModule):
             True
         """
         PythonModule.__init__(self, 'sage.libs.ecl',
-                              spkg='sagemath_symbolics', type='standard')
+                              spkg='sagemath_ecl', type='standard')
 
 
 class sage__libs__flint(JoinFeature):
