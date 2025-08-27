@@ -12,7 +12,7 @@ The passagemath fork uses the motto "Creating a Free Passage Between the Scienti
 and Mathematical Software Communities." It was created in October 2024 with the following goals:
 
 * providing modularized installation with pip
-  - [this major project was started in May 2020 in the Sage codebase](https://github.com/sagemath/sage/issues/29705) and completed passagemath 10.5.29 (May 2025),
+  - [this major project was started in May 2020 in the Sage codebase](https://github.com/sagemath/sage/issues/29705) and completed in passagemath 10.5.29 (May 2025),
 * establishing first-class membership in the scientific Python ecosystem,
 * giving [clear attribution of upstream projects](https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ),
 * providing independently usable Python interfaces to upstream libraries,
@@ -34,7 +34,7 @@ Join [passagemath.discourse.group](https://passagemath.discourse.group/) for hel
 
 Join the BlueSky platform and follow [@passagemath.org](https://bsky.app/profile/passagemath.org) to receive announcements.
 
-As of 2025-08-20, the [passagemath GitHub organization](https://github.com/passagemath) has 120 members.
+As of 2025-08-20, the [passagemath GitHub organization](https://github.com/passagemath) had 120 members.
 
 [People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
 development of SageMath since 2005, and hence of passagemath.
