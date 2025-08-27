@@ -10,7 +10,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "passagemath-environment"
 description = "passagemath: System and software environment"
+# packaging is needed in sage.features.fricas
 dependencies = [
+    SPKG_INSTALL_REQUIRES_packaging
     SPKG_INSTALL_REQUIRES_platformdirs
 ]
 dynamic = ["version"]

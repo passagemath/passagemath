@@ -18,8 +18,11 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-fricas"
 description = "passagemath: Symbolic computation with the general purpose computer algebra system FriCAS"
 dependencies = [
+    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_ecl
+    SPKG_INSTALL_REQUIRES_sagemath_environment
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
