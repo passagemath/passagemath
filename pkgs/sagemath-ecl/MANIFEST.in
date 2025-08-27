@@ -5,6 +5,7 @@ include VERSION.txt
 exclude *.m4
 include requirements.txt
 
+include sage/interfaces/lisp.p*
 include sage/libs/ecl.p*
 include sage/libs/eclsig.h
 
