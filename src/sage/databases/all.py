@@ -73,6 +73,11 @@ except ImportError:
     pass
 
 try:
+    from sage.databases.all__sagemath_database_stein_watkins_mini import *
+except ImportError:
+    pass
+
+try:
     from sage.databases.all__sagemath_database_symbolic_data import *
 except ImportError:
     pass
