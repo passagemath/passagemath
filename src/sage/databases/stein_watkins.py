@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-schemes
+# sage_setup: distribution = sagemath-database-stein-watkins-mini
 r"""
 The Stein-Watkins table of elliptic curves
 
