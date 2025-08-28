@@ -179,7 +179,7 @@ components are in the correct ring::
 
     sage: L = LazyDirichletSeriesRing(QQbar, "s")                                       # needs sage.rings.number_field
     sage: check(L, lambda n: n, valuation=2)                                            # needs sage.rings.number_field
-    sage: check(L, gen(), valuation=2)                                                  # needs sage.rings.number_field
+    sage: check(L, gen(), valuation=2)                                                  # needs sage.rings.number_field sage.symbolic
 
     sage: L.<z> = LazyPowerSeriesRing(GF(2))
     sage: check(L, lambda n: n, valuation=0)
