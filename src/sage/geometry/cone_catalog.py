@@ -686,9 +686,9 @@ def schur(ambient_dim=None, lattice=None):
         sage: Q = cones.nonnegative_orthant(5)
         sage: G = ( g.change_ring(QQbar).normalized() for g in P )
         sage: H = ( h.change_ring(QQbar).normalized() for h in Q )
-        sage: actual = max(arccos(u.inner_product(v)) for u in G for v in H)
-        sage: expected = 3*pi/4
-        sage: abs(actual - expected).n() < 1e-12
+        sage: actual = max(arccos(u.inner_product(v)) for u in G for v in H)            # needs sage.symbolic
+        sage: expected = 3*pi/4                                                         # needs sage.symbolic
+        sage: abs(actual - expected).n() < 1e-12                                        # needs sage.symbolic
         True
 
     The dual of the Schur cone is the downward-monotone cone
