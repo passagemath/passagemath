@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-environment
 r"""
-Check for ``phitigra``
+Feature for testing the presence of ``phitigra``
 """
 
 # *****************************************************************************

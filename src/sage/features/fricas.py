@@ -20,7 +20,7 @@ from packaging.version import Version
 
 class FriCAS(Executable):
     r"""
-    A :class:`~sage.features.Feature` which checks for the :ref:`fricas <fricas>` binary.
+    A :class:`~sage.features.Feature` which checks for the :ref:`fricas <spkg_fricas>` binary.
 
     EXAMPLES::
 

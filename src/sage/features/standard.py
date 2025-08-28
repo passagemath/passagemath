@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-environment
 r"""
-Check for various standard packages (for modularized distributions)
+Feature for testing the presence of various standard packages (for modularized distributions)
 
 These features are provided by standard packages in the Sage distribution.
 """

@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-environment
 r"""
-Check for ``dot2tex``
+Feature for testing the presence of ``dot2tex``
 """
 
 # *****************************************************************************
