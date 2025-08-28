@@ -961,8 +961,8 @@ class JacobianGroup_finite_field(JacobianGroup, JacobianGroup_finite_field_base)
             sage: G1 = J.group()
             sage: K = k.extension(3)
             sage: G3 = J.group(K)
-            sage: pt = G3.get_points(12)[-2]  # expected to be a point rational over K
-            sage: pt.frobenius().frobenius().frobenius() == pt  # indirect doctest
+            sage: pt = G3.get_points(12)[-2]  # expected to be a point rational over K  # needs sage.combinat
+            sage: pt.frobenius().frobenius().frobenius() == pt  # indirect doctest      # needs sage.combinat
             True
         """
         w = pt._w.apply_morphism(self._frobenius_of_constant_field)
