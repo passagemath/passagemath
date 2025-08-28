@@ -10,7 +10,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "passagemath-database-stein-watkins"
+name = "passagemath-database-stein-watkins-mini"
 description = "passagemath: The Stein-Watkins database of elliptic curves (small version)"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sage_conf
