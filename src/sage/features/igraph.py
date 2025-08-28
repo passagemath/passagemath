@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-environment
 r"""
-Check for igraph
+Feature for testing the presence of igraph
 """
 
 # ****************************************************************************

@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-environment
 r"""
-Check for poppler features
+Feature for testing the presence of poppler features
 
 poppler-utils is a collection of tools built on Poppler's library API, to
 manage PDF and extract contents:

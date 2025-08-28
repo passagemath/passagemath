@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-environment
 r"""
-Check for symengine_py
+Feature for testing the presence of symengine_py
 """
 
 # ****************************************************************************
