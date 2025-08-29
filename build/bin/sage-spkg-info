@@ -253,7 +253,7 @@ def process_spkg_file(pkg_base, pkg_scripts, fmt, out):
         content = re.sub('^ *passagemath:' ,
                          pkg_base + ':', content, flags=re.MULTILINE)
         content = re.sub('^====',
-                         '=========================', content, flags=re.MULTILINE)
+                         '============================', content, flags=re.MULTILINE)
         content = re.sub('`passagemath.*\nAbout this pip-installable distribution package\n-+\n',
                          '', content, flags=re.DOTALL|re.MULTILINE)
 
