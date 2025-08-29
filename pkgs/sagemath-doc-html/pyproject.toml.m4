@@ -23,6 +23,7 @@ requires = [
     SPKG_INSTALL_REQUIRES_sagemath_database_jones_numfield
     SPKG_INSTALL_REQUIRES_sagemath_database_kohel
     SPKG_INSTALL_REQUIRES_sagemath_database_odlyzko_zeta
+    SPKG_INSTALL_REQUIRES_sagemath_database_stein_watkins_mini
     SPKG_INSTALL_REQUIRES_sagemath_database_symbolic_data
 ]
 build-backend = 'mesonpy'
