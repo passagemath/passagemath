@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-doc-pdf ~= 10.6.11.0
+passagemath-doc-pdf ~= 10.6.12.0

@@ -1,1 +1,2 @@
-passagemath-database-stein-watkins
+# This file is updated on every release by the update-version script
+passagemath-database-stein-watkins ~= 10.6.12.0
