@@ -922,7 +922,6 @@
         "ntests": 274
     },
     "sage.combinat.designs.latin_squares": {
-        "failed": true,
         "ntests": 37
     },
     "sage.combinat.designs.orthogonal_arrays_build_recursive": {
@@ -1375,6 +1374,9 @@
         "ntests": 4
     },
     "sage.features.dvipng": {
+        "ntests": 4
+    },
+    "sage.features.ecl": {
         "ntests": 4
     },
     "sage.features.eclib": {
@@ -1851,7 +1853,6 @@
         "ntests": 43
     },
     "sage.groups.abelian_gps.abelian_group": {
-        "failed": true,
         "ntests": 241
     },
     "sage.groups.abelian_gps.abelian_group_element": {
@@ -2065,7 +2066,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2052
+        "ntests": 2046
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
@@ -2295,7 +2296,7 @@
         "ntests": 67
     },
     "sage.misc.latex": {
-        "ntests": 244
+        "ntests": 240
     },
     "sage.misc.latex_macros": {
         "ntests": 11
@@ -2915,6 +2916,9 @@
     "sage.rings.function_field.jacobian_hess": {
         "ntests": 1
     },
+    "sage.rings.function_field.jacobian_khuri_makdisi": {
+        "ntests": 2
+    },
     "sage.rings.function_field.maps": {
         "ntests": 55
     },
@@ -2952,7 +2956,7 @@
     },
     "sage.rings.integer": {
         "failed": true,
-        "ntests": 1101
+        "ntests": 1099
     },
     "sage.rings.integer_fake.pxd": {
         "ntests": 1
@@ -3082,7 +3086,7 @@
         "ntests": 251
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
-        "ntests": 168
+        "ntests": 173
     },
     "sage.rings.polynomial.ore_function_element": {
         "ntests": 56
@@ -3138,9 +3142,6 @@
     },
     "sage.rings.polynomial.skew_polynomial_ring": {
         "ntests": 20
-    },
-    "sage.rings.polynomial.symmetric_ideal": {
-        "ntests": 36
     },
     "sage.rings.polynomial.symmetric_reduction": {
         "ntests": 9
@@ -3676,7 +3677,6 @@
         "ntests": 47
     },
     "sage.topology.simplicial_complex_morphism": {
-        "failed": true,
         "ntests": 224
     },
     "sage.topology.simplicial_set": {

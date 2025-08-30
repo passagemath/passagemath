@@ -1,6 +1,5 @@
 {
     "sage.algebras.clifford_algebra": {
-        "failed": true,
         "ntests": 618
     },
     "sage.algebras.clifford_algebra_element": {
@@ -1461,6 +1460,9 @@
     "sage.features.dvipng": {
         "ntests": 4
     },
+    "sage.features.ecl": {
+        "ntests": 4
+    },
     "sage.features.eclib": {
         "ntests": 4
     },
@@ -1917,7 +1919,6 @@
         "ntests": 165
     },
     "sage.graphs.strongly_regular_db": {
-        "failed": true,
         "ntests": 312
     },
     "sage.graphs.traversals": {
@@ -1936,7 +1937,6 @@
         "ntests": 43
     },
     "sage.groups.abelian_gps.abelian_group": {
-        "failed": true,
         "ntests": 241
     },
     "sage.groups.abelian_gps.abelian_group_element": {
@@ -2427,7 +2427,7 @@
         "ntests": 67
     },
     "sage.misc.latex": {
-        "ntests": 244
+        "ntests": 240
     },
     "sage.misc.latex_macros": {
         "ntests": 11
@@ -3164,6 +3164,9 @@
     "sage.rings.function_field.jacobian_hess": {
         "ntests": 1
     },
+    "sage.rings.function_field.jacobian_khuri_makdisi": {
+        "ntests": 2
+    },
     "sage.rings.function_field.maps": {
         "ntests": 59
     },
@@ -3205,7 +3208,7 @@
     },
     "sage.rings.integer": {
         "failed": true,
-        "ntests": 1165
+        "ntests": 1163
     },
     "sage.rings.integer_fake.pxd": {
         "ntests": 1
@@ -3422,7 +3425,7 @@
         "ntests": 251
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
-        "ntests": 172
+        "ntests": 177
     },
     "sage.rings.polynomial.ore_function_element": {
         "ntests": 243
@@ -3480,9 +3483,6 @@
     },
     "sage.rings.polynomial.q_integer_valued_polynomials": {
         "ntests": 207
-    },
-    "sage.rings.polynomial.symmetric_ideal": {
-        "ntests": 36
     },
     "sage.rings.polynomial.symmetric_reduction": {
         "ntests": 9
@@ -4093,7 +4093,6 @@
         "ntests": 47
     },
     "sage.topology.simplicial_complex_morphism": {
-        "failed": true,
         "ntests": 224
     },
     "sage.topology.simplicial_set": {
