@@ -293,9 +293,6 @@
     "sage.categories.examples.finite_dimensional_algebras_with_basis": {
         "ntests": 17
     },
-    "sage.categories.examples.finite_dimensional_lie_algebras_with_basis": {
-        "ntests": 1
-    },
     "sage.categories.examples.finite_enumerated_sets": {
         "ntests": 29
     },
@@ -553,7 +550,7 @@
         "ntests": 4
     },
     "sage.categories.lie_algebras": {
-        "ntests": 112
+        "ntests": 96
     },
     "sage.categories.lie_algebras_with_basis": {
         "ntests": 19
@@ -1189,12 +1186,15 @@
         "ntests": 3
     },
     "sage.features.databases": {
-        "ntests": 36
+        "ntests": 40
     },
     "sage.features.dot2tex": {
         "ntests": 4
     },
     "sage.features.dvipng": {
+        "ntests": 4
+    },
+    "sage.features.ecl": {
         "ntests": 4
     },
     "sage.features.eclib": {
@@ -1433,7 +1433,6 @@
         "ntests": 80
     },
     "sage.groups.abelian_gps.abelian_group": {
-        "failed": true,
         "ntests": 241
     },
     "sage.groups.abelian_gps.abelian_group_element": {
@@ -1617,7 +1616,7 @@
     },
     "sage.matrix.matrix2": {
         "failed": true,
-        "ntests": 2039
+        "ntests": 2033
     },
     "sage.matrix.matrix_cdv": {
         "ntests": 5
@@ -2466,6 +2465,9 @@
     "sage.rings.function_field.jacobian_hess": {
         "ntests": 1
     },
+    "sage.rings.function_field.jacobian_khuri_makdisi": {
+        "ntests": 2
+    },
     "sage.rings.function_field.maps": {
         "ntests": 55
     },
@@ -2503,7 +2505,7 @@
     },
     "sage.rings.integer": {
         "failed": true,
-        "ntests": 1101
+        "ntests": 1099
     },
     "sage.rings.integer_fake.pxd": {
         "ntests": 1
@@ -2633,7 +2635,7 @@
         "ntests": 251
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
-        "ntests": 168
+        "ntests": 173
     },
     "sage.rings.polynomial.ore_function_element": {
         "ntests": 56
@@ -2689,9 +2691,6 @@
     },
     "sage.rings.polynomial.skew_polynomial_ring": {
         "ntests": 20
-    },
-    "sage.rings.polynomial.symmetric_ideal": {
-        "ntests": 36
     },
     "sage.rings.polynomial.symmetric_reduction": {
         "ntests": 9

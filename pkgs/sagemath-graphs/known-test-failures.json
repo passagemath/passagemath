@@ -742,7 +742,7 @@
         "ntests": 274
     },
     "sage.combinat.designs.latin_squares": {
-        "ntests": 12
+        "ntests": 13
     },
     "sage.combinat.designs.orthogonal_arrays_build_recursive": {
         "ntests": 20
@@ -997,6 +997,9 @@
         "ntests": 4
     },
     "sage.features.dvipng": {
+        "ntests": 4
+    },
+    "sage.features.ecl": {
         "ntests": 4
     },
     "sage.features.eclib": {
@@ -1610,7 +1613,7 @@
     },
     "sage.misc.latex": {
         "failed": true,
-        "ntests": 221
+        "ntests": 220
     },
     "sage.misc.latex_macros": {
         "ntests": 11
@@ -1992,6 +1995,9 @@
     "sage.rings.function_field.jacobian_hess": {
         "ntests": 1
     },
+    "sage.rings.function_field.jacobian_khuri_makdisi": {
+        "ntests": 2
+    },
     "sage.rings.function_field.maps": {
         "ntests": 55
     },
@@ -2027,7 +2033,7 @@
     },
     "sage.rings.integer": {
         "failed": true,
-        "ntests": 1085
+        "ntests": 1083
     },
     "sage.rings.integer_fake.pxd": {
         "ntests": 1
@@ -2138,7 +2144,7 @@
         "ntests": 245
     },
     "sage.rings.polynomial.multi_polynomial_sequence": {
-        "ntests": 163
+        "ntests": 168
     },
     "sage.rings.polynomial.polydict": {
         "ntests": 396
@@ -2168,9 +2174,6 @@
     },
     "sage.rings.polynomial.polynomial_singular_interface": {
         "ntests": 42
-    },
-    "sage.rings.polynomial.symmetric_ideal": {
-        "ntests": 36
     },
     "sage.rings.polynomial.symmetric_reduction": {
         "ntests": 9

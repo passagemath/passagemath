@@ -16614,7 +16614,11 @@ cdef class Matrix(Matrix1):
         """
         d = self.smith_form(transformation=False)
         r = min(self.nrows(), self.ncols())
-        return [d[i, i] for i in range(r)]
+        ed = [d[i, i] for i in range(r)]
+        try:
+            return [x.canonical_associate()[0] for x in ed]
+        except (AttributeError, TypeError):
+            return ed
 
     def smith_form(self, transformation=True, integral=None, exact=True):
         r"""

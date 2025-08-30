@@ -1018,6 +1018,9 @@
     "sage.features.dvipng": {
         "ntests": 4
     },
+    "sage.features.ecl": {
+        "ntests": 3
+    },
     "sage.features.eclib": {
         "ntests": 3
     },
@@ -1249,7 +1252,6 @@
         "ntests": 79
     },
     "sage.groups.abelian_gps.abelian_group": {
-        "failed": true,
         "ntests": 216
     },
     "sage.groups.abelian_gps.abelian_group_element": {
@@ -1629,8 +1631,7 @@
         "ntests": 63
     },
     "sage.misc.latex": {
-        "failed": true,
-        "ntests": 223
+        "ntests": 220
     },
     "sage.misc.latex_macros": {
         "ntests": 11
