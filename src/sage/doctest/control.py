@@ -505,7 +505,17 @@ class DocTestController(SageObject):
                         if pkg.name in options.hide:
                             continue
                         # Skip features for which we have a more specific runtime feature test.
-                        if pkg.name in ['4ti2', 'bliss', 'buckygen', 'coxeter3', 'cvxpy', 'cunningham_tables', 'database_graphs', 'database_jones_numfield', 'database_mutation_class', 'database_symbolic_data', 'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac', 'jmol', 'kenzo', 'latte_int', 'macaulay2', 'mcqd', 'meataxe', 'msolve', 'palp', 'plantri', 'polytopes_db', 'qepcad', 'rubiks', 'sirocco', 'sympow', 'tachyon', 'tdlib', 'topcom']:
+                        if pkg.name in ['4ti2', 'bliss', 'buckygen', 'conway_polynomials',
+                                        'coxeter3', 'cvxpy', 'cunningham_tables',
+                                        'database_cubic_hecke', 'database_graphs',
+                                        'database_jones_numfield', 'database_knotinfo',
+                                        'database_mutation_class', 'database_symbolic_data',
+                                        'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac',
+                                        'jmol', 'kenzo', 'latte_int', 'macaulay2',
+                                        'matroid_database', 'mcqd', 'meataxe', 'msolve',
+                                        'palp', 'plantri', 'polytopes_db', 'polytopes_db_4d',
+                                        'pynormaliz', 'qepcad', 'rubiks', 'sirocco', 'sympow',
+                                        'tachyon', 'tdlib', 'topcom']:
                             continue
                         if pkg.is_installed() and pkg.installed_version == pkg.remote_version:
                             options.optional.add(pkg.name)
