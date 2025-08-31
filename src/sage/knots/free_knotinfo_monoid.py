@@ -272,10 +272,10 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             Defining K3_1m
             sage: elems = (K3_1, K3_1m)
             sage: K = Knots().from_table(3, 1)
-            sage: FKIM._check_elements(K, elems)
+            sage: FKIM._check_elements(K, elems)                                        # needs sage.libs.braiding
             KnotInfo['K3_1m']
             sage: K = Knots().from_table(4, 1)
-            sage: FKIM._check_elements(K, elems) is None
+            sage: FKIM._check_elements(K, elems) is None                                # needs sage.libs.braiding
             True
         """
         for e in elems:
@@ -375,7 +375,7 @@ class FreeKnotInfoMonoid(IndexedFreeAbelianMonoid):
             sage: from sage.knots.free_knotinfo_monoid import FreeKnotInfoMonoid
             sage: FKIM =  FreeKnotInfoMonoid()
             sage: K = KnotInfo.K5_1.link().mirror_image()
-            sage: FKIM._from_knot(K)                                                    # needs sage.groups sage.modules
+            sage: FKIM._from_knot(K)                                                    # needs sage.groups sage.libs.braiding sage.modules
             (KnotInfo['K5_1m'],)
         """
         hp = knot.homfly_polynomial(normalization='vz')
