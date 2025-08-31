@@ -1425,7 +1425,7 @@ def GeneralisedOctagonGraph(const int s, const int t):
 
     EXAMPLES::
 
-        sage: # needs sage.libs.gap
+        sage: # needs sage.combinat sage.libs.gap
         sage: G = graphs.GeneralisedOctagonGraph(1, 4)          # optional - database_graphs
         sage: G.is_distance_regular(True)                       # optional - database_graphs
         ([5, 4, 4, 4, None], [None, 1, 1, 1, 5])

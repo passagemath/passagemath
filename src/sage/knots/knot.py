@@ -369,6 +369,7 @@ class Knot(Link, Element, metaclass=InheritComparisonClasscallMetaclass):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: W = Knots()
             sage: K = W.from_dowker_code([-4,-6,-2])
             sage: K.colored_jones_polynomial(2)
@@ -380,7 +381,7 @@ class Knot(Link, Element, metaclass=InheritComparisonClasscallMetaclass):
             -t^-4 - t^-3 - t^-1
 
             sage: R.<t> = ZZ[]
-            sage: K.colored_jones_polynomial(2, t+1)
+            sage: K.colored_jones_polynomial(2, t+1)                                    # needs sage.combinat
             (t^3 + 3*t^2 + 4*t + 1)/(t^4 + 4*t^3 + 6*t^2 + 4*t + 1)
         """
         return self.braid().colored_jones_polynomial(N=N, variab=variab,

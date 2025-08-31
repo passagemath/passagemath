@@ -1323,21 +1323,21 @@ class Polyhedron_base6(Polyhedron_base5):
         The ``orthonormal=True`` parameter preserves volumes;
         it provides an isometric copy of the polyhedron::
 
-            sage: # needs sage.groups sage.rings.number_field
+            sage: # needs sage.groups sage.rings.number_field sage.symbolic
             sage: Pentagon = polytopes.dodecahedron().faces(2)[0].as_polyhedron()
             sage: P = Pentagon.affine_hull_projection(orthonormal=True, extend=True)
             sage: _, c= P.is_inscribed(certificate=True)
             sage: c
             (0.4721359549995794?, 0.6498393924658126?)
-            sage: circumradius = (c - vector(P.vertices()[0])).norm()                   # needs sage.symbolic
+            sage: circumradius = (c - vector(P.vertices()[0])).norm()
             sage: p = polytopes.regular_polygon(5)
             sage: p.volume()
             2.377641290737884?
             sage: P.volume()
             1.53406271079097?
-            sage: p.volume()*circumradius^2                                             # needs sage.symbolic
+            sage: p.volume()*circumradius^2
             1.534062710790965?
-            sage: P.volume() == p.volume()*circumradius^2                               # needs sage.symbolic
+            sage: P.volume() == p.volume()*circumradius^2
             True
 
         One can also use ``orthogonal`` parameter to calculate volumes;
