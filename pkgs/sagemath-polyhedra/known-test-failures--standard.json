@@ -2263,12 +2263,11 @@
         "ntests": 110
     },
     "sage.groups.artin": {
-        "failed": true,
-        "ntests": 171
+        "ntests": 162
     },
     "sage.groups.braid": {
         "failed": true,
-        "ntests": 330
+        "ntests": 325
     },
     "sage.groups.cactus_group": {
         "ntests": 174
@@ -2434,8 +2433,7 @@
         "ntests": 39
     },
     "sage.groups.perm_gps.permgroup": {
-        "failed": true,
-        "ntests": 984
+        "ntests": 980
     },
     "sage.groups.perm_gps.permgroup_element": {
         "ntests": 402
@@ -2551,19 +2549,17 @@
         "ntests": 23
     },
     "sage.knots.free_knotinfo_monoid": {
-        "failed": true,
         "ntests": 66
     },
     "sage.knots.gauss_code": {
         "ntests": 18
     },
     "sage.knots.knot": {
-        "failed": true,
-        "ntests": 95
+        "ntests": 89
     },
     "sage.knots.knotinfo": {
         "failed": true,
-        "ntests": 341
+        "ntests": 311
     },
     "sage.knots.link": {
         "ntests": 556
@@ -4866,8 +4862,7 @@
         "ntests": 1
     },
     "sage.stats.distributions.discrete_gaussian_lattice": {
-        "failed": true,
-        "ntests": 0
+        "ntests": 150
     },
     "sage.stats.distributions.discrete_gaussian_polynomial": {
         "ntests": 24

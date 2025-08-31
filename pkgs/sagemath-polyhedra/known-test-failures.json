@@ -1321,8 +1321,7 @@
         "ntests": 28
     },
     "sage.features.sagemath": {
-        "failed": true,
-        "ntests": 0
+        "ntests": 189
     },
     "sage.features.sat": {
         "ntests": 16
