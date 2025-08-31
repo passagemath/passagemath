@@ -272,6 +272,7 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
         Next, we show ``elm`` is not the identity by using the embedding of
         the affine braid group `\widetilde{B}_n \to B_{n+1}`::
 
+            sage: # needs sage.libs.braiding
             sage: B.<t1,t2,t3,t4> = BraidGroup(5)
             sage: D = t1 * t2 * t3 * t4^2
             sage: t0 = D * t3 * ~D
@@ -291,7 +292,7 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
         (Bigelow gave an example of the representation not being faithful for
         `B_5`, but it is still open for `B_4`)::
 
-            sage: emb.burau_matrix() != 1
+            sage: emb.burau_matrix() != 1                                               # needs sage.libs.braiding
             True
 
         We also verify the result using the elements in [BQ2024]_ Remark 4.2::
@@ -300,8 +301,8 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
             sage: bp = s1 * ~s4 * s1^2 * s3^-2 * ~s2 * s4 * s1 * ~s3 * s2 * ~s4 * s3 * s1 * s4 * s1 * ~s2 * s4^-2 * s3
             sage: alpha = ap * s3 * ~ap
             sage: beta = bp * s2 * ~bp
-            sage: elm = alpha * beta * ~alpha * ~beta
-            sage: elm.burau_matrix()
+            sage: elm = alpha * beta * ~alpha * ~beta                                   # needs sage.libs.braiding
+            sage: elm.burau_matrix()                                                    # needs sage.libs.braiding
             [1 0 0 0]
             [0 1 0 0]
             [0 0 1 0]

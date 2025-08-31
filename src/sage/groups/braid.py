@@ -2316,7 +2316,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, 1, 2, 3, -1, 2, 1, 3])
-            sage: b.super_summit_set_element()
+            sage: b.super_summit_set_element()                                          # needs sage.libs.braiding
             (s0*s2*s0*s1*s2*s1*s0, s0^-1*s1^-1*s0^-1*s2^-1*s1^-1*s0^-1*s1*s0*s2*s1*s0)
         """
         to_sss = send_to_sss(self)
@@ -2332,7 +2332,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, 1, 2, 3, -1, 2, -1, 3])
-            sage: b.ultra_summit_set_element()
+            sage: b.ultra_summit_set_element()                                          # needs sage.libs.braiding
             (s0*s1*s0*s2*s1, s0^-1*s1^-1*s0^-1*s2^-1*s1^-1*s0^-1*s1*s2*s1^2*s0)
         """
         to_uss = send_to_uss(self)
@@ -2348,7 +2348,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, 1, 2, 3, -1, 2, -1, 3])
-            sage: b.sliding_circuits_element()
+            sage: b.sliding_circuits_element()                                          # needs sage.libs.braiding
             (s0*s1*s0*s2*s1, s0^2*s1*s2)
         """
         to_sc = send_to_sc(self)
@@ -2363,7 +2363,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, 1, 2, 3, -1, 2, -1, 3])
-            sage: b.trajectory()
+            sage: b.trajectory()                                                        # needs sage.libs.braiding
             [s0^-1*s1^-1*s0^-1*s2^-1*s1^-1*s2*s0*s1*s2*s1*s0^2*s1*s2^2,
              s0*s1*s2^3,
              s0*s1*s2*s1^2,
@@ -2383,7 +2383,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
             sage: B = BraidGroup(4)
             sage: b = B([1, 2, 1, 2, 3, -1, 2, 1])
-            sage: b.cyclic_slidings()
+            sage: b.cyclic_slidings()                                                   # needs sage.libs.braiding
             [[s0*s2*s1*s0*s1*s2, s0*s1*s2*s1*s0^2, s1*s0*s2^2*s1*s0],
              [s0*s1*s2*s1^2*s0, s0*s1*s2*s1*s0*s2, s1*s0*s2*s0*s1*s2]]
         """
@@ -2672,7 +2672,7 @@ class BraidGroup_class(FiniteTypeArtinGroup):
             sage: B1 = BraidGroup(5) # indirect doctest
             sage: B1
             Braid group on 5 strands
-            sage: TestSuite(B1).run()
+            sage: TestSuite(B1).run()                                                   # needs sage.libs.braiding
             sage: B1.category()
             Category of infinite groups
 
@@ -2907,6 +2907,7 @@ class BraidGroup_class(FiniteTypeArtinGroup):
 
         TESTS::
 
+            sage: # needs sage.libs.singular
             sage: B = BraidGroup(3)
             sage: g1, g2, mu3 = B._links_gould_representation()
             sage: R1, R1I = g1
@@ -3508,11 +3509,11 @@ class BraidGroup_class(FiniteTypeArtinGroup):
             sage: b = B((1,-2,-1,3,2,1))
             sage: bm = mirr(b); bm
             s0^-1*s1*s0*s2^-1*s1^-1*s0^-1
-            sage: bm == ~b
+            sage: bm == ~b                                                              # needs sage.libs.braiding
             False
-            sage: bm.is_conjugated(b)
+            sage: bm.is_conjugated(b)                                                   # needs sage.libs.braiding
             False
-            sage: bm.is_conjugated(~b)
+            sage: bm.is_conjugated(~b)                                                  # needs sage.libs.braiding
             True
         """
         gens_mirr = [~g for g in self.gens()]

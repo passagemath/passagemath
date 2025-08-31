@@ -337,8 +337,9 @@ def PermutationGroup(gens=None, *args, **kwds):
 
     We can create a permutation group from a group action::
 
+        sage: # needs sage.combinat
         sage: a = lambda x: (2*x) % 7
-        sage: H = PermutationGroup(action=a, domain=range(7))                           # needs sage.combinat
+        sage: H = PermutationGroup(action=a, domain=range(7))
         sage: H.orbits()                                                                # needs sage.libs.pari
         ((0,), (1, 2, 4), (3, 6, 5))
         sage: H.gens()                                                                  # needs sage.libs.pari
