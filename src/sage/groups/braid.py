@@ -70,7 +70,6 @@ AUTHORS:
 
 from itertools import combinations
 
-from sage.algebras.free_algebra import FreeAlgebra
 from sage.categories.action import Action
 from sage.categories.groups import Groups
 from sage.combinat.permutation import Permutation, Permutations
@@ -2159,6 +2158,8 @@ class Braid(FiniteTypeArtinGroupElement):
             sage: burau.subs({t:q}).change_ring(db_base) == db_simp
             True
         """
+        from sage.algebras.free_algebra import FreeAlgebra
+
         R = LaurentPolynomialRing(ZZ, variab)
 
         n = self.strands()
