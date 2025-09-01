@@ -341,7 +341,7 @@ class Groups(CategoryWithAxiom):
 
             ::
 
-                sage: A = AbelianGroup([2, 2])                                          # needs sage.groups
+                sage: A = AbelianGroup([2, 2])                                          # needs sage.groups sage.modules
                 sage: A.cayley_table(names='elements')                                  # needs sage.groups sage.modules
                     *      1    f1    f0 f0*f1
                      +------------------------

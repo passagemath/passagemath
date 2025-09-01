@@ -1758,7 +1758,7 @@ class SemidihedralGroup(PermutationGroup_unique):
             sage: G = SemidihedralGroup(4.4)
             Traceback (most recent call last):
             ...
-            TypeError: m must be an integer, not 4.40000000000000
+            TypeError: m must be an integer, not 4.4...
 
             sage: G = SemidihedralGroup(-5)
             Traceback (most recent call last):
