@@ -513,7 +513,10 @@ class DocTestController(SageObject):
                                         'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac',
                                         'jmol', 'kenzo', 'latte_int', 'macaulay2',
                                         'matroid_database', 'mcqd', 'meataxe', 'msolve',
-                                        'palp', 'plantri', 'polytopes_db', 'polytopes_db_4d',
+                                        'palp', 'pari_elldata', 'pari_galpol', 'pari_seadata',
+                                        'pari_seadata_big', 'pari_seadata_small',
+                                        'pari_galdata', 'pari_nflistdata', 'pari_nftables',
+                                        'plantri', 'polytopes_db', 'polytopes_db_4d',
                                         'pynormaliz', 'qepcad', 'rubiks', 'sirocco', 'sympow',
                                         'tachyon', 'tdlib', 'topcom']:
                             continue
