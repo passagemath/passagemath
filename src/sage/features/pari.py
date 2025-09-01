@@ -49,7 +49,7 @@ class PariFeature(Feature):
         sage: from sage.features.pari import PariFeature
         sage: F = PariFeature('pari_seadata', 'ellmodulareqn(211)')
         sage: F.is_present()                                   # optional - pari_seadata
-        True
+        FeatureTestResult('pari_seadata', True)
     """
     def __init__(self, name, command, **kwds):
         Feature.__init__(self, name,
