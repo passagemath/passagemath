@@ -20,11 +20,18 @@
     "sage.libs.eclib.newforms": {
         "ntests": 93
     },
+    "sage.modular.pollack_stevens.space": {
+        "failed": true,
+        "ntests": 182
+    },
     "sage.schemes.elliptic_curves.BSD": {
         "ntests": 50
     },
     "sage.schemes.elliptic_curves.Qcurves": {
         "ntests": 62
+    },
+    "sage.schemes.elliptic_curves.addition_formulas_ring": {
+        "ntests": 20
     },
     "sage.schemes.elliptic_curves.cardinality": {
         "ntests": 59
@@ -33,12 +40,10 @@
         "ntests": 92
     },
     "sage.schemes.elliptic_curves.constructor": {
-        "failed": true,
-        "ntests": 227
+        "ntests": 222
     },
     "sage.schemes.elliptic_curves.descent_two_isogeny": {
-        "failed": true,
-        "ntests": 37
+        "ntests": 34
     },
     "sage.schemes.elliptic_curves.ec_database": {
         "ntests": 9
@@ -47,38 +52,34 @@
         "ntests": 876
     },
     "sage.schemes.elliptic_curves.ell_egros": {
-        "failed": true,
-        "ntests": 29
+        "ntests": 24
     },
     "sage.schemes.elliptic_curves.ell_field": {
-        "failed": true,
-        "ntests": 430
+        "ntests": 433
     },
     "sage.schemes.elliptic_curves.ell_finite_field": {
-        "failed": true,
-        "ntests": 530
+        "ntests": 538
     },
     "sage.schemes.elliptic_curves.ell_generic": {
-        "failed": true,
-        "ntests": 540
+        "ntests": 565
     },
     "sage.schemes.elliptic_curves.ell_local_data": {
         "ntests": 167
     },
     "sage.schemes.elliptic_curves.ell_modular_symbols": {
-        "ntests": 76
+        "ntests": 75
     },
     "sage.schemes.elliptic_curves.ell_number_field": {
-        "failed": true,
-        "ntests": 840
+        "ntests": 827
+    },
+    "sage.schemes.elliptic_curves.ell_padic_field": {
+        "ntests": 13
     },
     "sage.schemes.elliptic_curves.ell_point": {
-        "failed": true,
-        "ntests": 960
+        "ntests": 995
     },
     "sage.schemes.elliptic_curves.ell_rational_field": {
-        "failed": true,
-        "ntests": 843
+        "ntests": 813
     },
     "sage.schemes.elliptic_curves.ell_tate_curve": {
         "ntests": 64
@@ -103,45 +104,37 @@
     },
     "sage.schemes.elliptic_curves.heegner": {
         "failed": true,
-        "ntests": 1087
+        "ntests": 1078
     },
     "sage.schemes.elliptic_curves.height": {
-        "failed": true,
-        "ntests": 318
+        "ntests": 303
     },
     "sage.schemes.elliptic_curves.hom": {
-        "failed": true,
-        "ntests": 344
+        "ntests": 336
     },
     "sage.schemes.elliptic_curves.hom_composite": {
-        "failed": true,
-        "ntests": 196
+        "ntests": 184
     },
     "sage.schemes.elliptic_curves.hom_frobenius": {
-        "failed": true,
-        "ntests": 111
+        "ntests": 104
     },
     "sage.schemes.elliptic_curves.hom_scalar": {
         "ntests": 138
     },
     "sage.schemes.elliptic_curves.hom_sum": {
-        "failed": true,
-        "ntests": 134
+        "ntests": 123
     },
     "sage.schemes.elliptic_curves.hom_velusqrt": {
-        "failed": true,
-        "ntests": 263
+        "ntests": 259
     },
     "sage.schemes.elliptic_curves.homset": {
-        "failed": true,
-        "ntests": 59
+        "ntests": 57
     },
     "sage.schemes.elliptic_curves.isogeny_class": {
         "ntests": 141
     },
     "sage.schemes.elliptic_curves.isogeny_small_degree": {
-        "failed": true,
-        "ntests": 297
+        "ntests": 291
     },
     "sage.schemes.elliptic_curves.jacobian": {
         "ntests": 35
@@ -153,8 +146,7 @@
         "ntests": 138
     },
     "sage.schemes.elliptic_curves.lseries_ell": {
-        "failed": true,
-        "ntests": 51
+        "ntests": 50
     },
     "sage.schemes.elliptic_curves.mod5family": {
         "ntests": 2
@@ -163,15 +155,19 @@
         "ntests": 27
     },
     "sage.schemes.elliptic_curves.mod_sym_num": {
-        "failed": true,
         "ntests": 359
     },
     "sage.schemes.elliptic_curves.modular_parametrization": {
         "ntests": 50
     },
+    "sage.schemes.elliptic_curves.padic_lseries": {
+        "ntests": 181
+    },
+    "sage.schemes.elliptic_curves.padics": {
+        "ntests": 80
+    },
     "sage.schemes.elliptic_curves.period_lattice": {
-        "failed": true,
-        "ntests": 405
+        "ntests": 449
     },
     "sage.schemes.elliptic_curves.saturation": {
         "ntests": 69
