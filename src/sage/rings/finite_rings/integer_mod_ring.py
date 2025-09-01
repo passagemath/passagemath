@@ -319,7 +319,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         sage: FF.order()
         29
 
-        sage: # needs sage.groups
+        sage: # needs sage.groups sage.modules
         sage: gens = FF.unit_gens()
         sage: a = gens[0]
         sage: a
@@ -610,7 +610,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         EXAMPLES::
 
-            sage: # optional - gap_package_polycyclic, needs sage.groups
+            sage: # optional - gap_package_polycyclic, needs sage.groups sage.modules
             sage: Integers(5).multiplicative_subgroups()
             ((2,), (4,), ())
             sage: Integers(15).multiplicative_subgroups()
@@ -622,11 +622,12 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         TESTS::
 
-            sage: IntegerModRing(1).multiplicative_subgroups()                          # needs sage.groups
+            sage: # needs sage.groups sage.modules
+            sage: IntegerModRing(1).multiplicative_subgroups()
             ((),)
-            sage: IntegerModRing(2).multiplicative_subgroups()                          # needs sage.groups
+            sage: IntegerModRing(2).multiplicative_subgroups()
             ((),)
-            sage: IntegerModRing(3).multiplicative_subgroups()  # optional - gap_package_polycyclic, needs sage.groups
+            sage: IntegerModRing(3).multiplicative_subgroups()  # optional - gap_package_polycyclic
             ((2,), ())
         """
         return tuple(tuple(g.value() for g in H.gens())
@@ -1334,32 +1335,35 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         EXAMPLES::
 
+            sage: # needs sage.groups sage.modules
             sage: R = IntegerModRing(18)
-            sage: R.unit_gens()                                                         # needs sage.groups
+            sage: R.unit_gens()
             (11,)
             sage: R = IntegerModRing(17)
-            sage: R.unit_gens()                                                         # needs sage.groups
+            sage: R.unit_gens()
             (3,)
-            sage: IntegerModRing(next_prime(10^30)).unit_gens()                         # needs sage.groups
+            sage: IntegerModRing(next_prime(10^30)).unit_gens()
             (5,)
 
         The choice of generators is affected by the optional keyword
         ``algorithm``; this can be ``'sage'`` (default) or ``'pari'``.
         See :meth:`unit_group` for details. ::
 
+            sage: # needs sage.groups sage.modules
             sage: A = Zmod(55)
-            sage: A.unit_gens(algorithm='sage')                                         # needs sage.groups
+            sage: A.unit_gens(algorithm='sage')
             (12, 46)
-            sage: A.unit_gens(algorithm='pari')                                         # needs sage.groups sage.libs.pari
+            sage: A.unit_gens(algorithm='pari')                                         # needs sage.libs.pari
             (2, 21)
 
         TESTS::
 
-            sage: IntegerModRing(2).unit_gens()                                         # needs sage.groups
+            sage: # needs sage.groups sage.modules
+            sage: IntegerModRing(2).unit_gens()
             ()
-            sage: IntegerModRing(4).unit_gens()                                         # needs sage.groups
+            sage: IntegerModRing(4).unit_gens()
             (3,)
-            sage: IntegerModRing(8).unit_gens()                                         # needs sage.groups
+            sage: IntegerModRing(8).unit_gens()
             (7, 5)
         """
         return self.unit_group(**kwds).gens_values()
@@ -1368,11 +1372,12 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         """
         EXAMPLES::
 
+            sage: # needs sage.groups sage.modules
             sage: R = IntegerModRing(17)
-            sage: R.unit_group_exponent()                                               # needs sage.groups
+            sage: R.unit_group_exponent()
             16
             sage: R = IntegerModRing(18)
-            sage: R.unit_group_exponent()                                               # needs sage.groups
+            sage: R.unit_group_exponent()
             6
         """
         return self.unit_group().exponent()
@@ -1384,7 +1389,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         EXAMPLES::
 
             sage: R = Integers(500)
-            sage: R.unit_group_order()                                                  # needs sage.groups
+            sage: R.unit_group_order()                                                  # needs sage.groups sage.modules
             200
         """
         return self.unit_group().order()
@@ -1422,7 +1427,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         differ in various ways.  In the following example, the same
         cyclic factors are computed, but in a different order::
 
-            sage: # needs sage.groups
+            sage: # needs sage.groups sage.modules
             sage: A = Zmod(15)
             sage: G = A.unit_group(); G
             Multiplicative Abelian group isomorphic to C2 x C4
@@ -1436,7 +1441,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         Here are two examples where the cyclic factors are isomorphic,
         but are ordered differently and have different generators::
 
-            sage: # needs sage.groups
+            sage: # needs sage.groups sage.modules
             sage: A = Zmod(40)
             sage: G = A.unit_group(); G
             Multiplicative Abelian group isomorphic to C2 x C2 x C4
@@ -1447,7 +1452,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
             sage: H.gens_values()                                                       # needs sage.libs.pari
             (17, 31, 21)
 
-            sage: # needs sage.groups
+            sage: # needs sage.groups sage.modules
             sage: A = Zmod(192)
             sage: G = A.unit_group(); G
             Multiplicative Abelian group isomorphic to C2 x C16 x C2
@@ -1461,17 +1466,17 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         In the following examples, the cyclic factors are not even
         isomorphic::
 
+            sage: # needs sage.groups sage.modules
             sage: A = Zmod(319)
-            sage: A.unit_group()                                                        # needs sage.groups
+            sage: A.unit_group()
             Multiplicative Abelian group isomorphic to C10 x C28
-            sage: A.unit_group(algorithm='pari')                                        # needs sage.groups sage.libs.pari
+            sage: A.unit_group(algorithm='pari')                                        # needs sage.libs.pari
             Multiplicative Abelian group isomorphic to C140 x C2
-
             sage: A = Zmod(30.factorial())
-            sage: A.unit_group()                                                        # needs sage.groups
+            sage: A.unit_group()
             Multiplicative Abelian group isomorphic to
              C2 x C16777216 x C3188646 x C62500 x C2058 x C110 x C156 x C16 x C18 x C22 x C28
-            sage: A.unit_group(algorithm='pari')                                        # needs sage.groups sage.libs.pari
+            sage: A.unit_group(algorithm='pari')                                        # needs sage.libs.pari
             Multiplicative Abelian group isomorphic to
              C20499647385305088000000 x C55440 x C12 x C12 x C4 x C2 x C2 x C2 x C2 x C2 x C2
 
@@ -1479,7 +1484,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         We test the cases where the unit group is trivial::
 
-            sage: # needs sage.groups
+            sage: # needs sage.groups sage.modules
             sage: A = Zmod(1)
             sage: A.unit_group()
             Trivial Abelian group
@@ -1490,8 +1495,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
             Trivial Abelian group
             sage: A.unit_group(algorithm='pari')                                        # needs sage.libs.pari
             Trivial Abelian group
-
-            sage: Zmod(3).unit_group(algorithm='bogus')                                 # needs sage.groups
+            sage: Zmod(3).unit_group(algorithm='bogus')
             Traceback (most recent call last):
             ...
             ValueError: unknown algorithm 'bogus' for computing the unit group
