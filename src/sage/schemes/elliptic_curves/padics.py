@@ -169,7 +169,7 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
 
     Next consider the curve 37b::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.graphs
         sage: e = EllipticCurve('37b')
         sage: L = e.padic_lseries(3)
         sage: P = L.series(5)
@@ -184,23 +184,26 @@ def padic_lseries(self, p, normalize=None, implementation='eclib',
 
     We can use Sage modular symbols instead to compute the `L`-series::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.graphs
         sage: e = EllipticCurve('11a')
         sage: L = e.padic_lseries(3, implementation='sage')
-        sage: L.series(5,prec=10)
-        2 + 3 + 3^2 + 2*3^3 + 2*3^5 + 3^6 + O(3^7) + (1 + 3 + 2*3^2 + 3^3 + O(3^4))*T + (1 + 2*3 + O(3^4))*T^2 + (3 + 2*3^2 + O(3^3))*T^3 + (2*3 + 3^2 + O(3^3))*T^4 + (2 + 2*3 + 2*3^2 + O(3^3))*T^5 + (1 + 3^2 + O(3^3))*T^6 + (2 + 3^2 + O(3^3))*T^7 + (2 + 2*3 + 2*3^2 + O(3^3))*T^8 + (2 + O(3^2))*T^9 + O(T^10)
+        sage: L.series(5, prec=10)
+        2 + 3 + 3^2 + 2*3^3 + 2*3^5 + 3^6 + O(3^7) + (1 + 3 + 2*3^2 + 3^3 + O(3^4))*T
+          + (1 + 2*3 + O(3^4))*T^2 + (3 + 2*3^2 + O(3^3))*T^3 + (2*3 + 3^2 + O(3^3))*T^4
+          + (2 + 2*3 + 2*3^2 + O(3^3))*T^5 + (1 + 3^2 + O(3^3))*T^6 + (2 + 3^2 + O(3^3))*T^7
+          + (2 + 2*3 + 2*3^2 + O(3^3))*T^8 + (2 + O(3^2))*T^9 + O(T^10)
 
     Also the numerical modular symbols can be used.
     This may allow for much larger conductor in some instances::
 
         sage: E = EllipticCurve([101,103])
         sage: L = E.padic_lseries(5, implementation='num')
-        sage: L.series(2)
+        sage: L.series(2)                                                               # needs sage.graphs
         O(5^4) + (3 + O(5))*T + (1 + O(5))*T^2 + (3 + O(5))*T^3 + O(5)*T^4 + O(T^5)
 
     Finally, we can use the overconvergent method of Pollack-Stevens.::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.graphs
         sage: e = EllipticCurve('11a')
         sage: L = e.padic_lseries(3, implementation='pollackstevens', precision=6)
         sage: L.series(5)
@@ -278,48 +281,48 @@ def padic_regulator(self, p, prec=20, height=None, check_hypotheses=True):
 
     EXAMPLES::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve("37a")
         sage: E.padic_regulator(5, 10)
         5 + 5^2 + 5^3 + 3*5^6 + 4*5^7 + 5^9 + O(5^10)
 
     An anomalous case::
 
-        sage: E.padic_regulator(53, 10)                                                 # needs database_cremona_mini_ellcurve
+        sage: E.padic_regulator(53, 10)                                                 # needs database_cremona_mini_ellcurve sage.symbolic
         26*53^-1 + 30 + 20*53 + 47*53^2 + 10*53^3 + 32*53^4 + 9*53^5 + 22*53^6 + 35*53^7 + 30*53^8 + O(53^9)
 
     An anomalous case where the precision drops some::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve("5077a")
         sage: E.padic_regulator(5, 10)
         5 + 5^2 + 4*5^3 + 2*5^4 + 2*5^5 + 2*5^6 + 4*5^7 + 2*5^8 + 5^9 + O(5^10)
 
     Check that answers agree over a range of precisions::
 
-        sage: # needs database_cremona_mini_ellcurve
-        sage: max_prec = 30    # make sure we get past p^2    # long time
-        sage: full = E.padic_regulator(5, max_prec)           # long time
-        sage: for prec in range(1, max_prec):                 # long time
+        sage: # long time, needs database_cremona_mini_ellcurve sage.symbolic
+        sage: max_prec = 30    # make sure we get past p^2
+        sage: full = E.padic_regulator(5, max_prec)
+        sage: for prec in range(1, max_prec):
         ....:     assert E.padic_regulator(5, prec) == full
 
     A case where the generator belongs to the formal group already
     (:issue:`3632`)::
 
         sage: E = EllipticCurve([37,0])
-        sage: E.padic_regulator(5,10)
+        sage: E.padic_regulator(5,10)                                                   # needs sage.symbolic
         2*5^2 + 2*5^3 + 5^4 + 5^5 + 4*5^6 + 3*5^8 + 4*5^9 + O(5^10)
 
     The result is not dependent on the model for the curve::
 
         sage: E = EllipticCurve([0,0,0,0,2^12*17])
         sage: Em = E.minimal_model()
-        sage: E.padic_regulator(7) == Em.padic_regulator(7)
+        sage: E.padic_regulator(7) == Em.padic_regulator(7)                             # needs sage.symbolic
         True
 
     Allow a python int as input::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve('37a')
         sage: E.padic_regulator(int(5))
         5 + 5^2 + 5^3 + 3*5^6 + 4*5^7 + 5^9 + 5^10 + 3*5^11 + 3*5^12 + 5^13 + 4*5^14 + 5^15 + 2*5^16 + 5^17 + 2*5^18 + 4*5^19 + O(5^20)
@@ -384,14 +387,14 @@ def padic_height_pairing_matrix(self, p, prec=20, height=None, check_hypotheses=
 
     EXAMPLES::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve("37a")
         sage: E.padic_height_pairing_matrix(5, 10)
         [5 + 5^2 + 5^3 + 3*5^6 + 4*5^7 + 5^9 + O(5^10)]
 
     A rank two example::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: e = EllipticCurve('389a')
         sage: e._set_gens([e(-1, 1), e(1,0)])  # avoid platform dependent gens
         sage: e.padic_height_pairing_matrix(5,10)
@@ -400,7 +403,7 @@ def padic_height_pairing_matrix(self, p, prec=20, height=None, check_hypotheses=
 
     An anomalous rank 3 example::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: e = EllipticCurve("5077a")
         sage: e._set_gens([e(-1,3), e(2,0), e(4,6)])
         sage: e.padic_height_pairing_matrix(5,4)
@@ -724,7 +727,7 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     EXAMPLES::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve("37a")
         sage: P = E.gens()[0]
         sage: h = E.padic_height(5, 10)
@@ -733,23 +736,23 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     An anomalous case::
 
-        sage: h = E.padic_height(53, 10)                                                # needs database_cremona_mini_ellcurve
-        sage: h(P)                                                                      # needs database_cremona_mini_ellcurve
+        sage: h = E.padic_height(53, 10)                                                # needs database_cremona_mini_ellcurve sage.symbolic
+        sage: h(P)                                                                      # needs database_cremona_mini_ellcurve sage.symbolic
         26*53^-1 + 30 + 20*53 + 47*53^2 + 10*53^3 + 32*53^4 + 9*53^5 + 22*53^6 + 35*53^7 + 30*53^8 + 17*53^9 + O(53^10)
 
     Boundary case::
 
-        sage: E.padic_height(5, 3)(P)                                                   # needs database_cremona_mini_ellcurve
+        sage: E.padic_height(5, 3)(P)                                                   # needs database_cremona_mini_ellcurve sage.symbolic
         5 + 5^2 + O(5^3)
 
     A case that works the division polynomial code a little harder::
 
-        sage: E.padic_height(5, 10)(5*P)                                                # needs database_cremona_mini_ellcurve
+        sage: E.padic_height(5, 10)(5*P)                                                # needs database_cremona_mini_ellcurve sage.symbolic
         5^3 + 5^4 + 5^5 + 3*5^8 + 4*5^9 + O(5^10)
 
     Check that answers agree over a range of precisions::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: max_prec = 30    # make sure we get past p^2    # long time
         sage: full = E.padic_height(5, max_prec)(P)           # long time
         sage: for prec in range(1, max_prec):                 # long time
@@ -757,7 +760,7 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     A supersingular prime for a curve::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve('37a')
         sage: E.is_supersingular(3)
         True
@@ -771,7 +774,7 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     A torsion point in both the good and supersingular cases::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve('11a')
         sage: P = E.torsion_subgroup().gen(0).element(); P
         (5 : 5 : 1)
@@ -784,6 +787,7 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     The result is not dependent on the model for the curve::
 
+        sage: # needs sage.symbolic
         sage: E = EllipticCurve([0,0,0,0,2^12*17])
         sage: Em = E.minimal_model()
         sage: P = E.gens()[0]
@@ -797,7 +801,7 @@ def padic_height(self, p, prec=20, sigma=None, check_hypotheses=True):
 
     Check that issue :issue:`20798` is solved::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve("91b")
         sage: h = E.padic_height(7,10)
         sage: P = E.gen(0)
@@ -924,7 +928,7 @@ def padic_height_via_multiply(self, p, prec=20, E2=None, check_hypotheses=True):
 
     EXAMPLES::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve("37a")
         sage: P = E.gens()[0]
         sage: h = E.padic_height_via_multiply(5, 10)
@@ -933,13 +937,13 @@ def padic_height_via_multiply(self, p, prec=20, E2=None, check_hypotheses=True):
 
     An anomalous case::
 
-        sage: h = E.padic_height_via_multiply(53, 10)                                   # needs database_cremona_mini_ellcurve
-        sage: h(P)                                                                      # needs database_cremona_mini_ellcurve
+        sage: h = E.padic_height_via_multiply(53, 10)                                   # needs database_cremona_mini_ellcurve sage.symbolic
+        sage: h(P)                                                                      # needs database_cremona_mini_ellcurve sage.symbolic
         26*53^-1 + 30 + 20*53 + 47*53^2 + 10*53^3 + 32*53^4 + 9*53^5 + 22*53^6 + 35*53^7 + 30*53^8 + 17*53^9 + O(53^10)
 
     Supply the value of E2 manually::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E2 = E.padic_E2(5, 8)
         sage: E2
         2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + O(5^8)
@@ -949,12 +953,12 @@ def padic_height_via_multiply(self, p, prec=20, E2=None, check_hypotheses=True):
 
     Boundary case::
 
-        sage: E.padic_height_via_multiply(5, 3)(P)                                      # needs database_cremona_mini_ellcurve
+        sage: E.padic_height_via_multiply(5, 3)(P)                                      # needs database_cremona_mini_ellcurve sage.symbolic
         5 + 5^2 + O(5^3)
 
     Check that answers agree over a range of precisions::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: max_prec = 30    # make sure we get past p^2    # long time
         sage: full = E.padic_height(5, max_prec)(P)           # long time
         sage: for prec in range(2, max_prec):                 # long time
@@ -1089,23 +1093,24 @@ def padic_sigma(self, p, N=20, E2=None, check=False, check_hypotheses=True):
 
     EXAMPLES::
 
-        sage: EllipticCurve([-1, 1/4]).padic_sigma(5, 10)
+        sage: EllipticCurve([-1, 1/4]).padic_sigma(5, 10)                               # needs sage.symbolic
         O(5^11) + (1 + O(5^10))*t + O(5^9)*t^2 + (3 + 2*5^2 + 3*5^3 + 3*5^6 + 4*5^7 + O(5^8))*t^3 + O(5^7)*t^4 + (2 + 4*5^2 + 4*5^3 + 5^4 + 5^5 + O(5^6))*t^5 + O(5^5)*t^6 + (2 + 2*5 + 5^2 + 4*5^3 + O(5^4))*t^7 + O(5^3)*t^8 + (1 + 2*5 + O(5^2))*t^9 + O(5)*t^10 + O(t^11)
 
     Run it with a consistency check::
 
-        sage: EllipticCurve("37a").padic_sigma(5, 10, check=True)
+        sage: EllipticCurve("37a").padic_sigma(5, 10, check=True)                       # needs sage.symbolic
         O(5^11) + (1 + O(5^10))*t + O(5^9)*t^2 + (3 + 2*5^2 + 3*5^3 + 3*5^6 + 4*5^7 + O(5^8))*t^3 + (3 + 2*5 + 2*5^2 + 2*5^3 + 2*5^4 + 2*5^5 + 2*5^6 + O(5^7))*t^4 + (2 + 4*5^2 + 4*5^3 + 5^4 + 5^5 + O(5^6))*t^5 + (2 + 3*5 + 5^4 + O(5^5))*t^6 + (4 + 3*5 + 2*5^2 + O(5^4))*t^7 + (2 + 3*5 + 2*5^2 + O(5^3))*t^8 + (4*5 + O(5^2))*t^9 + (1 + O(5))*t^10 + O(t^11)
 
     Boundary cases::
 
-        sage: EllipticCurve([1, 1, 1, 1, 1]).padic_sigma(5, 1)
+        sage: EllipticCurve([1, 1, 1, 1, 1]).padic_sigma(5, 1)                          # needs sage.symbolic
          (1 + O(5))*t + O(t^2)
-        sage: EllipticCurve([1, 1, 1, 1, 1]).padic_sigma(5, 2)
+        sage: EllipticCurve([1, 1, 1, 1, 1]).padic_sigma(5, 2)                          # needs sage.symbolic
          (1 + O(5^2))*t + (3 + O(5))*t^2 + O(t^3)
 
     Supply your very own value of E2::
 
+        sage: # needs sage.symbolic
         sage: X = EllipticCurve("37a")
         sage: my_E2 = X.padic_E2(5, 8)
         sage: my_E2 = my_E2 + 5**5    # oops!!!
@@ -1116,6 +1121,7 @@ def padic_sigma(self, p, N=20, E2=None, check=False, check_hypotheses=True):
 
     ::
 
+        sage: # needs sage.symbolic
         sage: f = EllipticCurve([-1, 3]).padic_sigma(5, 10)
         sage: g = EllipticCurve([-1*(2**4), 3*(2**6)]).padic_sigma(5, 10)
         sage: t = f.parent().gen()
@@ -1128,7 +1134,7 @@ def padic_sigma(self, p, N=20, E2=None, check=False, check_hypotheses=True):
 
     Test that it returns consistent results over a range of precision::
 
-        sage: # long time
+        sage: # long time, needs sage.symbolic
         sage: max_N = 30   # get up to at least p^2
         sage: E = EllipticCurve([1, 1, 1, 1, 1])
         sage: p = 5
@@ -1295,13 +1301,13 @@ def padic_sigma_truncated(self, p, N=20, lamb=0, E2=None, check_hypotheses=True)
     EXAMPLES::
 
         sage: E = EllipticCurve([-1, 1/4])
-        sage: E.padic_sigma_truncated(5, 10)
+        sage: E.padic_sigma_truncated(5, 10)                                            # needs sage.symbolic
         O(5^11) + (1 + O(5^10))*t + O(5^9)*t^2 + (3 + 2*5^2 + 3*5^3 + 3*5^6 + 4*5^7 + O(5^8))*t^3 + O(5^7)*t^4 + (2 + 4*5^2 + 4*5^3 + 5^4 + 5^5 + O(5^6))*t^5 + O(5^5)*t^6 + (2 + 2*5 + 5^2 + 4*5^3 + O(5^4))*t^7 + O(5^3)*t^8 + (1 + 2*5 + O(5^2))*t^9 + O(5)*t^10 + O(t^11)
 
     Note the precision of the `t^3` coefficient depends only on
     `N`, not on lamb::
 
-        sage: E.padic_sigma_truncated(5, 10, lamb=2)
+        sage: E.padic_sigma_truncated(5, 10, lamb=2)                                    # needs sage.symbolic
         O(5^17) + (1 + O(5^14))*t + O(5^11)*t^2 + (3 + 2*5^2 + 3*5^3 + 3*5^6 + 4*5^7 + O(5^8))*t^3 + O(5^5)*t^4 + (2 + O(5^2))*t^5 + O(t^6)
 
     Compare against plain padic_sigma() function over a dense range of
@@ -1309,9 +1315,10 @@ def padic_sigma_truncated(self, p, N=20, lamb=0, E2=None, check_hypotheses=True)
 
     ::
 
-        sage: E = EllipticCurve([1, 2, 3, 4, 7])                            # long time
-        sage: E2 = E.padic_E2(5, 50)                                        # long time
-        sage: for N in range(2, 10):                                        # long time
+        sage: # long time, needs sage.symbolic
+        sage: E = EllipticCurve([1, 2, 3, 4, 7])
+        sage: E2 = E.padic_E2(5, 50)
+        sage: for N in range(2, 10):
         ....:    for lamb in range(10):
         ....:       correct = E.padic_sigma(5, N + 3*lamb, E2=E2)
         ....:       compare = E.padic_sigma_truncated(5, N=N, lamb=lamb, E2=E2)
@@ -1462,17 +1469,18 @@ def padic_E2(self, p, prec=20, check=False, check_hypotheses=True, algorithm='au
     EXAMPLES: Here is the example discussed in the paper "Computation
     of p-adic Heights and Log Convergence" (Mazur, Stein, Tate) [MST2006]_::
 
-        sage: EllipticCurve([-1, 1/4]).padic_E2(5)
+        sage: EllipticCurve([-1, 1/4]).padic_E2(5)                                      # needs sage.symbolic
         2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + 5^8 + 3*5^9 + 4*5^10 + 2*5^11 + 2*5^12 + 2*5^14 + 3*5^15 + 3*5^16 + 3*5^17 + 4*5^18 + 2*5^19 + O(5^20)
 
     Let's try to higher precision (this is the same answer the MAGMA
     implementation gives)::
 
-        sage: EllipticCurve([-1, 1/4]).padic_E2(5, 100)
+        sage: EllipticCurve([-1, 1/4]).padic_E2(5, 100)                                 # needs sage.symbolic
         2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + 5^8 + 3*5^9 + 4*5^10 + 2*5^11 + 2*5^12 + 2*5^14 + 3*5^15 + 3*5^16 + 3*5^17 + 4*5^18 + 2*5^19 + 4*5^20 + 5^21 + 4*5^22 + 2*5^23 + 3*5^24 + 3*5^26 + 2*5^27 + 3*5^28 + 2*5^30 + 5^31 + 4*5^33 + 3*5^34 + 4*5^35 + 5^36 + 4*5^37 + 4*5^38 + 3*5^39 + 4*5^41 + 2*5^42 + 3*5^43 + 2*5^44 + 2*5^48 + 3*5^49 + 4*5^50 + 2*5^51 + 5^52 + 4*5^53 + 4*5^54 + 3*5^55 + 2*5^56 + 3*5^57 + 4*5^58 + 4*5^59 + 5^60 + 3*5^61 + 5^62 + 4*5^63 + 5^65 + 3*5^66 + 2*5^67 + 5^69 + 2*5^70 + 3*5^71 + 3*5^72 + 5^74 + 5^75 + 5^76 + 3*5^77 + 4*5^78 + 4*5^79 + 2*5^80 + 3*5^81 + 5^82 + 5^83 + 4*5^84 + 3*5^85 + 2*5^86 + 3*5^87 + 5^88 + 2*5^89 + 4*5^90 + 4*5^92 + 3*5^93 + 4*5^94 + 3*5^95 + 2*5^96 + 4*5^97 + 4*5^98 + 2*5^99 + O(5^100)
 
     Check it works at low precision too::
 
+        sage: # needs sage.symbolic
         sage: EllipticCurve([-1, 1/4]).padic_E2(5, 1)
         2 + O(5)
         sage: EllipticCurve([-1, 1/4]).padic_E2(5, 2)
@@ -1487,7 +1495,7 @@ def padic_E2(self, p, prec=20, check=False, check_hypotheses=True, algorithm='au
 
     ::
 
-        sage: EllipticCurve([1, 1, 1, 1, 1]).padic_E2(5, 1)
+        sage: EllipticCurve([1, 1, 1, 1, 1]).padic_E2(5, 1)                             # needs sage.symbolic
         O(5)
 
     Check it works for different models of the same curve (37a), even
@@ -1498,7 +1506,7 @@ def padic_E2(self, p, prec=20, check=False, check_hypotheses=True, algorithm='au
         sage: X1 = EllipticCurve([-1, 1/4])
         sage: X1.j_invariant(), X1.discriminant()
          (110592/37, 37)
-        sage: X1.padic_E2(5, 10)
+        sage: X1.padic_E2(5, 10)                                                        # needs sage.symbolic
          2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + 5^8 + 3*5^9 + O(5^10)
 
     ::
@@ -1506,7 +1514,7 @@ def padic_E2(self, p, prec=20, check=False, check_hypotheses=True, algorithm='au
         sage: X2 = EllipticCurve([0, 0, 1, -1, 0])
         sage: X2.j_invariant(), X2.discriminant()
          (110592/37, 37)
-        sage: X2.padic_E2(5, 10)
+        sage: X2.padic_E2(5, 10)                                                        # needs sage.symbolic
          2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + 5^8 + 3*5^9 + O(5^10)
 
     ::
@@ -1514,7 +1522,7 @@ def padic_E2(self, p, prec=20, check=False, check_hypotheses=True, algorithm='au
         sage: X3 = EllipticCurve([-1*(2**4), 1/4*(2**6)])
         sage: X3.j_invariant(), X3.discriminant() / 2**12
          (110592/37, 37)
-        sage: 2**(-2) * X3.padic_E2(5, 10)
+        sage: 2**(-2) * X3.padic_E2(5, 10)                                              # needs sage.symbolic
          2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + 5^8 + 3*5^9 + O(5^10)
 
     ::
@@ -1522,7 +1530,7 @@ def padic_E2(self, p, prec=20, check=False, check_hypotheses=True, algorithm='au
         sage: X4 = EllipticCurve([-1*(7**4), 1/4*(7**6)])
         sage: X4.j_invariant(), X4.discriminant() / 7**12
          (110592/37, 37)
-        sage: 7**(-2) * X4.padic_E2(5, 10)
+        sage: 7**(-2) * X4.padic_E2(5, 10)                                              # needs sage.symbolic
          2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + 5^8 + 3*5^9 + O(5^10)
 
     ::
@@ -1530,7 +1538,7 @@ def padic_E2(self, p, prec=20, check=False, check_hypotheses=True, algorithm='au
         sage: X5 = EllipticCurve([-1*(5**4), 1/4*(5**6)])
         sage: X5.j_invariant(), X5.discriminant() / 5**12
          (110592/37, 37)
-        sage: 5**(-2) * X5.padic_E2(5, 10)
+        sage: 5**(-2) * X5.padic_E2(5, 10)                                              # needs sage.symbolic
          2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + 5^8 + 3*5^9 + O(5^10)
 
     ::
@@ -1538,11 +1546,12 @@ def padic_E2(self, p, prec=20, check=False, check_hypotheses=True, algorithm='au
         sage: X6 = EllipticCurve([-1/(5**4), 1/4/(5**6)])
         sage: X6.j_invariant(), X6.discriminant() * 5**12
          (110592/37, 37)
-        sage: 5**2 * X6.padic_E2(5, 10)
+        sage: 5**2 * X6.padic_E2(5, 10)                                                 # needs sage.symbolic
          2 + 4*5 + 2*5^3 + 5^4 + 3*5^5 + 2*5^6 + 5^8 + 3*5^9 + O(5^10)
 
     Test check=True vs check=False::
 
+        sage: # needs sage.symbolic
         sage: EllipticCurve([-1, 1/4]).padic_E2(5, 1, check=False)
         2 + O(5)
         sage: EllipticCurve([-1, 1/4]).padic_E2(5, 1, check=True)
@@ -1554,7 +1563,7 @@ def padic_E2(self, p, prec=20, check=False, check_hypotheses=True, algorithm='au
 
     Here's one using the `p^{1/2}` algorithm::
 
-        sage: EllipticCurve([-1, 1/4]).padic_E2(3001, 3, algorithm='sqrtp')
+        sage: EllipticCurve([-1, 1/4]).padic_E2(3001, 3, algorithm='sqrtp')             # needs sage.symbolic
         1907 + 2819*3001 + 1124*3001^2 + O(3001^3)
     """
     if self.conductor() % p == 0:
@@ -1624,7 +1633,7 @@ def matrix_of_frobenius(self, p, prec=20, check=False, check_hypotheses=True, al
 
     EXAMPLES::
 
-        sage: # needs database_cremona_mini_ellcurve
+        sage: # needs database_cremona_mini_ellcurve sage.symbolic
         sage: E = EllipticCurve('37a1')
         sage: E.matrix_of_frobenius(7)
         [             2*7 + 4*7^2 + 5*7^4 + 6*7^5 + 6*7^6 + 7^8 + 4*7^9 + 3*7^10 + 2*7^11 + 5*7^12 + 4*7^14 + 7^16 + 2*7^17 + 3*7^18 + 4*7^19 + 3*7^20 + O(7^21)                                   2 + 3*7 + 6*7^2 + 7^3 + 3*7^4 + 5*7^5 + 3*7^7 + 7^8 + 3*7^9 + 6*7^13 + 7^14 + 7^16 + 5*7^17 + 4*7^18 + 7^19 + O(7^20)]

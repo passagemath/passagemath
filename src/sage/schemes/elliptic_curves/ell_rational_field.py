@@ -6024,7 +6024,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         The bug reported on :issue:`22719` is now fixed::
 
             sage: E = EllipticCurve("141d1")
-            sage: E.integral_points()                                                   # needs eclib
+            sage: E.integral_points()                                                   # needs eclib sage.symbolic
             [(0 : -1 : 1), (2 : -2 : 1)]
         """
         xmin = pari(xmin)
@@ -6100,7 +6100,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
         ::
 
             sage: E = EllipticCurve([0,0,1,-7,6])
-            sage: a = E.integral_points(both_signs=True); a                             # needs eclib
+            sage: a = E.integral_points(both_signs=True); a                             # needs eclib sage.symbolic
             [(-3 : -1 : 1), (-3 : 0 : 1), (-2 : -4 : 1), (-2 : 3 : 1), (-1 : -4 : 1),
              (-1 : 3 : 1), (0 : -3 : 1), (0 : 2 : 1), (1 : -1 : 1), (1 : 0 : 1),
              (2 : -1 : 1), (2 : 0 : 1), (3 : -4 : 1), (3 : 3 : 1), (4 : -7 : 1),
@@ -6112,7 +6112,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         An example with negative discriminant::
 
-            sage: EllipticCurve('900d1').integral_points()                              # needs eclib
+            sage: EllipticCurve('900d1').integral_points()                              # needs eclib sage.symbolic
             [(-11 : -27 : 1), (-4 : -34 : 1), (4 : -18 : 1), (16 : -54 : 1)]
 
         Another example with rank 5 and no torsion points::
@@ -6121,19 +6121,19 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             sage: P1 = E.point((540,1188)); P2 = E.point((576,1836))
             sage: P3 = E.point((468,3132)); P4 = E.point((612,3132))
             sage: P5 = E.point((432,4428))
-            sage: a = E.integral_points([P1,P2,P3,P4,P5]); len(a)  # long time (18s on sage.math, 2011)
+            sage: a = E.integral_points([P1,P2,P3,P4,P5]); len(a)  # long time (18s on sage.math, 2011), needs sage.symbolic
             54
 
         TESTS:
 
         The bug reported on :issue:`4525` is now fixed::
 
-            sage: EllipticCurve('91b1').integral_points()                               # needs eclib
+            sage: EllipticCurve('91b1').integral_points()                               # needs eclib sage.symbolic
             [(-1 : -4 : 1), (1 : -1 : 1), (3 : -5 : 1)]
 
         ::
 
-            sage: [len(e.integral_points(both_signs=False)) for e in cremona_curves([11..100])]  # long time (15s on sage.math, 2011), needs eclib
+            sage: [len(e.integral_points(both_signs=False)) for e in cremona_curves([11..100])]  # long time (15s on sage.math, 2011), needs eclib sage.symbolic
             [2, 0, 2, 3, 2, 1, 3, 0, 2, 4, 2, 4, 3, 0, 0, 1, 2, 1, 2, 0, 2, 1, 0, 1, 3, 3, 1, 1, 4, 2, 3, 2, 0, 0, 5, 3, 2, 2, 1, 1, 1, 0, 1, 3, 0, 1, 0, 1, 1, 3, 6, 1, 2, 2, 2, 0, 0, 2, 3, 1, 2, 2, 1, 1, 0, 3, 2, 1, 0, 1, 0, 1, 3, 3, 1, 1, 5, 1, 0, 1, 1, 0, 1, 2, 0, 2, 0, 1, 1, 3, 1, 2, 2, 4, 4, 2, 1, 0, 0, 5, 1, 0, 1, 2, 0, 2, 2, 0, 0, 0, 1, 0, 3, 1, 5, 1, 2, 4, 1, 0, 1, 0, 1, 0, 1, 0, 2, 2, 0, 0, 1, 0, 1, 1, 4, 1, 0, 1, 1, 0, 4, 2, 0, 1, 1, 2, 3, 1, 1, 1, 1, 6, 2, 1, 1, 0, 2, 0, 6, 2, 0, 4, 2, 2, 0, 0, 1, 2, 0, 2, 1, 0, 3, 1, 2, 1, 4, 6, 3, 2, 1, 0, 2, 2, 0, 0, 5, 4, 1, 0, 0, 1, 0, 2, 2, 0, 0, 2, 3, 1, 3, 1, 1, 0, 1, 0, 0, 1, 2, 2, 0, 2, 0, 0, 1, 2, 0, 0, 4, 1, 0, 1, 1, 0, 1, 2, 0, 1, 4, 3, 1, 2, 2, 1, 1, 1, 1, 6, 3, 3, 3, 3, 1, 1, 1, 1, 1, 0, 7, 3, 0, 1, 3, 2, 1, 0, 3, 2, 1, 0, 2, 2, 6, 0, 0, 6, 2, 2, 3, 3, 5, 5, 1, 0, 6, 1, 0, 3, 1, 1, 2, 3, 1, 2, 1, 1, 0, 1, 0, 1, 0, 5, 5, 2, 2, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1]
 
         The bug reported at :issue:`4897` is now fixed::
@@ -6143,7 +6143,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         See :issue:`22063`::
 
-            sage: for n in [67,71,74,91]:  # long time
+            sage: for n in [67,71,74,91]:  # long time, needs sage.symbolic
             ....:     assert 4*n^6 + 4*n^2 in [P[0] for P in EllipticCurve([0,0,0,2,n^2]).integral_points()]
 
         ALGORITHM:
@@ -6562,31 +6562,31 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
 
         ::
 
-            sage: a = E.S_integral_points([2,3])                                            # needs eclib
-            sage: len(a)                                                                    # needs eclib
+            sage: a = E.S_integral_points([2,3])                                            # needs eclib sage.symbolic
+            sage: len(a)                                                                    # needs eclib sage.symbolic
             43
 
         An example with negative discriminant::
 
-            sage: EllipticCurve('900d1').S_integral_points([17], both_signs=True)           # needs eclib
+            sage: EllipticCurve('900d1').S_integral_points([17], both_signs=True)           # needs eclib sage.symbolic
             [(-11 : -27 : 1), (-11 : 27 : 1), (-4 : -34 : 1), (-4 : 34 : 1), (4 : -18 : 1),
              (4 : 18 : 1), (2636/289 : -98786/4913 : 1), (2636/289 : 98786/4913 : 1),
              (16 : -54 : 1), (16 : 54 : 1)]
 
         Output checked with Magma (corrected in 3 cases)::
 
-            sage: [len(e.S_integral_points([2], both_signs=False)) for e in cremona_curves([11..100])] # long time (17s on sage.math, 2011)     # needs eclib
+            sage: [len(e.S_integral_points([2], both_signs=False)) for e in cremona_curves([11..100])]  # long time (17s on sage.math, 2011)     # needs eclib sage.symbolic
             [2, 0, 2, 3, 3, 1, 3, 1, 3, 5, 3, 5, 4, 1, 1, 2, 2, 2, 3, 1, 2, 1, 0, 1, 3, 3, 1, 1, 5, 3, 4, 2, 1, 1, 5, 3, 2, 2, 1, 1, 1, 0, 1, 3, 0, 1, 0, 1, 1, 3, 7, 1, 3, 3, 3, 1, 1, 2, 3, 1, 2, 3, 1, 2, 1, 3, 3, 1, 1, 1, 0, 1, 3, 3, 1, 1, 7, 1, 0, 1, 1, 0, 1, 2, 0, 3, 1, 2, 1, 3, 1, 2, 2, 4, 5, 3, 2, 1, 1, 6, 1, 0, 1, 3, 1, 3, 3, 1, 1, 1, 1, 1, 3, 1, 5, 1, 2, 4, 1, 1, 1, 1, 1, 0, 1, 0, 2, 2, 0, 0, 1, 0, 1, 1, 6, 1, 0, 1, 1, 0, 4, 3, 1, 2, 1, 2, 3, 1, 1, 1, 1, 8, 3, 1, 2, 1, 2, 0, 8, 2, 0, 6, 2, 3, 1, 1, 1, 3, 1, 3, 2, 1, 3, 1, 2, 1, 6, 9, 3, 3, 1, 1, 2, 3, 1, 1, 5, 5, 1, 1, 0, 1, 1, 2, 3, 1, 1, 2, 3, 1, 3, 1, 1, 1, 1, 0, 0, 1, 3, 3, 1, 3, 1, 1, 2, 2, 0, 0, 6, 1, 0, 1, 1, 1, 1, 3, 1, 2, 6, 3, 1, 2, 2, 1, 1, 1, 1, 7, 5, 4, 3, 3, 1, 1, 1, 1, 1, 1, 8, 5, 1, 1, 3, 3, 1, 1, 3, 3, 1, 1, 2, 3, 6, 1, 1, 7, 3, 3, 4, 5, 9, 6, 1, 0, 7, 1, 1, 3, 1, 1, 2, 3, 1, 2, 1, 1, 1, 1, 1, 1, 1, 7, 8, 2, 3, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1]
 
         An example from [PZGH1999]_::
 
             sage: E = EllipticCurve([0,0,0,-172,505])
-            sage: E.rank(), len(E.S_integral_points([3,5,7]))  # long time (5s on sage.math, 2011)      # needs eclib
+            sage: E.rank(), len(E.S_integral_points([3,5,7]))  # long time (5s on sage.math, 2011)      # needs eclib sage.symbolic
             (4, 72)
 
         This is curve "7690e1" which failed until :issue:`4805` was fixed::
 
-            sage: EllipticCurve([1,1,1,-301,-1821]).S_integral_points([13,2])                           # needs eclib
+            sage: EllipticCurve([1,1,1,-301,-1821]).S_integral_points([13,2])                           # needs eclib sage.symbolic
             [(-13 : -4 : 1), (-9 : -12 : 1), (-7 : 2 : 1), (21 : -52 : 1),
              (23 : -76 : 1), (63 : -516 : 1), (71 : -620 : 1), (87 : -844 : 1),
              (2711 : -142540 : 1), (7323 : -630376 : 1), (17687 : -2361164 : 1)]

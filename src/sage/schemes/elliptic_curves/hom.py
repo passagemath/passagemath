@@ -1162,7 +1162,7 @@ def compare_via_evaluation(left, right):
         sage: from sage.schemes.elliptic_curves.hom_composite import EllipticCurveHom_composite
         sage: mu = EllipticCurveHom_composite.from_factors([phi, psi])
         sage: from sage.schemes.elliptic_curves.hom import compare_via_evaluation
-        sage: compare_via_evaluation(mu, E.scalar_multiplication(7))
+        sage: compare_via_evaluation(mu, E.scalar_multiplication(7))                    # needs sage.symbolic
         True
 
     .. SEEALSO::
@@ -1344,6 +1344,7 @@ def compute_trace_generic(phi):
     the result for Frobenius matches
     :meth:`~sage.schemes.elliptic_curves.ell_finite_field.EllipticCurve_finite_field.trace_of_frobenius`::
 
+        sage: # needs sage.symbolic
         sage: from sage.schemes.elliptic_curves.hom import compute_trace_generic
         sage: p = random_prime(10^3)
         sage: e = randrange(1, ceil(log(10^5,p)))

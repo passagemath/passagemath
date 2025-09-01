@@ -39,7 +39,7 @@ the endomorphism ring as scalar multiplications::
     True
     sage: (1 + omega + omega^2) == 0
     True
-    sage: (2*omega + 1)^2 == -3
+    sage: (2*omega + 1)^2 == -3                                                         # needs sage.symbolic
     True
 
 AUTHORS:
@@ -94,7 +94,7 @@ class EllipticCurveHomset(SchemeHomset_generic):
 
             sage: E = EllipticCurve(GF(101), [1,1])
             sage: H = End(E)
-            sage: TestSuite(H).run(skip='_test_elements')
+            sage: TestSuite(H).run(skip='_test_elements')                               # needs sage.symbolic
 
         ::
 

@@ -47,7 +47,7 @@ However, they are certainly separable isogenies with the same kernel
 and must therefore be equal *up to post-isomorphism*::
 
     sage: isos = psi.codomain().isomorphisms(phi.codomain())
-    sage: sum(iso * psi == phi for iso in isos)
+    sage: sum(iso * psi == phi for iso in isos)                                         # needs sage.symbolic
     1
 
 Just like
@@ -1034,7 +1034,7 @@ class EllipticCurveHom_velusqrt(EllipticCurveHom):
             Elliptic-curve isogeny (using square-root Vélu) of degree 59:
               From: Elliptic Curve defined by y^2 + 5*x*y + 5*y = x^3 + 5*x^2 + 5*x + 5 over Finite Field of size 101
               To:   Elliptic Curve defined by y^2 = x^3 + 15*x + 25 over Finite Field of size 101
-            sage: phi == psi
+            sage: phi == psi                                                            # needs sage.symbolic
             True
         """
         if op != op_EQ:
@@ -1089,13 +1089,19 @@ class EllipticCurveHom_velusqrt(EllipticCurveHom):
             sage: K = E.cardinality() // 11 * E.gens()[0]
             sage: phi = E.isogeny(K, algorithm='velusqrt'); phi
             Elliptic-curve isogeny (using square-root Vélu) of degree 11:
-              From: Elliptic Curve defined by y^2 + x*y + y = x^3 + x^2 + x + 1 over Finite Field in z2 of size 101^2
-              To:   Elliptic Curve defined by y^2 = x^3 + 39*x + 40 over Finite Field in z2 of size 101^2
+              From: Elliptic Curve defined by y^2 + x*y + y = x^3 + x^2 + x + 1
+                    over Finite Field in z2 of size 101^2
+              To:   Elliptic Curve defined by y^2 = x^3 + 39*x + 40
+                    over Finite Field in z2 of size 101^2
             sage: phi.dual()
-            Isogeny of degree 11 from Elliptic Curve defined by y^2 = x^3 + 39*x + 40 over Finite Field in z2 of size 101^2 to Elliptic Curve defined by y^2 + x*y + y = x^3 + x^2 + x + 1 over Finite Field in z2 of size 101^2
-            sage: phi.dual() * phi == phi.domain().scalar_multiplication(11)
+            Isogeny of degree 11
+             from Elliptic Curve defined by y^2 = x^3 + 39*x + 40
+                  over Finite Field in z2 of size 101^2
+               to Elliptic Curve defined by y^2 + x*y + y = x^3 + x^2 + x + 1
+                  over Finite Field in z2 of size 101^2
+            sage: phi.dual() * phi == phi.domain().scalar_multiplication(11)            # needs sage.symbolic
             True
-            sage: phi * phi.dual() == phi.codomain().scalar_multiplication(11)
+            sage: phi * phi.dual() == phi.codomain().scalar_multiplication(11)          # needs sage.symbolic
             True
         """
         # FIXME: This code fails if the degree is divisible by the characteristic.

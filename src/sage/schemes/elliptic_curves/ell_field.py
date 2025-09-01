@@ -2121,6 +2121,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         ::
 
+            sage: # needs sage.symbolic
             sage: E = EllipticCurve(GF(next_prime(2^32)), j=1728)
             sage: sorted([phi.codomain().j_invariant() for phi in E.isogenies_degree(11 * 17 * 19^2)])
             [1348157279, 1348157279, 1713365879, 1713365879, 3153894341, 3153894341,
@@ -2134,6 +2135,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
         not use a ``set`` or any hash-based data structure, as hashing
         isogenies is slow::
 
+            sage: # needs sage.symbolic
             sage: import itertools
             sage: all_distinct = lambda arr: all(x != y for x, y in itertools.combinations(arr, 2))
             sage: K.<z> = GF((19, 2))
@@ -2193,7 +2195,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
                To:   Elliptic Curve defined by y^2 = x^3 + 4294967267*x + 112 over Finite Field of size 4294967311]
             sage: all(isog.domain() is E for isog in _)
             True
-            sage: all(isog.domain() is E for isog in E.isogenies_degree(2^5, _intermediate=True))
+            sage: all(isog.domain() is E for isog in E.isogenies_degree(2^5, _intermediate=True))   # needs sage.symbolic
             True
 
         The following curve has no degree-`53` isogenies, so the code is quick::

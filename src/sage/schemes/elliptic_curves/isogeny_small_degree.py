@@ -1142,7 +1142,7 @@ def isogenies_7_0(E, minimal_models=True):
             to Elliptic Curve defined by y^2 + y = x^3 + (-7) over Number Field in r
                with defining polynomial x^2 + 3 with r = 1.732050807568878?*I]
 
-        sage: # needs sage.rings.number_field
+        sage: # needs sage.rings.number_field sage.symbolic
         sage: x = polygen(QQ, 'x')
         sage: K.<a> = NumberField(x^6 + 1512*x^3 - 21168)
         sage: E = EllipticCurve(K, [0,1])

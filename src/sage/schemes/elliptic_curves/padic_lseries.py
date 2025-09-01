@@ -127,18 +127,24 @@ class pAdicLseries(SageObject):
 
     An example showing the calculation of nontrivial Teichmueller twists::
 
+        sage: # needs sage.graphs
         sage: E = EllipticCurve('11a1')
         sage: lp = E.padic_lseries(7)
-        sage: lp.series(4,eta=1)
-        3 + 7^3 + 6*7^4 + 3*7^5 + O(7^6) + (2*7 + 7^2 + O(7^3))*T + (1 + 5*7^2 + O(7^3))*T^2 + (4 + 4*7 + 4*7^2 + O(7^3))*T^3 + (4 + 3*7 + 7^2 + O(7^3))*T^4 + O(T^5)
-        sage: lp.series(4,eta=2)
-        5 + 6*7 + 4*7^2 + 2*7^3 + 3*7^4 + 2*7^5 + O(7^6) + (6 + 4*7 + 7^2 + O(7^3))*T + (3 + 2*7^2 + O(7^3))*T^2 + (1 + 4*7 + 7^2 + O(7^3))*T^3 + (6 + 6*7 + 6*7^2 + O(7^3))*T^4 + O(T^5)
-        sage: lp.series(4,eta=3)
-        O(7^6) + (5 + 4*7 + 2*7^2 + O(7^3))*T + (6 + 5*7 + 2*7^2 + O(7^3))*T^2 + (5*7 + O(7^3))*T^3 + (7 + 4*7^2 + O(7^3))*T^4 + O(T^5)
+        sage: lp.series(4, eta=1)
+        3 + 7^3 + 6*7^4 + 3*7^5 + O(7^6)
+          + (2*7 + 7^2 + O(7^3))*T + (1 + 5*7^2 + O(7^3))*T^2
+          + (4 + 4*7 + 4*7^2 + O(7^3))*T^3 + (4 + 3*7 + 7^2 + O(7^3))*T^4 + O(T^5)
+        sage: lp.series(4, eta=2)
+        5 + 6*7 + 4*7^2 + 2*7^3 + 3*7^4 + 2*7^5 + O(7^6)
+          + (6 + 4*7 + 7^2 + O(7^3))*T + (3 + 2*7^2 + O(7^3))*T^2
+          + (1 + 4*7 + 7^2 + O(7^3))*T^3 + (6 + 6*7 + 6*7^2 + O(7^3))*T^4 + O(T^5)
+        sage: lp.series(4, eta=3)
+        O(7^6) + (5 + 4*7 + 2*7^2 + O(7^3))*T + (6 + 5*7 + 2*7^2 + O(7^3))*T^2
+          + (5*7 + O(7^3))*T^3 + (7 + 4*7^2 + O(7^3))*T^4 + O(T^5)
 
     (Note that the last series vanishes at `T = 0`, which is consistent with ::
 
-        sage: E.quadratic_twist(-7).rank()
+        sage: E.quadratic_twist(-7).rank()                                              # needs sage.graphs
         1
 
     This proves that `E` has rank 1 over `\QQ(\zeta_7)`.)
@@ -311,7 +317,7 @@ class pAdicLseries(SageObject):
             sage: Et = E.quadratic_twist(-4)
             sage: lpt = Et.padic_lseries(5)
             sage: eta = lpt._quotient_of_periods_to_twist(-4)
-            sage: lpt.modular_symbol(0) == lp.modular_symbol(0,quadratic_twist=-4) / eta
+            sage: lpt.modular_symbol(0) == lp.modular_symbol(0, quadratic_twist=-4) / eta           # needs sage.graphs
             True
         """
         if quadratic_twist == +1:
@@ -397,9 +403,10 @@ class pAdicLseries(SageObject):
             sage: L.measure(1,2, quadratic_twist=-4, prec=15)                           # needs sage.graphs
             4 + 4*5 + 4*5^2 + 3*5^3 + 2*5^4 + 5^5 + 3*5^6 + 5^8 + 2*5^9 + 3*5^12 + 2*5^13 + 4*5^14 + O(5^15)
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve('11a1')
-            sage: a = E.quadratic_twist(-3).padic_lseries(5).measure(1,2,prec=15)
-            sage: b = E.padic_lseries(5).measure(1,2, quadratic_twist=-3,prec=15)
+            sage: a = E.quadratic_twist(-3).padic_lseries(5).measure(1,2, prec=15)
+            sage: b = E.padic_lseries(5).measure(1,2, quadratic_twist=-3, prec=15)
             sage: a == b * E.padic_lseries(5)._quotient_of_periods_to_twist(-3)
             True
         """
@@ -819,13 +826,14 @@ class pAdicLseriesOrdinary(pAdicLseries):
             sage: lp = E.padic_lseries(3)
             sage: lp.series(2, quadratic_twist=-19)                                     # needs sage.graphs
             2 + 2*3 + 2*3^2 + O(3^4) + (1 + O(3))*T + (1 + O(3))*T^2 + O(T^3)
-            sage: E.quadratic_twist(-19).label()    # optional -- database_cremona_ellcurve
+            sage: E.quadratic_twist(-19).label()    # optional -- database_cremona_ellcurve, needs sage.graphs
             '15523a1'
 
         This proves that the rank of '15523a1' is zero, even if ``mwrank`` cannot determine this.
 
         We calculate the `L`-series in the nontrivial Teichmueller components::
 
+            sage: # needs sage.graphs
             sage: L = EllipticCurve('110a1').padic_lseries(5, implementation='sage')
             sage: for j in [0..3]: print(L.series(4, eta=j))
             O(5^6) + (2 + 2*5 + 2*5^2 + O(5^3))*T + (5 + 5^2 + O(5^3))*T^2 + (4 + 4*5 + 2*5^2 + O(5^3))*T^3 + (1 + 5 + 3*5^2 + O(5^3))*T^4 + O(T^5)
@@ -837,16 +845,17 @@ class pAdicLseriesOrdinary(pAdicLseries):
 
             sage: E = EllipticCurve("53a1")
             sage: lp = E.padic_lseries(2)
-            sage: lp.series(7)
+            sage: lp.series(7)                                                          # needs sage.graphs
             O(2^8) + (1 + 2^2 + 2^3 + O(2^5))*T + (1 + 2^3 + O(2^4))*T^2 + (2^2 + 2^3 + O(2^4))*T^3 + (2 + 2^2 + O(2^3))*T^4 + O(T^5)
 
             sage: E = EllipticCurve("109a1")
             sage: lp = E.padic_lseries(2)
-            sage: lp.series(6)
+            sage: lp.series(6)                                                          # needs sage.graphs
             2^2 + 2^6 + O(2^7) + (2 + O(2^4))*T + O(2^3)*T^2 + (2^2 + O(2^3))*T^3 + (2 + O(2^2))*T^4 + O(T^5)
 
         Check that twists by odd Teichmuller characters are ok (:issue:`32258`)::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve("443c1")
             sage: lp = E.padic_lseries(17, implementation='num')
             sage: l8 = lp.series(2,eta=8,prec=3)
@@ -1025,6 +1034,7 @@ class pAdicLseriesOrdinary(pAdicLseries):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: E = EllipticCurve('11a1')
             sage: Lp = E.padic_lseries(5)
             sage: Lp._c_bound()
@@ -1470,6 +1480,7 @@ class pAdicLseriesSupersingular(pAdicLseries):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: E = EllipticCurve('14a')
             sage: L = E.padic_lseries(5)
             sage: phi = L.frobenius(5)
@@ -1714,6 +1725,7 @@ class pAdicLseriesSupersingular(pAdicLseries):
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: E = EllipticCurve('43a')
             sage: L = E.padic_lseries(7)
             sage: L.Dp_valued_regulator(7)

@@ -3770,7 +3770,7 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         Examples 2 and 3 from [Sil1988]_::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: x = polygen(ZZ, 'x')
             sage: K.<i> = NumberField(x^2 + 1)
             sage: E = EllipticCurve(K, [0,0,4,6*i,0]); E
@@ -3783,8 +3783,6 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
             0
             sage: P.non_archimedean_local_height(K.ideal(1-2*i))
             0
-
-            sage: # needs sage.rings.number_field
             sage: Q = E.lift_x(-9/4); Q
             (-9/4 : 27/8*i - 4 : 1)
             sage: Q.non_archimedean_local_height(K.ideal(1+i))
@@ -3800,13 +3798,13 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
             sage: E = EllipticCurve([0, 0, 0, -36, 0])
             sage: P = E([-3, 9])
-            sage: P.non_archimedean_local_height()
+            sage: P.non_archimedean_local_height()                                      # needs sage.symbolic
             -log(3)
 
         Local heights of torsion points can be nonzero (unlike the
         global height)::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: K.<i> = QuadraticField(-1)
             sage: E = EllipticCurve([0, 0, 0, K(1), 0])
             sage: P = E(i, 0)
@@ -3815,12 +3813,13 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
 
         TESTS::
 
-            sage: Q.non_archimedean_local_height(prec=100)                              # needs sage.rings.number_field
+            sage: Q.non_archimedean_local_height(prec=100)                              # needs sage.rings.number_field sage.symbolic
             1.3862943611198906188344642429
-            sage: (3*Q).non_archimedean_local_height()                                  # needs sage.rings.number_field
+            sage: (3*Q).non_archimedean_local_height()                                  # needs sage.rings.number_field sage.symbolic
             1/2*log(75923153929839865104)
 
             sage: # needs sage.rings.number_field
+            sage: x = polygen(ZZ, 'x')
             sage: F.<a> = NumberField(x^4 + 2*x^3 + 19*x^2 + 18*x + 288)
             sage: F.ring_of_integers().basis()
             [1, 5/6*a^3 + 1/6*a, 1/6*a^3 + 1/6*a^2, a^3]
@@ -3831,20 +3830,20 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
             (-1/6*a^2 - 1/6*a - 1 : a : 1)
             sage: P[0].is_integral()
             True
-            sage: P.non_archimedean_local_height()
+            sage: P.non_archimedean_local_height()                                      # needs sage.symbolic
             0
 
         This shows that the bug reported at :issue:`13951` has been fixed::
 
             sage: E = EllipticCurve([0,17])
             sage: P = E(2,5)
-            sage: P.non_archimedean_local_height(2)
+            sage: P.non_archimedean_local_height(2)                                     # needs sage.symbolic
             -2/3*log(2)
 
         This shows that the bug reported at :issue:`36834` (incorrect
         value when the model is not integral) has been fixed::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: K.<a> = QuadraticField(84131656042917)
             sage: E = EllipticCurve(K, [0, 0, 0, -5482707841/48, -244634179112639/864])
             sage: P = E(349189/12, 1/2*a)

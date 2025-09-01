@@ -1213,7 +1213,7 @@ def two_descent_by_two_isogeny(E,
     for rational points which do not exist, and by setting global_limit_large
     to a very high bound, it will still be working when we simulate a ``CTRL-C``::
 
-        sage: # needs sage.schemes
+        sage: # needs sage.graphs sage.schemes
         sage: from sage.schemes.elliptic_curves.descent_two_isogeny import two_descent_by_two_isogeny
         sage: E = EllipticCurve('960d'); E
         Elliptic Curve defined by y^2 = x^3 - x^2 - 900*x - 10098 over Rational Field

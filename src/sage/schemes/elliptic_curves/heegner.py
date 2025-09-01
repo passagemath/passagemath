@@ -2531,7 +2531,7 @@ class HeegnerPoints_level_disc_cond(HeegnerPoints_level, HeegnerPoints_level_dis
 
             sage: len(heegner_points(389,-20,1))
             4
-            sage: QQ[sqrt(-20)].class_number()
+            sage: QQ[sqrt(-20)].class_number()                                          # needs sage.symbolic
             2
         """
         return len(self.points())
@@ -6820,6 +6820,7 @@ def _adjust_heegner_index(self, a):
 
     EXAMPLES::
 
+        sage: # needs sage.symbolic
         sage: E = EllipticCurve('11a1')
         sage: a = RIF(sqrt(2)) - RIF(1.4142135623730951)
         sage: E._adjust_heegner_index(a)
@@ -7243,7 +7244,7 @@ def _heegner_forms_list(self, D, beta=None, expected_count=None):
         -195
         sage: len(E._heegner_forms_list(-195))
         4
-        sage: QQ[sqrt(-195)].class_number()
+        sage: QQ[sqrt(-195)].class_number()                                             # needs sage.symbolic
         4
 
         sage: E = EllipticCurve('389a')
@@ -7287,6 +7288,7 @@ def _heegner_best_tau(self, D, prec=None):
 
     EXAMPLES::
 
+        sage: # needs sage.symbolic
         sage: E = EllipticCurve('37a')
         sage: E._heegner_best_tau(-7)
         1/74*sqrt(-7) - 17/74

@@ -1902,7 +1902,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             y^2 + a*x*y = x^3 + a*x^2 + (3*a+8)*x + (4*a+3) over Number Field
             in a with defining polynomial x^2 - 10 has no global minimal model!
             For a semi-global minimal model use semi_global=True
-            sage: E.global_minimal_model(semi_global=True)
+            sage: E.global_minimal_model(semi_global=True)                              # needs sage.symbolic
             Elliptic Curve defined by
              y^2 + a*x*y = x^3 + a*x^2 + (3*a+8)*x + (4*a+3) over Number Field in a
              with defining polynomial x^2 - 10
@@ -1910,6 +1910,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
         An example of a curve with everywhere good reduction but which
         has no model with unit discriminant::
 
+            sage: # needs sage.symbolic
             sage: x = polygen(QQ)
             sage: K.<a> = NumberField(x^2 - x - 16)
             sage: K.class_number()
@@ -3187,7 +3188,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: c6c = -124369 + 15988*(1 + s)/2
             sage: E = EllipticCurve_from_c4c6(c4, c6)
             sage: Ec = EllipticCurve_from_c4c6(c4c, c6c)
-            sage: E.is_isogenous(Ec)
+            sage: E.is_isogenous(Ec)                                                    # needs sage.symbolic
             True
 
         Check that :issue:`17295` is fixed::
@@ -3198,7 +3199,7 @@ class EllipticCurve_number_field(EllipticCurve_field):
             sage: Ec = EllipticCurve(k, [3*s*(4 - 5*s), -2*s*(2 - 14*s + 11*s^2)])
             sage: EK = E.base_extend(K)
             sage: EcK = Ec.base_extend(K)
-            sage: EK.is_isogenous(EcK)      # long time (about 3.5 s)
+            sage: EK.is_isogenous(EcK)      # long time (about 3.5 s)                   # needs sage.symbolic
             True
         """
         if not isinstance(other, EllipticCurve_generic):
@@ -4194,9 +4195,9 @@ class EllipticCurve_number_field(EllipticCurve_field):
 
             sage: # needs database_cremona_mini_ellcurve
             sage: E = EllipticCurve("11a1")
-            sage: E.rational_points(bound=5)
+            sage: E.rational_points(bound=5)                                            # needs sage.symbolic
             [(0 : 1 : 0), (5 : 5 : 1)]
-            sage: E.rational_points(bound=6) # long time
+            sage: E.rational_points(bound=6)  # long time                               # needs sage.symbolic
             [(0 : 1 : 0), (5 : -6 : 1), (5 : 5 : 1)]
 
         An example over a number field::

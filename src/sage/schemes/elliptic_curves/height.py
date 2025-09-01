@@ -1035,7 +1035,7 @@ class EllipticCurveCanonicalHeight:
 
         EXAMPLES::
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.rings.number_field sage.symbolic
             sage: K.<i> = QuadraticField(-1)
             sage: E = EllipticCurve([0, 0, 0, 1+5*i, 3+i])
             sage: H = E.height_function()
@@ -1109,7 +1109,7 @@ class EllipticCurveCanonicalHeight:
 
         In [Tho2010]_ the value is given as 0.772::
 
-            sage: RealField(12)( H.B(5, 0.01) )                                         # needs sage.rings.number_field
+            sage: RealField(12)( H.B(5, 0.01) )                                         # needs sage.rings.number_field sage.symbolic
             0.777
         """
         K = self.K
@@ -1320,9 +1320,9 @@ class EllipticCurveCanonicalHeight:
         height strictly greater than 0.2, but fail to prove the same
         for 0.3::
 
-            sage: H.real_intersection_is_empty([H.B(n,0.2) for n in srange(1,10)], v)
+            sage: H.real_intersection_is_empty([H.B(n,0.2) for n in srange(1,10)], v)   # needs sage.symbolic
             True
-            sage: H.real_intersection_is_empty([H.B(n,0.3) for n in srange(1,10)], v)
+            sage: H.real_intersection_is_empty([H.B(n,0.3) for n in srange(1,10)], v)   # needs sage.symbolic
             False
 
         An example over a number field::
@@ -1339,9 +1339,9 @@ class EllipticCurveCanonicalHeight:
         height strictly greater than 0.07, but fail to prove the same
         for 0.08::
 
-            sage: H.real_intersection_is_empty([H.B(n,0.07) for n in srange(1,5)], v)  # long time, needs sage.rings.number_field
+            sage: H.real_intersection_is_empty([H.B(n,0.07) for n in srange(1,5)], v)  # long time, needs sage.rings.number_field sage.symbolic
             True
-            sage: H.real_intersection_is_empty([H.B(n,0.08) for n in srange(1,5)], v)   # needs sage.rings.number_field
+            sage: H.real_intersection_is_empty([H.B(n,0.08) for n in srange(1,5)], v)   # needs sage.rings.number_field sage.symbolic
             False
         """
         return UnionOfIntervals.intersection([self.Sn(-B, B, k+1, v) for k,B in enumerate(Bk)]).is_empty()
@@ -1628,7 +1628,7 @@ class EllipticCurveCanonicalHeight:
         The array of values on the grid shows symmetry, since `\wp` is
         even::
 
-            sage: H.wp_on_grid(v,4)
+            sage: H.wp_on_grid(v, 4)                                                    # needs sage.symbolic
             array([[25.43920182,  5.28760943,  5.28760943, 25.43920182],
                    [ 6.05099485,  1.83757786,  1.83757786,  6.05099485],
                    [ 6.05099485,  1.83757786,  1.83757786,  6.05099485],
@@ -1636,7 +1636,7 @@ class EllipticCurveCanonicalHeight:
 
         The array of values on the half-grid::
 
-            sage: H.wp_on_grid(v,4,True)
+            sage: H.wp_on_grid(v, 4, True)                                              # needs sage.symbolic
             array([[25.43920182,  5.28760943],
                    [ 6.05099485,  1.83757786],
                    [ 6.05099485,  1.83757786],
@@ -1693,18 +1693,18 @@ class EllipticCurveCanonicalHeight:
         for 0.03.  For the first proof, using only `n=1,2,3` is not
         sufficient::
 
-            sage: H.complex_intersection_is_empty([H.B(n,0.02) for n in [1,2,3]], v)  # long time, needs sage.rings.number_field
+            sage: H.complex_intersection_is_empty([H.B(n, 0.02) for n in [1,2,3]], v)  # long time, needs sage.rings.number_field sage.symbolic
             False
-            sage: H.complex_intersection_is_empty([H.B(n,0.02) for n in [1,2,3,4]], v)  # needs sage.rings.number_field
+            sage: H.complex_intersection_is_empty([H.B(n, 0.02) for n in [1,2,3,4]], v)  # needs sage.rings.number_field sage.symbolic
             True
-            sage: H.complex_intersection_is_empty([H.B(n,0.03) for n in [1,2,3,4]], v)  # long time, needs sage.rings.number_field
+            sage: H.complex_intersection_is_empty([H.B(n, 0.03) for n in [1,2,3,4]], v)  # long time, needs sage.rings.number_field sage.symbolic
             False
 
         Using `n\le6` enables us to prove the lower bound 0.03.  Note
         that it takes longer when the result is ``False`` than when it
         is ``True``::
 
-            sage: H.complex_intersection_is_empty([H.B(n,0.03) for n in [1..6]], v)     # needs sage.rings.number_field
+            sage: H.complex_intersection_is_empty([H.B(n, 0.03) for n in [1..6]], v)     # needs sage.rings.number_field sage.symbolic
             True
         """
         from sage.schemes.elliptic_curves.period_lattice_region import PeriodicRegion
@@ -1818,11 +1818,11 @@ class EllipticCurveCanonicalHeight:
         Using `N=5` we can prove that 0.1 is a lower bound (in fact we
         only need `N=2`), but not that 0.2 is::
 
-            sage: H.test_mu(0.1, 5)                                                     # needs sage.rings.number_field
+            sage: H.test_mu(0.1, 5)                                                     # needs sage.rings.number_field sage.symbolic
             B_1(0.100000000000000) = 1.51580969677387
             B_2(0.100000000000000) = 0.932072561526720
             True
-            sage: H.test_mu(0.2, 5)                                                     # needs sage.rings.number_field
+            sage: H.test_mu(0.2, 5)                                                     # needs sage.rings.number_field sage.symbolic
             B_1(0.200000000000000) = 2.04612906979932
             B_2(0.200000000000000) = 3.09458988474327
             B_3(0.200000000000000) = 27.6251108409484
@@ -1903,7 +1903,7 @@ class EllipticCurveCanonicalHeight:
         given)::
 
             sage: E = EllipticCurve([1, 0, 1, 421152067, 105484554028056]) # 60490d1
-            sage: E.height_function().min_gr(.0001, 5)
+            sage: E.height_function().min_gr(.0001, 5)                                  # needs sage.symbolic
             1.98684388146518
 
         Example 10.1 from [Tho2010]_ (where a lower bound of 0.18 was
@@ -1913,7 +1913,7 @@ class EllipticCurveCanonicalHeight:
             sage: K.<i> = QuadraticField(-1)
             sage: E = EllipticCurve([0, 0, 0, 91 - 26*i, -144 - 323*i])
             sage: H = E.height_function()
-            sage: H.min_gr(0.1, 4)              # long time
+            sage: H.min_gr(0.1, 4)              # long time, needs sage.symbolic
             0.1621049443313762
 
         Example 10.2 from [Tho2010]_::
@@ -1922,7 +1922,7 @@ class EllipticCurveCanonicalHeight:
             sage: K.<i> = QuadraticField(-1)
             sage: E = EllipticCurve([0, 1 - i, i, -i, 0])
             sage: H = E.height_function()
-            sage: H.min_gr(0.01, 5)             # long time
+            sage: H.min_gr(0.01, 5)             # long time, needs sage.symbolic
             0.020153685521979152
 
         In this example the point `P=(0,0)` has height 0.023 so our
@@ -1938,10 +1938,11 @@ class EllipticCurveCanonicalHeight:
         given)::
 
             sage: # needs sage.rings.number_field
+            sage: x = polygen(ZZ, 'x')
             sage: K.<a> = NumberField(x^3 - 2)
             sage: E = EllipticCurve([0, 0, 0, -3*a - a^2, a^2])
             sage: H = E.height_function()
-            sage: H.min_gr(0.1, 5)              # long time
+            sage: H.min_gr(0.1, 5)              # long time, needs sage.symbolic
             0.25
 
         TESTS:
@@ -1949,10 +1950,11 @@ class EllipticCurveCanonicalHeight:
         This example from the LMFDB gave problems before the fix in :issue:`8829`::
 
             sage: # needs sage.rings.number_field
+            sage: x = polygen(ZZ, 'x')
             sage: K.<phi> = NumberField(x^2 - x - 1)
             sage: E = EllipticCurve([phi + 1, -phi + 1, 1, 20*phi - 39, 196*phi + 237])
             sage: H = E.height_function()
-            sage: H.min_gr(.1, 5, verbose=True)         # long time
+            sage: H.min_gr(.1, 5, verbose=True)         # long time, needs sage.symbolic
             B_1(1) = 1540.199246369678
             ...
             halving mu to 0.25 and increasing n_max to 6
@@ -2028,7 +2030,7 @@ class EllipticCurveCanonicalHeight:
         given)::
 
             sage: E = EllipticCurve([1, 0, 1, 421152067, 105484554028056]) # 60490d1
-            sage: E.height_function().min(.0001, 5)
+            sage: E.height_function().min(.0001, 5)                                     # needs sage.symbolic
             0.0011263287309893311
 
         Example 10.1 from [Tho2010]_ (where a lower bound of 0.18 was
@@ -2061,6 +2063,7 @@ class EllipticCurveCanonicalHeight:
         given)::
 
             sage: # needs sage.rings.number_field
+            sage: x = polygen(ZZ, 'x')
             sage: K.<a> = NumberField(x^3 - 2)
             sage: E = EllipticCurve([0, 0, 0, -3*a - a^2, a^2])
             sage: H = E.height_function()
@@ -2071,7 +2074,7 @@ class EllipticCurveCanonicalHeight:
 
             sage: E = EllipticCurve('37a')
             sage: h = E.height_function()
-            sage: h.min(.01, 5)
+            sage: h.min(.01, 5)                                                         # needs sage.symbolic
             0.03987318057488725
             sage: E.gen(0).height()
             0.0511114082399688
@@ -2079,12 +2082,12 @@ class EllipticCurveCanonicalHeight:
         After base change the lower bound can decrease::
 
             sage: K.<a> = QuadraticField(-5)                                            # needs sage.rings.number_field
-            sage: E.change_ring(K).height_function().min(0.5, 10)       # long time, needs sage.rings.number_field
+            sage: E.change_ring(K).height_function().min(0.5, 10)       # long time, needs sage.rings.number_field sage.symbolic
             0.04419417382415922
 
             sage: E = EllipticCurve('389a')
             sage: h = E.height_function()
-            sage: h.min(0.1, 5)
+            sage: h.min(0.1, 5)                                                         # needs sage.symbolic
             0.05731275270029196
             sage: [P.height() for P in E.gens()]
             [0.686667083305587, 0.327000773651605]
