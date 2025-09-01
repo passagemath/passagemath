@@ -2816,7 +2816,7 @@ def special_supersingular_curve(F, q=None, *, endomorphism=False):
         sage: pi = E.frobenius_isogeny()
         sage: pi.codomain() is pi.domain() is E
         True
-        sage: pi * endo == -endo * pi
+        sage: pi * endo == -endo * pi                                                   # needs sage.symbolic
         True
 
     Also try it when `q` is given:
@@ -2845,7 +2845,7 @@ def special_supersingular_curve(F, q=None, *, endomorphism=False):
         sage: pi = E.frobenius_isogeny()
         sage: pi.codomain() is pi.domain() is E
         True
-        sage: pi * endo == -endo * pi
+        sage: pi * endo == -endo * pi                                                   # needs sage.symbolic
         True
 
     .. NOTE::

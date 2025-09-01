@@ -20,7 +20,12 @@ EXAMPLES::
     Sum morphism:
       From: Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101
       To:   Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101
-      Via:  (Isogeny of degree 7 from Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101 to Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101, Isogeny of degree 7 from Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101 to Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101)
+      Via:  (Isogeny of degree 7
+              from Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101
+                to Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101,
+             Isogeny of degree 7
+              from Elliptic Curve defined by y^2 = x^3 + 5*x + 5 over Finite Field of size 101
+                to Elliptic Curve defined by y^2 = x^3 + 12*x + 98 over Finite Field of size 101)
     sage: phi + phi == phi * E.scalar_multiplication(2)                                 # needs sage.symbolic
     True
     sage: phi + phi + phi == phi * E.scalar_multiplication(3)                           # needs sage.symbolic
@@ -28,6 +33,7 @@ EXAMPLES::
 
 An example of computing with a supersingular endomorphism ring::
 
+    sage: # needs sage.symbolic
     sage: E = EllipticCurve(GF(419^2), [1,0])
     sage: i = E.automorphisms()[-1]
     sage: j = E.frobenius_isogeny()

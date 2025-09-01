@@ -64,7 +64,7 @@ Equality is decided correctly (and, in some cases, much faster than
 comparing :meth:`EllipticCurveHom.rational_maps`) even when distinct
 factorizations of the same isogeny are compared::
 
-    sage: psi == EllipticCurveIsogeny(E, P)                                             # needs sage.rings.finite_rings
+    sage: psi == EllipticCurveIsogeny(E, P)                                             # needs sage.rings.finite_rings sage.symbolic
     True
 
 We can easily obtain the individual factors of the composite map::
@@ -464,7 +464,7 @@ class EllipticCurveHom_composite(EllipticCurveHom):
             sage: P, = E.gens()
             sage: phi = EllipticCurveHom_composite(E, P)
             sage: psi = EllipticCurveHom_composite.from_factors(phi.factors())
-            sage: psi == phi
+            sage: psi == phi                                                            # needs sage.symbolic
             True
 
         TESTS::
@@ -479,7 +479,7 @@ class EllipticCurveHom_composite(EllipticCurveHom):
             sage: E = EllipticCurve(GF(419), [1,0])
             sage: P, = E.gens()
             sage: phi = EllipticCurveHom_composite(E, P)
-            sage: EllipticCurveHom_composite.from_factors(phi.factors()) == phi
+            sage: EllipticCurveHom_composite.from_factors(phi.factors()) == phi         # needs sage.symbolic
             True
         """
         maps = tuple(maps)
@@ -713,14 +713,14 @@ class EllipticCurveHom_composite(EllipticCurveHom):
 
         ::
 
-            sage: # needs sage.rings.finite_rings
+            sage: # needs sage.rings.finite_rings sage.rings.number_field sage.symbolic
             sage: E = EllipticCurve(GF(431**2), [1,0])
             sage: P,Q = E.gens()
-            sage: phi1 = EllipticCurveHom_composite(E, P)                               # needs sage.rings.number_field
-            sage: phi2 = EllipticCurveHom_composite(phi1.codomain(), phi1(Q))           # needs sage.rings.number_field
-            sage: psi1 = EllipticCurveHom_composite(E, Q)                               # needs sage.rings.number_field
-            sage: psi2 = EllipticCurveHom_composite(psi1.codomain(), psi1(P))           # needs sage.rings.number_field
-            sage: phi2 * phi1 == psi2 * psi1                                            # needs sage.rings.number_field
+            sage: phi1 = EllipticCurveHom_composite(E, P)
+            sage: phi2 = EllipticCurveHom_composite(phi1.codomain(), phi1(Q))
+            sage: psi1 = EllipticCurveHom_composite(E, Q)
+            sage: psi2 = EllipticCurveHom_composite(psi1.codomain(), psi1(P))
+            sage: phi2 * phi1 == psi2 * psi1
             True
         """
         if op != op_EQ:
@@ -845,9 +845,9 @@ class EllipticCurveHom_composite(EllipticCurveHom):
                     over Finite Field of size 65537
               To:   Elliptic Curve defined by y^2 + x*y + 3*y = x^3 + 2*x^2 + 4*x + 5
                     over Finite Field of size 65537
-            sage: psi * phi == phi.domain().scalar_multiplication(phi.degree())
+            sage: psi * phi == phi.domain().scalar_multiplication(phi.degree())         # needs sage.symbolic
             True
-            sage: phi * psi == psi.domain().scalar_multiplication(psi.degree())
+            sage: phi * psi == psi.domain().scalar_multiplication(psi.degree())         # needs sage.symbolic
             True
         """
         phis = (phi.dual() for phi in self._phis[::-1])

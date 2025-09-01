@@ -431,18 +431,18 @@ class EllipticCurveHom_frobenius(EllipticCurveHom):
             sage: from sage.schemes.elliptic_curves.hom_frobenius import EllipticCurveHom_frobenius
             sage: E = EllipticCurve(GF(31), [0,1])
             sage: f = EllipticCurveHom_frobenius(E)
-            sage: f.dual() * f == EllipticCurveHom_scalar(f.domain(), 31)
+            sage: f.dual() * f == EllipticCurveHom_scalar(f.domain(), 31)               # needs sage.symbolic
             True
-            sage: f * f.dual() == EllipticCurveHom_scalar(f.codomain(), 31)
+            sage: f * f.dual() == EllipticCurveHom_scalar(f.codomain(), 31)             # needs sage.symbolic
             True
 
         A supersingular example::
 
             sage: E = EllipticCurve(GF(31), [1,0])
             sage: f = EllipticCurveHom_frobenius(E)
-            sage: f.dual() * f == EllipticCurveHom_scalar(f.domain(), 31)
+            sage: f.dual() * f == EllipticCurveHom_scalar(f.domain(), 31)               # needs sage.symbolic
             True
-            sage: f * f.dual() == EllipticCurveHom_scalar(f.codomain(), 31)
+            sage: f * f.dual() == EllipticCurveHom_scalar(f.codomain(), 31)             # needs sage.symbolic
             True
 
         TESTS:
@@ -459,13 +459,13 @@ class EllipticCurveHom_frobenius(EllipticCurveHom):
             ....:     except ArithmeticError:
             ....:         pass
             sage: f = EllipticCurveHom_frobenius(E, n)
-            sage: f.dual() * f == EllipticCurveHom_scalar(E, p**n)
+            sage: f.dual() * f == EllipticCurveHom_scalar(E, p**n)                      # needs sage.symbolic
             True
-            sage: f * f.dual() == EllipticCurveHom_scalar(f.codomain(), p**n)
+            sage: f * f.dual() == EllipticCurveHom_scalar(f.codomain(), p**n)           # needs sage.symbolic
             True
-            sage: f.dual().dual() == f  # known bug -- broken in characteristic 2,3
+            sage: f.dual().dual() == f  # known bug -- broken in characteristic 2,3     # needs sage.symbolic
             True
-            sage: p in (2,3) or f.dual().dual() == f
+            sage: p in (2,3) or f.dual().dual() == f                                    # needs sage.symbolic
             True
 
         ALGORITHM:
