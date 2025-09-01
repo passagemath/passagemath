@@ -97,7 +97,7 @@ In Sage, the PARI large Galois groups datafiles should be installed
 by default::
 
     sage: f = gp('x^9 - x - 2')
-    sage: f.polgalois()
+    sage: f.polgalois()                                                                 # needs pari_galdata
     [362880, -1, 34, "S9"]
 
 TESTS:
