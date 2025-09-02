@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-database-kohel ~= 10.6.13.0
+passagemath-database-kohel ~= 10.6.14.0
