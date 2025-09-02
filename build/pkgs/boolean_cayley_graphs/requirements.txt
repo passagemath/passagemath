@@ -1,1 +1,1 @@
-boolean-cayley-graphs @ https://github.com/passagemath/passagemath-pkg-Boolean-Cayley-graphs.git
+boolean-cayley-graphs @ git+https://github.com/passagemath/passagemath-pkg-Boolean-Cayley-graphs.git
