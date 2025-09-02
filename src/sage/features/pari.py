@@ -53,7 +53,7 @@ class PariFeature(Feature):
     """
     def __init__(self, name, command, **kwds):
         Feature.__init__(self, name,
-                         spkg=f'pypi/passagemath-{name.replace('_', '-')}',
+                         spkg=f"pypi/passagemath-{name.replace('_', '-')}",
                          **kwds)
         self.command = command
 
