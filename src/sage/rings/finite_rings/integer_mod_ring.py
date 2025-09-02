@@ -319,7 +319,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         sage: FF.order()
         29
 
-        sage: # needs sage.groups sage.modules
+        sage: # needs sage.groups sage.libs.pari sage.modules
         sage: gens = FF.unit_gens()
         sage: a = gens[0]
         sage: a
@@ -610,7 +610,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         EXAMPLES::
 
-            sage: # optional - gap_package_polycyclic, needs sage.groups sage.modules
+            sage: # optional - gap_package_polycyclic, needs sage.groups sage.libs.pari sage.modules
             sage: Integers(5).multiplicative_subgroups()
             ((2,), (4,), ())
             sage: Integers(15).multiplicative_subgroups()
@@ -1335,7 +1335,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         EXAMPLES::
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.groups sage.libs.pari sage.modules
             sage: R = IntegerModRing(18)
             sage: R.unit_gens()
             (11,)
@@ -1372,7 +1372,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         """
         EXAMPLES::
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.groups sage.libs.pari sage.modules
             sage: R = IntegerModRing(17)
             sage: R.unit_group_exponent()
             16
@@ -1389,7 +1389,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         EXAMPLES::
 
             sage: R = Integers(500)
-            sage: R.unit_group_order()                                                  # needs sage.groups sage.modules
+            sage: R.unit_group_order()                                                  # needs sage.groups sage.libs.pari sage.modules
             200
         """
         return self.unit_group().order()
@@ -1427,7 +1427,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         differ in various ways.  In the following example, the same
         cyclic factors are computed, but in a different order::
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.groups sage.libs.pari sage.modules
             sage: A = Zmod(15)
             sage: G = A.unit_group(); G
             Multiplicative Abelian group isomorphic to C2 x C4
@@ -1441,42 +1441,42 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         Here are two examples where the cyclic factors are isomorphic,
         but are ordered differently and have different generators::
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.groups sage.libs.pari sage.modules
             sage: A = Zmod(40)
             sage: G = A.unit_group(); G
             Multiplicative Abelian group isomorphic to C2 x C2 x C4
             sage: G.gens_values()
             (31, 21, 17)
-            sage: H = A.unit_group(algorithm='pari'); H                                 # needs sage.libs.pari
+            sage: H = A.unit_group(algorithm='pari'); H
             Multiplicative Abelian group isomorphic to C4 x C2 x C2
-            sage: H.gens_values()                                                       # needs sage.libs.pari
+            sage: H.gens_values()
             (17, 31, 21)
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.groups sage.libs.pari sage.modules
             sage: A = Zmod(192)
             sage: G = A.unit_group(); G
             Multiplicative Abelian group isomorphic to C2 x C16 x C2
             sage: G.gens_values()
             (127, 133, 65)
-            sage: H = A.unit_group(algorithm='pari'); H                                 # needs sage.libs.pari
+            sage: H = A.unit_group(algorithm='pari'); H
             Multiplicative Abelian group isomorphic to C16 x C2 x C2
-            sage: H.gens_values()                                                       # needs sage.libs.pari
+            sage: H.gens_values()
             (133, 127, 65)
 
         In the following examples, the cyclic factors are not even
         isomorphic::
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.groups sage.libs.pari sage.modules
             sage: A = Zmod(319)
             sage: A.unit_group()
             Multiplicative Abelian group isomorphic to C10 x C28
-            sage: A.unit_group(algorithm='pari')                                        # needs sage.libs.pari
+            sage: A.unit_group(algorithm='pari')
             Multiplicative Abelian group isomorphic to C140 x C2
             sage: A = Zmod(30.factorial())
             sage: A.unit_group()
             Multiplicative Abelian group isomorphic to
              C2 x C16777216 x C3188646 x C62500 x C2058 x C110 x C156 x C16 x C18 x C22 x C28
-            sage: A.unit_group(algorithm='pari')                                        # needs sage.libs.pari
+            sage: A.unit_group(algorithm='pari')
             Multiplicative Abelian group isomorphic to
              C20499647385305088000000 x C55440 x C12 x C12 x C4 x C2 x C2 x C2 x C2 x C2 x C2
 
@@ -1484,16 +1484,16 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         We test the cases where the unit group is trivial::
 
-            sage: # needs sage.groups sage.modules
+            sage: # needs sage.groups sage.libs.pari sage.modules
             sage: A = Zmod(1)
             sage: A.unit_group()
             Trivial Abelian group
-            sage: A.unit_group(algorithm='pari')                                        # needs sage.libs.pari
+            sage: A.unit_group(algorithm='pari')
             Trivial Abelian group
             sage: A = Zmod(2)
             sage: A.unit_group()
             Trivial Abelian group
-            sage: A.unit_group(algorithm='pari')                                        # needs sage.libs.pari
+            sage: A.unit_group(algorithm='pari')
             Trivial Abelian group
             sage: Zmod(3).unit_group(algorithm='bogus')
             Traceback (most recent call last):
