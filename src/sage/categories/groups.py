@@ -308,7 +308,7 @@ class Groups(CategoryWithAxiom):
             of the elements themselves.  ::
 
                 sage: C = CyclicPermutationGroup(11)                                    # needs sage.groups
-                sage: C.cayley_table(names='digits')                                    # needs sage.groups
+                sage: C.cayley_table(names='digits')                                    # needs sage.groups sage.modules
                  *  00 01 02 03 04 05 06 07 08 09 10
                   +---------------------------------
                 00| 00 01 02 03 04 05 06 07 08 09 10
@@ -327,7 +327,7 @@ class Groups(CategoryWithAxiom):
 
                 sage: G = QuaternionGroup()                                             # needs sage.groups
                 sage: names = ['1', 'I', '-1', '-I', 'J', '-K', '-J', 'K']
-                sage: G.cayley_table(names=names)                                       # needs sage.groups
+                sage: G.cayley_table(names=names)                                       # needs sage.groups sage.modules
                  *   1  I -1 -I  J -K -J  K
                   +------------------------
                  1|  1  I -1 -I  J -K -J  K
@@ -341,8 +341,8 @@ class Groups(CategoryWithAxiom):
 
             ::
 
-                sage: A = AbelianGroup([2, 2])                                          # needs sage.groups
-                sage: A.cayley_table(names='elements')                                  # needs sage.groups
+                sage: A = AbelianGroup([2, 2])                                          # needs sage.groups sage.modules
+                sage: A.cayley_table(names='elements')                                  # needs sage.groups sage.modules
                     *      1    f1    f0 f0*f1
                      +------------------------
                     1|     1    f1    f0 f0*f1
@@ -354,7 +354,7 @@ class Groups(CategoryWithAxiom):
             routine behaves similarly, but changes an existing table "in-place."
             ::
 
-                sage: # needs sage.groups
+                sage: # needs sage.groups sage.modules
                 sage: G = AlternatingGroup(3)
                 sage: T = G.cayley_table()
                 sage: T.change_names('digits')

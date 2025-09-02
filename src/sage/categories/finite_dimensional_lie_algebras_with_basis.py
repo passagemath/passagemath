@@ -217,26 +217,28 @@ class FiniteDimensionalLieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             TESTS::
 
-                sage: L = lie_algebras.three_dimensional_by_rank(QQ, 3,                 # needs sage.groups sage.modules
+                sage: # needs sage.graphs sage.groups sage.modules
+                sage: L = lie_algebras.three_dimensional_by_rank(QQ, 3,
                 ....:                                            names=['E','F','H'])
-                sage: PBW = L.pbw_basis()                                               # needs sage.groups sage.modules
-                sage: PBW._basis_key('E') < PBW._basis_key('H')                         # needs sage.groups sage.modules
+                sage: PBW = L.pbw_basis()
+                sage: PBW._basis_key('E') < PBW._basis_key('H')
                 True
 
             ::
 
-                sage: L = lie_algebras.sl(QQ, 2)                                        # needs sage.groups sage.modules
+                sage: # needs sage.graphs sage.groups sage.modules
+                sage: L = lie_algebras.sl(QQ, 2)
                 sage: def neg_key(x):
                 ....:     return -L.basis().keys().index(x)
-                sage: PBW = L.pbw_basis(basis_key=neg_key)                              # needs sage.groups sage.modules
-                sage: prod(PBW.gens())  # indirect doctest                              # needs sage.groups sage.modules
+                sage: PBW = L.pbw_basis(basis_key=neg_key)
+                sage: prod(PBW.gens())  # indirect doctest
                 PBW[-alpha[1]]*PBW[alphacheck[1]]*PBW[alpha[1]]
                  - 4*PBW[-alpha[1]]*PBW[alpha[1]] + PBW[alphacheck[1]]^2
                  - 2*PBW[alphacheck[1]]
 
             Check that :issue:`23266` is fixed::
 
-                sage: # needs sage.groups sage.modules
+                sage: # needs sage.graphs sage.groups sage.modules
                 sage: sl2 = lie_algebras.sl(QQ, 2, 'matrix')
                 sage: sl2.indices()
                 {'e1', 'f1', 'h1'}

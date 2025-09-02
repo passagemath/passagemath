@@ -480,7 +480,7 @@ class WeightLatticeRealizations(Category_over_base_ring):
                 sage: R.reduced_word_of_alcove_morphism(omega3.translation)
                 [0, 1, 0, 2, 1, 0]
 
-                sage: # needs sage.libs.gap
+                sage: # needs sage.graphs sage.libs.gap
                 sage: W = WeylGroup(['C',3,1])
                 sage: s = W.simple_reflections()
                 sage: w = s[0]*s[1]*s[2]*s[3]*s[2]
@@ -780,15 +780,15 @@ class WeightLatticeRealizations(Category_over_base_ring):
             EXAMPLES::
 
                 sage: L = RootSystem(['C',2,1]).weight_lattice()
-                sage: L.signs_of_alcovewalk([1,2,0,1,2,1,2,0,1,2])                      # needs sage.libs.gap
+                sage: L.signs_of_alcovewalk([1,2,0,1,2,1,2,0,1,2])                      # needs sage.graphs sage.libs.gap
                 [-1, -1, 1, -1, 1, 1, 1, 1, 1, 1]
 
                 sage: L = RootSystem(['A',2,1]).weight_lattice()
-                sage: L.signs_of_alcovewalk([0,1,2,1,2,0,1,2,0,1,2,0])                  # needs sage.libs.gap
+                sage: L.signs_of_alcovewalk([0,1,2,1,2,0,1,2,0,1,2,0])                  # needs sage.graphs sage.libs.gap
                 [1, 1, 1, 1, -1, 1, -1, 1, -1, 1, -1, 1]
 
                 sage: L = RootSystem(['B',2,1]).coweight_lattice()
-                sage: L.signs_of_alcovewalk([0,1,2,0,1,2])                              # needs sage.libs.gap
+                sage: L.signs_of_alcovewalk([0,1,2,0,1,2])                              # needs sage.graphs sage.libs.gap
                 [1, -1, 1, -1, 1, 1]
 
             .. WARNING::

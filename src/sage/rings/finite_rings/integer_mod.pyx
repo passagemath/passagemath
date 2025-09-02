@@ -562,9 +562,9 @@ cdef class IntegerMod_abstract(FiniteRingElement):
             sage: a = Mod(2,19)
             sage: gap(a)
             Z(19)
-            sage: gap(Mod(3, next_prime(10000)))
+            sage: gap(Mod(3, next_prime(10000)))                                        # needs sage.libs.pari
             Z(10007)^6190
-            sage: gap(Mod(3, next_prime(100000)))
+            sage: gap(Mod(3, next_prime(100000)))                                       # needs sage.libs.pari
             ZmodpZObj( 3, 100003 )
             sage: gap(Mod(4, 48))
             ZmodnZObj( 4, 48 )

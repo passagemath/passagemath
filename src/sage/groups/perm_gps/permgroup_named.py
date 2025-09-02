@@ -390,9 +390,9 @@ class SymmetricGroup(PermutationGroup_symalt):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: A = SymmetricGroup([2,3,7]); A.cartan_type()
             ['A', 2]
-
             sage: A = SymmetricGroup([]); A.cartan_type()
             ['A', 0]
         """
@@ -405,7 +405,7 @@ class SymmetricGroup(PermutationGroup_symalt):
 
         EXAMPLES::
 
-            sage: A = SymmetricGroup([2,3,7,'a']); A.coxeter_matrix()                   # needs sage.graphs
+            sage: A = SymmetricGroup([2,3,7,'a']); A.coxeter_matrix()                   # needs sage.graphs sage.modules
             [1 3 2]
             [3 1 3]
             [2 3 1]
@@ -1758,7 +1758,7 @@ class SemidihedralGroup(PermutationGroup_unique):
             sage: G = SemidihedralGroup(4.4)
             Traceback (most recent call last):
             ...
-            TypeError: m must be an integer, not 4.40000000000000
+            TypeError: m must be an integer, not 4.4...
 
             sage: G = SemidihedralGroup(-5)
             Traceback (most recent call last):
@@ -2677,11 +2677,11 @@ class PGL(PermutationGroup_plg):
             sage: G.order()
             24
 
-            sage: G = PGL(2, 9, 'b'); G                                                 # needs sage.rings.finite_rings
+            sage: # needs sage.rings.finite_rings
+            sage: G = PGL(2, 9, 'b'); G
             Permutation Group with generators [(3,10,9,8,4,7,6,5), (1,2,4)(5,6,8)(7,9,10)]
             sage: G.base_ring()
             Finite Field in b of size 3^2
-
             sage: G.category()
             Category of finite enumerated permutation groups
             sage: TestSuite(G).run()  # long time
@@ -2739,15 +2739,15 @@ class PSL(PermutationGroup_plg):
 
         We create two groups over nontrivial finite fields::
 
-            sage: G = PSL(2, 4, 'b'); G                                                 # needs sage.rings.finite_rings
+            sage: # needs sage.rings.finite_rings
+            sage: G = PSL(2, 4, 'b'); G
             Permutation Group with generators [(3,4,5), (1,2,3)]
             sage: G.base_ring()
             Finite Field in b of size 2^2
-            sage: G = PSL(2, 8); G                                                      # needs sage.rings.finite_rings
+            sage: G = PSL(2, 8); G
             Permutation Group with generators [(3,8,6,4,9,7,5), (1,2,3)(4,7,5)(6,9,8)]
             sage: G.base_ring()
             Finite Field in a of size 2^3
-
             sage: G.category()
             Category of finite enumerated permutation groups
             sage: TestSuite(G).run()  # long time
@@ -2918,7 +2918,8 @@ class PSp(PermutationGroup_plg):
             sage: G.base_ring()
             Finite Field of size 3
 
-            sage: G = PSp(2, 8, name='alpha'); G                                        # needs sage.rings.finite_rings
+            sage: # needs sage.rings.finite_rings
+            sage: G = PSp(2, 8, name='alpha'); G
             Permutation Group with generators [(3,8,6,4,9,7,5), (1,2,3)(4,7,5)(6,9,8)]
             sage: G.base_ring()
             Finite Field in alpha of size 2^3
@@ -3508,7 +3509,7 @@ class SmallPermutationGroup(PermutationGroup_generic):
         Group of order 12 and GAP Id 4 as a permutation group
         sage: G.gens()
         ((4,5), (1,2), (3,4,5))
-        sage: G.character_table()                                                       # needs sage.rings.number_field
+        sage: G.character_table()                                                       # needs sage.modules sage.rings.number_field
         [ 1  1  1  1  1  1]
         [ 1 -1  1 -1  1 -1]
         [ 1 -1  1  1 -1  1]
