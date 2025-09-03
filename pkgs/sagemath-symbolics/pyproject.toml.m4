@@ -45,7 +45,7 @@ conf            = ["passagemath-conf"]
 test            = ["passagemath-repl"]
 
 # extras by libraries
-axiom           = []  # FIXME
+fricas          = ["passagemath-fricas"]
 giac            = ["passagemath-giac"]
 ginac           = []  # no extra needed, same as pynac
 maxima          = []  # no extra needed

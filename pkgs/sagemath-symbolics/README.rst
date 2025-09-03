@@ -106,6 +106,9 @@ Using `SageManifolds <https://sagemanifolds.obspm.fr/>`_::
 Available as extras, from other distributions
 ---------------------------------------------
 
+``pip install "passagemath-symbolics[fricas]"``
+ Computer algebra system `FriCAS <https://passagemath.org/docs/latest/html/en/reference/spkg/fricas.html>`_, via `passagemath-fricas <https://passagemath.org/docs/latest/html/en/reference/spkg/sagemath_fricas.html>`_
+
 ``pip install "passagemath-symbolics[giac]"``
  Computer algebra system `Giac <https://passagemath.org/docs/latest/html/en/reference/spkg/giac.html>`_, via `passagemath-giac <https://passagemath.org/docs/latest/html/en/reference/spkg/sagemath_giac.html>`_
 
