@@ -579,7 +579,7 @@ endef
 # Set defaults
 $(foreach pkgname, $(NORMAL_PACKAGES) $(SCRIPT_PACKAGES),			\
      $(if $(findstring sagemath_,$(pkgname)),					\
-	  $(eval $(call SET_SAGE_CHECK,$(pkgname),no))				\
+	  $(eval $(call SET_SAGE_CHECK,$(pkgname),no)),				\
           $(eval $(call SET_SAGE_CHECK,$(pkgname),$(SAGE_CHECK)))))
 
 # Parsing the SAGE_CHECK_PACKAGES variable:
