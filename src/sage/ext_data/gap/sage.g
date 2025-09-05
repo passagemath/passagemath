@@ -145,9 +145,14 @@ end;
 # allows us to load the usual set of packages, but only if they are
 # installed. So most people will get exactly the default behavior,
 # but minimal installations won't throw warnings and fail tests.
-_autoloads := [ "autpgrp", "alnuth", "crisp", "ctbllib", "factint", "fga",
-                "irredsol", "laguna", "polenta", "polycyclic", "resclasses",
-                "sophus", "tomlib" ];
+_autoloads := [ "autpgrp", "alnuth", "crisp",
+                # "ctbllib",
+                "factint", "fga",
+                # "irredsol",
+                "laguna", "polenta", "polycyclic", "resclasses",
+                "sophus"
+                # "tomlib"
+              ];
 for p in _autoloads do
   LoadPackage(p);
 od;

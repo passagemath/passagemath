@@ -295,7 +295,7 @@
         "ntests": 3
     },
     "sage.categories.finite_dimensional_lie_algebras_with_basis": {
-        "ntests": 34
+        "ntests": 27
     },
     "sage.categories.finite_dimensional_modules_with_basis": {
         "ntests": 68
@@ -619,7 +619,7 @@
         "ntests": 17
     },
     "sage.categories.simplicial_sets": {
-        "ntests": 50
+        "ntests": 51
     },
     "sage.categories.subobjects": {
         "ntests": 2
@@ -1106,6 +1106,15 @@
     "sage.geometry.ribbon_graph": {
         "ntests": 224
     },
+    "sage.groups.abelian_gps.abelian_aut": {
+        "ntests": 2
+    },
+    "sage.groups.abelian_gps.abelian_group_gap": {
+        "ntests": 7
+    },
+    "sage.groups.abelian_gps.abelian_group_morphism": {
+        "ntests": 17
+    },
     "sage.groups.conjugacy_classes": {
         "ntests": 2
     },
@@ -1177,7 +1186,7 @@
         "ntests": 39
     },
     "sage.groups.perm_gps.permgroup": {
-        "ntests": 903
+        "ntests": 896
     },
     "sage.groups.perm_gps.permgroup_element": {
         "ntests": 385
@@ -1681,10 +1690,10 @@
         "ntests": 15
     },
     "sage.rings.finite_rings.integer_mod": {
-        "ntests": 543
+        "ntests": 545
     },
     "sage.rings.finite_rings.integer_mod_ring": {
-        "ntests": 304
+        "ntests": 295
     },
     "sage.rings.finite_rings.residue_field": {
         "ntests": 41
@@ -2254,6 +2263,9 @@
     },
     "sage.tests.books.computational-mathematics-with-sagemath.graphtheory_doctest": {
         "ntests": 6
+    },
+    "sage.tests.books.judson-abstract-algebra.cyclic-sage": {
+        "ntests": 5
     },
     "sage.tests.books.judson-abstract-algebra.homomorph-sage": {
         "ntests": 42

@@ -34,7 +34,7 @@ class GapPackage(Feature):
         sage: GapPackage("grape", spkg='gap_packages')
         Feature('gap_package_grape')
     """
-    def __init__(self, package, **kwds):
+    def __init__(self, package, check_command=None, **kwds):
         r"""
         TESTS::
 
@@ -44,6 +44,7 @@ class GapPackage(Feature):
         """
         Feature.__init__(self, f"gap_package_{package}", **kwds)
         self.package = package
+        self.check_command = check_command
 
     def _is_present(self):
         r"""
@@ -59,30 +60,50 @@ class GapPackage(Feature):
             FeatureTestResult('gap_package_grape', True)
         """
         try:
+            import sage.all__sagemath_gap
             from sage.libs.gap.libgap import libgap
+            from sage.libs.gap.util import GAPError
         except ImportError:
             return FeatureTestResult(self, False,
                                      reason="sage.libs.gap is not available")
 
-        # This returns "true" even if the package is already loaded.
-        command = 'LoadPackage("{package}")'.format(package=self.package)
-        presence = libgap.eval(command)
+        try:
+            # This returns "true" even if the package is already loaded.
+            command = 'LoadPackage("{package}")'.format(package=self.package)
+            presence = libgap.eval(command)
 
-        if presence:
-            return FeatureTestResult(self, True,
-                    reason="`{command}` evaluated to `{presence}` in GAP.".format(command=command, presence=presence))
-        else:
+            if presence:
+                if self.check_command:
+                    command = self.check_command
+                    presence = libgap.eval(command)
+                    if presence:
+                        return FeatureTestResult(self, True,
+                                                 reason="`{command}` evaluated to `{presence}` in GAP.".format(
+                                                     command=command, presence=presence))
             return FeatureTestResult(self, False,
-                    reason="`{command}` evaluated to `{presence}` in GAP.".format(command=command, presence=presence))
-
+                                     reason="`{command}` evaluated to `{presence}` in GAP.".format(
+                                         command=command, presence=presence))
+        except GAPError as exception:
+            return FeatureTestResult(self, False,
+                                     reason="Evaluating `{command}` in GAP raised an error: {exception}.".format(
+                                         command=command, exception=exception))
 
 def all_features():
     return [GapPackage("atlasrep", spkg='gap_packages'),
+            GapPackage("ctbllib", spkg='pypi/passagemath-gap-pkg-ctbllib-data', type='standard',
+                       check_command='CharacterTable("J1"))'),
             GapPackage("design", spkg='gap_packages'),
             GapPackage("grape", spkg='gap_packages'),
             GapPackage("guava", spkg='gap_packages'),
             GapPackage("hap", spkg='gap_packages'),
+            GapPackage("irredsol", spkg='pypi/passagemath-gap-pkg-irredsol-data', type='standard',
+                       check_command='IsAvailableIrreducibleSolubleGroupData(4, 3)'),
             GapPackage("polenta", spkg='gap_packages'),
             GapPackage("polycyclic", spkg='gap_packages'),
             GapPackage("qpa", spkg='gap_packages'),
-            GapPackage("quagroup", spkg='gap_packages')]
+            GapPackage("quagroup", spkg='gap_packages'),
+            GapPackage("semigroups", spkg='pypi/passagemath-gap-pkg-semigroups'),
+            GapPackage("tomlib", spkg='pypi/passagemath-gap-pkg-tomlib-data', type='standard',
+                       check_command='TableOfMarks("5:4xA5")'),
+            GapPackage("transgrp", spkg='pypi/passagemath-gap-pkg-transgrp-data', type='standard',
+                       check_command='TransitiveGroupsAvailable(10)')]
