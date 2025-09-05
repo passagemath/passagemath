@@ -59,6 +59,7 @@ class GapPackage(Feature):
             FeatureTestResult('gap_package_grape', True)
         """
         try:
+            import sage.all__sagemath_gap
             from sage.libs.gap.libgap import libgap
         except ImportError:
             return FeatureTestResult(self, False,
