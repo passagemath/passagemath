@@ -1936,7 +1936,7 @@ class TransitiveGroup(PermutationGroup_unique):
 
         EXAMPLES::
 
-            sage: TransitiveGroup(8, 44).transitive_number()
+            sage: TransitiveGroup(8, 44).transitive_number()                    # needs gap_pkg_transgrp
             44
         """
         return self._n
@@ -1947,7 +1947,7 @@ class TransitiveGroup(PermutationGroup_unique):
 
         EXAMPLES::
 
-            sage: TransitiveGroup(8, 44).degree()
+            sage: TransitiveGroup(8, 44).degree()                               # needs gap_pkg_transgrp
             8
         """
         return self._d
@@ -1956,7 +1956,7 @@ class TransitiveGroup(PermutationGroup_unique):
         """
         EXAMPLES::
 
-            sage: G = TransitiveGroup(1,1); G
+            sage: G = TransitiveGroup(1, 1); G                                  # needs gap_pkg_transgrp
             Transitive group number 1 of degree 1
         """
         return "Transitive group number %s of degree %s" % (self._n, self._d)
@@ -2029,7 +2029,7 @@ class TransitiveGroupsAll(DisjointUnionEnumeratedSets):
             sage: S = TransitiveGroups()
             sage: S.category()
             Category of facade infinite enumerated sets
-            sage: TestSuite(TransitiveGroups()).run()
+            sage: TestSuite(TransitiveGroups()).run()                           # needs gap_pkg_transgrp
         """
         DisjointUnionEnumeratedSets.__init__(self,
                                              Family(NonNegativeIntegers(),
@@ -2207,9 +2207,9 @@ class TransitiveGroupsOfDegree(CachedRepresentation, Parent):
             1
             sage: TransitiveGroups(7).cardinality()
             7
-            sage: TransitiveGroups(12).cardinality()
+            sage: TransitiveGroups(12).cardinality()                            # needs gap_pkg_transgrp
             301
-            sage: [TransitiveGroups(i).cardinality() for i in range(11)]
+            sage: [TransitiveGroups(i).cardinality() for i in range(11)]        # needs gap_pkg_transgrp
             [1, 1, 1, 2, 5, 5, 16, 7, 50, 34, 45]
 
         .. WARNING::
@@ -2217,7 +2217,7 @@ class TransitiveGroupsOfDegree(CachedRepresentation, Parent):
             GAP comes with a database containing all transitive groups
             up to degree 31::
 
-                sage: TransitiveGroups(32).cardinality()
+                sage: TransitiveGroups(32).cardinality()                        # needs gap_pkg_transgrp
                 Traceback (most recent call last):
                 ...
                 NotImplementedError: only the transitive groups of degree at most 31
@@ -2225,7 +2225,7 @@ class TransitiveGroupsOfDegree(CachedRepresentation, Parent):
 
         TESTS::
 
-            sage: type(TransitiveGroups(12).cardinality())
+            sage: type(TransitiveGroups(12).cardinality())                      # needs gap_pkg_transgrp
             <class 'sage.rings.integer.Integer'>
             sage: type(TransitiveGroups(0).cardinality())
             <class 'sage.rings.integer.Integer'>
