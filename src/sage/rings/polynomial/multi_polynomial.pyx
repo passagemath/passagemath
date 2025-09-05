@@ -1007,12 +1007,12 @@ cdef class MPolynomial(CommutativePolynomial):
             sage: p = sum(prod(x[i] for i in e)
             ....:         for e in [(0,1,2), (0,1,7), (0,2,7), (1,2,7),
             ....:                   (3,4,5), (3,4,6), (3,5,6), (4,5,6)])
-            sage: p.is_symmetric(libgap.TransitiveGroup(8, 5))                          # needs sage.groups
+            sage: p.is_symmetric(libgap.TransitiveGroup(8, 5))                          # needs gap_pkg_transgrp sage.groups
             True
             sage: p = sum(prod(x[i] for i in e)
             ....:     for e in [(0,1,2), (0,1,7), (0,2,7), (1,2,7),
             ....:               (3,4,5), (3,4,6), (3,5,6)])
-            sage: p.is_symmetric(libgap.TransitiveGroup(8, 5))                          # needs sage.groups
+            sage: p.is_symmetric(libgap.TransitiveGroup(8, 5))                          # needs gap_pkg_transgrp sage.groups
             False
 
         TESTS::
