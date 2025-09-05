@@ -21,12 +21,12 @@ objects have a more group theoretic flavor than the more combinatorial
 # ****************************************************************************
 
 from . import permgroup_element
-from sage.misc.sage_eval import sage_eval
-from sage.misc.lazy_import import lazy_import
 from sage.interfaces.gap import GapElement
 from sage.libs.gap.element import GapElement_Permutation
+from sage.misc.lazy_import import lazy_import
 
 lazy_import('sage.combinat.permutation', ['Permutation', 'from_cycles'])
+lazy_import('sage.misc.sage_eval', 'sage_eval')
 
 try:
     from cypari2.gen import Gen as pari_gen
