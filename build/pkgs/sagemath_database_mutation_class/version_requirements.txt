@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-database-mutation-class ~= 10.6.15.0
+passagemath-database-mutation-class ~= 10.6.16.0
