@@ -2081,8 +2081,8 @@ class PermutationGroup_generic(FiniteGroup):
             [[()], [()], [(), (3,4)], [()]]
             sage: G.strong_generating_system(base_of_group=[3,1,2,4])
             [[(), (3,4)], [()], [()], [()]]
-            sage: G = TransitiveGroup(12,17)
-            sage: G.strong_generating_system()
+            sage: G = TransitiveGroup(12,17)                    # needs gap_pkg_transgrp
+            sage: G.strong_generating_system()                  # needs gap_pkg_transgrp
             [[(), (1,4,11,2)(3,6,5,8)(7,10,9,12), (1,8,3,2)(4,11,10,9)(5,12,7,6),
               (1,7)(2,8)(3,9)(4,10)(5,11)(6,12), (1,12,7,2)(3,10,9,8)(4,11,6,5),
               (1,11)(2,8)(3,5)(4,10)(6,12)(7,9), (1,10,11,8)(2,3,12,5)(4,9,6,7),
