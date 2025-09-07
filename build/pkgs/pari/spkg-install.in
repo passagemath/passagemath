@@ -115,6 +115,12 @@ if [ "$SAGE_DEBUG" = yes ]; then
     PARI_MAKEFLAGS="KERNELCFLAGS=-O1 $PARI_MAKEFLAGS"
 fi
 
+if [ -n "$MSYSTEM" ]; then
+    PARI_CONFIGURE_MT=
+    sed -i.bak '/define PARI_TUNE/d' src/headers/paritune.h
+else
+    PARI_CONFIGURE_MT=--mt=pthread
+fi
 
 # Build PARI/GP
 # Configure PARI/GP, forcing bash instead of /bin/sh.  It is not
@@ -127,7 +133,7 @@ fi
 bash ./Configure --prefix="$SAGE_LOCAL" \
     --with-readline="$SAGE_LOCAL" $SAGE_CONFIGURE_GMP \
     --with-runtime-perl="/usr/bin/env perl" \
-    --mt=pthread \
+    $PARI_CONFIGURE_MT \
     --kernel=gmp $PARI_CONFIGURE || \
     sdh_die "Error configuring PARI with readline and GMP kernel failed."
 
@@ -136,3 +142,5 @@ sdh_make $PARI_MAKEFLAGS gp
 
 # install non-parallel (-j1) because of race conditions
 sdh_make_install -j1
+
+sdh_generate_windows_lib_files pari
