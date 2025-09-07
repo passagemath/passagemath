@@ -485,7 +485,7 @@ def is_LatticePolytope(x):
         See https://github.com/sagemath/sage/issues/34307 for details.
         False
         sage: p = LatticePolytope([(1,0), (0,1), (-1,-1)])
-        sage: p                                                                         # optional - polytopes_db, needs palp
+        sage: p                                                                         # optional - polytopes_db, needs palp sage.groups
         2-d reflexive polytope #0 in 2-d lattice M
         sage: is_LatticePolytope(p)
         True
