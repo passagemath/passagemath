@@ -147,7 +147,7 @@ class Polyhedron_base2(Polyhedron_base1):
             sage: P = Polyhedron(vertices=[(1, 0), (0, 1), (-1, 0), (0, -1)])
             sage: lp = P.lattice_polytope(); lp
             2-d reflexive polytope... in 2-d lattice M
-            sage: lp                                                            # optional - polytopes_db, needs palp
+            sage: lp                                                            # optional - polytopes_db, needs palp sage.groups
             2-d reflexive polytope #3 in 2-d lattice M
             sage: lp.vertices()
             M(-1,  0),
@@ -166,7 +166,7 @@ class Polyhedron_base2(Polyhedron_base1):
             to add the argument "envelope=True" to compute an enveloping
             lattice polytope.
             sage: lp = P.lattice_polytope(True)
-            sage: lp                                                            # optional - polytopes_db, needs palp
+            sage: lp                                                            # optional - polytopes_db, needs palp sage.groups
             2-d reflexive polytope #5 in 2-d lattice M
             sage: lp.vertices()
             M(-1,  0),

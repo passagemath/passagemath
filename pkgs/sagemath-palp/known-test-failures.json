@@ -6,7 +6,7 @@
         "ntests": 1113
     },
     "sage.geometry.cone_catalog": {
-        "ntests": 101
+        "ntests": 108
     },
     "sage.geometry.cone_critical_angles": {
         "ntests": 112
@@ -43,7 +43,7 @@
         "ntests": 7
     },
     "sage.geometry.lattice_polytope": {
-        "ntests": 615
+        "ntests": 618
     },
     "sage.geometry.linear_expression": {
         "ntests": 165
@@ -58,7 +58,6 @@
         "ntests": 11
     },
     "sage.geometry.polyhedron.backend_cdd": {
-        "failed": true,
         "ntests": 33
     },
     "sage.geometry.polyhedron.backend_cdd_rdf": {
@@ -98,16 +97,16 @@
         "ntests": 11
     },
     "sage.geometry.polyhedron.base5": {
-        "ntests": 382
+        "ntests": 397
     },
     "sage.geometry.polyhedron.base6": {
-        "ntests": 166
+        "ntests": 168
     },
     "sage.geometry.polyhedron.base7": {
         "ntests": 128
     },
     "sage.geometry.polyhedron.base_QQ": {
-        "ntests": 112
+        "ntests": 114
     },
     "sage.geometry.polyhedron.base_RDF": {
         "ntests": 14
@@ -143,7 +142,6 @@
         "ntests": 52
     },
     "sage.geometry.polyhedron.constructor": {
-        "failed": true,
         "ntests": 109
     },
     "sage.geometry.polyhedron.double_description": {
@@ -155,12 +153,15 @@
     "sage.geometry.polyhedron.face": {
         "ntests": 159
     },
+    "sage.geometry.polyhedron.generating_function": {
+        "ntests": 7
+    },
     "sage.geometry.polyhedron.lattice_euclidean_group_element": {
         "ntests": 27
     },
     "sage.geometry.polyhedron.library": {
         "failed": true,
-        "ntests": 314
+        "ntests": 306
     },
     "sage.geometry.polyhedron.misc": {
         "ntests": 12
@@ -169,13 +170,13 @@
         "ntests": 44
     },
     "sage.geometry.polyhedron.palp_database": {
-        "ntests": 6
+        "ntests": 64
     },
     "sage.geometry.polyhedron.parent": {
         "ntests": 200
     },
     "sage.geometry.polyhedron.plot": {
-        "ntests": 199
+        "ntests": 201
     },
     "sage.geometry.polyhedron.ppl_lattice_polygon": {
         "ntests": 81
@@ -202,7 +203,6 @@
         "ntests": 82
     },
     "sage.geometry.triangulation.base": {
-        "failed": true,
         "ntests": 173
     },
     "sage.geometry.triangulation.element": {
@@ -212,7 +212,6 @@
         "ntests": 250
     },
     "sage.geometry.voronoi_diagram": {
-        "failed": true,
         "ntests": 24
     }
 }

@@ -427,9 +427,9 @@ class Polyhedron_base0(Element, sage.geometry.abc.Polyhedron):
 
                 sage: P = Polyhedron([[2/3,0],[6666666666666667/10^16,0]], base_ring=AA); P         # needs sage.rings.number_field
                 A 1-dimensional polyhedron in AA^2 defined as the convex hull of 2 vertices
-                sage: Q = P.change_ring(RDF); Q                                         # needs sage.rings.number_field
+                sage: Q = P.change_ring(RDF); Q                                         # needs cddexec sage.rings.number_field
                 A 0-dimensional polyhedron in RDF^2 defined as the convex hull of 1 vertex
-                sage: P.n_vertices() == Q.n_vertices()                                  # needs sage.rings.number_field
+                sage: P.n_vertices() == Q.n_vertices()                                  # needs cddexec sage.rings.number_field
                 False
         """
         from sage.categories.rings import Rings
