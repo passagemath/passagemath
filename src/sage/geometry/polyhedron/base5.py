@@ -1077,8 +1077,13 @@ class Polyhedron_base5(Polyhedron_base4):
                     R = self*polytopes.regular_polygon(5, exact=True)
                     assert R
                 if RDF.has_coerce_map_from(self.base_ring()):
-                    R = self*polytopes.regular_polygon(5, exact=False)
-                    assert R
+                    try:
+                        P5 = polytopes.regular_polygon(5, exact=False)
+                    except FeatureNotPresentError:
+                        pass
+                    else:
+                        R = self * P5
+                        assert R
 
         if self.base_ring() in (ZZ, QQ):
             # Check that the double description is set up correctly.
