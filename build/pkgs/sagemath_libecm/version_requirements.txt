@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-libecm ~= 10.6.16.0
+passagemath-libecm ~= 10.6.17.0
