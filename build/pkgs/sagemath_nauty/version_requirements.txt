@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-nauty ~= 10.6.17.0
+passagemath-nauty ~= 10.6.18.0
