@@ -288,10 +288,13 @@ def display_version_info(pkg_base, out):
         logger.warning("Could not get version info for %s: %s", pkg_base, e.stderr.strip())
         return
 
-    print("Version Information", file=out)
-    print("-------------------", file=out)
-    print("", file=out)
-    print(result.strip(), file=out)
+    result = result.strip()
+
+    if result:
+        print("Version Information", file=out)
+        print("-------------------", file=out)
+        print("", file=out)
+        print(result, file=out)
 
 
 # To Build the "Equivalent System Packages" section and Use sage-print-system-package-command.
