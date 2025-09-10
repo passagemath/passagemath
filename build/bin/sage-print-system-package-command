@@ -268,7 +268,7 @@ case $system:$command in
         fi
         ;;
     pip:install)
-        [ -n "$system_packages" ] && print_shell_command sage -pip install $system_packages
+        [ -n "$system_packages" ] && print_shell_command pip install $system_packages
         if [ -z "$system_packages" ]; then
             print_comment "No package needed"
         fi
