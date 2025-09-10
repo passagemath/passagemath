@@ -33,6 +33,8 @@ os.environ.setdefault("SAGE_ROOT", _SAGE_ROOT_DEFAULT)
 # To Prepend .../build/bin to PATH
 os.environ["PATH"] = os.path.join(BUILD_DIR, "bin") + ":" + os.environ.get("PATH", "")
 
+os.environ["ENABLE_SYSTEM_SITE_PACKAGES"] = "yes"
+
 SYSTEM_NAME_MAP = {
     "alpine": "Alpine",
     "arch": "Arch Linux",
