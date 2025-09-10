@@ -285,7 +285,7 @@ def display_dependencies(pkg_base, fmt, out):
     print(result.strip(), file=out)
     
 
-def display_version_info(pkg_base, out):
+def display_version_info(pkg_base, fmt, out):
     try:
         result = run(["sage-get-system-packages", "versions", pkg_base], check=True)
     except subprocess.CalledProcessError as e:
@@ -297,6 +297,7 @@ def display_version_info(pkg_base, out):
     try:
         repology = run([
             "sage-print-system-package-command", "repology",
+            "--format={}".format("rst" if fmt.rst else "plain"),
             "--wrap", "--prompt=    $ ", "--continuation=          ",
             "--sudo", "--spkg", "install",
             pkg_base
@@ -419,7 +420,7 @@ def emit_for_package(pkg_base, fmt, out_dir):
 
         # Version info
         print("", file=out_stream)
-        display_version_info(pkg_base, out_stream)
+        display_version_info(pkg_base, fmt, out_stream)
 
         # System packages
         print("", file=out_stream)
