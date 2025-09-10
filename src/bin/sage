@@ -652,7 +652,8 @@ if [ "$1" = '-gap' -o "$1" = '--gap' ]; then
     shift
     # Use "-A" to avoid warnings about missing packages. The gap
     # interface and libgap within sage both already do this.
-    eval exec $(python3 -c 'from sage.interfaces.gap import gap_cmd; print(gap_cmd)') "$@"
+    set -- $(eval echo $(python3 -c 'from sage.interfaces.gap import gap_cmd; print(gap_cmd)')) "$@"
+    exec "$@"
 fi
 
 if [ "$1" = '-gap3' -o "$1" = '--gap3' ]; then
