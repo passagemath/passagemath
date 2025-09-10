@@ -41,9 +41,24 @@ content-type = "text/x-rst"
 test            = ["passagemath-repl"]
 
 # GAP packages
+# - external dependencies per 'ExternalConditions' in PackageInfo.g
+# - dependencies on packages with external dependencies per 'NeededOtherPackages' in PackageInfo.g
+aclib           = ["passagemath-gap[polycyclic]"]
+alnuth          = ["passagemath-pari"]
+cryst           = ["passagemath-gap[polycyclic]"]
+crystcat        = ["passagemath-gap[cryst]"]
 ctbllib         = ["passagemath-gap-pkg-ctbllib-data"]
+hap             = ["passagemath-gap[polycyclic,crystcat,aclib,nq]"]
+hapcryst        = ["passagemath-gap[polycyclic,aclib,cryst,hap,polymaking]"]
 irredsol        = ["passagemath-gap-pkg-irredsol-data"]
+nq              = ["passagemath-gap[polycyclic]"]
+polenta         = ["passagemath-gap[polycyclic,alnuth,radiroot]"]
+polycyclic      = ["passagemath-gap[alnuth]"]
+polymaking      = [SPKG_INSTALL_REQUIRES_jupymake]
+radiroot        = ["passagemath-gap[alnuth]"]
+resclasses      = ["passagemath-gap[polycyclic]"]
 semigroups      = ["passagemath-gap-pkg-semigroups"]
+singular        = ["passagemath-singular"]
 tomlib          = ["passagemath-gap-pkg-tomlib-data"]
 transgrp        = ["passagemath-gap-pkg-transgrp-data"]
 
@@ -59,7 +74,11 @@ notebook        = [
 ]
 
 # Everything as in standard Sage
-standard        = ["passagemath-gap[transgrp,ctbllib,tomlib,irredsol]"]
+standard        = [
+    "passagemath-gap[transgrp,ctbllib,tomlib,irredsol]",
+    "passagemath-pari",
+    "passagemath-singular",
+]
 
 [tool.cibuildwheel.linux]
 # Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
