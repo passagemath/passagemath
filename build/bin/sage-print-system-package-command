@@ -91,7 +91,7 @@ if [ "$system" = auto ]; then
         exit 1
     fi
 fi
-if [ "$SPKG" = "yes" ]; then
+if [ "$SPKG" = "yes" -a "$system" != "spkg" ]; then
     system_packages=$(echo $(sage-get-system-packages $system $*))
 else
     system_packages="$*"
