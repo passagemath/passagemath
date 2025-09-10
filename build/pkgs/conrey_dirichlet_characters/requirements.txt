@@ -1,0 +1,1 @@
+DirichletConrey @ git+https://github.com/passagemath/passagemath-pkg-conrey-dirichlet-characters.git
