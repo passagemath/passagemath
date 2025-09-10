@@ -285,20 +285,38 @@ def display_dependencies(pkg_base, fmt, out):
     print(result.strip(), file=out)
     
 
-def display_version_info(pkg_base, out):
+def display_version_info(pkg_base, fmt, out):
     try:
         result = run(["sage-get-system-packages", "versions", pkg_base], check=True)
     except subprocess.CalledProcessError as e:
         logger.warning("Could not get version info for %s: %s", pkg_base, e.stderr.strip())
-        return
+        result = ''
 
     result = result.strip()
 
-    if result:
+    try:
+        repology = run([
+            "sage-print-system-package-command", "repology",
+            "--format={}".format("rst" if fmt.rst else "plain"),
+            "--wrap", "--prompt=    $ ", "--continuation=          ",
+            "--sudo", "--spkg", "install",
+            pkg_base
+        ])
+    except subprocess.CalledProcessError as e:
+        logger.warning("repology cmd failed: %s", e.stderr.strip())
+        repology = ''
+
+    repology = repology.strip()
+
+    if result or repology:
         print("Version Information", file=out)
         print("-------------------", file=out)
-        print("", file=out)
-        print(result, file=out)
+        if result:
+            print("", file=out)
+            print(result, file=out)
+        if repology:
+            print("", file=out)
+            print(repology, file=out)
 
 
 # To Build the "Equivalent System Packages" section and Use sage-print-system-package-command.
@@ -318,17 +336,10 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
 
     systems.append("spkg")
 
-    have_repology = False
     for entry in sorted(glob.glob(os.path.join(distros_dir, "*.txt"))):
         name = os.path.splitext(os.path.basename(entry))[0]
-        if name == "repology":
-            have_repology = True
-        else:
+        if name != "repology":
             systems.append(name)
-
-    if not systems and not have_repology:
-        print("(none known)", file=out)
-        return
 
     for system in systems:
         heading = "{}:".format(SYSTEM_NAME_MAP.get(system, system))
@@ -363,20 +374,6 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
                            pkg_base, system, e.stderr.strip())
         print("", file=out)
 
-    if have_repology:
-        # To show below the tabs, like the shell script
-        repology_file = os.path.join(distros_dir, "repology.txt")
-        sys_pkgs = _strip_comments_and_collapse(repology_file)
-        try:
-            cp = run([
-                "sage-print-system-package-command", "repology",
-                "--wrap", "--prompt=    $ ", "--continuation=          ",
-                "--sudo", "install",
-            ] + sys_pkgs.split())
-            print(cp.rstrip(), file=out)
-        except subprocess.CalledProcessError as e:
-            logger.warning("repology cmd failed: %s", e.stderr.strip())
-
     # To print message about spkg-configure.m4. Optionally: expose as @property later.
     print("", file=out)
     if pkg.has_spkg_configure:
@@ -387,7 +384,6 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
                           fmt.code('./configure'),
                           fmt.code('./configure')),
                   file=out)
-
         else:
             cfg_word = "./configure"
             if fmt.rst:
@@ -398,6 +394,7 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
             print("However, these system packages will not be used for building Sage", file=out)
             print("because {} has not been written for this package;".format(fmt.code('spkg-configure.m4')), file=out)
             print("see {} for more information.".format(fmt.issue('27330')), file=out)
+
 
 # To Emit info for multiple packages.
 def emit_for_package(pkg_base, fmt, out_dir):
@@ -423,7 +420,7 @@ def emit_for_package(pkg_base, fmt, out_dir):
 
         # Version info
         print("", file=out_stream)
-        display_version_info(pkg_base, out_stream)
+        display_version_info(pkg_base, fmt, out_stream)
 
         # System packages
         print("", file=out_stream)
