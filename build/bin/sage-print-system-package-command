@@ -165,14 +165,23 @@ case $system:$command in
         else
             [ -n "$system_packages" ] && print_shell_command ${SUDO}${env}apt-get $command $options $system_packages
         fi
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     @(fedora*|redhat*|centos*):install)
         [ "$YES" = yes ] && options="$options -y"
         [ "$IGNORE_MISSING" = yes ] && options="$options --skip-unavailable"
         [ -n "$system_packages" ] && print_shell_command ${SUDO}dnf install $options $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     gentoo*:install)
         [ -n "$system_packages" ] && print_shell_command ${SUDO}emerge $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     @(arch|msys|mingw)*:update)
         print_shell_command "${SUDO}pacman -Sy"
@@ -184,6 +193,9 @@ case $system:$command in
         else
             [ -n "$system_packages" ] && print_shell_command ${SUDO}pacman -S $options $system_packages
         fi
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     void*:update)
         print_shell_command "${SUDO}xbps-install -Su"
@@ -191,32 +203,56 @@ case $system:$command in
     void*:install)
         [ "$YES" = yes ] && options="$options --yes"
         [ -n "$system_packages" ] && print_shell_command ${SUDO}xbps-install $options $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     opensuse*:install)
         [ "$YES" = yes ] && options_pre="--non-interactive"
         [ "$IGNORE_MISSING" = yes ] && options_pre="$options_pre --ignore-unknown"
         [ -n "$system_packages" ] && print_shell_command ${SUDO}zypper $options_pre install $options $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     *conda*:install)
         [ "$YES" = yes ] && options="$options --yes"
         [ -n "$system_packages" ] && print_shell_command conda install $options $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     homebrew*:install)
         [ "$YES" = yes ] && options="$options --overwrite"
         [ -n "$system_packages" ] && print_shell_command brew install $options $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     macports*:install)
         [ "$YES" = yes ] && options="$options -N"
         [ -n "$system_packages" ] && print_shell_command ${SUDO}port $options install $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     slackware*:install)
         [ -n "$system_packages" ] && print_shell_command ${SUDO}slackpkg install $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     freebsd*:install)
         [ -n "$system_packages" ] && print_shell_command ${SUDO}pkg install $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     nix*:install)
         [ -n "$system_packages" ] && print_shell_command "nix-env -f '<nixpkgs>' --install --attr $system_packages"
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     alpine:update)
         print_shell_command "apk update"
@@ -227,15 +263,27 @@ case $system:$command in
         else
             [ -n "$system_packages" ] && print_shell_command apk add $system_packages
         fi
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     pip:install)
         [ -n "$system_packages" ] && print_shell_command sage -pip install $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     cpan:install)
         [ -n "$system_packages" ] && print_shell_command cpan -i $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     spkg:install)
         [ -n "$system_packages" ] && print_shell_command sage -i $system_packages
+        if [ -z "$system_packages" ]; then
+            print_comment "No package needed"
+        fi
         ;;
     repology:install)
         if [ -n "$system_packages" ]; then
