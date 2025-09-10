@@ -336,6 +336,7 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
         indent = "   " if fmt.rst else ""
 
         if system == 'spkg' and pkg.source == 'none':
+            print("", file=out)
             print("{}This is a dummy package and cannot be installed "
                   "using the Sage distribution.".format(indent), file=out)
             print("", file=out)
