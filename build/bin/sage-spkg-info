@@ -33,6 +33,8 @@ os.environ.setdefault("SAGE_ROOT", _SAGE_ROOT_DEFAULT)
 # To Prepend .../build/bin to PATH
 os.environ["PATH"] = os.path.join(BUILD_DIR, "bin") + ":" + os.environ.get("PATH", "")
 
+os.environ["ENABLE_SYSTEM_SITE_PACKAGES"] = "yes"
+
 SYSTEM_NAME_MAP = {
     "alpine": "Alpine",
     "arch": "Arch Linux",
@@ -47,7 +49,9 @@ SYSTEM_NAME_MAP = {
     "nix": "Nixpkgs",
     "openbsd": "OpenBSD",
     "opensuse": "openSUSE",
+    "pip": "PyPI",
     "slackware": "Slackware",
+    "spkg": "Sage distribution",
     "void": "Void Linux",
 }
 # This is to map system names to display names 
@@ -288,26 +292,32 @@ def display_version_info(pkg_base, out):
         logger.warning("Could not get version info for %s: %s", pkg_base, e.stderr.strip())
         return
 
-    print("Version Information", file=out)
-    print("-------------------", file=out)
-    print("", file=out)
-    print(result.strip(), file=out)
+    result = result.strip()
+
+    if result:
+        print("Version Information", file=out)
+        print("-------------------", file=out)
+        print("", file=out)
+        print(result, file=out)
 
 
 # To Build the "Equivalent System Packages" section and Use sage-print-system-package-command.
 def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
 
-    print("Equivalent System Packages", file=out)
-    print("--------------------------", file=out)
+    pkg = _package_from_dir(pkg_base, pkg_scripts)  # or to change to Package.from_base(pkg_base), depending on types of API
+
+    print("Installation commands", file=out)
+    print("---------------------", file=out)
     print("", file=out)
 
     distros_dir = os.path.join(pkg_scripts, "distros")
-    if not os.path.isdir(distros_dir):
-        logger.info("No distros directory for %s", pkg_base)
-        print("(none known)", file=out)
-        return
 
     systems = []
+    if pkg.distribution_name:
+        systems.append("pip")
+
+    systems.append("spkg")
+
     have_repology = False
     for entry in sorted(glob.glob(os.path.join(distros_dir, "*.txt"))):
         name = os.path.splitext(os.path.basename(entry))[0]
@@ -321,37 +331,36 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
         return
 
     for system in systems:
-        system_file = os.path.join(distros_dir, "{}.txt".format(system))
-        sys_pkgs = _strip_comments_and_collapse(system_file)
-
-
         heading = "{}:".format(SYSTEM_NAME_MAP.get(system, system))
         print(fmt.tab(heading), file=out)
         indent = "   " if fmt.rst else ""
 
-        if sys_pkgs:
-            args = [
-                "sage-print-system-package-command",
-                system,
-                "--format={}".format("rst" if fmt.rst else "plain"),
-                "--wrap",
-                "--prompt={}".format("    $ "),
-                "--continuation={}".format("          "),
-                "--indent={}".format(indent),
-                "--sudo",
-                "install",
-            ] + sys_pkgs.split()
-            try:
-                cp = run(args)
-                print(cp.rstrip(), file=out)
-            except subprocess.CalledProcessError as e:
-                logger.warning("Failed to get system package command for %s on %s: %s",
-                               pkg_base, system, e.stderr.strip())
-                print("", file=out)
-                print("{}No package needed.".format(indent), file=out)
-        else:
+        if system == 'spkg' and pkg.source == 'none':
             print("", file=out)
-            print("{}No package needed.".format(indent), file=out)
+            print("{}This is a dummy package and cannot be installed "
+                  "using the Sage distribution.".format(indent), file=out)
+            print("", file=out)
+            continue
+
+        args = [
+            "sage-print-system-package-command",
+            system,
+            "--format={}".format("rst" if fmt.rst else "plain"),
+            "--wrap",
+            "--prompt={}".format("    $ "),
+            "--continuation={}".format("          "),
+            "--indent={}".format(indent),
+            "--sudo",
+            "--spkg",
+            "install",
+            pkg_base
+        ]
+        try:
+            cp = run(args)
+            print(cp.rstrip(), file=out)
+        except subprocess.CalledProcessError as e:
+            logger.warning("Failed to get system package command for %s on %s: %s",
+                           pkg_base, system, e.stderr.strip())
         print("", file=out)
 
     if have_repology:
@@ -370,11 +379,10 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
 
     # To print message about spkg-configure.m4. Optionally: expose as @property later.
     print("", file=out)
-    pkg = _package_from_dir(pkg_base, pkg_scripts)  # or to change to Package.from_base(pkg_base), depending on types of API
     if pkg.has_spkg_configure:
         if pkg.uses_python_package_check:
             print("If the system package is installed and if the (experimental) option", file=out)
-            print("{} is passed to {}, then {} will check if the system package can be used."
+            print("{} is passed to {}, then \n{} will check if the system package can be used."
                   .format(fmt.code('--enable-system-site-packages'),
                           fmt.code('./configure'),
                           fmt.code('./configure')),
