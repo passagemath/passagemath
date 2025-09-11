@@ -30,6 +30,8 @@ fi
 # Where to install these packages
 PKG_DIR="$SAGE_LOCAL/lib/gap/pkg"
 
+BUILDPACKAGES="$(pwd)/src/bin/BuildPackages.sh"
+
 PKG_SRC_DIR="$(pwd)/src/pkg"
 cd "$PKG_SRC_DIR"
 
@@ -92,46 +94,42 @@ install_compiled_pkg()
 #
 # These packages have an old ./configure that take the GAP_ROOT as a positional
 # argument
+export CFLAGS="$CFLAGS -Wno-implicit-function-declaration"
+
+"$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" \
+                 --add-package-config-digraphs "--with-external-planarity" \
+                 cohomolo crypting grape orb datastructures
+
 for pkg in cohomolo crypting grape orb datastructures
 do
-    echo "Building GAP package $pkg"
-    CFLAGS="$CFLAGS -Wno-implicit-function-declaration"
-    export CFLAGS
+    echo "Installing GAP package $pkg"
     cd "$PKG_SRC_DIR/$pkg"
-    ./configure "$GAP_ROOT"
-    sdh_make
     install_compiled_pkg "$pkg"
     cd "$PKG_SRC_DIR"
 done
 
-echo "Building GAP package guava"
-export CFLAGS="-std=gnu17 $CFLAGS -Wno-implicit-function-declaration"
+export CFLAGS="-std=gnu17 $CFLAGS"
+
+"$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" \
+                 --add-package-config-digraphs "--with-external-planarity" \
+                 guava
+
+echo "Installing GAP package guava"
 cd "$PKG_SRC_DIR/guava"
-./configure "$GAP_ROOT"
-sdh_make
 install_compiled_pkg "guava"
 cd "$PKG_SRC_DIR"
 
 # These packages have a new-style autoconf ./configure
 # that takes --with-gaproot
 
-#############################################################################
-########## add extra parameters for packages' configures here ###############
-#
-# nq         : none
-# io         : none
-# digraphs   needs to use external planarity
-pararr=( " " " " "--with-external-planarity" )
-##############################################################################
+"$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" \
+                 --add-package-config-digraphs "--with-external-planarity" \
+                 nq io digraphs
 
-parind=0
 for pkg in nq io digraphs
 do
-    echo "Building GAP package $pkg"
+    echo "Installing GAP package $pkg"
     cd "$PKG_SRC_DIR/$pkg"
-    sdh_configure --with-gaproot="$GAP_ROOT" ${pararr[$parind]}
-    ((parind+=1))
-    sdh_make
     install_compiled_pkg "$pkg"
     cd "$PKG_SRC_DIR"
 done
