@@ -32,6 +32,10 @@ PKG_DIR="$SAGE_LOCAL/lib/gap/pkg"
 
 BUILDPACKAGES="$(pwd)/src/bin/BuildPackages.sh"
 
+# Patch out unnecessary things from the script
+# - do not set the MAKE variable
+sed -i.bak 's/^ *MAKE=.*/:/' "$BUILDPACKAGES"
+
 PKG_SRC_DIR="$(pwd)/src/pkg"
 cd "$PKG_SRC_DIR"
 
