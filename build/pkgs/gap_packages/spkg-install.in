@@ -35,6 +35,9 @@ BUILDPACKAGES="$(pwd)/src/bin/BuildPackages.sh"
 PKG_SRC_DIR="$(pwd)/src/pkg"
 cd "$PKG_SRC_DIR"
 
+# remove unused vendored sources
+rm -rf grape/nauty*
+
 # directly install pure GAP packages
 #
 #    happrime - no longer distributed, partly merged in Hap,
@@ -51,6 +54,7 @@ sdh_install \
     design \
     gbnp \
     genss \
+    grape \
     hap \
     hapcryst \
     hecke \
@@ -96,11 +100,11 @@ export CFLAGS="$CFLAGS -std=gnu17 -Wno-implicit-function-declaration"
 
 "$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" \
                  --add-package-config-digraphs "--with-external-planarity" \
-                 cohomolo crypting grape orb datastructures \
+                 cohomolo crypting orb datastructures \
                  guava \
                  nq io digraphs
 
-for pkg in cohomolo crypting grape orb datastructures \
+for pkg in cohomolo crypting orb datastructures \
                  guava \
                  nq io digraphs
 do
