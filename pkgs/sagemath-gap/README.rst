@@ -65,8 +65,6 @@ What is included
 
 - the binary wheels on PyPI ship a prebuilt copy of GAP and the following `GAP packages <https://www.gap-system.org/packages>`__:
 
-  - `aclib <https://gap-packages.github.io/aclib/>`__: Almost crystallographic groups
-  - `alnuth <https://gap-packages.github.io/alnuth>`__: Algebraic number theory, interface to PARI/GP
   - `atlasrep <https://www.math.rwth-aachen.de/~Thomas.Breuer/atlasrep>`__: Interface to the Atlas of Group Representations
   - `autodoc <https://gap-packages.github.io/AutoDoc>`__: Generate documentation from GAP source code
   - `autpgrp <https://gap-packages.github.io/autpgrp/>`__: Computing the automorphism group of a p-group
@@ -75,8 +73,6 @@ What is included
   - `crime <https://gap-packages.github.io/crime/>`__: Group cohomology and Massey products
   - `crisp <http://www.icm.tu-bs.de/~bhoeflin/crisp/index.html>`__: Computing with radicals, injectors, Schunck classes and projectors
   - `crypting <https://gap-packages.github.io/crypting/>`__: Hashes and crypto
-  - `cryst <https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php>`__: Computing with crystallographic groups
-  - `crystcat <https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php>`__: Crystallographic groups catalog
   - `datastructures <https://gap-packages.github.io/datastructures>`__: Collection of standard data structures
   - `design <https://gap-packages.github.io/design>`__: Constructing, classifying, partitioning, and studying block designs
   - `digraphs <https://digraphs.github.io/Digraphs>`__: Graphs, digraphs, and multidigraphs
@@ -87,8 +83,6 @@ What is included
   - `genss <https://gap-packages.github.io/genss>`__: Generic Schreier-Sims
   - `grape <https://gap-packages.github.io/grape>`__: GRaph Algorithms using PErmutation groups
   - `guava <https://gap-packages.github.io/guava>`__: Computing with error-correcting codes
-  - `hap <https://gap-packages.github.io/hap>`__: Homological algebra programming
-  - `hapcryst <https://gap-packages.github.io/hapcryst/>`__: HAP extension for crystallographic groups
   - `hecke <https://gap-packages.github.io/hecke/>`__: Calculating decomposition matrices of Hecke algebras
   - `images <https://gap-packages.github.io/images/>`__: Minimal and canonical images
   - `jupyterviz <https://nathancarter.github.io/jupyterviz>`__: Visualization Tools for Jupyter and the GAP REPL
@@ -101,19 +95,12 @@ What is included
   - `lins <https://gap-packages.github.io/LINS/>`__: Computing the normal subgroups of a finitely presented group
   - `loops <https://gap-packages.github.io/loops/>`__: Computing with quasigroups and loops
   - `mapclass <https://gap-packages.github.io/MapClass>`__: Mapping class orbit computation
-  - `nq <https://gap-packages.github.io/nq/>`__: Nilpotent quotients of finitely presented groups
   - `orb <https://gap-packages.github.io/orb>`__: Methods to enumerate orbits
   - `packagemanager <https://gap-packages.github.io/PackageManager/>`__: Easily download and install GAP packages
-  - `polenta <https://gap-packages.github.io/polenta/>`__: Polycyclic presentations for matrix groups
-  - `polycyclic <https://gap-packages.github.io/polycyclic/>`__: Computation with polycyclic groups
-  - `polymaking <https://gap-packages.github.io/polymaking/>`__: Interfacing the geometry software polymake
   - `primgrp <https://gap-packages.github.io/primgrp/>`__: Primitive permutation groups library
   - `quagroup <https://gap-packages.github.io/quagroup/>`__: Computations with quantum groups
   - `qpa <https://folk.ntnu.no/oyvinso/QPA/>`__: Quivers and path algebras
-  - `radiroot <https://gap-packages.github.io/radiroot/>`__: Roots of a polynomial as radicals
   - `repsn <https://gap-packages.github.io/repsn/>`__: Constructing representations of finite groups
-  - `resclasses <https://gap-packages.github.io/resclasses/>`__: Set-theoretic computations with residue classes
-  - `singular <https://gap-packages.github.io/singular/>`__: Interface to Singular
   - `sla <https://gap-packages.github.io/sla/>`__: Simple Lie algebras
   - `smallgrp <https://gap-packages.github.io/smallgrp/>`__: The GAP Small Groups Library
   - `sonata <https://gap-packages.github.io/sonata/>`__: System of nearrings and their applications
@@ -182,11 +169,53 @@ Jupyter kernel spec
 GAP packages
 ~~~~~~~~~~~~
 
+``pip install "passagemath-gap[aclib]"``
+ installs `aclib <https://gap-packages.github.io/aclib/>`__: Almost crystallographic groups
+
+``pip install "passagemath-gap[alnuth]"``
+ installs `alnuth <https://gap-packages.github.io/alnuth>`__: Algebraic number theory, interface to PARI/GP
+
+``pip install "passagemath-gap[cryst]"``
+ installs `cryst <https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php>`__: Computing with crystallographic groups
+
+``pip install "passagemath-gap[crystcat]"``
+ installs `crystcat <https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php>`__: Crystallographic groups catalog
+
 ``pip install "passagemath-gap[ctbllib]"``
  installs `ctbllib <https://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib>`__: The GAP Character Table Library
 
+``pip install "passagemath-gap[hap]"``
+ installs `hap <https://gap-packages.github.io/hap>`__: Homological algebra programming
+
+``pip install "passagemath-gap[hapcryst]"``
+ installs `hapcryst <https://gap-packages.github.io/hapcryst/>`__: HAP extension for crystallographic groups
+
 ``pip install "passagemath-gap[irredsol]"``
  installs `irredsol <http://www.icm.tu-bs.de/~bhoeflin/irredsol/index.html>`__: Library of irreducible soluble linear groups over finite fields and of finite primivite soluble groups
+
+``pip install "passagemath-gap[nq]"``
+ installs `nq <https://gap-packages.github.io/nq/>`__: Nilpotent quotients of finitely presented groups
+
+``pip install "passagemath-gap[polenta]"``
+ installs `polenta <https://gap-packages.github.io/polenta/>`__: Polycyclic presentations for matrix groups
+
+``pip install "passagemath-gap[polycyclic]"``
+ installs `polycyclic <https://gap-packages.github.io/polycyclic/>`__: Computation with polycyclic groups
+
+``pip install "passagemath-gap[polymaking]"``
+ installs `polymaking <https://gap-packages.github.io/polymaking/>`__: Interfacing the geometry software polymake
+
+``pip install "passagemath-gap[radiroot]"``
+ installs `radiroot <https://gap-packages.github.io/radiroot/>`__: Roots of a polynomial as radicals
+
+``pip install "passagemath-gap[resclasses]"``
+ installs `resclasses <https://gap-packages.github.io/resclasses/>`__: Set-theoretic computations with residue classes
+
+``pip install "passagemath-gap[semigroups]"``
+ installs `semigroups <https://semigroups.github.io/Semigroups/>`__
+
+``pip install "passagemath-gap[singular]"``
+ installs `singular <https://gap-packages.github.io/singular/>`__: Interface to Singular
 
 ``pip install "passagemath-gap[tomllib]"``
  installs `tomlib <https://gap-packages.github.io/tomlib>`__: The GAP Library of Tables of Marks
