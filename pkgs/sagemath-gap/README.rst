@@ -63,7 +63,7 @@ What is included
 
 - numerous modules with build-time dependencies on GAP, see `MANIFEST <https://github.com/passagemath/passagemath/blob/main/pkgs/sagemath-gap/MANIFEST.in>`_
 
-- the binary wheels on PyPI ship a prebuilt copy of GAP and the following `GAP packages <https://www.gap-system.org/packages>`__:
+- the binary wheels on PyPI ship a prebuilt copy of GAP and at least the following `GAP packages <https://www.gap-system.org/packages>`__:
 
   - `atlasrep <https://www.math.rwth-aachen.de/~Thomas.Breuer/atlasrep>`__: Interface to the Atlas of Group Representations
   - `autodoc <https://gap-packages.github.io/AutoDoc>`__: Generate documentation from GAP source code
@@ -169,6 +169,9 @@ Jupyter kernel spec
 GAP packages
 ~~~~~~~~~~~~
 
+``pip install "passagemath-gap[4ti2interface]"``
+ installs `4ti2interface <https://gap-packages.github.io/4ti2interface/>`__
+
 ``pip install "passagemath-gap[aclib]"``
  installs `aclib <https://gap-packages.github.io/aclib/>`__: Almost crystallographic groups
 
@@ -183,6 +186,9 @@ GAP packages
 
 ``pip install "passagemath-gap[ctbllib]"``
  installs `ctbllib <https://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib>`__: The GAP Character Table Library
+
+``pip install "passagemath-gap[difsets]"``
+ installs `difsets <https://gap-packages.github.io/difsets>`__
 
 ``pip install "passagemath-gap[hap]"``
  installs `hap <https://gap-packages.github.io/hap>`__: Homological algebra programming
@@ -208,6 +214,9 @@ GAP packages
 ``pip install "passagemath-gap[radiroot]"``
  installs `radiroot <https://gap-packages.github.io/radiroot/>`__: Roots of a polynomial as radicals
 
+``pip install "passagemath-gap[rcwa]"``
+ installs `rcwa <https://gap-packages.github.io/rcwa/>`__
+
 ``pip install "passagemath-gap[resclasses]"``
  installs `resclasses <https://gap-packages.github.io/resclasses/>`__: Set-theoretic computations with residue classes
 
@@ -217,8 +226,17 @@ GAP packages
 ``pip install "passagemath-gap[singular]"``
  installs `singular <https://gap-packages.github.io/singular/>`__: Interface to Singular
 
+``pip install "passagemath-gap[smallsemi]"``
+ installs `smallsemi <https://gap-packages.github.io/smallsemi/>`__
+
 ``pip install "passagemath-gap[tomllib]"``
  installs `tomlib <https://gap-packages.github.io/tomlib>`__: The GAP Library of Tables of Marks
 
 ``pip install "passagemath-gap[transgrp]"``
  installs `transgrp <https://www.math.colostate.edu/~hulpke/transgrp>`__: Transitive Groups Library
+
+``pip install "passagemath-gap[unitlib]"``
+ installs `unitlib <https://gap-packages.github.io/unitlib/>`__
+
+``pip install "passagemath-gap[yangbaxter]"``
+ installs `yangbaxter <https://gap-packages.github.io/yangbaxter/>`__
