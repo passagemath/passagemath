@@ -39,8 +39,8 @@ sed -i.bak 's/^ *MAKE=.*/:/' "$BUILDPACKAGES"
 PKG_SRC_DIR="$(pwd)/src/pkg"
 cd "$PKG_SRC_DIR"
 
-# remove unused vendored sources
-rm -rf grape/nauty*
+# remove unused vendored sources, treat as a pure GAP package
+(cd grape && rm -rf nauty* autogen.sh configure)
 
 # directly install pure GAP packages
 #
@@ -100,13 +100,105 @@ install_compiled_pkg()
 
 # Build and install compiled packages:
 
+SPKG_aclib=gap_packages
+SPKG_alnuth=gap                         # one of the packages autoloaded in the default GAP config
+SPKG_atlasrep=gap                       # one of the packages autoloaded in the default GAP config
+SPKG_autodoc=gap_packages
+SPKG_autpgrp=gap                        # one of the packages autoloaded in the default GAP config
+SPKG_cddinterface=none                  # FIXME: Needs cddlib
+SPKG_cohomolo=gap_packages
+SPKG_corelg=gap_packages
+SPKG_crime=gap_packages
+SPKG_crisp=gap                          # one of the packages autoloaded in the default GAP config
+SPKG_crypting=gap_packages
+SPKG_cryst=gap_packages
+SPKG_crystcat=gap_packages
+SPKG_ctbllib=gap                        # one of the packages autoloaded in the default GAP config
+SPKG_datastructures=gap_packages
+SPKG_design=gap_packages
+SPKG_digraphs=gap_packages
+SPKG_factint=gap                        # one of the packages autoloaded in the default GAP config
+SPKG_fga=gap                            # one of the packages autoloaded in the default GAP config
+SPKG_float=none                         # FIXME: needs fplll, ...
+SPKG_gapdoc=gap                         # one of the minimal packages GAP needs to run
+SPKG_gbnp=gap_packages
+SPKG_genss=gap_packages
+SPKG_grape=gap_packages
+SPKG_guava=gap_packages
+SPKG_hap=gap_packages
+SPKG_hapcryst=gap_packages
+SPKG_hecke=gap_packages
+SPKG_images=gap_packages
+SPKG_io=gap_packages
+SPKG_irredsol=gap                       # one of the packages autoloaded in the default GAP config
+SPKG_json=gap_pkg_jupyterkernel
+SPKG_jupyterkernel=gap_pkg_jupyterkernel
+SPKG_jupyterviz=gap_pkg_jupyterkernel
+SPKG_laguna=gap                         # one of the packages autoloaded in the default GAP config
+SPKG_liealgdb=gap_packages
+SPKG_liepring=gap_packages
+SPKG_liering=gap_packages
+SPKG_lins=gap_packages
+SPKG_loops=gap_packages
+SPKG_mapclass=gap_packages
+SPKG_nq=gap_packages
+SPKG_normalizinterface=none             # FIXME: needs normaliz
+SPKG_orb=gap_packages
+SPKG_packagemanager=gap
+SPKG_polenta=gap                        # one of the packages autoloaded in the default GAP config
+SPKG_polycyclic=gap                     # one of the packages autoloaded in the default GAP config
+SPKG_polymaking=gap_packages
+SPKG_primgrp=gap                        # one of the minimal packages GAP needs to run
+SPKG_qpa=gap_packages
+SPKG_quagroup=gap_packages
+SPKG_radiroot=gap_packages
+SPKG_repsn=gap_packages
+SPKG_resclasses=gap                     # one of the packages autoloaded in the default GAP config
+SPKG_semigroups=semigroups
+SPKG_singular=gap_packages
+SPKG_sla=gap_packages
+SPKG_smallgrp=gap                       # one of the minimal packages GAP needs to run
+SPKG_sonata=gap_packages
+SPKG_sophus=gap                         # one of the packages autoloaded in the default GAP config
+SPKG_tomlib=gap                         # one of the packages autoloaded in the default GAP config
+SPKG_toric=gap_packages
+SPKG_transgrp=gap                       # one of the minimal packages GAP needs to run
+SPKG_utils=gap_packages
+SPKG_uuid=gap_pkg_jupyterkernel
+SPKG_zeromqinterface=gap_pkg_jupyterkernel
+SPKG_xgap=none
+
+# Build all GAP packages claimed by this SPKG.
+PACKAGES=
+for pkg in *; do
+    if [ -r $pkg/PackageInfo.g ]; then
+        eval SPKG=\${SPKG_$pkg}
+        if [ "$SPKG" = "$PKG_BASE" ]; then
+            PACKAGES="$PACKAGES $pkg"
+        fi
+    fi
+done
+
 export CFLAGS="$CFLAGS -std=gnu17 -Wno-implicit-function-declaration"
 
-"$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" \
+"$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" --strict \
                  --add-package-config-digraphs "--with-external-planarity" \
-                 cohomolo crypting orb datastructures \
-                 guava \
-                 nq io digraphs
+                 $PACKAGES
+
+# Now build all GAP packages unclaimed by an SPKG, in non-strict mode.
+PACKAGES=
+for pkg in *; do
+    if [ -r $pkg/PackageInfo.g ]; then
+        eval SPKG=\${SPKG_$pkg}
+        if [ "$SPKG" = "" ]; then
+            PACKAGES="$PACKAGES $pkg"
+        fi
+    fi
+done
+
+"$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" --no-strict \
+                 --add-package-config-digraphs "--with-external-planarity" \
+                 $PACKAGES
 
 for pkg in cohomolo crypting orb datastructures \
                  guava \
