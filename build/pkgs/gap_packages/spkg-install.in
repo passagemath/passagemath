@@ -155,8 +155,11 @@ mkdir -p $SAGE_DESTDIR$PKG_DIR
     --exclude "*/*/m4" --exclude "*/*/cnf" --exclude "*/*/autogen.sh" --exclude "*/*/*.m4" \
     --exclude "*/*/src" --exclude "*/*/config*" \
     --exclude "*/*/Makefile*" --exclude "*/*/makefile*" \
+    --exclude "*/*/Dockerfile" \
+    --exclude "*/anupq/include" \
     --exclude "*/cohomolo/standalone/progs.d" \
     --exclude "*/digraphs/extern" --exclude "*/digraphs/gen" \
+    --exclude "*/ferret/YAPB++" \
     --exclude "*/grape/nauty*" \
     --exclude "*/kbmag/standalone/lib" \
     $ALL_PACKAGES) | (cd $SAGE_DESTDIR$PKG_DIR && tar xf -)
