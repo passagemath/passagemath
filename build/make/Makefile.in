@@ -146,12 +146,17 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sagemath_database_stein_watkins_mini	\
 	sagemath_database_symbolic_data		\
 	sagemath_gap_pkg_ctbllib_data		\
+	sagemath_gap_pkg_difsets_data		\
 	sagemath_gap_pkg_factint_data		\
 	sagemath_gap_pkg_irredsol_data		\
 	sagemath_gap_pkg_primgrp_data		\
+	sagemath_gap_pkg_rcwa_data		\
 	sagemath_gap_pkg_smallgrp_data		\
+	sagemath_gap_pkg_smallsemi_data		\
 	sagemath_gap_pkg_tomlib_data		\
+	sagemath_gap_pkg_unitlib_data		\
 	sagemath_gap_pkg_transgrp_data		\
+	sagemath_gap_pkg_yangbaxter_data	\
 	sagemath_pari_elldata			\
 	sagemath_pari_galdata			\
 	sagemath_pari_galpol			\
