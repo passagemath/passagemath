@@ -42,62 +42,6 @@ cd "$PKG_SRC_DIR"
 # remove unused vendored sources, treat as a pure GAP package
 (cd grape && rm -rf nauty* autogen.sh configure)
 
-# directly install pure GAP packages
-#
-#    happrime - no longer distributed, partly merged in Hap,
-#    cf. https://www.gap-system.org/Packages/packages.html#deppkg
-#    (GAP 4.8.6 still had it, but this is gone in 4.10)
-
-sdh_install \
-    aclib \
-    autodoc \
-    corelg \
-    crime \
-    cryst \
-    crystcat \
-    design \
-    gbnp \
-    genss \
-    grape \
-    hap \
-    hapcryst \
-    hecke \
-    images \
-    liealgdb \
-    liepring \
-    liering \
-    lins \
-    loops \
-    mapclass \
-    polymaking \
-    qpa \
-    quagroup \
-    radiroot \
-    repsn \
-    singular \
-    sla \
-    sonata \
-    toric \
-    utils \
-    "$PKG_DIR"
-
-install_compiled_pkg()
-{
-    local pkg="$1"
-    # Install the bin/ dir (where compiled modules should end up)
-    # under <prefix>/lib/gap; we then symlink to it later
-    sdh_install * "$SAGE_LOCAL/lib/gap/pkg/$pkg"
-
-    # TODO:
-    # Clean up any build artificts before installing the rest of the package
-    # Also remove configure/Makefiles
-    # Note: None, if any of the packages really have a proper install target
-    #make clean  # Works for some packages but not all
-    #rm -rf bin/
-    #rm -rf configure configure.* config.* autogen.sh *.m4 Makefile* m4/
-
-}
-
 # Build and install compiled packages:
 
 SPKG_aclib=gap_packages
@@ -178,6 +122,7 @@ for pkg in *; do
         fi
     fi
 done
+ALL_PACKAGES=$PACKAGES
 
 export CFLAGS="$CFLAGS -std=gnu17 -Wno-implicit-function-declaration"
 
@@ -195,17 +140,15 @@ for pkg in *; do
         fi
     fi
 done
+ALL_PACKAGES="$ALL_PACKAGES $PACKAGES"
 
 "$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" --no-strict \
                  --add-package-config-digraphs "--with-external-planarity" \
                  $PACKAGES
 
-for pkg in cohomolo crypting orb datastructures \
-                 guava \
-                 nq io digraphs
-do
-    echo "Installing GAP package $pkg"
-    cd "$PKG_SRC_DIR/$pkg"
-    install_compiled_pkg "$pkg"
-    cd "$PKG_SRC_DIR"
-done
+# Install all built packages.
+
+mkdir -p $SAGE_DESTDIR$PKG_DIR
+(tar cf - --exclude "*/**/*.o" --exclude "*/digraphs/extern" --exclude "*/digraphs/gen" --exclude "*/grape/nauty*" --exclude "*/*/src" $ALL_PACKAGES) | (cd $SAGE_DESTDIR$PKG_DIR && tar xf -)
+
+(cd $SAGE_DESTDIR$PKG_DIR && du -sh * 2>/dev/null || :)
