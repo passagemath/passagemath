@@ -214,60 +214,6 @@
 .. |codespace-ubuntu-noble-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-noble-maximal%2Fdevcontainer.json
 
-.. |image-ubuntu-oracular-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-minimal-with-system-packages
-
-.. |image-ubuntu-oracular-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-minimal-configured
-
-.. |image-ubuntu-oracular-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-minimal-with-targets-pre
-
-.. |image-ubuntu-oracular-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-minimal-with-targets
-
-.. |image-ubuntu-oracular-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-minimal-with-targets-optional
-
-.. |codespace-ubuntu-oracular-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-oracular-minimal%2Fdevcontainer.json
-
-.. |image-ubuntu-oracular-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-standard-with-system-packages
-
-.. |image-ubuntu-oracular-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-standard-configured
-
-.. |image-ubuntu-oracular-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-standard-with-targets-pre
-
-.. |image-ubuntu-oracular-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-standard-with-targets
-
-.. |image-ubuntu-oracular-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-standard-with-targets-optional
-
-.. |codespace-ubuntu-oracular-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-oracular-standard%2Fdevcontainer.json
-
-.. |image-ubuntu-oracular-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-maximal-with-system-packages
-
-.. |image-ubuntu-oracular-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-maximal-configured
-
-.. |image-ubuntu-oracular-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-maximal-with-targets-pre
-
-.. |image-ubuntu-oracular-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-maximal-with-targets
-
-.. |image-ubuntu-oracular-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-oracular-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-oracular-maximal-with-targets-optional
-
-.. |codespace-ubuntu-oracular-maximal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-oracular-maximal%2Fdevcontainer.json
-
 .. |image-ubuntu-plucky-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-plucky-minimal-with-system-packages
 
@@ -2857,17 +2803,6 @@
      - |codespace-ubuntu-noble-standard|
    * -    ‑*maximal*
      - |image-ubuntu-noble-maximal-with-system-packages| |image-ubuntu-noble-maximal-with-targets-pre|
-     -
-   * - **ubuntu**-oracular 
-       
-          ‑*minimal*
-     - |image-ubuntu-oracular-minimal-with-system-packages| |image-ubuntu-oracular-minimal-with-targets-pre| |image-ubuntu-oracular-minimal-with-targets| |image-ubuntu-oracular-minimal-with-targets-optional|
-     - |codespace-ubuntu-oracular-minimal|
-   * -    ‑*standard*
-     - |image-ubuntu-oracular-standard-with-system-packages| |image-ubuntu-oracular-standard-with-targets-pre| |image-ubuntu-oracular-standard-with-targets| |image-ubuntu-oracular-standard-with-targets-optional|
-     - |codespace-ubuntu-oracular-standard|
-   * -    ‑*maximal*
-     - |image-ubuntu-oracular-maximal-with-system-packages| |image-ubuntu-oracular-maximal-with-targets-pre|
      -
    * - **ubuntu**-plucky 
        
