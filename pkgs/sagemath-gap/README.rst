@@ -259,6 +259,9 @@ GAP packages
 ``pip install "passagemath-gap[semigroups]"``
  installs `semigroups <https://semigroups.github.io/Semigroups/>`__
 
+``pip install "passagemath-gap[simpcomp]"``
+ installs `simpcomp <https://gap-packages.github.io/simpcomp/>`__
+
 ``pip install "passagemath-gap[singular]"``
  installs `singular <https://gap-packages.github.io/singular/>`__: Interface to Singular
 
