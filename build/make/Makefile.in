@@ -145,6 +145,7 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sagemath_database_odlyzko_zeta		\
 	sagemath_database_stein_watkins_mini	\
 	sagemath_database_symbolic_data		\
+	sagemath_gap_pkg_agt_data		\
 	sagemath_gap_pkg_ctbllib_data		\
 	sagemath_gap_pkg_difsets_data		\
 	sagemath_gap_pkg_factint_data		\

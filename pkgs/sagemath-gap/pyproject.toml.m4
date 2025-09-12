@@ -45,6 +45,7 @@ test            = ["passagemath-repl"]
 # - dependencies on packages with external dependencies per 'NeededOtherPackages' in PackageInfo.g
 4ti2interface   = ["passagemath-latte-4ti2"]
 aclib           = ["passagemath-gap[polycyclic]"]
+agt             = ["passagemath-gap-pkg-agt-data"]
 alnuth          = ["passagemath-pari"]
 cryst           = ["passagemath-gap[polycyclic]"]
 crystcat        = ["passagemath-gap[cryst]"]

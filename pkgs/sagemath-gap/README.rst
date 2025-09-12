@@ -175,6 +175,9 @@ GAP packages
 ``pip install "passagemath-gap[aclib]"``
  installs `aclib <https://gap-packages.github.io/aclib/>`__: Almost crystallographic groups
 
+``pip install "passagemath-gap[agt]"``
+ installs `agt <https://gap-packages.github.io/agt/>`__
+
 ``pip install "passagemath-gap[alnuth]"``
  installs `alnuth <https://gap-packages.github.io/alnuth>`__: Algebraic number theory, interface to PARI/GP
 
