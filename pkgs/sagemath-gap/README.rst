@@ -238,6 +238,9 @@ GAP packages
 ``pip install "passagemath-gap[nq]"``
  installs `nq <https://gap-packages.github.io/nq/>`__: Nilpotent quotients of finitely presented groups
 
+``pip install "passagemath-gap[numericalsgps]"``
+ installs `numericalsgps <https://gap-packages.github.io/numericalsgps/>`__
+
 ``pip install "passagemath-gap[polenta]"``
  installs `polenta <https://gap-packages.github.io/polenta/>`__: Polycyclic presentations for matrix groups
 
