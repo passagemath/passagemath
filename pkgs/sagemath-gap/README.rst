@@ -181,6 +181,9 @@ GAP packages
 ``pip install "passagemath-gap[alnuth]"``
  installs `alnuth <https://gap-packages.github.io/alnuth>`__: Algebraic number theory, interface to PARI/GP
 
+``pip install "passagemath-gap[corefreesub]"``
+ installs `corefreesub <https://gap-packages.github.io/corefreesub/>`__
+
 ``pip install "passagemath-gap[cryst]"``
  installs `cryst <https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php>`__: Computing with crystallographic groups
 
@@ -190,8 +193,26 @@ GAP packages
 ``pip install "passagemath-gap[ctbllib]"``
  installs `ctbllib <https://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib>`__: The GAP Character Table Library
 
+``pip install "passagemath-gap[cubefree]"``
+ installs `cubefree <https://gap-packages.github.io/cubefree/>`__
+
+``pip install "passagemath-gap[deepthought]"``
+ installs `deepthought <https://gap-packages.github.io/deepthought/>`__
+
 ``pip install "passagemath-gap[difsets]"``
  installs `difsets <https://gap-packages.github.io/difsets>`__
+
+``pip install "passagemath-gap[fr]"``
+ installs `fr <https://gap-packages.github.io/fr/>`__
+
+``pip install "passagemath-gap[fwtree]"``
+ installs `fwtree <https://gap-packages.github.io/fwtree/>`__
+
+``pip install "passagemath-gap[grpconst]"``
+ installs `grpconst <https://gap-packages.github.io/grpconst/>`__
+
+``pip install "passagemath-gap[guarana]"``
+ installs `guarana <https://gap-packages.github.io/guarana/>`__
 
 ``pip install "passagemath-gap[hap]"``
  installs `hap <https://gap-packages.github.io/hap>`__: Homological algebra programming
@@ -199,8 +220,20 @@ GAP packages
 ``pip install "passagemath-gap[hapcryst]"``
  installs `hapcryst <https://gap-packages.github.io/hapcryst/>`__: HAP extension for crystallographic groups
 
+``pip install "passagemath-gap[help]"``
+ installs `help <https://gap-packages.github.io/help/>`__
+
 ``pip install "passagemath-gap[irredsol]"``
  installs `irredsol <http://www.icm.tu-bs.de/~bhoeflin/irredsol/index.html>`__: Library of irreducible soluble linear groups over finite fields and of finite primivite soluble groups
+
+``pip install "passagemath-gap[lpres]"``
+ installs `lpres <https://gap-packages.github.io/lpres/>`__
+
+``pip install "passagemath-gap[modisom]"``
+ installs `modisom <https://gap-packages.github.io/modisom/>`__
+
+``pip install "passagemath-gap[nilmat]"``
+ installs `nilmat <https://gap-packages.github.io/nilmat/>`__
 
 ``pip install "passagemath-gap[nq]"``
  installs `nq <https://gap-packages.github.io/nq/>`__: Nilpotent quotients of finitely presented groups
@@ -232,11 +265,17 @@ GAP packages
 ``pip install "passagemath-gap[smallsemi]"``
  installs `smallsemi <https://gap-packages.github.io/smallsemi/>`__
 
+``pip install "passagemath-gap[symbcompcc]"``
+ installs `symbcompcc <https://gap-packages.github.io/symbcompcc/>`__
+
 ``pip install "passagemath-gap[tomllib]"``
  installs `tomlib <https://gap-packages.github.io/tomlib>`__: The GAP Library of Tables of Marks
 
 ``pip install "passagemath-gap[transgrp]"``
  installs `transgrp <https://www.math.colostate.edu/~hulpke/transgrp>`__: Transitive Groups Library
+
+``pip install "passagemath-gap[xmod]"``
+ installs `xmod <https://gap-packages.github.io/xmod/>`__
 
 ``pip install "passagemath-gap[unitlib]"``
  installs `unitlib <https://gap-packages.github.io/unitlib/>`__
