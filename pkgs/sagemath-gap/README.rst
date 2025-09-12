@@ -268,6 +268,9 @@ GAP packages
 ``pip install "passagemath-gap[smallsemi]"``
  installs `smallsemi <https://gap-packages.github.io/smallsemi/>`__
 
+``pip install "passagemath-gap[sonata]"``
+ installs `sonata <https://gap-packages.github.io/sonata/>`__
+
 ``pip install "passagemath-gap[symbcompcc]"``
  installs `symbcompcc <https://gap-packages.github.io/symbcompcc/>`__
 

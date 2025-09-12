@@ -155,6 +155,7 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sagemath_gap_pkg_simpcomp_data		\
 	sagemath_gap_pkg_smallgrp_data		\
 	sagemath_gap_pkg_smallsemi_data		\
+	sagemath_gap_pkg_sonata_data		\
 	sagemath_gap_pkg_tomlib_data		\
 	sagemath_gap_pkg_unitlib_data		\
 	sagemath_gap_pkg_transgrp_data		\
