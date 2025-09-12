@@ -152,6 +152,7 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sagemath_gap_pkg_irredsol_data		\
 	sagemath_gap_pkg_primgrp_data		\
 	sagemath_gap_pkg_rcwa_data		\
+	sagemath_gap_pkg_sglppow_data		\
 	sagemath_gap_pkg_simpcomp_data		\
 	sagemath_gap_pkg_smallgrp_data		\
 	sagemath_gap_pkg_smallsemi_data		\
