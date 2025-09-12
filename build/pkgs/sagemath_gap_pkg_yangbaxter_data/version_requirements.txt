@@ -1,1 +1,2 @@
-passagemath-gap-pkg-yangbaxter-data
+# This file is updated on every release by the update-version script
+passagemath-gap-pkg-yangbaxter-data ~= 10.6.21.0

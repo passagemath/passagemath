@@ -1,1 +1,2 @@
-passagemath-gap-pkg-rcwa-data
+# This file is updated on every release by the update-version script
+passagemath-gap-pkg-rcwa-data ~= 10.6.21.0

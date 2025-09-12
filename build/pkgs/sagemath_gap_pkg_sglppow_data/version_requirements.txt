@@ -1,1 +1,2 @@
-passagemath-gap-pkg-sglppow-data
+# This file is updated on every release by the update-version script
+passagemath-gap-pkg-sglppow-data ~= 10.6.21.0
