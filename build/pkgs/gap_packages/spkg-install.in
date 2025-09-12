@@ -150,6 +150,6 @@ ALL_PACKAGES="$ALL_PACKAGES $PACKAGES"
 # Install all built packages.
 
 mkdir -p $SAGE_DESTDIR$PKG_DIR
-(tar cf - --exclude "*/**/*.o" --exclude "*/digraphs/extern" --exclude "*/digraphs/gen" --exclude "*/grape/nauty*" --exclude "*/*/src" $ALL_PACKAGES) | (cd $SAGE_DESTDIR$PKG_DIR && tar xf -)
+(tar cf - --exclude "*/**/*.o" --exclude "*/**/*.a" --exclude "*/digraphs/extern" --exclude "*/digraphs/gen" --exclude "*/grape/nauty*" --exclude "*/*/src" $ALL_PACKAGES) | (cd $SAGE_DESTDIR$PKG_DIR && tar xf -)
 
 (cd $SAGE_DESTDIR$PKG_DIR && du -sh * 2>/dev/null || :)
