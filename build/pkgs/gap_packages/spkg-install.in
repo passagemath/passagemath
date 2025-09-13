@@ -59,6 +59,7 @@ SPKG_crypting=gap_packages
 SPKG_cryst=gap_packages
 SPKG_crystcat=gap_packages
 SPKG_ctbllib=gap                        # one of the packages autoloaded in the default GAP config
+SPKG_curlinterface=gap_packages
 SPKG_datastructures=gap_packages
 SPKG_design=gap_packages
 SPKG_digraphs=gap_packages
