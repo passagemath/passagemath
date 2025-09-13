@@ -196,6 +196,9 @@ GAP packages
 ``pip install "passagemath-gap[cubefree]"``
  installs `cubefree <https://gap-packages.github.io/cubefree/>`__
 
+``pip install "passagemath-gap[curlinterface]"``
+ installs `curlinterface <https://gap-packages.github.io/curlinterface/>`__
+
 ``pip install "passagemath-gap[deepthought]"``
  installs `deepthought <https://gap-packages.github.io/deepthought/>`__
 
