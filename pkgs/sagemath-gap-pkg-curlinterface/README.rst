@@ -1,6 +1,6 @@
-======================================================================
+=========================================================================
  passagemath: Computational Group Theory with GAP: curlinterface package
-======================================================================
+=========================================================================
 
 `passagemath <https://github.com/passagemath/passagemath>`__ is open
 source mathematical software in Python, released under the GNU General
@@ -51,8 +51,7 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable distribution ``passagemath-gap-pkg-curlinterface`` is a
-distribution of the GAP package `curlinterface <https://curlinterface.github.io/Semigroups/>`__,
-for use with ``passagemath-gap``.
+distribution of the GAP package ``curlinterface`` for use with ``passagemath-gap``.
 
 
 What is included
