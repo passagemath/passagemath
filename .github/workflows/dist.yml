@@ -611,6 +611,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap
 
+      - name: sagemath-gap-pkg-curlinterface
+        id:   sagemath-gap-pkg-curlinterface
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_curlinterface
+
       - name: sagemath-gap-pkg-semigroups
         id:   sagemath-gap-pkg-semigroups
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
