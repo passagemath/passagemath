@@ -654,6 +654,12 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
           path: ./wheelhouse/*.whl
 
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          path: ./logs
+
   build_optional_wheels:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }} optional
     if: (success() || failure())
@@ -1020,6 +1026,12 @@ jobs:
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
           path: ./wheelhouse/*.whl
+
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
+          path: ./logs
 
 
   upload_wheels:
