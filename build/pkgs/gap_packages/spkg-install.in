@@ -42,6 +42,9 @@ cd "$PKG_SRC_DIR"
 # remove unused vendored sources, treat as a pure GAP package
 (cd grape && rm -rf nauty* autogen.sh configure)
 
+# remove download and build of normaliz
+rm -f normalizinterface/prerequisites.sh
+
 # Build and install compiled packages:
 
 SPKG_aclib=gap_packages
