@@ -196,6 +196,9 @@ GAP packages
 ``pip install "passagemath-gap[cubefree]"``
  installs `cubefree <https://gap-packages.github.io/cubefree/>`__
 
+``pip install "passagemath-gap[cddinterface]"``
+ installs `cddinterface <https://gap-packages.github.io/cddinterface/>`__
+
 ``pip install "passagemath-gap[curlinterface]"``
  installs `curlinterface <https://gap-packages.github.io/curlinterface/>`__
 
