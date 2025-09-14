@@ -88,6 +88,7 @@ class GapPackage(Feature):
                                      reason="Evaluating `{command}` in GAP raised an error: {exception}.".format(
                                          command=command, exception=exception))
 
+
 def all_features():
     return [GapPackage("atlasrep", spkg='gap_packages'),
             GapPackage("ctbllib", spkg='pypi/passagemath-gap-pkg-ctbllib-data', type='standard',
