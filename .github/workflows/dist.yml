@@ -158,7 +158,7 @@ jobs:
         if: steps.cache-sdists.outputs.cache-hit != 'true'
         run: |
           ./bootstrap
-          if [ -x ./config.status ]; then ./config.status; else ./configure; fi
+          ./configure
           make sagemath_environment V=0
           make pypi-sdists V=0
           (mkdir dist && mv upstream/*sage*.tar.gz dist/)
@@ -611,11 +611,23 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap
 
+      - name: sagemath-gap-pkg-cddinterface
+        id:   sagemath-gap-pkg-cddinterface
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_cddinterface
+
       - name: sagemath-gap-pkg-curlinterface
         id:   sagemath-gap-pkg-curlinterface
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_curlinterface
+
+      - name: sagemath-gap-pkg-normalizinterface
+        id:   sagemath-gap-pkg-normalizinterface
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_normalizinterface
 
       - name: sagemath-gap-pkg-semigroups
         id:   sagemath-gap-pkg-semigroups
@@ -641,6 +653,12 @@ jobs:
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
           path: ./wheelhouse/*.whl
+
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          path: ./logs
 
   build_optional_wheels:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }} optional
@@ -1008,6 +1026,12 @@ jobs:
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
           path: ./wheelhouse/*.whl
+
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
+          path: ./logs
 
 
   upload_wheels:

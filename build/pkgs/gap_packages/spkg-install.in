@@ -42,6 +42,9 @@ cd "$PKG_SRC_DIR"
 # remove unused vendored sources, treat as a pure GAP package
 (cd grape && rm -rf nauty* autogen.sh configure)
 
+# remove download and build of normaliz
+rm -f normalizinterface/prerequisites.sh
+
 # Build and install compiled packages:
 
 SPKG_aclib=gap_packages
@@ -49,7 +52,7 @@ SPKG_alnuth=gap                         # one of the packages autoloaded in the 
 SPKG_atlasrep=gap                       # one of the packages autoloaded in the default GAP config
 SPKG_autodoc=gap_packages
 SPKG_autpgrp=gap                        # one of the packages autoloaded in the default GAP config
-SPKG_cddinterface=none                  # FIXME: Needs cddlib
+SPKG_cddinterface=gap_packages
 SPKG_caratinterface=none                # FIXME: Big and messy, includes 38M in caratinterface/carat/tables
 SPKG_cohomolo=gap_packages
 SPKG_corelg=gap_packages
@@ -88,7 +91,7 @@ SPKG_lins=gap_packages
 SPKG_loops=gap_packages
 SPKG_mapclass=gap_packages
 SPKG_nq=gap_packages
-SPKG_normalizinterface=none             # FIXME: needs normaliz
+SPKG_normalizinterface=gap_packages
 SPKG_orb=gap_packages
 SPKG_packagemanager=gap
 SPKG_polenta=gap                        # one of the packages autoloaded in the default GAP config
@@ -129,7 +132,8 @@ ALL_PACKAGES=$PACKAGES
 export CFLAGS="$CFLAGS -std=gnu17 -Wno-implicit-function-declaration"
 
 "$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" --strict \
-                 --add-package-config-digraphs "--with-external-planarity" \
+                 --add-package-config-Digraphs "--with-external-planarity" \
+                 --add-package-config-CddInterface "--with-cddlib=$SAGE_LOCAL" \
                  $PACKAGES
 
 # Now build all GAP packages unclaimed by an SPKG, in non-strict mode.
@@ -145,7 +149,6 @@ done
 ALL_PACKAGES="$ALL_PACKAGES $PACKAGES"
 
 "$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" --no-strict \
-                 --add-package-config-digraphs "--with-external-planarity" \
                  $PACKAGES
 
 # Install all built packages.
