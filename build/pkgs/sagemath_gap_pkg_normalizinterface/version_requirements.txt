@@ -1,1 +1,2 @@
-passagemath-gap-pkg-normalizinterface
+# This file is updated on every release by the update-version script
+passagemath-gap-pkg-normalizinterface ~= 10.6.23.0

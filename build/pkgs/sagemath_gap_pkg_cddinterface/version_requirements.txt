@@ -1,1 +1,2 @@
-passagemath-gap-pkg-cddinterface
+# This file is updated on every release by the update-version script
+passagemath-gap-pkg-cddinterface ~= 10.6.23.0
