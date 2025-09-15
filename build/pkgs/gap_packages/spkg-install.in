@@ -132,8 +132,8 @@ ALL_PACKAGES=$PACKAGES
 export CFLAGS="$CFLAGS -std=gnu17 -Wno-implicit-function-declaration"
 
 "$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" --strict \
-                 --add-package-config-digraphs "--with-external-planarity" \
-                 --add-package-config-cddinterface "--with-cddlib=$SAGE_LOCAL" \
+                 --add-package-config-Digraphs "--with-external-planarity" \
+                 --add-package-config-CddInterface "--with-cddlib=$SAGE_LOCAL" \
                  $PACKAGES
 
 # Now build all GAP packages unclaimed by an SPKG, in non-strict mode.
