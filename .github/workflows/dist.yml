@@ -611,6 +611,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap
 
+      - name: sagemath-gap-pkg-caratinterface
+        id:   sagemath-gap-pkg-caratinterface
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_caratinterface
+
       - name: sagemath-gap-pkg-cddinterface
         id:   sagemath-gap-pkg-cddinterface
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
