@@ -53,7 +53,7 @@ SPKG_atlasrep=gap                       # one of the packages autoloaded in the 
 SPKG_autodoc=gap_packages
 SPKG_autpgrp=gap                        # one of the packages autoloaded in the default GAP config
 SPKG_cddinterface=gap_packages
-SPKG_caratinterface=none                # FIXME: Big and messy, includes 38M in caratinterface/carat/tables
+SPKG_caratinterface=gap_packages
 SPKG_cohomolo=gap_packages
 SPKG_corelg=gap_packages
 SPKG_crime=gap_packages
@@ -161,6 +161,7 @@ mkdir -p $SAGE_DESTDIR$PKG_DIR
     --exclude "*/*/Makefile*" --exclude "*/*/makefile*" \
     --exclude "*/*/Dockerfile" \
     --exclude "*/anupq/include" \
+    --exclude "*/caratinterface/*.tgz" \
     --exclude "*/cohomolo/standalone/progs.d" \
     --exclude "*/digraphs/extern" --exclude "*/digraphs/gen" \
     --exclude "*/ferret/YAPB++" \

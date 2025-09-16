@@ -181,6 +181,9 @@ GAP packages
 ``pip install "passagemath-gap[alnuth]"``
  installs `alnuth <https://gap-packages.github.io/alnuth>`__: Algebraic number theory, interface to PARI/GP
 
+``pip install "passagemath-gap[caratinterface]"``
+ installs `caratinterface <https://gap-packages.github.io/caratinterface/>`__
+
 ``pip install "passagemath-gap[corefreesub]"``
  installs `corefreesub <https://gap-packages.github.io/corefreesub/>`__
 
