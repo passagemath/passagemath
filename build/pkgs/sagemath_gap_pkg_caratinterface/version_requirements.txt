@@ -1,1 +1,2 @@
-passagemath-gap-pkg-caratinterface
+# This file is updated on every release by the update-version script
+passagemath-gap-pkg-caratinterface ~= 10.6.24.0
