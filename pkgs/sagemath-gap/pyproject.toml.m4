@@ -77,8 +77,8 @@ polymaking      = [SPKG_INSTALL_REQUIRES_jupymake]
 radiroot        = ["passagemath-gap[alnuth]"]
 rcwa            = ["passagemath-gap-pkg-rcwa-data", "passagemath-gap[resclasses]"]
 resclasses      = ["passagemath-gap[polycyclic]"]
-sglppow         = ["passagemath-gap-pkg-sglppow-data"]
 semigroups      = ["passagemath-gap-pkg-semigroups"]
+sglppow         = ["passagemath-gap-pkg-sglppow-data"]
 simpcomp        = ["passagemath-gap-pkg-simpcomp-data"]
 singular        = ["passagemath-singular"]
 smallsemi       = ["passagemath-gap-pkg-smallsemi-data"]
@@ -106,6 +106,12 @@ standard        = [
     "passagemath-gap[transgrp,ctbllib,tomlib,irredsol]",
     "passagemath-pari",
     "passagemath-singular",
+]
+
+# The full set of GAP packages shipped by the GAP distribution;
+# omitted: polymaking
+full            = [
+    "passagemath-gap[standard,4ti2interface,agt,caratinterface,cddinterface,difsets,cddinterface,jupyterkernel,normalizinterface,numericalsgps,rcwa,semigroups,sglppow,simpcomp,smallsemi,sonata,unitlib,yangbaxter]"
 ]
 
 [tool.cibuildwheel.linux]
