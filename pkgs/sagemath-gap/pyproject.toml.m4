@@ -111,7 +111,7 @@ standard        = [
 # The full set of GAP packages shipped by the GAP distribution;
 # omitted: polymaking
 full            = [
-    "passagemath-gap[standard,4ti2interface,agt,caratinterface,cddinterface,difsets,cddinterface,jupyterkernel,normalizinterface,numericalsgps,rcwa,semigroups,sglppow,simpcomp,smallsemi,sonata,unitlib,yangbaxter]"
+    "passagemath-gap[standard,4ti2interface,agt,caratinterface,cddinterface,difsets,jupyterkernel,normalizinterface,numericalsgps,rcwa,semigroups,sglppow,simpcomp,smallsemi,sonata,unitlib,yangbaxter]"
 ]
 
 [tool.cibuildwheel.linux]
