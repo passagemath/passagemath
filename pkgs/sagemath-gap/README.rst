@@ -303,3 +303,13 @@ GAP packages
 
 ``pip install "passagemath-gap[yangbaxter]"``
  installs `yangbaxter <https://gap-packages.github.io/yangbaxter/>`__
+
+
+Collections
+~~~~~~~~~~~
+
+``pip install "passagemath-gap[standard]"``
+ installs all GAP packages present in a standard installation of Sage and their dependencies
+
+``pip install "passagemath-gap[full]"``
+ installs the full set of GAP packages shipped by the GAP distribution and their dependencies
