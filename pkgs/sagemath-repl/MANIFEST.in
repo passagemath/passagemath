@@ -1,6 +1,7 @@
 prune sage
 
 graft sage/doctest
+graft sage/interacts
 graft sage/repl
 graft sage/tests
 
