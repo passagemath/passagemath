@@ -158,7 +158,7 @@ mkdir -p $SAGE_DESTDIR$PKG_DIR
     --exclude "**/*.o" --exclude "**/*.a" --exclude "**/.deps" \
     --exclude "*/m4" --exclude "*/cnf" --exclude "*/autogen.sh" --exclude "*/*.m4" \
     --exclude "*/src" --exclude "*/config.log" --exclude "*/config.status" --exclude "*/configure" \
-    --exclude "*/configure.ac" --exclude "*/config.guess" --exclude "*/config.sub" ---exclude "*/autom4te.cache" \
+    --exclude "*/configure.ac" --exclude "*/config.guess" --exclude "*/config.sub" --exclude "*/autom4te.cache" \
     --exclude "*/Makefile*" --exclude "*/makefile*" \
     --exclude "*/Dockerfile" \
     --exclude "anupq/include" \
