@@ -109,9 +109,6 @@ from sage.logic.all import *
 
 from sage.numerical.all import *
 
-# Lazily import interacts (#15335)
-lazy_import('sage.interacts', 'all', 'interacts')
-
 try:
     from .all__sagemath_plot import *
 except ImportError:
