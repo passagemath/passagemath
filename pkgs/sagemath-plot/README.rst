@@ -86,6 +86,9 @@ Examples
 Available as extras, from other distributions
 ---------------------------------------------
 
+``pip install "passagemath-plot[dot2tex]"``
+ Transforming Graphviz files: `dot2tex <https://pypi.org/project/dot2tex/>`_
+
 ``pip install "passagemath-plot[graphs]"``
  Graphs and networks: `sagemath-graphs <https://pypi.org/project/passagemath-graphs/>`_
 
