@@ -46,6 +46,7 @@ test            = [
 ]
 
 # extras by libraries
+dot2tex         = [SPKG_INSTALL_REQUIRES_dot2tex]
 jsmol           = [SPKG_INSTALL_REQUIRES_jupyter_jsmol]
 matplotlib      = []  # no extra needed
 playwright      = [SPKG_INSTALL_REQUIRES_playwright]
