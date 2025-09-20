@@ -21,6 +21,7 @@ name = "passagemath-gap"
 description = "passagemath: Computational Group Theory with GAP"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
+    SPKG_INSTALL_REQUIRES_dot2tex
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_pexpect
     SPKG_INSTALL_REQUIRES_sage_conf
@@ -29,6 +30,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_factint_data
     SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_primgrp_data
     SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_smallgrp_data
+    SPKG_INSTALL_REQUIRES_sagemath_repl                         dnl Needed for GAP package RingsForHomalg
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -38,7 +40,7 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl"]
+test            = []
 
 # GAP packages
 # - external dependencies per 'ExternalConditions' in PackageInfo.g
@@ -111,7 +113,7 @@ standard        = [
 # The full set of GAP packages shipped by the GAP distribution;
 # omitted: polymaking
 full            = [
-    "passagemath-gap[standard,4ti2interface,agt,caratinterface,cddinterface,difsets,jupyterkernel,normalizinterface,numericalsgps,rcwa,semigroups,sglppow,simpcomp,smallsemi,sonata,unitlib,yangbaxter]"
+    "passagemath-gap[standard,4ti2interface,agt,caratinterface,cddinterface,curlinterface,difsets,jupyterkernel,normalizinterface,numericalsgps,rcwa,semigroups,sglppow,simpcomp,smallsemi,sonata,unitlib,yangbaxter]"
 ]
 
 [tool.cibuildwheel.linux]
