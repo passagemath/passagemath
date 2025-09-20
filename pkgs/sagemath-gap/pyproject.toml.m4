@@ -29,6 +29,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_factint_data
     SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_primgrp_data
     SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_smallgrp_data
+    SPKG_INSTALL_REQUIRES_sagemath_repl                         dnl Needed for GAP package RingsForHomalg
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -38,7 +39,7 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl"]
+test            = []
 
 # GAP packages
 # - external dependencies per 'ExternalConditions' in PackageInfo.g
