@@ -32,7 +32,7 @@ with InWheel(wheel, wheel):
             if os.system(f"bash -c {shlex.quote(command)}") != 0:
                 sys.exit(1)
     if not found:
-        printf(f'Not found: {pkgdir}')
+        print(f'Not found: {pkgdir}')
         sys.exit(1)
 
     # Remove the sage-conf dependency; it is not needed because our wheels ship what is needed.
