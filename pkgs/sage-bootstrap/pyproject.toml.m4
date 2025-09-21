@@ -53,6 +53,7 @@ packages = [
     'sage_bootstrap.compat',
     'sage_bootstrap.download',
     'sage_bootstrap.uncompress',
+    'sage_root',
 ]
 script-files = [
     'bin/sage-download-file',
