@@ -1053,8 +1053,7 @@ jobs:
          "ubuntu-24.04-arm-musllinux-*-wheels",
          "macos-13-*-wheels",
          "macos-14-*-wheels",
-         "noarch-wheels",
-         "dist"]
+         "noarch-wheels"]
     secrets: inherit
 
   tox:
