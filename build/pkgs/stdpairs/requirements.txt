@@ -1,0 +1,1 @@
+stdpairs @ git+https://github.com/byeongsuyu/StdPairs.git
