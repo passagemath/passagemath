@@ -33,7 +33,7 @@ with InWheel(wheel, wheel):
             if os.system(f"bash -c {shlex.quote(command)}") != 0:
                 sys.exit(1)
     if not found:
-        printf(f'Not found: {datadir}')
+        print(f'Not found: {datadir}')
         sys.exit(1)
 
     # Remove the sage-conf dependency; it is not needed because our wheels ship what is needed.
