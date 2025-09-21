@@ -13,7 +13,7 @@ dnl Not including the standard metadata from pyproject_toml_metadata_supports_wi
 dnl because passagemath-bootstrap is GPL v3+.
 license = "GPL-3.0-or-later"
 authors = [
-    {name = "Volker Braun", "vbraun.name@gmail.com"},
+    {name = "Volker Braun", email = "vbraun.name@gmail.com"},
     {name = "The Sage Developers", email = "sage-support@googlegroups.com"},
 ]
 maintainers = [
@@ -61,6 +61,7 @@ script-files = [
     'bin/sage-package',
     'bin/sage-print-system-package-command',
     'bin/sage-spkg-info',
+    'bin/sage-uncompress-spkg',
 ]
 include-package-data = false
 

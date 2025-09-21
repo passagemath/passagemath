@@ -1,0 +1,8 @@
+prune bin
+include bin/sage-download-file
+include bin/sage-get-system-packages
+include bin/sage-guess-package-system
+include bin/sage-package
+include bin/sage-print-system-package-command
+include bin/sage-spkg-info
+include bin/sage-uncompress-spkg
