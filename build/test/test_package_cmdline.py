@@ -168,7 +168,6 @@ class SagePackageTestCase(unittest.TestCase):
                 f.read(),
                 'tarball=Foo-VERSION.tgz\n' +
                 'sha1=15d0e36e27c69bc758231f8e9add837f40a40cd0\n' +
-                'md5=bc62fed5e35f31aeea2af95c00473d4d\n' +
-                'cksum=1436769867\n'
+                'sha256=a46b96c6edc357b842d9efec51b9600bed3289674cced4eb768e2392fed1c41f\n'
             )
         shutil.rmtree(tmp)
