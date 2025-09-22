@@ -58,47 +58,6 @@ import subprocess
 from sage_bootstrap.package import Package
 
 
-def resolve_package(pkg_base):
-    """
-    To Return (pkg, pkg_dir: Path, pkg_scripts: Path, pkg_type: Optional[str])
-    instead of using 'sage-package properties'.
-    """
-    sage_root = os.path.realpath(os.environ.get("SAGE_ROOT", ""))
-    if not sage_root:
-        logger.error("SAGE_ROOT is not set; cannot locate packages.")
-        raise SystemExit(2)
-
-    pkg_dir = os.path.join(sage_root, "build", "pkgs", pkg_base)
-    if not os.path.isdir(pkg_dir):
-        logger.error("Package directory not found: %s", pkg_dir)
-        raise SystemExit(1)
-
-    # To Construct the Package object directly
-    try:
-        pkg = Package(pkg_base)
-    except Exception as e:
-        logger.error("Failed to construct Package from %s: %s", pkg_dir, e)
-        raise SystemExit(1)
-
-    # Scripts & metadata files (SPKG.rst, distros/, etc.) live in pkg_dir
-    pkg_scripts = pkg_dir
-
-    # Get package type (base/standard/optional/experimental)
-    pkg_type = None
-    # To Handle both Enum and plain-string representations with grace,
-    if hasattr(pkg, "package_type"):
-        t = getattr(pkg, "package_type")
-        pkg_type = getattr(t, "value", None) or str(t)
-    elif hasattr(pkg, "type"):
-        t = getattr(pkg, "type")
-        pkg_type = getattr(t, "value", None) or str(t)
-    if isinstance(pkg_type, str):
-        # To Normalize (if any) common forms like 'PackageType.OPTIONAL' -> 'optional'
-        pkg_type = pkg_type.split(".")[-1].lower()
-
-    return pkg, pkg_dir, pkg_scripts, pkg_type
-
-
 def _strip_comments_and_collapse(path):  # path: str
     with io.open(path, "r", encoding="utf-8") as fh:
         txt = fh.read()
@@ -374,7 +333,8 @@ def handle_system_packages(pkg_base, pkg_scripts, fmt, out):
 
 # To Emit info for multiple packages.
 def emit_for_package(pkg_base, fmt, out_dir):
-    pkg, pkg_dir, pkg_scripts, pkg_type = resolve_package(pkg_base)
+
+    pkg = Package(pkg_base)
 
     # Local helper to print all sections
     def _emit_sections(out_stream):
@@ -382,12 +342,12 @@ def emit_for_package(pkg_base, fmt, out_dir):
             print(".. _spkg_{}:\n".format(pkg_base), file=out_stream)
 
         # SPKG.rst content
-        process_spkg_file(pkg_base, pkg_scripts, fmt, out_stream)
+        process_spkg_file(pkg_base, pkg.path, fmt, out_stream)
 
         # Package type
-        if pkg_type:
+        if pkg.type:
             print("\nType\n----\n", file=out_stream)
-            print(pkg_type, file=out_stream)
+            print(pkg.type, file=out_stream)
             print("", file=out_stream)  # blank line after the value
 
         # Dependencies (formatting handled elsewhere)
@@ -400,7 +360,7 @@ def emit_for_package(pkg_base, fmt, out_dir):
 
         # System packages
         print("", file=out_stream)
-        handle_system_packages(pkg_base, pkg_scripts, fmt, out_stream)
+        handle_system_packages(pkg_base, pkg.path, fmt, out_stream)
 
     if out_dir:
         if not os.path.isdir(out_dir):
