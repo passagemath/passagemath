@@ -22,6 +22,12 @@ import os
 import io
 import glob
 
+try:
+    import sage_bootstrap
+except ImportError:
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+    import sage_bootstrap
+
 os.environ["ENABLE_SYSTEM_SITE_PACKAGES"] = "yes"
 
 SYSTEM_NAME_MAP = {
