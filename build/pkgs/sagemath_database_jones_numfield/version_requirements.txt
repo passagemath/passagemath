@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-database-jones-numfield ~= 10.6.26.0
+passagemath-database-jones-numfield ~= 10.6.27.0

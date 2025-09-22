@@ -1,1 +1,2 @@
-passagemath-bootstrap
+# This file is updated on every release by the update-version script
+passagemath-bootstrap ~= 10.6.27.0
