@@ -22,17 +22,6 @@ import os
 import io
 import glob
 
-# Make .../build importable so `import sage_bootstrap` works
-BUILD_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-sys.path.insert(0, BUILD_DIR)
-
-# .../passagemath
-_SAGE_ROOT_DEFAULT = os.path.dirname(BUILD_DIR)
-os.environ.setdefault("SAGE_ROOT", _SAGE_ROOT_DEFAULT)
-
-# To Prepend .../build/bin to PATH
-os.environ["PATH"] = os.path.join(BUILD_DIR, "bin") + ":" + os.environ.get("PATH", "")
-
 os.environ["ENABLE_SYSTEM_SITE_PACKAGES"] = "yes"
 
 SYSTEM_NAME_MAP = {
