@@ -302,6 +302,13 @@ jobs:
           path: "dist/*.whl"
           name: noarch-wheels
 
+      - name: Upload logs artifact
+        uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-noarch-wheels
+          path: ./logs
+
   build_wheels:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }}
     runs-on: ${{ matrix.os }}
@@ -660,7 +667,8 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
           path: ./wheelhouse/*.whl
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload logs artifact
+        uses: actions/upload-artifact@v4
         if:   always()
         with:
           name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
@@ -1033,7 +1041,8 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
           path: ./wheelhouse/*.whl
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload logs artifact
+        uses: actions/upload-artifact@v4
         if:   always()
         with:
           name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
