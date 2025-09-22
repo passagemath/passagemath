@@ -18,7 +18,6 @@ import unittest
 import subprocess
 import logging
 
-from sage_bootstrap.download.mirror_list import MIRRORLIST_FILENAME
 from sage_bootstrap.util import is_url
 
 
@@ -40,10 +39,6 @@ class SageDownloadFileTestCase(unittest.TestCase):
         """
         Subsequent runs of sage-download-file
         """
-        try:
-            os.remove(MIRRORLIST_FILENAME)
-        except OSError:
-            pass
         env = dict(os.environ)
         env['http_proxy'] = 'http://192.0.2.0:5187/'
         env['https_proxy'] = 'http://192.0.2.0:5187/'
@@ -69,10 +64,6 @@ class SageDownloadFileTestCase(unittest.TestCase):
         """
         The first run of sage-download-file
         """
-        try:
-            os.remove(MIRRORLIST_FILENAME)
-        except OSError:
-            pass
         proc = subprocess.Popen(
             [EXECUTABLE, '--print-fastest-mirror'],
             stdin=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE,

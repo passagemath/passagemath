@@ -21,7 +21,6 @@ import shutil
 import logging
 
 from sage_bootstrap.env import SAGE_DISTFILES
-from sage_bootstrap.download.mirror_list import MIRRORLIST_FILENAME
 from sage_bootstrap.package import Package
 from test.capture import CapturedLog
 
