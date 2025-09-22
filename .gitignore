@@ -208,6 +208,7 @@ build/bin/sage-build-env-config
 /pkgs/sage-conf_pypi/sage_root/upstream/
 /pkgs/sage-conf_pypi/sage_root/venv
 
+/pkgs/sage-bootstrap/pyproject.toml
 /pkgs/sage-docbuild/pyproject.toml
 /pkgs/sage-setup/pyproject.toml
 
