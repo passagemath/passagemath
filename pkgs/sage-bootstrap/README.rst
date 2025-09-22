@@ -87,3 +87,7 @@ This distribution package ``passagemath-bootstrap`` provides:
 
     $ sage-spkg-info pypi/setuptools
     ...
+
+The database of packages is included with ``passagemath-bootstrap`` and consists of
+over 600 packages; see https://passagemath.org/docs/latest/html/en/reference/spkg/index.html
+for a list of the available packages.
