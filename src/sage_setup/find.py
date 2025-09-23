@@ -21,6 +21,7 @@ import importlib.machinery
 import importlib.util
 
 import os
+import sys
 
 from collections import defaultdict
 
@@ -31,7 +32,8 @@ assert read_distribution  # unused in this file, re-export for compatibility
 
 
 def find_python_sources(src_dir, modules=['sage'], distributions=None,
-                        exclude_distributions=None):
+                        exclude_distributions=None,
+                        extension_kwds=None):
     """
     Find all Python packages and Python/Cython modules in the sources.
 
@@ -143,6 +145,9 @@ def find_python_sources(src_dir, modules=['sage'], distributions=None,
 
     distribution_filter = SourceDistributionFilter(distributions, exclude_distributions)
 
+    if extension_kwds is None:
+        extension_kwds = {}
+
     cwd = os.getcwd()
     try:
         os.chdir(src_dir)
@@ -166,7 +171,8 @@ def find_python_sources(src_dir, modules=['sage'], distributions=None,
                     if ext == '.pyx':
                         if filepath in distribution_filter:
                             cython_modules.append(Extension(package + '.' + base,
-                                                            sources=[os.path.join(dirpath, filename)]))
+                                                            sources=[os.path.join(dirpath, filename)],
+                                                            **extension_kwds))
 
     finally:
         os.chdir(cwd)
