@@ -3,7 +3,7 @@
 from .paridecl cimport (GEN, t_COMPLEX, dbltor, real_0_bit, stoi, cgetg,
                         set_gel, gen_0)
 from .gen cimport Gen
-from cpython.int cimport PyInt_AS_LONG
+from cpython.long cimport PyLong_AsLong
 from cpython.float cimport PyFloat_AS_DOUBLE
 from cpython.complex cimport PyComplex_RealAsDouble, PyComplex_ImagAsDouble
 from cpython.longintrepr cimport py_long
@@ -60,7 +60,7 @@ cdef inline GEN doubles_to_COMPLEX(double re, double im) noexcept:
 # Conversion Python -> PARI
 
 cdef inline GEN PyInt_AS_GEN(x) except? NULL:
-    return stoi(PyInt_AS_LONG(x))
+    return stoi(PyLong_AsLong(x))
 
 cdef GEN PyLong_AS_GEN(py_long x) noexcept
 
