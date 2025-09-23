@@ -25,5 +25,6 @@ sage_setup(
         "sage.rings": [
             "integer_fake.h",
         ]
-    }
+    },
+    py_limited_api=False,
 )

@@ -32,7 +32,8 @@ assert read_distribution  # unused in this file, re-export for compatibility
 
 
 def find_python_sources(src_dir, modules=['sage'], distributions=None,
-                        exclude_distributions=None):
+                        exclude_distributions=None,
+                        extension_kwds=None):
     """
     Find all Python packages and Python/Cython modules in the sources.
 
@@ -144,12 +145,8 @@ def find_python_sources(src_dir, modules=['sage'], distributions=None,
 
     distribution_filter = SourceDistributionFilter(distributions, exclude_distributions)
 
-    extension_kwds = {}
-    if os.environ.get('CIBUILDWHEEL', None) and sys.version_info >= (3, 12, 0, 0):
-        # https://cibuildwheel.pypa.io/en/stable/options/#examples_8
-        # https://cython.readthedocs.io/en/latest/src/userguide/limited_api.html#setuptools-and-setup-py
-        extension_kwds['define_macros'] = [("Py_LIMITED_API", 0x030C0000)]
-        extension_kwds['py_limited_api'] = True
+    if extension_kwds is None:
+        extension_kwds = {}
 
     cwd = os.getcwd()
     try:
