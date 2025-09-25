@@ -443,10 +443,11 @@ jobs:
             ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}-build=${{
               hashFiles('build',
                         'configure.ac',
-                        'm4')
+                        'm4',
+                        '.github/workflows/dist.yml')
             }}
-          restore-keys: |
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
+          # restore-keys: |
+          #   ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
 
       - name: Unpack and prepare
         id: unpack
@@ -817,7 +818,13 @@ jobs:
           path: |
             /sage-*
             ~/sage-*
-          key: ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
+          key: >-
+            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4',
+                        '.github/workflows/dist.yml')
+            }}
 
       - name: Unpack and prepare
         # We build the wheels from the sdists so that MANIFEST filtering becomes effective.
