@@ -60,6 +60,8 @@ if [ -n "$LD" -a "$LD" != "ld" ]; then
 fi
 unset LD
 
+env
+
 # Use SAGE_CXX_WITHOUT_STD instead of CXX.
 # This fixes #29162 (gfortran 9.2.0 compile error on debian-jessie with gcc 4.9.2)
 ../src/configure \
