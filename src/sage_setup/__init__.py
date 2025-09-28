@@ -7,7 +7,7 @@ def sage_setup(distributions, *,
                data_files=(),
                cmdclass=None,
                ext_modules=(),
-               py_limited_api=True):
+               py_limited_api=False):
     r"""
     Replacement for :func:`setuptools.setup` for building distribution packages of the Sage library
 
