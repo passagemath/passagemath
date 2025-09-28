@@ -8,4 +8,5 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-gap-pkg-semigroups'],
-           spkgs=['semigroups'])
+           spkgs=['semigroups'],
+           py_limited_api=True)
