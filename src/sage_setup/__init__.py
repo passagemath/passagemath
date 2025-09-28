@@ -88,6 +88,8 @@ def sage_setup(distributions, *,
     cmdclass.update(dict(build_ext=sage_build_ext_minimal,
                          build_py=sage_build_py))
 
+    options = {}
+
     sdist = len(sys.argv) > 1 and (sys.argv[1] in ["sdist", "egg_info", "dist_info"])
 
     # ########################################################
@@ -120,6 +122,7 @@ def sage_setup(distributions, *,
             # https://cython.readthedocs.io/en/latest/src/userguide/limited_api.html#setuptools-and-setup-py
             extension_kwds['define_macros'] = [("Py_LIMITED_API", 0x030C0000)]
             extension_kwds['py_limited_api'] = True
+            options["bdist_wheel"] = {"py_limited_api": "cp312"}
 
         if interpreters:
             log.info("Generating auto-generated sources")
@@ -187,5 +190,6 @@ def sage_setup(distributions, *,
           py_modules=python_modules,
           data_files=data_files,
           ext_modules=extensions + list(ext_modules),
+          options=options,
           **kwds
     )
