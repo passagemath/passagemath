@@ -9,4 +9,5 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-msolve'],
            spkgs=['msolve'],
-           package_data={})
+           package_data={},
+           py_limited_api=True)

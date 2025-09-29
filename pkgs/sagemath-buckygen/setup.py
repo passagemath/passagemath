@@ -9,4 +9,5 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-buckygen'],
            spkgs=['buckygen'],
-           package_data={})
+           package_data={},
+           py_limited_api=True)

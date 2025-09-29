@@ -14,4 +14,5 @@ sage_setup(['sagemath-tachyon'],
                    "doctest/invalid/*",
                 ],
            },
+           py_limited_api=True,
 )

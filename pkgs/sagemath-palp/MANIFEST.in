@@ -3,7 +3,6 @@ prune sage
 include VERSION.txt
 
 include sage/libs/palp.p*
-include sage/rings/polynomial/palp.p*
 
 global-exclude *.c
 global-exclude *.cpp

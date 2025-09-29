@@ -9,4 +9,5 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-mcqd'],
            spkgs=['mcqd'],
-           package_data={"sage.graphs": ["mcqd.pxd"]})
+           package_data={"sage.graphs": ["mcqd.pxd"]},
+           py_limited_api=True)

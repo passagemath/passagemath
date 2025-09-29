@@ -6,7 +6,8 @@ def sage_setup(distributions, *,
                package_data=None,
                data_files=(),
                cmdclass=None,
-               ext_modules=()):
+               ext_modules=(),
+               py_limited_api=False):
     r"""
     Replacement for :func:`setuptools.setup` for building distribution packages of the Sage library
 
@@ -87,6 +88,8 @@ def sage_setup(distributions, *,
     cmdclass.update(dict(build_ext=sage_build_ext_minimal,
                          build_py=sage_build_py))
 
+    options = {}
+
     sdist = len(sys.argv) > 1 and (sys.argv[1] in ["sdist", "egg_info", "dist_info"])
 
     # ########################################################
@@ -113,6 +116,14 @@ def sage_setup(distributions, *,
         sage.env.default_required_modules = required_modules
         sage.env.default_optional_modules = optional_modules
 
+        extension_kwds = {}
+        if py_limited_api and os.environ.get('CIBUILDWHEEL', None) and sys.version_info >= (3, 12, 0, 0):
+            # https://cibuildwheel.pypa.io/en/stable/options/#examples_8
+            # https://cython.readthedocs.io/en/latest/src/userguide/limited_api.html#setuptools-and-setup-py
+            extension_kwds['define_macros'] = [("Py_LIMITED_API", 0x030C0000)]
+            extension_kwds['py_limited_api'] = True
+            options["bdist_wheel"] = {"py_limited_api": "cp312"}
+
         if interpreters:
             log.info("Generating auto-generated sources")
             # from sage_setup.autogen import autogen_all
@@ -126,7 +137,7 @@ def sage_setup(distributions, *,
         t = time.time()
 
         python_packages, python_modules, cython_modules = find_python_sources(
-            '.', recurse_packages, distributions=distributions)
+            '.', recurse_packages, distributions=distributions, extension_kwds=extension_kwds)
         extra_files = find_extra_files(
             '.', recurse_packages, '/doesnotexist', distributions=distributions)
 
@@ -179,5 +190,6 @@ def sage_setup(distributions, *,
           py_modules=python_modules,
           data_files=data_files,
           ext_modules=extensions + list(ext_modules),
+          options=options,
           **kwds
     )

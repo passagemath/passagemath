@@ -9,4 +9,5 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-macaulay2'],
            spkgs=['macaulay2'],
-           package_data={})
+           package_data={},
+           py_limited_api=True)
