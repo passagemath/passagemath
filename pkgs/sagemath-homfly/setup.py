@@ -10,4 +10,4 @@ from sage_setup import sage_setup
 sage_setup(['sagemath-homfly'],
            spkgs=['libhomfly'],
            package_data={},
-           py_limited_api=True)
+           py_limited_api=False)
