@@ -2376,6 +2376,13 @@ def PrimitiveGroups(d=None):
         sage: PrimitiveGroups()
         Primitive Groups
 
+    The database is currently limited::
+
+         sage: PrimitiveGroups(2^13).cardinality()
+         Traceback (most recent call last):
+         ...
+         GAPError: Error...
+
     .. TODO::
 
         This enumeration helper could be extended based on
@@ -2602,6 +2609,10 @@ class PrimitiveGroupsOfDegree(CachedRepresentation, Parent):
 
             sage: PrimitiveGroups(2500).cardinality()
             34
+            sage: PrimitiveGroups(2^13).cardinality()
+            Traceback (most recent call last):
+            ...
+            GAPError: Error...
         """
         if self._degree <= 1:
             # gap.NrPrimitiveGroups(0) fails, so Sage needs to handle this

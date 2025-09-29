@@ -1,22 +1,19 @@
-*********************
-Representation theory
-*********************
+******
+表示论
+******
 
 .. index:
    pair: ordinary representation; character
 
 .. _section-character:
 
-Ordinary characters
-===================
+普通特征标 (Ordinary characters)
+================================
 
-How can you compute character tables of a finite group in Sage? The
-Sage-GAP interface can be used to compute character tables.
+如何在 Sage 中计算有限群的特征标表？可以使用 Sage-GAP 接口来计算特征标表。
 
-You can construct the table of character values of a permutation
-group :math:`G` as a Sage matrix, using the method
-``character_table`` of the PermutationGroup class, or via the
-interface to the GAP command ``CharacterTable``.
+你可以使用 ``PermutationGroup`` 类的 ``character_table`` 方法，
+或通过 GAP 命令 ``CharacterTable`` 的接口，将置换群 `G` 的特征标值表构建为 Sage 矩阵。
 
 ::
 
@@ -45,7 +42,7 @@ interface to the GAP command ``CharacterTable``.
     X.4     1  1 -1 -1  1
     X.5     2  .  .  . -2
 
-Here is another example:
+下面是另一个示例:
 
 ::
 
@@ -76,10 +73,9 @@ Here is another example:
     A = E(3)^2
       = (-1-Sqrt(-3))/2 = -1-b3
 
-where :math:`E(3)` denotes a cube root of unity, :math:`ER(-3)`
-denotes a square root of :math:`-3`, say :math:`i\sqrt{3}`, and
-:math:`b3 = \frac{1}{2}(-1+i \sqrt{3})`. Note the added ``print``
-Python command. This makes the output look much nicer.
+其中 `E(3)` 表示单位立方根，`ER(-3)` 表示 `-3` 的平方根，即 `i\sqrt{3}`,
+而 `b3 = \frac{1}{2}(-1+i \sqrt{3})`。
+请注意添加的 ``print`` Python 命令。这会令输出更美观。
 
 .. link
 
@@ -106,11 +102,9 @@ Python command. This makes the output look much nicer.
     sage: g^chi # random
     E(3)
 
-This last quantity is the value of the character ``chi`` at the group
-element ``g``.
+最后一个量是特征 ``chi`` 在群元素 ``g`` 处的值。
 
-Alternatively, if you turn IPython "pretty printing" off, then the
-table prints nicely.
+或者，如果你关闭 IPython 的“美观打印”，那么表格将打印得更好。
 
 .. skip
 
@@ -158,14 +152,13 @@ table prints nicely.
 
 .. _section-brauer:
 
-Brauer characters
-=================
+布劳尔特征标 (Brauer characters)
+================================
 
-The Brauer character tables in GAP do not yet have a "native"
-interface. To access them you can directly interface with GAP using
-the ``libgap.eval`` command.
+GAP 中的布劳尔特征标表尚未具有“原生”接口。
+要访问它们，你可以使用 ``libgap.eval`` 命令直接与 GAP 交互。
 
-The example below using the GAP interface illustrates the syntax.
+下面的示例通过使用 GAP 接口来说明语法。
 
 ::
 
