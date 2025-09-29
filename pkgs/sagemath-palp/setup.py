@@ -9,4 +9,5 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-palp'],
            spkgs=['palp'],
-           package_data={})
+           package_data={},
+           py_limited_api=True)
