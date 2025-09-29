@@ -950,8 +950,6 @@ jobs:
         if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_coxeter3
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
       - name: sagemath-mcqd
         id:   sagemath-mcqd
