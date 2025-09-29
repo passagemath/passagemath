@@ -15,4 +15,4 @@ sage_setup(['sagemath-coxeter3'],
                    "decl.pxd",
                ],
            },
-           py_limited_api=True)
+           py_limited_api=False)
