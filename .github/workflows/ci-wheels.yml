@@ -163,12 +163,16 @@ jobs:
           WHEELHOUSE=${GITHUB_WORKSPACE}/wheelhouse
           if [ -d "$WHEELHOUSE" ]; then
               export PIP_FIND_LINKS=file://$WHEELHOUSE
+              case $python_version_no_dot in
+                  310|311) python_version_abi3=$python_version_no_dot ;;
+                  *)       python_version_abi3=312 ;;
+              esac
               (set +x; cd "$WHEELHOUSE" && for whl in *.whl *.tar.gz; do
                    case $whl in
                        *$pkg_underscore-*.whl) ;;
                        *musllinux*)            ;;
                        *_i686*)                ;;
-                       *-cp$python_version_no_dot-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                       *-cp$python_version_no_dot-*|*-cp$python_version_abi3-abi3-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
               export PIP_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt
@@ -198,7 +202,7 @@ jobs:
               windows*) tag="win_amd64";;
           esac
           # Run tox
-          for wheel in "$WHEELHOUSE"/*$pkg_underscore-*-cp$python_version_no_dot-$tag.whl "$WHEELHOUSE"/*$pkg_underscore-*-py3-none-any.whl; do
+          for wheel in "$WHEELHOUSE"/*$pkg_underscore-*-cp$python_version_no_dot-$tag.whl "$WHEELHOUSE"/*$pkg_underscore-*-cp$python_version_abi3-abi3-$tag.whl "$WHEELHOUSE"/*$pkg_underscore-*-py3-none-any.whl; do
             if [ -r "$wheel" ]; then
               cd pkgs/$pkg
               tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py'$python_version_no_dot'-norequirements/')
