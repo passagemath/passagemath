@@ -9,6 +9,8 @@ from pathlib import Path
 from auditwheel.wheeltools import InWheel
 
 from sage_conf import GAP_ROOT_PATHS
+from sage_conf import SAGE_LOCAL
+
 
 if "TMPDIR" in os.environ:
     os.environ["TMPDIR"] = str(Path(os.environ["TMPDIR"]).resolve())
@@ -26,6 +28,12 @@ with InWheel(wheel, wheel):
         sys.stdout.flush()
         if os.system(f"bash -c {shlex.quote(command)}") != 0:
             sys.exit(1)
+
+    command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/gap) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
+    print(f'Running {command}')
+    sys.stdout.flush()
+    if os.system(f"bash -c {shlex.quote(command)}") != 0:
+        sys.exit(1)
 
     # Remove the sage-conf dependency; it is not needed because our wheels ship what is needed.
 
