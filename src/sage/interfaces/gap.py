@@ -235,7 +235,7 @@ if SAGE_GAP_COMMAND is None:
         gap_cmd = ''
     else:
         sage_wheels_path = ':'.join(os.path.join(p, 'bin') for p in sage_wheels.__path__)
-        gap_cmd = f'PATH={shlex.quote(sage_wheels_path)}:$PATH '
+        gap_cmd = f'env PATH={shlex.quote(sage_wheels_path)}:$PATH '
     # Passing -A allows us to use a minimal GAP installation without
     # producing errors at start-up. The files sage.g and sage.gaprc are
     # used to load any additional packages that may be available.
