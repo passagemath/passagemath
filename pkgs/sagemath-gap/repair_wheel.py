@@ -29,11 +29,19 @@ with InWheel(wheel, wheel):
         if os.system(f"bash -c {shlex.quote(command)}") != 0:
             sys.exit(1)
 
-    command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/gap) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
+    # real gap executable
+    command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)}/bin && tar cf - --dereference gap) | (cd gap && tar xvf -)'
     print(f'Running {command}')
     sys.stdout.flush()
     if os.system(f"bash -c {shlex.quote(command)}") != 0:
         sys.exit(1)
+
+    # gap relocation script
+    os.makedirs("sage_wheels/bin", exist_ok=True)
+    with open("sage_wheels/bin/gap", "w") as f:
+        f.write('#!/usr/bin/env bash\npython3 -m sage.interfaces.gap "$@"\n')
+    os.system("chmod +x sage_wheels/bin/gap")
+    print('Created sage_wheels/bin/gap')
 
     # Remove the sage-conf dependency; it is not needed because our wheels ship what is needed.
 
