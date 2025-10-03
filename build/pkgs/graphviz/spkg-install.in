@@ -1,0 +1,7 @@
+cd src
+sdh_configure --disable-swig --disable-ruby --disable-sharp --disable-go \
+    --disable-guile --disable-java --disable-lua --disable-perl --disable-php \
+    --disable-python --disable-python3 --disable-tcl \
+    $GRAPHVIZ_CONFIGURE
+sdh_make
+sdh_make_install
