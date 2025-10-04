@@ -34,7 +34,10 @@ on:
            ["15",     "",             "conda-forge-macos-standard"],
            ["15",     "xcode_26.0",   "homebrew-macos-opthomebrew-minimal"],
            ["15",     "xcode_26.0",   "homebrew-macos-opthomebrew-standard"],
-           ["15",     "xcode_26.0",   "conda-forge-macos-standard"]]
+           ["15",     "xcode_26.0",   "conda-forge-macos-standard"],
+           ["26",     "",             "homebrew-macos-opthomebrew-minimal"],
+           ["26",     "",             "homebrew-macos-opthomebrew-standard"],
+           ["26",     "",             "conda-forge-macos-standard"]]
         type: string
       extra_sage_packages:
         description: 'Extra Sage packages to install as system packages'
