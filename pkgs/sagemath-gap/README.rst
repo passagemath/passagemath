@@ -211,6 +211,9 @@ GAP packages
 ``pip install "passagemath-gap[difsets]"``
  installs `difsets <https://gap-packages.github.io/difsets>`__
 
+``pip install "passagemath-gap[float]"``
+ installs `float <https://gap-packages.github.io/float>`__
+
 ``pip install "passagemath-gap[fr]"``
  installs `fr <https://gap-packages.github.io/fr/>`__
 
