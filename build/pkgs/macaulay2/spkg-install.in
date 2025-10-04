@@ -16,6 +16,7 @@ BUILD_OPTIONS=$SAGE_MACAULAY2_BUILD_OPTIONS
 export Eigen3_DIR=$SAGE_LOCAL
 export Flint_DIR=$SAGE_LOCAL
 export Factory_DIR=$SAGE_LOCAL
+export Readline_DIR=$SAGE_LOCAL
 
 # https://github.com/Macaulay2/M2/wiki/Building-M2-from-source-using-CMake
 # -DWITH_OMP=OFF makes OpenMP optional.
