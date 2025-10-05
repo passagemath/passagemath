@@ -68,7 +68,7 @@ SPKG_design=gap_packages
 SPKG_digraphs=gap_packages
 SPKG_factint=gap                        # one of the packages autoloaded in the default GAP config
 SPKG_fga=gap                            # one of the packages autoloaded in the default GAP config
-SPKG_float=none                         # FIXME: needs fplll, ...
+SPKG_float=gap_packages                 # this uses deps mpfi mpc fplll; we omit the optional dep CXSC
 SPKG_gapdoc=gap                         # one of the minimal packages GAP needs to run
 SPKG_gbnp=gap_packages
 SPKG_genss=gap_packages
@@ -134,6 +134,7 @@ export CFLAGS="$CFLAGS -std=gnu17 -Wno-implicit-function-declaration"
 "$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" --strict \
                  --add-package-config-Digraphs "--with-external-planarity" \
                  --add-package-config-CddInterface "--with-cddlib=$SAGE_LOCAL" \
+                 --add-package-config-float "--with-fplll=$SAGE_LOCAL --with-mpc=$SAGE_LOCAL --with-mpfi=$SAGE_LOCAL --with-mpfr=$SAGE_LOCAL" \
                  $PACKAGES
 
 # Now build all GAP packages unclaimed by an SPKG, in non-strict mode.

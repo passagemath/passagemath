@@ -443,10 +443,11 @@ jobs:
             ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}-build=${{
               hashFiles('build',
                         'configure.ac',
-                        'm4')
+                        'm4',
+                        '.github/workflows/dist.yml')
             }}
-          restore-keys: |
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
+          # restore-keys: |
+          #   ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
 
       - name: Unpack and prepare
         id: unpack
@@ -654,6 +655,14 @@ jobs:
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
+      - name: sagemath-gap-pkg-float
+        id:   sagemath-gap-pkg-float
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_float
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
       - name: sagemath-gap-pkg-normalizinterface
         id:   sagemath-gap-pkg-normalizinterface
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
@@ -811,7 +820,13 @@ jobs:
           path: |
             /sage-*
             ~/sage-*
-          key: ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}
+          key: >-
+            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4',
+                        '.github/workflows/dist.yml')
+            }}
 
       - name: Unpack and prepare
         # We build the wheels from the sdists so that MANIFEST filtering becomes effective.
