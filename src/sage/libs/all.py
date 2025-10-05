@@ -4,7 +4,6 @@ from sage.libs.all__sagemath_flint import *
 from sage.libs.all__sagemath_ntl import *
 from sage.libs.all__sagemath_pari import *
 from sage.libs.all__sagemath_eclib import *
-from sage.libs.all__sagemath_giac import *
 
 try:
     from sage.libs.all__sagemath_symbolics import *
