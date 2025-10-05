@@ -660,6 +660,8 @@ jobs:
         if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_float
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
       - name: sagemath-gap-pkg-normalizinterface
         id:   sagemath-gap-pkg-normalizinterface
