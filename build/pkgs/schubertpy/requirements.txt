@@ -1,0 +1,1 @@
+schubertpy @ git+https://github.com/passagemath/passagemath-pkg-schubertpy.git
