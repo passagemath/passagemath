@@ -44,6 +44,7 @@ if [ "$UNAME" = "Darwin" ]; then
     DISABLENLS="--disable-nls"
 fi
 
+export ac_cv_lib_usb_1_0_main=no
 sdh_configure --disable-ao "$DISABLENLS" --enable-png=no --disable-samplerate --disable-static --disable-micropy --disable-quickjs --disable-fltk $GIAC_CONFIGURE
 
 #############################################################

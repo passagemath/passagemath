@@ -1,4 +1,5 @@
 cd src
+export GMP_ROOT="$SAGE_GMP_PREFIX"
 sdh_cmake -DBUILD_TESTING=off
 sdh_make
 sdh_make_install
