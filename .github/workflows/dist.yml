@@ -332,7 +332,7 @@ jobs:
           - os: ubuntu-24.04-arm
             arch: aarch64
             build: musllinux
-          - os: macos-13
+          - os: macos-15-intel
             arch: x86_64
             build: macosx
           - os: macos-14
@@ -357,7 +357,7 @@ jobs:
       CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel --version && auditwheel -v -v -v -v repair -w {dest_dir} {wheel}"
       CIBW_REPAIR_WHEEL_COMMAND_MACOS: "set -x && export DYLD_FALLBACK_LIBRARY_PATH=$(pwd)/prefix/lib:$DYLD_FALLBACK_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}"
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
-      MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
+      MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-15-intel' && '13.0' || '14.0' }}
     steps:
       - name: Maximize build disk space
         if: runner.os == 'Linux' && matrix.arch != 'aarch64'
@@ -731,7 +731,7 @@ jobs:
           - os: ubuntu-24.04-arm
             arch: aarch64
             build: musllinux
-          - os: macos-13
+          - os: macos-15-intel
             arch: x86_64
             build: macosx
           - os: macos-14
@@ -756,7 +756,7 @@ jobs:
       CIBW_REPAIR_WHEEL_COMMAND_LINUX: "set -x && export LD_LIBRARY_PATH=$(pwd)/prefix/lib:$LD_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && auditwheel --version && auditwheel -v -v -v -v repair -w {dest_dir} {wheel}"
       CIBW_REPAIR_WHEEL_COMMAND_MACOS: "set -x && export DYLD_FALLBACK_LIBRARY_PATH=$(pwd)/prefix/lib:$DYLD_FALLBACK_LIBRARY_PATH && pkg=$(basename {wheel}) && pkg=${pkg%%-*} && pkg=${pkg//_/-} && pkg=${pkg#pas} && if [ -r pkgs/$pkg/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 pkgs/$pkg/repair_wheel.py {wheel}; fi && delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}"
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
-      MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-13' && '13.0' || '14.0' }}
+      MACOSX_DEPLOYMENT_TARGET: ${{ matrix.os == 'macos-15-intel' && '13.0' || '14.0' }}
     steps:
       - name: Maximize build disk space
         if: runner.os == 'Linux' && matrix.arch != 'aarch64'
@@ -1139,7 +1139,7 @@ jobs:
          "ubuntu-latest-musllinux-*-wheels",
          "ubuntu-24.04-arm-manylinux-*-wheels",
          "ubuntu-24.04-arm-musllinux-*-wheels",
-         "macos-13-*-wheels",
+         "macos-15-intel-*-wheels",
          "macos-14-*-wheels",
          "noarch-wheels"]
     secrets: inherit

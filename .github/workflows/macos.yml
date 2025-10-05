@@ -23,21 +23,21 @@ on:
         #  https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
         description: 'Stringified JSON object'
         default: >-
-          [["13",     "",             "homebrew-macos-usrlocal-minimal"],
-           ["13",     "",             "homebrew-macos-usrlocal-standard"],
-           ["13",     "",             "conda-forge-macos-standard"],
-           ["14",     "",             "homebrew-macos-opthomebrew-minimal"],
-           ["14",     "",             "homebrew-macos-opthomebrew-standard"],
-           ["14",     "",             "conda-forge-macos-standard"],
-           ["15",     "",             "homebrew-macos-opthomebrew-minimal"],
-           ["15",     "",             "homebrew-macos-opthomebrew-standard"],
-           ["15",     "",             "conda-forge-macos-standard"],
-           ["15",     "xcode_26.0",   "homebrew-macos-opthomebrew-minimal"],
-           ["15",     "xcode_26.0",   "homebrew-macos-opthomebrew-standard"],
-           ["15",     "xcode_26.0",   "conda-forge-macos-standard"],
-           ["26",     "",             "homebrew-macos-opthomebrew-minimal"],
-           ["26",     "",             "homebrew-macos-opthomebrew-standard"],
-           ["26",     "",             "conda-forge-macos-standard"]]
+          [["15-intel", "",           "homebrew-macos-usrlocal-minimal"],
+           ["15-intel", "",           "homebrew-macos-usrlocal-standard"],
+           ["15-intel", "",           "conda-forge-macos-standard"],
+           ["14",       "",           "homebrew-macos-opthomebrew-minimal"],
+           ["14",       "",           "homebrew-macos-opthomebrew-standard"],
+           ["14",       "",           "conda-forge-macos-standard"],
+           ["15",       "",           "homebrew-macos-opthomebrew-minimal"],
+           ["15",       "",           "homebrew-macos-opthomebrew-standard"],
+           ["15",       "",           "conda-forge-macos-standard"],
+           ["15",       "xcode_26.0", "homebrew-macos-opthomebrew-minimal"],
+           ["15",       "xcode_26.0", "homebrew-macos-opthomebrew-standard"],
+           ["15",       "xcode_26.0", "conda-forge-macos-standard"],
+           ["26",       "",           "homebrew-macos-opthomebrew-minimal"],
+           ["26",       "",           "homebrew-macos-opthomebrew-standard"],
+           ["26",       "",           "conda-forge-macos-standard"]]
         type: string
       extra_sage_packages:
         description: 'Extra Sage packages to install as system packages'
