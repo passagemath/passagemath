@@ -921,6 +921,8 @@ jobs:
         if:   (success() || failure())
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_giac
+        env:
+          MACOSX_DEPLOYMENT_TARGET: 14.0
 
       - name: sagemath-palp
         id:   sagemath-palp
@@ -1111,8 +1113,7 @@ jobs:
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_macaulay2
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-
+          MACOSX_DEPLOYMENT_TARGET: 14.0
 
       - uses: actions/upload-artifact@v4
         if:   always()
