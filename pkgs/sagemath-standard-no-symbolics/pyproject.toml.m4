@@ -46,7 +46,6 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_ctbllib_data
     SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_tomlib_data
     SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_irredsol_data
-    SPKG_INSTALL_REQUIRES_sagemath_giac
     SPKG_INSTALL_REQUIRES_sagemath_glpk
     SPKG_INSTALL_REQUIRES_sagemath_graphs
     SPKG_INSTALL_REQUIRES_sagemath_groups
