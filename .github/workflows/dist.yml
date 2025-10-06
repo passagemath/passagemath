@@ -796,6 +796,20 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
           path: dist
 
+      - name: Retrieve configure tarball cache
+        id: cache-configure
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            build/pkgs/configure
+            upstream/configure*
+          key: >-
+            configure-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}
+
       - uses: actions/setup-python@v5
         # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
@@ -805,6 +819,7 @@ jobs:
           update-environment: false
 
       - name: Bootstrap
+        if: steps.cache-configure.outputs.cache-hit != 'true'
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
           export PATH=$(pwd)/build/bin:$PATH
@@ -813,7 +828,16 @@ jobs:
           sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
           ./bootstrap
 
-      - name: Cache SAGE_LOCAL
+      - name: Save configure tarball cache
+        if: steps.cache-configure.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            build/pkgs/configure
+            upstream/configure*
+          key: ${{ steps.cache-configure.outputs.cache-primary-key }}
+
+      - name: Retrieve SAGE_LOCAL cache
         id:   cache-sage-local
         uses: actions/cache/restore@v4
         with:
@@ -845,6 +869,8 @@ jobs:
         #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
         #
         run: |
+          if [ ! -x ./configure ]; then ./bootstrap -D; fi
+          touch configure
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --prefix=$HOME/runner-venv
@@ -865,6 +891,15 @@ jobs:
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_bliss
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: Save SAGE_LOCAL cache
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            /sage-*
+            ~/sage-*
+          key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
 
       # Standard packages
 
