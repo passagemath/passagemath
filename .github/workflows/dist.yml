@@ -310,7 +310,7 @@ jobs:
           path: ./logs
 
   build_wheels:
-    name: wheels ${{ matrix.build }}*_${{ matrix.arch }}
+    name: wheels ${{ matrix.build }}*_${{ matrix.arch }} side A
     runs-on: ${{ matrix.os }}
     needs: [sdists_for_pypi, noarch_wheels_for_pypi]
     strategy:
@@ -342,7 +342,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc mpfi givaro boost_cropped cliquer glpk libhomfly gsl pari xeus_gp gp2c gap_packages gap_pkg_jupyterkernel semigroups ntl flint iml lcalc libbraiding m4ri m4rie planarity rw symmetrica gap cddlib nauty ecm tachyon graphs polytopes_db pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
+      TARGETS_PRE: _cibuildwheel_local_a pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
@@ -708,7 +708,7 @@ jobs:
           path: ./logs
 
   build_optional_wheels:
-    name: wheels ${{ matrix.build }}*_${{ matrix.arch }} optional
+    name: wheels ${{ matrix.build }}*_${{ matrix.arch }} side B
     if: (success() || failure())
     runs-on: ${{ matrix.os }}
     needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels]
@@ -741,7 +741,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: ccache libpng gmp mpfr mpc m4ri m4rie linbox libgd singular ecl maxima brial giac palp eclib sympow bliss gfan fricas coxeter3 mcqd meataxe sirocco tdlib msolve cddlib latte_int 4ti2 cmr topcom qepcad frobby lrslib rubiks plantri buckygen benzene macaulay2 glucose kissat kenzo pip elliptic_curves ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
+      TARGETS_PRE: _cibuildwheel_local_b ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
