@@ -27,6 +27,7 @@ sdh_cmake -GNinja -S../.. -B. \
       -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
       -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
       -DWITH_OMP=OFF \
+      -DREADLINE_ROOT_DIR="${SAGE_LOCAL}" \
       $BUILD_OPTIONS
 if [ -n "$SAGE_MACAULAY2_TARGETS" ]; then
    # "Note that this target must be built separately, before proceeding to M2-binary."
