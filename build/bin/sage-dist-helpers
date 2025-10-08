@@ -228,10 +228,15 @@ sdh_build_wheel() {
                 unset PIP_NO_BINARY
                 ;;
             --no-build-isolation)
-                # Use --no-binary, so that no wheels from caches are used.
-                unset PIP_FIND_LINKS
-                export PIP_NO_BINARY=:all:
-                build_isolation_option="--no-isolation --skip-dependency-check"
+                if [ "$SAGE_VENV_FLAGS" = DISABLED ]; then
+                    # Ignore --no-build-isolation
+                    :
+                else
+                    # Use --no-binary, so that no wheels from caches are used.
+                    unset PIP_FIND_LINKS
+                    export PIP_NO_BINARY=:all:
+                    build_isolation_option="--no-isolation --skip-dependency-check"
+                fi
                 ;;
             --sdist-then-wheel)
                 dist_option=""
@@ -253,6 +258,8 @@ sdh_build_wheel() {
     done
     if python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options "$@"; then
         : # successful
+    elif [ "$SAGE_VENV_FLAGS" = DISABLED ]; then
+        sdh_die "Error building a wheel for $PKG_NAME"
     else
         case $build_isolation_option in
             *--no-isolation*)
