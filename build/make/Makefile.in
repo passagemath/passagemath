@@ -336,6 +336,10 @@ PYTHON_FOR_VENV = @PYTHON_FOR_VENV@
 PYTHON_MINOR = @PYTHON_MINOR@
 SAGE_VENV_FLAGS = @SAGE_VENV_FLAGS@
 
+ifeq ($(SAGE_VENV_FLAGS),DISABLED)
+# This is 'configure --with-sage-venv=none'
+PYTHON = $(SAGE_LOCAL)/$(SPKG_INST_RELDIR)/.dummy
+else
 ifneq ($(PYTHON_FOR_VENV),)
 # Special rule for making the Python virtualenv from the system Python (Python
 # 3 only).  $(PYTHON) is set in Makefile to python3_venv.
@@ -356,6 +360,7 @@ $(inst_python3_venv): | $(SAGE_VENV)/$(SPKG_INST_RELDIR)
 	$(PYTHON_FOR_VENV) $(SAGE_ROOT)/build/bin/sage-venv $(SAGE_VENV_FLAGS) "$(SAGE_VENV)"
 	rm -f "$(SAGE_VENV)/$(SPKG_INST_RELDIR)"/python3_venv-*
 	touch "$@"
+endif
 endif
 
 # Build everything and start Sage.

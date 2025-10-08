@@ -228,10 +228,15 @@ sdh_build_wheel() {
                 unset PIP_NO_BINARY
                 ;;
             --no-build-isolation)
-                # Use --no-binary, so that no wheels from caches are used.
-                unset PIP_FIND_LINKS
-                export PIP_NO_BINARY=:all:
-                build_isolation_option="--no-isolation --skip-dependency-check"
+                if [ "$SAGE_VENV_FLAGS" = DISABLED ]; then
+                    # Ignore --no-build-isolation
+                    :
+                else
+                    # Use --no-binary, so that no wheels from caches are used.
+                    unset PIP_FIND_LINKS
+                    export PIP_NO_BINARY=:all:
+                    build_isolation_option="--no-isolation --skip-dependency-check"
+                fi
                 ;;
             --sdist-then-wheel)
                 dist_option=""
@@ -253,6 +258,8 @@ sdh_build_wheel() {
     done
     if python3 -m build $dist_option --outdir=dist $build_isolation_option $build_options "$@"; then
         : # successful
+    elif [ "$SAGE_VENV_FLAGS" = DISABLED ]; then
+        sdh_die "Error building a wheel for $PKG_NAME"
     else
         case $build_isolation_option in
             *--no-isolation*)
@@ -289,6 +296,9 @@ sdh_pip_install() {
 }
 
 sdh_pip_editable_install() {
+    if [ "$SAGE_VENV_FLAGS" = "DISABLED" ]; then
+        return 0
+    fi
     echo "Installing $PKG_NAME (editable mode)"
     python3 -m pip install --verbose --no-deps --no-index --no-build-isolation --isolated --editable "$@" || \
         sdh_die "Error installing $PKG_NAME"
@@ -353,6 +363,10 @@ sdh_store_and_pip_install_wheel() {
     done
     sdh_store_wheel "$@"
 
+    if [ "$SAGE_VENV_FLAGS" = "DISABLED" ]; then
+        return 0
+    fi
+
     wheel_basename="${wheel##*/}"
     distname="${wheel_basename%%-*}"
 
@@ -391,6 +405,9 @@ sdh_store_and_pip_install_wheel() {
 }
 
 sdh_actually_pip_install_wheel() {
+    if [ "$SAGE_VENV_FLAGS" = "DISABLED" ]; then
+        return 0
+    fi
     distname=$1
     shift
     # Issue #32659: pip no longer reinstalls local wheels if the version is the same.
@@ -407,6 +424,9 @@ sdh_actually_pip_install_wheel() {
 }
 
 sdh_pip_uninstall() {
+    if [ "$SAGE_VENV_FLAGS" = "DISABLED" ]; then
+        return 0
+    fi
     sage-pip-uninstall "$@"
     if [ $? -ne 0 ]; then
         echo "Warning: pip exited with status $?" >&2

@@ -2,6 +2,7 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 [build-system]
 requires = [
     SPKG_INSTALL_REQUIRES_setuptools
+    SPKG_INSTALL_REQUIRES_python_build
 ]
 build-backend = "setuptools.build_meta"
 
