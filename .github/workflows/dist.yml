@@ -853,6 +853,7 @@ jobs:
             }}
 
       - name: Unpack and prepare
+        id: unpack
         # We build the wheels from the sdists so that MANIFEST filtering becomes effective.
         # But we must run cibuildwheel with the unpacked source directory, not a tarball,
         # so that SAGE_ROOT is copied into the build containers.
