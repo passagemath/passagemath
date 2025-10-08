@@ -44,8 +44,24 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how you can contribute.
 passagemath is a major integrating force in the [mathematical software landscape](https://github.com/passagemath#passagemath-in-the-mathematical-software-landscape).
 
 
-Supported Platforms
--------------------
+Running passagemath in the cloud (Google Colab)
+-----------------------------------------------
+
+Just create a [Google Colab](https://colab.google/) notebook and type:
+
+    %pip install --prefer-binary passagemath-standard
+
+Then import the top level:
+
+    from sage.all import *
+
+Note that the Colab notebook uses a Python kernel, so no Sage-specific preparsing is in effect.
+When following [code examples in the documentation](https://passagemath.org/docs/10.6/html/en/a_tour_of_sage/index.html),
+be sure to switch to the "Python" tab.
+
+
+Local installation of passagemath: Supported platforms
+------------------------------------------------------
 
 passagemath attempts to support and provides binary wheels suitable for
 all major Linux distributions and recent versions of macOS.
@@ -74,7 +90,8 @@ for Linux and macOS, both for the x86_64 and ARM architectures.
 
 Unless you need to install passagemath into a specific existing environment, we recommend
 to create and activate a fresh virtual environment over a supported Python
-for example `~/passagemath-venv/`:
+for example `~/passagemath-venv/`. (The dollar sign ($) indicates the shell prompt;
+do not type it.)
 
 ```bash session
 $ python3 --version
@@ -83,6 +100,10 @@ $ python3 -m venv ~/passagemath-venv
 $ source ~/passagemath-venv/bin/activate
 $ rehash
 ```
+
+(Activating the virtual environment only takes effect for the current terminal session;
+repeat the last command whenever you open a new terminal session in which you wish to
+use passagemath.)
 
 Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
 
