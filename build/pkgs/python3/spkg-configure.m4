@@ -141,7 +141,9 @@ To build Sage with a different system python, use ./configure --with-python=/pat
     AC_SUBST([PYTHON_MINOR], [$(echo $PYTHON_VERSION | cut -d. -f2)])
     export PYTHON_MINOR  # for sage-get-system-packages
 
-    AS_VAR_IF([SAGE_VENV], [auto], [SAGE_VENV=$SAGE_VENV_AUTO])
+    AS_CASE([$SAGE_VENV],
+        [auto], [SAGE_VENV=$SAGE_VENV_AUTO],
+        [none], [SAGE_VENV=no; SAGE_VENV_FLAGS=DISABLED])
     AS_CASE([$SAGE_VENV],
         [no],  [SAGE_VENV='${SAGE_LOCAL}'],dnl Quoted so that it is resolved at build time by shell/Makefile
         [yes], [SAGE_VENV='${SAGE_LOCAL}'/var/lib/sage/venv-python$PYTHON_VERSION]

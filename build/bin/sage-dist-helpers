@@ -289,6 +289,9 @@ sdh_pip_install() {
 }
 
 sdh_pip_editable_install() {
+    if [ "$SAGE_VENV_FLAGS" = "DISABLED" ]; then
+        return 0
+    fi
     echo "Installing $PKG_NAME (editable mode)"
     python3 -m pip install --verbose --no-deps --no-index --no-build-isolation --isolated --editable "$@" || \
         sdh_die "Error installing $PKG_NAME"
@@ -353,6 +356,10 @@ sdh_store_and_pip_install_wheel() {
     done
     sdh_store_wheel "$@"
 
+    if [ "$SAGE_VENV_FLAGS" = "DISABLED" ]; then
+        return 0
+    fi
+
     wheel_basename="${wheel##*/}"
     distname="${wheel_basename%%-*}"
 
@@ -391,6 +398,9 @@ sdh_store_and_pip_install_wheel() {
 }
 
 sdh_actually_pip_install_wheel() {
+    if [ "$SAGE_VENV_FLAGS" = "DISABLED" ]; then
+        return 0
+    fi
     distname=$1
     shift
     # Issue #32659: pip no longer reinstalls local wheels if the version is the same.
@@ -407,6 +417,9 @@ sdh_actually_pip_install_wheel() {
 }
 
 sdh_pip_uninstall() {
+    if [ "$SAGE_VENV_FLAGS" = "DISABLED" ]; then
+        return 0
+    fi
     sage-pip-uninstall "$@"
     if [ $? -ne 0 ]; then
         echo "Warning: pip exited with status $?" >&2
