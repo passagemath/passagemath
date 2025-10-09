@@ -1,1 +1,1 @@
-googletest
+$(MP_LIBRARY) googletest
