@@ -1,0 +1,6 @@
+cd src
+# see https://github.com/Homebrew/homebrew-core/pull/199639
+export am_cv_func_iconv_works=yes
+sdh_configure
+sdh_make
+sdh_make_install
