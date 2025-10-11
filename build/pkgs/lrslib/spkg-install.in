@@ -1,4 +1,5 @@
 cd src/
+export CFLAGS="$CFLAGS -std=gnu17"
 sdh_configure
 sdh_make
 sdh_make_install
