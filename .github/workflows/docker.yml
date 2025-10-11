@@ -27,6 +27,7 @@ on:
            "debian-bullseye",
            "debian-bookworm",
            "debian-trixie",
+           "debian-forky",
            "debian-sid",
            "linuxmint-20.2",
            "linuxmint-20.3",
