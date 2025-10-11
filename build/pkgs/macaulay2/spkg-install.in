@@ -18,6 +18,10 @@ if [ "$UNAME" = "Darwin" ]; then
     BUILD_OPTIONS="$BUILD_OPTIONS -DCMAKE_EXE_LINKER_FLAGS=-ld_classic"
 fi
 
+if [ -r "$SAGE_LOCAL/include/readline/readline.h" ]; then
+    BUILD_OPTIONS="$BUILD_OPTIONS -DREADLINE_ROOT_DIR=${SAGE_LOCAL}"
+fi
+
 export Eigen3_DIR=$SAGE_LOCAL
 export Flint_DIR=$SAGE_LOCAL
 export Factory_DIR=$SAGE_LOCAL
@@ -32,7 +36,6 @@ sdh_cmake -GNinja -S../.. -B. \
       -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
       -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
       -DWITH_OMP=OFF \
-      -DREADLINE_ROOT_DIR="${SAGE_LOCAL}" \
       $BUILD_OPTIONS
 if [ -n "$SAGE_MACAULAY2_TARGETS" ]; then
    # "Note that this target must be built separately, before proceeding to M2-binary."
