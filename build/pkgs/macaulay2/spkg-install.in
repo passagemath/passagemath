@@ -13,6 +13,11 @@ git clone https://github.com/Macaulay2/mathicgb.git M2/submodules/mathicgb
 
 BUILD_OPTIONS=$SAGE_MACAULAY2_BUILD_OPTIONS
 
+if [ "$UNAME" = "Darwin" ]; then
+    # https://github.com/igraph/igraph/issues/2394#issuecomment-1732292483
+    BUILD_OPTIONS="$BUILD_OPTIONS -DCMAKE_EXE_LINKER_FLAGS=-ld_classic"
+fi
+
 export Eigen3_DIR=$SAGE_LOCAL
 export Flint_DIR=$SAGE_LOCAL
 export Factory_DIR=$SAGE_LOCAL
