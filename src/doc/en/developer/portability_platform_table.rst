@@ -484,6 +484,60 @@
 .. |codespace-debian-trixie-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-debian-trixie-maximal%2Fdevcontainer.json
 
+.. |image-debian-forky-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-minimal-with-system-packages
+
+.. |image-debian-forky-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-minimal-configured
+
+.. |image-debian-forky-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-minimal-with-targets-pre
+
+.. |image-debian-forky-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-minimal-with-targets
+
+.. |image-debian-forky-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-minimal-with-targets-optional
+
+.. |codespace-debian-forky-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-debian-forky-minimal%2Fdevcontainer.json
+
+.. |image-debian-forky-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-standard-with-system-packages
+
+.. |image-debian-forky-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-standard-configured
+
+.. |image-debian-forky-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-standard-with-targets-pre
+
+.. |image-debian-forky-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-standard-with-targets
+
+.. |image-debian-forky-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-standard-with-targets-optional
+
+.. |codespace-debian-forky-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-debian-forky-standard%2Fdevcontainer.json
+
+.. |image-debian-forky-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-maximal-with-system-packages
+
+.. |image-debian-forky-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-maximal-configured
+
+.. |image-debian-forky-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-maximal-with-targets-pre
+
+.. |image-debian-forky-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-maximal-with-targets
+
+.. |image-debian-forky-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-forky-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-debian-forky-maximal-with-targets-optional
+
+.. |codespace-debian-forky-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-debian-forky-maximal%2Fdevcontainer.json
+
 .. |image-debian-sid-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-sid-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-debian-sid-minimal-with-system-packages
 
@@ -2858,6 +2912,17 @@
      - |codespace-debian-trixie-standard|
    * -    ‑*maximal*
      - |image-debian-trixie-maximal-with-system-packages| |image-debian-trixie-maximal-with-targets-pre|
+     -
+   * - **debian**-forky 
+       
+          ‑*minimal*
+     - |image-debian-forky-minimal-with-system-packages| |image-debian-forky-minimal-with-targets-pre| |image-debian-forky-minimal-with-targets| |image-debian-forky-minimal-with-targets-optional|
+     - |codespace-debian-forky-minimal|
+   * -    ‑*standard*
+     - |image-debian-forky-standard-with-system-packages| |image-debian-forky-standard-with-targets-pre| |image-debian-forky-standard-with-targets| |image-debian-forky-standard-with-targets-optional|
+     - |codespace-debian-forky-standard|
+   * -    ‑*maximal*
+     - |image-debian-forky-maximal-with-system-packages| |image-debian-forky-maximal-with-targets-pre|
      -
    * - **debian**-sid 
        
