@@ -22,6 +22,11 @@ if [ -r "$SAGE_LOCAL/include/readline/readline.h" ]; then
     BUILD_OPTIONS="$BUILD_OPTIONS -DREADLINE_ROOT_DIR=${SAGE_LOCAL}"
 fi
 
+machine=$($CC -dumpmachine)
+if [[ $machine =~ aarch64-* ]]; then
+    sed -i.bak '/quadmath/d' M2/Macaulay2/d/CMakeLists.txt
+fi
+
 export Eigen3_DIR=$SAGE_LOCAL
 export Flint_DIR=$SAGE_LOCAL
 export Factory_DIR=$SAGE_LOCAL
