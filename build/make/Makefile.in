@@ -826,7 +826,7 @@ $(1)-no-deps:
 	. '$$(SAGE_ROOT)/src/bin/sage-env' && \
 	. '$$(SAGE_ROOT)/build/bin/sage-build-env-config' && \
 	. '$$(SAGE_ROOT)/build/bin/sage-build-env' && \
-	sage-logger -p 'sage --pip install -r "$$(SAGE_ROOT)/build/pkgs/$(1)/requirements.txt"' '$$(SAGE_LOGS)/$(1).log'
+	sage-logger -p 'sage --pip install -v -r "$$(SAGE_ROOT)/build/pkgs/$(1)/requirements.txt"' '$$(SAGE_LOGS)/$(1).log'
 
 $(1)-uninstall:
 	-sage --pip uninstall --isolated --yes --no-input -r '$$(SAGE_ROOT)/build/pkgs/$(1)/requirements.txt'
