@@ -35,7 +35,7 @@ Mathematics
 ~~~~~~~~~~~
 
 EOF
-for PKG_BASE in $(sage-package list --has-file SPKG.rst --has-file math :standard: | grep -v '^sagemath_'); do
+for PKG_BASE in $(sage-package list --has-file SPKG.rst --has-file math :standard: | grep -E -v '^sage(lib|math_|_)'); do
     echo "* :ref:\`spkg_$PKG_BASE\`"
 done
 cat <<EOF
@@ -44,7 +44,7 @@ Front-end, graphics, document preparation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 EOF
-for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math --has-file front-end :standard: | grep -v '^sagemath_'); do
+for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math --has-file front-end :standard: | grep -E -v '^sage(lib|math_|_)'); do
     echo "* :ref:\`spkg_$PKG_BASE\`"
 done
 cat <<EOF
@@ -53,7 +53,7 @@ Other dependencies
 ~~~~~~~~~~~~~~~~~~
 
 EOF
-for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math --no-file front-end :standard: | grep -v '^sagemath_'); do
+for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math --no-file front-end :standard: | grep -E -v '^sage(lib|math_|_)'); do
     echo "* :ref:\`spkg_$PKG_BASE\`"
 done) > "$OUTPUT_DIR"/index_standard.rst
 (cat <<EOF
@@ -61,7 +61,7 @@ Mathematics
 ~~~~~~~~~~~
 
 EOF
-for PKG_BASE in $(sage-package list --has-file SPKG.rst --has-file math :optional: | grep -v '^sagemath_'); do
+for PKG_BASE in $(sage-package list --has-file SPKG.rst --has-file math :optional: | grep -E -v '^sage(lib|math_|_)'); do
     echo "* :ref:\`spkg_$PKG_BASE\`"
 done
 cat <<EOF
@@ -70,7 +70,7 @@ Front-end, graphics, document preparation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 EOF
-for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math --has-file front-end :optional: | grep -v '^sagemath_'); do
+for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math --has-file front-end :optional: | grep -E -v '^sage(lib|math_|_)'); do
     echo "* :ref:\`spkg_$PKG_BASE\`"
 done
 cat <<EOF
@@ -79,10 +79,10 @@ Other dependencies
 ~~~~~~~~~~~~~~~~~~
 
 EOF
-for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math --no-file front-end :optional: | grep -v '^sagemath_'); do
+for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math --no-file front-end :optional: | grep -E -v '^sage(lib|math_|_)'); do
     echo "* :ref:\`spkg_$PKG_BASE\`"
 done) > "$OUTPUT_DIR"/index_optional.rst
-for PKG_BASE in $(sage-package list --has-file SPKG.rst | grep '^sagemath_'); do
+for PKG_BASE in $(sage-package list --has-file SPKG.rst | grep -E '^sage(lib|math_|_)'); do
     echo "* :ref:\`spkg_$PKG_BASE\`"
 done > "$OUTPUT_DIR"/index_sagemath.rst
 (cat <<EOF
@@ -90,7 +90,7 @@ Mathematics
 ~~~~~~~~~~~
 
 EOF
-for PKG_BASE in $(sage-package list --has-file SPKG.rst --has-file math :experimental: | grep -v '^sagemath_'); do
+for PKG_BASE in $(sage-package list --has-file SPKG.rst --has-file math :experimental: | grep -E -v '^sage(lib|math_|_)'); do
     echo "* :ref:\`spkg_$PKG_BASE\`"
 done
 
@@ -100,7 +100,7 @@ Other dependencies
 ~~~~~~~~~~~~~~~~~~
 
 EOF
-for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math :experimental: | grep -v '^sagemath_'); do
+for PKG_BASE in $(sage-package list --has-file SPKG.rst --no-file math :experimental: | grep -E -v '^sage(lib|math_|_)'); do
     echo "* :ref:\`spkg_$PKG_BASE\`"
 done) > "$OUTPUT_DIR"/index_experimental.rst
 (cat <<EOF
