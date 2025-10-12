@@ -1,5 +1,5 @@
-sage_numerical_interactive_mip: Interactive mixed integer linear programming solver
-===================================================================================
+numerical_interactive_mip: Interactive mixed integer linear programming solver
+==============================================================================
 
 Description
 -----------
