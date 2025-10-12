@@ -92,8 +92,12 @@ Features
    sage/features/topcom
 
 
-Distribution Packages of the Sage Library
------------------------------------------
+pip-installable passagemath Packages
+------------------------------------
+
+The passagemath project publishes the Sage library in modularized
+form as pip-installable source and binary wheel packages. They
+can be built, installed, and tested separately.
 
 .. include:: index_sagemath.rst
 
