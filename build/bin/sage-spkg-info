@@ -1,7 +1,7 @@
 #!/usr/bin/env sage-bootstrap-python
 """
 Python rewrite of `build/bin/sage-spkg-info` with suggestions applied:
-  - Rewrote actually most of the original script because 
+  - Rewrote actually most of the original script because
   - Utilizes Python's logging (instead of print) for debug/info.
     - Re-use/initialize logging via sage_bootstrap if available.
   - Call `sage-print-system-package-command` instead of writing sudo lines.
@@ -49,7 +49,7 @@ SYSTEM_NAME_MAP = {
     "spkg": "Sage distribution",
     "void": "Void Linux",
 }
-# This is to map system names to display names 
+# This is to map system names to display names
 
 import argparse
 import logging
@@ -122,7 +122,7 @@ else:
         return subprocess_run(cmd, capture_output=True, text=text, check=check).stdout
 
 
-# For the purpose of better looking, Output formatting helpers 
+# For the purpose of better looking, Output formatting helpers
 # Splitted the helper into two small classes, RstFormatter and PlainFormatter
 class _BaseFormatter:
     """Common API For fixing output behavior."""
@@ -196,7 +196,7 @@ def process_spkg_file(pkg_base, pkg_scripts, fmt, out):
         content = re.sub('`passagemath.*\nAbout this pip-installable distribution package\n-+\n',
                          '', content, flags=re.DOTALL|re.MULTILINE)
 
-    # Tweaks to make identical to the bash script 
+    # Tweaks to make identical to the bash script
     content = re.sub(r'https://github\.com/sagemath/sage/issues/(\d+)',
                      r':issue:`\1`', content)
     content = re.sub(r'https://arxiv\.org/abs/cs/(\d+)',
@@ -218,7 +218,7 @@ def display_dependencies(pkg_base, fmt, out):
     print("------------", file=out)
     print("", file=out)
     print(result.strip(), file=out)
-    
+
 
 def display_version_info(pkg_base, fmt, out):
     try:
@@ -347,7 +347,7 @@ def emit_for_package(pkg_base, fmt, out_dir):
         # Package type
         if pkg.type:
             print("\nType\n----\n", file=out_stream)
-            print(pkg.type, file=out_stream)
+            print("{}".format(pkg.type), file=out_stream)
             print("", file=out_stream)  # blank line after the value
 
         # Dependencies (formatting handled elsewhere)
