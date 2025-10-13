@@ -11,6 +11,10 @@ if [ "x$SAGE_DEBUG" = "xyes" ]; then
     SINGULAR_CONFIGURE="$SINGULAR_CONFIGURE --enable-debug --disable-optimizationflags"
 fi
 
+# Patch out excessive use of -rpath
+# https://github.com/passagemath/passagemath/issues/1633
+sed -i.bak 's/-Wl,-rpath,[^ ]* //' configure
+
 config()
 {
     # configure notes (dates from Singular 3.x, maybe outdated for 4.x):
