@@ -35,6 +35,7 @@ jobs:
     with:
       stage: "1"
       timeout: 14400
+      max_parallel: 3
 
   stage-2:
     uses: ./.github/workflows/macos.yml
