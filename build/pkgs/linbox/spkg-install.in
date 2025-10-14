@@ -9,6 +9,11 @@ cd src/
 # disabled.  Therefore, disable it always.
 export CPPFLAGS="$CPPFLAGS -DDISABLE_COMMENTATOR"
 
+# From https://github.com/conda-forge/linbox-feedstock/blob/main/recipe/build.sh#L13C1-L16C1
+# givaro defined bool_constant but since C++17 there is also std::bool_constant which leads to ambiguity.
+# linbox needs std::binary_function which was removed in C++17.
+export CXXFLAGS="$CXXFLAGS -std=c++14"
+
 ###############################################################################
 # Configure, build and install LinBox:
 ###############################################################################
