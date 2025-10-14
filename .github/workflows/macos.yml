@@ -81,7 +81,7 @@ jobs:
     env:
       TOX_ENV: local-${{ matrix.osversion_xcodeversion_toxenv[2] }}${{ matrix.osversion_xcodeversion_toxenv[1] && format('-{0}', matrix.osversion_xcodeversion_toxenv[1]) }}
       LOCAL_ARTIFACT_NAME: sage-local-commit-${{ github.sha }}-tox-local-${{ matrix.osversion_xcodeversion_toxenv[2] }}-macos-${{ matrix.osversion_xcodeversion_toxenv[0] }}${{ matrix.osversion_xcodeversion_toxenv[1] && format('-{0}', matrix.osversion_xcodeversion_toxenv[1]) }}
-      LOGS_ARTIFACT_NAME: logs-commit-${{ github.sha }}-tox-local-${{ matrix.osversion_xcodeversion_toxenv[2] }}-macos-${{ matrix.osversion_xcodeversion_toxenv[0] }}${{ matrix.osversion_xcodeversion_toxenv[1] && format('-{0}', matrix.osversion_xcodeversion_toxenv[1]) }}
+      LOGS_ARTIFACT_NAME: logs-commit-${{ github.sha }}-tox-local-${{ matrix.osversion_xcodeversion_toxenv[2] }}-macos-${{ matrix.osversion_xcodeversion_toxenv[0] }}${{ matrix.osversion_xcodeversion_toxenv[1] && format('-{0}', matrix.osversion_xcodeversion_toxenv[1]) }}${{ inputs.stage && format('-{0}', inputs.stage) }}
     steps:
       - name: Check out SageMath
         uses: actions/checkout@v4
