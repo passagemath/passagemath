@@ -1,5 +1,8 @@
 cd src
 cp "$SAGE_ROOT"/config/config.* build-aux/
+
+export CXXFLAGS="$CXXFLAGS -std=gnu++14"
+
 sdh_configure
 
 # Don't run "make" at the top-level because the documentation build
