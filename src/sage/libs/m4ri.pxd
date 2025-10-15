@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-linbox
-# distutils: extra_compile_args = -std=c++17
+# distutils: extra_compile_args = -std=c++14
 # distutils: language = c++
 
 cdef extern from "m4ri/m4ri.h":
