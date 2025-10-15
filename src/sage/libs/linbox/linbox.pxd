@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-linbox
-# distutils: extra_compile_args = LINBOX_CFLAGS
+# distutils: extra_compile_args = LINBOX_CFLAGS -std=gnu++14
 # distutils: include_dirs = LINBOX_INCDIR
 # distutils: libraries = LINBOX_LIBRARIES
 # distutils: library_dirs = LINBOX_LIBDIR
