@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-standard-no-symbolics ~= 10.6.30.0
+passagemath-standard-no-symbolics == 10.6.31rc1
