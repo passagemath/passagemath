@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-linbox
+# distutils: extra_compile_args = -std=c++14
 ##############################################################################
 #       Copyright (C) 2010 Martin Albrecht <martinralbrecht@googlemail.com>
 #  Distributed under the terms of the GNU General Public License (GPL)

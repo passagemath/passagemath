@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-pari
-# distutils: extra_compile_args = GIVARO_CFLAGS -std=c++11
+# distutils: extra_compile_args = GIVARO_CFLAGS -std=c++17
 # distutils: include_dirs = GIVARO_INCDIR
 
 from libcpp.vector cimport vector
