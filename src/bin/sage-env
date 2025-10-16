@@ -295,6 +295,26 @@ if [ -n "$SAGE_LOCAL" ]; then
     # adding the gcc option -I $SAGE_LOCAL/include.
     [ -z "$CPATH" ] || CPATH=":${CPATH}"
     export CPATH="$SAGE_LOCAL/include${CPATH}"
+    # If any -I or -L options are already in CFLAGS etc. variables
+    # (as they are in conda environments), ensure that we override
+    # them by prepending our own paths, as CPATH etc. have lower precedence.
+    case "$LDFLAGS" in
+        *-L*)
+            export LDFLAGS="-L$SAGE_LOCAL/lib $LDFLAGS"
+            ;;
+    esac
+    case "$CFLAGS $CPPFLAGS $CXXFLAGS" in
+        *-I*)
+            export CFLAGS="-I$SAGE_LOCAL/include $CFLAGS"
+            export CPPFLAGS="-I$SAGE_LOCAL/include $CPPFLAGS"
+            export CXXFLAGS="-I$SAGE_LOCAL/include $CXXFLAGS"
+            ;;
+        *-isystem*)
+            export CFLAGS="-isystem $SAGE_LOCAL/include $CFLAGS"
+            export CPPFLAGS="-isystem $SAGE_LOCAL/include $CPPFLAGS"
+            export CXXFLAGS="-isystem $SAGE_LOCAL/include $CXXFLAGS"
+            ;;
+    esac
 fi
 
 if [ -n "$SAGE_LOCAL" ]; then
