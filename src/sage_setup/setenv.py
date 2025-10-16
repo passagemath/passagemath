@@ -34,6 +34,16 @@ def setenv():
         _environ_prepend('CPATH',        f'{SAGE_LOCAL}/include')
         _environ_prepend('LDFLAGS',      f'-L{SAGE_LOCAL}/lib -Wl,-rpath,{SAGE_LOCAL}/lib',
                          separator=' ')
+        # If any -I or -L options are already in CFLAGS etc. variables
+        # (as they are in conda environments), ensure that we override
+        # them by prepending our own paths, as CPATH etc. have lower precedence.
+        if any('-I' in os.environ.get(var, '') for var in ['CPPFLAGS', 'CFLAGS', 'CXXFLAGS']):
+            for var in ['CPPFLAGS', 'CFLAGS', 'CXXFLAGS']:
+                _environ_prepend(var, f'-I{SAGE_LOCAL}/include', separator=' ')
+        elif any('-isystem' in os.environ.get(var, '') for var in ['CPPFLAGS', 'CFLAGS', 'CXXFLAGS']):
+            for var in ['CPPFLAGS', 'CFLAGS', 'CXXFLAGS']:
+                _environ_prepend(var, f'-isystem {SAGE_LOCAL}/include', separator=' ')
+
         if platform.system() == 'Linux':
             _environ_prepend('LDFLAGS',      f'-Wl,-rpath-link,{SAGE_LOCAL}/lib',
                              separator=' ')
