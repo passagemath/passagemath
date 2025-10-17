@@ -1,1 +1,2 @@
 libxml2
+libxml2-devel
