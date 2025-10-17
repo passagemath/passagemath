@@ -1,1 +1,2 @@
 boost-devel
+libboost_regex-devel
