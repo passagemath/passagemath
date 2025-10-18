@@ -141,12 +141,12 @@ jobs:
             2-optional*)     export TARGETS_PRE="build/make/Makefile" TARGETS="build/make/Makefile"
                              targets_pattern="${{ inputs.stage }}"
                              targets_pattern="${targets_pattern#2-optional-}"
-                             export TARGETS_OPTIONAL=$( echo $(export PATH=build/bin:$PATH && sage-package list :optional: --has-file 'spkg-install.in|spkg-install|requirements.txt' --no-file huge|has_nonfree_dependencies |  grep -v sagemath_doc | grep "^[$targets_pattern]" ) )
+                             export TARGETS_OPTIONAL=$( echo $(export PATH=build/bin:$PATH && sage-package list :optional: --has-file 'spkg-install.in|spkg-install|requirements.txt' --no-file 'huge|has_nonfree_dependencies' |  grep -v sagemath_doc | grep "^[$targets_pattern]" ) )
                              ;;
             2-experimental*) export TARGETS_PRE="build/make/Makefile" TARGETS="build/make/Makefile"
                              targets_pattern="${{ inputs.stage }}"
                              targets_pattern="${targets_pattern#2-experimental-}"
-                             export TARGETS_OPTIONAL=$( echo $(export PATH=build/bin:$PATH && sage-package list :experimental: --has-file 'spkg-install.in|spkg-install|requirements.txt' --no-file huge|has_nonfree_dependencies |  grep -v sagemath_doc | grep "^[$targets_pattern]" ) )
+                             export TARGETS_OPTIONAL=$( echo $(export PATH=build/bin:$PATH && sage-package list :experimental: --has-file 'spkg-install.in|spkg-install|requirements.txt' --no-file 'huge|has_nonfree_dependencies' |  grep -v sagemath_doc | grep "^[$targets_pattern]" ) )
                              ;;
             *)               export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }} TARGETS_OPTIONAL="${{ inputs.targets_optional }}
                              ;;
