@@ -6,6 +6,9 @@ export CFLAGS=$CFLAGS_O3
 
 cd src
 
+# Try avoiding pthread deadlocks - https://github.com/passagemath/passagemath/issues/1684
+export OMP_NUM_THREADS=1
+
 $MAKE test-all
 
 if [ $? -ne 0 ]; then
