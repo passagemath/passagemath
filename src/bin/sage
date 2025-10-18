@@ -205,7 +205,7 @@ fi
 # build/bin/sage-site. See #29111; but OTOH #34627.
 
 build_sage() {
-    ( cd "$SAGE_ROOT" && make sagelib-no-deps ) || exit $?
+    (cd "$SAGE_ROOT" && make build) || exit $?
 }
 
 # Check for '-i' etc. before sourcing sage-env: running "make"
@@ -234,7 +234,7 @@ case "$1" in
         shift; set -- -n "$@"  # delegate to handling of "-n" below, after sourcing sage-env
         ;;
     -ba)
-        ( cd "$SAGE_ROOT" && make sagelib-clean )
+        (cd "$SAGE_ROOT" && make sagemath_environment-no-deps sagemath_objects-no-deps build)
         build_sage
         exit 0
         ;;
