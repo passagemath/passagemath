@@ -117,6 +117,99 @@ fplll_fp_map = {None: None,
                 'xd': 'dpe',
                 'rr': 'mpfr'}
 
+class GraverBasis:
+    r"""
+    Iterable module for the Graver basis of integer matrix.
+    
+    Provides iteration over the Graver basis vectors and an orthogonal range search method.
+    All elements are vectors in `ZZ^n`, init `n` is the number of columns of original matrix.
+    """
+    def __init__(self, A):
+        """
+        To compute the Graver basis of matrix A (over ZZ) and initialize.
+        
+        INPUT:
+        
+        - ``A`` -- a matrix over ZZ to compute the Graver basis.
+        
+        To use  the 4ti2 optional package to compute the Graver basis.
+        """
+        try:
+            # To import the 4ti2 interface (optional package)
+            from sage.interfaces.four_ti_2 import four_ti_2
+        except ImportError:
+            raise ImportError("The 4ti2 package is not installed. Please install it with 'sage -i 4ti2'.")
+        # To ensure A is an integer matrix (convert if necessary)
+        from sage.matrix.constructor import matrix
+        if A.base_ring() is not ZZ:
+            A = matrix(ZZ, A)
+        # To call 4ti2 to compute the Graver basis, init result is a matrix with basis vectors as rows
+        G = four_ti_2.graver(A)            # To run 4ti2's "graver" on A (requires 4ti2)
+        self._basis_matrix = G             # To store the resulting matrix of basis vectors (each row is a Graver vector)
+        self._nrows = G.nrows()            # number of Graver basis vectors
+        self._ncols = G.ncols()            # number of columns (same as A.ncols)
+    
+    def __iter__(self):
+        """To Iterate over the Graver basis vectors (each to return as a vector in ZZ^n)."""
+        for i in range(self._nrows):
+            yield self._basis_matrix.row(i)  # To return each row as a Sage vector (element of ZZ^n)
+    
+    def __len__(self):
+        """To return the number of vectors in the Graver basis."""
+        return self._nrows
+    
+    def __getitem__(self, index):
+        """
+        To Return a specific Graver basis vector or a slice of vectors.
+        
+        - If ``index`` is an integer, returns the corresponding Graver basis vector (as a vector in ZZ^n).
+        - If ``index`` is a slice, returns a list of Graver basis vectors in that range.
+        """
+        if isinstance(index, slice):
+            return [self._basis_matrix.row(i) for i in range(*index.indices(self._nrows))]
+        # integer index
+        if index < 0:
+            index += self._nrows
+        if index < 0 or index >= self._nrows:
+            raise IndexError("GraverBasis index out of range")
+        return self._basis_matrix.row(index)
+    
+    def orthogonal_range_search(self, l, u):
+        r"""
+        To Iterate over all Graver basis vectors `x` such that `l <= x <= u` (component-wise).
+        
+        INPUT:
+        
+        - ``l`` -- a lower bound (list or vector of length n).
+        - ``u`` -- an upper bound (list or vector of length n).
+        
+        OUTPUT: An iterator over all Graver basis vectors `x` satisfying `l_i \leq x_i \leq u_i` for all components i.
+        
+        EXAMPLE:
+        
+        If `G` is a GraverBasis, one can do::
+        
+            sage: for v in G.orthogonal_range_search([0,0,0], [2,2,2]):
+            ....:     print(v)
+        
+        to iterate over those Graver basis vectors bounded between `[0,0,0]` and `[2,2,2]` (inclusive).
+        """
+        l_vec = vector(ZZ, l)
+        u_vec = vector(ZZ, u)
+        if len(l_vec) != self._ncols or len(u_vec) != self._ncols:
+            raise ValueError(f"Bound vectors must have length {self._ncols} (the number of columns of the original matrix).")
+        # To Iterate and yield vectors within bounds
+        for i in range(self._nrows):
+            v = self._basis_matrix.row(i)
+            # To check component-wise bounds
+            within_bounds = True
+            for j in range(self._ncols):
+                if v[j] < l_vec[j] or v[j] > u_vec[j]:
+                    within_bounds = False
+                    break
+            if within_bounds:
+                yield v
+
 
 cdef class Matrix_integer_dense(Matrix_dense):
     r"""
@@ -838,6 +931,34 @@ cdef class Matrix_integer_dense(Matrix_dense):
         fmpz_mat_sub(M._matrix,self._matrix,(<Matrix_integer_dense> right)._matrix)
         sig_off()
         return M
+    def graver_basis(self):
+        r"""
+        To Compute the Graver basis of this integer matrix.
+        
+        To return an iterable object over the integer vectors of the Graver basis of `self`.
+        The result is a `GraverBasis` instance, which can be iterated to obtain each Graver basis vector (an element of `ZZ^n`).
+        This object supports range queries via the `orthogonal_range_search` method.
+        
+        OUTPUT: 
+        
+        - An instance of ``GraverBasis`` containing the Graver basis vectors of this matrix.
+        
+        .. NOTE:: This method requires the optional package 4ti2 to be installed.
+        
+        EXAMPLES::
+        
+            sage: A = matrix(ZZ, [[1, 2, 3]])
+            sage: G = A.graver_basis()  # optional - 4ti2
+            sage: list(G)    # Iterate over all Graver basis vectors
+            [ (2, -1, 0),
+              (3, 0, -1),
+              (1, 1, -1),
+              (1, -2, 1),
+              (0, 3, -2) ]
+            sage: list(G.orthogonal_range_search([0, 0, -1], [2, 1, 0]))  # vectors within given bounds
+            [ (1, 1, -1) ]
+        """
+        return GraverBasis(self)
 
     def __pow__(sself, n, dummy):
         r"""
