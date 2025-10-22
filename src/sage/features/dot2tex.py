@@ -35,7 +35,7 @@ class dot2tex(PythonModule):
             sage: isinstance(dot2tex(), dot2tex)
             True
         """
-        PythonModule.__init__(self, 'dot2tex', spkg='dot2tex')
+        PythonModule.__init__(self, 'dot2tex', spkg='dot2tex', type='standard')
 
 
 def all_features():
