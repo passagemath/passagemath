@@ -181,9 +181,9 @@ jobs:
               pip download -v --only-binary :all: --no-deps -d $WHEELHOUSE pas$pkg
           fi
           # Use passagemath-conf wheelhouse for missing wheels of third-party projects
-          # case "${{ matrix.os }}" in
-          #     ubuntu*-arm) export SAGE_CONF_TARGETS="gmpy2 memory_allocator";;
-          # esac
+          case "${{ matrix.os }}" in
+              ubuntu*-arm) export SAGE_CONF_TARGETS="gmpy2 memory_allocator";;
+          esac
           if [ -n "$SAGE_CONF_TARGETS" ]; then
               case "${{ matrix.os }}" in
                   ubuntu*) sudo apt-get update
