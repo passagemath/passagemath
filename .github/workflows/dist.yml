@@ -344,6 +344,8 @@ jobs:
       # Non-Python packages to install as spkgs
       TARGETS_PRE: _cibuildwheel_local_a pip ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
+      # Disable free-threading builds on all platforms
+      CIBW_SKIP: "cp3??t-*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
@@ -743,6 +745,8 @@ jobs:
       # Non-Python packages to install as spkgs
       TARGETS_PRE: _cibuildwheel_local_b ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
+      # Disable free-threading builds on all platforms
+      CIBW_SKIP: "cp3??t-*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
