@@ -23,7 +23,7 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
-requires-python = ">=3.10, <3.15"
+requires-python = ">=3.11, <3.15"
 
 [project.urls]
 "release notes" = "https://github.com/passagemath/passagemath/releases"
