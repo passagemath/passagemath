@@ -73,7 +73,7 @@ Subsystem for Linux (WSL) or virtualization.
 |------------------------------------------------------------------------------|-----------|-------------------|-------------------|---------------|------------------------|
 | [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9-3.12  | GCC 8.4-14, clang | Linux, macOS, WSL | x86_64, ARM   | EOL 2024-12            |
 | [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9-3.13  | GCC 9-14, clang   | Linux, macOS, WSL | x86_64, ARM   | oldstable, EOL 2025-10 |
-| 10.6.x (main)                                                                | 3.10-3.13 | GCC 9-15, clang   | Linux, macOS, WSL | x86_64, ARM   | stable                 |
+| 10.6.x (main)                                                                | 3.10-3.14 | GCC 9-15, clang   | Linux, macOS, WSL | x86_64, ARM   | stable                 |
 |                                                                              |           | mingw32 + MSVC    | Windows (partial) | x86_64        |                        |
 | 10.7.x ([#1051](https://github.com/passagemath/passagemath/pull/1051))       | 3.11-3.14 |                   |                   |               | planned                |
 
@@ -104,6 +104,19 @@ $ rehash
 (Activating the virtual environment only takes effect for the current terminal session;
 repeat the last command whenever you open a new terminal session in which you wish to
 use passagemath.)
+
+For Python 3.14,
+[some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
+Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
+
+```bash session
+(passagemath-venv) $ export SAGE_CONF_TARGETS="cysignals"
+(passagemath-venv) $ export SAGE_CONF_CONFIGURE_ARGS="--disable-gcc-version-check"
+(passagemath-venv) $ pip cache remove passagemath_conf
+(passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
+(passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
+(passagemath-venv) $ export PIP_PREFER_BINARY=1
+```
 
 Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
 
