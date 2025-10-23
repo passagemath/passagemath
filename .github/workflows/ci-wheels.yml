@@ -16,6 +16,8 @@ on:
         required: true
       oss:
         description: 'OSs to test (JSON list; default: all)'
+        default: >-
+          ['ubuntu-latest']
         required: false
   workflow_call:
     inputs:
