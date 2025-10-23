@@ -1,2 +1,3 @@
 # This file is updated on every release by the update-version script
-passagemath-environment == 10.6.31rc3
+passagemath-environment >= 10.6.31rc3
+passagemath-environment < 10.6.31rc4
