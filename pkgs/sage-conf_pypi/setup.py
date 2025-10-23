@@ -1,5 +1,6 @@
 import os
 import sys
+import shlex
 import shutil
 import sysconfig
 import platform
@@ -102,7 +103,8 @@ class build_py(setuptools_build_py):
             #   (that use native libraries shared with other packages).
             SETMAKE = 'if [ -z "$MAKE" ]; then export MAKE="make -j$(PATH=build/bin:$PATH build/bin/sage-build-num-threads | cut -d" " -f 2)"; fi'
             TARGETS = 'base'
-            cmd = f'cd {SAGE_ROOT} && ({SETENV}; {SETMAKE} && make V=0 ${{SAGE_CONF_TARGETS-{TARGETS}}})'
+            # Setting PYTHONPATH so that the isolated build environment is pulled in
+            cmd = f'cd {SAGE_ROOT} && ({SETENV}; {SETMAKE} && export PYTHONPATH={shlex.quote(os.pathsep.join(sys.path))} && make V=0 ${{SAGE_CONF_TARGETS-{TARGETS}}})'
             print(f"Running {cmd}", flush=True)
             if os.system(cmd) != 0:
                 raise SetupError(f"make ${{SAGE_CONF_TARGETS-{TARGETS}}} failed")
