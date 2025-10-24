@@ -309,7 +309,7 @@ jobs:
           name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-noarch-wheels
           path: ./logs
 
-  build_wheels:
+  build_wheels_side_a:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }} side A
     runs-on: ${{ matrix.os }}
     needs: [sdists_for_pypi, noarch_wheels_for_pypi]
@@ -709,11 +709,11 @@ jobs:
           name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
           path: ./logs
 
-  build_optional_wheels:
+  build_wheels_side_b:
     name: wheels ${{ matrix.build }}*_${{ matrix.arch }} side B
     if: (success() || failure())
     runs-on: ${{ matrix.os }}
-    needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels]
+    needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels_side_a]
     strategy:
       fail-fast: false
       matrix:
@@ -1183,7 +1183,7 @@ jobs:
 
   upload_wheels:
     # This needs to be a separate job because pypa/gh-action-pypi-publish cannot run on macOS
-    needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels, build_optional_wheels]
+    needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels_side_a, build_wheels_side_b]
     if: (success() || failure()) && startsWith(github.ref, 'refs/tags')
     uses: ./.github/workflows/pypi-publish.yml
     with:
@@ -1198,7 +1198,7 @@ jobs:
     secrets: inherit
 
   tox:
-    needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels, build_optional_wheels]
+    needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels_side_a, build_wheels_side_b]
     if: (success() || failure())
     uses: ./.github/workflows/ci-wheels.yml
     with:
