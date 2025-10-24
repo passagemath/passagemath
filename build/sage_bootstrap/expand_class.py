@@ -75,7 +75,7 @@ class PackageClass(object):
                 return
             try:
                 pkg = Package(package_name)
-            except FileNotFoundError:
+            except (ValueError, FileNotFoundError):
                 # Silently ignore unknown packages,
                 # substitutions such as $(BLAS) $(PYTHON),
                 # and optional dependencies of the form $(find-string ...).
