@@ -802,7 +802,7 @@ $(1): $(3) $(2)
 $(1)-ensure: $$(inst_$(1))
 
 $(1)-no-deps:
-	$(AM_V_at)sage-logger -p 'sage --pip install -r "$$(SAGE_ROOT)/build/pkgs/$(1)/requirements.txt"' '$$(SAGE_LOGS)/$(1).log'
+	$(AM_V_at)sage-logger -p 'sage --pip install -v -r "$$(SAGE_ROOT)/build/pkgs/$(1)/requirements.txt"' '$$(SAGE_LOGS)/$(1).log'
 
 $(1)-uninstall:
 	-sage --pip uninstall --isolated --yes --no-input -r '$$(SAGE_ROOT)/build/pkgs/$(1)/requirements.txt'

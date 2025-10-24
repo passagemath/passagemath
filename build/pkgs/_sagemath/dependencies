@@ -1,0 +1,1 @@
+$(SCRIPTS) boost_cropped $(BLAS) eclib ecm flint fplll libgd gap givaro glpk gsl iml lcalc lrcalc libbraiding libhomfly libpng linbox m4ri m4rie mpc mpfi mpfr $(MP_LIBRARY) ntl pari ppl primesieve primecount rw  singular symmetrica $(PCFILES)
