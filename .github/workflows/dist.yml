@@ -554,48 +554,9 @@ jobs:
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
-        ####### sagemath-modules and what depends on it
-
-      - name: sagemath-modules
-        id:   sagemath-modules
-        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_modules
-
-      - name: sagemath-plot
-        id:   sagemath-plot
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_plot
-
-      - name: sagemath-polyhedra
-        id:   sagemath-polyhedra
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_polyhedra
-
-      - name: sagemath-ntl
-        id:   sagemath-ntl
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_ntl
-
-      - name: sagemath-flint
-        id:   sagemath-flint
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_flint
-
-      - name: sagemath-pari
-        id:   sagemath-pari
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          . ./.homebrew-build-env 2> /dev/null || :
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_pari
-
       - name: sagemath-cddlib
         id:   sagemath-cddlib
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cddlib
         env:
@@ -603,7 +564,7 @@ jobs:
 
       - name: sagemath-nauty
         id:   sagemath-nauty
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_nauty
         env:
@@ -611,33 +572,21 @@ jobs:
 
       - name: sagemath-libecm
         id:   sagemath-libecm
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_libecm
 
-      - name: sagemath-lcalc
-        id:   sagemath-lcalc
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_lcalc
-
       - name: sagemath-libbraiding
         id:   sagemath-libbraiding
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_libbraiding
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
-      - name: sagemath-gap
-        id:   sagemath-gap
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap
-
       - name: sagemath-gap-pkg-caratinterface
         id:   sagemath-gap-pkg-caratinterface
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_caratinterface
         env:
@@ -645,7 +594,7 @@ jobs:
 
       - name: sagemath-gap-pkg-cddinterface
         id:   sagemath-gap-pkg-cddinterface
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_cddinterface
         env:
@@ -653,7 +602,7 @@ jobs:
 
       - name: sagemath-gap-pkg-curlinterface
         id:   sagemath-gap-pkg-curlinterface
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_curlinterface
         env:
@@ -661,7 +610,7 @@ jobs:
 
       - name: sagemath-gap-pkg-float
         id:   sagemath-gap-pkg-float
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_float
         env:
@@ -669,7 +618,7 @@ jobs:
 
       - name: sagemath-gap-pkg-normalizinterface
         id:   sagemath-gap-pkg-normalizinterface
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_normalizinterface
         env:
@@ -677,23 +626,73 @@ jobs:
 
       - name: sagemath-gap-pkg-semigroups
         id:   sagemath-gap-pkg-semigroups
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_semigroups
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
-      - name: sagemath-groups
-        id:   sagemath-groups
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_groups
-
       - name: sagemath-cliquer
         id:   sagemath-cliquer
-        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cliquer
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: sagemath-rubiks
+        id:   sagemath-rubiks
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_rubiks
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: sagemath-plantri
+        id:   sagemath-plantri
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_plantri
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: sagemath-buckygen
+        id:   sagemath-buckygen
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_buckygen
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: sagemath-benzene
+        id:   sagemath-benzene
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_benzene
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: sagemath-glucose
+        id:   sagemath-glucose
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_glucose
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: sagemath-kissat
+        id:   sagemath-kissat
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_kissat
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: sagemath-tdlib
+        id:   sagemath-tdlib
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_tdlib
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
@@ -891,8 +890,13 @@ jobs:
               (cd unpacked && tar xfz - && base=${sdist#dist/} && mv ${base%.tar.gz} ${base%-*}) < $sdist
           done
 
+      # Side B: sagemath-modules (hence dependency on BLAS and gfortran) and what depends on it
 
-
+      - name: sagemath-modules
+        id:   sagemath-modules
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_modules
 
       - name: Save SAGE_LOCAL cache
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
@@ -916,21 +920,77 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: sage-local-artifact/sage-local.tar
-          name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
+          name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
 
+      - name: sagemath-plot
+        id:   sagemath-plot
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_plot
+
+      - name: sagemath-polyhedra
+        id:   sagemath-polyhedra
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_polyhedra
+
+      - name: sagemath-ntl
+        id:   sagemath-ntl
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_ntl
+
+      - name: sagemath-flint
+        id:   sagemath-flint
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_flint
+
+      - name: sagemath-pari
+        id:   sagemath-pari
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          . ./.homebrew-build-env 2> /dev/null || :
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_pari
+
+      - name: sagemath-lcalc
+        id:   sagemath-lcalc
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_lcalc
+
+      - name: sagemath-sympow
+        id:   sagemath-sympow
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_sympow
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: sagemath-gap
+        id:   sagemath-gap
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap
+
+      - name: sagemath-groups
+        id:   sagemath-groups
+        if:   (success() || failure()) && steps.sagemath-modules.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_groups
 
 
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
           path: ./wheelhouse/*.whl
 
       - name: Upload logs artifact
         uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
+          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
           path: ./logs
 
 
@@ -968,7 +1028,7 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2
       # Non-Python packages to install as spkgs
-      TARGETS_PRE: _cibuildwheel_local_b ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
+      TARGETS_PRE: _cibuildwheel_local_c ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
       # Disable free-threading builds on all platforms
       CIBW_SKIP: "cp3??t-*"
@@ -1144,7 +1204,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: sage-local-artifact/sage-local.tar
-          name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
+          name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-c-wheels
 
         # Standard packages
 
@@ -1216,14 +1276,6 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_eclib
 
-      - name: sagemath-sympow
-        id:   sagemath-sympow
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_sympow
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
       # Optional packages
 
       - name: sagemath-gfan
@@ -1266,14 +1318,6 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_sirocco
 
-      - name: sagemath-tdlib
-        id:   sagemath-tdlib
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_tdlib
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
       - name: sagemath-msolve
         id:   sagemath-msolve
         if:   (success() || failure())
@@ -1312,70 +1356,6 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cmr
 
-      - name: sagemath-frobby
-        id:   sagemath-frobby
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_frobby
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-qepcad
-        id:   sagemath-qepcad
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_qepcad
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-rubiks
-        id:   sagemath-rubiks
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_rubiks
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-plantri
-        id:   sagemath-plantri
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_plantri
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-buckygen
-        id:   sagemath-buckygen
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_buckygen
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-benzene
-        id:   sagemath-benzene
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_benzene
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-glucose
-        id:   sagemath-glucose
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_glucose
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-kissat
-        id:   sagemath-kissat
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_kissat
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
       - name: sagemath-kenzo
         id:   sagemath-kenzo
         if:   (success() || failure())
@@ -1392,17 +1372,36 @@ jobs:
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
+      # Broken on some platforms
+
+      - name: sagemath-frobby
+        id:   sagemath-frobby
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_frobby
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+      - name: sagemath-qepcad
+        id:   sagemath-qepcad
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_qepcad
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
+
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-c-wheels
           path: ./wheelhouse/*.whl
 
       - name: Upload logs artifact
         uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-optional-wheels
+          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-c-wheels
           path: ./logs
 
 
