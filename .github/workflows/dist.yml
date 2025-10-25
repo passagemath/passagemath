@@ -785,7 +785,7 @@ jobs:
             build: macosx
     env:
       # SPKGs to install as system packages
-      SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2
+      SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
       # Non-Python packages to install as spkgs
       TARGETS_PRE: _cibuildwheel_local_b ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
@@ -1081,7 +1081,7 @@ jobs:
             build: macosx
     env:
       # SPKGs to install as system packages
-      SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2
+      SPKGS: _bootstrap _prereq liblzma bzip2 info libxml2 libuuid
       # Non-Python packages to install as spkgs
       TARGETS_PRE: _cibuildwheel_local_c ${{ startsWith(matrix.os, 'ubuntu') && 'patchelf' || '' }}
       CIBW_BUILD: "*${{ matrix.build }}*"
