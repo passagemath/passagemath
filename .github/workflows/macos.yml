@@ -25,18 +25,19 @@ on:
         default: >-
           [["15-intel", "",           "homebrew-macos-usrlocal-minimal"],
            ["15-intel", "",           "homebrew-macos-usrlocal-standard"],
+           ["15-intel", "",           "conda-forge-macos-minimal"],
            ["15-intel", "",           "conda-forge-macos-standard"],
            ["14",       "",           "homebrew-macos-opthomebrew-minimal"],
            ["14",       "",           "homebrew-macos-opthomebrew-standard"],
+           ["14",       "",           "conda-forge-macos-minimal"],
            ["14",       "",           "conda-forge-macos-standard"],
            ["15",       "",           "homebrew-macos-opthomebrew-minimal"],
            ["15",       "",           "homebrew-macos-opthomebrew-standard"],
+           ["15",       "",           "conda-forge-macos-minimal"],
            ["15",       "",           "conda-forge-macos-standard"],
-           ["15",       "xcode_26.0", "homebrew-macos-opthomebrew-minimal"],
-           ["15",       "xcode_26.0", "homebrew-macos-opthomebrew-standard"],
-           ["15",       "xcode_26.0", "conda-forge-macos-standard"],
            ["26",       "",           "homebrew-macos-opthomebrew-minimal"],
            ["26",       "",           "homebrew-macos-opthomebrew-standard"],
+           ["26",       "",           "conda-forge-macos-minimal"]]
            ["26",       "",           "conda-forge-macos-standard"]]
         type: string
       extra_sage_packages:
