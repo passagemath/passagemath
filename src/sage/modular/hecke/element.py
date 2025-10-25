@@ -25,10 +25,7 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-try:
-    from typing import Self  # type: ignore (Python >= 3.11)
-except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.10)
+from typing import Self
 
 from sage.structure.element import ModuleElement
 from sage.structure.richcmp import op_NE, richcmp
