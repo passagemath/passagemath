@@ -91,7 +91,7 @@ SPKG_lins=gap_packages
 SPKG_loops=gap_packages
 SPKG_mapclass=gap_packages
 SPKG_nq=gap_packages
-SPKG_normalizinterface=gap_packages
+SPKG_normalizinterface=gap_pkg_normalizinterface
 SPKG_orb=gap_packages
 SPKG_packagemanager=gap
 SPKG_polenta=gap                        # one of the packages autoloaded in the default GAP config
@@ -137,20 +137,22 @@ export CFLAGS="$CFLAGS -std=gnu17 -Wno-implicit-function-declaration"
                  --add-package-config-float "--with-fplll=$SAGE_LOCAL --with-mpc=$SAGE_LOCAL --with-mpfi=$SAGE_LOCAL --with-mpfr=$SAGE_LOCAL" \
                  $PACKAGES
 
-# Now build all GAP packages unclaimed by an SPKG, in non-strict mode.
-PACKAGES=
-for pkg in *; do
-    if [ -r $pkg/PackageInfo.g ]; then
-        eval SPKG=\${SPKG_$pkg}
-        if [ "$SPKG" = "" ]; then
-            PACKAGES="$PACKAGES $pkg"
+if [ "gap_packages" = "$PKG_BASE" ]; then
+    # Now build all GAP packages unclaimed by an SPKG, in non-strict mode.
+    PACKAGES=
+    for pkg in *; do
+        if [ -r $pkg/PackageInfo.g ]; then
+            eval SPKG=\${SPKG_$pkg}
+            if [ "$SPKG" = "" ]; then
+                PACKAGES="$PACKAGES $pkg"
+            fi
         fi
-    fi
-done
-ALL_PACKAGES="$ALL_PACKAGES $PACKAGES"
+    done
+    ALL_PACKAGES="$ALL_PACKAGES $PACKAGES"
 
-"$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" --no-strict \
-                 $PACKAGES
+    "$BUILDPACKAGES" --no-color --with-gaproot "$GAP_ROOT" --no-strict \
+                     $PACKAGES
+fi
 
 # Install all built packages.
 
