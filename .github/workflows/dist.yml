@@ -352,7 +352,7 @@ jobs:
       CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.15' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
-        (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
+        (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals ; python_version>='3.14'" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
       # Environment during wheel build
       CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include LIBRARY_PATH=$(pwd)/prefix/lib PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal CURL_CONFIGURE='--without-zstd --without-brotli --without-libidn2' LINBOX_CONFIGURE=--without-ntl SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
@@ -806,7 +806,7 @@ jobs:
       CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.15' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
-        (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
+        (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals ; python_version>='3.14'" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
       # Environment during wheel build
       CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include LIBRARY_PATH=$(pwd)/prefix/lib PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal CURL_CONFIGURE='--without-zstd --without-brotli --without-libidn2' GIAC_CONFIGURE=--disable-ntl LINBOX_CONFIGURE=--without-ntl SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
@@ -1115,7 +1115,7 @@ jobs:
       CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.15' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
-        (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
+        (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals ; python_version>='3.14'" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
       # Environment during wheel build
       CIBW_ENVIRONMENT: "PATH=$(pwd)/prefix/bin:$PATH CPATH=$(pwd)/prefix/include LIBRARY_PATH=$(pwd)/prefix/lib PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal CURL_CONFIGURE='--without-zstd --without-brotli --without-libidn2' GIAC_CONFIGURE=--disable-ntl LINBOX_CONFIGURE=--without-ntl SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off PIP_CONSTRAINT=$(pwd)/constraints.txt PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist SAGE_NUM_THREADS=6 ${{ startsWith(matrix.os, 'macos') && 'FC=gfortran LDFLAGS=\"-Wl,-ld_classic -Wl,-headerpad_max_install_names $LDFLAGS\"' || '' }}"
       # Without setting LD_LIBRARY_PATH, we get Cannot repair wheel, because required library "libm4ri-0.0.20200125.so" could not be located
