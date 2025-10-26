@@ -3,6 +3,9 @@ unset MSYS
 
 cd src
 
+# Use newer version of config.guess and config.sub (see Github issue #19713)
+cp "$SAGE_ROOT"/config/config.* .
+
 sdh_configure LIBS="`pkg-config --libs-only-l cblas` -lm" \
               LDFLAGS="$LDFLAGS `pkg-config --libs-only-L cblas`" \
               CPPFLAGS="$CPPFLAGS `pkg-config --cflags-only-I cblas`" \
