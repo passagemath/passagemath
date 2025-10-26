@@ -1229,6 +1229,12 @@ jobs:
               (cd unpacked && tar xfz - && base=${sdist#dist/} && mv ${base%.tar.gz} ${base%-*}) < $sdist
           done
 
+      - name: sagemath-singular
+        id:   sagemath-singular
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_singular
+
       - name: Save SAGE_LOCAL cache
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: actions/cache/save@v4
@@ -1254,12 +1260,6 @@ jobs:
           name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-c-wheels
 
         # Standard packages
-
-      - name: sagemath-singular
-        id:   sagemath-singular
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_singular
 
       - name: sagemath-schemes
         id:   sagemath-schemes
