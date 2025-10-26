@@ -15,12 +15,16 @@ Utility to manage lists of packages
 # ****************************************************************************
 
 import logging
+import re
+
 from sage_bootstrap.package import Package
 
 log = logging.getLogger()
 
 
 class PackageClass(object):
+
+    SUBSTITUTE = re.compile(r'\$\((?P<variable>.*)\)')
 
     def __init__(self, *package_names_or_classes, **filters):
         self.__names = set()
@@ -73,6 +77,12 @@ class PackageClass(object):
         def include_recursive_dependencies(names, package_name):
             if package_name in names:
                 return
+            m = self.SUBSTITUTE.fullmatch(package_name)
+            if m:
+                package_name = {'PYTHON': 'python3',
+                                'MP_LIBRARY': 'gmp',
+                                'BLAS': 'openblas'}.get(m.group('variable'),
+                                                        package_name)
             try:
                 pkg = Package(package_name)
             except (ValueError, FileNotFoundError):
