@@ -740,7 +740,8 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_brial
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload wheels artifact
+        uses: actions/upload-artifact@v4
         if:   always()
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
@@ -1035,7 +1036,8 @@ jobs:
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_eclib
 
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload wheels artifact
+        uses: actions/upload-artifact@v4
         if:   always()
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
@@ -1396,7 +1398,8 @@ jobs:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload wheels artifact
+        uses: actions/upload-artifact@v4
         if:   always()
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-c-wheels
