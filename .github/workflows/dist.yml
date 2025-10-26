@@ -562,6 +562,14 @@ jobs:
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
+      - name: sagemath-latte-4ti2
+        id:   sagemath-latte-4ti2
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_latte_4ti2
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
       - name: sagemath-nauty
         id:   sagemath-nauty
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
@@ -1035,6 +1043,18 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_eclib
 
+      - name: sagemath-cmr
+        id:   sagemath-cmr
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cmr
+
+      - name: sagemath-meataxe
+        id:   sagemath-meataxe
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_meataxe
+
 
       - name: Upload wheels artifact
         uses: actions/upload-artifact@v4
@@ -1313,12 +1333,6 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_fricas
 
-      - name: sagemath-meataxe
-        id:   sagemath-meataxe
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_meataxe
-
       - name: sagemath-sirocco
         id:   sagemath-sirocco
         if:   (success() || failure())
@@ -1332,20 +1346,6 @@ jobs:
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_msolve
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-latte-4ti2
-        id:   sagemath-latte-4ti2
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_latte_4ti2
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-cmr
-        id:   sagemath-cmr
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cmr
 
       - name: sagemath-kenzo
         id:   sagemath-kenzo
