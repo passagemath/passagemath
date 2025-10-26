@@ -743,14 +743,14 @@ jobs:
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
           path: ./wheelhouse/*.whl
 
       - name: Upload logs artifact
         uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
           path: ./logs
 
   build_wheels_side_b: ################################################################
@@ -838,10 +838,10 @@ jobs:
           name: noarch-wheels
           path: dist
 
-      - name: Download wheels
+      - name: Download wheels side A
         uses: actions/download-artifact@v4
         with:
-          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
           path: dist
 
       - name: Retrieve configure tarball cache
@@ -1134,10 +1134,16 @@ jobs:
           name: noarch-wheels
           path: dist
 
-      - name: Download wheels
+      - name: Download wheels side A
         uses: actions/download-artifact@v4
         with:
-          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
+          path: dist
+
+      - name: Download wheels side B
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
           path: dist
 
       - name: Retrieve configure tarball cache
