@@ -184,7 +184,7 @@ AC_DEFUN([SAGE_SPKG_FINALIZE], [dnl
     dnl trees.  For example, if we decide to create a separate tree for a venv with the
     dnl Jupyter notebook, then packages such as jupyter_core would have to be installed into
     dnl two trees.
-    SAGE_PACKAGE_TREES="${SAGE_PACKAGE_TREES}$(printf '\ntrees_')SPKG_NAME = SPKG_TREE_VAR"
+    AS_VAR_APPEND([SAGE_PACKAGE_TREES], ["$(printf '\ntrees_')SPKG_NAME = SPKG_TREE_VAR"])
 
     dnl Determine whether it is installed already
     AS_VAR_SET([SPKG_INSTALLED_VERSION], [])
@@ -280,7 +280,7 @@ AC_DEFUN([SAGE_SPKG_FINALIZE], [dnl
         uninstall_message=
     ])dnl
     dnl
-    SAGE_PACKAGE_VERSIONS="${SAGE_PACKAGE_VERSIONS}$(printf '\nvers_')SPKG_NAME = ${SPKG_VERSION}"
+    AS_VAR_APPEND([SAGE_PACKAGE_VERSIONS], ["$(printf '\nvers_')SPKG_NAME = ${SPKG_VERSION}"])
     dnl
         AS_VAR_PUSHDEF([sage_spkg_install], [sage_spkg_install_]SPKG_NAME)dnl
         AS_VAR_PUSHDEF([sage_require], [sage_require_]SPKG_NAME)dnl
@@ -328,7 +328,7 @@ AC_DEFUN([SAGE_SPKG_FINALIZE], [dnl
         AS_VAR_POPDEF([sage_spkg_install])dnl
     dnl
     m4_case(in_sdist, [yes], [dnl
-        SAGE_SDIST_PACKAGES="${SAGE_SDIST_PACKAGES} \\$(printf '\n    ')SPKG_NAME"
+        AS_VAR_APPEND([SAGE_SDIST_PACKAGES], [" \\$(printf '\n    ')SPKG_NAME"])
     ])
     dnl
     spkg_line=" \\$(printf '\n    ')SPKG_NAME"
@@ -346,18 +346,18 @@ AC_DEFUN([SAGE_SPKG_FINALIZE], [dnl
     AS_VAR_APPEND([BUILD_DEPS], [" | $order_only_deps_]SPKG_NAME["])
     AS_VAR_COPY([DEPS], [runtime_deps_]SPKG_NAME)
     AS_VAR_COPY([CHECK_DEPS], [check_deps_]SPKG_NAME)
-    SAGE_PACKAGE_DEPENDENCIES="${SAGE_PACKAGE_DEPENDENCIES}$(printf '\nbuild_deps_')SPKG_NAME = ${BUILD_DEPS}$(printf '\ndeps_')SPKG_NAME = ${DEPS}$(printf '\ncheck_deps_')SPKG_NAME = ${CHECK_DEPS}"
+    AS_VAR_APPEND([SAGE_PACKAGE_DEPENDENCIES], ["$(printf '\nbuild_deps_')SPKG_NAME = ${BUILD_DEPS}$(printf '\ndeps_')SPKG_NAME = ${DEPS}$(printf '\ncheck_deps_')SPKG_NAME = ${CHECK_DEPS}"])
     dnl
     dnl Determine package build rules
     m4_case(SPKG_SOURCE,
       [pip], [dnl
-        SAGE_PIP_PACKAGES="${SAGE_PIP_PACKAGES} \\$(printf '\n    ')SPKG_NAME"
+        AS_VAR_APPEND([SAGE_PIP_PACKAGES], [" \\$(printf '\n    ')SPKG_NAME"])
       ],
       [normal], [dnl
-        SAGE_NORMAL_PACKAGES="${SAGE_NORMAL_PACKAGES} \\$(printf '\n    ')SPKG_NAME"
+        AS_VAR_APPEND([SAGE_NORMAL_PACKAGES], [" \\$(printf '\n    ')SPKG_NAME"])
       ],
       [dnl script|none
-        SAGE_SCRIPT_PACKAGES="${SAGE_SCRIPT_PACKAGES} \\$(printf '\n    ')SPKG_NAME"
+        AS_VAR_APPEND([SAGE_SCRIPT_PACKAGES], [" \\$(printf '\n    ')SPKG_NAME"])
     ])dnl
     dnl
     m4_popdef([SPKG_TREE_VAR])dnl
