@@ -1,1 +1,1 @@
-ccache libpng gmp mpfr mpc m4ri m4rie gsl mpfi flint ntl polytopes_db pari xeus_gp gp2c lcalc sympow gap gap_packages
+ccache libpng gmp mpfr mpc m4ri m4rie gsl mpfi flint ntl polytopes_db givaro pari xeus_gp gp2c lcalc sympow gap gap_packages m4ri m4rie libgd iml linbox eclib
