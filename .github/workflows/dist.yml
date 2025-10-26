@@ -562,6 +562,14 @@ jobs:
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
+      - name: sagemath-latte-4ti2
+        id:   sagemath-latte-4ti2
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_latte_4ti2
+        env:
+          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
+
       - name: sagemath-nauty
         id:   sagemath-nauty
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
@@ -740,17 +748,18 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_brial
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload wheels artifact
+        uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
           path: ./wheelhouse/*.whl
 
       - name: Upload logs artifact
         uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          name: logs-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
           path: ./logs
 
   build_wheels_side_b: ################################################################
@@ -838,10 +847,10 @@ jobs:
           name: noarch-wheels
           path: dist
 
-      - name: Download wheels
+      - name: Download wheels side A
         uses: actions/download-artifact@v4
         with:
-          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
           path: dist
 
       - name: Retrieve configure tarball cache
@@ -1034,8 +1043,21 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_eclib
 
+      - name: sagemath-cmr
+        id:   sagemath-cmr
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cmr
 
-      - uses: actions/upload-artifact@v4
+      - name: sagemath-meataxe
+        id:   sagemath-meataxe
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_meataxe
+
+
+      - name: Upload wheels artifact
+        uses: actions/upload-artifact@v4
         if:   always()
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
@@ -1134,10 +1156,16 @@ jobs:
           name: noarch-wheels
           path: dist
 
-      - name: Download wheels
+      - name: Download wheels side A
         uses: actions/download-artifact@v4
         with:
-          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-wheels
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
+          path: dist
+
+      - name: Download wheels side B
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
           path: dist
 
       - name: Retrieve configure tarball cache
@@ -1305,12 +1333,6 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_fricas
 
-      - name: sagemath-meataxe
-        id:   sagemath-meataxe
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_meataxe
-
       - name: sagemath-sirocco
         id:   sagemath-sirocco
         if:   (success() || failure())
@@ -1324,20 +1346,6 @@ jobs:
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_msolve
         env:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-latte-4ti2
-        id:   sagemath-latte-4ti2
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_latte_4ti2
-        env:
-          CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
-
-      - name: sagemath-cmr
-        id:   sagemath-cmr
-        if:   (success() || failure())
-        run: |
-          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cmr
 
       - name: sagemath-kenzo
         id:   sagemath-kenzo
@@ -1390,7 +1398,8 @@ jobs:
           CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.10, <3.11' || '>=3.10, <3.13' }}
 
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload wheels artifact
+        uses: actions/upload-artifact@v4
         if:   always()
         with:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-c-wheels
