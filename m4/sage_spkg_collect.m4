@@ -291,7 +291,7 @@ AC_DEFUN([SAGE_SPKG_FINALIZE], [dnl
         dnl "./sage -i SPKG_NAME" will still install the package.
         AS_VAR_IF([sage_spkg_install], [no], [dnl
             dnl We will use the system package (or not required for this platform.)
-            SAGE_DUMMY_PACKAGES="${SAGE_DUMMY_PACKAGES} \\$(printf '\n    ')SPKG_NAME"
+            AS_VAR_APPEND([SAGE_DUMMY_PACKAGES], [" \\$(printf '\n    ')SPKG_NAME"])
             AS_VAR_IF([sage_require], [yes], [ message="using system package"
             ],                               [ message="not required on your platform"
             ])
@@ -301,7 +301,7 @@ AC_DEFUN([SAGE_SPKG_FINALIZE], [dnl
             ])
         ], [dnl
             dnl We will not use the system package.
-            SAGE_BUILT_PACKAGES="${SAGE_BUILT_PACKAGES} \\$(printf '\n    ')SPKG_NAME"
+            AS_VAR_APPEND([SAGE_BUILT_PACKAGES], [" \\$(printf '\n    ')SPKG_NAME"])
             AS_VAR_SET_IF([sage_use_system], [dnl
                 AS_VAR_COPY([reason], [sage_use_system])
                 AS_CASE([$reason],
@@ -333,8 +333,8 @@ AC_DEFUN([SAGE_SPKG_FINALIZE], [dnl
     dnl
     spkg_line=" \\$(printf '\n    ')SPKG_NAME"
     AS_CASE([$is_installed-$want_spkg],
-            [*-yes],  [AS_VAR_APPEND(SAGE_OPTIONAL_INSTALLED_PACKAGES, "$spkg_line")],
-            [yes-no], [AS_VAR_APPEND(SAGE_OPTIONAL_UNINSTALLED_PACKAGES, "$spkg_line")])
+            [*-yes],  [AS_VAR_APPEND([SAGE_OPTIONAL_INSTALLED_PACKAGES], "$spkg_line")],
+            [yes-no], [AS_VAR_APPEND([SAGE_OPTIONAL_UNINSTALLED_PACKAGES], "$spkg_line")])
     m4_popdef([want_spkg])dnl
     dnl
     dnl Determine package dependencies
