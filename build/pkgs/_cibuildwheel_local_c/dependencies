@@ -1,1 +1,1 @@
-ccache libpng gmp mpfr mpc singular ecl maxima giac gfan fricas sirocco msolve topcom qepcad frobby macaulay2 kenzo pip elliptic_curves
+ccache libpng gmp mpfr mpc givaro gsl singular ecl maxima giac gfan fricas sirocco msolve topcom qepcad frobby macaulay2 kenzo pip elliptic_curves
