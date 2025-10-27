@@ -22,10 +22,7 @@ else:
     ext_modules = []
 
 sage_setup(['sagemath-singular'],
-           required_modules=('Singular', 'factory',
-                             # from sagemath-linbox
-                             'fflas-ffpack', 'givaro', 'gsl', 'linbox', 'cblas',
-                             'm4ri', 'gdlib', 'libpng', 'zlib'),
+           required_modules=('Singular', 'factory', 'givaro', 'gsl'),
            spkgs=['singular'],
            package_data={"sage": [
                "ext_data/singular/**",
