@@ -33,6 +33,7 @@ class PackageClass(object):
         exclude_dependencies = filters.pop('exclude_dependencies', False)
         filenames = filters.pop('has_files', [])
         no_filenames = filters.pop('no_files', [])
+        trees = filters.pop('trees', [])
         excluded = []
         for package_names in exclude:
             excluded.extend(package_names)
@@ -44,9 +45,14 @@ class PackageClass(object):
                            for filename in filename_disjunction.split('|'))
                        for filename_disjunction in filenames):
                 return False
-            return not any(any(pkg.has_file(filename)
-                               for filename in no_filename_disjunction.split('|'))
-                           for no_filename_disjunction in no_filenames)
+            if any(any(pkg.has_file(filename)
+                       for filename in no_filename_disjunction.split('|'))
+                   for no_filename_disjunction in no_filenames):
+                return False
+            if not trees:
+                return True
+            return any(tree in pkg.trees.split()
+                       for tree in trees)
 
         for package_name_or_class in package_names_or_classes:
             if package_name_or_class == ':all:':

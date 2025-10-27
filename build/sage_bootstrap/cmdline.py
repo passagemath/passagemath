@@ -297,6 +297,10 @@ def make_parser():
         help=('only include packages that do not have this file in their metadata directory '
               '(examples: huge, patches, huge|has_nonfree_dependencies)'))
     parser_list.add_argument(
+        '--tree', action='append', default=[], metavar='TREEVAR', dest='trees',
+        help=('only include packages that will be installed to this installation tree '
+              '(examples: SAGE_LOCAL, SAGE_VENV)'))
+    parser_list.add_argument(
         '--exclude', nargs='*', action='append', default=[], metavar='PACKAGE_NAME',
         help='exclude package from list')
     parser_list.add_argument(
@@ -410,6 +414,10 @@ def make_parser():
         help=('only include packages that do not have this file in their metadata directory '
               '(examples: huge, patches, huge|has_nonfree_dependencies)'))
     parser_download.add_argument(
+        '--tree', action='append', default=[], metavar='TREEVAR', dest='trees',
+        help=('only include packages that will be installed to this installation tree '
+              '(examples: SAGE_LOCAL, SAGE_VENV)'))
+    parser_download.add_argument(
         '--exclude', nargs='*', action='append', default=[], metavar='PACKAGE_NAME',
         help='exclude package from list')
     parser_download.add_argument(
@@ -521,6 +529,7 @@ def run():
                 args.package_class = [':all:']
         app.list_cls(*args.package_class,
                      has_files=args.has_files, no_files=args.no_files,
+                     trees=args.trees,
                      exclude=args.exclude,
                      include_dependencies=args.include_dependencies,
                      exclude_dependencies=args.exclude_dependencies)
