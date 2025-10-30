@@ -225,6 +225,7 @@ jobs:
         GIAC_CONFIGURE=--disable-ntl
         SAGE_MACAULAY2_BUILD_OPTIONS=-DWITH_PYTHON=off
         PIP_CONSTRAINT=${GITHUB_WORKSPACE}\\constraints.txt
+        PIP_BUILD_CONSTRAINT=${GITHUB_WORKSPACE}\\constraints.txt
         PIP_FIND_LINKS=${GITHUB_WORKSPACE}\\wheelhouse' '${GITHUB_WORKSPACE}\\dist
         SAGE_NUM_THREADS=6
         PYTHONUTF8=1

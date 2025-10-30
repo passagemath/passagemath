@@ -918,7 +918,7 @@ $(1)-cibuildwheel: cibuildwheel $(1)-sdist sage_conf sage_setup sagemath_environ
 		 tar xfz $$$$(ls -t $$$$SAGE_DISTFILES/*$(1)*.tar.gz | head -n1)) && \
 		export CIBW_BEFORE_ALL='echo > constraints.txt' && \
 		export CIBW_BEFORE_BUILD='cat $$(SAGE_VENV)/var/lib/sage/scripts/{sage_conf,sage_setup,sagemath_environment,sagemath_repl}/spkg-requirements.txt > constraints.txt' && \
-		export CIBW_ENVIRONMENT='PATH=$$$$(pwd)/prefix/bin:$$$$PATH CPATH=$$$$(pwd)/prefix/include:$$$$CPATH LIBRARY_PATH=$$$$(pwd)/prefix/lib:$$$$LIBRARY_PATH PKG_CONFIG_PATH=$$$$(pwd)/prefix/lib/pkgconfig:$$$$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$$$$(pwd)/constraints.txt PIP_FIND_LINKS=file://$$$$(pwd)/wheelhouse SAGE_NUM_THREADS=6' && \
+		export CIBW_ENVIRONMENT='PATH=$$$$(pwd)/prefix/bin:$$$$PATH CPATH=$$$$(pwd)/prefix/include:$$$$CPATH LIBRARY_PATH=$$$$(pwd)/prefix/lib:$$$$LIBRARY_PATH PKG_CONFIG_PATH=$$$$(pwd)/prefix/lib/pkgconfig:$$$$PKG_CONFIG_PATH ACLOCAL_PATH=/usr/share/aclocal PIP_CONSTRAINT=$$$$(pwd)/constraints.txt PIP_BUILD_CONSTRAINT=$$$$(pwd)/constraints.txt PIP_FIND_LINKS=file://$$$$(pwd)/wheelhouse SAGE_NUM_THREADS=6' && \
 		env | grep '^CIBW' && \
 		python3 -m cibuildwheel --output-dir '$$(SAGE_ROOT)/wheelhouse' '$$(SAGE_ROOT)/build/pkgs/$(1)/unpacked'/*$(1)*
 

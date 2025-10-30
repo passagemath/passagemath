@@ -462,6 +462,7 @@ Full Installation from Source as passagemath
     ```bash session
     (passagemath-venv) $ export SAGE_ROOT=$(pwd)
     (passagemath-venv) $ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
+    (passagemath-venv) $ export PIP_BUILD_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
     (passagemath-venv) $ export SAGE_CONF_TARGETS="build-local"
     ```
 

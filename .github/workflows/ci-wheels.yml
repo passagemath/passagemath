@@ -178,6 +178,7 @@ jobs:
                    esac;
                done) | tee constraints.txt
               export PIP_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt
+              export PIP_BUILD_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt
           else
               mkdir -p $WHEELHOUSE
               pip download -v --only-binary :all: --no-deps -d $WHEELHOUSE pas$pkg

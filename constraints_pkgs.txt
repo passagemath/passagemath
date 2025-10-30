@@ -10,6 +10,7 @@
 # [alice@localhost sage]$ export MAKE="make -j16" SAGE_NUM_THREADS=16
 # [alice@localhost sage]$ make all-sage-local
 # [alice@localhost sage]$ export PIP_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
+# [alice@localhost sage]$ export PIP_BUILD_CONSTRAINT="$(pwd)/constraints_pkgs.txt"
 # [alice@localhost sage]$ python3 -m build -v -v pkgs/sagemath-standard-no-symbolics
 #
 # Non-example: Installing the built wheel using the same
