@@ -1,9 +1,11 @@
 cd src/
 
 sdh_cmake -GNinja \
-          -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+          -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
           -DCMAKE_VERBOSE_MAKEFILE=ON \
           -DLIB_INSTALL_DIR="${SAGE_LOCAL}"/lib \
+          -DCMAKE_INSTALL_NAME_DIR="${SAGE_LOCAL}"/lib \
+          -DCMAKE_BUILD_WITH_INSTALL_NAME_DIR=ON \
           .
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
