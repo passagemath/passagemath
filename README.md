@@ -72,7 +72,7 @@ Subsystem for Linux (WSL) or virtualization.
 | Version                                                                      | CPython   | Toolchains        | Operating Systems | Architectures | Notes                  |
 |------------------------------------------------------------------------------|-----------|-------------------|-------------------|---------------|------------------------|
 | [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9-3.12  | GCC 8.4-14, clang | Linux, macOS, WSL | x86_64, ARM   | EOL 2024-12            |
-| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9-3.13  | GCC 9-14, clang   | Linux, macOS, WSL | x86_64, ARM   | oldstable, EOL 2025-10 |
+| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9-3.13  | GCC 9-14, clang   | Linux, macOS, WSL | x86_64, ARM   | EOL 2025-10            |
 | 10.6.x (main)                                                                | 3.10-3.14 | GCC 9-15, clang   | Linux, macOS, WSL | x86_64, ARM   | stable                 |
 |                                                                              |           | mingw32 + MSVC    | Windows (partial) | x86_64        |                        |
 | 10.7.x ([#1051](https://github.com/passagemath/passagemath/pull/1051))       | 3.11-3.14 |                   |                   |               | planned                |
