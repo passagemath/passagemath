@@ -13,7 +13,7 @@ fi
 
 # Patch out excessive use of -rpath
 # https://github.com/passagemath/passagemath/issues/1633
-sed -i.bak 's/-Wl,-rpath,[^ ]* //' configure
+sed -i.bak 's/-Wl,-rpath,[^ ]* //g' **/configure
 
 config()
 {
