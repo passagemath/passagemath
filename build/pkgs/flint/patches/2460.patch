@@ -1,0 +1,180 @@
+From 972c87877654c65dcc72dcf57796145cd1da10c0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Albin=20Ahlb=C3=A4ck?= <albin.ahlback@gmail.com>
+Date: Fri, 31 Oct 2025 13:06:14 +0100
+Subject: [PATCH] Adjust for few registers on x86 assembly
+
+---
+ src/longlong.h         | 26 +++++++++++-------
+ src/longlong_asm_gcc.h | 60 +++++++++++++++++++++---------------------
+ 2 files changed, 46 insertions(+), 40 deletions(-)
+
+diff --git a/src/longlong.h b/src/longlong.h
+index 67610eab62..20b9c68109 100644
+--- a/src/longlong.h
++++ b/src/longlong.h
+@@ -128,7 +128,9 @@ flint_bitcnt_t FLINT_BIT_COUNT(ulong x)
+     (s0) = (a0) - (b0); \
+     (s1) = (a1) - (b1) - ((ulong) (s0) > __t0); \
+   } while (0)
++#endif
+ 
++#if !defined(add_sssaaaaaa)
+ # define add_sssaaaaaa(s2, s1, s0, a2, a1, a0, b2, b1, b0) \
+   do { \
+     ulong __t1, __t2; \
+@@ -162,7 +164,9 @@ flint_bitcnt_t FLINT_BIT_COUNT(ulong x)
+     sub_ddmmss(__t4, s2, (ulong) 0, a2, (ulong) 0, b2); \
+     sub_ddmmss(s3, s2, (a3) - (b3), s2, -__t4, -__t3); \
+   } while (0)
++#endif
+ 
++#if !defined(add_sssssaaaaaaaaaa)
+ # define add_sssssaaaaaaaaaa(s4, s3, s2, s1, s0, a4, a3, a2, a1, a0, b4, b3, b2, b1, b0) \
+   do { \
+     ulong __t4 = 0; \
+@@ -178,7 +182,9 @@ flint_bitcnt_t FLINT_BIT_COUNT(ulong x)
+     sub_ddmmss(__t6, s3, (ulong) 0, a3, (ulong) 0, b3); \
+     sub_ddmmss(s4, s3, (a4) - (b4), s3, -__t6, -__t5); \
+   } while (0)
++#endif
+ 
++#if !defined(add_ssssssaaaaaaaaaaaa)
+ # define add_ssssssaaaaaaaaaaaa(s5, s4, s3, s2, s1, s0, a5, a4, a3, a2, a1, a0, b5, b4, b3, b2, b1, b0) \
+   do { \
+     ulong __t5 = 0; \
+@@ -196,7 +202,6 @@ flint_bitcnt_t FLINT_BIT_COUNT(ulong x)
+   } while (0)
+ #endif
+ 
+-/* extra wide variants might not have inline asm if there are not enough registers */
+ #if !defined(add_sssssssaaaaaaaaaaaaaa)
+ # define add_sssssssaaaaaaaaaaaaaa(s6, s5, s4, s3, s2, s1, s0, a6, a5, a4, a3, a2, a1, a0, b6, b5, b4, b3, b2, b1, b0) \
+   do { \
+@@ -206,14 +211,6 @@ flint_bitcnt_t FLINT_BIT_COUNT(ulong x)
+     add_ssaaaa(s6, s5, s6, s5, (ulong) 0, __t6); \
+   } while (0)
+ 
+-# define add_ssssssssaaaaaaaaaaaaaaaa(s7, s6, s5, s4, s3, s2, s1, s0, a7, a6, a5, a4, a3, a2, a1, a0, b7, b6, b5, b4, b3, b2, b1, b0) \
+-  do { \
+-    ulong __t7 = 0; \
+-    add_sssssssaaaaaaaaaaaaaa(__t7, s5, s4, s3, s2, s1, s0, (ulong) 0, a5, a4, a3, a2, a1, a0, (ulong) 0, b5, b4, b3, b2, b1, b0); \
+-    add_ssaaaa(s7, s6, a7, a6, b7, b6); \
+-    add_ssaaaa(s7, s6, s7, s6, (ulong) 0, __t7); \
+-  } while (0)
+-
+ # define sub_dddddddmmmmmmmsssssss(s6, s5, s4, s3, s2, s1, s0, a6, a5, a4, a3, a2, a1, a0, b6, b5, b4, b3, b2, b1, b0) \
+   do { \
+     ulong __t9, __t10; \
+@@ -221,6 +218,16 @@ flint_bitcnt_t FLINT_BIT_COUNT(ulong x)
+     sub_ddmmss(__t10, s5, (ulong) 0, a5, (ulong) 0, b5); \
+     sub_ddmmss(s6, s5, (a6) - (b6), s5, -__t10, -__t9); \
+   } while (0)
++#endif
++
++#if !defined(add_ssssssssaaaaaaaaaaaaaaaa)
++# define add_ssssssssaaaaaaaaaaaaaaaa(s7, s6, s5, s4, s3, s2, s1, s0, a7, a6, a5, a4, a3, a2, a1, a0, b7, b6, b5, b4, b3, b2, b1, b0) \
++  do { \
++    ulong __t7 = 0; \
++    add_sssssssaaaaaaaaaaaaaa(__t7, s5, s4, s3, s2, s1, s0, (ulong) 0, a5, a4, a3, a2, a1, a0, (ulong) 0, b5, b4, b3, b2, b1, b0); \
++    add_ssaaaa(s7, s6, a7, a6, b7, b6); \
++    add_ssaaaa(s7, s6, s7, s6, (ulong) 0, __t7); \
++  } while (0)
+ 
+ # define sub_ddddddddmmmmmmmmssssssss(s7, s6, s5, s4, s3, s2, s1, s0, a7, a6, a5, a4, a3, a2, a1, a0, b7, b6, b5, b4, b3, b2, b1, b0) \
+   do { \
+@@ -231,7 +238,6 @@ flint_bitcnt_t FLINT_BIT_COUNT(ulong x)
+   } while (0)
+ #endif
+ 
+-
+ #if !defined(MPN_INCR_U)
+ # if FLINT_WANT_ASSERT
+ #  define MPN_INCR_U(ptr, size, incr) \
+diff --git a/src/longlong_asm_gcc.h b/src/longlong_asm_gcc.h
+index e629aa1a29..115b32c7ba 100644
+--- a/src/longlong_asm_gcc.h
++++ b/src/longlong_asm_gcc.h
+@@ -80,21 +80,6 @@
+       "3" ((ulong)(a1)), _ASM_RME ((ulong)(b1)), \
+       "4" ((ulong)(a0)), _ASM_RME ((ulong)(b0)))
+ 
+-# define add_ssssssaaaaaaaaaaaa(s5, s4, s3, s2, s1, s0, a5, a4, a3, a2, a1, a0, b5, b4, b3, b2, b1, b0) \
+-  __asm__(_ASM_ADD " %17,%" _ASM_PRE "5\n" \
+-     "\t" _ASM_ADC " %15,%" _ASM_PRE "4\n" \
+-     "\t" _ASM_ADC " %13,%" _ASM_PRE "3\n" \
+-     "\t" _ASM_ADC " %11,%" _ASM_PRE "2\n" \
+-     "\t" _ASM_ADC " %9,%" _ASM_PRE "1\n" \
+-     "\t" _ASM_ADC " %7,%" _ASM_PRE "0" \
+-    : "=r" (s5), "=&r" (s4), "=&r" (s3), "=&r" (s2), "=&r" (s1), "=&r" (s0) \
+-    : "0" ((ulong)(a5)), _ASM_RME ((ulong)(b5)), \
+-      "1" ((ulong)(a4)), _ASM_RME ((ulong)(b4)), \
+-      "2" ((ulong)(a3)), _ASM_RME ((ulong)(b3)), \
+-      "3" ((ulong)(a2)), _ASM_RME ((ulong)(b2)), \
+-      "4" ((ulong)(a1)), _ASM_RME ((ulong)(b1)), \
+-      "5" ((ulong)(a0)), _ASM_RME ((ulong)(b0)))
+-
+ # define sub_ddmmss(d1, d0, m1, m0, s1, s0) \
+   __asm__(_ASM_SUB " %5,%" _ASM_PRE "1\n" \
+      "\t" _ASM_SBB " %3,%" _ASM_PRE "0" \
+@@ -135,24 +120,24 @@
+       "3" ((ulong)(m1)), _ASM_RME ((ulong)(s1)), \
+       "4" ((ulong)(m0)), _ASM_RME ((ulong)(s0)))
+ 
+-# define sub_ddddddmmmmmmssssss(d5, d4, d3, d2, d1, d0, m5, m4, m3, m2, m1, m0, s5, s4, s3, s2, s1, s0) \
+-  __asm__(_ASM_SUB " %17,%" _ASM_PRE "5\n" \
+-     "\t" _ASM_SBB " %15,%" _ASM_PRE "4\n" \
+-     "\t" _ASM_SBB " %13,%" _ASM_PRE "3\n" \
+-     "\t" _ASM_SBB " %11,%" _ASM_PRE "2\n" \
+-     "\t" _ASM_SBB " %9,%" _ASM_PRE "1\n" \
+-     "\t" _ASM_SBB " %7,%" _ASM_PRE "0" \
+-    : "=r" (d5), "=&r" (d4), "=&r" (d3), "=&r" (d2), "=&r" (d1), "=&r" (d0) \
+-    : "0" ((ulong)(m5)), _ASM_RME ((ulong)(s5)), \
+-      "1" ((ulong)(m4)), _ASM_RME ((ulong)(s4)), \
+-      "2" ((ulong)(m3)), _ASM_RME ((ulong)(s3)), \
+-      "3" ((ulong)(m2)), _ASM_RME ((ulong)(s2)), \
+-      "4" ((ulong)(m1)), _ASM_RME ((ulong)(s1)), \
+-      "5" ((ulong)(m0)), _ASM_RME ((ulong)(s0)))
+-
+ /* x86 does not have enough registers */
+ # if FLINT_BITS == 64 && defined (__amd64__)
+ 
++# define add_ssssssaaaaaaaaaaaa(s5, s4, s3, s2, s1, s0, a5, a4, a3, a2, a1, a0, b5, b4, b3, b2, b1, b0) \
++  __asm__(_ASM_ADD " %17,%" _ASM_PRE "5\n" \
++     "\t" _ASM_ADC " %15,%" _ASM_PRE "4\n" \
++     "\t" _ASM_ADC " %13,%" _ASM_PRE "3\n" \
++     "\t" _ASM_ADC " %11,%" _ASM_PRE "2\n" \
++     "\t" _ASM_ADC " %9,%" _ASM_PRE "1\n" \
++     "\t" _ASM_ADC " %7,%" _ASM_PRE "0" \
++    : "=r" (s5), "=&r" (s4), "=&r" (s3), "=&r" (s2), "=&r" (s1), "=&r" (s0) \
++    : "0" ((ulong)(a5)), _ASM_RME ((ulong)(b5)), \
++      "1" ((ulong)(a4)), _ASM_RME ((ulong)(b4)), \
++      "2" ((ulong)(a3)), _ASM_RME ((ulong)(b3)), \
++      "3" ((ulong)(a2)), _ASM_RME ((ulong)(b2)), \
++      "4" ((ulong)(a1)), _ASM_RME ((ulong)(b1)), \
++      "5" ((ulong)(a0)), _ASM_RME ((ulong)(b0)))
++
+ # define add_sssssssaaaaaaaaaaaaaa(s6, s5, s4, s3, s2, s1, s0, a6, a5, a4, a3, a2, a1, a0, b6, b5, b4, b3, b2, b1, b0) \
+   __asm__(_ASM_ADD " %20,%" _ASM_PRE "6\n" \
+      "\t" _ASM_ADC " %18,%" _ASM_PRE "5\n" \
+@@ -189,6 +174,21 @@
+       "6" ((ulong)(a1)), _ASM_RME ((ulong)(b1)), \
+       "7" ((ulong)(a0)), _ASM_RME ((ulong)(b0)))
+ 
++# define sub_ddddddmmmmmmssssss(d5, d4, d3, d2, d1, d0, m5, m4, m3, m2, m1, m0, s5, s4, s3, s2, s1, s0) \
++  __asm__(_ASM_SUB " %17,%" _ASM_PRE "5\n" \
++     "\t" _ASM_SBB " %15,%" _ASM_PRE "4\n" \
++     "\t" _ASM_SBB " %13,%" _ASM_PRE "3\n" \
++     "\t" _ASM_SBB " %11,%" _ASM_PRE "2\n" \
++     "\t" _ASM_SBB " %9,%" _ASM_PRE "1\n" \
++     "\t" _ASM_SBB " %7,%" _ASM_PRE "0" \
++    : "=r" (d5), "=&r" (d4), "=&r" (d3), "=&r" (d2), "=&r" (d1), "=&r" (d0) \
++    : "0" ((ulong)(m5)), _ASM_RME ((ulong)(s5)), \
++      "1" ((ulong)(m4)), _ASM_RME ((ulong)(s4)), \
++      "2" ((ulong)(m3)), _ASM_RME ((ulong)(s3)), \
++      "3" ((ulong)(m2)), _ASM_RME ((ulong)(s2)), \
++      "4" ((ulong)(m1)), _ASM_RME ((ulong)(s1)), \
++      "5" ((ulong)(m0)), _ASM_RME ((ulong)(s0)))
++
+ # define sub_dddddddmmmmmmmsssssss(d6, d5, d4, d3, d2, d1, d0, m6, m5, m4, m3, m2, m1, m0, s6, s5, s4, s3, s2, s1, s0) \
+   __asm__(_ASM_SUB " %20,%" _ASM_PRE "6\n" \
+      "\t" _ASM_SBB " %18,%" _ASM_PRE "5\n" \
