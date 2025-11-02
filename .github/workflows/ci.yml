@@ -36,7 +36,7 @@ jobs:
       # https://github.com/actions/setup-python/issues/527
       - name: Set up Python
         run: |
-          uv python install
+          uv python install 3.14t
           uv venv
           . .venv/bin/activate
           echo PATH=$PATH >> $GITHUB_ENV
