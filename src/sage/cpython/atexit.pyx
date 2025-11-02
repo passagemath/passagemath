@@ -173,6 +173,7 @@ cdef extern from *:
     
     // Dummy function for Python 3.14+ (never called)
     static atexit_callback_struct** get_atexit_callbacks_array(PyObject *self) {
+        PyErr_SetString(PyExc_RuntimeError, "Python >= 3.14 has no atexit array");
         return NULL;
     }
     #else
@@ -186,18 +187,19 @@ cdef extern from *:
     
     // Dummy function for Python < 3.14 (never called)
     static PyObject* get_atexit_callbacks_list(PyObject *self) {
+        PyErr_SetString(PyExc_RuntimeError, "Python < 3.14 has no atexit list");
         return NULL;
     }
     #endif
     """
     # Declare both functions - they exist in all Python versions (one is dummy)
-    PyObject* get_atexit_callbacks_list(object module)
+    object get_atexit_callbacks_list(object module)
     
     ctypedef struct atexit_callback_struct:
         PyObject* func
         PyObject* args
         PyObject* kwargs
-    atexit_callback_struct** get_atexit_callbacks_array(object module)
+    atexit_callback_struct** get_atexit_callbacks_array(object module) except NULL
 
 
 def _get_exithandlers():
@@ -210,7 +212,7 @@ def _get_exithandlers():
     
     # Python 3.14+ uses a PyList directly
     if sys.version_info >= (3, 14):
-        callbacks_list = <object>get_atexit_callbacks_list(atexit)
+        callbacks_list = get_atexit_callbacks_list(atexit)
         if callbacks_list is None:
             return exithandlers
         # callbacks is a list of tuples: [(func, args, kwargs), ...]
