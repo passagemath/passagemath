@@ -167,7 +167,7 @@ from cpython.list cimport *
 from cpython.number cimport *
 from cpython.long cimport *
 from cpython.object cimport *
-from cpython.ref cimport _Py_REFCNT, Py_SET_REFCNT
+from cpython.ref cimport _Py_REFCNT
 from libc.stdint cimport uint64_t
 cimport sage.structure.element
 from sage.structure.coerce cimport coercion_model
@@ -206,8 +206,11 @@ objtogen = None
 new_gen_from_integer = None
 
 
-cdef extern from *:
+cdef extern from "Python.h":
     int unlikely(int) nogil  # Defined by Cython
+
+cdef extern from "Python.h":
+    void Py_SET_REFCNT(PyObject*, Py_ssize_t) nogil
 
 cdef object numpy_long_interface = {'typestr': '=i4' if sizeof(long) == 4 else '=i8'}
 cdef object numpy_int64_interface = {'typestr': '=i8'}
