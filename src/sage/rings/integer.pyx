@@ -167,7 +167,6 @@ from cpython.list cimport *
 from cpython.number cimport *
 from cpython.long cimport *
 from cpython.object cimport *
-from cpython.ref cimport _Py_REFCNT
 from libc.stdint cimport uint64_t
 cimport sage.structure.element
 from sage.structure.coerce cimport coercion_model
@@ -206,7 +205,7 @@ objtogen = None
 new_gen_from_integer = None
 
 
-cdef extern from "Python.h":
+cdef extern from *:
     int unlikely(int) nogil  # Defined by Cython
 
 cdef extern from "Python.h":
