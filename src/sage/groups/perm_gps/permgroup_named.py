@@ -2376,6 +2376,13 @@ def PrimitiveGroups(d=None):
         sage: PrimitiveGroups()
         Primitive Groups
 
+    The database is currently limited::
+
+         sage: PrimitiveGroups(2^13).cardinality()
+         Traceback (most recent call last):
+         ...
+         GAPError: Error...
+
     .. TODO::
 
         This enumeration helper could be extended based on
@@ -2602,6 +2609,10 @@ class PrimitiveGroupsOfDegree(CachedRepresentation, Parent):
 
             sage: PrimitiveGroups(2500).cardinality()
             34
+            sage: PrimitiveGroups(2^13).cardinality()
+            Traceback (most recent call last):
+            ...
+            GAPError: Error...
         """
         if self._degree <= 1:
             # gap.NrPrimitiveGroups(0) fails, so Sage needs to handle this
@@ -3498,13 +3509,15 @@ class SmallPermutationGroup(PermutationGroup_generic):
         Group of order 12 and GAP Id 4 as a permutation group
         sage: G.gens()
         ((4,5), (1,2), (3,4,5))
-        sage: G.character_table()                                                       # needs sage.modules sage.rings.number_field
+        sage: Gct = G.character_table(); Gct  # random, needs sage.modules sage.rings.number_field
         [ 1  1  1  1  1  1]
         [ 1 -1  1 -1  1 -1]
         [ 1 -1  1  1 -1  1]
         [ 1  1  1 -1 -1 -1]
         [ 2  0 -1 -2  0  1]
         [ 2  0 -1  2  0 -1]
+        sage: sorted(Gct, key=str)  # needs modules sage.rings.number_field
+        [(1, -1, 1, -1, 1, -1), (1, -1, 1, 1, -1, 1), (1, 1, 1, -1, -1, -1), (1, 1, 1, 1, 1, 1), (2, 0, -1, -2, 0, 1), (2, 0, -1, 2, 0, -1)]
         sage: def numgps(n): return ZZ(libgap.NumberSmallGroups(n))
         sage: all(SmallPermutationGroup(n,k).id() == [n,k]
         ....:     for n in [1..64] for k in [1..numgps(n)])  # long time (180s)
