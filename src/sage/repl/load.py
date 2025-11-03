@@ -122,7 +122,7 @@ def load(filename, globals, attach=False):
         sage: t = tmp_filename(ext='.py')
         sage: with open(t, 'w') as f:
         ....:     _ = f.write("print(('hi', 2^3)); z = -2^7; print(z)")
-        sage: z=1
+        sage: z = 1
         sage: sage.repl.load.load(t, globals())
         ('hi', 1)
         -7
@@ -132,7 +132,7 @@ def load(filename, globals, attach=False):
         sage: t = tmp_filename(ext='.sage')
         sage: with open(t, 'w') as f:
         ....:     _ = f.write("print(('hi', 2^3)); z = -2^7; print(z)")
-        sage: z=1
+        sage: z = 1
         sage: sage.repl.load.load(t, globals())
         ('hi', 8)
         -128
@@ -142,8 +142,8 @@ def load(filename, globals, attach=False):
         sage: t = tmp_filename(ext='.pyx')
         sage: with open(t, 'w') as f:
         ....:     _ = f.write("print(('hi', 2^3)); z = -2^7; print(z)")
-        sage: z=1
-        sage: sage.repl.load.load(t, globals())                                        # needs sage.misc.cython
+        sage: z = 1
+        sage: sage.repl.load.load(t, globals())                                         # needs sage.misc.cython
         Compiling ...
         ('hi', 1)
         -7
