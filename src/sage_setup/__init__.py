@@ -117,7 +117,7 @@ def sage_setup(distributions, *,
         sage.env.default_optional_modules = optional_modules
 
         extension_kwds = {}
-        if py_limited_api and os.environ.get('CIBUILDWHEEL', None) and sys.version_info >= (3, 12, 0, 0):
+        if py_limited_api and os.environ.get('CIBUILDWHEEL', None) and sys.version_info >= (3, 12, 0, 0) and sysconfig.get_config_var("Py_GIL_DISABLED") != '1':
             # https://cibuildwheel.pypa.io/en/stable/options/#examples_8
             # https://cython.readthedocs.io/en/latest/src/userguide/limited_api.html#setuptools-and-setup-py
             extension_kwds['define_macros'] = [("Py_LIMITED_API", 0x030C0000)]
