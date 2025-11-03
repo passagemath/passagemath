@@ -151,6 +151,8 @@ from sage.structure.richcmp cimport rich_to_bool_sgn
 cdef bin_op
 from sage.structure.element import bin_op
 
+from sage.libs.mpmath.utils cimport mpfr_to_mpfval
+
 from sage.rings.integer cimport Integer
 from sage.rings.rational cimport Rational
 from sage.rings.real_double cimport RealDoubleElement
@@ -1696,7 +1698,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
             ....:     for rnd_dir in ('RNDN', 'RNDD', 'RNDU', 'RNDZ'):
             ....:         fld = RealField(prec, rnd=rnd_dir)
             ....:         var = polygen(fld)
-            ....:         for v in values + [fld.random_element() for _ in range(5)]:
+            ....:         for v in [NaN, -infinity, -20, -e, 0, 1, 2^500, -2^4000, -2^-500, 2^-4000] + [fld.random_element() for _ in range(5)]:
             ....:             for preparse in (True, False, None):
             ....:                 _ = sage_input(fld(v), verify=True, preparse=preparse)
             ....:                 _ = sage_input(fld(v) * var, verify=True, preparse=preparse)
@@ -2388,7 +2390,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(1) + RIF(1)                                                        # needs sage.rings.real_interval_field
+            sage: RR(1) + RIF(1)
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -2412,7 +2414,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(2) - RIF(1)                                                        # needs sage.rings.real_interval_field
+            sage: RR(2) - RIF(1)
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -2436,7 +2438,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(1) * RIF(1)                                                        # needs sage.rings.real_interval_field
+            sage: RR(1) * RIF(1)
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -2460,7 +2462,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(1) / RIF(1/2)                                                      # needs sage.rings.real_interval_field
+            sage: RR(1) / RIF(1/2)
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -3576,7 +3578,6 @@ cdef class RealNumber(sage.structure.element.RingElement):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.real_interval_field
             sage: RRd = RealField(53, rnd='RNDD')
             sage: RRz = RealField(53, rnd='RNDZ')
             sage: RRu = RealField(53, rnd='RNDU')
@@ -3754,7 +3755,6 @@ cdef class RealNumber(sage.structure.element.RingElement):
 
         EXAMPLES::
 
-            sage: # needs sage.rings.real_interval_field
             sage: (0.333).nearby_rational(max_error=0.001)
             1/3
             sage: (0.333).nearby_rational(max_error=1)
@@ -3764,7 +3764,6 @@ cdef class RealNumber(sage.structure.element.RingElement):
 
         ::
 
-            sage: # needs sage.rings.real_interval_field
             sage: (0.333).nearby_rational(max_denominator=100)
             1/3
             sage: RR(1/3 + 1/1000000).nearby_rational(max_denominator=2999999)
@@ -3776,7 +3775,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
             sage: RR(3/4).nearby_rational(max_denominator=2)
             1
 
-            sage: # needs sage.rings.real_interval_field sage.symbolic
+            sage: # needs sage.symbolic
             sage: RR(pi).nearby_rational(max_denominator=120)
             355/113
             sage: RR(pi).nearby_rational(max_denominator=10000)
@@ -3786,7 +3785,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
             sage: RR(pi).nearby_rational(max_denominator=1)
             3
 
-            sage: RR(-3.5).nearby_rational(max_denominator=1)                           # needs sage.rings.real_interval_field
+            sage: RR(-3.5).nearby_rational(max_denominator=1)
             -3
 
         TESTS::
@@ -5414,7 +5413,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
 
             sage: r = sqrt(2.0); r
             1.41421356237310
-            sage: r.algebraic_dependency(5)                                             # needs fpylll
+            sage: r.algebraic_dependency(5)
             x^2 - 2
         """
         return sage.arith.misc.algebraic_dependency(self, n)
@@ -5696,18 +5695,20 @@ cdef class RealLiteral(RealNumber):
     casting into higher precision rings.
     """
 
-    cdef readonly literal
+    cdef readonly str literal
     cdef readonly int base
 
-    def __init__(self, RealField_class parent, x=0, int base=10):
+    def __init__(self, RealField_class parent, str x, int base=10):
         """
         Initialize ``self``.
+
+        Note that the constructor parameters are first passed to :meth:`RealNumber.__cinit__`.
 
         EXAMPLES::
 
             sage: RealField(200)(float(1.3))
             1.3000000000000000444089209850062616169452667236328125000000
-            sage: RealField(200)(1.3)
+            sage: RealField(200)(1.3)  # implicit doctest
             1.3000000000000000000000000000000000000000000000000000000000
             sage: 1.3 + 1.2
             2.50000000000000
@@ -5715,9 +5716,8 @@ cdef class RealLiteral(RealNumber):
             10000.0000000000
         """
         RealNumber.__init__(self, parent, x, base)
-        if isinstance(x, str):
-            self.base = base
-            self.literal = x.replace('_', '')
+        self.base = base
+        self.literal = x.replace('_', '')
 
     def __neg__(self):
         """
@@ -5730,10 +5730,25 @@ cdef class RealLiteral(RealNumber):
             sage: RealField(300)(-(-1.2))
             1.20000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
         """
-        if self.literal is not None and self.literal[0] == '-':
+        if self.literal[0] == '-':
             return RealLiteral(self._parent, self.literal[1:], self.base)
-        else:
-            return RealLiteral(self._parent, '-'+self.literal, self.base)
+        return RealLiteral(self._parent, '-' + self.literal, self.base)
+
+    def __float__(self):
+        """
+        Return a Python float approximating ``self``.
+        This override is needed to avoid issues with rounding twice,
+        thus guaranteeing round-trip.
+
+        TESTS::
+
+            sage: float(1.133759543500045e+153)
+            1.133759543500045e+153
+            sage: for i in range(1000):
+            ....:     x = float(randint(1, 2**53) << randint(1, 200))
+            ....:     assert float(eval(preparse(str(x)))) == x, x
+        """
+        return float(self.numerical_approx(53))
 
     def numerical_approx(self, prec=None, digits=None, algorithm=None):
         """
@@ -5776,10 +5791,15 @@ cdef class RealLiteral(RealNumber):
             <class 'sage.rings.real_mpfr.RealLiteral'>
             sage: type(n(1.3))
             <class 'sage.rings.real_mpfr.RealNumber'>
+
+        TESTS::
+
+            sage: n(RealNumber('12', base=16))  # abs tol 1e-14
+            18.0000000000000
         """
         if prec is None:
             prec = digits_to_bits(digits)
-        return RealField(prec)(self.literal)
+        return RealField(prec)(self.literal, self.base)
 
 
 RR = RealField()
