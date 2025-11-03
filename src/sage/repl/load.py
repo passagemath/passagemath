@@ -121,34 +121,31 @@ def load(filename, globals, attach=False):
 
         sage: t = tmp_filename(ext='.py')
         sage: with open(t, 'w') as f:
-        ....:     _ = f.write("print(('hi', 2^3)); z = -2^7")
-        sage: z = 1
+        ....:     _ = f.write("print(('hi', 2^3)); z = -2^7; print(z)")
+        sage: z=1
         sage: sage.repl.load.load(t, globals())
         ('hi', 1)
-        sage: z
         -7
 
     A ``.sage`` file *is* preparsed::
 
         sage: t = tmp_filename(ext='.sage')
         sage: with open(t, 'w') as f:
-        ....:     _ = f.write("print(('hi', 2^3)); z = -2^7")
-        sage: z = 1
+        ....:     _ = f.write("print(('hi', 2^3)); z = -2^7; print(z)")
+        sage: z=1
         sage: sage.repl.load.load(t, globals())
         ('hi', 8)
-        sage: z
         -128
 
     Cython files are *not* preparsed::
 
         sage: t = tmp_filename(ext='.pyx')
         sage: with open(t, 'w') as f:
-        ....:     _ = f.write("print(('hi', 2^3)); z = -2^7")
-        sage: z = 1
-        sage: sage.repl.load.load(t, globals())                                         # needs sage.misc.cython
+        ....:     _ = f.write("print(('hi', 2^3)); z = -2^7; print(z)")
+        sage: z=1
+        sage: sage.repl.load.load(t, globals())                                        # needs sage.misc.cython
         Compiling ...
         ('hi', 1)
-        sage: z
         -7
 
     If the file is not a Cython, Python, or Sage file, a :exc:`ValueError`
