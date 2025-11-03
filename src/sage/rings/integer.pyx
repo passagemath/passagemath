@@ -167,6 +167,7 @@ from cpython.list cimport *
 from cpython.number cimport *
 from cpython.long cimport *
 from cpython.object cimport *
+from cpython.ref cimport _Py_REFCNT
 from libc.stdint cimport uint64_t
 cimport sage.structure.element
 from sage.structure.coerce cimport coercion_model
@@ -7630,7 +7631,7 @@ cdef PyObject* fast_tp_new(type t, args, kwds) except NULL:
     # Objects from the pool have reference count zero, so this
     # needs to be set in this case.
 
-    new.ob_refcnt = 1
+    _Py_REFCNT(<PyObject*>new) = 1
 
     return new
 

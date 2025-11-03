@@ -45,6 +45,7 @@ cimport libc.math
 from libc.string cimport memcpy
 from cpython.object cimport *
 from cpython.float cimport *
+from cpython.ref cimport _Py_REFCNT
 
 from sage.ext.stdsage cimport PY_NEW
 from sage.cpython.python_debug cimport if_Py_TRACE_REFS_then_PyObject_INIT
@@ -2158,7 +2159,7 @@ cdef PyObject* fast_tp_new(type t, args, kwds) noexcept:
     # Objects from the pool have reference count zero, so this
     # needs to be set in this case.
 
-    new.ob_refcnt = 1
+    _Py_REFCNT(<PyObject*>new) = 1
 
     return new
 
