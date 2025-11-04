@@ -17,7 +17,7 @@ Memory management for Gens on the PARI stack or the heap
 
 cimport cython
 
-from cpython.ref cimport PyObject
+from cpython.ref cimport PyObject, _Py_REFCNT
 from cpython.exc cimport PyErr_SetString
 
 from cysignals.signals cimport (sig_on, sig_off, sig_block, sig_unblock,
@@ -261,7 +261,7 @@ cdef class DetachGen:
         cdef GEN res = src.g
         if is_on_stack(res):
             # Verify that we hold the only reference to src
-            if (<PyObject*>src).ob_refcnt != 1:
+            if _Py_REFCNT(<PyObject*>src) != 1:
                 raise SystemError("cannot detach a Gen which is still referenced")
         elif is_universal_constant(res):
             pass
