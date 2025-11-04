@@ -3329,7 +3329,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
             3.1415926535897932384626433833
             sage: axiom(R(pi))  # indirect doctest      # optional - axiom
             3.1415926535 8979323846 26433833
-            sage: fricas(R(pi))                         # optional - fricas
+            sage: fricas(R(pi)) # indirect doctest      # optional - fricas
             3.1415926535_8979323846_26433833
         """
         prec = self.parent().prec()
