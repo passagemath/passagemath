@@ -2390,7 +2390,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(1) + RIF(1)
+            sage: RR(1) + RIF(1) # needs sage.rings.real_interval_field
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -2414,7 +2414,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(2) - RIF(1)
+            sage: RR(2) - RIF(1) # needs sage.rings.real_interval_field
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -2438,7 +2438,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(1) * RIF(1)
+            sage: RR(1) * RIF(1) # needs sage.rings.real_interval_field
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -2462,7 +2462,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(1) / RIF(1/2)
+            sage: RR(1) / RIF(1/2) # needs sage.rings.real_interval_field
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -3578,7 +3578,8 @@ cdef class RealNumber(sage.structure.element.RingElement):
         will be either exactly equal to or slightly larger than the number.
 
         EXAMPLES::
-
+        
+            sage: # needs sage.rings.real_interval_field
             sage: RRd = RealField(53, rnd='RNDD')
             sage: RRz = RealField(53, rnd='RNDZ')
             sage: RRu = RealField(53, rnd='RNDU')
@@ -3786,7 +3787,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
             sage: RR(pi).nearby_rational(max_denominator=1)
             3
 
-            sage: RR(-3.5).nearby_rational(max_denominator=1)
+            sage: RR(-3.5).nearby_rational(max_denominator=1) # needs sage.rings.real_interval_field
             -3
 
         TESTS::
@@ -5414,7 +5415,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
 
             sage: r = sqrt(2.0); r
             1.41421356237310
-            sage: r.algebraic_dependency(5)
+            sage: r.algebraic_dependency(5) # needs fpylll
             x^2 - 2
         """
         return sage.arith.misc.algebraic_dependency(self, n)
