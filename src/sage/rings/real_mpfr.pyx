@@ -150,9 +150,6 @@ from sage.structure.element cimport have_same_parent
 from sage.structure.richcmp cimport rich_to_bool_sgn
 cdef bin_op
 from sage.structure.element import bin_op
-
-from sage.libs.mpmath.utils cimport mpfr_to_mpfval
-
 from sage.rings.integer cimport Integer
 from sage.rings.rational cimport Rational
 from sage.rings.real_double cimport RealDoubleElement
@@ -2390,7 +2387,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(1) + RIF(1) # needs sage.rings.real_interval_field
+            sage: RR(1) + RIF(1)                                                        # needs sage.rings.real_interval_field
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -2414,7 +2411,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(2) - RIF(1) # needs sage.rings.real_interval_field
+             sage: RR(2) - RIF(1)                                                        # needs sage.rings.real_interval_field
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -2438,7 +2435,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(1) * RIF(1) # needs sage.rings.real_interval_field
+            sage: RR(1) * RIF(1)                                                        # needs sage.rings.real_interval_field
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -2462,7 +2459,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-            sage: RR(1) / RIF(1/2) # needs sage.rings.real_interval_field
+            sage: RR(1) / RIF(1/2)                                                      # needs sage.rings.real_interval_field
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -3329,7 +3326,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
             3.1415926535897932384626433833
             sage: axiom(R(pi))  # indirect doctest      # optional - axiom
             3.1415926535 8979323846 26433833
-            sage: fricas(R(pi)) # optional - fricas
+            sage: fricas(R(pi))                         # optional - fricas
             ...
             3.1415926535_8979323846_26433833
         """
@@ -5712,7 +5709,7 @@ cdef class RealLiteral(RealNumber):
 
             sage: RealField(200)(float(1.3))
             1.3000000000000000444089209850062616169452667236328125000000
-            sage: RealField(200)(1.3)  # implicit doctest
+            sage: RealField(200)(1.3)  # indirect doctest
             1.3000000000000000000000000000000000000000000000000000000000
             sage: 1.3 + 1.2
             2.50000000000000
