@@ -33,6 +33,8 @@ AUTHORS:
 import re
 import weakref
 
+import sage.misc.misc
+
 from sage.libs.mpfr cimport *
 
 from sage.structure.parent cimport Parent
@@ -57,7 +59,6 @@ gmpy2.import_gmpy2()
 try:
     from cypari2.gen import Gen as pari_gen
     from cypari2.handle_error import PariError
-    from sage.libs.pari import pari
 except ImportError:
     pari_gen = PariError = ()
 
@@ -882,7 +883,7 @@ class ComplexField_class(sage.rings.abc.ComplexField):
             (x - 1.7320508075688772935274463415*I) * (x + 1.7320508075688772935274463415*I)
             sage: k._factor_univariate_polynomial(x^2 + 1)
             (x - I) * (x + I)
-            sage: k._factor_univariate_polynomial(k(I) * (x^2 + 1))                     # needs sage.symbolic
+            sage: k._factor_univariate_polynomial(k(I) * (x^2 + 1))
             (1.0000000000000000000000000000*I) * (x - I) * (x + I)
         """
         R = f.parent()
@@ -1112,9 +1113,9 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
             {unop:- {call: {atomic:RR}({atomic:Infinity})}}
             sage: CC(0, infinity)._sage_input_(sib, True)
             {call: {atomic:CC}({call: {atomic:RR}({atomic:0})}, {call: {atomic:RR}({atomic:Infinity})})}
-            sage: CC(NaN, 5)._sage_input_(sib, True)                                    # needs sage.symbolic
+            sage: CC(NaN, 5)._sage_input_(sib, True)
             {call: {atomic:CC}({call: {atomic:RR}({atomic:NaN})}, {call: {atomic:RR}({atomic:5})})}
-            sage: CC(5, NaN)._sage_input_(sib, True)                                    # needs sage.symbolic
+            sage: CC(5, NaN)._sage_input_(sib, True)
             {call: {atomic:CC}({call: {atomic:RR}({atomic:5})}, {call: {atomic:RR}({atomic:NaN})})}
             sage: CC(12345)._sage_input_(sib, True)
             {atomic:12345}
@@ -1236,8 +1237,8 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: a = CC(1 + I)                                                         # needs sage.symbolic
-            sage: loads(dumps(a)) == a                                                  # needs sage.symbolic
+            sage: a = CC(1 + I)
+            sage: loads(dumps(a)) == a
             True
         """
         # TODO: This is potentially slow -- make a 1 version that
@@ -1435,7 +1436,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
         """
         if self.is_real():
             return self.real().__pari__()
-        return pari.complex(self.real() or 0, self.imag())
+        return sage.libs.pari.pari.complex(self.real() or 0, self.imag())
 
     def __mpc__(self):
         """
@@ -1709,7 +1710,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         Check that :issue:`11323` is fixed::
 
-            sage: float(5)^(0.5 + 14.1347251*I)                                         # needs sage.symbolic
+            sage: float(5)^(0.5 + 14.1347251*I)
             -1.62414637645790 - 1.53692828324508*I
         """
         if isinstance(right, (int, Integer)):
@@ -1762,8 +1763,8 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: z = 1 + CC(I)                                                         # needs sage.symbolic
-            sage: z.is_zero()                                                           # needs sage.symbolic
+            sage: z = 1 + CC(I)
+            sage: z.is_zero()
             False
         """
         return not (mpfr_zero_p(self.__re) and mpfr_zero_p(self.__im))
@@ -2112,7 +2113,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arccos()                                                    # needs sage.libs.pari sage.symbolic
+            sage: (1+CC(I)).arccos()                                                    # needs sage.libs.pari
             0.904556894302381 - 1.06127506190504*I
         """
         return self._parent(self.__pari__().acos())
@@ -2123,7 +2124,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arccosh()                                                   # needs sage.libs.pari sage.symbolic
+            sage: (1+CC(I)).arccosh()                                                   # needs sage.libs.pari
             1.06127506190504 + 0.904556894302381*I
         """
         return self._parent(self.__pari__().acosh())
@@ -2134,7 +2135,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arcsin()                                                    # needs sage.libs.pari sage.symbolic
+            sage: (1+CC(I)).arcsin()                                                    # needs sage.libs.pari
             0.666239432492515 + 1.06127506190504*I
         """
         return self._parent(self.__pari__().asin())
@@ -2145,7 +2146,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arcsinh()                                                   # needs sage.libs.pari sage.symbolic
+            sage: (1+CC(I)).arcsinh()                                                   # needs sage.libs.pari
             1.06127506190504 + 0.666239432492515*I
         """
         return self._parent(self.__pari__().asinh())
@@ -2156,7 +2157,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arctan()                                                    # needs sage.libs.pari sage.symbolic
+            sage: (1+CC(I)).arctan()                                                    # needs sage.libs.pari
             1.01722196789785 + 0.402359478108525*I
         """
         return self._parent(self.__pari__().atan())
@@ -2167,7 +2168,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).arctanh()                                                   # needs sage.libs.pari sage.symbolic
+            sage: (1+CC(I)).arctanh()                                                   # needs sage.libs.pari
             0.402359478108525 + 1.01722196789785*I
         """
         return self._parent(self.__pari__().atanh())
@@ -2267,7 +2268,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
         EXAMPLES::
 
             sage: # needs sage.libs.pari
-            sage: (1+CC(I)).cot()                                                       # needs sage.symbolic
+            sage: (1+CC(I)).cot()
             0.217621561854403 - 0.868014142895925*I
             sage: i = ComplexField(200).0
             sage: (1+i).cot()
@@ -2280,7 +2281,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         Verify that :issue:`29409` is fixed::
 
-            sage: cot(1 + I).n()                                                        # needs sage.symbolic
+            sage: cot(1 + I).n()
             0.217621561854403 - 0.868014142895925*I
         """
         return ~(self.tan())
@@ -2291,7 +2292,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).cos()                                                       # needs sage.symbolic
+            sage: (1+CC(I)).cos()
             0.833730025131149 - 0.988897705762865*I
         """
         # write self = a + i*b, then
@@ -2319,7 +2320,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).cosh()                                                      # needs sage.symbolic
+            sage: (1+CC(I)).cosh()
             0.833730025131149 + 0.988897705762865*I
         """
         # write self = a + i*b, then
@@ -2397,7 +2398,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         You can also use functional notation::
 
-            sage: eta(1 + CC(I))                                                        # needs sage.libs.pari sage.symbolic
+            sage: eta(1 + CC(I))                                                        # needs sage.libs.pari
             0.742048775836565 + 0.198831370229911*I
         """
         try:
@@ -2411,7 +2412,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).sin()                                                       # needs sage.symbolic
+            sage: (1+CC(I)).sin()
             1.29845758141598 + 0.634963914784736*I
         """
         # write self = a + i*b, then
@@ -2438,7 +2439,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).sinh()                                                      # needs sage.symbolic
+            sage: (1+CC(I)).sinh()
             0.634963914784736 + 1.29845758141598*I
         """
         # write self = a + i*b, then
@@ -2465,7 +2466,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).tan()                                                       # needs sage.symbolic
+            sage: (1+CC(I)).tan()
             0.271752585319512 + 1.08392332733869*I
         """
         # write self = a + i*b, then
@@ -2504,7 +2505,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: (1+CC(I)).tanh()                                                      # needs sage.symbolic
+            sage: (1+CC(I)).tanh()
             1.08392332733869 + 0.271752585319512*I
         """
         # write self = a + i*b, then
@@ -2605,7 +2606,6 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         An example which came up in testing::
 
-            sage: # needs sage.symbolic
             sage: I = CC(I)
             sage: a =  0.501648970493109 + 1.11877240294744*I
             sage: b =  1.05946309435930 + 1.05946309435930*I
@@ -2625,7 +2625,6 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         Consistency::
 
-            sage: # needs sage.symbolic
             sage: a = 1 + 0.5*I
             sage: b = 2 - 0.25*I
             sage: a.agm(b) - ComplexField(100)(a).agm(b)
@@ -2908,7 +2907,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
         Check that :issue:`7099` is fixed::
 
             sage: C = ComplexField(400)
-            sage: C(2 + I).gamma_inc(C(3 + I))  # abs tol 1e-120                        # needs sage.libs.pari sage.symbolic
+            sage: C(2 + I).gamma_inc(C(3 + I))  # abs tol 1e-120                        # needs sage.libs.pari
             0.121515644664508695525971545977439666159749344176962379708992904126499444842886620664991650378432544392118359044438541515 + 0.101533909079826033296475736021224621546966200987295663190553587086145836461236284668967411665020429964946098113930918850*I
         """
         return self._parent(self.__pari__().incgam(t, precision=self.prec()))
@@ -2936,8 +2935,8 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         ::
 
-            sage: b = ComplexNumber(float(exp(42)),0)                                   # needs sage.symbolic
-            sage: b.log()  # abs tol 1e-12                                              # needs sage.symbolic
+            sage: b = ComplexNumber(float(exp(42)),0)
+            sage: b.log()  # abs tol 1e-12
             41.99999999999971
 
         ::
@@ -2955,8 +2954,8 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
         If either component (real or imaginary) of the complex number
         is NaN (not a number), log will return the complex NaN::
 
-            sage: c = ComplexNumber(NaN,2)                                              # needs sage.symbolic
-            sage: c.log()                                                               # needs sage.symbolic
+            sage: c = ComplexNumber(NaN,2)
+            sage: c.log()
             NaN + NaN*I
         """
         if mpfr_nan_p(self.__re):
@@ -3143,7 +3142,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
             sage: CC(1.23).is_real()
             True
-            sage: CC(1+i).is_real()                                                     # needs sage.symbolic
+            sage: CC(1+i).is_real()
             False
         """
         return (mpfr_zero_p(self.__im) != 0)
@@ -3154,9 +3153,9 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: CC(1.23*i).is_imaginary()                                             # needs sage.symbolic
+            sage: CC(1.23*i).is_imaginary()
             True
-            sage: CC(1+i).is_imaginary()                                                # needs sage.symbolic
+            sage: CC(1+i).is_imaginary()
             False
         """
         return (mpfr_zero_p(self.__re) != 0)
@@ -3225,9 +3224,9 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
             sage: CC(1, 2).is_NaN()
             False
-            sage: CC(NaN).is_NaN()                                                      # needs sage.symbolic
+            sage: CC(NaN).is_NaN()
             True
-            sage: CC(NaN, 2).log().is_NaN()                                             # needs sage.symbolic
+            sage: CC(NaN,2).log().is_NaN()
             True
         """
         return mpfr_nan_p(self.__re) or mpfr_nan_p(self.__im)
@@ -3266,7 +3265,6 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
 
         EXAMPLES::
 
-            sage: # needs fpylll
             sage: C = ComplexField()
             sage: z = (1/2)*(1 + sqrt(3.0) *C.0); z
             0.500000000000000 + 0.866025403784439*I
@@ -3288,8 +3286,8 @@ def make_ComplexNumber0(fld, mult_order, real, imag):
 
     EXAMPLES::
 
-        sage: a = CC(1 + I)                                                             # needs sage.symbolic
-        sage: loads(dumps(a)) == a  # indirect doctest                                  # needs sage.symbolic
+        sage: a = CC(1 + I)
+        sage: loads(dumps(a)) == a # indirect doctest
         True
     """
     x = ComplexNumber(fld, real, imag)
