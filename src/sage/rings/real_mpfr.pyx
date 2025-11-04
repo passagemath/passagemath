@@ -150,6 +150,7 @@ from sage.structure.element cimport have_same_parent
 from sage.structure.richcmp cimport rich_to_bool_sgn
 cdef bin_op
 from sage.structure.element import bin_op
+
 from sage.rings.integer cimport Integer
 from sage.rings.rational cimport Rational
 from sage.rings.real_double cimport RealDoubleElement
@@ -2411,7 +2412,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         r"""
         TESTS::
 
-             sage: RR(2) - RIF(1)                                                        # needs sage.rings.real_interval_field
+            sage: RR(2) - RIF(1)                                                        # needs sage.rings.real_interval_field
             doctest:...:
             DeprecationWarning: automatic conversions from floating-point numbers to intervals are deprecated
             See https://github.com/sagemath/sage/issues/15114 for details.
@@ -3786,7 +3787,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
             sage: RR(pi).nearby_rational(max_denominator=1)
             3
 
-            sage: RR(-3.5).nearby_rational(max_denominator=1) # needs sage.rings.real_interval_field
+            sage: RR(-3.5).nearby_rational(max_denominator=1)                           # needs sage.rings.real_interval_field
             -3
 
         TESTS::
@@ -5414,7 +5415,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
 
             sage: r = sqrt(2.0); r
             1.41421356237310
-            sage: r.algebraic_dependency(5) # needs fpylll
+            sage: r.algebraic_dependency(5)                                             # needs fpylll
             x^2 - 2
         """
         return sage.arith.misc.algebraic_dependency(self, n)
