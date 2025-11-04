@@ -3475,7 +3475,7 @@ class HyperplaneArrangementElement(Element):
         if algorithm == "singular":
             # TODO: Implement this using libSingular
             mres = self.defining_polynomial().jacobian_ideal()._singular_().mres(0)
-            return len(mres) <= 2
+            return len(mres) <= 3
         elif algorithm == "BC":
             return self.derivation_module_free_chain() is not None
         else:
