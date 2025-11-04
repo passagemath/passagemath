@@ -7480,7 +7480,7 @@ cdef class Matrix(Matrix1):
         C = ComplexField(self.base_ring().precision())
         from sage.modules.free_module_element import vector
         return [
-                (C(e), [vector(C, V)], 1)
+                (C(complex(e)), [vector(C, [complex(x) for x in V])], 1)
                 for e, V in zip(eigenvalues, eigenvectors.tolist())
                 ]
 
@@ -16615,10 +16615,14 @@ cdef class Matrix(Matrix1):
         d = self.smith_form(transformation=False)
         r = min(self.nrows(), self.ncols())
         ed = [d[i, i] for i in range(r)]
-        try:
-            return [x.canonical_associate()[0] for x in ed]
-        except (AttributeError, TypeError):
-            return ed
+        # Normalize elements using canonical_associate for number field orders
+        from sage.rings.number_field.order import Order
+        if isinstance(self.base_ring(), Order):
+            try:
+                return [x.canonical_associate()[1] for x in ed]
+            except (AttributeError, TypeError):
+                pass
+        return ed
 
     def smith_form(self, transformation=True, integral=None, exact=True):
         r"""
