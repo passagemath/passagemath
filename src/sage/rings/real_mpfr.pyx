@@ -3578,7 +3578,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
         will be either exactly equal to or slightly larger than the number.
 
         EXAMPLES::
-        
+
             sage: # needs sage.rings.real_interval_field
             sage: RRd = RealField(53, rnd='RNDD')
             sage: RRz = RealField(53, rnd='RNDZ')
