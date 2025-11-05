@@ -16617,7 +16617,7 @@ cdef class Matrix(Matrix1):
         ed = [d[i, i] for i in range(r)]
         try:
             return [x.canonical_associate()[0] for x in ed]
-        except (AttributeError, TypeError):       
+        except (AttributeError, TypeError):
             return ed
 
     def smith_form(self, transformation=True, integral=None, exact=True):
