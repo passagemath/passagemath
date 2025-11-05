@@ -7477,10 +7477,12 @@ cdef class Matrix(Matrix1):
         from mpmath import mp
         eigenvalues, eigenvectors = mp.eig(self._mpmath_(), left=True, right=False)
         from sage.rings.complex_mpfr import ComplexField
+        from sage.libs.mpmath.utils import mpmath_to_sage
         C = ComplexField(self.base_ring().precision())
+        prec = self.base_ring().precision()
         from sage.modules.free_module_element import vector
         return [
-                (C(e), [vector(C, V)], 1)
+                (mpmath_to_sage(e, prec), [vector(C, [mpmath_to_sage(x, prec) for x in V])], 1)
                 for e, V in zip(eigenvalues, eigenvectors.tolist())
                 ]
 
