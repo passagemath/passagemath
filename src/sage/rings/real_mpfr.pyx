@@ -1696,7 +1696,7 @@ cdef class RealNumber(sage.structure.element.RingElement):
             ....:     for rnd_dir in ('RNDN', 'RNDD', 'RNDU', 'RNDZ'):
             ....:         fld = RealField(prec, rnd=rnd_dir)
             ....:         var = polygen(fld)
-            ....:         for v in value + [fld.random_element() for _ in range(5)]:
+            ....:         for v in values + [fld.random_element() for _ in range(5)]:
             ....:             for preparse in (True, False, None):
             ....:                 _ = sage_input(fld(v), verify=True, preparse=preparse)
             ....:                 _ = sage_input(fld(v) * var, verify=True, preparse=preparse)
