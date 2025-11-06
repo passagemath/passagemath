@@ -624,7 +624,7 @@ class Singular(ExtraTabCompletion, Expect):
             sage: o = s.hilb()
             ...// dimension (affine) = 0
             // degree (affine)  = 8
-            // ** right side is not a datum, assignment ignored
+            // ** right side is not a datum, assignment... ignored
             ...
 
         rather than ignored
