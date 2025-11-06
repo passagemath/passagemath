@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-singular
+# sage.doctest: needs sage.combinat
 """
 Weighted homogeneous elements of free algebras, in letterplace implementation
 
