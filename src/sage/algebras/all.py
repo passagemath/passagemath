@@ -21,5 +21,4 @@ from sage.algebras.all__sagemath_modules import *
 from sage.algebras.all__sagemath_singular import *
 from sage.algebras.all__sagemath_combinat import *
 
-from sage.algebras.fusion_rings.all import *
 from sage.algebras.lie_conformal_algebras.all import *

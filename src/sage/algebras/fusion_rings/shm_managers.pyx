@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-singular
+# sage.doctest: needs sage.combinat sage.groups
 r"""
 Shared Memory Managers for F-Symbol Attributes
 
