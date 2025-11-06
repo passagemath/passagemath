@@ -671,7 +671,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
             [1 0]
             [0 1]
 
-            sage: a = matrix(QQ, 4, primes_first_n(16))
+            sage: a = matrix(QQ, 4, primes_first_n(16))                                 # needs sage.libs.pari
             sage: a.inverse(algorithm='pari')                                           # needs sage.libs.pari
             [   3/11  -12/55    -1/5    2/11]
             [  -5/11   -2/55    3/10   -3/22]
