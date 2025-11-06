@@ -103,7 +103,7 @@ class Submodule_free_ambient(Module_free_ambient):
 
             sage: R.<x,y> = QQ[]
             sage: S = R.quotient([x*y])
-            sage: M = FreeModule(S, 2)
+            sage: M = FreeModule(S, 2)                                                  # needs sage.libs.singular
             sage: M.zero_submodule()                                                    # needs sage.libs.singular
             Submodule of Ambient free module of rank 2 over Quotient of Multivariate Polynomial Ring in x, y
              over Rational Field by the ideal (x*y)
