@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-singular
+# sage.doctest: needs sage.combinat sage.groups
 """
 Fast Fusion Ring Methods for Computing Braid Group Representations
 """

@@ -99,6 +99,7 @@ cpdef tuple _unflatten_coeffs(field, tuple eq_tup):
 
     EXAMPLES::
 
+        sage: # needs sage.combinat sage.groups
         sage: from sage.algebras.fusion_rings.poly_tup_engine import _unflatten_coeffs
         sage: fm = FusionRing("A2", 2).get_fmatrix()
         sage: p = fm._poly_ring.random_element()

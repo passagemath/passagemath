@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-singular
+# sage.doctest: needs sage.combinat sage.groups
 """
 The Fusion Ring of the Drinfeld Double of a Finite Group
 """
