@@ -1514,7 +1514,7 @@ class RijndaelGF(SageObject):
 
             sage: state = rgf._hex_to_GF('36400926f9336d2d9fb59d23c42c3950')
             sage: result = rgf.apply_poly(state, fn)                                    # needs sage.libs.gap
-            sage: rgf._GF_to_hex(result)
+            sage: rgf._GF_to_hex(result)                                                # needs sage.libs.gap
             'f4bcd45432e554d075f1d6c51dd03b3c'
             <BLANKLINE>
             sage: new_state = rgf.shift_rows(state)
