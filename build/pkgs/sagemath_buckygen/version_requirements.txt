@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-buckygen ~= 10.6.32.0
+passagemath-buckygen ~= 10.6.33.0
