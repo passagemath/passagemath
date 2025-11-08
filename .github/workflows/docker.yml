@@ -59,6 +59,7 @@ on:
            "gentoo-python3.13",
            "archlinux-latest",
            "opensuse-15.6-gcc_11-python3.11",
+           "opensuse-16.0-python3.13",
            "opensuse-tumbleweed-python3.10",
            "opensuse-tumbleweed",
            "voidlinux-musl",
