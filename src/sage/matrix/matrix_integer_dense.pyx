@@ -68,7 +68,7 @@ from cysignals.memory cimport sig_malloc, sig_free, check_allocarray
 from sage.libs.gmp.mpz cimport *
 
 from sage.modules.vector_integer_dense cimport Vector_integer_dense
-
+from sage.modules.free_module import vector
 from sage.misc.verbose import verbose, get_verbose
 
 from sage.arith.misc import previous_prime
@@ -101,9 +101,9 @@ from sage.rings.finite_rings.finite_field_constructor import GF
 from sage.matrix.matrix2 import decomp_seq
 
 from sage.matrix.matrix cimport Matrix
-
+from sage.matrix.constructor import matrix
 cimport sage.structure.element
-
+from sage.rings.integer_ring import ZZ
 import sage.matrix.matrix_space as matrix_space
 
 ################
@@ -176,40 +176,52 @@ class GraverBasis:
     
     def orthogonal_range_search(self, l, u):
         r"""
-        To Iterate over all Graver basis vectors `x` such that `l <= x <= u` (component-wise).
-        
+        Iterate over all Graver basis vectors `x` such that `l \le x \le u`
+        component-wise.
+
         INPUT:
-        
-        - ``l`` -- a lower bound (list or vector of length n).
-        - ``u`` -- an upper bound (list or vector of length n).
-        
-        OUTPUT: An iterator over all Graver basis vectors `x` satisfying `l_i \leq x_i \leq u_i` for all components i.
-        
-        EXAMPLE:
-        
-        If `G` is a GraverBasis, one can do::
-        
-            sage: for v in G.orthogonal_range_search([0,0,0], [2,2,2]):
-            ....:     print(v)
-        
-        to iterate over those Graver basis vectors bounded between `[0,0,0]` and `[2,2,2]` (inclusive).
+
+        - ``l`` -- lower bounds (list/tuple/vector of length ``n``).
+        - ``u`` -- upper bounds (list/tuple/vector of length ``n``).
+
+        OUTPUT:
+
+        An *iterator* over elements of ``ZZ^n`` (the ambient of the Graver basis).
+
+        EXAMPLES::
+
+            sage: from sage.rings.all import ZZ
+            sage: from sage.modules.free_module_element import vector
+            sage: # A tiny fake GraverBasis for demonstration:
+            sage: amb = ZZ**3
+            sage: def _fake_iter():
+            ....:     yield vector(ZZ, [0, 1, 2])
+            ....:     yield vector(ZZ, [1, 1, 1])
+            ....:     yield vector(ZZ, [3, 0, -1])
+            sage: class _GB:
+            ....:     def __init__(self, amb): self._ambient = amb
+            ....:     def __iter__(self): return _fake_iter()
+            ....:     def orthogonal_range_search(self, l, u): return orthogonal_range_search(self, l, u)
+            sage: G = _GB(amb)
+            sage: list(G.orthogonal_range_search([0,0,0], [2,2,2]))
+            [(0, 1, 2), (1, 1, 1)]
         """
+        amb = self._ambient
         l_vec = vector(ZZ, l)
         u_vec = vector(ZZ, u)
-        if len(l_vec) != self._ncols or len(u_vec) != self._ncols:
-            raise ValueError(f"Bound vectors must have length {self._ncols} (the number of columns of the original matrix).")
-        # To Iterate and yield vectors within bounds
-        for i in range(self._nrows):
-            v = self._basis_matrix.row(i)
-            # To check component-wise bounds
-            within_bounds = True
-            for j in range(self._ncols):
-                if v[j] < l_vec[j] or v[j] > u_vec[j]:
-                    within_bounds = False
-                    break
-            if within_bounds:
-                yield v
 
+        n = amb.rank()
+        if len(l_vec) != n or len(u_vec) != n:
+            raise ValueError(f"Bound vectors must have length {n}.")
+        if any(l_vec[i] > u_vec[i] for i in range(n)):
+            raise ValueError("All lower bound must be ≤ the corresponding upper bound.")
+
+        def _gen():
+            for v in self:                      # To iterate over the (possibly lazy) basis
+                w = amb(v)                      # To coerce to ZZ^n for consistent parent
+                if all(l_vec[i] <= w[i] <= u_vec[i] for i in range(n)):
+                    yield w
+        return _gen()
 
 cdef class Matrix_integer_dense(Matrix_dense):
     r"""
@@ -931,6 +943,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         fmpz_mat_sub(M._matrix,self._matrix,(<Matrix_integer_dense> right)._matrix)
         sig_off()
         return M
+
     def graver_basis(self):
         r"""
         To Compute the Graver basis of this integer matrix.
