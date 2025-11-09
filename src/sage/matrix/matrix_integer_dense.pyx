@@ -148,6 +148,8 @@ class GraverBasis:
         self._basis_matrix = G             # To store the resulting matrix of basis vectors (each row is a Graver vector)
         self._nrows = G.nrows()            # number of Graver basis vectors
         self._ncols = G.ncols()            # number of columns (same as A.ncols)
+        # To add Ambient free module ZZ^n for range/coercion utilities
+        self._ambient = ZZ ** self._ncols
     
     def __iter__(self):
         """To Iterate over the Graver basis vectors (each to return as a vector in ZZ^n)."""
@@ -192,7 +194,7 @@ class GraverBasis:
 
             sage: from sage.rings.all import ZZ
             sage: from sage.modules.free_module_element import vector
-            sage: # A tiny fake GraverBasis for demonstration:
+            sage: # A tiny fake GraverBasis to demonstrate the range filter without 4ti2:
             sage: amb = ZZ**3
             sage: def _fake_iter():
             ....:     yield vector(ZZ, [0, 1, 2])
@@ -205,10 +207,23 @@ class GraverBasis:
             sage: G = _GB(amb)
             sage: list(G.orthogonal_range_search([0,0,0], [2,2,2]))
             [(0, 1, 2), (1, 1, 1)]
+
+        A real Graver basis example (requires 4ti2)::
+
+            sage: A = matrix(ZZ, [[1,2,3]])                    # optional - 4ti2
+            sage: G = A.graver_basis()                          # optional - 4ti2
+            sage: list(G.orthogonal_range_search([0,0,-1],      # optional - 4ti2
+            ....:                                     [2,1, 0]))  # optional - 4ti2
+            [(1, 1, -1)]
         """
         amb = self._ambient
         l_vec = vector(ZZ, l)
         u_vec = vector(ZZ, u)
+    def ambient(self):
+        """
+        To Return the ambient free module ``ZZ^n`` of this Graver basis.
+        """
+        return self._ambient
 
         n = amb.rank()
         if len(l_vec) != n or len(u_vec) != n:
