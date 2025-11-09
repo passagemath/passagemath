@@ -6,10 +6,7 @@ Dedekind Domains
 #  Distributed under the terms of the GNU General Public License (GPL)
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
-try:
-    from typing import Self  # type: ignore (Python >= 3.11)
-except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.10)
+from typing import Self
 
 from sage.categories.category import Category
 from sage.categories.integral_domains import IntegralDomains
