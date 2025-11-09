@@ -68,7 +68,6 @@ from cysignals.memory cimport sig_malloc, sig_free, check_allocarray
 from sage.libs.gmp.mpz cimport *
 
 from sage.modules.vector_integer_dense cimport Vector_integer_dense
-from sage.modules.free_module import vector
 from sage.misc.verbose import verbose, get_verbose
 
 from sage.arith.misc import previous_prime
@@ -93,7 +92,6 @@ from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.polynomial_integer_dense_flint cimport Polynomial_integer_dense_flint
 from sage.structure.element cimport Element, Vector
-from sage.structure.element import Vector
 
 from sage.rings.finite_rings.finite_field_constructor import GF
 
@@ -203,7 +201,9 @@ class GraverBasis:
             sage: class _GB:
             ....:     def __init__(self, amb): self._ambient = amb
             ....:     def __iter__(self): return _fake_iter()
-            ....:     def orthogonal_range_search(self, l, u): return orthogonal_range_search(self, l, u)
+            ....:     def orthogonal_range_search(self, l, u):
+            ....:         # Reuse the library implementation for filtering:
+            ....:         return GraverBasis.orthogonal_range_search(self, l, u)
             sage: G = _GB(amb)
             sage: list(G.orthogonal_range_search([0,0,0], [2,2,2]))
             [(0, 1, 2), (1, 1, 1)]
@@ -219,12 +219,6 @@ class GraverBasis:
         amb = self._ambient
         l_vec = vector(ZZ, l)
         u_vec = vector(ZZ, u)
-    def ambient(self):
-        """
-        To Return the ambient free module ``ZZ^n`` of this Graver basis.
-        """
-        return self._ambient
-
         n = amb.rank()
         if len(l_vec) != n or len(u_vec) != n:
             raise ValueError(f"Bound vectors must have length {n}.")
@@ -232,11 +226,17 @@ class GraverBasis:
             raise ValueError("All lower bound must be ≤ the corresponding upper bound.")
 
         def _gen():
-            for v in self:                      # To iterate over the (possibly lazy) basis
-                w = amb(v)                      # To coerce to ZZ^n for consistent parent
+            for v in self:                      # iterate over (possibly lazy) basis
+                w = amb(v)                      # coerce to ZZ^n for consistent parent
                 if all(l_vec[i] <= w[i] <= u_vec[i] for i in range(n)):
                     yield w
         return _gen()
+
+    def ambient(self):
+        r"""
+        Return the ambient free module ``ZZ^n`` of this Graver basis.
+        """
+        return self._ambient
 
 cdef class Matrix_integer_dense(Matrix_dense):
     r"""
