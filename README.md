@@ -56,8 +56,28 @@ Then import the top level:
     from sage.all import *
 
 Note that the Colab notebook uses a Python kernel, so no Sage-specific preparsing is in effect.
-When following [code examples in the documentation](https://passagemath.org/docs/10.6/html/en/a_tour_of_sage/index.html),
+When following [code examples in the documentation](https://passagemath.org/docs/latest/html/en/a_tour_of_sage/index.html),
 be sure to switch to the "Python" tab.
+
+
+Running passagemath in the cloud (molab.marimo.io)
+--------------------------------------------------
+
+Just create a [Marimo notebook on molab](https://molab.marimo.io/).
+
+Use the "Manage Packages" icon on the left to install "passagemath-standard".
+
+Marimo may prompt you a few times that the notebook may need to be restarted; just confirm it.
+
+In the marimo notebook, no Sage-specific preparsing is in effect.
+When following [code examples in the documentation](https://passagemath.org/docs/latest/html/en/a_tour_of_sage/index.html),
+be sure to switch to the "Python" tab.
+
+Also, by design of the reactive notebook, importing `*` does not work.
+Import the global bindings that you need manually, for example:
+
+    from sage.all import ZZ
+    V = ZZ**8; V
 
 
 Local installation of passagemath: Supported platforms
