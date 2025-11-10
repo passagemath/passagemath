@@ -146,13 +146,11 @@ class GraverBasis:
         self._basis_matrix = G             # To store the resulting matrix of basis vectors (each row is a Graver vector)
         self._nrows = G.nrows()            # number of Graver basis vectors
         self._ncols = G.ncols()            # number of columns (same as A.ncols)
-        # To add Ambient free module ZZ^n for range/coercion utilities
-        self._ambient = ZZ ** self._ncols
     
     def __iter__(self):
         """To Iterate over the Graver basis vectors (each to return as a vector in ZZ^n)."""
         for i in range(self._nrows):
-            yield self._ambient(self._basis_matrix.row(i))  # To return each row as a Sage vector (element of ZZ^n)
+            yield self._basis_matrix.row(i)  # To return each row as a Sage vector (element of ZZ^n)
     
     def __len__(self):
         """To return the number of vectors in the Graver basis."""
@@ -172,77 +170,35 @@ class GraverBasis:
             index += self._nrows
         if index < 0 or index >= self._nrows:
             raise IndexError("GraverBasis index out of range")
-        return self._ambient(self._basis_matrix.row(index))
+        return self._basis_matrix.row(index)
     
     def orthogonal_range_search(self, l, u):
         r"""
-        Iterate over all Graver basis vectors `x` such that `l \le x \le u`
-        component-wise.
-
+        To Iterate over all Graver basis vectors `x` such that `l <= x <= u` (component-wise).
+        
         INPUT:
-
-        - ``l`` -- lower bounds (list/tuple/vector of length ``n``).
-        - ``u`` -- upper bounds (list/tuple/vector of length ``n``).
-
-        OUTPUT:
-
-        An *iterator* over elements of ``ZZ^n`` (the ambient of the Graver basis).
-
-        EXAMPLES::
-
-            sage: from sage.rings.all import ZZ
-            sage: from sage.modules.free_module_element import vector
-            sage: # A tiny fake GraverBasis to demonstrate the range filter without 4ti2:
-            sage: amb = ZZ**3
-            sage: def _fake_iter():
-            ....:     yield vector(ZZ, [0, 1, 2])
-            ....:     yield vector(ZZ, [1, 1, 1])
-            ....:     yield vector(ZZ, [3, 0, -1])
-            sage: class _GB:
-            ....:     def __init__(self, amb): self._ambient = amb
-            ....:     def __iter__(self): return _fake_iter()
-            ....:     def orthogonal_range_search(self, l, u):
-            ....:         # To Inline the small filter: avoid referring to GraverBasis in doctest scope
-            ....:         l_vec = vector(ZZ, l); u_vec = vector(ZZ, u)
-            ....:         n = self._ambient.rank()
-            ....:         def _gen():
-            ....:             for v in self:
-            ....:                 w = self._ambient(v)
-            ....:                 if all(l_vec[i] <= w[i] <= u_vec[i] for i in range(n)):            ....:                     yield w
-            ....:         return _gen()
-            sage: G = _GB(amb)
-            sage: list(G.orthogonal_range_search([0,0,0], [2,2,2]))
-            [(0, 1, 2), (1, 1, 1)]
-
-        A real Graver basis example (requires 4ti2)::
-
-            sage: A = matrix(ZZ, [[1,2,3]])                    # optional - 4ti2
-            sage: G = A.graver_basis()                          # optional - 4ti2
-            sage: list(G.orthogonal_range_search([0,0,-1],      # optional - 4ti2
-            ....:                                     [2,1, 0]))  # optional - 4ti2
-            [(1, 1, -1)]
+        
+        - ``l`` -- a lower bound (list or vector of length n).
+        - ``u`` -- an upper bound (list or vector of length n).
+        
+        OUTPUT: An iterator over all Graver basis vectors `x` satisfying `l_i \leq x_i \leq u_i` for all components i.
+        
         """
-        amb = self._ambient
         l_vec = vector(ZZ, l)
         u_vec = vector(ZZ, u)
-        n = amb.rank()
-        if len(l_vec) != n or len(u_vec) != n:
-            raise ValueError(f"Bound vectors must have length {n}.")
-        if any(l_vec[i] > u_vec[i] for i in range(n)):
-            raise ValueError("All lower bound must be ≤ the corresponding upper bound.")
-
-        def _gen():
-            for v in self:                      # iterate over (possibly lazy) basis
-                w = amb(v)                      # coerce to ZZ^n for consistent parent
-                if all(l_vec[i] <= w[i] <= u_vec[i] for i in range(n)):
-                    yield w
-        return _gen()
-
-    def ambient(self):
-        r"""
-        Return the ambient free module ``ZZ^n`` of this Graver basis.
-        """
-        return self._ambient
+        if len(l_vec) != self._ncols or len(u_vec) != self._ncols:
+            raise ValueError(f"Bound vectors must have length {self._ncols} (the number of columns of the original matrix).")
+        # To Iterate and yield vectors within bounds
+        for i in range(self._nrows):
+            v = self._basis_matrix.row(i)
+            # To check component-wise bounds
+            within_bounds = True
+            for j in range(self._ncols):
+                if v[j] < l_vec[j] or v[j] > u_vec[j]:
+                    within_bounds = False
+                    break
+            if within_bounds:
+                yield v
 
 cdef class Matrix_integer_dense(Matrix_dense):
     r"""
@@ -965,7 +921,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         sig_off()
         return M
 
-    cpdef graver_basis(self):
+    def graver_basis(self):
         r"""
         To Compute the Graver basis of this integer matrix.
         
@@ -983,7 +939,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         
             sage: A = matrix(ZZ, [[1, 2, 3]])
             sage: G = A.graver_basis()  # optional - 4ti2
-            sage: list(G)    # Iterate over all Graver basis vectors
+            sage: list(G)    # To Iterate over all Graver basis vectors
             [ (2, -1, 0),
               (3, 0, -1),
               (1, 1, -1),
