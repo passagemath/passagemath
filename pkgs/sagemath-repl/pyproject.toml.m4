@@ -24,6 +24,9 @@ dynamic = ["version"]
 include(`pyproject_toml_metadata_supports_windows.m4')dnl'
 
 [project.optional-dependencies]
+jupyterlab  = [SPKG_INSTALL_REQUIRES_jupyterlab]
+marimo      = [SPKG_INSTALL_REQUIRES_marimo]
+notebook    = [SPKG_INSTALL_REQUIRES_notebook]
 # Improved formatting of docstrings in the help system
 sphinx = [
     SPKG_INSTALL_REQUIRES_sphinx

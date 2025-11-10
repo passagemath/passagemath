@@ -74,6 +74,29 @@ class NotebookJupyterlab():
         main(argv)
 
 
+class NotebookMarimo():
+    def print_banner(self):
+        print('Please wait while Marimo starts...')
+
+    @classmethod
+    def print_help(cls):
+        cls(['help'])
+
+    def __init__(self, argv):
+        try:
+            from marimo._cli.cli import main
+        except ImportError:
+            import traceback
+            traceback.print_exc()
+            print("Marimo is not installed (at least not in this Sage installation).")
+            print("You can install it by running")
+            print("  sage -i marimo")
+            raise SystemExit(1)
+        self.print_banner()
+        sys.argv = ['marimo', 'edit'] + argv
+        main()
+
+
 class SageNBExport(NotebookJupyter):
 
     def print_banner(self):
@@ -134,6 +157,7 @@ notebook_launcher = {
     'ipython': NotebookJupyter,
     'jupyter': NotebookJupyter,
     'jupyterlab': NotebookJupyterlab,
+    'marimo': NotebookMarimo,
     'export': SageNBExport,
 }
 
