@@ -73,7 +73,7 @@ from sage.misc.verbose import verbose, get_verbose
 from sage.arith.misc import previous_prime
 from sage.arith.long cimport integer_check_long_py
 from sage.arith.power cimport generic_power
-from sage.structure.element cimport Element
+from sage.structure.element cimport Element, Vector
 from sage.structure.proof.proof import get_flag as get_proof_flag
 from sage.structure.richcmp cimport rich_to_bool
 from sage.misc.randstate cimport randstate, current_randstate
@@ -88,11 +88,10 @@ from sage.rings.rational_field import QQ
 from sage.rings.real_double import RDF
 from sage.rings.integer_ring import ZZ, IntegerRing_class
 from sage.rings.integer_ring cimport IntegerRing_class
+from sage.matrix.matrix_dense cimport Matrix_dense
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.polynomial_integer_dense_flint cimport Polynomial_integer_dense_flint
-from sage.structure.element cimport Element, Vector
-
 from sage.rings.finite_rings.finite_field_constructor import GF
 
 
@@ -101,8 +100,9 @@ from sage.matrix.matrix2 import decomp_seq
 from sage.matrix.matrix cimport Matrix
 from sage.matrix.constructor import matrix
 cimport sage.structure.element
-from sage.rings.integer_ring import ZZ
 import sage.matrix.matrix_space as matrix_space
+from sage.modules.free_module_element import vector  # to use in GraverBasis.orthogonal_range_search
+
 
 ################
 # Used for modular HNF
@@ -152,7 +152,7 @@ class GraverBasis:
     def __iter__(self):
         """To Iterate over the Graver basis vectors (each to return as a vector in ZZ^n)."""
         for i in range(self._nrows):
-            yield self._basis_matrix.row(i)  # To return each row as a Sage vector (element of ZZ^n)
+            yield self._ambient(self._basis_matrix.row(i))  # To return each row as a Sage vector (element of ZZ^n)
     
     def __len__(self):
         """To return the number of vectors in the Graver basis."""
@@ -172,7 +172,7 @@ class GraverBasis:
             index += self._nrows
         if index < 0 or index >= self._nrows:
             raise IndexError("GraverBasis index out of range")
-        return self._basis_matrix.row(index)
+        return self._ambient(self._basis_matrix.row(index))
     
     def orthogonal_range_search(self, l, u):
         r"""
@@ -202,8 +202,14 @@ class GraverBasis:
             ....:     def __init__(self, amb): self._ambient = amb
             ....:     def __iter__(self): return _fake_iter()
             ....:     def orthogonal_range_search(self, l, u):
-            ....:         # Reuse the library implementation for filtering:
-            ....:         return GraverBasis.orthogonal_range_search(self, l, u)
+            ....:         # To Inline the small filter: avoid referring to GraverBasis in doctest scope
+            ....:         l_vec = vector(ZZ, l); u_vec = vector(ZZ, u)
+            ....:         n = self._ambient.rank()
+            ....:         def _gen():
+            ....:             for v in self:
+            ....:                 w = self._ambient(v)
+            ....:                 if all(l_vec[i] <= w[i] <= u_vec[i] for i in range(n)):            ....:                     yield w
+            ....:         return _gen()
             sage: G = _GB(amb)
             sage: list(G.orthogonal_range_search([0,0,0], [2,2,2]))
             [(0, 1, 2), (1, 1, 1)]
@@ -959,7 +965,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         sig_off()
         return M
 
-    def graver_basis(self):
+    cpdef graver_basis(self):
         r"""
         To Compute the Graver basis of this integer matrix.
         
