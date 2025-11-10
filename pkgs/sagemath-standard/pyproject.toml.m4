@@ -52,6 +52,7 @@ latte       = ["passagemath-latte-4ti2"]  # alias
 latte_int   = ["passagemath-latte-4ti2"]
 lrslib      = ["passagemath-lrslib"]
 macaulay2   = ["passagemath-macaulay2"]
+marimo      = [SPKG_INSTALL_REQUIRES_marimo]
 mcqd        = ["passagemath-mcqd"]
 meataxe     = ["passagemath-meataxe"]
 msolve      = ["passagemath-msolve"]
