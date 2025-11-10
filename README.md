@@ -118,7 +118,6 @@ $ python3 --version
 Python 3.12.7
 $ python3 -m venv ~/passagemath-venv
 $ source ~/passagemath-venv/bin/activate
-$ rehash
 ```
 
 (Activating the virtual environment only takes effect for the current terminal session;
@@ -134,6 +133,7 @@ Build these wheels from source using [![PyPI: passagemath-conf](https://img.shie
 (passagemath-venv) $ export SAGE_CONF_CONFIGURE_ARGS="--disable-gcc-version-check"
 (passagemath-venv) $ pip cache remove passagemath_conf
 (passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
+(passagemath-venv) $ rehash
 (passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
 (passagemath-venv) $ export PIP_PREFER_BINARY=1
 ```
@@ -142,6 +142,7 @@ Then install the meta-package [![PyPI: passagemath-standard](https://img.shields
 
 ```bash session
 (passagemath-venv) $ pip install -v --prefer-binary passagemath-standard
+(passagemath-venv) $ rehash
 ```
 
 Start the Sage REPL:
@@ -150,7 +151,12 @@ Start the Sage REPL:
 (passagemath-venv) $ sage
 ```
 
-Alternatively, use a Python or IPython REPL, or use the Python kernel or the provided Sage kernel in Jupyter.
+Alternatively,
+
+* use a Python (`python3`) or IPython (`ipython`) REPL, or
+* use the Python kernel or the provided Sage kernel in a Jupyter notebook (after `pip install notebook`, use `sage -n jupyter`), or
+* use the Python kernel or the provided Sage kernel in JupyterLab (after `pip install jupyterlab`, use `sage -n jupyterlab`), or
+* use a reactive marimo notebook (`pip install marimo`, followed by `sage -n marimo`).
 
 
 Modularized distributions
@@ -473,7 +479,6 @@ Full Installation from Source as passagemath
     Python 3.12.7
     $ python3 -m venv ~/passagemath-venv
     $ source ~/passagemath-venv/bin/activate
-    $ rehash
     ```
 
 10. Let's configure it so that all ``passagemath-*`` packages are built from your
@@ -503,6 +508,7 @@ Full Installation from Source as passagemath
     ```bash session
     (passagemath-venv) $ python3 -m pip cache remove passagemath_conf
     (passagemath-venv) $ python3 -m pip install --force-reinstall -v passagemath-conf
+    (passagemath-venv) $ rehash
     ```
 
 12. Depending on what you chose above, a wheelhouse may now provide various
@@ -533,6 +539,7 @@ Full Installation from Source as passagemath
 
     ```bash session
     (passagemath-venv) $ python3 -m pip install -v passagemath-standard
+    (passagemath-venv) $ rehash
     ```
 
 15. Type `sage` to try it out. At the Sage prompt, try for example `2 + 2`,
