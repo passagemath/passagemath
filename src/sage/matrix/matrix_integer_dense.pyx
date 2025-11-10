@@ -4881,7 +4881,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         if row == 0:
             return self, pivots
         # 1. Create a new matrix that has row as the last row.
-        row_mat = matrix(row)
+        row_mat = matrix(row) #
         A = self.stack(row_mat)
         # 2. Working from the left, clear each column to put
         #    the resulting matrix back in echelon form.
