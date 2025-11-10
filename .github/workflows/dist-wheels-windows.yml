@@ -189,10 +189,11 @@ jobs:
       # SPKGs to install as system packages
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm
       # Non-Python packages to install as spkgs
-      #TARGETS_PRE: ccache libpng mpfi givaro pari ntl flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
+      #TARGETS_PRE: ccache libpng mpfi givaro pari ntl flint iml lcalc libbraiding m4ri m4rie gap nauty gfan tachyon pip
       TARGETS_PRE: >-
         boost_cropped
         gmp
+        ecm
         glpk
         gsl
         mpc
@@ -390,6 +391,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_categories
 
+      - name: sagemath-libecm
+        id:   sagemath-libecm
+        uses: pypa/cibuildwheel@v3.0.1
+        with:
+          package-dir: unpacked/passagemath_libecm
+
       - name: sagemath-graphs
         id:   sagemath-graphs
         uses: pypa/cibuildwheel@v3.2.1
@@ -518,6 +525,7 @@ jobs:
          'sagemath-glpk',
          'sagemath-graphs',
          'sagemath-homfly',
+         'sagemath-libecm',
          'sagemath-modules',
          'sagemath-planarity',
          'sagemath-plot',
