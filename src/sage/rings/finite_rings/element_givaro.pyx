@@ -166,8 +166,8 @@ cdef class Cache_givaro(Cache_base):
 
         For binary fields, you may ask for a minimal weight polynomial::
 
-            sage: k = GF(2**10, 'a', modulus='minimal_weight')                          # needs sage.libs.ntl
-            sage: k.modulus()                                                           # needs sage.libs.ntl
+            sage: k = GF(2**10, 'a', modulus='minimal_weight')                          # needs sage.libs.m4ri sage.libs.ntl
+            sage: k.modulus()                                                           # needs sage.libs.m4ri sage.libs.ntl
             x^10 + x^3 + 1
         """
         # we are calling late_import here because this constructor is

@@ -443,7 +443,8 @@ cdef class Cache_ntl_gf2e(Cache_base):
 
         EXAMPLES::
 
-            sage: k.<a> = GF(2^20,modulus='minimal_weight')
+            sage: # needs sage.libs.m4ri
+            sage: k.<a> = GF(2^20, modulus='minimal_weight')
             sage: k._cache.polynomial()
             [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
         """
