@@ -977,9 +977,9 @@ cdef class ReductionMap(Map):
             sage: k.reduction_map()                                                     # needs sage.libs.ntl
             Partially defined reduction map:
               From: Fraction Field of
-                    Univariate Polynomial Ring in t over Finite Field of size 2 (using GF2X)
+                    Univariate Polynomial Ring in t over Finite Field of size 2 (using ...)
               To:   Residue field in tbar of Principal ideal (t^7 + t^6 + t^5 + t^4 + 1) of
-                    Univariate Polynomial Ring in t over Finite Field of size 2 (using GF2X)
+                    Univariate Polynomial Ring in t over Finite Field of size 2 (using ...)
             sage: type(k)                                                               # needs sage.libs.linbox
             <class 'sage.rings.finite_rings.residue_field_givaro.ResidueFiniteField_givaro_with_category'>
         """
@@ -1211,9 +1211,9 @@ cdef class ReductionMap(Map):
             sage: f.section()                                                           # needs sage.libs.ntl
             Lifting map:
               From: Residue field in a of Principal ideal (t^5 + t^2 + 1) of
-                    Univariate Polynomial Ring in t over Finite Field of size 2 (using GF2X)
+                    Univariate Polynomial Ring in t over Finite Field of size 2 (using ...)
               To:   Fraction Field of
-                    Univariate Polynomial Ring in t over Finite Field of size 2 (using GF2X)
+                    Univariate Polynomial Ring in t over Finite Field of size 2 (using ...)
         """
         if self._section is None:
             self._section = LiftingMap(self, self._to_order, self._PB)
