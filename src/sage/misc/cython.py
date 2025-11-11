@@ -246,10 +246,10 @@ def cython(filename, verbose=0, compile_message=False,
 
     Test ``view_annotate``::
 
-        sage: cython('''
+        sage: cython('''                                        # optional -- webbrowser
         ....: def f(int n):
         ....:     return n*n
-        ....: ''', view_annotate=True)  # optional -- webbrowser
+        ....: ''', view_annotate=True)
 
     ::
 

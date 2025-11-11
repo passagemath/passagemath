@@ -252,13 +252,15 @@ specified if given a non-interval and an interval::
 
 TESTS::
 
-    sage: import numpy                                                                  # needs numpy
-    sage: if int(numpy.version.short_version[0]) > 1:                                   # needs numpy
-    ....:     _ = numpy.set_printoptions(legacy="1.25")                                     # needs numpy
-    sage: RIF(2) == numpy.int8('2')                                                     # needs numpy
+    sage: # needs numpy
+    sage: import numpy
+    sage: if int(numpy.version.short_version[0]) > 1:
+    ....:     _ = numpy.set_printoptions(legacy="1.25")
+    sage: RIF(2) == numpy.int8('2')
     True
-    sage: numpy.int8('2') == RIF(2)                                                     # needs numpy
+    sage: numpy.int8('2') == RIF(2)
     True
+
     sage: RIF(0,1) < float('2')
     Traceback (most recent call last):
     ...

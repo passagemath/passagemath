@@ -1156,13 +1156,14 @@ cdef class NumpyToSRMorphism(Morphism):
 
     We check that :issue:`8949` and :issue:`9769` are fixed (see also :issue:`18076`)::
 
-        sage: import numpy                                                              # needs numpy
-        sage: if int(numpy.version.short_version[0]) > 1:                               # needs numpy
-        ....:     _ = numpy.set_printoptions(legacy="1.25")                                 # needs numpy
+        sage: # needs numpy
+        sage: import numpy
+        sage: if int(numpy.version.short_version[0]) > 1:
+        ....:     _ = numpy.set_printoptions(legacy="1.25")
         sage: f(x) = x^2
-        sage: f(numpy.int8('2'))                                                        # needs numpy
+        sage: f(numpy.int8('2'))
         4
-        sage: f(numpy.int32('3'))                                                       # needs numpy
+        sage: f(numpy.int32('3'))
         9
 
     Note that the answer is a Sage integer and not a numpy type::
