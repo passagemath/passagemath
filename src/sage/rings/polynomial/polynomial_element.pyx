@@ -10697,12 +10697,12 @@ cdef class Polynomial(CommutativePolynomial):
             sage: g = f.map_coefficients(residue, new_base_ring=k); g
             x + 1
             sage: g.parent()                                                            # needs sage.libs.ntl
-            Univariate Polynomial Ring in x over Finite Field of size 2 (using GF2X)
+            Univariate Polynomial Ring in x over Finite Field of size 2 (using ...)
             sage: residue = k.coerce_map_from(ZZ)
             sage: g = f.map_coefficients(residue); g
             x + 1
             sage: g.parent()                                                            # needs sage.libs.ntl
-            Univariate Polynomial Ring in x over Finite Field of size 2 (using GF2X)
+            Univariate Polynomial Ring in x over Finite Field of size 2 (using ...)
         """
         R = self._parent
         if new_base_ring is not None:

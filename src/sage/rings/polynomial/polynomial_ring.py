@@ -1326,7 +1326,7 @@ class PolynomialRing_generic(Ring):
 
         EXAMPLES::
 
-            sage: # needs sage.libs.ntl
+            sage: # needs sage.libs.m4ri sage.libs.ntl
             sage: R.<z> = Integers(2)[]; R
             Univariate Polynomial Ring in z over Ring of integers modulo 2 (using GF2X)
             sage: R.is_field()
@@ -3382,20 +3382,20 @@ class PolynomialRing_dense_mod_n(PolynomialRing_commutative):
             sage: k.<a> = R.residue_field(t^3 + t + 1); k
             Residue field in a
              of Principal ideal (t^3 + t + 1) of Univariate Polynomial Ring in t
-             over Finite Field of size 2 (using GF2X)
+             over Finite Field of size 2 (using ...)
             sage: k.list()
             [0, a, a^2, a + 1, a^2 + a, a^2 + a + 1, a^2 + 1, 1]
             sage: R.residue_field(t)
             Residue field of Principal ideal (t) of Univariate Polynomial Ring in t
-             over Finite Field of size 2 (using GF2X)
+             over Finite Field of size 2 (using ...)
             sage: P = R.irreducible_element(8) * R
             sage: P
             Principal ideal (t^8 + t^4 + t^3 + t^2 + 1) of Univariate Polynomial Ring in t
-             over Finite Field of size 2 (using GF2X)
+             over Finite Field of size 2 (using ...)
             sage: k.<a> = R.residue_field(P); k
             Residue field in a
              of Principal ideal (t^8 + t^4 + t^3 + t^2 + 1) of Univariate Polynomial Ring in t
-             over Finite Field of size 2 (using GF2X)
+             over Finite Field of size 2 (using ...)
             sage: k.cardinality()
             256
 
@@ -3429,8 +3429,8 @@ class PolynomialRing_dense_mod_p(PolynomialRing_dense_finite_field,
         TESTS::
 
             sage: P = GF(2)['x']; P                                                     # needs sage.libs.ntl
-            Univariate Polynomial Ring in x over Finite Field of size 2 (using GF2X)
-            sage: type(P.gen())                                                         # needs sage.libs.ntl
+            Univariate Polynomial Ring in x over Finite Field of size 2 (using ...)
+            sage: type(P.gen())                                                         # needs sage.libs.m4ri sage.libs.ntl
             <class 'sage.rings.polynomial.polynomial_gf2x.Polynomial_GF2X'>
 
             sage: from sage.rings.polynomial.polynomial_ring import PolynomialRing_dense_mod_p
@@ -3503,7 +3503,7 @@ class PolynomialRing_dense_mod_p(PolynomialRing_dense_finite_field,
         """
         TESTS::
 
-            sage: # needs sage.libs.ntl
+            sage: # needs sage.libs.m4ri sage.libs.ntl
             sage: PolynomialRing(GF(2), 'x', implementation='GF2X')
             Univariate Polynomial Ring in x over Finite Field of size 2 (using GF2X)
             sage: PolynomialRing(GF(2), 'x', implementation='NTL')
@@ -3607,7 +3607,7 @@ class PolynomialRing_dense_mod_p(PolynomialRing_dense_finite_field,
 
             sage: GF(2)['x'].irreducible_element(33)                                    # needs sage.rings.finite_rings
             x^33 + x^13 + x^12 + x^11 + x^10 + x^8 + x^6 + x^3 + 1
-            sage: GF(2)['x'].irreducible_element(33, algorithm='minimal_weight')        # needs sage.libs.ntl sage.rings.finite_rings
+            sage: GF(2)['x'].irreducible_element(33, algorithm='minimal_weight')        # needs sage.libs.m4ri sage.libs.ntl sage.rings.finite_rings
             x^33 + x^10 + 1
 
         In degree 1::

@@ -127,7 +127,7 @@ def get_matrix_class(R, nrows, ncols, sparse, implementation):
         sage: get_matrix_class(ZZ, 3, 3, False, 'generic')
         <class 'sage.matrix.matrix_generic_dense.Matrix_generic_dense'>
 
-        sage: get_matrix_class(GF(2^15), 3, 3, False, None)                             # needs sage.rings.finite_rings
+        sage: get_matrix_class(GF(2^15), 3, 3, False, None)                             # needs sage.libs.m4ri sage.rings.finite_rings
         <class 'sage.matrix.matrix_gf2e_dense.Matrix_gf2e_dense'>
         sage: get_matrix_class(GF(2^17), 3, 3, False, None)                             # needs sage.rings.finite_rings
         <class 'sage.matrix.matrix_generic_dense.Matrix_generic_dense'>
@@ -1017,7 +1017,7 @@ class MatrixSpace(UniqueRepresentation, Parent):
         EXAMPLES::
 
             sage: MS = MatrixSpace(GF(2), 20, 20)
-            sage: MS._copy_zero
+            sage: MS._copy_zero                                                                     # needs sage.libs.m4ri
             False
 
             sage: MS = MatrixSpace(GF(3), 20, 20)
@@ -1043,14 +1043,23 @@ class MatrixSpace(UniqueRepresentation, Parent):
         """
         if self.__is_sparse:
             return False
-        elif self.Element is sage.matrix.matrix_mod2_dense.Matrix_mod2_dense:
-            return False
-        elif self.Element is sage.matrix.matrix_rational_dense.Matrix_rational_dense:
-            return False
-        elif self.__nrows > 40 and self.__ncols > 40:
-            return False
+        try:
+            from sage.matrix.matrix_mod2_dense import Matrix_mod2_dense
+        except ImportError:
+            pass
         else:
-            return True
+            if self.Element is Matrix_mod2_dense:
+                return False
+        try:
+            from sage.matrix.matrix_rational_dense import Matrix_rational_dense
+        except ImportError:
+            pass
+        else:
+            if self.Element is Matrix_rational_dense:
+                return False
+        if self.__nrows > 40 and self.__ncols > 40:
+            return False
+        return True
 
     def _element_constructor_(self, entries, **kwds):
         """
