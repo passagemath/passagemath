@@ -656,7 +656,7 @@ cdef class Matroid(SageObject):
 
             sage: M = matroids.catalog.R10()
             sage: M1M = M.direct_sum(M)
-            sage: Matroid(M1M, regular=True)  # indirect doctest
+            sage: Matroid(M1M, regular=True)  # indirect doctest                        # needs sage.graphs
             Regular matroid of rank 10 on 20 elements with 26244 bases
         """
         cdef list res = []
