@@ -1,5 +1,6 @@
 export LDFLAGS="$LDFLAGS -lz -lbz2"
 #export CPPFLAGS="-DHAVE_CLOCK_GETTIME=0"
+export CXX="$CXX -std=c++14"
 
 # See discussion on #12220
 #
