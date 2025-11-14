@@ -2413,6 +2413,16 @@ class IncidenceStructure:
 
         return not points
 
+    def is_unimodular(self):
+        r"""
+        Test whether ``self`` is unimodular.
+
+        A hypergraph is unimodular if its incidence matrix is totally unimodular.
+
+        See 83.3 (Unimodular hypergraphs) in [Sch2003]_.
+        """
+        raise NotImplementedError
+
 
 from sage.misc.rest_index_of_methods import gen_rest_table_index
 __doc__ = __doc__.format(METHODS_OF_IncidenceStructure=gen_rest_table_index(IncidenceStructure))
