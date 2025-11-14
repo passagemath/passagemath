@@ -8024,6 +8024,20 @@ class Graph(GenericGraph):
 
         return MD.is_prime() and len(MD.children) == self.order()
 
+    @doc_index("Graph properties")
+    def is_unimodular(self):
+        r"""
+        Test whether ``self`` is unimodular.
+
+        A graphs is unimodular if its max-clique--vertex incidence matrix
+        is totally unimodular.
+
+        Unimodular graphs are perfect.
+
+        See 66.5c (Unimodular graphs) in [Sch2003]_.
+        """
+        raise NotImplementedError
+
     @doc_index("Connectivity, orientations, trees")
     def gomory_hu_tree(self, algorithm=None, solver=None, verbose=0,
                        *, integrality_tolerance=1e-3):
