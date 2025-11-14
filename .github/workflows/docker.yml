@@ -97,6 +97,9 @@ on:
       logs_artifact:
         default: true
         type: boolean
+      logs_artifact_suffix:
+        required: false
+        type: string
       merge_ci_fixes:
         default: false
         type: boolean
@@ -155,7 +158,7 @@ jobs:
         tox_packages_factor: ${{ fromJson(inputs.tox_packages_factors) }}
     env:
       TOX_ENV:            "docker-${{ matrix.tox_system_factor }}-${{ matrix.tox_packages_factor }}${{ inputs.incremental && '-incremental' || '' }}"
-      LOGS_ARTIFACT_NAME: logs-commit-${{ github.sha }}-tox-docker-${{ matrix.tox_system_factor }}-${{ matrix.tox_packages_factor }}
+      LOGS_ARTIFACT_NAME: logs-commit-${{ github.sha }}-tox-docker-${{ matrix.tox_system_factor }}-${{ matrix.tox_packages_factor }}${{ inputs.logs_artifact_suffix  }}
       DOCKER_TARGETS:     ${{ inputs.docker_targets }}
       TARGETS_PRE:        ${{ inputs.targets_pre }}
       TARGETS:            ${{ inputs.targets }}
