@@ -1116,11 +1116,16 @@ class IncidenceStructure:
         V = [Set(v) for v in self]
         return Graph([V, lambda x, y: len(x & y) in sizes], loops=False)
 
-    def incidence_matrix(self):
+    def incidence_matrix(self, labels=False):
         r"""
         Return the incidence matrix `A` of the design. A is a `(v \times b)`
         matrix defined by: ``A[i,j] = 1`` if ``i`` is in block ``B_j`` and 0
         otherwise.
+
+        INPUT:
+
+        - ``labels`` -- boolean; if ``True``, create a morphism of free modules
+          instead of a matrix
 
         EXAMPLES::
 
@@ -1142,6 +1147,11 @@ class IncidenceStructure:
             [1 1 1 0]
             [1 1 0 0]
             [0 1 1 1]
+
+        Creating a module morphism::
+
+            sage: phi_BD = BD.incidence_matrix(labels=True); phi_BD
+            sage: phi_BD._unicode_art_matrix()
         """
         from sage.matrix.constructor import matrix
         from sage.rings.integer_ring import ZZ
@@ -1149,6 +1159,8 @@ class IncidenceStructure:
         for j, b in enumerate(self._blocks):
             for i in b:
                 A[i, j] = 1
+        if labels:
+            raise NotImplementedError
         return A
 
     def incidence_graph(self, labels=False):
