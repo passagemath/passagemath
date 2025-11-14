@@ -8029,7 +8029,7 @@ class Graph(GenericGraph):
         r"""
         Test whether ``self`` is unimodular.
 
-        A graphs is unimodular if its max-clique--vertex incidence matrix
+        A graph is unimodular if its max-clique--vertex incidence matrix
         is totally unimodular.
 
         Unimodular graphs are perfect.
