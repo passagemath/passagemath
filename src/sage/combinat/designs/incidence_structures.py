@@ -2413,6 +2413,32 @@ class IncidenceStructure:
 
         return not points
 
+    def is_unimodular(self, certificate=False, **kwds):
+        r"""
+        Test whether ``self`` is unimodular.
+
+        A hypergraph is unimodular if its incidence matrix is totally unimodular.
+
+        See 83.3 (Unimodular hypergraphs) in [Sch2003]_.
+
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``); whether to return
+          a certificate in addition to the result.
+
+        - other keyword arguments are passed on to the matrix method
+          :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.is_totally_unimodular`
+
+        EXAMPLES::
+
+            sage: H = Hypergraph([{1,2,3}, {2,3,4}, {3,4,5}, {4,5,6}]); H
+            Incidence structure with 6 points and 4 blocks
+            sage: H.is_unimodular()
+            True
+        """
+        return self.incidence_matrix(labels=True).is_totally_unimodular(certificate=certificate,
+                                                                        **kwds)
+
 
 from sage.misc.rest_index_of_methods import gen_rest_table_index
 __doc__ = __doc__.format(METHODS_OF_IncidenceStructure=gen_rest_table_index(IncidenceStructure))
