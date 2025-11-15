@@ -1234,6 +1234,38 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 (True, GraphicNode (3×2))
                 sage: certificate.graph()
                 Digraph on 4 vertices
+
+                sage: # needs sage.libs.cmr
+                sage: M = matrix(ZZ,
+                ....:            [[1, 1, 0, 0, 0, 0, 0, 0, 0],
+                ....:             [1, 1, 1, 0, 0, 0, 0, 0, 0],
+                ....:             [1, 0, 0, 1, 0, 0, 0, 0, 0],
+                ....:             [0, 1, 1, 1, 0, 0, 0, 0, 0],
+                ....:             [0, 0, 1, 1, 0, 0, 0, 0, 0],
+                ....:             [0, 0, 0, 0, 1, 1, 1, 0, 0],
+                ....:             [0, 0, 0, 0, 1, 1, 0, 1, 0],
+                ....:             [0, 0, 0, 0, 0, 1, 0, 1, 1],
+                ....:             [0, 0, 0, 0, 0, 0, 1, 1, 1]],
+                ....:            row_keys='ABCDEFGHI',
+                ....:            column_keys='abcdefghi')
+                sage: M._unicode_art_matrix()
+                  a b c d e f g h i
+                A⎛1 1 0 0 0 0 0 0 0⎞
+                B⎜1 1 1 0 0 0 0 0 0⎟
+                C⎜1 0 0 1 0 0 0 0 0⎟
+                D⎜0 1 1 1 0 0 0 0 0⎟
+                E⎜0 0 1 1 0 0 0 0 0⎟
+                F⎜0 0 0 0 1 1 1 0 0⎟
+                G⎜0 0 0 0 1 1 0 1 0⎟
+                H⎜0 0 0 0 0 1 0 1 1⎟
+                I⎝0 0 0 0 0 0 1 1 1⎠
+                sage: result, certificate = M.is_totally_unimodular(certificate=True)
+                sage: result, certificate
+                (False, (OneSumNode (9×9) with 2 children, (('D', 'C', 'A'), ('d', 'b', 'a'))))
+                sage: unicode_art(certificate[0])
+                ╭OneSumNode (9×9) with 2 children─╮
+                │                                 │
+                ThreeConnectedIrregularNode (5×4) UnknownNode (4×5)
             """
             try:
                 matrix = self._matrix_cmr()
