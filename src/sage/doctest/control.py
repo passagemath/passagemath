@@ -516,7 +516,7 @@ class DocTestController(SageObject):
                                         'palp', 'pari_elldata', 'pari_galpol', 'pari_seadata',
                                         'pari_seadata_big', 'pari_seadata_small',
                                         'pari_galdata', 'pari_nflistdata', 'pari_nftables',
-                                        'plantri', 'polytopes_db', 'polytopes_db_4d',
+                                        'planarity', 'plantri', 'polytopes_db', 'polytopes_db_4d',
                                         'pynormaliz', 'qepcad', 'rubiks', 'sirocco', 'sympow',
                                         'tachyon', 'tdlib', 'topcom']:
                             continue
