@@ -8024,6 +8024,46 @@ class Graph(GenericGraph):
 
         return MD.is_prime() and len(MD.children) == self.order()
 
+    @doc_index("Graph properties")
+    def is_unimodular(self, certificate=False, **kwds):
+        r"""
+        Test whether ``self`` is unimodular.
+
+        A graph is unimodular if its max-clique--vertex incidence matrix
+        is totally unimodular.
+
+        Unimodular graphs are perfect.
+
+        See 66.5c (Unimodular graphs) in [Sch2003]_.
+
+        INPUT:
+
+        - ``certificate`` -- boolean (default: ``False``); whether to return
+          a certificate in addition to the result.
+
+        - other keyword arguments are passed on to the matrix method
+          :meth:`~sage.matrix.matrix_cmr_sparse.Matrix_cmr_chr_sparse.is_totally_unimodular`
+
+        EXAMPLES::
+
+            sage: # needs sage.libs.cmr
+            sage: W6 = graphs.WheelGraph(7); W6
+            Wheel graph: Graph on 7 vertices
+            sage: W6.is_unimodular()
+            True
+            sage: W6.is_unimodular(certificate=True)
+            (True, CographicNode (6×7))
+        """
+        from sage.matrix.constructor import matrix
+        max_cliques = [frozenset(Q) for Q in self.cliques_maximal()]
+        clique_vertex_incidence_matrix = matrix(
+            entries=lambda clique, vertex: 1 if vertex in clique else 0,
+            row_keys=max_cliques, column_keys=self.vertices()
+        )
+        return clique_vertex_incidence_matrix.is_totally_unimodular(
+            certificate=certificate, **kwds
+        )
+
     @doc_index("Connectivity, orientations, trees")
     def gomory_hu_tree(self, algorithm=None, solver=None, verbose=0,
                        *, integrality_tolerance=1e-3):
