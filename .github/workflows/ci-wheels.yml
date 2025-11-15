@@ -186,7 +186,7 @@ jobs:
           fi
           # Use passagemath-conf wheelhouse for missing wheels of third-party projects
           case "${{ matrix.os }}--${{ matrix.python-version }}" in
-              *--3.14*) export SAGE_CONF_TARGETS="cysignals fpylll pplpy primecountpy";;
+              *--3.14*) export SAGE_CONF_TARGETS="cysignals gmpy2";;
           esac
           if [ -n "$SAGE_CONF_TARGETS" ]; then
               case "${{ matrix.os }}" in

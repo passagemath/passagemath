@@ -129,7 +129,7 @@ For Python 3.14,
 Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
 
 ```bash session
-(passagemath-venv) $ export SAGE_CONF_TARGETS="cysignals fpylll pplpy primecountpy"
+(passagemath-venv) $ export SAGE_CONF_TARGETS="cysignals gmpy2"
 (passagemath-venv) $ export SAGE_CONF_CONFIGURE_ARGS="--disable-gcc-version-check"
 (passagemath-venv) $ pip cache remove passagemath_conf
 (passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
