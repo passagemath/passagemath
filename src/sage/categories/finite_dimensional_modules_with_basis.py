@@ -943,9 +943,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.is_unimodular(**kwds)
+                method = matrix.is_unimodular
             except AttributeError:
                 raise NotImplementedError
+            else:
+                return method(**kwds)
 
         def is_strongly_unimodular(self, **kwds):
             r"""
@@ -976,9 +978,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.is_strongly_unimodular(**kwds)
+                method = matrix.is_strongly_unimodular
             except AttributeError:
                 raise NotImplementedError
+            else:
+                return method(**kwds)
 
         def equimodulus(self, **kwds):
             r"""
@@ -992,9 +996,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.equimodulus(**kwds)
+                method = matrix.equimodulus
             except AttributeError:
                 raise NotImplementedError
+            else:
+                return method(**kwds)
 
         def strong_equimodulus(self, **kwds):
             r"""
@@ -1008,9 +1014,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.strong_equimodulus(**kwds)
+                method = matrix.strong_equimodulus
             except AttributeError:
                 raise NotImplementedError
+            else:
+                return method(**kwds)
 
         def is_k_equimodular(self, k, **kwds):
             r"""
@@ -1041,9 +1049,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.is_k_equimodular(k, **kwds)
+                method = matrix.is_k_equimodular
             except AttributeError:
                 raise NotImplementedError
+            else:
+                return method(k, **kwds)
 
         def is_strongly_k_equimodular(self, k, **kwds):
             r"""
@@ -1080,9 +1090,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return matrix.is_strongly_k_equimodular(k, **kwds)
+                method = matrix.is_strongly_k_equimodular
             except AttributeError:
                 raise NotImplementedError
+            else:
+                return method(k, **kwds)
 
         def _wrapped_method_with_certificate(self, matrix_method):
 
@@ -1144,9 +1156,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return self._wrapped_method_with_certificate(matrix.is_conetwork_matrix)(**kwds)
+                method = self._wrapped_method_with_certificate(matrix.is_conetwork_matrix)
             except AttributeError:
                 raise NotImplementedError
+            else:
+                return method(**kwds)
 
         def is_network_matrix(self, **kwds):
             r"""
@@ -1189,9 +1203,11 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return self._wrapped_method_with_certificate(matrix.is_network_matrix)(**kwds)
+                method = self._wrapped_method_with_certificate(matrix.is_network_matrix)
             except AttributeError:
                 raise NotImplementedError
+            else:
+                return method(**kwds)
 
         def is_totally_unimodular(self, **kwds):
             r"""
@@ -1218,15 +1234,49 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 (True, GraphicNode (3×2))
                 sage: certificate.graph()
                 Digraph on 4 vertices
+
+                sage: # needs sage.libs.cmr
+                sage: M = matrix(ZZ,
+                ....:            [[1, 1, 0, 0, 0, 0, 0, 0, 0],
+                ....:             [1, 1, 1, 0, 0, 0, 0, 0, 0],
+                ....:             [1, 0, 0, 1, 0, 0, 0, 0, 0],
+                ....:             [0, 1, 1, 1, 0, 0, 0, 0, 0],
+                ....:             [0, 0, 1, 1, 0, 0, 0, 0, 0],
+                ....:             [0, 0, 0, 0, 1, 1, 1, 0, 0],
+                ....:             [0, 0, 0, 0, 1, 1, 0, 1, 0],
+                ....:             [0, 0, 0, 0, 0, 1, 0, 1, 1],
+                ....:             [0, 0, 0, 0, 0, 0, 1, 1, 1]],
+                ....:            row_keys='ABCDEFGHI',
+                ....:            column_keys='abcdefghi')
+                sage: M._unicode_art_matrix()
+                  a b c d e f g h i
+                A⎛1 1 0 0 0 0 0 0 0⎞
+                B⎜1 1 1 0 0 0 0 0 0⎟
+                C⎜1 0 0 1 0 0 0 0 0⎟
+                D⎜0 1 1 1 0 0 0 0 0⎟
+                E⎜0 0 1 1 0 0 0 0 0⎟
+                F⎜0 0 0 0 1 1 1 0 0⎟
+                G⎜0 0 0 0 1 1 0 1 0⎟
+                H⎜0 0 0 0 0 1 0 1 1⎟
+                I⎝0 0 0 0 0 0 1 1 1⎠
+                sage: result, certificate = M.is_totally_unimodular(certificate=True)
+                sage: result, certificate
+                (False, (OneSumNode (9×9) with 2 children, (('D', 'C', 'A'), ('d', 'b', 'a'))))
+                sage: unicode_art(certificate[0])
+                ╭OneSumNode (9×9) with 2 children─╮
+                │                                 │
+                ThreeConnectedIrregularNode (5×4) UnknownNode (4×5)
             """
             try:
                 matrix = self._matrix_cmr()
             except (ImportError, TypeError):
                 matrix = self.matrix()
             try:
-                return self._wrapped_method_with_certificate(matrix.is_totally_unimodular)(**kwds)
+                method = self._wrapped_method_with_certificate(matrix.is_totally_unimodular)
             except AttributeError:
                 raise NotImplementedError
+            else:
+                return method(**kwds)
 
     class Homsets(HomsetsCategory):
 

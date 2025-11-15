@@ -5403,20 +5403,25 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         INPUT:
 
         - ``certificate`` -- boolean (default: ``False``);
-          if ``True``, then return
-          a :class:`DecompositionNode` if ``self`` is totally unimodular;
-          a submatrix with determinant not in `\{0, \pm1\}` if not.
+          if ``True``, then return a certificate for the answer:
+
+          - in the case of a ``True`` answer, a (full) Seymour decomposition
+            (:class:`DecompositionNode`),
+
+          - in the case of a ``False`` answer, a (possibly partial) Seymour
+            decomposition and a pair of row and column indices specifying a
+            submatrix with determinant not in `\{0, \pm1\}`.
 
         - ``stop_when_nonTU`` -- boolean (default: ``True``);
-          whether to stop decomposing once not TU is determined.
+          whether to stop decomposing once non-TUness is determined.
 
           For a description of other parameters, see :meth:`_set_cmr_seymour_parameters`
 
         - ``row_keys`` -- a finite or enumerated family of arbitrary objects
-          that index the rows of the matrix
+          that index the rows of the matrix, for use in certificates
 
         - ``column_keys`` -- a finite or enumerated family of arbitrary objects
-          that index the columns of the matrix
+          that index the columns of the matrix, for use in certificates
 
         EXAMPLES::
 
@@ -5583,8 +5588,13 @@ cdef class Matrix_cmr_chr_sparse(Matrix_cmr_sparse):
         if submat == NULL:
             submat_tuple = None
         else:
-            submat_tuple = (tuple(submat.rows[i] for i in range(submat.numRows)),
-                            tuple(submat.columns[i] for i in range(submat.numColumns)))
+            submat_rows = tuple(submat.rows[i] for i in range(submat.numRows))
+            if row_keys is not None:
+                submat_rows = tuple(row_keys[i] for i in submat_rows)
+            submat_columns = tuple(submat.columns[i] for i in range(submat.numColumns))
+            if column_keys is not None:
+                submat_columns = tuple(column_keys[i] for i in submat_columns)
+            submat_tuple = (submat_rows, submat_columns)
 
         return result, (node, submat_tuple)
 
