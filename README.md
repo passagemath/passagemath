@@ -124,20 +124,6 @@ $ source ~/passagemath-venv/bin/activate
 repeat the last command whenever you open a new terminal session in which you wish to
 use passagemath.)
 
-For Python 3.14,
-[some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
-Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
-
-```bash session
-(passagemath-venv) $ export SAGE_CONF_TARGETS="cysignals gmpy2"
-(passagemath-venv) $ export SAGE_CONF_CONFIGURE_ARGS="--disable-gcc-version-check"
-(passagemath-venv) $ pip cache remove passagemath_conf
-(passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
-(passagemath-venv) $ rehash
-(passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
-(passagemath-venv) $ export PIP_PREFER_BINARY=1
-```
-
 Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
 
 ```bash session
