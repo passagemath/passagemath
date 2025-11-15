@@ -2413,7 +2413,7 @@ class IncidenceStructure:
 
         return not points
 
-    def is_unimodular(self):
+    def is_unimodular(self, certificate=False, **kwds):
         r"""
         Test whether ``self`` is unimodular.
 
@@ -2421,7 +2421,8 @@ class IncidenceStructure:
 
         See 83.3 (Unimodular hypergraphs) in [Sch2003]_.
         """
-        raise NotImplementedError
+        return self.incidence_matrix(labels=True).is_totally_unimodular(certificate=certificate,
+                                                                        **kwds)
 
 
 from sage.misc.rest_index_of_methods import gen_rest_table_index
