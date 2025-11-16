@@ -100,7 +100,7 @@ Use with sage.graphs::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-nauty[test]" ipython
 
-    In [1]: from sage.all__sagemath_graphs import *
+    In [1]: from passagemath_graphs import *
 
     In [2]: gen = graphs.nauty_geng("7 -c")  # connected graphs on 7 vertices
 

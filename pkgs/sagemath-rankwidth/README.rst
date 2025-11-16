@@ -70,7 +70,7 @@ Examples
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-rankwidth[test]" ipython
 
-    In [1]: from sage.all__sagemath_rankwidth import *
+    In [1]: from passagemath_rankwidth import *
 
     In [2]: g = graphs.PetersenGraph()
 

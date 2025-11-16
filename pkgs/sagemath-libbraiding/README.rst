@@ -69,7 +69,7 @@ Examples
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-libbraiding[test]" ipython
 
-    In [1]: from sage.all__sagemath_libbraiding import *
+    In [1]: from passagemath_libbraiding import *
 
     In [2]: from sage.libs.braiding import conjugatingbraid
 

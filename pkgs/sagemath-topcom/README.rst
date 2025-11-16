@@ -97,7 +97,7 @@ Using `sage.geometry.triangulation.point_configuration <https://passagemath.org/
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-topcom[test]" ipython
 
-    In [1]: from sage.all__sagemath_topcom import *
+    In [1]: from passagemath_topcom import *
 
     In [2]: p = PointConfiguration([[-1,QQ('-5/9')], [0,QQ('10/9')], [1,QQ('-5/9')], [-2,QQ('-10/9')], [0,QQ('20/9')], [2,QQ('-10/9')]])
 

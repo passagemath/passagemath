@@ -80,7 +80,7 @@ A quick way to try it out interactively::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib[test]" ipython
 
-    In [1]: from sage.all__sagemath_eclib import *
+    In [1]: from passagemath_eclib import *
 
     In [2]: M = CremonaModularSymbols(43, cuspidal=True); M
     Out[2]: Cremona Cuspidal Modular Symbols space of dimension 6 for Gamma_0(43) of weight 2 with sign 0
@@ -96,7 +96,7 @@ Use with `sage.schemes.elliptic_curves <https://passagemath.org/docs/latest/html
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib[test]" ipython
 
-    In [1]: from sage.all__sagemath_eclib import *
+    In [1]: from passagemath_eclib import *
 
     In [2]: x = polygen(ZZ, 'x')
 

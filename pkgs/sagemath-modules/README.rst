@@ -96,7 +96,7 @@ A quick way to try it out interactively::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-modules[test]" ipython
 
-    In [1]: from sage.all__sagemath_modules import *
+    In [1]: from passagemath_modules import *
 
     In [2]: M = matroids.Wheel(5); M
     Out[2]: Wheel(5): Regular matroid of rank 5 on 10 elements with 121 bases
@@ -130,7 +130,7 @@ Available as extras, from other distributions
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-modules[flint,fpylll,linbox,test]" ipython
 
-    In [1]: from sage.all__sagemath_modules import *
+    In [1]: from passagemath_modules import *
 
     In [2]: M = matrix(ZZ, [[1,2,3],[31,41,51],[101,201,301]])
 

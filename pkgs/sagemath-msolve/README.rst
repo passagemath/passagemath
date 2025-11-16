@@ -60,7 +60,7 @@ A quick way to try it out interactively::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-msolve[test]" ipython
 
-    In [1]: from sage.all__sagemath_msolve import *
+    In [1]: from passagemath_msolve import *
 
     In [2]: R = PolynomialRing(QQ, 2, names=['x', 'y'], order='lex')
 

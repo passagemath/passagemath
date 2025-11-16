@@ -85,6 +85,6 @@ Using the pexpect interface to FriCAS::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-fricas[test]" python
 
-    >>> from sage.all__sagemath_fricas import *
+    >>> from passagemath_fricas import *
     >>> fricas('1+1')
     2

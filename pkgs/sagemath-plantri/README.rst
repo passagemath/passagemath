@@ -82,7 +82,7 @@ Using the Python interface::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-plantri[test]" ipython
 
-    In [1]: from sage.all__sagemath_plantri import *
+    In [1]: from passagemath_plantri import *
 
     In [2]: len(list(graphs.planar_graphs(4, minimum_edges=4)))
     Out[2]: 4

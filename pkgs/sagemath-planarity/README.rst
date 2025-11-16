@@ -71,7 +71,7 @@ Examples
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-planarity[test]" ipython
 
-    In [1]: from sage.all__sagemath_planarity import *
+    In [1]: from passagemath_planarity import *
 
     In [2]: g = graphs.PetersenGraph()
 

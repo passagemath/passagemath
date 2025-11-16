@@ -81,7 +81,7 @@ Use with `sage.sat <https://passagemath.org/docs/latest/html/en/reference/sat/in
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-kissat[test]" ipython
 
-    In [1]: from sage.all__sagemath_kissat import *
+    In [1]: from passagemath_kissat import *
 
     In [2]: from sage.sat.solvers.dimacs import Kissat
 

@@ -80,7 +80,7 @@ Use with `sage.sat <https://passagemath.org/docs/latest/html/en/reference/sat/in
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-glucose[test]" ipython
 
-    In [1]: from sage.all__sagemath_glucose import *
+    In [1]: from passagemath_glucose import *
 
     In [2]: from sage.sat.solvers.dimacs import Glucose
 

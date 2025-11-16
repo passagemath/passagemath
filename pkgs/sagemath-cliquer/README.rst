@@ -68,7 +68,7 @@ Examples
 
    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-cliquer[test]" ipython
 
-   In [1]: from sage.all__sagemath_cliquer import *
+   In [1]: from passagemath_cliquer import *
 
    In [2]: from sage.graphs.cliquer import max_clique
 

@@ -81,7 +81,7 @@ Using the Python interface::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-buckygen[test]" ipython
 
-    In [1]: from sage.all__sagemath_buckygen import *
+    In [1]: from passagemath_buckygen import *
 
     In [2]: len(list(graphs.fullerenes(60)))
     Out[2]: 1812

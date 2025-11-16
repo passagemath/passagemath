@@ -72,7 +72,7 @@ A quick way to try it out interactively::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-combinat[test]" ipython
 
-    In [1]: from sage.all__sagemath_combinat import *
+    In [1]: from passagemath_combinat import *
 
     In [2]: RowStandardTableaux([3,2,1]).cardinality()
     Out[2]: 60
