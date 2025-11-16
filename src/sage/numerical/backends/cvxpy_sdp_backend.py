@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-polyhedra
+# sage.doctest: optional - cvxpy
 
 from sage.numerical.sdp import SDPSolverException
 from sage.matrix.all import Matrix
