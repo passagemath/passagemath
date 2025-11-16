@@ -1,3 +1,5 @@
+graft passagemath_pari_elldata
+
 include VERSION.txt
 
 global-exclude *.c

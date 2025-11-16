@@ -1,3 +1,5 @@
+graft passagemath_database_kohel
+
 include VERSION.txt
 
 include sage/databases/db_modular_polynomials.p*

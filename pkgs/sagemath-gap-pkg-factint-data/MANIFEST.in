@@ -1,3 +1,5 @@
+graft passagemath_gap_pkg_factint_data
+
 include VERSION.txt
 
 global-exclude *.c

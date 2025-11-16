@@ -1,3 +1,5 @@
+graft passagemath_macaulay2
+
 prune sage
 
 include VERSION.txt

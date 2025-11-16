@@ -1,3 +1,5 @@
+graft passagemath_coxeter3
+
 prune sage
 
 include VERSION.txt

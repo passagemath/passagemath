@@ -1,3 +1,5 @@
+graft passagemath_pari_seadata
+
 include VERSION.txt
 
 global-exclude *.c

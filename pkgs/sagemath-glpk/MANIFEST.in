@@ -1,3 +1,5 @@
+graft passagemath_glpk
+
 include VERSION.txt
 
 prune sage

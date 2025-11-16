@@ -1,3 +1,5 @@
+graft passagemath_database_stein_watkins_mini
+
 include VERSION.txt
 
 include sage/databases/stein_watkins.p*

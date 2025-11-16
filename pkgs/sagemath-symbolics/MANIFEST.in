@@ -1,3 +1,5 @@
+graft passagemath_symbolics
+
 prune sage
 
 include VERSION.txt

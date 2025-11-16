@@ -1,3 +1,5 @@
+graft passagemath_msolve
+
 prune sage
 
 include VERSION.txt

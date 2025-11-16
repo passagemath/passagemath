@@ -1,3 +1,5 @@
+graft passagemath_database_symbolic_data
+
 include VERSION.txt
 
 include sage/databases/symbolic_data.p*

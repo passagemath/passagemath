@@ -1,3 +1,5 @@
+graft passagemath_pari_galpol
+
 include VERSION.txt
 
 global-exclude *.c

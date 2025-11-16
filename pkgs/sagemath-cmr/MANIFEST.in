@@ -1,3 +1,5 @@
+graft passagemath_cmr
+
 include VERSION.txt
 
 graft sage/libs/cmr

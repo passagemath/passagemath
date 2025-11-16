@@ -1,3 +1,5 @@
+graft passagemath_mcqd
+
 prune sage
 
 include VERSION.txt

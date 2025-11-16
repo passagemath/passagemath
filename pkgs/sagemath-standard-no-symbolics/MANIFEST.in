@@ -1,3 +1,5 @@
+graft passagemath_standard_no_symbolics
+
 prune .tox
 exclude *.m4
 include requirements.txt
