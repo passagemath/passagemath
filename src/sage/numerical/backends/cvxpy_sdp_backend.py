@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-polyhedra
+
 from sage.numerical.sdp import SDPSolverException
 from sage.matrix.all import Matrix
 from .matrix_sdp_backend import MatrixSDPBackend
