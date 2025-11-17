@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-latte-4ti2'],
+           recurse_packages=('sage', 'passagemath_latte_4ti2'),
            spkgs=['latte_int', '4ti2'],
            package_data={},
            py_limited_api=True)

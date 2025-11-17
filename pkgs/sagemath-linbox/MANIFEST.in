@@ -1,3 +1,5 @@
+graft passagemath_linbox
+
 prune sage
 
 include VERSION.txt

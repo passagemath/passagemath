@@ -9,6 +9,7 @@ from sage_setup import sage_setup
 
 sage_setup(
     ['sagemath-objects'],
+    recurse_packages=('sage', 'passagemath_objects'),
     spkgs=['gmp', 'mpc', 'mpfr'],
     package_data={
         "sage.cpython": [

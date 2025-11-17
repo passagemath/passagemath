@@ -1,3 +1,5 @@
+graft passagemath_gap_pkg_curlinterface
+
 include VERSION.txt
 
 include sage/libs/gap_pkg_curlinterface.pyx

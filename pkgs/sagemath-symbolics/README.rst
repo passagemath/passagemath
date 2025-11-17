@@ -78,7 +78,7 @@ Using `SageManifolds <https://sagemanifolds.obspm.fr/>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics[test]" ipython
 
-    In [1]: from sage.all__sagemath_symbolics import *
+    In [1]: from passagemath_symbolics import *
 
     In [2]: M = Manifold(4, 'M', structure='Lorentzian'); M
     Out[2]: 4-dimensional Lorentzian manifold M

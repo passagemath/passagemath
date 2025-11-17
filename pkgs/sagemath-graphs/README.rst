@@ -85,7 +85,7 @@ Examples
 A quick way to try it out interactively::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[test]" ipython
-    In [1]: from sage.all__sagemath_graphs import *
+    In [1]: from passagemath_graphs import *
 
     In [6]: g = Graph([(1, 3), (3, 8), (5, 2)]); g
     Out[6]: Graph on 5 vertices
@@ -117,7 +117,7 @@ for network matrices, totally unimodular matrices and regular matroids, series-p
 `igraph <https://python.igraph.org/en/stable/>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[igraph,test]" ipython
-    In [1]: from sage.all__sagemath_graphs import *
+    In [1]: from passagemath_graphs import *
 
     In [2]: ## Example depending on igraph goes here
 
@@ -130,7 +130,7 @@ automorphism groups of graphs and digraphs.
 `NetworkX <https://networkx.github.io>`__::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[networkx,test]" ipython
-    In [1]: from sage.all__sagemath_graphs import *
+    In [1]: from passagemath_graphs import *
 
     In [2]: ## Example depending on networkx goes here
 
@@ -154,7 +154,7 @@ Features
 available via `passagemath-gap <https://pypi.org/project/passagemath-gap/>`_, `passagemath-groups <https://pypi.org/project/passagemath-groups/>`_, and `passagemath-nauty <https://pypi.org/project/passagemath-nauty/>`_::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[groups,test]" ipython
-    In [1]: from sage.all__sagemath_graphs import *
+    In [1]: from passagemath_graphs import *
 
     In [2]: g = Graph({
                 0: [1, 2],
@@ -173,7 +173,7 @@ available via `passagemath-gap <https://pypi.org/project/passagemath-gap/>`_, `p
 solver GLPK available via `passagemath-glpk <https://pypi.org/project/passagemath-glpk/>`_ and `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra/>`_ (see there for other available solvers).::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-graphs[mip,test]" ipython
-    In [1]: from sage.all__sagemath_graphs import *
+    In [1]: from passagemath_graphs import *
 
     In [2]: ## Example depending on MIP goes here
 

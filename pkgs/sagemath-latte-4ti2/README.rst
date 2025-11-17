@@ -109,7 +109,7 @@ Use with sage.geometry.polyhedron::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-latte-4ti2[test]" ipython
 
-    In [1]: from sage.all__sagemath_polyhedra import *
+    In [1]: from passagemath_polyhedra import *
 
     In [2]: P = Polyhedron(vertices=[[1,0,0], [0,0,1], [-1,1,1], [-1,2,0]])
 

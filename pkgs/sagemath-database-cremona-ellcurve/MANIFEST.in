@@ -1,3 +1,5 @@
+graft passagemath_database_cremona_ellcurve
+
 include VERSION.txt
 
 global-exclude *.c

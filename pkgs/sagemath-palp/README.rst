@@ -85,7 +85,7 @@ Use with sage.geometry::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-palp[test]" ipython
 
-    In [1]: from sage.all__sagemath_polyhedra import *
+    In [1]: from passagemath_polyhedra import *
 
     In [2]: square = lattice_polytope.cross_polytope(2).polar()
 

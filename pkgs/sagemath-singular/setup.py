@@ -22,6 +22,7 @@ else:
     ext_modules = []
 
 sage_setup(['sagemath-singular'],
+           recurse_packages=('sage', 'passagemath_singular'),
            required_modules=('Singular', 'factory', 'givaro', 'gsl'),
            spkgs=['singular'],
            package_data={"sage": [

@@ -1,3 +1,5 @@
+graft passagemath_database_cunningham
+
 include VERSION.txt
 
 include sage/databases/cunningham_tables.p*

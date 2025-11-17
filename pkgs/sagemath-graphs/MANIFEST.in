@@ -1,3 +1,5 @@
+graft passagemath_graphs
+
 prune sage
 
 include VERSION.txt

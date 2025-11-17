@@ -72,6 +72,7 @@ sage_setup(['sagemath-pari'],
            optional_modules=('readline',),
            spkgs=['pari', 'gsl', 'givaro'],
            recurse_packages=[
+               'passagemath_pari',
                'sage',
                'cypari2',
                'PARIKernel',

@@ -1,3 +1,5 @@
+graft passagemath_database_mutation_class
+
 include VERSION.txt
 
 global-exclude all__*.py

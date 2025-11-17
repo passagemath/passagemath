@@ -83,7 +83,7 @@ Use with `sage.game_theory <https://passagemath.org/docs/latest/html/en/referenc
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-lrslib[test]" ipython
 
-    In [1]: from sage.all__sagemath_lrslib import *
+    In [1]: from passagemath_lrslib import *
 
     In [2]: A = matrix([[1, -1], [-1, 1]]); B = matrix([[-1, 1], [1, -1]])
 

@@ -68,7 +68,7 @@ Examples
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sirocco[test]" ipython
 
-    In [1]: from sage.all__sagemath_sirocco import *
+    In [1]: from passagemath_sirocco import *
 
     In [2]: from sage.libs.sirocco import contpath
 

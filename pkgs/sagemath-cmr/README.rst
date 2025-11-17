@@ -74,7 +74,7 @@ Examples
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-cmr[test]" ipython
 
-    In [1]: from sage.all__sagemath_cmr import *
+    In [1]: from passagemath_cmr import *
 
     In [2]: from sage.matrix.matrix_cmr_sparse import Matrix_cmr_chr_sparse
 
@@ -116,7 +116,7 @@ Modularized use::
     (cmr-venv) passagemath $ pip install -v passagemath-repl
     (cmr-venv) passagemath $ sage
     ... sage.all is not available ...
-    sage: from sage.all__sagemath_modules import *
+    sage: from passagemath_modules import *
     sage: matroids.Uniform(3, 4)
     U(3, 4): Matroid of rank 3 on 4 elements with circuit-closures
     {3: {{0, 1, 2, 3}}}
@@ -124,7 +124,7 @@ Modularized use::
 In plain Python::
 
     (cmr-venv) passagemath $ python3
-    >>> from sage.all__sagemath_modules import *
+    >>> from passagemath_modules import *
     >>> matroids.Uniform(3, 4)
     U(3, 4): Matroid of rank 3 on 4 elements with circuit-closures
     {3: {{0, 1, 2, 3}}}

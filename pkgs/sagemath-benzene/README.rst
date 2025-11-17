@@ -81,7 +81,7 @@ Using the Python interface::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-benzene[test]" ipython
 
-    In [1]: from sage.all__sagemath_benzene import *
+    In [1]: from passagemath_benzene import *
 
     In [2]: len(list(graphs.fusenes(9, benzenoids=True)))
     Out[2]: 6505

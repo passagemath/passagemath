@@ -61,7 +61,7 @@ Example
 
     $ pipx run  --pip-args="--prefer-binary" --spec "passagemath-qepcad[test]" ipython
 
-    In [1]: from sage.all__sagemath_symbolics import *
+    In [1]: from passagemath_symbolics import *
 
     In [2]: var('x,y')
 

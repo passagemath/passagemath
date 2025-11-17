@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-glucose'],
+           recurse_packages=('sage', 'passagemath_glucose'),
            spkgs=['glucose'],
            package_data={},
            py_limited_api=True)

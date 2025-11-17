@@ -1,3 +1,5 @@
+graft passagemath_database_stein_watkins
+
 include VERSION.txt
 
 global-exclude *.c

@@ -78,7 +78,7 @@ A quick way to try it out interactively::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[test]" ipython
 
-    In [1]: from sage.all__sagemath_polyhedra import *
+    In [1]: from passagemath_polyhedra import *
 
     In [2]: P = Polyhedron(ieqs=[[0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 1], [0, 0, 1, -1, -1, 1, 0], [0, 0, -1, 1, -1, 1, 0]], eqns=[[-31, 1, 1, 1, 1, 1, 1]]); P
     Out[2]: A 5-dimensional polyhedron in QQ^6 defined as the convex hull of 7 vertices
@@ -107,7 +107,7 @@ Additional features
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[graphs,test]" ipython
 
-    In [1]: from sage.all__sagemath_polyhedra import *
+    In [1]: from passagemath_polyhedra import *
 
     In [2]: c5_10 = Polyhedron(vertices = [[i, i**2, i**3, i**4, i**5] for i in range(1, 11)]); c5_10
     Out[2]: A 5-dimensional polyhedron in ZZ^5 defined as the convex hull of 10 vertices
@@ -122,7 +122,7 @@ Additional features
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[graphs,groups,test]" ipython
 
-    In [1]: from sage.all__sagemath_polyhedra import *
+    In [1]: from passagemath_polyhedra import *
 
     In [2]: P24 = polytopes.twenty_four_cell(); P24
     Out[2]: A 4-dimensional polyhedron in QQ^4 defined as the convex hull of 24 vertices
@@ -137,7 +137,7 @@ Additional features
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[graphs,toric,test]" ipython
 
-    In [1]: from sage.all__sagemath_polyhedra import *
+    In [1]: from passagemath_polyhedra import *
 
     In [2]: TV3 = ToricVariety(NormalFan(lattice_polytope.cross_polytope(3))); TV3
     Out[2]: 3-d toric variety covered by 6 affine patches
@@ -153,7 +153,7 @@ Additional features
 
    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[latte,test]" ipython
 
-   In [1]: from sage.all__sagemath_polyhedra import *
+   In [1]: from passagemath_polyhedra import *
 
    In [2]: P = polytopes.cube()
 
@@ -180,7 +180,7 @@ Additional backends for polyhedral computations
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[normaliz,test]" ipython
 
-    In [1]: from sage.all__sagemath_polyhedra import *
+    In [1]: from passagemath_polyhedra import *
 
     In [2]: gap_norm = polytopes.grand_antiprism(backend='normaliz'); gap_norm
 
@@ -193,7 +193,7 @@ Additional backends for polyhedral computations
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[cddlib,test]" ipython
 
-    In [1]: from sage.all__sagemath_polyhedra import *
+    In [1]: from passagemath_polyhedra import *
 
     In [2]: P1 = polytopes.regular_polygon(5, exact=False); P1
     Out[2]: A 2-dimensional polyhedron in RDF^2 defined as the convex hull of 5 vertices
@@ -206,7 +206,7 @@ Additional backends for polyhedral computations
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[flint,lrslib,test]" ipython
 
-    In [1]: from sage.all__sagemath_polyhedra import *
+    In [1]: from passagemath_polyhedra import *
 
     In [2]: A = matrix([[2, 1], [1, 5/2]]); B = matrix([[-1, 3], [2, 1]])
 

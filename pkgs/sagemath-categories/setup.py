@@ -9,6 +9,7 @@ from sage_setup import sage_setup
 
 sage_setup(
     ['sagemath-categories'],
+    recurse_packages=('sage', 'passagemath_categories'),
     interpreters=['Element', 'Python'],  # RDF uses gsl --> sagemath-modules
     package_data={
         "sage.data_structures": [

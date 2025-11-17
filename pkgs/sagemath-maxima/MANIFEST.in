@@ -1,3 +1,5 @@
+graft passagemath_maxima
+
 prune sage
 
 include VERSION.txt

@@ -1,3 +1,5 @@
+graft passagemath_plantri
+
 prune sage
 
 include VERSION.txt

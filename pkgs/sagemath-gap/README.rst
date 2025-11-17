@@ -132,9 +132,9 @@ Using the library interface from Python::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-gap[test]" IPython
 
-    In [1]: from sage.all__sagemath_modules import *
+    In [1]: from passagemath_modules import *
 
-    In [2]: from sage.all__sagemath_gap import *
+    In [2]: from passagemath_gap import *
 
     In [3]: G = libgap.eval("Group([(1,2,3), (1,2)(3,4), (1,7)])")
 

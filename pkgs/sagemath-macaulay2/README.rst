@@ -82,7 +82,7 @@ Using the Python interface::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-macaulay2[test]" ipython
 
-    In [1]: from sage.all__sagemath_macaulay2 import *
+    In [1]: from passagemath_macaulay2 import *
 
     In [2]: R = macaulay2('QQ[x, y]'); R
     Out[2]: QQ[x..y]

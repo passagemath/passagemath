@@ -99,7 +99,7 @@ Using the Cython interface to Singular::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-singular[test]" ipython
 
-    In [1]: from sage.all__sagemath_singular import *
+    In [1]: from passagemath_singular import *
 
     In [2]: from sage.libs.singular.function import singular_function
 

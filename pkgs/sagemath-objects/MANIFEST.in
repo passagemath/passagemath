@@ -1,3 +1,5 @@
+graft passagemath_objects
+
 prune sage
 graft sage/cpython
 

@@ -83,7 +83,7 @@ A quick way to try it out interactively::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-giac[test]" ipython
 
-    In [1]: from sage.all__sagemath_giac import *
+    In [1]: from passagemath_giac import *
 
     In [2]: x = libgiac('x')
 
@@ -111,7 +111,7 @@ The last example again, using the Sage REPL::
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-giac[test]" sage
     Warning: sage.all is not available; this is a limited REPL.
 
-    sage: from sage.all__sagemath_giac import *
+    sage: from passagemath_giac import *
 
     sage: x = libgiac('x')
 

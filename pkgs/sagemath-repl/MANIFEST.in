@@ -1,3 +1,5 @@
+graft passagemath_repl
+
 prune sage
 
 graft sage/doctest

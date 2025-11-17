@@ -1,3 +1,5 @@
+graft passagemath_database_polytopes_4d
+
 include VERSION.txt
 
 global-exclude *.c

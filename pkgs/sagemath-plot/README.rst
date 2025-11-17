@@ -74,7 +74,7 @@ Examples
 
    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-plot[test]" ipython
 
-   In [1]: from sage.all__sagemath_plot import *
+   In [1]: from passagemath_plot import *
 
    In [2]: scatter_plot([[0,1],[2,2],[4.3,1.1]], marker='s').save('output.png')
 

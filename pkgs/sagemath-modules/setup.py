@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-modules'],
+           recurse_packages=('sage', 'passagemath_modules'),
            interpreters=['CDF', 'RDF', 'RR', 'CC'],
            required_modules=('gsl',),
            package_data={})

@@ -114,7 +114,7 @@ Using sage.groups.perm_gps::
 
     $ pipx run --pip-args="--prefer-binary" --spec "passagemath-rubiks[test]" ipython
 
-    In [1]: from sage.all__sagemath_rubiks import *
+    In [1]: from passagemath_rubiks import *
 
     In [2]: rubik = CubeGroup(); state = rubik.faces("R")
 

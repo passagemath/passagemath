@@ -1,3 +1,5 @@
+graft passagemath_flint
+
 include VERSION.txt
 
 prune sage

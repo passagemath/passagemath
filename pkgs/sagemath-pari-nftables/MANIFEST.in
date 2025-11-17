@@ -1,3 +1,5 @@
+graft passagemath_pari_nftables
+
 include VERSION.txt
 
 global-exclude *.c
