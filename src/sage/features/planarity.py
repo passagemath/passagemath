@@ -38,8 +38,8 @@ class Planarity(JoinFeature):
         """
         JoinFeature.__init__(self, 'planarity',
                              [PythonModule('sage.graphs.planarity',
-                                           spkg='sagemath_planarity')],
-                             type='standard')
+                                           spkg='sagemath_planarity',
+                                           type='standard')])
 
 
 def all_features():
