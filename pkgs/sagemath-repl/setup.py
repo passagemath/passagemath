@@ -12,8 +12,8 @@ sage.env.SAGE_EXTCODE = os.path.join(os.path.dirname(__file__),
                                      'sage', 'ext_data')
 
 sage_setup(
-           recurse_packages=('sage', 'passagemath_repl'),
     ['sagemath-repl'],
+    recurse_packages=('sage', 'passagemath_repl'),
     cmdclass={
         "develop":   sage_develop,
         "install":   sage_install,

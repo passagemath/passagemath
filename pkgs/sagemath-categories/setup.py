@@ -8,8 +8,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(
-           recurse_packages=('sage', 'passagemath_categories'),
     ['sagemath-categories'],
+    recurse_packages=('sage', 'passagemath_categories'),
     interpreters=['Element', 'Python'],  # RDF uses gsl --> sagemath-modules
     package_data={
         "sage.data_structures": [
