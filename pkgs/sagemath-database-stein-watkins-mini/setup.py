@@ -8,4 +8,5 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-database-stein-watkins-mini'],
+           recurse_packages=('sage', 'passagemath_database_stein_watkins_mini'),
            spkgs=['database_stein_watkins_mini'])

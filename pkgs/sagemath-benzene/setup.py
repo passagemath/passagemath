@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-benzene'],
+           recurse_packages=('sage', 'passagemath_benzene'),
            spkgs=['benzene'],
            package_data={},
            py_limited_api=True)

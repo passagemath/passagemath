@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-cddlib'],
+           recurse_packages=('sage', 'passagemath_cddlib'),
            spkgs=['cddlib'],
            package_data={},
            py_limited_api=True)

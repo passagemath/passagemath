@@ -8,5 +8,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-graphs'],
+           recurse_packages=('sage', 'passagemath_graphs'),
            spkgs=['boost_cropped', 'graphs'],
            package_data={'sage.ext_data': ['graphs/**', 'kenzo/**']})

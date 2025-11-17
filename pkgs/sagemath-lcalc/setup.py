@@ -8,5 +8,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-lcalc'],
+           recurse_packages=('sage', 'passagemath_lcalc'),
            spkgs=['lcalc'],
            package_data={})

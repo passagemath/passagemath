@@ -8,5 +8,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-gap-pkg-float'],
+           recurse_packages=('sage', 'passagemath_gap_pkg_float'),
            spkgs=['gap_pkg_float'],
            py_limited_api=True)

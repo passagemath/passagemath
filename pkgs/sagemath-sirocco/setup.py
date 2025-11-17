@@ -8,5 +8,6 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-sirocco'],
+           recurse_packages=('sage', 'passagemath_sirocco'),
            spkgs=['sirocco'],
            package_data={})

@@ -8,4 +8,5 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-gap-pkg-sglppow-data'],
+           recurse_packages=('sage', 'passagemath_gap_pkg_sglppow_data'),
            spkgs=['gap'])

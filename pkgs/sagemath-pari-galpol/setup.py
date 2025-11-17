@@ -8,4 +8,5 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-pari-galpol'],
+           recurse_packages=('sage', 'passagemath_pari_galpol'),
            spkgs=['pari_galpol'])

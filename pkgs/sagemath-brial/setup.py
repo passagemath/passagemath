@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup(['sagemath-brial'],
+           recurse_packages=('sage', 'passagemath_brial'),
            required_modules=('m4ri', 'libpng'),
            spkgs=['brial', 'm4ri', 'libpng', 'gmp', 'mpc', 'mpfr'],
            package_data={})

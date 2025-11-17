@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sage_setup import sage_setup
 
 sage_setup('sagemath-maxima',
+           recurse_packages=('sage', 'passagemath_maxima'),
            required_modules=('gsl', 'Singular', 'ecl'),
            spkgs=['maxima'],
            package_data={

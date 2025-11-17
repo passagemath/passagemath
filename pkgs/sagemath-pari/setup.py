@@ -64,6 +64,7 @@ if not (len(sys.argv) > 1 and (sys.argv[1] in ["sdist", "egg_info", "dist_info"]
 
 
 sage_setup(['sagemath-pari'],
+           recurse_packages=('sage', 'passagemath_pari'),
            cmdclass={
                "develop":   sage_develop,
                "install":   sage_install,
