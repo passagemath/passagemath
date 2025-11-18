@@ -942,7 +942,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: list(G)    # optional - 4ti2
             [(2, -1, 0), (3, 0, -1), (1, 1, -1), (1, -2, 1), (0, 3, -2)]
             sage: list(G.orthogonal_range_search([0, 0, -1], [2, 1, 0]))  # optional - 4ti2
-            [ (1, 1, -1) ]
+            [(1, 1, -1)]
         """
         return GraverBasis(self)
 
