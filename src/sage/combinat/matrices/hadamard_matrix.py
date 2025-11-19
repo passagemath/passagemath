@@ -1962,7 +1962,7 @@ def hadamard_matrix_www(url_file, comments=False):
         [ 1 -1 -1  1  1  1 -1 -1 -1  1  1 -1 -1 -1  1  1]
         [ 1 -1 -1  1 -1 -1  1  1 -1  1  1 -1  1  1 -1 -1]
     """
-    n = eval(url_file.split(".")[1])
+    n = int(url_file.split(".")[1])
     rws = []
     url = "http://neilsloane.com/hadamard/" + url_file
     with urlopen(url) as f:
