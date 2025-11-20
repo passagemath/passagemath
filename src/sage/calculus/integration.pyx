@@ -446,6 +446,7 @@ def numerical_integral(func, a, b=None,
 
 
 cdef double c_monte_carlo_f(double *t, size_t dim, void *params) noexcept:
+    sig_block()
     cdef double value
     cdef PyFunctionWrapper wrapper
     wrapper = <PyFunctionWrapper> params
@@ -460,14 +461,17 @@ cdef double c_monte_carlo_f(double *t, size_t dim, void *params) noexcept:
             value = wrapper.the_function(*wrapper.lx)
     except Exception as msg:
         print(msg)
-        return 0
+        value=0
 
+    sig_unblock()
     return value
 
 
 cdef double c_monte_carlo_ff(double *x, size_t dim, void *params) noexcept:
     cdef double result
+    sig_block()
     (<Wrapper_rdf> params).call_c(x, &result)
+    sig_unblock()
     return result
 
 
