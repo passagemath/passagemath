@@ -7,7 +7,7 @@ authors:
   orcid: "https://orcid.org/0000-0003-2492-4139"
 - name: "the passagemath contributors"
 - name: "the Sage developers"
-version: 10.6.37
+version: 10.6.38
 doi: 10.5281/zenodo.15265940
-date-released: 2025-11-19
+date-released: 2025-11-23
 repository-code: "https://github.com/passagemath/passagemath"

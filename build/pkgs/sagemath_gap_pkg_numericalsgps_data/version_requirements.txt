@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-gap-pkg-numericalsgps-data ~= 10.6.37.0
+passagemath-gap-pkg-numericalsgps-data ~= 10.6.38.0
