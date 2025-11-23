@@ -21,6 +21,7 @@ export CXXFLAGS="$CXXFLAGS -std=c++14"
 # If SAGE_FAT_BINARY is set, disable dependency that be discovered on the building system.
 if [ "$SAGE_FAT_BINARY" = yes ]; then
     # https://github.com/passagemath/upstream-linbox/blob/master/macros/common.m4
+    # FIXME: On i386/i686, adding "-mfpmath=sse" is done unconditionally.
     LINBOX_CONFIGURE="--without-archnative --without-ocl $LINBOX_CONFIGURE"
 fi
 
