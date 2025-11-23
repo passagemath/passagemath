@@ -16,8 +16,6 @@ echo "*************************************************"
 echo "Using --with-blas-libs='$LINBOX_BLAS' '$LINBOX_BLAS_CFLAGS'"
 echo "*************************************************"
 
-FFLAS_FFPACK_CONFIGURE="$SAGE_CONFIGURE_FFLAS_FFPACK $FFLAS_FFPACK_CONFIGURE"
-
 # If SAGE_FAT_BINARY is set, disable all processor-specific optimizations
 if [ "$SAGE_FAT_BINARY" = yes ]; then
     # https://github.com/passagemath/upstream-fflas-ffpack/blob/master/macros/common.m4
