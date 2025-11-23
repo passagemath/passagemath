@@ -271,6 +271,3 @@ def rebuild(dirname, force=False, interpreters=None, distribution=None):
         if distribution is not None:
             f.write(f"# sage_setup: distribution = {distribution}\n")
         f.write("# " + AUTOGEN_WARN)
-
-    with open(os.path.join(dirname, '__init__.py'), 'w') as f:
-        f.write("# " + AUTOGEN_WARN)
