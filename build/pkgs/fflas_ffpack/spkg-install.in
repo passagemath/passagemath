@@ -32,7 +32,7 @@ fi
 # We disable openmp because of build failures, see
 # https://github.com/sagemath/sage/issues/17635#comment:67
 sdh_configure --with-default="$SAGE_LOCAL" --with-blas-libs="$LINBOX_BLAS" \
-              "$LINBOX_BLAS_CFLAGS" --disable-static \
+              $LINBOX_BLAS_CFLAGS --disable-static \
               --enable-precompilation $FFLAS_FFPACK_CONFIGURE
 sdh_make
 
