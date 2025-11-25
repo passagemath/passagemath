@@ -936,7 +936,8 @@ cdef class Matrix_integer_dense(Matrix_dense):
         .. NOTE:: This method requires the optional package 4ti2 to be installed.
         
         EXAMPLES::
-            
+
+            sage: optional - 4ti2
             sage: A = matrix(ZZ, [[1, 2, 3]])
             sage: G = A.graver_basis()  # optional - 4ti2
             sage: list(G)  # optional - 4ti2
@@ -948,6 +949,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             [(1, 1, -1)]
 
             To showcase number of steps for a simple matrix
+            sage: optional - 4ti2
             sage: A = matrix(ZZ, [[1, 2, 3]])
             sage: b = vector(ZZ, [6])
             sage: c = vector(ZZ, [1, 1, 1])
@@ -970,6 +972,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             ((0, 3, 0), 2)
 
             To showcase most efficient step
+            sage: optional - 4ti2
             sage: A = matrix(ZZ, [[1, 2, 3]])
             sage: b = vector(ZZ, [6])
             sage: c = vector(ZZ, [1, 1, 1])
@@ -985,6 +988,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             ( -1, 2, -1 )
             
             To implement examples of unknown solutions
+            sage: optional - 4ti2
             sage: A = matrix(ZZ, [[1, 2, 3]])
             sage: b = vector(ZZ, [7])
             sage: c = vector(ZZ, [2, 1, 1])
