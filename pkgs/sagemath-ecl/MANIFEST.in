@@ -17,6 +17,8 @@ global-include all__sagemath_ecl.py
 global-exclude *.c
 global-exclude *.cpp
 
+include repair_wheel.py
+
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude *.bak

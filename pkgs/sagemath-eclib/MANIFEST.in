@@ -15,6 +15,8 @@ global-include all__sagemath_eclib.py
 include sage/interfaces/mwrank.py
 include sage/libs/eclib/wrap.cpp
 
+include repair_wheel.py
+
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude *.bak

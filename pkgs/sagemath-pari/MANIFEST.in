@@ -80,6 +80,8 @@ graft pari-jupyter
 global-exclude all__sagemath*.*
 global-include all__sagemath_pari.py
 
+include repair_wheel.py
+
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude *.bak

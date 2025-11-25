@@ -9,6 +9,8 @@ global-exclude *.cpp
 
 global-include all__sagemath_database_stein_watkins_mini.py
 
+include repair_wheel.py
+
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude *.bak
