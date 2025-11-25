@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-pari ~= 10.6.37.0
+passagemath-pari ~= 10.6.38.0

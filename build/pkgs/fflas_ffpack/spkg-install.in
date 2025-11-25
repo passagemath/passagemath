@@ -16,11 +16,11 @@ echo "*************************************************"
 echo "Using --with-blas-libs='$LINBOX_BLAS' '$LINBOX_BLAS_CFLAGS'"
 echo "*************************************************"
 
-FFLAS_FFPACK_CONFIGURE="$SAGE_CONFIGURE_FFLAS_FFPACK $FFLAS_FFPACK_CONFIGURE"
-
 # If SAGE_FAT_BINARY is set, disable all processor-specific optimizations
 if [ "$SAGE_FAT_BINARY" = yes ]; then
-    FFLAS_FFPACK_CONFIGURE="--disable-sse --disable-sse2 --disable-sse3 --disable-ssse3 --disable-sse41 --disable-sse42 --disable-fma --disable-fma4 --disable-avx --disable-avx2 --disable-avx512f --disable-avx512dq --disable-avx512vl $FFLAS_FFPACK_CONFIGURE"
+    # https://github.com/passagemath/upstream-fflas-ffpack/blob/master/macros/common.m4
+    # FIXME: On i386/i686, adding "-mfpmath=sse" is done unconditionally.
+    FFLAS_FFPACK_CONFIGURE="--without-archnative $FFLAS_FFPACK_CONFIGURE"
 fi
 
 # Need to use 'bash' for configure, see
@@ -32,7 +32,7 @@ fi
 # We disable openmp because of build failures, see
 # https://github.com/sagemath/sage/issues/17635#comment:67
 sdh_configure --with-default="$SAGE_LOCAL" --with-blas-libs="$LINBOX_BLAS" \
-              "$LINBOX_BLAS_CFLAGS" --disable-static \
+              $LINBOX_BLAS_CFLAGS --disable-static \
               --enable-precompilation $FFLAS_FFPACK_CONFIGURE
 sdh_make
 

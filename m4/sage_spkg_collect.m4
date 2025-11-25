@@ -319,7 +319,7 @@ AC_DEFUN([SAGE_SPKG_FINALIZE], [dnl
 
     dnl Issue #29124: Do not talk about underscore club
     m4_bmatch(SPKG_NAME, [^_], [], [dnl
-        formatted_message=$(printf '%-32s%s' "SPKG_NAME:" "$message")
+        formatted_message=$(printf '%-38s%s' "SPKG_NAME:" "$message")
         AC_MSG_RESULT([$formatted_message])
     ])
     dnl
