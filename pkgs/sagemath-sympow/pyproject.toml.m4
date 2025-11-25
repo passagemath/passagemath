@@ -34,18 +34,15 @@ test = [
 ]
 
 [tool.cibuildwheel.linux]
-# Unfortunately CIBW_REPAIR_WHEEL_COMMAND does not expand {project} (and other placeholders),
-# so there is no clean way to refer to the repair_wheel.py script
-# https://github.com/pypa/cibuildwheel/issues/1931
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf auditwheel',
-    'python3 pkgs/sagemath-sympow/repair_wheel.py {wheel}',
+    'python3 {package}/repair_wheel.py {wheel}',
     'auditwheel repair -w {dest_dir} {wheel}',
 ]
 [tool.cibuildwheel.macos]
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf auditwheel',
-    'python3 pkgs/sagemath-sympow/repair_wheel.py {wheel}',
+    'python3 {package}/repair_wheel.py {wheel}',
     'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
 ]
 
