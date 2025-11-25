@@ -1006,8 +1006,8 @@ cdef class Matrix_integer_dense(Matrix_dense):
             ....:             break
             sage: x   # optional - 4ti2
             (0, 1, 2)
-            """
-            return GraverBasis(self)
+        """
+        return GraverBasis(self)
 
     def __pow__(sself, n, dummy):
         r"""
