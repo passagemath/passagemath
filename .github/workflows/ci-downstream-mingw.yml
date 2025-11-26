@@ -20,9 +20,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        env:
-          - ucrt-x86_64
-          - clang-aarch64
         distribution: >-
           ${{ fromJson(inputs.distributions
                        || '["sagemath-categories",
@@ -34,6 +31,9 @@ jobs:
                             "sagemath-modules",
                             "sagemath-objects"
                            ]') }}
+        env:
+          - ucrt-x86_64
+          - clang-aarch64
     steps:
       - name: Check out passagemath
         uses: actions/checkout@v4
