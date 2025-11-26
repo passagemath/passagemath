@@ -184,7 +184,20 @@ jobs:
           build:   "win_*64"
     env:
       # SPKGs to install as system packages
-      SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm
+      SPKGS: >-
+        _bootstrap
+        _prereq
+        bzip2
+        curl
+        gdbm
+        info
+        libffi
+        liblzma
+        libxml2
+        ntl
+        openssl
+        readline
+        zlib
       # Non-Python packages to install as spkgs
       #TARGETS_PRE: ccache libpng givaro pari flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
       TARGETS_PRE: >-
@@ -196,7 +209,6 @@ jobs:
         mpfr
         cmr
         mpfi
-        ntl
         rw
         cddlib
         graphs
