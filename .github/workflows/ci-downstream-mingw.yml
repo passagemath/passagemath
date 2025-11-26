@@ -16,17 +16,17 @@ concurrency:
 
 jobs:
   mingw:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ contains(matrix.env, 'aarch') && 'windows-11-arm' || 'windows-2022' }}
     strategy:
       fail-fast: false
       matrix:
-        include:
-        - os:      windows-2022
-          msystem: ucrt64
-          env:     ucrt-x86_64
-        - os:      windows-11-arm
-          msystem: clangarm64
-          env:     clang-aarch64
+        env:
+          - ucrt-x86_64
+          - clang-aarch64
+        distribution: >-
+          ${{ fromJson(inputs.distributions
+                       || '["sagemath-categories",
+                           ]') }}
     steps:
       - name: Check out passagemath
         uses: actions/checkout@v4
@@ -36,17 +36,10 @@ jobs:
         with:
           update: true
           install: >-
-            mingw-w64-${{ matrix.env }}-python-passagemath-categories
-            mingw-w64-${{ matrix.env }}-python-passagemath-cddlib
-            mingw-w64-${{ matrix.env }}-python-passagemath-combinat
-            mingw-w64-${{ matrix.env }}-python-passagemath-environment
-            mingw-w64-${{ matrix.env }}-python-passagemath-glpk
-            mingw-w64-${{ matrix.env }}-python-passagemath-graphs
-            mingw-w64-${{ matrix.env }}-python-passagemath-modules
-            mingw-w64-${{ matrix.env }}-python-passagemath-objects
+            mingw-w64-${{ matrix.env }}-python-pas${{ matrix.distribution }}
             mingw-w64-${{ matrix.env }}-python-passagemath-repl
-            mingw-w64-${{ matrix.env }}-python-passagemath-setup
-          msystem: ${{ matrix.msystem }}
+            mingw-w64-${{ matrix.env }}-python-tox
+          msystem: ${{ contains(matrix.env, 'ucrt') && 'ucrt64' || 'clangarm64' }}
           path-type: inherit
 
       - name: Retrieve configure tarball cache
@@ -82,8 +75,19 @@ jobs:
             upstream/configure*
           key: ${{ steps.cache-configure.outputs.cache-primary-key }}
 
+      - name: tox
+        run: |
+          set -x
+          pkg=${{ matrix.distribution }}
+          cd pkgs/$pkg
+          tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/python-norequirements/')
+          tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --skip-pkg-install
+        env:
+          VIRTUALENV_SYSTEM_SITE_PACKAGES: 1
+        shell: bash
+
       - uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: mingw-logs-${{ matrix.os }}
+          name: mingw-logs-${{ matrix.env }}
           path: ./logs
