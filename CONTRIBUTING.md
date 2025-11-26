@@ -12,6 +12,8 @@ repository](https://github.com/passagemath/passagemath) or other
 repositories in the [passagemath GitHub organization](https://github.com/passagemath).
 
 PRs will be reviewed by the passagemath project's maintainer.
+Members of the passagemath organization and the general public are invited to
+contribute to reviewing PRs.
 
 All participation in passagemath is subject to the Code of Conduct.
 Code contributions to passagemath are limited to those that
