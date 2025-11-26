@@ -79,3 +79,5 @@ There are many other ways to contribute to the passagemath project.
 
 For example, help popularize the project by sharing project announcements
 in mailing lists and on social media.
+
+The passagemath project does not accept financial sponsorship.
