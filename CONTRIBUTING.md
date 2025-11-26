@@ -49,6 +49,17 @@ are a basis for such efforts.
 - Use `git cherry-pick` or `git rebase --onto` to prepare a branch
   backported to the SageMath `develop` branch.
 
+## Contributing to passagemath by backporting SageMath PRs
+
+Although we already merge new releases of SageMath into passagemath on a
+regular basis, also backports of selected changes made in the SageMath
+project are welcome.
+
+As passagemath makes frequent stable releases, in particular bug fixes
+in the Sage library, updates of packages in the Sage distribution, and
+portability improvements are good candidates for backporting to
+passagemath.
+
 ## Non-code contributions to passagemath
 
 There are many other ways to contribute to the passagemath project.
