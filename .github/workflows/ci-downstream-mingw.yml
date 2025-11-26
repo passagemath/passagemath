@@ -26,6 +26,13 @@ jobs:
         distribution: >-
           ${{ fromJson(inputs.distributions
                        || '["sagemath-categories",
+                            "sagemath-cddlib",
+                            "sagemath-cmr",
+                            "sagemath-combinat",
+                            "sagemath-glpk",
+                            "sagemath-graphs",
+                            "sagemath-modules",
+                            "sagemath-objects"
                            ]') }}
     steps:
       - name: Check out passagemath
