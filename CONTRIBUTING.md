@@ -69,6 +69,7 @@ passagemath.
   generated release notes in https://github.com/passagemath/passagemath/releases
 
 - Please include a link to the original PR in the description.
+  There is no need to copy-paste the original description.
 
 - Use `git cherry-pick` or `git rebase --onto` to prepare a branch
   backported to the passagemath `main` branch.
