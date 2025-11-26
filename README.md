@@ -93,9 +93,9 @@ Subsystem for Linux (WSL) or virtualization.
 |------------------------------------------------------------------------------|-----------|-------------------|-------------------|---------------|------------------------|
 | [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9-3.12  | GCC 8.4-14, clang | Linux, macOS, WSL | x86_64, ARM   | EOL 2024-12            |
 | [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9-3.13  | GCC 9-14, clang   | Linux, macOS, WSL | x86_64, ARM   | EOL 2025-10            |
-| 10.6.x (main)                                                                | 3.10-3.14 | GCC 9-15, clang   | Linux, macOS, WSL | x86_64, ARM   | stable                 |
+| 10.6.x (main)                                                                | 3.10-3.14 | GCC 9-15, clang   | Linux, macOS, WSL | x86_64, ARM   | stable, EOL 2026-10    |
 |                                                                              |           | mingw32 + MSVC    | Windows (partial) | x86_64        |                        |
-| 10.7.x ([#1051](https://github.com/passagemath/passagemath/pull/1051))       | 3.11-3.14 |                   |                   |               | planned                |
+| 10.8.x ([#1051](https://github.com/passagemath/passagemath/pull/1051))       | 3.11-3.14 |                   |                   |               | planned                |
 
 Detailed information on supported platforms for a specific version of passagemath
 can be found in the
@@ -457,7 +457,7 @@ Full Installation from Source as passagemath
 --------------------------------------------
 
 9.  Unless you need to install passagemath into a specific existing environment, we recommend
-    to create and activate a fresh virtual environment over a suitable Python (3.10.x-3.13.x),
+    to create and activate a fresh virtual environment over a suitable Python (3.10.x-3.14.x),
     for example `~/passagemath-venv/` as follows. (Dollar signs are prompts; do not type them.)
 
     ```bash session
