@@ -4,7 +4,7 @@ passagemath is a compatible fork of SageMath.
 
 We merge new releases of SageMath into passagemath on a regular basis.
 
-## Direct code contributions to passagemath (recommended)
+## Direct code/documentation contributions to passagemath (recommended)
 
 On 2025-09-01, the passagemath project was opened to general
 code contributions.  Submit pull requests to the [main passagemath
@@ -19,7 +19,7 @@ All participation in passagemath is subject to the Code of Conduct.
 Code contributions to passagemath are limited to those that
 support the goals of the fork outlined in [README.md](README.md).
 
-## Code contributions to upstream SageMath (caution advised)
+## Code/documentation contributions to upstream SageMath (caution advised)
 
 As we merge new releases of SageMath into passagemath on a regular basis,
 it is also possible to contribute to passagemath indirectly, by opening
