@@ -52,13 +52,24 @@ are a basis for such efforts.
 ## Contributing to passagemath by backporting SageMath PRs
 
 Although we already merge new releases of SageMath into passagemath on a
-regular basis, also backports of selected changes made in the SageMath
+regular basis, earlier backports of selected changes made in the SageMath
 project are welcome.
 
 As passagemath makes frequent stable releases, in particular bug fixes
 in the Sage library, updates of packages in the Sage distribution, and
 portability improvements are good candidates for backporting to
 passagemath.
+
+- Such PRs are best opened with a title in the form
+  "ORIGINALTITLE by @ORIGINALAUTHOR, backported" or
+  "ORIGINALTITLE by @ORIGINALAUTHOR, rebased".
+  This ensures that the correct attribution is shown in the automatically
+  generated release notes in https://github.com/passagemath/passagemath/releases
+
+- Please include a link to the original PR in the description.
+
+- Use `git cherry-pick` or `git rebase --onto` to prepare a branch
+  backported to the passagemath `main` branch.
 
 ## Non-code contributions to passagemath
 
