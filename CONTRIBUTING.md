@@ -17,7 +17,7 @@ contribute to reviewing PRs.
 
 All participation in passagemath is subject to the Code of Conduct.
 Code contributions to passagemath are limited to those that
-support the goals of the fork outlined in [README.md](README.md).
+do not conflict with the goals of the fork outlined in [README.md](README.md).
 
 ## Code/documentation contributions to upstream SageMath (caution advised)
 
