@@ -84,7 +84,7 @@ jobs:
           tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --skip-pkg-install
         env:
           VIRTUALENV_SYSTEM_SITE_PACKAGES: 1
-        shell: bash
+        shell: msys2 {0}
 
       - uses: actions/upload-artifact@v4
         if:   always()
