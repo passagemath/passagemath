@@ -54,7 +54,6 @@ import hashlib
 import linecache
 import multiprocessing
 import os
-import platform
 import re
 import sys
 import tempfile
@@ -92,7 +91,8 @@ if typing.TYPE_CHECKING:
 # trac #27754.
 # With Python 3.14, the default changed to 'forkserver' on Linux as well.
 # Sage doctesting requires 'fork' method.
-multiprocessing.set_start_method('fork', force=True)
+if sys.platform != 'win32':
+    multiprocessing.set_start_method('fork', force=True)
 
 
 def _sorted_dict_pprinter_factory(start, end):
