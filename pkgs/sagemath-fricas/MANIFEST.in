@@ -14,6 +14,8 @@ global-exclude *.cpp
 global-exclude all__sagemath_*.py
 global-include all__sagemath_fricas.py
 
+include repair_wheel.py
+
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude *.bak

@@ -34,6 +34,8 @@ include sage/cpython/pycore_long.h  # FIXME
 # PySingular
 include PySingular.cpp
 
+include repair_wheel.py
+
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude *.bak
