@@ -78,9 +78,11 @@ jobs:
       - name: tox
         run: |
           set -x
+          python_version=3.12
+          python_version_no_dot=${python_version/./}
           pkg=${{ matrix.distribution }}
           cd pkgs/$pkg
-          tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/python-norequirements/')
+          tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py'$python_version_no_dot'-norequirements/')
           tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --skip-pkg-install
         env:
           VIRTUALENV_SYSTEM_SITE_PACKAGES: 1
