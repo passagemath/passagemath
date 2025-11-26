@@ -42,38 +42,38 @@ jobs:
           msystem: ${{ contains(matrix.env, 'ucrt') && 'ucrt64' || 'clangarm64' }}
           path-type: inherit
 
-      - name: Retrieve configure tarball cache
-        id: cache-configure
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            build/pkgs/configure
-            upstream/configure*
-          key: >-
-            configure-build=${{
-              hashFiles('build',
-                        'configure.ac',
-                        'm4')
-            }}
+      # - name: Retrieve configure tarball cache
+      #   id: cache-configure
+      #   uses: actions/cache/restore@v4
+      #   with:
+      #     path: |
+      #       build/pkgs/configure
+      #       upstream/configure*
+      #     key: >-
+      #       configure-build=${{
+      #         hashFiles('build',
+      #                   'configure.ac',
+      #                   'm4')
+      #       }}
 
-      - name: Bootstrap
-        if: steps.cache-configure.outputs.cache-hit != 'true'
-        # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
-        run: |
-          export PATH=$(pwd)/build/bin:$PATH
-          eval $(sage-print-system-package-command auto --yes update)
-          eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
-          ./bootstrap -s
-        shell: msys2 {0}
+      # - name: Bootstrap
+      #   if: steps.cache-configure.outputs.cache-hit != 'true'
+      #   # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
+      #   run: |
+      #     export PATH=$(pwd)/build/bin:$PATH
+      #     eval $(sage-print-system-package-command auto --yes update)
+      #     eval $(sage-print-system-package-command auto --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+      #     ./bootstrap -s
+      #   shell: msys2 {0}
 
-      - name: Save configure tarball cache
-        if: steps.cache-configure.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            build/pkgs/configure
-            upstream/configure*
-          key: ${{ steps.cache-configure.outputs.cache-primary-key }}
+      # - name: Save configure tarball cache
+      #   if: steps.cache-configure.outputs.cache-hit != 'true'
+      #   uses: actions/cache/save@v4
+      #   with:
+      #     path: |
+      #       build/pkgs/configure
+      #       upstream/configure*
+      #     key: ${{ steps.cache-configure.outputs.cache-primary-key }}
 
       - name: tox
         run: |
