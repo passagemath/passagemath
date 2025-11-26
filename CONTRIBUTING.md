@@ -81,3 +81,28 @@ For example, help popularize the project by sharing project announcements
 in mailing lists and on social media.
 
 The passagemath project does not accept financial sponsorship.
+
+## Contributing to the larger mathematical software ecosystem
+
+The passagemath project is a major integrating force in the
+[mathematical software landscape](https://github.com/passagemath#passagemath-in-the-mathematical-software-landscape).
+
+passagemath depends on numerous open-source mathematical software
+packages.  Contributing to the development and maintenance of
+dependencies is a great way to contribute to passagemath, too.
+
+Publishing your own packages that depend on passagemath is also a
+wonderful way to contribute to the passagemath project and the
+mathematical software ecosystem.
+
+You are also invited to help with curation activities for mathematical
+software.
+
+- For user packages that depend on the Sage library, curation
+  activities are coordinated in
+  [passagemath/passagemath#248](https://github.com/passagemath/passagemath/issues/248).
+
+- Regarding other mathematical software, we invite the public to open
+  an Issue at https://github.com/passagemath/passagemath/issues to
+  describe the scope of the curation and initial examples of software
+  to be surveyed.
