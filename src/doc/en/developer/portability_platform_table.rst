@@ -322,6 +322,60 @@
 .. |codespace-ubuntu-questing-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-questing-maximal%2Fdevcontainer.json
 
+.. |image-ubuntu-resolute-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-minimal-with-system-packages
+
+.. |image-ubuntu-resolute-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-minimal-configured
+
+.. |image-ubuntu-resolute-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-minimal-with-targets-pre
+
+.. |image-ubuntu-resolute-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-minimal-with-targets
+
+.. |image-ubuntu-resolute-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-minimal-with-targets-optional
+
+.. |codespace-ubuntu-resolute-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-resolute-minimal%2Fdevcontainer.json
+
+.. |image-ubuntu-resolute-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-standard-with-system-packages
+
+.. |image-ubuntu-resolute-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-standard-configured
+
+.. |image-ubuntu-resolute-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-standard-with-targets-pre
+
+.. |image-ubuntu-resolute-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-standard-with-targets
+
+.. |image-ubuntu-resolute-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-standard-with-targets-optional
+
+.. |codespace-ubuntu-resolute-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-resolute-standard%2Fdevcontainer.json
+
+.. |image-ubuntu-resolute-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-maximal-with-system-packages
+
+.. |image-ubuntu-resolute-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-maximal-configured
+
+.. |image-ubuntu-resolute-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-maximal-with-targets-pre
+
+.. |image-ubuntu-resolute-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-maximal-with-targets
+
+.. |image-ubuntu-resolute-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-resolute-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-resolute-maximal-with-targets-optional
+
+.. |codespace-ubuntu-resolute-maximal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-resolute-maximal%2Fdevcontainer.json
+
 .. |image-debian-bullseye-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages
 
@@ -2933,6 +2987,17 @@
      - |codespace-ubuntu-questing-standard|
    * -    ‑*maximal*
      - |image-ubuntu-questing-maximal-with-system-packages| |image-ubuntu-questing-maximal-with-targets-pre|
+     -
+   * - **ubuntu**-resolute 
+       
+          ‑*minimal*
+     - |image-ubuntu-resolute-minimal-with-system-packages| |image-ubuntu-resolute-minimal-with-targets-pre| |image-ubuntu-resolute-minimal-with-targets| |image-ubuntu-resolute-minimal-with-targets-optional|
+     - |codespace-ubuntu-resolute-minimal|
+   * -    ‑*standard*
+     - |image-ubuntu-resolute-standard-with-system-packages| |image-ubuntu-resolute-standard-with-targets-pre| |image-ubuntu-resolute-standard-with-targets| |image-ubuntu-resolute-standard-with-targets-optional|
+     - |codespace-ubuntu-resolute-standard|
+   * -    ‑*maximal*
+     - |image-ubuntu-resolute-maximal-with-system-packages| |image-ubuntu-resolute-maximal-with-targets-pre|
      -
    * - **debian**-bullseye 
        
