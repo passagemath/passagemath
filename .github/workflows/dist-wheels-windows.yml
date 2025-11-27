@@ -202,7 +202,8 @@ jobs:
       #TARGETS_PRE: ccache libpng givaro pari flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
       TARGETS_PRE: >-
         boost_cropped
-        gmp
+        gmp-ensure
+        ntl-ensure
         glpk
         gsl
         mpc
