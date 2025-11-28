@@ -28,7 +28,9 @@ jobs:
                             "sagemath-combinat",
                             "sagemath-glpk",
                             "sagemath-graphs",
+                            "sagemath-homfly",
                             "sagemath-modules",
+                            "sagemath-nauty",
                             "sagemath-objects"
                            ]') }}
         env:
