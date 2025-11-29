@@ -13,7 +13,7 @@ multiprecision package.
 License
 -------
 
-LGPL 3.0
+Apache 2.0
 
 
 Upstream Contact
