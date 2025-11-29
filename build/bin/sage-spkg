@@ -472,7 +472,9 @@ case "$PKG_SRC_TYPE" in
         ;;
     *)
         # Source tarball
-        sage-uncompress-spkg -d src "$PKG_SRC" || exit_with_error_msg "Error: failed to extract $PKG_SRC"
+        #
+        # Undo "export MSYS=winsymlinks" done in top-level Makefile
+        (unset MSYS; sage-uncompress-spkg -d src "$PKG_SRC") || exit_with_error_msg "Error: failed to extract $PKG_SRC"
         cd src
         sage-apply-patches || exit_with_error_msg "Error applying patches"
         cd ..
