@@ -48,8 +48,14 @@ jobs:
             mingw-w64-${{ matrix.env }}-python-pas${{ matrix.distribution }}
             mingw-w64-${{ matrix.env }}-python-passagemath-repl
             mingw-w64-${{ matrix.env }}-python-tox
+            ${{ matrix.distribution == 'sagemath-combinat' && format('mingw-w64-{0}-python-passagemath-graphs mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-graphs'   && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs', matrix.env) || ''}}
           msystem: ${{ contains(matrix.env, 'ucrt') && 'ucrt64' || 'clangarm64' }}
           path-type: inherit
+
+          # TBD when test dependencies are available:
+          #  ${{ matrix.distribution == 'sagemath-cddlib' && format('mingw-w64-{0}-python-passagemath-polyhedra mingw-w64-{0}-python-passagemath-flint mingw-w64-{0}-python-passagemath-pari', matrix.env) || ''}}
 
       # - name: Retrieve configure tarball cache
       #   id: cache-configure
