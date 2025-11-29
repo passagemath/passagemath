@@ -103,8 +103,9 @@ jobs:
           VIRTUALENV_SYSTEM_SITE_PACKAGES: 1
         shell: msys2 {0}
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload logs artifact
+        uses: actions/upload-artifact@v4
         if:   always()
         with:
-          name: mingw-logs-${{ matrix.env }}
-          path: ./logs
+          name: downstream-mingw-logs-${{ matrix.distribution }}-${{ matrix.env }}
+          path: "pkgs/*/.tox/*/log"
