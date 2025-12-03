@@ -24,6 +24,7 @@ IF UNAME_SYSNAME == "Linux" or UNAME_SYSNAME == "Darwin":
     from posix.unistd cimport getpid, _exit
 
     from cysignals.pselect import PSelecter
+    from cysignals.pysignals import changesignal
 
 ELSE:
 
@@ -34,10 +35,12 @@ ELSE:
         sys.exit(0)
 
     @contextmanager
-    def PSelecter():
+    def PSelecter(*args):
         yield
 
-from cysignals.pysignals import changesignal
+    @contextmanager
+    def changesignal(*args):
+        yield
 
 
 cdef class ContainChildren():
