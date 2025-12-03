@@ -31,7 +31,8 @@ jobs:
                             "sagemath-homfly",
                             "sagemath-modules",
                             "sagemath-nauty",
-                            "sagemath-objects"
+                            "sagemath-objects",
+                            "sagemath-rankwidth"
                            ]') }}
         env:
           - ucrt-x86_64
