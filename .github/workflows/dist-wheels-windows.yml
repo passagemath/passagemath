@@ -215,7 +215,8 @@ jobs:
         PIP_FIND_LINKS=${GITHUB_WORKSPACE}\\wheelhouse' '${GITHUB_WORKSPACE}\\dist
         SAGE_NUM_THREADS=6
         PYTHONUTF8=1
-      CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: "delvewheel repair -vv --custom-patch -w {dest_dir} {wheel}"
+      CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: |
+        msys2 -c "set -x && if [ -r {package}/repair_wheel.py ]; then python3 -m pip install passagemath-conf auditwheel && python3 {package}/repair_wheel.py {wheel}; fi" && delvewheel repair -vv --custom-patch -w {dest_dir} {wheel}"
       #
       CIBW_PLATFORM: windows
     steps:
