@@ -193,7 +193,7 @@ cdef class ContainChildren():
 
 
 @contextmanager
-def terminate(sp, interval=1, signals=[signal.SIGTERM, signal.SIGKILL]):
+def terminate(sp, interval=1, signals=None):
     r"""
     Context manager that terminates or kills the given `subprocess.Popen`
     when it is no longer needed, in case the process does not end on its
@@ -268,10 +268,28 @@ def terminate(sp, interval=1, signals=[signal.SIGTERM, signal.SIGKILL]):
     try:
         yield sp
     finally:
+        if signals is None:
+            signals = []
+            try:
+                from signal import SIGTERM
+            except ImportError:
+                pass
+            else:
+                signals.append(SIGTERM)
+            try:
+                from signal import SIGKILL
+            except ImportError:
+                pass
+            else:
+                signals.append(SIGKILL)
+        try:
+            from signal import SIGCHLD
+        except ImportError:
+            SIGCHLD = None
         # This "with" block ensures that SIGCHLD will certainly
         # interrupt the sel.sleep() call without race conditions.
-        with PSelecter([signal.SIGCHLD]) as sel, \
-                changesignal(signal.SIGCHLD, lambda *args: None):
+        with PSelecter([SIGCHLD]) as sel, \
+                changesignal(SIGCHLD, lambda *args: None):
             if sp.poll() is not None:
                 return
 
