@@ -190,21 +190,7 @@ jobs:
       SPKGS: _bootstrap _prereq openssl curl readline liblzma libffi bzip2 zlib info libxml2 gdbm
       # Non-Python packages to install as spkgs
       #TARGETS_PRE: ccache libpng mpfi givaro pari ntl flint iml lcalc libbraiding m4ri m4rie gap nauty gfan ecm tachyon pip
-      TARGETS_PRE: >-
-        boost_cropped
-        gmp
-        glpk
-        gsl
-        mpc
-        mpfr
-        cmr
-        rw
-        cddlib
-        graphs
-        planarity
-        cliquer
-        libhomfly
-        symmetrica
+      TARGETS_PRE: _cibuildwheel_local_windows
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
