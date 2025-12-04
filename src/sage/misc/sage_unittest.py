@@ -259,6 +259,7 @@ class TestSuite:
             The following tests failed: _test_b, _test_d, _test_pickling
 
             ...
+
         The ``catch=False`` option prevents ``TestSuite`` from
         catching exceptions::
 
