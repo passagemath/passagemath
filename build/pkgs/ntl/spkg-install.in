@@ -101,7 +101,7 @@ ntl_configure()
     # command prompt, when they're expecting a POSIX-style shell
     # This works around that by adding the MSYS perl to PATH
     if [ -n "$MSYSTEM" ]; then
-        
+        LIBTOOL_LINK_FLAGS="-no-undefined"
         # We only want the MSYS perl added to PATH, not everything else in /usr/bin,
         # since that includes plenty of other MSYS tools that might accidentally result
         # in a Cygwin build, not a Windows-native build 
