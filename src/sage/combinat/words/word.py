@@ -522,7 +522,7 @@ class InfiniteWord_iter_with_caching(WordDatatype_iter_with_caching, InfiniteWor
         sage: try:
         ....:     dumps(w)
         ....: except TypeError as e:
-        ....:     if "pickle" in str(e) and "generator" in str(e)
+        ....:     if "pickle" in str(e) and "generator" in str(e):
         ....:         print("TypeError raised in dumps() as expected")
         TypeError raised in dumps() as expected
     """
@@ -563,7 +563,7 @@ class InfiniteWord_iter(WordDatatype_iter, InfiniteWord_class):
         sage: try:
         ....:     dumps(w)
         ....: except TypeError as e:
-        ....:     if "pickle" in str(e) and "generator" in str(e)
+        ....:     if "pickle" in str(e) and "generator" in str(e):
         ....:         print("TypeError raised in dumps() as expected")
         TypeError raised in dumps() as expected
     """
