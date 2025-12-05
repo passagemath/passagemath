@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-fricas ~= 10.6.39.0
+passagemath-fricas ~= 10.6.40.0

@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-conf ~= 10.6.39.0 ; sys_platform != 'win32'
+passagemath-conf ~= 10.6.40.0 ; sys_platform != 'win32'
