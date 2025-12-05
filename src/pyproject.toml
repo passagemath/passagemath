@@ -11,7 +11,7 @@ requires = [
     # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212, https://github.com/passagemath/passagemath/issues/445
     'cysignals >=1.11.2, != 1.12.0',
     # Exclude 1.12.4 because of https://github.com/passagemath/passagemath/issues/1318
-    'cysignals <1.12.4; sys_platform == "win32"',
+    'cysignals !=1.12.4; sys_platform == "win32"',
     # per https://github.com/scipy/scipy/blob/maintenance/1.13.x/pyproject.toml
     'cython >=3.0.8,<3.3.0',
     'gmpy2 ~=2.1.b999',
@@ -34,7 +34,7 @@ dependencies = [
     # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212, https://github.com/passagemath/passagemath/issues/445
     'cysignals >=1.11.2, != 1.12.0',
     # Exclude 1.12.4 because of https://github.com/passagemath/passagemath/issues/1318
-    'cysignals <1.12.4; sys_platform == "win32"',
+    'cysignals !=1.12.4; sys_platform == "win32"',
     'cython >=3.0.8, <3.3.0',
     'gmpy2 ~=2.1.b999',
     # According to https://pypi.org/project/importlib-metadata/,
