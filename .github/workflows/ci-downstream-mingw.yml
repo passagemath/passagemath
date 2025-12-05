@@ -24,6 +24,7 @@ jobs:
           ${{ fromJson(inputs.distributions
                        || '["sagemath-categories",
                             "sagemath-cddlib",
+                            "sagemath-cliquer",
                             "sagemath-cmr",
                             "sagemath-combinat",
                             "sagemath-glpk",
@@ -32,6 +33,7 @@ jobs:
                             "sagemath-modules",
                             "sagemath-nauty",
                             "sagemath-objects",
+                            "sagemath-planarity",
                             "sagemath-rankwidth"
                            ]') }}
         env:
@@ -49,6 +51,7 @@ jobs:
             mingw-w64-${{ matrix.env }}-python-pas${{ matrix.distribution }}
             mingw-w64-${{ matrix.env }}-python-passagemath-repl
             mingw-w64-${{ matrix.env }}-python-tox
+            ${{ matrix.distribution == 'sagemath-cliquer'  && format('mingw-w64-{0}-python-passagemath-graphs', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-combinat' && format('mingw-w64-{0}-python-passagemath-graphs mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-graphs'   && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs', matrix.env) || ''}}
