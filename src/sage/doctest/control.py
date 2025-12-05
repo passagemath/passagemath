@@ -819,8 +819,12 @@ class DocTestController(SageObject):
             {'walltime': 1.0}
         """
         from sage.misc.temporary_file import atomic_write
-        with atomic_write(filename) as stats_file:
-            json.dump(self.stats, stats_file, sort_keys=True, indent=4)
+
+        try:
+            with atomic_write(filename) as stats_file:
+                json.dump(self.stats, stats_file, sort_keys=True, indent=4)
+        except Exception:
+            self.log("Error writing stats to %s" % filename)
 
     def log(self, s, end='\n'):
         """
