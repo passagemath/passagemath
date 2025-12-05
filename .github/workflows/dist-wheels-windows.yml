@@ -418,6 +418,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_cliquer
 
+      - name: sagemath-nauty
+        id:   sagemath-nauty
+        uses: pypa/cibuildwheel@v3.3.0
+        with:
+          package-dir: unpacked/passagemath_nauty
+
       - name: sagemath-combinat
         id:   sagemath-combinat
         uses: pypa/cibuildwheel@v3.3.0
@@ -505,6 +511,7 @@ jobs:
          'sagemath-graphs',
          'sagemath-homfly',
          'sagemath-modules',
+         'sagemath-nauty',
          'sagemath-planarity',
          'sagemath-plot',
          'sagemath-rankwidth',
