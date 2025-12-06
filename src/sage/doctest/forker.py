@@ -91,6 +91,7 @@ if typing.TYPE_CHECKING:
 # With Python 3.14, the default changed to 'forkserver' on Linux as well.
 # Sage doctesting requires 'fork' method.
 if sys.platform not in ('win32', 'emscripten'):
+    import multiprocessing
     multiprocessing.set_start_method('fork', force=True)
 
 from multiprocessing import Process
