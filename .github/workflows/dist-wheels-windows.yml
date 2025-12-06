@@ -432,6 +432,12 @@ jobs:
         with:
           package-dir: unpacked/passagemath_modules
 
+      - name: sagemath-ntl
+        id:   sagemath-ntl
+        uses: pypa/cibuildwheel@v2.23.0
+        with:
+          package-dir: unpacked/passagemath_ntl
+
       - name: sagemath-plot
         id:   sagemath-plot
         uses: pypa/cibuildwheel@v3.3.0
@@ -505,6 +511,7 @@ jobs:
          'sagemath-graphs',
          'sagemath-homfly',
          'sagemath-modules',
+         'sagemath-ntl',
          'sagemath-planarity',
          'sagemath-plot',
          'sagemath-rankwidth',
