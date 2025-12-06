@@ -34,6 +34,7 @@ jobs:
                             "sagemath-nauty",
                             "sagemath-objects",
                             "sagemath-planarity",
+                            "sagemath-plot",
                             "sagemath-rankwidth"
                            ]') }}
         env:
@@ -60,6 +61,7 @@ jobs:
 
           # TBD when test dependencies are available:
           #  ${{ matrix.distribution == 'sagemath-cddlib' && format('mingw-w64-{0}-python-passagemath-polyhedra mingw-w64-{0}-python-passagemath-flint mingw-w64-{0}-python-passagemath-pari', matrix.env) || ''}}
+          #  ${{ matrix.distribution == 'sagemath-plot' && format('mingw-w64-{0}-python-passagemath-tachyon', matrix.env) || ''}}
 
       - name: tox
         run: |
