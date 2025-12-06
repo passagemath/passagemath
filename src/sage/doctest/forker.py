@@ -52,7 +52,6 @@ import errno
 import gc
 import hashlib
 import linecache
-import multiprocessing
 import os
 import re
 import sys
@@ -91,8 +90,16 @@ if typing.TYPE_CHECKING:
 # trac #27754.
 # With Python 3.14, the default changed to 'forkserver' on Linux as well.
 # Sage doctesting requires 'fork' method.
-if sys.platform != 'win32':
+if sys.platform not in ('win32', 'emscripten'):
+    import multiprocessing
     multiprocessing.set_start_method('fork', force=True)
+
+from multiprocessing import Process
+
+try:
+    import _multiprocessing
+except ImportError:
+    _multiprocessing = None
 
 
 def _sorted_dict_pprinter_factory(start, end):
@@ -249,7 +256,7 @@ def init_sage(controller: DocTestController | None = None) -> None:
         pass
 
     try:
-        import sympy
+        import sympy.printing
     except (ImportError, AttributeError):
         # Do not require sympy for running doctests (Issue #25106).
         pass
@@ -1509,7 +1516,7 @@ class SageDocTestRunner(doctest.DocTestRunner):
                 except KeyboardInterrupt:
                     # Assume this is a *real* interrupt. We need to
                     # escalate this to the master doctesting process.
-                    if not self.options.serial:
+                    if not self.options.serial and _multiprocessing:
                         import signal
                         os.kill(os.getppid(), signal.SIGINT)
                     raise
@@ -1657,7 +1664,7 @@ class SageDocTestRunner(doctest.DocTestRunner):
                 except KeyboardInterrupt:
                     # Assume this is a *real* interrupt. We need to
                     # escalate this to the master doctesting process.
-                    if not self.options.serial:
+                    if not self.options.serial and _multiprocessing:
                         os.kill(os.getppid(), signal.SIGINT)
                     raise
                 finally:
@@ -2169,13 +2176,13 @@ class DocTestDispatcher(SageObject):
             sage -t .../sage/rings/big_oh.py
                 [... tests, ...s wall]
         """
-        if self.controller.options.serial:
+        if self.controller.options.serial or not _multiprocessing:
             self.serial_dispatch()
         else:
             self.parallel_dispatch()
 
 
-class DocTestWorker(multiprocessing.Process):
+class DocTestWorker(Process):
     """
     The DocTestWorker process runs one :class:`DocTestTask` for a given
     source. It returns messages about doctest failures (or all tests if
@@ -2240,7 +2247,7 @@ class DocTestWorker(multiprocessing.Process):
                 cumulative wall time: ... seconds
             Features detected...
         """
-        multiprocessing.Process.__init__(self)
+        Process.__init__(self)
 
         self.source = source
         self.options = options
