@@ -243,6 +243,27 @@ This makes technical sense because the dependencies will be localized to this di
 [![PyPI: passagemath-docbuild](https://img.shields.io/pypi/v/passagemath-docbuild.svg?label=passagemath-docbuild)](https://pypi.python.org/pypi/passagemath-docbuild) Build system for the Sage documentation.
 
 
+[Windows] Installation from MSYS2 Packages
+------------------------------------------
+
+The modularized packages marked above as "Available on Windows" can also be installed
+using the [MSYS2 software distribution](https://www.msys2.org/).
+
+After installing MSYS2, use pacman to install some of the
+[available packages](https://packages.msys2.org/search?t=pkg&q=passagemath).
+
+```bash session
+$ pacman -S mingw-w64-ucrt-x86_64-python-passagemath-{cmr,repl}
+```
+
+Then start the Sage REPL:
+
+```bash session
+$ sage
+...
+sage: from passagemath_cmr import *
+```
+
 
 Building from Source: Table of Contents
 ---------------------------------------
