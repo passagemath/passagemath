@@ -1,1 +1,1 @@
-boost_cropped gmp glpk gsl mpc mpfr cmr rw cddlib graphs planarity cliquer libhomfly symmetrica
+boost_cropped gmp glpk gsl mpc mpfr ntl cmr rw cddlib graphs planarity cliquer libhomfly symmetrica
