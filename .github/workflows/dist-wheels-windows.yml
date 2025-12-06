@@ -372,54 +372,63 @@ jobs:
 
       - name: sagemath-categories
         id:   sagemath-categories
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_categories
 
       - name: sagemath-graphs
         id:   sagemath-graphs
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_graphs
 
       - name: sagemath-rankwidth
         id:   sagemath-rankwidth
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_rankwidth
 
       - name: sagemath-cddlib
         id:   sagemath-cddlib
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_cddlib
 
       - name: sagemath-glpk
         id:   sagemath-glpk
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_glpk
 
       - name: sagemath-planarity
         id:   sagemath-planarity
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_planarity
 
       - name: sagemath-homfly
         id:   sagemath-homfly
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_homfly
 
       - name: sagemath-cliquer
         id:   sagemath-cliquer
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_cliquer
 
       - name: sagemath-combinat
         id:   sagemath-combinat
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_combinat
@@ -428,18 +437,21 @@ jobs:
 
       - name: sagemath-modules
         id:   sagemath-modules
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_modules
 
       - name: sagemath-plot
         id:   sagemath-plot
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_plot
 
       - name: sagemath-cmr
         id:   sagemath-cmr
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
         uses: pypa/cibuildwheel@v3.3.0
         with:
           package-dir: unpacked/passagemath_cmr
