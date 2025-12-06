@@ -1,5 +1,5 @@
-passagemath: General purpose mathematical software system, a fork of SageMath
-=============================================================================
+passagemath: General purpose mathematical software system in Python, a pip-installable modularized fork of SageMath
+===================================================================================================================
 
 [passagemath](https://github.com/passagemath/passagemath) is open source mathematical
 software in Python, released under the GNU General Public Licence GPLv2+.
@@ -11,7 +11,7 @@ and MATLAB".
 The passagemath fork uses the motto "Creating a Free Passage Between the Scientific Python Ecosystem
 and Mathematical Software Communities." It was created in October 2024 with the following goals:
 
-* providing modularized installation with pip
+* providing instant, modularized installation with pip from binary wheels,
   - [this major project was started in May 2020 in the Sage codebase](https://github.com/sagemath/sage/issues/29705) and completed in passagemath 10.5.29 (May 2025),
 * establishing first-class membership in the scientific Python ecosystem,
 * giving [clear attribution of upstream projects](https://groups.google.com/g/sage-devel/c/6HO1HEtL1Fs/m/G002rPGpAAAJ),
@@ -20,9 +20,17 @@ and Mathematical Software Communities." It was created in October 2024 with the 
 * [inviting collaborations](https://github.com/passagemath/passagemath/issues/700) with upstream projects,
 * [building a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ),
 * [empowering Sage users to participate in the scientific Python ecosystem](https://github.com/passagemath/passagemath/issues/248) by publishing packages,
-* developing a port to [Pyodide](https://pyodide.org/en/stable/) (WebAssembly) for serverless deployment with JavaScript,
-* developing a [native Windows port](https://github.com/passagemath/passagemath/issues/1044)
-  - passagemath 10.6.1 (July 2025) published the first pip-installable packages for native Windows on x86_64.
+* developing a port to [Pyodide](https://pyodide.org/en/stable/) (WebAssembly) for serverless deployment with Javascript,
+* developing a [native Windows port](https://github.com/passagemath/passagemath/issues/1044),
+  - passagemath 10.6.1 (July 2025) published the first pip-installable wheel packages for native Windows on x86_64,
+  - passagemath packages became available in the [MSYS2 software distribution](https://packages.msys2.org/search?t=pkg&q=passagemath) in November 2025.
+
+Moreover, the passagemath project:
+
+* provides a stable, frequently updated version of the Sage distribution,
+* integrates additional mathematical software, notably Macaulay2, a full set of GAP packages,
+  and the Combinatorial Matrix Recognition library,
+* curates a library of Sage user packages.
 
 [Full documentation](https://passagemath.org/docs/latest/html/en/index.html) is available online.
 
@@ -30,18 +38,20 @@ and Mathematical Software Communities." It was created in October 2024 with the 
 passagemath community
 ---------------------
 
-Join [passagemath.discourse.group](https://passagemath.discourse.group/) for help and discussions.
+Join the [Scientific Python Discord server](https://discord.com/invite/vur45CbwMz) and visit the
+[#passagemath](https://discord.com/channels/786703927705862175/1446246458910310541) channel.
 
 Join the BlueSky platform and follow [@passagemath.org](https://bsky.app/profile/passagemath.org) to receive announcements.
+On Mastodon / in the Fediverse, follow [@passagemath.org@bsky.brid.gy](https://mathstodon.xyz/@passagemath.org@bsky.brid.gy).
 
-As of 2025-08-20, the [passagemath GitHub organization](https://github.com/passagemath) had 120 members.
+Join [passagemath.discourse.group](https://passagemath.discourse.group/) for help and discussions.
+
+As of 2025-09-20, the [passagemath GitHub organization](https://github.com/passagemath) had 128 members.
 
 [People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
 development of SageMath since 2005, and hence of passagemath.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for how you can contribute.
-
-passagemath is a major integrating force in the [mathematical software landscape](https://github.com/passagemath#passagemath-in-the-mathematical-software-landscape).
+See [CONTRIBUTING.md](https://github.com/passagemath/passagemath/blob/main/CONTRIBUTING.md) for how you can contribute: to passagemath itself or the surrounding [mathematical software landscape](https://github.com/passagemath#passagemath-in-the-mathematical-software-landscape).
 
 
 Running passagemath in the cloud (Google Colab)
