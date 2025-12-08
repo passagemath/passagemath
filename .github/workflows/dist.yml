@@ -1413,6 +1413,9 @@ jobs:
     needs: [sdists_for_pypi, noarch_wheels_for_pypi]
     env:
       CIBW_PLATFORM: pyodide
+      CIBW_ENVIRONMENT: >-
+        SAGE_CONF_FILE=/dev/null
+        SAGE_CONF_ENV_FILE=/dev/null
     steps:
       - uses: actions/checkout@v4
 
