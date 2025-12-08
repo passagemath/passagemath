@@ -32,6 +32,7 @@ jobs:
                             "sagemath-homfly",
                             "sagemath-modules",
                             "sagemath-nauty",
+                            "sagemath-ntl",
                             "sagemath-objects",
                             "sagemath-planarity",
                             "sagemath-plot",
@@ -52,10 +53,11 @@ jobs:
             mingw-w64-${{ matrix.env }}-python-pas${{ matrix.distribution }}
             mingw-w64-${{ matrix.env }}-python-passagemath-repl
             mingw-w64-${{ matrix.env }}-python-tox
-            ${{ matrix.distribution == 'sagemath-cliquer'  && format('mingw-w64-{0}-python-passagemath-graphs', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-cliquer'  && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-combinat' && format('mingw-w64-{0}-python-passagemath-graphs mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-graphs'   && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
-            ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-ntl'      && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
           msystem: ${{ contains(matrix.env, 'ucrt') && 'ucrt64' || 'clangarm64' }}
           path-type: inherit
 
