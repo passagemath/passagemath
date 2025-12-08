@@ -1416,6 +1416,7 @@ jobs:
       CIBW_ENVIRONMENT: >-
         SAGE_CONF_FILE=/dev/null
         SAGE_CONF_ENV_FILE=/dev/null
+        PIP_FIND_LINKS=file://$(pwd)/wheelhouse' 'file://$(pwd)/dist
     steps:
       - uses: actions/checkout@v4
 
