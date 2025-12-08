@@ -1407,6 +1407,64 @@ jobs:
           path: ./logs
 
 
+  build_wheels_pyodide:
+    name: pyodide wheels
+    runs-on: ubuntu-latest
+    needs: [sdists_for_pypi, noarch_wheels_for_pypi]
+    env:
+      CIBW_PLATFORM: pyodide
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download sdists
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Download noarch-wheels
+        uses: actions/download-artifact@v4
+        with:
+          name: noarch-wheels
+          path: dist
+
+      - name: Unpack and prepare
+        id: unpack
+        # We build the wheels from the sdists so that MANIFEST filtering becomes effective.
+        # But we must run cibuildwheel with the unpacked source directory, not a tarball,
+        # so that SAGE_ROOT is copied into the build containers.
+        #
+        # In the CIBW_BEFORE_ALL phase, we install libraries using the Sage distribution.
+        # https://cibuildwheel.readthedocs.io/en/stable/options/#before-all
+        # For Linux, this is repeated for each of the packages that we build wheels for
+        # because CIBW starts with a fresh container on each invocation.
+        # Therefore we cache it in a directory mounted from the host: /host
+        # https://cibuildwheel.pypa.io/en/stable/faq/#linux-builds-in-containers
+        #
+        # - configure --with-sage-venv makes the SAGE_VENV separate from SAGE_LOCAL.
+        #   SAGE_LOCAL is put in PATH for the wheel building.
+        #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
+        #
+        run: |
+          mkdir -p unpacked
+          set -x
+          for sdist in dist/$pkg*.tar.gz; do
+              (cd unpacked && tar xfz - && base=${sdist#dist/} && mv ${base%.tar.gz} ${base%-*}) < $sdist
+          done
+
+      - name: sagemath-objects
+        id:   sagemath-objects
+        uses: pypa/cibuildwheel@v3.3.0
+        with:
+          package-dir: unpacked/passagemath_objects
+
+      - uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: pyodide-wheels
+          path: ./wheelhouse/*.whl
+
+
   upload_wheels:
     # This needs to be a separate job because pypa/gh-action-pypi-publish cannot run on macOS
     needs: [sdists_for_pypi, noarch_wheels_for_pypi, build_wheels_side_a, build_wheels_side_b, build_wheels_side_c]
