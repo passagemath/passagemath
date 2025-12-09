@@ -285,7 +285,7 @@ def terminate(sp, interval=1, signals=None):
         try:
             from signal import SIGCHLD
         except ImportError:
-            SIGCHLD = None
+            raise NotImplementedError
         # This "with" block ensures that SIGCHLD will certainly
         # interrupt the sel.sleep() call without race conditions.
         with PSelecter([SIGCHLD]) as sel, \
