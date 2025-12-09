@@ -222,8 +222,11 @@ def terminate(sp, interval=1, signals=None):
         ....:                              'sys.stdout.flush()\n'
         ....:                              'while True: pass']
         sage: sp = Popen(cmd, stdout=PIPE, encoding='ascii')
-        sage: with terminate(sp, interval=0.2):
-        ....:     print(sp.stdout.readline())
+        sage: try:
+        ....:     with terminate(sp, interval=0.2):
+        ....:         print(sp.stdout.readline())
+        ....: except NotImplementedError:
+        ....:     sp = None
         y
         <BLANKLINE>
         sage: sp.wait() == -signal.SIGTERM
@@ -238,8 +241,11 @@ def terminate(sp, interval=1, signals=None):
         ....:          'print("y"); sys.stdout.flush()\n' \
         ....:          'while True: pass'
         sage: sp = Popen(cmd, stdout=PIPE, encoding='ascii')
-        sage: with terminate(sp, interval=0.2):
-        ....:     print(sp.stdout.readline())
+        sage: try:
+        ....:     with terminate(sp, interval=0.2):
+        ....:         print(sp.stdout.readline())
+        ....: except NotImplementedError:
+        ....:     sp = None
         y
         <BLANKLINE>
         sage: sp.wait() == -signal.SIGKILL
