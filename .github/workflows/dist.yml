@@ -414,9 +414,11 @@ jobs:
           update-environment: false
 
       - name: Bootstrap
-        if: steps.cache-configure.outputs.cache-hit != 'true'
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
+          if [ "${{ steps.cache-configure.outputs.cache-hit }}" = true ]; then
+              if ./bootstrap -D; then exit 0; fi
+          fi
           export PATH=$(pwd)/build/bin:$PATH
           eval $(sage-print-system-package-command auto --sudo --yes update)
           eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
@@ -467,7 +469,6 @@ jobs:
         #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
         #
         run: |
-          if [ ! -x ./configure ]; then ./bootstrap -D; fi
           touch configure
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
@@ -872,14 +873,16 @@ jobs:
           update-environment: false
 
       - name: Bootstrap
-        if: steps.cache-configure.outputs.cache-hit != 'true'
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
+          if [ "${{ steps.cache-configure.outputs.cache-hit }}" = true ]; then
+              if ./bootstrap -D; then exit 0; fi
+          fi
           export PATH=$(pwd)/build/bin:$PATH
           eval $(sage-print-system-package-command auto --sudo --yes update)
           eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
           sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
-          ./bootstrap
+          ./bootstrap -s
 
       - name: Save configure tarball cache
         if: steps.cache-configure.outputs.cache-hit != 'true'
@@ -923,7 +926,6 @@ jobs:
         #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
         #
         run: |
-          if [ ! -x ./configure ]; then ./bootstrap -D; fi
           touch configure
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
@@ -1185,14 +1187,16 @@ jobs:
           update-environment: false
 
       - name: Bootstrap
-        if: steps.cache-configure.outputs.cache-hit != 'true'
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
+          if [ "${{ steps.cache-configure.outputs.cache-hit }}" = true ]; then
+              if ./bootstrap -D; then exit 0; fi
+          fi
           export PATH=$(pwd)/build/bin:$PATH
           eval $(sage-print-system-package-command auto --sudo --yes update)
           eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
           sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
-          ./bootstrap
+          ./bootstrap -s
 
       - name: Save configure tarball cache
         if: steps.cache-configure.outputs.cache-hit != 'true'
@@ -1236,7 +1240,6 @@ jobs:
         #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
         #
         run: |
-          if [ ! -x ./configure ]; then ./bootstrap -D; fi
           touch configure
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
