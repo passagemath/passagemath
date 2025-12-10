@@ -15,7 +15,10 @@ fi
 if [ "x$SAGE_FAT_BINARY" = "xyes" ]; then
     OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE DYNAMIC_ARCH=1"
     machine=$($CC -dumpmachine)
-    if [[ $machine =~ x86_64-apple-darwin* ]]; then
+    if [[ -n "$MSYSTEM" && $machine =~ aarch64-* ]]; then
+        # from https://github.com/msys2/MINGW-packages/blob/master/mingw-w64-openblas/PKGBUILD#L78C31-L78C40
+        OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=CORTEXA53 DYNAMIC_LIST=\"CORTEXA53 CORTEXA57 CORTEXA72 CORTEXA73 CORTEXA76 CORTEXX1 THUNDERX TSV110 EMAG8180\""
+    elif [[ $machine =~ x86_64-apple-darwin* ]]; then
         OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=CORE2"
     elif [[ $os-$machine =~ arm64-apple-darwin* ]]; then
         OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=VORTEX"
@@ -45,7 +48,7 @@ fi
 # Ensure USE_TLS=1 ; see https://github.com/sagemath/sage/issues/27256
 OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE USE_TLS=1"
 
-if ! (sdh_make libs $OPENBLAS_CONFIGURE && sdh_make netlib $OPENBLAS_CONFIGURE && sdh_make shared $OPENBLAS_CONFIGURE); then
+if ! (eval sdh_make libs $OPENBLAS_CONFIGURE && eval sdh_make netlib $OPENBLAS_CONFIGURE && eval sdh_make shared $OPENBLAS_CONFIGURE); then
     if [[ $OPENBLAS_CONFIGURE == *"TARGET"* ]]; then
         sdh_die "Error building OpenBLAS"
     else
@@ -55,11 +58,11 @@ if ! (sdh_make libs $OPENBLAS_CONFIGURE && sdh_make netlib $OPENBLAS_CONFIGURE &
         echo "Error building OpenBLAS"
         echo "Retrying building OpenBLAS: $MAKE $OPENBLAS_CONFIGURE"
         sdh_make clean
-        sdh_make libs $OPENBLAS_CONFIGURE && sdh_make netlib $OPENBLAS_CONFIGURE && sdh_make shared $OPENBLAS_CONFIGURE
+        eval sdh_make libs $OPENBLAS_CONFIGURE && eval sdh_make netlib $OPENBLAS_CONFIGURE && eval sdh_make shared $OPENBLAS_CONFIGURE
     fi
 fi
 
-sdh_make_install PREFIX="$SAGE_LOCAL" NO_STATIC=1 $OPENBLAS_CONFIGURE
+eval sdh_make_install PREFIX="$SAGE_LOCAL" NO_STATIC=1 $OPENBLAS_CONFIGURE
 cd ..
 ./write_pc_file.py
 
