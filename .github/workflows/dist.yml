@@ -220,6 +220,7 @@ jobs:
     permissions:
       contents: write
 
+
   noarch_wheels_for_pypi:
 
     runs-on: ubuntu-latest
@@ -247,11 +248,42 @@ jobs:
                         '!pkgs/sagemath-standard/requirements.txt')
             }}-src=${{ hashFiles('src') }}
 
-      - name: Install bootstrap prerequisites
+      - name: Retrieve configure tarball cache
+        id: cache-configure
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            build/pkgs/configure
+            upstream/configure*
+          key: >-
+            configure-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}
+
+      - name: Bootstrap
+        if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
+        # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
-          sudo DEBIAN_FRONTEND=noninteractive apt-get update
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install $(build/bin/sage-get-system-packages debian _bootstrap)
+          if [ "${{ steps.cache-configure.outputs.cache-hit }}" = true ]; then
+              if ./bootstrap -D; then exit 0; fi
+          fi
+          export PATH=$(pwd)/build/bin:$PATH
+          eval $(sage-print-system-package-command auto --sudo --yes update)
+          eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+          sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
+          ./bootstrap -s
+
+      - name: Save configure tarball cache
+        if: steps.cache-noarch-wheels.outputs.cache-hit != 'true' && steps.cache-configure.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            build/pkgs/configure
+            upstream/configure*
+          key: ${{ steps.cache-configure.outputs.cache-primary-key }}
 
       - name: Cache SAGE_LOCAL
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
@@ -272,7 +304,6 @@ jobs:
       - name: make pypi-noarch-wheels
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
         run: |
-          ./bootstrap
           ./configure --without-system-gap
           make pypi-noarch-wheels V=0
           (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/ && rm -f dist/*sage*conf-*-none-any.whl)
@@ -391,6 +422,14 @@ jobs:
           name: noarch-wheels
           path: dist
 
+      - uses: actions/setup-python@v5
+        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
+        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
+        id: python
+        with:
+          python-version: "3.11 - 3.13"
+          update-environment: false
+
       - name: Retrieve configure tarball cache
         id: cache-configure
         uses: actions/cache/restore@v4
@@ -405,18 +444,12 @@ jobs:
                         'm4')
             }}
 
-      - uses: actions/setup-python@v5
-        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
-        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
-        id: python
-        with:
-          python-version: "3.11 - 3.13"
-          update-environment: false
-
       - name: Bootstrap
-        if: steps.cache-configure.outputs.cache-hit != 'true'
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
+          if [ "${{ steps.cache-configure.outputs.cache-hit }}" = true ]; then
+              if ./bootstrap -D; then exit 0; fi
+          fi
           export PATH=$(pwd)/build/bin:$PATH
           eval $(sage-print-system-package-command auto --sudo --yes update)
           eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
@@ -467,12 +500,11 @@ jobs:
         #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
         #
         run: |
-          if [ ! -x ./configure ]; then ./bootstrap -D; fi
           touch configure
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --disable-python-distutils-check --prefix=$HOME/runner-venv
-          make cibuildwheel
+          MAKE="make -j6" make V=0 cibuildwheel
           export PATH=build/bin:$PATH
           echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS) make) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --without-system-curl --without-system-gdbm --without-system-gettext --without-system-gmp --without-system-libffi --without-system-openssl --with-system-python3=force --without-system-readline --without-system-libpng --without-system-patchelf --without-system-zlib && echo ::group::config.log && cat config.log && echo ::endgroup:: && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*|*ssl*|*crypto*|*curl*|*tinfo*|*readline*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done; fi" >> "$GITHUB_ENV"
           mkdir -p unpacked
@@ -849,6 +881,14 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
           path: dist
 
+      - uses: actions/setup-python@v5
+        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
+        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
+        id: python
+        with:
+          python-version: "3.11 - 3.13"
+          update-environment: false
+
       - name: Retrieve configure tarball cache
         id: cache-configure
         uses: actions/cache/restore@v4
@@ -863,23 +903,17 @@ jobs:
                         'm4')
             }}
 
-      - uses: actions/setup-python@v5
-        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
-        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
-        id: python
-        with:
-          python-version: "3.11 - 3.13"
-          update-environment: false
-
       - name: Bootstrap
-        if: steps.cache-configure.outputs.cache-hit != 'true'
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
+          if [ "${{ steps.cache-configure.outputs.cache-hit }}" = true ]; then
+              if ./bootstrap -D; then exit 0; fi
+          fi
           export PATH=$(pwd)/build/bin:$PATH
           eval $(sage-print-system-package-command auto --sudo --yes update)
           eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
           sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
-          ./bootstrap
+          ./bootstrap -s
 
       - name: Save configure tarball cache
         if: steps.cache-configure.outputs.cache-hit != 'true'
@@ -923,12 +957,11 @@ jobs:
         #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
         #
         run: |
-          if [ ! -x ./configure ]; then ./bootstrap -D; fi
           touch configure
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --prefix=$HOME/runner-venv
-          make cibuildwheel
+          MAKE="make -j6" make V=0 cibuildwheel
           export PATH=build/bin:$PATH
           rm -f ~/sage-local/config.status /sage-*/config.status  # trigger rebuild
           echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS) make) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --without-system-curl --without-system-gdbm --without-system-gettext --without-system-gmp --without-system-libffi --without-system-openssl --with-system-python3=force --without-system-readline --without-system-libpng --without-system-patchelf --without-system-zlib && echo ::group::config.log && cat config.log && echo ::endgroup:: && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*|*ssl*|*crypto*|*curl*|*tinfo*|*readline*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done; fi" >> "$GITHUB_ENV"
@@ -1162,6 +1195,14 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
           path: dist
 
+      - uses: actions/setup-python@v5
+        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
+        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
+        id: python
+        with:
+          python-version: "3.11 - 3.13"
+          update-environment: false
+
       - name: Retrieve configure tarball cache
         id: cache-configure
         uses: actions/cache/restore@v4
@@ -1176,23 +1217,17 @@ jobs:
                         'm4')
             }}
 
-      - uses: actions/setup-python@v5
-        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
-        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
-        id: python
-        with:
-          python-version: "3.11 - 3.13"
-          update-environment: false
-
       - name: Bootstrap
-        if: steps.cache-configure.outputs.cache-hit != 'true'
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
+          if [ "${{ steps.cache-configure.outputs.cache-hit }}" = true ]; then
+              if ./bootstrap -D; then exit 0; fi
+          fi
           export PATH=$(pwd)/build/bin:$PATH
           eval $(sage-print-system-package-command auto --sudo --yes update)
           eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
           sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
-          ./bootstrap
+          ./bootstrap -s
 
       - name: Save configure tarball cache
         if: steps.cache-configure.outputs.cache-hit != 'true'
@@ -1236,12 +1271,11 @@ jobs:
         #   SAGE_VENV must not be in PATH so it does not shadow cibuildwheel's build tools.
         #
         run: |
-          if [ ! -x ./configure ]; then ./bootstrap -D; fi
           touch configure
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --prefix=$HOME/runner-venv
-          make cibuildwheel
+          MAKE="make -j6" make V=0 cibuildwheel
           export PATH=build/bin:$PATH
           rm -f ~/sage-local/config.status /sage-*/config.status  # trigger rebuild
           echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS) make) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --without-system-curl --without-system-gdbm --without-system-gettext --without-system-gmp --without-system-libffi --without-system-openssl --with-system-python3=force --without-system-readline --without-system-libpng --without-system-patchelf --without-system-zlib && echo ::group::config.log && cat config.log && echo ::endgroup:: && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*|*ssl*|*crypto*|*curl*|*tinfo*|*readline*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done; fi" >> "$GITHUB_ENV"
