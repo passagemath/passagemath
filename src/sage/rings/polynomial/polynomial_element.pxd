@@ -1,4 +1,7 @@
 # sage_setup: distribution = sagemath-categories
+
+from libc.stdint cimport int64_t
+
 from sage.structure.element import Element
 from sage.structure.element cimport Element, CommutativeAlgebraElement, ModuleElement
 from sage.structure.parent cimport Parent
@@ -13,7 +16,7 @@ cdef class Polynomial(CommutativePolynomial):
     cdef CompiledPolynomialFunction _compiled
     cpdef Polynomial truncate(self, long n)
     cpdef Polynomial inverse_series_trunc(self, long prec)
-    cdef long _hash_c(self) except -1
+    cdef int64_t _hash_c(self) except -1
     cpdef constant_coefficient(self)
     cpdef Polynomial _new_constant_poly(self, a, Parent P)
     cpdef list list(self, bint copy=*)

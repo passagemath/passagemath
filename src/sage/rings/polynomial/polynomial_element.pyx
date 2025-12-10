@@ -1230,7 +1230,7 @@ cdef class Polynomial(CommutativePolynomial):
     def __hash__(self):
         return self._hash_c()
 
-    cdef long _hash_c(self) except -1:
+    cdef int64_t _hash_c(self) except -1:
         """
         This hash incorporates the variable name in an effort to respect
         the obvious inclusions into multi-variable polynomial rings.
@@ -1266,10 +1266,10 @@ cdef class Polynomial(CommutativePolynomial):
             ...
             TypeError: ...unhashable type: 'sage.rings.padics.qadic_flint_CR.qAdicCappedRelativeElement'...
         """
-        cdef long result = 0 # store it in a c-int and just let the overflowing additions wrap
-        cdef long result_mon
-        cdef long c_hash
-        cdef long var_name_hash
+        cdef int64_t result = 0 # store it in a c-int and just let the overflowing additions wrap
+        cdef int64_t result_mon
+        cdef int64_t c_hash
+        cdef int64_t var_name_hash
         cdef int i
         for i from 0<= i <= self.degree():
             if i == 1:

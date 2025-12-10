@@ -2315,7 +2315,7 @@ cdef class NCPolynomial_plural(RingElement):
             base_map = codomain
         return sum(prod(im_gens[i]**val for i, val in enumerate(t))*base_map(d[t]) for t in d)
 
-    cdef long _hash_c(self) noexcept:
+    cdef int64_t _hash_c(self) noexcept:
         """
         See :meth:`__hash__`
         """
@@ -2328,10 +2328,10 @@ cdef class NCPolynomial_plural(RingElement):
             rChangeCurrRing(r)
         base = (<NCPolynomialRing_plural>self._parent)._base
         p = self._poly
-        cdef long result = 0  # store it in a c-int and just let the overflowing additions wrap
-        cdef long result_mon
+        cdef int64_t result = 0  # store it in a c-int and just let the overflowing additions wrap
+        cdef int64_t result_mon
         var_name_hash = [hash(vn) for vn in self._parent.variable_names()]
-        cdef long c_hash
+        cdef int64_t c_hash
         while p:
             c_hash = hash(si2sa(p_GetCoeff(p, r), r, base))
             if c_hash != 0:  # this is always going to be true, because we are sparse (correct?)

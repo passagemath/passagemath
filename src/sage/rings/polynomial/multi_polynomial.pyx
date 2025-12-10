@@ -586,7 +586,7 @@ cdef class MPolynomial(CommutativePolynomial):
             D[ETuple(tmp)] = a
         return D
 
-    cdef long _hash_c(self) except -1:
+    cdef int64_t _hash_c(self) except -1:
         r"""
         This hash incorporates the variable name in an effort to respect the obvious inclusions
         into multi-variable polynomial rings.
@@ -625,10 +625,10 @@ cdef class MPolynomial(CommutativePolynomial):
             ...
             TypeError: ...unhashable type: 'sage.rings.padics.qadic_flint_CR.qAdicCappedRelativeElement'...
         """
-        cdef long result = 0 # store it in a c-int and just let the overflowing additions wrap
-        cdef long result_mon
+        cdef int64_t result = 0 # store it in a c-int and just let the overflowing additions wrap
+        cdef int64_t result_mon
         var_name_hash = [hash(v) for v in self._parent.variable_names()]
-        cdef long c_hash
+        cdef int64_t c_hash
         for m, c in self.monomial_coefficients().items():
             #  I'm assuming (incorrectly) that hashes of zero indicate that the element is 0.
             # This assumption is not true, but I think it is true enough for the purposes and it
