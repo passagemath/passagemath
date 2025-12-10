@@ -232,10 +232,18 @@ def sage_timeit(stmt, globals_dict=None, preparse=None, number=0, repeat=3, prec
     exec(code, globals_dict, ns)
     timer.inner = ns["inner"]
 
+
+    import sys
+    f = sys.stdout
+
     try:
-        import sys
-        f = sys.stdout
-        sys.stdout = open('/dev/null', 'w')
+        null = open('/dev/null', 'w')
+    except Exception:
+        null = None
+
+    try:
+        if null is not None:
+            sys.stdout = null
 
         if number == 0:
             # determine number so that 0.2 <= total time < 2.0
@@ -249,8 +257,9 @@ def sage_timeit(stmt, globals_dict=None, preparse=None, number=0, repeat=3, prec
         best = min(series)
 
     finally:
-        sys.stdout.close()
-        sys.stdout = f
+        if null is not None:
+            sys.stdout.close()
+            sys.stdout = f
         import gc
         gc.enable()
 
