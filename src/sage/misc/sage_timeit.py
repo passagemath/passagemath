@@ -17,6 +17,8 @@ AUTHOR:
     -- William Stein, based on code by Fernando Perez included in IPython
 """
 
+import os
+
 
 class SageTimeitResult:
     r"""
@@ -237,7 +239,7 @@ def sage_timeit(stmt, globals_dict=None, preparse=None, number=0, repeat=3, prec
     f = sys.stdout
 
     try:
-        null = open('/dev/null', 'w')
+        null = open(os.devnull, 'w')
     except Exception:
         null = None
 
