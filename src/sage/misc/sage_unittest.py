@@ -216,14 +216,6 @@ class TestSuite:
             ....:     def _test_b(self, tester): tester.fail()
             ....:     def _test_c(self, tester): pass
             ....:     def _test_d(self, tester): tester.fail()
-            ....:     def _test_pickling(self, tester):
-            ....:         from _pickle import PicklingError
-            ....:         from sage.misc.persist import dumps
-            ....:         try:
-            ....:             dumps(self)
-            ....:             tester.fail("Expected PicklingError")
-            ....:         except PicklingError:
-            ....:             pass
 
             sage: TestSuite(Blah()).run()
             Failure in _test_b:
@@ -236,7 +228,12 @@ class TestSuite:
               ...
             AssertionError: None
             ------------------------------------------------------------
-            The following tests failed: _test_b, _test_d
+            Failure in _test_pickling:
+            ...
+            ...PicklingError: Can't pickle <class '__main__.Blah'>: ...
+            ...
+            ------------------------------------------------------------
+            The following tests failed: _test_b, _test_d, _test_pickling
 
             sage: TestSuite(Blah()).run(verbose = True)
             running ._test_a() . . . pass
@@ -254,11 +251,14 @@ class TestSuite:
             ------------------------------------------------------------
             running ._test_new() . . . pass
             running ._test_not_implemented_methods() . . . pass
-            running ._test_pickling() . . . pass
-            The following tests failed: _test_b, _test_d
+            running ._test_pickling() . . . fail
+            ...
+            ...PicklingError: Can't pickle <class '__main__.Blah'>: ...
+            ...
+            ------------------------------------------------------------
+            The following tests failed: _test_b, _test_d, _test_pickling
 
-            File "/opt/sage/local/lib/python/site-packages/sage/misc/sage_unittest.py", line 183, in run
-            test_method(tester = tester)
+            ...
 
         The ``catch=False`` option prevents ``TestSuite`` from
         catching exceptions::
