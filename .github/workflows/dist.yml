@@ -220,6 +220,7 @@ jobs:
     permissions:
       contents: write
 
+
   noarch_wheels_for_pypi:
 
     runs-on: ubuntu-latest
@@ -247,11 +248,42 @@ jobs:
                         '!pkgs/sagemath-standard/requirements.txt')
             }}-src=${{ hashFiles('src') }}
 
-      - name: Install bootstrap prerequisites
+      - name: Retrieve configure tarball cache
+        id: cache-configure
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            build/pkgs/configure
+            upstream/configure*
+          key: >-
+            configure-build=${{
+              hashFiles('build',
+                        'configure.ac',
+                        'm4')
+            }}
+
+      - name: Bootstrap
+        if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
+        # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
         run: |
-          sudo DEBIAN_FRONTEND=noninteractive apt-get update
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install $(build/bin/sage-get-system-packages debian _bootstrap)
+          if [ "${{ steps.cache-configure.outputs.cache-hit }}" = true ]; then
+              if ./bootstrap -D; then exit 0; fi
+          fi
+          export PATH=$(pwd)/build/bin:$PATH
+          eval $(sage-print-system-package-command auto --sudo --yes update)
+          eval $(sage-print-system-package-command auto --sudo --yes --no-install-recommends --spkg install _bootstrap bzip2 xz liblzma)
+          sed -i.bak '/m4_pushdef.*MIN_VERSION/s/3[0-9.]*/3.9.0/' build/pkgs/python3/spkg-configure.m4
+          ./bootstrap -s
+
+      - name: Save configure tarball cache
+        if: steps.cache-noarch-wheels.outputs.cache-hit != 'true' && steps.cache-configure.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            build/pkgs/configure
+            upstream/configure*
+          key: ${{ steps.cache-configure.outputs.cache-primary-key }}
 
       - name: Cache SAGE_LOCAL
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
@@ -272,7 +304,6 @@ jobs:
       - name: make pypi-noarch-wheels
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
         run: |
-          ./bootstrap
           ./configure --without-system-gap
           make pypi-noarch-wheels V=0
           (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/ && rm -f dist/*sage*conf-*-none-any.whl)
@@ -391,6 +422,14 @@ jobs:
           name: noarch-wheels
           path: dist
 
+      - uses: actions/setup-python@v5
+        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
+        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
+        id: python
+        with:
+          python-version: "3.11 - 3.13"
+          update-environment: false
+
       - name: Retrieve configure tarball cache
         id: cache-configure
         uses: actions/cache/restore@v4
@@ -404,14 +443,6 @@ jobs:
                         'configure.ac',
                         'm4')
             }}
-
-      - uses: actions/setup-python@v5
-        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
-        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
-        id: python
-        with:
-          python-version: "3.11 - 3.13"
-          update-environment: false
 
       - name: Bootstrap
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
@@ -850,6 +881,14 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
           path: dist
 
+      - uses: actions/setup-python@v5
+        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
+        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
+        id: python
+        with:
+          python-version: "3.11 - 3.13"
+          update-environment: false
+
       - name: Retrieve configure tarball cache
         id: cache-configure
         uses: actions/cache/restore@v4
@@ -863,14 +902,6 @@ jobs:
                         'configure.ac',
                         'm4')
             }}
-
-      - uses: actions/setup-python@v5
-        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
-        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
-        id: python
-        with:
-          python-version: "3.11 - 3.13"
-          update-environment: false
 
       - name: Bootstrap
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
@@ -1164,6 +1195,14 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
           path: dist
 
+      - uses: actions/setup-python@v5
+        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
+        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
+        id: python
+        with:
+          python-version: "3.11 - 3.13"
+          update-environment: false
+
       - name: Retrieve configure tarball cache
         id: cache-configure
         uses: actions/cache/restore@v4
@@ -1177,14 +1216,6 @@ jobs:
                         'configure.ac',
                         'm4')
             }}
-
-      - uses: actions/setup-python@v5
-        # As of 2024-02-03, the macOS M1 runners do not have preinstalled python or pipx.
-        # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
-        id: python
-        with:
-          python-version: "3.11 - 3.13"
-          update-environment: false
 
       - name: Bootstrap
         # Patch python3 spkg-configure to allow Python 3.9.0 during the CIBW_BEFORE_ALL phase
