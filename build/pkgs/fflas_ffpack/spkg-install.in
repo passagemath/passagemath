@@ -36,10 +36,8 @@ sdh_configure --with-default="$SAGE_LOCAL" --with-blas-libs="$LINBOX_BLAS" \
               --enable-precompilation $FFLAS_FFPACK_CONFIGURE
 sdh_make
 
-$MAKE autotune
-if [ $? -ne 0 ]; then
-    echo >&2 "Error tuning fflas-ffpack"
-    exit 1
-fi
+while ! $MAKE autotune; do
+    echo >&2 "Error tuning fflas-ffpack, retrying"
+done
 
 sdh_make_install
