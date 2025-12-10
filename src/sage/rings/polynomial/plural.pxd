@@ -1,4 +1,7 @@
 # sage_setup: distribution = sagemath-singular
+
+from libc.stdint cimport int64_t
+
 from sage.libs.singular.decl cimport *
 from sage.rings.ring cimport Ring
 from sage.structure.element cimport RingElement, Element
@@ -36,7 +39,7 @@ cdef class NCPolynomial_plural(RingElement):
     cpdef _add_(self, other)
     cpdef _mul_(self, other)
     cpdef _repr_short_(self)
-    cdef long _hash_c(self) noexcept
+    cdef int64_t _hash_c(self) noexcept
     cpdef is_constant(self)
     cpdef dict dict(self)
     cpdef dict monomial_coefficients(self, bint copy=*)

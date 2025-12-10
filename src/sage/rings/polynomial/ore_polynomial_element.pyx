@@ -234,7 +234,7 @@ cdef class OrePolynomial(AlgebraElement):
         """
         AlgebraElement.__init__(self, parent)
 
-    cdef long _hash_c(self) noexcept:
+    cdef int64_t _hash_c(self) noexcept:
         raise NotImplementedError
 
     def __hash__(self):
@@ -2316,7 +2316,7 @@ cdef class OrePolynomial_generic_dense(OrePolynomial):
         """
         return (self._parent, (self._coeffs,))
 
-    cdef long _hash_c(self) noexcept:
+    cdef int64_t _hash_c(self) noexcept:
         r"""
         This hash incorporates the name of the variable.
 
@@ -2326,10 +2326,10 @@ cdef class OrePolynomial_generic_dense(OrePolynomial):
         """
         # todo - come up with a way to create hashes of zero that
         # that do not incorrectly indicate that the element is 0.
-        cdef long result = 0
-        cdef long result_mon
-        cdef long c_hash
-        cdef long var_name_hash = 0
+        cdef int64_t result = 0
+        cdef int64_t result_mon
+        cdef int64_t c_hash
+        cdef int64_t var_name_hash = 0
         cdef int i
         for i in range(len(self._coeffs)):
             if i == 1:

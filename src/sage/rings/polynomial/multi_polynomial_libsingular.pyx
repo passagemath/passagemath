@@ -3137,7 +3137,7 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
 
     hamming_weight = number_of_terms
 
-    cdef long _hash_c(self) except -1:
+    cdef int64_t _hash_c(self) except -1:
         """
         See ``self.__hash__``
         """
@@ -3147,10 +3147,10 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
         cdef int v
         if r!=currRing: rChangeCurrRing(r)
         base = self._parent._base
-        cdef long result = 0 # store it in a c-int and just let the overflowing additions wrap
-        cdef long result_mon
+        cdef int64_t result = 0 # store it in a c-int and just let the overflowing additions wrap
+        cdef int64_t result_mon
         var_name_hash = [hash(vn) for vn in self._parent.variable_names()]
-        cdef long c_hash
+        cdef int64_t c_hash
         while p:
             c_hash = hash(si2sa(p_GetCoeff(p, r), r, base))
             if c_hash != 0: # this is always going to be true, because we are sparse (correct?)

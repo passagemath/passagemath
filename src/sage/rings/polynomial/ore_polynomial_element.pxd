@@ -1,4 +1,7 @@
 # sage_setup: distribution = sagemath-modules
+
+from libc.stdint cimport int64_t
+
 from sage.structure.element cimport AlgebraElement
 from sage.structure.parent cimport Parent
 from sage.rings.integer cimport Integer
@@ -9,7 +12,7 @@ from sage.rings.polynomial.polynomial_element cimport Polynomial_generic_dense
 cdef class OrePolynomial(AlgebraElement):
     cdef _is_gen
 
-    cdef long _hash_c(self) noexcept
+    cdef int64_t _hash_c(self) noexcept
     cdef OrePolynomial _new_c(self, list coeffs, Parent P, char check=*)
     cpdef OrePolynomial _new_constant_poly(self, RingElement a, Parent P, char check=*)
     cpdef _neg_(self)
