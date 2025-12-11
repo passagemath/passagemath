@@ -14,7 +14,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-cddlib"
-description = "passagemath: Polynomial system solving through algebraic methods with cddlib"
+description = "passagemath: Polyhedral computation with cddlib"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_cysignals
