@@ -571,7 +571,8 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                                                    coerce=True, copy=False)
 
     class MorphismMethods:
-        def matrix(self, base_ring=None, side='left'):
+        def matrix(self, base_ring=None, side='left', *,
+                   row_order=None, column_order=None):
             r"""
             Return the matrix of this morphism in the distinguished
             bases of the domain and codomain.
@@ -583,12 +584,21 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             - ``side`` -- ``'left'`` or ``'right'`` (default: ``'left'``)
 
-            If ``side`` is "left", this morphism is considered as
-            acting on the left; i.e. each column of the matrix
-            represents the image of an element of the basis of the
-            domain.
+              If ``side`` is "left", this morphism is considered as
+              acting on the left; i.e. each column of the matrix
+              represents the image of an element of the basis of the
+              domain.
 
-            The order of the rows and columns matches with the order
+            - ``row_order`` -- (optional) an ordering of the basis
+              indexing set of the codomain (if `side='left'`)
+              or domain (if `side='right'`).
+
+            - ``column_order`` -- (optional) an ordering of the basis
+              indexing set of the domain (if `side='left'`)
+              or codomain (if `side='right'`).
+
+            If ``row_order`` or ``column_order`` are not specified,
+            the order of the rows and columns matches with the order
             in which the bases are enumerated.
 
             .. SEEALSO:: :func:`Modules.WithBasis.ParentMethods.module_morphism`
@@ -658,21 +668,8 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: Hom(X, Y).zero().matrix().parent()
                 Full MatrixSpace of 3 by 0 dense matrices over Rational Field
             """
-            if base_ring is None:
-                base_ring = self.codomain().base_ring()
-
-            on_basis = self.on_basis()
-            basis_keys = self.domain().basis().keys()
-            from sage.matrix.matrix_space import MatrixSpace
-            if isinstance(basis_keys, list):
-                nrows = len(basis_keys)
-            else:
-                nrows = basis_keys.cardinality()
-            MS = MatrixSpace(base_ring, nrows, self.codomain().dimension())
-            m = MS([on_basis(x)._vector_() for x in basis_keys])
-            if side == "left":
-                m = m.transpose()
-            m.set_immutable()
+            m, *_ = self._matrix_side_bases_orders(base_ring, side,
+                                                   row_order=row_order, column_order=column_order)
             return m
 
         def _repr_matrix(self):
