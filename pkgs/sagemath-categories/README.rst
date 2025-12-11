@@ -85,32 +85,32 @@ What is included
 Available in other distribution packages
 -----------------------------------------------
 
-* `sagemath-combinat <https://pypi.org/project/sagemath-combinat>`_:
+* `passagemath-combinat <https://pypi.org/project/passagemath-combinat>`_:
   Algebraic combinatorics, combinatorial representation theory
 
-* `sagemath-graphs <https://pypi.org/project/sagemath-graphs>`_:
+* `passagemath-graphs <https://pypi.org/project/passagemath-graphs>`_:
   Graphs, posets, hypergraphs, designs, abstract complexes, combinatorial polyhedra, abelian sandpiles, quivers
 
-* `sagemath-groups <https://pypi.org/project/sagemath-groups>`_:
+* `passagemath-groups <https://pypi.org/project/passagemath-groups>`_:
   Groups, invariant theory
 
-* `sagemath-modules <https://pypi.org/project/sagemath-modules>`_:
+* `passagemath-modules <https://pypi.org/project/passagemath-modules>`_:
   Vectors, matrices, tensors, vector spaces, affine spaces,
   modules and algebras, additive groups, quadratic forms, root systems, homology, coding theory, matroids
 
-* `sagemath-plot <https://pypi.org/project/sagemath-plot>`_:
+* `passagemath-plot <https://pypi.org/project/passagemath-plot>`_:
   Plotting and graphics with Matplotlib, Three.JS, etc.
 
-* `sagemath-polyhedra <https://pypi.org/project/sagemath-polyhedra>`_:
+* `passagemath-polyhedra <https://pypi.org/project/passagemath-polyhedra>`_:
   Convex polyhedra in arbitrary dimension, triangulations, polyhedral fans, lattice points, geometric complexes, hyperplane arrangements
 
-* `sagemath-repl <https://pypi.org/project/sagemath-repl>`_:
-  IPython REPL, the interactive language of SageMath (preparser), interacts, development tools
+* `passagemath-repl <https://pypi.org/project/passagemath-repl>`_:
+  IPython REPL, the interactive language of Passagemath (preparser), interacts, development tools
 
-* `sagemath-schemes <https://pypi.org/project/sagemath-schemes>`_:
+* `passagemath-schemes <https://pypi.org/project/passagemath-schemes>`_:
   Schemes, varieties, Groebner bases, elliptic curves, algebraic Riemann surfaces, modular forms, arithmetic dynamics
 
-* `sagemath-symbolics <https://pypi.org/project/sagemath-symbolics>`_:
+* `passagemath-symbolics <https://pypi.org/project/passagemath-symbolics>`_:
   Symbolic expressions, calculus, differentiable manifolds, asymptotics
 
 
