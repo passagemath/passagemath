@@ -44,7 +44,7 @@ the passagemath distributions. Use of the full functionality of passagemath
 on Windows currently requires the use of Windows Subsystem for Linux (WSL)
 or virtualization.
 
-The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.13.x.
+The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.14.x.
 
 
 About this pip-installable distribution package
