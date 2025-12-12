@@ -706,14 +706,19 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                   a b c
                 v[1 0 0]
                 w[0 1 0]
+                sage: print(M._repr_matrix(row_order='wv', column_order='cb'))
+                  c b
+                w[0 1]
+                v[0 0]
             """
-            matrix = self.matrix()
+            matrix, _, _, _, row_order, column_order = self._matrix_side_bases_orders(
+                row_order=row_order, column_order=column_order)
 
             from sage.matrix.constructor import options
 
             if matrix.nrows() <= options.max_rows() and matrix.ncols() <= options.max_cols():
-                return matrix.str(top_border=self.domain().basis().keys(),
-                                  left_border=self.codomain().basis().keys())
+                return matrix.str(top_border=column_order,
+                                  left_border=row_order)
 
             return repr(matrix)
 
@@ -735,15 +740,20 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                     a b c
                   v[1 0 0]
                   w[0 1 0]
+                sage: print(M._ascii_art_matrix(row_order='wv', column_order='cb'))
+                  c b
+                w[0 1]
+                v[0 0]
             """
-            matrix = self.matrix()
+            matrix, _, _, _, row_order, column_order = self._matrix_side_bases_orders(
+                row_order=row_order, column_order=column_order)
 
             from sage.matrix.constructor import options
 
             if matrix.nrows() <= options.max_rows() and matrix.ncols() <= options.max_cols():
                 return matrix.str(character_art=True,
-                                  top_border=self.domain().basis().keys(),
-                                  left_border=self.codomain().basis().keys())
+                                  top_border=column_order,
+                                  left_border=row_order)
 
             from sage.typeset.ascii_art import AsciiArt
 
@@ -767,15 +777,20 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                     a b c
                   v⎛1 0 0⎞
                   w⎝0 1 0⎠
+                sage: print(M._unicode_art_matrix(row_order='wv', column_order='cb'))
+                  c b
+                w⎛0 1⎞
+                v⎝0 0⎠
             """
-            matrix = self.matrix()
+            matrix, _, _, _, row_order, column_order = self._matrix_side_bases_orders(
+                row_order=row_order, column_order=column_order)
 
             from sage.matrix.constructor import options
 
             if matrix.nrows() <= options.max_rows() and matrix.ncols() <= options.max_cols():
                 return matrix.str(unicode=True, character_art=True,
-                                  top_border=self.domain().basis().keys(),
-                                  left_border=self.codomain().basis().keys())
+                                  top_border=column_order,
+                                  left_border=row_order)
 
             from sage.typeset.unicode_art import UnicodeArt
 
