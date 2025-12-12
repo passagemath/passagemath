@@ -2671,6 +2671,7 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             Infinite-dimensional example::
 
+                sage: # needs sage.modules
                 sage: X = CombinatorialFreeModule(QQ, ZZ); x = X.basis()
                 sage: def on_basis(i):
                 ....:     return X.monomial(i+1) - X.monomial(i+2)
