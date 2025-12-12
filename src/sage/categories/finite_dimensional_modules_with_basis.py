@@ -838,8 +838,10 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: f.kernel_basis()                                                  # needs sage.combinat sage.groups
                 ([1, 2, 3] - [3, 2, 1], [1, 3, 2] - [3, 2, 1], [2, 1, 3] - [3, 2, 1])
             """
-            return tuple(map( self.domain().from_vector,
-                              self.matrix().right_kernel_matrix().rows() ))
+            # Avoid using the method matrix() because of Issue #37877
+            mat, *_ = self._matrix_side_bases_orders()
+            return tuple(map(self.domain().from_vector,
+                             mat.right_kernel_matrix().rows()))
 
         def kernel(self):
             """
