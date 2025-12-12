@@ -62,6 +62,7 @@ include sage/rings/imaginary_unit.p*
 
 include sage/modular/modform/eis_series_cython.p*
 include sage/modular/modsym/apply.p*
+include sage/modular/modsym/p1list.p*           # needed by heilbronn
 include sage/modular/modsym/heilbronn.p*
 include sage/modular/pollack_stevens/dist.p*
 include sage/schemes/elliptic_curves/descent_two_isogeny.p*

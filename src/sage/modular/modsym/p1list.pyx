@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-schemes
+# sage_setup: distribution = sagemath-flint
 # distutils: libraries = gmp
 # distutils: extra_compile_args = -D_XPG6
 

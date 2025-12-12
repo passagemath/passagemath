@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-schemes
+# sage_setup: distribution = sagemath-flint
 
 
 cdef class export:
