@@ -1648,9 +1648,9 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 [0, 1, 0]
             """
             if order is None:
-                raise ValueError(f"module is not finite-dimensional; "
-                                 f"use order to obtain the coefficients "
-                                 f"of a finite-dimensional projection")
+                raise ValueError("module is not finite-dimensional; "
+                                 "use order to obtain the coefficients "
+                                 "of a finite-dimensional projection")
             return [self[i] for i in order]
 
         def is_zero(self):
@@ -2712,9 +2712,9 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
             if row_order is None:
                 nrows = self.domain().dimension()
                 if nrows == Infinity:
-                    raise ValueError(f"domain or codomain are not finite-dimensional; "
-                                     f"use row_order or column_order to obtain the matrix "
-                                     f"of a finite-dimensional restriction or projection")
+                    raise ValueError("domain or codomain are not finite-dimensional; "
+                                     "use row_order or column_order to obtain the matrix "
+                                     "of a finite-dimensional restriction or projection")
                 try:
                     row_order = sorted(domain_basis.keys())
                 except AttributeError:  # Not a family, assume it is list-like
@@ -2727,9 +2727,9 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
             if column_order is None:
                 ncols = self.codomain().dimension()
                 if ncols == Infinity:
-                    raise ValueError(f"domain or codomain are not finite-dimensional; "
-                                     f"use row_order or column_order to obtain the matrix "
-                                     f"of a finite-dimensional restriction or projection")
+                    raise ValueError("domain or codomain are not finite-dimensional; "
+                                     "use row_order or column_order to obtain the matrix "
+                                     "of a finite-dimensional restriction or projection")
                 try:
                     column_order = sorted(codomain_basis.keys())
                 except AttributeError:  # Not a family, assume it is list-like
