@@ -8,6 +8,11 @@ on:
       - '*windows*'
       - '*mingw*'
   workflow_dispatch:
+    inputs:
+      sage-doctest-options:
+        description: 'Options for sage -t (example: --verbose)'
+        type: string
+        required: false
 
 concurrency:
   # Cancel previous runs of this workflow for the same branch
@@ -76,6 +81,7 @@ jobs:
           tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --skip-pkg-install
         env:
           VIRTUALENV_SYSTEM_SITE_PACKAGES: 1
+          SAGE_DOCTEST_OPTIONS: ${{ inputs.sage-doctest-options}}
         shell: msys2 {0}
 
       - name: Prepare logs artifact
