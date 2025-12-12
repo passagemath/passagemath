@@ -34,10 +34,7 @@ from sage.libs.flint.fmpq_mat cimport fmpq_mat_entry_num
 cdef extern from "<math.h>":
     float roundf(float x)
 
-cimport sage.modular.modsym.p1list as p1list
-from sage.modular.modsym import p1list
-cdef p1list.export export
-export = p1list.export()
+from sage.modular.modsym.p1list cimport c_p1_normalize_int, c_p1_normalize_llong, P1List
 
 from sage.modular.modsym.apply cimport Apply
 cdef Apply PolyApply= Apply()
@@ -265,7 +262,7 @@ cdef class Heilbronn:
                 sig_check()
                 a = u*self.list.v[4*i] + v*self.list.v[4*i+2]
                 b = u*self.list.v[4*i+1] + v*self.list.v[4*i+3]
-                export.c_p1_normalize_int(N, a, b, &c, &d, &s, 0)
+                c_p1_normalize_int(N, a, b, &c, &d, &s, 0)
                 X = (c, d)
                 if X in M:
                     M[X] += 1
@@ -276,7 +273,7 @@ cdef class Heilbronn:
                 sig_check()
                 a = (u * self.list.v[4*i]) % N + (v * self.list.v[4*i+2]) % N
                 b = (u * self.list.v[4*i+1]) % N + (v * self.list.v[4*i+3]) % N
-                export.c_p1_normalize_int(N, a, b, &c, &d, &s, 0)
+                c_p1_normalize_int(N, a, b, &c, &d, &s, 0)
                 X = (c, d)
                 if X in M:
                     M[X] += 1
@@ -287,7 +284,7 @@ cdef class Heilbronn:
                 sig_check()
                 a = llong_prod_mod(u, self.list.v[4*i], N) + llong_prod_mod(v, self.list.v[4*i+2], N)
                 b = llong_prod_mod(u, self.list.v[4*i+1], N) + llong_prod_mod(v, self.list.v[4*i+3], N)
-                export.c_p1_normalize_llong(N, a, b, &c, &d, &s, 0)
+                c_p1_normalize_llong(N, a, b, &c, &d, &s, 0)
                 X = (c, d)
                 if X in M:
                     M[X] += 1
@@ -551,7 +548,7 @@ def hecke_images_gamma0_weight2(int u, int v, int N, indices, R):
         sage: D[1].q_eigenform(10, 'a') # indirect doctest
         q + 4*q^2 + 2*q^3 + 6*q^5 + q^6 + 5*q^7 + 6*q^8 + q^9 + O(q^10)
     """
-    cdef p1list.P1List P1 = p1list.P1List(N)
+    cdef P1List P1 = P1List(N)
 
     # Create a zero dense matrix over `\QQ` with len(indices) rows
     # and #P^1(N) columns.
@@ -677,7 +674,7 @@ def hecke_images_nonquad_character_weight2(int u, int v, int N, indices, chi, R)
         sage: M.T(6)(x).element()
         (7, -2*zeta6 + 1, -zeta6 - 1, -2*zeta6)
     """
-    cdef p1list.P1List P1 = p1list.P1List(N)
+    cdef P1List P1 = P1List(N)
 
     from sage.rings.rational_field import QQ
     K = chi.base_ring()
@@ -780,7 +777,7 @@ def hecke_images_quad_character_weight2(int u, int v, int N, indices, chi, R):
         sage: M.T(4)(x).element()
         (0, -2, 0, 2, -2, -1)
     """
-    cdef p1list.P1List P1 = p1list.P1List(N)
+    cdef P1List P1 = P1List(N)
     from sage.rings.rational_field import QQ
     if chi.base_ring() != QQ:
         raise TypeError("character must takes values in QQ")
@@ -874,7 +871,7 @@ def hecke_images_gamma0_weight_k(int u, int v, int i, int N, int k, indices, R):
         sage: M.T(12)(x).element() == c
         True
     """
-    cdef p1list.P1List P1 = p1list.P1List(N)
+    cdef P1List P1 = P1List(N)
 
     # The Manin symbols are enumerated as
     #   all [0, (u,v)] for (u,v) in P^1(N) then
