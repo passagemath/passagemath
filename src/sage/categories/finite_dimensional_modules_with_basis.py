@@ -672,7 +672,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                                                    row_order=row_order, column_order=column_order)
             return m
 
-        def _repr_matrix(self):
+        def _repr_matrix(self, *, row_order=None, column_order=None):
             r"""
             Return a string representation of this morphism (as a matrix).
 
@@ -701,7 +701,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             return repr(matrix)
 
-        def _ascii_art_matrix(self):
+        def _ascii_art_matrix(self, *, row_order=None, column_order=None):
             r"""
             Return an ASCII art representation of this morphism (as a matrix).
 
@@ -733,7 +733,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             return AsciiArt(repr(self).splitlines())
 
-        def _unicode_art_matrix(self):
+        def _unicode_art_matrix(self, *, row_order=None, column_order=None):
             r"""
             Return a unicode art representation of this morphism (as a matrix).
 
