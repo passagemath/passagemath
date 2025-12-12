@@ -234,7 +234,6 @@ def sage_timeit(stmt, globals_dict=None, preparse=None, number=0, repeat=3, prec
     exec(code, globals_dict, ns)
     timer.inner = ns["inner"]
 
-
     import sys
     f = sys.stdout
 
