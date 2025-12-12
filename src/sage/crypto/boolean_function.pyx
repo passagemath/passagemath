@@ -1472,8 +1472,12 @@ def random_boolean_function(n):
         sage: B = random_boolean_function(9)
         sage: B.nvariables()
         9
-        sage: while not (210 < B.nonlinearity() < 220):
+        sage: count = 0
+        sage: while count < 10000 and not (210 < B.nonlinearity() < 220):
         ....:     B = random_boolean_function(9)
+        ....:     count += 1
+        sage: print(f"Iterations: {count}")
+        Iterations: ...
     """
     from sage.misc.randstate import current_randstate
     r = current_randstate().python_random()
