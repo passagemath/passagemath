@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-tachyon ~= 10.6.41.0
+passagemath-tachyon ~= 10.6.42.0
