@@ -2717,9 +2717,14 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
                                      "use row_order or column_order to obtain the matrix "
                                      "of a finite-dimensional restriction or projection")
                 try:
-                    row_order = sorted(domain_basis.keys())
+                    row_order = domain_basis.keys()
                 except AttributeError:  # Not a family, assume it is list-like
                     row_order = range(nrows)
+                else:
+                    try:
+                        row_order = sorted(row_order)
+                    except (ValueError, TypeError):
+                        pass
             elif not isinstance(row_order, collections.abc.Sequence):
                 raise ValueError("row_order and column_order must be either None or a sequence")
             else:
@@ -2732,10 +2737,15 @@ class ModulesWithBasis(CategoryWithAxiom_over_base_ring):
                                      "use row_order or column_order to obtain the matrix "
                                      "of a finite-dimensional restriction or projection")
                 try:
-                    column_order = sorted(codomain_basis.keys())
+                    column_order = codomain_basis.keys()
                 except AttributeError:  # Not a family, assume it is list-like
                     column_order = range(ncols)
-            elif not isinstance(row_order, collections.abc.Sequence):
+                else:
+                    try:
+                        column_order = sorted(column_order)
+                    except (ValueError, TypeError):
+                        pass
+            elif not isinstance(column_order, collections.abc.Sequence):
                 raise ValueError("row_order and column_order must be either None or a sequence")
             else:
                 ncols = len(column_order)
