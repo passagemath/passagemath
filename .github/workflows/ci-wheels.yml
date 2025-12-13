@@ -19,6 +19,10 @@ on:
         default: >-
           ['ubuntu-latest']
         required: false
+      sage-doctest-options:
+        description: 'Options for sage -t (example: --verbose)'
+        type: string
+        required: false
   workflow_call:
     inputs:
       run-id:
@@ -228,3 +232,5 @@ jobs:
           echo "Wheel missing" >&2
           exit 1
         shell: bash
+        env:
+          SAGE_DOCTEST_OPTIONS: ${{ inputs.sage-doctest-options}}
