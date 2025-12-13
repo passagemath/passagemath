@@ -1703,18 +1703,18 @@ def matrix_of_frobenius(self, p, prec=20, check=False, check_hypotheses=True, al
         # Need to increase precision a little to compensate for precision
         # losses during the computation. (See monsky_washnitzer.py
         # for more details.)
-        adjusted_prec = adjusted_prec(p, prec)
+        adj_prec = adjusted_prec(p, prec)
 
         if check:
             trace = None
         else:
             trace = self.ap(p)
 
-        base_ring = Integers(p**adjusted_prec)
+        base_ring = Integers(p**adj_prec)
 
         R, x = PolynomialRing(base_ring, 'x').objgen()
         Q = x**3 + base_ring(X.a4()) * x + base_ring(X.a6())
-        frob_p = matrix_of_frobenius(Q, p, adjusted_prec, trace)
+        frob_p = matrix_of_frobenius(Q, p, adj_prec, trace)
 
     else:   # algorithm == "sqrtp"
         p_to_prec = p**prec
