@@ -855,7 +855,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
                 matrix=inv_mat,
                 codomain=self.domain(), category=self.category_for())
 
-        def is_injective(self):
+        def is_injective(self) -> bool:
             """
             Tell whether ``self`` is injective.
 
