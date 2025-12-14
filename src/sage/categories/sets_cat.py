@@ -1837,6 +1837,7 @@ Please use, e.g., S.algebra(QQ, category=Semigroups())""".format(self))
             considerations of the dimensions.  However, each fulfills
             half of the requirements to be a bijection.  ::
 
+                sage: # needs sage.modules
                 sage: V1 = QQ^2
                 sage: V2 = QQ^3
                 sage: m = matrix(QQ, [[1, 2, 3], [4, 5, 6]])
@@ -1854,6 +1855,7 @@ Please use, e.g., S.algebra(QQ, category=Semigroups())""".format(self))
             We construct a simple bijection between two one-dimensional
             vector spaces.  ::
 
+                sage: # needs sage.modules
                 sage: V1 = QQ^3
                 sage: V2 = QQ^2
                 sage: phi = V1.hom(matrix(QQ, [[1, 2], [3, 4], [5, 6]]), V2)

@@ -861,6 +861,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: V1 = QQ^2
                 sage: V2 = QQ^3
                 sage: phi = V1.hom(Matrix([[1,2,3], [4,5,6]]),V2)
@@ -889,6 +890,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: V = ZZ^2; phi = V.hom(V.basis())
                 sage: phi.nullity()
                 0
@@ -898,6 +900,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             ::
 
+                sage: # needs sage.modules
                 sage: m = matrix(2, [1, 2])
                 sage: V = ZZ^2
                 sage: h1 = V.hom(m)
@@ -985,6 +988,7 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: V = ZZ^2; phi = V.hom(V.basis())
                 sage: phi.rank()
                 2
