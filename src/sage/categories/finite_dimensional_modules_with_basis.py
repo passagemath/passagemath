@@ -584,18 +584,18 @@ class FiniteDimensionalModulesWithBasis(CategoryWithAxiom_over_base_ring):
 
             - ``side`` -- ``'left'`` or ``'right'`` (default: ``'left'``)
 
-              If ``side`` is "left", this morphism is considered as
-              acting on the left; i.e. each column of the matrix
+              If ``side`` is ``'left'``, this morphism is considered as
+              acting on the left; i.e., each column of the matrix
               represents the image of an element of the basis of the
               domain.
 
             - ``row_order`` -- (optional) an ordering of the basis
-              indexing set of the codomain (if `side='left'`)
-              or domain (if `side='right'`).
+              indexing set of the codomain (if ``side='left'``)
+              or domain (if ``side='right'``).
 
             - ``column_order`` -- (optional) an ordering of the basis
-              indexing set of the domain (if `side='left'`)
-              or codomain (if `side='right'`).
+              indexing set of the domain (if ``side='left'``)
+              or codomain (if ``side='right'``).
 
             If ``row_order`` or ``column_order`` are not specified,
             the order of the rows and columns matches with the order
