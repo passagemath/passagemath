@@ -85,6 +85,7 @@ jobs:
           tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --skip-pkg-install
         env:
           VIRTUALENV_SYSTEM_SITE_PACKAGES: 1
+          PYTHONUTF8: 1
           SAGE_DOCTEST_OPTIONS: ${{ inputs.sage-doctest-options}}
         shell: msys2 {0}
 
