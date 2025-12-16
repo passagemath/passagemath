@@ -172,6 +172,151 @@ class GraverBasis:
             raise IndexError("GraverBasis index out of range")
         return self._basis_matrix.row(index)
 
+    def _coerce_vec(self, v, name, n):
+        vv = vector(ZZ, v)
+        if len(vv) != n:
+            raise ValueError(f"{name} must have length {n}.")
+        return vv
+
+    def _l1_norm(self, g):
+        s = ZZ(0)
+        for gi in g:
+            s += abs(gi)
+        return s
+
+    def max_step(self, x, g, l=None, u=None):
+        r"""
+        To Return λ_max so that x + λ g stays within l <= · <= u.
+
+        l/u may be None (treated as -∞/+∞ coordinate-wise if entirely None).
+        """
+        x = self._coerce_vec(x, "x", self._ncols)
+        g = self._coerce_vec(g, "g", self._ncols)
+
+        if l is None:
+            l = None
+        else:
+            l = self._coerce_vec(l, "l", self._ncols)
+
+        if u is None:
+            u = None
+        else:
+            u = self._coerce_vec(u, "u", self._ncols)
+
+        lam = None  # "infinity" sentinel
+        for i in range(self._ncols):
+            gi = g[i]
+            if gi > 0:
+                if u is None:
+                    continue
+                bound = (u[i] - x[i]) // gi
+            elif gi < 0:
+                if l is None:
+                    continue
+                bound = (x[i] - l[i]) // (-gi)
+            else:
+                continue
+
+            if lam is None or bound < lam:
+                lam = bound
+
+            if lam <= 0:
+                return ZZ(0)
+
+        return ZZ(0) if lam is None else ZZ(lam)
+
+    def directed_augmentation_query(self, x, c, l=None, u=None,
+                                   strategy="steepest",
+                                   multipliers=None,
+                                   use_range_prefilter=True):
+        r"""
+        To Return a greedy Graver augmentation (g, λ, new_x, delta) or None.
+
+        - strategy="steepest": To minimize delta = λ * (c·g) among feasible improving steps.
+        - strategy="max_mean": To minimize (c·g)/||g||_1 (λ chosen as λ_max).
+        - multipliers: optional list of candidate λ values (e.g. powers of 2). If given,
+         only consider λ in this set (and feasible), which matches the multiplier.
+
+        If use_range_prefilter=True and l/u provided, to prefilter g by the box [l-x, u-x]
+        (necessary condition for λ>=1) via orthogonal_range_search.
+        """
+        x = self._coerce_vec(x, "x", self._ncols)
+        c = self._coerce_vec(c, "c", self._ncols)
+
+        l_vec = None if l is None else self._coerce_vec(l, "l", self._ncols)
+        u_vec = None if u is None else self._coerce_vec(u, "u", self._ncols)
+
+        # To Candidate iterator over Graver directions
+        if use_range_prefilter and (l_vec is not None) and (u_vec is not None):
+            cand_iter = self.orthogonal_range_search(l_vec - x, u_vec - x)
+        else:
+            cand_iter = iter(self)
+
+        best = None  # (score, g, lam, delta)
+        for g in cand_iter:
+            # For Improvement test uses c·g
+            cg = c.dot_product(g)
+            if cg >= 0:
+                continue
+
+            lam_max = self.max_step(x, g, l_vec, u_vec)
+            if lam_max <= 0:
+                continue
+
+            # To Choose λ
+            if multipliers is None:
+                lam = lam_max
+            else:
+                # To choose the largest candidate <= lam_max
+                lam = ZZ(0)
+                for t in multipliers:
+                    t = ZZ(t)
+                    if 1 <= t <= lam_max and t > lam:
+                        lam = t
+                if lam == 0:
+                    continue
+
+            delta = lam * cg  # negative
+
+            if strategy == "steepest":
+                score = delta  # most negative is best
+            elif strategy == "max_mean":
+                # For mean per L1 movement, using g (λ cancels in L1)
+                denom = self._l1_norm(g)
+                if denom == 0:
+                    continue
+                score = delta / (lam * denom)  # == cg/denom (negative)
+            else:
+                raise ValueError("strategy must be 'steepest' or 'max_mean'")
+
+            if best is None or score < best[0]:
+                best = (score, g, lam, delta)
+
+        if best is None:
+            return None
+
+        _, g, lam, delta = best
+        new_x = x + lam * g
+        return (g, lam, new_x, delta)
+
+    def greedy_augment(self, x, c, l=None, u=None, strategy="steepest",
+                       multipliers=None, max_iters=10_000):
+        r"""
+        To Run greedy Graver augmentation until no improving step exists.
+        Return (x_final, steps).
+        """
+        x = self._coerce_vec(x, "x", self._ncols)
+        steps = 0
+        while steps < max_iters:
+            res = self.directed_augmentation_query(
+                x, c, l=l, u=u, strategy=strategy, multipliers=multipliers
+            )
+            if res is None:
+                break
+            g, lam, x, delta = res
+            steps += 1
+        return x, steps
+
     def orthogonal_range_search(self, l, u):
         r"""
         To Iterate over all Graver basis vectors `x` such that `l <= x <= u` (component-wise).
@@ -937,77 +1082,45 @@ cdef class Matrix_integer_dense(Matrix_dense):
         
         EXAMPLES::
 
-            sage: # optional - 4ti2
-            sage: A = matrix(ZZ, [[1, 2, 3]])
-            sage: G = A.graver_basis()  # optional - 4ti2
-            sage: list(G)  # optional - 4ti2
-            [(2, -1, 0), (3, 0, -1), (1, 1, -1), (1, -2, 1), (0, 3, -2)]
-            To restrict Graver directions by coordinate-wise lower and upper bounds:
-            sage: lower = vector(ZZ, [0, 0, -1])
-            sage: upper = vector(ZZ, [2, 1, 0])
-            sage: list(G.orthogonal_range_search(lower, upper))  # optional - 4ti2
+            sage: A = matrix(ZZ, [[1, 2, 3]])                                 # optional - 4ti2
+            sage: G = A.graver_basis()                                        # optional - 4ti2
+            sage: sorted(tuple(v) for v in G)                                 # optional - 4ti2
+            [(0, 3, -2), (1, -2, 1), (1, 1, -1), (2, -1, 0), (3, 0, -1)]
+
+            sage: A = matrix(ZZ, [[1, 2, 3]])                          # optional - 4ti2
+            sage: G = A.graver_basis()                                 # optional - 4ti2
+            sage: x = vector(ZZ, [6, 0, 0]); c = vector(ZZ, [1, 1, 1])  # optional - 4ti2
+            sage: l = vector(ZZ, [0, 0, 0]); u = vector(ZZ, [6, 6, 6])  # optional - 4ti2
+            sage: res = G.directed_augmentation_query(x, c, l, u)       # optional - 4ti2
+            sage: (tuple(res[2]), int(res[1]))                          # optional - 4ti2
+            ((0, 3, 0), 2)
+            
+            sage: # To Restrict Graver directions by coordinate-wise bounds       # optional - 4ti2
+            sage: lower = vector(ZZ, [0, 0, -1])                               # optional - 4ti2
+            sage: upper = vector(ZZ, [2, 1, 0])                                # optional - 4ti2
+            sage: sorted(tuple(v) for v in G.orthogonal_range_search(lower, upper))  # optional - 4ti2
             [(1, 1, -1)]
 
-            To showcase number of steps for a simple matrix
-            sage: # optional - 4ti2
-            sage: A = matrix(ZZ, [[1, 2, 3]])
-            sage: b = vector(ZZ, [6])
-            sage: c = vector(ZZ, [1, 1, 1])
-            sage: G = A.graver_basis()  # optional - 4ti2
-            sage: l = vector(ZZ, [0, 0, 0])
-            sage: u = vector(ZZ, [6, 6, 6])
-            sage: x = vector(ZZ, [6, 0, 0])      # feasible: A * x = 6
-            sage: steps = 0
-            sage: while True:                    # optional - 4ti2
-            ....:     best = None
-            ....:     for g in G.orthogonal_range_search(l - x, u - x):
-            ....:         if c * g < 0:
-            ....:             if best is None or c * g < c * best:
-            ....:                 best = g
-            ....:     if best is None:
-            ....:         break
-            ....:     x += best
-            ....:     steps += 1
-            sage: x, steps  # optional - 4ti2
+            sage: # To Count greedy augmentation steps for a simple instance      # optional - 4ti2
+            sage: A = matrix(ZZ, [[1, 2, 3]])                                  # optional - 4ti2
+            sage: c = vector(ZZ, [1, 1, 1])                                    # optional - 4ti2
+            sage: G = A.graver_basis()                                         # optional - 4ti2
+            sage: l = vector(ZZ, [0, 0, 0])                                    # optional - 4ti2
+            sage: u = vector(ZZ, [6, 6, 6])                                    # optional - 4ti2
+            sage: x = vector(ZZ, [6, 0, 0])                                    # optional - 4ti2
+            sage: steps = 0                                                    # optional - 4ti2
+            sage: while True:                                                  # optional - 4ti2
+            ....:     best = None                                              # optional - 4ti2
+            ....:     for g in G.orthogonal_range_search(l - x, u - x):        # optional - 4ti2
+            ....:         if c.dot_product(g) < 0:                             # optional - 4ti2
+            ....:             if best is None or c.dot_product(g) < c.dot_product(best):  # optional - 4ti2
+            ....:                 best = g                                     # optional - 4ti2
+            ....:     if best is None:                                         # optional - 4ti2
+            ....:         break                                                # optional - 4ti2
+            ....:     x += best                                                # optional - 4ti2
+            ....:     steps += 1                                               # optional - 4ti2
+            sage: (tuple(x), steps)                                            # optional - 4ti2
             ((0, 3, 0), 2)
-
-            To showcase most efficient step
-            sage: # optional - 4ti2
-            sage: A = matrix(ZZ, [[1, 2, 3]])
-            sage: b = vector(ZZ, [6])
-            sage: c = vector(ZZ, [1, 1, 1])
-            sage: G = A.graver_basis()  # optional - 4ti2
-            sage: l = vector(ZZ, [0, 0, 0])
-            sage: u = vector(ZZ, [6, 6, 6])
-            sage: x = vector(ZZ, [6, 0, 0])   # current feasible solution
-            sage: best = None
-            sage: for g in G.orthogonal_range_search(l - x, u - x):  # optional - 4ti2
-            ....:     if c * g < 0 and (best is None or c * g < c * best):
-            ....:         best = g
-            sage: best  # optional - 4ti2
-            ( -1, 2, -1 )
-            
-            To implement examples of unknown solutions
-            sage: # optional - 4ti2
-            sage: A = matrix(ZZ, [[1, 2, 3]])
-            sage: b = vector(ZZ, [7])
-            sage: c = vector(ZZ, [2, 1, 1])
-            sage: G = A.graver_basis()  # optional - 4ti2
-            sage: l = vector(ZZ, [0, 0, 0])
-            sage: u = vector(ZZ, [7, 7, 7])
-            sage: x = vector(ZZ, [7, 0, 0])      # some feasible solution
-            sage: improved = True
-            sage: while improved:                # optional - 4ti2
-            ....:     improved = False
-            ....:     for g in G.orthogonal_range_search(l - x, u - x):
-            ....:         if c * g < 0:
-            ....:             x += g
-            ....:             improved = True
-            ....:             break
-            sage: x   # optional - 4ti2
-            (0, 1, 2)
-        """
-        return GraverBasis(self)
 
     def __pow__(sself, n, dummy):
         r"""
