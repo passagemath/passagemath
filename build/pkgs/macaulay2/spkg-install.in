@@ -8,8 +8,11 @@ set -e
 # Place the submodules, since the tarfile doesn't include them
 git clone https://github.com/Macaulay2/M2-emacs.git M2/Macaulay2/editors/emacs
 git clone https://github.com/Macaulay2/memtailor.git M2/submodules/memtailor
+(cd M2/submodules/memtailor && git checkout 07c84a6)
 git clone https://github.com/Macaulay2/mathic.git M2/submodules/mathic
+(cd M2/submodules/mathic && git checkout 7abf77e)
 git clone https://github.com/Macaulay2/mathicgb.git M2/submodules/mathicgb
+(cd M2/submodules/mathicgb && git checkout de13956)
 
 BUILD_OPTIONS=$SAGE_MACAULAY2_BUILD_OPTIONS
 

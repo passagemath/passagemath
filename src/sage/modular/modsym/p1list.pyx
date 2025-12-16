@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-schemes
+# sage_setup: distribution = sagemath-flint
 # distutils: libraries = gmp
 # distutils: extra_compile_args = -D_XPG6
 
@@ -1174,18 +1174,6 @@ cdef class P1List():
             120
         """
         return self.__N
-
-
-cdef class export:
-    cdef int c_p1_normalize_int(self, int N, int u, int v,
-                                int* uu, int* vv, int* ss,
-                                int compute_s) except -1:
-        return c_p1_normalize_int(N, u, v, uu, vv, ss, compute_s)
-
-    cdef int c_p1_normalize_llong(self, int N, int u, int v,
-                                  int* uu, int* vv, int* ss,
-                                  int compute_s) except -1:
-        return c_p1_normalize_llong(N, u, v, uu, vv, ss, compute_s)
 
 
 def lift_to_sl2z_int(int c, int d, int N):

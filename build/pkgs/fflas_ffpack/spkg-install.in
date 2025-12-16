@@ -6,7 +6,7 @@ else
     LINBOX_BLAS="$(pkg-config --libs blas cblas)"
     BLAS_CFLAGS="$(pkg-config --cflags blas cblas)"
     if [ "$BLAS_CFLAGS" != "" ]; then
-        LINBOX_BLAS_CFLAGS="--with-blas-cflags=$BLAS_CFLAGS"
+        LINBOX_BLAS_CFLAGS="--with-blas-cflags=\"$BLAS_CFLAGS\""
     else
         LINBOX_BLAS_CFLAGS=""
     fi
@@ -31,15 +31,13 @@ fi
 
 # We disable openmp because of build failures, see
 # https://github.com/sagemath/sage/issues/17635#comment:67
-sdh_configure --with-default="$SAGE_LOCAL" --with-blas-libs="$LINBOX_BLAS" \
+eval sdh_configure "--with-default=\"$SAGE_LOCAL\"" "--with-blas-libs=\"$LINBOX_BLAS\"" \
               $LINBOX_BLAS_CFLAGS --disable-static \
               --enable-precompilation $FFLAS_FFPACK_CONFIGURE
 sdh_make
 
-$MAKE autotune
-if [ $? -ne 0 ]; then
-    echo >&2 "Error tuning fflas-ffpack"
-    exit 1
-fi
+while ! $MAKE autotune; do
+    echo >&2 "Error tuning fflas-ffpack, retrying"
+done
 
 sdh_make_install

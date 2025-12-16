@@ -1,0 +1,103 @@
+name: Test downstream MSYS2 / mingw-w64 packages
+
+on:
+  schedule:
+    - cron: '28 5 * * 1'
+  push:
+    branches:
+      - '*windows*'
+      - '*mingw*'
+  workflow_dispatch:
+    inputs:
+      sage-doctest-options:
+        description: 'Options for sage -t (example: --verbose)'
+        type: string
+        required: false
+
+concurrency:
+  # Cancel previous runs of this workflow for the same branch
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  mingw:
+    runs-on: ${{ contains(matrix.env, 'aarch') && 'windows-11-arm' || 'windows-2022' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        distribution: >-
+          ${{ fromJson(inputs.distributions
+                       || '["sagemath-bliss",
+                            "sagemath-categories",
+                            "sagemath-cddlib",
+                            "sagemath-cliquer",
+                            "sagemath-cmr",
+                            "sagemath-combinat",
+                            "sagemath-glpk",
+                            "sagemath-graphs",
+                            "sagemath-homfly",
+                            "sagemath-modules",
+                            "sagemath-nauty",
+                            "sagemath-ntl",
+                            "sagemath-objects",
+                            "sagemath-planarity",
+                            "sagemath-plot",
+                            "sagemath-rankwidth",
+                            "sagemath-tdlib"
+                           ]') }}
+        env:
+          - ucrt-x86_64
+          - clang-aarch64
+    steps:
+      - name: Check out passagemath
+        uses: actions/checkout@v4
+
+      - uses: msys2/setup-msys2@v2
+        name: Setup msys2
+        with:
+          update: true
+          install: >-
+            mingw-w64-${{ matrix.env }}-python-pas${{ matrix.distribution }}
+            mingw-w64-${{ matrix.env }}-python-passagemath-repl
+            mingw-w64-${{ matrix.env }}-python-tox
+            ${{ matrix.distribution == 'sagemath-bliss'    && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-cliquer'  && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-combinat' && format('mingw-w64-{0}-python-passagemath-graphs mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-graphs'   && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-ntl'      && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-tdlib'    && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
+          msystem: ${{ contains(matrix.env, 'ucrt') && 'ucrt64' || 'clangarm64' }}
+          path-type: inherit
+
+          # TBD when test dependencies are available:
+          #  ${{ matrix.distribution == 'sagemath-cddlib' && format('mingw-w64-{0}-python-passagemath-polyhedra mingw-w64-{0}-python-passagemath-flint mingw-w64-{0}-python-passagemath-pari', matrix.env) || ''}}
+          #  ${{ matrix.distribution == 'sagemath-plot' && format('mingw-w64-{0}-python-passagemath-tachyon', matrix.env) || ''}}
+
+      - name: tox
+        run: |
+          set -x
+          python_version=3.12
+          python_version_no_dot=${python_version/./}
+          pkg=${{ matrix.distribution }}
+          cd pkgs/$pkg
+          tox_envs=$(tox -l -q| sed 's/sagepython-.*nopypi-norequirements/py'$python_version_no_dot'-norequirements/')
+          tox -v -v -e $(for env in $tox_envs; do echo -n "$comma$env"; comma=,; done) --skip-pkg-install
+        env:
+          VIRTUALENV_SYSTEM_SITE_PACKAGES: 1
+          PYTHONUTF8: 1
+          SAGE_DOCTEST_OPTIONS: ${{ inputs.sage-doctest-options}}
+        shell: msys2 {0}
+
+      - name: Prepare logs artifact
+        if:   always()
+        run: |
+          (cd pkgs/${{ matrix.distribution }}/.tox && tar cf - */log) > downstream-mingw-logs-${{ matrix.distribution }}-${{ matrix.env }}.tar
+        shell: msys2 {0}
+
+      - name: Upload logs artifact
+        uses: actions/upload-artifact@v4
+        if:   always()
+        with:
+          name: downstream-mingw-logs-${{ matrix.distribution }}-${{ matrix.env }}
+          path: downstream-mingw-logs-${{ matrix.distribution }}-${{ matrix.env }}.tar

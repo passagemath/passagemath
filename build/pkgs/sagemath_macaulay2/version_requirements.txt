@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-macaulay2 ~= 10.6.38.0
+passagemath-macaulay2 ~= 10.6.42.0

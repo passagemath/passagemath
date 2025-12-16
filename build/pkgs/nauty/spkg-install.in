@@ -17,8 +17,11 @@ addedgeg addptg amtog ancestorg assembleg biplabg catg complg converseg copyg
 countg countneg cubhamg deledgeg delptg dimacs2g directg dreadnaut dretodot
 dretog edgetransg genbg genbgL geng gengL genposetg genquarticg genrang
 genspecialg gentourng gentreeg genktreeg hamheuristic labelg linegraphg listg
-multig nbrhoodg newedgeg pickg planarg productg ranlabg ransubg shortg showg
+multig nbrhoodg newedgeg pickg planarg productg ranlabg ransubg showg
 subdivideg twohamg underlyingg uniqg vcolg watercluster2 NRswitchg"
+if [ -z "$MSYSTEM" ]; then
+    PROGRAMS="$PROGRAMS shortg"
+fi
 sdh_install $PROGRAMS "$SAGE_LOCAL/bin"
 
 sdh_install nauty.h "$SAGE_LOCAL/include/nauty"

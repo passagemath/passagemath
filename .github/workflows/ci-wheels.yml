@@ -19,6 +19,10 @@ on:
         default: >-
           ['ubuntu-latest']
         required: false
+      sage-doctest-options:
+        description: 'Options for sage -t (example: --verbose)'
+        type: string
+        required: false
   workflow_call:
     inputs:
       run-id:
@@ -175,7 +179,7 @@ jobs:
                        *$pkg_underscore-*.whl) ;;
                        *musllinux*)            ;;
                        *_i686*)                ;;
-                       *-cp$python_version_no_dot-*|*-cp$python_version_abi3-abi3-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                       *-cp$python_version_no_dot-cp$python_version_no_dot-*|*-cp$python_version_abi3-abi3-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
               export PIP_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt
@@ -185,9 +189,9 @@ jobs:
               pip download -v --only-binary :all: --no-deps -d $WHEELHOUSE pas$pkg
           fi
           # Use passagemath-conf wheelhouse for missing wheels of third-party projects
-          case "${{ matrix.os }}--${{ matrix.python-version }}" in
-              *--3.14*) export SAGE_CONF_TARGETS="cysignals gmpy2";;
-          esac
+          ## case "${{ matrix.os }}--${{ matrix.python-version }}" in
+          ##     *--3.14*) export SAGE_CONF_TARGETS="cysignals fpylll pplpy primecountpy";;
+          ## esac
           if [ -n "$SAGE_CONF_TARGETS" ]; then
               case "${{ matrix.os }}" in
                   ubuntu*) sudo apt-get update
@@ -228,3 +232,5 @@ jobs:
           echo "Wheel missing" >&2
           exit 1
         shell: bash
+        env:
+          SAGE_DOCTEST_OPTIONS: ${{ inputs.sage-doctest-options}}

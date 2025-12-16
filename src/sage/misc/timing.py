@@ -86,6 +86,14 @@ def cputime(
         CPU time is reported correctly because subprocesses can be
         started and terminated at any given time.
     """
+    try:
+        import resource  # type: ignore
+    except ImportError:
+        # The module 'resource' is removed in Pyodide to browser limitations.
+        if isinstance(t, GlobalCputime):
+            t = float(t)
+        return walltime(t)
+
     if isinstance(t, GlobalCputime):
         subprocesses = True
 

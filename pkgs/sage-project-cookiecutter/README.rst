@@ -39,9 +39,7 @@ passagemath attempts to support all major Linux distributions and recent version
 macOS. Use on Windows currently requires the use of Windows Subsystem for Linux or
 virtualization.
 
-Complete sets of binary wheels are provided on PyPI for Python versions 3.10.x-3.13.x.
-Python 3.13.x is also supported, but some third-party packages are still missing wheels,
-so compilation from source is triggered for those.
+Complete sets of binary wheels are provided on PyPI for Python versions 3.10.x-3.14.x.
 
 
 About this pip-installable distribution package

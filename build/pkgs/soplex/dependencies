@@ -1,1 +1,1 @@
-$(MP_LIBRARY) mpfr boost_cropped zlib papilo | cmake ninja_build
+$(MP_LIBRARY) mpfr boost_cropped zlib liblzma bzip2 papilo | cmake ninja_build
