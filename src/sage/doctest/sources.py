@@ -660,12 +660,13 @@ class FileDocTestSource(DocTestSource):
         """
         if self.options.abspath:
             return os.path.abspath(self.path)
-        else:
+        try:
             relpath = os.path.relpath(self.path)
-            if relpath.startswith(".." + os.path.sep):
-                return self.path
-            else:
-                return relpath
+        except ValueError:
+            return self.path
+        if relpath.startswith(".." + os.path.sep):
+            return self.path
+        return relpath
 
     @lazy_attribute
     def basename(self):
