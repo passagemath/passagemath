@@ -154,7 +154,7 @@ jobs:
               ln -s logs/pkgs/config.log config.log
               ./configure --enable-build-as-root --prefix=$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --disable-python-distutils-check --without-system-libpng --without-system-zlib
           fi
-          export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }} TARGETS_OPTIONAL="${{ inputs.targets_optional }}
+          export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }}" TARGETS_OPTIONAL="${{ inputs.targets_optional }}"
           MAKE="make -j6" make -k V=0 $TARGETS_PRE $TARGETS $TARGETS_OPTIONAL
         shell: msys2 {0}
 
