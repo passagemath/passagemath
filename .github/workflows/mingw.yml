@@ -56,6 +56,7 @@ jobs:
       - uses: msys2/setup-msys2@v2
         name: Setup msys2
         with:
+          update: true
           install: >-
             mingw-w64-${{ matrix.env }}-gcc
             autotools
