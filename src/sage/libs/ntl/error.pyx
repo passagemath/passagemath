@@ -39,7 +39,7 @@ class NTLError(RuntimeError):
     EXAMPLES::
 
         sage: a = ntl.ZZX([0])
-        sage: a.quo_rem(a)
+        sage: a.quo_rem(a)  # known bug: windows (crashes - https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3659157463)
         Traceback (most recent call last):
         ...
         NTLError: DivRem: division by zero
