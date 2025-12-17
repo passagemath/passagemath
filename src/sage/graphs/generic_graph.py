@@ -18225,7 +18225,7 @@ class GenericGraph(GenericGraph_pyx):
         If we run Dijkstra with negative weights::
 
             sage: D = DiGraph([(0,1,2),(1,2,-2),(0,2,1)])
-            sage: D.shortest_paths(0, algorithm='Dijkstra_Boost', by_weight=True)
+            sage: D.shortest_paths(0, algorithm='Dijkstra_Boost', by_weight=True)  # known bug: windows (crashes - https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3659076423)
             Traceback (most recent call last):
             ...
             RuntimeError: Dijkstra algorithm does not work with negative weights, use Bellman-Ford instead
