@@ -16,9 +16,61 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  mingw:
+  mingw-minimal:
     uses: ./.github/workflows/mingw.yml
     with:
+      targets: >-
+        sagemath_bliss
+        sagemath_categories
+        sagemath_cddlib
+        sagemath_cliquer
+        sagemath_cmr
+        sagemath_combinat
+        sagemath_glpk
+        sagemath_graphs
+        sagemath_homfly
+        sagemath_modules
+        sagemath_nauty
+        sagemath_ntl
+        sagemath_objects
+        sagemath_planarity
+        sagemath_plot
+        sagemath_rankwidth
+        sagemath_tdlib
+      targets_optional: >-
+        sagemath_bliss-check
+        sagemath_categories-check
+        sagemath_cddlib-check
+        sagemath_cliquer-check
+        sagemath_cmr-check
+        sagemath_combinat-check
+        sagemath_glpk-check
+        sagemath_graphs-check
+        sagemath_homfly-check
+        sagemath_modules-check
+        sagemath_nauty-check
+        sagemath_ntl-check
+        sagemath_objects-check
+        sagemath_planarity-check
+        sagemath_plot-check
+        sagemath_rankwidth-check
+        sagemath_tdlib-check
+
+  mingw-standard:
+    uses: ./.github/workflows/mingw.yml
+    with:
+      extra_sage_packages: >-
+        bliss
+        cddlib
+        cliquer
+        cmr
+        libhomfly
+        nauty
+        ntl
+        planarity
+        rankwidth
+        symmetrica
+        tdlib
       targets: >-
         sagemath_bliss
         sagemath_categories
