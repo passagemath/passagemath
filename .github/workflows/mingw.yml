@@ -67,7 +67,6 @@ jobs:
             mingw-w64-${{ matrix.env }}-ninja
             mingw-w64-${{ matrix.env }}-gtest
           msystem: ${{ matrix.msystem }}
-          path-type: inherit
 
       - name: Download upstream artifact
         uses: actions/download-artifact@v4
