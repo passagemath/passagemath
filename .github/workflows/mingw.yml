@@ -16,6 +16,9 @@ on:
         description: 'Extra Sage packages to install as system packages'
         type: string
         default: ""
+      extra_configure_args:
+        type: string
+        default: ""
       merge_ci_fixes:
         default: false
         type: boolean
@@ -67,17 +70,19 @@ jobs:
             mingw-w64-${{ matrix.env }}-cmake
             mingw-w64-${{ matrix.env }}-ninja
             mingw-w64-${{ matrix.env }}-gtest
-            ${{ contains(inputs.extra_sage_packages, 'bliss')      && format('mingw-w64-{0}-bliss',      matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'cddlib')     && format('mingw-w64-{0}-cddlib',     matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'cliquer')    && format('mingw-w64-{0}-cliquer',    matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'cmr')        && format('mingw-w64-{0}-cmr',        matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'libhomfly')  && format('mingw-w64-{0}-libhomfly',  matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'nauty')      && format('mingw-w64-{0}-nauty',      matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'ntl')        && format('mingw-w64-{0}-ntl',        matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'planarity')  && format('mingw-w64-{0}-planarity',  matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'rankwidth')  && format('mingw-w64-{0}-rankwidth',  matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'symmetrica') && format('mingw-w64-{0}-symmetrica', matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'tdlib')      && format('mingw-w64-{0}-treedec',    matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'bliss')      && format('mingw-w64-{0}-bliss',             matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'cddlib')     && format('mingw-w64-{0}-cddlib',            matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'cliquer')    && format('mingw-w64-{0}-cliquer',           matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'cmr')        && format('mingw-w64-{0}-cmr',               matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'libhomfly')  && format('mingw-w64-{0}-libhomfly',         matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'nauty')      && format('mingw-w64-{0}-nauty',             matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'ntl')        && format('mingw-w64-{0}-ntl',               matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'planarity')  && format('mingw-w64-{0}-planarity',         matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'rankwidth')  && format('mingw-w64-{0}-rankwidth',         matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'symmetrica') && format('mingw-w64-{0}-symmetrica',        matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'tdlib')      && format('mingw-w64-{0}-treedec',           matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'cython')     && format('mingw-w64-{0}-cython',            matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'setuptools') && format('mingw-w64-{0}-python-setuptools', matrix.env) || '' }}
           msystem: ${{ matrix.msystem }}
 
       - name: Download upstream artifact
@@ -164,7 +169,7 @@ jobs:
               mkdir -p logs/pkgs
               touch logs/pkgs/config.log
               ln -s logs/pkgs/config.log config.log
-              ./configure --enable-build-as-root --prefix=$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --disable-python-distutils-check --without-system-libpng --without-system-zlib
+              ./configure --enable-build-as-root --prefix=$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --disable-python-distutils-check --without-system-libpng --without-system-zlib ${{ inputs.extra_configure_args }}
           fi
           export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }}" TARGETS_OPTIONAL="${{ inputs.targets_optional }}"
           MAKE="make -j6" make -k V=0 $TARGETS_PRE $TARGETS $TARGETS_OPTIONAL
