@@ -19,6 +19,12 @@ on:
       extra_configure_args:
         type: string
         default: ""
+      logs_artifact:
+        default: true
+        type: boolean
+      logs_artifact_suffix:
+        required: false
+        type: string
       merge_ci_fixes:
         default: false
         type: boolean
@@ -175,14 +181,16 @@ jobs:
           MAKE="make -j6" make -k V=0 $TARGETS_PRE $TARGETS $TARGETS_OPTIONAL
         shell: msys2 {0}
 
-      - uses: actions/upload-artifact@v4
-        if:   always()
+      - name: Upload logs artifact
+        uses: actions/upload-artifact@v4
+        if:   always() && inputs.logs_artifact
         with:
-          name: mingw-logs-${{ matrix.os }}
+          name: mingw-logs-${{ matrix.os }}${{ inputs.logs_artifact_suffix }}
           path: ./logs
 
-      - uses: actions/upload-artifact@v4
-        if:   always()
+      - name: Upload SAGE_LOCAL artifact
+        uses: actions/upload-artifact@v4
+        if:   always() && inputs.logs_artifact
         with:
-          name: mingw-sage-local-${{ matrix.os }}
+          name: mingw-sage-local-${{ matrix.os }}${{ inputs.logs_artifact_suffix }}
           path: ./local

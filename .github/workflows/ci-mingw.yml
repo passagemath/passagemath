@@ -19,6 +19,7 @@ jobs:
   mingw-minimal:
     uses: ./.github/workflows/mingw.yml
     with:
+      logs_artifact_suffix: "-minimal"
       targets: >-
         sagemath_bliss
         sagemath_categories
@@ -59,6 +60,7 @@ jobs:
   mingw-standard:
     uses: ./.github/workflows/mingw.yml
     with:
+      logs_artifact_suffix: "-standard"
       extra_sage_packages: >-
         bliss
         cddlib
@@ -111,6 +113,7 @@ jobs:
   mingw-standard-sitepackages:
     uses: ./.github/workflows/mingw.yml
     with:
+      logs_artifact_suffix: "-standard-sitepackages"
       extra_configure_args: >-
         --enable-system-site-packages
       extra_sage_packages: >-
