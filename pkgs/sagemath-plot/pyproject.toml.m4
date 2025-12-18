@@ -41,7 +41,7 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test            = [
-    "passagemath-plot[tachyon]",
+    "passagemath-plot[tachyon]; sys_platform != 'win32'",
     "passagemath-repl",
 ]
 
