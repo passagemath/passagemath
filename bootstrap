@@ -143,7 +143,7 @@ save () {
         exit 63
     fi
 
-    NEWCONFVERSION=`git rev-parse HEAD`
+    NEWCONFVERSION=`git rev-parse HEAD || echo unknown`
     NEWCONFBALL="upstream/configure-$NEWCONFVERSION.tar.gz"
 
     # Create configure tarball
