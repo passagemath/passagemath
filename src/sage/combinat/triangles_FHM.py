@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
+# sage.doctest: known bug: windows (hangs)
 """
 Combinatorial triangles for posets and fans
 
