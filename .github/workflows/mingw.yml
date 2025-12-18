@@ -175,6 +175,7 @@ jobs:
               mkdir -p logs/pkgs
               touch logs/pkgs/config.log
               ln -s logs/pkgs/config.log config.log
+              unset FC
               ./configure --enable-build-as-root --prefix=$PREFIX --with-sage-venv --with-system-gfortran=force --with-system-python3=force --disable-python-distutils-check --without-system-libpng --without-system-zlib ${{ inputs.extra_configure_args }}
           fi
           export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }}" TARGETS_OPTIONAL="${{ inputs.targets_optional }}"
