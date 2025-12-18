@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# sage.doctest: needs numpy, known bug: windows (crash - https://github.com/passagemath/passagemath/issues/1892#issue-3726343166)
 """
 Fast Fourier Transforms Using GSL
 
