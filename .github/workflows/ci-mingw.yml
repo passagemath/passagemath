@@ -67,6 +67,7 @@ jobs:
         cliquer
         cmr
         flex
+        gsl
         libhomfly
         nauty
         ntl
@@ -123,6 +124,7 @@ jobs:
         cliquer
         cmr
         flex
+        gsl
         libhomfly
         nauty
         ntl
