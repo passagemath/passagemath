@@ -70,9 +70,9 @@ jobs:
             mingw-w64-${{ matrix.env }}-gcc
             ${{ !contains(matrix.env, 'clang') && format('mingw-w64-{0}-gcc-fortran', matrix.env) || '' }}
             autotools
-            python
-            python-pip
-            python-setuptools
+            mingw-w64-${{ matrix.env }}-python
+            mingw-w64-${{ matrix.env }}-python-pip
+            mingw-w64-${{ matrix.env }}-python-setuptools
             patch
             mingw-w64-${{ matrix.env }}-cmake
             mingw-w64-${{ matrix.env }}-ninja
