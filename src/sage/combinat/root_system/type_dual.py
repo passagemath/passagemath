@@ -384,7 +384,7 @@ class AmbientSpace(ambient_space.AmbientSpace):
         sage: ct = sage.combinat.root_system.type_dual.CartanType(CartanType(['F',4]))
         sage: L = ct.root_system().ambient_space(); L
         Ambient space of the Root system of type ['F', 4]^*
-        sage: TestSuite(L).run(skip=["_test_elements","_test_pickling"])                # needs sage.graphs
+        sage: TestSuite(L).run(skip=["_test_elements","_test_pickling"])                # needs sage.graphs, known bug: windows (hangs - https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3659252495)
     """
 
     @lazy_attribute

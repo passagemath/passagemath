@@ -37,6 +37,9 @@ on:
       oss:
         type: string
         required: false
+      sage-doctest-options:
+        type: string
+        required: false
 
 jobs:
 
@@ -234,3 +237,4 @@ jobs:
         shell: bash
         env:
           SAGE_DOCTEST_OPTIONS: ${{ inputs.sage-doctest-options}}
+          PYTHONUTF8: 1

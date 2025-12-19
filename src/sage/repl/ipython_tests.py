@@ -82,6 +82,7 @@ Next, test the ``pinfo`` magic for ``R`` interface code, see :issue:`26906`::
 Next, test the pinfo2 magic for Python code. This is what IPython
 calls when you ask for the double-questionmark help, like ``foo??`` ::
 
+    sage: # known bug: windows (hangs - https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3659177777)
     sage: from sage.repl.interpreter import get_test_shell
     sage: shell = get_test_shell()
     sage: shell.run_cell(u'from sage.repl.ipython_tests import dummy')
@@ -111,6 +112,7 @@ calls when you ask for the double-questionmark help, like ``foo??`` ::
 
 Next, test the pinfo2 magic for Cython code::
 
+    sage: # known bug: windows (hangs - https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3659177777)
     sage: from sage.repl.interpreter import get_test_shell
     sage: shell = get_test_shell()
     sage: shell.run_cell(u'from sage.tests.stl_vector import stl_int_vector')
@@ -141,6 +143,7 @@ Next, test the pinfo2 magic for Cython code::
 
 Next, test the ``pinfo2`` magic for ``R`` interface code, see :issue:`26906`::
 
+    sage: # known bug: windows (hangs - https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3659177777)
     sage: from sage.repl.interpreter import get_test_shell   # optional - rpy2
     sage: shell = get_test_shell()                           # optional - rpy2
     sage: shell.run_cell(u'%pinfo2 r.lm')                    # optional - rpy2

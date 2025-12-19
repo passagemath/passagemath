@@ -930,7 +930,7 @@ cpdef shortest_paths(g, start, weight_function=None, algorithm=None):
 
         sage: from sage.graphs.base.boost_graph import shortest_paths
         sage: g = DiGraph([(0,1,1),(1,2,-2),(1,3,4),(2,3,1)], weighted=True)
-        sage: shortest_paths(g, 1, algorithm='Dijkstra')
+        sage: shortest_paths(g, 1, algorithm='Dijkstra')  # known bug: windows (crashes - https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3659076423)
         Traceback (most recent call last):
         ...
         RuntimeError: Dijkstra algorithm does not work with negative weights, use Bellman-Ford instead

@@ -99,7 +99,7 @@ Some challenges
 
   ::
 
-      sage: # needs sage.modules
+      sage: # needs sage.modules, known bug: windows (crash - https://github.com/passagemath/passagemath/issues/1892#issuecomment-3673607183)
       sage: m = random_matrix(QQ, 4, algorithm='echelonizable',
       ....:                   rank=3, upper_bound=60)
       sage: m^8 == m*m*m*m*m*m*m*m == ((m^2)^2)^2

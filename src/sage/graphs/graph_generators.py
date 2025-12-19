@@ -604,7 +604,7 @@ class GraphGenerators:
 
     ::
 
-        sage: # needs nauty
+        sage: # needs nauty, known bug: windows (hangs - https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3659190630)
         sage: for G in graphs(3):
         ....:    print(G)
         Graph on 3 vertices

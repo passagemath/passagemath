@@ -103,7 +103,7 @@ def parse_optional_tags(
     - ``'long time'``
     - ``'not implemented'``
     - ``'not tested'``
-    - ``'known bug'`` (possible values are ``None``, ``linux`` and ``macos``)
+    - ``'known bug'`` (possible values are ``None``, ``linux``, ``macos``, ``windows``)
     - ``'py2'``
     - ``'optional -- FEATURE...'`` or ``'needs FEATURE...'`` --
       the dictionary will just have the key ``'FEATURE'``
@@ -217,6 +217,8 @@ def parse_optional_tags(
                 value = "linux"
             if m.groups("tags") and m.group("tags").strip().lower().startswith("macos"):
                 value = "macos"
+            if m.groups("tags") and m.group("tags").strip().lower().startswith("win"):
+                value = "windows"
 
             # rename 'known bug' to 'bug' so that such tests will be run by sage -t ... -only-optional=bug
             tags["bug"] = value
@@ -1114,7 +1116,7 @@ class SageDocTestParser(doctest.DocTestParser):
                         if extra and any(tag in ["bug"] for tag in extra):
                             # Bug only occurs on a specific platform?
                             bug_platform = optional_tags_with_values.get("bug")
-                            # System platform as either linux or macos
+                            # System platform as either linux, macos, or windows
                             system_platform = (
                                 platform.system().lower().replace("darwin", "macos")
                             )
