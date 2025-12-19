@@ -66,6 +66,7 @@ jobs:
         cddlib
         cliquer
         cmr
+        flex
         libhomfly
         nauty
         ntl
@@ -121,6 +122,7 @@ jobs:
         cddlib
         cliquer
         cmr
+        flex
         libhomfly
         nauty
         ntl
@@ -128,10 +130,10 @@ jobs:
         rankwidth
         symmetrica
         tdlib
-        setuptools
-        cython
         cysignals
+        cython
         numpy
+        setuptools
       targets: >-
         sagemath_bliss
         sagemath_categories
