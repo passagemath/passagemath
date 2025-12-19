@@ -187,6 +187,7 @@ jobs:
               ./configure --enable-build-as-root --prefix=$PREFIX --with-sage-venv --with-system-python3=force --disable-python-distutils-check --without-system-libpng --without-system-zlib ${{ inputs.extra_configure_args }}
           fi
           export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }}" TARGETS_OPTIONAL="${{ inputs.targets_optional }}"
+          export VIRTUALENV_SYSTEM_SITE_PACKAGES=1
           MAKE="make -j6" make -k V=0 $TARGETS_PRE $TARGETS $TARGETS_OPTIONAL
         shell: msys2 {0}
 
