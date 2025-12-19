@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# known bug: windows (crash - https://github.com/passagemath/passagemath/issues/1892#issue-3726343166)
 """
 GSL arrays
 """
