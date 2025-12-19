@@ -67,11 +67,15 @@ jobs:
         cliquer
         cmr
         flex
+        freetype
         gsl
         libhomfly
+        m4ri
+        mpfi
         nauty
         ntl
         planarity
+        qhull
         rankwidth
         symmetrica
         tdlib
@@ -124,11 +128,15 @@ jobs:
         cliquer
         cmr
         flex
+        freetype
         gsl
         libhomfly
+        m4ri
+        mpfi
         nauty
         ntl
         planarity
+        qhull
         rankwidth
         symmetrica
         tdlib
