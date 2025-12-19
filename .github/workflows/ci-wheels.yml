@@ -237,3 +237,4 @@ jobs:
         shell: bash
         env:
           SAGE_DOCTEST_OPTIONS: ${{ inputs.sage-doctest-options}}
+          PYTHONUTF8: 1
