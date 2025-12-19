@@ -130,6 +130,8 @@ jobs:
         tdlib
         setuptools
         cython
+        cysignals
+        numpy
       targets: >-
         sagemath_bliss
         sagemath_categories
