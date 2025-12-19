@@ -68,6 +68,7 @@ jobs:
           update: true
           install: >-
             mingw-w64-${{ matrix.env }}-gcc
+            mingw-w64-${{ matrix.env }}-gcc-fortran
             autotools
             python
             python-pip
