@@ -78,23 +78,25 @@ jobs:
             mingw-w64-${{ matrix.env }}-cmake
             mingw-w64-${{ matrix.env }}-ninja
             mingw-w64-${{ matrix.env }}-gtest
-            ${{ contains(inputs.extra_sage_packages, 'flex')       && 'flex' || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'bliss')      && format('mingw-w64-{0}-bliss',             matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'cddlib')     && format('mingw-w64-{0}-cddlib',            matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'cliquer')    && format('mingw-w64-{0}-cliquer',           matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'cmr')        && format('mingw-w64-{0}-cmr',               matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'gsl')        && format('mingw-w64-{0}-gsl',               matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'libhomfly')  && format('mingw-w64-{0}-libhomfly',         matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'nauty')      && format('mingw-w64-{0}-nauty',             matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'ntl')        && format('mingw-w64-{0}-ntl',               matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'planarity')  && format('mingw-w64-{0}-planarity',         matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'rankwidth')  && format('mingw-w64-{0}-rankwidth',         matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'symmetrica') && format('mingw-w64-{0}-symmetrica',        matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'tdlib')      && format('mingw-w64-{0}-treedec',           matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'cysignals')  && format('mingw-w64-{0}-python-cysignals',  matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'cython')     && format('mingw-w64-{0}-cython',            matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'numpy')      && format('mingw-w64-{0}-python-numpy',      matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'setuptools') && format('mingw-w64-{0}-python-setuptools', matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'flex')         && 'flex' || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'bliss')        && format('mingw-w64-{0}-bliss',             matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'cddlib')       && format('mingw-w64-{0}-cddlib',            matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'cliquer')      && format('mingw-w64-{0}-cliquer',           matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'cmr')          && format('mingw-w64-{0}-cmr',               matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'gsl')          && format('mingw-w64-{0}-gsl',               matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'libhomfly')    && format('mingw-w64-{0}-libhomfly',         matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'nauty')        && format('mingw-w64-{0}-nauty',             matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'ntl')          && format('mingw-w64-{0}-ntl',               matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'planarity')    && format('mingw-w64-{0}-planarity',         matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'rankwidth')    && format('mingw-w64-{0}-rankwidth',         matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'symmetrica')   && format('mingw-w64-{0}-symmetrica',        matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'tdlib')        && format('mingw-w64-{0}-treedec',           matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'cysignals')    && format('mingw-w64-{0}-python-cysignals',  matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'cython')       && format('mingw-w64-{0}-cython',            matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'meson')        && format('mingw-w64-{0}-meson',             matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'meson_python') && format('mingw-w64-{0}-meson-python',      matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'numpy')        && format('mingw-w64-{0}-python-numpy',      matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'setuptools')   && format('mingw-w64-{0}-python-setuptools', matrix.env) || '' }}
           msystem: ${{ matrix.msystem }}
 
       - name: Download upstream artifact

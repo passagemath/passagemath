@@ -134,6 +134,7 @@ jobs:
         tdlib
         cysignals
         cython
+        meson_python
         numpy
         setuptools
       targets: >-
