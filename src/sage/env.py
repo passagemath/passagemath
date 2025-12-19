@@ -494,7 +494,7 @@ def cython_aliases(required_modules=None, optional_modules=None):
         var = lib.upper().replace("-", "") + "_"
         if lib == 'cblas':
             lib = get_cblas_pc_module_name()
-        if system == 'Windows':
+        if system == 'Windows' and not os.environ.get('MSYSTEM'):
             aliases[var + "CFLAGS"] = aliases[var + "INCDIR"] = aliases[var + "LIBDIR"] = aliases[var + "LIBEXTRA"] = []
             aliases[var + "LIBRARIES"] = lib
             continue

@@ -5,8 +5,7 @@ on:
     - cron: '28 5 * * 1'
   push:
     branches:
-      - '*windows*'
-      - '*mingw*'
+      - '*downstream-mingw*'
   workflow_dispatch:
     inputs:
       sage-doctest-options:

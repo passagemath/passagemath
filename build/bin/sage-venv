@@ -43,7 +43,7 @@ if options.upgrade and options.clear:
 b = venv.EnvBuilder(system_site_packages=options.system_site,
                     clear=options.clear,
                     upgrade=options.upgrade,
-                    symlinks=True)
+                    symlinks=sys.platform != 'win32')
 c = b.ensure_directories(options.env_dir)
 b.setup_python(c)
 b.create_configuration(c)
