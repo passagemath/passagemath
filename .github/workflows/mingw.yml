@@ -108,7 +108,7 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'flit_core')         && format('mingw-w64-{0}-python-flit-core',         matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'gmpy2')             && format('mingw-w64-{0}-python-gmpy2',             matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'hatchling')         && format('mingw-w64-{0}-python-hatchling',         matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'jinja2')            && format('mingw-w64-{0}-python-jinja2',            matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'jinja2')            && format('mingw-w64-{0}-python-jinja',             matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'markupsafe')        && format('mingw-w64-{0}-python-markupsafe',        matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'matplotlib')        && format('mingw-w64-{0}-python-matplotlib',        matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'memory_allocator')  && format('mingw-w64-{0}-python-memory-allocator',  matrix.env) || '' }}
