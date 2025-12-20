@@ -1,0 +1,1 @@
+${MINGW_PACKAGE_PREFIX}-python-rfc3986-validator

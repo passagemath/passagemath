@@ -27,6 +27,7 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_flint
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
@@ -45,6 +46,7 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
@@ -63,17 +65,27 @@ jobs:
       logs_artifact_suffix: "-standard"
       extra_sage_packages: >-
         bliss
+        bzip2
         cddlib
         cliquer
         cmr
         flex
+        freetype
+        glpk
+        gsl
         libhomfly
+        libjpeg
+        libpng
+        m4ri
+        mpfi
         nauty
         ntl
         planarity
+        qhull
         rankwidth
         symmetrica
         tdlib
+        zlib
       targets: >-
         sagemath_bliss
         sagemath_categories
@@ -81,6 +93,7 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_flint
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
@@ -99,6 +112,7 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
@@ -119,21 +133,48 @@ jobs:
         --enable-system-site-packages
       extra_sage_packages: >-
         bliss
+        bzip2
         cddlib
         cliquer
         cmr
         flex
+        freetype
+        glpk
+        gsl
         libhomfly
+        libjpeg
+        libpng
+        m4ri
+        mpfi
         nauty
         ntl
         planarity
+        qhull
         rankwidth
         symmetrica
         tdlib
+        zlib
+        calver
         cysignals
         cython
+        editables
+        flit_core
+        gmpy2
+        hatchling
+        jinja2
+        markupsafe
+        matplotlib
+        memory_allocator
+        meson_python
+        mpmath
         numpy
+        pathspec
+        pillow
+        pkgconfig
+        python_build
+        scipy
         setuptools
+        trove_classifiers
       targets: >-
         sagemath_bliss
         sagemath_categories
@@ -141,6 +182,7 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_flint
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
@@ -159,6 +201,7 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
