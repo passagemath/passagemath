@@ -27,6 +27,7 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_flint
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
@@ -45,6 +46,7 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
@@ -87,6 +89,7 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_flint
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
@@ -105,6 +108,7 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
@@ -157,6 +161,7 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_flint
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
@@ -175,6 +180,7 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
