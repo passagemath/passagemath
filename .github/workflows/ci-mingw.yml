@@ -65,6 +65,7 @@ jobs:
       logs_artifact_suffix: "-standard"
       extra_sage_packages: >-
         bliss
+        bzip2
         cddlib
         cliquer
         cmr
@@ -73,6 +74,7 @@ jobs:
         glpk
         gsl
         libhomfly
+        libpng
         m4ri
         mpfi
         nauty
@@ -82,6 +84,7 @@ jobs:
         rankwidth
         symmetrica
         tdlib
+        zlib
       targets: >-
         sagemath_bliss
         sagemath_categories
@@ -129,6 +132,7 @@ jobs:
         --enable-system-site-packages
       extra_sage_packages: >-
         bliss
+        bzip2
         cddlib
         cliquer
         cmr
@@ -137,6 +141,7 @@ jobs:
         glpk
         gsl
         libhomfly
+        libpng
         m4ri
         mpfi
         nauty
@@ -146,6 +151,7 @@ jobs:
         rankwidth
         symmetrica
         tdlib
+        zlib
         calver
         cysignals
         cython
