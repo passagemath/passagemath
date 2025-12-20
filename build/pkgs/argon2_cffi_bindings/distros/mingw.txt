@@ -1,0 +1,1 @@
+${MINGW_PACKAGE_PREFIX}-python-argon2-cffi-bindings
