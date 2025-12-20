@@ -74,6 +74,7 @@ jobs:
         glpk
         gsl
         libhomfly
+        libjpeg
         libpng
         m4ri
         mpfi
@@ -141,6 +142,7 @@ jobs:
         glpk
         gsl
         libhomfly
+        libjpeg
         libpng
         m4ri
         mpfi
