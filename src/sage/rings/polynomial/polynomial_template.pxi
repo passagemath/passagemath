@@ -181,9 +181,6 @@ cdef class Polynomial_template(Polynomial):
             x = parent.base_ring()(x)
             self.__class__.__init__(self, parent, x, check=check, is_gen=is_gen, construct=construct)
 
-    def get_cparent(self):
-        return <long> self._cparent
-
     def __reduce__(self):
         """
         EXAMPLES::
