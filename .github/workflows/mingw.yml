@@ -85,6 +85,7 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'cddlib')            && format('mingw-w64-{0}-cddlib',                   matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'cliquer')           && format('mingw-w64-{0}-cliquer',                  matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'cmr')               && format('mingw-w64-{0}-cmr',                      matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'flint')             && format('mingw-w64-{0}-flint',                    matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'freetype')          && format('mingw-w64-{0}-freetype',                 matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'glpk')              && format('mingw-w64-{0}-glpk',                     matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'gsl')               && format('mingw-w64-{0}-gsl',                      matrix.env) || '' }}
