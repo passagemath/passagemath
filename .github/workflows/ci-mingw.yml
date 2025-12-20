@@ -146,14 +146,27 @@ jobs:
         rankwidth
         symmetrica
         tdlib
+        calver
         cysignals
         cython
+        editables
+        flit_core
+        gmpy2
+        hatchling
+        jinja2
+        markupsafe
         matplotlib
+        memory_allocator
         meson_python
+        mpmath
         numpy
+        pathspec
         pillow
+        pkgconfig
+        python_build
         scipy
         setuptools
+        trove_classifiers
       targets: >-
         sagemath_bliss
         sagemath_categories
