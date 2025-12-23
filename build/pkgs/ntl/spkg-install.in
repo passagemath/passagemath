@@ -101,7 +101,7 @@ ntl_configure()
     # command prompt, when they're expecting a POSIX-style shell
     # This works around that by adding the MSYS perl to PATH
     if [ -n "$MSYSTEM" ]; then
-        
+        LIBTOOL_LINK_FLAGS="-no-undefined"
         # We only want the MSYS perl added to PATH, not everything else in /usr/bin,
         # since that includes plenty of other MSYS tools that might accidentally result
         # in a Cygwin build, not a Windows-native build 
@@ -142,3 +142,11 @@ ntl_install()
 ntl_configure
 ntl_build
 ntl_install
+
+sdh_generate_windows_lib_files ntl
+
+if [ -n "$MSYSTEM" ]; then
+    # Make installed NTL header files compatible with the native toolchain
+    sed -i.bak '/HAVE_BUILTIN_CLZL/d' "${SAGE_DESTDIR_LOCAL}"/include/NTL/ALL_FEATURES.h
+    rm -f "${SAGE_DESTDIR_LOCAL}"/include/NTL/ALL_FEATURES.h.bak
+fi
