@@ -426,6 +426,13 @@ jobs:
         with:
           package-dir: unpacked/passagemath_cliquer
 
+      - name: sagemath-bliss
+        id:   sagemath-bliss
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v3.3.0
+        with:
+          package-dir: unpacked/passagemath_bliss
+
       - name: sagemath-combinat
         id:   sagemath-combinat
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
@@ -508,6 +515,7 @@ jobs:
         ]
       distributions: >-
         [
+         'sagemath-bliss',
          'sagemath-categories',
          'sagemath-cddlib',
          'sagemath-cliquer',

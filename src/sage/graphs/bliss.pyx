@@ -1,5 +1,5 @@
 # distutils: language = c++
-# distutils: extra_compile_args = -std=c++17
+# distutils: extra_compile_args = -std=c++17 -DBLISS_USE_GMP
 # distutils: libraries = bliss
 # sage_setup: distribution = sagemath-bliss
 
