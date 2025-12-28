@@ -32,6 +32,7 @@ jobs:
                             "sagemath-cliquer",
                             "sagemath-cmr",
                             "sagemath-combinat",
+                            "sagemath-flint",
                             "sagemath-glpk",
                             "sagemath-graphs",
                             "sagemath-homfly",
@@ -62,6 +63,7 @@ jobs:
             ${{ matrix.distribution == 'sagemath-bliss'    && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-cliquer'  && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-combinat' && format('mingw-w64-{0}-python-passagemath-graphs mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-flint'    && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-graphs'   && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-ntl'      && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
