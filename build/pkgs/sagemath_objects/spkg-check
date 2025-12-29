@@ -16,6 +16,10 @@ for lib in "$SAGE_SRC/bin/sage-src-env-config" "$SAGE_SRC/bin/sage-env-config" "
 done
 
 export PIP_NO_INDEX=true
+if [ -n "$MSYSTEM" ]; then
+    # Convert from paths /d/a/... to D:/a/... before prepending file://
+    export SAGE_SPKG_WHEELS=$(cygpath -m $SAGE_SPKG_WHEELS)
+fi
 export PIP_FIND_LINKS="file://$SAGE_SPKG_WHEELS"
 
 unset tox_args
