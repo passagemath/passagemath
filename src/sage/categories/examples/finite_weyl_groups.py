@@ -7,11 +7,11 @@ Examples of finite Weyl groups
 #  Distributed under the terms of the GNU General Public License (GPL)
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
-
-from sage.misc.cachefunc import cached_method
-from sage.structure.parent import Parent
-from sage.structure.element_wrapper import ElementWrapper
 from sage.categories.finite_weyl_groups import FiniteWeylGroups
+from sage.misc.cachefunc import cached_method
+from sage.rings.integer import Integer
+from sage.structure.element_wrapper import ElementWrapper
+from sage.structure.parent import Parent
 from sage.structure.unique_representation import UniqueRepresentation
 
 
@@ -157,7 +157,7 @@ class SymmetricGroup(UniqueRepresentation, Parent):
         assert y in self
         return self(tuple(x.value[i] for i in y.value))
 
-    def degrees(self) -> tuple:
+    def degrees(self) -> tuple[Integer, ...]:
         """
         Return the degrees of ``self``.
 
@@ -167,8 +167,7 @@ class SymmetricGroup(UniqueRepresentation, Parent):
             sage: W.degrees()
             (2, 3, 4)
         """
-        from sage.rings.integer_ring import ZZ
-        return tuple(ZZ(i) for i in range(2, self.n + 1))
+        return tuple(Integer(i) for i in range(2, self.n + 1))
 
     class Element(ElementWrapper):
 

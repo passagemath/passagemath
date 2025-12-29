@@ -9,13 +9,13 @@ Examples of finite Coxeter groups
 #  Distributed under the terms of the GNU General Public License (GPL)
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
-from sage.misc.cachefunc import cached_method
-from sage.structure.parent import Parent
-from sage.structure.element_wrapper import ElementWrapper
 from sage.categories.finite_coxeter_groups import FiniteCoxeterGroups
-from sage.structure.unique_representation import UniqueRepresentation
-from sage.misc.functional import is_odd, is_even
 from sage.combinat.root_system.coxeter_matrix import CoxeterMatrix
+from sage.misc.cachefunc import cached_method
+from sage.rings.integer import Integer
+from sage.structure.element_wrapper import ElementWrapper
+from sage.structure.parent import Parent
+from sage.structure.unique_representation import UniqueRepresentation
 
 
 class DihedralGroup(UniqueRepresentation, Parent):
@@ -144,7 +144,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
         """
         return self(())
 
-    def index_set(self) -> tuple:
+    def index_set(self) -> tuple[int, int]:
         r"""
         Implement :meth:`CoxeterGroups.ParentMethods.index_set`.
 
@@ -156,7 +156,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
         """
         return (1, 2)
 
-    def degrees(self) -> tuple:
+    def degrees(self) -> tuple[Integer, Integer]:
         """
         Return the degrees of ``self``.
 
@@ -165,8 +165,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
             sage: FiniteCoxeterGroups().example(6).degrees()
             (2, 6)
         """
-        from sage.rings.integer_ring import ZZ
-        return (ZZ(2), ZZ(self.n))
+        return (Integer(2), Integer(self.n))
 
     def coxeter_matrix(self):
         """
@@ -234,7 +233,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
             reduced_word = copy(self.value)
             n = self.parent().n
             if len(reduced_word) == n:
-                if (i == 1 and is_odd(n)) or (i == 2 and is_even(n)):
+                if (i == 1 and n % 2) or (i == 2 and not n % 2):
                     return self.parent()(reduced_word[:-1])
                 return self.parent()(reduced_word[1:])
 
