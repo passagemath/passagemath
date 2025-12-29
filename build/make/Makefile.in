@@ -743,7 +743,7 @@ $(1)-$(6)-no-deps: $(1)-$(6)-build-no-deps
 $(1)-no-deps: $(1)-$(6)-no-deps
 
 $(1)-$(6)-check:
-	$(PLUS)@sage-logger -p 'PATH=$$(SAGE_SRC)/bin:$$($(6))/bin:$$$$PATH $$(SAGE_SPKG) --check-only $(1)-$(2) $$($(6))' '$$(SAGE_LOGS)/$(1)-$(2).log'
+	$(PLUS)@sage-logger -v check -p 'PATH=$$(SAGE_SRC)/bin:$$($(6))/bin:$$$$PATH $$(SAGE_SPKG) --check-only $(1)-$(2) $$($(6))' '$$(SAGE_LOGS)/$(1)-$(2).log'
 
 $(1)-check: $(1)-$(6)-check
 
@@ -886,7 +886,7 @@ $(1)-$(5)-no-deps:
 $(1)-no-deps: $(1)-$(5)-no-deps
 
 $(1)-$(5)-check:
-	$(PLUS)@sage-logger -p 'PATH=$$(SAGE_SRC)/bin:$$($(5))/bin:$$$$PATH $$(SAGE_SPKG) --check-only $(1)-$(2) $$($(5))' '$$(SAGE_LOGS)/$(1)-$(2).log'
+	$(PLUS)@sage-logger -v check -p 'PATH=$$(SAGE_SRC)/bin:$$($(5))/bin:$$$$PATH $$(SAGE_SPKG) --check-only $(1)-$(2) $$($(5))' '$$(SAGE_LOGS)/$(1)-$(2).log'
 
 $(1)-check: $(1)-$(5)-check
 

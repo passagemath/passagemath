@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# sage-logger [-p] [-P PREFIX] COMMAND [LOGFILE]
+# sage-logger [-p] [-P PREFIX] [-v VERB] COMMAND [LOGFILE]
 #
 # Evaluate shell command COMMAND while logging stdout and stderr to
 # LOGFILE (if given). If either the command or the logging failed, return a
@@ -11,6 +11,9 @@
 #
 # If the -P PREFIX argument is given, each line printed to stdout is
 # prefixed with PREFIX.
+#
+# If the -v VERB argument is given, VERB is used instead of "install"
+# in messages.
 #
 # AUTHOR:
 #
@@ -28,16 +31,25 @@
 
 use_prefix=false
 prefix=""
+verb="install"
 
-case "$1" in
-    -p) use_prefix=true
-        shift
-        ;;
-    -P) use_prefix=true
-        prefix="[$2] "
-        shift 2
-        ;;
-esac
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -p) use_prefix=true
+            shift
+            ;;
+        -P) use_prefix=true
+            prefix="[$2] "
+            shift 2
+            ;;
+        -v) verb=$2
+            shift 2
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
 
 cmd="$1"
 logfile="$2"
@@ -114,24 +126,24 @@ fi
 if [ -n "$SAGE_SILENT_BUILD" -a ${use_prefix} = true ]; then
     # Silent build.
     # Similar to https://www.gnu.org/software/automake/manual/html_node/Automake-Silent-Rules.html#Automake-Silent-Rules
-    echo "[$logname] installing. Log file: $logfile"
+    echo "[$logname] ${verb}ing. Log file: $logfile"
     ( exec>> $logfile 2>&1; time_cmd "$cmd"; status=$?; report_time; exit $status )
     status=$?
     if [[ $status != 0 ]]; then
         if [ -n "$GITHUB_ACTIONS" ]; then
-            echo "  [$logname] error installing, exit status $status. Log file:"
+            echo "  [$logname] error ${verb}ing, exit status $status. Log file:"
             sed "s;^;  [$logname]   ;" "$logfile" >&2
         else
-            echo "  [$logname] error installing, exit status $status. End of log file:"
+            echo "  [$logname] error ${verb}ing, exit status $status. End of log file:"
             tail -n 12000 "$logfile" | sed "/Please email sage-devel/,$ d;s;^;  [$logname]   ;" >&2
             echo "  [$logname] Full log file: $logfile"
         fi
     else
         time=$(report_time)
         if [ -n "$time" ]; then
-            echo "  [$logname] successfully installed ($time)."
+            echo "  [$logname] successfully ${verb}ed ($time)."
         else
-            echo "  [$logname] successfully installed."
+            echo "  [$logname] successfully ${verb}ed."
         fi
     fi
     exit $status
