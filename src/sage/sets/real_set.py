@@ -2636,34 +2636,42 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
 
         OUTPUT: :class:`Rational`
 
-        TESTS::
+        EXAMPLES::
 
-            sage: RealSet((1,2)).simplest_rational()
+            sage: s=RealSet((1, 2));  s
+            (1, 2)
+            sage: s.simplest_rational()
             3/2
             sage: s=RealSet((0, 1));  s
-            1
+            (0, 1)
             sage: s.simplest_rational()
             0
             sage: s=RealSet.point(1/2);  s
-            1
+            {1/2}
             sage: s.simplest_rational()
             1/2
-            sage: s=RealSet(x == pi);  s
-            1
+            sage: s=RealSet(x == pi);  s                                            # needs sage.symbolic
+            {pi}
             sage: s.simplest_rational()
             165707065/52746197
-            sage: s=RealSet(1.5 <= x)
-            2
+            sage: s=RealSet(1.5 <= x);  s                                           # needs sage.symbolic
+            [1.50000000000000, +oo)
             sage: s.simplest_rational()
             2
             sage: s=RealSet.real_line();  s
             (-oo, +oo)
             sage: s.simplest_rational()
             0
-            sage: s=RealSet.point(1/2)+RealSet.point(-1/2);  s
+            sage: s=RealSet.point(1/2) + RealSet.point(-1/2);  s
             {-1/2} ∪ {1/2}
             sage: s.simplest_rational()
             1/2
+            sage: s=RealSet();  s
+            {}
+            sage: s.simplest_rational()
+            Traceback (most recent call last):
+            ...
+            ValueError: Empty set has no simplest rational.
         """
 
         if self.is_empty():
