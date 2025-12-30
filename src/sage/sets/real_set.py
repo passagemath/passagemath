@@ -2642,19 +2642,11 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
             (1, 2)
             sage: s.simplest_rational()
             3/2
-            sage: s=RealSet((0, 1));  s
-            (0, 1)
-            sage: s.simplest_rational()
-            0
             sage: s=RealSet.point(1/2);  s
             {1/2}
             sage: s.simplest_rational()
             1/2
-            sage: s=RealSet(x == pi);  s                                            # needs sage.symbolic
-            {pi}
-            sage: s.simplest_rational()
-            165707065/52746197
-            sage: s=RealSet(1.5 <= x);  s                                           # needs sage.symbolic
+            sage: s=RealSet(1.5 <= x);  s   # needs sage.symbolic
             [1.50000000000000, +oo)
             sage: s.simplest_rational()
             2
@@ -2666,12 +2658,22 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
             {-1/2} ∪ {1/2}
             sage: s.simplest_rational()
             1/2
+            sage: s=RealSet(x == pi);  s    # needs sage.symbolic
+            {pi}
+            sage: s.simplest_rational()
+            165707065/52746197
+            sage: s=RealSet((0, 1));  s
+            (0, 1)
+            sage: s.simplest_rational()
+            Traceback (most recent call last):
+            ...
+            NotImplementedError:
             sage: s=RealSet();  s
             {}
             sage: s.simplest_rational()
             Traceback (most recent call last):
             ...
-            sage.categories.sets_cat.EmptySetError
+            EmptySetError:
         """
 
         if self.is_empty():
@@ -2697,6 +2699,9 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
             lo_open = not interval.lower_closed()
             hi_open = not interval.upper_closed()
             simplest_rat = rs_field.simplest_rational(low_open=lo_open, high_open=hi_open)
+
+            if not interval.contains(simplest_rat):
+                raise NotImplementedError
 
             candidates.append(simplest_rat)
 
