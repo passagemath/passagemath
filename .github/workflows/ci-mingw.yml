@@ -132,6 +132,7 @@ jobs:
       logs_artifact_suffix: "-standard-sitepackages"
       extra_configure_args: >-
         --enable-system-site-packages
+        --without-system-typing_extensions
       extra_sage_packages: >-
         bliss
         bzip2
