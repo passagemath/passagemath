@@ -268,7 +268,7 @@ sdh_build_wheel() {
         sdh_die "Error building a wheel for $PKG_NAME"
     else
         case $build_isolation_option in
-            *--no-isolation*)
+            *--no-isolation*--skip-dependency-check*)
                 sdh_die "Error building a wheel for $PKG_NAME"
                 ;;
             *)
