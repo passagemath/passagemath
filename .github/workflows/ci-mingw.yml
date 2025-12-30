@@ -92,6 +92,7 @@ jobs:
         gsl
         highs
         iml
+        info
         libbraiding
         libhomfly
         libjpeg
@@ -184,6 +185,7 @@ jobs:
         gsl
         highs
         iml
+        info
         libbraiding
         libhomfly
         libjpeg
