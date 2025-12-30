@@ -79,6 +79,7 @@ jobs:
         freetype
         glpk
         gsl
+        info
         libhomfly
         libjpeg
         libpng
@@ -155,6 +156,7 @@ jobs:
         freetype
         glpk
         gsl
+        info
         libhomfly
         libjpeg
         libpng
