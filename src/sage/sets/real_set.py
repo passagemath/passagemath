@@ -2671,11 +2671,11 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
             sage: s.simplest_rational()
             Traceback (most recent call last):
             ...
-            ValueError: Empty set has no simplest rational.
+            sage.categories.sets_cat.EmptySetError
         """
 
         if self.is_empty():
-            raise ValueError("Empty set has no simplest rational.")
+            raise EmptySetError
 
         from sage.rings.real_mpfi import RealIntervalField
         from sage.rings.rational_field import QQ
