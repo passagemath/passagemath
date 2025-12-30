@@ -38,6 +38,7 @@ jobs:
         sagemath_planarity
         sagemath_plot
         sagemath_rankwidth
+        sagemath_singular
         sagemath_tdlib
       targets_optional: >-
         sagemath_bliss-check
@@ -57,6 +58,7 @@ jobs:
         sagemath_planarity-check
         sagemath_plot-check
         sagemath_rankwidth-check
+        sagemath_singular-check
         sagemath_tdlib-check
 
   mingw-standard:
@@ -105,6 +107,7 @@ jobs:
         sagemath_planarity
         sagemath_plot
         sagemath_rankwidth
+        sagemath_singular
         sagemath_tdlib
       targets_optional: >-
         sagemath_bliss-check
@@ -124,6 +127,7 @@ jobs:
         sagemath_planarity-check
         sagemath_plot-check
         sagemath_rankwidth-check
+        sagemath_singular-check
         sagemath_tdlib-check
 
   mingw-standard-sitepackages:
@@ -195,6 +199,7 @@ jobs:
         sagemath_planarity
         sagemath_plot
         sagemath_rankwidth
+        sagemath_singular
         sagemath_tdlib
       targets_optional: >-
         sagemath_bliss-check
@@ -214,4 +219,5 @@ jobs:
         sagemath_planarity-check
         sagemath_plot-check
         sagemath_rankwidth-check
+        sagemath_singular-check
         sagemath_tdlib-check
