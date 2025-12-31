@@ -282,6 +282,14 @@ WSL post-installation notes
 When the installation is complete, you may be interested in :ref:`sec-launching-wsl-post-installation`.
 
 
+.. _section_mingw:
+
+MSYS2 prerequisites (Windows)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. literalinclude:: mingw.txt
+
+
 .. _section_conda_compilers:
 
 
