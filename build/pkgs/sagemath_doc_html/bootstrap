@@ -21,7 +21,8 @@ fi
 
 shopt -s extglob
 
-echo arch conda debian fedora gentoo homebrew opensuse void | xargs -P 16 -n 1 ./bootstrap_system_packages
+export MINGW_PACKAGE_PREFIX='@@MINGW_PACKAGE_PREFIX@'
+echo arch conda debian fedora gentoo homebrew opensuse void mingw | xargs -P 16 -n 1 ./bootstrap_system_packages
 
 cd "$SAGE_ROOT"
 

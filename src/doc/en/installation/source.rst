@@ -14,7 +14,7 @@ Moreover, it offers you full development capabilities: you can change
 absolutely any part of Sage or the packages on which it depends, and recompile
 the modified parts.
 
-See the file `README.md <https://github.com/sagemath/sage/#readme>`_
+See the file `README.md <https://github.com/passagemath/passagemath/#readme>`_
 in ``SAGE_ROOT`` for information on supported platforms and
 step-by-step instructions.
 
@@ -282,6 +282,41 @@ WSL post-installation notes
 When the installation is complete, you may be interested in :ref:`sec-launching-wsl-post-installation`.
 
 
+.. _section_mingw:
+
+MSYS2 prerequisites (Windows)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+passagemath provides partial support for building from source in Windows using
+the `MSYS2 <https://www.msys2.org/>`__ software distribution.
+
+Install the following packages:
+
+.. literalinclude:: mingw.txt
+
+If you wish to do Sage development, we recommend that you additionally
+install the following:
+
+.. literalinclude:: mingw-develop.txt
+
+The following system packages provide additional functionality
+and cannot be installed by the Sage distribution.
+
+.. literalinclude:: mingw-recommended.txt
+
+In addition to these, if you don't want Sage to build optional packages that might
+be available from your OS, cf. the growing list of such packages on :issue:`27330`,
+install:
+
+.. literalinclude:: mingw-optional.txt
+
+In the MSYS2 shell, after bootstrapping, use the experimental option
+``./configure --enable-system-site-packages``, then follow the instructions printed
+by the ``configure`` script regarding the installation of missing system packages.
+
+Finally, use ``MAKE="make -j8" make -k V=0 sagemath_{bliss,categories,cddlib,cliquer,cmr,combinat,flint,glpk,graphs,homfly,modules,nauty,ntl,objects,planarity,plot,rankwidth,tdlib}``. (Use this list of modularized distributions ready for MSYS2, or any subset, instead of ``make build``.)
+
+
 .. _section_conda_compilers:
 
 
@@ -363,7 +398,7 @@ Traditional Installation from Source as Sage-the-Distribution
   The following steps use the classical ``make configure && ./configure && make`` build
   process.
 
-#. Follow the procedure in the file `README.md <https://github.com/sagemath/sage/#readme>`_
+#. Follow the procedure in the file `README.md <https://github.com/passagemath/passagemath/#readme>`_
    in ``SAGE_ROOT``.
 
 #. If you wish to prepare for having to build Sage in an environment
@@ -797,11 +832,6 @@ Sage-specific environment variables controlling the build process
   where ``SIZE`` is specified in gigabytes, megabytes, or kilobytes by
   appending a "G", "M", or "K".
 
-  Sage does not include the sources for ccache since it is an optional package.
-  Because of this, it is necessary to have an Internet connection while
-  building ccache for Sage, so that Sage can pull down the necessary
-  sources.
-
 .. envvar:: SAGE_DEBUG
 
   Controls debugging support. There are three different possible values:
@@ -1116,7 +1146,7 @@ a single copy of Sage in a multi-user computer network.
        $ sudo chmod 755 SAGE_LOCAL
 
 #. Build and install Sage, following the instructions in `README.md
-   <https://github.com/sagemath/sage/#readme>`_, using the
+   <https://github.com/passagemath/passagemath/#readme>`_, using the
    ``configure`` option ``--prefix=SAGE_LOCAL``.
 
    Do not use ``sudo`` for this step; building Sage must be done using
@@ -1209,7 +1239,7 @@ To try out a new version of Sage, let's fetch it first from the main
 repository::
 
   [alice@localhost sage]$ git fetch upstream 10.3.beta8
-  From https://github.com/sagemath/sage
+  From https://github.com/passagemath/passagemath
    * tag                     10.3.beta8 -> FETCH_HEAD
 
 Now let's create a new worktree. We need a name for it; it should
@@ -1253,7 +1283,7 @@ existing working installation in the main worktree.
 
 We will refer again to the step-by-step instructions
 from the file
-`README.md <https://github.com/sagemath/sage/#readme>`_.
+`README.md <https://github.com/passagemath/passagemath/#readme>`_.
 Our worktree ``worktree-purple`` is the ``SAGE_ROOT``
 for this purpose.
 
@@ -1270,5 +1300,5 @@ Now let's build Sage, starting with the step::
 
   [alice@localhost worktree-purple]$ make configure
 
-Refer to the file `README.md <https://github.com/sagemath/sage/#readme>`_
+Refer to the file `README.md <https://github.com/passagemath/passagemath/#readme>`_
 for the following steps.
