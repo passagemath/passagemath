@@ -26,6 +26,8 @@ if [ x"$SAGE_SPKG_INSTALL_DOCS" != xyes ] ; then
     ECL_CONFIGURE="$ECL_CONFIGURE --enable-manual=no"
 fi
 
+find . -name configure -o -name depcomp -o -name install-sh -o -name install.sh -o -name compile -o -name config.guess -o -name config.sub -o -name missing -o -name ltmain.sh | xargs chmod +x
+
 sdh_configure $SAGE_CONFIGURE_GMP \
               --enable-unicode=yes --with-defsystem $ECL_CONFIGURE
 
