@@ -109,6 +109,7 @@ function print_shell_command()
     fi
     # shell-quote arguments if necessary
     quoted=$(for a in "$@"; do printf "%q " $a; done)
+    quoted=${quoted//@@MINGW_PACKAGE_PREFIX@/\$\{MINGW_PACKAGE_PREFIX\}}
     if [ -z "$WRAP" -o $# -lt 6 ]; then
         echo "${PROMPT}${quoted}"
     else
