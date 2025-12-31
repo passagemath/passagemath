@@ -288,7 +288,7 @@ MSYS2 prerequisites (Windows)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 passagemath provides partial support for building from source in Windows using
-the [MSYS2](https://www.msys2.org/) software distribution.
+the `MSYS2 <https://www.msys2.org/>`__ software distribution.
 
 Install the following packages:
 
@@ -312,9 +312,9 @@ install:
 
 In the MSYS2 shell, after bootstrapping, use the experimental option
 ``./configure --enable-system-site-packages``, then follow the instructions printed
-by the `configure` script regarding the installation of missing system packages.
+by the ``configure`` script regarding the installation of missing system packages.
 
-Finally, use ``MAKE="make -j8" make -k V=0 sagemath_{bliss,categories,cddlib,cliquer,cmr,combinat,flint,glpk,graphs,homfly,modules,nauty,ntl,objects,planarity,plot,rankwidth,tdlib}``. (Use this list of modularized distributions ready for MSYS2, or any subset, instead of `make build`.)
+Finally, use ``MAKE="make -j8" make -k V=0 sagemath_{bliss,categories,cddlib,cliquer,cmr,combinat,flint,glpk,graphs,homfly,modules,nauty,ntl,objects,planarity,plot,rankwidth,tdlib}``. (Use this list of modularized distributions ready for MSYS2, or any subset, instead of ``make build``.)
 
 
 .. _section_conda_compilers:
