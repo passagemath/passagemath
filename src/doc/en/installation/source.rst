@@ -287,6 +287,9 @@ When the installation is complete, you may be interested in :ref:`sec-launching-
 MSYS2 prerequisites (Windows)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+passagemath provides partial support for building from source in Windows using
+the [MSYS2](https://www.msys2.org/) software distribution.
+
 Install the following packages:
 
 .. literalinclude:: mingw.txt
@@ -306,6 +309,12 @@ be available from your OS, cf. the growing list of such packages on :issue:`2733
 install:
 
 .. literalinclude:: mingw-optional.txt
+
+In the MSYS2 shell, after bootstrapping, use the experimental option
+``./configure --enable-system-site-packages``, then follow the instructions printed
+by the `configure` script regarding the installation of missing system packages.
+
+Finally, use ``MAKE="make -j8" make -k V=0 sagemath_{bliss,categories,cddlib,cliquer,cmr,combinat,flint,glpk,graphs,homfly,modules,nauty,ntl,objects,planarity,plot,rankwidth,tdlib}``. (Use this list of modularized distributions ready for MSYS2, or any subset, instead of `make build`.)
 
 
 .. _section_conda_compilers:
@@ -822,11 +831,6 @@ Sage-specific environment variables controlling the build process
   This can be changed by running ``sage -sh -c "ccache --max-size=SIZE"``,
   where ``SIZE`` is specified in gigabytes, megabytes, or kilobytes by
   appending a "G", "M", or "K".
-
-  Sage does not include the sources for ccache since it is an optional package.
-  Because of this, it is necessary to have an Internet connection while
-  building ccache for Sage, so that Sage can pull down the necessary
-  sources.
 
 .. envvar:: SAGE_DEBUG
 
