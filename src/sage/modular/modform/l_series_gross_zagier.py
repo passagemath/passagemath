@@ -10,7 +10,7 @@ from sage.structure.sage_object import SageObject
 
 class GrossZagierLseries(SageObject):
 
-    def __init__(self, E, A, prec=53, max_imaginary_part=0):
+    def __init__(self, E, A, prec=53, max_imaginary_part=0) -> None:
         r"""
         Class for the Gross-Zagier `L`-series.
 
@@ -65,7 +65,7 @@ class GrossZagierLseries(SageObject):
                              [0, 0, 1, 1],
                              weight=2, eps=epsilon)
         L = LFunction(Lpari, prec=prec, max_im=max_imaginary_part)
-        nterms = Integer(L.n_coeffs())
+        nterms = Integer(L.cost())
         if nterms > 1e6:
             # just takes way to long
             raise ValueError(f"Too many terms: {nterms}")
