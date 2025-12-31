@@ -44,7 +44,7 @@ SAGE_ROOT_LOGS = logs
 # such as: make V=0 build "V=1 normaliz pynormaliz"
 %::
 	@if [ -x relocate-once.py ]; then ./relocate-once.py; fi
-	$(MAKE) build/make/Makefile --stop
+	@$(MAKE) --no-print-directory build/make/Makefile --stop
 	+build/bin/sage-logger \
 		"cd build/make && ./install $@" logs/install.log
 
