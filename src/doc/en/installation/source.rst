@@ -14,7 +14,7 @@ Moreover, it offers you full development capabilities: you can change
 absolutely any part of Sage or the packages on which it depends, and recompile
 the modified parts.
 
-See the file `README.md <https://github.com/sagemath/sage/#readme>`_
+See the file `README.md <https://github.com/passagemath/passagemath/#readme>`_
 in ``SAGE_ROOT`` for information on supported platforms and
 step-by-step instructions.
 
@@ -398,7 +398,7 @@ Traditional Installation from Source as Sage-the-Distribution
   The following steps use the classical ``make configure && ./configure && make`` build
   process.
 
-#. Follow the procedure in the file `README.md <https://github.com/sagemath/sage/#readme>`_
+#. Follow the procedure in the file `README.md <https://github.com/passagemath/passagemath/#readme>`_
    in ``SAGE_ROOT``.
 
 #. If you wish to prepare for having to build Sage in an environment
@@ -1146,7 +1146,7 @@ a single copy of Sage in a multi-user computer network.
        $ sudo chmod 755 SAGE_LOCAL
 
 #. Build and install Sage, following the instructions in `README.md
-   <https://github.com/sagemath/sage/#readme>`_, using the
+   <https://github.com/passagemath/passagemath/#readme>`_, using the
    ``configure`` option ``--prefix=SAGE_LOCAL``.
 
    Do not use ``sudo`` for this step; building Sage must be done using
@@ -1239,7 +1239,7 @@ To try out a new version of Sage, let's fetch it first from the main
 repository::
 
   [alice@localhost sage]$ git fetch upstream 10.3.beta8
-  From https://github.com/sagemath/sage
+  From https://github.com/passagemath/passagemath
    * tag                     10.3.beta8 -> FETCH_HEAD
 
 Now let's create a new worktree. We need a name for it; it should
@@ -1283,7 +1283,7 @@ existing working installation in the main worktree.
 
 We will refer again to the step-by-step instructions
 from the file
-`README.md <https://github.com/sagemath/sage/#readme>`_.
+`README.md <https://github.com/passagemath/passagemath/#readme>`_.
 Our worktree ``worktree-purple`` is the ``SAGE_ROOT``
 for this purpose.
 
@@ -1300,5 +1300,5 @@ Now let's build Sage, starting with the step::
 
   [alice@localhost worktree-purple]$ make configure
 
-Refer to the file `README.md <https://github.com/sagemath/sage/#readme>`_
+Refer to the file `README.md <https://github.com/passagemath/passagemath/#readme>`_
 for the following steps.
