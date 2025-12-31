@@ -8055,7 +8055,7 @@ class FiniteStateMachine(SageObject):
             Automaton with 1 state
         """
         def composition_transition(states, input):
-            (state1, state2) = states
+            state1, state2 = states
             return [((new_state1, new_state2), output_second)
                     for _, new_state1, output_first in
                     first.process([input],
@@ -8087,7 +8087,7 @@ class FiniteStateMachine(SageObject):
                                        initial_states=new_initial_states)
 
         for state in F.iter_states():
-            (state1, state2) = state.label()
+            state1, state2 = state.label()
             if state1.is_final:
                 final_output_second = second.process(
                     state1.final_word_out,
@@ -10089,7 +10089,7 @@ class FiniteStateMachine(SageObject):
 
         K = len(self.input_alphabet)
         R = PolynomialRing(QQ, ("x", "y", "z"))
-        (x, y, z) = R.gens()
+        x, y, z = R.gens()
         try:
             M = get_matrix(self, x, y)
         except (TypeError, ValueError):
