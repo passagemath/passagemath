@@ -287,7 +287,25 @@ When the installation is complete, you may be interested in :ref:`sec-launching-
 MSYS2 prerequisites (Windows)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Install the following packages:
+
 .. literalinclude:: mingw.txt
+
+If you wish to do Sage development, we recommend that you additionally
+install the following:
+
+.. literalinclude:: mingw-develop.txt
+
+The following system packages provide additional functionality
+and cannot be installed by the Sage distribution.
+
+.. literalinclude:: mingw-recommended.txt
+
+In addition to these, if you don't want Sage to build optional packages that might
+be available from your OS, cf. the growing list of such packages on :issue:`27330`,
+install:
+
+.. literalinclude:: mingw-optional.txt
 
 
 .. _section_conda_compilers:
