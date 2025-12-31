@@ -24,6 +24,10 @@ cp "$SAGE_ROOT"/config/config.* .
 # https://github.com/sagemath/sage/pull/35619#issuecomment-1567351409
 sed -i.bak 's/^maxima_singlepage.html //' doc/info/Makefile.in
 
+# On MinGW, C::BUILD-FASL is missing
+# https://github.com/passagemath/passagemath/pull/1919#issuecomment-3702653508
+sed -i.bak $'/in-package/a \\\n\\\n#+ecl (require :cmp)\\\n' src/maxima.system
+
 # Note that maxima configure checks for git and, if it finds it, uses
 # versions information from the repo. See #15529. We disable this with
 # git_found=false
