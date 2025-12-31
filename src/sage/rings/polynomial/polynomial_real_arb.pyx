@@ -180,7 +180,7 @@ cdef class Polynomial_real_arb(Polynomial):
                     arb_poly_set_coeff_arb(self._poly, i, ball.value)
             elif isinstance(x, dict):
                 dct = <dict> x
-                if len(dct) == 0:
+                if not dct:
                     arb_poly_zero(self._poly)
                 else:
                     length = max(int(i) for i in dct) + 1
