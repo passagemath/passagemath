@@ -261,7 +261,7 @@ class LatticePosets(Category):
                 [Category of finite lattice posets,
                  Category of trim lattice posets]
             """
-            return [LatticePosets.Extremal()]
+            return [LatticePosets().Extremal()]
 
         class ParentMethods:
             def is_trim(self) -> bool:
@@ -274,38 +274,6 @@ class LatticePosets(Category):
                     True
                 """
                 return True
-
-        class Distributive(CategoryWithAxiom):
-            """
-            The category of distributive lattices.
-
-            EXAMPLES::
-
-                sage: cat = FiniteLatticePosets().Distributive(); cat
-                Category of finite trim chain graded distributive lattice posets
-
-                sage: cat.super_categories()
-                [Category of finite lattice posets,
-                 Category of trim distributive lattice posets,
-                 Category of chain graded lattice posets]
-            """
-            #_base_category_class_and_axiom = (LatticePosets.Trim(),
-            #                                 "ChainGraded")
-
-            class ParentMethods:
-                def is_distributive(self) -> bool:
-                    """
-                    Return whether ``self`` is a distributive lattice.
-
-                    EXAMPLES::
-
-                        sage: P = posets.Crown(4).order_ideals_lattice()
-                        sage: P.is_distributive()
-                        True
-                    """
-                    return True
-
-        ChainGraded = Distributive
 
     class Semidistributive(CategoryWithAxiom):
         """
@@ -357,7 +325,7 @@ class LatticePosets(Category):
                 [Category of finite lattice posets,
                  Category of congruence uniform lattice posets]
             """
-            return [LatticePosets.Semidistributive()]
+            return [LatticePosets().Semidistributive()]
 
         class ParentMethods:
             def is_congruence_uniform(self) -> bool:
@@ -397,7 +365,7 @@ class LatticePosets(Category):
                 [Category of finite lattice posets,
                  Category of stone lattice posets]
             """
-            return [LatticePosets.Trim(), LatticePosets.ChainGraded()]
+            return [LatticePosets().Trim(), LatticePosets().ChainGraded()]
 
         class ParentMethods:
             def is_stone(self) -> bool:
@@ -435,3 +403,40 @@ class LatticePosets(Category):
                     True
                 """
                 return True
+
+
+# the following was moved out of the main class
+
+class Distributive(CategoryWithAxiom):
+    """
+    The category of distributive lattices.
+
+    EXAMPLES::
+
+        sage: cat = FiniteLatticePosets().Distributive(); cat
+        Category of finite trim chain graded distributive lattice posets
+
+        sage: cat.super_categories()
+        [Category of finite lattice posets,
+         Category of trim distributive lattice posets,
+         Category of chain graded lattice posets]
+    """
+    base_category_class_and_axiom = (LatticePosets().Trim(),
+                                     "ChainGraded")
+
+    class ParentMethods:
+        def is_distributive(self) -> bool:
+            """
+            Return whether ``self`` is a distributive lattice.
+
+            EXAMPLES::
+
+                sage: P = posets.Crown(4).order_ideals_lattice()
+                sage: P.is_distributive()
+                True
+            """
+            return True
+
+
+LatticePosets.Trim.Distributive = Distributive
+LatticePosets.Trim.ChainGraded = Distributive

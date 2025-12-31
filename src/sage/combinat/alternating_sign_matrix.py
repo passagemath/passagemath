@@ -1049,7 +1049,7 @@ class AlternatingSignMatrices(UniqueRepresentation, Parent):
         sage: L
         Finite lattice containing 7 elements
         sage: L.category()
-        Category of facade finite enumerated distributive lattice posets
+        Category of facade finite enumerated trim chain graded distributive lattice posets
     """
 
     def __init__(self, n) -> None:
