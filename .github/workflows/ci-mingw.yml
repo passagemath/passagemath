@@ -38,6 +38,7 @@ jobs:
         sagemath_planarity
         sagemath_plot
         sagemath_rankwidth
+        sagemath_sirocco
         sagemath_tdlib
       targets_optional: >-
         sagemath_bliss-check
@@ -105,6 +106,7 @@ jobs:
         sagemath_planarity
         sagemath_plot
         sagemath_rankwidth
+        sagemath_sirocco
         sagemath_tdlib
       targets_optional: >-
         sagemath_bliss-check
@@ -196,6 +198,7 @@ jobs:
         sagemath_planarity
         sagemath_plot
         sagemath_rankwidth
+        sagemath_sirocco
         sagemath_tdlib
       targets_optional: >-
         sagemath_bliss-check
