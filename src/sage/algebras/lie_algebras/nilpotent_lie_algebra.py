@@ -134,7 +134,7 @@ class NilpotentLieAlgebra_dense(LieAlgebraWithStructureCoefficients):
         return super().__classcall__(cls, R, s_coeff, names,
                                      index_set, category=category, **kwds)
 
-    def __init__(self, R, s_coeff, names, index_set, step=None, **kwds):
+    def __init__(self, R, s_coeff, names, index_set, step=None, **kwds) -> None:
         r"""
         Initialize ``self``.
 
@@ -150,7 +150,7 @@ class NilpotentLieAlgebra_dense(LieAlgebraWithStructureCoefficients):
                                                      names, index_set,
                                                      **kwds)
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         """
         Return a string representation of ``self``.
 
@@ -350,7 +350,7 @@ class FreeNilpotentLieAlgebra(NilpotentLieAlgebra_dense):
             cls, R, r, s, names=tuple(names), naming=naming,
             category=category, **kwds)
 
-    def __init__(self, R, r, s, names, naming, category, **kwds):
+    def __init__(self, R, r, s, names, naming, category, **kwds) -> None:
         r"""
         Initialize ``self``.
 
@@ -395,10 +395,12 @@ class FreeNilpotentLieAlgebra(NilpotentLieAlgebra_dense):
                     let = repr
                 elif r <= 16:
                     hexdata = [repr(i) for i in range(10)] + ['a','b','c','d','e','f']
+
                     def let(i):
                         return hexdata[i]
                 else:
                     rlen = len(repr(r))
+
                     def let(i):
                         ret = repr(i)
                         return '0'*(rlen-len(ret)) + ret
@@ -438,7 +440,6 @@ class FreeNilpotentLieAlgebra(NilpotentLieAlgebra_dense):
                                            index_set, s,
                                            category=category, **kwds)
 
-
     class options(GlobalOptions):
         r"""
         Set the global options for elements of a free nilpotent Lie algebra.
@@ -468,7 +469,7 @@ class FreeNilpotentLieAlgebra(NilpotentLieAlgebra_dense):
                                  brackets='print basis elements as brackets'),
                      case_sensitive=False)
 
-    def _repr_generator(self, w, use_latex=False):
+    def _repr_generator(self, w, use_latex=False) -> str:
         r"""
         Return the string representation of the basis element
         indexed by the word ``w`` in ``self``.
@@ -526,7 +527,7 @@ class FreeNilpotentLieAlgebra(NilpotentLieAlgebra_dense):
             return latex(standard_bracket(w))
         return repr(standard_bracket(w))
 
-    def _latex_term(self, w):
+    def _latex_term(self, w) -> str:
         r"""
         Return the latex representation of the basis element
         indexed by the word ``w`` in ``self``.
@@ -557,7 +558,7 @@ class FreeNilpotentLieAlgebra(NilpotentLieAlgebra_dense):
         """
         return self._repr_generator(w, use_latex=True)
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return a string representation of ``self``.
 
@@ -570,7 +571,7 @@ class FreeNilpotentLieAlgebra(NilpotentLieAlgebra_dense):
         return "Free Nilpotent Lie algebra of rank {} and step {} over {}".format(
             self._rank, self._step, self.base_ring())
 
-    def degree_on_basis(self, w):
+    def degree_on_basis(self, w) -> int:
         r"""
         Return the degree of the basis element index by ``w``.
 
