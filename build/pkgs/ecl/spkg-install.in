@@ -30,6 +30,7 @@ find . -name configure -o -name depcomp -o -name install-sh -o -name install.sh 
 
 # Override the default INSTALL_TARGET=flat_install on MinGW.
 sed -i.bak '/INSTALL_TARGET=/s/flatinstall/install/' src/configure
+sed -i.bak '/#-mingw32/d' src/compile.lsp.in
 
 sdh_configure $SAGE_CONFIGURE_GMP \
               --enable-unicode=yes --with-defsystem $ECL_CONFIGURE
