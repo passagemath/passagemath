@@ -407,19 +407,19 @@ class LatticePosets(Category):
 
 # the following was moved out of the main class
 
-class Distributive(CategoryWithAxiom):
+class DistributiveLattices(CategoryWithAxiom):
     """
     The category of distributive lattices.
 
     EXAMPLES::
 
         sage: cat = FiniteLatticePosets().Distributive(); cat
-        Category of finite trim chain graded distributive lattice posets
+        Category of finite trim chain graded lattice posets
 
         sage: cat.super_categories()
         [Category of finite lattice posets,
-         Category of trim distributive lattice posets,
-         Category of chain graded lattice posets]
+         Category of chain graded lattice posets,
+         Category of trim lattice posets]
     """
     base_category_class_and_axiom = (LatticePosets().Trim(),
                                      "ChainGraded")
@@ -438,5 +438,4 @@ class Distributive(CategoryWithAxiom):
             return True
 
 
-LatticePosets.Trim.Distributive = Distributive
-LatticePosets.Trim.ChainGraded = Distributive
+LatticePosets.Trim.Distributive = DistributiveLattices
