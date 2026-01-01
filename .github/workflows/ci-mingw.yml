@@ -85,6 +85,7 @@ jobs:
         planarity
         qhull
         rankwidth
+        sirocco
         symmetrica
         tdlib
         zlib
@@ -156,6 +157,7 @@ jobs:
         planarity
         qhull
         rankwidth
+        sirocco
         symmetrica
         tdlib
         zlib
