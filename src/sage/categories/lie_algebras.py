@@ -674,7 +674,7 @@ class LieAlgebras(Category_over_base_ring):
                 Traceback (most recent call last):
                 ...
                 ValueError: the Lie algebra is not known to be nilpotent,
-                so you must specify the precision
+                 so you must specify the precision
                 sage: L.bch(X, Y, 4)                                                    # needs sage.combinat sage.modules
                 X + 1/12*[X, [X, Y]] + 1/24*[X, [[X, Y], Y]]
                 + 1/2*[X, Y] + 1/12*[[X, Y], Y] + Y
@@ -1004,7 +1004,7 @@ class LieAlgebras(Category_over_base_ring):
                 sage: h = X.exp(); h
                 exp(X)
                 sage: g.parent()
-                Lie group G of Free Nilpotent Lie algebra on 3 generators (X, Y, Z)
+                Lie group G of Free Nilpotent Lie algebra of rank 2 and step 2
                  over Rational Field
                 sage: g.parent() is h.parent()
                 True
@@ -1016,7 +1016,7 @@ class LieAlgebras(Category_over_base_ring):
                 sage: k = Z.exp(lie_group=H); k
                 exp(Z)
                 sage: k.parent()
-                Lie group H of Free Nilpotent Lie algebra on 3 generators (X, Y, Z)
+                Lie group H of Free Nilpotent Lie algebra of rank 2 and step 2
                  over Rational Field
                 sage: g.parent() == k.parent()
                 False

@@ -351,7 +351,7 @@ class LieAlgebra(Parent, UniqueRepresentation):  # IndexedGenerators):
     using the ``step`` keyword::
 
         sage: L = LieAlgebra(ZZ, 2, step=3); L
-        Free Nilpotent Lie algebra on 5 generators (X_1, X_2, X_12, X_112, X_122) over Integer Ring
+        Free Nilpotent Lie algebra of rank 2 and step 3 over Integer Ring
         sage: L.step()
         3
 
