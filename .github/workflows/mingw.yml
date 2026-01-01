@@ -99,6 +99,7 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'planarity')         && format('mingw-w64-{0}-planarity',                matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'qhull')             && format('mingw-w64-{0}-qhull',                    matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'rankwidth')         && format('mingw-w64-{0}-rankwidth',                matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'sirocco')           && format('mingw-w64-{0}-sirocco',                  matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'symmetrica')        && format('mingw-w64-{0}-symmetrica',               matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'tdlib')             && format('mingw-w64-{0}-treedec',                  matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'zlib')              && format('mingw-w64-{0}-zlib',                     matrix.env) || '' }}
