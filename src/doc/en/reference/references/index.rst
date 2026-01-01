@@ -143,6 +143,10 @@ REFERENCES:
             quasiperiodicities in strings*,
             Theoret. Comput. Sci. 119 (1993) 247--265.
 
+.. [AE2006] Federico Ardila, Laura Escobar, *The harmonic polytope*,
+            Selecta Math. Vol. 27 (2021)
+            :doi:`10.1007/s00029-021-00687-6`, :arxiv:`2006.03078`
+
 .. [AG1988] George E. Andrews, F. G. Garvan,
             *Dyson's crank of a partition*.
             Bull. Amer. Math. Soc. (N.S.) Volume 18, Number 2 (1988),
@@ -295,6 +299,16 @@ REFERENCES:
 
 .. [Ap1997] \T. Apostol, Modular functions and Dirichlet series in
             number theory, Springer, 1997 (2nd ed), section 3.7--3.9.
+
+.. [AP2010] Federico Ardila and Alexander Postnikov.
+            *Combinatorics and geometry of power ideals*.
+            Trans. Amer. Math. Soc. **362** no. 8 (2010), pp. 4357-4384.
+            :arxiv:`0809.2143`.
+
+.. [AP2015] Federico Ardila and Alexander Postnikov. *Correction to
+            "Combinatorics and geometry of power ideals": Two counterexamples
+            for power ideals of hyperplane arrangements*. Trans. Amer. Math.
+            Soc. **367** (2015). :doi:`10.1090/S0002-9947-2015-06071-1`.
 
 .. [AP2024] William Atherton, Dmitrii V. Pasechnik, *Decline and Fall of the
             ICALP 2008 Modular Decomposition algorithm*, 2024.
@@ -559,6 +573,11 @@ REFERENCES:
 .. [BCDGNPY2019] \Z. Bao, A. Chakraborti, N. Datta, J. Guo, M. Nandi, T. Peyrin, K. Yasuda.
                  "PHOTON-BeetleAuthenticated Encryption and Hash Family"
                  https://csrc.nist.gov/CSRC/media/Projects/Lightweight-Cryptography/documents/round-1/spec-doc/PHOTON-Beetle-spec.pdf
+
+.. [BF1976] George Phillip Barker and James Foran.
+            *Self-Dual Cones in Euclidean Spaces*.
+            Linear Algebra and its Applications, 13(1-2):147-155, 1976.
+            :doi:`10.1016/0024-3795(76)90053-7`.
 
 .. [BH1965] \L. D. Baumert, M. Hall Jr.
             *A new construction for Hadamard matrices*.
@@ -1010,6 +1029,11 @@ REFERENCES:
             Fast Computation of Matrix-Type Padé Approximants*. SIAM J. Matrix
             Anal. Appl. 15 (1994) 804-823.
             :doi:`10.1137/S0895479892230031`
+
+.. [BecLab2000] Bernhard Beckermann, George Labahn. *Fraction-Free Computation
+                of Matrix Rational Interpolants and Matrix GCDs*. SIAM J.
+                Matrix Anal. Appl. 22 (2000) 114-144.
+                :doi:`10.1137/S0895479897326912`
 
 .. [BL1995] \W. Bosma, H.W. Lenstra: *Complete Systems of Two Addition Laws for
             Elliptic Curves*. Journal of Number Theory, volume 53, issue 2,
@@ -2415,6 +2439,13 @@ REFERENCES:
 
 .. [dotspec] http://www.graphviz.org/doc/info/lang.html
 
+.. [DP2011] \B. Deconinck and M. S. Patterson, *Computing with plane algebraic
+            curves and Riemann surfaces: The algorithms of the Maple package
+            "Algcurves"*, In: A. Bobenko and C. Klein (eds) Computational 
+            approach to Riemann surfaces. Lecture Notes in Mathematics 2013. 
+            Springer, Berlin, Heidelberg. (2011).
+            :doi:`10.1007/978-3-642-17413-1_2`
+
 .. [DPS2017] Kevin Dilks, Oliver Pechenik, and Jessica Striker,
              *Resonance in orbits of plane partitions and increasing
              tableaux*, JCTA 148 (2017), 244-274,
@@ -3554,6 +3585,10 @@ REFERENCES:
 .. [HR2005]  Tom Halverson and Arun Ram. *Partition algebras*.
              Euro. J. Combin. **26** (2005) 869--921.
 
+.. [HR2011]  Olga Holtz and Amos Ron. *Zonotopal algebra*.
+             Adv. Math. **227**, no. 2, (2011) 847--894.
+             doi:`10.1016/j.aim.2011.02.012`, :arxiv:`0708.2632`.
+
 .. [HR2016]  Clemens Heuberger and Roswitha Rissner, *Computing
              `J`-Ideals of a Matrix Over a Principal Ideal Domain*,
              :arxiv:`1611.10308`, 2016.
@@ -3808,9 +3843,15 @@ REFERENCES:
              http://code.google.com/p/graph-theory-algorithms-book/
 
 .. [JNSV2016] Claude-Pierre Jeannerod, Vincent Neiger, Eric Schost, and Gilles
-             Villard. Fast Computation of Minimal Interpolation Bases in Popov
-             Form for Arbitrary Shifts. In Proceedings ISSAC 2016 (pages
-             295-302). :doi:`10.1145/2930889.2930928`
+              Villard. *Fast Computation of Minimal Interpolation Bases in
+              Popov Form for Arbitrary Shifts*. In Proceedings ISSAC 2016
+              (pages 295-302).
+              :doi:`10.1145/2930889.2930928`
+
+.. [JNSV2017] Claude-Pierre Jeannerod, Vincent Neiger, Eric Schost, and Gilles
+              Villard. *Computing Minimal Interpolation Bases*. J. Symb.
+              Comput. 83, 2017 (pp 272--314).
+              :doi:`10.1016/j.jsc.2016.11.015`
 
 .. [Joh1990] \D.L. Johnson. *Presentations of Groups*. Cambridge
              University Press. (1990).
@@ -4376,6 +4417,9 @@ REFERENCES:
 .. [Labelle2008] \G. Labelle. *New combinatorial computational methods
                  arising from pseudo-singletons.* DMTCS Proceedings 1, 2008.
 
+.. [Lad2021] S. Ladkani. *Refined Coxeter polynomials*, Proceedings ICRA 2020,
+             EMS Publishing House. :arxiv:`2110.15329`
+
 .. [Lak2010] Dan Laksov. *Splitting algebras and Gysin homomorphisms*.
              Journal of Commutative Algebra, Volume 2, Number 3, Fall 2010
 
@@ -4401,6 +4445,11 @@ REFERENCES:
 .. [Lau2011] Alan G.B. Lauder, *Computations with classical and p-adic
              modular forms*, LMS J. of Comput. Math. 14 (2011),
              214-231.
+
+.. [Law2011] Shirley Law and Nathan Reading,
+             *The Hopf algebra of diagonal rectangulations*,
+             \J. Comb. Theory, Ser. A 119, No. 3, 788-824 (2012).
+             :doi:`10.1016/j.jcta.2011.09.006`
 
 .. [Laz1992] Daniel Lazard, *Solving Zero-dimensional Algebraic
              Systems*, in Journal of Symbolic Computation (1992)

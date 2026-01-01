@@ -1299,7 +1299,7 @@ class FSMState(SageObject):
         sage: A.determinisation()
         Traceback (most recent call last):
         ...
-        TypeError: unhashable type: 'list'
+        TypeError: ...unhashable type: 'list'...
         sage: A.state(0).color = ()
         sage: A.determinisation()
         Automaton with 1 state
@@ -4720,8 +4720,7 @@ class FiniteStateMachine(SageObject):
             accepting_show_empty = False
 
         result = "\\begin{tikzpicture}[%s]\n" % ", ".join(options)
-        j = 0
-        for vertex in self.iter_states():
+        for j, vertex in enumerate(self.iter_states()):
             if not hasattr(vertex, "coordinates"):
                 vertex.coordinates = (3*cos(2*pi*j/len(self.states())),
                                       3*sin(2*pi*j/len(self.states())))
@@ -4761,8 +4760,6 @@ class FiniteStateMachine(SageObject):
                     EndOfWordLaTeX,
                     self.format_transition_label(vertex.final_word_out),
                     angle, accepting_distance)
-
-            j += 1
 
         def key_function(s):
             return (s.from_state, s.to_state)
@@ -6557,7 +6554,7 @@ class FiniteStateMachine(SageObject):
             sage: Transducer(transition, input_alphabet=[0], initial_states=[0])
             Traceback (most recent call last):
             ...
-            TypeError: mutable vectors are unhashable
+            TypeError: ...mutable vectors are unhashable...
         """
         if self.input_alphabet is None:
             raise ValueError("No input alphabet is given. "
@@ -10954,7 +10951,7 @@ class Automaton(FiniteStateMachine):
             sage: A.determinisation()
             Traceback (most recent call last):
             ...
-            TypeError: unhashable type: 'list'
+            TypeError: ...unhashable type: 'list'...
             sage: A.state(0).color = ()
             sage: A.determinisation()
             Automaton with 1 state
