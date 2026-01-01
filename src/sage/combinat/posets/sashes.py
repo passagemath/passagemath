@@ -9,7 +9,7 @@ There is a lattice of sashes `\Sigma_n` for every integer `n \geq 1`.
 The underlying set of `\Sigma_n` is the set of words of length `n`
 in the letters ``□``, ``▨`` and ``■■`` of respective lengths `1,1` and `2`.
 
-The cardinalities of the lattices $\Sigma_n$ are therefore given by
+The cardinalities of the lattices `\Sigma_n` are therefore given by
 the Pell numbers (:oeis:`A000129`).
 
 The implementation describes sashes as tuples of strings.
@@ -17,8 +17,8 @@ The implementation describes sashes as tuples of strings.
 REFERENCES:
 
 - [Law2014]_
-
 """
+
 from itertools import pairwise
 from collections.abc import Iterator
 
@@ -35,7 +35,7 @@ B, N, BB = "□", "▨", "■■"
 
 def sashes(n: int) -> Iterator[tuple[str, ...]]:
     """
-    Iterate over the sashes of length `n`.
+    Iterate over the sashes of length ``n``.
 
     INPUT:
 
@@ -80,7 +80,7 @@ def cover_relations(s: tuple[str, ...]) -> Iterator[tuple[str, ...]]:
 
     INPUT:
 
-    - ``s`` -- a sash, as a tuple of strings
+    - ``s`` -- sash, as a tuple of strings
 
     EXAMPLES::
 
@@ -107,7 +107,7 @@ def cover_relations(s: tuple[str, ...]) -> Iterator[tuple[str, ...]]:
 
 def lattice_of_sashes(n: int) -> LatticePoset:
     """
-    Return the lattice of sashes of length `n`.
+    Return the lattice of sashes of length ``n``.
 
     INPUT:
 
@@ -138,7 +138,7 @@ def lattice_of_sashes(n: int) -> LatticePoset:
 @cached_function
 def pellytope_fan(n: int) -> Fan:
     """
-    Return the fan of the pellytope of dimension `n`.
+    Return the fan of the pellytope of dimension ``n``.
 
     This is defined by induction.
 
@@ -177,9 +177,12 @@ def pellytope_fan(n: int) -> Fan:
 
 def pellytope(n: int) -> Polyhedron:
     """
-    Return the pellytope of dimension `n`.
+    Return the pellytope of dimension ``n``.
 
-    This is defined as a Minkowski sum.
+    This is defined as a Minkowski sum of the unit volume `n`
+    dimensional hypercube in the positive orthant and the
+    triangles with vertices $(0, e_i, e_i + e_{i+1})$ for
+    all $1 \leq i < n$.
 
     INPUT:
 
@@ -207,7 +210,8 @@ def pellytope(n: int) -> Polyhedron:
     """
     if n <= 0:
         raise ValueError("n must be positive")
-    v = [vector([1 if i == j else 0 for i in range(n)])
+    M = FreeModule(ZZ, n)
+    v = M.basis()
          for j in range(n)]
     zero = [0] * n
 
