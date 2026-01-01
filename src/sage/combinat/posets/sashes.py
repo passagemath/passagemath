@@ -196,8 +196,7 @@ def pellytope(n: int) -> Polyhedron:
 
     EXAMPLES::
 
-        sage: from sage.combinat.posets.sashes import pellytope
-        sage: P3 = pellytope(3); P3
+        sage: P3 = polytopes.pellytope(3); P3
         A 3-dimensional polyhedron in ZZ^3 defined as
         the convex hull of 12 vertices
         sage: P3.f_vector()
@@ -205,13 +204,13 @@ def pellytope(n: int) -> Polyhedron:
 
     TESTS::
 
-        sage: pellytope(0)
+        sage: polytopes.pellytope(0)
         Traceback (most recent call last):
         ...
         ValueError: n must be positive
 
         sage: G = posets.Sashes(3).hasse_diagram().to_undirected()
-        sage: pellytope(3).graph().is_isomorphic(G)
+        sage: polytopes.pellytope(3).graph().is_isomorphic(G)
         True
 
     REFERENCES:
