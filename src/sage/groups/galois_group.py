@@ -45,7 +45,7 @@ def _alg_key(self, algorithm=None, recompute=False) -> str | None:
     """
     if recompute:
         algorithm = self._get_algorithm(algorithm)
-    return algorithm
+        return algorithm
 
 
 class _GMixin:
