@@ -418,8 +418,7 @@ class DistributiveLattices(CategoryWithAxiom):
 
         sage: cat.super_categories()
         [Category of finite lattice posets,
-         Category of chain graded lattice posets,
-         Category of trim lattice posets]
+         Category of distributive lattices]
 
     TESTS::
 
@@ -444,4 +443,4 @@ class DistributiveLattices(CategoryWithAxiom):
             return True
 
 
-LatticePosets.Trim.Distributive = DistributiveLattices
+LatticePosets.Trim.ChainGraded = DistributiveLattices
