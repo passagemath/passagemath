@@ -346,10 +346,10 @@ class LatticePosets(Category):
         EXAMPLES::
 
             sage: cat = FiniteLatticePosets().Stone(); cat
-            Category of finite stone lattice posets
+            Category of finite stone distributive lattices
 
             sage: cat.super_categories()
-            [Category of finite lattice posets,
+            [Category of finite distributive lattices,
              Category of stone lattice posets]
         """
         @cached_method
@@ -362,10 +362,10 @@ class LatticePosets(Category):
             EXAMPLES::
 
                 sage: FiniteLatticePosets().Stone().super_categories()
-                [Category of finite lattice posets,
+                [Category of finite distributive lattices,
                  Category of stone lattice posets]
             """
-            return [LatticePosets().Trim(), LatticePosets().ChainGraded()]
+            return [LatticePosets().Trim().ChainGraded()]
 
         class ParentMethods:
             def is_stone(self) -> bool:
@@ -414,7 +414,7 @@ class DistributiveLattices(CategoryWithAxiom):
     EXAMPLES::
 
         sage: cat = FiniteLatticePosets().Distributive(); cat
-        Category of finite trim chain graded lattice posets
+        Category of finite distributive lattices
 
         sage: cat.super_categories()
         [Category of finite lattice posets,
@@ -428,6 +428,9 @@ class DistributiveLattices(CategoryWithAxiom):
     """
     _base_category_class_and_axiom = (LatticePosets.Trim,
                                       "ChainGraded")
+
+    class Finite(CategoryWithAxiom):
+        pass
 
     class ParentMethods:
         def is_distributive(self) -> bool:
