@@ -420,9 +420,15 @@ class DistributiveLattices(CategoryWithAxiom):
         [Category of finite lattice posets,
          Category of chain graded lattice posets,
          Category of trim lattice posets]
+
+    TESTS::
+
+        sage: from sage.categories.lattice_posets import DistributiveLattices
+        sage: LatticePosets().Distributive() is DistributiveLattices()
+        True
     """
-    base_category_class_and_axiom = (LatticePosets().Trim(),
-                                     "ChainGraded")
+    _base_category_class_and_axiom = (LatticePosets.Trim,
+                                      "ChainGraded")
 
     class ParentMethods:
         def is_distributive(self) -> bool:
