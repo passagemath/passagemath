@@ -14,6 +14,10 @@ the Pell numbers (:oeis:`A000129`).
 
 The implementation describes sashes as tuples of strings.
 
+This file also implements the polytopes known as pellytopes, and their fans.
+The skeletons of pellytopes are isomorphic to the undirected Hasse
+diagrams of the lattices of sashes.
+
 REFERENCES:
 
 - [Law2014]_
@@ -28,7 +32,9 @@ from sage.geometry.cone import Cone
 from sage.geometry.fan import Fan
 from sage.geometry.polyhedron.constructor import Polyhedron
 from sage.misc.cachefunc import cached_function
+from sage.modules.free_module import FreeModule
 from sage.modules.free_module_element import vector
+from sage.rings.integer_ring import ZZ
 
 B, N, BB = "□", "▨", "■■"
 
@@ -176,13 +182,13 @@ def pellytope_fan(n: int) -> Fan:
 
 
 def pellytope(n: int) -> Polyhedron:
-    """
+    r"""
     Return the pellytope of dimension ``n``.
 
     This is defined as a Minkowski sum of the unit volume `n`
     dimensional hypercube in the positive orthant and the
-    triangles with vertices $(0, e_i, e_i + e_{i+1})$ for
-    all $1 \leq i < n$.
+    triangles with vertices `(0, e_i, e_i + e_{i+1})` for
+    all `1 \leq i < n`.
 
     INPUT:
 
@@ -204,20 +210,22 @@ def pellytope(n: int) -> Polyhedron:
         ...
         ValueError: n must be positive
 
+        sage: G = posets.Sashes(3).hasse_diagram().to_undirected()
+        sage: pellytope(3).graph().is_isomorphic(G)
+        True
+
     REFERENCES:
 
     - [BTTM2024]_
     """
+    from sage.geometry.polyhedron.library import Polytopes
     if n <= 0:
         raise ValueError("n must be positive")
     M = FreeModule(ZZ, n)
     v = M.basis()
-         for j in range(n)]
-    zero = [0] * n
+    zero = M.zero()
 
-    resu = [Polyhedron(vertices=[zero, v[i]]) for i in range(n)]
+    resu = Polytopes().hypercube(n, intervals='zero_one')
 
-    resu.extend(Polyhedron(vertices=[zero, v[j], v[j] + v[j + 1]])
-                for j in range(n - 1))
-
-    return sum(resu)
+    return resu + sum(Polyhedron(vertices=[zero, v[i], v[i] + v[i + 1]])
+                      for i in range(n - 1))
