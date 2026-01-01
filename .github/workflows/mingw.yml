@@ -229,4 +229,4 @@ jobs:
         if:   always() && inputs.logs_artifact
         with:
           name: mingw-sage-local-${{ matrix.os }}${{ inputs.logs_artifact_suffix }}
-          path: ./local
+          path: ./sage-local
