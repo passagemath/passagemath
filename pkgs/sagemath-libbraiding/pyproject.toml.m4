@@ -6,11 +6,8 @@ requires = [
     SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sage_setup
-    SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_environment
-    SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_cython
-    SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_cysignals
 ]
 build-backend = "setuptools.build_meta"
@@ -19,8 +16,6 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-libbraiding"
 description = "passagemath: Braid computations with libbraiding"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_sagemath_objects
-    SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_cysignals
 ]
 dynamic = ["version"]
@@ -54,14 +49,7 @@ build-requires = [
 ]
 
 host-requires = [
-  "pkg:generic/gmp",
   "pkg:generic/libbraiding",
-  "pkg:generic/mpc",
-  "pkg:generic/mpfr",
-  "pkg:generic/iml",
-  "pkg:generic/linbox",
-  "pkg:generic/m4ri",
-  "pkg:generic/m4rie",
 ]
 
 dependencies = [
