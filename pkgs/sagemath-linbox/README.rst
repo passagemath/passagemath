@@ -1,6 +1,6 @@
-===============================================================================================
- passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML, m4ri(e)
-===============================================================================================
+====================================================================
+ passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML
+====================================================================
 
 `passagemath <https://github.com/passagemath/passagemath>`__ is open
 source mathematical software in Python, released under the GNU General
@@ -52,7 +52,5 @@ About this pip-installable distribution package
 
 This pip-installable distribution ``passagemath-linbox``
 provides modules that depend on the `LinBox suite <https://linalg.org/>`_
-(Givaro, fflas-ffpack, LinBox), or on the libraries
-`IML <https://cs.uwaterloo.ca/~astorjoh/iml.html>`_,
-`m4ri <https://bitbucket.org/malb/m4ri/src/master/>`_,
-`m4rie <https://bitbucket.org/malb/m4rie/src/master/>`_.
+(Givaro, fflas-ffpack, LinBox), or on the library
+`IML <https://cs.uwaterloo.ca/~astorjoh/iml.html>`_.
