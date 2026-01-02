@@ -209,6 +209,9 @@ AUTHORS:
 
 - Sebastian A. Spindler (2024-03-06): implemented Hilbert symbols for global
   function fields
+
+- Vincent Macri (2025-11-28): speedup integral basis computation for global
+  function fields over a prime finite field using Singular
 """
 
 # *****************************************************************************
@@ -227,6 +230,7 @@ AUTHORS:
 #                     2019      Brent Baccala
 #                     2022      Frédéric Chapoton
 #                     2022      Gonzalo Tornaría
+#                     2025      Vincent Macri <vincent.macri@ucalgary.ca>
 #
 #  Distributed under the terms of the GNU General Public License (GPL)
 #  as published by the Free Software Foundation; either version 2 of
@@ -467,9 +471,22 @@ class FunctionField(Field):
 
             sage: K.extension(t*y^3 + (1/t)*y + t^3/(t+1))                              # needs sage.rings.function_field
             Function field in y defined by t*y^3 + 1/t*y + t^3/(t + 1)
+
+        TESTS:
+
+        Verify that :issue:`41095` has been resolved::
+
+            sage: K.<x> = FunctionField(GF(2))
+            sage: R.<t> = PolynomialRing(K)
+            sage: L.<y> = K.extension(t^2 + t*x)
+            sage: M.<z> = L.extension(t^3 + x)
+            sage: M.base_ring() is K
+            False
+            sage: M.base_ring() is L
+            True
         """
         from . import constructor
-        return constructor.FunctionFieldExtension(f, names)
+        return constructor.FunctionFieldExtension(f.change_ring(self), names)
 
     def order_with_basis(self, basis, check: bool = True):
         """
