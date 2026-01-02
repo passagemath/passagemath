@@ -29,3 +29,5 @@ cp "$SAGE_ROOT"/config/config.* .
 sdh_configure --enable-shared --disable-static $ENABLE_DEBUG
 sdh_make
 sdh_make_install
+
+sdh_generate_windows_lib_files m4rie
