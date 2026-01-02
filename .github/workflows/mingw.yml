@@ -89,10 +89,13 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'freetype')          && format('mingw-w64-{0}-freetype',                 matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'glpk')              && format('mingw-w64-{0}-glpk',                     matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'gsl')               && format('mingw-w64-{0}-gsl',                      matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'iml')               && format('mingw-w64-{0}-iml',                      matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'libbraiding')       && format('mingw-w64-{0}-libbraiding',              matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'libhomfly')         && format('mingw-w64-{0}-libhomfly',                matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'libjpeg')           && format('mingw-w64-{0}-libjpeg-turbo',            matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'libpng')            && format('mingw-w64-{0}-libpng',                   matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'm4ri')              && format('mingw-w64-{0}-m4ri',                     matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'm4rie')             && format('mingw-w64-{0}-m4rie',                    matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'mpfi')              && format('mingw-w64-{0}-mpfi',                     matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'nauty')             && format('mingw-w64-{0}-nauty',                    matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'ntl')               && format('mingw-w64-{0}-ntl',                      matrix.env) || '' }}

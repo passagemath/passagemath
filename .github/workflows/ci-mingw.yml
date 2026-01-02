@@ -31,6 +31,7 @@ jobs:
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
+        sagemath_libbraiding
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -75,10 +76,13 @@ jobs:
         freetype
         glpk
         gsl
+        iml
+        libbraiding
         libhomfly
         libjpeg
         libpng
         m4ri
+        m4rie
         mpfi
         nauty
         ntl
@@ -100,6 +104,7 @@ jobs:
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
+        sagemath_libbraiding
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -147,10 +152,13 @@ jobs:
         freetype
         glpk
         gsl
+        iml
+        libbraiding
         libhomfly
         libjpeg
         libpng
         m4ri
+        m4rie
         mpfi
         nauty
         ntl
@@ -193,6 +201,7 @@ jobs:
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
+        sagemath_libbraiding
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
