@@ -201,6 +201,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_eclib				\
 	sagemath_homfly				\
 	sagemath_linbox				\
+	sagemath_m4ri_m4rie			\
 	sagemath_ntl				\
 	sagemath_lcalc				\
 	sagemath_libbraiding			\
