@@ -27,10 +27,12 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_ecl
         sagemath_flint
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
+        sagemath_maxima
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -47,10 +49,12 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_ecl-check
         sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
+        sagemath_maxima-check
         sagemath_modules-check
         sagemath_nauty-check
         sagemath_ntl-check
@@ -75,6 +79,7 @@ jobs:
         freetype
         glpk
         gsl
+        info
         libhomfly
         libjpeg
         libpng
@@ -96,10 +101,12 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_ecl
         sagemath_flint
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
+        sagemath_maxima
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -116,10 +123,12 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_ecl-check
         sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
+        sagemath_maxima-check
         sagemath_modules-check
         sagemath_nauty-check
         sagemath_ntl-check
@@ -147,6 +156,7 @@ jobs:
         freetype
         glpk
         gsl
+        info
         libhomfly
         libjpeg
         libpng
@@ -189,10 +199,12 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_ecl
         sagemath_flint
         sagemath_glpk
         sagemath_graphs
         sagemath_homfly
+        sagemath_maxima
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -209,10 +221,12 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_ecl-check
         sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
+        sagemath_maxima-check
         sagemath_modules-check
         sagemath_nauty-check
         sagemath_ntl-check
