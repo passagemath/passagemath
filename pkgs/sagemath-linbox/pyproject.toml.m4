@@ -19,7 +19,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-linbox"
-description = "passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML, m4ri(e)"
+description = "passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
@@ -61,8 +61,6 @@ host-requires = [
   "pkg:generic/gmp",
   "pkg:generic/iml",
   "pkg:generic/linbox",
-  "pkg:generic/m4ri",
-  "pkg:generic/m4rie",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
 ]
