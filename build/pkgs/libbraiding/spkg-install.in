@@ -7,3 +7,5 @@ sdh_configure $LIBBRAIDING_CONFIGURE
 sed -i 's|allow_undefined=yes|allow_undefined=no|g' libtool
 sdh_make
 sdh_make_install -j1
+
+sdh_generate_windows_lib_files braiding

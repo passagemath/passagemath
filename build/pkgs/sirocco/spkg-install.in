@@ -3,3 +3,5 @@ cd src
 sdh_configure
 sdh_make
 sdh_make_install -j1
+
+sdh_generate_windows_lib_files sirocco
