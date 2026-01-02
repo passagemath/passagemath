@@ -546,6 +546,7 @@ if __name__ == '__main__':
                          "sagemath-libecm",
                          "sagemath-singular",
                          "sagemath-linbox",
+                         "sagemath-m4ri-m4rie",
                          "sagemath-flint",
                          "sagemath-ntl",
                          "sagemath-pari",
