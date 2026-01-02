@@ -32,6 +32,7 @@ jobs:
         sagemath_graphs
         sagemath_homfly
         sagemath_libbraiding
+        sagemath_m4ri_m4rie
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -52,6 +53,7 @@ jobs:
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
+        sagemath_m4ri_m4rie-check
         sagemath_modules-check
         sagemath_nauty-check
         sagemath_ntl-check
@@ -105,6 +107,7 @@ jobs:
         sagemath_graphs
         sagemath_homfly
         sagemath_libbraiding
+        sagemath_m4ri_m4rie
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -125,6 +128,7 @@ jobs:
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
+        sagemath_m4ri_m4rie-check
         sagemath_modules-check
         sagemath_nauty-check
         sagemath_ntl-check
@@ -202,6 +206,7 @@ jobs:
         sagemath_graphs
         sagemath_homfly
         sagemath_libbraiding
+        sagemath_m4ri_m4rie
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -222,6 +227,7 @@ jobs:
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_homfly-check
+        sagemath_m4ri_m4rie-check
         sagemath_modules-check
         sagemath_nauty-check
         sagemath_ntl-check
