@@ -497,6 +497,8 @@ def cython_aliases(required_modules=None, optional_modules=None):
         if system == 'Windows' and (not sysconfig.get_config_var("SOABI")
                                     or "mingw" not in sysconfig.get_config_var("SOABI").lower()):
             # Windows but not MSYS2/mingw32
+            if lib == 'gdlib':
+                lib = 'gd'
             aliases[var + "CFLAGS"] = aliases[var + "INCDIR"] = aliases[var + "LIBDIR"] = aliases[var + "LIBEXTRA"] = []
             aliases[var + "LIBRARIES"] = lib
             continue
