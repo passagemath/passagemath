@@ -2658,7 +2658,9 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
             sage: s=RealSet(x == pi);  s    # needs sage.symbolic
             {pi}
             sage: s.simplest_rational()
-            165707065/52746197
+            Traceback (most recent call last):
+            ...
+            NotImplementedError:
             sage: s=RealSet((0, 1));  s
             (0, 1)
             sage: s.simplest_rational()
