@@ -499,6 +499,8 @@ def cython_aliases(required_modules=None, optional_modules=None):
             # Windows but not MSYS2/mingw32
             if lib == 'gdlib':
                 lib = 'gd'
+            elif lib == 'libpng':
+                lib = 'png16'
             aliases[var + "CFLAGS"] = aliases[var + "INCDIR"] = aliases[var + "LIBDIR"] = aliases[var + "LIBEXTRA"] = []
             aliases[var + "LIBRARIES"] = lib
             continue
