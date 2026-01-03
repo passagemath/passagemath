@@ -21,10 +21,7 @@ AUTHORS:
 - Jared Weinstein
 """
 
-try:
-    from typing import Self  # type: ignore (Python >= 3.11)
-except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.10)
+from typing import Self
 
 from sage.misc.abstract_method import abstract_method
 from sage.misc.cachefunc import cached_method
