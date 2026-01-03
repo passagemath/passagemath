@@ -24,6 +24,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_modules
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata_supports_windows.m4')dnl'
@@ -35,7 +36,7 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test = [
      "passagemath-repl",
-     "passagemath-modules",
+     "passagemath-pari",
 ]
 
 [tool.setuptools]
