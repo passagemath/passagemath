@@ -551,7 +551,7 @@ sdh_generate_windows_lib_files() {
             exports_file=${lib_name}-exports.txt
             def_file=${lib_name}.def
             lib_file=${lib_name}.lib
-            name=$(echo ${lib_name}|sed -E 's/^lib//;s/-?[0-9]+//')
+            name=$(echo ${lib_name}|sed -E 's/^lib//;s/-?[0-9]+$//')
 
             dumpbin //exports ${dll_file} > ${exports_file}
 
