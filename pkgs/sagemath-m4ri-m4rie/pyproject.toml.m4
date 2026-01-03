@@ -54,6 +54,7 @@ build-requires = [
 
 host-requires = [
   "pkg:generic/gmp",
+  "pkg:generic/libgd",
   "pkg:generic/m4ri",
   "pkg:generic/m4rie",
 ]
