@@ -3074,9 +3074,6 @@ def spqr_tree(G, algorithm='Hopcroft_Tarjan', solver=None, verbose=0,
     cut_size, cut_vertices = G.vertex_connectivity(value_only=False, solver=solver, verbose=verbose,
                                                    integrality_tolerance=integrality_tolerance)
 
-    # Round cut_size to nearest integer to handle floating-point imprecision
-    cut_size = round(cut_size)
-
     if cut_size < 2:
         raise ValueError("generation of SPQR-trees is only implemented for 2-connected graphs")
     elif cut_size > 2:
