@@ -1,5 +1,5 @@
 """
-Coxeter Types
+Coxeter types
 """
 # ****************************************************************************
 #       Copyright (C) 2015 Travis Scrimshaw <tscrim at ucdavis.edu>,
@@ -69,11 +69,11 @@ class CoxeterType(SageObject, metaclass=ClasscallMetaclass):
 
         INPUT:
 
-        - ``finite`` -- a boolean or ``None`` (default: ``None``)
+        - ``finite`` -- boolean or ``None`` (default: ``None``)
 
-        - ``affine`` -- a boolean or ``None`` (default: ``None``)
+        - ``affine`` -- boolean or ``None`` (default: ``None``)
 
-        - ``crystallographic`` -- a boolean or ``None`` (default: ``None``)
+        - ``crystallographic`` -- boolean or ``None`` (default: ``None``)
 
         The sample contains all the exceptional finite and affine
         Coxeter types, as well as typical representatives of the
@@ -245,11 +245,11 @@ class CoxeterType(SageObject, metaclass=ClasscallMetaclass):
 
         EXAMPLES::
 
-            sage: CoxeterType(['A', 3]).coxeter_matrix()
+            sage: CoxeterType(['A', 3]).coxeter_matrix()                                # needs sage.graphs
             [1 3 2]
             [3 1 3]
             [2 3 1]
-            sage: CoxeterType(['A', 3, 1]).coxeter_matrix()
+            sage: CoxeterType(['A', 3, 1]).coxeter_matrix()                             # needs sage.graphs
             [1 3 2 3]
             [3 1 3 2]
             [2 3 1 3]
@@ -263,14 +263,14 @@ class CoxeterType(SageObject, metaclass=ClasscallMetaclass):
 
         EXAMPLES::
 
-            sage: CoxeterType(['A', 3]).coxeter_graph()
+            sage: CoxeterType(['A', 3]).coxeter_graph()                                 # needs sage.graphs
             Graph on 3 vertices
-            sage: CoxeterType(['A', 3, 1]).coxeter_graph()
+            sage: CoxeterType(['A', 3, 1]).coxeter_graph()                              # needs sage.graphs
             Graph on 4 vertices
         """
 
     @abstract_method
-    def is_finite(self):
+    def is_finite(self) -> bool:
         """
         Return whether ``self`` is finite.
 
@@ -283,7 +283,7 @@ class CoxeterType(SageObject, metaclass=ClasscallMetaclass):
         """
 
     @abstract_method
-    def is_affine(self):
+    def is_affine(self) -> bool:
         """
         Return whether ``self`` is affine.
 
@@ -295,7 +295,7 @@ class CoxeterType(SageObject, metaclass=ClasscallMetaclass):
             True
         """
 
-    def is_crystallographic(self):
+    def is_crystallographic(self) -> bool:
         """
         Return whether ``self`` is crystallographic.
 
@@ -315,7 +315,7 @@ class CoxeterType(SageObject, metaclass=ClasscallMetaclass):
         """
         return False
 
-    def is_simply_laced(self):
+    def is_simply_laced(self) -> bool:
         """
         Return whether ``self`` is simply laced.
 
@@ -357,6 +357,7 @@ class CoxeterType(SageObject, metaclass=ClasscallMetaclass):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs sage.libs.gap
             sage: CoxeterType(['A', 2, 1]).bilinear_form()
             [   1 -1/2 -1/2]
             [-1/2    1 -1/2]
@@ -479,7 +480,7 @@ class CoxeterTypeFromCartanType(UniqueRepresentation, CoxeterType):
         EXAMPLES::
 
             sage: C = CoxeterType(['H',3])
-            sage: C.coxeter_matrix()
+            sage: C.coxeter_matrix()                                                    # needs sage.graphs
             [1 3 2]
             [3 1 5]
             [2 5 1]
@@ -493,7 +494,7 @@ class CoxeterTypeFromCartanType(UniqueRepresentation, CoxeterType):
         EXAMPLES::
 
             sage: C = CoxeterType(['H',3])
-            sage: C.coxeter_graph().edges(sort=True)
+            sage: C.coxeter_graph().edges(sort=True)                                    # needs sage.graphs
             [(1, 2, 3), (2, 3, 5)]
         """
         return self._cartan_type.coxeter_diagram()
@@ -546,7 +547,7 @@ class CoxeterTypeFromCartanType(UniqueRepresentation, CoxeterType):
         """
         return self._cartan_type.index_set()
 
-    def is_finite(self):
+    def is_finite(self) -> bool:
         """
         Return if ``self`` is a finite type.
 
@@ -558,7 +559,7 @@ class CoxeterTypeFromCartanType(UniqueRepresentation, CoxeterType):
         """
         return self._cartan_type.is_finite()
 
-    def is_affine(self):
+    def is_affine(self) -> bool:
         """
         Return if ``self`` is an affine type.
 
@@ -570,7 +571,7 @@ class CoxeterTypeFromCartanType(UniqueRepresentation, CoxeterType):
         """
         return self._cartan_type.is_affine()
 
-    def is_crystallographic(self):
+    def is_crystallographic(self) -> bool:
         """
         Return if ``self`` is crystallographic.
 
@@ -586,7 +587,7 @@ class CoxeterTypeFromCartanType(UniqueRepresentation, CoxeterType):
         """
         return self._cartan_type.is_crystallographic()
 
-    def is_simply_laced(self):
+    def is_simply_laced(self) -> bool:
         """
         Return if ``self`` is simply-laced.
 
@@ -602,7 +603,7 @@ class CoxeterTypeFromCartanType(UniqueRepresentation, CoxeterType):
         """
         return self._cartan_type.is_simply_laced()
 
-    def is_reducible(self):
+    def is_reducible(self) -> bool:
         """
         Return if ``self`` is reducible.
 
@@ -618,7 +619,7 @@ class CoxeterTypeFromCartanType(UniqueRepresentation, CoxeterType):
         """
         return self._cartan_type.is_reducible()
 
-    def is_irreducible(self):
+    def is_irreducible(self) -> bool:
         """
         Return if ``self`` is irreducible.
 

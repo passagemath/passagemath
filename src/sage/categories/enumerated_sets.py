@@ -20,7 +20,7 @@ lazy_import("sage.rings.integer", "Integer")
 
 class EnumeratedSets(CategoryWithAxiom):
     """
-    The category of enumerated sets
+    The category of enumerated sets.
 
     An *enumerated set* is a *finite* or *countable* set or multiset `S`
     together with a canonical enumeration of its elements;
@@ -33,50 +33,49 @@ class EnumeratedSets(CategoryWithAxiom):
 
     The purpose of this category is threefold:
 
-     - to fix a common interface for all these sets;
-     - to provide a bunch of default implementations;
-     - to provide consistency tests.
+    - to fix a common interface for all these sets;
+    - to provide a bunch of default implementations;
+    - to provide consistency tests.
 
     The standard methods for an enumerated set ``S`` are:
 
-       - ``S.cardinality()``: the number of elements of the set. This
-         is the equivalent for ``len`` on a list except that the
-         return value is specified to be a Sage :class:`Integer` or
-         ``infinity``, instead of a Python ``int``.
+    - ``S.cardinality()`` -- the number of elements of the set. This
+      is the equivalent for ``len`` on a list except that the
+      return value is specified to be a Sage :class:`Integer` or
+      ``infinity``, instead of a Python ``int``.
 
-       - ``iter(S)``: an iterator for the elements of the set;
+    - ``iter(S)`` -- an iterator for the elements of the set;
 
-       - ``S.list()``: a fresh list of the elements of the set, when
-         possible; raises a :class:`NotImplementedError` if the list is
-         predictably too large to be expanded in memory.
+    - ``S.list()`` -- a fresh list of the elements of the set, when
+      possible; raises a :exc:`NotImplementedError` if the list is
+      predictably too large to be expanded in memory.
 
-       - ``S.tuple()``: a tuple of the elements of the set, when
-         possible; raises a :class:`NotImplementedError` if the tuple is
-         predictably too large to be expanded in memory.
+    - ``S.tuple()`` -- a tuple of the elements of the set, when
+      possible; raises a :exc:`NotImplementedError` if the tuple is
+      predictably too large to be expanded in memory.
 
-       - ``S.unrank(n)``: the  ``n``-th element of the set when ``n`` is a sage
-         ``Integer``. This is the equivalent for ``l[n]`` on a list.
+    - ``S.unrank(n)`` -- the  ``n``-th element of the set when ``n`` is a sage
+      ``Integer``. This is the equivalent for ``l[n]`` on a list.
 
-       - ``S.rank(e)``: the position of the element ``e`` in the set;
-         This is equivalent to ``l.index(e)`` for a list except that
-         the return value is specified to be a Sage :class:`Integer`,
-         instead of a Python ``int``.
+    - ``S.rank(e)`` -- the position of the element ``e`` in the set;
+      This is equivalent to ``l.index(e)`` for a list except that
+      the return value is specified to be a Sage :class:`Integer`,
+      instead of a Python ``int``.
 
-       - ``S.first()``: the first object of the set; it is equivalent to
-         ``S.unrank(0)``.
+    - ``S.first()`` -- the first object of the set; it is equivalent to
+      ``S.unrank(0)``.
 
-       - ``S.next(e)``: the object of the set which follows ``e``; it is
-         equivalent to ``S.unrank(S.rank(e) + 1)``.
+    - ``S.next(e)`` -- the object of the set which follows ``e``; it is
+      equivalent to ``S.unrank(S.rank(e) + 1)``.
 
-       - ``S.random_element()``: a random generator for an element of
-         the set. Unless otherwise stated, and for finite enumerated
-         sets, the probability is uniform.
+    - ``S.random_element()`` -- a random generator for an element of
+      the set. Unless otherwise stated, and for finite enumerated
+      sets, the probability is uniform.
 
     For examples and tests see:
 
-       - ``FiniteEnumeratedSets().example()``
-       - ``InfiniteEnumeratedSets().example()``
-
+    - ``FiniteEnumeratedSets().example()``
+    - ``InfiniteEnumeratedSets().example()``
 
     EXAMPLES::
 
@@ -182,7 +181,8 @@ class EnumeratedSets(CategoryWithAxiom):
             It is also possible to override ``__iter__`` method itself. Then
             the methods of the first column are defined using  ``__iter__``
 
-            If none of these are provided, raise a ``NotImplementedError``.
+            If none of these are provided, this raises
+            a :exc:`NotImplementedError`.
 
             EXAMPLES:
 
@@ -227,7 +227,6 @@ class EnumeratedSets(CategoryWithAxiom):
                 ....:         return [5, 6, 7]
                 sage: it = iter(set_list()); [next(it), next(it), next(it)]
                 [5, 6, 7]
-
             """
             # Check if .first() and .next(x) are overridden in the subclass
             if ( self.first != self._first_from_iterator and
@@ -278,33 +277,34 @@ class EnumeratedSets(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: P = Partitions()                                                  # optional - sage.combinat
-                sage: list(P.iterator_range(stop=5))                                    # optional - sage.combinat
+                sage: # needs sage.combinat
+                sage: P = Partitions()
+                sage: list(P.iterator_range(stop=5))
                 [[], [1], [2], [1, 1], [3]]
-                sage: list(P.iterator_range(0, 5))                                      # optional - sage.combinat
+                sage: list(P.iterator_range(0, 5))
                 [[], [1], [2], [1, 1], [3]]
-                sage: list(P.iterator_range(3, 5))                                      # optional - sage.combinat
+                sage: list(P.iterator_range(3, 5))
                 [[1, 1], [3]]
-                sage: list(P.iterator_range(3, 10))                                     # optional - sage.combinat
+                sage: list(P.iterator_range(3, 10))
                 [[1, 1], [3], [2, 1], [1, 1, 1], [4], [3, 1], [2, 2]]
-                sage: list(P.iterator_range(3, 10, 2))                                  # optional - sage.combinat
+                sage: list(P.iterator_range(3, 10, 2))
                 [[1, 1], [2, 1], [4], [2, 2]]
-                sage: it = P.iterator_range(3)                                          # optional - sage.combinat
-                sage: [next(it) for x in range(10)]                                     # optional - sage.combinat
+                sage: it = P.iterator_range(3)
+                sage: [next(it) for x in range(10)]
                 [[1, 1],
                  [3], [2, 1], [1, 1, 1],
                  [4], [3, 1], [2, 2], [2, 1, 1], [1, 1, 1, 1],
                  [5]]
-                sage: it = P.iterator_range(3, step=2)                                  # optional - sage.combinat
-                sage: [next(it) for x in range(5)]                                      # optional - sage.combinat
+                sage: it = P.iterator_range(3, step=2)
+                sage: [next(it) for x in range(5)]
                 [[1, 1],
                  [2, 1],
                  [4], [2, 2], [1, 1, 1, 1]]
-                sage: next(P.iterator_range(stop=-3))                                   # optional - sage.combinat
+                sage: next(P.iterator_range(stop=-3))
                 Traceback (most recent call last):
                 ...
                 NotImplementedError: cannot list an infinite set
-                sage: next(P.iterator_range(start=-3))                                  # optional - sage.combinat
+                sage: next(P.iterator_range(start=-3))
                 Traceback (most recent call last):
                 ...
                 NotImplementedError: cannot list an infinite set
@@ -312,8 +312,7 @@ class EnumeratedSets(CategoryWithAxiom):
             if stop is None:
                 if start is None:
                     if step is None:
-                        for x in self:
-                            yield x
+                        yield from self
                         return
                     start = 0
                 elif start < 0:
@@ -357,26 +356,27 @@ class EnumeratedSets(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: P = Partitions()                                                  # optional - sage.combinat
-                sage: P.unrank_range(stop=5)                                            # optional - sage.combinat
+                sage: # needs sage.combinat
+                sage: P = Partitions()
+                sage: P.unrank_range(stop=5)
                 [[], [1], [2], [1, 1], [3]]
-                sage: P.unrank_range(0, 5)                                              # optional - sage.combinat
+                sage: P.unrank_range(0, 5)
                 [[], [1], [2], [1, 1], [3]]
-                sage: P.unrank_range(3, 5)                                              # optional - sage.combinat
+                sage: P.unrank_range(3, 5)
                 [[1, 1], [3]]
-                sage: P.unrank_range(3, 10)                                             # optional - sage.combinat
+                sage: P.unrank_range(3, 10)
                 [[1, 1], [3], [2, 1], [1, 1, 1], [4], [3, 1], [2, 2]]
-                sage: P.unrank_range(3, 10, 2)                                          # optional - sage.combinat
+                sage: P.unrank_range(3, 10, 2)
                 [[1, 1], [2, 1], [4], [2, 2]]
-                sage: P.unrank_range(3)                                                 # optional - sage.combinat
+                sage: P.unrank_range(3)
                 Traceback (most recent call last):
                 ...
                 NotImplementedError: cannot list an infinite set
-                sage: P.unrank_range(stop=-3)                                           # optional - sage.combinat
+                sage: P.unrank_range(stop=-3)
                 Traceback (most recent call last):
                 ...
                 NotImplementedError: cannot list an infinite set
-                sage: P.unrank_range(start=-3)                                          # optional - sage.combinat
+                sage: P.unrank_range(start=-3)
                 Traceback (most recent call last):
                 ...
                 NotImplementedError: cannot list an infinite set
@@ -410,27 +410,28 @@ class EnumeratedSets(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: P = Partitions()                                                  # optional - sage.combinat
-                sage: P[:5]                                                             # optional - sage.combinat
+                sage: # needs sage.combinat
+                sage: P = Partitions()
+                sage: P[:5]
                 [[], [1], [2], [1, 1], [3]]
-                sage: P[0:5]                                                            # optional - sage.combinat
+                sage: P[0:5]
                 [[], [1], [2], [1, 1], [3]]
-                sage: P[3:5]                                                            # optional - sage.combinat
+                sage: P[3:5]
                 [[1, 1], [3]]
-                sage: P[3:10]                                                           # optional - sage.combinat
+                sage: P[3:10]
                 [[1, 1], [3], [2, 1], [1, 1, 1], [4], [3, 1], [2, 2]]
-                sage: P[3:10:2]                                                         # optional - sage.combinat
+                sage: P[3:10:2]
                 [[1, 1], [2, 1], [4], [2, 2]]
-                sage: P[3:]                                                             # optional - sage.combinat
+                sage: P[3:]
                 Traceback (most recent call last):
                 ...
                 NotImplementedError: cannot list an infinite set
-                sage: P[3]                                                              # optional - sage.combinat
+                sage: P[3]
                 [1, 1]
-                sage: P[-1]                                                             # optional - sage.combinat
+                sage: P[-1]
                 Traceback (most recent call last):
                 ...
-                NotImplementedError: cannot list an infinite set
+                ValueError: infinite list
 
             ::
 
@@ -455,11 +456,28 @@ class EnumeratedSets(CategoryWithAxiom):
                 [1]
                 sage: F[1::2]
                 [2]
+
+            TESTS:
+
+            Verify that an infinite index raises an error::
+
+                sage: F = FiniteEnumeratedSet([1,2,3,4,5])
+                sage: F[oo]
+                Traceback (most recent call last):
+                ...
+                TypeError: unable to coerce <class 'sage.rings.infinity.PlusInfinity'>
+                to an integer
             """
+            from sage.rings.infinity import Infinity
             if isinstance(i, slice):
                 return self.unrank_range(i.start, i.stop, i.step)
+            i = Integer(i)
             if i < 0:
-                return self.list()[i]
+                i += self.cardinality()
+            if i < 0:
+                raise IndexError("index out of range")
+            if i is Infinity:
+                raise ValueError("infinite list")
             return self.unrank(i)
 
         def __len__(self):
@@ -468,9 +486,9 @@ class EnumeratedSets(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: len(GF(5))                                                        # optional - sage.libs.pari
+                sage: len(GF(5))
                 5
-                sage: len(MatrixSpace(GF(2), 3, 3))                                     # optional - sage.libs.pari sage.modules
+                sage: len(MatrixSpace(GF(2), 3, 3))                                     # needs sage.modules
                 512
             """
             from sage.rings.infinity import Infinity
@@ -495,7 +513,7 @@ class EnumeratedSets(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: (GF(3)^2).tuple()                                                 # optional - sage.libs.pari
+                sage: (GF(3)^2).tuple()                                                 # needs sage.modules
                 ((0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2))
                 sage: R = Integers(11)
                 sage: l = R.tuple(); l
@@ -576,7 +594,7 @@ class EnumeratedSets(CategoryWithAxiom):
 
             EXAMPLES::
 
-                sage: (GF(3)^2).list()                                                  # optional - sage.libs.pari
+                sage: (GF(3)^2).list()                                                  # needs sage.modules
                 [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1), (0, 2), (1, 2), (2, 2)]
                 sage: R = Integers(11)
                 sage: R.list()
@@ -602,28 +620,28 @@ class EnumeratedSets(CategoryWithAxiom):
             TESTS:
 
             Trying to list an infinite vector space raises an error
-            instead of running forever (see :trac:`10470`)::
+            instead of running forever (see :issue:`10470`)::
 
-                sage: (QQ^2).list()  # indirect test                                    # optional - sage.modules
+                sage: (QQ^2).list()  # indirect test                                    # needs sage.modules
                 Traceback (most recent call last):
                 ...
-                AttributeError: 'FreeModule_ambient_field_with_category' object has no attribute 'list'
+                AttributeError: 'FreeModule_ambient_field_with_category' object has no attribute 'list'...
 
             Here we test that for an object that does not know whether it
             is finite or not.  Calling ``x.list()`` simply tries to create
             the list (but here it fails, since the object is not
-            iterable). This was fixed :trac:`11350` ::
+            iterable). This was fixed :issue:`11350` ::
 
                 sage: R.<t,p> = QQ[]
                 sage: Q = R.quotient(t^2-t+1)
                 sage: Q.is_finite()
                 Traceback (most recent call last):
                 ...
-                AttributeError: 'QuotientRing_generic_with_category' object has no attribute 'is_finite'
+                AttributeError: 'QuotientRing_generic_with_category' object has no attribute 'is_finite'...
                 sage: Q.list()   # indirect test
                 Traceback (most recent call last):
                 ...
-                AttributeError: 'QuotientRing_generic_with_category' object has no attribute 'list'
+                AttributeError: 'QuotientRing_generic_with_category' object has no attribute 'list'...
 
             Here is another example. We artificially create a version of
             the ring of integers that does not know whether it is finite
@@ -706,7 +724,7 @@ class EnumeratedSets(CategoryWithAxiom):
 
         def _unrank_from_iterator(self, r):
             """
-            The ``r``-th element of ``self``
+            The ``r``-th element of ``self``.
 
             ``self.unrank(r)`` returns the ``r``-th element of ``self``, where
             ``r`` is an integer between ``0`` and ``n-1`` where ``n`` is the
@@ -739,17 +757,17 @@ class EnumeratedSets(CategoryWithAxiom):
             for counter, u in enumerate(self):
                 if counter == r:
                     return u
-            raise ValueError("the rank must be in the range from %s to %s"%(0,counter))
+            raise ValueError("the rank must be in the range from %s to %s" % (0,counter))
         unrank = _unrank_from_iterator
 
         def _rank_from_iterator(self, x):
             """
-            The rank of an element of ``self``
+            The rank of an element of ``self``.
 
             ``self.rank(x)`` returns the rank of `x`, that is its
             position in the enumeration of ``self``. This is an
             integer between ``0`` and ``n-1`` where ``n`` is the
-            cardinality of ``self``, or None if `x` is not in `self`.
+            cardinality of ``self``, or None if `x` is not in ``self``.
 
             This is the default (brute force) implementation from the
             category ``EnumeratedSets()`` which can be used when the
@@ -766,12 +784,11 @@ class EnumeratedSets(CategoryWithAxiom):
                 2
                 sage: C.rank(5) # indirect doctest
             """
-            counter = 0
-            for u in self:
+            for counter, u in enumerate(self):
                 if u == x:
                     return counter
-                counter += 1
             return None
+
         rank = _rank_from_iterator
 
         def _iterator_from_list(self):
@@ -790,8 +807,7 @@ class EnumeratedSets(CategoryWithAxiom):
                 sage: [next(it), next(it), next(it)]
                 [1, 2, 3]
             """
-            for x in self.tuple():
-                yield x
+            yield from self.tuple()
 
         def _iterator_from_next(self):
             """
@@ -859,7 +875,7 @@ class EnumeratedSets(CategoryWithAxiom):
         @cached_method
         def _an_element_from_iterator(self):
             """
-            Return the first element of ``self`` returned by :meth:`__iter__`
+            Return the first element of ``self`` returned by :meth:`__iter__`.
 
             If ``self`` is empty, the exception
             :class:`~sage.categories.sets_cat.EmptySetError` is raised instead.
@@ -911,12 +927,11 @@ class EnumeratedSets(CategoryWithAxiom):
                 sage: list(C.some_elements()) # indirect doctest
                 [1, 2, 3]
             """
-            nb = 0
-            for i in self:
+            for nb, i in enumerate(self):
                 yield i
-                nb += 1
-                if nb >= 100:
+                if nb >= 99:
                     break
+
         some_elements = _some_elements_from_iterator
 
         def random_element(self):
@@ -927,7 +942,7 @@ class EnumeratedSets(CategoryWithAxiom):
             the probability is uniform.
 
             This is a generic implementation from the category
-            ``EnumeratedSets()``. It raise a ``NotImplementedError``
+            ``EnumeratedSets()``. It raises a :exc:`NotImplementedError`
             since one does not know whether the set is finite.
 
             EXAMPLES::
@@ -939,7 +954,7 @@ class EnumeratedSets(CategoryWithAxiom):
                 Traceback (most recent call last):
                 ...
                 NotImplementedError: unknown cardinality
-                """
+            """
             raise NotImplementedError("unknown cardinality")
 
         def map(self, f, name=None, *, is_injective=True):
@@ -949,21 +964,21 @@ class EnumeratedSets(CategoryWithAxiom):
 
             INPUT:
 
-            - ``is_injective`` -- boolean (default: ``True``) whether to assume
-              that ``f`` is injective.
+            - ``is_injective`` -- boolean (default: ``True``); whether to assume
+              that `f` is injective
 
             EXAMPLES::
 
-                sage: R = Compositions(4).map(attrcall('partial_sums')); R              # optional - sage.combinat
+                sage: R = Compositions(4).map(attrcall('partial_sums')); R
                 Image of Compositions of 4 by The map *.partial_sums()
                  from Compositions of 4
-                sage: R.cardinality()                                                   # optional - sage.combinat
+                sage: R.cardinality()
                 8
-                sage: R.list()                                                          # optional - sage.combinat
+                sage: R.list()
                 [[1, 2, 3, 4], [1, 2, 4], [1, 3, 4], [1, 4], [2, 3, 4], [2, 4], [3, 4], [4]]
-                sage: [r for r in R]                                                    # optional - sage.combinat
+                sage: [r for r in R]
                 [[1, 2, 3, 4], [1, 2, 4], [1, 3, 4], [1, 4], [2, 3, 4], [2, 4], [3, 4], [4]]
-                sage: R.category()                                                      # optional - sage.combinat
+                sage: R.category()
                 Category of finite enumerated subobjects of sets
 
             .. WARNING::
@@ -971,32 +986,36 @@ class EnumeratedSets(CategoryWithAxiom):
                 If the function is not injective, then there may be
                 repeated elements::
 
-                    sage: P = Compositions(4)                                           # optional - sage.combinat
-                    sage: P.list()                                                      # optional - sage.combinat
+                    sage: P = Compositions(4)
+                    sage: P.list()
                     [[1, 1, 1, 1], [1, 1, 2], [1, 2, 1], [1, 3], [2, 1, 1], [2, 2], [3, 1], [4]]
-                    sage: P.map(attrcall('major_index')).list()                         # optional - sage.combinat
+                    sage: P.map(attrcall('major_index')).list()
                     [6, 3, 4, 1, 5, 2, 3, 0]
 
                 Pass ``is_injective=False`` to get a correct result in this case::
 
-                    sage: P.map(attrcall('major_index'), is_injective=False).list()     # optional - sage.combinat
+                    sage: P.map(attrcall('major_index'), is_injective=False).list()
                     [6, 3, 4, 1, 5, 2, 0]
 
             TESTS::
 
-                sage: TestSuite(R).run(skip=['_test_an_element',                        # optional - sage.combinat
+                sage: TestSuite(R).run(skip=['_test_an_element',
                 ....:                        '_test_enumerated_set_contains',
                 ....:                        '_test_some_elements'])
             """
-            from sage.combinat.combinat import MapCombinatorialClass
-            return MapCombinatorialClass(self, f, name, is_injective=is_injective)
+            from sage.sets.image_set import ImageSubobject
+
+            image = ImageSubobject(f, self, is_injective=is_injective)
+            if name:
+                image.rename(name)
+            return image
 
 #
 #  Consistency test suite for an enumerated set:
 #
         def _test_enumerated_set_contains(self, **options):
             """
-            Checks that the methods :meth:`.__contains__` and :meth:`.__iter__` are consistent.
+            Check that the methods :meth:`.__contains__` and :meth:`.__iter__` are consistent.
 
             See also :class:`TestSuite`.
 
@@ -1023,16 +1042,14 @@ class EnumeratedSets(CategoryWithAxiom):
                 of a finite enumerated set: {1,2,3}
             """
             tester = self._tester(**options)
-            i = 0
-            for w in self:
+            for i, w in enumerate(self, start=1):
                 tester.assertIn(w, self)
-                i += 1
                 if i > tester._max_runs:
                     return
 
         def _test_enumerated_set_iter_list(self, **options):
             """
-            Checks that the methods :meth:`.list` and :meth:`.__iter__` are consistent.
+            Check that the methods :meth:`.list` and :meth:`.__iter__` are consistent.
 
             See also: :class:`TestSuite`.
 

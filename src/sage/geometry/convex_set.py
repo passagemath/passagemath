@@ -41,13 +41,11 @@ class ConvexSet_base(SageObject, Set_base):
     Abstract base class for convex sets.
     """
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         r"""
         Test whether ``self`` is the empty set.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -58,13 +56,11 @@ class ConvexSet_base(SageObject, Set_base):
         """
         return self.dim() < 0
 
-    def is_finite(self):
+    def is_finite(self) -> bool:
         r"""
         Test whether ``self`` is a finite set.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -87,9 +83,7 @@ class ConvexSet_base(SageObject, Set_base):
         """
         Return the cardinality of this set.
 
-        OUTPUT:
-
-        Either an integer or ``Infinity``.
+        OUTPUT: either an integer or ``Infinity``
 
         EXAMPLES::
 
@@ -112,13 +106,11 @@ class ConvexSet_base(SageObject, Set_base):
             return ZZ(1)
         return infinity
 
-    def is_universe(self):
+    def is_universe(self) -> bool:
         r"""
         Test whether ``self`` is the whole ambient space.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         TESTS::
 
@@ -260,7 +252,7 @@ class ConvexSet_base(SageObject, Set_base):
 
     def _test_an_affine_basis(self, tester=None, **options):
         r"""
-        Run tests on the method :meth:`.an_affine_basis`
+        Run tests on the method :meth:`.an_affine_basis`.
 
         TESTS::
 
@@ -411,7 +403,7 @@ class ConvexSet_base(SageObject, Set_base):
             Relative interior of a 1-dimensional polyhedron in QQ^1 defined as the convex hull of 2 vertices
             sage: ri_P_aff.closure() == P_aff
             True
-         """
+        """
         if as_convex_set is None:
             as_convex_set = not as_affine_map
         if not as_affine_map and not as_convex_set:
@@ -453,14 +445,12 @@ class ConvexSet_base(SageObject, Set_base):
 
     codim = codimension
 
-    def is_full_dimensional(self):
+    def is_full_dimensional(self) -> bool:
         r"""
         Return whether ``self`` is full dimensional.
 
-        OUTPUT:
-
-        Boolean. Whether the polyhedron is not contained in any strict
-        affine subspace.
+        OUTPUT: boolean; whether the polyhedron is not contained in any strict
+        affine subspace
 
         EXAMPLES::
 
@@ -475,16 +465,14 @@ class ConvexSet_base(SageObject, Set_base):
         """
         return self.dim() == self.ambient_dim()
 
-    def is_open(self):
+    def is_open(self) -> bool:
         r"""
         Return whether ``self`` is open.
 
         The default implementation of this method only knows that the
         empty set and the ambient space are open.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -501,7 +489,7 @@ class ConvexSet_base(SageObject, Set_base):
             return True
         raise NotImplementedError
 
-    def is_relatively_open(self):
+    def is_relatively_open(self) -> bool:
         r"""
         Return whether ``self`` is relatively open.
 
@@ -509,9 +497,7 @@ class ConvexSet_base(SageObject, Set_base):
         sets are also relatively open, and in addition singletons are
         relatively open.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -528,16 +514,14 @@ class ConvexSet_base(SageObject, Set_base):
             return True
         raise NotImplementedError
 
-    def is_closed(self):
+    def is_closed(self) -> bool:
         r"""
         Return whether ``self`` is closed.
 
         The default implementation of this method only knows that the
         empty set, a singleton set, and the ambient space are closed.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -552,7 +536,7 @@ class ConvexSet_base(SageObject, Set_base):
             return True
         raise NotImplementedError
 
-    def is_compact(self):
+    def is_compact(self) -> bool:
         r"""
         Return whether ``self`` is compact.
 
@@ -560,9 +544,7 @@ class ConvexSet_base(SageObject, Set_base):
         non-closed set cannot be compact, and that the empty set and
         a singleton set are compact.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
             sage: from sage.geometry.convex_set import ConvexSet_base
             sage: class ExampleSet(ConvexSet_base):
@@ -627,9 +609,7 @@ class ConvexSet_base(SageObject, Set_base):
         """
         Return a "generic" point of ``self``.
 
-        OUTPUT:
-
-        A point in the relative interior of ``self`` as a coordinate vector.
+        OUTPUT: a point in the relative interior of ``self`` as a coordinate vector
 
         EXAMPLES::
 
@@ -676,7 +656,6 @@ class ConvexSet_base(SageObject, Set_base):
             Failure in _test_convex_set:
             ...
             The following tests failed: _test_convex_set
-
         """
         if tester is None:
             tester = self._tester(**options)
@@ -721,7 +700,7 @@ class ConvexSet_base(SageObject, Set_base):
         r"""
         Return a point of ``self``.
 
-        If ``self`` is empty, an :class:`EmptySetError` will be raised.
+        If ``self`` is empty, an :exc:`EmptySetError` will be raised.
 
         The default implementation delegates to :meth:`_some_elements_`.
 
@@ -790,9 +769,7 @@ class ConvexSet_base(SageObject, Set_base):
 
         - ``other`` -- another convex set
 
-        OUTPUT:
-
-        The Cartesian product of ``self`` and ``other``.
+        OUTPUT: the Cartesian product of ``self`` and ``other``
 
         TESTS::
 
@@ -908,9 +885,7 @@ class ConvexSet_base(SageObject, Set_base):
 
         - ``other`` -- another convex set
 
-        OUTPUT:
-
-        The intersection.
+        OUTPUT: the intersection
 
         TESTS::
 
@@ -928,7 +903,7 @@ class ConvexSet_base(SageObject, Set_base):
 
         INPUT:
 
-        - ``scalar`` -- A scalar, not necessarily in :meth:`base_ring`
+        - ``scalar`` -- a scalar, not necessarily in :meth:`base_ring`
 
         EXAMPLES::
 
@@ -994,13 +969,11 @@ class ConvexSet_closed(ConvexSet_base):
     Abstract base class for closed convex sets.
     """
 
-    def is_closed(self):
+    def is_closed(self) -> bool:
         r"""
         Return whether ``self`` is closed.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -1010,13 +983,11 @@ class ConvexSet_closed(ConvexSet_base):
         """
         return True
 
-    def is_open(self):
+    def is_open(self) -> bool:
         r"""
         Return whether ``self`` is open.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -1036,13 +1007,11 @@ class ConvexSet_compact(ConvexSet_closed):
     Abstract base class for compact convex sets.
     """
 
-    def is_universe(self):
+    def is_universe(self) -> bool:
         r"""
-        Return whether ``self`` is the whole ambient space
+        Return whether ``self`` is the whole ambient space.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -1056,13 +1025,11 @@ class ConvexSet_compact(ConvexSet_closed):
         """
         return self.ambient_dim() == 0 and not self.is_empty()
 
-    def is_compact(self):
+    def is_compact(self) -> bool:
         r"""
         Return whether ``self`` is compact.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -1080,13 +1047,11 @@ class ConvexSet_relatively_open(ConvexSet_base):
     Abstract base class for relatively open convex sets.
     """
 
-    def is_relatively_open(self):
+    def is_relatively_open(self) -> bool:
         r"""
         Return whether ``self`` is relatively open.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -1097,13 +1062,11 @@ class ConvexSet_relatively_open(ConvexSet_base):
         """
         return True
 
-    def is_open(self):
+    def is_open(self) -> bool:
         r"""
         Return whether ``self`` is open.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -1120,13 +1083,11 @@ class ConvexSet_open(ConvexSet_relatively_open):
     Abstract base class for open convex sets.
     """
 
-    def is_open(self):
+    def is_open(self) -> bool:
         r"""
         Return whether ``self`` is open.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 
@@ -1137,13 +1098,11 @@ class ConvexSet_open(ConvexSet_relatively_open):
         """
         return True
 
-    def is_closed(self):
+    def is_closed(self) -> bool:
         r"""
         Return whether ``self`` is closed.
 
-        OUTPUT:
-
-        Boolean.
+        OUTPUT: boolean
 
         EXAMPLES::
 

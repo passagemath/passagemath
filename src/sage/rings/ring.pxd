@@ -5,9 +5,6 @@ cpdef bint _is_Field(x) except -2
 cdef class Ring(ParentWithGens):
     cdef public object _zero_element
     cdef public object _one_element
-    cdef public object _zero_ideal
-    cdef public object _unit_ideal
-    cdef public object __ideal_monoid
 
 
 cdef class CommutativeRing(Ring):
@@ -16,17 +13,13 @@ cdef class CommutativeRing(Ring):
 cdef class IntegralDomain(CommutativeRing):
     pass
 
-cdef class DedekindDomain(IntegralDomain):
+cdef class DedekindDomain(CommutativeRing):
     pass
 
-
-cdef class PrincipalIdealDomain(IntegralDomain):
+cdef class PrincipalIdealDomain(CommutativeRing):
     pass
 
-cdef class EuclideanDomain(PrincipalIdealDomain):
-    pass
-
-cdef class Field(PrincipalIdealDomain):
+cdef class Field(CommutativeRing):
     pass
 
 cdef class Algebra(Ring):

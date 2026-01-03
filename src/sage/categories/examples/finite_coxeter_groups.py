@@ -1,4 +1,4 @@
-# sage.doctest: optional - sage.combinat sage.groups
+# sage.doctest: needs sage.combinat sage.groups
 r"""
 Examples of finite Coxeter groups
 """
@@ -91,7 +91,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
 
         INPUT:
 
-        - `n` -- an integer with `n \geq 2`
+        - ``n`` -- integer with `n \geq 2`
 
         EXAMPLES::
 
@@ -103,7 +103,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
         Parent.__init__(self, category=FiniteCoxeterGroups())
         self.n = n
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         EXAMPLES::
 
@@ -114,9 +114,9 @@ class DihedralGroup(UniqueRepresentation, Parent):
         """
         return "The %s-th dihedral group of order %s" % (self.n, 2 * self.n)
 
-    def __contains__(self, x):
+    def __contains__(self, x) -> bool:
         r"""
-        Check in the element x is in the mathematical parent self.
+        Check if the element ``x`` is in the mathematical parent ``self``.
 
         EXAMPLES::
 
@@ -128,13 +128,13 @@ class DihedralGroup(UniqueRepresentation, Parent):
 
         (also tested by :meth:`test_an_element` :meth:`test_some_elements`)
         """
-        from sage.structure.all import parent
+        from sage.structure.element import parent
         return parent(x) is self
 
     @cached_method
     def one(self):
         r"""
-        Implements :meth:`Monoids.ParentMethods.one`.
+        Implement :meth:`Monoids.ParentMethods.one`.
 
         EXAMPLES::
 
@@ -146,7 +146,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
 
     def index_set(self):
         r"""
-        Implements :meth:`CoxeterGroups.ParentMethods.index_set`.
+        Implement :meth:`CoxeterGroups.ParentMethods.index_set`.
 
         EXAMPLES::
 
@@ -184,9 +184,9 @@ class DihedralGroup(UniqueRepresentation, Parent):
         wrapped_class = tuple
         __lt__ = ElementWrapper._lt_by_value
 
-        def has_right_descent(self, i, positive=False, side="right"):
+        def has_right_descent(self, i, positive=False, side='right') -> bool:
             r"""
-            Implements :meth:`SemiGroups.ElementMethods.has_right_descent`.
+            Implement :meth:`SemiGroups.ElementMethods.has_right_descent`.
 
             EXAMPLES::
 
@@ -221,7 +221,7 @@ class DihedralGroup(UniqueRepresentation, Parent):
 
         def apply_simple_reflection_right(self, i):
             r"""
-            Implements :meth:`CoxeterGroups.ElementMethods.apply_simple_reflection`.
+            Implement :meth:`CoxeterGroups.ElementMethods.apply_simple_reflection`.
 
             EXAMPLES::
 

@@ -1,23 +1,22 @@
+# sage.doctest: needs sage.combinat sage.modules
 r"""
-Kazhdan-Lusztig Polynomials
+Kazhdan-Lusztig polynomials
 
 AUTHORS:
 
 - Daniel Bump (2008): initial version
-
-- Alan J.X. Guo (2014-03-18): ``R_tilde()`` method.
-
+- Alan J.X. Guo (2014-03-18): ``R_tilde()`` method
 """
 
-#*****************************************************************************
+# ***************************************************************************
 #       Copyright (C) 2008 Daniel Bump <bump at match.stanford.edu>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
 # (at your option) any later version.
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ***************************************************************************
 
 
 from sage.rings.polynomial.polynomial_element import Polynomial
@@ -46,7 +45,7 @@ class KazhdanLusztigPolynomial(UniqueRepresentation, SageObject):
 
     EXAMPLES::
 
-        sage: W = WeylGroup("B3",prefix="s")
+        sage: W = WeylGroup("B3",prefix='s')
         sage: [s1,s2,s3] = W.simple_reflections()
         sage: R.<q> = LaurentPolynomialRing(QQ)
         sage: KL = KazhdanLusztigPolynomial(W,q)
@@ -66,7 +65,7 @@ class KazhdanLusztigPolynomial(UniqueRepresentation, SageObject):
 
         EXAMPLES::
 
-            sage: W = WeylGroup("B3",prefix="s")
+            sage: W = WeylGroup("B3",prefix='s')
             sage: R.<q> = LaurentPolynomialRing(QQ)
             sage: KL = KazhdanLusztigPolynomial(W,q)
             sage: TestSuite(KL).run()
@@ -95,7 +94,7 @@ class KazhdanLusztigPolynomial(UniqueRepresentation, SageObject):
         EXAMPLES::
 
             sage: R.<q>=QQ[]
-            sage: W = WeylGroup("A2", prefix="s")
+            sage: W = WeylGroup("A2", prefix='s')
             sage: [s1,s2]=W.simple_reflections()
             sage: KL = KazhdanLusztigPolynomial(W, q)
             sage: [KL.R(x,s2*s1) for x in [1,s1,s2,s1*s2]]
@@ -114,7 +113,7 @@ class KazhdanLusztigPolynomial(UniqueRepresentation, SageObject):
                 return self._base_ring.one()
             else:
                 return self._base_ring.zero()
-        s = self._coxeter_group.simple_reflection(y.first_descent(side="left"))
+        s = self._coxeter_group.simple_reflection(y.first_descent(side='left'))
         if (s*x).length() < x.length():
             ret = self.R(s*x,s*y)
             if self._trace:
@@ -141,7 +140,7 @@ class KazhdanLusztigPolynomial(UniqueRepresentation, SageObject):
         EXAMPLES::
 
             sage: R.<q> = QQ[]
-            sage: W = WeylGroup("A2", prefix="s")
+            sage: W = WeylGroup("A2", prefix='s')
             sage: [s1,s2] = W.simple_reflections()
             sage: KL = KazhdanLusztigPolynomial(W, q)
             sage: [KL.R_tilde(x,s2*s1) for x in [1,s1,s2,s1*s2]]
@@ -155,7 +154,7 @@ class KazhdanLusztigPolynomial(UniqueRepresentation, SageObject):
             return self._base_ring.zero()
         if x == y:
             return self._base_ring.one()
-        s = self._coxeter_group.simple_reflection(y.first_descent(side="right"))
+        s = self._coxeter_group.simple_reflection(y.first_descent(side='right'))
         if (x * s).length() < x.length():
             ret = self.R_tilde(x * s, y * s)
             if self._trace:
@@ -187,7 +186,7 @@ class KazhdanLusztigPolynomial(UniqueRepresentation, SageObject):
         EXAMPLES::
 
             sage: R.<q> = QQ[]
-            sage: W = WeylGroup("A3", prefix="s")
+            sage: W = WeylGroup("A3", prefix='s')
             sage: [s1,s2,s3] = W.simple_reflections()
             sage: KL = KazhdanLusztigPolynomial(W, q)
             sage: KL.P(s2,s2*s1*s3*s2)

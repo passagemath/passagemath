@@ -2,7 +2,7 @@
 Pure python code for abstract base class for objects with generators
 """
 
-#*****************************************************************************
+# ****************************************************************************
 #       Copyright (C) 2005 William Stein <wstein@gmail.com>
 #
 #  Distributed under the terms of the GNU General Public License (GPL)
@@ -14,8 +14,8 @@ Pure python code for abstract base class for objects with generators
 #
 #  The full text of the GPL is available at:
 #
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ****************************************************************************
 
 
 def multiplicative_iterator(M):
@@ -28,7 +28,7 @@ def multiplicative_iterator(M):
     stop = [g.multiplicative_order() for g in G]
     for i in range(len(stop)):
         if stop[i] is infinity:
-            raise ArithmeticError("%s is not finite."%M)
+            raise ArithmeticError("%s is not finite." % M)
         stop[i] = stop[i] - 1
     z = M(1)
     yield z
@@ -55,7 +55,7 @@ def abelian_iterator(M):
     stop = [g.additive_order() for g in G]
     for i in range(len(stop)):
         if stop[i] is infinity:
-            raise ArithmeticError("%s is not finite."%M)
+            raise ArithmeticError("%s is not finite." % M)
         stop[i] = stop[i] - 1
     z = M(0)
     yield z

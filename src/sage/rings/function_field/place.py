@@ -24,17 +24,17 @@ constant field::
     sage: F.<x> = FunctionField(GF(2))
     sage: O = F.maximal_order()
     sage: p = O.ideal(x^2 + x + 1).place()                                              # needs sage.libs.pari
-    sage: k, fr_k, to_k = p.residue_field()                                             # needs sage.rings.function_field
-    sage: k
+    sage: k, fr_k, to_k = p.residue_field()                                             # needs sage.libs.pari sage.rings.function_field
+    sage: k                                                                             # needs sage.libs.pari sage.rings.function_field
     Finite Field in z2 of size 2^2
 
 The homomorphisms are between the valuation ring and the residue field::
 
-    sage: fr_k
+    sage: fr_k                                                                          # needs sage.libs.pari sage.rings.function_field
     Ring morphism:
       From: Finite Field in z2 of size 2^2
       To:   Valuation ring at Place (x^2 + x + 1)
-    sage: to_k
+    sage: to_k                                                                          # needs sage.libs.pari sage.rings.function_field
     Ring morphism:
       From: Valuation ring at Place (x^2 + x + 1)
       To:   Finite Field in z2 of size 2^2
@@ -44,7 +44,6 @@ AUTHORS:
 - Kwankyu Lee (2017-04-30): initial version
 
 - Brent Baccala (2019-12-20): function fields of characteristic zero
-
 """
 
 # ****************************************************************************
@@ -82,7 +81,7 @@ class FunctionFieldPlace(Element):
         sage: L.places_finite()[0]                                                      # needs sage.rings.function_field
         Place (x, y)
     """
-    def __init__(self, parent, prime):
+    def __init__(self, parent, prime) -> None:
         """
         Initialize the place.
 
@@ -97,7 +96,7 @@ class FunctionFieldPlace(Element):
 
         self._prime = prime
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Return the hash of the place.
 
@@ -111,7 +110,7 @@ class FunctionFieldPlace(Element):
         """
         return hash((self.function_field(), self._prime))
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         """
         Return the string representation of the place.
 
@@ -130,7 +129,7 @@ class FunctionFieldPlace(Element):
         gens_str = ', '.join(repr(g) for g in gens)
         return "Place ({})".format(gens_str)
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
         Return the LaTeX representation of the place.
 
@@ -253,7 +252,7 @@ class FunctionFieldPlace(Element):
 
             sage: k.<a> = GF(2)
             sage: K.<x> = FunctionField(k)
-            sage: sum(K.places_finite())                                                # needs sage.libs.pari
+            sage: sum(K.places_finite())                                                # needs sage.libs.pari sage.modules
             Place (x) + Place (x + 1)
 
         Note that this does not work, as wanted::
@@ -336,7 +335,7 @@ class PlaceSet(UniqueRepresentation, Parent):
     """
     Element = FunctionFieldPlace
 
-    def __init__(self, field):
+    def __init__(self, field) -> None:
         """
         Initialize the set of places of the function ``field``.
 
@@ -352,7 +351,7 @@ class PlaceSet(UniqueRepresentation, Parent):
 
         self._field = field
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         """
         Return the string representation of the place.
 
