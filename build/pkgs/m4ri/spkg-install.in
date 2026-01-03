@@ -24,6 +24,10 @@ cd src
 
 cp "$SAGE_ROOT"/config/config.* .
 
+# Use "extern C" even with MSVC
+# https://github.com/passagemath/passagemath/pull/1932#issuecomment-3707253700
+sed -i.bak s/_MSC_VER/SDHFDSKFHFHJKDSFHJDSHF/ m4ri/m4ri.h
+
 # Configure and build M4RI
 sdh_configure --enable-shared --disable-static $ENABLE_DEBUG $DISABLE_SSE2
 sdh_make
