@@ -61,7 +61,6 @@ What is included
 
 - `Dense matrices over GF(2) using the M4RI library <https://passagemath.org/docs/latest/html/en/reference/matrices/sage/matrix/matrix_mod2_dense.html>`__
 
-- `Dense matrices over GF(2^e) for 2 <= e <= 16
- using the M4RIE library <https://passagemath.org/docs/latest/html/en/reference/matrices/sage/matrix/matrix_gf2e_dense.html>`__
+- `Dense matrices over GF(2**e) for e from 2 to 16 using the M4RIE library <https://passagemath.org/docs/latest/html/en/reference/matrices/sage/matrix/matrix_gf2e_dense.html>`__
 
 - `Vectors with elements in GF(2) <https://passagemath.org/docs/latest/html/en/reference/modules/sage/modules/vector_mod2_dense.html>`__
