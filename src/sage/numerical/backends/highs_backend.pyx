@@ -64,6 +64,9 @@ cdef class HiGHSBackend(GenericBackend):
         self.obj_constant_term = 0.0
         
         # Suppress HiGHS output messages
+        # output_flag is the master switch for all HiGHS output
+        # log_to_console controls whether log messages go to console
+        Highs_setBoolOptionValue(self.highs, b"output_flag", 0)
         Highs_setBoolOptionValue(self.highs, b"log_to_console", 0)
         
         # Set tighter MIP feasibility tolerance to avoid floating-point imprecision
@@ -77,9 +80,10 @@ cdef class HiGHSBackend(GenericBackend):
         # HiGHS's work-stealing scheduler: when finishSymmetryDetection() calls
         # taskGroup.sync(), a race condition in HighsSplitDeque::waitForTaskToFinish()
         # can cause the notification from the finishing task to be lost, resulting
-        # in an indefinite pthread_cond_wait. This affects HiGHS with threads >= 3.
-        # The trade-off is that MIP problems won't benefit from symmetry exploitation,
-        # but this is preferable to hanging indefinitely.
+        # in an indefinite pthread_cond_wait. This affects all thread settings
+        # including threads=1, suggesting the issue may also involve interactions
+        # with cysignals' signal handling. The trade-off is that MIP problems won't
+        # benefit from symmetry exploitation, but this is preferable to hanging.
         Highs_setBoolOptionValue(self.highs, b"mip_detect_symmetry", 0)
         
         # Set optimization sense
@@ -763,18 +767,24 @@ cdef class HiGHSBackend(GenericBackend):
             sage: p.set_verbosity(0)
         """
         cdef HighsInt status
-        cdef bint log_to_console
+        cdef bint enable_output
         
         if level == 0:
-            log_to_console = False
+            enable_output = False
         elif level == 1:
-            log_to_console = True
+            enable_output = True
         else:
             raise ValueError("Invalid verbosity level. Must be 0 or 1.")
         
-        status = Highs_setBoolOptionValue(self.highs, b"log_to_console", log_to_console)
+        # output_flag is the master switch for all HiGHS output
+        status = Highs_setBoolOptionValue(self.highs, b"output_flag", enable_output)
         if status != kHighsStatusOk:
-            raise MIPSolverException("HiGHS: Failed to set verbosity")
+            raise MIPSolverException("HiGHS: Failed to set output_flag")
+        
+        # log_to_console controls whether log messages go to console
+        status = Highs_setBoolOptionValue(self.highs, b"log_to_console", enable_output)
+        if status != kHighsStatusOk:
+            raise MIPSolverException("HiGHS: Failed to set log_to_console")
     
     cpdef add_linear_constraint(self, coefficients, lower_bound, upper_bound, name=None):
         """
@@ -1841,7 +1851,12 @@ cdef class HiGHSBackend(GenericBackend):
         
         if value is None:
             # Get parameter - try each type until one succeeds
-            # Try int first
+            # Try bool first (most common for flags, and avoids HiGHS error messages)
+            status = Highs_getBoolOptionValue(self.highs, name_bytes, &bool_value)
+            if status == kHighsStatusOk:
+                return bool(bool_value)
+            
+            # Try int
             status = Highs_getIntOptionValue(self.highs, name_bytes, &int_value)
             if status == kHighsStatusOk:
                 return int_value
@@ -1850,11 +1865,6 @@ cdef class HiGHSBackend(GenericBackend):
             status = Highs_getDoubleOptionValue(self.highs, name_bytes, &double_value)
             if status == kHighsStatusOk:
                 return double_value
-            
-            # Try bool
-            status = Highs_getBoolOptionValue(self.highs, name_bytes, &bool_value)
-            if status == kHighsStatusOk:
-                return bool(bool_value)
             
             # Try string (allocate buffer for string value)
             str_value = <char*> malloc(256 * sizeof(char))
