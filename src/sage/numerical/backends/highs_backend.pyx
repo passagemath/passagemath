@@ -71,6 +71,17 @@ cdef class HiGHSBackend(GenericBackend):
         # instead of 2.0). See https://github.com/sagemath/sage/pull/41105
         Highs_setDoubleOptionValue(self.highs, b"mip_feasibility_tolerance", 1e-7)
         
+        # Disable MIP symmetry detection to work around a known HiGHS bug
+        # (https://github.com/ERGO-Code/HiGHS/issues/1670) where the parallel
+        # task executor can deadlock during symmetry detection. The bug is in
+        # HiGHS's work-stealing scheduler: when finishSymmetryDetection() calls
+        # taskGroup.sync(), a race condition in HighsSplitDeque::waitForTaskToFinish()
+        # can cause the notification from the finishing task to be lost, resulting
+        # in an indefinite pthread_cond_wait. This affects HiGHS with threads >= 3.
+        # The trade-off is that MIP problems won't benefit from symmetry exploitation,
+        # but this is preferable to hanging indefinitely.
+        Highs_setBoolOptionValue(self.highs, b"mip_detect_symmetry", 0)
+        
         # Set optimization sense
         if maximization:
             self.set_sense(+1)
