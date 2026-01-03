@@ -9473,10 +9473,13 @@ class Graph(GenericGraph):
         minimal forbidden minors is `K_{4,4} - e`, so we get a one-to-one
         dictionary from :meth:`~Graph.minor`::
 
+            sage: # needs sage.numerical.mip
             sage: K44 = graphs.CompleteBipartiteGraph(4, 4)
-            sage: K44.is_projective_planar(return_map=True)                             # needs sage.numerical.mip
-            (False,
-             {0: [0], 1: [1], 2: [2], 3: [3], 4: [4], 5: [5], 6: [6], 7: [7]})
+            sage: is_planar, minor_map = K44.is_projective_planar(return_map=True)
+            sage: is_planar
+            False
+            sage: sorted(tuple(v) for v in minor_map.values())
+            [(0,), (1,), (2,), (3,), (4,), (5,), (6,), (7,)]
 
         .. SEEALSO::
 

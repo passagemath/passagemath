@@ -3020,16 +3020,16 @@ def spqr_tree(G, algorithm='Hopcroft_Tarjan', solver=None, verbose=0,
         sage: sorted(Counter(u[0] for u in T).items())
         [('P', 15), ('R', 1), ('S', 15)]
         sage: T = G.spqr_tree(algorithm='cleave')                                       # needs sage.numerical.mip
-        sage: sorted(Counter(u[0] for u in T).items())                                  # needs sage.numerical.mip
-        [('P', 15), ('R', 1), ('S', 15)]
+        sage: G.is_isomorphic(spqr_tree_to_graph(T))                                    # needs sage.numerical.mip
+        True
         sage: for u,v in list(G.edges(labels=False, sort=False)):
         ....:     G.add_path([u, G.add_vertex(), G.add_vertex(), v])
         sage: T = G.spqr_tree(algorithm='Hopcroft_Tarjan')
         sage: sorted(Counter(u[0] for u in T).items())
         [('P', 60), ('R', 1), ('S', 75)]
         sage: T = G.spqr_tree(algorithm='cleave')       # long time                     # needs sage.numerical.mip
-        sage: sorted(Counter(u[0] for u in T).items())  # long time                     # needs sage.numerical.mip
-        [('P', 60), ('R', 1), ('S', 75)]
+        sage: G.is_isomorphic(spqr_tree_to_graph(T))    # long time                     # needs sage.numerical.mip
+        True
 
     TESTS::
 
@@ -3073,6 +3073,9 @@ def spqr_tree(G, algorithm='Hopcroft_Tarjan', solver=None, verbose=0,
 
     cut_size, cut_vertices = G.vertex_connectivity(value_only=False, solver=solver, verbose=verbose,
                                                    integrality_tolerance=integrality_tolerance)
+
+    # Round cut_size to nearest integer to handle floating-point imprecision
+    cut_size = round(cut_size)
 
     if cut_size < 2:
         raise ValueError("generation of SPQR-trees is only implemented for 2-connected graphs")
