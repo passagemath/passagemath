@@ -107,6 +107,7 @@ from sage.sets.set import Set_base, Set_boolean_operators, Set_add_sub_operators
 from sage.structure.parent import Parent
 from sage.structure.richcmp import richcmp, richcmp_method
 from sage.structure.unique_representation import UniqueRepresentation
+from sage.symbolic.ring import SR
 
 
 @richcmp_method
@@ -365,12 +366,12 @@ class InternalRealInterval(UniqueRepresentation, Parent):
         if self.is_point():
             return '{' + str(self.lower()) + '}'
         s = '[' if self._lower_closed else '('
-        if self.lower() is minus_infinity:
+        if self.lower() == SR(minus_infinity):
             s += '-oo'
         else:
             s += str(self.lower())
         s += ', '
-        if self.upper() is infinity:
+        if self.upper() == SR(infinity):
             s += '+oo'
         else:
             s += str(self.upper())
@@ -1216,10 +1217,6 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
                     Internal helper function.
                     """
                     oo = infinity
-                    try:
-                        val = val.pyobject()
-                    except AttributeError:
-                        pass
                     val = RLF(val)
                     if op == eq:
                         s = [InternalRealInterval(val, True, val, True)]
