@@ -27,14 +27,21 @@ cdef extern from "highs/interfaces/highs_c_api.h":
     const HighsInt kHighsModelStatusNotset
     const HighsInt kHighsModelStatusLoadError
     const HighsInt kHighsModelStatusModelError
+    const HighsInt kHighsModelStatusPresolveError
+    const HighsInt kHighsModelStatusSolveError
+    const HighsInt kHighsModelStatusPostsolveError
+    const HighsInt kHighsModelStatusModelEmpty
     const HighsInt kHighsModelStatusOptimal
     const HighsInt kHighsModelStatusInfeasible
     const HighsInt kHighsModelStatusUnboundedOrInfeasible
     const HighsInt kHighsModelStatusUnbounded
+    const HighsInt kHighsModelStatusObjectiveBound
+    const HighsInt kHighsModelStatusObjectiveTarget
     const HighsInt kHighsModelStatusTimeLimit
     const HighsInt kHighsModelStatusIterationLimit
+    const HighsInt kHighsModelStatusUnknown
+    const HighsInt kHighsModelStatusSolutionLimit
     const HighsInt kHighsModelStatusInterrupt
-    const HighsInt kHighsModelStatusMemoryLimit
 
     # Basis status constants
     const HighsInt kHighsBasisStatusLower

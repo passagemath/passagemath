@@ -442,18 +442,42 @@ cdef class HiGHSBackend(GenericBackend):
         
         if model_status == kHighsModelStatusOptimal:
             return 0  # Success
+        elif model_status == kHighsModelStatusModelEmpty:
+            return 0  # Empty model is trivially optimal
         elif model_status == kHighsModelStatusInfeasible:
             raise MIPSolverException("HiGHS: Problem is infeasible")
         elif model_status == kHighsModelStatusUnbounded:
             raise MIPSolverException("HiGHS: Problem is unbounded")
+        elif model_status == kHighsModelStatusUnboundedOrInfeasible:
+            raise MIPSolverException("HiGHS: Problem is unbounded or infeasible")
         elif model_status == kHighsModelStatusTimeLimit:
             raise MIPSolverException("HiGHS: Time limit reached")
         elif model_status == kHighsModelStatusIterationLimit:
             raise MIPSolverException("HiGHS: Iteration limit reached")
+        elif model_status == kHighsModelStatusSolutionLimit:
+            raise MIPSolverException("HiGHS: Solution limit reached")
         elif model_status == kHighsModelStatusInterrupt:
             raise MIPSolverException("HiGHS: Interrupted by user")
+        elif model_status == kHighsModelStatusObjectiveBound:
+            return 0  # Objective bound reached - considered success
+        elif model_status == kHighsModelStatusObjectiveTarget:
+            return 0  # Objective target reached - considered success
+        elif model_status == kHighsModelStatusNotset:
+            raise MIPSolverException("HiGHS: Model status not set")
+        elif model_status == kHighsModelStatusLoadError:
+            raise MIPSolverException("HiGHS: Load error")
+        elif model_status == kHighsModelStatusModelError:
+            raise MIPSolverException("HiGHS: Model error")
+        elif model_status == kHighsModelStatusPresolveError:
+            raise MIPSolverException("HiGHS: Presolve error")
+        elif model_status == kHighsModelStatusSolveError:
+            raise MIPSolverException("HiGHS: Solve error")
+        elif model_status == kHighsModelStatusPostsolveError:
+            raise MIPSolverException("HiGHS: Postsolve error")
+        elif model_status == kHighsModelStatusUnknown:
+            raise MIPSolverException("HiGHS: Unknown status")
         else:
-            raise MIPSolverException(f"HiGHS: Solver failed with status {model_status}")
+            raise MIPSolverException(f"HiGHS: Solver failed with unknown model status {model_status}")
     
     cpdef get_objective_value(self):
         """
