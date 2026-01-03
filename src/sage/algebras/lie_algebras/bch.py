@@ -152,7 +152,7 @@ def bch_iterator(X=None, Y=None):
 
     TESTS:
 
-    Compare to the BCH formula up to degree 5 given by :wiki:`wikipedia
+    Compare to the BCH formula up to degree 5 given by :wikipedia:`wikipedia
     <Baker–Campbell–Hausdorff_formula>`::
 
         sage: from sage.algebras.lie_algebras.bch import bch_iterator
