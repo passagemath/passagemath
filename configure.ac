@@ -85,7 +85,7 @@ SAGE_LOCAL="$prefix"
 # inspects stuff in the installation prefix at configure time.
 # This is nonstandard.
 if test "$SAGE_LOCAL" = NONE; then
-    SAGE_LOCAL=local
+    SAGE_LOCAL=$ac_default_prefix
     if test -x "$SAGE_LOCAL"/bin/python3; then
         # Incremental build with an existing installation of python3 spkg
         # in SAGE_LOCAL or venv in SAGE_LOCAL.  Keep old behavior.
