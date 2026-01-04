@@ -637,7 +637,7 @@ class LieAlgebras(Category_over_base_ring):
             Return the element `\log(\exp(X)\exp(Y))`.
 
             The BCH formula is an expression for `\log(\exp(X)\exp(Y))`
-            as a sum of Lie brackets of ``X ` and ``Y`` with rational
+            as a sum of Lie brackets of ``X`` and ``Y`` with rational
             coefficients. It is only defined if the base ring of
             ``self`` has a coercion from the rationals.
 
