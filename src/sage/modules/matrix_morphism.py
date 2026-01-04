@@ -57,31 +57,6 @@ from sage.structure.element import parent
 from sage.structure.richcmp import richcmp, op_NE, op_EQ
 
 
-def is_MatrixMorphism(x):
-    """
-    Return ``True`` if x is a Matrix morphism of free modules.
-
-    This function is deprecated.
-
-    EXAMPLES::
-
-        sage: V = ZZ^2; phi = V.hom([3*V.0, 2*V.1])
-        sage: sage.modules.matrix_morphism.is_MatrixMorphism(phi)
-        doctest:warning...
-        DeprecationWarning: is_MatrixMorphism is deprecated;
-        use isinstance(..., MatrixMorphism_abstract) or categories instead
-        See https://github.com/sagemath/sage/issues/37731 for details.
-        True
-        sage: sage.modules.matrix_morphism.is_MatrixMorphism(3)
-        False
-    """
-    from sage.misc.superseded import deprecation
-    deprecation(37731,
-                "is_MatrixMorphism is deprecated; "
-                "use isinstance(..., MatrixMorphism_abstract) or categories instead")
-    return isinstance(x, MatrixMorphism_abstract)
-
-
 class MatrixMorphism_abstract(sage.categories.morphism.Morphism):
 
     # Copy in methods that delegate to self.matrix.
