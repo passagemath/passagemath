@@ -1,1 +1,2 @@
-passagemath-m4ri-m4rie
+# This file is updated on every release by the update-version script
+passagemath-m4ri-m4rie ~= 10.6.44.0

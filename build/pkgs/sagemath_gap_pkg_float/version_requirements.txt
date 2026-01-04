@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-gap-pkg-float ~= 10.6.43.0
+passagemath-gap-pkg-float ~= 10.6.44.0
