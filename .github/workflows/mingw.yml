@@ -100,6 +100,7 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'nauty')             && format('mingw-w64-{0}-nauty',                    matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'ntl')               && format('mingw-w64-{0}-ntl',                      matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'planarity')         && format('mingw-w64-{0}-planarity',                matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'ppl')               && format('mingw-w64-{0}-ppl',                      matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'qhull')             && format('mingw-w64-{0}-qhull',                    matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'rankwidth')         && format('mingw-w64-{0}-rankwidth',                matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'sirocco')           && format('mingw-w64-{0}-sirocco',                  matrix.env) || '' }}
@@ -124,6 +125,7 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'pathspec')          && format('mingw-w64-{0}-python-pathspec',          matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'pillow')            && format('mingw-w64-{0}-python-pillow',            matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'pkgconfig')         && format('mingw-w64-{0}-python-pkgconfig',         matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'pplpy')             && format('mingw-w64-{0}-python-passagemath-ppl',   matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'python_build')      && format('mingw-w64-{0}-python-build',             matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'scipy')             && format('mingw-w64-{0}-python-scipy',             matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'setuptools')        && format('mingw-w64-{0}-python-setuptools',        matrix.env) || '' }}
