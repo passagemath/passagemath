@@ -688,10 +688,10 @@ class LieAlgebras(Category_over_base_ring):
                 TypeError: the BCH formula is not well defined
                 since Integer Ring has no coercion from Rational Field
 
-            We use the free nilpotent Lie algebra to approxiate using the
-            BCH formula as a formal group law in the nilpotent completion
-            of the free Lie algebra (we thank Greg Kuperberg for this
-            example)::
+            We use the free nilpotent Lie algebra to approximate the BCH
+            formula in the nilpotent completion of the free Lie algebra,
+            where the BCH formula can be treated as a formal group law
+            (we thank Greg Kuperberg for this example)::
 
                 sage: L = LieAlgebra(QQ, 2, step=4)
                 sage: L.options.display = "brackets"
