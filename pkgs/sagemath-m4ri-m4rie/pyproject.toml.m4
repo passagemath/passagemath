@@ -7,7 +7,6 @@ requires = [
     SPKG_INSTALL_REQUIRES_sage_setup
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
-    SPKG_INSTALL_REQUIRES_sagemath_flint
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_cysignals
@@ -18,17 +17,17 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "passagemath-linbox"
-description = "passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML"
+name = "passagemath-m4ri-m4rie"
+description = "passagemath: Linear Algebra with m4ri and m4rie"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
-    SPKG_INSTALL_REQUIRES_sagemath_m4ri_m4rie
+    SPKG_INSTALL_REQUIRES_sagemath_modules
 ]
 dynamic = ["version"]
-include(`pyproject_toml_metadata.m4')dnl'
+include(`pyproject_toml_metadata_supports_windows.m4')dnl'
 
 [project.readme]
 file = "README.rst"
@@ -37,10 +36,7 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test = [
      "passagemath-repl",
-     "passagemath-modules",
-]
-primecountpy = [
-    SPKG_INSTALL_REQUIRES_primecountpy
+     "passagemath-pari",
 ]
 
 [tool.setuptools]
@@ -58,12 +54,10 @@ build-requires = [
 ]
 
 host-requires = [
-  "pkg:generic/givaro",
   "pkg:generic/gmp",
-  "pkg:generic/iml",
-  "pkg:generic/linbox",
-  "pkg:generic/mpc",
-  "pkg:generic/mpfr",
+  "pkg:generic/libgd",
+  "pkg:generic/m4ri",
+  "pkg:generic/m4rie",
 ]
 
 dependencies = [

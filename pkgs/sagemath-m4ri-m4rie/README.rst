@@ -1,6 +1,6 @@
-====================================================================
- passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML
-====================================================================
+=================================================
+ passagemath: Linear Algebra with m4ri and m4rie
+=================================================
 
 `passagemath <https://github.com/passagemath/passagemath>`__ is open
 source mathematical software in Python, released under the GNU General
@@ -50,7 +50,17 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.14.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable distribution ``passagemath-linbox``
-provides modules that depend on the `LinBox suite <https://linalg.org/>`_
-(Givaro, fflas-ffpack, LinBox), or on the library
-`IML <https://cs.uwaterloo.ca/~astorjoh/iml.html>`_.
+This pip-installable distribution ``passagemath-m4ri-m4rie``
+provides modules that depend on the libraries
+`m4ri <https://bitbucket.org/malb/m4ri/src/master/>`_,
+`m4rie <https://bitbucket.org/malb/m4rie/src/master/>`_.
+
+
+What is included
+----------------
+
+- `Dense matrices over GF(2) using the M4RI library <https://passagemath.org/docs/latest/html/en/reference/matrices/sage/matrix/matrix_mod2_dense.html>`__
+
+- `Dense matrices over GF(2**e) for e from 2 to 16 using the M4RIE library <https://passagemath.org/docs/latest/html/en/reference/matrices/sage/matrix/matrix_gf2e_dense.html>`__
+
+- `Vectors with elements in GF(2) <https://passagemath.org/docs/latest/html/en/reference/modules/sage/modules/vector_mod2_dense.html>`__

@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-m4ri-m4rie
 from sage.modules.free_module_element cimport FreeModuleElement
 from sage.libs.m4ri cimport mzd_t
 

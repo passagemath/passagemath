@@ -456,6 +456,13 @@ jobs:
         with:
           package-dir: unpacked/passagemath_cmr
 
+      - name: sagemath-m4ri-m4rie
+        id:   sagemath-m4ri-m4rie
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v3.3.0
+        with:
+          package-dir: unpacked/passagemath_m4ri_m4rie
+
 
       - uses: actions/upload-artifact@v4
         if:   always()
