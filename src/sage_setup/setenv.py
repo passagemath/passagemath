@@ -5,7 +5,7 @@ import platform
 from pathlib import Path
 
 
-def _environ_prepend(var, value, separator=':'):
+def _environ_prepend(var, value, separator=os.pathsep):
     if value:
         if var in os.environ:
             os.environ[var] = value + separator + os.environ[var]
