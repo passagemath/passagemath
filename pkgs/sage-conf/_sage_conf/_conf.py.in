@@ -6,8 +6,8 @@ VERSION = "@PACKAGE_VERSION@"
 # location of sagelib.  See comments in SAGE_ROOT/src/Makefile.in
 # These variables come first so that other substituted variable values can refer
 # to it.
-SAGE_LOCAL = "@prefix@"
-SAGE_ROOT = "@SAGE_ROOT@"
+SAGE_LOCAL = "@SAGE_LOCAL_M@"
+SAGE_ROOT = "@SAGE_ROOT_M@"
 
 # The semicolon-separated list of GAP root paths. This is the list of
 # locations that are searched for GAP packages. This is passed directly

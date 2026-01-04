@@ -42,6 +42,7 @@ jobs:
                             "sagemath-objects",
                             "sagemath-planarity",
                             "sagemath-plot",
+                            "sagemath-polyhedra",
                             "sagemath-rankwidth",
                             "sagemath-tdlib"
                            ]') }}

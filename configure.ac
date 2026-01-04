@@ -72,7 +72,13 @@ export MSYS=winsymlinks:nativestrict
 
 # Assume current directory is SAGE_ROOT.
 SAGE_ROOT=`pwd -P`
-AC_SUBST(SAGE_ROOT)
+AS_IF([cygpath --version >/dev/null 2>/dev/null], [dnl
+    SAGE_ROOT_M=$(cygpath -m "$SAGE_ROOT")
+], [dnl
+    SAGE_ROOT_M=$SAGE_ROOT
+])
+AC_SUBST([SAGE_ROOT])
+AC_SUBST([SAGE_ROOT_M])
 
 SAGE_LOCAL="$prefix"
 # The following line is necessary because the code below
@@ -91,6 +97,12 @@ else
     SAGE_VENV_AUTO=no
 fi
 SAGE_SRC="$SAGE_ROOT/src"
+AS_IF([cygpath --version >/dev/null 2>/dev/null], [dnl
+    SAGE_LOCAL_M=$(cygpath -m "$SAGE_LOCAL")
+], [dnl
+    SAGE_LOCAL_M=$SAGE_LOCAL
+])
+AC_SUBST([SAGE_LOCAL_M])
 
 AC_ARG_WITH([sage-venv],
             [AS_HELP_STRING([--with-sage-venv={auto (default),yes,no,none,SAGE_VENV}],

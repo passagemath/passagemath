@@ -38,6 +38,7 @@ jobs:
         sagemath_objects
         sagemath_planarity
         sagemath_plot
+        sagemath_polyhedra
         sagemath_rankwidth
         sagemath_sirocco
         sagemath_tdlib
@@ -57,6 +58,7 @@ jobs:
         sagemath_ntl-check
         sagemath_objects-check
         sagemath_planarity-check
+        sagemath_polyhedra-check
         sagemath_plot-check
         sagemath_rankwidth-check
         sagemath_tdlib-check
@@ -87,6 +89,7 @@ jobs:
         nauty
         ntl
         planarity
+        ppl
         qhull
         rankwidth
         sirocco
@@ -111,6 +114,7 @@ jobs:
         sagemath_objects
         sagemath_planarity
         sagemath_plot
+        sagemath_polyhedra
         sagemath_rankwidth
         sagemath_sirocco
         sagemath_tdlib
@@ -130,6 +134,7 @@ jobs:
         sagemath_ntl-check
         sagemath_objects-check
         sagemath_planarity-check
+        sagemath_polyhedra-check
         sagemath_plot-check
         sagemath_rankwidth-check
         sagemath_tdlib-check
@@ -163,6 +168,7 @@ jobs:
         nauty
         ntl
         planarity
+        ppl
         qhull
         rankwidth
         sirocco
@@ -186,6 +192,7 @@ jobs:
         pathspec
         pillow
         pkgconfig
+        pplpy
         python_build
         scipy
         setuptools
@@ -208,6 +215,7 @@ jobs:
         sagemath_objects
         sagemath_planarity
         sagemath_plot
+        sagemath_polyhedra
         sagemath_rankwidth
         sagemath_sirocco
         sagemath_tdlib
@@ -228,5 +236,6 @@ jobs:
         sagemath_objects-check
         sagemath_planarity-check
         sagemath_plot-check
+        sagemath_polyhedra-check
         sagemath_rankwidth-check
         sagemath_tdlib-check
