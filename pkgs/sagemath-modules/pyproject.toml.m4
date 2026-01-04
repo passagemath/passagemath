@@ -47,8 +47,8 @@ flint   = ["passagemath-flint"]
 fpylll  = [SPKG_INSTALL_REQUIRES_fpylll]
 gsl     = []  # No extra needed
 linbox  = ["passagemath-linbox"]
-m4ri    = ["passagemath-modules[linbox]"]
-m4rie   = ["passagemath-modules[linbox]"]
+m4ri    = [SPKG_INSTALL_REQUIRES_m4ri_m4rie]
+m4rie   = ["passagemath-modules[m4ri,pari]"]
 meataxe = ["passagemath-meataxe"]
 mpfi    = ["passagemath-modules[flint]"]
 mpfr    = []  # No extra needed
@@ -87,7 +87,7 @@ CyclotomicField = ["passagemath-modules[NumberField]"]
 padics      = ["passagemath-modules[Zp]"]
 
 # the whole package
-standard    = ["passagemath-modules[invariant,combinat,padics,NumberField,FiniteField,m4ri,m4rie,flint,linbox,numpy,mpfi,ntl,pari]"]
+standard    = ["passagemath-modules[invariant,combinat,padics,NumberField,FiniteField,flint,linbox,m4ri,m4rie,mpfi,ntl,numpy,pari]"]
 
 [tool.setuptools]
 include-package-data = false
