@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-m4ri-m4rie
 # distutils: extra_compile_args = -std=c++14
 # distutils: language = c++
 

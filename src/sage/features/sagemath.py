@@ -640,7 +640,7 @@ class sage__libs__m4ri(JoinFeature):
         JoinFeature.__init__(self, 'sage.libs.m4ri',
                              [PythonModule('sage.matrix.matrix_gf2e_dense'),
                               PythonModule('sage.matrix.matrix_mod2_dense')],
-                             spkg='sagemath_m4ri', type='standard')
+                             spkg='sagemath_m4ri_m4rie', type='standard')
 
 
 class sage__libs__ntl(JoinFeature):

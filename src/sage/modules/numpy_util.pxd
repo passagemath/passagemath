@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-m4ri-m4rie
 from libc.stdint cimport uintptr_t
 from sage.libs.m4ri cimport *
 from sage.matrix.matrix_mod2_dense cimport Matrix_mod2_dense

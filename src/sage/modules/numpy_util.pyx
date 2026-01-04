@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-m4ri-m4rie
 # sage.doctest: optional - numpy
 # cython: fast_getattr=False
 # https://github.com/cython/cython/issues/6442
