@@ -51,6 +51,7 @@ on:
            "fedora-41",
            "fedora-42",
            "fedora-43",
+           "fedora-44",
            "centos-stream-9",
            "centos-stream-9-python3.12",
            "centos-stream-10",
@@ -72,6 +73,7 @@ on:
            "fedora-41-arm64v8",
            "fedora-42-arm64v8",
            "fedora-43-arm64v8",
+           "fedora-44-arm64v8",
           ]
         # 'tox -e update_docker_platforms' updates above
       tox_packages_factors:
