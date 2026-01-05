@@ -3029,6 +3029,17 @@ class MPolynomialIdeal_singular_repr(
             sage: K.hilbert_series(grading=[2,1])                                       # needs sage.libs.flint
             (2*t^7 - t^6 - t^4 - t^2 - 1)/(t - 1)
 
+        This method also works for :class:`NCPolynomialRing_plural`::
+
+            sage: M = matroids.CompleteGraphic(4)
+            sage: OS = M.orlik_solomon_algebra(QQ)
+            sage: A = OS.as_gca()
+            sage: I = A.defining_ideal()
+            sage: I.hilbert_series()
+            6*t^3 + 11*t^2 + 6*t + 1
+            sage: _.factor()
+            (t + 1) * (2*t + 1) * (3*t + 1)
+
         TESTS::
 
             sage: # needs sage.libs.flint
@@ -3056,6 +3067,8 @@ class MPolynomialIdeal_singular_repr(
             sage: I = Ideal([x^3*y^2 + 3*x^2*y^2*z + y^3*z^2 + z^5])                                                    # needs sage.rings.number_field
             sage: I.hilbert_series()                                                                                    # needs sage.rings.number_field
             (t^4 + t^3 + t^2 + t + 1)/(t^2 - 2*t + 1)
+        
+        
         """
         if not self.is_homogeneous():
             raise TypeError("ideal must be homogeneous")
@@ -3873,6 +3886,26 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
             warn("The resulting resolution is one-sided (left)!")
         return self.__call_singular('res', length)
 
+    def is_homogeneous(self):
+        r"""
+        Return ``True`` if this ideal is spanned by homogeneous
+        polynomials, i.e., if it is a homogeneous ideal.
+
+        EXAMPLES::
+
+            sage: # needs sage.combinat sage.modules
+            sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
+            sage: H = A.g_algebra({y*x: x*y-z, z*x: x*z+2*x, z*y: y*z-2*y})
+            sage: H.inject_variables()
+            Defining x, y, z
+            sage: I = H.ideal([y^2, x^2, z^2 - H.one()], coerce=False)
+            sage: I.is_homogeneous()
+            False
+            sage: J = H.ideal([y^2, x^2, z^2 - x*y], coerce=False)
+            sage: J.is_homogeneous()
+            True
+        """
+        return all(f.is_homogeneous() for f in self.gens())
 
 @richcmp_method
 class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
