@@ -9,7 +9,7 @@ appropriate dimension.
 
 EXAMPLES::
 
-    sage: from sage.modules.matrix_morphism import MatrixMorphism, is_MatrixMorphism
+    sage: from sage.modules.matrix_morphism import MatrixMorphism
     sage: V = QQ^3
     sage: T = End(V)
     sage: M = MatrixSpace(QQ,3)
