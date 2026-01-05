@@ -2617,7 +2617,7 @@ class MPolynomialIdeal_singular_repr(
             sage: I = Ideal([x^2 - 1, y^2 - 1])                                         # needs sage.rings.finite_rings
             sage: sorted(I.variety(algorithm='msolve',          # optional - msolve, needs sage.rings.finite_rings
             ....:                  proof=False),
-            ....:        key=lambda d: str(sorted(d.items()))
+            ....:        key=lambda d: str(sorted(d.items())))
             [{y: 1, x: 1},
              {y: 1, x: 536870908},
              {y: 536870908, x: 1},
@@ -3612,6 +3612,29 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
             return self.twostd()
         return self.ring().ideal( self.__call_singular('std'), side=self.side())
 #        return self.__call_singular('std')
+
+    def groebner_basis(self):
+        r"""
+        Compute a Gröbner basis of the ideal. It is two-sided if and only if the ideal is two-sided.
+
+        This returns a `PolynomialSequence`. See :func:`sage.rings.polynomial.multi_polynomial_sequence.PolynomialSequence`.
+        Under the hood, this uses the :meth:`std` or :meth:`twostd` methods.
+
+        EXAMPLES::
+
+            sage: # needs sage.combinat sage.modules
+            sage: A.<x,y,z> = FreeAlgebra(QQ, 3)
+            sage: H = A.g_algebra({y*x: x*y-z, z*x: x*z+2*x, z*y: y*z-2*y})
+            sage: H.inject_variables()
+            Defining x, y, z
+            sage: I = H.ideal([y^2, x^2, z^2 - H.one()], coerce=False)
+            sage: I.groebner_basis()
+            [z^2 - 1, y*z - y, x*z + x, y^2, 2*x*y - z - 1, x^2]
+        """
+        # return a polynomial sequence for consistency with the MPolynomialIdeal.groebner_basis method
+        from sage.rings.polynomial.multi_polynomial_sequence import \
+                PolynomialSequence
+        return PolynomialSequence(self.std())
 
     def elimination_ideal(self, variables):
         r"""
