@@ -3067,8 +3067,6 @@ class MPolynomialIdeal_singular_repr(
             sage: I = Ideal([x^3*y^2 + 3*x^2*y^2*z + y^3*z^2 + z^5])                                                    # needs sage.rings.number_field
             sage: I.hilbert_series()                                                                                    # needs sage.rings.number_field
             (t^4 + t^3 + t^2 + t + 1)/(t^2 - 2*t + 1)
-        
-        
         """
         if not self.is_homogeneous():
             raise TypeError("ideal must be homogeneous")
@@ -3906,6 +3904,7 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
             True
         """
         return all(f.is_homogeneous() for f in self.gens())
+
 
 @richcmp_method
 class MPolynomialIdeal(MPolynomialIdeal_singular_repr,
