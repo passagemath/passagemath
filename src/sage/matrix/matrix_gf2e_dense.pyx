@@ -656,14 +656,32 @@ cdef class Matrix_gf2e_dense(matrix_dense.Matrix_dense):
 
         EXAMPLES::
 
-             sage: K.<a> = GF(4)
-             sage: A = random_matrix(K,10,10)
-             sage: B = a*A  # indirect doctest
-             sage: all(B.list()[i] == a*A.list()[i] for i in range(100))
-             True
-        """
+            sage: K.<a> = GF(4)
+            sage: A = random_matrix(K,10,10)
+            sage: B = a*A  # indirect doctest
+            sage: all(B.list()[i] == a*A.list()[i] for i in range(100))
+            True
+
+        Regression tests for zero-size matrices (see :issue:`40653`)::
+
+            sage: all((2 * Matrix(GF(2^e), 0, 3)).nrows() == 0 and
+            ....:     (2 * Matrix(GF(2^e), 0, 3)).ncols() == 3
+            ....:     for e in range(2, 6))
+            True
+
+        """    
+
         cdef m4ri_word a = poly_to_word(right)
-        cdef Matrix_gf2e_dense C = Matrix_gf2e_dense.__new__(Matrix_gf2e_dense, self._parent, 0, 0, 0)
+
+
+        cdef Matrix_gf2e_dense C = Matrix_gf2e_dense.__new__(Matrix_gf2e_dense, self._parent, self._nrows, self._ncols, 0)
+
+
+        # Handle zero edge cases
+        if self._nrows == 0 or self._ncols == 0 or a == 0:
+            return C
+
+
         mzed_mul_scalar(C._entries, a, self._entries)
         return C
 
