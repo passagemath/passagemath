@@ -3630,7 +3630,7 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
         r"""
         Compute a Gröbner basis of the ideal. It is two-sided if and only if the ideal is two-sided.
 
-        This returns a `PolynomialSequence`. See :func:`sage.rings.polynomial.multi_polynomial_sequence.PolynomialSequence`.
+        This returns a polynomial sequence. See :func:`sage.rings.polynomial.multi_polynomial_sequence.PolynomialSequence`.
         Under the hood, this uses the :meth:`std` or :meth:`twostd` methods.
 
         EXAMPLES::
