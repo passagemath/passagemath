@@ -3035,9 +3035,9 @@ class MPolynomialIdeal_singular_repr(
             sage: OS = M.orlik_solomon_algebra(QQ)
             sage: A = OS.as_gca()
             sage: I = A.defining_ideal()
-            sage: I.hilbert_series()
+            sage: HS = I.hilbert_series(); HS
             6*t^3 + 11*t^2 + 6*t + 1
-            sage: _.factor()
+            sage: HS.factor()
             (t + 1) * (2*t + 1) * (3*t + 1)
 
         TESTS::
@@ -3626,10 +3626,17 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
 
     def groebner_basis(self):
         r"""
-        Compute a Gröbner basis of the ideal. It is two-sided if and only if the ideal is two-sided.
+        Compute a Gröbner basis of the ideal.
 
-        This returns a polynomial sequence. See :func:`sage.rings.polynomial.multi_polynomial_sequence.PolynomialSequence`.
-        Under the hood, this uses the :meth:`std` or :meth:`twostd` methods.
+        The Gröbner basis is two-sided if and only if the ideal is two-sided.
+
+        OUTPUT:
+
+        :func:`~sage.rings.polynomial.multi_polynomial_sequence.PolynomialSequence`
+
+        ALGORITHM:
+
+        Use the :meth:`std` or :meth:`twostd` methods.
 
         EXAMPLES::
 
@@ -3642,9 +3649,7 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
             sage: I.groebner_basis()
             [z^2 - 1, y*z - y, x*z + x, y^2, 2*x*y - z - 1, x^2]
         """
-        # return a polynomial sequence for consistency with the MPolynomialIdeal.groebner_basis method
-        from sage.rings.polynomial.multi_polynomial_sequence import \
-                PolynomialSequence
+        from sage.rings.polynomial.multi_polynomial_sequence import PolynomialSequence
         return PolynomialSequence(self.std())
 
     def elimination_ideal(self, variables):
@@ -3884,7 +3889,7 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
             warn("The resulting resolution is one-sided (left)!")
         return self.__call_singular('res', length)
 
-    def is_homogeneous(self):
+    def is_homogeneous(self) -> bool:
         r"""
         Return ``True`` if this ideal is spanned by homogeneous
         polynomials, i.e., if it is a homogeneous ideal.
