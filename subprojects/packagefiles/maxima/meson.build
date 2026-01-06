@@ -24,8 +24,6 @@ proj = mod.add_project('configure',
   configure_options : [
                         '--enable-ecl',
                         '--with-ecl=' + ecl,
-                        '--prefix=' + meson.current_build_dir() + '/dist/usr/local',
-                        '--infodir=' + meson.current_build_dir() + '/dist/usr/local/share/maxima/5.47.0/share/info',
                         # Maxima configure checks for git and, if it finds it, uses
                         # versions information from the repo. See #15529. We disable this.
                         'git_found=false',
@@ -37,7 +35,7 @@ maxima_fas_dep = proj.dependency('maxima').partial_dependency(sources : true)
 maxima_dep = declare_dependency(
   variables: {
     'MAXIMA_FAS': meson.current_build_dir() + '/build/src/binary-ecl/maxima.fas',
-    'MAXIMA_SHARE': meson.current_build_dir() + '/dist/usr/local/share/maxima/5.47.0/share',
+    'MAXIMA_PREFIX': meson.current_build_dir() + '/dist/usr/local/',
     'MAXIMA_BIN': meson.current_build_dir() + '/dist/usr/local/bin/maxima',
   },
   dependencies: maxima_fas_dep
