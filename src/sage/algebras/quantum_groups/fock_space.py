@@ -1354,13 +1354,30 @@ class FockSpace(Parent, UniqueRepresentation):
                 return fock.sum_of_terms((fock._indices([[]]*k + list(pt)), c) for pt,c in cur)
 
             cur = R.A()._A_to_fock_basis(la)
-            s = sorted(cur.support())  # Sort lex, which respects dominance order
-            s.pop()  # Remove the largest
+
+            # In level > 1, the default comparison on PartitionTuples is lexicographic
+            # and does not necessarily refine the dominance order used by this algorithm.
+            # Build the elimination list s so that whenever y.dominates(x),
+            # y appears after x.
+            s = []
+            for x in sorted(cur.support()):
+                if x == la or x not in self._indices:
+                    continue
+                for i in reversed(range(len(s))):
+                    if not s[i].dominates(x):
+                        s.insert(i+1, x)
+                        break
+                else:
+                    s.insert(0, x)
+
 
             q = R._q
             while s:
                 mu = s.pop()
+                if mu not in self._indices:
+                    continue
                 d = cur[mu].denominator()
+
                 k = d.degree()
                 n = cur[mu].numerator()
                 if k != 0 or n.constant_coefficient() != 0:
@@ -1370,17 +1387,31 @@ class FockSpace(Parent, UniqueRepresentation):
                     cur -= gamma * self._G_to_fock_basis(mu)
 
                     # Add any new support elements
+                    # Add any new support elements
                     for x in cur.support():
-                        if x == mu or not mu.dominates(x): # Add only things (strictly) dominated by mu
+                        if x == mu or x not in self._indices or not mu.dominates(x):
+                            continue
+                        if x in s:
                             continue
                         for i in reversed(range(len(s))):
                             if not s[i].dominates(x):
                                 s.insert(i+1, x)
                                 break
+                        else:
+                            s.insert(0, x)
             return cur
 
     lower_global_crystal = G
     canonical = G
+
+
+    # TESTS::
+    #     sage: Fock = FockSpace(3,[0,1])
+    #     sage: F = Fock.natural()
+    #     sage: G = Fock.G()
+    #     sage: v = F(G([[6],[5,5,1]]))   # used to crash in higher level
+    #     sage: v.parent() is F
+    #     True
 
 
 ###############################################################################
