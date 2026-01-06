@@ -744,20 +744,22 @@ cdef class GapElement(RingElement):
         return (_from_sage, (elem,))
 
     cdef bint _check_contains(self, Element other) except -2:
+        """
+        Helper function to check containment.
+        """
         cdef GapElement c_other
         if isinstance(other, GapElement):
             c_other = <GapElement>other
         else:
-            libgap = self.parent()
-            c_other = <GapElement>(libgap(other))
+            c_other = <GapElement>libgap(other)
 
-        sig_on()
         try:
-            sig_GAP_Enter()
+            gap_sig_on()
+            GAP_Enter()
             return GAP_IN(c_other.value, self.value)
         finally:
             GAP_Leave()
-            sig_off()
+            gap_sig_off()
 
     def __contains__(self, other):
         r"""
@@ -778,7 +780,7 @@ cdef class GapElement(RingElement):
             ...
             GAPError: Error, no method found! Error, no 1st choice method found for `in' on 2 arguments
         """
-        return _check_contains(self, other)
+        return self._check_contains(other)
 
     cpdef _type_number(self):
         """
