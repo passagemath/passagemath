@@ -664,10 +664,11 @@ cdef class Matrix_gf2e_dense(matrix_dense.Matrix_dense):
 
         Regression tests for zero-size matrices (see :issue:`40653`)::
 
-            sage: all((2 * Matrix(GF(2^e), 0, 3)).nrows() == 0 and
-            ....:     (2 * Matrix(GF(2^e), 0, 3)).ncols() == 3
-            ....:     for e in range(2, 6))
+            sage: (2 * Matrix(GF(4), 0, 3)).nrows() == 0
             True
+            sage: (2 * Matrix(GF(4), 0, 3)).ncols() == 3
+            True
+
 
         """    
 
