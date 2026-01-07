@@ -433,6 +433,20 @@ jobs:
         with:
           package-dir: unpacked/passagemath_combinat
 
+      - name: sagemath-sirocco
+        id:   sagemath-sirocco
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v3.3.0
+        with:
+          package-dir: unpacked/passagemath_sirocco
+
+      - name: sagemath-libbraiding
+        id:   sagemath-libbraiding
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v3.3.0
+        with:
+          package-dir: unpacked/passagemath_libbraiding
+
         ####### sagemath-modules and what depends on it
 
       - name: sagemath-modules
