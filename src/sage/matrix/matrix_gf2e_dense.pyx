@@ -664,13 +664,15 @@ cdef class Matrix_gf2e_dense(matrix_dense.Matrix_dense):
 
         TESTS (see :issue:`40653`)::
 
-            sage: (2 * Matrix(GF(4), 0, 3)).nrows() 
+            sage: K = GF(4)
+            sage: zero = K(0)
+            sage: (2 * Matrix(K, 0, 3)).nrows()
             0
-            sage: (2 * Matrix(GF(4), 0, 3)).ncols() 
+            sage: (2 * Matrix(K, 0, 3)).ncols()
             3
-            sage: (0 * Matrix(GF(4), 2, 3)).nrows()
+            sage: (zero * Matrix(K, 2, 3)).nrows()
             2
-            sage: (0 * Matrix(GF(4), 2, 3)).ncols()
+            sage: (zero * Matrix(K, 2, 3)).ncols()
             3
         """    
         cdef m4ri_word a = poly_to_word(right)
