@@ -1354,7 +1354,6 @@ class FockSpace(Parent, UniqueRepresentation):
                 return fock.sum_of_terms((fock._indices([[]]*k + list(pt)), c) for pt,c in cur)
 
             cur = R.A()._A_to_fock_basis(la)
-
             # In level > 1, the default comparison on PartitionTuples is lexicographic
             # and does not necessarily refine the dominance order used by this algorithm.
             # Build the elimination list s so that whenever y.dominates(x),
@@ -1369,9 +1368,8 @@ class FockSpace(Parent, UniqueRepresentation):
                         break
                 else:
                     s.insert(0, x)
-
-
             q = R._q
+          
             while s:
                 mu = s.pop()
                 if mu not in self._indices:
@@ -1386,7 +1384,6 @@ class FockSpace(Parent, UniqueRepresentation):
                     gamma += n[k]
                     cur -= gamma * self._G_to_fock_basis(mu)
 
-                    # Add any new support elements
                     # Add any new support elements
                     for x in cur.support():
                         if x == mu or x not in self._indices or not mu.dominates(x):
