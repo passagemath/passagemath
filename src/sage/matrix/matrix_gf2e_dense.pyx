@@ -662,26 +662,19 @@ cdef class Matrix_gf2e_dense(matrix_dense.Matrix_dense):
             sage: all(B.list()[i] == a*A.list()[i] for i in range(100))
             True
 
-        Regression tests for zero-size matrices (see :issue:`40653`)::
+        TESTS (see :issue:`40653`)::
 
-            sage: (2 * Matrix(GF(4), 0, 3)).nrows() == 0
-            True
-            sage: (2 * Matrix(GF(4), 0, 3)).ncols() == 3
-            True
-
-
+            sage: (2 * Matrix(GF(4), 0, 3)).nrows() 
+            0
+            sage: (2 * Matrix(GF(4), 0, 3)).ncols() 
+            3
         """    
-
         cdef m4ri_word a = poly_to_word(right)
-
-
         cdef Matrix_gf2e_dense C = Matrix_gf2e_dense.__new__(Matrix_gf2e_dense, self._parent, self._nrows, self._ncols, 0)
 
-
-        # Handle zero edge cases
+        # Handle zero scalar or zero-size matrices explicitly
         if self._nrows == 0 or self._ncols == 0 or a == 0:
             return C
-
 
         mzed_mul_scalar(C._entries, a, self._entries)
         return C
