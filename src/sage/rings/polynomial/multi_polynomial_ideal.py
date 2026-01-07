@@ -3637,7 +3637,7 @@ class NCPolynomialIdeal(MPolynomialIdeal_singular_repr, Ideal_nc):
 
         ALGORITHM:
 
-        Use the :meth:`std` or :meth:`twostd` methods.
+        Uses the :meth:`std` method.
 
         EXAMPLES::
 
