@@ -3029,7 +3029,8 @@ class MPolynomialIdeal_singular_repr(
             sage: K.hilbert_series(grading=[2,1])                                       # needs sage.libs.flint
             (2*t^7 - t^6 - t^4 - t^2 - 1)/(t - 1)
 
-        This method also works for :class:`NCPolynomialRing_plural`::
+        This also works for
+        :class:`~sage.rings.polynomial.plural.NCPolynomialRing_plural`::
 
             sage: M = matroids.CompleteGraphic(4)
             sage: OS = M.orlik_solomon_algebra(QQ)
