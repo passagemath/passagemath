@@ -668,6 +668,10 @@ cdef class Matrix_gf2e_dense(matrix_dense.Matrix_dense):
             0
             sage: (2 * Matrix(GF(4), 0, 3)).ncols() 
             3
+            sage: (0 * Matrix(GF(4), 2, 3)).nrows()
+            2
+            sage: (0 * Matrix(GF(4), 2, 3)).ncols()
+            3
         """    
         cdef m4ri_word a = poly_to_word(right)
         cdef Matrix_gf2e_dense C = Matrix_gf2e_dense.__new__(Matrix_gf2e_dense, self._parent, self._nrows, self._ncols, 0)
