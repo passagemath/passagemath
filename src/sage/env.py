@@ -494,8 +494,8 @@ def cython_aliases(required_modules=None, optional_modules=None):
         var = lib.upper().replace("-", "") + "_"
         if lib == 'cblas':
             lib = get_cblas_pc_module_name()
-        if system == 'Windows' and (not sysconfig.get_config_var("SOABI")
-                                    or "mingw" not in sysconfig.get_config_var("SOABI").lower()):
+        if system == 'Windows' and (not sysconfig.get_config_var("EXT_SUFFIX")
+                                    or "mingw" not in sysconfig.get_config_var("EXT_SUFFIX").lower()):
             # Windows but not MSYS2/mingw32
             if lib == 'gdlib':
                 lib = 'gd'
