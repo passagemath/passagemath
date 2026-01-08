@@ -3721,7 +3721,7 @@ class LatticePolytopeClass(Element, ConvexSet_compact,
         if not hasattr(self, "_points"):
             M = self.lattice()
             nv = self.n_vertices()
-            self._points = points = self._vertices
+            points = self._vertices
             if self.dim() == 1:
                 v = points[1] - points[0]
                 l_gcd = gcd(v)
@@ -3734,20 +3734,27 @@ class LatticePolytopeClass(Element, ConvexSet_compact,
                         current.set_immutable()
                         points.append(current)
             if self.dim() > 1:
-                result = self.poly_x("p", reduce_dimension=True)
-                if self.dim() == self.lattice_dim():
-                    points = read_palp_point_collection(StringIO(result), M)
-                else:
-                    m = self._embed(read_palp_matrix(result))
-                    if m.ncols() > nv:
-                        points = list(points)
-                        for j in range(nv, m.ncols()):
-                            current = M.element_class(
-                                M, [m[i, j] for i in range(M.rank())])
-                            current.set_immutable()
-                            points.append(current)
+                try:
+                    result = self. poly_x("p", reduce_dimension=True)
+                    if self.dim() == self.lattice_dim():
+                        points = read_palp_point_collection(StringIO(result), M)
+                    else:
+                        m = self._embed(read_palp_matrix(result))
+                        if m.ncols() > nv:
+                            points = list(points)
+                            for j in range(nv, m.ncols()):
+                                current = M.element_class(
+                                    M, [m[i, j] for i in range(M. rank())])
+                                current. set_immutable()
+                                points.append(current)
+                except (ValueError, RuntimeError):
+                    # PALP failed - re-raise to avoid caching wrong data
+                    raise
+            # Convert to PointCollection if needed and cache
             if len(points) > nv:
                 self._points = PointCollection(points, M)
+            else:
+                self._points = points
         if args or kwds:
             return self._points(*args, **kwds)
         else:
