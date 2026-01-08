@@ -221,7 +221,7 @@ jobs:
           export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }}" TARGETS_OPTIONAL="${{ inputs.targets_optional }}"
           export VIRTUALENV_SYSTEM_SITE_PACKAGES=1
           # Avoid problems with long paths: https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3707521272
-          export SAGE_BUILD_DIR="D:/sage-build"
+          export SAGE_BUILD_DIR="C:/sage-build"
           MAKE="make -j6" make -k V=0 $TARGETS_PRE $TARGETS $TARGETS_OPTIONAL
         shell: msys2 {0}
 
