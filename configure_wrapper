@@ -15,7 +15,7 @@ cp conftest.py bak_conftest.py
 # Fix config.status to call ./configure instead of ./real_configure
 # so that --recheck also protects conftest.py
 if [[ "$OSTYPE" == "darwin"* ]]; then
-   sed -i '' -E "s|'./real_configure'|'./configure'|g" config.status
+   sed -i '' "s|'./real_configure'|'./configure'|g" config.status
 else
    sed -i "s|'./real_configure'|'./configure'|g" config.status
 fi
