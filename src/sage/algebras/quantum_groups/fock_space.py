@@ -1421,14 +1421,6 @@ class FockSpace(Parent, UniqueRepresentation):
 
     lower_global_crystal = G
     canonical = G
-  
-    # TESTS::
-    #     sage: Fock = FockSpace(3,[0,1])
-    #     sage: F = Fock.natural()
-    #     sage: G = Fock.G()
-    #     sage: v = F(G([[6],[5,5,1]]))   # used to crash in higher level
-    #     sage: v.parent() is F
-    #     True
 
 ###############################################################################
 # Bases Category
