@@ -1422,6 +1422,7 @@ class FockSpace(Parent, UniqueRepresentation):
     lower_global_crystal = G
     canonical = G
 
+
 ###############################################################################
 # Bases Category
 
