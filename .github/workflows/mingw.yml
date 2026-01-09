@@ -68,7 +68,7 @@ jobs:
           update: true
           install: >-
             mingw-w64-${{ matrix.env }}-gcc
-            ${{ !contains(matrix.env, 'clang') && format('mingw-w64-{0}-gcc-fortran', matrix.env) || '' }}
+            ${{ !contains(matrix.env, 'clang') && format('mingw-w64-{0}-gcc-fortran', matrix.env) || format('mingw-w64-{0}-fc', matrix.env) }}
             autotools
             python
             mingw-w64-${{ matrix.env }}-python
@@ -220,6 +220,7 @@ jobs:
           fi
           export TARGETS_PRE="${{ inputs.targets_pre }}" TARGETS="${{ inputs.targets }}" TARGETS_OPTIONAL="${{ inputs.targets_optional }}"
           export VIRTUALENV_SYSTEM_SITE_PACKAGES=1
+          ${{ contains(matrix.env, 'clang') && 'export FC=flang' || '' }}
           # Avoid problems with long paths: https://github.com/msys2/MINGW-packages/issues/24738#issuecomment-3707521272
           export SAGE_BUILD_DIR="C:/sage-build"
           MAKE="make -j6" make -k V=0 $TARGETS_PRE $TARGETS $TARGETS_OPTIONAL
