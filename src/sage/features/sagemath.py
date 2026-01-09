@@ -583,7 +583,7 @@ class sage__libs__iml(JoinFeature):
         """
         JoinFeature.__init__(self, 'sage.libs.iml',
                              [PythonModule('sage.matrix.matrix_integer_iml')],
-                             spkg='sagemath_linbox', type='standard')
+                             spkg='sagemath_iml', type='standard')
 
 
 class sage__libs__linbox(JoinFeature):
