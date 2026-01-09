@@ -11,22 +11,19 @@ requires = [
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_memory_allocator
-    SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_pkgconfig
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "passagemath-linbox"
-description = "passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox"
+name = "passagemath-iml"
+description = "passagemath: Linear Algebra with IML"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
-    SPKG_INSTALL_REQUIRES_sagemath_iml
-    SPKG_INSTALL_REQUIRES_sagemath_m4ri_m4rie
+    SPKG_INSTALL_REQUIRES_sagemath_flint
+    SPKG_INSTALL_REQUIRES_sagemath_modules
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
@@ -38,10 +35,6 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test = [
      "passagemath-repl",
-     "passagemath-modules",
-]
-primecountpy = [
-    SPKG_INSTALL_REQUIRES_primecountpy
 ]
 
 [tool.setuptools]
@@ -59,11 +52,8 @@ build-requires = [
 ]
 
 host-requires = [
-  "pkg:generic/givaro",
   "pkg:generic/gmp",
-  "pkg:generic/linbox",
-  "pkg:generic/mpc",
-  "pkg:generic/mpfr",
+  "pkg:generic/iml",
 ]
 
 dependencies = [

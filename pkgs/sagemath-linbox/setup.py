@@ -11,5 +11,5 @@ sage_setup(['sagemath-linbox'],
            recurse_packages=('sage', 'passagemath_linbox'),
            required_modules=('fflas-ffpack', 'givaro', 'gsl', 'linbox', 'cblas',
                              'zlib'),
-           spkgs=['linbox', 'gsl', 'iml'],
+           spkgs=['linbox', 'gsl'],
            package_data={})

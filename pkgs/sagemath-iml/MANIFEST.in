@@ -1,0 +1,23 @@
+graft passagemath_iml
+
+prune sage
+
+include VERSION.txt
+
+include sage/libs/iml.p*
+include sage/matrix/matrix_integer_iml.p*
+
+global-exclude *.c
+global-exclude *.cpp
+
+global-exclude all__sagemath_*.py
+global-include all__sagemath_iml.py
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude *.bak
+global-exclude *.so
+global-exclude *~
+prune .tox
+prune build
+prune dist

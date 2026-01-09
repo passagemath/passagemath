@@ -200,6 +200,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_glpk				\
 	sagemath_eclib				\
 	sagemath_homfly				\
+	sagemath_iml				\
 	sagemath_linbox				\
 	sagemath_m4ri_m4rie			\
 	sagemath_ntl				\
