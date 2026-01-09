@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-iml
 # distutils: libraries = iml
 # sage.doctest: needs sage.libs.flint sage.libs.linbox
 
