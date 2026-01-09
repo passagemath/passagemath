@@ -19,12 +19,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-linbox"
-description = "passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox, IML"
+description = "passagemath: Linear Algebra with Givaro, fflas-ffpack, LinBox"
 dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_iml
     SPKG_INSTALL_REQUIRES_sagemath_m4ri_m4rie
 ]
 dynamic = ["version"]
@@ -60,7 +61,6 @@ build-requires = [
 host-requires = [
   "pkg:generic/givaro",
   "pkg:generic/gmp",
-  "pkg:generic/iml",
   "pkg:generic/linbox",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
