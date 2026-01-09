@@ -273,16 +273,16 @@ class ConjugacyClass(Parent):
             sage: C.set()
             Traceback (most recent call last):
             ...
-            NotImplementedError: Listing the elements of conjugacy classes is
-            not implemented for infinite groups! Use the iter function instead.
+            NotImplementedError: listing the elements of conjugacy classes is
+            not implemented for infinite groups; use the iter function instead
         """
         if self._parent.is_finite():
             from sage.sets.set import Set
             return Set(iter(self))
             # return Set(self) creates an infinite loop in __contains__
-        raise NotImplementedError("Listing the elements of conjugacy classes "
-                                  "is not implemented for infinite groups! "
-                                  "Use the iter function instead.")
+        raise NotImplementedError("listing the elements of conjugacy classes "
+                                  "is not implemented for infinite groups; "
+                                  "use the iter function instead")
 
     def list(self) -> list:
         r"""
@@ -304,9 +304,9 @@ class ConjugacyClass(Parent):
             # return list(self) creates an infinite loop because list calls
             # __len__ which calls list...
 
-        raise NotImplementedError("Listing the elements of conjugacy classes "
-                                  "is not implemented for infinite groups! "
-                                  "Use the iter function instead.")
+        raise NotImplementedError("listing the elements of conjugacy classes "
+                                  "is not implemented for infinite groups; "
+                                  "use the iter function instead")
 
     def is_real(self) -> bool:
         """
@@ -526,6 +526,5 @@ class ConjugacyClassGAP(ConjugacyClass):
             return Set([self._parent(x) for x in cc])
         except NotImplementedError:
             # If GAP doesn't work, fall back to naive method
-
             # Need the f because the base-class method is also cached
             return ConjugacyClass.set.f(self)
