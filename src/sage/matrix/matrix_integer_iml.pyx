@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-iml
 # distutils: libraries = iml
-# sage.doctest: needs sage.libs.flint sage.libs.iml
+# sage.doctest: needs sage.libs.iml
 
 from cysignals.signals cimport sig_check, sig_on, sig_str, sig_off
 from cysignals.memory cimport sig_malloc, sig_free, check_allocarray
