@@ -702,6 +702,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
             ...
             ValueError: unknown algorithm 'IAmNotAnAlgorithm'
 
+            sage: # needs sage.libs.iml sage.libs.pari
             sage: for _ in range(30):
             ....:     dim = randint(1, 20)
             ....:     a = random_matrix(QQ, dim, num_bound=10, den_bound=10)
