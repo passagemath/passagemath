@@ -3719,7 +3719,7 @@ class LatticePolytopeClass(Element, ConvexSet_compact,
             in 1-d lattice M
 
         Regression test for a 6-dimensional polytope that previously failed
-        due to PALP limitations (: issue:`#41400`)::
+        due to PALP limitations (:issue:`41400`)::
 
             sage: V = [(-1, -1, 0, 0, 0, 0),
             ....:      (-1, 0, 0, 0, 0, 0),
