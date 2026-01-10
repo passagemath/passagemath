@@ -3717,6 +3717,31 @@ class LatticePolytopeClass(Element, ConvexSet_compact,
             sage: p.points()
             M(1)
             in 1-d lattice M
+
+        Regression test for a 6-dimensional polytope that previously failed
+        due to PALP limitations (: issue:`#41400`)::
+
+            sage: V = [(-1, -1, 0, 0, 0, 0),
+            ....:      (-1, 0, 0, 0, 0, 0),
+            ....:      (-1, -1, -1, 0, 0, 0),
+            ....:      (-1, -1, -1, -1, 0, 0),
+            ....:      (-1, -1, -1, 0, -1, 0),
+            ....:      (-1, -1, -1, -1, -1, 0),
+            ....:      (-1, -1, -1, -1, -1, -1),
+            ....:      (-1, -1, -1, 0, -1, -1),
+            ....:      (0, 0, 0, 1, 0, 0),
+            ....:      (0, 1, 0, 0, 0, 0),
+            ....:      (1, 0, 0, 0, 0, 0),
+            ....:      (0, 0, 1, 0, 0, 0),
+            ....:      (0, 0, 0, 0, 1, 0),
+            ....:      (0, 0, 0, 0, 0, 1)]
+            sage: Q = LatticePolytope(V)
+            sage: Q.points()  # needs palp
+            Traceback (most recent call last):
+            ...
+            RuntimeError: Error executing ...
+            Output:
+            ...Transpose_PM failed...
         """
         if hasattr(self, "_points"):
             if args or kwds:
@@ -3738,7 +3763,7 @@ class LatticePolytopeClass(Element, ConvexSet_compact,
                     current.set_immutable()
                     points.append(current)
         if self.dim() > 1:
-            result = self. poly_x("p", reduce_dimension=True)
+            result = self.poly_x("p", reduce_dimension=True)
             if self.dim() == self.lattice_dim():
                 points = read_palp_point_collection(StringIO(result), M)
             else:
@@ -3747,8 +3772,8 @@ class LatticePolytopeClass(Element, ConvexSet_compact,
                     points = list(points)
                     for j in range(nv, m.ncols()):
                         current = M.element_class(
-                            M, [m[i, j] for i in range(M. rank())])
-                        current. set_immutable()
+                            M, [m[i, j] for i in range(M.rank())])
+                        current.set_immutable()
                         points.append(current)
         if len(points) > nv:
             self._points = PointCollection(points, M)
