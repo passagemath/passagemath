@@ -208,10 +208,10 @@ def det_padic(A, proof=True, stabilize=2):
 
         sage: import sage.matrix.matrix_integer_dense_hnf as h
         sage: a = matrix(ZZ, 3, [1..9])
-        sage: h.det_padic(a)
+        sage: h.det_padic(a)                                                            # needs sage.libs.iml
         0
         sage: a = matrix(ZZ, 3, [1,2,5,-7,8,10,192,5,18])
-        sage: h.det_padic(a)
+        sage: h.det_padic(a)                                                            # needs sage.libs.iml
         -3669
         sage: a.determinant(algorithm='ntl')
         -3669
@@ -298,6 +298,7 @@ def add_column_fallback(B, a, proof):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.linbox
         sage: B = matrix(ZZ,3, [-1, -1, 1, -3, 8, -2, -1, -1, -1])
         sage: a = matrix(ZZ,3,1, [1,2,3])
         sage: import sage.matrix.matrix_integer_dense_hnf as matrix_integer_dense_hnf
@@ -339,6 +340,7 @@ def solve_system_with_difficult_last_row(B, a):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.iml
         sage: from sage.matrix.matrix_integer_dense_hnf import solve_system_with_difficult_last_row
         sage: B = matrix(ZZ, 3, [1,2,4, 3,-4,7, 939082,2930982,132902384098234])
         sage: a = matrix(ZZ,3,1, [1,2,5])
@@ -424,6 +426,7 @@ def add_column(B, H_B, a, proof):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.iml
         sage: B = matrix(ZZ, 3, 3, [1,2,5, 0,-5,3, 1,1,2])
         sage: H_B = B.echelon_form()
         sage: a = matrix(ZZ, 3, 1, [1,8,-2])
@@ -671,6 +674,7 @@ def probable_pivot_rows(A):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.linbox
         sage: import sage.matrix.matrix_integer_dense_hnf as matrix_integer_dense_hnf
         sage: a = matrix(ZZ,3,[0, -1, -1, 0, -20, 1, 0, 1, 2])
         sage: a
@@ -693,6 +697,7 @@ def probable_pivot_columns(A):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.linbox
         sage: import sage.matrix.matrix_integer_dense_hnf as matrix_integer_dense_hnf
         sage: a = matrix(ZZ,3,[0, -1, -1, 0, -20, 1, 0, 1, 2])
         sage: a
@@ -875,6 +880,7 @@ def probable_hnf(A, include_zero_rows, proof):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.linbox
         sage: a = matrix(ZZ,4,3,[-1, -1, -1, -20, 4, 1, -1, 1, 2,1,2,3])
         sage: import sage.matrix.matrix_integer_dense_hnf as matrix_integer_dense_hnf
         sage: matrix_integer_dense_hnf.probable_hnf(a, True, True)
@@ -1041,6 +1047,7 @@ def hnf(A, include_zero_rows=True, proof=True):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.linbox
         sage: import sage.matrix.matrix_integer_dense_hnf as matrix_integer_dense_hnf
         sage: a = matrix(ZZ,3,5,[-2, -6, -3, -17, -1, 2, -1, -1, -2, -1, -2, -2, -6, 9, 2])
         sage: matrix_integer_dense_hnf.hnf(a)
@@ -1115,6 +1122,7 @@ def hnf_with_transformation(A, proof=True):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.linbox
         sage: import sage.matrix.matrix_integer_dense_hnf as matrix_integer_dense_hnf
         sage: A = matrix(ZZ, 2, [1, -5, -10, 1, 3, 197]); A
         [  1  -5 -10]
@@ -1145,6 +1153,7 @@ def hnf_with_transformation_tests(n=10, m=5, trials=10):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.linbox
         sage: from sage.matrix.matrix_integer_dense_hnf import hnf_with_transformation_tests
         sage: hnf_with_transformation_tests(n=15, m=10, trials=10)
         0 1 2 3 4 5 6 7 8 9
@@ -1169,6 +1178,7 @@ def benchmark_hnf(nrange, bits=4):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.linbox
         sage: import sage.matrix.matrix_integer_dense_hnf as hnf
         sage: hnf.benchmark_hnf([10,25],32)
         ('sage', 10, 32, ...),
@@ -1222,6 +1232,7 @@ def sanity_checks(times=50, n=8, m=5, proof=True, stabilize=2,
 
     EXAMPLES::
 
+        sage: # needs sage.libs.linbox
         sage: import sage.matrix.matrix_integer_dense_hnf as matrix_integer_dense_hnf
         sage: matrix_integer_dense_hnf.sanity_checks(times=5, check_using_magma=False)
         small 8 x 5
