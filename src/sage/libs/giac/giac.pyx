@@ -1035,10 +1035,10 @@ cdef class Pygen(GiacMethods_base):
         cdef gen v
         sig_on()
         cdef gen g = gen(<string>encstring23('GIACPY_TMP_NAME050268070969290100291003'),context_ptr)
-        GIAC_sto((<Pygen>self).gptr[0],g,1,context_ptr)
+        GIAC_sto((<Pygen>self).gptr[0],g,True,context_ptr)
         g = gen(<string>encstring23('GIACPY_TMP_NAME050268070969290100291003[%s]' % str(key)), context_ptr)
         v=(<Pygen>(Pygen(value).eval())).gptr[0]
-        GIAC_sto(v, g, 1, context_ptr)
+        GIAC_sto(v, g, True, context_ptr)
         Pygen('purge(GIACPY_TMP_NAME050268070969290100291003):;').eval()
         sig_off()
         return
