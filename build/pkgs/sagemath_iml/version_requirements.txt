@@ -1,1 +1,2 @@
-passagemath-iml
+# This file is updated on every release by the update-version script
+passagemath-iml ~= 10.6.46.0

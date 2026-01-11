@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-pari-seadata-small ~= 10.6.45.0
+passagemath-pari-seadata-small ~= 10.6.46.0
