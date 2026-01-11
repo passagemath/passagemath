@@ -41,7 +41,8 @@ from sage.rings.rational_field import RationalField
 lazy_import('sage.rings.padics.factory', ['Qp', 'Zp'])
 lazy_import('sage.schemes.hyperelliptic_curves.hypellfrob', 'hypellfrob')
 lazy_import('sage.schemes.hyperelliptic_curves.monsky_washnitzer',
-            ['adjusted_prec', 'matrix_of_frobenius'])
+            ['adjusted_prec', 'matrix_of_frobenius'],
+            as_=['mw_adjusted_prec', 'mw_matrix_of_frobenius'])
 
 from . import padic_lseries as plseries
 
@@ -1703,18 +1704,18 @@ def matrix_of_frobenius(self, p, prec=20, check=False, check_hypotheses=True, al
         # Need to increase precision a little to compensate for precision
         # losses during the computation. (See monsky_washnitzer.py
         # for more details.)
-        adj_prec = adjusted_prec(p, prec)
+        adjusted_prec = mw_adjusted_prec(p, prec)
 
         if check:
             trace = None
         else:
             trace = self.ap(p)
 
-        base_ring = Integers(p**adj_prec)
+        base_ring = Integers(p**adjusted_prec)
 
         R, x = PolynomialRing(base_ring, 'x').objgen()
         Q = x**3 + base_ring(X.a4()) * x + base_ring(X.a6())
-        frob_p = matrix_of_frobenius(Q, p, adj_prec, trace)
+        frob_p = mw_matrix_of_frobenius(Q, p, adjusted_prec, trace)
 
     else:   # algorithm == "sqrtp"
         p_to_prec = p**prec
