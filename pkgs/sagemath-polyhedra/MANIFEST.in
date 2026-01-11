@@ -7,8 +7,6 @@ include VERSION.txt
 exclude *.m4
 include requirements.txt
 
-include sage/interfaces/polymake.p*
-
 graft sage/geometry
 exclude sage/geometry/abc.p*                            # in sagemath-categories
 exclude sage/geometry/toric_lattice*.p*                 # in sagemath-modules

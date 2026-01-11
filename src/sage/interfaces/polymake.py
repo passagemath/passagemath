@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-polyhedra
+# sage_setup: distribution = sagemath-polymake
 r"""
 Interface to polymake
 
