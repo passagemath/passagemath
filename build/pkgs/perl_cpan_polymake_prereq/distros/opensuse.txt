@@ -1,0 +1,6 @@
+perl-XML-Writer
+perl-XML-LibXML
+perl-XML-LibXSLT
+perl-JSON
+perl-SVG
+perl-Term-ReadKey
