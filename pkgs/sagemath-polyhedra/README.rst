@@ -214,26 +214,25 @@ Additional backends for polyhedral computations
     Out[3]: [[(1/5, 4/5), (3/5, 2/5)]]
 
 ``pip install "passagemath-polyhedra[polymake]"``
- `Polymake <https://passagemath.org/docs/latest/html/en/reference/spkg/polymake.html#spkg-polymake>`_, via `JuPyMake <https://pypi.org/project/JuPyMake/>`_
+ `Polymake <https://passagemath.org/docs/latest/html/en/reference/spkg/polymake.html#spkg-polymake>`_, via passagemath-polymake
 
- This currently requires a separate installation of polymake.
 
 Optional backends for optimization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``pip install "passagemath-polyhedra[cbc]"``
  `COIN/OR CBC <https://passagemath.org/docs/latest/html/en/reference/spkg/cbc.html#spkg-cbc>`_ Mixed Integer Linear Optimization solver,
- via `sage_numerical_backends_coin <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_coin.html#spkg-sage-numerical-backends-coin>`_
+ via `passagemath-coin-or-cbc <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_coin.html#spkg-sage-numerical-backends-coin>`_
 
 ``pip install "passagemath-polyhedra[cplex]"``
  CPLEX Mixed Integer Optimization solver (proprietary; requires licensed installation),
- via `sage_numerical_backends_cplex <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_cplex.html#spkg-sage-numerical-backends-cplex>`_
+ via `passagemath-cplex <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_cplex.html#spkg-sage-numerical-backends-cplex>`_
 
 ``pip install "passagemath-polyhedra[cvxpy]"``
  `CVXPy <https://passagemath.org/docs/latest/html/en/reference/spkg/cvxpy.html#spkg-cvxpy>`_ as middle-end for `various backends <https://www.cvxpy.org/install/>`_
 
 ``pip install "passagemath-polyhedra[gurobi]"``
- Gurobi Mixed Integer Optimization solver (proprietary; requires licensed installation), via `sage_numerical_backends_gurobi <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_gurobi.html#spkg-sage-numerical-backends-gurobi>`_
+ Gurobi Mixed Integer Optimization solver (proprietary; requires licensed installation), via `passagemath-gurobi <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_gurobi.html#spkg-sage-numerical-backends-gurobi>`_
 
 ``pip install "passagemath-polyhedra[scip]"``
  `SCIP <https://passagemath.org/docs/latest/html/en/reference/spkg/scip.html#spkg-scip>`_ Mixed Integer Optimization solver,
