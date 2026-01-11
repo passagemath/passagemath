@@ -78,7 +78,7 @@ jobs:
       - name: tox
         run: |
           set -x
-          python_version=3.12
+          python_version=3.13
           python_version_no_dot=${python_version/./}
           pkg=${{ matrix.distribution }}
           cd pkgs/$pkg
