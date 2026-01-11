@@ -10,8 +10,6 @@ This distribution makes the following features available::
     FeatureTestResult('sage.libs.flint', True)
     sage: sage__rings__complex_interval_field().is_present()
     FeatureTestResult('sage.rings.complex_interval_field', True)
-    sage: sage__rings__number_field().is_present()
-    FeatureTestResult('sage.rings.number_field', True)
     sage: sage__rings__real_interval_field().is_present()
     FeatureTestResult('sage.rings.real_interval_field', True)
 """

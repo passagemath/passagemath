@@ -460,7 +460,6 @@ class sage__libs__flint(JoinFeature):
                               PythonModule('sage.libs.flint.arith_sage'),
                               PythonModule('sage.matrix.matrix_integer_dense'),
                               PythonModule('sage.matrix.matrix_rational_dense'),
-                              PythonModule('sage.rings.padics.pow_computer_flint'),
                               PythonModule('sage.graphs.chrompoly'),
                               PythonModule('sage.graphs.matchpoly')],
                              spkg='sagemath_flint', type='standard')
@@ -1054,8 +1053,9 @@ class sage__rings__number_field(JoinFeature):
                               PythonModule('sage.rings.number_field.number_field_element_quadratic'),
                               PythonModule('sage.rings.qqbar'),
                               PythonModule('sage.rings.polynomial.real_roots'),
-                              sage__libs__flint()],
-                             type='standard')
+                              sage__libs__flint(),
+                              sage__libs__pari()],
+                             type='standard', spkg='sagemath_pari')
 
 
 class sage__rings__padics(JoinFeature):
