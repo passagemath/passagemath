@@ -538,6 +538,22 @@ def cython_aliases(required_modules=None, optional_modules=None):
             aliases["ECL_LIBRARIES"] = [s[2:] for s in filter(lambda s: s.startswith('-l'), ecl_libs)]
             aliases["ECL_LIBEXTRA"] = list(filter(lambda s: not s.startswith(('-l', '-L')), ecl_libs))
             continue
+        elif lib == 'polymake':
+            try:
+                polymake_cflags = subprocess.run(["polymake-config", "--cflags"], check=True, capture_output=True, text=True).stdout.strip().split()
+                polymake_cflags += subprocess.run(["polymake-config", "--includes"], check=True, capture_output=True, text=True).stdout.strip().split()
+                polymake_ldflags = subprocess.run(["polymake-config", "--ldflags"], check=True, capture_output=True, text=True).stdout.strip().split()
+            except subprocess.CalledProcessError:
+                if required:
+                    raise
+                else:
+                    continue
+            aliases["POLYMAKE_CFLAGS"] = polymake_cflags
+            aliases["POLYMAKE_INCDIR"] = []
+            aliases["POLYMAKE_LIBDIR"] = []
+            aliases["POLYMAKE_LIBRARIES"] = ["polymake"]
+            aliases["POLYMAKE_LIBEXTRA"] = polymake_ldflags
+            continue
         else:
             try:
                 aliases[var + "CFLAGS"] = pkgconfig.cflags(lib).split()
