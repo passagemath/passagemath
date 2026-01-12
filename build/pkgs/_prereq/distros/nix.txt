@@ -7,14 +7,15 @@
 # One package per line. No need to escape special characters.
 # Everything on a line after a # character is ignored.
 #
-binutils
+# These two give conflicts as of 2026-01:
+# binutils
+# gcc
 gnumake
 gnum4
 perl
 python3    # system python for bootstrapping the build
 gnutar
 bc
-gcc
 bash
 flex
 bison
