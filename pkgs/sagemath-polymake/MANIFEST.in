@@ -12,10 +12,6 @@ global-exclude *.cpp
 global-exclude all__sagemath_*.py
 global-include all__sagemath_polymake.py
 
-graft sage/symbolic/ginac
-
-include sage/cpython/pycore_long.h  # FIXME
-
 # JupyMake
 include JuPyMake.cpp
 
