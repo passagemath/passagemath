@@ -1,5 +1,4 @@
 perl-ExtUtils-Embed
-perl-File-Slurp
 perl-JSON
 perl-Term-ReadLine-Gnu
 perl-TermReadKey

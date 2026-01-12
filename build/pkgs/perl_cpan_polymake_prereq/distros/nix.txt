@@ -1,4 +1,3 @@
-perlPackages.FileSlurp
 perlPackages.XMLWriter
 perlPackages.XMLLibXML
 perlPackages.XMLLibXSLT

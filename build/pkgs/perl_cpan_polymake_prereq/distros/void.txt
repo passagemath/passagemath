@@ -1,4 +1,3 @@
-perl-File-Slurp
 perl-JSON
 perl-SVG
 perl-Term-ReadKey
