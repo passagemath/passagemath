@@ -6,7 +6,7 @@ from sage.modular.hecke.hecke_operator import HeckeOperator
 
 from sage.modular.hecke.degenmap import DegeneracyMap
 
-from sage.modular.hecke.algebra import HeckeAlgebra, is_HeckeAlgebra
+from sage.modular.hecke.algebra import HeckeAlgebra
 
 from sage.modular.hecke.morphism import (HeckeModuleMorphism,
                                          HeckeModuleMorphism_matrix)
