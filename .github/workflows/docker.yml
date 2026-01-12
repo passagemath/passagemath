@@ -67,6 +67,7 @@ on:
            "voidlinux-musl",
            "voidlinux",
            "conda-forge-python3.11",
+           "nixos-python3.13",
            "ubuntu-bionic-toolchain-gcc_9-i386",
            "debian-bullseye-i386",
            "fedora-40-arm64v8",
