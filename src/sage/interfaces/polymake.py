@@ -1818,7 +1818,7 @@ class PolymakeJuPyMake(PolymakeAbstract):
 
     ::
 
-         sage: # long time, optional - internet jupymake perl_mongodb
+         sage: # long time, optional - internet jupymake
          sage: L = polymake.db_query({'"_id"': '"F.4D.0047"'},
          ....:                       db='"LatticePolytopes"',
          ....:                       collection='"SmoothReflexive"'); L
