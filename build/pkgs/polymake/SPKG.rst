@@ -27,8 +27,7 @@ Dependencies
 Polymake needs a working installation of Perl, including its shared
 library and some modules (``XML::Writer XML::LibXML XML::LibXSLT
 Term::ReadLine::Gnu JSON SVG``). The Polymake interface in Sage
-additionally needs ``File::Slurp``. For full functionality including
-polymake's polyDB, also the Perl module ``MongoDB`` is needed.
+additionally needs ``File::Slurp``.
 
 These are not provided by a Sage package. The dummy package
 ``perl_cpan_polymake_prereq`` will signal an error at build time if the
@@ -48,7 +47,7 @@ home directory or ``/usr/local``) is using CPAN. This is also the way to
 install the modules on macOS. For this, if you don't have root access,
 you will need the ``local::lib`` Perl module installed::
 
-   cpan -i XML::Writer XML::LibXML XML::LibXSLT File::Slurp Term::ReadLine::Gnu JSON SVG MongoDB
+   cpan -i XML::Writer XML::LibXML XML::LibXSLT File::Slurp Term::ReadLine::Gnu JSON SVG
 
 Before installing the ``polymake`` package, refer to the SPKG pages for the following packages to ensure a more featureful Polymake installation:
 
