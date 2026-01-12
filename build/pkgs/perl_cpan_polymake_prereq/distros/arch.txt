@@ -1,0 +1,5 @@
+perl-json
+perl-term-readkey
+perl-xml-libxml
+perl-xml-libxslt
+perl-xml-writer
