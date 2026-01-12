@@ -18,19 +18,10 @@ using std::endl;
  * Python different version stuff
  */
 
-#if PY_MAJOR_VERSION >= 3
 #define to_python_string(o) PyUnicode_FromString(o)
-#else
-#define to_python_string(o) PyString_FromString(const_cast< char* >(o))
-#endif
 
-#if PY_MAJOR_VERSION >= 3
 #define char_to_python_string(o)                                             \
     PyUnicode_FromString(std::string(1, o).c_str())
-#else
-#define char_to_python_string(o)                                             \
-    PyString_FromString(std::string(1, o).c_str())
-#endif
 
 #define SET_SIGNAL_HANDLERS                                                  \
     sigset_t signal_block_set, signal_pending_set;                           \
@@ -195,12 +186,7 @@ struct module_state {
     PyObject* error;
 };
 
-#if PY_MAJOR_VERSION >= 3
 #define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
-#else
-#define GETSTATE(m) (&_state)
-static struct module_state _state;
-#endif
 
 static PyMethodDef JuPyMakeMethods[] = {
     {"ExecuteCommand", (PyCFunction)ExecuteCommand, METH_VARARGS,
@@ -215,8 +201,6 @@ static PyMethodDef JuPyMakeMethods[] = {
     {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-
-#if PY_MAJOR_VERSION >= 3
 
 static int JuPyMake_traverse(PyObject* m, visitproc visit, void* arg)
 {
@@ -239,18 +223,8 @@ static struct PyModuleDef moduledef = {
 #define INITERROR return NULL
 
 PyMODINIT_FUNC PyInit_JuPyMake(void)
-
-#else
-#define INITERROR return
-
-extern "C" void initJuPyMake(void)
-#endif
 {
-#if PY_MAJOR_VERSION >= 3
     PyObject* module = PyModule_Create(&moduledef);
-#else
-    PyObject* module = Py_InitModule("JuPyMake", JuPyMakeMethods);
-#endif
 
     if (module == NULL)
         INITERROR;
@@ -260,7 +234,5 @@ extern "C" void initJuPyMake(void)
     Py_INCREF(JuPyMakeError);
     st->error = JuPyMakeError;
 
-#if PY_MAJOR_VERSION >= 3
     return module;
-#endif
 }
