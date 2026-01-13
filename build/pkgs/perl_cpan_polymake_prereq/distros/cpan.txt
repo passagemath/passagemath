@@ -1,6 +1,5 @@
 XML::Writer
-XML::LibXML
-XML::LibXSLT
+XML::SAX
 JSON
 SVG
 Term::ReadKey
