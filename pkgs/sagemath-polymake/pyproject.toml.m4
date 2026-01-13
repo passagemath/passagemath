@@ -15,6 +15,7 @@ name = "passagemath-polymake"
 description = "passagemath: Polyhedral geometry with polymake"
 dependencies = [
     SPKG_INSTALL_REQUIRES_pexpect
+    SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
 ]
