@@ -32,6 +32,7 @@ SAGE_SPKG_CONFIGURE([polymake], [
              AC_MSG_RESULT([yes])
              sage_require_perl_cpan_polymake_prereq=no
              sage_require_perl_term_readline_gnu=no
+             sage_require_perl_app_perlbrew=no
            ], [
              AC_MSG_RESULT([no])
              sage_spkg_install_polymake=yes

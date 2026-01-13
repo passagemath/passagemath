@@ -1,0 +1,6 @@
+set -x
+export PERLBREW_ROOT="$SAGE_LOCAL"
+perlbrew exec cpm install --global --without-test --show-build-log-on-failure $(cat $SAGE_ROOT/build/pkgs/$PKG_BASE/distros/cpan.txt)
+if [ $? != 0 ]; then
+    sdh_die "cpm install failed"
+fi

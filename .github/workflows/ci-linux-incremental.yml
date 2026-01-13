@@ -105,6 +105,6 @@ jobs:
       tox_packages_factors: >-
           ["standard",
            "minimal"]
-      extra_sage_packages: perl_cpan_polymake_prereq libxml2
+      extra_sage_packages: libxml2
       docker_push_repository: ghcr.io/${{ github.repository }}/
       max_parallel: 8

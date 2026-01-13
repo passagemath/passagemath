@@ -25,7 +25,9 @@ fi
 # from a previous version. (polymake 4.8 puts these includes to the end.)
 export CXXFLAGS="-I$(pwd)/include/core-wrappers -I$(pwd)/include/core $CXXFLAGS"
 
-./configure --without-java \
+export PERLBREW_ROOT="$SAGE_LOCAL"
+
+perlbrew exec ./configure --without-java \
             --without-javaview \
             --without-soplex \
             --prefix="$SAGE_LOCAL" \
