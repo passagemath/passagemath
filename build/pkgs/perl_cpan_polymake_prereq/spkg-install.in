@@ -1,2 +1,2 @@
 export PERLBREW_ROOT="$SAGE_LOCAL"
-perlbrew exec cpanm -f $(cat $SAGE_ROOT/build/pkgs/$PKG_BASE/distros/cpan.txt)
+perlbrew exec cpanm --notest $(cat $SAGE_ROOT/build/pkgs/$PKG_BASE/distros/cpan.txt)

@@ -12,12 +12,12 @@ if [ $? != 0 ]; then
     cat "$PERLBREW_ROOT"/build*perl*.log
     sdh_die "perlbrew install-patchperl failed"
 fi
-${PERL-perl} "$LOCALINSTALLER" install --force -j8 5.40.3
+${PERL-perl} "$LOCALINSTALLER" install --notest -j8 5.40.3
 if [ $? != 0 ]; then
     cat "$PERLBREW_ROOT"/build*perl*.log
     sdh_die "perlbrew install failed"
 fi
-${PERL-perl} "$LOCALINSTALLER" install-cpanm --force
+${PERL-perl} "$LOCALINSTALLER" install-cpanm --notest
 if [ $? != 0 ]; then
     cat "$PERLBREW_ROOT"/build*perl*.log
     sdh_die "perlbrew install-cpanm failed"
