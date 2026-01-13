@@ -64,3 +64,10 @@ What is included
 - the `JuPyMake feature <https://passagemath.org/docs/latest/html/en/reference/spkg/sage/features/polymake.html>`__ (via passagemath-environment)
 
 - the `JuPyMake <https://pypi.org/project/JuPyMake/>`__ API
+
+Examples
+--------
+
+Using polymake on the command line::
+
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polymake" sage -polymake
