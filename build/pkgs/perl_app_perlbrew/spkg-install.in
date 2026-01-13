@@ -1,5 +1,8 @@
+set -x
 cd src
 LOCALINSTALLER=perlbrew
 export PERLBREW_ROOT="$SAGE_LOCAL"
 ${PERL-perl} "$LOCALINSTALLER" self-install || sdh_die "perlbrew self-install failed"
-# ${PERL-perl} "$LOCALINSTALLER" -f -q install-patchperl || sdh_die "perlbrew install-patchperl" failed
+${PERL-perl} "$LOCALINSTALLER" -f -q install-patchperl || sdh_die "perlbrew install-patchperl failed"
+${PERL-perl} "$LOCALINSTALLER" -f install -j8 5.40.3 || sdh_die "perlbrew install failed"
+${PERL-perl} "$LOCALINSTALLER" -f install-cpanm || sdh_die "perlbrew install-cpanm failed"

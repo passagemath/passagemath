@@ -21,5 +21,8 @@ esac
 # reported in #22505 (libreadline.so not found).  We work around it by
 # using LD_LIBRARY_PATH.
 export LD_LIBRARY_PATH="$SAGE_LOCAL/lib":"$LD_LIBRARY_PATH"
-perl Makefile.PL --prefix="$SAGE_LOCAL" INSTALL_BASE="$SAGE_LOCAL"
-$MAKE install
+
+export PERLBREW_ROOT="$SAGE_LOCAL"
+
+perlbrew exec perl Makefile.PL
+perlbrew exec $MAKE install
