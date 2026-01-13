@@ -3718,8 +3718,10 @@ class LatticePolytopeClass(Element, ConvexSet_compact,
             M(1)
             in 1-d lattice M
 
-        Regression test for a 6-dimensional polytope that previously failed
-        due to PALP limitations (:issue:`41400`)::
+        Regression test:  ensure this method does not cache an incorrect answer
+        when an exception is raised.  This 6-dimensional polytope exceeds PALP's
+        internal limits and should raise RuntimeError, not returning wrong results
+        (:issue:`41400`)::
 
             sage: V = [(-1, -1, 0, 0, 0, 0),
             ....:      (-1, 0, 0, 0, 0, 0),
