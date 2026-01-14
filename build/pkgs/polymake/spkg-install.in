@@ -25,6 +25,9 @@ fi
 # from a previous version. (polymake 4.8 puts these includes to the end.)
 export CXXFLAGS="-I$(pwd)/include/core-wrappers -I$(pwd)/include/core $CXXFLAGS"
 
+# Disable (excessive) C++ debugging information - https://github.com/passagemath/passagemath/pull/1966#issuecomment-3751008687
+export CXXFLAGS="$CXXFLAGS -g0"
+
 export PERLBREW_ROOT="$SAGE_LOCAL"
 
 perlbrew exec ./configure --without-java \
