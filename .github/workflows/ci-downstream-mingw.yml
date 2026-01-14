@@ -36,11 +36,13 @@ jobs:
                             "sagemath-glpk",
                             "sagemath-graphs",
                             "sagemath-homfly",
+                            "sagemath-iml",
                             "sagemath-modules",
                             "sagemath-nauty",
                             "sagemath-ntl",
                             "sagemath-objects",
                             "sagemath-planarity",
+                            "sagemath-plantri",
                             "sagemath-plot",
                             "sagemath-polyhedra",
                             "sagemath-rankwidth",
@@ -68,6 +70,7 @@ jobs:
             ${{ matrix.distribution == 'sagemath-graphs'   && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-ntl'      && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-plantri'  && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-tdlib'    && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
           msystem: ${{ contains(matrix.env, 'ucrt') && 'ucrt64' || 'clangarm64' }}
 
