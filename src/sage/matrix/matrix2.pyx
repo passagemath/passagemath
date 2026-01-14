@@ -364,7 +364,7 @@ cdef class Matrix(Matrix1):
             sage: A.solve_left(b)                                                       # needs scipy
             Traceback (most recent call last):
             ...
-            LinAlgError: Matrix is singular.
+            LinAlgError: ...singular.
 
         The vector of constants needs the correct degree::
 
@@ -759,7 +759,7 @@ cdef class Matrix(Matrix1):
             sage: A.solve_right(b)
             Traceback (most recent call last):
             ...
-            LinAlgError: Matrix is singular.
+            LinAlgError: ...singular.
 
         The vector of constants needs the correct degree.  ::
 
