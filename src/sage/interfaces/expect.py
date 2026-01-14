@@ -501,7 +501,8 @@ If this all works, you can then make calls like:
         # See Issue #12221 and #13859.
         pexpect_env = dict(os.environ)
         pexpect_env.update(self._env)
-        pexpect_del_vars = ['TERM', 'COLUMNS']
+        pexpect_env['TERM'] = "dumb"
+        pexpect_del_vars = ['COLUMNS']
         for i in pexpect_del_vars:
             try:
                 del pexpect_env[i]
