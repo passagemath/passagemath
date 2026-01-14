@@ -48,11 +48,6 @@ FOURTITWO_PPI = "@FOURTITWO_PPI@"
 FOURTITWO_CIRCUITS = "@FOURTITWO_CIRCUITS@"
 FOURTITWO_GROEBNER = "@FOURTITWO_GROEBNER@"
 
-# Colon-separated list of pkg-config modules to search for cblas functionality.
-# We hard-code it here as cblas because configure (build/pkgs/openblas/spkg-configure.m4)
-# always provides cblas.pc, if necessary by creating a facade pc file for a system BLAS.
-CBLAS_PC_MODULES = "cblas"
-
 # for sage_setup.setenv
 SAGE_ARCHFLAGS = "@SAGE_ARCHFLAGS@"
 SAGE_PKG_CONFIG_PATH = "@SAGE_PKG_CONFIG_PATH@".replace("$SAGE_LOCAL", SAGE_LOCAL)
