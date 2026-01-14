@@ -188,9 +188,8 @@ cdef class Matrix_gf2e_dense(matrix_dense.Matrix_dense):
                 _m4rie_finite_field_cache[poly] = FF
 
         # cache elements
-        self._zero = self._base_ring(0)
-        self._zero_word = poly_to_word(self._zero)
-        self._one = self._base_ring(1)
+        self._zero = self._base_ring.zero()
+        self._one = self._base_ring.one()
 
     def __dealloc__(self):
         """
@@ -350,7 +349,7 @@ cdef class Matrix_gf2e_dense(matrix_dense.Matrix_dense):
             [0 1]
             [1 0]
         """
-        return mzed_read_elem(self._entries, i, j) == self._zero_word
+        return mzed_read_elem(self._entries, i, j) == 0
 
     cpdef _add_(self, right):
         r"""
