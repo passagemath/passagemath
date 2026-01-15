@@ -2,6 +2,14 @@ set -x
 cd src
 LOCALINSTALLER=perlbrew
 export PERLBREW_ROOT="$SAGE_LOCAL"
+
+# Work around https://github.com/Perl/perl5/issues/24085
+case "$MACOSX_DEPLOYMENT_TARGET" in
+    "")  ;;
+    *.*) ;;
+    *)   export MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET}.0";;
+esac
+
 ${PERL-perl} "$LOCALINSTALLER" self-install
 if [ $? != 0 ]; then
     cat "$PERLBREW_ROOT"/build*perl*.log
