@@ -1,0 +1,22 @@
+ https://src.fedoraproject.org/rpms/polymake/raw/rawhide/f/polymake-no-gold.patch
+
+--- a/support/configure.pl	2024-06-17 14:41:03.559585338 -0600
++++ b/support/configure.pl	2024-06-17 14:42:08.005682050 -0600
+@@ -636,17 +636,6 @@ int main() {
+ ---
+    my $build_error;
+ 
+-   # try to use gold linker unless another linker has been prescribed by the user
+-   unless ($^O eq "darwin" or $Config::Config{archname} =~ /^mips/ or "$CXXFLAGS $LDFLAGS" =~ /(?:^|\s)-fuse-ld[=\s]/) {
+-      $build_error = build_test_program($cxx_tell_version, LDFLAGS => "-fuse-ld=gold");
+-      if ($?) {
+-         # did not work out, maybe gold is missing?
+-         undef $build_error;
+-      } else {
+-         $LDFLAGS .= " -fuse-ld=gold";
+-         $autogold = 1;
+-      }
+-   }
+    $build_error //= build_test_program($cxx_tell_version);
+ 
+    if ($?) {

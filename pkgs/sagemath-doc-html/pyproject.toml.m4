@@ -19,6 +19,7 @@ requires = [
     SPKG_INSTALL_REQUIRES_sagemath_kenzo
     SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2
     SPKG_INSTALL_REQUIRES_sagemath_msolve
+    SPKG_INSTALL_REQUIRES_sagemath_polymake
     SPKG_INSTALL_REQUIRES_sagemath_qepcad
     SPKG_INSTALL_REQUIRES_sagemath_rankwidth
     SPKG_INSTALL_REQUIRES_sagemath_rubiks

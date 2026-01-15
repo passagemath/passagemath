@@ -52,7 +52,7 @@ latte       = ["passagemath-polyhedra[latte_int]"]  # alias
 latte_int   = ["passagemath-latte-4ti2"]
 normaliz    = [SPKG_INSTALL_REQUIRES_pynormaliz]
 palp        = ["passagemath-palp"]
-polymake    = [SPKG_INSTALL_REQUIRES_jupymake]
+polymake    = ["passagemath-polymake"]
 ppl         = []  # no extra required
 topcom      = ["passagemath-topcom"]
 

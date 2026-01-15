@@ -49,7 +49,7 @@ Information on missing Polymake prerequisites after installing polymake::
    (sage-sh) $ polymake
    polytope> show_unconfigured;
 
-In order to use Polymake from Sage, please refer to the [Jupymake SPKG page](https://passagemath.org/docs/latest/html/en/reference/spkg/jupymake.html) for installation instructions.
+In order to use Polymake from Sage, please install [passagemath-polymake](https://passagemath.org/docs/latest/html/en/reference/spkg/sagemath_polymake.html).
 
 
 

@@ -1,0 +1,27 @@
+graft passagemath_polymake
+
+prune sage
+
+include VERSION.txt
+
+include sage/interfaces/polymake.py
+
+global-exclude *.c
+global-exclude *.cpp
+
+global-exclude all__sagemath_*.py
+global-include all__sagemath_polymake.py
+
+# JupyMake
+include JuPyMake.cpp
+
+include repair_wheel.py
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude *.bak
+global-exclude *.so
+global-exclude *~
+prune .tox
+prune build
+prune dist

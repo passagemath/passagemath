@@ -18,7 +18,7 @@ from .join_feature import JoinFeature
 
 class JuPyMake(JoinFeature):
     r"""
-    A :class:`~sage.features.Feature` describing the presence of the :ref:`JuPyMake <spkg_jupymake>`
+    A :class:`~sage.features.Feature` describing the presence of the JuPyMake
     module, a Python interface to the :ref:`polymake <spkg_polymake>` library.
 
     EXAMPLES::
@@ -36,7 +36,7 @@ class JuPyMake(JoinFeature):
             True
         """
         JoinFeature.__init__(self, "jupymake",
-                             [PythonModule("JuPyMake", spkg='jupymake')])
+                             [PythonModule("JuPyMake", spkg='sagemath_polymake')])
 
 
 def all_features():
