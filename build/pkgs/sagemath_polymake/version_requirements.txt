@@ -1,1 +1,2 @@
-passagemath-polymake
+# This file is updated on every release by the update-version script
+passagemath-polymake ~= 10.6.47.0
