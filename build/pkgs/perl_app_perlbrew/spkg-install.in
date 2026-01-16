@@ -2,6 +2,7 @@ set -x
 cd src
 LOCALINSTALLER=./perlbrew
 export PERLBREW_ROOT="$SAGE_LOCAL"
+export PERLBREW_HOME="$SAGE_LOCAL"
 rm -f "$SAGE_LOCAL"/bin/perlbrew
 
 # Work around https://github.com/Perl/perl5/issues/24085
