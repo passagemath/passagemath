@@ -56,10 +56,7 @@ thereof, for all the combinatorial maps that apply to it.
 # ****************************************************************************
 
 
-try:
-    from typing import Self  # type: ignore (Python >= 3.11)
-except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.10)
+from typing import Self
 
 
 def combinatorial_map_trivial(f=None, order=None, name=None):
