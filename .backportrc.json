@@ -5,7 +5,7 @@
   "repoName": "passagemath",
 
   // the branches available to backport to
-  "targetBranchChoices": ["passagemath-10.5.x"],
+  "targetBranchChoices": ["passagemath-10.6.x"],
 
   // Optional: automatically merge backport PR
   "autoMerge": true,
