@@ -11,7 +11,8 @@ case "$MACOSX_DEPLOYMENT_TARGET" in
     *)   export MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET}.0";;
 esac
 
-${PERL-perl} "$LOCALINSTALLER" self-install --force
+cpan Devel::Trace
+${PERL-perl} -d:Trace "$LOCALINSTALLER" self-install --force
 if [ $? != 0 ]; then
     cat "$PERLBREW_ROOT"/build*perl*.log
     set +x
