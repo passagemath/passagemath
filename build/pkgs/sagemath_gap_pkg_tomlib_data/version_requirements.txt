@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-gap-pkg-tomlib-data ~= 10.6.47.0
+passagemath-gap-pkg-tomlib-data == 10.8.1.dev0
