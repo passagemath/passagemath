@@ -17,19 +17,19 @@ if [ $? != 0 ]; then
     set +x
     sdh_die "perlbrew self-install failed"
 fi
-${PERL-perl} "$LOCALINSTALLER" install-patchperl
+${PERL-perl} "$LOCALINSTALLER" install-patchperl --force
 if [ $? != 0 ]; then
     cat "$PERLBREW_ROOT"/build*perl*.log
     set +x
     sdh_die "perlbrew install-patchperl failed"
 fi
-${PERL-perl} "$LOCALINSTALLER" install --notest -j8 5.40.3 -Duseshrplib
+${PERL-perl} "$LOCALINSTALLER" install --notest --force -j8 5.40.3 -Duseshrplib
 if [ $? != 0 ]; then
     cat "$PERLBREW_ROOT"/build*perl*.log
     set +x
     sdh_die "perlbrew install failed"
 fi
-${PERL-perl} "$LOCALINSTALLER" install-cpm --notest
+${PERL-perl} "$LOCALINSTALLER" install-cpm --notest --force
 if [ $? != 0 ]; then
     cat "$PERLBREW_ROOT"/build*perl*.log
     set +x
