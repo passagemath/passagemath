@@ -556,6 +556,8 @@ jobs:
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_polymake
+        env:
+          CIBW_SKIP: "cp313-* cp314-*"
 
       - name: sagemath-glpk
         id:   sagemath-glpk
