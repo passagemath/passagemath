@@ -437,7 +437,8 @@ class EllipticCurveFactory(UniqueFactory):
 
         if isinstance(x, str):
             # Interpret x as a Cremona or LMFDB label.
-            with sage.databases.cremona.CremonaDatabase() as D:
+            from sage.databases.cremona import CremonaDatabase
+            with CremonaDatabase() as D:
                 x, data = D.coefficients_and_data(x)
             # data is only valid for elliptic curves over QQ.
             if R not in (None, QQ):
