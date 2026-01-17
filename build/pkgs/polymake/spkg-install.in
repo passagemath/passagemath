@@ -28,6 +28,9 @@ export CXXFLAGS="-I$(pwd)/include/core-wrappers -I$(pwd)/include/core $CXXFLAGS"
 # Disable (excessive) C++ debugging information - https://github.com/passagemath/passagemath/pull/1966#issuecomment-3751008687
 export CXXFLAGS="$CXXFLAGS -g0"
 
+# Patch out lib64 guesswork
+sed -i.bak 's/lib64/lib64-disabled/g' perllib/Polymake/ConfigureStandalone.pm
+
 export PERLBREW_ROOT="$SAGE_LOCAL"
 
 perlbrew exec cpm install --global --without-test --show-build-log-on-failure Devel::Trace
