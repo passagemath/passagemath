@@ -12,29 +12,42 @@ case "$MACOSX_DEPLOYMENT_TARGET" in
     *)   export MACOSX_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET}.0";;
 esac
 
-cpan Devel::Trace
-${PERL-perl} -d:Trace "$LOCALINSTALLER" self-install --force
-if [ $? != 0 ]; then
+print_logs () {
     cat "$PERLBREW_ROOT"/build*perl*.log
+    rm -f "$PERLBREW_ROOT"/build*perl*.log
+}
+
+if cpan Devel::Trace; then
+    TRACE_OPTIONS="-d:Trace"
+fi
+
+${PERL-perl} $TRACE_OPTIONS "$LOCALINSTALLER" self-install --force
+status=$?
+if [ $status != 0 ]; then
     set +x
     sdh_die "perlbrew self-install failed"
 fi
+
 ${PERL-perl} "$LOCALINSTALLER" install-patchperl --force
-if [ $? != 0 ]; then
-    cat "$PERLBREW_ROOT"/build*perl*.log
+status=$?
+print_logs
+if [ $status != 0 ]; then
     set +x
     sdh_die "perlbrew install-patchperl failed"
 fi
-${PERL-perl} "$LOCALINSTALLER" install --notest --force -j8 5.40.3 -Duseshrplib -Ulocincpth= -Uloclibpth= -Aldflags="$LDFLAGS"
-cat "$PERLBREW_ROOT"/build*perl*.log
 
-if [ $? != 0 ]; then
+${PERL-perl} "$LOCALINSTALLER" install --notest --force -j8 5.40.3 -Duseshrplib -Ulocincpth= -Uloclibpth= -Aldflags="$LDFLAGS"
+status=$?
+print_logs
+if [ $status != 0 ]; then
     set +x
     sdh_die "perlbrew install failed"
 fi
+
 ${PERL-perl} "$LOCALINSTALLER" install-cpm --notest --force
-if [ $? != 0 ]; then
-    cat "$PERLBREW_ROOT"/build*perl*.log
+status=$?
+print_logs
+if [ $status != 0 ]; then
     set +x
     sdh_die "perlbrew install-cpm failed"
 fi
