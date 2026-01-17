@@ -25,9 +25,10 @@ if [ $? != 0 ]; then
     set +x
     sdh_die "perlbrew install-patchperl failed"
 fi
-${PERL-perl} "$LOCALINSTALLER" install --notest --force -j8 5.40.3 -Duseshrplib
+${PERL-perl} "$LOCALINSTALLER" install --notest --force -j8 5.40.3 -Duseshrplib -Dlocincpth= -Dloclibpth=
+cat "$PERLBREW_ROOT"/build*perl*.log
+
 if [ $? != 0 ]; then
-    cat "$PERLBREW_ROOT"/build*perl*.log
     set +x
     sdh_die "perlbrew install failed"
 fi
