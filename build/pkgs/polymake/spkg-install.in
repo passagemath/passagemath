@@ -44,5 +44,5 @@ perlbrew exec perl -d:Trace -I. support/configure.pl --without-java \
             --with-gmp="$SAGE_LOCAL" \
             --with-mpfr="$SAGE_LOCAL" \
             $more_configure_options || sdh_die "Error configuring Polymake"
-ninja -C build/Opt -j${SAGE_NUM_THREADS}
+ninja -v -C build/Opt -j${SAGE_NUM_THREADS}
 sdh_make_install
