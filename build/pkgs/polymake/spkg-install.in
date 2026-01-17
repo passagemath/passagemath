@@ -30,7 +30,9 @@ export CXXFLAGS="$CXXFLAGS -g0"
 
 export PERLBREW_ROOT="$SAGE_LOCAL"
 
-perlbrew exec ./configure --without-java \
+perlbrew exec cpm install --global --without-test --show-build-log-on-failure Devel::Trace
+
+perlbrew exec perl -d:Trace -I. support/configure.pl --without-java \
             --without-javaview \
             --without-soplex \
             --prefix="$SAGE_LOCAL" \
