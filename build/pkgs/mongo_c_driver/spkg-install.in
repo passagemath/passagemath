@@ -5,6 +5,9 @@ sdh_cmake -GNinja \
           -DBUILD_STATIC_LIBS=OFF \
           -DBUILD_SHARED_LIBS=ON \
           -DENABLE_MONGOC=ON \
+          -DENABLE_ZLIB=SYSTEM \
+          -DENABLE_ZSTD=OFF \
+          -DENABLE_SNAPPY=OFF \
           .
 
 cmake --build .
