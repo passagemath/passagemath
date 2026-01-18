@@ -28,4 +28,4 @@ export LD_LIBRARY_PATH="$SAGE_LOCAL/lib":"$LD_LIBRARY_PATH"
 export PERLBREW_ROOT="$SAGE_LOCAL"
 
 perlbrew exec perl Makefile.PL
-perlbrew exec $MAKE install
+perlbrew exec $MAKE OTHERLDFLAGS="$LDFLAGS" install
