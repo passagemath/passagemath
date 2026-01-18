@@ -37,6 +37,7 @@ jobs:
                             "sagemath-graphs",
                             "sagemath-homfly",
                             "sagemath-iml",
+                            "sagemath-mcqd",
                             "sagemath-modules",
                             "sagemath-nauty",
                             "sagemath-ntl",
@@ -69,6 +70,7 @@ jobs:
             ${{ matrix.distribution == 'sagemath-flint'    && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-graphs'   && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-mcqd'     && format('mingw-w64-{0}-python-passagemath-graphs mingw-w64-{0}-python-passagemath-cliquer', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-ntl'      && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-plantri'  && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-tdlib'    && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
