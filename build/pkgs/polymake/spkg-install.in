@@ -33,9 +33,7 @@ sed -i.bak 's/lib64/lib64-disabled/g' perllib/Polymake/ConfigureStandalone.pm
 
 export PERLBREW_ROOT="$SAGE_LOCAL"
 
-perlbrew exec cpm install --global --without-test --show-build-log-on-failure Devel::Trace
-
-perlbrew exec perl -d:Trace -I. support/configure.pl --without-java \
+perlbrew exec ./configure --without-java \
             --without-javaview \
             --without-soplex \
             --prefix="$SAGE_LOCAL" \
