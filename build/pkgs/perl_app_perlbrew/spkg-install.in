@@ -17,9 +17,9 @@ print_logs () {
     rm -f "$PERLBREW_ROOT"/build*perl*.log
 }
 
-if cpan Devel::Trace; then
-    TRACE_OPTIONS="-d:Trace"
-fi
+# if cpan Devel::Trace; then
+#     TRACE_OPTIONS="-d:Trace"
+# fi
 
 ${PERL-perl} $TRACE_OPTIONS "$LOCALINSTALLER" self-install --force
 status=$?
