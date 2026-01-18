@@ -32,7 +32,7 @@ export CXXFLAGS="$CXXFLAGS -g0"
 sed -i.bak 's/lib64/lib64-disabled/g' perllib/Polymake/ConfigureStandalone.pm
 
 # Patch out rpathery
-sed -i.bak '/-rpath,/d' support/configure.pl
+sed -E -i.bak 's/ *-Wl,-rpath,[^ "/]*//' support/configure.pl bundled/*/support/configure.pl
 
 export PERLBREW_ROOT="$SAGE_LOCAL"
 
