@@ -31,6 +31,9 @@ export CXXFLAGS="$CXXFLAGS -g0"
 # Patch out lib64 guesswork
 sed -i.bak 's/lib64/lib64-disabled/g' perllib/Polymake/ConfigureStandalone.pm
 
+# Patch out rpathery
+sed -i.bak '/-rpath,/d' support/configure.pl
+
 export PERLBREW_ROOT="$SAGE_LOCAL"
 
 perlbrew exec ./configure --without-java \
