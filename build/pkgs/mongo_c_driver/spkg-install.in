@@ -4,7 +4,12 @@ sdh_cmake -GNinja \
           -DCMAKE_VERBOSE_MAKEFILE=ON \
           -DBUILD_STATIC_LIBS=OFF \
           -DBUILD_SHARED_LIBS=ON \
+          -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
+          -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
           -DENABLE_MONGOC=ON \
+          -DENABLE_ZLIB=SYSTEM \
+          -DENABLE_ZSTD=OFF \
+          -DENABLE_SNAPPY=OFF \
           .
 
 cmake --build .

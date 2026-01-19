@@ -1,5 +1,8 @@
 cd src
 
+# Patch out homebrew discovery
+sed -i.bak 's/brew -v/brew-does-not-exist/' Makefile.PL
+
 case $(uname) in
     Darwin)
         # #21175/#29408: Set the ARCHFLAGS environment variable. This
@@ -25,4 +28,4 @@ export LD_LIBRARY_PATH="$SAGE_LOCAL/lib":"$LD_LIBRARY_PATH"
 export PERLBREW_ROOT="$SAGE_LOCAL"
 
 perlbrew exec perl Makefile.PL
-perlbrew exec $MAKE install
+perlbrew exec $MAKE OTHERLDFLAGS="$LDFLAGS" install
