@@ -529,6 +529,21 @@ jobs:
             ~/sage-*
           key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
 
+      - name: Prepare sage-local artifact
+        if: always() && runner.os != 'Linux' && steps.unpack.outcome == 'success'
+        # Adapted from macos.yml
+        # This is macOS tar -- cannot use --remove-files.
+        # We remove the $SAGE_LOCAL/lib64 link
+        run: |
+          mkdir -p sage-local-artifact && (cd $HOME && rm -f "sage-local/lib64" && tar -cf - sage-local) > sage-local-artifact/sage-local.tar
+
+      - name: Upload sage-local artifact
+        if: always() && runner.os != 'Linux' && steps.unpack.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          path: sage-local-artifact/sage-local.tar
+          name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
+
         ####### sagemath-categories and what depends on it
 
       - name: sagemath-categories
