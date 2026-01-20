@@ -80,7 +80,7 @@ from sage.rings.infinity import Infinity
 
 
 class InfiniteWord_class(Word_class):
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return a string representation of ``self``.
 

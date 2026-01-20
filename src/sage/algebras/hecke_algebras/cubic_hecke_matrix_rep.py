@@ -75,7 +75,7 @@ class RepresentationType(Enum):
         sage: chmr.RepresentationType.RegularLeft.is_regular()
         True
     """
-    def is_split(self):
+    def is_split(self) -> bool:
         r"""
         Return ``True`` if this representation type is absolutely split,
         ``False`` else-wise.
@@ -89,7 +89,7 @@ class RepresentationType(Enum):
         """
         return self.value['split']
 
-    def is_regular(self):
+    def is_regular(self) -> bool:
         r"""
         Return ``True`` if this representation type is regular, ``False``
         else-wise.
@@ -709,7 +709,7 @@ class CubicHeckeMatrixSpace(MatrixSpace):
             sage: MS = c1.matrix().parent()
             sage: MS._test_category()   # indirect doctest
         """
-        return None
+        return
 
     def __reduce__(self):
         r"""
@@ -895,8 +895,8 @@ class CubicHeckeMatrixSpace(MatrixSpace):
             matri += cf2 * matr
             matri += cf3 * matr**2
             d1, d2 = matr.dimensions()
-            matrI = matrix(original_base_ring, d1, d2, lambda i, j: original_base_ring(matri[i, j]))
-            return matrI
+            return matrix(original_base_ring, d1, d2,
+                          lambda i, j: original_base_ring(matri[i, j]))
 
         if n == 2:
             if representation_type.is_split():

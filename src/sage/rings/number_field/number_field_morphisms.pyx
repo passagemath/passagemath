@@ -498,8 +498,8 @@ def root_from_approx(f, a):
             return a
         if rel is True:
             raise ValueError("{} is not a root of {}".format(a, f))
-        from sage.symbolic.relation import test_relation_maxima
-        if test_relation_maxima(rel):
+        from sage.symbolic.relation import check_relation_maxima
+        if check_relation_maxima(rel):
             raise ValueError("{} is not a root of {}".format(a, f))
         return a
 

@@ -167,7 +167,7 @@ cdef class LibSingularOptions_abstract:
             sage: opt['degBound']
             2
         """
-        for k,v in kwds.iteritems():
+        for k, v in kwds.items():
             self[k] = v
 
     def __getitem__(self, name):
@@ -616,7 +616,7 @@ cdef class LibSingularOptionsContext:
         self.bck_degBound.append(Kstd1_deg)
         self.bck_multBound.append(Kstd1_mu)
         opt = self.opt.__class__()
-        for k,v in self.options.iteritems():
+        for k, v in self.options.items():
             opt[k] = v
 
     def __call__(self, **kwds):
@@ -632,8 +632,7 @@ cdef class LibSingularOptionsContext:
             ....:   opt['redTail']
             False
         """
-        new = self.__class__(self.opt, **kwds)
-        return new
+        return self.__class__(self.opt, **kwds)
 
     def __exit__(self, typ, value, tb):
         """

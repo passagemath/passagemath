@@ -354,7 +354,7 @@ to_mpl_color = rgbcolor
 
 
 class Color:
-    def __init__(self, r='#0000ff', g=None, b=None, space='rgb'):
+    def __init__(self, r='#0000ff', g=None, b=None, space='rgb') -> None:
         """
         A Red-Green-Blue (RGB) color model color object.  For most
         consumer-grade devices (e.g., CRTs, LCDs, and printers), as
@@ -401,7 +401,7 @@ class Color:
         else:
             self._rgb = rgbcolor((r, g, b), space=space)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Return a string representation of this color.
 
@@ -416,7 +416,7 @@ class Color:
         """
         return f"RGB color {self._rgb}"
 
-    def __lt__(self, right):
+    def __lt__(self, right) -> bool:
         """
         Check whether a :class:`Color` object is less than some other
         object. This doesn't make sense, and so we conclude that it is
@@ -439,7 +439,7 @@ class Color:
         """
         return False
 
-    def __le__(self, right):
+    def __le__(self, right) -> bool:
         """
         Check whether a :class:`Color` object is less than or equal to
         some other object. It wouldn't make sense for it to be less than
@@ -463,7 +463,7 @@ class Color:
         """
         return self == right
 
-    def __eq__(self, right):
+    def __eq__(self, right) -> bool:
         """
         Compare two :class:`Color` objects to determine whether
         they refer to the same color.
@@ -490,7 +490,7 @@ class Color:
             return self._rgb == right._rgb
         return False
 
-    def __ne__(self, right):
+    def __ne__(self, right) -> bool:
         """
         Compare two :class:`Color` objects to determine whether
         they refer to different colors.
@@ -517,7 +517,7 @@ class Color:
         """
         return not (self == right)
 
-    def __gt__(self, right):
+    def __gt__(self, right) -> bool:
         """
         Check whether a :class:`Color` object is greater than some other
         object. This doesn't make sense, and so we conclude that it is
@@ -540,7 +540,7 @@ class Color:
         """
         return False
 
-    def __ge__(self, right):
+    def __ge__(self, right) -> bool:
         """
         Check whether a :class:`Color` object is greater than or equal
         to some other object. It wouldn't make sense for it to be
@@ -564,7 +564,7 @@ class Color:
         """
         return self == right
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Return the hash value of a color.
         Equal colors return equal hash values.
@@ -1005,7 +1005,7 @@ class ColorsDict(dict):
         sage: sorted(colors)
         ['aliceblue', 'antiquewhite', 'aqua', 'aquamarine', ...]
     """
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Construct a dict-like collection of colors.  The keys are the
         color names (i.e., strings) and the values are RGB 3-tuples of
@@ -1365,7 +1365,7 @@ class Colormaps(MutableMapping):
         sage: sorted(colormaps)
         ['Accent', ...]
     """
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Construct an empty mutable collection of color maps.
 
@@ -1419,7 +1419,7 @@ class Colormaps(MutableMapping):
                    '__setitem__', '__delitem__']
         return dir(super()) + methods + sorted(self)
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         Return the number of color maps.
 
@@ -1453,7 +1453,7 @@ class Colormaps(MutableMapping):
         self.load_maps()
         return iter(self.maps)
 
-    def __contains__(self, name):
+    def __contains__(self, name) -> bool:
         """
         Return whether a map is in the color maps collection.
 
@@ -1537,7 +1537,7 @@ class Colormaps(MutableMapping):
         except KeyError:
             raise AttributeError("'{}' has no attribute or colormap {}".format(type(self).__name__, name))
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Return a string representation of the color map collection.
 

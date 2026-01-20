@@ -12,7 +12,7 @@ AUTHORS:
 - Franco Saliola
 - Chris Berg
 """
-#*****************************************************************************
+# ***************************************************************************
 #       Copyright (C) 2010 Jason Bandlow <jbandlow@gmail.com>,
 #                     2012 Franco Saliola <saliola@gmail.com>,
 #
@@ -25,8 +25,8 @@ AUTHORS:
 #
 #  The full text of the GPL is available at:
 #
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+#  ***************************************************************************
 
 from sage.misc.cachefunc import cached_method
 from sage.categories.realizations import Category_realization_of_parent
@@ -950,7 +950,7 @@ class BasesOfQSymOrNCSF(Category_realization_of_parent):
             EXAMPLES::
 
                 sage: S = NonCommutativeSymmetricFunctions(QQ).S()
-                sage: (x, y) = (S[2], S[3])
+                sage: x, y = S[2], S[3]
                 sage: x.degree()
                 2
                 sage: (x^3 + 4*y^2).degree()
@@ -961,7 +961,7 @@ class BasesOfQSymOrNCSF(Category_realization_of_parent):
             ::
 
                 sage: F = QuasiSymmetricFunctions(QQ).F()
-                sage: (x, y) = (F[2], F[3])
+                sage: x, y = F[2], F[3]
                 sage: x.degree()
                 2
                 sage: (x^3 + 4*y^2).degree()

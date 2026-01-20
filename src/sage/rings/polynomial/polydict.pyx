@@ -99,7 +99,7 @@ cdef class PolyDict:
     Data structure for multivariate polynomials.
 
     A PolyDict holds a dictionary all of whose keys are :class:`ETuple` and
-    whose values are coefficients on which it is implicitely assumed that
+    whose values are coefficients on which it is implicitly assumed that
     arithmetic operations can be performed.
 
     No arithmetic operation on :class:`PolyDict` clear zero coefficients as of
@@ -108,7 +108,9 @@ cdef class PolyDict:
     can use the method :meth:`remove_zeros` which can be parametrized by a zero
     test.
     """
-    def __init__(self, pdict, zero=None, remove_zero=None, force_int_exponents=None, force_etuples=None, bint check=True):
+    def __init__(self, pdict, zero=None, remove_zero=None,
+                 force_int_exponents=None, force_etuples=None,
+                 bint check=True) -> None:
         """
         INPUT:
 
@@ -297,7 +299,7 @@ cdef class PolyDict:
         deprecation(34000, 'coerce_cefficients is deprecated; use apply_map instead')
         self.apply_map(A.coerce)
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Return the hash.
 
@@ -314,7 +316,7 @@ cdef class PolyDict:
         """
         return hash(frozenset(self.__repn.items()))
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         """
         Return whether the PolyDict is empty.
 
@@ -327,7 +329,7 @@ cdef class PolyDict:
         """
         return bool(self.__repn)
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         Return the number of terms of this polynomial.
 
@@ -340,7 +342,7 @@ cdef class PolyDict:
         """
         return len(self.__repn)
 
-    def __richcmp__(PolyDict left, PolyDict right, int op):
+    def __richcmp__(PolyDict left, PolyDict right, int op) -> bool:
         """
         Implement the ``__richcmp__`` protocol for `PolyDict`s.
 
@@ -524,7 +526,7 @@ cdef class PolyDict:
         """
         return self.__repn.get(e, default)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         r"""
         String representation.
         """
@@ -1452,7 +1454,7 @@ cdef class ETuple:
         x._length = self._length
         return x
 
-    def __init__(self, data=None, length=None):
+    def __init__(self, data=None, length=None) -> None:
         """
         - ``ETuple()`` -> an empty ETuple
         - ``ETuple(sequence)`` -> ETuple initialized from sequence's items
@@ -1522,7 +1524,7 @@ cdef class ETuple:
         if self._data != <int*>0:
             sig_free(self._data)
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         r"""
         Return whether ``self`` is nonzero.
 
@@ -1664,7 +1666,7 @@ cdef class ETuple:
             return self._data[2 * ind + 1]
         return 0
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         x.__hash__() <==> hash(x)
         """
@@ -1689,7 +1691,7 @@ cdef class ETuple:
         """
         return self._length
 
-    def __contains__(self, elem):
+    def __contains__(self, elem) -> bool:
         """
         ``x.__contains__(n) <==> n in x``.
 
@@ -1713,7 +1715,7 @@ cdef class ETuple:
                 return True
         return False
 
-    def __richcmp__(ETuple self, ETuple other, op):
+    def __richcmp__(ETuple self, ETuple other, op) -> bool:
         """
         EXAMPLES::
 
@@ -1820,10 +1822,10 @@ cdef class ETuple:
             else:
                 yield 0
 
-    def __str__(self):
+    def __str__(self) -> str:
         return repr(self)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         r"""
         TESTS::
 
@@ -2023,8 +2025,7 @@ cdef class ETuple:
             sage: y^(2^32)
             Traceback (most recent call last):
             ...
-            OverflowError: exponent overflow (...)   # 64-bit
-            OverflowError: Python int too large to convert to C unsigned long  # 32-bit
+            OverflowError: exponent overflow (...)
         """
         if self._length != other._length:
             raise ArithmeticError('ETuple of different lengths')

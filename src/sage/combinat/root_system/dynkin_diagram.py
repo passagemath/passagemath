@@ -460,7 +460,7 @@ class DynkinDiagram_class(DiGraph, CartanType_abstract):
             sage: DynkinDiagram("A2","B2","F4").rank()
             8
         """
-        return self.num_verts()
+        return self.n_vertices()
 
     def dynkin_diagram(self):
         """
@@ -631,7 +631,7 @@ class DynkinDiagram_class(DiGraph, CartanType_abstract):
         """
         return self.cartan_matrix().subtype(index_set).dynkin_diagram()
 
-    def is_finite(self):
+    def is_finite(self) -> bool:
         """
         Check if ``self`` corresponds to a finite root system.
 
@@ -647,7 +647,7 @@ class DynkinDiagram_class(DiGraph, CartanType_abstract):
             return self._cartan_type.is_finite()
         return self.cartan_matrix().is_finite()
 
-    def is_affine(self):
+    def is_affine(self) -> bool:
         """
         Check if ``self`` corresponds to an affine root system.
 
@@ -663,7 +663,7 @@ class DynkinDiagram_class(DiGraph, CartanType_abstract):
             return self._cartan_type.is_affine()
         return self.cartan_matrix().is_affine()
 
-    def is_irreducible(self):
+    def is_irreducible(self) -> bool:
         """
         Check if ``self`` corresponds to an irreducible root system.
 
@@ -682,9 +682,9 @@ class DynkinDiagram_class(DiGraph, CartanType_abstract):
         """
         if self._cartan_type is not None:
             return self._cartan_type.is_irreducible()
-        return self.connected_components_number() == 1
+        return self.number_of_connected_components() == 1
 
-    def is_crystallographic(self):
+    def is_crystallographic(self) -> bool:
         """
         Implement :meth:`CartanType_abstract.is_crystallographic`.
 
@@ -771,8 +771,8 @@ class DynkinDiagram_class(DiGraph, CartanType_abstract):
             [[2], [1, 3], [2, 4], [3]]
         """
         if not isinstance(i, tuple):
-            return DiGraph.__getitem__(self,i)
-        [i,j] = i
+            return DiGraph.__getitem__(self, i)
+        i, j = i
         if i == j:
             if i in self._odd_isotropic_roots:
                 return 0

@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-graphs
-# cython: binding=True
 r"""
 Comparability and permutation graphs
 

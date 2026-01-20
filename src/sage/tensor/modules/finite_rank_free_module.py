@@ -528,8 +528,7 @@ The components on the basis are returned by the square bracket operator for
 # ******************************************************************************
 from __future__ import annotations
 
-from typing import Optional
-from collections.abc import Generator
+from typing import Optional, TYPE_CHECKING
 
 from sage.categories.fields import Fields
 from sage.categories.homset import Hom
@@ -549,6 +548,9 @@ from sage.tensor.modules.reflexive_module import (
     ReflexiveModule_base,
     ReflexiveModule_dual,
 )
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 
 class FiniteRankFreeModule_abstract(UniqueRepresentation, ReflexiveModule_abstract):
@@ -2033,6 +2035,8 @@ class FiniteRankFreeModule(ReflexiveModule_base, FiniteRankFreeModule_abstract):
               running ._test_new() . . . pass
               running ._test_not_implemented_methods() . . . pass
               running ._test_pickling() . . . pass
+              running ._test_random() . . . pass
+              running ._test_rank() . . . pass
               running ._test_some_elements() . . . pass
         """
         from sage.misc.sage_unittest import TestSuite

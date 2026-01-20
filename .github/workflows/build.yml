@@ -429,7 +429,7 @@ jobs:
         # This step needs to happen after the commit sha is put in DOCKER_TAG
         # so that multi-stage builds can work correctly.
         run: |
-          .ci/merge-fixes.sh
+          .github/workflows/merge-fixes.sh
         env:
           GH_TOKEN: ${{ github.token }}
         if: false
@@ -490,13 +490,13 @@ jobs:
             --force-lib --long -p4 --format github \
             --random-seed=286735480429121101562228604801325644303 ${{ matrix.tests }} \
             --baseline-stats-path=.github/workflows/build-known-test-failures.json
-        shell: sh .ci/docker-exec-script.sh BUILD . {0}
+        shell: sh .github/workflows/docker-exec-script.sh BUILD . {0}
 
       - name: Combine coverage results
         if: (success() || failure()) && steps.container.outcome == 'success'
         run: |
           ./sage -python -m coverage combine --rcfile=src/tox.ini
-        shell: sh .ci/docker-exec-script.sh BUILD /sage {0}
+        shell: sh .github/workflows/docker-exec-script.sh BUILD /sage {0}
 
       - name: Prepare upload
         id: copy-coverage
@@ -553,7 +553,7 @@ jobs:
         # This step needs to happen after the commit sha is put in DOCKER_TAG
         # so that multi-stage builds can work correctly.
         run: |
-          .ci/merge-fixes.sh
+          .github/workflows/merge-fixes.sh
         env:
           GH_TOKEN: ${{ github.token }}
         if: false
@@ -604,7 +604,7 @@ jobs:
 
       - name: Download coverage artifacts
         if: (success() || failure()) && steps.container.outcome == 'success'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           path: .coverage
           pattern: coverage-*
@@ -621,7 +621,7 @@ jobs:
           ./sage -python -m coverage xml --rcfile=src/tox.ini --omit="/tmp/*"
           mkdir -p .coverage/coverage-report
           mv coverage.xml .coverage/coverage-report/
-        shell: sh .ci/docker-exec-script.sh BUILD . {0}
+        shell: sh .github/workflows/docker-exec-script.sh BUILD . {0}
 
       - name: Upload coverage to codecov
         if: (success() || failure()) && steps.container.outcome == 'success'

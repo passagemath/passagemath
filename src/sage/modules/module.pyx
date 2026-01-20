@@ -50,7 +50,7 @@ A minimal example of a module::
     sage: TestSuite(M).run()
 """
 
-#*****************************************************************************
+# ***************************************************************************
 #       Copyright (C) 2005 William Stein <wstein@gmail.com>
 #                     2014 Julian Rueth <julian.rueth@fsfe.org>
 #
@@ -63,8 +63,8 @@ A minimal example of a module::
 #
 #  The full text of the GPL is available at:
 #
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ***************************************************************************
 
 cdef class Module(Parent):
     """

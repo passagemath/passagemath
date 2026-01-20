@@ -288,7 +288,7 @@ class FusionDouble(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: P=FusionDouble(CyclicPermutationGroup(3),prefix='p',inject_variables=True)
+            sage: P = FusionDouble(CyclicPermutationGroup(3),prefix='p',inject_variables=True)
             sage: P.s_ij(p1,p3)
             1
             sage: P.s_ijconj(p1,p3)
@@ -330,9 +330,9 @@ class FusionDouble(CombinatorialFreeModule):
             [ 1/3  1/3 -1/3    0    0  2/3 -1/3 -1/3]
         """
         b = self.basis()
-        S = matrix([[self.s_ij(b[x], b[y], unitary=unitary, base_coercion=base_coercion)
-                     for x in self.get_order()] for y in self.get_order()])
-        return S
+        return matrix([[self.s_ij(b[x], b[y], unitary=unitary,
+                                  base_coercion=base_coercion)
+                        for x in self.get_order()] for y in self.get_order()])
 
     @cached_method
     def N_ijk(self, i, j, k):
@@ -697,7 +697,7 @@ class FusionDouble(CombinatorialFreeModule):
 
         EXAMPLES::
 
-            sage: Q=FusionDouble(SymmetricGroup(3),prefix='q',inject_variables=True)
+            sage: Q = FusionDouble(SymmetricGroup(3),prefix='q',inject_variables=True)
             sage: q3*q4
             q0 + q2 + q5 + q6 + q7
             sage: Q._names
@@ -822,7 +822,7 @@ class FusionDouble(CombinatorialFreeModule):
 
             EXAMPLES::
 
-                sage: Q=FusionDouble(CyclicPermutationGroup(3))
+                sage: Q = FusionDouble(CyclicPermutationGroup(3))
                 sage: [x.twist() for x in Q.basis()]
                 [0, 0, 0, 4/3, 0, 2/3, 2/3, 0, 4/3]
                 sage: [x.ribbon() for x in Q.basis()]

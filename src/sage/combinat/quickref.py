@@ -30,7 +30,7 @@ Combinatorial objects::
 
 Constructions and Species::
 
-    sage: for (p, s) in cartesian_product([P,S]): print((p, s)) # not tested
+    sage: for ps in cartesian_product([P,S]): print(ps) # not tested
     sage: def IV_3(n):
     ....:     return IntegerVectors(n, 3)
     sage: DisjointUnionEnumeratedSets(Family(IV_3, NonNegativeIntegers))  # not tested
@@ -49,7 +49,7 @@ Polytopes::
 
     sage: points = random_matrix(ZZ, 6, 3, x=7).rows()                                  # needs sage.modules
     sage: L = LatticePolytope(points)                                                   # needs sage.geometry.polyhedron sage.modules
-    sage: L.npoints(); L.plot3d()                           # random                    # needs palp sage.geometry.polyhedron sage.modules sage.plot
+    sage: L.n_points(); L.plot3d()                           # random                   # needs palp sage.geometry.polyhedron sage.modules sage.plot
 
 :ref:`Root systems, Coxeter and Weyl groups <sage.combinat.root_system.all>`::
 

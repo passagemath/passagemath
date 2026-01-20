@@ -100,7 +100,7 @@ class AbelianLieAlgebra(LieAlgebraWithStructureCoefficients):
         """
         return PolynomialRing(self.base_ring(), self.variable_names())
 
-    def is_abelian(self):
+    def is_abelian(self) -> bool:
         """
         Return ``True`` since ``self`` is an abelian Lie algebra.
 
@@ -161,7 +161,7 @@ class InfiniteDimensionalAbelianLieAlgebra(InfinitelyGeneratedLieAlgebra, Indexe
         """
         return infinity
 
-    def is_abelian(self):
+    def is_abelian(self) -> bool:
         """
         Return ``True`` since ``self`` is an abelian Lie algebra.
 

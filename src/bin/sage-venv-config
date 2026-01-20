@@ -39,7 +39,7 @@ else:
 
 def _main():
     from argparse import ArgumentParser
-    from sys import exit, stdout
+    from sys import stdout
     parser = ArgumentParser()
     parser.add_argument('--version', help="show version", action="version",
                        version='%(prog)s ' + VERSION)

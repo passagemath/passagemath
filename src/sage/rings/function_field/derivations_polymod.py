@@ -40,7 +40,7 @@ class FunctionFieldDerivation_separable(FunctionFieldDerivation):
         sage: L.derivation()
         d/dx
     """
-    def __init__(self, parent, d):
+    def __init__(self, parent, d) -> None:
         """
         Initialize a derivation.
 
@@ -165,7 +165,7 @@ class FunctionFieldDerivation_separable(FunctionFieldDerivation):
 
 
 class FunctionFieldDerivation_inseparable(FunctionFieldDerivation):
-    def __init__(self, parent, u=None):
+    def __init__(self, parent, u=None) -> None:
         r"""
         Initialize this derivation.
 
@@ -287,7 +287,7 @@ class FunctionFieldHigherDerivation(Map):
           From: Rational function field in x over Finite Field of size 2
           To:   Rational function field in x over Finite Field of size 2
     """
-    def __init__(self, field):
+    def __init__(self, field) -> None:
         """
         Initialize.
 
@@ -387,7 +387,7 @@ class RationalFunctionFieldHigherDerivation_global(FunctionFieldHigherDerivation
         sage: h(x^2, 2)
         1
     """
-    def __init__(self, field):
+    def __init__(self, field) -> None:
         """
         Initialize.
 
@@ -581,7 +581,7 @@ class FunctionFieldHigherDerivation_global(FunctionFieldHigherDerivation):
         ((x^7 + 1)/x^2)*y^2 + x^3*y
     """
 
-    def __init__(self, field):
+    def __init__(self, field) -> None:
         """
         Initialize.
 
@@ -827,7 +827,7 @@ class FunctionFieldHigherDerivation_char_zero(FunctionFieldHigherDerivation):
         sage: h(h(h(e,1),1),1) == 3*2*h(e,3)
         True
     """
-    def __init__(self, field):
+    def __init__(self, field) -> None:
         """
         Initialize.
 

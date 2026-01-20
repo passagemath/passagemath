@@ -28,15 +28,15 @@ ACKNOWLEDGEMENT:
 - Gabriel Lipnik is supported by the
   Austrian Science Fund (FWF): P 24644-N26.
 """
-#*****************************************************************************
+# ***************************************************************************
 #       Copyright (C) 2017 Gabriel Lipnik <devel@gabriellipnik.at>
 #
 # This program is free software: You can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ***************************************************************************
 
 
 def multiply_reduce(A, B):
@@ -77,7 +77,7 @@ def multiply_reduce(A, B):
         [ -8 -14 -20]
         [  2   2   2]
     """
-    return (A*B).apply_map(lambda m: min(m, 2))
+    return (A * B).apply_map(lambda m: min(m, 2))
 
 
 def construct_phi(matrices):
@@ -146,7 +146,6 @@ def construct_phi(matrices):
         [2 2 2], [0 2 0], [0 2 2], [1 1 2], [2 0 0], [2 2 2], [1 2 2]
         ]
     """
-    from sage.arith.srange import srange
     length = len(matrices)
 
     def get_immutable(M):
@@ -163,7 +162,7 @@ def construct_phi(matrices):
     raise RuntimeError('Phi too large.')
 
 
-def is_integer_valued(matrices):
+def is_integer_valued(matrices) -> bool:
     r"""
     Return whether every matrix in ``matrices`` is integer-valued.
 
@@ -206,7 +205,7 @@ def is_integer_valued(matrices):
     return all(mat in M for mat in matrices)
 
 
-def is_non_negative(matrices):
+def is_non_negative(matrices) -> bool:
     r"""
     Return whether every matrix in ``matrices`` is non-negative.
 
@@ -237,10 +236,10 @@ def is_non_negative(matrices):
         sage: is_non_negative(matrices)
         True
     """
-    return all(min(mat.list()) >= 0 for mat in matrices)
+    return all(v >= 0 for mat in matrices for v in mat.list())
 
 
-def is_bounded_via_mandel_simon_algorithm(matrices):
+def is_bounded_via_mandel_simon_algorithm(matrices) -> bool:
     r"""
     Return whether the semigroup generated whether the semigroup of all
     possible products of ``matrices`` is finite/bounded.
@@ -290,10 +289,10 @@ def is_bounded_via_mandel_simon_algorithm(matrices):
         sage: is_bounded_via_mandel_simon_algorithm(N)
         Traceback (most recent call last):
         ...
-        ValueError: Not all matrices are integer-valued.
+        ValueError: not all matrices are integer-valued
     """
     if not is_integer_valued(matrices):
-        raise ValueError('Not all matrices are integer-valued.')
+        raise ValueError('not all matrices are integer-valued')
 
     phi = construct_phi(matrices)
     return not any(multiply_reduce(M, M) == M and not M**2 == M**3
@@ -391,17 +390,15 @@ def make_positive(matrices) -> list:
         ...
         ValueError: There is a matrix which is neither non-negative nor non-positive.
     """
-    from sage.arith.srange import srange
 
     def do(mat):
         if is_non_negative(mat):
             return mat
-        elif is_non_negative(-mat):
+        if is_non_negative(-mat):
             return -mat
-        else:
-            raise ValueError('There is a matrix which is neither non-negative nor non-positive.')
+        raise ValueError('There is a matrix which is neither non-negative nor non-positive.')
 
-    return list(do(mat) for mat in matrices)
+    return [do(mat) for mat in matrices]
 
 
 def regular_sequence_is_bounded(S):
@@ -515,10 +512,7 @@ def regular_sequence_is_bounded(S):
         sage: regular_sequence_is_bounded(S)                                            # needs sage.rings.number_field
         True
     """
-    from sage.arith.srange import srange
-
     matrices = list(S.mu)
-    length = len(matrices)
     try:
         return is_bounded_via_mandel_simon_algorithm(make_positive(matrices))
     except ValueError:
@@ -528,8 +522,8 @@ def regular_sequence_is_bounded(S):
     if not has_bounded_matrix_powers(matrices):
         return False
 
-    matricesProd = list(ell*em for ell in matrices for em in matrices
-                        if ell != em)
+    matricesProd = [ell * em for ell in matrices for em in matrices
+                    if ell != em]
     if not has_bounded_matrix_powers(matricesProd):
         return False
 

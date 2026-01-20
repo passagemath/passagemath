@@ -14,6 +14,7 @@ from sage.combinat.debruijn_sequence import DeBruijnSequences
 
 lazy_import('sage.combinat.schubert_polynomial', 'SchubertPolynomialRing')
 lazy_import('sage.combinat.key_polynomial', 'KeyPolynomialBasis', as_='KeyPolynomials')
+lazy_import('sage.combinat.key_polynomial', 'AtomPolynomialBasis', as_='AtomPolynomials')
 lazy_import('sage.combinat.symmetric_group_algebra', [
             'SymmetricGroupAlgebra', 'HeckeAlgebraSymmetricGroupT'])
 lazy_import('sage.combinat.symmetric_group_representations', [

@@ -1,5 +1,6 @@
 # sage_setup: distribution = sagemath-repl
-from typing import Callable, Any
+from typing import Any
+from collections.abc import Callable
 import valgrind
 
 

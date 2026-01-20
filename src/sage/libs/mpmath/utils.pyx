@@ -28,8 +28,7 @@ cdef mpfr_from_mpfval(mpfr_t res, tuple x):
     cdef int sign
     cdef gmpy2.mpz man
     cdef long exp
-    cdef long bc
-    sign, man, exp, bc = x
+    sign, man, exp, _ = x
     if man:
         mpfr_set_z(res, man.z, MPFR_RNDZ)
         if sign:
@@ -184,7 +183,6 @@ def sage_to_mpmath(x, prec):
         sage: a.sage_to_mpmath({'n':0.5}, 53)
         {'n': mpf('0.5')}
     """
-    cdef RealNumber y
     if isinstance(x, Element):
         if isinstance(x, Integer):
             return int(<Integer>x)
@@ -204,7 +202,7 @@ def sage_to_mpmath(x, prec):
     if isinstance(x, (tuple, list)):
         return type(x)([sage_to_mpmath(v, prec) for v in x])
     if isinstance(x, dict):
-        return dict([(k, sage_to_mpmath(v, prec)) for (k, v) in x.items()])
+        return {k: sage_to_mpmath(v, prec) for k, v in x.items()}
     return x
 
 

@@ -155,11 +155,9 @@ cdef class KhuriMakdisi_base(object):
         """
         cdef Matrix mat, perp, vmu
         cdef FreeModuleElement v
-        cdef Py_ssize_t nd, ne, nde, r
+        cdef Py_ssize_t ne, r
 
         ne = we.ncols()
-        nde = wde.ncols()
-        nd = nde - ne
 
         perp = wde.right_kernel_matrix()
         mat = matrix(0, mu_mat.nrows())
@@ -826,6 +824,7 @@ cdef class KhuriMakdisi_small(KhuriMakdisi_base):
 
         Check that :issue:`40237` is fixed::
 
+            sage: # long time (:issue:`39569`)
             sage: K = GF(2)
             sage: F.<x> = FunctionField(K)
             sage: t = polygen(F)
@@ -879,6 +878,7 @@ cdef class KhuriMakdisi_small(KhuriMakdisi_base):
 
         Check that :issue:`39148` is fixed::
 
+            sage: # long time (:issue:`39569`)
             sage: k.<x> = FunctionField(GF(17)); t = polygen(k)
             sage: F.<y> = k.extension(t^4 + (14*x + 14)*t^3 + 9*t^2 + (10*x^2 + 15*x + 8)*t
             ....:  + 7*x^3 + 15*x^2 + 6*x + 16)

@@ -91,9 +91,9 @@ cdef class Matrix(Matrix0):
         from sage.libs.pari import pari
         return pari.matrix(self._nrows, self._ncols, self._list())
 
-    def _gap_init_(self):
+    def _gap_init_(self) -> str:
         """
-        Return a string defining a gap representation of ``self``.
+        Return a string defining a GAP representation of ``self``.
 
         EXAMPLES::
 
@@ -133,10 +133,9 @@ cdef class Matrix(Matrix0):
         """
         cdef Py_ssize_t i, j
         v = []
-        for i from 0 <= i < self._nrows:
-            tmp = []
-            for j from 0 <= j < self._ncols:
-                tmp.append(self.get_unsafe(i, j)._gap_init_())
+        for i in range(self._nrows):
+            tmp = [self.get_unsafe(i, j)._gap_init_()
+                   for j in range(self._ncols)]
             v.append('[%s]' % (','.join(tmp)))
         # It is needed to multiply with 'One(...)', because
         # otherwise the result would not be a gap matrix
@@ -931,22 +930,6 @@ cdef class Matrix(Matrix0):
         self.cache('row_ambient_module', x)
         return x
 
-    def _row_ambient_module(self, base_ring=None):
-        r"""
-        TESTS::
-
-            sage: M = matrix(Zmod(5), 2, 3)
-            sage: M._row_ambient_module()
-            doctest:warning
-            ...
-            DeprecationWarning: the method _row_ambient_module is deprecated use row_ambient_module (without underscore) instead
-            See https://github.com/sagemath/sage/issues/32984 for details.
-            Vector space of dimension 3 over Ring of integers modulo 5
-        """
-        from sage.misc.superseded import deprecation
-        deprecation(32984, 'the method _row_ambient_module is deprecated use row_ambient_module (without underscore) instead')
-        return self.row_ambient_module(base_ring)
-
     cpdef column_ambient_module(self, base_ring=None, sparse=None):
         r"""
         Return the free module that contains the columns of the matrix.
@@ -987,22 +970,6 @@ cdef class Matrix(Matrix0):
                                                 sparse=self.is_sparse_c())
         self.cache('column_ambient_module', x)
         return x
-
-    def _column_ambient_module(self):
-        r"""
-        TESTS::
-
-            sage: M = matrix(Zmod(5), 2, 3)
-            sage: M._column_ambient_module()
-            doctest:warning
-            ...
-            DeprecationWarning: the method _column_ambient_module is deprecated use column_ambient_module (without underscore) instead
-            See https://github.com/sagemath/sage/issues/32984 for details.
-            Vector space of dimension 2 over Ring of integers modulo 5
-        """
-        from sage.misc.superseded import deprecation
-        deprecation(32984, 'the method _column_ambient_module is deprecated use column_ambient_module (without underscore) instead')
-        return self.column_ambient_module()
 
     def columns(self, copy=True):
         r"""
@@ -2044,7 +2011,7 @@ cdef class Matrix(Matrix0):
             if col < 0 or col >= self._ncols:
                 raise IndexError("column index out of range")
             for i in range(self._nrows):
-                A.set_unsafe(i, j, self.get_unsafe(i, col))
+                A.copy_from_unsafe(i, j, self, i, col)
         return A
 
     def delete_columns(self, dcols, check=True):
@@ -2142,7 +2109,7 @@ cdef class Matrix(Matrix0):
             if row < 0 or row >= self._nrows:
                 raise IndexError("row index out of range")
             for j in range(self._ncols):
-                A.set_unsafe(i, j, self.get_unsafe(row, j))
+                A.copy_from_unsafe(i, j, self, row, j)
         return A
 
     def delete_rows(self, drows, check=True):
@@ -2269,7 +2236,7 @@ cdef class Matrix(Matrix0):
             if row < 0 or row >= self._nrows:
                 raise IndexError("row index out of range")
             for j, col in enumerate(columns):
-                A.set_unsafe(i, j, self.get_unsafe(row, col))
+                A.copy_from_unsafe(i, j, self, row, col)
         return A
 
     def submatrix(self, Py_ssize_t row=0, Py_ssize_t col=0,

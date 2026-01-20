@@ -132,8 +132,10 @@ clean:
 	fi
 
 # "c_lib", ".cython_version", "build" in $(SAGE_SRC) are from old sage versions
-# Cleaning .so files (and .c and .cpp files associated with .pyx files) is for editable installs.
-# Also cython_debug is for editable installs.
+# Cleaning .so files (and .c and .cpp files associated with .pyx files), cython_debug and "sagelib/src/build" is for old editable installs.
+# build/sage-distro is for the "Use meson also in the Sage distribution" method (not used in passagemath)
+# - Don't use "meson setup --wipe "$$d";" due to https://github.com/sagemath/sage/pull/39030#issuecomment-3021583924
+
 sagelib-clean:
 	@echo "Deleting Sage library build artifacts..."
 	if [ -d "$(SAGE_SRC)" ]; then \
@@ -144,6 +146,7 @@ sagelib-clean:
 	     cd sage/ext/interpreters/ && rm -f *.so *.c *.h *.py* *.pxd) \
 	    && (cd "$(SAGE_ROOT)/build/pkgs/sagelib/src/" && rm -rf build); \
 	fi
+	rm -rf "$(SAGE_ROOT)/build/sage-distro"
 
 sage_docbuild-clean:
 	(cd "$(SAGE_ROOT)/build/pkgs/sage_docbuild/src" && rm -rf build)
@@ -173,6 +176,7 @@ misc-clean:
 	rm -f aclocal.m4 config.log confcache
 	rm -rf autom4te.cache
 	rm -f build/make/Makefile build/make/Makefile-auto
+	rm -f build/platform/meson/sage-configure-native-file.ini
 	rm -rf src/lib
 
 bdist-clean: clean
@@ -367,7 +371,7 @@ ptestoptionallong-nodoc:
 # CONFIGURE_DEPENDENCIES is the list of files that influence the generation of 'configure'.
 CONFIGURE_DEPENDENCIES =							\
 	configure.ac src/bin/sage-version.sh m4/*.m4				\
-	src/pyproject.toml							\
+	pyproject.toml								\
 	build/pkgs/*/spkg-configure.m4						\
 	build/pkgs/*/type build/pkgs/*/SPKG.rst					\
 	build/pkgs/*/version_requirements.txt build/pkgs/*/package-version.txt

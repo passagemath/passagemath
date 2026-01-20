@@ -1,7 +1,6 @@
 # sage_setup: distribution = sagemath-brial
 # sage.doctest: needs sage.rings.polynomial.pbori
-from .pbori import ReductionStrategy
-from .PyPolyBoRi import Polynomial
+from sage.rings.polynomial.pbori.pbori import Polynomial, ReductionStrategy
 
 
 def interred(l, completely=False):

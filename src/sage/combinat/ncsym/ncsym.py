@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-combinat
 # sage.doctest: needs sage.combinat sage.modules
 """
-Symmetric functions in noncommuting variables
+Symmetric functions in non-commuting variables
 
 AUTHORS:
 
@@ -294,7 +294,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
         -4*p[] + 2*p[1] + p[2, 2]
     """
 
-    def __init__(self, R):
+    def __init__(self, R) -> None:
         """
         Initialize ``self``.
 
@@ -310,7 +310,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
         category = GradedHopfAlgebras(R).Cocommutative()
         Parent.__init__(self, category=category.WithRealizations())
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         EXAMPLES::
 
@@ -332,7 +332,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
         """
         return self.powersum()
 
-    _shorthands = tuple(['chi', 'cp', 'm', 'e', 'h', 'p', 'rho', 'x'])
+    _shorthands = ('chi', 'cp', 'm', 'e', 'h', 'p', 'rho', 'x')
 
     def dual(self):
         r"""
@@ -400,10 +400,8 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             def lt(s, t):
                 if s == t:
                     return False
-                for p in s:
-                    if len([z for z in t if z.intersection(p)]) != 1:
-                        return False
-                return True
+                return all(len([1 for z in t if z.intersection(p)]) == 1
+                           for p in s)
 
             p = self.realization_of().p()
             P = Poset((A.coarsenings(), lt))
@@ -1734,10 +1732,8 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             def lt(s, t):
                 if s == t:
                     return False
-                for p in s:
-                    if len([z for z in t if z.intersection(p)]) != 1:
-                        return False
-                return True
+                return all(len([1 for z in t if z.intersection(p)]) == 1
+                           for p in s)
 
             p = self.realization_of().p()
             P_refine = Poset((A.refinements(), lt))

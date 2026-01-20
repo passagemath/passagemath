@@ -46,7 +46,7 @@ class HomologyGroup_class(AdditiveAbelianGroup_fixed_gens):
         sage: HomologyGroup(100, ZZ)
         Z^100
     """
-    def __init__(self, n, invfac):
+    def __init__(self, n, invfac) -> None:
         """
         See :func:`HomologyGroup` for full documentation.
 
@@ -63,7 +63,7 @@ class HomologyGroup_class(AdditiveAbelianGroup_fixed_gens):
         AdditiveAbelianGroup_fixed_gens.__init__(self, A, B, A.gens())
         self._original_invts = invfac
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         """
         Print representation of ``self``.
 

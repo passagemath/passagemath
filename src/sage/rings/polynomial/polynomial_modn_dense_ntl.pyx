@@ -40,7 +40,8 @@ from sage.rings.polynomial.polynomial_element cimport Polynomial, _dict_to_list
 
 from sage.rings.integer cimport smallInteger
 
-from sage.libs.ntl.all import ZZX, ZZ_pX
+from sage.libs.ntl.ntl_ZZX import ntl_ZZX as ZZX
+from sage.libs.ntl.ntl_ZZ_pX import ntl_ZZ_pX as ZZ_pX
 from sage.rings.integer_ring import ZZ
 
 from sage.rings.fraction_field_element import FractionFieldElement

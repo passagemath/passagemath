@@ -4,7 +4,7 @@
 Noncommutative symmetric functions
 """
 # ****************************************************************************
-#       Copyright (C) 2009 Nicolas M. Thiery <nthiery at users.sf.net>,
+#       Copyright (C) 2009 Nicolas M. Thiéry <nthiery at users.sf.net>,
 #                     2012 Franco Saliola <saliola@gmail.com>,
 #                     2012 Chris Berg <chrisjamesberg@gmail.com>
 #
@@ -17,7 +17,7 @@ Noncommutative symmetric functions
 #
 #  The full text of the GPL is available at:
 #
-#                  http://www.gnu.org/licenses/
+#                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
 # TODO: Make Coercion run faster between multiple bases
@@ -401,7 +401,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
         sage: TestSuite(complete).run()
     """
 
-    def __init__(self, R):
+    def __init__(self, R) -> None:
         r"""
         TESTS::
 
@@ -443,7 +443,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
         Phi.algebra_morphism(Phi._to_complete_on_generators,
                              codomain=complete).register_as_coercion()
 
-    def _repr_(self): # could be taken care of by the category
+    def _repr_(self) -> str:  # could be taken care of by the category
         r"""
         EXAMPLES::
 
@@ -470,7 +470,8 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
         """
         return self.complete()
 
-    _shorthands = tuple(['S', 'R', 'L', 'Phi', 'Psi', 'nM', 'I', 'dQS', 'dYQS', 'ZL', 'ZR'])
+    _shorthands = ('S', 'R', 'L', 'Phi', 'Psi', 'nM', 'I',
+                   'dQS', 'dYQS', 'ZL', 'ZR')
 
     def dual(self):
         r"""

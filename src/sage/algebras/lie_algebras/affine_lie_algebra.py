@@ -108,7 +108,7 @@ class AffineLieAlgebra(FinitelyGeneratedLieAlgebra):
             return UntwistedAffineLieAlgebra(g, kac_moody=kac_moody)
         return TwistedAffineLieAlgebra(arg0, cartan_type, kac_moody=kac_moody)
 
-    def __init__(self, g, cartan_type, names, kac_moody):
+    def __init__(self, g, cartan_type, names, kac_moody) -> None:
         """
         Initialize ``self``.
 
@@ -580,7 +580,7 @@ class UntwistedAffineLieAlgebra(AffineLieAlgebra):
         sage: D.d()
         0
     """
-    def __init__(self, g, kac_moody):
+    def __init__(self, g, kac_moody) -> None:
         """
         Initialize ``self``.
 
@@ -673,7 +673,7 @@ class TwistedAffineLieAlgebra(AffineLieAlgebra):
     weights in this representation with the roots of type `B_n` and
     the double all of its short roots.
     """
-    def __init__(self, R, cartan_type, kac_moody):
+    def __init__(self, R, cartan_type, kac_moody) -> None:
         """
         Initialize ``self``.
 
@@ -1109,7 +1109,7 @@ class TwistedAffineIndices(UniqueRepresentation, Set_generic):
             raise ValueError("the Cartan type must be a twisted affine type")
         return super().__classcall__(cls, cartan_type)
 
-    def __init__(self, cartan_type):
+    def __init__(self, cartan_type) -> None:
         """
         Initialize ``self``.
 
@@ -1143,7 +1143,7 @@ class TwistedAffineIndices(UniqueRepresentation, Set_generic):
         from sage.categories.infinite_enumerated_sets import InfiniteEnumeratedSets
         super().__init__(facade=facade, category=InfiniteEnumeratedSets())
 
-    def __contains__(self, x):
+    def __contains__(self, x) -> bool:
         """
         Return if ``x`` is contained in ``self``.
 

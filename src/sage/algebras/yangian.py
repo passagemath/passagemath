@@ -251,7 +251,7 @@ class Yangian(CombinatorialFreeModule):
                                          sorting_key=Yangian._term_key,
                                          prefix=variable_name, category=category)
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return a string representation of ``self``.
 
@@ -264,7 +264,7 @@ class Yangian(CombinatorialFreeModule):
         """
         return "Yangian of gl({}) in the {} filtration over {}".format(self._n, self._filtration, self.base_ring())
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
         Return a latex representation of ``self``.
 
@@ -290,7 +290,7 @@ class Yangian(CombinatorialFreeModule):
         """
         return (-len(x), x._sorted_items())
 
-    def _repr_term(self, m):
+    def _repr_term(self, m) -> str:
         """
         Return a string representation of the basis element indexed by ``m``.
 
@@ -306,11 +306,11 @@ class Yangian(CombinatorialFreeModule):
         if len(m) == 0:
             return '1'
         prefix = self.prefix()
-        return '*'.join(prefix + '({})[{},{}]'.format(r,i,j)
+        return '*'.join(prefix + '({})[{},{}]'.format(r, i, j)
                         + ('^{}'.format(exp) if exp > 1 else '')
-                        for (r,i,j), exp in m._sorted_items())
+                        for (r, i, j), exp in m._sorted_items())
 
-    def _latex_term(self, m):
+    def _latex_term(self, m) -> str:
         r"""
         Return a `\LaTeX` representation of the basis element indexed
         by ``m``.
@@ -674,7 +674,7 @@ class YangianLevel(Yangian):
         CombinatorialFreeModule.__init__(self, base_ring, basis_keys,
                                          prefix=variable_name, category=category)
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return a string representation of ``self``.
 
@@ -686,7 +686,7 @@ class YangianLevel(Yangian):
         return "Yangian of level {} of gl({}) in the {} filtration over {}".format(
                         self._level, self._n, self._filtration, self.base_ring())
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
         Return a latex representation of ``self``.
 
@@ -697,7 +697,7 @@ class YangianLevel(Yangian):
         """
         from sage.misc.latex import latex
         return "Y_{{{}}}(\\mathfrak{{gl}}_{{{}}}, {})".format(
-                        self._level, self._n, latex(self.base_ring()))
+            self._level, self._n, latex(self.base_ring()))
 
     def _coerce_map_from_(self, R):
         """
@@ -899,7 +899,7 @@ class GradedYangianBase(AssociatedGradedAlgebra):
     """
     Base class for graded algebras associated to a Yangian.
     """
-    def _repr_term(self, m):
+    def _repr_term(self, m) -> str:
         """
         Return a string representation of the monomial indexed by ``m``.
 
@@ -913,11 +913,11 @@ class GradedYangianBase(AssociatedGradedAlgebra):
         if len(m) == 0:
             return '1'
         prefix = self.prefix()
-        return '*'.join(prefix + '({})[{},{}]'.format(r,i,j)
+        return '*'.join(prefix + '({})[{},{}]'.format(r, i, j)
                         + ('^{}'.format(exp) if exp > 1 else '')
-                        for (r,i,j), exp in m._sorted_items())
+                        for (r, i, j), exp in m._sorted_items())
 
-    def _latex_term(self, m):
+    def _latex_term(self, m) -> str:
         r"""
         Return a latex representation of the monomial indexed by ``m``.
 
@@ -934,11 +934,12 @@ class GradedYangianBase(AssociatedGradedAlgebra):
         prefix = "\\overline{{{}}}".format(self._A.prefix())
 
         def term(r, i, j, exp):
-            s = prefix + '^{{({})}}_{{{},{}}}'.format(r,i,j)
+            s = prefix + '^{{({})}}_{{{},{}}}'.format(r, i, j)
             if exp == 1:
                 return s
             return '\\left({}\\right)^{{{}}}'.format(s, exp)
-        return ' '.join(term(r, i, j, exp) for (r,i,j), exp in m._sorted_items())
+        return ' '.join(term(r, i, j, exp)
+                        for (r, i, j), exp in m._sorted_items())
 
 
 class GradedYangianNatural(GradedYangianBase):

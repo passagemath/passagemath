@@ -101,7 +101,7 @@ class DiscretePseudoValuationSpace(UniqueRepresentation, Homset):
 
         sage: TestSuite(H).run() # long time
     """
-    def __init__(self, domain):
+    def __init__(self, domain) -> None:
         r"""
         TESTS::
 
@@ -188,7 +188,7 @@ class DiscretePseudoValuationSpace(UniqueRepresentation, Homset):
         """
         return "Discrete pseudo-valuations on %r" % (self.domain(),)
 
-    def __contains__(self, x):
+    def __contains__(self, x) -> bool:
         r"""
         Return whether ``x`` is a valuation in this space.
 
@@ -355,10 +355,7 @@ class DiscretePseudoValuationSpace(UniqueRepresentation, Homset):
             if self(self.domain().one()) is infinity:
                 # the constant infinity
                 return True
-            if self(self.uniformizer()) != 0:
-                # not constant on the nonzero elements
-                return False
-            return True
+            return self(self.uniformizer()) == 0
 
         @abstract_method
         def uniformizer(self):

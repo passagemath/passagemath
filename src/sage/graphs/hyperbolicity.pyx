@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-graphs
-# cython: binding=True
 r"""
 Hyperbolicity
 
@@ -1312,13 +1311,12 @@ def hyperbolicity(G,
 
     # The hyperbolicity of some classes of graphs is known. If it is easy and
     # fast to test that a graph belongs to one of these classes, we do it.
-    if G.num_verts() <= 3:
+    if G.n_vertices() <= 3:
         # The hyperbolicity of a graph with 3 vertices is 0.
         # The certificate is the set of vertices.
         return 0, list(G), 0
 
-    elif G.num_verts() == G.num_edges() + 1:
-        # G is a tree
+    elif G.is_tree():
         # Any set of 4 vertices is a valid certificate
         return 0, list(G)[:4], 0
 
@@ -1330,7 +1328,7 @@ def hyperbolicity(G,
     cdef list certificate = []
     cdef list certif
 
-    cdef int N = G.num_verts()
+    cdef int N = G.n_vertices()
     hyp = 0
     hyp_UB = 0
 
@@ -1670,10 +1668,10 @@ def hyperbolicity_distribution(G, algorithm='sampling', sampling_size=10**6):
     # The hyperbolicity distribution of some classes of graphs is known. If it
     # is easy and fast to test that a graph belongs to one of these classes, we
     # do it.
-    if (G.num_verts() == G.num_edges() + 1) or G.is_clique():
-        return {0: sampling_size if algorithm=='sampling' else binomial(G.num_verts(), 4)}
+    if G.is_tree() or G.is_clique():
+        return {0: sampling_size if algorithm=='sampling' else binomial(G.n_vertices(), 4)}
 
-    cdef int N = G.num_verts()
+    cdef int N = G.n_vertices()
     cdef int i
     cdef unsigned short** distances
     cdef unsigned short* _distances_

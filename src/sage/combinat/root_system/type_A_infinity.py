@@ -127,7 +127,7 @@ class CartanType(CartanType_standard, CartanType_simple):
         """
         return self
 
-    def is_simply_laced(self):
+    def is_simply_laced(self) -> bool:
         """
         Return ``True`` because ``self`` is simply laced.
 
@@ -140,7 +140,7 @@ class CartanType(CartanType_standard, CartanType_simple):
         """
         return True
 
-    def is_crystallographic(self):
+    def is_crystallographic(self) -> bool:
         """
         Return ``False`` because ``self`` is not crystallographic.
 
@@ -153,7 +153,7 @@ class CartanType(CartanType_standard, CartanType_simple):
         """
         return True
 
-    def is_finite(self):
+    def is_finite(self) -> bool:
         """
         Return ``True`` because ``self`` is not finite.
 
@@ -166,7 +166,7 @@ class CartanType(CartanType_standard, CartanType_simple):
         """
         return False
 
-    def is_affine(self):
+    def is_affine(self) -> bool:
         """
         Return ``False`` because ``self`` is not (untwisted) affine.
 
@@ -179,7 +179,7 @@ class CartanType(CartanType_standard, CartanType_simple):
         """
         return False
 
-    def is_untwisted_affine(self):
+    def is_untwisted_affine(self) -> bool:
         """
         Return ``False`` because ``self`` is not (untwisted) affine.
 

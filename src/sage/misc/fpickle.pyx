@@ -1,6 +1,5 @@
 # sage_setup: distribution = sagemath-objects
 # cython: old_style_globals=True
-# cython: binding=True
 """
 Function pickling
 

@@ -152,7 +152,7 @@ cdef class Vector_modn_dense(free_module_element.FreeModuleElement):
         cdef Vector_modn_dense y
         y = self._new_c()
         cdef Py_ssize_t i
-        for i from 0 <= i < self._degree:
+        for i in range(self._degree):
             y._entries[i] = self._entries[i]
         return y
 
@@ -194,18 +194,17 @@ cdef class Vector_modn_dense(free_module_element.FreeModuleElement):
                 raise TypeError("x must be a list of the right length")
             if coerce:
                 R = parent.base_ring()
-                for i from 0 <= i < self._degree:
+                for i in range(self._degree):
                     a = int(R(x[i]))
                     self._entries[i] = a
             else:
-                for i from 0 <= i < self._degree:
+                for i in range(self._degree):
                     self._entries[i] = x[i]
             return
         if x != 0:
             raise TypeError("can't initialize vector from nonzero non-list")
-        else:
-            for i from 0 <= i < self._degree:
-                self._entries[i] = 0
+        for i in range(self._degree):
+            self._entries[i] = 0
 
     def __dealloc__(self):
         sig_free(self._entries)
@@ -296,7 +295,7 @@ cdef class Vector_modn_dense(free_module_element.FreeModuleElement):
         r = right
         z = self._new_c()
         cdef Py_ssize_t i
-        for i from 0 <= i < self._degree:
+        for i in range(self._degree):
             z._entries[i] = (self._entries[i] + r._entries[i]) % self._p
         return z
 
@@ -305,7 +304,7 @@ cdef class Vector_modn_dense(free_module_element.FreeModuleElement):
         r = right
         z = self._new_c()
         cdef Py_ssize_t i
-        for i from 0 <= i < self._degree:
+        for i in range(self._degree):
             z._entries[i] = (self._p + self._entries[i] - r._entries[i]) % self._p
         return z
 
@@ -344,7 +343,7 @@ cdef class Vector_modn_dense(free_module_element.FreeModuleElement):
         r = right
         z = self._new_c()
         cdef Py_ssize_t i
-        for i from 0 <= i < self._degree:
+        for i in range(self._degree):
             z._entries[i] = (self._entries[i] * r._entries[i]) % self._p
         return z
 
@@ -355,7 +354,7 @@ cdef class Vector_modn_dense(free_module_element.FreeModuleElement):
         z = self._new_c()
         cdef Py_ssize_t i
 
-        for i from 0 <= i < self._degree:
+        for i in range(self._degree):
             z._entries[i] = (self._entries[i] * a) % self._p
         return z
 
@@ -363,7 +362,7 @@ cdef class Vector_modn_dense(free_module_element.FreeModuleElement):
         cdef Vector_modn_dense z
         z = self._new_c()
         cdef Py_ssize_t i
-        for i from 0 <= i < self._degree:
+        for i in range(self._degree):
             if self._entries[i] > 0:
                 z._entries[i] = self._p - self._entries[i]
             else:
@@ -379,7 +378,7 @@ def unpickle_v0(parent, entries, degree, p):
     cdef Vector_modn_dense v
     v = Vector_modn_dense.__new__(Vector_modn_dense)
     v._init(degree, parent, p)
-    for i from 0 <= i < degree:
+    for i in range(degree):
         v._entries[i] = entries[i]
     return v
 
@@ -388,7 +387,7 @@ def unpickle_v1(parent, entries, degree, p, is_mutable):
     cdef Vector_modn_dense v
     v = Vector_modn_dense.__new__(Vector_modn_dense)
     v._init(degree, parent, p)
-    for i from 0 <= i < degree:
+    for i in range(degree):
         v._entries[i] = entries[i]
     v._is_immutable = not is_mutable
     return v
