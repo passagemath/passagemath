@@ -1,0 +1,27 @@
+From c6361487f5fe5609dfec16d18ecbd381c2b8c1d5 Mon Sep 17 00:00:00 2001
+From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
+Date: Mon, 19 Jan 2026 17:04:07 -0800
+Subject: [PATCH] tools/generate_f2pymod.py: Do not try to invoke f2py via
+ sys.executable
+
+---
+ tools/generate_f2pymod.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/tools/generate_f2pymod.py b/tools/generate_f2pymod.py
+index aaedad2bd2..b5cec7dff7 100644
+--- a/tools/generate_f2pymod.py
++++ b/tools/generate_f2pymod.py
+@@ -293,8 +293,7 @@ def main():
+ 
+     # Now invoke f2py to generate the C API module file
+     if args.infile.endswith(('.pyf.src', '.pyf')):
+-        cmd = [sys.executable, '-m', 'numpy.f2py', fname_pyf,
+-               '--build-dir', outdir_abs] + nogil_arg
++        cmd = ['f2py', fname_pyf, '--build-dir', outdir_abs] + nogil_arg
+         if args.f2cmap:
+             cmd += ['--f2cmap', args.f2cmap]
+ 
+-- 
+2.51.1
+
