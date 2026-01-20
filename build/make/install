@@ -137,4 +137,14 @@ EOF
 
 fi
 
+# Update simple repository index
+if command dir2pi >&/dev/null; then
+    if dir2pi "$SAGE_SPKG_WHEELS"; then
+        echo "Updated PEP 503 simple repository index in $SAGE_SPKG_WHEELS/simple"
+    else
+        echo "Error updating PEP 503 simple repository index"
+        exit 1
+    fi
+fi
+
 # Build succeeded.
