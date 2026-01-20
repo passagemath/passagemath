@@ -1,3 +1,4 @@
+# sage_setup: distribution = passagemath-repl
 """
 Interacts for Statistics
 
