@@ -1,1 +1,1 @@
-passagemath version 10.8.1.dev0, Release Date: 2026-01-16
+passagemath version 10.8.1.alpha0, Release Date: 2026-01-20
