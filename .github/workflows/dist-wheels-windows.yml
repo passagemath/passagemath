@@ -377,6 +377,13 @@ jobs:
         with:
           package-dir: unpacked/passagemath_categories
 
+      - name: sagemath-brial
+        id:   sagemath-brial
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v3.3.0
+        with:
+          package-dir: unpacked/passagemath_brial
+
       - name: sagemath-graphs
         id:   sagemath-graphs
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
@@ -515,6 +522,7 @@ jobs:
         ]
       distributions: >-
         [
+         'sagemath-brial',
          'sagemath-categories',
          'sagemath-cddlib',
          'sagemath-cliquer',
