@@ -1705,6 +1705,14 @@ cdef class CGraphBackend(GenericGraphBackend):
             - :meth:`has_vertex` -- returns whether or not this graph has a
               specific vertex
 
+        TESTS::
+
+            sage: G = Graph(320)
+            sage: G.add_vertex()
+            320
+            sage: G.add_vertex()
+            321
+
         EXAMPLES::
 
             sage: D = sage.graphs.base.dense_graph.DenseGraphBackend(9)
@@ -1726,16 +1734,9 @@ cdef class CGraphBackend(GenericGraphBackend):
         retval = None
         if name is None:
             name = 0
-            while (
-                name < self.cg().active_vertices.size and
-                (
-                    name in self.vertex_ints or
-                    (
-                        name not in self.vertex_labels and
-                        bitset_in(self.cg().active_vertices, <mp_bitcnt_t> name)
-                    )
-                )
-            ):
+            while name in self.vertex_ints or (
+                    name not in self.vertex_labels and
+                    name < self.cg().active_vertices.size and bitset_in(self.cg().active_vertices, <mp_bitcnt_t> name)):
                 name += 1
             retval = name
 
