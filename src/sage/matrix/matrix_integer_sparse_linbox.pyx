@@ -212,13 +212,13 @@ def _minpoly_linbox(Matrix_integer_sparse self, var='x'):
     cdef linbox.DensePolynomial_integer * p = new linbox.DensePolynomial_integer(givZZ, <size_t> self._nrows)
     cdef Polynomial_integer_dense_flint g = (<Polynomial_integer_dense_flint> R.gen())._new()
     cdef mpz_t tmp
+    cdef size_t i
 
     while True:  # linbox is unreliable, see :issue:`37068`
         sig_on()
         linbox.minpoly(p[0], M[0])
         sig_off()
 
-        cdef size_t i
         fmpz_poly_fit_length(g._poly, p.size())
         for i in range(p.size()):
             tmp = p[0][i].get_mpz_const()
