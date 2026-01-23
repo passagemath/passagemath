@@ -248,6 +248,8 @@ graft sage/schemes/projective
 graft sage/schemes/product_projective
 graft sage/schemes/weighted_projective
 
+exclude sage/schemes/*/coh*.p*                                  # sagemath-modules
+
 graft sage/sets
 exclude sage/sets/pythonclass.*                                 # sagemath-objects
 

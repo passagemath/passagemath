@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-categories
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.libs.singular
 r"""
 Cohomology of coherent sheaves
