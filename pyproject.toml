@@ -4,10 +4,12 @@ build-backend = 'mesonpy'
 requires = [
   'cypari2 >=2.2.1; sys_platform != "win32"',
   'meson-python',
-  # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212
-  'cysignals >=1.12.1',
-  'cython >=3.1.0',
-  'gmpy2 >=2.1.5',
+  # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212, https://github.com/passagemath/passagemath/issues/445
+  'cysignals >=1.11.2, != 1.12.0',
+  # Exclude 1.12.4 because of https://github.com/passagemath/passagemath/issues/1318
+  'cysignals !=1.12.4; sys_platform == "win32"',
+  'cython >=3.1.0,<3.3.0',
+  'gmpy2 ~=2.1.b999',
   'jinja2',
   'memory_allocator',
   'numpy >=2.2.4',
@@ -46,18 +48,20 @@ dependencies = [
   'conway-polynomials >=0.8',
   'cypari2 >=2.2.1; sys_platform != "win32"',
   'six >=1.15.0',
-  # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212
-  'cysignals >=1.12.1',
-  'cython >=3.1.0',
+  # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212, https://github.com/passagemath/passagemath/issues/445
+  'cysignals >=1.11.2, != 1.12.0',
+  # Exclude 1.12.4 because of https://github.com/passagemath/passagemath/issues/1318
+  'cysignals !=1.12.4; sys_platform == "win32"',
+  'cython >=3.1.0,<3.3.0',
   'fpylll >=0.5.9; sys_platform != "win32"',
-  'gmpy2 >=2.1.5',
+  'gmpy2 ~=2.1.b999',
   'ipykernel >=5.2.1',
   'ipython >=8.9.0',
   'ipywidgets >=7.5.1',
   'jupyter-client',
   'matplotlib >=3.7.0',
   'memory_allocator',
-  'mpmath >=1.1.0',
+  'mpmath >=1.1.0, <1.4',
   'networkx >=3.1',
   'numpy >=1.25',
   'pexpect >=4.8.0',
