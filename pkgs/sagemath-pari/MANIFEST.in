@@ -64,7 +64,7 @@ global-exclude *.c
 global-exclude *.cpp
 
 include sage/libs/linkages/padics/relaxed/flint_helper.c
-include sage/rings/padics/transcendantal.c  # sic
+include sage/rings/padics/transcendental.c
 
 graft sage/ext_data/pari
 

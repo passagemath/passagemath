@@ -11,9 +11,11 @@ We discuss how to push your local changes to your fork of the passagemath reposi
 so that your changes can be reviewed for inclusion.
 
 Before proceeding, check that you have ``origin``, ``passagemath``, and ``upstream``
-remotes right::
+remotes right
 
-    [alice@localhost passagemath]$ git remote -v
+.. code-block:: console
+
+    $ git remote -v
     origin  https://github.com/alice/passagemath.git (fetch)
     origin  https://github.com/alice/passagemath.git (push)
     passagemath https://github.com/passagemath/passagemath.git (fetch)
@@ -56,9 +58,11 @@ Creating a new PR
 
 Suppose you have written an algorithm for calculating the last twin prime,
 committed the code to a local branch based on the ``main`` branch. Now you
-want to add it to Sage. You would first open a PR for that::
+want to add it to Sage. You would first open a PR for that
 
-    [alice@localhost passagemath]$ gh pr create
+.. code-block:: console
+
+    $ gh pr create
     ? Where should we push the 'last-twin-prime' branch? alice/passagemath
 
     Creating pull request for alice:last-twin-prime into main in passagemath/passagemath
@@ -86,9 +90,11 @@ Checking out an existing PR
 ===========================
 
 If you want to base your work on an existing PR or want to review the code of a PR,
-then you would run::
+then you would run
 
-    [alice@localhost passagemath]$ gh pr checkout 12345
+.. code-block:: console
+
+    $ gh pr checkout 12345
     remote: Enumerating objects: 7, done.
     remote: Counting objects: 100% (7/7), done.
     remote: Compressing objects: 100% (7/7), done.
@@ -113,9 +119,11 @@ to your local branch as described in :ref:`section-walkthrough-add-edit` and
 :ref:`section-walkthrough-commit`.
 
 If you are ready to share the changes up to now, upload your new commits to
-your fork by::
+your fork by
 
-    [alice@localhost passagemath]$ git push origin
+.. code-block:: console
+
+    $ git push origin
     Enumerating objects: 13, done.
     Counting objects: 100% (13/13), done.
     Delta compression using up to 12 threads
@@ -153,16 +161,20 @@ Merging the upstream main branch
 
 It commonly happens that the ``main`` branch at the remote ``passagemath`` was
 updated and you need to merge the changes there to your local branch. Then
-you do::
+you do
 
-    [alice@localhost passagemath]$ git fetch passagemath main:main
+.. code-block:: console
+
+    $ git fetch passagemath main:main
 
 This fast-forwards your local ``main`` branch to the upstream
 ``main`` branch.
 
-Now you go back to your working branch and merge the updated ``main`` branch::
+Now you go back to your working branch and merge the updated ``main`` branch
 
-    [alice@localhost passagemath]$ git merge main
+.. code-block:: console
+
+    $ git merge main
     ....
 
 If there was no upstream change conflicting with the changes you made locally,

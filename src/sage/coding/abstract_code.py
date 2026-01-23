@@ -204,7 +204,7 @@ class AbstractCode(Parent):
     """
 
     def __init__(self, length, default_encoder_name=None,
-                 default_decoder_name=None, metric='Hamming'):
+                 default_decoder_name=None, metric='Hamming') -> None:
         r"""
         Initialize mandatory parameters that any code shares.
 
@@ -216,7 +216,7 @@ class AbstractCode(Parent):
         INPUT:
 
         - ``length`` -- the length of ``self`` (a Python int or a Sage Integer,
-          must be > 0)
+          must be >= 0)
 
         - ``default_encoder_name`` -- (default: ``None``) the name of
           the default encoder of ``self``
@@ -282,19 +282,24 @@ class AbstractCode(Parent):
             ...
             ValueError: length must be a Python int or a Sage Integer
 
-        If the length of the code is not a nonzero positive integer
-        (See :issue:`21326`), it will raise an exception::
+        If the length of the code is negative, it will raise an exception::
 
-            sage: C = MyCodeFamily(0)
+            sage: C = MyCodeFamily(-1)
             Traceback (most recent call last):
             ...
-            ValueError: length must be a nonzero positive integer
+            ValueError: length must be a non-negative integer
+
+        Codes of length 0 are allowed::
+
+            sage: C = MyCodeFamily(0)
+            sage: C.length()
+            0
         """
 
         if not isinstance(length, (int, Integer)):
             raise ValueError("length must be a Python int or a Sage Integer")
-        if length <= 0:
-            raise ValueError("length must be a nonzero positive integer")
+        if length < 0:
+            raise ValueError("length must be a non-negative integer")
 
         self._length = length
         self._metric = metric
@@ -349,7 +354,7 @@ class AbstractCode(Parent):
         """
         raise RuntimeError("Please override __iter__ in the implementation of {}".format(self.parent()))
 
-    def __contains__(self, c):
+    def __contains__(self, c) -> bool:
         r"""
         Return an error message requiring to override ``__contains__`` in ``self``.
 
@@ -418,7 +423,7 @@ class AbstractCode(Parent):
             sage: C = LinearCode(G)
             sage: word = vector((0, 1, 1, 0))
             sage: C(word)
-            (1, 1, 0, 0, 1, 1, 0)
+            (0, 1, 1, 0, 0, 1, 1)
 
             sage: c = C.random_element()
             sage: C(c) == c
@@ -724,14 +729,14 @@ class AbstractCode(Parent):
             sage: C = LinearCode(G)
             sage: word = vector(GF(2), (1, 1, 0, 0, 1, 1, 0))
             sage: C.decode_to_message(word)
-            (0, 1, 1, 0)
+            (1, 1, 0, 0)
 
         It is possible to manually choose the decoder amongst the list of the available ones::
 
             sage: sorted(C.decoders_available())
             ['InformationSet', 'NearestNeighbor', 'Syndrome']
             sage: C.decode_to_message(word, 'NearestNeighbor')
-            (0, 1, 1, 0)
+            (1, 1, 0, 0)
         """
         return self.unencode(self.decode_to_code(word, decoder_name, *args, **kwargs), **kwargs)
 
@@ -883,9 +888,9 @@ class AbstractCode(Parent):
             sage: C = LinearCode(G)
             sage: word = vector((0, 1, 1, 0))
             sage: C.encode(word)
-            (1, 1, 0, 0, 1, 1, 0)
+            (0, 1, 1, 0, 0, 1, 1)
             sage: C(word)
-            (1, 1, 0, 0, 1, 1, 0)
+            (0, 1, 1, 0, 0, 1, 1)
 
         It is possible to manually choose the encoder amongst the list of the available ones::
 
@@ -893,7 +898,7 @@ class AbstractCode(Parent):
             ['GeneratorMatrix', 'Systematic']
             sage: word = vector((0, 1, 1, 0))
             sage: C.encode(word, 'GeneratorMatrix')
-            (1, 1, 0, 0, 1, 1, 0)
+            (0, 1, 1, 0, 0, 1, 1)
         """
         E = self.encoder(encoder_name, *args, **kwargs)
         return E.encode(word)
@@ -1058,7 +1063,7 @@ class AbstractCode(Parent):
             sage: G = Matrix(GF(2), [[1,1,1,0,0,0,0], [1,0,0,1,1,0,0],
             ....:                    [0,1,0,1,0,1,0], [1,1,0,1,0,0,1]])
             sage: C = LinearCode(G)
-            sage: c = vector(GF(2), (1, 1, 0, 0, 1, 1, 0))
+            sage: c = vector(GF(2), (0, 1, 1, 0, 0, 1, 1))
             sage: C.unencode(c)
             (0, 1, 1, 0)
         """

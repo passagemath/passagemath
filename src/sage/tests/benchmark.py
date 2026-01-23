@@ -27,7 +27,7 @@ from sage.interfaces.gp import gp
 from sage.interfaces.magma import magma, Magma
 from sage.interfaces.maple import maple
 from sage.interfaces.mathematica import mathematica
-from sage.interfaces.maxima import maxima
+from sage.interfaces.maxima_lib import maxima
 from sage.interfaces.singular import singular
 from sage.libs.pari import pari
 from sage.matrix.matrix_space import MatrixSpace

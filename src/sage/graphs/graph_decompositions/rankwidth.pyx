@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-rankwidth
-# cython: binding=True
 # distutils: libraries = rw
 r"""
 Rank Decompositions of graphs

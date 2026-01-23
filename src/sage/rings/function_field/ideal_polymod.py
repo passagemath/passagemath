@@ -53,7 +53,7 @@ class FunctionFieldIdeal_polymod(FunctionFieldIdeal):
         sage: O.ideal(y)
         Ideal (y) of Maximal order of Function field in y defined by y^2 + x^3*y + x
     """
-    def __init__(self, ring, hnf, denominator=1):
+    def __init__(self, ring, hnf, denominator=1) -> None:
         """
         Initialize.
 
@@ -94,7 +94,7 @@ class FunctionFieldIdeal_polymod(FunctionFieldIdeal):
         # if the second gen is zero, the tuple has only the first gen.
         self._gens_two_vecs = None
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         """
         Test if this ideal is zero.
 
@@ -129,7 +129,7 @@ class FunctionFieldIdeal_polymod(FunctionFieldIdeal):
         """
         return self._hnf.nrows() != 0
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Return the hash of this ideal.
 
@@ -152,7 +152,7 @@ class FunctionFieldIdeal_polymod(FunctionFieldIdeal):
         """
         return hash((self._ring, self._hnf, self._denominator))
 
-    def __contains__(self, x):
+    def __contains__(self, x) -> bool:
         """
         Return ``True`` if ``x`` is in this ideal.
 
@@ -834,7 +834,7 @@ class FunctionFieldIdeal_polymod(FunctionFieldIdeal):
         return n
 
     @cached_method
-    def is_prime(self):
+    def is_prime(self) -> bool:
         """
         Return ``True`` if this ideal is a prime ideal.
 
@@ -1047,7 +1047,7 @@ class FunctionFieldIdeal_global(FunctionFieldIdeal_polymod):
         sage: O.ideal(y)
         Ideal (y) of Maximal order of Function field in y defined by y^2 + x^3*y + x
     """
-    def __init__(self, ring, hnf, denominator=1):
+    def __init__(self, ring, hnf, denominator=1) -> None:
         """
         Initialize.
 
@@ -1252,9 +1252,8 @@ class FunctionFieldIdeal_global(FunctionFieldIdeal_polymod):
 
         R = hnf.base_ring()
 
-        basis = []
-        for row in hnf:
-            basis.append(sum([c1 * c2 for c1, c2 in zip(row, O.basis())]))
+        basis = [sum(c1 * c2 for c1, c2 in zip(row, O.basis()))
+                 for row in hnf]
 
         n = len(basis)
         alpha = None
@@ -1321,7 +1320,7 @@ class FunctionFieldIdealInfinite_polymod(FunctionFieldIdealInfinite):
         Ideal (1/x^4*y^2) of Maximal infinite order of Function field
         in y defined by y^3 + y^2 + 2*x^4
     """
-    def __init__(self, ring, ideal):
+    def __init__(self, ring, ideal) -> None:
         """
         Initialize this ideal.
 
@@ -1337,7 +1336,7 @@ class FunctionFieldIdealInfinite_polymod(FunctionFieldIdealInfinite):
         FunctionFieldIdealInfinite.__init__(self, ring)
         self._ideal = ideal
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Return the hash of this ideal.
 
@@ -1359,7 +1358,7 @@ class FunctionFieldIdealInfinite_polymod(FunctionFieldIdealInfinite):
         """
         return hash((self.ring(), self._ideal))
 
-    def __contains__(self, x):
+    def __contains__(self, x) -> bool:
         """
         Return ``True`` if ``x`` is in this ideal.
 

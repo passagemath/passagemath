@@ -28,7 +28,7 @@ from sage.structure.element import coercion_model
 
 class CellComplexReference:
 
-    def __init__(self, cell_complex, degree, cells=None):
+    def __init__(self, cell_complex, degree, cells=None) -> None:
         """
         Auxiliary base class for chains and cochains.
 
@@ -125,7 +125,8 @@ class Chains(CellComplexReference, CombinatorialFreeModule):
         sage: c.eval(z)
         6
     """
-    def __init__(self, cell_complex, degree, cells=None, base_ring=None):
+    def __init__(self, cell_complex, degree, cells=None,
+                 base_ring=None) -> None:
         """
         EXAMPLES::
 
@@ -265,7 +266,7 @@ class Chains(CellComplexReference, CombinatorialFreeModule):
             )
             return codomain.from_vector(d * self.to_vector())
 
-        def is_cycle(self):
+        def is_cycle(self) -> bool:
             """
             Test whether the chain is a cycle.
 
@@ -289,7 +290,7 @@ class Chains(CellComplexReference, CombinatorialFreeModule):
             """
             return self.to_complex().is_cycle()
 
-        def is_boundary(self):
+        def is_boundary(self) -> bool:
             """
             Test whether the chain is a boundary.
 
@@ -352,7 +353,8 @@ class Cochains(CellComplexReference, CombinatorialFreeModule):
         sage: c.eval(z)
         6
     """
-    def __init__(self, cell_complex, degree, cells=None, base_ring=None):
+    def __init__(self, cell_complex, degree, cells=None,
+                 base_ring=None) -> None:
         """
         EXAMPLES::
 
@@ -494,7 +496,7 @@ class Cochains(CellComplexReference, CombinatorialFreeModule):
             )
             return codomain.from_vector(d * self.to_vector())
 
-        def is_cocycle(self):
+        def is_cocycle(self) -> bool:
             """
             Test whether the cochain is a cocycle.
 
@@ -518,7 +520,7 @@ class Cochains(CellComplexReference, CombinatorialFreeModule):
             """
             return self.to_complex().is_cycle()
 
-        def is_coboundary(self):
+        def is_coboundary(self) -> bool:
             """
             Test whether the cochain is a coboundary.
 

@@ -128,7 +128,7 @@ cdef class IndependentSets:
         ...
         ValueError: a is not a vertex of the graph
     """
-    def __init__(self, G, maximal=False, complement=False):
+    def __init__(self, G, maximal=False, complement=False) -> None:
         r"""
         Constructor for this class.
 
@@ -162,7 +162,7 @@ cdef class IndependentSets:
             ....:         IS2.extend(map(Set, list(G.subgraph_search_iterator(Graph(n), induced=True, return_graphs=False))))
             ....:     if len(IS) != len(set(IS2)):
             ....:        raise ValueError("something goes wrong")
-            sage: for i in range(5):                                                    # needs sage.modules
+            sage: for i in range(5):                                                    # needs sage.modules, long time (:issue:`39569`)
             ....:     check_with_subgraph_search(graphs.RandomGNP(11, .3))
 
         Empty graph::
@@ -329,7 +329,7 @@ cdef class IndependentSets:
         from sage.rings.integer import Integer
         return Integer(i)
 
-    def __contains__(self, S):
+    def __contains__(self, S) -> bool:
         r"""
         Check whether the set is an independent set (possibly maximal).
 

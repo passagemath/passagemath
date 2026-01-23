@@ -882,7 +882,7 @@ def contour_plot(f, xrange, yrange, **options):
         sage: contour_plot(log(x) + log(y), (-1, 5), (-1, 5))
         Graphics object consisting of 1 graphics primitive
     """
-    from sage.plot.all import Graphics
+    from sage.plot.graphics import Graphics
     from sage.plot.misc import setup_for_eval_on_grid
 
     region = options.pop('region')
@@ -1651,7 +1651,7 @@ def region_plot(f, xrange, yrange, **options):
         sage: region_plot([x^2 + y^2 == 1, x < y], (x,-1,1), (y,-1,1))
         Graphics object consisting of 1 graphics primitive
     """
-    from sage.plot.all import Graphics
+    from sage.plot.graphics import Graphics
     from sage.plot.misc import setup_for_eval_on_grid
     from sage.structure.element import Expression
     from warnings import warn
@@ -1781,7 +1781,7 @@ def equify(f):
         sage: f(2, 1)
         -1
     """
-    from sage.calculus.all import symbolic_expression
+    from sage.calculus.expr import symbolic_expression
     from sage.structure.element import Expression
     if not isinstance(f, Expression):
         return lambda x, y: -1 if f(x, y) else 1

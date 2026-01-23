@@ -216,7 +216,7 @@ class DownUpAlgebra(CombinatorialFreeModule):
         CombinatorialFreeModule.__init__(self, base_ring, indices, category=cat, sorting_reverse=True)
         self._assign_names(['d', 'u'])
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return a string representation of ``self``.
 
@@ -229,7 +229,7 @@ class DownUpAlgebra(CombinatorialFreeModule):
         return "Down-Up algebra with parameters ({}, {}, {}) over {}".format(
             self._alpha, self._beta, self._gamma, self.base_ring())
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
         Return a latex representation of ``self``.
 
@@ -242,7 +242,7 @@ class DownUpAlgebra(CombinatorialFreeModule):
         """
         return "\\mathcal{DU}(%s,%s,%s)" % (self._alpha, self._beta, self._gamma)
 
-    def _repr_term(self, m):
+    def _repr_term(self, m) -> str:
         r"""
         Return a string representation of the basis element indexed by ``m``.
 
@@ -274,7 +274,7 @@ class DownUpAlgebra(CombinatorialFreeModule):
                 ret += f"{s}^{m[i]}"
         return ret
 
-    def _latex_term(self, m):
+    def _latex_term(self, m) -> str:
         r"""
         Return a latex representation for the basis element indexed by ``m``.
 
@@ -623,7 +623,7 @@ class VermaModule(CombinatorialFreeModule):
         CombinatorialFreeModule.__init__(self, R, NonNegativeIntegers(),
                                          prefix='v', category=cat)
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return a string representation of ``self``.
 
@@ -635,7 +635,7 @@ class VermaModule(CombinatorialFreeModule):
         """
         return f"Verma module of weight {self._weights[0]} of {self._DU}"
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
         Return a latex representation of ``self``.
 

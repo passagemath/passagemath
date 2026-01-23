@@ -272,7 +272,7 @@ class CartesianProduct_iters(EnumeratedSetFromIterator):
         """
         return iter(self._mrange)
 
-    def is_finite(self):
+    def is_finite(self) -> bool:
         """
         The Cartesian product is finite if all of its inputs are
         finite, or if any input is empty.
@@ -293,9 +293,7 @@ class CartesianProduct_iters(EnumeratedSetFromIterator):
         if all(f is True for f in finites):
             return True
         lens = [_len(L) for L in self.iters]
-        if any(l == 0 for l in lens):
-            return True
-        return False
+        return any(l == 0 for l in lens)
 
     def unrank(self, x):
         """

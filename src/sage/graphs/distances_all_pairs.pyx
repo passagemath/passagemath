@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-graphs
-# cython: binding=True
 r"""
 Distances/shortest paths between all pairs of vertices
 
@@ -2607,7 +2606,7 @@ def antipodal_graph(G):
 
     The drawback of this method is that some BFS distances may be computed
     twice, one time to determine the eccentricities and another time is the
-    vertex has eccentricity equal to the diameter. However, in practive, this is
+    vertex has eccentricity equal to the diameter. However, in practice, this is
     much more efficient. See the documentation of method
     :meth:`c_eccentricity_DHV`.
 

@@ -38,15 +38,15 @@ TESTS::
 # (at your option) any later version.
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
+import itertools
 from collections import defaultdict
 from collections.abc import Iterable
-import itertools
 
-from .generic_graph import GenericGraph
-from .graph import Graph
-from sage.rings.integer import Integer
+from sage.graphs.generic_graph import GenericGraph
+from sage.graphs.graph import Graph
 from sage.misc.cachefunc import cached_method
 from sage.misc.lazy_import import lazy_import
+from sage.rings.integer import Integer
 
 lazy_import('networkx', ['MultiGraph', 'Graph'], as_=['networkx_MultiGraph', 'networkx_Graph'])
 
@@ -402,7 +402,16 @@ class BipartiteGraph(Graph):
             sage: B.add_vertices([4], left=True)
             Traceback (most recent call last):
             ...
-            ValueError: graph is immutable; please change a copy instead (use function copy())
+            TypeError: this graph is immutable and so cannot be changed
+
+        Check that :issue:`39756` is fixed::
+
+            sage: B = BipartiteGraph([(0,2), (0,3), (1,2), (1,3)])
+            sage: B.left, B.right
+            ({0, 1}, {2, 3})
+            sage: B.clear()
+            sage: B.left, B.right
+            (set(), set())
         """
         if kwds is None:
             kwds = {'loops': False}
@@ -453,7 +462,7 @@ class BipartiteGraph(Graph):
                 # Some error checking.
                     if left & right:
                         raise ValueError("the parts are not disjoint")
-                    if len(left) + len(right) != self.num_verts():
+                    if len(left) + len(right) != self.n_vertices():
                         raise ValueError("not all vertices appear in partition")
 
                     if check:
@@ -516,7 +525,7 @@ class BipartiteGraph(Graph):
                 # Some error checking.
                 if left & right:
                     raise ValueError("the parts are not disjoint")
-                if len(left) + len(right) != self.num_verts():
+                if len(left) + len(right) != self.n_vertices():
                     raise ValueError("not all vertices appear in partition")
 
             if isinstance(data, (networkx_MultiGraph, networkx_Graph)):
@@ -945,7 +954,20 @@ class BipartiteGraph(Graph):
             Traceback (most recent call last):
             ...
             ValueError: vertex (0) not in the graph
+
+        TESTS:
+
+        Check that :issue:`39756` is fixed::
+
+            sage: B = BipartiteGraph([(0,2), (0,3), (1,2), (1,3)])
+            sage: B.left, B.right
+            ({0, 1}, {2, 3})
+            sage: B.delete_vertices(B.vertex_iterator())
+            sage: B.left, B.right
+            (set(), set())
         """
+        vertices = list(vertices)
+
         # remove vertices from the graph
         Graph.delete_vertices(self, vertices)
 
@@ -1055,9 +1077,8 @@ class BipartiteGraph(Graph):
                 except Exception:
                     u, v = u
                     label = None
-        else:
-            if v is None:
-                u, v = u
+        elif v is None:
+            u, v = u
 
         # if endpoints are in the same partition
         if self.left.issuperset((u, v)) or self.right.issuperset((u, v)):
@@ -2325,6 +2346,8 @@ class BipartiteGraph(Graph):
             sage: B = BipartiteGraph(graphs.CycleGraph(4) * 2)
             sage: len(B.vertex_cover())                                                 # needs networkx
             4
+            sage: B.vertex_cover(value_only=True)                                       # needs networkx
+            4
 
         Empty bipartite graph and bipartite graphs without edges::
 
@@ -2357,7 +2380,7 @@ class BipartiteGraph(Graph):
                 if b.size():
                     VC.extend(b.vertex_cover(algorithm='Konig'))
             if value_only:
-                return sum(VC)
+                return len(VC)
             return VC
 
         M = Graph(self.matching())
@@ -2684,10 +2707,13 @@ class BipartiteGraph(Graph):
                                                    immutable=immutable)
 
         else:
-            from sage.groups.perm_gps.partn_ref.refinement_graphs import search_tree
-            from sage.graphs.graph import Graph
-            from sage.graphs.generic_graph import graph_isom_equivalent_non_edge_labeled_graph
             from itertools import chain
+
+            from sage.graphs.generic_graph import (
+                graph_isom_equivalent_non_edge_labeled_graph,
+            )
+            from sage.graphs.graph import Graph
+            from sage.groups.perm_gps.partn_ref.refinement_graphs import search_tree
 
             cert = {}
 

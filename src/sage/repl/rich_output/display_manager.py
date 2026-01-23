@@ -36,11 +36,7 @@ from __future__ import annotations
 
 import warnings
 from typing import Any
-
-try:
-    from typing import Self  # type: ignore (Python >= 3.11)
-except ImportError:
-    from typing_extensions import Self  # type: ignore (Python 3.9, 3.10)
+from typing import Self  # type: ignore
 
 from sage.repl.rich_output.output_basic import (
     OutputAsciiArt,
@@ -779,7 +775,7 @@ class DisplayManager(SageObject):
         """
         return self._supported_output
 
-    def displayhook(self, obj: Any) -> None | Any:
+    def displayhook(self, obj: Any) -> Any | None:
         """
         Implementation of the displayhook.
 

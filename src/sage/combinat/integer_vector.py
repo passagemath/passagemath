@@ -364,14 +364,14 @@ def gale_ryser_theorem(p1, p2, algorithm='gale',
         k1, k2 = len(p1), len(p2)
         p = MixedIntegerLinearProgram(solver=solver)
         b = p.new_variable(binary=True)
-        for (i, c) in enumerate(p1):
+        for i, c in enumerate(p1):
             p.add_constraint(p.sum([b[i, j] for j in range(k2)]) == c)
-        for (i, c) in enumerate(p2):
+        for i, c in enumerate(p2):
             p.add_constraint(p.sum([b[j, i] for j in range(k1)]) == c)
         p.set_objective(None)
         p.solve()
         b = p.get_values(b, convert=ZZ, tolerance=integrality_tolerance)
-        M = [[0]*k2 for i in range(k1)]
+        M = [[0] * k2 for _ in range(k1)]
         for i in range(k1):
             for j in range(k2):
                 M[i][j] = b[i, j]
@@ -813,6 +813,24 @@ class IntegerVectors(Parent, metaclass=ClasscallMetaclass):
                 rtn[ptr-1] += 1
             else:
                 return self._element_constructor_(rtn)
+
+    def is_finite(self):
+        """
+        Return whether ``self`` is finite.
+
+        EXAMPLES::
+
+            sage: IntegerVectors().is_finite()
+            False
+            sage: IntegerVectors(3).is_finite()
+            False
+            sage: IntegerVectors(length=5).is_finite()
+            False
+            sage: IntegerVectors(3, 5).is_finite()
+            True
+        """
+        from sage.rings.infinity import Infinity
+        return self.cardinality() < Infinity
 
 
 class IntegerVectors_all(UniqueRepresentation, IntegerVectors):
@@ -1311,10 +1329,7 @@ class IntegerVectors_nk(UniqueRepresentation, IntegerVectors):
         if sum(x) != self.n:
             return False
 
-        if len(x) > 0 and min(x) < 0:
-            return False
-
-        return True
+        return not x or min(x) >= 0
 
     def rank(self, x):
         """
@@ -1375,6 +1390,21 @@ class IntegerVectors_nk(UniqueRepresentation, IntegerVectors):
         """
         n, k = self.n, self.k
         return Integer(binomial(n + k - 1, n))
+
+    def is_finite(self):
+        """
+        Return whether ``self`` is finite.
+
+        EXAMPLES::
+
+            sage: IntegerVectors(3,5).is_finite()
+            True
+            sage: IntegerVectors(99, 3).is_finite()
+            True
+            sage: IntegerVectors(2*10^9, 10^9).is_finite()
+            True
+        """
+        return True
 
 
 class IntegerVectors_nnondescents(UniqueRepresentation, IntegerVectors):

@@ -150,7 +150,7 @@ class Encoder(SageObject):
             sage: word = vector(GF(2), (0, 1, 1, 0))
             sage: E = codes.encoders.LinearCodeGeneratorMatrixEncoder(C)
             sage: E.encode(word)
-            (1, 1, 0, 0, 1, 1, 0)
+            (0, 1, 1, 0, 0, 1, 1)
 
         If ``word`` is not in the message space of ``self``, it will return an exception::
 
@@ -184,7 +184,7 @@ class Encoder(SageObject):
             sage: word = vector(GF(2), (0, 1, 1, 0))
             sage: E = codes.encoders.LinearCodeGeneratorMatrixEncoder(C)
             sage: E(word)
-            (1, 1, 0, 0, 1, 1, 0)
+            (0, 1, 1, 0, 0, 1, 1)
 
             sage: F = GF(11)
             sage: Fx.<x> = F[]
@@ -225,7 +225,7 @@ class Encoder(SageObject):
             True
             sage: E = codes.encoders.LinearCodeGeneratorMatrixEncoder(C)
             sage: E.unencode(c)
-            (0, 1, 1, 0)
+            (1, 1, 0, 0)
 
         TESTS:
 
@@ -240,13 +240,14 @@ class Encoder(SageObject):
             ...
             EncodingError: Given word is not in the code
 
-        Note that since :issue:`21326`, codes cannot be of length zero::
+        Note that codes of length zero are now allowed (see :issue:`21326` and :issue:`40513`)::
 
-            sage: G = Matrix(GF(17), [])
+            sage: G = matrix(GF(2), 0, 0)
             sage: C = LinearCode(G)
-            Traceback (most recent call last):
-            ...
-            ValueError: length must be a nonzero positive integer
+            sage: C
+            [0, 0] linear code over GF(2)
+            sage: C.generator_matrix()
+            []
         """
         if not nocheck and c not in self.code():
             raise EncodingError("Given word is not in the code")
@@ -269,10 +270,10 @@ class Encoder(SageObject):
             sage: E = C.encoder()
             sage: E._unencoder_matrix()
             (
-            [0 0 1 1]
-            [0 1 0 1]
-            [1 1 1 0]
-            [0 1 1 1], (0, 1, 2, 3)
+            [1 0 0 0]
+            [0 1 0 0]
+            [0 0 1 0]
+            [0 0 0 1], (0, 1, 2, 3)
             )
         """
         info_set = self.code().information_set()
@@ -307,7 +308,7 @@ class Encoder(SageObject):
             True
             sage: E = codes.encoders.LinearCodeGeneratorMatrixEncoder(C)
             sage: E.unencode_nocheck(c)
-            (0, 1, 1, 0)
+            (1, 1, 0, 0)
 
         Taking a vector that does not belong to ``C`` will not raise an error but
         probably just give a non-sensical result::
@@ -317,7 +318,7 @@ class Encoder(SageObject):
             False
             sage: E = codes.encoders.LinearCodeGeneratorMatrixEncoder(C)
             sage: E.unencode_nocheck(c)
-            (0, 1, 1, 0)
+            (1, 1, 0, 0)
             sage: m = vector(GF(2), (0, 1, 1, 0))
             sage: c1 = E.encode(m)
             sage: c == c1
@@ -376,10 +377,10 @@ class Encoder(SageObject):
             sage: C = LinearCode(G)
             sage: E = C.encoder()
             sage: E.generator_matrix()
-            [1 1 1 0 0 0 0]
-            [1 0 0 1 1 0 0]
-            [0 1 0 1 0 1 0]
-            [1 1 0 1 0 0 1]
+            [1 0 0 0 0 1 1]
+            [0 1 0 0 1 0 1]
+            [0 0 1 0 1 1 0]
+            [0 0 0 1 1 1 1]
         """
 
 

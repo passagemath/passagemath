@@ -126,7 +126,7 @@ cdef class ComplexIntervalFieldElement(FieldElement):
         mpfi_init2(self.__re, self._prec)
         mpfi_init2(self.__im, self._prec)
 
-    def __init__(self, parent, real, imag=None, int base=10):
+    def __init__(self, parent, real, imag=None, int base=10) -> None:
         """
         Initialize a complex number (interval).
 
@@ -169,7 +169,7 @@ cdef class ComplexIntervalFieldElement(FieldElement):
         """
         return self.str(10)
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Return the hash value of ``self``.
 
@@ -665,7 +665,7 @@ cdef class ComplexIntervalFieldElement(FieldElement):
 
         return center
 
-    def __contains__(self, other):
+    def __contains__(self, other) -> bool:
         """
         Test whether ``other`` is totally contained in ``self``.
 
@@ -1166,7 +1166,6 @@ cdef class ComplexIntervalFieldElement(FieldElement):
 
         - [RL1971]_
         """
-        cdef ComplexIntervalFieldElement result
         x = self._new()
 
         if mpfi_nan_p(self.__re) or mpfi_nan_p(self.__im):
@@ -1408,7 +1407,7 @@ cdef class ComplexIntervalFieldElement(FieldElement):
         return complex(self.real().n(self._prec),
                        self.imag().n(self._prec))
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         """
         Return ``True`` if ``self`` is not known to be exactly zero.
 

@@ -2,7 +2,7 @@
 from sage.structure.element cimport ModuleElement
 
 cdef class FiniteZZsubmodule_iterator:
-    #### Global Data
+    # Global Data
     cdef FiniteZZsubmodule_iterator _other_ZZ
     cdef ModuleElement _basis
     cdef ModuleElement _cw

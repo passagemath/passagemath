@@ -1,7 +1,10 @@
 # sage_setup: distribution = sagemath-brial
 # sage.doctest: needs sage.rings.polynomial.pbori
-from .interpolate import variety_lex_leading_terms, nf_lex_points
-from .pbori import easy_linear_factors
+from sage.rings.polynomial.pbori.interpolate import (
+    nf_lex_points,
+    variety_lex_leading_terms,
+)
+from sage.rings.polynomial.pbori.pbori import easy_linear_factors
 
 
 def easy_linear_polynomials(p):

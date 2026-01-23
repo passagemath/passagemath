@@ -159,16 +159,19 @@ def _charpoly_linbox(Matrix_integer_sparse self, var='x'):
     cdef linbox.DensePolynomial_integer * p = new linbox.DensePolynomial_integer(givZZ, <size_t> self._nrows)
     cdef Polynomial_integer_dense_flint g = (<Polynomial_integer_dense_flint> R.gen())._new()
 
-    sig_on()
-    linbox.charpoly(p[0], M[0])
-    sig_off()
+    while True:  # linbox is unreliable, see :issue:`37068`
+        sig_on()
+        linbox.charpoly(p[0], M[0])
+        sig_off()
 
-    cdef size_t i
-    fmpz_poly_fit_length(g._poly, p.size())
-    for i in range(p.size()):
-        tmp = p[0][i].get_mpz_const()
-        fmpz_poly_set_coeff_mpz(g._poly, i, tmp)
-    _fmpz_poly_set_length(g._poly, p.size())
+        fmpz_poly_fit_length(g._poly, p.size())
+        for i in range(p.size()):
+            tmp = p[0][i].get_mpz_const()
+            fmpz_poly_set_coeff_mpz(g._poly, i, tmp)
+        _fmpz_poly_set_length(g._poly, p.size())
+
+        if g.lc() == 1 and g.degree() == self._nrows:
+            break
 
     del M
     del p
@@ -208,18 +211,22 @@ def _minpoly_linbox(Matrix_integer_sparse self, var='x'):
     cdef linbox.SparseMatrix_integer * M = new_linbox_matrix_integer_sparse(givZZ, self)
     cdef linbox.DensePolynomial_integer * p = new linbox.DensePolynomial_integer(givZZ, <size_t> self._nrows)
     cdef Polynomial_integer_dense_flint g = (<Polynomial_integer_dense_flint> R.gen())._new()
-
-    sig_on()
-    linbox.minpoly(p[0], M[0])
-    sig_off()
-
-    cdef size_t i
     cdef mpz_t tmp
-    fmpz_poly_fit_length(g._poly, p.size())
-    for i in range(p.size()):
-        tmp = p[0][i].get_mpz_const()
-        fmpz_poly_set_coeff_mpz(g._poly, i, tmp)
-    _fmpz_poly_set_length(g._poly, p.size())
+    cdef size_t i
+
+    while True:  # linbox is unreliable, see :issue:`37068`
+        sig_on()
+        linbox.minpoly(p[0], M[0])
+        sig_off()
+
+        fmpz_poly_fit_length(g._poly, p.size())
+        for i in range(p.size()):
+            tmp = p[0][i].get_mpz_const()
+            fmpz_poly_set_coeff_mpz(g._poly, i, tmp)
+        _fmpz_poly_set_length(g._poly, p.size())
+
+        if g.lc() == 1:
+            break
 
     del M
     del p

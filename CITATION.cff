@@ -9,5 +9,5 @@ authors:
 - name: "the Sage developers"
 version: 10.8.1.alpha0
 doi: 10.5281/zenodo.15265940
-date-released: 2026-01-20
+date-released: 2026-01-21
 repository-code: "https://github.com/passagemath/passagemath"

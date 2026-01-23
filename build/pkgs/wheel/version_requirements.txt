@@ -1,1 +1,2 @@
-wheel
+# version constraint for macOS Big Sur support (see https://github.com/sagemath/sage/issues/31050)
+wheel >=0.36.2

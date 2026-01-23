@@ -103,6 +103,49 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
         mpq_vector_get_entry(x.value, &self._matrix[i], j)
         return x
 
+    cdef copy_from_unsafe(self, Py_ssize_t iDst, Py_ssize_t jDst, src, Py_ssize_t iSrc, Py_ssize_t jSrc):
+        r"""
+        Copy the ``(iSrc, jSrc)`` entry of ``src`` into the ``(iDst, jDst)``
+        entry of ``self``.
+
+        INPUT:
+
+        - ``iDst`` - the row to be copied to in ``self``.
+        - ``jDst`` - the column to be copied to in ``self``.
+        - ``src`` - the matrix to copy from. Should be a Matrix_rational_sparse
+                    with the same base ring as ``self``.
+        - ``iSrc``  - the row to be copied from in ``src``.
+        - ``jSrc`` - the column to be copied from in ``src``.
+
+        TESTS::
+
+            sage: M = matrix(QQ,3,4,[i + 1/(i+1) if is_prime(i) else 0 for i in range(12)],sparse=True)
+            sage: M
+            [     0      0    7/3   13/4]
+            [     0   31/6      0   57/8]
+            [     0      0      0 133/12]
+            sage: M.transpose()
+            [     0      0      0]
+            [     0   31/6      0]
+            [   7/3      0      0]
+            [  13/4   57/8 133/12]
+            sage: M.matrix_from_rows([0,2])
+            [     0      0    7/3   13/4]
+            [     0      0      0 133/12]
+            sage: M.matrix_from_columns([1,3])
+            [     0   13/4]
+            [  31/6   57/8]
+            [     0 133/12]
+            sage: M.matrix_from_rows_and_columns([1,2],[0,3])
+            [     0   57/8]
+            [     0 133/12]
+        """
+        cdef Rational x
+        x = Rational()
+        cdef Matrix_rational_sparse _src = <Matrix_rational_sparse> src
+        mpq_vector_get_entry(x.value, &_src._matrix[iSrc], jSrc)
+        mpq_vector_set_entry(&self._matrix[iDst], jDst, x.value)
+
     cdef bint get_is_zero_unsafe(self, Py_ssize_t i, Py_ssize_t j) except -1:
         """
         Return 1 if the entry ``(i, j)`` is zero, otherwise 0.
@@ -715,27 +758,30 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
             v.positions[l] = cols_index[w.positions[pos[l]]]
             mpq_mul(v.entries[l], w.entries[pos[l]], minus_one)
 
-    def _right_kernel_matrix(self, **kwds):
+    def _right_kernel_matrix(self, algorithm='default', proof=None):
         r"""
         Return a pair that includes a matrix of basis vectors
         for the right kernel of ``self``.
 
         INPUT:
 
-        - ``kwds`` -- these are provided for consistency with other versions
-          of this method.  Here they are ignored as there is no optional
-          behavior available.
+        - ``algorithm`` -- (default: ``'default'``) a keyword that selects the
+          algorithm employed.  Allowable values are:
+
+          - ``'default'`` -- equivalent to ``'padic'``
+          - ``'padic'`` -- `p`-adic algorithm from the IML library for matrices
+            over the rationals and integers
+          - ``'linbox'`` -- LinBox library code for sparse matrices over the
+            rationals
 
         OUTPUT:
 
-        Returns a pair.  First item is the string 'computed-iml-rational'
-        that identifies the nature of the basis vectors.
+        Returns a pair.  First item is a string that identifies the nature
+        of the basis vectors, either 'computed-iml-rational' or
+        'computed-linbox-rational'.
 
-        Second item is a matrix whose rows are a basis for the right kernel,
-        over the rationals, as computed by the IML library.  Notice that the
-        IML library returns a matrix that is in the 'pivot' format, once the
-        whole matrix is multiplied by -1.  So the 'computed' format is very
-        close to the 'pivot' format.
+        Second item is a matrix whose nonzero rows are a basis for the right kernel,
+        over the rationals, as computed by the IML library or the LinBox library.
 
         EXAMPLES::
 
@@ -754,11 +800,14 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
             sage: X = result[1].transpose()
             sage: A*X == zero_matrix(QQ, 4, 2)
             True
-
-        Computed result is the negative of the pivot basis, which
-        is just slightly more efficient to compute. ::
-
-            sage: A.right_kernel_matrix(basis='pivot') == -A.right_kernel_matrix(basis='computed')
+            sage: result = A._right_kernel_matrix(algorithm='linbox')
+            sage: result[0]
+            'computed-linbox-rational'
+            sage: result[1]
+            [ 1 -2  2  1  0]
+            [-1 -2  0  0  1]
+            sage: X = result[1].transpose()
+            sage: A*X == zero_matrix(QQ, 4, 2)
             True
 
         TESTS:
@@ -777,9 +826,18 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
             [1 0 0]
             [0 1 0]
             [0 0 1]
-        """
-        return self.dense_matrix()._right_kernel_matrix()
 
+        .. SEEALSO::
+
+            :meth:`~sage.matrix.matrix_rational_dense.Matrix_rational_dense._right_kernel_matrix`
+        """
+        if algorithm == 'default' or algorithm == 'padic':
+            return self.dense_matrix()._right_kernel_matrix()
+        elif algorithm == 'linbox':
+            from sage.matrix.matrix_rational_sparse_linbox import _right_kernel_matrix_linbox
+            return _right_kernel_matrix_linbox(self)
+        else:
+            raise ValueError(f"matrix kernel algorithm '{algorithm}' not recognized")
 
 #########################
 

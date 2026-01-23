@@ -6,7 +6,7 @@ Homogeneous symmetric functions
 By this we mean the basis formed of the complete homogeneous
 symmetric functions `h_\lambda`, not an arbitrary graded basis.
 """
-#*****************************************************************************
+# ***************************************************************************
 #       Copyright (C) 2007 Mike Hansen <mhansen@gmail.com>
 #                     2012 Mike Zabrocki <mike.zabrocki@gmail.com>
 #
@@ -19,8 +19,8 @@ symmetric functions `h_\lambda`, not an arbitrary graded basis.
 #
 #  The full text of the GPL is available at:
 #
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ***************************************************************************
 
 ####################################
 #                                  #
@@ -305,6 +305,9 @@ class SymmetricFunctionAlgebra_homogeneous(multiplicative.SymmetricFunctionAlgeb
                 sage: s = x.principal_specialization(3); s
                 0
             """
+            if n == 1:
+                return self.base_ring().sum(self.coefficients(sort=False))
+
             from sage.combinat.q_analogues import q_binomial
 
             def get_variable(ring, name):

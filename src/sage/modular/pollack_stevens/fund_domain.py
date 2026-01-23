@@ -32,7 +32,7 @@ from sage.misc.cachefunc import cached_method
 
 from .sigma0 import Sigma0
 
-M2ZSpace = MatrixSpace(ZZ,2)
+M2ZSpace = MatrixSpace(ZZ, 2)
 
 
 def M2Z(x):

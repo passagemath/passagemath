@@ -31,14 +31,6 @@ from sage.structure.richcmp import richcmp, richcmp_not_equal
 from sage.rings.semirings.non_negative_integer_semiring import NN
 
 
-def is_FreeMonoidElement(x):
-    from sage.misc.superseded import deprecation
-    deprecation(38184,
-                "The function is_FreeMonoidElement is deprecated; "
-                "use 'isinstance(..., FreeMonoidElement)' instead.")
-    return isinstance(x, FreeMonoidElement)
-
-
 class FreeMonoidElement(MonoidElement):
     """
     Element of a free monoid.
@@ -56,7 +48,7 @@ class FreeMonoidElement(MonoidElement):
         ...
         NotImplementedError
     """
-    def __init__(self, F, x, check=True):
+    def __init__(self, F, x, check=True) -> None:
         """
         Create the element `x` of the FreeMonoid `F`.
 

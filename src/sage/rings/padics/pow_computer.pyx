@@ -25,7 +25,7 @@ AUTHORS:
 - David Roe
 """
 
-#*****************************************************************************
+# ***************************************************************************
 #       Copyright (C) 2007-2013 David Roe <roed.math@gmail.com>
 #                               William Stein <wstein@gmail.com>
 #
@@ -34,7 +34,7 @@ AUTHORS:
 #  the License, or (at your option) any later version.
 #
 #                  https://www.gnu.org/licenses/
-#*****************************************************************************
+# ***************************************************************************
 
 import weakref
 from cysignals.memory cimport sig_malloc, sig_free

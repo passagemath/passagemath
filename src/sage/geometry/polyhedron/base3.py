@@ -1101,7 +1101,7 @@ class Polyhedron_base3(Polyhedron_base2):
                 for face in comb_chain] + \
                [universe]
 
-    def is_simplex(self):
+    def is_simplex(self) -> bool:
         r"""
         Return whether the polyhedron is a simplex.
 
@@ -1153,7 +1153,7 @@ class Polyhedron_base3(Polyhedron_base2):
             raise NotImplementedError("this function is implemented for polytopes only")
         return self.combinatorial_polyhedron().simplicity()
 
-    def is_simple(self):
+    def is_simple(self) -> bool:
         """
         Test for simplicity of a polytope.
 
@@ -1204,7 +1204,7 @@ class Polyhedron_base3(Polyhedron_base2):
             raise NotImplementedError("this function is implemented for polytopes only")
         return self.combinatorial_polyhedron().simpliciality()
 
-    def is_simplicial(self):
+    def is_simplicial(self) -> bool:
         """
         Test if the polytope is simplicial.
 

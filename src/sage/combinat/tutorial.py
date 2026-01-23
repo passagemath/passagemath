@@ -141,7 +141,7 @@ We will now attempt a little numerical simulation. The following
 function tests whether a given hand is a flush or not::
 
     sage: def is_flush(hand):
-    ....:     return len(set(suit for (val, suit) in hand)) == 1
+    ....:     return len(set(suit for val, suit in hand)) == 1
 
 We now draw 10000 hands at random, and count the number of flushes
 obtained (this takes about 10 seconds)::
@@ -1636,7 +1636,7 @@ iterator or non-naive counting::
     M(4, 2, 3),
     M(5, 2, 3)
     in 3-d lattice M
-    sage: L.npoints()                                 # random                          # needs palp
+    sage: L.n_points()                                # random                          # needs palp
     11
 
 This polytope can be visualized in 3D with ``L.plot3d()`` (see

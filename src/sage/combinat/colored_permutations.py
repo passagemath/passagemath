@@ -8,7 +8,7 @@ Colored permutations
     generalized to `G \wr S_n`
 """
 import itertools
-from random import choice
+from sage.misc.prandom import choice
 
 from sage.structure.element import MultiplicativeGroupElement
 from sage.structure.parent import Parent
@@ -19,7 +19,7 @@ from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.arith.functions import lcm
 
-from sage.combinat.partition_tuple import PartitionTuples, PartitionTuple
+from sage.combinat.partition_tuple import PartitionTuples
 from sage.combinat.permutation import Permutations
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
@@ -274,7 +274,7 @@ class ColoredPermutation(MultiplicativeGroupElement):
         """
         Cp = CyclotomicField(self.parent()._m)
         g = Cp.gen()
-        D = diagonal_matrix(Cp, [g ** i for i in self._colors])
+        D = diagonal_matrix(Cp, [g**i for i in self._colors])
         return self._perm.to_matrix() * D
 
     def has_left_descent(self, i) -> bool:
@@ -474,7 +474,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
             return ColoredPermutations(m, n)
         return super().__classcall__(cls, m, p, n)
 
-    def __init__(self, m, p, n):
+    def __init__(self, m, p, n) -> None:
         r"""
         Initialize ``self``.
 
@@ -507,9 +507,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
         self._C = IntegerModRing(self._m)
         self._P = Permutations(self._n)
 
-        if (self._p == 1 and (self._m == 1 or self._m == 2)
-            or (self._p == 2 and self._m == 2)
-            or (self._n == 2 and self._p == self._m)):
+        if self._p <= self._m <= 2 or (self._n == 2 and self._p == self._m):
             from sage.categories.finite_coxeter_groups import FiniteCoxeterGroups
             category = FiniteCoxeterGroups()
             if not (self._n == self._m == self._p == 2):  # special case of type D_2
@@ -521,7 +519,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
                 category = category.WellGenerated()
         Parent.__init__(self, category=category)
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         """
         Return a string representation of ``self``.
 
@@ -741,8 +739,8 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
         if i == self._n + 1 or self._n == 1:
             return sn ** self._p
 
-        snm = self.simple_reflection(self._n-1)
-        return sn**(self._m-1) * snm * sn
+        snm = self.simple_reflection(self._n - 1)
+        return sn**(self._m - 1) * snm * sn
 
     @cached_method
     def _inverse_simple_reflections(self):
@@ -1126,7 +1124,7 @@ class ShephardToddFamilyGroup(UniqueRepresentation, Parent):
             q = PolynomialRing(ZZ, 'q').gen(0)
         return prod(q + d - 1 for d in self.degrees())
 
-    def is_well_generated(self):
+    def is_well_generated(self) -> bool:
         r"""
         Return if ``self`` is a well-generated complex reflection group.
 

@@ -211,7 +211,7 @@ class TabloidModule(Representation_abstract, CombinatorialFreeModule):
         data = [cartesian_product([OrderedSetPartitions([val * x for x, val in zip(sorted(X), signs)], la),
                                    OrderedSetPartitions(sorted(Y), mu)])
                 for (X, Y) in OrderedSetPartitions(G._n, [sum(la), sum(mu)])
-                for signs in product([1,-1], repeat=sum(la))]
+                for signs in product([1, -1], repeat=sum(la))]
         tabloids = DisjointUnionEnumeratedSets(data)
         tabloids.rename(f"Tabloids of shape {self._diagram}")
 
@@ -511,8 +511,8 @@ class SpechtModule(Representation_abstract, SubmoduleWithBasis):
                 n = T.size()
                 for sigma in T.column_stabilizer():
                     sigma = sigma.tuple()
-                    for signs in product(*[[1,-1] if i not in mu_vals else [1]
-                                           for i in range(1,n+1)]):
+                    for signs in product(*[[1, -1] if i not in mu_vals else [1]
+                                           for i in range(1, n+1)]):
                         yield self._semigroup([s * val for s, val in zip(signs, sigma)])
 
             return ambient.sum_of_terms((ambient._semigroup_basis_action(elt, tab),
@@ -605,7 +605,7 @@ class SpechtModule(Representation_abstract, SubmoduleWithBasis):
         COB = matrix([b.lift().to_vector() for b in B]).T
         P, L, U = COB.LU()
         # Since U is upper triangular, the nonzero entriesm must be in the
-        #   upper square portiion of the matrix
+        #   upper square portion of the matrix
         n = len(B)
 
         Uinv = U.matrix_from_rows(range(n)).inverse()
@@ -906,7 +906,7 @@ class SimpleModule(Representation_abstract, QuotientModuleWithBasis):
         [0 0 0 0 0 0 1 0]
         [0 0 0 0 0 0 0 1]
     """
-    def __init__(self, specht_module):
+    def __init__(self, specht_module) -> None:
         r"""
         Initialize ``self``.
 
@@ -916,18 +916,19 @@ class SimpleModule(Representation_abstract, QuotientModuleWithBasis):
             sage: D = B4.simple_module([[2,1], [1]], GF(3))
             sage: TestSuite(D).run()
         """
-        self._diagram = specht_module._diagram
         p = specht_module.base_ring().characteristic()
-        if (not all(la.is_regular(p) for la in specht_module._diagram)
-            or (p == 2 and specht_module._diagram[0])):
+        d = self._diagram = specht_module._diagram
+        if (p == 2 and d[0]) or not all(la.is_regular(p) for la in d):
             raise ValueError(f"the partition must be {p}-regular")
-        Representation_abstract.__init__(self, specht_module._semigroup, specht_module._side,
+        Representation_abstract.__init__(self, specht_module._semigroup,
+                                         specht_module._side,
                                          algebra=specht_module._semigroup_algebra)
         cat = specht_module.category()
-        QuotientModuleWithBasis.__init__(self, specht_module.maximal_submodule(),
+        QuotientModuleWithBasis.__init__(self,
+                                         specht_module.maximal_submodule(),
                                          cat, prefix='D', bracket='')
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         Return a string representation of ``self``.
 
@@ -939,7 +940,7 @@ class SimpleModule(Representation_abstract, QuotientModuleWithBasis):
         """
         return f"Simple module of {self._diagram} over {self.base_ring()}"
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
         Return a latex representation of ``self``.
 

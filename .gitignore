@@ -6,6 +6,7 @@
 /logs
 /upstream
 /wheelhouse
+/sagemath.egg-info
 
 # Autotools generated files
 /aclocal.m4
@@ -174,7 +175,7 @@ __pycache__/
 !/src/sage/rings/bernmm/bern_modp_util.cpp
 !/src/sage/rings/bernmm/bern_rat.cpp
 !/src/sage/rings/bernmm/bernmm-test.cpp
-!/src/sage/rings/padics/transcendantal.c
+!/src/sage/rings/padics/transcendental.c
 !/src/sage/rings/polynomial/weil/power_sums.c
 !/src/sage/schemes/hyperelliptic_curves/hypellfrob/hypellfrob.cpp
 !/src/sage/schemes/hyperelliptic_curves/hypellfrob/recurrences_ntl.cpp
@@ -273,19 +274,16 @@ src/.coverage/
 worktree*
 **/worktree*
 
-# Meson build directory
-builddir
-builddir-*
-build-install
-build/cp*
-
 # Meson subprojects
 /subprojects/*
 !/subprojects/*.wrap
 !/subprojects/packagefiles
+!/subprojects/README.md
 
 # Meson temporary files
 subprojects/wrapdb.json
+subprojects/maxima-5.47.0
+subprojects/packagecache
 src/sage/interfaces/__init__.py
 src/sage/crypto/block_cipher/__init__.py
 src/sage/crypto/public_key/__init__.py
@@ -295,6 +293,7 @@ src/sage/dynamics/cellular_automata/__init__.py
 src/sage/dynamics/arithmetic_dynamics/__init__.py
 src/sage/dynamics/__init__.py
 src/sage/dynamics/complex_dynamics/__init__.py
+src/sage/ext/interpreters/__init__.py
 src/sage/knots/__init__.py
 src/sage/topology/__init__.py
 src/sage/functions/__init__.py
@@ -322,6 +321,7 @@ src/sage/schemes/hyperelliptic_curves/__init__.py
 src/sage/schemes/berkovich/__init__.py
 src/sage/schemes/generic/__init__.py
 src/sage/schemes/projective/__init__.py
+src/sage/schemes/weighted_projective/__init__.py
 src/sage/schemes/__init__.py
 src/sage/schemes/affine/__init__.py
 src/sage/modular/hecke/__init__.py
@@ -434,6 +434,7 @@ src/sage/graphs/graph_decompositions/__init__.py
 src/sage/graphs/generators/__init__.py
 src/sage/graphs/__init__.py
 src/sage/graphs/base/__init__.py
+src/sage/graphs/tests/__init__.py
 src/sage/databases/__init__.py
 src/sage/stats/hmm/__init__.py
 src/sage/stats/__init__.py
@@ -451,3 +452,8 @@ src/sage/calculus/__init__.py
 # ci-meson.yml runs a `./tools/test-git-no-uncommitted-changes` step)
 /.ccache
 /setup-miniconda-patched-environment-*.yml
+
+# bootstrap-time generated docs
+/src/doc/en/installation/*.txt
+/src/doc/en/reference/spkg/*.rst
+!/src/doc/en/reference/spkg/index.rst

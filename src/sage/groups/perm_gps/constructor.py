@@ -20,7 +20,7 @@ objects have a more group theoretic flavor than the more combinatorial
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from . import permgroup_element
+from sage.groups.perm_gps import permgroup_element
 from sage.interfaces.gap import GapElement
 from sage.libs.gap.element import GapElement_Permutation
 from sage.misc.lazy_import import lazy_import

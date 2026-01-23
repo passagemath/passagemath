@@ -156,6 +156,7 @@ and testing to make sure nothing funny is going on).
    :maxdepth: 1
 
    sage/interfaces/r
+   sage/interfaces/regina
    sage/interfaces/rubik
    sage/interfaces/sage0
    sage/interfaces/scilab

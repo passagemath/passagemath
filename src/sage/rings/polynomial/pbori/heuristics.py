@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-brial
 # sage.doctest: needs sage.rings.polynomial.pbori
-from .PyPolyBoRi import Polynomial, gauss_on_polys
+from sage.rings.polynomial.pbori.PyPolyBoRi import Polynomial, gauss_on_polys
 
 
 def dense_system(I):

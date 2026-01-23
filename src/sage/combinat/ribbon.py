@@ -2,7 +2,7 @@
 r"""
 Ribbons
 """
-#*****************************************************************************
+# ***************************************************************************
 #       Copyright (C) 2007 Mike Hansen <mhansen@gmail.com>,
 #
 #  Distributed under the terms of the GNU General Public License (GPL)
@@ -14,7 +14,7 @@ Ribbons
 #
 #  The full text of the GPL is available at:
 #
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ***************************************************************************
 
 from .ribbon_shaped_tableau import RibbonShapedTableau, StandardRibbonShapedTableaux

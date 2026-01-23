@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-graphs
-# cython: binding=True
 r"""
 Static dense graphs
 
@@ -752,7 +751,7 @@ def connected_subgraph_iterator(G, k=None, bint vertices_only=False,
                                 edges_only=False, labels=False, induced=True,
                                 exactly_k=False):
     r"""
-    Return an terator over the induced connected subgraphs of order at most `k`.
+    Return an iterator over the induced connected subgraphs of order at most `k`.
 
     This method implements a iterator over the induced connected subgraphs of
     the input (di)graph. An induced subgraph of a graph is another graph, formed

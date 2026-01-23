@@ -1,5 +1,4 @@
 # sage_setup: distribution = sagemath-flint
-# cython: binding=True
 # sage.doctest: needs sage.libs.flint sage.graphs sage.modules
 r"""
 Some fast computations for finite posets using FLINT matrices

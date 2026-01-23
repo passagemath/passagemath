@@ -22,7 +22,7 @@ if [ $# -ne 1 ]; then
 fi
 
 if [ -z "$SAGE_ROOT" ]; then
-    die "must be run from within a Sage environment, or with SAGE_ROOT provided"
+    SAGE_ROOT="$(pwd)"
 fi
 
 if [ -z "$SAGE_SRC" ]; then
@@ -115,7 +115,7 @@ SAGE_VERSION_BANNER='$SAGE_VERSION_BANNER'
 EOF
 
 # Create a top-level VERSION.txt file, which some external utilities rely on
-echo "$SAGE_VERSION_BANNER" > "$SAGE_ROOT/VERSION.txt"
+echo "$SAGE_VERSION" > "$SAGE_ROOT/VERSION.txt"
 
 # Add version to the front of GitHub release assets URLs.
 #REPO=https://github.com/sagemath/sage

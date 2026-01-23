@@ -347,7 +347,7 @@ cdef class MPComplexField_class(Field):
         z.init = 1
         return z
 
-    def _repr_ (self) -> str:
+    def _repr_(self) -> str:
         """
         Return a string representation of ``self``.
 

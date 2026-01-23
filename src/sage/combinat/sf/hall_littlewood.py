@@ -5,7 +5,7 @@ Hall-Littlewood polynomials
 
 Notation used in the definitions follows mainly [Mac1995]_.
 """
-#*****************************************************************************
+# ***************************************************************************
 #       Copyright (C) 2007 Mike Hansen <mhansen@gmail.com>,
 #
 #  Distributed under the terms of the GNU General Public License (GPL)
@@ -17,17 +17,19 @@ Notation used in the definitions follows mainly [Mac1995]_.
 #
 #  The full text of the GPL is available at:
 #
-#                  http://www.gnu.org/licenses/
-#*****************************************************************************
+#                  https://www.gnu.org/licenses/
+# ***************************************************************************
 
 import sage.combinat.partition
+import sage.misc.persist
+
 from sage.categories.homset import Hom
+from sage.categories.modules_with_basis import ModulesWithBasis
 from sage.categories.morphism import SetMorphism
+from sage.combinat.sf import sfa
 from sage.misc.lazy_import import lazy_import
 from sage.rings.rational_field import QQ
 from sage.structure.unique_representation import UniqueRepresentation
-
-from . import sfa
 
 lazy_import('sage.libs.symmetrica.all', 'hall_littlewood')
 lazy_import('sage.matrix.constructor', 'matrix')
@@ -234,7 +236,7 @@ class HallLittlewood(UniqueRepresentation):
         Transitions between bases with the parameter `t` specialized::
 
             sage: Sym = SymmetricFunctions(FractionField(QQ['y','z']))
-            sage: (y,z) = Sym.base_ring().gens()
+            sage: y, z = Sym.base_ring().gens()
             sage: HLy = Sym.hall_littlewood(t=y)
             sage: HLz = Sym.hall_littlewood(t=z)
             sage: Qpy = HLy.Qp()
@@ -390,7 +392,7 @@ class HallLittlewood_generic(sfa.SymmetricFunctionAlgebra_generic):
         # common category BasesByOrthotriangularity (shared with Jack, HL, orthotriang, Mcdo)
         if hasattr(self, "_s_cache"):
             # temporary until Hom(GradedHopfAlgebrasWithBasis work better)
-            category = sage.categories.all.ModulesWithBasis(self._sym.base_ring())
+            category = ModulesWithBasis(self._sym.base_ring())
             self   .register_coercion(SetMorphism(Hom(self._s, self, category), self._s_to_self))
             self._s.register_coercion(SetMorphism(Hom(self, self._s, category), self._self_to_s))
 
@@ -862,7 +864,7 @@ class HallLittlewood_q(HallLittlewood_generic):
 
         self._P = self._hall_littlewood.P()
         # temporary until Hom(GradedHopfAlgebrasWithBasis work better)
-        category = sage.categories.all.ModulesWithBasis(self.base_ring())
+        category = ModulesWithBasis(self.base_ring())
 
         phi = self.module_morphism(diagonal=self._P._q_to_p_normalization,
                                    codomain=self._P, category=category)

@@ -70,19 +70,23 @@ def _multiply_linbox(Matrix_integer_dense self, Matrix_integer_dense right):
 
 
 def _charpoly_linbox(Matrix_integer_dense self, var):
-    g = (<Polynomial_integer_dense_flint> PolynomialRing(ZZ, names=var).gen())._new()
-    sig_on()
-    linbox_fmpz_mat_charpoly(g._poly, self._matrix)
-    sig_off()
-    return g
+    while True:  # linbox is unreliable, see :issue:`37068`
+        g = (<Polynomial_integer_dense_flint> PolynomialRing(ZZ, names=var).gen())._new()
+        sig_on()
+        linbox_fmpz_mat_charpoly(g._poly, self._matrix)
+        sig_off()
+        if g.lc() == 1 and g.degree() == self._nrows:
+            return g
 
 
 def _minpoly_linbox(Matrix_integer_dense self, var):
-    g = (<Polynomial_integer_dense_flint> PolynomialRing(ZZ, names=var).gen())._new()
-    sig_on()
-    linbox_fmpz_mat_minpoly(g._poly, self._matrix)
-    sig_off()
-    return g
+    while True:  # linbox is unreliable, see :issue:`37068`
+        g = (<Polynomial_integer_dense_flint> PolynomialRing(ZZ, names=var).gen())._new()
+        sig_on()
+        linbox_fmpz_mat_minpoly(g._poly, self._matrix)
+        sig_off()
+        if g.lc() == 1:
+            return g
 
 
 def _rank_linbox(Matrix_integer_dense self):

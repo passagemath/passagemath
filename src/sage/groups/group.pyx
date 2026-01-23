@@ -17,34 +17,8 @@ Base class for groups
 #
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
-from sage.misc.superseded import deprecation
 from sage.rings.infinity import infinity
 from sage.structure.parent cimport Parent
-
-
-def is_Group(x):
-    """
-    Return whether ``x`` is a group object.
-
-    INPUT:
-
-    - ``x`` -- anything
-
-    OUTPUT: boolean
-
-    EXAMPLES::
-
-        sage: from sage.groups.group import is_Group
-        sage: is_Group("a string")
-        doctest:warning...DeprecationWarning: use instead G in Groups()
-        See https://github.com/sagemath/sage/issues/37449 for details.
-        False
-        sage: F.<a,b> = FreeGroup()                                                     # needs sage.combinat sage.groups
-        sage: is_Group(F)                                                               # needs sage.combinat sage.groups
-        True
-    """
-    deprecation(37449, 'use instead G in Groups()')
-    return isinstance(x, Group)
 
 
 cdef class Group(Parent):
@@ -114,7 +88,7 @@ cdef class Group(Parent):
                 raise ValueError("%s is not a subcategory of %s" % (category, Groups()))
         Parent.__init__(self, base=base, category=category)
 
-    def is_abelian(self):
+    def is_abelian(self) -> bool:
         """
         Test whether this group is abelian.
 
@@ -129,7 +103,7 @@ cdef class Group(Parent):
         """
         raise NotImplementedError
 
-    def is_commutative(self):
+    def is_commutative(self) -> bool:
         r"""
         Test whether this group is commutative.
 
@@ -269,7 +243,7 @@ cdef class AbelianGroup(Group):
     """
     Generic abelian group.
     """
-    def is_abelian(self):
+    def is_abelian(self) -> bool:
         """
         Return ``True``.
 

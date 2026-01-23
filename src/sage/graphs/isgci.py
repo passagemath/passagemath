@@ -146,7 +146,7 @@ Predefined classes
 
    * - Biconnected
 
-     - :meth:`~sage.graphs.graph.Graph.is_biconnected`,
+     - :meth:`~sage.graphs.generic_graph.GenericGraph.is_biconnected`,
        :meth:`~sage.graphs.generic_graph.GenericGraph.blocks_and_cut_vertices`,
        :meth:`~sage.graphs.generic_graph.GenericGraph.blocks_and_cuts_tree`
 
@@ -566,7 +566,7 @@ class GraphClass(SageObject, CachedRepresentation):
 
         return [smallgraphs[g] for g in excluded]
 
-    def __contains__(self, g):
+    def __contains__(self, g) -> bool:
         r"""
         Check if ``g`` belongs to the graph class represented by ``self``.
 
@@ -605,11 +605,7 @@ class GraphClass(SageObject, CachedRepresentation):
             raise NotImplementedError("No recognition algorithm is available "
                                       "for this class.")
 
-        for gg in excluded:
-            if g.subgraph_search(gg, induced=True):
-                return False
-
-        return True
+        return not any(g.subgraph_search(gg, induced=True) for gg in excluded)
 
     def description(self):
         r"""

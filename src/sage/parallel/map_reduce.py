@@ -231,7 +231,7 @@ Fine control over the execution of a map/reduce computation is achieved
 via parameters passed to the :meth:`RESetMapReduce.run` method.
 The following three parameters can be used:
 
-- ``max_proc`` -- (integer, default: ``None``) if given, the
+- ``max_proc`` -- integer (default: ``None``); if given, the
   maximum number of worker processors to use. The actual number
   is also bounded by the value of the environment variable
   ``SAGE_NUM_THREADS`` (the number of cores by default).
@@ -1410,7 +1410,7 @@ class RESetMapReduce:
 
         INPUT:
 
-        - ``max_proc`` -- (integer, default: ``None``) if given, the
+        - ``max_proc`` -- integer (default: ``None``); if given, the
           maximum number of worker processors to use. The actual number
           is also bounded by the value of the environment variable
           ``SAGE_NUM_THREADS`` (the number of cores by default).

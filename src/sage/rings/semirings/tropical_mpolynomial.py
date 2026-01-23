@@ -550,7 +550,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
         A subdivision with many faces, not all of which are triangles::
 
-            sage: # needs sage.geometry.polyhedron
+            sage: # long time (:issue:`39569`), needs sage.geometry.polyhedron
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y> = PolynomialRing(T)
             sage: p3 = (R(8) + R(4)*x + R(2)*y + R(1)*x^2 + x*y + R(1)*y^2
@@ -586,7 +586,7 @@ class TropicalMPolynomial(MPolynomial_polydict):
 
         Dual subdivision of a tropical surface::
 
-            sage: # needs sage.geometry.polyhedron
+            sage: # long time (:issue:`39569`), needs sage.geometry.polyhedron
             sage: T = TropicalSemiring(QQ)
             sage: R.<x,y,z> = PolynomialRing(T)
             sage: p1 = x + y + z + x^2 + R(1)

@@ -274,7 +274,7 @@ class CubicHeckeExtensionRing(LaurentPolynomialRing_mpair):
             sage: ER = chbr.CubicHeckeExtensionRing('a, b, c')
             sage: ER._test_category()   # indirect doctest
         """
-        return None
+        return
 
     def __reduce__(self):
         r"""

@@ -144,9 +144,10 @@ from sage.misc.lazy_attribute import lazy_attribute
 
 from sage.structure.parent cimport Parent
 from sage.structure.coerce cimport (coercion_model,
-        py_scalar_to_element, is_numpy_type, is_mpmath_type)
+                                    py_scalar_to_element,
+                                    is_numpy_type, is_mpmath_type)
 from sage.structure.richcmp cimport richcmp
-
+from sage.misc.lazy_attribute import lazy_attribute
 from sage.misc.fpickle import pickle_function, unpickle_function
 
 from sage.symbolic.symbols import symbol_table, register_symbol
@@ -166,6 +167,7 @@ cdef object SR = None, PolynomialRing_commutative = None, MPolynomialRing_polydi
 # Changing the order of this list could cause problems unpickling old pickles.
 sfunctions_funcs = ['eval', 'evalf', 'conjugate', 'real_part', 'imag_part',
         'derivative', 'power', 'series', 'print', 'print_latex', 'tderivative']
+
 
 cdef class Function(SageObject):
     """
@@ -1372,6 +1374,15 @@ cdef class SymbolicFunction(Function):
             foo(x)^2 + foo(0) + 1
             sage: u.subs(y=0).n()                                                       # needs sage.symbolic
             43.0000000000000
+
+        Check that :issue:`40292` is fixed::
+
+            sage: # needs sage.symbolic
+            sage: var('x,y')
+            (x, y)
+            sage: u = function('u')(x, y)
+            sage: loads(dumps(u))
+            u(x, y)
         """
         return (2, self._name, self._nargs, self._latex_name, self._conversions,
                 self._evalf_params_first,

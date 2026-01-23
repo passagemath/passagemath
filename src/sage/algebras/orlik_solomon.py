@@ -157,7 +157,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
         """
         return (-len(x), sorted(x))
 
-    def _repr_term(self, m):
+    def _repr_term(self, m) -> str:
         """
         Return a string representation of the basis element indexed by `m`.
 
@@ -170,7 +170,7 @@ class OrlikSolomonAlgebra(CombinatorialFreeModule):
         """
         return "OS{{{}}}".format(', '.join(str(t) for t in sorted(m)))
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         """
         Return a string representation of ``self``.
 
@@ -829,7 +829,7 @@ class OrlikSolomonInvariantAlgebra(FiniteDimensionalInvariantModule):
             sage: OS1.construction() is None
             True
         """
-        return None
+        return
 
     def _basis_action(self, g, f):
         r"""

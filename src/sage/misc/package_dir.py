@@ -527,6 +527,7 @@ if __name__ == '__main__':
         # Order matters because some MANIFESTs are not careful enough
         distributions = ["sagemath-symbolics",
                          "sagemath-schemes",
+                         "sagemath-database-stein-watkins-mini",
                          "sagemath-glpk",
                          "sagemath-gap",
                          "sagemath-groups",
@@ -546,7 +547,6 @@ if __name__ == '__main__':
                          "sagemath-libecm",
                          "sagemath-singular",
                          "sagemath-linbox",
-                         "sagemath-m4ri-m4rie",
                          "sagemath-iml",
                          "sagemath-flint",
                          "sagemath-ntl",
@@ -555,6 +555,7 @@ if __name__ == '__main__':
                          "sagemath-plot",
                          "sagemath-combinat",
                          "sagemath-modules",
+                         "sagemath-m4ri-m4rie",
                          "sagemath-categories",
                          "sagemath-repl",
                          "sagemath-environment",

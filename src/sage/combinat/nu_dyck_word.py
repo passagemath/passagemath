@@ -1080,7 +1080,7 @@ class NuDyckWord(CombinatorialElement):
             return j
         return False
 
-    def mutate(self, i) -> None | NuDyckWord:
+    def mutate(self, i) -> NuDyckWord | None:
         r"""
         Return a new `\nu`-Dyck Word if possible.
 

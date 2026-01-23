@@ -971,35 +971,6 @@ unsigned_infinity = UnsignedInfinityRing.gen(0)
 less_than_infinity = UnsignedInfinityRing.less_than_infinity()
 
 
-def is_Infinite(x) -> bool:
-    """
-    This is a type check for infinity elements.
-
-    EXAMPLES::
-
-        sage: sage.rings.infinity.is_Infinite(oo)
-        doctest:warning...
-        DeprecationWarning: The function is_Infinite is deprecated;
-        use 'isinstance(..., InfinityElement)' instead.
-        See https://github.com/sagemath/sage/issues/38022 for details.
-        True
-        sage: sage.rings.infinity.is_Infinite(-oo)
-        True
-        sage: sage.rings.infinity.is_Infinite(unsigned_infinity)
-        True
-        sage: sage.rings.infinity.is_Infinite(3)
-        False
-        sage: sage.rings.infinity.is_Infinite(RR(infinity))
-        False
-        sage: sage.rings.infinity.is_Infinite(ZZ)
-        False
-    """
-    from sage.misc.superseded import deprecation
-    deprecation(38022, "The function is_Infinite is deprecated; use 'isinstance(..., InfinityElement)' instead.")
-
-    return isinstance(x, InfinityElement)
-
-
 class SignError(ArithmeticError):
     """
     Sign error exception.
@@ -1008,7 +979,7 @@ class SignError(ArithmeticError):
 
 
 class InfinityRing_class(Singleton, CommutativeRing):
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initialize ``self``.
 
@@ -1282,10 +1253,8 @@ class InfinityRing_class(Singleton, CommutativeRing):
         from sage.structure.coerce import parent_is_real_numerical
         if parent_is_real_numerical(R):
             return True
-        if isinstance(R, (sage.rings.abc.RealIntervalField,
-                          sage.rings.abc.RealBallField)):
-            return True
-        return False
+        return isinstance(R, (sage.rings.abc.RealIntervalField,
+                              sage.rings.abc.RealBallField))
 
     def _pushout_(self, other):
         r"""
@@ -1768,7 +1737,7 @@ Infinity = infinity
 minus_infinity = InfinityRing.gen(1)
 
 
-def test_comparison(ring):
+def check_comparison(ring):
     """
     Check comparison with infinity.
 
@@ -1784,17 +1753,17 @@ def test_comparison(ring):
 
     EXAMPLES::
 
-        sage: from sage.rings.infinity import test_comparison
+        sage: from sage.rings.infinity import check_comparison
         sage: rings = [ZZ, QQ, RDF]
         sage: rings += [RR, RealField(200)]                                             # needs sage.rings.real_mpfr
         sage: rings += [RLF, RIF]                                                       # needs sage.rings.real_interval_field
         sage: for R in rings:
         ....:     print('testing {}'.format(R))
-        ....:     test_comparison(R)
+        ....:     check_comparison(R)
         testing Integer Ring
         testing Rational Field
         testing Real Double Field...
-        sage: test_comparison(AA)                                                       # needs sage.rings.number_field
+        sage: check_comparison(AA)                                                       # needs sage.rings.number_field
 
     Comparison with number fields does not work::
 
@@ -1807,7 +1776,7 @@ def test_comparison(ring):
     ``False`` (meaning: cannot decide) already for some very
     elementary comparisons::
 
-        sage: test_comparison(SR)               # known bug                             # needs sage.symbolic
+        sage: check_comparison(SR)               # known bug                             # needs sage.symbolic
         Traceback (most recent call last):
         ...
         AssertionError: testing -1000.0 in Symbolic Ring: id = ...
@@ -1839,7 +1808,7 @@ def test_comparison(ring):
         assert infinity >= z, msg
 
 
-def test_signed_infinity(pos_inf):
+def check_signed_infinity(pos_inf):
     """
     Test consistency of infinity representations.
 
@@ -1869,12 +1838,12 @@ def test_signed_infinity(pos_inf):
 
     EXAMPLES::
 
-        sage: from sage.rings.infinity import test_signed_infinity
-        sage: test_signed_infinity(oo)
-        sage: test_signed_infinity(float('+inf'))
-        sage: test_signed_infinity(RLF(oo))                                             # needs sage.rings.real_interval_field
-        sage: test_signed_infinity(RIF(oo))                                             # needs sage.rings.real_interval_field
-        sage: test_signed_infinity(SR(oo))                                              # needs sage.symbolic
+        sage: from sage.rings.infinity import check_signed_infinity
+        sage: check_signed_infinity(oo)
+        sage: check_signed_infinity(float('+inf'))
+        sage: check_signed_infinity(RLF(oo))                                             # needs sage.rings.real_interval_field
+        sage: check_signed_infinity(RIF(oo))                                             # needs sage.rings.real_interval_field
+        sage: check_signed_infinity(SR(oo))                                              # needs sage.symbolic
     """
     msg = f'testing {pos_inf} ({type(pos_inf)})'
     assert InfinityRing(pos_inf) is infinity, msg

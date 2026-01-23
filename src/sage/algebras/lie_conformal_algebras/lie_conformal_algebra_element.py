@@ -74,7 +74,7 @@ class LCAWithGeneratorsElement(IndexedFreeModuleElement):
                 return p.zero()
         return sum(mon.T(n) for mon in self.terms())
 
-    def is_monomial(self):
+    def is_monomial(self) -> bool:
         """
         Whether this element is a monomial.
 
@@ -149,7 +149,7 @@ class LCAStructureCoefficientsElement(LCAWithGeneratorsElement):
                 ret[k] = ret.get(k, pz) + d[k]
         return {k: v for k, v in ret.items() if v}
 
-    def _repr_(self):
+    def _repr_(self) -> str:
         r"""
         A visual representation of this element.
 
@@ -187,7 +187,7 @@ class LCAStructureCoefficientsElement(LCAWithGeneratorsElement):
 
         return repr_lincomb(terms, strip_one=True)
 
-    def _latex_(self):
+    def _latex_(self) -> str:
         r"""
         A visual representation of this element.
 
