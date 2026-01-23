@@ -197,7 +197,7 @@ jobs:
       #
       CIBW_ARCHS: ${{ matrix.arch }}
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.12, <3.13' || '>=3.10, <3.15' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.12, <3.13' || '>=3.11, <3.15' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD_WINDOWS: |
         pip install delvewheel && msys2 -c "set -x; cat constraints.txt && (echo passagemath-conf @ file:///${GITHUB_WORKSPACE}/pkgs/sage-conf && echo passagemath-setup @ file:///${GITHUB_WORKSPACE}/pkgs/sage-setup && echo passagemath-environment @ file:///${GITHUB_WORKSPACE}/pkgs/sagemath-environment) > constraints.txt && cat constraints.txt"
