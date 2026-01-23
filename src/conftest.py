@@ -11,7 +11,6 @@ import doctest
 import inspect
 import sys
 import warnings
-from collections.abc import Iterable
 from typing import Any, Optional, TYPE_CHECKING
 
 import pytest
@@ -33,6 +32,7 @@ from sage.doctest.forker import (
 from sage.doctest.parsing import SageDocTestParser, SageOutputChecker
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable
     from pathlib import Path
 
 
