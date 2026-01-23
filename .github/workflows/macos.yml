@@ -114,7 +114,7 @@ jobs:
       - name: Merge CI fixes from sagemath/sage
         if: inputs.merge_ci_fixes
         run: |
-          .ci/merge-fixes.sh
+          .github/workflows/merge-fixes.sh
         env:
           GH_TOKEN: ${{ github.token }}
           SAGE_CI_FIXES_FROM_REPOSITORIES: ${{ vars.SAGE_CI_FIXES_FROM_REPOSITORIES }}
