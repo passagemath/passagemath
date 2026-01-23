@@ -57,7 +57,7 @@ TESTS:
 
 Run Sage itself with various options::
 
-    sage: from sage.tests import check_executable
+    sage: from sage.tests.fixtures import check_executable
 
     sage: # long time
     sage: from sage.version import banner
