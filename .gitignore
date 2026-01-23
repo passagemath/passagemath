@@ -175,7 +175,7 @@ __pycache__/
 !/src/sage/rings/bernmm/bern_modp_util.cpp
 !/src/sage/rings/bernmm/bern_rat.cpp
 !/src/sage/rings/bernmm/bernmm-test.cpp
-!/src/sage/rings/padics/transcendantal.c
+!/src/sage/rings/padics/transcendental.c
 !/src/sage/rings/polynomial/weil/power_sums.c
 !/src/sage/schemes/hyperelliptic_curves/hypellfrob/hypellfrob.cpp
 !/src/sage/schemes/hyperelliptic_curves/hypellfrob/recurrences_ntl.cpp
