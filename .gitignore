@@ -57,7 +57,6 @@
 /src/environment-optional-3.11.yml
 
 /src/setup.cfg
-/src/requirements.txt
 
 # Various editors
 *~
