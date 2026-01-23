@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-objects
 cdef class LazyImport:
     cdef readonly object _object   # The actual object if imported, None otherwise
     cdef object _module

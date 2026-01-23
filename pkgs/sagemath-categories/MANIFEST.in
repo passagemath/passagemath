@@ -246,6 +246,7 @@ graft sage/schemes/generic
 graft sage/schemes/affine
 graft sage/schemes/projective
 graft sage/schemes/product_projective
+graft sage/schemes/weighted_projective
 
 graft sage/sets
 exclude sage/sets/pythonclass.*                                 # sagemath-objects

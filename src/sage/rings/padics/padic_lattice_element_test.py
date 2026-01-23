@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-pari
 import pytest
 from sage.rings.padics.factory import ZpLC, ZpLF, QpLC, QpLF
 

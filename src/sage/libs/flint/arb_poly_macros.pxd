@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 # Macros from arb_poly.h
 # See https://github.com/flintlib/flint/issues/1529
 

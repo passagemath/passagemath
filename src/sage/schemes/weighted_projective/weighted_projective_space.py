@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from sage.categories.fields import Fields
 from sage.categories.map import Map
 from sage.misc.latex import latex

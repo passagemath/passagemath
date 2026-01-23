@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 from sage.libs.flint.arb_poly cimport *
 from sage.rings.polynomial.polynomial_element cimport Polynomial
 

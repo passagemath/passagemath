@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-gap
 import pytest
 from sage.libs.gap.libgap import libgap
 
