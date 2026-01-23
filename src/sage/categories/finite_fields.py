@@ -332,6 +332,8 @@ class FiniteFields(CategoryWithAxiom):
                 ...
                 ValueError: element is not a square
             """
+            from sage.rings.integer import Integer
+
             q = self.parent().cardinality()
             if not self.is_square():
                 raise ValueError("element is not a square")
