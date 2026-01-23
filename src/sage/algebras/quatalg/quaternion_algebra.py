@@ -80,7 +80,6 @@ from sage.rings.number_field.number_field_base import NumberField
 from sage.rings.polynomial.polynomial_ring import polygen
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.power_series_ring import PowerSeriesRing
-from sage.rings.qqbar import AA
 from sage.rings.rational_field import QQ, RationalField
 from sage.rings.real_mpfr import RR
 from sage.structure.category_object import normalize_names
