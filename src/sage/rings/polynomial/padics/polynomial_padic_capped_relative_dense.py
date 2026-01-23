@@ -27,7 +27,7 @@ from cypari2.gen import Gen as pari_gen
 from sage.misc.lazy_import import lazy_import
 from sage.rings.infinity import infinity
 
-lazy_import('sage.libs.ntl.ntl_ZZX', 'ZZX')
+lazy_import('sage.libs.ntl.ntl_ZZX', 'ntl_ZZX', as_='ZZX')
 
 min = misc.min
 ZZ = sage.rings.integer_ring.ZZ
