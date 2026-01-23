@@ -646,4 +646,5 @@ def sage_data_paths(name: str = '') -> set[str]:
     else:
         paths = set(SAGE_DATA_PATH.split(os.pathsep))
 
-    return {os.path.join(path, name) for path in paths if os.path.exists(path)}
+    return {(os.path.join(path, name) if name is not None else path)
+            for path in paths if path is not None and os.path.exists(path)}
