@@ -67,9 +67,8 @@ dependencies = [
   'pexpect >=4.8.0',
   'pillow >=7.2.0',
   'platformdirs',
-  # Issue #30922: pplpy 0.8.4 and earlier do not declare dependencies correctly
-  'pplpy >=0.8.6; sys_platform != "win32"',
-  'primecountpy; sys_platform != "win32"',
+  'passagemath-ppl; sys_platform != "win32"',
+  'passagemath-primesieve-primecount; sys_platform != "win32"',
   'ptyprocess > 0.5',
   'requests >=2.13.0',
   'scipy >=1.11',
