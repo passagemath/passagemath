@@ -16,9 +16,11 @@ on:
   merge_group:
   push:
     tags:
-      # Match all release tags including beta, rc
+      # Match all release tags including alpha, beta, rc
       - 'passagemath-[0-9]+.[0-9]+'
       - 'passagemath-[0-9]+.[0-9]+.[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.alpha[0-9]+'
+      - 'passagemath-[0-9]+.[0-9]+.[0-9]+.alpha[0-9]+'
       - 'passagemath-[0-9]+.[0-9]+.beta[0-9]+'
       - 'passagemath-[0-9]+.[0-9]+.[0-9]+.beta[0-9]+'
       - 'passagemath-[0-9]+.[0-9]+.rc[0-9]+'
