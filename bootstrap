@@ -158,8 +158,7 @@ save () {
 	src/doc/en/installation/*.txt \
 	$(find src/doc/en/reference/spkg -maxdepth 1 -name index.rst -prune -o -name "*.rst" -print) \
         $(for a in pkgs/*/*.m4; do echo ${a%.m4}; done) \
-	environment-3.1[0-9]-*.yml \
-	src/requirements.txt
+	environment-3.1[0-9]-*.yml
 
     # Update version; this re-computes the checksum
     sage-package update configure "$NEWCONFVERSION"
