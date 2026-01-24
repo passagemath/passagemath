@@ -46,10 +46,10 @@ About this pip-installable distribution package
 
 This distribution package ``passagemath-conf`` provides:
 
-- a single Python module, ``sage_conf``, providing configuration information
+- a single Python module, ``sage.config``, providing configuration information
   to the Sage library at the time of its installation and at its runtime
 
-- a console script ``sage-config``, for querying the variables of ``sage_conf``
+- a console script ``sage-config``, for querying the variables of ``sage.config``
   from the shell
 
 - a sourcable shell script ``sage-env-config``, providing additional configuration
