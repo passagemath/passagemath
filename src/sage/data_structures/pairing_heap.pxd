@@ -1,4 +1,7 @@
 # sage_setup: distribution = sagemath-categories
+# distutils: language = c++
+# distutils: extra_compile_args = -std=c++17
+
 # ******************************************************************************
 # Copyright (C) 2024 David Coudert <david.coudert@inria.fr>
 #
