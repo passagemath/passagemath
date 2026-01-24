@@ -50,7 +50,7 @@ sage-config = "sage_conf:_main"
 
 [tool.setuptools]
 packages = ["_sage_conf"]
-py-modules = ["sage_conf"]
+py-modules = ["sage.config"]
 script-files = ["bin/sage-env-config"]
 include-package-data = false
 
