@@ -1,3 +1,6 @@
+# This template for a sage.config module is used by the meson build system.
+# It is not used in passagemath, which ships this module from pkgs/sage-conf*/
+
 from pathlib import Path
 
 import sage
