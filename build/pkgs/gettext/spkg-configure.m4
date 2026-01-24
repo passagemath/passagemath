@@ -1,3 +1,3 @@
 SAGE_SPKG_CONFIGURE([gettext], [dnl
-    AC_CHECK_LIB([intl], [main], [], [sage_spkg_install_gettext=yes])
+  AC_SEARCH_LIBS([gettext], [intl], [], [sage_spkg_install_gettext=yes])
 ])
