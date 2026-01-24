@@ -502,7 +502,7 @@ Full Installation from Source as passagemath
 --------------------------------------------
 
 9.  Unless you need to install passagemath into a specific existing environment, we recommend
-    to create and activate a fresh virtual environment over a suitable Python (3.10.x-3.14.x),
+    to create and activate a fresh virtual environment over a suitable Python (3.11.x-3.14.x),
     for example `~/passagemath-venv/` as follows. (Dollar signs are prompts; do not type them.)
 
     ```bash session
