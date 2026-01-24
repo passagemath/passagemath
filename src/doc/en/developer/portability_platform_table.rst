@@ -1888,60 +1888,6 @@
 .. |codespace-fedora-44-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-44-maximal%2Fdevcontainer.json
 
-.. |image-centos-stream-9-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-minimal-with-system-packages
-
-.. |image-centos-stream-9-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-minimal-configured
-
-.. |image-centos-stream-9-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-minimal-with-targets-pre
-
-.. |image-centos-stream-9-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-minimal-with-targets
-
-.. |image-centos-stream-9-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-minimal-with-targets-optional
-
-.. |codespace-centos-stream-9-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-centos-stream-9-minimal%2Fdevcontainer.json
-
-.. |image-centos-stream-9-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-standard-with-system-packages
-
-.. |image-centos-stream-9-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-standard-configured
-
-.. |image-centos-stream-9-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-standard-with-targets-pre
-
-.. |image-centos-stream-9-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-standard-with-targets
-
-.. |image-centos-stream-9-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-standard-with-targets-optional
-
-.. |codespace-centos-stream-9-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-centos-stream-9-standard%2Fdevcontainer.json
-
-.. |image-centos-stream-9-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-maximal-with-system-packages
-
-.. |image-centos-stream-9-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-maximal-configured
-
-.. |image-centos-stream-9-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-maximal-with-targets-pre
-
-.. |image-centos-stream-9-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-maximal-with-targets
-
-.. |image-centos-stream-9-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
-   :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-maximal-with-targets-optional
-
-.. |codespace-centos-stream-9-maximal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-centos-stream-9-maximal%2Fdevcontainer.json
-
 .. |image-centos-stream-9-python3.12-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-python3.12-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-python3.12-minimal-with-system-packages
 
@@ -2427,60 +2373,6 @@
 
 .. |codespace-opensuse-16.0-python3.13-maximal| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-16.0-python3.13-maximal%2Fdevcontainer.json
-
-.. |image-opensuse-tumbleweed-python3.10-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-with-system-packages
-
-.. |image-opensuse-tumbleweed-python3.10-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-configured
-
-.. |image-opensuse-tumbleweed-python3.10-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-with-targets-pre
-
-.. |image-opensuse-tumbleweed-python3.10-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-with-targets
-
-.. |image-opensuse-tumbleweed-python3.10-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-minimal-with-targets-optional
-
-.. |codespace-opensuse-tumbleweed-python3.10-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-tumbleweed-python3.10-minimal%2Fdevcontainer.json
-
-.. |image-opensuse-tumbleweed-python3.10-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-with-system-packages
-
-.. |image-opensuse-tumbleweed-python3.10-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-configured
-
-.. |image-opensuse-tumbleweed-python3.10-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-with-targets-pre
-
-.. |image-opensuse-tumbleweed-python3.10-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-with-targets
-
-.. |image-opensuse-tumbleweed-python3.10-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-standard-with-targets-optional
-
-.. |codespace-opensuse-tumbleweed-python3.10-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-tumbleweed-python3.10-standard%2Fdevcontainer.json
-
-.. |image-opensuse-tumbleweed-python3.10-maximal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-with-system-packages
-
-.. |image-opensuse-tumbleweed-python3.10-maximal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-configured
-
-.. |image-opensuse-tumbleweed-python3.10-maximal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%238f6b8d
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-with-targets-pre
-
-.. |image-opensuse-tumbleweed-python3.10-maximal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%23b46eb2
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-with-targets
-
-.. |image-opensuse-tumbleweed-python3.10-maximal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%23da70d6
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-python3.10-maximal-with-targets-optional
-
-.. |codespace-opensuse-tumbleweed-python3.10-maximal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-tumbleweed-python3.10-maximal%2Fdevcontainer.json
 
 .. |image-opensuse-tumbleweed-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-tumbleweed-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-tumbleweed-minimal-with-system-packages
@@ -3523,17 +3415,6 @@
    * -    ‑*maximal*
      - |image-fedora-44-maximal-with-system-packages| |image-fedora-44-maximal-with-targets-pre|
      -
-   * - **centos**-stream-9 
-       
-          ‑*minimal*
-     - |image-centos-stream-9-minimal-with-system-packages| |image-centos-stream-9-minimal-with-targets-pre| |image-centos-stream-9-minimal-with-targets| |image-centos-stream-9-minimal-with-targets-optional|
-     - |codespace-centos-stream-9-minimal|
-   * -    ‑*standard*
-     - |image-centos-stream-9-standard-with-system-packages| |image-centos-stream-9-standard-with-targets-pre| |image-centos-stream-9-standard-with-targets| |image-centos-stream-9-standard-with-targets-optional|
-     - |codespace-centos-stream-9-standard|
-   * -    ‑*maximal*
-     - |image-centos-stream-9-maximal-with-system-packages| |image-centos-stream-9-maximal-with-targets-pre|
-     -
    * - **centos**-stream-9-python3.12 
        
           ‑*minimal*
@@ -3632,17 +3513,6 @@
      - |codespace-opensuse-16.0-python3.13-standard|
    * -    ‑*maximal*
      - |image-opensuse-16.0-python3.13-maximal-with-system-packages| |image-opensuse-16.0-python3.13-maximal-with-targets-pre|
-     -
-   * - **opensuse**-tumbleweed-python3.10 
-       
-          ‑*minimal*
-     - |image-opensuse-tumbleweed-python3.10-minimal-with-system-packages| |image-opensuse-tumbleweed-python3.10-minimal-with-targets-pre| |image-opensuse-tumbleweed-python3.10-minimal-with-targets| |image-opensuse-tumbleweed-python3.10-minimal-with-targets-optional|
-     - |codespace-opensuse-tumbleweed-python3.10-minimal|
-   * -    ‑*standard*
-     - |image-opensuse-tumbleweed-python3.10-standard-with-system-packages| |image-opensuse-tumbleweed-python3.10-standard-with-targets-pre| |image-opensuse-tumbleweed-python3.10-standard-with-targets| |image-opensuse-tumbleweed-python3.10-standard-with-targets-optional|
-     - |codespace-opensuse-tumbleweed-python3.10-standard|
-   * -    ‑*maximal*
-     - |image-opensuse-tumbleweed-python3.10-maximal-with-system-packages| |image-opensuse-tumbleweed-python3.10-maximal-with-targets-pre|
      -
    * - **opensuse**-tumbleweed 
        
