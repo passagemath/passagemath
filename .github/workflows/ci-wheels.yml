@@ -12,7 +12,7 @@ on:
       python-versions:
         description: 'Python versions to test (JSON list)'
         default: >-
-          ['3.10', '3.14']
+          ['3.11', '3.14']
         required: true
       oss:
         description: 'OSs to test (JSON list; default: all)'
@@ -110,7 +110,7 @@ jobs:
                            ]') }}
         python-version: >-
           ${{ fromJson(inputs.python-versions
-                       || '["3.10",
+                       || '["3.11",
                            ]') }}
         os: >-
           ${{ fromJson(inputs.oss
