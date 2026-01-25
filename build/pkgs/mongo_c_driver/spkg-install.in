@@ -1,0 +1,11 @@
+cd src
+
+sdh_cmake -GNinja \
+          -DCMAKE_VERBOSE_MAKEFILE=ON \
+          -DBUILD_STATIC_LIBS=OFF \
+          -DBUILD_SHARED_LIBS=ON \
+          -DENABLE_MONGOC=ON \
+          .
+
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
