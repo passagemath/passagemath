@@ -484,6 +484,8 @@ class Rings(CategoryWithAxiom):
                 False
                 sage: Qp(19).is_prime_field()                                               # needs sage.rings.padics
                 False
+
+                sage: # needs sage.libs.pari
                 sage: R.<x> = PolynomialRing(QQ)
                 sage: S = R.quotient(x + 16)
                 sage: S.is_prime_field()
@@ -503,9 +505,10 @@ class Rings(CategoryWithAxiom):
 
             We check that bug :issue:`40426` is fixed::
 
+                sage: # needs sage.rings.finite_rings
                 sage: K = GF(4)
                 sage: A.<x> = K[]
-                sage: L = K.extension(x+1)
+                sage: L = K.extension(x + 1)
                 sage: L.is_prime_field()
                 False
             """

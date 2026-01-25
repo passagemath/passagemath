@@ -493,13 +493,12 @@ class FiniteEnumeratedSets(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.finite_rings
                 sage: R = GF(9)
                 sage: C = cartesian_product([R])
                 sage: C._test_random()
-
                 sage: C = cartesian_product([R, R])
                 sage: C._test_random()
-
                 sage: C = cartesian_product([list(range(5)) for _ in range(5)])
                 sage: C._test_random()
             """

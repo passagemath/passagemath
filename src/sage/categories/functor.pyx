@@ -46,6 +46,7 @@ def _Functor_unpickle(Cl, D, domain, codomain):
 
     EXAMPLES::
 
+        sage: # needs sage.modules
         sage: R.<x,y> = InfinitePolynomialRing(QQ)
         sage: F = R.construction()[0]
         sage: F == loads(dumps(F))

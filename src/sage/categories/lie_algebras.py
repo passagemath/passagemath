@@ -698,6 +698,7 @@ class LieAlgebras(Category_over_base_ring):
             where the BCH formula can be treated as a formal group law
             (we thank Greg Kuperberg for this example)::
 
+                sage: # needs sage.combinat sage.modules
                 sage: L = LieAlgebra(QQ, 2, step=4)
                 sage: L.options.display = "brackets"
                 sage: a, b = L.basis(1)

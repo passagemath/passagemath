@@ -261,6 +261,7 @@ class FiniteFields(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.finite_rings
                 sage: k = GF((3, 10))
                 sage: k.quadratic_nonresidue().is_square()
                 False
@@ -291,6 +292,7 @@ class FiniteFields(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.libs.pari
                 sage: S.<x> = GF(5)[]
                 sage: f = S.irreducible_element(20)
                 sage: k.<y> = S.quotient_ring(f)
@@ -322,6 +324,7 @@ class FiniteFields(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.finite_rings
                 sage: k.<a> = GF((5, 10))
                 sage: k(2).is_square()
                 True
@@ -363,6 +366,7 @@ class FiniteFields(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.finite_rings
                 sage: k.<a> = GF((5, 10))
                 sage: k(2).is_square()
                 True
@@ -414,6 +418,7 @@ class FiniteFields(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.libs.pari
                 sage: S.<x> = GF(5)[]
                 sage: f = S.irreducible_element(20)
                 sage: k.<y> = S.quotient_ring(f)
@@ -440,6 +445,7 @@ class FiniteFields(CategoryWithAxiom):
             Here is an example where changing the algorithm results
             in a faster square root::
 
+                sage: # needs sage.libs.pari
                 sage: p = 141 * 2^141 + 1
                 sage: S.<x> = GF(p)[]
                 sage: f = S.irreducible_element(2)
