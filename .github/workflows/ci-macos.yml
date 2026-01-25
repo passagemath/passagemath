@@ -18,6 +18,7 @@ name: CI macOS
 #on: [push, pull_request]
 
 on:
+  pull_request:
   push:
     tags:
       - '*'
@@ -36,11 +37,15 @@ jobs:
       stage: "1"
       timeout: 18000
       max_parallel: 3
+      osversion_xcodeversion_toxenv_tuples: >-
+        [["15",       "",           "homebrew-macos-opthomebrew-standard"]]
 
   stage-2:
     uses: ./.github/workflows/macos.yml
     with:
       stage: "2"
+      osversion_xcodeversion_toxenv_tuples: >-
+        [["15",       "",           "homebrew-macos-opthomebrew-standard"]]
     needs: [stage-1]
     if: ${{ success() || failure() }}
 
@@ -48,6 +53,8 @@ jobs:
     uses: ./.github/workflows/macos.yml
     with:
       stage: "2-optional-0-o"
+      osversion_xcodeversion_toxenv_tuples: >-
+        [["15",       "",           "homebrew-macos-opthomebrew-standard"]]
     needs: [stage-2]
     if: ${{ success() || failure() }}
 
@@ -55,19 +62,25 @@ jobs:
     uses: ./.github/workflows/macos.yml
     with:
       stage: "2-optional-p-z"
-    needs: [stage-2-optional-0-o]
+      osversion_xcodeversion_toxenv_tuples: >-
+        [["15",       "",           "homebrew-macos-opthomebrew-standard"]]
+    needs: [stage-2]
     if: ${{ success() || failure() }}
 
   stage-2-experimental-0-o:
     uses: ./.github/workflows/macos.yml
     with:
-      stage: "2-optional-0-o"
-    needs: [stage-2-optional-p-z]
+      stage: "2-experimental-0-o"
+      osversion_xcodeversion_toxenv_tuples: >-
+        [["15",       "",           "homebrew-macos-opthomebrew-standard"]]
+    needs: [stage-2]
     if: ${{ success() || failure() }}
 
   stage-2-experimental-p-z:
     uses: ./.github/workflows/macos.yml
     with:
       stage: "2-experimental-p-z"
-    needs: [stage-2-experimental-0-o]
+      osversion_xcodeversion_toxenv_tuples: >-
+        [["15",       "",           "homebrew-macos-opthomebrew-standard"]]
+    needs: [stage-2]
     if: ${{ success() || failure() }}

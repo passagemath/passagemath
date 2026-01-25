@@ -24,4 +24,5 @@ else:
 sage_setup(['sagemath-polymake'],
            recurse_packages=('sage', 'passagemath_polymake'),
            spkgs=['polymake'],
-           ext_modules=ext_modules)
+           ext_modules=ext_modules,
+           py_limited_api=True)
