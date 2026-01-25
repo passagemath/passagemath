@@ -165,12 +165,12 @@ Classes
 from sage.misc.persist import register_unpickle_override
 from sage.misc.cachefunc import cached_method
 from sage.misc.converting_dict import KeyConvertingDict
+from sage.misc.lazy_import import lazy_import
 from sage.rings.finite_rings.finite_field_base import FiniteField
 from sage.rings.finite_rings.finite_field_constructor import FiniteField as GF
 from sage.rings.infinity import Infinity
 from sage.rings.polynomial.multi_polynomial_ideal import MPolynomialIdeal, NCPolynomialIdeal
 from sage.rings.polynomial.multi_polynomial_ring import MPolynomialRing_base
-from sage.rings.polynomial.plural import NCPolynomialRing_plural
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.infinite_polynomial_ring import InfinitePolynomialRing_sparse
 from sage.rings.quotient_ring import QuotientRing_nc
@@ -185,6 +185,8 @@ except ImportError:
     def singular_gb_standard_options(func):
         return func
     libsingular_gb_standard_options = singular_gb_standard_options
+
+lazy_import("sage.rings.polynomial.plural", "NCPolynomialRing_plural")
 
 
 def is_PolynomialSequence(F):
