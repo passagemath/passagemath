@@ -30,8 +30,3 @@ Upstream Contact
 ----------------
 
 http://gcc.gnu.org/
-
-Special Update/Build Instructions
----------------------------------
-
-None.

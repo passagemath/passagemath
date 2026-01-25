@@ -101,14 +101,16 @@ A part of the functionality is also available on Windows using MSYS2.
 Use of the full functionality on Windows currently requires the use of Windows
 Subsystem for Linux (WSL) or virtualization.
 
-| Version                                                                      | CPython   | Toolchains        | Operating Systems           | Architectures | Notes                  |
-|------------------------------------------------------------------------------|-----------|-------------------|-----------------------------|---------------|------------------------|
-| [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9–3.12  | GCC 8.4–14, clang | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2024-12            |
-| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9–3.13  | GCC 9–14, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2025-10            |
-| [10.6.x](https://github.com/passagemath/passagemath/tree/passagemath-10.6.x) | 3.10–3.14 | GCC 9–15, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable <br>EOL 2026-10 |
-|                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | partial functionality  |
-|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | partial functionality  |
-| 10.8.x <br>(main)                                                            | 3.11–3.14 |                   |                             |               | development            |
+| Version                                                                      | CPython   | Toolchains        | Operating Systems           | Architectures | Notes                   |
+|------------------------------------------------------------------------------|-----------|-------------------|-----------------------------|---------------|-------------------------|
+| [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9–3.12  | GCC 8.4–14, clang | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2024-12             |
+| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9–3.13  | GCC 9–14, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2025-10             |
+| [10.6.x](https://github.com/passagemath/passagemath/tree/passagemath-10.6.x) | 3.10–3.14 | GCC 9–15, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable <br>EOL 2026-10  |
+|                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality* |
+|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality* |
+| 10.8.x <br>(main)                                                            | 3.11–3.14 | GCC 9–16, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | development             |
+|                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality* |
+|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality* |
 
 Detailed information on supported platforms for a specific version of passagemath
 can be found in the
@@ -421,7 +423,7 @@ in the Installation Guide.
 
 4.  [Linux, WSL] Install the required minimal build prerequisites:
 
-    - Compilers: `gcc`, `gfortran`, `g++` (GCC versions from 9.x to 14.x
+    - Compilers: `gcc`, `gfortran`, `g++` (GCC versions from 9.x to 16.x
       and recent versions of Clang (LLVM) are supported).
       See [build/pkgs/gcc/SPKG.rst](build/pkgs/gcc/SPKG.rst) and
       [build/pkgs/gfortran/SPKG.rst](build/pkgs/gfortran/SPKG.rst)

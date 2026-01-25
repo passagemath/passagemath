@@ -6,7 +6,7 @@ Description
 
 This package represents the required C and C++ compilers.
 
-- GCC (GNU Compiler Collection) versions 9.x to 14.x are supported.
+- GCC (GNU Compiler Collection) versions 9.x to 16.x are supported.
 
 - Clang (LLVM) is also supported.
 

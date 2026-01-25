@@ -99,7 +99,8 @@ jobs:
          "debian-bullseye",
          "debian-bookworm",
          "fedora-30",
-         "fedora-42",
+         "fedora-43",
+         "fedora-44",
          "gentoo-python3.11",
          "debian-bullseye-i386"]
       tox_packages_factors: >-
