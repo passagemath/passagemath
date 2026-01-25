@@ -103,7 +103,7 @@ def sage_setup(distributions, *,
 
         if spkgs:
             try:
-                from sage_conf import make
+                from sage.config import make
             except ImportError:
                 pass
             else:

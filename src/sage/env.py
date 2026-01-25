@@ -150,14 +150,10 @@ def var(key: str, *fallbacks: Optional[str], force: bool = False) -> Optional[st
         value = os.environ.get(key)
     if value is None:
         try:
-            import sage_conf
-            value = getattr(sage_conf, key, None)
+            import sage.config
+            value = getattr(sage.config, key, None)
         except ImportError:
-            try:
-                import sage.config
-                value = getattr(sage.config, key, None)
-            except ImportError:
-                pass
+            pass
 
     # Try all fallbacks in order as long as we don't have a value
     for f in fallbacks:

@@ -46,11 +46,11 @@ documentation = "https://passagemath.org/docs/latest"
 "tracker" = "https://github.com/passagemath/passagemath/issues"
 
 [project.scripts]
-sage-config = "sage_conf:_main"
+sage-config = "sage.config:_main"
 
 [tool.setuptools]
 packages = ["_sage_conf"]
-py-modules = ["sage_conf"]
+py-modules = ["sage.config"]
 script-files = ["bin/sage-env-config"]
 include-package-data = false
 

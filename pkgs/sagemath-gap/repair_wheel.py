@@ -8,8 +8,8 @@ from pathlib import Path
 
 from auditwheel.wheeltools import InWheel
 
-from sage_conf import GAP_ROOT_PATHS
-from sage_conf import SAGE_LOCAL
+from sage.config import GAP_ROOT_PATHS
+from sage.config import SAGE_LOCAL
 
 
 if "TMPDIR" in os.environ:

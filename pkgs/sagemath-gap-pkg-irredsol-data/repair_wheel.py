@@ -8,7 +8,7 @@ from pathlib import Path
 
 from auditwheel.wheeltools import InWheel
 
-from sage_conf import GAP_ROOT_PATHS
+from sage.config import GAP_ROOT_PATHS
 
 if "TMPDIR" in os.environ:
     os.environ["TMPDIR"] = str(Path(os.environ["TMPDIR"]).resolve())

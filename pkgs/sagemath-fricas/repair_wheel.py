@@ -8,7 +8,7 @@ from pathlib import Path
 
 from auditwheel.wheeltools import InWheel
 
-from sage_conf import SAGE_LOCAL
+from sage.config import SAGE_LOCAL
 
 wheel = sys.argv[1]
 

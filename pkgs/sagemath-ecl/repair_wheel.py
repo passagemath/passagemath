@@ -8,7 +8,7 @@ from pathlib import Path
 
 from auditwheel.wheeltools import InWheel
 
-from sage_conf import MAXIMA_FAS, SAGE_LOCAL
+from sage.config import MAXIMA_FAS, SAGE_LOCAL
 
 if "TMPDIR" in os.environ:
     os.environ["TMPDIR"] = str(Path(os.environ["TMPDIR"]).resolve())

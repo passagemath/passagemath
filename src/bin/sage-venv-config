@@ -11,7 +11,7 @@
 VERSION = 'unknown'
 
 try:
-    from sage_conf import *
+    from sage.config import *
 except ImportError:
     pass
 

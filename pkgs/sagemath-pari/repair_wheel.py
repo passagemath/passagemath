@@ -10,7 +10,7 @@ from pathlib import Path
 
 from auditwheel.wheeltools import InWheel
 
-from sage_conf import SAGE_LOCAL
+from sage.config import SAGE_LOCAL
 
 if "TMPDIR" in os.environ:
     os.environ["TMPDIR"] = str(Path(os.environ["TMPDIR"]).resolve())
