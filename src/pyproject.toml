@@ -15,7 +15,7 @@ requires = [
     # per https://github.com/scipy/scipy/blob/maintenance/1.13.x/pyproject.toml
     'cython >=3.0.8,<3.3.0',
     'gmpy2 ~=2.1.b999',
-    'memory_allocator',
+    'memory_allocator <0.2',
     # per https://github.com/scipy/scipy/blob/maintenance/1.13.x/pyproject.toml
     'numpy >=1.22.4',
     'pkgconfig',
@@ -44,7 +44,7 @@ dependencies = [
     # version 5.7 provides the features of Python 3.12 importlib.resources
     'importlib_resources >= 5.12; python_version<"3.12"',
     'lrcalc ~=2.1',
-    'memory_allocator',
+    'memory_allocator <0.2',
     'numpy >=1.19',
     'pkgconfig',
     'passagemath-ppl',
