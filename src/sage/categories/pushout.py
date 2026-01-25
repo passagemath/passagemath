@@ -1189,6 +1189,7 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
 
     EXAMPLES::
 
+        sage: # needs sage.modules
         sage: A.<a,b> = InfinitePolynomialRing(ZZ['t'])
         sage: A.construction()
         [InfPoly{[a,b], "lex", "dense"},
@@ -1285,9 +1286,10 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
 
         TESTS::
 
+            sage: # needs sage.modules
             sage: P.<x,y> = QQ[]
             sage: R.<alpha> = InfinitePolynomialRing(P)
-            sage: f = P.hom([x+y,x-y],P)
+            sage: f = P.hom([x + y, x - y], P)
             sage: R.construction()[0](f)     # indirect doctest
             Traceback (most recent call last):
             ...
@@ -1301,6 +1303,7 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
 
         TESTS::
 
+            sage: # needs sage.modules
             sage: F = sage.categories.pushout.InfinitePolynomialFunctor(['a','b','x'],'degrevlex','sparse'); F
             InfPoly{[a,b,x], "degrevlex", "sparse"}
             sage: F(QQ['t']) # indirect doctest
@@ -1365,6 +1368,7 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
 
         TESTS::
 
+            sage: # needs sage.modules
             sage: F1 = QQ['a','x_2','x_1','y_3','y_2'].construction()[0]; F1
             MPoly[a,x_2,x_1,y_3,y_2]
             sage: F2 = InfinitePolynomialRing(QQ, ['x','y'],order='degrevlex').construction()[0]; F2
@@ -1466,6 +1470,7 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: X.<x,y> = InfinitePolynomialRing(QQ, implementation='sparse')
             sage: Y.<x,y> = InfinitePolynomialRing(QQ, order='degrevlex')
             sage: X.construction()
@@ -1518,6 +1523,7 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: A = InfinitePolynomialRing(QQ, ['x','y'], order='degrevlex')
             sage: F = A.construction()[0]; F
             InfPoly{[x,y], "degrevlex", "dense"}
@@ -3937,7 +3943,7 @@ class BlackBoxConstructionFunctor(ConstructionFunctor):
         TESTS::
 
             sage: from sage.categories.pushout import BlackBoxConstructionFunctor
-            sage: from sage.interfaces.maxima_lib import maxima
+            sage: from sage.interfaces.maxima_lib import maxima                         # needs sage.symbolic
             sage: FG = BlackBoxConstructionFunctor(gap)
             sage: FM = BlackBoxConstructionFunctor(maxima)                              # needs sage.symbolic
             sage: FM == FG                                                              # needs sage.libs.gap sage.symbolic
@@ -3969,7 +3975,7 @@ class BlackBoxConstructionFunctor(ConstructionFunctor):
         TESTS::
 
             sage: from sage.categories.pushout import BlackBoxConstructionFunctor
-            sage: from sage.interfaces.maxima_lib import maxima
+            sage: from sage.interfaces.maxima_lib import maxima                         # needs sage.symbolic
             sage: FG = BlackBoxConstructionFunctor(gap)
             sage: FM = BlackBoxConstructionFunctor(maxima)                              # needs sage.symbolic
             sage: FM == FG       # indirect doctest                                     # needs sage.libs.gap sage.symbolic
@@ -3989,7 +3995,7 @@ class BlackBoxConstructionFunctor(ConstructionFunctor):
         EXAMPLES::
 
             sage: from sage.categories.pushout import BlackBoxConstructionFunctor
-            sage: from sage.interfaces.maxima_lib import maxima
+            sage: from sage.interfaces.maxima_lib import maxima                         # needs sage.symbolic
             sage: FG = BlackBoxConstructionFunctor(gap)
             sage: FM = BlackBoxConstructionFunctor(maxima)                              # needs sage.symbolic
             sage: FM != FG       # indirect doctest                                     # needs sage.libs.gap sage.symbolic

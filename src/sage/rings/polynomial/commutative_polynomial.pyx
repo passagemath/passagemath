@@ -16,8 +16,8 @@ cdef class CommutativePolynomial(CommutativeAlgebraElement):
         sage: K.<x,y> = PolynomialRing(QQ)
         sage: isinstance(x, CommutativePolynomial)
         True
-        sage: X.<x,y> = InfinitePolynomialRing(ZZ, implementation='sparse')
-        sage: isinstance(x[2], CommutativePolynomial)
+        sage: X.<x,y> = InfinitePolynomialRing(ZZ, implementation='sparse')             # needs sage.modules
+        sage: isinstance(x[2], CommutativePolynomial)                                   # needs sage.modules
         True
     """
 

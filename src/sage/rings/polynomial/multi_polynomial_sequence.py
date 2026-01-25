@@ -302,11 +302,12 @@ def PolynomialSequence(arg1, arg2=None, immutable=False, cr=False, cr_str=None):
     A ``PolynomialSequence`` can be created from elements of an
     ``InfinitePolynomialRing``::
 
+        sage: # needs sage.modules
         sage: R.<a> = InfinitePolynomialRing(QQ)
-        sage: s = PolynomialSequence([a[i]-a[i+1] for i in range(3)])
+        sage: s = PolynomialSequence([a[i] - a[i+1] for i in range(3)])
         sage: s
         [-a_1 + a_0, -a_2 + a_1, -a_3 + a_2]
-        sage: s.coefficients_monomials()                                                # needs sage.modules
+        sage: s.coefficients_monomials()
         (
         [ 0  0 -1  1]
         [ 0 -1  1  0]

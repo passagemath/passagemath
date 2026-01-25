@@ -1142,6 +1142,7 @@ cdef class PowerSeries(AlgebraElement):
             sage: f.O(5)
             1 + x + x*t + 1/2*x^2*t - 1/6*x^3*t + 1/2*x^2*t^2 + O(x, t)^5
 
+            sage: # needs sage.symbolic
             sage: R.<x> = QQ[[]]
             sage: (e^(e^x - 1)).O(5)
             1 + x + x^2 + 5/6*x^3 + 5/8*x^4 + O(x^5)

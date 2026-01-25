@@ -464,7 +464,8 @@ class MPowerSeriesRing_generic(PowerSeriesRing_generic, Nonexact):
             sage: M.is_noetherian()
             True
 
-            sage: W = PowerSeriesRing(InfinitePolynomialRing(ZZ,'a'),2,'x,y')
+            sage: # needs sage.modules
+            sage: W = PowerSeriesRing(InfinitePolynomialRing(ZZ, 'a'), 2, 'x,y')
             sage: W.is_noetherian()
             False
         """

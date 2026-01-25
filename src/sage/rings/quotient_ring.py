@@ -944,6 +944,7 @@ class QuotientRing_nc(Parent):
         have no way of testing whether ``self`` is Noetherian, so we
         raise an error::
 
+            sage: # needs sage.modules
             sage: R.<x> = InfinitePolynomialRing(QQ)
             sage: R.is_noetherian()
             False
