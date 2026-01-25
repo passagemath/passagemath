@@ -507,7 +507,10 @@ class FiniteEnumeratedSets(CategoryWithAxiom):
                 self.cardinality == self._cardinality_from_iterator):
                 return
             from sage.misc.randstate import seed
-            from sage.probability.probability_distribution import RealDistribution
+            try:
+                from sage.probability.probability_distribution import RealDistribution
+            except ImportError:
+                return
             from sage.rings.infinity import Infinity
             from collections import Counter
             tester = self._tester(**options)
