@@ -1,1 +1,1 @@
-| cmake ninja_build
+openssl | cmake ninja_build

@@ -28,6 +28,12 @@ export CXXFLAGS="-I$(pwd)/include/core-wrappers -I$(pwd)/include/core $CXXFLAGS"
 # Disable (excessive) C++ debugging information - https://github.com/passagemath/passagemath/pull/1966#issuecomment-3751008687
 export CXXFLAGS="$CXXFLAGS -g0"
 
+# Patch out lib64 guesswork
+sed -i.bak 's/lib64/lib64-disabled/g' perllib/Polymake/ConfigureStandalone.pm
+
+# Patch out rpathery
+sed -E -i.bak 's/ *-Wl,-rpath,[^ "/]*//' support/configure.pl bundled/*/support/configure.pl
+
 export PERLBREW_ROOT="$SAGE_LOCAL"
 
 perlbrew exec ./configure --without-java \
@@ -39,6 +45,9 @@ perlbrew exec ./configure --without-java \
             --bindir="$SAGE_LOCAL"/bin \
             --libdir="$SAGE_LOCAL"/lib \
             --with-mongoc="$SAGE_LOCAL" \
+            --with-gmp="$SAGE_LOCAL" \
+            --with-mpfr="$SAGE_LOCAL" \
+            LDFLAGS="$LDFLAGS -Wl,-rpath,$SAGE_LOCAL/lib" \
             $more_configure_options || sdh_die "Error configuring Polymake"
-ninja -C build/Opt -j${SAGE_NUM_THREADS}
+ninja -v -C build/Opt -j${SAGE_NUM_THREADS}
 sdh_make_install
