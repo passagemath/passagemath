@@ -477,6 +477,7 @@ cdef class CategoryObject(SageObject):
 
         ::
 
+            sage: # needs sage.modules
             sage: T.<x> = InfinitePolynomialRing(ZZ)
             sage: T.variable_names()
             ('x',)
@@ -496,6 +497,8 @@ cdef class CategoryObject(SageObject):
             sage: R.<z,y,a42> = ZZ[]
             sage: R.variable_name()
             'z'
+
+            sage: # needs sage.modules
             sage: R.<x> = InfinitePolynomialRing(ZZ)
             sage: R.variable_name()
             'x'
