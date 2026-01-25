@@ -173,6 +173,7 @@ class WeightedProjectiveSpace_ring(UniqueRepresentation, AmbientSpace):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: WP = WeightedProjectiveSpace(GF(19^2, 'α'), [1, 3, 4, 1], 'abcd')
             sage: # needs sage.rings.finite_rings
             sage: R = WP.coordinate_ring(); R
