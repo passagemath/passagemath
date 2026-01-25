@@ -88,6 +88,7 @@ class ImageSubobject(Parent):
 
         Implementing ``inverse_image`` automatically makes :meth:`__contains__` work::
 
+            sage: # needs sage.libs.singular
             sage: R.<x> = QQ[]
             sage: S.<y> = QQ[]
             sage: R.hom([y^2]).inverse_image(y^4)
