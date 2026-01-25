@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-categories
+# sage.doctest: needs sage.modules
 r"""
 Elements of Infinite Polynomial Rings
 
@@ -934,12 +935,14 @@ class InfinitePolynomial(CommutativePolynomial,
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: R.<x> = InfinitePolynomialRing(QQbar)
             sage: factor(x[3]^2 - x[1]^2)
             (x_3 - x_1) * (x_3 + x_1)
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: P = factor(x[3]^2 - x[1]^2)[0][0].parent()
             sage: P
             Infinite polynomial ring in x over Algebraic Field

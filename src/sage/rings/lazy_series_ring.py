@@ -713,6 +713,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             sage: F
             -1 + 1/2*z^2 - 1/24*z^4 + 1/720*z^6 + O(z^7)
 
+            sage: # needs sage.modules
             sage: L.<z> = LazyPowerSeriesRing(QQ)
             sage: f = L.undefined(0)
             sage: L.define_implicitly([f], [2*z*f(z^3) + z*f^3 - 3*f + 3])
