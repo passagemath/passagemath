@@ -389,7 +389,7 @@ cdef class IntegerWrapper(Integer):
             sage: n = IntegerWrapper(Primes(), 3) # indirect doctest
             sage: n
             3
-            sage: n.parent()
+            sage: n.parent()                                                            # needs sage.libs.pari
             Set of all prime numbers: 2, 3, 5, 7, ...
 
         Pickling seems to work now (as of :issue:`10314`)::
@@ -4078,6 +4078,7 @@ cdef class Integer(sage.structure.element.EuclideanDomainElement):
         Example with ``flint_bits``. The small prime factor is found since it is
         much smaller than `2^{50}`, but not the large ones::
 
+            sage: # needs sage.libs.pari
             sage: n = next_prime(2^256) * next_prime(2^257) * next_prime(2^40)
             sage: n.factor(algorithm='flint', flint_bits=50)                            # needs sage.libs.flint
             1099511627791 * 2681...6291
@@ -5032,7 +5033,7 @@ cdef class Integer(sage.structure.element.EuclideanDomainElement):
         Test small powers of even numbers that are not a power of 2
         (see :issue:`40846`)::
 
-            sage: (26**2).perfect_power()
+            sage: (26**2).perfect_power()                                               # needs sage.libs.pari
             (26, 2)
         """
         cdef long n
@@ -6407,7 +6408,7 @@ cdef class Integer(sage.structure.element.EuclideanDomainElement):
 
         EXAMPLES::
 
-            sage: libgap(1)
+            sage: libgap(1)                                                             # needs sage.libs.gap
             1
         """
         from sage.libs.gap.element import make_GapElement_Integer_from_sage_integer  # avoid compile-time dependency

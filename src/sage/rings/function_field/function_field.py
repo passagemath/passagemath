@@ -477,6 +477,7 @@ class FunctionField(Field):
 
         Verify that :issue:`41095` has been resolved::
 
+            sage: # needs sage.rings.function_field
             sage: K.<x> = FunctionField(GF(2))
             sage: R.<t> = PolynomialRing(K)
             sage: L.<y> = K.extension(t^2 + t*x)

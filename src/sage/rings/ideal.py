@@ -140,19 +140,19 @@ def Ideal(*args, **kwds):
 
         sage: R.<x> = ZZ[]
         sage: I = R.ideal([4 + 3*x + x^2, 1 + x^2])
-        sage: I == loads(dumps(I))
+        sage: I == loads(dumps(I))                                                      # needs sage.libs.singular
         True
 
     ::
 
         sage: I = Ideal(R, [4 + 3*x + x^2, 1 + x^2])
-        sage: I == loads(dumps(I))
+        sage: I == loads(dumps(I))                                                      # needs sage.libs.singular
         True
 
     ::
 
         sage: I = Ideal((4 + 3*x + x^2, 1 + x^2))
-        sage: I == loads(dumps(I))
+        sage: I == loads(dumps(I))                                                      # needs sage.libs.singular
         True
 
     This shows that the issue at :issue:`5477` is fixed::
@@ -164,7 +164,7 @@ def Ideal(*args, **kwds):
         Principal ideal (x^2 + x) of Univariate Polynomial Ring in x over Rational Field
         sage: S = R.quotient_ring(I)                                                    # needs sage.libs.pari
         sage: U = R.quotient_ring(J)                                                    # needs sage.libs.pari
-        sage: I == J
+        sage: I == J                                                                    # needs sage.libs.singular
         True
         sage: S == U                                                                    # needs sage.libs.pari
         True
@@ -1435,6 +1435,7 @@ class Ideal_principal(Ideal_generic):
 
         Comparison with non-principal ideal::
 
+            sage: # needs sage.libs.singular
             sage: R.<x> = ZZ[]
             sage: I = R.ideal([x^3 + 4*x - 1, x + 6])
             sage: J = [x + 6] * R
@@ -1449,6 +1450,7 @@ class Ideal_principal(Ideal_generic):
 
         Between two principal ideals::
 
+            sage: # needs sage.libs.singular
             sage: P.<x> = PolynomialRing(ZZ)
             sage: I = P.ideal(x^2-2)
             sage: I2 = P.ideal(0)

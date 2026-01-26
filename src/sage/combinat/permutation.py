@@ -6978,7 +6978,7 @@ class Permutations_msetk(Permutations_mset):
         EXAMPLES::
 
             sage: P = Permutations([1,1,1,2,3], 3)
-            sage: P.rank(P([1,1,1]))
+            sage: P.rank(P([1,1,1]))                                                    # needs sage.libs.gap
             0
         """
         return self._rank_from_iterator(x)
@@ -6990,7 +6990,7 @@ class Permutations_msetk(Permutations_mset):
         EXAMPLES::
 
             sage: P = Permutations([1,1,1,2,3], 3)
-            sage: P.unrank(P.rank(P([1,1,2])))
+            sage: P.unrank(P.rank(P([1,1,2])))                                          # needs sage.libs.gap
             [1, 1, 2]
         """
         return self._unrank_from_iterator(r)

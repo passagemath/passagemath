@@ -549,6 +549,7 @@ class LaurentSeriesRing(UniqueRepresentation, Parent):
 
         Check that :issue:`39839` is fixed::
 
+            sage: # needs sage.symbolic
             sage: var("x")
             x
             sage: f = (1/x+sqrt(x+1)).series(x, 5); f

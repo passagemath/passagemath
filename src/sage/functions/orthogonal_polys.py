@@ -2558,8 +2558,8 @@ class Func_gen_laguerre(OrthogonalFunction):
 
         EXAMPLES::
 
-            sage: from sage.interfaces.maxima_lib import maxima
             sage: # needs sage.symbolic
+            sage: from sage.interfaces.maxima_lib import maxima
             sage: a, n, x = var('a, n, x')
             sage: gen_laguerre(x, x, x)._sympy_()                                       # needs sympy
             assoc_laguerre(x, x, x)

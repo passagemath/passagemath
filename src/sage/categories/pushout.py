@@ -1207,6 +1207,7 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
     However, if the polynomial ring was given a different ordering, merging would not be allowed,
     resulting in a name conflict::
 
+        sage: # needs sage.modules
         sage: R = PolynomialRing(QQ, names=['x','y','a_3','a_1'])
         sage: A.construction()[0] * R.construction()[0]
         Traceback (most recent call last):
@@ -1216,6 +1217,7 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
     In an infinite polynomial ring with generator `a_\ast`, the variable `a_3` will always be greater
     than the variable `a_1`. Hence, the orders are incompatible in the next example as well::
 
+        sage: # needs sage.modules
         sage: R = PolynomialRing(QQ, names=['x','y','a_1','a_3'], order='lex')
         sage: A.construction()[0] * R.construction()[0]
         Traceback (most recent call last):
@@ -1227,6 +1229,7 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
     This is not the case in the following example, since it is not clear whether the variables `x,y`
     should be greater or smaller than the variables `b_\ast`::
 
+        sage: # needs sage.modules
         sage: R = PolynomialRing(QQ, names=['a_3','a_1','x','y'], order='lex')
         sage: A.construction()[0] * R.construction()[0]
         Traceback (most recent call last):
@@ -1237,12 +1240,14 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
     Since the construction functors are actually used to construct infinite polynomial rings, the following
     result is no surprise::
 
+        sage: # needs sage.modules
         sage: C.<a,b> = InfinitePolynomialRing(B); C
         Infinite polynomial ring in a, b
          over Multivariate Polynomial Ring in x, y over Rational Field
 
     There is also an overlap in the next example::
 
+        sage: # needs sage.modules
         sage: X.<w,x,y> = InfinitePolynomialRing(ZZ)
         sage: Y.<x,y,z> = InfinitePolynomialRing(QQ)
 
@@ -1250,6 +1255,7 @@ class InfinitePolynomialFunctor(ConstructionFunctor):
     used in both rings, it gives rise to isomorphic sub-monoids in both `X` and `Y`. They are merged in the
     pushout, which also yields a common parent for doing arithmetic::
 
+        sage: # needs sage.modules
         sage: P = sage.categories.pushout.pushout(Y,X); P
         Infinite polynomial ring in w, x, y, z over Rational Field
         sage: w[2]+z[3]
