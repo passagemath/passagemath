@@ -1,5 +1,9 @@
 cd src
 
+machine=$($CC -dumpmachine)
+
+if [ -z "$MSYSTEM" ]; then
+
 # OpenBLAS does not build on 32bit Haswell. Upstream suggests to pass BINARY=32 to default to NEHALEM kernels
 # See https://github.com/xianyi/OpenBLAS/issues/657
 # Right now this affect all 32bit CPUs.
@@ -14,11 +18,7 @@ fi
 
 if [ "x$SAGE_FAT_BINARY" = "xyes" ]; then
     OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE DYNAMIC_ARCH=1"
-    machine=$($CC -dumpmachine)
-    if [[ -n "$MSYSTEM" && $machine =~ aarch64-* ]]; then
-        # from https://github.com/msys2/MINGW-packages/blob/master/mingw-w64-openblas/PKGBUILD#L78C31-L78C40
-        OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=CORTEXA53 DYNAMIC_LIST=\"CORTEXA53 CORTEXA57 CORTEXA72 CORTEXA73 CORTEXA76 CORTEXX1 THUNDERX TSV110 EMAG8180\""
-    elif [[ $machine =~ x86_64-apple-darwin* ]]; then
+    if [[ $machine =~ x86_64-apple-darwin* ]]; then
         OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=CORE2"
     elif [[ $os-$machine =~ arm64-apple-darwin* ]]; then
         OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE TARGET=VORTEX"
@@ -78,4 +78,32 @@ if [ "$UNAME" = "Darwin" ]; then
     for dylib in lib*openblas*.dylib; do
         install_name_tool -id "$SAGE_LOCAL/lib/$dylib" "$dylib"
     done
+fi
+
+
+else  ##### MSYSTEM: build with cmake ##################################################
+
+# https://github.com/msys2/MINGW-packages/blob/master/mingw-w64-openblas/PKGBUILD
+
+if [[ -n "$MSYSTEM" && $machine =~ aarch64-* ]]; then
+   OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE -DTARGET=CORTEXA53 -DDYNAMIC_ARCH=ON -DDYNAMIC_LIST='CORTEXA53;CORTEXA57;CORTEXA72;CORTEXA73;CORTEXA76;CORTEXX1;THUNDERX;TSV110;EMAG8180'"
+else
+   OPENBLAS_CONFIGURE="$OPENBLAS_CONFIGURE -DTARGET=CORE2 -DDYNAMIC_ARCH=ON"
+fi
+
+eval sdh_cmake -GNinja -DGENERATORS=on \
+    -DBUILD_TESTING=OFF \
+    -DUSE_THREAD=ON \
+    -DNUM_THREADS=64 \
+    -DUSE_OPENMP=ON \
+    -DCMAKE_BUILD_TYPE=Release \
+    $OPENBLAS_CONFIGURE \
+    .
+
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
+
+sdh_generate_windows_lib_files openblas
+
+
 fi
