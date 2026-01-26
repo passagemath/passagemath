@@ -755,11 +755,11 @@ cdef class SageObject:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: a = gap(2/3); a
             2/3
             sage: type(a)
             <class 'sage.interfaces.gap.GapElement'>
-
             sage: a = (2/3)._gap_(); a
             2/3
             sage: type(a)
@@ -782,6 +782,7 @@ cdef class SageObject:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: (2/3)._gap_init_()
             '2/3'
             sage: Zmod(4)._gap_init_()
@@ -809,6 +810,7 @@ cdef class SageObject:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gap
             sage: a = libgap(2/3); a
             2/3
             sage: type(a)
@@ -816,6 +818,7 @@ cdef class SageObject:
 
         TESTS::
 
+            sage: # needs sage.libs.gap
             sage: from sage.libs.gap.element import GapElement
             sage: isinstance(a, GapElement)
             True
