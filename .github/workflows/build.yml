@@ -101,6 +101,12 @@ jobs:
         ports:
           - 5000:5000
     steps:
+      - name: Check build disk space
+        run: |
+          df -h /
+          if df -h /mnt | grep /mnt ; then
+              echo HAVE_MNT=1 >> $GITHUB_ENV
+          fi
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
         with:
@@ -111,6 +117,8 @@ jobs:
           remove-haskell:       true
           remove-codeql:        true
           remove-docker-images: true
+        continue-on-error: true
+        if: env.HAVE_MNT
 
       - name: Checkout
         id: checkout
@@ -299,6 +307,12 @@ jobs:
           # Optional
           - "sagemath_cmr sagemath_cmr-check"
     steps:
+      - name: Check build disk space
+        run: |
+          df -h /
+          if df -h /mnt | grep /mnt ; then
+              echo HAVE_MNT=1 >> $GITHUB_ENV
+          fi
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
         with:
@@ -309,6 +323,8 @@ jobs:
           remove-haskell:       true
           remove-codeql:        true
           remove-docker-images: true
+        continue-on-error: true
+        if: env.HAVE_MNT
 
       - name: Checkout
         id: checkout
@@ -401,6 +417,12 @@ jobs:
           - "src/sage/[p-z]*"
           - "src/doc src/sage_docbuild src/sage_setup"
     steps:
+      - name: Check build disk space
+        run: |
+          df -h /
+          if df -h /mnt | grep /mnt ; then
+              echo HAVE_MNT=1 >> $GITHUB_ENV
+          fi
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
         with:
@@ -411,6 +433,8 @@ jobs:
           remove-haskell:       true
           remove-codeql:        true
           remove-docker-images: true
+        continue-on-error: true
+        if: env.HAVE_MNT
 
       - name: Checkout
         id: checkout
@@ -525,6 +549,12 @@ jobs:
         ports:
           - 5000:5000
     steps:
+      - name: Check build disk space
+        run: |
+          df -h /
+          if df -h /mnt | grep /mnt ; then
+              echo HAVE_MNT=1 >> $GITHUB_ENV
+          fi
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
         with:
@@ -535,6 +565,8 @@ jobs:
           remove-haskell:       true
           remove-codeql:        true
           remove-docker-images: true
+        continue-on-error: true
+        if: env.HAVE_MNT
 
       - name: Checkout
         id: checkout
