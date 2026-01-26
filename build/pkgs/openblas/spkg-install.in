@@ -93,6 +93,8 @@ fi
 
 eval sdh_cmake -GNinja -DGENERATORS=on \
     -DBUILD_TESTING=OFF \
+    -DBUILD_SHARED_LIBS=ON \
+    -DBUILD_STATIC_LIBS=ON \
     -DUSE_THREAD=ON \
     -DNUM_THREADS=64 \
     -DUSE_OPENMP=ON \
