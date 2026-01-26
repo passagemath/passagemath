@@ -1,7 +1,7 @@
 # sage_setup: distribution = sagemath-categories
 # sage.doctest: needs sage.libs.singular sage.modules (because all doctests need laurent_polynomial_mpair, Groebner bases)
 r"""
-Ideals in Laurent polynomial rings.
+Ideals in Laurent polynomial rings
 
 For `R` a commutative ring, ideals in the Laurent polynomial ring
 `R[x_1^{\pm 1}, x_2^{\pm 1}, \ldots, x_n^{\pm 1}]` are implemented as
