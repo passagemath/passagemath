@@ -501,8 +501,8 @@ class LaurentPolynomialIdeal( Ideal_generic ):
         """
         Determine whether every generator of ``self`` is a binomial.
 
-        If ``groebner_basis`` is True, this becomes intrinsic (for a choice of
-        term order).
+        If ``groebner_basis`` is ``True``, this becomes intrinsic (for a choice
+        of term order).
 
         EXAMPLES::
 
