@@ -1926,6 +1926,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         We can find roots of high degree polynomials in a reasonable time::
 
+            sage: # needs sage.libs.pari
             sage: set_random_seed(31337)
             sage: p = random_prime(2^128)
             sage: R.<x> = Zmod(p)[]
@@ -1935,6 +1936,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         Roots of 0 or 1 degree polynomials should be computable without factoring the order::
 
+            sage: # needs sage.libs.pari
             sage: set_random_seed(31337)
             sage: p = random_prime(2^512)
             sage: q = random_prime(2^512)
@@ -1948,6 +1950,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
         Even when leading coefficient of linear polynomial is not invertible::
 
+            sage: # needs sage.libs.pari
             sage: set_random_seed(31337)
             sage: p = random_prime(2^10)
             sage: q = random_prime(2^512)
