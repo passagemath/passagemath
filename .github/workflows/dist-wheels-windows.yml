@@ -229,6 +229,7 @@ jobs:
         with:
           install: >-
             mingw-w64-${{ matrix.env }}-gcc
+            mingw-w64-${{ matrix.env }}-fc
             mingw-w64-${{ matrix.env }}-omp
             autotools
             python
