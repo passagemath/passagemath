@@ -263,7 +263,7 @@ def _ord_from_op(x, op, param_name='ord'):
         sage: import operator
         sage: _ord_from_op(mod(2, 5), operator.add)
         5
-        sage: _ord_from_op(mod(2, 5), operator.mul)
+        sage: _ord_from_op(mod(2, 5), operator.mul)                                     # needs sage.libs.pari
         4
         sage: _ord_from_op(mod(2, 5), operator.xor)
         Traceback (most recent call last):
@@ -870,6 +870,7 @@ def discrete_log(a, base, ord=None, bounds=None, operation='*', identity=None, i
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: b = Mod(2,37);  a = b^20
         sage: discrete_log(a, b)
         20
