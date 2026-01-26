@@ -53,6 +53,12 @@ jobs:
         ports:
           - 5000:5000
     steps:
+      - name: Check build disk space
+        run: |
+          df -h /
+          if df -h /mnt | grep /mnt ; then
+              echo HAVE_MNT=1 >> $GITHUB_ENV
+          fi
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
         with:
@@ -63,6 +69,8 @@ jobs:
           remove-haskell:       true
           remove-codeql:        true
           remove-docker-images: true
+        continue-on-error: true
+        if: env.HAVE_MNT
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install test prerequisites

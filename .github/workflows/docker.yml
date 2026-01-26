@@ -172,6 +172,12 @@ jobs:
       EXTRA_CONFIGURE_ARGS: --enable-fat-binary
       EXTRA_SAGE_PACKAGES:  ${{ inputs.extra_sage_packages }}
     steps:
+      - name: Check build disk space
+        run: |
+          df -h /
+          if df -h /mnt | grep /mnt ; then
+              echo HAVE_MNT=1 >> $GITHUB_ENV
+          fi
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
         with:
@@ -183,7 +189,7 @@ jobs:
           remove-codeql:        true
           remove-docker-images: true
         continue-on-error: true
-        if: inputs.free_disk_space && !contains(matrix.tox_system_factor, 'arm64')
+        if: inputs.free_disk_space && !contains(matrix.tox_system_factor, 'arm64') && env.HAVE_MNT
       - name: Check out SageMath
         uses: actions/checkout@v4
         with:

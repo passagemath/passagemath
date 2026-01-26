@@ -392,8 +392,13 @@ jobs:
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: 13.0
     steps:
+      - name: Check build disk space
+        run: |
+          df -h /
+          if df -h /mnt | grep /mnt 2>/dev/null; then
+              echo HAVE_MNT=1 >> $GITHUB_ENV
+          fi
       - name: Maximize build disk space
-        if: runner.os == 'Linux' && matrix.arch != 'aarch64'
         uses: easimon/maximize-build-space@v10
         with:
           # need space in /var for Docker images
@@ -403,6 +408,8 @@ jobs:
           remove-haskell:       true
           remove-codeql:        true
           remove-docker-images: true
+        continue-on-error: true
+        if: runner.os == 'Linux' && matrix.arch != 'aarch64' && env.HAVE_MNT
 
       - uses: actions/checkout@v4
 
@@ -860,8 +867,13 @@ jobs:
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: 13.0
     steps:
+      - name: Check build disk space
+        run: |
+          df -h /
+          if df -h /mnt | grep /mnt 2>/dev/null ; then
+              echo HAVE_MNT=1 >> $GITHUB_ENV
+          fi
       - name: Maximize build disk space
-        if: runner.os == 'Linux' && matrix.arch != 'aarch64'
         uses: easimon/maximize-build-space@v10
         with:
           # need space in /var for Docker images
@@ -871,6 +883,8 @@ jobs:
           remove-haskell:       true
           remove-codeql:        true
           remove-docker-images: true
+        continue-on-error: true
+        if: runner.os == 'Linux' && matrix.arch != 'aarch64' && env.HAVE_MNT
 
       - uses: actions/checkout@v4
 
@@ -1180,8 +1194,13 @@ jobs:
       # to avoid "DelocationError: Library dependencies do not satisfy target MacOS version 10.9"
       MACOSX_DEPLOYMENT_TARGET: 13.0
     steps:
+      - name: Check build disk space
+        run: |
+          df -h /
+          if df -h /mnt | grep /mnt 2>/dev/null ; then
+              echo HAVE_MNT=1 >> $GITHUB_ENV
+          fi
       - name: Maximize build disk space
-        if: runner.os == 'Linux' && matrix.arch != 'aarch64'
         uses: easimon/maximize-build-space@v10
         with:
           # need space in /var for Docker images
@@ -1191,6 +1210,8 @@ jobs:
           remove-haskell:       true
           remove-codeql:        true
           remove-docker-images: true
+        continue-on-error: true
+        if: runner.os == 'Linux' && matrix.arch != 'aarch64' && env.HAVE_MNT
 
       - uses: actions/checkout@v4
 
