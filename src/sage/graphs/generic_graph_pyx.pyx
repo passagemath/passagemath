@@ -80,7 +80,7 @@ def layout_split(layout_function, G, **options):
         sage: em = {0: [1, 4], 4: [0, 5], 1: [5, 2, 0], 5: [4, 6, 1],
         ....:       2: [1, 3, 6], 6: [7, 5, 2], 3: [7, 2], 7: [3, 6],
         ....:       8: [10, 9], 9: [8, 10], 10: [8, 9]}
-        ....: em_before = deepcopy(em)
+        sage: em_before = deepcopy(em)
         sage: p = H.layout_planar(on_embedding=em)
         sage: em == em_before
         True
