@@ -296,11 +296,12 @@ def _latex_product(coefficients, variables,
 
     TESTS::
 
+        sage: # needs sage.symbolic
         sage: from sage.numerical.interactive_simplex_method import \
         ....:       _latex_product
-        sage: var("x, y")                                                               # needs sage.symbolic
+        sage: var("x, y")
         (x, y)
-        sage: print(_latex_product([-1, 3], [x, y]))                                    # needs sage.symbolic
+        sage: print(_latex_product([-1, 3], [x, y]))
         - \mspace{-6mu}&\mspace{-6mu} x \mspace{-6mu}&\mspace{-6mu} + \mspace{-6mu}&\mspace{-6mu} 3 y
         sage: var("x, y, z")
         (x, y, z)
@@ -1182,6 +1183,7 @@ class InteractiveLPProblem(SageObject):
 
         An algebraic polyhedron::
 
+            sage: # needs sage.symbolic
             sage: A = ([1, sqrt(2)], [sqrt(3), 1])
             sage: b = (1000, 1500)
             sage: c = (10, 5)
@@ -2649,6 +2651,7 @@ class InteractiveLPProblemStandardForm(InteractiveLPProblem):
 
         Using constants in the symbolic ring::
 
+            sage: # needs sage.symbolic
             sage: A = Matrix(([1, 1], [3, 1], [-1, -1])) * pi
             sage: b = vector((1000, 1500, -400)) * pi
             sage: c = vector((10, 5)) * pi
