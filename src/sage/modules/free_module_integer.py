@@ -40,8 +40,6 @@ from sage.misc.cachefunc import cached_method
 from sage.modules.free_module import FreeModule_submodule_with_basis_pid, FreeModule_ambient_pid
 from sage.modules.free_module_element import vector
 from math import prod
-from sage.functions.all import gamma
-from sage.symbolic.constants import pi, e
 
 
 try:
@@ -985,6 +983,9 @@ class FreeModule_submodule_with_basis_integer(FreeModule_submodule_with_basis_pi
             sage: float(L.gaussian_heuristic(exact_form=True)) # rel tol 1e-13
             21.375859827168494
         """
+        from sage.functions.all import gamma
+        from sage.symbolic.constants import pi, e
+
         basis = self.basis_matrix()
 
         n = basis.nrows()
