@@ -7,7 +7,7 @@ cd src
 cp "$SAGE_ROOT"/config/config.* .
 
 sdh_configure LIBS="`pkg-config --libs-only-l cblas` -lm" \
-              LDFLAGS="$LDFLAGS `pkg-config --libs-only-L cblas`" \
+              LDFLAGS="$LDFLAGS `pkg-config --libs-only-L cblas` -Wl,--export-all-symbols" \
               CPPFLAGS="$CPPFLAGS `pkg-config --cflags-only-I cblas` -DGSL_DLL" \
               CFLAGS="$CFLAGS `pkg-config --cflags-only-other cblas`"
 sdh_make
