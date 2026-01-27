@@ -98,7 +98,6 @@ from sage.misc.functional import is_odd, lift
 from sage.misc.latex import latex, latex_variable_name
 from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
-from sage.misc.sage_eval import sage_eval
 from sage.misc.superseded import deprecation
 from sage.modules.free_module import VectorSpace
 from sage.modules.free_module_element import vector
