@@ -289,11 +289,16 @@ fi
 if [ -n "$SAGE_LOCAL" ]; then
     # Compile-time path for libraries.  This is the equivalent of
     # adding the gcc option -L $SAGE_LOCAL/lib.
-    [ -z "$LIBRARY_PATH" ] || LIBRARY_PATH=":${LIBRARY_PATH}"
+    if [ -n "$MSYSTEM" ]; then
+        pathsep=";"
+    else
+        pathsep=":"
+    fi
+    [ -z "$LIBRARY_PATH" ] || LIBRARY_PATH="${pathsep}${LIBRARY_PATH}"
     export LIBRARY_PATH="$SAGE_LOCAL/lib${LIBRARY_PATH}"
     # Compile-time path for include files.  This is the equivalent of
     # adding the gcc option -I $SAGE_LOCAL/include.
-    [ -z "$CPATH" ] || CPATH=":${CPATH}"
+    [ -z "$CPATH" ] || CPATH="${pathsep}${CPATH}"
     export CPATH="$SAGE_LOCAL/include${CPATH}"
     # If any -I or -L options are already in CFLAGS etc. variables
     # (as they are in conda environments), ensure that we override
