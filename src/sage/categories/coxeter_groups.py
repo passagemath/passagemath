@@ -445,6 +445,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: W = CoxeterGroup(['B', 3])
                 sage: W.is_commutative()
                 False
