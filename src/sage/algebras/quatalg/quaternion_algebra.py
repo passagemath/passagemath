@@ -62,7 +62,6 @@ from sage.arith.misc import (
 from sage.arith.misc import kronecker as kronecker_symbol
 from sage.categories.algebras import Algebras
 from sage.categories.number_fields import NumberFields
-from sage.combinat.words.word import Word
 from sage.matrix.constructor import diagonal_matrix, matrix
 from sage.matrix.matrix_space import MatrixSpace
 from sage.misc.cachefunc import cached_method
