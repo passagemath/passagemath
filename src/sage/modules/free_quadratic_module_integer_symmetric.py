@@ -1275,6 +1275,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
 
         We can handle the trivial sublattice::
 
+            sage: # needs sage.graphs
             sage: A1 = IntegralLattice("A1")
             sage: L = A1.sublattice([])
             sage: L.orthogonal_group()
