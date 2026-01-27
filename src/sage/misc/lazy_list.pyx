@@ -172,18 +172,18 @@ def lazy_list(data=None, initial_values=None, start=None, stop=None, step=None,
     of the sequence manually::
 
         sage: l = lazy_list(divisors, [None])
-        sage: l
+        sage: l                                                                         # needs sage.libs.pari
         lazy list [None, [1], [1, 2], ...]
 
     Lazy lists behave like lists except that they are immutable::
 
-        sage: l[3::5]
+        sage: l[3::5]                                                                   # needs sage.libs.pari
         lazy list [[1, 3], [1, 2, 4, 8], [1, 13], ...]
 
     If your lazy list is finite, you can obtain the underlying list with the
     method `.list()`::
 
-        sage: l[30:50:5].list()
+        sage: l[30:50:5].list()                                                         # needs sage.libs.pari
         [[1, 2, 3, 5, 6, 10, 15, 30],
          [1, 5, 7, 35],
          [1, 2, 4, 5, 8, 10, 20, 40],
@@ -1016,7 +1016,7 @@ cdef class lazy_list_from_function(lazy_list_generic):
             sage: from sage.misc.lazy_list import lazy_list_from_function
             sage: lazy_list_from_function(euler_phi)                                    # needs sage.libs.pari
             lazy list [0, 1, 1, ...]
-            sage: lazy_list_from_function(divisors, [None])
+            sage: lazy_list_from_function(divisors, [None])                             # needs sage.libs.pari
             lazy list [None, [1], [1, 2], ...]
 
         TESTS::
@@ -1069,7 +1069,7 @@ cdef class lazy_list_from_function(lazy_list_generic):
             sage: from sage.misc.lazy_list import lazy_list_from_function
             sage: loads(dumps(lazy_list_from_function(euler_phi)))                      # needs sage.libs.pari
             lazy list [0, 1, 1, ...]
-            sage: loads(dumps(lazy_list_from_function(divisors, [None])))
+            sage: loads(dumps(lazy_list_from_function(divisors, [None])))               # needs sage.libs.pari
             lazy list [None, [1], [1, 2], ...]
         """
         if self.start != 0 or self.step != 1:

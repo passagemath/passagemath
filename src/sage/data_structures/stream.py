@@ -2918,6 +2918,7 @@ class Stream_dirichlet_convolve(Stream_binary):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.data_structures.stream import (Stream_dirichlet_convolve, Stream_function, Stream_exact)
         sage: f = Stream_function(lambda n: n, True, 1)
         sage: g = Stream_exact([0], constant=1)
@@ -2926,7 +2927,6 @@ class Stream_dirichlet_convolve(Stream_binary):
         [1, 3, 4, 7, 6, 12, 8, 15, 13]
         sage: [sigma(n) for n in range(1, 10)]
         [1, 3, 4, 7, 6, 12, 8, 15, 13]
-
         sage: u = Stream_dirichlet_convolve(g, f, True)
         sage: [u[i] for i in range(1, 10)]
         [1, 3, 4, 7, 6, 12, 8, 15, 13]
@@ -2938,6 +2938,7 @@ class Stream_dirichlet_convolve(Stream_binary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import Stream_exact, Stream_function, Stream_dirichlet_convolve
             sage: f = Stream_exact([0, 2])
             sage: g = Stream_function(lambda n: 3*n, True, 1)
@@ -2965,6 +2966,7 @@ class Stream_dirichlet_convolve(Stream_binary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import (Stream_dirichlet_convolve, Stream_function, Stream_exact)
             sage: f = Stream_function(lambda n: n, True, 1)
             sage: g = Stream_exact([0], constant=1)
@@ -3880,6 +3882,7 @@ class Stream_dirichlet_invert(Stream_unary):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.data_structures.stream import (Stream_dirichlet_invert, Stream_function)
         sage: f = Stream_function(lambda n: 1, True, 1)
         sage: g = Stream_dirichlet_invert(f, True)
@@ -3894,6 +3897,7 @@ class Stream_dirichlet_invert(Stream_unary):
 
         TESTS::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import (Stream_exact, Stream_dirichlet_invert)
             sage: f = Stream_exact([0, 0], constant=1)
             sage: g = Stream_dirichlet_invert(f, True)
@@ -3912,6 +3916,7 @@ class Stream_dirichlet_invert(Stream_unary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import Stream_function, Stream_dirichlet_invert
             sage: f = Stream_function(lambda n: QQ(n), True, 1)
             sage: h = Stream_dirichlet_invert(f, True)
@@ -3934,12 +3939,12 @@ class Stream_dirichlet_invert(Stream_unary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import (Stream_exact, Stream_dirichlet_invert)
             sage: f = Stream_exact([0, 3], constant=2)
             sage: g = Stream_dirichlet_invert(f, True)
             sage: g._ainv
             1/3
-
             sage: f = Stream_exact([Zmod(6)(5)], constant=2, order=1)
             sage: g = Stream_dirichlet_invert(f, True)
             sage: g._ainv
@@ -3960,6 +3965,7 @@ class Stream_dirichlet_invert(Stream_unary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import (Stream_exact, Stream_dirichlet_invert)
             sage: f = Stream_exact([0, 3], constant=2)
             sage: g = Stream_dirichlet_invert(f, True)
