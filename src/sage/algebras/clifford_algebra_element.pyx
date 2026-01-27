@@ -444,7 +444,7 @@ cdef class ExteriorAlgebraElement(CliffordAlgebraElement):
              + 2*a*b + 2*a*c + 2*a*d + 2*b*c + 2*b*d + 2*c*d
              + 2*a + 2*b + 2*c + 2*d + 1
 
-            sage: from sage.all import ExteriorAlgebra, SR, var
+            sage: # needs sage.symbolic
             sage: L.<a, b> = ExteriorAlgebra(SR)
             sage: x, y = var('x y')
             sage: x * (y * b)
