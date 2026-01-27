@@ -2,6 +2,8 @@
 # distutils: libraries = GSL_LIBRARIES
 # distutils: library_dirs = GSL_LIBDIR
 # distutils: include_dirs = GSL_INCDIR
+# distutils: extra_compile_args = -DGSL_DLL
+
 cdef extern from "gsl/gsl_odeiv.h":
 
   ctypedef struct gsl_odeiv_system:
