@@ -43,7 +43,6 @@ AUTHORS:
 
 import operator
 
-import sage.misc.sage_eval
 from sage.misc.fast_methods import WithEqualityById
 from sage.misc.instancedoc import instancedoc
 from sage.structure.element import Element, parent
