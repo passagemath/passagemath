@@ -703,6 +703,7 @@ class InfinitePolynomialRing_sparse(CommutativeRing):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar)
             sage: TestSuite(X).run(skip='_test_elements')
 
