@@ -9,6 +9,7 @@ graft             sage/libs/flint
 recursive-include sage/libs/ntl *.pxi *.h                                       # FIXME
 include           sage/matrix/change_ring.p*
 include           sage/matrix/matrix_complex_ball_dense.p*
+include           sage/matrix/misc.p*
 include           sage/matrix/misc_flint.p*
 include           sage/matrix/matrix_cyclo_dense.p*
 include           sage/matrix/matrix_integer_dense.p*
