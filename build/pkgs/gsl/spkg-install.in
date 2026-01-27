@@ -8,7 +8,7 @@ cp "$SAGE_ROOT"/config/config.* .
 
 sdh_configure LIBS="`pkg-config --libs-only-l cblas` -lm" \
               LDFLAGS="$LDFLAGS `pkg-config --libs-only-L cblas`" \
-              CPPFLAGS="$CPPFLAGS `pkg-config --cflags-only-I cblas`" \
+              CPPFLAGS="$CPPFLAGS `pkg-config --cflags-only-I cblas` -DGSL_DLL" \
               CFLAGS="$CFLAGS `pkg-config --cflags-only-other cblas`"
 sdh_make
 sdh_make_install
