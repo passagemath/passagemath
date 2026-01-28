@@ -287,7 +287,6 @@ Classes and functions
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 from __future__ import annotations
-import builtins
 from collections import defaultdict
 from copy import copy
 from itertools import product
@@ -314,6 +313,10 @@ from sage.combinat.posets.elements import PosetElement
 from sage.combinat.combinatorial_map import combinatorial_map
 from sage.combinat.subset import Subsets
 from .linear_extensions import LinearExtensionsOfPoset
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import builtins
 
 
 def Poset(data=None, element_labels=None, cover_relations=False, linear_extension=False, category=None, facade=None, key=None):
