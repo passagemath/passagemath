@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# distutils: extra_compile_args = -DGSL_DLL
 from sage.libs.gsl.types cimport *
 
 from sage.libs.gsl.math cimport *

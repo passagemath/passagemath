@@ -2,6 +2,7 @@
 # distutils: libraries = GSL_LIBRARIES
 # distutils: library_dirs = GSL_LIBDIR
 # distutils: include_dirs = GSL_INCDIR
+# distutils: extra_compile_args = -DGSL_DLL
 cdef extern from "gsl/gsl_sf_elljac.h":
 
   int  gsl_sf_elljac_e(double u, double m, double * sn, double * cn, double * dn)

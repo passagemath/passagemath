@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-modules
+# distutils: extra_compile_args = -DGSL_DLL
 r"""
 Probability Distributions
 

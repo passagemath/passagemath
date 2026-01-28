@@ -1,5 +1,6 @@
 # sage_setup: distribution = sagemath-modules
 # distutils: include_dirs = GSL_INCDIR
+# distutils: extra_compile_args = -DGSL_DLL
 from libc.stdio cimport FILE
 
 cdef enum:

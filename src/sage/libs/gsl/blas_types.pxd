@@ -1,5 +1,6 @@
 # sage_setup: distribution = sagemath-modules
 # distutils: include_dirs = GSL_INCDIR
+# distutils: extra_compile_args = -DGSL_DLL
 cdef extern from "gsl/gsl_cblas.h":
   cdef enum CBLAS_ORDER:
     CblasRowMajor=101
