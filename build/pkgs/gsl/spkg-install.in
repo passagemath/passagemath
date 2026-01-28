@@ -6,6 +6,9 @@ cd src
 # Use newer version of config.guess and config.sub (see Github issue #19713)
 cp "$SAGE_ROOT"/config/config.* .
 
+# Work around linker error LNK2048
+sed -i.bak '/__declspec/s/$/ __attribute__((aligned(16)))/' gsl_types.h
+
 sdh_configure LIBS="`pkg-config --libs-only-l cblas` -lm" \
               LDFLAGS="$LDFLAGS `pkg-config --libs-only-L cblas` -Wl,--export-all-symbols" \
               CPPFLAGS="$CPPFLAGS `pkg-config --cflags-only-I cblas` -DGSL_DLL" \
