@@ -66,7 +66,6 @@ class InventoryBuilder(DummyBuilder):
         """
         assert self.env is not None
 
-        Path(self.outdir).mkdir(parents=True, exist_ok=True)
         InventoryFile.dump(
             path.join(self.outdir, INVENTORY_FILENAME), self.env, self
         )
