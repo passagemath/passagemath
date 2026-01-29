@@ -1282,6 +1282,7 @@ class VariablePool(UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import VariablePool
             sage: R.<a> = InfinitePolynomialRing(QQ)
             sage: P = VariablePool(R)
@@ -1296,6 +1297,7 @@ class VariablePool(UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import VariablePool
             sage: R.<a> = InfinitePolynomialRing(QQ)
             sage: P = VariablePool(R)
@@ -1307,6 +1309,7 @@ class VariablePool(UniqueRepresentation):
         Check, that we get a new pool for each
         :class:`InfinitePolynomialRing`::
 
+            sage: # needs sage.modules
             sage: R0.<b> = InfinitePolynomialRing(QQ)
             sage: P0 = VariablePool(R0)
             sage: P0.new_variable()
@@ -1324,12 +1327,12 @@ class VariablePool(UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import VariablePool
             sage: R.<a> = InfinitePolynomialRing(QQ)
             sage: P = VariablePool(R)
             sage: v = P.new_variable(); v
             a_1
-
             sage: P.del_variable(v)
             sage: v = P.new_variable(); v
             a_1
@@ -1342,6 +1345,7 @@ class VariablePool(UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import VariablePool
             sage: R.<a> = InfinitePolynomialRing(QQ)
             sage: P = VariablePool(R)
@@ -1414,6 +1418,7 @@ class CoefficientRing(UniqueRepresentation, FractionField_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import CoefficientRing
             sage: PF = CoefficientRing(ZZ)
             sage: S.<q, t> = PF[]
@@ -1423,18 +1428,19 @@ class CoefficientRing(UniqueRepresentation, FractionField_generic):
             FESDUMMY_0*q
             sage: p.parent()
             Multivariate Polynomial Ring in q, t over CoefficientRing over Integer Ring
-
             sage: p = c + q
             sage: p
             q + FESDUMMY_0
             sage: p.parent()
             Multivariate Polynomial Ring in q, t over CoefficientRing over Integer Ring
 
+            sage: # needs sage.modules
             sage: L.<a,b> = LazyPowerSeriesRing(ZZ)
             sage: p = a + c
             sage: p.parent()
             Multivariate Lazy Taylor Series Ring in a, b over CoefficientRing over Integer Ring
 
+            sage: # needs sage.modules
             sage: S.<q, t> = ZZ[]
             sage: PF = CoefficientRing(S)
             sage: L.<a, b> = LazyPowerSeriesRing(S)
@@ -1443,6 +1449,7 @@ class CoefficientRing(UniqueRepresentation, FractionField_generic):
             sage: p.parent()
             Multivariate Lazy Taylor Series Ring in a, b over CoefficientRing over Multivariate Polynomial Ring in q, t over Integer Ring
 
+            sage: # needs sage.modules
             sage: PF = CoefficientRing(ZZ)
             sage: S.<q, t> = PF[]
             sage: L.<a, b> = LazyPowerSeriesRing(ZZ)
@@ -1490,6 +1497,7 @@ class CoefficientRing(UniqueRepresentation, FractionField_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import CoefficientRing
             sage: PF = CoefficientRing(ZZ["q"])
             sage: PF.gen(0)
@@ -1503,6 +1511,7 @@ class CoefficientRing(UniqueRepresentation, FractionField_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import CoefficientRing
             sage: R = ZZ['q']
             sage: S = QQ['t']['a','q']
@@ -1739,6 +1748,7 @@ class Stream_uninitialized(Stream):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import Stream_uninitialized, Stream_exact, Stream_cauchy_mul, Stream_add, Stream_sub
             sage: terms_of_degree = lambda n, R: [R.one()]
             sage: x = Stream_exact([1], order=1)
@@ -2022,6 +2032,7 @@ class Stream_uninitialized(Stream):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import Stream_uninitialized, Stream_cauchy_mul, Stream_sub
             sage: terms_of_degree = lambda n, R: [R.one()]
             sage: C = Stream_uninitialized(0)
@@ -2191,6 +2202,7 @@ class Stream_uninitialized(Stream):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import Stream_uninitialized, Stream_cauchy_mul, Stream_sub
             sage: terms_of_degree = lambda n, R: [R.one()]
             sage: C = Stream_uninitialized(0)
@@ -2906,6 +2918,7 @@ class Stream_dirichlet_convolve(Stream_binary):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.data_structures.stream import (Stream_dirichlet_convolve, Stream_function, Stream_exact)
         sage: f = Stream_function(lambda n: n, True, 1)
         sage: g = Stream_exact([0], constant=1)
@@ -2914,7 +2927,6 @@ class Stream_dirichlet_convolve(Stream_binary):
         [1, 3, 4, 7, 6, 12, 8, 15, 13]
         sage: [sigma(n) for n in range(1, 10)]
         [1, 3, 4, 7, 6, 12, 8, 15, 13]
-
         sage: u = Stream_dirichlet_convolve(g, f, True)
         sage: [u[i] for i in range(1, 10)]
         [1, 3, 4, 7, 6, 12, 8, 15, 13]
@@ -2926,6 +2938,7 @@ class Stream_dirichlet_convolve(Stream_binary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import Stream_exact, Stream_function, Stream_dirichlet_convolve
             sage: f = Stream_exact([0, 2])
             sage: g = Stream_function(lambda n: 3*n, True, 1)
@@ -2953,6 +2966,7 @@ class Stream_dirichlet_convolve(Stream_binary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import (Stream_dirichlet_convolve, Stream_function, Stream_exact)
             sage: f = Stream_function(lambda n: n, True, 1)
             sage: g = Stream_exact([0], constant=1)
@@ -3868,6 +3882,7 @@ class Stream_dirichlet_invert(Stream_unary):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.data_structures.stream import (Stream_dirichlet_invert, Stream_function)
         sage: f = Stream_function(lambda n: 1, True, 1)
         sage: g = Stream_dirichlet_invert(f, True)
@@ -3882,6 +3897,7 @@ class Stream_dirichlet_invert(Stream_unary):
 
         TESTS::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import (Stream_exact, Stream_dirichlet_invert)
             sage: f = Stream_exact([0, 0], constant=1)
             sage: g = Stream_dirichlet_invert(f, True)
@@ -3900,6 +3916,7 @@ class Stream_dirichlet_invert(Stream_unary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import Stream_function, Stream_dirichlet_invert
             sage: f = Stream_function(lambda n: QQ(n), True, 1)
             sage: h = Stream_dirichlet_invert(f, True)
@@ -3922,12 +3939,12 @@ class Stream_dirichlet_invert(Stream_unary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import (Stream_exact, Stream_dirichlet_invert)
             sage: f = Stream_exact([0, 3], constant=2)
             sage: g = Stream_dirichlet_invert(f, True)
             sage: g._ainv
             1/3
-
             sage: f = Stream_exact([Zmod(6)(5)], constant=2, order=1)
             sage: g = Stream_dirichlet_invert(f, True)
             sage: g._ainv
@@ -3948,6 +3965,7 @@ class Stream_dirichlet_invert(Stream_unary):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.data_structures.stream import (Stream_exact, Stream_dirichlet_invert)
             sage: f = Stream_exact([0, 3], constant=2)
             sage: g = Stream_dirichlet_invert(f, True)

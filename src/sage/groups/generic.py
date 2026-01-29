@@ -885,6 +885,7 @@ def discrete_log(a, base, ord=None, bounds=None, operation='*', identity=None, i
         sage: discrete_log(a, b, K.order() - 1)
         210
 
+        sage: # needs sage.libs.pari
         sage: b = Mod(1,37);  x = Mod(2,37)
         sage: discrete_log(x, b)
         Traceback (most recent call last):

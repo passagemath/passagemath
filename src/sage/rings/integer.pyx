@@ -400,7 +400,7 @@ cdef class IntegerWrapper(Integer):
             sage: nn.parent()
             Integer Ring
 
-            sage: TestSuite(n).run()
+            sage: TestSuite(n).run()                                                    # needs sage.libs.pari
         """
         if parent is not None:
             Element.__init__(self, parent=parent)
