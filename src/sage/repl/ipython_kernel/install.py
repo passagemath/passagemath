@@ -171,12 +171,13 @@ class SageKernelSpec:
             sage: from sage.repl.ipython_kernel.install import SageKernelSpec
             sage: spec = SageKernelSpec(prefix=tmp_dir())
             sage: spec.kernel_spec()
-            {'argv': ..., 'display_name': 'passagemath ...', 'language': 'sage'}
+            {'argv': ..., 'display_name': 'passagemath ...', 'language': 'sage', 'metadata': {'debugger': True}}
         """
         return dict(
             argv=self._kernel_cmd(),
             display_name=self._display_name,
             language='sage',
+            metadata=dict(debugger=True),
         )
 
     def _install_spec(self):
