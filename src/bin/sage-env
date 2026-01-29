@@ -287,6 +287,12 @@ if [ "$UNAME" = "Darwin" ]; then
 fi
 
 if [ -n "$SAGE_LOCAL" ]; then
+  if [ -n "$MSYSTEM" ]; then
+      export CFLAGS="-I$SAGE_LOCAL/include $CFLAGS"
+      export CPPFLAGS="-I$SAGE_LOCAL/include $CPPFLAGS"
+      export CXXFLAGS="-I$SAGE_LOCAL/include $CXXFLAGS"
+      export LDFLAGS="-L$SAGE_LOCAL/lib $LDFLAGS"
+  else
     # Compile-time path for libraries.  This is the equivalent of
     # adding the gcc option -L $SAGE_LOCAL/lib.
     [ -z "$LIBRARY_PATH" ] || LIBRARY_PATH=":${LIBRARY_PATH}"
@@ -315,6 +321,7 @@ if [ -n "$SAGE_LOCAL" ]; then
             export CXXFLAGS="-isystem $SAGE_LOCAL/include $CXXFLAGS"
             ;;
     esac
+  fi
 fi
 
 if [ -n "$SAGE_LOCAL" ]; then
