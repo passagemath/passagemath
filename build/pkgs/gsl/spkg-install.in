@@ -9,6 +9,8 @@ cp "$SAGE_ROOT"/config/config.* .
 # Work around linker error LNK2048
 sed -i.bak '/__declspec/s/$/ __attribute__((aligned(16)))/' gsl_types.h
 
+sed -i.bak '/^const gsl_.*_type /s/=/ __attribute__((aligned(16))) =/' */*.c
+
 sdh_configure LIBS="`pkg-config --libs-only-l cblas` -lm" \
               LDFLAGS="$LDFLAGS `pkg-config --libs-only-L cblas` -Wl,--export-all-symbols" \
               CPPFLAGS="$CPPFLAGS `pkg-config --cflags-only-I cblas` -DGSL_DLL" \
