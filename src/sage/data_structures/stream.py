@@ -106,12 +106,13 @@ from sage.categories.action import Action
 from sage.categories.hopf_algebras_with_basis import HopfAlgebrasWithBasis
 from sage.categories.quotient_fields import QuotientFields
 from sage.structure.unique_representation import UniqueRepresentation
-from sage.rings.polynomial.infinite_polynomial_ring import InfinitePolynomialRing
-from sage.rings.polynomial.infinite_polynomial_element import InfinitePolynomial
 from sage.rings.fraction_field import FractionField_generic
 from sage.rings.fraction_field_element import FractionFieldElement
 from sage.misc.cachefunc import cached_method
+
 lazy_import('sage.combinat.sf.sfa', ['_variables_recursive', '_raise_variables'])
+lazy_import('sage.rings.polynomial.infinite_polynomial_ring', 'InfinitePolynomialRing')
+lazy_import('sage.rings.polynomial.infinite_polynomial_element', 'InfinitePolynomial')
 
 
 class Stream:
