@@ -1374,6 +1374,7 @@ class DominatingAction(Action):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import CoefficientRing
             sage: PF = CoefficientRing(ZZ)
             sage: g = PF.gen(0)
@@ -1484,6 +1485,7 @@ class CoefficientRing(UniqueRepresentation, FractionField_generic):
 
         EXAMPLES::
 
+            sage: # needs sage.modules
             sage: from sage.data_structures.stream import CoefficientRing
             sage: CoefficientRing(ZZ["q"])
             CoefficientRing over Univariate Polynomial Ring in q over Integer Ring
