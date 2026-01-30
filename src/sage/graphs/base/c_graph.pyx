@@ -1618,9 +1618,7 @@ cdef class CGraphBackend(GenericGraphBackend):
         if ``u`` is not a vertex of the graph.
         """
         cdef int u_int = self.get_vertex(u)
-        if (
-            u_int != -1
-            and u_int < self.cg().active_vertices.size
+        if (u_int != -1 and u_int < self.cg().active_vertices.size
             and bitset_in(self.cg().active_vertices, u_int)
         ):
             return u_int
@@ -1636,10 +1634,8 @@ cdef class CGraphBackend(GenericGraphBackend):
 
         if u_int in vertex_labels:
             return vertex_labels[u_int]
-        elif (
-            u_int != -1 
-            and u_int < self.cg().active_vertices.size
-            and bitset_in(self.cg().active_vertices, u_int)
+        elif (u_int != -1 and u_int < self.cg().active_vertices.size
+              and bitset_in(self.cg().active_vertices, u_int)
         ):
             return u_int
         else:
@@ -1655,12 +1651,9 @@ cdef class CGraphBackend(GenericGraphBackend):
 
         cdef int u_int = self.get_vertex(u)
         if u_int != -1:
-            if (
-                u_int < 0 
-                or u_int >= G.active_vertices.size 
+            if (u_int < 0 or u_int >= G.active_vertices.size
                 or not bitset_in(G.active_vertices, u_int)
             ):
-
                 bitset_add(G.active_vertices, u_int)
                 G.num_verts += 1
             return u_int
@@ -1747,10 +1740,10 @@ cdef class CGraphBackend(GenericGraphBackend):
         retval = None
         if name is None:
             name = 0
-            while name in self.vertex_ints or (
-                    name not in self.vertex_labels and
-                    name < self.cg().active_vertices.size and bitset_in(self.cg().active_vertices,
-                    <mp_bitcnt_t> name)):
+            while (name in self.vertex_ints or
+                    (name not in self.vertex_labels and
+                     name < self.cg().active_vertices.size and
+                     bitset_in(self.cg().active_vertices, <mp_bitcnt_t> name))):
                 name += 1
             retval = name
 
@@ -2222,8 +2215,7 @@ cdef class CGraphBackend(GenericGraphBackend):
 
         cdef int u_int
         cdef int v_int = self.get_vertex(v)
-        if (
-            v_int == -1 or v_int >= self.cg().active_vertices.size
+        if (v_int == -1 or v_int >= self.cg().active_vertices.size
             or not bitset_in(self.cg().active_vertices, v_int)
         ):
             raise LookupError("vertex ({0}) is not a vertex of the graph".format(v))
@@ -2274,9 +2266,7 @@ cdef class CGraphBackend(GenericGraphBackend):
 
         cdef int u_int
         cdef int v_int = self.get_vertex(v)
-        if (
-            v_int == -1 or
-            v_int >= self.cg().active_vertices.size 
+        if (v_int == -1 or v_int >= self.cg().active_vertices.size
             or not bitset_in(self.cg().active_vertices,v_int)
         ):
             raise LookupError("vertex ({0}) is not a vertex of the graph".format(v))
@@ -2318,9 +2308,7 @@ cdef class CGraphBackend(GenericGraphBackend):
         """
         cdef int u_int
         cdef int v_int = self.get_vertex(v)
-        if (
-            v_int == -1 or
-            v_int >= self.cg().active_vertices.size 
+        if (v_int == -1 or v_int >= self.cg().active_vertices.size
             or not bitset_in(self.cg().active_vertices,v_int)
         ):
             raise LookupError("vertex ({0}) is not a vertex of the graph".format(v))
@@ -2905,12 +2893,8 @@ cdef class CGraphBackend(GenericGraphBackend):
                                 yield (v, u)
                     v = v_copy
 
-                if (
-                    v_int < 0 or v_int >= self.cg().active_vertices.size 
-                    or unlikely(
-                        not bitset_in(self.cg()active_vertices, v_int)
-                    )
-                ):
+                if (v_int < 0 or v_int >= self.cg().active_vertices.size
+                    or unlikely(not bitset_in(self.cg().active_vertices, v_int))):
 
                     raise IndexError("the vertices were modified while iterating the edges")
 
