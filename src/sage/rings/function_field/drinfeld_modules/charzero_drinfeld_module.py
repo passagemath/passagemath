@@ -570,11 +570,17 @@ class DrinfeldModule_rational(DrinfeldModule_charzero):
             sage: phi.class_polynomial()
             1
 
-        Here is an example with a nontrivial class module::
+        Here are two examples with a nontrivial class module::
 
             sage: phi = DrinfeldModule(A, [T, 2*T^14 + 2*T^4])
             sage: phi.class_polynomial()
             T + 3
+
+        ::
+
+            sage: phi = DrinfeldModule(A, [T, -T^13])
+            sage: phi.class_polynomial()
+            T^2
 
         TESTS:
 
