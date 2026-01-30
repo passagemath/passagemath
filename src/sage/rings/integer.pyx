@@ -3221,12 +3221,7 @@ cdef class Integer(sage.structure.element.EuclideanDomainElement):
         if mpz_cmp_ui(self.value, 0) == 0:
             raise ValueError("n must be nonzero")
 
-        value_fits_slong = mpz_fits_slong_p(self.value)
-        if method is None:
-            method = 'pari' if value_fits_slong else 'sage'
-        if method == 'pari':
-            if not value_fits_slong:
-                raise ValueError("method `pari` requested, but integer value is too large")
+        if (method is None or method == 'pari') and mpz_fits_slong_p(self.value):
             global pari_divisors_small
             if pari_divisors_small is None:
                 try:
