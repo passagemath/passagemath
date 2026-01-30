@@ -575,8 +575,7 @@ if __name__ == '__main__':
             sys.exit(1)
         from sage.env import SAGE_SRC
         if (not SAGE_SRC
-                or not os.path.exists(os.path.join(SAGE_SRC, 'sage'))
-                or not os.path.exists(os.path.join(SAGE_SRC, 'conftest_test.py'))):
+                or not os.path.exists(os.path.join(SAGE_SRC, 'sage'))):
             print(f'{SAGE_SRC=} does not seem to contain a copy of the Sage source tree')
             sys.exit(1)
         args.filename = [os.path.join(SAGE_SRC, 'sage')]
