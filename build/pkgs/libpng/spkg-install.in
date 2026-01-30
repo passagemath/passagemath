@@ -3,6 +3,10 @@ unset GREP_OPTIONS
 
 cd src
 
+if [ -n "$MSYSTEM" ]; then
+    autoreconf -fi
+fi
+
 sdh_configure --enable-shared --disable-static
 sdh_make
 sdh_make_install
