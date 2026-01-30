@@ -14,4 +14,7 @@ lazy_import('sage.rings.polynomial.integer_valued_polynomials',
 lazy_import('sage.rings.polynomial.q_integer_valued_polynomials',
             'QuantumValuedPolynomialRing')
 
+# Infinite Polynomial Rings
+from sage.rings.polynomial.infinite_polynomial_ring import InfinitePolynomialRing
+
 del lazy_import
