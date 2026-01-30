@@ -45,7 +45,6 @@ from sage.categories.commutative_algebras import CommutativeAlgebras
 from sage.categories.commutative_rings import CommutativeRings
 from sage.misc.cachefunc import cached_method
 from sage.rings.polynomial import polynomial_element
-from sage.rings.polynomial.infinite_polynomial_ring import GenDictWithBasering
 from sage.rings.polynomial.polynomial_quotient_ring_element import (
     PolynomialQuotientRingElement,
 )
@@ -544,7 +543,8 @@ class PolynomialQuotientRing_generic(QuotientRing_generic):
         # Interpretation in self has priority over interpretation in self.__ring
         try:
             from sage.misc.sage_eval import sage_eval
-            out = sage_eval(x, GenDictWithBasering(self,self.gens_dict()))
+            from sage.rings.polynomial.infinite_polynomial_ring import GenDictWithBasering
+            out = sage_eval(x, GenDictWithBasering(self, self.gens_dict()))
             if out.parent() is not self:
                 return self(out)
             return out

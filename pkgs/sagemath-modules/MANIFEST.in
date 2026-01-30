@@ -233,6 +233,7 @@ include sage/rings/polynomial/laurent_polynomial_mpair.p*                # cimpo
 include sage/rings/polynomial/ore_*.p*
 include sage/rings/polynomial/skew_*.p*
 include sage/rings/polynomial/*integer_valued_polynomials.p*
+include sage/rings/polynomial/infinite_polynomial_*.p*
 
 include sage/rings/ring_extension*.p*
 
