@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-categories
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.modules
 r"""
 Elements of Infinite Polynomial Rings
