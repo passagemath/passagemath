@@ -1,10 +1,10 @@
-tinycss2: A tiny CSS parser
-===========================
+tinycss2: Tiny CSS parser
+=========================
 
 Description
 -----------
 
-A tiny CSS parser
+Tiny CSS parser
 
 License
 -------
