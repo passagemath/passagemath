@@ -108,7 +108,6 @@ from sage.sets.set import Set_base, Set_boolean_operators, Set_add_sub_operators
 from sage.structure.parent import Parent
 from sage.structure.richcmp import richcmp, richcmp_method
 from sage.structure.unique_representation import UniqueRepresentation
-from sage.symbolic.ring import SR
 
 
 @richcmp_method
@@ -367,12 +366,12 @@ class InternalRealInterval(UniqueRepresentation, Parent):
         if self.is_point():
             return '{' + str(self.lower()) + '}'
         s = '[' if self._lower_closed else '('
-        if self.lower() == SR(minus_infinity):
+        if self.lower() is minus_infinity:
             s += '-oo'
         else:
             s += str(self.lower())
         s += ', '
-        if self.upper() == SR(infinity):
+        if self.upper() is infinity:
             s += '+oo'
         else:
             s += str(self.upper())
@@ -1218,6 +1217,10 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
                     Internal helper function.
                     """
                     oo = infinity
+                    try:
+                        val = val.pyobject()
+                    except AttributeError:
+                        pass
                     val = RLF(val)
                     if op == eq:
                         s = [InternalRealInterval(val, True, val, True)]
@@ -2636,39 +2639,39 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
 
         EXAMPLES::
 
-            sage: s=RealSet((1, 2));  s
+            sage: s = RealSet((1, 2));  s
             (1, 2)
             sage: s.simplest_rational()
             3/2
-            sage: s=RealSet.point(1/2);  s
+            sage: s = RealSet.point(1/2);  s
             {1/2}
             sage: s.simplest_rational()
             1/2
-            sage: s=RealSet(1.5 <= x);  s   # needs sage.symbolic
+            sage: s = RealSet(1.5 <= x);  s                                             # needs sage.symbolic
             [1.50000000000000, +oo)
-            sage: s.simplest_rational()
+            sage: s.simplest_rational()                                                 # needs sage.symbolic
             2
-            sage: s=RealSet.real_line();  s
+            sage: s = RealSet.real_line();  s
             (-oo, +oo)
             sage: s.simplest_rational()
             0
-            sage: s=RealSet.point(1/2) + RealSet.point(-1/2);  s
+            sage: s = RealSet.point(1/2) + RealSet.point(-1/2);  s
             {-1/2} ∪ {1/2}
             sage: s.simplest_rational()
             1/2
-            sage: s=RealSet(x == pi);  s    # needs sage.symbolic
+            sage: s = RealSet(x == pi);  s                                              # needs sage.symbolic
             {pi}
-            sage: s.simplest_rational()
+            sage: s.simplest_rational()                                                 # needs sage.symbolic
             Traceback (most recent call last):
             ...
             NotImplementedError...
-            sage: s=RealSet((0, 1));  s
+            sage: s = RealSet((0, 1));  s
             (0, 1)
             sage: s.simplest_rational()
             Traceback (most recent call last):
             ...
             NotImplementedError...
-            sage: s=RealSet();  s
+            sage: s = RealSet();  s
             {}
             sage: s.simplest_rational()
             Traceback (most recent call last):
@@ -2690,9 +2693,9 @@ class RealSet(UniqueRepresentation, Parent, Set_base,
             # handle one bound as infinity as RIF simplest_rational gives ValueError
             if interval.contains(0):
                 return QQ(0)
-            if lower == minus_infinity:
+            if lower is minus_infinity:
                 lower = upper - 2 # to contain at least 1 integer
-            elif upper == infinity:
+            elif upper is infinity:
                 upper = lower + 2 # to contain at least 1 integer
 
             rs_field = RIF(lower, upper)
