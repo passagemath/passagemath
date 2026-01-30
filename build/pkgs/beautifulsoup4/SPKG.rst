@@ -9,7 +9,7 @@ Screen-scraping library
 License
 -------
 
-MIT
+MIT License
 
 Upstream Contact
 ----------------
