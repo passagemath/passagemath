@@ -22,6 +22,7 @@ AUTHORS:
 from sage.misc.cachefunc import cached_method
 from sage.misc.latex import latex, LatexExpr
 from sage.misc.lazy_attribute import lazy_attribute
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.structure.parent import Parent
 from sage.structure.unique_representation import UniqueRepresentation
@@ -33,10 +34,11 @@ import sage.data_structures.blas_dict as blas
 from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
 from sage.rings.polynomial.multi_polynomial_ring_base import MPolynomialRing_base
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
-from sage.rings.polynomial.infinite_polynomial_ring import InfinitePolynomialRing_dense
-from sage.rings.polynomial.infinite_polynomial_element import InfinitePolynomial
 from sage.structure.global_options import GlobalOptions
 from sage.modules.with_basis.indexed_element import IndexedFreeModuleElement
+
+lazy_import('sage.rings.polynomial.infinite_polynomial_ring', 'InfinitePolynomialRing_dense')
+lazy_import('sage.rings.polynomial.infinite_polynomial_element', 'InfinitePolynomial')
 
 
 def repr_from_monomials(monomials, term_repr, use_latex=False) -> str:
