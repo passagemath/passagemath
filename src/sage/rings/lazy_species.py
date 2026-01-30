@@ -1,3 +1,5 @@
+# sage_setup: distribution = sagemath-gap
+# sage.doctest: needs sage.combinat sage.libs.gap sage.modules
 r"""
 Lazy Combinatorial Species
 
