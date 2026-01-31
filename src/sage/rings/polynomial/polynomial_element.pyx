@@ -11638,7 +11638,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: S.<y> = R[]
             sage: p = ((3*z + 2)*x + 2*z - 1) * y + 2*x + z
             sage: q = y^2 + z*y*x + 2*y + z
-            sage: p.divides(q), p.divides(p*q)
+            sage: p.divides(q), p.divides(p*q)                                          # needs sage.libs.singular
             (False, True)
 
             sage: R.<x,y> = GF(2)[]
@@ -11650,7 +11650,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: R.<x> = Zmod(6)[]
             sage: p = 4*x + 3
             sage: q = 2*x**2 + x + 2
-            sage: p.divides(q)
+            sage: p.divides(q)                                                          # needs sage.libs.singular
             False
         """
         if p.is_zero():
