@@ -575,8 +575,7 @@ if __name__ == '__main__':
             sys.exit(1)
         from sage.env import SAGE_SRC
         if (not SAGE_SRC
-                or not os.path.exists(os.path.join(SAGE_SRC, 'sage'))
-                or not os.path.exists(os.path.join(SAGE_SRC, 'conftest_test.py'))):
+                or not os.path.exists(os.path.join(SAGE_SRC, 'sage'))):
             print(f'{SAGE_SRC=} does not seem to contain a copy of the Sage source tree')
             sys.exit(1)
         args.filename = [os.path.join(SAGE_SRC, 'sage')]
@@ -661,14 +660,14 @@ if __name__ == '__main__':
                     for root, dirs, files in os.walk(path):
                         for dir in sorted(dirs):
                             path = os.path.join(root, dir)
-                            if any(dir.startswith(prefix) for prefix in ['.', 'build', 'dist', '__pycache__', '_vendor', '.tox', 'meson.build']):
+                            if any(dir.startswith(prefix) for prefix in ['.', 'build', 'dist', '__pycache__', '_vendor', '.tox']):
                                 # Silently skip
                                 dirs.remove(dir)
                             elif not is_package_or_sage_namespace_package_dir(path):
                                 print(f'{path}: non-package directory')
                                 dirs.remove(dir)
                         for file in sorted(files):
-                            if any(file.endswith(ext) for ext in [".pyc", ".pyo", ".bak", ".so", "~"]):
+                            if any(file.endswith(ext) for ext in [".pyc", ".pyo", ".bak", ".so", "~", "meson.build", ".pyi"]):
                                 continue
                             handle_file(root, file)
             else:
