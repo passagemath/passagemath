@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.combinat sage.libs.gap sage.modules
 r"""
 Combinatorial species
 

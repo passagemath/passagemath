@@ -217,6 +217,7 @@ cdef class Matrix_generic_sparse(matrix_sparse.Matrix_sparse):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: K.<z> = GF(9)
             sage: m = matrix(K,3,4,[((i%9)//3)*z + i%3 if is_prime(i) else 0 for i in range(12)],sparse=True)
             sage: m

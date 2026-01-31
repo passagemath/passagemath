@@ -5,7 +5,6 @@ Baxter permutations
 from collections.abc import Iterator
 
 from sage.combinat.permutation import Permutations
-from sage.combinat.posets.lattices import LatticePoset
 from sage.rings.integer import Integer
 from sage.rings.integer_ring import ZZ
 from sage.sets.disjoint_union_enumerated_sets import DisjointUnionEnumeratedSets
@@ -245,13 +244,15 @@ class BaxterPermutations_size(BaxterPermutations):
 
         EXAMPLES::
 
-            sage: L = BaxterPermutations(4).lattice(); L
+            sage: L = BaxterPermutations(4).lattice(); L                                # needs sage.graphs
             Finite lattice containing 22 elements
 
         REFERENCES:
 
         - [Law2011]_
         """
+        from sage.combinat.posets.lattices import LatticePoset
+
         return LatticePoset([list(self), lambda a, b: a.weak_le(b)],
                             check=False)
 

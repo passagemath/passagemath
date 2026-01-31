@@ -3768,7 +3768,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         Random tests for noncommutative rings::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.singular sage.modules
             sage: A.<i,j,k> = QuaternionAlgebra(QQ, -1,-1)
             sage: R.<w> = PolynomialRing(A)
             sage: f = R.random_element(randint(10,100))
@@ -10560,6 +10560,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         Check that the method is sufficiently fast::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = GF(2^13)[]
             sage: f = R.random_element(degree=1000)
             sage: g = f.radical()  # < 1s
@@ -10567,6 +10568,7 @@ cdef class Polynomial(CommutativePolynomial):
         Check that the method works as long as either :meth:`squarefree_decomposition`
         or :meth:`factor` is implemented::
 
+            sage: # needs sage.rings.finite_rings
             sage: F.<x> = FunctionField(GF(2^10))
             sage: R.<y> = F[]
             sage: f = (y+1/(x-1))^2 * (y+x)
@@ -11612,7 +11614,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: R.<x> = Zmod(6)[]
             sage: f = x - 2
             sage: g = 3
-            sage: R.ideal(f*g) <= R.ideal(f)
+            sage: R.ideal(f*g) <= R.ideal(f)                                            # needs sage.libs.singular
             True
             sage: f.divides(f*g)
             True

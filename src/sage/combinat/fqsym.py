@@ -172,6 +172,7 @@ class FQSymBasis_abstract(CombinatorialFreeModule, BindableClass):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: A = algebras.FQSym(QQ)
             sage: F = A.F()
             sage: F.an_element()
@@ -316,6 +317,7 @@ class FreeQuasisymmetricFunctions(UniqueRepresentation, Parent):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: F = algebras.FQSym(ZZ).F()
         sage: x,y,z = F([1]), F([1,2]), F([1,3,2])
         sage: (x * y) * z
@@ -323,21 +325,21 @@ class FreeQuasisymmetricFunctions(UniqueRepresentation, Parent):
 
     The product of `FQSym` is associative::
 
-        sage: x * (y * z) == (x * y) * z
+        sage: x * (y * z) == (x * y) * z                                                # needs sage.graphs
         True
 
     The associative product decomposes into two parts::
 
-        sage: x * y == F.prec(x, y) + F.succ(x, y)
+        sage: x * y == F.prec(x, y) + F.succ(x, y)                                      # needs sage.graphs
         True
 
     The axioms of a dendriform algebra hold::
 
-        sage: F.prec(F.succ(x, y), z) == F.succ(x, F.prec(y, z))
+        sage: F.prec(F.succ(x, y), z) == F.succ(x, F.prec(y, z))                        # needs sage.graphs
         True
-        sage: F.prec(F.prec(x, y), z) == F.prec(x, y * z)
+        sage: F.prec(F.prec(x, y), z) == F.prec(x, y * z)                               # needs sage.graphs
         True
-        sage: F.succ(x * y, z) == F.succ(x, F.succ(y, z))
+        sage: F.succ(x * y, z) == F.succ(x, F.succ(y, z))                               # needs sage.graphs
         True
 
     `FQSym` is also known as the Malvenuto-Reutenauer algebra::
@@ -450,7 +452,7 @@ class FreeQuasisymmetricFunctions(UniqueRepresentation, Parent):
                 F[1, 3, 2]
                 sage: R(Permutation([1, 3, 2]))
                 F[1, 3, 2]
-                sage: R(SymmetricGroup(4)(Permutation([1,3,4,2])))
+                sage: R(SymmetricGroup(4)(Permutation([1,3,4,2])))                      # needs sage.groups
                 F[1, 3, 4, 2]
             """
             if isinstance(x, (list, tuple, PermutationGroupElement)):
@@ -518,7 +520,7 @@ class FreeQuasisymmetricFunctions(UniqueRepresentation, Parent):
 
                 sage: A = algebras.FQSym(QQ).F()
                 sage: x = Permutation([1])
-                sage: A.product_on_basis(x, x)
+                sage: A.product_on_basis(x, x)                                          # needs sage.graphs
                 F[1, 2] + F[2, 1]
             """
             return self.sum_of_monomials(u for u in x.shifted_shuffle(y))
@@ -715,7 +717,7 @@ class FreeQuasisymmetricFunctions(UniqueRepresentation, Parent):
             G[] # G[3, 1, 2] + G[1] # G[2, 1] + G[1, 2] # G[1]
              + G[3, 1, 2] # G[]
 
-            sage: G([3, 1, 2]) * G([2, 1])
+            sage: G([3, 1, 2]) * G([2, 1])                                              # needs sage.graphs
             G[3, 1, 2, 5, 4] + G[4, 1, 2, 5, 3] + G[4, 1, 3, 5, 2]
              + G[4, 2, 3, 5, 1] + G[5, 1, 2, 4, 3] + G[5, 1, 3, 4, 2]
              + G[5, 1, 4, 3, 2] + G[5, 2, 3, 4, 1] + G[5, 2, 4, 3, 1]
@@ -748,7 +750,7 @@ class FreeQuasisymmetricFunctions(UniqueRepresentation, Parent):
                 G[1, 3, 2]
                 sage: R(Permutation([1, 3, 2]))
                 G[1, 3, 2]
-                sage: R(SymmetricGroup(4)(Permutation([1,3,4,2])))
+                sage: R(SymmetricGroup(4)(Permutation([1,3,4,2])))                      # needs sage.groups
                 G[1, 3, 4, 2]
 
                 sage: RF = algebras.FQSym(QQ).F()
@@ -894,7 +896,7 @@ class FreeQuasisymmetricFunctions(UniqueRepresentation, Parent):
             M[] # M[3, 2, 1] + M[1] # M[2, 1] + M[2, 1] # M[1]
              + M[3, 2, 1] # M[]
 
-            sage: M([1, 2]) * M([1])
+            sage: M([1, 2]) * M([1])                                                    # needs sage.graphs
             M[1, 2, 3] + 2*M[1, 3, 2] + M[2, 3, 1] + M[3, 1, 2]
         """
         _prefix = "M"
@@ -943,7 +945,7 @@ class FreeQuasisymmetricFunctions(UniqueRepresentation, Parent):
                 M[1, 3, 2]
                 sage: R(Permutation([1, 3, 2]))
                 M[1, 3, 2]
-                sage: R(SymmetricGroup(4)(Permutation([1,3,4,2])))
+                sage: R(SymmetricGroup(4)(Permutation([1,3,4,2])))                      # needs sage.groups
                 M[1, 3, 4, 2]
 
                 sage: RF = algebras.FQSym(QQ).F()
@@ -1315,7 +1317,7 @@ class FQSymBases(Category_realization_of_parent):
                 F[1, 3, 2]
                 sage: R[Permutation([1, 3, 2])]
                 F[1, 3, 2]
-                sage: R[SymmetricGroup(4)(Permutation([1,3,4,2]))]
+                sage: R[SymmetricGroup(4)(Permutation([1,3,4,2]))]                      # needs sage.groups
                 F[1, 3, 4, 2]
             """
             return self.monomial(Permutation(p))
@@ -1363,6 +1365,7 @@ class FQSymBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: A = algebras.FQSym(QQ)
                 sage: F = A.F()
                 sage: F.some_elements()
@@ -1496,7 +1499,7 @@ class FQSymBases(Category_realization_of_parent):
                 sage: G = algebras.FQSym(ZZ).G()
                 sage: a = G([1])
                 sage: b = G([2, 3, 1])
-                sage: G.prec(a, b) + G.succ(a, b) == a * b # indirect doctest
+                sage: G.prec(a, b) + G.succ(a, b) == a * b  # indirect doctest          # needs sage.graphs
                 True
             """
             F = self.realization_of().a_realization()
@@ -1586,7 +1589,7 @@ class FQSymBases(Category_realization_of_parent):
                 sage: G[[2,3,1]].omega_involution()
                 G[2, 1, 3]
                 sage: M = FQSym.M()
-                sage: M[[2,3,1]].omega_involution()
+                sage: M[[2,3,1]].omega_involution()                                     # needs sage.graphs
                 -M[1, 2, 3] - M[2, 1, 3] - M[3, 1, 2]
 
             The omega involution is an algebra homomorphism::
@@ -1607,7 +1610,7 @@ class FQSymBases(Category_realization_of_parent):
             Testing the `\pi \circ \omega = \omega \circ \pi` relation
             noticed above::
 
-                sage: all( M[I].omega_involution().to_qsym()
+                sage: all( M[I].omega_involution().to_qsym()                            # needs sage.graphs
                 ....:      == M[I].to_qsym().omega_involution()
                 ....:      for I in Permutations(4) )
                 True
@@ -1702,14 +1705,14 @@ class FQSymBases(Category_realization_of_parent):
             The `\psi` involution intertwines the antipode
             and the inverse of the antipode::
 
-                sage: all( F(I).antipode().psi_involution().antipode()
+                sage: all( F(I).antipode().psi_involution().antipode()                  # needs sage.graphs
                 ....:      == F(I).psi_involution()
                 ....:      for I in Permutations(4) )
                 True
 
             Testing the `\pi \circ \psi = \psi \circ \pi` relation above::
 
-                sage: all( M[I].psi_involution().to_qsym()
+                sage: all( M[I].psi_involution().to_qsym()                              # needs sage.graphs
                 ....:      == M[I].to_qsym().psi_involution()
                 ....:      for I in Permutations(4) )
                 True
@@ -1718,7 +1721,7 @@ class FQSymBases(Category_realization_of_parent):
 
                 sage: NSym = NonCommutativeSymmetricFunctions(ZZ)
                 sage: S = NSym.S()
-                sage: all( S[I].omega_involution().to_fqsym() == S[I].to_fqsym().psi_involution()
+                sage: all( S[I].omega_involution().to_fqsym() == S[I].to_fqsym().psi_involution()   # needs sage.graphs
                 ....:      for I in Compositions(4) )
                 True
 
@@ -1814,14 +1817,14 @@ class FQSymBases(Category_realization_of_parent):
 
             The star involution commutes with the antipode::
 
-                sage: all( F(I).antipode().star_involution()
+                sage: all( F(I).antipode().star_involution()                                        # needs sage.graphs
                 ....:      == F(I).star_involution().antipode()
                 ....:      for I in Permutations(4) )
                 True
 
             Testing the `\pi \circ (\ast) = (\ast) \circ \pi` relation::
 
-                sage: all( M[I].star_involution().to_qsym()
+                sage: all( M[I].star_involution().to_qsym()                                         # needs sage.graphs
                 ....:      == M[I].to_qsym().star_involution()
                 ....:      for I in Permutations(4) )
                 True
@@ -1830,14 +1833,14 @@ class FQSymBases(Category_realization_of_parent):
 
                 sage: NSym = NonCommutativeSymmetricFunctions(ZZ)
                 sage: S = NSym.S()
-                sage: all( S[I].star_involution().to_fqsym() == S[I].to_fqsym().star_involution()
+                sage: all( S[I].star_involution().to_fqsym() == S[I].to_fqsym().star_involution()   # needs sage.graphs
                 ....:      for I in Compositions(4) )
                 True
 
             Similar for `WQSym`::
 
                 sage: WQSym = algebras.WQSym(ZZ)
-                sage: all( F(I).to_wqsym().star_involution()
+                sage: all( F(I).to_wqsym().star_involution()                                        # needs sage.graphs
                 ....:      == F(I).star_involution().to_wqsym()
                 ....:      for I in Permutations(4) )
                 True
