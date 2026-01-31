@@ -113,7 +113,7 @@ class FilteredSimplicialComplex(SageObject):
 
         sage: FilteredSimplicialComplex([([0], 0), ([1], 0), ([2], 1), ([0,1], 2.27)])
         Filtered complex on vertex set (0, 1, 2) and with simplices
-         ((0,) : 0), ((1,) : 0), ((2,) : 1), ((0, 1) : 2.27000000000000)
+         ((0,) : 0), ((1,) : 0), ((2,) : 1), ((0, 1) : 2.27...)
     """
     def __init__(self, simplices=[], verbose=False):
         """
@@ -524,7 +524,7 @@ class FilteredSimplicialComplex(SageObject):
 
             sage: int_list2 = [[],[]]
             sage: X._add_interval(Simplex([1, 2]), None, int_list2)                     # needs sage.modules
-            sage: int_list2[1]
+            sage: int_list2[1]                                                          # needs sage.modules
             [(10, +Infinity)]
         """
         # figure out dimension of homology element
