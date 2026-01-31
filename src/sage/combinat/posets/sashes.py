@@ -151,12 +151,12 @@ def pellytope_fan(n: int) -> Fan:
     EXAMPLES::
 
         sage: from sage.combinat.posets.sashes import pellytope_fan
-        sage: pellytope_fan(3).f_vector()
+        sage: pellytope_fan(3).f_vector()                                               # needs sage.geometry.polyhedron
         (1, 8, 18, 12)
 
     TESTS::
 
-        sage: pellytope_fan(1)
+        sage: pellytope_fan(1)                                                          # needs sage.geometry.polyhedron
         Rational polyhedral fan in 1-d lattice N
         sage: pellytope_fan(0)
         Traceback (most recent call last):
@@ -197,6 +197,7 @@ def pellytope(n: int):
 
     EXAMPLES::
 
+        sage: # needs sage.geometry.polyhedron
         sage: P3 = polytopes.pellytope(3); P3
         A 3-dimensional polyhedron in ZZ^3 defined as
         the convex hull of 12 vertices
@@ -211,7 +212,7 @@ def pellytope(n: int):
         ValueError: n must be positive
 
         sage: G = posets.Sashes(3).hasse_diagram().to_undirected()
-        sage: polytopes.pellytope(3).graph().is_isomorphic(G)
+        sage: polytopes.pellytope(3).graph().is_isomorphic(G)                           # needs sage.geometry.polyhedron
         True
 
     REFERENCES:
