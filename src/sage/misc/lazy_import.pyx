@@ -42,6 +42,7 @@ that (s)he can remove the flag::
     namespace; however, before that, the :class:`LazyImport` object
     is not exactly equivalent to the actual imported object. For example::
 
+        sage: # needs sage.rings.number_field
         sage: from sage.misc.lazy_import import LazyImport
         sage: my_qqbar = LazyImport('sage.rings.qqbar', 'QQbar')
         sage: my_qqbar(5) == QQbar(5)  # good
