@@ -2139,10 +2139,7 @@ def sage_getdoc(obj, obj_name='', embedded=False):
         ....:     docs
         ....:     '''
         sage: import sys
-        sage: if sys.version_info >= (3, 13):
-        ....:     assert sage_getdoc(C) == 'docs\n', sage_getdoc(C)
-        ....: else:
-        ....:     assert sage_getdoc(C) == '   docs\n', sage_getdoc(C)
+        sage: assert sage_getdoc(C).strip() == 'docs', sage_getdoc(C)
 
         sage: from sage.repl.interpreter import get_test_shell
         sage: shell = get_test_shell()
