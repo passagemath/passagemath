@@ -112,9 +112,9 @@ def sage_eval(source, locals=None, cmds='', preparse=True):
         9
         sage: vars = {'rt2': sqrt(2.0)}
         sage: sage_eval(('rt2 += 1', 'rt2', vars))
-        2.41421356237309
+        2.414213562373...
         sage: vars['rt2']
-        1.41421356237310
+        1.414213562373...
 
     This example illustrates how :mod:`sage_eval` can be
     useful when evaluating the output of other computer algebra
