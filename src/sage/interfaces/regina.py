@@ -1,3 +1,4 @@
+# sage.setup: distribution = sagemath-categories
 # sage.doctest: optional regina
 r"""
 Interface to Regina
