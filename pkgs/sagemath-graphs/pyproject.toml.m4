@@ -51,6 +51,7 @@ pari        = ["passagemath-pari"]
 planarity   = ["passagemath-planarity"]
 plantri     = ["passagemath-plantri"]
 rankwidth   = ["passagemath-rankwidth"]
+regina      = [SPKG_INSTALL_REQUIRES_regina]
 rw          = ["passagemath-graphs[rankwidth]"]  # alias
 tdlib       = ["passagemath-tdlib"]
 
