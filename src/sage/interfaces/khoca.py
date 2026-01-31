@@ -1,4 +1,4 @@
-# sage.setup: distribution = sagemath-categories
+# sage_setup: distribution = sagemath-categories
 r"""
 Interface to Khoca
 
