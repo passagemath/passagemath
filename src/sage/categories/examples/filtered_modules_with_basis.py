@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-categories
-# sage.doctest: needs sage.combinat
+# sage.doctest: needs sage.combinat sage.modules
 r"""
 Examples of filtered modules with basis
 """

@@ -55,7 +55,7 @@ class CoxeterGroups(Category_singleton):
 
     Here are some further examples::
 
-        sage: FiniteCoxeterGroups().example()
+        sage: FiniteCoxeterGroups().example()                                           # needs sage.combinat sage.groups
         The 5-th dihedral group of order 10
         sage: FiniteWeylGroups().example()
         The symmetric group on {0, ..., 3}
@@ -374,6 +374,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.combinat sage.groups
                 sage: D5 = FiniteCoxeterGroups().example(5)
                 sage: sorted(list(D5)) # indirect doctest (but see :meth:`._test_enumerated_set_iter_list`)
                 [(),
@@ -478,6 +479,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.combinat sage.groups
                 sage: D6 = FiniteCoxeterGroups().example(5)
                 sage: I = D6.weak_order_ideal(predicate=lambda w: w.length() <= 3)
                 sage: I.cardinality()

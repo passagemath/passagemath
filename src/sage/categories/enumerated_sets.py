@@ -124,7 +124,7 @@ class EnumeratedSets(CategoryWithAxiom):
 
         EXAMPLES::
 
-            sage: EnumeratedSets()(Primes())
+            sage: EnumeratedSets()(Primes())                                            # needs sage.libs.pari
             Set of all prime numbers: 2, 3, 5, 7, ...
 
         For now, lists, tuples, sets, Sets are coerced into finite

@@ -824,6 +824,7 @@ class Sets(Category_singleton):
             example, the elements of the set of prime numbers are
             represented by plain integers::
 
+                sage: # needs sage.libs.pari
                 sage: Primes()
                 Set of all prime numbers: 2, 3, 5, 7, ...
                 sage: p = Primes().an_element(); p
