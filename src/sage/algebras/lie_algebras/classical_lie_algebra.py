@@ -29,6 +29,7 @@ from collections import OrderedDict
 
 from sage.misc.abstract_method import abstract_method
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 from sage.structure.indexed_generators import IndexedGenerators
 from sage.structure.element import Element
 from sage.structure.richcmp import richcmp
@@ -38,11 +39,12 @@ from sage.categories.triangular_kac_moody_algebras import TriangularKacMoodyAlge
 from sage.algebras.lie_algebras.lie_algebra import MatrixLieAlgebraFromAssociative, FinitelyGeneratedLieAlgebra
 from sage.algebras.lie_algebras.structure_coefficients import LieAlgebraWithStructureCoefficients
 from sage.combinat.root_system.cartan_type import CartanType
-from sage.combinat.root_system.cartan_matrix import CartanMatrix
-from sage.combinat.root_system.dynkin_diagram import DynkinDiagram_class
 from sage.matrix.matrix_space import MatrixSpace
 from sage.sets.family import Family
 from sage.modules.free_module import FreeModule
+
+lazy_import('sage.combinat.root_system.cartan_matrix', 'CartanMatrix')
+lazy_import('sage.combinat.root_system.dynkin_diagram', 'DynkinDiagram_class')
 
 
 class ClassicalMatrixLieAlgebra(MatrixLieAlgebraFromAssociative):
