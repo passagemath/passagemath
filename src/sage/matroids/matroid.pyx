@@ -8147,7 +8147,7 @@ cdef class Matroid(SageObject):
 
         EXAMPLES::
 
-            sage: # needs sage.graphs
+            sage: # needs sage.graphs sage.groups
             sage: M = matroids.Wheel(2)
             sage: A = M.chow_ring(R=ZZ, augmented=False, presentation='fy'); A
             Chow ring of Wheel(2): Regular matroid of rank 2 on 4 elements with
