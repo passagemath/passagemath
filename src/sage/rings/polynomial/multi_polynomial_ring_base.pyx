@@ -911,6 +911,7 @@ cdef class MPolynomialRing_base(CommutativeRing):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.real_mpfr
             sage: R = CC['x,y,z']
             sage: x = R.gen()
             sage: x
@@ -1263,10 +1264,8 @@ cdef class MPolynomialRing_base(CommutativeRing):
             True
             sage: all(len(list(a)) <= 1 for a in M.list())
             True
-
             sage: P.random_element(0, 1) in QQ
             True
-
             sage: P.random_element(2, 0)
             0
 

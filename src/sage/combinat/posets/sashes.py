@@ -29,12 +29,7 @@ from collections.abc import Iterator
 
 from sage.categories.finite_lattice_posets import FiniteLatticePosets
 from sage.combinat.posets.lattices import LatticePoset
-from sage.geometry.cone import Cone
-from sage.geometry.fan import Fan
-from sage.geometry.polyhedron.constructor import Polyhedron
 from sage.misc.cachefunc import cached_function
-from sage.modules.free_module import FreeModule
-from sage.modules.free_module_element import vector
 from sage.rings.integer_ring import ZZ
 
 B, N, BB = "□", "▨", "■■"
@@ -156,12 +151,12 @@ def pellytope_fan(n: int) -> Fan:
     EXAMPLES::
 
         sage: from sage.combinat.posets.sashes import pellytope_fan
-        sage: pellytope_fan(3).f_vector()
+        sage: pellytope_fan(3).f_vector()                                               # needs sage.geometry.polyhedron
         (1, 8, 18, 12)
 
     TESTS::
 
-        sage: pellytope_fan(1)
+        sage: pellytope_fan(1)                                                          # needs sage.geometry.polyhedron
         Rational polyhedral fan in 1-d lattice N
         sage: pellytope_fan(0)
         Traceback (most recent call last):
@@ -174,6 +169,11 @@ def pellytope_fan(n: int) -> Fan:
     """
     if n <= 0:
         raise ValueError("n must be positive")
+
+    from sage.geometry.cone import Cone
+    from sage.geometry.fan import Fan
+    from sage.modules.free_module_element import vector
+
     dim_one = Fan([Cone([[-1]]), Cone([[1]])])
     if n == 1:
         return dim_one
@@ -182,7 +182,7 @@ def pellytope_fan(n: int) -> Fan:
     return G.subdivide(new_rays=[v])
 
 
-def pellytope(n: int) -> Polyhedron:
+def pellytope(n: int):
     r"""
     Return the pellytope of dimension ``n``.
 
@@ -197,6 +197,7 @@ def pellytope(n: int) -> Polyhedron:
 
     EXAMPLES::
 
+        sage: # needs sage.geometry.polyhedron
         sage: P3 = polytopes.pellytope(3); P3
         A 3-dimensional polyhedron in ZZ^3 defined as
         the convex hull of 12 vertices
@@ -211,16 +212,20 @@ def pellytope(n: int) -> Polyhedron:
         ValueError: n must be positive
 
         sage: G = posets.Sashes(3).hasse_diagram().to_undirected()
-        sage: polytopes.pellytope(3).graph().is_isomorphic(G)
+        sage: polytopes.pellytope(3).graph().is_isomorphic(G)                           # needs sage.geometry.polyhedron
         True
 
     REFERENCES:
 
     - [BTTM2024]_
     """
-    from sage.geometry.polyhedron.library import Polytopes
     if n <= 0:
         raise ValueError("n must be positive")
+
+    from sage.geometry.polyhedron.constructor import Polyhedron
+    from sage.geometry.polyhedron.library import Polytopes
+    from sage.modules.free_module import FreeModule
+
     M = FreeModule(ZZ, n)
     v = M.basis()
     zero = M.zero()

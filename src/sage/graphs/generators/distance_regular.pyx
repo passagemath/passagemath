@@ -82,6 +82,7 @@ def cocliques_HoffmannSingleton(immutable=False):
 
     Check the behavior of parameter `ìmmutable``::
 
+        sage: # needs cliquer
         sage: G = graphs.cocliques_HoffmannSingleton()
         sage: G.is_immutable()
         False

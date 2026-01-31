@@ -3681,6 +3681,7 @@ class Graph(GenericGraph):
         produces/yields the monomial symmetric function `m_{\lambda}`
         (scaled by a constant)::
 
+            sage: # needs sage.combinat sage.modules
             sage: m = SymmetricFunctions(ZZ).m()
             sage: K5 = graphs.CompleteGraph(5)
             sage: m(K5.chromatic_symmetric_function())
@@ -9473,7 +9474,7 @@ class Graph(GenericGraph):
         dictionary from :meth:`~Graph.minor`::
 
             sage: K44 = graphs.CompleteBipartiteGraph(4, 4)
-            sage: K44.is_projective_planar(return_map=True)
+            sage: K44.is_projective_planar(return_map=True)                             # needs sage.numerical.mip
             (False,
              {0: [0], 1: [1], 2: [2], 3: [3], 4: [4], 5: [5], 6: [6], 7: [7]})
 

@@ -2799,7 +2799,7 @@ class DiGraph(GenericGraph):
         EXAMPLES::
 
             sage: D = DiGraph([[1,2,'a'], [1,2,'b']], multiedges=True)
-            sage: D.auslander_reiten_quiver()
+            sage: D.auslander_reiten_quiver()                                           # needs sage.libs.flint
             Auslander-Reiten quiver of Multi-digraph on 2 vertices
         """
         from sage.quivers.ar_quiver import AuslanderReitenQuiver
