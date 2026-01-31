@@ -431,7 +431,7 @@ def random_matrix(ring, nrows, ncols=None, algorithm='randomize', implementation
         True
 
         sage: A = random_matrix(QQ, 4, density=0.5, sparse=True)
-        sage: type(A)
+        sage: type(A)                                                                   # needs sage.libs.flint
         <class 'sage.matrix.matrix_rational_sparse.Matrix_rational_sparse'>
         sage: A.density() <= 0.5
         True
@@ -2012,7 +2012,7 @@ def block_matrix(*args, **kwds):
         ...
         ValueError: an element of parent <class 'list'> was passed in,
          but only matrices, vectors and ring elements are accepted
-        sage: matrix.block([
+        sage: matrix.block([                                                            # needs sage.schemes
         ....:     [EllipticCurve('37a1').0],
         ....:     ])
         Traceback (most recent call last):
