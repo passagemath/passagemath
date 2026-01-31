@@ -29,8 +29,6 @@ from collections.abc import Iterator
 
 from sage.categories.finite_lattice_posets import FiniteLatticePosets
 from sage.combinat.posets.lattices import LatticePoset
-from sage.geometry.cone import Cone
-from sage.geometry.fan import Fan
 from sage.geometry.polyhedron.constructor import Polyhedron
 from sage.misc.cachefunc import cached_function
 from sage.modules.free_module import FreeModule
@@ -174,6 +172,10 @@ def pellytope_fan(n: int) -> Fan:
     """
     if n <= 0:
         raise ValueError("n must be positive")
+
+    from sage.geometry.cone import Cone
+    from sage.geometry.fan import Fan
+
     dim_one = Fan([Cone([[-1]]), Cone([[1]])])
     if n == 1:
         return dim_one
