@@ -29,7 +29,6 @@ from collections.abc import Iterator
 
 from sage.categories.finite_lattice_posets import FiniteLatticePosets
 from sage.combinat.posets.lattices import LatticePoset
-from sage.geometry.polyhedron.constructor import Polyhedron
 from sage.misc.cachefunc import cached_function
 from sage.rings.integer_ring import ZZ
 
@@ -183,7 +182,7 @@ def pellytope_fan(n: int) -> Fan:
     return G.subdivide(new_rays=[v])
 
 
-def pellytope(n: int) -> Polyhedron:
+def pellytope(n: int):
     r"""
     Return the pellytope of dimension ``n``.
 
@@ -222,9 +221,9 @@ def pellytope(n: int) -> Polyhedron:
     if n <= 0:
         raise ValueError("n must be positive")
 
+    from sage.geometry.polyhedron.constructor import Polyhedron
     from sage.geometry.polyhedron.library import Polytopes
     from sage.modules.free_module import FreeModule
-
 
     M = FreeModule(ZZ, n)
     v = M.basis()
