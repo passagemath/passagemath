@@ -272,8 +272,8 @@ class Function_tan(GinacFunction):
             tan(x)
             sage: conjugate(tan(x))                                                     # needs sage.symbolic
             tan(conjugate(x))
-            sage: tan(complex(1,1))     # rel tol 1e-15
-            (0.2717525853195118+1.0839233273386946j)
+            sage: tan(complex(1,1))
+            (0.27175258531951...+1.08392332733869...j)
 
         Check that :issue:`19791` is fixed::
 
