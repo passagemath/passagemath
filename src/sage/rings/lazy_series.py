@@ -5223,6 +5223,7 @@ class LazyPowerSeries(LazyCauchyProductSeries):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: L.<x, y, z> = LazyPowerSeriesRing(QQ)
             sage: M.<a, b> = LazyPowerSeriesRing(ZZ)
             sage: g1 = 1 / (1 - x)
@@ -5234,6 +5235,7 @@ class LazyPowerSeries(LazyCauchyProductSeries):
         The number of mappings from a set with `m` elements to a set
         with `n` elements::
 
+            sage: # needs sage.libs.singular
             sage: M.<a> = LazyPowerSeriesRing(QQ)
             sage: Ea = M(lambda n: 1/factorial(n))
             sage: Ex = L(lambda n: 1/factorial(n)*x^n)
