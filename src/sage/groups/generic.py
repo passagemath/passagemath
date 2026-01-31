@@ -885,6 +885,7 @@ def discrete_log(a, base, ord=None, bounds=None, operation='*', identity=None, i
         sage: discrete_log(a, b, K.order() - 1)
         210
 
+        sage: # needs sage.libs.pari
         sage: b = Mod(1,37);  x = Mod(2,37)
         sage: discrete_log(x, b)
         Traceback (most recent call last):
@@ -959,6 +960,7 @@ def discrete_log(a, base, ord=None, bounds=None, operation='*', identity=None, i
 
     The above examples also work when the ``'rho'`` and ``'lambda'`` algorithms are used::
 
+        sage: # needs sage.libs.pari
         sage: b = Mod(2,37);  a = b^20
         sage: discrete_log(a, b, algorithm='rho')
         20
@@ -973,6 +975,7 @@ def discrete_log(a, base, ord=None, bounds=None, operation='*', identity=None, i
         sage: discrete_log(a, b, K.order()-1, algorithm='rho')
         210
 
+        sage: # needs sage.libs.pari
         sage: b = Mod(1,37);  x = Mod(2,37)
         sage: discrete_log(x, b, algorithm='lambda')
         Traceback (most recent call last):
@@ -1006,6 +1009,7 @@ def discrete_log(a, base, ord=None, bounds=None, operation='*', identity=None, i
 
     Pass ``ord=oo`` to avoid attempts to factorize the group order::
 
+        sage: # needs sage.libs.pari
         sage: p, q = next_prime(2^128), next_prime(2^129)
         sage: a = mod(2, p*q*124+1)
         sage: discrete_log(a^100, a, bounds=(1, 500))  # not tested (takes very long, but pari.addprimes(p) makes it faster)
