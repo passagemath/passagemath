@@ -1257,7 +1257,7 @@ def hyperbolicity(G,
 
         sage: from sage.graphs.hyperbolicity import hyperbolicity
         sage: G = Graph()
-        sage: hyperbolicity(G, algorithm='CCL', additive_gap=-1)
+        sage: hyperbolicity(G, algorithm='CCL', additive_gap=-1)                        # needs sage.rings.real_mpfr
         Traceback (most recent call last):
         ...
         ValueError: the additive gap must be a real positive number
@@ -1266,7 +1266,7 @@ def hyperbolicity(G,
 
         sage: from sage.graphs.hyperbolicity import hyperbolicity
         sage: G = Graph()
-        sage: hyperbolicity(G, algorithm='tip top')
+        sage: hyperbolicity(G, algorithm='tip top')                                     # needs sage.rings.real_mpfr
         Traceback (most recent call last):
         ...
         ValueError: algorithm 'tip top' not yet implemented, please contribute
