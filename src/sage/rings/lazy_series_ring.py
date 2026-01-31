@@ -830,7 +830,6 @@ class LazySeriesRing(UniqueRepresentation, Parent):
             5*z^-1 + 2 + 2*z + 2*z^3 + O(z^6)
             sage: 2 + z*f(z^2) - f
             O(z^6)
-
             sage: g = L.undefined(-2)
             sage: L.define_implicitly([(g, [5])], [2+z*g(z^2) - g])
             sage: g

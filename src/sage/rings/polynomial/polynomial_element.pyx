@@ -3236,7 +3236,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: f = x^3+2/3*x^2 - 5/3
             sage: f._repr_()
             'x^3 + 2/3*x^2 - 5/3'
-            sage: f.rename('vaughn')
+            sage: f.rename('vaughn')                                                    # needs sage.libs.flint
             Traceback (most recent call last):
             ...
             NotImplementedError: object does not support renaming: x^3 + 2/3*x^2 - 5/3
@@ -3553,6 +3553,7 @@ cdef class Polynomial(CommutativePolynomial):
 
         Ensure the method is interruptible::
 
+            sage: # needs sage.rings.complex_double
             sage: from sage.doctest.util import ensure_interruptible_after
             sage: R.<x> = CDF[]
             sage: f = R.random_element(degree=5000)
@@ -11616,7 +11617,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: g = 3
             sage: R.ideal(f*g) <= R.ideal(f)                                            # needs sage.libs.singular
             True
-            sage: f.divides(f*g)
+            sage: f.divides(f*g)                                                        # needs sage.libs.singular
             True
             sage: p = 4*x + 3
             sage: q = 5*x**2 + x + 2
@@ -11919,6 +11920,7 @@ cdef list do_schoolbook_product(list x, list y, Py_ssize_t deg):
 
     Ensure the method is interruptible::
 
+        sage: # needs sage.rings.complex_double
         sage: from sage.doctest.util import ensure_interruptible_after
         sage: R.<x> = CDF[]
         sage: f = R.random_element(degree=5000)

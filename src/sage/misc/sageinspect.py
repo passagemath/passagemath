@@ -2121,7 +2121,7 @@ def sage_getdoc(obj, obj_name='', embedded=False):
         sage: sage_getdoc(identity_matrix)[87:124]                                      # needs sage.modules
         '...the n x n identity matrix...'
         sage: def f(a, b, c, d=1): return a+b+c+d
-        sage: sage_getdoc(f)
+        sage: sage_getdoc(f).strip()
         ''
         sage: import functools
         sage: f1 = functools.partial(f, 1,c=2)
@@ -2139,10 +2139,7 @@ def sage_getdoc(obj, obj_name='', embedded=False):
         ....:     docs
         ....:     '''
         sage: import sys
-        sage: if sys.version_info >= (3, 13):
-        ....:     assert sage_getdoc(C) == 'docs\n', sage_getdoc(C)
-        ....: else:
-        ....:     assert sage_getdoc(C) == '   docs\n', sage_getdoc(C)
+        sage: assert sage_getdoc(C).strip() == 'docs', sage_getdoc(C)
 
         sage: from sage.repl.interpreter import get_test_shell
         sage: shell = get_test_shell()

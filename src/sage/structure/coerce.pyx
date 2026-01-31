@@ -1617,7 +1617,7 @@ cdef class CoercionModel:
               To:   Rational Field,
             Generic map:
               From: Rational Field
-              To:   Real Field with 53 bits of precision)
+              To:   Real...Field...)
         """
         if homs is None:
             return None

@@ -141,6 +141,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: A = ModulesWithBasis(ZZ).Filtered().example()
                 sage: A.basis(4)
                 Lazy family (Term map from Partitions to An example of a
@@ -149,6 +150,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
             Without arguments, the full basis is returned::
 
+                sage: # needs sage.modules
                 sage: A.basis()
                 Lazy family (Term map from Partitions to An example of a
                  filtered module with basis: the free module on partitions
@@ -162,6 +164,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
             will typically raise a :exc:`NotImplementedError` when this
             feature is not implemented. ::
 
+                sage: # needs sage.modules
                 sage: A = AlgebrasWithBasis(ZZ).Filtered().example()
                 sage: A.basis(4)
                 Traceback (most recent call last):
@@ -170,7 +173,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
             Without arguments, the full basis is returned::
 
-                sage: A.basis()
+                sage: A.basis()                                                         # needs sage.modules
                 Lazy family (Term map from Free abelian monoid indexed by
                  {'x', 'y', 'z'} to An example of a filtered algebra with
                  basis: the universal enveloping algebra of Lie algebra
@@ -179,6 +182,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
             An example with a graded algebra::
 
+                sage: # needs sage.modules
                 sage: E.<x,y> = ExteriorAlgebra(QQ)
                 sage: E.basis()
                 Lazy family (Term map from Subsets of {0,1} to
@@ -201,6 +205,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: A = GradedModulesWithBasis(ZZ).example()
                 sage: A.homogeneous_component_basis(4)
                 Lazy family (Term map
@@ -230,6 +235,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: A = GradedModulesWithBasis(ZZ).example()
                 sage: A.homogeneous_component(4)
                 Degree 4 homogeneous component of An example of a graded module
@@ -747,6 +753,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
             basis, or at least on a definition of homogeneous
             components)::
 
+                sage: # needs sage.modules
                 sage: A = AlgebrasWithBasis(QQ).Filtered().example()
                 sage: x,y,z = A.algebra_generators()
                 sage: (x*y).is_homogeneous()
@@ -831,6 +838,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
             notion of homogeneity now depends on the choice of a
             basis)::
 
+                sage: # needs sage.modules
                 sage: A = AlgebrasWithBasis(QQ).Filtered().example()
                 sage: x,y,z = A.algebra_generators()
                 sage: (x*y).homogeneous_degree()
@@ -973,6 +981,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
                 sage: x.homogeneous_component(3)
                 0
 
+                sage: # needs sage.modules
                 sage: A = AlgebrasWithBasis(ZZ).Filtered().example()
                 sage: G = A.algebra_generators()
                 sage: g = A.an_element() - 2 * G['x'] * G['y']; g
@@ -1042,6 +1051,7 @@ class FilteredModulesWithBasis(FilteredModulesCategory):
                 sage: x.truncate(3)
                 2*P[] + 2*P[1] + 3*P[2]
 
+                sage: # needs sage.modules
                 sage: A = AlgebrasWithBasis(ZZ).Filtered().example()
                 sage: G = A.algebra_generators()
                 sage: g = A.an_element() - 2 * G['x'] * G['y']; g

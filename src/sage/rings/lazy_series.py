@@ -5223,6 +5223,7 @@ class LazyPowerSeries(LazyCauchyProductSeries):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: L.<x, y, z> = LazyPowerSeriesRing(QQ)
             sage: M.<a, b> = LazyPowerSeriesRing(ZZ)
             sage: g1 = 1 / (1 - x)
@@ -5234,6 +5235,7 @@ class LazyPowerSeries(LazyCauchyProductSeries):
         The number of mappings from a set with `m` elements to a set
         with `n` elements::
 
+            sage: # needs sage.libs.singular
             sage: M.<a> = LazyPowerSeriesRing(QQ)
             sage: Ea = M(lambda n: 1/factorial(n))
             sage: Ex = L(lambda n: 1/factorial(n)*x^n)
@@ -7816,19 +7818,20 @@ class LazyDirichletSeries(LazyModuleElement):
 
         # Special behavior for finite series
         if isinstance(coeff_stream, Stream_exact):
-            from sage.rings.cc import CC
             if not coeff_stream._constant:
                 try:
                     return sum(self[k] * ~(ZZ(k)**p)
                                for k in range(1, coeff_stream._degree))
                 except (ValueError, TypeError, ArithmeticError):
                     pass
-            elif p in CC:
-                from sage.functions.transcendental import zeta
-                C = coeff_stream._constant
-                ret = sum((self[k] - C) * ~(ZZ(k)**p)
-                          for k in range(1, coeff_stream._degree))
-                return ret + C * zeta(p)
+            else:
+                from sage.rings.cc import CC
+                if p in CC:
+                    from sage.functions.transcendental import zeta
+                    C = coeff_stream._constant
+                    ret = sum((self[k] - C) * ~(ZZ(k)**p)
+                              for k in range(1, coeff_stream._degree))
+                    return ret + C * zeta(p)
 
         R = PolynomialRing(ZZ, P.variable_name())
         p = R(p)
