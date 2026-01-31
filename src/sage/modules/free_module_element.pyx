@@ -4290,12 +4290,14 @@ cdef class FreeModuleElement(Vector):   # abstract base class
 
         EXAMPLES::
 
+            sage: # needs sage.symbolic
             sage: f(x, y, z) = (y, z, x)
             sage: f.compositional_inverse()
             (x, y, z) |--> (z, x, y)
 
         TESTS::
 
+            sage: # needs sage.symbolic
             sage: f.change_ring(SR)
             (y, z, x)
             sage: f.change_ring(SR).compositional_inverse()

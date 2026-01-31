@@ -1278,7 +1278,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
             sage: # needs sage.graphs
             sage: A1 = IntegralLattice("A1")
             sage: L = A1.sublattice([])
-            sage: L.orthogonal_group()
+            sage: L.orthogonal_group()                                                  # needs sage.libs.gap
             Group of isometries with 1 generator ([1],)
         """
         from sage.categories.groups import Groups
@@ -1436,7 +1436,7 @@ class FreeQuadraticModule_integer_symmetric(FreeQuadraticModule_submodule_with_b
         EXAMPLES::
 
             sage: L = IntegralLattice('A2')                                             # needs sage.graphs
-            sage: L.minimum()                                                           # needs sage.graphs
+            sage: L.minimum()                                                           # needs sage.graphs sage.libs.pari
             2
             sage: L.twist(-1).minimum()                                                 # needs sage.graphs
             -Infinity
