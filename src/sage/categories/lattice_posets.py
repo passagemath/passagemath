@@ -137,6 +137,7 @@ class LatticePosets(Category):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: P = posets.ChainPoset(2).order_ideals_lattice()
                 sage: P in FiniteLatticePosets().Distributive()
                 True
@@ -272,7 +273,7 @@ class LatticePosets(Category):
 
                 EXAMPLES::
 
-                    sage: posets.TamariLattice(4).is_trim()
+                    sage: posets.TamariLattice(4).is_trim()                             # needs sage.modules
                     True
                 """
                 return True
@@ -336,7 +337,7 @@ class LatticePosets(Category):
 
                 EXAMPLES::
 
-                    sage: posets.TamariLattice(4).is_congruence_uniform()
+                    sage: posets.TamariLattice(4).is_congruence_uniform()               # needs sage.modules
                     True
                 """
                 return True
@@ -376,7 +377,7 @@ class LatticePosets(Category):
 
                 EXAMPLES::
 
-                    sage: posets.DivisorLattice(12).is_stone()
+                    sage: posets.DivisorLattice(12).is_stone()                          # needs sage.modules
                     True
                 """
                 return True
@@ -441,6 +442,7 @@ class DistributiveLattices(CategoryWithAxiom):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: P = posets.Crown(4).order_ideals_lattice()
                 sage: P.is_distributive()
                 True

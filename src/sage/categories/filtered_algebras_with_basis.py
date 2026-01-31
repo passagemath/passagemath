@@ -131,6 +131,7 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: A = Algebras(QQ).WithBasis().Filtered().example()
                 sage: p = A.an_element() + A.algebra_generators()['x'] + 2; p
                 U['x']^2*U['y']^2*U['z']^3 + 3*U['x'] + 3*U['y'] + 3
@@ -160,6 +161,7 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: A = Algebras(QQ).WithBasis().Filtered().example()
                 sage: p = A.an_element() + A.algebra_generators()['x'] + 2; p
                 U['x']^2*U['y']^2*U['z']^3 + 3*U['x'] + 3*U['y'] + 3
@@ -191,6 +193,7 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
 
             EXAMPLES::
 
+                sage: # needs sage.modules
                 sage: A = Algebras(QQ).WithBasis().Filtered().example()
                 sage: p = A.an_element() + A.algebra_generators()['x'] + 2; p
                 U['x']^2*U['y']^2*U['z']^3 + 3*U['x'] + 3*U['y'] + 3
@@ -251,6 +254,7 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
             Lie algebra `\RR^3` (with the cross product serving as
             Lie bracket)::
 
+                sage: # needs sage.modules
                 sage: A = AlgebrasWithBasis(QQ).Filtered().example(); A
                 An example of a filtered algebra with basis: the
                  universal enveloping algebra of Lie algebra of RR^3
@@ -262,6 +266,7 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
             Let us define a stupid filtered map from ``A`` to
             itself::
 
+                sage: # needs sage.modules
                 sage: def map_on_basis(m):
                 ....:     d = m.dict()
                 ....:     i = d.get('x', 0); j = d.get('y', 0); k = d.get('z', 0)
