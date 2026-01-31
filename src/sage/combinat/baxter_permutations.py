@@ -244,7 +244,7 @@ class BaxterPermutations_size(BaxterPermutations):
 
         EXAMPLES::
 
-            sage: L = BaxterPermutations(4).lattice(); L
+            sage: L = BaxterPermutations(4).lattice(); L                                # needs sage.graphs
             Finite lattice containing 22 elements
 
         REFERENCES:
