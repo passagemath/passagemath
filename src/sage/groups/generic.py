@@ -1047,7 +1047,7 @@ def discrete_log(a, base, ord=None, bounds=None, operation='*', identity=None, i
         sage: F = GF(5)
         sage: base = F(3)
         sage: a = F(1)
-        sage: discrete_log(a, base, bounds=(1,2), operation="*")
+        sage: discrete_log(a, base, bounds=(1,2), operation="*")                        # needs sage.libs.pari
         Traceback (most recent call last):
         ...
         ValueError: no discrete log of 1 found to base 3 with bounds (1, 2)
