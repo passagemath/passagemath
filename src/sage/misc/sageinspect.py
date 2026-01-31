@@ -2121,7 +2121,7 @@ def sage_getdoc(obj, obj_name='', embedded=False):
         sage: sage_getdoc(identity_matrix)[87:124]                                      # needs sage.modules
         '...the n x n identity matrix...'
         sage: def f(a, b, c, d=1): return a+b+c+d
-        sage: sage_getdoc(f)
+        sage: sage_getdoc(f).strip()
         ''
         sage: import functools
         sage: f1 = functools.partial(f, 1,c=2)
