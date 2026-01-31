@@ -116,6 +116,7 @@ cdef class Matrix_generic_dense(matrix_dense.Matrix_dense):
 
         TESTS::
 
+            sage: # needs sage.rings.finite_rings
             sage: K.<z> = GF(9)
             sage: m = matrix(K,3,4,[((i%9)//3)*z + i%3 for i in range(12)])
             sage: m
