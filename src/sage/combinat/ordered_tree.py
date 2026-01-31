@@ -1024,7 +1024,7 @@ class OrderedTrees_size(OrderedTrees):
 
             sage: from sage.combinat.ordered_tree import OrderedTrees_size
             sage: TestSuite(OrderedTrees_size(0)).run()
-            sage: for i in range(6): TestSuite(OrderedTrees_size(i)).run()
+            sage: for i in range(6): TestSuite(OrderedTrees_size(i)).run()              # needs sage.combinat
         """
         super().__init__(category=FiniteEnumeratedSets())
         self._size = size

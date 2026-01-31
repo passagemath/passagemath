@@ -106,7 +106,7 @@ class NonSymmetricMacdonaldPolynomials(CherednikOperatorsEigenvectors):
         sage: E = NonSymmetricMacdonaldPolynomials(["G",2,1])
         sage: L0 = E.keys()
         sage: omega = L0.fundamental_weights()
-        sage: E[omega[2] - omega[1]]
+        sage: E[omega[2] - omega[1]]                                                    # needs sage.combinat sage.groups
         -((q*q1^3*q2+q*q1^2*q2^2)/(q*q1^4-q2^4))*B[(0, 0, 0)] + B[(1, -1, 0)]
         - ((q1*q2^3+q2^4)/(q*q1^4-q2^4))*B[(1, 0, -1)]
 
@@ -1906,7 +1906,7 @@ class NonSymmetricMacdonaldPolynomials(CherednikOperatorsEigenvectors):
 
             sage: E = NonSymmetricMacdonaldPolynomials(['C',3,1], q, v, -1/v)
             sage: om = E.L0().fundamental_weights()
-            sage: E.symmetric_macdonald_polynomial(om[1]+om[2])
+            sage: E.symmetric_macdonald_polynomial(om[1]+om[2])                         # needs sage.libs.gap
             B[(-2, -1, 0)] + B[(-2, 1, 0)] + B[(-2, 0, -1)] + B[(-2, 0, 1)]
             + ((4*q^3*v^14+2*q^2*v^14-2*q^3*v^12+2*q^2*v^12-2*q^3*v^10+q*v^12-5*q^2*v^10-5*q*v^4+q^2*v^2-2*v^4+2*q*v^2-2*v^2+2*q+4)/(q^3*v^14-q^2*v^10-q*v^4+1))*B[(-1, 0, 0)]
             + B[(-1, -2, 0)] + ((2*q*v^4+v^4-q*v^2+v^2-q-2)/(q*v^4-1))*B[(-1, -1, -1)]
@@ -1930,7 +1930,7 @@ class NonSymmetricMacdonaldPolynomials(CherednikOperatorsEigenvectors):
 
             sage: E = NonSymmetricMacdonaldPolynomials(['G',2,1], q, v, -1/v)
             sage: om = E.L0().fundamental_weights()
-            sage: E.symmetric_macdonald_polynomial(2*om[1])
+            sage: E.symmetric_macdonald_polynomial(2*om[1])                             # needs sage.libs.gap
             ((3*q^6*v^22+3*q^5*v^22-3*q^6*v^20+q^4*v^22-4*q^5*v^20+q^4*v^18-q^5*v^16+q^3*v^18-2*q^4*v^16+q^5*v^14-q^3*v^16+q^4*v^14-4*q^4*v^12+q^2*v^14+q^5*v^10-8*q^3*v^12+4*q^4*v^10-4*q^2*v^12+8*q^3*v^10-q*v^12-q^4*v^8+4*q^2*v^10-q^2*v^8+q^3*v^6-q*v^8+2*q^2*v^6-q^3*v^4+q*v^6-q^2*v^4+4*q*v^2-q^2+3*v^2-3*q-3)/(q^6*v^22-q^5*v^20-q^4*v^12-q^3*v^12+q^3*v^10+q^2*v^10+q*v^2-1))*B[(0, 0, 0)]
             + ((q*v^2+v^2-q-1)/(q*v^2-1))*B[(-2, 1, 1)] + B[(-2, 2, 0)] + B[(-2, 0, 2)]
             - ((q*v^2+v^2-q-1)/(-q*v^2+1))*B[(-1, -1, 2)]

@@ -206,7 +206,7 @@ def pellytope(n: int):
 
     TESTS::
 
-        sage: polytopes.pellytope(0)
+        sage: polytopes.pellytope(0)                                                    # needs sage.geometry.polyhedron
         Traceback (most recent call last):
         ...
         ValueError: n must be positive

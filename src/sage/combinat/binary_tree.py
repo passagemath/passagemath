@@ -4195,7 +4195,7 @@ class BinaryTrees_size(BinaryTrees):
     TESTS::
 
         sage: from sage.combinat.binary_tree import BinaryTrees_size
-        sage: for i in range(6): TestSuite(BinaryTrees_size(i)).run()
+        sage: for i in range(6): TestSuite(BinaryTrees_size(i)).run()                   # needs sage.combinat
     """
 
     def __init__(self, size):
@@ -4442,7 +4442,7 @@ class FullBinaryTrees_size(BinaryTrees):
         TESTS::
 
             sage: from sage.combinat.binary_tree import FullBinaryTrees_size
-            sage: for i in range(1,6):
+            sage: for i in range(1,6):                                                  # needs sage.combinat
             ....:     TestSuite(BinaryTrees(2*i-1, full=True)).run()
         """
         super().__init__(facade=BinaryTrees_all(),
