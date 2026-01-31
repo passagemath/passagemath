@@ -15,6 +15,7 @@ AUTHORS:
 # ****************************************************************************
 from itertools import repeat
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 from sage.misc.misc_c import prod
 from sage.structure.parent import Parent
 from sage.structure.unique_representation import UniqueRepresentation
@@ -27,12 +28,13 @@ from sage.combinat.free_module import CombinatorialFreeModule
 from sage.combinat.ncsym.bases import NCSymBases, MultiplicativeNCSymBases, NCSymBasis_abstract
 from sage.combinat.set_partition import SetPartitions
 from sage.combinat.set_partition_ordered import OrderedSetPartitions
-from sage.combinat.posets.posets import Poset
 from sage.combinat.sf.sf import SymmetricFunctions
 from sage.matrix.matrix_space import MatrixSpace
 from sage.sets.set import Set
 from sage.rings.integer_ring import ZZ
 from functools import reduce
+
+lazy_import('sage.combinat.posets.posets', 'Poset')
 
 
 def matchings(A, B):
