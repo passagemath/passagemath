@@ -7818,19 +7818,20 @@ class LazyDirichletSeries(LazyModuleElement):
 
         # Special behavior for finite series
         if isinstance(coeff_stream, Stream_exact):
-            from sage.rings.cc import CC
             if not coeff_stream._constant:
                 try:
                     return sum(self[k] * ~(ZZ(k)**p)
                                for k in range(1, coeff_stream._degree))
                 except (ValueError, TypeError, ArithmeticError):
                     pass
-            elif p in CC:
-                from sage.functions.transcendental import zeta
-                C = coeff_stream._constant
-                ret = sum((self[k] - C) * ~(ZZ(k)**p)
-                          for k in range(1, coeff_stream._degree))
-                return ret + C * zeta(p)
+            else:
+                from sage.rings.cc import CC
+                if p in CC:
+                    from sage.functions.transcendental import zeta
+                    C = coeff_stream._constant
+                    ret = sum((self[k] - C) * ~(ZZ(k)**p)
+                              for k in range(1, coeff_stream._degree))
+                    return ret + C * zeta(p)
 
         R = PolynomialRing(ZZ, P.variable_name())
         p = R(p)
