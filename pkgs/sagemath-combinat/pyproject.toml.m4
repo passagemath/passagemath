@@ -44,10 +44,11 @@ symmetrica      = []
 # by feature
 graphs          = ["passagemath-graphs"]
 modules         = ["passagemath-modules"]
+species         = ["passagemath-gap"]
 findstat        = [SPKG_INSTALL_REQUIRES_requests]
 
 # everything
-standard        = ["passagemath-combinat[findstat,lrcalc,symmetrica,graphs,modules]"]
+standard        = ["passagemath-combinat[findstat,lrcalc,symmetrica,graphs,modules,species]"]
 
 [tool.setuptools]
 include-package-data = false
