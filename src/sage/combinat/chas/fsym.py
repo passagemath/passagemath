@@ -465,7 +465,7 @@ class FreeSymmetricFunctions(UniqueRepresentation, Parent):
 
     This embedding is a Hopf algebra morphism::
 
-        sage: all(F(G[t1] * G[t2]) == F(G[t1]) * F(G[t2])
+        sage: all(F(G[t1] * G[t2]) == F(G[t1]) * F(G[t2])                               # needs sage.graphs
         ....:     for t1 in StandardTableaux(2)
         ....:     for t2 in StandardTableaux(3))
         True
@@ -896,7 +896,7 @@ class FreeSymmetricFunctions_Dual(UniqueRepresentation, Parent):
 
             This mapping is a Hopf algebra morphism::
 
-                sage: all(TF(SF[p1] * SF[p2]) == TF(SF[p1]) * TF(SF[p2])
+                sage: all(TF(SF[p1] * SF[p2]) == TF(SF[p1]) * TF(SF[p2])                # needs sage.graphs
                 ....:     for p1 in Permutations(2)
                 ....:     for p2 in Permutations(3))
                 True

@@ -2537,7 +2537,7 @@ class WQSymBases(Category_realization_of_parent):
 
                 sage: NCSF = NonCommutativeSymmetricFunctions(QQ)
                 sage: R = NCSF.R()
-                sage: all(R[I].star_involution().to_fqsym().to_wqsym()
+                sage: all(R[I].star_involution().to_fqsym().to_wqsym()                  # needs sage.graphs
                 ....:     == R[I].to_fqsym().to_wqsym().star_involution()
                 ....:     for I in Compositions(4))
                 True
