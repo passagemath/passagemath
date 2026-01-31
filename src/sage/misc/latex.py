@@ -2174,7 +2174,11 @@ def repr_lincomb(symbols, coeffs):
         sage: latex(x)
         \text{\texttt{x}} + 2\text{\texttt{y}}
     """
-    from sage.rings.cc import CC
+    try:
+        from sage.rings.cc import CC as Numbers
+    except ImportError:
+        from sage.rings.real_double import RDF as Numbers
+
     terms = []
     for c, sym in zip(coeffs, symbols):
         if c == 0:
@@ -2190,7 +2194,7 @@ def repr_lincomb(symbols, coeffs):
         # this is a hack: I want to say that if the symbol happens to
         # be a number, then we should put a multiplication sign in
         try:
-            if sym in CC and coeff not in ("", "-"):
+            if sym in Numbers and coeff not in ("", "-"):
                 term = f"{coeff}\\cdot {b}"
             else:
                 term = f"{coeff}{b}"
