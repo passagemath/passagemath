@@ -5994,6 +5994,7 @@ class GenericGraph(GenericGraph_pyx):
 
         Check the behavior of parameter ``immutable``::
 
+            sage: # needs planarity
             sage: G = graphs.PetersenGraph()
             sage: G.is_planar(kuratowski=True)
             (False, Kuratowski subgraph of (Petersen graph): Graph on 9 vertices)
@@ -6983,7 +6984,7 @@ class GenericGraph(GenericGraph_pyx):
             sage: g = graphs.CycleGraph(3)
             sage: hasattr(g, '_embedding')
             False
-            sage: F = g.faces()
+            sage: F = g.faces()                                                         # needs planarity
             sage: hasattr(g, '_embedding')
             False
         """
