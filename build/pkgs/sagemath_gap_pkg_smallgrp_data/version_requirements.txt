@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-gap-pkg-smallgrp-data == 10.8.1.alpha3
+passagemath-gap-pkg-smallgrp-data == 10.8.1.alpha4
