@@ -1,6 +1,6 @@
-===========================================================================================================================================================================================================
- passagemath: Vectors, matrices, tensors, vector spaces, affine spaces, modules and algebras, additive groups, quadratic forms, root systems, homology, coding theory, matroids
-===========================================================================================================================================================================================================
+=======================================================
+ passagemath: Numerics with the GNU Scientific Library
+=======================================================
 
 `passagemath <https://github.com/passagemath/passagemath>`__ is open
 source mathematical software in Python, released under the GNU General
@@ -50,4 +50,31 @@ The supported Python versions in the passagemath 10.6.x series are 3.10.x-3.14.x
 About this pip-installable distribution package
 -----------------------------------------------
 
-This pip-installable distribution ``passagemath-gsl`` is a distribution of a part of the Sage Library.  It provides a subset of the modules of the Sage library ("sagelib", `passagemath-standard`).
+This pip-installable distribution ``passagemath-gsl`` is a distribution of a part of the Sage Library.  It provides a subset of the modules of the Sage library ("sagelib", ``passagemath-standard``) that depend on the GNU Scientific Library.
+
+
+What is included
+----------------
+
+* `Numerical Integration - Symbolic
+Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/integration.html>`__
+
+* `Discrete Wavelet Transform - Symbolic
+Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/transforms/dwt.html>`__
+
+* `Discrete Fourier Transforms - Symbolic
+Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/transforms/dft.html>`__
+
+* `Fast Fourier Transforms Using GSL - Symbolic
+Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/transforms/fft.html>`__
+
+* `Riemann Mapping - Symbolic
+Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/riemann.html>`__
+
+* `Solving ODE numerically by GSL - Symbolic
+Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/ode.html>`__
+
+* `Real Interpolation using GSL - Symbolic
+Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/interpolation.html>`__
+
+* `Probability Spaces and Distributions <https://passagemath.org/docs/latest/html/en/reference/probability/index.html>`_
