@@ -3038,6 +3038,7 @@ class MPolynomialIdeal_singular_repr(
         This also works for
         :class:`~sage.rings.polynomial.plural.NCPolynomialRing_plural`::
 
+            sage: # needs sage.graphs
             sage: M = matroids.CompleteGraphic(4)
             sage: OS = M.orlik_solomon_algebra(QQ)
             sage: A = OS.as_gca()

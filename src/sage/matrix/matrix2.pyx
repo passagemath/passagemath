@@ -8483,7 +8483,7 @@ cdef class Matrix(Matrix1):
             sage: a.echelon_form()
             Traceback (most recent call last):
             ...
-            NotImplementedError: Echelon form not implemented over 'Ring of integers modulo 9'.
+            NotImplementedError: ...form...Ring of integers modulo 9...
 
         Involving a sparse matrix::
 
@@ -9076,7 +9076,7 @@ cdef class Matrix(Matrix1):
         ``include_zero_rows`` is a bit silly, since the
         extended echelon form will never have any zero rows. ::
 
-            sage: # needs sage.libs.pari
+            sage: # needs sage.libs.linbox sage.libs.pari
             sage: A = matrix(ZZ, [[1,2], [5,0], [5,9]])
             sage: E = A.extended_echelon_form(algorithm='padic', include_zero_rows=False)
             sage: E
@@ -10647,7 +10647,7 @@ cdef class Matrix(Matrix1):
             True
             sage: A.change_ring(QQ).is_diagonalizable()                                 # needs sage.libs.pari
             False
-            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()                 # needs sage.libs.pari sage.rings.number_field
+            sage: A.change_ring(CyclotomicField(4)).is_diagonalizable()                 # needs sage.libs.linbox sage.libs.pari sage.rings.number_field
             True
         """
         return self.minpoly().is_squarefree()
@@ -16478,7 +16478,7 @@ cdef class Matrix(Matrix1):
 
         Check the euclidean norm for a sparse matrix (:issue:`40492`)::
 
-            sage: matrix(ZZ, [[1, 2], [3, 4]], sparse=True).norm()
+            sage: matrix(ZZ, [[1, 2], [3, 4]], sparse=True).norm()                      # needs scipy
             5.464985704219043
         """
         from sage.rings.real_double import RDF
