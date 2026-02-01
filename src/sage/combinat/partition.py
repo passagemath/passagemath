@@ -8880,7 +8880,7 @@ class RegularPartitions_n(RegularPartitions, Partitions_n):
         EXAMPLES::
 
             sage: P = Partitions(5, regular=3)
-            sage: TestSuite(P).run()
+            sage: TestSuite(P).run()                                                    # needs sage.libs.flint
 
         1-regular partitions::
 
@@ -9709,7 +9709,7 @@ class RestrictedPartitions_n(RestrictedPartitions_generic, Partitions_n):
         EXAMPLES::
 
             sage: P = Partitions(5, restricted=3)
-            sage: TestSuite(P).run()
+            sage: TestSuite(P).run()                                                    # needs sage.libs.flint
         """
         RestrictedPartitions_generic.__init__(self, ell)
         Partitions_n.__init__(self, n)
