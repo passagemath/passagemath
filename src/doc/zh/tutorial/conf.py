@@ -27,8 +27,8 @@ html_static_path = [] + html_common_static_path
 
 # Add small view/edit buttons.
 html_theme_options.update({
-    'source_view_link': os.path.join(source_repository, 'blob/develop/src/doc/zh/tutorial', '{filename}'),
-    'source_edit_link': os.path.join(source_repository, 'edit/develop/src/doc/zh/tutorial', '{filename}'),
+    'source_view_link': os.path.join(source_repository, 'blob/main/src/doc/zh/tutorial', '{filename}'),
+    'source_edit_link': os.path.join(source_repository, 'edit/main/src/doc/zh/tutorial', '{filename}'),
 })
 
 # General information about the project.
