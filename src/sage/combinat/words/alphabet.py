@@ -179,7 +179,7 @@ def build_alphabet(data=None, names=None, name=None):
 
         sage: build_alphabet(oo, 'x')
         Lazy family (x(i))_{i in Non negative integers}
-        sage: build_alphabet(Primes(), 'y')
+        sage: build_alphabet(Primes(), 'y')                                             # needs sage.libs.pari
         Lazy family (y(i))_{i in Set of all prime numbers: 2, 3, 5, 7, ...}
 
     TESTS::
