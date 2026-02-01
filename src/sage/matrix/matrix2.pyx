@@ -19898,6 +19898,7 @@ cdef class Matrix(Matrix1):
 
         Base ring coercion should be possible in both directions::
 
+            sage: # needs sage.rings.finite_rings
             sage: R2.<z> = GF(97^2)
             sage: M = matrix(R2, [[0, 45*z+67, 0], [0, 0, 20*z], [0, 0, 0]])
             sage: E.krylov_matrix(M)
@@ -20408,6 +20409,7 @@ cdef class Matrix(Matrix1):
 
         Base ring coercion should be possible in both directions::
 
+            sage: # needs sage.rings.finite_rings
             sage: R2.<z> = GF(97^2)
             sage: M = matrix(R2, [[0, 45*z+67, 0], [0, 0, 20*z], [0, 0, 0]])
             sage: E.krylov_basis(M)
@@ -20839,6 +20841,7 @@ cdef class Matrix(Matrix1):
 
         Base ring coercion should be possible in both directions::
 
+            sage: # needs sage.rings.finite_rings
             sage: R2.<z> = GF(97^2)
             sage: M = matrix(R2, [[0, 45*z+67, 0], [0, 0, 20*z], [0, 0, 0]])
             sage: E.krylov_kernel_basis(M)
@@ -21606,6 +21609,7 @@ def _matrix_power_symbolic(A, n):
 
     Check symbolic power of matrix with repeated eigenvalues (:issue:`40803`)::
 
+        sage: # needs sage.symbolic
         sage: var('k n')
         (k, n)
         sage: A = matrix([[k,1,0,1],[1,k,1,0],[0,1,k,1],[1,0,1,k]])^n
