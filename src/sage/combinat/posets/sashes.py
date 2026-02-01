@@ -138,7 +138,7 @@ def lattice_of_sashes(n: int) -> LatticePoset:
 
 
 @cached_function
-def pellytope_fan(n: int) -> Fan:
+def pellytope_fan(n: int):
     """
     Return the fan of the pellytope of dimension ``n``.
 
