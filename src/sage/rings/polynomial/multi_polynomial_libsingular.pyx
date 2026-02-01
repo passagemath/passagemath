@@ -4713,6 +4713,7 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
 
             While the generic implementation is fine::
 
+                sage: # needs scipy
                 sage: R.<x> = PolynomialRing(RDF)
                 sage: g = 5*x^3 + x - 7; m = x^4 - 12*x + 13; inverse_mod(g, m)  # abs tol 1e-14
                 -0.03196361250430942*x^3 - 0.03832697590106863*x^2 - 0.046305090023464945*x + 0.3464796877258926
