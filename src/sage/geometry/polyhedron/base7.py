@@ -672,6 +672,7 @@ class Polyhedron_base7(Polyhedron_base6):
         Check for :issue:`30772`::
 
             sage: # needs sage.rings.number_field
+            sage: x = polygen(ZZ, 'x')
             sage: R2.<sqrt2> = NumberField(x^2 - 2, embedding=AA(2).sqrt())
             sage: R3.<sqrt3> = NumberField(x^2 - 3, embedding=AA(3).sqrt())
             sage: F2 = Polyhedron([[sqrt2,0],[0,sqrt3]])
