@@ -446,7 +446,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: # needs sage.graphs
+                sage: # needs sage.combinat sage.groups sage.rings.number_field
                 sage: W = CoxeterGroup(['B', 3])
                 sage: W.is_commutative()
                 False

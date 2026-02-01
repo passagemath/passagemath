@@ -2456,7 +2456,7 @@ def continued_fraction_list(x, type='std', partial_convergents=False,
         sage: a = 1.575709393346379
         sage: type(a)                                                                   # needs sage.rings.real_mpfr
         <class 'sage.rings.real_mpfr.RealLiteral'>
-        sage: continued_fraction_list(a)
+        sage: continued_fraction_list(a)                                                # needs sage.rings.real_interval_field
         [1, 1, 1, 2, 1, 4, 18, 1, 5, 2, 25037802, 7, 1, 3, 1, 28, 1, 8, 2]
 
     Check that this works for arb elements (:issue:`20069`)::
@@ -2643,7 +2643,7 @@ def continued_fraction(x, value=None):
     Note the value returned for floating point number is the continued fraction
     associated to the rational number you obtain with a conversion::
 
-        sage: for _ in range(10):
+        sage: for _ in range(10):                                                       # needs sage.rings.real_interval_field
         ....:     x = RR.random_element()
         ....:     cff = continued_fraction(x)
         ....:     cfe = QQ(x).continued_fraction()
@@ -2654,7 +2654,7 @@ def continued_fraction(x, value=None):
     Fixed :issue:`18901`. For RealLiteral, continued_fraction calls
     continued_fraction_list::
 
-        sage: continued_fraction(1.575709393346379)
+        sage: continued_fraction(1.575709393346379)                                     # needs sage.rings.real_interval_field
         [1; 1, 1, 2, 1, 4, 18, 1, 5, 2, 25037802, 7, 1, 3, 1, 28, 1, 8, 2]
 
     Constants in symbolic subrings work like constants in ``SR``::

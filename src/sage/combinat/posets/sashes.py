@@ -138,7 +138,7 @@ def lattice_of_sashes(n: int) -> LatticePoset:
 
 
 @cached_function
-def pellytope_fan(n: int) -> Fan:
+def pellytope_fan(n: int):
     """
     Return the fan of the pellytope of dimension ``n``.
 
@@ -206,7 +206,7 @@ def pellytope(n: int):
 
     TESTS::
 
-        sage: polytopes.pellytope(0)
+        sage: polytopes.pellytope(0)                                                    # needs sage.geometry.polyhedron
         Traceback (most recent call last):
         ...
         ValueError: n must be positive

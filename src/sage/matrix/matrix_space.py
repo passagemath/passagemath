@@ -952,7 +952,7 @@ class MatrixSpace(UniqueRepresentation, Parent):
         r"""
         EXAMPLES::
 
-            sage: MatrixSpace(ZZ, 2, implementation='generic')._has_default_implementation()
+            sage: MatrixSpace(ZZ, 2, implementation='generic')._has_default_implementation()        # needs sage.libs.flint
             False
             sage: MatrixSpace(ZZ, 2, implementation='flint')._has_default_implementation()          # needs sage.libs.linbox
             True
@@ -1012,7 +1012,7 @@ class MatrixSpace(UniqueRepresentation, Parent):
             sage: MS._copy_zero
             False
             sage: MS = MatrixSpace(QQ,20,20)
-            sage: MS._copy_zero
+            sage: MS._copy_zero                                                                     # needs sage.libs.flint
             False
         """
         if self.__is_sparse:
@@ -1482,9 +1482,9 @@ class MatrixSpace(UniqueRepresentation, Parent):
             sage: MS
             Full MatrixSpace of 2 by 4 sparse matrices over Integer Ring
 
-            sage: MatrixSpace(ZZ, 2, implementation='flint')                            # needs sage.libs.linbox
+            sage: MatrixSpace(ZZ, 2, implementation='flint')                            # needs sage.libs.flint
             Full MatrixSpace of 2 by 2 dense matrices over Integer Ring
-            sage: MatrixSpace(ZZ, 2, implementation='generic')
+            sage: MatrixSpace(ZZ, 2, implementation='generic')                          # needs sage.libs.flint
             Full MatrixSpace of 2 by 2 dense matrices over Integer Ring (using Matrix_generic_dense)
         """
         if self.is_sparse():
@@ -2276,14 +2276,14 @@ class MatrixSpace(UniqueRepresentation, Parent):
             sage: MS.matrix([MS0([1,2,3,4]), MS0([5,6,7,8])])
             Traceback (most recent call last):
             ...
-            TypeError: unable to coerce <class 'sage.matrix.matrix_integer_dense.Matrix_integer_dense'> to an integer
+            TypeError: unable to coerce <class 'sage.matrix.matrix_...'> to an integer
 
         A mixed list of matrices and vectors is prohibited as well::
 
             sage: MS.matrix( [MS0([1,2,3,4])] + list(MS0([5,6,7,8])) )
             Traceback (most recent call last):
             ...
-            TypeError: unable to coerce <class 'sage.matrix.matrix_integer_dense.Matrix_integer_dense'> to an integer
+            TypeError: unable to coerce <class 'sage.matrix.matrix_...'> to an integer
 
         Check that :issue:`13302` is fixed::
 

@@ -132,7 +132,7 @@ import shlex
 
 from sage.arith.misc import GCD as gcd
 from sage.categories.monoids import Monoids
-from sage.features import PythonModule
+from sage.features import FeatureNotPresentError, PythonModule
 from sage.features.palp import PalpExecutable
 from sage.features.databases import DatabaseReflexivePolytopes
 from sage.geometry.cone import _ambient_space_point, integral_length

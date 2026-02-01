@@ -539,7 +539,7 @@ class AffineGroup(UniqueRepresentation, Group):
         TESTS::
 
             sage: G = AffineGroup(2, 3)
-            sage: len([g for g in G]) == G.cardinality()  # indirect doctest
+            sage: len([g for g in G]) == G.cardinality()  # indirect doctest            # needs sage.libs.gap
             True
         """
         for A in self._GL:

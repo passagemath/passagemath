@@ -7397,6 +7397,7 @@ class FinitePoset(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: P = posets.NoncrossingPartitions(SymmetricGroup(4))
             sage: P.apozeta_polynomial()
             8/3*q^3 - 10*q^2 + 37/3*q - 5

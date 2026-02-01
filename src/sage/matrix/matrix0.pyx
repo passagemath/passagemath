@@ -75,9 +75,9 @@ cdef class Matrix(sage.structure.element.Matrix):
         sage: a = M([1,2,3,  4,5,6]); a
         [1.0 2.0 3.0]
         [4.0 5.0 6.0]
-        sage: type(a)
+        sage: type(a)                                                                   # needs numpy
         <class 'sage.matrix.matrix_complex_double_dense.Matrix_complex_double_dense'>
-        sage: parent(a)
+        sage: parent(a)                                                                 # needs numpy
         Full MatrixSpace of 2 by 3 dense matrices over Complex Double Field
 
     ::
@@ -4873,7 +4873,7 @@ cdef class Matrix(sage.structure.element.Matrix):
             sage: m.rank()
             Traceback (most recent call last):
             ...
-            NotImplementedError: Echelon form not implemented over 'Ring of integers modulo 4'.
+            NotImplementedError: ...Ring of integers modulo 4...
 
         TESTS:
 
@@ -5870,7 +5870,7 @@ cdef class Matrix(sage.structure.element.Matrix):
         Matrices over the integers modulo a composite modulus::
 
             sage: m = matrix(Zmod(49), 2, [2,1,3,3])
-            sage: type(m)
+            sage: type(m)                                                               # needs sage.libs.linbox
             <class 'sage.matrix.matrix_modn_dense_float.Matrix_modn_dense_float'>
             sage: ~m
             [ 1 16]

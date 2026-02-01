@@ -5247,6 +5247,7 @@ class LazyPowerSeries(LazyCauchyProductSeries):
 
         We perform the composition with a lazy Laurent series::
 
+            sage: # needs sage.libs.singular
             sage: N.<w> = LazyLaurentSeriesRing(QQ)
             sage: f1 = 1 / (1 - w)
             sage: f2 = cot(w / (1 - w))

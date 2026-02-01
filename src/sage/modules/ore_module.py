@@ -1974,7 +1974,7 @@ class OreSubmodule(OreModule):
             sage: R.<x,y> = QQ[]
             sage: S.<X> = OrePolynomialRing(R, R.derivation())
             sage: M.<v,w> = S.quotient_module((X + x + y)^2)
-            sage: M.span((X + x + y)*v)
+            sage: M.span((X + x + y)*v)                                                 # needs sage.libs.singular
             Traceback (most recent call last):
             ...
             NotImplementedError: submodules and quotients are only implemented over PIDs
@@ -2529,7 +2529,7 @@ class OreQuotientModule(OreModule):
             sage: R.<x,y> = QQ[]
             sage: S.<X> = OrePolynomialRing(R, R.derivation(x))
             sage: M.<v,w> = S.quotient_module((X + x + y)^2)
-            sage: M.quo((X + x + y)*v)
+            sage: M.quo((X + x + y)*v)                                                  # needs sage.libs.singular
             Traceback (most recent call last):
             ...
             NotImplementedError: submodules and quotients are only implemented over PIDs

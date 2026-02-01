@@ -1483,9 +1483,9 @@ class GraphGenerators:
             ....:   return A
             sage: g = graphs.cospectral_graphs(5, matrix_function=DinverseA,            # needs sage.libs.pari sage.modules
             ....:                              graphs=lambda g: min(g.degree()) > 0)
-            sage: sorted(sorted(g.graph6_string() for g in glist) for glist in g)       # needs sage.modules
+            sage: sorted(sorted(g.graph6_string() for g in glist) for glist in g)       # needs sage.libs.pari sage.modules
             [['Dlg', 'Ds_']]
-            sage: (g[0][1].laplacian_matrix(normalized=True).charpoly()                 # needs sage.modules sage.symbolic
+            sage: (g[0][1].laplacian_matrix(normalized=True).charpoly()                 # needs sage.libs.pari sage.modules sage.symbolic
             ....:   == g[0][1].laplacian_matrix(normalized=True).charpoly())
             True
         """

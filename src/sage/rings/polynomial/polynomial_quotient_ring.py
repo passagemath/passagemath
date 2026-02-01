@@ -2451,24 +2451,30 @@ class PolynomialQuotientRing_field(PolynomialQuotientRing_domain, Field):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.finite_rings
             sage: K.<a> = GF(9)
             sage: R.<x> = PolynomialRing(K)
             sage: S = R.quotient(x^2 + a*x + 1)
             sage: S.absolute_degree()
             4
+
+            sage: # needs sage.rings.number_field
             sage: x = polygen(QQ, 'x')
             sage: K.<i> = NumberField(x^2 + 1)
             sage: R.<y> = PolynomialRing(K)
             sage: S = R.quotient(y^3 + y + 1)
             sage: S.absolute_degree()
             6
+
             sage: R.<x> = PolynomialRing(RR)
             sage: S = R.quotient(x^2 + 1)
             sage: S.absolute_degree()
             2
+
+            sage: # needs sage.rings.finite_rings
             sage: K = GF(4)
             sage: A.<x> = K[]
-            sage: L = K.extension(x+1)
+            sage: L = K.extension(x + 1)
             sage: L.absolute_degree()
             2
 

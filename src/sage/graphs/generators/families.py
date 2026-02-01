@@ -3109,7 +3109,7 @@ def SierpinskiGasketGraph(n):
         81
         sage: s4.degree_histogram()
         [0, 0, 3, 0, 39]
-        sage: s4.is_hamiltonian()
+        sage: s4.is_hamiltonian()                                                       # needs sage.numerical.mip
         True
 
     REFERENCES:
