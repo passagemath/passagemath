@@ -428,7 +428,7 @@ class Primes(Set_generic, UniqueRepresentation):
 
         TESTS::
 
-            sage: x in P
+            sage: x in P                                                                # needs sage.symbolic
             False
         """
         try:
