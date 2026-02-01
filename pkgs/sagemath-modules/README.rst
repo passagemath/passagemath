@@ -86,7 +86,7 @@ What is included
 
 * `Cryptography <https://passagemath.org/docs/latest/html/en/reference/cryptography/index.html>`_
 
-* `Probability Spaces and Distributions <https://passagemath.org/docs/latest/html/en/reference/probability/index.html>`_, `Statistics <https://passagemath.org/docs/latest/html/en/reference/stats/index.html>`_
+* `Statistics <https://passagemath.org/docs/latest/html/en/reference/stats/index.html>`_
 
 
 Examples

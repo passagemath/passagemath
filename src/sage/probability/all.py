@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-modules
+# sage_setup: distribution = sagemath-gsl
 
 from sage.probability.random_variable import (
     DiscreteRandomVariable,

@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-symbolics
-from sage.calculus.all__sagemath_modules import *
+from sage.calculus.all__sagemath_gsl import *
 
 from sage.calculus import desolvers
 from sage.calculus.calculus import maxima as maxima_calculus

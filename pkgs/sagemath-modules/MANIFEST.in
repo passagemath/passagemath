@@ -269,6 +269,12 @@ exclude sage/calculus/desolvers.*
 exclude sage/calculus/predefined.*
 exclude sage/calculus/tests.*
 exclude sage/calculus/var.*
+# exclude what is included in sagemath-gsl
+exclude sage/calculus/integration.p*
+exclude sage/calculus/interpolation.p*
+exclude sage/calculus/ode.p*
+exclude sage/calculus/riemann.p*
+prune sage/calculus/transforms
 
 # More from algebras with compile-time dependencies on sagemath-modules
 include sage/algebras/clifford_algebra*.p*
@@ -299,7 +305,6 @@ graft sage/crypto
 # We include other parts of sage.stats for simplicity,
 # although they cimports numpy directly or via sage.modules.vector_real_double_dense
 graft sage/stats
-graft sage/probability                                  # uses gsl
 
 # only needed by interpreter
 graft sage/libs/mpc

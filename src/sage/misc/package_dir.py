@@ -555,6 +555,7 @@ if __name__ == '__main__':
                          "sagemath-plot",
                          "sagemath-combinat",
                          "sagemath-modules",
+                         "sagemath-gsl",
                          "sagemath-m4ri-m4rie",
                          "sagemath-categories",
                          "sagemath-repl",

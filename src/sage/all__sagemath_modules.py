@@ -51,7 +51,6 @@ from sage.quadratic_forms.all__sagemath_modules import *
 from sage.coding.all import *
 from sage.crypto.all import *
 from sage.stats.all import *
-from sage.probability.all import *
 from sage.calculus.all__sagemath_modules import *
 from sage.numerical.all__sagemath_modules import *
 
