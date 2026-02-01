@@ -14,6 +14,8 @@ include sage/calculus/ode.p*
 include sage/calculus/riemann.p*
 graft sage/calculus/transforms
 
+graft sage/probability
+
 global-exclude all__sagemath_*.*
 global-include all__sagemath_gsl.py
 
