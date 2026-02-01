@@ -124,7 +124,8 @@ Sage knows about monoids::
 
 and sure enough, binary powering is defined there::
 
-    sage: m._pow_int.__module__                                                         # needs sage.modules
+    sage: # needs sage.modules, known bug: windows (crash - https://github.com/passagemath/passagemath/issues/1892#issuecomment-3673607183)
+    sage: m._pow_int.__module__
     'sage.categories.monoids'
 
 That's our bookshelf! And it's used in many places::
