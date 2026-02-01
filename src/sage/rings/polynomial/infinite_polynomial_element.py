@@ -1552,6 +1552,7 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: X.<x> = InfinitePolynomialRing(ZZ, implementation="sparse")
             sage: x[2] // x[2]  # indirect doctest
             1
@@ -1561,7 +1562,7 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
         TESTS::
 
             sage: X.<x> = InfinitePolynomialRing(QQbar, implementation='sparse')
-            sage: (x[2]^2 - 1) // (x[2] + 1)
+            sage: (x[2]^2 - 1) // (x[2] + 1)                                            # needs sage.libs.singular
             x_2 - 1
         """
         try:
@@ -1739,6 +1740,7 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x> = InfinitePolynomialRing(QQ, implementation="sparse")
             sage: p = 1 + 3*x[0]*x[1] + 2*x[2]
             sage: q = x[0] - 1
@@ -1747,6 +1749,7 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.libs.singular
             sage: R.<x> = InfinitePolynomialRing(QQbar, implementation="sparse")
             sage: p = 1 + 3*x[0]*x[1] + 2*x[2]
             sage: q = x[0] - 1
@@ -2032,6 +2035,7 @@ class InfinitePolynomial_dense(InfinitePolynomial):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: X.<x> = InfinitePolynomialRing(ZZ)
             sage: x[2] // x[2]  # indirect doctest
             1
@@ -2041,7 +2045,7 @@ class InfinitePolynomial_dense(InfinitePolynomial):
         TESTS::
 
             sage: X.<x> = InfinitePolynomialRing(QQbar)
-            sage: (x[2]^2 - 1) // (x[2] + 1)
+            sage: (x[2]^2 - 1) // (x[2] + 1)                                            # needs sage.libs.singular
             x_2 - 1
         """
         P = self.parent()

@@ -3215,6 +3215,7 @@ def random_unitary_matrix(parent):
     Double-precision real/complex matrices can be constructed as
     well::
 
+        sage: # needs scipy
         sage: n = ZZ.random_element(10)
         sage: MS = MatrixSpace(RDF, n)
         sage: U = random_unitary_matrix(MS)

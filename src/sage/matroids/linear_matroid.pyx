@@ -3012,23 +3012,23 @@ cdef class LinearMatroid(BasisExchangeMatroid):
             [e2^2, e1^4, e0^3, e0^4 + 4*e0^3*e1 + 6*e0^2*e1^2 + 4*e0*e1^3 + e1^4]
             sage: Z0.defining_ideal().gens()[-1].factor()                               # needs sage.libs.pari
             (e0 + e1)^4
-            sage: Z0.defining_ideal().hilbert_series()                                  # needs sage.libs.flint
+            sage: Z0.defining_ideal().hilbert_series()                                  # needs sage.libs.flint sage.libs.singular
             t^5 + 4*t^4 + 6*t^3 + 5*t^2 + 3*t + 1
             sage: R.<t> = PolynomialRing(ZZ)
             sage: t**(len(M.groundset())-M.rank()) * M.tutte_polynomial(1+t, ~t)
             t^5 + 4*t^4 + 6*t^3 + 5*t^2 + 3*t + 1
 
             sage: Z1 = M.zonotopal_algebra(-1)
-            sage: Z1.defining_ideal().hilbert_series()                                  # needs sage.libs.flint
+            sage: Z1.defining_ideal().hilbert_series()                                  # needs sage.libs.flint sage.libs.singular
             2*t^2 + 2*t + 1
             sage: t**(len(M.groundset())-M.rank()) * M.tutte_polynomial(1, ~t)
             2*t^2 + 2*t + 1
 
             sage: Z2 = M.zonotopal_algebra(-2)
-            sage: Z2.defining_ideal().hilbert_series()                                  # needs sage.libs.flint
+            sage: Z2.defining_ideal().hilbert_series()                                  # needs sage.libs.flint sage.libs.singular
             0
             sage: Z2p = M.internal_zonotopal_algebra()
-            sage: Z2p.defining_ideal().hilbert_series()                                 # needs sage.libs.flint
+            sage: Z2p.defining_ideal().hilbert_series()                                 # needs sage.libs.flint sage.libs.singular
             0
             sage: t**(len(M.groundset())-M.rank()) * M.tutte_polynomial(0, ~t)
             0
@@ -3043,12 +3043,12 @@ cdef class LinearMatroid(BasisExchangeMatroid):
             [ 0  0  0 -1 -1 -1]
             sage: M = Matroid(mat)
             sage: Z2 = M.zonotopal_algebra(-2)
-            sage: Z2.defining_ideal().hilbert_series()                                  # needs sage.libs.flint
+            sage: Z2.defining_ideal().hilbert_series()                                  # needs sage.libs.flint sage.libs.singular
             t + 1
             sage: Z2.defining_ideal().groebner_basis()                                  # needs sage.libs.singular
             [e3^2, e0, e1, e2]
             sage: Z2p = M.internal_zonotopal_algebra()
-            sage: Z2p.defining_ideal().hilbert_series()                                 # needs sage.libs.flint
+            sage: Z2p.defining_ideal().hilbert_series()                                 # needs sage.libs.flint sage.libs.singular
             t + 1
             sage: t**(len(M.groundset())-M.rank()) * M.tutte_polynomial(0, ~t)
             t + 1
@@ -3080,7 +3080,7 @@ cdef class LinearMatroid(BasisExchangeMatroid):
         in [AP2010]_::
 
             sage: S.<x1,x2> = PolynomialRing(QQ)
-            sage: [S.ideal([x1^(k+2), x2^(k+2)]                                         # needs sage.libs.flint
+            sage: [S.ideal([x1^(k+2), x2^(k+2)]                                         # needs sage.libs.flint sage.libs.singular
             ....:          + [(x1+a*x2)^(k+3) for a in range(1,k+5)]
             ....:         ).hilbert_series()
             ....:  for k in range(-2, 4)]
@@ -3091,9 +3091,9 @@ cdef class LinearMatroid(BasisExchangeMatroid):
              3*t^4 + 4*t^3 + 3*t^2 + 2*t + 1,
              4*t^5 + 5*t^4 + 4*t^3 + 3*t^2 + 2*t + 1]
 
-            sage: M.zonotopal_algebra(-2).defining_ideal().hilbert_series()             # needs sage.libs.flint
+            sage: M.zonotopal_algebra(-2).defining_ideal().hilbert_series()             # needs sage.libs.flint sage.libs.singular
             0
-            sage: M.zonotopal_algebra(-1).defining_ideal().hilbert_series()             # needs sage.libs.flint
+            sage: M.zonotopal_algebra(-1).defining_ideal().hilbert_series()             # needs sage.libs.flint sage.libs.singular
             1
 
         REFERENCES:
@@ -3152,9 +3152,9 @@ cdef class LinearMatroid(BasisExchangeMatroid):
             [ 0  0  1  0 -1 -1]
             sage: M = Matroid(mat)
             sage: Z = M.central_zonotopal_algebra()
-            sage: Z.defining_ideal().hilbert_series()                                   # needs sage.libs.flint
+            sage: Z.defining_ideal().hilbert_series()                                   # needs sage.libs.flint sage.libs.singular
             6*t^3 + 6*t^2 + 3*t + 1
-            sage: M.zonotopal_algebra(-1).defining_ideal().hilbert_series()             # needs sage.libs.flint
+            sage: M.zonotopal_algebra(-1).defining_ideal().hilbert_series()             # needs sage.libs.flint sage.libs.singular
             6*t^3 + 6*t^2 + 3*t + 1
         """
         if base_ring is None:
@@ -3208,9 +3208,9 @@ cdef class LinearMatroid(BasisExchangeMatroid):
             [ 0  0  1  0  1  1]
             sage: M = Matroid(mat)
             sage: Z = M.internal_zonotopal_algebra()
-            sage: Z.defining_ideal().hilbert_series()                                   # needs sage.libs.flint
+            sage: Z.defining_ideal().hilbert_series()                                   # needs sage.libs.flint sage.libs.singular
             4*t^2 + 3*t + 1
-            sage: M.zonotopal_algebra(-2).defining_ideal().hilbert_series()             # needs sage.libs.flint
+            sage: M.zonotopal_algebra(-2).defining_ideal().hilbert_series()             # needs sage.libs.flint sage.libs.singular
             4*t^2 + 3*t + 1
         """
         if base_ring is None:

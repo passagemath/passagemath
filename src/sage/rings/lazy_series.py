@@ -5275,6 +5275,7 @@ class LazyPowerSeries(LazyCauchyProductSeries):
             sage: fog - fg
             O(1/(8^s))
 
+            sage: # needs sage.libs.singular
             sage: f = 1 / (1 - 2*a)
             sage: f(g)                                                                  # needs sage.symbolic
             1 + 2/2^s + 2/3^s + 6/4^s + 2/5^s + 10/6^s + 2/7^s + O(1/(8^s))
