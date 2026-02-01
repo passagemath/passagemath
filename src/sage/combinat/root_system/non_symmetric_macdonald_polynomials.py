@@ -226,8 +226,8 @@ class NonSymmetricMacdonaldPolynomials(CherednikOperatorsEigenvectors):
         sage: Y = T.Y(); Y
         Lazy family (...)_{i in Coroot lattice of the Root system of type ['C', 2, 1]}
         sage: alphacheck = Y.keys().simple_roots()
-        sage: Y1 = Y[alphacheck[1]]
-        sage: Y1(x)
+        sage: Y1 = Y[alphacheck[1]]                                                     # needs sage.combinat sage.groups
+        sage: Y1(x)                                                                     # needs sage.combinat sage.groups
         ((q1^2+2*q1*q2+q2^2)/(-q1*q2))*B[e[0] + e['deltacheck']]
         - ((q1^2+2*q1*q2+q2^2)/(-q2^2))*B[-e[1] + e['deltacheck']]
         - ((q1^2+q1*q2)/(-q2^2))*B[2*e[0] - e[1] - e['delta'] + e['deltacheck']]
@@ -255,7 +255,7 @@ class NonSymmetricMacdonaldPolynomials(CherednikOperatorsEigenvectors):
         sage: Lcheck = L.root_system.coweight_lattice()
         sage: w = Lcheck.reduced_word_of_translation(Lcheck(alphacheck[1])); w
         [0, 2, 1, 0, 2, 1]
-        sage: Lcheck.signs_of_alcovewalk(w)
+        sage: Lcheck.signs_of_alcovewalk(w)                                             # needs sage.combinat sage.groups
         [1, -1, 1, -1, 1, 1]
 
     .. RUBRIC:: Level zero representation of the affine Hecke algebra
