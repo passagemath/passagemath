@@ -27,6 +27,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_ecl
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_flint
+    SPKG_INSTALL_REQUIRES_sagemath_gsl
     SPKG_INSTALL_REQUIRES_sagemath_maxima
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_sagemath_ntl
