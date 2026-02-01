@@ -179,6 +179,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_repl				\
 	sagemath_categories			\
 	sagemath_modules			\
+	sagemath_gsl				\
 	sagemath_plot				\
 	sagemath_polyhedra			\
 	sagemath_graphs				\
