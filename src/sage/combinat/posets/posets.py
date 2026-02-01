@@ -4466,8 +4466,9 @@ class FinitePoset(UniqueRepresentation, Parent):
 
         TESTS::
 
+            sage: # needs sage.libs.flint
             sage: P = posets.PentagonPoset()
-            sage: P.coxeter_smith_form(algorithm='sage')                                 # needs sage.libs.flint
+            sage: P.coxeter_smith_form(algorithm='sage')
             [1, 1, 1, 1, x^5 + x^4 + x + 1]
             sage: P.coxeter_smith_form(algorithm='gap')                                  # needs sage.libs.gap
             [1, 1, 1, 1, x^5 + x^4 + x + 1]
@@ -5329,20 +5330,20 @@ class FinitePoset(UniqueRepresentation, Parent):
 
             sage: P = posets.PentagonPoset()
             sage: Q = P*P
-            sage: Q.factor()
+            sage: Q.factor()                                                            # needs sage.libs.pari
             [Finite poset containing 5 elements,
              Finite poset containing 5 elements]
 
             sage: P1 = posets.ChainPoset(3)
             sage: P2 = posets.ChainPoset(7)
-            sage: P1.factor()
+            sage: P1.factor()                                                           # needs sage.libs.pari
             [Finite lattice containing 3 elements]
-            sage: (P1 * P2).factor()
+            sage: (P1 * P2).factor()                                                    # needs sage.libs.pari
             [Finite poset containing 7 elements,
              Finite poset containing 3 elements]
 
             sage: P = posets.TamariLattice(4)
-            sage: (P*P).factor()
+            sage: (P*P).factor()                                                        # needs sage.libs.pari
             [Finite poset containing 14 elements,
             Finite poset containing 14 elements]
 
@@ -5357,7 +5358,7 @@ class FinitePoset(UniqueRepresentation, Parent):
             NotImplementedError: the poset is empty or not connected
 
             sage: P = posets.Crown(2)
-            sage: P.factor()
+            sage: P.factor()                                                            # needs sage.libs.pari
             [Finite poset containing 4 elements]
 
             sage: Poset().factor()
@@ -5365,11 +5366,11 @@ class FinitePoset(UniqueRepresentation, Parent):
             ...
             NotImplementedError: the poset is empty or not connected
 
-            sage: factor(posets.BooleanLattice(2))
+            sage: factor(posets.BooleanLattice(2))                                      # needs sage.libs.pari
             [Finite poset containing 2 elements,
             Finite poset containing 2 elements]
 
-            sage: factor(Poset(DiGraph([[0,1],[1,2],[0,3]])))
+            sage: factor(Poset(DiGraph([[0,1],[1,2],[0,3]])))                           # needs sage.libs.pari
             [Finite poset containing 4 elements]
 
         REFERENCES:
@@ -7405,7 +7406,7 @@ class FinitePoset(UniqueRepresentation, Parent):
             sage: P = Poset({"a": "bc", "b": "d", "c": "de"})
             sage: P.apozeta_polynomial()
             3/2*q^2 - 5/2*q + 1
-            sage: P.zeta_polynomial()
+            sage: P.zeta_polynomial()                                                   # needs sage.libs.flint
             3/2*q^2 - 1/2*q
 
         TESTS:
@@ -7884,7 +7885,7 @@ class FinitePoset(UniqueRepresentation, Parent):
             x^2 + 3*x*y + y^2
 
             sage: P = posets.BooleanLattice(4)
-            sage: P.degree_polynomial().factor()
+            sage: P.degree_polynomial().factor()                                        # needs sage.libs.pari
             (x + y)^4
 
         .. SEEALSO::
