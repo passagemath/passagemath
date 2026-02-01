@@ -8189,7 +8189,7 @@ cdef class Matroid(SageObject):
         The augmented Chow ring can also be constructed with the
         Feitchner-Yuzvinsky and atom-free presentation::
 
-            sage: # needs sage.graphs
+            sage: # needs sage.graphs sage.groups
             sage: M = matroids.Wheel(3)
             sage: ch = M.chow_ring(QQ, augmented=True, presentation='fy'); ch
             Augmented Chow ring of Wheel(3): Regular matroid of rank 3 on
