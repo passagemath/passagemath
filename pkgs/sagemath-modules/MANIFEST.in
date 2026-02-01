@@ -269,6 +269,11 @@ exclude sage/calculus/desolvers.*
 exclude sage/calculus/predefined.*
 exclude sage/calculus/tests.*
 exclude sage/calculus/var.*
+# exclude what is included in sagemath-gsl
+exclude sage/calculus/integration.p*
+exclude sage/calculus/interpolation.p*
+exclude sage/calculus/ode.p*
+prune sage/calculus/transforms
 
 # More from algebras with compile-time dependencies on sagemath-modules
 include sage/algebras/clifford_algebra*.p*
