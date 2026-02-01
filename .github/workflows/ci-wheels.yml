@@ -71,6 +71,7 @@ jobs:
                             "sagemath-glucose",
                             "sagemath-graphs",
                             "sagemath-groups",
+                            "sagemath-gsl",
                             "sagemath-homfly",
                             "sagemath-kenzo",
                             "sagemath-kissat",
