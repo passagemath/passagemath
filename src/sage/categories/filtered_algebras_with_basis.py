@@ -106,7 +106,7 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
             EXAMPLES::
 
                 sage: A = AlgebrasWithBasis(ZZ).Filtered().example()
-                sage: A.graded_algebra()                                                # needs sage.combinat
+                sage: A.graded_algebra()                                                # needs sage.combinat sage.modules
                 Graded Algebra of An example of a filtered algebra with basis:
                  the universal enveloping algebra of
                  Lie algebra of RR^3 with cross product over Integer Ring
@@ -294,7 +294,7 @@ class FilteredAlgebrasWithBasis(FilteredModulesCategory):
 
             We now compute `\operatorname{gr} f` ::
 
-                sage: # needs sage.combinat
+                sage: # needs sage.combinat sage.modules
                 sage: grA = A.graded_algebra(); grA
                 Graded Algebra of An example of a filtered algebra with
                  basis: the universal enveloping algebra of Lie algebra

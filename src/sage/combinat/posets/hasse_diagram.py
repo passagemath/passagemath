@@ -2456,7 +2456,7 @@ class HasseDiagram(DiGraph):
 
         EXAMPLES::
 
-            sage: # needs sage.combinat
+            sage: # needs sage.combinat sage.modules
             sage: P = posets.BubblePoset(3,3)
             sage: H = P._hasse_diagram
             sage: list(H.linear_intervals_count())
