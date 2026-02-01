@@ -3045,7 +3045,7 @@ cdef class LinearMatroid(BasisExchangeMatroid):
             sage: Z2 = M.zonotopal_algebra(-2)
             sage: Z2.defining_ideal().hilbert_series()                                  # needs sage.libs.flint
             t + 1
-            sage: Z2.defining_ideal().groebner_basis()
+            sage: Z2.defining_ideal().groebner_basis()                                  # needs sage.libs.singular
             [e3^2, e0, e1, e2]
             sage: Z2p = M.internal_zonotopal_algebra()
             sage: Z2p.defining_ideal().hilbert_series()                                 # needs sage.libs.flint

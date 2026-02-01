@@ -8160,7 +8160,7 @@ cdef class Matroid(SageObject):
 
         We construct a more interesting example using the Fano matroid::
 
-            sage: # needs sage.graphs
+            sage: # needs sage.graphs sage.groups
             sage: M = matroids.catalog.Fano()
             sage: A = M.chow_ring(QQ, False, 'fy'); A
             Chow ring of Fano: Binary matroid of rank 3 on 7 elements,
