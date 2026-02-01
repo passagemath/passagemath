@@ -273,6 +273,7 @@ exclude sage/calculus/var.*
 exclude sage/calculus/integration.p*
 exclude sage/calculus/interpolation.p*
 exclude sage/calculus/ode.p*
+exclude sage/calculus/riemann.p*
 prune sage/calculus/transforms
 
 # More from algebras with compile-time dependencies on sagemath-modules

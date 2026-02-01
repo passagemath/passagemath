@@ -11,6 +11,7 @@ include requirements.txt
 include sage/calculus/integration.p*
 include sage/calculus/interpolation.p*
 include sage/calculus/ode.p*
+include sage/calculus/riemann.p*
 graft sage/calculus/transforms
 
 global-exclude all__sagemath_*.*
