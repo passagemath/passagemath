@@ -56,25 +56,18 @@ This pip-installable distribution ``passagemath-gsl`` is a distribution of a par
 What is included
 ----------------
 
-* `Numerical Integration - Symbolic
-Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/integration.html>`__
+* `Numerical Integration - Symbolic Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/integration.html>`__
 
-* `Discrete Wavelet Transform - Symbolic
-Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/transforms/dwt.html>`__
+* `Discrete Wavelet Transform - Symbolic Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/transforms/dwt.html>`__
 
-* `Discrete Fourier Transforms - Symbolic
-Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/transforms/dft.html>`__
+* `Discrete Fourier Transforms - Symbolic Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/transforms/dft.html>`__
 
-* `Fast Fourier Transforms Using GSL - Symbolic
-Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/transforms/fft.html>`__
+* `Fast Fourier Transforms Using GSL - Symbolic Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/transforms/fft.html>`__
 
-* `Riemann Mapping - Symbolic
-Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/riemann.html>`__
+* `Riemann Mapping - Symbolic Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/riemann.html>`__
 
-* `Solving ODE numerically by GSL - Symbolic
-Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/ode.html>`__
+* `Solving ODE numerically by GSL - Symbolic Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/ode.html>`__
 
-* `Real Interpolation using GSL - Symbolic
-Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/interpolation.html>`__
+* `Real Interpolation using GSL - Symbolic Calculus <https://passagemath.org/docs/latest/html/en/reference/calculus/sage/calculus/interpolation.html>`__
 
 * `Probability Spaces and Distributions <https://passagemath.org/docs/latest/html/en/reference/probability/index.html>`_
