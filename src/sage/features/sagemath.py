@@ -533,6 +533,37 @@ class sage__libs__giac(JoinFeature):
                              spkg='sagemath_giac', type='optional')
 
 
+class sage__libs__gsl(JoinFeature):
+    r"""
+    A :class:`sage.features.Feature` describing the presence of :mod:`sage.libs.gsl`.
+
+    In addition to the modularization purposes that this tag serves,
+    it also provides attribution to the upstream project.
+
+    TESTS::
+
+        sage: from sage.features.sagemath import sage__libs__gsl
+        sage: sage__libs__gsl().is_present()                                         # needs sage.libs.gsl
+        FeatureTestResult('sage.libs.gsl', True)
+    """
+    def __init__(self):
+        r"""
+        TESTS::
+
+            sage: from sage.features.sagemath import sage__libs__gsl
+            sage: isinstance(sage__libs__gsl(), sage__libs__gsl)
+            True
+        """
+        JoinFeature.__init__(self, 'sage.libs.gsl',
+                             [PythonModule('sage.calculus.integration'),
+                              PythonModule('sage.calculus.interpolation'),
+                              PythonModule('sage.calculus.ode'),
+                              PythonModule('sage.calculus.riemann'),
+                              PythonModule('sage.calculus.transforms'),
+                              PythonModule('sage.probability')],
+                             spkg='sagemath_gsl', type='standard')
+
+
 class sage__libs__homfly(JoinFeature):
     r"""
     A :class:`sage.features.Feature` describing the presence of :mod:`sage.libs.homfly`.
@@ -1339,6 +1370,7 @@ def all_features():
             sage__libs__flint(),
             sage__libs__gap(),
             sage__libs__giac(),
+            sage__libs__gsl(),
             sage__libs__homfly(),
             sage__libs__iml(),
             sage__libs__linbox(),

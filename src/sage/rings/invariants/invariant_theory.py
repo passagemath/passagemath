@@ -593,9 +593,9 @@ class AlgebraicForm(FormsBase):
             sage: p = a0*x1^4 + a1*x1^3*x0 + a2*x1^2*x0^2 + a3*x1*x0^3 + a4*x0^4
             sage: quartic = invariant_theory.binary_quartic(p, x0, x1)
 
+            sage: # needs sage.libs.gsl
             sage: quartic._check_covariant('EisensteinE', invariant=True)
             sage: quartic._check_covariant('h_covariant')
-
             sage: quartic._check_covariant('h_covariant', invariant=True)  # not tested, known bug (see :issue:`32118`)
             Traceback (most recent call last):
             ...
@@ -970,7 +970,7 @@ class QuadraticForm(AlgebraicForm):
             sage: form = QuadraticForm(2, 2, x^2 + 2*y^2 + 3*x*y)
             sage: form
             Binary quadratic with coefficients (1, 2, 3)
-            sage: form._check_covariant('discriminant', invariant=True)
+            sage: form._check_covariant('discriminant', invariant=True)                 # needs sage.libs.gsl
             sage: QuadraticForm(3, 2, x^2 + y^2)
             Ternary quadratic with coefficients (1, 1, 0, 0, 0, 0)
         """
@@ -1311,6 +1311,7 @@ class BinaryQuartic(AlgebraicForm):
 
     TESTS::
 
+        sage: # needs sage.libs.gsl
         sage: R.<a0, a1, a2, a3, a4, x0, x1> = QQ[]
         sage: p = a0*x1^4 + a1*x1^3*x0 + a2*x1^2*x0^2 + a3*x1*x0^3 + a4*x0^4
         sage: quartic = invariant_theory.binary_quartic(p, x0, x1)
@@ -1603,6 +1604,7 @@ class BinaryQuintic(AlgebraicForm):
 
     TESTS::
 
+        sage: # needs sage.libs.gsl
         sage: R.<a0, a1, a2, a3, a4, a5, x0, x1> = QQ[]
         sage: p = a0*x1^5 + a1*x1^4*x0 + a2*x1^3*x0^2 + a3*x1^2*x0^3 + a4*x1*x0^4 + a5*x0^5
         sage: quintic = invariant_theory.binary_quintic(p, x0, x1)
@@ -2679,6 +2681,7 @@ class TernaryCubic(AlgebraicForm):
 
         TESTS::
 
+            sage: # needs sage.libs.gsl
             sage: R.<x,y,z> = QQ[]
             sage: p = 2837*x^3 + 1363*x^2*y + 6709*x^2*z + \
             ....:   5147*x*y^2 + 2769*x*y*z + 912*x*z^2 + 4976*y^3 + \
@@ -3243,6 +3246,7 @@ class SeveralAlgebraicForms(FormsBase):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.gsl
             sage: R.<x,y,z,w> = QQ[]
             sage: q = invariant_theory.quaternary_biquadratic(x^2+y^2+z^2+w^2, x*y+y*z+z*w+x*w)
             sage: q._check_covariant('Delta_invariant', invariant=True)
@@ -3349,6 +3353,7 @@ class TwoTernaryQuadratics(TwoAlgebraicForms):
         quadratic with coefficients (0, 0, 0, 1, 1, 1)
         sage: TestSuite(inv).run()
 
+        sage: # needs sage.libs.gsl
         sage: q1 = 73*x^2 + 96*x*y - 11*y^2 + 4*x + 63*y + 57
         sage: q2 = 61*x^2 - 100*x*y - 72*y^2 - 81*x + 39*y - 7
         sage: biquadratic = invariant_theory.ternary_biquadratic(q1, q2, [x,y]).homogenized()
@@ -3562,6 +3567,7 @@ class TwoQuaternaryQuadratics(TwoAlgebraicForms):
         quaternary quadratic with coefficients (0, 0, 1, 1, 0, 0, 0, 0, 0, 0)
         sage: TestSuite(inv).run()
 
+        sage: # needs sage.libs.gsl
         sage: q1 = 73*x^2 + 96*x*y - 11*y^2 - 74*x*z - 10*y*z + 66*z^2 + 4*x + 63*y - 11*z + 57
         sage: q2 = 61*x^2 - 100*x*y - 72*y^2 - 38*x*z + 85*y*z + 95*z^2 - 81*x + 39*y + 23*z - 7
         sage: biquadratic = invariant_theory.quaternary_biquadratic(q1, q2, [x,y,z]).homogenized()
