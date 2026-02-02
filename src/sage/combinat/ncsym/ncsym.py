@@ -115,6 +115,7 @@ def nesting(la, nu):
 
     ::
 
+        sage: # needs sage.libs.flint
         sage: lst = list(SetPartitions(4))
         sage: d = {}
         sage: for i, nu in enumerate(lst):
@@ -234,6 +235,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
     The basis is indexed by set partitions, so we create a few elements and
     convert them between these bases::
 
+        sage: # needs sage.graphs
         sage: elt = m(SetPartition([[1,3],[2]])) - 2*m(SetPartition([[1],[2]])); elt
         -2*m{{1}, {2}} + m{{1, 3}, {2}}
         sage: e(elt)
@@ -246,6 +248,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
         sage: m(p(elt))
         -2*m{{1}, {2}} + m{{1, 3}, {2}}
 
+        sage: # needs sage.graphs
         sage: elt = p(SetPartition([[1,3],[2]])) - 4*p(SetPartition([[1],[2]])) + 2; elt
         2*p{} - 4*p{{1}, {2}} + p{{1, 3}, {2}}
         sage: e(elt)
@@ -260,6 +263,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
     There is also a shorthand for creating elements. We note that we must use
     ``p[[]]`` to create the empty set partition due to python's syntax. ::
 
+        sage: # needs sage.graphs
         sage: eltm = m[[1,3],[2]] - 3*m[[1],[2]]; eltm
         -3*m{{1}, {2}} + m{{1, 3}, {2}}
         sage: elte = e[[1,3],[2]]; elte
@@ -273,6 +277,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
     letting the variables commute.  This projection map preserves the product
     and coproduct structure.  We check that Theorem 2.1 of [RS06]_ holds::
 
+        sage: # needs sage.graphs
         sage: Sym = SymmetricFunctions(QQ)
         sage: Sm = Sym.m()
         sage: Se = Sym.e()
@@ -370,7 +375,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
-                sage: TestSuite(NCSym.m()).run()
+                sage: TestSuite(NCSym.m()).run()                                        # needs sage.graphs
             """
             R = NCSym.base_ring()
             category = GradedHopfAlgebras(R).Cocommutative()
@@ -395,7 +400,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: m = NCSym.m()
-                sage: all(m(m._m_to_p_on_basis(A)) == m[A] for i in range(5)
+                sage: all(m(m._m_to_p_on_basis(A)) == m[A] for i in range(5)            # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -456,6 +461,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: m = SymmetricFunctionsNonCommutingVariables(QQ).m()
                 sage: mon = SymmetricFunctions(QQ).m()
                 sage: elt = m.from_symmetric_function(mon[2,1,1]); elt
@@ -482,7 +488,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
             Check that `\chi \circ \widetilde{\chi}` is the identity on `Sym`::
 
-                sage: all(m.from_symmetric_function(pow(la)).to_symmetric_function() == pow(la)
+                sage: all(m.from_symmetric_function(pow(la)).to_symmetric_function() == pow(la)     # needs sage.graphs
                 ....:     for la in Partitions(4))
                 True
             """
@@ -689,7 +695,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: m = SymmetricFunctionsNonCommutingVariables(QQ).monomial()
-                sage: m.internal_coproduct_on_basis(SetPartition([[1,3],[2]]))
+                sage: m.internal_coproduct_on_basis(SetPartition([[1,3],[2]]))                      # needs sage.libs.flint
                 m{{1, 2, 3}} # m{{1, 3}, {2}} + m{{1, 3}, {2}} # m{{1, 2, 3}} + m{{1, 3}, {2}} # m{{1, 3}, {2}}
             """
             P = SetPartitions()
@@ -738,7 +744,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: m = SymmetricFunctionsNonCommutingVariables(QQ).m()
-                sage: m.sum_of_partitions(Partition([2,1,1]))
+                sage: m.sum_of_partitions(Partition([2,1,1]))                                       # needs sage.graphs
                 1/12*m{{1}, {2}, {3, 4}} + 1/12*m{{1}, {2, 3}, {4}} + 1/12*m{{1}, {2, 4}, {3}}
                  + 1/12*m{{1, 2}, {3}, {4}} + 1/12*m{{1, 3}, {2}, {4}} + 1/12*m{{1, 4}, {2}, {3}}
 
@@ -748,7 +754,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: m = SymmetricFunctionsNonCommutingVariables(QQ).m()
                 sage: mon = SymmetricFunctions(QQ).monomial()
-                sage: all(m.from_symmetric_function(mon[la]).to_symmetric_function() == mon[la]
+                sage: all(m.from_symmetric_function(mon[la]).to_symmetric_function() == mon[la]     # needs sage.graphs
                 ....:     for i in range(6) for la in Partitions(i))
                 True
             """
@@ -861,7 +867,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
-                sage: TestSuite(NCSym.e()).run()
+                sage: TestSuite(NCSym.e()).run()                                                    # needs sage.graphs
             """
             CombinatorialFreeModule.__init__(self, NCSym.base_ring(), SetPartitions(),
                                              prefix='e', bracket=False,
@@ -900,7 +906,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: e = NCSym.e()
-                sage: all(e(e._e_to_m_on_basis(A)) == e[A] for i in range(5)
+                sage: all(e(e._e_to_m_on_basis(A)) == e[A] for i in range(5)                        # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -953,7 +959,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: e = NCSym.e()
-                sage: all(e(e._e_to_p_on_basis(A)) == e[A] for i in range(5)
+                sage: all(e(e._e_to_p_on_basis(A)) == e[A] for i in range(5)                        # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -1039,7 +1045,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             sage: h = NCSym.h()
             sage: h[[1,3],[2,4]]*h[[1,2,3]]
             h{{1, 3}, {2, 4}, {5, 6, 7}}
-            sage: h[[1,2]].coproduct()
+            sage: h[[1,2]].coproduct()                                                              # needs sage.graphs
             h{} # h{{1, 2}} + 2*h{{1}} # h{{1}} + h{{1, 2}} # h{}
         """
 
@@ -1048,7 +1054,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
-                sage: TestSuite(NCSym.h()).run()
+                sage: TestSuite(NCSym.h()).run()                                                    # needs sage.graphs
             """
             CombinatorialFreeModule.__init__(self, NCSym.base_ring(), SetPartitions(),
                                              prefix='h', bracket=False,
@@ -1075,7 +1081,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: h = NCSym.h()
-                sage: all(h(h._h_to_m_on_basis(A)) == h[A] for i in range(5)
+                sage: all(h(h._h_to_m_on_basis(A)) == h[A] for i in range(5)                        # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -1128,7 +1134,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: h = NCSym.h()
-                sage: all(h(h._h_to_p_on_basis(A)) == h[A] for i in range(5)
+                sage: all(h(h._h_to_p_on_basis(A)) == h[A] for i in range(5)                        # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -1268,7 +1274,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: p = NCSym.p()
-                sage: all(p(p._p_to_m_on_basis(A)) == p[A] for i in range(5)
+                sage: all(p(p._p_to_m_on_basis(A)) == p[A] for i in range(5)                        # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -1291,7 +1297,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: p = NCSym.p()
-                sage: all(p(p._p_to_e_on_basis(A)) == p[A] for i in range(5)
+                sage: all(p(p._p_to_e_on_basis(A)) == p[A] for i in range(5)                        # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -1317,7 +1323,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: p = NCSym.p()
-                sage: all(p(p._p_to_h_on_basis(A)) == p[A] for i in range(5)
+                sage: all(p(p._p_to_h_on_basis(A)) == p[A] for i in range(5)                        # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -1343,7 +1349,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: p = NCSym.p()
-                sage: all(p(p._p_to_x_on_basis(A)) == p[A] for i in range(5)
+                sage: all(p(p._p_to_x_on_basis(A)) == p[A] for i in range(5)                        # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -1615,6 +1621,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
             sage: cp = NCSym.cp()
             sage: cp[[1,3],[2,4]]*cp[[1,2,3]]
@@ -1633,7 +1640,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
-                sage: TestSuite(NCSym.cp()).run()
+                sage: TestSuite(NCSym.cp()).run()                                       # needs sage.graphs
             """
             CombinatorialFreeModule.__init__(self, NCSym.base_ring(), SetPartitions(),
                                              prefix='cp', bracket=False,
@@ -1696,7 +1703,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             sage: x = NCSym.x()
             sage: x[[1,3],[2,4]]*x[[1,2,3]]
             x{{1, 3}, {2, 4}, {5, 6, 7}}
-            sage: x[[1,2],[3]].internal_coproduct()
+            sage: x[[1,2],[3]].internal_coproduct()                                     # needs sage.graphs
             x{{1}, {2}, {3}} # x{{1, 2}, {3}} + x{{1, 2}, {3}} # x{{1}, {2}, {3}} +
              x{{1, 2}, {3}} # x{{1, 2}, {3}}
         """
@@ -1706,7 +1713,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
-                sage: TestSuite(NCSym.x()).run()
+                sage: TestSuite(NCSym.x()).run()                                        # needs sage.graphs
             """
             CombinatorialFreeModule.__init__(self, NCSym.base_ring(), SetPartitions(),
                                              prefix='x', bracket=False,
@@ -1727,7 +1734,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: x = NCSym.x()
-                sage: all(x(x._x_to_p_on_basis(A)) == x[A] for i in range(5)
+                sage: all(x(x._x_to_p_on_basis(A)) == x[A] for i in range(5)            # needs sage.graphs
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -1774,6 +1781,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
         We construct Example 3.1 in [BT13]_::
 
+            sage: # needs sage.libs.flint
             sage: rnode = lambda A: sorted([a[1] for a in A.arcs()], reverse=True)
             sage: dimv = lambda A: sorted([a[1]-a[0] for a in A.arcs()], reverse=True)
             sage: lst = list(SetPartitions(4))
@@ -1804,7 +1812,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
                 sage: R = QQ['q'].fraction_field()
                 sage: q = R.gen()
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(R)
-                sage: TestSuite(NCSym.rho(q)).run()
+                sage: TestSuite(NCSym.rho(q)).run()                                     # needs sage.graphs
             """
             R = NCSym.base_ring()
             self._q = R(q)
@@ -1920,6 +1928,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: R = QQ['q'].fraction_field()
             sage: q = R.gen()
             sage: NCSym = SymmetricFunctionsNonCommutingVariables(R)
@@ -1946,7 +1955,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
                 sage: R = QQ['q'].fraction_field()
                 sage: q = R.gen()
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(R)
-                sage: TestSuite(NCSym.chi(q)).run()
+                sage: TestSuite(NCSym.chi(q)).run()                                     # needs sage.graphs
             """
             R = NCSym.base_ring()
             self._q = R(q)
@@ -1995,7 +2004,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
                 sage: q = R.gen()
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(R)
                 sage: chi = NCSym.chi(q)
-                sage: all(chi(chi._chi_to_m_on_basis(A)) == chi[A] for i in range(5)
+                sage: all(chi(chi._chi_to_m_on_basis(A)) == chi[A] for i in range(5)    # needs sage.libs.flint
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -2023,6 +2032,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
             EXAMPLES::
 
+                sage: # needs sage.libs.flint
                 sage: R = QQ['q'].fraction_field(); q = R.gen()
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(R)
                 sage: chi = NCSym.chi(q); m = NCSym.m()
@@ -2056,6 +2066,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
             TESTS::
 
+                sage: # needs sage.libs.flint
                 sage: R = QQ['q'].fraction_field()
                 sage: q = R.gen()
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(R)

@@ -132,6 +132,7 @@ class SchubertPolynomial_class(CombinatorialFreeModule.Element):
         Calling .expand() should always return an element of an
         MPolynomialRing::
 
+            sage: # needs sage.libs.singular
             sage: X = SchubertPolynomialRing(ZZ)
             sage: f = X([1]); f
             X[1]
