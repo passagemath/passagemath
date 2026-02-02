@@ -2770,11 +2770,12 @@ class PSL(PermutationGroup_plg):
 
         Coverage test. Note that generator name of ``q`` is used if ``q`` is a field::
 
-            sage: PSL(2,GF(2^2,'a'),name='b')
+            sage: # needs sage.rings.finite_rings
+            sage: PSL(2, GF(2^2,'a'), name='b')
             Permutation Group with generators [(3,4,5), (1,2,3)]
             sage: _.base_ring()
             Finite Field in a of size 2^2
-            sage: PSL(2,2^2,name='b')
+            sage: PSL(2, 2^2, name='b')
             Permutation Group with generators [(3,4,5), (1,2,3)]
             sage: _.base_ring()
             Finite Field in b of size 2^2
