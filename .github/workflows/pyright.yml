@@ -29,6 +29,8 @@ jobs:
           .github/workflows/merge-fixes.sh
         env:
           GH_TOKEN: ${{ github.token }}
+          SAGE_CI_FIXES_FROM_REPOSITORIES: ${{ vars.SAGE_CI_FIXES_FROM_REPOSITORIES }}
+        if: false
 
       - name: Cache conda packages
         uses: actions/cache@v4
