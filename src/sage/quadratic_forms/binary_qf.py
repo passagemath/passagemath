@@ -1726,6 +1726,7 @@ class BinaryQF(SageObject):
 
         Test for square discriminants specifically (:issue:`33026`)::
 
+            sage: # needs sage.libs.gsl
             sage: n = randrange(-10^3, 10^3)
             sage: Q = BinaryQF([n, randrange(-10^3, 10^3), 0][::(-1)**randrange(2)])
             sage: U = random_matrix(ZZ, 2, 2, 'unimodular')
@@ -1734,14 +1735,14 @@ class BinaryQF(SageObject):
             sage: Q = Q.matrix_action_right(U)
             sage: Q.discriminant().is_square()
             True
-            sage: # needs sage.libs.pari
+            sage: # needs sage.libs.gsl sage.libs.pari
             sage: xy = Q.solve_integer(n)
             sage: Q(*xy) == n
             True
 
         Also test the `n=0` special case separately::
 
-            sage: # needs sage.libs.pari
+            sage: # needs sage.libs.gsl sage.libs.pari
             sage: xy = Q.solve_integer(0)
             sage: Q(*xy)
             0

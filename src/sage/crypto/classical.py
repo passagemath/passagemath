@@ -445,6 +445,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
         Use the chi-square statistic to rank all possible keys and their
         corresponding decipherment::
 
+            sage: # needs sage.libs.gsl
             sage: A = AffineCryptosystem(AlphabeticStrings())
             sage: a, b = (3, 7)
             sage: P = A.encoding("Line.")
@@ -467,6 +468,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
         As more ciphertext is available, the reliability of the chi-square
         ranking function increases::
 
+            sage: # needs sage.libs.gsl
             sage: A = AffineCryptosystem(AlphabeticStrings())
             sage: a, b = (11, 24)
             sage: P = A.encoding("Longer message is more information for cryptanalysis.")
@@ -490,6 +492,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
 
         The ciphertext cannot be an empty string::
 
+            sage: # needs sage.libs.gsl
             sage: A.rank_by_chi_square("", Plist)
             Traceback (most recent call last):
             ...
@@ -508,6 +511,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
         :func:`AlphabeticStrings()
         <sage.monoids.string_monoid.AlphabeticStrings>`::
 
+            sage: # needs sage.libs.gsl
             sage: H = HexadecimalStrings()
             sage: A.rank_by_chi_square(H.encoding("shift"), Plist)
             Traceback (most recent call last):
@@ -521,6 +525,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
 
         The dictionary ``pdict`` cannot be empty::
 
+            sage: # needs sage.libs.gsl
             sage: A.rank_by_chi_square(C, {})
             Traceback (most recent call last):
             ...
@@ -654,6 +659,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
         Use the method of squared differences to rank all possible keys
         and their corresponding decipherment::
 
+            sage: # needs sage.libs.gsl
             sage: A = AffineCryptosystem(AlphabeticStrings())
             sage: a, b = (3, 7)
             sage: P = A.encoding("Line.")
@@ -676,6 +682,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
         As more ciphertext is available, the reliability of the
         squared-differences ranking function increases::
 
+            sage: # needs sage.libs.gsl
             sage: A = AffineCryptosystem(AlphabeticStrings())
             sage: a, b = (11, 24)
             sage: P = A.encoding("Longer message is more information for cryptanalysis.")
@@ -699,6 +706,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
 
         The ciphertext cannot be an empty string::
 
+            sage: # needs sage.libs.gsl
             sage: A.rank_by_squared_differences("", Plist)
             Traceback (most recent call last):
             ...
@@ -717,6 +725,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
         :func:`AlphabeticStrings()
         <sage.monoids.string_monoid.AlphabeticStrings>`::
 
+            sage: # needs sage.libs.gsl
             sage: H = HexadecimalStrings()
             sage: A.rank_by_squared_differences(H.encoding("line"), Plist)
             Traceback (most recent call last):
@@ -730,6 +739,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
 
         The dictionary ``pdict`` cannot be empty::
 
+            sage: # needs sage.libs.gsl
             sage: A.rank_by_squared_differences(C, {})
             Traceback (most recent call last):
             ...
@@ -857,6 +867,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
 
         Use the chi-square ranking function, i.e. ``ranking="chisquare"``::
 
+            sage: # needs sage.libs.gsl
             sage: A = AffineCryptosystem(AlphabeticStrings())
             sage: a, b = (3, 7)
             sage: P = A.encoding("Linear functions for encrypting and decrypting."); P
@@ -879,6 +890,7 @@ class AffineCryptosystem(SymmetricKeyCryptosystem):
         Use the squared differences ranking function, i.e.
         ``ranking="squared_differences"``::
 
+            sage: # needs sage.libs.gsl
             sage: Rank = A.brute_force(C, ranking='squared_differences')
             sage: Rank[:10]  # display only the top 10 candidate keys
             <BLANKLINE>
@@ -2010,6 +2022,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
         Use the chi-square statistic to rank all possible keys and their
         corresponding decipherment::
 
+            sage: # needs sage.libs.gsl
             sage: S = ShiftCryptosystem(AlphabeticStrings())
             sage: P = S.encoding("Shi."); P
             SHI
@@ -2048,6 +2061,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
         As more ciphertext is available, the reliability of the chi-square
         ranking function increases::
 
+            sage: # needs sage.libs.gsl
             sage: P = S.encoding("Shift cipher."); P
             SHIFTCIPHER
             sage: C = S.enciphering(K, P)
@@ -2085,6 +2099,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
 
         The ciphertext cannot be an empty string::
 
+            sage: # needs sage.libs.gsl
             sage: S.rank_by_chi_square("", Pdict)
             Traceback (most recent call last):
             ...
@@ -2103,6 +2118,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
         :func:`AlphabeticStrings()
         <sage.monoids.string_monoid.AlphabeticStrings>`::
 
+            sage: # needs sage.libs.gsl
             sage: H = HexadecimalStrings()
             sage: S.rank_by_chi_square(H.encoding("shift"), Pdict)
             Traceback (most recent call last):
@@ -2116,6 +2132,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
 
         The dictionary ``pdict`` cannot be empty::
 
+            sage: # needs sage.libs.gsl
             sage: S.rank_by_chi_square(C, {})
             Traceback (most recent call last):
             ...
@@ -2245,6 +2262,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
         Use the method of squared differences to rank all possible keys
         and their corresponding decipherment::
 
+            sage: # needs sage.libs.gsl
             sage: S = ShiftCryptosystem(AlphabeticStrings())
             sage: P = S.encoding("Shi."); P
             SHI
@@ -2283,6 +2301,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
         As more ciphertext is available, the reliability of the squared
         differences ranking function increases::
 
+            sage: # needs sage.libs.gsl
             sage: P = S.encoding("Shift cipher."); P
             SHIFTCIPHER
             sage: C = S.enciphering(K, P)
@@ -2320,6 +2339,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
 
         The ciphertext cannot be an empty string::
 
+            sage: # needs sage.libs.gsl
             sage: S.rank_by_squared_differences("", Pdict)
             Traceback (most recent call last):
             ...
@@ -2338,6 +2358,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
         :func:`AlphabeticStrings()
         <sage.monoids.string_monoid.AlphabeticStrings>`::
 
+            sage: # needs sage.libs.gsl
             sage: H = HexadecimalStrings()
             sage: S.rank_by_squared_differences(H.encoding("shift"), Pdict)
             Traceback (most recent call last):
@@ -2351,6 +2372,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
 
         The dictionary ``pdict`` cannot be empty::
 
+            sage: # needs sage.libs.gsl
             sage: S.rank_by_squared_differences(C, {})
             Traceback (most recent call last):
             ...
@@ -2511,6 +2533,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
 
         Use the chi-square ranking function, i.e. ``ranking="chisquare"``::
 
+            sage: # needs sage.libs.gsl
             sage: S.brute_force(C, ranking='chisquare')
             <BLANKLINE>
             [(8, SHIFTINGUSINGMODULARARITHMETIC),
@@ -2543,6 +2566,7 @@ class ShiftCryptosystem(SymmetricKeyCryptosystem):
         Use the squared differences ranking function, i.e.
         ``ranking="squared_differences"``::
 
+            sage: # needs sage.libs.gsl
             sage: S.brute_force(C, ranking='squared_differences')
             <BLANKLINE>
             [(8, SHIFTINGUSINGMODULARARITHMETIC),

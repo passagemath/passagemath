@@ -726,7 +726,7 @@ class AlphabeticStringMonoid(StringMonoid_class):
         Illustrating the difference between :func:`characteristic_frequency`
         and :func:`frequency_distribution() <sage.monoids.string_monoid_element.StringMonoidElement.frequency_distribution>`::
 
-            sage: # needs sage.rings.real_mpfr
+            sage: # needs sage.libs.gsl sage.rings.real_mpfr
             sage: A = AlphabeticStrings()
             sage: M = A.encoding("abcd")
             sage: FD = M.frequency_distribution().function()

@@ -44,7 +44,7 @@ def frequency_distribution(S, n=1, field=None):
 
     EXAMPLES::
 
-        sage: frequency_distribution('banana not a nana nor ananas', 2)                 # needs sage.modules
+        sage: frequency_distribution('banana not a nana nor ananas', 2)                 # needs sage.libs.gsl sage.modules
         Discrete probability space defined by {' a': 0.0740740740740741,
          ' n': 0.111111111111111,
          'a ': 0.111111111111111,
@@ -122,7 +122,7 @@ def coincidence_discriminant(S, n=2):
     EXAMPLES::
 
         sage: S = strip_encoding("The cat in the hat.")
-        sage: coincidence_discriminant([ S[i:i+2] for i in range(len(S)-1) ])           # needs sage.modules
+        sage: coincidence_discriminant([ S[i:i+2] for i in range(len(S)-1) ])           # needs sage.libs.gsl sage.modules
         0.0827001855677322
     """
     if not isinstance(S, (list, tuple)):

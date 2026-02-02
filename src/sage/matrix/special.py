@@ -2532,6 +2532,7 @@ def random_rref_matrix(parent, num_pivots):
     Matrices generated are in reduced row-echelon form with specified rank. If the
     base ring is `QQ` the result has only integer entries.  ::
 
+        sage: # needs sage.libs.gsl
         sage: from sage.matrix.constructor import random_rref_matrix
         sage: matrix_space = sage.matrix.matrix_space.MatrixSpace(QQ, 5, 6)
         sage: A = random_rref_matrix(matrix_space, num_pivots=4); A  # random
@@ -2553,6 +2554,7 @@ def random_rref_matrix(parent, num_pivots):
 
     Matrices can be generated over other exact rings. ::
 
+        sage: # needs sage.libs.gsl
         sage: B = random_matrix(FiniteField(7), 4, 4,  # random
         ....:                   algorithm='echelon_form', num_pivots=3); B
         [1 0 0 0]
@@ -2570,40 +2572,40 @@ def random_rref_matrix(parent, num_pivots):
 
     Rank zero::
 
-        sage: random_matrix(QQ, 1, 1, algorithm='echelon_form', num_pivots=0)
+        sage: random_matrix(QQ, 1, 1, algorithm='echelon_form', num_pivots=0)           # needs sage.libs.gsl
         [0]
 
     Rank of a matrix must be an integer. ::
 
-        sage: random_matrix(QQ, 120, 56, algorithm='echelon_form', num_pivots=61/2)
+        sage: random_matrix(QQ, 120, 56, algorithm='echelon_form', num_pivots=61/2)     # needs sage.libs.gsl
         Traceback (most recent call last):
         ...
         TypeError: the number of pivots must be an integer
 
     Matrices must be generated over exact fields. ::
 
-        sage: random_matrix(RR, 40, 88, algorithm='echelon_form', num_pivots=39)
+        sage: random_matrix(RR, 40, 88, algorithm='echelon_form', num_pivots=39)        # needs sage.libs.gsl
         Traceback (most recent call last):
         ...
         TypeError: the base ring must be exact
 
     Matrices must have the number of pivot columns be less than or equal to the number of rows. ::
 
-        sage: C = random_matrix(ZZ, 6,4, algorithm='echelon_form', num_pivots=7); C
+        sage: C = random_matrix(ZZ, 6,4, algorithm='echelon_form', num_pivots=7); C     # needs sage.libs.gsl
         Traceback (most recent call last):
         ...
         ValueError: number of pivots cannot exceed the number of rows or columns
 
     Matrices must have the number of pivot columns be less than or equal to the number of columns. ::
 
-        sage: D = random_matrix(QQ, 1,3, algorithm='echelon_form', num_pivots=5); D
+        sage: D = random_matrix(QQ, 1,3, algorithm='echelon_form', num_pivots=5); D     # needs sage.libs.gsl
         Traceback (most recent call last):
         ...
         ValueError: number of pivots cannot exceed the number of rows or columns
 
     Matrices must have the number of pivot columns be greater than zero. ::
 
-        sage: random_matrix(QQ, 5, 4, algorithm='echelon_form', num_pivots=-1)
+        sage: random_matrix(QQ, 5, 4, algorithm='echelon_form', num_pivots=-1)          # needs sage.libs.gsl
         Traceback (most recent call last):
         ...
         ValueError: the number of pivots must be zero or greater
@@ -2717,6 +2719,7 @@ def random_echelonizable_matrix(parent, rank, upper_bound=None, max_tries=100):
     Generated matrices have the desired dimensions, rank and entry size. The
     matrix in reduced row-echelon form has only integer entries. ::
 
+        sage: # needs sage.libs.gsl
         sage: from sage.matrix.constructor import random_echelonizable_matrix
         sage: matrix_space = sage.matrix.matrix_space.MatrixSpace(QQ, 5, 6)
         sage: A = random_echelonizable_matrix(matrix_space, rank=4, upper_bound=40)
@@ -2729,6 +2732,7 @@ def random_echelonizable_matrix(parent, rank, upper_bound=None, max_tries=100):
 
     An example with default settings (i.e. no entry size control). ::
 
+        sage: # needs sage.libs.gsl
         sage: C = random_matrix(QQ, 6, 7, algorithm='echelonizable', rank=5)
         sage: C.rank()
         5
@@ -2737,7 +2741,7 @@ def random_echelonizable_matrix(parent, rank, upper_bound=None, max_tries=100):
 
     A matrix without size control may have very large entry sizes. ::
 
-        sage: D = random_matrix(ZZ, 7, 8, algorithm='echelonizable', rank=6); D  # random
+        sage: D = random_matrix(ZZ, 7, 8, algorithm='echelonizable', rank=6); D  # random   # needs sage.libs.gsl
         [    1     2     8   -35  -178  -239  -284   778]
         [    4     9    37  -163  -827 -1111 -1324  3624]
         [    5     6    21   -88  -454  -607  -708  1951]
@@ -2748,7 +2752,7 @@ def random_echelonizable_matrix(parent, rank, upper_bound=None, max_tries=100):
 
     Matrices can be generated over any exact ring. ::
 
-        sage: # needs sage.rings.finite_rings
+        sage: # needs sage.libs.gsl sage.rings.finite_rings
         sage: F.<a> = GF(2^3)
         sage: B = random_matrix(F, 4, 5, algorithm='echelonizable', rank=4,
         ....:                   upper_bound=None)
@@ -2759,6 +2763,7 @@ def random_echelonizable_matrix(parent, rank, upper_bound=None, max_tries=100):
 
     Square matrices over ZZ or QQ with full rank are always unimodular. ::
 
+        sage: # needs sage.libs.gsl
         sage: E = random_matrix(QQ, 7, 7, algorithm='echelonizable', rank=7)
         sage: det(E)
         1
@@ -2771,6 +2776,7 @@ def random_echelonizable_matrix(parent, rank, upper_bound=None, max_tries=100):
     Matrices must have a rank zero or greater, and less than
     both the number of rows and the number of columns. ::
 
+        sage: # needs sage.libs.gsl
         sage: random_matrix(QQ, 3, 4, algorithm='echelonizable', rank=-1)
         Traceback (most recent call last):
         ...
@@ -2786,14 +2792,14 @@ def random_echelonizable_matrix(parent, rank, upper_bound=None, max_tries=100):
 
     The base ring must be exact. ::
 
-        sage: random_matrix(RR, 3, 3, algorithm='echelonizable', rank=2)
+        sage: random_matrix(RR, 3, 3, algorithm='echelonizable', rank=2)                # needs sage.libs.gsl
         Traceback (most recent call last):
         ...
         TypeError: the base ring must be exact
 
     Works for rank==1, too. ::
 
-        sage: random_matrix(QQ, 3, 3, algorithm='echelonizable', rank=1).ncols()
+        sage: random_matrix(QQ, 3, 3, algorithm='echelonizable', rank=1).ncols()        # needs sage.libs.gsl
         3
 
 
@@ -2921,6 +2927,7 @@ def random_subspaces_matrix(parent, rank=None):
     subspaces can then be determined by analyzing subdivisions of this
     matrix. See the four subspaces routine in [Bee]_ for more. ::
 
+        sage: # needs sage.libs.gsl
         sage: from sage.matrix.constructor import random_subspaces_matrix
         sage: matrix_space = sage.matrix.matrix_space.MatrixSpace(QQ, 6, 8)
         sage: B = random_subspaces_matrix(matrix_space, rank=3)
@@ -2938,11 +2945,12 @@ def random_subspaces_matrix(parent, rank=None):
 
     Check that we fixed :issue:`10543` (echelon forms should be immutable)::
 
-        sage: B_expanded.is_immutable()
+        sage: B_expanded.is_immutable()                                                 # needs sage.libs.gsl
         True
 
     We want to modify B_expanded, so replace it with a copy::
 
+        sage: # needs sage.libs.gsl
         sage: B_expanded = copy(B_expanded)
         sage: B_expanded.subdivide(B.nrows()-B.nullity(), B.ncols())
         sage: C = B_expanded.subdivision(0, 0)
@@ -2958,6 +2966,7 @@ def random_subspaces_matrix(parent, rank=None):
 
     A matrix to show that the null space of the L matrix is the column space of the starting matrix. ::
 
+        sage: # needs sage.libs.gsl
         sage: A = random_matrix(QQ, 5, 7, algorithm='subspaces', rank=None)
         sage: (A.nrows(), A.ncols())
         (5, 7)
@@ -2982,6 +2991,7 @@ def random_subspaces_matrix(parent, rank=None):
     The designated rank of the L matrix cannot be greater than the
     number of desired rows, nor can the rank be negative. ::
 
+        sage: # needs sage.libs.gsl
         sage: random_matrix(QQ, 19, 20, algorithm='subspaces', rank=21)
         Traceback (most recent call last):
         ...
@@ -3187,6 +3197,7 @@ def random_unitary_matrix(parent):
 
     Matrices over a quadratic field::
 
+        sage: # needs sage.rings.number_field
         sage: n = ZZ.random_element(10)
         sage: K = QuadraticField(-1,'i')
         sage: MS = MatrixSpace(K, n)
@@ -3196,7 +3207,7 @@ def random_unitary_matrix(parent):
 
     Matrices with entries in the algebraic real field (slow)::
 
-        sage: # long time
+        sage: # long time, needs sage.rings.number_field
         sage: n = ZZ.random_element(4)
         sage: MS = MatrixSpace(AA, n)
         sage: U = random_unitary_matrix(MS)
@@ -3205,7 +3216,7 @@ def random_unitary_matrix(parent):
 
     Matrices with entries in the algebraic field (slower yet)::
 
-        sage: # long time
+        sage: # long time, needs sage.rings.number_field
         sage: n = ZZ.random_element(2)
         sage: MS = MatrixSpace(QQbar, n)
         sage: U = random_unitary_matrix(MS)
