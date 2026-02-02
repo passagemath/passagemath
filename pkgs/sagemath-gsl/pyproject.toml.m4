@@ -16,6 +16,7 @@ requires = [
     SPKG_INSTALL_REQUIRES_cython
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
+    SPKG_INSTALL_REQUIRES_numpy
 ]
 build-backend = "setuptools.build_meta"
 
