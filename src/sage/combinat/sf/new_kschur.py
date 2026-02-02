@@ -616,6 +616,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ['t'])
                 sage: ks = Sym.kschur(3)
                 sage: ks[2]*ks[2]                        # indirect doctest
@@ -637,13 +638,13 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             TESTS::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
                 sage: ks2 = Sym.kschur(2)
                 sage: ks3 = Sym.kschur(3)
                 sage: ks5 = Sym.kschur(5)
                 sage: ks5(ks3[2]) * ks5(ks2[2,1])
                 ks5[2, 2, 1] + ks5[3, 1, 1] + (t+1)*ks5[3, 2] + (t+1)*ks5[4, 1] + t*ks5[5]
-
                 sage: ks3([1]) * ks3([1]) # indirect doctest
                 ks3[1, 1] + ks3[2]
                 sage: ks3([2,1]) * ks3([2,1])
@@ -932,6 +933,7 @@ class kSchur(CombinatorialFreeModule):
     implemented for distinct `k` and `j`. Let us show how to get around
     this 'manually'::
 
+        sage: # needs lrcalc_python
         sage: ks3 = Sym.kBoundedSubspace(3).kschur()
         sage: ks2([2,1]) * ks3([3,1])
         Traceback (most recent call last):
@@ -959,7 +961,7 @@ class kSchur(CombinatorialFreeModule):
     is not implemented, even when the answer is still in the `k`-bounded
     subspace::
 
-        sage: ks2([1])^2
+        sage: ks2([1])^2                                                                # needs lrcalc_python
         Traceback (most recent call last):
         ...
         TypeError: unsupported operand parent(s) for ^: '2-bounded Symmetric Functions over Univariate Polynomial Ring in t over Rational Field in the 2-Schur basis' and 'Integer Ring'

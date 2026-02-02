@@ -48,7 +48,7 @@ class FunctorialCompositionSpecies(GenericCombinatorialSpecies):
             <class 'sage.combinat.species.functorial_composition_species.FunctorialCompositionSpecies'>
             sage: G == loads(dumps(G))
             True
-            sage: G._check()  # False due to isomorphism types not being implemented    # needs sage.modules
+            sage: G._check()  # False due to isomorphism types not being implemented    # needs sage.libs.pari sage.modules
             False
         """
         self._F = F
