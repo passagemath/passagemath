@@ -5709,9 +5709,9 @@ class Partition(CombinatorialElement):
 
         EXAMPLES::
 
-            sage: SM = Partition([2,2,1]).specht_module(QQ); SM                         # needs sage.combinat sage.modules
+            sage: SM = Partition([2,2,1]).specht_module(QQ); SM                         # needs sage.combinat sage.groups sage.modules
             Specht module of [2, 2, 1] over Rational Field
-            sage: SM.frobenius_image()                                                  # needs sage.combinat sage.modules
+            sage: SM.frobenius_image()                                                  # needs sage.combinat sage.groups sage.modules
             s[2, 2, 1]
         """
         from sage.combinat.specht_module import SpechtModule
@@ -5737,7 +5737,7 @@ class Partition(CombinatorialElement):
             sage: # needs sage.combinat sage.modules
             sage: GP = Partition([3,2,1]).garsia_procesi_module(QQ); GP
             Garsia-Procesi module of shape [3, 2, 1] over Rational Field
-            sage: GP.graded_frobenius_image()
+            sage: GP.graded_frobenius_image()                                           # needs sage.libs.flint
             q^4*s[3, 2, 1] + q^3*s[3, 3] + q^3*s[4, 1, 1] + (q^3+q^2)*s[4, 2]
              + (q^2+q)*s[5, 1] + s[6]
 

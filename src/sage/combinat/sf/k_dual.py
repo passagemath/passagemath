@@ -448,6 +448,7 @@ class KBoundedQuotient(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: kQ = SymmetricFunctions(QQ['t'].fraction_field()).kBoundedQuotient(3)
             sage: kQ.realizations()
             [3-Bounded Quotient of Symmetric Functions over Fraction Field of Univariate Polynomial Ring in t over Rational Field in the 3-bounded monomial basis, 3-Bounded Quotient of Symmetric Functions over Fraction Field of Univariate Polynomial Ring in t over Rational Field in the 3-bounded Hall-Littlewood P basis, 3-Bounded Quotient of Symmetric Functions over Fraction Field of Univariate Polynomial Ring in t over Rational Field in the 3-bounded affine Schur basis, 3-Bounded Quotient of Symmetric Functions over Fraction Field of Univariate Polynomial Ring in t over Rational Field in the dual 3-Schur basis]
@@ -1074,7 +1075,7 @@ class kbounded_HallLittlewoodP(KBoundedQuotientBasis):
             sage: kP = kbounded_HallLittlewoodP(SymmetricFunctions(QQ['t'].fraction_field()).kBoundedQuotient(4))
             sage: kP
             4-Bounded Quotient of Symmetric Functions over Fraction Field of Univariate Polynomial Ring in t over Rational Field in the 4-bounded Hall-Littlewood P basis
-            sage: TestSuite(kP).run()
+            sage: TestSuite(kP).run()                                                   # needs lrcalc_python
         """
         KBoundedQuotientBasis.__init__(self, kBoundedRing, 'HLP')
 
@@ -1388,6 +1389,7 @@ class AffineSchurFunctions(KBoundedQuotientBasis):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: from sage.combinat.sf.k_dual import AffineSchurFunctions
             sage: F = AffineSchurFunctions(SymmetricFunctions(QQ['t']).kBoundedQuotient(4,t=1))
             sage: F
@@ -1407,6 +1409,7 @@ class AffineSchurFunctions(KBoundedQuotientBasis):
         """
         TESTS::
 
+            sage: # needs sage.combinat sage.groups
             sage: Sym = SymmetricFunctions(QQ)
             sage: F = Sym.kBoundedQuotient(3,t=1).affineSchur()
             sage: F._repr_()

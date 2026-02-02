@@ -58,14 +58,14 @@ def SimpleGraphSpecies():
 
     TESTS::
 
-        sage: seq = S.isotype_generating_series().counts(6)[1:]                         # needs sage.modules
-        sage: oeis(seq)[0]                              # optional - internet           # needs sage.modules
+        sage: seq = S.isotype_generating_series().counts(6)[1:]                         # needs sage.libs.pari sage.modules
+        sage: oeis(seq)[0]                              # optional - internet           # needs sage.libs.pari sage.modules
         A000088: ...
 
     ::
 
-        sage: seq = S.generating_series().counts(10)[1:]                                # needs sage.modules
-        sage: oeis(seq)[0]                              # optional - internet           # needs sage.modules
+        sage: seq = S.generating_series().counts(10)[1:]                                # needs sage.libs.pari sage.modules
+        sage: oeis(seq)[0]                              # optional - internet           # needs sage.libs.pari sage.modules
         A006125: a(n) = 2^(n*(n-1)/2).
     """
     E = SetSpecies()

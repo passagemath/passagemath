@@ -65,13 +65,13 @@ One can convert symmetric functions to symmetric polynomials and vice versa::
     sage: poly = f.expand(3); poly
     2*x0^4 + 2*x0^3*x1 + 2*x0*x1^3 + 2*x1^4 + 2*x0^3*x2 + 2*x1^3*x2 + 2*x0*x2^3 + 2*x1*x2^3 + 2*x2^4
     + x0^3 + 2*x0^2*x1 + 2*x0*x1^2 + x1^3 + 2*x0^2*x2 + 3*x0*x1*x2 + 2*x1^2*x2 + 2*x0*x2^2 + 2*x1*x2^2 + x2^3
-    sage: Sym.from_polynomial(poly)
+    sage: Sym.from_polynomial(poly)                                                     # needs sage.groups
     3*m[1, 1, 1] + 2*m[2, 1] + m[3] + 2*m[3, 1] + 2*m[4]
-    sage: Sym.from_polynomial(poly) == f
+    sage: Sym.from_polynomial(poly) == f                                                # needs sage.groups
     True
     sage: g = h[1,1,1,1]
     sage: poly = g.expand(3)
-    sage: Sym.from_polynomial(poly) == g
+    sage: Sym.from_polynomial(poly) == g                                                # needs sage.groups
     False
 
 ::
@@ -605,6 +605,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
                 See https://github.com/sagemath/sage/issues/37220 for details.
                 Symmetric Functions over Integer Ring in the monomial basis
 
+                sage: # needs sage.rings.number_field
                 sage: Sym = SymmetricFunctions(CyclotomicField())
                 sage: s = Sym.schur()
                 sage: s.corresponding_basis_over(Integers(13))
@@ -709,28 +710,28 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
                 sage: sp = SkewPartition([[5,3,3,1], [3,2,1]])
                 sage: s = SymmetricFunctions(QQ).s()
-                sage: s.skew_schur(sp)
+                sage: s.skew_schur(sp)                                                  # needs lrcalc_python
                 s[2, 2, 1, 1] + s[2, 2, 2] + s[3, 1, 1, 1] + 3*s[3, 2, 1]
                  + s[3, 3] + 2*s[4, 1, 1] + 2*s[4, 2] + s[5, 1]
 
                 sage: e = SymmetricFunctions(QQ).e()
-                sage: ess = e.skew_schur(sp); ess
+                sage: ess = e.skew_schur(sp); ess                                       # needs lrcalc_python
                 e[2, 1, 1, 1, 1] - e[2, 2, 1, 1] - e[3, 1, 1, 1] + e[3, 2, 1]
-                sage: ess == e(s.skew_schur(sp))
+                sage: ess == e(s.skew_schur(sp))                                        # needs lrcalc_python
                 True
 
             TESTS::
 
-                sage: s.skew_schur([[2,1], [1]])
+                sage: s.skew_schur([[2,1], [1]])                                        # needs lrcalc_python
                 s[1, 1] + s[2]
 
-                sage: s.skew_schur([[2,1], [3]])
+                sage: s.skew_schur([[2,1], [3]])                                        # needs lrcalc_python
                 Traceback (most recent call last):
                 ...
                 ValueError: not a valid skew partition
 
                 sage: s = SymmetricFunctions(GF(2)).s()
-                sage: s.skew_schur([[3,2,1],[2,1]])
+                sage: s.skew_schur([[3,2,1],[2,1]])                                     # needs lrcalc_python
                 s[1, 1, 1] + s[3]
             """
             from sage.combinat.skew_partition import SkewPartitions
@@ -891,6 +892,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             The first few values of `\mathbf{GR}_{(n)} = L_n`::
 
+                sage: # needs sage.libs.pari
                 sage: Sym = SymmetricFunctions(ZZ)
                 sage: h = Sym.h()
                 sage: h.gessel_reutenauer(1)
@@ -910,6 +912,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             Gessel-Reutenauer functions indexed by partitions::
 
+                sage: # needs sage.libs.pari
                 sage: h.gessel_reutenauer([2, 1])
                 h[1, 1, 1] - h[2, 1]
                 sage: h.gessel_reutenauer([2, 2])
@@ -917,6 +920,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             The Gessel-Reutenauer functions are Schur-positive::
 
+                sage: # needs sage.libs.pari
                 sage: s = Sym.s()
                 sage: s.gessel_reutenauer([2, 1])
                 s[1, 1, 1] + s[2, 1]
@@ -926,12 +930,12 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
             They do not form a basis, as the following example (from
             [GR1993]_ p. 201) shows::
 
-                sage: s.gessel_reutenauer([4]) == s.gessel_reutenauer([2, 1, 1])
+                sage: s.gessel_reutenauer([4]) == s.gessel_reutenauer([2, 1, 1])        # needs sage.libs.pari
                 True
 
             They also go by the name *higher Lie character*::
 
-                sage: s.higher_lie_character([2, 2, 1]) == s.gessel_reutenauer([2, 2, 1])
+                sage: s.higher_lie_character([2, 2, 1]) == s.gessel_reutenauer([2, 2, 1])   # needs sage.libs.pari
                 True
 
             Of the above three equivalent definitions of
@@ -939,6 +943,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
             computations. Let us check that the second one gives the
             same results::
 
+                sage: # needs sage.libs.pari
                 sage: QSym = QuasiSymmetricFunctions(ZZ)
                 sage: F = QSym.F() # fundamental basis
                 sage: def GR_def2(lam): # `\mathbf{GR}_\lambda`
@@ -953,6 +958,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             And the first one, too (assuming symmetry)::
 
+                sage: # needs sage.libs.pari
                 sage: m = Sym.m()
                 sage: def GR_def1(lam): # `\mathbf{GR}_\lambda`
                 ....:     n = lam.size()
@@ -975,6 +981,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             This works fine over other base rings::
 
+                sage: # needs sage.libs.pari
                 sage: Sym = SymmetricFunctions(FractionField(QQ['q','t']))
                 sage: P = Sym.macdonald().P()
                 sage: h = Sym.h()
@@ -1079,6 +1086,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
             `\mathbf{GR}_{(j)}` (see :meth:`gessel_reutenauer`) under the
             involution `\omega` (i.e. :meth:`omega_involution`)::
 
+                sage: # needs sage.libs.pari
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: s = Sym.s()
                 sage: pi_2 = (s.gessel_reutenauer(2)).omega_involution()
@@ -1537,6 +1545,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             We verify Theorem 1.7 in [AN2023]_ for an example::
 
+                sage: # needs sage.graphs
                 sage: from sage.combinat.q_analogues import q_int
                 sage: H = [2, 4, 4, 4]
                 sage: G = posets.HessenbergPoset(H).incomparability_graph()
@@ -1636,7 +1645,7 @@ class FilteredSymmetricFunctionsBases(Category_realization_of_parent):
         Category of filtered bases of Symmetric Functions over Rational Field
         sage: Sym.schur() in bases
         True
-        sage: Sym.sp() in bases
+        sage: Sym.sp() in bases                                                         # needs lrcalc_python
         True
     """
 
@@ -1686,7 +1695,7 @@ class GradedSymmetricFunctionsBases(Category_realization_of_parent):
         Category of graded bases of Symmetric Functions over Rational Field
         sage: Sym.schur() in bases
         True
-        sage: Sym.sp() in bases
+        sage: Sym.sp() in bases                                                         # needs lrcalc_python
         False
     """
 
@@ -1759,7 +1768,7 @@ class GradedSymmetricFunctionsBases(Category_realization_of_parent):
 
                 sage: Sym = SymmetricFunctions(FiniteField(23))
                 sage: h = Sym.h()
-                sage: all( all( (s[u] * s[v]).antipode() == s[u].antipode() * s[v].antipode()
+                sage: all( all( (s[u] * s[v]).antipode() == s[u].antipode() * s[v].antipode()   # needs lrcalc_python
                 ....:           for u in Partitions(3) )
                 ....:      for v in Partitions(3) )
                 True
@@ -1937,7 +1946,7 @@ class SymmetricFunctionAlgebra_generic(CombinatorialFreeModule):
             sage: s = SymmetricFunctions(QQ).s()
             sage: isinstance(s, SymmetricFunctionAlgebra_classical)
             True
-            sage: TestSuite(s).run()
+            sage: TestSuite(s).run()                                                            # needs lrcalc_python
         """
         R = Sym.base_ring()
         from sage.categories.commutative_rings import CommutativeRings
@@ -1992,7 +2001,7 @@ class SymmetricFunctionAlgebra_generic(CombinatorialFreeModule):
         Check that a single number which is in ``ZZ`` can be used::
 
             sage: s = SymmetricFunctions(QQ).s()
-            sage: s[QQbar(2)]
+            sage: s[QQbar(2)]                                                                   # needs sage.rings.number_field
             s[2]
         """
         C = self.basis().keys()
@@ -3053,12 +3062,12 @@ class SymmetricFunctionAlgebra_generic(CombinatorialFreeModule):
             sage: Sym = SymmetricFunctions(QQ)
             sage: h = Sym.homogeneous()
             sage: f = (h([]) + h([2,1]) + h([3])).expand(3)
-            sage: h.from_polynomial(f)
+            sage: h.from_polynomial(f)                                                          # needs sage.groups
             h[] + h[2, 1] + h[3]
             sage: s = Sym.s()
             sage: g = (s([]) + s([2,1])).expand(3); g
             x0^2*x1 + x0*x1^2 + x0^2*x2 + 2*x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + 1
-            sage: s.from_polynomial(g)
+            sage: s.from_polynomial(g)                                                          # needs sage.groups
             s[] + s[2, 1]
         """
         m = self.realization_of().m()
@@ -3077,6 +3086,7 @@ class SymmetricFunctionAlgebra_generic(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs lrcalc_python
             sage: p = SymmetricFunctions(QQ).p()
             sage: p.product_by_coercion(p[3,1,1], p[2,2])
             p[3, 2, 2, 1, 1]
@@ -3104,6 +3114,7 @@ class SymmetricFunctionAlgebra_generic(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs lrcalc_python
             sage: m = SymmetricFunctions(QQ).m()
             sage: m[3,1,1].coproduct()
             m[] # m[3, 1, 1] + m[1] # m[3, 1] + m[1, 1] # m[3] + m[3] # m[1, 1] + m[3, 1] # m[1] + m[3, 1, 1] # m[]
@@ -3295,16 +3306,16 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
 
             sage: e = SymmetricFunctions(ZZ).e()
             sage: h = SymmetricFunctions(ZZ).h()
-            sage: e[3,2,1] // h[2]
+            sage: e[3,2,1] // h[2]                                                      # needs sage.libs.singular
             -e[3, 1]
 
         TESTS::
 
             sage: s = SymmetricFunctions(ZZ).s()
-            sage: s(0) // s[1]
+            sage: s(0) // s[1]                                                          # needs sage.libs.singular
             0
 
-            sage: s(6) // s(2)
+            sage: s(6) // s(2)                                                          # needs sage.libs.singular
             3*s[]
         """
         from sage.combinat.sf.multiplicative import (
@@ -3338,25 +3349,25 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
             sage: A = 5*e[3] + e[2,1] + e[1]
             sage: B = 7*e[2] + e[5,1]
             sage: C = 3*e[1,1] + e[2]
-            sage: gcd(A*B^2, B*C)
+            sage: gcd(A*B^2, B*C)                                                       # needs sage.libs.singular
             7*e[2] + e[5, 1]
 
             sage: p = SymmetricFunctions(ZZ).p()
-            sage: gcd(e[2,1], p[1,1]-p[2])
+            sage: gcd(e[2,1], p[1,1]-p[2])                                              # needs sage.libs.singular
             e[2]
-            sage: gcd(p[2,1], p[3,2]-p[2,1])
+            sage: gcd(p[2,1], p[3,2]-p[2,1])                                            # needs sage.libs.singular
             p[2]
 
         TESTS::
 
             sage: s = SymmetricFunctions(ZZ).s()
-            sage: gcd(s(0), s[1])
+            sage: gcd(s(0), s[1])                                                       # needs sage.libs.singular
             s[1]
 
-            sage: gcd(s(0), s(1))
+            sage: gcd(s(0), s(1))                                                       # needs sage.libs.singular
             s[]
 
-            sage: gcd(s(9), s(6))
+            sage: gcd(s(9), s(6))                                                       # needs sage.libs.singular
             3*s[]
         """
         from sage.combinat.sf.multiplicative import (
@@ -3460,6 +3471,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
 
         Sage also handles plethysm of tensor products of symmetric functions::
 
+            sage: # needs lrcalc_python
             sage: s = SymmetricFunctions(QQ).s()
             sage: X = tensor([s[1],s[[]]])
             sage: Y = tensor([s[[]],s[1]])
@@ -3472,6 +3484,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
         commuting variables. For example, we verify the Cauchy identities
         (in degree 5)::
 
+            sage: # needs lrcalc_python
             sage: m = SymmetricFunctions(QQ).m()
             sage: P5 = Partitions(5)
             sage: sum(s[mu](X)*s[mu](Y) for mu in P5) == sum(m[mu](X)*h[mu](Y) for mu in P5)
@@ -3481,6 +3494,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
 
         Sage can also do the plethysm with an element in the completion::
 
+            sage: # needs lrcalc_python
             sage: s = SymmetricFunctions(QQ).s()
             sage: L = LazySymmetricFunctions(s)
             sage: f = s[2,1]
@@ -4111,6 +4125,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
         \right|`, is `s_{\lambda'}` (where `\lambda'` is the conjugate
         partition of `\lambda`)::
 
+            sage: # needs sage.rings.number_field
             sage: F = CyclotomicField(12)
             sage: s = SymmetricFunctions(F).s()
             sage: e = SymmetricFunctions(F).e()
@@ -4451,6 +4466,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
             sage: h(e[2].reduced_kronecker_product(h[2]))
             h[1] + 2*h[1, 1] + h[1, 1, 1] - h[2] + h[2, 1, 1] - h[2, 2]
 
+            sage: # needs sage.rings.number_field
             sage: F = CyclotomicField(12)
             sage: s = SymmetricFunctions(F).s()
             sage: e = SymmetricFunctions(F).e()
@@ -4652,6 +4668,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
             sage: h(e[2].left_padded_kronecker_product(h[2]))
             h[1, 1] + h[1, 1, 1] - h[2] + h[2, 1, 1] - h[2, 2]
 
+            sage: # needs sage.rings.number_field
             sage: F = CyclotomicField(12)
             sage: s = SymmetricFunctions(F).s()
             sage: e = SymmetricFunctions(F).e()
@@ -4745,12 +4762,12 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
 
             sage: s = SymmetricFunctions(ZZ).s()
             sage: a = s([2,1])
-            sage: a.internal_coproduct()
+            sage: a.internal_coproduct()                                                # needs lrcalc_python
             s[1, 1, 1] # s[2, 1] + s[2, 1] # s[1, 1, 1] + s[2, 1] # s[2, 1] + s[2, 1] # s[3] + s[3] # s[2, 1]
 
             sage: e = SymmetricFunctions(QQ).e()
             sage: b = e([2])
-            sage: b.internal_coproduct()
+            sage: b.internal_coproduct()                                                # needs lrcalc_python
             e[1, 1] # e[2] + e[2] # e[1, 1] - 2*e[2] # e[2]
 
         The internal coproduct is adjoint to the internal product with respect
@@ -4760,6 +4777,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
         `\Delta^{\times}(h)` as `\sum_i h^{\prime}_i \otimes
         h^{\prime\prime}_i`. Let us check this in degree `4`::
 
+            sage: # needs lrcalc_python
             sage: e = SymmetricFunctions(FiniteField(29)).e()
             sage: s = SymmetricFunctions(FiniteField(29)).s()
             sage: m = SymmetricFunctions(FiniteField(29)).m()
@@ -4777,6 +4795,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
         Let us check the formulas for `\Delta^{\times}(h_n)` and
         `\Delta^{\times}(p_n)` given in the description of this method::
 
+            sage: # needs lrcalc_python
             sage: e = SymmetricFunctions(QQ).e()
             sage: p = SymmetricFunctions(QQ).p()
             sage: h = SymmetricFunctions(QQ).h()
@@ -4795,6 +4814,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
 
         TESTS::
 
+            sage: # needs lrcalc_python
             sage: s = SymmetricFunctions(QQ).s()
             sage: s([]).internal_coproduct()
             s[] # s[]
