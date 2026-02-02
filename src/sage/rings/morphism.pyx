@@ -1363,8 +1363,8 @@ cdef class RingHomomorphism(RingMap):
 
         Non-commutative rings are not supported (:issue:`32824`)::
 
-            sage: A = GradedCommutativeAlgebra(QQ, 'x,y,z')                             # needs sage.combinat sage.modules
-            sage: A.hom(A.gens(), A).kernel()                                           # needs sage.combinat sage.modules
+            sage: A = GradedCommutativeAlgebra(QQ, 'x,y,z')                             # needs sage.combinat sage.libs.singular sage.modules
+            sage: A.hom(A.gens(), A).kernel()                                           # needs sage.combinat sage.libs.singular sage.modules
             Traceback (most recent call last):
             ...
             NotImplementedError: rings are not commutative
