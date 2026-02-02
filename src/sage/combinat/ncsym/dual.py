@@ -121,7 +121,7 @@ class SymmetricFunctionsNonCommutingVariablesDual(UniqueRepresentation, Parent):
         Similarly we can pull back when we are in the image of `\chi^*`::
 
             sage: elt = 3*(w[[1],[2,3]] + w[[1,2],[3]] + w[[1,3],[2]])
-            sage: h(elt)
+            sage: h(elt)                                                                # needs sage.graphs
             3*h[2, 1]
         """
 

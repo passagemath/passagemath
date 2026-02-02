@@ -570,7 +570,7 @@ def parse_tolerance(source, want):
         0
         sage: marked.rel_tol
         0
-        sage: marked.abs_tol                                                            # needs sage.rings.real_mpfr
+        sage: marked.abs_tol                                                            # needs sage.rings.real_interval_field
         0.010000000000000000000...?
     """
     # regular expressions

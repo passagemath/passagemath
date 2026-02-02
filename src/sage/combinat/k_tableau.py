@@ -508,7 +508,7 @@ class WeakTableau_abstract(ClonableList,
             'core'
             sage: t.representation('bounded')
             [[1, 1, 2, 4], [2, 3, 5], [3, 4], [5, 6], [6], [7]]
-            sage: t.representation('factorized_permutation')
+            sage: t.representation('factorized_permutation')                            # needs sage.combinat sage.groups
             [s0, s3*s1, s2*s1, s0*s4, s3*s0, s4*s2, s1*s0]
 
             sage: tb = WeakTableau([[1, 1, 2, 4], [2, 3, 5], [3, 4], [5, 6], [6], [7]], 4,

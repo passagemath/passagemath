@@ -4207,6 +4207,7 @@ class TemperleyLiebAlgebra(SubPartitionAlgebra, UnitDiagramMixin):
 
     Additional examples when the Temperley-Lieb algebra is not semisimple::
 
+        sage: # needs sage.graphs
         sage: TL = TemperleyLiebAlgebra(8, -1, QQ)
         sage: for la in TL.cell_poset():
         ....:     CM = TL.cell_module(la)

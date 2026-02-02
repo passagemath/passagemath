@@ -1430,6 +1430,7 @@ class AffineSchurFunctions(KBoundedQuotientBasis):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: F = SymmetricFunctions(QQ).kBoundedQuotient(3,t=1).affineSchur()
             sage: F._F_to_m_on_basis(Partition([2,1]))
             2*m[1, 1, 1] + m[2, 1]
