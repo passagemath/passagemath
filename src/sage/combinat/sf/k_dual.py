@@ -617,7 +617,7 @@ class KBoundedQuotientBases(Category_realization_of_parent):
 
             EXAMPLES::
 
-            sage: # needs sage.combinat sage.groups
+                sage: # needs sage.combinat sage.groups
                 sage: F = SymmetricFunctions(QQ).kBoundedQuotient(3, t=1).affineSchur()
                 sage: F[3,2]    # indirect doctest
                 F3[3, 2]
