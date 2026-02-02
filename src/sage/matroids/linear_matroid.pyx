@@ -3070,7 +3070,7 @@ cdef class LinearMatroid(BasisExchangeMatroid):
              2*t^3 + 3*t^2 + 2*t + 1,
              3*t^4 + 4*t^3 + 3*t^2 + 2*t + 1,
              4*t^5 + 5*t^4 + 4*t^3 + 3*t^2 + 2*t + 1]
-            sage: [M.zonotopal_algebra(k, True).defining_ideal().hilbert_series() for k in range(4)]
+            sage: [M.zonotopal_algebra(k, True).defining_ideal().hilbert_series() for k in range(4)]    # needs sage.libs.flint sage.libs.singular
             [t^2 + 2*t + 1,
              t^4 + 2*t^3 + 3*t^2 + 2*t + 1,
              t^6 + 2*t^5 + 3*t^4 + 4*t^3 + 3*t^2 + 2*t + 1,

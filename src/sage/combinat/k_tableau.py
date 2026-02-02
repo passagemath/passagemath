@@ -126,7 +126,7 @@ def WeakTableau(t, k, inner_shape=[], representation='core'):
 
     And the analogue of the skew example in bounded representation::
 
-        sage: tbs = WeakTableau([[None, 1, 2], [None, 2], [1]], 3, representation = "bounded")
+        sage: tbs = WeakTableau([[None, 1, 2], [None, 2], [1]], 3, representation="bounded")
         sage: tbs.shape()
         ([3, 2, 1], [1, 1])
         sage: tbs.weight()
@@ -138,7 +138,8 @@ def WeakTableau(t, k, inner_shape=[], representation='core'):
 
     Finally we do the same examples for the factorized permutation representation::
 
-        sage: tf = WeakTableau([[2,0],[3,2],[1,0]], 3, representation = "factorized_permutation")
+        sage: # needs sage.combinat sage.groups
+        sage: tf = WeakTableau([[2,0],[3,2],[1,0]], 3, representation="factorized_permutation")
         sage: tf.shape()
         [5, 2, 1]
         sage: tf.weight()
@@ -148,7 +149,8 @@ def WeakTableau(t, k, inner_shape=[], representation='core'):
         sage: tf.to_core_tableau() == t
         True
 
-        sage: tfs = WeakTableau([[0,3],[2,1]], 3, inner_shape = [1,1], representation = 'factorized_permutation')
+        sage: # needs sage.combinat sage.groups
+        sage: tfs = WeakTableau([[0,3],[2,1]], 3, inner_shape = [1,1], representation='factorized_permutation')
         sage: tfs.shape()
         ([5, 2, 1], [1, 1])
         sage: tfs.weight()
@@ -182,7 +184,7 @@ def WeakTableau(t, k, inner_shape=[], representation='core'):
 
     TESTS::
 
-        sage: t = WeakTableau([[2,0],[3,2],[1,0]], 3, representation = "bla")
+        sage: t = WeakTableau([[2,0],[3,2],[1,0]], 3, representation="bla")
         Traceback (most recent call last):
         ...
         NotImplementedError: The representation option needs to be 'core', 'bounded', or 'factorized_permutation'
@@ -228,27 +230,29 @@ def WeakTableaux(k, shape , weight, representation='core'):
         [[None, None, 1, 2, 4], [2, 4], [3]],
         [[None, None, 1, 2, 3], [2, 3], [4]]]
 
-        sage: T = WeakTableaux(3, [3,2,1], [1,1,1,1,1,1], representation = 'bounded')
+        sage: T = WeakTableaux(3, [3,2,1], [1,1,1,1,1,1], representation='bounded')
         sage: T.list()
         [[[1, 3, 5], [2, 6], [4]],
         [[1, 2, 5], [3, 6], [4]],
         [[1, 2, 3], [4, 6], [5]],
         [[1, 2, 3], [4, 5], [6]]]
 
-        sage: T = WeakTableaux(3, [[3,2,1], [2]], [1,1,1,1], representation = 'bounded')
+        sage: T = WeakTableaux(3, [[3,2,1], [2]], [1,1,1,1], representation='bounded')
         sage: T.list()
         [[[None, None, 3], [1, 4], [2]],
         [[None, None, 1], [2, 4], [3]],
         [[None, None, 1], [2, 3], [4]]]
 
-        sage: T = WeakTableaux(3, [5,2,1], [1,1,1,1,1,1], representation = 'factorized_permutation')
+        sage: # needs sage.combinat sage.groups
+        sage: T = WeakTableaux(3, [5,2,1], [1,1,1,1,1,1], representation='factorized_permutation')
         sage: T.list()
         [[s0, s3, s2, s1, s3, s0],
         [s0, s3, s2, s3, s1, s0],
         [s0, s2, s3, s2, s1, s0],
         [s2, s0, s3, s2, s1, s0]]
 
-        sage: T = WeakTableaux(3, [[5,2,1], [2]], [1,1,1,1], representation = 'factorized_permutation')
+        sage: # needs sage.combinat sage.groups
+        sage: T = WeakTableaux(3, [[5,2,1], [2]], [1,1,1,1], representation='factorized_permutation')
         sage: T.list()
         [[s0, s3, s2, s3], [s0, s2, s3, s2], [s2, s0, s3, s2]]
     """
@@ -286,17 +290,18 @@ class WeakTableau_abstract(ClonableList,
             sage: t.shape()
             ([5, 2, 1], [2])
 
-            sage: t = WeakTableau([[1,1,1],[2,2],[3]], 3, representation = 'bounded')
+            sage: t = WeakTableau([[1,1,1],[2,2],[3]], 3, representation='bounded')
             sage: t.shape()
             [3, 2, 1]
-            sage: t = WeakTableau([[None, None, 1], [2, 4], [3]], 3, representation = 'bounded')
+            sage: t = WeakTableau([[None, None, 1], [2, 4], [3]], 3, representation='bounded')
             sage: t.shape()
             ([3, 2, 1], [2])
 
-            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation='factorized_permutation')
             sage: t.shape()
             [5, 2, 1]
-            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape = [2], representation = 'factorized_permutation')
+            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape=[2], representation='factorized_permutation')
             sage: t.shape()
             ([5, 2, 1], [2])
         """
@@ -321,23 +326,24 @@ class WeakTableau_abstract(ClonableList,
             sage: t.weight()
             (0, 1, 1)
 
-            sage: t = WeakTableau([[1,1,1],[2,2],[3]], 3, representation = 'bounded')
+            sage: t = WeakTableau([[1,1,1],[2,2],[3]], 3, representation='bounded')
             sage: t.weight()
             (3, 2, 1)
-            sage: t = WeakTableau([[1,1,2],[2,3],[3]], 3, representation = 'bounded')
+            sage: t = WeakTableau([[1,1,2],[2,3],[3]], 3, representation='bounded')
             sage: t.weight()
             (2, 2, 2)
-            sage: t = WeakTableau([[None, None, 1], [2, 4], [3]], 3, representation = 'bounded')
+            sage: t = WeakTableau([[None, None, 1], [2, 4], [3]], 3, representation='bounded')
             sage: t.weight()
             (1, 1, 1, 1)
 
-            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation='factorized_permutation')
             sage: t.weight()
             (3, 2, 1)
-            sage: t = WeakTableau([[2,0],[3,2],[1,0]], 3, representation = 'factorized_permutation')
+            sage: t = WeakTableau([[2,0],[3,2],[1,0]], 3, representation='factorized_permutation')
             sage: t.weight()
             (2, 2, 2)
-            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape = [2], representation = 'factorized_permutation')
+            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape=[2], representation='factorized_permutation')
             sage: t.weight()
             (2, 2)
         """
@@ -387,15 +393,16 @@ class WeakTableau_abstract(ClonableList,
             sage: t.intermediate_shapes()
             [[2], [2, 1], [3, 1, 1], [4, 1, 1], [5, 2, 1]]
 
-            sage: t = WeakTableau([[1,1,1],[2,2],[3]], 3, representation = 'bounded')
+            sage: t = WeakTableau([[1,1,1],[2,2],[3]], 3, representation='bounded')
             sage: t.intermediate_shapes()
             [[], [3], [3, 2], [3, 2, 1]]
 
-            sage: t = WeakTableau([[None, None, 1], [2, 4], [3]], 3, representation = 'bounded')
+            sage: t = WeakTableau([[None, None, 1], [2, 4], [3]], 3, representation='bounded')
             sage: t.intermediate_shapes()
             [[2], [3], [3, 1], [3, 1, 1], [3, 2, 1]]
 
-            sage: t = WeakTableau([[0],[3],[2],[3]], 3, inner_shape = [2], representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[0],[3],[2],[3]], 3, inner_shape=[2], representation='factorized_permutation')
             sage: t.intermediate_shapes()
             [[2], [2, 1], [3, 1, 1], [4, 1, 1], [5, 2, 1]]
         """
@@ -415,7 +422,9 @@ class WeakTableau_abstract(ClonableList,
             .  1  1  2  2
             .  2
             1
-            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape = [2], representation = 'factorized_permutation')
+
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape=[2], representation='factorized_permutation')
             sage: t.pp()
             [s2*s0, s3*s2]
         """
@@ -438,6 +447,8 @@ class WeakTableau_abstract(ClonableList,
             sage: t = T[0]
             sage: hash(t) == hash(t)
             True
+
+            sage: # needs sage.combinat sage.groups
             sage: T = WeakTableaux(3, [5,2,1], [1,1,1,1,1,1], representation='factorized_permutation')
             sage: t = T[0]
             sage: hash(t) == hash(t)
@@ -464,7 +475,8 @@ class WeakTableau_abstract(ClonableList,
             \end{array}$}
             }
 
-            sage: t = WeakTableau([[0,3],[2,1]], 3, inner_shape = [1,1], representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[0,3],[2,1]], 3, inner_shape = [1,1], representation='factorized_permutation')
             sage: latex(t)
             [s_{0}s_{3},s_{2}s_{1}]
         """
@@ -499,15 +511,18 @@ class WeakTableau_abstract(ClonableList,
             sage: t.representation('factorized_permutation')
             [s0, s3*s1, s2*s1, s0*s4, s3*s0, s4*s2, s1*s0]
 
-            sage: tb = WeakTableau([[1, 1, 2, 4], [2, 3, 5], [3, 4], [5, 6], [6], [7]], 4, representation = 'bounded')
+            sage: tb = WeakTableau([[1, 1, 2, 4], [2, 3, 5], [3, 4], [5, 6], [6], [7]], 4,
+            ....:                  representation='bounded')
             sage: tb.parent()._representation
             'bounded'
             sage: tb.representation('core') == t
             True
-            sage: tb.representation('factorized_permutation')
+            sage: tb.representation('factorized_permutation')                           # needs sage.combinat sage.groups
             [s0, s3*s1, s2*s1, s0*s4, s3*s0, s4*s2, s1*s0]
 
-            sage: tp = WeakTableau([[0],[3,1],[2,1],[0,4],[3,0],[4,2],[1,0]], 4, representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: tp = WeakTableau([[0],[3,1],[2,1],[0,4],[3,0],[4,2],[1,0]], 4,
+            ....:                  representation='factorized_permutation')
             sage: tp.parent()._representation
             'factorized_permutation'
             sage: tp.representation('core') == t
@@ -875,6 +890,7 @@ class WeakTableau_core(WeakTableau_abstract):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: t = WeakTableau([[1, 1, 2, 2, 3], [2, 3], [3]], 3)
             sage: c = t.to_factorized_permutation_tableau(); c
             [s2*s0, s3*s2, s1*s0]
@@ -883,6 +899,7 @@ class WeakTableau_core(WeakTableau_abstract):
             sage: c.to_core_tableau() == t
             True
 
+            sage: # needs sage.combinat sage.groups
             sage: t = WeakTableau([[None, None, 2, 3, 4], [1, 4], [2]], 3)
             sage: c = t.to_factorized_permutation_tableau(); c
             [s0, s3, s2, s3]
@@ -893,6 +910,7 @@ class WeakTableau_core(WeakTableau_abstract):
 
         TESTS::
 
+            sage: # needs sage.combinat sage.groups
             sage: t = WeakTableau([], 4)
             sage: c = t.to_factorized_permutation_tableau(); c
             [1]
@@ -1798,6 +1816,7 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: from sage.combinat.k_tableau import WeakTableau_factorized_permutation
             sage: WeakTableau_factorized_permutation.straighten_input([[2,0],[3,2],[1,0]], 3)
             (s2*s0, s3*s2, s1*s0)
@@ -1807,6 +1826,7 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         TESTS::
 
+            sage: # needs sage.combinat sage.groups
             sage: WeakTableau_factorized_permutation.straighten_input([W.an_element(),W.an_element()], 3)
             Traceback (most recent call last):
             ...
@@ -1832,17 +1852,16 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         TESTS::
 
+            sage: # needs sage.combinat sage.groups
             sage: from sage.combinat.k_tableau import WeakTableau_factorized_permutation
             sage: t = WeakTableau_factorized_permutation([[2,0],[3,2],[1,0]], 3)
             sage: t.check()
             sage: type(t)
             <class 'sage.combinat.k_tableau.WeakTableaux_factorized_permutation_with_category.element_class'>
             sage: TestSuite(t).run()
-
-            sage: t = WeakTableau_factorized_permutation([[0,3],[2,1]], 3, inner_shape = [1,1])
+            sage: t = WeakTableau_factorized_permutation([[0,3],[2,1]], 3, inner_shape=[1,1])
             sage: t.check()
             sage: TestSuite(t).run()
-
             sage: t = WeakTableau_factorized_permutation([], 3); t
             [1]
             sage: t.check()
@@ -1870,6 +1889,7 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         TESTS::
 
+            sage: # needs sage.combinat sage.groups
             sage: from sage.combinat.k_tableau import WeakTableau_factorized_permutation, WeakTableaux_factorized_permutation
             sage: c = WeakTableau_factorized_permutation([[2,0],[3,2],[1,0]], 3)
             sage: T = WeakTableaux_factorized_permutation(3, [5,2,1],[2,2,2])
@@ -1882,8 +1902,7 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
             sage: t.parent()
             Factorized permutation (skew) weak 3-Tableaux of shape [5, 2, 1] and weight (2, 2, 2)
             sage: TestSuite(t).run()
-
-            sage: t = WeakTableau_factorized_permutation([[2,0],[3,2]], 3, inner_shape = [2]); t
+            sage: t = WeakTableau_factorized_permutation([[2,0],[3,2]], 3, inner_shape=[2]); t
             [s2*s0, s3*s2]
             sage: t._inner_shape
             [2]
@@ -1892,12 +1911,10 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
             sage: t.shape()
             ([5, 2, 1], [2])
             sage: TestSuite(t).run()
-
             sage: t = T([[3,0],[0,3],[1,0]])
             Traceback (most recent call last):
             ...
             ValueError: The outer shape of the parent does not agree with the outer shape of the tableau!
-
             sage: t = WeakTableau_factorized_permutation([], 3); t
             [1]
             sage: t.parent()._outer_shape
@@ -1919,11 +1936,11 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         EXAMPLES::
 
-            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation='factorized_permutation')
             sage: t.shape_core()
             [5, 2, 1]
-
-            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape = [2], representation = 'factorized_permutation')
+            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape=[2], representation='factorized_permutation')
             sage: t.shape()
             ([5, 2, 1], [2])
         """
@@ -1939,11 +1956,11 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         EXAMPLES::
 
-            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation='factorized_permutation')
             sage: t.shape_bounded()
             [3, 2, 1]
-
-            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape = [2], representation = 'factorized_permutation')
+            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape=[2], representation='factorized_permutation')
             sage: t.shape_bounded()
             ([3, 2, 1], [2])
         """
@@ -1957,17 +1974,18 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         EXAMPLES::
 
-            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation='factorized_permutation')
             sage: t.check()
 
         TESTS::
 
-            sage: t = WeakTableau([[2,0],[3,2]], 3, representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[2,0],[3,2]], 3, representation='factorized_permutation')
             Traceback (most recent call last):
             ...
             ValueError: this only works on type 'A' affine Grassmannian elements
-
-            sage: T = WeakTableaux(3, [4,1], [2,1], representation = 'factorized_permutation')
+            sage: T = WeakTableaux(3, [4,1], [2,1], representation='factorized_permutation')
             sage: t = T([[2],[1],[0]])
             Traceback (most recent call last):
             ...
@@ -1990,11 +2008,11 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         EXAMPLES::
 
-            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[2],[0,3],[2,1,0]], 3, representation='factorized_permutation')
             sage: t._is_k_tableau()
             True
-
-            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape = [2], representation = 'factorized_permutation')
+            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape=[2], representation='factorized_permutation')
             sage: t._is_k_tableau()
             True
         """
@@ -2009,7 +2027,8 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         EXAMPLES::
 
-            sage: t = WeakTableau([[0], [3,1], [2,1], [0,4], [3,0], [4,2], [1,0]], 4, representation = 'factorized_permutation'); t
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[0], [3,1], [2,1], [0,4], [3,0], [4,2], [1,0]], 4, representation='factorized_permutation'); t
             [s0, s3*s1, s2*s1, s0*s4, s3*s0, s4*s2, s1*s0]
             sage: c = t.to_core_tableau(); c
             [[1, 1, 2, 3, 4, 4, 5, 5, 6], [2, 3, 5, 5, 6], [3, 4, 7], [5, 6], [6], [7]]
@@ -2019,15 +2038,13 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
             [1]
             sage: t.to_core_tableau()
             []
-
             sage: from sage.combinat.k_tableau import WeakTableau_factorized_permutation
-            sage: t = WeakTableau([[2,0],[3,2],[1,0]], 3, representation = 'factorized_permutation')
+            sage: t = WeakTableau([[2,0],[3,2],[1,0]], 3, representation='factorized_permutation')
             sage: WeakTableau_factorized_permutation.from_core_tableau(t.to_core_tableau(), 3)
             [s2*s0, s3*s2, s1*s0]
             sage: t == WeakTableau_factorized_permutation.from_core_tableau(t.to_core_tableau(), 3)
             True
-
-            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape = [2], representation = 'factorized_permutation')
+            sage: t = WeakTableau([[2,0],[3,2]], 3, inner_shape=[2], representation='factorized_permutation')
             sage: t.to_core_tableau()
             [[None, None, 1, 1, 2], [1, 2], [2]]
             sage: t == WeakTableau_factorized_permutation.from_core_tableau(t.to_core_tableau(), 3)
@@ -2060,6 +2077,7 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: from sage.combinat.k_tableau import WeakTableau_factorized_permutation
             sage: WeakTableau_factorized_permutation.from_core_tableau([[1, 1, 2, 2, 3], [2, 3], [3]],3)
             [s2*s0, s3*s2, s1*s0]
@@ -2083,13 +2101,14 @@ class WeakTableau_factorized_permutation(WeakTableau_abstract):
 
         EXAMPLES::
 
-            sage: t = WeakTableau([[2,0],[3,2],[1,0]], 3, representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: t = WeakTableau([[2,0],[3,2],[1,0]], 3, representation='factorized_permutation')
             sage: t.k_charge()
             2
-            sage: t = WeakTableau([[0],[3],[2],[1],[3],[0]], 3, representation = 'factorized_permutation')
+            sage: t = WeakTableau([[0],[3],[2],[1],[3],[0]], 3, representation='factorized_permutation')
             sage: t.k_charge()
             8
-            sage: t = WeakTableau([[0],[3,1],[2,1],[0,4],[3,0],[4,2],[1,0]], 4, representation = 'factorized_permutation')
+            sage: t = WeakTableau([[0],[3,1],[2,1],[0,4],[3,0],[4,2],[1,0]], 4, representation='factorized_permutation')
             sage: t.k_charge()
             12
         """
@@ -2110,11 +2129,11 @@ class WeakTableaux_factorized_permutation(WeakTableaux_abstract):
 
     EXAMPLES::
 
-        sage: T = WeakTableaux(3, [4,1], [2,2], representation = 'factorized_permutation')
+        sage: # needs sage.combinat sage.groups
+        sage: T = WeakTableaux(3, [4,1], [2,2], representation='factorized_permutation')
         sage: T.list()
         [[s3*s2, s1*s0]]
-
-        sage: T = WeakTableaux(4, [[6,2,1], [2]], [2,1,1,1], representation = 'factorized_permutation')
+        sage: T = WeakTableaux(4, [[6,2,1], [2]], [2,1,1,1], representation='factorized_permutation')
         sage: T.list()
         [[s0, s4, s3, s4*s2], [s0, s3, s4, s3*s2], [s3, s0, s4, s3*s2]]
     """
@@ -2125,6 +2144,7 @@ class WeakTableaux_factorized_permutation(WeakTableaux_abstract):
 
         TESTS::
 
+            sage: # needs sage.combinat sage.groups
             sage: from sage.combinat.k_tableau import WeakTableaux_factorized_permutation
             sage: T = WeakTableaux_factorized_permutation(3, [2,1], [1,1,1])
             sage: TestSuite(T).run()
@@ -2151,6 +2171,7 @@ class WeakTableaux_factorized_permutation(WeakTableaux_abstract):
 
         TESTS::
 
+            sage: # needs sage.combinat sage.groups
             sage: from sage.combinat.k_tableau import WeakTableaux_factorized_permutation
             sage: T = WeakTableaux_factorized_permutation(3, [4,1], [2,2])
             sage: TestSuite(T).run()
@@ -2170,6 +2191,7 @@ class WeakTableaux_factorized_permutation(WeakTableaux_abstract):
         """
         TESTS::
 
+            sage: # needs sage.combinat sage.groups
             sage: from sage.combinat.k_tableau import WeakTableaux_factorized_permutation
             sage: repr(WeakTableaux_factorized_permutation(3, [2,1], [1,1,1]))
             'Factorized permutation (skew) weak 3-Tableaux of shape [2, 1] and weight (1, 1, 1)'
@@ -2182,13 +2204,14 @@ class WeakTableaux_factorized_permutation(WeakTableaux_abstract):
         r"""
         TESTS::
 
-            sage: T = WeakTableaux(3, [4,1], [2,2], representation = 'factorized_permutation')
+            sage: # needs sage.combinat sage.groups
+            sage: T = WeakTableaux(3, [4,1], [2,2], representation='factorized_permutation')
             sage: T.list()
             [[s3*s2, s1*s0]]
-            sage: T = WeakTableaux(3, [5,2,2], [2,2,2,1], representation = 'factorized_permutation')
+            sage: T = WeakTableaux(3, [5,2,2], [2,2,2,1], representation='factorized_permutation')
             sage: T.list()
             [[s0, s3*s2, s0*s3, s1*s0], [s3, s2*s0, s3*s2, s1*s0]]
-            sage: T = WeakTableaux(4, [[6,2,1], [2]], [2,1,1,1], representation = 'factorized_permutation')
+            sage: T = WeakTableaux(4, [[6,2,1], [2]], [2,1,1,1], representation='factorized_permutation')
             sage: T.list()
             [[s0, s4, s3, s4*s2], [s0, s3, s4, s3*s2], [s3, s0, s4, s3*s2]]
         """

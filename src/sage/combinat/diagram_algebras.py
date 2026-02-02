@@ -625,7 +625,7 @@ class IdealDiagram(AbstractPartitionDiagram):
          {{-2}, {-1}, {1}, {2}}]
 
         sage: from sage.combinat.diagram_algebras import PartitionDiagrams as PDs
-        sage: PDs(4).cardinality() == factorial(4) + IDs(4).cardinality()
+        sage: PDs(4).cardinality() == factorial(4) + IDs(4).cardinality()               # needs sage.libs.flint
         True
     """
     @staticmethod
@@ -1183,7 +1183,7 @@ class AbstractPartitionDiagrams(Parent, UniqueRepresentation):
             Category of finite sets
 
             sage: pd = da.PartitionDiagrams(2)
-            sage: TestSuite(pd).run()
+            sage: TestSuite(pd).run()                                                   # needs sage.libs.flint
 
             sage: bd = da.BrauerDiagrams(2)
             sage: TestSuite(bd).run()
@@ -1225,6 +1225,8 @@ class AbstractPartitionDiagrams(Parent, UniqueRepresentation):
         TESTS::
 
             sage: import sage.combinat.diagram_algebras as da
+
+            sage: # needs sage.libs.flint
             sage: list(da.PartitionDiagrams(2))
             [{{-2, -1, 1, 2}},
              {{-2, 1, 2}, {-1}},
@@ -1241,7 +1243,6 @@ class AbstractPartitionDiagrams(Parent, UniqueRepresentation):
              {{-2}, {-1, 2}, {1}},
              {{-2, -1}, {1}, {2}},
              {{-2}, {-1}, {1}, {2}}]
-
             sage: list(da.PartitionDiagrams(3/2))
             [{{-2, -1, 1, 2}},
              {{-2, 1, 2}, {-1}},
@@ -1381,13 +1382,13 @@ class PartitionDiagrams(AbstractPartitionDiagrams):
 
     TESTS::
 
+        sage: # needs sage.libs.flint
         sage: import sage.combinat.diagram_algebras as da
         sage: pd = da.PartitionDiagrams(3)
         sage: pd.an_element() in pd
         True
         sage: pd.cardinality() == len(pd.list())
         True
-
         sage: pd = da.PartitionDiagrams(5/2)
         sage: pd.an_element() in pd
         True
@@ -1405,11 +1406,11 @@ class PartitionDiagrams(AbstractPartitionDiagrams):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.flint
             sage: import sage.combinat.diagram_algebras as da
             sage: pd = da.PartitionDiagrams(3)
             sage: pd.cardinality()
             203
-
             sage: pd = da.PartitionDiagrams(7/2)
             sage: pd.cardinality()
             877
@@ -1535,6 +1536,7 @@ class BrauerDiagrams(AbstractPartitionDiagrams):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: import sage.combinat.diagram_algebras as da
             sage: bd = da.BrauerDiagrams(4)
             sage: bd.symmetric_diagrams(l=1, perm=[2,1])
@@ -1547,6 +1549,7 @@ class BrauerDiagrams(AbstractPartitionDiagrams):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: import sage.combinat.diagram_algebras as da
             sage: bd = da.BrauerDiagrams(3/2)
             sage: bd.symmetric_diagrams(l=1, perm=[2,1])
@@ -1856,7 +1859,7 @@ class DiagramAlgebra(CombinatorialFreeModule):
         sage: import sage.combinat.diagram_algebras as da
         sage: R.<x> = QQ[]
         sage: D = da.DiagramAlgebra(2, x, R, 'P', da.PartitionDiagrams(2))
-        sage: list(D.basis())
+        sage: list(D.basis())                                                           # needs sage.libs.flint
         [P{{-2, -1, 1, 2}},
          P{{-2, 1, 2}, {-1}},
          P{{-2}, {-1, 1, 2}},
@@ -1892,7 +1895,7 @@ class DiagramAlgebra(CombinatorialFreeModule):
             sage: import sage.combinat.diagram_algebras as da
             sage: R.<x> = QQ[]
             sage: D = da.DiagramBasis(2, x, R, 'P', da.PartitionDiagrams(2))
-            sage: TestSuite(D).run()
+            sage: TestSuite(D).run()                                                    # needs sage.libs.flint
         """
         self._prefix = prefix
         self._q = base_ring(q)
@@ -2074,7 +2077,7 @@ class DiagramAlgebra(CombinatorialFreeModule):
             sage: import sage.combinat.diagram_algebras as da
             sage: R.<x> = QQ[]
             sage: D = da.DiagramAlgebra(2, x, R, 'P', da.PartitionDiagrams(2))
-            sage: list(D.set_partitions()) == list(da.PartitionDiagrams(2))
+            sage: list(D.set_partitions()) == list(da.PartitionDiagrams(2))             # needs sage.libs.flint
             True
         """
         return self.basis().keys()
@@ -2538,7 +2541,7 @@ class PartitionAlgebra(DiagramBasis, UnitDiagramMixin):
 
             sage: R.<q> = QQ[]
             sage: PA = PartitionAlgebra(2, q, R)
-            sage: TestSuite(PA).run()
+            sage: TestSuite(PA).run()                                                   # needs sage.libs.flint
         """
         self._k = k
         self._prefix = prefix
@@ -3121,10 +3124,10 @@ class PartitionAlgebra(DiagramBasis, UnitDiagramMixin):
         EXAMPLES::
 
             sage: PA = algebras.Partition(5/2, QQ(4))
-            sage: PR = PA.potts_representation()
+            sage: PR = PA.potts_representation()                                        # needs sage.groups
 
             sage: PA = algebras.Partition(5/2, 3/2)
-            sage: PA.potts_representation()
+            sage: PA.potts_representation()                                             # needs sage.groups
             Traceback (most recent call last):
             ...
             ValueError: the partition algebra deformation parameter must
@@ -3305,7 +3308,7 @@ class OrbitBasis(DiagramAlgebra):
         EXAMPLES::
 
             sage: O2 = PartitionAlgebra(2, -1, QQ).orbit_basis()
-            sage: TestSuite(O2).run()
+            sage: TestSuite(O2).run()                                                   # needs sage.libs.flint
         """
         base_ring = alg.base_ring()
         k = alg._k
@@ -4185,6 +4188,7 @@ class TemperleyLiebAlgebra(SubPartitionAlgebra, UnitDiagramMixin):
     the dimensions of the simple modules at `q = 0` is given by
     :oeis:`A050166`::
 
+        sage: # needs sage.graphs
         sage: for k in range(1,5):
         ....:     TL = TemperleyLiebAlgebra(2*k, 0, QQ)
         ....:     print("".join("{:3}".format(TL.cell_module(la).simple_module().dimension())
@@ -4261,10 +4265,10 @@ class TemperleyLiebAlgebra(SubPartitionAlgebra, UnitDiagramMixin):
 
             sage: R.<q> = QQ[]
             sage: TL = TemperleyLiebAlgebra(2, q, R)
-            sage: TestSuite(TL).run()
+            sage: TestSuite(TL).run()                                                   # needs sage.graphs
 
             sage: TL = TemperleyLiebAlgebra(3, 0, QQ)
-            sage: TestSuite(TL).run()
+            sage: TestSuite(TL).run()                                                   # needs sage.graphs
         """
         cat = AssociativeAlgebras(base_ring.category()).Unital().FiniteDimensional().WithBasis().Cellular()
         SubPartitionAlgebra.__init__(self, k, q, base_ring, prefix, TemperleyLiebDiagrams(k), category=cat)
@@ -4358,11 +4362,11 @@ class TemperleyLiebAlgebra(SubPartitionAlgebra, UnitDiagramMixin):
 
             sage: R.<q> = QQ[]
             sage: TL = TemperleyLiebAlgebra(7, q, R)
-            sage: TL.cell_poset().cover_relations()
+            sage: TL.cell_poset().cover_relations()                                     # needs sage.graphs
             [[1, 3], [3, 5], [5, 7]]
 
             sage: TL = TemperleyLiebAlgebra(8, q, R)
-            sage: TL.cell_poset().cover_relations()
+            sage: TL.cell_poset().cover_relations()                                     # needs sage.graphs
             [[0, 2], [2, 4], [4, 6], [6, 8]]
         """
         from sage.combinat.posets.posets import Poset
@@ -4393,7 +4397,7 @@ class TemperleyLiebAlgebra(SubPartitionAlgebra, UnitDiagramMixin):
 
             sage: R.<q> = QQ[]
             sage: TL = TemperleyLiebAlgebra(3, q, R)
-            sage: for d in TL.basis().keys():
+            sage: for d in TL.basis().keys():                                           # needs sage.graphs
             ....:     print(d)
             ....:     print(TL._to_cellular_element(d))
             {{-3, 3}, {-2, -1}, {1, 2}}
@@ -4429,6 +4433,7 @@ class TemperleyLiebAlgebra(SubPartitionAlgebra, UnitDiagramMixin):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: R.<q> = QQ[]
             sage: TL = TemperleyLiebAlgebra(3, q, R)
             sage: C = TL.cellular_basis()
@@ -4445,7 +4450,6 @@ class TemperleyLiebAlgebra(SubPartitionAlgebra, UnitDiagramMixin):
             T{{-3, -2}, {-1, 1}, {2, 3}}
             (3, {}, {})
             T{{-3, 3}, {-2, 2}, {-1, 1}}
-
             sage: TL = TemperleyLiebAlgebra(4, QQ.zero(), QQ)
             sage: C = TL.cellular_basis()
             sage: [TL._from_cellular_index(i) for i in C.basis().keys()]
@@ -5031,6 +5035,7 @@ class PottsRepresentation(CombinatorialFreeModule):
     to construct the centralizer algebra of the left `S_{d-1}`-action on
     `V^{\otimes n}` with `V = \QQ^d` being the permutation action. ::
 
+        sage: # needs sage.groups
         sage: PA = algebras.Partition(5/2, QQ(2))
         sage: PR = PA.potts_representation(2)
         sage: mats = [PR.representation_matrix(x) for x in PA.basis()]
@@ -5041,13 +5046,14 @@ class PottsRepresentation(CombinatorialFreeModule):
 
     We check that this commutes with the `S_{d-1}`-action::
 
-        sage: all((g * v) * x == g * (v * x) for g in PR.symmetric_group()
+        sage: all((g * v) * x == g * (v * x) for g in PR.symmetric_group()              # needs sage.groups
         ....:     for v in PR.basis() for x in PA.basis())
         True
 
     Next, we see that the centralizer of the `S_d`-action is smaller
     than the semisimple quotient of the partition algebra::
 
+        sage: # needs sage.groups
         sage: PA.dimension()
         52
         sage: len(PA.radical_basis())
@@ -5060,7 +5066,7 @@ class PottsRepresentation(CombinatorialFreeModule):
     orthogonal idempotents in the semisimple quotient and construct
     the corresponding Peirce summands `e_i P_n(d) e_i`::
 
-        sage: # long time
+        sage: # long time, needs sage.groups
         sage: orth_idems = PA.orthogonal_idempotents_central_mod_radical()
         sage: algs = [PA.peirce_summand(idm, idm) for idm in orth_idems]
         sage: [A.dimension() for A in algs]
@@ -5077,6 +5083,7 @@ class PottsRepresentation(CombinatorialFreeModule):
     since the partition algebra has integer rank). We perform the same
     computations as before::
 
+        sage: # needs sage.groups
         sage: PA = algebras.Partition(2, QQ(2))
         sage: PA.dimension()
         15
@@ -5087,6 +5094,7 @@ class PottsRepresentation(CombinatorialFreeModule):
         sage: [A.dimension() for A in algs]
         [4, 2, 4, 1]
 
+        sage: # needs sage.groups
         sage: PR = PA.potts_representation()
         sage: mats = [PR.representation_matrix(x) for x in PA.basis()]
         sage: MS = mats[0].parent()
@@ -5098,6 +5106,7 @@ class PottsRepresentation(CombinatorialFreeModule):
     To do the remainder of the computation, we need to monkey patch a
     ``product_on_basis`` method::
 
+        sage: # needs sage.groups
         sage: CM.product_on_basis
         NotImplemented
         sage: CM.product_on_basis = lambda x,y: CM.retract(CM.basis()[x].lift() * CM.basis()[y].lift())
@@ -5116,7 +5125,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
     Lastly, we verify the commuting actions::
 
-        sage: all((g * v) * x == g * (v * x) for g in PR.symmetric_group()
+        sage: all((g * v) * x == g * (v * x) for g in PR.symmetric_group()              # needs sage.groups
         ....:     for v in PR.basis() for x in PA.basis())
         True
 
@@ -5130,10 +5139,10 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(5/2, QQ(4))
             sage: PR = PA.potts_representation()
             sage: TestSuite(PR).run()
-
             sage: PA = algebras.Partition(5/2, QQ(2))  # not semisimple
             sage: PR = PA.potts_representation()
             sage: TestSuite(PR).run()
@@ -5142,28 +5151,27 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         ::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(2, QQ(4))
             sage: PR = PA.potts_representation()
             sage: TestSuite(PR).run()
-
             sage: PA = algebras.Partition(3, QQ(2))  # not semisimple
             sage: PR = PA.potts_representation()
             sage: TestSuite(PR).run()
 
         TESTS::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(3, QQ(0))
             sage: PA.potts_representation()
             Traceback (most recent call last):
             ...
             ValueError: the partition algebra deformation parameter must be a positive integer
-
             sage: PA = algebras.Partition(3, QQ(2))
             sage: PA.potts_representation(1)
             Traceback (most recent call last):
             ...
             ValueError: the magnetic field direction should not be given for integer rank
-
             sage: PA = algebras.Partition(5/2, QQ(4))
             sage: PA.potts_representation(6)
             Traceback (most recent call last):
@@ -5214,11 +5222,11 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(5/2, QQ(4))
             sage: PA.potts_representation(2)
             Potts representation with 4 colors and magnetic field direction 2 of
              Partition Algebra of rank 5/2 with parameter 4 over Rational Field
-
             sage: PA = algebras.Partition(3, QQ(4))
             sage: PA.potts_representation()
             Potts representation with 4 colors of
@@ -5234,6 +5242,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(4, QQ(3))
             sage: PR = PA.potts_representation()
             sage: PR._test_representation()
@@ -5252,6 +5261,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(4, QQ(3))
             sage: PR = PA.potts_representation()
             sage: PR._monomial([1, 2, 1, 3])
@@ -5265,11 +5275,11 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(4, QQ(3))
             sage: PR = PA.potts_representation()
             sage: PR[1,2,1,3]
             P[word: 1213]
-
             sage: PA = algebras.Partition(1, QQ(4))
             sage: PR = PA.potts_representation()
             sage: PR[2]
@@ -5294,6 +5304,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(3, QQ(4))
             sage: PR = PA.potts_representation()
             sage: PR.partition_algebra() is PA
@@ -5307,6 +5318,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(7/2, QQ(4))
             sage: PR = PA.potts_representation()
             sage: PR.number_of_factors()
@@ -5320,6 +5332,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(3, QQ(4))
             sage: PR = PA.potts_representation()
             sage: PR.number_of_colors()
@@ -5333,6 +5346,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(7/2, QQ(4))
             sage: PR = PA.potts_representation(2)
             sage: PR.magnetic_field_direction()
@@ -5346,11 +5360,11 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(3, QQ(4))
             sage: PR = PA.potts_representation()
             sage: PR.symmetric_group()
             Symmetric group of order 4! as a permutation group
-
             sage: PA = algebras.Partition(7/2, QQ(4))
             sage: PR = PA.potts_representation()
             sage: PR.symmetric_group().domain()
@@ -5371,6 +5385,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(9/2, QQ(4))
             sage: PR = PA.potts_representation(2)
             sage: D = PA._indices([[1,2],[3,-3],[-1,-2,-4],[4,5,-5]])
@@ -5421,6 +5436,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(9/2, QQ(4))
             sage: PR = PA.potts_representation(2)
             sage: G = PR.symmetric_group()
@@ -5437,6 +5453,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(7/2, QQ(2))
             sage: PR = PA.potts_representation()
             sage: PR.representation_matrix(PA.an_element())
@@ -5448,12 +5465,12 @@ class PottsRepresentation(CombinatorialFreeModule):
             [0 0 0 0 0 0 0 0]
             [0 0 0 0 0 0 0 0]
             [0 0 0 0 0 0 0 0]
-
             sage: all(b.to_vector() * PR.representation_matrix(x)  # long time
             ....:     == (b * x).to_vector()
             ....:     for b in PR.basis() for x in PA.basis())
             True
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(2, QQ(2))
             sage: PR = PA.potts_representation()
             sage: [PR.representation_matrix(x) for x in PA.basis()]
@@ -5474,6 +5491,7 @@ class PottsRepresentation(CombinatorialFreeModule):
             [0 0 1 1], [1 0 0 1], [1 1 1 1]
             ]
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(5/2, QQ(2))
             sage: PR = PA.potts_representation()
             sage: all(PR.representation_matrix(x) * PR.representation_matrix(y)  # long time
@@ -5481,6 +5499,7 @@ class PottsRepresentation(CombinatorialFreeModule):
             ....:     for x in PA.basis() for y in PA.basis())
             True
 
+            sage: # needs sage.groups
             sage: PA = algebras.Partition(2, QQ(4))
             sage: PR = PA.potts_representation()
             sage: all(PR.representation_matrix(x) * PR.representation_matrix(y)
@@ -5498,6 +5517,7 @@ class PottsRepresentation(CombinatorialFreeModule):
 
             EXAMPLES::
 
+                sage: # needs sage.groups
                 sage: PA = algebras.Partition(5/2, QQ(4))
                 sage: PR = PA.potts_representation()
                 sage: v = PR.an_element(); v
@@ -5518,6 +5538,7 @@ class PottsRepresentation(CombinatorialFreeModule):
                 TypeError: unsupported operand parent(s) for *:
                  'Partition Algebra ...' and 'Potts representation ...'
 
+                sage: # needs sage.groups
                 sage: PA = algebras.Partition(2, QQ(4))
                 sage: PR = PA.potts_representation()
                 sage: v = PR.an_element(); v
@@ -5658,10 +5679,10 @@ def to_graph(sp):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: import sage.combinat.diagram_algebras as da
         sage: g = da.to_graph( da.to_set_partition([[1,-2],[2,-1]])); g
         Graph on 4 vertices
-
         sage: g.vertices(sort=True)
         [-2, -1, 1, 2]
         sage: g.edges(sort=True)
@@ -5691,12 +5712,12 @@ def pair_to_graph(sp1, sp2):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: import sage.combinat.diagram_algebras as da
         sage: sp1 = da.to_set_partition([[1,-2],[2,-1]])
         sage: sp2 = da.to_set_partition([[1,-2],[2,-1]])
         sage: g = da.pair_to_graph( sp1, sp2 ); g
         Graph on 8 vertices
-
         sage: g.vertices(sort=True)
         [(-2, 1), (-2, 2), (-1, 1), (-1, 2), (1, 1), (1, 2), (2, 1), (2, 2)]
         sage: g.edges(sort=True)
@@ -5706,11 +5727,11 @@ def pair_to_graph(sp1, sp2):
 
     Another example which used to be wrong until :issue:`15958`::
 
+        sage: # needs sage.graphs
         sage: sp3 = da.to_set_partition([[1, -1], [2], [-2]])
         sage: sp4 = da.to_set_partition([[1], [-1], [2], [-2]])
         sage: g = da.pair_to_graph( sp3, sp4 ); g
         Graph on 8 vertices
-
         sage: g.vertices(sort=True)
         [(-2, 1), (-2, 2), (-1, 1), (-1, 2), (1, 1), (1, 2), (2, 1), (2, 2)]
         sage: g.edges(sort=True)

@@ -294,7 +294,7 @@ def gale_ryser_theorem(p1, p2, algorithm='gale',
 
     Null matrix::
 
-        sage: gale_ryser_theorem([0,0,0],[0,0,0,0], algorithm='gale')                   # needs sage.combinat sage.modules
+        sage: gale_ryser_theorem([0,0,0],[0,0,0,0], algorithm='gale')                   # needs sage.combinat sage.modules sage.numerical_mip
         [0 0 0 0]
         [0 0 0 0]
         [0 0 0 0]
@@ -520,7 +520,7 @@ class IntegerVector(ClonableArray):
             sage: SM = IntegerVectors()([2,0,1,0,2]).specht_module(QQ); SM              # needs sage.combinat sage.modules
             Specht module of [(0, 0), (0, 1), (2, 0), (4, 0), (4, 1)] over Rational Field
             sage: s = SymmetricFunctions(QQ).s()                                        # needs sage.combinat sage.modules
-            sage: s(SM.frobenius_image())                                               # needs sage.combinat sage.modules
+            sage: s(SM.frobenius_image())                                               # needs sage.combinat sage.libs.flint sage.modules
             s[2, 2, 1]
         """
         from sage.combinat.specht_module import SpechtModule

@@ -1648,6 +1648,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
+                    sage: # needs sage.graphs
                     sage: R = NonCommutativeSymmetricFunctions(QQ).R()
                     sage: R[2,1].to_symmetric_group_algebra()
                     [1, 3, 2] + [2, 3, 1]
@@ -1660,6 +1661,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                 group algebra directly has the same result as going through
                 the descent algebra::
 
+                    sage: # needs sage.graphs
                     sage: S = NonCommutativeSymmetricFunctions(QQ).S()
                     sage: SGA4 = SymmetricGroupAlgebra(QQ, 4)
                     sage: D4 = DescentAlgebra(QQ, 4).D()
@@ -1783,6 +1785,7 @@ class NonCommutativeSymmetricFunctions(UniqueRepresentation, Parent):
                 We also check that the `NCSym` monomials agree on the homogeneous
                 and complete basis::
 
+                    sage: # needs sage.graphs
                     sage: h = SymmetricFunctions(QQ).h()
                     sage: all(m.from_symmetric_function(h[i])
                     ....:     == S[i].to_ncsym() for i in range(6))

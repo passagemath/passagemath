@@ -505,7 +505,7 @@ class Diagram(ClonableArray, metaclass=InheritComparisonClasscallMetaclass):
             sage: D = Diagram([(0,0), (1,1), (2,2), (2,3)])
             sage: SM = D.specht_module(QQ)                                              # needs sage.modules
             sage: s = SymmetricFunctions(QQ).s()                                        # needs sage.modules
-            sage: s(SM.frobenius_image())                                               # needs sage.modules
+            sage: s(SM.frobenius_image())                                               # needs sage.libs.flint sage.modules
             s[2, 1, 1] + s[2, 2] + 2*s[3, 1] + s[4]
         """
         from sage.combinat.specht_module import SpechtModule

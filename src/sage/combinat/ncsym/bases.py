@@ -284,7 +284,7 @@ class NCSymOrNCSymDualBases(Category_realization_of_parent):
                 [1 0 0 1 0]
                 [1 1 1 1 1]
                 sage: x = NCSym.x()
-                sage: w.duality_pairing_matrix(x, 3)
+                sage: w.duality_pairing_matrix(x, 3)                                    # needs sage.graphs
                 [ 0  0  0  0  1]
                 [ 1  0 -1 -1  1]
                 [ 1 -1  0 -1  1]
@@ -390,6 +390,7 @@ class NCSymBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: e = NCSym.e()
@@ -440,6 +441,7 @@ class NCSymBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: e = SymmetricFunctionsNonCommutingVariables(QQ).e()
                 sage: elt = e.primitive(SetPartition([[1,3],[2]])); elt
                 e{{1, 2}, {3}} - e{{1, 3}, {2}}
@@ -463,7 +465,7 @@ class NCSymBases(Category_realization_of_parent):
             EXAMPLES::
 
                 sage: m = SymmetricFunctionsNonCommutingVariables(QQ).m()
-                sage: m.internal_coproduct_on_basis(SetPartition([[1,2]]))
+                sage: m.internal_coproduct_on_basis(SetPartition([[1,2]]))              # needs sage.libs.flint
                 m{{1, 2}} # m{{1, 2}}
             """
 
@@ -482,7 +484,7 @@ class NCSymBases(Category_realization_of_parent):
             EXAMPLES::
 
                 sage: cp = SymmetricFunctionsNonCommutingVariables(QQ).cp()
-                sage: cp.internal_coproduct(cp[[1,3],[2]] - 2*cp[[1]])
+                sage: cp.internal_coproduct(cp[[1,3],[2]] - 2*cp[[1]])                  # needs sage.graphs
                 -2*cp{{1}} # cp{{1}} + cp{{1, 2, 3}} # cp{{1, 3}, {2}} + cp{{1, 3}, {2}} # cp{{1, 2, 3}}
                  + cp{{1, 3}, {2}} # cp{{1, 3}, {2}}
             """
@@ -505,7 +507,7 @@ class NCSymBases(Category_realization_of_parent):
             EXAMPLES::
 
                 sage: h = SymmetricFunctionsNonCommutingVariables(QQ).h()
-                sage: h[[1,3],[2]].internal_coproduct() # indirect doctest
+                sage: h[[1,3],[2]].internal_coproduct()  # indirect doctest             # needs sage.graphs
                 2*h{{1}, {2}, {3}} # h{{1}, {2}, {3}} - h{{1}, {2}, {3}} # h{{1, 3}, {2}}
                  - h{{1, 3}, {2}} # h{{1}, {2}, {3}} + h{{1, 3}, {2}} # h{{1, 3}, {2}}
             """
@@ -536,6 +538,7 @@ class NCSymBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: h = SymmetricFunctionsNonCommutingVariables(QQ).h()
                 sage: h[[1,3],[2]].expand(3)
                 2*x0^3 + x0^2*x1 + x0^2*x2 + 2*x0*x1*x0 + x0*x1^2 + x0*x1*x2 + 2*x0*x2*x0
@@ -572,6 +575,7 @@ class NCSymBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: e = NCSym.e()
                 sage: h = NCSym.h()
@@ -612,6 +616,7 @@ class NCSymBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: e = NCSym.e()
                 sage: h = NCSym.h()
@@ -665,7 +670,7 @@ class NCSymBases(Category_realization_of_parent):
             EXAMPLES::
 
                 sage: x = SymmetricFunctionsNonCommutingVariables(QQ).x()
-                sage: x[[1,3],[2]].internal_coproduct()
+                sage: x[[1,3],[2]].internal_coproduct()                                 # needs sage.graphs
                 x{{1}, {2}, {3}} # x{{1, 3}, {2}} + x{{1, 3}, {2}} # x{{1}, {2}, {3}}
                  + x{{1, 3}, {2}} # x{{1, 3}, {2}}
             """
@@ -687,6 +692,7 @@ class NCSymBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: m = NCSym.m()
                 sage: m[[1,3],[2]].omega()
@@ -772,6 +778,7 @@ class MultiplicativeNCSymBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: e = SymmetricFunctionsNonCommutingVariables(QQ).e()
                 sage: h = SymmetricFunctionsNonCommutingVariables(QQ).h()
                 sage: x = SymmetricFunctionsNonCommutingVariables(QQ).x()

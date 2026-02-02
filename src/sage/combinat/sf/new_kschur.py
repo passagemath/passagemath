@@ -81,14 +81,15 @@ class KBoundedSubspace(UniqueRepresentation, Parent):
             sage: Sym = SymmetricFunctions(QQ)
             sage: from sage.combinat.sf.new_kschur import KBoundedSubspace
             sage: L3 = KBoundedSubspace(Sym,3,1)
-            sage: TestSuite(L3).run(skip=["_test_not_implemented_methods"])
+            sage: TestSuite(L3).run(skip=["_test_not_implemented_methods"])             # needs lrcalc_python
             sage: Sym.kBoundedSubspace(0,1)
             Traceback (most recent call last):
             ...
             ValueError: k must be a positive integer
 
             sage: Sym = SymmetricFunctions(QQ['t'])
-            sage: TestSuite(Sym.kBoundedSubspace(1)).run(skip=["_test_not_implemented_methods"])
+            sage: TestSuite(Sym.kBoundedSubspace(1)).run(       # needs lrcalc_python
+            ....:     skip=["_test_not_implemented_methods"])
         """
         if not isinstance(k, (int, Integer)) or (k < 1):
             raise ValueError("k must be a positive integer")
@@ -148,9 +149,9 @@ class KBoundedSubspace(UniqueRepresentation, Parent):
             sage: s = Sym.schur()
             sage: KB = Sym.kBoundedSubspace(3,1); KB
             3-bounded Symmetric Functions over Rational Field with t=1
-            sage: KB.retract(s[2]+s[3])
+            sage: KB.retract(s[2]+s[3])                         # needs lrcalc_python
             ks3[2] + ks3[3]
-            sage: KB.retract(s[2,1,1])
+            sage: KB.retract(s[2,1,1])                          # needs lrcalc_python
             Traceback (most recent call last):
             ...
             ValueError: s[2, 1, 1] is not in the image
@@ -189,7 +190,7 @@ class KBoundedSubspace(UniqueRepresentation, Parent):
         EXAMPLES::
 
             sage: ks3 = SymmetricFunctions(QQ).kBoundedSubspace(3,1).kschur()
-            sage: TestSuite(ks3).run()
+            sage: TestSuite(ks3).run()                          # needs lrcalc_python
         """
         return kSchur(self)
 
@@ -202,7 +203,7 @@ class KBoundedSubspace(UniqueRepresentation, Parent):
         EXAMPLES::
 
             sage: ksp3 = SymmetricFunctions(QQ).kBoundedSubspace(3,1).ksplit()
-            sage: TestSuite(ksp3).run()
+            sage: TestSuite(ksp3).run()                         # needs lrcalc_python
         """
         return kSplit(self)
 
@@ -362,7 +363,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: e = Sym.elementary(); ks3 = Sym.kschur(3,1)
-                sage: ks3(e[3, 2])                   # indirect doctest
+                sage: ks3(e[3, 2])                   # indirect doctest     # needs lrcalc_python
                 ks3[1, 1, 1, 1, 1]
             """
             P = self.lift.codomain()
@@ -457,7 +458,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
                 sage: Sym = SymmetricFunctions(QQ); s = Sym.schur()
                 sage: ks3 = Sym.kschur(3,1)
-                sage: ks3.transition_matrix(s,5)
+                sage: ks3.transition_matrix(s,5)                            # needs lrcalc_python
                 [1 1 1 0 0 0 0]
                 [0 1 0 1 0 0 0]
                 [0 0 1 0 1 0 0]
@@ -467,7 +468,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
                 sage: Sym = SymmetricFunctions(QQ['t'])
                 sage: s = Sym.schur()
                 sage: ks = Sym.kschur(3)
-                sage: ks.transition_matrix(s,5)
+                sage: ks.transition_matrix(s,5)                             # needs lrcalc_python
                 [t^2   t   1   0   0   0   0]
                 [  0   t   0   1   0   0   0]
                 [  0   0   t   0   1   0   0]
@@ -524,6 +525,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: ks3 = Sym.kschur(3,1)
                 sage: ks3[2,1].coproduct()
@@ -567,6 +569,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: ks3 = Sym.kschur(3,1)
                 sage: ks3[3,2].antipode()
@@ -613,6 +616,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ['t'])
                 sage: ks = Sym.kschur(3)
                 sage: ks[2]*ks[2]                        # indirect doctest
@@ -634,13 +638,13 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             TESTS::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
                 sage: ks2 = Sym.kschur(2)
                 sage: ks3 = Sym.kschur(3)
                 sage: ks5 = Sym.kschur(5)
                 sage: ks5(ks3[2]) * ks5(ks2[2,1])
                 ks5[2, 2, 1] + ks5[3, 1, 1] + (t+1)*ks5[3, 2] + (t+1)*ks5[4, 1] + t*ks5[5]
-
                 sage: ks3([1]) * ks3([1]) # indirect doctest
                 ks3[1, 1] + ks3[2]
                 sage: ks3([2,1]) * ks3([2,1])
@@ -678,6 +682,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
                 sage: ks = Sym.kschur(4)
                 sage: s = Sym.schur()
@@ -686,6 +691,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
                 sage: ks([3,1,1]).hl_creation_operator([1])
                 (t-1)*ks4[2, 2, 1, 1] + t^2*ks4[3, 1, 1, 1] + t^3*ks4[3, 2, 1] + (t^3-t^2)*ks4[3, 3] + t^4*ks4[4, 1, 1]
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: ks = Sym.kschur(4,t=1)
                 sage: ks([3,1,1]).hl_creation_operator([1])
@@ -712,6 +718,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: ks = Sym.kschur(3,1)
                 sage: ks[2,2,1,1].omega()
@@ -720,6 +727,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
                 sage: kh[3].omega()
                 h3[1, 1, 1] - 2*h3[2, 1] + h3[3]
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
                 sage: ks = Sym.kschur(3)
                 sage: ks[3,1,1].omega()
@@ -760,6 +768,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: ks = Sym.kschur(3,1)
                 sage: f = ks[3,2]+ks[1]
@@ -769,6 +778,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
                 sage: f.is_schur_positive()
                 False
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ['t'])
                 sage: ks = Sym.kschur(3)
                 sage: f = ks[3,2]+ks[1]
@@ -792,6 +802,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: ks = Sym.kschur(3,1)
                 sage: ks[3,1].expand(2)
@@ -800,6 +811,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
                 sage: ks[3,1].expand(2) == s(ks[3,1]).expand(2)
                 True
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ['t'])
                 sage: ks = Sym.kschur(3)
                 sage: f = ks[3,2]-ks[1]
@@ -825,6 +837,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             EXAMPLES::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ['t'])
                 sage: ks3 = Sym.kschur(3)
                 sage: ks3[3,2,1].scalar( ks3[2,2,2] )
@@ -844,6 +857,7 @@ class KBoundedSubspaceBases(Category_realization_of_parent):
 
             TESTS::
 
+                sage: # needs lrcalc_python
                 sage: Sym = SymmetricFunctions(QQ)
                 sage: ks3 = Sym.kschur(3,1)
                 sage: ks3(1).scalar(ks3([]))
@@ -907,6 +921,7 @@ class kSchur(CombinatorialFreeModule):
     happens to lie in the `k`-bounded subspace, then the result is cast into the
     `k`-Schur basis::
 
+        sage: # needs lrcalc_python
         sage: ks2 = Sym.kBoundedSubspace(2).kschur()
         sage: ks2[1] * ks2[1]
         ks2[1, 1] + ks2[2]
@@ -918,6 +933,7 @@ class kSchur(CombinatorialFreeModule):
     implemented for distinct `k` and `j`. Let us show how to get around
     this 'manually'::
 
+        sage: # needs lrcalc_python
         sage: ks3 = Sym.kBoundedSubspace(3).kschur()
         sage: ks2([2,1]) * ks3([3,1])
         Traceback (most recent call last):
@@ -926,6 +942,7 @@ class kSchur(CombinatorialFreeModule):
 
     The workaround::
 
+        sage: # needs lrcalc_python
         sage: f = s(ks2([2,1])) * s(ks3([3,1])); f # Convert to Schur functions first and multiply there.
         s[3, 2, 1, 1] + s[3, 2, 2] + (t+1)*s[3, 3, 1] + s[4, 1, 1, 1]
         + (2*t+2)*s[4, 2, 1] + (t^2+t+1)*s[4, 3] + (2*t+1)*s[5, 1, 1]
@@ -933,6 +950,7 @@ class kSchur(CombinatorialFreeModule):
 
     or::
 
+        sage: # needs lrcalc_python
         sage: f = ks2[2,1].lift() * ks3[3,1].lift()
         sage: ks5 = Sym.kBoundedSubspace(5).kschur()
         sage: ks5(f) # The product of a 'ks2' with a 'ks3' is a 'ks5'.
@@ -943,7 +961,7 @@ class kSchur(CombinatorialFreeModule):
     is not implemented, even when the answer is still in the `k`-bounded
     subspace::
 
-        sage: ks2([1])^2
+        sage: ks2([1])^2                                                                # needs lrcalc_python
         Traceback (most recent call last):
         ...
         TypeError: unsupported operand parent(s) for ^: '2-bounded Symmetric Functions over Univariate Polynomial Ring in t over Rational Field in the 2-Schur basis' and 'Integer Ring'
@@ -955,6 +973,7 @@ class kSchur(CombinatorialFreeModule):
     However, at `t=1`, the product of `k`-Schur functions is in the span of the
     `k`-Schur functions always. Below are some examples at `t=1` ::
 
+        sage: # needs lrcalc_python
         sage: ks3 = Sym.kBoundedSubspace(3, t=1).kschur(); ks3
         3-bounded Symmetric Functions over Univariate Polynomial Ring in t over Rational Field with t=1 in the 3-Schur basis
         sage: s = SymmetricFunctions(ks3.base_ring()).schur()
@@ -969,6 +988,7 @@ class kSchur(CombinatorialFreeModule):
 
     Check that :issue:`13743` is fixed::
 
+        sage: # needs lrcalc_python
         sage: ks3 = SymmetricFunctions(QQ).kschur(3, 1)
         sage: f = ks3[2,1]
         sage: f.coefficient(f.support()[0])
@@ -1051,6 +1071,7 @@ class kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs lrcalc_python
             sage: Sym = SymmetricFunctions(QQ['t'])
             sage: ks = Sym.kschur(4)
             sage: ks._to_schur_on_basis(Partition([3,3,2,1]))
@@ -1061,7 +1082,7 @@ class kSchur(CombinatorialFreeModule):
 
         TESTS::
 
-            sage: ks._to_schur_on_basis(Partition([]))
+            sage: ks._to_schur_on_basis(Partition([]))                                  # needs lrcalc_python
             s[]
         """
         s = self.realization_of().ambient().schur()
@@ -1097,6 +1118,7 @@ class kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs lrcalc_python
             sage: Sym = SymmetricFunctions(QQ)
             sage: ks = Sym.kschur(5,1)
             sage: ks._product_on_basis_via_rectangles(Partition([5,4,4,3,3,3]),Partition([4,4,2,2,2,2]))
@@ -1106,7 +1128,7 @@ class kSchur(CombinatorialFreeModule):
 
         TESTS::
 
-            sage: ks._product_on_basis_via_rectangles(Partition([]), Partition([]))
+            sage: ks._product_on_basis_via_rectangles(Partition([]), Partition([]))     # needs lrcalc_python
             ks5[]
         """
         leftir = self._to_schur_on_basis(left.k_irreducible(self.k))
@@ -1137,6 +1159,7 @@ class kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs lrcalc_python
             sage: Sym = SymmetricFunctions(QQ['t'])
             sage: ks3 = Sym.kschur(3,1)
             sage: kH = Sym.khomogeneous(3)
@@ -1158,6 +1181,7 @@ class kSchur(CombinatorialFreeModule):
 
         TESTS::
 
+            sage: # needs lrcalc_python
             sage: Sym = SymmetricFunctions(QQ['t'])
             sage: ks3 = Sym.kschur(3,1)
             sage: kH = Sym.khomogeneous(3)
@@ -1216,6 +1240,7 @@ class kSplit(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs lrcalc_python
             sage: Symt = SymmetricFunctions(QQ['t'].fraction_field())
             sage: kBS3 = Symt.kBoundedSubspace(3)
             sage: ks3 = kBS3.kschur()
@@ -1229,10 +1254,12 @@ class kSplit(CombinatorialFreeModule):
             sage: ksp3[2,1].hl_creation_operator([1])
             t*ksp3[2, 1, 1] + (-t^2+t)*ksp3[2, 2]
 
+            sage: # needs lrcalc_python
             sage: Qp = Symt.hall_littlewood().Qp()
             sage: ksp3(Qp[3,2,1])
             ksp3[3, 2, 1] + t*ksp3[3, 3]
 
+            sage: # needs lrcalc_python
             sage: kBS4 = Symt.kBoundedSubspace(4)
             sage: ksp4 = kBS4.ksplit()
             sage: ksp4(ksp3([3,2,1]))
@@ -1313,6 +1340,7 @@ class kSplit(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs lrcalc_python
             sage: Sym = SymmetricFunctions(QQ)
             sage: s = Sym.s()
             sage: ksp3 = Sym.kBoundedSubspace(3,1).ksplit()
@@ -1418,6 +1446,7 @@ class K_kSchur(CombinatorialFreeModule):
         r"""
         TESTS::
 
+            sage: # needs sage.combinat sage.groups
             sage: from sage.combinat.sf.new_kschur import K_kSchur
             sage: kB = SymmetricFunctions(QQ).kBoundedSubspace(3,1)
             sage: g = K_kSchur(kB)
@@ -1491,6 +1520,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g._homogeneous_generators_noncommutative_variables_zero_Hecke(2)
             T[1,0] + T[2,0] + T[0,3] + T[3,2] + T[3,1] + T[2,1]
@@ -1519,6 +1549,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g._homogeneous_basis(Partition([2,1]))
             T[2,1,0] + T[3,1,0] + T[1,2,0] + T[3,2,0] + T[0,1,0] + T[2,0,1] + T[1,0,3] + T[0,3,0] + T[2,0,3] + T[0,3,2] + T[0,3,1] + T[2,3,2] + T[3,2,1] + T[2,3,1] + T[3,1,2] + T[1,2,1] - T[1,0] - 2*T[2,0] - T[0,3] - T[3,2] - 2*T[3,1] - T[2,1]
@@ -1540,6 +1571,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g.homogeneous_basis_noncommutative_variables_zero_Hecke([2,1])
             T[2,1,0] + T[3,1,0] + T[1,2,0] + T[3,2,0] + T[0,1,0] + T[2,0,1] + T[1,0,3] + T[0,3,0] + T[2,0,3] + T[0,3,2] + T[0,3,1] + T[2,3,2] + T[3,2,1] + T[2,3,1] + T[3,1,2] + T[1,2,1] - T[1,0] - 2*T[2,0] - T[0,3] - T[3,2] - 2*T[3,1] - T[2,1]
@@ -1562,6 +1594,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g._DualGrothMatrix(3)
             [ 1  1  1  0  0  0  0]
@@ -1602,6 +1635,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g._DualGrothendieck(Partition([2,1]))
             h[2] + h[2, 1] - h[3]
@@ -1645,6 +1679,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g._g_to_kh_on_basis([2,1])
             h[2] + h[2, 1] - h[3]
@@ -1671,6 +1706,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g.K_k_Schur_non_commutative_variables([2,1])
             T[3,1,0] + T[1,2,0] + T[3,2,0] + T[0,1,0] + T[2,0,1] + T[0,3,0] + T[2,0,3] + T[0,3,1] + T[2,3,2] + T[2,3,1] + T[3,1,2] + T[1,2,1] - T[2,0] - T[3,1]
@@ -1699,6 +1735,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g._kh_to_g_on_basis([2,1])
             -Kks3[2] + Kks3[2, 1] + Kks3[3]
@@ -1728,6 +1765,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g.product(g([2,1]), g[1])
             -2*Kks3[2, 1] + Kks3[2, 1, 1] + Kks3[2, 2]
@@ -1750,6 +1788,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: g.lift([2,1])
             h[2] + h[2, 1] - h[3]
@@ -1775,6 +1814,7 @@ class K_kSchur(CombinatorialFreeModule):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups
             sage: g = SymmetricFunctions(QQ).kBoundedSubspace(3,1).K_kschur()
             sage: m = SymmetricFunctions(QQ).m()
             sage: g.retract(m[2,1])

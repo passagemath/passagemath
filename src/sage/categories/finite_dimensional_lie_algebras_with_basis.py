@@ -1692,7 +1692,7 @@ class FiniteDimensionalLieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
                 sage: [C.free_module_rank(i) for i in range(11)]  # long time
                 [1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1]
 
-                sage: # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.graphs sage.modules
                 sage: g = lie_algebras.sl(QQ, 2)
                 sage: E, F, H = g.basis()
                 sage: n = g.subalgebra([F, H])
@@ -2554,7 +2554,7 @@ class FiniteDimensionalLieAlgebrasWithBasis(CategoryWithAxiom_over_base_ring):
 
             We verify that this forms a representation::
 
-                sage: # needs sage.combinat sage.modules
+                sage: # needs sage.combinat sage.graphs sage.modules
                 sage: sl3 = lie_algebras.sl(QQ, 3)
                 sage: e1, e2 = sl3.e(1), sl3.e(2)
                 sage: e12 = e1.bracket(e2)

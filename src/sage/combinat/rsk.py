@@ -2628,6 +2628,7 @@ class RuleStar(Rule):
     Check that :func:`RSK_inverse` is the inverse of :func:`RSK` on arrays
     and words::
 
+        sage: # needs sage.groups
         sage: S = SymmetricGroup(3+1)
         sage: from sage.combinat import permutation
         sage: FC = [x
@@ -2650,6 +2651,7 @@ class RuleStar(Rule):
         sage: all(Checks)
         True
 
+        sage: # needs sage.groups
         sage: from sage.monoids.hecke_monoid import HeckeMonoid
         sage: Checks = []
         sage: H = HeckeMonoid(SymmetricGroup(3+1))

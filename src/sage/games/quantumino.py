@@ -561,7 +561,7 @@ class QuantuminoSolver(SageObject):
 
         If the box is too small, there is no solution::
 
-            sage: next(QuantuminoSolver(4, box=(40,2,1)).solve())
+            sage: next(QuantuminoSolver(4, box=(40,2,1)).solve())                       # needs sage.combinat sage.groups
             Traceback (most recent call last):
             ...
             StopIteration

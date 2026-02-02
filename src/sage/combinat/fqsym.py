@@ -1594,15 +1594,15 @@ class FQSymBases(Category_realization_of_parent):
 
             The omega involution is an algebra homomorphism::
 
-                sage: (F[1,2] * F[1]).omega_involution()
+                sage: (F[1,2] * F[1]).omega_involution()                                # needs sage.graphs
                 F[2, 1, 3] + F[2, 3, 1] + F[3, 2, 1]
-                sage: F[1,2].omega_involution() * F[1].omega_involution()
+                sage: F[1,2].omega_involution() * F[1].omega_involution()               # needs sage.graphs
                 F[2, 1, 3] + F[2, 3, 1] + F[3, 2, 1]
 
             The omega involution intertwines the antipode
             and the inverse of the antipode::
 
-                sage: all( F(I).antipode().omega_involution().antipode()
+                sage: all( F(I).antipode().omega_involution().antipode()                # needs sage.graphs
                 ....:      == F(I).omega_involution()
                 ....:      for I in Permutations(4) )
                 True
@@ -1617,6 +1617,7 @@ class FQSymBases(Category_realization_of_parent):
 
             Testing the `\omega \circ \iota = \iota \circ \psi` relation::
 
+                sage: # needs sage.graphs
                 sage: NSym = NonCommutativeSymmetricFunctions(ZZ)
                 sage: S = NSym.S()
                 sage: all( S[I].psi_involution().to_fqsym() == S[I].to_fqsym().omega_involution()

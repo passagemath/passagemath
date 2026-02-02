@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
-# sage.doctest: needs sage.combinat sage.modules
+# sage.doctest: needs sage.combinat sage.groups sage.modules
 """
 Affine nilTemperley Lieb Algebra of type A
 """

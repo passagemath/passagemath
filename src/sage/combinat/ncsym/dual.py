@@ -115,7 +115,7 @@ class SymmetricFunctionsNonCommutingVariablesDual(UniqueRepresentation, Parent):
         a coercion::
 
             sage: h = SymmetricFunctions(QQ).h()
-            sage: w(h[2,1])
+            sage: w(h[2,1])                                                             # needs sage.graphs
             w{{1}, {2, 3}} + w{{1, 2}, {3}} + w{{1, 3}, {2}}
 
         Similarly we can pull back when we are in the image of `\chi^*`::
@@ -361,7 +361,7 @@ class SymmetricFunctionsNonCommutingVariablesDual(UniqueRepresentation, Parent):
             EXAMPLES::
 
                 sage: w = SymmetricFunctionsNonCommutingVariables(QQ).dual().w()
-                sage: w.sum_of_partitions([2,1,1])
+                sage: w.sum_of_partitions([2,1,1])                                      # needs sage.graphs
                 2*w{{1}, {2}, {3, 4}} + 2*w{{1}, {2, 3}, {4}} + 2*w{{1}, {2, 4}, {3}}
                  + 2*w{{1, 2}, {3}, {4}} + 2*w{{1, 3}, {2}, {4}} + 2*w{{1, 4}, {2}, {3}}
             """
@@ -407,7 +407,7 @@ class SymmetricFunctionsNonCommutingVariablesDual(UniqueRepresentation, Parent):
                 Traceback (most recent call last):
                 ...
                 ValueError: w{{1, 3}, {2}} is not in the image
-                sage: h(w(h[2,1])) == w(h[2,1]).to_symmetric_function()
+                sage: h(w(h[2,1])) == w(h[2,1]).to_symmetric_function()                 # needs sage.graphs
                 True
             """
             cur = 1
@@ -452,13 +452,13 @@ class SymmetricFunctionsNonCommutingVariablesDual(UniqueRepresentation, Parent):
                 EXAMPLES::
 
                     sage: w = SymmetricFunctionsNonCommutingVariables(QQ).dual().w()
-                    sage: w[[1,3],[2]].expand(4)
+                    sage: w[[1,3],[2]].expand(4)                                        # needs sage.libs.singular
                     x02*x11*x20 + x03*x11*x30 + x03*x22*x30 + x13*x22*x31
 
                 One can use a different set of variable by using the
                 optional argument ``letter``::
 
-                    sage: w[[1,3],[2]].expand(3, letter='y')
+                    sage: w[[1,3],[2]].expand(3, letter='y')                            # needs sage.libs.singular
                     y02*y11*y20
                 """
                 from sage.combinat.permutation import Permutations
@@ -519,6 +519,7 @@ class SymmetricFunctionsNonCommutingVariablesDual(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
+                    sage: # needs sage.graphs
                     sage: w = SymmetricFunctionsNonCommutingVariables(QQ).dual().w()
                     sage: elt = w.sum_of_partitions([2,1,1])
                     sage: elt.is_symmetric()
@@ -567,6 +568,7 @@ class SymmetricFunctionsNonCommutingVariablesDual(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
+                    sage: # needs sage.graphs
                     sage: w = SymmetricFunctionsNonCommutingVariables(QQ).dual().w()
                     sage: elt = w[[1],[2,3]] + w[[1,2],[3]] + w[[1,3],[2]]
                     sage: elt.to_symmetric_function()
@@ -577,6 +579,7 @@ class SymmetricFunctionsNonCommutingVariablesDual(UniqueRepresentation, Parent):
 
                 TESTS::
 
+                    sage: # needs sage.graphs
                     sage: w = SymmetricFunctionsNonCommutingVariables(QQ).dual().w()
                     sage: w(0).to_symmetric_function()
                     0

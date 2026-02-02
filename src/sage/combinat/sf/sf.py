@@ -240,7 +240,7 @@ class SymmetricFunctions(UniqueRepresentation, Parent):
     In this section, we explore some of the many methods that can be applied
     to an arbitrary symmetric function::
 
-        sage: f = s[2]^2; f
+        sage: f = s[2]^2; f                                                             # needs lrcalc_python
         s[2, 2] + s[3, 1] + s[4]
 
     For more methods than discussed here, create a symmetric function as
@@ -1019,6 +1019,7 @@ class SymmetricFunctions(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: SymmetricFunctions(QQ).irreducible_symmetric_group_character()
             Symmetric Functions over Rational Field in the irreducible symmetric group character basis
             sage: st = SymmetricFunctions(QQ).st()
@@ -1073,6 +1074,7 @@ class SymmetricFunctions(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: SymmetricFunctions(QQ).induced_trivial_character()
             Symmetric Functions over Rational Field in the induced trivial symmetric group character basis
             sage: ht = SymmetricFunctions(QQ).ht()
@@ -1396,13 +1398,13 @@ class SymmetricFunctions(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: P = PolynomialRing(QQ, 'x', 3)
             sage: x = P.gens()
             sage: f = x[0] + x[1] + x[2]
             sage: S = SymmetricFunctions(QQ)
             sage: S.from_polynomial(f)
             m[1]
-
             sage: f = x[0] + 2*x[1] + x[2]
             sage: S.from_polynomial(f)
             Traceback (most recent call last):

@@ -632,7 +632,7 @@ def cmunu1(mu, nu):
         sage: Sym = SymmetricFunctions(QQ['q','t'].fraction_field())
         sage: h = Sym.h()
         sage: Ht = Sym.macdonald().Ht()
-        sage: all(Ht[3,2,1].skew_by(h[1]).coefficient(nu)
+        sage: all(Ht[3,2,1].skew_by(h[1]).coefficient(nu)                               # needs lrcalc_python
         ....:     == cmunu1(Partition([3,2,1]),nu)
         ....:     for nu in Partition([3,2,1]).down_list())
         True
@@ -899,6 +899,7 @@ class MacdonaldPolynomials_generic(sfa.SymmetricFunctionAlgebra_generic):
 
         EXAMPLES::
 
+            sage: # needs lrcalc_python
             sage: Mac = SymmetricFunctions(FractionField(QQ['q','t'])).macdonald()
             sage: H = Mac.H()
             sage: J = Mac.J()

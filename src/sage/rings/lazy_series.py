@@ -7350,7 +7350,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
             sage: m = SymmetricFunctions(R).m()                                         # needs sage.combinat sage.modules
             sage: L = LazySymmetricFunctions(m)                                         # needs sage.combinat sage.modules
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.gap sage.modules
             sage: c = LazyCombinatorialSpecies(QQ, "X").Cycles().cycle_index_series()
             sage: Lplus = L(lambda n: p([1]*n), valuation=1)
             sage: r = c.arithmetic_product(Lplus); r                                    # needs sage.libs.pari
@@ -7525,10 +7525,10 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
             sage: elt = S(s[2])
             sage: elt.symmetric_function()
             s[2]
-            sage: f = 1 / (1 - elt)
+            sage: f = 1 / (1 - elt)                                                     # needs lrcalc_python
             sage: f                                                                     # needs lrcalc_python
             s[] + s[2] + (s[2,2]+s[3,1]+s[4]) + (s[2,2,2]+2*s[3,2,1]+s[3,3]+s[4,1,1]+3*s[4,2]+2*s[5,1]+s[6]) + O^7
-            sage: f.symmetric_function()
+            sage: f.symmetric_function()                                                # needs lrcalc_python
             Traceback (most recent call last):
             ...
             ValueError: not a symmetric function

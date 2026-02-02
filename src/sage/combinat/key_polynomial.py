@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
-# sage.doctest: needs sage.combinat sage.modules
+# sage.doctest: needs sage.combinat sage.libs.singular sage.modules
 r"""
 Key and Atom Polynomials
 
