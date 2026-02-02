@@ -1,1 +1,2 @@
-passagemath-gsl
+# This file is updated on every release by the update-version script
+passagemath-gsl == 10.8.1rc1
