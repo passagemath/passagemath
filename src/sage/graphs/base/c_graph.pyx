@@ -1619,11 +1619,9 @@ cdef class CGraphBackend(GenericGraphBackend):
         """
         cdef int u_int = self.get_vertex(u)
         if (u_int != -1 and u_int < self.cg().active_vertices.size
-            and bitset_in(self.cg().active_vertices, u_int)
-        ):
+                and bitset_in(self.cg().active_vertices, u_int)):
             return u_int
-        else:
-            return -1
+        return -1
 
     cdef vertex_label(self, int u_int):
         """
@@ -1634,12 +1632,10 @@ cdef class CGraphBackend(GenericGraphBackend):
 
         if u_int in vertex_labels:
             return vertex_labels[u_int]
-        elif (u_int != -1 and u_int < self.cg().active_vertices.size
-              and bitset_in(self.cg().active_vertices, u_int)
-        ):
+        if (u_int != -1 and u_int < self.cg().active_vertices.size
+                and bitset_in(self.cg().active_vertices, u_int)):
             return u_int
-        else:
-            return None
+        return None
 
     cdef inline int check_labelled_vertex(self, u, bint reverse) except ? -1:
         """
@@ -1652,8 +1648,7 @@ cdef class CGraphBackend(GenericGraphBackend):
         cdef int u_int = self.get_vertex(u)
         if u_int != -1:
             if (u_int < 0 or u_int >= G.active_vertices.size
-                or not bitset_in(G.active_vertices, u_int)
-            ):
+                    or not bitset_in(G.active_vertices, u_int)):
                 bitset_add(G.active_vertices, u_int)
                 G.num_verts += 1
             return u_int
@@ -2216,8 +2211,7 @@ cdef class CGraphBackend(GenericGraphBackend):
         cdef int u_int
         cdef int v_int = self.get_vertex(v)
         if (v_int == -1 or v_int >= self.cg().active_vertices.size
-            or not bitset_in(self.cg().active_vertices, v_int)
-        ):
+                or not bitset_in(self.cg().active_vertices, v_int)):
             raise LookupError("vertex ({0}) is not a vertex of the graph".format(v))
 
         cdef set seen = set()
@@ -2267,8 +2261,7 @@ cdef class CGraphBackend(GenericGraphBackend):
         cdef int u_int
         cdef int v_int = self.get_vertex(v)
         if (v_int == -1 or v_int >= self.cg().active_vertices.size
-            or not bitset_in(self.cg().active_vertices,v_int)
-        ):
+                or not bitset_in(self.cg().active_vertices,v_int)):
             raise LookupError("vertex ({0}) is not a vertex of the graph".format(v))
 
         for u_int in self.cg().in_neighbors(v_int):
@@ -2309,8 +2302,7 @@ cdef class CGraphBackend(GenericGraphBackend):
         cdef int u_int
         cdef int v_int = self.get_vertex(v)
         if (v_int == -1 or v_int >= self.cg().active_vertices.size
-            or not bitset_in(self.cg().active_vertices,v_int)
-        ):
+                or not bitset_in(self.cg().active_vertices,v_int)):
             raise LookupError("vertex ({0}) is not a vertex of the graph".format(v))
 
         for u_int in self.cg().out_neighbors(v_int):
@@ -2894,8 +2886,7 @@ cdef class CGraphBackend(GenericGraphBackend):
                     v = v_copy
 
                 if (v_int < 0 or v_int >= self.cg().active_vertices.size
-                    or unlikely(not bitset_in(self.cg().active_vertices, v_int))):
-
+                        or unlikely(not bitset_in(self.cg().active_vertices, v_int))):
                     raise IndexError("the vertices were modified while iterating the edges")
 
                 u_int = cg._next_neighbor_unsafe(v_int, u_int, out, &l_int)
