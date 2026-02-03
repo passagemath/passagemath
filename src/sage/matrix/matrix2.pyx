@@ -870,6 +870,8 @@ cdef class Matrix(Matrix1):
             (1)
             sage: matrix(QQ, [[2]]).solve_right(vector(QQ, [1]), extend=False)
             (1/2)
+
+            sage: # needs sage.libs.flint
             sage: v = matrix.identity(QQ, 500).solve_right(vector(QQ, [1]*500), extend=True)  # <1s
             sage: v = matrix.identity(QQ, 500).solve_right(vector(QQ, [1]*500), extend=False)  # <1s
             sage: matrix.identity(QQ, 500).hermite_form()  # not tested (slow)
