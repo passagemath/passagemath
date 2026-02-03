@@ -10,9 +10,6 @@ requires = [
   'cysignals !=1.12.4; sys_platform == "win32"',
   'cython >=3.1.0,<3.3.0',
   'gmpy2 ~=2.1.b999',
-  # gmpy2 2.3 will be ABI-incompatible on Windows
-  # until we remove the patch imported from gmpy2 - https://github.com/gmpy2/gmpy2/pull/675
-  'gmpy2 <2.3; sys_platform == "win32"',
   'jinja2',
   'memory_allocator <0.2',
   'numpy >=2.2.4',
@@ -58,9 +55,6 @@ dependencies = [
   'cython >=3.1.0,<3.3.0',
   'fpylll >=0.5.9; sys_platform != "win32"',
   'gmpy2 ~=2.1.b999',
-  # gmpy2 2.3 will be ABI-incompatible on Windows
-  # until we remove the patch imported from gmpy2 - https://github.com/gmpy2/gmpy2/pull/675
-  'gmpy2 <2.3; sys_platform == "win32"',
   'ipykernel >=5.2.1',
   'ipython >=8.9.0',
   'ipywidgets >=7.5.1',
