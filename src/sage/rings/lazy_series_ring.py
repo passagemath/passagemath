@@ -755,7 +755,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
         We solve the recurrence relation in (3.12) of Prellberg and Brak
         :doi:`10.1007/BF02183685`::
 
-            sage: # needs sage.modules
+            sage: # needs sage.modules, known bug: windows (hangs - https://github.com/passagemath/passagemath/issues/1892#issuecomment-3844228165)
             sage: q, y = QQ['q,y'].fraction_field().gens()
             sage: L.<x> = LazyPowerSeriesRing(q.parent())
             sage: R = L.undefined()
