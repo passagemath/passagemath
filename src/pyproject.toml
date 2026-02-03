@@ -15,6 +15,9 @@ requires = [
     # per https://github.com/scipy/scipy/blob/maintenance/1.13.x/pyproject.toml
     'cython >=3.0.8,<3.3.0',
     'gmpy2 ~=2.1.b999',
+    # gmpy2 2.3 will be ABI-incompatible on Windows
+    # until we remove the patch imported from gmpy2 - https://github.com/gmpy2/gmpy2/pull/675
+    'gmpy2 <2.3; sys_platform == "win32"',
     'memory_allocator <0.2',
     # per https://github.com/scipy/scipy/blob/maintenance/1.13.x/pyproject.toml
     'numpy >=1.22.4',
@@ -37,6 +40,7 @@ dependencies = [
     'cysignals !=1.12.4; sys_platform == "win32"',
     'cython >=3.0.8, <3.3.0',
     'gmpy2 ~=2.1.b999',
+    'gmpy2 <2.3; sys_platform == "win32"',
     # According to https://pypi.org/project/importlib-metadata/,
     # 6.5 provides the features of Python 3.12 importlib.metadata
     'importlib_metadata >=6.5; python_version<"3.12"',
