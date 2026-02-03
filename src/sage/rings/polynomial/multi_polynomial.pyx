@@ -2241,6 +2241,7 @@ cdef class MPolynomial(CommutativePolynomial):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.singular
             sage: R.<x,y,z> = QQ[]
             sage: a = 32 * (x*y + 1)^5 * (x+y+z)^5
             sage: a.nth_root(5)
@@ -2251,6 +2252,7 @@ cdef class MPolynomial(CommutativePolynomial):
             ...
             ValueError: not a 42nd power
 
+            sage: # needs sage.libs.singular, known bug: windows (hangs)
             sage: R.<x,y> = QQ[]
             sage: S.<z,t> = R[]
             sage: T.<u,v> = S[]
