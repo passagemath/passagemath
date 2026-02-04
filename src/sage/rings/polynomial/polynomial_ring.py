@@ -2043,7 +2043,7 @@ class PolynomialRing_integral_domain(PolynomialRing_commutative, PolynomialRing_
             35
             sage: L[9]
             T^4 + T^3 + 2*T^2 + 2*T + 4
-            sage: all(p.is_weil_polynomial() for p in L)
+            sage: all(p.is_weil_polynomial() for p in L)                                # needs sage.libs.pari
             True
 
         Setting multiple leading coefficients::
