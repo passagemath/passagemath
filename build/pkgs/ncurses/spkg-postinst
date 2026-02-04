@@ -23,7 +23,7 @@ if [ ! -e libtinfo.so ] && [ -e libtinfow.so ]; then
 fi
 
 # Create versioned symlinks
-for ver in 6 5; do
+for ver in 6 6; do
     if [ ! -e libncurses.so.$ver ] && [ -e libncursesw.so.$ver ]; then
         ln -sf libncursesw.so.$ver libncurses.so.$ver
         echo "Created libncurses.so.$ver -> libncursesw.so.$ver"
