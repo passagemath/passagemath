@@ -745,7 +745,8 @@ def is_geodetic(G):
 
     A graph is geodetic iff all its connected components are geodetic::
 
-        sage: all(G.is_geodetic() == all(H.is_geodetic() for H in G.connected_components_subgraphs()) for G in graphs(5))
+        sage: all(G.is_geodetic() == all(H.is_geodetic() for H in G.connected_components_subgraphs())   # needs nauty
+        ....:     for G in graphs(5))
         True
 
     This method is also valid for digraphs::

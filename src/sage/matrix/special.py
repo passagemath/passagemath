@@ -3086,6 +3086,7 @@ def random_unimodular_matrix(parent, upper_bound=None, max_tries=100):
 
     A matrix size 5 over QQ. ::
 
+        sage: # needs sage.libs.gsl
         sage: from sage.matrix.constructor import random_unimodular_matrix
         sage: matrix_space = sage.matrix.matrix_space.MatrixSpace(QQ, 5)
         sage: A = random_unimodular_matrix(matrix_space)
@@ -3094,6 +3095,7 @@ def random_unimodular_matrix(parent, upper_bound=None, max_tries=100):
 
     A matrix size 6 with entries no larger than 50. ::
 
+        sage: # needs sage.libs.gsl
         sage: B = random_matrix(ZZ, 7, algorithm='unimodular', upper_bound=50)
         sage: det(B)
         1
@@ -3102,7 +3104,7 @@ def random_unimodular_matrix(parent, upper_bound=None, max_tries=100):
 
     A matrix over the number Field in `y` with defining polynomial `y^2-2y-2`. ::
 
-        sage: # needs sage.rings.number_field
+        sage: # needs sage.libs.gsl sage.rings.number_field
         sage: y = polygen(ZZ, 'y')
         sage: K = NumberField(y^2 - 2*y - 2, 'y')
         sage: C = random_matrix(K, 3, algorithm='unimodular')
