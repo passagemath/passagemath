@@ -229,7 +229,8 @@ class WeylGroup_gens(UniqueRepresentation,
         EXAMPLES::
 
             sage: G = WeylGroup(['B',3])
-            sage: TestSuite(G).run()
+            sage: TestSuite(G).run()                                                    # needs sage.rings.number_field
+
             sage: cm = CartanMatrix([[2,-5,0],[-2,2,-1],[0,-1,2]])
             sage: W = WeylGroup(cm)
             sage: TestSuite(W).run() # long time
@@ -588,7 +589,7 @@ class ClassicalWeylSubgroup(WeylGroup_gens):
         24
         sage: G.index_set()
         (1, 2, 3)
-        sage: TestSuite(G).run()
+        sage: TestSuite(G).run()                                                        # needs sage.rings.number_field
 
     TESTS::
 
@@ -1029,7 +1030,7 @@ class WeylGroup_permutation(UniqueRepresentation, PermutationGroup_generic):
         EXAMPLES::
 
             sage: W = WeylGroup(['F',4], implementation='permutation')
-            sage: TestSuite(W).run()
+            sage: TestSuite(W).run()                                                    # needs sage.rings.number_field
         """
         self._cartan_type = cartan_type
         self._index_set = cartan_type.index_set()
@@ -1141,8 +1142,8 @@ class WeylGroup_permutation(UniqueRepresentation, PermutationGroup_generic):
             sage: W3 = WeylGroup(["B",5])
             sage: W.has_coerce_map_from(W3)
             False
-            sage: W4 = CoxeterGroup(["B",4])
-            sage: W.has_coerce_map_from(W4)
+            sage: W4 = CoxeterGroup(["B",4])                                            # needs sage.rings.number_field
+            sage: W.has_coerce_map_from(W4)                                             # needs sage.rings.number_field
             False
             sage: W5 = WeylGroup(["C",4], implementation='permutation')
             sage: W.has_coerce_map_from(W5)

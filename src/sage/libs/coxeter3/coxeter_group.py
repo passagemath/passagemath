@@ -391,7 +391,7 @@ class CoxeterGroup(UniqueRepresentation, Parent):
         TESTS::
 
             sage: W = CoxeterGroup(['A', 3], implementation='coxeter3')
-            sage: type(W.parabolic_kazhdan_lusztig_polynomial([2],[],[1]))
+            sage: type(W.parabolic_kazhdan_lusztig_polynomial([2],[],[1]))              # needs sage.libs.flint
             <class 'sage.rings.polynomial.polynomial_integer_dense_flint.Polynomial_integer_dense_flint'>
         """
         u = self(u)

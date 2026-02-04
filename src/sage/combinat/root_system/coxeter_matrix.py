@@ -856,7 +856,7 @@ class CoxeterMatrix(CoxeterType, metaclass=ClasscallMetaclass):
             [   1 -1/2 -1/2]
             [-1/2    1 -1/2]
             [-1/2 -1/2    1]
-            sage: CoxeterType(['H', 3]).bilinear_form()
+            sage: CoxeterType(['H', 3]).bilinear_form()                                 # needs sage.rings.number_field
             [                      1                    -1/2                       0]
             [                   -1/2                       1 1/2*E(5)^2 + 1/2*E(5)^3]
             [                      0 1/2*E(5)^2 + 1/2*E(5)^3                       1]

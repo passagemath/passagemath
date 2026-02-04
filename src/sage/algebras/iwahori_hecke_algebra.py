@@ -381,6 +381,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
     We check conversion between the bases for type `B_2` as well as some of
     the defining properties::
 
+        sage: # needs sage.rings.number_field
         sage: H = IwahoriHeckeAlgebra(['B',2], v**2)
         sage: W = H.coxeter_group()
         sage: T = H.T()
@@ -463,9 +464,11 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: T = IwahoriHeckeAlgebra("B2", 1).T()
             sage: T.is_commutative()
             False
+
             sage: T = IwahoriHeckeAlgebra("A1", 1).T()
             sage: T.is_commutative()
             True
@@ -609,6 +612,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: IwahoriHeckeAlgebra("B2", 1).coxeter_group()
             Finite Coxeter group over Number Field in a with defining polynomial x^2 - 2 with a = 1.414213562373095? with Coxeter matrix:
             [1 4]
@@ -622,6 +626,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: H = IwahoriHeckeAlgebra("B2", 1)
             sage: H.a_realization()
             Iwahori-Hecke algebra of type B2 in 1,-1 over Integer Ring in the T-basis
@@ -634,6 +639,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: H = IwahoriHeckeAlgebra("B2", 1)
             sage: H.q1()
             1
@@ -646,6 +652,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: H = IwahoriHeckeAlgebra("B2", 1)
             sage: H.q2()
             -1
@@ -666,6 +673,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
             TESTS::
 
+                sage: # needs sage.rings.number_field
                 sage: H = IwahoriHeckeAlgebra("B2", 1)
                 sage: bases = H._BasesCategory()
                 sage: H.T() in bases
@@ -679,6 +687,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.number_field
                 sage: H = IwahoriHeckeAlgebra("B2", 1)
                 sage: bases = H._BasesCategory()
                 sage: bases.super_categories()
@@ -693,6 +702,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.number_field
                 sage: H = IwahoriHeckeAlgebra("B2", 1)
                 sage: H._BasesCategory()
                 Category of bases of Iwahori-Hecke algebra of type B2 in 1,-1 over Integer Ring
@@ -711,6 +721,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
                 EXAMPLES::
 
+                    sage: # needs sage.rings.number_field
                     sage: H = IwahoriHeckeAlgebra("B2", 1)
                     sage: H.T()
                     Iwahori-Hecke algebra of type B2 in 1,-1 over Integer Ring in the T-basis
@@ -745,6 +756,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
                 EXAMPLES::
 
+                    sage: # needs sage.rings.number_field
                     sage: H = IwahoriHeckeAlgebra("B2", 1)
                     sage: T = H.T()
                     sage: G = H.coxeter_group()
@@ -776,6 +788,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
                 EXAMPLES::
 
+                    sage: # needs sage.rings.number_field
                     sage: T = IwahoriHeckeAlgebra("B2", 1).T()
                     sage: T.is_field()
                     False
@@ -790,6 +803,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
                 EXAMPLES::
 
+                    sage: # needs sage.rings.number_field
                     sage: H = IwahoriHeckeAlgebra("B2", 1)
                     sage: H.T().one_basis()
                     [1 0]
@@ -803,6 +817,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
                 EXAMPLES::
 
+                    sage: # needs sage.rings.number_field
                     sage: IwahoriHeckeAlgebra("B2", 1).T().index_set()
                     (1, 2)
                 """
@@ -1239,6 +1254,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.number_field
                 sage: H = IwahoriHeckeAlgebra("G2",1)
                 sage: t = H.T(prefix='t')
                 sage: t[1]
@@ -1695,6 +1711,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
 
             TESTS::
 
+                sage: # needs sage.rings.number_field
                 sage: R.<q> = QQ[]
                 sage: H = IwahoriHeckeAlgebra("B3",q).T()
                 sage: T1,T2,T3 = H.algebra_generators()
@@ -1713,6 +1730,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
                 sage: (t1-t2)^3
                 (q1^2-q1*q2+q2^2)*t[1] - (q1^2-q1*q2+q2^2)*t[2]
 
+                sage: # needs sage.rings.number_field
                 sage: R.<q> = QQ[]
                 sage: H = IwahoriHeckeAlgebra("G2", q).T()
                 sage: [T1, T2] = H.algebra_generators()
@@ -1933,6 +1951,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
         `A_9` seems infeasible, while with ``coxeter3`` both the computations
         are instant::
 
+            sage: # needs sage.rings.number_field
             sage: H = IwahoriHeckeAlgebra('H4', v**2)   # optional - coxeter3
             sage: Cp = H.Cp()                           # optional - coxeter3
             sage: Cp[3,4,3]*Cp[3,4,3,4]*Cp[1,2,3,4]     # optional - coxeter3
@@ -2843,6 +2862,7 @@ class IwahoriHeckeAlgebra_nonstandard(IwahoriHeckeAlgebra):
 
             EXAMPLES::
 
+                sage: # needs sage.rings.number_field
                 sage: H = sage.algebras.iwahori_hecke_algebra.IwahoriHeckeAlgebra_nonstandard("B2")
                 sage: H._BasesCategory().super_categories()
                 [Category of bases of A generic Iwahori-Hecke algebra of type B2 in u,-u^-1*v^2 over
