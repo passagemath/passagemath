@@ -239,13 +239,29 @@ Test that conversion of symbolic functions with latex names works (:issue:`31047
 #############################################################################
 
 import os
+<<<<<<< HEAD
 
 from sage.interfaces.expect import Expect, ExpectElement, ExpectFunction, FunctionElement, gc_disabled
 
+=======
+>>>>>>> a920068db94 (src/sage/interfaces/giac.py: Use Feature)
 import pexpect
+import shlex
 
 from sage.cpython.string import bytes_to_str
 from sage.env import DOT_SAGE
+<<<<<<< HEAD
+=======
+from sage.features.giac import Giac as Giac_executable
+from sage.interfaces.expect import (
+    Expect,
+    ExpectElement,
+    ExpectFunction,
+    FunctionElement,
+    gc_disabled,
+)
+from sage.misc.instancedoc import instancedoc
+>>>>>>> a920068db94 (src/sage/interfaces/giac.py: Use Feature)
 from sage.misc.pager import pager
 from sage.misc.instancedoc import instancedoc
 from sage.structure.richcmp import rich_to_bool
@@ -324,7 +340,7 @@ class Giac(Expect):
         sage: g.n()                                                                     # needs sage.symbolic
         0.577215664901533
     """
-    def __init__(self, maxread=None, script_subdirectory=None, server=None, server_tmpdir=None, logfile=None):
+    def __init__(self, maxread=None, script_subdirectory=None, server=None, server_tmpdir=None, logfile=None, command=None) -> None:
         """
         Create an instance of the Giac interpreter.
 
@@ -333,10 +349,12 @@ class Giac(Expect):
             sage: giac == loads(dumps(giac))
             True
         """
+        if command is None:
+            command = os.getenv('SAGE_GIAC_COMMAND') or f'{shlex.quote(Giac_executable().absolute_filename())} --sage'
         Expect.__init__(self,
                         name='giac',
                         prompt='[0-9]*>> ',
-                        command="giac --sage",
+                        command=command,
                         env={"LANG": "C"},
                         init_code=['maple_mode(0);I:=i;'],  # coercion could be broken in maple_mode
                         script_subdirectory=script_subdirectory,
