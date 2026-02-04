@@ -30,6 +30,7 @@ We can use the implementation of the algorithm proposed in [WROM1986]_::
 
 We can also use nauty's gentreeg::
 
+    sage: # needs nauty
     sage: gen = graphs.nauty_gentreeg("10")
     sage: T = next(gen); T
     Graph on 10 vertices
@@ -39,6 +40,7 @@ We can also use nauty's gentreeg::
 Note that nauty's gentreeg can only be used to generate trees with
 `1 \leq n \leq 128` vertices::
 
+    sage: # needs nauty
     sage: next(graphs.nauty_gentreeg("0"))
     Traceback (most recent call last):
     ...
@@ -63,6 +65,7 @@ We don't have this limitation with method :meth:`trees`::
 
 Nauty's gentreeg can be used to generate trees with bounded maximum degree::
 
+    sage: # needs nauty
     sage: gen = graphs.nauty_gentreeg("8 -D3")
     sage: all(max(g.degree()) <= 3 for g in gen)
     True
@@ -71,6 +74,7 @@ Nauty's gentreeg can be used to generate trees with bounded maximum degree::
 
 Nauty's gentreeg can be used to generate trees with bounded diameter::
 
+    sage: # needs nauty
     sage: all(g.diameter() == 3 for g in graphs.nauty_gentreeg("8 -Z3"))
     True
     sage: len(list(graphs.nauty_gentreeg("8 -Z3")))
@@ -80,7 +84,7 @@ The number of trees on the first few vertex counts agrees with :oeis:`A000055`::
 
     sage: [len(list(graphs.trees(i))) for i in range(15)]
     [1, 1, 1, 1, 2, 3, 6, 11, 23, 47, 106, 235, 551, 1301, 3159]
-    sage: [len(list(graphs.nauty_gentreeg(str(i)))) for i in range(1, 15)]
+    sage: [len(list(graphs.nauty_gentreeg(str(i)))) for i in range(1, 15)]              # needs nauty
     [1, 1, 1, 2, 3, 6, 11, 23, 47, 106, 235, 551, 1301, 3159]
 
 Methods
