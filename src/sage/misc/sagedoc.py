@@ -686,7 +686,7 @@ def format(s, embedded=False):
         '<<<identity_matrix\n'
         sage: format('identity_matrix>>>')
         'identity_matrix>>>\n'
-        sage: format('<<<identity_matrix>>>')                                           # needs sage.modules
+        sage: format('<<<identity_matrix>>>')                                           # needs sphinx sage.modules
         '...Definition: identity_matrix(...'
         sage: format('<<<identity_matrix>>>')[:28]                                      # needs sphinx
         'Definition: identity_matrix('
