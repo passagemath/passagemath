@@ -497,7 +497,7 @@ class AffinePlaneCurveArrangementElement(PlaneCurveArrangementElement):
 
         EXAMPLES::
 
-            sage: # needs sirocco
+            sage: # needs sirocco sage.libs.braiding
             sage: H.<x, y> = AffinePlaneCurveArrangements(QQ)
             sage: A = H(y^2 + x, y + x - 1, x)
             sage: A.fundamental_group()
@@ -944,7 +944,7 @@ class ProjectivePlaneCurveArrangementElement(PlaneCurveArrangementElement):
 
         EXAMPLES::
 
-            sage: # needs sirocco
+            sage: # needs sirocco sage.libs.braiding
             sage: H.<x, y, z> = ProjectivePlaneCurveArrangements(QQ)
             sage: A = H(y^2 + x*z, y + x - z, x)
             sage: A.fundamental_group().sorted_presentation()
