@@ -5292,7 +5292,7 @@ class LazyPowerSeries(LazyCauchyProductSeries):
             sage: L.<z> = LaurentPolynomialRing(ZZ)
             sage: parent(x(a, b))
             Multivariate Polynomial Ring in a, b, c over Rational Field
-            sage: parent(x(CC(2), a))
+            sage: parent(x(CC(2), a))                                                   # needs sage.rings.real_mpfr
             Multivariate Polynomial Ring in a, b, c over Complex Field with 53 bits of precision
             sage: parent(x(0, 0))
             Rational Field
