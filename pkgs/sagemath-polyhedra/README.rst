@@ -234,6 +234,9 @@ Optional backends for optimization
 ``pip install "passagemath-polyhedra[gurobi]"``
  Gurobi Mixed Integer Optimization solver (proprietary; requires licensed installation), via `passagemath-gurobi <https://passagemath.org/docs/latest/html/en/reference/spkg/sage_numerical_backends_gurobi.html#spkg-sage-numerical-backends-gurobi>`_
 
+``pip install "passagemath-polyhedra[highs]"``
+ HiGHS
+
 ``pip install "passagemath-polyhedra[scip]"``
  `SCIP <https://passagemath.org/docs/latest/html/en/reference/spkg/scip.html#spkg-scip>`_ Mixed Integer Optimization solver,
  via `PySCIPOpt <https://passagemath.org/docs/latest/html/en/reference/spkg/pyscipopt.html#spkg-pyscipopt>`_

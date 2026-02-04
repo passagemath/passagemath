@@ -199,6 +199,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_flint				\
 	sagemath_pari				\
 	sagemath_glpk				\
+	sagemath_highs				\
 	sagemath_eclib				\
 	sagemath_homfly				\
 	sagemath_iml				\

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-highs
 #*****************************************************************************
 #       Copyright (C) 2025 SageMath Developers
 #

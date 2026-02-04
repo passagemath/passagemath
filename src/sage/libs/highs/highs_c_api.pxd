@@ -1,3 +1,10 @@
+# sage_setup: distribution = sagemath-highs
+# distutils: libraries = HIGHS_LIBRARIES
+# distutils: extra_compile_args = HIGHS_CFLAGS
+# distutils: include_dirs = HIGHS_INCDIR
+# distutils: library_dirs = HIGHS_LIBDIR
+# distutils: extra_link_args = HIGHS_LIBEXTRA
+#
 # Cython declarations for the HiGHS C API.
 #
 # This wraps the public header highs/interfaces/highs_c_api.h.

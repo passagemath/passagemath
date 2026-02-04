@@ -89,6 +89,7 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'freetype')          && format('mingw-w64-{0}-freetype',                 matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'glpk')              && format('mingw-w64-{0}-glpk',                     matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'gsl')               && format('mingw-w64-{0}-gsl',                      matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'highs')             && format('mingw-w64-{0}-highs',                     matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'iml')               && format('mingw-w64-{0}-iml',                      matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'libbraiding')       && format('mingw-w64-{0}-libbraiding',              matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'libhomfly')         && format('mingw-w64-{0}-libhomfly',                matrix.env) || '' }}

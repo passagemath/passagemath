@@ -1,0 +1,25 @@
+graft passagemath_highs
+
+prune sage
+
+include VERSION.txt
+
+exclude *.m4
+
+graft sage/libs/highs
+include sage/numerical/backends/highs*.p*
+
+global-exclude all__sagemath_*.py
+global-include all__sagemath_highs.py
+
+global-exclude *.c
+global-exclude *.cpp
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude *.bak
+global-exclude *.so
+global-exclude *~
+prune .tox
+prune build
+prune dist
