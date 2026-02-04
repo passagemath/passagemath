@@ -292,10 +292,10 @@ class OrderedHyperplaneArrangementElement(HyperplaneArrangementElement):
             ...
             TypeError: the base field is not in QQbar
             sage: L.<t> = OrderedHyperplaneArrangements(QQ)
-            sage: L([t - j for j in range(4)]).affine_fundamental_group()
+            sage: L([t - j for j in range(4)]).affine_fundamental_group()               # needs sage.libs.braiding
             Finitely presented group < x0, x1, x2, x3 |  >
             sage: L.<x, y, z> = OrderedHyperplaneArrangements(QQ)
-            sage: L(L.gens() + (x + y + z + 1,)).affine_fundamental_group().sorted_presentation()
+            sage: L(L.gens() + (x + y + z + 1,)).affine_fundamental_group().sorted_presentation()   # needs sage.libs.braiding
             Finitely presented group
             < x0, x1, x2, x3 | x3^-1*x2^-1*x3*x2, x3^-1*x1^-1*x3*x1,
                                x3^-1*x0^-1*x3*x0, x2^-1*x1^-1*x2*x1,
@@ -359,7 +359,7 @@ class OrderedHyperplaneArrangementElement(HyperplaneArrangementElement):
             sage: H.affine_meridians()
             {0: [x0], 1: [x1], 2: [x1^-1*x0^-1]}
             sage: H1 = H.add_hyperplane(y - x)
-            sage: H1.affine_meridians()
+            sage: H1.affine_meridians()                                                 # needs sage.libs.braiding
             {0: [x0], 1: [x1], 2: [x2], 3: [x2^-1*x1^-1*x0^-1]}
         """
         if self._affine_meridians is None:
@@ -492,12 +492,12 @@ class OrderedHyperplaneArrangementElement(HyperplaneArrangementElement):
             sage: # optional - sirocco, needs sage.graphs
             sage: A3.<x, y, z> = OrderedHyperplaneArrangements(QQ)
             sage: H = A3(hyperplane_arrangements.braid(4).essentialization())
-            sage: H.projective_meridians()
+            sage: H.projective_meridians()                                              # needs sage.libs.braiding
             {0: [x2^-1*x0^-1*x4^-1*x3^-1*x1^-1],
              1: [x3], 2: [x4], 3: [x1], 4: [x2], 5: [x0]}
             sage: A4.<t1, t2, t3, t4> = OrderedHyperplaneArrangements(QQ)
             sage: H = A4(hyperplane_arrangements.braid(4))
-            sage: H.projective_meridians()  # long time
+            sage: H.projective_meridians()  # long time                                 # needs sage.libs.braiding
             {0: [x2^-1*x0^-1*x4^-1*x3^-1*x1^-1], 1: [x3],
              2: [x4], 3: [x0], 4: [x2], 5: [x1]}
 
@@ -505,7 +505,7 @@ class OrderedHyperplaneArrangementElement(HyperplaneArrangementElement):
             sage: L.<t0, t1, t2, t3, t4> = OrderedHyperplaneArrangements(QQ)
             sage: H = hyperplane_arrangements.coordinate(5)
             sage: H = L(H)
-            sage: H.projective_meridians()
+            sage: H.projective_meridians()                                              # needs sage.libs.braiding
             {0: [x2], 1: [x3], 2: [x0], 3: [x3^-1*x2^-1*x1^-1*x0^-1], 4: [x1]}
         """
         if self._projective_meridians is None:
