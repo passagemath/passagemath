@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-setup == 10.8.1rc1
+passagemath-setup == 10.8.1rc2
