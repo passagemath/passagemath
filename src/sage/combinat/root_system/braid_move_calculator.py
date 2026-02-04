@@ -31,6 +31,7 @@ class BraidMoveCalculator:
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: from sage.combinat.root_system.braid_move_calculator import BraidMoveCalculator
             sage: W = CoxeterGroup(['C',3])
             sage: B = BraidMoveCalculator(W)
@@ -44,6 +45,7 @@ class BraidMoveCalculator:
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: from sage.combinat.root_system.braid_move_calculator import BraidMoveCalculator
             sage: W = CoxeterGroup(['C',3])
             sage: B = BraidMoveCalculator(W)
@@ -89,6 +91,7 @@ class BraidMoveCalculator:
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: from sage.combinat.root_system.braid_move_calculator import BraidMoveCalculator
             sage: W = CoxeterGroup(['C',3])
             sage: B = BraidMoveCalculator(W)
