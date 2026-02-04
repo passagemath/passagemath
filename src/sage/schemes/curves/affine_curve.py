@@ -1836,7 +1836,7 @@ class AffinePlaneCurve_field(AffinePlaneCurve, AffineCurve_field):
 
         EXAMPLES::
 
-            sage: # needs sirocco
+            sage: # needs sirocco sage.libs.braiding
             sage: A.<x,y> = AffineSpace(QQ, 2)
             sage: C = A.curve(y^2 - x^3 - x^2)
             sage: C.fundamental_group(puiseux=False)

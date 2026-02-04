@@ -30,7 +30,7 @@ EXAMPLES::
     sage: f = y^3 + x^3 - 1
     sage: braid_monodromy(f)
     ([s1*s0, s1*s0, s1*s0], {0: 0, 1: 0, 2: 0}, {}, 3)
-    sage: fundamental_group(f)
+    sage: fundamental_group(f)                                                          # needs sage.libs.braiding
     Finitely presented group < x0 |  >
 """
 # ****************************************************************************
@@ -1510,7 +1510,7 @@ def braid2rels(L) -> list:
         sage: from sage.schemes.curves.zariski_vankampen import braid2rels
         sage: B.<s0, s1, s2> = BraidGroup(4)
         sage: L = ((s1*s0)^2, [s2])
-        sage: braid2rels(L)
+        sage: braid2rels(L)                                                             # needs sage.libs.braiding
         [(4, 1, -2, -1), (2, -4, -2, 1)]
     """
     br = L[0]
@@ -1598,28 +1598,29 @@ def fundamental_group_from_braid_mon(bm, degree=None,
 
     EXAMPLES::
 
+        sage: # needs sirocco sage.libs.braiding
         sage: from sage.schemes.curves.zariski_vankampen import fundamental_group_from_braid_mon
         sage: B.<s0, s1, s2> = BraidGroup(4)
         sage: bm = [s1*s2*s0*s1*s0^-1*s1^-1*s0^-1,
         ....:       s0*s1^2*s0*s2*s1*(s0^-1*s1^-1)^2*s0^-1,
         ....:       (s0*s1)^2]
-        sage: g = fundamental_group_from_braid_mon(bm, projective=True)        # needs sirocco
-        sage: g.sorted_presentation()                                          # needs sirocco
+        sage: g = fundamental_group_from_braid_mon(bm, projective=True)
+        sage: g.sorted_presentation()
         Finitely presented group
         < x0, x1 | x1^-2*x0^-2, x1^-1*(x0^-1*x1)^2*x0 >
-        sage: print(g.order(), g.abelian_invariants())                         # needs sirocco
+        sage: print(g.order(), g.abelian_invariants())
         12 (4,)
         sage: B2 = BraidGroup(2)
         sage: bm = [B2(3 * [1])]
-        sage: g = fundamental_group_from_braid_mon(bm, vertical=[0]); g         # needs sirocco
+        sage: g = fundamental_group_from_braid_mon(bm, vertical=[0]); g
         Finitely presented group
         < x0, x1, x2 | x2*x0*x1*x2^-1*x1^-1*x0^-1,
                        x2*x0*x1*x0*x1^-1*x0^-1*x2^-1*x1^-1 >
-        sage: fundamental_group_from_braid_mon([]) is None                      # needs sirocco
+        sage: fundamental_group_from_braid_mon([]) is None
         True
-        sage: fundamental_group_from_braid_mon([], degree=2)                    # needs sirocco
+        sage: fundamental_group_from_braid_mon([], degree=2)
         Finitely presented group < x0, x1 |  >
-        sage: fundamental_group_from_braid_mon([SymmetricGroup(1).one()])       # needs sirocco
+        sage: fundamental_group_from_braid_mon([SymmetricGroup(1).one()])
         Finitely presented group < x |  >
     """
     vertical0 = sorted(vertical)
@@ -1701,7 +1702,7 @@ def fundamental_group(f, simplified=True, projective=False, puiseux=True):
 
     EXAMPLES::
 
-        sage: # needs sirocco
+        sage: # needs sirocco sage.libs.braiding
         sage: from sage.schemes.curves.zariski_vankampen import fundamental_group, braid_monodromy
         sage: R.<x, y> = QQ[]
         sage: f = x^2 + y^3
@@ -1718,7 +1719,7 @@ def fundamental_group(f, simplified=True, projective=False, puiseux=True):
 
     ::
 
-        sage: # needs sirocco
+        sage: # needs sirocco sage.libs.braiding
         sage: from sage.schemes.curves.zariski_vankampen import fundamental_group
         sage: R.<x, y> = QQ[]
         sage: f = y^3 + x^3
@@ -1738,13 +1739,13 @@ def fundamental_group(f, simplified=True, projective=False, puiseux=True):
         Defining zeta
         sage: R.<x, y> = F[]
         sage: f = y^3 + x^3 + zeta * x + 1
-        sage: fundamental_group(f)                                  # needs sirocco
+        sage: fundamental_group(f)                                  # needs sirocco sage.libs.braiding
         Finitely presented group < x0 |  >
 
     We compute the fundamental group of the complement of a
     quartic using the ``puiseux`` option::
 
-        sage: # optional - sirocco
+        sage: # optional - sirocco, needs sage.libs.braiding
         sage: from sage.schemes.curves.zariski_vankampen import fundamental_group
         sage: R.<x, y> = QQ[]
         sage: f = x^2 * y^2 + x^2 + y^2 - 2 * x * y  * (x + y + 1)
@@ -1826,7 +1827,7 @@ def fundamental_group_arrangement(flist, simplified=True, projective=False,
 
     EXAMPLES::
 
-        sage: # needs sirocco
+        sage: # needs sirocco sage.libs.braiding
         sage: from sage.schemes.curves.zariski_vankampen import braid_monodromy
         sage: from sage.schemes.curves.zariski_vankampen import fundamental_group_arrangement
         sage: R.<x, y> = QQ[]
