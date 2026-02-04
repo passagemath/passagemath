@@ -3662,8 +3662,9 @@ cdef class Matrix_integer_dense(Matrix_dense):
 
         ::
 
-            sage: # needs sage.libs.linbox
             sage: A = matrix(ZZ,5,[1,2,3,4,5,4,6,3,2,1,7,9,7,5,2,1,4,6,7,8,3,2,4,6,7])
+
+            sage: # needs sage.libs.linbox
             sage: A.determinant(algorithm='linbox')
             Traceback (most recent call last):
             ...
