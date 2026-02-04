@@ -500,6 +500,7 @@ class InfinitePolynomial(CommutativePolynomial,
 
         EXAMPLES::
 
+            sage: # needs sage.rings.number_field
             sage: R.<x> = InfinitePolynomialRing(QQbar)
             sage: f = 3*x[3]^2 - 2*x[1] + 5
             sage: f.is_constant()
@@ -1492,6 +1493,7 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar, implementation='sparse')
             sage: x[1] + x[3]
             x_3 + x_1
@@ -1514,6 +1516,7 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar, implementation='sparse')
             sage: x[1] * x[3]
             x_3*x_1
@@ -1536,6 +1539,7 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar, implementation='sparse')
             sage: x[1] - x[3]
             -x_3 + x_1
@@ -1561,6 +1565,7 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar, implementation='sparse')
             sage: (x[2]^2 - 1) // (x[2] + 1)                                            # needs sage.libs.singular
             x_2 - 1
@@ -1594,6 +1599,7 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar, implementation='sparse')
             sage: (x[3] + x[1])^2
             x_3^2 + 2*x_3*x_1 + x_1^2
@@ -1984,6 +1990,7 @@ class InfinitePolynomial_dense(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar)
             sage: x[1] + x[3]
             x_3 + x_1
@@ -2003,6 +2010,7 @@ class InfinitePolynomial_dense(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar)
             sage: x[1]*x[3]
             x_3*x_1
@@ -2022,6 +2030,7 @@ class InfinitePolynomial_dense(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar)
             sage: x[1] - x[3]
             -x_3 + x_1
@@ -2044,6 +2053,7 @@ class InfinitePolynomial_dense(InfinitePolynomial):
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: X.<x> = InfinitePolynomialRing(QQbar)
             sage: (x[2]^2 - 1) // (x[2] + 1)                                            # needs sage.libs.singular
             x_2 - 1
@@ -2139,15 +2149,16 @@ class InfinitePolynomial_dense(InfinitePolynomial):
             sage: R.<x> = InfinitePolynomialRing(QQ)
             sage: p = 1 + 3*x[0]*x[1] + 2*x[2]
             sage: q = x[0] - 1
-            sage: p.quo_rem(q)
+            sage: p.quo_rem(q)                                                          # needs sage.libs.singular
             (3*x_1, 2*x_2 + 3*x_1 + 1)
 
         TESTS::
 
+            sage: # needs sage.rings.number_field
             sage: R.<x> = InfinitePolynomialRing(QQbar)
             sage: p = 1 + 3*x[0]*x[1] + 2*x[2]
             sage: q = x[0] - 1
-            sage: p.quo_rem(q)
+            sage: p.quo_rem(q)                                                          # needs sage.libs.singular
             (3*x_1, 2*x_2 + 3*x_1 + 1)
         """
         P = self.parent()
