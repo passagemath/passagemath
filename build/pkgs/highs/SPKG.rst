@@ -29,11 +29,6 @@ Upstream Contact
 - https://www.highs.dev
 - Email: hello@highs.dev
 
-Dependencies
-------------
-
-- CMake (build dependency)
-
 Special Update/Build Instructions
 ----------------------------------
 
