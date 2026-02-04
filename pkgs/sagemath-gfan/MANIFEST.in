@@ -4,6 +4,7 @@ prune sage
 
 include VERSION.txt
 
+include sage/interfaces/gfan.p*
 include sage/libs/gfan.p*
 include sage/rings/polynomial/groebner_fan.p*
 
