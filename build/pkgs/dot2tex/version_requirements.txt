@@ -1,1 +1,2 @@
 dot2tex >=2.11.3
+pyparsing <3.3
