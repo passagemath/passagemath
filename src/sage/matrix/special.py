@@ -498,6 +498,7 @@ def random_matrix(ring, nrows, ncols=None, algorithm='randomize', implementation
     a random matrix in echelon form.  When the base ring is ``QQ`` the result has integer
     entries.  Other exact rings may be also specified. ::
 
+        sage: # needs sage.libs.gsl
         sage: A = random_matrix(QQ, 4, 8, algorithm='echelon_form', num_pivots=3)
         sage: A.base_ring()
         Rational Field

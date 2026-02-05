@@ -525,16 +525,16 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
         magnitude of the entries. ::
 
             sage: A = random_matrix(ZZ, 18, 11, sparse=True)
-            sage: A._right_kernel_matrix(algorithm='default')[0]
+            sage: A._right_kernel_matrix(algorithm='default')[0]                        # needs sage.libs.pari
             'computed-pari-int'
             sage: A = random_matrix(ZZ, 18, 11, x = 10^200, sparse=True)
-            sage: A._right_kernel_matrix(algorithm='default')[0]
+            sage: A._right_kernel_matrix(algorithm='default')[0]                        # needs sage.libs.iml
             'computed-iml-int'
             sage: A = random_matrix(ZZ, 60, 60, sparse=True)
-            sage: A._right_kernel_matrix(algorithm='default')[0]
+            sage: A._right_kernel_matrix(algorithm='default')[0]                        # needs sage.libs.iml
             'computed-iml-int'
             sage: A = random_matrix(ZZ, 60, 55, sparse=True)
-            sage: A._right_kernel_matrix(algorithm='default')[0]
+            sage: A._right_kernel_matrix(algorithm='default')[0]                        # needs sage.libs.pari
             'computed-pari-int'
 
         TESTS:

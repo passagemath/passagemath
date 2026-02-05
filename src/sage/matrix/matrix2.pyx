@@ -7196,7 +7196,7 @@ cdef class Matrix(Matrix1):
         EXAMPLES::
 
             sage: A = matrix([[1, 2], [3, 4]])
-            sage: A.singular_values()
+            sage: A.singular_values()                                                   # needs sage.libs.pari
             [0.3659661906262578?, 5.464985704219043?]
 
         TESTS::

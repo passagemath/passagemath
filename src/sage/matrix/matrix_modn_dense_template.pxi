@@ -1794,6 +1794,7 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
             sage: A.pivot_rows()
             (0, 1)
 
+            sage: # needs sage.rings.finite_rings
             sage: for p in (3,17,97,127,1048573):
             ....:    for i in range(10):
             ....:        A = random_matrix(GF(p), 100, 100)
