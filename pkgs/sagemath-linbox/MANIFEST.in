@@ -9,7 +9,6 @@ recursive-include sage/libs/ntl *.pxd *.pxi *.h                                 
 include sage/matrix/matrix_*_linbox.p*
 include sage/matrix/matrix_modn_dense_*.p*
 include sage/matrix/matrix_modn_dense_.p*
-include sage/matrix/matrix_modn_sparse.p*
 include sage/matrix/misc.p*
 
 # entangled via matrix_integer_dense
