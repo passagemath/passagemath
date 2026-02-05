@@ -2147,7 +2147,7 @@ class Func_jacobi_P(OrthogonalFunction):
         sage: x = PolynomialRing(QQ, 'x').gen()
         sage: jacobi_P(2, 0, 0, x)                                                      # needs sage.libs.flint sage.symbolic
         3/2*x^2 - 1/2
-        sage: jacobi_P(2, 1, 2, 1.2)                                                    # needs sage.libs.flint
+        sage: jacobi_P(2, 1, 2, 1.2)                                                    # needs sage.libs.flint sage.symbolic
         5.01000000000000
     """
     def __init__(self):

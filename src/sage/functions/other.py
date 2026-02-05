@@ -1493,7 +1493,7 @@ class Function_factorial(GinacFunction):
         Check that :issue:`16166` is fixed::
 
             sage: RBF = RealBallField(53)                                               # needs sage.libs.flint
-            sage: factorial(RBF(4.2))  # abs tol 1e-13                                  # needs sage.libs.flint
+            sage: factorial(RBF(4.2))  # abs tol 1e-13                                  # needs sage.libs.flint sage.symbolic
             [32.5780960503314 +/- 6.06e-14]
 
         Test pickling::
@@ -1537,7 +1537,7 @@ class Function_factorial(GinacFunction):
 
         Check that :issue:`25421` is fixed::
 
-            sage: factorial(RBF(2)**64)                                                 # needs sage.libs.flint
+            sage: factorial(RBF(2)**64)                                                 # needs sage.libs.flint sage.symbolic
             [+/- 2.30e+347382171326740403407]
 
         Check that :issue:`26749` is fixed::

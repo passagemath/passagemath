@@ -588,7 +588,7 @@ class DickmanRho(BuiltinFunction):
              - 0.0097336*x^3 + 0.045224*x^2 - 0.11891*x + 0.13032
             sage: f(-1), f(0), f(1)
             (0.30685, 0.13032, 0.048608)
-            sage: dickman_rho(2), dickman_rho(2.5), dickman_rho(3)
+            sage: dickman_rho(2), dickman_rho(2.5), dickman_rho(3)                      # needs sage.symbolic
             (0.306852819440055, 0.130319561832251, 0.0486083882911316)
         """
         return self._compute_power_series(n, abs_prec, cache_ring=None)
