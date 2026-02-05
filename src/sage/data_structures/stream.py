@@ -1698,7 +1698,7 @@ class Stream_uninitialized(Stream):
             sage: D = Stream_add(x, Stream_cauchy_mul(C, C, True), True)
             sage: eq = Stream_sub(C, D, True)
             sage: C.define_implicitly([C], [], [eq], QQ, QQ, terms_of_degree)
-            sage: C[6]
+            sage: C[6]                                                                  # needs sage.libs.pari
             42
         """
         assert self._target is None
@@ -1801,9 +1801,9 @@ class Stream_uninitialized(Stream):
             sage: C.define_implicitly([C], [], [eq], QQ, QQ, terms_of_degree)
             sage: C._good_cache
             [0, 0, 0, 0]
-            sage: C[1]
+            sage: C[1]                                                                  # needs sage.libs.pari
             1
-            sage: C._good_cache
+            sage: C._good_cache                                                         # needs sage.libs.pari
             [1, 0, 1, 0]
         """
         g = []
@@ -1958,7 +1958,7 @@ class Stream_uninitialized(Stream):
             sage: D = Stream_add(x, Stream_cauchy_mul(C, C, True), True)
             sage: eq = Stream_sub(C, D, True)
             sage: C.define_implicitly([C], [], [eq], QQ, QQ, terms_of_degree)
-            sage: C[3]  # indirect doctest
+            sage: C[3]  # indirect doctest                                              # needs sage.libs.pari
             2
         """
         def subs(c, var, val):
@@ -2043,7 +2043,7 @@ class Stream_uninitialized(Stream):
             sage: C.define_implicitly([C], [], [eq], QQ, QQ, terms_of_degree)
             sage: C._uncomputed = False
             sage: C._collect_equations(0)
-            ([], [[(0, -FESDUMMY_0^2 + FESDUMMY_0)]])
+            ([], [[(0, -FESDUMMY_...^2 + FESDUMMY_...)]])
         """
         lin_coeffs = []
         all_coeffs = []  # only for the error message
@@ -2112,9 +2112,9 @@ class Stream_uninitialized(Stream):
             [FESDUMMY_1]
             sage: lin_coeffs
             [FESDUMMY_1 - 1]
-            sage: C._solve_linear_equations_and_subs(lin_coeffs)
+            sage: C._solve_linear_equations_and_subs(lin_coeffs)                        # needs sage.libs.pari
             True
-            sage: C._cache
+            sage: C._cache                                                              # needs sage.libs.pari
             [1]
         """
         from sage.rings.polynomial.multi_polynomial_sequence import PolynomialSequence
@@ -2166,7 +2166,7 @@ class Stream_uninitialized(Stream):
             sage: D = Stream_add(x, Stream_cauchy_mul(C, C, True), True)
             sage: eq = Stream_sub(C, D, True)
             sage: C.define_implicitly([C], [], [eq], QQ, QQ, terms_of_degree)
-            sage: C[3]  # indirect doctest
+            sage: C[3]  # indirect doctest                                              # needs sage.libs.pari
             2
         """
         # determine the next linear equations
