@@ -1967,6 +1967,7 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
             sage: A.pivots() == (0, 1, 3)
             True
 
+            sage: # needs sage.rings.finite_rings
             sage: A = matrix(GF(65537), 5, 3,
             ....:            [  223,   669, 21130,
             ....:             13996, 41988, 21387,
@@ -1977,6 +1978,7 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
             True
             sage: A.pivots() == (0, 2)
             True
+
             sage: A = matrix(GF(7), 3, 5, [2, 2, 4, 1, 4,
             ....:                          4, 4, 1, 4, 6,
             ....:                          5, 2, 5, 6, 6])
@@ -2037,6 +2039,7 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
             sage: A.pivot_rows() == (0, 1, 3)
             True
 
+            sage: # needs sage.rings.finite_rings
             sage: A = matrix(GF(65537), 3, 5,
             ....:            [  223, 13996, 39034, 14660, 12016,
             ....:               669, 41988, 51565, 43980, 36048,
@@ -2045,6 +2048,7 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
             True
             sage: A.pivot_rows() == (0, 2)
             True
+
             sage: A = matrix(GF(7), 5, 3, [2, 4, 5,
             ....:                          2, 4, 2,
             ....:                          4, 1, 5,

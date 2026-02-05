@@ -3268,6 +3268,7 @@ def random_unitary_matrix(parent):
 
     Likewise if that field is not a subfield of the complex numbers::
 
+        sage: # needs sage.rings.padics
         sage: R = Qp(7)
         sage: R.characteristic()
         0
