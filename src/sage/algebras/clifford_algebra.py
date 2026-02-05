@@ -2777,7 +2777,7 @@ class ExteriorAlgebraIdeal(Ideal_nc):
 
             sage: E.<a,b,c,d> = ExteriorAlgebra(QQ)
             sage: I = E.ideal([a+b*c])
-            sage: I.reduce(I.gen(0) * d)
+            sage: I.reduce(I.gen(0) * d)                                                # needs sage.libs.pari
             0
         """
         if self._groebner_strategy is None:
@@ -2792,6 +2792,7 @@ class ExteriorAlgebraIdeal(Ideal_nc):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: E.<x,y,z> = ExteriorAlgebra(QQ)
             sage: I = E.ideal([x, x*y*z + 2*x*z + 3*y*z], side='left')
             sage: I.groebner_basis()
@@ -2822,6 +2823,7 @@ class ExteriorAlgebraIdeal(Ideal_nc):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: E.<x,y,z> = ExteriorAlgebra(QQ)
             sage: I = E.ideal([x, x*y*z + 2*x*z + 3*y*z])
             sage: I == I
@@ -2844,6 +2846,7 @@ class ExteriorAlgebraIdeal(Ideal_nc):
             sage: I <= E.ideal([x])
             False
 
+            sage: # needs sage.libs.pari
             sage: E.<a,b,c,d> = ExteriorAlgebra(QQ)
             sage: p = a + b*c
             sage: IT = E.ideal([p], side='twosided')
@@ -2859,7 +2862,6 @@ class ExteriorAlgebraIdeal(Ideal_nc):
             2*a*d
             sage: IR.reduce(d * p)
             -2*a*d
-
             sage: IR <= IT
             True
             sage: IL <= IT
@@ -2934,6 +2936,7 @@ class ExteriorAlgebraIdeal(Ideal_nc):
 
             sage: E.<a,b,c,d> = ExteriorAlgebra(QQ)
 
+            sage: # needs sage.libs.pari
             sage: I = E.ideal([a + 1], side='left')
             sage: J = I * I; J
             Left Ideal (2*a + 1, a, b, c, d, a*b, a*c, a*d, 2*a*b*c + b*c, 2*a*b*d + b*d,
@@ -2943,19 +2946,16 @@ class ExteriorAlgebraIdeal(Ideal_nc):
             (1,)
             sage: I.gen(0)^2
             2*a + 1
-
             sage: J = E.ideal([b+c])
             sage: I * J
             Twosided Ideal (a*b + a*c + b + c) of The exterior algebra of rank 4 over Rational Field
             sage: J * I
             Left Ideal (-a*b - a*c + b + c) of The exterior algebra of rank 4 over Rational Field
-
             sage: K = J * I
             sage: K
             Left Ideal (-a*b - a*c + b + c) of The exterior algebra of rank 4 over Rational Field
             sage: E.ideal([J.gen(0) * d * I.gen(0)], side='left') <= K
             True
-
             sage: J = E.ideal([b + c*d], side='right')
             sage: I * J
             Twosided Ideal (a*c*d + a*b + c*d + b) of The exterior algebra of rank 4 over Rational Field
@@ -2968,7 +2968,6 @@ class ExteriorAlgebraIdeal(Ideal_nc):
             c*d + b
             sage: a * p  # not a left ideal
             a*c*d + a*b
-
             sage: I = E.ideal([a + 1], side='right')
             sage: E.ideal([1]) * I
             Twosided Ideal (a + 1) of The exterior algebra of rank 4 over Rational Field
@@ -3057,6 +3056,7 @@ class ExteriorAlgebraIdeal(Ideal_nc):
         By default, the Gröbner basis is reduced, but we can get non-reduced
         Gröber bases (which are not unique)::
 
+            sage: # needs sage.libs.pari
             sage: E.<x,y,z> = ExteriorAlgebra(QQ)
             sage: I = E.ideal([x+y*z])
             sage: I.groebner_basis(reduced=False)
@@ -3067,6 +3067,7 @@ class ExteriorAlgebraIdeal(Ideal_nc):
         However, if we have already computed a reduced Gröbner basis (with
         a given term order), then we return that::
 
+            sage: # needs sage.libs.pari
             sage: I = E.ideal([x+y*z])  # A fresh ideal
             sage: I.groebner_basis()
             (x*y, x*z, y*z + x)
@@ -3075,6 +3076,7 @@ class ExteriorAlgebraIdeal(Ideal_nc):
 
         TESTS::
 
+            sage: # needs sage.libs.pari
             sage: E.<a,b,c,d,e> = ExteriorAlgebra(ZZ)
             sage: I = E.ideal([a+1, b*c+d])
             sage: I.groebner_basis()

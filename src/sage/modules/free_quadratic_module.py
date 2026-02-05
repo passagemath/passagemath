@@ -1285,6 +1285,7 @@ class FreeQuadraticModule_submodule_with_basis_pid(free_module.FreeModule_submod
             [-1  0  0  0  0  0  1  0]
             [-1  0  0  0  0  0  0  1]
 
+            sage: # needs sage.libs.pari
             sage: M = FreeModule(ZZ,8,sparse=True)
             sage: N = M.submodule_with_basis([ M.gen(i) - M.gen(0) for i in range(1,8) ])
             sage: N # indirect doctest
@@ -1562,6 +1563,7 @@ class FreeQuadraticModule_submodule_with_basis_field(free_module.FreeModule_subm
 
         Sparse vector spaces print this fact::
 
+            sage: # needs sage.libs.pari
             sage: V = VectorSpace(QQ,5,sparse=True)
             sage: U = V.submodule([ V.gen(i) - V.gen(0) for i in range(1,5) ])
             sage: U # indirect doctest
@@ -1672,6 +1674,7 @@ class FreeQuadraticModule_submodule_field(free_module.FreeModule_submodule_field
 
         Sparse vector spaces print this fact::
 
+            sage: # needs sage.libs.pari
             sage: V = VectorSpace(QQ, 5, sparse=True)
             sage: U = V.submodule([ V.gen(i) - V.gen(0) for i in range(1,5) ])
             sage: U # indirect doctest

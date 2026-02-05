@@ -47,7 +47,7 @@ invariant factors of the group. You should now use
     (2, 0, 3, 2, 4)
     sage: J.invariants()             # deprecated
     (2, 0, 3, 2, 4)
-    sage: J.elementary_divisors()    # these are the "invariant factors"
+    sage: J.elementary_divisors()    # these are the "invariant factors"                # needs sage.libs.pari
     (2, 2, 12, 0)
     sage: for i in range(J.ngens()):
     ....:     print((i, J.gen(i), J.gen(i).order()))     # or use this form
@@ -485,16 +485,16 @@ class AbelianGroup_class(UniqueRepresentation, AbelianGroupBase):
         False
         sage: Z2xZ3 == Z6
         False
-        sage: Z2xZ3.is_isomorphic(Z6)
+        sage: Z2xZ3.is_isomorphic(Z6)                                                   # needs sage.libs.pari
         True
 
+        sage: # needs sage.libs.pari
         sage: F = AbelianGroup(5,[5,5,7,8,9], names=list("abcde")); F
         Multiplicative Abelian group isomorphic to C5 x C5 x C7 x C8 x C9
         sage: F = AbelianGroup(5,[2, 4, 12, 24, 120], names=list("abcde")); F
         Multiplicative Abelian group isomorphic to C2 x C4 x C12 x C24 x C120
         sage: F.elementary_divisors()
         (2, 4, 12, 24, 120)
-
         sage: F.category()
         Category of finite enumerated commutative groups
 
@@ -559,7 +559,7 @@ class AbelianGroup_class(UniqueRepresentation, AbelianGroupBase):
 
             sage: G1 = AbelianGroup([2,3,4,5])
             sage: G2 = AbelianGroup([2,3,4,5,1])
-            sage: G1.is_isomorphic(G2)
+            sage: G1.is_isomorphic(G2)                                                  # needs sage.libs.pari
             True
         """
         if not isinstance(right, AbelianGroup_class):
@@ -636,6 +636,7 @@ class AbelianGroup_class(UniqueRepresentation, AbelianGroupBase):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: AbelianGroup([2, 3]).is_trivial()
             False
             sage: AbelianGroup([1, 1]).is_trivial()
@@ -649,6 +650,7 @@ class AbelianGroup_class(UniqueRepresentation, AbelianGroupBase):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: T = AbelianGroup([2, 3])
             sage: bool(T)  # indirect doctest
             True
@@ -728,6 +730,7 @@ class AbelianGroup_class(UniqueRepresentation, AbelianGroupBase):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: G = AbelianGroup(2, [2,3])
             sage: G.elementary_divisors()
             (6,)
@@ -946,16 +949,16 @@ class AbelianGroup_class(UniqueRepresentation, AbelianGroupBase):
             sage: Z2xZ3 = AbelianGroup([2,3])
             sage: Z2xZ3.gens_orders()
             (2, 3)
-            sage: Z2xZ3.elementary_divisors()
+            sage: Z2xZ3.elementary_divisors()                                           # needs sage.libs.pari
             (6,)
 
             sage: Z6 = AbelianGroup([6])
             sage: Z6.gens_orders()
             (6,)
-            sage: Z6.elementary_divisors()
+            sage: Z6.elementary_divisors()                                              # needs sage.libs.pari
             (6,)
 
-            sage: Z2xZ3.is_isomorphic(Z6)
+            sage: Z2xZ3.is_isomorphic(Z6)                                               # needs sage.libs.pari
             True
             sage: Z2xZ3 is Z6
             False
@@ -1000,6 +1003,7 @@ class AbelianGroup_class(UniqueRepresentation, AbelianGroupBase):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: J = AbelianGroup([2,3])
             sage: J.invariants()
             (2, 3)
@@ -1023,6 +1027,7 @@ class AbelianGroup_class(UniqueRepresentation, AbelianGroupBase):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: J = AbelianGroup([2,3])
             sage: J.gens_orders()
             (2, 3)

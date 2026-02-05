@@ -2098,7 +2098,7 @@ class PolynomialRing_integral_domain(PolynomialRing_commutative, PolynomialRing_
 
         A simple check (not sufficient)::
 
-            sage: all(f.number_of_real_roots() == 0 for f in simples)                                                   # needs sage.libs.flint
+            sage: all(f.number_of_real_roots() == 0 for f in simples)                   # needs sage.libs.flint sage.libs.pari
             True
         """
         R = self.base_ring()

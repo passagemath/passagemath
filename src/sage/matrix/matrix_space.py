@@ -2723,10 +2723,10 @@ def _test_trivial_matrices_inverse(ring, sparse=True, implementation=None, check
     TESTS::
 
         sage: from sage.matrix.matrix_space import _test_trivial_matrices_inverse as tinv
-        sage: tinv(ZZ, sparse=True)
+        sage: tinv(ZZ, sparse=True)                                                     # needs sage.libs.pari
         sage: tinv(ZZ, sparse=False, implementation='flint')                            # needs sage.libs.linbox
         sage: tinv(ZZ, sparse=False, implementation='generic')
-        sage: tinv(QQ, sparse=True)
+        sage: tinv(QQ, sparse=True)                                                     # needs sage.libs.pari
         sage: tinv(QQ, sparse=False, implementation='flint')                            # needs sage.libs.linbox
         sage: tinv(QQ, sparse=False, implementation='generic')
         sage: tinv(GF(11), sparse=True)

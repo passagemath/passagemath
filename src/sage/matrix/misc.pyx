@@ -181,6 +181,7 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: A = matrix(QQ, 3, 7, [1..21])
         sage: from sage.matrix.misc import matrix_rational_echelon_form_multimodular
         sage: E, pivots = matrix_rational_echelon_form_multimodular(A)
@@ -190,7 +191,6 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
         [ 0  0  0  0  0  0  0]
         sage: pivots
         (0, 1)
-
         sage: A = matrix(QQ, 3, 4, [0,0] + [1..9] + [-1/2^20])
         sage: E, pivots = matrix_rational_echelon_form_multimodular(A)
         sage: E
@@ -199,7 +199,6 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
         [                0                 0                 1                 2]
         sage: pivots
         (0, 1, 2)
-
         sage: A.echelon_form()
         [                1                 0                 0 -10485761/1048576]
         [                0                 1                 0  27262979/4194304]
@@ -210,6 +209,7 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
     A small benchmark, showing that flint fraction-free multimodular algorithm
     is always faster than the fraction-free multimodular algorithm implemented in Python::
 
+        sage: # needs sage.libs.pari
         sage: import copy
         sage: def benchmark(num_row, num_col, entry_size, timeout=2, integer_coefficient=True):
         ....:     A = matrix(QQ, [[

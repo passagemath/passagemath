@@ -136,7 +136,7 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
             sage: b.coxeter_group_element().reduced_word()
             [1, 2, 3, 2]
 
-            sage: # neeeds sage.combinat sage.rings.number_field
+            sage: # needs sage.combinat sage.rings.number_field
             sage: A.<s1,s2,s3> = ArtinGroup(['A',3])
             sage: c = s1 * s2 *s3
             sage: c1 = c.coxeter_group_element(); c1

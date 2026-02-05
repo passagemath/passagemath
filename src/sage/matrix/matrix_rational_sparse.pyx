@@ -529,6 +529,7 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: a = matrix(QQ, 4, range(16), sparse=True); a[0,0] = 1/19; a[0,1] = 1/5; a
             [1/19  1/5    2    3]
             [   4    5    6    7]
@@ -542,6 +543,7 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
 
         :issue:`10319` has been fixed::
 
+            sage: # needs sage.libs.pari
             sage: m = Matrix(QQ, [1], sparse=True); m.echelonize()
             sage: m = Matrix(QQ, [1], sparse=True); m.echelonize(); m
             [1]
@@ -571,6 +573,7 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: a = matrix(QQ, 4, range(16), sparse=True); a[0,0] = 1/19; a[0,1] = 1/5; a
             [1/19  1/5    2    3]
             [   4    5    6    7]
@@ -792,7 +795,7 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
             ....:                 [4, -1, 0, -6, 2]],
             ....:             sparse=True)
             sage: result = A._right_kernel_matrix()
-            sage: result[0]
+            sage: result[0]                                                             # needs sage.libs.iml
             'computed-iml-rational'
             sage: result[1]
             [-1  2 -2 -1  0]

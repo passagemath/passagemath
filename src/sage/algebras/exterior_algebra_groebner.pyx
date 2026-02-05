@@ -293,6 +293,7 @@ cdef class GroebnerStrategy:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: E.<y, x> = ExteriorAlgebra(QQ)
             sage: I = E.ideal([x*y - x, x*y - 1], side='left')
             sage: I.groebner_basis()  # indirect doctest
@@ -301,6 +302,7 @@ cdef class GroebnerStrategy:
             sage: J.groebner_basis()  # indirect doctest
             (1,)
 
+            sage: # needs sage.libs.pari
             sage: E.<a,b,c,d> = ExteriorAlgebra(QQ)
             sage: I = E.ideal([a+b*c], side='left')
             sage: I.groebner_basis()  # indirect doctest
@@ -441,6 +443,7 @@ cdef class GroebnerStrategy:
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: E.<x,y,z> = ExteriorAlgebra(QQ)
             sage: I = E.ideal([x+y*z])
             sage: I.groebner_basis(reduced=False)
@@ -483,6 +486,7 @@ cdef class GroebnerStrategy:
 
         Check :issue:`37108` is fixed::
 
+            sage: # needs sage.libs.pari
             sage: E = ExteriorAlgebra(QQ, 6)
             sage: E.inject_variables(verbose=False)
             sage: gens = [-e0*e1*e2 + e0*e1*e5 - e0*e2*e3 - e0*e3*e5 + e1*e2*e3 + e1*e3*e5,
