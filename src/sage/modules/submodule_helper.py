@@ -66,6 +66,7 @@ class SubmoduleHelper(metaclass=ClasscallMetaclass):
 
         ::
 
+            sage: # needs sage.libs.pari
             sage: SH = SubmoduleHelper(matrix(ZZ, [[1, 3]]))
             sage: type(SH)
             <class 'sage.modules.submodule_helper.SubmoduleHelper_PID'>
