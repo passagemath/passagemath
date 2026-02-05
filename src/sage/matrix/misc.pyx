@@ -275,10 +275,14 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
 
     if self.is_sparse():
         from sage.matrix.matrix_modn_sparse import MAX_MODULUS
-        p = MAX_MODULUS + 1
     else:
-        from sage.matrix.matrix_modn_dense_double import MAX_MODULUS
-        p = MAX_MODULUS + 1
+        try:
+            from sage.matrix.matrix_modn_dense_double import MAX_MODULUS
+        except ImportError:
+            from sage.arith.multi_modular import MAX_MODULUS
+
+    p = MAX_MODULUS + 1
+
     t = None
     X = []
     best_pivots = []
