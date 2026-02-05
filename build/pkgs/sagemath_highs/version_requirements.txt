@@ -1,1 +1,2 @@
-passagemath-highs
+# This file is updated on every release by the update-version script
+passagemath-highs == 10.8.1rc3
