@@ -205,7 +205,7 @@ jobs:
       # PYTHONUTF8=1 is for delvewheel
       CIBW_ENVIRONMENT: >-
         PATH="${GITHUB_WORKSPACE}\\sage-local\\bin;${GITHUB_WORKSPACE}\\build\\bin;$PATH"
-        INCLUDE="${GITHUB_WORKSPACE}\\sage-local\\include;%INCLUDE%"
+        INCLUDE="${GITHUB_WORKSPACE}\\sage-local\\include;${GITHUB_WORKSPACE}\\sage-local\\include\\highs;%INCLUDE%"
         LIB="${GITHUB_WORKSPACE}\\sage-local\\bin;${GITHUB_WORKSPACE}\\sage-local\\lib;%LIB%"
         PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH
         ACLOCAL_PATH=/usr/share/aclocal
