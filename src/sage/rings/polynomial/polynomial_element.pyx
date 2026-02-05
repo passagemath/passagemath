@@ -8544,13 +8544,13 @@ cdef class Polynomial(CommutativePolynomial):
             sage: p = x^5 - x - 1
             sage: p.roots()                                                             # needs sage.libs.pari
             []
-            sage: p.roots(ring=CIF)                                                     # needs sage.rings.complex_interval_field
+            sage: p.roots(ring=CIF)                                                     # needs sage.libs.pari sage.rings.complex_interval_field
             [(1.167303978261419?, 1),
              (-0.764884433600585? - 0.352471546031727?*I, 1),
              (-0.764884433600585? + 0.352471546031727?*I, 1),
              (0.181232444469876? - 1.083954101317711?*I, 1),
              (0.181232444469876? + 1.083954101317711?*I, 1)]
-            sage: p.roots(ring=ComplexIntervalField(200))                               # needs sage.rings.complex_interval_field
+            sage: p.roots(ring=ComplexIntervalField(200))                               # needs sage.libs.pari sage.rings.complex_interval_field
             [(1.167303978261418684256045899854842180720560371525489039140082?, 1),
              (-0.76488443360058472602982318770854173032899665194736756700778? - 0.35247154603172624931794709140258105439420648082424733283770?*I, 1),
              (-0.76488443360058472602982318770854173032899665194736756700778? + 0.35247154603172624931794709140258105439420648082424733283770?*I, 1),
@@ -10464,7 +10464,7 @@ cdef class Polynomial(CommutativePolynomial):
             sage: f = x^2
             sage: f.is_squarefree()                                                     # needs sage.libs.pari
             False
-            sage: f.is_squarefree.cache
+            sage: f.is_squarefree.cache                                                 # needs sage.libs.pari
             False
 
         If the base ring implements ``_is_squarefree_univariate_polynomial``,

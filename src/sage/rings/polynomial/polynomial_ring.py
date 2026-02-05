@@ -2086,8 +2086,8 @@ class PolynomialRing_integral_domain(PolynomialRing_commutative, PolynomialRing_
         Check that every polynomial in this list has 3 real roots between `-2
         \sqrt{3}` and `2 \sqrt{3}`::
 
-            sage: roots = [f.roots(RR, multiplicities=False) for f in reals]                                            # needs sage.libs.flint
-            sage: all(len(L) == 3 and all(x^2 <= 12 for x in L) for L in roots)                                         # needs sage.libs.flint
+            sage: roots = [f.roots(RR, multiplicities=False) for f in reals]                                            # needs sage.libs.flint sage.libs.pari
+            sage: all(len(L) == 3 and all(x^2 <= 12 for x in L) for L in roots)                                         # needs sage.libs.flint sage.libs.pari
             True
 
         Finally, check that the original polynomials are reconstructed as CM

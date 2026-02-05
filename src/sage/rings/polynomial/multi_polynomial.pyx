@@ -2795,6 +2795,7 @@ cdef class MPolynomial(CommutativePolynomial):
         Renormalized Schur polynomials are Lorentzian, but not in general if the
         renormalization is skipped::
 
+            sage: # needs sage.libs.pari
             sage: P.<x,y> = QQ[]
             sage: p = (x^2 / 2) + x*y + (y^2 / 2)
             sage: p.is_lorentzian()
@@ -2806,6 +2807,7 @@ cdef class MPolynomial(CommutativePolynomial):
         Homogeneous linear forms and constant polynomials with positive
         coefficients are Lorentzian, as well as the zero polynomial::
 
+            sage: # needs sage.libs.pari
             sage: p = x + 2*y
             sage: p.is_lorentzian()
             True
@@ -2818,6 +2820,7 @@ cdef class MPolynomial(CommutativePolynomial):
         Inhomogeneous polynomials and polynomials with negative coefficients
         are not Lorentzian::
 
+            sage: # needs sage.libs.pari
             sage: p = x^2 + 2*x + y^2
             sage: p.is_lorentzian()
             False
@@ -2839,6 +2842,7 @@ cdef class MPolynomial(CommutativePolynomial):
 
         The method can give a reason for a polynomial failing to be Lorentzian::
 
+            sage: # needs sage.libs.pari
             sage: p = x^2 + 2*x + y^2
             sage: p.is_lorentzian(explain=True)
             (False, 'inhomogeneous')
