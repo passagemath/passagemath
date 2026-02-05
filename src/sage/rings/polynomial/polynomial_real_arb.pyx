@@ -60,7 +60,9 @@ cdef class Polynomial_real_arb(Polynomial):
         x
 
         sage: all(Pol.has_coerce_map_from(P) for P in
-        ....:     (QQ['x'], QuadraticField(2), RealBallField(100)))
+        ....:     (QQ['x'], RealBallField(100)))
+        True
+        sage: Pol.has_coerce_map_from(QuadraticField(2))                               # needs sage.rings.number_field
         True
         sage: any(Pol.has_coerce_map_from(P) for P in
         ....:     (QQ['y'], RR, CC, RDF, CDF, RIF, CIF, RealBallField(20)))

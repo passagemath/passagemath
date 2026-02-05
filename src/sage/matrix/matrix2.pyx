@@ -1132,7 +1132,7 @@ cdef class Matrix(Matrix1):
 
             sage: A = vector(ZZ, [1, 2, 3]).column()
             sage: B = vector(ZZ, [1, 1, 1]).column()
-            sage: A._solve_right_smith_form(B)
+            sage: A._solve_right_smith_form(B)                                          # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             ValueError: matrix equation has no solutions

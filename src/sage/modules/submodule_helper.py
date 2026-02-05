@@ -134,6 +134,7 @@ class SubmoduleHelper(metaclass=ClasscallMetaclass):
 
         ::
 
+            sage: # needs sage.libs.pari
             sage: SHZ = SubmoduleHelper(matrix(ZZ, [[1, 3]]))
             sage: SHZ == SH1
             False
@@ -219,6 +220,7 @@ class SubmoduleHelper_PID(SubmoduleHelper):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: from sage.modules.submodule_helper import SubmoduleHelper
             sage: SH = SubmoduleHelper(matrix(ZZ, [[1, 2, 3], [1, 3, 4]]))
             sage: SH.basis
@@ -233,12 +235,13 @@ class SubmoduleHelper_PID(SubmoduleHelper):
 
         We check that the previous outputs are coherent::
 
-            sage: SH.basis.stack(SH.complement) * SH.coordinates == 1
+            sage: SH.basis.stack(SH.complement) * SH.coordinates == 1                   # needs sage.libs.pari
             True
 
         When ``saturate=True``, the saturation of the span of the given
         matrix is created::
 
+            sage: # needs sage.libs.pari
             sage: SH1 = SubmoduleHelper(matrix(ZZ, [[1, 2, 3], [2, 6, 8]]))
             sage: SH1.basis
             [1 0 1]
