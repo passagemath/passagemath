@@ -1248,6 +1248,7 @@ cdef class Matrix(Matrix1):
 
         Random testing::
 
+            sage: # needs sage.libs.flint
             sage: m = randrange(1,100)
             sage: n = randrange(1,100)
             sage: A = matrix(ZZ, [[randrange(-10,11) for _ in range(n)] for _ in range(m)])
