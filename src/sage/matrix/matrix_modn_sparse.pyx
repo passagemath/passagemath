@@ -310,6 +310,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
 
         The following shows that :issue:`23669` has been addressed::
 
+            sage: # needs sage.rings.finite_rings
             sage: p = next_prime(2**15)
             sage: M = Matrix(GF(p), 1,3, lambda i,j: -1, sparse=True); M
             [32770 32770 32770]
@@ -370,7 +371,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: a = matrix(GF(2), 20, 20, sparse=True)
             sage: a*a == a._matrix_times_matrix_dense(a)
             True
-            sage: type(a._matrix_times_matrix_dense(a))
+            sage: type(a._matrix_times_matrix_dense(a))                                 # needs sage.libs.m4ri
             <class 'sage.matrix.matrix_mod2_dense.Matrix_mod2_dense'>
         """
         cdef Matrix_modn_sparse right
@@ -704,6 +705,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: matrix(GF(3), 0, sparse=True).rank(algorithm='linbox')
             0
 
+            sage: # needs sage.rings.finite_rings
             sage: for _ in range(50):
             ....:     nrows = randint(0, 100)
             ....:     ncols = randint(0, 100)
@@ -776,7 +778,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: B = identity_matrix(GF(3), 4, sparse=True)
             sage: (A + B).det()
             2
-            sage: (A + B).det(algorithm='linbox')
+            sage: (A + B).det(algorithm='linbox')                                       # needs sage.libs.linbox
             2
             sage: (A + B).det(algorithm='generic')
             2
@@ -797,6 +799,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: matrix(GF(3), 0, sparse=True).det(algorithm='linbox')
             1
 
+            sage: # needs sage.rings.finite_rings
             sage: for _ in range(100):
             ....:     dim = randint(0, 50)
             ....:     p = random_prime(10000)
