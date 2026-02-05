@@ -149,7 +149,6 @@ include sage/algebras/finite_gca.p*
 graft sage/algebras/steenrod
 
 graft sage/matrix
-exclude sage/matrix/misc.p*             # Matrix_integer_sparse
 exclude sage/matrix/misc_flint.p*
 exclude sage/matrix/matrix_gap.*
 exclude sage/matrix/matrix_*ball*.*     # depends on arb
@@ -158,8 +157,8 @@ exclude sage/matrix/matrix_*gap*.*      # depends on gap
 exclude sage/matrix/matrix_gf2*.*       # depends on m4ri, m4rie
 exclude sage/matrix/matrix_gfpn*.*      # depends on meataxe
 exclude sage/matrix/matrix_integer_*.*  # depends on flint, pari, iml, linbox
+exclude sage/matrix/matrix_*linbox*.p*  # depends on linbox
 exclude sage/matrix/matrix_mod2*.*      # depends on m4ri
-exclude sage/matrix/matrix_modn*.*      # depends on linbox or flint
 exclude sage/matrix/matrix_mpolynom*.*  # depends on singular
 exclude sage/matrix/matrix_rational_*.* # depends on flint, pari
 exclude sage/matrix/matrix_symbolic_*.* # --> sagemath-symbolics

@@ -25,8 +25,8 @@ include sage/rings/bernmm.p*            # dep of sage.rings.bernoulli_mod_p
 
 include sage/libs/mpfi/*.pxd            # FIXME - shipped by sagemath-flint
 include sage/rings/real_mpfi.pxd
-include sage/matrix/matrix_modn_*.pxd   # FIXME - shipped by sagemath-linbox
-include sage/matrix/matrix_modn_*.pxi
+include sage/matrix/matrix_modn_dense_*.pxd   # FIXME - shipped by sagemath-linbox
+include sage/matrix/matrix_modn_dense_*.pxi
 include sage/rings/padics/*.pxd
 include sage/rings/padics/*.pxi                                       # FIXME
 exclude sage/rings/padics/*flint*.p*

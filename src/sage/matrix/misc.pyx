@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-modules
 # sage.doctest: needs sage.libs.flint
 """
 Misc matrix algorithms

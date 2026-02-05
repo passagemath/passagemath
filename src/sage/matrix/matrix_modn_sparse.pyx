@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-linbox
+# sage_setup: distribution = sagemath-modules
 r"""
 Sparse matrices over `\ZZ/n\ZZ` for `n` small
 
@@ -80,23 +80,11 @@ TESTS::
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from libc.stdint cimport uint64_t
-from libc.limits cimport UINT_MAX
-
 from cysignals.memory cimport check_calloc, sig_free
 from cysignals.signals cimport sig_on, sig_off
 
-cimport sage.libs.linbox.givaro as givaro
-cimport sage.libs.linbox.linbox as linbox
-
 from sage.arith.misc import is_prime
 from sage.data_structures.binary_search cimport *
-from sage.libs.linbox.conversion cimport (METHOD_DEFAULT,
-                                          METHOD_DENSE_ELIMINATION,
-                                          METHOD_SPARSE_ELIMINATION,
-                                          METHOD_BLACKBOX,
-                                          METHOD_WIEDEMANN,
-                                          new_linbox_matrix_modn_sparse)
 from sage.matrix.args cimport SparseEntry, MatrixArgs_init
 from sage.matrix.matrix2 import Matrix as Matrix2
 from sage.matrix.matrix_dense cimport Matrix_dense
@@ -322,6 +310,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
 
         The following shows that :issue:`23669` has been addressed::
 
+            sage: # needs sage.rings.finite_rings
             sage: p = next_prime(2**15)
             sage: M = Matrix(GF(p), 1,3, lambda i,j: -1, sparse=True); M
             [32770 32770 32770]
@@ -382,7 +371,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: a = matrix(GF(2), 20, 20, sparse=True)
             sage: a*a == a._matrix_times_matrix_dense(a)
             True
-            sage: type(a._matrix_times_matrix_dense(a))
+            sage: type(a._matrix_times_matrix_dense(a))                                 # needs sage.libs.m4ri
             <class 'sage.matrix.matrix_mod2_dense.Matrix_mod2_dense'>
         """
         cdef Matrix_modn_sparse right
@@ -681,69 +670,6 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
                     set_entry(&A.rows[i], cols[int(row.positions[j])], row.entries[j])
         return A
 
-    def _rank_det_linbox(self):
-        """
-        Return the rank and determinant using linbox.
-
-        .. NOTE::
-
-            This method does not perform any caching contrarily to
-            :meth:`determinant` and :meth:`rank`.
-
-        EXAMPLES::
-
-            sage: m = matrix(Zmod(13), 1, sparse=True)
-            sage: m[0,0] = 0
-            sage: m._rank_det_linbox()
-            (0, 0)
-            sage: for i in range(1, 13):
-            ....:     m[0,0] = i
-            ....:     assert m._rank_det_linbox() == (1, i)
-
-            sage: m = matrix(GF(5), 2, sparse=True)
-            sage: m[0,0] = 1
-            sage: m[0,1] = 2
-            sage: m[1,0] = 1
-            sage: m[1,1] = 3
-            sage: m._rank_det_linbox()
-            (2, 1)
-            sage: m
-            [1 2]
-            [1 3]
-
-        TESTS::
-
-            sage: matrix(Zmod(3), 0, sparse=True)._rank_det_linbox()
-            (0, 1)
-        """
-        if self._nrows == 0 or self._ncols == 0:
-            # TODO: bug in linbox (gives segfault)
-            return 0, self.base_ring().one()
-
-        cdef size_t A_rank = 0
-        cdef uint64_t A_det = 0
-
-        if not is_prime(self.p):
-            raise TypeError("only GF(p) supported via LinBox")
-
-        cdef givaro.Modular_uint64 * F = new givaro.Modular_uint64(<uint64_t> self.p)
-        cdef linbox.SparseMatrix_Modular_uint64 * A
-        A = new_linbox_matrix_modn_sparse(F[0], self)
-
-        cdef linbox.GaussDomain_Modular_uint64 * dom = new linbox.GaussDomain_Modular_uint64(F[0])
-
-        # NOTE: see above for the reason of casting...
-        if A.rowdim() >= <size_t> UINT_MAX or A.coldim() >= <size_t> UINT_MAX:
-            raise ValueError("row/column size unsupported in LinBox")
-
-        dom.InPlaceLinearPivoting(A_rank, A_det, A[0], A.rowdim(), A.coldim())
-
-        del A
-        del F
-        del dom
-
-        return <long> A_rank, self.base_ring()(A_det)
-
     def rank(self, algorithm=None):
         """
         Return the rank of this matrix.
@@ -779,6 +705,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: matrix(GF(3), 0, sparse=True).rank(algorithm='linbox')
             0
 
+            sage: # needs sage.rings.finite_rings
             sage: for _ in range(50):
             ....:     nrows = randint(0, 100)
             ....:     ncols = randint(0, 100)
@@ -816,17 +743,26 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
         if x is not None:
             return x
 
-        if algorithm is None or algorithm == "linbox":
-            rank, det = self._rank_det_linbox()
+        if algorithm is None:
+            try:
+                from sage.matrix.matrix_modn_sparse_linbox import _rank_det_linbox
+            except ImportError:
+                algorithm = "generic"
+            else:
+                algorithm = "linbox"
+
+        if algorithm == "linbox":
+            from sage.matrix.matrix_modn_sparse_linbox import _rank_det_linbox
+
+            rank, det = _rank_det_linbox(self)
             self.cache("rank", rank)
             self.cache("det", det)
             return rank
 
-        elif algorithm == "generic":
+        if algorithm == "generic":
             return Matrix2.rank(self)
 
-        else:
-            raise ValueError("no algorithm '%s'" % algorithm)
+        raise ValueError("no algorithm '%s'" % algorithm)
 
     def determinant(self, algorithm=None):
         r"""
@@ -842,7 +778,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: B = identity_matrix(GF(3), 4, sparse=True)
             sage: (A + B).det()
             2
-            sage: (A + B).det(algorithm='linbox')
+            sage: (A + B).det(algorithm='linbox')                                       # needs sage.libs.linbox
             2
             sage: (A + B).det(algorithm='generic')
             2
@@ -863,6 +799,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: matrix(GF(3), 0, sparse=True).det(algorithm='linbox')
             1
 
+            sage: # needs sage.rings.finite_rings
             sage: for _ in range(100):
             ....:     dim = randint(0, 50)
             ....:     p = random_prime(10000)
@@ -886,8 +823,18 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
         if d is not None:
             return d
 
-        if algorithm is None or algorithm == "linbox":
-            r, d = self._rank_det_linbox()
+        if algorithm is None:
+            try:
+                from sage.matrix.matrix_modn_sparse_linbox import _rank_det_linbox
+            except ImportError:
+                algorithm = "generic"
+            else:
+                algorithm = "linbox"
+
+        if algorithm == "linbox":
+            from sage.matrix.matrix_modn_sparse_linbox import _rank_det_linbox
+
+            r, d = _rank_det_linbox(self)
             self.cache('rank', r)
             self.cache('det', d)
             return d
