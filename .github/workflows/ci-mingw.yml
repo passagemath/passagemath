@@ -31,6 +31,7 @@ jobs:
         sagemath_glpk
         sagemath_graphs
         sagemath_gsl
+        sagemath_highs
         sagemath_homfly
         sagemath_iml
         sagemath_libbraiding
@@ -56,6 +57,7 @@ jobs:
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_gsl-check
+        sagemath_highs-check
         sagemath_homfly-check
         sagemath_iml-check
         sagemath_m4ri_m4rie-check
@@ -84,6 +86,7 @@ jobs:
         freetype
         glpk
         gsl
+        highs
         iml
         libbraiding
         libhomfly
@@ -113,6 +116,7 @@ jobs:
         sagemath_glpk
         sagemath_graphs
         sagemath_gsl
+        sagemath_highs
         sagemath_homfly
         sagemath_iml
         sagemath_libbraiding
@@ -138,6 +142,7 @@ jobs:
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_gsl-check
+        sagemath_highs-check
         sagemath_homfly-check
         sagemath_iml-check
         sagemath_m4ri_m4rie-check
@@ -169,6 +174,7 @@ jobs:
         freetype
         glpk
         gsl
+        highs
         iml
         libbraiding
         libhomfly
@@ -220,6 +226,7 @@ jobs:
         sagemath_glpk
         sagemath_graphs
         sagemath_gsl
+        sagemath_highs
         sagemath_homfly
         sagemath_iml
         sagemath_libbraiding
@@ -245,6 +252,7 @@ jobs:
         sagemath_glpk-check
         sagemath_graphs-check
         sagemath_gsl-check
+        sagemath_highs-check
         sagemath_homfly-check
         sagemath_iml-check
         sagemath_m4ri_m4rie-check

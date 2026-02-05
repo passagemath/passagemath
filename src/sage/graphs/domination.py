@@ -331,7 +331,7 @@ def dominating_sets(g, k=1, independent=False, total=False, connected=False,
         sage: g = digraphs.Path(3)
         sage: g.dominating_set(value_only=True)
         2
-        sage: list(g.dominating_sets())
+        sage: sorted(g.dominating_sets())
         [[0, 1], [0, 2]]
         sage: list(g.dominating_sets(k=2))
         [[0]]

@@ -205,7 +205,7 @@ jobs:
       # PYTHONUTF8=1 is for delvewheel
       CIBW_ENVIRONMENT: >-
         PATH="${GITHUB_WORKSPACE}\\sage-local\\bin;${GITHUB_WORKSPACE}\\build\\bin;$PATH"
-        INCLUDE="${GITHUB_WORKSPACE}\\sage-local\\include;%INCLUDE%"
+        INCLUDE="${GITHUB_WORKSPACE}\\sage-local\\include;${GITHUB_WORKSPACE}\\sage-local\\include\\highs;%INCLUDE%"
         LIB="${GITHUB_WORKSPACE}\\sage-local\\bin;${GITHUB_WORKSPACE}\\sage-local\\lib;%LIB%"
         PKG_CONFIG_PATH=$(pwd)/prefix/lib/pkgconfig:$PKG_CONFIG_PATH
         ACLOCAL_PATH=/usr/share/aclocal
@@ -409,6 +409,13 @@ jobs:
         with:
           package-dir: unpacked/passagemath_glpk
 
+      - name: sagemath-highs
+        id:   sagemath-highs
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v3.3.0
+        with:
+          package-dir: unpacked/passagemath_highs
+
       - name: sagemath-planarity
         id:   sagemath-planarity
         if:   (success() || failure()) && steps.unpack.outcome == 'success'
@@ -534,6 +541,7 @@ jobs:
          'sagemath-glpk',
          'sagemath-graphs',
          'sagemath-gsl',
+         'sagemath-highs',
          'sagemath-homfly',
          'sagemath-modules',
          'sagemath-planarity',

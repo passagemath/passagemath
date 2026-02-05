@@ -68,6 +68,7 @@ cvxopt_sage = [SPKG_INSTALL_REQUIRES_cvxopt]
 cvxpy       = [SPKG_INSTALL_REQUIRES_cvxpy]
 glpk        = ["passagemath-polyhedra[glpk_sage]"]
 glpk_sage   = []  # no extra required
+highs       = ["passagemath-highs"]
 gurobi      = ["passagemath-polyhedra[gurobi_sage]"]
 gurobi_sage = [SPKG_INSTALL_REQUIRES_sage_numerical_backends_gurobi]
 scip        = [SPKG_INSTALL_REQUIRES_pyscipopt]

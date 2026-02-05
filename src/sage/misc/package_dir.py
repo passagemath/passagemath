@@ -529,6 +529,7 @@ if __name__ == '__main__':
                          "sagemath-schemes",
                          "sagemath-database-stein-watkins-mini",
                          "sagemath-glpk",
+                         "sagemath-highs",
                          "sagemath-gap",
                          "sagemath-groups",
                          "sagemath-polyhedra",

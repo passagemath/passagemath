@@ -676,7 +676,7 @@ def simplicial_data_from_kenzo_output(filename) -> dict:
             end = new_dim_idx
         if dim == 0:
             simplex_string = data[data.find('Vertices :') + len('Vertices :'):end]
-            vertices = OneOrMore(nested_expr()).parse_string(simplex_string).asList()[0]
+            vertices = OneOrMore(nested_expr()).parse_string(simplex_string).as_list()[0]
             for v in vertices:
                 vertex = AbstractSimplex(0, name=v)
                 simplex_data[vertex] = None
