@@ -239,19 +239,11 @@ Test that conversion of symbolic functions with latex names works (:issue:`31047
 #############################################################################
 
 import os
-<<<<<<< HEAD
-
-from sage.interfaces.expect import Expect, ExpectElement, ExpectFunction, FunctionElement, gc_disabled
-
-=======
->>>>>>> a920068db94 (src/sage/interfaces/giac.py: Use Feature)
 import pexpect
 import shlex
 
 from sage.cpython.string import bytes_to_str
 from sage.env import DOT_SAGE
-<<<<<<< HEAD
-=======
 from sage.features.giac import Giac as Giac_executable
 from sage.interfaces.expect import (
     Expect,
@@ -261,7 +253,6 @@ from sage.interfaces.expect import (
     gc_disabled,
 )
 from sage.misc.instancedoc import instancedoc
->>>>>>> a920068db94 (src/sage/interfaces/giac.py: Use Feature)
 from sage.misc.pager import pager
 from sage.misc.instancedoc import instancedoc
 from sage.structure.richcmp import rich_to_bool
