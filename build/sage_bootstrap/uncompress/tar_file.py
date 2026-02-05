@@ -103,8 +103,11 @@ class SageBaseTarFile(tarfile.TarFile):
                        else name_to_member[m]
                        for m in members]
         tfile = super(SageBaseTarFile, self)
-        if 'filter' in inspect.signature(tfile.extractall).parameters:
-            kwargs['filter'] = 'fully_trusted'
+        try:
+            if 'filter' in inspect.signature(tfile.extractall).parameters:
+                kwargs['filter'] = 'fully_trusted'
+        except AttributeError:
+            pass
         return tfile.extractall(path=path, members=members, **kwargs)
 
     def extractbytes(self, member):
