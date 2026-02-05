@@ -622,6 +622,7 @@ cdef class Polynomial_template(Polynomial):
 
         ::
 
+            sage: # needs sage.rings.finite_rings
             sage: R.<x> = GF(2^8)[]
             sage: pow(x + 1, 2, R.zero())
             Traceback (most recent call last):
