@@ -3783,7 +3783,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
             sage: A = random_matrix(ZZ,30)
             sage: d = A.determinant()
             sage: A._clear_cache()
-            sage: A.determinant(algorithm='linbox',proof=False) == d
+            sage: A.determinant(algorithm='linbox', proof=False) == d                   # needs sage.libs.linbox
             True
 
         TESTS:

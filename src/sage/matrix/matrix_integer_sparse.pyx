@@ -697,7 +697,15 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
         if x is not None:
             return x
 
-        if algorithm is None or algorithm == "linbox":
+        if algorithm is None:
+            try:
+                from sage.matrix.matrix_integer_sparse_linbox import _rank_linbox
+            except ImportError:
+                algorithm = 'generic'
+            else:
+                algorithm = 'linbox'
+
+        if algorithm == "linbox":
             from .matrix_integer_sparse_linbox import _rank_linbox
             r = _rank_linbox(self)
             self.cache("rank", r)
@@ -810,12 +818,17 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         cdef Polynomial_integer_dense_flint g
 
-        if algorithm is None:
-            algorithm = 'linbox'
-
         g = self.fetch('charpoly')
         if g is not None:
             return g.change_variable_name(var)
+
+        if algorithm is None:
+            try:
+                from sage.matrix.matrix_integer_sparse_linbox import _charpoly_linbox
+            except ImportError:
+                algorithm = 'generic'
+            else:
+                algorithm = 'linbox'
 
         if algorithm == 'linbox':
             from sage.matrix.matrix_integer_sparse_linbox import _charpoly_linbox
@@ -884,12 +897,17 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         cdef Polynomial_integer_dense_flint g
 
-        if algorithm is None:
-            algorithm = 'linbox'
-
         g = self.fetch('minpoly')
         if g is not None:
             return g.change_variable_name(var)
+
+        if algorithm is None:
+            try:
+                from sage.matrix.matrix_integer_sparse_linbox import _minpoly_linbox
+            except ImportError:
+                algorithm = 'generic'
+            else:
+                algorithm = 'linbox'
 
         if algorithm == 'linbox':
             from .matrix_integer_sparse_linbox import _minpoly_linbox
@@ -988,6 +1006,14 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
             B = B.change_ring(self.base_ring())
         if self.nrows() != B.nrows():
             raise ValueError("input matrices must have the same number of rows.")
+
+        if algorithm is None:
+            try:
+                from sage.matrix.matrix_integer_sparse_linbox import _solve_matrix_linbox
+            except ImportError:
+                algorithm = 'generic'
+            else:
+                algorithm = 'linbox'
 
         if algorithm == "generic":
             return Matrix_sparse.solve_right(self, B)
