@@ -1613,6 +1613,7 @@ cdef class Matrix_rational_dense(Matrix_dense):
 
         Check that :issue:`41267` is fixed::
 
+            sage: # needs sage.libs.pari
             sage: Parallelism().set(nproc=2)
             sage: M = matrix(QQ, [
             ....:     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],

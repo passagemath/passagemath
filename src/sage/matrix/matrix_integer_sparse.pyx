@@ -493,6 +493,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
             sage: A*X.transpose() == zero_matrix(ZZ, 4, 2)
             True
 
+            sage: # needs sage.libs.iml
             sage: result = A._right_kernel_matrix(algorithm='padic')
             sage: result[0]
             'computed-iml-int'
@@ -577,7 +578,8 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         EXAMPLES::
 
-            sage: matrix(3, range(9),sparse=True).elementary_divisors()
+            sage: # needs sage.libs.pari
+            sage: matrix(3, range(9), sparse=True).elementary_divisors()
             [1, 3, 0]
             sage: M = matrix(ZZ, 3, [1,5,7, 3,6,9, 0,1,2], sparse=True)
             sage: M.elementary_divisors()
@@ -585,6 +587,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         This returns a copy, which is safe to change::
 
+            sage: # needs sage.libs.pari
             sage: edivs = M.elementary_divisors()
             sage: edivs.pop()
             6
@@ -626,6 +629,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: A = MatrixSpace(IntegerRing(), 3, sparse=True)(range(9))
             sage: D, U, V = A.smith_form()
             sage: D
@@ -647,6 +651,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         It also makes sense for nonsquare matrices::
 
+            sage: # needs sage.libs.pari
             sage: A = Matrix(ZZ,3,2,range(6), sparse=True)
             sage: D, U, V = A.smith_form()
             sage: D
@@ -961,6 +966,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: A = matrix(ZZ, 3, [1,2,3,-1,2,5,2,3,1], sparse=True)
             sage: b = vector(ZZ, [1,2,3])
             sage: x = A.solve_right(b)
@@ -969,6 +975,7 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
             sage: A * x
             (1, 2, 3)
 
+            sage: # needs sage.libs.pari
             sage: u = matrix(ZZ, 3, 2, [0,1,1,1,0,2])
             sage: x = A.solve_right(u)
             sage: x

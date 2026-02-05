@@ -471,7 +471,7 @@ def random_matrix(ring, nrows, ncols=None, algorithm='randomize', implementation
 
         sage: K.<a> = FiniteField(3^2)                                                  # needs sage.rings.finite_rings
         sage: A = random_matrix(K, 2, 5, implementation='generic')                      # needs sage.rings.finite_rings
-        sage: type(A)
+        sage: type(A)                                                                   # needs sage.rings.finite_rings
         <class 'sage.matrix.matrix_generic_dense.Matrix_generic_dense'>
         sage: A.base_ring() is K                                                        # needs sage.rings.finite_rings
         True

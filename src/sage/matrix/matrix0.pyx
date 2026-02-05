@@ -5938,7 +5938,7 @@ cdef class Matrix(sage.structure.element.Matrix):
             ....:                 [0, 0, 0, 0, 1/120, 1/420, 1/140, 13/1260, -1/40],
             ....:                 [0, 0, 0, 0,1/12, -1/24, -1/20, -1/40, 1/6]],
             ....:           sparse=True)
-            sage: (B.inverse()*B).norm(1)
+            sage: (B.inverse()*B).norm(1)                                               # needs sage.libs.pari
             1.0
         """
         if not self.is_square():
@@ -6046,6 +6046,7 @@ cdef class Matrix(sage.structure.element.Matrix):
             sage: M.inverse_of_unit()   # this was very slow, now 1s                    # needs sage.graphs
             429 x 429 sparse matrix over Integer Ring...
 
+            sage: # needs sage.libs.pari
             sage: m = matrix(Zmod(2**2), 1, 1, [1], sparse=True)
             sage: mi = ~m; mi
             [1]

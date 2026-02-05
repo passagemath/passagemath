@@ -1691,6 +1691,7 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
             sage: ~A == C
             True
 
+            sage: # needs sage.libs.linbox
             sage: B = A.augment(MS(1))
             sage: B.echelonize(algorithm='linbox')
             sage: A.rank()

@@ -1139,7 +1139,7 @@ cdef class Matrix(Matrix1):
 
         Random testing::
 
-            sage: # needs sage.libs.flint
+            sage: # needs sage.libs.flint sage.libs.pari
             sage: m = randrange(1,100)
             sage: n = randrange(1,100)
             sage: A = matrix(ZZ, [[randrange(-10,11) for _ in range(n)] for _ in range(m)])
@@ -10860,6 +10860,7 @@ cdef class Matrix(Matrix1):
 
         ::
 
+            sage: # needs sage.libs.pari
             sage: m = matrix([[1,2],[3,4]], sparse=True)
             sage: m^(-1)
             [  -2    1]
