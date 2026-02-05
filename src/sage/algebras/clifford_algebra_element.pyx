@@ -739,7 +739,7 @@ cdef class ExteriorAlgebraElement(CliffordAlgebraElement):
             0
 
             sage: I = E.ideal([a + b*c])
-            sage: f.reduce(I)
+            sage: f.reduce(I)                                                           # needs sage.libs.pari
             0
         """
         from sage.algebras.clifford_algebra import ExteriorAlgebraIdeal
