@@ -741,7 +741,15 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
         if x is not None:
             return x
 
-        if algorithm is None or algorithm == "linbox":
+        if algorithm is None:
+            try:
+                from sage.matrix.matrix_modn_sparse_linbox import _rank_det_linbox
+            except ImportError:
+                algorithm = "generic"
+            else:
+                algorithm = "linbox"
+
+        if algorithm == "linbox":
             from sage.matrix.matrix_modn_sparse_linbox import _rank_det_linbox
 
             rank, det = _rank_det_linbox(self)
@@ -749,11 +757,10 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             self.cache("det", det)
             return rank
 
-        elif algorithm == "generic":
+        if algorithm == "generic":
             return Matrix2.rank(self)
 
-        else:
-            raise ValueError("no algorithm '%s'" % algorithm)
+        raise ValueError("no algorithm '%s'" % algorithm)
 
     def determinant(self, algorithm=None):
         r"""
@@ -813,7 +820,15 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
         if d is not None:
             return d
 
-        if algorithm is None or algorithm == "linbox":
+        if algorithm is None:
+            try:
+                from sage.matrix.matrix_modn_sparse_linbox import _rank_det_linbox
+            except ImportError:
+                algorithm = "generic"
+            else:
+                algorithm = "linbox"
+
+        if algorithm == "linbox":
             from sage.matrix.matrix_modn_sparse_linbox import _rank_det_linbox
 
             r, d = _rank_det_linbox(self)
