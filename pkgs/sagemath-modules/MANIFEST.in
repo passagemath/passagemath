@@ -149,6 +149,7 @@ include sage/algebras/finite_gca.p*
 graft sage/algebras/steenrod
 
 graft sage/matrix
+exclude sage/matrix/misc.p*
 exclude sage/matrix/misc_flint.p*
 exclude sage/matrix/matrix_gap.*
 exclude sage/matrix/matrix_*ball*.*     # depends on arb
