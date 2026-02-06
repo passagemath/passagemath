@@ -194,7 +194,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: # needs sage.graphs
+                sage: # needs sage.graphs sage.rings.number_field
                 sage: W = CoxeterGroup(['H', 3])
                 sage: W.coxeter_type()
                 Coxeter type of ['H', 3]
