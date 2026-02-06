@@ -264,7 +264,7 @@ cdef class GroebnerStrategy:
     cdef inline list additional_products(self, list elts, list G):
         r"""
         Construct a list of additional products `b x` (and/or `x b`),
-        where `b` is a basis element and `e` is an ``GBElement`` from
+        where `b` is a basis element and `e` is a ``GBElement`` from
         ``elts``, modulo ``G``.
         """
         cdef GBElement f
@@ -311,7 +311,7 @@ cdef class GroebnerStrategy:
                     L.add(self.partial_S_poly_left(f0, f1))
                     L.add(self.partial_S_poly_left(f1, f0))
         if self.side == 1 or (self.side == 2 and not self.homogeneous):
-            # Homogenous ideals are automatically two-sides,
+            # Homogenous ideals are automatically twosided,
             # so for non-homogeneous ideals, we need to do both sides.
             for f0, f1 in P:
                 if self.build_S_poly(f0, f1):
