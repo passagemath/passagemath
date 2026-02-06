@@ -365,7 +365,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: c = a._matrix_times_matrix_dense(b); c
             [ 9 12 15]
             [19 26 33]
-            sage: type(c)
+            sage: type(c)                                                               # needs sage.libs.linbox
             <class 'sage.matrix.matrix_modn_dense_double.Matrix_modn_dense_double'>
 
             sage: a = matrix(GF(2), 20, 20, sparse=True)
@@ -705,7 +705,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: matrix(GF(3), 0, sparse=True).rank(algorithm='linbox')
             0
 
-            sage: # needs sage.rings.finite_rings
+            sage: # needs sage.libs.linbox sage.rings.finite_rings
             sage: for _ in range(50):
             ....:     nrows = randint(0, 100)
             ....:     ncols = randint(0, 100)
@@ -799,7 +799,7 @@ cdef class Matrix_modn_sparse(Matrix_sparse):
             sage: matrix(GF(3), 0, sparse=True).det(algorithm='linbox')
             1
 
-            sage: # needs sage.rings.finite_rings
+            sage: # needs sage.libs.linbox sage.rings.finite_rings
             sage: for _ in range(100):
             ....:     dim = randint(0, 50)
             ....:     p = random_prime(10000)
