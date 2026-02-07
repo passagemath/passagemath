@@ -850,12 +850,15 @@ def lookup_global(name):
             import sage.all as all
         except ImportError:
             try:
-                import sage.all__sagemath_modules as all
+                import sage.all__sagemath_schemes as all
             except ImportError:
                 try:
-                    import sage.all__sagemath_pari as all
+                    import sage.all__sagemath_modules as all
                 except ImportError:
-                    import sage.all__sagemath_categories as all
+                    try:
+                        import sage.all__sagemath_pari as all
+                    except ImportError:
+                        import sage.all__sagemath_categories as all
     return getattr(all, name)
 
 
