@@ -378,7 +378,7 @@ def sieve(X, bound):
         sage: from sage.schemes.projective.projective_rational_point import sieve
         sage: P.<x,y,z> = ProjectiveSpace(2, QQ)
         sage: X = P.subscheme(3*x - 3/2*y)
-        sage: sieve(X, 3)                                                               # needs sage.libs.singular sage.symbolic
+        sage: sieve(X, 3)                                                               # needs fpylll sage.libs.singular sage.symbolic
         [(-1 : -2 : 1), (-1/2 : -1 : 1), (-1/3 : -2/3 : 1), (0 : 0 : 1),
          (1/3 : 2/3 : 1), (1/2 : 1 : 0), (1/2 : 1 : 1), (1 : 2 : 1)]
     """
