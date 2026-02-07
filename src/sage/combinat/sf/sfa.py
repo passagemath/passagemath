@@ -141,7 +141,7 @@ Here are further examples::
     2*m[3, 1, 1, 1] + m[3, 2, 1] + 2*m[4, 1, 1] + m[4, 2] + m[5, 1]
     sage: s(m([3])*s([2,1]))
     s[2, 1, 1, 1, 1] - s[2, 2, 2] - s[3, 3] + s[5, 1]
-    sage: s(s([2,1])*m([3]))
+    sage: s(s([2,1])*m([3]))                                                            # needs lrcalc_python
     s[2, 1, 1, 1, 1] - s[2, 2, 2] - s[3, 3] + s[5, 1]
     sage: e = Sym.e()
     sage: e([4])*e([3])*e([1])
@@ -622,6 +622,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             Let's check that this handles each of the bases properly::
 
+                sage: # needs sage.rings.number_field
                 sage: P = QQ['q','t']
                 sage: Sym = SymmetricFunctions(P)
                 sage: Q = CyclotomicField()['q','t']
@@ -1117,6 +1118,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             The first few values of `\mathbf{LS}_{(n)}`::
 
+                sage: # needs sage.libs.pari
                 sage: Sym = SymmetricFunctions(ZZ)
                 sage: h = Sym.h()
                 sage: h.lehrer_solomon(1)
@@ -1132,6 +1134,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             The :meth:`whitney_homology_character` method is an alias::
 
+                sage: # needs sage.libs.pari
                 sage: Sym = SymmetricFunctions(ZZ)
                 sage: s = Sym.schur()
                 sage: s.lehrer_solomon([2, 2, 1]) == s.whitney_homology_character([2, 2, 1])
@@ -1139,6 +1142,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             Lehrer-Solomon functions indexed by partitions::
 
+                sage: # needs sage.libs.pari
                 sage: h.lehrer_solomon([2, 1])
                 h[2, 1]
                 sage: h.lehrer_solomon([2, 2])
@@ -1146,6 +1150,7 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             The Lehrer-Solomon functions are Schur-positive::
 
+                sage: # needs sage.libs.pari
                 sage: s = Sym.s()
                 sage: s.lehrer_solomon([2, 1])
                 s[2, 1] + s[3]
@@ -1158,12 +1163,14 @@ class SymmetricFunctionsBases(Category_realization_of_parent):
 
             This works fine over other base rings::
 
+                sage: # needs sage.libs.pari
                 sage: Sym = SymmetricFunctions(FractionField(QQ['q','t']))
                 sage: P = Sym.macdonald().P()
                 sage: h = Sym.h()
                 sage: P.lehrer_solomon(3) == P(h.lehrer_solomon(3))
                 True
 
+                sage: # needs sage.libs.pari
                 sage: s = SymmetricFunctions(GF(2)).s()
                 sage: s.lehrer_solomon([4,1])
                 s[2, 1, 1, 1] + s[2, 2, 1] + s[3, 2] + s[4, 1]
@@ -3530,7 +3537,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
 
         Fixed :issue:`41257`::
 
-            sage: s[[]](tensor([p[1], s[1]]))
+            sage: s[[]](tensor([p[1], s[1]]))                                           # needs lrcalc_python
             p[] # s[]
 
         Check that degree one elements are treated in the correct way::
@@ -4184,6 +4191,7 @@ class SymmetricFunctionAlgebra_generic_Element(CombinatorialFreeModule.Element):
         and tensor products of symmetric group representations", International
         Journal of Algebra and Computation, 1991::
 
+            sage: # needs sage.rings.number_field
             sage: s = SymmetricFunctions(QQbar).s()
             sage: s[2,1].itensor(s[2,1])
             s[1, 1, 1] + s[2, 1] + s[3]

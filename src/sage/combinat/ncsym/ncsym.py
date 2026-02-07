@@ -933,7 +933,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: e = NCSym.e()
-                sage: all(e(e._e_to_h_on_basis(A)) == e[A] for i in range(5)
+                sage: all(e(e._e_to_h_on_basis(A)) == e[A] for i in range(5)                        # needs sage.libs.flint
                 ....:     for A in SetPartitions(i))
                 True
             """
@@ -985,6 +985,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
+                    sage: # needs sage.libs.flint
                     sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                     sage: e = NCSym.e()
                     sage: h = NCSym.h()
@@ -1105,6 +1106,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
             TESTS::
 
+                sage: # needs sage.libs.flint
                 sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                 sage: h = NCSym.h()
                 sage: all(h(h._h_to_e_on_basis(A)) == h[A] for i in range(5)
@@ -1160,6 +1162,7 @@ class SymmetricFunctionsNonCommutingVariables(UniqueRepresentation, Parent):
 
                 EXAMPLES::
 
+                    sage: # needs sage.libs.flint
                     sage: NCSym = SymmetricFunctionsNonCommutingVariables(QQ)
                     sage: h = NCSym.h()
                     sage: e = NCSym.e()
