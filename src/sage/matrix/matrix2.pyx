@@ -7201,7 +7201,7 @@ cdef class Matrix(Matrix1):
 
         TESTS::
 
-            sage: type(A.singular_values())
+            sage: type(A.singular_values())                                             # needs sage.libs.pari
             <class 'sage.structure.sequence.Sequence_generic'>
 
         Ensure floating point error does not cause trouble::

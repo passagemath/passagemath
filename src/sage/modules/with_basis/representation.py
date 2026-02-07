@@ -502,6 +502,7 @@ class Representation_abstract:
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: W = CoxeterGroup(['H', 3])
             sage: R = W.reflection_representation()
             sage: S3R = R.symmetric_power(3)
@@ -522,6 +523,7 @@ class Representation_abstract:
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: W = CoxeterGroup(['H', 3])
             sage: R = W.reflection_representation()
             sage: S111 = R.schur_functor([1,1,1])
@@ -2512,6 +2514,7 @@ class SignRepresentationCoxeterGroup(SignRepresentation_abstract):
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: G = WeylGroup(["A", 1, 1])
         sage: V = G.sign_representation()
         sage: TestSuite(V).run()
@@ -2531,6 +2534,7 @@ class SignRepresentationCoxeterGroup(SignRepresentation_abstract):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: G = WeylGroup(["A", 1, 1])
             sage: elem = G.an_element()
             sage: V = G.sign_representation()
@@ -2555,6 +2559,7 @@ class ReflectionRepresentation(Representation_abstract, CombinatorialFreeModule)
 
     EXAMPLES::
 
+        sage: # needs sage.graphs
         sage: W = CoxeterGroup(['B', 4])
         sage: R = W.reflection_representation()
         sage: all(g.matrix() == R.representation_matrix(g) for g in W)
@@ -2567,6 +2572,7 @@ class ReflectionRepresentation(Representation_abstract, CombinatorialFreeModule)
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: W = CoxeterGroup(['D', 4])
             sage: R1 = W.reflection_representation()
             sage: R2 = W.reflection_representation(ZZ)
@@ -2583,10 +2589,12 @@ class ReflectionRepresentation(Representation_abstract, CombinatorialFreeModule)
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: W = CoxeterGroup(['C', 3])
             sage: R = W.reflection_representation()
             sage: TestSuite(R).run()
 
+            sage: # needs sage.graphs
             sage: W = CoxeterGroup(['E', 6, 1])
             sage: R = W.reflection_representation()
             sage: TestSuite(R).run()
@@ -2604,6 +2612,7 @@ class ReflectionRepresentation(Representation_abstract, CombinatorialFreeModule)
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: W = CoxeterGroup(['E', 8])
             sage: W.reflection_representation()
             Reflection representation of Finite Coxeter group over Integer Ring with Coxeter matrix:
@@ -2625,6 +2634,7 @@ class ReflectionRepresentation(Representation_abstract, CombinatorialFreeModule)
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: W = CoxeterGroup(['E', 8])
             sage: R = W.reflection_representation()
             sage: g = W.an_element()
@@ -2678,6 +2688,7 @@ class NaturalMatrixRepresentation(Representation):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.pari
             sage: G = groups.matrix.SU(2, 2)
             sage: N = G.natural_representation()
             sage: TestSuite(N).run()

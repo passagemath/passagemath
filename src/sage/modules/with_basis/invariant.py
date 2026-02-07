@@ -93,6 +93,7 @@ class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
     Now we will take the regular representation of the symmetric group on
     three elements to be the module, and compute its invariant submodule::
 
+        sage: # needs sage.combinat
         sage: G = SymmetricGroup(3)
         sage: R = G.regular_representation(QQ)
         sage: I = R.invariant_module()
@@ -102,7 +103,7 @@ class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
     We can also check the scalar multiplication by elements of the base ring
     (for this example, the rational field)::
 
-        sage: [I.lift(3*b).to_vector() for b in I.basis()]
+        sage: [I.lift(3*b).to_vector() for b in I.basis()]                              # needs sage.combinat
         [(3, 3, 3, 3, 3, 3)]
 
     A more subtle example is the invariant submodule of a skew-commutative
@@ -333,12 +334,12 @@ class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: G = SymmetricGroup(3)
             sage: M = CombinatorialFreeModule(QQ, [1,2,3], prefix='M')
             sage: def action(g, x): return M.monomial(g(x))
             sage: I = M.invariant_module(G, action_on_basis=action)
             sage: I._test_invariant()
-
             sage: G = SymmetricGroup(10)
             sage: M = CombinatorialFreeModule(QQ, list(range(1,11)), prefix='M')
             sage: def action(g, x): return M.monomial(g(x))
@@ -370,6 +371,7 @@ class FiniteDimensionalInvariantModule(SubmoduleWithBasis):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat
             sage: G = SymmetricGroup(3)
             sage: M = CombinatorialFreeModule(QQ, [1,2,3], prefix='M')
             sage: def action(g, x): return M.monomial(g(x))
@@ -616,6 +618,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
     so trying to create the twisted invariant module when there is no twist
     returns a :class:`~sage.modules.with_basis.invariant.FiniteDimensionalInvariantModule`::
 
+        sage: # needs sage.rings.number_field
         sage: chi = ClassFunction(G, (1,1,1))
         sage: T = M.twisted_invariant_module(G, chi, action_on_basis=action)
         sage: type(T)
@@ -625,6 +628,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
     coming from the first three coordinates and the other coming from the
     fact that `S_3` does not touch the fourth coordinate::
 
+        sage: # needs sage.rings.number_field
         sage: T.basis()
         Finite family {0: B[0], 1: B[1]}
         sage: [T.lift(b) for b in T.basis()]
@@ -632,6 +636,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
     The character values of the standard representation are `2,0,-1`::
 
+        sage: # needs sage.rings.number_field
         sage: chi = ClassFunction(G, [2,0,-1])
         sage: T = M.twisted_invariant_module(G, chi, action_on_basis=action)
         sage: type(T)
@@ -646,6 +651,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
     basis element ``B[4]`` is itself a copy of the trivial representation,
     so the sign representation does not appear in the decomposition::
 
+        sage: # needs sage.rings.number_field
         sage: T = M.twisted_invariant_module(G, [1,-1,1], action_on_basis=action)
         sage: T.basis()
         Finite family {}
@@ -759,42 +765,41 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
             sage: M = CombinatorialFreeModule(QQ, [1,2,3])
             sage: G = SymmetricGroup(3)
             sage: def action(g, x): return M.term(g(x))
-            sage: T = M.twisted_invariant_module(G, [2,0,-1], action_on_basis=action)
+            sage: T = M.twisted_invariant_module(G, [2,0,-1], action_on_basis=action)   # needs sage.combinat
 
         Check that it works for tuples::
 
-            sage: T2 = M.twisted_invariant_module(G, (2,0,-1), action_on_basis=action)
-            sage: T is T2
+            sage: T2 = M.twisted_invariant_module(G, (2,0,-1), action_on_basis=action)  # needs sage.combinat
+            sage: T is T2                                                               # needs sage.combinat
             True
 
         Check that it works for class functions::
 
             sage: chi = ClassFunction(G, [2,0,-1])
-            sage: T3 = M.twisted_invariant_module(G, chi, action_on_basis=action)
-            sage: T is T3
+            sage: T3 = M.twisted_invariant_module(G, chi, action_on_basis=action)       # needs sage.combinat
+            sage: T is T3                                                               # needs sage.combinat
             True
 
         Check that it works when the character values are not an instance of
         :class:`~sage.rings.integer.Integer`::
 
             sage: chi = [QQ(2), QQ(0), QQ(-1)]
-            sage: T4 = M.twisted_invariant_module(G, chi, action_on_basis=action)
-            sage: T is T4
+            sage: T4 = M.twisted_invariant_module(G, chi, action_on_basis=action)       # needs sage.combinat
+            sage: T is T4                                                               # needs sage.combinat
             True
 
         Check that the trivial character returns an instance of
         :class:`~sage.modules.with_basis.invariant.FiniteDimensionalInvariantModule`::
 
+            sage: # needs sage.combinat
             sage: chi = [1, 1, 1] # check for list
             sage: T = M.twisted_invariant_module(G, chi, action_on_basis=action)
             sage: type(T)
             <class 'sage.modules.with_basis.invariant.FiniteDimensionalInvariantModule_with_category'>
-
             sage: chi = (1, 1, 1) # check for tuple
             sage: T = M.twisted_invariant_module(G, chi, action_on_basis=action)
             sage: type(T)
             <class 'sage.modules.with_basis.invariant.FiniteDimensionalInvariantModule_with_category'>
-
             sage: chi = ClassFunction(G, [1,1,1]) # check for class function
             sage: T = M.twisted_invariant_module(G, chi, action_on_basis=action)
             sage: type(T)
@@ -802,7 +807,7 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
 
         Check the :exc:`ValueError`::
 
-            sage: T = M.twisted_invariant_module(G, "ichigo", action_on_basis=action)
+            sage: T = M.twisted_invariant_module(G, "ichigo", action_on_basis=action)   # needs sage.combinat
             Traceback (most recent call last):
             ...
             ValueError: chi must be a list/tuple or a class function of the group G
@@ -839,7 +844,8 @@ class FiniteDimensionalTwistedInvariantModule(SubmoduleWithBasis):
         of `S_3`::
 
             sage: M = CombinatorialFreeModule(QQ, [1,2,3], prefix='M');
-            sage: G = SymmetricGroup(3); G.conjugacy_classes()
+            sage: G = SymmetricGroup(3)
+            sage: G.conjugacy_classes()                                                 # needs sage.libs.flint
             [Conjugacy class of cycle type [1, 1, 1] in Symmetric group of order 3! as a permutation group,
              Conjugacy class of cycle type [2, 1] in Symmetric group of order 3! as a permutation group,
              Conjugacy class of cycle type [3] in Symmetric group of order 3! as a permutation group]
