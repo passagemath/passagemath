@@ -195,7 +195,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
             sage: R.<t> = PolynomialRing(GF(37))
             sage: H = HyperellipticCurve(t^5 + t + 2)
-            sage: H.frobenius_matrix_hypellfrob()
+            sage: H.frobenius_matrix_hypellfrob()                                       # needs sage.libs.ntl sage.libs.linbox
             [1258 + O(37^2)  925 + O(37^2)  132 + O(37^2)  587 + O(37^2)]
             [1147 + O(37^2)  814 + O(37^2)  241 + O(37^2) 1011 + O(37^2)]
             [1258 + O(37^2) 1184 + O(37^2) 1105 + O(37^2)  482 + O(37^2)]
@@ -217,7 +217,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: K = GF(7)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^9 + t^3 + 1)
-            sage: H.frobenius_matrix_hypellfrob()
+            sage: H.frobenius_matrix_hypellfrob()                                       # needs sage.libs.ntl sage.libs.linbox
             Traceback (most recent call last):
             ...
             ValueError: In the current implementation, p must be greater than (2g+1)(2N-1) = 81
@@ -271,7 +271,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
             sage: R.<t> = PolynomialRing(GF(37))
             sage: H = HyperellipticCurve(t^5 + t + 2)
-            sage: H.frobenius_matrix()
+            sage: H.frobenius_matrix()                                                  # needs sage.libs.ntl sage.libs.linbox
             [1258 + O(37^2)  925 + O(37^2)  132 + O(37^2)  587 + O(37^2)]
             [1147 + O(37^2)  814 + O(37^2)  241 + O(37^2) 1011 + O(37^2)]
             [1258 + O(37^2) 1184 + O(37^2) 1105 + O(37^2)  482 + O(37^2)]
@@ -293,7 +293,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: K = GF(7)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^9 + t^3 + 1)
-            sage: H.frobenius_matrix(algorithm='hypellfrob')
+            sage: H.frobenius_matrix(algorithm='hypellfrob')                            # needs sage.libs.ntl sage.libs.linbox
             Traceback (most recent call last):
             ...
             ValueError: In the current implementation, p must be greater than (2g+1)(2N-1) = 81
@@ -316,13 +316,13 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
             sage: R.<t> = PolynomialRing(GF(37))
             sage: H = HyperellipticCurve(t^5 + t + 2)
-            sage: H.frobenius_polynomial(algorithm='cardinalities')
+            sage: H.frobenius_polynomial(algorithm='cardinalities')                     # needs sage.libs.ntl sage.libs.linbox
             x^4 + x^3 - 52*x^2 + 37*x + 1369
 
         A quadratic twist::
 
             sage: H = HyperellipticCurve(2*t^5 + 2*t + 4)
-            sage: H.frobenius_polynomial(algorithm='cardinalities')
+            sage: H.frobenius_polynomial(algorithm='cardinalities')                     # needs sage.libs.ntl sage.libs.linbox
             x^4 - x^3 - 52*x^2 - 37*x + 1369
 
         Curve over a non-prime field::
@@ -330,7 +330,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: K.<z> = GF(7**2)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^5 + z*t + z^2)
-            sage: H.frobenius_polynomial(algorithm='cardinalities')
+            sage: H.frobenius_polynomial(algorithm='cardinalities')                     # needs sage.libs.ntl sage.libs.linbox
             x^4 + 8*x^3 + 70*x^2 + 392*x + 2401
 
         This method may actually be useful when ``hypellfrob`` does not work::
@@ -338,7 +338,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: K = GF(7)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^9 + t^3 + 1)
-            sage: H.frobenius_polynomial(algorithm='matrix')
+            sage: H.frobenius_polynomial(algorithm='matrix')                            # needs sage.libs.ntl sage.libs.linbox
             Traceback (most recent call last):
             ...
             ValueError: In the current implementation, p must be greater than (2g+1)(2N-1) = 81
@@ -375,13 +375,13 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
             sage: R.<t> = PolynomialRing(GF(37))
             sage: H = HyperellipticCurve(t^5 + t + 2)
-            sage: H.frobenius_polynomial(algorithm='matrix')
+            sage: H.frobenius_polynomial(algorithm='matrix')                            # needs sage.libs.ntl sage.libs.linbox
             x^4 + x^3 - 52*x^2 + 37*x + 1369
 
         A quadratic twist::
 
             sage: H = HyperellipticCurve(2*t^5 + 2*t + 4)
-            sage: H.frobenius_polynomial(algorithm='matrix')
+            sage: H.frobenius_polynomial(algorithm='matrix')                            # needs sage.libs.ntl sage.libs.linbox
             x^4 - x^3 - 52*x^2 - 37*x + 1369
 
         Curves defined over larger prime fields::
@@ -389,11 +389,11 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: K = GF(49999)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^9 + t^5 + 1)
-            sage: H.frobenius_polynomial(algorithm='matrix')
+            sage: H.frobenius_polynomial(algorithm='matrix')                            # needs sage.libs.ntl sage.libs.linbox
             x^8 + 281*x^7 + 55939*x^6 + 14144175*x^5 + 3156455369*x^4 + 707194605825*x^3
             + 139841906155939*x^2 + 35122892542149719*x + 6249500014999800001
             sage: H = HyperellipticCurve(t^15 + t^5 + 1)
-            sage: H.frobenius_polynomial(algorithm='matrix')  # long time, 8s on a Corei7
+            sage: H.frobenius_polynomial(algorithm='matrix')  # long time, 8s on a Corei7   # needs sage.libs.ntl sage.libs.linbox
             x^14 - 76*x^13 + 220846*x^12 - 12984372*x^11 + 24374326657*x^10 - 1203243210304*x^9
             + 1770558798515792*x^8 - 74401511415210496*x^7 + 88526169366991084208*x^6
             - 3007987702642212810304*x^5 + 3046608028331197124223343*x^4
@@ -537,13 +537,13 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
             sage: R.<t> = PolynomialRing(GF(37))
             sage: H = HyperellipticCurve(t^5 + t + 2)
-            sage: H.frobenius_polynomial()
+            sage: H.frobenius_polynomial()                                                  # needs sage.libs.ntl sage.libs.linbox
             x^4 + x^3 - 52*x^2 + 37*x + 1369
 
         A quadratic twist::
 
             sage: H = HyperellipticCurve(2*t^5 + 2*t + 4)
-            sage: H.frobenius_polynomial()
+            sage: H.frobenius_polynomial()                                                  # needs sage.libs.ntl sage.libs.linbox
             x^4 - x^3 - 52*x^2 - 37*x + 1369
 
         Slightly larger example::
@@ -551,7 +551,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: K = GF(2003)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^7 + 487*t^5 + 9*t + 1)
-            sage: H.frobenius_polynomial()
+            sage: H.frobenius_polynomial()                                                  # needs sage.libs.ntl sage.libs.linbox
             x^6 - 14*x^5 + 1512*x^4 - 66290*x^3 + 3028536*x^2 - 56168126*x + 8036054027
 
         Curves defined over a non-prime field of odd characteristic,
@@ -922,7 +922,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: K = GF(49999)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^19 + t + 1)
-            sage: H.count_points_matrix_traces(3)
+            sage: H.count_points_matrix_traces(3)                                           # needs sage.libs.ntl sage.libs.linbox
             [49491, 2500024375, 124992509154249]
 
         TESTS:
@@ -931,7 +931,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
             sage: R.<t> = PolynomialRing(GF(11))
             sage: H = HyperellipticCurve(t^5 - t + 1)
-            sage: H.count_points_matrix_traces()
+            sage: H.count_points_matrix_traces()                                            # needs sage.libs.ntl sage.libs.linbox
             Traceback (most recent call last):
             ...
             ValueError: In the current implementation, p must be greater than (2g+1)(2N-1) = 15
@@ -1078,6 +1078,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
         EXAMPLES::
 
+            sage: # needs sage.libs.ntl sage.libs.linbox
             sage: K = GF(49999)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^21 + 3*t^5 + 5)
@@ -1086,6 +1087,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: H.count_points_hypellfrob(2)
             [49804, 2499799038]
 
+            sage: # needs sage.libs.ntl sage.libs.linbox
             sage: K = GF(2**7-1)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^11 + 3*t^5 + 5)
@@ -1094,6 +1096,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: H.count_points_hypellfrob(n=5)
             [127, 16335, 2045701, 260134299, 33038098487]
 
+            sage: # needs sage.libs.ntl sage.libs.linbox
             sage: K = GF(2**7-1)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^13 + 3*t^5 + 5)
@@ -1186,20 +1189,20 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: K = GF(2**31-1)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^5 + 3*t + 5)
-            sage: H.count_points() # long time, 2.4 sec on a Corei7
+            sage: H.count_points() # long time, 2.4 sec on a Corei7                     # needs sage.libs.ntl sage.libs.linbox
             [2147464821]
-            sage: H.count_points(n=2) # long time, 30s on a Corei7
+            sage: H.count_points(n=2) # long time, 30s on a Corei7                      # needs sage.libs.ntl sage.libs.linbox
             [2147464821, 4611686018988310237]
 
             sage: K = GF(2**7-1)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^13 + 3*t^5 + 5)
-            sage: H.count_points(n=6)
+            sage: H.count_points(n=6)                                                   # needs sage.libs.ntl sage.libs.linbox
             [112, 16360, 2045356, 260199160, 33038302802, 4195868633548]
 
             sage: P.<x> = PolynomialRing(GF(3))
             sage: H = HyperellipticCurve(x^3+x^2+1)
-            sage: C1 = H.count_points(4); C1
+            sage: C1 = H.count_points(4); C1                                            # needs sage.libs.ntl sage.libs.linbox
             [6, 12, 18, 96]
             sage: C2 = sage.schemes.generic.scheme.Scheme.count_points(H,4); C2 # long time, 2s on a Corei7
             [6, 12, 18, 96]
@@ -1220,7 +1223,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
             sage: x = polygen(GF(4099))
             sage: H = HyperellipticCurve(x^6 + x + 1)
-            sage: H.count_points(1)
+            sage: H.count_points(1)                                                     # needs sage.libs.ntl sage.libs.linbox
             [4106]
         """
         K = self.base_ring()
@@ -1363,15 +1366,15 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: K = GF(next_prime(1<<10))
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^7 + 3*t^5 + 5)
-            sage: H.cardinality_hypellfrob()
+            sage: H.cardinality_hypellfrob()                                            # needs sage.libs.ntl sage.libs.linbox
             1025
 
             sage: K = GF(49999)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^7 + 3*t^5 + 5)
-            sage: H.cardinality_hypellfrob()
+            sage: H.cardinality_hypellfrob()                                            # needs sage.libs.ntl sage.libs.linbox
             50162
-            sage: H.cardinality_hypellfrob(3)
+            sage: H.cardinality_hypellfrob(3)                                           # needs sage.libs.ntl sage.libs.linbox
             124992471088310
         """
         # the following actually computes the cardinality for several extensions
@@ -1385,6 +1388,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
         EXAMPLES::
 
+            sage: # needs sage.libs.ntl sage.libs.linbox
             sage: K = GF(101)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^9 + 3*t^5 + 5)
@@ -1395,6 +1399,7 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
             sage: H.cardinality(100)
             270481382942152609326719471080753083367793838278100277689020104911710151430673927943945601434674459120495370826289654897190781715493352266982697064575800553229661690000887425442240414673923744999504000
 
+            sage: # needs sage.libs.ntl sage.libs.linbox
             sage: K = GF(37)
             sage: R.<t> = PolynomialRing(K)
             sage: H = HyperellipticCurve(t^9 + 3*t^5 + 5)
@@ -1407,9 +1412,10 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
         The following example shows that :issue:`20391` has been resolved::
 
-            sage: F=GF(23)
-            sage: x=polygen(F)
-            sage: C=HyperellipticCurve(x^8+1)
+            sage: # needs sage.libs.ntl sage.libs.linbox
+            sage: F = GF(23)
+            sage: x = polygen(F)
+            sage: C = HyperellipticCurve(x^8 + 1)
             sage: C.cardinality()
             24
         """
@@ -1456,14 +1462,14 @@ class HyperellipticCurve_finite_field(hyperelliptic_generic.HyperellipticCurve_g
 
             sage: R.<t> = PolynomialRing(GF(37))
             sage: H = HyperellipticCurve(t^5 + t + 2)
-            sage: H.zeta_function()
+            sage: H.zeta_function()                                                     # needs sage.libs.ntl sage.libs.linbox
             (1369*x^4 + 37*x^3 - 52*x^2 + x + 1)/(37*x^2 - 38*x + 1)
 
         A quadratic twist::
 
             sage: R.<t> = PolynomialRing(GF(37))
             sage: H = HyperellipticCurve(2*t^5 + 2*t + 4)
-            sage: H.zeta_function()
+            sage: H.zeta_function()                                                     # needs sage.libs.ntl sage.libs.linbox
             (1369*x^4 - 37*x^3 - 52*x^2 - x + 1)/(37*x^2 - 38*x + 1)
         """
         q = self.base_ring().cardinality()

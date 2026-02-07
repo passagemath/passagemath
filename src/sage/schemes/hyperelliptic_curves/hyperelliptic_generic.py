@@ -564,7 +564,7 @@ class HyperellipticCurve_generic(plane_curve.ProjectivePlaneCurve):
             points on their reductions.  43 and 67 split completely in the
             compositum, so when we reduce we find:
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.libs.ntl sage.libs.linbox sage.rings.number_field
             sage: P2 = K2.factor(43)[0][0]
             sage: P3 = K3.factor(43)[0][0]
             sage: Hp2.change_ring(K2.residue_field(P2)).frobenius_polynomial()
@@ -572,10 +572,10 @@ class HyperellipticCurve_generic(plane_curve.ProjectivePlaneCurve):
             sage: Hp3.change_ring(K3.residue_field(P3)).frobenius_polynomial()
             x^4 - 16*x^3 + 134*x^2 - 688*x + 1849
 
-            sage: H.change_ring(GF(43)).odd_degree_model().frobenius_polynomial()       # needs sage.rings.finite_rings
+            sage: H.change_ring(GF(43)).odd_degree_model().frobenius_polynomial()       # needs sage.libs.ntl sage.libs.linbox sage.rings.finite_rings
             x^4 - 16*x^3 + 134*x^2 - 688*x + 1849
 
-            sage: # needs sage.rings.number_field
+            sage: # needs sage.libs.ntl sage.libs.linbox sage.rings.number_field
             sage: P2 = K2.factor(67)[0][0]
             sage: P3 = K3.factor(67)[0][0]
             sage: Hp2.change_ring(K2.residue_field(P2)).frobenius_polynomial()
@@ -583,7 +583,7 @@ class HyperellipticCurve_generic(plane_curve.ProjectivePlaneCurve):
             sage: Hp3.change_ring(K3.residue_field(P3)).frobenius_polynomial()
             x^4 - 8*x^3 + 150*x^2 - 536*x + 4489
 
-            sage: H.change_ring(GF(67)).odd_degree_model().frobenius_polynomial()       # needs sage.rings.finite_rings
+            sage: H.change_ring(GF(67)).odd_degree_model().frobenius_polynomial()       # needs sage.libs.ntl sage.libs.linbox sage.rings.finite_rings
             x^4 - 8*x^3 + 150*x^2 - 536*x + 4489
 
         TESTS::
