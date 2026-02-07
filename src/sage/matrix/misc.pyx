@@ -181,7 +181,7 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
 
     EXAMPLES::
 
-        sage: # needs sage.libs.pari
+        sage: # needs sage.libs.linbox sage.libs.pari
         sage: A = matrix(QQ, 3, 7, [1..21])
         sage: from sage.matrix.misc import matrix_rational_echelon_form_multimodular
         sage: E, pivots = matrix_rational_echelon_form_multimodular(A)

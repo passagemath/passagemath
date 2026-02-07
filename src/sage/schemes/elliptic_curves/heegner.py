@@ -83,7 +83,7 @@ Here we find that the Heegner point generates a subgroup of index 3::
 
 The above is consistent with the following analytic computation::
 
-    sage: E.heegner_index(-7)
+    sage: E.heegner_index(-7)                                                           # needs eclib
     3.0000?
 """
 

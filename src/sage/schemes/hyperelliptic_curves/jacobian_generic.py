@@ -272,7 +272,7 @@ class HyperellipticJacobian_generic(Jacobian_generic):
             sage: f = x^5 + x^4 + 4*x^3 + 8*x^2 + 5*x + 1
             sage: C = HyperellipticCurve(f)
             sage: J = C.jacobian()
-            sage: J.geometric_endomorphism_algebra_is_field()
+            sage: J.geometric_endomorphism_algebra_is_field()                           # needs sage.libs.ntl sage.libs.linbox
             False
 
         This is LMFDB curve 50000.a.200000.1::
@@ -341,7 +341,7 @@ class HyperellipticJacobian_generic(Jacobian_generic):
             sage: f = 4*x^5 + x^4 - 4*x^3 + 2*x^2 + 4*x + 1
             sage: C = HyperellipticCurve(f)
             sage: J = C.jacobian()
-            sage: J.geometric_endomorphism_ring_is_ZZ()
+            sage: J.geometric_endomorphism_ring_is_ZZ()                                 # needs sage.libs.ntl sage.libs.linbox
             True
 
         This is LMFDB curve 1152.a.147456.1 whose geometric endomorphism ring
@@ -428,7 +428,7 @@ class HyperellipticJacobian_generic(Jacobian_generic):
         EXAMPLES::
 
             sage: R.<x> = GF(3663031)[]
-            sage: HyperellipticCurve(x^5 + 1758294*x^4 + 1908793*x^3 + 3033920*x^2 + 3445698*x + 3020661).jacobian().cardinality()
+            sage: HyperellipticCurve(x^5 + 1758294*x^4 + 1908793*x^3 + 3033920*x^2 + 3445698*x + 3020661).jacobian().cardinality()  # needs sage.libs.ntl sage.libs.linbox
             13403849798842
         """
         from sage.categories.finite_fields import FiniteFields

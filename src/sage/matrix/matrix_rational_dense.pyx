@@ -1644,9 +1644,9 @@ cdef class Matrix_rational_dense(Matrix_dense):
             ....:     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             ....:     [0,0,0,0,0,0,0,0,0,0,0,0,0,-70,0,0,0,0,28,-28,0,0,0,0,0,-1,1]])
             sage: Mf = copy(M)
-            sage: M.echelonize(algorithm='multimodular')
+            sage: M.echelonize(algorithm='multimodular')                                # needs sage.libs.flint
             sage: Mf.echelonize(algorithm='flint:multimodular')
-            sage: assert(M == Mf)
+            sage: assert(M == Mf)                                                       # needs sage.libs.flint
             sage: Parallelism().set(nproc=1)
         """
         if self.fetch('in_echelon_form'):

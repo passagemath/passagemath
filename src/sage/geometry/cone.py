@@ -5157,6 +5157,7 @@ class ConvexRationalPolyhedralCone(IntegralRayCollection, Container, ConvexSet_c
         Lyapunov rank should be invariant under a linear isomorphism
         [Or2017]_::
 
+            sage: # needs sage.libs.gsl
             sage: K1 = random_cone(max_ambient_dim=8)
             sage: n = K1.lattice_dim()
             sage: A = random_matrix(QQ, n, algorithm='unimodular')
