@@ -216,6 +216,7 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: A.<s1,s2,s3> = ArtinGroup(['B',3])
             sage: B1 = s1.burau_matrix()
             sage: B2 = s2.burau_matrix()
@@ -237,6 +238,7 @@ class ArtinGroupElement(FinitelyPresentedGroupElement):
 
         We verify the example in Theorem 4.1 of [BQ2024]_::
 
+            sage: # needs sage.graphs
             sage: A.<s1,s2,s3,s4> = ArtinGroup(['A', 3, 1])
             sage: [g.burau_matrix() for g in A.gens()]
             [
@@ -868,6 +870,7 @@ class ArtinGroup(UniqueRepresentation, FinitelyPresentedGroup):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: A = ArtinGroup(['G',2])
             sage: A._burau_generators
             [[
@@ -878,7 +881,6 @@ class ArtinGroup(UniqueRepresentation, FinitelyPresentedGroup):
             [ -t^-2 a*t^-1]  [     1      0]
             [     0      1], [a*t^-1  -t^-2]
             ]]
-
             sage: A = ArtinGroup(['H',3])
             sage: A._burau_generators
             [[
@@ -903,7 +905,6 @@ class ArtinGroup(UniqueRepresentation, FinitelyPresentedGroup):
             [                 0                  1                  0]
             [                 0 (1/2*a + 1/2)*t^-1              -t^-2]
             ]]
-
             sage: CM = matrix([[1,4,7], [4,1,10], [7,10,1]])
             sage: A = ArtinGroup(CM)
             sage: gens = A._burau_generators[0]; gens

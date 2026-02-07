@@ -273,10 +273,10 @@ class Braid(FiniteTypeArtinGroupElement):
         The adjoined matrix (``Madj`` in the above example) matches the
         output of :meth:`sage.groups.artin.ArtinGroupElement.burau_matrix`::
 
+            sage: # needs sage.graphs
             sage: from sage.groups.artin import ArtinGroupElement
             sage: Madj == ArtinGroupElement.burau_matrix(b)
             True
-
             sage: a = s0^2 * s1 * s0 * s2 *s1 * ~s0 * s1^3 * s0 * s2 * s1^-2 * s0
             sage: a.burau_matrix(reduced='unitary')[1] == ArtinGroupElement.burau_matrix(a)
             True
@@ -1480,6 +1480,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: B = BraidGroup(4)
             sage: b = B([1,3,-2])
             sage: b.annular_khovanov_homology()
@@ -1495,7 +1496,6 @@ class Braid(FiniteTypeArtinGroupElement):
              (5, 0): {2: Z},
              (5, 2): {1: Z x Z},
              (5, 4): {0: Z}}
-
             sage: B = BraidGroup(2)
             sage: b = B([1,1,1])
             sage: b.annular_khovanov_homology((7,0))
@@ -1503,6 +1503,7 @@ class Braid(FiniteTypeArtinGroupElement):
 
         TESTS::
 
+            sage: # needs sage.graphs
             sage: b = BraidGroup(4)([1,-3])
             sage: b.annular_khovanov_homology((-4,-2))
             {-1: Z}

@@ -425,7 +425,7 @@ class GaloisGroup_ab(_GaloisMixin, AbelianGroup_class):
 
             sage: from sage.groups.galois_group import GaloisGroup_ab
             sage: Gtest = GaloisGroup_ab(field=None, generator_orders=(2,2,4))
-            sage: Gtest.transitive_number()                                             # needs sage.libs.gap
+            sage: Gtest.transitive_number()                                             # needs gap_package_transgrp sage.libs.gap
             2
         """
         return ZZ(self.permutation_group()._libgap_().TransitiveIdentification())
