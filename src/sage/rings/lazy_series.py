@@ -6674,7 +6674,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
             sage: E1 = S(lambda n: s[n], valuation=1)
             sage: E = 1 + E1
             sage: P = E(E1)
-            sage: P[:5]
+            sage: P[:5]                                                                 # needs lrcalc_python
             [s[], s[1], 2*s[2], s[2, 1] + 3*s[3], 2*s[2, 2] + 2*s[3, 1] + 5*s[4]]
 
         The plethysm with a tensor product is also implemented::
@@ -6971,7 +6971,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
             ....:     return p.sum_of_terms((Partition([d] * (n // d)),
             ....:          euler_phi(d) / n) for d in divisors(n))
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.pari sage.modules
             sage: A = lp(asso, valuation=2)
             sage: A.legendre_transform()[:5]
             [1/2*p[1, 1] - 1/2*p[2],
@@ -7067,7 +7067,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         EXAMPLES::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs lrcalc_python sage.combinat sage.modules
             sage: s = SymmetricFunctions(QQ).s()
             sage: ls = LazySymmetricFunctions(s)
             sage: f = ls(lambda n: s([n]), valuation=1)
@@ -7165,7 +7165,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
 
         The symmetric function `\sum_n h_n` is a left absorbing element::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.pari sage.modules
             sage: H.functorial_composition(f) - H
             O^7
 
@@ -7400,7 +7400,7 @@ class LazySymmetricFunction(LazyCompletionGradedAlgebraElement):
             sage: # needs sage.combinat sage.modules
             sage: L(s([2])).arithmetic_product(s([1,1,1]))
             s[2, 2, 1, 1] + s[3, 1, 1, 1] + s[3, 2, 1] + s[3, 3] + 2*s[4, 1, 1]
-            sage: f = 1/(1-L(s[1]))
+            sage: f = 1/(1-L(s[1]))                                                     # needs lrcalc_python
             sage: f.arithmetic_product(s[1]) - f                                        # needs lrcalc_python
             O^7
 

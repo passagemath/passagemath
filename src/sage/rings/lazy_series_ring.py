@@ -677,7 +677,7 @@ class LazySeriesRing(UniqueRepresentation, Parent):
 
         EXAMPLES::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.flint sage.modules
             sage: s = SymmetricFunctions(ZZ).s()
             sage: L = LazySymmetricFunctions(s)
             sage: m = L._terms_of_degree(3, ZZ); m
@@ -3616,7 +3616,7 @@ class LazyCompletionGradedAlgebra(LazySeriesRing):
 
         EXAMPLES::
 
-            sage: # needs sage.combinat sage.modules
+            sage: # needs sage.combinat sage.libs.flint sage.modules
             sage: s = SymmetricFunctions(ZZ).s()
             sage: L = LazySymmetricFunctions(s)
             sage: m = L._terms_of_degree(3, QQ["x"]); m
