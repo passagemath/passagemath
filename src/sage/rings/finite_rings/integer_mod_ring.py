@@ -381,7 +381,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         sage: Z16.characteristic()
         16
 
-        sage: # needs sage.groups sage.modules
+        sage: # needs sage.groups sage.libs.pari sage.modules
         sage: gens = Z16.unit_gens()
         sage: gens
         (15, 5)
@@ -1351,7 +1351,7 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
 
             sage: # needs sage.groups sage.modules
             sage: A = Zmod(55)
-            sage: A.unit_gens(algorithm='sage')
+            sage: A.unit_gens(algorithm='sage')                                         # needs sage.libs.pari
             (12, 46)
             sage: A.unit_gens(algorithm='pari')                                         # needs sage.libs.pari
             (2, 21)

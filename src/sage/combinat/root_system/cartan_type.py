@@ -2660,20 +2660,18 @@ class CartanType_standard_finite(CartanType_standard, CartanType_finite):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs sage.libs.gap
             sage: ct = CartanType(['A', 5])
-            sage: ct.opposition_automorphism()                                          # needs sage.graphs sage.libs.gap
+            sage: ct.opposition_automorphism()
             Finite family {1: 5, 2: 4, 3: 3, 4: 2, 5: 1}
-
             sage: ct = CartanType(['D', 4])
-            sage: ct.opposition_automorphism()                                          # needs sage.libs.gap
+            sage: ct.opposition_automorphism()
             Finite family {1: 1, 2: 2, 3: 3, 4: 4}
-
             sage: ct = CartanType(['D', 5])
-            sage: ct.opposition_automorphism()                                          # needs sage.libs.gap
+            sage: ct.opposition_automorphism()
             Finite family {1: 1, 2: 2, 3: 3, 4: 5, 5: 4}
-
             sage: ct = CartanType(['C', 4])
-            sage: ct.opposition_automorphism()                                          # needs sage.libs.gap
+            sage: ct.opposition_automorphism()
             Finite family {1: 1, 2: 2, 3: 3, 4: 4}
         """
         Q = self.root_system().root_lattice()

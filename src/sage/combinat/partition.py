@@ -7753,7 +7753,7 @@ class Partitions_parts_in(Partitions):
 
         If you can use all parts 1 through `n`, we'd better get `p(n)`::
 
-            sage: (Partitions(20, parts_in=[1..20]).cardinality()                       # needs sage.libs.gap
+            sage: (Partitions(20, parts_in=[1..20]).cardinality()                       # needs sage.libs.flint sage.libs.gap
             ....:   == Partitions(20).cardinality())
             True
 
@@ -9406,7 +9406,7 @@ class PartitionsGreatestLE(UniqueRepresentation, IntegerListsLex):
 
         EXAMPLES::
 
-            sage: PartitionsGreatestLE(9, 5).cardinality()                              # needs sage.libs.gap
+            sage: PartitionsGreatestLE(9, 5).cardinality()                              # needs sage.libs.flint sage.libs.gap
             23
 
         TESTS::

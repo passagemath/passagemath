@@ -506,12 +506,12 @@ class WeightLatticeRealizations(Category_over_base_ring):
                 sage: R.reduced_word_of_alcove_morphism(omega4.translation)
                 [0, 2, 1, 3, 2, 0]
 
-                sage: # needs sage.libs.gap
+                sage: # needs sage.graphs sage.libs.gap
                 sage: W = WeylGroup(['D',4,1])
                 sage: s = W.simple_reflections()
                 sage: w = s[0]*s[2]*s[3]*s[4]*s[2]
                 sage: w1= s[1]*s[2]*s[3]*s[4]*s[2]
-                sage: W.from_reduced_word(R.reduced_word_of_alcove_morphism(omega2.translation)) == w*w1                # needs sage.graphs
+                sage: W.from_reduced_word(R.reduced_word_of_alcove_morphism(omega2.translation)) == w*w1
                 True
 
                 sage: R = RootSystem(['D',5,1]).weight_lattice()
@@ -521,12 +521,12 @@ class WeightLatticeRealizations(Category_over_base_ring):
                 sage: R.reduced_word_of_alcove_morphism(omega1.translation)             # needs sage.graphs
                 [0, 2, 3, 4, 5, 3, 2, 0]
 
-                sage: # needs sage.libs.gap
+                sage: # needs sage.graphs sage.libs.gap
                 sage: W = WeylGroup(['D',5,1])
                 sage: s = W.simple_reflections()
                 sage: w = s[0]*s[2]*s[3]*s[4]*s[5]*s[3]*s[2]
                 sage: w1= s[1]*s[2]*s[3]*s[4]*s[5]*s[3]*s[2]
-                sage: W.from_reduced_word(R.reduced_word_of_alcove_morphism(omega2.translation)) == w*w1                # needs sage.graphs
+                sage: W.from_reduced_word(R.reduced_word_of_alcove_morphism(omega2.translation)) == w*w1
                 True
             """
             return f(self.rho()).reduced_word()

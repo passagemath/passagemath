@@ -125,6 +125,8 @@ class HeisenbergGroup(UniqueRepresentation, FinitelyGeneratedMatrixGroup_gap):
             sage: TestSuite(H).run()  # long time
             sage: H = groups.matrix.Heisenberg(n=3)
             sage: TestSuite(H).run(max_runs=30, skip='_test_elements')  # long time
+
+            sage: # needs sage.rings.finite_rings
             sage: H = groups.matrix.Heisenberg(n=2, R=GF(4))
             sage: TestSuite(H).run()  # long time
 
@@ -215,6 +217,8 @@ class HeisenbergGroup(UniqueRepresentation, FinitelyGeneratedMatrixGroup_gap):
             sage: H = groups.matrix.Heisenberg(n=2, R=3)
             sage: H.order()
             243
+
+            sage: # needs sage.rings.finite_rings
             sage: H = groups.matrix.Heisenberg(n=2, R=GF(4))
             sage: H.order()
             1024
