@@ -305,8 +305,7 @@ def gens_to_basis_matrix(syms, relation_matrix, mod, field, sparse):
         h = 9999999
     tm = verbose("putting relation matrix in echelon form (height = %s)" % h)
     if h < 10:
-        A = relation_matrix.echelon_form(algorithm='multimodular',
-                                         height_guess=1)
+        A = relation_matrix.echelon_form(height_guess=1)
     else:
         A = relation_matrix.echelon_form()
     A.set_immutable()

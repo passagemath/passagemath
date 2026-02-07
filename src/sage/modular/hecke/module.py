@@ -982,7 +982,6 @@ class HeckeModule_free_module(HeckeModule_generic):
                                      self.level() % p)
                 if is_rational:
                     X = t.decomposition_of_subspace(U[i], check_restrict=False,
-                                                    algorithm='multimodular',
                                                     height_guess=height_guess, proof=proof)
                 else:
                     X = t.decomposition_of_subspace(U[i], check_restrict=False,
