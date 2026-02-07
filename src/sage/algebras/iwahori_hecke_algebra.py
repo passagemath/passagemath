@@ -470,7 +470,7 @@ class IwahoriHeckeAlgebra(Parent, UniqueRepresentation):
             False
 
             sage: T = IwahoriHeckeAlgebra("A1", 1).T()
-            sage: T.is_commutative()
+            sage: T.is_commutative()                                                    # needs sage.rings.number_field
             True
         """
         self._W = W

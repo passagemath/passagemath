@@ -2109,9 +2109,9 @@ class Stream_uninitialized(Stream):
             sage: C._uncomputed = False
             sage: lin_coeffs, all_coeffs = C._collect_equations(0)
             sage: C._cache
-            [FESDUMMY_1]
+            [FESDUMMY_...]
             sage: lin_coeffs
-            [FESDUMMY_1 - 1]
+            [FESDUMMY_... - 1]
             sage: C._solve_linear_equations_and_subs(lin_coeffs)                        # needs sage.libs.pari
             True
             sage: C._cache                                                              # needs sage.libs.pari
