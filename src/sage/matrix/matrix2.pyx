@@ -5198,7 +5198,7 @@ cdef class Matrix(Matrix1):
             [  1   5  -8   3  -1  -1  -1]
             [  0  11 -19   5  -2  -3  -3]
             sage: E = copy(A)
-            sage: E.right_kernel(algorithm='padic', basis='LLL')                        # needs fpylll
+            sage: E.right_kernel(algorithm='padic', basis='LLL')                        # needs fpylll sage.libs.iml
             Free module of degree 7 and rank 2 over Integer Ring
             User basis matrix:
             [-2  1 -3 -1  0 -1 -1]
