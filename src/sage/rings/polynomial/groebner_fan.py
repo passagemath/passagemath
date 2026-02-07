@@ -64,6 +64,7 @@ import re
 import string
 from collections.abc import Iterator
 
+from sage.features.gfan import GfanExecutable
 from sage.structure.sage_object import SageObject
 from sage.interfaces.gfan import gfan
 from .multi_polynomial_ideal import MPolynomialIdeal
@@ -971,7 +972,7 @@ class GroebnerFan(SageObject):
             sage: len(g4.weight_vectors())
             23
         """
-        gfan_processes = Popen(['gfan', '_weightvector', '-m'],
+        gfan_processes = Popen([GfanExecutable().absolute_filename(), '_weightvector', '-m'],
                                stdin=PIPE, stdout=PIPE, stderr=PIPE)
         b_ans, _ = gfan_processes.communicate(input=self.gfan().encode("utf8"))
         s_ans = b_ans.decode()
