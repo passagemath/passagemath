@@ -868,6 +868,7 @@ def ps_modsym_from_elliptic_curve(E, sign=0, implementation='eclib'):
         sage: symb.values()
         [-1/2, 1, -1, 0, 0, 1, 1, -1, 0, -1, 0, 0, 0, 1, -1, 0, 0, 0, 1, 0, 0]
 
+        sage: # needs eclib
         sage: E = EllipticCurve([0,1])
         sage: symb = E.pollack_stevens_modular_symbol()
         sage: symb.values()

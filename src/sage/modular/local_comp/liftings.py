@@ -242,6 +242,7 @@ def lift_for_SL(A, N=None):
         ...
         ValueError: you must choose the modulus
 
+        sage: # needs sage.libs.gsl
         sage: for _ in range(100):
         ....:     d = randint(0, 10)
         ....:     p = choice([2,3,5,7,11])

@@ -327,6 +327,7 @@ def _gens_from_bqf(O, Q):
 
     Randomized testing::
 
+        sage: # needs sage.libs.gsl
         sage: from sage.rings.number_field.order_ideal import _random_for_testing
         sage: O, random_ideal = _random_for_testing()
         sage: I = random_ideal()

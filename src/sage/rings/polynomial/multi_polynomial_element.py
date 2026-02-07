@@ -2287,7 +2287,7 @@ class MPolynomial_polydict(Polynomial_singular_repr, MPolynomial_element):
             sage: x.quo_rem(y)                                                          # needs sage.libs.singular sage.rings.padics
             Traceback (most recent call last):
             ...
-            TypeError: no conversion of this ring to a Singular ring defined
+            TypeError...
 
         ALGORITHM: Use Singular.
 

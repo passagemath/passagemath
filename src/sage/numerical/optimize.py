@@ -79,7 +79,7 @@ def find_root(f, a, b, xtol=10e-13, rtol=2.0**-50, maxiter=100, full_output=Fals
     The following example was added due to :issue:`4942` and demonstrates that
     the function need not be defined at the endpoints::
 
-        sage: find_root(x^2*log(x,2)-1,0, 2)  # abs tol 1e-6
+        sage: find_root(x^2*log(x,2)-1,0, 2)  # abs tol 1e-6                            # needs sage.symbolic
         1.41421356237
 
     The following is an example, again from :issue:`4942` where Brent's method

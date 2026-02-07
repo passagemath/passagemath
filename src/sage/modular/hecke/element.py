@@ -125,7 +125,7 @@ class HeckeModuleElement(ModuleElement):
             <class 'sage.modules.vector_rational_dense.Vector_rational_dense'>
             sage: type(vector(v))
             <class 'sage.modules.vector_rational_dense.Vector_rational_dense'>
-            sage: type(vector(v, GF(2)))
+            sage: type(vector(v, GF(2)))                                                # needs sage.libs.m4ri
             <class 'sage.modules.vector_mod2_dense.Vector_mod2_dense'>
         """
         if R is None:
