@@ -918,6 +918,7 @@ class ArithmeticSubgroup(Group):
 
         ::
 
+            sage: # needs sage.groups
             sage: G = CongruenceSubgroup(8, [ [1,1,0,1], [3,-1,4,-1] ])
             sage: G.level()
             8

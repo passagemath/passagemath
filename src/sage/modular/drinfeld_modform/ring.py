@@ -366,7 +366,7 @@ class DrinfeldModularForms(Parent, UniqueRepresentation):
             sage: K = Frac(A)
             sage: M = DrinfeldModularForms(K, 3)
             sage: M._repr_()
-            'Ring of Drinfeld modular forms of rank 3 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 2 (using GF2X)'
+            'Ring of Drinfeld modular forms of rank 3 over Fraction Field of Univariate Polynomial Ring in T over Finite Field of size 2...'
         """
         return ("Ring of Drinfeld modular forms of rank %s over %s"
                 % (self._rank, self._base_ring))
