@@ -277,7 +277,7 @@ class SymmetricFunctions(UniqueRepresentation, Parent):
 
     We can indeed check that this agrees with the character table of `S_5`::
 
-        sage: SymmetricGroup(5).character_table() == M
+        sage: SymmetricGroup(5).character_table() == M                                  # needs sage.groups
         True
 
     In this interpretation of symmetric functions as characters on the
