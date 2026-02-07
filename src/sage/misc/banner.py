@@ -88,6 +88,7 @@ def banner_text(full=True):
             a("┃ %-66s ┃\n" % 'Warning: this is a prerelease version, and it may be unstable.')
         if not have_sage_all:
             a("┃ %-66s ┃\n" % 'Warning: sage.all is not available; this is a limited REPL.')
+            a("┃ %-66s ┃\n" % 'Hint:    Use "from passagemath_<TAB> import *".')
         a('┗' + bars2 + '┛' + red_out)
     return ''.join(s)
 
