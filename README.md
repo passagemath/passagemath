@@ -4,7 +4,7 @@ passagemath: General purpose mathematical software system in Python, a pip-insta
 [passagemath](https://github.com/passagemath/passagemath) is open source mathematical
 software in Python, released under the GNU General Public Licence GPLv2+.
 
-It is a fork of [SageMath](https://www.sagemath.org/), which has been developed 2005-2025
+It is a fork of [SageMath](https://www.sagemath.org/), which has been developed 2005-2026
 under the motto "Creating a Viable Open Source Alternative to Magma, Maple, Mathematica,
 and MATLAB".
 
@@ -20,7 +20,7 @@ and Mathematical Software Communities." It was created in October 2024 with the 
 * [inviting collaborations](https://github.com/passagemath/passagemath/issues/700) with upstream projects,
 * [building a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ),
 * [empowering Sage users to participate in the scientific Python ecosystem](https://github.com/passagemath/passagemath/issues/248) by publishing packages,
-* developing a port to [Pyodide](https://pyodide.org/en/stable/) (WebAssembly) for serverless deployment with Javascript,
+* developing a port to WebAssembly ([Pyodide](https://pyodide.org/en/stable/), emscripten-forge) for serverless deployment with Javascript,
 * developing a [native Windows port](https://github.com/passagemath/passagemath/issues/1044),
   - passagemath 10.6.1 (July 2025) published the first pip-installable wheel packages for native Windows on x86_64,
   - passagemath packages became available in the [MSYS2 software distribution](https://packages.msys2.org/search?t=pkg&q=passagemath) in November 2025.
@@ -46,7 +46,7 @@ On Mastodon / in the Fediverse, follow [@passagemath.org@bsky.brid.gy](https://m
 
 Join [passagemath.discourse.group](https://passagemath.discourse.group/) for help and discussions.
 
-As of 2025-09-20, the [passagemath GitHub organization](https://github.com/passagemath) had 128 members.
+As of 2026-02-07, the [passagemath GitHub organization](https://github.com/passagemath) had 145 members.
 
 [People all around the globe](https://www.sagemath.org/development-map.html) have contributed to the
 development of SageMath since 2005, and hence of passagemath.
@@ -101,16 +101,16 @@ A part of the functionality is also available on Windows using MSYS2.
 Use of the full functionality on Windows currently requires the use of Windows
 Subsystem for Linux (WSL) or virtualization.
 
-| Version                                                                      | CPython   | Toolchains        | Operating Systems           | Architectures | Notes                   |
-|------------------------------------------------------------------------------|-----------|-------------------|-----------------------------|---------------|-------------------------|
-| [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9–3.12  | GCC 8.4–14, clang | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2024-12             |
-| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9–3.13  | GCC 9–14, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2025-10             |
-| [10.6.x](https://github.com/passagemath/passagemath/tree/passagemath-10.6.x) | 3.10–3.14 | GCC 9–15, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable <br>EOL 2026-10  |
-|                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality* |
-|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality* |
-| 10.8.x <br>(main)                                                            | 3.11–3.14 | GCC 9–16, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | development             |
-|                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality* |
-|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality* |
+| Version                                                                      | CPython   | Toolchains        | Operating Systems           | Architectures | Notes                      |
+|------------------------------------------------------------------------------|-----------|-------------------|-----------------------------|---------------|----------------------------|
+| [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9–3.12  | GCC 8.4–14, clang | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2024-12                |
+| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9–3.13  | GCC 9–14, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2025-10                |
+| [10.6.x](https://github.com/passagemath/passagemath/tree/passagemath-10.6.x) | 3.10–3.14 | GCC 9–15, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | old stable <br>EOL 2026-10 |
+|                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
+|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
+| 10.8.x <br>(main)                                                            | 3.11–3.14 | GCC 9–16, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable                     |
+|                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
+|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
 
 Detailed information on supported platforms for a specific version of passagemath
 can be found in the
