@@ -25,7 +25,7 @@ As we merge new releases of SageMath into passagemath on a regular basis,
 it is also possible to contribute to passagemath indirectly, by opening
 pull requests in the [SageMath project](https://github.com/sagemath/sage).
 
-Caution is advised. As of 2025, SageMath is not a safe environment.
+Caution is advised. As of 2026, SageMath is not a safe environment.
 
 ## Contributing by sending passagemath changes to upstream SageMath
 
