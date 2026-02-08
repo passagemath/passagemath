@@ -95,8 +95,8 @@ Local installation of passagemath: Supported platforms
 
 passagemath attempts to support and provides binary wheels suitable for
 all major Linux distributions and recent versions of macOS.
-Binary wheels for native Windows (x86_64) are gradually made available in the passagemath
-10.6.x series.
+Binary wheels for native Windows (x86_64) are gradually being made available
+since the passagemath-10.6.x series.
 A part of the functionality is also available on Windows using MSYS2.
 Use of the full functionality on Windows currently requires the use of Windows
 Subsystem for Linux (WSL) or virtualization.
@@ -134,17 +134,6 @@ $ python3 --version
 Python 3.12.7
 $ python3 -m venv ~/passagemath-venv
 $ source ~/passagemath-venv/bin/activate
-```
-
-For the Linux aarch64 (ARM) platform and for Python 3.14.x on any platform,
-[some third-party packages are still missing wheels](https://github.com/passagemath/passagemath/issues/347).
-Build these wheels from source using [![PyPI: passagemath-conf](https://img.shields.io/pypi/v/passagemath-conf.svg?label=passagemath-conf)](https://pypi.python.org/pypi/passagemath-conf)
-
-```bash session
-(passagemath-venv) $ export SAGE_CONF_TARGETS="gmpy2 memory_allocator"
-(passagemath-venv) $ pip install --force-reinstall -v passagemath-conf
-(passagemath-venv) $ export PIP_FIND_LINKS=$(sage-config SAGE_SPKG_WHEELS)
-(passagemath-venv) $ export PIP_PREFER_BINARY=1
 ```
 
 (Activating the virtual environment only takes effect for the current terminal session;
