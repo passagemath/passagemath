@@ -114,7 +114,7 @@ class Morphism_abstract(sage.modules.matrix_morphism.MatrixMorphism_abstract):
         try:
             iM, denom = M._invert_iml()
         except (AttributeError, ImportError):
-            iM = M.matrix_over_field().invert()
+            iM = M.matrix_over_field().inverse()
             iM, denom = iM._clear_denom()
         return Morphism(self.parent().reversed(), iM)
 

@@ -1517,6 +1517,7 @@ class HypergeometricData:
 
         Check issue from :issue:`28404`::
 
+            sage: # needs sage.libs.gap sage.rings.number_field
             sage: H1 = Hyp(cyclotomic=([1,1,1], [6,2]))
             sage: H2 = Hyp(cyclotomic=([6,2], [1,1,1]))
             sage: [H1.H_value(5,1,i) for i in range(2,5)]
