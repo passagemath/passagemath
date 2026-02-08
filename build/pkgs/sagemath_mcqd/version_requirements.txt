@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-mcqd == 10.8.1rc3
+passagemath-mcqd ~= 10.8.1.0
