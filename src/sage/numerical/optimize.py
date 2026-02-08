@@ -95,8 +95,8 @@ def find_root(f, a, b, xtol=10e-13, rtol=2.0**-50, maxiter=100, full_output=Fals
 
     An example of a function which evaluates to NaN on the entire interval::
 
-        sage: f(x) = 0.0 / max(0, x)
-        sage: find_root(f, -1, 0)
+        sage: f(x) = 0.0 / max(0, x)                                                    # needs sage.symbolic
+        sage: find_root(f, -1, 0)                                                       # needs sage.symbolic
         Traceback (most recent call last):
         ...
         RuntimeError: f appears to have no zero on the interval

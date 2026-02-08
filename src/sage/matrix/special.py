@@ -587,6 +587,7 @@ def random_matrix(ring, nrows, ncols=None, algorithm='randomize', implementation
     contain only integer entries.  If ``rank``, is not set, the
     rank of the matrix will be generated randomly. ::
 
+        sage: # needs sage.libs.gsl
         sage: B = random_matrix(QQ, 5, 6, algorithm='subspaces', rank=3); B  # random
         sage: B_expanded = B.augment(identity_matrix(5)).rref()
         sage: (B.nrows(), B.ncols())

@@ -122,9 +122,7 @@ class MatrixGroup_base(Group):
             sage: G._check_matrix(matrix(F, [[1,1], [0,1]]))                            # needs sage.rings.finite_rings
             Traceback (most recent call last):
             ...
-            TypeError: matrix must be unitary with respect to the hermitian form
-            [0 1]
-            [1 0]
+            TypeError: matrix must be unitary...
         """
         if not x.is_invertible():
             raise TypeError('matrix is not invertible')
