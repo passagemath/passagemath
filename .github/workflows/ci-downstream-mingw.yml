@@ -35,6 +35,8 @@ jobs:
                             "sagemath-flint",
                             "sagemath-glpk",
                             "sagemath-graphs",
+                            "sagemath-gsl",
+                            "sagemath-highs",
                             "sagemath-homfly",
                             "sagemath-iml",
                             "sagemath-mcqd",
