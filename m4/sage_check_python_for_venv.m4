@@ -40,13 +40,13 @@ AC_DEFUN([SAGE_CHECK_PYTHON_FOR_VENV], [
                             AS_IF(["]PYTHON_EXE[" build/bin/sage-venv $conftest_venv_options conftest_venv && conftest_venv/bin/python3 -c "import $all_required_modules" 2>& ]AS_MESSAGE_LOG_FD, [
                               AS_VAR_SET([python3_result], [yes])
                               AS_VAR_IF([enable_python_distutils_check], [yes], [dnl
-                                SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" conftest_venv/bin/python3], [
+                                SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" ../conftest_venv/bin/python3], [
                                     SAGE_ARCHFLAGS="unset"
                                 ], [
                                     AS_CASE([$host],
                                         [*-*-darwin*], [
                                             dnl #31227: Try if setting ARCHFLAGS to empty fixes it
-                                            SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" ARCHFLAGS="" conftest_venv/bin/python3], [
+                                            SAGE_PYTHON_CHECK_DISTUTILS([CC="$CC" CXX="$CXX" ARCHFLAGS="" ../conftest_venv/bin/python3], [
                                                 SAGE_ARCHFLAGS=""
                                             ], [
                                                 AS_VAR_SET([python3_result],
@@ -93,11 +93,11 @@ AC_DEFUN([SAGE_PYTHON_CHECK_DISTUTILS], [
     m4_pushdef([COMMANDS_IF_DISTUTILS_NOT_GOOD], [$3])
     SAGE_PYTHON_DISTUTILS_C_CONFTEST
     dnl (echo "***ENV***:"; env; echo "***SYSCONFIG***"; conftest_venv/bin/python3 -m sysconfig) >& AS_MESSAGE_LOG_FD
-    echo PYTHON_EXE conftest.py --verbose build --build-base=conftest.dir >& AS_MESSAGE_LOG_FD
-    AS_IF([PYTHON_EXE conftest.py --verbose build --build-base=conftest.dir >& AS_MESSAGE_LOG_FD 2>&1 ], [
+    echo PYTHON_EXE setup.py --verbose build --build-base=build >& AS_MESSAGE_LOG_FD
+    AS_IF([(cd conftest.dir && PYTHON_EXE setup.py --verbose build --build-base=build >& AS_MESSAGE_LOG_FD 2>&1)], [
         SAGE_PYTHON_DISTUTILS_CXX_CONFTEST
-        echo PYTHON_EXE conftest.py --verbose build --build-base=conftest.dir >& AS_MESSAGE_LOG_FD 2>&1
-        AS_IF([PYTHON_EXE conftest.py --verbose build --build-base=conftest.dir >& AS_MESSAGE_LOG_FD 2>&1 ], [
+        echo PYTHON_EXE setup.py --verbose build --build-base=build >& AS_MESSAGE_LOG_FD 2>&1
+        AS_IF([(cd conftest.dir && PYTHON_EXE setup.py --verbose build --build-base=build >& AS_MESSAGE_LOG_FD 2>&1)], [
             COMMANDS_IF_DISTUTILS_GOOD], [
             reason="distutils cannot build a C++ 17 extension"
             COMMANDS_IF_DISTUTILS_NOT_GOOD
@@ -111,9 +111,10 @@ AC_DEFUN([SAGE_PYTHON_CHECK_DISTUTILS], [
     m4_popdef([COMMANDS_IF_DISTUTILS_NOT_GOOD])
 ])
 
-dnl Write conftest.py and conftest.c
+dnl Write conftest.dir/setup.py, conftest.c
 AC_DEFUN([SAGE_PYTHON_DISTUTILS_C_CONFTEST], [
                                 rm -rf conftest.*
+                                mkdir conftest.dir
                                 AC_LANG_PUSH([C])
                                 AC_LANG_CONFTEST([
                                     AC_LANG_SOURCE([[
@@ -141,20 +142,21 @@ PyInit_spam(void)
                                     ]])
                                 ])
                                 AC_LANG_POP([C])
-                                cat > conftest.py <<EOF
+                                cat > conftest.dir/setup.py <<EOF
 
 from $distutils_core import setup
 from $distutils_extension import Extension
 from sys import exit
-modules = list((Extension("spam", list(("conftest.c",))),))
+modules = list((Extension("spam", list(("../conftest.c",))),))
 setup(name="config_check_distutils", packages=(), py_modules=(), ext_modules=modules)
 exit(0)
 EOF
 ])
 
-dnl Write conftest.py and conftest.cpp
+dnl Write conftest.dir/setup.py, conftest.cpp
 AC_DEFUN([SAGE_PYTHON_DISTUTILS_CXX_CONFTEST], [
                                     rm -rf conftest.*
+                                    mkdir conftest.dir
                                     AC_LANG_PUSH([C++])
                                     AC_LANG_CONFTEST([
                                         AC_LANG_SOURCE([[
@@ -191,12 +193,12 @@ PyInit_spam(void)
                                         ]])
                                     ])
                                     AC_LANG_POP([C++])
-                                    cat > conftest.py <<EOF
+                                    cat > conftest.dir/setup.py <<EOF
 
 from $distutils_core import setup
 from $distutils_extension import Extension
 from sys import exit
-modules = list((Extension("spam", list(("conftest.cpp",)),
+modules = list((Extension("spam", list(("../conftest.cpp",)),
                           extra_compile_args=list(("-std=c++17",)), language="c++"),))
 setup(name="config_check_distutils_cxx", packages=(), py_modules=(), ext_modules=modules)
 exit(0)
