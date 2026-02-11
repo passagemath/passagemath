@@ -113,6 +113,7 @@ cdef class Module(Parent):
         sage: M.rename('toto')
         sage: h == M.__hash__()
         True
+        sage: M.rename()
     """
     def __init__(self, base, category=None, names=None):
         """

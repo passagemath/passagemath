@@ -985,4 +985,6 @@ class Modules(Category_module):
                     F # G
                     sage: T.tensor_factors()
                     (F, G)
+                    sage: F.rename()
+                    sage: G.rename()
                 """

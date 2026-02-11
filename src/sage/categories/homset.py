@@ -623,16 +623,17 @@ class Homset(Set_generic):
             sage: H
             Set of Morphisms from X to Y in Category of monoids
             sage: TestSuite(H).run()
-
-            sage: H = MyHomset(X, Y, category=1, base = ZZ)
+            sage: H = MyHomset(X, Y, category=1, base=ZZ)
             Traceback (most recent call last):
             ...
             TypeError: category (=1) must be a category
-
-            sage: H = MyHomset(X, Y, category=1, base = ZZ, check = False)
+            sage: H = MyHomset(X, Y, category=1, base=ZZ, check=False)
             Traceback (most recent call last):
             ...
             AttributeError: 'sage.rings.integer.Integer' object has no attribute 'Homsets'...
+            sage: X.rename()
+            sage: Y.rename()
+
             sage: P.<t> = ZZ[]
             sage: f = P.hom([1/2*t])
             sage: f.parent().domain()

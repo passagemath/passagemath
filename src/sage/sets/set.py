@@ -555,6 +555,7 @@ class Set_object(Set_generic, Set_base, Set_boolean_operators, Set_add_sub_opera
             sage: X.rename('{ integers }')
             sage: X
             { integers }
+            sage: X.rename()
         """
         return "Set of elements of " + repr(self.__object)
 
