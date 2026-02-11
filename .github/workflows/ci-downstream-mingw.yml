@@ -35,6 +35,8 @@ jobs:
                             "sagemath-flint",
                             "sagemath-glpk",
                             "sagemath-graphs",
+                            "sagemath-gsl",
+                            "sagemath-highs",
                             "sagemath-homfly",
                             "sagemath-iml",
                             "sagemath-mcqd",
@@ -64,16 +66,17 @@ jobs:
             mingw-w64-${{ matrix.env }}-python-pas${{ matrix.distribution }}
             mingw-w64-${{ matrix.env }}-python-passagemath-repl
             mingw-w64-${{ matrix.env }}-python-tox
-            ${{ matrix.distribution == 'sagemath-bliss'    && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
-            ${{ matrix.distribution == 'sagemath-cliquer'  && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-bliss'    && format('mingw-w64-{0}-python-passagemath-graphs',    matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-cliquer'  && format('mingw-w64-{0}-python-passagemath-graphs',    matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-combinat' && format('mingw-w64-{0}-python-passagemath-graphs mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
-            ${{ matrix.distribution == 'sagemath-flint'    && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
-            ${{ matrix.distribution == 'sagemath-graphs'   && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
-            ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-flint'    && format('mingw-w64-{0}-python-passagemath-modules',   matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-graphs'   && format('mingw-w64-{0}-python-passagemath-modules',   matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-highs'    && format('mingw-w64-{0}-python-passagemath-polyhedra', matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-homfly'   && format('mingw-w64-{0}-python-passagemath-graphs',    matrix.env) || ''}}
             ${{ matrix.distribution == 'sagemath-mcqd'     && format('mingw-w64-{0}-python-passagemath-graphs mingw-w64-{0}-python-passagemath-cliquer', matrix.env) || ''}}
-            ${{ matrix.distribution == 'sagemath-ntl'      && format('mingw-w64-{0}-python-passagemath-modules', matrix.env) || ''}}
-            ${{ matrix.distribution == 'sagemath-plantri'  && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
-            ${{ matrix.distribution == 'sagemath-tdlib'    && format('mingw-w64-{0}-python-passagemath-graphs',  matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-ntl'      && format('mingw-w64-{0}-python-passagemath-modules',   matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-plantri'  && format('mingw-w64-{0}-python-passagemath-graphs',    matrix.env) || ''}}
+            ${{ matrix.distribution == 'sagemath-tdlib'    && format('mingw-w64-{0}-python-passagemath-graphs',    matrix.env) || ''}}
           msystem: ${{ contains(matrix.env, 'ucrt') && 'ucrt64' || 'clangarm64' }}
 
           # TBD when test dependencies are available:
