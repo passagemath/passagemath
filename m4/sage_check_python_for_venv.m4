@@ -111,7 +111,7 @@ AC_DEFUN([SAGE_PYTHON_CHECK_DISTUTILS], [
     m4_popdef([COMMANDS_IF_DISTUTILS_NOT_GOOD])
 ])
 
-dnl Write conftest.dir/setup.py, conftest.c
+dnl Write conftest.dir/{setup.py,conftest.c}
 AC_DEFUN([SAGE_PYTHON_DISTUTILS_C_CONFTEST], [
                                 rm -rf conftest.*
                                 mkdir conftest.dir
@@ -142,18 +142,19 @@ PyInit_spam(void)
                                     ]])
                                 ])
                                 AC_LANG_POP([C])
+                                mv conftest.c conftest.dir/
                                 cat > conftest.dir/setup.py <<EOF
 
 from $distutils_core import setup
 from $distutils_extension import Extension
 from sys import exit
-modules = list((Extension("spam", list(("../conftest.c",))),))
+modules = list((Extension("spam", list(("conftest.c",))),))
 setup(name="config_check_distutils", packages=(), py_modules=(), ext_modules=modules)
 exit(0)
 EOF
 ])
 
-dnl Write conftest.dir/setup.py, conftest.cpp
+dnl Write conftest.dir/{setup.py,conftest.cpp}
 AC_DEFUN([SAGE_PYTHON_DISTUTILS_CXX_CONFTEST], [
                                     rm -rf conftest.*
                                     mkdir conftest.dir
@@ -193,12 +194,13 @@ PyInit_spam(void)
                                         ]])
                                     ])
                                     AC_LANG_POP([C++])
+                                    mv conftest.cpp conftest.dir/
                                     cat > conftest.dir/setup.py <<EOF
 
 from $distutils_core import setup
 from $distutils_extension import Extension
 from sys import exit
-modules = list((Extension("spam", list(("../conftest.cpp",)),
+modules = list((Extension("spam", list(("conftest.cpp",)),
                           extra_compile_args=list(("-std=c++17",)), language="c++"),))
 setup(name="config_check_distutils_cxx", packages=(), py_modules=(), ext_modules=modules)
 exit(0)
