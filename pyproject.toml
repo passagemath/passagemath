@@ -261,9 +261,6 @@ select = [
   "RUF013",
   "RUF036",
 
-  # flake8-builtins
-  "A003",
-
   "TC", # flake8-type-checking - https://docs.astral.sh/ruff/rules/#flake8-type-checking-tc
   # pyupgrade -- https://docs.astral.sh/ruff/rules/#pyupgrade-up
   "UP004",
