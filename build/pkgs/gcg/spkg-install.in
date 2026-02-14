@@ -1,0 +1,12 @@
+cd src
+mkdir build
+cd build
+sdh_cmake -GNinja \
+          -DCMAKE_INSTALL_LIBDIR=lib \
+          -DCMAKE_VERBOSE_MAKEFILE=ON \
+          -DCMAKE_BUILD_WITH_INSTALL_NAME_DIR=ON \
+          -DGMP_DIR="${SAGE_GMP_PREFIX}" \
+          -DSYM=bliss \
+          ..
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
