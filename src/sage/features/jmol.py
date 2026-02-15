@@ -1,4 +1,7 @@
 # sage_setup: distribution = sagemath-environment
+r"""
+Feature for testing the presence of ``jmol``
+"""
 import os
 
 from . import StaticFile

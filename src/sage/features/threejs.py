@@ -1,4 +1,7 @@
 # sage_setup: distribution = sagemath-environment
+r"""
+Feature for testing the presence of ``threejs``
+"""
 from pathlib import Path
 
 from . import StaticFile
