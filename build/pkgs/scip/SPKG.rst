@@ -20,10 +20,3 @@ Upstream Contact
 ----------------
 
 https://scipopt.org/#scipoptsuite
-
-
-Dependencies
-------------
-
-scip brings its own patched version of the bliss library.
-This will conflict with the optional package bliss.
