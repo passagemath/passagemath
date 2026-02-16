@@ -310,6 +310,8 @@ jobs:
           make pypi-noarch-wheels V=0
           (mkdir dist && mv venv/var/lib/sage/wheels/*sage*-none-any.whl dist/ && rm -f dist/*sage*conf-*-none-any.whl)
           ls -l dist
+        env:
+          MAKE: make -j8
 
       - name: Repair wheels
         if: steps.cache-noarch-wheels.outputs.cache-hit != 'true'
