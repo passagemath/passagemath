@@ -24,11 +24,9 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_sagemath_categories
-    SPKG_INSTALL_REQUIRES_sagemath_ecl
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_flint
     SPKG_INSTALL_REQUIRES_sagemath_gsl
-    SPKG_INSTALL_REQUIRES_sagemath_maxima
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_sagemath_ntl
     SPKG_INSTALL_REQUIRES_sagemath_singular
@@ -49,7 +47,7 @@ test            = ["passagemath-repl"]
 fricas          = ["passagemath-fricas"]
 giac            = ["passagemath-giac"]
 ginac           = []  # no extra needed, same as pynac
-maxima          = []  # no extra needed
+maxima          = ["passagemath-maxima"]
 ntl             = []  # no extra needed
 primecount      = [SPKG_INSTALL_REQUIRES_primecountpy]
 pynac           = []  # no extra needed
@@ -58,6 +56,8 @@ sympy           = []  # no extra needed
 
 # extras by other features
 plot            = ["passagemath-plot"]
+
+standard        = ["passagemath-symbolics[maxima,primecount,test]"]
 
 [tool.setuptools]
 include-package-data = false
@@ -74,9 +74,7 @@ build-requires = [
 ]
 
 host-requires = [
-  "pkg:generic/ecl",
   "pkg:generic/gmp",
-  "pkg:generic/maxima",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
   "pkg:generic/singular",
