@@ -112,7 +112,14 @@ from sage.doctest.all import *
 from sage.repl.all import *
 from sage.misc.all__sagemath_repl import *
 
+from sage.misc.lazy_import import lazy_import
+
+# Lazily import interacts (#15335)
+lazy_import('sage.interacts', 'all', 'interacts')
+
 # For doctesting. These are overwritten later
 
 Integer = int
 RealNumber = float
+
+del lazy_import
