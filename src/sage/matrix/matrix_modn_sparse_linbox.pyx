@@ -31,18 +31,18 @@ def _rank_det_linbox(Matrix_modn_sparse self):
         sage: from sage.matrix.matrix_modn_sparse_linbox import _rank_det_linbox
         sage: m = matrix(Zmod(13), 1, sparse=True)
         sage: m[0,0] = 0
-        sage: m._rank_det_linbox()
+        sage: _rank_det_linbox(m)
         (0, 0)
         sage: for i in range(1, 13):
         ....:     m[0,0] = i
-        ....:     assert m._rank_det_linbox() == (1, i)
+        ....:     assert _rank_det_linbox(m) == (1, i)
 
         sage: m = matrix(GF(5), 2, sparse=True)
         sage: m[0,0] = 1
         sage: m[0,1] = 2
         sage: m[1,0] = 1
         sage: m[1,1] = 3
-        sage: m._rank_det_linbox()
+        sage: _rank_det_linbox(m)
         (2, 1)
         sage: m
         [1 2]
@@ -50,7 +50,7 @@ def _rank_det_linbox(Matrix_modn_sparse self):
 
     TESTS::
 
-        sage: matrix(Zmod(3), 0, sparse=True)._rank_det_linbox()
+        sage: _rank_det_linbox(matrix(Zmod(3), 0, sparse=True))
         (0, 1)
     """
     if self._nrows == 0 or self._ncols == 0:
