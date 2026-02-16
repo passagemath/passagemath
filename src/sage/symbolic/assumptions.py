@@ -212,9 +212,12 @@ class GenericDeclaration(UniqueRepresentation):
             ...
             ValueError: bougie not a valid assumption, must be one of ['analytic', ... 'symmetric']
         """
-        from sage.calculus.calculus import maxima
         global _valid_feature_strings
         if self._assumption in _valid_feature_strings:
+            return
+        try:
+            from sage.interfaces.maxima_lib import maxima
+        except ImportError:
             return
         # We get the list here because features may be added with time.
         _valid_feature_strings.update(repr(x).strip() for x in list(maxima("features")))
@@ -243,7 +246,13 @@ class GenericDeclaration(UniqueRepresentation):
         """
         if self in _assumptions:
             return
-        from sage.calculus.calculus import maxima
+        try:
+            from sage.interfaces.maxima_lib import maxima
+        except ImportError:
+            self._var.decl_assume(self._assumption)
+            _assumptions[self] = True
+            return
+
         cur = None
         context = None
         if self._context is None:
@@ -310,11 +319,15 @@ class GenericDeclaration(UniqueRepresentation):
             cos(pi*x)
         """
         self._var.decl_forget(self._assumption)
-        from sage.calculus.calculus import maxima
+
         if self._context is not None:
             try:
                 del _assumptions[self]
             except KeyError:
+                return
+            try:
+                from sage.interfaces.maxima_lib import maxima
+            except ImportError:
                 return
             maxima.deactivate(self._context)
         else:  # trying to forget a declaration explicitly rather than implicitly
