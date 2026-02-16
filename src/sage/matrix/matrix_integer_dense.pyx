@@ -68,13 +68,12 @@ from cysignals.memory cimport sig_malloc, sig_free, check_allocarray
 from sage.libs.gmp.mpz cimport *
 
 from sage.modules.vector_integer_dense cimport Vector_integer_dense
-
 from sage.misc.verbose import verbose, get_verbose
 
 from sage.arith.misc import previous_prime
 from sage.arith.long cimport integer_check_long_py
 from sage.arith.power cimport generic_power
-from sage.structure.element cimport Element
+from sage.structure.element cimport Element, Vector
 from sage.structure.proof.proof import get_flag as get_proof_flag
 from sage.structure.richcmp cimport rich_to_bool
 from sage.misc.randstate cimport randstate, current_randstate
@@ -88,22 +87,21 @@ from sage.rings.rational_field import QQ
 from sage.rings.real_double import RDF
 from sage.rings.integer_ring import ZZ, IntegerRing_class
 from sage.rings.integer_ring cimport IntegerRing_class
+from sage.matrix.matrix_dense cimport Matrix_dense
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.polynomial.polynomial_integer_dense_flint cimport Polynomial_integer_dense_flint
-from sage.structure.element cimport Element, Vector
-from sage.structure.element import Vector
-
 from sage.rings.finite_rings.finite_field_constructor import GF
 
 
 from sage.matrix.matrix2 import decomp_seq
 
 from sage.matrix.matrix cimport Matrix
-
+from sage.matrix.constructor import matrix
 cimport sage.structure.element
-
 import sage.matrix.matrix_space as matrix_space
+from sage.modules.free_module_element import vector  # to use in GraverBasis.orthogonal_range_search
+
 
 ################
 # Used for modular HNF
@@ -116,6 +114,235 @@ fplll_fp_map = {None: None,
                 'xd': 'dpe',
                 'rr': 'mpfr'}
 
+class GraverBasis:
+    r"""
+    Iterable module for the Graver basis of integer matrix.
+    
+    Provides iteration over the Graver basis vectors and an orthogonal range search method.
+    All elements are vectors in `ZZ^n`, init `n` is the number of columns of original matrix.
+    """
+    def __init__(self, A):
+        """
+        To compute the Graver basis of matrix A (over ZZ) and initialize.
+        
+        INPUT:
+        
+        - ``A`` -- a matrix over ZZ to compute the Graver basis.
+        
+        To use  the 4ti2 optional package to compute the Graver basis.
+        """
+        try:
+            # To import the 4ti2 interface (optional package)
+            from sage.interfaces.four_ti_2 import four_ti_2
+        except ImportError:
+            raise ImportError("The 4ti2 package is not installed. Please install it with 'sage -i 4ti2'.")
+        # To ensure A is an integer matrix (convert if necessary)
+        from sage.matrix.constructor import matrix
+        if A.base_ring() is not ZZ:
+            A = matrix(ZZ, A)
+        # To call  to compute the Graver basis, init result is a matrix with basis vectors as rows
+        G = four_ti_2.graver(A)            # To run 4ti2's "graver" on A (requires 4ti2)
+        self._basis_matrix = G             # To store the resulting matrix of basis vectors (each row is a Graver vector)
+        self._nrows = G.nrows()            # number of Graver basis vectors
+        self._ncols = G.ncols()            # number of columns (same as A.ncols)
+
+    def __iter__(self):
+        """To Iterate over the Graver basis vectors (each to return as a vector in ZZ^n)."""
+        for i in range(self._nrows):
+            yield self._basis_matrix.row(i)  # To return each row as a Sage vector (element of ZZ^n)
+
+    def __len__(self):
+        """To return the number of vectors in the Graver basis."""
+        return self._nrows
+
+    def __getitem__(self, index):
+        """
+        To Return a specific Graver basis vector or a slice of vectors.
+        
+        - If ``index`` is an integer, returns the corresponding Graver basis vector (as a vector in ZZ^n).
+        - If ``index`` is a slice, returns a list of Graver basis vectors in that range.
+        """
+        if isinstance(index, slice):
+            return [self._basis_matrix.row(i) for i in range(*index.indices(self._nrows))]
+        # integer index
+        if index < 0:
+            index += self._nrows
+        if index < 0 or index >= self._nrows:
+            raise IndexError("GraverBasis index out of range")
+        return self._basis_matrix.row(index)
+
+    def _coerce_vec(self, v, name, n):
+        vv = vector(ZZ, v)
+        if len(vv) != n:
+            raise ValueError(f"{name} must have length {n}.")
+        return vv
+
+    def _l1_norm(self, g):
+        s = ZZ(0)
+        for gi in g:
+            s += abs(gi)
+        return s
+
+    def max_step(self, x, g, l=None, u=None):
+        r"""
+        To Return λ_max so that x + λ g stays within l <= · <= u.
+
+        l/u may be None (treated as -∞/+∞ coordinate-wise if entirely None).
+        """
+        x = self._coerce_vec(x, "x", self._ncols)
+        g = self._coerce_vec(g, "g", self._ncols)
+
+        if l is None:
+            l = None
+        else:
+            l = self._coerce_vec(l, "l", self._ncols)
+
+        if u is None:
+            u = None
+        else:
+            u = self._coerce_vec(u, "u", self._ncols)
+
+        lam = None  # "infinity" sentinel
+        for i in range(self._ncols):
+            gi = g[i]
+            if gi > 0:
+                if u is None:
+                    continue
+                bound = (u[i] - x[i]) // gi
+            elif gi < 0:
+                if l is None:
+                    continue
+                bound = (x[i] - l[i]) // (-gi)
+            else:
+                continue
+
+            if lam is None or bound < lam:
+                lam = bound
+
+            if lam <= 0:
+                return ZZ(0)
+
+        return ZZ(0) if lam is None else ZZ(lam)
+
+    def directed_augmentation_query(self, x, c, l=None, u=None,
+                                   strategy="steepest",
+                                   multipliers=None,
+                                   use_range_prefilter=True):
+        r"""
+        To Return a greedy Graver augmentation (g, λ, new_x, delta) or None.
+
+        - strategy="steepest": To minimize delta = λ * (c·g) among feasible improving steps.
+        - strategy="max_mean": To minimize (c·g)/||g||_1 (λ chosen as λ_max).
+        - multipliers: optional list of candidate λ values (e.g. powers of 2). If given,
+         only consider λ in this set (and feasible), which matches the multiplier.
+
+        If use_range_prefilter=True and l/u provided, to prefilter g by the box [l-x, u-x]
+        (necessary condition for λ>=1) via orthogonal_range_search.
+        """
+        x = self._coerce_vec(x, "x", self._ncols)
+        c = self._coerce_vec(c, "c", self._ncols)
+
+        l_vec = None if l is None else self._coerce_vec(l, "l", self._ncols)
+        u_vec = None if u is None else self._coerce_vec(u, "u", self._ncols)
+
+        # To Candidate iterator over Graver directions
+        if use_range_prefilter and (l_vec is not None) and (u_vec is not None):
+            cand_iter = self.orthogonal_range_search(l_vec - x, u_vec - x)
+        else:
+            cand_iter = iter(self)
+
+        best = None  # (score, g, lam, delta)
+        for g in cand_iter:
+            # For Improvement test uses c·g
+            cg = c.dot_product(g)
+            if cg >= 0:
+                continue
+
+            lam_max = self.max_step(x, g, l_vec, u_vec)
+            if lam_max <= 0:
+                continue
+
+            # To Choose λ
+            if multipliers is None:
+                lam = lam_max
+            else:
+                # To choose the largest candidate <= lam_max
+                lam = ZZ(0)
+                for t in multipliers:
+                    t = ZZ(t)
+                    if 1 <= t <= lam_max and t > lam:
+                        lam = t
+                if lam == 0:
+                    continue
+
+            delta = lam * cg  # negative
+
+            if strategy == "steepest":
+                score = delta  # most negative is best
+            elif strategy == "max_mean":
+                # For mean per L1 movement, using g (λ cancels in L1)
+                denom = self._l1_norm(g)
+                if denom == 0:
+                    continue
+                score = delta / (lam * denom)  # == cg/denom (negative)
+            else:
+                raise ValueError("strategy must be 'steepest' or 'max_mean'")
+
+            if best is None or score < best[0]:
+                best = (score, g, lam, delta)
+
+        if best is None:
+            return None
+
+        _, g, lam, delta = best
+        new_x = x + lam * g
+        return (g, lam, new_x, delta)
+
+    def greedy_augment(self, x, c, l=None, u=None, strategy="steepest",
+                       multipliers=None, max_iters=10_000):
+        r"""
+        To Run greedy Graver augmentation until no improving step exists.
+        Return (x_final, steps).
+        """
+        x = self._coerce_vec(x, "x", self._ncols)
+        steps = 0
+        while steps < max_iters:
+            res = self.directed_augmentation_query(
+                x, c, l=l, u=u, strategy=strategy, multipliers=multipliers
+            )
+            if res is None:
+                break
+            g, lam, x, delta = res
+            steps += 1
+        return x, steps
+
+    def orthogonal_range_search(self, l, u):
+        r"""
+        To Iterate over all Graver basis vectors `x` such that `l <= x <= u` (component-wise).
+        
+        INPUT:
+        
+        - ``l`` -- a lower bound (list or vector of length n).
+        - ``u`` -- an upper bound (list or vector of length n).
+        
+        OUTPUT: An iterator over all Graver basis vectors `x` satisfying `l_i \leq x_i \leq u_i` for all components i.
+        
+        """
+        l_vec = vector(ZZ, l)
+        u_vec = vector(ZZ, u)
+        if len(l_vec) != self._ncols or len(u_vec) != self._ncols:
+            raise ValueError(f"Bound vectors must have length {self._ncols} (the number of columns of the original matrix).")
+        # To Iterate and yield vectors within bounds
+        for i in range(self._nrows):
+            v = self._basis_matrix.row(i)
+            # To check component-wise bounds
+            within_bounds = True
+            for j in range(self._ncols):
+                if v[j] < l_vec[j] or v[j] > u_vec[j]:
+                    within_bounds = False
+                    break
+            if within_bounds:
+                yield v
 
 cdef class Matrix_integer_dense(Matrix_dense):
     r"""
@@ -879,6 +1106,62 @@ cdef class Matrix_integer_dense(Matrix_dense):
         fmpz_mat_sub(M._matrix,self._matrix,(<Matrix_integer_dense> right)._matrix)
         sig_off()
         return M
+
+    def graver_basis(self):
+        r"""
+        To Compute the Graver basis of this integer matrix.
+        
+        To return an iterable object over the integer vectors of the Graver basis of `self`.
+        The result is a `GraverBasis` instance, which can be iterated to obtain each Graver basis vector (an element of `ZZ^n`).
+        This object supports range queries via the `orthogonal_range_search` method.
+        
+        OUTPUT: 
+        
+        - An instance of ``GraverBasis`` containing the Graver basis vectors of this matrix.
+        
+        .. NOTE:: This method requires the optional package 4ti2 to be installed.
+        
+        EXAMPLES::
+
+            sage: A = matrix(ZZ, [[1, 2, 3]])                                 # optional - 4ti2
+            sage: G = A.graver_basis()                                        # optional - 4ti2
+            sage: sorted(tuple(v) for v in G)                                 # optional - 4ti2
+            [(0, 3, -2), (1, -2, 1), (1, 1, -1), (2, -1, 0), (3, 0, -1)]
+
+            sage: A = matrix(ZZ, [[1, 2, 3]])                          # optional - 4ti2
+            sage: G = A.graver_basis()                                 # optional - 4ti2
+            sage: x = vector(ZZ, [6, 0, 0]); c = vector(ZZ, [1, 1, 1])  # optional - 4ti2
+            sage: l = vector(ZZ, [0, 0, 0]); u = vector(ZZ, [6, 6, 6])  # optional - 4ti2
+            sage: res = G.directed_augmentation_query(x, c, l, u)       # optional - 4ti2
+            sage: (tuple(res[2]), int(res[1]))                          # optional - 4ti2
+            ((0, 3, 0), 2)
+            
+            sage: # To Restrict Graver directions by coordinate-wise bounds       # optional - 4ti2
+            sage: lower = vector(ZZ, [0, 0, -1])                               # optional - 4ti2
+            sage: upper = vector(ZZ, [2, 1, 0])                                # optional - 4ti2
+            sage: sorted(tuple(v) for v in G.orthogonal_range_search(lower, upper))  # optional - 4ti2
+            [(1, 1, -1)]
+
+            sage: # To Count greedy augmentation steps for a simple instance      # optional - 4ti2
+            sage: A = matrix(ZZ, [[1, 2, 3]])                                  # optional - 4ti2
+            sage: c = vector(ZZ, [1, 1, 1])                                    # optional - 4ti2
+            sage: G = A.graver_basis()                                         # optional - 4ti2
+            sage: l = vector(ZZ, [0, 0, 0])                                    # optional - 4ti2
+            sage: u = vector(ZZ, [6, 6, 6])                                    # optional - 4ti2
+            sage: x = vector(ZZ, [6, 0, 0])                                    # optional - 4ti2
+            sage: steps = 0                                                    # optional - 4ti2
+            sage: while True:                                                  # optional - 4ti2
+            ....:     best = None                                              # optional - 4ti2
+            ....:     for g in G.orthogonal_range_search(l - x, u - x):        # optional - 4ti2
+            ....:         if c.dot_product(g) < 0:                             # optional - 4ti2
+            ....:             if best is None or c.dot_product(g) < c.dot_product(best):  # optional - 4ti2
+            ....:                 best = g                                     # optional - 4ti2
+            ....:     if best is None:                                         # optional - 4ti2
+            ....:         break                                                # optional - 4ti2
+            ....:     x += best                                                # optional - 4ti2
+            ....:     steps += 1                                               # optional - 4ti2
+            sage: (tuple(x), steps)                                            # optional - 4ti2
+            ((0, 3, 0), 2)
 
     def __pow__(sself, n, dummy):
         r"""
@@ -4819,7 +5102,7 @@ cdef class Matrix_integer_dense(Matrix_dense):
         if row == 0:
             return self, pivots
         # 1. Create a new matrix that has row as the last row.
-        row_mat = matrix(row)
+        row_mat = matrix(row) #
         A = self.stack(row_mat)
         # 2. Working from the left, clear each column to put
         #    the resulting matrix back in echelon form.
