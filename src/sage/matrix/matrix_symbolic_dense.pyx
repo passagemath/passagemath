@@ -39,11 +39,11 @@ Computing inverses::
     sage: ~M
     [1/a - b*c/(a^2*(b*c/a - d))           b/(a*(b*c/a - d))]
     [          c/(a*(b*c/a - d))              -1/(b*c/a - d)]
-    sage: (~M*M).simplify_rational()
+    sage: (~M*M).simplify_rational()                                                    # needs sage.libs.maxima
     [1 0]
     [0 1]
     sage: M = matrix(SR, 3, 3, range(9)) - var('t')
-    sage: (~M * M).simplify_rational()
+    sage: (~M * M).simplify_rational()                                                  # needs sage.libs.maxima
     [1 0 0]
     [0 1 0]
     [0 0 1]
@@ -85,7 +85,7 @@ Comparison::
     sage: m != 3
     True
     sage: m = matrix(SR,2,[1..4]); n = m^2
-    sage: (exp(m+n) - exp(m)*exp(n)).simplify_rational() == 0       # indirect test
+    sage: (exp(m+n) - exp(m)*exp(n)).simplify_rational() == 0  # indirect doctest       # needs sage.libs.maxima
     True
 
 
@@ -102,7 +102,7 @@ Determinant::
     sage: M.det()
     cos(t)^2 + sin(t)^2
     sage: M = matrix([[sqrt(x),0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]])
-    sage: det(M)
+    sage: det(M)                                                                        # needs sage.libs.maxima
     sqrt(x)
 
 Permanents::
@@ -191,8 +191,8 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         EXAMPLES::
 
-            sage: a=matrix(SR,[[1,2],[3,4]])
-            sage: a.eigenvalues()
+            sage: a = matrix(SR, [[1,2],[3,4]])
+            sage: a.eigenvalues()                                                       # needs sage.libs.maxima
             [-1/2*sqrt(33) + 5/2, 1/2*sqrt(33) + 5/2]
 
         TESTS:
@@ -201,7 +201,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
             sage: m = matrix([[cos(pi/5), sin(pi/5)], [-sin(pi/5), cos(pi/5)]])
             sage: t = linear_transformation(m)
-            sage: t.eigenvalues()
+            sage: t.eigenvalues()                                                       # needs sage.libs.maxima
             [1/4*sqrt(5) - 1/4*sqrt(2*sqrt(5) - 10) + 1/4,
              1/4*sqrt(5) + 1/4*sqrt(2*sqrt(5) - 10) + 1/4]
         """
@@ -230,6 +230,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: A = matrix(SR,3,3,range(9)); A
             [0 1 2]
             [3 4 5]
@@ -247,6 +248,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         ::
 
+            sage: # needs sage.libs.maxima
             sage: A = matrix(SR, 2, 2, var('a,b,c,d'))
             sage: A.eigenvectors_left()
             [(1/2*a + 1/2*d - 1/2*sqrt(a^2 + 4*b*c - 2*a*d + d^2), [(1, -1/2*(a - d + sqrt(a^2 + 4*b*c - 2*a*d + d^2))/c)], 1), (1/2*a + 1/2*d + 1/2*sqrt(a^2 + 4*b*c - 2*a*d + d^2), [(1, -1/2*(a - d - sqrt(a^2 + 4*b*c - 2*a*d + d^2))/c)], 1)]
@@ -290,7 +292,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
             sage: # needs sage.graphs
             sage: G = graphs.CycleGraph(6)
             sage: am = G.adjacency_matrix().change_ring(SR)
-            sage: am.eigenvectors_left()
+            sage: am.eigenvectors_left()                                                # needs sage.libs.maxima
             [(-1, [(1, 0, -1, 1, 0, -1), (0, 1, -1, 0, 1, -1)], 2), (1, [(1, 0, -1, -1, 0, 1), (0, 1, 1, 0, -1, -1)], 2), (-2, [(1, -1, 1, -1, 1, -1)], 1), (2, [(1, 1, 1, 1, 1, 1)], 1)]
 
         TESTS::
@@ -305,7 +307,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         Check that :issue:`23332` is fixed::
 
-            sage: matrix([[x, x^2], [1, 0]]).eigenvectors_left()
+            sage: matrix([[x, x^2], [1, 0]]).eigenvectors_left()                        # needs sage.libs.maxima
             [(-1/2*x*(sqrt(5) - 1), [(1, -1/2*x*(sqrt(5) + 1))], 1),
              (1/2*x*(sqrt(5) + 1), [(1, 1/2*x*(sqrt(5) - 1))], 1)]
         """
@@ -347,15 +349,17 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
             sage: A = matrix(SR,2,2,range(4)); A
             [0 1]
             [2 3]
-            sage: right = A.eigenvectors_right(); right
-            [(-1/2*sqrt(17) + 3/2, [(1, -1/2*sqrt(17) + 3/2)], 1), (1/2*sqrt(17) + 3/2, [(1, 1/2*sqrt(17) + 3/2)], 1)]
+            sage: right = A.eigenvectors_right(); right                                 # needs sage.libs.maxima
+            [(-1/2*sqrt(17) + 3/2, [(1, -1/2*sqrt(17) + 3/2)], 1),
+             (1/2*sqrt(17) + 3/2, [(1, 1/2*sqrt(17) + 3/2)], 1)]
 
         The right eigenvectors are nothing but the left eigenvectors of the
         transpose matrix::
 
-            sage: left  = A.transpose().eigenvectors_left(); left
-            [(-1/2*sqrt(17) + 3/2, [(1, -1/2*sqrt(17) + 3/2)], 1), (1/2*sqrt(17) + 3/2, [(1, 1/2*sqrt(17) + 3/2)], 1)]
-            sage: right[0][1] == left[0][1]
+            sage: left = A.transpose().eigenvectors_left(); left                        # needs sage.libs.maxima
+            [(-1/2*sqrt(17) + 3/2, [(1, -1/2*sqrt(17) + 3/2)], 1),
+             (1/2*sqrt(17) + 3/2, [(1, 1/2*sqrt(17) + 3/2)], 1)]
+            sage: right[0][1] == left[0][1]                                             # needs sage.libs.maxima
             True
 
         TESTS::
@@ -370,7 +374,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         Check that :issue:`23332` is fixed::
 
-            sage: matrix([[x, x^2], [1, 0]]).eigenvectors_right()
+            sage: matrix([[x, x^2], [1, 0]]).eigenvectors_right()                       # needs sage.libs.maxima
             [(-1/2*x*(sqrt(5) - 1), [(1, -1/2*(sqrt(5) + 1)/x)], 1),
              (1/2*x*(sqrt(5) + 1), [(1, 1/2*(sqrt(5) - 1)/x)], 1)]
         """
@@ -395,10 +399,10 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
             sage: m = matrix(SR,2, [0,x,x,0]); m
             [0 x]
             [x 0]
-            sage: m.exp()
+            sage: m.exp()                                                               # needs sage.libs.maxima
             [1/2*(e^(2*x) + 1)*e^(-x) 1/2*(e^(2*x) - 1)*e^(-x)]
             [1/2*(e^(2*x) - 1)*e^(-x) 1/2*(e^(2*x) + 1)*e^(-x)]
-            sage: exp(m)
+            sage: exp(m)                                                                # needs sage.libs.maxima
             [1/2*(e^(2*x) + 1)*e^(-x) 1/2*(e^(2*x) - 1)*e^(-x)]
             [1/2*(e^(2*x) - 1)*e^(-x) 1/2*(e^(2*x) + 1)*e^(-x)]
 
@@ -407,11 +411,11 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
             sage: m = matrix(SR,0,[]); m
             []
-            sage: m.exp()
+            sage: m.exp()                                                               # needs sage.libs.maxima
             []
             sage: m = matrix(SR,1,[2]); m
             [2]
-            sage: m.exp()  # not tested, requires patched maxima
+            sage: m.exp()  # not tested, requires patched maxima                        # needs sage.libs.maxima
             [e^2]
 
         Commuting matrices `m, n` have the property that
@@ -425,8 +429,8 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
             [ 37  54]
             [ 81 118]
 
-            sage: a = exp(m+n) - exp(m)*exp(n)
-            sage: a.simplify_rational() == 0
+            sage: a = exp(m+n) - exp(m)*exp(n)                                          # needs sage.libs.maxima
+            sage: a.simplify_rational() == 0                                            # needs sage.libs.maxima
             True
 
         The input matrix must be square::
@@ -439,7 +443,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         In this example we take the symbolic answer and make it
         numerical at the end::
 
-            sage: exp(matrix(SR, [[1.2, 5.6], [3,4]])).change_ring(RDF)  # rel tol 1e-15
+            sage: exp(matrix(SR, [[1.2, 5.6], [3,4]])).change_ring(RDF)  # rel tol 1e-15    # needs sage.libs.maxima
             [ 346.5574872980695  661.7345909344504]
             [354.50067371488416  677.4247827652946]
 
@@ -447,7 +451,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         we clumsily create::
 
             sage: m = identity_matrix(SR,4); m = matrix(list(reversed(m.rows()))) * x
-            sage: exp(m)
+            sage: exp(m)                                                                    # needs sage.libs.maxima
             [1/2*(e^(2*x) + 1)*e^(-x)                        0                        0 1/2*(e^(2*x) - 1)*e^(-x)]
             [                       0 1/2*(e^(2*x) + 1)*e^(-x) 1/2*(e^(2*x) - 1)*e^(-x)                        0]
             [                       0 1/2*(e^(2*x) - 1)*e^(-x) 1/2*(e^(2*x) + 1)*e^(-x)                        0]
@@ -484,9 +488,9 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         EXAMPLES::
 
             sage: M = matrix(SR, 2, 2, var('a,b,c,d'))
-            sage: M.charpoly('t')
+            sage: M.charpoly('t')                                                           # needs sage.libs.maxima
             t^2 + (-a - d)*t - b*c + a*d
-            sage: matrix(SR, 5, [1..5^2]).charpoly()
+            sage: matrix(SR, 5, [1..5^2]).charpoly()                                        # needs sage.libs.maxima
             x^5 - 65*x^4 - 250*x^3
 
         TESTS:
@@ -500,28 +504,28 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
             sage: A = M(range(0, 2^2))
             sage: type(A)
             <class 'sage.matrix.matrix_symbolic_dense.Matrix_symbolic_dense'>
-            sage: A.charpoly('x')
+            sage: A.charpoly('x')                                                           # needs sage.libs.maxima
             x^2 - 3*x - 2
-            sage: A.charpoly('y')
+            sage: A.charpoly('y')                                                           # needs sage.libs.maxima
             y^2 - 3*y - 2
-            sage: A._cache['charpoly']
+            sage: A._cache['charpoly']                                                      # needs sage.libs.maxima
             x^2 - 3*x - 2
 
         Ensure the variable name of the polynomial does not conflict
         with variables used within the matrix (:issue:`14403`)::
 
-            sage: Matrix(SR, [[sqrt(x), x],[1,x]]).charpoly().list()
+            sage: Matrix(SR, [[sqrt(x), x],[1,x]]).charpoly().list()                        # needs sage.libs.maxima
             [x^(3/2) - x, -x - sqrt(x), 1]
 
         Test that :issue:`13711` is fixed::
 
-            sage: matrix([[sqrt(2), -1], [pi, e^2]]).charpoly()
+            sage: matrix([[sqrt(2), -1], [pi, e^2]]).charpoly()                             # needs sage.libs.maxima
             x^2 + (-sqrt(2) - e^2)*x + pi + sqrt(2)*e^2
 
         Test that :issue:`26427` is fixed::
 
             sage: M = matrix(SR, 7, 7, SR.var('a', 49))
-            sage: M.charpoly().degree() # long time
+            sage: M.charpoly().degree() # long time                                         # needs sage.libs.maxima
             7
         """
         cache_key = 'charpoly'
@@ -554,12 +558,12 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         EXAMPLES::
 
             sage: M = Matrix.identity(SR, 2)
-            sage: M.minpoly()
+            sage: M.minpoly()                                                               # needs sage.libs.maxima
             x - 1
 
             sage: t = var('t')
             sage: m = matrix(2, [1, 2, 4, t])
-            sage: m.minimal_polynomial()
+            sage: m.minimal_polynomial()                                                    # needs sage.libs.maxima
             x^2 + (-t - 1)*x + t - 8
 
         TESTS:
@@ -567,7 +571,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         Check that the variable `x` can occur in the matrix::
 
             sage: m = matrix([[x]])
-            sage: m.minimal_polynomial('y')
+            sage: m.minimal_polynomial('y')                                                 # needs sage.libs.maxima
             y - x
         """
         mp = self.fetch('minpoly')
@@ -589,12 +593,13 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         EXAMPLES::
 
-            sage: a = matrix(SR,[[1,2],[3,4]])
+            sage: # needs sage.libs.maxima
+            sage: a = matrix(SR, [[1,2],[3,4]])
             sage: a.fcp()
             x^2 - 5*x - 2
             sage: [i for i in a.fcp()]
             [(x^2 - 5*x - 2, 1)]
-            sage: a = matrix(SR,[[1,0],[0,2]])
+            sage: a = matrix(SR, [[1,0],[0,2]])
             sage: a.fcp()
             (x - 2) * (x - 1)
             sage: [i for i in a.fcp()]
@@ -637,6 +642,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         We start with some examples of diagonalisable matrices::
 
+            sage: # needs sage.libs.maxima
             sage: a,b,c,d = var('a,b,c,d')
             sage: matrix([a]).jordan_form()
             [a]
@@ -657,6 +663,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         In the following examples, we compute Jordan forms of some
         non-diagonalisable matrices::
 
+            sage: # needs sage.libs.maxima
             sage: matrix([[a, a], [0, a]]).jordan_form()
             [a 1]
             [0 a]
@@ -670,6 +677,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         Note that symbolic expressions may need to be simplified to
         make consistency checks succeed::
 
+            sage: # needs sage.libs.maxima
             sage: A = matrix([[x - a*c, a^2], [-c^2, x + a*c]])
             sage: J, P = A.jordan_form(transformation=True)
             sage: J, P
@@ -682,7 +690,6 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
             [                 -c^2               a*c + x]
             sage: A1.simplify_rational() == A
             True
-
             sage: B = matrix([[a, b, c], [0, a, d], [0, 0, a]])
             sage: J, T = B.jordan_form(transformation=True)
             sage: J, T
@@ -696,6 +703,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         Finally, some examples involving square roots::
 
+            sage: # needs sage.libs.maxima
             sage: matrix([[a, -b], [b, a]]).jordan_form()
             [a - I*b|      0]
             [-------+-------]
@@ -706,7 +714,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         Check that :issue:`40803` is fixed::
 
-            sage: matrix([[a, 0], [0, a]]).jordan_form()
+            sage: matrix([[a, 0], [0, a]]).jordan_form()                                # needs sage.libs.maxima
             [a|0]
             [-+-]
             [0|a]
@@ -733,10 +741,10 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
             sage: var('x,y,z')
             (x, y, z)
-            sage: m = matrix([[z, (x+y)/(x+y)], [x^2, y^2+2]]); m
+            sage: m = matrix([[z, (x+y)/(x+y)], [x^2, y^2+2]]); m                       # needs sage.libs.maxima
             [      z       1]
             [    x^2 y^2 + 2]
-            sage: m.simplify()
+            sage: m.simplify()                                                          # needs sage.libs.maxima
             [      z       1]
             [    x^2 y^2 + 2]
         """
@@ -746,6 +754,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: theta = var('theta')
             sage: M = matrix(SR, 2, 2, [cos(theta), sin(theta), -sin(theta), cos(theta)])
             sage: ~M
@@ -761,6 +770,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: M = matrix(SR, 3, 3, range(9)) - var('t')
             sage: (~M*M)[0,0]
             t*(3*(2/t + (6/t + 7)/((t - 3/t - 4)*t))*(2/t + (6/t + 5)/((t - 3/t
@@ -793,6 +803,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         Symbolic matrices will have their entries simplified::
 
+            sage: # needs sage.libs.maxima
             sage: a,n,k = SR.var('a,n,k')
             sage: f1 = sin(x)^2 + cos(x)^2
             sage: f2 = sin(x/(x^2 + x))
@@ -813,6 +824,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: var('x','y')
             (x, y)
             sage: l1 = [sqrt(2)*sqrt(3)*sqrt(6) , log(x*y)]
@@ -837,7 +849,7 @@ cdef class Matrix_symbolic_dense(Matrix_generic_dense):
             sage: M = matrix(SR, 2, 2, x^2 - 2*x + 1); M
             [x^2 - 2*x + 1             0]
             [            0 x^2 - 2*x + 1]
-            sage: M.factor()
+            sage: M.factor()                                                            # needs sage.libs.maxima
             [(x - 1)^2         0]
             [        0 (x - 1)^2]
         """
