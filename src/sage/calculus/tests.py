@@ -31,7 +31,7 @@ Compute the Christoffel symbol.
     sage: X = christoffel(1,1,1,[t,r,theta,phi],m)
     sage: X
     1/2/(r^2*(1/r - 1))
-    sage: X.rational_simplify()
+    sage: X.rational_simplify()                                                         # needs sage.libs.maxima
      -1/2/(r^2 - r)
 
 Some basic things::
@@ -101,9 +101,9 @@ from some Mathematica docs::
     diff(f(x), x)
     sage: diff( 2*x*f(x^2), x)
     4*x^2*D[0](f)(x^2) + 2*f(x^2)
-    sage: integrate( 1/(x^4 - a^4), x)
+    sage: integrate(1/(x^4 - a^4), x)                                                   # needs sage.libs.maxima
     -1/2*arctan(x/a)/a^3 - 1/4*log(a + x)/a^3 + 1/4*log(-a + x)/a^3
-    sage: expand(integrate(log(1-x^2), x))
+    sage: expand(integrate(log(1-x^2), x))                                              # needs sage.libs.maxima
     x*log(-x^2 + 1) - 2*x + log(x + 1) - log(x - 1)
 
 This is an apparent regression in Maxima 5.39.0, although
@@ -112,21 +112,21 @@ the antiderivative is correct, assuming we work with
 1/2*log(x^2)*log(-x^2 + 1) + 1/2*dilog(-x^2 + 1).
 See also https://sourceforge.net/p/maxima/bugs/3275/::
 
-    sage: integrate(log(1-x^2)/x, x)
+    sage: integrate(log(1-x^2)/x, x)                                                    # needs sage.libs.maxima
     log(-x)*log(x + 1) + log(x)*log(-x + 1) + dilog(x + 1) + dilog(-x + 1)
 
 No problems here::
 
-    sage: integrate(exp(1-x^2),x)
+    sage: # needs sage.libs.maxima
+    sage: integrate(exp(1-x^2), x)
     1/2*sqrt(pi)*erf(x)*e
-    sage: integrate(sin(x^2),x)
+    sage: integrate(sin(x^2), x)
     1/16*sqrt(pi)*((I + 1)*sqrt(2)*erf((1/2*I + 1/2)*sqrt(2)*x) + (I - 1)*sqrt(2)*erf((1/2*I - 1/2)*sqrt(2)*x) - (I - 1)*sqrt(2)*erf(sqrt(-I)*x) + (I + 1)*sqrt(2)*erf((-1)^(1/4)*x))
-
-    sage: integrate((1-x^2)^n,x)  # long time
+    sage: integrate((1-x^2)^n, x)  # long time
     x*hypergeometric((1/2, -n), (3/2,), x^2*exp_polar(2*I*pi))
-    sage: integrate(x^x,x)
+    sage: integrate(x^x, x)
     integrate(x^x, x)
-    sage: integrate(1/(x^3+1),x)
+    sage: integrate(1/(x^3+1), x)
     1/3*sqrt(3)*arctan(1/3*sqrt(3)*(2*x - 1)) - 1/6*log(x^2 - x + 1) + 1/3*log(x + 1)
     sage: integrate(1/(x^3+1), x, 0, 1)
     1/9*sqrt(3)*pi + 1/3*log(2)
@@ -136,16 +136,16 @@ No problems here::
     sage: forget()
     sage: c = var('c')
     sage: assume(c > 0)
-    sage: integrate(exp(-c*x^2), x, -oo, oo)
+    sage: integrate(exp(-c*x^2), x, -oo, oo)                                            # needs sage.libs.maxima
     sqrt(pi)/sqrt(c)
     sage: forget()
 
 Other examples that now (:issue:`27958`) work::
 
-    sage: integrate(log(x)*exp(-x^2), x)  # long time
+    sage: integrate(log(x)*exp(-x^2), x)  # long time                                   # needs sage.libs.maxima
     1/2*sqrt(pi)*erf(x)*log(x) - x*hypergeometric((1/2, 1/2), (3/2, 3/2), -x^2)
 
-    sage: integrate(log(1+sqrt(1+4*x)/2)/x, x, 0, 1)
+    sage: integrate(log(1+sqrt(1+4*x)/2)/x, x, 0, 1)                                    # needs sage.libs.maxima
     Traceback (most recent call last):
     ...
     ValueError: Integral is divergent.
@@ -153,7 +153,7 @@ Other examples that now (:issue:`27958`) work::
 The following is an example of integral that Mathematica
 can do, but Sage currently cannot do::
 
-    sage: integrate(ceil(x^2 + floor(x)), x, 0, 5, algorithm='maxima')
+    sage: integrate(ceil(x^2 + floor(x)), x, 0, 5, algorithm='maxima')                  # needs sage.libs.maxima
     integrate(ceil(x^2) + floor(x), x, 0, 5)
 
 MAPLE: The basic differentiation and integration examples in the
@@ -182,21 +182,22 @@ Maple documentation::
     (x, y, z)
     sage: diff(g(x,y,z), x,z,z)
     diff(g(x, y, z), x, z, z)
-    sage: integrate(sin(x), x)
+    sage: integrate(sin(x), x)                                                          # needs sage.libs.maxima
     -cos(x)
-    sage: integrate(sin(x), x, 0, pi)
+    sage: integrate(sin(x), x, 0, pi)                                                   # needs sage.libs.maxima
     2
 
 ::
 
     sage: var('a b')
     (a, b)
-    sage: integrate(sin(x), x, a, b)
+    sage: integrate(sin(x), x, a, b)                                                    # needs sage.libs.maxima
     cos(a) - cos(b)
 
 ::
 
-    sage: integrate( x/(x^3-1), x)
+    sage: # needs sage.libs.maxima
+    sage: integrate(x/(x^3-1), x)
     1/3*sqrt(3)*arctan(1/3*sqrt(3)*(2*x + 1)) - 1/6*log(x^2 + x + 1) + 1/3*log(x - 1)
     sage: integrate(exp(-x^2), x)
     1/2*sqrt(pi)*erf(x)
