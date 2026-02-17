@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-symbolics
+# sage.doctest: needs sage.libs.maxima
 r"""
 Spheres smoothly embedded in Euclidean Space
 
