@@ -140,7 +140,7 @@ Copying symbolic matrices::
 Conversion to Maxima::
 
     sage: m = matrix(SR, 2, [sqrt(2), 3, pi, e])
-    sage: m._maxima_()
+    sage: m._maxima_()                                                                  # needs sage.libs.maxima
     matrix([sqrt(2),3],[%pi,%e])
 
 TESTS:
