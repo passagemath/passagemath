@@ -2288,10 +2288,16 @@ cdef class Expression(Expression_abc):
         if not self.is_relational():
             raise TypeError("self (=%s) must be a relational expression" % self)
         if self not in _assumptions:
-            m = self._maxima_init_assume_()
-            s = maxima.assume(m)
+            try:
+                from sage.interfaces.maxima_lib import maxima
+            except ImportError:
+                result = None
+            else:
+                m = self._maxima_init_assume_()
+                s = maxima.assume(m)
+                result = str(s._sage_()[0])
             pynac_assume_rel(self._gobj)
-            if str(s._sage_()[0]) in ['meaningless','inconsistent','redundant']:
+            if result in ['meaningless','inconsistent','redundant']:
                 raise ValueError("Assumption is %s" % str(s._sage_()[0]))
             _assumptions[self] = True
 
@@ -2332,12 +2338,16 @@ cdef class Expression(Expression_abc):
             -sin(pi*n)
         """
         from sage.symbolic.assumptions import _assumptions
-        from sage.calculus.calculus import maxima
         if not self.is_relational():
             raise TypeError("self (=%s) must be a relational expression" % self)
         pynac_forget_rel(self._gobj)
-        m = self._maxima_init_assume_()
-        maxima.forget(m)
+        try:
+            from sage.interfaces.maxima_lib import maxima
+        except ImportError:
+            pass
+        else:
+            m = self._maxima_init_assume_()
+            maxima.forget(m)
         try:
             del _assumptions[self]
         except KeyError:
