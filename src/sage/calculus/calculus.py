@@ -318,9 +318,9 @@ The symbolic calculus package uses its own copy of Maxima for
 simplification, etc., which is separate from the default
 system-wide version::
 
-    sage: maxima.eval('[x,y]: [1,2]')
+    sage: maxima.eval('[x,y]: [1,2]')                                                   # needs sage.libs.maxima
     '[1,2]'
-    sage: maxima.eval('expand((x+y)^3)')
+    sage: maxima.eval('expand((x+y)^3)')                                                # needs sage.libs.maxima
     '27'
 
 If the copy of Maxima used by the symbolic calculus package were
@@ -335,9 +335,9 @@ which would be very confusing indeed!
 
 Set x to be 5 in maxima::
 
-    sage: maxima('x: 5')
+    sage: maxima('x: 5')                                                                # needs sage.libs.maxima
     5
-    sage: maxima('x + x + %pi')
+    sage: maxima('x + x + %pi')                                                         # needs sage.libs.maxima
     %pi+10
 
 Simplifications like these are now done using Pynac::
@@ -347,7 +347,7 @@ Simplifications like these are now done using Pynac::
 
 But this still uses Maxima::
 
-    sage: (x + x + pi).simplify()
+    sage: (x + x + pi).simplify()                                                       # needs sage.libs.maxima
     pi + 2*x
 
 Note that ``x`` is still ``x``, since the
@@ -355,7 +355,7 @@ maxima used by the calculus package is different than the one in
 the interactive interpreter.
 Clear the maxima variables to avoid interference with other tests::
 
-    sage: maxima('kill(x,y)')
+    sage: maxima('kill(x,y)')                                                           # needs sage.libs.maxima
     done
 
 Check to see that the problem with the variables method mentioned
@@ -367,29 +367,29 @@ in :issue:`3779` is actually fixed::
 
 Doubly ensure that :issue:`7479` is working::
 
-    sage: f(x)=x
-    sage: integrate(f,x,0,1)
+    sage: f(x) = x
+    sage: integrate(f, x, 0, 1)                                                         # needs sage.libs.maxima
     1/2
 
 Check that the problem with Taylor expansions of the gamma function
 (:issue:`9217`) is fixed::
 
-    sage: taylor(gamma(1/3+x),x,0,3)
+    sage: taylor(gamma(1/3 + x), x, 0, 3)                                               # needs sage.libs.maxima
     -1/432*((72*euler_gamma^3 + 36*euler_gamma^2*(sqrt(3)*pi + 9*log(3)) + ...
-    sage: [f[0].n() for f in _.coefficients()]  # numerical coefficients to make comparison easier; Maple 12 gives same answer
+    sage: [f[0].n() for f in _.coefficients()]  # numerical coefficients to make comparison easier; Maple 12 gives same answer  # needs sage.libs.maxima
     [2.6789385347..., -8.3905259853..., 26.662447494..., -80.683148377...]
 
 Ensure that :issue:`8582` is fixed::
 
     sage: k = var("k")
-    sage: sum(1/(1+k^2), k, -oo, oo)
+    sage: sum(1/(1+k^2), k, -oo, oo)                                                    # needs sage.libs.maxima
     -1/2*I*psi(I + 1) + 1/2*I*psi(-I + 1) - 1/2*I*psi(I) + 1/2*I*psi(-I)
 
 Ensure that :issue:`8624` is fixed::
 
-    sage: integrate(abs(cos(x)) * sin(x), x, pi/2, pi)
+    sage: integrate(abs(cos(x)) * sin(x), x, pi/2, pi)                                  # needs sage.libs.maxima
     1/2
-    sage: integrate(sqrt(cos(x)^2 + sin(x)^2), x, 0, 2*pi)
+    sage: integrate(sqrt(cos(x)^2 + sin(x)^2), x, 0, 2*pi)                              # needs sage.libs.maxima
     2*pi
 
 Ensure that :issue:`25626` is fixed. As the form of the answer is dependent of
@@ -403,6 +403,7 @@ the giac version, we simplify it (see :issue:`34037`)::
 Check if maxima has redundant variables defined after initialization,
 see :issue:`9538`::
 
+    sage: # needs sage.libs.maxima
     sage: maxima = sage.interfaces.maxima_lib.maxima
     sage: maxima('f1')
     f1
@@ -411,6 +412,7 @@ see :issue:`9538`::
 
 To check that :issue:`14821` is fixed::
 
+    sage: # needs sage.libs.maxima
     sage: H = exp(-1.0 * x)
     sage: H.integral(x, 0, 1)
     0.6321205588285577
@@ -422,7 +424,7 @@ To check that :issue:`14821` is fixed::
 To check that :issue:`27092` is fixed::
 
     sage: n = var('n')
-    sage: sum(binomial(1, n), n, 0, oo)
+    sage: sum(binomial(1, n), n, 0, oo)                                                 # needs sage.libs.maxima
     2
 """
 

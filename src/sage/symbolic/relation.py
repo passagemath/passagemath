@@ -234,6 +234,7 @@ Miscellaneous
 
 Conversion to Maxima::
 
+    sage: # needs sage.libs.maxima
     sage: from sage.interfaces.maxima_lib import maxima
     sage: x = var('x')
     sage: eq = (x^(3/5) >= pi^2 + e^i)
@@ -307,13 +308,13 @@ More Examples
 
     sage: x,y,a = var('x,y,a')
     sage: f = x^2 + y^2 == 1
-    sage: f.solve(x)
+    sage: f.solve(x)                                                                    # needs sage.libs.maxima
     [x == -sqrt(-y^2 + 1), x == sqrt(-y^2 + 1)]
 
 ::
 
     sage: f = x^5 + a
-    sage: solve(f==0,x)
+    sage: solve(f == 0, x)                                                              # needs sage.libs.maxima
     [x == 1/4*(-a)^(1/5)*(sqrt(5) + I*sqrt(2*sqrt(5) + 10) - 1), x == -1/4*(-a)^(1/5)*(sqrt(5) - I*sqrt(-2*sqrt(5) + 10) + 1), x == -1/4*(-a)^(1/5)*(sqrt(5) + I*sqrt(-2*sqrt(5) + 10) + 1), x == 1/4*(-a)^(1/5)*(sqrt(5) - I*sqrt(2*sqrt(5) + 10) - 1), x == (-a)^(1/5)]
 
 You can also do arithmetic with inequalities, as illustrated
@@ -614,7 +615,7 @@ def string_to_list_of_solutions(s):
     string `s` below::
 
         sage: s = '[x=-(sqrt(a^2-4*b)+a)/2,x=(sqrt(a^2-4*b)-a)/2]'
-        sage: sage.symbolic.relation.string_to_list_of_solutions(s)
+        sage: sage.symbolic.relation.string_to_list_of_solutions(s)                     # needs sage.libs.maxima
          [x == -1/2*a - 1/2*sqrt(a^2 - 4*b), x == -1/2*a + 1/2*sqrt(a^2 - 4*b)]
     """
     from sage.calculus.calculus import symbolic_expression_from_maxima_string
@@ -916,7 +917,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
         [[s == 1, j == 0], [s == g/b, j == (b - g)*m/(b*g)]]
 
         sage: z = var('z')
-        sage: solve((x-z)^2==2, x)
+        sage: solve((x-z)^2 == 2, x)                                                    # needs sage.libs.maxima
         [x == z - sqrt(2), x == z + sqrt(2)]
 
     Inequalities can be also solved::

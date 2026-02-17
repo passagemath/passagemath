@@ -1032,15 +1032,15 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Some tests for :issue:`17468`::
 
-        sage: integral(log(abs(2*sin(x))), x, 0, pi/3)
+        sage: integral(log(abs(2*sin(x))), x, 0, pi/3)                                  # needs sage.libs.maxima
         1/36*I*pi^2 + I*dilog(1/2*I*sqrt(3) + 1/2) + I*dilog(-1/2*I*sqrt(3) - 1/2)
-        sage: integral(log(abs(sin(x))), x, 0, pi/2)
+        sage: integral(log(abs(sin(x))), x, 0, pi/2)                                    # needs sage.libs.maxima
         -1/2*pi*log(2)
 
     Check that :issue:`25823` is fixed::
 
         sage: f = log(sin(x))*sin(x)^2
-        sage: g = integrate(f, x) ; g
+        sage: g = integrate(f, x); g                                                    # needs sage.libs.maxima
         1/4*I*x^2
         - 1/2*I*x*arctan2(sin(x), cos(x) + 1)
         + 1/2*I*x*arctan2(sin(x), -cos(x) + 1)
@@ -1053,12 +1053,12 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Indeed::
 
-        sage: (g.derivative() - f).full_simplify().full_simplify()
+        sage: (g.derivative() - f).full_simplify().full_simplify()                      # needs sage.libs.maxima
         0
 
     Test for :issue:`24117`::
 
-        sage: integrate(sqrt(1-4*sin(x)^2),x, algorithm='maxima')
+        sage: integrate(sqrt(1-4*sin(x)^2), x, algorithm='maxima')                      # needs sage.libs.maxima
         integrate(sqrt(-4*sin(x)^2 + 1), x)
 
     Check that :issue:`30353` is fixed::
@@ -1081,13 +1081,13 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     of the second kind, :issue:`26563`::
 
         sage: x,m = SR.var('x,m', domain='real')    # long time
-        sage: integrate(elliptic_e(x,m).diff(x), x) # long time
+        sage: integrate(elliptic_e(x,m).diff(x), x)  # long time                        # needs sage.libs.maxima
         elliptic_e(x, m)
 
     Check that :issue:`20467` is fixed::
 
         sage: k = var('k')
-        sage: integral(sin(k*x)/x*erf(x^2), x, 0, oo, algorithm='maxima')
+        sage: integral(sin(k*x)/x*erf(x^2), x, 0, oo, algorithm='maxima')               # needs sage.libs.maxima
         integrate(erf(x^2)*sin(k*x)/x, x, 0, +Infinity)
     """
     expression, v, a, b = _normalize_integral_input(expression, v, a, b)
