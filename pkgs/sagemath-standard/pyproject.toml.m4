@@ -12,6 +12,7 @@ description = "passagemath: Standard Python Library"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_standard_no_symbolics
     SPKG_INSTALL_REQUIRES_sagemath_symbolics
+    SPKG_INSTALL_REQUIRES_sagemath_maxima
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'

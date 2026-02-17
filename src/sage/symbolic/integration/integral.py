@@ -46,8 +46,9 @@ class IndefiniteIntegral(BuiltinFunction):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.symbolic.integration.integral import indefinite_integral
-            sage: indefinite_integral(log(x), x) #indirect doctest
+            sage: indefinite_integral(log(x), x)  # indirect doctest
             x*log(x) - x
             sage: indefinite_integral(x^2, x)
             1/3*x^3
@@ -63,7 +64,9 @@ class IndefiniteIntegral(BuiltinFunction):
             sage: # needs sage.libs.giac
             sage: Ex = (1-2*x^(1/3))^(3/4)/x
             sage: integrate(Ex, x, algorithm='giac')  # long time
-            4*(-2*x^(1/3) + 1)^(3/4) + 6*arctan((-2*x^(1/3) + 1)^(1/4)) - 3*log(abs((-2*x^(1/3) + 1)^(1/4) + 1)) + 3*log(abs((-2*x^(1/3) + 1)^(1/4) - 1))
+            4*(-2*x^(1/3) + 1)^(3/4) + 6*arctan((-2*x^(1/3) + 1)^(1/4))
+            - 3*log(abs((-2*x^(1/3) + 1)^(1/4) + 1))
+            + 3*log(abs((-2*x^(1/3) + 1)^(1/4) - 1))
 
         Check for :issue:`29833`::
 
@@ -76,9 +79,9 @@ class IndefiniteIntegral(BuiltinFunction):
         After :issue:`25119` we can integrate the following function,
         although giac and sympy give different-looking answers::
 
-            sage: result = integrate(sqrt(x^2)/x,x)
+            sage: result = integrate(sqrt(x^2)/x,x)                                     # needs sage.libs.maxima
             ...
-            sage: result in [x*sgn(x), sqrt(x^2)]
+            sage: result in [x*sgn(x), sqrt(x^2)]                                       # needs sage.libs.maxima
             True
         """
         # The automatic evaluation routine will try these integrators
@@ -100,8 +103,9 @@ class IndefiniteIntegral(BuiltinFunction):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.symbolic.integration.integral import indefinite_integral
-            sage: indefinite_integral(exp(x), x) # indirect doctest
+            sage: indefinite_integral(exp(x), x)  # indirect doctest
             e^x
             sage: indefinite_integral(exp(x), x^2)
             2*(x - 1)*e^x
@@ -110,7 +114,7 @@ class IndefiniteIntegral(BuiltinFunction):
 
         Check that :issue:`28842` is fixed::
 
-            sage: integrate(1/(x^4 + x^3 + 1), x)
+            sage: integrate(1/(x^4 + x^3 + 1), x)                                       # needs sage.libs.maxima
             integrate(1/(x^4 + x^3 + 1), x)
 
         Check that :issue:`32002` is fixed. This needs giac since only
@@ -155,6 +159,7 @@ class IndefiniteIntegral(BuiltinFunction):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.symbolic.integration.integral import indefinite_integral
             sage: f = function('f'); a,b=var('a,b')
             sage: h = indefinite_integral(f(x), x)
@@ -179,7 +184,7 @@ class IndefiniteIntegral(BuiltinFunction):
             sage: f = function('f')
             sage: print_latex(f(x),x)
             '\\int f\\left(x\\right)\\,{d x}'
-            sage: latex(integrate(tan(x)/x, x))
+            sage: latex(integrate(tan(x)/x, x))                                         # needs sage.libs.maxima
             \int \frac{\tan\left(x\right)}{x}\,{d x}
         """
         from sage.misc.latex import latex
@@ -202,7 +207,7 @@ class DefiniteIntegral(BuiltinFunction):
         EXAMPLES::
 
             sage: from sage.symbolic.integration.integral import definite_integral
-            sage: definite_integral(sin(x),x,0,pi)
+            sage: definite_integral(sin(x), x, 0, pi)                                   # needs sage.libs.maxima
             2
 
         TESTS:
@@ -236,14 +241,15 @@ class DefiniteIntegral(BuiltinFunction):
         EXAMPLES::
 
             sage: from sage.symbolic.integration.integral import definite_integral
-            sage: definite_integral(exp(x),x,0,1) # indirect doctest
+            sage: definite_integral(exp(x), x, 0, 1) # indirect doctest                 # needs sage.libs.maxima
             e - 1
 
         TESTS:
 
         Check that :issue:`32002` is fixed::
 
-            sage: result = integral(2*min_symbolic(x,2*x),x,-1,1)
+            sage: # needs sage.libs.maxima
+            sage: result = integral(2*min_symbolic(x,2*x), x, -1, 1)
             ...
             sage: result
             -1
@@ -296,7 +302,7 @@ class DefiniteIntegral(BuiltinFunction):
 
         Check if :issue:`3863` is fixed::
 
-            sage: integrate(x^2.7 * e^(-2.4*x), x, 0, 3).n()
+            sage: integrate(x^2.7 * e^(-2.4*x), x, 0, 3).n()                            # needs sage.libs.maxima
             0.154572952320790
         """
         from sage.calculus.integration import numerical_integral
@@ -310,8 +316,9 @@ class DefiniteIntegral(BuiltinFunction):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.symbolic.integration.integral import definite_integral
-            sage: f = function('f'); a,b=var('a,b')
+            sage: f = function('f'); a, b = var('a,b')
             sage: h = definite_integral(f(x), x,a,b)
             ...
             sage: h.diff(x) # indirect doctest
@@ -327,8 +334,8 @@ class DefiniteIntegral(BuiltinFunction):
 
             sage: t = var("t")
             sage: f = function("f")
-            sage: F(x) = integrate(f(t),t,0,x)
-            sage: F(x).diff(x)
+            sage: F(x) = integrate(f(t),t,0,x)                                          # needs sage.libs.maxima
+            sage: F(x).diff(x)                                                          # needs sage.libs.maxima
             f(x)
         """
         if not x.has(diff_param):
@@ -355,7 +362,7 @@ class DefiniteIntegral(BuiltinFunction):
             sage: f = function('f')
             sage: print_latex(f(x),x,0,1)
             '\\int_{0}^{1} f\\left(x\\right)\\,{d x}'
-            sage: latex(integrate(tan(x)/x, x, 0, 1))
+            sage: latex(integrate(tan(x)/x, x, 0, 1))                                   # needs sage.libs.maxima
             \int_{0}^{1} \frac{\tan\left(x\right)}{x}\,{d x}
         """
         from sage.misc.latex import latex
@@ -495,31 +502,32 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
         sage: x = var('x')
         sage: h = sin(x)/(cos(x))^2
-        sage: h.integral(x)
+        sage: h.integral(x)                                                             # needs sage.libs.maxima
         1/cos(x)
 
     ::
 
         sage: f = x^2/(x+1)^3
-        sage: f.integral(x)
+        sage: f.integral(x)                                                             # needs sage.libs.maxima
         1/2*(4*x + 3)/(x^2 + 2*x + 1) + log(x + 1)
 
     ::
 
         sage: f = x*cos(x^2)
-        sage: f.integral(x, 0, sqrt(pi))
+        sage: f.integral(x, 0, sqrt(pi))                                                # needs sage.libs.maxima
         0
-        sage: f.integral(x, a=-pi, b=pi)
+        sage: f.integral(x, a=-pi, b=pi)                                                # needs sage.libs.maxima
         0
 
     ::
 
         sage: f(x) = sin(x)
-        sage: f.integral(x, 0, pi/2)
+        sage: f.integral(x, 0, pi/2)                                                    # needs sage.libs.maxima
         1
 
     The variable is required, but the endpoints are optional::
 
+        sage: # needs sage.libs.maxima
         sage: y = var('y')
         sage: integral(sin(x), x)
         -cos(x)
@@ -537,18 +545,19 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     Using the ``hold`` parameter it is possible to prevent automatic
     evaluation, which can then be evaluated via :meth:`simplify`::
 
-        sage: integral(x^2, x, 0, 3)
+        sage: integral(x^2, x, 0, 3)                                                    # needs sage.libs.maxima
         9
-        sage: a = integral(x^2, x, 0, 3, hold=True) ; a
+        sage: a = integral(x^2, x, 0, 3, hold=True); a
         integrate(x^2, x, 0, 3)
-        sage: a.simplify()
+        sage: a.simplify()                                                              # needs sage.libs.maxima
         9
 
     Constraints are sometimes needed::
 
+        sage: # needs sage.libs.maxima
         sage: var('x, n')
         (x, n)
-        sage: integral(x^n,x)
+        sage: integral(x^n, x)
         Traceback (most recent call last):
         ...
         ValueError: Computation failed since Maxima requested additional
@@ -557,25 +566,26 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
         for more details)
         Is n equal to -1?
         sage: assume(n > 0)
-        sage: integral(x^n,x)
+        sage: integral(x^n, x)
         x^(n + 1)/(n + 1)
         sage: forget()
 
     Usually the constraints are of sign, but others are possible::
 
-        sage: assume(n==-1)
-        sage: integral(x^n,x)
+        sage: assume(n == -1)                                                           # needs sage.libs.maxima
+        sage: integral(x^n, x)                                                          # needs sage.libs.maxima
         log(x)
 
     Note that an exception is raised when a definite integral is
     divergent::
 
+        sage: # needs sage.libs.maxima
         sage: forget() # always remember to forget assumptions you no longer need
-        sage: integrate(1/x^3,(x,0,1))
+        sage: integrate(1/x^3, (x,0,1))
         Traceback (most recent call last):
         ...
         ValueError: Integral is divergent.
-        sage: integrate(1/x^3,x,-1,3)
+        sage: integrate(1/x^3, x, -1, 3)
         Traceback (most recent call last):
         ...
         ValueError: Integral is divergent.
@@ -583,11 +593,12 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     But Sage can calculate the convergent improper integral of
     this function::
 
-        sage: integrate(1/x^3,x,1,infinity)
+        sage: integrate(1/x^3, x, 1, infinity)                                          # needs sage.libs.maxima
         1/2
 
     The examples in the Maxima documentation::
 
+        sage: # needs sage.libs.maxima
         sage: var('x, y, z, b')
         (x, y, z, b)
         sage: integral(sin(x)^3, x)
@@ -614,7 +625,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
                     z        Pi                2
                  x y  + Sqrt[--] FresnelS[Sqrt[--] x]
                              2                 Pi
-        sage: print(f.integral(x))
+        sage: print(f.integral(x))                                                      # needs sage.libs.maxima
         x*y^z + 1/16*sqrt(pi)*((I + 1)*sqrt(2)*erf((1/2*I + 1/2)*sqrt(2)*x)
                                 + (I - 1)*sqrt(2)*erf((1/2*I - 1/2)*sqrt(2)*x)
                                 - (I - 1)*sqrt(2)*erf(sqrt(-I)*x)
@@ -630,12 +641,12 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     We can also use Sympy::
 
-        sage: integrate(x*sin(log(x)), x)
+        sage: integrate(x*sin(log(x)), x)                                               # needs sage.libs.maxima
         -1/5*x^2*(cos(log(x)) - 2*sin(log(x)))
         sage: integrate(x*sin(log(x)), x, algorithm='sympy')                            # needs sympy
         -1/5*x^2*cos(log(x)) + 2/5*x^2*sin(log(x))
         sage: _ = var('y, z')
-        sage: (x^y - z).integrate(y)
+        sage: (x^y - z).integrate(y)                                                    # needs sage.libs.maxima
         -y*z + x^y/log(x)
         sage: (x^y - z).integrate(y, algorithm='sympy')                                 # needs sympy
         -y*z + cases(((log(x) != 0, x^y/log(x)), (1, y)))
@@ -651,21 +662,21 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     that the answer comes back as an expression that contains an
     integral itself. ::
 
-        sage: A = integral(1/ ((x-4) * (x^4+x+1)), x); A
+        sage: A = integral(1 / ((x-4) * (x^4+x+1)), x); A                               # needs sage.libs.maxima
         integrate(1/((x^4 + x + 1)*(x - 4)), x)
 
     Sometimes, in this situation, using the algorithm "maxima"
     gives instead a partially integrated answer::
 
-        sage: integral(1/(x**7-1),x,algorithm='maxima')
+        sage: integral(1/(x**7-1), x, algorithm='maxima')                               # needs sage.libs.maxima
         -1/7*integrate((x^5 + 2*x^4 + 3*x^3 + 4*x^2 + 5*x + 6)/(x^6 + x^5 + x^4 + x^3 + x^2 + x + 1), x) + 1/7*log(x - 1)
 
     We now show that floats are not converted to rationals
-    automatically since we by default have keepfloat: true in maxima.
+    automatically since we by default have ``keepfloat: true`` in maxima.
 
     ::
 
-        sage: integral(e^(-x^2),(x, 0, 0.1))
+        sage: integral(e^(-x^2), (x, 0, 0.1))                                           # needs sage.libs.maxima
         0.05623145800914245*sqrt(pi)
 
     An example of an integral that fricas can integrate::
@@ -677,7 +688,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     where the default integrator obtains another answer::
 
-        sage: integrate(f(x), x)  # long time
+        sage: integrate(f(x), x)  # long time                                           # needs sage.libs.maxima
         1/8*sqrt(x)*gamma(1/4)*gamma(-1/4)^2*hypergeometric((-1/4, -1/4, 1/4),
                                                             (1/2, 3/4),
                                                             -1/x^2)/(pi*gamma(3/4))
@@ -685,12 +696,12 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     The following definite integral is not found by maxima::
 
         sage: f(x) = (x^4 - 3*x^2 + 6) / (x^6 - 5*x^4 + 5*x^2 + 4)
-        sage: integrate(f(x), x, 1, 2, algorithm='maxima')  # long time
+        sage: integrate(f(x), x, 1, 2, algorithm='maxima')  # long time                 # needs sage.libs.maxima
         integrate((x^4 - 3*x^2 + 6)/(x^6 - 5*x^4 + 5*x^2 + 4), x, 1, 2)
 
     but is nevertheless computed::
 
-        sage: integrate(f(x), x, 1, 2)  # long time
+        sage: integrate(f(x), x, 1, 2)  # long time                                     # needs sage.libs.maxima
         -1/2*pi + arctan(8) + arctan(5) + arctan(2) + arctan(1/2)
 
     Both fricas and sympy give the correct result::
@@ -722,7 +733,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     Here is an example where we have to use assume::
 
         sage: a,b = var('a,b')
-        sage: integrate(1/(x^3 *(a+b*x)^(1/3)), x)
+        sage: integrate(1/(x^3 *(a+b*x)^(1/3)), x)                                      # needs sage.libs.maxima
         Traceback (most recent call last):
         ...
         ValueError: Computation failed since Maxima requested additional
@@ -734,7 +745,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     So we just assume that `a>0` and the integral works::
 
         sage: assume(a>0)
-        sage: integrate(1/(x^3 *(a+b*x)^(1/3)), x)
+        sage: integrate(1/(x^3 * (a+b*x)^(1/3)), x)                                     # needs sage.libs.maxima
         2/9*sqrt(3)*b^2*arctan(1/3*sqrt(3)*(2*(b*x + a)^(1/3) + a^(1/3))/a^(1/3))/a^(7/3)
          - 1/9*b^2*log((b*x + a)^(2/3) + (b*x + a)^(1/3)*a^(1/3) + a^(2/3))/a^(7/3)
          + 2/9*b^2*log((b*x + a)^(1/3) - a^(1/3))/a^(7/3) + 1/6*(4*(b*x + a)^(5/3)*b^2
@@ -745,7 +756,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     The following integral was broken prior to Maxima 5.15.0 -
     see :issue:`3013`::
 
-        sage: integrate(sin(x)*cos(10*x)*log(x), x)
+        sage: integrate(sin(x)*cos(10*x)*log(x), x)                                     # needs sage.libs.maxima
         -1/198*(9*cos(11*x) - 11*cos(9*x))*log(x) + 1/44*Ei(11*I*x) - 1/36*Ei(9*I*x) - 1/36*Ei(-9*I*x) + 1/44*Ei(-11*I*x)
 
     It is no longer possible to use certain functions without an
@@ -757,23 +768,26 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
         ...
         TypeError: unable to convert sin to a symbolic expression
 
-        sage: integrate(sin(x), x)
+        sage: integrate(sin(x), x)                                                      # needs sage.libs.maxima
         -cos(x)
-        sage: integrate(sin(x), x, 0, 1)
+        sage: integrate(sin(x), x, 0, 1)                                                # needs sage.libs.maxima
         -cos(1) + 1
 
     Check if :issue:`780` is fixed::
 
+        sage: # needs sage.libs.maxima
         sage: _ = var('x,y')
-        sage: f = log(x^2+y^2)
-        sage: res = integral(f,x,1414/10^7, 1); res
+        sage: f = log(x^2 + y^2)
+        sage: res = integral(f, x, 1414/10^7, 1); res
         Traceback (most recent call last):
         ...
-        ValueError: Computation failed since Maxima requested additional constraints; using the 'assume' command before evaluation *may* help ...
+        ValueError: Computation failed since Maxima requested additional constraints;
+        using the 'assume' command before evaluation *may* help ...
         Is ... positive, negative or zero?
-        sage: assume(y>1)
-        sage: res = integral(f,x,1414/10^7, 1); res
-        -2*y*arctan(707/5000000/y) + 2*y*arctan(1/y) + log(y^2 + 1) - 707/5000000*log(y^2 + 499849/25000000000000) - 4999293/2500000
+        sage: assume(y > 1)
+        sage: res = integral(f, x, 1414/10^7, 1); res
+        -2*y*arctan(707/5000000/y) + 2*y*arctan(1/y) + log(y^2 + 1)
+        - 707/5000000*log(y^2 + 499849/25000000000000) - 4999293/2500000
         sage: nres = numerical_integral(f.subs(y=2), 0.0001414, 1.); nres
         (1.4638323264144..., 1.6251803529759...e-14)
         sage: res.subs(y=2).n()
@@ -785,21 +799,22 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Check if :issue:`6816` is fixed::
 
+        sage: # needs sage.libs.maxima
         sage: var('t,theta')
         (t, theta)
-        sage: integrate(t*cos(-theta*t),t,0,pi)
+        sage: integrate(t*cos(-theta*t), t, 0, pi)
         (pi*theta*sin(pi*theta) + cos(pi*theta))/theta^2 - 1/theta^2
-        sage: integrate(t*cos(-theta*t),(t,0,pi))
+        sage: integrate(t*cos(-theta*t), (t,0,pi))
         (pi*theta*sin(pi*theta) + cos(pi*theta))/theta^2 - 1/theta^2
-        sage: integrate(t*cos(-theta*t),t)
+        sage: integrate(t*cos(-theta*t), t)
         (t*theta*sin(t*theta) + cos(t*theta))/theta^2
-        sage: integrate(x^2,(x)) # this worked before
+        sage: integrate(x^2, (x)) # this worked before
         1/3*x^3
-        sage: integrate(x^2,(x,)) # this didn't
+        sage: integrate(x^2, (x,)) # this didn't
         1/3*x^3
-        sage: integrate(x^2,(x,1,2))
+        sage: integrate(x^2, (x,1,2))
         7/3
-        sage: integrate(x^2,(x,1,2,3))
+        sage: integrate(x^2, (x,1,2,3))
         Traceback (most recent call last):
         ...
         TypeError: invalid input (x, 1, 2, 3) - please use variable, with or without two endpoints
@@ -807,13 +822,14 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     Note that this used to be the test, but it is actually divergent
     (Maxima currently asks for assumptions on theta)::
 
-        sage: integrate(t*cos(-theta*t),(t,-oo,oo))
+        sage: integrate(t*cos(-theta*t), (t,-oo,oo))                                    # needs sage.libs.maxima
         Traceback (most recent call last):
         ...
         ValueError: Computation failed since Maxima requested additional constraints;...
 
     Check if :issue:`6189` is fixed::
 
+        sage: # needs sage.libs.maxima
         sage: n = N; n
         <function numerical_approx at ...>
         sage: F(x) = 1/sqrt(2*pi*1^2)*exp(-1/(2*1^2)*(x-0)^2)
@@ -827,11 +843,12 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     This was broken before Maxima 5.20::
 
-        sage: exp(-x*i).integral(x,0,1)
+        sage: exp(-x*i).integral(x,0,1)                                                 # needs sage.libs.maxima
         I*e^(-I) - I
 
     Test that :issue:`8729` is fixed::
 
+        sage: # needs sage.libs.maxima
         sage: t = var('t')
         sage: a = sqrt((sin(t))^2 + (cos(t))^2)
         sage: integrate(a, t, 0, 2*pi)
@@ -843,13 +860,14 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     integrate certain convergent integrals.  Here we test
     that this does not raise an error message (see :issue:`11987`)::
 
-        sage: integrate(sin(x)*sin(x/3)/x^2, x, 0, oo)
+        sage: integrate(sin(x)*sin(x/3)/x^2, x, 0, oo)                                  # needs sage.libs.maxima
         1/6*pi
 
     Maxima returned a negative value for this integral prior to
     maxima-5.24 (:issue:`10923`). Ideally we would get an answer in terms
     of the gamma function; however, we get something equivalent::
 
+        sage: # needs sage.libs.maxima
         sage: actual_result = integral(e^(-1/x^2), x, 0, 1)
         sage: actual_result.canonicalize_radical()
         (sqrt(pi)*(erf(1)*e - e) + 1)*e^(-1)
@@ -861,6 +879,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     We will get a correct answer here, which is better than
     the previous (wrong) answer of zero. See :issue:`10914`::
 
+        sage: # needs sage.libs.maxima
         sage: f = abs(sin(x))
         sage: result = integrate(f, x, 0, 2*pi)
         ...
@@ -870,9 +889,10 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     Another incorrect integral fixed upstream in Maxima, from
     :issue:`11233`::
 
+        sage: # needs sage.libs.maxima
         sage: a,t = var('a,t')
-        sage: assume(a>0)
-        sage: assume(x>0)
+        sage: assume(a > 0)
+        sage: assume(x > 0)
         sage: f = log(1 + a/(x * t)^2)
         sage: F = integrate(f, t, 1, Infinity)
         sage: F(x=1, a=7).numerical_approx() # abs tol 1e-10
@@ -886,6 +906,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Check that :issue:`11737` is fixed::
 
+        sage: # needs sage.libs.maxima
         sage: N(integrate(sin(x^2)/(x^2), x, 1, infinity), prec=54)
         0.285736646322853
         sage: N(integrate(sin(x^2)/(x^2), x, 1, infinity))  # known bug (nonzero imag part)
@@ -893,17 +914,19 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Check that :issue:`14209` is fixed::
 
-        sage: integral(e^(-abs(x))/cosh(x),x,-infinity,infinity)
+        sage: # needs sage.libs.maxima
+        sage: integral(e^(-abs(x))/cosh(x), x, -infinity, infinity)
         2*log(2)
-        sage: integral(e^(-abs(x))/cosh(x),x,-infinity,infinity)
+        sage: integral(e^(-abs(x))/cosh(x), x, -infinity, infinity)
         2*log(2)
 
     Check that :issue:`12628` is fixed::
 
+        sage: # needs sage.libs.maxima
         sage: var('z,n')
         (z, n)
         sage: f(z, n) = sin(n*z) / (n*z)
-        sage: integrate(f(z,1)*f(z,3)*f(z,5)*f(z,7),z,0,oo)
+        sage: integrate(f(z,1)*f(z,3)*f(z,5)*f(z,7), z, 0, oo)
         22/315*pi
         sage: for k in srange(1, 16, 2):
         ....:     print(integrate(prod(f(z, ell)
@@ -919,7 +942,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Check that :issue:`12628` is fixed::
 
-        sage: integrate(1/(sqrt(x)*((1+sqrt(x))^2)),x,1,9)
+        sage: integrate(1/(sqrt(x)*((1+sqrt(x))^2)), x, 1, 9)                           # needs sage.libs.maxima
         1/2
 
     Check that :issue:`8728` is fixed::
@@ -929,11 +952,12 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
         sage: assume(1-c^2 > 0)
         sage: assume(abs(c) - sqrt(1-c^2) - 1 > 0)
         sage: assume(abs(sqrt(1-c^2)-1) - abs(c) > 0)
-        sage: integrate(cos(w+T) / (1+c*cos(T))^2, T, 0, 2*pi)
+        sage: integrate(cos(w+T) / (1+c*cos(T))^2, T, 0, 2*pi)                          # needs sage.libs.maxima
         2*pi*sqrt(-c^2 + 1)*c*cos(w)/(c^4 - 2*c^2 + 1)
 
     Check that :issue:`13733` is fixed (but the bug reappeared, see :issue:`30063`)::
 
+        sage: # needs sage.libs.maxima
         sage: a = integral(log(cot(x) - 1), x, 0, pi/4); a  # long time (about 6 s) # known bug
         -1/4*pi*log(2) - 1/2*I*dilog(I + 1) + 1/2*I*dilog(-I + 1) + 1/2*I*dilog(1/2*I + 1/2) - 1/2*I*dilog(-1/2*I + 1/2)
         sage: abs(N(a - pi*log(2)/8)) < 1e-15  # long time # known bug
@@ -941,6 +965,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Check that :issue:`17968` is fixed::
 
+        sage: # needs sage.libs.maxima
         sage: a = N(integrate(exp(x^3), (x, 1, 2)), prec=54)
         sage: a.real_part()    # abs tol 1e-13
         275.510983763312
@@ -950,9 +975,10 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     This used to be solved by the ``abs_integrate`` Maxima package
     but can be solved now without it::
 
+        sage: # needs sage.libs.maxima
         sage: integrate(abs(x), x)
         1/2*x*abs(x)
-        sage: integral(abs(cos(x))*sin(x),(x,pi/2,pi))
+        sage: integral(abs(cos(x))*sin(x), (x, pi/2, pi))
         1/2
         sage: f = (x^2)*exp(x) / (1+exp(x))^2
         sage: integrate(f, (x, -infinity, infinity))
@@ -960,21 +986,25 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Some integrals are now working (:issue:`27958`, using giac or sympy)::
 
+        sage: # needs sage.libs.maxima
         sage: result = integrate(abs(x^2 - 1), x, -2, 2)
         ...
         sage: result
         4
 
+        sage: # needs sage.libs.maxima
         sage: result = integrate(sgn(x) - sgn(1-x), x)
         ...
         sage: result
         abs(x - 1) + abs(x)
 
+        sage: # needs sage.libs.maxima
         sage: result = integrate(1 / (1 + abs(x-5)), x, -5, 6)
         ...
         sage: result
         log(11) + log(2)
 
+        sage: # needs sage.libs.maxima
         sage: result = integrate(abs(x^2 - 1), x, -2, 2)
         ...
         sage: result
@@ -1002,15 +1032,15 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Some tests for :issue:`17468`::
 
-        sage: integral(log(abs(2*sin(x))), x, 0, pi/3)
+        sage: integral(log(abs(2*sin(x))), x, 0, pi/3)                                  # needs sage.libs.maxima
         1/36*I*pi^2 + I*dilog(1/2*I*sqrt(3) + 1/2) + I*dilog(-1/2*I*sqrt(3) - 1/2)
-        sage: integral(log(abs(sin(x))), x, 0, pi/2)
+        sage: integral(log(abs(sin(x))), x, 0, pi/2)                                    # needs sage.libs.maxima
         -1/2*pi*log(2)
 
     Check that :issue:`25823` is fixed::
 
         sage: f = log(sin(x))*sin(x)^2
-        sage: g = integrate(f, x) ; g
+        sage: g = integrate(f, x); g                                                    # needs sage.libs.maxima
         1/4*I*x^2
         - 1/2*I*x*arctan2(sin(x), cos(x) + 1)
         + 1/2*I*x*arctan2(sin(x), -cos(x) + 1)
@@ -1023,12 +1053,12 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
 
     Indeed::
 
-        sage: (g.derivative() - f).full_simplify().full_simplify()
+        sage: (g.derivative() - f).full_simplify().full_simplify()                      # needs sage.libs.maxima
         0
 
     Test for :issue:`24117`::
 
-        sage: integrate(sqrt(1-4*sin(x)^2),x, algorithm='maxima')
+        sage: integrate(sqrt(1-4*sin(x)^2), x, algorithm='maxima')                      # needs sage.libs.maxima
         integrate(sqrt(-4*sin(x)^2 + 1), x)
 
     Check that :issue:`30353` is fixed::
@@ -1036,7 +1066,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
         sage: a = SR.var('a')
         sage: assume(a > 0)
         sage: assume(a < 1)
-        sage: integrate(x*log(1/(a*x+(1-x)^2)), x, 0, 1, algorithm='maxima')
+        sage: integrate(x*log(1/(a*x+(1-x)^2)), x, 0, 1, algorithm='maxima')            # needs sage.libs.maxima
         1/4*a^2*log(a) + 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)*(a - 2)/(a^2 - 4*a)) - 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)/(a - 4)) - a*log(a) - sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)*(a - 2)/(a^2 - 4*a)) + sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)/(a - 4)) - 1/2*a + 3/2
 
     Check that :issue:`25905` is fixed::
@@ -1051,13 +1081,13 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
     of the second kind, :issue:`26563`::
 
         sage: x,m = SR.var('x,m', domain='real')    # long time
-        sage: integrate(elliptic_e(x,m).diff(x), x) # long time
+        sage: integrate(elliptic_e(x,m).diff(x), x)  # long time                        # needs sage.libs.maxima
         elliptic_e(x, m)
 
     Check that :issue:`20467` is fixed::
 
         sage: k = var('k')
-        sage: integral(sin(k*x)/x*erf(x^2), x, 0, oo, algorithm='maxima')
+        sage: integral(sin(k*x)/x*erf(x^2), x, 0, oo, algorithm='maxima')               # needs sage.libs.maxima
         integrate(erf(x^2)*sin(k*x)/x, x, 0, +Infinity)
     """
     expression, v, a, b = _normalize_integral_input(expression, v, a, b)

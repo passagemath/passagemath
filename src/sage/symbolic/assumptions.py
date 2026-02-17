@@ -212,9 +212,12 @@ class GenericDeclaration(UniqueRepresentation):
             ...
             ValueError: bougie not a valid assumption, must be one of ['analytic', ... 'symmetric']
         """
-        from sage.calculus.calculus import maxima
         global _valid_feature_strings
         if self._assumption in _valid_feature_strings:
+            return
+        try:
+            from sage.interfaces.maxima_lib import maxima
+        except ImportError:
             return
         # We get the list here because features may be added with time.
         _valid_feature_strings.update(repr(x).strip() for x in list(maxima("features")))
@@ -232,10 +235,10 @@ class GenericDeclaration(UniqueRepresentation):
             sage: from sage.symbolic.assumptions import GenericDeclaration
             sage: decl = GenericDeclaration(x, 'even')
             sage: decl.assume()
-            sage: cos(x*pi).simplify()
+            sage: cos(x*pi).simplify()                                                  # needs sage.libs.maxima
             1
             sage: decl2 = GenericDeclaration(x, 'odd')
-            sage: decl2.assume()
+            sage: decl2.assume()                                                        # needs sage.libs.maxima
             Traceback (most recent call last):
             ...
             ValueError: Assumption is inconsistent
@@ -243,7 +246,13 @@ class GenericDeclaration(UniqueRepresentation):
         """
         if self in _assumptions:
             return
-        from sage.calculus.calculus import maxima
+        try:
+            from sage.interfaces.maxima_lib import maxima
+        except ImportError:
+            self._var.decl_assume(self._assumption)
+            _assumptions[self] = True
+            return
+
         cur = None
         context = None
         if self._context is None:
@@ -303,18 +312,22 @@ class GenericDeclaration(UniqueRepresentation):
             sage: decl.assume()
             sage: cos(pi*x)
             cos(pi*x)
-            sage: cos(pi*x).simplify()
+            sage: cos(pi*x).simplify()                                                  # needs sage.libs.maxima
             -1
             sage: decl.forget()
-            sage: cos(x*pi).simplify()
+            sage: cos(x*pi).simplify()                                                  # needs sage.libs.maxima
             cos(pi*x)
         """
         self._var.decl_forget(self._assumption)
-        from sage.calculus.calculus import maxima
+
         if self._context is not None:
             try:
                 del _assumptions[self]
             except KeyError:
+                return
+            try:
+                from sage.interfaces.maxima_lib import maxima
+            except ImportError:
                 return
             maxima.deactivate(self._context)
         else:  # trying to forget a declaration explicitly rather than implicitly
@@ -483,15 +496,15 @@ def assume(*args):
     Here, we verify that for `x>0`, `\sqrt{x^2}=x`::
 
         sage: assume(x > 0)
-        sage: bool(sqrt(x^2) == x)
+        sage: bool(sqrt(x^2) == x)                                                      # needs sage.libs.maxima
         True
 
     This will be assumed in the current Sage session until forgotten::
 
-        sage: bool(sqrt(x^2) == x)
+        sage: bool(sqrt(x^2) == x)                                                      # needs sage.libs.maxima
         True
         sage: forget()
-        sage: bool(sqrt(x^2) == x)
+        sage: bool(sqrt(x^2) == x)                                                      # needs sage.libs.maxima
         False
 
     Another major use case is in taking certain integrals and limits
@@ -500,7 +513,7 @@ def assume(*args):
         sage: var('x, n')
         (x, n)
         sage: assume(n+1>0)
-        sage: integral(x^n,x)
+        sage: integral(x^n,x)                                                           # needs sage.libs.maxima
         x^(n + 1)/(n + 1)
         sage: forget()
 
@@ -509,13 +522,13 @@ def assume(*args):
         sage: var('q, a, k')
         (q, a, k)
         sage: assume(q > 1)
-        sage: sum(a*q^k, k, 0, oo)
+        sage: sum(a*q^k, k, 0, oo)                                                      # needs sage.libs.maxima
         Traceback (most recent call last):
         ...
         ValueError: Sum is divergent.
         sage: forget()
         sage: assume(abs(q) < 1)
-        sage: sum(a*q^k, k, 0, oo)
+        sage: sum(a*q^k, k, 0, oo)                                                      # needs sage.libs.maxima
         -a/(q - 1)
         sage: forget()
 
@@ -525,7 +538,7 @@ def assume(*args):
         sage: assume(n, 'integer')
         sage: c = P*e^(r*n)
         sage: d = P*(1+r2)^n
-        sage: solve(c==d,r2)
+        sage: solve(c == d, r2)                                                         # needs sage.libs.maxima
         [r2 == e^r - 1]
         sage: forget()
 
@@ -536,7 +549,7 @@ def assume(*args):
         sage: sin(n*pi)
         0
         sage: forget()
-        sage: sin(n*pi).simplify()
+        sage: sin(n*pi).simplify()                                                      # needs sage.libs.maxima
         sin(pi*n)
 
     Instead of using chained comparison notation, each relationship

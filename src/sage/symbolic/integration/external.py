@@ -18,6 +18,7 @@ def maxima_integrator(expression, v, a=None, b=None):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.maxima
         sage: from sage.symbolic.integration.external import maxima_integrator
         sage: maxima_integrator(sin(x), x)
         -cos(x)
@@ -31,7 +32,7 @@ def maxima_integrator(expression, v, a=None, b=None):
 
     Check that :issue:`25817` is fixed::
 
-        sage: maxima_integrator(log(e^x*log(x)*sin(x))/x^2, x)
+        sage: maxima_integrator(log(e^x*log(x)*sin(x))/x^2, x)                          # needs sage.libs.maxima
         1/2*(x*(Ei(-log(x)) + conjugate(Ei(-log(x))))
         - 2*x*integrate(sin(x)/(x*cos(x)^2 + x*sin(x)^2
         + 2*x*cos(x) + x), x) + 2*x*integrate(sin(x)/(x*cos(x)^2

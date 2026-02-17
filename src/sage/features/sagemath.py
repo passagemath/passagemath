@@ -702,6 +702,36 @@ class sage__libs__ntl(JoinFeature):
                              spkg='sagemath_ntl', type='standard')
 
 
+class sage__libs__maxima(JoinFeature):
+    r"""
+    A :class:`sage.features.Feature` describing the presence of
+    modules depending on Maxima.
+
+    In addition to the modularization purposes that this tag serves,
+    it also provides attribution to the upstream project.
+
+    TESTS::
+
+        sage: from sage.features.sagemath import sage__libs__maxima
+        sage: sage__libs__maxima().is_present()                                         # needs sage.libs.maxima
+        FeatureTestResult('sage.libs.maxima', True)
+    """
+    def __init__(self):
+        r"""
+        TESTS::
+
+            sage: from sage.features.sagemath import sage__libs__maxima
+            sage: isinstance(sage__libs__maxima(), sage__libs__maxima)
+            True
+        """
+        JoinFeature.__init__(self, 'sage.libs.maxima',
+                             [PythonModule('sage.interfaces.maxima'),
+                              PythonModule('sage.interfaces.maxima_abstract'),
+                              PythonModule('sage.interfaces.maxima_lib'),
+                             ],
+                             spkg='sagemath_maxima', type='standard')
+
+
 class sage__libs__pari(JoinFeature):
     r"""
     A :class:`~sage.features.Feature` describing the presence of :mod:`sage.libs.pari`.
@@ -1327,9 +1357,6 @@ class sage__symbolic(JoinFeature):
                               PythonModule('sage.interfaces.maple'),
                               PythonModule('sage.interfaces.mathematica'),
                               PythonModule('sage.interfaces.mathics'),
-                              PythonModule('sage.interfaces.maxima'),
-                              PythonModule('sage.interfaces.maxima_abstract'),
-                              PythonModule('sage.interfaces.maxima_lib'),
                               PythonModule('sage.interfaces.sympy'),
                               PythonModule('sage.interfaces.sympy_wrapper'),
                              ], spkg='sagemath_symbolics', type='standard')
@@ -1375,6 +1402,7 @@ def all_features():
             sage__libs__iml(),
             sage__libs__linbox(),
             sage__libs__m4ri(),
+            sage__libs__maxima(),
             sage__libs__ntl(),
             sage__libs__pari(),
             sage__libs__singular(),
