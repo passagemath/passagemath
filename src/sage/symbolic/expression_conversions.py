@@ -397,6 +397,7 @@ class InterfaceInit(Converter):
         """
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.symbolic.expression_conversions import InterfaceInit
             sage: m = InterfaceInit(maxima)
             sage: a = pi + 2
@@ -416,11 +417,11 @@ class InterfaceInit(Converter):
         EXAMPLES::
 
             sage: from sage.symbolic.expression_conversions import InterfaceInit
-            sage: m = InterfaceInit(maxima)
-            sage: m.symbol(x)
+            sage: m = InterfaceInit(maxima)                                             # needs sage.libs.maxima
+            sage: m.symbol(x)                                                           # needs sage.libs.maxima
             '_SAGE_VAR_x'
             sage: f(x) = x
-            sage: m.symbol(f)
+            sage: m.symbol(f)                                                           # needs sage.libs.maxima
             '_SAGE_VAR_x'
             sage: ii = InterfaceInit(gp)                                                # needs sage.libs.pari
             sage: ii.symbol(x)                                                          # needs sage.libs.pari
@@ -467,10 +468,10 @@ class InterfaceInit(Converter):
 
             sage: import operator
             sage: from sage.symbolic.expression_conversions import InterfaceInit
-            sage: m = InterfaceInit(maxima)
-            sage: m.relation(x==3, operator.eq)
+            sage: m = InterfaceInit(maxima)                                             # needs sage.libs.maxima
+            sage: m.relation(x == 3, operator.eq)                                       # needs sage.libs.maxima
             '_SAGE_VAR_x = 3'
-            sage: m.relation(x==3, operator.lt)
+            sage: m.relation(x == 3, operator.lt)                                       # needs sage.libs.maxima
             '_SAGE_VAR_x < 3'
         """
         return "%s %s %s" % (self(ex.lhs()), self.relation_symbols[operator],
@@ -481,9 +482,9 @@ class InterfaceInit(Converter):
         EXAMPLES::
 
             sage: from sage.symbolic.expression_conversions import InterfaceInit
-            sage: m = InterfaceInit(maxima)
+            sage: m = InterfaceInit(maxima)                                             # needs sage.libs.maxima
             sage: t = SR._force_pyobject((3, 4, e^x))
-            sage: m.tuple(t)
+            sage: m.tuple(t)                                                            # needs sage.libs.maxima
             '[3,4,exp(_SAGE_VAR_x)]'
         """
         x = map(self, ex.operands())
@@ -495,14 +496,14 @@ class InterfaceInit(Converter):
         EXAMPLES::
 
             sage: from sage.symbolic.expression_conversions import InterfaceInit
-            sage: m = InterfaceInit(maxima)
+            sage: m = InterfaceInit(maxima)                                             # needs sage.libs.maxima
             sage: f = function('f')
             sage: a = f(x).diff(x); a
             diff(f(x), x)
-            sage: print(m.derivative(a, a.operator()))
+            sage: print(m.derivative(a, a.operator()))                                  # needs sage.libs.maxima
             diff('f(_SAGE_VAR_x), _SAGE_VAR_x, 1)
             sage: b = f(x).diff(x, x)
-            sage: print(m.derivative(b, b.operator()))
+            sage: print(m.derivative(b, b.operator()))                                  # needs sage.libs.maxima
             diff('f(_SAGE_VAR_x), _SAGE_VAR_x, 2)
 
         We can also convert expressions where the argument is not just a
@@ -513,7 +514,7 @@ class InterfaceInit(Converter):
             sage: t = (f(x*y).diff(x))/y
             sage: t
             D[0](f)(x*y)
-            sage: m.derivative(t, t.operator())
+            sage: m.derivative(t, t.operator())                                         # needs sage.libs.maxima
             "at(diff('f(_SAGE_VAR__symbol0), _SAGE_VAR__symbol0, 1), [_SAGE_VAR__symbol0 = (_SAGE_VAR_x)*(_SAGE_VAR_y)])"
 
         TESTS:
@@ -522,7 +523,7 @@ class InterfaceInit(Converter):
 
             sage: t = var('t'); f = function('f')(t)
             sage: a = 2^e^t * f.subs(t=e^t) * diff(f, t).subs(t=e^t) + 2*t
-            sage: solve(a == 0, diff(f, t).subs(t=e^t))
+            sage: solve(a == 0, diff(f, t).subs(t=e^t))                                 # needs sage.libs.maxima
             [D[0](f)(e^t) == -2^(-e^t + 1)*t/f(e^t)]
 
         ::
@@ -530,11 +531,12 @@ class InterfaceInit(Converter):
             sage: f = function('f')(x)
             sage: df = f.diff(x); df
             diff(f(x), x)
-            sage: maxima(df)
+            sage: maxima(df)                                                            # needs sage.libs.maxima
             'diff('f(_SAGE_VAR_x),_SAGE_VAR_x,1)
 
         ::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.interfaces.maxima_lib import maxima
             sage: a = df.subs(x=exp(x)); a
             D[0](f)(e^x)
@@ -545,6 +547,7 @@ class InterfaceInit(Converter):
 
         ::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.interfaces.maxima_lib import maxima
             sage: a = df.subs(x=4); a
             D[0](f)(4)
@@ -561,11 +564,12 @@ class InterfaceInit(Converter):
             sage: f = function('f')(x, y)
             sage: f_x = f.diff(x); f_x
             diff(f(x, y), x)
-            sage: maxima(f_x)
+            sage: maxima(f_x)                                                           # needs sage.libs.maxima
             'diff('f(_SAGE_VAR_x,_SAGE_VAR_y),_SAGE_VAR_x,1)
 
         ::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.interfaces.maxima_lib import maxima
             sage: a = f_x.subs(x=4); a
             D[0](f)(4, y)
@@ -576,6 +580,7 @@ class InterfaceInit(Converter):
 
         ::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.interfaces.maxima_lib import maxima
             sage: a = f_x.subs(x=4).subs(y=8); a
             D[0](f)(4, 8)
@@ -589,7 +594,7 @@ class InterfaceInit(Converter):
             sage: x,y = var('x,y')
             sage: (gamma_inc(x,y).diff(x))
             diff(gamma(x, y), x)
-            sage: (gamma_inc(x,x+1).diff(x)).simplify()
+            sage: (gamma_inc(x,x+1).diff(x)).simplify()                                 # needs sage.libs.maxima
             -(x + 1)^(x - 1)*e^(-x - 1) + D[0](gamma)(x, x + 1)
         """
         # This code should probably be moved into the interface
@@ -631,8 +636,8 @@ class InterfaceInit(Converter):
 
             sage: import operator
             sage: from sage.symbolic.expression_conversions import InterfaceInit
-            sage: m = InterfaceInit(maxima)
-            sage: m.arithmetic(x+2, sage.symbolic.operators.add_vararg)
+            sage: m = InterfaceInit(maxima)                                             # needs sage.libs.maxima
+            sage: m.arithmetic(x+2, sage.symbolic.operators.add_vararg)                 # needs sage.libs.maxima
             '(_SAGE_VAR_x)+(2)'
         """
         args = ["(%s)" % self(op) for op in ex.operands()]
@@ -643,6 +648,8 @@ class InterfaceInit(Converter):
         EXAMPLES::
 
             sage: from sage.symbolic.expression_conversions import InterfaceInit
+
+            sage: # needs sage.libs.maxima
             sage: m = InterfaceInit(maxima)
             sage: m.composition(sin(x), sin)
             'sin(_SAGE_VAR_x)'
@@ -1658,6 +1665,7 @@ class HalfAngle(ExpressionTreeWalker):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.symbolic.expression_conversions import HalfAngle
             sage: x, t = SR.var("x, t")
             sage: a = HalfAngle(cos(3*x)/(4-cos(x)).trig_expand())()
