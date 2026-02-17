@@ -920,6 +920,7 @@ class HyperbolicGeodesic(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: g = HyperbolicPlane().UHP().random_geodesic()
             sage: m = g.midpoint()
             sage: end1, end2 = g.endpoints()
@@ -1608,6 +1609,7 @@ class HyperbolicGeodesicUHP(HyperbolicGeodesic):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: UHP = HyperbolicPlane().UHP()
             sage: g = UHP.random_geodesic()
             sage: m = g.midpoint()
@@ -2039,6 +2041,8 @@ class HyperbolicGeodesicUHP(HyperbolicGeodesic):
         EXAMPLES::
 
             sage: UHP = HyperbolicPlane().UHP()
+
+            sage: # needs sage.libs.maxima
             sage: (p1, p2) = [UHP.random_point() for k in range(2)]
             sage: g = UHP.get_geodesic(p1, p2)
             sage: m = g.midpoint()
