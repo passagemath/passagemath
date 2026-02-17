@@ -481,6 +481,13 @@ jobs:
         with:
           package-dir: unpacked/passagemath_m4ri_m4rie
 
+      - name: sagemath-symbolics
+        id:   sagemath-symbolics
+        if:   (success() || failure()) && steps.unpack.outcome == 'success'
+        uses: pypa/cibuildwheel@v3.3.0
+        with:
+          package-dir: unpacked/passagemath_symbolics
+
 
       - uses: actions/upload-artifact@v4
         if:   always()
@@ -547,6 +554,7 @@ jobs:
          'sagemath-planarity',
          'sagemath-plot',
          'sagemath-rankwidth',
+         'sagemath-symbolics',
         ]
       sage-doctest-options: >-
         --verbose
