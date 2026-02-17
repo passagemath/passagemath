@@ -20,7 +20,8 @@ and Mathematical Software Communities." It was created in October 2024 with the 
 * [inviting collaborations](https://github.com/passagemath/passagemath/issues/700) with upstream projects,
 * [building a professional, respectful, inclusive community](https://groups.google.com/g/sage-devel/c/xBzaINHWwUQ),
 * [empowering Sage users to participate in the scientific Python ecosystem](https://github.com/passagemath/passagemath/issues/248) by publishing packages,
-* developing a port to WebAssembly ([Pyodide](https://pyodide.org/en/stable/), emscripten-forge) for serverless deployment with Javascript,
+* developing a port to WebAssembly ([Pyodide](https://pyodide.org/en/stable/), [emscripten-forge](https://emscripten-forge.org/)) for serverless deployment with Javascript,
+  - passagemath 10.8.1 (February 2026) published the first packages in the prefix.dev [emscripten-forge-4x channel](https://prefix.dev/channels/emscripten-forge-4x),
 * developing a [native Windows port](https://github.com/passagemath/passagemath/issues/1044),
   - passagemath 10.6.1 (July 2025) published the first pip-installable wheel packages for native Windows on x86_64,
   - passagemath packages became available in the [MSYS2 software distribution](https://packages.msys2.org/search?t=pkg&q=passagemath) in November 2025.
@@ -28,8 +29,10 @@ and Mathematical Software Communities." It was created in October 2024 with the 
 Moreover, the passagemath project:
 
 * provides a stable, frequently updated version of the Sage distribution,
-* integrates additional mathematical software, notably Macaulay2, a full set of GAP packages,
-  and the Combinatorial Matrix Recognition library,
+* periodically merges the compatible changes from the SageMath project
+  - passagemath 10.8.1 merged SageMath 10.9.beta3 (January 2026)
+* integrates additional mathematical software,
+  - notably Macaulay2, a full set of GAP packages, and the Combinatorial Matrix Recognition library,
 * curates a library of Sage user packages.
 
 [Full documentation](https://passagemath.org/docs/latest/html/en/index.html) is available online.
