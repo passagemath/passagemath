@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-symbolics
+# sage.doctest: needs sage.libs.maxima
 r"""
 Manifold Subsets Defined as Pullbacks of Subsets under Continuous Maps
 """
