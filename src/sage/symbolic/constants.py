@@ -32,7 +32,7 @@ you want to create `\pi` in Maxima and Singular, you don't
 have to figure out the special notation for each system. You just
 type the following::
 
-    sage: maxima(pi)
+    sage: maxima(pi)                                                                    # needs sage.libs.maxima
     %pi
     sage: singular(pi)                                                                  # needs sage.libs.singular
     pi
@@ -58,7 +58,7 @@ can be coerced into other systems or evaluated.
 
     sage: a = pi + e*4/5; a
     pi + 4/5*e
-    sage: maxima(a)
+    sage: maxima(a)                                                                     # needs sage.libs.maxima
     %pi+(4*%e)/5
     sage: RealField(15)(a)           # 15 *bits* of precision
     5.316
@@ -457,14 +457,14 @@ class Constant:
 
             sage: from sage.symbolic.constants import Constant
             sage: p = Constant('p', conversions=dict(maxima='%pi'))
-            sage: p._maxima_(maxima)
+            sage: p._maxima_(maxima)                                                    # needs sage.libs.maxima
             %pi
 
         The above ``_maxima_`` is constructed like ``m`` below::
 
             sage: from functools import partial
             sage: m = partial(p._generic_interface, '%pi')
-            sage: m(maxima)
+            sage: m(maxima)                                                             # needs sage.libs.maxima
             %pi
         """
         return I(value)
@@ -478,14 +478,14 @@ class Constant:
 
             sage: from sage.symbolic.constants import Constant
             sage: p = Constant('p', conversions=dict(maxima='%pi'))
-            sage: p._maxima_init_()
+            sage: p._maxima_init_()                                                     # needs sage.libs.maxima
             '%pi'
 
         The above ``_maxima_init_`` is constructed like ``mi`` below::
 
             sage: from functools import partial
             sage: mi = partial(p._generic_interface_init, '%pi')
-            sage: mi()
+            sage: mi()                                                                  # needs sage.libs.maxima
             '%pi'
         """
         return value
@@ -496,7 +496,7 @@ class Constant:
 
             sage: from sage.symbolic.constants import Constant
             sage: p = Constant('p', conversions=dict(maxima='%pi'))
-            sage: p._interface_(maxima)
+            sage: p._interface_(maxima)                                                 # needs sage.libs.maxima
             %pi
         """
         try:
@@ -669,7 +669,7 @@ We can convert to complex fields::
 
     sage: SR.I().minpoly()
     x^2 + 1
-    sage: maxima(2*SR.I())
+    sage: maxima(2*SR.I())                                                              # needs sage.libs.maxima
     2*%i
 
 TESTS::
@@ -763,6 +763,8 @@ class GoldenRatio(Constant):
         sage: R = RealField(200)
         sage: R(gr)
         1.6180339887498948482045868343656381177203091798057628621354
+
+        sage: # needs sage.libs.maxima
         sage: grm = maxima(golden_ratio);grm
         (sqrt(5)+1)/2
         sage: grm + grm
@@ -876,9 +878,9 @@ class Log2(Constant):
         -(log2 - 1)/(log2 + 1)
         sage: R(l)
         0.18123221829928249948761381864650311423330609774776013488056
-        sage: maxima(log2)
+        sage: maxima(log2)                                                              # needs sage.libs.maxima
         log(2)
-        sage: maxima(log2).float()
+        sage: maxima(log2).float()                                                      # needs sage.libs.maxima
         0.6931471805599453
         sage: gp(log2)                                                                  # needs sage.libs.pari
         0.69314718055994530941723212145817656807

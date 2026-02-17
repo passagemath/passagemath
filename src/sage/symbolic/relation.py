@@ -9,7 +9,7 @@ example, we derive the quadratic formula as follows::
     sage: qe = (a*x^2 + b*x + c == 0)
     sage: qe
     a*x^2 + b*x + c == 0
-    sage: print(solve(qe, x))
+    sage: print(solve(qe, x))                                                           # needs sage.libs.maxima
     [
     x == -1/2*(b + sqrt(b^2 - 4*a*c))/a,
     x == -1/2*(b - sqrt(b^2 - 4*a*c))/a
@@ -131,6 +131,7 @@ Solving
 
 We can solve equations::
 
+    sage: # needs sage.libs.maxima
     sage: x = var('x')
     sage: S = solve(x^3 - 1 == 0, x)
     sage: S
@@ -154,6 +155,7 @@ for where the partial derivatives with respect to ``x``
 and ``y`` are zero. Then it substitutes one of the solutions
 into the Hessian matrix ``H`` for ``f``::
 
+    sage: # needs sage.libs.maxima
     sage: f(x,y) = x^2*y+y^2+y
     sage: solutions = solve(list(f.diff()),[x,y],solution_dict=True)
     sage: solutions == [{x: -I, y: 0}, {x: I, y: 0}, {x: 0, y: -1/2}]
@@ -168,6 +170,7 @@ into the Hessian matrix ``H`` for ``f``::
 
 We illustrate finding multiplicities of solutions::
 
+    sage: # needs sage.libs.maxima
     sage: f = (x-1)^5*(x^2+1)
     sage: solve(f == 0, x)
     [x == -I, x == I, x == 1]
@@ -176,7 +179,7 @@ We illustrate finding multiplicities of solutions::
 
 We can also solve many inequalities::
 
-    sage: solve(1/(x-1)<=8,x)
+    sage: solve(1/(x-1) <= 8, x)                                                        # needs sage.libs.maxima
     [[x < 1], [x >= (9/8)]]
 
 We can numerically find roots of equations::
@@ -369,6 +372,7 @@ def check_relation_maxima(relation):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.maxima
         sage: from sage.symbolic.relation import check_relation_maxima
         sage: k = var('k')
         sage: pol = 1/(k-1) - 1/k -1/k/(k-1)
@@ -392,6 +396,7 @@ def check_relation_maxima(relation):
 
     Here are some examples involving assumptions::
 
+        sage: # needs sage.libs.maxima
         sage: x, y, z = var('x, y, z')
         sage: assume(x>=y,y>=z,z>=x)
         sage: check_relation_maxima(x==z)
@@ -426,6 +431,7 @@ def check_relation_maxima(relation):
 
     Here is an example that illustrates that ``False`` may mean inconclusive::
 
+        sage: # needs sage.libs.maxima
         sage: x = SR.var('x')
         sage: assume(x, 'integer')
         sage: check_relation_maxima( x == 1 )
@@ -448,7 +454,7 @@ def check_relation_maxima(relation):
         sage: f = log(x*y) - (log(x) + log(y))
         sage: f(x=-1, y=i)
         -2*I*pi
-        sage: check_relation_maxima(f == 0)
+        sage: check_relation_maxima(f == 0)                                             # needs sage.libs.maxima
         False
         sage: forget()
 
@@ -457,7 +463,7 @@ def check_relation_maxima(relation):
 
         sage: assume(x, 'complex')
         sage: f = sqrt(x^2) - abs(x)
-        sage: check_relation_maxima(f == 0)
+        sage: check_relation_maxima(f == 0)                                             # needs sage.libs.maxima
         False
         sage: forget()
 
@@ -466,7 +472,7 @@ def check_relation_maxima(relation):
         sage: assume(x, 'real')
         sage: f1 = ( e^(I*x) - e^(-I*x) ) / ( I*e^(I*x) + I*e^(-I*x) )
         sage: f2 = sin(x)/cos(x)
-        sage: check_relation_maxima(f1 - f2 == 0)
+        sage: check_relation_maxima(f1 - f2 == 0)                                       # needs sage.libs.maxima
         True
         sage: forget()
 
@@ -475,7 +481,7 @@ def check_relation_maxima(relation):
         sage: assume(x, 'complex')
         sage: f1 = ( e^(I*x) - e^(-I*x) ) / ( I*e^(I*x) + I*e^(-I*x) )
         sage: f2 = sin(x)/cos(x)
-        sage: check_relation_maxima(f1 - f2 == 0)
+        sage: check_relation_maxima(f1 - f2 == 0)                                       # needs sage.libs.maxima
         False
         sage: forget()
 
@@ -486,7 +492,7 @@ def check_relation_maxima(relation):
         sage: assume(k, 'integer')
         sage: f1 = factorial(n+1)/factorial(n)
         sage: f2 = n + 1
-        sage: check_relation_maxima(f1 - f2 == 0)
+        sage: check_relation_maxima(f1 - f2 == 0)                                       # needs sage.libs.maxima
         True
         sage: forget()
 
@@ -495,16 +501,16 @@ def check_relation_maxima(relation):
 
         sage: k = var('k')
         sage: assume(k,'noninteger')
-        sage: solve([k^3==1],k)
+        sage: solve([k^3==1],k)                                                         # needs sage.libs.maxima
         [k == 1/2*I*sqrt(3) - 1/2, k == -1/2*I*sqrt(3) - 1/2]
         sage: assumptions()
         [k is noninteger]
 
     Check that boolean values are handled correctly::
 
-        sage: check_relation_maxima(2 == 2)
+        sage: check_relation_maxima(2 == 2)                                             # needs sage.libs.maxima
         True
-        sage: check_relation_maxima(2 == 3)
+        sage: check_relation_maxima(2 == 3)                                             # needs sage.libs.maxima
         False
     """
     # Handle boolean values directly (e.g., when comparing Python integers)
@@ -566,6 +572,7 @@ def check_relation_maxima_neq_as_not_eq(relation):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.maxima
         sage: from sage.symbolic.relation import check_relation_maxima_neq_as_not_eq
         sage: x = var('x')
         sage: check_relation_maxima_neq_as_not_eq(x != x)
@@ -599,7 +606,7 @@ def string_to_list_of_solutions(s):
 
         sage: var('x,a,b')
         (x, a, b)
-        sage: solve(x^2 + a*x + b == 0, x)
+        sage: solve(x^2 + a*x + b == 0, x)                                              # needs sage.libs.maxima
         [x == -1/2*a - 1/2*sqrt(a^2 - 4*b), x == -1/2*a + 1/2*sqrt(a^2 - 4*b)]
 
     Behind the scenes when the above is evaluated the function
@@ -763,6 +770,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
 
     EXAMPLES::
 
+        sage: # needs sage.libs.maxima
         sage: x, y = var('x, y')
         sage: solve([x+y==6, x-y==4], x, y)
         [[x == 5, y == 1]]
@@ -788,13 +796,13 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     equations, at times approximations will be given by Maxima, due to the
     underlying algorithm::
 
+        sage: # needs sage.libs.maxima
         sage: sols = solve([x^3==y,y^2==x], [x,y]); sols[-1], sols[0] # abs tol 1e-15
         ([x == 0, y == 0],
          [x == (0.3090169943749475 + 0.9510565162951535*I),
           y == (-0.8090169943749475 - 0.5877852522924731*I)])
         sage: sols[0][0].rhs().pyobject().parent()
         Complex Double Field
-
         sage: solve([y^6==y],y)
         [y == 1/4*sqrt(5) + 1/4*I*sqrt(2*sqrt(5) + 10) - 1/4,
          y == -1/4*sqrt(5) + 1/4*I*sqrt(-2*sqrt(5) + 10) - 1/4,
@@ -807,6 +815,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
 
     Here we demonstrate very basic use of the optional keywords::
 
+        sage: # needs sage.libs.maxima
         sage: ((x^2-1)^2).solve(x)
         [x == -1, x == 1]
         sage: ((x^2-1)^2).solve(x,multiplicities=True)
@@ -821,24 +830,25 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
         [x == -10, x == 12]
 
         sage: from sage.symbolic.expression import Expression
-        sage: Expression.solve(x^2==1,x)
+        sage: Expression.solve(x^2==1, x)                                               # needs sage.libs.maxima
         [x == -1, x == 1]
 
     We must solve with respect to actual variables::
 
         sage: z = 5
-        sage: solve([8*z + y == 3, -z +7*y == 0],y,z)
+        sage: solve([8*z + y == 3, -z + 7*y == 0], y, z)                                # needs sage.libs.maxima
         Traceback (most recent call last):
         ...
         TypeError: 5 is not a valid variable
 
     If we ask for dictionaries containing the solutions, we get them::
 
-        sage: solve([x^2-1],x,solution_dict=True)
+        sage: # needs sage.libs.maxima
+        sage: solve([x^2 - 1], x, solution_dict=True)
         [{x: -1}, {x: 1}]
-        sage: solve([x^2-4*x+4],x,solution_dict=True)
+        sage: solve([x^2 - 4*x + 4], x, solution_dict=True)
         [{x: 2}]
-        sage: res = solve([x^2 == y, y == 4],x,y,solution_dict=True)
+        sage: res = solve([x^2 == y, y == 4], x, y, solution_dict=True)
         sage: for soln in res: print("x: %s, y: %s" % (soln[x], soln[y]))
         x: 2, y: 4
         x: -2, y: 4
@@ -847,11 +857,11 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     a new variable.  In the following example, ``r1`` is an arbitrary
     constant (because of the ``r``)::
 
+        sage: # needs sage.libs.maxima
         sage: forget()
         sage: x, y = var('x,y')
-        sage: solve([x+y == 3, 2*x+2*y == 6],x,y)
+        sage: solve([x + y == 3, 2*x + 2*y == 6], x, y)
         [[x == -r1 + 3, y == r1]]
-
         sage: var('b, c')
         (b, c)
         sage: solve((b-1)*(c-1), [b,c])
@@ -860,15 +870,16 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     Especially with trigonometric functions, the dummy variable may
     be implicitly an integer (hence the ``z``)::
 
-        sage: solve( sin(x)==cos(x), x, to_poly_solve=True)
+        sage: # needs sage.libs.maxima
+        sage: solve(sin(x) == cos(x), x, to_poly_solve=True)
         [x == 1/4*pi + pi*z...]
-        sage: solve([cos(x)*sin(x) == 1/2, x+y == 0],x,y)
+        sage: solve([cos(x)*sin(x) == 1/2, x + y == 0], x, y)
         [[x == 1/4*pi + pi*z..., y == -1/4*pi - pi*z...]]
 
     Expressions which are not equations are assumed to be set equal
     to zero, as with `x` in the following example::
 
-        sage: solve([x, y == 2],x,y)
+        sage: solve([x, y == 2], x, y)                                                  # needs sage.libs.maxima
         [[x == 0, y == 2]]
 
     If ``True`` appears in the list of equations it is
@@ -879,6 +890,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
 
     ::
 
+        sage: # needs sage.libs.maxima
         sage: solve([3==3, 1.00000000000000*x^3 == 0], x)
         [x == 0]
         sage: solve([1.00000000000000*x^3 == 0], x)
@@ -887,19 +899,20 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     Here, the first equation evaluates to ``False``, so
     there are no solutions::
 
-        sage: solve([1==3, 1.00000000000000*x^3 == 0], x)
+        sage: solve([1==3, 1.00000000000000*x^3 == 0], x)                               # needs sage.libs.maxima
         []
 
     Completely symbolic solutions are supported::
 
+        sage: # needs sage.libs.maxima
         sage: var('s,j,b,m,g')
         (s, j, b, m, g)
-        sage: sys = [ m*(1-s) - b*s*j, b*s*j-g*j ]
-        sage: solve(sys,s,j)
+        sage: sys = [m*(1-s) - b*s*j, b*s*j-g*j]
+        sage: solve(sys, s, j)
         [[s == 1, j == 0], [s == g/b, j == (b - g)*m/(b*g)]]
-        sage: solve(sys,(s,j))
+        sage: solve(sys, (s,j))
         [[s == 1, j == 0], [s == g/b, j == (b - g)*m/(b*g)]]
-        sage: solve(sys,[s,j])
+        sage: solve(sys, [s,j])
         [[s == 1, j == 0], [s == g/b, j == (b - g)*m/(b*g)]]
 
         sage: z = var('z')
@@ -908,44 +921,47 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
 
     Inequalities can be also solved::
 
-        sage: solve(x^2>8,x)
+        sage: # needs sage.libs.maxima
+        sage: solve(x^2 > 8, x)
         [[x < -2*sqrt(2)], [x > 2*sqrt(2)]]
-        sage: x,y = var('x,y'); (ln(x)-ln(y)>0).solve(x)
+        sage: x, y = var('x,y'); (ln(x) - ln(y) > 0).solve(x)
         [[log(x) - log(y) > 0]]
-        sage: x,y = var('x,y'); (ln(x)>ln(y)).solve(x)  # random
+        sage: x, y = var('x,y'); (ln(x) > ln(y)).solve(x)  # random
         [[0 < y, y < x, 0 < x]]
         [[y < x, 0 < y]]
 
     A simple example to show the use of the keyword
     ``multiplicities``::
 
+        sage: # needs sage.libs.maxima
         sage: ((x^2-1)^2).solve(x)
         [x == -1, x == 1]
-        sage: ((x^2-1)^2).solve(x,multiplicities=True)
+        sage: ((x^2-1)^2).solve(x, multiplicities=True)
         ([x == -1, x == 1], [2, 2])
-        sage: ((x^2-1)^2).solve(x,multiplicities=True,to_poly_solve=True)
+        sage: ((x^2-1)^2).solve(x, multiplicities=True, to_poly_solve=True)
         Traceback (most recent call last):
         ...
         NotImplementedError: to_poly_solve does not return multiplicities
 
     Here is how the ``explicit_solutions`` keyword functions::
 
-        sage: solve(sin(x)==x,x)
+        sage: # needs sage.libs.maxima
+        sage: solve(sin(x) == x, x)
         [x == sin(x)]
-        sage: solve(sin(x)==x,x,explicit_solutions=True)
+        sage: solve(sin(x) == x, x, explicit_solutions=True)
         []
-        sage: solve(x*sin(x)==x^2,x)
+        sage: solve(x*sin(x) == x^2, x)
         [x == 0, x == sin(x)]
-        sage: solve(x*sin(x)==x^2,x,explicit_solutions=True)
+        sage: solve(x*sin(x) == x^2, x, explicit_solutions=True)
         [x == 0]
 
     The following examples show the use of the keyword ``to_poly_solve``::
 
+        sage: # needs sage.libs.maxima
         sage: solve(abs(1-abs(1-x)) == 10, x)
         [abs(abs(x - 1) - 1) == 10]
         sage: solve(abs(1-abs(1-x)) == 10, x, to_poly_solve=True)
         [x == -10, x == 12]
-
         sage: var('Q')
         Q
         sage: solve(Q*sqrt(Q^2 + 2) - 1, Q)
@@ -956,23 +972,24 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     namely ``1/sqrt(sqrt(2) + 1)``, see
     https://sourceforge.net/p/maxima/bugs/3276/::
 
-        sage: solve(Q*sqrt(Q^2 + 2) - 1, Q, to_poly_solve=True)
+        sage: solve(Q*sqrt(Q^2 + 2) - 1, Q, to_poly_solve=True)                         # needs sage.libs.maxima
         [Q == -sqrt(-sqrt(2) - 1), Q == sqrt(sqrt(2) + 1)*(sqrt(2) - 1)]
 
     An effort is made to only return solutions that satisfy
     the current assumptions::
 
-        sage: solve(x^2==4, x)
+        sage: # needs sage.libs.maxima
+        sage: solve(x^2 == 4, x)
         [x == -2, x == 2]
-        sage: assume(x<0)
-        sage: solve(x^2==4, x)
+        sage: assume(x < 0)
+        sage: solve(x^2 == 4, x)
         [x == -2]
         sage: solve((x^2-4)^2 == 0, x, multiplicities=True)
         ([x == -2], [2])
-        sage: solve(x^2==2, x)
+        sage: solve(x^2 == 2, x)
         [x == -sqrt(2)]
         sage: z = var('z')
-        sage: solve(x^2==2-z, x)
+        sage: solve(x^2 == 2 - z, x)
         [x == -sqrt(-z + 2)]
         sage: assume(x, 'rational')
         sage: solve(x^2 == 2, x)
@@ -981,17 +998,19 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     In some cases it may be worthwhile to directly use ``to_poly_solve``
     if one suspects some answers are being missed::
 
+        sage: # needs sage.libs.maxima
         sage: forget()
-        sage: solve(cos(x)==0, x)
+        sage: solve(cos(x) == 0, x)
         [x == 1/2*pi]
-        sage: solve(cos(x)==0, x, to_poly_solve=True)
+        sage: solve(cos(x) == 0, x, to_poly_solve=True)
         [x == 1/2*pi]
-        sage: solve(cos(x)==0, x, to_poly_solve='force')
+        sage: solve(cos(x) == 0, x, to_poly_solve='force')
         [x == 1/2*pi + pi*z...]
 
     The same may also apply if a returned unsolved expression has a
     denominator, but the original one did not::
 
+        sage: # needs sage.libs.maxima
         sage: solve(cos(x) * sin(x) == 1/2, x, to_poly_solve=True)
         [sin(x) == 1/2/cos(x)]
         sage: solve(cos(x) * sin(x) == 1/2, x, to_poly_solve=True, explicit_solutions=True)
@@ -1002,10 +1021,11 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     We use ``use_grobner`` in Maxima if no solution is obtained from
     Maxima's ``to_poly_solve``::
 
+        sage: # needs sage.libs.maxima
         sage: x,y = var('x y')
-        sage: c1(x,y) = (x-5)^2+y^2-16
-        sage: c2(x,y) = (y-3)^2+x^2-9
-        sage: solve([c1(x,y),c2(x,y)],[x,y])
+        sage: c1(x,y) = (x-5)^2 + y^2 - 16
+        sage: c2(x,y) = (y-3)^2 + x^2 - 9
+        sage: solve([c1(x,y), c2(x,y)], [x,y])
         [[x == -9/68*sqrt(55) + 135/68, y == -15/68*sqrt(55) + 123/68],
          [x == 9/68*sqrt(55) + 135/68, y == 15/68*sqrt(55) + 123/68]]
 
@@ -1016,40 +1036,43 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
         sage: assume(z, 'integer')
         sage: solve((x-z)^2==2, x)
         []
-
         sage: forget()
 
     The following shows some more of SymPy's capabilities that cannot be
     handled by Maxima::
 
         sage: _ = var('t')
-        sage: r = solve([x^2 - y^2/exp(x), y-1], x, y, algorithm='sympy', solution_dict=True)
+        sage: r = solve([x^2 - y^2/exp(x), y-1], x, y,
+        ....:           algorithm='sympy', solution_dict=True)
         sage: (r[0][x], r[0][y])
         (2*lambert_w(-1/2), 1)
         sage: solve(-2*x**3 + 4*x**2 - 2*x + 6 > 0, x, algorithm='sympy')
-        [x < 1/3*(1/2)^(1/3)*(9*sqrt(77) + 79)^(1/3) + 2/3*(1/2)^(2/3)/(9*sqrt(77) + 79)^(1/3) + 2/3]
-        sage: solve(sqrt(2*x^2 - 7) - (3 - x),x,algorithm='sympy')
+        [x < 1/3*(1/2)^(1/3)*(9*sqrt(77) + 79)^(1/3)
+             + 2/3*(1/2)^(2/3)/(9*sqrt(77) + 79)^(1/3) + 2/3]
+        sage: solve(sqrt(2*x^2 - 7) - (3 - x), x, algorithm='sympy')
         [x == -8, x == 2]
-        sage: solve(sqrt(2*x + 9) - sqrt(x + 1) - sqrt(x + 4),x,algorithm='sympy')
+        sage: solve(sqrt(2*x + 9) - sqrt(x + 1) - sqrt(x + 4), x, algorithm='sympy')
         [x == 0]
-        sage: r = solve([x + y + z + t, -z - t], x, y, z, t, algorithm='sympy', solution_dict=True)
+        sage: r = solve([x + y + z + t, -z - t], x, y, z, t,
+        ....:           algorithm='sympy', solution_dict=True)
         sage: (r[0][x], r[0][z])
         (-y, -t)
-        sage: r = solve([x^2+y+z, y+x^2+z, x+y+z^2], x, y,z, algorithm='sympy', solution_dict=True)
+        sage: r = solve([x^2 + y + z, y + x^2 + z, x + y + z^2], x, y, z,
+        ....:           algorithm='sympy', solution_dict=True)
         sage: (r[0][x], r[0][y])
         (z, -(z + 1)*z)
         sage: (r[1][x], r[1][y])
         (-z + 1, -z^2 + z - 1)
-        sage: solve(abs(x + 3) - 2*abs(x - 3),x,algorithm='sympy',domain='real')
+        sage: solve(abs(x + 3) - 2*abs(x - 3), x, algorithm='sympy', domain='real')
         [x == 1, x == 9]
 
     We cannot translate all results from SymPy but we can at least
     print them::
 
-        sage: solve(sinh(x) - 2*cosh(x),x,algorithm='sympy')
+        sage: solve(sinh(x) - 2*cosh(x), x, algorithm='sympy')
         [ImageSet(Lambda(_n, I*(2*_n*pi + pi/2) + log(sqrt(3))), Integers),
          ImageSet(Lambda(_n, I*(2*_n*pi - pi/2) + log(sqrt(3))), Integers)]
-        sage: solve(2*sin(x) - 2*sin(2*x), x,algorithm='sympy')
+        sage: solve(2*sin(x) - 2*sin(2*x), x, algorithm='sympy')
         [ImageSet(Lambda(_n, 2*_n*pi), Integers),
          ImageSet(Lambda(_n, 2*_n*pi + pi), Integers),
          ImageSet(Lambda(_n, 2*_n*pi + 5*pi/3), Integers),
@@ -1076,50 +1099,54 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
 
     TESTS::
 
-        sage: solve([sin(x)==x,y^2==x],x,y)
+        sage: # needs sage.libs.maxima
+        sage: solve([sin(x) == x, y^2 == x], x, y)
         [sin(x) == x, y^2 == x]
-        sage: solve(0==1,x)
+        sage: solve(0 == 1, x)
         []
 
     Test if the empty list is returned, too, when (a list of)
     dictionaries (is) are requested (:issue:`8553`)::
 
-        sage: solve([SR(0)==1],x)
+        sage: # needs sage.libs.maxima
+        sage: solve([SR(0) == 1], x)
         []
-        sage: solve([SR(0)==1],x,solution_dict=True)
+        sage: solve([SR(0) == 1], x, solution_dict=True)
         []
-        sage: solve([x==1,x==-1],x)
+        sage: solve([x == 1, x == -1], x)
         []
-        sage: solve([x==1,x==-1],x,solution_dict=True)
+        sage: solve([x == 1, x == -1], x, solution_dict=True)
         []
-        sage: solve((x==1,x==-1),x,solution_dict=0)
+        sage: solve((x == 1, x == -1), x, solution_dict=0)
         []
 
     Relaxed form, suggested by Mike Hansen (:issue:`8553`)::
 
-        sage: solve([x^2-1],x,solution_dict=-1)
+        sage: # needs sage.libs.maxima
+        sage: solve([x^2 - 1], x, solution_dict=-1)
         [{x: -1}, {x: 1}]
-        sage: solve([x^2-1],x,solution_dict=1)
+        sage: solve([x^2 - 1], x, solution_dict=1)
         [{x: -1}, {x: 1}]
-        sage: solve((x==1,x==-1),x,solution_dict=-1)
+        sage: solve((x == 1, x == -1), x, solution_dict=-1)
         []
-        sage: solve((x==1,x==-1),x,solution_dict=1)
+        sage: solve((x == 1, x == -1), x, solution_dict=1)
         []
 
     This inequality holds for any real ``x`` (:issue:`8078`)::
 
-        sage: solve(x^4+2>0,x)
+        sage: solve(x^4 + 2 > 0, x)                                                     # needs sage.libs.maxima
         [x < +Infinity]
 
     Test for user friendly input handling :issue:`13645`::
 
+        sage: # needs sage.libs.maxima
         sage: poly.<a,b> = PolynomialRing(RR)
-        sage: solve([a+b+a*b == 1], a)
+        sage: solve([a + b + a*b == 1], a)
         Traceback (most recent call last):
         ...
         TypeError: a is not a valid variable
         sage: a,b = var('a,b')
-        sage: solve([a+b+a*b == 1], a)
+        sage: solve([a + b + a*b == 1], a)
         [a == -(b - 1)/(b + 1)]
         sage: solve([a, b], (1, a))
         Traceback (most recent call last):
@@ -1137,6 +1164,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     Test that the original version of a system in the French Sage book
     now works (:issue:`14306`)::
 
+        sage: # needs sage.libs.maxima
         sage: var('y,z')
         (y, z)
         sage: solve([x^2 * y * z == 18, x * y^3 * z == 24, x * y * z^4 == 6], x, y, z)
@@ -1148,7 +1176,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
 
     :issue:`13286` fixed::
 
-        sage: solve([x-4], [x])
+        sage: solve([x - 4], [x])                                                       # needs sage.libs.maxima
         [x == 4]
 
     Test for a list of non-symbolic expressions as first argument
@@ -1161,9 +1189,10 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
 
     Automatic computation of the variables to solve for::
 
+        sage: # needs sage.libs.maxima
         sage: var("x y")
         (x, y)
-        sage: solve(x==1)
+        sage: solve(x == 1)
         [x == 1]
         sage: solve([x == 1, y == 2])  # random
         [[y == 2, x == 1]]
@@ -1175,13 +1204,14 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
 
     Special case::
 
-        sage: solve([], [])
+        sage: solve([], [])                                                             # needs sage.libs.maxima
         [[]]
 
     Coverage test::
 
+        sage: # needs sage.libs.maxima
         sage: y = function('y')(x)
-        sage: solve([diff(y)==x, diff(y)==x], y)
+        sage: solve([diff(y) == x, diff(y) == x], y)
         Traceback (most recent call last):
         ...
         TypeError: y(x) is not a valid variable
@@ -1189,6 +1219,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
         ([], [])
         sage: solve([0==0], [], multiplicities=True)
         ([[]], [1])
+
         sage: var("x y")
         (x, y)
         sage: solve([x==1, y==2], [x, y], algorithm='sympy', solution_dict=True)
@@ -1336,31 +1367,33 @@ def _solve_expression(f, x, explicit_solutions, multiplicities,
 
     :issue:`7325` (solving inequalities)::
 
-        sage: (x^2>1).solve(x)
+        sage: (x^2>1).solve(x)                                                          # needs sage.libs.maxima
         [[x < -1], [x > 1]]
 
     Catch error message from Maxima::
 
-        sage: solve(acot(x),x)
+        sage: solve(acot(x),x)                                                          # needs sage.libs.maxima
         Traceback (most recent call last):
         ...
         TypeError: ECL says: cot: argument 0 isn't in the domain of cot.
 
     ::
 
-        sage: solve(acot(x),x,to_poly_solve=True)
+        sage: solve(acot(x), x, to_poly_solve=True)                                     # needs sage.libs.maxima
         Traceback (most recent call last):
         ...
         TypeError: ECL says: cot: argument 0 isn't in the domain of cot.
 
     :issue:`7491` fixed::
 
+        sage: # needs sage.libs.maxima
         sage: y = var('y')
-        sage: solve(y==y,y)
+        sage: solve(y == y, y)
         [y == r1]
-        sage: solve(y==y,y,multiplicities=True)
+        sage: solve(y == y, y, multiplicities=True)
         ([y == r1], [])
 
+        sage: # needs sage.libs.maxima
         sage: from sage.symbolic.assumptions import GenericDeclaration
         sage: GenericDeclaration(x, 'rational').assume()
         sage: solve(x^2 == 2, x)
@@ -1369,37 +1402,38 @@ def _solve_expression(f, x, explicit_solutions, multiplicities,
 
     :issue:`8390` fixed::
 
-        sage: solve(sin(x)==1/2,x)
+        sage: solve(sin(x) == 1/2, x)                                                   # needs sage.libs.maxima
         [x == 1/6*pi]
 
     ::
 
-        sage: solve(sin(x)==1/2,x,to_poly_solve=True)
+        sage: solve(sin(x) == 1/2, x, to_poly_solve=True)                               # needs sage.libs.maxima
         [x == 1/6*pi]
 
     ::
 
-        sage: solve(sin(x)==1/2, x, to_poly_solve='force')
+        sage: solve(sin(x) == 1/2, x, to_poly_solve='force')                            # needs sage.libs.maxima
         [x == 5/6*pi + 2*pi*z..., x == 1/6*pi + 2*pi*z...]
 
     :issue:`11618` fixed::
 
-        sage: g(x)=0
-        sage: solve(g(x)==0,x,solution_dict=True)
+        sage: g(x) = 0
+        sage: solve(g(x) == 0, x, solution_dict=True)                                   # needs sage.libs.maxima
         [{x: r1}]
 
     :issue:`17128`: fixed::
 
+        sage: # needs sage.libs.maxima
         sage: var('x,y')
         (x, y)
-        sage: f = x+y
+        sage: f = x + y
         sage: sol = f.solve([x, y], solution_dict=True)
         sage: sol[0].get(x) + sol[0].get(y)
         0
 
     :issue:`16651` fixed::
 
-        sage: (x^7-x-1).solve(x, to_poly_solve=True)     # abs tol 1e-6
+        sage: (x^7 - x - 1).solve(x, to_poly_solve=True)     # abs tol 1e-6             # needs sage.libs.maxima
         [x == 1.11277569705,
          x == (-0.363623519329 - 0.952561195261*I),
          x == (0.617093477784 - 0.900864951949*I),
@@ -1410,7 +1444,7 @@ def _solve_expression(f, x, explicit_solutions, multiplicities,
 
     :issue:`31452` fixed::
 
-        sage: solve([x==3], [x], solution_dict=True)
+        sage: solve([x==3], [x], solution_dict=True)                                    # needs sage.libs.maxima
         [{x: 3}]
         sage: solve([x==3], [x], solution_dict=True, algorithm='sympy')
         [{x: 3}]
@@ -1879,14 +1913,13 @@ def solve_ineq_univar(ineq):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.maxima
         sage: from sage.symbolic.relation import solve_ineq_univar
-        sage: solve_ineq_univar(x-1/x>0)
+        sage: solve_ineq_univar(x - 1/x > 0)
         [[x > -1, x < 0], [x > 1]]
-
-        sage: solve_ineq_univar(x^2-1/x>0)
+        sage: solve_ineq_univar(x^2 - 1/x > 0)
         [[x < 0], [x > 1]]
-
-        sage: solve_ineq_univar((x^3-1)*x<=0)
+        sage: solve_ineq_univar((x^3-1)*x <= 0)
         [[x >= 0, x <= 1]]
 
     ALGORITHM:
@@ -1933,25 +1966,25 @@ def solve_ineq_fourier(ineq, vars=None):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.maxima
         sage: from sage.symbolic.relation import solve_ineq_fourier
         sage: y = var('y')
-        sage: solve_ineq_fourier([x+y<9,x-y>4],[x,y])
+        sage: solve_ineq_fourier([x + y < 9, x - y > 4], [x,y])
         [[y + 4 < x, x < -y + 9, y < (5/2)]]
-        sage: solve_ineq_fourier([x+y<9,x-y>4],[y,x])[0][0](x=42)
+        sage: solve_ineq_fourier([x + y < 9, x - y > 4], [y,x])[0][0](x=42)
         y < -33
-
-        sage: solve_ineq_fourier([x^2>=0])
+        sage: solve_ineq_fourier([x^2 >= 0])
         [[x < +Infinity]]
-
-        sage: solve_ineq_fourier([log(x)>log(y)],[x,y])
+        sage: solve_ineq_fourier([log(x) > log(y)], [x,y])
         [[y < x, 0 < y]]
-        sage: solve_ineq_fourier([log(x)>log(y)],[y,x])
+        sage: solve_ineq_fourier([log(x) > log(y)], [y,x])
         [[0 < y, y < x, 0 < x]]
 
     Note that different systems will find default variables in different
     orders, so the following is not tested::
 
-        sage: solve_ineq_fourier([log(x)>log(y)])  # random (one of the following appears)
+        sage: # needs sage.libs.maxima
+        sage: solve_ineq_fourier([log(x) > log(y)])  # random (one of the following appears)
         [[0 < y, y < x, 0 < x]]
         [[y < x, 0 < y]]
 
@@ -2024,25 +2057,24 @@ def solve_ineq(ineq, vars=None):
 
     Inequalities in one variable. The variable is detected automatically::
 
-        sage: solve_ineq(x^2-1>3)
+        sage: solve_ineq(x^2 - 1 > 3)                                                   # needs sage.libs.maxima
         [[x < -2], [x > 2]]
-
-        sage: solve_ineq(1/(x-1)<=8)
+        sage: solve_ineq(1/(x-1) <= 8)                                                  # needs sage.libs.maxima
         [[x < 1], [x >= (9/8)]]
 
     System of inequalities with automatically detected inequalities::
 
         sage: y = var('y')
-        sage: solve_ineq([x-y<0,x+y-3<0],[y,x])
+        sage: solve_ineq([x - y < 0, x + y - 3 < 0], [y,x])                             # needs sage.libs.maxima
         [[x < y, y < -x + 3, x < (3/2)]]
-        sage: solve_ineq([x-y<0,x+y-3<0],[x,y])
+        sage: solve_ineq([x - y < 0, x + y - 3 < 0], [x,y])                             # needs sage.libs.maxima
         [[x < min(-y + 3, y)]]
 
     Note that although Sage will detect the variables automatically,
     the order it puts them in may depend on the system, so the following
     command is only guaranteed to give you one of the above answers::
 
-        sage: solve_ineq([x-y<0,x+y-3<0])  # random
+        sage: solve_ineq([x - y < 0, x + y - 3 < 0])  # random                          # needs sage.libs.maxima
         [[x < y, y < -x + 3, x < (3/2)]]
 
     ALGORITHM:
