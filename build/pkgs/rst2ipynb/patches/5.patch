@@ -1,0 +1,24 @@
+From b39fabde987b6305d137a48dafb9b789defcf087 Mon Sep 17 00:00:00 2001
+From: Ricardo Buring <ricardo.buring@gmail.com>
+Date: Wed, 13 Sep 2023 10:49:04 +0200
+Subject: [PATCH] Use --markdown-headings=atx option in pandoc call
+
+The --atx-headers option is deprecated since pandoc 2.11.2 (2020-11-19)
+and was removed in pandoc 3.0 (2023-01-18).
+---
+ rst2ipynb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/rst2ipynb b/rst2ipynb
+index fd53376..122bb23 100644
+--- a/rst2ipynb
++++ b/rst2ipynb
+@@ -61,7 +61,7 @@ if args.verbose:
+ p = Popen([
+         'pandoc',
+         '--filter', 'rst2ipynb-sageblock-filter',
+-        '--atx-headers',
++        '--markdown-headings=atx',
+         '--from', 'rst',
+         '--to', 'markdown_github+tex_math_dollars+fenced_code_attributes',
+     ], stdout=PIPE, stdin=PIPE)
