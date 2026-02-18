@@ -114,6 +114,7 @@ Subsystem for Linux (WSL) or virtualization.
 | 10.8.x <br>(main)                                                            | 3.11–3.14 | GCC 9–16, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable                     |
 |                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
 |                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
+|                                                                              |           | Emscripten        | any                         | WASM32        | *partial functionality*    |
 
 Detailed information on supported platforms for a specific version of passagemath
 can be found in the
