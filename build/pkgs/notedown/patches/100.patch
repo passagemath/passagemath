@@ -1,0 +1,103 @@
+From 8a959a6ed3c47e31e5c3528a87d65749b4ad822f Mon Sep 17 00:00:00 2001
+From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
+Date: Wed, 18 Feb 2026 13:37:50 -0800
+Subject: [PATCH 1/2] notedown/main.py: Remove use of pkg_resources.require
+
+---
+ notedown/main.py | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/notedown/main.py b/notedown/main.py
+index 16cdb4e..139fa51 100644
+--- a/notedown/main.py
++++ b/notedown/main.py
+@@ -17,12 +17,7 @@
+                        run,
+                        strip)
+ 
+-
+-try:
+-    __version__ = pkg_resources.require('notedown')[0].version
+-
+-except pkg_resources.DistributionNotFound:
+-    __version__ = 'testing'
++__version__ = '1.5.1'
+ 
+ markdown_template \
+     = pkg_resources.resource_filename('notedown',
+
+From d76dc50eea175ec309dcfcdfa8c9eab478376fdc Mon Sep 17 00:00:00 2001
+From: Matthias Koeppe <mkoeppe@math.ucdavis.edu>
+Date: Wed, 18 Feb 2026 15:37:24 -0800
+Subject: [PATCH 2/2] Replace use of pkg_resources.resource_filename using
+ importlib.resources
+
+---
+ notedown/__init__.py |  2 +-
+ notedown/main.py     | 26 ++++++++++++++++++--------
+ 2 files changed, 19 insertions(+), 9 deletions(-)
+
+diff --git a/notedown/__init__.py b/notedown/__init__.py
+index 6abe8df..e633569 100644
+--- a/notedown/__init__.py
++++ b/notedown/__init__.py
+@@ -1,7 +1,7 @@
+ from __future__ import absolute_import
+ 
+ from .notedown import *
+-from .main import convert, markdown_template, __version__
++from .main import convert, __version__
+ 
+ # avoid having to require the notebook to install notedown
+ try:
+diff --git a/notedown/main.py b/notedown/main.py
+index 139fa51..9afd1ac 100644
+--- a/notedown/main.py
++++ b/notedown/main.py
+@@ -4,7 +4,7 @@
+ import os
+ import sys
+ import argparse
+-import pkg_resources
++import importlib
+ import io
+ import logging
+ 
+@@ -19,12 +19,20 @@
+ 
+ __version__ = '1.5.1'
+ 
+-markdown_template \
+-    = pkg_resources.resource_filename('notedown',
+-                                      'templates/markdown.tpl')
+-markdown_figure_template \
+-    = pkg_resources.resource_filename('notedown',
+-                                      'templates/markdown_outputs.tpl')
++
++def main(args, help=''):
++    global markdown_template, markdown_figure_template
++
++    with (
++        importlib.resources.path('notedown',
++                                 'templates/markdown.tpl')
++        as markdown_template,
++        importlib.resources.path('notedown',
++                                 'templates/markdown_outputs.tpl')
++        as markdown_figure_template
++    ):
++        return _main(args, help)
++
+ 
+ examples = """
+ Example usage of notedown
+@@ -202,7 +210,9 @@ def command_line_parser():
+     return parser
+ 
+ 
+-def main(args, help=''):
++def _main(args, help=''):
++    global markdown_template, markdown_figure_template
++
+     if args.debug:
+         logging.basicConfig(level=logging.DEBUG)
+ 
