@@ -9,6 +9,7 @@ requires = [
     SPKG_INSTALL_REQUIRES_sphinx_inline_tabs
     SPKG_INSTALL_REQUIRES_furo
     SPKG_INSTALL_REQUIRES_jupyter_sphinx
+    SPKG_INSTALL_REQUIRES_jupyterlite_sphinx
     SPKG_INSTALL_REQUIRES_sagelib
     SPKG_INSTALL_REQUIRES_sagemath_cliquer
     SPKG_INSTALL_REQUIRES_sagemath_cmr
