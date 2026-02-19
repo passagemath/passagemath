@@ -15,9 +15,14 @@ Stopgaps
 
 import warnings
 
+cdef bint ENABLED = True
 
-from sage.doctest import DOCTEST_MODE
-cdef bint ENABLED = not DOCTEST_MODE
+try:
+    from sage.doctest import DOCTEST_MODE
+except ImportError:
+    pass
+else:
+    ENABLED = not DOCTEST_MODE
 
 
 def set_state(bint mode):
