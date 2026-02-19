@@ -218,9 +218,13 @@ class CharacterArt(SageObject):
             sage: empty_ascii_art._isatty()
             False
         """
-        from sage.doctest import DOCTEST_MODE
-        if DOCTEST_MODE:
-            return False
+        try:
+            from sage.doctest import DOCTEST_MODE
+        except ImportError:
+            pass
+        else:
+            if DOCTEST_MODE:
+                return False
         try:
             return sys.stdout.isatty()
         except Exception:
