@@ -67,10 +67,10 @@ if SAGE_LIVE_DOC == 'yes':
     SAGE_JUPYTER_SERVER = os.environ.get('SAGE_JUPYTER_SERVER', 'binder')
     if SAGE_JUPYTER_SERVER.startswith('binder'):
         # format: "binder" or
-        #         "binder:sagemath/sage-binder-env" or
-        #         "binder:sagemath/sage-binder-env/dev"
+        #         "binder:passagemath/passagemath-binder-env" or
+        #         "binder:passagemath/passagemath-binder-env/main"
         if SAGE_JUPYTER_SERVER == 'binder':
-            binder_repo = "sagemath/sage-binder-env/master"
+            binder_repo = "passagemath/passagemath-binder-env/main"
         else:
             binder_repo = SAGE_JUPYTER_SERVER[7:]
         s = binder_repo.split('/', 2)
