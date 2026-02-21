@@ -106,14 +106,14 @@ Subsystem for Linux (WSL) or virtualization.
 
 | Version                                                                      | CPython   | Toolchains        | Operating Systems           | Architectures | Notes                      |
 |------------------------------------------------------------------------------|-----------|-------------------|-----------------------------|---------------|----------------------------|
-| [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9–3.12  | GCC 8.4–14, clang | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2024-12                |
-| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9–3.13  | GCC 9–14, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2025-10                |
-| [10.6.x](https://github.com/passagemath/passagemath/tree/passagemath-10.6.x) | 3.10–3.14 | GCC 9–15, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | old stable <br>EOL 2026-10 |
+| [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9–3.12  | GCC 8.4–14, clang | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2024-12                |
+| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9–3.13  | GCC 9–14, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2025-10                |
+| [10.6.x](https://github.com/passagemath/passagemath/tree/passagemath-10.6.x) | 3.10–3.14 | GCC 9–15, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | old stable <br>EOL 2026-10 |
 |                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
 |                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
-| 10.8.x <br>(main)                                                            | 3.11–3.14 | GCC 9–16, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable                     |
+| 10.8.x <br>(main)                                                            | 3.11–3.14 | GCC 9–16, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable                     |
 |                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
-|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
+|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
 |                                                                              |           | Emscripten        | any                         | Wasm32        | *partial functionality*    |
 
 Detailed information on supported platforms for a specific version of passagemath
@@ -176,6 +176,12 @@ Authors of packages that depend on the Sage library can declare dependencies on 
 - [kerrgeodesic_gw](https://github.com/BlackHolePerturbationToolkit/kerrgeodesic_gw) is an example of a pure Python package that [declares optional dependencies ("extras-require")](https://github.com/BlackHolePerturbationToolkit/kerrgeodesic_gw/blob/master/setup.py#L49) on three distributions: passagemath-symbolics, passagemath-plot, and passagemath-repl.
 
 - See https://github.com/passagemath/passagemath/issues/248 for many more examples how to change a user package to make it ready for passagemath and the Python ecosystem.
+
+The modularized design also enables productive porting efforts to new platforms.
+- Packages marked ‹Windows› are available on PyPI as binary wheels for native Windows.
+- Packages marked ‹MSYS2› are available in the [MSYS2 software distribution](https://www.msys2.org/) on Windows.
+- Packages marked ‹Wasm› are available in the prefix.dev
+[emscripten-forge-4x channel](https://prefix.dev/channels/emscripten-forge-4x) for serverless in-browser use via WebAssembly.
 
 Here is an overview of the distribution packages of passagemath.
 
@@ -254,8 +260,15 @@ This makes technical sense because the dependencies will be localized to this di
 [![PyPI: passagemath-docbuild](https://img.shields.io/pypi/v/passagemath-docbuild.svg?label=passagemath-docbuild)](https://pypi.python.org/pypi/passagemath-docbuild) Build system for the Sage documentation. ‹Linux·macOS·WSL···›
 
 
-[Windows] Installation from MSYS2 Packages
-------------------------------------------
+‹Windows› Installation on Windows
+---------------------------------
+
+The modularized packages marked above as ‹Windows› can be installed
+into Python on Windows using pip.
+
+
+‹MSYS2› Installation on Windows from MSYS2 Packages
+---------------------------------------------------
 
 The modularized packages marked above as ‹MSYS2› can be installed
 using the [MSYS2 software distribution](https://www.msys2.org/).
@@ -276,15 +289,15 @@ sage: from passagemath_cmr import *
 ```
 
 
-[Wasm] Serverless In-Browser Use with WebAssembly and JupyterLite
+‹Wasm› Serverless In-Browser Use with WebAssembly and JupyterLite
 -----------------------------------------------------------------
 
 WebAssembly builds of the modularized packages marked above as ‹Wasm›,
 using the Emscripten toolchain, are available in the prefix.dev
 [emscripten-forge-4x channel](https://prefix.dev/channels/emscripten-forge-4x).
 
-They can be used with JupyterLite in the browser for serverless operation,
-as illustrated by the
+They can be used with [JupyterLite](https://github.com/jupyterlite/jupyterlite)
+in a web browser for serverless operation, as illustrated by the
 [passagemath JupyterLite demo website](http://passagemath.org/passagemath-jupyterlite-demo/).
 
 [![lite-badge](https://jupyterlite.rtfd.io/en/latest/_static/badge.svg)](http://passagemath.org/passagemath-jupyterlite-demo/notebooks/?path=passagemath-combinat.ipynb)
