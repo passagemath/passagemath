@@ -38,7 +38,7 @@ from sage.misc.sagedoc_conf import *  # Load configuration shared with sage.misc
 # General configuration
 # ---------------------
 
-SAGE_LIVE_DOC = os.environ.get('SAGE_LIVE_DOC', 'no')
+SAGE_LIVE_DOC = os.environ.get('SAGE_LIVE_DOC', 'yes')
 SAGE_PREPARSED_DOC = os.environ.get('SAGE_PREPARSED_DOC', 'yes')
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
@@ -67,10 +67,10 @@ if SAGE_LIVE_DOC == 'yes':
     SAGE_JUPYTER_SERVER = os.environ.get('SAGE_JUPYTER_SERVER', 'binder')
     if SAGE_JUPYTER_SERVER.startswith('binder'):
         # format: "binder" or
-        #         "binder:sagemath/sage-binder-env" or
-        #         "binder:sagemath/sage-binder-env/dev"
+        #         "binder:passagemath/passagemath-binder-env" or
+        #         "binder:passagemath/passagemath-binder-env/main"
         if SAGE_JUPYTER_SERVER == 'binder':
-            binder_repo = "sagemath/sage-binder-env/master"
+            binder_repo = "passagemath/passagemath-binder-env/main"
         else:
             binder_repo = SAGE_JUPYTER_SERVER[7:]
         s = binder_repo.split('/', 2)
