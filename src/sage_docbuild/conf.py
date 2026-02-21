@@ -38,7 +38,7 @@ from sage.misc.sagedoc_conf import *  # Load configuration shared with sage.misc
 # General configuration
 # ---------------------
 
-SAGE_LIVE_DOC = os.environ.get('SAGE_LIVE_DOC', 'no')
+SAGE_LIVE_DOC = os.environ.get('SAGE_LIVE_DOC', 'yes')
 SAGE_PREPARSED_DOC = os.environ.get('SAGE_PREPARSED_DOC', 'yes')
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
