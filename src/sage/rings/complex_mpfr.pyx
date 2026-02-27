@@ -53,6 +53,7 @@ from sage.rings.integer_ring import ZZ
 
 cimport gmpy2
 gmpy2.import_gmpy2()
+from mpmath import mp
 
 try:
     from cypari2.gen import Gen as pari_gen
@@ -984,7 +985,7 @@ cdef class ComplexNumber(sage.structure.element.FieldElement):
                 real, imag = real
             elif isinstance(real, complex):
                 real, imag = real.real, real.imag
-            elif type(real) is gmpy2.mpc:
+            elif isinstance(real, (gmpy2.mpc, mp.mpc)):
                 real, imag = (<gmpy2.mpc>real).real, (<gmpy2.mpc>real).imag
             else:
                 imag = 0
