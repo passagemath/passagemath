@@ -729,7 +729,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             sage: SR.cleanup_var(x)
             sage: symbols_copy == SR.symbols
             True
-            sage: assumptions_copy == assumptions()
+            sage: assumptions_copy == assumptions()                                     # needs sage.libs.maxima
             True
         """
         from sage.symbolic.assumptions import assumptions

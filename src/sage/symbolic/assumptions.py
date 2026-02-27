@@ -35,6 +35,7 @@ The default domain of a symbolic variable is the complex plane::
 
 Here is the list of acceptable features::
 
+    sage: # needs sage.libs.maxima
     sage: from sage.interfaces.maxima_lib import maxima
     sage: ", ".join(map(str, maxima("features")._sage_()))
     'integer, noninteger, even, odd, rational, irrational, real, imaginary,
@@ -67,7 +68,7 @@ Assumptions also affect operations that do not use Maxima::
 Assumptions are added and in some cases checked for consistency::
 
     sage: assume(x>0)
-    sage: assume(x<0)
+    sage: assume(x<0)                                                                   # needs sage.libs.maxima
     Traceback (most recent call last):
     ...
     ValueError: Assumption is inconsistent
@@ -113,11 +114,12 @@ class GenericDeclaration(UniqueRepresentation):
         sage: decl.forget()
         sage: sin(x*pi)
         sin(pi*x)
-        sage: sin(x*pi).simplify()
+        sage: sin(x*pi).simplify()                                                      # needs sage.libs.maxima
         sin(pi*x)
 
     Here is the list of acceptable features::
 
+        sage: # needs sage.libs.maxima
         sage: from sage.interfaces.maxima_lib import maxima
         sage: ", ".join(map(str, maxima("features")._sage_()))
         'integer, noninteger, even, odd, rational, irrational, real, imaginary,
@@ -150,7 +152,7 @@ class GenericDeclaration(UniqueRepresentation):
             sage: from sage.symbolic.assumptions import GenericDeclaration
             sage: decl = GenericDeclaration(x, 'integer')
             sage: decl.assume()
-            sage: sin(x*pi)
+            sage: sin(x*pi)                                                             # needs sage.libs.maxima
             0
             sage: decl.forget()
             sage: sin(x*pi)
@@ -158,6 +160,7 @@ class GenericDeclaration(UniqueRepresentation):
 
         Here is the list of acceptable features::
 
+            sage: # needs sage.libs.maxima
             sage: from sage.interfaces.maxima_lib import maxima
             sage: ", ".join(map(str, maxima("features")._sage_()))
             'integer, noninteger, even, odd, rational, irrational, real,
@@ -207,7 +210,7 @@ class GenericDeclaration(UniqueRepresentation):
             b
             sage: GDecl(b, 'bougie')
             b is bougie
-            sage: _.assume()
+            sage: _.assume()                                                            # needs sage.libs.maxima
             Traceback (most recent call last):
             ...
             ValueError: bougie not a valid assumption, must be one of ['analytic', ... 'symmetric']
@@ -376,6 +379,7 @@ class GenericDeclaration(UniqueRepresentation):
             sage: GenericDeclaration(x, 'imaginary').contradicts(x==y+z)
             False
 
+            sage: # needs sage.libs.maxima
             sage: GenericDeclaration(x, 'rational').contradicts(y==pi)
             False
             sage: GenericDeclaration(x, 'rational').contradicts(x==pi)
@@ -564,6 +568,7 @@ def assume(*args):
     If you make inconsistent or meaningless assumptions,
     Sage will let you know::
 
+        sage: # needs sage.libs.maxima
         sage: assume(x<0)
         sage: assume(x>0)
         Traceback (most recent call last):
@@ -586,6 +591,7 @@ def assume(*args):
     You can also use assumptions to evaluate simple
     truth values::
 
+        sage: # needs sage.libs.maxima
         sage: x, y, z = var('x, y, z')
         sage: assume(x>=y,y>=z,z>=x)
         sage: bool(x==z)
@@ -612,14 +618,14 @@ def assume(*args):
         sage: var('m,n')
         (m, n)
         sage: assume(n, 'integer'); assume(m, 'integer')
-        sage: sin(n*pi).simplify()
+        sage: sin(n*pi).simplify()                                                      # needs sage.libs.maxima
         0
-        sage: sin(m*pi).simplify()
+        sage: sin(m*pi).simplify()                                                      # needs sage.libs.maxima
         0
         sage: forget()
-        sage: sin(n*pi).simplify()
+        sage: sin(n*pi).simplify()                                                      # needs sage.libs.maxima
         sin(pi*n)
-        sage: sin(m*pi).simplify()
+        sage: sin(m*pi).simplify()                                                      # needs sage.libs.maxima
         sin(pi*m)
 
     Check that positive integers can be created (:issue:`20132`)
@@ -679,7 +685,7 @@ def assume(*args):
         sage: x, y = SR.var('x, y')
         sage: assume(x > 0)
         sage: assume(y > 0)
-        sage: bool(y*(x - y) == 0)
+        sage: bool(y*(x - y) == 0)                                                      # needs sage.libs.maxima
         False
     """
     for x in preprocess_assumptions(args):
@@ -716,12 +722,12 @@ def forget(*args):
         sage: assume(y, 'even', z, 'complex')
         sage: assumptions()
         [y > 0, y is even, z is complex]
-        sage: cos(y*pi).simplify()
+        sage: cos(y*pi).simplify()                                                      # needs sage.libs.maxima
         1
         sage: forget(y,'even')
-        sage: cos(y*pi).simplify()
+        sage: cos(y*pi).simplify()                                                      # needs sage.libs.maxima
         cos(pi*y)
-        sage: assumptions()
+        sage: assumptions()                                                             # needs sage.libs.maxima
         [y > 0, z is complex]
         sage: forget()
         sage: assumptions()
@@ -814,12 +820,12 @@ def _forget_all():
         sage: assume(x > 0, y < 0)
         sage: bool(x*y < 0)      # means definitely true
         True
-        sage: bool(x*y > 0)      # might not be true
+        sage: bool(x*y > 0)      # might not be true                                    # needs sage.libs.maxima
         False
         sage: forget()    # implicitly calls _forget_all
-        sage: bool(x*y < 0)      # might not be true
+        sage: bool(x*y < 0)      # might not be true                                    # needs sage.libs.maxima
         False
-        sage: bool(x*y > 0)      # might not be true
+        sage: bool(x*y > 0)      # might not be true                                    # needs sage.libs.maxima
         False
 
     TESTS:
@@ -829,14 +835,14 @@ def _forget_all():
         sage: var('m,n')
         (m, n)
         sage: assume(n, 'integer'); assume(m, 'integer')
-        sage: sin(n*pi).simplify()
+        sage: sin(n*pi).simplify()                                                      # needs sage.libs.maxima
         0
-        sage: sin(m*pi).simplify()
+        sage: sin(m*pi).simplify()                                                      # needs sage.libs.maxima
         0
         sage: forget()
-        sage: sin(n*pi).simplify()
+        sage: sin(n*pi).simplify()                                                      # needs sage.libs.maxima
         sin(pi*n)
-        sage: sin(m*pi).simplify()
+        sage: sin(m*pi).simplify()                                                      # needs sage.libs.maxima
         sin(pi*m)
     """
     global _assumptions
@@ -886,6 +892,7 @@ class assuming:
     updated assumptions database. After exit, the original database is
     restored. ::
 
+        sage: # needs sage.libs.maxima
         sage: var("x")
         x
         sage: forget(assumptions())
@@ -902,6 +909,7 @@ class assuming:
     (and by the way, to check that Sage's default integrator
     (Maxima's, that is), sometimes nitpicks for naught). ::
 
+        sage: # needs sage.libs.maxima
         sage: var("y,k,theta")
         (y, k, theta)
         sage: dgamma(y,k,theta)=y^(k-1)*e^(-y/theta)/(theta^k*gamma(k))
@@ -932,12 +940,12 @@ class assuming:
     As mentioned above, it is an error to try to introduce redundant or
     inconsistent assumptions. ::
 
+        sage: # needs sage.libs.maxima
         sage: assume(x > 0)
         sage: with assuming(x > -1): "I won't see this"
         Traceback (most recent call last):
         ...
         ValueError: Assumption is redundant
-
         sage: with assuming(x < -1): "I won't see this"
         Traceback (most recent call last):
         ...

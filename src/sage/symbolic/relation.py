@@ -1043,6 +1043,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     handled by Maxima::
 
         sage: _ = var('t')
+        sage: x, y = var('x y')
         sage: r = solve([x^2 - y^2/exp(x), y-1], x, y,
         ....:           algorithm='sympy', solution_dict=True)
         sage: (r[0][x], r[0][y])
