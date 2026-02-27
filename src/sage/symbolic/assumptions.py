@@ -333,9 +333,9 @@ class GenericDeclaration(UniqueRepresentation):
         else:  # trying to forget a declaration explicitly rather than implicitly
             for x in _assumptions:
                 if repr(self) == repr(x):  # so by implication x is also a GenericDeclaration
-                    x.forget()
-                    break
-            return
+                    if self is not x:
+                        x.forget()
+                        break
 
     def contradicts(self, soln):
         """
