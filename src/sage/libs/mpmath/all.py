@@ -23,5 +23,5 @@ _constants_funcs = {
 
 
 def eval_constant(name, ring):
-    prec = ring.precision() + 20
+    prec = int(ring.precision() + 20)
     return ring(_constants_funcs[name](prec)) >> prec
