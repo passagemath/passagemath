@@ -1266,11 +1266,12 @@ def limit(ex, *args, dir=None, taylor=False, algorithm='maxima', **kwargs):
 
     Using different algorithms::
 
+        sage: x = var('x')
         sage: limit(sin(x)/x, x, 0, algorithm='sympy')
         1
-        sage: limit(sin(x)/x, x, 0, algorithm='giac') # needs sage.libs.giac
+        sage: limit(sin(x)/x, x, 0, algorithm='giac')                                   # needs sage.libs.giac
         1
-        sage: limit(x^x, x, 0, dir='+', algorithm='fricas') # optional - fricas
+        sage: limit(x^x, x, 0, dir='+', algorithm='fricas')     # optional - fricas
         1
 
     Using Taylor series (can sometimes handle more complex limits)::
@@ -1807,6 +1808,7 @@ def laplace(ex, t, s, algorithm='maxima'):
 
     We do a formal calculation::
 
+        sage: x, s = var('x, s')
         sage: f = function('f')(x)
         sage: g = f.diff(x); g
         diff(f(x), x)

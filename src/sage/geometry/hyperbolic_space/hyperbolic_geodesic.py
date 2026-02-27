@@ -1609,8 +1609,9 @@ class HyperbolicGeodesicUHP(HyperbolicGeodesic):
 
         EXAMPLES::
 
-            sage: # needs sage.libs.maxima
             sage: UHP = HyperbolicPlane().UHP()
+
+            sage: # needs sage.libs.maxima
             sage: g = UHP.random_geodesic()
             sage: m = g.midpoint()
             sage: d1 = UHP.dist(m, g.start())

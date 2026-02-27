@@ -1033,6 +1033,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     We use SymPy for Diophantine equations, see
     ``Expression.solve_diophantine``::
 
+        sage: x, z = var('x z')
         sage: assume(x, 'integer')
         sage: assume(z, 'integer')
         sage: solve((x-z)^2==2, x)
@@ -1071,6 +1072,7 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     We cannot translate all results from SymPy but we can at least
     print them::
 
+        sage: x = var('x')
         sage: solve(sinh(x) - 2*cosh(x), x, algorithm='sympy')
         [ImageSet(Lambda(_n, I*(2*_n*pi + pi/2) + log(sqrt(3))), Integers),
          ImageSet(Lambda(_n, I*(2*_n*pi - pi/2) + log(sqrt(3))), Integers)]
@@ -1086,22 +1088,20 @@ def solve(f, *args, explicit_solutions=None, multiplicities=None, to_poly_solve=
     A basic interface to Giac is provided::
 
         sage: # needs sage.libs.giac
-        sage: solve([(2/3)^x-2], [x], algorithm='giac')
+        sage: x = var('x')
+        sage: solve([(2/3)^x - 2], [x], algorithm='giac')
         [-log(2)/(log(3) - log(2))]
-
-        sage: # needs sage.libs.giac
         sage: f = (sin(x) - 8*cos(x)*sin(x))*(sin(x)^2 + cos(x)) - (2*cos(x)*sin(x) - sin(x))*(-2*sin(x)^2 + 2*cos(x)^2 - cos(x))
         sage: solve(f, x, algorithm='giac')
         [-2*arctan(sqrt(2)), 0, 2*arctan(sqrt(2)), pi]
-
-        sage: # needs sage.libs.giac
         sage: x, y = SR.var('x,y')
-        sage: solve([x+y-4,x*y-3],[x,y],algorithm='giac')
+        sage: solve([x + y - 4, x*y - 3], [x,y], algorithm='giac')
         [[1, 3], [3, 1]]
 
     TESTS::
 
         sage: # needs sage.libs.maxima
+        sage: x = var('x')
         sage: solve([sin(x) == x, y^2 == x], x, y)
         [sin(x) == x, y^2 == x]
         sage: solve(0 == 1, x)
