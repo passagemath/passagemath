@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-repl
-# sage.doctest: needs primecountpy sage.libs.pari
+# sage.doctest: needs primecountpy sage.libs.pari sage.schemes
 """
 This file contains all the example code from the published book
 'Elementary Number Theory: Primes, Congruences, and Secrets' by
