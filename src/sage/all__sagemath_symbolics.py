@@ -1,7 +1,12 @@
 # sage_setup: distribution = sagemath-symbolics
 # delvewheel: patch
 from .all__sagemath_modules import *
-from .all__sagemath_singular import *
+
+try:
+    from .all__sagemath_singular import *
+except ImportError:
+    pass
+
 from .all__sagemath_gsl import *
 
 from sage.dynamics.complex_dynamics import *
