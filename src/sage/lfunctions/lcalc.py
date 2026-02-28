@@ -29,12 +29,14 @@ AUTHORS:
 # ######################################################################
 
 import os
+import shlex
 
-from sage.structure.sage_object import SageObject
+from sage.features.lcalc import lcalc as lcalc_executable
 from sage.misc.lazy_import import lazy_import
 from sage.misc.pager import pager
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
+from sage.structure.sage_object import SageObject
 
 lazy_import('sage.rings.complex_mpfr', 'ComplexField')
 lazy_import('sage.rings.real_mpfr', 'RealField')
@@ -68,7 +70,7 @@ class LCalc(SageObject):
         return "Rubinsteins L-function Calculator"
 
     def __call__(self, args):
-        cmd = 'lcalc %s' % args
+        cmd = f'{shlex.quote(lcalc.absolute_filename())} {args}'
         with os.popen(cmd) as f:
             res = f.read().strip()
         return res
