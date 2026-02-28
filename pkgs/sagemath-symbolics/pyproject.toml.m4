@@ -29,7 +29,6 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_gsl
     SPKG_INSTALL_REQUIRES_sagemath_modules
     SPKG_INSTALL_REQUIRES_sagemath_ntl
-    SPKG_INSTALL_REQUIRES_sagemath_singular
     SPKG_INSTALL_REQUIRES_sympy
 ]
 dynamic = ["version"]
@@ -51,13 +50,13 @@ maxima          = ["passagemath-maxima"]
 ntl             = []  # no extra needed
 primecount      = [SPKG_INSTALL_REQUIRES_primecountpy]
 pynac           = []  # no extra needed
-singular        = []  # no extra needed
+singular        = ["passagemath-singular"]
 sympy           = []  # no extra needed
 
 # extras by other features
 plot            = ["passagemath-plot"]
 
-standard        = ["passagemath-symbolics[maxima,primecount,test]"]
+standard        = ["passagemath-symbolics[maxima,primecount,singular,test]"]
 
 [tool.setuptools]
 include-package-data = false
@@ -77,7 +76,7 @@ host-requires = [
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
-  "pkg:generic/singular",
+  "pkg:generic/singular",  # factory only
 ]
 
 dependencies = [
