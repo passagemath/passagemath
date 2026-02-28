@@ -1631,7 +1631,8 @@ class HyperbolicGeodesicUHP(HyperbolicGeodesic):
         This checks :issue:`20330` so that geodesics defined by symbolic
         expressions do not generate runtime errors. ::
 
-            sage: g=HyperbolicPlane().UHP().get_geodesic(-1+I,1+I)
+            sage: # needs sage.libs.maxima
+            sage: g = HyperbolicPlane().UHP().get_geodesic(-1+I,1+I)
             sage: point = g.midpoint(); point
             Point in UHP -1/2*(sqrt(2)*...
             sage: QQbar(point.coordinates()).radical_expression()  # long time
