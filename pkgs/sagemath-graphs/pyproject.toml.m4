@@ -71,7 +71,7 @@ sat         = ["passagemath-combinat"]
 
 # the whole package
 standard    = [
-    "passagemath-graphs[combinat,databases,groups,mip,modules,planarity,polyhedra,rankwidth,repl]",
+    "passagemath-graphs[cliquer,combinat,databases,groups,mip,modules,planarity,polyhedra,rankwidth,repl]",
     "passagemath-plot[tachyon]",
 ]
 

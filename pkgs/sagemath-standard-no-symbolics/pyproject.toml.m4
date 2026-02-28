@@ -37,6 +37,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_brial
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_cddlib
+    SPKG_INSTALL_REQUIRES_sagemath_cliquer
     SPKG_INSTALL_REQUIRES_sagemath_combinat
     SPKG_INSTALL_REQUIRES_sagemath_eclib
     SPKG_INSTALL_REQUIRES_sagemath_environment
