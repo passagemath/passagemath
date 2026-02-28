@@ -387,7 +387,7 @@ def has_homomorphism_to(G, H, core=False, solver=None, verbose=0,
 
         sage: # needs sage.numerical.mip
         sage: g = graphs.CycleGraph(9)
-        sage: g.chromatic_number()
+        sage: g.chromatic_number()                                                      # needs cliquer
         3
         sage: g.has_homomorphism_to(graphs.CompleteGraph(3)) is not False
         True
