@@ -70,6 +70,9 @@
     "sage.arith.misc": {
         "ntests": 1079
     },
+    "sage.arith.multi_modular": {
+        "ntests": 134
+    },
     "sage.arith.numerical_approx": {
         "ntests": 3
     },
@@ -86,16 +89,16 @@
         "ntests": 77
     },
     "sage.calculus.calculus": {
-        "ntests": 226
+        "ntests": 444
     },
     "sage.calculus.desolvers": {
-        "ntests": 144
+        "ntests": 219
     },
     "sage.calculus.tests": {
-        "ntests": 58
+        "ntests": 78
     },
     "sage.calculus.var": {
-        "ntests": 91
+        "ntests": 98
     },
     "sage.categories.action": {
         "ntests": 91
@@ -1156,7 +1159,7 @@
         "ntests": 4
     },
     "sage.features.ecl": {
-        "ntests": 3
+        "ntests": 4
     },
     "sage.features.eclib": {
         "ntests": 3
@@ -1288,7 +1291,7 @@
         "ntests": 21
     },
     "sage.features.sagemath": {
-        "ntests": 162
+        "ntests": 164
     },
     "sage.features.sat": {
         "ntests": 12
@@ -1359,6 +1362,9 @@
     "sage.functions.other": {
         "ntests": 97
     },
+    "sage.functions.prime_pi": {
+        "ntests": 16
+    },
     "sage.functions.special": {
         "ntests": 27
     },
@@ -1381,8 +1387,7 @@
         "ntests": 138
     },
     "sage.geometry.hyperbolic_space.hyperbolic_geodesic": {
-        "failed": true,
-        "ntests": 387
+        "ntests": 406
     },
     "sage.geometry.hyperbolic_space.hyperbolic_interface": {
         "ntests": 25
@@ -1392,6 +1397,9 @@
     },
     "sage.geometry.hyperbolic_space.hyperbolic_point": {
         "ntests": 104
+    },
+    "sage.geometry.riemannian_manifolds.parametrized_surface3d": {
+        "ntests": 288
     },
     "sage.geometry.riemannian_manifolds.surface3d_generators": {
         "ntests": 15
@@ -1540,6 +1548,9 @@
     "sage.interfaces.khoca": {
         "ntests": 5
     },
+    "sage.interfaces.lisp": {
+        "ntests": 75
+    },
     "sage.interfaces.magma": {
         "ntests": 91
     },
@@ -1551,6 +1562,15 @@
     },
     "sage.interfaces.mathics": {
         "ntests": 30
+    },
+    "sage.interfaces.maxima": {
+        "ntests": 212
+    },
+    "sage.interfaces.maxima_abstract": {
+        "ntests": 307
+    },
+    "sage.interfaces.maxima_lib": {
+        "ntests": 226
     },
     "sage.interfaces.process": {
         "ntests": 39
@@ -1566,7 +1586,7 @@
         "ntests": 418
     },
     "sage.interfaces.sympy": {
-        "ntests": 314
+        "ntests": 319
     },
     "sage.interfaces.sympy_wrapper": {
         "ntests": 28
@@ -1579,6 +1599,9 @@
     },
     "sage.libs.arb.arith": {
         "ntests": 8
+    },
+    "sage.libs.ecl": {
+        "ntests": 204
     },
     "sage.libs.flint.arith": {
         "ntests": 9
@@ -1738,28 +1761,202 @@
         "ntests": 48
     },
     "sage.manifolds.calculus_method": {
-        "ntests": 82
+        "ntests": 86
+    },
+    "sage.manifolds.catalog": {
+        "ntests": 58
+    },
+    "sage.manifolds.chart": {
+        "ntests": 547
+    },
+    "sage.manifolds.chart_func": {
+        "ntests": 838
+    },
+    "sage.manifolds.continuous_map": {
+        "ntests": 411
     },
     "sage.manifolds.continuous_map_image": {
         "ntests": 33
     },
+    "sage.manifolds.differentiable.affine_connection": {
+        "ntests": 486
+    },
+    "sage.manifolds.differentiable.automorphismfield": {
+        "ntests": 318
+    },
+    "sage.manifolds.differentiable.automorphismfield_group": {
+        "ntests": 136
+    },
+    "sage.manifolds.differentiable.bundle_connection": {
+        "ntests": 285
+    },
+    "sage.manifolds.differentiable.chart": {
+        "ntests": 216
+    },
+    "sage.manifolds.differentiable.curve": {
+        "ntests": 162
+    },
+    "sage.manifolds.differentiable.de_rham_cohomology": {
+        "ntests": 139
+    },
+    "sage.manifolds.differentiable.degenerate": {
+        "ntests": 120
+    },
+    "sage.manifolds.differentiable.degenerate_submanifold": {
+        "ntests": 339
+    },
+    "sage.manifolds.differentiable.diff_form": {
+        "ntests": 377
+    },
+    "sage.manifolds.differentiable.diff_form_module": {
+        "ntests": 224
+    },
+    "sage.manifolds.differentiable.diff_map": {
+        "ntests": 201
+    },
     "sage.manifolds.differentiable.differentiable_submanifold": {
-        "ntests": 34
+        "ntests": 37
+    },
+    "sage.manifolds.differentiable.examples.euclidean": {
+        "ntests": 384
     },
     "sage.manifolds.differentiable.examples.real_line": {
         "ntests": 183
     },
+    "sage.manifolds.differentiable.examples.sphere": {
+        "ntests": 133
+    },
     "sage.manifolds.differentiable.examples.symplectic_space": {
         "ntests": 11
+    },
+    "sage.manifolds.differentiable.integrated_curve": {
+        "ntests": 314
+    },
+    "sage.manifolds.differentiable.levi_civita_connection": {
+        "ntests": 115
+    },
+    "sage.manifolds.differentiable.manifold": {
+        "ntests": 564
+    },
+    "sage.manifolds.differentiable.manifold_homset": {
+        "ntests": 283
+    },
+    "sage.manifolds.differentiable.metric": {
+        "ntests": 566
+    },
+    "sage.manifolds.differentiable.mixed_form": {
+        "ntests": 402
+    },
+    "sage.manifolds.differentiable.mixed_form_algebra": {
+        "ntests": 89
+    },
+    "sage.manifolds.differentiable.multivector_module": {
+        "ntests": 160
+    },
+    "sage.manifolds.differentiable.multivectorfield": {
+        "ntests": 289
+    },
+    "sage.manifolds.differentiable.poisson_tensor": {
+        "ntests": 40
+    },
+    "sage.manifolds.differentiable.pseudo_riemannian": {
+        "ntests": 140
+    },
+    "sage.manifolds.differentiable.pseudo_riemannian_submanifold": {
+        "ntests": 335
+    },
+    "sage.manifolds.differentiable.scalarfield": {
+        "ntests": 262
+    },
+    "sage.manifolds.differentiable.scalarfield_algebra": {
+        "ntests": 101
+    },
+    "sage.manifolds.differentiable.symplectic_form": {
+        "ntests": 107
+    },
+    "sage.manifolds.differentiable.tangent_space": {
+        "ntests": 91
+    },
+    "sage.manifolds.differentiable.tangent_vector": {
+        "ntests": 78
+    },
+    "sage.manifolds.differentiable.tensorfield": {
+        "ntests": 1024
+    },
+    "sage.manifolds.differentiable.tensorfield_module": {
+        "ntests": 157
+    },
+    "sage.manifolds.differentiable.tensorfield_paral": {
+        "ntests": 449
+    },
+    "sage.manifolds.differentiable.vector_bundle": {
+        "ntests": 291
+    },
+    "sage.manifolds.differentiable.vectorfield": {
+        "ntests": 265
+    },
+    "sage.manifolds.differentiable.vectorfield_module": {
+        "ntests": 330
+    },
+    "sage.manifolds.differentiable.vectorframe": {
+        "ntests": 341
     },
     "sage.manifolds.family": {
         "ntests": 63
     },
+    "sage.manifolds.local_frame": {
+        "ntests": 294
+    },
+    "sage.manifolds.manifold": {
+        "ntests": 497
+    },
     "sage.manifolds.manifold_homset": {
         "ntests": 92
     },
+    "sage.manifolds.operators": {
+        "ntests": 36
+    },
+    "sage.manifolds.point": {
+        "ntests": 159
+    },
+    "sage.manifolds.scalarfield": {
+        "ntests": 820
+    },
+    "sage.manifolds.scalarfield_algebra": {
+        "ntests": 129
+    },
+    "sage.manifolds.section": {
+        "ntests": 867
+    },
+    "sage.manifolds.section_module": {
+        "ntests": 180
+    },
     "sage.manifolds.structure": {
         "ntests": 24
+    },
+    "sage.manifolds.subset": {
+        "ntests": 456
+    },
+    "sage.manifolds.subsets.closure": {
+        "ntests": 29
+    },
+    "sage.manifolds.subsets.pullback": {
+        "ntests": 106
+    },
+    "sage.manifolds.topological_submanifold": {
+        "ntests": 136
+    },
+    "sage.manifolds.trivialization": {
+        "ntests": 204
+    },
+    "sage.manifolds.utilities": {
+        "ntests": 258
+    },
+    "sage.manifolds.vector_bundle": {
+        "ntests": 271
+    },
+    "sage.manifolds.vector_bundle_fiber": {
+        "ntests": 73
     },
     "sage.manifolds.vector_bundle_fiber_element": {
         "ntests": 28
@@ -1884,10 +2081,10 @@
         "ntests": 163
     },
     "sage.matrix.matrix_symbolic_dense": {
-        "ntests": 115
+        "ntests": 208
     },
     "sage.matrix.matrix_symbolic_sparse": {
-        "ntests": 125
+        "ntests": 212
     },
     "sage.matrix.misc": {
         "ntests": 15
@@ -2369,10 +2566,10 @@
         "ntests": 154
     },
     "sage.modules.vector_symbolic_dense": {
-        "ntests": 16
+        "ntests": 28
     },
     "sage.modules.vector_symbolic_sparse": {
-        "ntests": 16
+        "ntests": 28
     },
     "sage.modules.with_basis.indexed_element": {
         "ntests": 142
@@ -3739,7 +3936,7 @@
         "ntests": 244
     },
     "sage.symbolic.assumptions": {
-        "ntests": 180
+        "ntests": 260
     },
     "sage.symbolic.benchmark": {
         "ntests": 27
@@ -3752,7 +3949,7 @@
     },
     "sage.symbolic.constants": {
         "failed": true,
-        "ntests": 226
+        "ntests": 239
     },
     "sage.symbolic.expression_conversion_algebraic": {
         "ntests": 57
@@ -3761,19 +3958,22 @@
         "ntests": 72
     },
     "sage.symbolic.expression_conversions": {
-        "ntests": 356
+        "ntests": 403
     },
     "sage.symbolic.function": {
         "ntests": 130
     },
     "sage.symbolic.function_factory": {
-        "ntests": 93
+        "ntests": 96
     },
     "sage.symbolic.integration.external": {
-        "ntests": 8
+        "ntests": 14
     },
     "sage.symbolic.integration.integral": {
-        "ntests": 59
+        "ntests": 208
+    },
+    "sage.symbolic.maxima_wrapper": {
+        "ntests": 33
     },
     "sage.symbolic.operators": {
         "ntests": 50
@@ -3782,10 +3982,10 @@
         "ntests": 46
     },
     "sage.symbolic.relation": {
-        "ntests": 201
+        "ntests": 432
     },
     "sage.symbolic.ring": {
-        "ntests": 254
+        "ntests": 256
     },
     "sage.symbolic.subring": {
         "ntests": 177

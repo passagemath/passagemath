@@ -17,7 +17,7 @@ EXAMPLES::
     (cos(x)^2 + sin(x)^2, log(3*y) + log(2*y))
     sage: type(u)
     <class 'sage.modules.free_module.FreeModule_ambient_field_with_category.element_class'>
-    sage: u.simplify_full()
+    sage: u.simplify_full()                                                             # needs sage.libs.maxima
     (1, log(3*y) + log(2*y))
 
 TESTS:
@@ -77,6 +77,7 @@ def apply_map(phi):
 
         EXAMPLES::
 
+            sage: # needs sage.libs.maxima
             sage: var('x,y')
             (x, y)
             sage: v = vector([sin(x)^2 + cos(x)^2, log(x*y), sin(x/(x^2 + x)), factorial(x+1)/factorial(x)])
@@ -90,7 +91,6 @@ def apply_map(phi):
             (cos(x)^2 + sin(x)^2, log(x*y), sin(x/(x^2 + x)), x + 1)
             sage: v.simplify_full()
             (1, log(x*y), sin(1/(x + 1)), x + 1)
-
             sage: v = vector([sin(2*x), sin(3*x)])
             sage: v.simplify_trig()
             (2*cos(x)*sin(x), (4*cos(x)^2 - 1)*sin(x))

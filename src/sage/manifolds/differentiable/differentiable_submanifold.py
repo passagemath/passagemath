@@ -148,6 +148,7 @@ class DifferentiableSubmanifold(DifferentiableManifold, TopologicalSubmanifold):
     immersion is trivial. At the same time, the appropriate coordinate changes
     are computed::
 
+        sage: # needs sage.libs.maxima
         sage: N.adapted_chart()
         [Chart (M, (u_M, v_M, t_M))]
         sage: M.atlas()

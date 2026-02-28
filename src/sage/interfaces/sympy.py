@@ -558,15 +558,15 @@ def _sympysage_derivative(self):
         sage: assert diff(f(x, t), t)._sympy_()._sage_() == diff(f(x, t), t)
         sage: assert diff(f(x, t), x, 2, t)._sympy_()._sage_() == diff(f(x, t), x, 2, t)
 
-        sage: diff(f(x, t), x).integrate(x)
+        sage: diff(f(x, t), x).integrate(x)                                             # needs sage.libs.maxima
         f(x, t)
-        sage: diff(f(x, t), x).integrate(t, algorithm='maxima')
+        sage: diff(f(x, t), x).integrate(t, algorithm='maxima')                         # needs sage.libs.maxima
         integrate(diff(f(x, t), x), t)
         sage: diff(f(x, t), x).integrate(t, algorithm='sympy')
         integrate(diff(f(x, t), x), t)
-        sage: result = integrate(f(x, t), x).diff(t)
+        sage: result = integrate(f(x, t), x).diff(t)                                    # needs sage.libs.maxima
         ...
-        sage: result
+        sage: result                                                                    # needs sage.libs.maxima
         integrate(diff(f(x, t), t), x)
     """
     from sage.calculus.functional import derivative
@@ -1245,7 +1245,7 @@ def check_all():
     EXAMPLES::
 
         sage: from sage.interfaces.sympy import check_all
-        sage: check_all()
+        sage: check_all()                                                               # needs sage.libs.maxima
     """
     def test_basics():
         check_expression("x", "x")

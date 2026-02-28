@@ -328,6 +328,7 @@ def function(s, **kwds):
     Since Sage 4.0, you need to use :meth:`substitute_function` to
     replace all occurrences of a function with another::
 
+        sage: # needs sage.libs.maxima
         sage: var('a, b')
         (a, b)
         sage: cr = function('cr')
@@ -337,7 +338,6 @@ def function(s, **kwds):
         b*diff(cr(a), a)
         sage: g.substitute_function(cr, cos)
         -b*sin(a)
-
         sage: g.substitute_function(cr, (sin(x) + cos(x)).function(x))
         b*(cos(a) - sin(a))
 

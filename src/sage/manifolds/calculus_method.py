@@ -229,7 +229,7 @@ class CalculusMethod(SageObject):
             sage: f = x^2 + sin(x)^2 + cos(x)^2
             sage: from sage.manifolds.calculus_method import CalculusMethod
             sage: cm = CalculusMethod(base_field_type='real')
-            sage: cm.simplify(f)
+            sage: cm.simplify(f)                                                        # needs sage.libs.maxima
             x^2 + 1
 
         Using a weaker simplifying function, like
@@ -237,7 +237,7 @@ class CalculusMethod(SageObject):
         case::
 
             sage: cm.set_simplify_function(simplify)
-            sage: cm.simplify(f)
+            sage: cm.simplify(f)                                                        # needs sage.libs.maxima
             x^2 + cos(x)^2 + sin(x)^2
 
         Back to the default simplifying function
@@ -245,7 +245,7 @@ class CalculusMethod(SageObject):
         case)::
 
             sage: cm.set_simplify_function('default')
-            sage: cm.simplify(f)
+            sage: cm.simplify(f)                                                        # needs sage.libs.maxima
             x^2 + 1
 
         A ``SR`` expression, such as ``f``, cannot be simplified when the
@@ -265,7 +265,7 @@ class CalculusMethod(SageObject):
 
         or force the calculus method to be ``'SR'``::
 
-            sage: cm.simplify(f, method='SR')
+            sage: cm.simplify(f, method='SR')                                           # needs sage.libs.maxima
             x^2 + 1
         """
         if method is None:

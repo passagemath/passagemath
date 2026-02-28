@@ -703,7 +703,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             True
             sage: bool(x == y)
             False
-            sage: bool(x.parent()(x._maxima_()) == x)
+            sage: bool(x.parent()(x._maxima_()) == x)                                   # needs sage.libs.maxima
             True
         """
         if n is None:
@@ -729,7 +729,7 @@ cdef class SymbolicRing(sage.rings.abc.SymbolicRing):
             sage: SR.cleanup_var(x)
             sage: symbols_copy == SR.symbols
             True
-            sage: assumptions_copy == assumptions()
+            sage: assumptions_copy == assumptions()                                     # needs sage.libs.maxima
             True
         """
         from sage.symbolic.assumptions import assumptions

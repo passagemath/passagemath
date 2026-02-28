@@ -193,7 +193,7 @@ def function(s, **kwds) -> SymbolicFunction | list[SymbolicFunction]:
         (a, b)
         sage: cr = function('cr')
         sage: f = cr(a)
-        sage: g = f.diff(a).integral(b); g
+        sage: g = f.diff(a).integral(b); g                                              # needs sage.libs.maxima
         b*diff(cr(a), a)
         sage: foo = function("foo", nargs=2)
         sage: x,y,z = var("x y z")
@@ -203,10 +203,10 @@ def function(s, **kwds) -> SymbolicFunction | list[SymbolicFunction]:
     You need to use :meth:`substitute_function` to
     replace all occurrences of a function with another::
 
-        sage: g.substitute_function(cr, cos)
+        sage: g.substitute_function(cr, cos)                                            # needs sage.libs.maxima
         -b*sin(a)
 
-        sage: g.substitute_function(cr, (sin(x) + cos(x)).function(x))
+        sage: g.substitute_function(cr, (sin(x) + cos(x)).function(x))                  # needs sage.libs.maxima
         b*(cos(a) - sin(a))
 
     Basic arithmetic with unevaluated functions is no
