@@ -9,7 +9,7 @@ from sage_setup import sage_setup
 
 sage_setup('sagemath-symbolics',
            recurse_packages=('sage', 'passagemath_symbolics'),
-           required_modules=('gsl',),
+           required_modules=('gsl', 'factory'),
            spkgs=['maxima'],
            package_data={
                "sage.interfaces": [

@@ -12,11 +12,6 @@ graft sage/symbolic
 # exclude what is included in sagemath-categories
 exclude sage/symbolic/symbols.p*
 exclude sage/symbolic/function.p*
-# exclude what is included in sagemath-singular
-prune sage/symbolic/ginac
-exclude sage/symbolic/expression.p*
-exclude sage/symbolic/*.pxi
-exclude sage/symbolic/pynac_wrap.h
 # exclude what is included in sagemath-fricas
 exclude sage/symbolic/expression_conversion_fricas.p*
 
@@ -54,6 +49,10 @@ global-include all__sagemath_symbolics.py
 
 global-exclude *.c
 global-exclude *.cpp
+
+graft sage/symbolic/ginac
+
+include sage/cpython/pycore_long.h  # FIXME
 
 global-exclude __pycache__
 global-exclude *.py[co]

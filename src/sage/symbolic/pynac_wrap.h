@@ -1,4 +1,4 @@
-/* sage_setup: distribution = sagemath-singular
+/* sage_setup: distribution = sagemath-symbolics
  */
 /*******************************************************************************
     Sage: Open Source Mathematical Software
