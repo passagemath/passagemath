@@ -25,10 +25,8 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_numpy
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_environment
-    SPKG_INSTALL_REQUIRES_sagemath_flint
     SPKG_INSTALL_REQUIRES_sagemath_gsl
     SPKG_INSTALL_REQUIRES_sagemath_modules
-    SPKG_INSTALL_REQUIRES_sagemath_ntl
     SPKG_INSTALL_REQUIRES_sympy
 ]
 dynamic = ["version"]
@@ -43,11 +41,12 @@ conf            = ["passagemath-conf"]
 test            = ["passagemath-repl"]
 
 # extras by libraries
+flint           = ["passagemath-flint"]
 fricas          = ["passagemath-fricas"]
 giac            = ["passagemath-giac"]
 ginac           = []  # no extra needed, same as pynac
 maxima          = ["passagemath-maxima"]
-ntl             = []  # no extra needed
+ntl             = ["passagemath-ntl"]
 primecount      = [SPKG_INSTALL_REQUIRES_primecountpy]
 pynac           = []  # no extra needed
 singular        = ["passagemath-singular"]
@@ -56,7 +55,7 @@ sympy           = []  # no extra needed
 # extras by other features
 plot            = ["passagemath-plot"]
 
-standard        = ["passagemath-symbolics[maxima,primecount,singular,test]"]
+standard        = ["passagemath-symbolics[flint,maxima,ntl,primecount,singular,test]"]
 
 [tool.setuptools]
 include-package-data = false
