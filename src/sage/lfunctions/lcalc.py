@@ -70,7 +70,7 @@ class LCalc(SageObject):
         return "Rubinsteins L-function Calculator"
 
     def __call__(self, args):
-        cmd = f'{shlex.quote(lcalc.absolute_filename())} {args}'
+        cmd = f'{shlex.quote(lcalc_executable().absolute_filename())} {args}'
         with os.popen(cmd) as f:
             res = f.read().strip()
         return res
