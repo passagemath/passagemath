@@ -130,9 +130,9 @@ class SageSet(Set):
 
         EXAMPLES::
 
-            sage: sPrimes = Primes()._sympy_(); sPrimes
+            sage: sPrimes = Primes()._sympy_(); sPrimes                                 # needs sage.libs.pari
             SageSet(Set of all prime numbers: 2, 3, 5, 7, ...)
-            sage: iter_sPrimes = iter(sPrimes)
+            sage: iter_sPrimes = iter(sPrimes)                                          # needs sage.libs.pari
             sage: next(iter_sPrimes), next(iter_sPrimes), next(iter_sPrimes)            # needs sage.libs.pari
             (2, 3, 5)
         """
@@ -145,16 +145,16 @@ class SageSet(Set):
 
         EXAMPLES::
 
-            sage: sPrimes = Primes()._sympy_(); sPrimes
+            sage: sPrimes = Primes()._sympy_(); sPrimes                                 # needs sage.libs.pari
             SageSet(Set of all prime numbers: 2, 3, 5, 7, ...)
-            sage: 91 in sPrimes
+            sage: 91 in sPrimes                                                         # needs sage.libs.pari
             False
 
             sage: from sympy.abc import p
-            sage: sPrimes.contains(p)
+            sage: sPrimes.contains(p)                                                   # needs sage.libs.pari
             Contains(p, SageSet(Set of all prime numbers: 2, 3, 5, 7, ...))
 
-            sage: p in sPrimes
+            sage: p in sPrimes                                                          # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             TypeError: did not evaluate to a bool: None
@@ -185,9 +185,9 @@ class SageSet(Set):
         EXAMPLES::
 
             sage: sPrimes = Primes()._sympy_()
-            sage: str(sPrimes)  # indirect doctest
+            sage: str(sPrimes)  # indirect doctest                                      # needs sage.libs.pari
             'SageSet(Set of all prime numbers: 2, 3, 5, 7, ...)'
-            sage: repr(sPrimes)
+            sage: repr(sPrimes)                                                         # needs sage.libs.pari
             'SageSet(Set of all prime numbers: 2, 3, 5, 7, ...)'
         """
         # Provide this method so that sympy's printing code does not try to inspect

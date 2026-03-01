@@ -154,6 +154,7 @@ EXAMPLES: Arithmetic with constants
 
 ::
 
+    sage: # needs sage.libs.maxima
     sage: pim = maxima(pi)
     sage: maxima.eval('fpprec : 100')
     '100'

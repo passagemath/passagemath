@@ -617,6 +617,7 @@ def random_matrix(ring, nrows, ncols=None, algorithm='randomize', implementation
     or ``QQ`` the result has integer entries, whose magnitudes
     can be limited by the value of ``upper_bound``. ::
 
+        sage: # needs sage.libs.gsl
         sage: C = random_matrix(QQ, 5, algorithm='unimodular', upper_bound=70); C  # random
         sage: det(C)
         1

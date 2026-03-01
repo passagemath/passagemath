@@ -478,7 +478,7 @@ def is_rationally_isometric(self, other, return_matrix=False) -> bool | Any:
 
     ::
 
-        sage: # needs sage.rings.number_field
+        sage: # needs sage.libs.gsl sage.rings.number_field
         sage: K.<a> = NumberField(x^5 - x + 2, 'a')
         sage: Q = QuadraticForm(K, 3, [a, 1, 0, -a**2, -a**3, -1])
         sage: m = Q.matrix()
