@@ -3966,7 +3966,11 @@ cdef class Matrix(Matrix1):
     #####################################################################################
     # Decomposition: kernel, image, decomposition
     #####################################################################################
-    nullity = left_nullity
+
+    def nullity(self, *, side='right'):
+        if side != 'right':
+            raise NotImplementedError
+        return self.left_nullity()
 
     def left_nullity(self):
         """
@@ -5509,7 +5513,11 @@ cdef class Matrix(Matrix1):
         verbose("done computing left kernel for %sx%s matrix" % (self.nrows(), self.ncols()), level=2, t=tm)
         return K
 
-    kernel = left_kernel
+    def kernel(self, *args, **kwds):
+        side = kwds.pop('side', 'right')
+        if side != 'right':
+            raise NotImplementedError
+        return self.left_kernel(*args, **kwds)
 
     def kernel_on(self, V, poly=None, check=True):
         """
@@ -5658,7 +5666,7 @@ cdef class Matrix(Matrix1):
             M = MatrixSpace(ring, self.nrows(), self.ncols())(A)
             return M.kernel()
 
-    def image(self):
+    def image(self, *, side='right'):
         """
         Return the image of the homomorphism on rows defined by right
         multiplication by this matrix: that is, the row-space.
@@ -5691,6 +5699,8 @@ cdef class Matrix(Matrix1):
 
             :meth:`row_module`, :meth:`column_module`
         """
+        if side != 'right':
+            raise NotImplementedError
         return self.row_module()
 
     def row_module(self, base_ring=None):
@@ -5794,7 +5804,7 @@ cdef class Matrix(Matrix1):
         return self.column_module()
 
     def decomposition(self, algorithm='spin',
-                      is_diagonalizable=False, dual=False):
+                      is_diagonalizable=False, dual=False, *, side='right'):
         """
         Return the decomposition of the free module on which this matrix A
         acts from the right (i.e., the action is x goes to x A), along with
@@ -5871,6 +5881,8 @@ cdef class Matrix(Matrix1):
               [ 0  0  0  1 -2  1],
               False)]
         """
+        if side != 'right':
+            raise NotImplementedError
         if algorithm == 'kernel' or self.base_ring() not in _Fields:
             return self._decomposition_using_kernels(is_diagonalizable=is_diagonalizable, dual=dual)
         elif algorithm == 'spin':
@@ -6026,7 +6038,7 @@ cdef class Matrix(Matrix1):
             return E, Edual
         return E
 
-    def decomposition_of_subspace(self, M, check_restrict=True, **kwds):
+    def decomposition_of_subspace(self, M, check_restrict=True, *, side='right', **kwds):
         """
         Suppose the right action of ``self`` on M leaves M invariant. Return
         the decomposition of M as a list of pairs (W, is_irred) where
@@ -6099,6 +6111,8 @@ cdef class Matrix(Matrix1):
             sage: t.decomposition_of_subspace(v, check_restrict=False) == t.decomposition_of_subspace(v)                # needs sage.libs.pari
             True
         """
+        if side != 'right':
+            raise NotImplementedError
         if not isinstance(M, sage.modules.free_module.FreeModule_generic):
             raise TypeError("M must be a free module.")
         if not self.is_square():
@@ -6207,7 +6221,7 @@ cdef class Matrix(Matrix1):
                 raise ArithmeticError("subspace is not invariant under matrix")
             return self.new_matrix(n, n, C, sparse=False)
 
-    def restrict_domain(self, V):
+    def restrict_domain(self, V, *, side='right'):
         """
         Compute the matrix relative to the basis for V on the domain
         obtained by restricting ``self`` to V, but not changing the codomain of
@@ -6237,9 +6251,11 @@ cdef class Matrix(Matrix1):
             [ 1  2  0]
             [ 7 10  0]
         """
+        if side != 'right':
+            raise NotImplementedError
         return V.basis_matrix() * self
 
-    def restrict_codomain(self, V):
+    def restrict_codomain(self, V, *, side='right'):
         r"""
         Suppose that ``self`` defines a linear map from some domain to a
         codomain that contains `V` and that the image of ``self`` is
@@ -6278,6 +6294,8 @@ cdef class Matrix(Matrix1):
             sage: 44*V.0 + 52*V.1
             (44, 52, 60)
         """
+        if side != 'right':
+            raise NotImplementedError
         return V.basis_matrix().solve_left(self)
 
     def maxspin(self, v):
