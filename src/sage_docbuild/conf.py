@@ -60,6 +60,8 @@ extensions = [
 if JupyterSphinx().is_present():
     extensions.append('jupyter_sphinx')
 
+extensions.append('jupyterlite_sphinx')
+
 jupyter_execute_default_kernel = 'sagemath'
 
 if SAGE_LIVE_DOC == 'yes':
@@ -113,6 +115,40 @@ if SAGE_LIVE_DOC == 'yes':
             'lineNumbers': True,
         }
     })
+
+
+# -- Options for jupyterlite-sphinx ------------------------------------------
+# from https://github.com/jupyterlite/sphinx-demo/blob/main/xeus-kernel-example/docs/source/conf.py
+
+# A list of glob patterns relative to the source directory that match file
+#  and directories to include as a part of the embedded JupyterLite site.
+jupyterlite_contents = ["custom_contents/*"]
+
+# Set this to False to unsilence the verbose output of the JupyterLite build
+# process. This is useful for debugging.
+jupyterlite_silence = False
+
+# Strip out the JupyterLite contents from the output HTML files
+strip_tagged_cells = True
+
+# The global_enable_try_examples configuration option inserts the directives
+# to all "Examples" processed by numpydoc or sphinx.ext.napoleon.
+global_enable_try_examples = True
+
+# The global_button_text configuration option sets the button text for all
+# buttons, and can be overridden in individual TryExamples buttons as well.
+try_examples_global_button_text = "Try it online"
+
+# Considering the experimental nature of the TryExamples feature, this option
+# allows setting a warning message to be displayed as a cell at the top of
+# all interactive examples. This message can be written in Markdown.
+try_examples_global_warning_text = (
+    "This interactive example is experimental. Please report any issues "
+    "you may find to the JupyterLite team via "
+    "[the issue tracker](https://github.com/jupyterlite/sphinx-demo/issues/new). "
+    "Thank you!"
+)
+
 
 # This code is executed before each ".. PLOT::" directive in the Sphinx
 # documentation. It defines a 'sphinx_plot' function that displays a Sage object
