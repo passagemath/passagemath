@@ -34,8 +34,10 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-# No test requirements; see comment in tox.ini
-test = []
+test = [
+    SPKG_INSTALL_REQUIRES_sagemath_repl
+    SPKG_INSTALL_REQUIRES_sagemath_schemes
+]
 
 [tool.setuptools]
 include-package-data = false

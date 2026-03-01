@@ -1506,7 +1506,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
             2
             sage: E.analytic_rank(algorithm='zero_sum')                                 # needs sage.symbolic
             2
-            sage: E.analytic_rank(algorithm='all')              # needs lcalc
+            sage: E.analytic_rank(algorithm='all')              # needs lcalc sympow
             2
 
         With the optional parameter leading_coefficient set to ``True``,

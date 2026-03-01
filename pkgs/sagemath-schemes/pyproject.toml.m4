@@ -61,6 +61,7 @@ primecountpy = [SPKG_INSTALL_REQUIRES_primecountpy]
 # extras by packages (specific to sagemath-schemes)
 
 eclib   = ["passagemath-eclib"]
+lcalc   = ["passagemath-lcalc"]
 msolve  = ["passagemath-msolve"]
 palp    = ["passagemath-palp"]
 qepcad  = ["passagemath-qepcad"]
@@ -103,7 +104,7 @@ padics          = ["passagemath-schemes[Zp]"]
 database-kohel = ["passagemath-database-kohel"]
 
 # the whole package
-standard        = ["passagemath-schemes[toric,padics,NumberField,FiniteField,flint,linbox,mpfi,ntl,numpy,pari,singular,eclib,sympow]"]
+standard        = ["passagemath-schemes[toric,padics,NumberField,FiniteField,flint,lcalc,linbox,mpfi,ntl,numpy,pari,singular,eclib,sympow]"]
 
 [tool.cibuildwheel.linux]
 repair-wheel-command = [
