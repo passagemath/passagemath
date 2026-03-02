@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "passagemath-sws2rst"
 description = "passagemath: SageNB worksheet converter"
-license = {text = "GNU General Public License (GPL) v3 or later"}
+license = "GPL-3.0-or-later"
 authors = [{name = "The Sage Developers", email = "sage-support@googlegroups.com"}]
 urls = {Homepage = "https://www.sagemath.org"}
 dynamic = ["version"]
