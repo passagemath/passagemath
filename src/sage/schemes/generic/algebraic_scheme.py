@@ -1146,15 +1146,9 @@ class AlgebraicScheme_subscheme(AlgebraicScheme):
 
             sage: PP.<x,y,z,w,v> = ProjectiveSpace(4, QQ)
             sage: V = PP.subscheme((x^2 - y^2 - z^2) * (w^5 - 2*v^2*z^3) * w * (v^3 - x^2*z))
-            sage: V.irreducible_components()                                            # needs sage.libs.singular
-            [Closed subscheme of Projective Space of dimension 4 over Rational Field defined by:
-               w,
-             Closed subscheme of Projective Space of dimension 4 over Rational Field defined by:
-               x^2 - y^2 - z^2,
-             Closed subscheme of Projective Space of dimension 4 over Rational Field defined by:
-               x^2*z - v^3,
-             Closed subscheme of Projective Space of dimension 4 over Rational Field defined by:
-               w^5 - 2*z^3*v^2]
+            sage: Vc=V.irreducible_components()                                      # needs sage.libs.singular
+            sage: len(Vc)==4 and all(PP.subscheme(t) in  Vc for t in [w, -w^5 + 2*z^3*v^2, -x^2*z + v^3, -x^2 + y^2 + z^2])                                                 # needs sage.libs.singular
+            True
 
         We verify that the irrelevant ideal is not accidentally returned
         (see :issue:`6920`)::
