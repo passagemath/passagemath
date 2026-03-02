@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from typing import Any, Union
 
 def is_FractionFieldElement(x: Any) -> bool:

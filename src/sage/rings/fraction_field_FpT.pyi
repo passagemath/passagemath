@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 from typing import Any
 
 def is_FpTElement(x: Any) -> bool:

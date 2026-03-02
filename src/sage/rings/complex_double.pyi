@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from typing import Any
 
 from sage.libs.gsl.types import gsl_complex

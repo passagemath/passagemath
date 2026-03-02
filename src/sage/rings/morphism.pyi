@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from sage.rings.integer import Integer
 from sage.structure.element import Element
 from sage.structure.parent import Parent

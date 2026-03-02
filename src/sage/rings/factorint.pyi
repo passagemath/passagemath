@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 
 def aurifeuillian(n: int, m: int, F: int | None = None, check: bool = True) -> list[int]:
     ...

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from typing import Optional
 from sage.matrix.matrix import Matrix
 

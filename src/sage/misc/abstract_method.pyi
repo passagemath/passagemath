@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-objects
 from collections.abc import Callable
 from typing import Union
 

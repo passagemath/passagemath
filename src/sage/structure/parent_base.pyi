@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-objects
 from typing import Any
 
 class ParentWithBase:

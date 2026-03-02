@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from typing import Any
 
 from sage.structure.element import FieldElement

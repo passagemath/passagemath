@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from typing import Any
 
 def number_field_base(x: Any) -> bool:

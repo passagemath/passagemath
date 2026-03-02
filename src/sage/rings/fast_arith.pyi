@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 
 def prime_range(start: int, stop: int | None = None, algorithm: str | None = None, py_ints: bool = False) -> list[int]:
     ...

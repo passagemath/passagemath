@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from typing import Any
 
 from sage.libs.mpc.types import mpc_t, mpc_rnd_t

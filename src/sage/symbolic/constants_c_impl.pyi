@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 from collections.abc import Callable
 from typing import Any
 from sage.symbolic.expression import Expression

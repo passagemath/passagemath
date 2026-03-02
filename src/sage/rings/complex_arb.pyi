@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-flint
 from typing import Any
 
 from sage.libs.flint.acb import acb_t

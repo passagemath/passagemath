@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-objects
 from cpython.ref import PyTypeObject
 from sage.libs.gmp.types import mpz_ptr
 

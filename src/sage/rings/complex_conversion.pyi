@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from typing import Any
 
 from sage.structure.element import Element

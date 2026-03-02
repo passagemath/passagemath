@@ -276,7 +276,7 @@ def find_extra_files(src_dir, modules, cythonized_dir, special_filenames=[], *,
 
     These are (for each ``module`` in ``modules``):
 
-    1. From ``src_dir/module``: all .pyx, .pxd and .pxi files and files
+    1. From ``src_dir/module``: all .pyx, .pxd, .pxi, and .pyi files and files
        listed in ``special_filenames``.
     2. From ``cythonized_dir/module``: all .h files (both the .h files
        from the sources, as well as all Cython-generated .h files).
@@ -319,7 +319,7 @@ def find_extra_files(src_dir, modules, cythonized_dir, special_filenames=[], *,
         ['.../sage/ext/interpreters/wrapper_cdf.h', ...wrapper_cdf.pxd...]
     """
     data_files = {}
-    cy_exts = ('.pxd', '.pxi', '.pyx')
+    cy_exts = ('.pxd', '.pxi', '.pyx', '.pyi')
 
     cwd = os.getcwd()
     try:
