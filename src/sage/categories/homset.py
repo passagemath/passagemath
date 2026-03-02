@@ -1284,6 +1284,8 @@ class HomsetWithBase(Homset):
             sage: H.base()
             Integer Ring
             sage: TestSuite(H).run()
+            sage: X.rename()
+            sage: Y.rename()
         """
         if base is None:
             base = X.base_ring()
