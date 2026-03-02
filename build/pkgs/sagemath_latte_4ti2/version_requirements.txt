@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-latte-4ti2 == 10.8.2rc0
+passagemath-latte-4ti2 == 10.8.2rc1

@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-m4ri-m4rie == 10.8.2rc0
+passagemath-m4ri-m4rie == 10.8.2rc1
