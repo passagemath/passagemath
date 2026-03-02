@@ -224,7 +224,7 @@ def update_distribution(src_file, distribution, *, verbose=False):
             any_found = True
     if not any_found:
         if any(src_file.endswith(ext)
-               for ext in [".pxd", ".pxi", ".py", ".pyx", ".sage"]):
+               for ext in [".pxd", ".pxi", ".py", ".pyi", ".pyx", ".sage"]):
             src_lines.insert(0, f'# {directive}')
             any_change = True
             if verbose:
