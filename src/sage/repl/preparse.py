@@ -2220,7 +2220,7 @@ def preparse_file_named(name) -> Path:
         sage: with open(tmpf, 'w') as f:
         ....:     out = f.write("a = 2")
         sage: preparse_file_named(tmpf)
-        PosixPath('...sage.py')
+        ...Path('...sage.py')
     """
     from sage.misc.temporary_file import tmp_filename
     name = Path(name)

@@ -165,7 +165,7 @@ def load_attach_path(path=None, replace=False):
 
         sage: sage.repl.attach.reset(); reset_load_attach_path()
         sage: load_attach_path()
-        [PosixPath('.')]
+        [...Path('.')]
         sage: t_dir = tmp_dir()
         sage: fullpath = os.path.join(t_dir, 'test.py')
         sage: with open(fullpath, 'w') as f:
@@ -203,18 +203,18 @@ def load_attach_path(path=None, replace=False):
     The function returns a reference to the path list::
 
         sage: reset_load_attach_path(); load_attach_path()
-        [PosixPath('.')]
+        [...Path('.')]
         sage: load_attach_path('/path/to/my/sage/scripts'); load_attach_path()
-        [PosixPath('.'), PosixPath('/path/to/my/sage/scripts')]
+        [...Path('.'), ...Path('/path/to/my/sage/scripts')]
         sage: load_attach_path(['good', 'bad', 'ugly'], replace=True)
         sage: load_attach_path()
-        [PosixPath('good'), PosixPath('bad'), PosixPath('ugly')]
+        [...Path('good'), ...Path('bad'), ...Path('ugly')]
         sage: p = load_attach_path(); p.pop()
-        PosixPath('ugly')
+        ...Path('ugly')
         sage: p[0] = 'weird'; load_attach_path()
-        ['weird', PosixPath('bad')]
+        ['weird', ...Path('bad')]
         sage: reset_load_attach_path(); load_attach_path()
-        [PosixPath('.')]
+        [...Path('.')]
     """
     global search_paths
     if path is None:
@@ -243,31 +243,31 @@ def reset_load_attach_path():
     EXAMPLES::
 
         sage: load_attach_path()
-        [PosixPath('.')]
+        [...Path('.')]
         sage: t_dir = tmp_dir()
         sage: load_attach_path(t_dir)
         sage: from pathlib import Path
         sage: Path(t_dir) in load_attach_path()
         True
         sage: reset_load_attach_path(); load_attach_path()
-        [PosixPath('.')]
+        [...Path('.')]
 
     At startup, Sage adds colon-separated paths in the environment
     variable ``SAGE_LOAD_ATTACH_PATH``::
 
         sage: reset_load_attach_path(); load_attach_path()
-        [PosixPath('.')]
+        [...Path('.')]
         sage: os.environ['SAGE_LOAD_ATTACH_PATH'] = '/veni/vidi:vici:'
         sage: from importlib import reload
         sage: reload(sage.repl.attach)    # Simulate startup
         <module 'sage.repl.attach' from '...'>
         sage: load_attach_path()
-        [PosixPath('.'), PosixPath('/veni/vidi'), PosixPath('vici')]
+        [...Path('.'), ...Path('/veni/vidi'), ...Path('vici')]
         sage: del os.environ['SAGE_LOAD_ATTACH_PATH']
         sage: reload(sage.repl.preparse)    # Simulate startup
         <module 'sage.repl.preparse' from '...'>
         sage: reset_load_attach_path(); load_attach_path()
-        [PosixPath('.')]
+        [...Path('.')]
     """
     global search_paths
     search_paths = [Path()]
@@ -453,7 +453,7 @@ def detach(filename):
 
         sage: sage.repl.attach.reset(); reset_load_attach_path()
         sage: load_attach_path()
-        [PosixPath('.')]
+        [...Path('.')]
         sage: t_dir = tmp_dir()
         sage: fullpath = os.path.join(t_dir, 'test.py')
         sage: with open(fullpath, 'w') as f: _ = f.write("print(37 * 3)")
@@ -554,7 +554,7 @@ def modified_file_iterator():
         sage: sleep(1)   # filesystem mtime granularity
         sage: with open(t, 'w') as f: _ = f.write('1')
         sage: list(modified_file_iterator())
-        [(PosixPath('/.../tmp_....py'), time.struct_time(...))]
+        [(...Path('/.../tmp_....py'), time.struct_time(...))]
     """
     global attached
     modified = {}
