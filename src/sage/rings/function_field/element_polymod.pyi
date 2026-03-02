@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-singular
 from typing import Any
 from sage.structure.richcmp import richcmp
 from sage.structure.element import FieldElement

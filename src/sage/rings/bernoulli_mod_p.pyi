@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-ntl
 
 def verify_bernoulli_mod_p(data: list[int]) -> bool:
     ...

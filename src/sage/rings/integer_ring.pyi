@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from typing import Any, Optional, Union
 
 from sage.rings.ring import CommutativeRing

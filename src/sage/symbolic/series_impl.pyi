@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 from collections.abc import Sequence
 from typing import Any
 

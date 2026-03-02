@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-symbolics
 from typing import Any
 
 class PynacConstant:

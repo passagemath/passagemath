@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from typing import Optional
 
 class binary_tree_node:

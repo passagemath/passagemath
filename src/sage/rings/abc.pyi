@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from collections.abc import Callable
 from typing import Union
 

@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from typing import Any
 
 from sage.libs.mpfr.types import mpfr_t, mpfr_prec_t

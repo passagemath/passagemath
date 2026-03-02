@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-modules
 from collections.abc import Set
 from typing import Any
 

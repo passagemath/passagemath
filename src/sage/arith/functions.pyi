@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-categories
 from collections.abc import Iterable
 from typing import Any
 
