@@ -109,9 +109,9 @@ class ModularPolynomialDatabase:
 
             sage: C = ClassicalModularPolynomialDatabase()
             sage: C._dbpath(3)
-            PosixPath('PolMod/Cls/pol.003.dbz')
+            ...Path('PolMod/Cls/pol.003.dbz')
             sage: C._dbpath(8)
-            PosixPath('PolMod/Cls/pol.008.dbz')
+            ...Path('PolMod/Cls/pol.008.dbz')
         """
         path = Path("PolMod")
         return path / self.model / ("pol.%03d.dbz" % level)
@@ -205,7 +205,7 @@ class ModularCorrespondenceDatabase(ModularPolynomialDatabase):
 
             sage: DB = DedekindEtaModularCorrespondenceDatabase()
             sage: DB._dbpath((2,4))
-            PosixPath('PolMod/EtaCrr/crr.02.004.dbz')
+            ...Path('PolMod/EtaCrr/crr.02.004.dbz')
         """
         path = Path("PolMod")
         return path / self.model / ("crr.%02d.%03d.dbz" % level)

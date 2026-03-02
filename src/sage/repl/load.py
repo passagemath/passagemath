@@ -196,7 +196,7 @@ def load(filename, globals, attach=False):
         sage: import tempfile
         sage: sage.repl.attach.reset(); reset_load_attach_path()
         sage: load_attach_path()
-        [PosixPath('.')]
+        [...Path('.')]
         sage: with tempfile.TemporaryDirectory() as t_dir:
         ....:     fname = 'test.py'
         ....:     fullpath = os.path.join(t_dir, fname)

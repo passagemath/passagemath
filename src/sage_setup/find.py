@@ -246,9 +246,9 @@ def _cythonized_dir(src_dir=None, editable_install=None):
         sage: from sage_setup.find import _cythonized_dir
         sage: from sage.env import SAGE_SRC
         sage: _cythonized_dir(SAGE_SRC)
-        PosixPath('...')
+        ...Path('...')
         sage: _cythonized_dir(SAGE_SRC, editable_install=False) # optional - sage_spkg
-        PosixPath('.../build/cythonized')
+        ...Path('.../build/cythonized')
 
     """
     from importlib import import_module
