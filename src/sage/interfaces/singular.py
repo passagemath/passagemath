@@ -335,6 +335,7 @@ AUTHORS:
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
+import builtins
 import os
 import platform
 import re
@@ -1222,7 +1223,7 @@ class Singular(ExtraTabCompletion, Expect):
         else:
             return None
 
-    def _tab_completion(self) -> list:
+    def _tab_completion(self) -> builtins.list[str]:
         """
         Return a list of all Singular commands.
 
