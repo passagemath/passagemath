@@ -20,6 +20,8 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-lcalc"
 description = "passagemath: L-function calculations with lcalc"
 dependencies = [
+    SPKG_INSTALL_REQUIRES_sage_conf
+    SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_modules
@@ -37,6 +39,19 @@ content-type = "text/x-rst"
 test = [
     SPKG_INSTALL_REQUIRES_sagemath_repl
     SPKG_INSTALL_REQUIRES_sagemath_schemes
+]
+
+[tool.cibuildwheel.linux]
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf auditwheel',
+    'python3 {package}/repair_wheel.py {wheel}',
+    'auditwheel repair -w {dest_dir} {wheel}',
+]
+[tool.cibuildwheel.macos]
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf auditwheel',
+    'python3 {package}/repair_wheel.py {wheel}',
+    'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
 ]
 
 [tool.setuptools]
