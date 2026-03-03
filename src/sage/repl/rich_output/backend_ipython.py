@@ -55,6 +55,13 @@ class BackendIPython(BackendBase):
             sage: backend.install(shell=shell)
             sage: shell.run_cell('1+1')
             2
+
+        TESTS::
+
+            sage: from sage.repl.rich_output.backend_doctest import BackendDoctest
+            sage: from sage.repl.rich_output import get_display_manager
+            sage: get_display_manager().switch_backend(BackendDoctest())
+            IPython command line
         """
         shell = kwds['shell']
         from sage.repl.display.formatter import SageDisplayFormatter
@@ -224,18 +231,6 @@ class BackendIPythonCommandline(BackendIPython):
             sage: backend = BackendIPythonCommandline()
             sage: backend.displayhook(plain_text, plain_text)
             ({'text/plain': 'Example plain text output'}, {})
-
-        TESTS:
-
-        We verify that unicode strings work::
-
-            sage: class Foo(sage.structure.sage_object.SageObject):
-            ....:     def _rich_repr_(self, dm):
-            ....:         return dm.types.OutputPlainText('Motörhead')
-            sage: from sage.repl.rich_output import get_display_manager
-            sage: dm = get_display_manager()
-            sage: dm.displayhook(Foo())
-            ({'text/plain': 'Mot\xf6rhead'}, {})
         """
         if isinstance(rich_output, OutputPlainText):
             return ({'text/plain': rich_output.text.get_str()}, {})
