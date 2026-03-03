@@ -37,6 +37,7 @@ import collections.abc
 import doctest
 import platform
 import re
+import sys
 from collections import defaultdict
 from functools import reduce
 from re import Pattern
@@ -1528,6 +1529,13 @@ class SageOutputChecker(doctest.OutputChecker):
             # occurs sometimes when compiling cython code via sage.misc.cython
             dup_rpath_regex = re.compile("ld: warning: duplicate -rpath .* ignored")
             got = dup_rpath_regex.sub('', got)
+            did_fixup = True
+
+        if sys.platform == 'win32' and '\\' in got:
+            # Try to transform quoted or unquoted backslashes in Windows pathnames
+            backslash_regex = re.compile('\\\\{1,2}')
+            want = backslash_regex.sub('/', want)
+            got = backslash_regex.sub('/', got)
             did_fixup = True
 
         return did_fixup, want, got
