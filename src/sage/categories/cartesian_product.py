@@ -63,6 +63,7 @@ class CartesianProductFunctor(CovariantFunctorialConstruction, MultivariateConst
         ('abcdabcd', 1, 1/4)
         sage: C.category()
         Category of Cartesian products of monoids
+        sage: M.rename()
 
         sage: Monoids().CartesianProducts()
         Category of Cartesian products of monoids

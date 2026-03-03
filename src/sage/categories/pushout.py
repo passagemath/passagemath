@@ -3877,6 +3877,7 @@ class EquivariantSubobjectConstructionFunctor(ConstructionFunctor):
             sage: I.construction()
             (EquivariantSubobjectConstructionFunctor,
             Representation of S3 indexed by {1, 2, 3} over Integer Ring)
+            sage: M.rename()
         """
         from sage.categories.sets_cat import Sets
         super().__init__(Sets(), Sets())
