@@ -780,6 +780,7 @@ cdef class CategoryObject(SageObject):
             -5279516879544852222
             sage: h1 == h2
             True
+            sage: bla.rename()
         """
         if self._hash_value == -1:
             self._hash_value = hash(repr(self))
