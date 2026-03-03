@@ -42,4 +42,4 @@ def all_features():
     return [JoinFeature("lcalc",
                         (lcalc(),
                          PythonModule('sage.libs.lcalc')),
-                        spkg='sagemath_lcalc')]
+                        spkg='sagemath_lcalc', type='standard')]
