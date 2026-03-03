@@ -182,6 +182,13 @@ class SageDisplayFormatter(DisplayFormatter):
             sage: Repper()
             __repr__ called
             I am repper
+
+        TESTS::
+
+            sage: from sage.repl.rich_output.backend_doctest import BackendDoctest
+            sage: from sage.repl.rich_output import get_display_manager
+            sage: get_display_manager().switch_backend(BackendDoctest())
+            ...
         """
         sage_format, sage_metadata = self.dm.displayhook(obj)
         assert PLAIN_TEXT in sage_format, 'plain text is always present'
