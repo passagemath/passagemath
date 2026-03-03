@@ -296,6 +296,7 @@ cdef class Spin(Element):
         self._value = <bint*>sig_malloc(self._n*sizeof(bint))
         for i in range(self._n):
             self._value[i] = (val[i] != 1)
+        self._hash = -1
         Element.__init__(self, parent)
 
     cdef Spin _new_c(self, bint* value):
@@ -306,7 +307,7 @@ cdef class Spin(Element):
         ret._parent = self._parent
         ret._n = self._n
         ret._value = value
-        ret._hash = 0
+        ret._hash = -1
         return ret
 
     def __dealloc__(self):
@@ -332,7 +333,7 @@ cdef class Spin(Element):
             True
         """
         cdef int i
-        if self._hash == 0:
+        if self._hash == -1:
             self._hash = hash(tuple([-1 if self._value[i] else 1 for i in range(self._n)]))
         return self._hash
 

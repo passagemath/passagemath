@@ -105,7 +105,7 @@ cdef class Matrix_sparse(matrix.Matrix):
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
-    cdef long _hash_(self) except -1:
+    cdef Py_hash_t _hash_(self) except -1:
         """
         Return the hash of this matrix.
 
@@ -155,7 +155,8 @@ cdef class Matrix_sparse(matrix.Matrix):
         cdef long C[5]
         self.get_hash_constants(C)
 
-        cdef long h = 0, k, l
+        cdef Py_hash_t h = 0
+        cdef long k, l
         cdef Py_ssize_t i, j
         for ij, x in D.items():
             sig_check()

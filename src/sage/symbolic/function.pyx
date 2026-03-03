@@ -1245,7 +1245,7 @@ cdef class SymbolicFunction(Function):
 
     cdef _is_registered(SymbolicFunction self):
         # see if there is already a SymbolicFunction with the same state
-        cdef long myhash = self._hash_()
+        cdef Py_hash_t myhash = self._hash_()
         cdef SymbolicFunction sfunc = get_sfunction_from_hash(myhash)
         if sfunc is not None:
             # found one, set self._serial to be a copy
@@ -1256,7 +1256,7 @@ cdef class SymbolicFunction(Function):
     # cache the hash value of this function
     # this is used very often while unpickling to see if there is already
     # a function with the same properties
-    cdef long _hash_(self) except -1:
+    cdef Py_hash_t _hash_(self) except -1:
         if not self.__hinit:
             # create a string representation of this SymbolicFunction
             slist = [self._nargs, self._name, str(self._latex_name),

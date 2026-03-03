@@ -596,7 +596,7 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
             else:
                 v[se.j] = <celement>x
 
-    cdef long _hash_(self) except -1:
+    cdef Py_hash_t _hash_(self) except -1:
         """
         EXAMPLES::
 
@@ -630,7 +630,8 @@ cdef class Matrix_modn_dense_template(Matrix_dense):
         cdef long C[5]
         self.get_hash_constants(C)
 
-        cdef long h = 0, k, l
+        cdef Py_hash_t h = 0
+        cdef long k, l
         cdef Py_ssize_t i, j
         cdef celement* row
         sig_on()
