@@ -66,13 +66,29 @@ AC_DEFUN([SAGE_PYTHON_PACKAGE_CHECK], [
       WITH_SAGE_PYTHONUSERBASE([dnl
         AS_IF(
           [config.venv/bin/python3 -c dnl
-             "import importlib.metadata as _m
-from packaging.requirements import Requirement as _R
-for _r in (${SAGE_PKG_VERSPEC},):
-    _q=_R(_r)
-    try: _v=_m.version(_q.name)
-    except _m.PackageNotFoundError: raise SystemExit(1)
-    if not _q.specifier.contains(_v,prereleases=True): raise SystemExit(1)" dnl
+             "import importlib.metadata as _m, sys
+try:
+    from packaging.requirements import Requirement as _R
+except ImportError:
+    _R = None
+for _r in [ ${SAGE_PKG_VERSPEC} ]:
+    if _R:
+        _q = _R(_r)
+        if _q.marker is not None and not _q.marker.evaluate():
+            continue
+        try:
+            _v = _m.version(_q.name)
+            if not _q.specifier.contains(_v, prereleases=True):
+                sys.exit(1)
+        except _m.PackageNotFoundError:
+            sys.exit(1)
+    else:
+        if any(c in _r for c in '><=!@;'):
+            sys.exit(1)
+        try:
+            _m.version(_r.strip())
+        except _m.PackageNotFoundError:
+            sys.exit(1)" dnl
            2>&AS_MESSAGE_LOG_FD],
           [AC_MSG_RESULT(yes)],
           [AC_MSG_RESULT(no); sage_spkg_install_$1=yes]
