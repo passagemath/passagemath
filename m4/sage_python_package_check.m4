@@ -71,7 +71,7 @@ try:
     from packaging.requirements import Requirement as _R
 except ImportError:
     _R = None
-for _r in [ ${SAGE_PKG_VERSPEC} ]:
+for _r in (${SAGE_PKG_VERSPEC}):
     if _R:
         _q = _R(_r)
         if _q.marker is not None and not _q.marker.evaluate():
