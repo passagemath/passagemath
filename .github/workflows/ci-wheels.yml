@@ -178,7 +178,7 @@ jobs:
           pkg_underscore=${pkg//-/_}
           WHEELHOUSE=${GITHUB_WORKSPACE}/wheelhouse
           if [ -d "$WHEELHOUSE" ]; then
-              export PIP_FIND_LINKS=file://$WHEELHOUSE
+              export PIP_FIND_LINKS=$WHEELHOUSE
               (set +x; cd "$WHEELHOUSE" && for whl in *.whl *.tar.gz; do
                    case $whl in
                        *$pkg_underscore-*.whl) ;;
