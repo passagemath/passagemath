@@ -7,9 +7,9 @@
 #
 #   Determine if the system copy of a python package can be used by sage.
 #
-#   This macro uses setuptools.version's pkg_resources to check that the
-#   "version_requirements.txt" file (or entry in "pyproject.toml") for
-#   the named package is satisfied, and it can typically fail in four ways:
+#   This macro uses importlib.metadata and the packaging library to check
+#   that the "version_requirements.txt" file (or entry in "pyproject.toml")
+#   for the named package is satisfied, and it can typically fail in four ways:
 #
 #     1. If --enable-system-site-packages was not passed to ./configure,
 #
@@ -17,7 +17,7 @@
 #
 #     3. If we are unable to create a venv with the system python,
 #
-#     4. If setuptools is not available to the system python,
+#     4. If the packaging library is not available to the system python,
 #
 #     5. If the contents of version_requirements.txt (or entry in
 #        "pyproject.toml") are not met (wrong version, no version,
@@ -66,8 +66,29 @@ AC_DEFUN([SAGE_PYTHON_PACKAGE_CHECK], [
       WITH_SAGE_PYTHONUSERBASE([dnl
         AS_IF(
           [config.venv/bin/python3 -c dnl
-             "import pkg_resources; dnl
-              pkg_resources.require((${SAGE_PKG_VERSPEC}))" dnl
+             "import importlib.metadata as _m, sys
+try:
+    from packaging.requirements import Requirement as _R
+except ImportError:
+    _R = None
+for _r in (${SAGE_PKG_VERSPEC}):
+    if _R:
+        _q = _R(_r)
+        if _q.marker is not None and not _q.marker.evaluate():
+            continue
+        try:
+            _v = _m.version(_q.name)
+            if not _q.specifier.contains(_v, prereleases=True):
+                sys.exit(1)
+        except _m.PackageNotFoundError:
+            sys.exit(1)
+    else:
+        if any(c in _r for c in '><=!@;'):
+            sys.exit(1)
+        try:
+            _m.version(_r.strip())
+        except _m.PackageNotFoundError:
+            sys.exit(1)" dnl
            2>&AS_MESSAGE_LOG_FD],
           [AC_MSG_RESULT(yes)],
           [AC_MSG_RESULT(no); sage_spkg_install_$1=yes]

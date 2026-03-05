@@ -207,6 +207,7 @@ jobs:
         meson_python
         mpmath
         numpy
+        packaging
         pathspec
         pillow
         pkgconfig

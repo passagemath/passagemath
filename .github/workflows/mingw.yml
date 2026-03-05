@@ -123,6 +123,7 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'meson_python')      && format('mingw-w64-{0}-meson-python',             matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'mpmath')            && format('mingw-w64-{0}-python-mpmath',            matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'numpy')             && format('mingw-w64-{0}-python-numpy',             matrix.env) || '' }}
+            ${{ contains(inputs.extra_sage_packages, 'packaging')         && format('mingw-w64-{0}-python-packaging',         matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'pathspec')          && format('mingw-w64-{0}-python-pathspec',          matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'pillow')            && format('mingw-w64-{0}-python-pillow',            matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'pkgconfig')         && format('mingw-w64-{0}-python-pkgconfig',         matrix.env) || '' }}
