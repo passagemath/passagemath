@@ -17,7 +17,7 @@ done
 
 export PIP_NO_INDEX=true
 if [ -n "$MSYSTEM" ]; then
-    # Convert from paths /d/a/... to D:/a/... before prepending 
+    # Convert from paths /d/a/... to D:/a/...
     export SAGE_SPKG_WHEELS=$(cygpath -m $SAGE_SPKG_WHEELS)
 fi
 export PIP_FIND_LINKS="$SAGE_SPKG_WHEELS"
