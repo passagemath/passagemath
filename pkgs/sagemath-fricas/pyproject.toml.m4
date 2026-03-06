@@ -35,6 +35,7 @@ content-type = "text/x-rst"
 test = [
     SPKG_INSTALL_REQUIRES_sagemath_repl
     SPKG_INSTALL_REQUIRES_sagemath_symbolics
+    SPKG_INSTALL_REQUIRES_sagemath_maxima
 ]
 
 [tool.cibuildwheel.linux]
