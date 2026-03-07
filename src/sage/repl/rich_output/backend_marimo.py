@@ -114,8 +114,8 @@ class BackendMarimo(BackendBase):
 
         img_html = f"""
        <div style="resize: vertical; overflow: hidden; width: 100%; display: flex; align-items: center; justify-content: center;">
-           <img src="data:image/{image_format}; base64,{b64}" 
-                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+         <img src="data:image/{image_format}; base64,{b64}"
+           style="max-width: 100%; max-height: 100%; object-fit: contain;" />
        </div>
        """
 
