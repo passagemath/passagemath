@@ -414,7 +414,7 @@ class AutomaticSemigroup(UniqueRepresentation, Parent):
             sage: AutomaticSemigroup(Family({1: S5((1,2))}),                            # needs sage.groups
             ....:                    category=Groups().Finite().Subobjects())
             A subgroup of (S5) with 1 generators
-            sage: S5.rename()
+            sage: S5.rename()                                                           # needs sage.groups
         """
         categories = [Groups(), Monoids(), Semigroups()]
         for category in categories:
@@ -521,7 +521,7 @@ class AutomaticSemigroup(UniqueRepresentation, Parent):
 
             sage: len(M._retract.cache.keys())                                          # needs sage.groups
             24
-            sage: S5.rename()
+            sage: S5.rename()                                                           # needs sage.groups
         """
         element = self._retract(ambient_element)
         if check:
