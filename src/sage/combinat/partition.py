@@ -7172,6 +7172,11 @@ class Partitions_n(Partitions):
             ....:     if Partitions(n).cardinality() != Partitions(n).cardinality(algorithm='pari')])
             0
 
+        For small `n`, the result is computed by enumeration even without FLINT::
+
+            sage: Partitions(5).cardinality()
+            7
+
         For negative inputs, the result is zero (the algorithm is ignored)::
 
             sage: Partitions(-5).cardinality()
@@ -7185,6 +7190,11 @@ class Partitions_n(Partitions):
             return ZZ.zero()
 
         if algorithm == 'flint':
+            if cached_number_of_partitions is None:
+                if self.n <= 10:
+                    return self._cardinality_from_iterator()
+                from sage.features.sagemath import sage__libs__flint
+                sage__libs__flint().require()
             return cached_number_of_partitions(self.n)
 
         elif algorithm == 'gap':
@@ -7265,6 +7275,9 @@ class Partitions_n(Partitions):
         - Florent Hivert (2009-11-23)
         """
         n = self.n
+        if cached_number_of_partitions is None:
+            from sage.features.sagemath import sage__libs__flint
+            sage__libs__flint().require()
         res = []  # A dictionary of multiplicities could be faster.
         while n > 0:
             # Choose a pair d,j = 1,2..., with d*j <= n with probability
@@ -9911,6 +9924,9 @@ def number_of_partitions(n, algorithm='default'):
         algorithm = 'flint'
 
     if algorithm == 'flint':
+        if cached_number_of_partitions is None:
+            from sage.features.sagemath import sage__libs__flint
+            sage__libs__flint().require()
         return cached_number_of_partitions(n)
 
     raise ValueError("unknown algorithm '%s'" % algorithm)
@@ -10059,7 +10075,7 @@ try:
     from sage.libs.flint.arith_sage import number_of_partitions as flint_number_of_partitions
     cached_number_of_partitions = cached_function(flint_number_of_partitions)
 except ImportError:
-    pass
+    cached_number_of_partitions = None
 
 # October 2012: fixing outdated pickles which use classes being deprecated
 from sage.misc.persist import register_unpickle_override
