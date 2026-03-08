@@ -17,8 +17,6 @@ This module defines the Marimo backend for
 
 import base64
 import html
-import marimo as mo
-from marimo._output import formatting
 from sage.repl.rich_output import get_display_manager  # type: ignore
 from sage.repl.rich_output.backend_base import BackendBase
 from sage.repl.rich_output.output_basic import OutputBase
@@ -99,6 +97,7 @@ class BackendMarimo(BackendBase):
         return "Marimo Notebook"
 
     def install(self) -> None:
+        from marimo._output import formatting
         from sage.structure.sage_object import SageObject
 
         # register formatters with marimo
@@ -145,6 +144,8 @@ class BackendMarimo(BackendBase):
     def _render_rich_output(
         self, rich_output: OutputBase, fallback_obj: Any = None
     ) -> tuple[str, str]:
+        import marimo as mo
+
         match rich_output:
             case OutputHtml():
                 html_str = rich_output.html.get_str()
@@ -235,6 +236,8 @@ class BackendMarimo(BackendBase):
     def display_immediately(
         self, plain_text: OutputPlainText, rich_output: OutputBase
     ) -> None:
+        import marimo as mo
+
         mo.output.append(rich_output)
 
     def threejs_offline_scripts(self) -> str:
