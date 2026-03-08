@@ -7166,9 +7166,9 @@ cdef class Matrix(Matrix1):
              1.4142135623730950487637880730318329370*I]
             sage: m.eigenvalues(algorithm="pari_charpoly")  # abs tol 1e-14             # needs sage.libs.pari
             [-1.41421356237309505*I, 1.41421356237309505*I]
-            sage: m.eigenvalues()
+            sage: m.eigenvalues()                                                       # needs sage.libs.pari
             [-1.41421356237309505*I, 1.41421356237309505*I]
-            sage: type(m.eigenvalues())
+            sage: type(m.eigenvalues())                                                 # needs sage.libs.pari
             <class 'sage.structure.sequence.Sequence_generic'>
         """
         if algorithm is None:
@@ -7208,7 +7208,7 @@ cdef class Matrix(Matrix1):
 
             sage: set_random_seed(100)
             sage: A = matrix.random(CC, 5)
-            sage: Sequence((A*A.H).eigenvalues(), universe=RR)
+            sage: Sequence((A*A.H).eigenvalues(), universe=RR)                          # needs sage.libs.pari
             Traceback (most recent call last):
             ...
             TypeError: unable to convert ... to an element of Real Field with 53 bits of precision

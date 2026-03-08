@@ -500,7 +500,6 @@ cdef class Matrix_integer_sparse(Matrix_sparse):
             sage: X = result[1]; X
             [-469  214  -30  119  -37    0]
             [ 370 -165   18  -91   30   -2]
-
             sage: A*X.transpose() == zero_matrix(ZZ, 4, 2)
             True
 
