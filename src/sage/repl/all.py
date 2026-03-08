@@ -13,3 +13,9 @@ from sage.repl.rich_output.display_manager import get_display_manager
 
 from sage.repl.rich_output.pretty_print import pretty_print, show
 del lazy_import
+
+# Switches to BackendMarimo if in an interactive marimo notebook.
+# Does nothing otherwise
+from sage.repl.rich_output.backend_marimo import check_and_load_marimo
+check_and_load_marimo()
+del check_and_load_marimo
