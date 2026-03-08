@@ -95,7 +95,7 @@ Import the global bindings that you need manually, for example:
     from sage.all import ZZ
     V = ZZ**8; V
 
-The marimo rich output backend will initialise automatically after any `sage.all` imports in an interactive session.
+The marimo rich output backend will initialize automatically after any `sage.all` imports in an interactive session.
 This enables LaTex and 2D/3D plot graphics.
 
 There is a test notebook available in the [passagemath-marimo-notebooks repository](https://github.com/passagemath/passagemath-marimo-notebooks/blob/main/notebook_test_marimo.py)

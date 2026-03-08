@@ -376,5 +376,5 @@ Import the global bindings that you need manually, for example:
     from sage.all import ZZ
     V = ZZ**8; V
 
-The marimo rich output backend will initialise automatically after any ``sage.all`` imports in an interactive session.
+The marimo rich output backend will initialize automatically after any ``sage.all`` imports in an interactive session.
 This enables LaTex and 2D/3D plot graphics.
