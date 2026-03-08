@@ -373,6 +373,7 @@ By design of the reactive notebook, ``from sage.all import *`` will not work.
 Import the global bindings that you need manually, for example:
 
 .. code-block:: python
+
     from sage.all import ZZ
     V = ZZ**8; V
 
