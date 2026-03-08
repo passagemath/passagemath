@@ -7356,7 +7356,7 @@ class RowStandardTableaux_size(RowStandardTableaux, DisjointUnionEnumeratedSets)
         10
         sage: ns = [1,2,3,4,5,6]
         sage: sts = [RowStandardTableaux(n) for n in ns]
-        sage: all(st.cardinality() == len(st.list()) for st in sts)                     # needs sage.graphs
+        sage: all(st.cardinality() == len(st.list()) for st in sts)                     # needs sage.graphs sage.modules
         True
         sage: RowStandardTableaux(40).cardinality()  # not tested, too long
         2063837185739279909309355007659204891024472174278

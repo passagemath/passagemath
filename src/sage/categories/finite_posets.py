@@ -686,7 +686,8 @@ class FinitePosets(CategoryWithAxiom):
 
             Illustrating labelling with a function::
 
-                sage: P = posets.ChainPoset(2).product(posets.ChainPoset(2))            # needs sage.modules
+                sage: # needs sage.modules
+                sage: P = posets.ChainPoset(2).product(posets.ChainPoset(2))
                 sage: def x_label(e):
                 ....:     return 'x_' + str(e[0]) + str(e[1])
                 sage: l = P.birational_free_labelling(labels=x_label)
@@ -697,7 +698,8 @@ class FinitePosets(CategoryWithAxiom):
 
             The same, but with ``min_label`` and ``max_label`` provided::
 
-                sage: P = posets.ChainPoset(2).product(posets.ChainPoset(2))            # needs sage.modules
+                sage: # needs sage.modules
+                sage: P = posets.ChainPoset(2).product(posets.ChainPoset(2))
                 sage: l = P.birational_free_labelling(labels=x_label,
                 ....:                                 min_label='lambda', max_label='mu')
                 sage: sorted(l[1].items())
@@ -709,6 +711,7 @@ class FinitePosets(CategoryWithAxiom):
 
             Illustrating labelling with a comma separated list of labels::
 
+                sage: # needs sage.modules
                 sage: l = P.birational_free_labelling(labels='w,x,y,z')
                 sage: sorted(l[1].items())
                 [((0, 0), w), ((0, 1), x), ((1, 0), y), ((1, 1), z)]
