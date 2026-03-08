@@ -170,7 +170,7 @@ Alternatively,
 * use a Python (`python3`) or IPython (`ipython`) REPL, or
 * use the Python kernel or the provided Sage kernel in a Jupyter notebook (after `pip install notebook`, use `sage -n jupyter`), or
 * use the Python kernel or the provided Sage kernel in JupyterLab (after `pip install jupyterlab`, use `sage -n jupyterlab`), or
-* use a reactive marimo notebook (`pip install marimo`, followed by `sage -n marimo`). [See below for further information](#marimo-specifics)
+* use a reactive marimo notebook (`pip install marimo`, followed by `sage -n marimo`). [See above for further information](#marimo-specifics)
 
 
 Modularized distributions
