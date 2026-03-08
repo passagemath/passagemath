@@ -246,7 +246,7 @@ def libgiac_integrator(expression, v, a=None, b=None):
         sage: f = sec(2*a*x)
         sage: F = libgiac_integrator(f, x)
         ...
-        sage: (F.derivative(x) - f).simplify_trig()
+        sage: (F.derivative(x) - f).simplify_trig()                                     # needs sage.libs.maxima
         0
     """
     try:

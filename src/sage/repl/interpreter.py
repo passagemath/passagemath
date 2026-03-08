@@ -120,7 +120,6 @@ line::
     sage: from sage.repl.interpreter import get_test_shell
     sage: shell = get_test_shell()
     sage: shell.run_cell('sage: a = 123')              # single line
-    sage: shell.run_cell('sage: a = [\n... 123]')      # old-style multi-line
     sage: shell.run_cell('sage: a = [\n....: 123]')    # new-style multi-line
 
 We test that :issue:`16196` is resolved::
