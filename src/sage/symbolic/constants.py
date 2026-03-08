@@ -198,6 +198,7 @@ floating point rings::
 
 Check that :issue:`8237` is fixed::
 
+    sage: # needs sage.libs.maxima
     sage: maxima('infinity').sage()
     Infinity
     sage: maxima('inf').sage()

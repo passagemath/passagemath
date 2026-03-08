@@ -120,7 +120,7 @@ class IndefiniteIntegral(BuiltinFunction):
         Check that :issue:`32002` is fixed. This needs giac since only
         giac can integrate it in any case::
 
-            sage: # needs sage.libs.giac
+            sage: # needs sage.libs.giac sage.libs.maxima
             sage: result = integral(2*min_symbolic(x,2*x),x)
             ...
             sage: result
@@ -721,6 +721,8 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
         ...
         sage: result
         4
+
+        sage: # needs sage.libs.maxima
         sage: result = integrate(abs(cos(x)), x, 0, 2*pi)
         ...
         sage: result

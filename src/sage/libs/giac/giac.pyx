@@ -1351,19 +1351,19 @@ cdef class Pygen(GiacMethods_base):
         EXAMPLES::
 
             sage: from sage.libs.giac.giac import *
-            sage: a=libgiac('10'); b=libgiac('2**300')
-            sage: a;type(ZZ(a))
+            sage: a = libgiac('10'); b = libgiac('2**300')
+            sage: a; type(ZZ(a))
             10
             <class 'sage.rings.integer.Integer'>
-            sage: next_prime(b)
+            sage: next_prime(b)                                                         # needs sage.libs.pari
             2037035976334486086268445688409378161051468393665936250636140449354381299763336706183397533
-           sage: c=libgiac('2 % nextprime(2**40)')
-           sage: ZZ(c^1000)
-           -233775163595
-          sage: Mod(2,next_prime(2^40))^1000 - ZZ(c^1000)
-           0
-           sage: 2^320-(c^320).sage()
-           0
+            sage: c = libgiac('2 % nextprime(2**40)')
+            sage: ZZ(c^1000)
+            -233775163595
+            sage: Mod(2, next_prime(2^40))^1000 - ZZ(c^1000)                            # needs sage.libs.pari
+            0
+            sage: 2^320 - (c^320).sage()
+            0
         """
         cdef Integer n = PY_NEW(Integer)
         typ = self._type
@@ -1517,8 +1517,8 @@ cdef class Pygen(GiacMethods_base):
         EXAMPLES::
 
             sage: from sage.libs.giac.giac import *
-            sage: u,v=var('u,v');a=libgiac('cos(u+v)').texpand()
-            sage: simplify(SR(a)+sin(u)*sin(v))
+            sage: u,v = var('u,v'); a = libgiac('cos(u+v)').texpand()
+            sage: simplify(SR(a) + sin(u)*sin(v))                                       # needs sage.libs.maxima
             cos(u)*cos(v)
 
         TESTS:
