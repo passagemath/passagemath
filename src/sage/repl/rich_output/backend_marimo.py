@@ -19,23 +19,40 @@ import base64
 import html
 import marimo as mo
 from marimo._output import formatting
-from sage.repl.rich_output.preferences import DisplayPreferences
-from sage.repl.rich_output.backend_base import BackendBase
 from sage.repl.rich_output import get_display_manager  # type: ignore
+from sage.repl.rich_output.backend_base import BackendBase
 from sage.repl.rich_output.output_basic import OutputBase
 from sage.repl.rich_output.output_catalog import (
     OutputAsciiArt,
     OutputHtml,
-    OutputImagePng,
-    OutputImageJpg,
     OutputImageGif,
+    OutputImageJpg,
+    OutputImagePng,
     OutputImageSvg,
     OutputLatex,
     OutputPlainText,
     OutputSceneThreejs,
     OutputUnicodeArt,
 )
+from sage.repl.rich_output.preferences import DisplayPreferences
 from typing import Any
+
+# ensures only the following things are part of the public interface
+__all__ = ["check_and_load_marimo", "BackendMarimo"]
+
+
+def check_and_load_marimo():
+    """Switches to BackendMarimo if running in an interactive marimo notebook."""
+    try:
+        import marimo
+
+        if marimo.running_in_notebook():
+            print("Interactive marimo session detected. Loading sage marimo backend.")
+            from sage.repl.rich_output.backend_marimo import BackendMarimo
+
+            get_display_manager().switch_backend(BackendMarimo())
+    except ImportError:
+        pass
 
 
 class BackendMarimo(BackendBase):
@@ -46,14 +63,18 @@ class BackendMarimo(BackendBase):
 
         # in a marimo notebook
 
-        sage: from sage.repl.rich_output.backend_marimo import BackendMarimo
-        sage: from sage.repl.rich_output import get_display_manager
-        sage: dm = get_display_manager()
-        sage: dm.switch_backend(BackendMarimo())
-        sage: print(dm.get_instance())
+        from sage.repl.rich_output.backend_marimo import BackendMarimo
+        from sage.repl.rich_output import get_display_manager
+        dm = get_display_manager()
+        dm.switch_backend(BackendMarimo())
+        print(dm.get_instance())
+
+        # output:
         The Sage display manager using the Marimo Notebook backend
 
-        sage: print(dm.preferences())
+        print(dm.preferences())
+
+        # output:
         Display preferences:
         * align_latex = center
         * graphics is not specified
