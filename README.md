@@ -82,16 +82,24 @@ Use the "Manage Packages" icon on the left to install "passagemath-standard".
 
 Marimo may prompt you a few times that the notebook may need to be restarted; just confirm it.
 
+### Marimo specifics
+This information applies to local installs of marimo (using `pip install marimo` or `sage -i marimo`) as well as the cloud.
+
 In the marimo notebook, no Sage-specific preparsing is in effect.
 When following [code examples in the documentation](https://passagemath.org/docs/latest/html/en/a_tour_of_sage/index.html),
 be sure to switch to the "Python" tab.
 
-Also, by design of the reactive notebook, importing `*` does not work.
+By design of the reactive notebook, `from sage.all import *` will not work.
 Import the global bindings that you need manually, for example:
 
     from sage.all import ZZ
     V = ZZ**8; V
 
+The marimo rich output backend will initialise automatically after any `sage.all` imports in an interactive session.
+This enables LaTex and 2D/3D plot graphics.
+
+There is a test notebook available in the [passagemath-marimo-notebooks repository](https://github.com/passagemath/passagemath-marimo-notebooks/blob/main/notebook_test_marimo.py)
+that displays the compatible rich output functionality.
 
 Local installation of passagemath: Supported platforms
 ------------------------------------------------------
@@ -162,7 +170,7 @@ Alternatively,
 * use a Python (`python3`) or IPython (`ipython`) REPL, or
 * use the Python kernel or the provided Sage kernel in a Jupyter notebook (after `pip install notebook`, use `sage -n jupyter`), or
 * use the Python kernel or the provided Sage kernel in JupyterLab (after `pip install jupyterlab`, use `sage -n jupyterlab`), or
-* use a reactive marimo notebook (`pip install marimo`, followed by `sage -n marimo`).
+* use a reactive marimo notebook (`pip install marimo`, followed by `sage -n marimo`). [See below for further information](#marimo-specifics)
 
 
 Modularized distributions

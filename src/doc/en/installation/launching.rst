@@ -324,3 +324,57 @@ Here are steps to use SageMath in a Jupyter notebook in VS Code:
 
 * Click "Select Kernel" on the right (or press :kbd:`Ctrl` +
   :kbd:`Alt` + :kbd:`Enter`), select SageMath, and hit :kbd:`Enter`.
+
+
+Using sage in a Marimo notebook
+-------------------------------
+
+`Marimo <https://marimo.io/>` is a new take on Python notebooks.
+Passagemath can be used with Marimo and supports rich output.
+
+If you installed sage in a virtual environment (make sure it is activated)
+
+.. code-block:: console
+
+    $ pip install marimo
+
+or, if sage is installed globally,
+
+.. code-block:: console
+
+    $ sage -i marimo
+
+
+Launching a Marimo notebook
+"""""""""""""""""""""""""""
+From the directory containing the marimo notebook you wish to edit
+
+.. code-block:: console
+
+    $ sage -n marimo
+
+The marimo page should open in your browser and the notebook can be selected.
+
+Alternatively, as long as sage and marimo are installed together (e.g. in a virtual environment),
+
+.. code-block:: console
+
+    $ marimo edit notebook_file.py
+
+An example notebook is available in the `passagemath-marimo-notebooks repository <https://github.com/passagemath/passagemath-marimo-notebooks/blob/main/notebook_test_marimo.py>`.
+
+Marimo notebook specifics
+"""""""""""""""""""""""""
+In the marimo notebook, no Sage-specific preparsing is in effect.
+When following `code examples in the documentation <https://passagemath.org/docs/latest/html/en/a_tour_of_sage/index.html>`,
+be sure to switch to the "Python" tab.
+
+By design of the reactive notebook, ``from sage.all import *`` will not work.
+Import the global bindings that you need manually, for example:
+
+.. code-block:: python
+    from sage.all import ZZ
+    V = ZZ**8; V
+
+The marimo rich output backend will initialise automatically after any ``sage.all`` imports in an interactive session.
+This enables LaTex and 2D/3D plot graphics.
