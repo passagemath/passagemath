@@ -18,3 +18,4 @@ del lazy_import
 # Does nothing otherwise
 from sage.repl.rich_output.backend_marimo import check_and_load_marimo
 check_and_load_marimo()
+del check_and_load_marimo
