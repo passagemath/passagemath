@@ -2007,11 +2007,17 @@ cdef class Matrix(Matrix0):
         # Construct new matrix
         cdef Matrix A = self.new_matrix(ncols=ncols)
         cdef Py_ssize_t i, j, col
+
         for j, col in enumerate(columns):
             if col < 0 or col >= self._ncols:
                 raise IndexError("column index out of range")
-            for i in range(self._nrows):
-                A.copy_from_unsafe(i, j, self, i, col)
+            if type(A) == type(self):
+                for i in range(self._nrows):
+                    A.copy_from_unsafe(i, j, self, i, col)
+            else:
+                for i in range(self._nrows):
+                    A.set_unsafe(i, j, self.get_unsafe(i, col))
+
         return A
 
     def delete_columns(self, dcols, check=True):
@@ -2108,8 +2114,12 @@ cdef class Matrix(Matrix0):
         for i, row in enumerate(rows):
             if row < 0 or row >= self._nrows:
                 raise IndexError("row index out of range")
-            for j in range(self._ncols):
-                A.copy_from_unsafe(i, j, self, row, j)
+            if type(A) == type(self):
+                for j in range(self._ncols):
+                    A.copy_from_unsafe(i, j, self, row, j)
+            else:
+                for j in range(self._ncols):
+                    A.set_unsafe(i, j, self.get_unsafe(row, j))
         return A
 
     def delete_rows(self, drows, check=True):
@@ -2235,8 +2245,13 @@ cdef class Matrix(Matrix0):
         for i, row in enumerate(rows):
             if row < 0 or row >= self._nrows:
                 raise IndexError("row index out of range")
-            for j, col in enumerate(columns):
-                A.copy_from_unsafe(i, j, self, row, col)
+            if type(A) == type(self):
+                for j, col in enumerate(columns):
+                    A.copy_from_unsafe(i, j, self, row, col)
+            else:
+                for j, col in enumerate(columns):
+                    A.set_unsafe(i, j, self.get_unsafe(row, col))
+
         return A
 
     def submatrix(self, Py_ssize_t row=0, Py_ssize_t col=0,
