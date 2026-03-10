@@ -137,9 +137,15 @@ cdef class Matrix_dense(matrix.Matrix):
                                 copy=False, coerce=False)
 
         cdef Py_ssize_t i, j
-        for j from 0<= j < nc:
-            for i from 0<= i < nr:
-                trans.copy_from_unsafe(j, i, self, i, j)
+
+        if type(trans) == type(self):
+            for j from 0<= j < nc:
+                for i from 0<= i < nr:
+                    trans.copy_from_unsafe(j, i, self, i, j)
+        else:
+            for j from 0<= j < nc:
+                for i from 0<= i < nr:
+                    trans.set_unsafe(j,i,self.get_unsafe(i,j))
 
         if self._subdivisions is not None:
             row_divs, col_divs = self.subdivisions()
@@ -179,12 +185,21 @@ cdef class Matrix_dense(matrix.Matrix):
         cdef Py_ssize_t i, j
         cdef Py_ssize_t ri, rj # reversed i and j
         rj = nc
-        for j from 0 <= j < nc:
-            ri = nr
-            rj -= 1
-            for i from 0 <= i < nr:
-                ri -= 1
-                atrans.copy_from_unsafe(j, i, self, ri, rj)
+
+        if type(atrans) == type(self):
+            for j from 0 <= j < nc:
+                ri = nr
+                rj -= 1
+                for i from 0 <= i < nr:
+                    ri -= 1
+                    atrans.copy_from_unsafe(j, i, self, ri, rj)
+        else:
+            for j from 0 <= j < nc:
+                ri = nr
+                rj -= 1
+                for i from 0 <= i < nr:
+                    ri -= 1
+                    atrans.set_unsafe(j, i, self.get_unsafe(ri, rj))
 
         if self._subdivisions is not None:
             row_divs, col_divs = self.subdivisions()
