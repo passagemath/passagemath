@@ -215,4 +215,5 @@ def khoca_raw_data(link, ring, red_typ=True, **kwds):
             raise TypeError('reduced must be a boolean')
     return raw_data['unred']
 
+
 Khoca = khoca_interface
