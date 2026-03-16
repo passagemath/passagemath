@@ -64,6 +64,7 @@ try:
     from sage.libs.pari import pari
     from cypari2.gen import Gen as pari_gen
 except ImportError:
+    pari = None
     pari_gen = ()
 
 
@@ -1804,6 +1805,9 @@ class BinaryQF(SageObject):
         if algorithm == 'cornacchia':
             if not (self._a.is_one() and self._b.is_zero() and self._c > 0):
                 raise ValueError("Cornacchia's algorithm requires a=1 and b=0 and c>0")
+            if pari is None:
+                from sage.features.sagemath import sage__libs__pari
+                sage__libs__pari().require()
             sol = pari.qfbcornacchia(self._c, n)
             return tuple(map(ZZ, sol)) if sol else None
 

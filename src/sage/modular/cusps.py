@@ -46,6 +46,7 @@ try:
     from sage.libs.pari import pari
     from cypari2.gen import Gen as pari_gen
 except ImportError:
+    pari = None
     pari_gen = ()
 
 
@@ -1003,6 +1004,9 @@ class Cusp(Element):
             sage: pari(Cusp(3, 2))                                                      # needs sage.libs.pari
             3/2
         """
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         b = self.__b
         return pari(self.__a / b) if b else pari.oo()
 
