@@ -27,10 +27,10 @@ from sage.manifolds.utilities import (
     simplify_chain_real_sympy,
 )
 from sage.misc.latex import latex
+from sage.misc.lazy_import import lazy_import
 from sage.structure.sage_object import SageObject
 from sage.symbolic.ring import SR
 
-from sage.misc.lazy_import import lazy_import
 lazy_import('sympy', 'latex', as_='sympy_latex')
 
 
