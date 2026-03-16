@@ -264,6 +264,15 @@ except ImportError:
     def singular_gb_standard_options(func):
         return func
     libsingular_gb_standard_options = singular_gb_standard_options
+    singular_default = None
+    
+    class StdOutContext:
+        def __init__(self, *args, **kwds):
+            pass
+        def __enter__(self):
+            pass
+        def __exit__(self, *args):
+            pass
 
 try:
     from sage.interfaces.magma import magma as magma_default
