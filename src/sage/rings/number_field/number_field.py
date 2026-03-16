@@ -159,6 +159,7 @@ try:
     from sage.libs.pari import pari
     from cypari2.gen import Gen as pari_gen
 except ImportError:
+    pari = None
     pari_gen = ()
 
 
@@ -3586,6 +3587,9 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
             ....: )
             True
         """
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         factorizations = [I.factor() for I in ideals]
         y = [a for a, f in zip(residues, factorizations) for _ in f]
         x = pari.Mat([
@@ -4477,6 +4481,9 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         try:
             bnf = self._pari_bnf
         except AttributeError:
+            if pari is None:
+                from sage.features.sagemath import sage__libs__pari
+                sage__libs__pari().require()
             f = self.pari_polynomial("y")
             _saved_rand = pari.getrand()
             # make this deterministic, it affects printing of ideals
@@ -5125,6 +5132,9 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
                     ords.append(m1)
         card_S = len(S)
         if card_S != 0:
+            if pari is None:
+                from sage.features.sagemath import sage__libs__pari
+                sage__libs__pari().require()
             from sage.matrix.constructor import Matrix
             H = self.class_group()
             gen_ords = [g.order() for g in H.gens()]
@@ -6277,6 +6287,9 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         if d <= 11:
             return self.galois_group().is_abelian()
 
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         pari_pol = pari(self.polynomial())
         return pari_pol.galoisinit().galoisisabelian(1) == 1
 
@@ -6608,6 +6621,9 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         # the inner product on the Minkowski embedding, which is
         # faster than computing all the conjugates, etc ...
 
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         # flag to disable FLATTER, which is much more unstable than fplll
         flag = 1 if pari.version() >= (2, 17) else 0
         if self.is_totally_real():
@@ -6752,6 +6768,9 @@ class NumberField_generic(WithEqualityById, number_field_base.NumberField):
         if not self.is_totally_real():
             raise NotImplementedError("exact computation of LLL reduction only implemented in the totally real case")
 
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         B = self.reduced_basis()
         T = self.reduced_gram_matrix()
         P = pari(T).qfminim((C[1]**2) * 0.5, 10**6)[2]
@@ -10440,6 +10459,9 @@ class NumberField_absolute(NumberField_generic):
         a = self(a)
         b = self(b)
         if P is None:
+            if pari is None:
+                from sage.features.sagemath import sage__libs__pari
+                sage__libs__pari().require()
             return pari(self).nfhilbert(a, b)
 
         from sage.categories.map import Map
@@ -10465,6 +10487,9 @@ class NumberField_absolute(NumberField_generic):
             raise ValueError("P (=%s) should be an ideal of self (=%s) in hilbert_symbol, not of %s" % (P, self, P.number_field()))
         if not P.is_prime():
             raise ValueError("Non-prime ideal P (=%s) in hilbert_symbol" % P)
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         return pari(self).nfhilbert(a, b, P.pari_prime())
 
     def hilbert_symbol_negative_at_S(self, S, b, check=True):
@@ -11962,6 +11987,9 @@ class NumberField_cyclotomic(NumberField_absolute, sage.rings.abc.NumberField_cy
         try:
             return self._integral_basis_dict[tuple()]
         except KeyError:
+            if pari is None:
+                from sage.features.sagemath import sage__libs__pari
+                sage__libs__pari().require()
             z = pari(self.gen())
             a = pari(1)
             B = []
