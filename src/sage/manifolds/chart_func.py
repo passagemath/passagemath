@@ -46,11 +46,7 @@ from sage.structure.parent import Parent
 from sage.structure.sage_object import SageObject
 from sage.structure.unique_representation import UniqueRepresentation
 from sage.symbolic.ring import SR
-
-try:
-    import sympy
-except ImportError:
-    pass
+import sympy
 
 
 class ChartFunction(AlgebraElement, ModuleElementWithMutability):
