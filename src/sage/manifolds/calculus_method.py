@@ -30,11 +30,8 @@ from sage.misc.latex import latex
 from sage.structure.sage_object import SageObject
 from sage.symbolic.ring import SR
 
-try:
-    import sympy
-    from sympy import latex as sympy_latex
-except ImportError:
-    sympy_latex = None
+from sage.misc.lazy_import import lazy_import
+lazy_import('sympy', 'latex', as_='sympy_latex')
 
 
 # Conversion functions
@@ -69,6 +66,7 @@ def _SR_to_Sympy(expression):
         True
     """
     # Nothing to do if expression is already a SymPy object:
+    import sympy
     if isinstance(expression, sympy.Basic):
         return expression
     return SR(expression)._sympy_()
