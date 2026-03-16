@@ -80,6 +80,8 @@ try:
     from sage.libs.pari import pari
     from cypari2.handle_error import PariError
 except ImportError:
+    pari = None
+
     class PariError(Exception):
         pass
 
@@ -1111,6 +1113,9 @@ class IntegerModRing_generic(quotient_ring.QuotientRing_generic, sage.rings.abc.
         try:
             return self.__pari_order
         except AttributeError:
+            if pari is None:
+                from sage.features.sagemath import sage__libs__pari
+                sage__libs__pari().require()
             self.__pari_order = pari(self.order())
             return self.__pari_order
 

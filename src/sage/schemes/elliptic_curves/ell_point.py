@@ -163,6 +163,7 @@ try:
     from sage.libs.pari import pari
     from cypari2.handle_error import PariError
 except ImportError:
+    pari = None
     PariError = ()
 
 
@@ -749,6 +750,9 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
             sage: pari(E).elladd(O, P)
             [Mod(1, 11), Mod(2, 11)]
         """
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         x,y,z = self._coords
         if z:
             return pari([x/z, y/z])
@@ -2242,6 +2246,9 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
                 algorithm = 'sage'
 
         if algorithm == 'pari':
+            if pari is None:
+                from sage.features.sagemath import sage__libs__pari
+                sage__libs__pari().require()
             if pari.ellmul(E,P,n) != [0] or pari.ellmul(E,Q,n) != [0]:
                 raise ValueError("points must both be n-torsion")
             return E.base_field()(pari.ellweilpairing(E, P, Q, n))
@@ -2496,6 +2503,9 @@ class EllipticCurvePoint_field(EllipticCurvePoint,
         elif Mod(q, n)**k != 1:
             raise ValueError("n does not divide (q^k - 1) for the supplied value of q")
 
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         if pari.ellmul(E, P, n) != [0]:
             raise ValueError("The point P must be n-torsion")
 
@@ -4238,6 +4248,10 @@ class EllipticCurvePoint_number_field(EllipticCurvePoint_field):
         if algorithm != 'pari':
             raise ValueError("algorithm must be either 'pari' or 'sage'")
 
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
+
         # From now on emb() is a real embedding of K into
         # RealField(precision).  We interface with the PARI library.
 
@@ -4460,6 +4474,9 @@ class EllipticCurvePoint_finite_field(EllipticCurvePoint_field):
         k = ZZ(other)
         E = self.curve()
 
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         try:
             pariQ = pari.ellmul(E, self, k)
         except PariError as err:
@@ -4684,6 +4701,9 @@ class EllipticCurvePoint_finite_field(EllipticCurvePoint_field):
         elif base.weil_pairing(self, n) != 1:
             raise ValueError('ECDLog problem has no solution (non-trivial Weil pairing)')
 
+        if pari is None:
+            from sage.features.sagemath import sage__libs__pari
+            sage__libs__pari().require()
         return ZZ(pari.elllog(self.curve(), self, base, n))
 
     def padic_elliptic_logarithm(self, Q, p):
