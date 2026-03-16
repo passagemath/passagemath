@@ -265,7 +265,7 @@ except ImportError:
         return func
     libsingular_gb_standard_options = singular_gb_standard_options
     singular_default = None
-    
+
     class StdOutContext:
         def __init__(self, *args, **kwds):
             pass
