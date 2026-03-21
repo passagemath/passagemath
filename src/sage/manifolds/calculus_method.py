@@ -27,11 +27,8 @@ from sage.manifolds.utilities import (
     simplify_chain_real_sympy,
 )
 from sage.misc.latex import latex
-from sage.misc.lazy_import import lazy_import
 from sage.structure.sage_object import SageObject
 from sage.symbolic.ring import SR
-
-lazy_import('sympy', 'latex', as_='sympy_latex')
 
 
 # Conversion functions
@@ -200,6 +197,7 @@ class CalculusMethod(SageObject):
             self._simplify_dict['SR'] = simplify_chain_generic
         # The default simplifying functions are saved:
         self._simplify_dict_default = self._simplify_dict.copy()
+        from sympy import latex as sympy_latex
         self._latex_dict = {'sympy': sympy_latex, 'SR': latex}
 
     def simplify(self, expression, method=None):
