@@ -55,7 +55,9 @@ try:
     from .padic_ZZ_pX_CR_element import pAdicZZpXCRElement
     from .padic_ZZ_pX_CA_element import pAdicZZpXCAElement
 except ImportError:
-    pass
+    pAdicZZpXFMElement = None
+    pAdicZZpXCRElement = None
+    pAdicZZpXCAElement = None
 
 try:
     from .qadic_flint_CR import qAdicCappedRelativeElement
@@ -63,7 +65,10 @@ try:
     from .qadic_flint_FM import qAdicFixedModElement
     from .qadic_flint_FP import qAdicFloatingPointElement
 except ImportError:
-    pass
+    qAdicCappedRelativeElement = None
+    qAdicCappedAbsoluteElement = None
+    qAdicFixedModElement = None
+    qAdicFloatingPointElement = None
 
 
 def _make_integral_poly(exact_modulus, p, prec):
