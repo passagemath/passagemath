@@ -256,7 +256,6 @@ include sage/rings/complex_double.p*
 include sage/rings/complex_field.p*
 include sage/rings/complex_mpfr.p*
 include sage/rings/complex_conversion.p*
-include sage/rings/real_double_element_gsl.p*
 # uses gsl
 graft sage/calculus
 # exclude what is included in sagemath-categories
@@ -275,6 +274,7 @@ exclude sage/calculus/interpolation.p*
 exclude sage/calculus/ode.p*
 exclude sage/calculus/riemann.p*
 prune sage/calculus/transforms
+exclude sage/rings/real_double_element_gsl.p*
 
 # More from algebras with compile-time dependencies on sagemath-modules
 include sage/algebras/clifford_algebra*.p*

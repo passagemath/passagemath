@@ -8,6 +8,8 @@ prune .tox
 exclude *.m4
 include requirements.txt
 
+include sage/rings/real_double_element_gsl.p*
+
 include sage/calculus/integration.p*
 include sage/calculus/interpolation.p*
 include sage/calculus/ode.p*
