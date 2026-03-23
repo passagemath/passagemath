@@ -498,13 +498,14 @@ class PolynomialQuotientRing_generic(QuotientRing_generic):
             sage: p.parent()
             Univariate Quotient Polynomial Ring in xbar over Rational Field
              with modulus x^4 + 2*x^2 + 1
-            sage: p.parent()('xbar')
+            sage: p.parent()('xbar')                                          # needs sage.modules
             xbar
 
         Note that the result of string conversion has the correct parent, even
         when the given string suggests an element of the cover ring or the base
         ring::
 
+            sage: # needs sage.modules
             sage: a = Q1('x'); a
             xbar
             sage: a.parent() is Q1
@@ -527,7 +528,7 @@ class PolynomialQuotientRing_generic(QuotientRing_generic):
         String conversion takes into account both the generators of the quotient
         ring and its base ring::
 
-            sage: Q3('x*ybar^2')
+            sage: Q3('x*ybar^2')                                              # needs sage.modules
             -x
         """
         if not isinstance(x, str):
