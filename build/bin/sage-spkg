@@ -668,7 +668,11 @@ if [ -d "$SAGE_DESTDIR" ]; then
     FILE_LIST="$(cd "$PREFIX" && find . -type f -o -type l | sed 's|^\./||' | sort)"
 
     # Copy files into $SAGE_INST_LOCAL
-    $SAGE_SUDO cp -Rp "$PREFIX/." "$SAGE_INST_LOCAL" || exit_with_error_msg "Error moving files for $PKG_NAME."
+    # Use tar pipe instead of "cp -Rp" to avoid a race condition where
+    # parallel package installs both try to mkdir the same subdirectory
+    # (e.g. share/pari), causing "cp: cannot create directory: File exists".
+    # tar handles existing directories gracefully by merging into them.
+    (cd "$PREFIX" && tar cf - .) | $SAGE_SUDO tar xpf - -C "$SAGE_INST_LOCAL" || exit_with_error_msg "Error moving files for $PKG_NAME."
 
     # Remove the $SAGE_DESTDIR entirely once all files have been moved to their
     # final location.
