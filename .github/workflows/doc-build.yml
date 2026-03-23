@@ -161,12 +161,12 @@ jobs:
             '.workflow_runs[] | select(.name == $name and .conclusion == $conclusion) | .id' | head -n 1)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
 
-      - name: Download old doc
+      - name: Download doc-main
         id: download-doc
         if: steps.get_run_id.outcome == 'success'
         uses: actions/download-artifact@v4
         with:
-          name: doc-develop
+          name: doc-main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           run-id: ${{ env.RUN_ID }}
@@ -288,8 +288,8 @@ jobs:
           name: doc
           path: doc.zip
 
-      - name: Upload doc-develop
-        # artifact doc-develop is used for doc build on pull request event
+      - name: Upload doc-${{ github.ref_name }}
+        # artifact doc-main is used for doc build on pull request event
         id: upload-push
         if: steps.copy.outcome == 'success' && github.event_name == 'push'
         uses: actions/upload-artifact@v4
