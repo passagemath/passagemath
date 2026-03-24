@@ -146,21 +146,20 @@ import os
 import math
 
 # sage includes
-from sage.ext.stdsage cimport PY_NEW
-from sage.rings.integer_ring import ZZ
-from sage.rings.rational_field import QQ
-from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
-from sage.rings.integer cimport Integer
-from sage.rings.infinity import AnInfinity
-from sage.rings.rational cimport Rational
-from sage.structure.element cimport Matrix
-
-from sage.symbolic.expression import symbol_table
 from sage.calculus.calculus import symbolic_expression_from_string, SR_parser_giac
-from sage.symbolic.ring import SR
-from sage.symbolic.expression import Expression
-from sage.symbolic.expression_conversions import InterfaceInit
+from sage.ext.stdsage cimport PY_NEW
 from sage.interfaces.giac import giac
+from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
+from sage.rings.infinity import AnInfinity
+from sage.rings.integer cimport Integer
+from sage.rings.integer_ring import ZZ
+from sage.rings.rational cimport Rational
+from sage.rings.rational_field import QQ
+from sage.structure.element cimport Matrix
+from sage.symbolic.expression import Expression
+from sage.symbolic.expression import symbol_table
+from sage.symbolic.expression_conversions import InterfaceInit
+from sage.symbolic.ring import SR
 
 
 # initialize the gmpy2 C-API
