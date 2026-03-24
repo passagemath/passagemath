@@ -1,5 +1,3 @@
-/* sage_setup: distribution = sagemath-giac
- */
 #ifndef GIACPYMISC_H
 #define GIACPYMISC_H
 #include <giac/giac.h>
@@ -20,15 +18,6 @@ inline int  testctrl_c(void){
     return 0;
   }
 }
-
-/*
-int  giacgencmp(gen & a, gen & b, const context * context_ptr){
-  if(a==b){return 0;}
-  else{ if (is_strictly_greater(a,b,context_ptr)){return 1;}
-    else{return -1;}
-  }
-}
-*/
 
 int  giacgenrichcmp(gen & a, gen & b, int op, const context * context_ptr){
   int rep=0;//be careful with undef results
@@ -90,7 +79,6 @@ string browser_help(const giac::gen & g, int language){
       s=f._FUNCptr->ptr()->s;
     giac::html_vtt=giac::html_help(giac::html_mtt,s);
      if (!giac::html_vtt.empty()){
-       //giac::system_browser_command(giac::html_vtt.front());
        return giac::html_vtt.front();
      }
      else{

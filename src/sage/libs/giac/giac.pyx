@@ -1,12 +1,9 @@
-# sage_setup: distribution = sagemath-giac
-# sage.doctest: needs sage.libs.giac
-# distutils: libraries = giac
-# distutils: language = c++
-# distutils: extra_compile_args = -std=c++11
+# sage.doctest: optional - giac
 r"""
 Interface to the c++ giac library.
 
-Giac is a general purpose Computer algebra system by Bernard Parisse released under GPLv3.
+Giac is a general purpose Computer algebra system by Bernard Parisse
+released under GPLv3.
 
 - http://www-fourier.ujf-grenoble.fr/~parisse/giac.html
 - It is build on C and C++ libraries: NTL (arithmetic), GSL (numerics), GMP
@@ -51,62 +48,58 @@ Most common usage of this package in sage will be with the libgiac() function.
 This function is just the composition of the Pygen initialisation and the
 evaluation of this object in giac.::
 
-    sage: x,y,z=libgiac('x,y,z');  # add some giac objects
-    sage: f=(x+3*y)/(x+z+1)^2 -(x+z+1)^2/(x+3*y)
+    sage: x,y,z = libgiac('x,y,z')  # add some giac objects
+    sage: f = (x+y*3)/(x+z+1)**2 - (x+z+1)**2 / (x+y*3)
     sage: f.factor()
     (3*y-x^2-2*x*z-x-z^2-2*z-1)*(3*y+x^2+2*x*z+3*x+z^2+2*z+1)/((x+z+1)^2*(3*y+x))
     sage: f.normal()
     (-x^4-4*x^3*z-4*x^3-6*x^2*z^2-12*x^2*z-5*x^2+6*x*y-4*x*z^3-12*x*z^2-12*x*z-4*x+9*y^2-z^4-4*z^3-6*z^2-4*z-1)/(x^3+3*x^2*y+2*x^2*z+2*x^2+6*x*y*z+6*x*y+x*z^2+2*x*z+x+3*y*z^2+6*y*z+3*y)
 
-To obtain more hints consider the help of the :func:`libgiac<_giac>`
-function.::
+Some settings of giac are available via the ``giacsettings``
+element. (Ex: maximal number of threads in computations, allowing
+probabilistic algorithms or not...::
 
-    sage: libgiac?             # doctest: +SKIP
-
-Some settings of giac are available via the ``giacsettings`` element. (Ex:
-maximal number of threads in computations, allowing probabilistic algorithms or
-not...::
-
-    sage: # needs sage.libs.singular
+    sage: from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
+    sage: from sage.rings.rational_field import QQ
+    sage: from sage.rings.ideal import Katsura as KatsuraIdeal
     sage: R = PolynomialRing(QQ,8,'x')
-    sage: I = sage.rings.ideal.Katsura(R,8)
-    sage: giacsettings.proba_epsilon = 1e-15
+    sage: I = KatsuraIdeal(R,8)
+    sage: giacsettings.proba_epsilon = 1e-15  # faster, but can fail
     sage: Igiac = libgiac(I.gens());
-    sage: time Bgiac = Igiac.gbasis([R.gens()],'revlex')  # doctest: +SKIP
-    Running a probabilistic check for the reconstructed Groebner basis. If successfull, error probability is less than 1e-15 and is estimated to be less than 10^-109. Use proba_epsilon:=0 to certify (this takes more time).
-    Time: CPU 0.46 s, Wall: 0.50 s
-    sage: giacsettings.proba_epsilon = 0
+    sage: Bgiac = Igiac.gbasis([R.gens()],'revlex')  # random
+    sage: len(Bgiac)
+    74
+    sage: giacsettings.proba_epsilon = 0  # slower, but more reliable
     sage: Igiac = libgiac(I.gens())
-    sage: time Bgiac=Igiac.gbasis([R.gens()],'revlex') # doctest: +SKIP
-    Time: CPU 2.74 s, Wall: 2.75 s
+    sage: Bgiac = Igiac.gbasis([R.gens()],'revlex')
+    sage: len(Bgiac)
+    74
     sage: giacsettings.proba_epsilon = 1e-15
 
   ::
 
-    sage: # needs sage.symbolic
     sage: x = libgiac('x')
-    sage: f = 1/(2+sin(5*x))
-    sage: oldrep = 2/5/sqrt(3)*(atan((2*tan(5*x/2)+1)/sqrt(3))+pi*floor(5*x/2/pi+1/2))
-    sage: newrep = 2/5/sqrt(3)*(atan((-sqrt(3)*sin(5*x)+cos(5*x)+2*sin(5*x)+1)/(sqrt(3)*cos(5*x)+sqrt(3)-2*cos(5*x)+sin(5*x)+2))+5*x/2)
-    sage: ((f.int() - newrep) * (f.int() - oldrep())).normal()
-    0
+    sage: f = libgiac(1) / (libgiac.sin(x*5)+2)
+    sage: f.int()
+    2/5/sqrt(3)*(atan((-sqrt(3)*sin(5*x)+cos(5*x)+2*sin(5*x)+1)/(sqrt(3)*cos(5*x)+sqrt(3)-2*cos(5*x)+sin(5*x)+2))+5*x/2)
     sage: f.series(x,0,3)
     1/2-5/4*x+25/8*x^2-125/48*x^3+x^4*order_size(x)
-    sage: libgiac(sqrt(5)+pi).approx(100)
+    sage: (libgiac.sqrt(5)+libgiac.pi).approx(100)
     5.377660631089582934871817052010779119637787758986631545245841837718337331924013898042449233720899343
 
 TESTS::
 
     sage: from sage.libs.giac.giac import libgiac
-    sage: libgiac(3^100)
+    sage: libgiac(3**100)
     515377520732011331036461129765621272702107522001
-    sage: libgiac(-3^100)
+    sage: libgiac(-3**100)
     -515377520732011331036461129765621272702107522001
-    sage: libgiac(-11^1000)
+    sage: libgiac(-11**1000)
     -2469932918005826334124088385085221477709733385238396234869182951830739390375433175367866116456946191973803561189036523363533798726571008961243792655536655282201820357872673322901148243453211756020067624545609411212063417307681204817377763465511222635167942816318177424600927358163388910854695041070577642045540560963004207926938348086979035423732739933235077042750354729095729602516751896320598857608367865475244863114521391548985943858154775884418927768284663678512441565517194156946312753546771163991252528017732162399536497445066348868438762510366191040118080751580689254476068034620047646422315123643119627205531371694188794408120267120500325775293645416335230014278578281272863450085145349124727476223298887655183167465713337723258182649072572861625150703747030550736347589416285606367521524529665763903537989935510874657420361426804068643262800901916285076966174176854351055183740078763891951775452021781225066361670593917001215032839838911476044840388663443684517735022039957481918726697789827894303408292584258328090724141496484460001
 
 Ensure that signed infinities get converted correctly::
 
+    sage: from sage.rings.infinity import Infinity
     sage: libgiac(+Infinity)
     +infinity
     sage: libgiac(-Infinity)
@@ -119,31 +112,18 @@ Ensure that signed infinities get converted correctly::
 
 GETTING HELP:
 
-- To obtain some help on a giac keyword use the help() method. In sage the htmlhelp() method for Pygen element is disabled. Just use the ? or .help() method.
-
-  ::
-
-        sage: libgiac.gcd?             # doctest: +SKIP
-        "Returns the greatest common divisor of 2 polynomials of several variables or of 2 integers or of 2 rationals.
-        (Intg or Poly),(Intg or Poly)
-        gcd(45,75);gcd(15/7,50/9);gcd(x^2-2*x+1,x^3-1);gcd(t^2-2*t+1,t^2+t-2);gcd((x^2-1)*(y^2-1)*z^2,x^3*y^3*z+(-(y^3))*z+x^3*z-z)
-        lcm,euler,modgcd,ezgcd,psrgcd,heugcd,Gcd"
+- To obtain some help on a giac keyword use the help() method. In sage the
+  htmlhelp() method for Pygen element is disabled. Just use the ? or .help()
+  method.
 
 - You can find full html documentation about the **giac** functions  at:
 
-      - http://www-fourier.ujf-grenoble.fr/~parisse/giac/doc/en/cascmd_en/
+      - https://www-fourier.ujf-grenoble.fr/~parisse/giac/doc/en/cascmd_en/
 
-      - http://www-fourier.ujf-grenoble.fr/~parisse/giac/doc/fr/cascmd_fr/
+      - https://www-fourier.ujf-grenoble.fr/~parisse/giac/doc/fr/cascmd_fr/
 
-      - http://www-fourier.ujf-grenoble.fr/~parisse/giac/doc/el/cascmd_el/
+      - https://www-fourier.ujf-grenoble.fr/~parisse/giac/doc/el/cascmd_el/
 
-      - or in :doc:`$SAGE_LOCAL/share/giac/doc/en/cascmd_en/index.html`
-
-
-.. NOTE::
-
-    Graphics 2D Output via qcas (the qt frontend to giac) is removed in the
-    sage version of giacpy.
 """
 # ****************************************************************************
 #       Copyright (C) 2012, Frederic Han <frederic.han@imj-prg.fr>
@@ -156,22 +136,31 @@ GETTING HELP:
 #*****************************************************************************
 
 from cysignals.signals cimport *
+from gmpy2 cimport import_gmpy2, mpz_set
 from sys import maxsize as Pymaxint, version_info as Pyversioninfo
 import os
 import math
 
 # sage includes
 from sage.ext.stdsage cimport PY_NEW
-from sage.interfaces.giac import giac
-from sage.libs.gmp.mpz cimport mpz_set
-from sage.rings.abc import SymbolicRing
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational_field import QQ
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.integer cimport Integer
 from sage.rings.infinity import AnInfinity
 from sage.rings.rational cimport Rational
-from sage.structure.element cimport Matrix, Expression
+from sage.structure.element cimport Matrix
+
+from sage.symbolic.expression import symbol_table
+from sage.calculus.calculus import symbolic_expression_from_string, SR_parser_giac
+from sage.symbolic.ring import SR
+from sage.symbolic.expression import Expression
+from sage.symbolic.expression_conversions import InterfaceInit
+from sage.interfaces.giac import giac
+
+
+# initialize the gmpy2 C-API
+import_gmpy2()
 
 
 # Python3 compatibility ############################
@@ -196,12 +185,7 @@ Pygen('I:=sqrt(-1)').eval()   # WTF?
 # for giac/libgiac.
 # NB: We want to do this without starting an external giac program and
 # self._giac_() does.
-try:
-    from sage.symbolic.expression_conversions import InterfaceInit
-except ImportError:
-    pass
-else:
-    SRexpressiontoGiac = InterfaceInit(giac)
+SRexpressiontoGiac = InterfaceInit(giac)
 
 
 #######################################################
@@ -210,41 +194,44 @@ else:
 # in sage we don't export the giac function. We replace it by libgiac
 def _giac(s):
     """
-    This function evaluate a python/sage object with the giac library. It creates in python/sage a Pygen element and evaluate it with giac:
+    This function evaluate a python/sage object with the giac
+    library. It creates in python/sage a Pygen element and evaluate it
+    with giac:
 
     EXAMPLES::
 
         sage: from sage.libs.giac.giac import libgiac
         sage: x,y = libgiac('x,y')
-        sage: (x+2*y).cos().texpand()
+        sage: (x + y*2).cos().texpand()
         cos(x)*(2*cos(y)^2-1)-sin(x)*2*cos(y)*sin(y)
 
-    Coercion, Pygen and internal giac variables: The most useful objects will
-    be the Python object of type Pygen.::
+    Coercion, Pygen and internal giac variables: The most useful
+    objects will be the Python object of type Pygen::
 
         sage: x,y,z = libgiac('x,y,z')
-        sage: f = sum([x[i] for i in range(5)])^15/(y+z);f.coeff(x[0],12)
+        sage: f = sum([x[i] for i in range(5)], libgiac(0))**15/(y+z)
+        sage: f.coeff(x[0],12)
         (455*(x[1])^3+1365*(x[1])^2*x[2]+1365*(x[1])^2*x[3]+1365*(x[1])^2*x[4]+1365*x[1]*(x[2])^2+2730*x[1]*x[2]*x[3]+2730*x[1]*x[2]*x[4]+1365*x[1]*(x[3])^2+2730*x[1]*x[3]*x[4]+1365*x[1]*(x[4])^2+455*(x[2])^3+1365*(x[2])^2*x[3]+1365*(x[2])^2*x[4]+1365*x[2]*(x[3])^2+2730*x[2]*x[3]*x[4]+1365*x[2]*(x[4])^2+455*(x[3])^3+1365*(x[3])^2*x[4]+1365*x[3]*(x[4])^2+455*(x[4])^3)/(y+z)
 
-    Warning: The complex number sqrt(-1) is exported in python as I. (But it
-    may appears as i)::
+    Warning: The complex number sqrt(-1) is available in SageMath as
+    ``I``, but it may appears as ``i``::
 
-        sage: # needs sage.symbolic
-        sage: libgiac((1+I*sqrt(3))^3).normal()
+        sage: from sage.rings.imaginary_unit import I
+        sage: libgiac((libgiac.sqrt(3)*I + 1)**3).normal()
         -8
         sage: libgiac(1+I)
         1+i
 
     Python integers and reals can be directly converted to giac.::
 
-        sage: a = libgiac(2^1024);a.nextprime()
+        sage: libgiac(2**1024).nextprime()
         179769313486231590772930519078902473361797697894230657273430081157732675805500963132708477322407536021120113879871393357658789768814416622492847430639474124377767893424865485276302219601246094119453082952085005768838150682342462881473913110540827237163350510684586298239947245938479716304835356329624224137859
         sage: libgiac(1.234567).erf().approx(10)
         0.9191788641
 
-    The Python object y defined above is of type Pygen. It is not an internal
-    giac variable. (Most of the time you won't need to use internal giac
-    variables).::
+    The Python object ``y`` defined above is of type Pygen. It is not
+    an internal giac variable. (Most of the time you won't need to use
+    internal giac variables)::
 
         sage: libgiac('y:=1'); y
         1
@@ -256,36 +243,36 @@ def _giac(s):
 
     There are some natural coercion to Pygen elements::
 
-        sage: libgiac(pi)>3.14 ; libgiac(pi) >3.15 ; libgiac(3)==3
+        sage: libgiac.pi > 3.14
         True
+        sage: libgiac.pi > 3.15
         False
+        sage: libgiac(3) == 3
         True
 
-    Linear Algebra. In Giac/Xcas vectors are just lists and matrices are lists
-    of list::
+    Linear Algebra. In Giac/Xcas vectors are just lists and matrices
+    are lists of list::
 
         sage: x,y = libgiac('x,y')
-        sage: A = libgiac([[1,2],[3,4]])  # we create a giac matrix from it lines
-        sage: v = libgiac([x,y]); v   # a giac vector
+        sage: A = libgiac([[1,2],[3,4]])  # giac matrix
+        sage: v = libgiac([x,y]); v  # giac vector
         [x,y]
-        sage: A*v # matrix product with a vector outputs a vector
+        sage: A*v  # matrix-vector product
         [x+2*y,3*x+4*y]
         sage: v*v  # dot product
         x*x+y*y
 
-    Remark that ``w=giac([[x],[y]])`` is a matrix of 1 column and 2 rows. It is
-    not a vector so w*w doesn't make sense.::
+    Remark that ``w=giac([[x],[y]])`` is a matrix of 1 column and 2
+    rows. It is not a vector so w*w doesn't make sense.::
 
         sage: w = libgiac([[x],[y]])
-        sage: w.transpose()*w   # this matrix product makes sense and output a 1x1 matrix.
+        sage: w.transpose()*w
         matrix[[x*x+y*y]]
 
-    In sage affectation doesn't create a new matrix. (cf. pointers) see also
-    the doc of  'Pygen.__setitem__':
+    In sage, changing an entry doesn't create a new matrix (see also
+    the doc of ``Pygen.__setitem__``)::
 
-    ::
-
-        sage: B1=A;
+        sage: B1 = A
         sage: B1[0,0]=43; B1 # in place affectation changes both B1 and A
         [[43,2],[3,4]]
         sage: A
@@ -300,9 +287,7 @@ def _giac(s):
         sage: A
         [[44,2],[3,4]]
 
-    Sparse Matrices are available via the table function:
-
-    ::
+    Sparse Matrices are available via the table function::
 
         sage: A = libgiac.table(()); A  # create an empty giac table
         table(
@@ -321,9 +306,8 @@ def _giac(s):
         (2,2) = 1/7
         )
 
-    But many matrix functions apply only with ordinary matrices so need conversions:
-
-    ::
+    But many matrix functions apply only with ordinary matrices so
+    need conversions::
 
         sage: B1 = A.matrix(); B1 # convert the sparse matrix to a matrix, but the size is minimal
         [[0,0,2/7,0],[0,0,0,0],[0,0,0,33]]
@@ -331,58 +315,59 @@ def _giac(s):
         sage: B2.pmin(x)
         x^3
 
-    Lists of Pygen and Giac lists. Here l1 is a giac list and l2 is a python
-    list of Pygen type objects.
+    Lists of Pygen and Giac lists. Here l1 is a giac list and l2 is a
+    python list of Pygen type objects::
 
-    ::
-
-        sage: l1 = libgiac(range(10)); l2=[1/(i^2+1) for i in l1]
-        sage: sum(l2)
+        sage: l1 = libgiac(range(10))
+        sage: l2 = [libgiac(1)/(i**2+1) for i in l1]
+        sage: sum(l2, libgiac(0))
         33054527/16762850
 
-    So l1+l1 is done in giac and means a vector addition. But l2+l2 is done in Python so it is the list concatenation.
-
-    ::
+    So l1+l1 is done in giac and means a vector addition. But l2+l2 is
+    done in Python so it is the list concatenation::
 
         sage: l1+l1
         [0,2,4,6,8,10,12,14,16,18]
         sage: l2+l2
         [1, 1/2, 1/5, 1/10, 1/17, 1/26, 1/37, 1/50, 1/65, 1/82, 1, 1/2, 1/5, 1/10, 1/17, 1/26, 1/37, 1/50, 1/65, 1/82]
 
-    Here V is not a Pygen element. We need to push it to giac to use a giac
-    method like dim, or we need to use an imported function.
+    Here V is not a Pygen element. We need to push it to giac to use a
+    giac method like dim, or we need to use an imported function::
 
-    ::
-
-        sage: V = [ [x[i]^j for i in range(8)] for j in range(8)]
+        sage: V = [ [x[i]**j for i in range(8)] for j in range(8)]
         sage: libgiac(V).dim()
         [8,8]
         sage: libgiac.det_minor(V).factor()
         (x[6]-(x[7]))*(x[5]-(x[7]))*(x[5]-(x[6]))*(x[4]-(x[7]))*(x[4]-(x[6]))*(x[4]-(x[5]))*(x[3]-(x[7]))*(x[3]-(x[6]))*(x[3]-(x[5]))*(x[3]-(x[4]))*(x[2]-(x[7]))*(x[2]-(x[6]))*(x[2]-(x[5]))*(x[2]-(x[4]))*(x[2]-(x[3]))*(x[1]-(x[7]))*(x[1]-(x[6]))*(x[1]-(x[5]))*(x[1]-(x[4]))*(x[1]-(x[3]))*(x[1]-(x[2]))*(x[0]-(x[7]))*(x[0]-(x[6]))*(x[0]-(x[5]))*(x[0]-(x[4]))*(x[0]-(x[3]))*(x[0]-(x[2]))*(x[0]-(x[1]))
 
-    Modular objects with ``%``.::
+    Modular objects with ``%``::
 
-        sage: V = libgiac.ranm(5,6) % 2;
+        sage: V = libgiac.ranm(5,6) % 2
         sage: V.ker().rowdim()+V.rank()
         6
-        sage: a = libgiac(7)%3; a; a%0; 7%3
+        sage: a = libgiac(7)%3
+        sage: a
         1 % 3
+        sage: a % 0
         1
+        sage: 7 % 3
         1
 
-    Do not confuse with the  python integers::
+    Do not confuse with the python integers::
 
-        sage: type(7%3)==type(a);type(a)==type(7%3)
+        sage: type(7 % 3) == type(a)
         False
+        sage: type(a) == type(7 % 3)
         False
 
-    Syntax with reserved or unknown Python/sage symbols. In general equations
-    needs symbols such as ``=``, ``<`` or ``>`` that have another meaning in Python
-    or Sage. So those objects must be quoted.::
+    Syntax with reserved or unknown Python/sage symbols. In general
+    equations needs symbols such as ``=``, ``<`` or ``>`` that have
+    another meaning in Python or Sage. So those objects must be
+    quoted::
 
         sage: x = libgiac('x')
-        sage: (1+2*sin(3*x)).solve(x).simplify()
-        ...list[-pi/18,7*pi/18]
+        sage: (libgiac.sin(x*3)*2 + 1).solve(x).simplify()
+        list[-pi/18,7*pi/18]
 
         sage: libgiac.solve('x^3-x>x',x)
         list[((x>(-sqrt(2))) and (x<0)),x>(sqrt(2))]
@@ -394,7 +379,7 @@ def _giac(s):
         sage: libgiac.solve('sin(3*x)>2*sin(x)',x)
         list[((x>(-5*pi/6)) and (x<(-pi/6))),((x>0) and (x<(pi/6))),((x>(5*pi/6)) and (x<pi))]
 
-    To remove those hypothesis use the giac function: ``purge``::
+    To remove those hypothesis use the giac function ``purge``::
 
         sage: libgiac.purge('x')
         assume[[],[line[-pi,pi]],[-pi,pi]]
@@ -404,46 +389,30 @@ def _giac(s):
     Same problems with the ``..``::
 
         sage: x = libgiac('x')
-        sage: f = 1/(5+cos(4*x))
-        sage: oldrep = 1/2/(2*sqrt(6))*(atan(2*tan(4*x/2)/sqrt(6))+pi*floor(4*x/2/pi+1/2))
-        sage: newrep = 1/2/(2*sqrt(6))*(atan((-sqrt(6)*sin(4*x)+2*sin(4*x))/(sqrt(6)*cos(4*x)+sqrt(6)-2*cos(4*x)+2))+4*x/2)
-        sage: ((f.int(x) - newrep)*(f.int(x)-oldrep)).normal()
-        0
+        sage: f = libgiac(1)/(libgiac.cos(x*4)+5)
+        sage: f.int()
+        1/2/(2*sqrt(6))*(atan((-sqrt(6)*sin(4*x)+2*sin(4*x))/(sqrt(6)*cos(4*x)+sqrt(6)-2*cos(4*x)+2))+4*x/2)
         sage: libgiac.fMax(f,'x=-0..pi').simplify()
         pi/4,3*pi/4
-        sage: libgiac.fMax.help()  # doctest: +SKIP
-        "Returns the abscissa of the maximum of the expression.
-        Expr,[Var]
-        fMax(-x^2+2*x+1,x)
-        fMin"
-        sage: libgiac.sum(1/(1+x^2),'x=0..infinity').simplify()
+        sage: libgiac.sum(libgiac(1)/(x**2+1),'x=0..infinity').simplify()
         (pi*exp(pi)^2+pi+exp(pi)^2-1)/(2*exp(pi)^2-2)
 
-    From giac to sage. One can convert a Pygen element to sage with the sage
-    method. Get more details with::
-
-        sage: Pygen.sage?          # doctest: +SKIP
-
-    ::
+    From giac to sage. One can convert a Pygen element to sage with
+    the ``sage`` method::
 
         sage: L = libgiac('[1,sqrt(5),[1.3,x]]')
         sage: L.sage()       # All entries are converted recursively
         [1, sqrt(5), [1.30000000000000, x]]
 
-    To obtain matrices and vectors, use the :meth:`matrix<Pygen._matrix_>` and
-    :meth:`vector<Pygen._vector_>` commands. Get more details with::
-
-        sage: Pygen._matrix_?          # doctest: +SKIP
-        sage: Pygen._vector_?          # doctest: +SKIP
-
-    ::
-
-        sage: n = var('n'); A = matrix([[1,2],[-1,1]])
+        sage: from sage.symbolic.ring import SR
+        sage: from sage.matrix.constructor import matrix
+        sage: n = SR.symbol('n')
+        sage: A = matrix([[1,2],[-1,1]])
         sage: B = libgiac(A).matpow(n)    # We compute the symbolic power on A via libgiac
         sage: C = matrix(SR,B); C         # We convert B to sage
         [                     1/2*(I*sqrt(2) + 1)^n + 1/2*(-I*sqrt(2) + 1)^n -1/2*I*sqrt(2)*(I*sqrt(2) + 1)^n + 1/2*I*sqrt(2)*(-I*sqrt(2) + 1)^n]
         [ 1/4*I*sqrt(2)*(I*sqrt(2) + 1)^n - 1/4*I*sqrt(2)*(-I*sqrt(2) + 1)^n                      1/2*(I*sqrt(2) + 1)^n + 1/2*(-I*sqrt(2) + 1)^n]
-        sage: (C.subs(n=3)-A^3).expand()
+        sage: (C.subs(n=3)-A**3).expand()
         [0 0]
         [0 0]
 
@@ -554,7 +523,6 @@ cdef class GiacSetting(Pygen):
 
     ``threads`` (maximal number of allowed theads in giac)::
 
-        sage: from sage.libs.giac.giac import giacsettings
         sage: import os
         sage: try:
         ....:     ncpu = int(os.environ['SAGE_NUM_THREADS'])
@@ -583,9 +551,10 @@ cdef class GiacSetting(Pygen):
         sage: libgiac('x**2-2').factor()
         (x-sqrt(2))*(x+sqrt(2))
 
-    ``complexflag`` (flag to allow complex number in solving equations or factorizations)::
+    ``complexflag`` (flag to allow complex number in solving equations
+    or factorizations)::
 
-        sage: giacsettings.complexflag=False;giacsettings.complexflag
+        sage: giacsettings.complexflag = False; giacsettings.complexflag
         False
         sage: libgiac('x**2+4').factor()
         x^2+4
@@ -593,9 +562,8 @@ cdef class GiacSetting(Pygen):
         sage: libgiac('x**2+4').factor()
         (x+2*i)*(x-2*i)
 
-
-    ``eval_level`` (recursive level of substitution of variables during an
-    evaluation)::
+    ``eval_level`` (recursive level of substitution of variables
+    during an evaluation)::
 
         sage: giacsettings.eval_level = 1
         sage: libgiac("purge(a):;b:=a;a:=1;b")
@@ -605,14 +573,15 @@ cdef class GiacSetting(Pygen):
         sage: libgiac("purge(a):;b:=a;a:=1;b")
         "Done",a,1,1
 
-    ``proba_epsilon`` (maximum probability of a wrong answer with a probabilist
-    algorithm). Set this number to 0 to disable probabilist algorithms
-    (slower)::
+    ``proba_epsilon`` (maximum probability of a wrong answer with a
+    probabilistic algorithm). Set this number to 0 to disable
+    probabilistic algorithms (slower)::
 
-        sage: giacsettings.proba_epsilon=0;libgiac('proba_epsilon')
+        sage: giacsettings.proba_epsilon = 0
+        sage: libgiac('proba_epsilon')
         0.0
-        sage: giacsettings.proba_epsilon=10^(-13)
-        sage: libgiac('proba_epsilon')<10^(-14)
+        sage: giacsettings.proba_epsilon = 10**(-13)
+        sage: libgiac('proba_epsilon') < 10**(-14)
         False
 
     ``epsilon`` (value used by the ``epsilon2zero`` function)::
@@ -623,6 +592,7 @@ cdef class GiacSetting(Pygen):
         False
         sage: (P.epsilon2zero()).simplify()
         x+5
+
     """
     def __repr__(self):
         return "Giac Settings"
@@ -642,7 +612,8 @@ cdef class GiacSetting(Pygen):
             20
             sage: libgiac.approx('1/7')
             0.14285714285714285714
-            sage: giacsettings.digits=12;
+            sage: giacsettings.digits=12
+
         """
         def __get__(self):
             return (self.cas_setup()[6])._val
@@ -655,7 +626,8 @@ cdef class GiacSetting(Pygen):
 
     property sqrtflag:
         r"""
-        Flag to allow square roots in solving equations or factorizations.
+        Flag to allow square roots in solving equations or
+        factorizations.
         """
         def __get__(self):
             return (self.cas_setup()[9])._val == 1
@@ -671,7 +643,8 @@ cdef class GiacSetting(Pygen):
 
     property complexflag:
         r"""
-        Flag to allow complex number in solving equations or factorizations.
+        Flag to allow complex number in solving equations or
+        factorizations.
 
         EXAMPLES::
 
@@ -684,6 +657,7 @@ cdef class GiacSetting(Pygen):
             sage: giacsettings.complexflag=True;
             sage: libgiac('x**2+4').factor()
             (x+2*i)*(x-2*i)
+
         """
         def __get__(self):
             return (self.cas_setup()[2])._val == 1
@@ -703,16 +677,18 @@ cdef class GiacSetting(Pygen):
 
         EXAMPLES::
 
-            sage: from sage.libs.giac.giac import giacsettings,libgiac
+            sage: from sage.libs.giac.giac import giacsettings, libgiac
             sage: giacsettings.eval_level=1
             sage: libgiac("purge(a):;b:=a;a:=1;b")
             "Done",a,1,a
-            sage: giacsettings.eval_level=25; giacsettings.eval_level
+            sage: giacsettings.eval_level = 25
+            sage: giacsettings.eval_level
             25
             sage: libgiac("purge(a):;b:=a;a:=1;b")
             "Done",a,1,1
             sage: libgiac.purge('a,b')
             1,a
+
         """
         def __get__(self):
             return (self.cas_setup()[7][3])._val
@@ -725,18 +701,22 @@ cdef class GiacSetting(Pygen):
 
     property proba_epsilon:
         r"""
-        Maximum probability of a wrong answer with a probabilist algorithm.
+        Maximum probability of a wrong answer with a probabilistic
+        algorithm.
 
-        Set this number to 0 to disable probabilist algorithms (slower).
+        Set this number to 0 to disable probabilistic algorithms
+        (this makes the computation slower).
 
         EXAMPLES::
 
             sage: from sage.libs.giac.giac import giacsettings,libgiac
-            sage: giacsettings.proba_epsilon=0;libgiac('proba_epsilon')
+            sage: giacsettings.proba_epsilon = 0
+            sage: libgiac('proba_epsilon')
             0.0
-            sage: giacsettings.proba_epsilon=10^(-13)
-            sage: libgiac('proba_epsilon')<10^(-14)
+            sage: giacsettings.proba_epsilon = 10**(-13)
+            sage: libgiac('proba_epsilon') < 10**(-14)
             False
+
         """
         def __get__(self):
             return (self.cas_setup()[5][1])._double
@@ -753,13 +733,14 @@ cdef class GiacSetting(Pygen):
 
         EXAMPLES::
 
-            sage: from sage.libs.giac.giac import giacsettings,libgiac
+            sage: from sage.libs.giac.giac import giacsettings, libgiac
             sage: giacsettings.epsilon = 1e-10
             sage: P = libgiac('1e-11+x+5')
             sage: P == x+5
             False
             sage: (P.epsilon2zero()).simplify()
             x+5
+
         """
         def __get__(self):
             return (self.cas_setup()[5][0])._double
@@ -905,8 +886,9 @@ cdef class Pygen(GiacMethods_base):
         TESTS::
 
            sage: from sage.libs.giac.giac import libgiac
-           sage: l=libgiac("seq[]");len(l) # 29552 comment28
+           sage: l=libgiac("seq[]"); len(l) # 29552 comment28
            0
+
         """
         if (self._type == 7):
             sig_on()
@@ -922,23 +904,25 @@ cdef class Pygen(GiacMethods_base):
 
     def __getitem__(self, i):  #TODO?: add gen support for indexes
         """
-        Lists of 10^6 integers should be translated to giac easily
+        Lists of 10**6 integers should be translated to giac easily
 
         TESTS::
 
            sage: from sage.libs.giac.giac import libgiac
-           sage: l=libgiac(list(range(10^6)));l[5]
+           sage: l = libgiac(list(range(10**6))); l[5]
            5
            sage: l[35:50:7]
            [35,42,49]
-           sage: l[-10^6]
+           sage: l[-10**6]
            0
-           sage: t=libgiac(tuple(range(10)))
+           sage: t = libgiac(tuple(range(10)))
            sage: t[:4:-1]
            9,8,7,6,5
-           sage: x=libgiac('x'); sum([ x[i] for i in range(5)])^3
+           sage: x = libgiac('x')
+           sage: sum([ x[i] for i in range(5) ], libgiac(0))**3
            (x[0]+x[1]+x[2]+x[3]+x[4])^3
-           sage: A=libgiac.ranm(5,10); A[3,7]-A[3][7]
+           sage: A = libgiac.ranm(5,10)
+           sage: A[3,7]-A[3][7]
            0
            sage: A.transpose()[8,2]-A[2][8]
            0
@@ -946,11 +930,12 @@ cdef class Pygen(GiacMethods_base):
         Crash test::
 
            sage: from sage.libs.giac.giac import Pygen
-           sage: l=Pygen()
+           sage: l = Pygen()
            sage: l[0]
            Traceback (most recent call last):
            ...
            IndexError: list index 0 out of range
+
         """
         cdef gen result
 
@@ -1001,36 +986,28 @@ cdef class Pygen(GiacMethods_base):
         TESTS::
 
             sage: from sage.libs.giac.giac import libgiac
-            sage: A = libgiac([ [ j+2*i for i in range(3)] for j in range(3)]); A
+            sage: from sage.rings.rational_field import QQ
+            sage: A = libgiac([ [ libgiac(j)+libgiac(i)*2 for i in range(3)] for j in range(3)]); A
             [[0,2,4],[1,3,5],[2,4,6]]
-            sage: A[1,2]=44;A
+            sage: A[1,2] = 44; A
             [[0,2,4],[1,3,44],[2,4,6]]
-            sage: A[2][2]=1/3;A
+            sage: A[2][2] = QQ(1)/QQ(3); A
             [[0,2,4],[1,3,44],[2,4,1/3]]
-            sage: x=libgiac('x')
-            sage: A[0,0]=x+1/x; A
+            sage: x = libgiac('x')
+            sage: A[0,0] = x + libgiac(1)/x; A
             [[x+1/x,2,4],[1,3,44],[2,4,1/3]]
-            sage: A[0]=[-1,-2,-3]; A
+            sage: A[0] = [-1,-2,-3]; A
             [[-1,-2,-3],[1,3,44],[2,4,1/3]]
-            sage: B=A; A[2,2]
+            sage: B = A; A[2,2]
             1/3
-            sage: B[2,2]=6    # in place affectation
-            sage: A[2,2]      # so A is also modified
+            sage: B[2,2] = 6    # in place assignment
+            sage: A[2,2]        # so A is also modified
             6
             sage: A.pcar(x)
             x^3-8*x^2-159*x
 
-        NB: For Large matrix it seems that the syntax ``A[i][j]=`` is faster that ``A[i,j]=``::
-
-            sage: from sage.libs.giac.giac import libgiac
-            sage: from time import time
-            sage: A=libgiac.ranm(4000,4000)
-            sage: t1=time(); A[500][500]=12345;t1=time()-t1
-            sage: t2=time(); A[501,501]=54321;t2=time()-t2
-            sage: t1,t2 # doctest: +SKIP
-            (0.0002014636993408203, 0.05124521255493164)
-            sage: A[500,500],A[501][501]
-            (12345, 54321)
+        NB: For Large matrix it seems that the syntax ``A[i][j]=`` is
+        faster that ``A[i,j]=``.
         """
         cdef gen v
         sig_on()
@@ -1045,20 +1022,21 @@ cdef class Pygen(GiacMethods_base):
 
     def __iter__(self):
         """
-        Pygen lists of 10^6 elements should be yield.
+        Pygen lists of 10**6 elements should be yield.
 
         TESTS::
 
             sage: from sage.libs.giac.giac import libgiac
-            sage: l = libgiac(range(10^6))
-            sage: [ i for i in l ] == list(range(10^6))
+            sage: l = libgiac(range(10**6))
+            sage: [ i for i in l ] == list(range(10**6))
             True
 
-        Check for :issue:`18841`::
+        Check for SageMath issue 18841::
 
             sage: L = libgiac(range(10))
             sage: next(iter(L))
             0
+
         """
         cdef int i
         for i in range(len(self)):
@@ -1139,10 +1117,11 @@ cdef class Pygen(GiacMethods_base):
         TESTS::
 
             sage: from sage.libs.giac.giac import libgiac
-            sage: (sqrt(5)*libgiac('x')).factor() # BUG test could give 0
+            sage: (libgiac.sqrt(5)*libgiac('x')).factor()
             sqrt(5)*x
-            sage: (libgiac('x')*sqrt(5)).factor()
+            sage: (libgiac('x')*libgiac.sqrt(5)).factor()
             sqrt(5)*x
+
         """
         cdef gen result
         if not isinstance(right, Pygen):
@@ -1164,10 +1143,11 @@ cdef class Pygen(GiacMethods_base):
         TESTS::
 
             sage: from sage.libs.giac.giac import libgiac
-            sage: (sqrt(3)/libgiac('x')).factor()   # BUG test could give 0
+            sage: (libgiac.sqrt(3)/libgiac('x')).factor()
             sqrt(3)/x
-            sage: (libgiac('x')/sqrt(3)).factor()
+            sage: (libgiac('x')/libgiac.sqrt(3)).factor()
             sqrt(3)*x/3
+
         """
         cdef gen result
         if not isinstance(right, Pygen):
@@ -1242,23 +1222,21 @@ cdef class Pygen(GiacMethods_base):
         EXAMPLES::
 
             sage: from sage.libs.giac.giac import *
-            sage: f=libgiac('(x+y+z+2)**10'); g=f.normal()
-            sage: g.savegen("fichiertest")           #  doctest: +SKIP
-            sage: a=loadgiacgen("fichiertest")    #  doctest: +SKIP
+            sage: f = libgiac('(x+y+z+2)**10')
+            sage: g = f.normal()
             sage: from tempfile import NamedTemporaryFile
-            sage: F=NamedTemporaryFile()   # chose a temporary file for a test
+            sage: F = NamedTemporaryFile()  # choose a temporary file for a test
             sage: g.savegen(F.name)
-            sage: a=loadgiacgen(F.name)
+            sage: a = loadgiacgen(F.name)
             sage: a.factor()
             (x+y+z+2)^10
             sage: F.close()
+
         """
         sig_on()
         GIAC_archive( <string>encstring23(filename), (<Pygen>self).gptr[0], context_ptr)
         sig_off()
 
-    # NB: with giac <= 1.2.3-57 redim doesn't have a non evaluated for so Pygen('redim') fails.
-    # hence replacement  for redim:
 
     def redim(self, a, b=None):
         """
@@ -1272,40 +1250,24 @@ cdef class Pygen(GiacMethods_base):
             [[1,2,0],[0,0,0]]
             sage: C.redim(2,1)
             [[1,2]]
+
         """
-        d=self.dim()
-        if d.type()==7:
-            if(a>d[0] and b>=d[1]):
-                A=self.semi_augment(Pygen((a-d[0],d[1])).matrix())
-                if(b>d[1]):
-                    A=A.augment(Pygen((a,b-d[1])).matrix())
+        d = self.dim()
+        if d.type() == 7:
+            if(a > d[0] and b >= d[1]):
+                a = Pygen(a)
+                A = self.semi_augment(Pygen((a-d[0],d[1])).matrix())
+                if(b > d[1]):
+                    b = Pygen(b)
+                    A = A.augment(Pygen((a,b-d[1])).matrix())
                 return A
-            elif(b>d[1] and a==d[0]):
+            elif(b > d[1] and a == d[0]):
+                b = Pygen(b)
                 return self.augment(Pygen((d[0],b-d[1])).matrix())
             else:
                 return self
         else:
             raise TypeError("self is not a giac List")
-
-    # def htmlhelp(self, str lang='en'):
-    #     """
-    #     Open the giac html detailed help about ``self`` in an external  browser
-
-    #     There are currently 3 supported languages: 'en', 'fr', 'el'
-
-    #     """
-    #     l={'fr':1 , 'en':2, 'el':4}
-    #     if (not lang in ['en', 'fr', 'el']):
-    #       lang='en'
-    #     try:
-    #       url=browser_help(self.gptr[0],l[lang]).decode()
-    #       giacbasedir=GIAC_giac_aide_dir().decode()
-    #     except:
-    #       raise RuntimeError('giac docs dir not found')
-    #     print(url)
-    #     if os.access(giacbasedir,os.F_OK):
-    #        url='file:'+url
-    #        wwwbrowseropen(url)
 
     def _help(self):
         return self.findhelp().__str__()
@@ -1326,18 +1288,11 @@ cdef class Pygen(GiacMethods_base):
         EXAMPLES::
 
             sage: from sage.libs.giac.giac import libgiac
-            sage: M = matrix(QQ, [[1, 2], [3, 4]])
-            sage: latex(M)
-            \left(\begin{array}{rr}
-            1 & 2 \\
-            3 & 4
-            \end{array}\right)
-            sage: gM = libgiac(M)
-            sage: latex(gM)
-            \left...\begin{array}{cc}...1...&...2...\\...3...&...4...\end{array}\right...
+            sage: from sage.misc.latex import latex
             sage: gf = libgiac('(x^4 - y)/(y^2-3*x)')
-            sage: latex(gf)          # output changed slightly from 1.5.0-63 to 1.5.0-87
-            \frac{...x^{4}...-...y...}{...y^{2}-3...x...}
+            sage: latex(gf)
+            \frac{x^{4}-y}{y^{2}-3 x}
+
         """
         sig_on()
         result = GIAC_gen2tex(self.gptr[0], context_ptr).c_str().decode()
@@ -1346,24 +1301,31 @@ cdef class Pygen(GiacMethods_base):
 
     def _integer_(self, Z=None):
         """
-        Convert giac integers or modular integers to sage Integers (via gmp).
+        Convert giac integers or modular integers to sage Integers
+        (via gmp).
 
         EXAMPLES::
 
             sage: from sage.libs.giac.giac import *
-            sage: a = libgiac('10'); b = libgiac('2**300')
-            sage: a; type(ZZ(a))
+            sage: from sage.arith.misc import next_prime
+            sage: from sage.rings.integer_ring import ZZ
+            sage: from sage.rings.finite_rings.integer_mod import Mod
+            sage: a = libgiac('10')
+            sage: b = libgiac('2**300')
+            sage: a
             10
+            sage: type(ZZ(a))
             <class 'sage.rings.integer.Integer'>
-            sage: next_prime(b)                                                         # needs sage.libs.pari
+            sage: next_prime(b)
             2037035976334486086268445688409378161051468393665936250636140449354381299763336706183397533
             sage: c = libgiac('2 % nextprime(2**40)')
-            sage: ZZ(c^1000)
+            sage: ZZ(c**1000)
             -233775163595
-            sage: Mod(2, next_prime(2^40))^1000 - ZZ(c^1000)                            # needs sage.libs.pari
+            sage: Mod(2,next_prime(2**40))**1000 - ZZ(c**1000)
             0
-            sage: 2^320 - (c^320).sage()
+            sage: 2**320-(c**320).sage()
             0
+
         """
         cdef Integer n = PY_NEW(Integer)
         typ = self._type
@@ -1398,12 +1360,14 @@ cdef class Pygen(GiacMethods_base):
 
         EXAMPLES::
 
-           sage: from sage.libs.giac.giac import *
+           sage: from sage.libs.giac.giac import libgiac
+           sage: from sage.rings.rational_field import QQ
            sage: a = libgiac('103993/33102')
            sage: b = QQ(a); b
            103993/33102
            sage: b == a.sage()
            True
+
         """
         typ = self._type
         # _INT_ or _ZINT
@@ -1418,60 +1382,67 @@ cdef class Pygen(GiacMethods_base):
 
     def sage(self):
         r"""
-        Convert a libgiac expression back to a Sage expression. (could be slow)
+        Convert a libgiac expression back to a Sage
+        expression. (could be slow)
 
-        This currently does not implement a parser for the Giac output language,
-        therefore only very simple expressions will convert successfully.
+        This currently does not implement a parser for the Giac output
+        language, therefore only very simple expressions will convert
+        successfully.
 
         Lists are converted recursively to sage.
 
         CURRENT STATUS:
 
-           ZZ, QQ, ZZ/nZZ, strings, are supported, other type are sent to the symbolic ring
-           via strings. In particular symbolic expressions modulo n should be lift to ZZ
-           before ( with % 0 ).
+            ZZ, QQ, ZZ/nZZ, strings, are supported, other type are sent
+            to the symbolic ring via strings. In particular symbolic
+            expressions modulo n should be lift to ZZ before (with % 0).
 
         EXAMPLES::
 
-           sage: from sage.libs.giac.giac import libgiac
-           sage: m = libgiac('x^2 + 5*y')
-           sage: m.sage()
-           x^2 + 5*y
+            sage: from sage.libs.giac.giac import libgiac
+            sage: m = libgiac('x^2 + 5*y')
+            sage: m.sage()
+            x^2 + 5*y
 
         ::
 
-           sage: m = libgiac('sin(2*sqrt(1-x^2)) * (1 - cos(1/x))^2')
-           sage: m.trigexpand().sage()
-           2*cos(sqrt(-x^2 + 1))*cos(1/x)^2*sin(sqrt(-x^2 + 1)) - 4*cos(sqrt(-x^2 + 1))*cos(1/x)*sin(sqrt(-x^2 + 1)) + 2*cos(sqrt(-x^2 + 1))*sin(sqrt(-x^2 + 1))
+            sage: m = libgiac('sin(2*sqrt(1-x^2)) * (1 - cos(1/x))^2')
+            sage: m.trigexpand().sage()
+            2*cos(sqrt(-x^2 + 1))*cos(1/x)^2*sin(sqrt(-x^2 + 1)) - 4*cos(sqrt(-x^2 + 1))*cos(1/x)*sin(sqrt(-x^2 + 1)) + 2*cos(sqrt(-x^2 + 1))*sin(sqrt(-x^2 + 1))
 
         ::
 
-           sage: a=libgiac(' 2 % 7')
-           sage: (a.sage())^6
-           1
-           sage: a=libgiac('"une chaine"')
-           sage: b=a.sage(); b + b
-           'une chaineune chaine'
-           sage: isinstance(b,str)
-           True
+            sage: a = libgiac(' 2 % 7')
+            sage: (a.sage())**6
+            1
+            sage: a=libgiac('"une chaine"')
+            sage: b=a.sage(); b + b
+            'une chaineune chaine'
+            sage: isinstance(b,str)
+            True
 
-         The giac entries in the pynac conversion dictionary are used::
+        The giac entries in the pynac conversion dictionary are used::
 
-           sage: x=var('x')
-           sage: f=libgiac.Gamma
-           sage: f(4)
-           6
-           sage: f(x)
-           Gamma(sageVARx)
-           sage: (f(x)).sage()
-           gamma(x)
+            sage: from sage.symbolic.ring import SR
+            sage: x = SR.symbol('x')
+            sage: f = libgiac.Gamma
+            sage: f(4)
+            6
+            sage: f(x)
+            Gamma(sageVARx)
+            sage: (f(x)).sage()
+            gamma(x)
 
-         Converting a custom name by adding a new entry to the ``symbols_table``::
+        Converting a custom name by adding a new entry to the
+        ``symbols_table``::
 
+            sage: from sage.symbolic.expression import register_symbol
+            sage: from sage.functions.trig import sin
             sage: ex = libgiac('myFun(x)')
-            sage: sage.symbolic.expression.register_symbol(sin, {'giac':'myFun'})
+            sage: register_symbol(sin, {'giac':'myFun'})
             sage: ex.sage()
             sin(x)
+
         """
         typ = self._type
 
@@ -1500,7 +1471,6 @@ cdef class Pygen(GiacMethods_base):
                 return result
 
             else:
-                from sage.symbolic.ring import SR
                 return SR(self)
 
         else:
@@ -1516,33 +1486,36 @@ cdef class Pygen(GiacMethods_base):
 
         EXAMPLES::
 
-            sage: from sage.libs.giac.giac import *
-            sage: u,v = var('u,v'); a = libgiac('cos(u+v)').texpand()
-            sage: simplify(SR(a) + sin(u)*sin(v))                                       # needs sage.libs.maxima
+            sage: from sage.libs.giac.giac import libgiac
+            sage: from sage.symbolic.ring import SR
+            sage: from sage.functions.trig import sin
+            sage: u, v = SR.var('u,v')
+            sage: a = libgiac('cos(u+v)').texpand()
+            sage: (SR(a)+sin(u)*sin(v)).simplify()
             cos(u)*cos(v)
 
         TESTS:
 
-        Check that variables and constants are not mixed up (:issue:`30133`)::
+        Check that variables and constants are not mixed up
+        (SageMath issue 30133)::
 
+            sage: from sage.symbolic.constants import e, I, pi
             sage: ee, ii, pp = SR.var('e,i,pi')
+            sage: from sage.functions.trig import cos
             sage: libgiac(ee * ii * pp).sage().variables()
             (e, i, pi)
-            sage: libgiac(e * i * pi).sage().variables()
+            sage: libgiac(e * I * pi).sage().variables()
             ()
-            sage: libgiac.integrate(ee^x, x).sage()
+            sage: libgiac.integrate(ee**x, x).sage()
             e^x/log(e)
             sage: y = SR.var('π')
             sage: libgiac.integrate(cos(y), y).sage()
             sin(π)
-        """
-        if isinstance(R, SymbolicRing):
-            from sage.calculus.calculus import symbolic_expression_from_string, SR_parser_giac
-            from sage.symbolic.expression import symbol_table
 
+        """
+        if isinstance(R, SR.__class__):
             # Try to convert some functions names to the symbolic ring
             lsymbols = symbol_table['giac'].copy()
-            #lsymbols.update(locals)
             try:
                 result = symbolic_expression_from_string(self.__str__(), lsymbols,
                                                          accept_sequence=True,
@@ -1567,19 +1540,23 @@ cdef class Pygen(GiacMethods_base):
         EXAMPLES::
 
             sage: from sage.libs.giac.giac import *
-            sage: R.<x,y>=QQ[]
-            sage: M=libgiac('matrix(4,4,(k,l)->(x^k-y^l))'); M
-            //...
+            sage: from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
+            sage: from sage.rings.rational_field import QQ
+            sage: from sage.matrix.constructor import matrix
+            sage: M = libgiac('matrix(4,4,(k,l)->(x^k-y^l))')  # random
+            sage: M
             matrix[[0,1-y,1-y^2,1-y^3],[x-1,x-y,x-y^2,x-y^3],[x^2-1,x^2-y,x^2-y^2,x^2-y^3],[x^3-1,x^3-y,x^3-y^2,x^3-y^3]]
-            sage: M.eigenvals()       # random
-            0,0,(x^3+x^2+x-y^3-y^2-y+sqrt(x^6+2*x^5+3*x^4-14*x^3*y^3+2*x^3*y^2+2*x^3*y+6*x^3+2*x^2*y^3-14*x^2*y^2+2*x^2*y+5*x^2+2*x*y^3+2*x*y^2-14*x*y+4*x+y^6+2*y^5+3*y^4+6*y^3+5*y^2+4*y-12))/2,(x^3+x^2+x-y^3-y^2-y-sqrt(x^6+2*x^5+3*x^4-14*x^3*y^3+2*x^3*y^2+2*x^3*y+6*x^3+2*x^2*y^3-14*x^2*y^2+2*x^2*y+5*x^2+2*x*y^3+2*x*y^2-14*x*y+4*x+y^6+2*y^5+3*y^4+6*y^3+5*y^2+4*y-12))/2
-            sage: Z=matrix(R,M);Z
+            sage: len(M.eigenvals())
+            4
+            sage: R = PolynomialRing(QQ,'x,y')
+            sage: Z = matrix(R,M); Z
             [         0     -y + 1   -y^2 + 1   -y^3 + 1]
             [     x - 1      x - y   -y^2 + x   -y^3 + x]
             [   x^2 - 1    x^2 - y  x^2 - y^2 -y^3 + x^2]
             [   x^3 - 1    x^3 - y  x^3 - y^2  x^3 - y^3]
-            sage: parent(Z)
+            sage: Z.parent()
             Full MatrixSpace of 4 by 4 dense matrices over Multivariate Polynomial Ring in x, y over Rational Field
+
         """
         cdef int c
         cdef int r
@@ -1600,12 +1577,15 @@ cdef class Pygen(GiacMethods_base):
 
         EXAMPLES::
 
-            sage: from sage.libs.giac.giac import *
-            sage: v=libgiac(range(10))
+            sage: from sage.libs.giac.giac import libgiac
+            sage: from sage.rings.rational_field import QQ
+            sage: from sage.modules.free_module_element import vector
+            sage: v = libgiac(range(10))
             sage: vector(v+v)
             (0, 2, 4, 6, 8, 10, 12, 14, 16, 18)
-            sage: vector(v+v/3,QQ)
+            sage: vector(v + v/3, QQ)
             (0, 4/3, 8/3, 4, 16/3, 20/3, 8, 28/3, 32/3, 12)
+
         """
         if isinstance(R, None.__class__):
             R=ZZ
@@ -1625,8 +1605,8 @@ cdef class Pygen(GiacMethods_base):
 
     def mplot(self):
         """
-        Basic export of some 2D plots to sage. Only generic plots are supported.
-        lines, circles, ... are not implemented
+        Basic export of some 2D plots to sage. Only generic plots
+        are supported.  lines, circles, ... are not implemented
         """
         from sage.plot.line import line
         from sage.plot.scatter_plot import scatter_plot
@@ -1755,7 +1735,7 @@ cdef class Pygen(GiacMethods_base):
 #   A wrapper from a cpp element of type giac gen to create    #
 #   the Python object                                          #
 ################################################################
-cdef inline _wrap_gen(gen  g)except +:
+cdef inline _wrap_gen(gen  g):
 
 #   cdef Pygen pyg=Pygen('NULL')
 # It is much faster with ''
@@ -1789,7 +1769,7 @@ cdef inline _wrap_gen(gen  g)except +:
 #    A wrapper from a python list to a vector of gen           #
 ################################################################
 
-cdef  vecteur _wrap_pylist(L) except +:
+cdef  vecteur _wrap_pylist(L) except *:
     cdef vecteur  * V
     cdef int i
 
@@ -1809,7 +1789,7 @@ cdef  vecteur _wrap_pylist(L) except +:
 #################################
 #  slice wrapper for a giac list
 #################################
-cdef  vecteur _getgiacslice(Pygen L, slice sl) except +:
+cdef  vecteur _getgiacslice(Pygen L, slice sl) except *:
     cdef vecteur  * V
     cdef int u
 
@@ -1828,7 +1808,7 @@ cdef  vecteur _getgiacslice(Pygen L, slice sl) except +:
         raise TypeError("argument must be a Pygen list and a slice")
 
 
-cdef  gen pylongtogen(a) except +:
+cdef  gen pylongtogen(a) except *:
     #                                                                     #
     # basic conversion of Python long integers to gen via Horner's Method #
     #                                                                     #
@@ -1923,14 +1903,16 @@ GiacMethods={}
 
 
 class GiacFunction(Pygen):
-        # a class to evaluate args before call
     """
     A Subclass of Pygen to create functions with evaluating all the args
     before call so that they are substituted by their value.
 
     EXAMPLES::
 
-        sage: from sage.libs.giac.giac import *
+        sage: from sage.libs.giac.giac import libgiac
+        sage: from sage.rings.imaginary_unit import I
+        sage: from sage.functions.log import exp
+        sage: from sage.symbolic.constants import pi
         sage: libgiac.simplify(exp(I*pi))  # simplify is a GiacFunction
         -1
         sage: libgiac('a:=1')
@@ -1939,6 +1921,7 @@ class GiacFunction(Pygen):
         1
         sage: libgiac('a')
         a
+
     """
     def __call__(self, *args):
         n = len(args)
@@ -1954,13 +1937,14 @@ class GiacFunctionNoEV(Pygen):
 
     EXAMPLES::
 
-        sage: from sage.libs.giac.giac import *
+        sage: from sage.libs.giac.giac import libgiac
         sage: libgiac('a:=1')
         1
         sage: libgiac.purge('a')  # purge is a GiacFunctionNoEV
         1
         sage: libgiac('a')
         a
+
     """
 
 
@@ -1999,26 +1983,25 @@ __all__ = ['Pygen', 'giacsettings', 'libgiac', 'loadgiacgen', 'GiacFunction',
 
 def loadgiacgen(str filename):
     """
-      Open a file in giac compressed format to create a Pygen element.
+    Open a file in giac compressed format to create a Pygen element.
 
-      Use the save method from Pygen elements to create such files.
+    Use the save method from Pygen elements to create such files.
 
-      In C++ these files can be opened with giac::unarchive and created with
-      ``giac::archive``.
+    In C++ these files can be opened with giac::unarchive and created with
+    ``giac::archive``.
 
-      EXAMPLES::
+    EXAMPLES::
 
         sage: from sage.libs.giac.giac import *
-        sage: g=libgiac.texpand('cos(10*a+5*b)')
-        sage: g.save("fichiertest")           #  doctest: +SKIP
-        sage: a=loadgiacgen("fichiertest")    #  doctest: +SKIP
+        sage: g = libgiac.texpand('cos(10*a+5*b)')
         sage: from tempfile import NamedTemporaryFile
-        sage: F=NamedTemporaryFile()   # chose a temporary file for a test
+        sage: F = NamedTemporaryFile()   # choose a temporary file for a test
         sage: g.savegen(F.name)
-        sage: a=loadgiacgen(F.name)
+        sage: a = loadgiacgen(F.name)
         sage: a.tcollect()
         cos(10*a+5*b)
         sage: F.close()
+
     """
     cdef gen result
     sig_on()
@@ -2033,17 +2016,12 @@ class GiacInstance:
 
     EXAMPLES::
 
-        sage: from sage.libs.giac.giac import libgiac
-        sage: isinstance(libgiac,sage.libs.giac.giac.GiacInstance)
+        sage: from sage.libs.giac.giac import libgiac, GiacInstance
+        sage: isinstance(libgiac, GiacInstance)
         True
         sage: libgiac.solve('2*exp(x)<(exp(x*2)-1),x')
         list[x>(ln(sqrt(2)+1))]
-        sage: libgiac.solve? #  doctest: +SKIP
-        ...
-        Docstring:
-        From Giac's documentation:
-        Help for solve: solve(Expr,[Var]) Solves a (or a set of) polynomial
-        ...
+
     """
 
     def __init__(self):
