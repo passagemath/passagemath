@@ -146,20 +146,16 @@ import os
 import math
 
 # sage includes
-from sage.calculus.calculus import symbolic_expression_from_string, SR_parser_giac
 from sage.ext.stdsage cimport PY_NEW
 from sage.interfaces.giac import giac
+from sage.rings.abc import SymbolicRing
 from sage.rings.finite_rings.integer_mod_ring import IntegerModRing
 from sage.rings.infinity import AnInfinity
 from sage.rings.integer cimport Integer
 from sage.rings.integer_ring import ZZ
 from sage.rings.rational cimport Rational
 from sage.rings.rational_field import QQ
-from sage.structure.element cimport Matrix
-from sage.symbolic.expression import Expression
-from sage.symbolic.expression import symbol_table
-from sage.symbolic.expression_conversions import InterfaceInit
-from sage.symbolic.ring import SR
+from sage.structure.element cimport Matrix, Expression
 
 
 # initialize the gmpy2 C-API
@@ -188,7 +184,12 @@ Pygen('I:=sqrt(-1)').eval()   # WTF?
 # for giac/libgiac.
 # NB: We want to do this without starting an external giac program and
 # self._giac_() does.
-SRexpressiontoGiac = InterfaceInit(giac)
+try:
+    from sage.symbolic.expression_conversions import InterfaceInit
+except ImportError:
+    pass
+else:
+    SRexpressiontoGiac = InterfaceInit(giac)
 
 
 #######################################################
@@ -1474,6 +1475,7 @@ cdef class Pygen(GiacMethods_base):
                 return result
 
             else:
+                from sage.symbolic.ring import SR
                 return SR(self)
 
         else:
@@ -1514,9 +1516,11 @@ cdef class Pygen(GiacMethods_base):
             sage: y = SR.var('π')
             sage: libgiac.integrate(cos(y), y).sage()
             sin(π)
-
         """
-        if isinstance(R, SR.__class__):
+        if isinstance(R, SymbolicRing):
+            from sage.calculus.calculus import symbolic_expression_from_string, SR_parser_giac
+            from sage.symbolic.expression import symbol_table
+
             # Try to convert some functions names to the symbolic ring
             lsymbols = symbol_table['giac'].copy()
             try:

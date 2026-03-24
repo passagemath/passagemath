@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-giac
-# sage.doctest: optional - giac
+# sage.doctest: needs sage.libs.giac
 r"""
 Context manager and local wrapper for giacsettings.
 """
