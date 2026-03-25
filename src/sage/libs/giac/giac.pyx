@@ -63,6 +63,7 @@ Some settings of giac are available via the ``giacsettings``
 element. (Ex: maximal number of threads in computations, allowing
 probabilistic algorithms or not...::
 
+    sage: # needs sage.libs.singular
     sage: from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
     sage: from sage.rings.rational_field import QQ
     sage: from sage.rings.ideal import Katsura as KatsuraIdeal
@@ -82,6 +83,7 @@ probabilistic algorithms or not...::
 
   ::
 
+    sage: # needs sage.symbolic
     sage: x = libgiac('x')
     sage: f = libgiac(1) / (libgiac.sin(x*5)+2)
     sage: f.int()
@@ -1318,18 +1320,16 @@ cdef class Pygen(GiacMethods_base):
             sage: b = libgiac('2**300')
             sage: a
             10
-            sage: type(ZZ(a))
             <class 'sage.rings.integer.Integer'>
-            sage: next_prime(b)
+            sage: next_prime(b)                                                         # needs sage.libs.pari
             2037035976334486086268445688409378161051468393665936250636140449354381299763336706183397533
             sage: c = libgiac('2 % nextprime(2**40)')
-            sage: ZZ(c**1000)
+            sage: ZZ(c^1000)
             -233775163595
-            sage: Mod(2,next_prime(2**40))**1000 - ZZ(c**1000)
+            sage: Mod(2, next_prime(2^40))^1000 - ZZ(c^1000)                            # needs sage.libs.pari
             0
-            sage: 2**320-(c**320).sage()
+            sage: 2^320 - (c^320).sage()
             0
-
         """
         cdef Integer n = PY_NEW(Integer)
         typ = self._type
@@ -1496,7 +1496,7 @@ cdef class Pygen(GiacMethods_base):
             sage: from sage.functions.trig import sin
             sage: u, v = SR.var('u,v')
             sage: a = libgiac('cos(u+v)').texpand()
-            sage: (SR(a)+sin(u)*sin(v)).simplify()
+            sage: (SR(a)+sin(u)*sin(v)).simplify()                                      # needs sage.libs.maxima
             cos(u)*cos(v)
 
         TESTS:
