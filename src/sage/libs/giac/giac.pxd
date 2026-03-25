@@ -10,7 +10,7 @@
 #                  https://www.gnu.org/licenses/
 #*****************************************************************************
 
-from sage.libs.gmp.mpz cimport mpz_t, mpz_set
+from gmpy2.gmpy2 cimport mpz_t, mpz_set
 from libcpp.string cimport string
 
 cdef extern from "giac/giac.h" namespace "giac":
@@ -186,7 +186,7 @@ cdef extern from "giac/giac.h" namespace "giac":
     #test
     gen GIAC_Airy_Ai "_Airy_Ai" (gen &, context *) except +
     gen GIAC_ifactor "_ifactor" (gen &, context *) except +
-        
+
 
 cdef extern from "misc.h":
      void ressetctrl_c() except +
