@@ -1754,6 +1754,9 @@ def singular_function(name):
         return SingularLibraryFunction(name)
 
 
+_loaded_libs = set()
+
+
 def lib(name):
     """
     Load the Singular library ``name``.
@@ -1771,6 +1774,9 @@ def lib(name):
         sage: primes(2,10, ring=GF(127)['x,y,z'])
         (2, 3, 5, 7)
     """
+    if name in _loaded_libs:
+        return
+
     global si_opt_2
 
     cdef int vv = si_opt_2
@@ -1787,6 +1793,8 @@ def lib(name):
 
     if failure:
         raise NameError("Singular library {!r} not found".format(name))
+
+    _loaded_libs.add(name)
 
 
 def get_printlevel():
