@@ -1,5 +1,9 @@
 cd src
 cp "$SAGE_ROOT"/config/config.* build-aux/
+
+# Compilation errors with std=gnu23, https://github.com/passagemath/passagemath/issues/2306
+export CFLAGS="-std=gnu17 $CFLAGS"
+
 sdh_configure $LIBHOMFLY_CONFIGURE
 sdh_make
 sdh_make_install -j1

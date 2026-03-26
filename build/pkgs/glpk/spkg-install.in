@@ -24,9 +24,10 @@ fi
 #          are valid options.  So we *have to* add Sage's include and
 #          library directories to `CPPFLAGS` (done here) and `LDFLAGS`
 #          (already the default):
-CPPFLAGS="-I$SAGE_LOCAL/include $CPPFLAGS"
+export CPPFLAGS="-I$SAGE_LOCAL/include $CPPFLAGS"
 
-export CFLAGS LDFLAGS CPPFLAGS
+# Compilation errors with std=gnu23, https://github.com/passagemath/passagemath/issues/2308
+export CFLAGS="-std=gnu17 $CFLAGS"
 
 sdh_configure --with-gmp --disable-static
 sdh_make

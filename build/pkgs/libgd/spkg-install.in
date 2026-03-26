@@ -2,6 +2,9 @@ cd src
 
 export CFLAGS="-g $CFLAGS"
 
+# Compilation errors in libgd 2.3.3 with std=gnu23, https://github.com/passagemath/passagemath/issues/2307
+export CFLAGS="-std=gnu17 $CFLAGS"
+
 cp "$SAGE_ROOT"/config/config.* config/
 
 if [ -n "$MSYSTEM" ]; then
