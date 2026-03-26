@@ -6,7 +6,13 @@ export CFLAGS=$CFLAGS_O3
 
 cd src
 
-$MAKE test-all
+if [ "$UNAME" = "Darwin" ]; then
+    # Attempt to mitigate nondeterministic hangs
+    # https://github.com/passagemath/passagemath/issues/1684
+    $MAKE -j1 test-all
+else
+    $MAKE test-all
+fi
 
 if [ $? -ne 0 ]; then
     echo "Error: PARI failed the self-tests when running '$MAKE test-all'"
