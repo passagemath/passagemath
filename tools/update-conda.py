@@ -276,6 +276,7 @@ def get_dependencies(pyproject_toml: Path, python: str, platform: str) -> set[st
         all_requirements.add("openblas")
         all_requirements.add("libblas=*=*_openblas")
     all_requirements.add("fortran-compiler")
+
     if platform == "win-64":
         all_requirements.add("vs2022_win-64")
         # For mingw:
@@ -303,7 +304,9 @@ def get_dependencies(pyproject_toml: Path, python: str, platform: str) -> set[st
     # https://github.com/sagemath/sage/pull/40679
     if platform != "win-64":
         all_requirements.remove("maxima")
-        all_requirements.add("maxima < 5.48.0")
+        all_requirements.add("maxima ==5.49.0")
+        all_requirements.remove("singular")
+        all_requirements.add("singular ==4.4.1.p5")
 
     return all_requirements
 

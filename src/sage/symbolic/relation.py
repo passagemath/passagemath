@@ -1372,20 +1372,6 @@ def _solve_expression(f, x, explicit_solutions, multiplicities,
         sage: (x^2>1).solve(x)                                                          # needs sage.libs.maxima
         [[x < -1], [x > 1]]
 
-    Catch error message from Maxima::
-
-        sage: solve(acot(x),x)                                                          # needs sage.libs.maxima
-        Traceback (most recent call last):
-        ...
-        TypeError: ECL says: cot: argument 0 isn't in the domain of cot.
-
-    ::
-
-        sage: solve(acot(x), x, to_poly_solve=True)                                     # needs sage.libs.maxima
-        Traceback (most recent call last):
-        ...
-        TypeError: ECL says: cot: argument 0 isn't in the domain of cot.
-
     :issue:`7491` fixed::
 
         sage: # needs sage.libs.maxima
