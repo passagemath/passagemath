@@ -17,18 +17,59 @@ print_logs () {
     rm -f "$PERLBREW_ROOT"/build*perl*.log
 }
 
+################
+# Source - https://stackoverflow.com/a/8351489
+# Posted by phs, modified by community. See post 'Timeline' for change history
+# Retrieved 2026-03-26, License - CC BY-SA 3.0
+#
+# Retries a command a configurable number of times with backoff.
+#
+# The retry count is given by ATTEMPTS (default 5), the initial backoff
+# timeout is given by TIMEOUT in seconds (default 1.)
+#
+# Successive backoffs double the timeout.
+function with_backoff {
+  local max_attempts=${ATTEMPTS-5}
+  local timeout=${TIMEOUT-1}
+  local attempt=1
+  local exitCode=0
+
+  while (( $attempt < $max_attempts ))
+  do
+    if "$@"
+    then
+      return 0
+    else
+      exitCode=$?
+    fi
+
+    echo "Failure! Retrying in $timeout.." 1>&2
+    sleep $timeout
+    attempt=$(( attempt + 1 ))
+    timeout=$(( timeout * 2 ))
+  done
+
+  if [[ $exitCode != 0 ]]
+  then
+    echo "You've failed me for the last time! ($@)" 1>&2
+  fi
+
+  return $exitCode
+}
+##################
+
 # if cpan Devel::Trace; then
 #     TRACE_OPTIONS="-d:Trace"
 # fi
 
-${PERL-perl} $TRACE_OPTIONS "$LOCALINSTALLER" self-install --force
+with_backoff ${PERL-perl} $TRACE_OPTIONS "$LOCALINSTALLER" self-install --force
 status=$?
 if [ $status != 0 ]; then
     set +x
     sdh_die "perlbrew self-install failed"
 fi
 
-${PERL-perl} "$LOCALINSTALLER" install-patchperl --force
+with_backoff ${PERL-perl} "$LOCALINSTALLER" install-patchperl --force
 status=$?
 print_logs
 if [ $status != 0 ]; then
@@ -36,7 +77,7 @@ if [ $status != 0 ]; then
     sdh_die "perlbrew install-patchperl failed"
 fi
 
-${PERL-perl} "$LOCALINSTALLER" install --notest --force -j8 5.40.3 -Duseshrplib -Ulocincpth= -Uloclibpth= -Aldflags="$LDFLAGS"
+with_backoff ${PERL-perl} "$LOCALINSTALLER" install --notest --force -j8 5.40.3 -Duseshrplib -Ulocincpth= -Uloclibpth= -Aldflags="$LDFLAGS"
 status=$?
 print_logs
 if [ $status != 0 ]; then
@@ -44,7 +85,7 @@ if [ $status != 0 ]; then
     sdh_die "perlbrew install failed"
 fi
 
-${PERL-perl} "$LOCALINSTALLER" install-cpm --notest --force
+with_backoff ${PERL-perl} "$LOCALINSTALLER" install-cpm --notest --force
 status=$?
 print_logs
 if [ $status != 0 ]; then
