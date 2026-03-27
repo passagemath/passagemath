@@ -78,7 +78,7 @@ use the print command: use ``str(x)``.
 
 ::
 
-    sage: print(F)
+    sage: print(F)                                                                      # needs sage.symbolic
                                4      3    2  2    3      4
                    - (y - x) (y  + x y  + x  y  + x  y + x )
 
@@ -1193,7 +1193,7 @@ class MaximaElement(MaximaAbstractElement, ExpectElement):
             sage: a = maxima(5)
             sage: type(a)
             <class 'sage.interfaces.maxima.MaximaElement'>
-            sage: loads(dumps(a))==a
+            sage: loads(dumps(a)) == a                                                  # needs sage.symbolic
             True
         """
         ExpectElement.__init__(self, parent, value, is_name=False, name=None)
