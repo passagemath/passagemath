@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-maxima
+# sage.doctest: needs sage.symbolic
 r"""
 Library interface to Maxima
 

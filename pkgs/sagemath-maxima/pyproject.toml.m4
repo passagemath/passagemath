@@ -15,8 +15,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "passagemath-maxima"
-description = "passagemath: Symbolic calculus"
+description = "passagemath: Symbolic calculus with Maxima"
 dependencies = [
+    SPKG_INSTALL_REQUIRES_pexpect
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sagemath_ecl
     SPKG_INSTALL_REQUIRES_sagemath_environment
@@ -30,6 +31,8 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test            = ["passagemath-repl"]
+
+symbolics       = ["passagemath-symbolics"]
 
 [tool.cibuildwheel.linux]
 repair-wheel-command = [
