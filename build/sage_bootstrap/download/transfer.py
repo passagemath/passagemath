@@ -128,17 +128,19 @@ class Download(object):
             return
         try:
             opener = urllib.FancyURLopener()
+            urlretrieve = opener.retrieve
         except AttributeError:
             opener = urllib.build_opener()
+            urlretrieve = urllib.urlretrieve
             urllib.install_opener(opener)
 
         opener.http_error_default = self.http_error_default
         self.start_progress_bar()
         try:
             if self.progress:
-                opener.retrieve(self.url, self.destination, reporthook=self.progress_bar)
+                urlretrieve(self.url, self.destination, reporthook=self.progress_bar)
             else:
-                opener.retrieve(self.url, self.destination)
+                urlretrieve(self.url, self.destination)
 
         except IOError as error:
             self.error_progress_bar()
