@@ -32,6 +32,8 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test            = ["passagemath-repl"]
 
+symbolics       = ["passagemath-symbolics"]
+
 [tool.cibuildwheel.linux]
 repair-wheel-command = [
     'python3 -m pip install passagemath-conf auditwheel',
