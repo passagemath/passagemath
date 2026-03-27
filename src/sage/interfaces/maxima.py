@@ -59,6 +59,7 @@ The first way yields a Maxima object.
 
 ::
 
+    sage: # needs sage.symbolic
     sage: from sage.interfaces.maxima import maxima
     sage: x,y = SR.var('x,y')
     sage: F = maxima.factor('x^5 - y^5')
@@ -737,9 +738,9 @@ class Maxima(MaximaAbstract, Expect):
             [[a > 0,n > -1]]
             sage: maxima.facts()
             []
-            sage: var('a')
+            sage: var('a')                                                              # needs sage.symbolic
             a
-            sage: maxima('limit(x^a,x,0)')
+            sage: maxima('limit(x^a,x,0)')                                              # needs sage.symbolic
             Traceback (most recent call last):
             ...
             TypeError: Computation failed since Maxima requested additional
@@ -1170,7 +1171,7 @@ class MaximaElement(MaximaAbstractElement, ExpectElement):
 
         sage: maxima(3)
         3
-        sage: maxima(cos(x)+e^234)
+        sage: maxima(cos(x)+e^234)                                                      # needs sage.symbolic
         cos(_SAGE_VAR_x)+%e^234
     """
 
@@ -1181,7 +1182,7 @@ class MaximaElement(MaximaAbstractElement, ExpectElement):
 
         EXAMPLES::
 
-           sage: maxima(zeta(7))
+           sage: maxima(zeta(7))                                                        # needs sage.symbolic
            zeta(7)
 
         TESTS::
