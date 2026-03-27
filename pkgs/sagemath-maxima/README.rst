@@ -71,7 +71,7 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable distribution ``passagemath-maxima`` provides
-interfaces to `Maxima <https://passagemath.org/docs/latest/html/en/reference/spkg/maxima.html>`_.
+interfaces to the computer algebra system `Maxima <https://passagemath.org/docs/latest/html/en/reference/spkg/maxima.html>`_.
 
 
 What is included
@@ -96,9 +96,12 @@ Using the pexpect interface to Maxima::
     In [2]: maxima('1+1')
     Out[2]: 2
 
-Using the library interface to Maxima::
+Using the library interface to Maxima requires the additional package
+`passagemath-symbolics <https://pypi.org/project/passagemath-symbolics>`_;
+you can install it, for example, by using
+``pip install "passagemath-maxima[symbolics]"``::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-maxima[test]" ipython
+    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-maxima[symbolics,test]" ipython
 
     In [1]: from sage.interfaces.maxima_lib import maxima_lib
 
