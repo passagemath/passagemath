@@ -133,7 +133,7 @@ including exponentiation::
     sage: M^2
     [x^2 + x   2*x^3]
     [      2 x^2 + x]
-    sage: e^M
+    sage: e^M                                                                           # needs sage.libs.maxima
     [        1/2*(e^(2*sqrt(x)) + 1)*e^(x - sqrt(x)) 1/2*x^(3/2)*(e^(2*sqrt(x)) - 1)*e^(x - sqrt(x))]
     [1/2*(e^(2*sqrt(x)) - 1)*e^(x - sqrt(x))/x^(3/2)         1/2*(e^(2*sqrt(x)) + 1)*e^(x - sqrt(x))]
 
@@ -1861,6 +1861,7 @@ def laplace(ex, t, s, algorithm='maxima'):
 
     Another example::
 
+        sage: # needs sage.libs.maxima
         sage: var('a,s,t')
         (a, s, t)
         sage: f = exp(2*t + a) * sin(t) * t; f
