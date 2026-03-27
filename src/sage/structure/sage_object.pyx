@@ -881,16 +881,18 @@ cdef class SageObject:
 
     def _maxima_(self, G=None):
         if G is None:
-            from sage.interfaces.maxima_lib import maxima
-            G = maxima
+            import sage.interfaces.maxima
+            G = sage.interfaces.maxima.maxima
         return self._interface_(G)
 
     def _maxima_init_(self):
-        from sage.interfaces.maxima_lib import maxima
-        return self._interface_init_(maxima)
+        import sage.interfaces.maxima
+        I = sage.interfaces.maxima.maxima
+        return self._interface_init_(I)
 
     def _maxima_lib_(self, G=None):
-        return self._maxima_(G)
+        from sage.interfaces.maxima_lib import maxima_lib
+        return self._interface_(maxima_lib)
 
     def _maxima_lib_init_(self):
         return self._maxima_init_()
