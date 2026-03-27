@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-ecl
+# distutils: extra_compile_args = -std=gnu17
 """
 Library interface to Embeddable Common Lisp (ECL)
 """
