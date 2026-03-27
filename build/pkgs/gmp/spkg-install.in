@@ -23,6 +23,8 @@ case "$MSYSTEM" in
         ;;
 esac
 
+export CC="$CC -std=gnu17"
+
 user_cflags=$CFLAGS # Save them. 'sage-env' sets CC, but not CFLAGS.
 required_cflags=""  # Additional mandatory settings required by Sage, accumulated below.
 user_ldflags=$LDFLAGS # Save them.
