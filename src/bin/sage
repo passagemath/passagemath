@@ -694,11 +694,7 @@ fi
 
 if [ "$1" = '-maxima' -o "$1" = '--maxima' ]; then
     shift
-    maxima_cmd=$(sage-config MAXIMA 2>/dev/null)
-    if [ -z "${maxima_cmd}" ]; then
-        maxima_cmd="maxima"
-    fi
-    exec $maxima_cmd "$@"
+    exec python3 -m sage.interfaces.maxima "$@"
 fi
 
 if [ "$1" = '-mwrank' -o "$1" = '--mwrank' ]; then

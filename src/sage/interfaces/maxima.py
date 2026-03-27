@@ -1325,3 +1325,10 @@ def __doctest_cleanup():
     """
     import sage.interfaces.quit
     sage.interfaces.quit.expect_quitall()
+
+
+if __name__ == "__main__":
+    import sys
+    cmd = shlex.quote(MAXIMA)
+    cmd += ' ' + ' '.join(shlex.quote(arg) for arg in sys.argv[1:])
+    sys.exit(os.system(cmd))
