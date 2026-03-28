@@ -25,7 +25,7 @@ class lcalc(Executable):
 
         sage: from sage.features.lcalc import lcalc
         sage: lcalc().is_present()                              # needs lcalc
-        FeatureTestResult('lcalc', True)
+        FeatureTestResult('lcalc_executable', True)
     """
     def __init__(self):
         r"""
