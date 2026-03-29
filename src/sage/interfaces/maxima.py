@@ -260,6 +260,7 @@ is `i/j`, for `i,j=1,\ldots,4`.
 
 We can also compute the echelon form in Sage::
 
+    sage: # needs sage.modules
     sage: B = matrix(QQ, A)
     sage: B.echelon_form()
     [  1 1/2 1/3 1/4]
@@ -386,7 +387,7 @@ Obtaining digits of `\pi`::
 
     sage: maxima.eval('fpprec : 100')
     '100'
-    sage: maxima(pi).bfloat()
+    sage: maxima(pi).bfloat()                                                           # needs sage.symbolics
     3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117068b0
 
 Defining functions in maxima::
@@ -448,7 +449,7 @@ This working tests that a subtle bug has been fixed::
     sage: g
     gamma(1/7)
     sage: del f
-    sage: maxima(sin(x))
+    sage: maxima(sin(x))                                                                # needs sage.symbolics
     sin(_SAGE_VAR_x)
 
 This tests to make sure we handle the case where Maxima asks if an
@@ -456,6 +457,7 @@ expression is positive or zero.
 
 ::
 
+    sage: # needs sage.symbolics
     sage: var('Ax,Bx,By')
     (Ax, Bx, By)
     sage: t = -Ax*sin(sqrt(Ax^2)/2)/(sqrt(Ax^2)*sqrt(By^2 + Bx^2))
@@ -476,6 +478,7 @@ Test that Maxima gracefully handles this syntax error (:issue:`17667`)::
 
 Test that conversion of symbolic functions with latex names works (:issue:`31047`)::
 
+    sage: # needs sage.symbolics
     sage: var('phi')
     phi
     sage: function('Cp', latex_name='C_+')
