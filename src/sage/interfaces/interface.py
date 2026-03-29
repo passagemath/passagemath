@@ -130,8 +130,12 @@ class Interface(WithEqualityById, ParentWithBase):
             sage: s.rand_seed() # random
             365260051
         """
-        import sage.doctest
-        if sage.doctest.DOCTEST_MODE:
+        try:
+            from sage.doctest import DOCTEST_MODE
+        except ImportError:
+            DOCTEST_MODE = False
+
+        if DOCTEST_MODE:
             # set the random seed through the current randstate
             from sage.misc.randstate import current_randstate
             seed = current_randstate().seed()
