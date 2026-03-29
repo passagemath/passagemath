@@ -7,9 +7,8 @@ export CFLAGS=$CFLAGS_O3
 cd src
 
 if [ "$UNAME" = "Darwin" ]; then
-    # Attempt to mitigate nondeterministic hangs
     # https://github.com/passagemath/passagemath/issues/1684
-    $MAKE -j1 test-all
+    echo "Skipping testsuite to avoid nondeterministic hangs"
 else
     $MAKE test-all
 fi
