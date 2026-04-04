@@ -443,6 +443,28 @@ Pyflakes
 `Pyflakes <https://github.com/PyCQA/pyflakes>`_ checks for common coding errors.
 
 
+.. _section-tools-check-unbound-imports:
+
+check_unbound_imports
+=====================
+
+:sage_root:`tools/check_unbound_imports.py` is an AST-based checker that
+detects a specific class of ``NameError`` bug: a name imported inside a
+``try`` block where the ``except ImportError`` does not bind the name, and
+the name is then used unconditionally outside the ``try``.  This pattern is
+a common source of silent failures in modular installs where optional
+packages may be absent.
+
+*Usage:*
+
+.. code-block:: console
+
+    $ python3 tools/check_unbound_imports.py <directory_or_file> [...]
+
+The script exits with status 1 if any issues are found, making it suitable
+for use in CI.  It requires only the Python standard library.
+
+
 .. _section-act:
 
 Act
