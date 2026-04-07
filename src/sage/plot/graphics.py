@@ -1008,8 +1008,94 @@ class Graphics(WithEqualityById, SageObject):
             raise ValueError('unknown graphics output preference')
         for file_ext, output_container in preferred:
             if output_container in display_manager.supported_output():
-                return display_manager.graphics_from_save(
-                    self.save, kwds, file_ext, output_container)
+                if file_ext == '.png':
+                    from sage.repl.rich_output.buffer import OutputBuffer
+                    return output_container(OutputBuffer(self._render_png_(**kwds)))
+                else:
+                    return display_manager.graphics_from_save(
+                        self.save, kwds, file_ext, output_container)
+
+    def _repr_png_(self):
+        r"""
+        Return a PNG representation of this graphics object.
+
+        This allows ``Graphics`` objects to display as images in plain Python
+        Jupyter kernels (e.g. xeus-python in JupyterLite, Google Colab, marimo)
+        that do not use Sage's rich output system.
+
+        Unlike :meth:`_render_png_`, rendering failures are suppressed and
+        ``None`` is returned, matching the IPython ``_repr_png_`` protocol.
+
+        OUTPUT: ``bytes`` -- PNG image data, or ``None`` if rendering fails
+
+        EXAMPLES::
+
+            sage: G = line([(0, 0), (1, 1)])
+            sage: png = G._repr_png_()
+            sage: png[:8] == b'\x89PNG\r\n\x1a\n'
+            True
+        """
+        try:
+            return self._render_png_()
+        except Exception:
+            return None
+
+    def _render_png_(self, **kwds):
+        r"""
+        Render this graphics object to PNG bytes.
+
+        Used by :meth:`_repr_png_` (plain Python kernels) and
+        :meth:`_rich_repr_` (Sage kernel). Raises on rendering failure
+        so that callers in the Sage rich output path can surface errors.
+
+        Runtime keyword arguments (e.g. ``dpi``, ``figsize``) overlay the
+        instance's saved options, matching the merge order of :meth:`save`.
+
+        OUTPUT: ``bytes`` -- PNG image data
+
+        EXAMPLES::
+
+            sage: G = line([(0, 0), (1, 1)])
+            sage: png = G._render_png_()
+            sage: png[:8] == b'\x89PNG\r\n\x1a\n'
+            True
+
+        Runtime kwargs are forwarded, so ``dpi`` affects the output size::
+
+            sage: G = line([(0, 0), (1, 1)])
+            sage: len(G._render_png_(dpi=50)) < len(G._render_png_(dpi=200))
+            True
+        """
+        from io import BytesIO
+        from matplotlib import pyplot as plt, rcParams
+        from matplotlib.backends.backend_agg import FigureCanvasAgg
+        options = {}
+        options.update(self.SHOW_OPTIONS)
+        options.update(self._extra_kwds)
+        options.update(kwds)
+        dpi = options.pop('dpi')
+        transparent = options.pop('transparent')
+        fig_tight = options.pop('fig_tight')
+        rc_backup = (rcParams['ps.useafm'], rcParams['pdf.use14corefonts'],
+                     rcParams['text.usetex'])
+        figure = None
+        try:
+            figure = self.matplotlib(**options)
+            figure.set_canvas(FigureCanvasAgg(figure))
+            figure.tight_layout()
+            opts = {'dpi': dpi, 'transparent': transparent}
+            if fig_tight:
+                opts['bbox_inches'] = 'tight'
+            if self._bbox_extra_artists:
+                opts['bbox_extra_artists'] = self._bbox_extra_artists
+            buf = BytesIO()
+            figure.savefig(buf, format='png', **opts)
+            return buf.getvalue()
+        finally:
+            if figure is not None:
+                plt.close(figure)
+            (rcParams['ps.useafm'], rcParams['pdf.use14corefonts'],
+             rcParams['text.usetex']) = rc_backup
 
     def __str__(self):
         r"""
