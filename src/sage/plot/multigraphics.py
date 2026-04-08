@@ -706,11 +706,11 @@ class MultiGraphics(WithEqualityById, SageObject):
         """
         from sage.repl.rich_output import get_display_manager
         from sage.repl.rich_output.output_graphics import OutputImagePng
+        from sage.repl.ipython_extension import _running_in_notebook
         dm = get_display_manager()
         if (OutputImagePng not in dm._backend.supported_output()
                 and dm.preferences.graphics != 'disable'):
             try:
-                from sage.repl.ipython_extension import _running_in_notebook
                 if _running_in_notebook():
                     from IPython.display import display, Image
                     display(Image(self._render_png_(**kwds)))
