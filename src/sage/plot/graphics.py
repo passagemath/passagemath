@@ -2256,23 +2256,19 @@ class Graphics(WithEqualityById, SageObject):
             a list of two positive numbers, not [2, 3, 4]
             sage: P.show(figsize=[sqrt(2),sqrt(3)])
 
-        In plain Python Jupyter kernels (e.g. xeus-python, JupyterLite) where
-        Sage's rich output system is not initialized, the backend is
-        :class:`~sage.repl.rich_output.backend_base.BackendSimple` which does
-        not support PNG output.  In that case ``show()`` falls back to the
-        IPython display protocol (``IPython.display.display``) so the image
-        is still rendered inline.  The ``graphics='disable'`` preference is
-        still respected::
+        In Jupyter kernels where Sage's rich output system is not initialized
+        and the active backend does not support PNG, ``show()`` falls back to
+        ``IPython.display.display`` so the image still renders inline.  The
+        fallback only fires in notebook-style IPython kernels; in non-kernel
+        contexts such as the Sage doctester the call falls through to the
+        backend's plain-text output instead::
 
             sage: from sage.repl.rich_output.backend_base import BackendSimple
             sage: from sage.repl.rich_output import get_display_manager
             sage: dm = get_display_manager()
             sage: previous = dm.switch_backend(BackendSimple())
-            sage: circle((0,0), 1).show()  # IPython fallback; no stdout output
-            sage: dm.preferences.graphics = 'disable'
-            sage: circle((0,0), 1).show()  # graphics disabled; falls through to plain text
+            sage: circle((0,0), 1).show()
             Graphics object consisting of 1 graphics primitive
-            sage: dm.preferences.graphics = None
             sage: _ = dm.switch_backend(previous)
         """
         from sage.repl.rich_output import get_display_manager
@@ -2281,9 +2277,11 @@ class Graphics(WithEqualityById, SageObject):
         if (OutputImagePng not in dm._backend.supported_output()
                 and dm.preferences.graphics != 'disable'):
             try:
-                from IPython.display import display, Image
-                display(Image(self._render_png_(**kwds)))
-                return
+                from sage.repl.ipython_extension import _running_in_notebook
+                if _running_in_notebook():
+                    from IPython.display import display, Image
+                    display(Image(self._render_png_(**kwds)))
+                    return
             except Exception:
                 pass
         dm.display_immediately(self, **kwds)
