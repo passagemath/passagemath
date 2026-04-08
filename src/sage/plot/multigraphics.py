@@ -689,9 +689,30 @@ class MultiGraphics(WithEqualityById, SageObject):
                                 [plot(tan), plot(sec)]])
             sphinx_plot(G, axes=False, frame=True, figsize=4, fontsize=8, \
                         gridlines='major')
+
+        In plain Python Jupyter kernels where Sage's rich output system is not
+        initialized, ``show()`` falls back to the IPython display protocol so
+        the image is still rendered inline.  See
+        :meth:`~sage.plot.graphics.Graphics.show` for details::
+
+            sage: from sage.repl.rich_output.backend_base import BackendSimple
+            sage: from sage.repl.rich_output import get_display_manager
+            sage: dm = get_display_manager()
+            sage: previous = dm.switch_backend(BackendSimple())
+            sage: graphics_array([circle((0,0),1), line([(0,0),(1,1)])]).show()
+            sage: _ = dm.switch_backend(previous)
         """
         from sage.repl.rich_output import get_display_manager
+        from sage.repl.rich_output.output_graphics import OutputImagePng
         dm = get_display_manager()
+        if (OutputImagePng not in dm._backend.supported_output()
+                and dm.preferences.graphics != 'disable'):
+            try:
+                from IPython.display import display, Image
+                display(Image(self._render_png_(**kwds)))
+                return
+            except Exception:
+                pass
         dm.display_immediately(self, **kwds)
 
     def plot(self):
