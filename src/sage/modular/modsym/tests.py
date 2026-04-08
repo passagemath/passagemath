@@ -231,7 +231,7 @@ class Test:
         EXAMPLES::
 
             sage: from sage.modular.modsym.tests import Test
-            sage: Test().random(1)
+            sage: Test().random(1)                                                # needs sage.libs.linbox
             test_random
             ...
         """
