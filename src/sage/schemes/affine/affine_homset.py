@@ -332,7 +332,7 @@ class SchemeHomset_points_affine(SchemeHomset_points):
                         if numerical:
                             if len(points[i]) == N:
                                 S = AS([points[i][R.gen(j)] for j in range(N)])
-                                if all(g(list(S)) < zero_tol for g in X.defining_polynomials()):
+                                if all(abs(g(list(S))) < zero_tol for g in X.defining_polynomials()):
                                     rat_points.append(S)
                         else:
                             if len(points[i]) == N and I.subs(points[i]) == I0:
@@ -501,7 +501,7 @@ class SchemeHomset_points_affine(SchemeHomset_points):
             for P in points:
                 if len(P) == N:
                     S = AA([P[R.gen(j)] for j in range(N)])
-                    if all(g(list(S)) < zero_tol for g in polys):
+                    if all(abs(g(list(S))) < zero_tol for g in polys):
                         rat_points.append(S)
 
         rat_points = sorted(rat_points)
