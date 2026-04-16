@@ -704,6 +704,7 @@ def _expand_basis_pgroup(p, alphas, vals, beta, h, rel):
     # step 3
     j = next(j for j, r in enumerate(rel) if r == min_r)
     alphas[j] = sum(a * (r // rel[j]) for a, r in zip(alphas + [beta], rel))
+    vals[j] = rel[j].valuation(p)
 
     # step 4
     if not alphas[j]:
