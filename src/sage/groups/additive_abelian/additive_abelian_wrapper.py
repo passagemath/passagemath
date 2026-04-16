@@ -710,7 +710,7 @@ def _expand_basis_pgroup(p, alphas, vals, beta, h, rel):
         del alphas[j], vals[j]
         if not alphas:
             alphas.append(beta)
-            vals.append(val_rlast)
+            vals.append(h)
             # assert all(a.order() == p**v for a,v in zip(alphas,vals))
             return
 
