@@ -661,6 +661,19 @@ def _expand_basis_pgroup(p, alphas, vals, beta, h, rel):
         [2, 1]
         sage: len({i*alphas[0] + j*alphas[1] for i in range(3^2) for j in range(3^1)})
         27
+
+    TESTS:
+
+    Check for :issue:`42017`::
+
+        sage: from sage.groups.additive_abelian.additive_abelian_wrapper import _expand_basis_pgroup
+        sage: p = 2
+        sage: G = Zmod(p^2)
+        sage: gens, vals = [G(p)], [1]
+        sage: beta, h = G(-1), 2
+        sage: rel = [1, p]
+        sage: _expand_basis_pgroup(p, gens, vals, beta, h, rel)
+        sage: assert all(a.order() == p**v for a, v in zip(gens, vals))
     """
     # The given assertions should hold, but were commented out for speed.
 
