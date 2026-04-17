@@ -51,14 +51,15 @@ def multiplicative_iterator(M):
     ``g.multiplicative_order() - 1``.
 
     INPUT:
-        - ``M`` -- a finite multiplicative group-like object.
+
+    - ``M`` -- a finite multiplicative group-like object
 
     OUTPUT:
-        - Yields elements of ``M`` in a deterministic order.
 
-    ASSUMPTIONS:
-        - All generators have finite multiplicative order; otherwise an
-          ``ArithmeticError`` is raised.
+    - elements of ``M`` in a deterministic order
+
+   If not all generators have finite multiplicative order, an
+   ``ArithmeticError`` is raised.
     """
     from sage.rings.infinity import infinity
 
