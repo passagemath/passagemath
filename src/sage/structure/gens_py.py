@@ -83,8 +83,8 @@ def multiplicative_iterator(M):
     # `counts` is the current exponent vector (for an odometer).
     counts = [0] * len(generators)
     while counts != limits:
-        current = current * generators[0]
-        counts[0] = counts[0] + 1
+        current *= generators[0]
+        counts[0] += 1
 
         i = 0
         # Carry to the next generator when the current one overflows.
