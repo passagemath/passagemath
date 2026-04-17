@@ -673,7 +673,8 @@ def _expand_basis_pgroup(p, alphas, vals, beta, h, rel):
         sage: beta, h = G(-1), 2
         sage: rel = [1, p]
         sage: _expand_basis_pgroup(p, gens, vals, beta, h, rel)
-        sage: assert all(a.order() == p**v for a, v in zip(gens, vals))
+        sage: all(a.order() == p ** v for a, v in zip(gens, vals))
+        True
     """
     # The given assertions should hold, but were commented out for speed.
 
