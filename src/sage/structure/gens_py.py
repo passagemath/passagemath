@@ -135,7 +135,7 @@ def abelian_iterator(M):
             raise ArithmeticError("%s is not finite." % M)
 
         # We increment "counts" from 0 through (order-1), inclusive.
-        limits[i] = limits[i] - 1
+        limits[i] -= 1
 
     current = M(0)
     yield current
