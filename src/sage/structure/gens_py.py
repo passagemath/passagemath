@@ -64,7 +64,7 @@ def multiplicative_iterator(M):
     from sage.rings.infinity import infinity
 
     generators = M.gens()
-    if len(generators) == 0:
+    if not generators:
         yield M(1)
         return
 
