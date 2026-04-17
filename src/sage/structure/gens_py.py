@@ -111,14 +111,15 @@ def abelian_iterator(M):
     ``0`` up to ``g.additive_order() - 1``.
 
     INPUT:
-        - ``M`` -- a finite additive group-like object.
+
+    - ``M`` -- a finite additive group-like object
 
     OUTPUT:
-        - Yields elements of ``M`` in a deterministic order.
 
-    ASSUMPTIONS:
-        - All generators have finite additive order; otherwise an
-          ``ArithmeticError`` is raised.
+    - elements of ``M`` in a deterministic order
+
+   If not all generators have finite additive order, an
+   ``ArithmeticError`` is raised.
     """
     from sage.rings.infinity import infinity
 
