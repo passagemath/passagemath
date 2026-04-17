@@ -90,8 +90,8 @@ def multiplicative_iterator(M):
         # Carry to the next generator when the current one overflows.
         while i < len(counts) - 1 and counts[i] > limits[i]:
             counts[i] = 0
-            counts[i + 1] = counts[i + 1] + 1
-            current = current * generators[i + 1]
+            counts[i + 1] += 1
+            current *= generators[i + 1]
             i += 1
         yield current
 
