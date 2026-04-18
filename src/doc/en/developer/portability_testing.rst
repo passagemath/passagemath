@@ -62,9 +62,11 @@ setting is in Preferences -> Resources -> Advanced.
 
    .. ONLY:: html
 
-      .. image:: https://github.com/codespaces/badge.svg
-         :align: center
-         :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Ftox-docker-in-docker%2Fdevcontainer.json
+      .. raw:: html
+
+         <a href="https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Ftox-docker-in-docker%2Fdevcontainer.json">
+           <img src="https://github.com/codespaces/badge.svg" alt="Open in GitHub Codespaces">
+         </a>
 
 All major Linux distributions provide ready-to-use Docker images,
 which are published via `Docker Hub <https://hub.docker.com>`_
