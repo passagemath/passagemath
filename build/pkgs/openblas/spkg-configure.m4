@@ -52,6 +52,16 @@ SAGE_SPKG_CONFIGURE([openblas], [dnl CHECK
         AC_LANG_POP([C])
       ])
       AS_IF([test x$sage_spkg_install_openblas != xyes], [dnl
+        AC_MSG_CHECKING([whether flags provided by openblas.pc are compatible with GNU libtool])
+        AS_CASE([$OPENBLAS_CFLAGS],
+          [*-Xpreprocessor*], [dnl
+            AC_MSG_RESULT([no; found -Xpreprocessor in $OPENBLAS_CFLAGS])
+            sage_spkg_install_openblas=yes
+          ], [dnl
+            AC_MSG_RESULT([yes])
+          ])
+      ])
+      AS_IF([test x$sage_spkg_install_openblas != xyes], [dnl
         AC_SUBST([SAGE_SYSTEM_FACADE_PC_FILES])
         AC_SUBST([SAGE_OPENBLAS_PC_COMMAND], ["\$(LN) -sf \"$OPENBLASPCDIR/openblas.pc\" \"\$(@)\""])
         m4_foreach([blaslibnam], [blas, cblas, lapack], [dnl
