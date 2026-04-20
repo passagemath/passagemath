@@ -3409,6 +3409,72 @@ def compute_isogeny_bmss(E1, E2, l):
         sage: E2 = EllipticCurve(GF(167), [56, 40])
         sage: compute_isogeny_bmss(E1, E2, 13)
         x^6 + 139*x^5 + 73*x^4 + 139*x^3 + 120*x^2 + 88*x
+
+    TESTS:
+
+    A large number of tests that used to fail (see :issue:`42043`)::
+
+        sage: F = GF(53)
+        sage: E1 = EllipticCurve(F, [0, 1])
+        sage: E2 = EllipticCurve(F, [38, 22])
+        sage: compute_isogeny_bmss(E1, E2, 2)
+        x + 1
+
+    ::
+
+        sage: F = GF(53)
+        sage: E1 = EllipticCurve(F, [0, 1])
+        sage: E2 = EllipticCurve(F, [24, 42])
+        sage: compute_isogeny_bmss(E1, E2, 6)
+        x^3 + 52*x^2 + 51*x
+
+    ::
+
+        sage: F = GF(53)
+        sage: E1 = EllipticCurve(F, [0, 26])
+        sage: E2 = EllipticCurve(F, [24, 42])
+        sage: compute_isogeny_bmss(E1, E2, 2)
+        x + 50
+
+    ::
+
+        sage: F = GF(53)
+        sage: E1 = EllipticCurve(F, [40, 39])
+        sage: E2 = EllipticCurve(F, [8, 29])
+        sage: compute_isogeny_bmss(E1, E2, 2)
+        x + 40
+
+    ::
+
+        sage: F = GF(53)
+        sage: E1 = EllipticCurve(F, [40, 39])
+        sage: E2 = EllipticCurve(F, [20, 40])
+        sage: compute_isogeny_bmss(E1, E2, 4)
+        x^2 + 48*x + 2
+
+    ::
+
+        sage: F = GF(53)
+        sage: E1 = EllipticCurve(F, [13, 49])
+        sage: E2 = EllipticCurve(F, [45, 31])
+        sage: compute_isogeny_bmss(E1, E2, 2)
+        x + 34
+
+    ::
+
+        sage: F = GF(53)
+        sage: E1 = EllipticCurve(F, [20, 8])
+        sage: E2 = EllipticCurve(F, [30, 41])
+        sage: compute_isogeny_bmss(E1, E2, 2)
+        x + 9
+
+    ::
+
+        sage: F = GF(61)
+        sage: E1 = EllipticCurve(F, [1, 0])
+        sage: E2 = EllipticCurve(F, [11, 29])
+        sage: compute_isogeny_bmss(E1, E2, 2)
+        x + 11
     """
     # Original author of this function: Rémy Oudompheng.
     # https://github.com/remyoudompheng/isogeny_weber/blob/64289127a337ac1bf258b711e02fea02b7df5275/isogeny_weber/isogenies.py#L272-L332
@@ -3546,6 +3612,28 @@ def compute_isogeny_stark(E1, E2, ell):
         sage: E2 = EllipticCurve([0,-27])
         sage: E1.isogeny(None, E2, degree=3)
         Isogeny of degree 3 from Elliptic Curve defined by y^2 = x^3 + 1 over Rational Field to Elliptic Curve defined by y^2 = x^3 - 27 over Rational Field
+
+    These tests used to fail (see :issue:`42045`)::
+
+        sage: E = EllipticCurve([1, 1])
+        sage: E.isogeny(None, E, 1)
+        Isogeny of degree 1 from Elliptic Curve defined by y^2 = x^3 + x + 1 over Rational Field to Elliptic Curve defined by y^2 = x^3 + x + 1 over Rational Field
+
+    ::
+
+        sage: F = GF(67)
+        sage: E1 = EllipticCurve(F, [0, 11])
+        sage: E2 = EllipticCurve(F, [0, 7])
+        sage: compute_isogeny_stark(E1, E2, 7)
+        x^3 + 65
+
+    ::
+
+        sage: F = GF(53)
+        sage: E1 = EllipticCurve(F, [43, 52])
+        sage: E2 = EllipticCurve(F, [25, 37])
+        sage: compute_isogeny_stark(E1, E2, 5)
+        x^2 + 2*x + 39
     """
     K = E1.base_field()
     R, x = PolynomialRing(K, 'x').objgen()
