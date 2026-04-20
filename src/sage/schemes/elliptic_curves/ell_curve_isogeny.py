@@ -3460,10 +3460,20 @@ def compute_isogeny_bmss(E1, E2, l):
     _, Q = Rx(U).rational_reconstruction(x ** (2 * l), l, l)
     Q = Q.add_bigoh((l + 1) // 2)
     if not Q.is_square():
+        if True:  #XXX stopgap for #42043; to be fixed properly eventually
+            return compute_isogeny_stark(E1, E2, l)
         raise ValueError(f"the two curves are not linked by a cyclic normalized isogeny of degree {l}")
     Q = Q.sqrt()
     ker = Rx(Q).reverse(degree=l//2)
-    return ker.monic().radical()
+
+    ker = ker.monic().radical()
+
+    if True:  #XXX stopgap for #42043; to be fixed properly eventually
+        if (E1.division_polynomial(l, x=Rx.quotient(ker).gen())
+            or not E1.isogeny_codomain(ker).is_isomorphic(E2)):
+            return compute_isogeny_stark(E1, E2, l)
+
+    return ker
 
 
 def compute_isogeny_stark(E1, E2, ell):
@@ -3577,6 +3587,8 @@ def compute_isogeny_stark(E1, E2, ell):
 
         if n == ell+1 or T == 0:
             if T == 0 or T.valuation() < 2:
+                if True:  #XXX stopgap for #42045; to be fixed properly eventually
+                    return compute_isogeny_kernel_polynomial(E1, E2, ell, algorithm='bruteforce')
                 raise ValueError(f"the two curves are not linked by a cyclic normalized isogeny of degree {ell}")
             break
 
