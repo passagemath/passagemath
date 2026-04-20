@@ -3540,7 +3540,13 @@ def compute_isogeny_stark(E1, E2, ell):
     K = E1.base_field()
     R, x = PolynomialRing(K, 'x').objgen()
 
-    wp1 = E1.weierstrass_p(prec=4*ell+4)  #BMSS2006 claim 2*ell is enough, but it is not M09
+    ell = Integer(ell)
+    if ell.is_one():
+        if E1 == E2:
+            return R.one()
+        raise ValueError("the two curves are not linked by a cyclic normalized isogeny of degree 1")
+
+    wp1 = E1.weierstrass_p(prec=4*ell+4)  # [BMSS2006] claim 2*ell is enough, but it is not [M09]
     wp2 = E2.weierstrass_p(prec=4*ell+4)
 
     # viewed them as power series in Z = z^2
