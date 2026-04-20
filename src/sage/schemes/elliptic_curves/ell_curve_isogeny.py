@@ -3463,7 +3463,7 @@ def compute_isogeny_bmss(E1, E2, l):
         raise ValueError(f"the two curves are not linked by a cyclic normalized isogeny of degree {l}")
     Q = Q.sqrt()
     ker = Rx(Q).reverse(degree=l//2)
-    return ker.monic()
+    return ker.monic().radical()
 
 
 def compute_isogeny_stark(E1, E2, ell):
@@ -3503,22 +3503,22 @@ def compute_isogeny_stark(E1, E2, ell):
         sage: from sage.schemes.elliptic_curves.ell_curve_isogeny import compute_isogeny_stark, compute_sequence_of_maps
 
         sage: E = EllipticCurve(GF(97), [1,0,1,1,0])
-        sage: R.<x> = GF(97)[]; f = x^5 + 27*x^4 + 61*x^3 + 58*x^2 + 28*x + 21
+        sage: R.<x> = GF(97)[]
+        sage: f = x^5 + 27*x^4 + 61*x^3 + 58*x^2 + 28*x + 21
         sage: phi = EllipticCurveIsogeny(E, f)
         sage: E2 = phi.codomain()
         sage: isom1, isom2, E1pr, E2pr, ker_poly = compute_sequence_of_maps(E, E2, 11)
         sage: compute_isogeny_stark(E1pr, E2pr, 11)
-        x^10 + 37*x^9 + 53*x^8 + 66*x^7 + 66*x^6 + 17*x^5 + 57*x^4 + 6*x^3 + 89*x^2 + 53*x + 8
+        x^5 + 67*x^4 + 13*x^3 + 35*x^2 + 77*x + 69
 
         sage: E = EllipticCurve(GF(37), [0,0,0,1,8])
         sage: R.<x> = GF(37)[]
-        sage: f = (x + 14) * (x + 30)
+        sage: f = (x + 14) * (x + 30); f
+        x^2 + 7*x + 13
         sage: phi = EllipticCurveIsogeny(E, f)
         sage: E2 = phi.codomain()
         sage: compute_isogeny_stark(E, E2, 5)
-        x^4 + 14*x^3 + x^2 + 34*x + 21
-        sage: f**2
-        x^4 + 14*x^3 + x^2 + 34*x + 21
+        x^2 + 7*x + 13
 
         sage: E = EllipticCurve(QQ, [0,0,0,1,0])
         sage: R.<x> = QQ[]
@@ -3582,9 +3582,7 @@ def compute_isogeny_stark(E1, E2, ell):
 
         T = 1/T
 
-    qn = q[n]
-    qn /= qn.leading_coefficient()
-    return qn
+    return q[n].monic().radical()
 
 
 def compute_isogeny_kernel_polynomial(E1, E2, ell, algorithm=None):
@@ -3636,7 +3634,8 @@ def compute_isogeny_kernel_polynomial(E1, E2, ell, algorithm=None):
 
     TESTS:
 
-    Check that :meth:`Polynomial.radical` is doing the right thing for us::
+    Check that :meth:`Polynomial.radical` is doing the right thing for us
+    inside this method::
 
         sage: E = EllipticCurve(GF(37), [0,0,0,1,8])
         sage: R.<x> = GF(37)[]
@@ -3645,12 +3644,8 @@ def compute_isogeny_kernel_polynomial(E1, E2, ell, algorithm=None):
         sage: E2 = phi.codomain()
         sage: from sage.schemes.elliptic_curves.ell_curve_isogeny import compute_isogeny_stark
         sage: ker_poly = compute_isogeny_stark(E, E2, 7); ker_poly
-        x^6 + 2*x^5 + 20*x^4 + 11*x^3 + 36*x^2 + 35*x + 16
-        sage: ker_poly.factor()
-        (x + 10)^2 * (x + 12)^2 * (x + 16)^2
-        sage: poly = ker_poly.radical(); poly
         x^3 + x^2 + 28*x + 33
-        sage: poly.factor()
+        sage: ker_poly.factor()
         (x + 10) * (x + 12) * (x + 16)
     """
     if algorithm is None:
@@ -3662,7 +3657,7 @@ def compute_isogeny_kernel_polynomial(E1, E2, ell, algorithm=None):
     if algorithm == 'bmss':
         return compute_isogeny_bmss(E1, E2, ell)
     if algorithm == 'stark':
-        return compute_isogeny_stark(E1, E2, ell).radical()
+        return compute_isogeny_stark(E1, E2, ell)
 
     raise NotImplementedError(f'unknown algorithm {algorithm}')
 
