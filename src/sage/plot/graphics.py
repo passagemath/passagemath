@@ -40,6 +40,7 @@ from collections.abc import Iterable
 from math import isnan
 import sage.misc.verbose
 from sage.misc.temporary_file import tmp_filename
+import sage.structure.element  # break Cython circular import (refs #1604)
 from sage.misc.fast_methods import WithEqualityById
 from sage.structure.sage_object import SageObject
 from sage.misc.decorators import suboptions
