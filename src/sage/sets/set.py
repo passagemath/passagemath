@@ -881,7 +881,7 @@ class Set_object_enumerated(Set_object):
             {0, 1, 2}
         """
         if isinstance(X, Iterator):
-            X = list(X)
+            X = tuple(dict.fromkeys(X))
         Set_object.__init__(self, X, category=FiniteEnumeratedSets().or_subcategory(category))
 
     def random_element(self):
