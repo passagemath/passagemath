@@ -16,6 +16,7 @@ AUTHORS:
   ``GraphicsArray`` that was defined in the module :mod:`~sage.plot.graphics`.
 """
 import os
+import sage.structure.element  # break Cython circular import (refs #1604)
 from sage.misc.fast_methods import WithEqualityById
 from sage.structure.sage_object import SageObject
 from sage.misc.temporary_file import tmp_filename
