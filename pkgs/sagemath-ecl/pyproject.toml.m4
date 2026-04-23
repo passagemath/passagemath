@@ -66,7 +66,6 @@ host-requires = [
   "pkg:generic/maxima",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
-  "pkg:generic/singular",
 ]
 
 dependencies = [

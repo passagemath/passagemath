@@ -27,6 +27,7 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_ecl
         sagemath_flint
         sagemath_glpk
         sagemath_graphs
@@ -36,6 +37,7 @@ jobs:
         sagemath_iml
         sagemath_libbraiding
         sagemath_m4ri_m4rie
+        sagemath_maxima
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -53,6 +55,7 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_ecl-check
         sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
@@ -61,6 +64,7 @@ jobs:
         sagemath_homfly-check
         sagemath_iml-check
         sagemath_m4ri_m4rie-check
+        sagemath_maxima-check
         sagemath_modules-check
         sagemath_nauty-check
         sagemath_ntl-check
@@ -88,6 +92,7 @@ jobs:
         gsl
         highs
         iml
+        info
         libbraiding
         libhomfly
         libjpeg
@@ -112,6 +117,7 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_ecl
         sagemath_flint
         sagemath_glpk
         sagemath_graphs
@@ -121,6 +127,7 @@ jobs:
         sagemath_iml
         sagemath_libbraiding
         sagemath_m4ri_m4rie
+        sagemath_maxima
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -138,6 +145,7 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_ecl-check
         sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
@@ -146,6 +154,7 @@ jobs:
         sagemath_homfly-check
         sagemath_iml-check
         sagemath_m4ri_m4rie-check
+        sagemath_maxima-check
         sagemath_modules-check
         sagemath_nauty-check
         sagemath_ntl-check
@@ -176,6 +185,7 @@ jobs:
         gsl
         highs
         iml
+        info
         libbraiding
         libhomfly
         libjpeg
@@ -223,6 +233,7 @@ jobs:
         sagemath_cliquer
         sagemath_cmr
         sagemath_combinat
+        sagemath_ecl
         sagemath_flint
         sagemath_glpk
         sagemath_graphs
@@ -232,6 +243,7 @@ jobs:
         sagemath_iml
         sagemath_libbraiding
         sagemath_m4ri_m4rie
+        sagemath_maxima
         sagemath_modules
         sagemath_nauty
         sagemath_ntl
@@ -249,6 +261,7 @@ jobs:
         sagemath_cliquer-check
         sagemath_cmr-check
         sagemath_combinat-check
+        sagemath_ecl-check
         sagemath_flint-check
         sagemath_glpk-check
         sagemath_graphs-check
@@ -257,6 +270,7 @@ jobs:
         sagemath_homfly-check
         sagemath_iml-check
         sagemath_m4ri_m4rie-check
+        sagemath_maxima-check
         sagemath_modules-check
         sagemath_nauty-check
         sagemath_ntl-check
