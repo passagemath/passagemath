@@ -4,4 +4,7 @@ if [ "$UNAME" = "Darwin" ]; then
 fi
 
 cd src
+
+export CMAKE_POLICY_VERSION_MINIMUM=3.5
+
 sdh_pip_install .
