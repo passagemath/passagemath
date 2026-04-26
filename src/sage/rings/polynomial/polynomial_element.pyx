@@ -8579,9 +8579,9 @@ cdef class Polynomial(CommutativePolynomial):
 
             sage: # needs sage.libs.flint
             sage: Pol.<x> = CBF[]
-            sage: set((x^2 + 2).roots(multiplicities=False))
-            {[+/- ...e-19] + [-1.414213562373095 +/- ...e-17]*I,
-             [+/- ...e-19] + [1.414213562373095 +/- ...e-17]*I}
+            sage: sorted((x^2 + 2).roots(multiplicities=False), key=imag)
+            [[+/- ...e-19] + [-1.414213562373095 +/- ...e-17]*I,
+             [+/- ...e-19] + [1.414213562373095 +/- ...e-17]*I]
             sage: (x^3 - 1/2).roots(RBF, multiplicities=False)
             [[0.7937005259840997 +/- ...e-17]]
             sage: ((x - 1)^2).roots(multiplicities=False, proof=False)
