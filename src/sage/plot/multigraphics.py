@@ -239,6 +239,70 @@ class MultiGraphics(WithEqualityById, SageObject):
         except Exception:
             return None
 
+    def _repr_svg_(self):
+        r"""
+        Return an SVG representation of this graphics array.
+
+        This allows ``MultiGraphics`` objects to display as vector images in
+        plain Python Jupyter kernels that do not use Sage's rich output system.
+
+        Unlike :meth:`_render_svg_`, rendering failures are suppressed and
+        ``None`` is returned, matching the IPython ``_repr_svg_`` protocol.
+
+        OUTPUT: string -- SVG image data, or ``None`` if rendering fails
+
+        EXAMPLES::
+
+            sage: G = graphics_array([line([(0,0),(1,1)]), circle((0,0),1)])
+            sage: svg = G._repr_svg_()
+            sage: '<svg' in svg
+            True
+        """
+        try:
+            return self._render_svg_().decode('utf-8')
+        except Exception:
+            return None
+
+    def _render_svg_(self, **kwds):
+        r"""
+        Render this graphics array to SVG bytes.
+
+        Used by :meth:`_repr_svg_` (plain Python kernels). Raises on rendering
+        failure so that callers can surface errors.
+
+        Runtime keyword arguments (e.g. ``figsize``) are passed through to
+        :meth:`matplotlib`.
+
+        OUTPUT: ``bytes`` -- SVG image data (UTF-8 encoded XML)
+
+        EXAMPLES::
+
+            sage: G = graphics_array([line([(0,0),(1,1)]), circle((0,0),1)])
+            sage: svg = G._render_svg_()
+            sage: b'<svg' in svg
+            True
+        """
+        from io import BytesIO
+        from matplotlib import pyplot as plt, rcParams
+        from matplotlib.backends.backend_svg import FigureCanvasSVG
+        figsize = kwds.pop('figsize', None)
+        rc_backup = (rcParams['ps.useafm'], rcParams['pdf.use14corefonts'],
+                     rcParams['text.usetex'])
+        figure = None
+        try:
+            figure = self.matplotlib(figsize=figsize)
+            figure.set_canvas(FigureCanvasSVG(figure))
+            if isinstance(self, GraphicsArray):
+                figure.tight_layout()
+            buf = BytesIO()
+            figure.savefig(buf, format='svg')
+            return buf.getvalue()
+        finally:
+            if figure is not None:
+                plt.close(figure)
+            (rcParams['ps.useafm'], rcParams['pdf.use14corefonts'],
+             rcParams['text.usetex']) = rc_backup
+
     def _render_png_(self, **kwds):
         r"""
         Render this graphics array to PNG bytes.
@@ -713,8 +777,11 @@ class MultiGraphics(WithEqualityById, SageObject):
                 and dm.preferences.graphics != 'disable'):
             try:
                 if _running_in_notebook():
-                    from IPython.display import display, Image
-                    display(Image(self._render_png_(**kwds)))
+                    from IPython.display import display, SVG, Image
+                    try:
+                        display(SVG(self._render_svg_(**kwds).decode('utf-8')))
+                    except Exception:
+                        display(Image(self._render_png_(**kwds)))
                     return
             except Exception:
                 pass
