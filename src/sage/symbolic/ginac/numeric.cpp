@@ -1782,19 +1782,28 @@ const numeric numeric::pow_intexp(const numeric &exponent) const
 {
         if (not exponent.is_integer())
                 throw std::runtime_error("numeric::pow_intexp: exponent not integer");
-	// Because Sage may have simplified a fraction to an integer,
-	// we should check whether the type is MPQ as well as MPZ
-        if (exponent.t == MPZ) {
-                if (not mpz_fits_sint_p(exponent.v._bigint))
+        switch (exponent.t) {
+        case LONG:
+                return power(exponent.v._long);
+        case MPZ:
+                if (not mpz_fits_slong_p(exponent.v._bigint))
                         throw std::runtime_error("size of exponent exceeds signed long size");
                 return power(mpz_get_si(exponent.v._bigint));
+        case MPQ:
+                // Sage may have simplified a fraction to an integer, so check
+                // MPQ as well as MPZ.
+                if (not mpz_fits_slong_p(mpq_numref(exponent.v._bigrat)))
+                        throw std::runtime_error("size of exponent exceeds signed long size");
+                return power(mpz_get_si(mpq_numref(exponent.v._bigrat)));
+        case PYOBJECT:
+                // Exact Python objects can be integer-valued, for example the
+                // Gaussian integer -1 obtained while simplifying products of I.
+                // Convert through Sage's Integer constructor before extracting
+                // the machine exponent.
+                return pow_intexp(exponent.to_bigint());
+        default:
+                stub("invalid type: pow_intexp exponent type not handled");
         }
-	if (exponent.t == MPQ) {
-		if (not mpz_fits_sint_p(mpq_numref(exponent.v._bigrat)))
-			throw std::runtime_error("size of exponent exceeds signed long size");
-		return power(mpz_get_si(mpq_numref(exponent.v._bigrat)));
-        }
-        return power(exponent.v._long);
 }
 
 /** Numerical exponentiation.
