@@ -164,7 +164,7 @@ class Function_exp(GinacFunction):
     Python object equal to the integer `-1`::
 
         sage: t, q = var('t, q')                                                        # needs sage.symbolic
-        sage: exp(-I*pi*q).subs(q=-I/pi*log(2*t))                                      # needs sage.symbolic
+        sage: exp(-I*pi*q).subs(q=-I/pi*log(2*t))                                       # needs sage.symbolic
         1/2/t
 
     Check that :issue:`19918` is fixed::
