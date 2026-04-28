@@ -3054,10 +3054,14 @@ class GenericGraph(GenericGraph_pyx):
                 D[j, i] = label
 
         from sage.matrix.constructor import matrix
+        n = self.n_vertices()
+        if row_column_keys is not None:
+            # Free module morphisms require a dense underlying matrix
+            sparse = False
         if base_ring is None:
-            M = matrix(self.n_vertices(), D, sparse=sparse, **kwds)
+            M = matrix(n, n, D, sparse=sparse, **kwds)
         else:
-            M = matrix(base_ring, self.n_vertices(), D, sparse=sparse, **kwds)
+            M = matrix(base_ring, n, n, D, sparse=sparse, **kwds)
         return M
 
     def kirchhoff_matrix(self, weighted=None, indegree=True, normalized=False, signless=False, **kwds):
@@ -22044,7 +22048,7 @@ class GenericGraph(GenericGraph_pyx):
             sage: Graph()._layout_bounding_box({0: (3, 5), 1: (2, 7), 2: (-4, 2)})
             [-4, 3, 2, 7]
             sage: Graph()._layout_bounding_box({0: (3, 5), 1: (3.00000000001, 4.999999999999999)})
-            [2, 4.00000000001000, 4.00000000000000, 6]
+            [2, 4.00000000001..., 3.999999999999..., 6]
         """
         xs = [pos[v][0] for v in pos]
         ys = [pos[v][1] for v in pos]
