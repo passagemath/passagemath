@@ -11225,7 +11225,7 @@ class GenericGraph(GenericGraph_pyx):
             ....:         ('101', '011'): 2, ('101', '010'): 1}
             sage: flow_graph = g._build_flow_graph(flow, True)
             sage: flow_graph.edges(sort=True)
-            [('001', '010', 2), ('010', '101', 2), ('011', '101', 2)]
+            [('001', '010', 2), ('010', '101', 2), ('101', '011', 2)]
 
         Isolated zero-cost flow cycles are also removed::
 
