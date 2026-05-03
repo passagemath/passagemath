@@ -1035,6 +1035,26 @@ class Partition(CombinatorialElement):
         """
         print(self.ferrers_diagram())
 
+    def _macaulay2_init_(self, macaulay2=None):
+        """
+        Conversion to Macaulay2.
+
+        EXAMPLES::
+
+            sage: # optional - macaulay2
+            sage: P = Partition([4,3,1])
+            sage: m2 = macaulay2
+            sage: p = m2(P); p
+            Partition{4, 3, 1}
+            sage: p.conjugate()
+            Partition{3, 2, 2, 1}
+        """
+        if macaulay2 is None:
+            from sage.interfaces.macaulay2 import macaulay2 as m2_default
+            macaulay2 = m2_default
+
+        return macaulay2.new_from("Partition", list(self))
+
     def __truediv__(self, p):
         """
         Return the skew partition ``self / p``.

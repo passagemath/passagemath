@@ -540,6 +540,29 @@ class LatticePolytopeClass(Element, ConvexSet_compact,
         return sib.name('LatticePolytope')(sib(self._vertices),
                                            compute_vertices=False)
 
+    def _macaulay2_init_(self, macaulay2=None):
+        """
+        Conversion to Macaulay2.
+
+        EXAMPLES::
+
+            sage: # optional - macaulay2
+            sage: P = LatticePolytope([[0,0],[1,0],[1,2],[0,1]])
+            sage: m2 = macaulay2
+            sage: p = m2(P); p.vertices()
+            | 0 1 0 1 |
+            | 0 0 1 2 |
+            sage: p.nVertices()
+            4
+        """
+        if macaulay2 is None:
+            from sage.interfaces.macaulay2 import macaulay2 as m2_default
+            macaulay2 = m2_default
+
+        m = macaulay2(matrix([tuple(v) for v in self._vertices]).transpose())
+
+        return m.convexHull()
+
     def __contains__(self, point) -> bool:
         r"""
         Check if ``point`` is contained in ``self``.
