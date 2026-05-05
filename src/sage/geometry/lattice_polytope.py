@@ -549,11 +549,13 @@ class LatticePolytopeClass(Element, ConvexSet_compact,
             sage: # optional - macaulay2
             sage: P = LatticePolytope([[0,0],[1,0],[1,2],[0,1]])
             sage: m2 = macaulay2
-            sage: p = m2(P); p.vertices()
+            sage: p = m2(P); p.vertices()  # indirect doctest
             | 0 1 0 1 |
             | 0 0 1 2 |
             sage: p.nVertices()
             4
+            sage: p == P._macaulay2_init_()
+            True
         """
         if macaulay2 is None:
             from sage.interfaces.macaulay2 import macaulay2 as m2_default

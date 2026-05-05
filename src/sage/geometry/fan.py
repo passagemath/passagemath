@@ -1213,12 +1213,13 @@ class RationalPolyhedralFan(IntegralRayCollection, Callable, Container):
             sage: # optional - macaulay2
             sage: F = Fan([Cone([[0,1],[1,1]]),Cone([[1,1],[1,0]])])
             sage: m2 = macaulay2
-            sage: f = m2(F)
-            4
+            sage: f = m2(F)  # indirect doctest
             sage: f.isComplete()
             false
             sage: f.fVector()
-            {1, 2, 1}
+            {1, 3, 2}
+            sage: f == F._macaulay2_init_()
+            True
         """
         if macaulay2 is None:
             from sage.interfaces.macaulay2 import macaulay2 as m2_default

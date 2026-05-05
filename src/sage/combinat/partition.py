@@ -1044,7 +1044,7 @@ class Partition(CombinatorialElement):
             sage: # optional - macaulay2
             sage: P = Partition([4,3,1])
             sage: m2 = macaulay2
-            sage: p = m2(P); p
+            sage: p = m2(P); p  # indirect doctest
             Partition{4, 3, 1}
             sage: p.conjugate()
             Partition{3, 2, 2, 1}

@@ -1293,6 +1293,8 @@ class IntegralRayCollection(SageObject, Hashable, Iterable):
             sage: m2(c).rays()  # indirect doctest
             | 0 3 |
             | 1 4 |
+            sage: m2(c) == c._macaulay2_init_()
+            True
         """
         if macaulay2 is None:
             from sage.interfaces.macaulay2 import macaulay2 as m2_default
@@ -1560,12 +1562,14 @@ class ConvexRationalPolyhedralCone(IntegralRayCollection, Container, ConvexSet_c
             sage: # optional - macaulay2
             sage: C = Cone([[1,1],[1,2]])
             sage: m2 = macaulay2
-            sage: c = m2(C); c.rays()
+            sage: c = m2(C); c.rays()  # indirect doctest
             | 1 1 |
             | 1 2 |
-            sage: c.dualCone().rays()
+            sage: c.dualCone().rays()  # random
             | 2  -1 |
             | -1 1  |
+            sage: c == C._macaulay2_init_()
+            True
         """
         if macaulay2 is None:
             from sage.interfaces.macaulay2 import macaulay2 as m2_default
