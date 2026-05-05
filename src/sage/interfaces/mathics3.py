@@ -347,8 +347,8 @@ OTHER Examples::
 
 AUTHORS:
 
-- Sebastian Oehms (2021): first version from a copy of the Mathematica interface (see PR  :issue:`31778`).
-- Rashad Alsharpini (2026): port to Mathics3 10.0.0 (see :pr:`41885`).
+- Sebastian Oehms (2021): first version from a copy of the Mathematica interface (see :issue:`31778`).
+- Rashad Alsharpini (2026): port to Mathics3 10.0.0 (see SAGE pull request 41885).
 
 
 Thanks to Rocky Bernstein and Juan Mauricio Matera for their support. For further acknowledgments see `this list <https://github.com/Mathics3/mathics-core/blob/master/AUTHORS.txt>`__.
@@ -777,46 +777,27 @@ optional Sage package Mathics3 installed.
 
         EXAMPLES::
 
-        sage: mathics3.help('Sin')                   # optional - mathics3
-        '\n  Sin[z]\n    returns the sine of z.\n\n\nAttributes[Sin] = {Listable, NumericFunction, Protected}\n'
+            sage: mathics3.help('Sin')                   # optional - mathics3
+            'sine function\n'
 
-        sage: print(_)                              # optional - mathics3
-        <BLANKLINE>
-          Sin[z]
-            returns the sine of z.
-        <BLANKLINE>
-        <BLANKLINE>
-        Attributes[Sin] = {Listable, NumericFunction, Protected}
-        <BLANKLINE>
+            sage: print(_)                              # optional - mathics3
+            sine function
+            <BLANKLINE>
 
-        sage: print(mathics3.help('Sin', long=True)) # optional - mathics3
-        <BLANKLINE>
-          Sin[z]
-            returns the sine of z.
-        <BLANKLINE>
-        <BLANKLINE>
-        Attributes[Sin] = {Listable, NumericFunction, Protected}
-        <BLANKLINE>
+            sage: print(mathics3.help('Sin', long=True)) # optional - mathics3
+            sine function
+            <BLANKLINE>
+            Attributes[Sin] = {Listable, NumericFunction, Protected}
+            <BLANKLINE>
 
-        sage: print(mathics3.Factorial.__doc__)  # optional - mathics3
-        <BLANKLINE>
-          Factorial[n]
-          n!
-            computes the factorial of n.
-        <BLANKLINE>
-        <BLANKLINE>
-        Attributes[Factorial] = {Listable, NumericFunction, Protected, ReadProtected}
-        <BLANKLINE>
+            sage: print(mathics3.Factorial.__doc__)  # optional - mathics3
+            factorial
+            <BLANKLINE>
 
-        sage: u = mathics3('Pi')                 # optional - mathics3
-        sage: print(u.Cos.__doc__)              # optional - mathics3
-        <BLANKLINE>
-          Cos[z]
-            returns the cosine of z.
-        <BLANKLINE>
-        <BLANKLINE>
-        Attributes[Cos] = {Listable, NumericFunction, Protected}
-        <BLANKLINE>
+            sage: u = mathics3('Pi')                 # optional - mathics3
+            sage: print(u.Cos.__doc__)               # optional - mathics3
+            cosine function
+            <BLANKLINE>
         """
         if long:
             return self.eval('Information[%s]' % cmd)
@@ -826,7 +807,7 @@ optional Sage package Mathics3 installed.
         r"""
         EXAMPLES::
 
-            sage: msin = mathics3.Sin           # optional - mathics3
+            sage: msin = mathics3.Sin          # optional - mathics3
             sage: msin(0.2)                    # optional - mathics3
             0.19866933079506123
             sage: _ == sin(0.2)                # optional - mathics3
@@ -835,9 +816,6 @@ optional Sage package Mathics3 installed.
         if attrname[:1] == "_":
             raise AttributeError
         return InterfaceFunction(self, attrname)
-
-
-from sage.interfaces.abc import Mathics3Element as ABCMathics3Element
 
 
 def mathics3_to_sage(m_node, locals=None):
@@ -921,7 +899,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
     Element class of the Mathics3 interface.
 
     Its instances are usually constructed via the instance call of its parent.
-    It wrapes the Mathics3 library for this object. In a session Mathics3 methods
+    It wraps the Mathics3 library for this object. In a session Mathics3 methods
     can be obtained using tab completion.
 
     EXAMPLES::
@@ -1054,9 +1032,9 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
         r"""
         EXAMPLES::
 
-        sage: Q = mathics3('Sin[x Cos[y]]/Sqrt[1-x^2]')   # optional - mathics3
-        sage: latex(Q)                                    # optional - mathics3
-        \frac{\text{Sin}(x \text{Cos}(y))}{\sqrt{1-x^2}}
+            sage: Q = mathics3('Sin[x Cos[y]]/Sqrt[1-x^2]')   # optional - mathics3
+            sage: latex(Q)                                    # optional - mathics3
+            \frac{\text{Sin}\left[x \text{Cos}\left[y\right]\right]}{\sqrt{1-x^2}}
         """
         z = str(self.parent()('TeXForm[%s]' % self.name()))
         i = z.find('=')
