@@ -1,4 +1,4 @@
 cd $SAGE_ROOT/src/sage/
 
 echo "Testing interfaces/mathics3.py"
-sage -tp --long --optional="sage,mathics3" interfaces/mathics3.py  || sdh_die "Error testing Mathics interface"
+sage -tp --long --optional="sage,mathics3" interfaces/mathics3.py  || sdh_die "Error testing Mathics3 interface"

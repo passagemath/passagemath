@@ -93,12 +93,12 @@ class InterfaceFeature(Feature):
 
 class Mathics3(InterfaceFeature):
     r"""
-    A :class:`~sage.features.Feature` describing whether :class:`sage.interfaces.mathics.Mathics3`
+    A :class:`~sage.features.Feature` describing whether :class:`sage.interfaces.mathics3.Mathics3`
     is present and functional.
 
     EXAMPLES::
 
-        sage: from sage.features.interfaces import Mathics
+        sage: from sage.features.interfaces import Mathics3
         sage: Mathics3().is_present()  # not tested
         FeatureTestResult('mathics3', False)
     """
