@@ -29,7 +29,7 @@ py.install_sources(
   'magma_free.py',
   'maple.py',
   'mathematica.py',
-  'mathics.py',
+  'mathics3.py',
   'matlab.py',
   'maxima.py',
   'maxima_abstract.py',
@@ -83,4 +83,3 @@ foreach name, pyx : extension_data
     dependencies: [py_dep, gmp],
   )
 endforeach
-

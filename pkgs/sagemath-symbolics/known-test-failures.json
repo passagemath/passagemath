@@ -1549,7 +1549,7 @@
     "sage.interfaces.mathematica": {
         "ntests": 25
     },
-    "sage.interfaces.mathics": {
+    "sage.interfaces.mathics3": {
         "ntests": 30
     },
     "sage.interfaces.process": {

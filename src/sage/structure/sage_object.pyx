@@ -978,10 +978,10 @@ cdef class SageObject:
         I = sage.interfaces.mathematica.mathematica
         return self._interface_init_(I)
 
-    def _mathics_(self, G=None):
+    def _mathics3_(self, G=None):
         if G is None:
-            import sage.interfaces.mathics
-            G = sage.interfaces.mathics.mathics
+            import sage.interfaces.mathics3
+            G = sage.interfaces.mathics3.mathics3
         return self._interface_(G)
 
     _mathics_init_ = _mathematica_init_
