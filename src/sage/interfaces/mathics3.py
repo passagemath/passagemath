@@ -35,7 +35,7 @@ Mathics3 variable from within Sage. You can then call Mathics3
 functions on the new object; for example::
 
     sage: from sage.interfaces.mathics3 import mathics3
-    sage: mobj = mathics3(x^2-1); mobj       # optional - mathics3
+    sage: mobj = mathics3(x^2-1); mobj      # optional - mathics3
     -1 + x ^ 2
     sage: mobj.Factor()                     # optional - mathics3
     (-1 + x) (1 + x)
@@ -158,7 +158,7 @@ in Sage, this does not affect the `c` in Mathics3.
     sage: print(m('b + c x'))               # optional - mathics3
                  b + c x
     sage: print(m('b') + c*m('x'))          # optional - mathics3
-             b + 5 x
+    b + 5 x
 
 The Sage interfaces changes Sage lists into Mathics3 lists::
 
@@ -203,10 +203,10 @@ Next we find the minimum of a polynomial using the two different
 ways of accessing Mathics3::
 
     sage: mathics3('FindMinimum[x^3 - 6x^2 + 11x - 5, {x,3}]')  # not tested (since not supported, so far)
-    {0.6150998205402516, {x -> 2.5773502699629733}}
+    {0.6151, {x -> 2.57735}}
     sage: f = mathics3('x^3 - 6x^2 + 11x - 5')                  # optional - mathics3
     sage: f.FindMinimum(['x', 3])                               # not tested (since not supported, so far)
-    {0.6150998205402516, {x -> 2.5773502699629733}}
+    {0.6151, {x -> 2.57735}}
 
 Polynomial and Integer Factorization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -272,7 +272,7 @@ first examples test saving and loading to strings.
     sage: # optional - mathics3
     sage: x = mathics3(pi/2)
     sage: print(x)
-    Pi / 2
+    pi / 2
     sage: loads(dumps(x)) == x
     True
     sage: n = x.N(50)
@@ -336,7 +336,7 @@ OTHER Examples::
     sage: slist2[0].parent()                    # optional - mathics3
     Mathics3
     sage: slist3 = mlist.sage(); slist3         # optional - mathics3
-    ((1, 2), 3.00000000000000, 4.0 + 1.0*I)
+    [[1, 2], 3.00000000000000, 4.00000000000000 + 1.00000000000000*I]
 
 ::
 
@@ -750,11 +750,11 @@ optional Sage package Mathics3 installed.
 
             sage: mathics3.console()  # not tested
 
-            Mathics3 2.1.1.dev0
-            on CPython 3.9.2 (default, Mar 19 2021, 22:23:28)
-            using SymPy 1.7, mpmath 1.2.1, numpy 1.19.5, cython 0.29.21
+            Mathics3 10.0.0
+            Running on linux CPython 3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]
+            using SymPy 1.14.0, mpmath 1.3.0, numpy 2.4.3, cython 3.2.4, scipy 1.17.1, skimage Not installed
 
-            Copyright (C) 2011-2021 The Mathics3 Team.
+            Copyright (C) 2011-2026 The Mathics3 Team.
             This program comes with ABSOLUTELY NO WARRANTY.
             This is free software, and you are welcome to redistribute it
             under certain conditions.
@@ -1233,7 +1233,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
         EXAMPLES::
 
             sage: P = mathics3('Plot[Sin[x],{x,-2Pi,4Pi}]')   # optional - mathics3
-            sage: filename = tmp_filename()                   # optional - mathics3
+            sage: filename = tmp_filename(ext=".svg")         # optional - mathics3
             sage: P.save_image(filename, ImageSize=800)       # optional - mathics3
         """
         P = self._check_valid()
@@ -1256,7 +1256,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             sage: P = mathics3('Plot[Sin[x],{x,-2Pi,4Pi}]')       # optional - mathics3
 
         The following test requires a working X display on Linux so that the
-        Mathematica frontend can do the rendering (:issue:`23112`)::
+        Mathics3 frontend can do the rendering (:issue:`23112`)::
 
             sage: P._rich_repr_(dm)                               # optional - mathics3
             OutputImageSvg container
