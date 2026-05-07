@@ -405,7 +405,7 @@ def _mathics3_sympysage_symbol(self):
     This function replaces ``_sympysage_symbol`` to
     take care of the special names used in Mathics3.
     It is set to the method ``_sage_`` of the Sympy class
-    :class:`sympy.core.symbol.Sympol`.
+    :class:`sympy.core.symbol.Symbol`.
 
     EXAMPLES::
 
@@ -424,7 +424,7 @@ def _mathics3_sympysage_symbol(self):
     from sage.symbolic.ring import SR
     try:
         name = self.name
-        if name.startswith('_Mathics3_User_'):
+        if name.startswith('_Mathics`User_'):
             name = name.split('`')[1]
         elif name.startswith("_uGlobal_"):
             name = name[9:]
@@ -905,8 +905,10 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
     EXAMPLES::
 
         sage: # optional - mathics3
-        sage: me=mathics3(e); me
-        E
+        sage: me=mathics3(e); me.sage()
+        e
+        sage: me=mathics3('E'); me.sage()
+        e
         sage: type(me)
         <class 'sage.interfaces.mathics3.Mathics3Element'>
         sage: P = me.parent(); P
