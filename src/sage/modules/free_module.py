@@ -8372,7 +8372,7 @@ def element_class(R, is_sparse):
         <class 'sage.modules.free_module_element.FreeModuleElement_generic_sparse'>
         sage: sage.modules.free_module.element_class(FF, is_sparse=False)               # needs sage.libs.m4ri sage.rings.finite_rings
         <class 'sage.modules.vector_mod2_dense.Vector_mod2_dense'>
-        sage: FFntl = GF(2, impl='ntl')                                                # needs sage.rings.finite_rings
+        sage: FFntl = GF(2, impl='ntl')                                                 # needs sage.rings.finite_rings
         sage: sage.modules.free_module.element_class(FFntl, is_sparse=False)            # needs sage.rings.finite_rings
         <class 'sage.modules.vector_mod2_dense.Vector_mod2_dense'>
         sage: sage.modules.free_module.element_class(GF(7), is_sparse=False)
