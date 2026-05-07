@@ -29,6 +29,16 @@ TESTS::
     sage: w.set_immutable()
     sage: isinstance(hash(w), int)
     True
+
+    sage: F = GF(2, impl='ntl')
+    sage: V = VectorSpace(F, 2)
+    sage: v = V([F(1), F(0)])
+    sage: type(v)
+    <class 'sage.modules.vector_mod2_dense.Vector_mod2_dense'>
+    sage: v * v
+    1
+    sage: (v * v).parent() is F
+    True
 """
 
 # ****************************************************************************
@@ -41,7 +51,7 @@ TESTS::
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from sage.rings.finite_rings.integer_mod cimport IntegerMod_int, IntegerMod_abstract
+from sage.rings.finite_rings.integer_mod cimport IntegerMod_int
 from sage.rings.integer cimport Integer
 from sage.rings.rational cimport Rational
 from sage.structure.element cimport Element, Vector
@@ -50,6 +60,23 @@ cimport sage.modules.free_module_element as free_module_element
 from libc.stdint cimport uintptr_t
 
 from sage.libs.m4ri cimport mzd_add, mzd_copy, mzd_cmp, mzd_free, mzd_init, mzd_set_ui, mzd_read_bit, mzd_row, mzd_write_bit, m4ri_word
+
+
+cdef int mod2_bit(K, x) except -1:
+    """
+    Return the bit represented by ``x`` in an order-2 base ring.
+    """
+    if isinstance(x, (IntegerMod_int, int, Integer)):
+        return 1 if x % 2 else 0
+    elif isinstance(x, Rational):
+        if not (x.denominator() % 2):
+            raise ZeroDivisionError("inverse does not exist")
+        return 1 if (x.numerator() % 2) else 0
+    try:
+        return 1 if x % 2 else 0
+    except TypeError:
+        return 1 if K(x) else 0
+
 
 cdef class Vector_mod2_dense(free_module_element.FreeModuleElement):
     cdef _new_c(self):
@@ -236,16 +263,7 @@ cdef class Vector_mod2_dense(free_module_element.FreeModuleElement):
             if len(x) != self._degree:
                 raise TypeError("x must be a list of the right length")
             for i in range(len(x)):
-                xi = x[i]
-                if isinstance(xi, (IntegerMod_int, int, Integer)):
-                    # the if/else statement is because in some compilers, (-1)%2 is -1
-                    mzd_write_bit(self._entries, 0, i, 1 if xi % 2 else 0)
-                elif isinstance(xi, Rational):
-                    if not (xi.denominator() % 2):
-                        raise ZeroDivisionError("inverse does not exist")
-                    mzd_write_bit(self._entries, 0, i, 1 if (xi.numerator() % 2) else 0)
-                else:
-                    mzd_write_bit(self._entries, 0, i, xi % 2)
+                mzd_write_bit(self._entries, 0, i, mod2_bit(self._base_ring, x[i]))
         elif x != 0:
             raise TypeError("can't initialize vector from nonzero non-list")
         elif self._degree:
@@ -416,22 +434,19 @@ cdef class Vector_mod2_dense(free_module_element.FreeModuleElement):
            (0, 0)
         """
         cdef Py_ssize_t i
-        cdef IntegerMod_int n
         cdef Vector_mod2_dense r = right
         cdef m4ri_word tmp = 0
-        n = IntegerMod_int.__new__(IntegerMod_int)
-        IntegerMod_abstract.__init__(n, self.base_ring())
-        n.ivalue = 0
+        cdef int n = 0
         cdef m4ri_word *lrow = mzd_row(self._entries, 0)
         cdef m4ri_word *rrow = mzd_row(r._entries, 0)
         for i in range(self._entries.width):
             tmp ^= lrow[i] & rrow[i]
 
         for i in range(64):
-            n.ivalue ^= <int>(tmp & 1)
+            n ^= <int>(tmp & 1)
             tmp = tmp >> 1
 
-        return n
+        return self.base_ring()(n)
 
     cpdef _pairwise_product_(self, Vector right):
         """
@@ -522,7 +537,7 @@ cdef class Vector_mod2_dense(free_module_element.FreeModuleElement):
         return v
 
 
-def unpickle_v0(parent, entries, degree, is_immutable):
+def unpickle_v0(parent, entries, degree, immutable):
     """
     EXAMPLES::
 
@@ -535,13 +550,8 @@ def unpickle_v0(parent, entries, degree, is_immutable):
     cdef Vector_mod2_dense v
     v = Vector_mod2_dense.__new__(Vector_mod2_dense)
     v._init(degree, parent)
-    cdef int xi
 
     for i in range(degree):
-        if isinstance(entries[i], (IntegerMod_int, int, Integer)):
-            xi = entries[i]
-            mzd_write_bit(v._entries, 0, i, xi % 2)
-        else:
-            mzd_write_bit(v._entries, 0, i, entries[i] % 2)
-    v._is_immutable = int(is_immutable)
+        mzd_write_bit(v._entries, 0, i, mod2_bit(v._base_ring, entries[i]))
+    v._is_immutable = int(immutable)
     return v
