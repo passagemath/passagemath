@@ -1,3 +1,2 @@
 mathics3
-mathics3-scanner
 -c ${SAGE_VENV}/var/lib/sage/scripts/numpy/spkg-requirements.txt
