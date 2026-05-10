@@ -1356,7 +1356,7 @@ class sage__symbolic(JoinFeature):
                               PythonModule('sage.interfaces.magma_free'),
                               PythonModule('sage.interfaces.maple'),
                               PythonModule('sage.interfaces.mathematica'),
-                              PythonModule('sage.interfaces.mathics'),
+                              PythonModule('sage.interfaces.mathics3'),
                               PythonModule('sage.interfaces.sympy'),
                               PythonModule('sage.interfaces.sympy_wrapper'),
                              ], spkg='sagemath_symbolics', type='standard')

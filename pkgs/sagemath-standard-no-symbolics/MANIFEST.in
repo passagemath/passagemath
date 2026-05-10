@@ -32,7 +32,7 @@ exclude sage/interfaces/giac.p*
 exclude sage/interfaces/magma*.p*
 exclude sage/interfaces/maple*.p*
 exclude sage/interfaces/mathematica.p*
-exclude sage/interfaces/mathics.p*
+exclude sage/interfaces/mathics3.p*
 exclude sage/interfaces/maxima*.p*
 exclude sage/interfaces/qepcad.p*
 exclude sage/interfaces/sympy*.p*
