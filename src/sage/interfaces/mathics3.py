@@ -424,7 +424,7 @@ def _mathics3_sympysage_symbol(self):
     from sage.symbolic.ring import SR
     try:
         name = self.name
-        if name.startswith('_Mathics`User_'):
+        if name.startswith('_Mathics_User_'):
             name = name.split('`')[1]
         elif name.startswith("_uGlobal_"):
             name = name[9:]
