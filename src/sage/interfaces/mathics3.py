@@ -405,11 +405,11 @@ from mathics.core.systemsymbols import (
     SymbolKhinchin,
     SymbolPi,
 )
-from sage.all import (
-    Integer,
-    Rational,
-    RealNumber,
-    SR,
+
+from sage.rings.integer import Integer
+from sage.rings.rational import Rational
+from sage.rings.real_mpfr import RealNumber
+from sage.symbolic.constants import (
     catalan,
     e,
     euler_gamma,
