@@ -306,6 +306,11 @@ This method will not work when Mathics3's output includes:
 - Mathics3 functions with different parameters/parameter order to
   the Sage equivalent.
 
+A list of Mathics3 mathematical constants that we have Sage equivalents for:
+
+   sage: [mathics3(c).sage() for c in ('Catalan', 'Glaisher', 'GoldenRatio', 'EulerGamma', 'Khinchin', 'Pi')]
+   [catalan, glaisher, golden_ratio, euler_gamma, khinchin, pi]
+
 If you want to convert more complicated Mathics3 expressions, you can
 instead call ``mobj._sage_()`` and supply a translation dictionary::
 
@@ -387,14 +392,50 @@ as Sage's `e` (:issue:`29833`)::
 #                  https://www.gnu.org/licenses/
 ##############################################################################
 
+from typing import Dict, Final
 import os
 
+import sage.symbolic.expression
+from mathics.core.symbols import Symbol, SymbolFalse, SymbolTrue
+from mathics.core.systemsymbols import (
+    SymbolCatalan,
+    SymbolE,
+    SymbolEulerGamma,
+    SymbolGoldenRatio,
+    SymbolKhinchin,
+    SymbolPi,
+)
+from sage.all import (
+    Integer,
+    Rational,
+    RealNumber,
+    SR,
+    catalan,
+    e,
+    euler_gamma,
+    glaisher,
+    golden_ratio,
+    khinchin,
+    pi,
+)
 from sage.misc.cachefunc import cached_method
 from sage.interfaces.abc import Mathics3Element as ABCMathics3Element
 from sage.interfaces.interface import Interface, InterfaceElement, InterfaceFunction, InterfaceFunctionElement
 from sage.interfaces.tab_completion import ExtraTabCompletion
 from sage.misc.instancedoc import instancedoc
 from sage.structure.richcmp import rich_to_bool
+
+MATHICS3_TO_SAGE_CONSTANT: Final[Dict[Symbol, sage.symbolic.expression]] = {
+    SymbolCatalan: catalan,
+    SymbolEulerGamma: euler_gamma,
+    SymbolE: e,
+    SymbolFalse: False,
+    Symbol("System`Glaisher"): glaisher,
+    SymbolGoldenRatio: golden_ratio,
+    SymbolKhinchin: khinchin,
+    SymbolPi: pi,
+    SymbolTrue: True,
+}
 
 
 def _mathics3_sympysage_symbol(self):
@@ -819,7 +860,6 @@ optional Sage package Mathics3 installed.
 
 
 def mathics3_to_sage(m_node, locals=None):
-    from sage.all import SR, Integer, RealNumber, Rational, I, pi, e
     import mathics.core.atoms as m_atoms
     import mathics.core.symbols as m_symbols
     import mathics.core.expression as m_expr
@@ -834,18 +874,10 @@ def mathics3_to_sage(m_node, locals=None):
     if isinstance(m_node, m_atoms.Real):
         return RealNumber(str(m_node))
     if isinstance(m_node, m_symbols.Symbol):
-        name = m_node.get_name()
-        if name == "System`E":
-            return e
-        if name == "System`Pi":
-            return pi
-        if name == "System`I":
-            return I
-        if name == "System`True":
-            return True
-        if name == "System`False":
-            return False
+        if m_node in MATHICS3_TO_SAGE_CONSTANT:
+            return MATHICS3_TO_SAGE_CONSTANT[m_node]
 
+        name = m_node.get_name()
         name_short = name.split("`")[-1]
         if name_short in locals:
             return locals[name_short]
