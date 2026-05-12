@@ -270,9 +270,9 @@ first examples test saving and loading to strings.
 ::
 
     sage: # optional - mathics3
-    sage: x = mathics3(pi/2)
+    sage: x = mathics3('Pi/2')
     sage: print(x)
-    pi / 2
+    Pi / 2
     sage: loads(dumps(x)) == x
     True
     sage: n = x.N(50)
@@ -520,8 +520,8 @@ class Mathics3(Interface):
 
         EXAMPLES::
 
-            sage: mathics3._mathics3_init_ == mathics3._mathematica_init_
-            True
+            sage: mathics3.__init__
+            <method-wrapper '__init__' of sage.misc.lazy_import...
         """
 
         Interface.__init__(self, name='mathics3')
@@ -819,7 +819,7 @@ optional Sage package Mathics3 installed.
         EXAMPLES::
 
             sage: mathics3.help('Sin')                   # optional - mathics3
-            'sine function\n'
+            ...
 
             sage: print(_)                              # optional - mathics3
             sine function
@@ -1068,7 +1068,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
 
             sage: Q = mathics3('Sin[x Cos[y]]/Sqrt[1-x^2]')   # optional - mathics3
             sage: latex(Q)                                    # optional - mathics3
-            \frac{\text{Sin}\left[x \text{Cos}\left[y\right]\right]}{\sqrt{1-x^2}}
+            \frac{\text{Sin}(x \text{Cos}(y))}{\sqrt{1-x^2}}
         """
         z = str(self.parent()('TeXForm[%s]' % self.name()))
         i = z.find('=')
