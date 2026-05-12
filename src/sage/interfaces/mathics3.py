@@ -392,7 +392,7 @@ as Sage's `e` (:issue:`29833`)::
 #                  https://www.gnu.org/licenses/
 ##############################################################################
 
-from typing import Dict, Final
+from typing import Final
 import os
 
 import sage.symbolic.expression
@@ -425,7 +425,7 @@ from sage.interfaces.tab_completion import ExtraTabCompletion
 from sage.misc.instancedoc import instancedoc
 from sage.structure.richcmp import rich_to_bool
 
-MATHICS3_TO_SAGE_CONSTANT: Final[Dict[Symbol, sage.symbolic.expression]] = {
+MATHICS3_TO_SAGE_CONSTANT: Final[dict[Symbol, sage.symbolic.expression]] = {
     SymbolCatalan: catalan,
     SymbolEulerGamma: euler_gamma,
     SymbolE: e,
