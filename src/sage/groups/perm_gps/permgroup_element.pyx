@@ -1535,27 +1535,48 @@ cdef class PermutationGroupElement(MultiplicativeGroupElement):
         EXAMPLES::
 
             sage: G = SymmetricGroup(5)
-            sage: hash(G([2,1,5,3,4]))
-            -1203337681           # 32-bit
-            -1527414595000039889  # 64-bit
+            sage: g = G([2,1,5,3,4])
+            sage: hash(g) == hash(g)
+            True
+
+        The hash is compatible with equality of permutations from
+        different parents::
+
+            sage: from sage.groups.perm_gps.constructor import PermutationGroupElement
+            sage: h = PermutationGroupElement('(1,3,2)')
+            sage: k = PermutationGroupElement('(1,2,3)(4,5)')^2
+            sage: h == k
+            True
+            sage: hash(h) == hash(k)
+            True
 
         Check that the hash looks reasonable::
 
-            sage: s = set()
-            sage: s.update(map(hash,SymmetricGroup(0)))
-            sage: s.update(map(hash,SymmetricGroup(1)))
-            sage: s.update(map(hash,SymmetricGroup(2)))
-            sage: s.update(map(hash,SymmetricGroup(3)))
-            sage: s.update(map(hash,SymmetricGroup(4)))
-            sage: s.update(map(hash,SymmetricGroup(5)))
-            sage: len(s) == 1 + 1 + 2 + 6 + 24 + 120
+            sage: len(set(map(hash, SymmetricGroup(5)))) == 120
+            True
+
+        TESTS:
+
+        Check that :issue:`40041` is fixed::
+
+            sage: # needs sage.graphs
+            sage: pete = graphs.PetersenGraph()
+            sage: autpete = pete.automorphism_group()
+            sage: pointstabilizers = [[g for g in autpete if g(x) == x]
+            ....:                     for x in pete.vertices()]
+            sage: subgroup_check = [PermutationGroup(pointstabilizers[i])
+            ....:                   for i in range(len(pointstabilizers))]
+            sage: all(Set(subgroup_check[i]) == Set(pointstabilizers[i])
+            ....:     for i in range(10))
             True
         """
         cdef size_t i
-        cdef long ans = self.n
+        from_gap = self._parent._domain_from_gap
+        moved = []
         for i in range(self.n):
-            ans = (ans ^ (self.perm[i])) * 1000003L
-        return ans
+            if self.perm[i] != i:
+                moved.append((from_gap[i + 1], from_gap[self.perm[i] + 1]))
+        return hash(frozenset(moved))
 
     def tuple(self):
         r"""
