@@ -1558,7 +1558,7 @@ cdef class PermutationGroupElement(MultiplicativeGroupElement):
             True
             sage: len({a, b})
             2
-            sage: Set([a]) != Set([b])
+            sage: set([a]) != set([b])
             True
 
         Check that the hash looks reasonable::
@@ -1577,7 +1577,7 @@ cdef class PermutationGroupElement(MultiplicativeGroupElement):
             ....:                     for x in pete.vertices()]
             sage: subgroup_check = [PermutationGroup(pointstabilizers[i])
             ....:                   for i in range(len(pointstabilizers))]
-            sage: all(Set(subgroup_check[i]) == Set(pointstabilizers[i])
+            sage: all(set(subgroup_check[i]) == set(pointstabilizers[i])
             ....:     for i in range(10))
             True
         """
