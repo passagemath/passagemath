@@ -1550,6 +1550,17 @@ cdef class PermutationGroupElement(MultiplicativeGroupElement):
             sage: hash(h) == hash(k)
             True
 
+        Distinct cycles are not identified::
+
+            sage: a = PermutationGroupElement('(1,2,3)')
+            sage: b = PermutationGroupElement('(1,3,2)')
+            sage: a != b
+            True
+            sage: len({a, b})
+            2
+            sage: Set([a]) != Set([b])
+            True
+
         Check that the hash looks reasonable::
 
             sage: len(set(map(hash, SymmetricGroup(5)))) == 120
@@ -1572,11 +1583,11 @@ cdef class PermutationGroupElement(MultiplicativeGroupElement):
         """
         cdef size_t i
         from_gap = self._parent._domain_from_gap
-        moved = []
+        moved_pairs = []
         for i in range(self.n):
             if self.perm[i] != i:
-                moved.append((from_gap[i + 1], from_gap[self.perm[i] + 1]))
-        return hash(frozenset(moved))
+                moved_pairs.append((from_gap[i + 1], from_gap[self.perm[i] + 1]))
+        return hash(frozenset(moved_pairs))
 
     def tuple(self):
         r"""
