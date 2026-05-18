@@ -30,6 +30,9 @@ if [[ $machine =~ aarch64-* ]]; then
     sed -i.bak '/quadmath/d' M2/Macaulay2/d/CMakeLists.txt
 fi
 
+# Patch out rpath override
+sed -i.bak '/CMAKE_INSTALL_RPATH /d' M2/Macaulay2/CMakeLists.txt
+
 export Eigen3_DIR=$SAGE_LOCAL
 export Flint_DIR=$SAGE_LOCAL
 export Factory_DIR=$SAGE_LOCAL
