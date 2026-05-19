@@ -3112,9 +3112,15 @@ cdef class GLPKBackend(GenericBackend):
         """
         Destructor
         """
-        glp_delete_prob(self.lp)
-        sig_free(self.iocp)
-        sig_free(self.smcp)
+        if self.lp is not NULL:
+            glp_delete_prob(self.lp)
+            self.lp = NULL
+        if self.iocp is not NULL:
+            sig_free(self.iocp)
+            self.iocp = NULL
+        if self.smcp is not NULL:
+            sig_free(self.smcp)
+            self.smcp = NULL
 
 cdef void glp_callback(glp_tree* tree, void* info) noexcept:
     r"""
