@@ -33,6 +33,10 @@ from sage.libs.glpk.constants cimport *
 from sage.libs.glpk.lp cimport *
 
 
+cdef extern from "pythread.h":
+    unsigned long PyThread_get_thread_ident()
+
+
 cdef class GLPKBackend(GenericBackend):
     """
     MIP Backend that uses the GLPK solver.
@@ -46,6 +50,7 @@ cdef class GLPKBackend(GenericBackend):
 
             sage: p = MixedIntegerLinearProgram(solver='GLPK')
         """
+        self._owner_thread_ident = PyThread_get_thread_ident()
         self.lp = glp_create_prob()
         self.simplex_or_intopt = glp_simplex_then_intopt
         self.smcp = <glp_smcp* > sig_malloc(sizeof(glp_smcp))
@@ -3111,9 +3116,29 @@ cdef class GLPKBackend(GenericBackend):
     def __dealloc__(self):
         """
         Destructor
+
+        TESTS:
+
+        GLPK problem objects must be deleted in the same thread that created
+        them.  Otherwise GLPK aborts in its memory allocator::
+
+            sage: import gc
+            sage: import queue
+            sage: import threading
+            sage: q = queue.Queue()
+            sage: def create_backend():
+            ....:     from sage.numerical.backends.generic_backend import get_solver
+            ....:     q.put(get_solver(solver='GLPK'))
+            sage: t = threading.Thread(target=create_backend)
+            sage: t.start(); t.join()
+            sage: p = q.get()
+            sage: del p
+            sage: gc.collect() >= 0
+            True
         """
         if self.lp is not NULL:
-            glp_delete_prob(self.lp)
+            if PyThread_get_thread_ident() == self._owner_thread_ident:
+                glp_delete_prob(self.lp)
             self.lp = NULL
         if self.iocp is not NULL:
             sig_free(self.iocp)

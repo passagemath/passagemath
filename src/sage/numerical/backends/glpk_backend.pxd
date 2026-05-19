@@ -26,6 +26,7 @@ cdef class GLPKBackend(GenericBackend):
     cdef glp_iocp * iocp
     cdef glp_smcp * smcp
     cdef int simplex_or_intopt
+    cdef unsigned long _owner_thread_ident
     cdef search_tree_data_t search_tree_data
     cpdef __copy__(self)
     cpdef int print_ranges(self, filename=*) except -1

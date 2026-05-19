@@ -28,6 +28,7 @@ ctypedef struct c_a_data:
 
 cdef class GLPKGraphBackend():
     cdef glp_graph * graph
+    cdef unsigned long _owner_thread_ident
     cpdef add_vertex(self, name=?)
     cpdef list add_vertices(self, vertices)
     cpdef __add_vertices_sage(self, g)

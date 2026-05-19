@@ -78,6 +78,11 @@ from sage.libs.glpk.constants cimport *
 from sage.libs.glpk.graph cimport *
 from sage.numerical.mip import MIPSolverException
 
+
+cdef extern from "pythread.h":
+    unsigned long PyThread_get_thread_ident()
+
+
 cdef class GLPKGraphBackend():
     """
     GLPK Backend for access to GLPK graph functions.
@@ -201,6 +206,7 @@ cdef class GLPKGraphBackend():
 
         from sage.graphs.graph import Graph
 
+        self._owner_thread_ident = PyThread_get_thread_ident()
         self.graph = <glp_graph*> glp_create_graph(sizeof(c_v_data),
                        sizeof(c_a_data))
 
@@ -1342,5 +1348,6 @@ cdef class GLPKGraphBackend():
         Destructor
         """
         if self.graph is not NULL:
-            glp_delete_graph(self.graph)
+            if PyThread_get_thread_ident() == self._owner_thread_ident:
+                glp_delete_graph(self.graph)
         self.graph = NULL
