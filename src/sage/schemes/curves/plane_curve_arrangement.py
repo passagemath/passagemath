@@ -858,9 +858,9 @@ class ProjectivePlaneCurveArrangementElement(PlaneCurveArrangementElement):
             < x0, x1, x2 | x2*x0*x1*x0^-1*x2^-1*x1^-1,
                            x1*(x2*x0)^2*x2^-1*x1^-1*x0^-1*x2^-1*x0^-1 >
 
-        TESTS::
+        TESTS:
 
-        We check the issue:`42006` is fixed:
+        We check :issue:`42006` is fixed::
 
             sage: # needs sirocco
             sage: P.<u, v, w> = ProjectivePlaneCurveArrangements(QQ)
