@@ -4,7 +4,7 @@ Mathematical constants
 
 The following standard mathematical constants are defined in Sage,
 along with support for coercing them into GAP, PARI/GP, KASH,
-Maxima, Mathematica, Maple, Octave, and Singular::
+Maxima, Mathics3, Mathematica, Maple, Octave, and Singular::
 
     sage: pi
     pi
@@ -234,9 +234,11 @@ I = init_pynac_I()
 register_symbol(infinity, {'maxima': 'inf'}, 0)
 register_symbol(minus_infinity, {'maxima': 'minf'}, 0)
 register_symbol(unsigned_infinity, {'maxima': 'infinity'}, 0)
-register_symbol(I, {'mathematica': 'I'}, 0)
+register_symbol(I, {'mathematica': 'I',
+                    'mathics3': 'I'}, 0)
 register_symbol(True, {'giac': 'true',
                        'mathematica': 'True',
+                       'mathics3': 'True',
                        'maxima': 'true'}, 0)
 register_symbol(False, {'giac': 'false',
                         'mathematica': 'False',
@@ -561,7 +563,7 @@ class Pi(Constant):
         """
         conversions = dict(axiom='%pi', fricas='%pi', maxima='%pi', giac='pi',
                            gp='Pi', kash='PI',
-                           mathematica='Pi', matlab='pi', maple='Pi',
+                           mathics3='Pi', mathematica='Pi', matlab='pi', maple='Pi',
                            octave='pi', pari='Pi', pynac='Pi')
         Constant.__init__(self, name, conversions=conversions,
                           latex=r"\pi", mathml="<mi>&pi;</mi>",
@@ -688,7 +690,8 @@ TESTS::
 e = E()
 
 # Allow for backtranslation to this symbol from Mathematica (#29833).
-register_symbol(e, {'mathematica': 'E'})
+register_symbol(e, {'mathematica': 'E',
+                    'mathics3': 'E'})
 
 
 class NotANumber(Constant):
@@ -781,7 +784,7 @@ class GoldenRatio(Constant):
             sage: loads(dumps(golden_ratio))
             golden_ratio
         """
-        conversions = dict(mathematica='(1+Sqrt[5])/2', gp='(1+sqrt(5))/2',
+        conversions = dict(mathics3='(1+Sqrt[5])/2', mathematica='(1+Sqrt[5])/2', gp='(1+sqrt(5))/2',
                            maple='(1+sqrt(5))/2', maxima='(1+sqrt(5))/2',
                            pari='(1+sqrt(5))/2', octave='(1+sqrt(5))/2',
                            kash='(1+Sqrt(5))/2', giac='(1+sqrt(5))/2')
@@ -898,7 +901,7 @@ class Log2(Constant):
             sage: loads(dumps(log2))
             log2
         """
-        conversions = dict(mathematica='Log[2]', kash='Log(2)',
+        conversions = dict(mathics3='Log[2]', mathematica='Log[2]', kash='Log(2)',
                            maple='log(2)', maxima='log(2)', gp='log(2)',
                            pari='log(2)', octave='log(2)', giac='log(2)')
         Constant.__init__(self, name, conversions=conversions,
@@ -966,7 +969,7 @@ class EulerGamma(Constant):
             euler_gamma
         """
         conversions = dict(kash='EulerGamma(R)', maple='gamma',
-                           mathematica='EulerGamma', pari='Euler',
+                           mathics3='EulerGamma', mathematica='EulerGamma', pari='Euler',
                            maxima='%gamma', pynac='Euler', giac='euler_gamma',
                            fricas='-digamma(1)')
         Constant.__init__(self, name, conversions=conversions,
@@ -1036,7 +1039,7 @@ class Catalan(Constant):
             catalan
         """
         # kash: R is default prec
-        conversions = dict(mathematica='Catalan', kash='Catalan(R)',
+        conversions = dict(mathics3='Catalan', mathematica='Catalan', kash='Catalan(R)',
                            maple='Catalan', maxima='catalan',
                            pynac='Catalan')
         Constant.__init__(self, name, conversions=conversions,
@@ -1111,7 +1114,7 @@ class Khinchin(Constant):
             sage: loads(dumps(khinchin))
             khinchin
         """
-        conversions = dict(maxima='khinchin', mathematica='Khinchin',
+        conversions = dict(maxima='khinchin', mathics3='Khinchin', mathematica='Khinchin',
             pynac='Khinchin')
         Constant.__init__(self, name, conversions=conversions,
                           domain='positive')
@@ -1261,7 +1264,7 @@ class Glaisher(Constant):
             glaisher
         """
         conversions = dict(maxima='glaisher', pynac='Glaisher',
-            mathematica='Glaisher')
+            mathics3='Glaisher', mathematica='Glaisher')
         Constant.__init__(self, name, conversions=conversions,
                           domain='positive')
 
