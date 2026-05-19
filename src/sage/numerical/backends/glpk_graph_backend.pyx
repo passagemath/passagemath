@@ -71,6 +71,8 @@ Classes and methods
 #*****************************************************************************
 
 from cysignals.memory cimport check_allocarray, sig_free
+import threading
+import weakref
 
 from sage.cpython.string cimport str_to_bytes, char_to_str
 from sage.cpython.string import FS_ENCODING
@@ -81,6 +83,126 @@ from sage.numerical.mip import MIPSolverException
 
 cdef extern from "pythread.h":
     unsigned long PyThread_get_thread_ident()
+
+
+_glpk_graph_thread_data = threading.local()
+
+
+# GLPK allocates graph data from thread-local allocator state (its internal
+# ``ENV`` is keyed by ``pthread_key_t``).  A ``glp_graph`` must therefore be
+# deleted by the thread that created it; otherwise ``glp_free`` corrupts the
+# wrong thread's memory pool and eventually aborts.
+#
+# If the owning thread dies while another thread still holds a backend, the
+# ``glp_graph`` is leaked (see ``_GLPKGraphResource.__dealloc__``): freeing it
+# from any other thread would crash, and we cannot resurrect the owner thread.
+class _GLPKGraphThreadResources:
+    def __init__(self):
+        self.resources = []
+        self.has_released = False
+
+    def add(self, resource):
+        self.resources.append(resource)
+
+    def discard(self, resource):
+        try:
+            self.resources.remove(resource)
+        except ValueError:
+            pass
+
+    def collect_released(self):
+        if self.has_released:
+            self.has_released = False
+            for resource in list(self.resources):
+                resource._free_released_from_owner_thread()
+
+    def __del__(self):
+        for resource in self.resources:
+            resource._free_from_owner_thread()
+        self.resources.clear()
+
+
+def _glpk_graph_thread_resources():
+    try:
+        return _glpk_graph_thread_data.resources
+    except AttributeError:
+        resources = _GLPKGraphThreadResources()
+        _glpk_graph_thread_data.resources = resources
+        return resources
+
+
+cdef class _GLPKGraphResource:
+    cdef glp_graph * graph
+    cdef object owner_ref
+    cdef unsigned long owner_thread_ident
+    cdef bint registered
+    cdef bint released
+
+    def __cinit__(self):
+        self.graph = NULL
+        self.owner_ref = None
+        self.owner_thread_ident = 0
+        self.registered = False
+        self.released = False
+
+    cdef void init(self, glp_graph * graph) except *:
+        self.graph = graph
+        self.owner_thread_ident = PyThread_get_thread_ident()
+        owner = _glpk_graph_thread_resources()
+        self.owner_ref = weakref.ref(owner)
+        owner.add(self)
+        self.registered = True
+
+    cdef glp_graph * get(self) except NULL:
+        if self.graph is NULL:
+            raise RuntimeError("GLPK graph backend is no longer available")
+        if PyThread_get_thread_ident() != self.owner_thread_ident:
+            raise RuntimeError("GLPK graph backend cannot be used from a different thread")
+        owner = self.owner_ref()
+        if owner is not None:
+            owner.collect_released()
+        return self.graph
+
+    cdef void unregister(self) except *:
+        if self.registered:
+            owner = self.owner_ref()
+            if owner is not None:
+                owner.discard(self)
+            self.registered = False
+
+    cdef void free_from_owner_thread(self) noexcept:
+        if self.graph is not NULL:
+            glp_delete_graph(self.graph)
+            self.graph = NULL
+
+    cdef void request_release_from_owner_thread(self) except *:
+        self.released = True
+        owner = self.owner_ref()
+        if owner is not None:
+            owner.has_released = True
+
+    cpdef _free_from_owner_thread(self):
+        if PyThread_get_thread_ident() == self.owner_thread_ident:
+            self.free_from_owner_thread()
+
+    cpdef _free_released_from_owner_thread(self):
+        if (self.released
+                and PyThread_get_thread_ident() == self.owner_thread_ident):
+            self.free_from_owner_thread()
+            self.unregister()
+
+    cpdef release_from_backend(self):
+        if PyThread_get_thread_ident() == self.owner_thread_ident:
+            self.free_from_owner_thread()
+            self.unregister()
+        else:
+            self.request_release_from_owner_thread()
+
+    def __dealloc__(self):
+        if (self.graph is not NULL
+                and PyThread_get_thread_ident() == self.owner_thread_ident):
+            glp_delete_graph(self.graph)
+            self.graph = NULL
 
 
 cdef class GLPKGraphBackend():
@@ -206,11 +328,12 @@ cdef class GLPKGraphBackend():
 
         from sage.graphs.graph import Graph
 
-        self._owner_thread_ident = PyThread_get_thread_ident()
-        self.graph = <glp_graph*> glp_create_graph(sizeof(c_v_data),
-                       sizeof(c_a_data))
+        cdef _GLPKGraphResource resource = _GLPKGraphResource()
+        resource.init(<glp_graph*> glp_create_graph(sizeof(c_v_data),
+                       sizeof(c_a_data)))
+        self._graph_resource = resource
 
-        if self.graph is NULL:
+        if resource.graph is NULL:
             raise MemoryError("Error allocating memory.")
 
         self.s = 1
@@ -220,14 +343,14 @@ cdef class GLPKGraphBackend():
             fname = str_to_bytes(data, FS_ENCODING, 'surrogateescape')
             res = 0
             if format == "plain":
-                res = glp_read_graph(self.graph, fname)
+                res = glp_read_graph(self._graph(), fname)
             elif format == "dimacs":
-                res = glp_read_ccdata(self.graph, 0, fname)
+                res = glp_read_ccdata(self._graph(), 0, fname)
             elif format == "mincost":
-                res = glp_read_mincost(self.graph, 0, 0, sizeof(double),
+                res = glp_read_mincost(self._graph(), 0, 0, sizeof(double),
                    sizeof(double) + sizeof(double), fname)
             elif format == "maxflow":
-                res = glp_read_maxflow(self.graph, &self.s, &self.t,
+                res = glp_read_maxflow(self._graph(), &self.s, &self.t,
                    sizeof(double), fname)
             if res != 0:
                 raise IOError("Could not read graph from file %s" % (fname))
@@ -237,6 +360,18 @@ cdef class GLPKGraphBackend():
             self.__add_edges_sage(data)
         else:
             ValueError("Input data is not supported")
+
+    cdef glp_graph * _graph(self) except NULL:
+        return (<_GLPKGraphResource>self._graph_resource).get()
+
+    cdef glp_graph * _graph_or_null(self) noexcept:
+        cdef _GLPKGraphResource resource
+        if self._graph_resource is None:
+            return NULL
+        resource = <_GLPKGraphResource>self._graph_resource
+        if PyThread_get_thread_ident() != resource.owner_thread_ident:
+            return NULL
+        return resource.graph
 
     cpdef add_vertex(self, name=None):
         """
@@ -273,10 +408,10 @@ cdef class GLPKGraphBackend():
         if name is not None and self._find_vertex(name) >= 0:
             return None
 
-        cdef int vn = glp_add_vertices(self.graph, 1)
+        cdef int vn = glp_add_vertices(self._graph(), 1)
 
         if name is not None:
-            glp_set_vertex_name(self.graph, vn, str_to_bytes(name))
+            glp_set_vertex_name(self._graph(), vn, str_to_bytes(name))
             return None
 
         else:
@@ -289,7 +424,7 @@ cdef class GLPKGraphBackend():
                 s = str(vn_t - 1)
                 n = self._find_vertex(s)
 
-            glp_set_vertex_name(self.graph, vn, str_to_bytes(s))
+            glp_set_vertex_name(self._graph(), vn, str_to_bytes(s))
             return s
 
     cpdef __add_vertices_sage(self, g):
@@ -319,12 +454,12 @@ cdef class GLPKGraphBackend():
         if n < 1:
             raise ValueError("Graph must contain vertices")
 
-        glp_add_vertices(self.graph, n)
+        glp_add_vertices(self._graph(), n)
 
         for i in range(n):
-            vert = self.graph.v[i+1]
+            vert = self._graph().v[i+1]
             s = str(verts[i])
-            glp_set_vertex_name(self.graph, i + 1, str_to_bytes(s))
+            glp_set_vertex_name(self._graph(), i + 1, str_to_bytes(s))
 
             if g.get_vertex(verts[i]) is not None:
                 try:
@@ -332,7 +467,7 @@ cdef class GLPKGraphBackend():
                 except AttributeError:
                     pass
 
-        glp_create_v_index(self.graph)
+        glp_create_v_index(self._graph())
 
     cpdef list add_vertices(self, vertices):
         """
@@ -419,7 +554,7 @@ cdef class GLPKGraphBackend():
         if n < 0:
             raise KeyError("Vertex " + vertex + " does not exist.")
 
-        cdef glp_vertex* vert = self.graph.v[n+1]
+        cdef glp_vertex* vert = self._graph().v[n+1]
         cdef double val = demand
         (<c_v_data *>vert.data).rhs = val
 
@@ -487,7 +622,7 @@ cdef class GLPKGraphBackend():
         if i < 0:
             return None
 
-        cdef glp_vertex* vert = self.graph.v[i+1]
+        cdef glp_vertex* vert = self._graph().v[i+1]
         cdef c_v_data * vdata = <c_v_data *> vert.data
 
         return {
@@ -555,9 +690,9 @@ cdef class GLPKGraphBackend():
             ['A', 'B', 'C']
         """
 
-        return [char_to_str(self.graph.v[i+1].name)
-                if self.graph.v[i+1].name is not NULL else None
-                for i in range(self.graph.nv)]
+        return [char_to_str(self._graph().v[i+1].name)
+                if self._graph().v[i+1].name is not NULL else None
+                for i in range(self._graph().nv)]
 
     cpdef add_edge(self, u, v, dict params=None):
         """
@@ -609,7 +744,7 @@ cdef class GLPKGraphBackend():
 
         cdef glp_arc *a
 
-        a = glp_add_arc(self.graph, i+1, j+1)
+        a = glp_add_arc(self._graph(), i+1, j+1)
 
         if params is not None:
             try:
@@ -620,7 +755,7 @@ cdef class GLPKGraphBackend():
                 if "cost" in params:
                     (<c_a_data *>a.data).cost = params["cost"]
             except TypeError:
-                glp_del_arc(self.graph, a)
+                glp_del_arc(self._graph(), a)
                 raise TypeError("Invalid edge parameter.")
 
     cpdef list add_edges(self, edges):
@@ -680,20 +815,20 @@ cdef class GLPKGraphBackend():
         cdef glp_arc* a
         cdef int u
         cdef int v
-        cdef double cost
-        cdef double cap
-        cdef double low
+        cdef double cost = 0.0
+        cdef double cap = 0.0
+        cdef double low = 0.0
         cdef int isdirected = g.is_directed()
 
         for eu, ev, label in g.edges(sort=False):
             u_name = str(eu)
             v_name = str(ev)
-            u = glp_find_vertex(self.graph, str_to_bytes(u_name))
-            v = glp_find_vertex(self.graph, str_to_bytes(v_name))
+            u = glp_find_vertex(self._graph(), str_to_bytes(u_name))
+            v = glp_find_vertex(self._graph(), str_to_bytes(v_name))
             if u < 1 or v < 1:
                 raise IndexError(u_name + " or " + v_name + " not found")
 
-            a = glp_add_arc(self.graph, u, v)
+            a = glp_add_arc(self._graph(), u, v)
 
             if isinstance(label, dict):
                 if "cost" in label:
@@ -707,7 +842,7 @@ cdef class GLPKGraphBackend():
                     (<c_a_data *>a.data).low = low
 
             if not isdirected:
-                a = glp_add_arc(self.graph, v, u)
+                a = glp_add_arc(self._graph(), v, u)
                 if isinstance(label, dict):
                     if "cost" in label:
                         (<c_a_data *>a.data).cost = cost
@@ -759,8 +894,8 @@ cdef class GLPKGraphBackend():
         if i < 0 or j < 0:
             return None
 
-        cdef glp_vertex* vert_u = self.graph.v[i+1]
-        cdef glp_vertex* vert_v = self.graph.v[j+1]
+        cdef glp_vertex* vert_u = self._graph().v[i+1]
+        cdef glp_vertex* vert_v = self._graph().v[j+1]
         cdef glp_arc* a = vert_u.out
         while a is not NULL:
             if a.head == vert_v:
@@ -797,8 +932,8 @@ cdef class GLPKGraphBackend():
         cdef glp_arc* a
         edge_list = []
 
-        while i <= self.graph.nv:
-            vert_u = self.graph.v[i]
+        while i <= self._graph().nv:
+            vert_u = self._graph().v[i]
             a = vert_u.out
             while a is not NULL:
                 vert_v = a.head
@@ -853,7 +988,7 @@ cdef class GLPKGraphBackend():
         num[1] = i + 1
         cdef int ndel = 1
 
-        glp_del_vertices(self.graph, ndel, num)
+        glp_del_vertices(self._graph(), ndel, num)
 
     cpdef delete_vertices(self, list verts):
         r"""
@@ -895,7 +1030,7 @@ cdef class GLPKGraphBackend():
         for i,(v) in enumerate(verts_val):
             num[i+1] = v+1
 
-        glp_del_vertices(self.graph, ndel, num)
+        glp_del_vertices(self._graph(), ndel, num)
 
         sig_free(num)
 
@@ -938,12 +1073,15 @@ cdef class GLPKGraphBackend():
         if i < 0 or j < 0:
             return
 
-        cdef glp_vertex* vert_u = self.graph.v[i+1]
-        cdef glp_vertex* vert_v = self.graph.v[j+1]
+        cdef glp_vertex* vert_u = self._graph().v[i+1]
+        cdef glp_vertex* vert_v = self._graph().v[j+1]
         cdef glp_arc* a = vert_u.out
         cdef glp_arc* a2 = a
 
-        cdef double low, cap, cost, x
+        cdef double low = 0.0
+        cdef double cap = 0.0
+        cdef double cost = 0.0
+        cdef double x = 0.0
 
         if params is not None:
             if "low" in params:
@@ -958,7 +1096,7 @@ cdef class GLPKGraphBackend():
         while a is not NULL:
             a2 = a.t_next
             if a.head == vert_v and params is None:
-                glp_del_arc(self.graph, a)
+                glp_del_arc(self._graph(), a)
             elif a.head == vert_v:
                 del_it = True
                 if "low" in params:
@@ -974,7 +1112,7 @@ cdef class GLPKGraphBackend():
                     if (<c_a_data *>a.data).x != x:
                         del_it = False
                 if del_it:
-                    glp_del_arc(self.graph, a)
+                    glp_del_arc(self._graph(), a)
 
             a = a2
 
@@ -1033,8 +1171,11 @@ cdef class GLPKGraphBackend():
             -1
         """
 
-        glp_create_v_index(self.graph)
-        return glp_find_vertex(self.graph, str_to_bytes(name)) - 1
+        cdef glp_graph * graph = self._graph_or_null()
+        if graph is NULL:
+            return -1
+        glp_create_v_index(graph)
+        return glp_find_vertex(graph, str_to_bytes(name)) - 1
 
     cpdef int write_graph(self, fname) noexcept:
         r"""
@@ -1059,8 +1200,11 @@ cdef class GLPKGraphBackend():
             0
         """
 
+        cdef glp_graph * graph = self._graph_or_null()
+        if graph is NULL:
+            return -1
         fname = str_to_bytes(fname, FS_ENCODING, 'surrogateescape')
-        return glp_write_graph(self.graph, fname)
+        return glp_write_graph(graph, fname)
 
     cpdef int write_ccdata(self, fname) noexcept:
         r"""
@@ -1089,8 +1233,11 @@ cdef class GLPKGraphBackend():
             0
         """
 
+        cdef glp_graph * graph = self._graph_or_null()
+        if graph is NULL:
+            return -1
         fname = str_to_bytes(fname, FS_ENCODING, 'surrogateescape')
-        return glp_write_ccdata(self.graph, 0, fname)
+        return glp_write_ccdata(graph, 0, fname)
 
     cpdef int write_mincost(self, fname) noexcept:
         """
@@ -1115,8 +1262,11 @@ cdef class GLPKGraphBackend():
             0
         """
 
+        cdef glp_graph * graph = self._graph_or_null()
+        if graph is NULL:
+            return -1
         fname = str_to_bytes(fname, FS_ENCODING, 'surrogateescape')
-        return glp_write_mincost(self.graph, 0, 0, sizeof(double),
+        return glp_write_mincost(graph, 0, 0, sizeof(double),
                    sizeof(double) + sizeof(double), fname)
 
     cpdef double mincost_okalg(self) except -1:
@@ -1170,7 +1320,7 @@ cdef class GLPKGraphBackend():
             2 -> 3 0.0
         """
         cdef double graph_sol
-        cdef int status = glp_mincost_okalg(self.graph, 0, 0, sizeof(double),
+        cdef int status = glp_mincost_okalg(self._graph(), 0, 0, sizeof(double),
               2 * sizeof(double), &graph_sol,
               3 * sizeof(double), sizeof(double))
         if status == 0:
@@ -1223,11 +1373,11 @@ cdef class GLPKGraphBackend():
             0
         """
 
-        if self.graph.nv <= 0:
+        if self._graph().nv <= 0:
             raise IOError("Cannot write empty graph")
 
         fname = str_to_bytes(fname, FS_ENCODING, 'surrogateescape')
-        return glp_write_maxflow(self.graph, self.s+1, self.t+1,
+        return glp_write_maxflow(self._graph(), self.s+1, self.t+1,
                    sizeof(double), fname)
 
     cpdef double maxflow_ffalg(self, u=None, v=None) except -1:
@@ -1297,7 +1447,7 @@ cdef class GLPKGraphBackend():
         t += 1
 
         cdef double graph_sol
-        cdef int status = glp_maxflow_ffalg(self.graph, s, t, sizeof(double),
+        cdef int status = glp_maxflow_ffalg(self._graph(), s, t, sizeof(double),
                           &graph_sol, 3 * sizeof(double),
                           4 * sizeof(double))
         if status == 0:
@@ -1340,14 +1490,16 @@ cdef class GLPKGraphBackend():
             (1, 1.0, 0.0, 2.0)
         """
 
-        return glp_cpp(self.graph, 0, 2 * sizeof(double),
+        cdef glp_graph * graph = self._graph_or_null()
+        if graph is NULL:
+            return 0.0
+        return glp_cpp(graph, 0, 2 * sizeof(double),
                    3 * sizeof(double))
 
     def __dealloc__(self):
         """
         Destructor
         """
-        if self.graph is not NULL:
-            if PyThread_get_thread_ident() == self._owner_thread_ident:
-                glp_delete_graph(self.graph)
-        self.graph = NULL
+        if self._graph_resource is not None:
+            (<_GLPKGraphResource>self._graph_resource).release_from_backend()
+            self._graph_resource = None

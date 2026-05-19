@@ -22,12 +22,13 @@ ctypedef struct search_tree_data_t:
     double best_bound
 
 cdef class GLPKBackend(GenericBackend):
-    cdef glp_prob * lp
+    cdef object _lp_resource
     cdef glp_iocp * iocp
     cdef glp_smcp * smcp
     cdef int simplex_or_intopt
-    cdef unsigned long _owner_thread_ident
     cdef search_tree_data_t search_tree_data
+    cdef glp_prob * _lp(self) except NULL
+    cdef glp_prob * _lp_or_null(self) noexcept
     cpdef __copy__(self)
     cpdef int print_ranges(self, filename=*) except -1
     cpdef double get_row_dual(self, int variable) noexcept
