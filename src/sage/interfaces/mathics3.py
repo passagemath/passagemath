@@ -170,6 +170,25 @@ The Sage interfaces changes Sage lists into Mathics3 lists::
     sage: v.Solve(['x', 'y'])
     {{x -> 0, y -> -1}, {x -> 6, y -> 11}}
 
+Sage Numeric Constants
+~~~~~~~~~~~~~~~~~~~~~~
+
+All of Sage's numeric constants can be used in a mathics3() expression. For example::
+
+   sage: mathics3(pi/2)
+   Pi / 2
+
+   sage: mathics3(golden_ratio).N()
+   1.61803
+
+Similarly, many Mathics3's Numeric Constants translate into Sage's numeric constants::
+
+   sage: [mathics3(c).sage() for c in ('Catalan', 'Glaisher', 'GoldenRatio', 'EulerGamma', 'Khinchin', 'Pi')]
+   [catalan, glaisher, golden_ratio, euler_gamma, khinchin, pi]
+
+
+
+
 Function definitions
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -270,7 +289,7 @@ first examples test saving and loading to strings.
 ::
 
     sage:
-    sage: x = mathics3('Pi/2')
+    sage: x = mathics3('Pi/2')  # Or pi/2
     sage: print(x)
     Pi / 2
     sage: loads(dumps(x)) == x
@@ -305,11 +324,6 @@ This method will not work when Mathics3's output includes:
 - functions unknown to Sage;
 - Mathics3 functions with different parameters/parameter order to
   the Sage equivalent.
-
-A list of Mathics3 mathematical constants that we have Sage equivalents for:
-
-   sage: [mathics3(c).sage() for c in ('Catalan', 'Glaisher', 'GoldenRatio', 'EulerGamma', 'Khinchin', 'Pi')]
-   [catalan, glaisher, golden_ratio, euler_gamma, khinchin, pi]
 
 If you want to convert more complicated Mathics3 expressions, you can
 instead call ``mobj._sage_()`` and supply a translation dictionary::
