@@ -1583,10 +1583,9 @@ cdef class PermutationGroupElement(MultiplicativeGroupElement):
         """
         cdef size_t i
         from_gap = self._parent._domain_from_gap
-        moved_pairs = []
-        for i in range(self.n):
-            if self.perm[i] != i:
-                moved_pairs.append((from_gap[i + 1], from_gap[self.perm[i] + 1]))
+        moved_pairs = [(from_gap[i + 1], from_gap[self.perm[i] + 1])
+                       for i in range(self.n)
+                       if self.perm[i] != i]
         return hash(frozenset(moved_pairs))
 
     def tuple(self):
