@@ -48,7 +48,6 @@ object. However if you want to import Mathics3's output back to Sage,
 call the Mathics3 wrapper object's ``sage()`` method. This method returns
 a native Sage object::
 
-    sage:
     sage: mobj = mathics3(x^2-1)
     sage: mobj2 = mobj.Factor(); mobj2
     (-1 + x) (1 + x)
@@ -134,7 +133,6 @@ Some typical input
 
 We solve an equation and a system of two equations::
 
-    sage:
     sage: eqn = mathics3('3x + 5 == 14')
     sage: eqn
     5 + 3 x == 14
@@ -254,7 +252,6 @@ We can also factor a multivariate polynomial::
 
 We factor an integer::
 
-    sage:
     sage: n = mathics3(2434500)
     sage: n.FactorInteger()
     {{2, 2}, {3, 2}, {5, 3}, {541, 1}}
@@ -288,7 +285,6 @@ first examples test saving and loading to strings.
 
 ::
 
-    sage:
     sage: x = mathics3('Pi/2')  # Or pi/2
     sage: print(x)
     Pi / 2
@@ -377,7 +373,6 @@ TESTS:
 Check that numerical approximations via Mathics3's `N[]` function work
 correctly (:issue:`18888`, :issue:`28907`)::
 
-    sage:
     sage: mathics3('Pi/2').N(10)
     1.570796327
     sage: mathics3('Pi').N(10)
@@ -469,7 +464,6 @@ def _mathics3_sympysage_symbol(self):
 
     EXAMPLES::
 
-        sage:
         sage: from sage.interfaces.mathics3 import _mathics3_sympysage_symbol
         sage: mt = mathics3('t')
         sage: st = mt.to_sympy(); st
@@ -509,7 +503,6 @@ class Mathics3(Interface):
 
     EXAMPLES::
 
-        sage:
         sage: t = mathics3('Tan[I + 0.5]')
         sage: t.parent()
         Mathics3
@@ -973,7 +966,6 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
 
     EXAMPLES::
 
-        sage:
         sage: me=mathics3(e); me.sage()
         e
         sage: me=mathics3('E'); me.sage()
@@ -987,7 +979,6 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
 
     Access to the Mathics3 expression objects::
 
-        sage:
         sage: res = me._mathics3_result
         sage: type(res)
         <class 'mathics.core.evaluation.Result'>
@@ -998,7 +989,6 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
 
     Applying Mathics3 methods::
 
-        sage:
         sage: me.to_sympy()
         E
         sage: me.get_name()
@@ -1047,7 +1037,6 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
         r"""
         EXAMPLES::
 
-            sage:
             sage: a = mathics3(5*x)
             sage: res = a._mathics3_result
             sage: str(a) == res.result
@@ -1152,7 +1141,6 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
         Mathics3 lists of numbers/constants become Sage lists of
         numbers/constants::
 
-            sage:
             sage: m = mathics3('{{1., 4}, Pi, 3.2e100, I}')
             sage: s = m.sage(); s
             [[1.00000000000000, 4], pi, 3.20000000000000*e100, 1.00000000000000*I]
@@ -1189,7 +1177,6 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
 
         ::
 
-            sage:
             sage: m = mathics3('bla^2')
             sage: mb = m.sage()
             sage: var('bla')
@@ -1362,7 +1349,6 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
         r"""
         EXAMPLES::
 
-            sage:
             sage: mobj1 = mathics3([x^2-1, 2])
             sage: mobj2 = mathics3('{x^2-1, 2}')
             sage: mobj3 = mathics3('5*x + y')
