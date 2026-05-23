@@ -3018,7 +3018,6 @@ class GenericGraph(GenericGraph_pyx):
             Traceback (most recent call last):
             ...
             TypeError: Cannot convert NoneType to sage.structure.parent.Parent
-            
         Check that :issue:`2108` is fixed -- ``vertices=True`` used to crash on sparse graphs::
 
             sage: # needs sage.modules
