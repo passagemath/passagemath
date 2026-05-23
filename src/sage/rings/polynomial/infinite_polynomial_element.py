@@ -1496,6 +1496,8 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
             sage: X.<x> = InfinitePolynomialRing(QQ, implementation='sparse')
             sage: x[10]._common_polynomial_ring(x[5])
             Multivariate Polynomial Ring in x_10, x_5, x_0 over Rational Field
+            sage: (x[10] + x[2])._common_polynomial_ring(x[5])
+            Multivariate Polynomial Ring in x_10, x_5, x_2, x_0 over Rational Field
         """
         VarList = set(self._p.parent().variable_names())
         VarList.update(x._p.parent().variable_names())
@@ -1911,10 +1913,20 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
             sage: R.<a> = InfinitePolynomialRing(QQ, implementation="sparse")
             sage: P.<x> = LazyPowerSeriesRing(R)
             sage: f1 = P(lambda n: -a[n] if n else 1)
-            sage: diff(log(f1))[3]
+            sage: q = diff(log(f1))[3]; q
             -4*a_4 - 4*a_3*a_1 - 2*a_2^2 - 4*a_2*a_1^2 - a_1^4
-            sage: diff(log(f1))[3].coefficient(a[3]*a[1])
+            sage: q.coefficient(a[4])
             -4
+            sage: q.coefficient(a[3])
+            -4*a_1
+            sage: q.coefficient(a[3]*a[1])
+            -4
+            sage: q.coefficient({a[3]: 1, a[1]: 1})
+            -4
+            sage: q.monomial_coefficient(a[3]*a[1])
+            -4
+            sage: q.coefficient(a[5])
+            0
         """
         if isinstance(x, dict):
             if x:
@@ -1925,9 +1937,9 @@ class InfinitePolynomial_sparse(InfinitePolynomial):
 
             return self
 
-        try:
+        if self._p.parent() is x._p.parent():
             result = self._p.coefficient(x._p)
-        except TypeError:
+        else:
             R = self._common_polynomial_ring(x)
             result = R(self._p).coefficient(R(x._p))
 
@@ -2298,10 +2310,20 @@ class InfinitePolynomial_dense(InfinitePolynomial):
             sage: R.<a> = InfinitePolynomialRing(QQ)
             sage: P.<x> = LazyPowerSeriesRing(R)
             sage: f1 = P(lambda n: -a[n] if n else 1)
-            sage: diff(log(f1))[3]
+            sage: q = diff(log(f1))[3]; q
             -4*a_4 - 4*a_3*a_1 - 2*a_2^2 - 4*a_2*a_1^2 - a_1^4
-            sage: diff(log(f1))[3].coefficient(a[3]*a[1])
+            sage: q.coefficient(a[4])
             -4
+            sage: q.coefficient(a[3])
+            -4*a_1
+            sage: q.coefficient(a[3]*a[1])
+            -4
+            sage: q.coefficient({a[3]: 1, a[1]: 1})
+            -4
+            sage: q.monomial_coefficient(a[3]*a[1])
+            -4
+            sage: q.coefficient(a[5])
+            0
         """
         P = self.parent()
         if not self._p:
