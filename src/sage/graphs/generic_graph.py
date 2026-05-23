@@ -22058,7 +22058,7 @@ class GenericGraph(GenericGraph_pyx):
             sage: Graph()._layout_bounding_box({0: (3, 5), 1: (2, 7), 2: (-4, 2)})
             [-4, 3, 2, 7]
             sage: Graph()._layout_bounding_box({0: (3, 5), 1: (3.00000000001, 4.999999999999999)})
-            [2, 4.00000000001..., 3.999999999999..., 6]
+            [2, 4.00000000001000, 4.00000000000000, 6]
         """
         xs = [pos[v][0] for v in pos]
         ys = [pos[v][1] for v in pos]
