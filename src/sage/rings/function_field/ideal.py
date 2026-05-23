@@ -724,6 +724,50 @@ class FunctionFieldIdeal_module(FunctionFieldIdeal, Ideal_generic):
         """
         return self._module
 
+    def norm(self):
+        """
+        Return the norm of this fractional ideal.
+
+        EXAMPLES::
+
+            sage: K.<x> = FunctionField(QQ); R.<y> = K[]
+            sage: L.<y> = K.extension(y^2 - x^3 - 1)
+            sage: O = L.equation_order()
+            sage: O.ideal(x).norm()
+            x^2
+            sage: O.ideal(y).norm()
+            -x^3 - 1
+
+        The determinant is computed relative to the order lattice, so this
+        also works for orders whose basis is not the ambient power basis::
+
+            sage: O = L.order(x*y)
+            sage: O.ideal(x).norm()
+            x^2
+            sage: O.ideal(x*y).norm()
+            -x^5 - x^2
+
+        TESTS:
+
+        Check that ideals of equation orders compute their norm, instead of
+        falling back to the generic ideal implementation and returning the
+        ideal itself (:issue:`42215`)::
+
+            sage: q = 3
+            sage: Fq = GF(q)
+            sage: F.<S> = FunctionField(Fq)
+            sage: R.<x> = F[]
+            sage: K.<x> = F.extension(x^3 + x^2 + (2*S + 1)*x + 2*S^2)
+            sage: O = K.equation_order()
+            sage: O.ideal(x).norm()
+            S^2
+        """
+        if self.is_zero():
+            return self.ring().function_field().base_field().zero()
+
+        return (self.module().basis_matrix().det()
+                / self.ring().free_module().basis_matrix().det())
+
     def gens(self) -> tuple:
         """
         Return a set of generators of this ideal.
