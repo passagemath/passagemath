@@ -268,12 +268,6 @@ cdef class LazyImport():
         if self._object is not None:
             return self._object
 
-        if startup_guard and not self._at_startup:
-            warn(f"Resolving lazy import {self._name} during startup")
-        elif self._at_startup and not startup_guard:
-            if finish_startup_called:
-                warn(f"Option ``at_startup=True`` for lazy import {self._name} not needed anymore")
-
         try:
             self._object = getattr(__import__(self._module, {}, {}, [self._name]), self._name)
         except ImportError as e:
@@ -286,6 +280,21 @@ cdef class LazyImport():
         if self._feature:
             # for the case that the feature is hidden
             self._feature.require()
+
+        # Warn if the at_startup parameter looks incorrect. This
+        # method short-circuits (returns the cached response) only
+        # when self._object is not None. If the lazy import is backed
+        # by a missing feature, or if the import refers to a
+        # module/function that simply does not exist, an error will be
+        # raised above and self._object will remain None. The check
+        # below is not meant to be re-run (it will print spurious
+        # warnings times 2 through N with at_startup=True); to avoid
+        # that, we run it only after the import/feature test.
+        if startup_guard and not self._at_startup:
+            warn(f"Resolving lazy import {self._name} during startup")
+        elif self._at_startup and not startup_guard:
+            if finish_startup_called:
+                warn(f"Option ``at_startup=True`` for lazy import {self._name} not needed anymore")
 
         if self._deprecation is not None:
             from sage.misc.superseded import deprecation_cython as deprecation
