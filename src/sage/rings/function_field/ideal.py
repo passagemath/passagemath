@@ -725,8 +725,17 @@ class FunctionFieldIdeal_module(FunctionFieldIdeal, Ideal_generic):
         return self._module
 
     def norm(self):
-        """
+        r"""
         Return the norm of this fractional ideal.
+
+        This is the generator of the fractional index ideal of this ideal
+        in its order, over the maximal order of the base field. Equivalently,
+        if `B_I` and `B_O` are the basis matrices of the underlying modules
+        of the ideal and of the order in the ambient vector space, this is
+        `\det(B_I) / \det(B_O)`.
+
+        In particular, for a principal ideal this agrees with the field norm
+        of a generator and does not depend on the chosen order.
 
         EXAMPLES::
 
@@ -738,14 +747,19 @@ class FunctionFieldIdeal_module(FunctionFieldIdeal, Ideal_generic):
             sage: O.ideal(y).norm()
             -x^3 - 1
 
-        The determinant is computed relative to the order lattice, so this
-        also works for orders whose basis is not the ambient power basis::
+        The determinant is computed relative to the order lattice. Thus the
+        division by the determinant of the order basis accounts for orders
+        whose basis is not the ambient power basis::
 
             sage: O = L.order(x*y)
+            sage: O.free_module().basis_matrix().det()
+            x
             sage: O.ideal(x).norm()
             x^2
             sage: O.ideal(x*y).norm()
             -x^5 - x^2
+            sage: O.ideal(x*y).norm() == (x*y).norm()
+            True
 
         TESTS:
 
