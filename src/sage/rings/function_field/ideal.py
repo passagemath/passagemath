@@ -96,13 +96,14 @@ AUTHORS:
 
 from sage.misc.latex import latex
 from sage.combinat.subset import powerset
-from sage.structure.parent import Parent
+from sage.misc.misc_c import prod
+from sage.rings.ideal import Ideal_generic
 from sage.structure.element import Element
-from sage.structure.richcmp import richcmp
 from sage.structure.factorization import Factorization
+from sage.structure.parent import Parent
+from sage.structure.richcmp import richcmp
 from sage.structure.unique_representation import UniqueRepresentation
 from sage.categories.monoids import Monoids
-from sage.rings.ideal import Ideal_generic
 
 
 class FunctionFieldIdeal(Element):
@@ -779,8 +780,8 @@ class FunctionFieldIdeal_module(FunctionFieldIdeal, Ideal_generic):
         if self.is_zero():
             return self.ring().function_field().base_field().zero()
 
-        return (self.module().basis_matrix().det()
-                / self.ring().free_module().basis_matrix().det())
+        return (prod(self.module().basis_matrix().diagonal())
+                / prod(self.ring().free_module().basis_matrix().diagonal()))
 
     def gens(self) -> tuple:
         """
