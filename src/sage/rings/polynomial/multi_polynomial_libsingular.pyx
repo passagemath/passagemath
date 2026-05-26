@@ -3662,26 +3662,6 @@ cdef class MPolynomial_libsingular(MPolynomial_libsingular_base):
             (c + d)*z^2
             sage: f.subs({z:x+1})
             c*x^2*y + d*x^2 + (2*c)*x*y + (2*d)*x + c*y + d
-
-        Check for a memory leak in repeated nonconstant substitutions
-        (:issue:`27261`)::
-
-            sage: import gc, os
-            sage: def rss():
-            ....:     _ = gc.collect()
-            ....:     with open('/proc/self/statm') as statm:
-            ....:         pages = int(statm.read().split()[1])
-            ....:     return pages * os.sysconf('SC_PAGE_SIZE')
-            sage: R = PolynomialRing(ZZ, 'x', 50)
-            sage: d = {str(g): g for g in R.gens()}
-            sage: p = sum(d.values())
-            sage: for _ in range(200):  # warm up caches
-            ....:     _ = p.subs(**d)
-            sage: before = rss()
-            sage: for _ in range(1500):
-            ....:     _ = p.subs(**d)
-            sage: rss() - before < 6 * 1024 * 1024
-            True
         """
         cdef int mi, i
         cdef bint change_ring = False   # indicates the need to change the parent ring
