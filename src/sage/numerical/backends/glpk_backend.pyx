@@ -25,11 +25,14 @@ from libc.limits cimport INT_MAX
 from cysignals.memory cimport sig_malloc, sig_free
 from cysignals.signals cimport sig_on, sig_off
 from memory_allocator cimport MemoryAllocator
-import threading
 import weakref
 
 from sage.cpython.string cimport char_to_str, str_to_bytes
 from sage.cpython.string import FS_ENCODING
+from sage.numerical.backends.glpk_thread_resources import (
+    collect_glpk_released_for_current_thread,
+    glpk_thread_resources,
+)
 from sage.numerical.mip import MIPSolverException
 from sage.libs.glpk.constants cimport *
 from sage.libs.glpk.lp cimport *
@@ -39,53 +42,46 @@ cdef extern from "pythread.h":
     unsigned long PyThread_get_thread_ident()
 
 
-_glpk_thread_data = threading.local()
-
-
-# GLPK allocates problem data from thread-local allocator state (its internal
-# ``ENV`` is keyed by ``pthread_key_t``).  A ``glp_prob`` must therefore be
-# deleted by the thread that created it; otherwise ``glp_free`` corrupts the
-# wrong thread's memory pool and eventually aborts with
-# ``glp_free: memory allocation error``.
+# GLPK (built ``--enable-reentrant``, the default) keeps its allocator state in
+# a thread-local ``ENV`` block.  This is plain C thread-local storage -- a
+# ``static TLS void *tls`` in GLPK's ``env/tls.c``, where ``TLS`` expands to
+# ``_Thread_local``/``__thread`` -- *not* a ``pthread_key_t`` with a destructor.
+# Each ``ENV`` owns a doubly linked list of allocated blocks plus a block count
+# and byte total.  ``glp_create_prob`` allocates from the *calling* thread's
+# ``ENV``; ``glp_delete_prob`` -> ``glp_free`` -> ``dma`` looks up the *calling*
+# thread's ``ENV`` again and unlinks the blocks from it.  Run on a different
+# thread, that unlink corrupts the wrong thread's list and trips the guard
+# ``if (!(env->mem_count >= 1 && env->mem_total >= mbd->size))`` ->
+# ``xerror("glp_free: memory allocation error")`` -> ``abort()``.
 #
-# If the owning thread dies while another thread still holds a backend, the
-# ``glp_prob`` is leaked (see ``_GLPKProblemResource.__dealloc__``): freeing it
-# from any other thread would crash, and we cannot resurrect the owner thread.
-class _GLPKThreadResources:
-    def __init__(self):
-        self.resources = []
-        self.has_released = False
-
-    def add(self, resource):
-        self.resources.append(resource)
-
-    def discard(self, resource):
-        try:
-            self.resources.remove(resource)
-        except ValueError:
-            pass
-
-    def collect_released(self):
-        if self.has_released:
-            self.has_released = False
-            for resource in list(self.resources):
-                resource._free_released_from_owner_thread()
-
-    def __del__(self):
-        for resource in self.resources:
-            resource._free_from_owner_thread()
-        self.resources.clear()
-
-
-def _glpk_thread_resources():
-    try:
-        return _glpk_thread_data.resources
-    except AttributeError:
-        resources = _GLPKThreadResources()
-        _glpk_thread_data.resources = resources
-        return resources
-
-
+# A ``glp_prob`` must therefore be deleted by the thread that created it.  We
+# track each one per owner thread and only ever call ``glp_delete_prob`` from
+# that thread (immediately, or deferred to its next GLPK operation / its exit).
+#
+# Because GLPK installs no thread-exit destructor, the deferred free at owner
+# exit (``GLPKThreadResources.__del__``) must happen while the owner's TLS
+# ``ENV`` is still alive.  CPython tears down ``threading.local`` data during
+# ``PyThreadState_Clear`` -- on the dying thread, before the C runtime destroys
+# its ``__thread`` storage -- so this holds for normally joined threads.  (If
+# the owner were already gone, ``get_env_ptr`` would silently create a fresh
+# empty ``ENV`` and the free would abort just the same; hence we never free
+# from a non-owner thread.)
+#
+# If another thread drops the backend while the owner thread remains alive, the
+# ``glp_prob`` stays pending in the owner's resource list until that owner next
+# touches GLPK or exits.  This can temporarily retain memory in a long-lived
+# owner thread, but freeing from the non-owner thread would crash.  When the
+# owner exits normally, ``GLPKThreadResources.__del__`` frees the pointer even
+# if another thread still holds the Python backend object; later use then sees
+# an unavailable backend rather than a live cross-thread pointer.
+#
+# Thread safety of the bookkeeping itself relies on the GIL: the cross-thread
+# writes to ``released``/``has_released`` and the list mutations are only ever
+# interleaved at Python bytecode boundaries, which gives us the necessary
+# visibility and atomicity on CPython.  ``owner_thread_ident`` is an OS thread
+# id that the OS may reuse after a thread dies, but that is harmless here: the
+# pointer is freed and NULLed when the owner thread exits, so a later thread
+# reusing the id only ever sees a NULL ``lp``.
 cdef class _GLPKProblemResource:
     cdef glp_prob * lp
     cdef object owner_ref
@@ -103,7 +99,8 @@ cdef class _GLPKProblemResource:
     cdef void init(self, glp_prob * lp) except *:
         self.lp = lp
         self.owner_thread_ident = PyThread_get_thread_ident()
-        owner = _glpk_thread_resources()
+        owner = glpk_thread_resources()
+        collect_glpk_released_for_current_thread()
         self.owner_ref = weakref.ref(owner)
         owner.add(self)
         self.registered = True
@@ -113,9 +110,7 @@ cdef class _GLPKProblemResource:
             raise RuntimeError("GLPK backend is no longer available")
         if PyThread_get_thread_ident() != self.owner_thread_ident:
             raise RuntimeError("GLPK backend cannot be used from a different thread")
-        owner = self.owner_ref()
-        if owner is not None:
-            owner.collect_released()
+        collect_glpk_released_for_current_thread()
         return self.lp
 
     cdef void unregister(self) except *:
@@ -174,10 +169,11 @@ cdef class GLPKBackend(GenericBackend):
             sage: p = MixedIntegerLinearProgram(solver='GLPK')
         """
         cdef _GLPKProblemResource resource = _GLPKProblemResource()
-        resource.init(glp_create_prob())
-        self._lp_resource = resource
-        if resource.lp is NULL:
+        cdef glp_prob * lp = glp_create_prob()
+        if lp is NULL:
             raise MemoryError("Error allocating memory.")
+        resource.init(lp)
+        self._lp_resource = resource
         self.simplex_or_intopt = glp_simplex_then_intopt
         self.smcp = <glp_smcp* > sig_malloc(sizeof(glp_smcp))
         glp_init_smcp(self.smcp)
@@ -205,6 +201,7 @@ cdef class GLPKBackend(GenericBackend):
         resource = <_GLPKProblemResource>self._lp_resource
         if PyThread_get_thread_ident() != resource.owner_thread_ident:
             return NULL
+        collect_glpk_released_for_current_thread()
         return resource.lp
 
     cpdef int add_variable(self, lower_bound=0.0, upper_bound=None, binary=False, continuous=False, integer=False, obj=0.0, name=None) except -1:
@@ -264,21 +261,22 @@ cdef class GLPKBackend(GenericBackend):
         elif vtype != 1:
             raise ValueError("Exactly one parameter of 'binary', 'integer' and 'continuous' must be 'True'.")
 
-        glp_add_cols(self._lp(), 1)
-        cdef int n_var = glp_get_num_cols(self._lp())
+        cdef glp_prob * lp = self._lp()
+        glp_add_cols(lp, 1)
+        cdef int n_var = glp_get_num_cols(lp)
 
         self.variable_lower_bound(n_var - 1, lower_bound)
         self.variable_upper_bound(n_var - 1, upper_bound)
 
         if continuous:
-            glp_set_col_kind(self._lp(), n_var, GLP_CV)
+            glp_set_col_kind(lp, n_var, GLP_CV)
         elif binary:
-            glp_set_col_kind(self._lp(), n_var, GLP_BV)
+            glp_set_col_kind(lp, n_var, GLP_BV)
         elif integer:
-            glp_set_col_kind(self._lp(), n_var, GLP_IV)
+            glp_set_col_kind(lp, n_var, GLP_IV)
 
         if name is not None:
-            glp_set_col_name(self._lp(), n_var, str_to_bytes(name))
+            glp_set_col_name(lp, n_var, str_to_bytes(name))
 
         if obj:
             self.objective_coefficient(n_var - 1, obj)
@@ -345,10 +343,11 @@ cdef class GLPKBackend(GenericBackend):
         elif vtype != 1:
             raise ValueError("Exactly one parameter of 'binary', 'integer' and 'continuous' must be 'True'.")
 
-        glp_add_cols(self._lp(), number)
+        cdef glp_prob * lp = self._lp()
+        glp_add_cols(lp, number)
 
         cdef int n_var
-        n_var = glp_get_num_cols(self._lp())
+        n_var = glp_get_num_cols(lp)
 
         cdef int i
 
@@ -356,17 +355,17 @@ cdef class GLPKBackend(GenericBackend):
             self.variable_lower_bound(n_var - i - 1, lower_bound)
             self.variable_upper_bound(n_var - i - 1, upper_bound)
             if continuous:
-                glp_set_col_kind(self._lp(), n_var - i, GLP_CV)
+                glp_set_col_kind(lp, n_var - i, GLP_CV)
             elif binary:
-                glp_set_col_kind(self._lp(), n_var - i, GLP_BV)
+                glp_set_col_kind(lp, n_var - i, GLP_BV)
             elif integer:
-                glp_set_col_kind(self._lp(), n_var - i, GLP_IV)
+                glp_set_col_kind(lp, n_var - i, GLP_IV)
 
             if obj:
                 self.objective_coefficient(n_var - i - 1, obj)
 
             if names is not None:
-                glp_set_col_name(self._lp(), n_var - i,
+                glp_set_col_name(lp, n_var - i,
                                  str_to_bytes(names[number - i - 1]))
 
         return n_var - 1
@@ -543,11 +542,12 @@ cdef class GLPKBackend(GenericBackend):
             [1.0, 1.0, 2.0, 1.0, 3.0]
         """
         cdef int i
+        cdef glp_prob * lp = self._lp()
 
         for i,v in enumerate(coeff):
-            glp_set_obj_coef(self._lp(), i+1, v)
+            glp_set_obj_coef(lp, i+1, v)
 
-        glp_set_obj_coef(self._lp(), 0, d)
+        glp_set_obj_coef(lp, 0, d)
 
         self.obj_constant_term = d
 
@@ -644,13 +644,14 @@ cdef class GLPKBackend(GenericBackend):
             ValueError: The constraint's index i must satisfy 0 <= i < number_of_constraints
         """
         cdef int rows[2]
+        cdef glp_prob * lp = self._lp()
 
-        if i < 0 or i >= glp_get_num_rows(self._lp()):
+        if i < 0 or i >= glp_get_num_rows(lp):
             raise ValueError("The constraint's index i must satisfy 0 <= i < number_of_constraints")
 
         rows[1] = i + 1
-        glp_del_rows(self._lp(), 1, rows)
-        glp_std_basis(self._lp())
+        glp_del_rows(lp, 1, rows)
+        glp_std_basis(lp)
 
     cpdef remove_constraints(self, constraints):
         r"""
@@ -688,8 +689,9 @@ cdef class GLPKBackend(GenericBackend):
         """
         cdef int i, c
         cdef int m = len(constraints)
+        cdef glp_prob * lp = self._lp()
         cdef int * rows = <int *>sig_malloc((m + 1) * sizeof(int *))
-        cdef int nrows = glp_get_num_rows(self._lp())
+        cdef int nrows = glp_get_num_rows(lp)
 
         for i in range(m):
 
@@ -700,9 +702,9 @@ cdef class GLPKBackend(GenericBackend):
 
             rows[i+1] = c + 1
 
-        glp_del_rows(self._lp(), m, rows)
+        glp_del_rows(lp, m, rows)
         sig_free(rows)
-        glp_std_basis(self._lp())
+        glp_std_basis(lp)
 
     cpdef add_linear_constraint(self, coefficients, lower_bound, upper_bound, name=None):
         """
@@ -756,8 +758,9 @@ cdef class GLPKBackend(GenericBackend):
             if index < 0 or index > (self.ncols() - 1):
                 raise ValueError("invalid variable index %d" % index)
 
-        glp_add_rows(self._lp(), 1)
-        cdef int n = glp_get_num_rows(self._lp())
+        cdef glp_prob * lp = self._lp()
+        glp_add_rows(lp, 1)
+        cdef int n = glp_get_num_rows(lp)
 
         cdef MemoryAllocator mem = MemoryAllocator()
         cdef int * row_i
@@ -774,21 +777,21 @@ cdef class GLPKBackend(GenericBackend):
             i += 1
 
         sig_on()
-        glp_set_mat_row(self._lp(), n, n_coeff, row_i, row_values)
+        glp_set_mat_row(lp, n, n_coeff, row_i, row_values)
         sig_off()
 
         if upper_bound is not None and lower_bound is None:
-            glp_set_row_bnds(self._lp(), n, GLP_UP, upper_bound, upper_bound)
+            glp_set_row_bnds(lp, n, GLP_UP, upper_bound, upper_bound)
         elif lower_bound is not None and upper_bound is None:
-            glp_set_row_bnds(self._lp(), n, GLP_LO, lower_bound, lower_bound)
+            glp_set_row_bnds(lp, n, GLP_LO, lower_bound, lower_bound)
         elif upper_bound is not None and lower_bound is not None:
             if lower_bound == upper_bound:
-                glp_set_row_bnds(self._lp(), n, GLP_FX, lower_bound, upper_bound)
+                glp_set_row_bnds(lp, n, GLP_FX, lower_bound, upper_bound)
             else:
-                glp_set_row_bnds(self._lp(), n, GLP_DB, lower_bound, upper_bound)
+                glp_set_row_bnds(lp, n, GLP_DB, lower_bound, upper_bound)
 
         if name is not None:
-            glp_set_row_name(self._lp(), n, str_to_bytes(name))
+            glp_set_row_name(lp, n, str_to_bytes(name))
 
     cpdef add_linear_constraints(self, int number, lower_bound, upper_bound, names=None):
         """
@@ -820,22 +823,23 @@ cdef class GLPKBackend(GenericBackend):
         if lower_bound is None and upper_bound is None:
             raise ValueError("At least one of 'upper_bound' or 'lower_bound' must be set.")
 
-        glp_add_rows(self._lp(), number)
-        cdef int n = glp_get_num_rows(self._lp())
+        cdef glp_prob * lp = self._lp()
+        glp_add_rows(lp, number)
+        cdef int n = glp_get_num_rows(lp)
 
         cdef int i
         for 0<= i < number:
             if upper_bound is not None and lower_bound is None:
-                glp_set_row_bnds(self._lp(), n-i, GLP_UP, upper_bound, upper_bound)
+                glp_set_row_bnds(lp, n-i, GLP_UP, upper_bound, upper_bound)
             elif lower_bound is not None and upper_bound is None:
-                glp_set_row_bnds(self._lp(), n-i, GLP_LO, lower_bound, lower_bound)
+                glp_set_row_bnds(lp, n-i, GLP_LO, lower_bound, lower_bound)
             elif upper_bound is not None and lower_bound is not None:
                 if lower_bound == upper_bound:
-                    glp_set_row_bnds(self._lp(), n-i, GLP_FX, lower_bound, upper_bound)
+                    glp_set_row_bnds(lp, n-i, GLP_FX, lower_bound, upper_bound)
                 else:
-                    glp_set_row_bnds(self._lp(), n-i, GLP_DB, lower_bound, upper_bound)
+                    glp_set_row_bnds(lp, n-i, GLP_DB, lower_bound, upper_bound)
             if names is not None:
-                glp_set_row_name(self._lp(), n-i,
+                glp_set_row_name(lp, n-i,
                                  str_to_bytes(names[number-i-1]))
 
     cpdef row(self, int index):
@@ -879,7 +883,8 @@ cdef class GLPKBackend(GenericBackend):
         if index < 0 or index > (self.nrows() - 1):
             raise ValueError("invalid row index %d" % index)
 
-        cdef int n = glp_get_num_cols(self._lp())
+        cdef glp_prob * lp = self._lp()
+        cdef int n = glp_get_num_cols(lp)
         cdef MemoryAllocator mem = MemoryAllocator()
         cdef int * c_indices = <int*>mem.allocarray(n+1, sizeof(int))
         cdef double * c_values = <double*>mem.allocarray(n+1, sizeof(double))
@@ -887,7 +892,7 @@ cdef class GLPKBackend(GenericBackend):
         cdef list values = []
         cdef int i,j
 
-        i = glp_get_mat_row(self._lp(), index + 1, c_indices, c_values)
+        i = glp_get_mat_row(lp, index + 1, c_indices, c_values)
         for 0 < j <= i:
             indices.append(c_indices[j]-1)
             values.append(c_values[j])
@@ -937,8 +942,9 @@ cdef class GLPKBackend(GenericBackend):
         if index < 0 or index > (self.nrows() - 1):
             raise ValueError("invalid row index %d" % index)
 
-        ub = glp_get_row_ub(self._lp(), index + 1)
-        lb = glp_get_row_lb(self._lp(), index +1)
+        cdef glp_prob * lp = self._lp()
+        ub = glp_get_row_ub(lp, index + 1)
+        lb = glp_get_row_lb(lp, index +1)
 
         return (
             (lb if lb != -DBL_MAX else None),
@@ -989,8 +995,9 @@ cdef class GLPKBackend(GenericBackend):
         if index < 0 or index > (self.ncols() - 1):
             raise ValueError("invalid column index %d" % index)
 
-        ub = glp_get_col_ub(self._lp(), index +1)
-        lb = glp_get_col_lb(self._lp(), index +1)
+        cdef glp_prob * lp = self._lp()
+        ub = glp_get_col_ub(lp, index +1)
+        lb = glp_get_col_lb(lp, index +1)
 
         return (
             (lb if lb != -DBL_MAX else None),
@@ -1032,8 +1039,9 @@ cdef class GLPKBackend(GenericBackend):
             5
         """
 
-        glp_add_cols(self._lp(), 1)
-        cdef int n = glp_get_num_cols(self._lp())
+        cdef glp_prob * lp = self._lp()
+        glp_add_cols(lp, 1)
+        cdef int n = glp_get_num_cols(lp)
 
         cdef int * col_i
         cdef double * col_values
@@ -1046,8 +1054,8 @@ cdef class GLPKBackend(GenericBackend):
         for i,v in enumerate(coeffs):
             col_values[i+1] = v
 
-        glp_set_mat_col(self._lp(), n, len(indices), col_i, col_values)
-        glp_set_col_bnds(self._lp(), n, GLP_LO, 0,0)
+        glp_set_mat_col(lp, n, len(indices), col_i, col_values)
+        glp_set_col_bnds(lp, n, GLP_LO, 0,0)
         sig_free(col_i)
         sig_free(col_values)
 
@@ -1259,21 +1267,22 @@ cdef class GLPKBackend(GenericBackend):
         cdef int solution_status = GLP_UNDEF
         global solve_status_msg
         global solution_status_msg
+        cdef glp_prob * lp = self._lp()
 
         if (self.simplex_or_intopt == glp_simplex_only
             or self.simplex_or_intopt == glp_simplex_then_intopt
             or self.simplex_or_intopt == glp_exact_simplex_only):
             if self.simplex_or_intopt == glp_exact_simplex_only:
-                solve_status = glp_exact(self._lp(), self.smcp)
+                solve_status = glp_exact(lp, self.smcp)
             else:
-                solve_status = glp_simplex(self._lp(), self.smcp)
-            solution_status = glp_get_status(self._lp())
+                solve_status = glp_simplex(lp, self.smcp)
+            solution_status = glp_get_status(lp)
 
         if ((self.simplex_or_intopt == glp_intopt_only)
             or (self.simplex_or_intopt == glp_simplex_then_intopt) and (solution_status != GLP_UNDEF) and (solution_status != GLP_NOFEAS)):
             sig_on()
-            solve_status = glp_intopt(self._lp(), self.iocp)
-            solution_status = glp_mip_status(self._lp())
+            solve_status = glp_intopt(lp, self.iocp)
+            solution_status = glp_mip_status(lp)
             sig_off()
 
         if solution_status == GLP_OPT:
@@ -1561,8 +1570,9 @@ cdef class GLPKBackend(GenericBackend):
         if index < 0 or index > (self.ncols() - 1):
             raise ValueError("invalid column index %d" % index)
 
-        glp_create_index(self._lp())
-        s = <char*> glp_get_col_name(self._lp(), index + 1)
+        cdef glp_prob * lp = self._lp()
+        glp_create_index(lp)
+        s = <char*> glp_get_col_name(lp, index + 1)
 
         if s != NULL:
             return char_to_str(s)
@@ -1601,8 +1611,9 @@ cdef class GLPKBackend(GenericBackend):
         if index < 0 or index > (self.nrows() - 1):
             raise ValueError("invalid row index %d" % index)
 
-        glp_create_index(self._lp())
-        s = <char*> glp_get_row_name(self._lp(), index + 1)
+        cdef glp_prob * lp = self._lp()
+        glp_create_index(lp)
+        s = <char*> glp_get_row_name(lp, index + 1)
 
         if s != NULL:
             return char_to_str(s)
@@ -1808,9 +1819,10 @@ cdef class GLPKBackend(GenericBackend):
         if index < 0 or index > (self.ncols() - 1):
             raise ValueError("invalid variable index %d" % index)
 
+        cdef glp_prob * lp = self._lp()
         if value is False:
             sig_on()
-            x = glp_get_col_ub(self._lp(), index +1)
+            x = glp_get_col_ub(lp, index +1)
             sig_off()
             if x == DBL_MAX:
                 return None
@@ -1818,27 +1830,27 @@ cdef class GLPKBackend(GenericBackend):
                 return x
         else:
             sig_on()
-            min = glp_get_col_lb(self._lp(), index + 1)
+            min = glp_get_col_lb(lp, index + 1)
             sig_off()
 
             if value is None:
                 sig_on()
                 if min == -DBL_MAX:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_FR, 0, 0)
+                    glp_set_col_bnds(lp, index + 1, GLP_FR, 0, 0)
                 else:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_LO, min, 0)
+                    glp_set_col_bnds(lp, index + 1, GLP_LO, min, 0)
                 sig_off()
             else:
                 dvalue = <double?> value
 
                 sig_on()
                 if min == -DBL_MAX:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_UP, 0, dvalue)
+                    glp_set_col_bnds(lp, index + 1, GLP_UP, 0, dvalue)
 
                 elif min == dvalue:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_FX,  dvalue, dvalue)
+                    glp_set_col_bnds(lp, index + 1, GLP_FX,  dvalue, dvalue)
                 else:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_DB, min, dvalue)
+                    glp_set_col_bnds(lp, index + 1, GLP_DB, min, dvalue)
                 sig_off()
 
     cpdef variable_lower_bound(self, int index, value=False):
@@ -1908,9 +1920,10 @@ cdef class GLPKBackend(GenericBackend):
         if index < 0 or index > (self.ncols() - 1):
             raise ValueError("invalid variable index %d" % index)
 
+        cdef glp_prob * lp = self._lp()
         if value is False:
             sig_on()
-            x = glp_get_col_lb(self._lp(), index +1)
+            x = glp_get_col_lb(lp, index +1)
             sig_off()
             if x == -DBL_MAX:
                 return None
@@ -1918,15 +1931,15 @@ cdef class GLPKBackend(GenericBackend):
                 return x
         else:
             sig_on()
-            max = glp_get_col_ub(self._lp(), index + 1)
+            max = glp_get_col_ub(lp, index + 1)
             sig_off()
 
             if value is None:
                 sig_on()
                 if max == DBL_MAX:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_FR, 0.0, 0.0)
+                    glp_set_col_bnds(lp, index + 1, GLP_FR, 0.0, 0.0)
                 else:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_UP, 0.0, max)
+                    glp_set_col_bnds(lp, index + 1, GLP_UP, 0.0, max)
                 sig_off()
 
             else:
@@ -1934,11 +1947,11 @@ cdef class GLPKBackend(GenericBackend):
 
                 sig_on()
                 if max == DBL_MAX:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_LO, value, 0.0)
+                    glp_set_col_bnds(lp, index + 1, GLP_LO, value, 0.0)
                 elif max == value:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_FX,  value, value)
+                    glp_set_col_bnds(lp, index + 1, GLP_FX,  value, value)
                 else:
-                    glp_set_col_bnds(self._lp(), index + 1, GLP_DB, value, max)
+                    glp_set_col_bnds(lp, index + 1, GLP_DB, value, max)
                 sig_off()
 
     cpdef write_lp(self, filename):
@@ -2927,9 +2940,10 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: The constraint's index i must satisfy 0 <= i < number_of_constraints
         """
-        if i < 0 or i >= glp_get_num_rows(self._lp()):
+        cdef glp_prob * lp = self._lp()
+        if i < 0 or i >= glp_get_num_rows(lp):
             raise ValueError("The constraint's index i must satisfy 0 <= i < number_of_constraints")
-        return glp_get_row_stat(self._lp(), i+1)
+        return glp_get_row_stat(lp, i+1)
 
     cpdef int get_col_stat(self, int j) except? -1:
         """
@@ -2973,10 +2987,11 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: The variable's index j must satisfy 0 <= j < number_of_variables
         """
-        if j < 0 or j >= glp_get_num_cols(self._lp()):
+        cdef glp_prob * lp = self._lp()
+        if j < 0 or j >= glp_get_num_cols(lp):
             raise ValueError("The variable's index j must satisfy 0 <= j < number_of_variables")
 
-        return glp_get_col_stat(self._lp(), j+1)
+        return glp_get_col_stat(lp, j+1)
 
     cpdef set_row_stat(self, int i, int stat):
         r"""
@@ -3008,10 +3023,11 @@ cdef class GLPKBackend(GenericBackend):
             sage: lp.get_row_stat(0)
             3
         """
-        if i < 0 or i >= glp_get_num_rows(self._lp()):
+        cdef glp_prob * lp = self._lp()
+        if i < 0 or i >= glp_get_num_rows(lp):
             raise ValueError("The constraint's index i must satisfy 0 <= i < number_of_constraints")
 
-        glp_set_row_stat(self._lp(), i+1, stat)
+        glp_set_row_stat(lp, i+1, stat)
 
     cpdef set_col_stat(self, int j, int stat):
         r"""
@@ -3043,10 +3059,11 @@ cdef class GLPKBackend(GenericBackend):
             sage: lp.get_col_stat(0)
             2
         """
-        if j < 0 or j >= glp_get_num_cols(self._lp()):
+        cdef glp_prob * lp = self._lp()
+        if j < 0 or j >= glp_get_num_cols(lp):
             raise ValueError("The variable's index j must satisfy 0 <= j < number_of_variables")
 
-        glp_set_col_stat(self._lp(), j+1, stat)
+        glp_set_col_stat(lp, j+1, stat)
 
     cpdef int warm_up(self) noexcept:
         r"""
@@ -3163,7 +3180,8 @@ cdef class GLPKBackend(GenericBackend):
         if k < 0 or k >= n + m:
             raise ValueError("k = %s; Variable number out of range" % k)
 
-        if glp_bf_exists(self._lp()) == 0:
+        cdef glp_prob * lp = self._lp()
+        if glp_bf_exists(lp) == 0:
             raise ValueError("basis factorization does not exist")
 
         if k < m:
@@ -3177,7 +3195,7 @@ cdef class GLPKBackend(GenericBackend):
         cdef int    * c_indices = <int*>mem.allocarray(n+1, sizeof(int))
         cdef double * c_values  = <double*>mem.allocarray(n+1, sizeof(double))
 
-        i = glp_eval_tab_row(self._lp(), k + 1, c_indices, c_values)
+        i = glp_eval_tab_row(lp, k + 1, c_indices, c_values)
 
         indices = [c_indices[j + 1] - 1 for j in range(i)]
         values = [c_values[j + 1] for j in range(i)]
@@ -3261,7 +3279,8 @@ cdef class GLPKBackend(GenericBackend):
         if k < 0 or k >= m + n:
             raise ValueError("k = %s; Variable number out of range" % k)
 
-        if glp_bf_exists(self._lp()) == 0:
+        cdef glp_prob * lp = self._lp()
+        if glp_bf_exists(lp) == 0:
             raise ValueError("basis factorization does not exist")
 
         if k < m:
@@ -3275,7 +3294,7 @@ cdef class GLPKBackend(GenericBackend):
         cdef int    * c_indices = <int*>mem.allocarray(m+1, sizeof(int))
         cdef double * c_values  = <double*>mem.allocarray(m+1, sizeof(double))
 
-        i = glp_eval_tab_col(self._lp(), k + 1, c_indices, c_values)
+        i = glp_eval_tab_col(lp, k + 1, c_indices, c_values)
 
         indices = [c_indices[j + 1] - 1 for j in range(i)]
         values  = [c_values[j + 1] for j in range(i)]
