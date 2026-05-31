@@ -181,14 +181,10 @@ def _recover_from_ecl_file_error(error, objdir=None):
     Try to recover from an ECL file-open failure in Maxima's object cache.
 
     Used only from the ``init_code`` loop below, before any user
-    computation has run.  Two failure modes are addressed:
-
-    - ECL's ``ensure-directories-exist`` occasionally fails to create
-      subdirectories of ``*maxima-objdir*`` (see :issue:`26968`); we
-      create the missing directory with Python and let the caller retry.
-    - A stale ``.fas`` in ``*maxima-objdir*`` may reference a companion
-      ``.data`` that is no longer present; we remove the stale ``.fas``
-      so that Maxima falls back to the source on the next attempt.
+    computation has run. ECL's ``ensure-directories-exist`` occasionally
+    fails to create subdirectories of ``*maxima-objdir*`` (see
+    :issue:`26968`); we create the missing directory with Python and let
+    the caller retry.
 
     Note that ``*maxima-objdir*`` (typically
     ``$DOT_SAGE/maxima/binary/...``) is the per-user ECL compile cache,
@@ -196,32 +192,32 @@ def _recover_from_ecl_file_error(error, objdir=None):
 
     TESTS:
 
-    A stale ECL ``.fas`` file may refer to a companion ``.data`` file
-    which is not present.  In that case, remove the stale compiled file
-    so that Maxima falls back to the source on the next attempt::
+    ECL may fail while trying to write a compiler-generated ``.data``
+    file. The recovery creates the missing cache directory so that
+    retrying the Maxima load can compile normally::
 
         sage: from sage.interfaces.maxima_lib import _recover_from_ecl_file_error
         sage: import os, tempfile
         sage: with tempfile.TemporaryDirectory() as d:
-        ....:     stale = os.path.join(d, 'share', 'linearalgebra', 'mring.fas')
-        ....:     missing = os.path.splitext(stale)[0] + '.data'
-        ....:     os.makedirs(os.path.dirname(stale))
-        ....:     with open(stale, 'w'):
-        ....:         pass
+        ....:     missing = os.path.join(d, 'share', 'linearalgebra', 'mring.data')
         ....:     _ = _recover_from_ecl_file_error(
         ....:         RuntimeError(f'ECL says: Cannot open #P"{missing}".'), objdir=d)
-        ....:     os.path.exists(stale), os.path.isdir(os.path.dirname(missing))
-        (False, True)
+        ....:     os.path.isdir(os.path.dirname(missing))
+        True
+
+    The fallback is limited to Maxima's object cache::
+
+        sage: with tempfile.TemporaryDirectory() as d:
+        ....:     outside = os.path.join(os.path.dirname(d), 'mring.data')
+        ....:     _recover_from_ecl_file_error(
+        ....:         RuntimeError(f'ECL says: Cannot open #P"{outside}".'), objdir=d)
+        False
     """
     m = re.search(r'Cannot open #P"([^"]+)"', str(error))
     if not m:
         return False
 
     path = m.group(1)
-    dirname = os.path.dirname(path)
-    if dirname:
-        os.makedirs(dirname, exist_ok=True)
-
     objdir = maxima_objdir if objdir is None else objdir
     try:
         in_objdir = (os.path.commonpath([os.path.abspath(path),
@@ -230,14 +226,107 @@ def _recover_from_ecl_file_error(error, objdir=None):
     except ValueError:
         in_objdir = False
 
-    if in_objdir and os.path.splitext(path)[1] == ".data":
-        compiled_path = os.path.splitext(path)[0] + ".fas"
-        try:
-            os.remove(compiled_path)
-        except FileNotFoundError:
-            pass
+    if not in_objdir:
+        return False
+
+    dirname = os.path.dirname(path)
+    if dirname:
+        os.makedirs(dirname, exist_ok=True)
 
     return True
+
+
+def _maxima_share_subdirs(sharedir=None):
+    r"""
+    Return Maxima's share-package subdirectories, relative to the share tree.
+
+    The directories are read from Maxima's own ``*maxima-sharedir*`` -- the
+    canonical package tree that Maxima itself searches and compiles into --
+    rather than from a hardcoded list, so they cannot drift out of sync with
+    the installed Maxima version (see :issue:`26968`).
+
+    INPUT:
+
+    - ``sharedir`` -- string or ``None`` (default: ``None``); the Maxima
+      share directory to walk.  When ``None``, use ``*maxima-sharedir*``.
+
+    OUTPUT: a sorted list of ``/``-separated subdirectory paths relative to
+    ``sharedir``.
+
+    TESTS::
+
+        sage: from sage.interfaces.maxima_lib import _maxima_share_subdirs
+        sage: import os, tempfile
+        sage: with tempfile.TemporaryDirectory() as d:
+        ....:     os.makedirs(os.path.join(d, 'linearalgebra'))
+        ....:     os.makedirs(os.path.join(d, 'contrib', 'diffequations'))
+        ....:     _maxima_share_subdirs(sharedir=d)
+        ['contrib', 'contrib/diffequations', 'linearalgebra']
+    """
+    if sharedir is None:
+        sharedir = ecl_eval("*maxima-sharedir*").python()[1:-1]
+
+    subdirs = []
+    for dirpath, _, _ in os.walk(sharedir):
+        rel = os.path.relpath(dirpath, sharedir)
+        if rel != os.curdir:
+            subdirs.append(rel.replace(os.sep, "/"))
+    return sorted(subdirs)
+
+
+def _ensure_maxima_objdir_subdirectories(subdirs, objdir=None):
+    r"""
+    Create Maxima package subdirectories in the ECL object cache.
+
+    ECL writes compiler intermediates such as ``.c``, ``.eclh`` and
+    ``.data`` next to the target ``.fas`` while compiling Maxima share
+    packages.  Maxima's ``mk:defsystem`` calls ECL's
+    ``ensure-directories-exist`` for those target directories, but that
+    call is the unreliable part of :issue:`26968`.  Creating the expected
+    share package directories with Python before Maxima starts loading
+    packages prevents ECL from reaching the failing file-open path in the
+    first place.
+
+    The ``.data`` file here is a compiler-generated input to the C
+    compiler, not a reliable long-lived sidecar for the final ``.fas``.
+    Some valid ECL ``.fas`` files mention the temporary ``.data`` pathname
+    even when the temporary file has already been deleted, so the
+    prevention must be directory creation rather than compiled-file
+    invalidation.
+
+    INPUT:
+
+    - ``subdirs`` -- iterable of strings; Maxima share package
+      subdirectories (see :func:`_maxima_share_subdirs`).
+
+    - ``objdir`` -- string or ``None`` (default: ``None``); Maxima object
+      directory in which to create the subdirectories.  When ``None``, use
+      ``*maxima-objdir*``.
+
+    TESTS::
+
+        sage: from sage.interfaces.maxima_lib import _ensure_maxima_objdir_subdirectories
+        sage: import os, tempfile
+        sage: with tempfile.TemporaryDirectory() as d:
+        ....:     _ensure_maxima_objdir_subdirectories(
+        ....:         ['linearalgebra', 'contrib/diffequations'], objdir=d)
+        ....:     os.path.isdir(os.path.join(d, 'share', 'linearalgebra'))
+        ....:     os.path.isdir(os.path.join(d, 'share', 'contrib', 'diffequations'))
+        True
+        True
+    """
+    objdir = maxima_objdir if objdir is None else objdir
+
+    for subdir in subdirs:
+        os.makedirs(os.path.join(objdir, "share", subdir), exist_ok=True)
+
+
+# Pre-create every share-package directory in the ECL object cache before
+# Maxima starts compiling packages, working around the unreliable
+# ``ensure-directories-exist`` of :issue:`26968`.  The list mirrors the
+# installed Maxima share tree, so it stays correct across Maxima versions.
+_maxima_share_packages = _maxima_share_subdirs()
+_ensure_maxima_objdir_subdirectories(_maxima_share_packages)
 
 
 ecl_eval("(initialize-runtime-globals)")
