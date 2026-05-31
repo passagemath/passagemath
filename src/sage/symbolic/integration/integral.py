@@ -1065,7 +1065,14 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
         sage: a = SR.var('a')
         sage: assume(a > 0)
         sage: assume(a < 1)
+<<<<<<< HEAD
         sage: integrate(x*log(1/(a*x+(1-x)^2)), x, 0, 1, algorithm='maxima')            # needs sage.libs.maxima
+||||||| parent of 64dcae94121 (Upgrade Maxima to 5.49 and ECL to 26.5.5)
+        sage: integrate(x*log(1/(a*x+(1-x)^2)), x, 0, 1, algorithm='maxima')
+        1/4*a^2*log(a) + 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)*(a - 2)/(a^2 - 4*a)) - 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)/(a - 4)) - a*log(a) - sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)*(a - 2)/(a^2 - 4*a)) + sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)/(a - 4)) - 1/2*a + 3/2
+=======
+        sage: integrate(x*log(1/(a*x+(1-x)^2)), x, 0, 1, algorithm='maxima')
+>>>>>>> 64dcae94121 (Upgrade Maxima to 5.49 and ECL to 26.5.5)
         1/4*a^2*log(a) - 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)/(a - 4)) + 1/2*sqrt(-a^2 + 4*a)*a*arctan(sqrt(-a^2 + 4*a)*(a - 2)/((a - 4)*a)) - a*log(a) + sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)/(a - 4)) - sqrt(-a^2 + 4*a)*arctan(sqrt(-a^2 + 4*a)*(a - 2)/((a - 4)*a)) - 1/2*a + 3/2
 
     Check that :issue:`25905` is fixed::
