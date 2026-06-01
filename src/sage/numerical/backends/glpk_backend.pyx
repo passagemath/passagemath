@@ -407,17 +407,18 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: invalid variable index 2
         """
-        if variable < 0 or variable > (self.ncols() - 1):
+        cdef glp_prob * lp = self._lp()
+        if variable < 0 or variable >= glp_get_num_cols(lp):
             raise ValueError("invalid variable index %d" % variable)
 
         if vtype==1:
-            glp_set_col_kind(self._lp(), variable+1, GLP_IV)
+            glp_set_col_kind(lp, variable+1, GLP_IV)
 
         elif vtype==0:
-            glp_set_col_kind(self._lp(), variable+1, GLP_BV)
+            glp_set_col_kind(lp, variable+1, GLP_BV)
 
         else:
-            glp_set_col_kind(self._lp(), variable+1, GLP_CV)
+            glp_set_col_kind(lp, variable+1, GLP_CV)
 
     cpdef set_sense(self, int sense):
         """
@@ -479,13 +480,14 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: invalid variable index 2
         """
-        if variable < 0 or variable > (self.ncols() - 1):
+        cdef glp_prob * lp = self._lp()
+        if variable < 0 or variable >= glp_get_num_cols(lp):
             raise ValueError("invalid variable index %d" % variable)
 
         if coeff is None:
-            return glp_get_obj_coef(self._lp(), variable + 1)
+            return glp_get_obj_coef(lp, variable + 1)
         else:
-            glp_set_obj_coef(self._lp(), variable + 1, coeff)
+            glp_set_obj_coef(lp, variable + 1, coeff)
 
     cpdef problem_name(self, name=None):
         """
@@ -754,11 +756,11 @@ cdef class GLPKBackend(GenericBackend):
         # We're going to iterate through this more than once.
         coefficients = list(coefficients)
 
+        cdef glp_prob * lp = self._lp()
         for (index, _) in coefficients:
-            if index < 0 or index > (self.ncols() - 1):
+            if index < 0 or index >= glp_get_num_cols(lp):
                 raise ValueError("invalid variable index %d" % index)
 
-        cdef glp_prob * lp = self._lp()
         glp_add_rows(lp, 1)
         cdef int n = glp_get_num_rows(lp)
 
@@ -880,10 +882,10 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: invalid row index 2
         """
-        if index < 0 or index > (self.nrows() - 1):
+        cdef glp_prob * lp = self._lp()
+        if index < 0 or index >= glp_get_num_rows(lp):
             raise ValueError("invalid row index %d" % index)
 
-        cdef glp_prob * lp = self._lp()
         cdef int n = glp_get_num_cols(lp)
         cdef MemoryAllocator mem = MemoryAllocator()
         cdef int * c_indices = <int*>mem.allocarray(n+1, sizeof(int))
@@ -938,11 +940,11 @@ cdef class GLPKBackend(GenericBackend):
         """
         cdef double ub
         cdef double lb
+        cdef glp_prob * lp = self._lp()
 
-        if index < 0 or index > (self.nrows() - 1):
+        if index < 0 or index >= glp_get_num_rows(lp):
             raise ValueError("invalid row index %d" % index)
 
-        cdef glp_prob * lp = self._lp()
         ub = glp_get_row_ub(lp, index + 1)
         lb = glp_get_row_lb(lp, index +1)
 
@@ -991,11 +993,11 @@ cdef class GLPKBackend(GenericBackend):
 
         cdef double ub
         cdef double lb
+        cdef glp_prob * lp = self._lp()
 
-        if index < 0 or index > (self.ncols() - 1):
+        if index < 0 or index >= glp_get_num_cols(lp):
             raise ValueError("invalid column index %d" % index)
 
-        cdef glp_prob * lp = self._lp()
         ub = glp_get_col_ub(lp, index +1)
         lb = glp_get_col_lb(lp, index +1)
 
@@ -1441,14 +1443,15 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: invalid variable index 2
         """
-        if variable < 0 or variable > (self.ncols() - 1):
+        cdef glp_prob * lp = self._lp()
+        if variable < 0 or variable >= glp_get_num_cols(lp):
             raise ValueError("invalid variable index %d" % variable)
 
         if (self.simplex_or_intopt != glp_simplex_only
             and self.simplex_or_intopt != glp_exact_simplex_only):
-            return glp_mip_col_val(self._lp(), variable + 1)
+            return glp_mip_col_val(lp, variable + 1)
         else:
-            return glp_get_col_prim(self._lp(), variable + 1)
+            return glp_get_col_prim(lp, variable + 1)
 
     cpdef get_row_prim(self, int i):
         r"""
@@ -1492,10 +1495,11 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: invalid row index 2
         """
-        if i < 0 or i > (self.nrows() - 1):
+        cdef glp_prob * lp = self._lp()
+        if i < 0 or i >= glp_get_num_rows(lp):
             raise ValueError("invalid row index %d" % i)
 
-        return glp_get_row_prim(self._lp(), i+1)
+        return glp_get_row_prim(lp, i+1)
 
     cpdef int ncols(self) noexcept:
         """
@@ -1566,11 +1570,11 @@ cdef class GLPKBackend(GenericBackend):
             ValueError: invalid column index 2
         """
         cdef char * s
+        cdef glp_prob * lp = self._lp()
 
-        if index < 0 or index > (self.ncols() - 1):
+        if index < 0 or index >= glp_get_num_cols(lp):
             raise ValueError("invalid column index %d" % index)
 
-        cdef glp_prob * lp = self._lp()
         glp_create_index(lp)
         s = <char*> glp_get_col_name(lp, index + 1)
 
@@ -1607,11 +1611,11 @@ cdef class GLPKBackend(GenericBackend):
             ValueError: invalid row index 2
         """
         cdef char * s
+        cdef glp_prob * lp = self._lp()
 
-        if index < 0 or index > (self.nrows() - 1):
+        if index < 0 or index >= glp_get_num_rows(lp):
             raise ValueError("invalid row index %d" % index)
 
-        cdef glp_prob * lp = self._lp()
         glp_create_index(lp)
         s = <char*> glp_get_row_name(lp, index + 1)
 
@@ -1815,11 +1819,11 @@ cdef class GLPKBackend(GenericBackend):
         cdef double x
         cdef double min
         cdef double dvalue
+        cdef glp_prob * lp = self._lp()
 
-        if index < 0 or index > (self.ncols() - 1):
+        if index < 0 or index >= glp_get_num_cols(lp):
             raise ValueError("invalid variable index %d" % index)
 
-        cdef glp_prob * lp = self._lp()
         if value is False:
             sig_on()
             x = glp_get_col_ub(lp, index +1)
@@ -1916,11 +1920,11 @@ cdef class GLPKBackend(GenericBackend):
         cdef double x
         cdef double max
         cdef double dvalue
+        cdef glp_prob * lp = self._lp()
 
-        if index < 0 or index > (self.ncols() - 1):
+        if index < 0 or index >= glp_get_num_cols(lp):
             raise ValueError("invalid variable index %d" % index)
 
-        cdef glp_prob * lp = self._lp()
         if value is False:
             sig_on()
             x = glp_get_col_lb(lp, index +1)
@@ -2890,11 +2894,12 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: invalid column index 2
         """
-        if variable < 0 or variable > (self.ncols() - 1):
+        cdef glp_prob * lp = self._lp()
+        if variable < 0 or variable >= glp_get_num_cols(lp):
             raise ValueError("invalid column index %d" % variable)
 
         if self.simplex_or_intopt == simplex_only:
-            return glp_get_col_dual(self._lp(), variable+1)
+            return glp_get_col_dual(lp, variable+1)
         else:
             return 0.0
 
@@ -3173,14 +3178,14 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: ...
         """
-        cdef int m = self.nrows()
-        cdef int n = self.ncols()
+        cdef glp_prob * lp = self._lp()
+        cdef int m = glp_get_num_rows(lp)
+        cdef int n = glp_get_num_cols(lp)
         cdef int i,j
 
         if k < 0 or k >= n + m:
             raise ValueError("k = %s; Variable number out of range" % k)
 
-        cdef glp_prob * lp = self._lp()
         if glp_bf_exists(lp) == 0:
             raise ValueError("basis factorization does not exist")
 
@@ -3272,14 +3277,14 @@ cdef class GLPKBackend(GenericBackend):
             ...
             ValueError: ...
         """
-        cdef int m = self.nrows()
-        cdef int n = self.ncols()
+        cdef glp_prob * lp = self._lp()
+        cdef int m = glp_get_num_rows(lp)
+        cdef int n = glp_get_num_cols(lp)
         cdef int i,j
 
         if k < 0 or k >= m + n:
             raise ValueError("k = %s; Variable number out of range" % k)
 
-        cdef glp_prob * lp = self._lp()
         if glp_bf_exists(lp) == 0:
             raise ValueError("basis factorization does not exist")
 

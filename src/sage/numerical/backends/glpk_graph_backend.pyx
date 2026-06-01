@@ -1439,7 +1439,7 @@ cdef class GLPKGraphBackend():
 
         return graph_sol
 
-    cpdef double cpp(self) noexcept:
+    cpdef double cpp(self) except? -1:
         r"""
         Solve the critical path problem of a project network.
 
@@ -1463,10 +1463,7 @@ cdef class GLPKGraphBackend():
             (1, 1.0, 0.0, 2.0)
         """
 
-        cdef glp_graph * graph = self._graph_or_null()
-        if graph is NULL:
-            return 0.0
-        return glp_cpp(graph, 0, 2 * sizeof(double),
+        return glp_cpp(self._graph(), 0, 2 * sizeof(double),
                    3 * sizeof(double))
 
     def __dealloc__(self):
