@@ -893,25 +893,30 @@ class MatrixMorphism_abstract(sage.categories.morphism.Morphism):
         r"""
         Return a basis of the kernel of this morphism, in echelon form.
 
-        This is consistent with :meth:`kernel`: every returned vector
-        lies in :meth:`kernel`. In particular, the matrix convention
-        determined by :meth:`side` is respected.
+        The basis is taken from :meth:`kernel`, so it spans the kernel and
+        respects the matrix convention determined by :meth:`side`: every
+        returned vector is mapped to zero by this morphism.
 
-        EXAMPLES::
+        EXAMPLES:
+
+        For a ``side='left'`` morphism (the default), ``f(x) = x*M``, so the
+        relevant kernel is the *left* kernel of the matrix.  Before
+        :issue:`40933` this method returned the right kernel ``((1, 0),)``
+        instead, whose vector is not annihilated by ``A``::
 
             sage: A = linear_transformation(matrix([[0, -1], [0, 0]]))
             sage: A.kernel_basis()
             ((0, 1),)
-            sage: all(v in A.kernel() for v in A.kernel_basis())
+            sage: all(A(v).is_zero() for v in A.kernel_basis())
             True
 
-        The matrix convention is respected, so that the result agrees
-        with :meth:`kernel` for both sides (:issue:`40933`)::
+        The convention is respected for both sides, so the result is
+        consistent with :meth:`kernel`::
 
             sage: B = linear_transformation(matrix([[0, -1], [0, 0]]), side='right')
             sage: B.kernel_basis()
             ((1, 0),)
-            sage: all(v in B.kernel() for v in B.kernel_basis())
+            sage: all(B(v).is_zero() for v in B.kernel_basis())
             True
 
         This also works for free module morphisms that are not vector
@@ -921,7 +926,7 @@ class MatrixMorphism_abstract(sage.categories.morphism.Morphism):
             sage: phi = V.hom(matrix([[0, -1], [0, 0]]))
             sage: phi.kernel_basis()
             ((0, 1),)
-            sage: all(v in phi.kernel() for v in phi.kernel_basis())
+            sage: all(phi(v).is_zero() for v in phi.kernel_basis())
             True
         """
         return tuple(self.kernel().basis())
