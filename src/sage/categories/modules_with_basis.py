@@ -54,10 +54,10 @@ class ModulesWithBasisHomset(Homset):
     distinguished bases of the domain and codomain, by delegating to
     :meth:`~ModulesWithBasis.ParentMethods.module_morphism`.
 
-    This is what makes
+    This makes
     :func:`~sage.modules.vector_space_morphism.linear_transformation`
     (and ``Hom(X, Y)(some_matrix)``) work for vector spaces built from a
-    combinatorial basis (see :issue:`40847`).
+    combinatorial basis.
 
     .. NOTE::
 
