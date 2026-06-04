@@ -156,7 +156,8 @@ class ModulesWithBasisHomset(Homset):
             True
 
         The other ways of constructing a morphism are unaffected; in
-        particular a generic callable is still applied to whole elements::
+        particular, if the argument is not a matrix it should be a
+        callable, which is then applied directly to elements::
 
             sage: # needs sage.modules
             sage: H = Hom(X, Y)
