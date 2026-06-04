@@ -130,8 +130,7 @@ class ModulesWithBasisHomset(Homset):
             True
 
         As for a generic homset, the ``check`` argument is accepted (and
-        ignored), both for the matrix and the generic construction
-        (:issue:`40847`)::
+        ignored), both for the matrix and the generic construction::
 
             sage: # needs sage.modules
             sage: H(m, check=False) == H(m)
