@@ -900,9 +900,7 @@ class MatrixMorphism_abstract(sage.categories.morphism.Morphism):
         EXAMPLES:
 
         For a ``side='left'`` morphism (the default), ``f(x) = x*M``, so the
-        relevant kernel is the *left* kernel of the matrix.  Before
-        :issue:`40933` this method returned the right kernel ``((1, 0),)``
-        instead, whose vector is not annihilated by ``A``::
+        relevant kernel is the *left* kernel of the matrix::
 
             sage: A = linear_transformation(matrix([[0, -1], [0, 0]]))
             sage: A.kernel_basis()
