@@ -347,12 +347,12 @@ cdef class Matrix_generic_dense(matrix_dense.Matrix_dense):
         TESTS::
 
             sage: Ext=ExteriorAlgebra(QQ,['p'])
-            sage: Ext.inject_variables()
+            sage: Ext.inject_variables(verbose=False)
             sage: Mp = matrix(1,1,[[p]])
             sage: Mp[0,0]*Mp[0,0]
             0
             sage: Mp*Mp
-            [[0]]
+            [0]
         """
         cdef Py_ssize_t i, j, k, m, nr, nc, snc, p
         cdef Matrix_generic_dense right = _right
