@@ -926,6 +926,14 @@ class MatrixMorphism_abstract(sage.categories.morphism.Morphism):
             ((0, 1),)
             sage: all(phi(v).is_zero() for v in phi.kernel_basis())
             True
+
+        TESTS:
+
+        Check that :issue:`40933` is fixed::
+
+            sage: A = linear_transformation(matrix([[0, -1], [0, 0]]))
+            sage: A.kernel_basis()[0] in A.kernel()
+            True
         """
         return tuple(self.kernel().basis())
 
