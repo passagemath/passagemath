@@ -78,6 +78,16 @@ class ModulesWithBasisHomset(Homset):
         sage: H = Hom(X, Y)
         sage: isinstance(H, ModulesWithBasisHomset)
         True
+
+    TESTS:
+
+    Check that :issue:`40847` is fixed::
+
+        sage: # needs sage.modules
+        sage: V = VectorSpace(QQ, [0, 1, 2])
+        sage: phi = linear_transformation(V, V, identity_matrix(3))
+        sage: phi(V.basis()[0])
+        B[0]
     """
     def _element_constructor_(self, x=None, check=None, matrix=None, **options):
         r"""
