@@ -1943,7 +1943,7 @@ class EllipticCurve_finite_field(EllipticCurve_field, ProjectivePlaneCurve_finit
                 if self.is_isomorphic(t):
                     twists[i] = twists[0]
                     twists[0] = self
-                break
+                    break
             return twists
 
         # Now j is not 0 or 1728, and we only have a quadratic twist
