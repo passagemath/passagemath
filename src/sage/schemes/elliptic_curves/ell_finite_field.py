@@ -1928,6 +1928,17 @@ class EllipticCurve_finite_field(EllipticCurve_field, ProjectivePlaneCurve_finit
             ....:         pass
             sage: all(any(E2.is_isomorphic(E1) for E1 in twists1) for E2 in twists2)
             True
+
+        ::
+
+            sage: E = EllipticCurve(GF(101), [0, 2])
+            sage: E in E.twists()
+            True
+            sage: E == E.twists()[0]
+            True
+            sage: E.is_isomorphic(E.twists()[0])
+            True
+
         """
         K = self.base_field()
         j = self.j_invariant()
