@@ -73,6 +73,7 @@ AUTHORS:
 ##########################################################################
 
 import os
+import shlex
 import shutil
 
 from sage.calculus.functional import diff
@@ -81,6 +82,36 @@ lazy_import("sage.interfaces.maxima_lib","maxima")
 from sage.misc.functional import N
 from sage.rings.real_mpfr import RealField
 from sage.structure.element import Expression
+
+
+def _tides_compile_flags():
+    """
+    Return compiler flags for TIDES.
+
+    Normal Sage installations use ``SAGE_LOCAL``.  Installed wheels can provide
+    the same redistributable headers and static library through the optional
+    ``sagelite-tides-runtime`` companion package.
+    """
+    try:
+        from sagelite_tides.runtime import include_dir, library_path
+    except ImportError:
+        pass
+    else:
+        include = include_dir()
+        library = library_path()
+        if include.is_dir() and library.is_file():
+            return (
+                shlex.quote(os.fspath(library)),
+                "-L" + shlex.quote(os.fspath(library.parent)) + " ",
+                "-I" + shlex.quote(os.fspath(include)) + " ",
+            )
+
+    sage_local = os.environ.get("SAGE_LOCAL", "$SAGE_LOCAL")
+    return (
+        os.path.join(sage_local, "lib", "libTIDES.a"),
+        os.path.join("-L" + sage_local, "lib "),
+        os.path.join("-I" + sage_local, "include "),
+    )
 
 
 def fricas_desolve(de, dvar, ics, ivar):
@@ -1774,10 +1805,11 @@ def desolve_mintides(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16):
     genfiles_mintides(intfile, drfile, f, [N(_) for _ in ics],
                       N(initial), N(final), N(delta), N(tolrel),
                       N(tolabs), fileoutput)
+    tides_library, tides_libdir, tides_include = _tides_compile_flags()
     subprocess.check_call('gcc -o ' + runmefile + ' ' + os.path.join(tempdir, '*.c ') +
-                          os.path.join('$SAGE_LOCAL', 'lib', 'libTIDES.a') + ' $LDFLAGS '
-                          + os.path.join('-L$SAGE_LOCAL', 'lib ') + ' -lm  -O2 ' +
-                          os.path.join('-I$SAGE_LOCAL', 'include '),
+                          tides_library + ' $LDFLAGS '
+                          + tides_libdir + ' -lm  -O2 ' +
+                          tides_include,
                           shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     subprocess.check_call(os.path.join(tempdir, 'runme'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     with open(fileoutput) as outfile:
@@ -1869,10 +1901,11 @@ def desolve_tides_mpfr(f, ics, initial, final, delta, tolrel=1e-16, tolabs=1e-16
     runmefile = os.path.join(tempdir, 'runme')
     genfiles_mpfr(intfile, drfile, f, ics, initial, final, delta, [], [],
                   digits, tolrel, tolabs, fileoutput)
+    tides_library, tides_libdir, tides_include = _tides_compile_flags()
     subprocess.check_call('gcc -o ' + runmefile + ' ' + os.path.join(tempdir, '*.c ') +
-                          os.path.join('$SAGE_LOCAL', 'lib', 'libTIDES.a') + ' $LDFLAGS '
-                          + os.path.join('-L$SAGE_LOCAL', 'lib ') + '-lmpfr -lgmp -lm  -O2 -w ' +
-                          os.path.join('-I$SAGE_LOCAL', 'include '),
+                          tides_library + ' $LDFLAGS '
+                          + tides_libdir + '-lmpfr -lgmp -lm  -O2 -w ' +
+                          tides_include,
                           shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     subprocess.check_call(os.path.join(tempdir, 'runme'), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     with open(fileoutput) as outfile:
