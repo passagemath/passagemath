@@ -1,6 +1,6 @@
 SAGE_SPKG_CONFIGURE([cmake], [dnl
-        dnl macaulay2 1.24.11 needs 3.24
-        m4_pushdef([CMAKE_MIN_VERSION], [3.24])
+        dnl macaulay2 1.26.06 needs 3.30 for cmake policy CMP0167
+        m4_pushdef([CMAKE_MIN_VERSION], [3.30])
         AC_CACHE_CHECK([for cmake >= ]CMAKE_MIN_VERSION, [ac_cv_path_CMAKE], [dnl
         dnl Do not accept cmake installed via https://pypi.org/project/cmake/
         dnl in the default user scheme; it will not work in our venv because
