@@ -1,5 +1,5 @@
-mathics: General-purpose computer algebra system
-================================================
+mathics3: General-purpose computer algebra system
+=================================================
 
 Description
 -----------
@@ -15,4 +15,3 @@ Upstream Contact
 ----------------
 
 https://pypi.org/project/Mathics3/
-

@@ -18,6 +18,7 @@ Plotting primitives
 #
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
+import sage.structure.element  # break Cython circular import (refs #1604)
 from sage.misc.fast_methods import WithEqualityById
 from sage.structure.sage_object import SageObject
 from sage.misc.verbose import verbose

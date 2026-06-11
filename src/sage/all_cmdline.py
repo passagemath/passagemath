@@ -25,7 +25,7 @@ from sage.misc.lazy_import import lazy_import
 
 for pkg in ['axiom', 'fricas', 'gap', 'gap3', 'giac', 'gp',
             'gnuplot', 'kash', 'magma', 'macaulay2', 'maple',
-            'mathematica', 'mathics', 'matlab',
+            'mathematica', 'mathics3', 'matlab',
             'mupad', 'mwrank', 'octave', 'qepcad', 'singular',
             'sage0', 'lie', 'r']:
     lazy_import(f'sage.interfaces.{pkg}', f'{pkg}_console')

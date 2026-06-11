@@ -250,6 +250,7 @@ src/*.egg-info/
 
 # Virtual environments
 /venv
+/.venv*
 src/.env
 src/.venv
 src/env/

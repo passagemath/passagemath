@@ -16,6 +16,7 @@ AUTHORS:
   ``GraphicsArray`` that was defined in the module :mod:`~sage.plot.graphics`.
 """
 import os
+import sage.structure.element  # break Cython circular import (refs #1604)
 from sage.misc.fast_methods import WithEqualityById
 from sage.structure.sage_object import SageObject
 from sage.misc.temporary_file import tmp_filename
@@ -207,8 +208,155 @@ class MultiGraphics(WithEqualityById, SageObject):
             raise ValueError('unknown graphics output preference')
         for file_ext, output_container in preferred:
             if output_container in display_manager.supported_output():
-                return display_manager.graphics_from_save(
-                    self.save, kwds, file_ext, output_container)
+                if file_ext == '.png':
+                    from sage.repl.rich_output.buffer import OutputBuffer
+                    return output_container(OutputBuffer(self._render_png_(**kwds)))
+                else:
+                    return display_manager.graphics_from_save(
+                        self.save, kwds, file_ext, output_container)
+
+    def _repr_png_(self):
+        r"""
+        Return a PNG representation of this graphics array.
+
+        This allows ``MultiGraphics`` objects to display as images in plain Python
+        Jupyter kernels that do not use Sage's rich output system.
+
+        Unlike :meth:`_render_png_`, rendering failures are suppressed and
+        ``None`` is returned, matching the IPython ``_repr_png_`` protocol.
+
+        OUTPUT: ``bytes`` -- PNG image data, or ``None`` if rendering fails
+
+        EXAMPLES::
+
+            sage: G = graphics_array([line([(0,0),(1,1)]), circle((0,0),1)])
+            sage: png = G._repr_png_()
+            sage: png[:8] == b'\x89PNG\r\n\x1a\n'
+            True
+        """
+        try:
+            return self._render_png_()
+        except Exception:
+            return None
+
+    def _repr_svg_(self):
+        r"""
+        Return an SVG representation of this graphics array.
+
+        This allows ``MultiGraphics`` objects to display as vector images in
+        plain Python Jupyter kernels that do not use Sage's rich output system.
+
+        Unlike :meth:`_render_svg_`, rendering failures are suppressed and
+        ``None`` is returned, matching the IPython ``_repr_svg_`` protocol.
+
+        OUTPUT: string -- SVG image data, or ``None`` if rendering fails
+
+        EXAMPLES::
+
+            sage: G = graphics_array([line([(0,0),(1,1)]), circle((0,0),1)])
+            sage: svg = G._repr_svg_()
+            sage: '<svg' in svg
+            True
+        """
+        try:
+            return self._render_svg_().decode('utf-8')
+        except Exception:
+            return None
+
+    def _render_svg_(self, **kwds):
+        r"""
+        Render this graphics array to SVG bytes.
+
+        Used by :meth:`_repr_svg_` (plain Python kernels). Raises on rendering
+        failure so that callers can surface errors.
+
+        Runtime keyword arguments (e.g. ``figsize``) are passed through to
+        :meth:`matplotlib`.
+
+        OUTPUT: ``bytes`` -- SVG image data (UTF-8 encoded XML)
+
+        EXAMPLES::
+
+            sage: G = graphics_array([line([(0,0),(1,1)]), circle((0,0),1)])
+            sage: svg = G._render_svg_()
+            sage: b'<svg' in svg
+            True
+        """
+        from io import BytesIO
+        from matplotlib import pyplot as plt, rcParams
+        from matplotlib.backends.backend_svg import FigureCanvasSVG
+        figsize = kwds.pop('figsize', None)
+        rc_backup = (rcParams['ps.useafm'], rcParams['pdf.use14corefonts'],
+                     rcParams['text.usetex'])
+        figure = None
+        try:
+            figure = self.matplotlib(figsize=figsize)
+            figure.set_canvas(FigureCanvasSVG(figure))
+            if isinstance(self, GraphicsArray):
+                figure.tight_layout()
+            buf = BytesIO()
+            figure.savefig(buf, format='svg')
+            return buf.getvalue()
+        finally:
+            if figure is not None:
+                plt.close(figure)
+            (rcParams['ps.useafm'], rcParams['pdf.use14corefonts'],
+             rcParams['text.usetex']) = rc_backup
+
+    def _render_png_(self, **kwds):
+        r"""
+        Render this graphics array to PNG bytes.
+
+        Used by :meth:`_repr_png_` (plain Python kernels) and
+        :meth:`_rich_repr_` (Sage kernel). Raises on rendering failure
+        so that callers in the Sage rich output path can surface errors.
+
+        Runtime keyword arguments (e.g. ``dpi``, ``figsize``) are passed
+        through to :meth:`matplotlib`, matching the merge order of
+        :meth:`save`.
+
+        OUTPUT: ``bytes`` -- PNG image data
+
+        EXAMPLES::
+
+            sage: G = graphics_array([line([(0,0),(1,1)]), circle((0,0),1)])
+            sage: png = G._render_png_()
+            sage: png[:8] == b'\x89PNG\r\n\x1a\n'
+            True
+
+        Runtime kwargs are forwarded, so ``dpi`` affects the output size::
+
+            sage: G = graphics_array([line([(0,0),(1,1)]), circle((0,0),1)])
+            sage: len(G._render_png_(dpi=50)) < len(G._render_png_(dpi=200))
+            True
+        """
+        from io import BytesIO
+        from matplotlib import pyplot as plt, rcParams
+        from matplotlib.backends.backend_agg import FigureCanvasAgg
+        from sage.plot.graphics import Graphics
+        figsize = kwds.pop('figsize', None)
+        rc_backup = (rcParams['ps.useafm'], rcParams['pdf.use14corefonts'],
+                     rcParams['text.usetex'])
+        figure = None
+        try:
+            figure = self.matplotlib(figsize=figsize, **kwds)
+            figure.set_canvas(FigureCanvasAgg(figure))
+            if isinstance(self, GraphicsArray):
+                figure.tight_layout()
+            dpi = kwds.get('dpi', Graphics.SHOW_OPTIONS['dpi'])
+            transparent = kwds.get('transparent', Graphics.SHOW_OPTIONS['transparent'])
+            fig_tight = kwds.get('fig_tight', Graphics.SHOW_OPTIONS['fig_tight'])
+            opts = {'dpi': dpi, 'transparent': transparent}
+            if fig_tight:
+                opts['bbox_inches'] = 'tight'
+            buf = BytesIO()
+            figure.savefig(buf, format='png', **opts)
+            return buf.getvalue()
+        finally:
+            if figure is not None:
+                plt.close(figure)
+            (rcParams['ps.useafm'], rcParams['pdf.use14corefonts'],
+             rcParams['text.usetex']) = rc_backup
 
     def __getitem__(self, i):
         r"""
@@ -606,9 +754,37 @@ class MultiGraphics(WithEqualityById, SageObject):
                                 [plot(tan), plot(sec)]])
             sphinx_plot(G, axes=False, frame=True, figsize=4, fontsize=8, \
                         gridlines='major')
+
+        In Jupyter kernels where Sage's rich output system is not initialized
+        and the active backend does not support PNG, ``show()`` falls back to
+        ``IPython.display.display`` so the image still renders inline.  See
+        :meth:`~sage.plot.graphics.Graphics.show` for details.  In non-kernel
+        contexts the call falls through to plain-text output::
+
+            sage: from sage.repl.rich_output.backend_base import BackendSimple
+            sage: from sage.repl.rich_output import get_display_manager
+            sage: dm = get_display_manager()
+            sage: previous = dm.switch_backend(BackendSimple())
+            sage: graphics_array([circle((0,0),1), line([(0,0),(1,1)])]).show()
+            Graphics Array of size 1 x 2
+            sage: _ = dm.switch_backend(previous)
         """
         from sage.repl.rich_output import get_display_manager
+        from sage.repl.rich_output.output_graphics import OutputImagePng
+        from sage.repl.ipython_extension import _running_in_notebook
         dm = get_display_manager()
+        if (OutputImagePng not in dm._backend.supported_output()
+                and dm.preferences.graphics != 'disable'):
+            try:
+                if _running_in_notebook():
+                    from IPython.display import display, SVG, Image
+                    try:
+                        display(SVG(self._render_svg_(**kwds).decode('utf-8')))
+                    except Exception:
+                        display(Image(self._render_png_(**kwds)))
+                    return
+            except Exception:
+                pass
         dm.display_immediately(self, **kwds)
 
     def plot(self):

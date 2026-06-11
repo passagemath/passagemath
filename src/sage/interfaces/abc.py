@@ -123,6 +123,23 @@ class MagmaElement:
     pass
 
 
+class Mathics3Element:
+    r"""
+    Abstract base class for :class:`~sage.interfaces.mathics3.Mathics3Element`.
+
+    This class is defined for the purpose of ``isinstance`` tests.  It should not be
+    instantiated.
+
+    EXAMPLES:
+
+    By design, there is a unique direct subclass::
+
+        sage: len(sage.interfaces.abc.Mathics3Element.__subclasses__()) <= 1
+        True
+    """
+    pass
+
+
 class SingularElement:
     r"""
     Abstract base class for :class:`~sage.interfaces.singular.SingularElement`.

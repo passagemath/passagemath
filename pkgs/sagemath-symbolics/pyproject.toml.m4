@@ -46,6 +46,7 @@ test            = ["passagemath-repl"]
 fricas          = ["passagemath-fricas"]
 giac            = ["passagemath-giac"]
 ginac           = []  # no extra needed, same as pynac
+mathics3        = ["mathics3"]
 maxima          = ["passagemath-maxima"]
 ntl             = []  # no extra needed
 primecount      = [SPKG_INSTALL_REQUIRES_primecountpy]

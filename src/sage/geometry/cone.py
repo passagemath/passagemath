@@ -1328,7 +1328,7 @@ def classify_cone_2d(ray0, ray1, check=True):
     [CLS2011]_ ::
 
         sage: from sage.geometry.cone import normalize_rays
-        sage: for i in range(10):
+        sage: for i in range(10):                                    # needs sage.libs.linbox
         ....:     ray0 = random_vector(ZZ, 3)
         ....:     ray1 = random_vector(ZZ, 3)
         ....:     if ray0.is_zero() or ray1.is_zero(): continue

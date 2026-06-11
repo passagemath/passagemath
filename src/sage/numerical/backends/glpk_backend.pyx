@@ -2599,20 +2599,44 @@ cdef class GLPKBackend(GenericBackend):
 
         The dual value of a constraint is the shadow price of the constraint.
         The shadow price is the amount by which the objective value will change
-        if the constraints bounds change by one unit under the precondition
-        that the basis remains the same.
+        if the constraint bound changes by one unit, provided the basis remains
+        the same.
 
         INPUT:
 
-        - ``variable`` -- the number of the constraint
+        - ``variable`` -- the number of the constraint, 0-based, in the order
+          constraints were added
 
         .. NOTE::
 
-           Behaviour is undefined unless ``solve`` has been called before.
-           If the simplex algorithm has not been used for solving 0.0 will
-           be returned.
+           Dual values are only available after a simplex solve. If the
+           simplex algorithm was not used (e.g. the default
+           ``'simplex_then_intopt'`` mode was used instead of
+           ``'simplex_only'``), this method returns ``0.0`` for every row
+           with no warning or error.
 
-        EXAMPLES::
+        EXAMPLES:
+
+        Using the high-level ``MixedIntegerLinearProgram`` interface::
+
+            sage: p = MixedIntegerLinearProgram(maximization=True, solver='GLPK')
+            sage: x = p.new_variable(nonnegative=True)
+            sage: p.set_objective(3*x[0] + 2*x[1])
+            sage: p.add_constraint(x[0] + x[1] <= 4)  # row 0
+            sage: p.add_constraint(x[0] <= 2)          # row 1
+            sage: p.add_constraint(x[1] <= 3)          # row 2
+            sage: p.solver_parameter('simplex_or_intopt', 'simplex_only')
+            sage: p.solve()
+            10.0
+            sage: b = p.get_backend()
+            sage: b.get_row_dual(0)
+            2.0
+            sage: b.get_row_dual(1)
+            1.0
+            sage: b.get_row_dual(2)
+            0.0
+
+        Using the low-level backend interface::
 
             sage: from sage.numerical.backends.generic_backend import get_solver
             sage: lp = get_solver(solver = "GLPK")

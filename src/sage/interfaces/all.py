@@ -38,7 +38,7 @@ lazy_import('sage.interfaces.magma', ['magma', 'Magma'])
 lazy_import('sage.interfaces.magma_free', 'magma_free')
 lazy_import('sage.interfaces.maple', ['maple', 'Maple'])
 lazy_import('sage.interfaces.mathematica', ['mathematica', 'Mathematica'])
-lazy_import('sage.interfaces.mathics', ['mathics', 'Mathics'])
+lazy_import('sage.interfaces.mathics3', ['mathics3', 'Mathics3'])
 lazy_import('sage.interfaces.matlab', ['matlab', 'matlab_version', 'Matlab'])
 lazy_import('sage.interfaces.mupad', ['mupad', 'Mupad'])  # NOT functional yet
 lazy_import('sage.interfaces.mwrank', ['mwrank', 'Mwrank'])
@@ -56,6 +56,6 @@ lazy_import('sage.interfaces.singular', ['singular', 'singular_version', 'Singul
 # The following variable is used by sage-shell-mode in emacs:
 interfaces = ['gap', 'gap3', 'giac', 'gp', 'mathematica', 'gnuplot',
               'kash', 'magma', 'macaulay2', 'maple', 'maxima',
-              'mathematica', 'mwrank', 'octave', 'r', 'singular',
+              'mathematica', 'mathics3', 'mwrank', 'octave', 'r', 'singular',
               'sage0', 'sage']
 del lazy_import

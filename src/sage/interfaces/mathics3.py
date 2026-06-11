@@ -1,92 +1,91 @@
+# sage.doctest: optional - mathics3
 # sage_setup: distribution = sagemath-symbolics
 r"""
-Interface to Mathics
+Interface to Mathics3
 
-Mathics is an open source interpreter for the Wolfram Language.
+Mathics3 is an open source interpreter for the Wolfram Language.
 From the introduction of its reference manual:
 
 .. NOTE::
 
-    Mathics — to be pronounced like “Mathematics” without the
-    “emat” — is a general-purpose computer algebra system (CAS).
+    Mathics3 — is a general-purpose computer algebra system (CAS).
     It is meant to be a free, light-weight alternative to
     Mathematica®. It is free both as in “free beer” and as in
     “freedom”. There are various online mirrors running
-    Mathics but it is also possible to run Mathics locally.
-    A list of mirrors can be found at the Mathics homepage,
+    Mathics3 but it is also possible to run Mathics3 locally.
+    A list of mirrors can be found at the Mathics3 homepage,
     http://mathics.github.io.
 
-    The programming language of Mathics is meant to resemble
+    The programming language of Mathics3 is meant to resemble
     Wolfram’s famous Mathematica® as much as possible. However,
-    Mathics is in no way affiliated or supported by Wolfram.
-    Mathics will probably never have the power to compete with
+    Mathics3 is in no way affiliated or supported by Wolfram.
+    Mathics3 will probably never have the power to compete with
     Mathematica® in industrial applications; yet, it might be
     an interesting alternative for educational purposes.
 
-The Mathics interface will only work if the optional Sage package Mathics
-is installed. The interface lets you send certain Sage objects to Mathics,
-run Mathics functions, import certain Mathics expressions to Sage,
+The Mathics3 interface will only work if the optional Sage package Mathics3
+is installed. The interface lets you send certain Sage objects to Mathics3,
+run Mathics3 functions, import certain Mathics3 expressions to Sage,
 or any combination of the above.
 
-To send a Sage object ``sobj`` to Mathics, call ``mathics(sobj)``.
-This exports the Sage object to Mathics and returns a new Sage object
-wrapping the Mathics expression/variable, so that you can use the
-Mathics variable from within Sage. You can then call Mathics
+To send a Sage object ``sobj`` to Mathics3, call ``mathics3(sobj)``.
+This exports the Sage object to Mathics3 and returns a new Sage object
+wrapping the Mathics3 expression/variable, so that you can use the
+Mathics3 variable from within Sage. You can then call Mathics3
 functions on the new object; for example::
 
-    sage: from sage.interfaces.mathics import mathics
-    sage: mobj = mathics(x^2-1); mobj       # optional - mathics
+    sage: from sage.interfaces.mathics3 import mathics3
+    sage: mobj = mathics3(x^2-1); mobj
     -1 + x ^ 2
-    sage: mobj.Factor()                     # optional - mathics
+    sage: mobj.Factor()
     (-1 + x) (1 + x)
 
-In the above example the factorization is done using Mathics's
+In the above example the factorization is done using Mathics3's
 ``Factor[]`` function.
 
-To see Mathics's output you can simply print the Mathics wrapper
-object. However if you want to import Mathics's output back to Sage,
-call the Mathics wrapper object's ``sage()`` method. This method returns
+To see Mathics3's output you can simply print the Mathics3 wrapper
+object. However if you want to import Mathics3's output back to Sage,
+call the Mathics3 wrapper object's ``sage()`` method. This method returns
 a native Sage object::
 
-    sage: # optional - mathics
-    sage: mobj = mathics(x^2-1)
+    sage: mobj = mathics3(x^2-1)
     sage: mobj2 = mobj.Factor(); mobj2
     (-1 + x) (1 + x)
     sage: mobj2.parent()
-    Mathics
+    Mathics3
     sage: sobj = mobj2.sage(); sobj
     (x + 1)*(x - 1)
     sage: sobj.parent()
     Symbolic Ring
 
 
-If you want to run a Mathics function and don't already have the input
+If you want to run a Mathics3 function and don't already have the input
 in the form of a Sage object, then it might be simpler to input a string to
-``mathics(expr)``. This string will be evaluated as if you had typed it
-into Mathics::
+``mathics3(expr)``. This string will be evaluated as if you had typed it
+into Mathics3::
 
-    sage: mathics('Factor[x^2-1]')          # optional - mathics
+    sage: mathics3('Factor[x^2-1]')
     (-1 + x) (1 + x)
-    sage: mathics('Range[3]')               # optional - mathics
+    sage: mathics3('Range[3]')
     {1, 2, 3}
 
-If you want work with the internal Mathics expression, then you can call
-``mathics.eval(expr)``, which returns an instance of
-:class:`mathics.core.expression.Expression`. If you want the result to
-be a string formatted like Mathics's InputForm, call ``repr(mobj)`` on
+If you want work with the internal Mathics3 expression, then you can call
+``mathics3.eval(expr)``, which returns an instance of
+:class:`mathics3.core.expression.Expression`. If you want the result to
+be a string formatted like Mathics3's InputForm, call ``repr(mobj)`` on
 the wrapper object ``mobj``. If you want a string formatted in Sage style,
 call ``mobj._sage_repr()``::
 
-    sage: mathics.eval('x^2 - 1')           # optional - mathics
+    sage: mathics3.eval('x^2 - 1')
     '-1 + x ^ 2'
-    sage: repr(mathics('Range[3]'))         # optional - mathics
+    sage: repr(mathics3('Range[3]'))
     '{1, 2, 3}'
-    sage: mathics('Range[3]')._sage_repr()  # optional - mathics
+    sage: mathics3('Range[3]')._sage_repr()
     '[1, 2, 3]'
 
-Finally, if you just want to use a Mathics command line from within
-Sage, the function ``mathics_console()`` dumps you into an interactive
-command-line Mathics session.
+Finally, if you just want to use a Mathics3 command line from within
+Sage, the function ``mathics3_console()`` dumps you into an interactive
+command-line Mathics3 session.
 
 Tutorial
 --------
@@ -98,35 +97,35 @@ http://library.wolfram.com/conferences/devconf99/withoff/Basic1.html/.
 Syntax
 ~~~~~~
 
-Now make 1 and add it to itself. The result is a Mathics
+Now make 1 and add it to itself. The result is a Mathics3
 object.
 
 ::
 
-    sage: m = mathics
-    sage: a = m(1) + m(1); a                # optional - mathics
+    sage: m = mathics3
+    sage: a = m(1) + m(1); a
     2
-    sage: a.parent()                        # optional - mathics
-    Mathics
-    sage: m('1+1')                          # optional - mathics
+    sage: a.parent()
+    Mathics3
+    sage: m('1+1')
     2
-    sage: m(3)**m(50)                       # optional - mathics
+    sage: m(3)**m(50)
     717897987691852588770249
 
 The following is equivalent to ``Plus[2, 3]`` in
-Mathics::
+Mathics3::
 
-    sage: m = mathics
-    sage: m(2).Plus(m(3))                   # optional - mathics
+    sage: m = mathics3
+    sage: m(2).Plus(m(3))
     5
 
 We can also compute `7(2+3)`.
 
 ::
 
-    sage: m(7).Times(m(2).Plus(m(3)))       # optional - mathics
+    sage: m(7).Times(m(2).Plus(m(3)))
     35
-    sage: m('7(2+3)')                       # optional - mathics
+    sage: m('7(2+3)')
     35
 
 Some typical input
@@ -134,13 +133,12 @@ Some typical input
 
 We solve an equation and a system of two equations::
 
-    sage: # optional - mathics
-    sage: eqn = mathics('3x + 5 == 14')
+    sage: eqn = mathics3('3x + 5 == 14')
     sage: eqn
     5 + 3 x == 14
     sage: eqn.Solve('x')
     {{x -> 3}}
-    sage: sys = mathics('{x^2 - 3y == 3, 2x - y == 1}')
+    sage: sys = mathics3('{x^2 - 3y == 3, 2x - y == 1}')
     sage: print(sys)
     {x ^ 2 - 3 y == 3, 2 x - y == 1}
     sage: sys.Solve('{x, y}')
@@ -149,38 +147,54 @@ We solve an equation and a system of two equations::
 Assignments and definitions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you assign the mathics `5` to a variable `c`
-in Sage, this does not affect the `c` in Mathics.
+If you assign the mathics3 `5` to a variable `c`
+in Sage, this does not affect the `c` in Mathics3.
 
 ::
 
-    sage: c = m(5)                          # optional - mathics
-    sage: print(m('b + c x'))               # optional - mathics
+    sage: c = m(5)
+    sage: print(m('b + c x'))
                  b + c x
-    sage: print(m('b') + c*m('x'))          # optional - mathics
-             b + 5 x
+    sage: print(m('b') + c*m('x'))
+    b + 5 x
 
-The Sage interfaces changes Sage lists into Mathics lists::
+The Sage interfaces changes Sage lists into Mathics3 lists::
 
-    sage: m = mathics
-    sage: eq1 = m('x^2 - 3y == 3')          # optional - mathics
-    sage: eq2 = m('2x - y == 1')            # optional - mathics
-    sage: v = m([eq1, eq2]); v              # optional - mathics
+    sage: m = mathics3
+    sage: eq1 = m('x^2 - 3y == 3')
+    sage: eq2 = m('2x - y == 1')
+    sage: v = m([eq1, eq2]); v
     {x ^ 2 - 3 y == 3, 2 x - y == 1}
-    sage: v.Solve(['x', 'y'])               # optional - mathics
+    sage: v.Solve(['x', 'y'])
     {{x -> 0, y -> -1}, {x -> 6, y -> 11}}
+
+Sage Numeric Constants
+~~~~~~~~~~~~~~~~~~~~~~
+
+All of Sage's numeric constants can be used in a mathics3() expression. For example::
+
+    sage: mathics3(pi/2)
+    Pi / 2
+
+    sage: mathics3(golden_ratio).N()
+    1.61803
+
+Similarly, many Mathics3's Numeric Constants translate into Sage's numeric constants::
+
+    sage: [mathics3(c).sage() for c in ('Catalan', 'Glaisher', 'GoldenRatio', 'EulerGamma', 'Khinchin', 'Pi')]
+    [catalan, glaisher, golden_ratio, euler_gamma, khinchin, pi]
 
 Function definitions
 ~~~~~~~~~~~~~~~~~~~~
 
-Define mathics functions by simply sending the definition to
+Define mathics3 functions by simply sending the definition to
 the interpreter.
 
 ::
 
-    sage: m = mathics
-    sage: _ = mathics('f[p_] = p^2');       # optional - mathics
-    sage: m('f[9]')                         # optional - mathics
+    sage: m = mathics3
+    sage: _ = mathics3('f[p_] = p^2');
+    sage: m('f[9]')
     81
 
 Numerical Calculations
@@ -190,23 +204,23 @@ We find the `x` such that `e^x - 3x = 0`.
 
 ::
 
-    sage: eqn = mathics('Exp[x] - 3x == 0') # optional - mathics
-    sage: eqn.FindRoot(['x', 2])            # optional - mathics
+    sage: eqn = mathics3('Exp[x] - 3x == 0')
+    sage: eqn.FindRoot(['x', 2])
     {x -> 1.51213}
 
 Note that this agrees with what the PARI interpreter gp produces::
 
-    sage: gp('solve(x=1,2,exp(x)-3*x)')                                                 # needs sage.libs.pari
+    sage: gp('solve(x=1,2,exp(x)-3*x)')
     1.5121345516578424738967396780720387046
 
 Next we find the minimum of a polynomial using the two different
-ways of accessing Mathics::
+ways of accessing Mathics3::
 
-    sage: mathics('FindMinimum[x^3 - 6x^2 + 11x - 5, {x,3}]')  # not tested (since not supported, so far)
-    {0.6150998205402516, {x -> 2.5773502699629733}}
-    sage: f = mathics('x^3 - 6x^2 + 11x - 5')                  # optional - mathics
-    sage: f.FindMinimum(['x', 3])                              # not tested (since not supported, so far)
-    {0.6150998205402516, {x -> 2.5773502699629733}}
+    sage: mathics3('FindMinimum[x^3 - 6x^2 + 11x - 5, {x,3}]')  # not tested (since not supported, so far)
+    {0.6151, {x -> 2.57735}}
+    sage: f = mathics3('x^3 - 6x^2 + 11x - 5')
+    sage: f.FindMinimum(['x', 3])                               # not tested (since not supported, so far)
+    {0.6151, {x -> 2.57735}}
 
 Polynomial and Integer Factorization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -219,27 +233,26 @@ We factor a polynomial of degree 200 over the integers.
     sage: f = (x**100+17*x+5)*(x**100-5*x+20)
     sage: f
     x^200 + 12*x^101 + 25*x^100 - 85*x^2 + 315*x + 100
-    sage: g = mathics(str(f))                # optional - mathics
-    sage: print(g)                           # optional - mathics
+    sage: g = mathics3(str(f))
+    sage: print(g)
     100 + 315 x - 85 x ^ 2 + 25 x ^ 100 + 12 x ^ 101 + x ^ 200
-    sage: g                                  # optional - mathics
+    sage: g
     100 + 315 x - 85 x ^ 2 + 25 x ^ 100 + 12 x ^ 101 + x ^ 200
-    sage: print(g.Factor())                  # optional - mathics
+    sage: print(g.Factor())
     (5 + 17 x + x ^ 100) (20 - 5 x + x ^ 100)
 
 We can also factor a multivariate polynomial::
 
-    sage: f = mathics('x^6 + (-y - 2)*x^5 + (y^3 + 2*y)*x^4 - y^4*x^3')  # optional - mathics
-    sage: print(f.Factor())                  # optional - mathics
+    sage: f = mathics3('x^6 + (-y - 2)*x^5 + (y^3 + 2*y)*x^4 - y^4*x^3')
+    sage: print(f.Factor())
     x ^ 3 (x - y) (-2 x + x ^ 2 + y ^ 3)
 
 We factor an integer::
 
-    sage: # optional - mathics
-    sage: n = mathics(2434500)
+    sage: n = mathics3(2434500)
     sage: n.FactorInteger()
     {{2, 2}, {3, 2}, {5, 3}, {541, 1}}
-    sage: n = mathics(2434500)
+    sage: n = mathics3(2434500)
     sage: F = n.FactorInteger(); F
     {{2, 2}, {3, 2}, {5, 3}, {541, 1}}
     sage: F[1]
@@ -251,26 +264,25 @@ We factor an integer::
 Long Input
 ----------
 
-The Mathics interface reads in even very long input (using
+The Mathics3 interface reads in even very long input (using
 files) in a robust manner.
 
 ::
 
     sage: t = '"%s"'%10^10000   # ten thousand character string.
-    sage: a = mathics(t)        # optional - mathics
-    sage: a = mathics.eval(t)   # optional - mathics
+    sage: a = mathics3(t)
+    sage: a = mathics3.eval(t)
 
 Loading and saving
 ------------------
 
-Mathics has an excellent ``InputForm`` function,
-which makes saving and loading Mathics objects possible. The
+Mathics3 has an excellent ``InputForm`` function,
+which makes saving and loading Mathics3 objects possible. The
 first examples test saving and loading to strings.
 
 ::
 
-    sage: # optional - mathics
-    sage: x = mathics(pi/2)
+    sage: x = mathics3('Pi/2')  # Or pi/2
     sage: print(x)
     Pi / 2
     sage: loads(dumps(x)) == x
@@ -284,7 +296,7 @@ first examples test saving and loading to strings.
 Complicated translations
 ------------------------
 
-The ``mobj.sage()`` method tries to convert a Mathics object to a Sage
+The ``mobj.sage()`` method tries to convert a Mathics3 object to a Sage
 object. In many cases, it will just work. In particular, it should be able to
 convert expressions entirely consisting of:
 
@@ -292,26 +304,26 @@ convert expressions entirely consisting of:
 - functions and named constants also present in Sage, where:
 
     - Sage knows how to translate the function or constant's name from
-      Mathics's, or
+      Mathics3's, or
     - the Sage name for the function or constant is trivially related to
-      Mathics's;
+      Mathics3's;
 
 - symbolic variables whose names don't pathologically overlap with
   objects already defined in Sage.
 
-This method will not work when Mathics's output includes:
+This method will not work when Mathics3's output includes:
 
 - strings;
 - functions unknown to Sage;
-- Mathics functions with different parameters/parameter order to
+- Mathics3 functions with different parameters/parameter order to
   the Sage equivalent.
 
-If you want to convert more complicated Mathics expressions, you can
+If you want to convert more complicated Mathics3 expressions, you can
 instead call ``mobj._sage_()`` and supply a translation dictionary::
 
     sage: x = var('x')
-    sage: m = mathics('NewFn[x]')                 # optional - mathics
-    sage: m._sage_(locals={'NewFn': sin, 'x':x})  # optional - mathics
+    sage: m = mathics3('NewFn[x]')
+    sage: m._sage_(locals={'NewFn': sin, 'x':x})
     sin(x)
 
 For more details, see the documentation for ``._sage_()``.
@@ -320,61 +332,63 @@ For more details, see the documentation for ``._sage_()``.
 OTHER Examples::
 
     sage: def math_bessel_K(nu, x):
-    ....:     return mathics(nu).BesselK(x).N(20)
-    sage: math_bessel_K(2,I)                      # optional - mathics
+    ....:     return mathics3(nu).BesselK(x).N(20)
+    sage: math_bessel_K(2,I)
     -2.5928861754911969782 + 0.18048997206696202663 I
 
 ::
 
     sage: slist = [[1, 2], 3., 4 + I]
-    sage: mlist = mathics(slist); mlist         # optional - mathics
+    sage: mlist = mathics3(slist); mlist
     {{1, 2}, 3., 4 + I}
-    sage: slist2 = list(mlist); slist2          # optional - mathics
+    sage: slist2 = list(mlist); slist2
     [{1, 2}, 3., 4 + I]
-    sage: slist2[0]                             # optional - mathics
+    sage: slist2[0]
     {1, 2}
-    sage: slist2[0].parent()                    # optional - mathics
-    Mathics
-    sage: slist3 = mlist.sage(); slist3         # optional - mathics
+    sage: slist2[0].parent()
+    Mathics3
+    sage: slist3 = mlist.sage(); slist3
     [[1, 2], 3.00000000000000, 4.00000000000000 + 1.00000000000000*I]
 
 ::
 
-    sage: mathics('10.^80')         # optional - mathics
+    sage: mathics3('10.^80')
     1.×10^80
-    sage: mathics('10.^80').sage()  # optional - mathics
+    sage: mathics3('10.^80').sage()
     1.00000000000000e80
 
 AUTHORS:
 
 - Sebastian Oehms (2021): first version from a copy of the Mathematica interface (see :issue:`31778`).
+- Rashad Alsharpini (2026): port to Mathics3 10.0.0 (see SAGE pull request 41885).
 
 
-Thanks to Rocky Bernstein and Juan Mauricio Matera for their support. For further acknowledgments see `this list <https://github.com/mathics/Mathics/blob/master/AUTHORS.txt>`__.
+Thanks to Rocky Bernstein and Juan Mauricio Matera for their support. For further acknowledgments see `this list <https://github.com/Mathics3/mathics-core/blob/master/AUTHORS.txt>`__.
 
 TESTS:
 
-Check that numerical approximations via Mathics's `N[]` function work
+Check that numerical approximations via Mathics3's `N[]` function work
 correctly (:issue:`18888`, :issue:`28907`)::
 
-    sage: # optional - mathics
-    sage: mathics('Pi/2').N(10)
+    sage: mathics3('Pi/2').N(10)
     1.570796327
-    sage: mathics('Pi').N(10)
+    sage: mathics3('Pi').N(10)
     3.141592654
-    sage: mathics('Pi').N(50)
+    sage: mathics3('Pi').N(50)
     3.1415926535897932384626433832795028841971693993751
-    sage: str(mathics('Pi*x^2-1/2').N())
+    sage: str(mathics3('Pi*x^2-1/2').N())
     '-0.5 + 3.14159 x ^ 2.'
 
-Check that Mathics's `E` exponential symbol is correctly backtranslated
-as Sage's `e` (:issue:`29833`)::
-
-    sage: (e^x)._mathics_().sage()  # optional -- mathics
-    e^x
-    sage: exp(x)._mathics_().sage() # optional -- mathics
-    e^x
 """
+# TODO:
+# This needs reworking, and probably integrated better with Mathics3Element.
+# Check that Mathics3's `E` exponential symbol is correctly backtranslated
+# as Sage's `e` (:issue:`29833`)::
+
+#     sage: (e^x)._mathics3_().sage()
+#     exp[x]
+#     sage: exp(x)._mathics3_().sage()
+#     e^x
 
 ##############################################################################
 #       Copyright (C) 2021 Sebastian Oehms <seb.oehms@gmail.com>
@@ -386,33 +400,72 @@ as Sage's `e` (:issue:`29833`)::
 #                  https://www.gnu.org/licenses/
 ##############################################################################
 
+from typing import Final
 import os
 
+import sage.symbolic.expression
+from mathics.core.symbols import Symbol, SymbolFalse, SymbolTrue
+from mathics.core.systemsymbols import (
+    SymbolCatalan,
+    SymbolE,
+    SymbolEulerGamma,
+    SymbolGoldenRatio,
+    SymbolKhinchin,
+    SymbolPi,
+)
+
+from sage.rings.integer import Integer
+from sage.rings.rational import Rational
+from sage.rings.real_mpfr import RealNumber
+from sage.symbolic.constants import (
+    catalan,
+    e,
+    euler_gamma,
+    glaisher,
+    golden_ratio,
+    khinchin,
+    pi,
+)
 from sage.misc.cachefunc import cached_method
+from sage.interfaces.abc import Mathics3Element as ABCMathics3Element
 from sage.interfaces.interface import Interface, InterfaceElement, InterfaceFunction, InterfaceFunctionElement
 from sage.interfaces.tab_completion import ExtraTabCompletion
 from sage.misc.instancedoc import instancedoc
 from sage.structure.richcmp import rich_to_bool
+# from sage.symbolic.expression import register_symbol
+
+# register_symbol(e, {'mathics3': 'E'})
+
+MATHICS3_TO_SAGE_CONSTANT: Final[dict[Symbol, sage.symbolic.expression]] = {
+    SymbolCatalan: catalan,
+    SymbolEulerGamma: euler_gamma,
+    SymbolE: e,
+    SymbolFalse: False,
+    Symbol("System`Glaisher"): glaisher,
+    SymbolGoldenRatio: golden_ratio,
+    SymbolKhinchin: khinchin,
+    SymbolPi: pi,
+    SymbolTrue: True,
+}
 
 
-def _mathics_sympysage_symbol(self):
+def _mathics3_sympysage_symbol(self):
     r"""
     Convert a Sympy symbol ``self`` to a corresponding element
     in Sage's symbolic ring.
 
     This function replaces ``_sympysage_symbol`` to
-    take care of the special names used in Mathics.
+    take care of the special names used in Mathics3.
     It is set to the method ``_sage_`` of the Sympy class
-    :class:`sympy.core.symbol.Sympol`.
+    :class:`sympy.core.symbol.Symbol`.
 
     EXAMPLES::
 
-        sage: # optional - mathics
-        sage: from sage.interfaces.mathics import _mathics_sympysage_symbol
-        sage: mt = mathics('t')
+        sage: from sage.interfaces.mathics3 import _mathics3_sympysage_symbol
+        sage: mt = mathics3('t')
         sage: st = mt.to_sympy(); st
-        _Mathics_User_Global`t
-        sage: _mathics_sympysage_symbol(st)
+        _uGlobal_t
+        sage: _mathics3_sympysage_symbol(st)
         t
         sage: bool(_ == st._sage_())
         True
@@ -424,10 +477,12 @@ def _mathics_sympysage_symbol(self):
         name = self.name
         if name.startswith('_Mathics_User_'):
             name = name.split('`')[1]
-            if name == mathics._true_symbol():
-                return True
-            if name == mathics._false_symbol():
-                return False
+        elif name.startswith("_uGlobal_"):
+            name = name[9:]
+        if name == mathics3._true_symbol():
+            return True
+        if name == mathics3._false_symbol():
+            return False
         return SR.var(name)
     except ValueError:
         # sympy sometimes returns dummy variables
@@ -436,29 +491,28 @@ def _mathics_sympysage_symbol(self):
         return SR.var(str(self))
 
 
-class Mathics(Interface):
+class Mathics3(Interface):
     r"""
-    Interface to the Mathics interpreter.
+    Interface to the Mathics3 interpreter.
 
     Implemented according to the Mathematica interface but avoiding Pexpect
     functionality.
 
     EXAMPLES::
 
-        sage: # optional - mathics
-        sage: t = mathics('Tan[I + 0.5]')
+        sage: t = mathics3('Tan[I + 0.5]')
         sage: t.parent()
-        Mathics
+        Mathics3
         sage: ts = t.sage()
         sage: ts.parent()
         Complex Field with 53 bits of precision
-        sage: t == mathics(ts)
+        sage: t == mathics3(ts)
         True
-        sage: mtan = mathics.Tan
+        sage: mtan = mathics3.Tan
         sage: mt = mtan(I+1/2)
         sage: mt == t
         True
-        sage: u = mathics(I+1/2)
+        sage: u = mathics3(I+1/2)
         sage: u.Tan() == mt
         True
 
@@ -475,11 +529,11 @@ class Mathics(Interface):
 
         EXAMPLES::
 
-            sage: mathics._mathics_init_ == mathics._mathematica_init_
-            True
+            sage: mathics3.__init__
+            <method-wrapper '__init__' of sage.misc.lazy_import...
         """
 
-        Interface.__init__(self, name='mathics')
+        Interface.__init__(self, name='mathics3')
         self._seed = seed
         self._initialized = False  # done lazily
         self._session = None
@@ -487,13 +541,13 @@ class Mathics(Interface):
 
     def _lazy_init(self):
         r"""
-        Initialize the Mathics interpreter.
+        Initialize the Mathics3 interpreter.
 
         Implemented according to R interface.
 
         EXAMPLES::
 
-            sage: mathics._lazy_init()   # optional - mathics
+            sage: mathics3._lazy_init()
         """
         if not self._initialized:
             self._initialized = True
@@ -501,25 +555,25 @@ class Mathics(Interface):
 
     def _start(self):
         """
-        Start up the Mathics interpreter and sets the initial prompt and options.
+        Start up the Mathics3 interpreter and sets the initial prompt and options.
 
-        This is called the first time the Mathics interface is actually used.
+        This is called the first time the Mathics3 interface is actually used.
 
         EXAMPLES::
 
-            sage: mathics._start()            # optional - mathics
-            sage: type(mathics._session)      # optional - mathics
+            sage: mathics3._start()
+            sage: type(mathics3._session)
             <class 'mathics.session.MathicsSession'>
         """
         if not self._session:
             from mathics.session import MathicsSession
             from mathics.core.load_builtin import import_and_load_builtins
             import_and_load_builtins()
-            self._session = MathicsSession()
+            self._session = MathicsSession(add_builtin=True)
             from sage.interfaces.sympy import sympy_init
             sympy_init()
             from sympy import Symbol
-            Symbol._sage_ = _mathics_sympysage_symbol
+            Symbol._sage_ = _mathics3_sympysage_symbol
 
     def _read_in_file_command(self, filename):
         r"""
@@ -527,37 +581,37 @@ class Mathics(Interface):
 
             sage: from sage.misc.temporary_file import tmp_filename
             sage: fn = tmp_filename()
-            sage: mathics('40!>>%s' %fn)                     # optional - mathics
+            sage: mathics3('40!>>%s' %fn)
             815915283247897734345611269596115894272000000000
-            sage: mathics(mathics._read_in_file_command(fn)) # optional - mathics
+            sage: mathics3(mathics3._read_in_file_command(fn))
             815915283247897734345611269596115894272000000000
-            sage: os.system('rm %s' %fn)                     # optional - mathics
+            sage: os.system('rm %s' %fn)
             0
         """
         return '<<"%s"' % filename
 
     def _install_hints(self):
         """
-        Hints for installing mathics on your computer.
+        Hints for installing mathics3 on your computer.
 
         EXAMPLES::
 
-            sage: len(mathics._install_hints())  # optional - mathics
-            101
+            sage: len(mathics3._install_hints())
+            103
         """
         return """
-In order to use the Mathics interface you need to have the
-optional Sage package Mathics installed.
+In order to use the Mathics3 interface you need to have the
+optional Sage package Mathics3 installed.
 """
 
     def _eval(self, code):
         """
-        Evaluates a command inside the Mathics interpreter and returns the output
-        as a Mathics result.
+        Evaluates a command inside the Mathics3 interpreter and returns the output
+        as a Mathics3 result.
 
         EXAMPLES::
 
-            sage: mathics._eval('1+1').last_eval  # optional - mathics
+            sage: mathics3._eval('1+1').last_eval
             <Integer: 2>
         """
         self._lazy_init()
@@ -569,12 +623,12 @@ optional Sage package Mathics installed.
 
     def eval(self, code, *args, **kwds):
         """
-        Evaluates a command inside the Mathics interpreter and returns the output
+        Evaluates a command inside the Mathics3 interpreter and returns the output
         in printable form.
 
         EXAMPLES::
 
-            sage: mathics.eval('1+1')  # optional - mathics
+            sage: mathics3.eval('1+1')
             '2'
         """
         res = self._eval(code)
@@ -589,8 +643,8 @@ optional Sage package Mathics installed.
 
         EXAMPLES::
 
-            sage: mathics.set('u', '2*x +E')         # optional - mathics
-            sage: bool(mathics('u').sage() == 2*x+e) # optional - mathics
+            sage: mathics3.set('u', '2*x +E')
+            sage: bool(mathics3('u').sage() == 2*x+e)
             True
         """
         cmd = f'{var}={value};'
@@ -602,8 +656,8 @@ optional Sage package Mathics installed.
 
         EXAMPLES::
 
-            sage: mathics.set('u', '2*x +E')        # optional - mathics
-            sage: mathics.get('u')                  # optional - mathics
+            sage: mathics3.set('u', '2*x +E')
+            sage: mathics3.get('u')
             '2 x + E'
         """
         return self.eval(var)
@@ -614,7 +668,7 @@ optional Sage package Mathics installed.
 
         EXAMPLES::
 
-            sage: mathics._function_call_string('Sin', ['x'], [])
+            sage: mathics3._function_call_string('Sin', ['x'], [])
             'Sin[x]'
         """
         return "{}[{}]".format(function, ",".join(args))
@@ -623,7 +677,7 @@ optional Sage package Mathics installed.
         r"""
         EXAMPLES::
 
-            sage: mathics._left_list_delim()
+            sage: mathics3._left_list_delim()
             '{'
         """
         return "{"
@@ -632,7 +686,7 @@ optional Sage package Mathics installed.
         r"""
         EXAMPLES::
 
-            sage: mathics._right_list_delim()
+            sage: mathics3._right_list_delim()
             '}'
         """
         return "}"
@@ -641,7 +695,7 @@ optional Sage package Mathics installed.
         r"""
         EXAMPLES::
 
-            sage: mathics._left_func_delim()
+            sage: mathics3._left_func_delim()
             '['
         """
         return "["
@@ -650,7 +704,7 @@ optional Sage package Mathics installed.
         r"""
         EXAMPLES::
 
-            sage: mathics._right_func_delim()
+            sage: mathics3._right_func_delim()
             ']'
         """
         return "]"
@@ -660,12 +714,12 @@ optional Sage package Mathics installed.
     # #########################################
     def chdir(self, dir):
         """
-        Change Mathics's current working directory.
+        Change Mathics3's current working directory.
 
         EXAMPLES::
 
-            sage: mathics.chdir('/')          # optional - mathics
-            sage: mathics('Directory[]')      # optional - mathics
+            sage: mathics3.chdir('/')
+            sage: mathics3('Directory[]')
             /
         """
         self.eval('SetDirectory["%s"]' % dir)
@@ -674,7 +728,7 @@ optional Sage package Mathics installed.
         r"""
         EXAMPLES::
 
-            sage: mathics._true_symbol()
+            sage: mathics3._true_symbol()
             'True'
         """
         return 'True'
@@ -683,7 +737,7 @@ optional Sage package Mathics installed.
         r"""
         EXAMPLES::
 
-            sage: mathics._false_symbol()
+            sage: mathics3._false_symbol()
             'False'
         """
         return 'False'
@@ -692,7 +746,7 @@ optional Sage package Mathics installed.
         r"""
         EXAMPLES::
 
-            sage: mathics._equality_symbol()
+            sage: mathics3._equality_symbol()
             '=='
         """
         return '=='
@@ -701,7 +755,7 @@ optional Sage package Mathics installed.
         r"""
         EXAMPLES::
 
-            sage: mathics._assign_symbol()
+            sage: mathics3._assign_symbol()
             ':='
         """
         return ':='
@@ -709,19 +763,19 @@ optional Sage package Mathics installed.
     def _exponent_symbol(self):
         r"""
         Return the symbol used to denote the exponent of a number in
-        Mathics.
+        Mathics3.
 
         EXAMPLES::
 
-            sage: mathics._exponent_symbol()
+            sage: mathics3._exponent_symbol()
             '*^'
 
         ::
 
-            sage: bignum = mathics('10.^80')       # optional - mathics
-            sage: repr(bignum)                     # optional - mathics
+            sage: bignum = mathics3('10.^80')
+            sage: repr(bignum)
             '1.×10^80'
-            sage: repr(bignum).replace(mathics._exponent_symbol(), 'e').strip() # optional - mathics
+            sage: repr(bignum).replace(mathics3._exponent_symbol(), 'e').strip()
             '1.×10^80'
         """
         return '*^'
@@ -733,24 +787,24 @@ optional Sage package Mathics installed.
 
         EXAMPLES::
 
-            sage: mathics._object_class()
-            <class 'sage.interfaces.mathics.MathicsElement'>
+            sage: mathics3._object_class()
+            <class 'sage.interfaces.mathics3.Mathics3Element'>
         """
-        return MathicsElement
+        return Mathics3Element
 
     def console(self):
         r"""
-        Spawn a new Mathics command-line session.
+        Spawn a new Mathics3 command-line session.
 
         EXAMPLES::
 
-            sage: mathics.console()  # not tested
+            sage: mathics3.console()  # not tested
 
-            Mathics 2.1.1.dev0
-            on CPython 3.9.2 (default, Mar 19 2021, 22:23:28)
-            using SymPy 1.7, mpmath 1.2.1, numpy 1.19.5, cython 0.29.21
+            Mathics3 10.0.0
+            Running on linux CPython 3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]
+            using SymPy 1.14.0, mpmath 1.3.0, numpy 2.4.3, cython 3.2.4, scipy 1.17.1, skimage Not installed
 
-            Copyright (C) 2011-2021 The Mathics Team.
+            Copyright (C) 2011-2026 The Mathics3 Team.
             This program comes with ABSOLUTELY NO WARRANTY.
             This is free software, and you are welcome to redistribute it
             under certain conditions.
@@ -765,49 +819,66 @@ optional Sage package Mathics installed.
 
             sage:
         """
-        mathics_console()
+        mathics3_console()
 
     def help(self, cmd, long=False):
         r"""
-        Return the Mathics documentation of the given command.
+        Return the Mathics3 documentation of the given command.
 
         EXAMPLES::
 
-            sage: mathics.help('Sin')                   # optional - mathics
-            'sine function\n'
+            sage: mathics3.help('Sin')
+            ...
 
-            sage: print(_)                              # optional - mathics
-            sine function
+            sage: print(_)
             <BLANKLINE>
-
-            sage: print(mathics.help('Sin', long=True)) # optional - mathics
-            sine function
+              Sin[z]
+                returns the sine of z.
+            <BLANKLINE>
             <BLANKLINE>
             Attributes[Sin] = {Listable, NumericFunction, Protected}
             <BLANKLINE>
 
-            sage: print(mathics.Factorial.__doc__)  # optional - mathics
-            factorial
+            sage: print(mathics3.help('Sin', long=True))
+            <BLANKLINE>
+              Sin[z]
+                returns the sine of z.
+            <BLANKLINE>
+            <BLANKLINE>
+            Attributes[Sin] = {Listable, NumericFunction, Protected}
             <BLANKLINE>
 
-            sage: u = mathics('Pi')                 # optional - mathics
-            sage: print(u.Cos.__doc__)              # optional - mathics
-            cosine function
+            sage: print(mathics3.Factorial.__doc__)
+            <BLANKLINE>
+              Factorial[n]
+              n!
+                computes the factorial of n.
+            <BLANKLINE>
+            <BLANKLINE>
+            Attributes[Factorial] = {Listable, NumericFunction, Protected, ReadProtected}
+
+            sage: u = mathics3('Pi')
+            sage: print(u.Cos.__doc__)
+            <BLANKLINE>
+              Cos[z]
+                returns the cosine of z.
+            <BLANKLINE>
+            <BLANKLINE>
+            Attributes[Cos] = {Listable, NumericFunction, Protected}
             <BLANKLINE>
         """
         if long:
             return self.eval('Information[%s]' % cmd)
-        else:
-            return self.eval('? %s' % cmd)
+        return self.eval('? %s' % cmd)
 
     def __getattr__(self, attrname):
         r"""
         EXAMPLES::
 
-            sage: msin = mathics.Sin           # optional - mathics
-            sage: msin(0.2)                    # optional - mathics
+            sage: msin = mathics3.Sin
+            sage: msin(0.2)
             0.19866933079506123
-            sage: _ == sin(0.2)                # optional - mathics
+            sage: _ == sin(0.2)
             True
         """
         if attrname[:1] == "_":
@@ -815,31 +886,97 @@ optional Sage package Mathics installed.
         return InterfaceFunction(self, attrname)
 
 
+def mathics3_to_sage(m_node, locals=None):
+    import mathics.core.atoms as m_atoms
+    import mathics.core.symbols as m_symbols
+    import mathics.core.expression as m_expr
+
+    if locals is None:
+        locals = {}
+
+    if isinstance(m_node, m_atoms.Integer):
+        return Integer(str(m_node))
+    if isinstance(m_node, m_atoms.Rational):
+        return Rational(str(m_node))
+    if isinstance(m_node, m_atoms.Real):
+        return RealNumber(str(m_node))
+    if isinstance(m_node, m_symbols.Symbol):
+        if m_node in MATHICS3_TO_SAGE_CONSTANT:
+            return MATHICS3_TO_SAGE_CONSTANT[m_node]
+
+        name = m_node.get_name()
+        name_short = name.split("`")[-1]
+        if name_short in locals:
+            return locals[name_short]
+        return SR.var(name_short)
+
+    if isinstance(m_node, m_atoms.String):
+        return str(m_node.value)
+
+    if isinstance(m_node, m_expr.Expression):
+        head = m_node.get_head()
+        elements = [mathics3_to_sage(el, locals) for el in m_node.get_elements()]
+        head_name = head.get_name()
+
+        if head_name == "System`Plus":
+            return sum(elements) if elements else Integer(0)
+        if head_name == "System`Times":
+            import operator
+            from functools import reduce
+
+            return reduce(operator.mul, elements) if elements else Integer(1)
+        if head_name == "System`Power":
+            return elements[0] ** elements[1]
+        if head_name == "System`List":
+            return elements
+        if head_name == "System`Rule":
+            return (elements[0], elements[1])
+
+        head_name_short = head_name.split("`")[-1]
+        if head_name_short in locals:
+            func = locals[head_name_short]
+            return func(*elements) if callable(func) else func
+
+        # Try finding the function in Sage
+        try:
+            import sage.all
+
+            func = getattr(sage.all, head_name_short.lower())
+            if callable(func):
+                return func(*elements)
+        except AttributeError:
+            pass
+
+        return getattr(SR.var(head_name_short), "__call__")(*elements)
+
+    raise ValueError(f"Unknown node type: {type(m_node)}")
+
+
 @instancedoc
-class MathicsElement(ExtraTabCompletion, InterfaceElement):
+class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
     r"""
-    Element class of the Mathics interface.
+    Element class of the Mathics3 interface.
 
     Its instances are usually constructed via the instance call of its parent.
-    It wrapes the Mathics library for this object. In a session Mathics methods
+    It wraps the Mathics3 library for this object. In a session Mathics3 methods
     can be obtained using tab completion.
 
     EXAMPLES::
 
-        sage: # optional - mathics
-        sage: me=mathics(e); me
-        E
+        sage: me=mathics3(e); me.sage()
+        e
+        sage: me=mathics3('E'); me.sage()
+        e
         sage: type(me)
-        <class 'sage.interfaces.mathics.MathicsElement'>
+        <class 'sage.interfaces.mathics3.Mathics3Element'>
         sage: P = me.parent(); P
-        Mathics
+        Mathics3
         sage: type(P)
-        <class 'sage.interfaces.mathics.Mathics'>
+        <class 'sage.interfaces.mathics3.Mathics3'>
 
-    Access to the Mathics expression objects::
+    Access to the Mathics3 expression objects::
 
-        sage: # optional - mathics
-        sage: res = me._mathics_result
+        sage: res = me._mathics3_result
         sage: type(res)
         <class 'mathics.core.evaluation.Result'>
         sage: expr = res.last_eval; expr
@@ -847,9 +984,8 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
         sage: type(expr)
         <class 'mathics.core.symbols.Symbol'>
 
-    Applying Mathics methods::
+    Applying Mathics3 methods::
 
-        sage: # optional - mathics
         sage: me.to_sympy()
         E
         sage: me.get_name()
@@ -859,7 +995,7 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
 
     Conversion to Sage::
 
-        sage: bool(me.sage() == e)             # optional - mathics
+        sage: bool(me.sage() == e)
         True
     """
 
@@ -869,25 +1005,25 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
 
         .. NOTE::
 
-           Currently returns all methods of :class:`mathics.expression.Expression`.
+           Currently returns all methods of :class:`mathics3.expression.Expression`.
 
         EXAMPLES::
 
-            sage: a = mathics(5*x)             # optional - mathics
-            sage: t = a._tab_completion()      # optional - mathics
-            sage: len(t) > 100                 # optional - mathics
+            sage: a = mathics3(5*x)
+            sage: t = a._tab_completion()
+            sage: len(t) > 100
             True
         """
-        return dir(self._mathics_result.last_eval)
+        return dir(self._mathics3_result.last_eval)
 
     def __getitem__(self, n):
         r"""
         EXAMPLES::
 
-            sage: l = mathics('{1, x, .15}')  # optional - mathics
-            sage: l[0]                        # optional - mathics
+            sage: l = mathics3('{1, x, .15}')
+            sage: l[0]
             List
-            sage: for i in l: print(i)        # optional - mathics
+            sage: for i in l: print(i)
             1
             x
             0.15
@@ -898,23 +1034,22 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
         r"""
         EXAMPLES::
 
-            sage: # optional - mathics
-            sage: a = mathics(5*x)
-            sage: res = a._mathics_result
+            sage: a = mathics3(5*x)
+            sage: res = a._mathics3_result
             sage: str(a) == res.result
             True
-            sage: t = mathics._eval('5*x')
+            sage: t = mathics3._eval('5*x')
             sage: t.last_eval  == res.last_eval
             True
         """
         P = self._check_valid()
-        if attrname == '_mathics_result':
-            self._mathics_result = P._eval(self.name())
-            return self._mathics_result
-        elif attrname[:1] == "_":
+        if attrname == '_mathics3_result':
+            self._mathics3_result = P._eval(self.name())
+            return self._mathics3_result
+        if attrname[:1] == "_":
             raise AttributeError
         else:
-            expr = self._mathics_result.last_eval
+            expr = self._mathics3_result.last_eval
             if hasattr(expr, attrname):
                 return expr.__getattribute__(attrname)
         return InterfaceFunctionElement(self, attrname)
@@ -923,7 +1058,7 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
         r"""
         EXAMPLES::
 
-            sage: float(mathics('Pi')) == float(pi)  # optional - mathics
+            sage: float(mathics3('Pi')) == float(pi)
             True
         """
         P = self.parent()
@@ -934,8 +1069,8 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
         EXAMPLES::
 
             sage: slist = [[1, 2], 3., 4 + I]
-            sage: mlist = mathics(slist)    # optional - mathics
-            sage: mlist._reduce()           # optional - mathics
+            sage: mlist = mathics3(slist)
+            sage: mlist._reduce()
             '{{1, 2}, 3., 4 + I}'
         """
         return str(self)
@@ -944,8 +1079,8 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
         r"""
         EXAMPLES::
 
-            sage: mpol = mathics('x + y*z')     # optional - mathics
-            sage: loads(dumps(mpol)) == mpol    # optional - mathics
+            sage: mpol = mathics3('x + y*z')
+            sage: loads(dumps(mpol)) == mpol
             True
         """
         return reduce_load, (self._reduce(), )
@@ -954,9 +1089,9 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
         r"""
         EXAMPLES::
 
-            sage: Q = mathics('Sin[x Cos[y]]/Sqrt[1-x^2]')   # optional - mathics
-            sage: latex(Q)                                   # optional - mathics
-            \frac{\text{Sin}\left[x \text{Cos}\left[y\right]\right]}{\sqrt{1-x^2}}
+            sage: Q = mathics3('Sin[x Cos[y]]/Sqrt[1-x^2]')
+            sage: latex(Q)
+            \frac{\text{Sin}(x \text{Cos}(y))}{\sqrt{1-x^2}}
         """
         z = str(self.parent()('TeXForm[%s]' % self.name()))
         i = z.find('=')
@@ -966,45 +1101,44 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
         r"""
         EXAMPLES::
 
-            sage: Q = mathics('Sin[x Cos[y]]/Sqrt[1-x^2]')   # optional - mathics
-            sage: repr(Q)                                    # optional - mathics
+            sage: Q = mathics3('Sin[x Cos[y]]/Sqrt[1-x^2]')
+            sage: repr(Q)
             'Sin[x Cos[y]] / Sqrt[1 - x ^ 2]'
         """
-        return self._mathics_result.result
+        return self._mathics3_result.result
 
     def _sage_(self, locals={}):
         r"""
         Attempt to return a Sage version of this object.
 
-        This method works successfully when Mathics returns a result
+        This method works successfully when Mathics3 returns a result
         or list of results that consist only of:
 
         - numbers, i.e. integers, floats, complex numbers;
         - functions and named constants also present in Sage, where:
             - Sage knows how to translate the function or constant's name
-              from Mathics's naming scheme, or
+              from Mathics3's naming scheme, or
             - you provide a translation dictionary `locals`, or
             - the Sage name for the function or constant is simply the
-              Mathics name in lower case;
+              Mathics3 name in lower case;
 
         - symbolic variables whose names do not pathologically overlap with
           objects already defined in Sage.
 
-        This method will not work when Mathics's output includes:
+        This method will not work when Mathics3's output includes:
 
         - strings;
         - functions unknown to Sage;
-        - Mathics functions with different parameters/parameter order to
+        - Mathics3 functions with different parameters/parameter order to
           the Sage equivalent. In this case, define a function to do the
           parameter conversion, and pass it in via the locals dictionary.
 
         EXAMPLES:
 
-        Mathics lists of numbers/constants become Sage lists of
+        Mathics3 lists of numbers/constants become Sage lists of
         numbers/constants::
 
-            sage: # optional - mathics
-            sage: m = mathics('{{1., 4}, Pi, 3.2e100, I}')
+            sage: m = mathics3('{{1., 4}, Pi, 3.2e100, I}')
             sage: s = m.sage(); s
             [[1.00000000000000, 4], pi, 3.20000000000000*e100, 1.00000000000000*I]
             sage: s[1].n()
@@ -1014,34 +1148,33 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
 
         ::
 
-            sage: m = mathics('x^2 + 5*y')      # optional - mathics
-            sage: m.sage()                      # optional - mathics
+            sage: m = mathics3('x^2 + 5*y')
+            sage: m.sage()
             x^2 + 5*y
 
         ::
 
-            sage: m = mathics('Sin[Sqrt[1-x^2]] * (1 - Cos[1/x])^2')  # optional - mathics
-            sage: m.sage()                          # optional - mathics
+            sage: m = mathics3('Sin[Sqrt[1-x^2]] * (1 - Cos[1/x])^2')
+            sage: m.sage()
             (cos(1/x) - 1)^2*sin(sqrt(-x^2 + 1))
 
         ::
 
-            sage: m = mathics('NewFn[x]')                 # optional - mathics
-            sage: m._sage_(locals={'NewFn': sin, 'x':x})  # optional - mathics
+            sage: m = mathics3('NewFn[x]')
+            sage: m._sage_(locals={'NewFn': sin, 'x':x})
             sin(x)
 
         ::
 
-            sage: var('bla')                        # optional - mathics
+            sage: var('bla')
             bla
-            sage: m = mathics('bla^2')              # optional - mathics
-            sage: bla^2 - m.sage()                  # optional - mathics
+            sage: m = mathics3('bla^2')
+            sage: bla^2 - m.sage()
             0
 
         ::
 
-            sage: # optional - mathics
-            sage: m = mathics('bla^2')
+            sage: m = mathics3('bla^2')
             sage: mb = m.sage()
             sage: var('bla')
             bla
@@ -1055,6 +1188,13 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
             return sage_eval(self._sage_repr(), locals=locals)
 
         self._check_valid()
+        m_node = self._mathics3_result.last_eval
+        if m_node is not None:
+            try:
+                return mathics3_to_sage(m_node, locals=locals)
+            except Exception:
+                pass
+
         if self.is_inexact():
             m = self.to_mpmath()
             if self is not m and m is not None:
@@ -1062,6 +1202,12 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
                 return mpmath_to_sage(m, self.get_precision())
         s = self.to_sympy()
         if self is not s and s is not None:
+            import sympy
+
+            if s is sympy.S.true:
+                return True
+            if s is sympy.S.false:
+                return False
             if hasattr(s, '_sage_'):
                 try:
                     return s._sage_()
@@ -1074,20 +1220,19 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
             if isinstance(p, list):
                 return [conv(i) for i in p]
             elif isinstance(p, tuple):
-                return tuple([conv(i) for i in p])
+                return [conv(i) for i in p]
             elif type(p) is dict:
                 return {conv(k): conv(v) for k, v in p.items()}
-            else:
-                return p
+            return p
         return s
 
     def __len__(self):
         """
-        Return the object's length, evaluated by mathics.
+        Return the object's length, evaluated by mathics3.
 
         EXAMPLES::
 
-            sage: len(mathics([1,1.,2]))    # optional - mathics
+            sage: len(mathics3([1,1.,2]))
             3
         """
         return int(self.Length())
@@ -1095,21 +1240,21 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
     @cached_method
     def _is_graphics(self):
         """
-        Test whether the mathics expression is graphics.
+        Test whether the mathics3 expression is graphics.
 
         OUTPUT: boolean
 
         EXAMPLES::
 
-            sage: P = mathics('Plot[Sin[x],{x,-2Pi,4Pi}]')   # optional - mathics
-            sage: P._is_graphics()                           # optional - mathics
+            sage: P = mathics3('Plot[Sin[x],{x,-2Pi,4Pi}]')
+            sage: P._is_graphics()
             True
         """
         return str(self).startswith('-Graphics-')
 
     def save_image(self, filename, ImageSize=600):
         r"""
-        Save a mathics graphics.
+        Save a mathics3 graphics.
 
         INPUT:
 
@@ -1120,13 +1265,13 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
 
         EXAMPLES::
 
-            sage: P = mathics('Plot[Sin[x],{x,-2Pi,4Pi}]')   # optional - mathics
-            sage: filename = tmp_filename()                  # optional - mathics
-            sage: P.save_image(filename, ImageSize=800)      # optional - mathics
+            sage: P = mathics3('Plot[Sin[x],{x,-2Pi,4Pi}]')
+            sage: filename = tmp_filename(ext=".svg")
+            sage: P.save_image(filename, ImageSize=800)
         """
         P = self._check_valid()
         if not self._is_graphics():
-            raise ValueError('mathics expression is not graphics')
+            raise ValueError('mathics3 expression is not graphics')
         filename = os.path.abspath(filename)
         s = f'Export["{filename}", {self.name()}, ImageSize->{ImageSize}]'
         P.eval(s)
@@ -1141,12 +1286,12 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
 
             sage: from sage.repl.rich_output import get_display_manager
             sage: dm = get_display_manager()
-            sage: P = mathics('Plot[Sin[x],{x,-2Pi,4Pi}]')       # optional - mathics
+            sage: P = mathics3('Plot[Sin[x],{x,-2Pi,4Pi}]')
 
         The following test requires a working X display on Linux so that the
-        Mathematica frontend can do the rendering (:issue:`23112`)::
+        Mathics3 frontend can do the rendering (:issue:`23112`)::
 
-            sage: P._rich_repr_(dm)                              # optional - mathics
+            sage: P._rich_repr_(dm)
             OutputImageSvg container
         """
         if self._is_graphics():
@@ -1166,7 +1311,7 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
 
     def show(self, ImageSize=600):
         r"""
-        Show a mathics expression immediately.
+        Show a mathics3 expression immediately.
 
         This method attempts to display the graphics immediately,
         without waiting for the currently running code (if any) to
@@ -1185,13 +1330,13 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
 
         EXAMPLES::
 
-            sage: Q = mathics('Sin[x Cos[y]]/Sqrt[1-x^2]')   # optional - mathics
-            sage: show(Q)                                    # optional - mathics
+            sage: Q = mathics3('Sin[x Cos[y]]/Sqrt[1-x^2]')
+            sage: show(Q)
             Sin[x Cos[y]] / Sqrt[1 - x ^ 2]
 
-            sage: P = mathics('Plot[Sin[x],{x,-2Pi,4Pi}]')   # optional - mathics
-            sage: show(P)                                    # optional - mathics
-            sage: P.show(ImageSize=800)                      # optional - mathics
+            sage: P = mathics3('Plot[Sin[x],{x,-2Pi,4Pi}]')
+            sage: show(P)
+            sage: P.show(ImageSize=800)
         """
         from sage.repl.rich_output import get_display_manager
         dm = get_display_manager()
@@ -1201,10 +1346,9 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
         r"""
         EXAMPLES::
 
-            sage: # optional - mathics
-            sage: mobj1 = mathics([x^2-1, 2])
-            sage: mobj2 = mathics('{x^2-1, 2}')
-            sage: mobj3 = mathics('5*x + y')
+            sage: mobj1 = mathics3([x^2-1, 2])
+            sage: mobj2 = mathics3('{x^2-1, 2}')
+            sage: mobj3 = mathics3('5*x + y')
             sage: mobj1 == mobj2
             True
             sage: mobj1 < mobj2
@@ -1215,26 +1359,26 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
         P = self.parent()
         if str(P(f"{self.name()} < {other.name()}")) == P._true_symbol():
             return rich_to_bool(op, -1)
-        elif str(P(f"{self.name()} > {other.name()}")) == P._true_symbol():
+        if str(P(f"{self.name()} > {other.name()}")) == P._true_symbol():
             return rich_to_bool(op, 1)
-        elif str(P(f"{self.name()} == {other.name()}")) == P._true_symbol():
+        if str(P(f"{self.name()} == {other.name()}")) == P._true_symbol():
             return rich_to_bool(op, 0)
         return NotImplemented
 
     def __bool__(self):
         """
-        Return whether this Mathics element is not identical to ``False``.
+        Return whether this Mathics3 element is not identical to ``False``.
 
         EXAMPLES::
 
-            sage: bool(mathics(True))   # optional - mathics
+            sage: bool(mathics3(True))
             True
-            sage: bool(mathics(False))  # optional - mathics
+            sage: bool(mathics3(False))
             False
 
-        In Mathics, `0` cannot be used to express falsity::
+        In Mathics3, `0` cannot be used to express falsity::
 
-            sage: bool(mathics(0))     # optional - mathics
+            sage: bool(mathics3(0))
             True
         """
         P = self._check_valid()
@@ -1251,48 +1395,48 @@ class MathicsElement(ExtraTabCompletion, InterfaceElement):
 
         EXAMPLES::
 
-            sage: mathics('Pi').n(10)    # optional -- mathics
+            sage: mathics3('Pi').n(10)    # optional -- mathics3
             3.1
-            sage: mathics('Pi').n()      # optional -- mathics
+            sage: mathics3('Pi').n()      # optional -- mathics3
             3.14159265358979
-            sage: mathics('Pi').n(digits=10)   # optional -- mathics
+            sage: mathics3('Pi').n(digits=10)   # optional -- mathics3
             3.141592654
         """
         return self._sage_().n(*args, **kwargs)
 
 
 # An instance
-mathics = Mathics()
+mathics3 = Mathics3()
 
 
 def reduce_load(X):
     """
-    Used in unpickling a Mathics element.
+    Used in unpickling a Mathics3 element.
 
     This function is just the ``__call__`` method of the interface instance.
 
     EXAMPLES::
 
-        sage: sage.interfaces.mathics.reduce_load('Denominator[a / b]')  # optional -- mathics
+        sage: sage.interfaces.mathics3.reduce_load('Denominator[a / b]')  # optional -- mathics3
         b
     """
 
-    return mathics(X)
+    return mathics3(X)
 
 
-def mathics_console():
+def mathics3_console():
     r"""
-    Spawn a new Mathics command-line session.
+    Spawn a new Mathics3 command-line session.
 
     EXAMPLES::
 
-        sage: mathics_console()  # not tested
+        sage: mathics3_console()  # not tested
 
-        Mathics 2.1.1.dev0
-        on CPython 3.9.2 (default, Mar 19 2021, 22:23:28)
-        using SymPy 1.7, mpmath 1.2.1, numpy 1.19.5, cython 0.29.21
+        Mathics3 10.0.0
+        Running on linux CPython 3.14.3 (main, Mar 30 2026, 06:42:16) [GCC 13.3.0]
+        using SymPy 1.13.3, mpmath 1.3.0, numpy 2.4.4, cython 3.2.4, scipy 1.17.1, skimage 0.26.0
 
-        Copyright (C) 2011-2021 The Mathics Team.
+        Copyright (C) 2011-2026 The Mathics3 Team.
         This program comes with ABSOLUTELY NO WARRANTY.
         This is free software, and you are welcome to redistribute it
         under certain conditions.
@@ -1307,6 +1451,6 @@ def mathics_console():
     """
     from sage.repl.rich_output.display_manager import get_display_manager
     if not get_display_manager().is_in_terminal():
-        raise RuntimeError('Can use the console only in the terminal. Try %%mathics magics instead.')
-    from mathics import main
+        raise RuntimeError('Can use the console only in the terminal. Try %%mathics3 magics instead.')
+    from mathics import __main__ as main
     main.main()
