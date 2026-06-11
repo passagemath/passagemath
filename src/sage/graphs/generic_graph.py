@@ -2463,6 +2463,7 @@ class GenericGraph(GenericGraph_pyx):
                 sparse = False
         vertex_indices, keys = self._vertex_indices_and_keys(vertices)
         if keys is not None:
+            sparse = False
             kwds = copy(kwds)
             kwds['row_keys'] = kwds['column_keys'] = keys
 
@@ -3017,6 +3018,16 @@ class GenericGraph(GenericGraph_pyx):
             Traceback (most recent call last):
             ...
             TypeError: Cannot convert NoneType to sage.structure.parent.Parent
+
+        Check that :passagemathissue:`2108` is fixed -- ``vertices=True`` used to crash on sparse graphs::
+
+            sage: # needs sage.modules
+            sage: G = Graph([(0, 1, 1), (1, 2, 2), (0, 2, 3)], weighted=True, sparse=True)
+            sage: phi = G.weighted_adjacency_matrix(vertices=True)
+            sage: phi.matrix()
+            [0 1 3]
+            [1 0 2]
+            [3 2 0]
         """
         if self.has_multiple_edges():
             raise NotImplementedError("don't know how to represent weights for a multigraph")
@@ -3054,10 +3065,14 @@ class GenericGraph(GenericGraph_pyx):
                 D[j, i] = label
 
         from sage.matrix.constructor import matrix
+        n = self.n_vertices()
+        if row_column_keys is not None:
+            # Free module morphisms require a dense underlying matrix
+            sparse = False
         if base_ring is None:
-            M = matrix(self.n_vertices(), D, sparse=sparse, **kwds)
+            M = matrix(n, n, D, sparse=sparse, **kwds)
         else:
-            M = matrix(base_ring, self.n_vertices(), D, sparse=sparse, **kwds)
+            M = matrix(base_ring, n, n, D, sparse=sparse, **kwds)
         return M
 
     def kirchhoff_matrix(self, weighted=None, indegree=True, normalized=False, signless=False, **kwds):
