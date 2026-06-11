@@ -984,7 +984,10 @@ cdef class SageObject:
             G = sage.interfaces.mathics3.mathics3
         return self._interface_(G)
 
-    _mathics3_init_ = _mathematica_init_
+    def _mathics3_init(self):
+        import sage.interfaces.mathics3
+        I = sage.interfaces.mathics3.mathics3
+        return self._interface_init_(I)
 
     def _octave_(self, G=None):
         if G is None:
