@@ -173,19 +173,16 @@ Sage Numeric Constants
 
 All of Sage's numeric constants can be used in a mathics3() expression. For example::
 
-   sage: mathics3(pi/2)
-   Pi / 2
+    sage: mathics3(pi/2)
+    Pi / 2
 
-   sage: mathics3(golden_ratio).N()
-   1.61803
+    sage: mathics3(golden_ratio).N()
+    1.61803
 
 Similarly, many Mathics3's Numeric Constants translate into Sage's numeric constants::
 
-   sage: [mathics3(c).sage() for c in ('Catalan', 'Glaisher', 'GoldenRatio', 'EulerGamma', 'Khinchin', 'Pi')]
-   [catalan, glaisher, golden_ratio, euler_gamma, khinchin, pi]
-
-
-
+    sage: [mathics3(c).sage() for c in ('Catalan', 'Glaisher', 'GoldenRatio', 'EulerGamma', 'Khinchin', 'Pi')]
+    [catalan, glaisher, golden_ratio, euler_gamma, khinchin, pi]
 
 Function definitions
 ~~~~~~~~~~~~~~~~~~~~
