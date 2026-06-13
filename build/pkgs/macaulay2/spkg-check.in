@@ -2,13 +2,17 @@ cd src
 
 cd M2/BUILD/build
 
+status=0
+
 # From https://github.com/Macaulay2/M2/blob/stable/.github/workflows/test_build.yml#L202C1-L211C1
-set -xe
-./M2 -q --check 1
-./M2 -q --check 2
-./M2 -q --check 3
-cmake --build . --target M2-tests
-cmake --build . --target M2-unit-tests
-cmake --build . --target memtailor-unit-tests mathic-unit-tests mathicgb-unit-tests
-ctest -j1 --output-on-failure -R "unit-tests"
-ctest -j4 --output-on-failure -R "ComputationsBook"
+set -x
+./M2 -q --check 1 || status=$?
+./M2 -q --check 2 || status=$?
+./M2 -q --check 3 || status=$?
+cmake --build . --target M2-tests || status=$?
+cmake --build . --target M2-unit-tests || status=$?
+cmake --build . --target memtailor-unit-tests mathic-unit-tests mathicgb-unit-tests || status=$?
+ctest -j1 --output-on-failure -R "unit-tests" || status=$?
+ctest -j4 --output-on-failure -R "ComputationsBook" || status=$?
+
+exit $status
