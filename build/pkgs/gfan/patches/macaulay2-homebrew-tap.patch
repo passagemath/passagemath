@@ -1,44 +1,67 @@
+diff --git a/Makefile b/Makefile
+index 1d5fad9..29fb0f1 100644
+--- a/Makefile
++++ b/Makefile
+@@ -138,13 +138,12 @@ MKDIR=mkdir -p
+
+ # PREFIX = /usr/local/gcc/6.2.0/bin/
+ # PREFIX = /usr/local/gcc-8.1/bin/
+-PREFIX =
+ SHELL       = /bin/sh
+ #ARCH        = LINUX
+
+-CC          = $(PREFIX)gcc
++#CC          = $(PREFIX)gcc-15
+ CLINKER     = $(CC)
+-CXX         = $(PREFIX)g++
++#CXX         = $(PREFIX)g++-15
+-CCLINKER    = $(CXX)
++#CCLINKER    = $(CXX)
+
+ #CC          = $(PREFIX)gcc-8.1
+diff --git a/src/field.h b/src/field.h
+index 866be22..bc50a12 100644
+--- a/src/field.h
++++ b/src/field.h
+@@ -208,6 +208,7 @@ class FieldElementImplementation
+   {
+          fprintf(stderr,"*this is not in Z/pZ.\n");
+          assert(0);
++         return 0;
+   }
+   virtual bool isInteger()const
+   {
+@@ -223,6 +224,7 @@ class FieldElementImplementation
+   Field& operator=(const Field& a)
+     {
+       assert(0);
++      return const_cast<Field&>(a);
+     }//assignment
+ };
+
+@@ -271,6 +273,7 @@ class FieldImplementation
+   virtual FieldElement random()
+   {
+          assert(0);
++         return 0;
+   }
+     virtual int getCharacteristic()const=0;
+     virtual const char *name()=0;
 diff --git a/src/gfanlib_circuittableint.h b/src/gfanlib_circuittableint.h
-index 2b5ced4..b5bf6ed 100644
+index 6078a36..fdf4a36 100644
 --- a/src/gfanlib_circuittableint.h
 +++ b/src/gfanlib_circuittableint.h
-@@ -25,6 +25,7 @@ namespace gfan{
+@@ -27,7 +27,7 @@ namespace gfan{
    template<typename> struct MyMakeUnsigned;
-   template <> struct MyMakeUnsigned<int>{typedef unsigned int type;};
-   template <> struct MyMakeUnsigned<long int>{typedef unsigned long int type;};
-+  template <> struct MyMakeUnsigned<long long int>{typedef unsigned long long int type;};
-   template <> struct MyMakeUnsigned<__int128>{typedef unsigned __int128 type;};
+   template <> struct MyMakeUnsigned<int32_t>{typedef uint32_t type;};
+   template <> struct MyMakeUnsigned<int64_t>{typedef uint64_t type;};
+-  template <> struct MyMakeUnsigned<__int128>{typedef unsigned __int128 type;};
++  template <> struct MyMakeUnsigned<__int128_t>{typedef __uint128_t type;};
 
    class MVMachineIntegerOverflow: public std::exception
-@@ -92,6 +93,15 @@ static std::string toStr(__uint32_t b)
-        return s.str();
- }
-
-+#ifndef _64BITLONGINT
-+static std::string toStr(long int b)
-+{
-+       std::stringstream s;
-+       s<<b;
-+       return s.str();
-+}
-+#endif
-+
- class my256s{
- public:
-        __int128_t lo,hi;
-@@ -213,6 +221,10 @@ static __int128_t extMul(long int a, long int b)
- {
-        return ((__int128_t)a)*((__int128_t)b);
- }
-+static __int128_t extMul(long long int a, long long int b)
-+{
-+       return ((__int128_t)a)*((__int128_t)b);
-+}
-
- static __uint128_t unsignedProd64(uint64_t x,uint64_t y)
  {
 diff --git a/src/gfanlib_z.h b/src/gfanlib_z.h
-index f56597c..8c84ed1 100644
+index 2908d25..7e8c66f 100644
 --- a/src/gfanlib_z.h
 +++ b/src/gfanlib_z.h
 @@ -9,6 +9,7 @@
@@ -48,4 +71,6 @@ index f56597c..8c84ed1 100644
 +#include <cstdint>
  #include <ostream>
  #include <iostream>
- #define OLD 1
+ #include <cstdint>
+--
+2.53.0
