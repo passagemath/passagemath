@@ -21,7 +21,7 @@ esac
 
 echo "Now building gfan..."
 # We don't use the makefile to install gfan so we don't need to set PREFIX
-sdh_make CPPFLAGS="-I$SAGE_LOCAL/include"
+sdh_make CPPFLAGS="-I$SAGE_LOCAL/include" CXX="$CXX" CXXFLAGS="$CXXFLAGS"
 
 [ -f gfan ] || \
     sdh_die "Error: Build completed normally but gfan executable not found."
