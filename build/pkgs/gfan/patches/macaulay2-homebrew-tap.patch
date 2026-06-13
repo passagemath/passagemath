@@ -25,9 +25,9 @@ index 866be22..bc50a12 100644
 +++ b/src/field.h
 @@ -208,6 +208,7 @@ class FieldElementImplementation
    {
-          fprintf(stderr,"*this is not in Z/pZ.\n");
-          assert(0);
-+         return 0;
+ 	  fprintf(stderr,"*this is not in Z/pZ.\n");
+ 	  assert(0);
++	  return 0;
    }
    virtual bool isInteger()const
    {
@@ -42,8 +42,8 @@ index 866be22..bc50a12 100644
 @@ -271,6 +273,7 @@ class FieldImplementation
    virtual FieldElement random()
    {
-          assert(0);
-+         return 0;
+ 	  assert(0);
++	  return 0;
    }
      virtual int getCharacteristic()const=0;
      virtual const char *name()=0;
