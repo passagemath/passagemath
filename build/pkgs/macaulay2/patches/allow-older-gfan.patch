@@ -1,0 +1,35 @@
+Description: Allow older gfan in older Ubuntu releases.
+ At least for now, we don't actually require gfan 0.8 for any features.
+ Backporting take some effort since we don't have libasl-dev in focal.
+Author: Doug Torrance <dtorrance@debian.org>
+Forwarded: not-needed
+Last-Update: 2026-06-06
+
+--- a/M2/configure.ac
++++ b/M2/configure.ac
+@@ -974,10 +974,10 @@
+ AC_MSG_CHECKING(whether the package gfan is installed)
+ if command -v gfan > /dev/null
+ then gfan_version=`gfan _version | head -2 | tail -1 | sed 's/gfan//'`
+-     AX_COMPARE_VERSION([$gfan_version], [ge], [0.8],
++     AX_COMPARE_VERSION([$gfan_version], [ge], [0.6],
+           [AC_MSG_RESULT([yes])
+            FILE_PREREQS="$FILE_PREREQS `command -v gfan`"],
+-          [AC_MSG_RESULT([yes, but < 0.8, will build])
++          [AC_MSG_RESULT([yes, but < 0.6, will build])
+            BUILD_gfan=yes])
+ else AC_MSG_RESULT([no, will build])
+      BUILD_gfan=yes
+--- a/M2/Macaulay2/packages/gfanInterface.m2
++++ b/M2/Macaulay2/packages/gfanInterface.m2
+@@ -1013,9 +1013,7 @@
+ 	if gfanProgram === null then
+ 	    gfanProgram = findProgram("gfan", "gfan --help",
+ 		Verbose => gfanVerbose,
+-		-- version 0.8 is required (the 0.6.2 series predates several
+-		-- features used here and is no longer supported upstream)
+-		MinimumVersion => ("0.8",
++		MinimumVersion => ("0.6",
+ 		    "gfan _version | head -2 | tail -1 | sed 's/gfan//'"));
+ 	tmpFile := gfanMakeTemporaryFile data;
+ 
