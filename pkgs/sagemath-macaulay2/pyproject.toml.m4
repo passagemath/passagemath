@@ -35,6 +35,44 @@ content-type = "text/x-rst"
 test = [
     "passagemath-linbox",
 ]
+#
+# Runtime dependencies of M2 packages, in part per
+# - PROGRAM_OPTIONS
+# - OptionalComponentsPresent
+#
+# Bertini ... bertini
+CoincidentRootLoci          = ["passagemath-qepcad"]
+# DecomposableSparseSystems ... phc
+# EuclideanDistanceDegree ... bertini
+FourTiTwo                   = ["passagemath-latte-4ti2"]
+gfanInterface               = ["passagemath-gfan"]
+MatchingFields              = ["passagemath-latte-4ti2"]
+MonomialAlgebras            = ["passagemath-latte-4ti2"]
+# MonomialIntegerPrograms ... scip
+Msolve                      = ["passagemath-msolve"]
+Nauty                       = ["passagemath-nauty"]
+NautyGraphs                 = ["passagemath-nauty"]
+# NCAlgebra ... bergman
+# Normaliz ... normaliz (executable)
+# NumericalSchubertCalculus ... phc
+# NumericalAlgebraicGeometry ... bertini
+Oscillators                 = ["passagemath-nauty"]
+# PHCpack ... phc
+PhylogeneticTrees           = ["passagemath-latte-4ti2"]
+Polyhedra                   = ["passagemath-latte-4ti2", "passagemath-topcom"]
+Polymake                    = ["passagemath-polymake"]
+Posets                      = ["passagemath-latte-4ti2"]
+# RInterface ... R
+StatePolytope               = ["passagemath-polymake"]
+Topcom                      = ["passagemath-topcom"]
+Triangulations              = ["passagemath-topcom"]
+Tropical                    = ["passagemath-gfan"]
+TropicalToric               = ["passagemath-gfan"]
+Valuations                  = ["passagemath-gfan"]
+WhitneyStratifications      = ["passagemath-msolve"]
+#
+# Jupyter
+#
 jupyterkernel = [
     SPKG_INSTALL_REQUIRES_sagemath_macaulay2_jupyterkernel
 ]
