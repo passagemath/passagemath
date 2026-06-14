@@ -1,0 +1,11 @@
+cd src
+
+sdh_make prefix="${SAGE_LOCAL}" \
+         CPPFLAGS="${CPPFLAGS}" \
+         CFLAGS="${CFLAGS}" \
+         CXXFLAGS="${CXXFLAGS}" \
+         LDFLAGS="${LDFLAGS}" \
+         CC="${CC}" \
+         LD="${CXX}"
+
+sdh_install bin/cohomcalg "${SAGE_LOCAL}/bin/"
