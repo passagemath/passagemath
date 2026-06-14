@@ -37,6 +37,8 @@ export Eigen3_DIR=$SAGE_LOCAL
 export Flint_DIR=$SAGE_LOCAL
 export Factory_DIR=$SAGE_LOCAL
 
+export qe=$SAGE_LOCAL
+
 # https://github.com/Macaulay2/M2/wiki/Building-M2-from-source-using-CMake
 # -DWITH_OMP=OFF makes OpenMP optional.
 cd M2/BUILD/build
@@ -52,5 +54,5 @@ if [ -n "$SAGE_MACAULAY2_TARGETS" ]; then
    # "Note that this target must be built separately, before proceeding to M2-binary."
    cmake --build . --target $SAGE_MACAULAY2_TARGETS
 fi
-cmake --build . --target M2-core M2-emacs
+cmake --build . --target M2-core M2-emacs install-packages
 cmake --install .
