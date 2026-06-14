@@ -121,6 +121,21 @@ Using the Python interface::
 Available as extras, from other distributions
 ---------------------------------------------
 
+Runtime dependencies of various Macaulay2 packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Extras are defined for Macaulay2 packages that have
+pip-installable runtime dependencies. Examples:
+
+``pip install "passagemath-macaulay2[CoincidentRootLoci]"``
+ installs QEPCAD, a runtime dependency of M2 package ``CoincidentRootLoci``
+
+``pip install "passagemath-macaulay2[FourTiTwo]"``
+ installs 4ti2, a runtime dependency of M2 package ``FourTiTwo``
+
+``pip install "passagemath-macaulay2[gfanInterface]"``
+ installs gfan, a runtime dependency of M2 package ``gfanInterface``
+
 Jupyter kernel
 ~~~~~~~~~~~~~~
 
