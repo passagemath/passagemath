@@ -3,7 +3,7 @@ cd src
 sdh_make prefix="${SAGE_LOCAL}" \
          CPPFLAGS="${CPPFLAGS}" \
          CFLAGS="${CFLAGS}" \
-         CXXFLAGS="${CXXFLAGS}" \
+         CXXFLAGS="${CXXFLAGS} -std=gnu++11" \
          LDFLAGS="${LDFLAGS}" \
          CC="${CC}" \
          LD="${CXX}"
