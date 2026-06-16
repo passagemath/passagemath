@@ -163,6 +163,7 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sagemath_gap_pkg_unitlib_data		\
 	sagemath_gap_pkg_transgrp_data		\
 	sagemath_gap_pkg_yangbaxter_data	\
+	sagemath_macaulay2_doc			\
 	sagemath_pari_elldata			\
 	sagemath_pari_galdata			\
 	sagemath_pari_galpol			\

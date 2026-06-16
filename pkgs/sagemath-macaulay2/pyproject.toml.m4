@@ -23,6 +23,7 @@ dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_flint          dnl for sage.rings.{real_arb,real_mpfi}
     SPKG_INSTALL_REQUIRES_sagemath_modules        dnl for sage.rings.real_mpfr
     SPKG_INSTALL_REQUIRES_sagemath_repl           dnl for sage_eval
+    SPKG_INSTALL_REQUIRES_sagemath_macaulay2_doc
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata.m4')dnl'
