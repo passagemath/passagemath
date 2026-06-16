@@ -1,1 +1,2 @@
-passagemath-macaulay2-doc
+# This file is updated on every release by the update-version script
+passagemath-macaulay2-doc == 10.8.5rc5
