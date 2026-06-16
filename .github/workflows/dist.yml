@@ -365,10 +365,10 @@ jobs:
           - os: ubuntu-24.04-arm
             arch: aarch64
             build: musllinux
-          - os: macos-15-intel
+          - os: macos-26-intel
             arch: x86_64
             build: macosx
-          - os: macos-14
+          - os: macos-26
             arch: arm64
             build: macosx
     env:
@@ -846,10 +846,10 @@ jobs:
           - os: ubuntu-24.04-arm
             arch: aarch64
             build: musllinux
-          - os: macos-15-intel
+          - os: macos-26-intel
             arch: x86_64
             build: macosx
-          - os: macos-14
+          - os: macos-26
             arch: arm64
             build: macosx
     env:
@@ -1179,10 +1179,10 @@ jobs:
           - os: ubuntu-24.04-arm
             arch: aarch64
             build: musllinux
-          - os: macos-15-intel
+          - os: macos-26-intel
             arch: x86_64
             build: macosx
-          - os: macos-14
+          - os: macos-26
             arch: arm64
             build: macosx
     env:
@@ -1514,8 +1514,8 @@ jobs:
          "ubuntu-latest-musllinux-*-wheels",
          "ubuntu-24.04-arm-manylinux-*-wheels",
          "ubuntu-24.04-arm-musllinux-*-wheels",
-         "macos-15-intel-*-wheels",
-         "macos-14-*-wheels",
+         "macos-26-intel-macosx-*-wheels",
+         "macos-26-macosx-*-wheels",
          "noarch-wheels"]
     secrets: inherit
 

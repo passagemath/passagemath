@@ -27,8 +27,8 @@ jobs:
                             "ubuntu-latest-musllinux-*-wheels",
                             "ubuntu-24.04-arm-manylinux-*-wheels",
                             "ubuntu-24.04-arm-musllinux-*-wheels",
-                            "macos-15-intel-*-wheels",
-                            "macos-14-*-wheels",
+                            "macos-26-intel-macosx-*-wheels",
+                            "macos-26-macosx-*-wheels",
                             "windows-*-wheels",
                             "noarch-wheels",
                             "dist"]') }}
