@@ -788,6 +788,45 @@ class Qepcad_expect(ExtraTabCompletion, Expect):
                         logfile=logfile)
 
 
+def _qepcad_var_subst(text, mapping):
+    r"""
+    Replace whole-word occurrences of the keys of ``mapping`` in ``text``
+    by the corresponding values.
+
+    This is used to rename variables to and from the underscore-free names
+    that QEPCAD requires (see :issue:`38310`).  Only complete tokens are
+    replaced (using a word boundary on each side), so a name is never
+    matched as a substring of a longer name, and QEPCAD's own ``_root_``
+    notation in the output is left untouched.
+
+    EXAMPLES::
+
+        sage: from sage.interfaces.qepcad import _qepcad_var_subst
+        sage: _qepcad_var_subst('x_5_0 > 0 /\\ x_5_1 < 0',
+        ....:                   {'x_5_0': 'x50', 'x_5_1': 'x51'})
+        'x50 > 0 /\\ x51 < 0'
+
+    The reverse direction restores the original names without touching
+    QEPCAD's ``_root_`` notation or unrelated tokens such as ``x501``::
+
+        sage: _qepcad_var_subst('x50 < _root_1 x50^2 - 3 /\\ x501 = 0',
+        ....:                   {'x50': 'x_5_0'})
+        'x_5_0 < _root_1 x_5_0^2 - 3 /\\ x501 = 0'
+
+    An empty mapping leaves the text unchanged::
+
+        sage: _qepcad_var_subst('a x^2 + b x + c = 0', {})
+        'a x^2 + b x + c = 0'
+    """
+    if not mapping:
+        return text
+    # The word boundaries match each name as a complete token, so the order
+    # of the alternation does not matter and a name is never replaced inside
+    # a longer one.
+    pattern = re.compile(r'\b(' + '|'.join(re.escape(k) for k in mapping) + r')\b')
+    return pattern.sub(lambda m: mapping[m.group(0)], text)
+
+
 class Qepcad:
     r"""
     The wrapper for QEPCAD.
@@ -876,10 +915,18 @@ class Qepcad:
         self._varlist = varlist
         self._free_vars = free_vars
 
-        varlist = [v.replace('_', '') for v in varlist]
-        if len(frozenset(varlist)) != len(varlist):
+        # QEPCAD does not allow underscores in variable names, so we send it
+        # underscore-free names and keep maps to restore the original names in
+        # the output (see :issue:`38310`).
+        safe_varlist = [v.replace('_', '') for v in varlist]
+        if len(frozenset(safe_varlist)) != len(safe_varlist):
             raise ValueError("variables collide after stripping underscores")
-        formula = formula.replace('_', '')
+        self._to_qepcad = {orig: safe
+                           for orig, safe in zip(varlist, safe_varlist)
+                           if orig != safe}
+        self._from_qepcad = {safe: orig for orig, safe in self._to_qepcad.items()}
+        formula = _qepcad_var_subst(formula, self._to_qepcad)
+        varlist = safe_varlist
 
         qex = Qepcad_expect(logfile=logfile, memcells=memcells, server=server)
         qex._send('[ input from Sage ]')
@@ -936,7 +983,7 @@ class Qepcad:
                 raise ValueError("assumption contains variables not "
                                  "present in formula")
             assume = repr(assume)
-        assume = assume.replace('_', '')
+        assume = _qepcad_var_subst(assume, self._to_qepcad)
         result = self._eval_line("assume [%s]" % assume)
         if len(result):
             return AsciiArtString(result)
@@ -1023,8 +1070,8 @@ class Qepcad:
         loc = result.find(tagline)
         if loc >= 0:
             result = result[loc + len(tagline):]
-        result = result.strip()
-        if len(result):
+        result = _qepcad_var_subst(result.strip(), self._from_qepcad)
+        if result:
             return AsciiArtString(result)
 
     def set_truth_value(self, index, nv):
@@ -1104,9 +1151,9 @@ class Qepcad:
         match = re.search('\nAn equivalent quantifier-free formula:(.*)\n=+  The End  =+\r\n\r\n(.*)$', final, re.DOTALL)
 
         if match:
-            return (match.group(1).strip(), match.group(2))
-        else:
-            return (final, '')
+            answer = _qepcad_var_subst(match.group(1).strip(), self._from_qepcad)
+            return (answer, match.group(2))
+        return (_qepcad_var_subst(final, self._from_qepcad), '')
 
     def answer(self):
         r"""
@@ -1566,11 +1613,22 @@ def qepcad(formula, assume=None, interact=False, solution=None,
 
     TESTS:
 
-    We verify that long variable names work.  (Note that QEPCAD
-    does not support underscores, so they are stripped from the formula.) ::
+    We verify that long variable names work.  (Note that QEPCAD does not
+    support underscores, so internally they are removed from the variable
+    names before the formula is sent to QEPCAD and restored in the output;
+    see :issue:`38310`.) ::
 
         sage: qepcad(qf.exists(a, a*long_with_underscore_314159 == 1))                # optional - qepcad
-        longwithunderscore314159 /= 0
+        long_with_underscore_314159 /= 0
+
+    We check that variable names with underscores are restored in the
+    output instead of being silently mangled (:issue:`38310`)::
+
+        sage: from sage.interfaces.qepcad import _qepcad_atoms
+        sage: var('x_5_0, x_5_1')
+        (x_5_0, x_5_1)
+        sage: _qepcad_atoms(qepcad(qf.exists(x, x_5_0 * x + x_5_1 > 0)))              # optional - qepcad
+        {'x_5_0 /= 0', 'x_5_1 > 0'}
 
     Tests related to the not tested examples (nondeterministic order of atoms)::
 
