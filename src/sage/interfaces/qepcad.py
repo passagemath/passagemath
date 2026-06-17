@@ -934,8 +934,32 @@ class Qepcad:
         qex._send(str(free_vars))
         # I hope this prompt is distinctive enough...
         # if not, we could list all the cases separately
-        qex._change_prompt(['\r\n([^\r\n]*) >\r\n', pexpect.EOF])
+        #
+        # While reading the formula we additionally watch for QEPCAD's
+        # "Error <routine>: <message>" output: when it cannot parse the input
+        # it prints such a line and prompts for the formula again.  Since the
+        # pexpect process has no timeout, an undetected error would hang
+        # forever, so we raise a Python exception instead (see :issue:`41498`).
+        # This extra pattern must not stay in the persistent prompt, because
+        # QEPCAD also prints "Error ..." as ordinary output later on (e.g. for
+        # commands that are not active in the current phase), so we restore the
+        # plain prompt as soon as the formula has been read.
+        qex._change_prompt(['\r\n([^\r\n]*) >\r\n',
+                            '\r\nError [^\r\n]*',
+                            pexpect.EOF])
         qex.eval(formula + '.')
+        matched = qex._expect.after
+        if isinstance(matched, bytes):
+            matched = bytes_to_str(matched)
+        if not isinstance(matched, str):
+            # pexpect.EOF (or TIMEOUT) matched: the process is already gone.
+            qex.quit()
+            raise ValueError("QEPCAD terminated while reading the input formula")
+        if matched.lstrip().startswith('Error'):
+            qex.quit()
+            raise ValueError("QEPCAD could not parse the input formula: "
+                             + matched.strip())
+        qex._change_prompt(['\r\n([^\r\n]*) >\r\n', pexpect.EOF])
         self._qex = qex
 
     def __repr__(self):
@@ -1629,6 +1653,20 @@ def qepcad(formula, assume=None, interact=False, solution=None,
         (x_5_0, x_5_1)
         sage: _qepcad_atoms(qepcad(qf.exists(x, x_5_0 * x + x_5_1 > 0)))              # optional - qepcad
         {'x_5_0 /= 0', 'x_5_1 > 0'}
+
+    QEPCAD's ``_root_`` notation may be used in the input; its underscores
+    are no longer stripped away (:issue:`41498`)::
+
+        sage: qepcad(r'(E x)[ x = _root_1 x^2 - a ]', vars='a,x')                     # optional - qepcad
+        a >= 0
+
+    An input that QEPCAD cannot parse raises an exception instead of
+    hanging forever (:issue:`41498`)::
+
+        sage: qepcad('(E x)[ x = undeclared ]', vars='a,x')                           # optional - qepcad
+        Traceback (most recent call last):
+        ...
+        ValueError: QEPCAD could not parse the input formula: Error ...
 
     Tests related to the not tested examples (nondeterministic order of atoms)::
 
