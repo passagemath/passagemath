@@ -34,6 +34,7 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
+    "passagemath-gfan",
     "passagemath-linbox",
 ]
 #
