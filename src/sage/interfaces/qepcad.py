@@ -1406,10 +1406,9 @@ class Qepcad:
         post_phase = self.phase()
         if result and post_phase != 'EXITED':
             # Restore the original variable names for commands that echo the
-            # formula (e.g. ``d_formula``); see :issue:`38310`.  This only
-            # rewrites whole variable tokens, so the structural output parsed
-            # by :meth:`make_cells` (cell indices, signs, sample points) is
-            # left unchanged.
+            # formula (e.g. ``d_formula``); see :issue:`38310`.  Cell parsers
+            # normalize this display text back to QEPCAD's internal names
+            # before interpreting sample-point data.
             return AsciiArtString(_qepcad_var_subst(result, self._from_qepcad))
         if pre_phase != post_phase:
             if post_phase == 'EXITED' and name != 'quit':
@@ -1665,6 +1664,14 @@ def qepcad(formula, assume=None, interact=False, solution=None,
         sage: qe = qepcad(qf.exists(x, x_5_0 * x + x_5_1 > 0), interact=True)         # optional - qepcad
         sage: qe.d_formula()                                                          # optional - qepcad
         (E x)x_5_0 x + x_5_1 > 0
+
+    Restoring variable names in interactive output must not corrupt the
+    cell output parsed by the point-finding modes::
+
+        sage: x_ = var('x_')
+        sage: pts = qepcad(x_^2 - 2 == 0, solution='all-points')                       # optional - qepcad
+        sage: sorted(p['x_'].sign() for p in pts)                                      # optional - qepcad
+        [-1, 1]
 
     QEPCAD's ``_root_`` notation may be used in the input; its underscores
     are no longer stripped away (:issue:`41498`)::
@@ -2522,6 +2529,10 @@ class QepcadCell:
             QEPCAD cell (4, 3)
         """
         self._parent = parent
+        # Public commands restore original variable names for display, but the
+        # cell parser expects QEPCAD's internal text.  In particular, algebraic
+        # sample-point polynomials use ``x`` as a dummy variable.
+        lines = [_qepcad_var_subst(line, parent._to_qepcad) for line in lines]
         self._lines = lines
 
         max_level = len(parent._varlist)
