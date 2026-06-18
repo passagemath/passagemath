@@ -1037,6 +1037,12 @@ class InfinitePolynomialRing_sparse(CommutativeRing):
             sage: o + r
             a_0
 
+            sage: LP.<x, y> = LaurentPolynomialRing(QQ)
+            sage: R.<a> = InfinitePolynomialRing(QQ)
+            sage: o = LP(0); r = a[0]
+            sage: o + r
+            a_0
+
             sage: UCF = UniversalCyclotomicField()
             sage: R.<a> = InfinitePolynomialRing(QQ)
             sage: o = UCF(0); r = a[0]
@@ -1150,15 +1156,16 @@ class InfinitePolynomialRing_sparse(CommutativeRing):
         # Now, we focus on the underlying classical polynomial ring.
         # First, try interpretation in the base ring. This is unsafe
         # if the parent of x is a polynomial ring and the base is a
-        # polynomial or series ring that does not know all variable
-        # names of the parent of x: some bases match variables by
-        # position rather than by name, silently renaming them
-        # (:issue:`40540`). Other bases, such as number fields, use
-        # their own conversion semantics, so we let them.
+        # polynomial, Laurent, or series ring that does not know all
+        # variable names of the parent of x: such bases match the
+        # variables by position rather than by name, silently renaming
+        # them (:issue:`40540`). Other bases, such as number fields,
+        # interpret x by evaluation at their generators, so we let them.
         from sage.rings.polynomial.multi_polynomial import MPolynomial
         from sage.rings.polynomial.polynomial_element import Polynomial
         if isinstance(x, (Polynomial, MPolynomial)) and not x.is_constant():
             from sage.rings.lazy_series_ring import LazyPowerSeriesRing
+            from sage.rings.polynomial.laurent_polynomial_ring_base import LaurentPolynomialRing_generic
             from sage.rings.polynomial.multi_polynomial_ring import MPolynomialRing_polydict
             from sage.rings.polynomial.multi_polynomial_ring_base import MPolynomialRing_base
             from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
@@ -1171,6 +1178,7 @@ class InfinitePolynomialRing_sparse(CommutativeRing):
                 base_interpretable = False
             elif isinstance(self._base, (PolynomialRing_generic,
                                          MPolynomialRing_base,
+                                         LaurentPolynomialRing_generic,
                                          PowerSeriesRing_generic,
                                          LazyPowerSeriesRing)):
                 try:
