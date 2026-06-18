@@ -559,7 +559,12 @@ class GenDictWithBasering:
         self._D = [start]
         while hasattr(P, 'base_ring') and (P.base_ring() is not P):
             P = P.base_ring()
-            D = P.gens_dict()
+            try:
+                D = P.gens_dict()
+            except AttributeError:
+                # Some base rings have no named generators to add to
+                # the evaluation namespace.
+                continue
             if isinstance(D, GenDictWithBasering):
                 self._D.extend(D._D)
                 break
@@ -1015,6 +1020,29 @@ class InfinitePolynomialRing_sparse(CommutativeRing):
             sage: (a[0] * P.one()).parent()
             Infinite polynomial ring in a over Multivariate Polynomial Ring in x, y over Rational Field
 
+        The same positional renaming is avoided for other named base
+        rings::
+
+            sage: LS.<x, y> = LazyPowerSeriesRing(QQ)
+            sage: R.<a> = InfinitePolynomialRing(QQ)
+            sage: o = LS(0); r = a[0]
+            sage: o + r
+            a_0
+            sage: (o + r).parent()
+            Infinite polynomial ring in a over Multivariate Lazy Taylor Series Ring in x, y over Rational Field
+
+            sage: PS.<x, y> = QQ[[]]
+            sage: R.<a> = InfinitePolynomialRing(QQ)
+            sage: o = PS(0); r = a[0]
+            sage: o + r
+            a_0
+
+            sage: UCF = UniversalCyclotomicField()
+            sage: R.<a> = InfinitePolynomialRing(QQ)
+            sage: o = UCF(0); r = a[0]
+            sage: o + r
+            a_0
+
         If the base ring is itself an infinite polynomial ring, finite
         polynomials in variables of the base are still interpreted in
         the base ring, and the result is an element of ``self``::
@@ -1027,8 +1055,8 @@ class InfinitePolynomialRing_sparse(CommutativeRing):
             sage: q.parent() is Y
             True
 
-        Interpretation in the base ring also works if the base ring
-        does not use libsingular::
+        Conversion also works if the base ring does not use
+        libsingular; the variables are then matched by name::
 
             sage: Lg = PolynomialRing(QQ, ['x', 'y'], implementation='generic')
             sage: Sg = InfinitePolynomialRing(Lg, names=['a'])
@@ -1121,18 +1149,20 @@ class InfinitePolynomialRing_sparse(CommutativeRing):
 
         # Now, we focus on the underlying classical polynomial ring.
         # First, try interpretation in the base ring. This is unsafe
-        # if both the parent of x and the base ring are polynomial
-        # rings: unless the variable names of the parent of x are a
-        # subset of those of the base ring, libsingular matches the
-        # variables by position rather than by name, silently renaming
-        # them (:issue:`40540`). All other base rings convert by name
-        # or by evaluation, so we let them.
+        # if the parent of x is a polynomial ring and the base is a
+        # polynomial or series ring that does not know all variable
+        # names of the parent of x: some bases match variables by
+        # position rather than by name, silently renaming them
+        # (:issue:`40540`). Other bases, such as number fields, use
+        # their own conversion semantics, so we let them.
         from sage.rings.polynomial.multi_polynomial import MPolynomial
-        from sage.rings.polynomial.multi_polynomial_ring import MPolynomialRing_polydict
-        from sage.rings.polynomial.multi_polynomial_ring_base import MPolynomialRing_base
         from sage.rings.polynomial.polynomial_element import Polynomial
-        from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
         if isinstance(x, (Polynomial, MPolynomial)) and not x.is_constant():
+            from sage.rings.lazy_series_ring import LazyPowerSeriesRing
+            from sage.rings.polynomial.multi_polynomial_ring import MPolynomialRing_polydict
+            from sage.rings.polynomial.multi_polynomial_ring_base import MPolynomialRing_base
+            from sage.rings.polynomial.polynomial_ring import PolynomialRing_generic
+            from sage.rings.power_series_ring import PowerSeriesRing_generic
             if isinstance(self._base, MPolynomialRing_polydict):
                 # MPolynomialRing_polydict maps the variables by
                 # position whenever the numbers of variables coincide,
@@ -1140,8 +1170,13 @@ class InfinitePolynomialRing_sparse(CommutativeRing):
                 # We fall through to name-based string evaluation.
                 base_interpretable = False
             elif isinstance(self._base, (PolynomialRing_generic,
-                                         MPolynomialRing_base)):
-                base_names = self._base.variable_names_recursive()
+                                         MPolynomialRing_base,
+                                         PowerSeriesRing_generic,
+                                         LazyPowerSeriesRing)):
+                try:
+                    base_names = self._base.variable_names_recursive()
+                except AttributeError:
+                    base_names = self._base.variable_names()
                 base_interpretable = all(name in base_names
                                          for name in x.parent().variable_names())
             else:
