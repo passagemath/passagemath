@@ -1404,8 +1404,13 @@ class Qepcad:
         pre_phase = self.phase()
         result = self._eval_line('{} {}'.format(name, ' '.join(args)))
         post_phase = self.phase()
-        if len(result) and post_phase != 'EXITED':
-            return AsciiArtString(result)
+        if result and post_phase != 'EXITED':
+            # Restore the original variable names for commands that echo the
+            # formula (e.g. ``d_formula``); see :issue:`38310`.  This only
+            # rewrites whole variable tokens, so the structural output parsed
+            # by :meth:`make_cells` (cell indices, signs, sample points) is
+            # left unchanged.
+            return AsciiArtString(_qepcad_var_subst(result, self._from_qepcad))
         if pre_phase != post_phase:
             if post_phase == 'EXITED' and name != 'quit':
                 return self.answer()
@@ -1653,6 +1658,13 @@ def qepcad(formula, assume=None, interact=False, solution=None,
         (x_5_0, x_5_1)
         sage: _qepcad_atoms(qepcad(qf.exists(x, x_5_0 * x + x_5_1 > 0)))              # optional - qepcad
         {'x_5_0 /= 0', 'x_5_1 > 0'}
+
+    The original names are also restored in the output of interactive
+    commands that echo the formula, such as ``d_formula`` (:issue:`38310`)::
+
+        sage: qe = qepcad(qf.exists(x, x_5_0 * x + x_5_1 > 0), interact=True)         # optional - qepcad
+        sage: qe.d_formula()                                                          # optional - qepcad
+        (E x)x_5_0 x + x_5_1 > 0
 
     QEPCAD's ``_root_`` notation may be used in the input; its underscores
     are no longer stripped away (:issue:`41498`)::
