@@ -133,12 +133,15 @@ PIP_PACKAGES = @SAGE_PIP_PACKAGES@
 SCRIPT_PACKAGES = @SAGE_SCRIPT_PACKAGES@
 
 # Packages for which we build platform-independent wheels for PyPI
-PYPI_NOARCH_WHEEL_PACKAGES =			\
+PYPI_NOARCH_WHEEL_PACKAGES_1 =			\
 	sage_bootstrap				\
 	sage_sws2rst				\
 	sage_setup				\
 	sagemath_environment			\
 	sagemath_repl				\
+	sagelib
+
+PYPI_NOARCH_WHEEL_PACKAGES_2 =			\
 	sagemath_database_cunningham		\
 	sagemath_database_jones_numfield	\
 	sagemath_database_kohel			\
@@ -171,8 +174,9 @@ PYPI_NOARCH_WHEEL_PACKAGES =			\
 	sagemath_pari_nftables			\
 	sagemath_pari_seadata			\
 	sagemath_pari_seadata_big		\
-	sagemath_pari_seadata_small		\
-	sagelib
+	sagemath_pari_seadata_small
+
+PYPI_NOARCH_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES_1) $(PYPI_NOARCH_WHEEL_PACKAGES_2)
 
 # Packages for which we build wheels for PyPI
 PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
@@ -575,6 +579,20 @@ pypi-noarch-wheels:
 	    rm -f $(SAGE_VENV)/var/lib/sage/installed/$$a-*; \
 	done
 	$(MAKE_REC) SAGE_EDITABLE=no SAGE_WHEELS=yes $(subst sagelib,sagelib-no-deps,$(PYPI_NOARCH_WHEEL_PACKAGES:sagemath_repl=sagemath_repl-no-deps))
+	@echo "Built wheels are in venv/var/lib/sage/wheels/"
+
+pypi-noarch-wheels-1:
+	for a in $(PYPI_NOARCH_WHEEL_PACKAGES_1); do \
+	    rm -f $(SAGE_VENV)/var/lib/sage/installed/$$a-*; \
+	done
+	$(MAKE_REC) SAGE_EDITABLE=no SAGE_WHEELS=yes $(subst sagelib,sagelib-no-deps,$(PYPI_NOARCH_WHEEL_PACKAGES_1:sagemath_repl=sagemath_repl-no-deps))
+	@echo "Built wheels are in venv/var/lib/sage/wheels/"
+
+pypi-noarch-wheels-2:
+	for a in $(PYPI_NOARCH_WHEEL_PACKAGES_2); do \
+	    rm -f $(SAGE_VENV)/var/lib/sage/installed/$$a-*; \
+	done
+	$(MAKE_REC) SAGE_EDITABLE=no SAGE_WHEELS=yes $(subst sagelib,sagelib-no-deps,$(PYPI_NOARCH_WHEEL_PACKAGES_2:sagemath_repl=sagemath_repl-no-deps))
 	@echo "Built wheels are in venv/var/lib/sage/wheels/"
 
 pypi-wheels:
