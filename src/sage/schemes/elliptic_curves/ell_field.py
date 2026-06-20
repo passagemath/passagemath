@@ -188,6 +188,10 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
             sage: E = EllipticCurve(K, [1,0])
             sage: E.quadratic_twist().is_isomorphic(E)
             False
+            sage: F = GF(3^5, "a")
+            sage: E = EllipticCurve_from_j(F(1728))
+            sage: E.quadratic_twist().is_isomorphic(E)
+            False
         """
         K = self.base_ring()
         char = K.characteristic()
@@ -220,8 +224,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
                         E0 = EllipticCurve(K, [1,0])
                         if self.is_isomorphic(E0, field=K):
                             return EllipticCurve(K, [D,0])
-                        else:
-                            return E0
+                        return E0
 
             else:
                 raise ValueError("twisting parameter D must be specified over infinite fields.")
