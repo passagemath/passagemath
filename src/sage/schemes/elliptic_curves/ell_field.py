@@ -220,7 +220,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
                     # Handle the case j=1728 and #K=3 mod 4 separately to ensure that
                     # twist is non-isomorphic if no input D was specified
-                    if char % 4 == 3 and K.degree() % 2 == 1 and self.j_invariant() == K(1728):
+                    if char % 4 == 3 and K.degree() % 2 == 1 and self.j_invariant() == 1728:
                         # Outside of characteristic 3 we have exactly two isomorphism classes,
                         # given by the parameters [1,0] and [D,0]
                         if char > 3:
