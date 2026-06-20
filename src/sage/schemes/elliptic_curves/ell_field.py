@@ -210,23 +210,15 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
                         while (x**2 + x + D).roots():
                             D *= a
                 else:
-                    # We could take a multiplicative generator but
-                    # that might be expensive to compute; otherwise
-                    # half the elements will do, and testing squares
-                    # is very fast.
-                    D = K.random_element()
-                    while D.is_square():
-                        D = K.random_element()
-
                     # Handle the case j=1728 and #K=3 mod 4 separately to ensure that
                     # twist is non-isomorphic if no input D was specified
                     if char % 4 == 3 and K.degree() % 2 == 1 and self.j_invariant() == 1728:
                         # Outside of characteristic 3 we have exactly two isomorphism classes,
-                        # given by the parameters [1,0] and [D,0]
+                        # given by the parameters [1,0] and [-1,0]
                         if char > 3:
                             E0 = EllipticCurve(K, [1,0])
                             if self.is_isomorphic(E0, field=K):
-                                return EllipticCurve(K, [D,0])
+                                return EllipticCurve(K, [-1,0])
                             return E0
 
                         # Otherwise we are in characteristic 3; here the generic twisting does not
@@ -234,8 +226,15 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
                         b2, b4, b6, b8 = self.b_invariants()
                         # E is isomorphic to [0,b2,0,8*b4,16*b6]
                         if b6.is_zero():
-                            return EllipticCurve(K, [8*b4*D,0])
+                            return EllipticCurve(K, [-8*b4,0])
 
+                    # We could take a multiplicative generator but
+                    # that might be expensive to compute; otherwise
+                    # half the elements will do, and testing squares
+                    # is very fast.
+                    D = K.random_element()
+                    while D.is_square():
+                        D = K.random_element()
             else:
                 raise ValueError("twisting parameter D must be specified over infinite fields.")
         else:
