@@ -184,7 +184,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
             sage: E = EllipticCurve(GF(7), [0,6,0,8,0])
             sage: E.quadratic_twist().is_isomorphic(E)
             False
-            sage: K = GF(7^2, "i")
+            sage: K = GF(7^3, "i")
             sage: E = EllipticCurve(K, [1,0])
             sage: E.quadratic_twist().is_isomorphic(E)
             False
@@ -218,9 +218,9 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
                     while D.is_square():
                         D = K.random_element()
 
-                    # Handle the case j=1728 and char=3 mod 4 separately to ensure that
+                    # Handle the case j=1728 and #K=3 mod 4 separately to ensure that
                     # twist is non-isomorphic if no input D was specified
-                    if char % 4 == 3 and self.j_invariant() == K(1728):
+                    if char % 4 == 3 and char > 3 and K.degree() % 2 == 1 and self.j_invariant() == K(1728):
                         E0 = EllipticCurve(K, [1,0])
                         if self.is_isomorphic(E0, field=K):
                             return EllipticCurve(K, [D,0])
