@@ -173,6 +173,21 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
             sage: k2 = GF(p^2,'a')
             sage: E.change_ring(k2).is_isomorphic(Et.change_ring(k2))
             True
+
+        TESTS:
+
+        Check that :issue:`42403` is fixed, independently of model or base field::
+
+            sage: E = EllipticCurve(GF(7), [1,0])
+            sage: E.quadratic_twist().is_isomorphic(E)
+            False
+            sage: E = EllipticCurve(GF(7), [0,6,0,8,0])
+            sage: E.quadratic_twist().is_isomorphic(E)
+            False
+            sage: K = GF(7^2, "i")
+            sage: E = EllipticCurve(K, [1,0])
+            sage: E.quadratic_twist().is_isomorphic(E)
+            False
         """
         K = self.base_ring()
         char = K.characteristic()
@@ -198,6 +213,16 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
                     D = K.random_element()
                     while D.is_square():
                         D = K.random_element()
+
+                    # Handle the case j=1728 and char=3 mod 4 separately to ensure that
+                    # twist is non-isomorphic if no input D was specified
+                    if char % 4 == 3 and self.j_invariant() == K(1728):
+                        E0 = EllipticCurve(K, [1,0])
+                        if self.is_isomorphic(E0, field=K):
+                            return EllipticCurve(K, [D,0])
+                        else:
+                            return E0
+
             else:
                 raise ValueError("twisting parameter D must be specified over infinite fields.")
         else:
@@ -211,7 +236,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
         if char != 2:
             b2, b4, b6, b8 = self.b_invariants()
-            # E is isomorphic to  [0,b2,0,8*b4,16*b6]
+            # E is isomorphic to [0,b2,0,8*b4,16*b6]
             return EllipticCurve(K, [0, b2*D, 0, 8*b4*D**2, 16*b6*D**3])
 
         # now char==2
@@ -443,7 +468,7 @@ class EllipticCurve_field(ell_generic.EllipticCurve_generic, ProjectivePlaneCurv
 
             sage: # needs sage.rings.finite_rings
             sage: E1 = EllipticCurve_from_j(F(0))
-            sage: E2 = E1.quadratic_twist()
+            sage: E2 = E1.quadratic_twist(1)
             sage: D = E1.is_quadratic_twist(E2); D
             1
             sage: E1.is_isomorphic(E2)
