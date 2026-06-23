@@ -20,6 +20,7 @@ echo "INSTALL_DIR = $INSTALL_DIR"
 
 # GAP3 has its own string.h, which shadows the C library header in this tree.
 perl -0pi.bak -e 's/# include[[:space:]]*<string\.h>/typedef __SIZE_TYPE__ gap3_size_t;\nextern gap3_size_t strlen(const char *);\nextern int strcmp(const char *, const char *);\nextern char *strncat(char *, const char *, gap3_size_t);/' src/src/system.c
+perl -0pi.bak -e 's/#include <string\.h>/typedef __SIZE_TYPE__ gap3_size_t;\nextern gap3_size_t strlen(const char *);\nextern char *strcat(char *, const char *);/' src/src/gasman.c
 
 # The manylinux images do not provide static libc.
 sed -i.bak 's/ LOPTS="$(LOPTS) -static"/ LOPTS="$(LOPTS)"/g' src/src/Makefile
