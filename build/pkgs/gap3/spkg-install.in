@@ -18,6 +18,8 @@ echo "INSTALL_DIR = $INSTALL_DIR"
 ## INSTALLATION
 ###########################################
 
+# GAP3 has its own string.h; system.c needs the C library header here.
+sed -i.bak 's/# include[[:space:]]*<string\.h>/# include_next <string.h>/' src/src/system.c
 cd src/src
 $MAKE
 if [ $? -ne 0 ]; then
