@@ -13,6 +13,7 @@ from sage.ext.mod_int cimport *
 from sage.libs.gmp.mpq cimport *
 from sage.libs.gmp.mpz cimport *
 from sage.misc.lazy_import import LazyImport
+from sage.misc.lazy_string import lazy_string
 from sage.misc.verbose import verbose
 from sage.modules.vector_integer_sparse cimport *
 from sage.modules.vector_modn_sparse cimport *
@@ -182,6 +183,91 @@ def matrix_integer_sparse_rational_reconstruction(Matrix_integer_sparse A, Integ
     return R
 
 
+def _multimodular_echelon_progress(p, prod, M):
+    """
+    Return a progress message for modular echelon form.
+
+    TESTS::
+
+        sage: from sage.matrix.misc import _multimodular_echelon_progress
+        sage: _multimodular_echelon_progress(7, 10, 100)
+        'echelon modulo p=7 (66.67% done)'
+    """
+    return "echelon modulo p=%s (%.2f%% done)" % (
+        p, 100*float(len(str(prod))) / len(str(M)))
+
+
+def _multimodular_echelon_next_modulus(M, prod):
+    r"""
+    Return the target modulus to use after a failed reconstruction attempt.
+
+    ``M`` grows geometrically, but the result always exceeds ``prod``: a
+    retry must buy at least one new prime, otherwise the next pass would
+    reconstruct from the very same primes and fail in the same way.
+
+    TESTS::
+
+        sage: from sage.matrix.misc import _multimodular_echelon_next_modulus
+        sage: _multimodular_echelon_next_modulus(2^60, 2^61) == 2^73
+        True
+
+    Growth alone can leave ``M`` behind ``prod``; then take the smallest
+    modulus that requires another prime::
+
+        sage: _multimodular_echelon_next_modulus(2, 10^6)
+        1000001
+    """
+    M = M << (M.bit_length() // 5 + 1)
+    if M <= prod:
+        M = prod + 1
+    return M
+
+
+def _multimodular_echelon_candidate_has_shape(Matrix E, pivots):
+    r"""
+    Return whether ``E`` has reduced-echelon shape for ``pivots``.
+
+    This checks the structural invariant used by the exact row-space
+    certificate in :func:`matrix_rational_echelon_form_multimodular`.
+
+    TESTS::
+
+        sage: from sage.matrix.misc import _multimodular_echelon_candidate_has_shape
+        sage: _multimodular_echelon_candidate_has_shape(
+        ....:     matrix(QQ, [[0, 1]]), (1,))
+        True
+        sage: _multimodular_echelon_candidate_has_shape(
+        ....:     matrix(QQ, [[46337, 1]], sparse=True), (1,))
+        False
+        sage: _multimodular_echelon_candidate_has_shape(
+        ....:     matrix(QQ, [[1, 2], [0, 1]]), (0, 1))
+        False
+        sage: _multimodular_echelon_candidate_has_shape(
+        ....:     matrix(QQ, [[0, 1], [1, 0]]), (1, 0))
+        False
+    """
+    cdef Py_ssize_t i, j, pivot
+    cdef Py_ssize_t r = len(pivots)
+    if (r > E.nrows()
+            or any(pivot < 0 or pivot >= E.ncols() for pivot in pivots)
+            or any(pivots[i] >= pivots[i + 1] for i in range(r - 1))):
+        return False
+    if (not E[r:].is_zero()
+            or not E[:r].matrix_from_columns(pivots).is_one()):
+        return False
+    if E.is_sparse():
+        for i, j in E.nonzero_positions(copy=False):
+            if i < r and j < pivots[i]:
+                return False
+    else:
+        for i in range(r):
+            pivot = pivots[i]
+            for j in range(pivot):
+                if not E.get_is_zero_unsafe(i, j):
+                    return False
+    return True
+
+
 def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, proof=None):
     """
     Return reduced row-echelon form using a multi-modular
@@ -191,10 +277,17 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
 
     INPUT:
 
-    - ``height_guess`` -- integer or ``None``
+    - ``height_guess`` -- integer or ``None``; an estimate for `H(dE)`, where
+      `E` is the output echelon form and `d` is its denominator
     - ``proof`` -- boolean or ``None`` (default: ``None``, see
       ``proof.linear_algebra`` or ``sage.structure.proof``). Note that the
-      global Sage default is proof=True
+      global Sage default is proof=True.  With ``proof=False``, the algorithm
+      uses an explicitly supplied ``height_guess`` to attempt reconstruction
+      early and checks each candidate first with the usual height certificate;
+      if that fails, it checks the reduced-echelon shape and an exact row-space
+      identity.  The early attempt can reduce the number of modular images
+      when the output is much smaller than the input, but failed
+      reconstructions and the exact check can also make it slower
 
     OUTPUT: a pair consisting of a matrix in echelon form and a tuple of pivot
     positions.
@@ -207,35 +300,42 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
 
     Given Matrix A with n columns (self).
 
-     0. Rescale input matrix A to have integer entries.  This does
-        not change echelon form and makes reduction modulo lots of
-        primes significantly easier if there were denominators.
-        Henceforth we assume A has integer entries.
+     0. Rescale each row of the input matrix A independently to a primitive
+        integer row.  This does not change echelon form and makes reduction
+        modulo lots of primes significantly easier if there were
+        denominators.  Henceforth we assume A has integer entries.
 
-     1. Let c be a guess for the height of the echelon form.  E.g.,
-        c=1000, e.g., if matrix is very sparse and application is to
-        computing modular symbols.
+     1. Let c be a guess for H(dE), where E is the output echelon form
+        and d is its denominator.  E.g., c=1000 if the matrix is very
+        sparse and the application is to computing modular symbols.
 
-     2. Let M = n * c * H(A) + 1,
-        where n is the number of columns of A.
+     2. Let M = n * c * H(A) + 1, where n is the number of columns of A.
+        If ``proof=False`` and c was supplied explicitly, start instead with
+        M = c + 1 in order to attempt rational reconstruction earlier.
 
      3. List primes p_1, p_2, ..., such that the product of
         the p_i is at least M.
 
      4. Try to compute the rational reconstruction CRT echelon form
         of A mod the product of the p_i.  If rational
-        reconstruction fails, compute 1 more echelon forms mod the
-        next prime, and attempt again.  Make sure to keep the
+        reconstruction fails, compute more echelon forms modulo subsequent
+        primes, and attempt again.  Make sure to keep the
         result of CRT on the primes from before, so we don't have
         to do that computation again.  Let E be this matrix.
 
-     5. Compute the denominator d of E.
-        Attempt to prove that result is correct by checking that
+     5. Compute the denominator d of E.  Attempt to prove that the result is
+        correct by checking that
 
               H(d*E)*ncols(A)*H(A) < (prod of reduction primes)
 
-        where H denotes the height.   If this fails, do step 4 with
-        a few more primes.
+        where H denotes the height.  With ``proof=False``, if this certificate
+        fails, check the exact identity
+
+              d*A = A[:, P] * (d*E)[:r]
+
+        where P is the tuple of r pivot columns, after explicitly checking
+        that E has reduced-echelon shape for P.  If the applicable check
+        fails, do step 4 with more primes.
 
     EXAMPLES::
 
@@ -307,29 +407,178 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
         sage: t = walltime(t)  # long time
         sage: (t < 10, t)  # long time
         (True, ...)
+
+    TESTS:
+
+    Check that the correctness bound accounts for the integer matrix obtained
+    after clearing denominators (:issue:`42411`)::
+
+        sage: entries = [[1000001000, -1/501000500, 3], [1, -1, 1]]
+        sage: expected = matrix(QQ, entries).echelon_form(algorithm='flint')
+        sage: matrix(QQ, entries).echelon_form(algorithm='multimodular') == expected
+        True
+        sage: matrix(QQ, entries, sparse=True).echelon_form() == expected
+        True
+
+    An early reconstruction is checked exactly even when the standard
+    validity bound is disabled::
+
+        sage: output_height = (expected.denominator() * expected).height()
+        sage: matrix(QQ, entries, sparse=True).echelon_form(
+        ....:     height_guess=output_height, proof=False) == expected
+        True
+
+    First calibrate the instrumentation on a case that needs the exact
+    fallback, then check that the inexpensive height certificate bypasses
+    it::
+
+        sage: import sage.matrix.misc as matrix_misc
+        sage: A = matrix(QQ, [[10^6, 1, 0], [10^6 - 1, 1, 0]])
+        sage: expected = A.echelon_form(algorithm='flint')
+        sage: original_shape_check = matrix_misc._multimodular_echelon_candidate_has_shape
+        sage: shape_checks = []
+        sage: def count_shape_check(*args):
+        ....:     shape_checks.append(None)
+        ....:     return original_shape_check(*args)
+        sage: matrix_misc._multimodular_echelon_candidate_has_shape = count_shape_check
+        sage: try:
+        ....:     D = 43*53*61
+        ....:     fallback = matrix(QQ, [[D, D/43, D/53, D/61, 0],
+        ....:                            [0,    0,    0,    0, 1]], sparse=True)
+        ....:     fallback_expected = fallback.dense_matrix().echelon_form(
+        ....:         algorithm='flint')
+        ....:     fallback_result = fallback.echelon_form(
+        ....:         algorithm='multimodular', height_guess=1, proof=False)
+        ....:     hook_is_active = bool(shape_checks)
+        ....:     shape_checks.clear()
+        ....:     result = A.__copy__().echelon_form(
+        ....:         algorithm='multimodular', proof=False)
+        ....: finally:
+        ....:     matrix_misc._multimodular_echelon_candidate_has_shape = original_shape_check
+        sage: (result == expected, fallback_result == fallback_expected)
+        (True, True)
+        sage: (hook_is_active, shape_checks)
+        (True, [])
+
+    A premature rational reconstruction is rejected by the exact check even
+    when ``proof=False``::
+
+        sage: A = matrix(QQ, 2, 3,
+        ....:            [-17, 4/5, 25/13, -2/3, 19/5, -17/11], sparse=True)
+        sage: expected = A.dense_matrix().echelon_form(algorithm='flint')
+        sage: output_height = (expected.denominator() * expected).height()
+        sage: A.echelon_form(algorithm='multimodular',
+        ....:                height_guess=output_height, proof=False) == expected
+        True
+
+    The full identity is necessary.  Rational reconstruction may reuse a
+    shared denominator, so even a pivot residue of one need not reconstruct
+    as one::
+
+        sage: N = ZZ(499)
+        sage: C = matrix(QQ, [[1, 1/7, 1/11, 1/13, 0],
+        ....:                 [0,   0,    0,    0, 1]])
+        sage: L = matrix(ZZ, 2, 5, [x % N for x in C.list()], sparse=True)
+        sage: candidate = L.rational_reconstruction(N)
+        sage: candidate[1, 4]
+        3/1001
+        sage: B0 = matrix(ZZ, [[1001, 143, 91, 77, 0],
+        ....:                  [   0,   0,  0,  0, 1]], sparse=True)
+        sage: d = candidate.denominator()
+        sage: dE = (d*candidate).change_ring(ZZ)
+        sage: P = (0, 4); nonpivots = (1, 2, 3)
+        sage: (d * B0.matrix_from_columns(nonpivots)
+        ....:  == B0.matrix_from_columns(P)
+        ....:     * dE.matrix_from_columns(nonpivots))
+        True
+        sage: d*B0 == B0.matrix_from_columns(P) * dE
+        False
+
+    This situation can occur in the multimodular algorithm itself.  The first
+    sparse reduction prime is 46337, and the following shared denominator is
+    congruent to 8 modulo that prime::
+
+        sage: D = 43*53*61
+        sage: A = matrix(QQ, [[D, D/43, D/53, D/61, 0],
+        ....:                 [0,    0,    0,    0, 1]], sparse=True)
+        sage: expected = A.dense_matrix().echelon_form(algorithm='flint')
+        sage: A.echelon_form(algorithm='multimodular',
+        ....:                height_guess=1, proof=False) == expected
+        True
+
+    An exact row-space check also rejects a reconstruction obtained only from
+    bad-pivot primes::
+
+        sage: A = matrix(QQ, [[46337, 19453]], sparse=True)
+        sage: expected = A.dense_matrix().echelon_form(algorithm='flint')
+        sage: A.echelon_form(algorithm='multimodular',
+        ....:                height_guess=46337, proof=False) == expected
+        True
+
+    Check that independent row scaling keeps the performance-critical bound
+    small when rows have distinct denominators.  Counting calls to
+    ``previous_prime`` avoids a timing-dependent test::
+
+        sage: import sage.matrix.misc as matrix_misc
+        sage: denominators = [next_prime(10^4 + 100*i) for i in range(80)]
+        sage: entries = {(i, i): 1/q for i, q in enumerate(denominators)}
+        sage: entries.update({(i, 119): 1 for i in range(80)})
+        sage: A = matrix(QQ, 80, 120, entries)
+        sage: expected = matrix(QQ, 80, 120)
+        sage: for i, q in enumerate(denominators):
+        ....:     expected[i, i] = 1
+        ....:     expected[i, 119] = q
+        sage: original_previous_prime = matrix_misc.previous_prime
+        sage: def run(proof):
+        ....:     primes = []
+        ....:     def count_previous_prime(p):
+        ....:         primes.append(p)
+        ....:         return original_previous_prime(p)
+        ....:     matrix_misc.previous_prime = count_previous_prime
+        ....:     try:
+        ....:         result = A.__copy__().echelon_form(
+        ....:             algorithm='multimodular', proof=proof)
+        ....:     finally:
+        ....:         matrix_misc.previous_prime = original_previous_prime
+        ....:     return result, len(primes)
+        sage: proved, proved_primes = run(True)
+        sage: unproved, unproved_primes = run(False)
+        sage: proved == unproved == expected
+        True
+        sage: all(0 < count < 10
+        ....:     for count in (proved_primes, unproved_primes))
+        True
     """
     if proof is None:
         from sage.structure.proof.proof import get_flag
         proof = get_flag(proof, "linear_algebra")
 
     verbose("Multimodular echelon algorithm on %s x %s matrix" % (self._nrows, self._ncols), caller_name="multimod echelon")
-    cdef Matrix E
+    cdef Matrix E, dE
+    cdef bint default_height_guess = height_guess is None
     if self._nrows == 0 or self._ncols == 0:
         return self, ()
 
-    B, _ = self._clear_denom()
+    B, height = self._clear_denom_rowwise()
+    if not height:
+        return self.parent()(0), ()
 
-    height = self.height()
     if height_guess is None:
+        # Base the heuristic on the primitive integer matrix actually used by
+        # the modular computation, so denominator clearing is accounted for.
         height_guess = 10000000*(height+100)
     tm = verbose("height_guess = %s" % height_guess, level=2, caller_name="multimod echelon")
 
     cdef Integer M
     from sage.arith.misc import integer_floor as floor
-    if proof:
+    if proof or default_height_guess:
+        # The modular computation is done with denominators cleared, so H(A)
+        # in the reconstruction bound is the height of this integer matrix.
         M = floor(max(1, self._ncols * height_guess * height + 1))
     else:
-        M = floor(max(1, height_guess + 1))
+        # An explicit height guess opts into early reconstruction.  Each
+        # candidate is checked below.
+        M = floor(max(2, height_guess + 1))
 
     if self.is_sparse():
         from sage.matrix.matrix_modn_sparse import MAX_MODULUS
@@ -353,10 +602,11 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
             problem = problem + 1
             if problem > 50:
                 verbose("echelon multi-modular possibly not converging?", caller_name="multimod echelon")
-            t = verbose("echelon modulo p=%s (%.2f%% done)" % (
-                       p, 100*float(len(str(prod))) / len(str(M))), level=2, caller_name="multimod echelon")
+            t = verbose(lazy_string(_multimodular_echelon_progress,
+                                    p, prod, M),
+                        level=2, caller_name="multimod echelon")
 
-            # We use denoms=False, since we made self integral by calling clear_denom above.
+            # We use denoms=False, since the rows of B are integral.
             A = B._mod_int(p)
             t = verbose("time to reduce matrix mod p:",t, level=2, caller_name="multimod echelon")
             A.echelonize()
@@ -397,6 +647,8 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
                 Y.append(lifts[p])
                 prod = prod * X[i].base_ring().order()
         verbose("finished comparing pivots", level=2, t=t, caller_name="multimod echelon")
+        if prod < M:
+            continue
         try:
             if not Y:
                 raise ValueError("not enough primes")
@@ -417,20 +669,36 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
             verbose('rational reconstruction completed', t, level=2, caller_name="multimod echelon")
         except ValueError as msg:
             verbose(msg, level=2)
-            verbose("Not enough primes to do CRT lift; redoing with several more primes.", level=2, caller_name="multimod echelon")
-            M <<= M.bit_length() // 5 + 1
+            verbose("Not enough primes to do CRT lift; redoing with more "
+                    "primes.", level=2,
+                    caller_name="multimod echelon")
+            M = _multimodular_echelon_next_modulus(M, prod)
             continue
 
-        if not proof:
-            verbose("Not checking validity of result (since proof=False).", level=2, caller_name="multimod echelon")
-            break
-        d   = E.denominator()
-        hdE = int((d*E).height())
+        d = E.denominator()
+        dE = d*E
+        hdE = int(dE.height())
         if hdE * self.ncols() * height < prod:
-            verbose("Validity of result checked.", level=2, caller_name="multimod echelon")
+            verbose("Validity checked using the height bound.", level=2,
+                    caller_name="multimod echelon")
             break
+
+        if not proof:
+            r = len(best_pivots)
+            if _multimodular_echelon_candidate_has_shape(E, best_pivots):
+                dE_integer = dE[:r].change_ring(B.base_ring())
+                if d*B == B.matrix_from_columns(best_pivots) * dE_integer:
+                    verbose("Validity of early reconstruction checked.",
+                            level=2, caller_name="multimod echelon")
+                    break
+            verbose("Early reconstruction failed the row-space check; "
+                    "trying more primes.", level=2,
+                    caller_name="multimod echelon")
+            M = _multimodular_echelon_next_modulus(M, prod)
+            continue
+
         verbose("Validity failed; trying again with more primes.", level=2, caller_name="multimod echelon")
-        M <<= M.bit_length() // 5 + 1
+        M = _multimodular_echelon_next_modulus(M, prod)
     #end while
     verbose("total time",tm, level=2, caller_name="multimod echelon")
     return E, tuple(best_pivots)

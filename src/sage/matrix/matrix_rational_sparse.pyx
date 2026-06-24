@@ -25,7 +25,7 @@ TESTS::
 #                  http://www.gnu.org/licenses/
 #*****************************************************************************
 
-from cysignals.signals cimport sig_on, sig_off
+from cysignals.signals cimport sig_check, sig_on, sig_off
 from cysignals.memory cimport check_calloc, sig_free
 
 from sage.data_structures.binary_search cimport *
@@ -507,10 +507,90 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
         mpz_clear(t)
         return A, D
 
+    def _clear_denom_rowwise(self):
+        r"""
+        Clear denominators independently in each row, divide out its content,
+        and return the resulting integer matrix together with its height.
+
+        TESTS::
+
+            sage: A = matrix(QQ, [[0, 0], [1/2, 1/3]], sparse=True)
+            sage: B, height = A._clear_denom_rowwise()
+            sage: B
+            [0 0]
+            [3 2]
+            sage: (height, B.is_sparse())
+            (3, True)
+            sage: B.change_ring(QQ).echelon_form() == A.echelon_form()
+            True
+            sage: matrix(QQ, [[2/101, 2/103]], sparse=True)._clear_denom_rowwise()
+            ([103 101], 103)
+        """
+        cdef Py_ssize_t i, j
+        cdef Matrix_integer_sparse B
+        cdef mpq_vector *source_row
+        cdef mpz_vector *target_row
+        cdef mpz_vector new_row
+        cdef mpz_t content, denom
+        cdef Integer height = Integer.__new__(Integer)
+
+        MZ = sage.matrix.matrix_space.MatrixSpace(
+            ZZ, self._nrows, self._ncols, sparse=True)
+        B = MZ.element_class(MZ, None, False, False)
+
+        mpz_set_ui(height.value, 0)
+        mpz_init(content)
+        mpz_init(denom)
+        try:
+            for i in range(self._nrows):
+                sig_check()
+                source_row = &self._matrix[i]
+                mpz_set_ui(content, 0)
+                mpz_set_ui(denom, 1)
+                for j in range(source_row.num_nonzero):
+                    sig_check()
+                    mpz_lcm(denom, denom,
+                            mpq_denref(source_row.entries[j]))
+
+                # Allocate and initialize a complete replacement row before
+                # changing B.  This keeps every row structurally valid if
+                # allocation or a later signal raises an exception.
+                mpz_vector_init(
+                    &new_row, self._ncols, source_row.num_nonzero)
+                for j in range(source_row.num_nonzero):
+                    new_row.positions[j] = source_row.positions[j]
+                target_row = &B._matrix[i]
+                mpz_vector_clear(target_row)
+                target_row[0] = new_row
+
+                for j in range(source_row.num_nonzero):
+                    sig_check()
+                    mpz_divexact(
+                        target_row.entries[j], denom,
+                        mpq_denref(source_row.entries[j]))
+                    mpz_mul(
+                        target_row.entries[j], target_row.entries[j],
+                        mpq_numref(source_row.entries[j]))
+                    mpz_gcd(content, content, target_row.entries[j])
+
+                if mpz_sgn(content):
+                    for j in range(source_row.num_nonzero):
+                        sig_check()
+                        mpz_divexact(target_row.entries[j],
+                                     target_row.entries[j], content)
+                for j in range(source_row.num_nonzero):
+                    sig_check()
+                    if mpz_cmpabs(target_row.entries[j], height.value) > 0:
+                        mpz_abs(height.value, target_row.entries[j])
+        finally:
+            mpz_clear(denom)
+            mpz_clear(content)
+        return B, height
+
     ################################################
     # Echelon form
     ################################################
-    def echelonize(self, height_guess=None, proof=True, **kwds):
+    def echelonize(self, height_guess=None, proof=None, **kwds):
         """
         Transform the matrix ``self`` into reduced row echelon form
         in place.
@@ -562,7 +642,7 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
         self.cache('rank', len(pivots))
 
     def echelon_form(self, algorithm='default',
-                     height_guess=None, proof=True, **kwds):
+                     height_guess=None, proof=None, **kwds):
         """
         INPUT:
 
@@ -584,6 +664,31 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
             [      0       1       0  -5/157]
             [      0       0       1 238/157]
             [      0       0       0       0]
+
+        TESTS:
+
+        ``proof`` defaults to ``None``, so that the global
+        ``proof.linear_algebra`` flag is honoured just as it is for dense
+        matrices::
+
+            sage: import sage.matrix.misc as matrix_misc
+            sage: original = matrix_misc.matrix_rational_echelon_form_multimodular
+            sage: received = []
+            sage: def wrapper(A, height_guess=None, proof=None):
+            ....:     received.append(proof)
+            ....:     return original(A, height_guess=height_guess, proof=proof)
+            sage: matrix_misc.matrix_rational_echelon_form_multimodular = wrapper
+            sage: try:
+            ....:     a = matrix(QQ, [[1/2, 1/3]], sparse=True)
+            ....:     default = a.echelon_form()
+            ....:     forced = matrix(QQ, [[1/2, 1/3]], sparse=True).echelon_form(
+            ....:         proof=True)
+            ....: finally:
+            ....:     matrix_misc.matrix_rational_echelon_form_multimodular = original
+            sage: received
+            [None, True]
+            sage: default == forced == matrix(QQ, [[1, 2/3]])
+            True
         """
         label = 'echelon_form_%s' % algorithm
         x = self.fetch(label)
@@ -599,7 +704,7 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
         return E
 
     # Multimodular echelonization algorithms
-    def _echelonize_multimodular(self, height_guess=None, proof=True, **kwds):
+    def _echelonize_multimodular(self, height_guess=None, proof=None, **kwds):
         cdef Matrix_rational_sparse E
         E, pivots = self._echelon_form_multimodular(height_guess, proof=proof, **kwds)
         self.clear_cache()
@@ -607,7 +712,7 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
         self._matrix, E._matrix = E._matrix, self._matrix
         return pivots
 
-    def _echelon_form_multimodular(self, height_guess=None, proof=True):
+    def _echelon_form_multimodular(self, height_guess=None, proof=None):
         """
         Return reduced row-echelon form using a multi-modular
         algorithm.  Does not change ``self``.
@@ -615,7 +720,8 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
         INPUT:
 
         - ``height_guess`` -- integer or ``None``
-        - ``proof`` -- boolean (default: ``True``)
+        - ``proof`` -- boolean or ``None`` (default: ``None``, see
+          ``proof.linear_algebra`` or ``sage.structure.proof``)
         """
         from sage.matrix.misc import matrix_rational_echelon_form_multimodular
         cdef Matrix E
