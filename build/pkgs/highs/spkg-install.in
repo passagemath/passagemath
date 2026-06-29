@@ -10,6 +10,7 @@ sdh_cmake -GNinja \
           -DCMAKE_VERBOSE_MAKEFILE=ON \
           -DCMAKE_INSTALL_LIBDIR=lib \
           ..
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
 

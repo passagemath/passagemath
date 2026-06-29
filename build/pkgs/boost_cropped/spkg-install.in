@@ -29,6 +29,7 @@ sdh_cmake -GNinja \
       -DBOOST_EXCLUDE_LIBRARIES="cobalt;process;locale;context;asio;coroutine;fiber;log" \
       -DBOOST_STACKTRACE_ENABLE_FROM_EXCEPTION=0 \
       .
+set -e
 cmake --build .
 if [ -n "$MSYSTEM" ]; then
    # Try if repeated build makes sure all DLLs are built

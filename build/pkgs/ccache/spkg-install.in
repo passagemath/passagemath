@@ -9,6 +9,7 @@ sdh_cmake -GNinja \
           -DCMAKE_BUILD_TYPE=Release \
           -DENABLE_TESTING=OFF \
 		  ..
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
 

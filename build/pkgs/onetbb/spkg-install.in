@@ -11,5 +11,6 @@ sdh_cmake -GNinja \
     -DTBB_ENABLE_IPO=OFF \
     -DTBB_TEST=OFF \
     ..
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .

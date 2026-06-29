@@ -103,6 +103,7 @@ eval sdh_cmake -GNinja -DGENERATORS=on \
     $OPENBLAS_CONFIGURE \
     .
 
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
 

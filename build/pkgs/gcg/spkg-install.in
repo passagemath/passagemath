@@ -8,5 +8,6 @@ sdh_cmake -GNinja \
           -DGMP_DIR="${SAGE_GMP_PREFIX}" \
           -DSYM=bliss \
           ..
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .

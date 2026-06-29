@@ -4,5 +4,6 @@ if [ "$UNAME" = "Darwin" ]; then
 fi
 cd src
 sdh_cmake -GNinja -DUSE_GMP=OFF -DCMAKE_VERBOSE_MAKEFILE=ON .
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
