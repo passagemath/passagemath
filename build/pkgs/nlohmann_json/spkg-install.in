@@ -9,5 +9,6 @@ sdh_cmake -GNinja -DGENERATORS=on \
           -DJSON_BuildTests=OFF \
           -DJSON_MultipleHeaders=ON \
           ..
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .

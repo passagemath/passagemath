@@ -6,5 +6,6 @@ mkdir build
 cd build
 sdh_cmake -GNinja \
           -DBUILD_SHARED_LIBS=ON ..
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .

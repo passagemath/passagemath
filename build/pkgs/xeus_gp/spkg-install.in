@@ -4,5 +4,6 @@ sdh_cmake -GNinja \
           -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
           -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
           .
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .

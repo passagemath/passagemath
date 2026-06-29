@@ -20,5 +20,6 @@ sdh_cmake -GNinja \
           -DSUITESPARSE_ENABLE_PROJECTS="suitesparse_config;amd;camd;ccolamd;colamd;cholmod;umfpack" \
           .
 
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .

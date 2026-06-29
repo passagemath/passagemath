@@ -13,6 +13,7 @@ sdh_cmake -GNinja \
           ${EXTRA_OPTS} \
           .
 
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
 

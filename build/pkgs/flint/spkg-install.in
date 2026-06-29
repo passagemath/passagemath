@@ -10,6 +10,7 @@ if [ -n "$MSYSTEM" ]; then
     sdh_cmake -G Ninja \
         -DENABLE_ARCH=NO \
         .
+    set -e
     cmake --build .
     DESTDIR=$SAGE_DESTDIR cmake --install .
 else

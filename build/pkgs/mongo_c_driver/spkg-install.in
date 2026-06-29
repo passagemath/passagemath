@@ -12,5 +12,6 @@ sdh_cmake -GNinja \
           -DENABLE_SNAPPY=OFF \
           .
 
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .

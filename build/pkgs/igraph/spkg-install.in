@@ -16,5 +16,6 @@ sdh_cmake -GNinja \
           -DIGRAPH_USE_INTERNAL_SUITESPARSE=OFF \
           -DIGRAPH_GLPK_SUPPORT=ON \
           ..
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .

@@ -12,5 +12,6 @@ sdh_cmake -GNinja \
           -DSYM=bliss \
           -DSDPS=dsdp \
           ..
+set -e
 cmake --build .
 DESTDIR=$SAGE_DESTDIR cmake --install .
