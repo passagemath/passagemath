@@ -252,7 +252,7 @@ jobs:
             fi
           fi
           # If so, then create CHANGES.html
-          if [[ -n "$PR_NUMBER" ]]; then
+          if [[ -n "$PR_NUMBER" && -d doc/.git ]]; then
             (cd doc && git add -A && git commit --quiet -m 'new')
             # Wipe out chronic diffs of new doc against old doc before creating CHANGES.html
             (cd doc && \
