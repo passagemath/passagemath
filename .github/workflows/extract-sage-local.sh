@@ -16,6 +16,7 @@ done
 
 # We set the installation records to the same mtime so that no rebuilds due to dependencies
 # among these packages are triggered.
+# FIXME: This can be replaced by 'make sync-installed'
 dummy="$SAGE_LOCAL"/var/lib/sage/installed/.dummy
 if [ -f "$dummy" ]; then
     touch "$dummy"

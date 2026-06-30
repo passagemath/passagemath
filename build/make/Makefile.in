@@ -307,6 +307,15 @@ $(foreach tree,SAGE_LOCAL SAGE_VENV SAGE_DOCS, \
 $(foreach pkgname,$(INSTALLED_PACKAGES),\
     $(eval optional_inst_$(pkgname) = $(inst_$(pkgname))))
 
+# touch -r is --reference; the macOS version of touch does not accept the long option.
+sync-installed:
+	if [ -f "$(SAGE_LOCAL)/$(SPKG_INST_RELDIR)/.dummy" ]; then \
+	    touch "$(SAGE_LOCAL)/$(SPKG_INST_RELDIR)/.dummy"; \
+	    touch -r "$(SAGE_LOCAL)/$(SPKG_INST_RELDIR)/.dummy" $(INSTALLED_PACKAGE_INSTS); \
+	fi
+
+.PHONY: sync-installed
+
 ###############################################################################
 
 # Silent rules
