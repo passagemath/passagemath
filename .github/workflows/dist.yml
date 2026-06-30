@@ -540,9 +540,8 @@ jobs:
         if: always() && steps.unpack.outcome == 'success'
         # Adapted from macos.yml
         # This is macOS tar -- cannot use --remove-files.
-        # We remove the $SAGE_LOCAL/lib64 link
         run: |
-          mkdir -p sage-local-artifact && (cd /var/tmp && rm -f sage-local*/lib64 && tar -cf - sage-local*) > sage-local-artifact/sage-local.tar
+          mkdir -p sage-local-artifact && (cd /var/tmp && tar -cf - sage-local*) > sage-local-artifact/sage-local.tar
 
       - name: Upload sage-local artifact
         if: always() && steps.unpack.outcome == 'success'
@@ -1013,9 +1012,8 @@ jobs:
         if: always() && steps.unpack.outcome == 'success'
         # Adapted from macos.yml
         # This is macOS tar -- cannot use --remove-files.
-        # We remove the $SAGE_LOCAL/lib64 link
         run: |
-          mkdir -p sage-local-artifact && (cd /var/tmp && rm -f sage-local*/lib64 && tar -cf - sage-local*) > sage-local-artifact/sage-local.tar
+          mkdir -p sage-local-artifact && (cd /var/tmp && tar -cf - sage-local*) > sage-local-artifact/sage-local.tar
 
       - name: Upload sage-local artifact
         if: always() && steps.unpack.outcome == 'success'
@@ -1336,9 +1334,8 @@ jobs:
         if: always() && steps.unpack.outcome == 'success'
         # Adapted from macos.yml
         # This is macOS tar -- cannot use --remove-files.
-        # We remove the $SAGE_LOCAL/lib64 link
         run: |
-          mkdir -p sage-local-artifact && (cd /var/tmp && rm -f sage-local*/lib64 && tar -cf - sage-local*) > sage-local-artifact/sage-local.tar
+          mkdir -p sage-local-artifact && (cd /var/tmp && tar -cf - sage-local*) > sage-local-artifact/sage-local.tar
 
       - name: Upload sage-local artifact
         if: always() && steps.unpack.outcome == 'success'
