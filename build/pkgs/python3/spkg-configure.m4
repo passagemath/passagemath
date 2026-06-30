@@ -66,8 +66,14 @@ SAGE_SPKG_CONFIGURE([python3], [
                     dnl introduction for AC_MSG_RESULT printed by AC_CACHE_CHECK
                     AC_MSG_CHECKING([for python3 >= ]MIN_VERSION[, < ]LT_VERSION[ with $all_check_modules_text])
            ])
-           AS_IF([test -z "$ac_cv_path_PYTHON3"], [
-               AC_MSG_ERROR([the python3 selected using --with-python=$with_python is not suitable])
+           AS_IF([test -z "$ac_cv_path_PYTHON3"], [dnl
+               AS_VAR_IF([sage_use_system_python3], [force], [dnl
+                   dnl Defer the error so that system package info is printed.
+                   dnl In particular, this is for the case when configure is invoked by passagemath-conf.
+                   AC_MSG_NOTICE([the python3 selected using --with-python=$with_python is not suitable])
+               ], [dnl
+                   AC_MSG_ERROR([the python3 selected using --with-python=$with_python is not suitable])
+               ])
            ])
         ], [dnl checking the default system python3
            AC_MSG_RESULT([])
