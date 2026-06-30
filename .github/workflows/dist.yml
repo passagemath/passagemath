@@ -961,7 +961,7 @@ jobs:
       - name: Download sage-local artifact
         uses: actions/download-artifact@v4
         with:
-          path: sage-local-artifact/sage-local.tar
+          path: sage-local-artifact
           name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
 
       - name: Extract sage-local artifact
@@ -1285,7 +1285,7 @@ jobs:
       - name: Download sage-local artifact
         uses: actions/download-artifact@v4
         with:
-          path: sage-local-artifact/sage-local.tar
+          path: sage-local-artifact
           name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
 
       - name: Extract sage-local artifact
