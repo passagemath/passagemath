@@ -479,8 +479,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            /sage-*
-            ~/sage-*
+            /var/tmp/sage-local*
           key: >-
             ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}-build=${{
               hashFiles('build',
@@ -515,7 +514,7 @@ jobs:
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --disable-python-distutils-check --prefix=$HOME/runner-venv
           MAKE="make -j6" make V=0 cibuildwheel
           export PATH=build/bin:$PATH
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS) make) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --without-system-curl --without-system-gdbm --without-system-gettext --without-system-gmp --without-system-libffi --without-system-openssl --with-system-python3=force --without-system-readline --without-system-libpng --without-system-patchelf --without-system-zlib; status=\$?; echo ::group::config.log && cat config.log && echo ::endgroup::; (exit \$status) && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*|*ssl*|*crypto*|*curl*|*tinfo*|*readline*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done; fi" >> "$GITHUB_ENV"
+          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS) make) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/var/tmp/sage-local-\$AUDITWHEEL_PLAT' || '/var/tmp/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --without-system-curl --without-system-gdbm --without-system-gettext --without-system-gmp --without-system-libffi --without-system-openssl --with-system-python3=force --without-system-readline --without-system-libpng --without-system-patchelf --without-system-zlib; status=\$?; echo ::group::config.log && cat config.log && echo ::endgroup::; (exit \$status) && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*|*ssl*|*crypto*|*curl*|*tinfo*|*readline*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done; fi" >> "$GITHUB_ENV"
           mkdir -p unpacked
           set -x
           for sdist in dist/$pkg*.tar.gz; do
@@ -534,20 +533,18 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
-            /sage-*
-            ~/sage-*
+            /var/tmp/sage-local*
           key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
 
       - name: Prepare sage-local artifact
-        if: always() && runner.os != 'Linux' && steps.unpack.outcome == 'success'
+        if: always() && steps.unpack.outcome == 'success'
         # Adapted from macos.yml
         # This is macOS tar -- cannot use --remove-files.
-        # We remove the $SAGE_LOCAL/lib64 link
         run: |
-          mkdir -p sage-local-artifact && (cd $HOME && rm -f "sage-local/lib64" && tar -cf - sage-local) > sage-local-artifact/sage-local.tar
+          mkdir -p sage-local-artifact && (cd /var/tmp && tar -cf - sage-local*) > sage-local-artifact/sage-local.tar
 
       - name: Upload sage-local artifact
-        if: always() && runner.os != 'Linux' && steps.unpack.outcome == 'success'
+        if: always() && steps.unpack.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           path: sage-local-artifact/sage-local.tar
@@ -961,20 +958,15 @@ jobs:
             upstream/configure*
           key: ${{ steps.cache-configure.outputs.cache-primary-key }}
 
-      - name: Retrieve SAGE_LOCAL cache
-        id:   cache-sage-local
-        uses: actions/cache/restore@v4
+      - name: Download sage-local artifact
+        uses: actions/download-artifact@v4
         with:
-          path: |
-            /sage-*
-            ~/sage-*
-          key: >-
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}-build=${{
-              hashFiles('build',
-                        'configure.ac',
-                        'm4',
-                        '.github/workflows/dist.yml')
-            }}
+          path: sage-local-artifact
+          name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-a-wheels
+
+      - name: Extract sage-local artifact
+        run: |
+          (cd /var/tmp && tar -xf -) < sage-local-artifact/sage-local.tar
 
       - name: Unpack and prepare
         id: unpack
@@ -998,10 +990,10 @@ jobs:
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --prefix=$HOME/runner-venv
-          MAKE="make -j6" make V=0 cibuildwheel
+          MAKE="make -j6" make V=0 sync-installed cibuildwheel
           export PATH=build/bin:$PATH
-          rm -f ~/sage-local/config.status /sage-*/config.status  # trigger rebuild
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS) make) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --without-system-curl --without-system-gdbm --without-system-gettext --without-system-gmp --without-system-libffi --without-system-openssl --with-system-python3=force --without-system-readline --without-system-libpng --without-system-patchelf --without-system-zlib; status=\$?; echo ::group::config.log && cat config.log && echo ::endgroup::; (exit \$status) && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*|*ssl*|*crypto*|*curl*|*tinfo*|*readline*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done; fi" >> "$GITHUB_ENV"
+          rm -f /var/tmp/sage-*/config.status  # trigger rebuild
+          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS) make) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/var/tmp/sage-local-\$AUDITWHEEL_PLAT' || '/var/tmp/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --without-system-curl --without-system-gdbm --without-system-gettext --without-system-gmp --without-system-libffi --without-system-openssl --with-system-python3=force --without-system-readline --without-system-libpng --without-system-patchelf --without-system-zlib; status=\$?; echo ::group::config.log && cat config.log && echo ::endgroup::; (exit \$status) && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*|*ssl*|*crypto*|*curl*|*tinfo*|*readline*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done; fi" >> "$GITHUB_ENV"
           mkdir -p unpacked
           set -x
           for sdist in dist/$pkg*.tar.gz; do
@@ -1016,25 +1008,15 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_modules
 
-      - name: Save SAGE_LOCAL cache
-        if:   (success() || failure()) && steps.unpack.outcome == 'success'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            /sage-*
-            ~/sage-*
-          key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
-
       - name: Prepare sage-local artifact
-        if: always() && runner.os != 'Linux' && steps.unpack.outcome == 'success'
+        if: always() && steps.unpack.outcome == 'success'
         # Adapted from macos.yml
         # This is macOS tar -- cannot use --remove-files.
-        # We remove the $SAGE_LOCAL/lib64 link
         run: |
-          mkdir -p sage-local-artifact && (cd $HOME && rm -f "sage-local/lib64" && tar -cf - sage-local) > sage-local-artifact/sage-local.tar
+          mkdir -p sage-local-artifact && (cd /var/tmp && tar -cf - sage-local*) > sage-local-artifact/sage-local.tar
 
       - name: Upload sage-local artifact
-        if: always() && runner.os != 'Linux' && steps.unpack.outcome == 'success'
+        if: always() && steps.unpack.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           path: sage-local-artifact/sage-local.tar
@@ -1300,20 +1282,15 @@ jobs:
             upstream/configure*
           key: ${{ steps.cache-configure.outputs.cache-primary-key }}
 
-      - name: Retrieve SAGE_LOCAL cache
-        id:   cache-sage-local
-        uses: actions/cache/restore@v4
+      - name: Download sage-local artifact
+        uses: actions/download-artifact@v4
         with:
-          path: |
-            /sage-*
-            ~/sage-*
-          key: >-
-            ${{ runner.os }}-cibuildwheel-${{ matrix.arch }}-${{ matrix.build }}-build=${{
-              hashFiles('build',
-                        'configure.ac',
-                        'm4',
-                        '.github/workflows/dist.yml')
-            }}
+          path: sage-local-artifact
+          name: sage-local-${{ matrix.os }}-${{ matrix.build }}-${{ matrix.arch }}-b-wheels
+
+      - name: Extract sage-local artifact
+        run: |
+          (cd /var/tmp && tar -xf -) < sage-local-artifact/sage-local.tar
 
       - name: Unpack and prepare
         id: unpack
@@ -1337,10 +1314,10 @@ jobs:
           "${{ steps.python.outputs.python-path }}" -m pip install setuptools
           . ./.homebrew-build-env 2> /dev/null || :
           ./configure --with-python="${{ steps.python.outputs.python-path }}" --with-system-python3=force --prefix=$HOME/runner-venv
-          MAKE="make -j6" make V=0 cibuildwheel
+          MAKE="make -j6" make V=0 sync-installed cibuildwheel
           export PATH=build/bin:$PATH
-          rm -f ~/sage-local/config.status /sage-*/config.status  # trigger rebuild
-          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS) make) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/sage-\$AUDITWHEEL_PLAT' || '\$HOME/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --without-system-curl --without-system-gdbm --without-system-gettext --without-system-gmp --without-system-libffi --without-system-openssl --with-system-python3=force --without-system-readline --without-system-libpng --without-system-patchelf --without-system-zlib; status=\$?; echo ::group::config.log && cat config.log && echo ::endgroup::; (exit \$status) && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*|*ssl*|*crypto*|*curl*|*tinfo*|*readline*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done; fi" >> "$GITHUB_ENV"
+          rm -f /var/tmp/sage-*/config.status  # trigger rebuild
+          echo CIBW_BEFORE_ALL="echo > constraints.txt && ( $(sage-print-system-package-command debian update) && $(sage-print-system-package-command debian --yes --no-install-recommends install $(sage-get-system-packages debian $SPKGS) zip) || $(sage-print-system-package-command fedora --yes --no-install-recommends install $(sage-get-system-packages fedora $SPKGS | sed s/pkg-config/pkgconfig/) zip) || ( $(sage-print-system-package-command homebrew --yes --no-install-recommends install $(sage-get-system-packages homebrew $SPKGS) make) || $(sage-print-system-package-command alpine --yes --no-install-recommends install $(sage-get-system-packages alpine $SPKGS) zip) || echo error ignored) ) && . ./.homebrew-build-env 2> /dev/null; rm -f config.status && PREFIX=${{ startsWith(matrix.os, 'ubuntu') && '/host/var/tmp/sage-local-\$AUDITWHEEL_PLAT' || '/var/tmp/sage-local' }} && if cp \$PREFIX/config.status . 2>/dev/null; then chmod +x config.status; fi && if [ -x ./config.status ]; then ./config.status; else rm -f prefix && ./configure --enable-build-as-root --enable-fat-binary --prefix=\$PREFIX --with-sage-venv --without-system-curl --without-system-gdbm --without-system-gettext --without-system-gmp --without-system-libffi --without-system-openssl --with-system-python3=force --without-system-readline --without-system-libpng --without-system-patchelf --without-system-zlib; status=\$?; echo ::group::config.log && cat config.log && echo ::endgroup::; (exit \$status) && cp config.status prefix/ && (MAKE=\"make -j6\" make -k V=0 $TARGETS_PRE || echo error ignored); rm -rf prefix/share/gap/doc && for a in \$(find prefix/lib -type f -name 'lib*'); do case \$a in *flint*|*gf2x*|*gmp*|*gsl*|*mpfr*|*ntl*|*openblas*|*normaliz*|*ssl*|*crypto*|*curl*|*tinfo*|*readline*) strip -x \$a;; esac; done; for a in \$(find prefix/bin -type f); do case \$a in *M2-binary*) strip -x \$a;; esac; done; fi" >> "$GITHUB_ENV"
           mkdir -p unpacked
           set -x
           for sdist in dist/$pkg*.tar.gz; do
@@ -1353,25 +1330,15 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_singular
 
-      - name: Save SAGE_LOCAL cache
-        if:   (success() || failure()) && steps.unpack.outcome == 'success'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            /sage-*
-            ~/sage-*
-          key: ${{ steps.cache-sage-local.outputs.cache-primary-key }}
-
       - name: Prepare sage-local artifact
-        if: always() && runner.os != 'Linux' && steps.unpack.outcome == 'success'
+        if: always() && steps.unpack.outcome == 'success'
         # Adapted from macos.yml
         # This is macOS tar -- cannot use --remove-files.
-        # We remove the $SAGE_LOCAL/lib64 link
         run: |
-          mkdir -p sage-local-artifact && (cd $HOME && rm -f "sage-local/lib64" && tar -cf - sage-local) > sage-local-artifact/sage-local.tar
+          mkdir -p sage-local-artifact && (cd /var/tmp && tar -cf - sage-local*) > sage-local-artifact/sage-local.tar
 
       - name: Upload sage-local artifact
-        if: always() && runner.os != 'Linux' && steps.unpack.outcome == 'success'
+        if: always() && steps.unpack.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           path: sage-local-artifact/sage-local.tar
