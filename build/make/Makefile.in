@@ -311,7 +311,11 @@ $(foreach pkgname,$(INSTALLED_PACKAGES),\
 sync-installed:
 	if [ -f "$(SAGE_LOCAL)/$(SPKG_INST_RELDIR)/.dummy" ]; then \
 	    touch "$(SAGE_LOCAL)/$(SPKG_INST_RELDIR)/.dummy"; \
-	    touch -r "$(SAGE_LOCAL)/$(SPKG_INST_RELDIR)/.dummy" $(INSTALLED_PACKAGE_INSTS); \
+	    for a in $(INSTALLED_PACKAGE_INSTS); do \
+	        if [ -f "$a" ]; then \
+		    touch -r "$(SAGE_LOCAL)/$(SPKG_INST_RELDIR)/.dummy";  \
+		fi; \
+	    done; \
 	fi
 
 .PHONY: sync-installed
