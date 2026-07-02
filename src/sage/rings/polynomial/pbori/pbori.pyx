@@ -3482,6 +3482,33 @@ cdef class BooleanPolynomial(MPolynomial):
         """
         return self._pbpoly.isZero()
 
+    def is_nilpotent(BooleanPolynomial self):
+        r"""
+        Return whether ``self`` is nilpotent.
+
+        Boolean rings are reduced, so the only nilpotent boolean
+        polynomial is zero.
+
+        EXAMPLES::
+
+            sage: P.<x,y> = BooleanPolynomialRing(2)
+            sage: P(0).is_nilpotent()
+            True
+
+            sage: x.is_nilpotent()
+            False
+
+            sage: (x + y).is_nilpotent()
+            False
+
+        Check that :issue:`23311` is fixed::
+
+            sage: B.<a,b,c> = BooleanPolynomialRing()
+            sage: (a + b).is_nilpotent()
+            False
+        """
+        return self._pbpoly.isZero()
+
     def __bool__(self) -> bool:
         r"""
         Check if ``self`` is not zero.
