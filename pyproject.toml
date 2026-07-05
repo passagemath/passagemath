@@ -282,10 +282,3 @@ select = [
 no-build-isolation-package = ["sagemath"]
 # Build these packages from source instead of installing pre-built wheels.
 no-binary-package = ["cypari2", "pplpy", "primecountpy"]
-# These are built from source against system libraries (PARI, PPL, primecount).
-# uv caches the built wheel keyed by the sdist hash and Python/platform tag, not
-# by the system library soname, so a cached wheel goes stale when a distro bumps
-# a soname (e.g. PARI libpari-gmp-tls.so.8 -> .so.9). reinstall-package implies
-# --refresh-package, evicting the stale cache so they rebuild against the
-# currently installed libraries.
-reinstall-package = ["cypari2", "pplpy", "primecountpy"]
