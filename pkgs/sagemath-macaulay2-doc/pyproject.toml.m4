@@ -38,7 +38,6 @@ build-requires = [
 ]
 
 host-requires = [
-  "pkg:generic/macaulay2",
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
