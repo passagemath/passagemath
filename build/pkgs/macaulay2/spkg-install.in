@@ -55,5 +55,6 @@ if [ -n "$SAGE_MACAULAY2_TARGETS" ]; then
    # "Note that this target must be built separately, before proceeding to M2-binary."
    cmake --build . --target $SAGE_MACAULAY2_TARGETS
 fi
-cmake --build . --target M2-core M2-emacs install-packages
+# Add 'install-packages' to build documentation
+cmake --build . --target M2-core M2-emacs
 cmake --install .
