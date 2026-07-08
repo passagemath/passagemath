@@ -123,6 +123,7 @@ Subsystem for Linux (WSL) or virtualization.
 |                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
 |                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
 |                                                                              |           | Emscripten        | any                         | Wasm32        | *partial functionality*    |
+| 10.10.x                                                                      | 3.12–3.15 |                   |                             |               | planned                    |
 
 Detailed information on supported platforms for a specific version of passagemath
 can be found in the
