@@ -8,6 +8,7 @@ global-exclude *.c
 global-exclude *.cpp
 
 include sage/graphs/planarity.p*
+include sage/graphs/planarity-compat.h
 
 global-exclude all__sagemath_*.*
 global-include all__sagemath_planarity.py
