@@ -96,7 +96,7 @@ Examples
 
 Using `SageManifolds <https://sagemanifolds.obspm.fr/>`_::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-symbolics[test]" ipython
+    $ pipx run --spec "passagemath-symbolics[test]" ipython
 
     In [1]: from passagemath_symbolics import *
 

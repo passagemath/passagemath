@@ -90,7 +90,7 @@ Examples
 
 ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-libecm[test]" ipython
+    $ pipx run --spec "passagemath-libecm[test]" ipython
 
     In [1]: from sage.libs.libecm import ecmfactor
 

@@ -79,7 +79,7 @@ Example
 
 ::
 
-    $ pipx run  --pip-args="--prefer-binary" --spec "passagemath-qepcad[test]" ipython
+    $ pipx run  --spec "passagemath-qepcad[test]" ipython
 
     In [1]: from passagemath_symbolics import *
 

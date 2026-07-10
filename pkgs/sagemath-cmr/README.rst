@@ -92,7 +92,7 @@ Examples
 
 ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-cmr[test]" ipython
+    $ pipx run --spec "passagemath-cmr[test]" ipython
 
     In [1]: from passagemath_cmr import *
 

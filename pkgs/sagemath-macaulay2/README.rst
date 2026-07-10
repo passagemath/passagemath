@@ -87,11 +87,11 @@ Examples
 
 Using Macaulay 2 on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-macaulay2" sage -sh -c 'M2'
+    $ pipx run --spec "passagemath-macaulay2" sage -sh -c 'M2'
 
 Finding the installation location of Macaulay 2::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-macaulay2[test]" ipython
+    $ pipx run --spec "passagemath-macaulay2[test]" ipython
 
     In [1]: from sage.features.macaulay2 import Macaulay2
 
@@ -100,7 +100,7 @@ Finding the installation location of Macaulay 2::
 
 Using the Python interface::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-macaulay2[test]" ipython
+    $ pipx run --spec "passagemath-macaulay2[test]" ipython
 
     In [1]: from passagemath_macaulay2 import *
 

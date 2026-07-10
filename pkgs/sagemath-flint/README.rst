@@ -87,7 +87,7 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-flint[test]" ipython
+    $ pipx run --spec "passagemath-flint[test]" ipython
     In [1]: from passagemath_flint import *
 
     In [2]: RealBallField(128).pi()

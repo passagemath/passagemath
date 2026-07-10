@@ -86,11 +86,11 @@ Examples
 
 Using kissat programs on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-kissat" sage -sh -c kissat
+    $ pipx run --spec "passagemath-kissat" sage -sh -c kissat
 
 Finding the installation location of the kissat program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-kissat[test]" ipython
+    $ pipx run --spec "passagemath-kissat[test]" ipython
 
     In [1]: from sage.features.sat import Kissat
 
@@ -99,7 +99,7 @@ Finding the installation location of the kissat program::
 
 Use with `sage.sat <https://passagemath.org/docs/latest/html/en/reference/sat/index.html>`_::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-kissat[test]" ipython
+    $ pipx run --spec "passagemath-kissat[test]" ipython
 
     In [1]: from passagemath_kissat import *
 

@@ -96,7 +96,7 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[test]" ipython
+    $ pipx run --spec "passagemath-polyhedra[test]" ipython
 
     In [1]: from passagemath_polyhedra import *
 
@@ -125,7 +125,7 @@ Additional features
 
  ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[graphs,test]" ipython
+    $ pipx run --spec "passagemath-polyhedra[graphs,test]" ipython
 
     In [1]: from passagemath_polyhedra import *
 
@@ -140,7 +140,7 @@ Additional features
 
  ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[graphs,groups,test]" ipython
+    $ pipx run --spec "passagemath-polyhedra[graphs,groups,test]" ipython
 
     In [1]: from passagemath_polyhedra import *
 
@@ -155,7 +155,7 @@ Additional features
 
  ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[graphs,toric,test]" ipython
+    $ pipx run --spec "passagemath-polyhedra[graphs,toric,test]" ipython
 
     In [1]: from passagemath_polyhedra import *
 
@@ -171,7 +171,7 @@ Additional features
 
  ::
 
-   $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[latte,test]" ipython
+   $ pipx run --spec "passagemath-polyhedra[latte,test]" ipython
 
    In [1]: from passagemath_polyhedra import *
 
@@ -198,7 +198,7 @@ Additional backends for polyhedral computations
 
  ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[normaliz,test]" ipython
+    $ pipx run --spec "passagemath-polyhedra[normaliz,test]" ipython
 
     In [1]: from passagemath_polyhedra import *
 
@@ -211,7 +211,7 @@ Additional backends for polyhedral computations
 
  ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[cddlib,test]" ipython
+    $ pipx run --spec "passagemath-polyhedra[cddlib,test]" ipython
 
     In [1]: from passagemath_polyhedra import *
 
@@ -224,7 +224,7 @@ Additional backends for polyhedral computations
 
  ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polyhedra[flint,lrslib,test]" ipython
+    $ pipx run --spec "passagemath-polyhedra[flint,lrslib,test]" ipython
 
     In [1]: from passagemath_polyhedra import *
 

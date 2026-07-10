@@ -106,13 +106,13 @@ Examples
 
 Starting the GP calculator from the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-pari" sage -gp
+    $ pipx run --spec "passagemath-pari" sage -gp
     GP/PARI CALCULATOR Version 2.17.2 (released)
     ...
 
 Using the pexpect interface to the GP calculator::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-pari[test]" ipython
+    $ pipx run --spec "passagemath-pari[test]" ipython
 
     In [1]: from sage.interfaces.gp import gp
 
@@ -123,7 +123,7 @@ Using the pexpect interface to the GP calculator::
 
 Using the ``cypari2`` library interface::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-pari" python
+    $ pipx run --spec "passagemath-pari" python
 
     >>> import cypari2
     >>> pari = cypari2.Pari()

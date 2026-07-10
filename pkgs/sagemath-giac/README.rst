@@ -101,7 +101,7 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-giac[test]" ipython
+    $ pipx run --spec "passagemath-giac[test]" ipython
 
     In [1]: from passagemath_giac import *
 
@@ -128,7 +128,7 @@ A quick way to try it out interactively::
 
 The last example again, using the Sage REPL::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-giac[test]" sage
+    $ pipx run --spec "passagemath-giac[test]" sage
     Warning: sage.all is not available; this is a limited REPL.
 
     sage: from passagemath_giac import *

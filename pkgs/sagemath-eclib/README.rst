@@ -98,7 +98,7 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib[test]" ipython
+    $ pipx run --spec "passagemath-eclib[test]" ipython
 
     In [1]: from passagemath_eclib import *
 
@@ -107,14 +107,14 @@ A quick way to try it out interactively::
 
 Finding the installation location of the mwrank program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib" python
+    $ pipx run --spec "passagemath-eclib" python
     >>> from sage.features.eclib import Mwrank
     >>> Mwrank().absolute_filename()
     '.../bin/mwrank'
 
 Use with `sage.schemes.elliptic_curves <https://passagemath.org/docs/latest/html/en/reference/arithmetic_curves/index.html#elliptic-curves>`_::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-eclib[test]" ipython
+    $ pipx run --spec "passagemath-eclib[test]" ipython
 
     In [1]: from passagemath_eclib import *
 

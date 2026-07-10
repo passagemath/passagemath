@@ -114,7 +114,7 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-modules[test]" ipython
+    $ pipx run --spec "passagemath-modules[test]" ipython
 
     In [1]: from passagemath_modules import *
 
@@ -148,7 +148,7 @@ Available as extras, from other distributions
 ``pip install "passagemath-modules[flint,fpylll,linbox]"``
  Lattice basis reduction (LLL, BKZ)::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-modules[flint,fpylll,linbox,test]" ipython
+    $ pipx run --spec "passagemath-modules[flint,fpylll,linbox,test]" ipython
 
     In [1]: from passagemath_modules import *
 

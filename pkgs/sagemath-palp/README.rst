@@ -87,14 +87,14 @@ Examples
 
 Using PALP programs on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-palp" sage -sh -c 'echo "14 2 3 4 5" | class.x -f -po zbin'
+    $ pipx run --spec "passagemath-palp" sage -sh -c 'echo "14 2 3 4 5" | class.x -f -po zbin'
     0kR-0 0MB 0kIP 0kNF-0k 5_13 v8r8 f10r10 10b6 0s 0u 0n
     14 2 3 4 5 R=152 +0sl hit=0 IP=276 NF=179 (0)
     Writing zbin: 152+0sl 0m+0s 644b  u36 done: 0s
 
 Finding the installation location of a PALP program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-palp[test]" ipython
+    $ pipx run --spec "passagemath-palp[test]" ipython
 
     In [1]: from sage.features.palp import PalpExecutable
 
@@ -103,7 +103,7 @@ Finding the installation location of a PALP program::
 
 Use with sage.geometry::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-palp[test]" ipython
+    $ pipx run --spec "passagemath-palp[test]" ipython
 
     In [1]: from passagemath_polyhedra import *
 

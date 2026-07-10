@@ -89,7 +89,7 @@ Examples
 
 ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-planarity[test]" ipython
+    $ pipx run --spec "passagemath-planarity[test]" ipython
 
     In [1]: from passagemath_planarity import *
 

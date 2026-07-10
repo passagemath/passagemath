@@ -87,7 +87,7 @@ Examples
 
 ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-libbraiding[test]" ipython
+    $ pipx run --spec "passagemath-libbraiding[test]" ipython
 
     In [1]: from passagemath_libbraiding import *
 

@@ -78,7 +78,7 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-msolve[test]" ipython
+    $ pipx run --spec "passagemath-msolve[test]" ipython
 
     In [1]: from passagemath_msolve import *
 

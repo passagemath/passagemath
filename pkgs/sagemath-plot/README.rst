@@ -92,7 +92,7 @@ Examples
 
 ::
 
-   $ pipx run --pip-args="--prefer-binary" --spec "passagemath-plot[test]" ipython
+   $ pipx run --spec "passagemath-plot[test]" ipython
 
    In [1]: from passagemath_plot import *
 

@@ -85,12 +85,12 @@ Examples
 
 Using the sympow program on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sympow" sage -sh -c sympow
+    $ pipx run --spec "passagemath-sympow" sage -sh -c sympow
 
 
 Finding the installation location of the sympow executable::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sympow[test]" ipython
+    $ pipx run --spec "passagemath-sympow[test]" ipython
 
     In [1]: from sage.features.lrs import LrsNash
 

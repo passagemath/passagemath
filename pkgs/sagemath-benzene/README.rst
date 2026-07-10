@@ -86,11 +86,11 @@ Examples
 
 Using the benzene program on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-benzene[test]" sage -sh -c benzene
+    $ pipx run --spec "passagemath-benzene[test]" sage -sh -c benzene
 
 Finding the installation location of the benzene program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-benzene[test]" ipython
+    $ pipx run --spec "passagemath-benzene[test]" ipython
 
     In [1]: from sage.features.graph_generators import Benzene
 
@@ -99,7 +99,7 @@ Finding the installation location of the benzene program::
 
 Using the Python interface::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-benzene[test]" ipython
+    $ pipx run --spec "passagemath-benzene[test]" ipython
 
     In [1]: from passagemath_benzene import *
 

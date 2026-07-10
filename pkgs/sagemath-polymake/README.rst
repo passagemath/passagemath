@@ -90,4 +90,4 @@ Examples
 
 Using polymake on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-polymake" sage -polymake
+    $ pipx run --spec "passagemath-polymake" sage -polymake
