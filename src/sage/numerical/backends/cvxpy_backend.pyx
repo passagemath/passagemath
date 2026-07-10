@@ -599,7 +599,7 @@ cdef class CVXPYBackend:
         """
         return float(self.variables[variable].value)
 
-    cpdef int ncols(self) noexcept:
+    cpdef int ncols(self) except? -1:
         """
         Return the number of columns/variables.
 
@@ -616,7 +616,7 @@ cdef class CVXPYBackend:
         """
         return len(self.variables)
 
-    cpdef int nrows(self) noexcept:
+    cpdef int nrows(self) except? -1:
         """
         Return the number of rows/constraints.
 
@@ -632,7 +632,7 @@ cdef class CVXPYBackend:
         """
         return len(self.problem.constraints)
 
-    cpdef bint is_maximization(self) noexcept:
+    cpdef bint is_maximization(self) except? -1:
         """
         Test whether the problem is a maximization
 
@@ -766,7 +766,7 @@ cdef class CVXPYBackend:
         """
         return (self.col_lower_bound[index], self.col_upper_bound[index])
 
-    cpdef bint is_variable_binary(self, int index) noexcept:
+    cpdef bint is_variable_binary(self, int index) except? -1:
         """
         Test whether the given variable is of binary type.
 
@@ -787,7 +787,7 @@ cdef class CVXPYBackend:
         """
         return bool(self.variables[index].boolean_idx)
 
-    cpdef bint is_variable_integer(self, int index) noexcept:
+    cpdef bint is_variable_integer(self, int index) except? -1:
         """
         Test whether the given variable is of integer type.
 
@@ -808,7 +808,7 @@ cdef class CVXPYBackend:
         """
         return bool(self.variables[index].integer_idx)
 
-    cpdef bint is_variable_continuous(self, int index) noexcept:
+    cpdef bint is_variable_continuous(self, int index) except? -1:
         """
         Test whether the given variable is of continuous/real type.
 

@@ -29,7 +29,7 @@ ctypedef struct c_a_data:
 cdef class GLPKGraphBackend():
     cdef object _graph_resource
     cdef glp_graph * _graph(self) except NULL
-    cdef glp_graph * _graph_or_null(self) noexcept
+    cdef int _find_vertex_in_graph(self, glp_graph * graph, name) except? -1
     cpdef add_vertex(self, name=?)
     cpdef list add_vertices(self, vertices)
     cpdef __add_vertices_sage(self, g)
@@ -46,11 +46,11 @@ cdef class GLPKGraphBackend():
     cpdef list edges(self)
     cpdef delete_vertex(self, vert)
     cpdef delete_vertices(self, list verts)
-    cpdef int _find_vertex(self, vert) noexcept
-    cpdef int write_graph(self, fname) noexcept
-    cpdef int write_ccdata(self, fname) noexcept
-    cpdef int write_mincost(self, fname) noexcept
-    cpdef double mincost_okalg(self) except -1
+    cpdef int _find_vertex(self, vert) except? -1
+    cpdef int write_graph(self, fname) except? -1
+    cpdef int write_ccdata(self, fname) except? -1
+    cpdef int write_mincost(self, fname) except? -1
+    cpdef double mincost_okalg(self) except? -1
     cdef int s
     cdef int t
     cpdef int write_maxflow(self, fname) except -1

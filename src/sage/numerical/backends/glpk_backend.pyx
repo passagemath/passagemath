@@ -22,6 +22,12 @@ AUTHORS:
 
 from libc.float cimport DBL_MAX
 from libc.limits cimport INT_MAX
+from libc.stdint cimport int64_t, uint64_t
+from cpython.pystate cimport (
+    PyInterpreterState,
+    PyThreadState,
+    PyThreadState_Get,
+)
 from cysignals.memory cimport sig_malloc, sig_free
 from cysignals.signals cimport sig_on, sig_off
 from memory_allocator cimport MemoryAllocator
@@ -29,17 +35,34 @@ import weakref
 
 from sage.cpython.string cimport char_to_str, str_to_bytes
 from sage.cpython.string import FS_ENCODING
-from sage.numerical.backends.glpk_thread_resources import (
-    collect_glpk_released_for_current_thread,
-    glpk_thread_resources,
-)
+from sage.numerical.backends.glpk_thread_resources import glpk_thread_resources
 from sage.numerical.mip import MIPSolverException
 from sage.libs.glpk.constants cimport *
+from sage.libs.glpk.env cimport glp_config, glp_free_env
 from sage.libs.glpk.lp cimport *
 
 
 cdef extern from "pythread.h":
     unsigned long PyThread_get_thread_ident()
+
+
+cdef extern from "Python.h":
+    int64_t PyInterpreterState_GetID(PyInterpreterState *interp) noexcept
+    PyInterpreterState *PyThreadState_GetInterpreter(PyThreadState *tstate) noexcept
+    uint64_t PyThreadState_GetID(PyThreadState *tstate) noexcept
+
+
+def _glpk_uses_thread_local_env():
+    """
+    Return whether the loaded GLPK uses a thread-local environment.
+
+    TESTS::
+
+        sage: from sage.numerical.backends.glpk_backend import _glpk_uses_thread_local_env
+        sage: isinstance(_glpk_uses_thread_local_env(), bool)
+        True
+    """
+    return glp_config(b"TLS") is not NULL
 
 
 # GLPK (built ``--enable-reentrant``, the default) keeps its allocator state in
@@ -59,7 +82,7 @@ cdef extern from "pythread.h":
 # that thread (immediately, or deferred to its next GLPK operation / its exit).
 #
 # Because GLPK installs no thread-exit destructor, the deferred free at owner
-# exit (``GLPKThreadResources.__del__``) must happen while the owner's TLS
+# exit (``_GLPKThreadCleanup.__del__``) must happen while the owner's TLS
 # ``ENV`` is still alive.  CPython tears down ``threading.local`` data during
 # ``PyThreadState_Clear`` -- on the dying thread, before the C runtime destroys
 # its ``__thread`` storage -- so this holds for normally joined threads.  (If
@@ -71,46 +94,86 @@ cdef extern from "pythread.h":
 # ``glp_prob`` stays pending in the owner's resource list until that owner next
 # touches GLPK or exits.  This can temporarily retain memory in a long-lived
 # owner thread, but freeing from the non-owner thread would crash.  When the
-# owner exits normally, ``GLPKThreadResources.__del__`` frees the pointer even
+# owner exits normally, the private cleanup guard frees the pointer even
 # if another thread still holds the Python backend object; later use then sees
 # an unavailable backend rather than a live cross-thread pointer.
 #
 # Thread safety of the bookkeeping itself relies on the GIL: the cross-thread
 # writes to ``released``/``has_released`` and the list mutations are only ever
 # interleaved at Python bytecode boundaries, which gives us the necessary
-# visibility and atomicity on CPython.  ``owner_thread_ident`` is an OS thread
-# id that the OS may reuse after a thread dies, but that is harmless here: the
-# pointer is freed and NULLed when the owner thread exits, so a later thread
-# reusing the id only ever sees a NULL ``lp``.
+# visibility and atomicity on CPython.  Numeric thread identifiers are not
+# sufficient for ownership because the OS may reuse one after a thread exits.
+# We therefore pair it with CPython's monotonically assigned interpreter and
+# thread-state IDs.  These remain available while ``threading.local`` values
+# are finalized, but a replacement OS thread necessarily gets a new thread
+# state even when its numeric thread identifier is recycled.
 cdef class _GLPKProblemResource:
     cdef glp_prob * lp
     cdef object owner_ref
     cdef unsigned long owner_thread_ident
+    cdef int64_t owner_interpreter_id
+    cdef uint64_t owner_thread_state_id
+    cdef bint thread_affine
     cdef bint registered
     cdef bint released
 
     def __cinit__(self):
+        """
+        Initialize an empty GLPK problem resource wrapper.
+
+        TESTS::
+
+            sage: from sage.numerical.backends.glpk_backend import _GLPKProblemResource
+            sage: resource = _GLPKProblemResource()
+        """
         self.lp = NULL
         self.owner_ref = None
         self.owner_thread_ident = 0
+        self.owner_interpreter_id = -1
+        self.owner_thread_state_id = 0
+        self.thread_affine = glp_config(b"TLS") is not NULL
         self.registered = False
         self.released = False
 
     cdef void init(self, glp_prob * lp) except *:
+        cdef PyThreadState *tstate
         self.lp = lp
+        if not self.thread_affine:
+            return
+        tstate = PyThreadState_Get()
         self.owner_thread_ident = PyThread_get_thread_ident()
+        self.owner_interpreter_id = PyInterpreterState_GetID(
+            PyThreadState_GetInterpreter(tstate))
+        self.owner_thread_state_id = PyThreadState_GetID(tstate)
         owner = glpk_thread_resources()
-        collect_glpk_released_for_current_thread()
+        owner.collect_released()
         self.owner_ref = weakref.ref(owner)
         owner.add(self)
         self.registered = True
+        owner.set_environment_cleaner(self)
+
+    cdef bint is_owner_thread(self) noexcept:
+        cdef PyThreadState *tstate
+        if not self.thread_affine:
+            return True
+        tstate = PyThreadState_Get()
+        return (
+            PyThread_get_thread_ident() == self.owner_thread_ident
+            and PyInterpreterState_GetID(
+                PyThreadState_GetInterpreter(tstate))
+                == self.owner_interpreter_id
+            and PyThreadState_GetID(tstate) == self.owner_thread_state_id
+        )
 
     cdef glp_prob * get(self) except NULL:
         if self.lp is NULL:
             raise RuntimeError("GLPK backend is no longer available")
-        if PyThread_get_thread_ident() != self.owner_thread_ident:
+        if not self.is_owner_thread():
             raise RuntimeError("GLPK backend cannot be used from a different thread")
-        collect_glpk_released_for_current_thread()
+        if self.thread_affine:
+            owner = self.owner_ref()
+            if owner is not None:
+                owner.collect_released()
         return self.lp
 
     cdef void unregister(self) except *:
@@ -119,38 +182,68 @@ cdef class _GLPKProblemResource:
             if owner is not None:
                 owner.discard(self)
             self.registered = False
+            self.owner_ref = None
 
     cdef void free_from_owner_thread(self) noexcept:
-        if self.lp is not NULL:
+        if self.lp is not NULL and self.is_owner_thread():
             glp_delete_prob(self.lp)
             self.lp = NULL
 
     cdef void request_release_from_owner_thread(self) except *:
         self.released = True
-        owner = self.owner_ref()
-        if owner is not None:
-            owner.has_released = True
+        if self.owner_ref is not None:
+            owner = self.owner_ref()
+            if owner is not None:
+                owner.has_released = True
 
-    cpdef _free_from_owner_thread(self):
-        if PyThread_get_thread_ident() == self.owner_thread_ident:
-            self.free_from_owner_thread()
+    cpdef _free_from_owner_thread(self, bint only_if_released=False):
+        """
+        Free and unregister this resource when called by its owner.
 
-    cpdef _free_released_from_owner_thread(self):
-        if (self.released
-                and PyThread_get_thread_ident() == self.owner_thread_ident):
+        TESTS::
+
+            sage: from sage.numerical.backends.glpk_backend import _GLPKProblemResource
+            sage: _GLPKProblemResource()._free_from_owner_thread() is None
+            True
+        """
+        if (not only_if_released or self.released) and self.is_owner_thread():
             self.free_from_owner_thread()
             self.unregister()
 
+    cpdef _free_environment_from_owner_thread(self):
+        """
+        Free the GLPK environment when called by the owning thread.
+
+        An uninitialized wrapper is not associated with an owner::
+
+            sage: from sage.numerical.backends.glpk_backend import _GLPKProblemResource
+            sage: _GLPKProblemResource()._free_environment_from_owner_thread() is None
+            True
+        """
+        if self.thread_affine and self.is_owner_thread():
+            glp_free_env()
+
     cpdef release_from_backend(self):
-        if PyThread_get_thread_ident() == self.owner_thread_ident:
+        """
+        Free this resource now or request a deferred owner-thread release.
+
+        TESTS::
+
+            sage: from sage.numerical.backends.glpk_backend import _GLPKProblemResource
+            sage: _GLPKProblemResource().release_from_backend() is None
+            True
+        """
+        if self.lp is NULL:
+            self.unregister()
+            return
+        if self.is_owner_thread():
             self.free_from_owner_thread()
             self.unregister()
         else:
             self.request_release_from_owner_thread()
 
     def __dealloc__(self):
-        if (self.lp is not NULL
-                and PyThread_get_thread_ident() == self.owner_thread_ident):
+        if self.lp is not NULL and self.is_owner_thread():
             glp_delete_prob(self.lp)
             self.lp = NULL
 
@@ -194,15 +287,57 @@ cdef class GLPKBackend(GenericBackend):
     cdef glp_prob * _lp(self) except NULL:
         return (<_GLPKProblemResource>self._lp_resource).get()
 
-    cdef glp_prob * _lp_or_null(self) noexcept:
-        cdef _GLPKProblemResource resource
-        if self._lp_resource is None:
-            return NULL
-        resource = <_GLPKProblemResource>self._lp_resource
-        if PyThread_get_thread_ident() != resource.owner_thread_ident:
-            return NULL
-        collect_glpk_released_for_current_thread()
-        return resource.lp
+    cdef void _set_variable_lower_bound(
+            self, glp_prob * lp, int index, value) except *:
+        cdef double upper
+        cdef double dvalue
+
+        sig_on()
+        upper = glp_get_col_ub(lp, index + 1)
+        sig_off()
+        if value is not None:
+            dvalue = <double?> value
+
+        sig_on()
+        if value is None:
+            if upper == DBL_MAX:
+                glp_set_col_bnds(lp, index + 1, GLP_FR, 0.0, 0.0)
+            else:
+                glp_set_col_bnds(lp, index + 1, GLP_UP, 0.0, upper)
+        else:
+            if upper == DBL_MAX:
+                glp_set_col_bnds(lp, index + 1, GLP_LO, dvalue, 0.0)
+            elif upper == dvalue:
+                glp_set_col_bnds(lp, index + 1, GLP_FX, dvalue, dvalue)
+            else:
+                glp_set_col_bnds(lp, index + 1, GLP_DB, dvalue, upper)
+        sig_off()
+
+    cdef void _set_variable_upper_bound(
+            self, glp_prob * lp, int index, value) except *:
+        cdef double lower
+        cdef double dvalue
+
+        sig_on()
+        lower = glp_get_col_lb(lp, index + 1)
+        sig_off()
+        if value is not None:
+            dvalue = <double?> value
+
+        sig_on()
+        if value is None:
+            if lower == -DBL_MAX:
+                glp_set_col_bnds(lp, index + 1, GLP_FR, 0.0, 0.0)
+            else:
+                glp_set_col_bnds(lp, index + 1, GLP_LO, lower, 0.0)
+        else:
+            if lower == -DBL_MAX:
+                glp_set_col_bnds(lp, index + 1, GLP_UP, 0.0, dvalue)
+            elif lower == dvalue:
+                glp_set_col_bnds(lp, index + 1, GLP_FX, dvalue, dvalue)
+            else:
+                glp_set_col_bnds(lp, index + 1, GLP_DB, lower, dvalue)
+        sig_off()
 
     cpdef int add_variable(self, lower_bound=0.0, upper_bound=None, binary=False, continuous=False, integer=False, obj=0.0, name=None) except -1:
         """
@@ -265,8 +400,10 @@ cdef class GLPKBackend(GenericBackend):
         glp_add_cols(lp, 1)
         cdef int n_var = glp_get_num_cols(lp)
 
-        self.variable_lower_bound(n_var - 1, lower_bound)
-        self.variable_upper_bound(n_var - 1, upper_bound)
+        if lower_bound is not False:
+            self._set_variable_lower_bound(lp, n_var - 1, lower_bound)
+        if upper_bound is not False:
+            self._set_variable_upper_bound(lp, n_var - 1, upper_bound)
 
         if continuous:
             glp_set_col_kind(lp, n_var, GLP_CV)
@@ -279,7 +416,7 @@ cdef class GLPKBackend(GenericBackend):
             glp_set_col_name(lp, n_var, str_to_bytes(name))
 
         if obj:
-            self.objective_coefficient(n_var - 1, obj)
+            glp_set_obj_coef(lp, n_var, obj)
 
         return n_var - 1
 
@@ -352,8 +489,10 @@ cdef class GLPKBackend(GenericBackend):
         cdef int i
 
         for 0<= i < number:
-            self.variable_lower_bound(n_var - i - 1, lower_bound)
-            self.variable_upper_bound(n_var - i - 1, upper_bound)
+            if lower_bound is not False:
+                self._set_variable_lower_bound(lp, n_var - i - 1, lower_bound)
+            if upper_bound is not False:
+                self._set_variable_upper_bound(lp, n_var - i - 1, upper_bound)
             if continuous:
                 glp_set_col_kind(lp, n_var - i, GLP_CV)
             elif binary:
@@ -362,7 +501,7 @@ cdef class GLPKBackend(GenericBackend):
                 glp_set_col_kind(lp, n_var - i, GLP_IV)
 
             if obj:
-                self.objective_coefficient(n_var - i - 1, obj)
+                glp_set_obj_coef(lp, n_var - i, obj)
 
             if names is not None:
                 glp_set_col_name(lp, n_var - i,
@@ -1501,7 +1640,7 @@ cdef class GLPKBackend(GenericBackend):
 
         return glp_get_row_prim(lp, i+1)
 
-    cpdef int ncols(self) noexcept:
+    cpdef int ncols(self) except? -1:
         """
         Return the number of columns/variables.
 
@@ -1516,12 +1655,9 @@ cdef class GLPKBackend(GenericBackend):
             sage: p.ncols()
             2
         """
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL:
-            return -1
-        return glp_get_num_cols(lp)
+        return glp_get_num_cols(self._lp())
 
-    cpdef int nrows(self) noexcept:
+    cpdef int nrows(self) except? -1:
         """
         Return the number of rows/constraints.
 
@@ -1536,10 +1672,7 @@ cdef class GLPKBackend(GenericBackend):
             2
         """
 
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL:
-            return -1
-        return glp_get_num_rows(lp)
+        return glp_get_num_rows(self._lp())
 
     cpdef col_name(self, int index):
         """
@@ -1624,7 +1757,7 @@ cdef class GLPKBackend(GenericBackend):
         else:
             return ""
 
-    cpdef bint is_variable_binary(self, int index) noexcept:
+    cpdef bint is_variable_binary(self, int index) except? -1:
         """
         Test whether the given variable is of binary type.
 
@@ -1653,15 +1786,13 @@ cdef class GLPKBackend(GenericBackend):
             sage: p.is_variable_binary(2)
             False
         """
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL or index < 0 or index > (self.ncols() - 1):
-            # This is how the other backends behave, and this method is
-            # unable to raise a python exception as currently defined.
+        cdef glp_prob * lp = self._lp()
+        if index < 0 or index >= glp_get_num_cols(lp):
             return False
 
         return glp_get_col_kind(lp, index + 1) == GLP_BV
 
-    cpdef bint is_variable_integer(self, int index) noexcept:
+    cpdef bint is_variable_integer(self, int index) except? -1:
         """
         Test whether the given variable is of integer type.
 
@@ -1690,15 +1821,13 @@ cdef class GLPKBackend(GenericBackend):
             sage: p.is_variable_integer(2)
             False
         """
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL or index < 0 or index > (self.ncols() - 1):
-            # This is how the other backends behave, and this method is
-            # unable to raise a python exception as currently defined.
+        cdef glp_prob * lp = self._lp()
+        if index < 0 or index >= glp_get_num_cols(lp):
             return False
 
         return glp_get_col_kind(lp, index + 1) == GLP_IV
 
-    cpdef bint is_variable_continuous(self, int index) noexcept:
+    cpdef bint is_variable_continuous(self, int index) except? -1:
         """
         Test whether the given variable is of continuous/real type.
 
@@ -1729,15 +1858,13 @@ cdef class GLPKBackend(GenericBackend):
             sage: p.is_variable_continuous(2)
             False
         """
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL or index < 0 or index > (self.ncols() - 1):
-            # This is how the other backends behave, and this method is
-            # unable to raise a python exception as currently defined.
+        cdef glp_prob * lp = self._lp()
+        if index < 0 or index >= glp_get_num_cols(lp):
             return False
 
         return glp_get_col_kind(lp, index + 1) == GLP_CV
 
-    cpdef bint is_maximization(self) noexcept:
+    cpdef bint is_maximization(self) except? -1:
         """
         Test whether the problem is a maximization
 
@@ -1752,10 +1879,7 @@ cdef class GLPKBackend(GenericBackend):
             False
         """
 
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL:
-            return False
-        return glp_get_obj_dir(lp) == GLP_MAX
+        return glp_get_obj_dir(self._lp()) == GLP_MAX
 
     cpdef variable_upper_bound(self, int index, value=False):
         """
@@ -1817,8 +1941,6 @@ cdef class GLPKBackend(GenericBackend):
             TypeError: must be real number, not str
         """
         cdef double x
-        cdef double min
-        cdef double dvalue
         cdef glp_prob * lp = self._lp()
 
         if index < 0 or index >= glp_get_num_cols(lp):
@@ -1833,29 +1955,7 @@ cdef class GLPKBackend(GenericBackend):
             else:
                 return x
         else:
-            sig_on()
-            min = glp_get_col_lb(lp, index + 1)
-            sig_off()
-
-            if value is None:
-                sig_on()
-                if min == -DBL_MAX:
-                    glp_set_col_bnds(lp, index + 1, GLP_FR, 0, 0)
-                else:
-                    glp_set_col_bnds(lp, index + 1, GLP_LO, min, 0)
-                sig_off()
-            else:
-                dvalue = <double?> value
-
-                sig_on()
-                if min == -DBL_MAX:
-                    glp_set_col_bnds(lp, index + 1, GLP_UP, 0, dvalue)
-
-                elif min == dvalue:
-                    glp_set_col_bnds(lp, index + 1, GLP_FX,  dvalue, dvalue)
-                else:
-                    glp_set_col_bnds(lp, index + 1, GLP_DB, min, dvalue)
-                sig_off()
+            self._set_variable_upper_bound(lp, index, value)
 
     cpdef variable_lower_bound(self, int index, value=False):
         """
@@ -1918,8 +2018,6 @@ cdef class GLPKBackend(GenericBackend):
             TypeError: must be real number, not str
         """
         cdef double x
-        cdef double max
-        cdef double dvalue
         cdef glp_prob * lp = self._lp()
 
         if index < 0 or index >= glp_get_num_cols(lp):
@@ -1934,29 +2032,7 @@ cdef class GLPKBackend(GenericBackend):
             else:
                 return x
         else:
-            sig_on()
-            max = glp_get_col_ub(lp, index + 1)
-            sig_off()
-
-            if value is None:
-                sig_on()
-                if max == DBL_MAX:
-                    glp_set_col_bnds(lp, index + 1, GLP_FR, 0.0, 0.0)
-                else:
-                    glp_set_col_bnds(lp, index + 1, GLP_UP, 0.0, max)
-                sig_off()
-
-            else:
-                dvalue = <double?> value
-
-                sig_on()
-                if max == DBL_MAX:
-                    glp_set_col_bnds(lp, index + 1, GLP_LO, value, 0.0)
-                elif max == value:
-                    glp_set_col_bnds(lp, index + 1, GLP_FX,  value, value)
-                else:
-                    glp_set_col_bnds(lp, index + 1, GLP_DB, value, max)
-                sig_off()
+            self._set_variable_lower_bound(lp, index, value)
 
     cpdef write_lp(self, filename):
         """
@@ -2558,7 +2634,7 @@ cdef class GLPKBackend(GenericBackend):
         else:
             raise ValueError("This parameter is not available.")
 
-    cpdef bint is_variable_basic(self, int index) noexcept:
+    cpdef bint is_variable_basic(self, int index) except? -1:
         """
         Test whether the given variable is basic.
 
@@ -2587,12 +2663,12 @@ cdef class GLPKBackend(GenericBackend):
             sage: b.is_variable_basic(1)
             False
         """
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL or index < 0 or index >= glp_get_num_cols(lp):
+        cdef glp_prob * lp = self._lp()
+        if index < 0 or index >= glp_get_num_cols(lp):
             return False
         return glp_get_col_stat(lp, index + 1) == GLP_BS
 
-    cpdef bint is_variable_nonbasic_at_lower_bound(self, int index) noexcept:
+    cpdef bint is_variable_nonbasic_at_lower_bound(self, int index) except? -1:
         """
         Test whether the given variable is nonbasic at lower bound.
         This assumes that the problem has been solved with the simplex method
@@ -2620,12 +2696,12 @@ cdef class GLPKBackend(GenericBackend):
             sage: b.is_variable_nonbasic_at_lower_bound(1)
             True
         """
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL or index < 0 or index >= glp_get_num_cols(lp):
+        cdef glp_prob * lp = self._lp()
+        if index < 0 or index >= glp_get_num_cols(lp):
             return False
         return glp_get_col_stat(lp, index + 1) == GLP_NL
 
-    cpdef bint is_slack_variable_basic(self, int index) noexcept:
+    cpdef bint is_slack_variable_basic(self, int index) except? -1:
         """
         Test whether the slack variable of the given row is basic.
 
@@ -2654,12 +2730,12 @@ cdef class GLPKBackend(GenericBackend):
             sage: b.is_slack_variable_basic(1)
             False
         """
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL or index < 0 or index >= glp_get_num_rows(lp):
+        cdef glp_prob * lp = self._lp()
+        if index < 0 or index >= glp_get_num_rows(lp):
             return False
         return glp_get_row_stat(lp, index + 1) == GLP_BS
 
-    cpdef bint is_slack_variable_nonbasic_at_lower_bound(self, int index) noexcept:
+    cpdef bint is_slack_variable_nonbasic_at_lower_bound(self, int index) except? -1:
         """
         Test whether the slack variable of the given row is nonbasic at lower bound.
 
@@ -2688,8 +2764,8 @@ cdef class GLPKBackend(GenericBackend):
             sage: b.is_slack_variable_nonbasic_at_lower_bound(1)
             True
         """
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL or index < 0 or index >= glp_get_num_rows(lp):
+        cdef glp_prob * lp = self._lp()
+        if index < 0 or index >= glp_get_num_rows(lp):
             return False
         return glp_get_row_stat(lp, index + 1) == GLP_NU
 
@@ -2774,7 +2850,7 @@ cdef class GLPKBackend(GenericBackend):
                                                 'surrogateescape'))
         return res
 
-    cpdef double get_row_dual(self, int variable) noexcept:
+    cpdef double get_row_dual(self, int variable) except? -1:
         r"""
         Return the dual value of a constraint.
 
@@ -2840,9 +2916,9 @@ cdef class GLPKBackend(GenericBackend):
             10.0
         """
 
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL:
-            return 0.0
+        cdef glp_prob * lp = self._lp()
+        if variable < 0 or variable >= glp_get_num_rows(lp):
+            raise ValueError("invalid row index %d" % variable)
         if self.simplex_or_intopt == simplex_only:
             return glp_get_row_dual(lp, variable+1)
         else:
@@ -3070,7 +3146,7 @@ cdef class GLPKBackend(GenericBackend):
 
         glp_set_col_stat(lp, j+1, stat)
 
-    cpdef int warm_up(self) noexcept:
+    cpdef int warm_up(self) except? -1:
         r"""
         Warm up the basis using current statuses assigned to rows and cols.
 
@@ -3102,10 +3178,7 @@ cdef class GLPKBackend(GenericBackend):
             sage: lp.warm_up()
             0
         """
-        cdef glp_prob * lp = self._lp_or_null()
-        if lp is NULL:
-            return -1
-        return glp_warm_up(lp)
+        return glp_warm_up(self._lp())
 
     cpdef eval_tab_row(self, int k):
         r"""

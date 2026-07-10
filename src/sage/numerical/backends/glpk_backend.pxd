@@ -28,10 +28,11 @@ cdef class GLPKBackend(GenericBackend):
     cdef int simplex_or_intopt
     cdef search_tree_data_t search_tree_data
     cdef glp_prob * _lp(self) except NULL
-    cdef glp_prob * _lp_or_null(self) noexcept
+    cdef void _set_variable_lower_bound(self, glp_prob * lp, int index, value) except *
+    cdef void _set_variable_upper_bound(self, glp_prob * lp, int index, value) except *
     cpdef __copy__(self)
     cpdef int print_ranges(self, filename=*) except -1
-    cpdef double get_row_dual(self, int variable) noexcept
+    cpdef double get_row_dual(self, int variable) except? -1
     cpdef double get_col_dual(self, int variable) except? -1
     cpdef int get_row_stat(self, int variable) except? -1
     cpdef int get_col_stat(self, int variable) except? -1
@@ -40,4 +41,4 @@ cdef class GLPKBackend(GenericBackend):
     cpdef get_row_prim(self, int i)
     cpdef set_row_stat(self, int i, int stat)
     cpdef set_col_stat(self, int j, int stat)
-    cpdef int warm_up(self) noexcept
+    cpdef int warm_up(self) except? -1
