@@ -85,11 +85,11 @@ Examples
 
 Starting Maxima from the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-maxima" sage -maxima
+    $ pipx run --spec "passagemath-maxima" sage -maxima
 
 Using the pexpect interface to Maxima::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-maxima[test]" ipython
+    $ pipx run --spec "passagemath-maxima[test]" ipython
 
     In [1]: from sage.interfaces.maxima import maxima
 
@@ -101,7 +101,7 @@ Using the library interface to Maxima requires the additional package
 you can install it, for example, by using
 ``pip install "passagemath-maxima[symbolics]"``::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-maxima[symbolics,test]" ipython
+    $ pipx run --spec "passagemath-maxima[symbolics,test]" ipython
 
     In [1]: from sage.interfaces.maxima_lib import maxima_lib
 

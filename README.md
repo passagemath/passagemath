@@ -62,7 +62,7 @@ Running passagemath in the cloud (Google Colab)
 
 Just create a [Google Colab](https://colab.google/) notebook and type:
 
-    %pip install --prefer-binary passagemath-standard
+    %pip install passagemath-standard
 
 Then import the top level:
 
@@ -156,7 +156,7 @@ use passagemath.)
 Then install the meta-package [![PyPI: passagemath-standard](https://img.shields.io/pypi/v/passagemath-standard.svg?label=passagemath-standard)](https://pypi.python.org/pypi/passagemath-standard)
 
 ```bash session
-(passagemath-venv) $ pip install -v --prefer-binary passagemath-standard
+(passagemath-venv) $ pip install -v passagemath-standard
 (passagemath-venv) $ rehash
 ```
 

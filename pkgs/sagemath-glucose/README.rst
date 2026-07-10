@@ -85,11 +85,11 @@ Examples
 
 Using glucose programs on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-glucose" sage -sh -c glucose
+    $ pipx run --spec "passagemath-glucose" sage -sh -c glucose
 
 Finding the installation location of a glucose program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-glucose[test]" ipython
+    $ pipx run --spec "passagemath-glucose[test]" ipython
 
     In [1]: from sage.features.sat import Glucose
 
@@ -98,7 +98,7 @@ Finding the installation location of a glucose program::
 
 Use with `sage.sat <https://passagemath.org/docs/latest/html/en/reference/sat/index.html>`_::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-glucose[test]" ipython
+    $ pipx run --spec "passagemath-glucose[test]" ipython
 
     In [1]: from passagemath_glucose import *
 

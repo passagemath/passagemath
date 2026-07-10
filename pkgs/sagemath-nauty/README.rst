@@ -92,7 +92,7 @@ Examples
 
 Using the gtools on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-nauty" sage -sh -c 'geng 4'
+    $ pipx run --spec "passagemath-nauty" sage -sh -c 'geng 4'
     >A geng -d0D3 n=4 e=0-6
     C?
     CC
@@ -109,7 +109,7 @@ Using the gtools on the command line::
 
 Finding the installation location of a gtools program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-nauty[test]" ipython
+    $ pipx run --spec "passagemath-nauty[test]" ipython
 
     In [1]: from sage.features.nauty import NautyExecutable
 
@@ -118,7 +118,7 @@ Finding the installation location of a gtools program::
 
 Use with sage.graphs::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-nauty[test]" ipython
+    $ pipx run --spec "passagemath-nauty[test]" ipython
 
     In [1]: from passagemath_graphs import *
 

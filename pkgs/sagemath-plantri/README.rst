@@ -85,12 +85,12 @@ Examples
 
 Using plantri programs on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-plantri" sage -sh -c plantri
+    $ pipx run --spec "passagemath-plantri" sage -sh -c plantri
 
 
 Finding the installation location of a plantri program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-plantri[test]" ipython
+    $ pipx run --spec "passagemath-plantri[test]" ipython
 
     In [1]: from sage.features.graph_generators import Plantri
 
@@ -100,7 +100,7 @@ Finding the installation location of a plantri program::
 
 Using the Python interface::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-plantri[test]" ipython
+    $ pipx run --spec "passagemath-plantri[test]" ipython
 
     In [1]: from passagemath_plantri import *
 

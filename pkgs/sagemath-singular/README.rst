@@ -98,7 +98,7 @@ Examples
 
 Using Singular on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-singular" sage -singular
+    $ pipx run --spec "passagemath-singular" sage -singular
                          SINGULAR                                 /
      A Computer Algebra System for Polynomial Computations       /   version 4.4.0
                                                                0<
@@ -108,7 +108,7 @@ Using Singular on the command line::
 
 Finding the installation location of the Singular executable::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-singular[test]" ipython
+    $ pipx run --spec "passagemath-singular[test]" ipython
 
     In [1]: from sage.features.singular import Singular
 
@@ -117,7 +117,7 @@ Finding the installation location of the Singular executable::
 
 Using the Cython interface to Singular::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-singular[test]" ipython
+    $ pipx run --spec "passagemath-singular[test]" ipython
 
     In [1]: from passagemath_singular import *
 

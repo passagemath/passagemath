@@ -87,12 +87,12 @@ Examples
 
 Using lrslib programs on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-lrslib" sage -sh -c lrs
+    $ pipx run --spec "passagemath-lrslib" sage -sh -c lrs
     *lrs:lrslib v.7.1 2021.6.2(64bit,lrslong.h,hybrid arithmetic)
 
 Finding the installation location of an lrslib program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-lrslib[test]" ipython
+    $ pipx run --spec "passagemath-lrslib[test]" ipython
 
     In [1]: from sage.features.lrs import LrsNash
 
@@ -101,7 +101,7 @@ Finding the installation location of an lrslib program::
 
 Use with `sage.game_theory <https://passagemath.org/docs/latest/html/en/reference/game_theory/index.html>`_::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-lrslib[test]" ipython
+    $ pipx run --spec "passagemath-lrslib[test]" ipython
 
     In [1]: from passagemath_lrslib import *
 

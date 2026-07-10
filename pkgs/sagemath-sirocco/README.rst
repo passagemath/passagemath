@@ -86,7 +86,7 @@ Examples
 
 ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-sirocco[test]" ipython
+    $ pipx run --spec "passagemath-sirocco[test]" ipython
 
     In [1]: from passagemath_sirocco import *
 

@@ -106,12 +106,12 @@ Examples
 
 Using rubiks programs on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-rubiks" sage -sh -c cubex
+    $ pipx run --spec "passagemath-rubiks" sage -sh -c cubex
 
 
 Finding the installation location of a rubiks program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-rubiks[test]" ipython
+    $ pipx run --spec "passagemath-rubiks[test]" ipython
 
     In [1]: from sage.features.rubiks import cubex
 
@@ -120,7 +120,7 @@ Finding the installation location of a rubiks program::
 
 Using the Python interface::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-rubiks[test]" ipython
+    $ pipx run --spec "passagemath-rubiks[test]" ipython
 
     In [1]: from sage.interfaces.rubik import *
 
@@ -132,7 +132,7 @@ Using the Python interface::
 
 Using sage.groups.perm_gps::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-rubiks[test]" ipython
+    $ pipx run --spec "passagemath-rubiks[test]" ipython
 
     In [1]: from passagemath_rubiks import *
 

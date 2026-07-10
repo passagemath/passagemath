@@ -89,7 +89,7 @@ Examples
 
 Using TOPCOM programs on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-topcom" sage -sh -c 'cube 4 | points2facets'
+    $ pipx run --spec "passagemath-topcom" sage -sh -c 'cube 4 | points2facets'
     Evaluating Commandline Options ...
     ... done.
     16,5:
@@ -106,7 +106,7 @@ Using TOPCOM programs on the command line::
 
 Finding the installation location of a TOPCOM program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-topcom[test]" ipython
+    $ pipx run --spec "passagemath-topcom[test]" ipython
 
     In [1]: from sage.features.topcom import TOPCOMExecutable
 
@@ -115,7 +115,7 @@ Finding the installation location of a TOPCOM program::
 
 Using `sage.geometry.triangulation.point_configuration <https://passagemath.org/docs/latest/html/en/reference/discrete_geometry/sage/geometry/triangulation/point_configuration.html>`_::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-topcom[test]" ipython
+    $ pipx run --spec "passagemath-topcom[test]" ipython
 
     In [1]: from passagemath_topcom import *
 

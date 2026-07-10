@@ -85,7 +85,7 @@ Examples
 
 ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-homfly[test]" ipython
+    $ pipx run --spec "passagemath-homfly[test]" ipython
 
     In [1]: from sage.libs.homfly import homfly_polynomial_dict
 

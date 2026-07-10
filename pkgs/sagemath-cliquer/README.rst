@@ -86,7 +86,7 @@ Examples
 
 ::
 
-   $ pipx run --pip-args="--prefer-binary" --spec "passagemath-cliquer[test]" ipython
+   $ pipx run --spec "passagemath-cliquer[test]" ipython
 
    In [1]: from passagemath_cliquer import *
 

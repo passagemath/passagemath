@@ -86,11 +86,11 @@ Examples
 
 Using the buckygen program on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-buckygen[test]" sage -sh -c buckygen
+    $ pipx run --spec "passagemath-buckygen[test]" sage -sh -c buckygen
 
 Finding the installation location of the buckygen program::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-buckygen[test]" ipython
+    $ pipx run --spec "passagemath-buckygen[test]" ipython
 
     In [1]: from sage.features.graph_generators import Buckygen
 
@@ -99,7 +99,7 @@ Finding the installation location of the buckygen program::
 
 Using the Python interface::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-buckygen[test]" ipython
+    $ pipx run --spec "passagemath-buckygen[test]" ipython
 
     In [1]: from passagemath_buckygen import *
 

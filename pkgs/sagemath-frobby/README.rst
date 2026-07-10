@@ -79,6 +79,6 @@ Examples
 
 A quick way to try it out interactively::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-frobby[test]" ipython
+    $ pipx run --spec "passagemath-frobby[test]" ipython
 
     In [1]: from passagemath_frobby import *

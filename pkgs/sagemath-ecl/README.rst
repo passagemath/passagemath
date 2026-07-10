@@ -90,7 +90,7 @@ Examples
 
 Starting ECL from the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-ecl[test]" sage --ecl
+    $ pipx run --spec "passagemath-ecl[test]" sage --ecl
 
     ECL (Embeddable Common-Lisp) 23.9.9 (git:UNKNOWN)
     Copyright (C) 1984 Taiichi Yuasa and Masami Hagiya
@@ -99,7 +99,7 @@ Starting ECL from the command line::
 
 Finding the installation location of ECL in Python::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-ecl[test]" ipython
+    $ pipx run --spec "passagemath-ecl[test]" ipython
 
     In [1]: from sage.features.ecl import Ecl
 
@@ -108,7 +108,7 @@ Finding the installation location of ECL in Python::
 
 Using the Cython interface to ECL::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-ecl[test]" sage
+    $ pipx run --spec "passagemath-ecl[test]" sage
 
     sage: from sage.libs.ecl import *
     sage: ecl_eval("(defun fibo (n) (cond ((= n 0) 0) ((= n 1) 1) (t (+ (fibo (- n 1)) (fibo (- n 2))))))")

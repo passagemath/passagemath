@@ -88,7 +88,7 @@ Examples
 
 ::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-rankwidth[test]" ipython
+    $ pipx run --spec "passagemath-rankwidth[test]" ipython
 
     In [1]: from passagemath_rankwidth import *
 

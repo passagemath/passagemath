@@ -95,14 +95,14 @@ Examples
 
 Using LattE integrale and 4ti2 programs on the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-latte-4ti2" sage -sh -c 'ppi 5'
+    $ pipx run --spec "passagemath-latte-4ti2" sage -sh -c 'ppi 5'
     ...
     ### This makes 47 PPI up to sign
     ### Writing data file ppi5.gra and matrix file ppi5.mat done.
 
 Finding the installation location of a LattE integrale or 4ti2 program in Python::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-latte-4ti2[test]" ipython
+    $ pipx run --spec "passagemath-latte-4ti2[test]" ipython
 
     In [1]: from sage.features.latte import Latte_count
 
@@ -116,7 +116,7 @@ Finding the installation location of a LattE integrale or 4ti2 program in Python
 
 Using the low-level Python interfaces::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-latte-4ti2[test]" ipython
+    $ pipx run --spec "passagemath-latte-4ti2[test]" ipython
 
     In [1]: from sage.interfaces.latte import count
 
@@ -127,7 +127,7 @@ Using the low-level Python interfaces::
 
 Use with sage.geometry.polyhedron::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-latte-4ti2[test]" ipython
+    $ pipx run --spec "passagemath-latte-4ti2[test]" ipython
 
     In [1]: from passagemath_polyhedra import *
 

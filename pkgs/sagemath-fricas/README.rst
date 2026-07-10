@@ -90,11 +90,11 @@ Examples
 
 Starting FriCAS from the command line::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-fricas[test]" sage --fricas
+    $ pipx run --spec "passagemath-fricas[test]" sage --fricas
 
 Finding the installation location of FriCAS in Python::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-fricas[test]" ipython
+    $ pipx run --spec "passagemath-fricas[test]" ipython
 
     In [1]: from sage.features.fricas import FriCAS
 
@@ -103,7 +103,7 @@ Finding the installation location of FriCAS in Python::
 
 Using the pexpect interface to FriCAS::
 
-    $ pipx run --pip-args="--prefer-binary" --spec "passagemath-fricas[test]" python
+    $ pipx run --spec "passagemath-fricas[test]" python
 
     >>> from passagemath_fricas import *
     >>> fricas('1+1')
