@@ -3,13 +3,13 @@
 //      from .devcontainer/portability-devcontainer.json.in
 // See https://aka.ms/devcontainer.json for format details.
 {
-    "name": "nixos-python3.13-standard (≥ 8-core)",
+    "name": "nixos-python3.14-minimal (≥ 8-core)",
     "build": {
         "dockerfile": "portability-Dockerfile",
         // See tox.ini for definitions
         "args": {
-            "SYSTEM_FACTOR": "nixos-python3.13",
-            "PACKAGE_FACTOR": "standard",
+            "SYSTEM_FACTOR": "nixos-python3.14",
+            "PACKAGE_FACTOR": "minimal",
             "DOCKER_TARGET": "with-targets",
             "DOCKER_TAG": "dev"
         }
