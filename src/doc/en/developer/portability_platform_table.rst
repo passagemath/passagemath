@@ -250,6 +250,42 @@
 .. |codespace-ubuntu-resolute-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-resolute-standard%2Fdevcontainer.json
 
+.. |image-ubuntu-stonking-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-minimal-with-system-packages
+
+.. |image-ubuntu-stonking-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-minimal-configured
+
+.. |image-ubuntu-stonking-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-minimal-with-targets-pre
+
+.. |image-ubuntu-stonking-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-minimal-with-targets
+
+.. |image-ubuntu-stonking-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-minimal-with-targets-optional
+
+.. |codespace-ubuntu-stonking-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-stonking-minimal%2Fdevcontainer.json
+
+.. |image-ubuntu-stonking-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-standard-with-system-packages
+
+.. |image-ubuntu-stonking-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-standard-configured
+
+.. |image-ubuntu-stonking-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-standard-with-targets-pre
+
+.. |image-ubuntu-stonking-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-standard-with-targets
+
+.. |image-ubuntu-stonking-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-stonking-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-stonking-standard-with-targets-optional
+
+.. |codespace-ubuntu-stonking-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-stonking-standard%2Fdevcontainer.json
+
 .. |image-debian-bullseye-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages
 
@@ -2114,6 +2150,14 @@
    * -    ‑*standard*
      - |image-ubuntu-resolute-standard-with-system-packages| |image-ubuntu-resolute-standard-with-targets-pre| |image-ubuntu-resolute-standard-with-targets| |image-ubuntu-resolute-standard-with-targets-optional|
      - |codespace-ubuntu-resolute-standard|
+   * - **ubuntu**-stonking 
+       
+          ‑*minimal*
+     - |image-ubuntu-stonking-minimal-with-system-packages| |image-ubuntu-stonking-minimal-with-targets-pre| |image-ubuntu-stonking-minimal-with-targets| |image-ubuntu-stonking-minimal-with-targets-optional|
+     - |codespace-ubuntu-stonking-minimal|
+   * -    ‑*standard*
+     - |image-ubuntu-stonking-standard-with-system-packages| |image-ubuntu-stonking-standard-with-targets-pre| |image-ubuntu-stonking-standard-with-targets| |image-ubuntu-stonking-standard-with-targets-optional|
+     - |codespace-ubuntu-stonking-standard|
    * - **debian**-bullseye 
        
           ‑*minimal*
