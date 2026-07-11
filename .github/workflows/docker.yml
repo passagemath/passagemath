@@ -25,6 +25,7 @@ on:
            "ubuntu-plucky",
            "ubuntu-questing",
            "ubuntu-resolute",
+           "ubuntu-stonking",
            "debian-bullseye",
            "debian-bookworm",
            "debian-trixie",
