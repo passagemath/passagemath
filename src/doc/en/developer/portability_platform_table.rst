@@ -1258,41 +1258,41 @@
 .. |codespace-fedora-44-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-44-standard%2Fdevcontainer.json
 
-.. |image-fedora-45-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-minimal-with-system-packages
+.. |image-fedora-45-python3.14-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-minimal-with-system-packages
 
-.. |image-fedora-45-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-minimal-configured
+.. |image-fedora-45-python3.14-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-minimal-configured
 
-.. |image-fedora-45-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-minimal-with-targets-pre
+.. |image-fedora-45-python3.14-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-minimal-with-targets-pre
 
-.. |image-fedora-45-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-minimal-with-targets
+.. |image-fedora-45-python3.14-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-minimal-with-targets
 
-.. |image-fedora-45-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-minimal-with-targets-optional
+.. |image-fedora-45-python3.14-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-minimal-with-targets-optional
 
-.. |codespace-fedora-45-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-45-minimal%2Fdevcontainer.json
+.. |codespace-fedora-45-python3.14-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-45-python3.14-minimal%2Fdevcontainer.json
 
-.. |image-fedora-45-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-standard-with-system-packages
+.. |image-fedora-45-python3.14-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-standard-with-system-packages
 
-.. |image-fedora-45-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-standard-configured
+.. |image-fedora-45-python3.14-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-standard-configured
 
-.. |image-fedora-45-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-standard-with-targets-pre
+.. |image-fedora-45-python3.14-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-standard-with-targets-pre
 
-.. |image-fedora-45-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-standard-with-targets
+.. |image-fedora-45-python3.14-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-standard-with-targets
 
-.. |image-fedora-45-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-standard-with-targets-optional
+.. |image-fedora-45-python3.14-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-standard-with-targets-optional
 
-.. |codespace-fedora-45-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-45-standard%2Fdevcontainer.json
+.. |codespace-fedora-45-python3.14-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-45-python3.14-standard%2Fdevcontainer.json
 
 .. |image-centos-stream-9-python3.12-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-centos-stream-9-python3.12-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-centos-stream-9-python3.12-minimal-with-system-packages
@@ -2014,41 +2014,41 @@
 .. |codespace-fedora-44-arm64v8-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-44-arm64v8-standard%2Fdevcontainer.json
 
-.. |image-fedora-45-arm64v8-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-with-system-packages
+.. |image-fedora-45-python3.14-arm64v8-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-with-system-packages
 
-.. |image-fedora-45-arm64v8-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-configured
+.. |image-fedora-45-python3.14-arm64v8-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-configured
 
-.. |image-fedora-45-arm64v8-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-with-targets-pre
+.. |image-fedora-45-python3.14-arm64v8-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-with-targets-pre
 
-.. |image-fedora-45-arm64v8-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-with-targets
+.. |image-fedora-45-python3.14-arm64v8-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-with-targets
 
-.. |image-fedora-45-arm64v8-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-minimal-with-targets-optional
+.. |image-fedora-45-python3.14-arm64v8-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-minimal-with-targets-optional
 
-.. |codespace-fedora-45-arm64v8-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-45-arm64v8-minimal%2Fdevcontainer.json
+.. |codespace-fedora-45-python3.14-arm64v8-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-45-python3.14-arm64v8-minimal%2Fdevcontainer.json
 
-.. |image-fedora-45-arm64v8-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-standard-with-system-packages
+.. |image-fedora-45-python3.14-arm64v8-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-with-system-packages
 
-.. |image-fedora-45-arm64v8-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-standard-configured
+.. |image-fedora-45-python3.14-arm64v8-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-configured
 
-.. |image-fedora-45-arm64v8-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-standard-with-targets-pre
+.. |image-fedora-45-python3.14-arm64v8-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-with-targets-pre
 
-.. |image-fedora-45-arm64v8-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-standard-with-targets
+.. |image-fedora-45-python3.14-arm64v8-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-with-targets
 
-.. |image-fedora-45-arm64v8-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-arm64v8-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-arm64v8-standard-with-targets-optional
+.. |image-fedora-45-python3.14-arm64v8-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-fedora-45-python3.14-arm64v8-standard-with-targets-optional
 
-.. |codespace-fedora-45-arm64v8-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-45-arm64v8-standard%2Fdevcontainer.json
+.. |codespace-fedora-45-python3.14-arm64v8-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-fedora-45-python3.14-arm64v8-standard%2Fdevcontainer.json
 
 .. list-table::
    :widths: 50 50 40
@@ -2338,14 +2338,14 @@
    * -    ‑*standard*
      - |image-fedora-44-standard-with-system-packages| |image-fedora-44-standard-with-targets-pre| |image-fedora-44-standard-with-targets| |image-fedora-44-standard-with-targets-optional|
      - |codespace-fedora-44-standard|
-   * - **fedora**-45 
+   * - **fedora**-45-python3.14 
        
           ‑*minimal*
-     - |image-fedora-45-minimal-with-system-packages| |image-fedora-45-minimal-with-targets-pre| |image-fedora-45-minimal-with-targets| |image-fedora-45-minimal-with-targets-optional|
-     - |codespace-fedora-45-minimal|
+     - |image-fedora-45-python3.14-minimal-with-system-packages| |image-fedora-45-python3.14-minimal-with-targets-pre| |image-fedora-45-python3.14-minimal-with-targets| |image-fedora-45-python3.14-minimal-with-targets-optional|
+     - |codespace-fedora-45-python3.14-minimal|
    * -    ‑*standard*
-     - |image-fedora-45-standard-with-system-packages| |image-fedora-45-standard-with-targets-pre| |image-fedora-45-standard-with-targets| |image-fedora-45-standard-with-targets-optional|
-     - |codespace-fedora-45-standard|
+     - |image-fedora-45-python3.14-standard-with-system-packages| |image-fedora-45-python3.14-standard-with-targets-pre| |image-fedora-45-python3.14-standard-with-targets| |image-fedora-45-python3.14-standard-with-targets-optional|
+     - |codespace-fedora-45-python3.14-standard|
    * - **centos**-stream-9-python3.12 
        
           ‑*minimal*
@@ -2503,11 +2503,11 @@
    * -    ‑*standard*
      - |image-fedora-44-arm64v8-standard-with-system-packages| |image-fedora-44-arm64v8-standard-with-targets-pre| |image-fedora-44-arm64v8-standard-with-targets| |image-fedora-44-arm64v8-standard-with-targets-optional|
      - |codespace-fedora-44-arm64v8-standard|
-   * - **fedora**-45-arm64v8 
+   * - **fedora**-45-python3.14-arm64v8 
        
           ‑*minimal*
-     - |image-fedora-45-arm64v8-minimal-with-system-packages| |image-fedora-45-arm64v8-minimal-with-targets-pre| |image-fedora-45-arm64v8-minimal-with-targets| |image-fedora-45-arm64v8-minimal-with-targets-optional|
-     - |codespace-fedora-45-arm64v8-minimal|
+     - |image-fedora-45-python3.14-arm64v8-minimal-with-system-packages| |image-fedora-45-python3.14-arm64v8-minimal-with-targets-pre| |image-fedora-45-python3.14-arm64v8-minimal-with-targets| |image-fedora-45-python3.14-arm64v8-minimal-with-targets-optional|
+     - |codespace-fedora-45-python3.14-arm64v8-minimal|
    * -    ‑*standard*
-     - |image-fedora-45-arm64v8-standard-with-system-packages| |image-fedora-45-arm64v8-standard-with-targets-pre| |image-fedora-45-arm64v8-standard-with-targets| |image-fedora-45-arm64v8-standard-with-targets-optional|
-     - |codespace-fedora-45-arm64v8-standard|
+     - |image-fedora-45-python3.14-arm64v8-standard-with-system-packages| |image-fedora-45-python3.14-arm64v8-standard-with-targets-pre| |image-fedora-45-python3.14-arm64v8-standard-with-targets| |image-fedora-45-python3.14-arm64v8-standard-with-targets-optional|
+     - |codespace-fedora-45-python3.14-arm64v8-standard|
