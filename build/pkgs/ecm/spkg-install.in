@@ -1,3 +1,9 @@
+# Needed because of primesieve
+if [ "$UNAME" = "Darwin" ]; then
+    LDFLAGS="${LDFLAGS} -Wl,-rpath,${SAGE_LOCAL}/lib"
+    export LDFLAGS
+fi
+
 cd src/
 
 # Use newer version of config.guess and config.sub (see Issue #19724)
