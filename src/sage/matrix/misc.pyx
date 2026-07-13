@@ -564,7 +564,7 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
         sage: A = matrix(QQ, [[46337, 19453]], sparse=True)
         sage: expected = A.dense_matrix().echelon_form(algorithm='flint')
         sage: A.echelon_form(algorithm='multimodular',
-        ....:                height_guess=46337, proof=False) == expected
+        ....:                height_guess=46336, proof=False) == expected
         True
 
     Check both ends of the optimized sparse prime range.  A target reached

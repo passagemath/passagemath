@@ -525,8 +525,17 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
             True
             sage: matrix(QQ, [[2/101, 2/103]], sparse=True)._clear_denom_rowwise()
             ([103 101], 103)
+
+        Entries that are stored but zero do not become stored entries of the
+        result::
+
+            sage: A = matrix(QQ, [[1, 2], [3, 4]], sparse=True)
+            sage: A.set_row_to_multiple_of_row(0, 1, 0)
+            sage: B, height = A._clear_denom_rowwise()
+            sage: B.nonzero_positions()
+            [(1, 0), (1, 1)]
         """
-        cdef Py_ssize_t i, j
+        cdef Py_ssize_t i, j, k, num_nonzero
         cdef Matrix_integer_sparse B
         cdef mpq_vector *source_row
         cdef mpz_vector *target_row
@@ -547,41 +556,52 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
                 source_row = &self._matrix[i]
                 mpz_set_ui(content, 0)
                 mpz_set_ui(denom, 1)
+                num_nonzero = 0
                 for j in range(source_row.num_nonzero):
                     sig_check()
-                    mpz_lcm(denom, denom,
-                            mpq_denref(source_row.entries[j]))
+                    if mpq_sgn(source_row.entries[j]):
+                        num_nonzero += 1
+                        mpz_lcm(denom, denom,
+                                mpq_denref(source_row.entries[j]))
 
                 # Allocate and initialize a complete replacement row before
                 # changing B.  This keeps every row structurally valid if
-                # allocation or a later signal raises an exception.
-                mpz_vector_init(
-                    &new_row, self._ncols, source_row.num_nonzero)
+                # allocation or a later signal raises an exception.  A stored
+                # entry of ``self`` may be zero, and those must not be stored
+                # in B.
+                mpz_vector_init(&new_row, self._ncols, num_nonzero)
+                k = 0
                 for j in range(source_row.num_nonzero):
-                    new_row.positions[j] = source_row.positions[j]
+                    if mpq_sgn(source_row.entries[j]):
+                        new_row.positions[k] = source_row.positions[j]
+                        k += 1
                 target_row = &B._matrix[i]
                 mpz_vector_clear(target_row)
                 target_row[0] = new_row
 
+                k = 0
                 for j in range(source_row.num_nonzero):
                     sig_check()
+                    if not mpq_sgn(source_row.entries[j]):
+                        continue
                     mpz_divexact(
-                        target_row.entries[j], denom,
+                        target_row.entries[k], denom,
                         mpq_denref(source_row.entries[j]))
                     mpz_mul(
-                        target_row.entries[j], target_row.entries[j],
+                        target_row.entries[k], target_row.entries[k],
                         mpq_numref(source_row.entries[j]))
-                    mpz_gcd(content, content, target_row.entries[j])
+                    mpz_gcd(content, content, target_row.entries[k])
+                    k += 1
 
                 if mpz_sgn(content):
-                    for j in range(source_row.num_nonzero):
+                    for k in range(num_nonzero):
                         sig_check()
-                        mpz_divexact(target_row.entries[j],
-                                     target_row.entries[j], content)
-                for j in range(source_row.num_nonzero):
+                        mpz_divexact(target_row.entries[k],
+                                     target_row.entries[k], content)
+                for k in range(num_nonzero):
                     sig_check()
-                    if mpz_cmpabs(target_row.entries[j], height.value) > 0:
-                        mpz_abs(height.value, target_row.entries[j])
+                    if mpz_cmpabs(target_row.entries[k], height.value) > 0:
+                        mpz_abs(height.value, target_row.entries[k])
         finally:
             mpz_clear(denom)
             mpz_clear(content)
@@ -597,8 +617,10 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
 
         INPUT:
 
-        - ``height_guess``, ``proof``, ``**kwds`` -- all passed to the multimodular
-          algorithm; ignored by the `p`-adic algorithm
+        - ``height_guess``, ``proof`` -- passed to the multimodular algorithm
+
+        - ``**kwds`` -- ignored; accepted for compatibility with the generic
+          :meth:`~sage.matrix.matrix2.Matrix.echelonize`
 
         OUTPUT:
 
@@ -634,7 +656,7 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
             return  # already known to be in echelon form
         self.check_mutability()
 
-        pivots = self._echelonize_multimodular(height_guess, proof, **kwds)
+        pivots = self._echelonize_multimodular(height_guess, proof)
 
         self.cache('in_echelon_form', True)
         self.cache('echelon_form', self)
@@ -646,8 +668,10 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
         """
         INPUT:
 
-        - ``height_guess``, ``proof``, ``**kwds`` -- all passed to the multimodular
-          algorithm; ignored by the `p`-adic algorithm
+        - ``height_guess``, ``proof`` -- passed to the multimodular algorithm
+
+        - ``**kwds`` -- ignored; accepted for compatibility with the generic
+          :meth:`~sage.matrix.matrix2.Matrix.echelon_form`
 
         OUTPUT: ``self`` is no in reduced row echelon form
 
@@ -704,9 +728,9 @@ cdef class Matrix_rational_sparse(Matrix_sparse):
         return E
 
     # Multimodular echelonization algorithms
-    def _echelonize_multimodular(self, height_guess=None, proof=None, **kwds):
+    def _echelonize_multimodular(self, height_guess=None, proof=None):
         cdef Matrix_rational_sparse E
-        E, pivots = self._echelon_form_multimodular(height_guess, proof=proof, **kwds)
+        E, pivots = self._echelon_form_multimodular(height_guess, proof=proof)
         self.clear_cache()
         # Swap the data of E and self (effectively moving E to self)
         self._matrix, E._matrix = E._matrix, self._matrix
