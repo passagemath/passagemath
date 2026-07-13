@@ -6,7 +6,7 @@ Misc matrix algorithms
 
 from cysignals.signals cimport sig_check
 
-from sage.arith.misc import CRT_basis, previous_prime
+from sage.arith.misc import CRT_basis, next_prime, previous_prime
 from sage.arith.rational_reconstruction cimport mpq_rational_reconstruction
 from sage.data_structures.binary_search cimport *
 from sage.ext.mod_int cimport *
@@ -197,6 +197,40 @@ def _multimodular_echelon_progress(p, prod, M):
         p, 100*float(len(str(prod))) / len(str(M)))
 
 
+_sparse_prime_product_cache = {}
+
+
+def _sparse_prime_product(max_modulus):
+    r"""
+    Return the product of all primes below ``max_modulus``, cached.
+
+    This is the largest modulus the optimized sparse modular backend can
+    reach, so it is what decides whether that backend can finish a given
+    reconstruction at all.  It depends on nothing but ``max_modulus``, hence
+    the cache: recomputing it costs about a millisecond, which would dominate
+    the echelon form of a small matrix.
+
+    TESTS::
+
+        sage: from sage.matrix.misc import _sparse_prime_product
+        sage: _sparse_prime_product(10)
+        210
+        sage: _sparse_prime_product(10) is _sparse_prime_product(10)
+        True
+        sage: from sage.matrix.matrix_modn_sparse import MAX_MODULUS
+        sage: _sparse_prime_product(MAX_MODULUS).nbits()
+        66444
+    """
+    cached = _sparse_prime_product_cache.get(max_modulus)
+    if cached is not None:
+        return cached
+    from sage.arith.misc import prime_range
+    from sage.misc.misc_c import prod as product
+    cached = Integer(product(prime_range(max_modulus)))
+    _sparse_prime_product_cache[max_modulus] = cached
+    return cached
+
+
 def _multimodular_echelon_next_modulus(M, prod):
     r"""
     Return the target modulus to use after a failed reconstruction attempt.
@@ -283,14 +317,24 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
       ``proof.linear_algebra`` or ``sage.structure.proof``). Note that the
       global Sage default is proof=True.  With ``proof=False``, the algorithm
       uses an explicitly supplied ``height_guess`` to attempt reconstruction
-      early and checks each candidate first with the usual height certificate;
-      if that fails, it checks the reduced-echelon shape and an exact row-space
-      identity.  The early attempt can reduce the number of modular images
-      when the output is much smaller than the input, but failed
+      early, subject to backend fallback, and checks each candidate first with
+      the usual height certificate; if that fails, it checks the
+      reduced-echelon shape and an exact row-space identity.  The early
+      attempt can reduce the number of modular images when the output is much
+      smaller than the input, but failed
       reconstructions and the exact check can also make it slower
 
     OUTPUT: a pair consisting of a matrix in echelon form and a tuple of pivot
     positions.
+
+    .. NOTE::
+
+        A sparse input that is already close to dense, and wide enough that
+        its echelon form can be far taller than itself, is delegated to dense
+        FLINT: the optimized sparse modular backend is capped at small moduli
+        and cannot always reach the required prime product.  The result is
+        still returned sparse, but ``height_guess`` and ``proof`` have no
+        effect on that path, since FLINT is exact.
 
     ALGORITHM:
 
@@ -314,7 +358,15 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
         M = c + 1 in order to attempt rational reconstruction earlier.
 
      3. List primes p_1, p_2, ..., such that the product of
-        the p_i is at least M.
+        the p_i is at least M.  Sparse matrices ordinarily start with the
+        primes supported by the optimized sparse modular backend.  If M
+        already exceeds the product of that complete finite range, start
+        genuinely sparse inputs directly with larger primes and generic
+        sparse matrices; otherwise switch to those matrices if the optimized
+        range is exhausted later.  When a wide input is already at least
+        three-quarters dense and a heuristic based on the target and a
+        Hadamard bound indicates that the complete optimized prime range may
+        be insufficient, use dense FLINT instead.
 
      4. Try to compute the rational reconstruction CRT echelon form
         of A mod the product of the p_i.  If rational
@@ -515,6 +567,81 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
         ....:                height_guess=46337, proof=False) == expected
         True
 
+    Check both ends of the optimized sparse prime range.  A target reached
+    only after using the final prime must be reconstructed immediately; if
+    the target is still not reached, the computation continues with generic
+    sparse matrices over larger primes::
+
+        sage: import sage.matrix.misc as matrix_misc
+        sage: import sage.matrix.matrix_modn_sparse as modn_sparse
+        sage: original_max_modulus = modn_sparse.MAX_MODULUS
+        sage: original_previous_prime = matrix_misc.previous_prime
+        sage: original_next_prime = matrix_misc.next_prime
+        sage: previous_prime_inputs = []
+        sage: next_prime_inputs = []
+        sage: def record_previous_prime(p):
+        ....:     previous_prime_inputs.append(p)
+        ....:     return original_previous_prime(p)
+        sage: def record_next_prime(p, proof=None):
+        ....:     next_prime_inputs.append(
+        ....:         (p > modn_sparse.MAX_MODULUS, proof))
+        ....:     return original_next_prime(p, proof=proof)
+        sage: modn_sparse.MAX_MODULUS = 4
+        sage: matrix_misc.previous_prime = record_previous_prime
+        sage: matrix_misc.next_prime = record_next_prime
+        sage: try:
+        ....:     A = matrix(QQ, [[1, 10, 0]], sparse=True)
+        ....:     expected = A.dense_matrix().echelon_form(algorithm='flint')
+        ....:     continued = A.echelon_form(
+        ....:         algorithm='multimodular', height_guess=1, proof=False)
+        ....:     continuation_trace = (list(previous_prime_inputs),
+        ....:                           list(next_prime_inputs))
+        ....:     previous_prime_inputs.clear()
+        ....:     next_prime_inputs.clear()
+        ....:     direct_input = matrix(QQ, [[1, 10, 0]], sparse=True)
+        ....:     direct = direct_input.echelon_form(
+        ....:         algorithm='multimodular', height_guess=8, proof=False)
+        ....:     direct_trace = (list(previous_prime_inputs),
+        ....:                     list(next_prime_inputs))
+        ....:     previous_prime_inputs.clear()
+        ....:     next_prime_inputs.clear()
+        ....:     dense_input = [[1, 1, 1], [1, 0, 1]]
+        ....:     dense_fallback = matrix(QQ, dense_input,
+        ....:                             sparse=True).echelon_form(
+        ....:         algorithm='multimodular', height_guess=1, proof=True)
+        ....:     dense_trace = (list(previous_prime_inputs),
+        ....:                    list(next_prime_inputs))
+        ....:     previous_prime_inputs.clear()
+        ....:     next_prime_inputs.clear()
+        ....:     early = matrix(QQ, dense_input, sparse=True).echelon_form(
+        ....:         algorithm='multimodular', height_guess=1, proof=False)
+        ....:     early_trace = (list(previous_prime_inputs),
+        ....:                    list(next_prime_inputs))
+        ....:     previous_prime_inputs.clear()
+        ....:     next_prime_inputs.clear()
+        ....:     boundary = matrix(QQ, [[1, 1]], sparse=True).echelon_form(
+        ....:         algorithm='multimodular', height_guess=2, proof=True)
+        ....:     boundary_trace = (list(previous_prime_inputs),
+        ....:                       list(next_prime_inputs))
+        ....: finally:
+        ....:     matrix_misc.next_prime = original_next_prime
+        ....:     matrix_misc.previous_prime = original_previous_prime
+        ....:     modn_sparse.MAX_MODULUS = original_max_modulus
+        sage: (continued == expected, continued.is_sparse(),
+        ....:  continuation_trace)
+        (True, True, ([5, 3], [(True, True)]))
+        sage: (direct == expected, direct.is_sparse(), direct_trace)
+        (True, True, ([], [(True, True)]))
+        sage: dense_fallback
+        [1 0 1]
+        [0 1 0]
+        sage: (dense_fallback.is_sparse(), dense_trace)
+        (True, ([], []))
+        sage: (early == dense_fallback, early_trace)
+        (True, ([5], []))
+        sage: (boundary, boundary_trace)
+        ([1 1], ([5, 3], []))
+
     Check that independent row scaling keeps the performance-critical bound
     small when rows have distinct denominators.  Counting calls to
     ``previous_prime`` avoids a timing-dependent test::
@@ -555,7 +682,13 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
 
     verbose("Multimodular echelon algorithm on %s x %s matrix" % (self._nrows, self._ncols), caller_name="multimod echelon")
     cdef Matrix E, dE
+    cdef Matrix_integer_sparse B_sparse
     cdef bint default_height_guess = height_guess is None
+    cdef bint dense_flint_candidate = False
+    cdef bint generic_sparse_moduli = False
+    cdef bint sparse_input = self.is_sparse()
+    cdef bint use_dense_flint = False
+    cdef Py_ssize_t i, nonzero_count
     if self._nrows == 0 or self._ncols == 0:
         return self, ()
 
@@ -580,8 +713,70 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
         # candidate is checked below.
         M = floor(max(2, height_guess + 1))
 
-    if self.is_sparse():
+    if sparse_input:
         from sage.matrix.matrix_modn_sparse import MAX_MODULUS
+        # The generic sparse fallback below is deliberately retained for
+        # genuinely sparse matrices.  For a matrix whose storage is already
+        # close to dense, however, FLINT is both faster and memory-appropriate
+        # when the Hadamard reconstruction bound can exceed the complete
+        # optimized sparse prime range.
+        B_sparse = B
+        nonzero_count = 0
+        for i in range(self._nrows):
+            nonzero_count += B_sparse._matrix[i].num_nonzero
+        # Only a wide input can have an echelon form whose height is much
+        # larger than its own, which is what exhausts the prime range; a
+        # matrix with at least as many rows as columns either meets the
+        # full-rank shortcut below or has its output bounded by ``ncols``.
+        dense_flint_candidate = (
+            self._nrows < self._ncols
+            and 4 * nonzero_count >= 3 * self.nrows() * self.ncols())
+        sparse_prime_product = _sparse_prime_product(MAX_MODULUS)
+        if M > sparse_prime_product:
+            if dense_flint_candidate:
+                use_dense_flint = True
+            else:
+                from sage.rings.finite_rings.finite_field_constructor import GF
+                generic_sparse_moduli = True
+        elif dense_flint_candidate and (proof or default_height_guess):
+            # Compare the Hadamard bound 2 * r^r * H(B)^(2r) against the prime
+            # product.  Materializing it outright would build an integer of
+            # about 2*r*H(B).nbits() bits, which for a wide input with large
+            # entries dwarfs the matrix itself, so settle it from bit lengths
+            # whenever they are conclusive.  H(B)^(2r) has between
+            # 2r*(nbits(H)-1)+1 and 2r*nbits(H) bits; only when those straddle
+            # the prime product do we evaluate exactly, and there the value is
+            # by construction no larger than that product.
+            rank_bound = Integer(self._nrows)
+            head = 2 * rank_bound**rank_bound
+            threshold_bits = sparse_prime_product.nbits()
+            low_bits = head.nbits() + 2 * rank_bound * (height.nbits() - 1)
+            high_bits = head.nbits() + 2 * rank_bound * height.nbits()
+            if low_bits > threshold_bits:
+                use_dense_flint = True
+            elif high_bits < threshold_bits:
+                use_dense_flint = False
+            else:
+                use_dense_flint = (head * height**(2 * rank_bound)
+                                   >= sparse_prime_product)
+        if use_dense_flint:
+            verbose("Using dense FLINT because the optimized sparse "
+                    "prime range may be insufficient.", level=2,
+                    caller_name="multimod echelon")
+            B_sparse = None
+            B = None
+            E = self.dense_matrix()
+            E.echelonize(algorithm='flint:multimodular')
+            pivots = E.pivots()
+            result = E.sparse_matrix()
+            # ``echelonize`` caches the dense matrix as its own echelon form,
+            # so it would only be reclaimed by the cyclic collector.
+            E.clear_cache()
+            return result, pivots
+        if generic_sparse_moduli:
+            p = 1 << 255
+        else:
+            p = MAX_MODULUS + 1
     else:
         try:
             from sage.matrix.matrix_modn_dense_double import MAX_MODULUS
@@ -597,8 +792,22 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
     problem = 0
     lifts = {}
     while True:
-        p = previous_prime(p)
         while prod < M:
+            if generic_sparse_moduli:
+                p = next_prime(p, proof=True)
+            elif sparse_input and p <= 2:
+                # Matrix_modn_sparse is limited to small C-int moduli.  Once
+                # those primes are exhausted, keep the computation sparse but
+                # use fewer, larger primes to amortize the generic backend.
+                from sage.rings.finite_rings.finite_field_constructor import GF
+                generic_sparse_moduli = True
+                p = next_prime(1 << 255, proof=True)
+            else:
+                try:
+                    p = previous_prime(p)
+                except ValueError:
+                    raise RuntimeError("ran out of primes in multimodular "
+                                       "echelon form")
             problem = problem + 1
             if problem > 50:
                 verbose("echelon multi-modular possibly not converging?", caller_name="multimod echelon")
@@ -607,7 +816,10 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
                         level=2, caller_name="multimod echelon")
 
             # We use denoms=False, since the rows of B are integral.
-            A = B._mod_int(p)
+            if generic_sparse_moduli:
+                A = B.change_ring(GF(p))
+            else:
+                A = B._mod_int(p)
             t = verbose("time to reduce matrix mod p:",t, level=2, caller_name="multimod echelon")
             A.echelonize()
             t = verbose("time to put reduced matrix in echelon form:",t, level=2, caller_name="multimod echelon")
@@ -630,7 +842,6 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
                 # do not save A since it is bad.
                 verbose("Excluding this prime (bad pivots).", caller_name="multimod echelon")
             t = verbose("time for pivot compare", t, level=2, caller_name="multimod echelon")
-            p = previous_prime(p)
         # Find set of best matrices.
         Y = []
         # recompute product, since may drop bad matrices
@@ -638,13 +849,13 @@ def matrix_rational_echelon_form_multimodular(Matrix self, height_guess=None, pr
         t = verbose("now comparing pivots and dropping any bad ones", level=2, t=t, caller_name="multimod echelon")
         for i in range(len(X)):
             if cmp_pivots(best_pivots, X[i].pivots()) <= 0:
-                p = X[i].base_ring().order()
-                if p not in lifts:
+                q = X[i].base_ring().order()
+                if q not in lifts:
                     t0 = verbose("Lifting a good matrix", level=2, caller_name="multimod echelon")
                     lift = X[i].lift()
-                    lifts[p] = (lift, p)
+                    lifts[q] = (lift, q)
                     verbose("Finished lift", level=2, caller_name="multimod echelon", t=t0)
-                Y.append(lifts[p])
+                Y.append(lifts[q])
                 prod = prod * X[i].base_ring().order()
         verbose("finished comparing pivots", level=2, t=t, caller_name="multimod echelon")
         if prod < M:
