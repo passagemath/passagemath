@@ -1861,6 +1861,13 @@ cdef class Matrix_rational_dense(Matrix_dense):
             sage: E.echelon_form(algorithm='multimodular') is E
             True
 
+        This holds even if a copy was cached while the matrix was still
+        mutable::
+
+            sage: A.set_immutable()
+            sage: A.echelon_form(algorithm='flint') is A
+            True
+
         ::
 
             sage: B = matrix(QQ, [[1, 2], [3, 4]])
@@ -1889,15 +1896,17 @@ cdef class Matrix_rational_dense(Matrix_dense):
             pivots = self.fetch('pivots')
             if pivots is None:
                 raise RuntimeError('in_echelon_form set but not pivots')
-        x = self.fetch(label)
-        if x is not None:
-            return x
-
         if in_echelon_form and self.is_immutable():
             # ``self`` is its own echelon form and cannot drift away from it.
+            # This takes precedence over an equal copy cached under ``label``
+            # back when ``self`` was still mutable.
             self.cache(label, self)
             self.cache('rank', len(pivots))
             return self
+
+        x = self.fetch(label)
+        if x is not None:
+            return x
 
         E = self.__copy__()
         if in_echelon_form:
