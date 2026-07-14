@@ -770,6 +770,11 @@ class Gap_generic(ExtraTabCompletion, Expect):
         """
         Clear the variable named var.
 
+        The name is not returned to the interface's reuse pool here.  A
+        Python element may still refer to it and will release the name when
+        that element is destroyed.  Reusing the name before then would let
+        the stale element release or overwrite a newer value.
+
         EXAMPLES::
 
             sage: gap.set('x', '2')
@@ -784,7 +789,6 @@ class Gap_generic(ExtraTabCompletion, Expect):
             ...
         """
         self.eval('Unbind(%s)' % var)
-        self.clear(var)
 
     def _contains(self, v1, v2):
         """

@@ -207,7 +207,7 @@ Working with GAP3 lists. Note that GAP3 lists are 1-indexed::
 Controlling variable names used by GAP3::
 
     sage: # optional - gap3
-    sage: gap3('2', name='x')
+    sage: a = gap3('2', name='x'); a
     2
     sage: gap3('x')
     2
@@ -218,6 +218,16 @@ Controlling variable names used by GAP3::
     TypeError: Gap3 produced error output
     Error, Variable: 'x' must have a value
     ...
+
+The Python wrapper can outlive an explicit unbind without corrupting a later
+GAP value when it is collected::
+
+    sage: b = gap3(3)
+    sage: del a
+    sage: import gc; _ = gc.collect()
+    sage: c = gap3(4)
+    sage: b
+    3
 """
 
 # ****************************************************************************
@@ -502,11 +512,15 @@ class Gap3(Gap_generic):
                 helptext.append(chr(ord(E.after[1:2]) - ord('A') + 1))
                 helptext.append(E.before)
             elif x == 10:
-                # matched @n (normal input mode); it seems we're done
+                # matched @n (normal output before the final prompt); the
+                # help document is done, but GAP3's @i input marker remains
                 break
             elif x == 11:
                 # matched @r (echoing input); skip to end of line
                 E.expect_list(self._compiled_small_pattern)
+
+        # Keep the package-mode stream synchronized for the next command.
+        E.expect("@i")
 
         # merge the help text into one string and print it.
         helptext = "".join(bytes_to_str(line) for line in helptext).strip()
@@ -755,15 +769,34 @@ class GAP3Element(GapElement_generic):
             sage: # optional - gap3
             sage: s = gap3("[[1,2], [3/4, 5/6]]")
             sage: s._latex_()
-            '\\left(\\begin{array}{rr} 1&2\\\\ 3/4&\\frac{5}{6}\\\\ \\end{array}\\right)'
+            '\\left(\\begin{array}{rr} 1&2\\\\ \\frac34&\\frac56\\\\ \\end{array}\\right)'
             sage: latex(s)
-            \left(\begin{array}{rr} 1&2\\ 3/4&\frac{5}{6}\\ \end{array}\right)
+            \left(\begin{array}{rr} 1&2\\ \frac34&\frac56\\ \end{array}\right)
         """
         gap3_session = self._check_valid()
         try:
             s = gap3_session.eval('FormatLaTeX(%s)' % self.name())
             s = s.replace('\\\\', '\\').replace('"', '')
             s = s.replace('%\\n', ' ')
+            name = self.name()
+            is_rectangular_matrix = (
+                gap3_session.eval('IsList(%s)' % name) == 'true'
+                and int(gap3_session.eval('Length(%s)' % name)) > 0
+                and (
+                    gap3_session.eval(
+                        'ForAll(%s, row -> IsList(row))' % name) == 'true'
+                )
+                and gap3_session.eval(
+                    'ForAll({0}, row -> Length(row) = '
+                    'Length({0}[1]))'.format(name)) == 'true'
+            )
+            # Jean Michel's GAP3 formatter returns only the row body for a
+            # matrix.  Older GAP3 installations included the array wrapper.
+            if is_rectangular_matrix and r'\begin{array}' not in s:
+                ncols = int(gap3_session.eval('Length(%s[1])' % name))
+                body = s.replace(r'\n', ' ').strip()
+                return (r'\left(\begin{array}{%s} ' % ('r' * ncols)
+                        + body + r' \end{array}\right)')
             return s
         except RuntimeError:
             return str(self)
