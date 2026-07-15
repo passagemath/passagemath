@@ -41,6 +41,10 @@ install_compiled_pkg()
 # Build and install
 
 cd src
+
+# shipped as 700 in semigroups-5.6.3
+chmod 755 config.*
+
 echo "Building GAP package semigroups"
 sdh_configure --with-gaproot="$GAP_ROOT"  --with-external-libsemigroups
 sdh_make
