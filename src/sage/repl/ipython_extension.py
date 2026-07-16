@@ -75,11 +75,30 @@ from sage.repl.load import load_wrap
 
 
 def _running_in_notebook():
-    try:
-        from ipykernel.zmqshell import ZMQInteractiveShell
-    except ImportError:
+    r"""
+    Return whether the current IPython shell is attached to a Jupyter kernel.
+
+    Kernel implementations set a ``kernel`` attribute on the shell before any
+    user code runs: ``ipykernel`` passes ``kernel=self`` when constructing
+    :class:`~ipykernel.zmqshell.ZMQInteractiveShell`, and xeus-python sets
+    ``kernel`` on its ``XPythonShell`` during interpreter initialization.
+    Checking this attribute instead of testing ``isinstance`` against
+    ``ZMQInteractiveShell`` also covers kernels that do not depend on
+    ``ipykernel``, such as xeus-python used by JupyterLite
+    (:passagemathissue:`2369`).
+
+    EXAMPLES:
+
+    The doctest environment is not attached to a Jupyter kernel::
+
+        sage: from sage.repl.ipython_extension import _running_in_notebook
+        sage: _running_in_notebook()
+        False
+    """
+    ip = get_ipython()
+    if ip is None:
         return False
-    return isinstance(get_ipython(), ZMQInteractiveShell)
+    return getattr(ip, 'kernel', None) is not None
 
 
 @magics_class
