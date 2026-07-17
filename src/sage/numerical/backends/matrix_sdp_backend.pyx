@@ -86,6 +86,12 @@ cdef class MatrixSDPBackend(GenericSDPBackend):
         """
         return self.coeffs_matrix
 
+    def _update_problem(self):
+        """
+        Hook that is called when problem data are updated.
+        """
+        pass
+
     cpdef int add_variable(self, obj=0.0,  name=None) except -1:
         """
         Add a variable.
@@ -131,6 +137,7 @@ cdef class MatrixSDPBackend(GenericSDPBackend):
             i += 1
         self.col_name_var.append(name)
         self.objective_function.append(obj)
+        self._update_problem()
         return len(self.objective_function) - 1
 
     cpdef int add_variables(self, int n, names=None) except -1:
@@ -190,6 +197,7 @@ cdef class MatrixSDPBackend(GenericSDPBackend):
             self.is_maximize = 1
         else:
             self.is_maximize = 0
+        self._update_problem()
 
     cpdef objective_coefficient(self, int variable, coeff=None):
         """
@@ -216,6 +224,7 @@ cdef class MatrixSDPBackend(GenericSDPBackend):
         """
         if coeff is not None:
             self.objective_function[variable] = float(coeff)
+            self._update_problem()
         else:
             return self.objective_function[variable]
 
@@ -244,6 +253,7 @@ cdef class MatrixSDPBackend(GenericSDPBackend):
         for i in range(len(coeff)):
             self.objective_function[i] = coeff[i]
         self.obj_constant_term = d
+        self._update_problem()
 
     cpdef add_linear_constraint(self, coefficients, name=None):
         """
@@ -291,6 +301,7 @@ cdef class MatrixSDPBackend(GenericSDPBackend):
         self.coeffs_matrix.append(coefficients)
         self.matrices_dim[self.nrows()] = m.dimensions()[0] #
         self.row_name_var.append(name)
+        self._update_problem()
 
     cpdef add_linear_constraints(self, int number, names=None):
         """
@@ -392,6 +403,7 @@ cdef class MatrixSDPBackend(GenericSDPBackend):
             return self.name
 
         self.name = name
+        self._update_problem()
 
     cpdef row(self, int i):
         """
