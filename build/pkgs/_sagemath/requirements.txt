@@ -1,0 +1,1 @@
+--editable git+https://github.com/sagemath/sage.git#egg=sagemath
