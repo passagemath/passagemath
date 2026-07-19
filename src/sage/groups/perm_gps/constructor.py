@@ -21,11 +21,11 @@ objects have a more group theoretic flavor than the more combinatorial
 # ****************************************************************************
 
 from sage.groups.perm_gps import permgroup_element
-from sage.interfaces.gap import GapElement
 from sage.libs.gap.element import GapElement_Permutation
 from sage.misc.lazy_import import lazy_import
 
 lazy_import('sage.combinat.permutation', ['Permutation', 'from_cycles'])
+lazy_import('sage.interfaces.gap', 'GapElement')
 lazy_import('sage.misc.sage_eval', 'sage_eval')
 
 try:
