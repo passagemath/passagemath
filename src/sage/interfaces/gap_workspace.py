@@ -69,7 +69,11 @@ def gap_workspace_file(system='gap', name='workspace', dir=None):
             continue
         sysinfo = os.path.join(path, "sysinfo.gap")
         if os.path.exists(sysinfo):
-            data += subprocess.getoutput(f'. "{sysinfo}" && echo ":$GAP_VERSION:$GAParch"')
+            try:
+                data += subprocess.getoutput(f'. "{sysinfo}" && echo ":$GAP_VERSION:$GAParch"')
+                break
+            except OSError:  # emscripten
+                pass
     h = hashlib.sha1(data.encode('utf-8')).hexdigest()
     return os.path.join(dir, f'{system}-{name}-{HOSTNAME}-{h}')
 
