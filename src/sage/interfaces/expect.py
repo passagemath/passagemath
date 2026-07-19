@@ -51,7 +51,13 @@ import weakref
 from random import randrange
 
 import pexpect
-from pexpect import ExceptionPexpect
+
+try:
+    from pexpect import ExceptionPexpect
+except ImportError:
+    # emscripten
+    class ExceptionPexpect(Exception):
+        pass
 
 import sage.interfaces.abc
 from sage.cpython.string import bytes_to_str, str_to_bytes
