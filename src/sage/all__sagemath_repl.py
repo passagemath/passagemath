@@ -110,6 +110,10 @@ warnings.filterwarnings('ignore', category=DeprecationWarning,
 warnings.filterwarnings('ignore', category=DeprecationWarning,
                         message=r"Parsing dates involving a day of month without a year.*")
 
+# seen in jupyterlite
+warnings.filterwarnings('ignore', category=DeprecationWarning,
+                        message=r"`run_cell_async` will not call `transform_cell` automatically.*")
+
 from sage.all__sagemath_objects import *
 from sage.all__sagemath_environment import *
 
