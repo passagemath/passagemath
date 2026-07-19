@@ -149,14 +149,14 @@ from sage.groups.perm_gps.permgroup_element import PermutationGroupElement
 from sage.groups.perm_gps.constructor import PermutationGroupElement as PermutationConstructor, standardize_generator
 from sage.misc.cachefunc import cached_method
 from sage.misc.lazy_import import lazy_import
-from sage.groups.class_function import ClassFunction_libgap
 from sage.sets.finite_enumerated_set import FiniteEnumeratedSet
 from sage.categories.finite_enumerated_sets import FiniteEnumeratedSets
-from sage.groups.conjugacy_classes import ConjugacyClassGAP
 from sage.structure.richcmp import (richcmp_method,
                                     richcmp, rich_to_bool, op_EQ, op_NE)
 
 lazy_import('sage.groups.abelian_gps.abelian_group', 'AbelianGroup')
+lazy_import('sage.groups.class_function', 'ClassFunction_libgap')
+lazy_import('sage.groups.conjugacy_classes', 'ConjugacyClassGAP')
 
 
 def load_hap():

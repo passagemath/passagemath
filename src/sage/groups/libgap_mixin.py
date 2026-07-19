@@ -17,9 +17,11 @@ from sage.libs.gap.libgap import libgap
 from sage.libs.gap.element import GapElement
 from sage.structure.element import parent
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 from sage.misc.randstate import current_randstate
-from sage.groups.class_function import ClassFunction_libgap
 from sage.groups.libgap_wrapper import ElementLibGAP
+
+lazy_import('sage.groups.class_function', 'ClassFunction_libgap')
 
 
 class GroupMixinLibGAP:
@@ -341,7 +343,6 @@ class GroupMixinLibGAP:
             sage: list(chi)                                                             # needs sage.rings.number_field
             [0, 1, 2, 3, 4, 5, 6, 7]
         """
-        from sage.groups.class_function import ClassFunction_libgap
         return ClassFunction_libgap(self, values)
 
     @cached_method
