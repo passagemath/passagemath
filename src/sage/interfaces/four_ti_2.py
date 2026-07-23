@@ -423,6 +423,81 @@ class FourTi2:
         self.call('graver', project, options=['-q'])
         return self.read_matrix(project+'.gra')
 
+    def markov(self, mat=None, lat=None, sign=None, weights=None,
+               weights_max=None, zsol=None, project=None, *,
+               precision=None, algorithm=None, generation=None,
+               truncation=None, minimal=None):
+        r"""
+        Run the 4ti2 program ``markov`` on the parameters.
+
+        See the
+        `4ti2 markov documentation <https://4ti2.github.io/markov.html>`_
+        for details on the input and computational options.
+
+        EXAMPLES::
+
+            sage: from sage.interfaces.four_ti_2 import four_ti_2
+            sage: A = matrix(ZZ, [[1, 1, 0, 0],
+            ....:                 [0, 0, 1, 1],
+            ....:                 [1, 0, 1, 0],
+            ....:                 [0, 1, 0, 1]])
+            sage: M = four_ti_2.markov(mat=A)  # optional - 4ti2
+            sage: M.dimensions()  # optional - 4ti2
+            (1, 4)
+            sage: A * M.transpose() == zero_matrix(ZZ, 4, 1)  # optional - 4ti2
+            True
+        """
+        if precision is not None:
+            precision = str(precision)
+            if precision == 'arb':
+                precision = 'arbitrary'
+            if precision not in ('32', '64', 'arbitrary'):
+                raise ValueError("precision must be 32, 64, or 'arbitrary'")
+
+        if algorithm not in (None, 'fifo', 'weighted', 'unbounded'):
+            raise ValueError("algorithm must be 'fifo', 'weighted', or "
+                             "'unbounded'")
+
+        if generation not in (None, 'hybrid', 'project-and-lift',
+                               'max-min', 'saturation'):
+            raise ValueError("generation must be 'hybrid', "
+                             "'project-and-lift', 'max-min', or "
+                             "'saturation'")
+
+        if truncation not in (None, 'ip', 'lp', 'weight', 'none'):
+            raise ValueError("truncation must be 'ip', 'lp', 'weight', "
+                             "or 'none'")
+
+        if minimal is not None and not isinstance(minimal, bool):
+            raise TypeError("minimal must be a boolean or None")
+
+        input_files = {
+            'mat': mat,
+            'lat': lat,
+            'sign': sign,
+            'weights': weights,
+            'weights.max': weights_max,
+            'zsol': zsol,
+            'project': project,
+        }
+        project = self._process_input(input_files)
+
+        options = ['-q']
+        if precision is not None:
+            options.append(f'--precision={precision}')
+        if algorithm is not None:
+            options.append(f'--algorithm={algorithm}')
+        if generation is not None:
+            options.append(f'--generation={generation}')
+        if truncation is not None:
+            options.append(f'--truncation={truncation}')
+        if minimal is not None:
+            state = 'yes' if minimal else 'no'
+            options.append(f'--minimal={state}')
+
+        self.call('markov', project, options=options)
+        return self.read_matrix(project+'.mar')
+
     def ppi(self, n):
         r"""
         Run the 4ti2 program ``ppi`` on the parameters.
