@@ -201,6 +201,7 @@ def inline_plots(on=None):
 
     EXAMPLES::
 
+        sage: from sage.repl.interpreter import inline_plots
         sage: type(inline_plots()) is bool
         True
         sage: inline_plots(False)
