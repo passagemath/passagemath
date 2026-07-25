@@ -193,6 +193,35 @@ def preparser(on=True):
     _do_preparse = on is True
 
 
+def inline_plots(on=None):
+    """
+    Turn on or off the inline plots via Kitty when supported.
+
+    - ``on`` -- boolean; whether to turn on preparsing, returns the current state if None
+
+    EXAMPLES::
+
+        sage: type(inline_plots()) is bool
+        True
+        sage: inline_plots(False)
+        sage: inline_plots()
+        False
+    """
+    from IPython.core.getipython import get_ipython
+    IP = get_ipython()
+    if on is None:
+        return hasattr(IP, 'mime_renderers') and 'image/png' in IP.mime_renderers
+    if not hasattr(IP, 'mime_renderers'):
+        return
+    if on:
+        try:
+            from IPython.core.kitty import kitty_png_render
+        except ImportError:
+            return
+        IP.mime_renderers['image/png'] = kitty_png_render
+    elif 'image/png' in IP.mime_renderers:
+        del IP.mime_renderers['image/png']
+
 ##############################
 # Sage[Terminal]InteractiveShell
 ##############################

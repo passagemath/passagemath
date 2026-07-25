@@ -241,18 +241,14 @@ class BackendIPythonCommandline(BackendIPython):
         elif isinstance(rich_output, OutputLatex):
             return ({'text/plain': rich_output.latex.get_str()}, {})
         if isinstance(rich_output, OutputImagePng):
-            try:
-                # requires IPython 9.13:
-                from IPython.core.kitty import supports_kitty_graphics
-            except ImportError:
-                # fallback for older IPython versions:
-                supports_kitty_graphics = False
-            if supports_kitty_graphics:
-                msg = ''
+            IP = get_ipython()
+            # IPython>=9.3 supports inline plots
+            if hasattr(IP, 'mime_renderers') and 'image/png' in IP.mime_renderers:
+                return ({'text/plain': '', 'image/png': rich_output.png.get()}, {})
             else:
                 msg = self.launch_viewer(
                     rich_output.png.filename(ext='png'), plain_text.text.get_str())
-            return ({'text/plain': msg, 'image/png': rich_output.png.get()}, {})
+                return ({'text/plain': msg}, {})
         if isinstance(rich_output, OutputImageGif):
             msg = self.launch_viewer(
                 rich_output.gif.filename(ext='gif'), plain_text.text.get_str())
