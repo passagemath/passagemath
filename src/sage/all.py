@@ -188,6 +188,7 @@ sage.misc.lazy_import.finish_startup()
 if hasattr(sys, "set_int_max_str_digits"):
     sys.set_int_max_str_digits(0)
 
+
 def sage_globals():
     r"""
     Return the Sage namespace.

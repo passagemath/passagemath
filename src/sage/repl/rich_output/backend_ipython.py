@@ -245,10 +245,9 @@ class BackendIPythonCommandline(BackendIPython):
             # IPython>=9.3 supports inline plots
             if hasattr(IP, 'mime_renderers') and 'image/png' in IP.mime_renderers:
                 return ({'text/plain': '', 'image/png': rich_output.png.get()}, {})
-            else:
-                msg = self.launch_viewer(
-                    rich_output.png.filename(ext='png'), plain_text.text.get_str())
-                return ({'text/plain': msg}, {})
+            msg = self.launch_viewer(
+                rich_output.png.filename(ext='png'), plain_text.text.get_str())
+            return ({'text/plain': msg}, {})
         if isinstance(rich_output, OutputImageGif):
             msg = self.launch_viewer(
                 rich_output.gif.filename(ext='gif'), plain_text.text.get_str())
