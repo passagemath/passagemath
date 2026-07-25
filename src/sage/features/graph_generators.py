@@ -60,6 +60,9 @@ class Plantri(Executable):
         except subprocess.CalledProcessError as e:
             return FeatureTestResult(self, False,
                     reason="Call `{command}` failed with exit code {e.returncode}".format(command=" ".join(command), e=e))
+        except OSError:
+            return FeatureTestResult(self, False,
+                reason="Call to `{command}` failed with OSError".format(command=" ".join(command)))
 
         expected = b"1 triangulations written"
         if lines.find(expected) == -1:
@@ -107,6 +110,9 @@ class Buckygen(Executable):
         except subprocess.CalledProcessError as e:
             return FeatureTestResult(self, False,
                     reason="Call `{command}` failed with exit code {e.returncode}".format(command=" ".join(command), e=e))
+        except OSError:
+            return FeatureTestResult(self, False,
+                reason="Call to `{command}` failed with OSError".format(command=" ".join(command)))
 
         expected = b"Number of fullerenes generated with 13 vertices: 0"
         if lines.find(expected) == -1:
@@ -156,6 +162,9 @@ class Benzene(Executable):
         except subprocess.CalledProcessError as e:
             return FeatureTestResult(self, False,
                     reason="Call `{command}` failed with exit code {e.returncode}".format(command=" ".join(command), e=e))
+        except OSError:
+            return FeatureTestResult(self, False,
+                reason="Call to `{command}` failed with OSError".format(command=" ".join(command)))
 
         expected = b">>planar_code<<"
         if not lines.startswith(expected):

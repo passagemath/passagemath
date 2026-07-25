@@ -56,7 +56,7 @@ class FriCAS(Executable):
             version_line = output.decode('utf-8').strip()
             version = version_line.split()[1]
             return version
-        except subprocess.CalledProcessError:
+        except (subprocess.CalledProcessError, OSError):
             return None
 
     def is_functional(self):
@@ -75,6 +75,9 @@ class FriCAS(Executable):
         except subprocess.CalledProcessError as e:
             return FeatureTestResult(self, False,
                                      reason="Call `{command}` failed with exit code {e.returncode}".format(command=" ".join(command), e=e))
+        except OSError:
+            return FeatureTestResult(self, False,
+                reason="Call to `{command}` failed with OSError".format(command=" ".join(command)))
 
         expected = b"FriCAS"
         if lines.find(expected) == -1:

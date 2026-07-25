@@ -247,7 +247,7 @@ class TeXFile(StaticFile):
             proc = run(['kpsewhich', self.filename],
                        capture_output=True, text=True, check=True)
             return proc.stdout.strip()
-        except CalledProcessError:
+        except (CalledProcessError, OSError):
             reason = "{filename!r} not found by kpsewhich".format(filename=self.filename)
             raise FeatureNotPresentError(self, reason)
 
