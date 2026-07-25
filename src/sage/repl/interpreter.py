@@ -216,10 +216,11 @@ def inline_plots(on=None):
         return
     if on:
         try:
-            from IPython.core.kitty import kitty_png_render
+            from IPython.core.kitty import kitty_png_render, supports_kitty_graphics
         except ImportError:
             return
-        IP.mime_renderers['image/png'] = kitty_png_render
+        if supports_kitty_graphics:
+            IP.mime_renderers['image/png'] = kitty_png_render
     elif 'image/png' in IP.mime_renderers:
         del IP.mime_renderers['image/png']
 
