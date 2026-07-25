@@ -85,7 +85,7 @@ class PackageSystem(Feature):
                     lines.append(f'To install {feature} using the {system} package manager, you can try to run:')
                     lines.append(command)
                     return '\n'.join(lines)
-        except CalledProcessError:
+        except (CalledProcessError, OSError):
             pass
         return f'No equivalent system packages for {system} are known to Sage.'
 
@@ -127,7 +127,7 @@ class SagePackageSystem(PackageSystem):
         try:
             # "sage -p" is a fast way of checking whether sage-spkg is available.
             run('sage -p', shell=True, stdout=DEVNULL, stderr=DEVNULL, check=True)
-        except CalledProcessError:
+        except (CalledProcessError, OSError):
             return False
         # Check if there are any installation records.
         try:
@@ -192,5 +192,5 @@ class PipPackageSystem(PackageSystem):
         try:
             run('sage -pip --version', shell=True, stdout=DEVNULL, stderr=DEVNULL, check=True)
             return True
-        except CalledProcessError:
+        except (CalledProcessError, OSError):
             return False

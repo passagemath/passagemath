@@ -68,6 +68,9 @@ class CSDP(Executable):
                 return FeatureTestResult(self, False,
                     reason="Call to `{command}` failed with exit code {e.returncode}."
                                              .format(command=" ".join(command), e=e))
+            except OSError:
+                return FeatureTestResult(self, False,
+                    reason="Call to `{command}` failed with OSError")
 
         result = bytes_to_str(lines).strip().split('\n')[-1]
         match = re.match("^The Lovasz Theta Number is (.*)$", result)

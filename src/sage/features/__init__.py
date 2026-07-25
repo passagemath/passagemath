@@ -581,7 +581,7 @@ def package_systems():
             system_name = proc.stdout.strip()
             if system_name != 'unknown':
                 _cache_package_systems = [PackageSystem(system_name)]
-        except CalledProcessError:
+        except (CalledProcessError, OSError):
             pass
         more_package_systems = [SagePackageSystem(), PipPackageSystem()]
         _cache_package_systems += [ps for ps in more_package_systems if ps.is_present()]
