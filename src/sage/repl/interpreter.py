@@ -294,6 +294,7 @@ class SageTerminalInteractiveShell(SageShellOverride, TerminalInteractiveShell):
             sage: from sage.repl.interpreter import SageTerminalInteractiveShell
             sage: SageTerminalInteractiveShell().init_display_formatter()   # not tested
         """
+        super().init_display_formatter()
         from sage.repl.rich_output.backend_ipython import BackendIPythonCommandline
         backend = BackendIPythonCommandline()
         backend.get_display_manager().switch_backend(backend, shell=self)

@@ -240,11 +240,20 @@ class BackendIPythonCommandline(BackendIPython):
             return ({'text/plain': rich_output.unicode_art.get_str()}, {})
         elif isinstance(rich_output, OutputLatex):
             return ({'text/plain': rich_output.latex.get_str()}, {})
-        elif isinstance(rich_output, OutputImagePng):
-            msg = self.launch_viewer(
-                rich_output.png.filename(ext='png'), plain_text.text.get_str())
-            return ({'text/plain': msg}, {})
-        elif isinstance(rich_output, OutputImageGif):
+        if isinstance(rich_output, OutputImagePng):
+            try:
+                # requires IPython 9.13:
+                from IPython.core.kitty import supports_kitty_graphics
+            except ImportError:
+                # fallback for older IPython versions:
+                supports_kitty_graphics = False
+            if supports_kitty_graphics:
+                msg = ''
+            else:
+                msg = self.launch_viewer(
+                    rich_output.png.filename(ext='png'), plain_text.text.get_str())
+            return ({'text/plain': msg, 'image/png': rich_output.png.get()}, {})
+        if isinstance(rich_output, OutputImageGif):
             msg = self.launch_viewer(
                 rich_output.gif.filename(ext='gif'), plain_text.text.get_str())
             return ({'text/plain': msg}, {})
