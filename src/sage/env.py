@@ -405,7 +405,7 @@ def get_cblas_pc_module_name() -> str:
     return next(blas_lib for blas_lib in cblas_pc_modules if pkgconfig.exists(blas_lib))
 
 
-default_required_modules = ('fflas-ffpack', 'givaro', 'gsl', 'linbox', 'Singular',
+default_required_modules = ('fflas-ffpack', 'flint', 'givaro', 'gsl', 'linbox', 'Singular',
                             'libpng', 'gdlib', 'm4ri', 'zlib', 'cblas', 'ecl')
 
 
