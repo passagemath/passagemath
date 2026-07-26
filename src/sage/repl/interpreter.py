@@ -206,7 +206,7 @@ def inline_plots(on=None):
         sage: from sage.repl.interpreter import inline_plots
         sage: type(inline_plots()) is bool
         True
-        sage: inline_plots(False)
+        sage: inline_plots(False) # random
         sage: inline_plots()
         False
     """
