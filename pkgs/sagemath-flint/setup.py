@@ -9,6 +9,6 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-flint'],
            recurse_packages=('sage', 'passagemath_flint'),
-           required_modules=('gsl',),
+           required_modules=('flint', 'gsl',),
            spkgs=['flint', 'gsl'],
            package_data={})

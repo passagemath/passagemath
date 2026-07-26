@@ -9,5 +9,6 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-eclib'],
            recurse_packages=('sage', 'passagemath_eclib'),
+           required_modules=('flint',),
            spkgs=['eclib'],
            package_data={})

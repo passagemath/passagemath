@@ -68,7 +68,7 @@ sage_setup(['sagemath-pari'],
                "develop":   sage_develop,
                "install":   sage_install,
            },
-           required_modules=('gsl', 'givaro'),
+           required_modules=('flint', 'gsl', 'givaro'),
            optional_modules=('readline',),
            spkgs=['pari', 'gsl', 'givaro'],
            recurse_packages=[

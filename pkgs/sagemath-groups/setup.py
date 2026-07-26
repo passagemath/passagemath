@@ -9,4 +9,5 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-groups'],
            recurse_packages=('sage', 'passagemath_groups'),
+           required_modules=('flint',),
            package_data={})

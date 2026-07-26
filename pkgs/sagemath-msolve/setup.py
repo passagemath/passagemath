@@ -9,6 +9,7 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-msolve'],
            recurse_packages=('sage', 'passagemath_msolve'),
+           required_modules=('flint',),
            spkgs=['msolve'],
            package_data={},
            py_limited_api=True)
