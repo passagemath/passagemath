@@ -297,7 +297,7 @@ class BackendIPythonCommandline(BackendIPython):
             Example plain text output
         """
         formatdata, metadata = self.displayhook(plain_text, rich_output)
-        print(formatdata['text/plain'])
+        publish_display_data(data=formatdata, metadata=metadata)
 
     def launch_viewer(self, image_file, plain_text):
         """
