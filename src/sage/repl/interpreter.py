@@ -197,7 +197,7 @@ def inline_plots(on=None):
     """
     Turn on or off the inline plots via Kitty when supported.
 
-    - ``on`` -- boolean; whether to turn on preparsing, returns the current state if None
+    - ``on`` -- boolean; whether to turn on inline plots, returns the current state if None
 
     EXAMPLES::
 
