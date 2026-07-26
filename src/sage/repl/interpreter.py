@@ -210,21 +210,17 @@ def inline_plots(on=None):
     """
     from IPython.core.getipython import get_ipython
     IP = get_ipython()
+    try:
+        from IPython.core.kitty import kitty_png_render, supports_kitty_graphics
+    except ImportError:
+        supports_kitty_graphics = False
     if on is None:
-        return hasattr(IP, 'mime_renderers') and 'image/png' in IP.mime_renderers
-    if not hasattr(IP, 'mime_renderers'):
-        print('Inline plots are not supported in the current IPython version')
+        return supports_kitty_graphics and hasattr(IP, 'mime_renderers') and 'image/png' in IP.mime_renderers
+    if not supports_kitty_graphics:
+        print('Inline plots are not supported for the current terminal and IPython version')
         return
     if on:
-        try:
-            from IPython.core.kitty import kitty_png_render, supports_kitty_graphics
-        except ImportError:
-            print('Inline plots are not supported in the current IPython version')
-            return
-        if supports_kitty_graphics:
-            IP.mime_renderers['image/png'] = kitty_png_render
-        else:
-            print('Inline plots are not supported in the current terminal')
+        IP.mime_renderers['image/png'] = kitty_png_render
     elif 'image/png' in IP.mime_renderers:
         del IP.mime_renderers['image/png']
 

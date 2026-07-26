@@ -241,9 +241,9 @@ class BackendIPythonCommandline(BackendIPython):
         elif isinstance(rich_output, OutputLatex):
             return ({'text/plain': rich_output.latex.get_str()}, {})
         if isinstance(rich_output, OutputImagePng):
-            IP = get_ipython()
-            # IPython>=9.3 supports inline plots
-            if hasattr(IP, 'mime_renderers') and 'image/png' in IP.mime_renderers:
+           # IPython>=9.3 supports inline plots
+            from sage.repl.interpreter import inline_plots
+            if inline_plots():
                 return ({'text/plain': '', 'image/png': rich_output.png.get()}, {})
             msg = self.launch_viewer(
                 rich_output.png.filename(ext='png'), plain_text.text.get_str())
