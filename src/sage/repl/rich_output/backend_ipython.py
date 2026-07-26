@@ -241,7 +241,7 @@ class BackendIPythonCommandline(BackendIPython):
         elif isinstance(rich_output, OutputLatex):
             return ({'text/plain': rich_output.latex.get_str()}, {})
         if isinstance(rich_output, OutputImagePng):
-           # IPython>=9.3 supports inline plots
+           # IPython>=9.13 supports inline plots
             from sage.repl.interpreter import inline_plots
             if inline_plots():
                 return ({'text/plain': '', 'image/png': rich_output.png.get()}, {})
