@@ -1,5 +1,5 @@
 # sage_setup: distribution = sagemath-flint
-# distutils: libraries = flint
+# distutils: libraries = FLINT_LIBRARIES
 # distutils: depends = flint/fq_nmod_mpoly.h
 
 ################################################################################
