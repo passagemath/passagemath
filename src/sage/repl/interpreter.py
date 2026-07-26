@@ -213,16 +213,21 @@ def inline_plots(on=None):
     if on is None:
         return hasattr(IP, 'mime_renderers') and 'image/png' in IP.mime_renderers
     if not hasattr(IP, 'mime_renderers'):
+        print('Inline plots are not supported in the current IPython version')
         return
     if on:
         try:
             from IPython.core.kitty import kitty_png_render, supports_kitty_graphics
         except ImportError:
+            print('Inline plots are not supported in the current IPython version')
             return
         if supports_kitty_graphics:
             IP.mime_renderers['image/png'] = kitty_png_render
+        else:
+            print('Inline plots are not supported in the current terminal')
     elif 'image/png' in IP.mime_renderers:
         del IP.mime_renderers['image/png']
+
 
 ##############################
 # Sage[Terminal]InteractiveShell
