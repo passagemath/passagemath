@@ -195,7 +195,9 @@ def preparser(on=True):
 
 def inline_plots(on=None):
     """
-    Turn on or off the inline plots via Kitty when supported.
+    Turn inline plots on or off if supported. This feature requires IPython
+    v9.13 or later running in a terminal emulator that implements the
+    `kitty graphics protocol <https://sw.kovidgoyal.net/kitty/graphics-protocol/>`__.
 
     - ``on`` -- boolean; whether to turn on inline plots, returns the current state if None
 
