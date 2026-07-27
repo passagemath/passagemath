@@ -9,6 +9,7 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-macaulay2'],
            recurse_packages=('sage', 'passagemath_macaulay2'),
+           required_modules=('flint',),
            spkgs=['macaulay2'],
            package_data={},
            py_limited_api=True)

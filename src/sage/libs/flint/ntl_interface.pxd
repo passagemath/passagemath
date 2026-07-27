@@ -1,6 +1,6 @@
 # sage_setup: distribution = sagemath-flint
 # distutils: language = c++
-# distutils: libraries = flint
+# distutils: libraries = FLINT_LIBRARIES
 # distutils: depends = flint/NTL-interface.h
 
 from sage.libs.flint.types cimport fmpz_t, fmpz_poly_t

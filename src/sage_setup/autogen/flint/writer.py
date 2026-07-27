@@ -70,7 +70,7 @@ def write_flint_cython_headers(output_dir, documentation=False):
 
         output = open(os.path.join(output_dir, prefix + '.pxd'), 'w')
 
-        print('# distutils: libraries = flint', file=output)
+        print('# distutils: libraries = FLINT_LIBRARIES', file=output)
         print('# distutils: depends = flint/{}'.format(prefix + '.h'), file=output)
         print(file=output)
         print('#' * 80, file=output)

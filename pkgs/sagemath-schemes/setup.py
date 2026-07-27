@@ -9,5 +9,6 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-schemes'],
            recurse_packages=('sage', 'passagemath_schemes'),
+           required_modules=('flint',),
            spkgs=['elliptic_curves'],
            package_data={})
