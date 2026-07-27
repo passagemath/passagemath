@@ -1794,12 +1794,12 @@ def mathics3_limit(expression, v, a, dir=None):
     EXAMPLES::
 
         sage: from sage.calculus.calculus import mathics3_limit
-        sage: mathics3_limit(sin(x)/x, x, a=0) # optional - mathics3
+        sage: mathics3_limit('Sin[x]/x', x, a=0) # optional - mathics3
         1
 
     Another simple limit::
 
-        sage: mathics3_limit(e^(-x), x, a=oo) # optional - mathics3
+        sage: mathics3_limit('E^-x', x, a=oo) # optional - mathics3
         0
     """
     from sage.interfaces.mathics3 import mathics3
@@ -1807,7 +1807,8 @@ def mathics3_limit(expression, v, a, dir=None):
     dir_minus = ['minus', '-', 'below', 'left']
     if dir is None:
         input = "Limit[%s, %s -> %s]" % tuple(
-            [repr(expr._mathics3_()) for expr in (expression, v, a)])
+            [expr if isinstance(expr, str) else repr(expr._mathics3_()) for
+             expr in (expression, v, a)])
     else:
         if dir in dir_plus:
             dir = 'Direction -> "FromAbove"'
