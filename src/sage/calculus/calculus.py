@@ -581,7 +581,7 @@ def symbolic_sum(expression, v, a, b, algorithm='maxima', hold=False):
     Same summation via Open-Source Mathics3::
 
         sage: symbolic_sum(1/(1+k^2), k, -oo, oo, algorithm='mathics3')     # optional - mathics3
-        pi/tanh(pi)  # this really comes from SymPy and is the same thing as pi*coth(pi)
+        pi/tanh(pi)
 
     An example of this summation with Giac::
 
