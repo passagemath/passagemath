@@ -9,6 +9,6 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-iml'],
            recurse_packages=('sage', 'passagemath_iml'),
-           required_modules=(),
+           required_modules=('flint',),
            spkgs=['iml'],
            package_data={})

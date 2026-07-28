@@ -9,4 +9,5 @@ from sage_setup import sage_setup
 
 sage_setup([''],
            recurse_packages=('sage', 'passagemath_standard_no_symbolics'),
+           required_modules=('flint',),
 )
