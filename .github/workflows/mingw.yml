@@ -111,7 +111,6 @@ jobs:
             ${{ contains(inputs.extra_sage_packages, 'calver')            && format('mingw-w64-{0}-python-calver',            matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'cysignals')         && format('mingw-w64-{0}-python-cysignals',         matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'cython')            && format('mingw-w64-{0}-cython',                   matrix.env) || '' }}
-            ${{ contains(inputs.extra_sage_packages, 'editables')         && format('mingw-w64-{0}-python-editables',         matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'flit_core')         && format('mingw-w64-{0}-python-flit-core',         matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'gmpy2')             && format('mingw-w64-{0}-python-gmpy2',             matrix.env) || '' }}
             ${{ contains(inputs.extra_sage_packages, 'hatchling')         && format('mingw-w64-{0}-python-hatchling',         matrix.env) || '' }}
