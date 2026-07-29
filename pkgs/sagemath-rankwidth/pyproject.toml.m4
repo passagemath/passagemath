@@ -16,7 +16,7 @@ build-backend = "setuptools.build_meta"
 name = "passagemath-rankwidth"
 description = "passagemath: Rankwidth and rank decompositions of graphs with rw"
 dependencies = [
-    'passagemath-graphs',
+    SPKG_INSTALL_REQUIRES_sagemath_graphs
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata_supports_windows.m4')dnl'
