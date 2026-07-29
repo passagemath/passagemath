@@ -1,2 +1,1 @@
-dot2tex >=2.11.3
-pyparsing <3.3
+dot2tex >=2.12.0
