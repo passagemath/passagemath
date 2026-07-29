@@ -196,7 +196,6 @@ jobs:
         calver
         cysignals
         cython
-        editables
         flit_core
         gmpy2
         hatchling
