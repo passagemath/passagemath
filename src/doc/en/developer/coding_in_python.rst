@@ -47,7 +47,7 @@ using one of two mechanisms:
   - `typing_extensions <../reference/spkg/typing_extensions>`_
     (to be used in place of ``typing`` when Python older than
     3.13 is in use and any of the features introduced after Python
-    3.10.0 are used).
+    3.13.0 are used).
 
   The Sage library declares these backport packages as conditional
   dependencies for use with Python older than 3.13 and ensures that
