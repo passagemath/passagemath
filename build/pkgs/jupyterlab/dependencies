@@ -1,4 +1,4 @@
-async_lru importlib_metadata ipykernel jinja2 jupyter_core jupyter_lsp jupyter_server jupyterlab_server notebook_shim packaging traitlets tornado tomli httpx jupyter_builder
+async_lru ipykernel jinja2 jupyter_core jupyter_lsp jupyter_server jupyterlab_server notebook_shim packaging traitlets tornado httpx jupyter_builder typing_extensions
 
 ----------
 All lines of this file are ignored except the first.
