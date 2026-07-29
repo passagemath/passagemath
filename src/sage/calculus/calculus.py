@@ -1247,7 +1247,7 @@ def limit(ex, *args, dir=None, taylor=False, algorithm='maxima', **kwargs):
       Setting this automatically uses the ``'maxima_taylor'`` algorithm.
     - ``algorithm`` -- (default: ``'maxima'``) the backend algorithm to use.
       Options include ``'maxima'``, ``'maxima_taylor'``, ``'sympy'``,
-      ``'giac'``, ``'fricas'``, ``'mathematica_free'`` ``'mathics3'``.
+      ``'giac'``, ``'fricas'``, ``'mathematica_free'``, ``'mathics3'``.
     - ``**kwargs`` -- (optional) single named parameter. Required for the
       ``limit(expr, v=a)`` syntax to specify variable and limit point.
 
