@@ -473,6 +473,8 @@ def symbolic_sum(expression, v, a, b, algorithm='maxima', hold=False):
 
       - ``'mathematica'`` -- (optional) use Mathematica
 
+      - ``'mathics3'`` -- (optional) use Mathics3
+
       - ``'giac'`` -- (optional) use Giac
 
       - ``'sympy'`` -- use SymPy
@@ -576,6 +578,11 @@ def symbolic_sum(expression, v, a, b, algorithm='maxima', hold=False):
         sage: symbolic_sum(1/(1+k^2), k, -oo, oo, algorithm='mathematica')     # optional - mathematica
         pi*coth(pi)
 
+    Same summation via Open-Source Mathics3::
+
+        sage: symbolic_sum(1/(1+k^2), k, -oo, oo, algorithm='mathics3')     # optional - mathics3
+        pi/tanh(pi)
+
     An example of this summation with Giac::
 
         sage: # needs giac
@@ -623,7 +630,7 @@ def symbolic_sum(expression, v, a, b, algorithm='maxima', hold=False):
     .. NOTE::
 
        Sage can currently only understand a subset of the output of Maxima,
-       Maple and Mathematica, so even if the chosen backend can perform
+       Maple, Mathematica, and Mathics3, so even if the chosen backend can perform
        the summation the result might not be convertible into a Sage
        expression.
     """
@@ -653,6 +660,18 @@ def symbolic_sum(expression, v, a, b, algorithm='maxima', hold=False):
             result = mathematica(sum)
         except TypeError:
             raise ValueError("Mathematica cannot make sense of: %s" % sum)
+        return result.sage()
+
+    elif str(algorithm) in ("mathics3", "Mathics3"):
+        try:
+            sum = "Sum[%s, {%s, %s, %s}]" % tuple([repr(expr._mathics3_()) for expr in (expression, v, a, b)])
+        except TypeError:
+            raise ValueError("Mathics3 cannot make sense of input")
+        from sage.interfaces.mathics3 import mathics3
+        try:
+            result = mathics3(sum)
+        except TypeError:
+            raise ValueError("Mathics3 cannot make sense of: %s" % sum)
         return result.sage()
 
     elif algorithm == 'maple':
@@ -861,6 +880,8 @@ def symbolic_product(expression, v, a, b, algorithm='maxima', hold=False):
 
       - ``'mathematica'`` -- (optional) use Mathematica
 
+      - ``'mathics3'`` -- (optional) use Mathics3
+
     - ``hold`` -- boolean (default: ``False``); if ``True``, don't evaluate
 
     EXAMPLES::
@@ -918,6 +939,18 @@ def symbolic_product(expression, v, a, b, algorithm='maxima', hold=False):
             result = mathematica(prod)
         except TypeError:
             raise ValueError("Mathematica cannot make sense of: %s" % sum)
+        return result.sage()
+
+    elif str(algorithm) in ("mathics3", "Mathics3"):
+        try:
+            prod = "Product[%s, {%s, %s, %s}]" % tuple([repr(expr._mathics3_()) for expr in (expression, v, a, b)])
+        except TypeError:
+            raise ValueError("Mathics3 cannot make sense of input")
+        from sage.interfaces.mathics3 import mathics3
+        try:
+            result = mathics3(prod)
+        except TypeError:
+            raise ValueError("Mathics3 cannot make sense of: %s" % sum)
         return result.sage()
 
     elif algorithm == 'giac':
@@ -1214,7 +1247,7 @@ def limit(ex, *args, dir=None, taylor=False, algorithm='maxima', **kwargs):
       Setting this automatically uses the ``'maxima_taylor'`` algorithm.
     - ``algorithm`` -- (default: ``'maxima'``) the backend algorithm to use.
       Options include ``'maxima'``, ``'maxima_taylor'``, ``'sympy'``,
-      ``'giac'``, ``'fricas'``, ``'mathematica_free'``.
+      ``'giac'``, ``'fricas'``, ``'mathematica_free'``, ``'mathics3'``.
     - ``**kwargs`` -- (optional) single named parameter. Required for the
       ``limit(expr, v=a)`` syntax to specify variable and limit point.
 
@@ -1679,16 +1712,18 @@ def limit(ex, *args, dir=None, taylor=False, algorithm='maxima', **kwargs):
             giac_dir_arg = 1
         elif dir in dir_minus:
             giac_dir_arg = -1
-        l = libgiac.limit(ex, giac_v, giac_a, giac_dir_arg).sage()
+        limit_result = libgiac.limit(ex, giac_v, giac_a, giac_dir_arg).sage()
     elif effective_algorithm == 'mathematica_free':
         # Ensuring mma_free_limit exists
-        l = mma_free_limit(ex, v, a, dir)
+        limit_result = mma_free_limit(ex, v, a, dir)
+    elif effective_algorithm == 'mathics3':
+        limit_result = mathics3_limit(ex, v, a, dir)
     else:
         raise ValueError("Unknown algorithm: %s" % effective_algorithm)
 
     original_parent = ex.parent()
 
-    return original_parent(l)
+    return original_parent(limit_result)
 
 
 # lim is alias for limit
@@ -1743,6 +1778,51 @@ def mma_free_limit(expression, v, a, dir=None):
         raise ValueError("no outputs found in the answer from Wolfram Alpha")
     first_output = all_outputs[0]
     return symbolic_expression_from_mathematica_string(first_output)
+
+
+def mathics3_limit(expression, v, a, dir=None):
+    """
+    Limit using Mathics3
+
+    INPUT:
+
+    - ``expression`` -- symbolic expression
+    - ``v`` -- variable
+    - ``a`` -- value where the variable goes to
+    - ``dir`` -- ``'+'``, ``'-'`` or ``None`` (default: ``None``)
+
+    EXAMPLES::
+
+        sage: from sage.calculus.calculus import mathics3_limit
+        sage: mathics3_limit('Sin[x]/x', x, a=0) # optional - mathics3
+        1
+
+    Another simple limit::
+
+        sage: mathics3_limit('E^-x', x, a=oo) # optional - mathics3
+        0
+    """
+    from sage.interfaces.mathics3 import mathics3
+    dir_plus = ['plus', '+', 'above', 'right']
+    dir_minus = ['minus', '-', 'below', 'left']
+    if dir is None:
+        input = "Limit[%s, %s -> %s]" % tuple(
+            [expr if isinstance(expr, str) else repr(expr._mathics3_()) for
+             expr in (expression, v, a)])
+    else:
+        if dir in dir_plus:
+            dir = 'Direction -> "FromAbove"'
+        elif dir in dir_minus:
+            dir = 'Direction -> "FromBelow"'
+        else:
+            raise ValueError('wrong input for limit')
+        input = "Limit[%s, %s -> %s, %s]" % tuple(
+            [repr(expr._mathics3_()) for expr in (expression, v, a, dir)])
+    try:
+        result = mathics3(input)
+    except TypeError:
+        raise ValueError("Mathics3 cannot make sense of: %s" % input)
+    return result.sage()
 
 
 ###################################################################
