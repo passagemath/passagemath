@@ -1712,18 +1712,18 @@ def limit(ex, *args, dir=None, taylor=False, algorithm='maxima', **kwargs):
             giac_dir_arg = 1
         elif dir in dir_minus:
             giac_dir_arg = -1
-        limit_result = libgiac.limit(ex, giac_v, giac_a, giac_dir_arg).sage()
+        l = libgiac.limit(ex, giac_v, giac_a, giac_dir_arg).sage()
     elif effective_algorithm == 'mathematica_free':
         # Ensuring mma_free_limit exists
-        limit_result = mma_free_limit(ex, v, a, dir)
+        l = mma_free_limit(ex, v, a, dir)
     elif effective_algorithm == 'mathics3':
-        limit_result = mathics3_limit(ex, v, a, dir)
+        l = mathics3_limit(ex, v, a, dir)
     else:
         raise ValueError("Unknown algorithm: %s" % effective_algorithm)
 
     original_parent = ex.parent()
 
-    return original_parent(limit_result)
+    return original_parent(l)
 
 
 # lim is alias for limit
