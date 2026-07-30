@@ -9,6 +9,8 @@ Defines a variety of Pygments lexers for highlighting IPython code
 License
 -------
 
+BSD-3-Clause
+
 Upstream Contact
 ----------------
 
