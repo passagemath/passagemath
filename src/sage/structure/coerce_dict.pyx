@@ -68,7 +68,7 @@ cimport cython
 from cpython.object cimport *
 from cpython.ref cimport Py_XINCREF, Py_XDECREF, Py_CLEAR
 from cpython.tuple cimport PyTuple_New
-from cpython.weakref cimport PyWeakref_GetObject, PyWeakref_GET_OBJECT
+from cpython.weakref cimport PyWeakref_GetRef
 from cysignals.memory cimport check_calloc, sig_free
 
 cdef extern from "Python.h":
@@ -86,7 +86,13 @@ cdef inline bint is_dead_keyedref(x) noexcept:
     """
     if type(x) is not KeyedRef:
         return False
-    return PyWeakref_GET_OBJECT(x) is <PyObject*>None
+    cdef PyObject* strong_ref
+    cdef int result = PyWeakref_GetRef(x, &strong_ref)
+    if result == 0:
+        return True
+    if result == 1:
+        Py_XDECREF(strong_ref)
+    return False
 
 
 # Unique sentinel to indicate a deleted cell
@@ -236,8 +242,13 @@ cdef class MonoDictEraser:
             sage: len(D) # indirect doctest
             0
         """
-        cdef MonoDict md = <MonoDict>PyWeakref_GetObject(self.D)
-        if md is None or not md.mask:
+        cdef PyObject* strong_ref
+        cdef result = PyWeakref_GetRef(self.D, &strong_ref)
+        if result != 1:
+            return
+        cdef MonoDict md = <MonoDict>strong_ref
+        Py_XDECREF(strong_ref)
+        if not md.mask:
             return
         cdef mono_cell* cursor = md.lookup(unwrap(r.key))
         cdef PyObject* r_ = <PyObject*>r
@@ -656,10 +667,13 @@ cdef class MonoDict:
         # strong reference to the key as argument of this function, so
         # we know that it's alive.
         value = <object>cursor.value
+        cdef PyObject* strong_ref
         if type(value) is KeyedRef:
-            value = <object>PyWeakref_GET_OBJECT(value)
-            if value is None:
+            result = PyWeakref_GetRef(value, &strong_ref)
+            if result != 1:
                 raise KeyError(k)
+            value = <object>strong_ref
+            Py_XDECREF(strong_ref)
         return value
 
     def __setitem__(self, k, value):
@@ -789,6 +803,7 @@ cdef class MonoDict:
         # not reading random memory. If the dictionary changes, it's not
         # guaranteed you get to see any particular entry.
         cdef size_t i = 0
+        cdef PyObject *strong_ref
         while i <= self.mask:
             cursor = &(self.table[i])
             i += 1
@@ -796,15 +811,19 @@ cdef class MonoDict:
                 key = <object>(cursor.key_weakref)
                 value = <object>(cursor.value)
                 if type(key) is KeyedRef:
-                    key = <object>PyWeakref_GET_OBJECT(key)
-                    if key is None:
+                    result = PyWeakref_GetRef(key, &strong_ref)
+                    if result != 1:
                         print("found defunct key")
                         continue
+                    key = <object>strong_ref
+                    Py_XDECREF(strong_ref)
                 if type(value) is KeyedRef:
-                    value = <object>PyWeakref_GET_OBJECT(value)
-                    if value is None:
+                    result = PyWeakref_GetRef(value, &strong_ref)
+                    if result != 1:
                         print("found defunct value")
                         continue
+                    value = <object>strong_ref
+                    Py_XDECREF(strong_ref)
                 yield (key, value)
 
     def copy(self):
@@ -963,7 +982,12 @@ cdef class TripleDictEraser:
             sage: len(T)    # indirect doctest
             0
         """
-        cdef TripleDict td = <TripleDict>PyWeakref_GetObject(self.D)
+        cdef PyObject* strong_ref
+        cdef result = PyWeakref_GetRef(self.D, &strong_ref)
+        if result != 1:
+            return
+        cdef TripleDict td = <TripleDict>strong_ref
+        Py_XDECREF(strong_ref)
         if td is None or not td.mask:
             return
         k1, k2, k3 = r.key
@@ -1317,13 +1341,16 @@ cdef class TripleDict:
 
     cdef get(self, k1, k2, k3):
         cdef triple_cell* cursor = self.lookup(<PyObject*>k1, <PyObject*>k2, <PyObject*>k3)
+        cdef PyObject *strong_ref
         if not valid(cursor.key_id1):
             raise KeyError((k1, k2, k3))
         value = <object>cursor.value
         if type(value) is KeyedRef:
-            value = <object>PyWeakref_GET_OBJECT(value)
-            if value is None:
+            result = PyWeakref_GetRef(value, &strong_ref)
+            if result != 1:
                 raise KeyError((k1, k2, k3))
+            value = <object>strong_ref
+            Py_XDECREF(strong_ref)
         return value
 
     def __setitem__(self, k, value):
@@ -1452,6 +1479,7 @@ cdef class TripleDict:
             [((1, 2, 3), None)]
         """
         cdef size_t i = 0
+        cdef PyObject *strong_ref
         while i <= self.mask:
             cursor = &(self.table[i])
             i += 1
@@ -1461,25 +1489,33 @@ cdef class TripleDict:
                 key3 = <object>(cursor.key_weakref3)
                 value = <object>(cursor.value)
                 if type(key1) is KeyedRef:
-                    key1 = <object>PyWeakref_GET_OBJECT(key1)
-                    if key1 is None:
+                    result = PyWeakref_GetRef(key1, &strong_ref)
+                    if result != 1:
                         print("found defunct key1")
                         continue
+                    key1 = <object>strong_ref
+                    Py_XDECREF(strong_ref)
                 if type(key2) is KeyedRef:
-                    key2 = <object>PyWeakref_GET_OBJECT(key2)
-                    if key2 is None:
+                    result = PyWeakref_GetRef(key2, &strong_ref)
+                    if result != 1:
                         print("found defunct key2")
                         continue
+                    key2 = <object>strong_ref
+                    Py_XDECREF(strong_ref)
                 if type(key3) is KeyedRef:
-                    key3 = <object>PyWeakref_GET_OBJECT(key3)
-                    if key3 is None:
+                    result = PyWeakref_GetRef(key3, &strong_ref)
+                    if result != 1:
                         print("found defunct key3")
                         continue
+                    key3 = <object>strong_ref
+                    Py_XDECREF(strong_ref)
                 if type(value) is KeyedRef:
-                    value = <object>PyWeakref_GET_OBJECT(value)
-                    if value is None:
+                    result = PyWeakref_GetRef(value, &strong_ref)
+                    if result != 1:
                         print("found defunct value")
                         continue
+                    value = <object>strong_ref
+                    Py_XDECREF(strong_ref)
                 yield ((key1, key2, key3), value)
 
     def copy(self):

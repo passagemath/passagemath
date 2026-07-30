@@ -124,18 +124,14 @@ from copy import deepcopy
 
 from cpython.dict cimport PyDict_SetItem, PyDict_Next
 from cpython.tuple cimport PyTuple_GET_SIZE, PyTuple_New
-from cpython.weakref cimport PyWeakref_NewRef
-from cpython.ref cimport Py_INCREF
+from cpython.weakref cimport PyWeakref_GetRef, PyWeakref_NewRef
+from cpython.ref cimport Py_INCREF, Py_XDECREF
 from sage.cpython.dict_del_by_value cimport *
 
 from sage.misc.superseded import deprecation
 
 cdef extern from "Python.h":
     PyObject* Py_None
-    # we need this redefinition because we want to be able to call
-    # PyWeakref_GetObject with borrowed references. This is the recommended
-    # strategy according to Cython/Includes/cpython/__init__.pxd
-    PyObject* PyWeakref_GetObject(PyObject *ref)
     int PyTuple_SetItem(PyObject *op, Py_ssize_t i, PyObject *newitem) except -1
 
 
@@ -207,9 +203,12 @@ cdef class WeakValueDictEraser:
             sage: len(D)  # indirect doctest
             0
         """
-        cdef WeakValueDictionary D = <object> PyWeakref_GetObject(<PyObject*> self.D)
-        if D is None:
+        cdef PyObject *strong_ref
+        result = PyWeakref_GetRef(self.D, &strong_ref)
+        if result != 1:
             return
+        cdef WeakValueDictionary D = <WeakValueDictionary>strong_ref
+        Py_XDECREF(strong_ref)
         # The situation is the following:
         # in the underlying dictionary, we have stored a KeyedRef r
         # under a key k. The attribute r.key is the hash of k.
@@ -469,10 +468,13 @@ cdef class WeakValueDictionary(dict):
             TypeError: ...mutable matrices are unhashable...
         """
         cdef PyObject* wr = PyDict_GetItemWithError(self, k)
+        cdef PyObject *strong_ref
         if wr != NULL:
-            out = PyWeakref_GetObject(wr)
-            if out != Py_None:
-                return <object>out
+            result = PyWeakref_GetRef(<object>wr, &strong_ref)
+            if result == 1:
+                out = <object>strong_ref
+                Py_XDECREF(strong_ref)
+                return out
         self._set_item(k, default)
         return default
 
@@ -591,12 +593,14 @@ cdef class WeakValueDictionary(dict):
         cdef PyObject* wr = PyDict_GetItemWithError(self, k)
         if wr == NULL:
             raise KeyError(k)
-        cdef PyObject* outref = PyWeakref_GetObject(wr)
-        if outref == Py_None:
+        cdef PyObject *strong_ref
+        result = PyWeakref_GetRef(<object>wr, &strong_ref)
+        if result != 1:
             raise KeyError(k)
         # we turn the output into a new reference before deleting the item,
         # because the deletion can cause any kind of havoc.
-        out = <object>outref
+        out = <object>strong_ref
+        Py_XDECREF(strong_ref)
         del self[k]
         return out
 
@@ -668,11 +672,13 @@ cdef class WeakValueDictionary(dict):
         cdef PyObject * wr = PyDict_GetItemWithError(self, k)
         if wr == NULL:
             return d
-        out = PyWeakref_GetObject(wr)
-        if out == Py_None:
+        cdef PyObject *strong_ref
+        result = PyWeakref_GetRef(<object>wr, &strong_ref)
+        if result != 1:
             return d
-        else:
-            return <object>out
+        out = <object>strong_ref
+        Py_XDECREF(strong_ref)
+        return out
 
     def __getitem__(self, k):
         """
@@ -707,10 +713,13 @@ cdef class WeakValueDictionary(dict):
         cdef PyObject* wr = PyDict_GetItemWithError(self, k)
         if wr == NULL:
             raise KeyError(k)
-        out = PyWeakref_GetObject(wr)
-        if out == Py_None:
+        cdef PyObject *strong_ref
+        result = PyWeakref_GetRef(<object>wr, &strong_ref)
+        if result != 1:
             raise KeyError(k)
-        return <object>out
+        out = <object>strong_ref
+        Py_XDECREF(strong_ref)
+        return out
 
     def __contains__(self, k):
         """
@@ -748,7 +757,14 @@ cdef class WeakValueDictionary(dict):
             TypeError: ...mutable matrices are unhashable...
         """
         cdef PyObject* wr = PyDict_GetItemWithError(self, k)
-        return (wr != NULL) and (PyWeakref_GetObject(wr) != Py_None)
+        if wr == NULL:
+            return False
+        cdef PyObject *strong_ref
+        result = PyWeakref_GetRef(<object>wr, &strong_ref)
+        if result != 1:
+            return False
+        Py_XDECREF(strong_ref)
+        return True
 
     # def __len__(self):
     # since GC is not deterministic, neither is the length of a WeakValueDictionary,
@@ -781,13 +797,16 @@ cdef class WeakValueDictionary(dict):
         cdef PyObject *key
         cdef PyObject *wr
         cdef Py_ssize_t pos = 0
+        cdef PyObject *strong_ref
         try:
             self._enter_iter()
             while PyDict_Next(self, &pos, &key, &wr):
                 # this check does not really say anything: by the time
                 # the key makes it to the customer, it may have already turned
                 # invalid. It's a cheap check, though.
-                if PyWeakref_GetObject(wr)!=Py_None:
+                result = PyWeakref_GetRef(<object>wr, &strong_ref)
+                if result == 1:
+                    Py_XDECREF(strong_ref)
                     yield <object>key
         finally:
             self._exit_iter()
@@ -858,13 +877,16 @@ cdef class WeakValueDictionary(dict):
         """
         cdef PyObject *key
         cdef PyObject *wr
+        cdef PyObject *strong_ref
         cdef Py_ssize_t pos = 0
         try:
             self._enter_iter()
             while PyDict_Next(self, &pos, &key, &wr):
-                out = PyWeakref_GetObject(wr)
-                if out != Py_None:
-                    yield <object>out
+                result = PyWeakref_GetRef(<object>wr, &strong_ref)
+                if result == 1:
+                    out = <object>strong_ref
+                    Py_XDECREF(strong_ref)
+                    yield out
         finally:
             self._exit_iter()
 
@@ -960,13 +982,16 @@ cdef class WeakValueDictionary(dict):
         """
         cdef PyObject *key
         cdef PyObject *wr
+        cdef PyObject *strong_ref
         cdef Py_ssize_t pos = 0
         try:
             self._enter_iter()
             while PyDict_Next(self, &pos, &key, &wr):
-                out = PyWeakref_GetObject(wr)
-                if out != Py_None:
-                    yield <object>key, <object>out
+                result = PyWeakref_GetRef(<object>wr, &strong_ref)
+                if result == 1:
+                    out = <object>strong_ref
+                    Py_XDECREF(strong_ref)
+                    yield <object>key, out
         finally:
             self._exit_iter()
 
