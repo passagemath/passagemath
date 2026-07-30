@@ -31,10 +31,12 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
-requires-python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <3.15"
+requires-python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <3.16"
 dynamic = ["version"]
 
 [project.urls]
