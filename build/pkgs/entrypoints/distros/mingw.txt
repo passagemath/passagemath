@@ -1,1 +1,0 @@
-${MINGW_PACKAGE_PREFIX}-python-entrypoints
