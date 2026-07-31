@@ -22,9 +22,26 @@ from mathics.core.atoms.numerics import Complex as Mathics3Complex
 from mathics.core.atoms.numerics import Rational as Mathics3Rational
 from mathics.core.atoms.numerics import Real as Mathics3Real
 from mathics.core.convert.python import from_python
+from mathics.core.convert.sympy import sympy_to_mathics
 from mathics.core.expression import Expression as Mathics3Expression
-from mathics.core.symbols import Symbol as Mathics3Symbol
-from mathics.core.symbols import SymbolDivide, SymbolPlus, SymbolPower, SymbolTimes
+from mathics.core.list import ListExpression
+from mathics.core.symbols import (
+    Symbol as Mathics3Symbol,
+    SymbolDivide,
+    SymbolPlus,
+    SymbolPower,
+    SymbolTimes,
+)
+from mathics.core.systemsymbols import (
+    SymbolEqual,
+    SymbolFunction,
+    SymbolGreater,
+    SymbolGreaterEqual,
+    SymbolLess,
+    SymbolLessEqual,
+    SymbolQuotient,
+    SymbolUnequal,
+)
 from sage.all import RDF, ZZ, Rational
 from sage.interfaces.mathics3 import MATHICS3_TO_SAGE_CONSTANT, Mathics3
 from sage.rings.complex_double import ComplexDoubleElement
@@ -37,6 +54,15 @@ from sage.symbolic.operators import arithmetic_operators
 
 SAGE_CONSTANT_TO_MATHICS3 = {
     value: key for key, value in MATHICS3_TO_SAGE_CONSTANT.items()
+}
+
+SAGE_OPS_TO_MATHICS3 = {
+    eq: SymbolEqual,
+    ne: SymbolUnequal,
+    gt: SymbolGreater,
+    lt: SymbolLess,
+    ge: SymbolGreaterEqual,
+    le: SymbolLessEqual,
 }
 
 
@@ -82,15 +108,42 @@ class Mathics3Converter(Converter):
             sage: f(x, y) = x^2 + y^2; f
             (x, y) |--> x^2 + y^2
             sage: s(f)
-            ??? Expression? Lambda((x, y), x**2 + y**2)
+            Function[{x, y}, x^ + y^2]
         """
-        if isinstance(ex, Expression) and ex.is_callable():
-            # FIXME should get the function name. And then run in Mathics3
-            # f[x, y] := f(x, y) = x^2 + y^2
-            elements = [self.convert_object_to_mathics3(arg) for arg in ex.arguments()]
-            # FIXME: not right.
-            return Mathics3Expression(elements[0], *elements[1:])
-        return super().__call__(ex)
+        if isinstance(ex, Expression):
+            breakpoint()
+            if ex.is_callable():
+                # FIXME should get the function name. And then run in Mathics3
+                # f[x, y] := f(x, y) = x^2 + y^2
+                arguments = ListExpression(
+                        *[self.convert_object_to_mathics3(argument) for argument in ex.arguments()]
+                        )
+                operator = self.convert_object_to_mathics3(ex.operator())
+                return Mathics3Expression(SymbolFunction, arguments, operator)
+            elif (
+                (operator := ex.operator())
+                and (operands := ex.operands())
+                and (sympy_func := ex._sympy_())
+            ):
+                if not sympy_to_mathics:
+                    from mathics.core.load_builtin import import_and_load_builtins
+
+                    import_and_load_builtins()
+
+                sympy_name = sympy_func.__class__.__name__
+                if not sympy_name:
+                    raise NotImplementedError
+                mathics3_class = sympy_to_mathics.get(sympy_name)
+                if not mathics3_class:
+                    raise NotImplementedError
+                mathics3_name = mathics3_class.__class__.__name__
+                elements = [self.convert_object_to_mathics3(arg) for arg in operands]
+                return Mathics3Expression(Mathics3Symbol(mathics3_name), *elements)
+
+        breakpoint()
+        if (value := self.convert_object_to_mathics3(ex)) is not None:
+            return value
+        raise NotImplementedError
 
     def pyobject(self, ex, obj):
         """
@@ -148,6 +201,8 @@ class Mathics3Converter(Converter):
                 )
             case "/":
                 mathics3_expr = Mathics3Expression(SymbolDivide, *elements)
+            case "//":
+                mathics3_expr = Mathics3Expression(SymbolQuotient, *elements)
             case "^":
                 mathics3_expr = Mathics3Expression(SymbolPower, *elements)
             case _:
@@ -179,7 +234,7 @@ class Mathics3Converter(Converter):
             )
         elif isinstance(obj, Constant):
             return SAGE_CONSTANT_TO_MATHICS3.get(obj.expression(), obj)
-        elif obj.is_symbol():
+        elif hasattr(obj, "is_symbol") and obj.is_symbol():
             return self.symbol(obj)
 
     def derivative(self, ex, operator):
@@ -284,21 +339,20 @@ class Mathics3Converter(Converter):
         EXAMPLES::
 
             sage: import operator
-            sage: from sage.symbolic.expression_conversions import SympyConverter
-            sage: s = SympyConverter()
+            sage: from sage.symbolic.expression_conversions import Mathics3Converter
+            sage: s = Mathics3Converter()
             sage: s.relation(x == 3, operator.eq)
-            Eq(x, 3)
+            <Expression: <Symbol: System`Equal>[<Symbol: System`x>, <Integer: 3>]>Eq(x, 3)
             sage: s.relation(pi < 3, operator.lt)
-            pi < 3
+            <Expression: <Symbol: System`Less>[<Symbol: System`Pi>, <Integer: 3>]>
             sage: s.relation(x != pi, operator.ne)
-            Ne(x, pi)
+            <Expression: <Symbol: System`Unequal>[<Symbol: System`x>, <Symbol: System`Pi>]>
             sage: s.relation(x > 0, operator.gt)
-            x > 0
+            <Expression: <Symbol: System`Greater>[<Symbol: System`x>, <Integer: 0>]>
         """
-        from sympy import Eq, Ge, Gt, Le, Lt, Ne
-
-        ops = {eq: Eq, ne: Ne, gt: Gt, lt: Lt, ge: Ge, le: Le}
-        return ops.get(op)(self(ex.lhs()), self(ex.rhs()), evaluate=False)
+        lhs = self(ex.lhs())
+        rhs = self(ex.rhs())
+        return Mathics3Expression(SAGE_OPS_TO_MATHICS3[op], lhs, rhs)
 
     def composition(self, ex, operator):
         """
@@ -372,6 +426,7 @@ class Mathics3Converter(Converter):
             sage: hypergeometric((a,b,),(c,),d)._sympy_()
             hyper((a, b), (c,), d)
         """
+        breakpoint()
         return tuple(ex.operands())
 
 
