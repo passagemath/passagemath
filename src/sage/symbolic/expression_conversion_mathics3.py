@@ -15,7 +15,9 @@ Conversion of symbolic expressions to Mathics3
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
-from operator import add, eq, ge, gt, le, lt, mul, ne, neg, pow, truediv
+from operator import eq, ge, gt, le, lt, ne
+# Unused operators:
+# from operator import add, mul, neg, pow, truediv
 
 from mathics.core.atoms import IntegerM1
 from mathics.core.atoms.numerics import Complex as Mathics3Complex
@@ -56,7 +58,7 @@ SAGE_CONSTANT_TO_MATHICS3 = {
     value: key for key, value in MATHICS3_TO_SAGE_CONSTANT.items()
 }
 
-SAGE_OPS_TO_MATHICS3 = {
+SAGE_RELATION_TO_MATHICS3_SYMBOL = {
     eq: SymbolEqual,
     ne: SymbolUnequal,
     gt: SymbolGreater,
@@ -94,7 +96,7 @@ class Mathics3Converter(Converter):
         TESTS::
 
             sage: from sage.symbolic.expression_conversions import Mathics3Converter
-            sage: s = Mathics3Converter()  # indirect doctest
+            sage: m3 = Mathics3Converter()  # indirect doctest
             sage: TestSuite(s).run(skip='_test_pickling')
         """
         self.mathics3 = Mathics3()
@@ -104,10 +106,10 @@ class Mathics3Converter(Converter):
         EXAMPLES::
 
             sage: from sage.symbolic.expression_conversions import Mathics3Converter
-            sage: s = Mathics3Converter()  # indirect doctest
+            sage: m3 = Mathics3Converter()  # indirect doctest
             sage: f(x, y) = x^2 + y^2; f
             (x, y) |--> x^2 + y^2
-            sage: s(f)
+            sage: m(f)
             Function[{x, y}, x^ + y^2]
         """
         if isinstance(ex, Expression):
@@ -115,16 +117,17 @@ class Mathics3Converter(Converter):
             if ex.is_callable():
                 # FIXME should get the function name. And then run in Mathics3
                 # f[x, y] := f(x, y) = x^2 + y^2
-                arguments = ListExpression(
-                        *[self.convert_object_to_mathics3(argument) for argument in ex.arguments()]
-                        )
+                arguments = self.tuple(ex)
                 operator = self.convert_object_to_mathics3(ex.operator())
                 return Mathics3Expression(SymbolFunction, arguments, operator)
             elif (
-                (operator := ex.operator())
+                (operation := ex.operator())
                 and (operands := ex.operands())
                 and (sympy_func := ex._sympy_())
             ):
+                # FIXME: Figure out how to get function body.
+                # When this is corrected, it may be similar to
+                # composition. So use that when possible after correction.
                 if not sympy_to_mathics:
                     from mathics.core.load_builtin import import_and_load_builtins
 
@@ -150,24 +153,24 @@ class Mathics3Converter(Converter):
         EXAMPLES::
 
             sage: from sage.symbolic.expression_conversions import Mathics3Converter
-            sage: s = Mathics3Converter()
+            sage: m3 = Mathics3Converter()
             sage: x = SR(2)
-            sage: s.pyobject(x, x.pyobject())
+            sage: m3.pyobject(x, x.pyobject())
             <Integer: 2>
             sage: type(_)
             <class 'mathics.core.atoms.numerics.Integer'>
             sage: x = SR(2.0)
-            sage: s.pyobject(x, x.pyobject())
+            sage: m3.pyobject(x, x.pyobject())
             <MachineReal: 2.0>
             sage: type(_)
             <class 'mathics.core.atoms.numerics.MachineReal'>>
             sage: x = SR(2/3)
-            sage: s.pyobject(x, x.pyobject())
+            sage: m3.pyobject(x, x.pyobject())
             <Rational: 2/3>
             sage: type(_)
             <class 'mathics.core.atoms.numerics.Rational'>
             sage: x = SR(2 + 3j))
-            sage: s.pyobject(x, x.pyobject())
+            sage: m3.pyobject(x, x.pyobject())
             <Complex: 2.0 + 3.0*I>
             sage: type(_)
             <class 'mathics.core.atoms.numerics.Complex'>
@@ -182,9 +185,9 @@ class Mathics3Converter(Converter):
         EXAMPLES::
 
             sage: from sage.symbolic.expression_conversions import Mathics3Converter
-            sage: s = Mathics3Converter()
+            sage: m3 = Mathics3Converter()
             sage: f = x + 2
-            sage: s.arithmetic(f, f.operator())
+            sage: m3.arithmetic(f, f.operator())
             <Expression: <Symbol: System`Plus>[<Integer: 2>, <Symbol: System`x>]>
         """
         operator = arithmetic_operators[operator]
@@ -209,6 +212,43 @@ class Mathics3Converter(Converter):
                 raise NotImplementedError
         value = self.evaluate(mathics3_expr)
         return value
+
+    def composition(self, ex, operator):
+        """
+        EXAMPLES::
+
+            sage: from sage.symbolic.expression_conversions import Mathics3Converter
+            sage: m3 = Mathics3Converter()  # indirect doctest
+            sage: f = sin(2)
+            sage: m3.composition(f, f.operator())
+            <Expression: <Symbol: System`Sin>[<Integer: 2>]>
+            sage: type(_)
+            <class 'mathics.core.expression.Expression'>
+            sage: f = arcsin(2)
+            sage: m3.composition(f, f.operator())
+            asin(2)
+        """
+        if not (sympy_func := ex._sympy_()):
+            raise NotImplementedError
+        if not sympy_to_mathics:
+            from mathics.core.load_builtin import import_and_load_builtins
+
+            import_and_load_builtins()
+
+        # Convert via SymPy. However in the future, we can contemplate
+        # Having Sage to Mathics3 correspondences listed, or for those
+        # that do not have Sage to SymPy correspondences.
+        sympy_name = sympy_func.__class__.__name__
+        if not sympy_name:
+            raise NotImplementedError
+        mathics3_class = sympy_to_mathics.get(sympy_name)
+        if not mathics3_class:
+            raise NotImplementedError
+        mathics3_name = mathics3_class.__class__.__name__
+
+        operands = ex.operands()
+        elements = [self.convert_object_to_mathics3(arg) for arg in operands]
+        return Mathics3Expression(Mathics3Symbol(mathics3_name), *elements)
 
     def convert_object_to_mathics3(self, obj):
 
@@ -340,56 +380,27 @@ class Mathics3Converter(Converter):
 
             sage: import operator
             sage: from sage.symbolic.expression_conversions import Mathics3Converter
-            sage: s = Mathics3Converter()
-            sage: s.relation(x == 3, operator.eq)
+            sage: m3 = Mathics3Converter()
+            sage: m3.relation(x == 3, operator.eq)
             <Expression: <Symbol: System`Equal>[<Symbol: System`x>, <Integer: 3>]>Eq(x, 3)
-            sage: s.relation(pi < 3, operator.lt)
+            sage: m3.relation(pi < 3, operator.lt)
             <Expression: <Symbol: System`Less>[<Symbol: System`Pi>, <Integer: 3>]>
-            sage: s.relation(x != pi, operator.ne)
+            sage: m3.relation(x != pi, operator.ne)
             <Expression: <Symbol: System`Unequal>[<Symbol: System`x>, <Symbol: System`Pi>]>
-            sage: s.relation(x > 0, operator.gt)
+            sage: m3.relation(x > 0, operator.gt)
             <Expression: <Symbol: System`Greater>[<Symbol: System`x>, <Integer: 0>]>
         """
         lhs = self(ex.lhs())
         rhs = self(ex.rhs())
-        return Mathics3Expression(SAGE_OPS_TO_MATHICS3[op], lhs, rhs)
-
-    def composition(self, ex, operator):
-        """
-        EXAMPLES::
-
-            sage: from sage.symbolic.expression_conversions import Mathics3Converter
-            sage: s = Mathics3Converter()  # indirect doctest
-            sage: f = sin(2)
-            sage: s.composition(f, f.operator())
-            sin(2)
-            sage: type(_)
-            sin
-            sage: f = arcsin(2)
-            sage: s.composition(f, f.operator())
-            asin(2)
-        """
-        g = ex.operands()
-        try:
-            return operator._sympy_(*g)
-        except (AttributeError, TypeError):
-            pass
-        f = operator._sympy_init_()
-        import sympy
-
-        f_sympy = getattr(sympy, f, None)
-        if f_sympy:
-            return f_sympy(*sympy.sympify(g, evaluate=False))
-        else:
-            return sympy.Function(str(f))(*g, evaluate=False)
+        return Mathics3Expression(SAGE_RELATION_TO_MATHICS3_SYMBOL[op], lhs, rhs)
 
     def symbol(self, ex):
         """
         EXAMPLES::
 
             sage: from sage.symbolic.expression_conversions import Mathics3Converter
-            sage: s = Mathics3Converter()  # indirect doctest
-            sage: s.symbol(x)
+            sage: m3 = Mathics3Converter()  # indirect doctest
+            sage: m3.symbol(x)
             <Symbol: System`x>
             sage: type(_)
             <class 'mathics.core.symbols.Symbol'>
@@ -399,35 +410,39 @@ class Mathics3Converter(Converter):
 
     def tuple(self, ex):
         """
-        Conversion of tuples.
+        Conversion of tuples to Mathics3 ListExpressions.
 
         EXAMPLES::
 
             sage: t = SR._force_pyobject((3, 4, e^x))
-            sage: t._sympy_()
+            sage: t._mathics3_()
             (3, 4, e^x)
             sage: t = SR._force_pyobject((cos(x),))
-            sage: t._sympy_()
+            sage: t._mathics3_()
             (cos(x),)
 
         TESTS::
 
-            sage: from sage.symbolic.expression_conversions import sympy_converter
+            sage: from sage.symbolic.expression_conversions import mathics3_converter
             sage: F = hypergeometric([1/3,2/3],[1,1],x)
-            sage: F._sympy_()
+            sage: F._mathics3_()
             hyper((1/3, 2/3), (1, 1), x)
 
             sage: F = hypergeometric([1/3,2/3],[1],x)
-            sage: F._sympy_()
+            sage: F._mathics3_()
             hyper((1/3, 2/3), (1,), x)
 
             sage: var('a,b,c,d')
             (a, b, c, d)
-            sage: hypergeometric((a,b,),(c,),d)._sympy_()
+            sage: hypergeometric((a,b,),(c,),d)._mathics3_()
             hyper((a, b), (c,), d)
         """
-        breakpoint()
-        return tuple(ex.operands())
+        return ListExpression(
+            *[
+                self.convert_object_to_mathics3(argument)
+                for argument in ex.arguments()
+             ]
+            )
 
 
 def sage_to_python_int(val):
