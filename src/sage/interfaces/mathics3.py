@@ -401,6 +401,7 @@ correctly (:issue:`18888`, :issue:`28907`)::
 ##############################################################################
 
 from typing import Final
+import operator
 import os
 
 import sage.symbolic.expression
@@ -760,6 +761,30 @@ optional Sage package Mathics3 installed.
         """
         return ':='
 
+    def _relation_symbols(self):
+        """
+        Return a dictionary with operators as the keys and their
+        string representation as the values.
+
+        EXAMPLES::
+
+            sage: import operator
+            sage: symbols = mathematica._relation_symbols()
+            sage: symbols[operator.eq]
+            '=='
+        """
+        return {
+            operator.eq: "==",
+            operator.ge: ">=",
+            operator.gt: ">=",
+            operator.is_: "===",
+            operator.is_not: "=!=",
+            operator.le: "<=",
+            operator.lt: "<",
+            operator.ne: "!=",
+            operator.not_: "!",
+            }
+
     def _exponent_symbol(self):
         r"""
         Return the symbol used to denote the exponent of a number in
@@ -768,7 +793,7 @@ optional Sage package Mathics3 installed.
         EXAMPLES::
 
             sage: mathics3._exponent_symbol()
-            '*^'
+            '^'
 
         ::
 
@@ -778,7 +803,7 @@ optional Sage package Mathics3 installed.
             sage: repr(bignum).replace(mathics3._exponent_symbol(), 'e').strip()
             '1.×10^80'
         """
-        return '*^'
+        return '^'
 
     def _object_class(self):
         r"""
@@ -1407,7 +1432,6 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
 
 # An instance
 mathics3 = Mathics3()
-
 
 def reduce_load(X):
     """

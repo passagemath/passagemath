@@ -416,10 +416,10 @@ class Mathics3Converter(Converter):
 
             sage: t = SR._force_pyobject((3, 4, e^x))
             sage: t._mathics3_()
-            (3, 4, e^x)
+            {3, 4, e^x}
             sage: t = SR._force_pyobject((cos(x),))
             sage: t._mathics3_()
-            (cos(x),)
+            {cos(x)}
 
         TESTS::
 
@@ -430,12 +430,12 @@ class Mathics3Converter(Converter):
 
             sage: F = hypergeometric([1/3,2/3],[1],x)
             sage: F._mathics3_()
-            hyper((1/3, 2/3), (1,), x)
+            hyper({1/3, 2/3}, {1}, x)
 
             sage: var('a,b,c,d')
             (a, b, c, d)
             sage: hypergeometric((a,b,),(c,),d)._mathics3_()
-            hyper((a, b), (c,), d)
+            hyper({a, b}, {c}, d)
         """
         return ListExpression(
             *[
