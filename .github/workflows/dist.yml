@@ -379,8 +379,9 @@ jobs:
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
+      CIBW_ENABLE: cpython-prerelease
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.14, <3.15' || '>=3.11, <3.15' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.15, <3.16' || '>=3.11, <3.16' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals ; python_version>='3.14'" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
@@ -593,7 +594,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_planarity
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-rankwidth
         id:   sagemath-rankwidth
@@ -601,7 +602,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_rankwidth
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-tachyon
         id:   sagemath-tachyon
@@ -609,7 +610,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_tachyon
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-cddlib
         id:   sagemath-cddlib
@@ -617,7 +618,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cddlib
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-latte-4ti2
         id:   sagemath-latte-4ti2
@@ -625,7 +626,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_latte_4ti2
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-nauty
         id:   sagemath-nauty
@@ -633,7 +634,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_nauty
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-libecm
         id:   sagemath-libecm
@@ -647,7 +648,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_libbraiding
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-gap-pkg-caratinterface
         id:   sagemath-gap-pkg-caratinterface
@@ -655,7 +656,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_caratinterface
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-gap-pkg-cddinterface
         id:   sagemath-gap-pkg-cddinterface
@@ -663,7 +664,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_cddinterface
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-gap-pkg-curlinterface
         id:   sagemath-gap-pkg-curlinterface
@@ -671,7 +672,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_curlinterface
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-gap-pkg-float
         id:   sagemath-gap-pkg-float
@@ -679,7 +680,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_float
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-gap-pkg-normalizinterface
         id:   sagemath-gap-pkg-normalizinterface
@@ -687,7 +688,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_normalizinterface
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-gap-pkg-semigroups
         id:   sagemath-gap-pkg-semigroups
@@ -695,7 +696,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap_pkg_semigroups
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-cliquer
         id:   sagemath-cliquer
@@ -703,7 +704,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_cliquer
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-rubiks
         id:   sagemath-rubiks
@@ -711,7 +712,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_rubiks
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-plantri
         id:   sagemath-plantri
@@ -719,7 +720,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_plantri
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-buckygen
         id:   sagemath-buckygen
@@ -727,7 +728,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_buckygen
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-benzene
         id:   sagemath-benzene
@@ -735,7 +736,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_benzene
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-glucose
         id:   sagemath-glucose
@@ -743,7 +744,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_glucose
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-kissat
         id:   sagemath-kissat
@@ -751,7 +752,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_kissat
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-tdlib
         id:   sagemath-tdlib
@@ -759,7 +760,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_tdlib
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-bliss
         id:   sagemath-bliss
@@ -767,7 +768,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_bliss
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-mcqd
         id:   sagemath-mcqd
@@ -775,7 +776,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_mcqd
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-coxeter3
         id:   sagemath-coxeter3
@@ -789,7 +790,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_lrslib
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-palp
         id:   sagemath-palp
@@ -797,7 +798,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_palp
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-brial
         id:   sagemath-brial
@@ -857,8 +858,9 @@ jobs:
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
+      CIBW_ENABLE: cpython-prerelease
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.14, <3.15' || '>=3.11, <3.15' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.15, <3.16' || '>=3.11, <3.16' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals ; python_version>='3.14'" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
@@ -1083,7 +1085,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_sympow
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-gap
         id:   sagemath-gap
@@ -1175,8 +1177,9 @@ jobs:
       CIBW_BUILD: "*${{ matrix.build }}*"
       #
       CIBW_ARCHS: ${{ matrix.arch }}
+      CIBW_ENABLE: cpython-prerelease
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.14, <3.15' || '>=3.11, <3.15' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.15, <3.16' || '>=3.11, <3.16' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals ; python_version>='3.14'" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
@@ -1402,7 +1405,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_msolve
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-kenzo
         id:   sagemath-kenzo
@@ -1410,7 +1413,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_kenzo
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       # Broken on some platforms
 
@@ -1420,7 +1423,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_macaulay2
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-frobby
         id:   sagemath-frobby
@@ -1428,7 +1431,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_frobby
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-gfan
         id:   sagemath-gfan
@@ -1436,7 +1439,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gfan
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-qepcad
         id:   sagemath-qepcad
@@ -1444,7 +1447,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_qepcad
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
       - name: sagemath-topcom
         id:   sagemath-topcom
@@ -1452,7 +1455,7 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_topcom
         env:
-          CIBW_SKIP: "cp313-* cp314-*"
+          CIBW_SKIP: "cp313-* cp314-* cp315-*"
 
 
       - name: Upload wheels artifact
