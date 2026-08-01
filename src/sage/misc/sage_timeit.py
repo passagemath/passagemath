@@ -58,7 +58,7 @@ class SageTimeitResult:
     If the third argument is not a Python integer, a :exc:`TypeError` is raised::
 
         sage: SageTimeitResult( (1, 2, 3, 4, 's') )
-        <repr(<sage.misc.sage_timeit.SageTimeitResult at 0x...>) failed: TypeError: * wants int>
+        <repr(<sage.misc.sage_timeit.SageTimeitResult at 0x...>) failed: TypeError: * ... int...>
     """
     def __init__(self, stats, series=None):
         r"""
