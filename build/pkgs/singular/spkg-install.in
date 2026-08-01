@@ -56,9 +56,19 @@ build_singular()
     fi
 }
 
-
-# Actually run all the functions defined above
-for i in config build_singular; do
-    echo "############### Singular stage $i ###############"
-    cd "$SRC" && $i
-done
+if [ -n "$MSYSTEM" ]; then
+    # Only build factory on MinGW
+    for a in "$SAGE_ROOT"/subprojects/packagefiles/singular/*.patch; do
+        patch -p1 < "$a"
+    done
+    (cd "$SAGE_ROOT"/subprojects/packagefiles/singular && tar cf - .) | tar xf -
+    meson setup build --prefix="$SAGE_LOCAL"
+    meson compile -C build
+    meson install -C build
+else
+    # Full build of Singular
+    for i in config build_singular; do
+        echo "############### Singular stage $i ###############"
+        cd "$SRC" && $i
+    done
+fi
