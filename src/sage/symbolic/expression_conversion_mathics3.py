@@ -307,15 +307,15 @@ class Mathics3Converter(Converter):
 
         TESTS::
 
-            sage: var('x','y')
-            (x, y)
-
-            sage: f_sage = function('f_sage')(x, y)
-            sage: f_sympy = f_sage._sympy_()
-
-            sage: df_sage = f_sage.diff(x, 2, y, 1); df_sage
+            sage: var('x','y','z')
+            (x, y, z)
+            sage: f = function("F")
+            f = function("F"))
+            sage: f(x)._mathics3_()
+            F[x]
+            sage: diff(f(x,y,z), x, z, x)._mathics3_()
             diff(f_sage(x, y), x, x, y)
-            sage: df_sympy = df_sage._sympy_(); df_sympy
+            sage: df_mathics3 = df_sage._mathics3_(); df_mathics3
             Derivative(f_sage(x, y), (x, 2), y)
             sage: df_sympy == f_sympy.diff(x, 2, y, 1)
             True
@@ -358,7 +358,7 @@ class Mathics3Converter(Converter):
         # retrieve order
         order = operator._parameter_set
         # arguments
-        _args = [a._sympy_() for a in ex.operands()]
+        _args = [a._mathics3_() for a in ex.operands()]
 
         # when differentiating by a variable that occurs multiple times,
         # substitute it by a dummy variable

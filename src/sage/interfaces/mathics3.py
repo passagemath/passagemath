@@ -433,7 +433,8 @@ from sage.interfaces.interface import Interface, InterfaceElement, InterfaceFunc
 from sage.interfaces.tab_completion import ExtraTabCompletion
 from sage.misc.instancedoc import instancedoc
 from sage.structure.richcmp import rich_to_bool
-# from sage.symbolic.expression import register_symbol
+from sage.misc.lazy_import import lazy_import
+lazy_import('sage.symbolic.expression', ['symbol_table', 'register_symbol'])
 
 # register_symbol(e, {'mathics3': 'E'})
 
@@ -576,6 +577,10 @@ class Mathics3(Interface):
             from sympy import Symbol
             Symbol._sage_ = _mathics3_sympysage_symbol
 
+            # register translations between SymbolicRing and Mathics3 Expression
+            self._register_symbols()
+
+
     def _read_in_file_command(self, filename):
         r"""
         EXAMPLES::
@@ -590,6 +595,94 @@ class Mathics3(Interface):
             0
         """
         return '<<"%s"' % filename
+
+    @staticmethod
+    def _register_symbols():
+        """
+        Register translations between from a Mathics3 ``Expression`` elements of the
+        Sage ``SymbolicRing`` `.
+
+        This table is used to convert *from* Mathics3 systems back to Sage.
+
+        This method is called from :meth:`_start`, to work around a
+        circular import problem involving ``pi``.
+        """
+        from sage.calculus.functional import diff
+        from sage.functions.log import dilog, lambert_w
+        from sage.functions.trig import sin, cos, tan, cot, sec, csc, asin
+        from sage.functions.hyperbolic import tanh, sinh, cosh, coth, sech, csch
+        from sage.functions.other import abs
+        from sage.functions.gamma import gamma
+        from sage.functions.special import elliptic_e, elliptic_f
+        from sage.misc.functional import symbolic_sum, symbolic_prod
+        from sage.rings.infinity import infinity
+
+        register_symbol(pi, {'mathics3': 'Pi'}, 0)
+        register_symbol(e, {'mathics3': 'E'}, 0)
+        register_symbol(lambda: infinity, {'mathics3': 'Infinity'}, 0)
+        register_symbol(lambda: -infinity, {'mathics3': 'DirectedInfinity[-1]'}, 0)
+        register_symbol(cos, {'mathics3': 'Cos'})
+        register_symbol(sin, {'mathics3': 'Sin'})
+        register_symbol(tan, {'mathics3': 'Tan'})
+        register_symbol(cot, {'mathics3': 'Cot'})
+        register_symbol(sec, {'mathics3': 'Sec'})
+        register_symbol(csc, {'mathics3': 'Csc'})
+        register_symbol(tanh, {'mathics3': 'Tanh'})
+        register_symbol(sinh, {'mathics3': 'Sinh'})
+        register_symbol(cosh, {'mathics3': 'Cosh'})
+        register_symbol(coth, {'mathics3': 'Coth'})
+        register_symbol(sech, {'mathics3': 'Sech'})
+        register_symbol(csch, {'mathics3': 'Csch'})
+        register_symbol(gamma, {'mathics3': 'Gamma'}, 1)
+        register_symbol(gamma, {'mathics3': 'Gamma'}, 2)
+        register_symbol(lambda x, y: elliptic_e(asin(x), y), {'mathics3': 'EllipticE'}, 2)
+        register_symbol(lambda x, y: elliptic_f(asin(x), y), {'mathics3': 'EllipticF'}, 2)
+        register_symbol(lambda x, y: x + y, {'mathics3': '+'}, 2)
+        register_symbol(lambda x, y: x - y, {'mathics3': '-'}, 2)
+        register_symbol(lambda x, y: x * y, {'mathics3': '*'}, 2)
+        register_symbol(lambda x, y: x / y, {'mathics3': '/'}, 2)
+        register_symbol(lambda x, y: x ** y, {'mathics3': '^'}, 2)
+        register_symbol(lambda f, x: diff(f, x), {'mathics3': 'D'}, 2)
+        register_symbol(lambda x, y: x + y * I, {'mathics3': 'Complex'}, 2)
+        register_symbol(lambda x: dilog(1 - x), {'mathics3': 'PolyLog'}, 1)
+        register_symbol(lambda z: lambert_w(z), {'mathics3': 'ProductLog'}, 1)
+        register_symbol(abs, {'mathics3': 'Abs'}, 1)
+
+        # # construct occurs in the InputForm of hypergeometricF
+        # register_symbol(lambda *x: x, {'mathics3': 'construct'}, -1)
+        # # the following is a hack to deal with
+        # # integrate(sin((x^2+1)/x),x)::INFORM giving
+        # # (integral (sin (/ (+ (^ x 2) 1) x)) (:: x Symbol))
+        # register_symbol(lambda x, y: x, {'mathics3': '::'}, 2)
+
+        # def _convert_eval(f, a, b):
+        #     # it might be that FriCAS also returns a two-argument
+        #     # eval, where the second argument is a list of equations,
+        #     # in which case this function needs to be adapted
+        #     return f.subs({a: b})
+
+        # register_symbol(_convert_eval, {'mathics3': 'eval'}, 3)
+
+        def _convert_sum(x, y):
+            v, seg = y.operands()
+            a, b = seg.operands()
+            return symbolic_sum(x, v, a, b)
+
+        def _convert_prod(x, y):
+            v, seg = y.operands()
+            a, b = seg.operands()
+            return symbolic_prod(x, v, a, b)
+
+        register_symbol(_convert_sum, {'mathics3': 'Plus'}, 2)
+        register_symbol(_convert_prod, {'mathics3': 'Times'}, 2)
+
+        def explicitly_not_implemented(*args):
+            raise NotImplementedError("the translation of the Mathics3 Expression '%s' to sage is not yet implemented" % args)
+
+        # register_symbol(lambda *args: explicitly_not_implemented("rootOfADE"), {'mathics3': 'rootOfADE'}, 2) # to be removed once we fully on FriCAS 1.3.10+
+        # register_symbol(lambda *args: explicitly_not_implemented("FEseries"), {'mathics3': 'FEseries'}, 2)
+        # register_symbol(lambda *args: explicitly_not_implemented("rootOfRec"), {'mathics3': 'rootOfRec'}, 2)
+
 
     def _install_hints(self):
         """
