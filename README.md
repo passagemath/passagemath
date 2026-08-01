@@ -119,11 +119,11 @@ Subsystem for Linux (WSL) or virtualization.
 | [10.6.x](https://github.com/passagemath/passagemath/tree/passagemath-10.6.x) | 3.10–3.14 | GCC 9–15, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | old stable <br>EOL 2026-10 |
 |                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
 |                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
-| 10.8.x <br>(main)                                                            | 3.11–3.14 | GCC 9–16, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable                     |
+| [10.8.x](https://github.com/passagemath/passagemath/tree/passagemath-10.8.x) | 3.11–3.14 | GCC 9–16, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable                     |
 |                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
 |                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
 |                                                                              |           | Emscripten        | any                         | Wasm32        | *partial functionality*    |
-| 10.10.x                                                                      | 3.12–3.15 |                   |                             |               | planned                    |
+| 10.10.x <br>(main)                                                           | 3.12–3.15 |                   |                             |               | development                |
 
 Detailed information on supported platforms for a specific version of passagemath
 can be found in the
