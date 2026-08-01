@@ -13,6 +13,7 @@
 # ****************************************************************************
 
 import atexit
+import sys
 
 
 __all__ = ['restore_atexit']
@@ -133,15 +134,17 @@ cdef class restore_atexit:
 
     def __enter__(self):
         self._exithandlers = _get_exithandlers()
-        if self._clear:
-            _clear_exithandlers()
+        if sys.version_info < (3, 15):
+            if self._clear:
+                _clear_exithandlers()
 
         return self
 
     def __exit__(self, *exc):
-        if self._run:
-            atexit._run_exitfuncs()
-        _set_exithandlers(self._exithandlers)
+        if sys.version_info < (3, 15):
+            if self._run:
+                atexit._run_exitfuncs()
+            _set_exithandlers(self._exithandlers)
 
 from cpython.ref cimport PyObject
 import sys
