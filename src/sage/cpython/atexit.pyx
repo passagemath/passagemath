@@ -13,6 +13,7 @@
 # ****************************************************************************
 
 import atexit
+import sys
 
 
 __all__ = ['restore_atexit']
@@ -133,15 +134,17 @@ cdef class restore_atexit:
 
     def __enter__(self):
         self._exithandlers = _get_exithandlers()
-        if self._clear:
-            _clear_exithandlers()
+        if sys.version_info < (3, 15):
+            if self._clear:
+                _clear_exithandlers()
 
         return self
 
     def __exit__(self, *exc):
-        if self._run:
-            atexit._run_exitfuncs()
-        _set_exithandlers(self._exithandlers)
+        if sys.version_info < (3, 15):
+            if self._run:
+                atexit._run_exitfuncs()
+            _set_exithandlers(self._exithandlers)
 
 from cpython.ref cimport PyObject
 import sys
@@ -149,19 +152,29 @@ import sys
 # Implement a uniform interface for getting atexit callbacks
 cdef extern from *:
     """
-    #ifndef Py_BUILD_CORE
-    #define Py_BUILD_CORE
-    #endif
-    #undef _PyGC_FINALIZED
-    #include "internal/pycore_interp.h"
-    #include "internal/pycore_pystate.h"
-    
     // Always define this struct for Cython's use
     typedef struct {
         PyObject *func;
         PyObject *args;
         PyObject *kwargs;
     } atexit_callback_struct;
+    
+    #if PY_VERSION_HEX >= 0x030f0000
+    // Python 3.15: Trying to access things from internal/pycore_pystate.h gives linker errors
+    static PyObject* get_atexit_callbacks_list(PyObject *self) {
+        return PyList_New(0);
+    }
+    static atexit_callback_struct** get_atexit_callbacks_array(PyObject *self) {
+        PyErr_SetString(PyExc_RuntimeError, "Python >= 3.14 has no atexit arrays");
+        return NULL;
+    }
+    #else
+    #ifndef Py_BUILD_CORE
+    #define Py_BUILD_CORE
+    #endif
+    #undef _PyGC_FINALIZED
+    #include "internal/pycore_interp.h"
+    #include "internal/pycore_pystate.h"
     
     #if PY_VERSION_HEX >= 0x030e0000
     // Python 3.14+: atexit uses a PyList stored in state->callbacks
@@ -195,6 +208,7 @@ cdef extern from *:
         PyErr_SetString(PyExc_RuntimeError, "Python < 3.14 has no atexit lists");
         return NULL;
     }
+    #endif
     #endif
     """
     # Declare both functions - they exist in all Python versions (one is dummy)
