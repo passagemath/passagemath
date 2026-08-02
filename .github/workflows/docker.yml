@@ -18,8 +18,8 @@ on:
         # 'tox -e update_docker_platforms' updates below
         default: >-
           [
-           "ubuntu-bionic-toolchain-gcc_9",
-           "ubuntu-focal",
+           "ubuntu-bionic-toolchain-gcc_10",
+           "ubuntu-focal-toolchain-gcc_10",
            "ubuntu-jammy",
            "ubuntu-noble",
            "ubuntu-plucky",
@@ -39,8 +39,6 @@ on:
            "linuxmint-22.1",
            "linuxmint-22.2",
            "linuxmint-22.3",
-           "fedora-30",
-           "fedora-31",
            "fedora-32",
            "fedora-33",
            "fedora-34",
@@ -58,7 +56,7 @@ on:
            "fedora-45-python3.14",
            "centos-stream-9-python3.12",
            "centos-stream-10",
-           "almalinux-8-toolset-gcc_9-python3.12",
+           "almalinux-8-toolset-gcc_10-python3.12",
            "alpine",
            "gentoo-python3.13",
            "archlinux-latest",
@@ -69,7 +67,7 @@ on:
            "voidlinux",
            "conda-forge-python3.14",
            "nixos-python3.14",
-           "ubuntu-bionic-toolchain-gcc_9-i386",
+           "ubuntu-bionic-toolchain-gcc_10-i386",
            "debian-bullseye-i386",
            "fedora-41-arm64v8",
            "fedora-42-arm64v8",
