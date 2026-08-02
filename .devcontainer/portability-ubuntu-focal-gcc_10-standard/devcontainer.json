@@ -3,12 +3,12 @@
 //      from .devcontainer/portability-devcontainer.json.in
 // See https://aka.ms/devcontainer.json for format details.
 {
-    "name": "ubuntu-focal-toolchain-gcc_10-standard (≥ 8-core)",
+    "name": "ubuntu-focal-gcc_10-standard (≥ 8-core)",
     "build": {
         "dockerfile": "portability-Dockerfile",
         // See tox.ini for definitions
         "args": {
-            "SYSTEM_FACTOR": "ubuntu-focal-toolchain-gcc_10",
+            "SYSTEM_FACTOR": "ubuntu-focal-gcc_10",
             "PACKAGE_FACTOR": "standard",
             "DOCKER_TARGET": "with-targets",
             "DOCKER_TAG": "dev"
