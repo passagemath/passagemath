@@ -167,9 +167,13 @@ SAGE_SPKG_CONFIGURE_BASE([gcc], [
             # Add the .0 because Debian/Ubuntu gives version numbers like
             # 4.6 instead of 4.6.4 (Issue #18885)
             AS_CASE(["$GXX_VERSION.0"],
-                [[[0-8]].*], [
-                    # Install our own GCC if the system-provided one is older than gcc 9
-                    SAGE_SHOULD_INSTALL_GCC([you have $CXX version $GXX_VERSION, which is quite old])
+                [[[0-9]].*], [
+                    # Install our own GCC if the system-provided one is older than gcc 10.3
+                    SAGE_SHOULD_INSTALL_GCC([you have $CXX version $GXX_VERSION, which is too old])
+                ],
+                [10.[[0-2]].*], [
+                    # Install our own GCC if the system-provided one is older than gcc 10.3
+                    SAGE_SHOULD_INSTALL_GCC([you have $CXX version $GXX_VERSION, which is too old])
                 ],
                 [1[[7-9]].*], [
                     # Install our own GCC if the system-provided one is newer than 16.x.
