@@ -34,41 +34,41 @@
 .. |codespace-ubuntu-bionic-toolchain-gcc_10-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-toolchain-gcc_10-standard%2Fdevcontainer.json
 
-.. |image-ubuntu-focal-toolchain-gcc_10-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-with-system-packages
+.. |image-ubuntu-focal-gcc_10-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-with-system-packages
 
-.. |image-ubuntu-focal-toolchain-gcc_10-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-configured
+.. |image-ubuntu-focal-gcc_10-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-configured
 
-.. |image-ubuntu-focal-toolchain-gcc_10-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-with-targets-pre
+.. |image-ubuntu-focal-gcc_10-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-with-targets-pre
 
-.. |image-ubuntu-focal-toolchain-gcc_10-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-with-targets
+.. |image-ubuntu-focal-gcc_10-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-with-targets
 
-.. |image-ubuntu-focal-toolchain-gcc_10-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-minimal-with-targets-optional
+.. |image-ubuntu-focal-gcc_10-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-minimal-with-targets-optional
 
-.. |codespace-ubuntu-focal-toolchain-gcc_10-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-focal-toolchain-gcc_10-minimal%2Fdevcontainer.json
+.. |codespace-ubuntu-focal-gcc_10-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-focal-gcc_10-minimal%2Fdevcontainer.json
 
-.. |image-ubuntu-focal-toolchain-gcc_10-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-with-system-packages
+.. |image-ubuntu-focal-gcc_10-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-with-system-packages
 
-.. |image-ubuntu-focal-toolchain-gcc_10-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-configured
+.. |image-ubuntu-focal-gcc_10-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-configured
 
-.. |image-ubuntu-focal-toolchain-gcc_10-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-with-targets-pre
+.. |image-ubuntu-focal-gcc_10-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-with-targets-pre
 
-.. |image-ubuntu-focal-toolchain-gcc_10-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-with-targets
+.. |image-ubuntu-focal-gcc_10-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-with-targets
 
-.. |image-ubuntu-focal-toolchain-gcc_10-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-toolchain-gcc_10-standard-with-targets-optional
+.. |image-ubuntu-focal-gcc_10-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-focal-gcc_10-standard-with-targets-optional
 
-.. |codespace-ubuntu-focal-toolchain-gcc_10-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-focal-toolchain-gcc_10-standard%2Fdevcontainer.json
+.. |codespace-ubuntu-focal-gcc_10-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-focal-gcc_10-standard%2Fdevcontainer.json
 
 .. |image-ubuntu-jammy-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-ubuntu-jammy-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-ubuntu-jammy-minimal-with-system-packages
@@ -1994,14 +1994,14 @@
    * -    ‑*standard*
      - |image-ubuntu-bionic-toolchain-gcc_10-standard-with-system-packages| |image-ubuntu-bionic-toolchain-gcc_10-standard-with-targets-pre| |image-ubuntu-bionic-toolchain-gcc_10-standard-with-targets| |image-ubuntu-bionic-toolchain-gcc_10-standard-with-targets-optional|
      - |codespace-ubuntu-bionic-toolchain-gcc_10-standard|
-   * - **ubuntu**-focal-toolchain-gcc_10 
+   * - **ubuntu**-focal-gcc_10 
        
           ‑*minimal*
-     - |image-ubuntu-focal-toolchain-gcc_10-minimal-with-system-packages| |image-ubuntu-focal-toolchain-gcc_10-minimal-with-targets-pre| |image-ubuntu-focal-toolchain-gcc_10-minimal-with-targets| |image-ubuntu-focal-toolchain-gcc_10-minimal-with-targets-optional|
-     - |codespace-ubuntu-focal-toolchain-gcc_10-minimal|
+     - |image-ubuntu-focal-gcc_10-minimal-with-system-packages| |image-ubuntu-focal-gcc_10-minimal-with-targets-pre| |image-ubuntu-focal-gcc_10-minimal-with-targets| |image-ubuntu-focal-gcc_10-minimal-with-targets-optional|
+     - |codespace-ubuntu-focal-gcc_10-minimal|
    * -    ‑*standard*
-     - |image-ubuntu-focal-toolchain-gcc_10-standard-with-system-packages| |image-ubuntu-focal-toolchain-gcc_10-standard-with-targets-pre| |image-ubuntu-focal-toolchain-gcc_10-standard-with-targets| |image-ubuntu-focal-toolchain-gcc_10-standard-with-targets-optional|
-     - |codespace-ubuntu-focal-toolchain-gcc_10-standard|
+     - |image-ubuntu-focal-gcc_10-standard-with-system-packages| |image-ubuntu-focal-gcc_10-standard-with-targets-pre| |image-ubuntu-focal-gcc_10-standard-with-targets| |image-ubuntu-focal-gcc_10-standard-with-targets-optional|
+     - |codespace-ubuntu-focal-gcc_10-standard|
    * - **ubuntu**-jammy 
        
           ‑*minimal*

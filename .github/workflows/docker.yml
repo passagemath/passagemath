@@ -19,7 +19,7 @@ on:
         default: >-
           [
            "ubuntu-bionic-toolchain-gcc_10",
-           "ubuntu-focal-toolchain-gcc_10",
+           "ubuntu-focal-gcc_10",
            "ubuntu-jammy",
            "ubuntu-noble",
            "ubuntu-plucky",
