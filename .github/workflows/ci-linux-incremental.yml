@@ -94,14 +94,13 @@ jobs:
       docker_targets: "with-targets"
       targets: "${{needs.changed_files.outputs.build_targets}} ci-build-with-fallback ptest-nodoc"
       tox_system_factors: >-
-        ["ubuntu-focal",
+        ["ubuntu-focal-toolchain-gcc_10",
          "ubuntu-noble",
          "debian-bullseye",
          "debian-bookworm",
-         "fedora-30",
-         "fedora-43",
+         "fedora-32",
          "fedora-44",
-         "gentoo-python3.11",
+         "gentoo-python3.12",
          "debian-bullseye-i386"]
       tox_packages_factors: >-
           ["standard",
