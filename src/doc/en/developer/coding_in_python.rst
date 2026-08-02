@@ -19,8 +19,8 @@ can be found in the files :sage_root:`build/pkgs/python3/spkg-configure.m4`
 library), and :sage_root:`m4/pyproject_toml_metadata.m4` (for most other
 distribution packages in ``pkgs/``).
 
-Python 3.11 is the oldest supported version.  Hence,
-all language and library features that are available in Python 3.11 can
+Python 3.12 is the oldest supported version.  Hence,
+all language and library features that are available in Python 3.12 can
 be used; but features introduced in Python 3.12 cannot be used.  If a
 feature is deprecated in a newer supported version, it must be ensured
 that deprecation warnings issued by Python do not lead to failures in

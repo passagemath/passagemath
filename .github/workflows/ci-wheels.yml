@@ -12,7 +12,7 @@ on:
       python-versions:
         description: 'Python versions to test (JSON list)'
         default: >-
-          ['3.11', '3.14']
+          ['3.12', '3.15']
         required: true
       oss:
         description: 'OSs to test (JSON list; default: all)'

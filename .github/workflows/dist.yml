@@ -381,7 +381,7 @@ jobs:
       CIBW_ARCHS: ${{ matrix.arch }}
       CIBW_ENABLE: cpython-prerelease
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.15, <3.16' || '>=3.11, <3.16' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.15, <3.16' || '>=3.12, <3.16' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals ; python_version>='3.14'" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
@@ -437,7 +437,7 @@ jobs:
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
         id: python
         with:
-          python-version: "3.11 - 3.13"
+          python-version: "3.12 - 3.13"
           update-environment: false
 
       - name: Retrieve configure tarball cache
@@ -860,7 +860,7 @@ jobs:
       CIBW_ARCHS: ${{ matrix.arch }}
       CIBW_ENABLE: cpython-prerelease
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.15, <3.16' || '>=3.11, <3.16' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.15, <3.16' || '>=3.12, <3.16' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals ; python_version>='3.14'" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
@@ -922,7 +922,7 @@ jobs:
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
         id: python
         with:
-          python-version: "3.11 - 3.13"
+          python-version: "3.12 - 3.13"
           update-environment: false
 
       - name: Retrieve configure tarball cache
@@ -1179,7 +1179,7 @@ jobs:
       CIBW_ARCHS: ${{ matrix.arch }}
       CIBW_ENABLE: cpython-prerelease
       # https://cibuildwheel.readthedocs.io/en/stable/options/#requires-python
-      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.15, <3.16' || '>=3.11, <3.16' }}
+      CIBW_PROJECT_REQUIRES_PYTHON: ${{ github.event_name == 'pull_request' && '>=3.15, <3.16' || '>=3.12, <3.16' }}
       # Run before wheel build
       CIBW_BEFORE_BUILD: |
         (echo "passagemath-conf @ file://$(pwd)/pkgs/sage-conf" && echo "passagemath-setup @ file://$(pwd)/pkgs/sage-setup" && echo "cysignals @ git+https://github.com/passagemath/upstream-cysignals ; python_version>='3.14'" && echo "meson-python @ git+https://github.com/passagemath/upstream-meson-python.git") > constraints.txt
@@ -1247,7 +1247,7 @@ jobs:
         # Installing pipx follows the approach of https://github.com/pypa/cibuildwheel/pull/1743
         id: python
         with:
-          python-version: "3.11 - 3.13"
+          python-version: "3.12 - 3.13"
           update-environment: false
 
       - name: Retrieve configure tarball cache
