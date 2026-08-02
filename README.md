@@ -112,18 +112,21 @@ A part of the functionality is also available on Windows using MSYS2.
 Use of the full functionality on Windows currently requires the use of Windows
 Subsystem for Linux (WSL) or virtualization.
 
-| Version                                                                      | CPython   | Toolchains        | Operating Systems           | Architectures | Notes                      |
-|------------------------------------------------------------------------------|-----------|-------------------|-----------------------------|---------------|----------------------------|
-| [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9–3.12  | GCC 8.4–14, clang | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2024-12                |
-| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9–3.13  | GCC 9–14, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2025-10                |
-| [10.6.x](https://github.com/passagemath/passagemath/tree/passagemath-10.6.x) | 3.10–3.14 | GCC 9–15, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | old stable <br>EOL 2026-10 |
-|                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
-|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
-| [10.8.x](https://github.com/passagemath/passagemath/tree/passagemath-10.8.x) | 3.11–3.14 | GCC 9–16, clang   | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable                     |
-|                                                                              |           | mingw32 + MSVC    | Windows                     | x86_64, ARM   | *partial functionality*    |
-|                                                                              |           | mingw32           | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
-|                                                                              |           | Emscripten        | any                         | Wasm32        | *partial functionality*    |
-| 10.10.x <br>(main)                                                           | 3.12–3.15 |                   |                             |               | development                |
+| Version                                                                      | CPython   | Toolchains         | Operating Systems           | Architectures | Notes                      |
+|------------------------------------------------------------------------------|-----------|--------------------|-----------------------------|---------------|----------------------------|
+| [10.4.x](https://github.com/passagemath/passagemath/tree/passagemath-10.4.x) | 3.9–3.12  | GCC 8.4–14, clang  | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2024-12                |
+| [10.5.x](https://github.com/passagemath/passagemath/tree/passagemath-10.5.x) | 3.9–3.13  | GCC 9–14, clang    | Linux, macOS, Windows (WSL) | x86_64, ARM   | EOL 2025-10                |
+| [10.6.x](https://github.com/passagemath/passagemath/tree/passagemath-10.6.x) | 3.10–3.14 | GCC 9–15, clang    | Linux, macOS, Windows (WSL) | x86_64, ARM   | old stable <br>EOL 2026-10 |
+|                                                                              |           | mingw32 + MSVC     | Windows                     | x86_64, ARM   | *partial functionality*    |
+|                                                                              |           | mingw32            | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
+| [10.8.x](https://github.com/passagemath/passagemath/tree/passagemath-10.8.x) | 3.11–3.14 | GCC 9–16, clang    | Linux, macOS, Windows (WSL) | x86_64, ARM   | stable                     |
+|                                                                              |           | mingw32 + MSVC     | Windows                     | x86_64, ARM   | *partial functionality*    |
+|                                                                              |           | mingw32            | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
+|                                                                              |           | Emscripten         | any                         | Wasm32        | *partial functionality*    |
+| 10.10.x <br>(main)                                                           | 3.12–3.15 | GCC 10.3–16, clang | Linux, macOS, Windows (WSL) | x86_64, ARM   | development                |
+|                                                                              |           | mingw32 + MSVC     | Windows                     | x86_64, ARM   | *partial functionality*    |
+|                                                                              |           | mingw32            | Windows (MSYS2)             | x86_64, ARM   | *partial functionality*    |
+|                                                                              |           | Emscripten         | any                         | Wasm32        | *partial functionality*    |
 
 Detailed information on supported platforms for a specific version of passagemath
 can be found in the
@@ -458,7 +461,7 @@ in the Installation Guide.
 
 4.  [Linux, WSL] Install the required minimal build prerequisites:
 
-    - Compilers: `gcc`, `gfortran`, `g++` (GCC versions from 9.x to 16.x
+    - Compilers: `gcc`, `gfortran`, `g++` (GCC versions from 10.3 to 16.x
       and recent versions of Clang (LLVM) are supported).
       See [build/pkgs/gcc/SPKG.rst](build/pkgs/gcc/SPKG.rst) and
       [build/pkgs/gfortran/SPKG.rst](build/pkgs/gfortran/SPKG.rst)
@@ -470,7 +473,7 @@ in the Installation Guide.
       more details.
 
     - Python 3.4 or later, or Python 2.7, a full installation including
-      `urllib`; but ideally version 3.11.x or later, which
+      `urllib`; but ideally version 3.12.x or later, which
       will avoid having to build Sage's own copy of Python 3.
       See [build/pkgs/python3/SPKG.rst](build/pkgs/python3/SPKG.rst)
       for more details.
@@ -539,7 +542,7 @@ Full Installation from Source as passagemath
 --------------------------------------------
 
 9.  Unless you need to install passagemath into a specific existing environment, we recommend
-    to create and activate a fresh virtual environment over a suitable Python (3.11.x-3.14.x),
+    to create and activate a fresh virtual environment over a suitable Python (3.12.x-3.15.x),
     for example `~/passagemath-venv/` as follows. (Dollar signs are prompts; do not type them.)
 
     ```bash session
