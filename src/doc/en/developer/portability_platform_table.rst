@@ -1474,42 +1474,6 @@
 .. |codespace-almalinux-8-toolset-gcc_9-python3.12-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-8-toolset-gcc_9-python3.12-standard%2Fdevcontainer.json
 
-.. |image-almalinux-9-python3.11-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-system-packages
-
-.. |image-almalinux-9-python3.11-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-configured
-
-.. |image-almalinux-9-python3.11-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-targets-pre
-
-.. |image-almalinux-9-python3.11-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-targets
-
-.. |image-almalinux-9-python3.11-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-minimal-with-targets-optional
-
-.. |codespace-almalinux-9-python3.11-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-9-python3.11-minimal%2Fdevcontainer.json
-
-.. |image-almalinux-9-python3.11-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-standard-with-system-packages
-
-.. |image-almalinux-9-python3.11-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-standard-configured
-
-.. |image-almalinux-9-python3.11-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-standard-with-targets-pre
-
-.. |image-almalinux-9-python3.11-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-standard-with-targets
-
-.. |image-almalinux-9-python3.11-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-almalinux-9-python3.11-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-almalinux-9-python3.11-standard-with-targets-optional
-
-.. |codespace-almalinux-9-python3.11-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-almalinux-9-python3.11-standard%2Fdevcontainer.json
-
 .. |image-alpine-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-alpine-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-alpine-minimal-with-system-packages
 
@@ -1618,41 +1582,41 @@
 .. |codespace-archlinux-latest-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-archlinux-latest-standard%2Fdevcontainer.json
 
-.. |image-opensuse-15.6-gcc_11-python3.11-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-with-system-packages
+.. |image-opensuse-15.6-gcc_11-python3.12-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-system-packages
 
-.. |image-opensuse-15.6-gcc_11-python3.11-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-configured
+.. |image-opensuse-15.6-gcc_11-python3.12-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-configured
 
-.. |image-opensuse-15.6-gcc_11-python3.11-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-with-targets-pre
+.. |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-pre
 
-.. |image-opensuse-15.6-gcc_11-python3.11-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-with-targets
+.. |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets
 
-.. |image-opensuse-15.6-gcc_11-python3.11-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-minimal-with-targets-optional
+.. |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-optional
 
-.. |codespace-opensuse-15.6-gcc_11-python3.11-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-15.6-gcc_11-python3.11-minimal%2Fdevcontainer.json
+.. |codespace-opensuse-15.6-gcc_11-python3.12-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-15.6-gcc_11-python3.12-minimal%2Fdevcontainer.json
 
-.. |image-opensuse-15.6-gcc_11-python3.11-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-with-system-packages
+.. |image-opensuse-15.6-gcc_11-python3.12-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-system-packages
 
-.. |image-opensuse-15.6-gcc_11-python3.11-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-configured
+.. |image-opensuse-15.6-gcc_11-python3.12-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-configured
 
-.. |image-opensuse-15.6-gcc_11-python3.11-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-with-targets-pre
+.. |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets-pre
 
-.. |image-opensuse-15.6-gcc_11-python3.11-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-with-targets
+.. |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets
 
-.. |image-opensuse-15.6-gcc_11-python3.11-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.11-standard-with-targets-optional
+.. |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets-optional
 
-.. |codespace-opensuse-15.6-gcc_11-python3.11-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-15.6-gcc_11-python3.11-standard%2Fdevcontainer.json
+.. |codespace-opensuse-15.6-gcc_11-python3.12-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-15.6-gcc_11-python3.12-standard%2Fdevcontainer.json
 
 .. |image-opensuse-16.0-python3.13-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.0-python3.13-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.0-python3.13-minimal-with-system-packages
@@ -1798,41 +1762,41 @@
 .. |codespace-voidlinux-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-voidlinux-standard%2Fdevcontainer.json
 
-.. |image-conda-forge-python3.11-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-system-packages
+.. |image-conda-forge-python3.14-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-minimal-with-system-packages
 
-.. |image-conda-forge-python3.11-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-minimal-configured
+.. |image-conda-forge-python3.14-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-minimal-configured
 
-.. |image-conda-forge-python3.11-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-targets-pre
+.. |image-conda-forge-python3.14-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-minimal-with-targets-pre
 
-.. |image-conda-forge-python3.11-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-targets
+.. |image-conda-forge-python3.14-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-minimal-with-targets
 
-.. |image-conda-forge-python3.11-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-minimal-with-targets-optional
+.. |image-conda-forge-python3.14-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-minimal-with-targets-optional
 
-.. |codespace-conda-forge-python3.11-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-conda-forge-python3.11-minimal%2Fdevcontainer.json
+.. |codespace-conda-forge-python3.14-minimal| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-conda-forge-python3.14-minimal%2Fdevcontainer.json
 
-.. |image-conda-forge-python3.11-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-standard-with-system-packages
+.. |image-conda-forge-python3.14-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-standard-with-system-packages
 
-.. |image-conda-forge-python3.11-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-standard-configured
+.. |image-conda-forge-python3.14-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-standard-configured
 
-.. |image-conda-forge-python3.11-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-standard-with-targets-pre
+.. |image-conda-forge-python3.14-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-standard-with-targets-pre
 
-.. |image-conda-forge-python3.11-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-standard-with-targets
+.. |image-conda-forge-python3.14-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-standard-with-targets
 
-.. |image-conda-forge-python3.11-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.11-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.11-standard-with-targets-optional
+.. |image-conda-forge-python3.14-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-conda-forge-python3.14-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
+   :target: https://ghcr.io/passagemath/passagemath/sage-conda-forge-python3.14-standard-with-targets-optional
 
-.. |codespace-conda-forge-python3.11-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-conda-forge-python3.11-standard%2Fdevcontainer.json
+.. |codespace-conda-forge-python3.14-standard| image:: https://github.com/codespaces/badge.svg
+   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-conda-forge-python3.14-standard%2Fdevcontainer.json
 
 .. |image-nixos-python3.14-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-nixos-python3.14-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-nixos-python3.14-minimal-with-system-packages
@@ -2494,14 +2458,6 @@
    * -    ‑*standard*
      - |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-system-packages| |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-pre| |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets| |image-almalinux-8-toolset-gcc_9-python3.12-standard-with-targets-optional|
      - |codespace-almalinux-8-toolset-gcc_9-python3.12-standard|
-   * - **almalinux**-9-python3.11 
-       
-          ‑*minimal*
-     - |image-almalinux-9-python3.11-minimal-with-system-packages| |image-almalinux-9-python3.11-minimal-with-targets-pre| |image-almalinux-9-python3.11-minimal-with-targets| |image-almalinux-9-python3.11-minimal-with-targets-optional|
-     - |codespace-almalinux-9-python3.11-minimal|
-   * -    ‑*standard*
-     - |image-almalinux-9-python3.11-standard-with-system-packages| |image-almalinux-9-python3.11-standard-with-targets-pre| |image-almalinux-9-python3.11-standard-with-targets| |image-almalinux-9-python3.11-standard-with-targets-optional|
-     - |codespace-almalinux-9-python3.11-standard|
    * - **alpine** 
        
           ‑*minimal*
@@ -2526,14 +2482,14 @@
    * -    ‑*standard*
      - |image-archlinux-latest-standard-with-system-packages| |image-archlinux-latest-standard-with-targets-pre| |image-archlinux-latest-standard-with-targets| |image-archlinux-latest-standard-with-targets-optional|
      - |codespace-archlinux-latest-standard|
-   * - **opensuse**-15.6-gcc_11-python3.11 
+   * - **opensuse**-15.6-gcc_11-python3.12 
        
           ‑*minimal*
-     - |image-opensuse-15.6-gcc_11-python3.11-minimal-with-system-packages| |image-opensuse-15.6-gcc_11-python3.11-minimal-with-targets-pre| |image-opensuse-15.6-gcc_11-python3.11-minimal-with-targets| |image-opensuse-15.6-gcc_11-python3.11-minimal-with-targets-optional|
-     - |codespace-opensuse-15.6-gcc_11-python3.11-minimal|
+     - |image-opensuse-15.6-gcc_11-python3.12-minimal-with-system-packages| |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-pre| |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets| |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-optional|
+     - |codespace-opensuse-15.6-gcc_11-python3.12-minimal|
    * -    ‑*standard*
-     - |image-opensuse-15.6-gcc_11-python3.11-standard-with-system-packages| |image-opensuse-15.6-gcc_11-python3.11-standard-with-targets-pre| |image-opensuse-15.6-gcc_11-python3.11-standard-with-targets| |image-opensuse-15.6-gcc_11-python3.11-standard-with-targets-optional|
-     - |codespace-opensuse-15.6-gcc_11-python3.11-standard|
+     - |image-opensuse-15.6-gcc_11-python3.12-standard-with-system-packages| |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets-pre| |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets| |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets-optional|
+     - |codespace-opensuse-15.6-gcc_11-python3.12-standard|
    * - **opensuse**-16.0-python3.13 
        
           ‑*minimal*
@@ -2566,11 +2522,11 @@
    * -    ‑*standard*
      - |image-voidlinux-standard-with-system-packages| |image-voidlinux-standard-with-targets-pre| |image-voidlinux-standard-with-targets| |image-voidlinux-standard-with-targets-optional|
      - |codespace-voidlinux-standard|
-   * - **conda**-forge-python3.11 
+   * - **conda**-forge-python3.14 
        
           ‑*standard*
-     - |image-conda-forge-python3.11-standard-with-system-packages| |image-conda-forge-python3.11-standard-with-targets-pre| |image-conda-forge-python3.11-standard-with-targets| |image-conda-forge-python3.11-standard-with-targets-optional|
-     - |codespace-conda-forge-python3.11-standard|
+     - |image-conda-forge-python3.14-standard-with-system-packages| |image-conda-forge-python3.14-standard-with-targets-pre| |image-conda-forge-python3.14-standard-with-targets| |image-conda-forge-python3.14-standard-with-targets-optional|
+     - |codespace-conda-forge-python3.14-standard|
    * - **nixos**-python3.14 
        
           ‑*minimal*
