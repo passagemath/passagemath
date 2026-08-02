@@ -286,42 +286,6 @@
 .. |codespace-ubuntu-stonking-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-stonking-standard%2Fdevcontainer.json
 
-.. |image-debian-bullseye-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-with-system-packages
-
-.. |image-debian-bullseye-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-configured
-
-.. |image-debian-bullseye-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-with-targets-pre
-
-.. |image-debian-bullseye-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-with-targets
-
-.. |image-debian-bullseye-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-minimal-with-targets-optional
-
-.. |codespace-debian-bullseye-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-debian-bullseye-minimal%2Fdevcontainer.json
-
-.. |image-debian-bullseye-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-standard-with-system-packages
-
-.. |image-debian-bullseye-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-standard-configured
-
-.. |image-debian-bullseye-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-standard-with-targets-pre
-
-.. |image-debian-bullseye-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-standard-with-targets
-
-.. |image-debian-bullseye-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-standard-with-targets-optional
-
-.. |codespace-debian-bullseye-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-debian-bullseye-standard%2Fdevcontainer.json
-
 .. |image-debian-bookworm-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bookworm-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-debian-bookworm-minimal-with-system-packages
 
@@ -1798,42 +1762,6 @@
 .. |codespace-ubuntu-bionic-toolchain-gcc_10-i386-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-ubuntu-bionic-toolchain-gcc_10-i386-standard%2Fdevcontainer.json
 
-.. |image-debian-bullseye-i386-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-system-packages
-
-.. |image-debian-bullseye-i386-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-minimal-configured
-
-.. |image-debian-bullseye-i386-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-targets-pre
-
-.. |image-debian-bullseye-i386-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-targets
-
-.. |image-debian-bullseye-i386-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-minimal-with-targets-optional
-
-.. |codespace-debian-bullseye-i386-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-debian-bullseye-i386-minimal%2Fdevcontainer.json
-
-.. |image-debian-bullseye-i386-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-standard-with-system-packages
-
-.. |image-debian-bullseye-i386-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-standard-configured
-
-.. |image-debian-bullseye-i386-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-standard-with-targets-pre
-
-.. |image-debian-bullseye-i386-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-standard-with-targets
-
-.. |image-debian-bullseye-i386-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-debian-bullseye-i386-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-debian-bullseye-i386-standard-with-targets-optional
-
-.. |codespace-debian-bullseye-i386-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-debian-bullseye-i386-standard%2Fdevcontainer.json
-
 .. |image-fedora-41-arm64v8-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-fedora-41-arm64v8-minimal-with-system-packages
 
@@ -2122,14 +2050,6 @@
    * -    ‑*standard*
      - |image-ubuntu-stonking-standard-with-system-packages| |image-ubuntu-stonking-standard-with-targets-pre| |image-ubuntu-stonking-standard-with-targets| |image-ubuntu-stonking-standard-with-targets-optional|
      - |codespace-ubuntu-stonking-standard|
-   * - **debian**-bullseye 
-       
-          ‑*minimal*
-     - |image-debian-bullseye-minimal-with-system-packages| |image-debian-bullseye-minimal-with-targets-pre| |image-debian-bullseye-minimal-with-targets| |image-debian-bullseye-minimal-with-targets-optional|
-     - |codespace-debian-bullseye-minimal|
-   * -    ‑*standard*
-     - |image-debian-bullseye-standard-with-system-packages| |image-debian-bullseye-standard-with-targets-pre| |image-debian-bullseye-standard-with-targets| |image-debian-bullseye-standard-with-targets-optional|
-     - |codespace-debian-bullseye-standard|
    * - **debian**-bookworm 
        
           ‑*minimal*
@@ -2455,14 +2375,6 @@
    * -    ‑*standard*
      - |image-ubuntu-bionic-toolchain-gcc_10-i386-standard-with-system-packages| |image-ubuntu-bionic-toolchain-gcc_10-i386-standard-with-targets-pre| |image-ubuntu-bionic-toolchain-gcc_10-i386-standard-with-targets| |image-ubuntu-bionic-toolchain-gcc_10-i386-standard-with-targets-optional|
      - |codespace-ubuntu-bionic-toolchain-gcc_10-i386-standard|
-   * - **debian**-bullseye-i386 
-       
-          ‑*minimal*
-     - |image-debian-bullseye-i386-minimal-with-system-packages| |image-debian-bullseye-i386-minimal-with-targets-pre| |image-debian-bullseye-i386-minimal-with-targets| |image-debian-bullseye-i386-minimal-with-targets-optional|
-     - |codespace-debian-bullseye-i386-minimal|
-   * -    ‑*standard*
-     - |image-debian-bullseye-i386-standard-with-system-packages| |image-debian-bullseye-i386-standard-with-targets-pre| |image-debian-bullseye-i386-standard-with-targets| |image-debian-bullseye-i386-standard-with-targets-optional|
-     - |codespace-debian-bullseye-i386-standard|
    * - **fedora**-41-arm64v8 
        
           ‑*minimal*
