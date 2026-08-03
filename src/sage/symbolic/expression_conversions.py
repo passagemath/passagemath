@@ -462,9 +462,10 @@ class InterfaceInit(Converter):
         In particular, this fixes symbolic matrix inversion after NumPy has
         converted complex scalars to Python objects::
 
-            sage: import numpy                                                        # needs numpy
-            sage: a = numpy.eye(2, dtype=complex)                                     # needs numpy
-            sage: matrix(x * a).inverse()[0, 0].simplify_full()                       # needs numpy
+            sage: # needs numpy
+            sage: import numpy
+            sage: a = numpy.eye(2, dtype=complex)
+            sage: matrix(x * a).inverse()[0, 0].simplify_full()
             1.0/x
         """
         if isinstance(obj, complex):
