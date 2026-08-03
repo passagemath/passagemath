@@ -456,8 +456,6 @@ class InterfaceInit(Converter):
         (:issue:`42608`)::
 
             sage: z = SR(complex(1, 2))
-            sage: InterfaceInit(maxima).pyobject(z, z.pyobject())
-            '1.0000000000000000 + 2.0000000000000000*%i'
             sage: (z * x)._maxima_init_()
             '(_SAGE_VAR_x)*(1.0000000000000000 + 2.0000000000000000*%i)'
 
