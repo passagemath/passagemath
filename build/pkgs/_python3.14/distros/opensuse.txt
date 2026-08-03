@@ -1,2 +1,2 @@
-python310
-python310-devel
+python314
+python314-devel
