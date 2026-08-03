@@ -1702,14 +1702,14 @@ def _latex_file_(objects, title='SAGE', debug=False,
 
         sage: from sage.misc.latex import LatexExpr, _preview_latex_options
         sage: options = _preview_latex_options()
-        sage: pgf = LatexExpr(r'\\begin{pgfpicture}\\end{pgfpicture}')
+        sage: pgf = LatexExpr(r'\begin{pgfpicture}\end{pgfpicture}')
         sage: pgf_file = _latex_file_(pgf, **options)
-        sage: r'\\end{lrbox}\\begin{page}' in pgf_file
+        sage: r'\end{lrbox}\begin{page}' in pgf_file
         True
         sage: tikz = LatexExpr(
-        ....:     r'\\vcenter{\\hbox{$\\begin{tikzpicture}\\end{tikzpicture}$}}')
+        ....:     r'\vcenter{\hbox{$\begin{tikzpicture}\end{tikzpicture}$}}')
         sage: tikz_file = _latex_file_(tikz, **options)
-        sage: r'\\begin{page}$\\vcenter' in tikz_file
+        sage: r'\begin{page}$\vcenter' in tikz_file
         True
     """
     process = True
