@@ -16875,19 +16875,25 @@ class GenericGraph(GenericGraph_pyx):
             sage: PG = G.power(3)
             sage: PG.edges(sort=True, labels=False)
             [(0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 2), (1, 3), (1, 4), (1, 5), (2, 0), (2, 1), (2, 3), (2, 4), (2, 5), (3, 0), (3, 1), (3, 2), (4, 5)]
-        """
-        from sage.graphs.digraph import DiGraph
-        from sage.graphs.graph import Graph
 
-        power_of_graph = DiGraph() if self.is_directed() else Graph()
+        Testing on graph with isolated vertices::
+
+            sage: BipartiteGraph(7).power(1).order()
+            7
+        """
+        if self.is_directed():
+            from sage.graphs.digraph import DiGraph as GT
+        else:
+            from sage.graphs.graph import Graph as GT
+
+        if name := self.name():
+            name = f'power({name})'
+        power_of_graph = GT([self, []], format='vertices_and_edges', name=name)
 
         for u in self:
             for v in self.breadth_first_search(u, distance=k):
                 if u != v:
                     power_of_graph.add_edge(u, v)
-
-        if self.name():
-            power_of_graph.name("power({})".format(self.name()))
 
         return power_of_graph
 
