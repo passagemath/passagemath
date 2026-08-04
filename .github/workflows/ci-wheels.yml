@@ -112,7 +112,7 @@ jobs:
                            ]') }}
         python-version: >-
           ${{ fromJson(inputs.python-versions
-                       || '["3.11",
+                       || '["3.15",
                            ]') }}
         os: >-
           ${{ fromJson(inputs.oss
