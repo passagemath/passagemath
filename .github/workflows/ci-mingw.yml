@@ -97,11 +97,15 @@ jobs:
         m4rie
         mpfi
         nauty
+        ncurses
         ntl
         planarity
         ppl
+        primecount
+        primesieve
         qhull
         rankwidth
+        readline
         sirocco
         symmetrica
         tdlib
@@ -186,11 +190,15 @@ jobs:
         m4rie
         mpfi
         nauty
+        ncurses
         ntl
         planarity
         ppl
+        primecount
+        primesieve
         qhull
         rankwidth
+        readline
         sirocco
         symmetrica
         tdlib
