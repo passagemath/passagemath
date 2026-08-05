@@ -5658,8 +5658,8 @@ cdef class Matrix(Matrix1):
             M = MatrixSpace(ring, self.nrows(), self.ncols())(A)
             return M.kernel()
 
-    def markov_basis(self, algorithm='4ti2', *, precision=None,
-                     completion=None, generation=None, minimal=True):
+    def markov_basis_matrix(self, algorithm='4ti2', *, precision=None,
+                            completion=None, generation=None, minimal=True):
         r"""
         Return a Markov basis of this integer matrix using 4ti2.
 
@@ -5691,33 +5691,30 @@ cdef class Matrix(Matrix1):
             ....:                 [0, 0, 1, 1],
             ....:                 [1, 0, 1, 0],
             ....:                 [0, 1, 0, 1]])
-            sage: M = A.markov_basis()  # optional - 4ti2
+            sage: M = A.markov_basis_matrix()  # optional - 4ti2
             sage: M.dimensions()  # optional - 4ti2
             (1, 4)
             sage: A * M.transpose() == zero_matrix(ZZ, 4, 1)  # optional - 4ti2
             True
 
-        Matrices whose entries are not integers are rejected::
+        Denominators of rational matrices are cleared before calling 4ti2::
 
-            sage: matrix(QQ, [[1/2, 1]]).markov_basis()
-            Traceback (most recent call last):
-            ...
-            TypeError: the matrix entries must be integers
+            sage: A = matrix(QQ, [[1/2, 1]])
+            sage: M = A.markov_basis_matrix()  # optional - 4ti2
+            sage: M.dimensions()  # optional - 4ti2
+            (1, 2)
+            sage: A * M.transpose() == zero_matrix(QQ, 1, 1)  # optional - 4ti2
+            True
         """
         if algorithm != '4ti2':
             raise ValueError(f"unknown Markov basis algorithm: {algorithm!r}")
 
-        base_ring = self.base_ring()
-        if base_ring == ZZ:
+        if self.base_ring() == ZZ:
             integer_matrix = self
+        elif self.base_ring() == QQ:
+            integer_matrix, _ = self._clear_denom()
         else:
-            try:
-                if (not base_ring.is_exact()
-                        or any(entry not in ZZ for entry in self.list())):
-                    raise TypeError
-                integer_matrix = self.change_ring(ZZ)
-            except (TypeError, ValueError):
-                raise TypeError("the matrix entries must be integers") from None
+            raise TypeError("the matrix must be over the integers or rationals")
 
         from sage.features.four_ti_2 import FourTi2
         FourTi2().require()
