@@ -9,7 +9,7 @@ from sage_setup import sage_setup
 
 sage_setup('sagemath-maxima',
            recurse_packages=('sage', 'passagemath_maxima'),
-           required_modules=('gsl', 'Singular', 'ecl'),
+           required_modules=('gsl', 'ecl'),
            spkgs=['maxima'],
            package_data={
                "sage.interfaces": [
