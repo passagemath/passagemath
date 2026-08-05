@@ -1,1 +1,2 @@
 python314Packages.python
+python3Packages.setuptools
