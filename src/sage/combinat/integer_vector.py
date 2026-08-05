@@ -1642,6 +1642,11 @@ class IntegerVectorsConstraints(IntegerVectors):
 
             sage: [0,3,0,1,2] in IntegerVectors(6, max_length=3)                        # needs sage.combinat
             False
+
+            sage: [] in IntegerVectors(max_part=0)
+            True
+            sage: [] in IntegerVectors(max_length=0)
+            True
         """
         if isinstance(x, IntegerVector) and x.parent() is self:
             return True
@@ -1656,8 +1661,10 @@ class IntegerVectorsConstraints(IntegerVectors):
             return False
 
         from sage.combinat.misc import check_integer_list_constraints
-        return check_integer_list_constraints(x, singleton=True, **self.constraints)
-
+        return check_integer_list_constraints(
+            x, singleton=True, **self.constraints
+        ) is not None
+    
     def cardinality(self):
         """
         Return the cardinality of ``self``.
