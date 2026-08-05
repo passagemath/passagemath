@@ -29,7 +29,7 @@ sed -i.bak 's/^maxima_singlepage.html //' doc/info/Makefile.in
 sed -i.bak $'/in-package/a \\\n\\\n#+ecl (progn (prin1 (logical-pathname-translations "SYS")) (terpri) (load #P"SYS:ASDF.FAS") (require :cmp))\\\n' src/maxima.system
 
 # Control si:get-library-pathname for MinGW
-export ECLDIR="$SAGE_LOCAL/lib/ecl-24.5.10/"
+export ECLDIR="$SAGE_LOCAL/lib/ecl-26.5.5/"
 
 # Note that maxima configure checks for git and, if it finds it, uses
 # versions information from the repo. See #15529. We disable this with
