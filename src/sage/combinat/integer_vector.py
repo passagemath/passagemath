@@ -1664,7 +1664,7 @@ class IntegerVectorsConstraints(IntegerVectors):
         return check_integer_list_constraints(
             x, singleton=True, **self.constraints
         ) is not None
-    
+
     def cardinality(self):
         """
         Return the cardinality of ``self``.
