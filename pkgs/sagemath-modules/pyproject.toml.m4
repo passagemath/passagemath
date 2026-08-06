@@ -43,6 +43,7 @@ content-type = "text/x-rst"
 test    = ["passagemath-repl"]
 
 # extras by packages
+4ti2    = ["passagemath-latte-4ti2"]
 flint   = ["passagemath-flint"]
 fpylll  = [SPKG_INSTALL_REQUIRES_fpylll]
 gsl     = []  # No extra needed
