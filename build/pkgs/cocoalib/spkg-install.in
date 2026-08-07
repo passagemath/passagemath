@@ -1,5 +1,7 @@
 cd src/
 
+# The handwritten configure script breaks due to quoting bugs when CXX="g++ -std=gnu++11" or similar.
+export CXX=$(echo "$CXX" | sed 's/ *.*//')
 
 # there is room for adding more options (set some flags, use a lot of libraries
 # shipped with Sage): go to the source directory and type: ./configure --help
