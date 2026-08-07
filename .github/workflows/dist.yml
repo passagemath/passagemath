@@ -1412,6 +1412,14 @@ jobs:
         env:
           CIBW_SKIP: "cp313-* cp314-*"
 
+      - name: sagemath-gap3
+        id:   sagemath-gap3
+        if:   (success() || failure())
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_gap3
+        env:
+          CIBW_SKIP: "cp313-* cp314-*"
+
       # Broken on some platforms
 
       - name: sagemath-macaulay2
