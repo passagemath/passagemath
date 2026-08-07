@@ -28,6 +28,7 @@ include           sage/groups/semimonomial_transformations/all.py       # FIXME
 recursive-include sage/groups/semimonomial_transformations *.pxd        # FIXME
 
 include           sage/interfaces/gap*.p*
+exclude           sage/interfaces/gap3.p*
 graft             sage/libs/gap
 include           sage/matrix/matrix_gap.p*
 include           sage/rings/*species.p*
