@@ -20,6 +20,8 @@ name = "passagemath-gap3"
 description = "passagemath: Computational group theory with GAP3"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sagemath_gap
     SPKG_INSTALL_REQUIRES_pexpect
 ]
 dynamic = ["version"]
@@ -32,6 +34,8 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test = [
     "passagemath-repl",
+    "passagemath-combinat",
+    "passagemath-modules",
 ]
 
 [tool.setuptools]
