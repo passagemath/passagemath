@@ -166,6 +166,7 @@ AUTHORS:
 import sage.rings.abc
 
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 
 from sage.structure.richcmp import rich_to_bool
 from sage.structure.unique_representation import UniqueRepresentation
@@ -184,8 +185,11 @@ from sage.rings.rational_field import QQ
 from sage.rings.infinity import Infinity
 from sage.rings.qqbar import AA, QQbar
 
+lazy_import('sage.interfaces.gap3', 'GAP3Element')
+
+
 libgap = GapElement_Integer = GapElement_Rational = GapElement_Cyclotomic = None
-gap = gap3 = None
+gap = None
 
 
 def late_import():
@@ -206,7 +210,7 @@ def late_import():
     from sage.libs.gap.element import (GapElement_Integer,
                                        GapElement_Rational,
                                        GapElement_Cyclotomic)
-    from sage.interfaces import (gap, gap3)
+    from sage.interfaces import gap
 
 
 def UCF_sqrt_int(N, UCF):
@@ -1528,7 +1532,7 @@ class UniversalCyclotomicField(UniqueRepresentation, sage.rings.abc.UniversalCyc
         obj = None
         if isinstance(elt, gap.GapElement):
             obj = libgap(elt)
-        elif isinstance(elt, gap3.GAP3Element):
+        elif isinstance(elt, GAP3Element):
             obj = libgap.eval(str(elt))
         elif isinstance(elt, str):
             obj = libgap.eval(elt)
