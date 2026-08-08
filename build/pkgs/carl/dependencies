@@ -1,1 +1,1 @@
-$(MP_LIBRARY)
+$(MP_LIBRARY) eigen bliss
