@@ -35,6 +35,7 @@ test            = ["passagemath-repl"]
 # extras by packages
 coxeter3        = ["passagemath-coxeter3"]
 gap             = []  # no extra needed
+gap3            = ["passagemath-gap3"]
 
 # extras by groups_catalog
 additive        = []  # no extra needed
