@@ -7,6 +7,8 @@ prune sage
 graft             sage/coding/codecan
 include           sage/combinat/enumeration_mod_permgroup.p*
 include           sage/combinat/root_system/reflection_group*.p*
+exclude           sage/combinat/root_system/reflection_group_complex.p*  # sagemath-gap3
+exclude           sage/combinat/root_system/reflection_group_real.p*     # sagemath-gap3
 include           sage/combinat/root_system/weyl_group.p*
 graft             sage/ext_data/gap
 include           sage/graphs/spanning_tree.p*
@@ -28,6 +30,7 @@ include           sage/groups/semimonomial_transformations/all.py       # FIXME
 recursive-include sage/groups/semimonomial_transformations *.pxd        # FIXME
 
 include           sage/interfaces/gap*.p*
+exclude           sage/interfaces/gap3.p*
 graft             sage/libs/gap
 include           sage/matrix/matrix_gap.p*
 include           sage/rings/*species.p*

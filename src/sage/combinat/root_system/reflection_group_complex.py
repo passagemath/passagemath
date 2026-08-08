@@ -1,4 +1,4 @@
-# sage_setup: distribution = sagemath-gap
+# sage_setup: distribution = sagemath-gap3
 # sage.doctest: optional - gap3, needs sage.libs.gap
 r"""
 Finite complex reflection groups
