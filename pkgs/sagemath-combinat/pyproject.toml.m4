@@ -36,6 +36,7 @@ content-type = "text/x-rst"
 test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
 # by library
+gap3            = [SPKG_INSTALL_REQUIRES_sagemath_gap3]
 glucose         = [SPKG_INSTALL_REQUIRES_sagemath_glucose]
 kissat          = [SPKG_INSTALL_REQUIRES_sagemath_kissat]
 lrcalc          = [SPKG_INSTALL_REQUIRES_lrcalc_python]
