@@ -1,0 +1,21 @@
+# -*- shell-script -*-
+cd src
+mkdir build
+cd build
+BUILD_OPTIONS=
+# https://ths-rwth.github.io/carl/d1/d66/a06266.html
+## USE_CLN_NUMBERS [ON, OFF]
+## If set to ON, CLN number types can be used in addition to GMP number types.
+## USE_COCOA [ON, OFF]
+## If set to ON, CoCoALib can be used for advanced polynomial operations, for example multivariate gcd or factorization.
+## USE_GINAC [ON, OFF]
+## If set to ON, GiNaC can be used for some polynomial operations. Note that this implies USE_CLN_NUMBERS = ON.
+sdh_cmake -GNinja -DGENERATORS=on \
+          -DCMAKE_SYSTEM_PREFIX_PATH="$SAGE_LOCAL" \
+          -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
+          -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
+          -DSHARED=on \
+          $BUILD_OPTIONS ..
+set -e
+cmake --build .
+DESTDIR=$SAGE_DESTDIR cmake --install .
