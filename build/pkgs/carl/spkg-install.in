@@ -15,6 +15,7 @@ sdh_cmake -GNinja -DGENERATORS=on \
           -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
           -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
           -DSHARED=on \
+          -DUSE_COCOA=off \
           $BUILD_OPTIONS ..
 set -e
 cmake --build .
