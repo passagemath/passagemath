@@ -7,6 +7,8 @@ prune sage
 graft             sage/coding/codecan
 include           sage/combinat/enumeration_mod_permgroup.p*
 include           sage/combinat/root_system/reflection_group*.p*
+exclude           sage/combinat/root_system/reflection_group_complex.p*  # sagemath-gap3
+exclude           sage/combinat/root_system/reflection_group_real.p*     # sagemath-gap3
 include           sage/combinat/root_system/weyl_group.p*
 graft             sage/ext_data/gap
 include           sage/graphs/spanning_tree.p*
