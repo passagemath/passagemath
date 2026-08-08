@@ -90,7 +90,7 @@ jobs:
       free_disk_space: true
       from_docker_repository: ghcr.io/passagemath/passagemath/
       from_docker_target: "with-targets"
-      from_docker_tag: "dev"
+      from_docker_tag: "latest"
       docker_targets: "with-targets"
       targets: "${{needs.changed_files.outputs.build_targets}} ci-build-with-fallback ptest-nodoc"
       tox_system_factors: >-
