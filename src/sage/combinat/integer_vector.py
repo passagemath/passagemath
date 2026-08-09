@@ -1694,18 +1694,47 @@ class IntegerVectorsConstraints(IntegerVectors):
             1
             sage: list(Q)
             [[]]
+                        sage: P = IntegerVectors(1, length=1, max_length=0, max_part=1)
+            sage: [1] in P
+            True
+            sage: P.cardinality()
+            1
+            sage: list(P)
+            [[1]]
+            sage: Q = IntegerVectors(max_length=0, min_length=1)
+            sage: [] in Q
+            False
+            sage: Q.cardinality()
+            0
+            sage: list(Q)
+            []
         """
         # Handle zero-length cases
-        if self.constraints.get('length') == 0:
-            # If n is specified and not 0, there are no solutions
-            if self.n is not None and self.n != 0:
-                return Integer(0)
-            return Integer(1)
-        if self.constraints.get('max_length') == 0:
-            # If n is specified and not 0, there are no solutions
-            if self.n is not None and self.n != 0:
-                return Integer(0)
-            return Integer(1)
+        zero_length = (
+            self.constraints.get('length') == 0 or
+            ('length' not in self.constraints and self.constraints.get('max_length') == 0)
+        )
+        if zero_length:
+            # Check if the empty vector satisfies all constraints
+            # Check length constraints
+            if self.constraints.get('length') == 0:
+                # length=0, so only empty vector is possible
+                # But check if n (sum) is compatible
+                if self.n is not None and self.n != 0:
+                    return Integer(0)
+                # Check min_length: if min_length > 0, empty vector is invalid
+                if self.constraints.get('min_length', 0) > 0:
+                    return Integer(0)
+                return Integer(1)
+            elif self.constraints.get('max_length') == 0:
+                # max_length=0, only empty vector is possible
+                # But check if n (sum) is compatible
+                if self.n is not None and self.n != 0:
+                    return Integer(0)
+                # Check min_length: if min_length > 0, empty vector is invalid
+                if self.constraints.get('min_length', 0) > 0:
+                    return Integer(0)
+                return Integer(1)
 
         if self.k is None:
             if self.n is None:
@@ -1795,20 +1824,41 @@ class IntegerVectorsConstraints(IntegerVectors):
             sage: Q = IntegerVectors(max_length=0)
             sage: list(Q)
             [[]]
+                        sage: P = IntegerVectors(1, length=1, max_length=0, max_part=1)
+            sage: list(P)
+            [[1]]
+            sage: Q = IntegerVectors(max_length=0, min_length=1)
+            sage: list(Q)
+            []
         """
         # Handle zero-length cases
-        if self.constraints.get('length') == 0:
-            # If n is specified and not 0, there are no solutions
-            if self.n is not None and self.n != 0:
+        zero_length = (
+            self.constraints.get('length') == 0 or
+            ('length' not in self.constraints and self.constraints.get('max_length') == 0)
+        )
+        if zero_length:
+            # Check if the empty vector satisfies all constraints
+            # Check length constraints
+            if self.constraints.get('length') == 0:
+                # length=0, so only empty vector is possible
+                # But check if n (sum) is compatible
+                if self.n is not None and self.n != 0:
+                    return
+                # Check min_length: if min_length > 0, empty vector is invalid
+                if self.constraints.get('min_length', 0) > 0:
+                    return
+                yield self.element_class(self, [], check=False)
                 return
-            yield []
-            return
-        if self.constraints.get('max_length') == 0:
-            # If n is specified and not 0, there are no solutions
-            if self.n is not None and self.n != 0:
+            elif self.constraints.get('max_length') == 0:
+                # max_length=0, only empty vector is possible
+                # But check if n (sum) is compatible
+                if self.n is not None and self.n != 0:
+                    return
+                # Check min_length: if min_length > 0, empty vector is invalid
+                if self.constraints.get('min_length', 0) > 0:
+                    return
+                yield self.element_class(self, [], check=False)
                 return
-            yield []
-            return
 
         from sage.combinat.integer_lists import IntegerListsLex
 
