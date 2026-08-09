@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-combinat
+# sage.doctest: needs sage.modules
 r"""
 Cubic Hecke database
 
@@ -96,6 +97,7 @@ def simplify(mat):
 
     EXAMPLES::
 
+        sage: # needs sage.libs.pari
         sage: from sage.databases.cubic_hecke_db import simplify
         sage: import sage.algebras.hecke_algebras.cubic_hecke_base_ring as chbr
         sage: ER.<a, b, c> = chbr.CubicHeckeExtensionRing()
@@ -220,6 +222,7 @@ class CubicHeckeDataBase(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs
             sage: from sage.databases.knotinfo_db import KnotInfoDataBase
             sage: ki_db = KnotInfoDataBase()
             sage: ki_db.demo_version()       # optional - database_knotinfo
@@ -315,6 +318,7 @@ class CubicHeckeDataBase(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.combinat sage.groups sage.modules
             sage: from sage.databases.cubic_hecke_db import CubicHeckeDataBase
             sage: CHA3 = algebras.CubicHecke(2)
             sage: GER = CHA3.extension_ring(generic=True)
@@ -474,6 +478,7 @@ class MarkovTraceModuleBasis(Enum):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs sage.groups
             sage: from sage.databases.cubic_hecke_db import MarkovTraceModuleBasis
             sage: MarkovTraceModuleBasis.U1.link()
             Link with 1 component represented by 0 crossings
@@ -501,6 +506,7 @@ class MarkovTraceModuleBasis(Enum):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs sage.groups
             sage: from sage.databases.cubic_hecke_db import MarkovTraceModuleBasis
             sage: MarkovTraceModuleBasis.U1.regular_homfly_polynomial()
             1
@@ -525,6 +531,7 @@ class MarkovTraceModuleBasis(Enum):
 
         EXAMPLES::
 
+            sage: # needs sage.graphs sage.groups
             sage: from sage.databases.cubic_hecke_db import MarkovTraceModuleBasis
             sage: MarkovTraceModuleBasis.U1.regular_homfly_polynomial()
             1
@@ -672,6 +679,7 @@ class CubicHeckeFileCache(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: from sage.databases.cubic_hecke_db import CubicHeckeFileCache
             sage: CHA2 = algebras.CubicHecke(2)
             sage: cha_fc = CubicHeckeFileCache(CHA2)
@@ -690,6 +698,7 @@ class CubicHeckeFileCache(SageObject):
 
             EXAMPLES::
 
+                sage: # needs sage.groups
                 sage: from sage.databases.cubic_hecke_db import CubicHeckeFileCache
                 sage: CHA2 = algebras.CubicHecke(2)
                 sage: cha_fc = CubicHeckeFileCache(CHA2)
@@ -952,6 +961,7 @@ class CubicHeckeFileCache(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: CHA2 = algebras.CubicHecke(2)
             sage: R = CHA2.base_ring(generic=True)
             sage: cha_fc = CHA2._filecache
@@ -999,6 +1009,7 @@ class CubicHeckeFileCache(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: CHA2 = algebras.CubicHecke(2)
             sage: R = CHA2.base_ring(generic=True)
             sage: cha_fc = CHA2._filecache
@@ -1062,6 +1073,7 @@ class CubicHeckeFileCache(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: from sage.databases.cubic_hecke_db import CubicHeckeFileCache
             sage: CHA2 = algebras.CubicHecke(2)
             sage: ring_of_definition = CHA2.base_ring(generic=True)
@@ -1099,6 +1111,7 @@ class CubicHeckeFileCache(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: from sage.databases.cubic_hecke_db import CubicHeckeFileCache
             sage: CHA2 = algebras.CubicHecke(2)
             sage: ring_of_definition = CHA2.base_ring(generic=True)
@@ -1142,6 +1155,7 @@ class CubicHeckeFileCache(SageObject):
 
         EXAMPLES::
 
+            sage: # needs sage.groups
             sage: from sage.databases.cubic_hecke_db import CubicHeckeFileCache
             sage: CHA2 = algebras.CubicHecke(2)
             sage: cha_fc = CubicHeckeFileCache(2)
