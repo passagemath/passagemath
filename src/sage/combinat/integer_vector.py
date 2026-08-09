@@ -1708,6 +1708,13 @@ class IntegerVectorsConstraints(IntegerVectors):
             0
             sage: list(Q)
             []
+                        sage: R = IntegerVectors(0, length=0, min_length=1)
+            sage: [] in R
+            True
+            sage: R.cardinality()
+            1
+            sage: list(R)
+            [[]]
         """
         # Handle zero-length cases
         zero_length = (
@@ -1722,11 +1729,8 @@ class IntegerVectorsConstraints(IntegerVectors):
                 # But check if n (sum) is compatible
                 if self.n is not None and self.n != 0:
                     return Integer(0)
-                # Check min_length: if min_length > 0, empty vector is invalid
-                if self.constraints.get('min_length', 0) > 0:
-                    return Integer(0)
                 return Integer(1)
-            elif self.constraints.get('max_length') == 0:
+            if self.constraints.get('max_length') == 0:
                 # max_length=0, only empty vector is possible
                 # But check if n (sum) is compatible
                 if self.n is not None and self.n != 0:
@@ -1844,12 +1848,9 @@ class IntegerVectorsConstraints(IntegerVectors):
                 # But check if n (sum) is compatible
                 if self.n is not None and self.n != 0:
                     return
-                # Check min_length: if min_length > 0, empty vector is invalid
-                if self.constraints.get('min_length', 0) > 0:
-                    return
                 yield self.element_class(self, [], check=False)
                 return
-            elif self.constraints.get('max_length') == 0:
+            if self.constraints.get('max_length') == 0:
                 # max_length=0, only empty vector is possible
                 # But check if n (sum) is compatible
                 if self.n is not None and self.n != 0:
