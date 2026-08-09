@@ -1683,7 +1683,30 @@ class IntegerVectorsConstraints(IntegerVectors):
             27
             sage: IntegerVectors(13, 4, min_part=2, max_part=4).cardinality()
             16
+
+            sage: P = IntegerVectors(length=0, max_part=0)
+            sage: P.cardinality()
+            1
+            sage: list(P)
+            [[]]
+            sage: Q = IntegerVectors(max_length=0)
+            sage: Q.cardinality()
+            1
+            sage: list(Q)
+            [[]]
         """
+        # Handle zero-length cases
+        if self.constraints.get('length') == 0:
+            # If n is specified and not 0, there are no solutions
+            if self.n is not None and self.n != 0:
+                return Integer(0)
+            return Integer(1)
+        if self.constraints.get('max_length') == 0:
+            # If n is specified and not 0, there are no solutions
+            if self.n is not None and self.n != 0:
+                return Integer(0)
+            return Integer(1)
+
         if self.k is None:
             if self.n is None:
                 return PlusInfinity()
@@ -1765,7 +1788,28 @@ class IntegerVectorsConstraints(IntegerVectors):
             sage: iv = [ IntegerVectors(x[0], x[1], max_part=x[2]-1) for x in essai ]
             sage: all(map(lambda x: x.cardinality() == len(x.list()), iv))
             True
+
+            sage: P = IntegerVectors(length=0, max_part=0)
+            sage: list(P)
+            [[]]
+            sage: Q = IntegerVectors(max_length=0)
+            sage: list(Q)
+            [[]]
         """
+        # Handle zero-length cases
+        if self.constraints.get('length') == 0:
+            # If n is specified and not 0, there are no solutions
+            if self.n is not None and self.n != 0:
+                return
+            yield []
+            return
+        if self.constraints.get('max_length') == 0:
+            # If n is specified and not 0, there are no solutions
+            if self.n is not None and self.n != 0:
+                return
+            yield []
+            return
+
         from sage.combinat.integer_lists import IntegerListsLex
 
         if self.n is None:
@@ -1778,7 +1822,6 @@ class IntegerVectorsConstraints(IntegerVectors):
         for n in n_list:
             for x in IntegerListsLex(n, check=False, **self.constraints):
                 yield self.element_class(self, x, check=False)
-
 
 def integer_vectors_nk_fast_iter(n, k):
     """
