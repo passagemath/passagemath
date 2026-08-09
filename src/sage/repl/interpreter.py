@@ -220,6 +220,9 @@ def inline_plots(on=None):
     if not supports_kitty_graphics:
         print('Inline plots are not supported for the current terminal and IPython version')
         return
+    if not hasattr(IP, 'mime_renderers'):
+        # exit if we are not using the interactive shell
+        return
     if on:
         IP.mime_renderers['image/png'] = kitty_png_render
     elif 'image/png' in IP.mime_renderers:
