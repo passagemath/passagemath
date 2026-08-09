@@ -123,7 +123,6 @@ include-package-data = false
 [tool.setuptools.package-data]
 sage = [
     "ext_data/*",
-    "ext_data/kenzo/*",
     "ext_data/images/*",
     "ext_data/mwrank/*",
     "ext_data/notebook-ipython/*",
