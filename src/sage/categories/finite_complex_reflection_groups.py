@@ -935,11 +935,11 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
                 EXAMPLES::
 
                     sage: W = SymmetricGroup(4)                                         # needs sage.groups
-                    sage: W.noncrossing_partition_lattice()                             # needs sage.combinat sage.groups
+                    sage: W.noncrossing_partition_lattice()                             # needs sage.combinat sage.graphs sage.groups
                     Finite lattice containing 14 elements
 
                     sage: W = WeylGroup(['G', 2])                                       # needs sage.combinat sage.groups
-                    sage: W.noncrossing_partition_lattice()                             # needs sage.combinat sage.groups
+                    sage: W.noncrossing_partition_lattice()                             # needs sage.combinat sage.graphs sage.groups
                     Finite lattice containing 8 elements
 
                     sage: # optional - gap3
@@ -1304,8 +1304,8 @@ class FiniteComplexReflectionGroups(CategoryWithAxiom):
                         sage: W.number_of_reflections_of_full_support()
                         1
 
-                        sage: W = CoxeterGroup("B3")                                    # needs sage.combinat sage.groups
-                        sage: W.number_of_reflections_of_full_support()                 # needs sage.combinat sage.groups
+                        sage: W = CoxeterGroup("B3")                                    # needs sage.combinat sage.graphs sage.groups
+                        sage: W.number_of_reflections_of_full_support()                 # needs sage.combinat sage.graohs sage.groups
                         3
 
                         sage: W = ColoredPermutations(3,3)                              # needs sage.combinat

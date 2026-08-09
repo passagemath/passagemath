@@ -139,7 +139,7 @@ class CoxeterGroups(Category_singleton):
             EXAMPLES::
 
                 sage: G = WeylGroup(['A', 3])                                           # needs sage.combinat sage.groups
-                sage: G.coxeter_matrix()                                                # needs sage.combinat sage.groups
+                sage: G.coxeter_matrix()                                                # needs sage.combinat sage.graphs sage.groups
                 [1 3 2]
                 [3 1 3]
                 [2 3 1]
@@ -152,7 +152,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.groups
+                sage: # needs sage.combinat sage.graphs sage.groups
                 sage: W = CoxeterGroup([[1,3],[3,1]])
                 sage: W.index_set()
                 (1, 2)
@@ -208,8 +208,8 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: W = WeylGroup(["A", 2])                                           # needs sage.combinat sage.groups
-                sage: W.braid_relations()                                               # needs sage.combinat sage.groups
+                sage: W = WeylGroup(["A", 2])                                           # needs sage.combinat sage.graphs sage.groups
+                sage: W.braid_relations()                                               # needs sage.combinat sage.graphs sage.groups
                 [[[1, 2, 1], [2, 1, 2]]]
 
                 sage: # needs sage.combinat sage.groups sage.rings.number_field
@@ -234,8 +234,8 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: W = CoxeterGroup(['A', 2])                                        # needs sage.combinat sage.groups
-                sage: W.braid_group_as_finitely_presented_group()                       # needs sage.combinat sage.groups
+                sage: W = CoxeterGroup(['A', 2])                                        # needs sage.combinat sage.graphs sage.groups
+                sage: W.braid_group_as_finitely_presented_group()                       # needs sage.combinat sage.graphs sage.groups
                 Finitely presented group < S1, S2 | S1*S2*S1*S2^-1*S1^-1*S2^-1 >
 
                 sage: # needs sage.combinat sage.groups sage.rings.number_field
@@ -391,7 +391,7 @@ class CoxeterGroups(Category_singleton):
                  (2, 1, 2),
                  (2, 1, 2, 1)]
 
-                sage: # needs sage.combinat sage.groups
+                sage: # needs sage.combinat sage.graphs sage.groups
                 sage: W = WeylGroup(["A", 2, 1])
                 sage: g = iter(W)
                 sage: next(g)
@@ -577,7 +577,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.groups
+                sage: # needs sage.combinat sage.graphs sage.groups
                 sage: CoxeterGroup(['A', 4]).coxeter_element().reduced_word()
                 [1, 2, 3, 4]
                 sage: CoxeterGroup(['B', 4]).coxeter_element().reduced_word()           # needs sage.rings.number_field
@@ -709,7 +709,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: CoxeterGroup(['A', 3]).fully_commutative_elements()               # needs sage.combinat sage.groups
+                sage: CoxeterGroup(['A', 3]).fully_commutative_elements()               # needs sage.combinat sage.graphs sage.groups
                 Fully commutative elements of
                  Finite Coxeter group over Integer Ring with Coxeter matrix:
                 [1 3 2]
@@ -805,7 +805,7 @@ class CoxeterGroups(Category_singleton):
             representation of elements in the output cells but not the method
             used for the cell computation::
 
-                sage: # needs sage.combinat sage.groups
+                sage: # needs sage.combinat sage.graphs sage.groups
                 sage: W = CoxeterGroup('A2')
                 sage: KL_cells = W.kazhdan_lusztig_cells(side='right')
                 sage: set([tuple(sorted(C, key=lambda w: w.reduced_word()))
@@ -829,8 +829,8 @@ class CoxeterGroups(Category_singleton):
                 sage: len(KL_cells)
                 4
 
-                sage: W = CoxeterGroup('A2', implementation='permutation')              # needs sage.combinat sage.groups
-                sage: len(W.kazhdan_lusztig_cells(side='right'))                        # needs sage.combinat sage.groups
+                sage: W = CoxeterGroup('A2', implementation='permutation')              # needs sage.combinat sage.graphs sage.groups
+                sage: len(W.kazhdan_lusztig_cells(side='right'))                        # needs sage.combinat sage.graphs sage.groups
                 4
 
             We compute the left cells in the Coxeter group of type `A_3`
@@ -984,7 +984,7 @@ class CoxeterGroups(Category_singleton):
                  Weyl Group of type ['D', 4] (as a matrix group acting on the ambient space)
                  over Rational Field
 
-                sage: # optional - gap3
+                sage: # optional - coxeter3
                 sage: W = CoxeterGroup(['B',3], implementation="coxeter3")
                 sage: W.sign_representation()
                 Sign representation of Coxeter group of type ['B', 3]
@@ -1079,9 +1079,9 @@ class CoxeterGroups(Category_singleton):
                  s1*s2*s3*s2, s3*s2*s1, s2*s3*s1, s2*s3*s2, s1*s2*s1,
                  s3*s1*s2, s1*s2*s3, s2*s1, s3*s2, s2*s3, s1*s2, s2]
 
-                sage: W = WeylGroup(['A', 2, 1], prefix='s')                            # needs sage.combinat sage.groups
-                sage: s0, s1, s2 = W.simple_reflections()                               # needs sage.combinat sage.groups
-                sage: W.bruhat_interval(1, s0*s1*s2)                                    # needs sage.combinat sage.groups
+                sage: W = WeylGroup(['A', 2, 1], prefix='s')                            # needs sage.combinat sage.graphs sage.groups
+                sage: s0, s1, s2 = W.simple_reflections()                               # needs sage.combinat sage.graphs sage.groups
+                sage: W.bruhat_interval(1, s0*s1*s2)                                    # needs sage.combinat sage.graphs sage.groups
                 [s0*s1*s2, s1*s2, s0*s2, s0*s1, s2, s1, s0, 1]
             """
             if x == 1:
@@ -1113,17 +1113,17 @@ class CoxeterGroups(Category_singleton):
 
                 sage: W = WeylGroup("A3", prefix='s')                                   # needs sage.combinat sage.groups
                 sage: s1, s2, s3 = W.simple_reflections()                               # needs sage.combinat sage.groups
-                sage: W.bruhat_interval_poset(s2, s1*s3*s2*s1*s3)                       # needs sage.combinat sage.groups
+                sage: W.bruhat_interval_poset(s2, s1*s3*s2*s1*s3)                       # needs sage.combinat sage.graphs sage.groups
                 Finite poset containing 16 elements
 
-                sage: W = WeylGroup(['A', 2, 1], prefix='s')                            # needs sage.combinat sage.groups
-                sage: s0, s1, s2 = W.simple_reflections()                               # needs sage.combinat sage.groups
-                sage: W.bruhat_interval_poset(1, s0*s1*s2)                              # needs sage.combinat sage.groups
+                sage: W = WeylGroup(['A', 2, 1], prefix='s')                            # needs sage.combinat sage.graphs sage.groups
+                sage: s0, s1, s2 = W.simple_reflections()                               # needs sage.combinat sage.graphs sage.groups
+                sage: W.bruhat_interval_poset(1, s0*s1*s2)                              # needs sage.combinat sage.graphs sage.groups
                 Finite poset containing 8 elements
 
             TESTS::
 
-                sage: W.bruhat_interval_poset(s0*s1*s2, s0*s1*s2)                       # needs sage.combinat sage.groups
+                sage: W.bruhat_interval_poset(s0*s1*s2, s0*s1*s2)                       # needs sage.combinat sage.graphs sage.groups
                 Finite poset containing 1 elements
             """
             if x == 1:
@@ -1253,7 +1253,7 @@ class CoxeterGroups(Category_singleton):
             EXAMPLES::
 
                 sage: W = WeylGroup("A3")                                               # needs sage.combinat sage.groups
-                sage: W.canonical_representation()                                      # needs sage.combinat sage.groups
+                sage: W.canonical_representation()                                      # needs sage.combinat sage.graphs sage.groups
                 Finite Coxeter group over Integer Ring with Coxeter matrix:
                 [1 3 2]
                 [3 1 3]
@@ -1278,8 +1278,8 @@ class CoxeterGroups(Category_singleton):
                 sage: [len(list(W.elements_of_length(i))) for i in range(4)]
                 [1, 3, 5, 7]
 
-                sage: W = CoxeterGroup(['A', 2])                                        # needs sage.combinat sage.groups
-                sage: [len(list(W.elements_of_length(i))) for i in range(6)]            # needs sage.combinat sage.groups
+                sage: W = CoxeterGroup(['A', 2])                                        # needs sage.combinat sage.graphs sage.groups
+                sage: [len(list(W.elements_of_length(i))) for i in range(6)]            # needs sage.combinat sage.graphs sage.groups
                 [1, 2, 2, 1, 0, 0]
             """
             I = self.weak_order_ideal(ConstantFunction(True), side='right')
@@ -1305,7 +1305,7 @@ class CoxeterGroups(Category_singleton):
                 sage: p.length() == 10
                 True
 
-                sage: # needs sage.combinat sage.groups
+                sage: # needs sage.combinat sage.graphs sage.groups
                 sage: W = CoxeterGroup(['A', 4])
                 sage: p = W.random_element_of_length(5)
                 sage: p in W
@@ -1659,7 +1659,7 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: # needs sage.combinat sage.groups
+                sage: # needs sage.combinat sage.graphs sage.groups
                 sage: W = CoxeterGroup(['A', 3])
                 sage: len([1 for w in W if w.is_fully_commutative()])
                 14
@@ -1804,7 +1804,7 @@ class CoxeterGroups(Category_singleton):
 
                 sage: W = WeylGroup(['E', 6])                                           # needs sage.combinat sage.groups
                 sage: w = W.from_reduced_word([2,3,4,2])                                # needs sage.combinat sage.groups
-                sage: sorted(w.reduced_words())                                         # needs sage.combinat sage.groups
+                sage: sorted(w.reduced_words())                                         # needs sage.combinat sage.graphs sage.groups
                 [[2, 3, 4, 2], [3, 2, 4, 2], [3, 4, 2, 4]]
 
                 sage: # optional - gap3, needs sage.combinat sage.groups
@@ -2044,12 +2044,12 @@ class CoxeterGroups(Category_singleton):
 
                 sage: W = WeylGroup(["A", 3])                                           # needs sage.combinat sage.groups
                 sage: s = W.simple_reflections()                                        # needs sage.combinat sage.groups
-                sage: (s[1]*s[2]*s[3]).absolute_length()                                # needs sage.combinat sage.groups
+                sage: (s[1]*s[2]*s[3]).absolute_length()                                # needs sage.combinat sage.graphs sage.groups
                 3
 
                 sage: W = SymmetricGroup(4)                                             # needs sage.groups
                 sage: s = W.simple_reflections()                                        # needs sage.groups
-                sage: (s[3]*s[2]*s[1]).absolute_length()                                # needs sage.combinat sage.groups
+                sage: (s[3]*s[2]*s[1]).absolute_length()                                # needs sage.combinat sage.graphs sage.groups
                 3
 
                 sage: # needs sage.graphs sage.groups
@@ -2213,18 +2213,18 @@ class CoxeterGroups(Category_singleton):
                 sage: s = W.simple_reflections()
                 sage: w0 = s[1]
                 sage: w1 = s[1]*s[2]*s[3]
-                sage: w0.absolute_le(w1)
+                sage: w0.absolute_le(w1)                                                # needs sage.graphs
                 True
-                sage: w1.absolute_le(w0)
+                sage: w1.absolute_le(w0)                                                # needs sage.graphs
                 False
-                sage: w1.absolute_le(w1)
+                sage: w1.absolute_le(w1)                                                # needs sage.graphs
                 True
 
             TESTS:
 
             Check that this is independent of the implementation of the group, see :issue:`34799`::
 
-                sage: # needs sage.combinat sage.groups
+                sage: # needs sage.combinat sage.graphs sage.groups
                 sage: W1 = WeylGroup(['A', 2])
                 sage: W2 = Permutations(3)
                 sage: P = lambda pi: W2(list(pi.to_permutation()))
@@ -2273,7 +2273,7 @@ class CoxeterGroups(Category_singleton):
                 sage: s = W.simple_reflections()
                 sage: w0 = s[1]
                 sage: w1 = s[1]*s[2]*s[3]
-                sage: list(w0.absolute_covers())
+                sage: list(w0.absolute_covers())                                        # needs sage.graphs
                 [
                 [0 0 1 0]  [0 1 0 0]  [0 1 0 0]  [0 0 0 1]  [0 1 0 0]
                 [1 0 0 0]  [1 0 0 0]  [0 0 1 0]  [1 0 0 0]  [0 0 0 1]
@@ -2300,7 +2300,7 @@ class CoxeterGroups(Category_singleton):
 
                 sage: W = WeylGroup(["A", 3])                                           # needs sage.combinat sage.groups
                 sage: s = W.simple_reflections()                                        # needs sage.combinat sage.groups
-                sage: (s[1]*s[2]*s[3]).canonical_matrix()                               # needs sage.combinat sage.groups
+                sage: (s[1]*s[2]*s[3]).canonical_matrix()                               # needs sage.combinat sage.graphs sage.groups
                 [ 0  0 -1]
                 [ 1  0 -1]
                 [ 0  1 -1]
@@ -2504,6 +2504,8 @@ class CoxeterGroups(Category_singleton):
                 sage: print([v.reduced_word()
                 ....:        for v in W.one().bruhat_lower_covers()])
                 []
+
+                sage: # needs sage.combinat sage.graphs sage.groups
                 sage: W = WeylGroup(["B", 4, 1])
                 sage: w = W.from_reduced_word([0,2])
                 sage: print([v.reduced_word() for v in w.bruhat_lower_covers()])
@@ -2547,9 +2549,9 @@ class CoxeterGroups(Category_singleton):
 
             EXAMPLES::
 
-                sage: W = WeylGroup(['A', 3, 1], prefix='s')                            # needs sage.combinat sage.groups
-                sage: w = W.from_reduced_word([1,2,1])                                  # needs sage.combinat sage.groups
-                sage: w.bruhat_upper_covers()                                           # needs sage.combinat sage.groups
+                sage: W = WeylGroup(['A', 3, 1], prefix='s')                            # needs sage.combinat sage.graphs sage.groups
+                sage: w = W.from_reduced_word([1,2,1])                                  # needs sage.combinat sage.graphs sage.groups
+                sage: w.bruhat_upper_covers()                                           # needs sage.combinat sage.graphs sage.groups
                 [s1*s2*s1*s0, s1*s2*s0*s1, s0*s1*s2*s1, s3*s1*s2*s1, s2*s3*s1*s2, s1*s2*s3*s1]
 
                 sage: W = WeylGroup(['A', 3])                                           # needs sage.combinat sage.groups
@@ -2595,8 +2597,8 @@ class CoxeterGroups(Category_singleton):
 
             Check bug discovered in :issue:`32669` is fixed::
 
-                sage: W = CoxeterGroup(['A', 3], implementation='permutation')          # needs sage.combinat sage.groups
-                sage: W.w0.bruhat_lower_covers_reflections()                            # needs sage.combinat sage.groups
+                sage: W = CoxeterGroup(['A', 3], implementation='permutation')          # needs sage.combinat sage.graphs sage.groups
+                sage: W.w0.bruhat_lower_covers_reflections()                            # needs sage.combinat sage.graphs sage.groups
                 [((1,3,7,9)(2,11,6,10)(4,8,5,12), (2,5)(3,9)(4,6)(8,11)(10,12)),
                  ((1,11)(3,10)(4,9)(5,7)(6,12), (1,4)(2,8)(3,5)(7,10)(9,11)),
                  ((1,9,7,3)(2,10,6,11)(4,12,5,8), (1,7)(2,4)(5,6)(8,10)(11,12))]
@@ -2939,12 +2941,12 @@ class CoxeterGroups(Category_singleton):
                 sage: w.is_coxeter_sortable(c)
                 True
 
-                sage: W = CoxeterGroup(['A', 3])                                        # needs sage.combinat sage.groups
-                sage: c = W.from_reduced_word([1,2,3])                                  # needs sage.combinat sage.groups
+                sage: W = CoxeterGroup(['A', 3])                                        # needs sage.combinat sage.graphs sage.groups
+                sage: c = W.from_reduced_word([1,2,3])                                  # needs sage.combinat sage.graphs sage.groups
 
             Number of `c`-sortable elements in `A_3` (Catalan number)::
 
-                sage: len([w for w in W if w.is_coxeter_sortable(c)])                   # needs sage.rings.number_field
+                sage: len([w for w in W if w.is_coxeter_sortable(c)])                   # needs sage.combinat sage.graphs sage.groups sage.rings.number_field
                 14
 
             TESTS::
@@ -3344,9 +3346,9 @@ class CoxeterGroups(Category_singleton):
             choice of implementation affects the representation of elements in
             the output cell but not the method used for the cell computation::
 
-                sage: W = CoxeterGroup('A3', implementation='permutation')              # needs sage.combinat sage.groups
-                sage: s1, s2, s3 = W.simple_reflections()                               # needs sage.combinat sage.groups
-                sage: s1.kazhdan_lusztig_cell()                                         # needs sage.combinat sage.groups
+                sage: W = CoxeterGroup('A3', implementation='permutation')              # needs sage.combinat sage.graphs sage.groups
+                sage: s1, s2, s3 = W.simple_reflections()                               # needs sage.combinat sage.graphs sage.groups
+                sage: s1.kazhdan_lusztig_cell()                                         # needs sage.combinat sage.graphs sage.groups
                 {(1,2,3,12)(4,5,10,11)(6,7,8,9),
                  (1,2,10)(3,6,5)(4,7,8)(9,12,11),
                  (1,7)(2,4)(5,6)(8,10)(11,12)}
