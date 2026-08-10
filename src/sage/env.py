@@ -605,9 +605,13 @@ def cython_aliases(required_modules=None, optional_modules=None):
     aliases["OPENMP_CFLAGS"] = OPENMP_CFLAGS.split()
     aliases["OPENMP_CXXFLAGS"] = OPENMP_CXXFLAGS.split()
 
-    # FLINT: Broken .pc on ubuntu-noble does not contain -lflint
-    if "FLINT_LIBRARIES" in aliases and 'flint' not in aliases["FLINT_LIBRARIES"]:
-        aliases["FLINT_LIBRARIES"].insert(0, 'flint')
+    if "FLINT_LIBRARIES" in aliases:
+        # FLINT: Broken .pc on ubuntu-noble does not contain -lflint
+        if 'flint' not in aliases["FLINT_LIBRARIES"]:
+            aliases["FLINT_LIBRARIES"].insert(0, 'flint')
+    else:
+        # Compatibility, https://github.com/mkauers/ore_algebra/pull/163
+        aliases["FLINT_LIBRARIES"] = ['flint']
 
     return aliases
 

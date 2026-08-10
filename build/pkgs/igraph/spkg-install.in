@@ -15,6 +15,10 @@ sdh_cmake -GNinja \
           -DIGRAPH_USE_INTERNAL_LAPACK=OFF \
           -DIGRAPH_USE_INTERNAL_SUITESPARSE=OFF \
           -DIGRAPH_GLPK_SUPPORT=ON \
+          -DCMAKE_BUILD_RPATH="${SAGE_LOCAL}/lib" \
+          -DCMAKE_INSTALL_RPATH="${SAGE_LOCAL}/lib" \
+          -DCMAKE_INSTALL_NAME_DIR="${SAGE_LOCAL}"/lib \
+          -DCMAKE_BUILD_WITH_INSTALL_NAME_DIR=ON \
           ..
 set -e
 cmake --build .

@@ -38,7 +38,6 @@ include sage/interfaces/mathics3.p*
 include sage/interfaces/sympy*.p*
 include sage/interfaces/tides.p*
 
-graft sage/ext_data/kenzo
 graft sage/ext_data/magma
 
 graft sage/rings/asymptotic

@@ -17,7 +17,6 @@ sage_setup('sagemath-symbolics',
                ],
                "sage": [
                    "ext_data/*",
-                   "ext_data/kenzo/*",
                    "ext_data/singular/*",
                    "ext_data/singular/function_field/*",
                    "ext_data/magma/*",

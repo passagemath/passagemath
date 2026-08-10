@@ -1,5 +1,7 @@
 cd src
 
+cp "$SAGE_ROOT"/config/config.* .
+
 sdh_configure --with-python=no
 sdh_make
 sdh_make_install -j1

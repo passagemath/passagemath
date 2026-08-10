@@ -1,2 +1,3 @@
 python315
 python315-devel
+python315-setuptools
