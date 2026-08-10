@@ -1,5 +1,8 @@
 cd src
 
+# https://github.com/passagemath/passagemath/issues/2593
+export CFLAGS="$CFLAGS -std=gnu17"
+
 # build and install modular_resolution
 sdh_configure
 sdh_make_install
