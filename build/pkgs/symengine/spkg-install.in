@@ -1,4 +1,8 @@
 cd src
+
+# https://github.com/passagemath/passagemath/pull/2591#issuecomment-5246494550
+sed -i.bak 's/cmake_minimum_required(VERSION .*)/cmake_minimum_required(VERSION 3.18)/' cmake/SymEngineConfig.cmake.in
+
 mkdir build
 cd build
 sdh_cmake -GNinja \
