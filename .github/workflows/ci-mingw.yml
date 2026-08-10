@@ -88,6 +88,7 @@ jobs:
         gsl
         highs
         iml
+        info
         libbraiding
         libhomfly
         libjpeg
@@ -96,11 +97,15 @@ jobs:
         m4rie
         mpfi
         nauty
+        ncurses
         ntl
         planarity
         ppl
+        primecount
+        primesieve
         qhull
         rankwidth
+        readline
         sirocco
         symmetrica
         tdlib
@@ -176,6 +181,7 @@ jobs:
         gsl
         highs
         iml
+        info
         libbraiding
         libhomfly
         libjpeg
@@ -184,11 +190,15 @@ jobs:
         m4rie
         mpfi
         nauty
+        ncurses
         ntl
         planarity
         ppl
+        primecount
+        primesieve
         qhull
         rankwidth
+        readline
         sirocco
         symmetrica
         tdlib

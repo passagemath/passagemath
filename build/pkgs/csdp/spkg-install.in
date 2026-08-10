@@ -3,6 +3,7 @@ echo "**************************************************"
 echo "NOTE that csdp's License is NOT GPL-compatible"
 echo "**************************************************"
 
+export CFLAGS="$CFLAGS -std=gnu17"
 
 cd src
 sdh_configure CPPFLAGS=-DNOSHORTS
