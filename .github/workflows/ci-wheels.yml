@@ -179,7 +179,7 @@ jobs:
           WHEELHOUSE=${GITHUB_WORKSPACE}/wheelhouse
           if [ -d "$WHEELHOUSE" ]; then
               export PIP_FIND_LINKS=$WHEELHOUSE
-              (set +x; cd "$WHEELHOUSE" && for whl in *.whl *.tar.gz; do
+              (set +x; cd "$WHEELHOUSE" && case "${{ matrix.os }}" in macos-*-intel);; macos-*) rm -f *macosx_*_x86_64*;; esac; for whl in *.whl *.tar.gz; do
                    case $whl in
                        *$pkg_underscore-*.whl) ;;
                        *musllinux*)            ;;
