@@ -1,0 +1,3 @@
+python313
+python313-devel
+python313-setuptools

@@ -1,0 +1,2 @@
+python313Packages.python
+python3Packages.setuptools
