@@ -14,5 +14,5 @@ GPLv2+
 Upstream Contact
 ----------------
 
-https://gitlab.com/videlec/surface_dynamics
-https://pypi.org/project/surface-dynamics/
+- https://github.com/flatsurf/surface-dynamics
+- https://github.com/passagemath/passagemath-pkg-surface-dynamics
