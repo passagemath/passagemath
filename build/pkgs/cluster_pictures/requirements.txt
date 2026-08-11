@@ -1,1 +1,1 @@
-sage_cluster_pictures @ git+https://github.com/passagemath/passagemath-pkg-cluster-pictures.git
+-e git+https://github.com/passagemath/passagemath-pkg-cluster-pictures.git#egg=sage_cluster_pictures

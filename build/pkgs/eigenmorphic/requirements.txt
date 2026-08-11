@@ -1,1 +1,1 @@
-eigenmorphic @ git+https://github.com/passagemath/passagemath-pkg-eigenmorphic.git
+-e git+https://github.com/passagemath/passagemath-pkg-eigenmorphic.git#egg=eigenmorphic

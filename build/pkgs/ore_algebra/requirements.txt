@@ -1,1 +1,1 @@
-ore_algebra @ git+https://github.com/mkauers/ore_algebra
+-e git+https://github.com/mkauers/ore_algebra#egg=ore_algebra
