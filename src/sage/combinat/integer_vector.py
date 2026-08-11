@@ -1856,6 +1856,8 @@ class IntegerVectorsConstraints(IntegerVectors):
         for n in n_list:
             for x in IntegerListsLex(n, check=False, **self.constraints):
                 yield self.element_class(self, x, check=False)
+
+
 def integer_vectors_nk_fast_iter(n, k):
     """
     A fast iterator for integer vectors of ``n`` of length ``k`` which
