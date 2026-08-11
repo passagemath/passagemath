@@ -1,1 +1,1 @@
-surface_dynamics
+surface_dynamics @ git+https://github.com/passagemath/passagemath-pkg-surface-dynamics.git
