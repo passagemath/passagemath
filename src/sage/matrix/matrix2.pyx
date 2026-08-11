@@ -5658,6 +5658,76 @@ cdef class Matrix(Matrix1):
             M = MatrixSpace(ring, self.nrows(), self.ncols())(A)
             return M.kernel()
 
+    def markov_basis_matrix(self, algorithm='4ti2', *, precision=None,
+                            completion=None, generation=None, minimal=True):
+        r"""
+        Return a Markov basis of this integer matrix using 4ti2.
+
+        For a matrix `A`, a Markov basis is a finite subset of
+        `\ker_{\ZZ}(A)` whose moves connect every nonnegative integer fiber
+        `\{x \in \ZZ_{\geq 0}^n : Ax=b\}`.  The rows of the returned matrix
+        are the Markov moves.
+
+        INPUT:
+
+        - ``algorithm`` -- (default: ``'4ti2'``) computational backend
+        - ``precision`` -- (optional) ``32``, ``64``, or ``'arbitrary'``
+        - ``completion`` -- (optional) completion procedure:
+          ``'fifo'``, ``'weighted'``, or ``'unbounded'``
+        - ``generation`` -- (optional) generation procedure:
+          ``'hybrid'``, ``'project-and-lift'``, ``'max-min'``, or
+          ``'saturation'``
+        - ``minimal`` -- boolean (default: ``True``); whether to compute a
+          minimal Markov basis
+
+        OUTPUT:
+
+        A matrix over `\ZZ` whose rows are Markov moves.  Their order and
+        signs are not canonical.
+
+        EXAMPLES::
+
+            sage: A = matrix(ZZ, [[1, 1, 0, 0],
+            ....:                 [0, 0, 1, 1],
+            ....:                 [1, 0, 1, 0],
+            ....:                 [0, 1, 0, 1]])
+            sage: M = A.markov_basis_matrix()  # optional - 4ti2
+            sage: M.dimensions()  # optional - 4ti2
+            (1, 4)
+            sage: A * M.transpose() == zero_matrix(ZZ, 4, 1)  # optional - 4ti2
+            True
+
+        Denominators of rational matrices are cleared before calling 4ti2::
+
+            sage: A = matrix(QQ, [[1/2, 1]])
+            sage: M = A.markov_basis_matrix()  # optional - 4ti2
+            sage: M.dimensions()  # optional - 4ti2
+            (1, 2)
+            sage: A * M.transpose() == zero_matrix(QQ, 1, 1)  # optional - 4ti2
+            True
+        """
+        if algorithm != '4ti2':
+            raise ValueError(f"unknown Markov basis algorithm: {algorithm!r}")
+
+        if self.base_ring() == ZZ:
+            integer_matrix = self
+        elif self.base_ring() == QQ:
+            integer_matrix, _ = self._clear_denom()
+        else:
+            raise TypeError("the matrix must be over the integers or rationals")
+
+        from sage.features.four_ti_2 import FourTi2
+        FourTi2().require()
+
+        from sage.interfaces.four_ti_2 import four_ti_2
+        return four_ti_2.markov(
+            mat=integer_matrix,
+            precision=precision,
+            algorithm=completion,
+            generation=generation,
+            minimal=minimal,
+        )
+
     def image(self):
         """
         Return the image of the homomorphism on rows defined by right
