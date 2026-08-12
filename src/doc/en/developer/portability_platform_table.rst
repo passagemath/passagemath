@@ -1474,42 +1474,6 @@
 .. |codespace-archlinux-latest-standard| image:: https://github.com/codespaces/badge.svg
    :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-archlinux-latest-standard%2Fdevcontainer.json
 
-.. |image-opensuse-15.6-gcc_11-python3.12-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-system-packages
-
-.. |image-opensuse-15.6-gcc_11-python3.12-minimal-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-configured
-
-.. |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%23677895
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-pre
-
-.. |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%236686c1
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets
-
-.. |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%236495ed
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-optional
-
-.. |codespace-opensuse-15.6-gcc_11-python3.12-minimal| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-15.6-gcc_11-python3.12-minimal%2Fdevcontainer.json
-
-.. |image-opensuse-15.6-gcc_11-python3.12-standard-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-system-packages
-
-.. |image-opensuse-15.6-gcc_11-python3.12-standard-configured| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-configured/latest_tag?ignore=latest,dev,*-failed&label=configured&color=%23696969
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-configured
-
-.. |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets-pre| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets-pre/latest_tag?ignore=latest,dev,*-failed&label=with-targets-pre&color=%235d8a4c
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets-pre
-
-.. |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets/latest_tag?ignore=latest,dev,*-failed&label=with-targets&color=%2350ab2e
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets
-
-.. |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets-optional| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets-optional/latest_tag?ignore=latest,dev,*-failed&label=with-targets-optional&color=%2344cc11
-   :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-15.6-gcc_11-python3.12-standard-with-targets-optional
-
-.. |codespace-opensuse-15.6-gcc_11-python3.12-standard| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/passagemath/passagemath?devcontainer_path=.devcontainer%2Fportability-opensuse-15.6-gcc_11-python3.12-standard%2Fdevcontainer.json
-
 .. |image-opensuse-16.0-python3.13-minimal-with-system-packages| image:: https://ghcr-badge.egpl.dev/passagemath/passagemath/sage-opensuse-16.0-python3.13-minimal-with-system-packages/size?tag=dev&label=with-system-packages&color=%23696969
    :target: https://ghcr.io/passagemath/passagemath/sage-opensuse-16.0-python3.13-minimal-with-system-packages
 
@@ -2314,14 +2278,6 @@
    * -    ‑*standard*
      - |image-archlinux-latest-standard-with-system-packages| |image-archlinux-latest-standard-with-targets-pre| |image-archlinux-latest-standard-with-targets| |image-archlinux-latest-standard-with-targets-optional|
      - |codespace-archlinux-latest-standard|
-   * - **opensuse**-15.6-gcc_11-python3.12 
-       
-          ‑*minimal*
-     - |image-opensuse-15.6-gcc_11-python3.12-minimal-with-system-packages| |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-pre| |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets| |image-opensuse-15.6-gcc_11-python3.12-minimal-with-targets-optional|
-     - |codespace-opensuse-15.6-gcc_11-python3.12-minimal|
-   * -    ‑*standard*
-     - |image-opensuse-15.6-gcc_11-python3.12-standard-with-system-packages| |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets-pre| |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets| |image-opensuse-15.6-gcc_11-python3.12-standard-with-targets-optional|
-     - |codespace-opensuse-15.6-gcc_11-python3.12-standard|
    * - **opensuse**-16.0-python3.13 
        
           ‑*minimal*
