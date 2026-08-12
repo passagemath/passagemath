@@ -1,10 +1,6 @@
-if [ -z "$SAGE_LOCAL" ]; then
-    echo >&2 "SAGE_LOCAL undefined ... exiting"
-    echo >&2 "Maybe run 'sage --sh'?"
-    exit 1
-fi
-
 cd src
+
+export CFLAGS="$CFLAGS -std=gnu17"
 
 $MAKE
 if [ $? -ne 0 ]; then
