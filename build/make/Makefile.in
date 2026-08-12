@@ -847,6 +847,10 @@ $(foreach pkgname,$(PIP_PACKAGES),\
 	                                           $(call pkg_deps,$(pkgname)))))
 endif
 
+_sagemath-no-deps:
+	$(AM_V_at)sage-logger -p 'sage --pip install --no-build-isolation -v -r "$(SAGE_ROOT)/build/pkgs/_sagemath/requirements.txt"' '$(SAGE_LOGS)/_sagemath.log'
+
+
 # ============================= script packages ==============================
 # Generate build rules for 'script' packages; this template is used to generate
 # three rules in the form:
