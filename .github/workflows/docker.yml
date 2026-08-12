@@ -59,7 +59,6 @@ on:
            "alpine",
            "gentoo-python3.13",
            "archlinux-latest",
-           "opensuse-15.6-gcc_11-python3.12",
            "opensuse-16.0-python3.13",
            "opensuse-tumbleweed",
            "voidlinux-musl",
