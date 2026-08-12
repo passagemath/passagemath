@@ -1,3 +1,6 @@
+# https://github.com/passagemath/passagemath/issues/2593
+export CFLAGS="$CFLAGS -std=gnu17"
+
 # building pGroupCohomology
 cd `ls -d src/pGroupCohomology*`
 sdh_pip_install --no-build-isolation .
