@@ -87,7 +87,7 @@ index a7a74e7..1599014 100644
  )
  pari = declare_dependency(include_directories: pari_header_include_dirs,
 -  dependencies: [pari, gmp])
-+  link_args: '-Wl,-rpath=' + pari_libpath + ' -L' + pari_libpath + ' -lpari',
++  link_args: '-Wl,-rpath,' + pari_libpath + ' -L' + pari_libpath + ' -lpari',
 +  dependencies: [lpari, gmp])
  
  # Get PARI version (mostly as smoke test)
@@ -100,7 +100,7 @@ index a7a74e7..1599014 100644
  pari_version = cc.run(
    pari_version_code,
 -  args: ['-v'],
-+  args: ['-Wl,-rpath=' + pari_libpath + ' -L' + pari_libpath ],
++  args: ['-Wl,-rpath,' + pari_libpath + ' -L' + pari_libpath ],
 +#  args: ['-v'],
    name: 'pari version',
    dependencies: [pari],
