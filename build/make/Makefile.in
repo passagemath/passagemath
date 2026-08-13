@@ -821,7 +821,7 @@ $(1): $(3) $(2)
 $(1)-ensure: $$(inst_$(1))
 
 $(1)-no-deps:
-	. '$$(SAGE_ROOT)/src/bin/sage-src-env-config' && \
+	$(AM_V_at). '$$(SAGE_ROOT)/src/bin/sage-src-env-config' && \
 	. '$$(SAGE_ROOT)/src/bin/sage-env-config' && \
 	. '$$(SAGE_ROOT)/src/bin/sage-env' && \
 	. '$$(SAGE_ROOT)/build/bin/sage-build-env-config' && \
@@ -848,7 +848,12 @@ $(foreach pkgname,$(PIP_PACKAGES),\
 endif
 
 _sagemath-no-deps:
-	$(AM_V_at)sage-logger -p 'sage --pip install --no-build-isolation -v -r "$(SAGE_ROOT)/build/pkgs/_sagemath/requirements.txt"' '$(SAGE_LOGS)/_sagemath.log'
+	$(AM_V_at). '$(SAGE_ROOT)/src/bin/sage-src-env-config' && \
+	. '$(SAGE_ROOT)/src/bin/sage-env-config' && \
+	. '$(SAGE_ROOT)/src/bin/sage-env' && \
+	. '$(SAGE_ROOT)/build/bin/sage-build-env-config' && \
+	. '$(SAGE_ROOT)/build/bin/sage-build-env' && \
+	sage-logger -p 'sage --pip install --no-build-isolation -v -r "$(SAGE_ROOT)/build/pkgs/_sagemath/requirements.txt"' '$(SAGE_LOGS)/_sagemath.log'
 
 
 # ============================= script packages ==============================
