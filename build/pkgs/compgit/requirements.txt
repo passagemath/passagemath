@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-CompGIT#egg=CompGIT
+-e CompGIT@git+https://github.com/passagemath/passagemath-pkg-CompGIT

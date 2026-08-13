@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-zftools.git#egg=zftools
+-e zftools@git+https://github.com/passagemath/passagemath-pkg-zftools.git

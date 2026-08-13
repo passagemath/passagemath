@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-gcaops.git#egg=gcaops
+-e gcaops@git+https://github.com/passagemath/passagemath-pkg-gcaops.git

@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-arithmat#egg=arithmat
+-e arithmat@git+https://github.com/passagemath/passagemath-pkg-arithmat

@@ -1,1 +1,1 @@
--e git+https://github.com/abelfunctions/abelfunctions.git#egg=abelfunctions
+-e abelfunctions@git+https://github.com/abelfunctions/abelfunctions.git

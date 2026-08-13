@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-dd_functions.git#egg=dd_functions
+-e dd_functions@git+https://github.com/passagemath/passagemath-pkg-dd_functions.git

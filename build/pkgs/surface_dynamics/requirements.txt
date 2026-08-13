@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-surface-dynamics.git#egg=surface_dynamics
+-e surface_dynamics@git+https://github.com/passagemath/passagemath-pkg-surface-dynamics.git

@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-InDelsTopo.git#egg=InDelsTopo
+-e InDelsTopo@git+https://github.com/passagemath/passagemath-pkg-InDelsTopo.git

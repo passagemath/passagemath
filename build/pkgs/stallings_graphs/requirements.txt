@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-stallings_graphs.git#egg=stallings-graphs
+-e stallings-graphs@git+https://github.com/passagemath/passagemath-pkg-stallings_graphs.git

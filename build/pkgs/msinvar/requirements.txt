@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-msinvar.git#egg=msinvar
+-e msinvar@git+https://github.com/passagemath/passagemath-pkg-msinvar.git

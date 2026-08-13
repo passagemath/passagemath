@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-circkit.git#egg=circkit
+-e circkit@git+https://github.com/passagemath/passagemath-pkg-circkit.git
