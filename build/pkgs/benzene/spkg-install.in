@@ -1,5 +1,8 @@
 cd src
 
+# From Arch Linux - honor system CFLAGS
+sed -e '/^CFLAGS/d' -i.bak makefile
+
 export CFLAGS="$CFLAGS -std=gnu17"
 
 $MAKE
