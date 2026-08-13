@@ -1,1 +1,1 @@
-stdpairs @ git+https://github.com/byeongsuyu/StdPairs.git
+-e git+https://github.com/byeongsuyu/StdPairs.git#egg=stdpairs

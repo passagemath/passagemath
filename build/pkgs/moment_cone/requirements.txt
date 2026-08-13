@@ -1,1 +1,1 @@
-moment_cone @ git+https://github.com/ea-icj/moment_cone.git
+-e git+https://github.com/ea-icj/moment_cone.git#egg=moment_cone

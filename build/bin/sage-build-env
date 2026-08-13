@@ -182,6 +182,9 @@ if [ "x$SAGE_BUILD_ENV_SOURCED" = "x" ]; then
         export F77FLAGS_NON_NATIVE="$ORIGINAL_F77FLAGS"
         export F77FLAGS_O3_NON_NATIVE="$ORIGINAL_F77FLAGS"
     fi
+
+    # Have 'pip install -e URL' put source trees in SAGE_ROOT/pkgs
+    export PIP_SRC="$SAGE_ROOT/pkgs"
 fi
 
 # Issue #31335: Avoid include paths leaking in from homebrew python3's distutils.cfg

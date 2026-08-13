@@ -1,1 +1,1 @@
-train-track @ git+https://github.com/coulbois/sage-train-track.git
+-e git+https://github.com/coulbois/sage-train-track.git#egg=train-track
