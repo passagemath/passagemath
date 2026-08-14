@@ -1278,6 +1278,20 @@ cdef class LaurentPolynomial_mpair(LaurentPolynomial):
             sage: (a^2 * b^-1).degree()
             1
 
+        This also applies blockwise to block orders containing weighted
+        blocks::
+
+            sage: T = TermOrder('wdeglex', [1, 3]) + TermOrder('lex', 1)
+            sage: R.<x, y, z> = LaurentPolynomialRing(ZZ, order=T)
+            sage: R(y).degree()
+            3
+            sage: R(1/y).degree()
+            -3
+            sage: R(1/z).degree()
+            -1
+            sage: (x^2 * y^-1).degree()
+            -1
+
         TESTS::
 
             sage: R.<x, y, z> = LaurentPolynomialRing(ZZ)
@@ -1292,7 +1306,15 @@ cdef class LaurentPolynomial_mpair(LaurentPolynomial):
             return minus_infinity
 
         if x is None:
-            w = self._parent.term_order().weights()
+            T = self._parent.term_order()
+            w = T.weights()
+            if w is None:
+                blocks = T.blocks()
+                if len(blocks) > 1:
+                    w = []
+                    for b in blocks:
+                        bw = b.weights()
+                        w.extend(bw if bw is not None else [1] * len(b))
             if w is None:
                 return self._poly.total_degree() + sum(self._mon)
             return self._poly.total_degree() + sum(wi * mi for wi, mi
