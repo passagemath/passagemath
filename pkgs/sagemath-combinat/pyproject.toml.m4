@@ -33,18 +33,18 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl"]
+test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
 # by library
-glucose         = ["passagemath-glucose"]
-kissat          = ["passagemath-kissat"]
+glucose         = [SPKG_INSTALL_REQUIRES_sagemath_glucose]
+kissat          = [SPKG_INSTALL_REQUIRES_sagemath_kissat]
 lrcalc          = [SPKG_INSTALL_REQUIRES_lrcalc_python]
 symmetrica      = []
 
 # by feature
-graphs          = ["passagemath-graphs"]
-modules         = ["passagemath-modules"]
-species         = ["passagemath-gap"]
+graphs          = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
+modules         = [SPKG_INSTALL_REQUIRES_sagemath_modules]
+species         = [SPKG_INSTALL_REQUIRES_sagemath_gap]
 findstat        = [SPKG_INSTALL_REQUIRES_requests]
 
 # everything

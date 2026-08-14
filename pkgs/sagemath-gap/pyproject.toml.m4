@@ -45,21 +45,21 @@ test            = []
 # GAP packages
 # - external dependencies per 'ExternalConditions' in PackageInfo.g
 # - dependencies on packages with external dependencies per 'NeededOtherPackages' in PackageInfo.g
-4ti2interface   = ["passagemath-latte-4ti2"]
+4ti2interface   = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
 aclib           = ["passagemath-gap[polycyclic]"]
-agt             = ["passagemath-gap-pkg-agt-data"]
-alnuth          = ["passagemath-pari"]
-caratinterface  = ["passagemath-gap-pkg-caratinterface"]
-cddinterface    = ["passagemath-gap-pkg-cddinterface"]
+agt             = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_agt_data]
+alnuth          = [SPKG_INSTALL_REQUIRES_sagemath_pari]
+caratinterface  = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_caratinterface]
+cddinterface    = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_cddinterface]
 corefreesub     = ["passagemath-gap[polycyclic]"]
 cryst           = ["passagemath-gap[polycyclic]"]
 crystcat        = ["passagemath-gap[cryst]"]
-ctbllib         = ["passagemath-gap-pkg-ctbllib-data"]
+ctbllib         = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_ctbllib_data]
 cubefree        = ["passagemath-gap[grpconst,polycyclic]"]
-curlinterface   = ["passagemath-gap-pkg-curlinterface"]
+curlinterface   = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_curlinterface]
 deepthought     = ["passagemath-gap[polycyclic]"]
-difsets         = ["passagemath-gap-pkg-difsets-data"]
-float           = ["passagemath-gap-pkg-float"]
+difsets         = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_difsets_data]
+float           = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_float]
 fr              = ["passagemath-gap[polycyclic]"]
 fwtree          = ["passagemath-gap[polycyclic]"]
 grpconst        = ["passagemath-gap[irredsol]"]
@@ -67,34 +67,34 @@ guarana         = ["passagemath-gap[polenta]"]
 hap             = ["passagemath-gap[polycyclic,crystcat,aclib,nq]"]
 hapcryst        = ["passagemath-gap[polycyclic,aclib,cryst,hap,polymaking]"]
 help            = ["passagemath-gap[ctbllib]"]
-irredsol        = ["passagemath-gap-pkg-irredsol-data"]
+irredsol        = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_irredsol_data]
 lpres           = ["passagemath-gap[polycyclic]"]
 modisom         = ["passagemath-gap[polycyclic]"]
 nilmat          = ["passagemath-gap[polenta]"]
 nq              = ["passagemath-gap[polycyclic]"]
-normalizinterface = ["passagemath-gap-pkg-normalizinterface"]
-numericalsgps   = ["passagemath-gap-pkg-numericalsgps-data"]
+normalizinterface = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_normalizinterface]
+numericalsgps   = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_numericalsgps_data]
 polenta         = ["passagemath-gap[polycyclic,alnuth,radiroot]"]
 polycyclic      = ["passagemath-gap[alnuth]"]
-polymaking      = ["passagemath-polymake"]
+polymaking      = [SPKG_INSTALL_REQUIRES_sagemath_polymake]
 radiroot        = ["passagemath-gap[alnuth]"]
-rcwa            = ["passagemath-gap-pkg-rcwa-data", "passagemath-gap[resclasses]"]
+rcwa            = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_rcwa_data "passagemath-gap[resclasses]"]
 resclasses      = ["passagemath-gap[polycyclic]"]
-semigroups      = ["passagemath-gap-pkg-semigroups"]
-sglppow         = ["passagemath-gap-pkg-sglppow-data"]
-simpcomp        = ["passagemath-gap-pkg-simpcomp-data"]
-singular        = ["passagemath-singular"]
-smallsemi       = ["passagemath-gap-pkg-smallsemi-data"]
-sonata          = ["passagemath-gap-pkg-sonata-data"]
+semigroups      = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_semigroups]
+sglppow         = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_sglppow_data]
+simpcomp        = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_simpcomp_data]
+singular        = [SPKG_INSTALL_REQUIRES_sagemath_singular]
+smallsemi       = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_smallsemi_data]
+sonata          = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_sonata_data]
 symbcompcc      = ["passagemath-gap[polycyclic]"]
-tomlib          = ["passagemath-gap-pkg-tomlib-data"]
-transgrp        = ["passagemath-gap-pkg-transgrp-data"]
+tomlib          = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_tomlib_data]
+transgrp        = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_transgrp_data]
 xmod            = ["passagemath-gap[hap]"]
-unitlib         = ["passagemath-gap-pkg-unitlib-data"]
-yangbaxter      = ["passagemath-gap-pkg-yangbaxter-data", "passagemath-gap[cryst]"]
+unitlib         = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_unitlib_data]
+yangbaxter      = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_yangbaxter_data "passagemath-gap[cryst]"]
 
 # Jupyter
-jupyterkernel   = ["passagemath-gap-pkg-jupyterkernel"]
+jupyterkernel   = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_jupyterkernel]
 jupyterlab      = [
     "passagemath-gap[jupyterkernel]",
     SPKG_INSTALL_REQUIRES_jupyterlab
@@ -107,8 +107,8 @@ notebook        = [
 # Everything as in standard Sage
 standard        = [
     "passagemath-gap[transgrp,ctbllib,tomlib,irredsol]",
-    "passagemath-pari",
-    "passagemath-singular",
+    SPKG_INSTALL_REQUIRES_sagemath_pari
+    SPKG_INSTALL_REQUIRES_sagemath_singular
 ]
 
 # The full set of GAP packages shipped by the GAP distribution;

@@ -39,23 +39,23 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-conf            = ["passagemath-conf"]
-test            = ["passagemath-repl"]
+conf            = [SPKG_INSTALL_REQUIRES_sage_conf]
+test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
 # extras by libraries
-fricas          = ["passagemath-fricas"]
-giac            = ["passagemath-giac"]
+fricas          = [SPKG_INSTALL_REQUIRES_sagemath_fricas]
+giac            = [SPKG_INSTALL_REQUIRES_sagemath_giac]
 ginac           = []  # no extra needed, same as pynac
 mathics3        = ["mathics3"]
-maxima          = ["passagemath-maxima"]
+maxima          = [SPKG_INSTALL_REQUIRES_sagemath_maxima]
 ntl             = []  # no extra needed
 primecount      = [SPKG_INSTALL_REQUIRES_primecountpy]
 pynac           = []  # no extra needed
-singular        = ["passagemath-singular"]
+singular        = [SPKG_INSTALL_REQUIRES_sagemath_singular]
 sympy           = []  # no extra needed
 
 # extras by other features
-plot            = ["passagemath-plot"]
+plot            = [SPKG_INSTALL_REQUIRES_sagemath_plot]
 
 standard        = ["passagemath-symbolics[maxima,primecount,singular,test]"]
 

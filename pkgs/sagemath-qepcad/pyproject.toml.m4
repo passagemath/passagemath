@@ -29,7 +29,7 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-symbolics",
+    SPKG_INSTALL_REQUIRES_sagemath_symbolics
 ]
 
 [tool.cibuildwheel.linux]

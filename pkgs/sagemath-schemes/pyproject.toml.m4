@@ -40,33 +40,33 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test    = ["passagemath-repl"]
+test    = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
 # extras by packages (same as sagemath-modules)
 flint   = []  # No extra needed
 fpylll  = []  # No extra needed
 gsl     = []  # No extra needed
-linbox  = ["passagemath-linbox"]
+linbox  = [SPKG_INSTALL_REQUIRES_sagemath_linbox]
 m4ri    = ["passagemath-modules[m4ri]"]
 m4rie   = ["passagemath-modules[m4rie]"]
-meataxe = ["passagemath-meataxe"]
+meataxe = [SPKG_INSTALL_REQUIRES_sagemath_meataxe]
 mpfi    = ["passagemath-modules[flint]"]
 mpfr    = []  # No extra needed
 mpmath  = []  # No extra needed
-ntl     = ["passagemath-ntl"]
+ntl     = [SPKG_INSTALL_REQUIRES_sagemath_ntl]
 numpy   = [SPKG_INSTALL_REQUIRES_numpy]
-pari    = ["passagemath-pari"]
+pari    = [SPKG_INSTALL_REQUIRES_sagemath_pari]
 primecountpy = [SPKG_INSTALL_REQUIRES_primecountpy]
 
 # extras by packages (specific to sagemath-schemes)
 
-eclib   = ["passagemath-eclib"]
-lcalc   = ["passagemath-lcalc"]
-msolve  = ["passagemath-msolve"]
-palp    = ["passagemath-palp"]
-qepcad  = ["passagemath-qepcad"]
+eclib   = [SPKG_INSTALL_REQUIRES_sagemath_eclib]
+lcalc   = [SPKG_INSTALL_REQUIRES_sagemath_lcalc]
+msolve  = [SPKG_INSTALL_REQUIRES_sagemath_msolve]
+palp    = [SPKG_INSTALL_REQUIRES_sagemath_palp]
+qepcad  = [SPKG_INSTALL_REQUIRES_sagemath_qepcad]
 singular = []  # no extra needed
-sympow  = ["passagemath-sympow"]
+sympow  = [SPKG_INSTALL_REQUIRES_sagemath_sympow]
 
 # extras by rings; same as in sagemath-modules
 RDF     = ["passagemath-schemes[numpy]"]
@@ -95,13 +95,13 @@ QuadraticField  = ["passagemath-schemes[NumberField]"]
 CyclotomicField = ["passagemath-schemes[NumberField]"]
 
 # extras by features
-toric           = ["passagemath-palp",
-                   "passagemath-polyhedra",
-                   "passagemath-graphs"]
+toric           = [SPKG_INSTALL_REQUIRES_sagemath_palp
+                   SPKG_INSTALL_REQUIRES_sagemath_polyhedra
+                   SPKG_INSTALL_REQUIRES_sagemath_graphs]
 padics          = ["passagemath-schemes[Zp]"]
 
 # databases
-database-kohel = ["passagemath-database-kohel"]
+database-kohel = [SPKG_INSTALL_REQUIRES_sagemath_database_kohel]
 
 # the whole package
 standard        = ["passagemath-schemes[toric,padics,NumberField,FiniteField,flint,lcalc,linbox,mpfi,ntl,numpy,pari,singular,eclib,sympow]"]
