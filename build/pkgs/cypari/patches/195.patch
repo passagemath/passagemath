@@ -1,0 +1,107 @@
+From bb7d20eef203c24d99b1de76451ed9226f9122e7 Mon Sep 17 00:00:00 2001
+From: Dima Pasechnik <dima@pasechnik.info>
+Date: Fri, 12 Dec 2025 19:52:43 -0600
+Subject: [PATCH 1/2] add an meson option to pass pari location
+
+---
+ meson.build   | 7 +++++++
+ meson.options | 9 +++++++++
+ 2 files changed, 16 insertions(+)
+ create mode 100644 meson.options
+
+diff --git a/meson.build b/meson.build
+index f002877..a7a74e7 100644
+--- a/meson.build
++++ b/meson.build
+@@ -55,6 +55,13 @@ if host_machine.system() == 'darwin'
+   endif
+ endif
+ 
++pari_prefix = get_option('pari-prefix')
++if pari_prefix != ''
++   pari_header_include_dirs += include_directories(pari_prefix + '/include')
++   pari_lib_dirs += [pari_lib_dirs + '/lib']
++endif
++
++
+ # Explicitly check for header to give better error message (using -v to show search paths)
+ cc.has_header(
+   'pari/pari.h',
+diff --git a/meson.options b/meson.options
+new file mode 100644
+index 0000000..cfd7525
+--- /dev/null
++++ b/meson.options
+@@ -0,0 +1,9 @@
++## Options for the Meson build system
++# https://mesonbuild.com/Build-options.html
++
++option(
++  'pari-prefix',
++  type: 'string',
++  value: '',
++  description: 'Path to a custom installation of pari-gp'
++)
+
+From d1f51425d90f5463e833de325ee0133b3052fb1d Mon Sep 17 00:00:00 2001
+From: Dima Pasechnik <dima@pasechnik.info>
+Date: Sun, 14 Dec 2025 12:45:54 -0600
+Subject: [PATCH 2/2] this allows an external pari library, with LDFLAGS set
+
+with PPREF set to point at pari install prefix,
+do
+
+ export LDFLAGS="-Wl,-rpath=$PPREF/lib -L$PPREF/lib -lpari"
+ pip install . --config-settings=setup-args="-Dpari-prefix=$PPREF"
+
+works
+---
+ meson.build | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index a7a74e7..1599014 100644
+--- a/meson.build
++++ b/meson.build
+@@ -58,7 +58,8 @@ endif
+ pari_prefix = get_option('pari-prefix')
+ if pari_prefix != ''
+    pari_header_include_dirs += include_directories(pari_prefix + '/include')
+-   pari_lib_dirs += [pari_lib_dirs + '/lib']
++   pari_libpath = pari_prefix + '/lib'
++   pari_lib_dirs += [pari_libpath]
+ endif
+ 
+ 
+@@ -69,7 +70,7 @@ cc.has_header(
+   args: ['-v'],
+   include_directories: pari_header_include_dirs,
+ )
+-pari = cc.find_library(
++lpari = cc.find_library(
+   'pari',
+   has_headers: ['pari/pari.h'],
+   required: true,
+@@ -77,7 +78,8 @@ pari = cc.find_library(
+   header_include_directories: pari_header_include_dirs,
+ )
+ pari = declare_dependency(include_directories: pari_header_include_dirs,
+-  dependencies: [pari, gmp])
++  link_args: '-Wl,-rpath,' + pari_libpath + ' -L' + pari_libpath + ' -lpari',
++  dependencies: [lpari, gmp])
+ 
+ # Get PARI version (mostly as smoke test)
+ pari_version_code = '''
+@@ -92,9 +94,11 @@ int main(void) {
+   return 0;
+ }
+ '''
++
+ pari_version = cc.run(
+   pari_version_code,
+-  args: ['-v'],
++  args: ['-Wl,-rpath,' + pari_libpath + ' -L' + pari_libpath ],
++#  args: ['-v'],
+   name: 'pari version',
+   dependencies: [pari],
+   required: true,
