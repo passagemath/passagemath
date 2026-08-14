@@ -826,7 +826,12 @@ $(1)-no-deps:
 	. '$$(SAGE_ROOT)/src/bin/sage-env' && \
 	. '$$(SAGE_ROOT)/build/bin/sage-build-env-config' && \
 	. '$$(SAGE_ROOT)/build/bin/sage-build-env' && \
-	sage-logger -p '$(SAGE_ROOT)/src/bin/sage --pip install -v -r "$$(SAGE_ROOT)/build/pkgs/$(1)/requirements.txt"' '$$(SAGE_LOGS)/$(1).log'
+	cd '$$(SAGE_ROOT)/build/pkgs/$(1)/' && \
+	if [ -x "spkg-install" ]; then \
+	    sage-logger -p './spkg-install' '$$(SAGE_LOGS)/$(1).log'; \
+	else \
+	    sage-logger -p '$(SAGE_ROOT)/src/bin/sage --pip install -v -r "requirements.txt"' '$$(SAGE_LOGS)/$(1).log'; \
+        fi
 
 $(1)-uninstall:
 	-sage --pip uninstall --isolated --yes --no-input -r '$$(SAGE_ROOT)/build/pkgs/$(1)/requirements.txt'
@@ -846,15 +851,6 @@ $(foreach pkgname,$(PIP_PACKAGES),\
 	$(info $(call PIP_PACKAGE_templ,$(pkgname),$(call pkg_deps,$(pkgname),build_),\
 	                                           $(call pkg_deps,$(pkgname)))))
 endif
-
-_sagemath-no-deps:
-	$(AM_V_at). '$(SAGE_ROOT)/src/bin/sage-src-env-config' && \
-	. '$(SAGE_ROOT)/src/bin/sage-env-config' && \
-	. '$(SAGE_ROOT)/src/bin/sage-env' && \
-	. '$(SAGE_ROOT)/build/bin/sage-build-env-config' && \
-	. '$(SAGE_ROOT)/build/bin/sage-build-env' && \
-	sage-logger -p '$(SAGE_ROOT)/src/bin/sage --pip install --no-build-isolation -v -r "$(SAGE_ROOT)/build/pkgs/_sagemath/requirements.txt"' '$(SAGE_LOGS)/_sagemath.log'
-
 
 # ============================= script packages ==============================
 # Generate build rules for 'script' packages; this template is used to generate
