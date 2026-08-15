@@ -6,4 +6,8 @@ SAGE_SPKG_CONFIGURE([graphviz], [
     AS_IF([test x$NEATO = x], [sage_spkg_install_graphviz=yes])
     AC_CHECK_PROGS([TWOPI], [twopi])
     AS_IF([test x$TWOPI = x], [sage_spkg_install_graphviz=yes])
+    AC_CHECK_PROGS([FDP], [fdp])
+    AS_IF([test x$FDP = x], [sage_spkg_install_graphviz=yes])
+    AC_CHECK_PROGS([CIRCO], [circo])
+    AS_IF([test x$CIRCO = x], [sage_spkg_install_graphviz=yes])
 ])
