@@ -21,7 +21,7 @@ SAGE_LOCAL="$(cd "$(dirname "$0")" && cd .. && pwd -P)"
 ##  The default is '/usr/local/lib/gap3-jm'.
 ##  You have to change this unless you have installed  GAP in this  location.
 ##
-GAP_DIR="$SAGE_LOCAL/gap3/latest/gap3"
+GAP_DIR="$SAGE_LOCAL/gap3"
 
 #############################################################################
 ##

@@ -4,12 +4,7 @@
 ## SETUP
 ###########################################
 
-GAP3_DIR="gap-$PKG_VER"
-INSTALL_DIR="$SAGE_LOCAL/$PKG_BASE/$GAP3_DIR/gap3"
-
-echo "spkg-install is using"
-echo "GAP3_DIR = $GAP3_DIR"
-echo "INSTALL_DIR = $INSTALL_DIR"
+INSTALL_DIR="$SAGE_LOCAL/$PKG_BASE"
 
 ###########################################
 ## INSTALLATION
@@ -29,14 +24,6 @@ cd ..
 echo "Installing (copying) files..."
 sdh_install * "$INSTALL_DIR"
 
-echo "Creating symlink to new $PKG_BASE installation..."
-rm -f "$SAGE_LOCAL/$PKG_BASE/latest"
-ln -s "$GAP3_DIR" "$SAGE_DESTDIR_LOCAL/$PKG_BASE/latest"
-if [[ $? -ne 0 ]]; then
-    echo >&2 "Error creating symbolic link '$SAGE_LOCAL/$PKG_BASE/latest'"
-    exit 1
-fi
-
 echo "Copying GAP3 startup script..."
-rm -f "$SAGE_LOCAL/bin/gap3"
+rm -f "$SAGE_DESTDIR/LOCAL/bin/gap3"
 sdh_install -T ../gap3.sh "$SAGE_LOCAL/bin/gap3"
