@@ -29,7 +29,7 @@ class Gap3(Executable):
             "gap3",
             executable="gap3",
             spkg="gap3",
-            type="experimental",
+            type="optional",
         )
 
 
