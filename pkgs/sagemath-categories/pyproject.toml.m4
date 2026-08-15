@@ -28,7 +28,7 @@ include(`pyproject_toml_metadata_supports_windows.m4')dnl'
 
 [project.optional-dependencies]
 test = [
-    "passagemath-repl",
+    SPKG_INSTALL_REQUIRES_sagemath_repl
 ]
 
 [project.readme]

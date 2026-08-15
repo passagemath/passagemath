@@ -28,8 +28,8 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-groups",
-    "passagemath-repl",
+    SPKG_INSTALL_REQUIRES_sagemath_groups
+    SPKG_INSTALL_REQUIRES_sagemath_repl
 ]
 
 [tool.cibuildwheel.linux]

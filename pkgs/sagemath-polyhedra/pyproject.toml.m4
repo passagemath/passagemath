@@ -36,25 +36,25 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-conf        = ["passagemath-conf"]
-test        = ["passagemath-repl"]
+conf        = [SPKG_INSTALL_REQUIRES_sage_conf]
+test        = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
 # general libraries
-flint       = ["passagemath-flint"]
+flint       = [SPKG_INSTALL_REQUIRES_sagemath_flint]
 fpylll      = [SPKG_INSTALL_REQUIRES_fpylll]
-linbox      = ["passagemath-linbox"]
-pari        = ["passagemath-pari"]
+linbox      = [SPKG_INSTALL_REQUIRES_sagemath_linbox]
+pari        = [SPKG_INSTALL_REQUIRES_sagemath_pari]
 
 # polyhedral libraries
-4ti2        = ["passagemath-latte-4ti2"]
-cddlib      = ["passagemath-cddlib"]
+4ti2        = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
+cddlib      = [SPKG_INSTALL_REQUIRES_sagemath_cddlib]
 latte       = ["passagemath-polyhedra[latte_int]"]  # alias
-latte_int   = ["passagemath-latte-4ti2"]
+latte_int   = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
 normaliz    = [SPKG_INSTALL_REQUIRES_pynormaliz]
-palp        = ["passagemath-palp"]
-polymake    = ["passagemath-polymake"]
+palp        = [SPKG_INSTALL_REQUIRES_sagemath_palp]
+polymake    = [SPKG_INSTALL_REQUIRES_sagemath_polymake]
 ppl         = []  # no extra required
-topcom      = ["passagemath-topcom"]
+topcom      = [SPKG_INSTALL_REQUIRES_sagemath_topcom]
 
 # optimization libraries
 cbc         = ["passagemath-polyhedra[cbc_sage]"]
@@ -68,13 +68,13 @@ cvxopt_sage = [SPKG_INSTALL_REQUIRES_cvxopt]
 cvxpy       = [SPKG_INSTALL_REQUIRES_cvxpy]
 glpk        = ["passagemath-polyhedra[glpk_sage]"]
 glpk_sage   = []  # no extra required
-highs       = ["passagemath-highs"]
+highs       = [SPKG_INSTALL_REQUIRES_sagemath_highs]
 gurobi      = ["passagemath-polyhedra[gurobi_sage]"]
 gurobi_sage = [SPKG_INSTALL_REQUIRES_sage_numerical_backends_gurobi]
 scip        = [SPKG_INSTALL_REQUIRES_pyscipopt]
 
 # databases
-polytopes-db-4d = ["passagemath-polytopes-db-4d"]
+polytopes-db-4d = [SPKG_INSTALL_REQUIRES_sagemath_database_polytopes_4d]
 
 # supported rings
 QQ          = []
@@ -84,9 +84,9 @@ NumberField = ["passagemath-polyhedra[flint]"]
 
 # features
 databases   = ["passagemath-polyhedra[polytopes-db-4d]"]
-graphs      = ["passagemath-graphs"]
-groups      = ["passagemath-groups"]
-plot        = ["passagemath-plot"]
+graphs      = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
+groups      = [SPKG_INSTALL_REQUIRES_sagemath_groups]
+plot        = [SPKG_INSTALL_REQUIRES_sagemath_plot]
 
 # the whole package
 standard    = [

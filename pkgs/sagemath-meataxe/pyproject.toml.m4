@@ -29,8 +29,8 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-     "passagemath-pari",
-     "passagemath-repl",
+     SPKG_INSTALL_REQUIRES_sagemath_pari
+     SPKG_INSTALL_REQUIRES_sagemath_repl
 ]
 
 [tool.setuptools]

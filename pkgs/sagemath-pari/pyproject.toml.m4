@@ -38,17 +38,17 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test = ["passagemath-repl"]
+test = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
 # PARI data packages
-elldata         = ["passagemath-pari-elldata"]
-galdata         = ["passagemath-pari-galdata"]
-galpol          = ["passagemath-pari-galpol"]
-nflistdata      = ["passagemath-pari-nflistdata"]
-nftables        = ["passagemath-pari-nftables"]
-seadata         = ["passagemath-pari-seadata"]
-seadata-big     = ["passagemath-pari-seadata-big"]
-seadata-small   = ["passagemath-pari-seadata-small"]
+elldata         = [SPKG_INSTALL_REQUIRES_sagemath_pari_elldata]
+galdata         = [SPKG_INSTALL_REQUIRES_sagemath_pari_galdata]
+galpol          = [SPKG_INSTALL_REQUIRES_sagemath_pari_galpol]
+nflistdata      = [SPKG_INSTALL_REQUIRES_sagemath_pari_nflistdata]
+nftables        = [SPKG_INSTALL_REQUIRES_sagemath_pari_nftables]
+seadata         = [SPKG_INSTALL_REQUIRES_sagemath_pari_seadata]
+seadata-big     = [SPKG_INSTALL_REQUIRES_sagemath_pari_seadata_big]
+seadata-small   = [SPKG_INSTALL_REQUIRES_sagemath_pari_seadata_small]
 
 # Jupyter
 jupyterkernel   = [

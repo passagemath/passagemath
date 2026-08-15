@@ -32,8 +32,8 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-repl",
-    "passagemath-polyhedra",
+    SPKG_INSTALL_REQUIRES_sagemath_repl
+    SPKG_INSTALL_REQUIRES_sagemath_polyhedra
 ]
 
 [tool.setuptools]

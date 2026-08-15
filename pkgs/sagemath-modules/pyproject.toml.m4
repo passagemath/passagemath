@@ -40,22 +40,22 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test    = ["passagemath-repl"]
+test    = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
 # extras by packages
-flint   = ["passagemath-flint"]
+flint   = [SPKG_INSTALL_REQUIRES_sagemath_flint]
 fpylll  = [SPKG_INSTALL_REQUIRES_fpylll]
 gsl     = []  # No extra needed
-linbox  = ["passagemath-linbox"]
+linbox  = [SPKG_INSTALL_REQUIRES_sagemath_linbox]
 m4ri    = [SPKG_INSTALL_REQUIRES_sagemath_m4ri_m4rie]
 m4rie   = ["passagemath-modules[m4ri,pari]"]
-meataxe = ["passagemath-meataxe"]
+meataxe = [SPKG_INSTALL_REQUIRES_sagemath_meataxe]
 mpfi    = ["passagemath-modules[flint]"]
 mpfr    = []  # No extra needed
 mpmath  = []  # No extra needed
-ntl     = ["passagemath-ntl"]
+ntl     = [SPKG_INSTALL_REQUIRES_sagemath_ntl]
 numpy   = [SPKG_INSTALL_REQUIRES_numpy]
-pari    = ["passagemath-pari"]
+pari    = [SPKG_INSTALL_REQUIRES_sagemath_pari]
 
 # extras by rings
 RDF     = ["passagemath-modules[numpy]"]
