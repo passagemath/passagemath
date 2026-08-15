@@ -35,7 +35,7 @@ test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 # extras by packages
 coxeter3        = [SPKG_INSTALL_REQUIRES_sagemath_coxeter3]
 gap             = []  # no extra needed
-gap3            = ["passagemath-gap3"]
+gap3            = [SPKG_INSTALL_REQUIRES_sagemath_gap3]
 
 # extras by groups_catalog
 additive        = []  # no extra needed
