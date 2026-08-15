@@ -8,6 +8,8 @@ requires = [
   'cysignals >=1.11.2, != 1.12.0',
   # Exclude 1.12.4 because of https://github.com/passagemath/passagemath/issues/1318
   'cysignals !=1.12.4; sys_platform == "win32"',
+  # Exclude old versions of cysignals that do not declare their incompatibility with Python 3.14
+  'cysignals >= 1.12.6; python_version >= "3.14"',
   'cython >=3.1.0,<3.3.0',
   'gmpy2 ~=2.1.b999',
   'gmpy2 ~=2.3.b1; sys_platform == "win32"',
@@ -52,6 +54,8 @@ dependencies = [
   'cysignals >=1.11.2, != 1.12.0',
   # Exclude 1.12.4 because of https://github.com/passagemath/passagemath/issues/1318
   'cysignals !=1.12.4; sys_platform == "win32"',
+  # Exclude old versions of cysignals that do not declare their incompatibility with Python 3.14
+  'cysignals >= 1.12.6; python_version >= "3.14"',
   'cython >=3.1.0,<3.3.0',
   'fpylll >=0.5.9; sys_platform != "win32"',
   'gmpy2 ~=2.1.b999',
