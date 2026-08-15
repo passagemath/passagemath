@@ -1,0 +1,25 @@
+graft passagemath_gap3
+
+include VERSION.txt
+
+prune sage
+
+include sage/combinat/root_system/reflection_group_complex.p*
+include sage/combinat/root_system/reflection_group_real.p*
+include sage/interfaces/gap3.p*
+include sage/libs/gap3.p*
+
+global-exclude *.c
+global-exclude *.cpp
+
+global-exclude    all__sagemath_*.py
+global-include    all__sagemath_gap3.py
+
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude *.bak
+global-exclude *.so
+global-exclude *~
+prune .tox
+prune build
+prune dist

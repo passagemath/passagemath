@@ -48,6 +48,7 @@ database-symbolic-data      = [SPKG_INSTALL_REQUIRES_sagemath_database_symbolic_
 eclib       = [SPKG_INSTALL_REQUIRES_sagemath_eclib]
 fricas      = [SPKG_INSTALL_REQUIRES_sagemath_fricas]
 frobby      = [SPKG_INSTALL_REQUIRES_sagemath_frobby]
+gap3        = [SPKG_INSTALL_REQUIRES_sagemath_gap3]
 gcg         = [SPKG_INSTALL_REQUIRES_pygcgopt]
 gfan        = [SPKG_INSTALL_REQUIRES_sagemath_gfan]
 giac        = [SPKG_INSTALL_REQUIRES_sagemath_giac]

@@ -3,27 +3,27 @@ include(`sage_spkg_versions_toml.m4')dnl' -*- conf-toml -*-
 # Minimum requirements for the build system to execute.
 requires = [
     SPKG_INSTALL_REQUIRES_setuptools
+    SPKG_INSTALL_REQUIRES_pkgconfig
     SPKG_INSTALL_REQUIRES_sage_conf
     SPKG_INSTALL_REQUIRES_sage_setup
-    SPKG_INSTALL_REQUIRES_pkgconfig
-    SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sagemath_objects
     SPKG_INSTALL_REQUIRES_cython
-    SPKG_INSTALL_REQUIRES_gmpy2
-    SPKG_INSTALL_REQUIRES_cysignals
     SPKG_INSTALL_REQUIRES_memory_allocator
+    SPKG_INSTALL_REQUIRES_cysignals
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "passagemath-combinat"
-description = "passagemath: Algebraic combinatorics, combinatorial representation theory"
+name = "passagemath-gap3"
+description = "passagemath: Computational group theory with GAP3"
 dependencies = [
-    SPKG_INSTALL_REQUIRES_gmpy2
-    SPKG_INSTALL_REQUIRES_cysignals
-    SPKG_INSTALL_REQUIRES_memory_allocator
     SPKG_INSTALL_REQUIRES_sagemath_categories
     SPKG_INSTALL_REQUIRES_sagemath_environment
+    SPKG_INSTALL_REQUIRES_sagemath_gap
+    SPKG_INSTALL_REQUIRES_sagemath_groups
+    SPKG_INSTALL_REQUIRES_pexpect
 ]
 dynamic = ["version"]
 include(`pyproject_toml_metadata_supports_windows.m4')dnl'
@@ -33,23 +33,24 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
+test = [
+    "passagemath-repl",
+    "passagemath-combinat",
+    "passagemath-modules",
+]
 
-# by library
-gap3            = [SPKG_INSTALL_REQUIRES_sagemath_gap3]
-glucose         = [SPKG_INSTALL_REQUIRES_sagemath_glucose]
-kissat          = [SPKG_INSTALL_REQUIRES_sagemath_kissat]
-lrcalc          = [SPKG_INSTALL_REQUIRES_lrcalc_python]
-symmetrica      = []
-
-# by feature
-graphs          = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
-modules         = [SPKG_INSTALL_REQUIRES_sagemath_modules]
-species         = [SPKG_INSTALL_REQUIRES_sagemath_gap]
-findstat        = [SPKG_INSTALL_REQUIRES_requests]
-
-# everything
-standard        = ["passagemath-combinat[findstat,lrcalc,symmetrica,graphs,modules,species]"]
+[tool.cibuildwheel.linux]
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf auditwheel',
+    'python3 {package}/repair_wheel.py {wheel}',
+    'auditwheel repair -w {dest_dir} {wheel}',
+]
+[tool.cibuildwheel.macos]
+repair-wheel-command = [
+    'python3 -m pip install passagemath-conf auditwheel',
+    'python3 {package}/repair_wheel.py {wheel}',
+    'delocate-wheel --require-archs {delocate_archs} -w {dest_dir} -v {wheel}',
+]
 
 [tool.setuptools]
 include-package-data = false
@@ -66,10 +67,10 @@ build-requires = [
 ]
 
 host-requires = [
+  "pkg:generic/gap3",
   "pkg:generic/gmp",
   "pkg:generic/mpc",
   "pkg:generic/mpfr",
-  "pkg:generic/symmetrica",
 ]
 
 dependencies = [
