@@ -236,6 +236,7 @@ Controlling variable names used by GAP3::
 # ****************************************************************************
 import os
 
+from sage.env import SAGE_GAP3_COMMAND
 from sage.misc.cachefunc import cached_method
 from sage.interfaces.expect import Expect
 from sage.interfaces.gap import Gap_generic, GapElement_generic
@@ -243,7 +244,7 @@ from sage.cpython.string import bytes_to_str
 
 
 # gap3_cmd should point to the gap3 executable
-gap3_cmd = 'gap3'
+gap3_cmd = SAGE_GAP3_COMMAND
 
 
 class Gap3(Gap_generic):
