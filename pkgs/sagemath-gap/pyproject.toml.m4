@@ -113,8 +113,9 @@ standard        = [
 
 # The full set of GAP packages shipped by the GAP distribution;
 # omitted: polymaking
+# omitted: jupyterkernel -- the indirect self-reference passagemath-gap-package-jupyterkernel -> passagemath-gap is problematic for tox, which tries to "install_package_deps" before installing the package.
 full            = [
-    "passagemath-gap[standard,4ti2interface,agt,caratinterface,cddinterface,curlinterface,difsets,jupyterkernel,normalizinterface,numericalsgps,rcwa,semigroups,sglppow,simpcomp,smallsemi,sonata,unitlib,yangbaxter]"
+    "passagemath-gap[standard,4ti2interface,agt,caratinterface,cddinterface,curlinterface,difsets,normalizinterface,numericalsgps,rcwa,semigroups,sglppow,simpcomp,smallsemi,sonata,unitlib,yangbaxter]"
 ]
 
 [tool.cibuildwheel.linux]
