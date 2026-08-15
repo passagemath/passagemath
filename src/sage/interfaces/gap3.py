@@ -1,4 +1,5 @@
 # sage_setup: distribution = sagemath-gap
+# sage.doctest: optional - gap3
 r"""
 Interface to GAP3
 
