@@ -245,16 +245,13 @@ GAP value when it is collected::
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 import os
+import shlex
 
-from sage.env import SAGE_GAP3_COMMAND
 from sage.misc.cachefunc import cached_method
+from sage.features.gap3 import Gap3 as Gap3_executable
 from sage.interfaces.expect import Expect
 from sage.interfaces.gap import Gap_generic, GapElement_generic
 from sage.cpython.string import bytes_to_str
-
-
-# gap3_cmd should point to the gap3 executable
-gap3_cmd = SAGE_GAP3_COMMAND
 
 
 class Gap3(Gap_generic):
@@ -302,7 +299,7 @@ class Gap3(Gap_generic):
     """
     _identical_function = "IsIdentical"
 
-    def __init__(self, command=gap3_cmd):
+    def __init__(self, command=None):
         r"""
         Initialize the GAP3 interface and start a session.
 
@@ -322,6 +319,8 @@ class Gap3(Gap_generic):
             sage: gap3.is_running()
             True
         """
+        if command is None:
+            command = os.getenv('SAGE_GAP3_COMMAND') or shlex.quote(Gap3_executable().absolute_filename())
         self.__gap3_command_string = command
         # Explanation of additional command-line options passed to gap3:
         #
@@ -949,7 +948,7 @@ def gap3_console():
     from sage.repl.rich_output.display_manager import get_display_manager
     if not get_display_manager().is_in_terminal():
         raise RuntimeError('Can use the console only in the terminal. Try %%gap3 magics instead.')
-    os.system(gap3_cmd)
+    os.system(os.getenv('SAGE_GAP3_COMMAND') or shlex.quote(Gap3_executable().absolute_filename()))
 
 
 def gap3_version():

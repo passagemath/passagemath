@@ -3,7 +3,6 @@ Feature for testing the presence of ``gap3``.
 """
 
 from . import Executable
-from sage.env import SAGE_GAP3_COMMAND
 
 
 class Gap3(Executable):
@@ -28,7 +27,7 @@ class Gap3(Executable):
         Executable.__init__(
             self,
             "gap3",
-            executable=SAGE_GAP3_COMMAND,
+            executable="gap3",
             spkg="gap3",
             type="experimental",
         )
