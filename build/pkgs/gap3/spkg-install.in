@@ -23,24 +23,15 @@ perl -0pi.bak -e 's/#include <string\.h>/typedef __SIZE_TYPE__ gap3_size_t;\next
 sed -i.bak 's/ LOPTS="$(LOPTS) -static"/ LOPTS="$(LOPTS)"/g' src/src/Makefile
 
 cd src/src
-$MAKE
-if [ $? -ne 0 ]; then
-    echo >&2 "Error building $PKG_BASE."
-    exit 1
-fi
+sdh_make
 cd ..
 
 echo "Installing (copying) files..."
-mkdir -p "$INSTALL_DIR" &&
-cp -R -f * "$INSTALL_DIR"
-if [[ $? -ne 0 ]]; then
-    echo >&2 "Error copying $PKG_BASE files."
-    exit 1
-fi
+sdh_install * "$INSTALL_DIR"
 
 echo "Creating symlink to new $PKG_BASE installation..."
 rm -f "$SAGE_LOCAL/$PKG_BASE/latest"
-ln -s "$GAP3_DIR" "$SAGE_LOCAL/$PKG_BASE/latest"
+ln -s "$GAP3_DIR" "$SAGE_DESTDIR_LOCAL/$PKG_BASE/latest"
 if [[ $? -ne 0 ]]; then
     echo >&2 "Error creating symbolic link '$SAGE_LOCAL/$PKG_BASE/latest'"
     exit 1
@@ -48,8 +39,4 @@ fi
 
 echo "Copying GAP3 startup script..."
 rm -f "$SAGE_LOCAL/bin/gap3"
-cp ../gap3.sh "$SAGE_LOCAL/bin/gap3"
-if [[ $? -ne 0 ]]; then
-    echo >&2 "Error copying customized $PKG_BASE startup script."
-    exit 1
-fi
+sdh_install -T ../gap3.sh "$SAGE_LOCAL/bin/gap3"
