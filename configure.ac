@@ -337,8 +337,6 @@ AC_ARG_VAR(CXXFLAGS, C compiler flags)
 AC_ARG_VAR(FCFLAGS, Fortran compiler flags)
 AC_ARG_VAR(F77CFLAGS, Fortran 77 compiler flags)
 
-SAGE_CHECK_CONDA_COMPILERS
-
 AC_PROG_CC()
 AC_PROG_CPP()
 AC_PROG_CXX()
