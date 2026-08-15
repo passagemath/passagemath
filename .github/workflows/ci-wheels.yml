@@ -12,7 +12,7 @@ on:
       python-versions:
         description: 'Python versions to test (JSON list)'
         default: >-
-          ['3.11', '3.14']
+          ['3.14']
         required: true
       oss:
         description: 'OSs to test (JSON list; default: all)'
@@ -112,7 +112,7 @@ jobs:
                            ]') }}
         python-version: >-
           ${{ fromJson(inputs.python-versions
-                       || '["3.11",
+                       || '["3.14",
                            ]') }}
         os: >-
           ${{ fromJson(inputs.oss
@@ -184,7 +184,7 @@ jobs:
                        *$pkg_underscore-*.whl) ;;
                        *musllinux*)            ;;
                        *_i686*)                ;;
-                       *-cp$python_version_no_dot-cp$python_version_no_dot-*|*-cp$python_version_abi3-abi3-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                       *-cp3*-cp$python_version_no_dot-*|*-cp$python_version_abi3-abi3-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
               export PIP_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt
