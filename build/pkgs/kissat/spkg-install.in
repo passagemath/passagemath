@@ -1,4 +1,5 @@
 cd src
+export CFLAGS="-std=gnu17 $CFLAGS"
 ./configure CC="$CC" --test --kitten
 cd build
 sdh_make
