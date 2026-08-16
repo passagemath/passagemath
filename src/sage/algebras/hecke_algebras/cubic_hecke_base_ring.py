@@ -28,11 +28,14 @@ from sage.categories.action import Action
 from sage.misc.verbose import verbose
 from sage.misc.functional import cyclotomic_polynomial
 from sage.misc.cachefunc import cached_method
+from sage.misc.lazy_import import lazy_import
 from sage.rings.integer_ring import ZZ
 from sage.rings.polynomial.laurent_polynomial_ring import LaurentPolynomialRing_mpair
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 from sage.rings.localization import Localization
 from sage.algebras.splitting_algebra import solve_with_extension, SplittingAlgebra
+
+lazy_import('sage.interfaces.gap3', 'GAP3Element')
 
 
 # -----------------------------------------------------------------------------
@@ -308,7 +311,6 @@ class CubicHeckeExtensionRing(LaurentPolynomialRing_mpair):
             [ b  0]
             [-b  c]
         """
-        from sage.interfaces.gap3 import GAP3Element
         if isinstance(x, GAP3Element):
             return self._convert_from_gap3_mvp(x)
         return super()._element_constructor_(x, mon=mon)
