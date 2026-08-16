@@ -65,6 +65,7 @@ jobs:
                             "sagemath-fricas",
                             "sagemath-frobby",
                             "sagemath-gap",
+                            "sagemath-gap3",
                             "sagemath-gfan",
                             "sagemath-giac",
                             "sagemath-glpk",
