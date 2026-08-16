@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-euler-product.git#egg=sage-euler-product
+-e sage-euler-product@git+https://github.com/passagemath/passagemath-pkg-euler-product.git

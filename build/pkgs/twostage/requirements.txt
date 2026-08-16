@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-twostage.git#egg=twostage
+-e twostage@git+https://github.com/passagemath/passagemath-pkg-twostage.git

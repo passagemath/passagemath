@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-slabbe.git#egg=slabbe
+-e slabbe@git+https://github.com/passagemath/passagemath-pkg-slabbe.git

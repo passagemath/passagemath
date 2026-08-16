@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-mclf.git#egg=mclf
+-e mclf@git+https://github.com/passagemath/passagemath-pkg-mclf.git

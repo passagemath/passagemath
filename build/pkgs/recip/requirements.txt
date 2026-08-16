@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-recip.git#egg=recip
+-e recip@git+https://github.com/passagemath/passagemath-pkg-recip.git

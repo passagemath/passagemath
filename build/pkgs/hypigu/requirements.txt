@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-hypigu.git#egg=hypigu
+-e hypigu@git+https://github.com/passagemath/passagemath-pkg-hypigu.git

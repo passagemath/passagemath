@@ -1,1 +1,1 @@
--e git+https://gitlab.com/modulispaces/admcycles.git#egg=admcycles
+-e admcycles@git+https://gitlab.com/modulispaces/admcycles.git

@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-dependent_bterms.git#egg=dependent-bterms[passagemath]
+-e dependent-bterms[passagemath]@git+https://github.com/passagemath/passagemath-pkg-dependent_bterms.git

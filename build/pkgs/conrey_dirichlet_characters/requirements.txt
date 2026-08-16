@@ -1,1 +1,1 @@
--e git+https://github.com/passagemath/passagemath-pkg-conrey-dirichlet-characters.git#egg=DirichletConrey
+-e DirichletConrey@git+https://github.com/passagemath/passagemath-pkg-conrey-dirichlet-characters.git
