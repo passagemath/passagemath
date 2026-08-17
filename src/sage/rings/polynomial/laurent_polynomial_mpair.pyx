@@ -1306,7 +1306,7 @@ cdef class LaurentPolynomial_mpair(LaurentPolynomial):
             return minus_infinity
 
         if x is None:
-            w = [g.total_degree() for g in self._parent._R.gens()]
+            w = [gen.total_degree() for gen in self._parent._R.gens()]
             return self._poly.total_degree() + sum(wi * mi for wi, mi
                                                    in zip(w, self._mon))
 
