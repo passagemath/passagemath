@@ -47,5 +47,4 @@ b = venv.EnvBuilder(system_site_packages=options.system_site,
 c = b.ensure_directories(options.env_dir)
 b.setup_python(c)
 b.create_configuration(c)
-# We do not call setup_scripts, which would install the venv 'activate'/'deactivate' scripts.
-
+b.setup_scripts(c)

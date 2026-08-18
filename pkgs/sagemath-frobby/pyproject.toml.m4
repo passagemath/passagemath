@@ -31,9 +31,9 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-graphs",
-    "passagemath-repl",
-    "passagemath-singular",
+    SPKG_INSTALL_REQUIRES_sagemath_graphs
+    SPKG_INSTALL_REQUIRES_sagemath_repl
+    SPKG_INSTALL_REQUIRES_sagemath_singular
 ]
 
 [tool.cibuildwheel.linux]

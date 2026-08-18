@@ -315,7 +315,7 @@ class Feature(TrivialUniqueRepresentation):
 
             sage: from sage.features.graphviz import Graphviz
             sage: Graphviz().joined_features()
-            [Feature('dot'), Feature('neato'), Feature('twopi')]
+            [Feature('dot'), Feature('neato'), Feature('twopi'), Feature('fdp'), Feature('circo')]
             sage: from sage.features.sagemath import sage__rings__function_field
             sage: sage__rings__function_field().joined_features()
             [Feature('sage.rings.function_field.function_field_polymod'),

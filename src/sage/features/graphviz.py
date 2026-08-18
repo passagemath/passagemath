@@ -87,11 +87,76 @@ class twopi(Executable):
                             url='https://www.graphviz.org/')
 
 
+class fdp(Executable):
+    r"""
+    A :class:`~sage.features.Feature` describing the presence of ``fdp``.
+
+    TESTS::
+
+        sage: from sage.features.graphviz import fdp
+        sage: fdp().is_present()  # optional - graphviz
+        FeatureTestResult('fdp', True)
+    """
+    def __init__(self):
+        r"""
+        TESTS::
+
+            sage: from sage.features.graphviz import fdp
+            sage: isinstance(fdp(), fdp)
+            True
+        """
+        Executable.__init__(self, 'fdp', executable='fdp',
+                            spkg='graphviz',
+                            url='https://www.graphviz.org/')
+
+    def absolute_filename(self) -> str:
+        r"""
+        Return the ``fdp`` executable path.
+        """
+        try:
+            return super().absolute_filename()
+        except FeatureNotPresentError as error:
+            return _companion_executable("fdp", error)
+
+
+class circo(Executable):
+    r"""
+    A :class:`~sage.features.Feature` describing the presence of ``circo``.
+
+    TESTS::
+
+        sage: from sage.features.graphviz import circo
+        sage: circo().is_present()  # optional - graphviz
+        FeatureTestResult('circo', True)
+    """
+    def __init__(self):
+        r"""
+        TESTS::
+
+            sage: from sage.features.graphviz import circo
+            sage: isinstance(circo(), circo)
+            True
+        """
+        Executable.__init__(self, 'circo', executable='circo',
+                            spkg='graphviz',
+                            url='https://www.graphviz.org/')
+
+    def absolute_filename(self) -> str:
+        r"""
+        Return the ``circo`` executable path.
+        """
+        try:
+            return super().absolute_filename()
+        except FeatureNotPresentError as error:
+            return _companion_executable("circo", error)
+
+
 class Graphviz(JoinFeature):
     r"""
     A :class:`~sage.features.Feature` describing the presence of
-    the :class:`dot`, :class:`neato`, and :class:`twopi` executables from the
-    :ref:`graphviz <spkg_graphviz>` package.
+    the :class:`dot`, :class:`neato`, :class:`twopi`, :class:`fdp`, and
+    :class:`circo` executables from the :ref:`graphviz <spkg_graphviz>`
+    package.
 
     EXAMPLES::
 
@@ -108,7 +173,7 @@ class Graphviz(JoinFeature):
             True
         """
         JoinFeature.__init__(self, 'graphviz',
-                             [dot(), neato(), twopi()],
+                             [dot(), neato(), twopi(), fdp(), circo()],
                              spkg='graphviz',
                              url='https://www.graphviz.org/')
 

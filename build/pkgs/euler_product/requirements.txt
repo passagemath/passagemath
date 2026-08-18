@@ -1,1 +1,1 @@
-sage-euler-product @ git+https://github.com/passagemath/passagemath-pkg-euler-product.git
+-e sage-euler-product@git+https://github.com/passagemath/passagemath-pkg-euler-product.git

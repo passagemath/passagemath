@@ -142,7 +142,9 @@ if [ -n "$SAGE_SILENT_BUILD" -a ${use_prefix} = true ]; then
         fi
     else
         time=$(report_time)
-        if [ -n "$time" ]; then
+        if tail -20 $logfile 2>/dev/null | grep -E "^Warning: Failures testing package" &>/dev/null; then
+            echo "  [$logname] successfully ${verb}ed, but failures testing. Log file: $logfile"
+        elif [ -n "$time" ]; then
             echo "  [$logname] successfully ${verb}ed ($time)."
         else
             echo "  [$logname] successfully ${verb}ed."

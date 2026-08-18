@@ -65,6 +65,7 @@ jobs:
                             "sagemath-fricas",
                             "sagemath-frobby",
                             "sagemath-gap",
+                            "sagemath-gap3",
                             "sagemath-gfan",
                             "sagemath-giac",
                             "sagemath-glpk",
@@ -179,12 +180,12 @@ jobs:
           WHEELHOUSE=${GITHUB_WORKSPACE}/wheelhouse
           if [ -d "$WHEELHOUSE" ]; then
               export PIP_FIND_LINKS=$WHEELHOUSE
-              (set +x; cd "$WHEELHOUSE" && for whl in *.whl *.tar.gz; do
+              (set +x; cd "$WHEELHOUSE" && case "${{ matrix.os }}" in macos-*-intel);; macos-*) rm -f *macosx_*_x86_64*;; esac; for whl in *.whl *.tar.gz; do
                    case $whl in
                        *$pkg_underscore-*.whl) ;;
                        *musllinux*)            ;;
                        *_i686*)                ;;
-                       *-cp$python_version_no_dot-cp$python_version_no_dot-*|*-cp$python_version_abi3-abi3-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
+                       *-cp3*-cp$python_version_no_dot-*|*-cp$python_version_abi3-abi3-*|*-none-any*|passagemath_conf-*) echo "${whl%%-*} @ file://$WHEELHOUSE/$whl";;
                    esac;
                done) | tee constraints.txt
               export PIP_CONSTRAINT=${GITHUB_WORKSPACE}/constraints.txt

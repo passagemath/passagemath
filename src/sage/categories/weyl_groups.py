@@ -85,7 +85,7 @@ class WeylGroups(Category_singleton):
             EXAMPLES::
 
                 sage: G = WeylGroup(['A',3])
-                sage: G.coxeter_matrix()
+                sage: G.coxeter_matrix()                                                # needs sage.graphs
                 [1 3 2]
                 [3 1 3]
                 [2 3 1]
@@ -111,6 +111,7 @@ class WeylGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['A',5,1])
                 sage: PF = W.pieri_factors()
                 sage: PF.cardinality()
@@ -118,7 +119,7 @@ class WeylGroups(Category_singleton):
 
                 sage: W = WeylGroup(['B',3])
                 sage: PF = W.pieri_factors()
-                sage: sorted([w.reduced_word() for w in PF])
+                sage: sorted([w.reduced_word() for w in PF])                            # needs sage.graphs
                 [[],
                  [1],
                  [1, 2],
@@ -141,7 +142,7 @@ class WeylGroups(Category_singleton):
                  [3, 2, 1]]
                 sage: W = WeylGroup(['C',4,1])
                 sage: PF = W.pieri_factors()
-                sage: W.from_reduced_word([3,2,0]) in PF
+                sage: W.from_reduced_word([3,2,0]) in PF                                # needs sage.graphs
                 True
             """
             # Do not remove this line which makes sure the pieri factor
@@ -183,14 +184,14 @@ class WeylGroups(Category_singleton):
                 sage: W = WeylGroup(['A',2])
                 sage: x = W.from_reduced_word([1])
                 sage: y = W.w0
-                sage: W.bruhat_cone(x, y)                                               # needs cddexec_gmp
+                sage: W.bruhat_cone(x, y)                                               # needs cddexec_gmp sage.graphs
                 A 2-dimensional polyhedron in QQ^3
                  defined as the convex hull of 1 vertex and 2 rays
 
                 sage: W = WeylGroup(['E',6])
                 sage: x = W.one()
                 sage: y = W.w0
-                sage: W.bruhat_cone(x, y, side='lower')                                 # needs cddexec_gmp
+                sage: W.bruhat_cone(x, y, side='lower')                                 # needs cddexec_gmp sage.graphs
                 A 6-dimensional polyhedron in QQ^8
                  defined as the convex hull of 1 vertex and 6 rays
 
@@ -243,6 +244,7 @@ class WeylGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['A',3], prefix='s')
                 sage: g = W.quantum_bruhat_graph((1,3))
                 sage: g
@@ -334,18 +336,17 @@ class WeylGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['A',5,1])
                 sage: W.from_reduced_word([3,2,5]).is_pieri_factor()
                 True
                 sage: W.from_reduced_word([3,2,4,5]).is_pieri_factor()
                 False
-
                 sage: W = WeylGroup(['C',4,1])
                 sage: W.from_reduced_word([0,2,1]).is_pieri_factor()
                 True
                 sage: W.from_reduced_word([0,2,1,0]).is_pieri_factor()
                 False
-
                 sage: W = WeylGroup(['B',3])
                 sage: W.from_reduced_word([3,2,3]).is_pieri_factor()
                 False
@@ -372,6 +373,7 @@ class WeylGroups(Category_singleton):
             factorizations are in correspondence with all Pieri factors, and
             there are `\prod 2^{n_i}` of them::
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['A', 4, 1])
                 sage: W.from_reduced_word([]).left_pieri_factorizations().cardinality()
                 1
@@ -381,12 +383,10 @@ class WeylGroups(Category_singleton):
                 4
                 sage: W.from_reduced_word([1,2,3,1,2,1]).left_pieri_factorizations().cardinality()
                 8
-
                 sage: W.from_reduced_word([1,3]).left_pieri_factorizations().cardinality()
                 4
                 sage: W.from_reduced_word([1,3,4,3]).left_pieri_factorizations().cardinality()
                 8
-
                 sage: W.from_reduced_word([2,1]).left_pieri_factorizations().cardinality()
                 3
                 sage: W.from_reduced_word([1,2]).left_pieri_factorizations().cardinality()
@@ -395,6 +395,7 @@ class WeylGroups(Category_singleton):
                 ....:  for i in [-1, 0, 1, 2]]
                 [0, 1, 2, 2]
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['C',4,1])
                 sage: w = W.from_reduced_word([0,3,2,1,0])
                 sage: w.left_pieri_factorizations().cardinality()
@@ -409,6 +410,7 @@ class WeylGroups(Category_singleton):
                 ([3, 2, 0], [1, 0]),
                 ([3, 2, 0, 1], [0])]
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['B',4,1])
                 sage: W.from_reduced_word([0,2,1,0]).left_pieri_factorizations().cardinality()
                 6
@@ -455,6 +457,7 @@ class WeylGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['A', 3, 1])
                 sage: W.from_reduced_word([]).stanley_symmetric_function_as_polynomial()
                 1
@@ -475,10 +478,12 @@ class WeylGroups(Category_singleton):
                 sage: y.stanley_symmetric_function_as_polynomial()  # long time
                 8*x1^7 + 4*x1^5*x2 + 2*x1^3*x2^2 + x1*x2^3
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['C',3,1])
                 sage: W.from_reduced_word([0,2,1,0]).stanley_symmetric_function_as_polynomial()
                 32*x1^4 + 16*x1^2*x2 + 8*x2^2 + 4*x1*x3
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['B',3,1])
                 sage: W.from_reduced_word([3,2,1]).stanley_symmetric_function_as_polynomial()
                 2*x1^3 + x1*x2 + 1/2*x3
@@ -524,6 +529,7 @@ class WeylGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['A', 3, 1])
                 sage: W.from_reduced_word([3,1,2,0,3,1,0]).stanley_symmetric_function()
                 8*m[1, 1, 1, 1, 1, 1, 1] + 4*m[2, 1, 1, 1, 1, 1]
@@ -533,12 +539,12 @@ class WeylGroups(Category_singleton):
                 8*m[1, 1, 1, 1, 1, 1, 1] + 4*m[2, 1, 1, 1, 1, 1]
                 + 2*m[2, 2, 1, 1, 1] + m[2, 2, 2, 1]
 
-                sage: W = WeylGroup(['C',3,1])
-                sage: W.from_reduced_word([0,2,1,0]).stanley_symmetric_function()
+                sage: W = WeylGroup(['C',3,1])                                          # needs sage.graphs
+                sage: W.from_reduced_word([0,2,1,0]).stanley_symmetric_function()       # needs sage.graphs
                 32*m[1, 1, 1, 1] + 16*m[2, 1, 1] + 8*m[2, 2] + 4*m[3, 1]
 
-                sage: W = WeylGroup(['B',3,1])
-                sage: W.from_reduced_word([3,2,1]).stanley_symmetric_function()
+                sage: W = WeylGroup(['B',3,1])                                          # needs sage.graphs
+                sage: W.from_reduced_word([3,2,1]).stanley_symmetric_function()         # needs sage.graphs
                 2*m[1, 1, 1] + m[2, 1] + 1/2*m[3]
 
                 sage: W = WeylGroup(['B',4])
@@ -586,13 +592,13 @@ class WeylGroups(Category_singleton):
             EXAMPLES::
 
                 sage: W = WeylGroup(['C',2], prefix='s')
-                sage: W.from_reduced_word([1,2,1]).reflection_to_root()
+                sage: W.from_reduced_word([1,2,1]).reflection_to_root()                 # needs sage.graphs
                 2*alpha[1] + alpha[2]
-                sage: W.from_reduced_word([1,2]).reflection_to_root()
+                sage: W.from_reduced_word([1,2]).reflection_to_root()                   # needs sage.graphs
                 Traceback (most recent call last):
                 ...
                 ValueError: s1*s2 is not a reflection
-                sage: W.long_element().reflection_to_root()
+                sage: W.long_element().reflection_to_root()                             # needs sage.graphs
                 Traceback (most recent call last):
                 ...
                 ValueError: s2*s1*s2*s1 is not a reflection
@@ -615,13 +621,13 @@ class WeylGroups(Category_singleton):
             EXAMPLES::
 
                 sage: W = WeylGroup(['C',2], prefix='s')
-                sage: W.from_reduced_word([1,2,1]).reflection_to_coroot()
+                sage: W.from_reduced_word([1,2,1]).reflection_to_coroot()               # needs sage.graphs
                 alphacheck[1] + alphacheck[2]
-                sage: W.from_reduced_word([1,2]).reflection_to_coroot()
+                sage: W.from_reduced_word([1,2]).reflection_to_coroot()                 # needs sage.graphs
                 Traceback (most recent call last):
                 ...
                 ValueError: s1*s2 is not a reflection
-                sage: W.long_element().reflection_to_coroot()
+                sage: W.long_element().reflection_to_coroot()                           # needs sage.graphs
                 Traceback (most recent call last):
                 ...
                 ValueError: s2*s1*s2*s1 is not a reflection
@@ -659,17 +665,17 @@ class WeylGroups(Category_singleton):
                 sage: w = W.from_reduced_word([1,2])
                 sage: w.inversions()
                 [s2, s2*s1*s2]
-                sage: w.inversions(inversion_type = 'reflections')
+                sage: w.inversions(inversion_type='reflections')
                 [s2, s2*s1*s2]
-                sage: w.inversions(inversion_type = 'roots')
+                sage: w.inversions(inversion_type='roots')                              # needs sage.graphs
                 [alpha[2], alpha[1] + alpha[2]]
-                sage: w.inversions(inversion_type = 'coroots')
+                sage: w.inversions(inversion_type='coroots')                            # needs sage.graphs
                 [alphacheck[2], alphacheck[1] + 2*alphacheck[2]]
-                sage: w.inversions(side = 'left')
+                sage: w.inversions(side='left')
                 [s1, s1*s2*s1]
-                sage: w.inversions(side = 'left', inversion_type = 'roots')
+                sage: w.inversions(side='left', inversion_type='roots')                 # needs sage.graphs
                 [alpha[1], 2*alpha[1] + alpha[2]]
-                sage: w.inversions(side = 'left', inversion_type = 'coroots')
+                sage: w.inversions(side='left', inversion_type='coroots')               # needs sage.graphs
                 [alphacheck[1], alphacheck[1] + alphacheck[2]]
             """
             if side == 'left':
@@ -703,9 +709,9 @@ class WeylGroups(Category_singleton):
 
                 sage: W = WeylGroup(['A',3])
                 sage: w = W.from_reduced_word([1, 2, 3, 1, 2])
-                sage: A = w.inversion_arrangement(); A
+                sage: A = w.inversion_arrangement(); A                                  # needs sage.graphs
                 Arrangement of 5 hyperplanes of dimension 3 and rank 3
-                sage: A.hyperplanes()
+                sage: A.hyperplanes()                                                   # needs sage.graphs
                 (Hyperplane 0*a1 + 0*a2 + a3 + 0,
                  Hyperplane 0*a1 + a2 + 0*a3 + 0,
                  Hyperplane 0*a1 + a2 + a3 + 0,
@@ -715,7 +721,7 @@ class WeylGroups(Category_singleton):
             The identity element gives the empty arrangement::
 
                 sage: W = WeylGroup(['A',3])
-                sage: W.one().inversion_arrangement()
+                sage: W.one().inversion_arrangement()                                   # needs sage.graphs
                 Empty hyperplane arrangement of dimension 3
             """
             inv = self.inversions(side=side, inversion_type='roots')
@@ -745,7 +751,7 @@ class WeylGroups(Category_singleton):
 
                 sage: W = WeylGroup(['A',3], prefix='s')
                 sage: w = W.from_reduced_word([3,1,2,1])
-                sage: w.bruhat_lower_covers_coroots()
+                sage: w.bruhat_lower_covers_coroots()                                   # needs sage.graphs
                 [(s1*s2*s1, alphacheck[1] + alphacheck[2] + alphacheck[3]),
                  (s3*s2*s1, alphacheck[2]), (s3*s1*s2, alphacheck[1])]
             """
@@ -766,7 +772,7 @@ class WeylGroups(Category_singleton):
 
                 sage: W = WeylGroup(['A',4], prefix='s')
                 sage: w = W.from_reduced_word([3,1,2,1])
-                sage: w.bruhat_upper_covers_coroots()
+                sage: w.bruhat_upper_covers_coroots()                                   # needs sage.graphs
                 [(s1*s2*s3*s2*s1, alphacheck[3]),
                  (s2*s3*s1*s2*s1, alphacheck[2] + alphacheck[3]),
                  (s3*s4*s1*s2*s1, alphacheck[4]),
@@ -801,21 +807,22 @@ class WeylGroups(Category_singleton):
 
             EXAMPLES::
 
+                sage: # needs sage.graphs
                 sage: W = WeylGroup(['A',3], prefix='s')
                 sage: w = W.from_reduced_word([3,1,2])
-                sage: w.quantum_bruhat_successors([1], roots = True)
+                sage: w.quantum_bruhat_successors([1], roots=True)
                 [(s3, alpha[2]), (s1*s2*s3*s2, alpha[3]),
                  (s2*s3*s1*s2, alpha[1] + alpha[2] + alpha[3])]
                 sage: w.quantum_bruhat_successors([1,3])
                 [1, s2*s3*s1*s2]
-                sage: w.quantum_bruhat_successors(roots = True)
+                sage: w.quantum_bruhat_successors(roots=True)
                 [(s3*s1*s2*s1, alpha[1]),
                  (s3*s1, alpha[2]),
                  (s1*s2*s3*s2, alpha[3]),
                  (s2*s3*s1*s2, alpha[1] + alpha[2] + alpha[3])]
                 sage: w.quantum_bruhat_successors()
                 [s3*s1*s2*s1, s3*s1, s1*s2*s3*s2, s2*s3*s1*s2]
-                sage: w.quantum_bruhat_successors(quantum_only = True)
+                sage: w.quantum_bruhat_successors(quantum_only=True)
                 [s3*s1]
                 sage: w = W.from_reduced_word([2,3])
                 sage: w.quantum_bruhat_successors([1,3])

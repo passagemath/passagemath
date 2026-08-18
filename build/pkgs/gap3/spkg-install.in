@@ -4,15 +4,7 @@
 ## SETUP
 ###########################################
 
-PACKAGE_SHORTNAME=gap3
-VERSION=`cat package-version.txt`
-GAP3_DIR="gap-$VERSION"
-INSTALL_DIR="$SAGE_LOCAL/$PACKAGE_SHORTNAME/$GAP3_DIR/gap3"
-
-echo "spkg-install is using"
-echo "VERSION = $VERSION"
-echo "GAP3_DIR = $GAP3_DIR"
-echo "INSTALL_DIR = $INSTALL_DIR"
+INSTALL_DIR="$SAGE_LOCAL/$PKG_BASE"
 
 ###########################################
 ## INSTALLATION
@@ -26,33 +18,12 @@ perl -0pi.bak -e 's/#include <string\.h>/typedef __SIZE_TYPE__ gap3_size_t;\next
 sed -i.bak 's/ LOPTS="$(LOPTS) -static"/ LOPTS="$(LOPTS)"/g' src/src/Makefile
 
 cd src/src
-$MAKE
-if [ $? -ne 0 ]; then
-    echo >&2 "Error building $PACKAGE_SHORTNAME."
-    exit 1
-fi
+sdh_make
 cd ..
 
 echo "Installing (copying) files..."
-mkdir -p "$INSTALL_DIR" &&
-cp -R -f * "$INSTALL_DIR"
-if [[ $? -ne 0 ]]; then
-    echo >&2 "Error copying $PACKAGE_SHORTNAME files."
-    exit 1
-fi
-
-echo "Creating symlink to new $PACKAGE_SHORTNAME installation..."
-rm -f "$SAGE_LOCAL/$PACKAGE_SHORTNAME/latest"
-ln -s "$GAP3_DIR" "$SAGE_LOCAL/$PACKAGE_SHORTNAME/latest"
-if [[ $? -ne 0 ]]; then
-    echo >&2 "Error creating symbolic link '$SAGE_LOCAL/$PACKAGE_SHORTNAME/latest'"
-    exit 1
-fi
+sdh_install * "$INSTALL_DIR"
 
 echo "Copying GAP3 startup script..."
-rm -f "$SAGE_LOCAL/bin/gap3"
-cp bin/gap.sh "$SAGE_LOCAL/bin/gap3"
-if [[ $? -ne 0 ]]; then
-    echo >&2 "Error copying customized $PACKAGE_SHORTNAME startup script."
-    exit 1
-fi
+rm -f "$SAGE_DESTDIR/LOCAL/bin/gap3"
+sdh_install -T ../gap3.sh "$SAGE_LOCAL/bin/gap3"

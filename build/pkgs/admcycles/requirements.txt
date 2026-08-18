@@ -1,1 +1,1 @@
-admcycles @ git+https://gitlab.com/modulispaces/admcycles.git
+-e admcycles@git+https://gitlab.com/modulispaces/admcycles.git

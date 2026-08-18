@@ -30,9 +30,9 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [project.optional-dependencies]
-test            = ["passagemath-repl"]
+test            = [SPKG_INSTALL_REQUIRES_sagemath_repl]
 
-symbolics       = ["passagemath-symbolics"]
+symbolics       = [SPKG_INSTALL_REQUIRES_sagemath_symbolics]
 
 [tool.cibuildwheel.linux]
 repair-wheel-command = [
