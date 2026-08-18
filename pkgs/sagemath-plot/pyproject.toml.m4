@@ -42,7 +42,7 @@ content-type = "text/x-rst"
 [project.optional-dependencies]
 test            = [
     "passagemath-plot[tachyon]; sys_platform != 'win32'",
-    "passagemath-repl",
+    SPKG_INSTALL_REQUIRES_sagemath_repl
 ]
 
 # extras by libraries
@@ -54,9 +54,9 @@ tachyon         = [SPKG_INSTALL_REQUIRES_sagemath_tachyon]
 threejs         = []  # no extra needed
 
 # extras by other features
-graphs          = ["passagemath-graphs"]
-polyhedra       = ["passagemath-polyhedra"]
-symbolics       = ["passagemath-symbolics"]
+graphs          = [SPKG_INSTALL_REQUIRES_sagemath_graphs]
+polyhedra       = [SPKG_INSTALL_REQUIRES_sagemath_polyhedra]
+symbolics       = [SPKG_INSTALL_REQUIRES_sagemath_symbolics]
 
 [tool.setuptools]
 include-package-data = false

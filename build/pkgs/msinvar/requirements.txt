@@ -1,1 +1,1 @@
-msinvar @ git+https://github.com/passagemath/passagemath-pkg-msinvar.git
+-e msinvar@git+https://github.com/passagemath/passagemath-pkg-msinvar.git

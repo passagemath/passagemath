@@ -28,9 +28,9 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-schemes",
-    "passagemath-linbox",
-    "passagemath-repl",
+    SPKG_INSTALL_REQUIRES_sagemath_schemes
+    SPKG_INSTALL_REQUIRES_sagemath_linbox
+    SPKG_INSTALL_REQUIRES_sagemath_repl
 ]
 
 [tool.cibuildwheel.linux]

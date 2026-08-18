@@ -34,8 +34,8 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-gfan",
-    "passagemath-linbox",
+    SPKG_INSTALL_REQUIRES_sagemath_gfan
+    SPKG_INSTALL_REQUIRES_sagemath_linbox
 ]
 #
 # Runtime dependencies of M2 packages, in part per
@@ -43,35 +43,35 @@ test = [
 # - OptionalComponentsPresent
 #
 # Bertini ... bertini
-CoincidentRootLoci          = ["passagemath-qepcad"]
+CoincidentRootLoci          = [SPKG_INSTALL_REQUIRES_sagemath_qepcad]
 # DecomposableSparseSystems ... phc
 # EuclideanDistanceDegree ... bertini
-FourTiTwo                   = ["passagemath-latte-4ti2"]
-gfanInterface               = ["passagemath-gfan"]
-MatchingFields              = ["passagemath-latte-4ti2"]
-MonomialAlgebras            = ["passagemath-latte-4ti2"]
+FourTiTwo                   = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
+gfanInterface               = [SPKG_INSTALL_REQUIRES_sagemath_gfan]
+MatchingFields              = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
+MonomialAlgebras            = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
 # MonomialIntegerPrograms ... scip
-Msolve                      = ["passagemath-msolve"]
-Nauty                       = ["passagemath-nauty"]
-NautyGraphs                 = ["passagemath-nauty"]
+Msolve                      = [SPKG_INSTALL_REQUIRES_sagemath_msolve]
+Nauty                       = [SPKG_INSTALL_REQUIRES_sagemath_nauty]
+NautyGraphs                 = [SPKG_INSTALL_REQUIRES_sagemath_nauty]
 # NCAlgebra ... bergman
 # Normaliz ... normaliz (executable)
 # NumericalSchubertCalculus ... phc
 # NumericalAlgebraicGeometry ... bertini
-Oscillators                 = ["passagemath-nauty"]
+Oscillators                 = [SPKG_INSTALL_REQUIRES_sagemath_nauty]
 # PHCpack ... phc
-PhylogeneticTrees           = ["passagemath-latte-4ti2"]
-Polyhedra                   = ["passagemath-latte-4ti2", "passagemath-topcom"]
-Polymake                    = ["passagemath-polymake"]
-Posets                      = ["passagemath-latte-4ti2"]
+PhylogeneticTrees           = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
+Polyhedra                   = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2 SPKG_INSTALL_REQUIRES_sagemath_topcom]
+Polymake                    = [SPKG_INSTALL_REQUIRES_sagemath_polymake]
+Posets                      = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
 # RInterface ... R
-StatePolytope               = ["passagemath-polymake"]
-Topcom                      = ["passagemath-topcom"]
-Triangulations              = ["passagemath-topcom"]
-Tropical                    = ["passagemath-gfan"]
-TropicalToric               = ["passagemath-gfan"]
-Valuations                  = ["passagemath-gfan"]
-WhitneyStratifications      = ["passagemath-msolve"]
+StatePolytope               = [SPKG_INSTALL_REQUIRES_sagemath_polymake]
+Topcom                      = [SPKG_INSTALL_REQUIRES_sagemath_topcom]
+Triangulations              = [SPKG_INSTALL_REQUIRES_sagemath_topcom]
+Tropical                    = [SPKG_INSTALL_REQUIRES_sagemath_gfan]
+TropicalToric               = [SPKG_INSTALL_REQUIRES_sagemath_gfan]
+Valuations                  = [SPKG_INSTALL_REQUIRES_sagemath_gfan]
+WhitneyStratifications      = [SPKG_INSTALL_REQUIRES_sagemath_msolve]
 #
 # Jupyter
 #

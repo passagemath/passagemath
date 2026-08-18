@@ -46,8 +46,8 @@ case $status:$SAGE_CHECK:$([ -r known-test-failures.json ]; echo $?) in
     0:no:*)   echo "Not testing the package because SAGE_CHECK=no";;
     0:*:0)    echo "Passed the test suite (modulo baseline known-test-failures*.json)";;
     0:*:*)    echo "Passed the test suite";;
-    *:warn:0) echo "Warning: New failures (not in baseline known-test-failures*.json (ignored)"; status=0;;
-    *:warn:*) echo "Warning: Failures testing the package (ignored)"; status=0;;
+    *:warn:0) echo "Warning: New failures, not in baseline known-test-failures*.json (ignored)";;
+    *:warn:*) echo "Warning: Failures testing the package (ignored)";;
     *:yes:0)  echo "New failures, not in baseline known-test-failures*.json";;
     *:yes:*)  echo "Failures testing the package";;
 esac

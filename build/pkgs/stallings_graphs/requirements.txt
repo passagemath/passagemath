@@ -1,1 +1,1 @@
-stallings-graphs @ git+https://github.com/passagemath/passagemath-pkg-stallings_graphs.git
+-e stallings-graphs@git+https://github.com/passagemath/passagemath-pkg-stallings_graphs.git

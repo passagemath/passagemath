@@ -1,6 +1,6 @@
 SAGE_SPKG_CONFIGURE([openssl], [
   AX_CHECK_OPENSSL([
-    AC_MSG_CHECKING([whether OpenSSL >= 1.1.1, as required by PEP 644, and provides required APIs])
+    AC_MSG_CHECKING([whether OpenSSL >= 3.0.0 and provides required APIs])
     AC_COMPILE_IFELSE(
         dnl Issue #32580: Need OpenSSL >= 1.1.1 for PEP 644
         dnl From https://www.openssl.org/docs/man3.0/man3/OPENSSL_VERSION_NUMBER.html:
@@ -13,13 +13,15 @@ SAGE_SPKG_CONFIGURE([openssl], [
         dnl    S  is "status" (f = release)
         dnl -> OPENSSL_VERSION_NUMBER is 0xMNNFFPPSL
         dnl
+        dnl https://github.com/passagemath/passagemath/issues/2600: Need OpenSSL >= 3.0.0 for curl
+        dnl
         dnl Issue #34273: Test program from ​https://github.com/python/cpython/blob/3.10/configure.ac#L5845
         [AC_LANG_PROGRAM([[
             #include <openssl/opensslv.h>
             #include <openssl/evp.h>
             #include <openssl/ssl.h>
-            #if OPENSSL_VERSION_NUMBER < 0x10101000L
-            #error OpenSSL >= 1.1.1 is required according to PEP 644
+            #if OPENSSL_VERSION_NUMBER < 0x30000000L
+            #error OpenSSL >= 3.0.0 is required
             #endif
             static void keylog_cb(const SSL *ssl, const char *line) {}
           ]], [[

@@ -26,11 +26,11 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-repl",
-    "passagemath-combinat",
-    "passagemath-graphs",
-    "passagemath-groups",
-    "passagemath-modules",
+    SPKG_INSTALL_REQUIRES_sagemath_repl
+    SPKG_INSTALL_REQUIRES_sagemath_combinat
+    SPKG_INSTALL_REQUIRES_sagemath_graphs
+    SPKG_INSTALL_REQUIRES_sagemath_groups
+    SPKG_INSTALL_REQUIRES_sagemath_modules
 ]
 
 [tool.setuptools]

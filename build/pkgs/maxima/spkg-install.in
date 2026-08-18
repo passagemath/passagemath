@@ -48,6 +48,17 @@ mkdir -p "${ECLLIB}"
 cp -f "src/binary-ecl/maxima.fas" "$ECLLIB/maxima.fas" \
     || sdh_die "Failed to install 'src/binary-ecl/maxima.fas' as '$ECLLIB/maxima.fas'."
 
+# Also install it into the versioned ECL directory if it exists.
+# This is so it is found with a simple (REQUIRE :MAXIMA).
+# The Sage library does not depend on this, as it supplies the path of the FASL.
+# But the upstream SageMath meson build system needs this to find Maxima.
+for ECLLIB in "${SAGE_LOCAL}/lib/"ecl-*; do
+    if [ -d "$ECLLIB" ]; then
+        echo "Now installing the Maxima library as '$ECLLIB/maxima.fas'..."
+        cp -f "src/binary-ecl/maxima.fas" "$ECLLIB/maxima.fas" \
+            || sdh_die "Failed to install 'src/binary-ecl/maxima.fas' as '$ECLLIB/maxima.fas'."
+    fi
+done
 
 if [[ "$SAGE_SPKG_INSTALL_DOCS" = yes ]] ; then
     # Install a copy of the Maxima HTML documentation locally.

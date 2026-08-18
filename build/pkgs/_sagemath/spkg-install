@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Use --no-build-isolation because of https://github.com/passagemath/passagemath/pull/1648#issuecomment-5261102903
+"$SAGE_ROOT"/src/bin/sage --pip install --no-build-isolation -v -r "$SAGE_ROOT/build/pkgs/_sagemath/requirements.txt"

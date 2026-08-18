@@ -1,1 +1,1 @@
-abelfunctions @ git+https://github.com/abelfunctions/abelfunctions.git
+-e abelfunctions@git+https://github.com/abelfunctions/abelfunctions.git

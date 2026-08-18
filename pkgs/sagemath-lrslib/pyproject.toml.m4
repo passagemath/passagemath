@@ -28,9 +28,9 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-flint",
-    "passagemath-polyhedra",
-    "passagemath-repl",
+    SPKG_INSTALL_REQUIRES_sagemath_flint
+    SPKG_INSTALL_REQUIRES_sagemath_polyhedra
+    SPKG_INSTALL_REQUIRES_sagemath_repl
 ]
 
 [tool.cibuildwheel.linux]
