@@ -587,6 +587,12 @@ jobs:
         run: |
           ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_graphs
 
+      - name: sagemath-graphviz
+        id:   sagemath-graphviz
+        if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
+        run: |
+          ~/runner-venv/bin/python3 -m cibuildwheel unpacked/passagemath_graphviz
+
       - name: sagemath-planarity
         id:   sagemath-planarity
         if:   (success() || failure()) && steps.sagemath-categories.outcome == 'success'
