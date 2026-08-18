@@ -17,7 +17,9 @@ wheel = Path(sys.argv[1])
 
 # SAGE_LOCAL/bin/dot --> sage_wheels/bin/dot etc.
 with InWheel(wheel, wheel):
-    command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/{dot,neato,twopi,fdp,circo}) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
+    # For Sage: dot,neato,twopi,fdp,circo
+    # For gap_pkg_francy additionally: osage,patchwork
+    command = f'set -o pipefail; (cd {shlex.quote(SAGE_LOCAL)} && tar cf - --dereference bin/{dot,neato,twopi,fdp,circo,osage,patchwork}) | (mkdir -p sage_wheels && cd sage_wheels && tar xvf -)'
     print(f'Running {command}')
     sys.stdout.flush()
     if os.system(f"bash -c {shlex.quote(command)}") != 0:
