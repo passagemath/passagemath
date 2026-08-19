@@ -1,6 +1,5 @@
 cd src
-export CFLAGS="-std=gnu17 $CFLAGS"
-./configure CC="$CC" --test --kitten
+./configure CC="$CC -std=gnu17" --test --kitten
 cd build
 sdh_make
 sdh_install kissat kitten "$SAGE_LOCAL"/bin
