@@ -1,0 +1,1 @@
+$(MP_LIBRARY) | cmake ninja_build
