@@ -197,6 +197,7 @@ PYPI_WHEEL_PACKAGES = $(PYPI_NOARCH_WHEEL_PACKAGES) \
 	sagemath_gap_pkg_normalizinterface 	\
 	sagemath_gap_pkg_semigroups		\
 	sagemath_gap3				\
+	sagemath_graphviz			\
 	sagemath_groups				\
 	sagemath_flint				\
 	sagemath_pari				\
