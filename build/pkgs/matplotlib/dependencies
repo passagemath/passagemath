@@ -1,4 +1,4 @@
- numpy freetype pillow dateutil pyparsing tornado cycler qhull fonttools contourpy | kiwisolver certifi setuptools_scm pybind11 meson_python packaging
+ numpy freetype pillow dateutil pyparsing tornado cycler qhull fonttools contourpy | kiwisolver certifi truststore setuptools_scm pybind11 meson_python packaging
 
 ----------
 All lines of this file are ignored except the first.
