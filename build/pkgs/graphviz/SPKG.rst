@@ -10,7 +10,7 @@ They take descriptions of graphs in a simple text language, and make diagrams in
 License
 -------
 
-Eclipse Public License 1.0
+Eclipse Public License 2.0
 
 Upstream Contact
 ----------------
