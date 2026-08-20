@@ -619,6 +619,7 @@ class Mathics3(Interface):
 
         register_symbol(pi, {'mathics3': 'Pi'}, 0)
         register_symbol(e, {'mathics3': 'E'}, 0)
+        register_symbol(exp, {'mathics3': 'E'}, 1)
         register_symbol(lambda: infinity, {'mathics3': 'Infinity'}, 0)
         register_symbol(lambda: -infinity, {'mathics3': 'DirectedInfinity[-1]'}, 0)
         register_symbol(cos, {'mathics3': 'Cos'})
