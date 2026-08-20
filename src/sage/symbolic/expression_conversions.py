@@ -36,7 +36,7 @@ lazy_import('sage.rings.universal_cyclotomic_field', 'UniversalCyclotomicField')
 lazy_import('sage.symbolic.expression_conversion_sympy', ['SympyConverter', 'sympy_converter'])
 lazy_import('sage.symbolic.expression_conversion_algebraic', ['AlgebraicConverter', 'algebraic'])
 lazy_import('sage.symbolic.expression_conversion_fricas', ['FriCASConverter', 'fricas_converter'])
-lazy_import('sage.symbolic.expression_conversion_Mathics3', ['Mathics3Converter', 'mathics3_converter'])
+lazy_import('sage.symbolic.expression_conversion_mathics3', ['Mathics3Converter', 'mathics3_converter'])
 
 
 class FakeExpression:

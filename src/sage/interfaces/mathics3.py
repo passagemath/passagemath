@@ -608,12 +608,12 @@ class Mathics3(Interface):
         circular import problem involving ``pi``.
         """
         from sage.calculus.functional import diff
-        from sage.functions.log import dilog, lambert_w
-        from sage.functions.trig import sin, cos, tan, cot, sec, csc, asin
-        from sage.functions.hyperbolic import tanh, sinh, cosh, coth, sech, csch
-        from sage.functions.other import abs
         from sage.functions.gamma import gamma
+        from sage.functions.hyperbolic import tanh, sinh, cosh, coth, sech, csch
+        from sage.functions.log import dilog, exp, lambert_w
+        from sage.functions.other import abs
         from sage.functions.special import elliptic_e, elliptic_f
+        from sage.functions.trig import sin, cos, tan, cot, sec, csc, asin
         from sage.misc.functional import symbolic_sum, symbolic_prod
         from sage.rings.infinity import infinity
 
@@ -649,21 +649,6 @@ class Mathics3(Interface):
         register_symbol(lambda z: lambert_w(z), {'mathics3': 'ProductLog'}, 1)
         register_symbol(abs, {'mathics3': 'Abs'}, 1)
 
-        # # construct occurs in the InputForm of hypergeometricF
-        # register_symbol(lambda *x: x, {'mathics3': 'construct'}, -1)
-        # # the following is a hack to deal with
-        # # integrate(sin((x^2+1)/x),x)::INFORM giving
-        # # (integral (sin (/ (+ (^ x 2) 1) x)) (:: x Symbol))
-        # register_symbol(lambda x, y: x, {'mathics3': '::'}, 2)
-
-        # def _convert_eval(f, a, b):
-        #     # it might be that FriCAS also returns a two-argument
-        #     # eval, where the second argument is a list of equations,
-        #     # in which case this function needs to be adapted
-        #     return f.subs({a: b})
-
-        # register_symbol(_convert_eval, {'mathics3': 'eval'}, 3)
-
         def _convert_sum(x, y):
             v, seg = y.operands()
             a, b = seg.operands()
@@ -679,10 +664,6 @@ class Mathics3(Interface):
 
         def explicitly_not_implemented(*args):
             raise NotImplementedError("the translation of the Mathics3 Expression '%s' to sage is not yet implemented" % args)
-
-        # register_symbol(lambda *args: explicitly_not_implemented("rootOfADE"), {'mathics3': 'rootOfADE'}, 2) # to be removed once we fully on FriCAS 1.3.10+
-        # register_symbol(lambda *args: explicitly_not_implemented("FEseries"), {'mathics3': 'FEseries'}, 2)
-        # register_symbol(lambda *args: explicitly_not_implemented("rootOfRec"), {'mathics3': 'rootOfRec'}, 2)
 
 
     def _install_hints(self):

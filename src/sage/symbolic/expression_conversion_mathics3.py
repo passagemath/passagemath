@@ -51,7 +51,7 @@ from sage.rings.complex_mpfr import ComplexNumber
 from sage.rings.real_mpfr import RealField_class
 from sage.structure.element import Expression
 from sage.symbolic.constants import Constant
-from sage.symbolic.expression_conversions import Converter
+from sage.symbolic.expression_conversions import Converter, Expression
 from sage.symbolic.operators import arithmetic_operators
 
 SAGE_CONSTANT_TO_MATHICS3 = {
@@ -75,31 +75,23 @@ class Mathics3Converter(Converter):
     EXAMPLES::
 
         sage: eqn = mathics3('3x + 5 == 14')
-        eqn = mathics3('3x + 5 == 14')
+        sage: eqn
+        5 + 3 x == 14
         sage: eqn.sage()
         3*x + 5 == 14
         sage: f = mathics3('E^x!')
-        f = mathics3('E^x!')
+        sage: f
+        E ^ x!
         sage: f.sage()
-        (x, y)
-        sage: f = exp(x^2) - arcsin(pi+x)/y
         e^factorial(x)
-
-        ### FIXME
-        # sage: f = exp(x^2) - arcsin(pi+x)/y
-        # f = exp(x^2) - arcsin(pi+x)/yy
-        # sage: f._mathics3_()
-        # f._mathics3_())
-        # -arcsin[x + Pi] / y + exp[x ^ 2]
-
 
     TESTS:
 
     Make sure we can convert I::
 
-        sage: bool(I._mathics3() == I)
+        sage: bool(I._mathics3_() == I)
         True
-        sage: (x+I)._sympy_()
+        sage: (x+I)._mathics3_()
         I + x
     """
 
@@ -114,24 +106,24 @@ class Mathics3Converter(Converter):
         self.mathics3 = Mathics3()
 
     def __call__(self, ex=None):
+        #     EXAMPLES::
+        # sage: from sage.symbolic.expression_conversions import Mathics3Converter
+        # sage: m3 = Mathics3Converter()  # indirect doctest
+        # sage: f(x, y) = x^2 + y^2; f
+        # (x, y) |--> x^2 + y^2
+        # sage: m3(f)
+        # Function[{x, y}, x^ + y^2]
         """
-        EXAMPLES::
-
-            sage: from sage.symbolic.expression_conversions import Mathics3Converter
-            sage: m3 = Mathics3Converter()  # indirect doctest
-            sage: f(x, y) = x^2 + y^2; f
-            (x, y) |--> x^2 + y^2
-            sage: m(f)
-            Function[{x, y}, x^ + y^2]
         """
         if isinstance(ex, Expression):
-            breakpoint()
             if ex.is_callable():
                 # FIXME should get the function name. And then run in Mathics3
                 # f[x, y] := f(x, y) = x^2 + y^2
                 arguments = self.tuple(ex)
                 operator = self.convert_object_to_mathics3(ex.operator())
                 return Mathics3Expression(SymbolFunction, arguments, operator)
+            elif ex.is_constant():
+                return SAGE_CONSTANT_TO_MATHICS3.get(ex, ex)
             elif (
                 (operation := ex.operator())
                 and (operands := ex.operands())
@@ -155,7 +147,6 @@ class Mathics3Converter(Converter):
                 elements = [self.convert_object_to_mathics3(arg) for arg in operands]
                 return Mathics3Expression(Mathics3Symbol(mathics3_name), *elements)
 
-        breakpoint()
         if (value := self.convert_object_to_mathics3(ex)) is not None:
             return value
         raise NotImplementedError
@@ -177,14 +168,7 @@ class Mathics3Converter(Converter):
             sage: type(_)
             <class 'mathics.core.atoms.numerics.MachineReal'>>
             sage: x = SR(2/3)
-
-            # FIXME
-            ## sage: m3.pyobject(x, x.pyobject())
-            ## <Rational: 2/3>
-            ## sage: type(_)
-            ## <class 'mathics.core.atoms.numerics.Rational'>
-
-            sage: x = SR(2 + 3j))
+            sage: x = SR(2 + 3j)
             sage: m3.pyobject(x, x.pyobject())
             <Complex: 2.0 + 3.0*I>
             sage: type(_)
@@ -202,16 +186,12 @@ class Mathics3Converter(Converter):
             sage: from sage.symbolic.expression_conversions import Mathics3Converter
             sage: m3 = Mathics3Converter()
             sage: f = x + 2
-
-            ## FIXME
-            ## sage: m3.arithmetic(f, f.operator())
-            ## <Expression: <Symbol: System`Plus>[<Integer: 2>, <Symbol: System`x>]>
-            ##
+            sage: m3.arithmetic(f, f.operator())
+            <Expression: <Symbol: System`Plus>[<Integer: 2>, <Symbol: System`x>]>
         """
         operator = arithmetic_operators[operator]
         elements = [self.convert_object_to_mathics3(arg) for arg in ex.operands()]
         match operator:
-            # FIXME: Add in floordiv, neg, pos, abs?
             case "+":
                 mathics3_expr = Mathics3Expression(SymbolPlus, *elements)
             case "*":
@@ -253,6 +233,18 @@ class Mathics3Converter(Converter):
 
             import_and_load_builtins()
 
+        elements = []
+        for arg in ex.operands():
+            if isinstance(arg, Expression):
+                element = arg._mathics3_()
+            else:
+                element = self.convert_object_to_mathics3(arg)
+            elements.append(element)
+
+        # if operator == exp:
+        #     (arg,) = ex.operands()
+        #     return self(arg).__rpow__(self.parent()('E'))  # or E^self(arg)
+
         # Convert via SymPy. However in the future, we can contemplate
         # Having Sage to Mathics3 correspondences listed, or for those
         # that do not have Sage to SymPy correspondences.
@@ -264,8 +256,6 @@ class Mathics3Converter(Converter):
             raise NotImplementedError
         mathics3_name = mathics3_class.__class__.__name__
 
-        operands = ex.operands()
-        elements = [self.convert_object_to_mathics3(arg) for arg in operands]
         return Mathics3Expression(Mathics3Symbol(mathics3_name), *elements)
 
     def convert_object_to_mathics3(self, obj):
@@ -295,97 +285,98 @@ class Mathics3Converter(Converter):
         elif hasattr(obj, "is_symbol") and obj.is_symbol():
             return self.symbol(obj)
 
-    def derivative(self, ex, operator):
-        """
-        Convert the derivative of ``self`` in sympy.
+    # FIXME: for later.
+    # def derivative(self, ex, operator):
+    #     """
+    #     Convert the derivative of ``self`` in sympy.
 
-        INPUT:
+    #     INPUT:
 
-        - ``ex`` -- a symbolic expression
+    #     - ``ex`` -- a symbolic expression
 
-        - ``operator`` -- operator
+    #     - ``operator`` -- operator
 
-        TESTS::
+    #     TESTS::
 
-            sage: var('x','y','z')
-            (x, y, z)
-            sage: f = function("F")
-            f = function("F"))
-            sage: f(x)._mathics3_()
-            F[x]
-            sage: diff(f(x,y,z), x, z, x)._mathics3_()
-            diff(f_sage(x, y), x, x, y)
-            sage: df_mathics3 = df_sage._mathics3_(); df_mathics3
-            Derivative(f_sage(x, y), (x, 2), y)
-            sage: df_sympy == f_sympy.diff(x, 2, y, 1)
-            True
+    #         sage: var('x','y','z')
+    #         (x, y, z)
+    #         sage: f = function("F")
+    #         f = function("F"))
+    #         sage: f(x)._mathics3_()
+    #         F[x]
+    #         sage: diff(f(x,y,z), x, z, x)._mathics3_()
+    #         diff(f_sage(x, y), x, x, y)
+    #         sage: df_mathics3 = df_sage._mathics3_(); df_mathics3
+    #         Derivative(f_sage(x, y), (x, 2), y)
+    #         sage: df_sympy == f_sympy.diff(x, 2, y, 1)
+    #         True
 
-        Check that :issue:`28964` is fixed::
+    #     Check that :issue:`28964` is fixed::
 
-            sage: f = function('f')
-            sage: _ = var('x,t')
-            sage: diff(f(x, t), x)._sympy_(), diff(f(x, t), t)._sympy_()
-            (Derivative(f(x, t), x), Derivative(f(x, t), t))
+    #         sage: f = function('f')
+    #         sage: _ = var('x,t')
+    #         sage: diff(f(x, t), x)._sympy_(), diff(f(x, t), t)._sympy_()
+    #         (Derivative(f(x, t), x), Derivative(f(x, t), t))
 
-        Check differentiating by variables with multiple occurrences
-        (:issue:`28964`)::
+    #     Check differentiating by variables with multiple occurrences
+    #     (:issue:`28964`)::
 
-            sage: f = function('f')
-            sage: _ = var('x1,x2,x3,x,t')
-            sage: f(x, x, t).diff(x)._sympy_()._sage_()
-            D[0](f)(x, x, t) + D[1](f)(x, x, t)
+    #         sage: f = function('f')
+    #         sage: _ = var('x1,x2,x3,x,t')
+    #         sage: f(x, x, t).diff(x)._sympy_()._sage_()
+    #         D[0](f)(x, x, t) + D[1](f)(x, x, t)
 
-            sage: g = f(x1, x2, x3, t).diff(x1, 2, x2).subs(x1==x, x2==x, x3==x); g
-            D[0, 0, 1](f)(x, x, x, t)
-            sage: g._sympy_()
-            Subs(Derivative(f(_xi_1, _xi_2, x, t), (_xi_1, 2), _xi_2),
-                 (_xi_1, _xi_2), (x, x))
-            sage: assert g._sympy_()._sage_() == g
+    #         sage: g = f(x1, x2, x3, t).diff(x1, 2, x2).subs(x1==x, x2==x, x3==x); g
+    #         D[0, 0, 1](f)(x, x, x, t)
+    #         sage: g._sympy_()
+    #         Subs(Derivative(f(_xi_1, _xi_2, x, t), (_xi_1, 2), _xi_2),
+    #              (_xi_1, _xi_2), (x, x))
+    #         sage: assert g._sympy_()._sage_() == g
 
-        Check that the use of dummy variables does not cause a collision::
+    #     Check that the use of dummy variables does not cause a collision::
 
-            sage: f = function('f')
-            sage: _ = var('x1,x2,x,xi_1')
-            sage: g = f(x1, x2, xi_1).diff(x1).subs(x1==x, x2==x); g
-            D[0](f)(x, x, xi_1)
-            sage: assert g._sympy_()._sage_() == g
-        """
-        import sympy
+    #         sage: f = function('f')
+    #         sage: _ = var('x1,x2,x,xi_1')
+    #         sage: g = f(x1, x2, xi_1).diff(x1).subs(x1==x, x2==x); g
+    #         D[0](f)(x, x, xi_1)
+    #         sage: assert g._sympy_()._sage_() == g
+    #     """
+    #     import sympy
 
-        # retrieve derivated function
-        f = operator.function()
+    #     # retrieve derivated function
+    #     f = operator.function()
 
-        # retrieve order
-        order = operator._parameter_set
-        # arguments
-        _args = [a._mathics3_() for a in ex.operands()]
+    #     # retrieve order
+    #     order = operator._parameter_set
+    #     # arguments
+    #     _args = [a._mathics3_() for a in ex.operands()]
 
-        # when differentiating by a variable that occurs multiple times,
-        # substitute it by a dummy variable
-        subs_new = []
-        subs_old = []
-        sympy_arg = []
-        for idx in order:
-            a = _args[idx]
-            if _args.count(a) > 1:
-                D = sympy.Dummy("xi_%i" % (idx + 1))
-                # to avoid collisions with ordinary symbols when converting
-                # back to Sage, we pick an unused variable name for the dummy
-                while D._sage_() in ex.variables():
-                    D = sympy.Dummy(D.name + "_0")
-                subs_old.append(a)
-                subs_new.append(D)
-                _args[idx] = D
-                sympy_arg.append(D)
-            else:
-                sympy_arg.append(a)
+    #     # when differentiating by a variable that occurs multiple times,
+    #     # substitute it by a dummy variable
+    #     subs_new = []
+    #     subs_old = []
+    #     sympy_arg = []
+    #     for idx in order:
+    #         a = _args[idx]
+    #         if _args.count(a) > 1:
+    #             D = sympy.Dummy("xi_%i" % (idx + 1))
+    #             # to avoid collisions with ordinary symbols when converting
+    #             # back to Sage, we pick an unused variable name for the dummy
+    #             while D._sage_() in ex.variables():
+    #                 D = sympy.Dummy(D.name + "_0")
+    #             subs_old.append(a)
+    #             subs_new.append(D)
+    #             _args[idx] = D
+    #             sympy_arg.append(D)
+    #         else:
+    #             sympy_arg.append(a)
 
-        f_sympy = f._sympy_()(*_args)
-        result = f_sympy.diff(*sympy_arg)
-        if subs_new:
-            return sympy.Subs(result, subs_new, subs_old)
-        else:
-            return result
+    #     f_sympy = f._sympy_()(*_args)
+    #     result = f_sympy.diff(*sympy_arg)
+    #     if subs_new:
+    #         return sympy.Subs(result, subs_new, subs_old)
+    #     else:
+    #         return result
 
     def evaluate(self, ex):
         if self.mathics3._session is None:
@@ -426,35 +417,20 @@ class Mathics3Converter(Converter):
         # FIXME: we should figure out the context, e.g. System or Global.
         return Mathics3Symbol(repr(ex))
 
+    # FIXME: This not getting called. I don't know why not though.
     def tuple(self, ex):
         """
         Conversion of tuples to Mathics3 ListExpressions.
 
-        EXAMPLES::
-
-            sage: t = SR._force_pyobject((3, 4, e^x))
-            sage: t._mathics3_()
-            {3, 4, e^x}
-            sage: t = SR._force_pyobject((cos(x),))
-            sage: t._mathics3_()
-            {cos(x)}
-
-        TESTS::
-
-            sage: from sage.symbolic.expression_conversions import mathics3_converter
-            sage: F = hypergeometric([1/3,2/3],[1,1],x)
-            sage: F._mathics3_()
-            hyper((1/3, 2/3), (1, 1), x)
-
-            sage: F = hypergeometric([1/3,2/3],[1],x)
-            sage: F._mathics3_()
-            hyper({1/3, 2/3}, {1}, x)
-
-            sage: var('a,b,c,d')
-            (a, b, c, d)
-            sage: hypergeometric((a,b,),(c,),d)._mathics3_()
-            hyper({a, b}, {c}, d)
         """
+        # EXAMPLES::
+
+        #     sage: t = SR._force_pyobject((3, 4, e^x))
+        #     sage: t._mathics3_()
+        #     {3, 4, E^x}
+        #     sage: t = SR._force_pyobject((cos(x),))
+        #     sage: t._mathics3_()
+        #     {Cos[x]}
         return ListExpression(
             *[
                 self.convert_object_to_mathics3(argument)
