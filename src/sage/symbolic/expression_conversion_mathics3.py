@@ -125,7 +125,10 @@ class Mathics3Converter(Converter):
                 arguments = self.tuple(ex)
                 operator = self.convert_object_to_mathics3(ex.operator())
                 return Mathics3Expression(SymbolFunction, arguments, operator)
+            elif ex.is_numeric() and ex.is_rational_expression():
+                return self.convert_object_to_mathics3(ex)
             elif ex.is_constant():
+                # Note: testing for constant should be done after testing for a numeric rational.
                 return SAGE_CONSTANT_TO_MATHICS3.get(ex, ex)
             elif (operands := ex.operands()
                 and (sympy_func := ex._sympy_())
