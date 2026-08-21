@@ -572,10 +572,14 @@ class Mathics3(Interface):
             <class 'mathics.session.MathicsSession'>
         """
         if not self._session:
-            from mathics.core.load_builtin import import_and_load_builtins
+            from mathics.core.load_builtin import import_and_load_builtins, mathics3_builtins_modules
             from mathics.session import MathicsSession
 
-            import_and_load_builtins()
+            # Note: we shouldn't have to do the len() test.
+            # In a future Mathics3, we'll fix this.
+            if len(mathics3_builtins_modules) == 0:
+                import_and_load_builtins()
+
             self._session = MathicsSession(add_builtin=True)
             from sage.interfaces.sympy import sympy_init
 

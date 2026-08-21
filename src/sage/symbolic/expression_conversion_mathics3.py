@@ -397,7 +397,7 @@ class Mathics3Converter(Converter):
             sage: from sage.symbolic.expression_conversions import Mathics3Converter
             sage: m3 = Mathics3Converter()
             sage: m3.relation(x == 3, operator.eq)
-            <Expression: <Symbol: System`Equal>[<Symbol: System`x>, <Integer: 3>]>Eq(x, 3)
+            <Expression: <Symbol: System`Equal>[<Symbol: System`x>, <Integer: 3>]>
             sage: m3.relation(pi < 3, operator.lt)
             <Expression: <Symbol: System`Less>[<Symbol: System`Pi>, <Integer: 3>]>
             sage: m3.relation(x != pi, operator.ne)
