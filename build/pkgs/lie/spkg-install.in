@@ -8,11 +8,14 @@ cd src
 
 chmod -R a+rX .
 
+# Patch out conflict with 'index' from string.h
+sed -i.bak 's/index/Index/g' *.{c,h,y} **/*.{c,h,y}
+
 # Building LiE in parallel is broken
 export MAKE="$MAKE -j1"
 
 # building
-$MAKE CC="$CC" || die "Error building LiE. Did you install bison?"
+$MAKE CC="$CC -std=gnu17" || die "Error building LiE. Did you install bison?"
 
 # "install" the LiE package by moving over the complete build
 # directory to $SAGE_LOCAL/lib/lie
