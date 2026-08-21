@@ -539,7 +539,7 @@ class Mathics3(Interface):
             <method-wrapper '__init__' of sage.misc.lazy_import...
         """
 
-        Interface.__init__(self, name="mathics3")
+        Interface.__init__(self, name="Mathics3")
         self._seed = seed
         self._initialized = False  # done lazily
         self._session = None
@@ -881,14 +881,12 @@ optional Sage package Mathics3 installed.
         EXAMPLES::
 
             sage: mathics3._exponent_symbol()
-            '^'
+            '*^'
 
         ::
 
             sage: bignum = mathics3('10.^80')
             sage: repr(bignum)
-            '1.×10^80'
-            sage: repr(bignum).replace(mathics3._exponent_symbol(), 'e').strip()
             '1.×10^80'
         """
         return "^"

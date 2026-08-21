@@ -167,7 +167,7 @@ class Mathics3Converter(Converter):
             sage: m3.pyobject(x, x.pyobject())
             <MachineReal: 2.0>
             sage: type(_)
-            <class 'mathics.core.atoms.numerics.MachineReal'>>
+            <class 'mathics.core.atoms.numerics.MachineReal'>
             sage: x = SR(2/3)
             sage: x = SR(2 + 3j)
             sage: m3.pyobject(x, x.pyobject())
@@ -236,7 +236,9 @@ class Mathics3Converter(Converter):
 
         elements = []
         for arg in ex.operands():
-            if isinstance(arg, Expression):
+            if arg.is_numeric():
+                element = self.convert_object_to_mathics3(arg)
+            elif isinstance(arg, Expression):
                 element = arg._mathics3_()
             else:
                 element = self.convert_object_to_mathics3(arg)
