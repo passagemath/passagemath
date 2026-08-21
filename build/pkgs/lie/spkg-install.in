@@ -8,6 +8,9 @@ cd src
 
 chmod -R a+rX .
 
+# Patch out conflict with 'index' from string.h
+sed -i.bak 's/index/Index/g' *.{c,h,y} **/*.{c,h,y}
+
 # Building LiE in parallel is broken
 export MAKE="$MAKE -j1"
 
