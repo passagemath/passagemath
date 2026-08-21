@@ -18,7 +18,9 @@ perl -0pi.bak -e 's/#include <string\.h>/typedef __SIZE_TYPE__ gap3_size_t;\next
 sed -i.bak 's/ LOPTS="$(LOPTS) -static"/ LOPTS="$(LOPTS)"/g' src/src/Makefile
 
 cd src/src
-sdh_make
+# https://github.com/passagemath/upstream-gap3-jm/blob/master/sage/Makefile#L34 hardcodes CC
+sdh_make COPTS="-std=gnu17"
+
 cd ..
 
 echo "Installing (copying) files..."
