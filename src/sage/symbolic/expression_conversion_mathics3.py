@@ -16,9 +16,9 @@ Conversion of symbolic expressions to Mathics3
 # ****************************************************************************
 
 from operator import eq, ge, gt, le, lt, ne
+
 # Unused operators:
 # from operator import add, mul, neg, pow, truediv
-
 from mathics.core.atoms import IntegerM1
 from mathics.core.atoms.numerics import Complex as Mathics3Complex
 from mathics.core.atoms.numerics import Rational as Mathics3Rational
@@ -29,6 +29,8 @@ from mathics.core.expression import Expression as Mathics3Expression
 from mathics.core.list import ListExpression
 from mathics.core.symbols import (
     Symbol as Mathics3Symbol,
+)
+from mathics.core.symbols import (
     SymbolDivide,
     SymbolPlus,
     SymbolPower,
@@ -44,6 +46,7 @@ from mathics.core.systemsymbols import (
     SymbolQuotient,
     SymbolUnequal,
 )
+
 from sage.all import RDF, ZZ, Rational
 from sage.interfaces.mathics3 import MATHICS3_TO_SAGE_CONSTANT, Mathics3
 from sage.rings.complex_double import ComplexDoubleElement
@@ -51,7 +54,7 @@ from sage.rings.complex_mpfr import ComplexNumber
 from sage.rings.real_mpfr import RealField_class
 from sage.structure.element import Expression
 from sage.symbolic.constants import Constant
-from sage.symbolic.expression_conversions import Converter, Expression
+from sage.symbolic.expression_conversions import Converter
 from sage.symbolic.operators import arithmetic_operators
 
 SAGE_CONSTANT_TO_MATHICS3 = {
@@ -124,9 +127,7 @@ class Mathics3Converter(Converter):
                 return Mathics3Expression(SymbolFunction, arguments, operator)
             elif ex.is_constant():
                 return SAGE_CONSTANT_TO_MATHICS3.get(ex, ex)
-            elif (
-                (operation := ex.operator())
-                and (operands := ex.operands())
+            elif (operands := ex.operands()
                 and (sympy_func := ex._sympy_())
             ):
                 # FIXME: Figure out how to get function body.
