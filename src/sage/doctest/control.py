@@ -1474,7 +1474,6 @@ class DocTestController(SageObject):
             sage: DC.run()
             Running doctests with ID ...
             Using --optional=external,sage
-            Features to be detected: ...
             Doctesting 1 file.
             ....py
                 [0 tests, ...s wall]
@@ -1500,7 +1499,6 @@ class DocTestController(SageObject):
             sage: DC.run()
             Running doctests with ID ...
             Using --optional=sage...
-            Features to be detected: ...
             Doctesting 1 file.
             ....py
                 [4 tests, ...s wall]
@@ -1518,7 +1516,6 @@ class DocTestController(SageObject):
             sage: DC.run()
             Running doctests with ID ...
             Using --optional=sage
-            Features to be detected: ...
             Doctesting 1 file.
             ....py
                 [4 tests, ...s wall]
@@ -1536,7 +1533,6 @@ class DocTestController(SageObject):
             sage: DC.run()                              # optional - meataxe
             Running doctests with ID ...
             Using --optional=sage
-            Features to be detected: ...
             Doctesting 1 file.
             ....py
                 [4 tests, ...s wall]
@@ -1610,7 +1606,6 @@ class DocTestController(SageObject):
                 else:
                     available_software._seen[i] = -1
 
-            self.log("Features to be detected: " + ','.join(available_software.detectable()))
             if self.options.probe:
                 self.log("Features to be probed: " + ('all' if self.options.probe is True
                                                       else ','.join(self.options.probe)))
