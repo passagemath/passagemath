@@ -89,6 +89,8 @@ sympow      = [SPKG_INSTALL_REQUIRES_sagemath_sympow]
 tdlib       = [SPKG_INSTALL_REQUIRES_sagemath_tdlib]
 topcom      = [SPKG_INSTALL_REQUIRES_sagemath_topcom]
 
+test        = []
+
 [tool.setuptools]
 license-files = ["LICENSE.txt"]
 include-package-data = false
