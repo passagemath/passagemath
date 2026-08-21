@@ -10,38 +10,25 @@ AUTHORS:
 -  Franco Saliola (February 2010)
 -  Christian Stump (March 2016)
 
-.. WARNING::
+.. NOTE::
 
-    The experimental package for GAP3 is Jean Michel's pre-packaged GAP3,
+    The optional package for GAP3 is Jean Michel's pre-packaged GAP3,
     which is a minimal GAP3 distribution containing packages that have
-    no equivalent in GAP4, see :issue:`20107` and also
-
-        https://webusers.imj-prg.fr/~jean.michel/gap3/
+    no equivalent in GAP4, see :ref:`package gap3 <spkg_gap3>`.
 
 Obtaining GAP3
 --------------
 
-Instead of installing the experimental GAP3 package, one can as well install
-by hand either of the following two versions of GAP3:
+Instead of installing the optional GAP3 package, one can as well install
+by hand the following version of GAP3:
 
 - Frank Luebeck maintains a GAP3 Linux executable, optimized
   for i686 and statically linked for jobs of 2 GByte or more:
 
     http://www.math.rwth-aachen.de/~Frank.Luebeck/gap/GAP3
 
-- or you can download GAP3 from the GAP website below. Since GAP3
-  is no longer supported, it may not be easy to install this version.
-
-    https://www.gap-system.org/Gap3/Download3/download.html
-
 Changing which GAP3 is used
 ---------------------------
-
-.. WARNING::
-
-    There is a bug in the pexpect module (see :issue:`8471`) that
-    prevents the following from working correctly. For now, just make sure
-    that ``gap3`` is in your ``PATH``.
 
 Sage assumes that GAP3 can be launched with the command ``gap3``; that is,
 Sage assumes that the command ``gap3`` is in your ``PATH``. If this is not
@@ -616,18 +603,14 @@ class Gap3(Gap_generic):
     have GAP3 installed, or because it is not configured correctly.
 
     - If you do not have GAP3 installed, then you must either install
-      the optional package, see :issue:`20107`, or you download and
-      install it yourself.
-      Here are two other ways to obtain GAP3:
+      the optional package, see https://passagemath.org/docs/latest/html/en/reference/spkg/gap3.html,
+      or you download and install it yourself.
+
+      Another way to obtain GAP3:
 
         - Frank Luebeck maintains a GAP3 Linux executable, optimized
           for i686 and statically linked for jobs of 2 GByte or more:
             http://www.math.rwth-aachen.de/~Frank.Luebeck/gap/GAP3
-
-        - Finally, you can download GAP3 from the GAP website below. Since
-          GAP3 is no longer an officially supported distribution of GAP, it
-          may not be easy to install this version.
-            https://www.gap-system.org/Gap3/Download3/download.html
 
     - If you have GAP3 installed, then perhaps it is not configured
       correctly. Sage assumes that you can start GAP3 with the command
