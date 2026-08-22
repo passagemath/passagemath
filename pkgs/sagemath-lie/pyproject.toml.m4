@@ -20,6 +20,7 @@ name = "passagemath-lie"
 description = "passagemath: Representation theory of complex semisimple Lie groups/algebras with LiE"
 dependencies = [
     SPKG_INSTALL_REQUIRES_sagemath_categories
+    SPKG_INSTALL_REQUIRES_sagemath_conf
     SPKG_INSTALL_REQUIRES_sagemath_environment
     SPKG_INSTALL_REQUIRES_sagemath_repl
     SPKG_INSTALL_REQUIRES_pexpect
@@ -33,7 +34,7 @@ content-type = "text/x-rst"
 
 [project.optional-dependencies]
 test = [
-    "passagemath-repl",
+    SPKG_INSTALL_REQUIRES_sagemath_modules
 ]
 
 [tool.cibuildwheel.linux]
