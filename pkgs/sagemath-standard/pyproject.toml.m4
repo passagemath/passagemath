@@ -62,6 +62,7 @@ khoca       = [SPKG_INSTALL_REQUIRES_khoca]
 kissat      = [SPKG_INSTALL_REQUIRES_sagemath_kissat]
 latte       = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]  # alias
 latte_int   = [SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2]
+lie         = [SPKG_INSTALL_REQUIRES_sagemath_lie]
 lrslib      = [SPKG_INSTALL_REQUIRES_sagemath_lrslib]
 macaulay2   = [SPKG_INSTALL_REQUIRES_sagemath_macaulay2]
 marimo      = [SPKG_INSTALL_REQUIRES_marimo]

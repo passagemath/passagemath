@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-lie
 r"""
 Interface to LiE
 
