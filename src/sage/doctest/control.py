@@ -525,7 +525,7 @@ class DocTestController(SageObject):
                                         'database_jones_numfield', 'database_knotinfo',
                                         'database_mutation_class', 'database_symbolic_data',
                                         'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac',
-                                        'jmol', 'kenzo', 'latte_int', 'macaulay2',
+                                        'jmol', 'kenzo', 'latte_int', 'lie', 'macaulay2',
                                         'matroid_database', 'mcqd', 'meataxe', 'msolve',
                                         'palp', 'pari_elldata', 'pari_galpol', 'pari_seadata',
                                         'pari_seadata_big', 'pari_seadata_small',
