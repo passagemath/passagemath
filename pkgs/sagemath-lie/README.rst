@@ -1,6 +1,6 @@
-===================================================
- passagemath: Computational group theory with GAP3
-===================================================
+=======================================================================================
+ passagemath: Representation theory of complex semisimple Lie groups/algebras with LiE
+=======================================================================================
 
 `passagemath <https://github.com/passagemath/passagemath>`__ is open
 source mathematical software in Python, released under the GNU General
@@ -71,18 +71,13 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable distribution ``passagemath-lie`` provides
-an interface to GAP3.
-
-It can be installed as an extra of the distribution
-`passagemath-groups <https://pypi.org/project/passagemath-groups>`_::
-
-  $ pip install "passagemath-groups[lie]"
+an interface to `LiE <https://passagemath.org/docs/latest/html/en/reference/spkg/lie.html>`__,
+the software package for the representation theory of complex semisimple Lie groups and algebras.
 
 
 What is included
 ----------------
 
-- the binary wheels on PyPI ship a prebuilt copy of GAP3, namely
-  `Jean Michel's pre-packaged GAP3 <https://webusers.imj-prg.fr/~jean.michel/lie/>`__,
-  which is a minimal GAP3 distribution containing packages that have
-  no equivalent in GAP4.
+- `Interface to LiE <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/lie.html#module-sage.interfaces.lie>`__
+
+- the binary wheels on PyPI ship a prebuilt copy of LiE
