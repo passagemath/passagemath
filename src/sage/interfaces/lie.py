@@ -287,9 +287,12 @@ AUTHORS:
 #
 ##########################################################################
 import os
+import shlex
+
 from itertools import chain
 
 from sage.env import DOT_SAGE, LIE_INFO_DIR
+from sage.features.lie import LiE as LiE_executable
 from sage.interfaces.expect import (
     Expect,
     ExpectElement,
@@ -339,7 +342,7 @@ class LiE(ExtraTabCompletion, Expect):
                         prompt='> ',
 
                         # This is the command that starts up your program
-                        command="lie",
+                        command=os.getenv('SAGE_LIE_COMMAND') or shlex.quote(LiE_executable().absolute_filename()),
 
                         server=server,
                         script_subdirectory=script_subdirectory,
@@ -920,7 +923,7 @@ def lie_console():
     from sage.repl.rich_output.display_manager import get_display_manager
     if not get_display_manager().is_in_terminal():
         raise RuntimeError('Can use the console only in the terminal. Try %%lie magics instead.')
-    os.system('lie')
+    os.system(os.getenv('SAGE_LIE_COMMAND') or shlex.quote(LiE_executable().absolute_filename()))
 
 
 def lie_version():
