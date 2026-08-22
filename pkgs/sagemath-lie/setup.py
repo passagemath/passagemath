@@ -9,6 +9,6 @@ from sage_setup import sage_setup
 
 sage_setup(['sagemath-lie'],
            recurse_packages=('sage', 'passagemath_lie'),
-           required_modules=('zlib',),
+           required_modules=(),
            spkgs=['lie'],
            package_data={})
