@@ -4,8 +4,6 @@ include VERSION.txt
 
 prune sage
 
-include sage/combinat/root_system/reflection_group_complex.p*
-include sage/combinat/root_system/reflection_group_real.p*
 include sage/interfaces/lie.p*
 include sage/libs/lie.p*
 
