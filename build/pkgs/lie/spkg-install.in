@@ -12,8 +12,8 @@ export MAKE="$MAKE -j1"
 # building
 sdh_make CC="$CC -std=gnu17"
 
-# "install" the LiE package by moving over the complete build
-# directory to $SAGE_LOCAL/lib/LiE
-
-sdh_install . "$SAGE_LOCAL"/lib/LiE
+# install
+# following https://salsa.debian.org/debian/lie/-/blob/master/debian/install
+sdh_install -T Lie.exe "$SAGE_LOCAL"/lib/lie/lie
+sdh_install -T INFO* *.ind "$SAGE_LOCAL"/lib/lie
 sdh_install -T ../lie.sh "$SAGE_LOCAL/bin/lie"
