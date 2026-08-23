@@ -230,7 +230,7 @@ Matrices::
     [1 2]
     [3 4]
     sage: type(b) # optional - lie
-    <class 'sage.matrix.matrix_integer_dense.Matrix_integer_dense'>
+    <class 'sage.matrix.matrix_....Matrix...'>
 
 Polynomials::
 
@@ -238,7 +238,7 @@ Polynomials::
     sage: b = a.sage(); b              # optional - lie
     -2*x0^2*x1 + x0*x1^2
     sage: type(b)                      # optional - lie
-    <class 'sage.rings.polynomial.multi_polynomial_libsingular.MPolynomial_libsingular'>
+    <class 'sage.rings.polynomial.multi_polynomial...MPolynomial_...'>
 
 Text::
 
@@ -291,6 +291,7 @@ import os
 import shlex
 
 from itertools import chain
+from pathlib import Path
 
 from sage.env import DOT_SAGE, LIE_INFO_DIR
 from sage.features.lie import LiE as LiE_executable
@@ -410,8 +411,13 @@ class LiE(ExtraTabCompletion, Expect):
         commands['vid'] = []
         help = {}
 
+        if LIE_INFO_DIR:
+            info_dir = Path(LIE_INFO_DIR)
+        else:
+            info_dir = Path(LiE_executable().absolute_filename()).parent.parent / 'lib' / 'lie'
+
         for f in filenames:
-            info = open(os.path.join(LIE_INFO_DIR, f))
+            info = open(info_dir / f)
             prev_command = ""
             help_text = ""
             for line in info:
@@ -452,11 +458,11 @@ class LiE(ExtraTabCompletion, Expect):
                 else:
                     commands[t] = [line[1:i]]
 
+            info.close()
+
             # Take care of the last help text which doesn't get processed
             # since there's no following @ symbol
             help[prev_command] = help.get(prev_command, "") + help_text
-
-        info.close()
 
         # Build the list of all possible command completions
         l = list(chain(*commands.values()))
@@ -935,7 +941,12 @@ def lie_version():
         sage: lie_version() # optional - lie
         '2...'
     """
-    with open(os.path.join(LIE_INFO_DIR, 'INFO.0')) as f:
+    if LIE_INFO_DIR:
+        info_dir = Path(LIE_INFO_DIR)
+    else:
+        info_dir = Path(LiE_executable().absolute_filename()).parent.parent / 'lib' / 'lie'
+
+    with open(info_dir / 'INFO.0') as f:
         lines = f.readlines()
     i = lines.index('@version()\n')
     return lines[i + 1].split()[1]
