@@ -228,9 +228,6 @@ else:
 ecl_eval("(in-package :maxima)")
 ecl_eval("(set-locale-subdir)")
 
-if MAXIMA_PREFIX:
-    os.environ["MAXIMA_PREFIX"] = MAXIMA_PREFIX
-
 maxima_userdir = os.environ.get("MAXIMA_USERDIR")
 if not maxima_userdir:
     maxima_userdir = ecl_eval("(default-userdir)").python()[1:-1]
