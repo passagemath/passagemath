@@ -1,1 +1,2 @@
-passagemath-lie
+# This file is updated on every release by the update-version script
+passagemath-lie == 10.8.10rc3

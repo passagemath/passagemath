@@ -1,1 +1,2 @@
-passagemath-graphviz
+# This file is updated on every release by the update-version script
+passagemath-graphviz == 10.8.10rc3
