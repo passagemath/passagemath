@@ -524,15 +524,18 @@ class DocTestController(SageObject):
                                         'database_cubic_hecke', 'database_graphs',
                                         'database_jones_numfield', 'database_knotinfo',
                                         'database_mutation_class', 'database_symbolic_data',
-                                        'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac',
+                                        'eclib', 'ecm', 'fricas', 'frobby',
+                                        'gap_pkg_cddinterface', 'gap_pkg_curlinterface',
+                                        'gap_pkg_jupyterkernel', 'gap_pkg_normalizinterface',
+                                        'gap3', 'gfan', 'giac',
                                         'jmol', 'kenzo', 'latte_int', 'lie', 'macaulay2',
                                         'matroid_database', 'mcqd', 'meataxe', 'msolve',
                                         'palp', 'pari_elldata', 'pari_galpol', 'pari_seadata',
                                         'pari_seadata_big', 'pari_seadata_small',
                                         'pari_galdata', 'pari_nflistdata', 'pari_nftables',
                                         'planarity', 'plantri', 'polytopes_db', 'polytopes_db_4d',
-                                        'pynormaliz', 'qepcad', 'rubiks', 'sirocco', 'sympow',
-                                        'tachyon', 'tdlib', 'topcom']:
+                                        'pynormaliz', 'qepcad', 'rubiks', 'semigroups',
+                                        'sirocco', 'sympow', 'tachyon', 'tdlib', 'topcom']:
                             continue
                         if pkg.is_installed() and pkg.installed_version == pkg.remote_version:
                             options.optional.add(pkg.name)
