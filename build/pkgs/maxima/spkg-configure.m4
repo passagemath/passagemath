@@ -48,7 +48,8 @@ SAGE_SPKG_CONFIGURE([maxima], [
     AS_IF([test x$sage_spkg_install_ecl = xyes], [
       dnl The ECL SPKG version may have a Sage-specific patchlevel, which is
       dnl not part of ECL's versioned library directory name.
-      ecl_version=${version_with_patchlevel_ecl%%.p*}
+      ecl_version=$(cat build/pkgs/ecl/package-version.txt)
+      ecl_version=${ecl_version%%.p*}
     ], [
       ecl_version=`ecl --norc \
         --eval '(princ (lisp-implementation-version))' \
