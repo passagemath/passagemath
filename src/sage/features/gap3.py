@@ -50,7 +50,7 @@ class Gap3Package(Feature):
         sage: Gap3Package("chevie", spkg='gap3')
         Feature('gap3_package_chevie')
     """
-    def __init__(self, package, check_command=None, **kwds):
+    def __init__(self, package, spkg='gap3', **kwds):
         r"""
         TESTS::
 
@@ -58,9 +58,8 @@ class Gap3Package(Feature):
             sage: isinstance(Gap3Package("chevie", spkg='gap3'), Gap3Package)
             True
         """
-        Feature.__init__(self, f"gap3_package_{package}", **kwds)
+        Feature.__init__(self, f"gap3_package_{package}", spkg=spkg, **kwds)
         self.package = package
-        self.check_command = check_command
 
     def _is_present(self):
         r"""
