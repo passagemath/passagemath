@@ -380,6 +380,7 @@ correctly (:issue:`18888`, :issue:`28907`)::
     '-0.5 + 3.14159 x ^ 2.'
 
 """
+
 # TODO:
 # This needs reworking, and probably integrated better with Mathics3Element.
 # Check that Mathics3's `E` exponential symbol is correctly backtranslated
@@ -400,8 +401,9 @@ correctly (:issue:`18888`, :issue:`28907`)::
 #                  https://www.gnu.org/licenses/
 ##############################################################################
 
-from typing import Final
+import operator
 import os
+from typing import Final
 
 import sage.symbolic.expression
 from mathics.core.symbols import Symbol, SymbolFalse, SymbolTrue
@@ -413,10 +415,21 @@ from mathics.core.systemsymbols import (
     SymbolKhinchin,
     SymbolPi,
 )
-
+from sage.interfaces.abc import Mathics3Element as ABCMathics3Element
+from sage.interfaces.interface import (
+    Interface,
+    InterfaceElement,
+    InterfaceFunction,
+    InterfaceFunctionElement,
+)
+from sage.interfaces.tab_completion import ExtraTabCompletion
+from sage.misc.cachefunc import cached_method
+from sage.misc.instancedoc import instancedoc
+from sage.misc.lazy_import import lazy_import
 from sage.rings.integer import Integer
 from sage.rings.rational import Rational
 from sage.rings.real_mpfr import RealNumber
+from sage.structure.richcmp import rich_to_bool
 from sage.symbolic.constants import (
     catalan,
     e,
@@ -426,13 +439,8 @@ from sage.symbolic.constants import (
     khinchin,
     pi,
 )
-from sage.misc.cachefunc import cached_method
-from sage.interfaces.abc import Mathics3Element as ABCMathics3Element
-from sage.interfaces.interface import Interface, InterfaceElement, InterfaceFunction, InterfaceFunctionElement
-from sage.interfaces.tab_completion import ExtraTabCompletion
-from sage.misc.instancedoc import instancedoc
-from sage.structure.richcmp import rich_to_bool
-# from sage.symbolic.expression import register_symbol
+
+lazy_import("sage.symbolic.expression", ["symbol_table", "register_symbol"])
 
 # register_symbol(e, {'mathics3': 'E'})
 
@@ -473,10 +481,11 @@ def _mathics3_sympysage_symbol(self):
         <class 'sage.symbolic.expression.Expression'>
     """
     from sage.symbolic.ring import SR
+
     try:
         name = self.name
-        if name.startswith('_Mathics_User_'):
-            name = name.split('`')[1]
+        if name.startswith("_Mathics_User_"):
+            name = name.split("`")[1]
         elif name.startswith("_uGlobal_"):
             name = name[9:]
         if name == mathics3._true_symbol():
@@ -519,11 +528,8 @@ class Mathics3(Interface):
 
     More examples can be found in the module header.
     """
-    def __init__(self,
-                 maxread=None,
-                 logfile=None,
-                 init_list_length=1024,
-                 seed=None):
+
+    def __init__(self, maxread=None, logfile=None, init_list_length=1024, seed=None):
         r"""
         Python constructor.
 
@@ -533,11 +539,11 @@ class Mathics3(Interface):
             <method-wrapper '__init__' of sage.misc.lazy_import...
         """
 
-        Interface.__init__(self, name='mathics3')
+        Interface.__init__(self, name="mathics3")
         self._seed = seed
         self._initialized = False  # done lazily
         self._session = None
-        os.environ['MATHICS_CHARACTER_ENCODING'] = 'ASCII'  # see :issue:`37395`
+        os.environ["MATHICS_CHARACTER_ENCODING"] = "ASCII"  # see :issue:`37395`
 
     def _lazy_init(self):
         r"""
@@ -566,14 +572,24 @@ class Mathics3(Interface):
             <class 'mathics.session.MathicsSession'>
         """
         if not self._session:
+            from mathics.core.load_builtin import import_and_load_builtins, mathics3_builtins_modules
             from mathics.session import MathicsSession
-            from mathics.core.load_builtin import import_and_load_builtins
-            import_and_load_builtins()
+
+            # Note: we shouldn't have to do the len() test.
+            # In a future Mathics3, we'll fix this.
+            if len(mathics3_builtins_modules) == 0:
+                import_and_load_builtins()
+
             self._session = MathicsSession(add_builtin=True)
             from sage.interfaces.sympy import sympy_init
+
             sympy_init()
             from sympy import Symbol
+
             Symbol._sage_ = _mathics3_sympysage_symbol
+
+            # register translations between SymbolicRing and Mathics3 Expression
+            self._register_symbols()
 
     def _read_in_file_command(self, filename):
         r"""
@@ -589,6 +605,82 @@ class Mathics3(Interface):
             0
         """
         return '<<"%s"' % filename
+
+    @staticmethod
+    def _register_symbols():
+        """
+        Register translations between from a Mathics3 ``Expression`` elements of the
+        Sage ``SymbolicRing``.
+
+        This table is used to convert *from* Mathics3 systems back to Sage.
+
+        This method is called from :meth:`_start`, to work around a
+        circular import problem involving ``pi``.
+        """
+        from sage.calculus.functional import diff
+        from sage.functions.gamma import gamma
+        from sage.functions.hyperbolic import cosh, coth, csch, sech, sinh, tanh
+        from sage.functions.log import dilog, exp, lambert_w
+        from sage.functions.other import abs
+        from sage.functions.special import elliptic_e, elliptic_f
+        from sage.functions.trig import asin, cos, cot, csc, sec, sin, tan
+        from sage.misc.functional import symbolic_prod, symbolic_sum
+        from sage.rings.infinity import infinity
+
+        register_symbol(pi, {"mathics3": "Pi"}, 0)
+        register_symbol(e, {"mathics3": "E"}, 0)
+        register_symbol(exp, {"mathics3": "E"}, 1)
+        register_symbol(lambda: infinity, {"mathics3": "Infinity"}, 0)
+        register_symbol(lambda: -infinity, {"mathics3": "DirectedInfinity[-1]"}, 0)
+        register_symbol(cos, {"mathics3": "Cos"})
+        register_symbol(sin, {"mathics3": "Sin"})
+        register_symbol(tan, {"mathics3": "Tan"})
+        register_symbol(cot, {"mathics3": "Cot"})
+        register_symbol(sec, {"mathics3": "Sec"})
+        register_symbol(csc, {"mathics3": "Csc"})
+        register_symbol(tanh, {"mathics3": "Tanh"})
+        register_symbol(sinh, {"mathics3": "Sinh"})
+        register_symbol(cosh, {"mathics3": "Cosh"})
+        register_symbol(coth, {"mathics3": "Coth"})
+        register_symbol(sech, {"mathics3": "Sech"})
+        register_symbol(csch, {"mathics3": "Csch"})
+        register_symbol(gamma, {"mathics3": "Gamma"}, 1)
+        register_symbol(gamma, {"mathics3": "Gamma"}, 2)
+        register_symbol(
+            lambda x, y: elliptic_e(asin(x), y), {"mathics3": "EllipticE"}, 2
+        )
+        register_symbol(
+            lambda x, y: elliptic_f(asin(x), y), {"mathics3": "EllipticF"}, 2
+        )
+        register_symbol(lambda x, y: x + y, {"mathics3": "+"}, 2)
+        register_symbol(lambda x, y: x - y, {"mathics3": "-"}, 2)
+        register_symbol(lambda x, y: x * y, {"mathics3": "*"}, 2)
+        register_symbol(lambda x, y: x / y, {"mathics3": "/"}, 2)
+        register_symbol(lambda x, y: x**y, {"mathics3": "^"}, 2)
+        register_symbol(lambda f, x: diff(f, x), {"mathics3": "D"}, 2)
+        register_symbol(lambda x, y: x + y * I, {"mathics3": "Complex"}, 2)
+        register_symbol(lambda x: dilog(1 - x), {"mathics3": "PolyLog"}, 1)
+        register_symbol(lambda z: lambert_w(z), {"mathics3": "ProductLog"}, 1)
+        register_symbol(abs, {"mathics3": "Abs"}, 1)
+
+        def _convert_sum(x, y):
+            v, seg = y.operands()
+            a, b = seg.operands()
+            return symbolic_sum(x, v, a, b)
+
+        def _convert_prod(x, y):
+            v, seg = y.operands()
+            a, b = seg.operands()
+            return symbolic_prod(x, v, a, b)
+
+        register_symbol(_convert_sum, {"mathics3": "Plus"}, 2)
+        register_symbol(_convert_prod, {"mathics3": "Times"}, 2)
+
+        def explicitly_not_implemented(*args):
+            raise NotImplementedError(
+                "the translation of the Mathics3 Expression '%s' to sage is not yet implemented"
+                % args
+            )
 
     def _install_hints(self):
         """
@@ -618,6 +710,7 @@ optional Sage package Mathics3 installed.
         S = self._session
         expr = S.evaluate(code)
         from mathics.core.evaluation import Evaluation
+
         ev = Evaluation(S.definitions)
         return ev.evaluate(expr)
 
@@ -632,7 +725,7 @@ optional Sage package Mathics3 installed.
             '2'
         """
         res = self._eval(code)
-        if res.result == 'Null':
+        if res.result == "Null":
             if len(res.out) == 1:
                 return str(res.out[0])
         return res.result
@@ -647,7 +740,7 @@ optional Sage package Mathics3 installed.
             sage: bool(mathics3('u').sage() == 2*x+e)
             True
         """
-        cmd = f'{var}={value};'
+        cmd = f"{var}={value};"
         _ = self.eval(cmd)
 
     def get(self, var):
@@ -731,7 +824,7 @@ optional Sage package Mathics3 installed.
             sage: mathics3._true_symbol()
             'True'
         """
-        return 'True'
+        return "True"
 
     def _false_symbol(self):
         r"""
@@ -740,7 +833,7 @@ optional Sage package Mathics3 installed.
             sage: mathics3._false_symbol()
             'False'
         """
-        return 'False'
+        return "False"
 
     def _equality_symbol(self):
         r"""
@@ -749,7 +842,7 @@ optional Sage package Mathics3 installed.
             sage: mathics3._equality_symbol()
             '=='
         """
-        return '=='
+        return "=="
 
     def _assign_symbol(self):
         r"""
@@ -758,7 +851,31 @@ optional Sage package Mathics3 installed.
             sage: mathics3._assign_symbol()
             ':='
         """
-        return ':='
+        return ":="
+
+    def _relation_symbols(self):
+        """
+        Return a dictionary with operators as the keys and their
+        string representation as the values.
+
+        EXAMPLES::
+
+            sage: import operator
+            sage: symbols = mathematica._relation_symbols()
+            sage: symbols[operator.eq]
+            '=='
+        """
+        return {
+            operator.eq: "==",
+            operator.ge: ">=",
+            operator.gt: ">=",
+            operator.is_: "===",
+            operator.is_not: "=!=",
+            operator.le: "<=",
+            operator.lt: "<",
+            operator.ne: "!=",
+            operator.not_: "!",
+        }
 
     def _exponent_symbol(self):
         r"""
@@ -768,17 +885,15 @@ optional Sage package Mathics3 installed.
         EXAMPLES::
 
             sage: mathics3._exponent_symbol()
-            '*^'
+            '^'
 
         ::
 
             sage: bignum = mathics3('10.^80')
             sage: repr(bignum)
             '1.×10^80'
-            sage: repr(bignum).replace(mathics3._exponent_symbol(), 'e').strip()
-            '1.×10^80'
         """
-        return '*^'
+        return "^"
 
     def _object_class(self):
         r"""
@@ -868,8 +983,8 @@ optional Sage package Mathics3 installed.
             <BLANKLINE>
         """
         if long:
-            return self.eval('Information[%s]' % cmd)
-        return self.eval('? %s' % cmd)
+            return self.eval("Information[%s]" % cmd)
+        return self.eval("? %s" % cmd)
 
     def __getattr__(self, attrname):
         r"""
@@ -888,8 +1003,8 @@ optional Sage package Mathics3 installed.
 
 def mathics3_to_sage(m_node, locals=None):
     import mathics.core.atoms as m_atoms
-    import mathics.core.symbols as m_symbols
     import mathics.core.expression as m_expr
+    import mathics.core.symbols as m_symbols
 
     if locals is None:
         locals = {}
@@ -1028,7 +1143,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             x
             0.15
         """
-        return self.parent().new(f'{self._name}[[{n}]]')
+        return self.parent().new(f"{self._name}[[{n}]]")
 
     def __getattr__(self, attrname):
         r"""
@@ -1043,7 +1158,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             True
         """
         P = self._check_valid()
-        if attrname == '_mathics3_result':
+        if attrname == "_mathics3_result":
             self._mathics3_result = P._eval(self.name())
             return self._mathics3_result
         if attrname[:1] == "_":
@@ -1062,7 +1177,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             True
         """
         P = self.parent()
-        return float(P._eval(f'N[{self.name()},{precision}]').last_eval.to_mpmath())
+        return float(P._eval(f"N[{self.name()},{precision}]").last_eval.to_mpmath())
 
     def _reduce(self):
         r"""
@@ -1083,7 +1198,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             sage: loads(dumps(mpol)) == mpol
             True
         """
-        return reduce_load, (self._reduce(), )
+        return reduce_load, (self._reduce(),)
 
     def _latex_(self):
         r"""
@@ -1093,9 +1208,9 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             sage: latex(Q)
             \frac{\text{Sin}(x \text{Cos}(y))}{\sqrt{1-x^2}}
         """
-        z = str(self.parent()('TeXForm[%s]' % self.name()))
-        i = z.find('=')
-        return z[i + 1:]
+        z = str(self.parent()("TeXForm[%s]" % self.name()))
+        i = z.find("=")
+        return z[i + 1 :]
 
     def _repr_(self):
         r"""
@@ -1185,6 +1300,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             # if locals are given we use `_sage_repr`
             # surely this only covers simple cases
             from sage.misc.sage_eval import sage_eval
+
             return sage_eval(self._sage_repr(), locals=locals)
 
         self._check_valid()
@@ -1199,6 +1315,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             m = self.to_mpmath()
             if self is not m and m is not None:
                 from sage.libs.mpmath.utils import mpmath_to_sage
+
                 return mpmath_to_sage(m, self.get_precision())
         s = self.to_sympy()
         if self is not s and s is not None:
@@ -1208,15 +1325,17 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
                 return True
             if s is sympy.S.false:
                 return False
-            if hasattr(s, '_sage_'):
+            if hasattr(s, "_sage_"):
                 try:
                     return s._sage_()
                 except NotImplementedError:  # see :issue:`33584`
                     pass
         p = self.to_python()
         if self is not p and p is not None:
+
             def conv(i):
                 return self.parent()(i).sage()
+
             if isinstance(p, list):
                 return [conv(i) for i in p]
             elif isinstance(p, tuple):
@@ -1250,7 +1369,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             sage: P._is_graphics()
             True
         """
-        return str(self).startswith('-Graphics-')
+        return str(self).startswith("-Graphics-")
 
     def save_image(self, filename, ImageSize=600):
         r"""
@@ -1271,7 +1390,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
         """
         P = self._check_valid()
         if not self._is_graphics():
-            raise ValueError('mathics3 expression is not graphics')
+            raise ValueError("mathics3 expression is not graphics")
         filename = os.path.abspath(filename)
         s = f'Export["{filename}", {self.name()}, ImageSize->{ImageSize}]'
         P.eval(s)
@@ -1296,17 +1415,18 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
         """
         if self._is_graphics():
             OutputImageSvg = display_manager.types.OutputImageSvg
-            if display_manager.preferences.graphics == 'disable':
+            if display_manager.preferences.graphics == "disable":
                 return
             if OutputImageSvg in display_manager.supported_output():
                 return display_manager.graphics_from_save(
-                    self.save_image, kwds, '.svg', OutputImageSvg)
+                    self.save_image, kwds, ".svg", OutputImageSvg
+                )
         else:
             OutputLatex = display_manager.types.OutputLatex
             dmp = display_manager.preferences.text
-            if dmp is None or dmp == 'plain':
+            if dmp is None or dmp == "plain":
                 return
-            if dmp == 'latex' and OutputLatex in display_manager.supported_output():
+            if dmp == "latex" and OutputLatex in display_manager.supported_output():
                 return OutputLatex(self._latex_())
 
     def show(self, ImageSize=600):
@@ -1339,6 +1459,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             sage: P.show(ImageSize=800)
         """
         from sage.repl.rich_output import get_display_manager
+
         dm = get_display_manager()
         dm.display_immediately(self, ImageSize=ImageSize)
 
@@ -1382,7 +1503,7 @@ class Mathics3Element(ExtraTabCompletion, InterfaceElement, ABCMathics3Element):
             True
         """
         P = self._check_valid()
-        cmd = f'{self._name}==={P._false_symbol()}'
+        cmd = f"{self._name}==={P._false_symbol()}"
         return not str(P(cmd)) == P._true_symbol()
 
     def n(self, *args, **kwargs):
@@ -1450,7 +1571,11 @@ def mathics3_console():
         Goodbye!
     """
     from sage.repl.rich_output.display_manager import get_display_manager
+
     if not get_display_manager().is_in_terminal():
-        raise RuntimeError('Can use the console only in the terminal. Try %%mathics3 magics instead.')
+        raise RuntimeError(
+            "Can use the console only in the terminal. Try %%mathics3 magics instead."
+        )
     from mathics import __main__ as main
+
     main.main()

@@ -651,6 +651,7 @@ class Function_gamma_inc_lower(BuiltinFunction):
                 args_mathematica.append(str(a))
         x, z = args_mathematica
         return "Gamma[%s,0,%s]" % (x, z)
+    _mathics3_init_evaled_ = _mathematica_init_evaled_
 
 
 # shorter alias
