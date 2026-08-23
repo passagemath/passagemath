@@ -238,7 +238,7 @@ Polynomials::
     sage: b = a.sage(); b              # optional - lie
     -2*x0^2*x1 + x0*x1^2
     sage: type(b)                      # optional - lie
-    <class 'sage.rings.polynomial.multi_polynomial_libsingular.MPolynomial_libsingular'>
+    <class 'sage.rings.polynomial.multi_polynomial...MPolynomial_...'>
 
 Text::
 
