@@ -230,7 +230,7 @@ Matrices::
     [1 2]
     [3 4]
     sage: type(b) # optional - lie
-    <class 'sage.matrix.matrix_integer_dense.Matrix_integer_dense'>
+    <class 'sage.matrix.matrix_....Matrix...'>
 
 Polynomials::
 
