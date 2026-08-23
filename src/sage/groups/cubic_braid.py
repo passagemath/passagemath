@@ -88,6 +88,7 @@ import sage.rings.abc
 
 from sage.categories.groups import Groups
 from sage.categories.shephard_groups import ShephardGroups
+from sage.features.gap3 import Gap3Package
 from sage.groups.free_group import FreeGroup
 from sage.groups.finitely_presented import FinitelyPresentedGroup, FinitelyPresentedGroupElement
 from sage.groups.braid import BraidGroup
@@ -1019,8 +1020,7 @@ class CubicBraidGroup(UniqueRepresentation, FinitelyPresentedGroup):
             sage: CBG2._test_reflection_group()
         """
         if self._cbg_type == CubicBraidGroup.type.Coxeter and self.is_finite() and self.strands() > 2:
-            from sage.combinat.root_system.reflection_group_real import is_chevie_available
-            if is_chevie_available():
+            if Gap3Package('chevie').is_present():
                 tester = self._tester(**options)
                 reflgrp = self.as_reflection_group()
                 self._internal_test_attached_group(reflgrp, tester)
@@ -1796,8 +1796,7 @@ class CubicBraidGroup(UniqueRepresentation, FinitelyPresentedGroup):
         #    4 strands -> G25
         #    5 strands -> G32
         # -------------------------------------------------------------------------------
-        from sage.combinat.root_system.reflection_group_real import is_chevie_available
-        if not is_chevie_available():
+        if not Gap3Package('chevie').is_present():
             raise ImportError("the GAP3 package 'CHEVIE' is needed to obtain the corresponding reflection groups")
 
         if self._cbg_type != CubicBraidGroup.type.Coxeter or self.strands() > 5 or self.strands() < 2:

@@ -12,7 +12,7 @@ Features for testing the presence of the SageMath interfaces to ``gap`` and of G
 #                  https://www.gnu.org/licenses/
 # *****************************************************************************
 
-from . import Feature, FeatureTestResult, PythonModule
+from . import Feature, FeatureTestResult
 from .join_feature import JoinFeature
 from .sagemath import sage__libs__gap
 

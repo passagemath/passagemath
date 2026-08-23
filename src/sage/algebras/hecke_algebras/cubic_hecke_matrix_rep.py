@@ -26,6 +26,7 @@ AUTHORS:
 # ###########################################################################
 from enum import Enum
 
+from sage.features.gap3 import Gap3Package
 from sage.misc.cachefunc import cached_method
 from sage.misc.verbose import verbose
 from sage.rings.integer import Integer
@@ -639,8 +640,7 @@ class CubicHeckeMatrixSpace(MatrixSpace):
             representation_type = RepresentationType.SplitIrredMarin
 
         if representation_type == RepresentationType.SplitIrredChevie:
-            from sage.combinat.root_system.reflection_group_real import is_chevie_available
-            if not is_chevie_available():
+            if not Gap3Package('chevie').is_present():
                 raise ValueError('CHEVIE is not available')
 
         base_ring = cubic_hecke_algebra.base_ring(generic=original)
