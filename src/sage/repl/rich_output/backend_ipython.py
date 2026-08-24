@@ -15,104 +15,61 @@ This module defines the IPython backends for
 #                  https://www.gnu.org/licenses/
 # ****************************************************************************
 
+import html
 import os
 import shlex
 import subprocess
-import html
 from IPython.display import publish_display_data
 from sage.repl.rich_output.backend_base import BackendBase
 from sage.repl.rich_output.output_catalog import *
 
 
-def _viewer_command_arguments(command, filename):
+_VIEWER_HANDOFF_TIMEOUT = 1
+
+
+def _is_desktop_opener(command):
     r"""
-    Return command-line arguments for launching a viewer.
+    Return whether ``command`` is a freedesktop opener.
 
-    INPUT:
-
-    - ``command`` -- string; the configured viewer command
-
-    - ``filename`` -- string; the file to show
-
-    OUTPUT: list; the command and arguments
+    These commands normally return after handing the file to the desktop.
+    Waiting briefly for them usually avoids racing requests in a single-instance
+    viewer.  See :issue:`42292`.
 
     EXAMPLES::
 
-        sage: from sage.repl.rich_output.backend_ipython import _viewer_command_arguments
-        sage: _viewer_command_arguments('xdg-open', '/tmp/plot.png')
-        ['xdg-open', '/tmp/plot.png']
-        sage: _viewer_command_arguments('gio open', '/tmp/plot.png')
-        ['gio', 'open', '/tmp/plot.png']
-
-    Empty viewer commands are rejected::
-
-        sage: _viewer_command_arguments('', '/tmp/plot.png')
-        Traceback (most recent call last):
-        ...
-        ValueError: viewer command must not be empty
-    """
-    argv = shlex.split(command)
-    if not argv:
-        raise ValueError('viewer command must not be empty')
-    argv.append(filename)
-    return argv
-
-
-def _viewer_command_uses_foreground_handoff(command):
-    r"""
-    Return whether ``command`` should be run to completion before continuing.
-
-    The Sage command line normally launches viewers in the background, since
-    many viewers keep running until their window is closed.  Freedesktop
-    openers such as ``xdg-open``, ``gio open`` and ``gvfs-open`` are short-lived
-    handoff commands instead.  Running those handoffs concurrently can race in
-    single-instance image viewers, causing some images shown in a loop to be
-    skipped or repeated; running them in the foreground serializes the handoff
-    and avoids the race.  See :issue:`42292`.
-
-    .. NOTE::
-
-        Only the common freedesktop openers are recognized.  A viewer that is
-        itself a single-instance application and is configured directly (for
-        example ``viewer.png_viewer('eog')``) is still launched in the
-        background and may exhibit the race.
-
-    EXAMPLES::
-
-        sage: from sage.repl.rich_output.backend_ipython import _viewer_command_uses_foreground_handoff as handoff
-        sage: handoff('xdg-open')
+        sage: from sage.repl.rich_output.backend_ipython import _is_desktop_opener as opener
+        sage: opener('xdg-open')
         True
-        sage: handoff('/usr/bin/gio open')
+        sage: opener('/usr/bin/gio open')
         True
-        sage: handoff('gvfs-open')
+        sage: opener('gvfs-open')
         True
-
-    Long-running viewers and bare commands are not treated as handoffs::
-
-        sage: handoff('eog')
+        sage: opener('eog')
         False
-        sage: handoff('gio')
+        sage: opener('gio')
         False
-        sage: handoff('')
+        sage: opener('')
         False
     """
-    argv = shlex.split(command)
+    try:
+        argv = shlex.split(command)
+    except ValueError:
+        return False
     if not argv:
         return False
     program = os.path.basename(argv[0])
-    if program in ('xdg-open', 'gvfs-open'):
-        return True
-    return program == 'gio' and argv[1:2] == ['open']
+    return (program in ('xdg-open', 'gvfs-open')
+            or program == 'gio' and argv[1:2] == ['open'])
 
 
 def _launch_viewer_command(command, filename):
     r"""
     Launch an external viewer command for ``filename``.
 
-    Short-lived desktop openers are run in the foreground so Sage serializes the
-    handoff to the user's desktop. Other viewer commands are launched in the
-    background, preserving the existing command-line behavior for viewers that
-    stay open until their window is closed.
+    Sage waits briefly for freedesktop openers so quick handoffs complete before
+    the next request.  Since ``xdg-open`` can instead run the viewer itself on
+    some desktops, the wait is bounded.  Other viewer commands remain in the
+    background.
 
     INPUT:
 
@@ -120,32 +77,56 @@ def _launch_viewer_command(command, filename):
 
     - ``filename`` -- string; the file to show
 
-    EXAMPLES:
+    TESTS::
 
-    Long-running viewers are launched in the background (here ``true`` stands in
-    for such a viewer and simply exits)::
-
+        sage: import subprocess
+        sage: from unittest.mock import Mock, patch
         sage: from sage.repl.rich_output.backend_ipython import _launch_viewer_command
-        sage: from sage.misc.temporary_file import tmp_filename
-        sage: _launch_viewer_command('true', tmp_filename())
+        sage: process = Mock()
+        sage: with patch('sage.repl.rich_output.backend_ipython.subprocess.Popen', return_value=process) as popen:
+        ....:     with patch('sage.repl.rich_output.backend_ipython.os.system') as system:
+        ....:         _launch_viewer_command(
+        ....:             '$HOME/bin/xdg-open > "$HOME/viewer.log"',
+        ....:             '/tmp/a b;$(not-a-command).png')
+        sage: popen.assert_called_once_with(
+        ....:     "$HOME/bin/xdg-open > \"$HOME/viewer.log\" "
+        ....:     "'/tmp/a b;$(not-a-command).png'", shell=True,
+        ....:     stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+        ....:     stderr=subprocess.DEVNULL, start_new_session=True)
+        sage: system.assert_not_called()
+        sage: process.wait.assert_called_once_with(timeout=1)
+
+    A desktop opener that keeps running does not block the Sage prompt::
+
+        sage: slow_process = Mock()
+        sage: slow_process.wait.side_effect = subprocess.TimeoutExpired('xdg-open', 1)
+        sage: with patch('sage.repl.rich_output.backend_ipython.subprocess.Popen', return_value=slow_process):
+        ....:     with patch('sage.repl.rich_output.backend_ipython.os.system') as system:
+        ....:         _launch_viewer_command('xdg-open', '/tmp/plot.png')
+        sage: slow_process.wait.assert_called_once_with(timeout=1)
+        sage: system.assert_not_called()
+
+    Other viewers are launched in the background, with the filename quoted::
+
+        sage: with patch('sage.repl.rich_output.backend_ipython.os.system') as system:
+        ....:     with patch('sage.repl.rich_output.backend_ipython.subprocess.Popen') as popen:
+        ....:         _launch_viewer_command('eog', '/tmp/a b.png')
+        sage: system.assert_called_once_with(
+        ....:     "eog '/tmp/a b.png' 2>/dev/null 1>/dev/null &")
+        sage: popen.assert_not_called()
     """
-    if _viewer_command_uses_foreground_handoff(command):
-        # These openers return as soon as the file is handed off to the desktop
-        # (they do not block until the viewer window is closed), so running them
-        # in the foreground only briefly pauses the prompt.  We deliberately do
-        # not impose a timeout: killing a slow but legitimate handoff could drop
-        # the very image we are trying to show.  A Ctrl-C still propagates if an
-        # opener misbehaves.
+    shell_command = f'{command} {shlex.quote(filename)}'
+    if _is_desktop_opener(command):
         try:
-            subprocess.run(_viewer_command_arguments(command, filename),
-                           stdout=subprocess.DEVNULL,
-                           stderr=subprocess.DEVNULL,
-                           check=False)
-        except OSError:
+            process = subprocess.Popen(
+                shell_command, shell=True, stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                start_new_session=True)
+            process.wait(timeout=_VIEWER_HANDOFF_TIMEOUT)
+        except (OSError, subprocess.TimeoutExpired):
             pass
     else:
-        os.system('{0} {1} 2>/dev/null 1>/dev/null &'
-                  .format(command, shlex.quote(filename)))
+        os.system(f'{shell_command} 2>/dev/null 1>/dev/null &')
 
 
 class BackendIPython(BackendBase):
