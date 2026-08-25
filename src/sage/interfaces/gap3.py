@@ -249,7 +249,7 @@ class Gap3(Gap_generic):
     EXAMPLES::
 
         sage: from sage.interfaces.gap3 import Gap3
-        sage: gap3 = Gap3(command='gap3')
+        sage: gap3 = Gap3()
 
     TESTS::
 
