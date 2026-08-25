@@ -81,3 +81,19 @@ What is included
 - `Interface to LiE <https://passagemath.org/docs/latest/html/en/reference/interfaces/sage/interfaces/lie.html#module-sage.interfaces.lie>`__
 
 - the binary wheels on PyPI ship a prebuilt copy of LiE
+
+
+Examples
+--------
+
+Starting LiE from the command line without explicit installation::
+
+    $ pipx run --spec "passagemath-lie" sage -sh -c lie
+    LiE version 2.2.2 created on Aug 25 2026 at 16:24:54
+    Authors: Arjeh M. Cohen, Marc van Leeuwen, Bert Lisser.
+    Purpose: development CWI
+
+
+    type '?help' for help information
+    type '?' for a list of help entries.
+    >
