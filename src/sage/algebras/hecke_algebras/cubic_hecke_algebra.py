@@ -127,6 +127,7 @@ AUTHORS:
 from warnings import warn
 
 from sage.combinat.free_module import CombinatorialFreeModule
+from sage.features.gap3 import Gap3Package
 from sage.misc.cachefunc import cached_method
 from sage.misc.verbose import verbose
 from sage.groups.cubic_braid import CubicBraidGroup
@@ -1493,8 +1494,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
             sage: CHA3.chevie()                  # optional gap3
             Hecke(G4,[[a,b,c]])
         """
-        from sage.combinat.root_system.reflection_group_real import is_chevie_available
-        if not is_chevie_available():
+        if not Gap3Package('chevie').is_present():
             raise NotImplementedError('this functionality needs GAP3 with package CHEVIE')
 
         n = self._nstrands
@@ -1803,9 +1803,7 @@ class CubicHeckeAlgebra(CombinatorialFreeModule):
             test_matrix = self._tester(**options)
             test_matrix.assertEqual(m12mult, m12mat)
 
-        from sage.combinat.root_system.reflection_group_real import is_chevie_available
-
-        if is_chevie_available():
+        if Gap3Package('chevie').is_present():
             check_matrix(RepresentationType.SplitIrredChevie)
             if self.ngens() < 3:
                 check_matrix(RepresentationType.SplitIrredMarin)

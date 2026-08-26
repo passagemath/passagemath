@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+rm -rf "$SAGE_LOCAL"/lib/lie
+rm -rf "$SAGE_LOCAL"/bin/lie "$SAGE_LOCAL"/lib/LiE

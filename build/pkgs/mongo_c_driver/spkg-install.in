@@ -1,5 +1,8 @@
 cd src
 
+# https://github.com/passagemath/passagemath/issues/2518
+sed -i.bak /qualifiers/d build/cmake/MongoC-Warnings.cmake
+
 sdh_cmake -GNinja \
           -DCMAKE_VERBOSE_MAKEFILE=ON \
           -DBUILD_STATIC_LIBS=OFF \

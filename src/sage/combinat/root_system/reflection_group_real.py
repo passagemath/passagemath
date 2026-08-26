@@ -48,6 +48,7 @@ AUTHORS:
 
 from sage.misc.cachefunc import cached_function, cached_method, cached_in_parent_method
 from sage.combinat.root_system.cartan_type import CartanType, CartanType_abstract
+from sage.features.gap3 import Gap3Package
 from sage.interfaces.gap3 import gap3
 from sage.rings.integer_ring import ZZ
 from sage.combinat.root_system.reflection_group_complex import ComplexReflectionGroup, IrreducibleComplexReflectionGroup
@@ -123,7 +124,7 @@ def ReflectionGroup(*args, **kwds):
         sage: W = ReflectionGroup((4,2,2),4); W
         Reducible complex reflection group of rank 4 and type G(4,2,2) x ST4
     """
-    if not is_chevie_available():
+    if not Gap3Package('chevie').is_present():
         raise ImportError("the GAP3 package 'chevie' is needed to work with (complex) reflection groups")
 
     from sage.interfaces.gap3 import gap3
@@ -219,6 +220,7 @@ def ReflectionGroup(*args, **kwds):
                reflection_index_set=kwds.get('reflection_index_set', None))
 
 
+# Deprecated
 @cached_function
 def is_chevie_available():
     r"""
@@ -233,13 +235,7 @@ def is_chevie_available():
         sage: is_chevie_available() in [True, False]
         True
     """
-    try:
-        from sage.interfaces.gap3 import gap3
-        gap3._start()
-        gap3.load_package("chevie")
-        return True
-    except Exception:
-        return False
+    return bool(Gap3Package('chevie').is_present())
 
 #####################################################################
 ## Classes

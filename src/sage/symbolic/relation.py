@@ -1372,6 +1372,13 @@ def _solve_expression(f, x, explicit_solutions, multiplicities,
         sage: (x^2>1).solve(x)                                                          # needs sage.libs.maxima
         [[x < -1], [x > 1]]
 
+    Maxima 5.49 no longer raises an error for these inputs::
+
+        sage: solve(acot(x), x)
+        [arccot(x) == 0]
+        sage: solve(acot(x), x, to_poly_solve=True)
+        []
+
     :issue:`7491` fixed::
 
         sage: # needs sage.libs.maxima
