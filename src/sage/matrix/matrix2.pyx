@@ -15332,8 +15332,10 @@ cdef class Matrix(Matrix1):
 
             # Continuing the "else" branch of Higham's Step (1), and
             # onto B&K's Step (3) where we find the largest
-            # off-diagonal entry (in magnitude) in row "r" of the
-            # active submatrix.
+            # off-diagonal entry (in magnitude) in column "r" of the
+            # active submatrix. Since the matrix is Hermitian, we search
+            # row "r", whose corresponding entries have the same
+            # magnitudes.
             #
             # Note: omega_r is defined as a C double, but the abs()
             # below would make a complex number approximate anyway.
@@ -15528,12 +15530,11 @@ cdef class Matrix(Matrix1):
         the following Schur-complement update::
 
             sage: # needs scipy
-            sage: import math
             sage: H = RDF(1e200)
             sage: A = matrix(RDF, [[0, 1, 0], [1, 1, H], [0, H, 1]])
             sage: P, L, D = A.block_ldlt()
-            sage: all(math.isfinite(x) for x in L.list() + D.list())
-            True
+            sage: any(x.is_infinity() or x.is_NaN() for x in L.list() + D.list())
+            False
             sage: P.T * A * P == L * D * L.T
             True
 
