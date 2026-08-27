@@ -55,27 +55,8 @@ License (see http://www.gnu.org/licenses/gpl.html or the file GPL in the
 etc directory of the GAP installation).
 
 
-SPKG Maintainers
-----------------
-
--  Christian Stump <christian.stump@gmail.com>
-
-
 Upstream Contact
 ----------------
 
-Jean Michel <jmichel@math.jussieu.fr>
-http://webusers.imj-prg.fr/~jean.michel/
-
-
-Special Update/Build Instructions
----------------------------------
-
-The difference between the distributed tarball and Jean Michel's
-original tarball also contains the binaries
-
-Patches
-~~~~~~~
-
-None
-
+- https://webusers.imj-prg.fr/~jean.michel/gap3/
+- https://github.com/jmichel7/gap3-jm
