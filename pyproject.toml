@@ -3,6 +3,7 @@ build-backend = 'mesonpy'
 # Minimum requirements for the build system to execute.
 requires = [
   'cypari2 >=2.2.1; sys_platform != "win32"',
+  'meson >=1.7',
   'meson-python',
   # Exclude 1.12.0 because of https://github.com/sagemath/cysignals/issues/212, https://github.com/passagemath/passagemath/issues/445
   'cysignals >=1.11.2, != 1.12.0',
@@ -61,7 +62,7 @@ dependencies = [
   'gmpy2 ~=2.1.b999',
   'gmpy2 ~=2.3.b1; sys_platform == "win32"',
   'ipykernel >=5.2.1',
-  'ipython >=8.9.0',
+  'ipython >=7.13.0',
   'ipywidgets >=7.5.1',
   'jupyter-client',
   'matplotlib >=3.7.0',
@@ -223,7 +224,9 @@ extra = [
 dev = [
   "conda-lock",
   "grayskull",
-  "meson",
+  "meson >=1.7", # Duplicate build-system requirement to fix editable installs with uv
+  "meson-python", # Duplicate build-system requirement to fix editable installs with uv
+  "ninja", # Duplicate build-system requirement to fix editable installs with uv
   "pygithub",
   "python-build",
   "tqdm",

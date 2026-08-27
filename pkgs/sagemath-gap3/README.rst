@@ -71,7 +71,7 @@ About this pip-installable distribution package
 -----------------------------------------------
 
 This pip-installable distribution ``passagemath-gap3`` provides
-an interface to GAP3.
+an interface to `GAP3 <https://passagemath.org/docs/latest/html/en/reference/spkg/gap3.html>`__.
 
 It can be installed as an extra of the distribution
 `passagemath-groups <https://pypi.org/project/passagemath-groups>`_::
@@ -82,7 +82,56 @@ It can be installed as an extra of the distribution
 What is included
 ----------------
 
+- `Finite real reflection groups <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/root_system/reflection_group_real.html>`__
+
+- `Finite complex reflection groups <https://passagemath.org/docs/latest/html/en/reference/combinat/sage/combinat/root_system/reflection_group_complex.html>`__
+
 - the binary wheels on PyPI ship a prebuilt copy of GAP3, namely
   `Jean Michel's pre-packaged GAP3 <https://webusers.imj-prg.fr/~jean.michel/gap3/>`__,
   which is a minimal GAP3 distribution containing packages that have
   no equivalent in GAP4.
+
+
+Examples
+--------
+
+Starting GAP3 from the command line without explicit installation::
+
+    $ pipx run --spec "passagemath-gap3" sage -gap3
+                 ########            Lehrstuhl D fuer Mathematik, RWTH Aachen
+               ###    ####             #######            #########
+              ##         ##           #      ##          ## #     ##
+             ##          #           #       ##             #      ##
+            ##           #           ##       #             #      ##
+            ####        ##            #########             #######
+             #####     ###  Version 3 Release 4.4 18 Apr 97 #
+               ######### #                                  # Martin Schoenert
+                        ##  Alice Niemeyer, Werner Nickel   # Erzsebet Horvath
+                       ###  Bettina Eick,   Frank Celler,   # Udo Polis
+                      ## #  Johannes Meier, Alex Wegner,    # Goetz Pfeiffer
+                     ##  #  Juergen Mnich,  Thomas Breuer   # Heiko Theissen
+                    ##   #  Hans U. Besche, Volkmar Felsch  # Ansgar Kaup
+                   ##    #  Akos Seress,    Alexander Hulpke, Thomas Bischops
+                  ##    ##
+                   ######   For help enter: ?<return>
+     lib: 29 May 2017, src: 22 feb 2017, sys: macosx gcc64
+     for this GAP3 distribution see webusers.imj-prg.fr/~jmichel/gap3
+    ...
+    gap>
+
+Using the pexpect interface::
+
+    $ pipx run --spec "passagemath-gap3" sage
+    ...
+    sage: from sage.interfaces.gap3 import gap3
+    sage: gap3.load_package("chevie")
+    sage: m = gap3([[1,2,3],[4,5,6]]); m
+    [ [ 1, 2, 3 ], [ 4, 5, 6 ] ]
+
+Using ``sage.combinat.root_system``::
+
+    $ pipx run --spec "passagemath-gap3" python
+    ...
+    >>> from passagemath_gap3 import *
+    >>> W = ReflectionGroup(['H',4]); W
+    Irreducible real reflection group of rank 4 and type H4

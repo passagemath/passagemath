@@ -1,26 +1,19 @@
-die () {
-    echo "$@"
-    exit 1
-}
-
 # patching
 cd src
 
 chmod -R a+rX .
 
+# Patch out conflict with 'index' from string.h
+sed -i.bak 's/index/Index/g' *.{c,h,y} **/*.{c,h,y}
+
 # Building LiE in parallel is broken
 export MAKE="$MAKE -j1"
 
 # building
-$MAKE CC="$CC" || die "Error building LiE. Did you install bison?"
+sdh_make CC="$CC -std=gnu17"
 
-# "install" the LiE package by moving over the complete build
-# directory to $SAGE_LOCAL/lib/lie
-cd ..
-sed -e "s'$PWD/src'$SAGE_LOCAL/lib/LiE'" src/lie > src/lie~
-mv src/lie~ src/lie
-chmod +x src/lie
-rm -rf "$SAGE_LOCAL"/lib/lie # clean up old versions
-rm -rf "$SAGE_LOCAL"/bin/lie "$SAGE_LOCAL"/lib/LiE
-mv src/lie "$SAGE_LOCAL"/bin/
-mv src/ "$SAGE_LOCAL"/lib/LiE
+# install
+# following https://salsa.debian.org/debian/lie/-/blob/master/debian/install
+sdh_install -T Lie.exe "$SAGE_LOCAL"/lib/lie/lie
+sdh_install -T INFO* *.ind "$SAGE_LOCAL"/lib/lie
+sdh_install -T ../lie.sh "$SAGE_LOCAL/bin/lie"

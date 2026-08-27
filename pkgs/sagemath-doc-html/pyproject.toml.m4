@@ -14,10 +14,12 @@ requires = [
     SPKG_INSTALL_REQUIRES_sagemath_cmr
     SPKG_INSTALL_REQUIRES_sagemath_fricas
     SPKG_INSTALL_REQUIRES_sagemath_frobby
+    SPKG_INSTALL_REQUIRES_sagemath_gap3
     SPKG_INSTALL_REQUIRES_sagemath_gfan
     SPKG_INSTALL_REQUIRES_sagemath_giac
     SPKG_INSTALL_REQUIRES_sagemath_kenzo
     SPKG_INSTALL_REQUIRES_sagemath_latte_4ti2
+    SPKG_INSTALL_REQUIRES_sagemath_lie
     SPKG_INSTALL_REQUIRES_sagemath_msolve
     SPKG_INSTALL_REQUIRES_sagemath_polymake
     SPKG_INSTALL_REQUIRES_sagemath_qepcad

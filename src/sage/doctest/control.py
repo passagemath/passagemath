@@ -524,15 +524,18 @@ class DocTestController(SageObject):
                                         'database_cubic_hecke', 'database_graphs',
                                         'database_jones_numfield', 'database_knotinfo',
                                         'database_mutation_class', 'database_symbolic_data',
-                                        'eclib', 'ecm', 'fricas', 'frobby', 'gfan', 'giac',
-                                        'jmol', 'kenzo', 'latte_int', 'macaulay2',
+                                        'eclib', 'ecm', 'fricas', 'frobby',
+                                        'gap_pkg_cddinterface', 'gap_pkg_curlinterface',
+                                        'gap_pkg_jupyterkernel', 'gap_pkg_normalizinterface',
+                                        'gap3', 'gfan', 'giac',
+                                        'jmol', 'kenzo', 'latte_int', 'lie', 'macaulay2',
                                         'matroid_database', 'mcqd', 'meataxe', 'msolve',
                                         'palp', 'pari_elldata', 'pari_galpol', 'pari_seadata',
                                         'pari_seadata_big', 'pari_seadata_small',
                                         'pari_galdata', 'pari_nflistdata', 'pari_nftables',
                                         'planarity', 'plantri', 'polytopes_db', 'polytopes_db_4d',
-                                        'pynormaliz', 'qepcad', 'rubiks', 'sirocco', 'sympow',
-                                        'tachyon', 'tdlib', 'topcom']:
+                                        'pynormaliz', 'qepcad', 'rubiks', 'semigroups',
+                                        'sirocco', 'sympow', 'tachyon', 'tdlib', 'topcom']:
                             continue
                         if pkg.is_installed() and pkg.installed_version == pkg.remote_version:
                             options.optional.add(pkg.name)
@@ -1474,7 +1477,6 @@ class DocTestController(SageObject):
             sage: DC.run()
             Running doctests with ID ...
             Using --optional=external,sage
-            Features to be detected: ...
             Doctesting 1 file.
             ....py
                 [0 tests, ...s wall]
@@ -1500,7 +1502,6 @@ class DocTestController(SageObject):
             sage: DC.run()
             Running doctests with ID ...
             Using --optional=sage...
-            Features to be detected: ...
             Doctesting 1 file.
             ....py
                 [4 tests, ...s wall]
@@ -1518,7 +1519,6 @@ class DocTestController(SageObject):
             sage: DC.run()
             Running doctests with ID ...
             Using --optional=sage
-            Features to be detected: ...
             Doctesting 1 file.
             ....py
                 [4 tests, ...s wall]
@@ -1536,7 +1536,6 @@ class DocTestController(SageObject):
             sage: DC.run()                              # optional - meataxe
             Running doctests with ID ...
             Using --optional=sage
-            Features to be detected: ...
             Doctesting 1 file.
             ....py
                 [4 tests, ...s wall]
@@ -1610,7 +1609,6 @@ class DocTestController(SageObject):
                 else:
                     available_software._seen[i] = -1
 
-            self.log("Features to be detected: " + ','.join(available_software.detectable()))
             if self.options.probe:
                 self.log("Features to be probed: " + ('all' if self.options.probe is True
                                                       else ','.join(self.options.probe)))
