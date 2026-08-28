@@ -688,7 +688,6 @@ import re
 
 from sage.cpython.string import bytes_to_str
 from sage.features.tachyon import Tachyon
-from sage.misc.pager import pager
 from sage.misc.temporary_file import tmp_filename
 from sage.structure.sage_object import SageObject
 from sage.misc.cachefunc import cached_method
@@ -858,6 +857,7 @@ class TachyonRT(SageObject):
         with os.popen(Tachyon().absolute_filename()) as f:
             r = f.read()
         if use_pager:
+            from sage.misc.pager import pager
             pager()(r)
         else:
             print(r)
