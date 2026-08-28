@@ -1,1 +1,1 @@
-../../VERSION.txt
+10.8.10.post1
