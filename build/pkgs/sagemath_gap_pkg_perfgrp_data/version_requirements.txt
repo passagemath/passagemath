@@ -1,1 +1,2 @@
-passagemath-gap-pkg-perfgrp-data
+# This file is updated on every release by the update-version script
+passagemath-gap-pkg-perfgrp-data == 10.10.1.alpha0

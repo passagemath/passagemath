@@ -1,2 +1,2 @@
 # This file is updated on every release by the update-version script
-passagemath-gap3 == 10.8.10rc2
+passagemath-gap3 == 10.10.1.alpha0
