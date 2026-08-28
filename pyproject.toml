@@ -16,7 +16,7 @@ requires = [
   'gmpy2 ~=2.3.b1; sys_platform == "win32"',
   'jinja2',
   'memory_allocator <0.2',
-  'numpy >=2.2.4',
+  'numpy >=2.1',
 ]
 [tool.meson-python.args]
 # Prevent meson from trying to install the autoconf subprojects
@@ -69,7 +69,7 @@ dependencies = [
   'memory_allocator <0.2',
   'mpmath >=1.1.0, <1.4',
   'networkx >=3.1',
-  'numpy >=1.25',
+  'numpy >=2.1',
   'passagemath-ppl; sys_platform != "win32"',
   'passagemath-primesieve-primecount; sys_platform != "win32"',
   'pexpect >=4.8.0',

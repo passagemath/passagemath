@@ -80,6 +80,7 @@ nq              = ["passagemath-gap[polycyclic]"]
 normalizinterface = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_normalizinterface]
 numericalsgps   = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_numericalsgps_data
                    SPKG_INSTALL_REQUIRES_sagemath_graphviz]
+perfgrp         = [SPKG_INSTALL_REQUIRES_sagemath_gap_pkg_perfgrp_data]
 polenta         = ["passagemath-gap[polycyclic,alnuth,radiroot]"]
 polycyclic      = ["passagemath-gap[alnuth]"]
 polymaking      = [SPKG_INSTALL_REQUIRES_sagemath_polymake]
