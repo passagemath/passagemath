@@ -10,6 +10,26 @@ INSTALL_DIR="$SAGE_LOCAL/$PKG_BASE"
 ## INSTALLATION
 ###########################################
 
+# From spkg-src
+cd src
+
+cd pkg
+make cleanpackages
+cd ..
+echo "### Removing all bin binaries             ###"
+cd bin
+grep -r -m 1 "^"  . | grep "^Binary file" | xargs rm -f
+cd ..
+
+mv -f sage/init.g lib/init.g
+mv -f sage/gap.sh bin/gap.sh
+mv -f sage/Makefile src/Makefile
+chmod a+x bin/gap.sh
+rm -rf sage/*
+rmdir sage
+
+cd ..
+
 # GAP3 has its own string.h, which shadows the C library header in this tree.
 perl -0pi.bak -e 's/# include[[:space:]]*<string\.h>/typedef __SIZE_TYPE__ gap3_size_t;\nextern gap3_size_t strlen(const char *);\nextern int strcmp(const char *, const char *);\nextern char *strncat(char *, const char *, gap3_size_t);/' src/src/system.c
 perl -0pi.bak -e 's/#include <string\.h>/typedef __SIZE_TYPE__ gap3_size_t;\nextern gap3_size_t strlen(const char *);\nextern char *strcat(char *, const char *);/' src/src/gasman.c
