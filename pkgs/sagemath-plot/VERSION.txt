@@ -1,1 +1,1 @@
-../../VERSION.txt
+10.10.1.alpha0
