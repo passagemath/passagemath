@@ -74,6 +74,18 @@ from libc.math cimport INFINITY
 default_texture = Texture()
 pi = RDF.pi()
 
+# A Three.js scene is a complete HTML document, so embedding it in a notebook
+# cell needs an iframe. The Sage kernel wraps it in the IPython and marimo
+# backends; this copy serves _repr_html_(), which runs where sage.repl may not
+# be installed.
+THREEJS_IFRAME_TEMPLATE = """
+<iframe srcdoc="{escaped_html}"
+        width="{width}"
+        height="{height}"
+        style="border: 0;">
+</iframe>
+"""
+
 
 cdef class Graphics3d(SageObject):
     """
@@ -447,23 +459,39 @@ cdef class Graphics3d(SageObject):
         from sage.repl.rich_output.output_catalog import OutputSceneCanvas3d
         return OutputSceneCanvas3d(canvas3d)
 
-    def _rich_repr_threejs(self, **kwds):
+    def _render_html_(self, **kwds):
         r"""
-        Rich Representation as Three.js Scene.
+        Render this graphics object to a Three.js HTML page.
+
+        This is the canonical Three.js renderer, shared by :meth:`_repr_html_`
+        (plain Python kernels), :meth:`_rich_repr_threejs` (Sage kernel), and
+        :meth:`save` for ``.html`` files. It raises on rendering failure so
+        that callers in the Sage rich output path can surface errors.
+
+        The result is a complete document starting with ``<!DOCTYPE html>``,
+        not a fragment, so embedding it in a notebook cell takes an iframe.
 
         INPUT:
 
-        - ``**kwds`` -- optional keyword arguments
+        - ``online`` -- boolean (default: ``False``); load Three.js from a CDN
+          instead of from a local copy. Locating the local copy is
+          backend-specific and goes through :mod:`sage.repl.rich_output`,
+          whereas ``online=True`` needs only the version file that
+          **passagemath-plot** ships.
 
-        OUTPUT:
+        - ``kwds`` -- further viewing options such as ``frame``, ``axes`` or
+          ``viewpoint``, overlaid on the object's saved options in the same
+          order as :meth:`show`
 
-        Instance of
-        :class:`sage.repl.rich_output.output_graphics3d.OutputSceneThreejs`.
+        OUTPUT: string containing an HTML document
 
         EXAMPLES::
 
-            sage: sphere(online=True)._rich_repr_threejs()
-            OutputSceneThreejs container
+            sage: page = sphere()._render_html_(online=True)
+            sage: page.startswith('<!DOCTYPE html>')
+            True
+            sage: 'threejs-sage' in page
+            True
 
         TESTS::
 
@@ -477,22 +505,22 @@ cdef class Graphics3d(SageObject):
 
         Animation files are only included when at least 2 frames are present::
 
-            sage: str = g1._rich_repr_threejs(online=True).html.get_str()
+            sage: str = g1._render_html_(online=True)
             sage: (js in str) or (css in str) or (html in str)
             False
-            sage: str = g2._rich_repr_threejs(online=True).html.get_str()
+            sage: str = g2._render_html_(online=True)
             sage: (js in str) and (css in str) and (html in str)
             True
 
         Animation can be explicitly disabled by setting animate=False::
 
-            sage: str = g2._rich_repr_threejs(online=True, animate=False).html.get_str()
+            sage: str = g2._render_html_(online=True, animate=False)
             sage: (js in str) or (css in str) or (html in str)
             False
 
         Animation CSS and HTML are not included when animation_controls=False::
 
-            sage: str = g2._rich_repr_threejs(online=True, animation_controls=False).html.get_str()
+            sage: str = g2._render_html_(online=True, animation_controls=False)
             sage: js in str
             True
             sage: (css in str) or (html in str)
@@ -503,30 +531,30 @@ cdef class Graphics3d(SageObject):
 
             sage: fat = '// fat_lines.js'
             sage: L = line3d([(0, 0, 0), (1, 1, 1)], thickness=1)
-            sage: str = L._rich_repr_threejs(online=True).html.get_str()
+            sage: str = L._render_html_(online=True)
             sage: fat in str
             False
             sage: L = line3d([(0, 0, 0), (1, 1, 1)], thickness=10)
-            sage: str = L._rich_repr_threejs(online=True).html.get_str()
+            sage: str = L._render_html_(online=True)
             sage: fat in str
             True
             sage: d = dodecahedron(mesh=False, thickness=10)
-            sage: str = d._rich_repr_threejs(online=True).html.get_str()
+            sage: str = d._render_html_(online=True)
             sage: fat in str
             False
             sage: d = dodecahedron(mesh=True, thickness=1)
-            sage: str = d._rich_repr_threejs(online=True).html.get_str()
+            sage: str = d._render_html_(online=True)
             sage: fat in str
             False
             sage: d = dodecahedron(mesh=True, thickness=10)
-            sage: str = d._rich_repr_threejs(online=True).html.get_str()
+            sage: str = d._render_html_(online=True)
             sage: fat in str
             True
 
         If a page title is provided, it is stripped and HTML-escaped::
 
             sage: d = dodecahedron(page_title='\t"Page" & <Title>\n')
-            sage: str = d._rich_repr_threejs(online=True).html.get_str()
+            sage: str = d._render_html_(online=True)
             sage: '<title>&quot;Page&quot; &amp; &lt;Title&gt;</title>' in str
             True
         """
@@ -597,8 +625,13 @@ cdef class Graphics3d(SageObject):
                 style = [dict(), dict(), dict()]
             js_options['axesLabelsStyle'] = style
 
-        from sage.repl.rich_output import get_display_manager
-        scripts = get_display_manager().threejs_scripts(options['online'])
+        from sage.features.threejs import Threejs
+        if options['online']:
+            scripts = Threejs().cdn_scripts()
+        else:
+            # Where the local copy lives is backend-specific.
+            from sage.repl.rich_output import get_display_manager
+            scripts = get_display_manager().threejs_scripts(False)
         styles = ''
         extra_html = ''
 
@@ -667,8 +700,84 @@ cdef class Graphics3d(SageObject):
         html = html.replace('SAGE_LINES', str(reprs['line']))
         html = html.replace('SAGE_SURFACES', str(reprs['surface']))
 
+        return html
+
+    def _repr_html_(self):
+        r"""
+        Return an HTML representation of this graphics object.
+
+        This allows :class:`Graphics3d` objects to display as interactive Three.js
+        scenes in plain Python notebook environments such as Google Colab and
+        marimo, which do not use Sage's rich output system.
+
+        The scene arrives inside an ``<iframe srcdoc="...">``, because
+        :meth:`_render_html_` builds a whole HTML document rather than a
+        fragment. Three.js is loaded from a CDN, overriding any ``online``
+        option saved on the object: resolving a local copy is the job of a
+        Sage display backend, and a plain kernel has none, so ``online=False``
+        would either raise or emit a path the browser cannot fetch.
+
+        Unlike :meth:`_render_html_`, rendering failures are suppressed and
+        ``None`` is returned, matching the IPython ``_repr_html_`` protocol.
+
+        OUTPUT: string containing an ``<iframe>``, or ``None`` if rendering
+        fails
+
+        EXAMPLES::
+
+            sage: frame = sphere()._repr_html_()
+            sage: '<iframe srcdoc=' in frame
+            True
+
+        The document is escaped into the ``srcdoc`` attribute::
+
+            sage: '&lt;!DOCTYPE html&gt;' in frame
+            True
+
+        An ``online=False`` option saved on the object does not turn off the
+        CDN::
+
+            sage: frame = sphere(online=False)._repr_html_()
+            sage: '&lt;script src=&quot;https://cdn.jsdelivr.net' in frame
+            True
+        """
+        from html import escape
+        try:
+            page = self._render_html_(online=True)
+        except Exception:
+            return None
+        return THREEJS_IFRAME_TEMPLATE.format(escaped_html=escape(page),
+                                              width='100%', height=400)
+
+    def _rich_repr_threejs(self, **kwds):
+        r"""
+        Rich Representation as Three.js Scene.
+
+        INPUT:
+
+        - ``**kwds`` -- optional keyword arguments, passed on to
+          :meth:`_render_html_`
+
+        OUTPUT:
+
+        Instance of
+        :class:`sage.repl.rich_output.output_graphics3d.OutputSceneThreejs`.
+
+        EXAMPLES::
+
+            sage: sphere(online=True)._rich_repr_threejs()
+            OutputSceneThreejs container
+
+        TESTS:
+
+        The container carries the page that :meth:`_render_html_` builds::
+
+            sage: page = sphere(online=True)._rich_repr_threejs().html.get_str()
+            sage: page.startswith('<!DOCTYPE html>')
+            True
+        """
         from sage.repl.rich_output.output_catalog import OutputSceneThreejs
-        return OutputSceneThreejs(html)
+        return OutputSceneThreejs(self._render_html_(**kwds))
 
     def __str__(self):
         """
@@ -2068,7 +2177,8 @@ end_scene""".format(
             with open(filename, 'w') as outfile:
                 outfile.write(self.ply_ascii_string())
         elif ext == '.html':
-            self._rich_repr_threejs(**kwds).html.save_as(filename)
+            with open(filename, 'wb') as outfile:
+                outfile.write(self._render_html_(**kwds).encode('utf-8'))
         else:
             raise ValueError('filetype {} not supported by save()'.format(ext))
 
