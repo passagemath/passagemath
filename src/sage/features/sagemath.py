@@ -3,17 +3,18 @@ r"""
 Features for testing the presence of Python modules in the Sage library
 
 All of these features are present in a monolithic installation of the Sage library,
-such as the one made by the SageMath distribution.
+such as the one made by upstream SageMath project.
 
-The features are defined for the purpose of separately testing modularized
-distributions such as :ref:`sagemath-categories <spkg_sagemath_categories>`
-and :ref:`sagemath-repl <spkg_sagemath_repl>`.
+The features are defined for the purpose of separately testing the modularized
+distributions of the passagemath project such as
+:ref:`passagemath-groups <spkg_sagemath_groups>`
+and :ref:`passagemath-schemes <spkg_sagemath_schemes>`.
 
 Often, doctests in a module of the Sage library illustrate the
 interplay with a range of different objects; this is a form of integration testing.
 These objects may come from modules shipped in
 other distributions. For example, :mod:`sage.structure.element`
-(shipped by :ref:`sagemath-objects <spkg_sagemath_objects>`,
+(shipped by :ref:`passagemath-objects <spkg_sagemath_objects>`,
 one of the most fundamental distributions) contains the
 doctest::
 
@@ -22,7 +23,7 @@ doctest::
     sage: g.powers(4)                                                                   # needs sage.groups
     [(), (1,2,3,4), (1,3)(2,4), (1,4,3,2)]
 
-This test cannot pass when the distribution :ref:`sagemath-objects <spkg_sagemath_objects>`
+This test cannot pass when the distribution :ref:`passagemath-objects <spkg_sagemath_objects>`
 is tested separately (in a virtual environment): In this situation,
 :class:`SymmetricGroup` is not defined anywhere (and thus not present
 in the top-level namespace).
@@ -61,7 +62,7 @@ class SAGE_SRC(StaticFile):
         from sage.env import SAGE_SRC
         # We check the file bin/sage-src-env-config.in, which by design is:
         # - never installed,
-        # - not included in the sagemath-standard sdist,
+        # - not included in the passagemath-standard sdist,
         # - included only in one modularized sdist, of pkgs/sage-conf_pypi,
         #   where it appears in a subdirectory (sage_root/src/bin/)
         StaticFile.__init__(self, 'SAGE_SRC',
@@ -191,7 +192,7 @@ class sage__combinat(JoinFeature):
         """
         # sage.combinat will be a namespace package.
         # Testing whether sage.combinat itself can be imported is meaningless.
-        # Some modules providing basic combinatorics are already included in sagemath-categories.
+        # Some modules providing basic combinatorics are already included in passagemath-categories.
         # Hence, we test a Python module within the package.
         JoinFeature.__init__(self, 'sage.combinat',
                              [PythonModule('sage.combinat'),                        # namespace package
@@ -1316,14 +1317,14 @@ class sage__symbolic(JoinFeature):
 
     EXAMPLES:
 
-    The symbolics subsystem of Sage will be provided by the distribution
-    sagemath-symbolics, in preparation at :issue:`35095`. If it is not installed,
+    The symbolics subsystem of Sage is provided by the distribution
+    **passagemath-symbolics**, in preparation at :issue:`35095`. If it is not installed,
     Sage will be able to provide installation advice::
 
         sage: from sage.features.sagemath import sage__symbolic
         sage: print(sage__symbolic().resolution())                                      # optional - sage_spkg, not tested
         ...To install sagemath_symbolics...you can try to run...
-        pip install sagemath-symbolics
+        pip install passagemath-symbolics
         ...
 
     TESTS::
@@ -1367,7 +1368,7 @@ def all_features():
     Return features corresponding to parts of the Sage library.
 
     These features are named after Python packages/modules (e.g., :mod:`sage.symbolic`),
-    not distribution packages (**sagemath-symbolics**).
+    not distribution packages (**passagemath-symbolics**).
 
     This design is motivated by a separation of concerns: The author of a module that depends
     on some functionality provided by a Python module usually already knows the
