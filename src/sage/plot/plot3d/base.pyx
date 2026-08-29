@@ -178,6 +178,100 @@ cdef class Graphics3d(SageObject):
         else:
             assert False   # unreachable
 
+    def _render_png_(self, **kwds):
+        r"""
+        Render this graphics object to PNG bytes using Tachyon.
+
+        This is the canonical raw-PNG renderer, shared by :meth:`_repr_png_`
+        (plain Python kernels), :meth:`_rich_repr_tachyon` (Sage kernel), and
+        :meth:`_save_image_png`. It raises on rendering failure so that
+        callers in the Sage rich output path can surface errors.
+
+        Rendering requires the ``tachyon`` extra, i.e.
+        ``passagemath-plot[tachyon]``.
+
+        INPUT:
+
+        - ``kwds`` -- viewing options such as ``figsize``, ``zoom`` or
+          ``camera_position``, overlaid on the object's saved options in the
+          same order as :meth:`show`
+
+        OUTPUT: ``bytes`` -- PNG image data
+
+        EXAMPLES::
+
+            sage: png = sphere()._render_png_()    # optional - tachyon
+            sage: png[:8] == b'\x89PNG\r\n\x1a\n'  # optional - tachyon
+            True
+
+        Runtime keyword arguments reach Tachyon, so ``figsize`` changes the
+        rendered resolution::
+
+            sage: from io import BytesIO
+            sage: from PIL import Image
+            sage: small = sphere()._render_png_(figsize=2)  # optional - tachyon
+            sage: Image.open(BytesIO(small)).size           # optional - tachyon
+            (200, 200)
+            sage: large = sphere()._render_png_(figsize=6)  # optional - tachyon
+            sage: Image.open(BytesIO(large)).size           # optional - tachyon
+            (600, 600)
+        """
+        opts = self._process_viewing_options(kwds)
+        T = self._prepare_for_tachyon(
+            opts['frame'], opts['axes'], opts['frame_aspect_ratio'],
+            opts['aspect_ratio'],
+            1  # opts['zoom']. Let zoom be handled by tachyon.
+               # We don't want the perspective to change by zooming.
+        )
+
+        tachyon_args = dict((key, val) for key, val in opts.items()
+                            if key in Graphics3d.tachyon_keywords)
+        extra_opts = opts.get("extra_opts", "")
+        if "shade" in opts:
+            if opts["shade"] not in ["full", "medium", "low", "lowest"]:
+                raise ValueError("shade must be set to 'full', 'medium', "
+                                 "'low' or 'lowest'")
+            extra_opts += " -" + opts["shade"] + "shade"
+
+        from sage.interfaces.tachyon import tachyon_rt
+        from tempfile import TemporaryDirectory
+        with TemporaryDirectory() as dirname:
+            filename = os.path.join(dirname, 'scene.png')
+            tachyon_rt(T.tachyon(**tachyon_args), filename,
+                       opts['verbosity'], extra_opts)
+            with open(filename, 'rb') as fobj:
+                return fobj.read()
+
+    def _repr_png_(self):
+        r"""
+        Return a PNG representation of this graphics object.
+
+        This allows ``Graphics3d`` objects to display as static images in
+        plain Python notebook environments such as Google Colab and marimo,
+        which do not use Sage's rich output system.
+
+        Rendering requires the ``tachyon`` extra, i.e.
+        ``passagemath-plot[tachyon]``. Tachyon is a native executable and is
+        not available on every platform, so kernels that run entirely in the
+        browser are out of scope. Without it, ``None`` is returned and
+        IPython falls back to the text representation.
+
+        Unlike :meth:`_render_png_`, rendering failures are suppressed and
+        ``None`` is returned, matching the IPython ``_repr_png_`` protocol.
+
+        OUTPUT: ``bytes`` -- PNG image data, or ``None`` if rendering fails
+
+        EXAMPLES::
+
+            sage: png = sphere()._repr_png_()      # optional - tachyon
+            sage: png[:8] == b'\x89PNG\r\n\x1a\n'  # optional - tachyon
+            True
+        """
+        try:
+            return self._render_png_()
+        except Exception:
+            return None
+
     def _rich_repr_tachyon(self, output_container, **kwds):
         """
         Rich Representation using Tachyon.
@@ -206,42 +300,37 @@ cdef class Graphics3d(SageObject):
             sage: import sage.repl.rich_output.output_catalog as catalog
             sage: sphere()._rich_repr_tachyon(catalog.OutputImageJpg)  # optional -- libjpeg
             OutputImageJpg container
+
+        Each container carries image data in its own format::
+
+            sage: # optional - tachyon
+            sage: png = sphere()._rich_repr_tachyon(catalog.OutputImagePng)
+            sage: png.png.get()[:8] == b'\x89PNG\r\n\x1a\n'
+            True
+            sage: gif = sphere()._rich_repr_tachyon(catalog.OutputImageGif)
+            sage: gif.gif.get()[:6] in (b'GIF87a', b'GIF89a')
+            True
+            sage: jpg = sphere()._rich_repr_tachyon(catalog.OutputImageJpg)  # optional - libjpeg
+            sage: jpg.jpg.get()[:2] == b'\xff\xd8'                           # optional - libjpeg
+            True
         """
-        filename = tmp_filename(ext='.png')
-        opts = self._process_viewing_options(kwds)
-        T = self._prepare_for_tachyon(
-            opts['frame'], opts['axes'], opts['frame_aspect_ratio'],
-            opts['aspect_ratio'],
-            1 # opts['zoom']. Let zoom be handled by tachyon.
-            # We don't want the perspective to change by zooming
-        )
-
-        tachyon_args = dict((key,val) for key,val in opts.items() if key in Graphics3d.tachyon_keywords)
-        extra_opts = opts.get("extra_opts", "")
-        if "shade" in opts:
-            if opts["shade"] not in ["full", "medium", "low", "lowest"]:
-                raise ValueError("shade must be set to 'full', 'medium', 'low' or 'lowest'")
-            extra_opts += " -" + opts["shade"] + "shade"
-
-        from sage.interfaces.tachyon import tachyon_rt
-
-        tachyon_rt(T.tachyon(**tachyon_args), filename, opts['verbosity'], extra_opts)
-        from sage.repl.rich_output.buffer import OutputBuffer
+        from io import BytesIO
         import sage.repl.rich_output.output_catalog as catalog
         import PIL.Image as Image
+        png = self._render_png_(**kwds)
         if output_container is catalog.OutputImagePng:
-            buf = OutputBuffer.from_file(filename)
+            data = png
         elif output_container is catalog.OutputImageGif:
-            gif = tmp_filename(ext='.gif')
-            Image.open(filename).save(gif)
-            buf = OutputBuffer.from_file(gif)
+            buf = BytesIO()
+            Image.open(BytesIO(png)).save(buf, format='GIF')
+            data = buf.getvalue()
         elif output_container is catalog.OutputImageJpg:
-            jpg = tmp_filename(ext='.jpg')
-            Image.open(filename).save(jpg)
-            buf = OutputBuffer.from_file(jpg)
+            buf = BytesIO()
+            Image.open(BytesIO(png)).save(buf, format='JPEG')
+            data = buf.getvalue()
         else:
             raise ValueError('output_container not supported')
-        return output_container(buf)
+        return output_container(data)
 
     def _rich_repr_jmol(self, **kwds):
         """
@@ -1811,6 +1900,14 @@ end_scene""".format(
             Traceback (most recent call last):
             ...
             AssertionError
+
+        The Tachyon viewer writes a valid PNG::
+
+            sage: f = tmp_filename(ext='.png')
+            sage: s._save_image_png(f, viewer='tachyon')          # optional - tachyon
+            sage: with open(f, 'rb') as fobj:                     # optional - tachyon
+            ....:     fobj.read()[:8] == b'\x89PNG\r\n\x1a\n'
+            True
         """
         assert filename.endswith('.png')
         opts = self._process_viewing_options(kwds)
@@ -1834,9 +1931,8 @@ end_scene""".format(
             except Exception:
                 viewer = 'jmol'
         if viewer == 'tachyon':
-            from sage.repl.rich_output.output_catalog import OutputImagePng
-            render = self._rich_repr_tachyon(OutputImagePng, **opts)
-            render.png.save_as(filename)
+            with open(filename, 'wb') as fobj:
+                fobj.write(self._render_png_(**opts))
         elif viewer == 'jmol':
             scene = self._rich_repr_jmol(**opts)
             scene.preview_png.save_as(filename)
