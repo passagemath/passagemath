@@ -62,7 +62,7 @@ class SAGE_SRC(StaticFile):
         from sage.env import SAGE_SRC
         # We check the file bin/sage-src-env-config.in, which by design is:
         # - never installed,
-        # - not included in the sagemath-standard sdist,
+        # - not included in the passagemath-standard sdist,
         # - included only in one modularized sdist, of pkgs/sage-conf_pypi,
         #   where it appears in a subdirectory (sage_root/src/bin/)
         StaticFile.__init__(self, 'SAGE_SRC',
@@ -192,7 +192,7 @@ class sage__combinat(JoinFeature):
         """
         # sage.combinat will be a namespace package.
         # Testing whether sage.combinat itself can be imported is meaningless.
-        # Some modules providing basic combinatorics are already included in sagemath-categories.
+        # Some modules providing basic combinatorics are already included in passagemath-categories.
         # Hence, we test a Python module within the package.
         JoinFeature.__init__(self, 'sage.combinat',
                              [PythonModule('sage.combinat'),                        # namespace package
@@ -1317,14 +1317,14 @@ class sage__symbolic(JoinFeature):
 
     EXAMPLES:
 
-    The symbolics subsystem of Sage will be provided by the distribution
-    sagemath-symbolics, in preparation at :issue:`35095`. If it is not installed,
+    The symbolics subsystem of Sage is provided by the distribution
+    **passagemath-symbolics**, in preparation at :issue:`35095`. If it is not installed,
     Sage will be able to provide installation advice::
 
         sage: from sage.features.sagemath import sage__symbolic
         sage: print(sage__symbolic().resolution())                                      # optional - sage_spkg, not tested
         ...To install sagemath_symbolics...you can try to run...
-        pip install sagemath-symbolics
+        pip install passagemath-symbolics
         ...
 
     TESTS::
@@ -1368,7 +1368,7 @@ def all_features():
     Return features corresponding to parts of the Sage library.
 
     These features are named after Python packages/modules (e.g., :mod:`sage.symbolic`),
-    not distribution packages (**sagemath-symbolics**).
+    not distribution packages (**passagemath-symbolics**).
 
     This design is motivated by a separation of concerns: The author of a module that depends
     on some functionality provided by a Python module usually already knows the
