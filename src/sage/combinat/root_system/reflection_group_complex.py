@@ -49,7 +49,7 @@ Some special cases also occur, among them are::
     Irreducible real reflection group of rank 3 and type A3
 
 .. WARNING:: Uses the GAP3 package *Chevie* which is available as an
-             experimental package (installed by ``sage -i gap3``) or to
+             optional package (installed by ``sage -i gap3``) or to
              download by hand from `Jean Michel's website <http://webusers.imj-prg.fr/~jean.michel/gap3/>`_.
 
 A guided tour
