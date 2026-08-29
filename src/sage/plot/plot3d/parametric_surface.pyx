@@ -495,6 +495,31 @@ cdef class ParametricSurface(IndexFaceSet):
             sage: P.show()                                                          # indirect doctests
             sage: S = MoebiusStrip(1, .2)                                           # indirect doctests
             sage: S.show()                                                          # indirect doctests
+
+        An exception that interrupts the construction of the faces (a
+        :exc:`KeyboardInterrupt` from pressing :kbd:`Ctrl` + :kbd:`C` during a slow plot, or
+        an error raised by a user-supplied color function, as below) must
+        not leave a partially-built mesh behind; re-rendering such an
+        object used to crash the interpreter (:issue:`2699`)::
+
+            sage: def f(u, v): return u, v, u*v
+            sage: count = [0]
+            sage: def c(u, v):
+            ....:     count[0] += 1
+            ....:     if count[0] == 20:
+            ....:         raise ValueError("interrupted")
+            ....:     return 0.5
+            sage: P = ParametricSurface(f, (srange(0, 1, 0.1), srange(0, 1, 0.1)),
+            ....:                       color=(c, colormaps.jet))
+            sage: P.triangulate()
+            Traceback (most recent call last):
+            ...
+            ValueError: interrupted
+            sage: P.face_list() == []    # same as a never-triangulated surface
+            True
+            sage: P.triangulate()        # the retry redoes the work
+            sage: len(P.face_list())
+            81
         """
         cdef double u, v
         if render_params is None:
@@ -514,59 +539,7 @@ cdef class ParametricSurface(IndexFaceSet):
         cdef Py_ssize_t m = len(vrange) - 1
         cdef Py_ssize_t ix = 0
 
-        try:
-            self.realloc((m+1)*(n+1), m*n, 4*m*n)
-            self.eval_grid(urange, vrange)
-        except BaseException:
-            self.fcount = self.vcount = 0
-            self.render_grid = None
-            raise
-
-        # face_c.vertices:
-        #
-        #   0 - 1
-        #   |   |
-        #   3 - 2
-
         cdef face_c *face
-
-        for i in range(n):
-            for j in range(m):
-                sig_check()
-                ix = i*m + j
-                face = &self._faces[ix]
-                face.n = 4
-                face.vertices = &self.face_indices[4*ix]
-                if self.color_function is not None:
-                    face.color.r, face.color.g, face.color.b, _ = self.colormap(self.color_function(urange[i], vrange[j]))
-
-                # Connect to the i-1 row
-                if i == 0:
-                    if j == 0:
-                        face.vertices[0] = 0
-                    else:
-                        face.vertices[0] = self._faces[ix-1].vertices[1]
-                    face.vertices[1] = j+1
-                    smash_edge(self.vs, face, 0, 1)
-                else:
-                    face.vertices[0] = self._faces[ix-m].vertices[3]
-                    face.vertices[1] = self._faces[ix-m].vertices[2]
-
-                # Connect to the j-1 col
-                if j == 0:
-                    face.vertices[3] = (i+1)*(m+1)
-                    smash_edge(self.vs, face, 0, 3)
-                else:
-                    face.vertices[3] = self._faces[ix-1].vertices[2]
-
-                # This is the newly-seen vertex, identify if it's a triangle
-                face.vertices[2] = (i+1)*(m+1)+j+1
-                smash_edge(self.vs, face, 1, 2)
-                smash_edge(self.vs, face, 3, 2)
-
-        # Now we see if it wraps around or is otherwise enclosed
-        self.enclosed = True
-
         cdef face_c *first
         cdef face_c *last
         cdef point_c first_v0
@@ -575,62 +548,118 @@ cdef class ParametricSurface(IndexFaceSet):
         cdef point_c last_v1
         cdef point_c last_v2
         cdef point_c last_v3
-        for j in range(m):
-            sig_check()
-            first = &self._faces[j]
-            first_v0 = self.vs[first.vertices[0]]
-            first_v1 = self.vs[first.vertices[1]]
-            if not (point_c_isfinite(first_v0) and point_c_isfinite(first_v1)):
-                continue
-            last = &self._faces[(n-1)*m+j]
-            last_v3 = self.vs[last.vertices[3]]
-            last_v2 = self.vs[last.vertices[2]]
-            if not (point_c_isfinite(last_v3) and point_c_isfinite(last_v2)):
-                continue
-            if point_c_eq(first_v0, last_v3):
-                last.vertices[3] = first.vertices[0]
-            elif first.vertices[0] != first.vertices[1] or last.vertices[3] != last.vertices[2]:
-                self.enclosed = False
-            if point_c_eq(first_v1, last_v2):
-                last.vertices[2] = first.vertices[1]
-            elif first.vertices[0] != first.vertices[1] or last.vertices[3] != last.vertices[2]:
-                self.enclosed = False
 
-        for i in range(n):
-            sig_check()
-            first = &self._faces[i*m]
-            first_v0 = self.vs[first.vertices[0]]
-            first_v3 = self.vs[first.vertices[3]]
-            if not (point_c_isfinite(first_v0) and point_c_isfinite(first_v3)):
-                continue
-            last = &self._faces[i*m + m-1]
-            last_v1 = self.vs[last.vertices[1]]
-            last_v2 = self.vs[last.vertices[2]]
-            if not (point_c_isfinite(last_v1) and point_c_isfinite(last_v2)):
-                continue
-            if point_c_eq(first_v0, last_v1):
-                last.vertices[1] = first.vertices[0]
-            elif first.vertices[0] != first.vertices[3] or last.vertices[1] != last.vertices[2]:
-                self.enclosed = False
-            if point_c_eq(first_v3, last_v2):
-                last.vertices[2] = first.vertices[3]
-            elif first.vertices[0] != first.vertices[3] or last.vertices[1] != last.vertices[2]:
-                self.enclosed = False
+        try:
+            self.realloc((m+1)*(n+1), m*n, 4*m*n)
+            self.eval_grid(urange, vrange)
 
-        # make sure we deleted the correct point from the triangles
-        # so that the correct vertices are the first 3 ones
-        for ix in range(n * m):
-            sig_check()
-            face = &self._faces[ix]
-            if face.n == 3:
-                if face.vertices[3] == face.vertices[2] or face.vertices[3] == face.vertices[0]:
-                    pass
-                else:
-                    if face.vertices[0] == face.vertices[1]:
-                        face.vertices[1] = face.vertices[2]
-                    face.vertices[2] = face.vertices[3]
+            # face_c.vertices:
+            #
+            #   0 - 1
+            #   |   |
+            #   3 - 2
 
-        self._clean_point_list()
+            for i in range(n):
+                for j in range(m):
+                    sig_check()
+                    ix = i*m + j
+                    face = &self._faces[ix]
+                    face.n = 4
+                    face.vertices = &self.face_indices[4*ix]
+                    if self.color_function is not None:
+                        face.color.r, face.color.g, face.color.b, _ = self.colormap(self.color_function(urange[i], vrange[j]))
+
+                    # Connect to the i-1 row
+                    if i == 0:
+                        if j == 0:
+                            face.vertices[0] = 0
+                        else:
+                            face.vertices[0] = self._faces[ix-1].vertices[1]
+                        face.vertices[1] = j+1
+                        smash_edge(self.vs, face, 0, 1)
+                    else:
+                        face.vertices[0] = self._faces[ix-m].vertices[3]
+                        face.vertices[1] = self._faces[ix-m].vertices[2]
+
+                    # Connect to the j-1 col
+                    if j == 0:
+                        face.vertices[3] = (i+1)*(m+1)
+                        smash_edge(self.vs, face, 0, 3)
+                    else:
+                        face.vertices[3] = self._faces[ix-1].vertices[2]
+
+                    # This is the newly-seen vertex, identify if it's a triangle
+                    face.vertices[2] = (i+1)*(m+1)+j+1
+                    smash_edge(self.vs, face, 1, 2)
+                    smash_edge(self.vs, face, 3, 2)
+
+            # Now we see if it wraps around or is otherwise enclosed
+            self.enclosed = True
+
+            for j in range(m):
+                sig_check()
+                first = &self._faces[j]
+                first_v0 = self.vs[first.vertices[0]]
+                first_v1 = self.vs[first.vertices[1]]
+                if not (point_c_isfinite(first_v0) and point_c_isfinite(first_v1)):
+                    continue
+                last = &self._faces[(n-1)*m+j]
+                last_v3 = self.vs[last.vertices[3]]
+                last_v2 = self.vs[last.vertices[2]]
+                if not (point_c_isfinite(last_v3) and point_c_isfinite(last_v2)):
+                    continue
+                if point_c_eq(first_v0, last_v3):
+                    last.vertices[3] = first.vertices[0]
+                elif first.vertices[0] != first.vertices[1] or last.vertices[3] != last.vertices[2]:
+                    self.enclosed = False
+                if point_c_eq(first_v1, last_v2):
+                    last.vertices[2] = first.vertices[1]
+                elif first.vertices[0] != first.vertices[1] or last.vertices[3] != last.vertices[2]:
+                    self.enclosed = False
+
+            for i in range(n):
+                sig_check()
+                first = &self._faces[i*m]
+                first_v0 = self.vs[first.vertices[0]]
+                first_v3 = self.vs[first.vertices[3]]
+                if not (point_c_isfinite(first_v0) and point_c_isfinite(first_v3)):
+                    continue
+                last = &self._faces[i*m + m-1]
+                last_v1 = self.vs[last.vertices[1]]
+                last_v2 = self.vs[last.vertices[2]]
+                if not (point_c_isfinite(last_v1) and point_c_isfinite(last_v2)):
+                    continue
+                if point_c_eq(first_v0, last_v1):
+                    last.vertices[1] = first.vertices[0]
+                elif first.vertices[0] != first.vertices[3] or last.vertices[1] != last.vertices[2]:
+                    self.enclosed = False
+                if point_c_eq(first_v3, last_v2):
+                    last.vertices[2] = first.vertices[3]
+                elif first.vertices[0] != first.vertices[3] or last.vertices[1] != last.vertices[2]:
+                    self.enclosed = False
+
+            # make sure we deleted the correct point from the triangles
+            # so that the correct vertices are the first 3 ones
+            for ix in range(n * m):
+                sig_check()
+                face = &self._faces[ix]
+                if face.n == 3:
+                    if face.vertices[3] == face.vertices[2] or face.vertices[3] == face.vertices[0]:
+                        pass
+                    else:
+                        if face.vertices[0] == face.vertices[1]:
+                            face.vertices[1] = face.vertices[2]
+                        face.vertices[2] = face.vertices[3]
+
+            self._clean_point_list()
+        except BaseException:
+            # realloc() set fcount before the faces were populated: reset
+            # it so the next triangulate() rebuilds instead of
+            # short-circuiting on a partially-built mesh.  Leave
+            # render_grid alone -- for surfaces defined by a function it
+            # holds the domain that get_grid() needs for the retry.
+            self.fcount = self.vcount = 0
+            raise
 
         self.render_grid = urange, vrange
 
