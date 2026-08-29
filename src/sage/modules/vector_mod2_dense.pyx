@@ -30,6 +30,7 @@ TESTS::
     sage: isinstance(hash(w), int)
     True
 
+    sage: # needs sage.libs.ntl
     sage: F = GF(2, impl='ntl')
     sage: V = VectorSpace(F, 2)
     sage: v = V([F(1), F(0)])

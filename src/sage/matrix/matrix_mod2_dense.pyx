@@ -733,6 +733,7 @@ cdef class Matrix_mod2_dense(matrix_dense.Matrix_dense):   # dense or sparse
         Dense matrix/vector products over NTL's degree-one GF(2)
         use compatible mod-2 vector representations::
 
+            sage: # needs sage.libs.ntl
             sage: F = GF(2, impl='ntl')
             sage: m = identity_matrix(1, F)
             sage: v = vector(F, (1,))
