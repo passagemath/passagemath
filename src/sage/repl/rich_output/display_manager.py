@@ -743,10 +743,7 @@ class DisplayManager(SageObject):
         """
         from sage.features.threejs import Threejs
         if online:
-            version = Threejs().required_version()
-            return """
-<script src="https://cdn.jsdelivr.net/gh/sagemath/threejs-sage@{0}/build/three.min.js"></script>
-            """.format(version)
+            return Threejs().cdn_scripts()
         try:
             return self._backend.threejs_offline_scripts()
         except AttributeError:

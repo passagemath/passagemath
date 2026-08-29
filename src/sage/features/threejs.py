@@ -72,6 +72,28 @@ class Threejs(StaticFile):
         except FileNotFoundError:
             return "unknown"
 
+    def cdn_scripts(self):
+        r"""
+        Return a script tag that loads Three.js from a CDN.
+
+        This is the online counterpart of
+        :meth:`~sage.features.StaticFile.absolute_filename`. It does not need
+        the ``threejs`` package to be installed, only the version file that
+        **passagemath-plot** ships, so it is usable where the local copy is
+        absent or unreachable.
+
+        OUTPUT: string containing a script tag
+
+        EXAMPLES::
+
+            sage: from sage.features.threejs import Threejs
+            sage: Threejs().cdn_scripts()                                               # needs sage.plot
+            '...<script src="https://cdn.jsdelivr.net/gh/sagemath/threejs-sage@...'
+        """
+        return """
+<script src="https://cdn.jsdelivr.net/gh/sagemath/threejs-sage@{0}/build/three.min.js"></script>
+            """.format(self.required_version())
+
 
 def all_features():
     return [Threejs()]
