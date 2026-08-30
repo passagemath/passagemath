@@ -193,6 +193,40 @@ def preparser(on=True):
     _do_preparse = on is True
 
 
+def inline_plots(on=None):
+    """
+    Turn inline plots on or off if supported. This feature requires IPython
+    v9.13 or later running in a terminal emulator that implements the
+    `kitty graphics protocol <https://sw.kovidgoyal.net/kitty/graphics-protocol/>`__.
+
+    - ``on`` -- boolean; whether to turn on inline plots, returns the current state if None
+
+    EXAMPLES::
+
+        sage: from sage.repl.interpreter import inline_plots
+        sage: type(inline_plots()) is bool
+        True
+        sage: inline_plots(False) # random
+        sage: inline_plots()
+        False
+    """
+    from IPython.core.getipython import get_ipython
+    IP = get_ipython()
+    try:
+        from IPython.core.kitty import kitty_png_render, supports_kitty_graphics
+    except ImportError:
+        supports_kitty_graphics = False
+    if on is None:
+        return supports_kitty_graphics and hasattr(IP, 'mime_renderers') and 'image/png' in IP.mime_renderers
+    if not supports_kitty_graphics:
+        print('Inline plots are not supported for the current terminal and IPython version')
+        return
+    if on:
+        IP.mime_renderers['image/png'] = kitty_png_render
+    elif 'image/png' in IP.mime_renderers:
+        del IP.mime_renderers['image/png']
+
+
 ##############################
 # Sage[Terminal]InteractiveShell
 ##############################
@@ -294,6 +328,7 @@ class SageTerminalInteractiveShell(SageShellOverride, TerminalInteractiveShell):
             sage: from sage.repl.interpreter import SageTerminalInteractiveShell
             sage: SageTerminalInteractiveShell().init_display_formatter()   # not tested
         """
+        super().init_display_formatter()
         from sage.repl.rich_output.backend_ipython import BackendIPythonCommandline
         backend = BackendIPythonCommandline()
         backend.get_display_manager().switch_backend(backend, shell=self)
