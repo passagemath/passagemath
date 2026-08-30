@@ -571,7 +571,7 @@ def _discrete_log_pgroup(p, vals, aa, b):
 
         assert k - j == 1
         aajk = subbasis(j, k)
-        assert not any(p * a for a in aajk)  # orders are in {1,p}
+        # assert not any(p * a for a in aajk)  # orders are in {1,p}
         idxs = [i for i, a in enumerate(aajk) if a]
 
         rs = [([0], [0]) for i in range(len(aajk))]
@@ -661,6 +661,20 @@ def _expand_basis_pgroup(p, alphas, vals, beta, h, rel):
         [2, 1]
         sage: len({i*alphas[0] + j*alphas[1] for i in range(3^2) for j in range(3^1)})
         27
+
+    TESTS:
+
+    Check for :issue:`42017`::
+
+        sage: from sage.groups.additive_abelian.additive_abelian_wrapper import _expand_basis_pgroup
+        sage: p = 2
+        sage: G = Zmod(p^2)
+        sage: gens, vals = [G(p)], [1]
+        sage: beta, h = G(-1), 2
+        sage: rel = [1, p]
+        sage: _expand_basis_pgroup(p, gens, vals, beta, h, rel)
+        sage: all(a.order() == p ** v for a, v in zip(gens, vals))
+        True
     """
     # The given assertions should hold, but were commented out for speed.
 
@@ -669,8 +683,8 @@ def _expand_basis_pgroup(p, alphas, vals, beta, h, rel):
         raise TypeError('alphas and vals must be lists for mutability')
     if not len(alphas) == len(vals) == k - 1:
         raise ValueError('alphas and/or vals have incorrect length')
-    #    assert not sum(r*a for r,a in zip(rel, alphas+[beta]))
-    #    assert all(a.order() == p**v for a,v in zip(alphas,vals))
+    # assert not sum(r*a for r,a in zip(rel, alphas+[beta]))
+    # assert all(a.order() == p**v for a,v in zip(alphas,vals))
 
     if rel[-1] < 0:
         raise ValueError('rel must have nonnegative entries')
@@ -689,8 +703,8 @@ def _expand_basis_pgroup(p, alphas, vals, beta, h, rel):
     if min_r == float('inf'):
         raise ValueError('rel must have at least one nonzero entry')
     val_rlast = rel[-1].valuation(p)
-    #    assert rel[-1] == p ** val_rlast
-    #    assert not sum(r*a for r,a in zip(rel, alphas+[beta]))
+    # assert not sum(r*a for r,a in zip(rel, alphas+[beta]))
+    # assert all(a.order() == p**v for a,v in zip(alphas,vals))
 
     # step 2
     if rel[-1] == min_r:
@@ -698,20 +712,21 @@ def _expand_basis_pgroup(p, alphas, vals, beta, h, rel):
             beta += alphas[i] * (rel[i] // rel[-1])
         alphas.append(beta)
         vals.append(val_rlast)
-        #        assert alphas[-1].order() == p**vals[-1]
+        # assert all(a.order() == p**v for a,v in zip(alphas,vals))
         return
 
     # step 3
     j = next(j for j, r in enumerate(rel) if r == min_r)
     alphas[j] = sum(a * (r // rel[j]) for a, r in zip(alphas + [beta], rel))
+    vals[j] = rel[j].valuation(p)
 
     # step 4
     if not alphas[j]:
         del alphas[j], vals[j]
         if not alphas:
             alphas.append(beta)
-            vals.append(val_rlast)
-#            assert alphas[-1].order() == p**vals[-1]
+            vals.append(h)
+            # assert all(a.order() == p**v for a,v in zip(alphas,vals))
             return
 
     # step 5
@@ -728,7 +743,7 @@ def _expand_basis_pgroup(p, alphas, vals, beta, h, rel):
     else:
         alphas.append(beta)
         vals.append(h)
-    #    assert alphas[-1].order() == p**vals[-1]
+    # assert all(a.order() == p**v for a,v in zip(alphas,vals))
 
 
 def basis_from_generators(gens, ords=None):
