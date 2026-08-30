@@ -84,6 +84,7 @@ Features
    sage/features/polymake
    sage/features/poppler
    sage/features/qepcad
+   sage/features/rankwidth
    sage/features/rubiks
    sage/features/sat
    sage/features/singular
