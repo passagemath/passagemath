@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-environment
 r"""
 Feature for the rank-width graph decomposition
 """
