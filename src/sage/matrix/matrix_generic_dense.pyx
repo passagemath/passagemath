@@ -346,7 +346,7 @@ cdef class Matrix_generic_dense(matrix_dense.Matrix_dense):
 
         TESTS::
 
-            sage: Ext=ExteriorAlgebra(QQ,['p'])
+            sage: Ext = ExteriorAlgebra(QQ,['p'])
             sage: Ext.inject_variables(verbose=False)
             sage: Mp = matrix(1,1,[[p]])
             sage: Mp[0,0]*Mp[0,0]
@@ -354,7 +354,6 @@ cdef class Matrix_generic_dense(matrix_dense.Matrix_dense):
             sage: Mp*Mp
             [0]
 
-            sage: # needs sage.modules
             sage: MS = MatrixSpace(MatrixSpace(ZZ, 2, 2), 2, 2)
             sage: A = MS([matrix(ZZ, 2, [n, 0, 0, n]) for n in range(1, 5)])
             sage: B = A * A
