@@ -65,7 +65,7 @@ dependencies:
   - curl=8.19.0=h8206538_0
   - cycler=0.12.1=pyhcf101f3_2
   - cysignals=1.12.6=py314h13fbf68_2
-  - cython=3.2.4=py314h344ed54_0
+  - cython=3.3.0=py314h344ed54_0
   - debugpy=1.8.20=py314hb98de8c_0
   - decorator=5.2.1=pyhd8ed1ab_0
   - defusedxml=0.7.1=pyhd8ed1ab_0
