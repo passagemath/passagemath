@@ -23583,7 +23583,7 @@ class GenericGraph(GenericGraph_pyx):
             sage: print(G.latex_options().dot2tex_picture())    # optional - dot2tex graphviz, needs sage.plot
             \begin{tikzpicture}[>=latex,line join=bevel,]
             ...
-              \definecolor{strokecolor}{rgb}{0.25,0.5,1.0};
+              \definecolor{strokecolor}{rgb}{0.25,0.5,1.0}
               \draw [strokecolor,] (node_0) ... (node_1);
             ...
             \end{tikzpicture}
