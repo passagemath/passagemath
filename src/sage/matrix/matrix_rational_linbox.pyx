@@ -23,14 +23,16 @@ def _lift_crt_rr(Matrix_rational_dense self, res, mm):
     cdef mpq_t tmp2
     mpz_init(tmp)
     mpq_init(tmp2)
-    ZA = _lift_crt(res, mm)
-    QA = Matrix_rational_dense.__new__(Matrix_rational_dense, self.parent(), None, None, None)
-    m = mm.prod()
-    for i in range(ZA._nrows):
-        for j in range(ZA._ncols):
-            fmpz_get_mpz(tmp, fmpz_mat_entry(ZA._matrix,i,j))
-            mpq_rational_reconstruction(tmp2, tmp, m.value)
-            fmpq_set_mpq(fmpq_mat_entry(QA._matrix, i, j), tmp2)
-    mpz_clear(tmp)
-    mpq_clear(tmp2)
+    try:
+        ZA = _lift_crt(res, mm)
+        QA = Matrix_rational_dense.__new__(Matrix_rational_dense, self.parent(), None, None, None)
+        m = mm.prod()
+        for i in range(ZA._nrows):
+            for j in range(ZA._ncols):
+                fmpz_get_mpz(tmp, fmpz_mat_entry(ZA._matrix,i,j))
+                mpq_rational_reconstruction(tmp2, tmp, m.value)
+                fmpq_set_mpq(fmpq_mat_entry(QA._matrix, i, j), tmp2)
+    finally:
+        mpz_clear(tmp)
+        mpq_clear(tmp2)
     return QA
