@@ -35,14 +35,3 @@ https://www.wm.uni-bayreuth.de/de/team/rambau_joerg/TOPCOM/
     D-95440 Bayreuth
     Germany
     Tel: +49-921-55-7350, Fax: +49-921-55-7352
-
-Dependencies
-------------
-
--  gmp, libcdd
-
-
-Special Update/Build Instructions
----------------------------------
-
-See spkg-src
