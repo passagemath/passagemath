@@ -520,7 +520,7 @@ class DocTestController(SageObject):
                             continue
                         # Skip features for which we have a more specific runtime feature test.
                         if pkg.name in ['4ti2', 'bliss', 'buckygen', 'conway_polynomials',
-                                        'coxeter3', 'cvxpy', 'cunningham_tables',
+                                        'coxeter3', 'csdp', 'cvxpy', 'cunningham_tables',
                                         'database_cubic_hecke', 'database_graphs',
                                         'database_jones_numfield', 'database_knotinfo',
                                         'database_mutation_class', 'database_symbolic_data',
@@ -534,7 +534,7 @@ class DocTestController(SageObject):
                                         'pari_seadata_big', 'pari_seadata_small',
                                         'pari_galdata', 'pari_nflistdata', 'pari_nftables',
                                         'planarity', 'plantri', 'polytopes_db', 'polytopes_db_4d',
-                                        'pynormaliz', 'qepcad', 'rubiks', 'semigroups',
+                                        'pynormaliz', 'python_igraph', 'qepcad', 'rubiks', 'semigroups',
                                         'sirocco', 'sympow', 'tachyon', 'tdlib', 'topcom']:
                             continue
                         if pkg.is_installed() and pkg.installed_version == pkg.remote_version:
