@@ -1643,9 +1643,9 @@ class IntegerVectorsConstraints(IntegerVectors):
             sage: [0,3,0,1,2] in IntegerVectors(6, max_length=3)                        # needs sage.combinat
             False
 
-            sage: [] in IntegerVectors(max_part=0)
+            sage: [] in IntegerVectors(max_part=0)                                      # needs sage.combinat
             True
-            sage: [] in IntegerVectors(max_length=0)
+            sage: [] in IntegerVectors(max_length=0)                                    # needs sage.combinat
             True
         """
         if isinstance(x, IntegerVector) and x.parent() is self:
@@ -1694,6 +1694,8 @@ class IntegerVectorsConstraints(IntegerVectors):
             1
             sage: list(Q)
             [[]]
+
+            sage: # needs sage.combinat
             sage: P = IntegerVectors(1, length=1, max_length=0, max_part=1)
             sage: [1] in P
             True
