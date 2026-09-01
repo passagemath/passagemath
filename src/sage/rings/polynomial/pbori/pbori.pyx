@@ -206,7 +206,6 @@ from sage.structure.element cimport Element
 from sage.structure.parent cimport Parent
 from sage.structure.sequence import Sequence
 from sage.structure.element import coerce_binop
-from sage.structure.unique_representation import UniqueRepresentation
 from sage.structure.richcmp cimport richcmp, richcmp_not_equal, rich_to_bool
 
 from sage.categories.action cimport Action
@@ -216,6 +215,8 @@ from sage.monoids.monoid import Monoid_class
 from sage.rings.polynomial.polynomial_ring_constructor import PolynomialRing
 
 import sage.interfaces.abc
+
+from sage.misc.classcall_metaclass import ClasscallMetaclass, typecall
 
 
 order_dict = {"lp": pblp,
@@ -1850,7 +1851,7 @@ def get_var_mapping(ring, other):
     return var_mapping
 
 
-class BooleanMonomialMonoid(UniqueRepresentation, Monoid_class):
+class BooleanMonomialMonoid(Monoid_class, metaclass=ClasscallMetaclass):
     """
     Construct a boolean monomial monoid given a boolean polynomial
     ring.
@@ -1881,6 +1882,42 @@ class BooleanMonomialMonoid(UniqueRepresentation, Monoid_class):
         True
         sage: TestSuite(M).run()
     """
+    @staticmethod
+    def __classcall__(cls, polring):
+        """
+        Return the unique boolean monomial monoid associated with
+        ``polring``.
+
+        The monoid is cached on the ring itself (as its
+        ``_monom_monoid`` attribute), which avoids the global
+        :class:`~sage.structure.unique_representation.UniqueRepresentation`
+        cache that would otherwise keep ``polring`` alive by using it
+        as part of the cache key and defeat garbage collection of
+        boolean polynomial rings (see :issue:`3299`).
+
+        TESTS::
+
+            sage: from sage.rings.polynomial.pbori.pbori import BooleanMonomialMonoid
+            sage: B.<a,b,c> = BooleanPolynomialRing(3)
+            sage: M = BooleanMonomialMonoid(B)
+            sage: BooleanMonomialMonoid(B) is M
+            True
+            sage: loads(dumps(M)) is M
+            True
+            sage: import gc, weakref
+            sage: from sage.rings.polynomial.pbori.pbori import BooleanPolynomialRing as DirectBooleanPolynomialRing
+            sage: refs = [weakref.ref(DirectBooleanPolynomialRing(4,
+            ....:          names=[f'm{k}_{i}' for i in range(4)]))
+            ....:         for k in range(5)]
+            sage: _ = gc.collect(); _ = gc.collect()
+            sage: all(w() is None for w in refs)
+            True
+        """
+        existing = polring._monom_monoid
+        if existing is not None and isinstance(existing, cls):
+            return existing
+        return typecall(cls, polring)
+
     def __init__(self, BooleanPolynomialRing polring) -> None:
         """
         Create a new boolean polynomial ring.
@@ -1906,6 +1943,20 @@ class BooleanMonomialMonoid(UniqueRepresentation, Monoid_class):
         m = new_BM(self, polring)
         m._pbmonom = PBMonom(polring._pbring)
         self._one_element = m
+
+    def __reduce__(self):
+        """
+        Support pickling.
+
+        EXAMPLES::
+
+            sage: from sage.rings.polynomial.pbori.pbori import BooleanMonomialMonoid
+            sage: P.<x,y> = BooleanPolynomialRing(2)
+            sage: M = BooleanMonomialMonoid(P)
+            sage: loads(dumps(M)) is M
+            True
+        """
+        return (BooleanMonomialMonoid, (self._ring,))
 
     def _repr_(self):
         """
