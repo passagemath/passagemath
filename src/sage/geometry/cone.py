@@ -1281,6 +1281,27 @@ class IntegralRayCollection(SageObject, Hashable, Iterable):
 
         return L.span(self, base_ring)
 
+    def _macaulay2_init_(self, macaulay2=None):
+        """
+        Conversion to Macaulay2.
+
+        EXAMPLES::
+
+            sage: # optional - macaulay2
+            sage: m2 = macaulay2
+            sage: c = Cone([(3,4), (0,1)])
+            sage: m2(c).rays()  # indirect doctest
+            | 0 3 |
+            | 1 4 |
+            sage: m2(c) == c._macaulay2_init_()
+            True
+        """
+        if macaulay2 is None:
+            from sage.interfaces.macaulay2 import macaulay2 as m2_default
+            macaulay2 = m2_default
+
+        return macaulay2(matrix([tuple(v) for v in self._rays]).transpose())
+
 
 def classify_cone_2d(ray0, ray1, check=True):
     r"""
@@ -1531,6 +1552,30 @@ class ConvexRationalPolyhedralCone(IntegralRayCollection, Container, ConvexSet_c
                 gs.insert( PPL_ray(Linear_Expression(r,0)) )
             self._PPL_C_Polyhedron = C_Polyhedron(gs)
         return self._PPL_C_Polyhedron
+
+    def _macaulay2_init_(self, macaulay2=None):
+        """
+        Conversion to Macaulay2.
+
+        EXAMPLES::
+
+            sage: # optional - macaulay2
+            sage: C = Cone([[1,1],[1,2]])
+            sage: m2 = macaulay2
+            sage: c = m2(C); c.rays()  # indirect doctest
+            | 1 1 |
+            | 1 2 |
+            sage: c.dualCone().rays()  # random
+            | 2  -1 |
+            | -1 1  |
+            sage: c == C._macaulay2_init_()
+            True
+        """
+        if macaulay2 is None:
+            from sage.interfaces.macaulay2 import macaulay2 as m2_default
+            macaulay2 = m2_default
+
+        return super()._macaulay2_init_(macaulay2).coneFromVData()
 
     def __contains__(self, point) -> bool:
         r"""
