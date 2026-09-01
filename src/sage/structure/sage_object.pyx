@@ -220,6 +220,57 @@ cdef class SageObject:
             return super().__repr__()
         return reprfunc()
 
+    def _repr_latex_(self):
+        r"""
+        Return a LaTeX representation for IPython.
+
+        This standard display hook allows Sage objects to be typeset in a
+        stock Python Jupyter kernel without Sage's rich output system.
+
+        OUTPUT: a string containing a LaTeX display equation, or ``None`` if
+        no suitable representation is available
+
+        EXAMPLES::
+
+            sage: (1/2)._repr_latex_()
+            '$\\displaystyle \\frac{1}{2}$'
+            sage: QQ._repr_latex_()
+            '$\\displaystyle \\newcommand{\\Bold}[1]{\\mathbf{#1}}\\Bold{Q}$'
+
+        HTML escaping used by the MathJax renderer is removed from the LaTeX
+        payload::
+
+            sage: class LessThan(SageObject):
+            ....:     def _latex_(self):
+            ....:         return 'x < 1'
+            sage: LessThan()._repr_latex_()
+            '$\\displaystyle x < 1$'
+
+        Objects without a mathematical representation keep their plain text
+        output::
+
+            sage: SageObject()._repr_latex_() is None
+            True
+
+        Objects with a custom rich representation remain responsible for
+        their own display::
+
+            sage: from sage.misc.html import HtmlFragment
+            sage: HtmlFragment('<b>test</b>')._repr_latex_() is None
+            True
+        """
+        if hasattr(self, '_rich_repr_') or not hasattr(self, '_latex_'):
+            return None
+        try:
+            from sage.misc.html import MathJax
+        except ImportError:
+            return None
+        try:
+            latex = MathJax().eval(self, mode='plain')
+        except Exception:
+            return None
+        return '$\\displaystyle ' + str(latex).replace('&lt;', '<') + '$'
+
     def _ascii_art_(self):
         r"""
         Return an ASCII art representation.

@@ -69,6 +69,7 @@ from ipywidgets import Widget
 
 from sage.repl.display.pretty_print import SagePrettyPrinter
 from sage.misc.lazy_import import lazy_import
+from sage.structure.sage_object import SageObject
 
 IPYTHON_NATIVE_TYPES = (DisplayObject, Widget)
 
@@ -173,6 +174,35 @@ class SageDisplayFormatter(DisplayFormatter):
             sage: shell.run_cell('%display default')
             sage: shell.quit()
 
+        A Sage object's generic ``_repr_latex_`` exists for stock Python
+        Jupyter kernels and must not override ``%display default`` here
+        (:issue:`2236`)::
+
+            sage: from sage.structure.sage_object import SageObject
+            sage: from sage.repl.rich_output import get_display_manager
+            sage: from sage.repl.rich_output.backend_ipython import BackendIPythonNotebook
+            sage: class Formula(SageObject):
+            ....:     def _repr_(self):
+            ....:         return 'formula'
+            ....:     def _repr_latex_(self):
+            ....:         return r'$\displaystyle \frac{1}{2}$'
+            sage: shell = get_test_shell()
+            sage: dm = get_display_manager()
+            sage: previous = dm.switch_backend(BackendIPythonNotebook(), shell=shell)
+            sage: sorted(shell.display_formatter.format(Formula())[0])
+            ['text/plain']
+
+        Objects that are not Sage objects keep their own ``text/latex``, which
+        is how SymPy expressions render under a Sage kernel::
+
+            sage: class Foreign():
+            ....:     def _repr_latex_(self):
+            ....:         return r'$x$'
+            sage: sorted(shell.display_formatter.format(Foreign())[0])
+            ['text/latex', 'text/plain']
+            sage: _ = dm.switch_backend(previous, shell=shell)
+            sage: shell.quit()
+
         Test that ``__repr__`` is only called once when generating text output::
 
             sage: class Repper():
@@ -209,6 +239,14 @@ class SageDisplayFormatter(DisplayFormatter):
             exclude = list(exclude) + [PLAIN_TEXT]
         else:
             exclude = [PLAIN_TEXT]
+        if isinstance(obj, SageObject) and self.dm.preferences.text != 'latex':
+            # Sage objects carry a generic _repr_latex_ so that stock Python
+            # Jupyter kernels, which never install this formatter, can typeset
+            # formulas. Under a Sage kernel the text display preference makes
+            # that decision instead, so the hook must not quietly override
+            # "%display default". Objects that are not Sage objects, such as
+            # SymPy expressions, keep their own text/latex.
+            exclude.append(TEXT_LATEX)
         ipy_format, ipy_metadata = super().format(obj, include=include, exclude=exclude)
         if not ipy_format:
             return sage_format, sage_metadata
