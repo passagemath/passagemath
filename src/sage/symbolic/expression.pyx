@@ -672,6 +672,20 @@ cdef class Expression(Expression_abc):
             Traceback (most recent call last):
             ...
             TypeError: Python infinity cannot have complex phase.
+
+        An unarchived Python object is released with its symbolic wrapper::
+
+            sage: import gc, weakref
+            sage: wrapped = SR._force_pyobject({1, 2}, force=True)
+            sage: restored = loads(dumps(wrapped))
+            sage: restored_object = restored.pyobject()
+            sage: restored_object is wrapped.pyobject()
+            False
+            sage: reference = weakref.ref(restored_object)
+            sage: del restored_object, restored
+            sage: _ = gc.collect()
+            sage: reference() is None
+            True
         """
         if is_a_constant(self._gobj):
             from sage.symbolic.constants import constants_name_table
@@ -2008,6 +2022,14 @@ cdef class Expression(Expression_abc):
 
             sage: t = SR(matrix(2,2,range(4)))
             sage: hash(t)
+            Traceback (most recent call last):
+            ...
+            RuntimeError: Python object not hashable
+
+        Copying an expression must preserve that state::
+
+            sage: wrapped = SR._force_pyobject([], force=True)
+            sage: hash(wrapped + 0)
             Traceback (most recent call last):
             ...
             RuntimeError: Python object not hashable
@@ -4821,6 +4843,15 @@ cdef class Expression(Expression_abc):
 
             sage: ((1 - x)^-x).series(x, 8)
             1 + 1*x^2 + 1/2*x^3 + 5/6*x^4 + 3/4*x^5 + 33/40*x^6 + 5/6*x^7 + Order(x^8)
+
+        Differentiation also applies the product rule when a series
+        coefficient starts depending on the expansion variable after a
+        substitution::
+
+            sage: x, y = var('x y')
+            sage: series_with_variable_coefficients = (y/(1-x)).series(x, 5).subs(y=x)
+            sage: series_with_variable_coefficients.diff(x).coefficients(x)[:4]
+            [[1, 0], [2, 1], [3, 2], [4, 3]]
 
         Try different algorithms::
 
@@ -14029,7 +14060,7 @@ cdef unsigned sage_domain_to_ginac_domain(object domain) except? 3474701533:
     else:
         raise ValueError(repr(domain)+": domain must be one of 'complex', 'real', 'positive' or 'integer'")
 
-cdef void send_sage_domain_to_maxima(Expression v, object domain) except +:
+cdef void send_sage_domain_to_maxima(Expression v, object domain) except *:
     from sage.symbolic.assumptions import assume
     # convert the domain argument to something easy to parse
     if domain is RR or domain == 'real':
