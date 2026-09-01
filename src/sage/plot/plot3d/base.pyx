@@ -702,7 +702,7 @@ cdef class Graphics3d(SageObject):
 
         return html
 
-    def _repr_html_(self):
+    def _repr_html_(self, **kwds):
         r"""
         Return an HTML representation of this graphics object.
 
@@ -719,6 +719,15 @@ cdef class Graphics3d(SageObject):
 
         Unlike :meth:`_render_html_`, rendering failures are suppressed and
         ``None`` is returned, matching the IPython ``_repr_html_`` protocol.
+
+        INPUT:
+
+        - ``kwds`` -- viewing options forwarded by :meth:`show`; IPython calls
+          this method without arguments
+
+          ``online`` is always overridden to ``True``: the page is embedded in
+          an ``<iframe srcdoc=...>``, which cannot resolve the relative paths
+          that the offline Three.js copy uses.
 
         OUTPUT: string containing an ``<iframe>``, or ``None`` if rendering
         fails
@@ -740,10 +749,17 @@ cdef class Graphics3d(SageObject):
             sage: frame = sphere(online=False)._repr_html_()
             sage: '&lt;script src=&quot;https://cdn.jsdelivr.net' in frame
             True
+
+        Viewing options passed by :meth:`show` are preserved::
+
+            sage: frame = sphere()._repr_html_(frame=False)
+            sage: '&quot;frame&quot;: false' in frame
+            True
         """
         from html import escape
         try:
-            page = self._render_html_(online=True)
+            kwds['online'] = True
+            page = self._render_html_(**kwds)
         except Exception:
             return None
         return THREEJS_IFRAME_TEMPLATE.format(escaped_html=escape(page),
@@ -1985,10 +2001,78 @@ end_scene""".format(
         the following line produces the same result as the previous one::
 
             sage: p.show(viewer='tachyon', extra_opts='-mediumshade')                   # needs sage.symbolic
+
+        When ``passagemath-repl`` is unavailable, a stock IPython kernel uses
+        the HTML representation directly. This fallback supports the default
+        Three.js viewer; other viewers still require ``passagemath-repl``::
+
+            sage: import IPython.display as ipython_display
+            sage: from unittest.mock import patch
+            sage: displayed = []
+            sage: blocked = {'sage.repl': None, 'sage.repl.rich_output': None}
+            sage: with patch.dict(sys.modules, blocked), \
+            ....:      patch.object(ipython_display, 'display', displayed.append):
+            ....:     sphere().show(frame=False)
+            sage: len(displayed)
+            1
+            sage: isinstance(displayed[0], ipython_display.HTML)
+            True
+            sage: '<iframe srcdoc=' in displayed[0].data
+            True
+            sage: '&quot;frame&quot;: false' in displayed[0].data
+            True
+            sage: with patch.dict(sys.modules, blocked):
+            ....:     sphere().show(viewer='tachyon')
+            Traceback (most recent call last):
+            ...
+            ValueError: viewer='tachyon' requires passagemath-repl; the stock IPython fallback supports only viewer='threejs'
+
+        When Sage's rich output system is available, it remains the display
+        path::
+
+            sage: from sage.repl.rich_output import get_display_manager
+            sage: dm = get_display_manager()
+            sage: g = sphere()
+            sage: with patch.object(dm, 'display_immediately') as display_immediately:
+            ....:     g.show(frame=False)
+            sage: display_immediately.assert_called_once_with(g, frame=False)
         """
-        from sage.repl.rich_output import get_display_manager
-        dm = get_display_manager()
-        dm.display_immediately(self, **kwds)
+        try:
+            from sage.repl.rich_output import get_display_manager
+        except ModuleNotFoundError as error:
+            # A genuinely absent passagemath-repl reports 'sage.repl', while
+            # blocking its parent in sys.modules reports 'sage.repl.rich_output'.
+            if error.name not in ('sage.repl', 'sage.repl.rich_output'):
+                raise
+        else:
+            dm = get_display_manager()
+            dm.display_immediately(self, **kwds)
+            return
+
+        viewer = kwds.get('viewer', self._extra_kwds.get('viewer',
+                                                         SHOW_DEFAULTS['viewer']))
+        if viewer != 'threejs':
+            raise ValueError("viewer={!r} requires passagemath-repl; the stock "
+                             "IPython fallback supports only viewer='threejs'"
+                             .format(viewer))
+
+        try:
+            from IPython.display import HTML, display
+        except ModuleNotFoundError as error:
+            if error.name not in ('IPython', 'IPython.display'):
+                raise
+            raise RuntimeError(
+                'showing 3D graphics needs either passagemath-repl or IPython; '
+                'use save(filename, online=True) to write an HTML scene instead'
+            ) from error
+        frame = self._repr_html_(**kwds)
+        if frame is None:
+            # _repr_html_ follows the display protocol and suppresses errors;
+            # an explicit show() call should still surface rendering failures.
+            kwds['online'] = True
+            self._render_html_(**kwds)
+            raise RuntimeError('cannot render this scene as HTML')
+        display(HTML(frame))
 
     def _save_image_png(self, filename, **kwds):
         r"""
