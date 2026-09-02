@@ -520,6 +520,44 @@ cdef class ParametricSurface(IndexFaceSet):
             sage: P.triangulate()        # the retry redoes the work
             sage: len(P.face_list())
             81
+
+        C arrays used to evaluate subclasses and fast callable tuples are
+        released when evaluation raises an exception::
+
+            sage: import sys
+            sage: if sys.platform != 'win32':
+            ....:     import gc
+            ....:     import resource
+            ....:     class FailingSurface(ParametricSurface):
+            ....:         def eval(self, u, v):
+            ....:             raise ValueError("stop")
+            ....:     grid = (range(100_000), [0.0, 1.0])
+            ....:     def check(surface):
+            ....:         def fail():
+            ....:             try:
+            ....:                 surface.triangulate()
+            ....:             except ValueError:
+            ....:                 pass
+            ....:         fail()  # warm up allocations
+            ....:         fail()
+            ....:         gc.collect()
+            ....:         before = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+            ....:         for _ in range(50):
+            ....:             fail()
+            ....:         gc.collect()
+            ....:         after = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+            ....:         scale = 1 if sys.platform == 'darwin' else 1024
+            ....:         growth = (after - before) * scale
+            ....:         assert growth < 4_000_000, growth
+            ....:     check(FailingSurface(None, grid))
+            ....:     from sage.ext.fast_callable import ExpressionTreeBuilder, fast_callable
+            ....:     etb = ExpressionTreeBuilder(vars=('u', 'v'))
+            ....:     u, v = etb.var('u'), etb.var('v')
+            ....:     fast = fast_callable(u + v, domain=float)
+            ....:     def failing_function(u, v):
+            ....:         raise ValueError("stop")
+            ....:     check(ParametricSurface((fast, fast, failing_function), grid))
+            ....:     _ = gc.collect()
         """
         cdef double u, v
         if render_params is None:
@@ -704,82 +742,83 @@ cdef class ParametricSurface(IndexFaceSet):
         cdef double* vlist = NULL
         cdef bint fast_x, fast_y, fast_z
 
-        if self.f is None:
-            ulist = to_double_array(urange)
-            vlist = to_double_array(vrange)
-
-            res = self.vs
-            for i in range(m):
-                u = ulist[i]
-                for j in range(n):
-                    sig_check()
-                    v = vlist[j]
-                    self.eval_c(res, u, v)
-                    res += 1
-        elif isinstance(self.f, tuple):
-            fx, fy, fz = self.f
-
-            # First, deal with the fast functions (if any)
-            fast_x = isinstance(fx, Wrapper_rdf)
-            fast_y = isinstance(fy, Wrapper_rdf)
-            fast_z = isinstance(fz, Wrapper_rdf)
-            if fast_x or fast_y or fast_z:
+        try:
+            if self.f is None:
                 ulist = to_double_array(urange)
                 vlist = to_double_array(vrange)
 
                 res = self.vs
-                if fast_x:  # must be Wrapper_rdf
-                    for i in range(m):
-                        uv[0] = ulist[i]
-                        for j in range(n):
-                            sig_check()
-                            uv[1] = vlist[j]
-                            (<Wrapper_rdf>fx).call_c(uv, &res.x)
-                            res += 1
+                for i in range(m):
+                    u = ulist[i]
+                    for j in range(n):
+                        sig_check()
+                        v = vlist[j]
+                        self.eval_c(res, u, v)
+                        res += 1
+            elif isinstance(self.f, tuple):
+                fx, fy, fz = self.f
 
-                res = self.vs
-                if fast_y:  # must be Wrapper_rdf
-                    for i in range(m):
-                        uv[0] = ulist[i]
-                        for j in range(n):
-                            sig_check()
-                            uv[1] = vlist[j]
-                            (<Wrapper_rdf>fy).call_c(uv, &res.y)
-                            res += 1
+                # First, deal with the fast functions (if any)
+                fast_x = isinstance(fx, Wrapper_rdf)
+                fast_y = isinstance(fy, Wrapper_rdf)
+                fast_z = isinstance(fz, Wrapper_rdf)
+                if fast_x or fast_y or fast_z:
+                    ulist = to_double_array(urange)
+                    vlist = to_double_array(vrange)
 
-                res = self.vs
-                if fast_z:  # must be Wrapper_rdf
-                    for i in range(m):
-                        uv[0] = ulist[i]
-                        for j in range(n):
-                            sig_check()
-                            uv[1] = vlist[j]
-                            (<Wrapper_rdf>fz).call_c(uv, &res.z)
-                            res += 1
+                    res = self.vs
+                    if fast_x:  # must be Wrapper_rdf
+                        for i in range(m):
+                            uv[0] = ulist[i]
+                            for j in range(n):
+                                sig_check()
+                                uv[1] = vlist[j]
+                                (<Wrapper_rdf>fx).call_c(uv, &res.x)
+                                res += 1
 
-            # Finally, deal with the slow functions (if any)
-            if (not fast_x) or (not fast_y) or (not fast_z):
+                    res = self.vs
+                    if fast_y:  # must be Wrapper_rdf
+                        for i in range(m):
+                            uv[0] = ulist[i]
+                            for j in range(n):
+                                sig_check()
+                                uv[1] = vlist[j]
+                                (<Wrapper_rdf>fy).call_c(uv, &res.y)
+                                res += 1
+
+                    res = self.vs
+                    if fast_z:  # must be Wrapper_rdf
+                        for i in range(m):
+                            uv[0] = ulist[i]
+                            for j in range(n):
+                                sig_check()
+                                uv[1] = vlist[j]
+                                (<Wrapper_rdf>fz).call_c(uv, &res.z)
+                                res += 1
+
+                # Finally, deal with the slow functions (if any)
+                if (not fast_x) or (not fast_y) or (not fast_z):
+                    res = self.vs
+                    for uu in urange:
+                        for vv in vrange:
+                            sig_check()
+                            if not fast_x:
+                                res.x = fx(uu, vv)
+                            if not fast_y:
+                                res.y = fy(uu, vv)
+                            if not fast_z:
+                                res.z = fz(uu, vv)
+                            res += 1
+            else:
                 res = self.vs
                 for uu in urange:
                     for vv in vrange:
                         sig_check()
-                        if not fast_x:
-                            res.x = fx(uu, vv)
-                        if not fast_y:
-                            res.y = fy(uu, vv)
-                        if not fast_z:
-                            res.z = fz(uu, vv)
+                        res.x, res.y, res.z = self.f(uu, vv)
                         res += 1
-        else:
-            res = self.vs
-            for uu in urange:
-                for vv in vrange:
-                    sig_check()
-                    res.x, res.y, res.z = self.f(uu, vv)
-                    res += 1
-
-        sig_free(ulist)
-        sig_free(vlist)
+        finally:
+            sig_free(ulist)
+            sig_free(vlist)
 
     # One of the following two methods should be overridden in
     # derived classes.
