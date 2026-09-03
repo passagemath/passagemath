@@ -5256,7 +5256,7 @@ class LazyPowerSeries(LazyCauchyProductSeries):
 
         We perform the composition with a lazy Dirichlet series::
 
-            sage: # needs sage.symbolic
+            sage: # needs sage.libs.singular sage.symbolic
             sage: D = LazyDirichletSeriesRing(QQ, "s")
             sage: g = D(constant=1)-1
             sage: g
