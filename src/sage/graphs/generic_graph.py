@@ -21395,14 +21395,14 @@ class GenericGraph(GenericGraph_pyx):
         INPUT:
 
         - ``layout_name`` -- string; the name of a NetworkX layout function,
-        without its ``_layout`` suffix -- e.g. ``'kamada_kawai'`` for
-        :func:`networkx.kamada_kawai_layout`.
+          without its ``_layout`` suffix -- e.g. ``'kamada_kawai'`` for
+          :func:`networkx.kamada_kawai_layout`.
 
         - ``dim`` -- integer (default: 2); 2 or 3, ignored by NetworkX
-        layouts that do not accept a ``dim`` parameter.
+          layouts that do not accept a ``dim`` parameter.
 
         - ``**options`` -- extra keyword arguments forwarded unchanged to the
-        underlying NetworkX layout function.
+          underlying NetworkX layout function.
 
         OUTPUT:
 
@@ -21425,10 +21425,10 @@ class GenericGraph(GenericGraph_pyx):
             ...
             ValueError: unknown layout algorithm: this_is_not_a_layout
         """
-        import inspect
+
         import networkx
         from sage.graphs.graph_plot import graphplot_options
-
+    
         funcname = "%s_layout" % layout_name
         func = getattr(networkx, funcname, None)
         if func is None or not callable(func):
@@ -21436,13 +21436,6 @@ class GenericGraph(GenericGraph_pyx):
 
         G = self.networkx_graph()
 
-        # Exclude keys that belong to Sage's own plotting/layout option
-        # vocabulary, even if a NetworkX layout function happens to accept
-        # a same-named parameter with a different meaning. For example,
-        # Sage's 'dist' controls spacing between multi-edges (a float),
-        # while networkx.kamada_kawai_layout's 'dist' parameter expects a
-        # distance matrix (a dict) -- forwarding Sage's value there crashes
-        # NetworkX with a confusing TypeError.
         sage_option_names = set(graphplot_options)
 
         sig = inspect.signature(func)
