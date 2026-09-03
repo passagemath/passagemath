@@ -21428,7 +21428,7 @@ class GenericGraph(GenericGraph_pyx):
 
         import networkx
         from sage.graphs.graph_plot import graphplot_options
-    
+
         funcname = "%s_layout" % layout_name
         func = getattr(networkx, funcname, None)
         if func is None or not callable(func):
