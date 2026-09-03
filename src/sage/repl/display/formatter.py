@@ -287,6 +287,7 @@ class SageDisplayFormatter(DisplayFormatter):
         particular, IPython does not call an ordinary instance method such as
         :meth:`_repr_svg_` without an instance (:issue:`41697`)::
 
+            sage: # needs sage.combinat
             sage: shell = get_test_shell()
             sage: shell.run_cell('Tableau')
             <class 'sage.combinat.tableau.Tableau'>
@@ -297,9 +298,9 @@ class SageDisplayFormatter(DisplayFormatter):
 
         The class itself is unaffected and still hands out its methods::
 
-            sage: shell.run_cell('Tableau._repr_svg_')
+            sage: shell.run_cell('Tableau._repr_svg_')                                  # needs sage.combinat
             <function Tableau._repr_svg_ at ...>
-            sage: shell.quit()
+            sage: shell.quit()                                                          # needs sage.combinat
         """
         obj = _resolve_lazy_import(obj)
         sage_format, sage_metadata = self.dm.displayhook(obj)
