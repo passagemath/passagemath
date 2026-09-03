@@ -22,11 +22,14 @@ set -ex
 #    [boost_cropped-1.88.0]   [spkg-install]   171 | #error On this platform memory leaks are possible if capturing stacktrace from \
 #    [boost_cropped-1.88.0]   [spkg-install]       |  ^~~~~
 #
+# boost:
+#   Build issue on Windows - https://github.com/passagemath/passagemath/issues/2487
+#   would need some use of cygpath in libs/json/pretty_printers/FindBoostPrettyPrinters.cmake
 sdh_cmake -GNinja \
       -DBUILD_STATIC_LIBS=OFF \
       -DBUILD_SHARED_LIBS=ON \
       -DBOOST_INSTALL_LAYOUT=tagged \
-      -DBOOST_EXCLUDE_LIBRARIES="cobalt;process;locale;context;asio;coroutine;fiber;log" \
+      -DBOOST_EXCLUDE_LIBRARIES="cobalt;process;locale;context;asio;coroutine;fiber;log;json" \
       -DBOOST_STACKTRACE_ENABLE_FROM_EXCEPTION=0 \
       .
 set -e
