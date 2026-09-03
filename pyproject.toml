@@ -11,7 +11,7 @@ requires = [
   'cysignals !=1.12.4; sys_platform == "win32"',
   # Exclude old versions of cysignals that do not declare their incompatibility with Python 3.14
   'cysignals >= 1.12.6; python_version >= "3.14"',
-  'cython >=3.1.0,<3.3.0',
+  'cython >=3.1.0,<3.4.0',
   'gmpy2 ~=2.1.b999',
   'gmpy2 ~=2.3.b1; sys_platform == "win32"',
   'jinja2',
@@ -57,7 +57,7 @@ dependencies = [
   'cysignals !=1.12.4; sys_platform == "win32"',
   # Exclude old versions of cysignals that do not declare their incompatibility with Python 3.14
   'cysignals >= 1.12.6; python_version >= "3.14"',
-  'cython >=3.1.0,<3.3.0',
+  'cython >=3.1.0,<3.4.0',
   'fpylll >=0.5.9; sys_platform != "win32"',
   'gmpy2 ~=2.1.b999',
   'gmpy2 ~=2.3.b1; sys_platform == "win32"',

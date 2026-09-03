@@ -28,26 +28,26 @@ permutation braids.
 
 from cysignals.signals cimport sig_on, sig_off
 
-from libcpp.list cimport list
+from libcpp.list cimport list as cpplist
 
 
 cdef extern from "braiding.h" namespace "Braiding":
-    list[list[int]] ConjugatingBraid(int n, list[int] word, list[int] word2)
-    list[list[int]] LeftNormalForm(int n, list[int] word)
-    list[list[int]] RightNormalForm(int n, list[int] word)
-    list[list[int]] GreatestCommonDivisor(int n, list[int] word1, list[int] word2)
-    list[list[int]] LeastCommonMultiple(int n, list[int] word1, list[int] word2)
-    list[list[list[int]]] CentralizerGenerators(int n, list[int] word)
-    list[list[list[int]]] SuperSummitSet(int n, list[int] word)
-    list[list[list[list[int]]]] UltraSummitSet(int n, list[int] word)
-    int thurstontype(int n, list[int] word)
-    int Rigidity_ext(int n, list[int] word)
-    list[list[list[list[int]]]] SlidingCircuits(int n, list[int] word)
-    list[list[list[int]]] SendToSSS(int n, list[int] word)
-    list[list[list[int]]] SendToUSS(int n, list[int] word)
-    list[list[list[int]]] SendToSC(int n, list[int] word)
-    list[list[list[int]]] Trajectory(int n, list[int] word)
-    list[list[list[list[int]]]] CyclicSlidings(int n, list[int] word)
+    cpplist[cpplist[int]] ConjugatingBraid(int n, cpplist[int] word, cpplist[int] word2)
+    cpplist[cpplist[int]] LeftNormalForm(int n, cpplist[int] word)
+    cpplist[cpplist[int]] RightNormalForm(int n, cpplist[int] word)
+    cpplist[cpplist[int]] GreatestCommonDivisor(int n, cpplist[int] word1, cpplist[int] word2)
+    cpplist[cpplist[int]] LeastCommonMultiple(int n, cpplist[int] word1, cpplist[int] word2)
+    cpplist[cpplist[cpplist[int]]] CentralizerGenerators(int n, cpplist[int] word)
+    cpplist[cpplist[cpplist[int]]] SuperSummitSet(int n, cpplist[int] word)
+    cpplist[cpplist[cpplist[cpplist[int]]]] UltraSummitSet(int n, cpplist[int] word)
+    int thurstontype(int n, cpplist[int] word)
+    int Rigidity_ext(int n, cpplist[int] word)
+    cpplist[cpplist[cpplist[cpplist[int]]]] SlidingCircuits(int n, cpplist[int] word)
+    cpplist[cpplist[cpplist[int]]] SendToSSS(int n, cpplist[int] word)
+    cpplist[cpplist[cpplist[int]]] SendToUSS(int n, cpplist[int] word)
+    cpplist[cpplist[cpplist[int]]] SendToSC(int n, cpplist[int] word)
+    cpplist[cpplist[cpplist[int]]] Trajectory(int n, cpplist[int] word)
+    cpplist[cpplist[cpplist[cpplist[int]]]] CyclicSlidings(int n, cpplist[int] word)
 
 
 def conjugatingbraid(braid1, braid2):
@@ -78,7 +78,7 @@ def conjugatingbraid(braid1, braid2):
     l1 = braid1.Tietze()
     l2 = braid2.Tietze()
     sig_on()
-    cdef list[list[int]] rop = ConjugatingBraid(nstrands, l1, l2)
+    cdef cpplist[cpplist[int]] rop = ConjugatingBraid(nstrands, l1, l2)
     sig_off()
     return rop
 
@@ -108,7 +108,7 @@ def leftnormalform(braid):
     nstrands = braid.parent().strands()
     l1 = braid.Tietze()
     sig_on()
-    cdef list[list[int]] rop = LeftNormalForm(nstrands, l1)
+    cdef cpplist[cpplist[int]] rop = LeftNormalForm(nstrands, l1)
     sig_off()
     return rop
 
@@ -138,7 +138,7 @@ def rightnormalform(braid):
     nstrands = braid.parent().strands()
     l1 = braid.Tietze()
     sig_on()
-    cdef list[list[int]] rop = RightNormalForm(nstrands, l1)
+    cdef cpplist[cpplist[int]] rop = RightNormalForm(nstrands, l1)
     sig_off()
     return rop
 
@@ -167,7 +167,7 @@ def greatestcommondivisor(braid1, braid2):
     l1 = braid1.Tietze()
     l2 = braid2.Tietze()
     sig_on()
-    cdef list[list[int]] rop = GreatestCommonDivisor(nstrands, l1, l2)
+    cdef cpplist[cpplist[int]] rop = GreatestCommonDivisor(nstrands, l1, l2)
     sig_off()
     return rop
 
@@ -196,7 +196,7 @@ def leastcommonmultiple(braid1, braid2):
     l1 = braid1.Tietze()
     l2 = braid2.Tietze()
     sig_on()
-    cdef list[list[int]] rop = LeastCommonMultiple(nstrands, l1, l2)
+    cdef cpplist[cpplist[int]] rop = LeastCommonMultiple(nstrands, l1, l2)
     sig_off()
     return rop
 
@@ -233,7 +233,7 @@ def centralizer(braid):
             return [[[0], [i + 1, nstrands - i - 1]] for i in range(nstrands//2 - 1)] + [[[0], [nstrands//2]]]
     l = braid.Tietze()
     sig_on()
-    cdef list[list[list[int]]] rop = CentralizerGenerators(nstrands, l)
+    cdef cpplist[cpplist[cpplist[int]]] rop = CentralizerGenerators(nstrands, l)
     sig_off()
     return rop
 
@@ -259,7 +259,7 @@ def supersummitset(braid):
     nstrands = braid.parent().strands()
     b = braid.Tietze()
     sig_on()
-    cdef list[list[list[int]]] rop = SuperSummitSet(nstrands, b)
+    cdef cpplist[cpplist[cpplist[int]]] rop = SuperSummitSet(nstrands, b)
     sig_off()
     return rop
 
@@ -288,7 +288,7 @@ def ultrasummitset(braid):
     nstrands = braid.parent().strands()
     b = braid.Tietze()
     sig_on()
-    cdef list[list[list[list[int]]]] rop = UltraSummitSet(nstrands, b)
+    cdef cpplist[cpplist[cpplist[cpplist[int]]]] rop = UltraSummitSet(nstrands, b)
     sig_off()
     return rop
 
@@ -387,7 +387,7 @@ def sliding_circuits(braid):
     nstrands = braid.parent().strands()
     b = braid.Tietze()
     sig_on()
-    cdef list[list[list[list[int]]]] rop = SlidingCircuits(nstrands, b)
+    cdef cpplist[cpplist[cpplist[cpplist[int]]]] rop = SlidingCircuits(nstrands, b)
     sig_off()
     return rop
 
@@ -417,7 +417,7 @@ def send_to_sss(braid):
     nstrands = braid.parent().strands()
     b = braid.Tietze()
     sig_on()
-    cdef list[list[list[int]]] rop = SendToSSS(nstrands, b)
+    cdef cpplist[cpplist[cpplist[int]]] rop = SendToSSS(nstrands, b)
     sig_off()
     return rop
 
@@ -447,7 +447,7 @@ def send_to_uss(braid):
     nstrands = braid.parent().strands()
     b = braid.Tietze()
     sig_on()
-    cdef list[list[list[int]]] rop = SendToUSS(nstrands, b)
+    cdef cpplist[cpplist[cpplist[int]]] rop = SendToUSS(nstrands, b)
     sig_off()
     return rop
 
@@ -478,7 +478,7 @@ def send_to_sc(braid):
     nstrands = braid.parent().strands()
     b = braid.Tietze()
     sig_on()
-    cdef list[list[list[int]]] rop = SendToSC(nstrands, b)
+    cdef cpplist[cpplist[cpplist[int]]] rop = SendToSC(nstrands, b)
     sig_off()
     return rop
 
@@ -511,7 +511,7 @@ def trajectory(braid):
     nstrands = braid.parent().strands()
     b = braid.Tietze()
     sig_on()
-    cdef list[list[list[int]]] rop = Trajectory(nstrands, b)
+    cdef cpplist[cpplist[cpplist[int]]] rop = Trajectory(nstrands, b)
     sig_off()
     return rop
 
@@ -545,6 +545,6 @@ def cyclic_slidings(braid):
     nstrands = braid.parent().strands()
     b = braid.Tietze()
     sig_on()
-    cdef list[list[list[list[int]]]] rop = CyclicSlidings(nstrands, b)
+    cdef cpplist[cpplist[cpplist[cpplist[int]]]] rop = CyclicSlidings(nstrands, b)
     sig_off()
     return rop
