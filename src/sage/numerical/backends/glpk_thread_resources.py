@@ -1,3 +1,4 @@
+# sage_setup: distribution = sagemath-glpk
 """
 Shared thread-local GLPK resource tracking
 
