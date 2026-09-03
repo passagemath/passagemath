@@ -168,11 +168,14 @@ cdef extern from *:
     // Note: In Python 3.14 the atexit_state struct changed - callbacks is now a PyObject* (PyList)
     
     static PyObject* get_atexit_callbacks_list(PyObject *self) {
+        PyGILState_STATE gstate;
+        gstate = PyGILState_Ensure();
         PyInterpreterState *interp = _PyInterpreterState_GET();
         // Access the callbacks list directly from the interpreter state
         // We return a new reference because Cython expects an owned reference
         PyObject *callbacks = interp->atexit.callbacks;
         Py_XINCREF(callbacks);
+        PyGILState_Release(gstate);
         return callbacks;
     }
     
