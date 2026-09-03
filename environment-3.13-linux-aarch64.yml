@@ -76,7 +76,7 @@ dependencies:
   - cypari2=2.2.4=py313hf9b0f58_2
   - cyrus-sasl=2.1.28=h6c5dea3_0
   - cysignals=1.12.6=py313he352c24_2
-  - cython=3.3.0=py313h7f966aa_0
+  - cython=3.2.4=py313h4aae401_0
   - dbus=1.16.2=h70963c4_1
   - debugpy=1.8.20=py313h59403f9_0
   - decorator=5.2.1=pyhd8ed1ab_0

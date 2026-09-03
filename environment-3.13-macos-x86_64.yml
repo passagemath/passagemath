@@ -84,7 +84,7 @@ dependencies:
   - cycler=0.12.1=pyhcf101f3_2
   - cypari2=2.2.4=py313he346ed3_2
   - cysignals=1.12.6=py313hf4a977d_2
-  - cython=3.3.0=py313h43946a0_0
+  - cython=3.2.4=py313h74eaf42_0
   - debugpy=1.8.20=py313h8b5a893_0
   - decorator=5.2.1=pyhd8ed1ab_0
   - defusedxml=0.7.1=pyhd8ed1ab_0
