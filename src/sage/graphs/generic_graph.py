@@ -448,6 +448,7 @@ Methods
 # ****************************************************************************
 
 from copy import copy
+import inspect
 
 from sage.features.igraph import python_igraph as igraph_feature
 from sage.graphs.dot2tex_utils import assert_have_dot2tex
@@ -21373,7 +21374,7 @@ class GenericGraph(GenericGraph_pyx):
         if hasattr(self, "layout_%s" % layout):
             pos = getattr(self, "layout_%s" % layout)(dim=dim, **options)
         elif layout is not None:
-            raise ValueError("unknown layout algorithm: %s" % layout)
+            pos = self.layout_networkx(layout, dim=dim, **options)
 
         if len(pos) < self.order():
             pos = self.layout_extend_randomly(pos, dim=dim)
@@ -21381,6 +21382,83 @@ class GenericGraph(GenericGraph_pyx):
         if save_pos:
             self.set_pos(pos, dim=dim)
         return pos
+    def layout_networkx(self, layout_name, dim=2, **options):
+        r"""
+        Compute a layout using one of NetworkX's layout algorithms.
+
+        This is the fallback used by :meth:`layout` whenever ``layout_name``
+        does not match a ``layout_<name>`` method defined natively on this
+        class. It looks up ``networkx.<layout_name>_layout`` and calls it on
+        a NetworkX copy of ``self``, translating the result back into a
+        position dictionary keyed by the vertices of ``self``.
+
+        INPUT:
+
+        - ``layout_name`` -- string; the name of a NetworkX layout function,
+        without its ``_layout`` suffix -- e.g. ``'kamada_kawai'`` for
+        :func:`networkx.kamada_kawai_layout`.
+
+        - ``dim`` -- integer (default: 2); 2 or 3, ignored by NetworkX
+        layouts that do not accept a ``dim`` parameter.
+
+        - ``**options`` -- extra keyword arguments forwarded unchanged to the
+        underlying NetworkX layout function.
+
+        OUTPUT:
+
+        A dictionary mapping each vertex of ``self`` to a tuple of ``dim``
+        floats.
+
+        EXAMPLES::
+
+            sage: g = graphs.PetersenGraph()
+            sage: pos = g.layout('kamada_kawai')                      # needs networkx
+            sage: sorted(pos) == sorted(g)                             # needs networkx
+            True
+            sage: g.plot(layout='spectral')                           # needs networkx sage.plot
+            Graphics object consisting of ... graphics primitives
+
+        An unknown layout name raises a clear error::
+
+            sage: g.layout('this_is_not_a_layout')                     # needs networkx
+            Traceback (most recent call last):
+            ...
+            ValueError: unknown layout algorithm: this_is_not_a_layout
+        """
+        import inspect
+        import networkx
+        from sage.graphs.graph_plot import graphplot_options
+
+        funcname = "%s_layout" % layout_name
+        func = getattr(networkx, funcname, None)
+        if func is None or not callable(func):
+            raise ValueError("unknown layout algorithm: %s" % layout_name)
+
+        G = self.networkx_graph()
+
+        # Exclude keys that belong to Sage's own plotting/layout option
+        # vocabulary, even if a NetworkX layout function happens to accept
+        # a same-named parameter with a different meaning. For example,
+        # Sage's 'dist' controls spacing between multi-edges (a float),
+        # while networkx.kamada_kawai_layout's 'dist' parameter expects a
+        # distance matrix (a dict) -- forwarding Sage's value there crashes
+        # NetworkX with a confusing TypeError.
+        sage_option_names = set(graphplot_options)
+
+        sig = inspect.signature(func)
+        accepted = set(sig.parameters)
+
+        filtered_options = {
+        k: v for k, v in options.items()
+        if k in accepted and k not in sage_option_names
+        }
+
+        if 'dim' in accepted:
+            raw_pos = func(G, dim=dim, **filtered_options)
+        else:
+            raw_pos = func(G, **filtered_options)
+
+        return {v: tuple(float(c) for c in p) for v, p in raw_pos.items()}
 
     def layout_spring(self, by_component=True, **options):
         """
